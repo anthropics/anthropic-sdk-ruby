@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require "rake/testtask"
+require "minitest/test_task"
 require "rubocop/rake_task"
 
 task(default: [:test, :format])
 
-Rake::TestTask.new { |t| t.pattern = "./test/**/*_test.rb" }
+Minitest::TestTask.create
 
 RuboCop::RakeTask.new(:rubocop) do |t|
   t.options = ["-a", "--fail-level", "E"]

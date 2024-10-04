@@ -2,7 +2,9 @@
 
 require_relative "../test_helper"
 
-class Anthropic::Test::Resources::CompletionsTest < Test::Unit::TestCase
+class Anthropic::Test::Resources::CompletionsTest < Minitest::Test
+  parallelize_me!
+
   def setup
     @anthropic = Anthropic::Client.new(base_url: "http://localhost:4010", api_key: "my-anthropic-api-key")
   end

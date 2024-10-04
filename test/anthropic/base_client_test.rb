@@ -2,7 +2,9 @@
 
 require_relative "test_helper"
 
-class Anthropic::Test::BaseClientTest < Test::Unit::TestCase
+class Anthropic::Test::BaseClientTest < Minitest::Test
+  parallelize_me!
+
   def test_from_uri_string
     assert_equal(
       {

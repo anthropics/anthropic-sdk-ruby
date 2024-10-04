@@ -4,7 +4,9 @@ require "time"
 
 require_relative "test_helper"
 
-class AnthropicTest < Test::Unit::TestCase
+class AnthropicTest < Minitest::Test
+  parallelize_me!
+
   class MockResponse
     attr_accessor :code, :body, :content_type
 
@@ -41,7 +43,7 @@ class AnthropicTest < Test::Unit::TestCase
     anthropic = Anthropic::Client.new(base_url: "http://localhost:4010", api_key: "my-anthropic-api-key")
     requester = MockRequester.new(500, {}, {"x-stainless-mock-sleep" => "true"})
     anthropic.requester = requester
-    assert_raise(Anthropic::HTTP::InternalServerError) do
+    assert_raises(Anthropic::HTTP::InternalServerError) do
       anthropic.messages.create(
         {
           max_tokens: 1024,
@@ -61,7 +63,7 @@ class AnthropicTest < Test::Unit::TestCase
     )
     requester = MockRequester.new(500, {}, {"x-stainless-mock-sleep" => "true"})
     anthropic.requester = requester
-    assert_raise(Anthropic::HTTP::InternalServerError) do
+    assert_raises(Anthropic::HTTP::InternalServerError) do
       anthropic.messages.create(
         {
           max_tokens: 1024,
@@ -77,7 +79,7 @@ class AnthropicTest < Test::Unit::TestCase
     anthropic = Anthropic::Client.new(base_url: "http://localhost:4010", api_key: "my-anthropic-api-key")
     requester = MockRequester.new(500, {}, {"x-stainless-mock-sleep" => "true"})
     anthropic.requester = requester
-    assert_raise(Anthropic::HTTP::InternalServerError) do
+    assert_raises(Anthropic::HTTP::InternalServerError) do
       anthropic.messages.create(
         {
           max_tokens: 1024,
@@ -98,7 +100,7 @@ class AnthropicTest < Test::Unit::TestCase
     )
     requester = MockRequester.new(500, {}, {"x-stainless-mock-sleep" => "true"})
     anthropic.requester = requester
-    assert_raise(Anthropic::HTTP::InternalServerError) do
+    assert_raises(Anthropic::HTTP::InternalServerError) do
       anthropic.messages.create(
         {
           max_tokens: 1024,
@@ -119,7 +121,7 @@ class AnthropicTest < Test::Unit::TestCase
     )
     requester = MockRequester.new(500, {}, {"retry-after" => "1.3", "x-stainless-mock-sleep" => "true"})
     anthropic.requester = requester
-    assert_raise(Anthropic::HTTP::InternalServerError) do
+    assert_raises(Anthropic::HTTP::InternalServerError) do
       anthropic.messages.create(
         {
           max_tokens: 1024,
@@ -148,7 +150,7 @@ class AnthropicTest < Test::Unit::TestCase
       }
     )
     anthropic.requester = requester
-    assert_raise(Anthropic::HTTP::InternalServerError) do
+    assert_raises(Anthropic::HTTP::InternalServerError) do
       anthropic.messages.create(
         {
           max_tokens: 1024,
@@ -169,7 +171,7 @@ class AnthropicTest < Test::Unit::TestCase
     )
     requester = MockRequester.new(500, {}, {"retry-after-ms" => "1300", "x-stainless-mock-sleep" => "true"})
     anthropic.requester = requester
-    assert_raise(Anthropic::HTTP::InternalServerError) do
+    assert_raises(Anthropic::HTTP::InternalServerError) do
       anthropic.messages.create(
         {
           max_tokens: 1024,
@@ -187,7 +189,7 @@ class AnthropicTest < Test::Unit::TestCase
     requester = MockRequester.new(500, {}, {"x-stainless-mock-sleep" => "true"})
     anthropic.requester = requester
 
-    assert_raise(Anthropic::HTTP::InternalServerError) do
+    assert_raises(Anthropic::HTTP::InternalServerError) do
       anthropic.messages.create(
         {
           max_tokens: 1024,
@@ -206,7 +208,7 @@ class AnthropicTest < Test::Unit::TestCase
     requester = MockRequester.new(500, {}, {"x-stainless-mock-sleep" => "true"})
     anthropic.requester = requester
 
-    assert_raise(Anthropic::HTTP::InternalServerError) do
+    assert_raises(Anthropic::HTTP::InternalServerError) do
       anthropic.messages.create(
         {
           max_tokens: 1024,
@@ -226,7 +228,7 @@ class AnthropicTest < Test::Unit::TestCase
     requester = MockRequester.new(500, {}, {"x-stainless-mock-sleep" => "true"})
     anthropic.requester = requester
 
-    assert_raise(Anthropic::HTTP::InternalServerError) do
+    assert_raises(Anthropic::HTTP::InternalServerError) do
       anthropic.messages.create(
         {
           max_tokens: 1024,
@@ -245,7 +247,7 @@ class AnthropicTest < Test::Unit::TestCase
     anthropic = Anthropic::Client.new(base_url: "http://localhost:4010", api_key: "my-anthropic-api-key")
     requester = MockRequester.new(307, {}, {"location" => "/redirected"})
     anthropic.requester = requester
-    assert_raise(Anthropic::HTTP::APIConnectionError) do
+    assert_raises(Anthropic::HTTP::APIConnectionError) do
       anthropic.messages.create(
         {
           max_tokens: 1024,
@@ -268,7 +270,7 @@ class AnthropicTest < Test::Unit::TestCase
     anthropic = Anthropic::Client.new(base_url: "http://localhost:4010", api_key: "my-anthropic-api-key")
     requester = MockRequester.new(303, {}, {"location" => "/redirected"})
     anthropic.requester = requester
-    assert_raise(Anthropic::HTTP::APIConnectionError) do
+    assert_raises(Anthropic::HTTP::APIConnectionError) do
       anthropic.messages.create(
         {
           max_tokens: 1024,
@@ -280,15 +282,15 @@ class AnthropicTest < Test::Unit::TestCase
     end
     assert_equal(requester.attempts[1][:path], "/redirected")
     assert_equal(requester.attempts[1][:method], :get)
-    assert_equal(requester.attempts[1][:body], nil)
-    assert_equal(requester.attempts[1][:headers]["content-type"], nil)
+    assert_nil(requester.attempts[1][:body])
+    assert_nil(requester.attempts[1][:headers]["Content-Type"])
   end
 
   def test_client_redirect_auth_keep_same_origin
     anthropic = Anthropic::Client.new(base_url: "http://localhost:4010", api_key: "my-anthropic-api-key")
     requester = MockRequester.new(307, {}, {"location" => "/redirected"})
     anthropic.requester = requester
-    assert_raise(Anthropic::HTTP::APIConnectionError) do
+    assert_raises(Anthropic::HTTP::APIConnectionError) do
       anthropic.messages.create(
         {
           max_tokens: 1024,
@@ -308,7 +310,7 @@ class AnthropicTest < Test::Unit::TestCase
     anthropic = Anthropic::Client.new(base_url: "http://localhost:4010", api_key: "my-anthropic-api-key")
     requester = MockRequester.new(307, {}, {"location" => "https://example.com/redirected"})
     anthropic.requester = requester
-    assert_raise(Anthropic::HTTP::APIConnectionError) do
+    assert_raises(Anthropic::HTTP::APIConnectionError) do
       anthropic.messages.create(
         {
           max_tokens: 1024,
@@ -318,7 +320,7 @@ class AnthropicTest < Test::Unit::TestCase
         extra_headers: {"Authorization" => "Bearer xyz"}
       )
     end
-    assert_equal(requester.attempts[1][:headers]["authorization"], nil)
+    assert_nil(requester.attempts[1][:headers]["Authorization"])
   end
 
   def test_default_headers
@@ -333,9 +335,9 @@ class AnthropicTest < Test::Unit::TestCase
       }
     )
     headers = requester.attempts[0][:headers]
-    assert_not_empty(headers["x-stainless-lang"])
-    assert_not_empty(headers["x-stainless-package-version"])
-    assert_not_empty(headers["x-stainless-runtime"])
-    assert_not_empty(headers["x-stainless-runtime-version"])
+    refute_empty(headers["x-stainless-lang"])
+    refute_empty(headers["x-stainless-package-version"])
+    refute_empty(headers["x-stainless-runtime"])
+    refute_empty(headers["x-stainless-runtime-version"])
   end
 end
