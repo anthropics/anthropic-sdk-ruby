@@ -7,13 +7,7 @@
 # - Define shared testing namespace so that we don't need to indent test files as much
 
 require "anthropic"
+require_relative "test_namespaces"
 
 require "test/unit"
 require "stringio"
-
-module Anthropic
-  module Test
-    module Resources
-    end
-  end
-end

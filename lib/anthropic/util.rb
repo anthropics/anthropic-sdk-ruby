@@ -70,5 +70,9 @@ module Anthropic
         "#{uri.scheme}://#{uri.host}#{uri.port == uri.default_port ? '' : ":#{uri.port}"}"
       end
     end
+
+    def self.normalized_headers(*headers)
+      {}.merge(*headers.compact).transform_keys(&:downcase)
+    end
   end
 end
