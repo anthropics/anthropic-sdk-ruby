@@ -44,7 +44,7 @@ module Anthropic
           uri_string
         )
 
-        content_type = headers["Content-Type"]
+        content_type = headers["content-type"]
         if content_type == "multipart/form-data" && body
           form_data =
             body.filter_map do |k, v|
@@ -52,7 +52,7 @@ module Anthropic
               [k.to_s, v].flatten
             end
           request.set_form(form_data, content_type)
-          headers = headers.merge("Content-Type" => nil)
+          headers = headers.merge("content-type" => nil)
         else
           request.body = body
         end

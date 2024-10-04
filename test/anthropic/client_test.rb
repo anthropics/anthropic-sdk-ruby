@@ -6,13 +6,17 @@ require_relative "test_helper"
 
 class AnthropicTest < Test::Unit::TestCase
   class MockResponse
-    attr_accessor :code, :header, :body, :content_type
+    attr_accessor :code, :body, :content_type
 
     def initialize(code, data, headers)
+      @headers = headers
       self.code = code
-      self.header = headers
       self.body = JSON.generate(data)
       self.content_type = "application/json"
+    end
+
+    def [](header)
+      @headers[header]
     end
   end
 
@@ -125,7 +129,7 @@ class AnthropicTest < Test::Unit::TestCase
       )
     end
     assert_equal(2, requester.attempts.length)
-    assert_equal(requester.attempts.last[:headers]["X-Stainless-Mock-Slept"], 1.3)
+    assert_equal(requester.attempts.last[:headers]["x-stainless-mock-slept"], 1.3)
   end
 
   def test_client_retry_after_date
@@ -154,7 +158,7 @@ class AnthropicTest < Test::Unit::TestCase
       )
     end
     assert_equal(2, requester.attempts.length)
-    assert_equal(requester.attempts.last[:headers]["X-Stainless-Mock-Slept"], 2)
+    assert_equal(requester.attempts.last[:headers]["x-stainless-mock-slept"], 2)
   end
 
   def test_client_retry_after_ms
@@ -175,7 +179,7 @@ class AnthropicTest < Test::Unit::TestCase
       )
     end
     assert_equal(2, requester.attempts.length)
-    assert_equal(requester.attempts.last[:headers]["X-Stainless-Mock-Slept"], 1.3)
+    assert_equal(requester.attempts.last[:headers]["x-stainless-mock-slept"], 1.3)
   end
 
   def test_retry_count_header
@@ -193,7 +197,7 @@ class AnthropicTest < Test::Unit::TestCase
       )
     end
 
-    retry_count_headers = requester.attempts.map { |a| a[:headers]["X-Stainless-Retry-Count"] }
+    retry_count_headers = requester.attempts.map { |a| a[:headers]["x-stainless-retry-count"] }
     assert_equal(%w[0 1 2], retry_count_headers)
   end
 
@@ -209,11 +213,11 @@ class AnthropicTest < Test::Unit::TestCase
           messages: [{"content" => "Hello, world", "role" => "user"}],
           model: "claude-3-5-sonnet-20240620"
         },
-        extra_headers: {"X-Stainless-Retry-Count" => nil}
+        extra_headers: {"x-stainless-retry-count" => nil}
       )
     end
 
-    retry_count_headers = requester.attempts.map { |a| a[:headers]["X-Stainless-Retry-Count"] }
+    retry_count_headers = requester.attempts.map { |a| a[:headers]["x-stainless-retry-count"] }
     assert_equal([nil, nil, nil], retry_count_headers)
   end
 
@@ -229,11 +233,11 @@ class AnthropicTest < Test::Unit::TestCase
           messages: [{"content" => "Hello, world", "role" => "user"}],
           model: "claude-3-5-sonnet-20240620"
         },
-        extra_headers: {"X-Stainless-Retry-Count" => "42"}
+        extra_headers: {"x-stainless-retry-count" => "42"}
       )
     end
 
-    retry_count_headers = requester.attempts.map { |a| a[:headers]["X-Stainless-Retry-Count"] }
+    retry_count_headers = requester.attempts.map { |a| a[:headers]["x-stainless-retry-count"] }
     assert_equal(%w[42 42 42], retry_count_headers)
   end
 
@@ -255,8 +259,8 @@ class AnthropicTest < Test::Unit::TestCase
     assert_equal(requester.attempts[1][:method], requester.attempts[0][:method])
     assert_equal(requester.attempts[1][:body], requester.attempts[0][:body])
     assert_equal(
-      requester.attempts[1][:headers]["Content-Type"],
-      requester.attempts[0][:headers]["Content-Type"]
+      requester.attempts[1][:headers]["content-type"],
+      requester.attempts[0][:headers]["content-type"]
     )
   end
 
@@ -277,7 +281,7 @@ class AnthropicTest < Test::Unit::TestCase
     assert_equal(requester.attempts[1][:path], "/redirected")
     assert_equal(requester.attempts[1][:method], :get)
     assert_equal(requester.attempts[1][:body], nil)
-    assert_equal(requester.attempts[1][:headers]["Content-Type"], nil)
+    assert_equal(requester.attempts[1][:headers]["content-type"], nil)
   end
 
   def test_client_redirect_auth_keep_same_origin
@@ -295,8 +299,8 @@ class AnthropicTest < Test::Unit::TestCase
       )
     end
     assert_equal(
-      requester.attempts[1][:headers]["Authorization"],
-      requester.attempts[0][:headers]["Authorization"]
+      requester.attempts[1][:headers]["authorization"],
+      requester.attempts[0][:headers]["authorization"]
     )
   end
 
@@ -314,7 +318,7 @@ class AnthropicTest < Test::Unit::TestCase
         extra_headers: {"Authorization" => "Bearer xyz"}
       )
     end
-    assert_equal(requester.attempts[1][:headers]["Authorization"], nil)
+    assert_equal(requester.attempts[1][:headers]["authorization"], nil)
   end
 
   def test_default_headers
@@ -329,9 +333,9 @@ class AnthropicTest < Test::Unit::TestCase
       }
     )
     headers = requester.attempts[0][:headers]
-    assert_not_empty(headers["X-Stainless-Lang"])
-    assert_not_empty(headers["X-Stainless-Package-Version"])
-    assert_not_empty(headers["X-Stainless-Runtime"])
-    assert_not_empty(headers["X-Stainless-Runtime-Version"])
+    assert_not_empty(headers["x-stainless-lang"])
+    assert_not_empty(headers["x-stainless-package-version"])
+    assert_not_empty(headers["x-stainless-runtime"])
+    assert_not_empty(headers["x-stainless-runtime-version"])
   end
 end
