@@ -1,0 +1,7 @@
+.prism.log
+.idea/
+.ruby-lsp/
+.yardoc/
+doc/
+Brewfile.lock.json
+*.gem
