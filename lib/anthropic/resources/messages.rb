@@ -139,7 +139,7 @@ module Anthropic
       #
       #   Note that even with `temperature` of `0.0`, the results will not be fully
       #   deterministic.
-      # @option params [ToolChoice::UnnamedTypeWithunionParent10, ToolChoice::UnnamedTypeWithunionParent11, ToolChoice::UnnamedTypeWithunionParent9, nil] :tool_choice How the model should use the provided tools. The model can use a specific tool,
+      # @option params [Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceTool, nil] :tool_choice How the model should use the provided tools. The model can use a specific tool,
       #   any available tool, or decide by itself.
       # @option params [Array<Anthropic::Models::Tool>, nil] :tools Definitions of tools that the model may use.
       #
