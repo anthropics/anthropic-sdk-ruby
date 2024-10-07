@@ -111,7 +111,7 @@ module Anthropic
           #   [system prompt](https://docs.anthropic.com/en/docs/system-prompts), you can use
           #   the top-level `system` parameter — there is no `"system"` role for input
           #   messages in the Messages API.
-          # @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent12] :model The model that will complete your prompt.\n\nSee
+          # @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent9] :model The model that will complete your prompt.\n\nSee
           #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           #   details and options.
           # @option params [Metadata, nil] :metadata An object describing metadata about the request.
@@ -141,7 +141,7 @@ module Anthropic
           #
           #   Note that even with `temperature` of `0.0`, the results will not be fully
           #   deterministic.
-          # @option params [ToolChoice::UnnamedTypeWithunionParent13, ToolChoice::UnnamedTypeWithunionParent14, ToolChoice::UnnamedTypeWithunionParent15, nil] :tool_choice How the model should use the provided tools. The model can use a specific tool,
+          # @option params [Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceTool, nil] :tool_choice How the model should use the provided tools. The model can use a specific tool,
           #   any available tool, or decide by itself.
           # @option params [Array<Anthropic::Models::PromptCachingBetaTool>, nil] :tools Definitions of tools that the model may use.
           #
