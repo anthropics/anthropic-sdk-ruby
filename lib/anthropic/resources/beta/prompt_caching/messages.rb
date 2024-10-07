@@ -5,6 +5,7 @@ module Anthropic
     class Beta
       class PromptCaching
         class Messages
+          # @param client [Anthropic::Client]
           def initialize(client:)
             @client = client
           end

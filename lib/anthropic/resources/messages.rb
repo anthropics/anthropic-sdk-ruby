@@ -3,6 +3,7 @@
 module Anthropic
   module Resources
     class Messages
+      # @param client [Anthropic::Client]
       def initialize(client:)
         @client = client
       end
