@@ -7,6 +7,7 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::PromptCaching::Messages]
         attr_reader :messages
 
+        # @param client [Anthropic::Client]
         def initialize(client:)
           @client = client
           @messages = Anthropic::Resources::Beta::PromptCaching::Messages.new(client: client)
