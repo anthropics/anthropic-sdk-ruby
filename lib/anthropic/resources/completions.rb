@@ -38,7 +38,7 @@ module Anthropic
       #   our guide to
       #   [prompt design](https://docs.anthropic.com/en/docs/intro-to-prompting) for more
       #   details.
-      # @option params [Metadata, nil] :metadata An object describing metadata about the request.
+      # @option params [Anthropic::Models::Metadata, nil] :metadata An object describing metadata about the request.
       # @option params [Array<String>, nil] :stop_sequences Sequences that will cause the model to stop generating.
       #
       #   Our models stop on `"\n\nHuman:"`, and may include additional built-in stop

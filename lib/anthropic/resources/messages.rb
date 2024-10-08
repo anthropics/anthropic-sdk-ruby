@@ -112,7 +112,7 @@ module Anthropic
       # @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent8] :model The model that will complete your prompt.\n\nSee
       #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
-      # @option params [Metadata, nil] :metadata An object describing metadata about the request.
+      # @option params [Anthropic::Models::Metadata, nil] :metadata An object describing metadata about the request.
       # @option params [Array<String>, nil] :stop_sequences Custom text sequences that will cause the model to stop generating.
       #
       #   Our models will normally stop when they have naturally completed their turn,
