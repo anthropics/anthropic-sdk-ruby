@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class PromptCachingBetaMessage < BaseModel
+    class BetaMessage < BaseModel
       # @!attribute [rw] id
       #   Unique object identifier.
       #
@@ -36,20 +36,20 @@ module Anthropic
       # ```json
       # [{"type": "text", "text": "B)"}]
       # ```
-      #   @return [Array<Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock>]
+      #   @return [Array<Anthropic::Models::BetaTextBlock, Anthropic::Models::BetaToolUseBlock>]
       required :content, Anthropic::ArrayOf.new(Anthropic::Unknown)
 
       # @!attribute [rw] model
       #   The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-      #   @return [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent6]
+      #   @return [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent4]
       required :model, Anthropic::Unknown
 
       # @!attribute [rw] role
       #   Conversational role of the generated message.
       #
       # This will always be `"assistant"`.
-      #   @return [Symbol, Anthropic::Models::PromptCachingBetaMessage::Role]
-      required :role, enum: -> { Anthropic::Models::PromptCachingBetaMessage::Role }
+      #   @return [Symbol, Anthropic::Models::BetaMessage::Role]
+      required :role, enum: -> { Anthropic::Models::BetaMessage::Role }
 
       # @!attribute [rw] stop_reason
       #   The reason that we stopped.
@@ -61,8 +61,8 @@ module Anthropic
       # * `"tool_use"`: the model invoked one or more tools
       #
       # In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
-      #   @return [Symbol, Anthropic::Models::PromptCachingBetaMessage::StopReason]
-      required :stop_reason, enum: -> { Anthropic::Models::PromptCachingBetaMessage::StopReason }
+      #   @return [Symbol, Anthropic::Models::BetaMessage::StopReason]
+      required :stop_reason, enum: -> { Anthropic::Models::BetaMessage::StopReason }
 
       # @!attribute [rw] stop_sequence
       #   Which custom stop sequence was generated, if any.
@@ -75,8 +75,8 @@ module Anthropic
       #   Object type.
       #
       # For Messages, this is always `"message"`.
-      #   @return [Symbol, Anthropic::Models::PromptCachingBetaMessage::Type]
-      required :type, enum: -> { Anthropic::Models::PromptCachingBetaMessage::Type }
+      #   @return [Symbol, Anthropic::Models::BetaMessage::Type]
+      required :type, enum: -> { Anthropic::Models::BetaMessage::Type }
 
       # @!attribute [rw] usage
       #   Billing and rate-limit usage.
@@ -86,8 +86,8 @@ module Anthropic
       # Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
       #
       # For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
-      #   @return [Anthropic::Models::PromptCachingBetaUsage]
-      required :usage, -> { Anthropic::Models::PromptCachingBetaUsage }
+      #   @return [Anthropic::Models::BetaUsage]
+      required :usage, -> { Anthropic::Models::BetaUsage }
 
       # Conversational role of the generated message.
       #
