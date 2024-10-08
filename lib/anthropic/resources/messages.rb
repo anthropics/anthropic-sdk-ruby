@@ -8,9 +8,7 @@ module Anthropic
         @client = client
       end
 
-      # Create a Message.
-      #
-      #   Send a structured list of input messages with text and/or image content, and the
+      # Send a structured list of input messages with text and/or image content, and the
       #   model will generate the next message in the conversation.
       #
       #   The Messages API can be used for either single queries or stateless multi-turn
@@ -109,7 +107,7 @@ module Anthropic
       #   [system prompt](https://docs.anthropic.com/en/docs/system-prompts), you can use
       #   the top-level `system` parameter — there is no `"system"` role for input
       #   messages in the Messages API.
-      # @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent8] :model The model that will complete your prompt.\n\nSee
+      # @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent10] :model The model that will complete your prompt.\n\nSee
       #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
       # @option params [Anthropic::Models::Metadata, nil] :metadata An object describing metadata about the request.
