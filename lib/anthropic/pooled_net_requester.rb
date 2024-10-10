@@ -8,7 +8,7 @@ module Anthropic
       @pools = {}
     end
 
-    def get_pool(req)
+    def get_pool(req, timeout:)
       hostname = req[:host]
       scheme = req[:scheme]
       port =
@@ -23,6 +23,8 @@ module Anthropic
         @pools[hostname] ||= ConnectionPool.new do
           conn = Net::HTTP.new(hostname, port)
           conn.use_ssl = scheme.to_sym == :https
+          conn.max_retries = 0
+          conn.open_timeout = timeout
           conn.start
           conn
         end
@@ -30,9 +32,9 @@ module Anthropic
       end
     end
 
-    def execute(req)
+    def execute(req, timeout:)
       method, headers, body = req.values_at(:method, :headers, :body)
-      get_pool(req).with do |conn|
+      get_pool(req, timeout: timeout).with do |conn|
         # Net can't understand posting to a URI representing only path + query,
         # so we concatenate
         uri_string = Anthropic::Util.uri_from_req(req, absolute: false)
@@ -61,6 +63,8 @@ module Anthropic
           request[k] = v
         end
 
+        conn.read_timeout = timeout
+        conn.write_timeout = timeout
         conn.request(request)
       end
     end

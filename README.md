@@ -69,25 +69,26 @@ end
 
 Error codes are as followed:
 
-| Status Code | Error Type                 |
-| ----------- | -------------------------- |
-| 400         | `BadRequestError`          |
-| 401         | `AuthenticationError`      |
-| 403         | `PermissionDeniedError`    |
-| 404         | `NotFoundError`            |
-| 409         | `ConflictError`            |
-| 422         | `UnprocessableEntityError` |
-| 429         | `RateLimitError`           |
-| >=500       | `InternalServerError`      |
-| (else)      | `APIStatusError`           |
-| N/A         | `APIConnectionError`       |
+| Cause            | Error Type                 |
+| ---------------- | -------------------------- |
+| HTTP 400         | `BadRequestError`          |
+| HTTP 401         | `AuthenticationError`      |
+| HTTP 403         | `PermissionDeniedError`    |
+| HTTP 404         | `NotFoundError`            |
+| HTTP 409         | `ConflictError`            |
+| HTTP 422         | `UnprocessableEntityError` |
+| HTTP 429         | `RateLimitError`           |
+| HTTP >=500       | `InternalServerError`      |
+| Other HTTP error | `APIStatusError`           |
+| Timeout          | `APITimeoutError`          |
+| Network error    | `APIConnectionError`       |
 
 ### Retries
 
 Certain errors will be automatically retried 2 times by default, with a short
 exponential backoff. Connection errors (for example, due to a network
-connectivity problem), 408 Request Timeout, 409 Conflict, 429 Rate Limit,
-and >=500 Internal errors will all be retried by default.
+connectivity problem), 408 Request Timeout, 409 Conflict, 429 Rate Limit, >=500 Internal errors,
+and timeouts will all be retried by default.
 
 You can use the `max_retries` option to configure or disable this:
 
@@ -103,6 +104,29 @@ anthropic.messages.create(
   messages: [{"role" => "user", "content" => "Hello, Claude"}],
   model: "claude-3-opus-20240229",
   max_retries: 5
+)
+```
+
+### Timeouts
+
+By default, requests will time out after 600 seconds.
+Timeouts are applied separately to the initial connection and the overall request time,
+so in some cases a request could wait 2\*timeout seconds before it fails.
+
+You can use the `timeout` option to configure or disable this:
+
+```ruby
+# Configure the default for all requests:
+anthropic = Anthropic::Client.new(
+  timeout: nil # default is 600
+)
+
+# Or, configure per-request:
+anthropic.messages.create(
+  max_tokens: 1024,
+  messages: [{"role" => "user", "content" => "Hello, Claude"}],
+  model: "claude-3-opus-20240229",
+  timeout: 5
 )
 ```
 
