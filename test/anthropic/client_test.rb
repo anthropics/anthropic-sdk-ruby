@@ -20,6 +20,10 @@ class AnthropicTest < Minitest::Test
     def [](header)
       @headers[header]
     end
+
+    def key?(header)
+      @headers.key?(header)
+    end
   end
 
   class MockRequester
@@ -32,7 +36,7 @@ class AnthropicTest < Minitest::Test
       self.attempts = []
     end
 
-    def execute(req)
+    def execute(req, timeout:)
       # Deep copy the request because it is mutated on each retry.
       attempts.push(Marshal.load(Marshal.dump(req)))
       MockResponse.new(response_code, response_data, response_headers)

@@ -30,7 +30,13 @@ module Anthropic
     # @param max_retries [Integer] Max number of retries to attempt after a failed retryable request.
     #
     # @return [Anthropic::Client]
-    def initialize(base_url: nil, api_key: nil, auth_token: nil, max_retries: DEFAULT_MAX_RETRIES)
+    def initialize(
+      base_url: nil,
+      api_key: nil,
+      auth_token: nil,
+      max_retries: DEFAULT_MAX_RETRIES,
+      timeout: 600
+    )
       base_url ||= "https://api.anthropic.com"
 
       headers = {"anthropic-version" => "2023-06-01"}
@@ -38,7 +44,7 @@ module Anthropic
       @api_key = [api_key, ENV["ANTHROPIC_API_KEY"]].find { |v| !v.nil? }
       @auth_token = [auth_token, ENV["ANTHROPIC_AUTH_TOKEN"]].find { |v| !v.nil? }
 
-      super(base_url: base_url, max_retries: max_retries, headers: headers)
+      super(base_url: base_url, max_retries: max_retries, timeout: timeout, headers: headers)
 
       @completions = Anthropic::Resources::Completions.new(client: self)
       @messages = Anthropic::Resources::Messages.new(client: self)
