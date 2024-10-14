@@ -14,6 +14,15 @@ module Anthropic
       class Type < Anthropic::Enum
         AUTHENTICATION_ERROR = :authentication_error
       end
+
+      # Create a new instance of BetaAuthenticationError from a Hash of raw data.
+      #
+      # @overload initialize(message: nil, type: nil)
+      # @param message [String]
+      # @param type [String]
+      def initialize(data = {})
+        super
+      end
     end
   end
 end

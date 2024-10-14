@@ -14,6 +14,15 @@ module Anthropic
       class Type < Anthropic::Enum
         INVALID_REQUEST_ERROR = :invalid_request_error
       end
+
+      # Create a new instance of BetaInvalidRequestError from a Hash of raw data.
+      #
+      # @overload initialize(message: nil, type: nil)
+      # @param message [String]
+      # @param type [String]
+      def initialize(data = {})
+        super
+      end
     end
   end
 end

@@ -22,6 +22,19 @@ module Anthropic
       class Type < Anthropic::Enum
         TOOL = :tool
       end
+
+      # Create a new instance of BetaToolChoiceTool from a Hash of raw data.
+      #
+      # @overload initialize(name: nil, type: nil, disable_parallel_tool_use: nil)
+      # @param name [String] The name of the tool to use.
+      # @param type [String]
+      # @param disable_parallel_tool_use [Hash] Whether to disable parallel tool use.
+      #
+      #   Defaults to `false`. If set to `true`, the model will output exactly one tool
+      #   use.
+      def initialize(data = {})
+        super
+      end
     end
   end
 end

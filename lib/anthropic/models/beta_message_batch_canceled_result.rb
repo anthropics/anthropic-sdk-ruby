@@ -10,6 +10,14 @@ module Anthropic
       class Type < Anthropic::Enum
         CANCELED = :canceled
       end
+
+      # Create a new instance of BetaMessageBatchCanceledResult from a Hash of raw data.
+      #
+      # @overload initialize(type: nil)
+      # @param type [String]
+      def initialize(data = {})
+        super
+      end
     end
   end
 end

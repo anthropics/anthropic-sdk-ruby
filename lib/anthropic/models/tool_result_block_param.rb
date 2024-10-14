@@ -22,6 +22,17 @@ module Anthropic
       class Type < Anthropic::Enum
         TOOL_RESULT = :tool_result
       end
+
+      # Create a new instance of ToolResultBlockParam from a Hash of raw data.
+      #
+      # @overload initialize(tool_use_id: nil, type: nil, content: nil, is_error: nil)
+      # @param tool_use_id [String]
+      # @param type [String]
+      # @param content [Array<Object>, String]
+      # @param is_error [Hash]
+      def initialize(data = {})
+        super
+      end
     end
   end
 end

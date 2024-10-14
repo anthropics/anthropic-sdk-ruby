@@ -14,6 +14,15 @@ module Anthropic
       class Type < Anthropic::Enum
         ERRORED = :errored
       end
+
+      # Create a new instance of BetaMessageBatchErroredResult from a Hash of raw data.
+      #
+      # @overload initialize(error: nil, type: nil)
+      # @param error [Object]
+      # @param type [String]
+      def initialize(data = {})
+        super
+      end
     end
   end
 end

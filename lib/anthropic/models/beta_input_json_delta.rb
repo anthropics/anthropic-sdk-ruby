@@ -14,6 +14,15 @@ module Anthropic
       class Type < Anthropic::Enum
         INPUT_JSON_DELTA = :input_json_delta
       end
+
+      # Create a new instance of BetaInputJSONDelta from a Hash of raw data.
+      #
+      # @overload initialize(partial_json: nil, type: nil)
+      # @param partial_json [String]
+      # @param type [String]
+      def initialize(data = {})
+        super
+      end
     end
   end
 end

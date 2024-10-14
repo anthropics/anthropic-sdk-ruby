@@ -10,6 +10,14 @@ module Anthropic
       class Type < Anthropic::Enum
         EXPIRED = :expired
       end
+
+      # Create a new instance of BetaMessageBatchExpiredResult from a Hash of raw data.
+      #
+      # @overload initialize(type: nil)
+      # @param type [String]
+      def initialize(data = {})
+        super
+      end
     end
   end
 end

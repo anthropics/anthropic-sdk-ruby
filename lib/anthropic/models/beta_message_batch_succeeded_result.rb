@@ -14,6 +14,16 @@ module Anthropic
       class Type < Anthropic::Enum
         SUCCEEDED = :succeeded
       end
+
+      # Create a new instance of BetaMessageBatchSucceededResult from a Hash of raw
+      #   data.
+      #
+      # @overload initialize(message: nil, type: nil)
+      # @param message [Object]
+      # @param type [String]
+      def initialize(data = {})
+        super
+      end
     end
   end
 end

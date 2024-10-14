@@ -15,6 +15,15 @@ module Anthropic
         USER = :user
         ASSISTANT = :assistant
       end
+
+      # Create a new instance of PromptCachingBetaMessageParam from a Hash of raw data.
+      #
+      # @overload initialize(content: nil, role: nil)
+      # @param content [Array<Object>, String]
+      # @param role [String]
+      def initialize(data = {})
+        super
+      end
     end
   end
 end

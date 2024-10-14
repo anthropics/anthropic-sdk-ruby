@@ -33,6 +33,33 @@ module Anthropic
         class Type < Anthropic::Enum
           OBJECT = :object
         end
+
+        # Create a new instance of InputSchema from a Hash of raw data.
+        #
+        # @overload initialize(type: nil, properties: nil)
+        # @param type [String]
+        # @param properties [Object]
+        def initialize(data = {})
+          super
+        end
+      end
+
+      # Create a new instance of Tool from a Hash of raw data.
+      #
+      # @overload initialize(input_schema: nil, name: nil, description: nil)
+      # @param input_schema [Object] [JSON schema](https://json-schema.org/) for this tool's input.
+      #
+      #   This defines the shape of the `input` that your tool accepts and that the model
+      #   will produce.
+      # @param name [String]
+      # @param description [String] Description of what this tool does.
+      #
+      #   Tool descriptions should be as detailed as possible. The more information that
+      #   the model has about what the tool is and how to use it, the better it will
+      #   perform. You can use natural language descriptions to reinforce important
+      #   aspects of the tool input JSON schema.
+      def initialize(data = {})
+        super
       end
     end
   end
