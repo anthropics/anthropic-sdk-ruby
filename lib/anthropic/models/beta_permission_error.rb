@@ -14,6 +14,15 @@ module Anthropic
       class Type < Anthropic::Enum
         PERMISSION_ERROR = :permission_error
       end
+
+      # Create a new instance of BetaPermissionError from a Hash of raw data.
+      #
+      # @overload initialize(message: nil, type: nil)
+      # @param message [String]
+      # @param type [String]
+      def initialize(data = {})
+        super
+      end
     end
   end
 end

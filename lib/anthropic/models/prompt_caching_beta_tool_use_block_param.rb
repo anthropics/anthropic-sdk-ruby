@@ -26,6 +26,19 @@ module Anthropic
       class Type < Anthropic::Enum
         TOOL_USE = :tool_use
       end
+
+      # Create a new instance of PromptCachingBetaToolUseBlockParam from a Hash of raw
+      #   data.
+      #
+      # @overload initialize(id: nil, input: nil, name: nil, type: nil, cache_control: nil)
+      # @param id [String]
+      # @param input [Object]
+      # @param name [String]
+      # @param type [String]
+      # @param cache_control [Object]
+      def initialize(data = {})
+        super
+      end
     end
   end
 end

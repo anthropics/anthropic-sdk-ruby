@@ -18,6 +18,16 @@ module Anthropic
       class Type < Anthropic::Enum
         TEXT = :text
       end
+
+      # Create a new instance of BetaTextBlockParam from a Hash of raw data.
+      #
+      # @overload initialize(text: nil, type: nil, cache_control: nil)
+      # @param text [String]
+      # @param type [String]
+      # @param cache_control [Object]
+      def initialize(data = {})
+        super
+      end
     end
   end
 end

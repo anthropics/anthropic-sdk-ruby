@@ -118,7 +118,8 @@ module Anthropic
       rescue StandardError
         name = self.class.name.split("::").last
         raise ConversionError,
-              "Failed to parse #{name}.#{name_sym} as #{field_type.inspect}. To get the unparsed API response, use #{name}[:#{name_sym}]."
+              "Failed to parse #{name}.#{name_sym} as #{field_type.inspect}. " \
+              "To get the unparsed API response, use #{name}[:#{name_sym}]."
       end
       define_method("#{name_sym}=") { |val| @data[name_sym] = val }
     end
@@ -141,7 +142,7 @@ module Anthropic
     end
 
     # Create a new instance of a model.
-    # @param data [Hash] Model attributes.
+    # @param data [Hash] Raw data to initialize the model with.
     def initialize(data = {})
       @data = {}
       # TODO: what if data isn't a hash?

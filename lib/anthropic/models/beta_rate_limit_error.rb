@@ -14,6 +14,15 @@ module Anthropic
       class Type < Anthropic::Enum
         RATE_LIMIT_ERROR = :rate_limit_error
       end
+
+      # Create a new instance of BetaRateLimitError from a Hash of raw data.
+      #
+      # @overload initialize(message: nil, type: nil)
+      # @param message [String]
+      # @param type [String]
+      def initialize(data = {})
+        super
+      end
     end
   end
 end

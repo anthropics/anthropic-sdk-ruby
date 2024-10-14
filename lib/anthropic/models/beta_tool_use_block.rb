@@ -22,6 +22,17 @@ module Anthropic
       class Type < Anthropic::Enum
         TOOL_USE = :tool_use
       end
+
+      # Create a new instance of BetaToolUseBlock from a Hash of raw data.
+      #
+      # @overload initialize(id: nil, input: nil, name: nil, type: nil)
+      # @param id [String]
+      # @param input [Object]
+      # @param name [String]
+      # @param type [String]
+      def initialize(data = {})
+        super
+      end
     end
   end
 end

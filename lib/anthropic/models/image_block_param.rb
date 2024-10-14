@@ -34,10 +34,29 @@ module Anthropic
         class Type < Anthropic::Enum
           BASE64 = :base64
         end
+
+        # Create a new instance of Source from a Hash of raw data.
+        #
+        # @overload initialize(data: nil, media_type: nil, type: nil)
+        # @param data [String]
+        # @param media_type [String]
+        # @param type [String]
+        def initialize(data = {})
+          super
+        end
       end
 
       class Type < Anthropic::Enum
         IMAGE = :image
+      end
+
+      # Create a new instance of ImageBlockParam from a Hash of raw data.
+      #
+      # @overload initialize(source: nil, type: nil)
+      # @param source [Object]
+      # @param type [String]
+      def initialize(data = {})
+        super
       end
     end
   end
