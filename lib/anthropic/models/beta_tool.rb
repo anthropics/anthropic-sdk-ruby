@@ -38,34 +38,32 @@ module Anthropic
           OBJECT = :object
         end
 
-        # Create a new instance of InputSchema from a Hash of raw data.
-        #
-        # @overload initialize(type: nil, properties: nil)
-        # @param type [String]
-        # @param properties [Object]
-        def initialize(data = {})
-          super
-        end
+        # @!parse
+        #   # Create a new instance of InputSchema from a Hash of raw data.
+        #   #
+        #   # @param data [Hash{Symbol => Object}] .
+        #   #   @option data [String] :type
+        #   #   @option data [Object, nil] :properties
+        #   def initialize(data = {}) = super
       end
 
-      # Create a new instance of BetaTool from a Hash of raw data.
-      #
-      # @overload initialize(input_schema: nil, name: nil, cache_control: nil, description: nil)
-      # @param input_schema [Object] [JSON schema](https://json-schema.org/) for this tool's input.
-      #
-      #   This defines the shape of the `input` that your tool accepts and that the model
-      #   will produce.
-      # @param name [String]
-      # @param cache_control [Object]
-      # @param description [String] Description of what this tool does.
-      #
-      #   Tool descriptions should be as detailed as possible. The more information that
-      #   the model has about what the tool is and how to use it, the better it will
-      #   perform. You can use natural language descriptions to reinforce important
-      #   aspects of the tool input JSON schema.
-      def initialize(data = {})
-        super
-      end
+      # @!parse
+      #   # Create a new instance of BetaTool from a Hash of raw data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [Object] :input_schema [JSON schema](https://json-schema.org/) for this tool's input.
+      #   #
+      #   #     This defines the shape of the `input` that your tool accepts and that the model
+      #   #     will produce.
+      #   #   @option data [String] :name
+      #   #   @option data [Object, nil] :cache_control
+      #   #   @option data [String, nil] :description Description of what this tool does.
+      #   #
+      #   #     Tool descriptions should be as detailed as possible. The more information that
+      #   #     the model has about what the tool is and how to use it, the better it will
+      #   #     perform. You can use natural language descriptions to reinforce important
+      #   #     aspects of the tool input JSON schema.
+      #   def initialize(data = {}) = super
     end
   end
 end

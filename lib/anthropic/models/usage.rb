@@ -13,14 +13,13 @@ module Anthropic
       #   @return [Integer]
       required :output_tokens, Integer
 
-      # Create a new instance of Usage from a Hash of raw data.
-      #
-      # @overload initialize(input_tokens: nil, output_tokens: nil)
-      # @param input_tokens [Integer] The number of input tokens which were used.
-      # @param output_tokens [Integer] The number of output tokens which were used.
-      def initialize(data = {})
-        super
-      end
+      # @!parse
+      #   # Create a new instance of Usage from a Hash of raw data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [Integer] :input_tokens The number of input tokens which were used.
+      #   #   @option data [Integer] :output_tokens The number of output tokens which were used.
+      #   def initialize(data = {}) = super
     end
   end
 end

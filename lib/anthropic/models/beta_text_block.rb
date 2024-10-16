@@ -15,14 +15,13 @@ module Anthropic
         TEXT = :text
       end
 
-      # Create a new instance of BetaTextBlock from a Hash of raw data.
-      #
-      # @overload initialize(text: nil, type: nil)
-      # @param text [String]
-      # @param type [String]
-      def initialize(data = {})
-        super
-      end
+      # @!parse
+      #   # Create a new instance of BetaTextBlock from a Hash of raw data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [String] :text
+      #   #   @option data [String] :type
+      #   def initialize(data = {}) = super
     end
   end
 end

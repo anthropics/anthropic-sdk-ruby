@@ -19,15 +19,14 @@ module Anthropic
         CONTENT_BLOCK_START = :content_block_start
       end
 
-      # Create a new instance of RawContentBlockStartEvent from a Hash of raw data.
-      #
-      # @overload initialize(content_block: nil, index: nil, type: nil)
-      # @param content_block [Object]
-      # @param index [Integer]
-      # @param type [String]
-      def initialize(data = {})
-        super
-      end
+      # @!parse
+      #   # Create a new instance of RawContentBlockStartEvent from a Hash of raw data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [Object] :content_block
+      #   #   @option data [Integer] :index
+      #   #   @option data [String] :type
+      #   def initialize(data = {}) = super
     end
   end
 end

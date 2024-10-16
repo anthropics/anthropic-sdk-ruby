@@ -8,13 +8,12 @@ module Anthropic
       #   @return [Integer]
       required :output_tokens, Integer
 
-      # Create a new instance of BetaMessageDeltaUsage from a Hash of raw data.
-      #
-      # @overload initialize(output_tokens: nil)
-      # @param output_tokens [Integer] The cumulative number of output tokens which were used.
-      def initialize(data = {})
-        super
-      end
+      # @!parse
+      #   # Create a new instance of BetaMessageDeltaUsage from a Hash of raw data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [Integer] :output_tokens The cumulative number of output tokens which were used.
+      #   def initialize(data = {}) = super
     end
   end
 end

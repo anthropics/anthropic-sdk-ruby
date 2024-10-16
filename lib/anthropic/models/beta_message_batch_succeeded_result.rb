@@ -15,15 +15,14 @@ module Anthropic
         SUCCEEDED = :succeeded
       end
 
-      # Create a new instance of BetaMessageBatchSucceededResult from a Hash of raw
-      #   data.
-      #
-      # @overload initialize(message: nil, type: nil)
-      # @param message [Object]
-      # @param type [String]
-      def initialize(data = {})
-        super
-      end
+      # @!parse
+      #   # Create a new instance of BetaMessageBatchSucceededResult from a Hash of raw
+      #   #   data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [Object] :message
+      #   #   @option data [String] :type
+      #   def initialize(data = {}) = super
     end
   end
 end

@@ -23,16 +23,15 @@ module Anthropic
         TOOL_USE = :tool_use
       end
 
-      # Create a new instance of BetaToolUseBlock from a Hash of raw data.
-      #
-      # @overload initialize(id: nil, input: nil, name: nil, type: nil)
-      # @param id [String]
-      # @param input [Object]
-      # @param name [String]
-      # @param type [String]
-      def initialize(data = {})
-        super
-      end
+      # @!parse
+      #   # Create a new instance of BetaToolUseBlock from a Hash of raw data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [String] :id
+      #   #   @option data [Object] :input
+      #   #   @option data [String] :name
+      #   #   @option data [String] :type
+      #   def initialize(data = {}) = super
     end
   end
 end

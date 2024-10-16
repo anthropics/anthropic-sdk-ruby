@@ -15,14 +15,13 @@ module Anthropic
         ERRORED = :errored
       end
 
-      # Create a new instance of BetaMessageBatchErroredResult from a Hash of raw data.
-      #
-      # @overload initialize(error: nil, type: nil)
-      # @param error [Object]
-      # @param type [String]
-      def initialize(data = {})
-        super
-      end
+      # @!parse
+      #   # Create a new instance of BetaMessageBatchErroredResult from a Hash of raw data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [Object] :error
+      #   #   @option data [String] :type
+      #   def initialize(data = {}) = super
     end
   end
 end
