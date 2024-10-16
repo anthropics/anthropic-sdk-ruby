@@ -19,6 +19,14 @@ Style/RegexpLiteral:
 Style/SymbolArray:
   EnforcedStyle: brackets
 
+# Prefer consistency in method calling syntax
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+  Exclude:
+    - '**/*.gemspec'
+  IgnoredMethods:
+    - raise
+
 # Nothing wrong with clear if statements.
 Style/IfUnlessModifier:
   Enabled: false

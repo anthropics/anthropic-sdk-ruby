@@ -278,7 +278,7 @@ module Anthropic
         if response&.key?("x-stainless-mock-sleep")
           request[:headers]["x-stainless-mock-slept"] = delay
         else
-          sleep delay
+          sleep(delay)
         end
       end
     end
