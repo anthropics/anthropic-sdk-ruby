@@ -16,14 +16,13 @@ module Anthropic
         ASSISTANT = :assistant
       end
 
-      # Create a new instance of MessageParam from a Hash of raw data.
-      #
-      # @overload initialize(content: nil, role: nil)
-      # @param content [Array<Object>, String]
-      # @param role [String]
-      def initialize(data = {})
-        super
-      end
+      # @!parse
+      #   # Create a new instance of MessageParam from a Hash of raw data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [Array<Object>, String] :content
+      #   #   @option data [String] :role
+      #   def initialize(data = {}) = super
     end
   end
 end

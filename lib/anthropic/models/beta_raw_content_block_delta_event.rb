@@ -19,15 +19,14 @@ module Anthropic
         CONTENT_BLOCK_DELTA = :content_block_delta
       end
 
-      # Create a new instance of BetaRawContentBlockDeltaEvent from a Hash of raw data.
-      #
-      # @overload initialize(delta: nil, index: nil, type: nil)
-      # @param delta [Object]
-      # @param index [Integer]
-      # @param type [String]
-      def initialize(data = {})
-        super
-      end
+      # @!parse
+      #   # Create a new instance of BetaRawContentBlockDeltaEvent from a Hash of raw data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [Object] :delta
+      #   #   @option data [Integer] :index
+      #   #   @option data [String] :type
+      #   def initialize(data = {}) = super
     end
   end
 end

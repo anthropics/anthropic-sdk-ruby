@@ -15,14 +15,13 @@ module Anthropic
         CONTENT_BLOCK_STOP = :content_block_stop
       end
 
-      # Create a new instance of BetaRawContentBlockStopEvent from a Hash of raw data.
-      #
-      # @overload initialize(index: nil, type: nil)
-      # @param index [Integer]
-      # @param type [String]
-      def initialize(data = {})
-        super
-      end
+      # @!parse
+      #   # Create a new instance of BetaRawContentBlockStopEvent from a Hash of raw data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [Integer] :index
+      #   #   @option data [String] :type
+      #   def initialize(data = {}) = super
     end
   end
 end

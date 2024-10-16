@@ -15,14 +15,13 @@ module Anthropic
         INPUT_JSON_DELTA = :input_json_delta
       end
 
-      # Create a new instance of InputJSONDelta from a Hash of raw data.
-      #
-      # @overload initialize(partial_json: nil, type: nil)
-      # @param partial_json [String]
-      # @param type [String]
-      def initialize(data = {})
-        super
-      end
+      # @!parse
+      #   # Create a new instance of InputJSONDelta from a Hash of raw data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [String] :partial_json
+      #   #   @option data [String] :type
+      #   def initialize(data = {}) = super
     end
   end
 end

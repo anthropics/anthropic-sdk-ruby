@@ -142,7 +142,7 @@ module Anthropic
     end
 
     # Create a new instance of a model.
-    # @param data [Hash] Raw data to initialize the model with.
+    # @param data [Hash{Symbol => Object}] Raw data to initialize the model with.
     def initialize(data = {})
       @data = {}
       # TODO: what if data isn't a hash?

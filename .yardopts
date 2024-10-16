@@ -1,3 +1,2 @@
 --markup markdown
---reload
 --load .yardopts.rb

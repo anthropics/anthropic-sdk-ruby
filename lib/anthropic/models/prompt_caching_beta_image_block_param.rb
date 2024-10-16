@@ -42,31 +42,29 @@ module Anthropic
           BASE64 = :base64
         end
 
-        # Create a new instance of Source from a Hash of raw data.
-        #
-        # @overload initialize(data: nil, media_type: nil, type: nil)
-        # @param data [String]
-        # @param media_type [String]
-        # @param type [String]
-        def initialize(data = {})
-          super
-        end
+        # @!parse
+        #   # Create a new instance of Source from a Hash of raw data.
+        #   #
+        #   # @param data [Hash{Symbol => Object}] .
+        #   #   @option data [String] :data
+        #   #   @option data [String] :media_type
+        #   #   @option data [String] :type
+        #   def initialize(data = {}) = super
       end
 
       class Type < Anthropic::Enum
         IMAGE = :image
       end
 
-      # Create a new instance of PromptCachingBetaImageBlockParam from a Hash of raw
-      #   data.
-      #
-      # @overload initialize(source: nil, type: nil, cache_control: nil)
-      # @param source [Object]
-      # @param type [String]
-      # @param cache_control [Object]
-      def initialize(data = {})
-        super
-      end
+      # @!parse
+      #   # Create a new instance of PromptCachingBetaImageBlockParam from a Hash of raw
+      #   #   data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [Object] :source
+      #   #   @option data [String] :type
+      #   #   @option data [Object, nil] :cache_control
+      #   def initialize(data = {}) = super
     end
   end
 end

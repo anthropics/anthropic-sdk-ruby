@@ -15,14 +15,13 @@ module Anthropic
         NOT_FOUND_ERROR = :not_found_error
       end
 
-      # Create a new instance of BetaNotFoundError from a Hash of raw data.
-      #
-      # @overload initialize(message: nil, type: nil)
-      # @param message [String]
-      # @param type [String]
-      def initialize(data = {})
-        super
-      end
+      # @!parse
+      #   # Create a new instance of BetaNotFoundError from a Hash of raw data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [String] :message
+      #   #   @option data [String] :type
+      #   def initialize(data = {}) = super
     end
   end
 end

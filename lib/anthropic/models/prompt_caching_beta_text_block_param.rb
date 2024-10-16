@@ -19,16 +19,15 @@ module Anthropic
         TEXT = :text
       end
 
-      # Create a new instance of PromptCachingBetaTextBlockParam from a Hash of raw
-      #   data.
-      #
-      # @overload initialize(text: nil, type: nil, cache_control: nil)
-      # @param text [String]
-      # @param type [String]
-      # @param cache_control [Object]
-      def initialize(data = {})
-        super
-      end
+      # @!parse
+      #   # Create a new instance of PromptCachingBetaTextBlockParam from a Hash of raw
+      #   #   data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [String] :text
+      #   #   @option data [String] :type
+      #   #   @option data [Object, nil] :cache_control
+      #   def initialize(data = {}) = super
     end
   end
 end
