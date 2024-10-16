@@ -46,7 +46,7 @@ message = anthropic.messages.create(
   model: "claude-3-opus-20240229"
 )
 
-puts message.content
+puts(message.content)
 ```
 
 ### Errors
@@ -63,7 +63,7 @@ begin
     model: "claude-3-opus-20240229"
   )
 rescue Anthropic::HTTP::Error => e
-  puts e.code # 400
+  puts(e.code) # 400
 end
 ```
 
