@@ -12,7 +12,7 @@ module Anthropic
 
       # @!attribute [rw] name_
       #   @return [String]
-      required :name_, String
+      required :name_, String, api_name: :name
 
       # @!attribute [rw] cache_control
       #   @return [Anthropic::Models::BetaCacheControlEphemeral]

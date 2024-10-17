@@ -13,7 +13,7 @@ module Anthropic
 
       # @!attribute [rw] name_
       #   @return [String]
-      required :name_, String
+      required :name_, String, api_name: :name
 
       # @!attribute [rw] type
       #   @return [Symbol, Anthropic::Models::PromptCachingBetaToolUseBlockParam::Type]

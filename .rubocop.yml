@@ -61,6 +61,10 @@ Style/ClassAndModuleChildren:
   Exclude:
     - test/**/*
 
+# Rubocop is pretty bad about mangling single line lambdas
+Style/Lambda:
+  Enabled: false
+
 # Set a reasonable line length; rely on other cops to correct long lines.
 Layout/LineLength:
   Max: 110
