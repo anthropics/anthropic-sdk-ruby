@@ -103,37 +103,44 @@ module Anthropic
 
     # @!visibility private
     # Assumes superclass fields are totally defined before fields are accessed / defined on subclasses.
+    # @return [Hash{Symbol => Hash{Symbol => Object}}]
     def self.fields
       @fields ||= (superclass == BaseModel ? {} : superclass.fields.dup)
     end
 
     # @!visibility private
-    def self.add_field(name_sym, type_info, mode)
+    # @param name_sym [Symbol]
+    # @param api_name [Symbol, nil]
+    # @param type_info [Proc, Object]
+    # @param mode [Symbol]
+    # @return [void]
+    def self.add_field(name_sym, api_name:, type_info:, mode:)
       type_fn = type_info.is_a?(Proc) ? type_info : -> { type_info }
-      fields[name_sym] = {type_fn: type_fn, mode: mode}
+      key = api_name || name_sym
+      fields[name_sym] = {type_fn: type_fn, mode: mode, key: key}
 
       define_method(name_sym) do
         field_type = type_fn.call
-        Converter.convert(field_type, @data[name_sym])
+        Converter.convert(field_type, @data[key])
       rescue StandardError
         name = self.class.name.split("::").last
         raise ConversionError,
               "Failed to parse #{name}.#{name_sym} as #{field_type.inspect}. " \
-              "To get the unparsed API response, use #{name}[:#{name_sym}]."
+              "To get the unparsed API response, use #{name}[:#{key}]."
       end
-      define_method("#{name_sym}=") { |val| @data[name_sym] = val }
+      define_method("#{name_sym}=") { |val| @data[key] = val }
     end
 
     # @!visibility private
     # NB `required` is just a signal to the reader. We don't do runtime validation anyway.
-    def self.required(name_sym, type_info = nil, mode = :rw, enum: nil)
-      add_field(name_sym, enum || type_info, mode)
+    def self.required(name_sym, type_info = nil, mode = :rw, api_name: nil, enum: nil)
+      add_field(name_sym, api_name: api_name, type_info: enum || type_info, mode: mode)
     end
 
     # @!visibility private
     # NB `optional` is just a signal to the reader. We don't do runtime validation anyway.
-    def self.optional(name_sym, type_info = nil, mode = :rw, enum: nil)
-      add_field(name_sym, enum || type_info, mode)
+    def self.optional(name_sym, type_info = nil, mode = :rw, api_name: nil, enum: nil)
+      add_field(name_sym, api_name: api_name, type_info: enum || type_info, mode: mode)
     end
 
     # @!visibility private
@@ -188,6 +195,8 @@ module Anthropic
       @data[key]
     end
 
+    # @param keys [Array<Symbol>, nil]
+    # @return [Hash{Symbol => Object}]
     def deconstruct_keys(keys)
       (keys || self.class.fields.keys).to_h do |k|
         if !k.instance_of?(Symbol)

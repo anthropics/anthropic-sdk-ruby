@@ -5,6 +5,11 @@ module Anthropic
   class BaseClient
     attr_accessor :requester
 
+    # @param base_url [String]
+    # @param timeout [Integer, nil]
+    # @param headers [Hash{String => String}]
+    # @param max_retries [Integer]
+    # @param idempotency_header [String, nil]
     def initialize(
       base_url:,
       timeout: nil,
@@ -33,6 +38,7 @@ module Anthropic
       @idempotency_header = idempotency_header
     end
 
+    # @return [Hash{String => String}]
     def auth_headers
       {}
     end
@@ -330,7 +336,11 @@ module Anthropic
     end
 
     class ResponseError < Error
-      attr_reader :response, :body, :code
+      attr_reader :response, :body
+
+      # @!attribute [r] code
+      #   @return [Integer]
+      attr_reader :code
 
       def initialize(message:, response:, body:)
         super(message)

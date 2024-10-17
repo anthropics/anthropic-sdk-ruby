@@ -6,7 +6,7 @@ module Anthropic
       # @!attribute [rw] name_
       #   The name of the tool to use.
       #   @return [String]
-      required :name_, String
+      required :name_, String, api_name: :name
 
       # @!attribute [rw] type
       #   @return [Symbol, Anthropic::Models::ToolChoiceTool::Type]

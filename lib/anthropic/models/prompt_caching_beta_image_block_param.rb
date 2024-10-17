@@ -23,7 +23,7 @@ module Anthropic
         # @!attribute [rw] media_type
         #   @return [Symbol, Anthropic::Models::PromptCachingBetaImageBlockParam::Source::MediaType]
         required :media_type,
-                 enum: lambda {
+                 enum: -> {
                    Anthropic::Models::PromptCachingBetaImageBlockParam::Source::MediaType
                  }
 
