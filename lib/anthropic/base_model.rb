@@ -213,7 +213,9 @@ module Anthropic
 
     # @return [String]
     def inspect
-      "#<#{self.class.name}:0x#{object_id.to_s(16)} #{@data.inspect}>"
+      "#<#{self.class.name}:0x#{object_id.to_s(16)} #{deconstruct_keys(nil).map do |k, v|
+        "#{k}=#{v.inspect}"
+      end.join(' ')}>"
     end
 
     # @return [String]

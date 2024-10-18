@@ -326,6 +326,15 @@ module Anthropic
         raw_data
       end
     end
+
+    # @return [String]
+    def inspect
+      base_url = Util.uri_from_req(
+        {host: @host, scheme: @scheme, port: @port, path: @base_path},
+        absolute: true
+      )
+      "#<#{self.class.name}:0x#{object_id.to_s(16)} base_url=#{base_url.inspect} max_retries=#{@max_retries.inspect} timeout=#{@timeout.inspect}>"
+    end
   end
 
   class Error < StandardError

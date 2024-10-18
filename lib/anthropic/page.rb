@@ -33,7 +33,7 @@ module Anthropic
       !last_id.nil?
     end
 
-    # @return [Page]
+    # @return [Anthropic::Page]
     def next_page
       if !next_page?
         raise "No more pages available; please check #next_page? before calling #next_page"
@@ -52,6 +52,11 @@ module Anthropic
         break if !page.next_page?
         page = page.next_page
       end
+    end
+
+    # @return String
+    def inspect
+      "#<#{selfl.class}:0x#{object_id.to_s(16)} data=#{data.inspect} has_more=#{has_more.inspect} first_id=#{first_id.inspect} last_id=#{last_id.inspect}>"
     end
   end
 end
