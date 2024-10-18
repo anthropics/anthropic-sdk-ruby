@@ -56,7 +56,7 @@ module Anthropic
       uri = String.new
       if absolute
         uri << "#{req[:scheme]}://#{req[:host]}"
-        if req[:port]
+        if req[:port] && !(req[:scheme] == "https" && req[:port] == 443) && !(req[:scheme] == "http" && req[:port] == 80)
           uri << ":#{req[:port]}"
         end
       end
