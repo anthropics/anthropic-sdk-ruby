@@ -16,7 +16,7 @@ module Anthropic
           #   once. Once a Message Batch is created, it begins processing immediately. Batches
           #   can take up to 24 hours to complete.
           #
-          # @param params [Hash] Attributes to send in this request.
+          # @param params [Hash{Symbol => Object}] Attributes to send in this request.
           #   @option params [Array<Request>] :requests Body param: List of requests for prompt completion. Each is an individual
           #     request to create a Message.
           #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent13>, nil] :betas Header param: Optional header to specify the beta version(s) you want to use.
@@ -41,7 +41,7 @@ module Anthropic
           #
           # @param message_batch_id [String] ID of the Message Batch.
           #
-          # @param params [Hash] Attributes to send in this request.
+          # @param params [Hash{Symbol => Object}] Attributes to send in this request.
           #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent14>, nil] :betas Optional header to specify the beta version(s) you want to use.
           #
           # @param opts [Hash, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
@@ -59,7 +59,7 @@ module Anthropic
           # List all Message Batches within a Workspace. Most recently created batches are
           #   returned first.
           #
-          # @param params [Hash] Attributes to send in this request.
+          # @param params [Hash{Symbol => Object}] Attributes to send in this request.
           #   @option params [String, nil] :after_id Query param: ID of the object to use as a cursor for pagination. When provided,
           #     returns the page of results immediately after this object.
           #   @option params [String, nil] :before_id Query param: ID of the object to use as a cursor for pagination. When provided,
@@ -95,7 +95,7 @@ module Anthropic
           #
           # @param message_batch_id [String] ID of the Message Batch.
           #
-          # @param params [Hash] Attributes to send in this request.
+          # @param params [Hash{Symbol => Object}] Attributes to send in this request.
           #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent16>, nil] :betas Optional header to specify the beta version(s) you want to use.
           #
           # @param opts [Hash, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
@@ -118,7 +118,7 @@ module Anthropic
           #
           # @param message_batch_id [String] ID of the Message Batch.
           #
-          # @param params [Hash] Attributes to send in this request.
+          # @param params [Hash{Symbol => Object}] Attributes to send in this request.
           #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent17>, nil] :betas Optional header to specify the beta version(s) you want to use.
           #
           # @param opts [Hash, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.

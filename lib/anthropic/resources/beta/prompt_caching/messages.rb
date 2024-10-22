@@ -16,7 +16,7 @@ module Anthropic
           #   The Messages API can be used for either single queries or stateless multi-turn
           #   conversations.
           #
-          # @param params [Hash] Attributes to send in this request.
+          # @param params [Hash{Symbol => Object}] Attributes to send in this request.
           #   @option params [Integer] :max_tokens Body param: The maximum number of tokens to generate before stopping.
           #
           #     Note that our models may stop _before_ reaching this maximum. This parameter
