@@ -4,7 +4,7 @@ module Anthropic
   module Models
     class BetaMessageBatchIndividualResponse < BaseModel
       # @!attribute [rw] custom_id
-      #   Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests.
+      #   Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
       #
       # Must be unique for each request within the Message Batch.
       #   @return [String]
@@ -23,7 +23,7 @@ module Anthropic
       #   #
       #   # @param data [Hash{Symbol => Object}] .
       #   #   @option data [String] :custom_id Developer-provided ID created for each request in a Message Batch. Useful for
-      #   #     matching results to requests.
+      #   #     matching results to requests, as results may be given out of request order.
       #   #
       #   #     Must be unique for each request within the Message Batch.
       #   #   @option data [Object] :result Processing result for this request.

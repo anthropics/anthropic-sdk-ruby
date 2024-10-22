@@ -10,6 +10,11 @@ module Anthropic
       #   @return [String]
       required :id, String
 
+      # @!attribute [rw] archived_at
+      #   RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
+      #   @return [Time]
+      required :archived_at, Time
+
       # @!attribute [rw] cancel_initiated_at
       #   RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
       #   @return [Time]
@@ -34,15 +39,13 @@ module Anthropic
 
       # @!attribute [rw] processing_status
       #   Processing status of the Message Batch.
-      #
-      # This is one of: `in_progress`, `canceling`, or `ended`.
       #   @return [Symbol, Anthropic::Models::BetaMessageBatch::ProcessingStatus]
       required :processing_status, enum: -> { Anthropic::Models::BetaMessageBatch::ProcessingStatus }
 
       # @!attribute [rw] request_counts
-      #   Overview of the number of requests within the Message Batch and their statuses.
+      #   Tallies requests within the Message Batch, categorized by their status.
       #
-      # Requests start as `processing` and move to one of the other statuses only once processing of entire batch ends.
+      # Requests start as `processing` and move to one of the other statuses only once processing of the entire batch ends. The sum of all values always matches the total number of requests in the batch.
       #   @return [Anthropic::Models::BetaMessageBatchRequestCounts]
       required :request_counts, -> { Anthropic::Models::BetaMessageBatchRequestCounts }
 
@@ -61,8 +64,6 @@ module Anthropic
       required :type, enum: -> { Anthropic::Models::BetaMessageBatch::Type }
 
       # Processing status of the Message Batch.
-      #
-      # This is one of: `in_progress`, `canceling`, or `ended`.
       class ProcessingStatus < Anthropic::Enum
         IN_PROGRESS = :in_progress
         CANCELING = :canceling
@@ -83,6 +84,8 @@ module Anthropic
       #   #   @option data [String] :id Unique object identifier.
       #   #
       #   #     The format and length of IDs may change over time.
+      #   #   @option data [String] :archived_at RFC 3339 datetime string representing the time at which the Message Batch was
+      #   #     archived and its results became unavailable.
       #   #   @option data [String] :cancel_initiated_at RFC 3339 datetime string representing the time at which cancellation was
       #   #     initiated for the Message Batch. Specified only if cancellation was initiated.
       #   #   @option data [String] :created_at RFC 3339 datetime string representing the time at which the Message Batch was
@@ -95,12 +98,11 @@ module Anthropic
       #   #   @option data [String] :expires_at RFC 3339 datetime string representing the time at which the Message Batch will
       #   #     expire and end processing, which is 24 hours after creation.
       #   #   @option data [String] :processing_status Processing status of the Message Batch.
-      #   #
-      #   #     This is one of: `in_progress`, `canceling`, or `ended`.
-      #   #   @option data [Object] :request_counts Overview of the number of requests within the Message Batch and their statuses.
+      #   #   @option data [Object] :request_counts Tallies requests within the Message Batch, categorized by their status.
       #   #
       #   #     Requests start as `processing` and move to one of the other statuses only once
-      #   #     processing of entire batch ends.
+      #   #     processing of the entire batch ends. The sum of all values always matches the
+      #   #     total number of requests in the batch.
       #   #   @option data [String] :results_url URL to a `.jsonl` file containing the results of the Message Batch requests.
       #   #     Specified only once processing ends.
       #   #
