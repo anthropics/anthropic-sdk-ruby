@@ -5,7 +5,9 @@ require "rubocop/rake_task"
 
 task(default: [:test, :format])
 
-Minitest::TestTask.create
+Minitest::TestTask.create do |t|
+  t.libs = %w[.]
+end
 
 RuboCop::RakeTask.new(:rubocop) do |t|
   t.options = %w[--fail-level E --autocorrect]

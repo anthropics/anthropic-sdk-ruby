@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "time"
-
 require_relative "test_helper"
 
 class AnthropicTest < Minitest::Test
