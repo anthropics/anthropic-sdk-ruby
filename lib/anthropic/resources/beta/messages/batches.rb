@@ -10,10 +10,11 @@ module Anthropic
             @client = client
           end
 
-          # Send a batch of requests to create Messages.
+          # Send a batch of Message creation requests.
           #
-          #   The Messages Batch API can be used to process multiple Messages API requests at
-          #   once. Once a Message Batch is created, it begins processing immediately.
+          #   The Message Batches API can be used to process multiple Messages API requests at
+          #   once. Once a Message Batch is created, it begins processing immediately. Batches
+          #   can take up to 24 hours to complete.
           #
           # @param params [Hash] Attributes to send in this request.
           #   @option params [Array<Request>] :requests Body param: List of requests for prompt completion. Each is an individual
@@ -35,8 +36,8 @@ module Anthropic
           end
 
           # This endpoint is idempotent and can be used to poll for Message Batch
-          #   completion. To access the results of a Message Batch, use the `responses_url`
-          #   field in the response.
+          #   completion. To access the results of a Message Batch, make a request to the
+          #   `results_url` field in the response.
           #
           # @param message_batch_id [String] ID of the Message Batch.
           #
@@ -55,7 +56,8 @@ module Anthropic
             @client.request(req, opts)
           end
 
-          # List all Message Batches within a Workspace.
+          # List all Message Batches within a Workspace. Most recently created batches are
+          #   returned first.
           #
           # @param params [Hash] Attributes to send in this request.
           #   @option params [String, nil] :after_id Query param: ID of the object to use as a cursor for pagination. When provided,
@@ -81,8 +83,15 @@ module Anthropic
             @client.request(req, opts)
           end
 
-          # Batches may be canceled any time before processing ends. The system may complete
-          #   any in-progress, non-interruptible operations before finalizing cancellation.
+          # Batches may be canceled any time before processing ends. Once cancellation is
+          #   initiated, the batch enters a `canceling` state, at which time the system may
+          #   complete any in-progress, non-interruptible requests before finalizing
+          #   cancellation.
+          #
+          #   The number of canceled requests is specified in `request_counts`. To determine
+          #   which requests were canceled, check the individual results within the batch.
+          #   Note that cancellation may not result in any canceled requests if they were
+          #   non-interruptible.
           #
           # @param message_batch_id [String] ID of the Message Batch.
           #

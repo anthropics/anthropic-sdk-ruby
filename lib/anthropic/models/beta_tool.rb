@@ -25,6 +25,10 @@ module Anthropic
       #   @return [String]
       optional :description, String
 
+      # @!attribute [rw] type
+      #   @return [Symbol, Anthropic::Models::BetaTool::Type]
+      optional :type, enum: -> { Anthropic::Models::BetaTool::Type }
+
       class InputSchema < BaseModel
         # @!attribute [rw] type
         #   @return [Symbol, Anthropic::Models::BetaTool::InputSchema::Type]
@@ -47,6 +51,10 @@ module Anthropic
         #   def initialize(data = {}) = super
       end
 
+      class Type < Anthropic::Enum
+        CUSTOM = :custom
+      end
+
       # @!parse
       #   # Create a new instance of BetaTool from a Hash of raw data.
       #   #
@@ -63,6 +71,7 @@ module Anthropic
       #   #     the model has about what the tool is and how to use it, the better it will
       #   #     perform. You can use natural language descriptions to reinforce important
       #   #     aspects of the tool input JSON schema.
+      #   #   @option data [String, nil] :type
       #   def initialize(data = {}) = super
     end
   end
