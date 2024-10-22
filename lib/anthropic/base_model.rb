@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "date"
-require "time"
-
 module Anthropic
   # @!visibility private
   module Converter

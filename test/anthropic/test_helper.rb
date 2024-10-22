@@ -11,4 +11,3 @@ require_relative "test_namespaces"
 
 require "minitest"
 require "stringio"
-require "time"
