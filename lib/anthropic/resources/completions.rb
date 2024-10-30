@@ -72,7 +72,7 @@ module Anthropic
       #     Recommended for advanced use cases only. You usually only need to use
       #     `temperature`.
       #
-      # @param opts [Hash, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+      # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
       #
       # @return [Anthropic::Models::Completion]
       def create(params = {}, opts = {})

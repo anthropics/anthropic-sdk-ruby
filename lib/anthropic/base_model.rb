@@ -7,6 +7,12 @@ module Anthropic
     # - If the given `value` conforms to `type` already, the given `value`.
     # - If it's possible and safe to convert the given `value` to `type`, such a converted value.
     # - Otherwise, the given `value` unaltered.
+    #
+    # @param type [Class, Converter]
+    # @param value [Object]
+    #
+    # @raise [StandardError]
+    # @return [Object]
     def self.convert(type, value)
       # If `type.is_a?(Converter)`, `type` is an instance of a class that mixes
       # in `Converter`, indicating that the type should define `#convert` on this
@@ -18,15 +24,15 @@ module Anthropic
       # directly.
       if type.is_a?(Converter) || type.include?(Converter)
         type.convert(value)
-      elsif type == Date
-        Date.parse(value)
-      elsif type == Time
-        Time.parse(value)
-      elsif type == NilClass
+      elsif type <= NilClass
         nil
-      elsif type == Float
+      elsif type <= Date
+        Date.parse(value)
+      elsif type <= Time
+        Time.parse(value)
+      elsif type <= Float
         value.is_a?(Numeric) ? value.to_f : value
-      elsif [Object, Integer, String, Hash].include?(type)
+      elsif [Object, Hash, Integer, String].any? { |t| type <= t }
         value
       else
         raise StandardError, "Unexpected type #{type}"
@@ -100,6 +106,7 @@ module Anthropic
 
     # @!visibility private
     # Assumes superclass fields are totally defined before fields are accessed / defined on subclasses.
+    #
     # @return [Hash{Symbol => Hash{Symbol => Object}}]
     def self.fields
       @fields ||= (superclass == BaseModel ? {} : superclass.fields.dup)
@@ -110,6 +117,7 @@ module Anthropic
     # @param api_name [Symbol, nil]
     # @param type_info [Proc, Object]
     # @param mode [Symbol]
+    #
     # @return [void]
     def self.add_field(name_sym, api_name:, type_info:, mode:)
       type_fn = type_info.is_a?(Proc) ? type_info : -> { type_info }
@@ -193,6 +201,7 @@ module Anthropic
     end
 
     # @param keys [Array<Symbol>, nil]
+    #
     # @return [Hash{Symbol => Object}]
     def deconstruct_keys(keys)
       (keys || self.class.fields.keys).to_h do |k|

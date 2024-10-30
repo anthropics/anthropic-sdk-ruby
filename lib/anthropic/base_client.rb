@@ -6,7 +6,7 @@ module Anthropic
     attr_accessor :requester
 
     # @param base_url [String]
-    # @param timeout [Integer, nil]
+    # @param timeout [Float, nil]
     # @param headers [Hash{String => String}]
     # @param max_retries [Integer]
     # @param idempotency_header [String, nil]
@@ -43,6 +43,10 @@ module Anthropic
       {}
     end
 
+    # @param req [Hash{Symbol => Object}]
+    # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions]
+    #
+    # @raise [ArgumentError]
     def validate_request(req, opts)
       if (body = req[:body])
         # Body can be at least a Hash or Array, just check for Hash shape for now.
@@ -68,10 +72,16 @@ module Anthropic
       end
     end
 
+    # @param req [Hash{Symbol => Object}]
+    #
+    # @return [String]
     def self.normalize_path(path)
       path.gsub(/\/+/, "/")
     end
 
+    # @param req [Hash{Symbol => Object}]
+    #
+    # @return [Hash{Symbol => Object}]
     def resolve_uri_elements(req)
       from_args =
         if req[:url]
@@ -98,6 +108,9 @@ module Anthropic
       uri_components
     end
 
+    # @param options [Hash{Symbol => Object}]
+    #
+    # @return [Hash{Symbol => Object}]
     def prep_request(options)
       method = options.fetch(:method)
 
@@ -131,20 +144,24 @@ module Anthropic
 
       url_elements = resolve_uri_elements(options)
 
-      {method: method, headers: headers, body: body}.merge(url_elements)
+      {method: method, headers: headers, body: body, **url_elements}
     end
 
+    # @return [String]
     def generate_idempotency_key
       "stainless-ruby-retry-#{SecureRandom.uuid}"
     end
 
+    # @param response [Net::HTTPResponse]
+    #
+    # @return [Boolean]
     def should_retry?(response)
       should_retry_header = response["x-should-retry"]
 
       case should_retry_header
-      when "true"
+      in "true"
         true
-      when "false"
+      in "false"
         false
       else
         response_code = response.code.to_i
@@ -157,10 +174,14 @@ module Anthropic
       end
     end
 
+    # @param message [String]
+    # @param body [Object]
+    # @param response [Net::HTTPResponse]
     def make_status_error(message:, body:, response:)
       raise NotImplementedError
     end
 
+    # @param response [Net::HTTPResponse]
     def make_status_error_from_response(response)
       err_body =
         begin
@@ -199,6 +220,13 @@ module Anthropic
     rescue StandardError # rubocop:disable Lint/SuppressedException
     end
 
+    # @param request [Hash{Symbol => Object}]
+    # @param max_retries [Integer]
+    # @param timeout [Float]
+    # @param redirect_count [Integer]
+    #
+    # @raise [Anthropic::HTTP::Error]
+    # @return [Net::HTTPResponse]
     def send_request(request, max_retries:, timeout:, redirect_count:)
       delay = 0.5
       max_delay = 8.0
@@ -293,6 +321,8 @@ module Anthropic
     # resource methods call into.
     # Params req & opts are kept separate up until this point so that we can
     # validate opts as it was given to us by the user.
+    # @param req [Hash{Symbol => Object}]
+    # @param opts [Anthropic::RequestOptions, Hash{Symbol => Object}]
     def request(req, opts)
       validate_request(req, opts)
       options = Util.deep_merge(req, opts)
@@ -305,7 +335,7 @@ module Anthropic
       )
       raw_data =
         case response.content_type
-        when "application/json"
+        in "application/json"
           begin
             data = JSON.parse(response.body, symbolize_names: true)
             req[:unwrap] ? data[req[:unwrap]] : data
@@ -345,12 +375,21 @@ module Anthropic
     end
 
     class ResponseError < Error
-      attr_reader :response, :body
+      # @!attribute [r] response
+      #   @return [Net::HTTPResponse]
+      attr_reader :response
+
+      # @!attribute [r] body
+      #   @return [Object]
+      attr_reader :body
 
       # @!attribute [r] code
       #   @return [Integer]
       attr_reader :code
 
+      # @param message [String]
+      # @param response [Net::HTTPResponse]
+      # @param body [Object]
       def initialize(message:, response:, body:)
         super(message)
         @response = response
@@ -360,8 +399,12 @@ module Anthropic
     end
 
     class RequestError < Error
+      # @!attribute [r] request
+      #   @return [Hash{Symbol => Object}]
       attr_reader :request
 
+      # @param message [String]
+      # @param request [Hash{Symbol => Object}]
       def initialize(message:, request:)
         super(message)
         @request = request

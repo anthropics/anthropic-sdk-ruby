@@ -232,7 +232,7 @@ module Anthropic
         #     `temperature`.
         #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent12>, nil] :betas Header param: Optional header to specify the beta version(s) you want to use.
         #
-        # @param opts [Hash, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+        # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
         #
         # @return [Anthropic::Models::BetaMessage]
         def create(params = {}, opts = {})

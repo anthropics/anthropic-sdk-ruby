@@ -11,7 +11,11 @@ module Anthropic
 
     # Recursively merge one hash with another.
     # If the values at a given key are not both hashes, just take the new value.
+    # @param left [Object]
+    # @param right [Object]
     # @param concat [true, false] whether to merge sequences by concatenation
+    #
+    # @return [Object]
     def self.deep_merge(left, right, concat: false)
       right_cleaned = if right.is_a?(Hash)
         right.reject { |_, value| value == OMIT }
@@ -32,14 +36,23 @@ module Anthropic
       end
     end
 
+    # @param str [String]
+    #
+    # @return [Integer, String]
     def self.coerce_integer(str)
       Integer(str, exception: false) || str
     end
 
+    # @param str [String]
+    #
+    # @return [Float, String]
     def self.coerce_float(str)
       Float(str, exception: false) || str
     end
 
+    # @param str [String]
+    #
+    # @return [Boolean, String]
     def self.coerce_boolean(input)
       case input
       in "true"
@@ -51,6 +64,10 @@ module Anthropic
       end
     end
 
+    # @param req [Hash{Symbol => String}]
+    # @param absolute [Boolean]
+    #
+    # @return [String]
     def self.uri_from_req(req, absolute:)
       query_string = ("?#{URI.encode_www_form(req[:query])}" if req[:query])
       uri = String.new
@@ -63,6 +80,9 @@ module Anthropic
       uri << ((req[:path] || "/") + (query_string || ""))
     end
 
+    # @param uri [URI::Generic]
+    #
+    # @return [String]
     def self.uri_origin(uri)
       if uri.respond_to?(:origin)
         uri.origin
@@ -71,6 +91,7 @@ module Anthropic
       end
     end
 
+    # @param *headers [Array<Hash{String => String}>]
     def self.normalized_headers(*headers)
       {}.merge(*headers.compact).transform_keys(&:downcase)
     end

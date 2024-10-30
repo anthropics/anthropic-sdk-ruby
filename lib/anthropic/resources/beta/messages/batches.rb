@@ -21,7 +21,7 @@ module Anthropic
           #     request to create a Message.
           #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent13>, nil] :betas Header param: Optional header to specify the beta version(s) you want to use.
           #
-          # @param opts [Hash, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+          # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
           #
           # @return [Anthropic::Models::BetaMessageBatch]
           def create(params = {}, opts = {})
@@ -44,7 +44,7 @@ module Anthropic
           # @param params [Hash{Symbol => Object}] Attributes to send in this request.
           #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent14>, nil] :betas Optional header to specify the beta version(s) you want to use.
           #
-          # @param opts [Hash, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+          # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
           #
           # @return [Anthropic::Models::BetaMessageBatch]
           def retrieve(message_batch_id, _params = {}, opts = {})
@@ -69,7 +69,7 @@ module Anthropic
           #     Defaults to `20`. Ranges from `1` to `100`.
           #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent15>, nil] :betas Header param: Optional header to specify the beta version(s) you want to use.
           #
-          # @param opts [Hash, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+          # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
           #
           # @return [Anthropic::Page<Anthropic::Models::BetaMessageBatch>]
           def list(params = {}, opts = {})
@@ -98,7 +98,7 @@ module Anthropic
           # @param params [Hash{Symbol => Object}] Attributes to send in this request.
           #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent16>, nil] :betas Optional header to specify the beta version(s) you want to use.
           #
-          # @param opts [Hash, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+          # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
           #
           # @return [Anthropic::Models::BetaMessageBatch]
           def cancel(message_batch_id, _params = {}, opts = {})
@@ -121,7 +121,7 @@ module Anthropic
           # @param params [Hash{Symbol => Object}] Attributes to send in this request.
           #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent17>, nil] :betas Optional header to specify the beta version(s) you want to use.
           #
-          # @param opts [Hash, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+          # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
           #
           # @return [Object]
           def results(message_batch_id, _params = {}, opts = {})
