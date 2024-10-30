@@ -8,11 +8,13 @@ module Anthropic
   # with symbol keys matching the attributes on this class.
   class RequestOptions
     # @!visibility private
+    # @return [Array<Symbol>]
     def self.options
       @options ||= []
     end
 
     # @!visibility private
+    # @param name [Symbol]
     def self.option(name)
       define_method(name) { @_values[name] }
       define_method("#{name}=") { |val| @_values[name] = val }
@@ -84,6 +86,13 @@ module Anthropic
     # @return [String]
     def to_s
       @_values.to_s
+    end
+
+    # @param keys [Array<Symbol>, nil]
+    #
+    # @return [Hash{Symbol => Object}]
+    def deconstruct_keys(keys)
+      @_values.deconstruct_keys(keys)
     end
   end
 end
