@@ -73,32 +73,32 @@ module Anthropic
     end
 
     # @param req [Hash{Symbol => Object}]
+    #   @option req [String] :url
+    #   @option req [String] :host
+    #   @option req [String] :scheme
+    #   @option req [String] :path
+    #   @option req [String] :port
+    #   @option req [Hash{String => Array<String>}] :query
+    #   @option req [Hash{String => Array<String>}] :extra_query
     #
     # @return [Hash{Symbol => Object}]
     def resolve_uri_elements(req)
       from_args =
-        if req[:url]
-          uri = req[:url].is_a?(URI::Generic) ? req[:url] : URI.parse(req[:url])
-          {
-            host: uri.host,
-            scheme: uri.scheme,
-            path: uri.path,
-            query: CGI.parse(uri.query || ""),
-            port: uri.port
-          }
+        if (url = req[:url])
+          Anthropic::Util.parse_uri(url)
         else
-          from_req = req.slice(:host, :scheme, :path, :port, :query)
-          from_req[:path] = Anthropic::Util.normalize_path("/#{@base_path}/#{from_req[:path]}")
-          from_req
+          path = Anthropic::Util.normalize_path("/#{@base_path}/#{req.fetch(:path)}")
+          req.slice(:scheme, :host, :port, :query).merge(path: path)
         end
 
-      uri_components = {host: @host, scheme: @scheme, port: @port}.merge(from_args)
-
-      if req[:extra_query]
-        uri_components[:query] = Util.deep_merge(uri_components[:query], req[:extra_query], concat: true)
-      end
-
-      uri_components
+      query = Util.deep_merge(from_args[:query] || {}, req[:extra_query] || {}, concat: true)
+      {
+        host: @host,
+        scheme: @scheme,
+        port: @port,
+        **from_args,
+        query: query
+      }
     end
 
     # @param options [Hash{Symbol => Object}]
@@ -238,8 +238,9 @@ module Anthropic
           if status < 300
             return response
           elsif status < 400
+            prev_uri = Util.unparse_uri(request)
+
             begin
-              prev_uri = URI.parse(Util.uri_from_req(request, absolute: true))
               location = URI.join(prev_uri, response["location"])
             rescue ArgumentError
               message = "server responded with status #{status} but no valid location header"
@@ -352,11 +353,8 @@ module Anthropic
 
     # @return [String]
     def inspect
-      base_url = Util.uri_from_req(
-        {host: @host, scheme: @scheme, port: @port, path: @base_path},
-        absolute: true
-      )
-      "#<#{self.class.name}:0x#{object_id.to_s(16)} base_url=#{base_url.inspect} max_retries=#{@max_retries.inspect} timeout=#{@timeout.inspect}>"
+      base_url = Util.unparse_uri(scheme: @scheme, host: @host, port: @port, path: @base_path)
+      "#<#{self.class.name}:0x#{object_id.to_s(16)} base_url=#{base_url} max_retries=#{@max_retries} timeout=#{@timeout}>"
     end
   end
 

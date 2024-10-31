@@ -7,6 +7,7 @@ task(default: [:test, :format])
 
 Minitest::TestTask.create do |t|
   t.libs = %w[.]
+  t.test_globs = ENV.fetch("TEST", "test/**/*_test.rb")
 end
 
 RuboCop::RakeTask.new(:rubocop) do |t|

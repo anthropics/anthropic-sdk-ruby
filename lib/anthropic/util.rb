@@ -67,26 +67,54 @@ module Anthropic
       end
     end
 
-    # @param req [Hash{Symbol => String}]
+    # @param url [URI::Generic, String] -
+    #
+    # @return [Hash{Symbol => Object}]
+    def self.parse_uri(url)
+      uri =
+        case url
+        in URI::Generic
+          url
+        in String
+          URI.parse(url)
+        end
+      {
+        scheme: uri.scheme,
+        host: uri.host,
+        port: uri.port,
+        path: uri.path,
+        query: CGI.parse(uri.query || "")
+      }
+    end
+
+    # @param parsed [Hash{Symbol => String}] -
+    #   @option parsed [String] :scheme
+    #   @option parsed [String] :host
+    #   @option parsed [Integer] :port
+    #   @option parsed [String] :path
+    #   @option parsed [Hash{String => Array<String>}] :query
+    #
     # @param absolute [Boolean]
     #
-    # @return [String]
-    def self.uri_from_req(req, absolute:)
+    # @return [URI::Generic]
+    def self.unparse_uri(parsed, absolute: true)
+      scheme, host, port = parsed.fetch_values(:scheme, :host, :port)
+      path, query = parsed.fetch_values(:path, :query)
       uri = String.new
+
       if absolute
-        scheme, host = req.fetch_values(:scheme, :host)
         uri << "#{scheme}://#{host}"
-        case [req[:port], scheme]
-        in [nil, _] | [80, "http"] | [443, "https"]
+        case [scheme, port]
+        in [_, nil] | ["http", 80] | ["https", 443]
           nil
-        in [port, _]
+        else
           uri << ":#{port}"
         end
       end
 
-      query_string = req[:query]&.then { |q| "?#{URI.encode_www_form(q)}" } || ""
-      uri << (req.fetch(:path, "/") + query_string)
-      uri.freeze
+      qs = query.length.positive? ? "?#{URI.encode_www_form(query)}" : ""
+      uri << "#{path}#{qs}"
+      URI.parse(uri)
     end
 
     # @param uri [URI::Generic]
