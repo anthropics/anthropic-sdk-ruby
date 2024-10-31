@@ -13,20 +13,21 @@ module Anthropic
     #
     # @return [ConnectionPool]
     def get_pool(req, timeout:)
-      hostname = req[:host]
-      scheme = req[:scheme]
-      port =
-        req[:port] ||
-        case scheme.to_sym
-        in :https
-          Net::HTTP.https_default_port
-        else
+      scheme, hostname = req.fetch_values(:scheme, :host)
+      scheme = scheme.to_sym
+      port = req.fetch(:port) do
+        case scheme
+        in :http
           Net::HTTP.http_default_port
+        else
+          Net::HTTP.https_default_port
         end
+      end
+
       @mutex.synchronize do
         @pools[hostname] ||= ConnectionPool.new do
           conn = Net::HTTP.new(hostname, port)
-          conn.use_ssl = scheme.to_sym == :https
+          conn.use_ssl = scheme == :https
           conn.max_retries = 0
           conn.open_timeout = timeout
           conn.start
@@ -41,7 +42,9 @@ module Anthropic
     #
     # @return [Net::HTTPResponse]
     def execute(req, timeout:)
-      method, headers, body = req.values_at(:method, :headers, :body)
+      method, headers, body = req.fetch_values(:method, :headers, :body)
+      content_type = headers["content-type"]
+
       get_pool(req, timeout: timeout).with do |conn|
         # Net can't understand posting to a URI representing only path + query,
         # so we concatenate
@@ -54,8 +57,8 @@ module Anthropic
           uri_string
         )
 
-        content_type = headers["content-type"]
-        if content_type == "multipart/form-data" && body
+        case [content_type, body]
+        in ["multipart/form-data", Hash]
           form_data =
             body.filter_map do |k, v|
               next if v.nil?

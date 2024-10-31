@@ -8,7 +8,7 @@ module Anthropic
     # - If it's possible and safe to convert the given `value` to `type`, such a converted value.
     # - Otherwise, the given `value` unaltered.
     #
-    # @param type [Class, Converter]
+    # @param type [Class, Anthropic::Converter]
     # @param value [Object]
     #
     # @raise [StandardError]
@@ -32,7 +32,7 @@ module Anthropic
         Time.parse(value)
       elsif type <= Float
         value.is_a?(Numeric) ? value.to_f : value
-      elsif [Object, Hash, Integer, String].any? { |t| type <= t }
+      elsif [Object, Hash, Integer, String].any? { |cls| type <= cls }
         value
       else
         raise StandardError, "Unexpected type #{type}"
@@ -45,6 +45,9 @@ module Anthropic
   class Unknown
     include Converter
 
+    # @param value [Object]
+    #
+    # @return [Object]
     def self.convert(value)
       value
     end
@@ -55,6 +58,9 @@ module Anthropic
   class BooleanModel
     include Converter
 
+    # @param value [Boolean, Object]
+    #
+    # @return [Boolean, Object]
     def self.convert(value)
       value
     end
@@ -72,8 +78,12 @@ module Anthropic
   class Enum
     include Converter
 
+    # @param value [Symbol, String, Object]
+    #
+    # @return [Symbol, Object]
     def self.convert(value)
-      if value.is_a?(String)
+      case value
+      in String
         value.to_sym
       else
         value
@@ -91,13 +101,23 @@ module Anthropic
   class ArrayOf
     include Converter
 
+    # @param items_type_info [Proc, Object, nil]
+    # @param enum [Proc, nil]
     def initialize(items_type_info = nil, enum: nil)
       @items_type_fn = enum || (items_type_info.is_a?(Proc) ? items_type_info : -> { items_type_info })
     end
 
+    # @param value [Enumerable, Object]
+    #
+    # @return [Array<Object>]
     def convert(value)
       items_type = @items_type_fn.call
-      value.map { |item| Converter.convert(items_type, item) }
+      case value
+      in Enumerable
+        value.map { |item| Converter.convert(items_type, item) }.to_a
+      else
+        value
+      end
     end
   end
 
@@ -149,6 +169,9 @@ module Anthropic
     end
 
     # @!visibility private
+    #
+    # @param data [Hash{Symbol => Object}]
+    # @return [BaseModel]
     def self.convert(data)
       new(data)
     end
@@ -156,16 +179,18 @@ module Anthropic
     # Create a new instance of a model.
     # @param data [Hash{Symbol => Object}] Raw data to initialize the model with.
     def initialize(data = {})
-      @data = {}
-      # TODO: what if data isn't a hash?
-      data.each do |field_name, value|
-        next if value.nil?
+      unless data.respond_to?(:to_h)
+        raise ArgumentError,
+              "Expected a Hash, got #{data.inspect}"
+      end
 
-        field = self.class.fields[field_name.to_sym]
-        if field
-          next if field[:mode] == :w
-        end
-        @data[field_name.to_sym] = value
+      @data = {}
+      data.to_h.each do |field_name, value|
+        next if value.nil?
+        name = field_name.to_sym
+        next if self.class.fields.dig(name, :mode) == :w
+
+        @data[name] = value
       end
     end
 

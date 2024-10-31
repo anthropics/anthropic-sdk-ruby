@@ -13,7 +13,6 @@ Style/StringLiterals:
 # Most common style in Ruby.
 Style/RegexpLiteral:
   EnforcedStyle: slashes
-  AllowInnerSlashes: true
 
 # Prefer explicit symbols for clarity; you can search for `:the_symbol`.
 Style/SymbolArray:

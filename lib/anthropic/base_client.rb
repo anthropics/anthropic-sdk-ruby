@@ -32,7 +32,7 @@ module Anthropic
       @host = base_url_parsed.host
       @scheme = base_url_parsed.scheme
       @port = base_url_parsed.port
-      @base_path = self.class.normalize_path(base_url_parsed.path)
+      @base_path = Anthropic::Util.normalize_path(base_url_parsed.path)
       @max_retries = max_retries
       @timeout = timeout
       @idempotency_header = idempotency_header
@@ -74,13 +74,6 @@ module Anthropic
 
     # @param req [Hash{Symbol => Object}]
     #
-    # @return [String]
-    def self.normalize_path(path)
-      path.gsub(/\/+/, "/")
-    end
-
-    # @param req [Hash{Symbol => Object}]
-    #
     # @return [Hash{Symbol => Object}]
     def resolve_uri_elements(req)
       from_args =
@@ -95,7 +88,7 @@ module Anthropic
           }
         else
           from_req = req.slice(:host, :scheme, :path, :port, :query)
-          from_req[:path] = self.class.normalize_path("/#{@base_path}/#{from_req[:path]}")
+          from_req[:path] = Anthropic::Util.normalize_path("/#{@base_path}/#{from_req[:path]}")
           from_req
         end
 
