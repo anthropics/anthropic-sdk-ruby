@@ -3,6 +3,8 @@
 module Anthropic
   # @!visibility private
   class BaseClient
+    MAX_REDIRECTS = 20 # from whatwg fetch spec
+
     attr_accessor :requester
 
     # @param base_url [String]
@@ -14,12 +16,12 @@ module Anthropic
       base_url:,
       timeout: nil,
       headers: {},
-      max_retries: 0,
-      idempotency_header: nil
+      idempotency_header: nil,
+      max_retries: 0
     )
       self.requester = PooledNetRequester.new
       base_url_parsed = URI.parse(base_url)
-      @headers = Util.normalized_headers(
+      @headers = Anthropic::Util.normalized_headers(
         {
           "X-Stainless-Lang" => "ruby",
           "X-Stainless-Package-Version" => Anthropic::VERSION,
@@ -33,9 +35,11 @@ module Anthropic
       @scheme = base_url_parsed.scheme
       @port = base_url_parsed.port
       @base_path = Anthropic::Util.normalize_path(base_url_parsed.path)
+      @idempotency_header = idempotency_header&.to_s&.downcase
       @max_retries = max_retries
       @timeout = timeout
-      @idempotency_header = idempotency_header
+      @delay = 0.5
+      @max_delay = 8.0
     end
 
     # @return [Hash{String => String}]
@@ -48,27 +52,27 @@ module Anthropic
     #
     # @raise [ArgumentError]
     def validate_request(req, opts)
-      if (body = req[:body])
-        # Body can be at least a Hash or Array, just check for Hash shape for now.
-        if body.is_a?(Hash)
-          body.each_key do |k|
-            unless k.is_a?(Symbol)
-              raise ArgumentError, "Request body keys must be Symbols, got #{k.inspect}"
-            end
+      case (body = req[:body])
+      in Hash
+        body.each_key do |k|
+          unless k.is_a?(Symbol)
+            raise ArgumentError, "Request body keys must be Symbols, got #{k.inspect}"
           end
         end
+      else
+        # Body can be at least a Hash or Array, just check for Hash shape for now.
       end
 
-      unless opts.is_a?(Hash) || opts.is_a?(Anthropic::RequestOption)
+      case opts
+      in Anthropic::RequestOptions | Hash
+        valid_keys = Anthropic::RequestOptions.options
+        opts.to_h.each_key do |k|
+          unless valid_keys.include?(k)
+            raise ArgumentError, "Request `opts` keys must be one of #{valid_keys}, got #{k.inspect}"
+          end
+        end
+      else
         raise ArgumentError, "Request `opts` must be a Hash or RequestOptions, got #{opts.inspect}"
-      end
-      opts.to_h.each_key do |k|
-        unless k.is_a?(Symbol)
-          raise ArgumentError, "Request `opts` keys must be Symbols, got #{k.inspect}"
-        end
-        unless (valid_keys = Anthropic::RequestOptions.options).include?(k)
-          raise ArgumentError, "Request `opts` keys must be one of #{valid_keys}, got #{k.inspect}"
-        end
       end
     end
 
@@ -91,7 +95,11 @@ module Anthropic
           req.slice(:scheme, :host, :port, :query).merge(path: path)
         end
 
-      query = Util.deep_merge(from_args[:query] || {}, req[:extra_query] || {}, concat: true)
+      query = Anthropic::Util.deep_merge(
+        from_args[:query] || {},
+        req[:extra_query] || {},
+        concat: true
+      )
       {
         host: @host,
         scheme: @scheme,
@@ -107,7 +115,12 @@ module Anthropic
     def prep_request(options)
       method = options.fetch(:method)
 
-      headers = Util.normalized_headers(@headers, auth_headers, options[:headers], options[:extra_headers])
+      headers = Anthropic::Util.normalized_headers(
+        @headers,
+        auth_headers,
+        options[:headers],
+        options[:extra_headers]
+      )
       if @idempotency_header && !headers[@idempotency_header] && ![:get, :head, :options].include?(method)
         headers[@idempotency_header.to_s.downcase] = options[:idempotency_key] || generate_idempotency_key
       end
@@ -132,7 +145,7 @@ module Anthropic
           nil
         end
       if options[:extra_body]
-        body = Util.deep_merge(body, options[:extra_body])
+        body = Anthropic::Util.deep_merge(body, options[:extra_body])
       end
 
       url_elements = resolve_uri_elements(options)
@@ -149,21 +162,23 @@ module Anthropic
     #
     # @return [Boolean]
     def should_retry?(response)
-      should_retry_header = response["x-should-retry"]
-
-      case should_retry_header
+      case response["x-should-retry"]
       in "true"
         true
       in "false"
         false
       else
-        response_code = response.code.to_i
-        # retry on:
-        # 408: timeouts
-        # 409: locks
-        # 429: rate limits
-        # 500+: unknown errors
-        [408, 409, 429].include?(response_code) || response_code >= 500
+        case response.code.to_i
+        in 408 | 409 | 429 | (500..)
+          # retry on:
+          # 408: timeouts
+          # 409: locks
+          # 429: rate limits
+          # 500+: unknown errors
+          true
+        else
+          false
+        end
       end
     end
 
@@ -178,8 +193,9 @@ module Anthropic
     def make_status_error_from_response(response)
       err_body =
         begin
+          # TODO(SDK-36): symbolize_names: true
           JSON.parse(response.body)
-        rescue StandardError
+        rescue JSON::ParserError
           response
         end
 
@@ -191,26 +207,31 @@ module Anthropic
       make_status_error(message: message, body: err_body, response: response)
     end
 
+    # @param response [Net::HTTPResponse]
+    #
+    # @return [Float, nil]
     def header_based_retry(response)
       # Note the `retry-after-ms` header may not be standard, but is a good idea and we'd like proactive support for it.
-      retry_after_millis = Float(response["retry-after-ms"], exception: false)
-      if retry_after_millis
-        retry_after = retry_after_millis / 1000.0
-      elsif response["retry-after"]
-        retry_after = Float(response["retry-after"], exception: false)
-        if retry_after.nil?
-          begin
-            base = Time.now
-            if response["x-stainless-mock-sleep-base"]
-              base = Time.httpdate(response["x-stainless-mock-sleep-base"])
-            end
-            retry_after = Time.httpdate(response["retry-after"]) - base
-          rescue StandardError # rubocop:disable Lint/SuppressedException
-          end
+      timeout = Float(response["retry-after-ms"], exception: false)&.then { |v| v / 1000 }
+      return timeout if timeout
+
+      return nil if (retry_header = response["retry-after"]).nil?
+
+      return timeout if (timeout = Float(retry_header, exception: false))
+
+      # TODO(ruby) - this should be removed when we support middlewares
+      base =
+        if response["x-stainless-mock-sleep-base"]
+          Time.httpdate(response["x-stainless-mock-sleep-base"])
+        else
+          Time.now
         end
+
+      begin
+        Time.httpdate(retry_header) - base
+      rescue ArgumentError
+        nil
       end
-      retry_after
-    rescue StandardError # rubocop:disable Lint/SuppressedException
     end
 
     # @param request [Hash{Symbol => Object}]
@@ -221,8 +242,8 @@ module Anthropic
     # @raise [Anthropic::HTTP::Error]
     # @return [Net::HTTPResponse]
     def send_request(request, max_retries:, timeout:, redirect_count:)
-      delay = 0.5
-      max_delay = 8.0
+      delay = @delay
+      max_delay = @max_delay
       # Don't send the current retry count in the headers if the caller modified the header defaults.
       should_send_retry_count = request[:headers]["x-stainless-retry-count"] == "0"
       retries = 0
@@ -238,7 +259,7 @@ module Anthropic
           if status < 300
             return response
           elsif status < 400
-            prev_uri = Util.unparse_uri(request)
+            prev_uri = Anthropic::Util.unparse_uri(request)
 
             begin
               location = URI.join(prev_uri, response["location"])
@@ -247,8 +268,8 @@ module Anthropic
               raise HTTP::APIConnectionError.new(message: message, request: request)
             end
             # from whatwg fetch spec
-            if redirect_count == 20
-              message = "failed to complete the request within 20 redirects"
+            if redirect_count == MAX_REDIRECTS
+              message = "failed to complete the request within #{MAX_REDIRECTS} redirects"
               raise HTTP::APIConnectionError.new(message: message, request: request)
             end
             if location.scheme != "http" && location.scheme != "https"
@@ -317,9 +338,11 @@ module Anthropic
     # validate opts as it was given to us by the user.
     # @param req [Hash{Symbol => Object}]
     # @param opts [Anthropic::RequestOptions, Hash{Symbol => Object}]
+    #
+    # @return [Object]
     def request(req, opts)
       validate_request(req, opts)
-      options = Util.deep_merge(req, opts)
+      options = Anthropic::Util.deep_merge(req, opts)
       request_args = prep_request(options)
       response = send_request(
         request_args,
@@ -353,7 +376,7 @@ module Anthropic
 
     # @return [String]
     def inspect
-      base_url = Util.unparse_uri(scheme: @scheme, host: @host, port: @port, path: @base_path)
+      base_url = Anthropic::Util.unparse_uri(scheme: @scheme, host: @host, port: @port, path: @base_path)
       "#<#{self.class.name}:0x#{object_id.to_s(16)} base_url=#{base_url} max_retries=#{@max_retries} timeout=#{@timeout}>"
     end
   end
