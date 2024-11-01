@@ -38,8 +38,8 @@ module Anthropic
       @idempotency_header = idempotency_header&.to_s&.downcase
       @max_retries = max_retries
       @timeout = timeout
-      @initial_retry_delay = 0.5
-      @max_retry_delay = 8.0
+      @delay = 0.5
+      @max_delay = 8.0
     end
 
     # @return [Hash{String => String}]
@@ -48,7 +48,6 @@ module Anthropic
     end
 
     # @param req [Hash{Symbol => Object}]
-    #   @option req [Hash{Symbol => Object}, Array, Object, nil] :body
     # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions]
     #
     # @raise [ArgumentError]
@@ -111,10 +110,6 @@ module Anthropic
     end
 
     # @param options [Hash{Symbol => Object}]
-    #   @option options [Symbol] :method
-    #   @option options [Hash{String => String}] :headers
-    #   @option options [Hash{String => String}] :extra_headers
-    #   @option options [Hash{Symbol => Object}, Array, Object, nil] :body
     #
     # @return [Hash{Symbol => Object}]
     def prep_request(options)
@@ -152,6 +147,7 @@ module Anthropic
         end
 
       url_elements = resolve_uri_elements(options)
+
       {method: method, headers: headers, body: body, **url_elements}
     end
 
@@ -210,166 +206,127 @@ module Anthropic
     end
 
     # @param response [Net::HTTPResponse]
-    # @param retry_count [Integer]
     #
-    # @return [Float]
-    def retry_delay(response, retry_count:)
+    # @return [Float, nil]
+    def header_based_retry(response)
       # Note the `retry-after-ms` header may not be standard, but is a good idea and we'd like proactive support for it.
-      span = Float(response["retry-after-ms"], exception: false)&.then { |v| v / 1000 }
-      return span if span
+      timeout = Float(response["retry-after-ms"], exception: false)&.then { |v| v / 1000 }
+      return timeout if timeout
 
-      retry_header = response["retry-after"]
-      return span if (span = Float(retry_header, exception: false))
+      return nil if (retry_header = response["retry-after"]).nil?
+
+      return timeout if (timeout = Float(retry_header, exception: false))
 
       # TODO(ruby) - this should be removed when we support middlewares
-      now =
+      base =
         if response["x-stainless-mock-sleep-base"]
           Time.httpdate(response["x-stainless-mock-sleep-base"])
         else
           Time.now
         end
 
-      span =
-        if retry_header
-          Anthropic::Util.suppress(ArgumentError) do
-            Time.httpdate(retry_header) - now
-          end
-        end
-      return span if span
-
-      scale = retry_count**2
-      jitter = 1 - (0.25 * rand)
-      (@initial_retry_delay * scale * jitter).clamp(0, @max_retry_delay)
-    end
-
-    # @param request [Hash{Symbol => Object}]
-    #   @option options [Symbol] :method
-    #   @option options [Hash{String => String}] :headers
-    #   @option options [String, nil] :body
-    #
-    # @param status [Integer]
-    # @param location_header [URI::Generic]
-    #
-    # @raise [Anthropic::HTTP::Error]
-    # @return [Hash{Symbol => Object}]
-    def follow_redirect(request, status:, location_header:)
-      uri = Anthropic::Util.unparse_uri(request)
-      location =
-        Anthropic::Util.suppress(ArgumentError) do
-          URI.join(uri, location_header)
-        end
-
-      # TODO(ruby): these should be response errors
-      unless location
-        message = "server responded with status #{status} but no valid location header"
-        raise HTTP::APIConnectionError.new(message: message, request: request)
-      end
-
-      request = {**request, **resolve_uri_elements(url: location)}
-
-      case [uri.scheme, location.scheme]
-      in ["https", "http"]
-        message = "tried to redirect to a insecure URL"
-        raise HTTP::APIConnectionError.new(message: message, request: request)
-      else
+      begin
+        Time.httpdate(retry_header) - base
+      rescue ArgumentError
         nil
       end
-
-      # from whatwg fetch spec
-      case [status, (method = request.fetch(:method))]
-      in [301 | 302, :post] | [303, _]
-        drop = %w[content-encoding content-language content-location content-type content-length]
-        request = {
-          **request,
-          method: method == :head ? :head : :get,
-          headers: request.fetch(:headers).except(*drop),
-          body: nil
-        }
-      else
-      end
-
-      # from undici
-      if Anthropic::Util.uri_origin(uri) != Anthropic::Util.uri_origin(location)
-        drop = %w[authorization cookie proxy-authorization host]
-        request = {**request, headers: request.fetch(:headers).except(*drop)}
-      end
-
-      request
     end
 
     # @param request [Hash{Symbol => Object}]
-    #   @option options [Symbol] :method
-    #   @option options [Hash{String => String}] :headers
-    #   @option options [String, nil] :body
-    #
     # @param max_retries [Integer]
     # @param timeout [Float]
     # @param redirect_count [Integer]
-    # @param retry_count [Integer]
-    # @param send_retry_header [Boolean]
     #
     # @raise [Anthropic::HTTP::Error]
     # @return [Net::HTTPResponse]
-    def send_request(request, max_retries:, timeout:, redirect_count:, retry_count:, send_retry_header:)
-      if send_retry_header
-        request.fetch(:headers)["x-stainless-retry-count"] = retry_count.to_s
-      end
-
-      begin
-        response = @requester.execute(request, timeout: timeout)
-        status = response.code.to_i
-      rescue Timeout::Error, Net::HTTPBadResponse => e
-        status = e
-      end
-
-      case status
-      in ..299
-        response
-      in 300..399
-        if redirect_count >= MAX_REDIRECTS
-          message = "failed to complete the request within #{MAX_REDIRECTS} redirects"
-          raise HTTP::APIConnectionError.new(message: message, request: request)
+    def send_request(request, max_retries:, timeout:, redirect_count:)
+      delay = @delay
+      max_delay = @max_delay
+      # Don't send the current retry count in the headers if the caller modified the header defaults.
+      should_send_retry_count = request[:headers]["x-stainless-retry-count"] == "0"
+      retries = 0
+      loop do # rubocop:disable Metrics/BlockLength
+        if should_send_retry_count
+          request[:headers]["x-stainless-retry-count"] = retries.to_s
         end
 
-        request = follow_redirect(request, status: status, location_header: response["location"])
-        send_request(
-          request,
-          max_retries: max_retries,
-          timeout: timeout,
-          redirect_count: redirect_count + 1,
-          retry_count: retry_count,
-          send_retry_header: send_retry_header
-        )
-      in 400.. | Timeout::Error | Net::HTTPBadResponse
-        if response && !should_retry?(response)
-          raise make_status_error_from_response(response)
-        end
+        begin
+          response = @requester.execute(request, timeout: timeout)
+          status = response.code.to_i
 
-        if retry_count >= max_retries
-          message = "failed to complete the request within #{max_retries} retries"
-          case status
-          in Timeout::Error
+          if status < 300
+            return response
+          elsif status < 400
+            prev_uri = Anthropic::Util.unparse_uri(request)
+
+            begin
+              location = URI.join(prev_uri, response["location"])
+            rescue ArgumentError
+              message = "server responded with status #{status} but no valid location header"
+              raise HTTP::APIConnectionError.new(message: message, request: request)
+            end
+            # from whatwg fetch spec
+            if redirect_count == MAX_REDIRECTS
+              message = "failed to complete the request within #{MAX_REDIRECTS} redirects"
+              raise HTTP::APIConnectionError.new(message: message, request: request)
+            end
+            if location.scheme != "http" && location.scheme != "https"
+              message = "tried to redirect to a non-http URL"
+              raise HTTP::APIConnectionError.new(message: message, request: request)
+            end
+            request = request.merge(resolve_uri_elements({url: location}))
+            # from whatwg fetch spec
+            if ([301, 302].include?(status) && request[:method] == :post) || (status == 303)
+              request[:method] = request[:method] == :head ? :head : :get
+              request[:body] = nil
+              request[:headers] = request[:headers].reject do |k|
+                %w[content-encoding content-language content-location content-type content-length].include?(k)
+              end
+            end
+            # from undici
+            if Anthropic::Util.uri_origin(prev_uri) != Anthropic::Util.uri_origin(location)
+              request[:headers] = request[:headers].reject do |k|
+                %w[authorization cookie proxy-authorization host].include?(k)
+              end
+            end
+            return send_request(
+              request,
+              max_retries: max_retries,
+              timeout: timeout,
+              redirect_count: redirect_count + 1
+            )
+          end
+        rescue Net::HTTPBadResponse
+          if retries >= max_retries
+            message = "failed to complete the request within #{max_retries} retries"
+            raise HTTP::APIConnectionError.new(message: message, request: request)
+          end
+        rescue Timeout::Error
+          if retries >= max_retries
+            message = "failed to complete the request within #{max_retries} retries"
             raise HTTP::APITimeoutError.new(message: message, request: request)
-          else
-            raise HTTP::InternalServerError.new(message: message, response: response, body: response.body)
           end
         end
 
-        delay = retry_delay(response, retry_count: retry_count)
+        if (response && !should_retry?(response)) || retries >= max_retries
+          raise make_status_error_from_response(response)
+        end
+
+        retries += 1
+        base_delay = header_based_retry(response)
+        if base_delay
+          delay = base_delay
+        else
+          base_delay = (delay * (2**retries))
+          jitter_factor = 1 - (0.25 * rand)
+          delay = (base_delay * jitter_factor).clamp(0, max_delay)
+        end
+
         if response&.key?("x-stainless-mock-sleep")
-          request.fetch(:headers)["x-stainless-mock-slept"] = delay
+          request[:headers]["x-stainless-mock-slept"] = delay
         else
           sleep(delay)
         end
-
-        send_request(
-          request,
-          max_retries: max_retries,
-          timeout: timeout,
-          redirect_count: redirect_count,
-          retry_count: retry_count + 1,
-          send_retry_header: send_retry_header
-        )
       end
     end
 
@@ -380,23 +337,16 @@ module Anthropic
     # @param req [Hash{Symbol => Object}]
     # @param opts [Anthropic::RequestOptions, Hash{Symbol => Object}]
     #
-    # @raise [Anthropic::HTTP::Error]
     # @return [Object]
     def request(req, opts)
       validate_request(req, opts)
       options = Anthropic::Util.deep_merge(req, opts)
       request_args = prep_request(options)
-
-      # Don't send the current retry count in the headers if the caller modified the header defaults.
-      send_retry_header = request_args.fetch(:headers)["x-stainless-retry-count"] == "0"
-
       response = send_request(
         request_args,
         max_retries: opts.fetch(:max_retries, @max_retries),
         timeout: opts.fetch(:timeout, @timeout),
-        redirect_count: 0,
-        retry_count: 0,
-        send_retry_header: send_retry_header
+        redirect_count: 0
       )
       raw_data =
         case response.content_type
