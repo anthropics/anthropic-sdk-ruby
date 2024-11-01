@@ -11,6 +11,9 @@ module Anthropic
       required :input_schema, -> { Anthropic::Models::BetaTool::InputSchema }
 
       # @!attribute [rw] name_
+      #   Name of the tool.
+      #
+      # This is how the tool will be called by the model and in tool_use blocks.
       #   @return [String]
       required :name_, String, api_name: :name
 
@@ -63,7 +66,9 @@ module Anthropic
       #   #
       #   #     This defines the shape of the `input` that your tool accepts and that the model
       #   #     will produce.
-      #   #   @option data [String] :name
+      #   #   @option data [String] :name Name of the tool.
+      #   #
+      #   #     This is how the tool will be called by the model and in tool_use blocks.
       #   #   @option data [Object, nil] :cache_control
       #   #   @option data [String, nil] :description Description of what this tool does.
       #   #
