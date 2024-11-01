@@ -50,7 +50,7 @@ class AnthropicTest < Minitest::Test
         {
           max_tokens: 1024,
           messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20240620"
+          model: "claude-3-5-sonnet-20241022"
         }
       )
     end
@@ -70,7 +70,7 @@ class AnthropicTest < Minitest::Test
         {
           max_tokens: 1024,
           messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20240620"
+          model: "claude-3-5-sonnet-20241022"
         }
       )
     end
@@ -86,7 +86,7 @@ class AnthropicTest < Minitest::Test
         {
           max_tokens: 1024,
           messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20240620"
+          model: "claude-3-5-sonnet-20241022"
         },
         max_retries: 3
       )
@@ -107,7 +107,7 @@ class AnthropicTest < Minitest::Test
         {
           max_tokens: 1024,
           messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20240620"
+          model: "claude-3-5-sonnet-20241022"
         },
         max_retries: 4
       )
@@ -128,7 +128,7 @@ class AnthropicTest < Minitest::Test
         {
           max_tokens: 1024,
           messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20240620"
+          model: "claude-3-5-sonnet-20241022"
         }
       )
     end
@@ -157,7 +157,7 @@ class AnthropicTest < Minitest::Test
         {
           max_tokens: 1024,
           messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20240620"
+          model: "claude-3-5-sonnet-20241022"
         }
       )
     end
@@ -178,7 +178,7 @@ class AnthropicTest < Minitest::Test
         {
           max_tokens: 1024,
           messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20240620"
+          model: "claude-3-5-sonnet-20241022"
         }
       )
     end
@@ -196,7 +196,7 @@ class AnthropicTest < Minitest::Test
         {
           max_tokens: 1024,
           messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20240620"
+          model: "claude-3-5-sonnet-20241022"
         }
       )
     end
@@ -215,7 +215,7 @@ class AnthropicTest < Minitest::Test
         {
           max_tokens: 1024,
           messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20240620"
+          model: "claude-3-5-sonnet-20241022"
         },
         extra_headers: {"x-stainless-retry-count" => nil}
       )
@@ -235,7 +235,7 @@ class AnthropicTest < Minitest::Test
         {
           max_tokens: 1024,
           messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20240620"
+          model: "claude-3-5-sonnet-20241022"
         },
         extra_headers: {"x-stainless-retry-count" => "42"}
       )
@@ -254,7 +254,7 @@ class AnthropicTest < Minitest::Test
         {
           max_tokens: 1024,
           messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20240620"
+          model: "claude-3-5-sonnet-20241022"
         },
         extra_headers: {}
       )
@@ -277,7 +277,7 @@ class AnthropicTest < Minitest::Test
         {
           max_tokens: 1024,
           messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20240620"
+          model: "claude-3-5-sonnet-20241022"
         },
         extra_headers: {}
       )
@@ -297,7 +297,7 @@ class AnthropicTest < Minitest::Test
         {
           max_tokens: 1024,
           messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20240620"
+          model: "claude-3-5-sonnet-20241022"
         },
         extra_headers: {"Authorization" => "Bearer xyz"}
       )
@@ -317,7 +317,7 @@ class AnthropicTest < Minitest::Test
         {
           max_tokens: 1024,
           messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20240620"
+          model: "claude-3-5-sonnet-20241022"
         },
         extra_headers: {"Authorization" => "Bearer xyz"}
       )
@@ -333,7 +333,7 @@ class AnthropicTest < Minitest::Test
       {
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20240620"
+        model: "claude-3-5-sonnet-20241022"
       }
     )
     headers = requester.attempts[0][:headers]

@@ -17,7 +17,7 @@ class Anthropic::Test::Resources::MessagesTest < Minitest::Test
       {
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20240620"
+        model: "claude-3-5-sonnet-20241022"
       }
     )
     assert_kind_of(Anthropic::Models::Message, response)
