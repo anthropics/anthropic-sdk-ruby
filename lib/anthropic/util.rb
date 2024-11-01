@@ -39,6 +39,16 @@ module Anthropic
       end
     end
 
+    # @param exceptions [Array<Exception>]
+    # @param blk [Proc]
+    #
+    # @return [Object, nil]
+    def self.suppress(*exceptions, &blk)
+      blk.call
+    rescue *exceptions
+      nil
+    end
+
     # @param str [String]
     #
     # @return [Integer, String]
@@ -135,11 +145,13 @@ module Anthropic
       path.gsub(%r{/+}, "/").freeze
     end
 
-    # @param *headers [Array<Hash{String => String}>]
+    # @param headers [Array<Hash{String => String, Integer, nil}>]
     #
-    # @return [Hash{String => String}]
+    # @return [Hash{String => String, nil}]
     def self.normalized_headers(*headers)
-      {}.merge(*headers.compact).transform_keys(&:downcase)
+      {}.merge(*headers.compact).to_h do |key, val|
+        [key.downcase, val&.to_s&.strip]
+      end
     end
   end
 end

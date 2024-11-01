@@ -219,7 +219,7 @@ module Anthropic
     #
     # @return [Object, nil] The raw value at the given key.
     def [](key)
-      if !key.instance_of?(Symbol)
+      unless key.instance_of?(Symbol)
         raise ArgumentError, "Expected symbol key for lookup, got #{key.inspect}"
       end
       @data[key]
@@ -230,11 +230,7 @@ module Anthropic
     # @return [Hash{Symbol => Object}]
     def deconstruct_keys(keys)
       (keys || self.class.fields.keys).to_h do |k|
-        if !k.instance_of?(Symbol)
-          raise ArgumentError, "Expected symbol key for lookup, got #{k.inspect}"
-        end
-
-        if !self.class.fields.key?(k)
+        unless self.class.fields.key?(k)
           raise KeyError, "Expected one of #{self.class.fields.keys}, got #{k.inspect}"
         end
 
