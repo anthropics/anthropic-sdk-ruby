@@ -8,12 +8,14 @@ module Anthropic
   # with symbol keys matching the attributes on this class.
   class RequestOptions
     # @!visibility private
+    #
     # @return [Array<Symbol>]
     def self.options
       @options ||= []
     end
 
     # @!visibility private
+    #
     # @param name [Symbol]
     def self.option(name)
       define_method(name) { @_values[name] }
