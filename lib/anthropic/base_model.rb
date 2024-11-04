@@ -125,6 +125,7 @@ module Anthropic
     include Converter
 
     # @!visibility private
+    #
     # Assumes superclass fields are totally defined before fields are accessed / defined on subclasses.
     #
     # @return [Hash{Symbol => Hash{Symbol => Object}}]
@@ -133,6 +134,7 @@ module Anthropic
     end
 
     # @!visibility private
+    #
     # @param name_sym [Symbol]
     # @param api_name [Symbol, nil]
     # @param type_info [Proc, Object]
@@ -157,12 +159,14 @@ module Anthropic
     end
 
     # @!visibility private
+    #
     # NB `required` is just a signal to the reader. We don't do runtime validation anyway.
     def self.required(name_sym, type_info = nil, mode = :rw, api_name: nil, enum: nil)
       add_field(name_sym, api_name: api_name, type_info: enum || type_info, mode: mode)
     end
 
     # @!visibility private
+    #
     # NB `optional` is just a signal to the reader. We don't do runtime validation anyway.
     def self.optional(name_sym, type_info = nil, mode = :rw, api_name: nil, enum: nil)
       add_field(name_sym, api_name: api_name, type_info: enum || type_info, mode: mode)

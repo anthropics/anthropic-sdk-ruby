@@ -6,8 +6,18 @@ class AnthropicTest < Minitest::Test
   parallelize_me!
 
   class MockResponse
-    attr_accessor :code, :body, :content_type
+    # @return [Integer]
+    attr_accessor :code
 
+    # @return [String]
+    attr_accessor :body
+
+    # @return [String]
+    attr_accessor :content_type
+
+    # @param code [Integer]
+    # @param data [Object]
+    # @param headers [Hash{String => String}]
     def initialize(code, data, headers)
       @headers = headers
       self.code = code
@@ -25,8 +35,21 @@ class AnthropicTest < Minitest::Test
   end
 
   class MockRequester
-    attr_accessor :response_code, :response_data, :response_headers, :attempts
+    # @return [Integer]
+    attr_accessor :response_code
 
+    # @return [Object]
+    attr_accessor :response_data
+
+    # @return [Hash{String => String}]
+    attr_accessor :response_headers
+
+    # @return [Array<Hash{Symbol => Object}>]
+    attr_accessor :attempts
+
+    # @param response_code [Integer]
+    # @param response_data [Object]
+    # @param response_headers [Hash{String => String}]
     def initialize(response_code, response_data, response_headers)
       self.response_code = response_code
       self.response_data = response_data
@@ -34,6 +57,8 @@ class AnthropicTest < Minitest::Test
       self.attempts = []
     end
 
+    # @param req [Hash{Symbol => Object}]
+    # @param timeout [Float, nil]
     def execute(req, timeout:)
       # Deep copy the request because it is mutated on each retry.
       attempts.push(Marshal.load(Marshal.dump(req)))
