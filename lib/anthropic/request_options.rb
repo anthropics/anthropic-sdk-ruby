@@ -24,6 +24,12 @@ module Anthropic
     # Returns a new instance of RequestOptions.
     #
     # @param values [Hash{Symbol => Object}] initial option values to set on the instance.
+    #   @option values [String] :idempotency_key
+    #   @option values [Hash{Symbol => String}] :extra_headers
+    #   @option values [Hash{Symbol => Array<String>}] :extra_query
+    #   @option values [Hash{Symbol => Object}] :extra_body
+    #   @option values [Integer] :max_retries
+    #   @option values [Integer] :timeout
     def initialize(values = {})
       @_values = values
     end
@@ -43,7 +49,7 @@ module Anthropic
     # @!attribute extra_query
     # Extra query params to send with the request. These are `.merge`’d into any `query` given at
     #   the client level.
-    # @return [Hash{Symbol => Object}]
+    # @return [Hash{Symbol => Array<String>}]
     option :extra_query
 
     # @!attribute extra_body
