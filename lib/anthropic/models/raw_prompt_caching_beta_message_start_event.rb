@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class RawPromptCachingBetaMessageStartEvent < BaseModel
+    class RawPromptCachingBetaMessageStartEvent < Anthropic::BaseModel
       # @!attribute [rw] message
       #   @return [Anthropic::Models::PromptCachingBetaMessage]
       required :message, -> { Anthropic::Models::PromptCachingBetaMessage }

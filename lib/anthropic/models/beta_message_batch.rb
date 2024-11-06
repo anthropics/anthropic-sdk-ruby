@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaMessageBatch < BaseModel
+    class BetaMessageBatch < Anthropic::BaseModel
       # @!attribute [rw] id
       #   Unique object identifier.
       #

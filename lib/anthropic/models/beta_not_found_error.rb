@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaNotFoundError < BaseModel
+    class BetaNotFoundError < Anthropic::BaseModel
       # @!attribute [rw] message
       #   @return [String]
       required :message, String

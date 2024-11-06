@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class PromptCachingBetaTextBlockParam < BaseModel
+    class PromptCachingBetaTextBlockParam < Anthropic::BaseModel
       # @!attribute [rw] text
       #   @return [String]
       required :text, String

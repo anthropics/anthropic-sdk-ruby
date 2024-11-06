@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class MessageParam < BaseModel
+    class MessageParam < Anthropic::BaseModel
       # @!attribute [rw] content
       #   @return [Array<Anthropic::Models::ImageBlockParam, Anthropic::Models::TextBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::ToolUseBlockParam>, String]
       required :content, Anthropic::Unknown

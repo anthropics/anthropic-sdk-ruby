@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaTool < BaseModel
+    class BetaTool < Anthropic::BaseModel
       # @!attribute [rw] input_schema
       #   [JSON schema](https://json-schema.org/) for this tool's input.
       #
@@ -32,7 +32,7 @@ module Anthropic
       #   @return [Symbol, Anthropic::Models::BetaTool::Type]
       optional :type, enum: -> { Anthropic::Models::BetaTool::Type }
 
-      class InputSchema < BaseModel
+      class InputSchema < Anthropic::BaseModel
         # @!attribute [rw] type
         #   @return [Symbol, Anthropic::Models::BetaTool::InputSchema::Type]
         required :type, enum: -> { Anthropic::Models::BetaTool::InputSchema::Type }

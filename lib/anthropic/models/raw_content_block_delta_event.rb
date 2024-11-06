@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class RawContentBlockDeltaEvent < BaseModel
+    class RawContentBlockDeltaEvent < Anthropic::BaseModel
       # @!attribute [rw] delta
       #   @return [Anthropic::Models::InputJSONDelta, Anthropic::Models::TextDelta]
       required :delta, Anthropic::Unknown

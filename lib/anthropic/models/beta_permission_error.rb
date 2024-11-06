@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaPermissionError < BaseModel
+    class BetaPermissionError < Anthropic::BaseModel
       # @!attribute [rw] message
       #   @return [String]
       required :message, String

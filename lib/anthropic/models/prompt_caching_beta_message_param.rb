@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class PromptCachingBetaMessageParam < BaseModel
+    class PromptCachingBetaMessageParam < Anthropic::BaseModel
       # @!attribute [rw] content
       #   @return [Array<Anthropic::Models::PromptCachingBetaImageBlockParam, Anthropic::Models::PromptCachingBetaTextBlockParam, Anthropic::Models::PromptCachingBetaToolResultBlockParam, Anthropic::Models::PromptCachingBetaToolUseBlockParam>, String]
       required :content, Anthropic::Unknown

@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaMessageBatchExpiredResult < BaseModel
+    class BetaMessageBatchExpiredResult < Anthropic::BaseModel
       # @!attribute [rw] type
       #   @return [Symbol, Anthropic::Models::BetaMessageBatchExpiredResult::Type]
       required :type, enum: -> { Anthropic::Models::BetaMessageBatchExpiredResult::Type }

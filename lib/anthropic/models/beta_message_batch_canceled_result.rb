@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaMessageBatchCanceledResult < BaseModel
+    class BetaMessageBatchCanceledResult < Anthropic::BaseModel
       # @!attribute [rw] type
       #   @return [Symbol, Anthropic::Models::BetaMessageBatchCanceledResult::Type]
       required :type, enum: -> { Anthropic::Models::BetaMessageBatchCanceledResult::Type }

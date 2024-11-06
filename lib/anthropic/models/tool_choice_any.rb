@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ToolChoiceAny < BaseModel
+    class ToolChoiceAny < Anthropic::BaseModel
       # @!attribute [rw] type
       #   @return [Symbol, Anthropic::Models::ToolChoiceAny::Type]
       required :type, enum: -> { Anthropic::Models::ToolChoiceAny::Type }

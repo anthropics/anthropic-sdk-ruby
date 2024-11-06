@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaMetadata < BaseModel
+    class BetaMetadata < Anthropic::BaseModel
       # @!attribute [rw] user_id
       #   An external identifier for the user who is associated with the request.
       #

@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class PromptCachingBetaImageBlockParam < BaseModel
+    class PromptCachingBetaImageBlockParam < Anthropic::BaseModel
       # @!attribute [rw] source
       #   @return [Anthropic::Models::PromptCachingBetaImageBlockParam::Source]
       required :source, -> { Anthropic::Models::PromptCachingBetaImageBlockParam::Source }
@@ -15,7 +15,7 @@ module Anthropic
       #   @return [Anthropic::Models::PromptCachingBetaCacheControlEphemeral]
       optional :cache_control, -> { Anthropic::Models::PromptCachingBetaCacheControlEphemeral }
 
-      class Source < BaseModel
+      class Source < Anthropic::BaseModel
         # @!attribute [rw] data
         #   @return [String]
         required :data, String

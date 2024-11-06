@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaRawMessageStartEvent < BaseModel
+    class BetaRawMessageStartEvent < Anthropic::BaseModel
       # @!attribute [rw] message
       #   @return [Anthropic::Models::BetaMessage]
       required :message, -> { Anthropic::Models::BetaMessage }

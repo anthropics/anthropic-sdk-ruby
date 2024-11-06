@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaToolComputerUse20241022 < BaseModel
+    class BetaToolComputerUse20241022 < Anthropic::BaseModel
       # @!attribute [rw] display_height_px
       #   The height of the display in pixels.
       #   @return [Integer]

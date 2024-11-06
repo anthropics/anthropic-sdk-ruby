@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaMessageBatchSucceededResult < BaseModel
+    class BetaMessageBatchSucceededResult < Anthropic::BaseModel
       # @!attribute [rw] message
       #   @return [Anthropic::Models::BetaMessage]
       required :message, -> { Anthropic::Models::BetaMessage }

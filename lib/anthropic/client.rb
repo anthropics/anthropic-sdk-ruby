@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Anthropic
-  class Client < BaseClient
+  class Client < Anthropic::BaseClient
     # Default max number of retries to attempt after a failed retryable request.
     DEFAULT_MAX_RETRIES = 2
 
@@ -28,8 +28,6 @@ module Anthropic
     # @param api_key [String, nil] Defaults to `ENV["ANTHROPIC_API_KEY"]`
     # @param auth_token [String, nil] Defaults to `ENV["ANTHROPIC_AUTH_TOKEN"]`
     # @param max_retries [Integer] Max number of retries to attempt after a failed retryable request.
-    #
-    # @return [Anthropic::Client]
     def initialize(
       base_url: nil,
       api_key: nil,

@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaTextDelta < BaseModel
+    class BetaTextDelta < Anthropic::BaseModel
       # @!attribute [rw] text
       #   @return [String]
       required :text, String

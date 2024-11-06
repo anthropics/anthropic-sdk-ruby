@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaMessageBatchErroredResult < BaseModel
+    class BetaMessageBatchErroredResult < Anthropic::BaseModel
       # @!attribute [rw] error
       #   @return [Anthropic::Models::BetaErrorResponse]
       required :error, -> { Anthropic::Models::BetaErrorResponse }

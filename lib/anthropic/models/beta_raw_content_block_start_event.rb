@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaRawContentBlockStartEvent < BaseModel
+    class BetaRawContentBlockStartEvent < Anthropic::BaseModel
       # @!attribute [rw] content_block
       #   @return [Anthropic::Models::BetaTextBlock, Anthropic::Models::BetaToolUseBlock]
       required :content_block, Anthropic::Unknown

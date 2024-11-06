@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaTextBlock < BaseModel
+    class BetaTextBlock < Anthropic::BaseModel
       # @!attribute [rw] text
       #   @return [String]
       required :text, String

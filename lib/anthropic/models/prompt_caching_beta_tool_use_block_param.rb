@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class PromptCachingBetaToolUseBlockParam < BaseModel
+    class PromptCachingBetaToolUseBlockParam < Anthropic::BaseModel
       # @!attribute [rw] id
       #   @return [String]
       required :id, String

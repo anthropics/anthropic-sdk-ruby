@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaAPIError < BaseModel
+    class BetaAPIError < Anthropic::BaseModel
       # @!attribute [rw] message
       #   @return [String]
       required :message, String

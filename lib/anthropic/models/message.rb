@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class Message < BaseModel
+    class Message < Anthropic::BaseModel
       # @!attribute [rw] id
       #   Unique object identifier.
       #

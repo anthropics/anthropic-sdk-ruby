@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ToolUseBlockParam < BaseModel
+    class ToolUseBlockParam < Anthropic::BaseModel
       # @!attribute [rw] id
       #   @return [String]
       required :id, String
