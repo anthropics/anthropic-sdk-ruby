@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaRawMessageStopEvent < BaseModel
+    class BetaRawMessageStopEvent < Anthropic::BaseModel
       # @!attribute [rw] type
       #   @return [Symbol, Anthropic::Models::BetaRawMessageStopEvent::Type]
       required :type, enum: -> { Anthropic::Models::BetaRawMessageStopEvent::Type }

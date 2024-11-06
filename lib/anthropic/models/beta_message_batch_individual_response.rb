@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaMessageBatchIndividualResponse < BaseModel
+    class BetaMessageBatchIndividualResponse < Anthropic::BaseModel
       # @!attribute [rw] custom_id
       #   Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
       #

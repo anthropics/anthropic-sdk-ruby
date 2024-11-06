@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaOverloadedError < BaseModel
+    class BetaOverloadedError < Anthropic::BaseModel
       # @!attribute [rw] message
       #   @return [String]
       required :message, String

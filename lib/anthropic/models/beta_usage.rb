@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaUsage < BaseModel
+    class BetaUsage < Anthropic::BaseModel
       # @!attribute [rw] cache_creation_input_tokens
       #   The number of input tokens used to create the cache entry.
       #   @return [Integer]

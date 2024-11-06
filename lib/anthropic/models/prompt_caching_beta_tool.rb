@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class PromptCachingBetaTool < BaseModel
+    class PromptCachingBetaTool < Anthropic::BaseModel
       # @!attribute [rw] input_schema
       #   [JSON schema](https://json-schema.org/) for this tool's input.
       #
@@ -28,7 +28,7 @@ module Anthropic
       #   @return [String]
       optional :description, String
 
-      class InputSchema < BaseModel
+      class InputSchema < Anthropic::BaseModel
         # @!attribute [rw] type
         #   @return [Symbol, Anthropic::Models::PromptCachingBetaTool::InputSchema::Type]
         required :type, enum: -> { Anthropic::Models::PromptCachingBetaTool::InputSchema::Type }

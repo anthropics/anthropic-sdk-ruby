@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ToolChoiceTool < BaseModel
+    class ToolChoiceTool < Anthropic::BaseModel
       # @!attribute [rw] name_
       #   The name of the tool to use.
       #   @return [String]

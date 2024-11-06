@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaMessageParam < BaseModel
+    class BetaMessageParam < Anthropic::BaseModel
       # @!attribute [rw] content
       #   @return [Array<Anthropic::Models::BetaBase64PDFBlock, Anthropic::Models::BetaImageBlockParam, Anthropic::Models::BetaTextBlockParam, Anthropic::Models::BetaToolResultBlockParam, Anthropic::Models::BetaToolUseBlockParam>, String]
       required :content, Anthropic::Unknown

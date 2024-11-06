@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class PromptCachingBetaMessage < BaseModel
+    class PromptCachingBetaMessage < Anthropic::BaseModel
       # @!attribute [rw] id
       #   Unique object identifier.
       #

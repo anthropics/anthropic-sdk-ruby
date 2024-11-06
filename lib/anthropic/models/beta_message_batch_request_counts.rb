@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaMessageBatchRequestCounts < BaseModel
+    class BetaMessageBatchRequestCounts < Anthropic::BaseModel
       # @!attribute [rw] canceled
       #   Number of requests in the Message Batch that have been canceled.
       #

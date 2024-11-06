@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaRawMessageDeltaEvent < BaseModel
+    class BetaRawMessageDeltaEvent < Anthropic::BaseModel
       # @!attribute [rw] delta
       #   @return [Anthropic::Models::BetaRawMessageDeltaEvent::Delta]
       required :delta, -> { Anthropic::Models::BetaRawMessageDeltaEvent::Delta }
@@ -22,7 +22,7 @@ module Anthropic
       #   @return [Anthropic::Models::BetaMessageDeltaUsage]
       required :usage, -> { Anthropic::Models::BetaMessageDeltaUsage }
 
-      class Delta < BaseModel
+      class Delta < Anthropic::BaseModel
         # @!attribute [rw] stop_reason
         #   @return [Symbol, Anthropic::Models::BetaRawMessageDeltaEvent::Delta::StopReason]
         required :stop_reason, enum: -> { Anthropic::Models::BetaRawMessageDeltaEvent::Delta::StopReason }

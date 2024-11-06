@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class RawContentBlockStartEvent < BaseModel
+    class RawContentBlockStartEvent < Anthropic::BaseModel
       # @!attribute [rw] content_block
       #   @return [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock]
       required :content_block, Anthropic::Unknown

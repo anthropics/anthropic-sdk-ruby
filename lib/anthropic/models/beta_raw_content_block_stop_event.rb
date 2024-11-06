@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaRawContentBlockStopEvent < BaseModel
+    class BetaRawContentBlockStopEvent < Anthropic::BaseModel
       # @!attribute [rw] index
       #   @return [Integer]
       required :index, Integer

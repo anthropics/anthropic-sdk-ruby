@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaToolBash20241022 < BaseModel
+    class BetaToolBash20241022 < Anthropic::BaseModel
       # @!attribute [rw] name_
       #   Name of the tool.
       #

@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaBase64PDFBlock < BaseModel
+    class BetaBase64PDFBlock < Anthropic::BaseModel
       # @!attribute [rw] source
       #   @return [Anthropic::Models::BetaBase64PDFSource]
       required :source, -> { Anthropic::Models::BetaBase64PDFSource }

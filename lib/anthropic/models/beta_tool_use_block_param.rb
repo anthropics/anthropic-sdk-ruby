@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaToolUseBlockParam < BaseModel
+    class BetaToolUseBlockParam < Anthropic::BaseModel
       # @!attribute [rw] id
       #   @return [String]
       required :id, String

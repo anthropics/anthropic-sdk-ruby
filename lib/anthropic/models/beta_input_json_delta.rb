@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaInputJSONDelta < BaseModel
+    class BetaInputJSONDelta < Anthropic::BaseModel
       # @!attribute [rw] partial_json
       #   @return [String]
       required :partial_json, String

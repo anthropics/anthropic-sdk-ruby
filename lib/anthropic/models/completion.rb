@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class Completion < BaseModel
+    class Completion < Anthropic::BaseModel
       # @!attribute [rw] id
       #   Unique object identifier.
       #

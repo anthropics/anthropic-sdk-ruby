@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class Usage < BaseModel
+    class Usage < Anthropic::BaseModel
       # @!attribute [rw] input_tokens
       #   The number of input tokens which were used.
       #   @return [Integer]

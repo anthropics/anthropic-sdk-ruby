@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaInvalidRequestError < BaseModel
+    class BetaInvalidRequestError < Anthropic::BaseModel
       # @!attribute [rw] message
       #   @return [String]
       required :message, String

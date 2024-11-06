@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaImageBlockParam < BaseModel
+    class BetaImageBlockParam < Anthropic::BaseModel
       # @!attribute [rw] source
       #   @return [Anthropic::Models::BetaImageBlockParam::Source]
       required :source, -> { Anthropic::Models::BetaImageBlockParam::Source }
@@ -15,7 +15,7 @@ module Anthropic
       #   @return [Anthropic::Models::BetaCacheControlEphemeral]
       optional :cache_control, -> { Anthropic::Models::BetaCacheControlEphemeral }
 
-      class Source < BaseModel
+      class Source < Anthropic::BaseModel
         # @!attribute [rw] data
         #   @return [String]
         required :data, String

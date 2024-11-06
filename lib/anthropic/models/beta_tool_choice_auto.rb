@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaToolChoiceAuto < BaseModel
+    class BetaToolChoiceAuto < Anthropic::BaseModel
       # @!attribute [rw] type
       #   @return [Symbol, Anthropic::Models::BetaToolChoiceAuto::Type]
       required :type, enum: -> { Anthropic::Models::BetaToolChoiceAuto::Type }

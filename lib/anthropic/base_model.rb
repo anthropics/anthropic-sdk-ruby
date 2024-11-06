@@ -43,7 +43,7 @@ module Anthropic
   # When we don't know what to expect for the value.
   # @!visibility private
   class Unknown
-    include Converter
+    include Anthropic::Converter
 
     # @param value [Object]
     #
@@ -56,7 +56,7 @@ module Anthropic
   # Ruby has no Boolean class; this is something for models to refer to.
   # @!visibility private
   class BooleanModel
-    include Converter
+    include Anthropic::Converter
 
     # @param value [Boolean, Object]
     #
@@ -76,7 +76,7 @@ module Anthropic
   # values safely.
   # @!visibility private
   class Enum
-    include Converter
+    include Anthropic::Converter
 
     # @param value [Symbol, String, Object]
     #
@@ -99,7 +99,7 @@ module Anthropic
   # Array of items of a given type.
   # @!visibility private
   class ArrayOf
-    include Converter
+    include Anthropic::Converter
 
     # @param items_type_info [Proc, Object, nil]
     # @param enum [Proc, nil]
@@ -122,7 +122,7 @@ module Anthropic
   end
 
   class BaseModel
-    include Converter
+    include Anthropic::Converter
 
     # @!visibility private
     #

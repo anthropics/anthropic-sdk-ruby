@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaAuthenticationError < BaseModel
+    class BetaAuthenticationError < Anthropic::BaseModel
       # @!attribute [rw] message
       #   @return [String]
       required :message, String

@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ToolResultBlockParam < BaseModel
+    class ToolResultBlockParam < Anthropic::BaseModel
       # @!attribute [rw] tool_use_id
       #   @return [String]
       required :tool_use_id, String

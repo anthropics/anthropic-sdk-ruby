@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ImageBlockParam < BaseModel
+    class ImageBlockParam < Anthropic::BaseModel
       # @!attribute [rw] source
       #   @return [Anthropic::Models::ImageBlockParam::Source]
       required :source, -> { Anthropic::Models::ImageBlockParam::Source }
@@ -11,7 +11,7 @@ module Anthropic
       #   @return [Symbol, Anthropic::Models::ImageBlockParam::Type]
       required :type, enum: -> { Anthropic::Models::ImageBlockParam::Type }
 
-      class Source < BaseModel
+      class Source < Anthropic::BaseModel
         # @!attribute [rw] data
         #   @return [String]
         required :data, String

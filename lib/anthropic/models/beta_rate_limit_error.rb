@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaRateLimitError < BaseModel
+    class BetaRateLimitError < Anthropic::BaseModel
       # @!attribute [rw] message
       #   @return [String]
       required :message, String
