@@ -141,34 +141,35 @@ module Anthropic
     # @param mode [Symbol]
     #
     # @return [void]
-    def self.add_field(name_sym, api_name:, type_info:, mode:)
+    private_class_method def self.add_field(name_sym, api_name:, type_info:, mode:)
       type_fn = type_info.is_a?(Proc) ? type_info : -> { type_info }
       key = api_name || name_sym
       fields[name_sym] = {type_fn: type_fn, mode: mode, key: key}
 
+      define_method("#{name_sym}=") { |val| @data[key] = val }
+
       define_method(name_sym) do
         field_type = type_fn.call
-        Converter.convert(field_type, @data[key])
+        Anthropic::Converter.convert(field_type, @data[key])
       rescue StandardError
         name = self.class.name.split("::").last
-        raise ConversionError,
+        raise Anthropic::ConversionError,
               "Failed to parse #{name}.#{name_sym} as #{field_type.inspect}. " \
               "To get the unparsed API response, use #{name}[:#{key}]."
       end
-      define_method("#{name_sym}=") { |val| @data[key] = val }
     end
 
     # @!visibility private
     #
     # NB `required` is just a signal to the reader. We don't do runtime validation anyway.
-    def self.required(name_sym, type_info = nil, mode = :rw, api_name: nil, enum: nil)
+    private_class_method def self.required(name_sym, type_info = nil, mode = :rw, api_name: nil, enum: nil)
       add_field(name_sym, api_name: api_name, type_info: enum || type_info, mode: mode)
     end
 
     # @!visibility private
     #
     # NB `optional` is just a signal to the reader. We don't do runtime validation anyway.
-    def self.optional(name_sym, type_info = nil, mode = :rw, api_name: nil, enum: nil)
+    private_class_method def self.optional(name_sym, type_info = nil, mode = :rw, api_name: nil, enum: nil)
       add_field(name_sym, api_name: api_name, type_info: enum || type_info, mode: mode)
     end
 
@@ -233,13 +234,14 @@ module Anthropic
     #
     # @return [Hash{Symbol => Object}]
     def deconstruct_keys(keys)
-      (keys || self.class.fields.keys).to_h do |k|
+      (keys || self.class.fields.keys).filter_map do |k|
         unless self.class.fields.key?(k)
-          raise KeyError, "Expected one of #{self.class.fields.keys}, got #{k.inspect}"
+          next
         end
 
         [k, method(k).call]
       end
+      .to_h
     end
 
     # @return [String]

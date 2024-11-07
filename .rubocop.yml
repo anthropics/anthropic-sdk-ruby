@@ -26,6 +26,10 @@ Style/MethodCallWithArgsParentheses:
   IgnoredMethods:
     - raise
 
+# Nothing wrong with inline private methods
+Style/AccessModifierDeclarations:
+  Enabled: false
+
 # Nothing wrong with clear if statements.
 Style/IfUnlessModifier:
   Enabled: false

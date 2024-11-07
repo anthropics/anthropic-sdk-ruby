@@ -17,7 +17,7 @@ module Anthropic
     # @!visibility private
     #
     # @param name [Symbol]
-    def self.option(name)
+    private_class_method def self.option(name)
       define_method(name) { @_values[name] }
       define_method("#{name}=") { |val| @_values[name] = val }
       options.push(name)
