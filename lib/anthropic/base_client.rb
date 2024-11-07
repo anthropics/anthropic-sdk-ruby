@@ -47,12 +47,17 @@ module Anthropic
       {}
     end
 
+    # @return [String]
+    def generate_idempotency_key
+      "stainless-ruby-retry-#{SecureRandom.uuid}"
+    end
+
     # @param req [Hash{Symbol => Object}]
     #   @option req [Hash{Symbol => Object}, Array, Object, nil] :body
     # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions]
     #
     # @raise [ArgumentError]
-    def validate_request(req, opts)
+    private def validate_request(req, opts)
       case (body = req[:body])
       in Hash
         body.each_key do |k|
@@ -117,7 +122,7 @@ module Anthropic
     #   @option options [Hash{Symbol => Object}, Array, Object, nil] :body
     #
     # @return [Hash{Symbol => Object}]
-    def prep_request(options)
+    private def prep_request(options)
       method = options.fetch(:method)
       body, extra_body = options.values_at(:body, :extra_body)
 
@@ -155,15 +160,10 @@ module Anthropic
       {method: method, headers: headers, body: body, **url_elements}
     end
 
-    # @return [String]
-    def generate_idempotency_key
-      "stainless-ruby-retry-#{SecureRandom.uuid}"
-    end
-
     # @param response [Net::HTTPResponse]
     #
     # @return [Boolean]
-    def should_retry?(response)
+    private def should_retry?(response)
       case response["x-should-retry"]
       in "true"
         true
@@ -187,12 +187,12 @@ module Anthropic
     # @param message [String]
     # @param body [Object]
     # @param response [Net::HTTPResponse]
-    def make_status_error(message:, body:, response:)
+    private def make_status_error(message:, body:, response:)
       raise NotImplementedError
     end
 
     # @param response [Net::HTTPResponse]
-    def make_status_error_from_response(response)
+    private def make_status_error_from_response(response)
       err_body =
         begin
           # TODO(SDK-36): symbolize_names: true
@@ -213,7 +213,7 @@ module Anthropic
     # @param retry_count [Integer]
     #
     # @return [Float]
-    def retry_delay(response, retry_count:)
+    private def retry_delay(response, retry_count:)
       # Note the `retry-after-ms` header may not be standard, but is a good idea and we'd like proactive support for it.
       span = Float(response["retry-after-ms"], exception: false)&.then { |v| v / 1000 }
       return span if span
@@ -252,7 +252,7 @@ module Anthropic
     #
     # @raise [Anthropic::HTTP::Error]
     # @return [Hash{Symbol => Object}]
-    def follow_redirect(request, status:, location_header:)
+    private def follow_redirect(request, status:, location_header:)
       uri = Anthropic::Util.unparse_uri(request)
       location =
         Anthropic::Util.suppress(ArgumentError) do
@@ -310,7 +310,14 @@ module Anthropic
     #
     # @raise [Anthropic::HTTP::Error]
     # @return [Net::HTTPResponse]
-    def send_request(request, max_retries:, timeout:, redirect_count:, retry_count:, send_retry_header:)
+    private def send_request(
+      request,
+      max_retries:,
+      timeout:,
+      redirect_count:,
+      retry_count:,
+      send_retry_header:
+    )
       if send_retry_header
         request.fetch(:headers)["x-stainless-retry-count"] = retry_count.to_s
       end
@@ -413,11 +420,12 @@ module Anthropic
         end
 
       page, model = req.values_at(:page, :model)
-      if page
-        page.new(model, raw_data, response, self, req, opts)
-      elsif model
+      case [page, model]
+      in [Class, _]
+        page.new(client: self, model: model, req: req, opts: opts, response: response, raw_data: raw_data)
+      in [nil, _] unless model.nil?
         Anthropic::Converter.convert(model, raw_data)
-      else
+      in [nil, nil]
         raw_data
       end
     end

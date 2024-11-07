@@ -16,35 +16,20 @@ module Anthropic
 
     # @!visibility private
     #
-    # @return [Anthropic::Client]
-    attr_accessor :client
-
-    # @!visibility private
-    #
-    # @return [Hash{Symbol => Object}]
-    attr_accessor :req
-
-    # @!visibility private
-    #
-    # @return [Hash{Symbol => Object}]
-    attr_accessor :opts
-
-    # @!visibility private
-    #
     # @param model [Object]
     # @param raw_data [Hash{Symbol => Object}]
     # @param response [Net::HTTPResponse]
     # @param client [Anthropic::Client]
     # @param req [Hash{Symbol => Object}]
     # @param opts [Hash{Symbol => Object}]
-    def initialize(model, raw_data, _response, client, req, opts)
+    def initialize(client:, model:, req:, opts:, response:, raw_data:)
       self.data = (raw_data[:data] || []).map { |e| model.convert(e) }
       self.has_more = raw_data[:has_more]
       self.first_id = raw_data[:first_id]
       self.last_id = raw_data[:last_id]
-      self.client = client
-      self.req = req
-      self.opts = opts
+      @client = client
+      @req = req
+      @opts = opts
     end
 
     # @return [Boolean]
@@ -58,7 +43,9 @@ module Anthropic
       unless next_page?
         raise "No more pages available; please check #next_page? before calling #next_page"
       end
-      client.request(Anthropic::Util.deep_merge(req, {query: {after_id: last_id}}), opts)
+
+      req = Anthropic::Util.deep_merge(@req, {query: {after_id: last_id}})
+      @client.request(req, @opts)
     end
 
     # @param blk [Proc]
@@ -78,7 +65,7 @@ module Anthropic
 
     # @return [String]
     def inspect
-      "#<#{selfl.class}:0x#{object_id.to_s(16)} data=#{data.inspect} has_more=#{has_more.inspect} first_id=#{first_id.inspect} last_id=#{last_id.inspect}>"
+      "#<#{self.class}:0x#{object_id.to_s(16)} data=#{data.inspect} has_more=#{has_more.inspect} first_id=#{first_id.inspect} last_id=#{last_id.inspect}>"
     end
   end
 end
