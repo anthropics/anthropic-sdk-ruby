@@ -54,10 +54,9 @@ module Anthropic
 
     # @param req [Hash{Symbol => Object}]
     #   @option req [Hash{Symbol => Object}, Array, Object, nil] :body
-    # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions]
     #
     # @raise [ArgumentError]
-    private def validate_request(req, opts)
+    private def validate_request!(req)
       case (body = req[:body])
       in Hash
         body.each_key do |k|
@@ -67,18 +66,6 @@ module Anthropic
         end
       else
         # Body can be at least a Hash or Array, just check for Hash shape for now.
-      end
-
-      case opts
-      in Anthropic::RequestOptions | Hash
-        valid_keys = Anthropic::RequestOptions.options
-        opts.to_h.each_key do |k|
-          unless valid_keys.include?(k)
-            raise ArgumentError, "Request `opts` keys must be one of #{valid_keys}, got #{k.inspect}"
-          end
-        end
-      else
-        raise ArgumentError, "Request `opts` must be a Hash or RequestOptions, got #{opts.inspect}"
       end
     end
 
@@ -115,14 +102,12 @@ module Anthropic
       }
     end
 
-    # @param options [Hash{Symbol => Object}]
-    #   @option options [Symbol] :method
-    #   @option options [Hash{String => String}] :headers
-    #   @option options [Hash{String => String}] :extra_headers
-    #   @option options [Hash{Symbol => Object}, Array, Object, nil] :body
+    # @param req [Hash{Symbol => Object}]
+    # @param opts [Anthropic::RequestOptions, Hash{Symbol => Object}]
     #
     # @return [Hash{Symbol => Object}]
-    private def prep_request(options)
+    private def build_request(req, opts)
+      options = Anthropic::Util.deep_merge(req, opts)
       method = options.fetch(:method)
       body, extra_body = options.values_at(:body, :extra_body)
 
@@ -380,31 +365,11 @@ module Anthropic
       end
     end
 
-    # Execute the request specified by req + opts. This is the method that all
-    # resource methods call into.
-    # Params req & opts are kept separate up until this point so that we can
-    # validate opts as it was given to us by the user.
     # @param req [Hash{Symbol => Object}]
     # @param opts [Anthropic::RequestOptions, Hash{Symbol => Object}]
     #
-    # @raise [Anthropic::HTTP::Error]
     # @return [Object]
-    def request(req, opts)
-      validate_request(req, opts)
-      options = Anthropic::Util.deep_merge(req, opts)
-      request_args = prep_request(options)
-
-      # Don't send the current retry count in the headers if the caller modified the header defaults.
-      send_retry_header = request_args.fetch(:headers)["x-stainless-retry-count"] == "0"
-
-      response = send_request(
-        request_args,
-        max_retries: opts.fetch(:max_retries, @max_retries),
-        timeout: opts.fetch(:timeout, @timeout),
-        redirect_count: 0,
-        retry_count: 0,
-        send_retry_header: send_retry_header
-      )
+    private def parse_response(req, opts, response)
       raw_data =
         case response.content_type
         in "application/json"
@@ -428,6 +393,33 @@ module Anthropic
       in [nil, nil]
         raw_data
       end
+    end
+
+    # Execute the request specified by req + opts. This is the method that all
+    # resource methods call into.
+    # Params req & opts are kept separate up until this point so that we can
+    # validate opts as it was given to us by the user.
+    # @param req [Hash{Symbol => Object}]
+    # @param opts [Anthropic::RequestOptions, Hash{Symbol => Object}]
+    #
+    # @raise [Anthropic::HTTP::Error]
+    # @return [Object]
+    def request(req, opts)
+      Anthropic::RequestOptions.validate!(opts)
+      validate_request!(req)
+      request = build_request(req, opts)
+
+      # Don't send the current retry count in the headers if the caller modified the header defaults.
+      send_retry_header = request.fetch(:headers)["x-stainless-retry-count"] == "0"
+      response = send_request(
+        request,
+        max_retries: opts.fetch(:max_retries, @max_retries),
+        timeout: opts.fetch(:timeout, @timeout),
+        redirect_count: 0,
+        retry_count: 0,
+        send_retry_header: send_retry_header
+      )
+      parse_response(req, opts, response)
     end
 
     # @return [String]
