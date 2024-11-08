@@ -50,23 +50,23 @@ module Anthropic
     end
 
     # @!visibility private
-    def make_status_error(message:, body:, response:)
+    private def make_status_error(message:, body:, response:)
       case response.code.to_i
-      when 400
+      in 400
         Anthropic::HTTP::BadRequestError.new(message: message, response: response, body: body)
-      when 401
+      in 401
         Anthropic::HTTP::AuthenticationError.new(message: message, response: response, body: body)
-      when 403
+      in 403
         Anthropic::HTTP::PermissionDeniedError.new(message: message, response: response, body: body)
-      when 404
+      in 404
         Anthropic::HTTP::NotFoundError.new(message: message, response: response, body: body)
-      when 409
+      in 409
         Anthropic::HTTP::ConflictError.new(message: message, response: response, body: body)
-      when 422
+      in 422
         Anthropic::HTTP::UnprocessableEntityError.new(message: message, response: response, body: body)
-      when 429
+      in 429
         Anthropic::HTTP::RateLimitError.new(message: message, response: response, body: body)
-      when 500..599
+      in 500..599
         Anthropic::HTTP::InternalServerError.new(message: message, response: response, body: body)
       else
         Anthropic::HTTP::APIStatusError.new(message: message, response: response, body: body)

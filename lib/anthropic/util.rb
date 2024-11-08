@@ -49,6 +49,21 @@ module Anthropic
       nil
     end
 
+    # @param data [Hash, Array, Object]
+    # @param pick [Symbol, Integer, Array, nil]
+    #
+    # @return [Object, nil]
+    def self.dig(data, pick)
+      case [data, pick]
+      in [_, nil]
+        data
+      in [Hash, Symbol] | [Array, Integer]
+        data[pick]
+      in [Hash | Array, Array]
+        data.dig(*pick)
+      end
+    end
+
     # @param str [String]
     #
     # @return [Integer, String]

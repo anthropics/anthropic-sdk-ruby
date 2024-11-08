@@ -147,6 +147,43 @@ module Anthropic
 
     # @param response [Net::HTTPResponse]
     #
+    # @raise [JSON::ParserError]
+    # @return [Object]
+    private def parse_body(response)
+      case response.content_type
+      in "application/json"
+        JSON.parse(response.body, symbolize_names: true)
+      else
+        # TODO: parsing other response types
+        response.body
+      end
+    end
+
+    # @param message [String]
+    # @param body [Object]
+    # @param response [Net::HTTPResponse]
+    private def make_status_error(message:, body:, response:)
+      raise NotImplementedError
+    end
+
+    # @param response [Net::HTTPResponse]
+    private def make_status_error_from_response(response)
+      err_body =
+        begin
+          parse_body(response)
+        rescue JSON::ParserError
+          response
+        end
+
+      # We include the body in the error message as well as returning it
+      # since logging error messages is a common and quick way to assess what's
+      # wrong with a response.
+      message = "Error code: #{response.code}; Response: #{response.body}"
+      make_status_error(message: message, body: err_body, response: response)
+    end
+
+    # @param response [Net::HTTPResponse]
+    #
     # @return [Boolean]
     private def should_retry?(response)
       case response["x-should-retry"]
@@ -167,31 +204,6 @@ module Anthropic
           false
         end
       end
-    end
-
-    # @param message [String]
-    # @param body [Object]
-    # @param response [Net::HTTPResponse]
-    private def make_status_error(message:, body:, response:)
-      raise NotImplementedError
-    end
-
-    # @param response [Net::HTTPResponse]
-    private def make_status_error_from_response(response)
-      err_body =
-        begin
-          # TODO(SDK-36): symbolize_names: true
-          JSON.parse(response.body)
-        rescue JSON::ParserError
-          response
-        end
-
-      # We include the body in the error message as well as returning it
-      # since logging error messages is a common and quick way to assess what's
-      # wrong with a response.
-      message = "Error code: #{response.code}; Response: #{response.body}"
-
-      make_status_error(message: message, body: err_body, response: response)
     end
 
     # @param response [Net::HTTPResponse]
@@ -370,19 +382,8 @@ module Anthropic
     #
     # @return [Object]
     private def parse_response(req, opts, response)
-      raw_data =
-        case response.content_type
-        in "application/json"
-          begin
-            data = JSON.parse(response.body, symbolize_names: true)
-            req[:unwrap] ? data[req[:unwrap]] : data
-          rescue JSON::ParserError
-            response.body
-          end
-          # TODO: parsing other response types
-        else
-          response.body
-        end
+      parsed = parse_body(response)
+      raw_data = Anthropic::Util.dig(parsed, req[:unwrap])
 
       page, model = req.values_at(:page, :model)
       case [page, model]
