@@ -29,7 +29,7 @@ module Anthropic
       in [Hash, Hash, _]
         left
           .reject { |key, _| right[key] == OMIT }
-          .merge(right_cleaned) do |_k, old_val, new_val|
+          .merge(right_cleaned) do |_, old_val, new_val|
             deep_merge(old_val, new_val, concat: concat)
           end
       in [Array, Array, true]
@@ -64,31 +64,60 @@ module Anthropic
       end
     end
 
-    # @param str [String]
+    # @param input [String, Numeric, Boolean, nil]
     #
-    # @return [Integer, String]
-    def self.coerce_integer(str)
-      Integer(str, exception: false) || str
-    end
-
-    # @param str [String]
-    #
-    # @return [Float, String]
-    def self.coerce_float(str)
-      Float(str, exception: false) || str
-    end
-
-    # @param str [String]
-    #
-    # @return [Boolean, String]
-    def self.coerce_boolean(input)
+    # @return [Integer, String, nil]
+    def self.coerce_integer(input)
       case input
+      in true
+        1
+      in false
+        0
+      else
+        Integer(input, exception: false) || input
+      end
+    end
+
+    # @param input [String, Numeric, Boolean, nil]
+    #
+    # @return [Float, String, nil]
+    def self.coerce_float(input)
+      case input
+      in true
+        1.0
+      in false
+        0.0
+      else
+        Float(input, exception: false) || input
+      end
+    end
+
+    # @param input [String, Numeric, Boolean, nil]
+    #
+    # @return [Boolean, String, Numeric, nil]
+    def self.coerce_boolean(input)
+      case input.is_a?(String) ? input.downcase : input
+      in Numeric
+        !input.zero?
       in "true"
         true
       in "false"
         false
       else
         input
+      end
+    end
+
+    # @param input [String, Numeric, Boolean, nil]
+    #
+    # @raise [ArgumentError]
+    # @return [Boolean, nil]
+    def self.coerce_boolean!(input)
+      case (coerced = coerce_boolean(input))
+      in true | false | nil
+        coerced
+      else
+        raise ArgumentError, "Unable to coerce #{input.inspect} into boolean value"
       end
     end
 
@@ -157,7 +186,7 @@ module Anthropic
     #
     # @return [String]
     def self.normalize_path(path)
-      path.gsub(%r{/+}, "/").freeze
+      path.gsub(%r{/+}, "/")
     end
 
     # @param headers [Array<Hash{String => String, Integer, nil}>]

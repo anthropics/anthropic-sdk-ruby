@@ -5,19 +5,25 @@ module Anthropic
   class BaseClient
     MAX_REDIRECTS = 20 # from whatwg fetch spec
 
+    # @!attribute requester
+    # @return [Anthropic::PooledNetRequester]
     attr_accessor :requester
 
     # @param base_url [String]
-    # @param timeout [Float, nil]
-    # @param headers [Hash{String => String}]
+    # @param timeout [Float]
     # @param max_retries [Integer]
+    # @param initial_retry_delay [Float]
+    # @param max_retry_delay [Float]
+    # @param headers [Hash{String => String}]
     # @param idempotency_header [String, nil]
     def initialize(
       base_url:,
-      timeout: nil,
+      timeout: 0.0,
+      max_retries: 0,
+      initial_retry_delay: 0,
+      max_retry_delay: 0,
       headers: {},
-      idempotency_header: nil,
-      max_retries: 0
+      idempotency_header: nil
     )
       self.requester = Anthropic::PooledNetRequester.new
       base_url_parsed = URI.parse(base_url)
@@ -38,8 +44,8 @@ module Anthropic
       @idempotency_header = idempotency_header&.to_s&.downcase
       @max_retries = max_retries
       @timeout = timeout
-      @initial_retry_delay = 0.5
-      @max_retry_delay = 8.0
+      @initial_retry_delay = initial_retry_delay
+      @max_retry_delay = max_retry_delay
     end
 
     # @return [Hash{String => String}]
