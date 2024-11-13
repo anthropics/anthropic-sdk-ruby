@@ -113,7 +113,7 @@ module Anthropic
         #     [system prompt](https://docs.anthropic.com/en/docs/system-prompts), you can use
         #     the top-level `system` parameter — there is no `"system"` role for input
         #     messages in the Messages API.
-        #   @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent11] :model Body param: The model that will complete your prompt.\n\nSee
+        #   @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent10] :model Body param: The model that will complete your prompt.\n\nSee
         #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #     details and options.
         #   @option params [Anthropic::Models::BetaMetadata, nil] :metadata Body param: An object describing metadata about the request.
@@ -230,7 +230,7 @@ module Anthropic
         #
         #     Recommended for advanced use cases only. You usually only need to use
         #     `temperature`.
-        #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent12>, nil] :betas Header param: Optional header to specify the beta version(s) you want to use.
+        #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent11>, nil] :betas Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
         #
@@ -338,7 +338,7 @@ module Anthropic
         #     [system prompt](https://docs.anthropic.com/en/docs/system-prompts), you can use
         #     the top-level `system` parameter — there is no `"system"` role for input
         #     messages in the Messages API.
-        #   @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent13] :model Body param: The model that will complete your prompt.\n\nSee
+        #   @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent12] :model Body param: The model that will complete your prompt.\n\nSee
         #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #     details and options.
         #   @option params [Array<Anthropic::Models::BetaTextBlockParam>, String, nil] :system Body param: System prompt.
@@ -416,7 +416,7 @@ module Anthropic
         #     JSON structure of output.
         #
         #     See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
-        #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent14>, nil] :betas Header param: Optional header to specify the beta version(s) you want to use.
+        #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent13>, nil] :betas Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
         #

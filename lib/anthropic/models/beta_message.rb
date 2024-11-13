@@ -41,7 +41,7 @@ module Anthropic
 
       # @!attribute [rw] model
       #   The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-      #   @return [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent4]
+      #   @return [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent3]
       required :model, Anthropic::Unknown
 
       # @!attribute [rw] role

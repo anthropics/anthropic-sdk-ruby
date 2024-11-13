@@ -22,7 +22,7 @@ module Anthropic
       #
       #     Note that our models may stop _before_ reaching this maximum. This parameter
       #     only specifies the absolute maximum number of tokens to generate.
-      #   @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent9] :model The model that will complete your prompt.\n\nSee
+      #   @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent8] :model The model that will complete your prompt.\n\nSee
       #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #     details and options.
       #   @option params [String] :prompt The prompt that you want Claude to complete.
