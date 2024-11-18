@@ -23,10 +23,10 @@ module Anthropic
     # @param req [Hash{Symbol => Object}]
     # @param opts [Hash{Symbol => Object}]
     def initialize(client:, model:, req:, opts:, response:, raw_data:)
-      self.data = (raw_data[:data] || []).map { |e| model.convert(e) }
-      self.has_more = raw_data[:has_more]
-      self.first_id = raw_data[:first_id]
-      self.last_id = raw_data[:last_id]
+      @data = (raw_data[:data] || []).map { |e| model.convert(e) }
+      @has_more = raw_data[:has_more]
+      @first_id = raw_data[:first_id]
+      @last_id = raw_data[:last_id]
       @client = client
       @req = req
       @opts = opts

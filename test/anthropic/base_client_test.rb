@@ -35,7 +35,6 @@ class Anthropic::Test::BaseClientTest < Minitest::Test
         base_url: "h://nope"
       ).resolve_uri_elements(
         host: "a.b",
-        scheme: "h",
         path: "/c",
         query: {"d" => ["e"]},
         extra_query: {
