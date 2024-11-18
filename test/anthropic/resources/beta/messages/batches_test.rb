@@ -23,22 +23,6 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Minitest::Test
               "messages" => [{"content" => "Hello, world", "role" => "user"}],
               "model" => "claude-3-5-sonnet-20241022"
             }
-          },
-          {
-            "custom_id" => "my-custom-id-1",
-            "params" => {
-              "max_tokens" => 1024,
-              "messages" => [{"content" => "Hello, world", "role" => "user"}],
-              "model" => "claude-3-5-sonnet-20241022"
-            }
-          },
-          {
-            "custom_id" => "my-custom-id-1",
-            "params" => {
-              "max_tokens" => 1024,
-              "messages" => [{"content" => "Hello, world", "role" => "user"}],
-              "model" => "claude-3-5-sonnet-20241022"
-            }
           }
         ]
       }

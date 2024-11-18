@@ -25,14 +25,7 @@ class Anthropic::Test::Resources::Beta::MessagesTest < Minitest::Test
 
   def test_count_tokens_required_params
     response = @anthropic.beta.messages.count_tokens(
-      {
-        messages: [
-          {"content" => "string", "role" => "user"},
-          {"content" => "string", "role" => "user"},
-          {"content" => "string", "role" => "user"}
-        ],
-        model: "string"
-      }
+      {messages: [{"content" => "string", "role" => "user"}], model: "string"}
     )
     assert_kind_of(Anthropic::Models::BetaMessageTokensCount, response)
   end
