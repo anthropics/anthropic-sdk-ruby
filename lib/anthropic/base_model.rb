@@ -26,10 +26,10 @@ module Anthropic
         target_type.convert(value)
       elsif target_type <= NilClass
         nil
-      elsif [Date, Time].any? { |cls| target_type <= cls }
-        target_type.parse(value)
       elsif target_type <= Float
         value.is_a?(Numeric) ? value.to_f : value
+      elsif [Date, Time].any? { |cls| target_type <= cls }
+        target_type.parse(value)
       elsif target_type == Object || [Hash, String, Integer].any? { |cls| target_type <= cls }
         value
       else

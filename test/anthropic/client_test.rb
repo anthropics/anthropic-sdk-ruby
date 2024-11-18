@@ -20,9 +20,9 @@ class AnthropicTest < Minitest::Test
     # @param headers [Hash{String => String}]
     def initialize(code, data, headers)
       @headers = headers
-      self.code = code
-      self.body = JSON.generate(data)
-      self.content_type = "application/json"
+      @code = code
+      @body = JSON.generate(data)
+      @content_type = "application/json"
     end
 
     def [](header)
@@ -51,10 +51,10 @@ class AnthropicTest < Minitest::Test
     # @param response_data [Object]
     # @param response_headers [Hash{String => String}]
     def initialize(response_code, response_data, response_headers)
-      self.response_code = response_code
-      self.response_data = response_data
-      self.response_headers = response_headers
-      self.attempts = []
+      @response_code = response_code
+      @response_data = response_data
+      @response_headers = response_headers
+      @attempts = []
     end
 
     # @param req [Hash{Symbol => Object}]
