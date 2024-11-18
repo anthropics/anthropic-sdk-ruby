@@ -11,9 +11,9 @@ module Anthropic
       #   @return [Object]
       required :input, Anthropic::Unknown
 
-      # @!attribute [rw] name_
+      # @!attribute [rw] name
       #   @return [String]
-      required :name_, String, api_name: :name
+      required :name, String
 
       # @!attribute [rw] type
       #   @return [Symbol, Anthropic::Models::ToolUseBlockParam::Type]

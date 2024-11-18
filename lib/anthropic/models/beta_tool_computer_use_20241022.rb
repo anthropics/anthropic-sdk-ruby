@@ -13,12 +13,12 @@ module Anthropic
       #   @return [Integer]
       required :display_width_px, Integer
 
-      # @!attribute [rw] name_
+      # @!attribute [rw] name
       #   Name of the tool.
       #
       # This is how the tool will be called by the model and in tool_use blocks.
       #   @return [Symbol, Anthropic::Models::BetaToolComputerUse20241022::Name]
-      required :name_, api_name: :name, enum: -> { Anthropic::Models::BetaToolComputerUse20241022::Name }
+      required :name, enum: -> { Anthropic::Models::BetaToolComputerUse20241022::Name }
 
       # @!attribute [rw] type
       #   @return [Symbol, Anthropic::Models::BetaToolComputerUse20241022::Type]

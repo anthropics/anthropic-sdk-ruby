@@ -3,10 +3,10 @@
 module Anthropic
   module Models
     class ToolChoiceTool < Anthropic::BaseModel
-      # @!attribute [rw] name_
+      # @!attribute [rw] name
       #   The name of the tool to use.
       #   @return [String]
-      required :name_, String, api_name: :name
+      required :name, String
 
       # @!attribute [rw] type
       #   @return [Symbol, Anthropic::Models::ToolChoiceTool::Type]
