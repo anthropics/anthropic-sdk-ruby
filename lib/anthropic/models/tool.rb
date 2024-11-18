@@ -10,12 +10,12 @@ module Anthropic
       #   @return [Anthropic::Models::Tool::InputSchema]
       required :input_schema, -> { Anthropic::Models::Tool::InputSchema }
 
-      # @!attribute [rw] name_
+      # @!attribute [rw] name
       #   Name of the tool.
       #
       # This is how the tool will be called by the model and in tool_use blocks.
       #   @return [String]
-      required :name_, String, api_name: :name
+      required :name, String
 
       # @!attribute [rw] description
       #   Description of what this tool does.

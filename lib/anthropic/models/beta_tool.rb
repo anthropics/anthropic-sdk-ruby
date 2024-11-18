@@ -10,12 +10,12 @@ module Anthropic
       #   @return [Anthropic::Models::BetaTool::InputSchema]
       required :input_schema, -> { Anthropic::Models::BetaTool::InputSchema }
 
-      # @!attribute [rw] name_
+      # @!attribute [rw] name
       #   Name of the tool.
       #
       # This is how the tool will be called by the model and in tool_use blocks.
       #   @return [String]
-      required :name_, String, api_name: :name
+      required :name, String
 
       # @!attribute [rw] cache_control
       #   @return [Anthropic::Models::BetaCacheControlEphemeral]
