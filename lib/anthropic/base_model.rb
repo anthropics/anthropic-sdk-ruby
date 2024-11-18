@@ -8,34 +8,32 @@ module Anthropic
     # - If it's possible and safe to convert the given `value` to `type`, such a converted value.
     # - Otherwise, the given `value` unaltered.
     #
-    # @param type [Class, Anthropic::Converter]
+    # @param target_type [Class, Anthropic::Converter]
     # @param value [Object]
     #
-    # @raise [StandardError]
+    # @raise [ArgumentError]
     # @return [Object]
-    def self.convert(type, value)
-      # If `type.is_a?(Converter)`, `type` is an instance of a class that mixes
+    def self.convert(target_type, value)
+      # If `target_type.is_a?(Converter)`, `target_type` is an instance of a class that mixes
       # in `Converter`, indicating that the type should define `#convert` on this
       # instance. This is used for Enums and ArrayOfs, which are parameterized.
-      # If `type.include?(Converter)`, `type` is a class that mixes in `Converter`
+      # If `target_type.include?(Converter)`, `target_type` is a class that mixes in `Converter`
       # which we use to signal that the class should define `.convert`. This is
-      # used where the class itself fully specifies the type, like model classes.
+      # used where the class itself fully specifies the target_type, like model classes.
       # We don't monkey-patch Ruby-native types, so those need to be handled
       # directly.
-      if type.is_a?(Converter) || type.include?(Converter)
-        type.convert(value)
-      elsif type <= NilClass
+      if target_type.is_a?(Converter) || target_type.include?(Converter)
+        target_type.convert(value)
+      elsif target_type <= NilClass
         nil
-      elsif type <= Date
-        Date.parse(value)
-      elsif type <= Time
-        Time.parse(value)
-      elsif type <= Float
+      elsif [Date, Time].any? { |cls| target_type <= cls }
+        target_type.parse(value)
+      elsif target_type <= Float
         value.is_a?(Numeric) ? value.to_f : value
-      elsif [Object, Hash, Integer, String].any? { |cls| type <= cls }
+      elsif target_type == Object || [Hash, String, Integer].any? { |cls| target_type <= cls }
         value
       else
-        raise StandardError, "Unexpected type #{type}"
+        raise ArgumentError, "Unexpected conversion target type #{target_type}"
       end
     end
   end
