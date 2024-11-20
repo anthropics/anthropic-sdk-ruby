@@ -28,8 +28,8 @@ module Anthropic
             req = {
               method: :post,
               path: "/v1/messages/batches?beta=true",
-              body: params,
               headers: {"Content-Type" => "application/json"},
+              body: params,
               model: Anthropic::Models::BetaMessageBatch
             }
             @client.request(req, opts)
