@@ -79,8 +79,8 @@ module Anthropic
         req = {
           method: :post,
           path: "/v1/complete",
-          body: params,
           headers: {"Content-Type" => "application/json"},
+          body: params,
           model: Anthropic::Models::Completion
         }
         @client.request(req, opts)

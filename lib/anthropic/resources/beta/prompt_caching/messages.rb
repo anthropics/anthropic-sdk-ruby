@@ -236,8 +236,8 @@ module Anthropic
             req = {
               method: :post,
               path: "/v1/messages?beta=prompt_caching",
-              body: params,
               headers: {"Content-Type" => "application/json"},
+              body: params,
               model: Anthropic::Models::PromptCachingBetaMessage
             }
             @client.request(req, opts)

@@ -232,8 +232,8 @@ module Anthropic
         req = {
           method: :post,
           path: "/v1/messages",
-          body: params,
           headers: {"Content-Type" => "application/json"},
+          body: params,
           model: Anthropic::Models::Message
         }
         @client.request(req, opts)
