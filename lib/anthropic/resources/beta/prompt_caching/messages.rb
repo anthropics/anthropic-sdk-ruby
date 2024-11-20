@@ -128,7 +128,7 @@ module Anthropic
           #
           #     See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
           #     details.
-          #   @option params [Array<Anthropic::Models::PromptCachingBetaTextBlockParam>, String, nil] :system Body param: System prompt.
+          #   @option params [Array<Anthropic::Models::PromptCachingBetaTextBlockParam>, String, nil] :system_ Body param: System prompt.
           #
           #     A system prompt is a way of providing context and instructions to Claude, such
           #     as specifying a particular goal or role. See our
