@@ -27,7 +27,7 @@ module Anthropic
         #
         #     Different models have different maximum values for this parameter. See
         #     [models](https://docs.anthropic.com/en/docs/models-overview) for details.
-        #   @option params [Array<Anthropic::Models::BetaMessageParam>] :messages Body param: Input messages.
+        #   @option params [Array<Anthropic::Models::Beta::BetaMessageParam>] :messages Body param: Input messages.
         #
         #     Our models are trained to operate on alternating `user` and `assistant`
         #     conversational turns. When creating a new `Message`, you specify the prior
@@ -116,7 +116,7 @@ module Anthropic
         #   @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent10] :model Body param: The model that will complete your prompt.\n\nSee
         #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #     details and options.
-        #   @option params [Anthropic::Models::BetaMetadata, nil] :metadata Body param: An object describing metadata about the request.
+        #   @option params [Anthropic::Models::Beta::BetaMetadata, nil] :metadata Body param: An object describing metadata about the request.
         #   @option params [Array<String>, nil] :stop_sequences Body param: Custom text sequences that will cause the model to stop generating.
         #
         #     Our models will normally stop when they have naturally completed their turn,
@@ -131,7 +131,7 @@ module Anthropic
         #
         #     See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
         #     details.
-        #   @option params [Array<Anthropic::Models::BetaTextBlockParam>, String, nil] :system_ Body param: System prompt.
+        #   @option params [Array<Anthropic::Models::Beta::BetaTextBlockParam>, String, nil] :system_ Body param: System prompt.
         #
         #     A system prompt is a way of providing context and instructions to Claude, such
         #     as specifying a particular goal or role. See our
@@ -144,9 +144,9 @@ module Anthropic
         #
         #     Note that even with `temperature` of `0.0`, the results will not be fully
         #     deterministic.
-        #   @option params [Anthropic::Models::BetaToolChoiceAny, Anthropic::Models::BetaToolChoiceAuto, Anthropic::Models::BetaToolChoiceTool, nil] :tool_choice Body param: How the model should use the provided tools. The model can use a
+        #   @option params [Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceTool, nil] :tool_choice Body param: How the model should use the provided tools. The model can use a
         #     specific tool, any available tool, or decide by itself.
-        #   @option params [Array<Anthropic::Models::BetaTool, Anthropic::Models::BetaToolBash20241022, Anthropic::Models::BetaToolComputerUse20241022, Anthropic::Models::BetaToolTextEditor20241022>, nil] :tools Body param: Definitions of tools that the model may use.
+        #   @option params [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>, nil] :tools Body param: Definitions of tools that the model may use.
         #
         #     If you include `tools` in your API request, the model may return `tool_use`
         #     content blocks that represent the model's use of those tools. You can then run
@@ -234,14 +234,14 @@ module Anthropic
         #
         # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
         #
-        # @return [Anthropic::Models::BetaMessage]
+        # @return [Anthropic::Models::Beta::BetaMessage]
         def create(params = {}, opts = {})
           req = {
             method: :post,
             path: "/v1/messages?beta=true",
             headers: {"Content-Type" => "application/json"},
             body: params,
-            model: Anthropic::Models::BetaMessage
+            model: Anthropic::Models::Beta::BetaMessage
           }
           @client.request(req, opts)
         end
@@ -252,7 +252,7 @@ module Anthropic
         #   including tools, images, and documents, without creating it.
         #
         # @param params [Hash{Symbol => Object}] Attributes to send in this request.
-        #   @option params [Array<Anthropic::Models::BetaMessageParam>] :messages Body param: Input messages.
+        #   @option params [Array<Anthropic::Models::Beta::BetaMessageParam>] :messages Body param: Input messages.
         #
         #     Our models are trained to operate on alternating `user` and `assistant`
         #     conversational turns. When creating a new `Message`, you specify the prior
@@ -341,14 +341,14 @@ module Anthropic
         #   @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent12] :model Body param: The model that will complete your prompt.\n\nSee
         #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #     details and options.
-        #   @option params [Array<Anthropic::Models::BetaTextBlockParam>, String, nil] :system_ Body param: System prompt.
+        #   @option params [Array<Anthropic::Models::Beta::BetaTextBlockParam>, String, nil] :system_ Body param: System prompt.
         #
         #     A system prompt is a way of providing context and instructions to Claude, such
         #     as specifying a particular goal or role. See our
         #     [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
-        #   @option params [Anthropic::Models::BetaToolChoiceAny, Anthropic::Models::BetaToolChoiceAuto, Anthropic::Models::BetaToolChoiceTool, nil] :tool_choice Body param: How the model should use the provided tools. The model can use a
+        #   @option params [Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceTool, nil] :tool_choice Body param: How the model should use the provided tools. The model can use a
         #     specific tool, any available tool, or decide by itself.
-        #   @option params [Array<Anthropic::Models::BetaTool, Anthropic::Models::BetaToolBash20241022, Anthropic::Models::BetaToolComputerUse20241022, Anthropic::Models::BetaToolTextEditor20241022>, nil] :tools Body param: Definitions of tools that the model may use.
+        #   @option params [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>, nil] :tools Body param: Definitions of tools that the model may use.
         #
         #     If you include `tools` in your API request, the model may return `tool_use`
         #     content blocks that represent the model's use of those tools. You can then run
@@ -420,14 +420,14 @@ module Anthropic
         #
         # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
         #
-        # @return [Anthropic::Models::BetaMessageTokensCount]
+        # @return [Anthropic::Models::Beta::BetaMessageTokensCount]
         def count_tokens(params = {}, opts = {})
           req = {
             method: :post,
             path: "/v1/messages/count_tokens?beta=true",
             headers: {"Content-Type" => "application/json"},
             body: params,
-            model: Anthropic::Models::BetaMessageTokensCount
+            model: Anthropic::Models::Beta::BetaMessageTokensCount
           }
           @client.request(req, opts)
         end
