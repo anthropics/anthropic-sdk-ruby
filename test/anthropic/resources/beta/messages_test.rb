@@ -20,13 +20,13 @@ class Anthropic::Test::Resources::Beta::MessagesTest < Minitest::Test
         model: "claude-3-5-sonnet-20241022"
       }
     )
-    assert_kind_of(Anthropic::Models::BetaMessage, response)
+    assert_kind_of(Anthropic::Models::Beta::BetaMessage, response)
   end
 
   def test_count_tokens_required_params
     response = @anthropic.beta.messages.count_tokens(
       {messages: [{"content" => "string", "role" => "user"}], model: "string"}
     )
-    assert_kind_of(Anthropic::Models::BetaMessageTokensCount, response)
+    assert_kind_of(Anthropic::Models::Beta::BetaMessageTokensCount, response)
   end
 end

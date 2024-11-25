@@ -17,20 +17,20 @@ module Anthropic
           #   can take up to 24 hours to complete.
           #
           # @param params [Hash{Symbol => Object}] Attributes to send in this request.
-          #   @option params [Array<Request>] :requests Body param: List of requests for prompt completion. Each is an individual
+          #   @option params [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>] :requests Body param: List of requests for prompt completion. Each is an individual
           #     request to create a Message.
           #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent14>, nil] :betas Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
           #
-          # @return [Anthropic::Models::BetaMessageBatch]
+          # @return [Anthropic::Models::Beta::Messages::BetaMessageBatch]
           def create(params = {}, opts = {})
             req = {
               method: :post,
               path: "/v1/messages/batches?beta=true",
               headers: {"Content-Type" => "application/json"},
               body: params,
-              model: Anthropic::Models::BetaMessageBatch
+              model: Anthropic::Models::Beta::Messages::BetaMessageBatch
             }
             @client.request(req, opts)
           end
@@ -46,12 +46,12 @@ module Anthropic
           #
           # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
           #
-          # @return [Anthropic::Models::BetaMessageBatch]
+          # @return [Anthropic::Models::Beta::Messages::BetaMessageBatch]
           def retrieve(message_batch_id, _params = {}, opts = {})
             req = {
               method: :get,
               path: "/v1/messages/batches/#{message_batch_id}?beta=true",
-              model: Anthropic::Models::BetaMessageBatch
+              model: Anthropic::Models::Beta::Messages::BetaMessageBatch
             }
             @client.request(req, opts)
           end
@@ -71,14 +71,14 @@ module Anthropic
           #
           # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
           #
-          # @return [Anthropic::Page<Anthropic::Models::BetaMessageBatch>]
+          # @return [Anthropic::Page<Anthropic::Models::Beta::Messages::BetaMessageBatch>]
           def list(params = {}, opts = {})
             req = {
               method: :get,
               path: "/v1/messages/batches?beta=true",
               query: params,
               page: Anthropic::Page,
-              model: Anthropic::Models::BetaMessageBatch
+              model: Anthropic::Models::Beta::Messages::BetaMessageBatch
             }
             @client.request(req, opts)
           end
@@ -100,12 +100,12 @@ module Anthropic
           #
           # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
           #
-          # @return [Anthropic::Models::BetaMessageBatch]
+          # @return [Anthropic::Models::Beta::Messages::BetaMessageBatch]
           def cancel(message_batch_id, _params = {}, opts = {})
             req = {
               method: :post,
               path: "/v1/messages/batches/#{message_batch_id}/cancel?beta=true",
-              model: Anthropic::Models::BetaMessageBatch
+              model: Anthropic::Models::Beta::Messages::BetaMessageBatch
             }
             @client.request(req, opts)
           end

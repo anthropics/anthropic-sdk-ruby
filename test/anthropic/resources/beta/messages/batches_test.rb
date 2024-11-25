@@ -27,12 +27,12 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Minitest::Test
         ]
       }
     )
-    assert_kind_of(Anthropic::Models::BetaMessageBatch, response)
+    assert_kind_of(Anthropic::Models::Beta::Messages::BetaMessageBatch, response)
   end
 
   def test_retrieve
     response = @anthropic.beta.messages.batches.retrieve("message_batch_id")
-    assert_kind_of(Anthropic::Models::BetaMessageBatch, response)
+    assert_kind_of(Anthropic::Models::Beta::Messages::BetaMessageBatch, response)
   end
 
   def test_list
@@ -42,7 +42,7 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Minitest::Test
 
   def test_cancel
     response = @anthropic.beta.messages.batches.cancel("message_batch_id")
-    assert_kind_of(Anthropic::Models::BetaMessageBatch, response)
+    assert_kind_of(Anthropic::Models::Beta::Messages::BetaMessageBatch, response)
   end
 
   def test_results

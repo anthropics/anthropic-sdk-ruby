@@ -20,6 +20,6 @@ class Anthropic::Test::Resources::Beta::PromptCaching::MessagesTest < Minitest::
         model: "claude-3-5-sonnet-20241022"
       }
     )
-    assert_kind_of(Anthropic::Models::PromptCachingBetaMessage, response)
+    assert_kind_of(Anthropic::Models::Beta::PromptCaching::PromptCachingBetaMessage, response)
   end
 end

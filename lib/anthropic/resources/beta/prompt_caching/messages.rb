@@ -24,7 +24,7 @@ module Anthropic
           #
           #     Different models have different maximum values for this parameter. See
           #     [models](https://docs.anthropic.com/en/docs/models-overview) for details.
-          #   @option params [Array<Anthropic::Models::PromptCachingBetaMessageParam>] :messages Body param: Input messages.
+          #   @option params [Array<Anthropic::Models::Beta::PromptCaching::PromptCachingBetaMessageParam>] :messages Body param: Input messages.
           #
           #     Our models are trained to operate on alternating `user` and `assistant`
           #     conversational turns. When creating a new `Message`, you specify the prior
@@ -110,7 +110,7 @@ module Anthropic
           #     [system prompt](https://docs.anthropic.com/en/docs/system-prompts), you can use
           #     the top-level `system` parameter — there is no `"system"` role for input
           #     messages in the Messages API.
-          #   @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent20] :model Body param: The model that will complete your prompt.\n\nSee
+          #   @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent19] :model Body param: The model that will complete your prompt.\n\nSee
           #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           #     details and options.
           #   @option params [Anthropic::Models::Metadata, nil] :metadata Body param: An object describing metadata about the request.
@@ -128,7 +128,7 @@ module Anthropic
           #
           #     See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
           #     details.
-          #   @option params [Array<Anthropic::Models::PromptCachingBetaTextBlockParam>, String, nil] :system_ Body param: System prompt.
+          #   @option params [Array<Anthropic::Models::Beta::PromptCaching::PromptCachingBetaTextBlockParam>, String, nil] :system_ Body param: System prompt.
           #
           #     A system prompt is a way of providing context and instructions to Claude, such
           #     as specifying a particular goal or role. See our
@@ -143,7 +143,7 @@ module Anthropic
           #     deterministic.
           #   @option params [Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceTool, nil] :tool_choice Body param: How the model should use the provided tools. The model can use a
           #     specific tool, any available tool, or decide by itself.
-          #   @option params [Array<Anthropic::Models::PromptCachingBetaTool>, nil] :tools Body param: Definitions of tools that the model may use.
+          #   @option params [Array<Anthropic::Models::Beta::PromptCaching::PromptCachingBetaTool>, nil] :tools Body param: Definitions of tools that the model may use.
           #
           #     If you include `tools` in your API request, the model may return `tool_use`
           #     content blocks that represent the model's use of those tools. You can then run
@@ -227,18 +227,18 @@ module Anthropic
           #
           #     Recommended for advanced use cases only. You usually only need to use
           #     `temperature`.
-          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent21>, nil] :betas Header param: Optional header to specify the beta version(s) you want to use.
+          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent20>, nil] :betas Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
           #
-          # @return [Anthropic::Models::PromptCachingBetaMessage]
+          # @return [Anthropic::Models::Beta::PromptCaching::PromptCachingBetaMessage]
           def create(params = {}, opts = {})
             req = {
               method: :post,
               path: "/v1/messages?beta=prompt_caching",
               headers: {"Content-Type" => "application/json"},
               body: params,
-              model: Anthropic::Models::PromptCachingBetaMessage
+              model: Anthropic::Models::Beta::PromptCaching::PromptCachingBetaMessage
             }
             @client.request(req, opts)
           end
