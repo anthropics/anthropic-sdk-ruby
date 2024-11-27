@@ -23,7 +23,7 @@ Style/MethodCallWithArgsParentheses:
   Enabled: true
   Exclude:
     - '**/*.gemspec'
-  IgnoredMethods:
+  AllowedMethods:
     - raise
 
 # Nothing wrong with inline private methods
