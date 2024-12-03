@@ -78,13 +78,10 @@ class Anthropic::Test::UtilTest < Minitest::Test
     assert_nil(Anthropic::Util.dig([], 1))
     assert_equal(1, Anthropic::Util.dig([nil, [nil, 1]], [1, 1]))
     assert_equal(1, Anthropic::Util.dig({a: [nil, 1]}, [:a, 1]))
-
-    assert_raises(NoMatchingPatternError) do
-      Anthropic::Util.dig([], 1.0)
-    end
-    assert_raises(NoMatchingPatternError) do
-      Anthropic::Util.dig(Object, 1)
-    end
+    assert_nil(Anthropic::Util.dig([], 1.0))
+    assert_nil(Anthropic::Util.dig(Object, 1))
+    assert_equal(2, Anthropic::Util.dig([], 1.0, 2))
+    assert_equal(2, Anthropic::Util.dig([], 1.0) { 2 })
   end
 
   def test_uri_parsing

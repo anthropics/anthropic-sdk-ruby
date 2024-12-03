@@ -46,13 +46,13 @@ module Anthropic
       content_type = headers["content-type"]
 
       get_pool(req, timeout: timeout).with do |conn|
-        uri = Anthropic::Util.unparse_uri(req, absolute: false)
+        url = Anthropic::Util.unparse_uri(req, absolute: false)
 
         request = Net::HTTPGenericRequest.new(
           method.to_s.upcase,
           !body.nil?,
           method != :head,
-          uri.to_s
+          url.to_s
         )
 
         case [content_type, body]
@@ -75,6 +75,8 @@ module Anthropic
         conn.read_timeout = timeout
         conn.write_timeout = timeout
         conn.request(request)
+      rescue Timeout::Error
+        raise Anthropic::APITimeoutError.new(url: url)
       end
     end
   end
