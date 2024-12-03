@@ -151,8 +151,10 @@ module Anthropic
         Anthropic::Converter.convert(field_type, @data[key])
       rescue StandardError
         name = self.class.name.split("::").last
-        msg = "Failed to parse #{name}.#{name_sym} as #{field_type.inspect}. To get the unparsed API response, use #{name}[:#{key}]."
-        raise Anthropic::ConversionError.new(msg)
+        raise Anthropic::ConversionError.new(
+          "Failed to parse #{name}.#{name_sym} as #{field_type.inspect}. " \
+          "To get the unparsed API response, use #{name}[:#{key}]."
+        )
       end
     end
 
