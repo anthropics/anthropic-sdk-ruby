@@ -69,29 +69,5 @@ module Anthropic
       @messages = Anthropic::Resources::Messages.new(client: self)
       @beta = Anthropic::Resources::Beta.new(client: self)
     end
-
-    # @!visibility private
-    private def make_status_error(message:, body:, response:)
-      case response.code.to_i
-      in 400
-        Anthropic::HTTP::BadRequestError.new(message: message, response: response, body: body)
-      in 401
-        Anthropic::HTTP::AuthenticationError.new(message: message, response: response, body: body)
-      in 403
-        Anthropic::HTTP::PermissionDeniedError.new(message: message, response: response, body: body)
-      in 404
-        Anthropic::HTTP::NotFoundError.new(message: message, response: response, body: body)
-      in 409
-        Anthropic::HTTP::ConflictError.new(message: message, response: response, body: body)
-      in 422
-        Anthropic::HTTP::UnprocessableEntityError.new(message: message, response: response, body: body)
-      in 429
-        Anthropic::HTTP::RateLimitError.new(message: message, response: response, body: body)
-      in 500..599
-        Anthropic::HTTP::InternalServerError.new(message: message, response: response, body: body)
-      else
-        Anthropic::HTTP::APIStatusError.new(message: message, response: response, body: body)
-      end
-    end
   end
 end

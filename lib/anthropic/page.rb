@@ -53,7 +53,7 @@ module Anthropic
     # @return [nil]
     def auto_paging_each(&blk)
       unless block_given?
-        raise "A block must be given to #auto_paging_each"
+        raise ArgumentError.new("A block must be given to #auto_paging_each")
       end
       page = self
       loop do

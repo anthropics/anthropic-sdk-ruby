@@ -51,16 +51,22 @@ module Anthropic
 
     # @param data [Hash, Array, Object]
     # @param pick [Symbol, Integer, Array, nil]
+    # @param default [Object, nil]
+    # @param blk [Proc, nil]
     #
     # @return [Object, nil]
-    def self.dig(data, pick)
-      case [data, pick]
-      in [_, nil]
+    def self.dig(data, pick, default = nil, &blk)
+      case [data, pick, blk]
+      in [_, nil, nil]
         data
-      in [Hash, Symbol] | [Array, Integer]
+      in [Hash, Symbol, _] | [Array, Integer, _]
         data[pick]
-      in [Hash | Array, Array]
+      in [Hash | Array, Enumerable, _]
         data.dig(*pick)
+      in [_, _, Proc]
+        blk.call(pick)
+      in [_, _, nil]
+        default
       end
     end
 

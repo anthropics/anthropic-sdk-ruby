@@ -53,7 +53,7 @@ puts(message.content)
 
 When the library is unable to connect to the API, or if the API returns a
 non-success status code (i.e., 4xx or 5xx response), a subclass of
-`Anthropic::HTTP::Error` will be thrown:
+`Anthropic::Error` will be thrown:
 
 ```ruby
 begin
@@ -62,7 +62,7 @@ begin
     messages: [{"role" => "user", "content" => "Hello, Claude"}],
     model: "claude-3-opus-20240229"
   )
-rescue Anthropic::HTTP::Error => e
+rescue Anthropic::Error => e
   puts(e.code) # 400
 end
 ```

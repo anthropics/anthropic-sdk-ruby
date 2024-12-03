@@ -15,6 +15,7 @@ require "connection_pool"
 # Package files.
 require_relative "anthropic/base_client"
 require_relative "anthropic/base_model"
+require_relative "anthropic/errors"
 require_relative "anthropic/request_options"
 require_relative "anthropic/pooled_net_requester"
 require_relative "anthropic/util"

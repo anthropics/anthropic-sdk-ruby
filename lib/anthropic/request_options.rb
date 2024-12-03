@@ -33,11 +33,11 @@ module Anthropic
       in Anthropic::RequestOptions | Hash
         opts.to_h.each_key do |k|
           unless options.include?(k)
-            raise ArgumentError, "Request `opts` keys must be one of #{options}, got #{k.inspect}"
+            raise ArgumentError.new("Request `opts` keys must be one of #{options}, got #{k.inspect}")
           end
         end
       else
-        raise ArgumentError, "Request `opts` must be a Hash or RequestOptions, got #{opts.inspect}"
+        raise ArgumentError.new("Request `opts` must be a Hash or RequestOptions, got #{opts.inspect}")
       end
     end
 

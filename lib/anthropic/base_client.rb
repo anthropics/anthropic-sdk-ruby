@@ -6,7 +6,7 @@ module Anthropic
     MAX_REDIRECTS = 20 # from whatwg fetch spec
 
     # @!attribute requester
-    # @return [Anthropic::PooledNetRequester]
+    #   @return [Anthropic::PooledNetRequester]
     attr_accessor :requester
 
     # @param base_url [String]
@@ -65,7 +65,7 @@ module Anthropic
       in Hash
         body.each_key do |k|
           unless k.is_a?(Symbol)
-            raise ArgumentError, "Request body keys must be Symbols, got #{k.inspect}"
+            raise ArgumentError.new("Request body keys must be Symbols, got #{k.inspect}")
           end
         end
       else
@@ -129,7 +129,7 @@ module Anthropic
       unless headers.key?("x-stainless-retry-count")
         headers["x-stainless-retry-count"] = "0"
       end
-      headers.reject! { |_, v| v.nil? || v == "" }
+      headers.reject! { |_, v| v.to_s.empty? }
 
       if [:get, :head, :options].include?(method)
         body = nil
@@ -150,40 +150,23 @@ module Anthropic
     end
 
     # @param response [Net::HTTPResponse]
+    # @param suppress_error [Boolean]
     #
     # @raise [JSON::ParserError]
     # @return [Object]
-    private def parse_body(response)
+    private def parse_body(response, suppress_error: false)
       case response.content_type
       in "application/json"
-        JSON.parse(response.body, symbolize_names: true)
+        begin
+          JSON.parse(response.body, symbolize_names: true)
+        rescue JSON::ParserError => e
+          raise e unless suppress_error
+          response.body
+        end
       else
         # TODO: parsing other response types
         response.body
       end
-    end
-
-    # @param message [String]
-    # @param body [Object]
-    # @param response [Net::HTTPResponse]
-    private def make_status_error(message:, body:, response:)
-      raise NotImplementedError
-    end
-
-    # @param response [Net::HTTPResponse]
-    private def make_status_error_from_response(response)
-      err_body =
-        begin
-          parse_body(response)
-        rescue JSON::ParserError
-          response
-        end
-
-      # We include the body in the error message as well as returning it
-      # since logging error messages is a common and quick way to assess what's
-      # wrong with a response.
-      message = "Error code: #{response.code}; Response: #{response.body}"
-      make_status_error(message: message, body: err_body, response: response)
     end
 
     # @param response [Net::HTTPResponse]
@@ -248,30 +231,30 @@ module Anthropic
     #   @option options [Hash{String => String}] :headers
     #   @option options [String, nil] :body
     #
+    # @param url [URI::Generic]
     # @param status [Integer]
-    # @param location_header [URI::Generic]
+    # @param location_header [String]
     #
-    # @raise [Anthropic::HTTP::Error]
+    # @raise [Anthropic::APIError]
     # @return [Hash{Symbol => Object}]
-    private def follow_redirect(request, status:, location_header:)
-      uri = Anthropic::Util.unparse_uri(request)
+    private def follow_redirect(request, url:, status:, location_header:)
       location =
         Anthropic::Util.suppress(ArgumentError) do
-          URI.join(uri, location_header)
+          URI.join(url, location_header)
         end
 
       # TODO(ruby): these should be response errors
       unless location
-        message = "server responded with status #{status} but no valid location header"
-        raise HTTP::APIConnectionError.new(message: message, request: request)
+        message = "Server responded with status #{status} but no valid location header."
+        raise Anthropic::APIConnectionError.new(url: url, message: message)
       end
 
       request = {**request, **resolve_uri_elements(url: location)}
 
-      case [uri.scheme, location.scheme]
+      case [url.scheme, location.scheme]
       in ["https", "http"]
-        message = "tried to redirect to a insecure URL"
-        raise HTTP::APIConnectionError.new(message: message, request: request)
+        message = "Tried to redirect to a insecure URL"
+        raise Anthropic::APIConnectionError.new(url: url, message: message)
       else
         nil
       end
@@ -290,7 +273,7 @@ module Anthropic
       end
 
       # from undici
-      if Anthropic::Util.uri_origin(uri) != Anthropic::Util.uri_origin(location)
+      if Anthropic::Util.uri_origin(url) != Anthropic::Util.uri_origin(location)
         drop = %w[authorization cookie proxy-authorization host]
         request = {**request, headers: request.fetch(:headers).except(*drop)}
       end
@@ -309,7 +292,7 @@ module Anthropic
     # @param retry_count [Integer]
     # @param send_retry_header [Boolean]
     #
-    # @raise [Anthropic::HTTP::Error]
+    # @raise [Anthropic::APIError]
     # @return [Net::HTTPResponse]
     private def send_request(
       request,
@@ -319,27 +302,27 @@ module Anthropic
       retry_count:,
       send_retry_header:
     )
+      url = Anthropic::Util.unparse_uri(request)
+
       if send_retry_header
         request.fetch(:headers)["x-stainless-retry-count"] = retry_count.to_s
       end
 
       begin
         response = @requester.execute(request, timeout: timeout)
-        status = response.code.to_i
-      rescue Timeout::Error, Net::HTTPBadResponse => e
+        status = Integer(response.code)
+      rescue Anthropic::APIConnectionError => e
         status = e
       end
 
       case status
       in ..299
         response
+      in 300..399 if redirect_count >= MAX_REDIRECTS
+        message = "Failed to complete the request within #{MAX_REDIRECTS} redirects."
+        raise Anthropic::APIConnectionError.new(url: url, message: message)
       in 300..399
-        if redirect_count >= MAX_REDIRECTS
-          message = "failed to complete the request within #{MAX_REDIRECTS} redirects"
-          raise HTTP::APIConnectionError.new(message: message, request: request)
-        end
-
-        request = follow_redirect(request, status: status, location_header: response["location"])
+        request = follow_redirect(request, url: url, status: status, location_header: response["location"])
         send_request(
           request,
           max_retries: max_retries,
@@ -348,21 +331,19 @@ module Anthropic
           retry_count: retry_count,
           send_retry_header: send_retry_header
         )
-      in 400.. | Timeout::Error | Net::HTTPBadResponse
-        if response && !should_retry?(response)
-          raise make_status_error_from_response(response)
-        end
+      in Anthropic::APIConnectionError if retry_count >= max_retries
+        raise status
+      in (400..) if retry_count >= max_retries || (response && !should_retry?(response))
+        body = parse_body(response, suppress_error: true)
 
-        if retry_count >= max_retries
-          message = "failed to complete the request within #{max_retries} retries"
-          case status
-          in Timeout::Error
-            raise HTTP::APITimeoutError.new(message: message, request: request)
-          else
-            raise HTTP::InternalServerError.new(message: message, response: response, body: response.body)
-          end
-        end
-
+        raise Anthropic::APIStatusError.for(
+          url: url,
+          status: status,
+          body: body,
+          request: nil,
+          response: response
+        )
+      in 400.. | Anthropic::APIConnectionError
         delay = retry_delay(response, retry_count: retry_count)
         if response&.key?("x-stainless-mock-sleep")
           request.fetch(:headers)["x-stainless-mock-slept"] = delay
@@ -384,6 +365,7 @@ module Anthropic
     # @param req [Hash{Symbol => Object}]
     # @param opts [Anthropic::RequestOptions, Hash{Symbol => Object}]
     #
+    # @raise [Anthropic::APIError]
     # @return [Object]
     private def parse_response(req, opts, response)
       parsed = parse_body(response)
@@ -407,7 +389,7 @@ module Anthropic
     # @param req [Hash{Symbol => Object}]
     # @param opts [Anthropic::RequestOptions, Hash{Symbol => Object}]
     #
-    # @raise [Anthropic::HTTP::Error]
+    # @raise [Anthropic::APIError]
     # @return [Object]
     def request(req, opts)
       Anthropic::RequestOptions.validate!(opts)
@@ -431,84 +413,6 @@ module Anthropic
     def inspect
       base_url = Anthropic::Util.unparse_uri(scheme: @scheme, host: @host, port: @port, path: @base_path)
       "#<#{self.class.name}:0x#{object_id.to_s(16)} base_url=#{base_url} max_retries=#{@max_retries} timeout=#{@timeout}>"
-    end
-  end
-
-  class Error < StandardError
-  end
-
-  module HTTP
-    class Error < Anthropic::Error
-    end
-
-    class ResponseError < Error
-      # @!attribute [r] response
-      #   @return [Net::HTTPResponse]
-      attr_reader :response
-
-      # @!attribute [r] body
-      #   @return [Object]
-      attr_reader :body
-
-      # @!attribute [r] code
-      #   @return [Integer]
-      attr_reader :code
-
-      # @param message [String]
-      # @param response [Net::HTTPResponse]
-      # @param body [Object]
-      def initialize(message:, response:, body:)
-        super(message)
-        @response = response
-        @body = body
-        @code = response.code.to_i
-      end
-    end
-
-    class RequestError < Error
-      # @!attribute [r] request
-      #   @return [Hash{Symbol => Object}]
-      attr_reader :request
-
-      # @param message [String]
-      # @param request [Hash{Symbol => Object}]
-      def initialize(message:, request:)
-        super(message)
-        @request = request
-      end
-    end
-
-    class BadRequestError < ResponseError
-    end
-
-    class AuthenticationError < ResponseError
-    end
-
-    class PermissionDeniedError < ResponseError
-    end
-
-    class NotFoundError < ResponseError
-    end
-
-    class ConflictError < ResponseError
-    end
-
-    class UnprocessableEntityError < ResponseError
-    end
-
-    class RateLimitError < ResponseError
-    end
-
-    class InternalServerError < ResponseError
-    end
-
-    class APIStatusError < ResponseError
-    end
-
-    class APIConnectionError < RequestError
-    end
-
-    class APITimeoutError < RequestError
     end
   end
 end

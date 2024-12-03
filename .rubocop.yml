@@ -68,6 +68,10 @@ Style/ClassAndModuleChildren:
 Style/Lambda:
   Enabled: false
 
+# Reasonable to use brackets for errors with long messages.
+Style/RaiseArgs:
+  Enabled: false
+
 # Set a reasonable line length; rely on other cops to correct long lines.
 Layout/LineLength:
   Max: 110
