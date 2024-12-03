@@ -123,7 +123,7 @@ module Anthropic
       in true | false | nil
         coerced
       else
-        raise ArgumentError, "Unable to coerce #{input.inspect} into boolean value"
+        raise ArgumentError.new("Unable to coerce #{input.inspect} into boolean value")
       end
     end
 
