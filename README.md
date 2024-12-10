@@ -43,7 +43,7 @@ anthropic = Anthropic::Client.new(
 message = anthropic.messages.create(
   max_tokens: 1024,
   messages: [{"role" => "user", "content" => "Hello, Claude"}],
-  model: "claude-3-opus-20240229"
+  model: "claude-3-5-sonnet-latest"
 )
 
 puts(message.content)
@@ -60,7 +60,7 @@ begin
   anthropic.messages.create(
     max_tokens: 1024,
     messages: [{"role" => "user", "content" => "Hello, Claude"}],
-    model: "claude-3-opus-20240229"
+    model: "claude-3-5-sonnet-latest"
   )
 rescue Anthropic::Error => e
   puts(e.code) # 400
@@ -102,7 +102,7 @@ anthropic = Anthropic::Client.new(
 anthropic.messages.create(
   max_tokens: 1024,
   messages: [{"role" => "user", "content" => "Hello, Claude"}],
-  model: "claude-3-opus-20240229",
+  model: "claude-3-5-sonnet-latest",
   max_retries: 5
 )
 ```
@@ -125,7 +125,7 @@ anthropic = Anthropic::Client.new(
 anthropic.messages.create(
   max_tokens: 1024,
   messages: [{"role" => "user", "content" => "Hello, Claude"}],
-  model: "claude-3-opus-20240229",
+  model: "claude-3-5-sonnet-latest",
   timeout: 5
 )
 ```
