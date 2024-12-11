@@ -284,7 +284,7 @@ class AnthropicTest < Minitest::Test
         extra_headers: {}
       )
     end
-    assert_equal(requester.attempts[1][:path], "/redirected")
+    assert_equal(requester.attempts[1][:url].path, "/redirected")
     assert_equal(requester.attempts[1][:method], requester.attempts[0][:method])
     assert_equal(requester.attempts[1][:body], requester.attempts[0][:body])
     assert_equal(
@@ -307,7 +307,7 @@ class AnthropicTest < Minitest::Test
         extra_headers: {}
       )
     end
-    assert_equal(requester.attempts[1][:path], "/redirected")
+    assert_equal(requester.attempts[1][:url].path, "/redirected")
     assert_equal(requester.attempts[1][:method], :get)
     assert_nil(requester.attempts[1][:body])
     assert_nil(requester.attempts[1][:headers]["Content-Type"])

@@ -90,11 +90,10 @@ class Anthropic::Test::UtilTest < Minitest::Test
       https://example.com/
       https://example.com:443/example?e1=e1&e2=e2&e=
     ].each do |url|
-      uri = URI.parse(url)
-      parsed = Anthropic::Util.parse_uri(uri)
-      unparsed = Anthropic::Util.unparse_uri(parsed)
+      parsed = Anthropic::Util.parse_uri(url)
+      unparsed = Anthropic::Util.unparse_uri(parsed).to_s
 
-      assert_equal(unparsed, uri)
+      assert_equal(url, unparsed)
       assert_equal(parsed, Anthropic::Util.parse_uri(unparsed))
     end
   end

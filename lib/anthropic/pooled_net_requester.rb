@@ -2,38 +2,38 @@
 
 module Anthropic
   # @!visibility private
+  #
   class PooledNetRequester
     def initialize
       @mutex = Mutex.new
       @pools = {}
     end
 
-    # @param req [Hash{Symbol => Object}]
+    # @param url [URL::Generic]
     # @param timeout [Float]
     #
     # @return [ConnectionPool]
-    private def get_pool(req, timeout:)
-      scheme, hostname = req.fetch_values(:scheme, :host)
-      scheme = scheme.to_sym
-      port = req.fetch(:port) do
-        case scheme
-        in :http
+    private def get_pool(url, timeout:)
+      port =
+        case [url.port, url.scheme]
+        in [Integer, _]
+          url.port
+        in [nil, "http" | "ws"]
           Net::HTTP.http_default_port
-        else
+        in [nil, "https" | "wss"]
           Net::HTTP.https_default_port
         end
-      end
 
       @mutex.synchronize do
-        @pools[hostname] ||= ConnectionPool.new do
-          conn = Net::HTTP.new(hostname, port)
-          conn.use_ssl = scheme == :https
+        @pools[url.host] ||= ConnectionPool.new do
+          conn = Net::HTTP.new(url.host, port)
+          conn.use_ssl = %w[https wss].include?(url.scheme)
           conn.max_retries = 0
           conn.open_timeout = timeout
           conn.start
           conn
         end
-        @pools[hostname]
+        @pools[url.host]
       end
     end
 
@@ -42,11 +42,12 @@ module Anthropic
     #
     # @return [Net::HTTPResponse]
     def execute(req, timeout:)
-      method, headers, body = req.fetch_values(:method, :headers, :body)
+      method, url, headers, body = req.fetch_values(:method, :url, :headers, :body)
       content_type = headers["content-type"]
 
-      get_pool(req, timeout: timeout).with do |conn|
-        url = Anthropic::Util.unparse_uri(req, absolute: false)
+      get_pool(url, timeout: timeout).with do |conn|
+        conn.read_timeout = timeout
+        conn.write_timeout = timeout
 
         request = Net::HTTPGenericRequest.new(
           method.to_s.upcase,
@@ -72,8 +73,6 @@ module Anthropic
           request[k] = v
         end
 
-        conn.read_timeout = timeout
-        conn.write_timeout = timeout
         conn.request(request)
       rescue Timeout::Error
         raise Anthropic::APITimeoutError.new(url: url)
