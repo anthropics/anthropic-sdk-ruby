@@ -14,7 +14,9 @@ class Anthropic::Test::Resources::CompletionsTest < Minitest::Test
 
   def test_create_required_params
     response = @anthropic.completions.create(
-      {max_tokens_to_sample: 256, model: "string", prompt: "\n\nHuman: Hello, world!\n\nAssistant:"}
+      max_tokens_to_sample: 256,
+      model: "string",
+      prompt: "\n\nHuman: Hello, world!\n\nAssistant:"
     )
     assert_kind_of(Anthropic::Models::Completion, response)
   end

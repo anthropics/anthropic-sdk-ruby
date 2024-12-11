@@ -8,33 +8,37 @@ class Anthropic::Test::UtilTest < Minitest::Test
   end
 
   def test_right_map
-    assert_equal(Anthropic::Util.deep_merge(nil, {a: 1}), {a: 1})
+    assert_equal(
+      {a: 1},
+      Anthropic::Util.deep_merge(nil, {a: 1})
+    )
   end
 
   def test_disjoint_maps
     assert_equal(
-      Anthropic::Util.deep_merge({b: 2}, {a: 1}), {a: 1, b: 2}
+      {a: 1, b: 2},
+      Anthropic::Util.deep_merge({b: 2}, {a: 1})
     )
   end
 
   def test_overlapping_maps
     assert_equal(
-      Anthropic::Util.deep_merge({b: 2, c: 3}, {a: 1, c: 4}),
-      {a: 1, b: 2, c: 4}
+      {a: 1, b: 2, c: 4},
+      Anthropic::Util.deep_merge({b: 2, c: 3}, {a: 1, c: 4})
     )
   end
 
   def test_nested
     assert_equal(
-      Anthropic::Util.deep_merge({b: {b2: 1}}, {b: {b2: 2}}),
-      {b: {b2: 2}}
+      {b: {b2: 2}},
+      Anthropic::Util.deep_merge({b: {b2: 1}}, {b: {b2: 2}})
     )
   end
 
   def test_nested_left_map
     assert_equal(
-      Anthropic::Util.deep_merge({b: {b2: 1}}, {b: 6}),
-      {b: 6}
+      {b: 6},
+      Anthropic::Util.deep_merge({b: {b2: 1}}, {b: 6})
     )
   end
 

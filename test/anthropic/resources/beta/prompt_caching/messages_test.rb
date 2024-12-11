@@ -14,11 +14,9 @@ class Anthropic::Test::Resources::Beta::PromptCaching::MessagesTest < Minitest::
 
   def test_create_required_params
     response = @anthropic.beta.prompt_caching.messages.create(
-      {
-        max_tokens: 1024,
-        messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022"
-      }
+      max_tokens: 1024,
+      messages: [{"content" => "Hello, world", "role" => "user"}],
+      model: "claude-3-5-sonnet-20241022"
     )
     assert_kind_of(Anthropic::Models::Beta::PromptCaching::PromptCachingBetaMessage, response)
   end

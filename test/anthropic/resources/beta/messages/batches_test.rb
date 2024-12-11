@@ -14,18 +14,16 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Minitest::Test
 
   def test_create_required_params
     response = @anthropic.beta.messages.batches.create(
-      {
-        requests: [
-          {
-            "custom_id" => "my-custom-id-1",
-            "params" => {
-              "max_tokens" => 1024,
-              "messages" => [{"content" => "Hello, world", "role" => "user"}],
-              "model" => "claude-3-5-sonnet-20241022"
-            }
+      requests: [
+        {
+          "custom_id" => "my-custom-id-1",
+          "params" => {
+            "max_tokens" => 1024,
+            "messages" => [{"content" => "Hello, world", "role" => "user"}],
+            "model" => "claude-3-5-sonnet-20241022"
           }
-        ]
-      }
+        }
+      ]
     )
     assert_kind_of(Anthropic::Models::Beta::Messages::BetaMessageBatch, response)
   end
