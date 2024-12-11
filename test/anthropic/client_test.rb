@@ -72,11 +72,9 @@ class AnthropicTest < Minitest::Test
     anthropic.requester = requester
     assert_raises(Anthropic::InternalServerError) do
       anthropic.messages.create(
-        {
-          max_tokens: 1024,
-          messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20241022"
-        }
+        max_tokens: 1024,
+        messages: [{"content" => "Hello, world", "role" => "user"}],
+        model: "claude-3-5-sonnet-20241022"
       )
     end
     assert_equal(3, requester.attempts.length)
@@ -92,11 +90,9 @@ class AnthropicTest < Minitest::Test
     anthropic.requester = requester
     assert_raises(Anthropic::InternalServerError) do
       anthropic.messages.create(
-        {
-          max_tokens: 1024,
-          messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20241022"
-        }
+        max_tokens: 1024,
+        messages: [{"content" => "Hello, world", "role" => "user"}],
+        model: "claude-3-5-sonnet-20241022"
       )
     end
     assert_equal(4, requester.attempts.length)
@@ -150,15 +146,13 @@ class AnthropicTest < Minitest::Test
     anthropic.requester = requester
     assert_raises(Anthropic::InternalServerError) do
       anthropic.messages.create(
-        {
-          max_tokens: 1024,
-          messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20241022"
-        }
+        max_tokens: 1024,
+        messages: [{"content" => "Hello, world", "role" => "user"}],
+        model: "claude-3-5-sonnet-20241022"
       )
     end
     assert_equal(2, requester.attempts.length)
-    assert_equal(requester.attempts.last[:headers]["x-stainless-mock-slept"], 1.3)
+    assert_equal(1.3, requester.attempts.last[:headers]["x-stainless-mock-slept"])
   end
 
   def test_client_retry_after_date
@@ -179,15 +173,13 @@ class AnthropicTest < Minitest::Test
     anthropic.requester = requester
     assert_raises(Anthropic::InternalServerError) do
       anthropic.messages.create(
-        {
-          max_tokens: 1024,
-          messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20241022"
-        }
+        max_tokens: 1024,
+        messages: [{"content" => "Hello, world", "role" => "user"}],
+        model: "claude-3-5-sonnet-20241022"
       )
     end
     assert_equal(2, requester.attempts.length)
-    assert_equal(requester.attempts.last[:headers]["x-stainless-mock-slept"], 2)
+    assert_equal(2, requester.attempts.last[:headers]["x-stainless-mock-slept"])
   end
 
   def test_client_retry_after_ms
@@ -200,15 +192,13 @@ class AnthropicTest < Minitest::Test
     anthropic.requester = requester
     assert_raises(Anthropic::InternalServerError) do
       anthropic.messages.create(
-        {
-          max_tokens: 1024,
-          messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20241022"
-        }
+        max_tokens: 1024,
+        messages: [{"content" => "Hello, world", "role" => "user"}],
+        model: "claude-3-5-sonnet-20241022"
       )
     end
     assert_equal(2, requester.attempts.length)
-    assert_equal(requester.attempts.last[:headers]["x-stainless-mock-slept"], 1.3)
+    assert_equal(1.3, requester.attempts.last[:headers]["x-stainless-mock-slept"])
   end
 
   def test_retry_count_header
@@ -218,11 +208,9 @@ class AnthropicTest < Minitest::Test
 
     assert_raises(Anthropic::InternalServerError) do
       anthropic.messages.create(
-        {
-          max_tokens: 1024,
-          messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20241022"
-        }
+        max_tokens: 1024,
+        messages: [{"content" => "Hello, world", "role" => "user"}],
+        model: "claude-3-5-sonnet-20241022"
       )
     end
 
@@ -284,12 +272,12 @@ class AnthropicTest < Minitest::Test
         extra_headers: {}
       )
     end
-    assert_equal(requester.attempts[1][:url].path, "/redirected")
-    assert_equal(requester.attempts[1][:method], requester.attempts[0][:method])
-    assert_equal(requester.attempts[1][:body], requester.attempts[0][:body])
+    assert_equal("/redirected", requester.attempts[1][:url].path)
+    assert_equal(requester.attempts[0][:method], requester.attempts[1][:method])
+    assert_equal(requester.attempts[0][:body], requester.attempts[1][:body])
     assert_equal(
-      requester.attempts[1][:headers]["content-type"],
-      requester.attempts[0][:headers]["content-type"]
+      requester.attempts[0][:headers]["content-type"],
+      requester.attempts[1][:headers]["content-type"]
     )
   end
 
@@ -307,8 +295,8 @@ class AnthropicTest < Minitest::Test
         extra_headers: {}
       )
     end
-    assert_equal(requester.attempts[1][:url].path, "/redirected")
-    assert_equal(requester.attempts[1][:method], :get)
+    assert_equal("/redirected", requester.attempts[1][:url].path)
+    assert_equal(:get, requester.attempts[1][:method])
     assert_nil(requester.attempts[1][:body])
     assert_nil(requester.attempts[1][:headers]["Content-Type"])
   end
@@ -328,8 +316,8 @@ class AnthropicTest < Minitest::Test
       )
     end
     assert_equal(
-      requester.attempts[1][:headers]["authorization"],
-      requester.attempts[0][:headers]["authorization"]
+      requester.attempts[0][:headers]["authorization"],
+      requester.attempts[1][:headers]["authorization"]
     )
   end
 
@@ -355,11 +343,9 @@ class AnthropicTest < Minitest::Test
     requester = MockRequester.new(200, {}, {"x-stainless-mock-sleep" => "true"})
     anthropic.requester = requester
     anthropic.messages.create(
-      {
-        max_tokens: 1024,
-        messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022"
-      }
+      max_tokens: 1024,
+      messages: [{"content" => "Hello, world", "role" => "user"}],
+      model: "claude-3-5-sonnet-20241022"
     )
     headers = requester.attempts[0][:headers]
     refute_empty(headers["x-stainless-lang"])
