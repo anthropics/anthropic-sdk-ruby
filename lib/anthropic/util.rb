@@ -11,12 +11,24 @@ module Anthropic
 
     # Recursively merge one hash with another.
     # If the values at a given key are not both hashes, just take the new value.
-    # @param left [Hash, Array, Symbol, String, Integer, Float, nil, Object]
-    # @param right [Hash, Array, Symbol, String, Integer, Float, nil, Object]
+    #
+    # @param value [Hash, Array, Symbol, String, Integer, Float, nil, Object]
+    # @param values [Array<Hash, Array, Symbol, String, Integer, Float, nil, Object>]
     # @param concat [true, false] whether to merge sequences by concatenation
     #
     # @return [Object]
-    def self.deep_merge(left, right, concat: false)
+    def self.deep_merge(value, *values, concat: false)
+      values.reduce(value) do |acc, val|
+        _deep_merge(acc, val, concat: concat)
+      end
+    end
+
+    # @param left [Hash, Array, Symbol, String, Integer, Float, nil, Object]
+    # @param right [Hash, Array, Symbol, String, Integer, Float, nil, Object]
+    # @param concat [true, false]
+    #
+    # @return [Object]
+    private_class_method def self._deep_merge(left, right, concat: false)
       right_cleaned =
         case right
         in Hash
@@ -30,7 +42,7 @@ module Anthropic
         left
           .reject { |key, _| right[key] == OMIT }
           .merge(right_cleaned) do |_, old_val, new_val|
-            deep_merge(old_val, new_val, concat: concat)
+            _deep_merge(old_val, new_val, concat: concat)
           end
       in [Array, Array, true]
         left.concat(right_cleaned)
@@ -40,13 +52,14 @@ module Anthropic
     end
 
     # @param exceptions [Array<Exception>]
+    # @param sentinel [Object, nil]
     # @param blk [Proc]
     #
     # @return [Object, nil]
-    def self.suppress(*exceptions, &blk)
+    def self.suppress(*exceptions, sentinel: nil, &blk)
       blk.call
     rescue *exceptions
-      nil
+      sentinel
     end
 
     # @param data [Hash, Array, Object]
@@ -127,24 +140,26 @@ module Anthropic
       end
     end
 
-    # @param url [URI::Generic, String] -
+    # @param query [Hash{String => String | Array<String>}]
+    #
+    # @return [String, nil]
+    def self.encode_query(query)
+      query.empty? ? nil : URI.encode_www_form(query)
+    end
+
+    # @param query [String, nil]
+    #
+    # @return [Hash{String => Array<String>}]
+    def self.decode_query(query)
+      CGI.parse(query.to_s)
+    end
+
+    # @param url [String]
     #
     # @return [Hash{Symbol => Object}]
     def self.parse_uri(url)
-      uri =
-        case url
-        in URI::Generic
-          url
-        in String
-          URI.parse(url)
-        end
-      {
-        scheme: uri.scheme,
-        host: uri.host,
-        port: uri.port,
-        path: uri.path,
-        query: CGI.parse(uri.query || "")
-      }
+      parsed = URI::Generic.component.zip(URI.split(url)).to_h
+      parsed.merge(query: decode_query(parsed.fetch(:query)))
     end
 
     # @param parsed [Hash{Symbol => String}] -
@@ -154,45 +169,16 @@ module Anthropic
     #   @option parsed [String] :path
     #   @option parsed [Hash{String => Array<String>}] :query
     #
-    # @param absolute [Boolean]
-    #
     # @return [URI::Generic]
-    def self.unparse_uri(parsed, absolute: true)
-      scheme, host, port = parsed.fetch_values(:scheme, :host, :port)
-      path, query = parsed.fetch_values(:path, :query)
-      uri = String.new
-
-      if absolute
-        uri << "#{scheme}://#{host}"
-        case [scheme, port]
-        in [_, nil] | ["http", 80] | ["https", 443]
-          nil
-        else
-          uri << ":#{port}"
-        end
-      end
-
-      qs = query.length.positive? ? "?#{URI.encode_www_form(query)}" : ""
-      uri << "#{path}#{qs}"
-      URI.parse(uri)
+    def self.unparse_uri(parsed)
+      URI::Generic.build(**parsed, query: encode_query(parsed.fetch(:query)))
     end
 
     # @param uri [URI::Generic]
     #
     # @return [String]
     def self.uri_origin(uri)
-      if uri.respond_to?(:origin)
-        uri.origin
-      else
-        "#{uri.scheme}://#{uri.host}#{uri.port == uri.default_port ? '' : ":#{uri.port}"}"
-      end
-    end
-
-    # @param path [String]
-    #
-    # @return [String]
-    def self.normalize_path(path)
-      path.gsub(%r{/+}, "/")
+      "#{uri.scheme}://#{uri.host}#{uri.port == uri.default_port ? '' : ":#{uri.port}"}"
     end
 
     # @param headers [Array<Hash{String => String, Integer, nil}>]

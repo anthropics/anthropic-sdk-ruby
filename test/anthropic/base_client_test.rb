@@ -7,33 +7,21 @@ class Anthropic::Test::BaseClientTest < Minitest::Test
 
   def test_from_uri_string
     assert_equal(
-      {
-        scheme: "h",
-        host: "a.b",
-        port: nil,
-        path: "/c",
-        query: {"d" => ["e"]}
-      },
+      URI.parse("h://a.b/c?d=e"),
       Anthropic::BaseClient.new(
         base_url: "h://nope/ignored"
-      ).resolve_uri_elements(
-        url: "h://a.b/c?d=e"
+      ).resolve_url(
+        Anthropic::Util.parse_uri("h://a.b/c?d=e")
       )
     )
   end
 
   def test_extra_query
     assert_equal(
-      {
-        scheme: "h",
-        host: "a.b",
-        port: nil,
-        path: "/c",
-        query: {"d" => ["e"], "f" => ["g"]}
-      },
+      URI.parse("h://a.b/c?d=e&f=g"),
       Anthropic::BaseClient.new(
         base_url: "h://nope"
-      ).resolve_uri_elements(
+      ).resolve_url(
         host: "a.b",
         path: "/c",
         query: {"d" => ["e"]},
@@ -45,19 +33,22 @@ class Anthropic::Test::BaseClientTest < Minitest::Test
   end
 
   def test_path_merged
-    assert_equal(
-      {
-        scheme: "h",
-        host: "a.b",
-        port: nil,
-        path: "/c/c2",
-        query: {}
-      },
-      Anthropic::BaseClient.new(
-        base_url: "h://a.b/c"
-      ).resolve_uri_elements(
-        path: "c2"
+    base_url = "h://a.b/c?d=e"
+    cases = {
+      "c2" => URI.parse("h://a.b/c/c2"),
+      "/c2?f=g" => URI.parse("h://a.b/c2?f=g"),
+      "/c?f=g" => URI.parse("h://a.b/c?d=e&f=g")
+    }
+
+    cases.each do |path, expected|
+      assert_equal(
+        expected,
+        Anthropic::BaseClient.new(
+          base_url: base_url
+        ).resolve_url(
+          path: path
+        )
       )
-    )
+    end
   end
 end
