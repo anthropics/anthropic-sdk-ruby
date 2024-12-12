@@ -23,7 +23,7 @@ module Anthropic
     # @param req [Hash{Symbol => Object}]
     # @param opts [Hash{Symbol => Object}]
     def initialize(client:, model:, req:, opts:, response:, raw_data:)
-      @data = (raw_data[:data] || []).map { |e| model.convert(e) }
+      @data = raw_data[:data]&.map { |row| model.coerce(row) }
       @has_more = raw_data[:has_more]
       @first_id = raw_data[:first_id]
       @last_id = raw_data[:last_id]

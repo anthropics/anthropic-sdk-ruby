@@ -155,6 +155,20 @@ module Anthropic
     end
 
     # @param url [String]
+    # @param url [URI::Generic, String] -
+    # @param input [Object]
+    #
+    # @return [Hash, Object]
+    def self.coerce_hash(input)
+      case input
+      in NilClass | Array | Set | Enumerator
+        input
+      else
+        input.respond_to?(:to_h) ? input.to_h : input
+      end
+    end
+
+    # @param url [URI::Generic, String] -
     #
     # @return [Hash{Symbol => Object}]
     def self.parse_uri(url)
