@@ -21,10 +21,10 @@ RuboCop::RakeTask.new(:format) do |t|
   t.options = %w[--fail-level F --autocorrect --format offenses]
 end
 
-task(:build) do
+multitask(:build) do
   sh(*%w[gem build -- anthropic.gemspec])
 end
 
-task(release: [:build]) do
+multitask(release: [:build]) do
   sh(*%w[gem push], *FileList["anthropic-*.gem"])
 end
