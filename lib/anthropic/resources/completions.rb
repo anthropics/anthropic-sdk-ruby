@@ -22,7 +22,7 @@ module Anthropic
       #
       #     Note that our models may stop _before_ reaching this maximum. This parameter
       #     only specifies the absolute maximum number of tokens to generate.
-      #   @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent8] :model The model that will complete your prompt.\n\nSee
+      #   @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent0] :model The model that will complete your prompt.\n\nSee
       #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #     details and options.
       #   @option params [String] :prompt The prompt that you want Claude to complete.
@@ -76,11 +76,12 @@ module Anthropic
       #
       # @return [Anthropic::Models::Completion]
       def create(params = {}, opts = {})
+        parsed = Anthropic::Models::CompletionCreateParams.dump(params)
         req = {
           method: :post,
           path: "/v1/complete",
           headers: {"Content-Type" => "application/json"},
-          body: params,
+          body: parsed,
           model: Anthropic::Models::Completion
         }
         @client.request(req, opts)

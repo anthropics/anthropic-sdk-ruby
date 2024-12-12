@@ -357,7 +357,7 @@ module Anthropic
       in [Class, _]
         page.new(client: self, model: model, req: req, opts: opts, response: response, raw_data: raw_data)
       in [nil, _] unless model.nil?
-        Anthropic::Converter.convert(model, raw_data)
+        Anthropic::Converter.coerce(model, raw_data)
       in [nil, nil]
         raw_data
       end
