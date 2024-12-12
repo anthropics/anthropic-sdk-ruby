@@ -11,3 +11,7 @@ require_relative "test_namespaces"
 
 require "minitest"
 require "stringio"
+
+class Minitest::Test
+  parallelize_me!
+end

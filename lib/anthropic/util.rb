@@ -159,7 +159,7 @@ module Anthropic
     # @return [Hash{Symbol => Object}]
     def self.parse_uri(url)
       parsed = URI::Generic.component.zip(URI.split(url)).to_h
-      parsed.merge(query: decode_query(parsed.fetch(:query)))
+      {**parsed, query: decode_query(parsed.fetch(:query))}
     end
 
     # @param parsed [Hash{Symbol => String}] -

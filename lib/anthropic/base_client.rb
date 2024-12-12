@@ -196,17 +196,8 @@ module Anthropic
       retry_header = response["retry-after"]
       return span if (span = Float(retry_header, exception: false))
 
-      # TODO(ruby) - this should be removed when we support middlewares
-      now =
-        case (mock = response["x-stainless-mock-sleep-base"])
-        in String
-          Time.httpdate(mock)
-        else
-          Time.now
-        end
-
       span = retry_header && Anthropic::Util.suppress(ArgumentError) do
-        Time.httpdate(retry_header) - now
+        Time.httpdate(retry_header) - Time.now
       end
       return span if span
 
@@ -227,6 +218,7 @@ module Anthropic
     # @raise [Anthropic::APIError]
     # @return [Hash{Symbol => Object}]
     private def follow_redirect(request, url:, status:, location_header:)
+      method, headers = request.fetch_values(:method, :headers)
       location =
         Anthropic::Util.suppress(ArgumentError) do
           URI.join(url, location_header)
@@ -248,13 +240,13 @@ module Anthropic
       end
 
       # from whatwg fetch spec
-      case [status, (method = request.fetch(:method))]
+      case [status, method]
       in [301 | 302, :post] | [303, _]
         drop = %w[content-encoding content-language content-length content-location content-type]
         request = {
           **request,
           method: method == :head ? :head : :get,
-          headers: request.fetch(:headers).except(*drop),
+          headers: headers.except(*drop),
           body: nil
         }
       else
@@ -290,10 +282,10 @@ module Anthropic
       retry_count:,
       send_retry_header:
     )
-      url = request.fetch(:url)
+      url, headers = request.fetch_values(:url, :headers)
 
       if send_retry_header
-        request.fetch(:headers)["x-stainless-retry-count"] = retry_count.to_s
+        headers["x-stainless-retry-count"] = retry_count.to_s
       end
 
       begin
@@ -333,8 +325,9 @@ module Anthropic
         )
       in 400.. | Anthropic::APIConnectionError
         delay = retry_delay(response, retry_count: retry_count)
+        # TODO: remove special testing-only header
         if response&.key?("x-stainless-mock-sleep")
-          request.fetch(:headers)["x-stainless-mock-slept"] = delay
+          headers["x-stainless-mock-slept"] = delay
         else
           sleep(delay)
         end

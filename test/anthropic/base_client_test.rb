@@ -3,8 +3,6 @@
 require_relative "test_helper"
 
 class Anthropic::Test::BaseClientTest < Minitest::Test
-  parallelize_me!
-
   def test_from_uri_string
     assert_equal(
       URI.parse("h://a.b/c?d=e"),
