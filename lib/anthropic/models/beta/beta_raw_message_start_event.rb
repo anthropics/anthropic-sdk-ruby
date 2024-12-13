@@ -4,11 +4,11 @@ module Anthropic
   module Models
     module Beta
       class BetaRawMessageStartEvent < Anthropic::BaseModel
-        # @!attribute [rw] message
+        # @!attribute message
         #   @return [Anthropic::Models::Beta::BetaMessage]
         required :message, -> { Anthropic::Models::Beta::BetaMessage }
 
-        # @!attribute [rw] type
+        # @!attribute type
         #   @return [Symbol, Anthropic::Models::Beta::BetaRawMessageStartEvent::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaRawMessageStartEvent::Type }
 

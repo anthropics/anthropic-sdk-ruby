@@ -5,11 +5,11 @@ module Anthropic
     module Beta
       module PromptCaching
         class PromptCachingBetaMessageParam < Anthropic::BaseModel
-          # @!attribute [rw] content
+          # @!attribute content
           #   @return [Array<Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaTextBlockParam, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaToolResultBlockParam, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaToolUseBlockParam>, String]
           required :content, Anthropic::Unknown
 
-          # @!attribute [rw] role
+          # @!attribute role
           #   @return [Symbol, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaMessageParam::Role]
           required :role,
                    enum: -> {

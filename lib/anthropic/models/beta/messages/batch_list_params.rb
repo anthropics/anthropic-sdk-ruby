@@ -5,24 +5,24 @@ module Anthropic
     module Beta
       module Messages
         class BatchListParams < Anthropic::BaseModel
-          # @!attribute [rw] after_id
+          # @!attribute after_id
           #   ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
           #   @return [String]
           optional :after_id, String
 
-          # @!attribute [rw] before_id
+          # @!attribute before_id
           #   ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
           #   @return [String]
           optional :before_id, String
 
-          # @!attribute [rw] limit
+          # @!attribute limit
           #   Number of items to return per page.
           #
           # Defaults to `20`. Ranges from `1` to `100`.
           #   @return [Integer]
           optional :limit, Integer
 
-          # @!attribute [rw] betas
+          # @!attribute betas
           #   Optional header to specify the beta version(s) you want to use.
           #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent9>]
           optional :betas, Anthropic::ArrayOf.new(Anthropic::Unknown), api_name: :"anthropic-beta"

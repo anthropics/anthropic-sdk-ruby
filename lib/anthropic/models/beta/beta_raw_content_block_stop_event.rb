@@ -4,11 +4,11 @@ module Anthropic
   module Models
     module Beta
       class BetaRawContentBlockStopEvent < Anthropic::BaseModel
-        # @!attribute [rw] index
+        # @!attribute index
         #   @return [Integer]
         required :index, Integer
 
-        # @!attribute [rw] type
+        # @!attribute type
         #   @return [Symbol, Anthropic::Models::Beta::BetaRawContentBlockStopEvent::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaRawContentBlockStopEvent::Type }
 

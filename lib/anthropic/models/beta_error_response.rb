@@ -3,11 +3,11 @@
 module Anthropic
   module Models
     class BetaErrorResponse < Anthropic::BaseModel
-      # @!attribute [rw] error
+      # @!attribute error
       #   @return [Anthropic::Models::BetaAPIError, Anthropic::Models::BetaAuthenticationError, Anthropic::Models::BetaInvalidRequestError, Anthropic::Models::BetaNotFoundError, Anthropic::Models::BetaOverloadedError, Anthropic::Models::BetaPermissionError, Anthropic::Models::BetaRateLimitError]
       required :error, Anthropic::Unknown
 
-      # @!attribute [rw] type
+      # @!attribute type
       #   @return [Symbol, Anthropic::Models::BetaErrorResponse::Type]
       required :type, enum: -> { Anthropic::Models::BetaErrorResponse::Type }
 

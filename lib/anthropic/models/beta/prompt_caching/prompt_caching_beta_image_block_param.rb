@@ -5,36 +5,36 @@ module Anthropic
     module Beta
       module PromptCaching
         class PromptCachingBetaImageBlockParam < Anthropic::BaseModel
-          # @!attribute [rw] source
+          # @!attribute source
           #   @return [Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam::Source]
           required :source,
                    -> {
                      Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam::Source
                    }
 
-          # @!attribute [rw] type
+          # @!attribute type
           #   @return [Symbol, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam::Type]
           required :type,
                    enum: -> { Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam::Type }
 
-          # @!attribute [rw] cache_control
+          # @!attribute cache_control
           #   @return [Anthropic::Models::Beta::PromptCaching::PromptCachingBetaCacheControlEphemeral]
           optional :cache_control,
                    -> { Anthropic::Models::Beta::PromptCaching::PromptCachingBetaCacheControlEphemeral }
 
           class Source < Anthropic::BaseModel
-            # @!attribute [rw] data
+            # @!attribute data
             #   @return [String]
             required :data, String
 
-            # @!attribute [rw] media_type
+            # @!attribute media_type
             #   @return [Symbol, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam::Source::MediaType]
             required :media_type,
                      enum: -> {
                        Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam::Source::MediaType
                      }
 
-            # @!attribute [rw] type
+            # @!attribute type
             #   @return [Symbol, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam::Source::Type]
             required :type,
                      enum: -> {

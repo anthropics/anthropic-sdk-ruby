@@ -4,11 +4,11 @@ module Anthropic
   module Models
     module Beta
       class BetaTextBlock < Anthropic::BaseModel
-        # @!attribute [rw] text
+        # @!attribute text
         #   @return [String]
         required :text, String
 
-        # @!attribute [rw] type
+        # @!attribute type
         #   @return [Symbol, Anthropic::Models::Beta::BetaTextBlock::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaTextBlock::Type }
 

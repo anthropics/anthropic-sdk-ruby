@@ -4,15 +4,15 @@ module Anthropic
   module Models
     module Beta
       class BetaRawContentBlockStartEvent < Anthropic::BaseModel
-        # @!attribute [rw] content_block
+        # @!attribute content_block
         #   @return [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock]
         required :content_block, Anthropic::Unknown
 
-        # @!attribute [rw] index
+        # @!attribute index
         #   @return [Integer]
         required :index, Integer
 
-        # @!attribute [rw] type
+        # @!attribute type
         #   @return [Symbol, Anthropic::Models::Beta::BetaRawContentBlockStartEvent::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaRawContentBlockStartEvent::Type }
 

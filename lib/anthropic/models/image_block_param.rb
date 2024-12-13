@@ -3,24 +3,24 @@
 module Anthropic
   module Models
     class ImageBlockParam < Anthropic::BaseModel
-      # @!attribute [rw] source
+      # @!attribute source
       #   @return [Anthropic::Models::ImageBlockParam::Source]
       required :source, -> { Anthropic::Models::ImageBlockParam::Source }
 
-      # @!attribute [rw] type
+      # @!attribute type
       #   @return [Symbol, Anthropic::Models::ImageBlockParam::Type]
       required :type, enum: -> { Anthropic::Models::ImageBlockParam::Type }
 
       class Source < Anthropic::BaseModel
-        # @!attribute [rw] data
+        # @!attribute data
         #   @return [String]
         required :data, String
 
-        # @!attribute [rw] media_type
+        # @!attribute media_type
         #   @return [Symbol, Anthropic::Models::ImageBlockParam::Source::MediaType]
         required :media_type, enum: -> { Anthropic::Models::ImageBlockParam::Source::MediaType }
 
-        # @!attribute [rw] type
+        # @!attribute type
         #   @return [Symbol, Anthropic::Models::ImageBlockParam::Source::Type]
         required :type, enum: -> { Anthropic::Models::ImageBlockParam::Source::Type }
 

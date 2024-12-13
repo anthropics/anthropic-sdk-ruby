@@ -5,11 +5,11 @@ module Anthropic
     module Beta
       module Messages
         class BetaMessageBatchErroredResult < Anthropic::BaseModel
-          # @!attribute [rw] error
+          # @!attribute error
           #   @return [Anthropic::Models::BetaErrorResponse]
           required :error, -> { Anthropic::Models::BetaErrorResponse }
 
-          # @!attribute [rw] type
+          # @!attribute type
           #   @return [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult::Type]
           required :type, enum: -> { Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult::Type }
 

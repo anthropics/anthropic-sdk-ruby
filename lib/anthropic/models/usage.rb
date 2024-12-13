@@ -3,12 +3,12 @@
 module Anthropic
   module Models
     class Usage < Anthropic::BaseModel
-      # @!attribute [rw] input_tokens
+      # @!attribute input_tokens
       #   The number of input tokens which were used.
       #   @return [Integer]
       required :input_tokens, Integer
 
-      # @!attribute [rw] output_tokens
+      # @!attribute output_tokens
       #   The number of output tokens which were used.
       #   @return [Integer]
       required :output_tokens, Integer

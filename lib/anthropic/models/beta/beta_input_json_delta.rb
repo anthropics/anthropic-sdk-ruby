@@ -4,11 +4,11 @@ module Anthropic
   module Models
     module Beta
       class BetaInputJSONDelta < Anthropic::BaseModel
-        # @!attribute [rw] partial_json
+        # @!attribute partial_json
         #   @return [String]
         required :partial_json, String
 
-        # @!attribute [rw] type
+        # @!attribute type
         #   @return [Symbol, Anthropic::Models::Beta::BetaInputJSONDelta::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaInputJSONDelta::Type }
 

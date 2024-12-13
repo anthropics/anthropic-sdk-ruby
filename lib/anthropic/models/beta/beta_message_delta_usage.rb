@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Beta
       class BetaMessageDeltaUsage < Anthropic::BaseModel
-        # @!attribute [rw] output_tokens
+        # @!attribute output_tokens
         #   The cumulative number of output tokens which were used.
         #   @return [Integer]
         required :output_tokens, Integer

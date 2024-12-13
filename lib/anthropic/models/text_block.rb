@@ -3,11 +3,11 @@
 module Anthropic
   module Models
     class TextBlock < Anthropic::BaseModel
-      # @!attribute [rw] text
+      # @!attribute text
       #   @return [String]
       required :text, String
 
-      # @!attribute [rw] type
+      # @!attribute type
       #   @return [Symbol, Anthropic::Models::TextBlock::Type]
       required :type, enum: -> { Anthropic::Models::TextBlock::Type }
 

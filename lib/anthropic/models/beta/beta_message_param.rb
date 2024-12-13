@@ -4,11 +4,11 @@ module Anthropic
   module Models
     module Beta
       class BetaMessageParam < Anthropic::BaseModel
-        # @!attribute [rw] content
+        # @!attribute content
         #   @return [Array<Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam>, String]
         required :content, Anthropic::Unknown
 
-        # @!attribute [rw] role
+        # @!attribute role
         #   @return [Symbol, Anthropic::Models::Beta::BetaMessageParam::Role]
         required :role, enum: -> { Anthropic::Models::Beta::BetaMessageParam::Role }
 

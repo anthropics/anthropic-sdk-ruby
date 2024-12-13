@@ -3,11 +3,11 @@
 module Anthropic
   module Models
     class BetaAuthenticationError < Anthropic::BaseModel
-      # @!attribute [rw] message
+      # @!attribute message
       #   @return [String]
       required :message, String
 
-      # @!attribute [rw] type
+      # @!attribute type
       #   @return [Symbol, Anthropic::Models::BetaAuthenticationError::Type]
       required :type, enum: -> { Anthropic::Models::BetaAuthenticationError::Type }
 

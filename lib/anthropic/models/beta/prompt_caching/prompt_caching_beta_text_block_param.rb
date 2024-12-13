@@ -5,18 +5,18 @@ module Anthropic
     module Beta
       module PromptCaching
         class PromptCachingBetaTextBlockParam < Anthropic::BaseModel
-          # @!attribute [rw] text
+          # @!attribute text
           #   @return [String]
           required :text, String
 
-          # @!attribute [rw] type
+          # @!attribute type
           #   @return [Symbol, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaTextBlockParam::Type]
           required :type,
                    enum: -> {
                      Anthropic::Models::Beta::PromptCaching::PromptCachingBetaTextBlockParam::Type
                    }
 
-          # @!attribute [rw] cache_control
+          # @!attribute cache_control
           #   @return [Anthropic::Models::Beta::PromptCaching::PromptCachingBetaCacheControlEphemeral]
           optional :cache_control,
                    -> { Anthropic::Models::Beta::PromptCaching::PromptCachingBetaCacheControlEphemeral }

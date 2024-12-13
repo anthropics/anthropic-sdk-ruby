@@ -4,23 +4,23 @@ module Anthropic
   module Models
     module Beta
       class BetaToolResultBlockParam < Anthropic::BaseModel
-        # @!attribute [rw] tool_use_id
+        # @!attribute tool_use_id
         #   @return [String]
         required :tool_use_id, String
 
-        # @!attribute [rw] type
+        # @!attribute type
         #   @return [Symbol, Anthropic::Models::Beta::BetaToolResultBlockParam::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaToolResultBlockParam::Type }
 
-        # @!attribute [rw] cache_control
+        # @!attribute cache_control
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral]
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
 
-        # @!attribute [rw] content
+        # @!attribute content
         #   @return [Array<Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaTextBlockParam>, String]
         optional :content, Anthropic::Unknown
 
-        # @!attribute [rw] is_error
+        # @!attribute is_error
         #   @return [Boolean]
         optional :is_error, Anthropic::BooleanModel
 

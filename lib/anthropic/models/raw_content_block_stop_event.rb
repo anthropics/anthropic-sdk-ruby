@@ -3,11 +3,11 @@
 module Anthropic
   module Models
     class RawContentBlockStopEvent < Anthropic::BaseModel
-      # @!attribute [rw] index
+      # @!attribute index
       #   @return [Integer]
       required :index, Integer
 
-      # @!attribute [rw] type
+      # @!attribute type
       #   @return [Symbol, Anthropic::Models::RawContentBlockStopEvent::Type]
       required :type, enum: -> { Anthropic::Models::RawContentBlockStopEvent::Type }
 

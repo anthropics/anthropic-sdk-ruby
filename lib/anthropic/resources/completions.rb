@@ -80,7 +80,6 @@ module Anthropic
         req = {
           method: :post,
           path: "/v1/complete",
-          headers: {"Content-Type" => "application/json"},
           body: parsed,
           model: Anthropic::Models::Completion
         }

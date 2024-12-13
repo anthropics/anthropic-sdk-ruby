@@ -3,11 +3,11 @@
 module Anthropic
   module Models
     class BetaInvalidRequestError < Anthropic::BaseModel
-      # @!attribute [rw] message
+      # @!attribute message
       #   @return [String]
       required :message, String
 
-      # @!attribute [rw] type
+      # @!attribute type
       #   @return [Symbol, Anthropic::Models::BetaInvalidRequestError::Type]
       required :type, enum: -> { Anthropic::Models::BetaInvalidRequestError::Type }
 
