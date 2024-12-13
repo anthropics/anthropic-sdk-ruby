@@ -17,7 +17,7 @@ module Anthropic
       #   [migration guide](https://docs.anthropic.com/en/api/migrating-from-text-completions-to-messages)
       #   for guidance in migrating from Text Completions to Messages.
       #
-      # @param params [Hash{Symbol => Object}] Attributes to send in this request.
+      # @param params [Hash{Symbol => Object}, Anthropic::Models::CompletionCreateParams] Attributes to send in this request.
       #   @option params [Integer] :max_tokens_to_sample The maximum number of tokens to generate before stopping.
       #
       #     Note that our models may stop _before_ reaching this maximum. This parameter
