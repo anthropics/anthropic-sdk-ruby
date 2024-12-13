@@ -23,31 +23,31 @@ module Anthropic
       end
     end
 
-    # @param left [Hash, Array, Symbol, String, Integer, Float, nil, Object]
-    # @param right [Hash, Array, Symbol, String, Integer, Float, nil, Object]
+    # @param lhs [Hash, Array, Symbol, String, Integer, Float, nil, Object]
+    # @param rhs [Hash, Array, Symbol, String, Integer, Float, nil, Object]
     # @param concat [true, false]
     #
     # @return [Object]
-    private_class_method def self._deep_merge(left, right, concat: false)
-      right_cleaned =
-        case right
+    private_class_method def self._deep_merge(lhs, rhs, concat: false)
+      rhs_cleaned =
+        case rhs
         in Hash
-          right.reject { |_, value| value == OMIT }
+          rhs.reject { |_, value| value == OMIT }
         else
-          right
+          rhs
         end
 
-      case [left, right_cleaned, concat]
+      case [lhs, rhs_cleaned, concat]
       in [Hash, Hash, _]
-        left
-          .reject { |key, _| right[key] == OMIT }
-          .merge(right_cleaned) do |_, old_val, new_val|
+        lhs
+          .reject { |key, _| rhs[key] == OMIT }
+          .merge(rhs_cleaned) do |_, old_val, new_val|
             _deep_merge(old_val, new_val, concat: concat)
           end
       in [Array, Array, true]
-        left.concat(right_cleaned)
+        lhs.concat(rhs_cleaned)
       else
-        right_cleaned
+        rhs_cleaned
       end
     end
 
@@ -155,7 +155,7 @@ module Anthropic
     end
 
     # @param url [String]
-    # @param url [URI::Generic, String] -
+    # @param url [URI::Generic, String]
     # @param input [Object]
     #
     # @return [Hash, Object]
@@ -168,7 +168,7 @@ module Anthropic
       end
     end
 
-    # @param url [URI::Generic, String] -
+    # @param url [URI::Generic, String]
     #
     # @return [Hash{Symbol => Object}]
     def self.parse_uri(url)
@@ -186,6 +186,30 @@ module Anthropic
     # @return [URI::Generic]
     def self.unparse_uri(parsed)
       URI::Generic.build(**parsed, query: encode_query(parsed.fetch(:query)))
+    end
+
+    # @param lhs [Hash{Symbol => String}]
+    # @param rhs [Hash{Symbol => String}] -
+    #   @option rhs [Hash{String => Array<String>}] :extra_query
+    #
+    # @return [URI::Generic]
+    def self.join_parsed_uri(lhs, rhs)
+      base_path, base_query = lhs.fetch_values(:path, :query)
+      slashed = base_path.end_with?("/") ? base_path : "#{base_path}/"
+
+      parsed_path, parsed_query = parse_uri(rhs.fetch(:path)).fetch_values(:path, :query)
+      override = URI::Generic.build(**rhs.slice(:scheme, :host, :port), path: parsed_path)
+
+      joined = URI.join(URI::Generic.build(lhs.except(:path, :query)), slashed, override)
+      query = deep_merge(
+        joined.path == base_path ? base_query : {},
+        parsed_query,
+        *rhs.values_at(:query, :extra_query).compact,
+        concat: true
+      )
+
+      joined.query = encode_query(query)
+      joined
     end
 
     # @param uri [URI::Generic]
