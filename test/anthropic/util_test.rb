@@ -101,4 +101,55 @@ class Anthropic::Test::UtilTest < Minitest::Test
       assert_equal(parsed, Anthropic::Util.parse_uri(unparsed))
     end
   end
+
+  def test_joining_uris
+    cases = [
+      [
+        "h://a.b/c?d=e",
+        "h://nope/ignored",
+        Anthropic::Util.parse_uri("h://a.b/c?d=e")
+      ],
+      [
+        "h://a.b/c?d=e&f=g",
+        "h://nope",
+        {
+          host: "a.b",
+          path: "/c",
+          query: {"d" => ["e"]},
+          extra_query: {
+            "f" => ["g"]
+          }
+        }
+      ]
+    ]
+
+    cases.each do |expect, lhs, rhs|
+      assert_equal(
+        URI.parse(expect),
+        Anthropic::Util.join_parsed_uri(
+          Anthropic::Util.parse_uri(lhs),
+          rhs
+        )
+      )
+    end
+  end
+
+  def test_joining_uri_queries
+    base_url = "h://a.b/c?d=e"
+    cases = {
+      "c2" => "h://a.b/c/c2",
+      "/c2?f=g" => "h://a.b/c2?f=g",
+      "/c?f=g" => "h://a.b/c?d=e&f=g"
+    }
+
+    cases.each do |path, expected|
+      assert_equal(
+        URI.parse(expected),
+        Anthropic::Util.join_parsed_uri(
+          Anthropic::Util.parse_uri(base_url),
+          {path: path}
+        )
+      )
+    end
+  end
 end
