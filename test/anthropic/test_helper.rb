@@ -14,4 +14,27 @@ require "stringio"
 
 class Minitest::Test
   parallelize_me!
+  make_my_diffs_pretty!
+end
+
+class Time
+  class << self
+    alias_method :_now, :now
+  end
+
+  def self.now = Thread.current.thread_variable_get(:time_now) || _now
+end
+
+module Kernel
+  alias_method :_sleep, :sleep
+
+  def sleep(secs)
+    case (counter = Thread.current.thread_variable_get(:mock_sleep))
+    in Array
+      counter << secs
+      secs
+    else
+      _sleep(secs)
+    end
+  end
 end

@@ -3,8 +3,6 @@
 require_relative "test_helper"
 
 class Anthropic::Test::BaseModelTest < Minitest::Test
-  parallelize_me!
-
   class E1 < Anthropic::Enum
     A = :a
     B = :b

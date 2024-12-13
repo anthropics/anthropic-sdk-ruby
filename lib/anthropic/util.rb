@@ -12,14 +12,19 @@ module Anthropic
     # Recursively merge one hash with another.
     # If the values at a given key are not both hashes, just take the new value.
     #
-    # @param value [Hash, Array, Symbol, String, Integer, Float, nil, Object]
     # @param values [Array<Hash, Array, Symbol, String, Integer, Float, nil, Object>]
+    # @param sentinel [nil, Object] the value to return if no values are provided
     # @param concat [true, false] whether to merge sequences by concatenation
     #
     # @return [Object]
-    def self.deep_merge(value, *values, concat: false)
-      values.reduce(value) do |acc, val|
-        _deep_merge(acc, val, concat: concat)
+    def self.deep_merge(*values, sentinel: nil, concat: false)
+      case values
+      in [value, *values]
+        values.reduce(value) do |acc, val|
+          _deep_merge(acc, val, concat: concat)
+        end
+      else
+        sentinel
       end
     end
 
@@ -52,7 +57,7 @@ module Anthropic
     end
 
     # @param exceptions [Array<Exception>]
-    # @param sentinel [Object, nil]
+    # @param sentinel [nil, Object]
     # @param blk [Proc]
     #
     # @return [Object, nil]
