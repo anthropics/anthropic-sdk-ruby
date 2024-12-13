@@ -18,8 +18,8 @@ module Anthropic
     #
     # @param name [Symbol]
     private_class_method def self.option(name)
-      define_method("#{name}=") { |val| @_values[name] = val }
-      define_method(name) { @_values[name] }
+      define_method("#{name}=") { |val| @values[name] = val }
+      define_method(name) { @values[name] }
       options << name
     end
 
@@ -51,7 +51,7 @@ module Anthropic
     #   @option values [Integer] :max_retries
     #   @option values [Integer] :timeout
     def initialize(values = {})
-      @_values = values
+      @values = values
     end
 
     # @!attribute idempotency_key
@@ -92,33 +92,33 @@ module Anthropic
     #
     # @return [Object]
     def [](key)
-      @_values[key]
+      @values[key]
     end
 
     # Return a Hash containing the options set on this instance.
     #
     # @return [Hash{Symbol => Object}]
     def to_h
-      @_values
+      @values
     end
 
     alias_method :to_hash, :to_h
 
     # @return [String]
     def inspect
-      "#<#{self.class}:0x#{object_id.to_s(16)} #{@_values.inspect}>"
+      "#<#{self.class}:0x#{object_id.to_s(16)} #{@values.inspect}>"
     end
 
     # @return [String]
     def to_s
-      @_values.to_s
+      @values.to_s
     end
 
     # @param keys [Array<Symbol>, nil]
     #
     # @return [Hash{Symbol => Object}]
     def deconstruct_keys(keys)
-      @_values.deconstruct_keys(keys)
+      @values.deconstruct_keys(keys)
     end
   end
 end
