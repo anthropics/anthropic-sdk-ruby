@@ -3,11 +3,11 @@
 module Anthropic
   module Models
     class RawMessageStartEvent < Anthropic::BaseModel
-      # @!attribute [rw] message
+      # @!attribute message
       #   @return [Anthropic::Models::Message]
       required :message, -> { Anthropic::Models::Message }
 
-      # @!attribute [rw] type
+      # @!attribute type
       #   @return [Symbol, Anthropic::Models::RawMessageStartEvent::Type]
       required :type, enum: -> { Anthropic::Models::RawMessageStartEvent::Type }
 

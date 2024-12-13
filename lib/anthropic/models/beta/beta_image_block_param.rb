@@ -4,28 +4,28 @@ module Anthropic
   module Models
     module Beta
       class BetaImageBlockParam < Anthropic::BaseModel
-        # @!attribute [rw] source
+        # @!attribute source
         #   @return [Anthropic::Models::Beta::BetaImageBlockParam::Source]
         required :source, -> { Anthropic::Models::Beta::BetaImageBlockParam::Source }
 
-        # @!attribute [rw] type
+        # @!attribute type
         #   @return [Symbol, Anthropic::Models::Beta::BetaImageBlockParam::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaImageBlockParam::Type }
 
-        # @!attribute [rw] cache_control
+        # @!attribute cache_control
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral]
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
 
         class Source < Anthropic::BaseModel
-          # @!attribute [rw] data
+          # @!attribute data
           #   @return [String]
           required :data, String
 
-          # @!attribute [rw] media_type
+          # @!attribute media_type
           #   @return [Symbol, Anthropic::Models::Beta::BetaImageBlockParam::Source::MediaType]
           required :media_type, enum: -> { Anthropic::Models::Beta::BetaImageBlockParam::Source::MediaType }
 
-          # @!attribute [rw] type
+          # @!attribute type
           #   @return [Symbol, Anthropic::Models::Beta::BetaImageBlockParam::Source::Type]
           required :type, enum: -> { Anthropic::Models::Beta::BetaImageBlockParam::Source::Type }
 

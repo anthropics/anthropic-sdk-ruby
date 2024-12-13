@@ -5,33 +5,33 @@ module Anthropic
     module Beta
       module Messages
         class BetaMessageBatchRequestCounts < Anthropic::BaseModel
-          # @!attribute [rw] canceled
+          # @!attribute canceled
           #   Number of requests in the Message Batch that have been canceled.
           #
           # This is zero until processing of the entire Message Batch has ended.
           #   @return [Integer]
           required :canceled, Integer
 
-          # @!attribute [rw] errored
+          # @!attribute errored
           #   Number of requests in the Message Batch that encountered an error.
           #
           # This is zero until processing of the entire Message Batch has ended.
           #   @return [Integer]
           required :errored, Integer
 
-          # @!attribute [rw] expired
+          # @!attribute expired
           #   Number of requests in the Message Batch that have expired.
           #
           # This is zero until processing of the entire Message Batch has ended.
           #   @return [Integer]
           required :expired, Integer
 
-          # @!attribute [rw] processing
+          # @!attribute processing
           #   Number of requests in the Message Batch that are processing.
           #   @return [Integer]
           required :processing, Integer
 
-          # @!attribute [rw] succeeded
+          # @!attribute succeeded
           #   Number of requests in the Message Batch that have completed successfully.
           #
           # This is zero until processing of the entire Message Batch has ended.

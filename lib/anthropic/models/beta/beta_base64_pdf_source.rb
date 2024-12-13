@@ -4,15 +4,15 @@ module Anthropic
   module Models
     module Beta
       class BetaBase64PDFSource < Anthropic::BaseModel
-        # @!attribute [rw] data
+        # @!attribute data
         #   @return [String]
         required :data, String
 
-        # @!attribute [rw] media_type
+        # @!attribute media_type
         #   @return [Symbol, Anthropic::Models::Beta::BetaBase64PDFSource::MediaType]
         required :media_type, enum: -> { Anthropic::Models::Beta::BetaBase64PDFSource::MediaType }
 
-        # @!attribute [rw] type
+        # @!attribute type
         #   @return [Symbol, Anthropic::Models::Beta::BetaBase64PDFSource::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaBase64PDFSource::Type }
 

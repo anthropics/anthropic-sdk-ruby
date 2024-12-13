@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       module PromptCaching
         class PromptCachingBetaCacheControlEphemeral < Anthropic::BaseModel
-          # @!attribute [rw] type
+          # @!attribute type
           #   @return [Symbol, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaCacheControlEphemeral::Type]
           required :type,
                    enum: -> {

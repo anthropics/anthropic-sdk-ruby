@@ -3,19 +3,19 @@
 module Anthropic
   module Models
     class ToolResultBlockParam < Anthropic::BaseModel
-      # @!attribute [rw] tool_use_id
+      # @!attribute tool_use_id
       #   @return [String]
       required :tool_use_id, String
 
-      # @!attribute [rw] type
+      # @!attribute type
       #   @return [Symbol, Anthropic::Models::ToolResultBlockParam::Type]
       required :type, enum: -> { Anthropic::Models::ToolResultBlockParam::Type }
 
-      # @!attribute [rw] content
+      # @!attribute content
       #   @return [Array<Anthropic::Models::ImageBlockParam, Anthropic::Models::TextBlockParam>, String]
       optional :content, Anthropic::Unknown
 
-      # @!attribute [rw] is_error
+      # @!attribute is_error
       #   @return [Boolean]
       optional :is_error, Anthropic::BooleanModel
 

@@ -3,11 +3,11 @@
 module Anthropic
   module Models
     class ToolChoiceAuto < Anthropic::BaseModel
-      # @!attribute [rw] type
+      # @!attribute type
       #   @return [Symbol, Anthropic::Models::ToolChoiceAuto::Type]
       required :type, enum: -> { Anthropic::Models::ToolChoiceAuto::Type }
 
-      # @!attribute [rw] disable_parallel_tool_use
+      # @!attribute disable_parallel_tool_use
       #   Whether to disable parallel tool use.
       #
       # Defaults to `false`. If set to `true`, the model will output at most one tool use.

@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       module PromptCaching
         class PromptCachingBetaTool < Anthropic::BaseModel
-          # @!attribute [rw] input_schema
+          # @!attribute input_schema
           #   [JSON schema](https://json-schema.org/) for this tool's input.
           #
           # This defines the shape of the `input` that your tool accepts and that the model will produce.
@@ -15,19 +15,19 @@ module Anthropic
                      Anthropic::Models::Beta::PromptCaching::PromptCachingBetaTool::InputSchema
                    }
 
-          # @!attribute [rw] name
+          # @!attribute name
           #   Name of the tool.
           #
           # This is how the tool will be called by the model and in tool_use blocks.
           #   @return [String]
           required :name, String
 
-          # @!attribute [rw] cache_control
+          # @!attribute cache_control
           #   @return [Anthropic::Models::Beta::PromptCaching::PromptCachingBetaCacheControlEphemeral]
           optional :cache_control,
                    -> { Anthropic::Models::Beta::PromptCaching::PromptCachingBetaCacheControlEphemeral }
 
-          # @!attribute [rw] description
+          # @!attribute description
           #   Description of what this tool does.
           #
           # Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
@@ -35,14 +35,14 @@ module Anthropic
           optional :description, String
 
           class InputSchema < Anthropic::BaseModel
-            # @!attribute [rw] type
+            # @!attribute type
             #   @return [Symbol, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaTool::InputSchema::Type]
             required :type,
                      enum: -> {
                        Anthropic::Models::Beta::PromptCaching::PromptCachingBetaTool::InputSchema::Type
                      }
 
-            # @!attribute [rw] properties
+            # @!attribute properties
             #   @return [Object]
             optional :properties, Anthropic::Unknown
 

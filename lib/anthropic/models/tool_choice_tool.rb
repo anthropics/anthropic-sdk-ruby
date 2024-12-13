@@ -3,16 +3,16 @@
 module Anthropic
   module Models
     class ToolChoiceTool < Anthropic::BaseModel
-      # @!attribute [rw] name
+      # @!attribute name
       #   The name of the tool to use.
       #   @return [String]
       required :name, String
 
-      # @!attribute [rw] type
+      # @!attribute type
       #   @return [Symbol, Anthropic::Models::ToolChoiceTool::Type]
       required :type, enum: -> { Anthropic::Models::ToolChoiceTool::Type }
 
-      # @!attribute [rw] disable_parallel_tool_use
+      # @!attribute disable_parallel_tool_use
       #   Whether to disable parallel tool use.
       #
       # Defaults to `false`. If set to `true`, the model will output exactly one tool use.

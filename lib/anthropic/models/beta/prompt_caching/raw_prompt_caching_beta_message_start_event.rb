@@ -5,11 +5,11 @@ module Anthropic
     module Beta
       module PromptCaching
         class RawPromptCachingBetaMessageStartEvent < Anthropic::BaseModel
-          # @!attribute [rw] message
+          # @!attribute message
           #   @return [Anthropic::Models::Beta::PromptCaching::PromptCachingBetaMessage]
           required :message, -> { Anthropic::Models::Beta::PromptCaching::PromptCachingBetaMessage }
 
-          # @!attribute [rw] type
+          # @!attribute type
           #   @return [Symbol, Anthropic::Models::Beta::PromptCaching::RawPromptCachingBetaMessageStartEvent::Type]
           required :type,
                    enum: -> {

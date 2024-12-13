@@ -3,24 +3,24 @@
 module Anthropic
   module Models
     class Completion < Anthropic::BaseModel
-      # @!attribute [rw] id
+      # @!attribute id
       #   Unique object identifier.
       #
       # The format and length of IDs may change over time.
       #   @return [String]
       required :id, String
 
-      # @!attribute [rw] completion
+      # @!attribute completion
       #   The resulting completion up to and excluding the stop sequences.
       #   @return [String]
       required :completion, String
 
-      # @!attribute [rw] model
+      # @!attribute model
       #   The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
       #   @return [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent14]
       required :model, Anthropic::Unknown
 
-      # @!attribute [rw] stop_reason
+      # @!attribute stop_reason
       #   The reason that we stopped.
       #
       # This may be one the following values:
@@ -29,7 +29,7 @@ module Anthropic
       #   @return [String]
       required :stop_reason, String
 
-      # @!attribute [rw] type
+      # @!attribute type
       #   Object type.
       #
       # For Text Completions, this is always `"completion"`.

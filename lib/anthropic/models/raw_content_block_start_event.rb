@@ -3,15 +3,15 @@
 module Anthropic
   module Models
     class RawContentBlockStartEvent < Anthropic::BaseModel
-      # @!attribute [rw] content_block
+      # @!attribute content_block
       #   @return [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock]
       required :content_block, Anthropic::Unknown
 
-      # @!attribute [rw] index
+      # @!attribute index
       #   @return [Integer]
       required :index, Integer
 
-      # @!attribute [rw] type
+      # @!attribute type
       #   @return [Symbol, Anthropic::Models::RawContentBlockStartEvent::Type]
       required :type, enum: -> { Anthropic::Models::RawContentBlockStartEvent::Type }
 

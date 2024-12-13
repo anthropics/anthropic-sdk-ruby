@@ -240,7 +240,6 @@ module Anthropic
           req = {
             method: :post,
             path: "/v1/messages?beta=true",
-            headers: {"Content-Type" => "application/json"},
             body: parsed,
             model: Anthropic::Models::Beta::BetaMessage
           }
@@ -427,7 +426,6 @@ module Anthropic
           req = {
             method: :post,
             path: "/v1/messages/count_tokens?beta=true",
-            headers: {"Content-Type" => "application/json"},
             body: parsed,
             model: Anthropic::Models::Beta::BetaMessageTokensCount
           }

@@ -5,27 +5,27 @@ module Anthropic
     module Beta
       module PromptCaching
         class PromptCachingBetaToolResultBlockParam < Anthropic::BaseModel
-          # @!attribute [rw] tool_use_id
+          # @!attribute tool_use_id
           #   @return [String]
           required :tool_use_id, String
 
-          # @!attribute [rw] type
+          # @!attribute type
           #   @return [Symbol, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaToolResultBlockParam::Type]
           required :type,
                    enum: -> {
                      Anthropic::Models::Beta::PromptCaching::PromptCachingBetaToolResultBlockParam::Type
                    }
 
-          # @!attribute [rw] cache_control
+          # @!attribute cache_control
           #   @return [Anthropic::Models::Beta::PromptCaching::PromptCachingBetaCacheControlEphemeral]
           optional :cache_control,
                    -> { Anthropic::Models::Beta::PromptCaching::PromptCachingBetaCacheControlEphemeral }
 
-          # @!attribute [rw] content
+          # @!attribute content
           #   @return [Array<Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaTextBlockParam>, String]
           optional :content, Anthropic::Unknown
 
-          # @!attribute [rw] is_error
+          # @!attribute is_error
           #   @return [Boolean]
           optional :is_error, Anthropic::BooleanModel
 

@@ -4,15 +4,15 @@ module Anthropic
   module Models
     module Beta
       class BetaRawMessageDeltaEvent < Anthropic::BaseModel
-        # @!attribute [rw] delta
+        # @!attribute delta
         #   @return [Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta]
         required :delta, -> { Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta }
 
-        # @!attribute [rw] type
+        # @!attribute type
         #   @return [Symbol, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Type }
 
-        # @!attribute [rw] usage
+        # @!attribute usage
         #   Billing and rate-limit usage.
         #
         # Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
@@ -24,14 +24,14 @@ module Anthropic
         required :usage, -> { Anthropic::Models::Beta::BetaMessageDeltaUsage }
 
         class Delta < Anthropic::BaseModel
-          # @!attribute [rw] stop_reason
+          # @!attribute stop_reason
           #   @return [Symbol, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason]
           required :stop_reason,
                    enum: -> {
                      Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason
                    }
 
-          # @!attribute [rw] stop_sequence
+          # @!attribute stop_sequence
           #   @return [String]
           required :stop_sequence, String
 

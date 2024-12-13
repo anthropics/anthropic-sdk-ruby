@@ -4,23 +4,23 @@ module Anthropic
   module Models
     module Beta
       class BetaToolUseBlockParam < Anthropic::BaseModel
-        # @!attribute [rw] id
+        # @!attribute id
         #   @return [String]
         required :id, String
 
-        # @!attribute [rw] input
+        # @!attribute input
         #   @return [Object]
         required :input, Anthropic::Unknown
 
-        # @!attribute [rw] name
+        # @!attribute name
         #   @return [String]
         required :name, String
 
-        # @!attribute [rw] type
+        # @!attribute type
         #   @return [Symbol, Anthropic::Models::Beta::BetaToolUseBlockParam::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaToolUseBlockParam::Type }
 
-        # @!attribute [rw] cache_control
+        # @!attribute cache_control
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral]
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
 

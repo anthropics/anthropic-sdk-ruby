@@ -4,15 +4,15 @@ module Anthropic
   module Models
     module Beta
       class BetaRawContentBlockDeltaEvent < Anthropic::BaseModel
-        # @!attribute [rw] delta
+        # @!attribute delta
         #   @return [Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaTextDelta]
         required :delta, Anthropic::Unknown
 
-        # @!attribute [rw] index
+        # @!attribute index
         #   @return [Integer]
         required :index, Integer
 
-        # @!attribute [rw] type
+        # @!attribute type
         #   @return [Symbol, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Type }
 

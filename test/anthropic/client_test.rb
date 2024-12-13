@@ -16,19 +16,19 @@ class AnthropicTest < Minitest::Test
     attr_accessor :code
 
     # @return [String]
-    attr_accessor :body
-
-    # @return [String]
     attr_accessor :content_type
 
+    # @return [String]
+    attr_accessor :body
+
     # @param code [Integer]
-    # @param data [Object]
     # @param headers [Hash{String => String}]
-    def initialize(code, data, headers)
-      @headers = headers
+    # @param data [Object]
+    def initialize(code, headers, data)
       @code = code
-      @body = JSON.generate(data)
+      @headers = headers
       @content_type = "application/json"
+      @body = JSON.generate(data)
     end
 
     def [](header)
@@ -44,22 +44,22 @@ class AnthropicTest < Minitest::Test
     # @return [Integer]
     attr_accessor :response_code
 
-    # @return [Object]
-    attr_accessor :response_data
-
     # @return [Hash{String => String}]
     attr_accessor :response_headers
+
+    # @return [Object]
+    attr_accessor :response_data
 
     # @return [Array<Hash{Symbol => Object}>]
     attr_accessor :attempts
 
     # @param response_code [Integer]
-    # @param response_data [Object]
     # @param response_headers [Hash{String => String}]
-    def initialize(response_code, response_data, response_headers)
+    # @param response_data [Object]
+    def initialize(response_code, response_headers, response_data)
       @response_code = response_code
-      @response_data = response_data
       @response_headers = response_headers
+      @response_data = response_data
       @attempts = []
     end
 
@@ -67,7 +67,7 @@ class AnthropicTest < Minitest::Test
     def execute(req)
       # Deep copy the request because it is mutated on each retry.
       attempts.push(Marshal.load(Marshal.dump(req)))
-      MockResponse.new(response_code, response_data, response_headers)
+      MockResponse.new(response_code, response_headers, response_data)
     end
   end
 
@@ -155,7 +155,7 @@ class AnthropicTest < Minitest::Test
       api_key: "my-anthropic-api-key",
       max_retries: 1
     )
-    requester = MockRequester.new(500, {}, {"retry-after" => "1.3"})
+    requester = MockRequester.new(500, {"retry-after" => "1.3"}, {})
     anthropic.requester = requester
 
     assert_raises(Anthropic::InternalServerError) do
@@ -176,7 +176,7 @@ class AnthropicTest < Minitest::Test
       api_key: "my-anthropic-api-key",
       max_retries: 1
     )
-    requester = MockRequester.new(500, {}, {"retry-after" => (Time.now + 10).httpdate})
+    requester = MockRequester.new(500, {"retry-after" => (Time.now + 10).httpdate}, {})
     anthropic.requester = requester
 
     assert_raises(Anthropic::InternalServerError) do
@@ -199,7 +199,7 @@ class AnthropicTest < Minitest::Test
       api_key: "my-anthropic-api-key",
       max_retries: 1
     )
-    requester = MockRequester.new(500, {}, {"retry-after-ms" => "1300"})
+    requester = MockRequester.new(500, {"retry-after-ms" => "1300"}, {})
     anthropic.requester = requester
 
     assert_raises(Anthropic::InternalServerError) do
@@ -273,7 +273,7 @@ class AnthropicTest < Minitest::Test
 
   def test_client_redirect_307
     anthropic = Anthropic::Client.new(base_url: "http://localhost:4010", api_key: "my-anthropic-api-key")
-    requester = MockRequester.new(307, {}, {"location" => "/redirected"})
+    requester = MockRequester.new(307, {"location" => "/redirected"}, {})
     anthropic.requester = requester
 
     assert_raises(Anthropic::APIConnectionError) do
@@ -298,7 +298,7 @@ class AnthropicTest < Minitest::Test
 
   def test_client_redirect_303
     anthropic = Anthropic::Client.new(base_url: "http://localhost:4010", api_key: "my-anthropic-api-key")
-    requester = MockRequester.new(303, {}, {"location" => "/redirected"})
+    requester = MockRequester.new(303, {"location" => "/redirected"}, {})
     anthropic.requester = requester
 
     assert_raises(Anthropic::APIConnectionError) do
@@ -320,7 +320,7 @@ class AnthropicTest < Minitest::Test
 
   def test_client_redirect_auth_keep_same_origin
     anthropic = Anthropic::Client.new(base_url: "http://localhost:4010", api_key: "my-anthropic-api-key")
-    requester = MockRequester.new(307, {}, {"location" => "/redirected"})
+    requester = MockRequester.new(307, {"location" => "/redirected"}, {})
     anthropic.requester = requester
 
     assert_raises(Anthropic::APIConnectionError) do
@@ -342,7 +342,7 @@ class AnthropicTest < Minitest::Test
 
   def test_client_redirect_auth_strip_cross_origin
     anthropic = Anthropic::Client.new(base_url: "http://localhost:4010", api_key: "my-anthropic-api-key")
-    requester = MockRequester.new(307, {}, {"location" => "https://example.com/redirected"})
+    requester = MockRequester.new(307, {"location" => "https://example.com/redirected"}, {})
     anthropic.requester = requester
 
     assert_raises(Anthropic::APIConnectionError) do

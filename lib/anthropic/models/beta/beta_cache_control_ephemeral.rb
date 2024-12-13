@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Beta
       class BetaCacheControlEphemeral < Anthropic::BaseModel
-        # @!attribute [rw] type
+        # @!attribute type
         #   @return [Symbol, Anthropic::Models::Beta::BetaCacheControlEphemeral::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaCacheControlEphemeral::Type }
 

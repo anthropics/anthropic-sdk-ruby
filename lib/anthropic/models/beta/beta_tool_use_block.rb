@@ -4,19 +4,19 @@ module Anthropic
   module Models
     module Beta
       class BetaToolUseBlock < Anthropic::BaseModel
-        # @!attribute [rw] id
+        # @!attribute id
         #   @return [String]
         required :id, String
 
-        # @!attribute [rw] input
+        # @!attribute input
         #   @return [Object]
         required :input, Anthropic::Unknown
 
-        # @!attribute [rw] name
+        # @!attribute name
         #   @return [String]
         required :name, String
 
-        # @!attribute [rw] type
+        # @!attribute type
         #   @return [Symbol, Anthropic::Models::Beta::BetaToolUseBlock::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaToolUseBlock::Type }
 

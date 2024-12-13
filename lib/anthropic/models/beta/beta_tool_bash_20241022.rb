@@ -4,18 +4,18 @@ module Anthropic
   module Models
     module Beta
       class BetaToolBash20241022 < Anthropic::BaseModel
-        # @!attribute [rw] name
+        # @!attribute name
         #   Name of the tool.
         #
         # This is how the tool will be called by the model and in tool_use blocks.
         #   @return [Symbol, Anthropic::Models::Beta::BetaToolBash20241022::Name]
         required :name, enum: -> { Anthropic::Models::Beta::BetaToolBash20241022::Name }
 
-        # @!attribute [rw] type
+        # @!attribute type
         #   @return [Symbol, Anthropic::Models::Beta::BetaToolBash20241022::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaToolBash20241022::Type }
 
-        # @!attribute [rw] cache_control
+        # @!attribute cache_control
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral]
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
 

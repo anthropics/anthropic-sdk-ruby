@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     class RawMessageStopEvent < Anthropic::BaseModel
-      # @!attribute [rw] type
+      # @!attribute type
       #   @return [Symbol, Anthropic::Models::RawMessageStopEvent::Type]
       required :type, enum: -> { Anthropic::Models::RawMessageStopEvent::Type }
 
