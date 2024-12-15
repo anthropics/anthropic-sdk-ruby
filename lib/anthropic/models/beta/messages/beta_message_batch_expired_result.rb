@@ -6,20 +6,19 @@ module Anthropic
       module Messages
         class BetaMessageBatchExpiredResult < Anthropic::BaseModel
           # @!attribute type
-          #
           #   @return [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult::Type]
           required :type, enum: -> { Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult::Type }
-
-          # @!parse
-          #   # @param type [String]
-          #   #
-          #   def initialize(type:) = super
-
-          # def initialize: (Hash | Anthropic::BaseModel) -> void
 
           class Type < Anthropic::Enum
             EXPIRED = :expired
           end
+
+          # @!parse
+          #   # Create a new instance of BetaMessageBatchExpiredResult from a Hash of raw data.
+          #   #
+          #   # @param data [Hash{Symbol => Object}] .
+          #   #   @option data [String] :type
+          #   def initialize(data = {}) = super
         end
       end
     end

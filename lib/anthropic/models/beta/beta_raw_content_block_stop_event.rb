@@ -5,26 +5,24 @@ module Anthropic
     module Beta
       class BetaRawContentBlockStopEvent < Anthropic::BaseModel
         # @!attribute index
-        #
         #   @return [Integer]
         required :index, Integer
 
         # @!attribute type
-        #
         #   @return [Symbol, Anthropic::Models::Beta::BetaRawContentBlockStopEvent::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaRawContentBlockStopEvent::Type }
-
-        # @!parse
-        #   # @param index [Integer]
-        #   # @param type [String]
-        #   #
-        #   def initialize(index:, type:) = super
-
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         class Type < Anthropic::Enum
           CONTENT_BLOCK_STOP = :content_block_stop
         end
+
+        # @!parse
+        #   # Create a new instance of BetaRawContentBlockStopEvent from a Hash of raw data.
+        #   #
+        #   # @param data [Hash{Symbol => Object}] .
+        #   #   @option data [Integer] :index
+        #   #   @option data [String] :type
+        #   def initialize(data = {}) = super
       end
     end
 

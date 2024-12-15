@@ -15,7 +15,6 @@ module Anthropic
       #   conversations.
       #
       # @param params [Hash{Symbol => Object}, Anthropic::Models::MessageCreateParams] Attributes to send in this request.
-      #
       #   @option params [Integer] :max_tokens The maximum number of tokens to generate before stopping.
       #
       #     Note that our models may stop _before_ reaching this maximum. This parameter
@@ -23,7 +22,6 @@ module Anthropic
       #
       #     Different models have different maximum values for this parameter. See
       #     [models](https://docs.anthropic.com/en/docs/models-overview) for details.
-      #
       #   @option params [Array<Anthropic::Models::MessageParam>] :messages Input messages.
       #
       #     Our models are trained to operate on alternating `user` and `assistant`
@@ -110,13 +108,10 @@ module Anthropic
       #     [system prompt](https://docs.anthropic.com/en/docs/system-prompts), you can use
       #     the top-level `system` parameter — there is no `"system"` role for input
       #     messages in the Messages API.
-      #
       #   @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent1] :model The model that will complete your prompt.\n\nSee
       #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #     details and options.
-      #
       #   @option params [Anthropic::Models::Metadata, nil] :metadata An object describing metadata about the request.
-      #
       #   @option params [Array<String>, nil] :stop_sequences Custom text sequences that will cause the model to stop generating.
       #
       #     Our models will normally stop when they have naturally completed their turn,
@@ -126,18 +121,15 @@ module Anthropic
       #     text, you can use the `stop_sequences` parameter. If the model encounters one of
       #     the custom sequences, the response `stop_reason` value will be `"stop_sequence"`
       #     and the response `stop_sequence` value will contain the matched stop sequence.
-      #
       #   @option params [Boolean] :stream Whether to incrementally stream the response using server-sent events.
       #
       #     See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
       #     details.
-      #
       #   @option params [Array<Anthropic::Models::TextBlockParam>, String, nil] :system_ System prompt.
       #
       #     A system prompt is a way of providing context and instructions to Claude, such
       #     as specifying a particular goal or role. See our
       #     [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
-      #
       #   @option params [Float, nil] :temperature Amount of randomness injected into the response.
       #
       #     Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
@@ -146,10 +138,8 @@ module Anthropic
       #
       #     Note that even with `temperature` of `0.0`, the results will not be fully
       #     deterministic.
-      #
       #   @option params [Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceTool, nil] :tool_choice How the model should use the provided tools. The model can use a specific tool,
       #     any available tool, or decide by itself.
-      #
       #   @option params [Array<Anthropic::Models::Tool>, nil] :tools Definitions of tools that the model may use.
       #
       #     If you include `tools` in your API request, the model may return `tool_use`
@@ -218,7 +208,6 @@ module Anthropic
       #     JSON structure of output.
       #
       #     See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
-      #
       #   @option params [Integer, nil] :top_k Only sample from the top K options for each subsequent token.
       #
       #     Used to remove "long tail" low probability responses.
@@ -226,7 +215,6 @@ module Anthropic
       #
       #     Recommended for advanced use cases only. You usually only need to use
       #     `temperature`.
-      #
       #   @option params [Float, nil] :top_p Use nucleus sampling.
       #
       #     In nucleus sampling, we compute the cumulative distribution over all the options

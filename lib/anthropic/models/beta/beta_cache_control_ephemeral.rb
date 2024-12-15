@@ -5,20 +5,19 @@ module Anthropic
     module Beta
       class BetaCacheControlEphemeral < Anthropic::BaseModel
         # @!attribute type
-        #
         #   @return [Symbol, Anthropic::Models::Beta::BetaCacheControlEphemeral::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaCacheControlEphemeral::Type }
-
-        # @!parse
-        #   # @param type [String]
-        #   #
-        #   def initialize(type:) = super
-
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         class Type < Anthropic::Enum
           EPHEMERAL = :ephemeral
         end
+
+        # @!parse
+        #   # Create a new instance of BetaCacheControlEphemeral from a Hash of raw data.
+        #   #
+        #   # @param data [Hash{Symbol => Object}] .
+        #   #   @option data [String] :type
+        #   def initialize(data = {}) = super
       end
     end
 

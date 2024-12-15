@@ -6,30 +6,28 @@ module Anthropic
       module PromptCaching
         class PromptCachingBetaMessageParam < Anthropic::BaseModel
           # @!attribute content
-          #
           #   @return [Array<Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaTextBlockParam, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaToolResultBlockParam, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaToolUseBlockParam>, String]
           required :content, Anthropic::Unknown
 
           # @!attribute role
-          #
           #   @return [Symbol, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaMessageParam::Role]
           required :role,
                    enum: -> {
                      Anthropic::Models::Beta::PromptCaching::PromptCachingBetaMessageParam::Role
                    }
 
-          # @!parse
-          #   # @param content [Array<Object>, String]
-          #   # @param role [String]
-          #   #
-          #   def initialize(content:, role:) = super
-
-          # def initialize: (Hash | Anthropic::BaseModel) -> void
-
           class Role < Anthropic::Enum
             USER = :user
             ASSISTANT = :assistant
           end
+
+          # @!parse
+          #   # Create a new instance of PromptCachingBetaMessageParam from a Hash of raw data.
+          #   #
+          #   # @param data [Hash{Symbol => Object}] .
+          #   #   @option data [Array<Object>, String] :content
+          #   #   @option data [String] :role
+          #   def initialize(data = {}) = super
         end
       end
 
