@@ -1,15 +1,19 @@
 # frozen_string_literal: true
 
 module Anthropic
-  # @!visibility private
+  # @private
   #
   module Util
+    # @private
+    #
     # Use this to indicate that a value should be explicitly removed from a data structure
     # when using `Anthropic::Util.deep_merge`.
     # E.g. merging `{a: 1}` and `{a: OMIT}` should produce `{}`, where merging `{a: 1}` and
     # `{}` would produce `{a: 1}`.
     OMIT = Object.new.freeze
 
+    # @private
+    #
     # Recursively merge one hash with another.
     # If the values at a given key are not both hashes, just take the new value.
     #
@@ -29,6 +33,8 @@ module Anthropic
       end
     end
 
+    # @private
+    #
     # @param lhs [Hash, Array, Symbol, String, Integer, Float, nil, Object]
     # @param rhs [Hash, Array, Symbol, String, Integer, Float, nil, Object]
     # @param concat [true, false]
@@ -57,6 +63,8 @@ module Anthropic
       end
     end
 
+    # @private
+    #
     # @param exceptions [Array<Exception>]
     # @param sentinel [nil, Object]
     # @param blk [Proc]
@@ -68,6 +76,8 @@ module Anthropic
       sentinel
     end
 
+    # @private
+    #
     # @param data [Hash, Array, Object]
     # @param pick [Symbol, Integer, Array, nil]
     # @param default [Object, nil]
@@ -96,6 +106,8 @@ module Anthropic
       end
     end
 
+    # @private
+    #
     # @param input [String, Numeric, Boolean, nil]
     #
     # @return [Integer, String, nil]
@@ -110,6 +122,8 @@ module Anthropic
       end
     end
 
+    # @private
+    #
     # @param input [String, Numeric, Boolean, nil]
     #
     # @return [Float, String, nil]
@@ -124,6 +138,8 @@ module Anthropic
       end
     end
 
+    # @private
+    #
     # @param input [String, Numeric, Boolean, nil]
     #
     # @return [Boolean, String, Numeric, nil]
@@ -140,6 +156,8 @@ module Anthropic
       end
     end
 
+    # @private
+    #
     # @param input [String, Numeric, Boolean, nil]
     #
     # @raise [ArgumentError]
@@ -153,6 +171,8 @@ module Anthropic
       end
     end
 
+    # @private
+    #
     # @param query [Hash{String => String | Array<String>}]
     #
     # @return [String, nil]
@@ -160,6 +180,8 @@ module Anthropic
       query.empty? ? nil : URI.encode_www_form(query)
     end
 
+    # @private
+    #
     # @param query [String, nil]
     #
     # @return [Hash{String => Array<String>}]
@@ -167,6 +189,8 @@ module Anthropic
       CGI.parse(query.to_s)
     end
 
+    # @private
+    #
     # @param url [String]
     # @param url [URI::Generic, String]
     # @param input [Object]
@@ -181,6 +205,8 @@ module Anthropic
       end
     end
 
+    # @private
+    #
     # @param url [URI::Generic, String]
     #
     # @return [Hash{Symbol => Object}]
@@ -201,6 +227,8 @@ module Anthropic
       URI::Generic.build(**parsed, query: encode_query(parsed.fetch(:query)))
     end
 
+    # @private
+    #
     # @param lhs [Hash{Symbol => String}]
     # @param rhs [Hash{Symbol => String}] -
     #   @option rhs [Hash{String => Array<String>}] :extra_query
@@ -225,6 +253,8 @@ module Anthropic
       joined
     end
 
+    # @private
+    #
     # @param uri [URI::Generic]
     #
     # @return [String]
@@ -232,6 +262,8 @@ module Anthropic
       "#{uri.scheme}://#{uri.host}#{uri.port == uri.default_port ? '' : ":#{uri.port}"}"
     end
 
+    # @private
+    #
     # @param headers [Array<Hash{String => String, Integer, nil}>]
     #
     # @return [Hash{String => String, nil}]

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Anthropic
-  # @!visibility private
+  # @private
   #
   module Converter
     # Based on `target`, transform `value` into `target`, to the extent possible:
@@ -47,7 +47,7 @@ module Anthropic
     end
   end
 
-  # @!visibility private
+  # @private
   #
   # When we don't know what to expect for the value.
   class Unknown
@@ -63,7 +63,7 @@ module Anthropic
     end
   end
 
-  # @!visibility private
+  # @private
   #
   # Ruby has no Boolean class; this is something for models to refer to.
   class BooleanModel
@@ -79,7 +79,7 @@ module Anthropic
     end
   end
 
-  # @!visibility private
+  # @private
   #
   # A value from among a specified list of options. OpenAPI enum values map to
   # Ruby values in the SDK as follows:
@@ -114,7 +114,7 @@ module Anthropic
     end
   end
 
-  # @!visibility private
+  # @private
   #
   # Array of items of a given type.
   class ArrayOf
@@ -161,12 +161,12 @@ module Anthropic
     end
   end
 
-  # @!visibility private
+  # @private
   #
   class BaseModel
     include Anthropic::Converter
 
-    # @!visibility private
+    # @private
     #
     # Assumes superclass fields are totally defined before fields are accessed / defined on subclasses.
     #
@@ -175,7 +175,7 @@ module Anthropic
       @fields ||= (superclass == Anthropic::BaseModel ? {} : superclass.fields.dup)
     end
 
-    # @!visibility private
+    # @private
     #
     # @param name_sym [Symbol]
     # @param api_name [Symbol, nil]
@@ -205,21 +205,21 @@ module Anthropic
       end
     end
 
-    # @!visibility private
+    # @private
     #
     # NB `required` is just a signal to the reader. We don't do runtime validation anyway.
     private_class_method def self.required(name_sym, type_info = nil, api_name: nil, enum: nil)
       add_field(name_sym, api_name: api_name, type_info: enum || type_info)
     end
 
-    # @!visibility private
+    # @private
     #
     # NB `optional` is just a signal to the reader. We don't do runtime validation anyway.
     private_class_method def self.optional(name_sym, type_info = nil, api_name: nil, enum: nil)
       add_field(name_sym, api_name: api_name, type_info: enum || type_info)
     end
 
-    # @!visibility private
+    # @private
     #
     # `request_only` attributes not excluded from `.#coerce` when receiving responses
     # even if well behaved servers should not send them
@@ -230,7 +230,7 @@ module Anthropic
       @mode = nil
     end
 
-    # @!visibility private
+    # @private
     #
     # `response_only` attributes are omitted from `.#dump` when making requests
     def self.response_only(&blk)
@@ -240,7 +240,7 @@ module Anthropic
       @mode = nil
     end
 
-    # @!visibility private
+    # @private
     #
     # @param data [Anthropic::BaseModel, Hash{Symbol => Object}]
     #
@@ -254,7 +254,7 @@ module Anthropic
       end
     end
 
-    # @!visibility private
+    # @private
     #
     # @param data [Anthropic::BaseModel, Hash{Symbol => Object}]
     #

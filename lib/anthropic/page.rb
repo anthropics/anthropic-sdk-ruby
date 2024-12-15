@@ -14,7 +14,7 @@ module Anthropic
     # @return [String]
     attr_accessor :last_id
 
-    # @!visibility private
+    # @private
     #
     # @param model [Object]
     # @param raw_data [Hash{Symbol => Object}]

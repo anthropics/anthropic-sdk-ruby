@@ -7,14 +7,14 @@ module Anthropic
   # When making a request, you can pass an actual {RequestOptions} instance, or simply pass a Hash
   # with symbol keys matching the attributes on this class.
   class RequestOptions
-    # @!visibility private
+    # @private
     #
     # @return [Array<Symbol>]
     private_class_method def self.options
       @options ||= []
     end
 
-    # @!visibility private
+    # @private
     #
     # @param name [Symbol]
     private_class_method def self.option(name)
@@ -23,7 +23,7 @@ module Anthropic
       options << name
     end
 
-    # @!visibility private
+    # @private
     #
     # @param opts [Anthropic::RequestOptions, Hash{Symbol => Object}]
     #
@@ -97,16 +97,12 @@ module Anthropic
     # Lookup an option previously set on this instance.
     #
     # @return [Object]
-    def [](key)
-      @values[key]
-    end
+    def [](key) = @values[key]
 
     # Return a Hash containing the options set on this instance.
     #
     # @return [Hash{Symbol => Object}]
-    def to_h
-      @values
-    end
+    def to_h = @values
 
     alias_method :to_hash, :to_h
 
@@ -116,9 +112,7 @@ module Anthropic
     end
 
     # @return [String]
-    def to_s
-      @values.to_s
-    end
+    def to_s = @values.to_s
 
     # @param keys [Array<Symbol>, nil]
     #

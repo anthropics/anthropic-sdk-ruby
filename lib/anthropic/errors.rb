@@ -65,7 +65,7 @@ module Anthropic
   end
 
   class APIStatusError < Anthropic::APIError
-    # @!visibility private
+    # @private
     #
     # @param status [Integer]
     # @param body [Object, nil]

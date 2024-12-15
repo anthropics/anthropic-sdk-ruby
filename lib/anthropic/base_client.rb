@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Anthropic
-  # @!visibility private
+  # @private
   #
   class BaseClient
     MAX_REDIRECTS = 20 # from whatwg fetch spec
