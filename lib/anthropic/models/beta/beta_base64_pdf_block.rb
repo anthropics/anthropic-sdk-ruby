@@ -5,29 +5,32 @@ module Anthropic
     module Beta
       class BetaBase64PDFBlock < Anthropic::BaseModel
         # @!attribute source
+        #
         #   @return [Anthropic::Models::Beta::BetaBase64PDFSource]
         required :source, -> { Anthropic::Models::Beta::BetaBase64PDFSource }
 
         # @!attribute type
+        #
         #   @return [Symbol, Anthropic::Models::Beta::BetaBase64PDFBlock::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaBase64PDFBlock::Type }
 
         # @!attribute cache_control
+        #
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral]
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
+
+        # @!parse
+        #   # @param source [Object]
+        #   # @param type [String]
+        #   # @param cache_control [Object, nil]
+        #   #
+        #   def initialize(source:, type:, cache_control: nil) = super
+
+        # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         class Type < Anthropic::Enum
           DOCUMENT = :document
         end
-
-        # @!parse
-        #   # Create a new instance of BetaBase64PDFBlock from a Hash of raw data.
-        #   #
-        #   # @param data [Hash{Symbol => Object}] .
-        #   #   @option data [Object] :source
-        #   #   @option data [String] :type
-        #   #   @option data [Object, nil] :cache_control
-        #   def initialize(data = {}) = super
       end
     end
 
