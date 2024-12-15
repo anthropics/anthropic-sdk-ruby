@@ -4,29 +4,32 @@ module Anthropic
   module Models
     class RawContentBlockDeltaEvent < Anthropic::BaseModel
       # @!attribute delta
+      #
       #   @return [Anthropic::Models::InputJSONDelta, Anthropic::Models::TextDelta]
       required :delta, Anthropic::Unknown
 
       # @!attribute index
+      #
       #   @return [Integer]
       required :index, Integer
 
       # @!attribute type
+      #
       #   @return [Symbol, Anthropic::Models::RawContentBlockDeltaEvent::Type]
       required :type, enum: -> { Anthropic::Models::RawContentBlockDeltaEvent::Type }
+
+      # @!parse
+      #   # @param delta [Object]
+      #   # @param index [Integer]
+      #   # @param type [String]
+      #   #
+      #   def initialize(delta:, index:, type:) = super
+
+      # def initialize: (Hash | Anthropic::BaseModel) -> void
 
       class Type < Anthropic::Enum
         CONTENT_BLOCK_DELTA = :content_block_delta
       end
-
-      # @!parse
-      #   # Create a new instance of RawContentBlockDeltaEvent from a Hash of raw data.
-      #   #
-      #   # @param data [Hash{Symbol => Object}] .
-      #   #   @option data [Object] :delta
-      #   #   @option data [Integer] :index
-      #   #   @option data [String] :type
-      #   def initialize(data = {}) = super
     end
   end
 end

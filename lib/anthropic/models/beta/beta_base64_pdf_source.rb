@@ -5,16 +5,28 @@ module Anthropic
     module Beta
       class BetaBase64PDFSource < Anthropic::BaseModel
         # @!attribute data
+        #
         #   @return [String]
         required :data, String
 
         # @!attribute media_type
+        #
         #   @return [Symbol, Anthropic::Models::Beta::BetaBase64PDFSource::MediaType]
         required :media_type, enum: -> { Anthropic::Models::Beta::BetaBase64PDFSource::MediaType }
 
         # @!attribute type
+        #
         #   @return [Symbol, Anthropic::Models::Beta::BetaBase64PDFSource::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaBase64PDFSource::Type }
+
+        # @!parse
+        #   # @param data [String]
+        #   # @param media_type [String]
+        #   # @param type [String]
+        #   #
+        #   def initialize(data:, media_type:, type:) = super
+
+        # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         class MediaType < Anthropic::Enum
           APPLICATION_PDF = :"application/pdf"
@@ -23,15 +35,6 @@ module Anthropic
         class Type < Anthropic::Enum
           BASE64 = :base64
         end
-
-        # @!parse
-        #   # Create a new instance of BetaBase64PDFSource from a Hash of raw data.
-        #   #
-        #   # @param data [Hash{Symbol => Object}] .
-        #   #   @option data [String] :data
-        #   #   @option data [String] :media_type
-        #   #   @option data [String] :type
-        #   def initialize(data = {}) = super
       end
     end
 
