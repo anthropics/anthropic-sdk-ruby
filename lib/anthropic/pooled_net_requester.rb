@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Anthropic
-  # @!visibility private
+  # @private
   #
   class PooledNetRequester
     def initialize
