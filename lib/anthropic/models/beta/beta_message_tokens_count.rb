@@ -6,16 +6,17 @@ module Anthropic
       class BetaMessageTokensCount < Anthropic::BaseModel
         # @!attribute input_tokens
         #   The total number of tokens across the provided list of messages, system prompt, and tools.
+        #
         #   @return [Integer]
         required :input_tokens, Integer
 
         # @!parse
-        #   # Create a new instance of BetaMessageTokensCount from a Hash of raw data.
+        #   # @param input_tokens [Integer] The total number of tokens across the provided list of messages, system prompt,
+        #   #   and tools.
         #   #
-        #   # @param data [Hash{Symbol => Object}] .
-        #   #   @option data [Integer] :input_tokens The total number of tokens across the provided list of messages, system prompt,
-        #   #     and tools.
-        #   def initialize(data = {}) = super
+        #   def initialize(input_tokens:) = super
+
+        # def initialize: (Hash | Anthropic::BaseModel) -> void
       end
     end
 

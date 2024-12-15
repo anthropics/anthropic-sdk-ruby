@@ -5,24 +5,26 @@ module Anthropic
     module Beta
       class BetaTextBlock < Anthropic::BaseModel
         # @!attribute text
+        #
         #   @return [String]
         required :text, String
 
         # @!attribute type
+        #
         #   @return [Symbol, Anthropic::Models::Beta::BetaTextBlock::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaTextBlock::Type }
+
+        # @!parse
+        #   # @param text [String]
+        #   # @param type [String]
+        #   #
+        #   def initialize(text:, type:) = super
+
+        # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         class Type < Anthropic::Enum
           TEXT = :text
         end
-
-        # @!parse
-        #   # Create a new instance of BetaTextBlock from a Hash of raw data.
-        #   #
-        #   # @param data [Hash{Symbol => Object}] .
-        #   #   @option data [String] :text
-        #   #   @option data [String] :type
-        #   def initialize(data = {}) = super
       end
     end
 

@@ -9,6 +9,7 @@ module Anthropic
           #   Number of requests in the Message Batch that have been canceled.
           #
           # This is zero until processing of the entire Message Batch has ended.
+          #
           #   @return [Integer]
           required :canceled, Integer
 
@@ -16,6 +17,7 @@ module Anthropic
           #   Number of requests in the Message Batch that encountered an error.
           #
           # This is zero until processing of the entire Message Batch has ended.
+          #
           #   @return [Integer]
           required :errored, Integer
 
@@ -23,11 +25,13 @@ module Anthropic
           #   Number of requests in the Message Batch that have expired.
           #
           # This is zero until processing of the entire Message Batch has ended.
+          #
           #   @return [Integer]
           required :expired, Integer
 
           # @!attribute processing
           #   Number of requests in the Message Batch that are processing.
+          #
           #   @return [Integer]
           required :processing, Integer
 
@@ -35,27 +39,32 @@ module Anthropic
           #   Number of requests in the Message Batch that have completed successfully.
           #
           # This is zero until processing of the entire Message Batch has ended.
+          #
           #   @return [Integer]
           required :succeeded, Integer
 
           # @!parse
-          #   # Create a new instance of BetaMessageBatchRequestCounts from a Hash of raw data.
+          #   # @param canceled [Integer] Number of requests in the Message Batch that have been canceled.
           #   #
-          #   # @param data [Hash{Symbol => Object}] .
-          #   #   @option data [Integer] :canceled Number of requests in the Message Batch that have been canceled.
+          #   #   This is zero until processing of the entire Message Batch has ended.
           #   #
-          #   #     This is zero until processing of the entire Message Batch has ended.
-          #   #   @option data [Integer] :errored Number of requests in the Message Batch that encountered an error.
+          #   # @param errored [Integer] Number of requests in the Message Batch that encountered an error.
           #   #
-          #   #     This is zero until processing of the entire Message Batch has ended.
-          #   #   @option data [Integer] :expired Number of requests in the Message Batch that have expired.
+          #   #   This is zero until processing of the entire Message Batch has ended.
           #   #
-          #   #     This is zero until processing of the entire Message Batch has ended.
-          #   #   @option data [Integer] :processing Number of requests in the Message Batch that are processing.
-          #   #   @option data [Integer] :succeeded Number of requests in the Message Batch that have completed successfully.
+          #   # @param expired [Integer] Number of requests in the Message Batch that have expired.
           #   #
-          #   #     This is zero until processing of the entire Message Batch has ended.
-          #   def initialize(data = {}) = super
+          #   #   This is zero until processing of the entire Message Batch has ended.
+          #   #
+          #   # @param processing [Integer] Number of requests in the Message Batch that are processing.
+          #   #
+          #   # @param succeeded [Integer] Number of requests in the Message Batch that have completed successfully.
+          #   #
+          #   #   This is zero until processing of the entire Message Batch has ended.
+          #   #
+          #   def initialize(canceled:, errored:, expired:, processing:, succeeded:) = super
+
+          # def initialize: (Hash | Anthropic::BaseModel) -> void
         end
       end
     end

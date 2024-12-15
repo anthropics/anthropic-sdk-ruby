@@ -4,24 +4,26 @@ module Anthropic
   module Models
     class BetaOverloadedError < Anthropic::BaseModel
       # @!attribute message
+      #
       #   @return [String]
       required :message, String
 
       # @!attribute type
+      #
       #   @return [Symbol, Anthropic::Models::BetaOverloadedError::Type]
       required :type, enum: -> { Anthropic::Models::BetaOverloadedError::Type }
+
+      # @!parse
+      #   # @param message [String]
+      #   # @param type [String]
+      #   #
+      #   def initialize(message:, type:) = super
+
+      # def initialize: (Hash | Anthropic::BaseModel) -> void
 
       class Type < Anthropic::Enum
         OVERLOADED_ERROR = :overloaded_error
       end
-
-      # @!parse
-      #   # Create a new instance of BetaOverloadedError from a Hash of raw data.
-      #   #
-      #   # @param data [Hash{Symbol => Object}] .
-      #   #   @option data [String] :message
-      #   #   @option data [String] :type
-      #   def initialize(data = {}) = super
     end
   end
 end
