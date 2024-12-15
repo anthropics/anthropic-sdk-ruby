@@ -6,11 +6,15 @@ module Anthropic
   class BaseClient
     MAX_REDIRECTS = 20 # from whatwg fetch spec
 
+    # @private
+    #
     # @!attribute requester
     #
     #   @return [Anthropic::PooledNetRequester]
     attr_accessor :requester
 
+    # @private
+    #
     # @param base_url [String]
     # @param timeout [Float]
     # @param max_retries [Integer]
@@ -47,12 +51,18 @@ module Anthropic
       @max_retry_delay = max_retry_delay
     end
 
+    # @private
+    #
     # @return [Hash{String => String}]
-    def auth_headers = {}
+    private def auth_headers = {}
 
+    # @private
+    #
     # @return [String]
-    def generate_idempotency_key = "stainless-ruby-retry-#{SecureRandom.uuid}"
+    private def generate_idempotency_key = "stainless-ruby-retry-#{SecureRandom.uuid}"
 
+    # @private
+    #
     # @param req [Hash{Symbol => Object}]
     # @param opts [Anthropic::RequestOptions, Hash{Symbol => Object}]
     #
@@ -101,6 +111,8 @@ module Anthropic
       {method: method, url: url, headers: headers, body: encoded, timeout: timeout}
     end
 
+    # @private
+    #
     # @param response [Net::HTTPResponse]
     # @param suppress_error [Boolean]
     #
@@ -121,6 +133,8 @@ module Anthropic
       end
     end
 
+    # @private
+    #
     # @param status [Integer]
     # @param headers [Hash{String => String}]
     #
@@ -142,6 +156,8 @@ module Anthropic
       end
     end
 
+    # @private
+    #
     # @param headers [Hash{String => String}]
     # @param retry_count [Integer]
     #
@@ -164,6 +180,8 @@ module Anthropic
       (@initial_retry_delay * scale * jitter).clamp(0, @max_retry_delay)
     end
 
+    # @private
+    #
     # @param request [Hash{Symbol => Object}]
     #   @option options [Symbol] :method
     #   @option options [Hash{String => String}] :headers
@@ -219,6 +237,8 @@ module Anthropic
       request
     end
 
+    # @private
+    #
     # @param request [Hash{Symbol => Object}]
     #   @option options [Symbol] :method
     #   @option options [URI::Generic] :url
@@ -294,6 +314,8 @@ module Anthropic
       end
     end
 
+    # @private
+    #
     # @param req [Hash{Symbol => Object}]
     # @param opts [Anthropic::RequestOptions, Hash{Symbol => Object}]
     #

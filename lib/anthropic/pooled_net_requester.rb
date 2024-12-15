@@ -9,6 +9,8 @@ module Anthropic
       @pools = {}
     end
 
+    # @private
+    #
     # @param url [URL::Generic]
     # @param timeout [Float]
     #
@@ -35,6 +37,8 @@ module Anthropic
       end
     end
 
+    # @private
+    #
     # @param req [Hash{Symbol => Object}]
     #   @option req [Symbol] :method
     #   @option req [URI::Generic] :url
