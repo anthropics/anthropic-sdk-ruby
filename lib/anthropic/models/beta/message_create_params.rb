@@ -10,6 +10,7 @@ module Anthropic
         # Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
         #
         # Different models have different maximum values for this parameter.  See [models](https://docs.anthropic.com/en/docs/models-overview) for details.
+        #
         #   @return [Integer]
         required :max_tokens, Integer
 
@@ -78,16 +79,19 @@ module Anthropic
         # See [examples](https://docs.anthropic.com/en/api/messages-examples#vision) for more input examples.
         #
         # Note that if you want to include a [system prompt](https://docs.anthropic.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+        #
         #   @return [Array<Anthropic::Models::Beta::BetaMessageParam>]
         required :messages, Anthropic::ArrayOf.new(-> { Anthropic::Models::Beta::BetaMessageParam })
 
         # @!attribute model
         #   The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+        #
         #   @return [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent2]
         required :model, Anthropic::Unknown
 
         # @!attribute metadata
         #   An object describing metadata about the request.
+        #
         #   @return [Anthropic::Models::Beta::BetaMetadata]
         optional :metadata, -> { Anthropic::Models::Beta::BetaMetadata }
 
@@ -97,6 +101,7 @@ module Anthropic
         # Our models will normally stop when they have naturally completed their turn, which will result in a response `stop_reason` of `"end_turn"`.
         #
         # If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
+        #
         #   @return [Array<String>]
         optional :stop_sequences, Anthropic::ArrayOf.new(String)
 
@@ -104,6 +109,7 @@ module Anthropic
         #   Whether to incrementally stream the response using server-sent events.
         #
         # See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for details.
+        #
         #   @return [Boolean]
         required :stream, enum: -> { Anthropic::Models::Beta::MessageCreateParams::Stream }
 
@@ -111,6 +117,7 @@ module Anthropic
         #   System prompt.
         #
         # A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
+        #
         #   @return [Array<Anthropic::Models::Beta::BetaTextBlockParam>, String]
         optional :system_, Anthropic::Unknown, api_name: :system
 
@@ -120,11 +127,13 @@ module Anthropic
         # Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
         #
         # Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
+        #
         #   @return [Float]
         optional :temperature, Float
 
         # @!attribute tool_choice
         #   How the model should use the provided tools. The model can use a specific tool, any available tool, or decide by itself.
+        #
         #   @return [Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceTool]
         optional :tool_choice, Anthropic::Unknown
 
@@ -188,6 +197,7 @@ module Anthropic
         # Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
         #
         # See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
+        #
         #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>]
         optional :tools, Anthropic::ArrayOf.new(Anthropic::Unknown)
 
@@ -197,6 +207,7 @@ module Anthropic
         # Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
         #
         # Recommended for advanced use cases only. You usually only need to use `temperature`.
+        #
         #   @return [Integer]
         optional :top_k, Integer
 
@@ -206,11 +217,13 @@ module Anthropic
         # In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
         #
         # Recommended for advanced use cases only. You usually only need to use `temperature`.
+        #
         #   @return [Float]
         optional :top_p, Float
 
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
+        #
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent3>]
         optional :betas, Anthropic::ArrayOf.new(Anthropic::Unknown), api_name: :"anthropic-beta"
 
