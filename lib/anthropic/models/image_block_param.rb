@@ -4,47 +4,25 @@ module Anthropic
   module Models
     class ImageBlockParam < Anthropic::BaseModel
       # @!attribute source
-      #
       #   @return [Anthropic::Models::ImageBlockParam::Source]
       required :source, -> { Anthropic::Models::ImageBlockParam::Source }
 
       # @!attribute type
-      #
       #   @return [Symbol, Anthropic::Models::ImageBlockParam::Type]
       required :type, enum: -> { Anthropic::Models::ImageBlockParam::Type }
 
-      # @!parse
-      #   # @param source [Object]
-      #   # @param type [String]
-      #   #
-      #   def initialize(source:, type:) = super
-
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
-
       class Source < Anthropic::BaseModel
         # @!attribute data
-        #
         #   @return [String]
         required :data, String
 
         # @!attribute media_type
-        #
         #   @return [Symbol, Anthropic::Models::ImageBlockParam::Source::MediaType]
         required :media_type, enum: -> { Anthropic::Models::ImageBlockParam::Source::MediaType }
 
         # @!attribute type
-        #
         #   @return [Symbol, Anthropic::Models::ImageBlockParam::Source::Type]
         required :type, enum: -> { Anthropic::Models::ImageBlockParam::Source::Type }
-
-        # @!parse
-        #   # @param data [String]
-        #   # @param media_type [String]
-        #   # @param type [String]
-        #   #
-        #   def initialize(data:, media_type:, type:) = super
-
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         class MediaType < Anthropic::Enum
           IMAGE_JPEG = :"image/jpeg"
@@ -56,11 +34,28 @@ module Anthropic
         class Type < Anthropic::Enum
           BASE64 = :base64
         end
+
+        # @!parse
+        #   # Create a new instance of Source from a Hash of raw data.
+        #   #
+        #   # @param data [Hash{Symbol => Object}] .
+        #   #   @option data [String] :data
+        #   #   @option data [String] :media_type
+        #   #   @option data [String] :type
+        #   def initialize(data = {}) = super
       end
 
       class Type < Anthropic::Enum
         IMAGE = :image
       end
+
+      # @!parse
+      #   # Create a new instance of ImageBlockParam from a Hash of raw data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [Object] :source
+      #   #   @option data [String] :type
+      #   def initialize(data = {}) = super
     end
   end
 end

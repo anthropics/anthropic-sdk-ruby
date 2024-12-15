@@ -7,7 +7,6 @@ module Anthropic
     MAX_REDIRECTS = 20 # from whatwg fetch spec
 
     # @!attribute requester
-    #
     #   @return [Anthropic::PooledNetRequester]
     attr_accessor :requester
 

@@ -4,26 +4,24 @@ module Anthropic
   module Models
     class TextBlockParam < Anthropic::BaseModel
       # @!attribute text
-      #
       #   @return [String]
       required :text, String
 
       # @!attribute type
-      #
       #   @return [Symbol, Anthropic::Models::TextBlockParam::Type]
       required :type, enum: -> { Anthropic::Models::TextBlockParam::Type }
-
-      # @!parse
-      #   # @param text [String]
-      #   # @param type [String]
-      #   #
-      #   def initialize(text:, type:) = super
-
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
 
       class Type < Anthropic::Enum
         TEXT = :text
       end
+
+      # @!parse
+      #   # Create a new instance of TextBlockParam from a Hash of raw data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [String] :text
+      #   #   @option data [String] :type
+      #   def initialize(data = {}) = super
     end
   end
 end

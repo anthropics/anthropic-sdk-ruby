@@ -57,41 +57,35 @@ module Anthropic
     # @!attribute idempotency_key
     # Idempotency key to send with request and all associated retries. Will only be sent for write
     #   requests.
-    #
-    #   @return [String]
+    # @return [String]
     option :idempotency_key
 
     # @!attribute extra_headers
     # Extra headers to send with the request. These are `.merged`’d into any `extra_headers` given at the
     #  client level.
-    #
-    #   @return [Hash{String => String}]
+    # @return [Hash{String => String}]
     option :extra_headers
 
     # @!attribute extra_query
     # Extra query params to send with the request. These are `.merge`’d into any `query` given at
     #   the client level.
-    #
-    #   @return [Hash{Symbol => Array<String>}]
+    # @return [Hash{Symbol => Array<String>}]
     option :extra_query
 
     # @!attribute extra_body
     # Extra data to send with the request. These are deep merged into any data generated as part
     #   of the normal request.
-    #
-    #   @return [Hash{Symbol => Object}]
+    # @return [Hash{Symbol => Object}]
     option :extra_body
 
     # @!attribute max_retries
     # Maximum number of retries to attempt after a failed initial request.
-    #
-    #   @return [Integer]
+    # @return [Integer]
     option :max_retries
 
     # @!attribute timeout
     # Request timeout in seconds.
-    #
-    #   @return [Integer]
+    # @return [Integer]
     option :timeout
 
     # Lookup an option previously set on this instance.

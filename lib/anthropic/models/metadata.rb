@@ -7,20 +7,19 @@ module Anthropic
       #   An external identifier for the user who is associated with the request.
       #
       # This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
-      #
       #   @return [String]
       optional :user_id, String
 
       # @!parse
-      #   # @param user_id [String, nil] An external identifier for the user who is associated with the request.
+      #   # Create a new instance of Metadata from a Hash of raw data.
       #   #
-      #   #   This should be a uuid, hash value, or other opaque identifier. Anthropic may use
-      #   #   this id to help detect abuse. Do not include any identifying information such as
-      #   #   name, email address, or phone number.
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [String, nil] :user_id An external identifier for the user who is associated with the request.
       #   #
-      #   def initialize(user_id: nil) = super
-
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      #   #     This should be a uuid, hash value, or other opaque identifier. Anthropic may use
+      #   #     this id to help detect abuse. Do not include any identifying information such as
+      #   #     name, email address, or phone number.
+      #   def initialize(data = {}) = super
     end
   end
 end

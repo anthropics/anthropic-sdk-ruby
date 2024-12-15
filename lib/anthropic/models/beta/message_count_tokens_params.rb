@@ -69,13 +69,11 @@ module Anthropic
         # See [examples](https://docs.anthropic.com/en/api/messages-examples#vision) for more input examples.
         #
         # Note that if you want to include a [system prompt](https://docs.anthropic.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
-        #
         #   @return [Array<Anthropic::Models::Beta::BetaMessageParam>]
         required :messages, Anthropic::ArrayOf.new(-> { Anthropic::Models::Beta::BetaMessageParam })
 
         # @!attribute model
         #   The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-        #
         #   @return [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent4]
         required :model, Anthropic::Unknown
 
@@ -83,13 +81,11 @@ module Anthropic
         #   System prompt.
         #
         # A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
-        #
         #   @return [Array<Anthropic::Models::Beta::BetaTextBlockParam>, String]
         optional :system_, Anthropic::Unknown, api_name: :system
 
         # @!attribute tool_choice
         #   How the model should use the provided tools. The model can use a specific tool, any available tool, or decide by itself.
-        #
         #   @return [Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceTool]
         optional :tool_choice, Anthropic::Unknown
 
@@ -153,13 +149,11 @@ module Anthropic
         # Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
         #
         # See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
-        #
         #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>]
         optional :tools, Anthropic::ArrayOf.new(Anthropic::Unknown)
 
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
-        #
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent5>]
         optional :betas, Anthropic::ArrayOf.new(Anthropic::Unknown), api_name: :"anthropic-beta"
       end

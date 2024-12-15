@@ -4,20 +4,19 @@ module Anthropic
   module Models
     class RawMessageStopEvent < Anthropic::BaseModel
       # @!attribute type
-      #
       #   @return [Symbol, Anthropic::Models::RawMessageStopEvent::Type]
       required :type, enum: -> { Anthropic::Models::RawMessageStopEvent::Type }
-
-      # @!parse
-      #   # @param type [String]
-      #   #
-      #   def initialize(type:) = super
-
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
 
       class Type < Anthropic::Enum
         MESSAGE_STOP = :message_stop
       end
+
+      # @!parse
+      #   # Create a new instance of RawMessageStopEvent from a Hash of raw data.
+      #   #
+      #   # @param data [Hash{Symbol => Object}] .
+      #   #   @option data [String] :type
+      #   def initialize(data = {}) = super
     end
   end
 end

@@ -6,7 +6,6 @@ module Anthropic
       module PromptCaching
         class PromptCachingBetaImageBlockParam < Anthropic::BaseModel
           # @!attribute source
-          #
           #   @return [Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam::Source]
           required :source,
                    -> {
@@ -14,34 +13,21 @@ module Anthropic
                    }
 
           # @!attribute type
-          #
           #   @return [Symbol, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam::Type]
           required :type,
                    enum: -> { Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam::Type }
 
           # @!attribute cache_control
-          #
           #   @return [Anthropic::Models::Beta::PromptCaching::PromptCachingBetaCacheControlEphemeral]
           optional :cache_control,
                    -> { Anthropic::Models::Beta::PromptCaching::PromptCachingBetaCacheControlEphemeral }
 
-          # @!parse
-          #   # @param source [Object]
-          #   # @param type [String]
-          #   # @param cache_control [Object, nil]
-          #   #
-          #   def initialize(source:, type:, cache_control: nil) = super
-
-          # def initialize: (Hash | Anthropic::BaseModel) -> void
-
           class Source < Anthropic::BaseModel
             # @!attribute data
-            #
             #   @return [String]
             required :data, String
 
             # @!attribute media_type
-            #
             #   @return [Symbol, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam::Source::MediaType]
             required :media_type,
                      enum: -> {
@@ -49,21 +35,11 @@ module Anthropic
                      }
 
             # @!attribute type
-            #
             #   @return [Symbol, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam::Source::Type]
             required :type,
                      enum: -> {
                        Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam::Source::Type
                      }
-
-            # @!parse
-            #   # @param data [String]
-            #   # @param media_type [String]
-            #   # @param type [String]
-            #   #
-            #   def initialize(data:, media_type:, type:) = super
-
-            # def initialize: (Hash | Anthropic::BaseModel) -> void
 
             class MediaType < Anthropic::Enum
               IMAGE_JPEG = :"image/jpeg"
@@ -75,11 +51,30 @@ module Anthropic
             class Type < Anthropic::Enum
               BASE64 = :base64
             end
+
+            # @!parse
+            #   # Create a new instance of Source from a Hash of raw data.
+            #   #
+            #   # @param data [Hash{Symbol => Object}] .
+            #   #   @option data [String] :data
+            #   #   @option data [String] :media_type
+            #   #   @option data [String] :type
+            #   def initialize(data = {}) = super
           end
 
           class Type < Anthropic::Enum
             IMAGE = :image
           end
+
+          # @!parse
+          #   # Create a new instance of PromptCachingBetaImageBlockParam from a Hash of raw
+          #   #   data.
+          #   #
+          #   # @param data [Hash{Symbol => Object}] .
+          #   #   @option data [Object] :source
+          #   #   @option data [String] :type
+          #   #   @option data [Object, nil] :cache_control
+          #   def initialize(data = {}) = super
         end
       end
 

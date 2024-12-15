@@ -6,22 +6,18 @@ module Anthropic
       module PromptCaching
         class PromptCachingBetaToolUseBlockParam < Anthropic::BaseModel
           # @!attribute id
-          #
           #   @return [String]
           required :id, String
 
           # @!attribute input
-          #
           #   @return [Object]
           required :input, Anthropic::Unknown
 
           # @!attribute name
-          #
           #   @return [String]
           required :name, String
 
           # @!attribute type
-          #
           #   @return [Symbol, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaToolUseBlockParam::Type]
           required :type,
                    enum: -> {
@@ -29,25 +25,25 @@ module Anthropic
                    }
 
           # @!attribute cache_control
-          #
           #   @return [Anthropic::Models::Beta::PromptCaching::PromptCachingBetaCacheControlEphemeral]
           optional :cache_control,
                    -> { Anthropic::Models::Beta::PromptCaching::PromptCachingBetaCacheControlEphemeral }
 
-          # @!parse
-          #   # @param id [String]
-          #   # @param input [Object]
-          #   # @param name [String]
-          #   # @param type [String]
-          #   # @param cache_control [Object, nil]
-          #   #
-          #   def initialize(id:, input:, name:, type:, cache_control: nil) = super
-
-          # def initialize: (Hash | Anthropic::BaseModel) -> void
-
           class Type < Anthropic::Enum
             TOOL_USE = :tool_use
           end
+
+          # @!parse
+          #   # Create a new instance of PromptCachingBetaToolUseBlockParam from a Hash of raw
+          #   #   data.
+          #   #
+          #   # @param data [Hash{Symbol => Object}] .
+          #   #   @option data [String] :id
+          #   #   @option data [Object] :input
+          #   #   @option data [String] :name
+          #   #   @option data [String] :type
+          #   #   @option data [Object, nil] :cache_control
+          #   def initialize(data = {}) = super
         end
       end
 

@@ -6,16 +6,15 @@ module Anthropic
       class BetaMessageDeltaUsage < Anthropic::BaseModel
         # @!attribute output_tokens
         #   The cumulative number of output tokens which were used.
-        #
         #   @return [Integer]
         required :output_tokens, Integer
 
         # @!parse
-        #   # @param output_tokens [Integer] The cumulative number of output tokens which were used.
+        #   # Create a new instance of BetaMessageDeltaUsage from a Hash of raw data.
         #   #
-        #   def initialize(output_tokens:) = super
-
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        #   # @param data [Hash{Symbol => Object}] .
+        #   #   @option data [Integer] :output_tokens The cumulative number of output tokens which were used.
+        #   def initialize(data = {}) = super
       end
     end
 
