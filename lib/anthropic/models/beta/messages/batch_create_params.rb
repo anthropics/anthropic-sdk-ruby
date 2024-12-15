@@ -22,6 +22,16 @@ module Anthropic
           #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent6>]
           optional :betas, Anthropic::ArrayOf.new(Anthropic::Unknown), api_name: :"anthropic-beta"
 
+          # @!parse
+          #   # @param requests [Array<Object>] List of requests for prompt completion. Each is an individual request to create
+          #   #   a Message.
+          #   #
+          #   # @param betas [Array<String>, nil] Optional header to specify the beta version(s) you want to use.
+          #   #
+          #   def initialize(requests:, betas: nil) = super
+
+          # def initialize: (Hash | Anthropic::BaseModel) -> void
+
           class Request < Anthropic::BaseModel
             # @!attribute custom_id
             #   Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
