@@ -64,6 +64,10 @@ Style/ClassAndModuleChildren:
   Exclude:
     - test/**/*
 
+# Perfectly fine
+Style/MultipleComparison:
+  Enabled: false
+
 # Rubocop is pretty bad about mangling single line lambdas
 Style/Lambda:
   Enabled: false
