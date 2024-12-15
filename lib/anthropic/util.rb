@@ -2,7 +2,8 @@
 
 module Anthropic
   # @!visibility private
-  class Util
+  #
+  module Util
     # Use this to indicate that a value should be explicitly removed from a data structure
     # when using `Anthropic::Util.deep_merge`.
     # E.g. merging `{a: 1}` and `{a: OMIT}` should produce `{}`, where merging `{a: 1}` and
@@ -78,13 +79,20 @@ module Anthropic
       in [_, nil, nil]
         data
       in [Hash, Symbol, _] | [Array, Integer, _]
-        data[pick]
-      in [Hash | Array, Enumerable, _]
-        data.dig(*pick)
-      in [_, _, Proc]
-        blk.call(pick)
-      in [_, _, nil]
-        default
+        blk.nil? ? data.fetch(pick, default) : data.fetch(pick, &blk)
+      in [Hash | Array, Array, _]
+        pick.reduce(data) do |acc, key|
+          case acc
+          in Hash if acc.key?(key)
+            acc.fetch(key)
+          in Array if key.is_a?(Integer) && key < acc.length
+            acc[key]
+          else
+            return blk.nil? ? default : blk.call
+          end
+        end
+      in _
+        blk.nil? ? default : blk.call
       end
     end
 
