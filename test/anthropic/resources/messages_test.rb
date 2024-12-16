@@ -16,6 +16,9 @@ class Anthropic::Test::Resources::MessagesTest < Minitest::Test
       messages: [{"content" => "Hello, world", "role" => "user"}],
       model: "claude-3-5-sonnet-20241022"
     )
-    assert_kind_of(Anthropic::Models::Message, response)
+
+    assert_pattern do
+      response => Anthropic::Models::Message
+    end
   end
 end

@@ -72,6 +72,15 @@ Style/MultipleComparison:
 Style/Lambda:
   Enabled: false
 
+# Not all parameters should be named
+Style/NumberedParameters:
+  Enabled: false
+
+# Fairly useful in tests for pattern matching
+Style/CaseEquality:
+  Exclude:
+    - test/**/*
+
 # Reasonable to use brackets for errors with long messages.
 Style/RaiseArgs:
   Enabled: false
