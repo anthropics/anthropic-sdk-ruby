@@ -14,7 +14,7 @@ module Anthropic
       required :type, enum: -> { Anthropic::Models::ImageBlockParam::Type }
 
       # @!parse
-      #   # @param source [Object]
+      #   # @param source [Anthropic::Models::ImageBlockParam::Source]
       #   # @param type [String]
       #   #
       #   def initialize(source:, type:) = super

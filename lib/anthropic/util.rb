@@ -191,9 +191,7 @@ module Anthropic
 
     # @private
     #
-    # @param url [String]
-    # @param url [URI::Generic, String]
-    # @param input [Object]
+    # @param input [Hash, Object]
     #
     # @return [Hash, Object]
     def self.coerce_hash(input)

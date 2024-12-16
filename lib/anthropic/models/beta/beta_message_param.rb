@@ -15,7 +15,7 @@ module Anthropic
         required :role, enum: -> { Anthropic::Models::Beta::BetaMessageParam::Role }
 
         # @!parse
-        #   # @param content [Array<Object>, String]
+        #   # @param content [Array<Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam>, String]
         #   # @param role [String]
         #   #
         #   def initialize(content:, role:) = super

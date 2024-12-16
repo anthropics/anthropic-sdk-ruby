@@ -28,7 +28,7 @@ module Anthropic
       optional :description, String
 
       # @!parse
-      #   # @param input_schema [Object] [JSON schema](https://json-schema.org/) for this tool's input.
+      #   # @param input_schema [Anthropic::Models::Tool::InputSchema] [JSON schema](https://json-schema.org/) for this tool's input.
       #   #
       #   #   This defines the shape of the `input` that your tool accepts and that the model
       #   #   will produce.

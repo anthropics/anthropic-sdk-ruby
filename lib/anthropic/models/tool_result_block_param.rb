@@ -26,7 +26,7 @@ module Anthropic
       # @!parse
       #   # @param tool_use_id [String]
       #   # @param type [String]
-      #   # @param content [Array<Object>, String, nil]
+      #   # @param content [Array<Anthropic::Models::ImageBlockParam, Anthropic::Models::TextBlockParam>, String, nil]
       #   # @param is_error [Boolean, nil]
       #   #
       #   def initialize(tool_use_id:, type:, content: nil, is_error: nil) = super

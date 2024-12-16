@@ -37,8 +37,8 @@ module Anthropic
           # @!parse
           #   # @param tool_use_id [String]
           #   # @param type [String]
-          #   # @param cache_control [Object, nil]
-          #   # @param content [Array<Object>, String, nil]
+          #   # @param cache_control [Anthropic::Models::Beta::PromptCaching::PromptCachingBetaCacheControlEphemeral, nil]
+          #   # @param content [Array<Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaTextBlockParam>, String, nil]
           #   # @param is_error [Boolean, nil]
           #   #
           #   def initialize(tool_use_id:, type:, cache_control: nil, content: nil, is_error: nil) = super

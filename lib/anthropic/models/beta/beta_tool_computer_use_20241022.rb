@@ -51,7 +51,7 @@ module Anthropic
         #   #
         #   # @param type [String]
         #   #
-        #   # @param cache_control [Object, nil]
+        #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   #
         #   # @param display_number [Integer, nil] The X11 display number (e.g. 0, 1) for the display.
         #   #

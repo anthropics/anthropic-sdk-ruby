@@ -26,11 +26,11 @@ module Anthropic
       required :usage, -> { Anthropic::Models::MessageDeltaUsage }
 
       # @!parse
-      #   # @param delta [Object]
+      #   # @param delta [Anthropic::Models::RawMessageDeltaEvent::Delta]
       #   #
       #   # @param type [String]
       #   #
-      #   # @param usage [Object] Billing and rate-limit usage.
+      #   # @param usage [Anthropic::Models::MessageDeltaUsage] Billing and rate-limit usage.
       #   #
       #   #   Anthropic's API bills and rate-limits by token counts, as tokens represent the
       #   #   underlying cost to our systems.

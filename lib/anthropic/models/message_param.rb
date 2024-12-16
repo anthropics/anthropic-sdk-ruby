@@ -14,7 +14,7 @@ module Anthropic
       required :role, enum: -> { Anthropic::Models::MessageParam::Role }
 
       # @!parse
-      #   # @param content [Array<Object>, String]
+      #   # @param content [Array<Anthropic::Models::ImageBlockParam, Anthropic::Models::TextBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::ToolUseBlockParam>, String]
       #   # @param role [String]
       #   #
       #   def initialize(content:, role:) = super

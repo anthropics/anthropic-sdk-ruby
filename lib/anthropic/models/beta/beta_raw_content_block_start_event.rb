@@ -20,7 +20,7 @@ module Anthropic
         required :type, enum: -> { Anthropic::Models::Beta::BetaRawContentBlockStartEvent::Type }
 
         # @!parse
-        #   # @param content_block [Object]
+        #   # @param content_block [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock]
         #   # @param index [Integer]
         #   # @param type [String]
         #   #

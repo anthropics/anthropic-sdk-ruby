@@ -19,7 +19,7 @@ module Anthropic
       required :type, enum: -> { Anthropic::Models::RawContentBlockStartEvent::Type }
 
       # @!parse
-      #   # @param content_block [Object]
+      #   # @param content_block [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock]
       #   # @param index [Integer]
       #   # @param type [String]
       #   #

@@ -20,7 +20,7 @@ module Anthropic
         required :type, enum: -> { Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Type }
 
         # @!parse
-        #   # @param delta [Object]
+        #   # @param delta [Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaTextDelta]
         #   # @param index [Integer]
         #   # @param type [String]
         #   #

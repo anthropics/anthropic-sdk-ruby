@@ -34,7 +34,7 @@ module Anthropic
         #   # @param input [Object]
         #   # @param name [String]
         #   # @param type [String]
-        #   # @param cache_control [Object, nil]
+        #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   #
         #   def initialize(id:, input:, name:, type:, cache_control: nil) = super
 

@@ -19,7 +19,7 @@ module Anthropic
                    }
 
           # @!parse
-          #   # @param message [Object]
+          #   # @param message [Anthropic::Models::Beta::BetaMessage]
           #   # @param type [String]
           #   #
           #   def initialize(message:, type:) = super

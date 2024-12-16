@@ -14,7 +14,7 @@ module Anthropic
       required :type, enum: -> { Anthropic::Models::BetaErrorResponse::Type }
 
       # @!parse
-      #   # @param error [Object]
+      #   # @param error [Anthropic::Models::BetaAPIError, Anthropic::Models::BetaAuthenticationError, Anthropic::Models::BetaInvalidRequestError, Anthropic::Models::BetaNotFoundError, Anthropic::Models::BetaOverloadedError, Anthropic::Models::BetaPermissionError, Anthropic::Models::BetaRateLimitError]
       #   # @param type [String]
       #   #
       #   def initialize(error:, type:) = super

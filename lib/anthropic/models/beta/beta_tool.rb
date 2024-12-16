@@ -39,7 +39,7 @@ module Anthropic
         optional :type, enum: -> { Anthropic::Models::Beta::BetaTool::Type }
 
         # @!parse
-        #   # @param input_schema [Object] [JSON schema](https://json-schema.org/) for this tool's input.
+        #   # @param input_schema [Anthropic::Models::Beta::BetaTool::InputSchema] [JSON schema](https://json-schema.org/) for this tool's input.
         #   #
         #   #   This defines the shape of the `input` that your tool accepts and that the model
         #   #   will produce.
@@ -48,7 +48,7 @@ module Anthropic
         #   #
         #   #   This is how the tool will be called by the model and in tool_use blocks.
         #   #
-        #   # @param cache_control [Object, nil]
+        #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   #
         #   # @param description [String, nil] Description of what this tool does.
         #   #

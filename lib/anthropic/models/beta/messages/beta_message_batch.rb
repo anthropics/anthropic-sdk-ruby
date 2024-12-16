@@ -101,7 +101,7 @@ module Anthropic
           #   #
           #   # @param processing_status [String] Processing status of the Message Batch.
           #   #
-          #   # @param request_counts [Object] Tallies requests within the Message Batch, categorized by their status.
+          #   # @param request_counts [Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts] Tallies requests within the Message Batch, categorized by their status.
           #   #
           #   #   Requests start as `processing` and move to one of the other statuses only once
           #   #   processing of the entire batch ends. The sum of all values always matches the
