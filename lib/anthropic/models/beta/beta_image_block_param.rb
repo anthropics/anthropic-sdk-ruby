@@ -20,9 +20,9 @@ module Anthropic
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
 
         # @!parse
-        #   # @param source [Object]
+        #   # @param source [Anthropic::Models::Beta::BetaImageBlockParam::Source]
         #   # @param type [String]
-        #   # @param cache_control [Object, nil]
+        #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   #
         #   def initialize(source:, type:, cache_control: nil) = super
 

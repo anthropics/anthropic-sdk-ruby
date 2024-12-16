@@ -19,7 +19,7 @@ module Anthropic
                    }
 
           # @!parse
-          #   # @param content [Array<Object>, String]
+          #   # @param content [Array<Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaTextBlockParam, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaToolResultBlockParam, Anthropic::Models::Beta::PromptCaching::PromptCachingBetaToolUseBlockParam>, String]
           #   # @param role [String]
           #   #
           #   def initialize(content:, role:) = super

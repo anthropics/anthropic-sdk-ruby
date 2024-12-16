@@ -27,7 +27,7 @@ module Anthropic
           #   #
           #   #   Must be unique for each request within the Message Batch.
           #   #
-          #   # @param result [Object] Processing result for this request.
+          #   # @param result [Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult] Processing result for this request.
           #   #
           #   #   Contains a Message output if processing was successful, an error response if
           #   #   processing failed, or the reason why processing was not attempted, such as

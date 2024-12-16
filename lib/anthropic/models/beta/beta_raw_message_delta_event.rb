@@ -27,11 +27,11 @@ module Anthropic
         required :usage, -> { Anthropic::Models::Beta::BetaMessageDeltaUsage }
 
         # @!parse
-        #   # @param delta [Object]
+        #   # @param delta [Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta]
         #   #
         #   # @param type [String]
         #   #
-        #   # @param usage [Object] Billing and rate-limit usage.
+        #   # @param usage [Anthropic::Models::Beta::BetaMessageDeltaUsage] Billing and rate-limit usage.
         #   #
         #   #   Anthropic's API bills and rate-limits by token counts, as tokens represent the
         #   #   underlying cost to our systems.

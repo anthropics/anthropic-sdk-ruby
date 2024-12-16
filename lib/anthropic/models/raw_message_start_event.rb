@@ -14,7 +14,7 @@ module Anthropic
       required :type, enum: -> { Anthropic::Models::RawMessageStartEvent::Type }
 
       # @!parse
-      #   # @param message [Object]
+      #   # @param message [Anthropic::Models::Message]
       #   # @param type [String]
       #   #
       #   def initialize(message:, type:) = super

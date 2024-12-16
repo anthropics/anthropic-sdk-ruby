@@ -27,7 +27,7 @@ module Anthropic
           # @!parse
           #   # @param text [String]
           #   # @param type [String]
-          #   # @param cache_control [Object, nil]
+          #   # @param cache_control [Anthropic::Models::Beta::PromptCaching::PromptCachingBetaCacheControlEphemeral, nil]
           #   #
           #   def initialize(text:, type:, cache_control: nil) = super
 

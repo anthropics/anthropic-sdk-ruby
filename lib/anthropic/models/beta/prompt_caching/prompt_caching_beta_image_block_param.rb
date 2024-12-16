@@ -26,9 +26,9 @@ module Anthropic
                    -> { Anthropic::Models::Beta::PromptCaching::PromptCachingBetaCacheControlEphemeral }
 
           # @!parse
-          #   # @param source [Object]
+          #   # @param source [Anthropic::Models::Beta::PromptCaching::PromptCachingBetaImageBlockParam::Source]
           #   # @param type [String]
-          #   # @param cache_control [Object, nil]
+          #   # @param cache_control [Anthropic::Models::Beta::PromptCaching::PromptCachingBetaCacheControlEphemeral, nil]
           #   #
           #   def initialize(source:, type:, cache_control: nil) = super
 

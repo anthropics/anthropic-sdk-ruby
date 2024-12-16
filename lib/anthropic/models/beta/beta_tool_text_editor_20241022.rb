@@ -29,7 +29,7 @@ module Anthropic
         #   #
         #   # @param type [String]
         #   #
-        #   # @param cache_control [Object, nil]
+        #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   #
         #   def initialize(name:, type:, cache_control: nil) = super
 

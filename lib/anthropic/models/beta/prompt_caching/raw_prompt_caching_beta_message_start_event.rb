@@ -19,7 +19,7 @@ module Anthropic
                    }
 
           # @!parse
-          #   # @param message [Object]
+          #   # @param message [Anthropic::Models::Beta::PromptCaching::PromptCachingBetaMessage]
           #   # @param type [String]
           #   #
           #   def initialize(message:, type:) = super

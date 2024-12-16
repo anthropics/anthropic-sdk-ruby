@@ -107,7 +107,7 @@ module Anthropic
       #   #   [prompt design](https://docs.anthropic.com/en/docs/intro-to-prompting) for more
       #   #   details.
       #   #
-      #   # @param metadata [Object, nil] An object describing metadata about the request.
+      #   # @param metadata [Anthropic::Models::Metadata, nil] An object describing metadata about the request.
       #   #
       #   # @param stop_sequences [Array<String>, nil] Sequences that will cause the model to stop generating.
       #   #

@@ -247,7 +247,7 @@ module Anthropic
           #   #   Different models have different maximum values for this parameter. See
           #   #   [models](https://docs.anthropic.com/en/docs/models-overview) for details.
           #   #
-          #   # @param messages [Array<Object>] Input messages.
+          #   # @param messages [Array<Anthropic::Models::Beta::PromptCaching::PromptCachingBetaMessageParam>] Input messages.
           #   #
           #   #   Our models are trained to operate on alternating `user` and `assistant`
           #   #   conversational turns. When creating a new `Message`, you specify the prior
@@ -338,7 +338,7 @@ module Anthropic
           #   #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           #   #   details and options.
           #   #
-          #   # @param metadata [Object, nil] An object describing metadata about the request.
+          #   # @param metadata [Anthropic::Models::Metadata, nil] An object describing metadata about the request.
           #   #
           #   # @param stop_sequences [Array<String>, nil] Custom text sequences that will cause the model to stop generating.
           #   #
@@ -355,7 +355,7 @@ module Anthropic
           #   #   See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
           #   #   details.
           #   #
-          #   # @param system_ [Array<Object>, String, nil] System prompt.
+          #   # @param system_ [Array<Anthropic::Models::Beta::PromptCaching::PromptCachingBetaTextBlockParam>, String, nil] System prompt.
           #   #
           #   #   A system prompt is a way of providing context and instructions to Claude, such
           #   #   as specifying a particular goal or role. See our
@@ -370,10 +370,10 @@ module Anthropic
           #   #   Note that even with `temperature` of `0.0`, the results will not be fully
           #   #   deterministic.
           #   #
-          #   # @param tool_choice [Object, nil] How the model should use the provided tools. The model can use a specific tool,
+          #   # @param tool_choice [Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceTool, nil] How the model should use the provided tools. The model can use a specific tool,
           #   #   any available tool, or decide by itself.
           #   #
-          #   # @param tools [Array<Object>, nil] Definitions of tools that the model may use.
+          #   # @param tools [Array<Anthropic::Models::Beta::PromptCaching::PromptCachingBetaTool>, nil] Definitions of tools that the model may use.
           #   #
           #   #   If you include `tools` in your API request, the model may return `tool_use`
           #   #   content blocks that represent the model's use of those tools. You can then run
