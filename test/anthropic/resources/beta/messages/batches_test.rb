@@ -23,27 +23,41 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Minitest::Test
         }
       ]
     )
-    assert_kind_of(Anthropic::Models::Beta::Messages::BetaMessageBatch, response)
+
+    assert_pattern do
+      response => Anthropic::Models::Beta::Messages::BetaMessageBatch
+    end
   end
 
   def test_retrieve
     response = @anthropic.beta.messages.batches.retrieve("message_batch_id")
-    assert_kind_of(Anthropic::Models::Beta::Messages::BetaMessageBatch, response)
+
+    assert_pattern do
+      response => Anthropic::Models::Beta::Messages::BetaMessageBatch
+    end
   end
 
   def test_list
     response = @anthropic.beta.messages.batches.list
-    assert_kind_of(Anthropic::Page, response)
+
+    assert_pattern do
+      response => Anthropic::Page
+    end
   end
 
   def test_cancel
     response = @anthropic.beta.messages.batches.cancel("message_batch_id")
-    assert_kind_of(Anthropic::Models::Beta::Messages::BetaMessageBatch, response)
+
+    assert_pattern do
+      response => Anthropic::Models::Beta::Messages::BetaMessageBatch
+    end
   end
 
   def test_results
     skip("skipped: test server currently has no support for method content-type")
+
     response = @anthropic.beta.messages.batches.results("message_batch_id")
-    refute_nil(Object, response)
+
+    refute_nil(response)
   end
 end

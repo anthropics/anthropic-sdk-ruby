@@ -16,6 +16,9 @@ class Anthropic::Test::Resources::CompletionsTest < Minitest::Test
       model: "string",
       prompt: "\n\nHuman: Hello, world!\n\nAssistant:"
     )
-    assert_kind_of(Anthropic::Models::Completion, response)
+
+    assert_pattern do
+      response => Anthropic::Models::Completion
+    end
   end
 end

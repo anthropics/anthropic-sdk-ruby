@@ -16,6 +16,9 @@ class Anthropic::Test::Resources::Beta::PromptCaching::MessagesTest < Minitest::
       messages: [{"content" => "Hello, world", "role" => "user"}],
       model: "claude-3-5-sonnet-20241022"
     )
-    assert_kind_of(Anthropic::Models::Beta::PromptCaching::PromptCachingBetaMessage, response)
+
+    assert_pattern do
+      response => Anthropic::Models::Beta::PromptCaching::PromptCachingBetaMessage
+    end
   end
 end
