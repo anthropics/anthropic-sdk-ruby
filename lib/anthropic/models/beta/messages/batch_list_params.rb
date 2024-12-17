@@ -20,7 +20,7 @@ module Anthropic
           # @!attribute limit
           #   Number of items to return per page.
           #
-          # Defaults to `20`. Ranges from `1` to `100`.
+          # Defaults to `20`. Ranges from `1` to `1000`.
           #
           #   @return [Integer]
           optional :limit, Integer
@@ -28,7 +28,7 @@ module Anthropic
           # @!attribute betas
           #   Optional header to specify the beta version(s) you want to use.
           #
-          #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent9>]
+          #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent11>]
           optional :betas, Anthropic::ArrayOf.new(Anthropic::Unknown), api_name: :"anthropic-beta"
 
           # @!parse
@@ -40,7 +40,7 @@ module Anthropic
           #   #
           #   # @param limit [Integer, nil] Number of items to return per page.
           #   #
-          #   #   Defaults to `20`. Ranges from `1` to `100`.
+          #   #   Defaults to `20`. Ranges from `1` to `1000`.
           #   #
           #   # @param betas [Array<String>, nil] Optional header to specify the beta version(s) you want to use.
           #   #

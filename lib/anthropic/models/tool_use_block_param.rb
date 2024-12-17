@@ -23,13 +23,19 @@ module Anthropic
       #   @return [Symbol, Anthropic::Models::ToolUseBlockParam::Type]
       required :type, enum: -> { Anthropic::Models::ToolUseBlockParam::Type }
 
+      # @!attribute cache_control
+      #
+      #   @return [Anthropic::Models::CacheControlEphemeral]
+      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }
+
       # @!parse
       #   # @param id [String]
       #   # @param input [Object]
       #   # @param name [String]
       #   # @param type [String]
+      #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
       #   #
-      #   def initialize(id:, input:, name:, type:) = super
+      #   def initialize(id:, input:, name:, type:, cache_control: nil) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 

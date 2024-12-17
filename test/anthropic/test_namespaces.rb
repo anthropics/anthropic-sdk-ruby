@@ -6,15 +6,9 @@ module Anthropic
       module Beta
         module Messages
         end
-
-        module PromptCaching
-        end
       end
 
       module Messages
-      end
-
-      module PromptCaching
       end
     end
   end

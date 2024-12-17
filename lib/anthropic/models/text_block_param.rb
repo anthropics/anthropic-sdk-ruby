@@ -13,11 +13,17 @@ module Anthropic
       #   @return [Symbol, Anthropic::Models::TextBlockParam::Type]
       required :type, enum: -> { Anthropic::Models::TextBlockParam::Type }
 
+      # @!attribute cache_control
+      #
+      #   @return [Anthropic::Models::CacheControlEphemeral]
+      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }
+
       # @!parse
       #   # @param text [String]
       #   # @param type [String]
+      #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
       #   #
-      #   def initialize(text:, type:) = super
+      #   def initialize(text:, type:, cache_control: nil) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 

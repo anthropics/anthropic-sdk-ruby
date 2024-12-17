@@ -2,9 +2,7 @@
 
 module Anthropic
   module Models
-    module Beta
-      module PromptCaching
-      end
+    module Messages
     end
   end
 end

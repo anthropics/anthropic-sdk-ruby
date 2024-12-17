@@ -13,6 +13,11 @@ module Anthropic
       #   @return [Symbol, Anthropic::Models::ToolResultBlockParam::Type]
       required :type, enum: -> { Anthropic::Models::ToolResultBlockParam::Type }
 
+      # @!attribute cache_control
+      #
+      #   @return [Anthropic::Models::CacheControlEphemeral]
+      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }
+
       # @!attribute content
       #
       #   @return [Array<Anthropic::Models::ImageBlockParam, Anthropic::Models::TextBlockParam>, String]
@@ -26,10 +31,11 @@ module Anthropic
       # @!parse
       #   # @param tool_use_id [String]
       #   # @param type [String]
+      #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
       #   # @param content [Array<Anthropic::Models::ImageBlockParam, Anthropic::Models::TextBlockParam>, String, nil]
       #   # @param is_error [Boolean, nil]
       #   #
-      #   def initialize(tool_use_id:, type:, content: nil, is_error: nil) = super
+      #   def initialize(tool_use_id:, type:, cache_control: nil, content: nil, is_error: nil) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
