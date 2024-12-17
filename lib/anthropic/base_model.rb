@@ -58,6 +58,8 @@ module Anthropic
     include Anthropic::Converter
     # rubocop:disable Lint/UnusedMethodArgument
 
+    private_class_method :new
+
     # @param other [Object]
     #
     # @return [Boolean]
@@ -80,6 +82,8 @@ module Anthropic
   # Ruby has no Boolean class; this is something for models to refer to.
   class BooleanModel
     include Anthropic::Converter
+
+    private_class_method :new
 
     # @param other [Object]
     #
@@ -108,6 +112,8 @@ module Anthropic
   # values safely.
   class Enum
     include Anthropic::Converter
+
+    private_class_method :new
 
     # @param other [Object]
     #

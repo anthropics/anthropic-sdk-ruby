@@ -111,9 +111,7 @@ module Anthropic
     # @param keys [Array<Symbol>, nil]
     #
     # @return [Hash{Symbol => Object}]
-    def deconstruct_keys(keys)
-      @values.deconstruct_keys(keys)
-    end
+    def deconstruct_keys(keys) = @values.deconstruct_keys(keys)
 
     # @return [String]
     def to_s = @values.to_s
