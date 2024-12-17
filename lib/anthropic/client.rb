@@ -29,6 +29,9 @@ module Anthropic
     # @return [Anthropic::Resources::Messages]
     attr_reader :messages
 
+    # @return [Anthropic::Resources::Models]
+    attr_reader :models
+
     # @return [Anthropic::Resources::Beta]
     attr_reader :beta
 
@@ -70,6 +73,7 @@ module Anthropic
 
       @completions = Anthropic::Resources::Completions.new(client: self)
       @messages = Anthropic::Resources::Messages.new(client: self)
+      @models = Anthropic::Resources::Models.new(client: self)
       @beta = Anthropic::Resources::Beta.new(client: self)
     end
   end

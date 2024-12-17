@@ -21,4 +21,15 @@ class Anthropic::Test::Resources::MessagesTest < Minitest::Test
       response => Anthropic::Models::Message
     end
   end
+
+  def test_count_tokens_required_params
+    response = @anthropic.messages.count_tokens(
+      messages: [{"content" => "string", "role" => "user"}],
+      model: "string"
+    )
+
+    assert_pattern do
+      response => Anthropic::Models::MessageTokensCount
+    end
+  end
 end

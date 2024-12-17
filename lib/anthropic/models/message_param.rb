@@ -5,7 +5,7 @@ module Anthropic
     class MessageParam < Anthropic::BaseModel
       # @!attribute content
       #
-      #   @return [Array<Anthropic::Models::ImageBlockParam, Anthropic::Models::TextBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::ToolUseBlockParam>, String]
+      #   @return [Array<Anthropic::Models::DocumentBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::TextBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::ToolUseBlockParam>, String]
       required :content, Anthropic::Unknown
 
       # @!attribute role
@@ -14,7 +14,7 @@ module Anthropic
       required :role, enum: -> { Anthropic::Models::MessageParam::Role }
 
       # @!parse
-      #   # @param content [Array<Anthropic::Models::ImageBlockParam, Anthropic::Models::TextBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::ToolUseBlockParam>, String]
+      #   # @param content [Array<Anthropic::Models::DocumentBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::TextBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::ToolUseBlockParam>, String]
       #   # @param role [String]
       #   #
       #   def initialize(content:, role:) = super

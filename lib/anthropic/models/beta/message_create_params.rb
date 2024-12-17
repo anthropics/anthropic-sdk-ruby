@@ -86,7 +86,7 @@ module Anthropic
         # @!attribute model
         #   The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
         #
-        #   @return [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent2]
+        #   @return [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent4]
         required :model, Anthropic::Unknown
 
         # @!attribute metadata
@@ -224,7 +224,7 @@ module Anthropic
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
-        #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent3>]
+        #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent5>]
         optional :betas, Anthropic::ArrayOf.new(Anthropic::Unknown), api_name: :"anthropic-beta"
 
         # @!parse

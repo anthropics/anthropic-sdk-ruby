@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative "../../test_helper"
+require_relative "../test_helper"
 
-class Anthropic::Test::Resources::Beta::PromptCachingTest < Minitest::Test
+class Anthropic::Test::Resources::SharedTest < Minitest::Test
   def setup
     @anthropic = Anthropic::Client.new(
       base_url: ENV.fetch("TEST_API_BASE_URL", "http://localhost:4010"),

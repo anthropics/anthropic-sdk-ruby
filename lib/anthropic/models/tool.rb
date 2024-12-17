@@ -19,6 +19,11 @@ module Anthropic
       #   @return [String]
       required :name, String
 
+      # @!attribute cache_control
+      #
+      #   @return [Anthropic::Models::CacheControlEphemeral]
+      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }
+
       # @!attribute description
       #   Description of what this tool does.
       #
@@ -37,6 +42,8 @@ module Anthropic
       #   #
       #   #   This is how the tool will be called by the model and in tool_use blocks.
       #   #
+      #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
+      #   #
       #   # @param description [String, nil] Description of what this tool does.
       #   #
       #   #   Tool descriptions should be as detailed as possible. The more information that
@@ -44,7 +51,7 @@ module Anthropic
       #   #   perform. You can use natural language descriptions to reinforce important
       #   #   aspects of the tool input JSON schema.
       #   #
-      #   def initialize(input_schema:, name:, description: nil) = super
+      #   def initialize(input_schema:, name:, cache_control: nil, description: nil) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 

@@ -13,11 +13,17 @@ module Anthropic
       #   @return [Symbol, Anthropic::Models::ImageBlockParam::Type]
       required :type, enum: -> { Anthropic::Models::ImageBlockParam::Type }
 
+      # @!attribute cache_control
+      #
+      #   @return [Anthropic::Models::CacheControlEphemeral]
+      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }
+
       # @!parse
       #   # @param source [Anthropic::Models::ImageBlockParam::Source]
       #   # @param type [String]
+      #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
       #   #
-      #   def initialize(source:, type:) = super
+      #   def initialize(source:, type:, cache_control: nil) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 

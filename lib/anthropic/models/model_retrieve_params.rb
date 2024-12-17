@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+module Anthropic
+  module Models
+    class ModelRetrieveParams < Anthropic::BaseModel
+      # @!parse
+      #   def initialize = super
+
+      # def initialize: (Hash | Anthropic::BaseModel) -> void
+    end
+  end
+end
