@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Anthropic
-  class Page
+  class Page < Anthropic::BasePage
     # @return [Array<Object>]
     attr_accessor :data
 
@@ -16,20 +16,39 @@ module Anthropic
 
     # @private
     #
-    # @param model [Object]
-    # @param raw_data [Hash{Symbol => Object}]
-    # @param response [Net::HTTPResponse]
     # @param client [Anthropic::Client]
     # @param req [Hash{Symbol => Object}]
     # @param opts [Hash{Symbol => Object}]
-    def initialize(client:, model:, req:, opts:, response:, raw_data:)
-      @data = raw_data[:data]&.map { |row| model.coerce(row) }
-      @has_more = raw_data[:has_more]
-      @first_id = raw_data[:first_id]
-      @last_id = raw_data[:last_id]
-      @client = client
-      @req = req
-      @opts = opts
+    # @param headers [Hash{String => String}]
+    # @param unwrapped [Hash{Symbol => Object}]
+    def initialize(client:, req:, opts:, headers:, unwrapped:)
+      model = req.fetch(:model)
+
+      case unwrapped
+      in {data: data} if data.is_a?(Array) || data.nil?
+        @data = data&.map { |row| model.coerce(row) }
+      else
+      end
+
+      case unwrapped
+      in {has_more: has_more}
+        @has_more = has_more
+      else
+      end
+
+      case unwrapped
+      in {first_id: first_id} if first_id.is_a?(String) || first_id.is_nil?
+        @first_id = first_id
+      else
+      end
+
+      case unwrapped
+      in {last_id: last_id} if last_id.is_a?(String) || last_id.is_nil?
+        @last_id = last_id
+      else
+      end
+
+      super
     end
 
     # @return [Boolean]
@@ -50,23 +69,19 @@ module Anthropic
 
     # @param blk [Proc]
     #
-    # @return [nil]
+    # @yieldreturn Anthropic::Page
+    # @return [void]
     def auto_paging_each(&blk)
       unless block_given?
         raise ArgumentError.new("A block must be given to #auto_paging_each")
       end
       page = self
       loop do
-        page.data.each { |e| blk.call(e) }
+        page.data&.each { |row| blk.call(row) }
         break unless page.next_page?
         page = page.next_page
       end
     end
-
-    # @return [Enumerator]
-    def to_enum = super(:auto_paging_each)
-
-    alias_method :enum_for, :to_enum
 
     # @return [String]
     def inspect

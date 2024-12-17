@@ -43,6 +43,11 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Minitest::Test
     assert_pattern do
       response => Anthropic::Page
     end
+
+    page = response.next_page
+    assert_pattern do
+      page => Anthropic::Page
+    end
   end
 
   def test_cancel
