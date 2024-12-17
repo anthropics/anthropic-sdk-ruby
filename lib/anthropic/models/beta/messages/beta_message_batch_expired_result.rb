@@ -17,6 +17,14 @@ module Anthropic
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :expired
+          #   # ...
+          # end
+          # ```
           class Type < Anthropic::Enum
             EXPIRED = :expired
           end

@@ -26,6 +26,16 @@ module Anthropic
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :user
+          #   # ...
+          # in :assistant
+          #   # ...
+          # end
+          # ```
           class Role < Anthropic::Enum
             USER = :user
             ASSISTANT = :assistant

@@ -187,6 +187,15 @@ module Anthropic
           # Conversational role of the generated message.
           #
           # This will always be `"assistant"`.
+          #
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :assistant
+          #   # ...
+          # end
+          # ```
           class Role < Anthropic::Enum
             ASSISTANT = :assistant
           end
@@ -200,6 +209,21 @@ module Anthropic
           # * `"tool_use"`: the model invoked one or more tools
           #
           # In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
+          #
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :end_turn
+          #   # ...
+          # in :max_tokens
+          #   # ...
+          # in :stop_sequence
+          #   # ...
+          # in :tool_use
+          #   # ...
+          # end
+          # ```
           class StopReason < Anthropic::Enum
             END_TURN = :end_turn
             MAX_TOKENS = :max_tokens
@@ -210,6 +234,15 @@ module Anthropic
           # Object type.
           #
           # For Messages, this is always `"message"`.
+          #
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :message
+          #   # ...
+          # end
+          # ```
           class Type < Anthropic::Enum
             MESSAGE = :message
           end

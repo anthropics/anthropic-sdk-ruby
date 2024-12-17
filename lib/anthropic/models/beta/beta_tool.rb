@@ -87,11 +87,27 @@ module Anthropic
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :object
+          #   # ...
+          # end
+          # ```
           class Type < Anthropic::Enum
             OBJECT = :object
           end
         end
 
+        # @example
+        #
+        # ```ruby
+        # case enum
+        # in :custom
+        #   # ...
+        # end
+        # ```
         class Type < Anthropic::Enum
           CUSTOM = :custom
         end

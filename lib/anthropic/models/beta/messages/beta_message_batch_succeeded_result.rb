@@ -26,6 +26,14 @@ module Anthropic
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :succeeded
+          #   # ...
+          # end
+          # ```
           class Type < Anthropic::Enum
             SUCCEEDED = :succeeded
           end

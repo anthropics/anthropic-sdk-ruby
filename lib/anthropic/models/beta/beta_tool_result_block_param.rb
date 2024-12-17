@@ -40,6 +40,14 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+        # @example
+        #
+        # ```ruby
+        # case enum
+        # in :tool_result
+        #   # ...
+        # end
+        # ```
         class Type < Anthropic::Enum
           TOOL_RESULT = :tool_result
         end

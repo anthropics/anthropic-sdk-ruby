@@ -22,6 +22,14 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+        # @example
+        #
+        # ```ruby
+        # case enum
+        # in :message_start
+        #   # ...
+        # end
+        # ```
         class Type < Anthropic::Enum
           MESSAGE_START = :message_start
         end
