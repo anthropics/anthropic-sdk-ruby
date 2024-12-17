@@ -65,6 +65,20 @@ module Anthropic
 
             # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+            # @example
+            #
+            # ```ruby
+            # case enum
+            # in :"image/jpeg"
+            #   # ...
+            # in :"image/png"
+            #   # ...
+            # in :"image/gif"
+            #   # ...
+            # in :"image/webp"
+            #   # ...
+            # end
+            # ```
             class MediaType < Anthropic::Enum
               IMAGE_JPEG = :"image/jpeg"
               IMAGE_PNG = :"image/png"
@@ -72,11 +86,27 @@ module Anthropic
               IMAGE_WEBP = :"image/webp"
             end
 
+            # @example
+            #
+            # ```ruby
+            # case enum
+            # in :base64
+            #   # ...
+            # end
+            # ```
             class Type < Anthropic::Enum
               BASE64 = :base64
             end
           end
 
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :image
+          #   # ...
+          # end
+          # ```
           class Type < Anthropic::Enum
             IMAGE = :image
           end

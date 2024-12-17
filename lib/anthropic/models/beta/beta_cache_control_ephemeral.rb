@@ -16,6 +16,14 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+        # @example
+        #
+        # ```ruby
+        # case enum
+        # in :ephemeral
+        #   # ...
+        # end
+        # ```
         class Type < Anthropic::Enum
           EPHEMERAL = :ephemeral
         end

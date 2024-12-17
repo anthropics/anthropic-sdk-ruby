@@ -70,6 +70,20 @@ module Anthropic
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :end_turn
+          #   # ...
+          # in :max_tokens
+          #   # ...
+          # in :stop_sequence
+          #   # ...
+          # in :tool_use
+          #   # ...
+          # end
+          # ```
           class StopReason < Anthropic::Enum
             END_TURN = :end_turn
             MAX_TOKENS = :max_tokens
@@ -78,6 +92,14 @@ module Anthropic
           end
         end
 
+        # @example
+        #
+        # ```ruby
+        # case enum
+        # in :message_delta
+        #   # ...
+        # end
+        # ```
         class Type < Anthropic::Enum
           MESSAGE_DELTA = :message_delta
         end

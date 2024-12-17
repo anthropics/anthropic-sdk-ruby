@@ -21,6 +21,14 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+      # @example
+      #
+      # ```ruby
+      # case enum
+      # in :invalid_request_error
+      #   # ...
+      # end
+      # ```
       class Type < Anthropic::Enum
         INVALID_REQUEST_ERROR = :invalid_request_error
       end

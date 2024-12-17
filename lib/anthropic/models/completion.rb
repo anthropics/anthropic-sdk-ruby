@@ -71,6 +71,15 @@ module Anthropic
       # Object type.
       #
       # For Text Completions, this is always `"completion"`.
+      #
+      # @example
+      #
+      # ```ruby
+      # case enum
+      # in :completion
+      #   # ...
+      # end
+      # ```
       class Type < Anthropic::Enum
         COMPLETION = :completion
       end

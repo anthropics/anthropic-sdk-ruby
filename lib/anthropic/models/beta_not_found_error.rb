@@ -21,6 +21,14 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+      # @example
+      #
+      # ```ruby
+      # case enum
+      # in :not_found_error
+      #   # ...
+      # end
+      # ```
       class Type < Anthropic::Enum
         NOT_FOUND_ERROR = :not_found_error
       end

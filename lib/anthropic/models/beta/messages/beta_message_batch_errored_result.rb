@@ -23,6 +23,14 @@ module Anthropic
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :errored
+          #   # ...
+          # end
+          # ```
           class Type < Anthropic::Enum
             ERRORED = :errored
           end

@@ -38,10 +38,27 @@ module Anthropic
         # Name of the tool.
         #
         # This is how the tool will be called by the model and in tool_use blocks.
+        #
+        # @example
+        #
+        # ```ruby
+        # case enum
+        # in :bash
+        #   # ...
+        # end
+        # ```
         class Name < Anthropic::Enum
           BASH = :bash
         end
 
+        # @example
+        #
+        # ```ruby
+        # case enum
+        # in :bash_20241022
+        #   # ...
+        # end
+        # ```
         class Type < Anthropic::Enum
           BASH_20241022 = :bash_20241022
         end

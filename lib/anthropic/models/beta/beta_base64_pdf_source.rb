@@ -28,10 +28,26 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+        # @example
+        #
+        # ```ruby
+        # case enum
+        # in :"application/pdf"
+        #   # ...
+        # end
+        # ```
         class MediaType < Anthropic::Enum
           APPLICATION_PDF = :"application/pdf"
         end
 
+        # @example
+        #
+        # ```ruby
+        # case enum
+        # in :base64
+        #   # ...
+        # end
+        # ```
         class Type < Anthropic::Enum
           BASE64 = :base64
         end

@@ -165,6 +165,15 @@ module Anthropic
       # Whether to incrementally stream the response using server-sent events.
       #
       # See [streaming](https://docs.anthropic.com/en/api/streaming) for details.
+      #
+      # @example
+      #
+      # ```ruby
+      # case enum
+      # in true
+      #   # ...
+      # end
+      # ```
       class Stream < Anthropic::Enum
         TRUE = true
       end

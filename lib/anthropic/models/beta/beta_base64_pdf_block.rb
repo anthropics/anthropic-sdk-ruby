@@ -28,6 +28,14 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+        # @example
+        #
+        # ```ruby
+        # case enum
+        # in :document
+        #   # ...
+        # end
+        # ```
         class Type < Anthropic::Enum
           DOCUMENT = :document
         end

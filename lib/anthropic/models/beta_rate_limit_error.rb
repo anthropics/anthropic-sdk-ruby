@@ -21,6 +21,14 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+      # @example
+      #
+      # ```ruby
+      # case enum
+      # in :rate_limit_error
+      #   # ...
+      # end
+      # ```
       class Type < Anthropic::Enum
         RATE_LIMIT_ERROR = :rate_limit_error
       end

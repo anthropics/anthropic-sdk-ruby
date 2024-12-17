@@ -135,6 +135,19 @@ module Anthropic
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
           # Processing status of the Message Batch.
+          #
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :in_progress
+          #   # ...
+          # in :canceling
+          #   # ...
+          # in :ended
+          #   # ...
+          # end
+          # ```
           class ProcessingStatus < Anthropic::Enum
             IN_PROGRESS = :in_progress
             CANCELING = :canceling
@@ -144,6 +157,15 @@ module Anthropic
           # Object type.
           #
           # For Message Batches, this is always `"message_batch"`.
+          #
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :message_batch
+          #   # ...
+          # end
+          # ```
           class Type < Anthropic::Enum
             MESSAGE_BATCH = :message_batch
           end

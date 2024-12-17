@@ -38,10 +38,27 @@ module Anthropic
         # Name of the tool.
         #
         # This is how the tool will be called by the model and in tool_use blocks.
+        #
+        # @example
+        #
+        # ```ruby
+        # case enum
+        # in :str_replace_editor
+        #   # ...
+        # end
+        # ```
         class Name < Anthropic::Enum
           STR_REPLACE_EDITOR = :str_replace_editor
         end
 
+        # @example
+        #
+        # ```ruby
+        # case enum
+        # in :text_editor_20241022
+        #   # ...
+        # end
+        # ```
         class Type < Anthropic::Enum
           TEXT_EDITOR_20241022 = :text_editor_20241022
         end
