@@ -10,17 +10,13 @@ module Anthropic
           #
           #   @return [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>]
           required :requests,
-                   Anthropic::ArrayOf.new(
-                     -> {
-                       Anthropic::Models::Beta::Messages::BatchCreateParams::Request
-                     }
-                   )
+                   Anthropic::ArrayOf[-> { Anthropic::Models::Beta::Messages::BatchCreateParams::Request }]
 
           # @!attribute betas
           #   Optional header to specify the beta version(s) you want to use.
           #
           #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent8>]
-          optional :betas, Anthropic::ArrayOf.new(Anthropic::Unknown), api_name: :"anthropic-beta"
+          optional :betas, Anthropic::ArrayOf[Anthropic::Unknown], api_name: :"anthropic-beta"
 
           # @!parse
           #   # @param requests [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>] List of requests for prompt completion. Each is an individual request to create
@@ -142,7 +138,7 @@ module Anthropic
               # Note that if you want to include a [system prompt](https://docs.anthropic.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
               #
               #   @return [Array<Anthropic::Models::Beta::BetaMessageParam>]
-              required :messages, Anthropic::ArrayOf.new(-> { Anthropic::Models::Beta::BetaMessageParam })
+              required :messages, Anthropic::ArrayOf[-> { Anthropic::Models::Beta::BetaMessageParam }]
 
               # @!attribute model
               #   The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
@@ -164,7 +160,7 @@ module Anthropic
               # If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
               #
               #   @return [Array<String>]
-              optional :stop_sequences, Anthropic::ArrayOf.new(String)
+              optional :stop_sequences, Anthropic::ArrayOf[String]
 
               # @!attribute stream
               #   Whether to incrementally stream the response using server-sent events.
@@ -260,7 +256,7 @@ module Anthropic
               # See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
               #
               #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>]
-              optional :tools, Anthropic::ArrayOf.new(Anthropic::Unknown)
+              optional :tools, Anthropic::ArrayOf[Anthropic::Unknown]
 
               # @!attribute top_k
               #   Only sample from the top K options for each subsequent token.

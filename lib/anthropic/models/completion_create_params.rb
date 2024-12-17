@@ -43,7 +43,7 @@ module Anthropic
       # Our models stop on `"\n\nHuman:"`, and may include additional built-in stop sequences in the future. By providing the stop_sequences parameter, you may include additional strings that will cause the model to stop generating.
       #
       #   @return [Array<String>]
-      optional :stop_sequences, Anthropic::ArrayOf.new(String)
+      optional :stop_sequences, Anthropic::ArrayOf[String]
 
       # @!attribute stream
       #   Whether to incrementally stream the response using server-sent events.

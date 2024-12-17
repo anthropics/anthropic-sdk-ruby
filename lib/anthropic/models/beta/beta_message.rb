@@ -40,7 +40,7 @@ module Anthropic
         # ```
         #
         #   @return [Array<Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock>]
-        required :content, Anthropic::ArrayOf.new(Anthropic::Unknown)
+        required :content, Anthropic::ArrayOf[Anthropic::Unknown]
 
         # @!attribute model
         #   The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
