@@ -29,7 +29,7 @@ module Anthropic
           #   Optional header to specify the beta version(s) you want to use.
           #
           #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent11>]
-          optional :betas, Anthropic::ArrayOf.new(Anthropic::Unknown), api_name: :"anthropic-beta"
+          optional :betas, Anthropic::ArrayOf[Anthropic::Unknown], api_name: :"anthropic-beta"
 
           # @!parse
           #   # @param after_id [String, nil] ID of the object to use as a cursor for pagination. When provided, returns the

@@ -71,7 +71,7 @@ module Anthropic
         # Note that if you want to include a [system prompt](https://docs.anthropic.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
         #
         #   @return [Array<Anthropic::Models::Beta::BetaMessageParam>]
-        required :messages, Anthropic::ArrayOf.new(-> { Anthropic::Models::Beta::BetaMessageParam })
+        required :messages, Anthropic::ArrayOf[-> { Anthropic::Models::Beta::BetaMessageParam }]
 
         # @!attribute model
         #   The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
@@ -155,13 +155,13 @@ module Anthropic
         # See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
         #
         #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>]
-        optional :tools, Anthropic::ArrayOf.new(Anthropic::Unknown)
+        optional :tools, Anthropic::ArrayOf[Anthropic::Unknown]
 
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent7>]
-        optional :betas, Anthropic::ArrayOf.new(Anthropic::Unknown), api_name: :"anthropic-beta"
+        optional :betas, Anthropic::ArrayOf[Anthropic::Unknown], api_name: :"anthropic-beta"
 
         # @!parse
         #   # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Input messages.

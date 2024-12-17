@@ -8,8 +8,8 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
     B = :b
   end
 
-  A1 = Anthropic::ArrayOf.new(-> { Integer })
-  A2 = Anthropic::ArrayOf.new(enum: -> { E1 })
+  A1 = Anthropic::ArrayOf[-> { Integer }]
+  A2 = Anthropic::ArrayOf[enum: -> { E1 }]
 
   def test_basic
     assert(E1.include?(Anthropic::Converter))
