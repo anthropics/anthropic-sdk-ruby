@@ -6,6 +6,8 @@ module Anthropic
   # @private
   #
   module Converter
+    # @private
+    #
     # Based on `target`, transform `value` into `target`, to the extent possible:
     # - If the given `value` conforms to `target` already, return the given `value`.
     # - If it's possible and safe to convert the given `value` to `target`, then the converted value.
@@ -37,6 +39,8 @@ module Anthropic
       end
     end
 
+    # @private
+    #
     # @param target [Class, Anthropic::Converter]
     # @param value [Object]
     #
@@ -65,6 +69,8 @@ module Anthropic
     # @return [Boolean]
     def self.===(other) = true
 
+    # @private
+    #
     # @param value [Object]
     #
     # @return [Object]
@@ -90,6 +96,8 @@ module Anthropic
     # @return [Boolean]
     def self.===(other) = other == true || other == false
 
+    # @private
+    #
     # @param value [Boolean, Object]
     #
     # @return [Boolean, Object]
@@ -120,6 +128,8 @@ module Anthropic
     # @return [Boolean]
     def self.===(other) = values.include?(other)
 
+    # @private
+    #
     # @param value [Symbol, String, Object]
     #
     # @return [Symbol, Object]
@@ -150,6 +160,8 @@ module Anthropic
 
     private_class_method :new
 
+    # @private
+    #
     def self.[](...) = new(...)
 
     # @param other [Object]
@@ -165,6 +177,8 @@ module Anthropic
       end
     end
 
+    # @private
+    #
     # @param value [Enumerable, Object]
     #
     # @return [Array<Object>]
@@ -178,6 +192,8 @@ module Anthropic
       end
     end
 
+    # @private
+    #
     # @param value [Enumerable, Object]
     #
     # @return [Array<Object>]
