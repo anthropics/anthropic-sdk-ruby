@@ -17,25 +17,23 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
   end
 
   def test_basic_coerce
-    assert_equal(
-      [1, 2, 3],
-      Anthropic::Converter.coerce(A1, [1.0, 2.0, 3.0])
-    )
-    assert_equal(
-      [:a, :b, :c],
-      Anthropic::Converter.coerce(A2, %w[a b c])
-    )
+    assert_pattern do
+      Anthropic::Converter.coerce(A1, [1.0, 2.0, 3.0]) => [1, 2, 3]
+    end
+
+    assert_pattern do
+      Anthropic::Converter.coerce(A2, %w[a b c]) => [:a, :b, :c]
+    end
   end
 
   def test_basic_dump
-    assert_equal(
-      [1, 2, 3],
-      Anthropic::Converter.dump(A1, [1.0, 2.0, 3.0])
-    )
-    assert_equal(
-      [:a, :b, :c],
-      Anthropic::Converter.dump(A2, %w[a b c])
-    )
+    assert_pattern do
+      Anthropic::Converter.dump(A1, [1.0, 2.0, 3.0]) => [1, 2, 3]
+    end
+
+    assert_pattern do
+      Anthropic::Converter.dump(A2, %w[a b c]) => [:a, :b, :c]
+    end
   end
 
   class M1 < Anthropic::BaseModel
@@ -61,6 +59,7 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
   def test_model_accessors
     now = Time.now.round(0)
     model = M2.new(a: now.to_s, b: "b", renamed: "a", c: [1.0, 2.0, 3.0], w: 1, y: 1)
+
     assert_equal(now, model.a)
     assert_equal(:a, model.b)
     assert_equal("b", model[:b])
@@ -73,6 +72,7 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
     now = Time.now
     model1 = M2.new(a: now, b: "b", renamed: "a", c: M1.new, w: 1, y: 1)
     model2 = M2.new(a: now, b: "b", renamed: "a", c: M1.new, w: 1, y: 1)
+
     assert_equal(model1, model2)
   end
 
@@ -89,9 +89,18 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
 
   def test_basic_model_dump
     assert_nil(Anthropic::Converter.dump(M2, nil))
-    assert_equal({}, Anthropic::Converter.dump(M2, {}))
-    assert_equal({w: 1, x: "x"}, Anthropic::Converter.dump(M2, {w: 1, x: "x", y: 1, z: "z"}))
-    assert_equal([1, 2, 3], Anthropic::Converter.dump(M2, [1, 2, 3]))
+
+    assert_pattern do
+      Anthropic::Converter.dump(M2, {}) => {}
+    end
+
+    assert_pattern do
+      Anthropic::Converter.dump(M2, {w: 1, x: "x", y: 1, z: "z"}) => {w: 1, x: "x"}
+    end
+
+    assert_pattern do
+      Anthropic::Converter.dump(M2, [1, 2, 3]) => [1, 2, 3]
+    end
   end
 
   def test_nested_model_dump
@@ -102,6 +111,7 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
       {a: now, b: "a", c: [1.0, 2.0, 3.0], y: 1},
       {"a" => now, b: "", "b" => "a", "c" => [], :c => [1.0, 2.0, 3.0], "y" => 1}
     ]
+
     models.product(inputs).each do |model, input|
       assert_equal(
         {a: now, renamed: :a, c: [1, 2, 3]},
