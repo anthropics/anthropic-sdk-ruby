@@ -255,6 +255,25 @@ module Anthropic
 
     # @private
     #
+    # @param path [String, Array<String>]
+    #
+    # @return [String]
+    def self.interpolate_path(path)
+      case path
+      in String
+        path
+      in []
+        ""
+      in [String, *interpolations]
+        encoded = interpolations.map do |val|
+          CGI.escape(val.to_s).tr("+", "%20")
+        end
+        path.first % encoded
+      end
+    end
+
+    # @private
+    #
     # @param uri [URI::Generic]
     #
     # @return [String]
