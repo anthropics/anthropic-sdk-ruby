@@ -88,7 +88,7 @@ module Anthropic
         parsed = Anthropic::Models::CompletionCreateParams.dump(params)
         req = {
           method: :post,
-          path: "/v1/complete",
+          path: "v1/complete",
           body: parsed,
           model: Anthropic::Models::Completion
         }

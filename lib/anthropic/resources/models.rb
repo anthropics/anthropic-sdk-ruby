@@ -21,7 +21,7 @@ module Anthropic
       def retrieve(model_id, opts = {})
         req = {
           method: :get,
-          path: "/v1/models/#{model_id}",
+          path: ["v1/models/%0s", model_id],
           model: Anthropic::Models::ModelInfo
         }
         @client.request(req, opts)
@@ -51,7 +51,7 @@ module Anthropic
         parsed = Anthropic::Models::ModelListParams.dump(params)
         req = {
           method: :get,
-          path: "/v1/models",
+          path: "v1/models",
           query: parsed,
           page: Anthropic::Page,
           model: Anthropic::Models::ModelInfo

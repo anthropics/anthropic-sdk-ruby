@@ -30,7 +30,7 @@ module Anthropic
             parsed = Anthropic::Models::Beta::Messages::BatchCreateParams.dump(params)
             req = {
               method: :post,
-              path: "/v1/messages/batches?beta=true",
+              path: "v1/messages/batches?beta=true",
               body: parsed,
               model: Anthropic::Models::Beta::Messages::BetaMessageBatch
             }
@@ -54,7 +54,7 @@ module Anthropic
             Anthropic::Models::Beta::Messages::BatchRetrieveParams.dump(params)
             req = {
               method: :get,
-              path: "/v1/messages/batches/#{message_batch_id}?beta=true",
+              path: ["v1/messages/batches/%0s?beta=true", message_batch_id],
               model: Anthropic::Models::Beta::Messages::BetaMessageBatch
             }
             @client.request(req, opts)
@@ -84,7 +84,7 @@ module Anthropic
             parsed = Anthropic::Models::Beta::Messages::BatchListParams.dump(params)
             req = {
               method: :get,
-              path: "/v1/messages/batches?beta=true",
+              path: "v1/messages/batches?beta=true",
               query: parsed,
               page: Anthropic::Page,
               model: Anthropic::Models::Beta::Messages::BetaMessageBatch
@@ -115,7 +115,7 @@ module Anthropic
             Anthropic::Models::Beta::Messages::BatchCancelParams.dump(params)
             req = {
               method: :post,
-              path: "/v1/messages/batches/#{message_batch_id}/cancel?beta=true",
+              path: ["v1/messages/batches/%0s/cancel?beta=true", message_batch_id],
               model: Anthropic::Models::Beta::Messages::BetaMessageBatch
             }
             @client.request(req, opts)
@@ -140,7 +140,7 @@ module Anthropic
             Anthropic::Models::Beta::Messages::BatchResultsParams.dump(params)
             req = {
               method: :get,
-              path: "/v1/messages/batches/#{message_batch_id}/results?beta=true",
+              path: ["v1/messages/batches/%0s/results?beta=true", message_batch_id],
               headers: {"Accept" => "application/binary"},
               model: Anthropic::Unknown
             }
