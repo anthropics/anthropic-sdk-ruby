@@ -69,8 +69,7 @@ module Anthropic
     # @return [Hash{Symbol => Object}]
     private def build_request(req, opts)
       options = Anthropic::Util.deep_merge(req, opts)
-      method, uninterpolated_path = options.fetch_values(:method, :path)
-      path = Anthropic::Util.interpolate_path(uninterpolated_path)
+      method = options.fetch(:method)
 
       headers = Anthropic::Util.normalized_headers(
         @headers,
@@ -107,7 +106,7 @@ module Anthropic
           body
         end
 
-      url = Anthropic::Util.join_parsed_uri(@base_url, {**options, path: path})
+      url = Anthropic::Util.join_parsed_uri(@base_url, options)
       timeout = options.fetch(:timeout, @timeout)
       {method: method, url: url, headers: headers, body: encoded, timeout: timeout}
     end
