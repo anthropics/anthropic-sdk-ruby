@@ -22,7 +22,7 @@ module Anthropic
         def retrieve(model_id, opts = {})
           req = {
             method: :get,
-            path: "/v1/models/#{model_id}?beta=true",
+            path: ["v1/models/%0s?beta=true", model_id],
             model: Anthropic::Models::Beta::BetaModelInfo
           }
           @client.request(req, opts)
@@ -52,7 +52,7 @@ module Anthropic
           parsed = Anthropic::Models::Beta::ModelListParams.dump(params)
           req = {
             method: :get,
-            path: "/v1/models?beta=true",
+            path: "v1/models?beta=true",
             query: parsed,
             page: Anthropic::Page,
             model: Anthropic::Models::Beta::BetaModelInfo
