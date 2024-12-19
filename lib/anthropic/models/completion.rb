@@ -52,7 +52,7 @@ module Anthropic
       #   #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   #   details and options.
       #   #
-      #   # @param stop_reason [String] The reason that we stopped.
+      #   # @param stop_reason [String, nil] The reason that we stopped.
       #   #
       #   #   This may be one the following values:
       #   #

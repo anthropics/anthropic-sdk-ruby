@@ -29,9 +29,9 @@ module Anthropic
         required :output_tokens, Integer
 
         # @!parse
-        #   # @param cache_creation_input_tokens [Integer] The number of input tokens used to create the cache entry.
+        #   # @param cache_creation_input_tokens [Integer, nil] The number of input tokens used to create the cache entry.
         #   #
-        #   # @param cache_read_input_tokens [Integer] The number of input tokens read from the cache.
+        #   # @param cache_read_input_tokens [Integer, nil] The number of input tokens read from the cache.
         #   #
         #   # @param input_tokens [Integer] The number of input tokens which were used.
         #   #
