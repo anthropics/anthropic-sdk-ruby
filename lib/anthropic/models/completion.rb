@@ -20,8 +20,8 @@ module Anthropic
       # @!attribute model
       #   The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
       #
-      #   @return [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent14]
-      required :model, Anthropic::Unknown
+      #   @return [String, Symbol, Anthropic::Models::Model::UnionMember1]
+      required :model, union: -> { Anthropic::Models::Model }
 
       # @!attribute stop_reason
       #   The reason that we stopped.
@@ -48,7 +48,7 @@ module Anthropic
       #   #
       #   # @param completion [String] The resulting completion up to and excluding the stop sequences.
       #   #
-      #   # @param model [String] The model that will complete your prompt.\n\nSee
+      #   # @param model [String, String] The model that will complete your prompt.\n\nSee
       #   #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   #   details and options.
       #   #

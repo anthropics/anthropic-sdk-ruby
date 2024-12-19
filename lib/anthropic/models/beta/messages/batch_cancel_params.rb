@@ -8,11 +8,13 @@ module Anthropic
           # @!attribute betas
           #   Optional header to specify the beta version(s) you want to use.
           #
-          #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent12>]
-          optional :betas, Anthropic::ArrayOf[Anthropic::Unknown], api_name: :"anthropic-beta"
+          #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>]
+          optional :betas,
+                   Anthropic::ArrayOf[union: -> { Anthropic::Models::AnthropicBeta }],
+                   api_name: :"anthropic-beta"
 
           # @!parse
-          #   # @param betas [Array<String>, nil] Optional header to specify the beta version(s) you want to use.
+          #   # @param betas [Array<String, String>, nil] Optional header to specify the beta version(s) you want to use.
           #   #
           #   def initialize(betas: nil, **) = super
 

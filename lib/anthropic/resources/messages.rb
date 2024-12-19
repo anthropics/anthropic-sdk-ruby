@@ -115,7 +115,7 @@ module Anthropic
       #     the top-level `system` parameter — there is no `"system"` role for input
       #     messages in the Messages API.
       #
-      #   @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent1] :model The model that will complete your prompt.\n\nSee
+      #   @option params [String, Symbol, Anthropic::Models::Model::UnionMember1] :model The model that will complete your prompt.\n\nSee
       #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #     details and options.
       #
@@ -136,7 +136,7 @@ module Anthropic
       #     See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
       #     details.
       #
-      #   @option params [Array<Anthropic::Models::TextBlockParam>, String, nil] :system_ System prompt.
+      #   @option params [String, Array<Anthropic::Models::TextBlockParam>, nil] :system_ System prompt.
       #
       #     A system prompt is a way of providing context and instructions to Claude, such
       #     as specifying a particular goal or role. See our
@@ -151,7 +151,7 @@ module Anthropic
       #     Note that even with `temperature` of `0.0`, the results will not be fully
       #     deterministic.
       #
-      #   @option params [Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceTool, nil] :tool_choice How the model should use the provided tools. The model can use a specific tool,
+      #   @option params [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, nil] :tool_choice How the model should use the provided tools. The model can use a specific tool,
       #     any available tool, or decide by itself.
       #
       #   @option params [Array<Anthropic::Models::Tool>, nil] :tools Definitions of tools that the model may use.
@@ -349,17 +349,17 @@ module Anthropic
       #     the top-level `system` parameter — there is no `"system"` role for input
       #     messages in the Messages API.
       #
-      #   @option params [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent2] :model The model that will complete your prompt.\n\nSee
+      #   @option params [String, Symbol, Anthropic::Models::Model::UnionMember1] :model The model that will complete your prompt.\n\nSee
       #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #     details and options.
       #
-      #   @option params [Array<Anthropic::Models::TextBlockParam>, String, nil] :system_ System prompt.
+      #   @option params [String, Array<Anthropic::Models::TextBlockParam>, nil] :system_ System prompt.
       #
       #     A system prompt is a way of providing context and instructions to Claude, such
       #     as specifying a particular goal or role. See our
       #     [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
       #
-      #   @option params [Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceTool, nil] :tool_choice How the model should use the provided tools. The model can use a specific tool,
+      #   @option params [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, nil] :tool_choice How the model should use the provided tools. The model can use a specific tool,
       #     any available tool, or decide by itself.
       #
       #   @option params [Array<Anthropic::Models::Tool>, nil] :tools Definitions of tools that the model may use.

@@ -17,8 +17,8 @@ module Anthropic
         #
         # Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
         #
-        #   @return [Anthropic::Models::Messages::MessageBatchCanceledResult, Anthropic::Models::Messages::MessageBatchErroredResult, Anthropic::Models::Messages::MessageBatchExpiredResult, Anthropic::Models::Messages::MessageBatchSucceededResult]
-        required :result, Anthropic::Unknown
+        #   @return [Anthropic::Models::Messages::MessageBatchSucceededResult, Anthropic::Models::Messages::MessageBatchErroredResult, Anthropic::Models::Messages::MessageBatchCanceledResult, Anthropic::Models::Messages::MessageBatchExpiredResult]
+        required :result, union: -> { Anthropic::Models::Messages::MessageBatchResult }
 
         # @!parse
         #   # @param custom_id [String] Developer-provided ID created for each request in a Message Batch. Useful for
@@ -26,7 +26,7 @@ module Anthropic
         #   #
         #   #   Must be unique for each request within the Message Batch.
         #   #
-        #   # @param result [Anthropic::Models::Messages::MessageBatchCanceledResult, Anthropic::Models::Messages::MessageBatchErroredResult, Anthropic::Models::Messages::MessageBatchExpiredResult, Anthropic::Models::Messages::MessageBatchSucceededResult] Processing result for this request.
+        #   # @param result [Anthropic::Models::Messages::MessageBatchSucceededResult, Anthropic::Models::Messages::MessageBatchErroredResult, Anthropic::Models::Messages::MessageBatchCanceledResult, Anthropic::Models::Messages::MessageBatchExpiredResult] Processing result for this request.
         #   #
         #   #   Contains a Message output if processing was successful, an error response if
         #   #   processing failed, or the reason why processing was not attempted, such as

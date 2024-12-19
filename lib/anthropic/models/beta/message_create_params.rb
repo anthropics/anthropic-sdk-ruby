@@ -86,8 +86,8 @@ module Anthropic
         # @!attribute model
         #   The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
         #
-        #   @return [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent4]
-        required :model, Anthropic::Unknown
+        #   @return [String, Symbol, Anthropic::Models::Model::UnionMember1]
+        required :model, union: -> { Anthropic::Models::Model }
 
         # @!attribute metadata
         #   An object describing metadata about the request.
@@ -118,8 +118,12 @@ module Anthropic
         #
         # A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaTextBlockParam>, String]
-        optional :system_, Anthropic::Unknown, api_name: :system
+        #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
+        optional :system_,
+                 union: -> {
+                   Anthropic::Models::Beta::MessageCreateParams::System
+                 },
+                 api_name: :system
 
         # @!attribute temperature
         #   Amount of randomness injected into the response.
@@ -134,8 +138,8 @@ module Anthropic
         # @!attribute tool_choice
         #   How the model should use the provided tools. The model can use a specific tool, any available tool, or decide by itself.
         #
-        #   @return [Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceTool]
-        optional :tool_choice, Anthropic::Unknown
+        #   @return [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool]
+        optional :tool_choice, union: -> { Anthropic::Models::Beta::BetaToolChoice }
 
         # @!attribute tools
         #   Definitions of tools that the model may use.
@@ -198,8 +202,8 @@ module Anthropic
         #
         # See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>]
-        optional :tools, Anthropic::ArrayOf[Anthropic::Unknown]
+        #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>]
+        optional :tools, Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaToolUnion }]
 
         # @!attribute top_k
         #   Only sample from the top K options for each subsequent token.
@@ -224,8 +228,10 @@ module Anthropic
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
-        #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent5>]
-        optional :betas, Anthropic::ArrayOf[Anthropic::Unknown], api_name: :"anthropic-beta"
+        #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>]
+        optional :betas,
+                 Anthropic::ArrayOf[union: -> { Anthropic::Models::AnthropicBeta }],
+                 api_name: :"anthropic-beta"
 
         # @!parse
         #   # @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
@@ -323,7 +329,7 @@ module Anthropic
         #   #   the top-level `system` parameter — there is no `"system"` role for input
         #   #   messages in the Messages API.
         #   #
-        #   # @param model [String] The model that will complete your prompt.\n\nSee
+        #   # @param model [String, String] The model that will complete your prompt.\n\nSee
         #   #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #   #   details and options.
         #   #
@@ -344,7 +350,7 @@ module Anthropic
         #   #   See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
         #   #   details.
         #   #
-        #   # @param system_ [Array<Anthropic::Models::Beta::BetaTextBlockParam>, String, nil] System prompt.
+        #   # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>, nil] System prompt.
         #   #
         #   #   A system prompt is a way of providing context and instructions to Claude, such
         #   #   as specifying a particular goal or role. See our
@@ -359,10 +365,10 @@ module Anthropic
         #   #   Note that even with `temperature` of `0.0`, the results will not be fully
         #   #   deterministic.
         #   #
-        #   # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceTool, nil] How the model should use the provided tools. The model can use a specific tool,
+        #   # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, nil] How the model should use the provided tools. The model can use a specific tool,
         #   #   any available tool, or decide by itself.
         #   #
-        #   # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>, nil] Definitions of tools that the model may use.
+        #   # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>, nil] Definitions of tools that the model may use.
         #   #
         #   #   If you include `tools` in your API request, the model may return `tool_use`
         #   #   content blocks that represent the model's use of those tools. You can then run
@@ -449,7 +455,7 @@ module Anthropic
         #   #   Recommended for advanced use cases only. You usually only need to use
         #   #   `temperature`.
         #   #
-        #   # @param betas [Array<String>, nil] Optional header to specify the beta version(s) you want to use.
+        #   # @param betas [Array<String, String>, nil] Optional header to specify the beta version(s) you want to use.
         #   #
         #   def initialize(
         #     max_tokens:,
@@ -486,6 +492,28 @@ module Anthropic
         # ```
         class Stream < Anthropic::Enum
           TRUE = true
+        end
+
+        # System prompt.
+        #
+        # A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
+        #
+        # @example
+        #
+        # ```ruby
+        # case union
+        # in String
+        #   # ...
+        # in Anthropic::Models::Beta::MessageCreateParams::System::BetaTextBlockParamArray
+        #   # ...
+        # end
+        # ```
+        class System < Anthropic::Union
+          BetaTextBlockParamArray = Anthropic::ArrayOf[-> { Anthropic::Models::Beta::BetaTextBlockParam }]
+
+          variant String
+
+          variant -> { Anthropic::Models::Beta::MessageCreateParams::System::BetaTextBlockParamArray }
         end
       end
     end

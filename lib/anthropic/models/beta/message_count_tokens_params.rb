@@ -76,22 +76,24 @@ module Anthropic
         # @!attribute model
         #   The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
         #
-        #   @return [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent6]
-        required :model, Anthropic::Unknown
+        #   @return [String, Symbol, Anthropic::Models::Model::UnionMember1]
+        required :model, union: -> { Anthropic::Models::Model }
 
         # @!attribute system_
         #   System prompt.
         #
         # A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaTextBlockParam>, String]
-        optional :system_, Anthropic::Unknown, api_name: :system
+        #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
+        optional :system_,
+                 union: -> { Anthropic::Models::Beta::MessageCountTokensParams::System },
+                 api_name: :system
 
         # @!attribute tool_choice
         #   How the model should use the provided tools. The model can use a specific tool, any available tool, or decide by itself.
         #
-        #   @return [Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceTool]
-        optional :tool_choice, Anthropic::Unknown
+        #   @return [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool]
+        optional :tool_choice, union: -> { Anthropic::Models::Beta::BetaToolChoice }
 
         # @!attribute tools
         #   Definitions of tools that the model may use.
@@ -154,14 +156,19 @@ module Anthropic
         #
         # See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>]
-        optional :tools, Anthropic::ArrayOf[Anthropic::Unknown]
+        #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>]
+        optional :tools,
+                 Anthropic::ArrayOf[union: -> {
+                   Anthropic::Models::Beta::MessageCountTokensParams::Tool
+                 }]
 
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
-        #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent7>]
-        optional :betas, Anthropic::ArrayOf[Anthropic::Unknown], api_name: :"anthropic-beta"
+        #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>]
+        optional :betas,
+                 Anthropic::ArrayOf[union: -> { Anthropic::Models::AnthropicBeta }],
+                 api_name: :"anthropic-beta"
 
         # @!parse
         #   # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Input messages.
@@ -251,20 +258,20 @@ module Anthropic
         #   #   the top-level `system` parameter — there is no `"system"` role for input
         #   #   messages in the Messages API.
         #   #
-        #   # @param model [String] The model that will complete your prompt.\n\nSee
+        #   # @param model [String, String] The model that will complete your prompt.\n\nSee
         #   #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #   #   details and options.
         #   #
-        #   # @param system_ [Array<Anthropic::Models::Beta::BetaTextBlockParam>, String, nil] System prompt.
+        #   # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>, nil] System prompt.
         #   #
         #   #   A system prompt is a way of providing context and instructions to Claude, such
         #   #   as specifying a particular goal or role. See our
         #   #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
         #   #
-        #   # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceTool, nil] How the model should use the provided tools. The model can use a specific tool,
+        #   # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, nil] How the model should use the provided tools. The model can use a specific tool,
         #   #   any available tool, or decide by itself.
         #   #
-        #   # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>, nil] Definitions of tools that the model may use.
+        #   # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>, nil] Definitions of tools that the model may use.
         #   #
         #   #   If you include `tools` in your API request, the model may return `tool_use`
         #   #   content blocks that represent the model's use of those tools. You can then run
@@ -333,11 +340,374 @@ module Anthropic
         #   #
         #   #   See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
         #   #
-        #   # @param betas [Array<String>, nil] Optional header to specify the beta version(s) you want to use.
+        #   # @param betas [Array<String, String>, nil] Optional header to specify the beta version(s) you want to use.
         #   #
         #   def initialize(messages:, model:, system_: nil, tool_choice: nil, tools: nil, betas: nil, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
+
+        # System prompt.
+        #
+        # A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
+        #
+        # @example
+        #
+        # ```ruby
+        # case union
+        # in String
+        #   # ...
+        # in Anthropic::Models::Beta::MessageCountTokensParams::System::BetaTextBlockParamArray
+        #   # ...
+        # end
+        # ```
+        class System < Anthropic::Union
+          BetaTextBlockParamArray = Anthropic::ArrayOf[-> { Anthropic::Models::Beta::BetaTextBlockParam }]
+
+          variant String
+
+          variant -> { Anthropic::Models::Beta::MessageCountTokensParams::System::BetaTextBlockParamArray }
+        end
+
+        # @example
+        #
+        # ```ruby
+        # case union
+        # in Anthropic::Models::Beta::BetaTool
+        #   # ...
+        # in Anthropic::Models::Beta::BetaToolComputerUse20241022
+        #   # ...
+        # in Anthropic::Models::Beta::BetaToolBash20241022
+        #   # ...
+        # in Anthropic::Models::Beta::BetaToolTextEditor20241022
+        #   # ...
+        # end
+        # ```
+        class Tool < Anthropic::Union
+          variant -> { Anthropic::Models::Beta::BetaTool }
+
+          variant -> { Anthropic::Models::Beta::BetaToolComputerUse20241022 }
+
+          variant -> { Anthropic::Models::Beta::BetaToolBash20241022 }
+
+          variant -> { Anthropic::Models::Beta::BetaToolTextEditor20241022 }
+        end
+
+        class BetaTool < Anthropic::BaseModel
+          # @!attribute input_schema
+          #   [JSON schema](https://json-schema.org/) for this tool's input.
+          #
+          # This defines the shape of the `input` that your tool accepts and that the model will produce.
+          #
+          #   @return [Anthropic::Models::Beta::BetaTool::InputSchema]
+          required :input_schema, -> { Anthropic::Models::Beta::BetaTool::InputSchema }
+
+          # @!attribute name
+          #   Name of the tool.
+          #
+          # This is how the tool will be called by the model and in tool_use blocks.
+          #
+          #   @return [String]
+          required :name, String
+
+          # @!attribute cache_control
+          #
+          #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral]
+          optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
+
+          # @!attribute description
+          #   Description of what this tool does.
+          #
+          # Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
+          #
+          #   @return [String]
+          optional :description, String
+
+          # @!attribute type
+          #
+          #   @return [Symbol, Anthropic::Models::Beta::BetaTool::Type]
+          optional :type, enum: -> { Anthropic::Models::Beta::BetaTool::Type }
+
+          # @!parse
+          #   # @param input_schema [Anthropic::Models::Beta::BetaTool::InputSchema] [JSON schema](https://json-schema.org/) for this tool's input.
+          #   #
+          #   #   This defines the shape of the `input` that your tool accepts and that the model
+          #   #   will produce.
+          #   #
+          #   # @param name [String] Name of the tool.
+          #   #
+          #   #   This is how the tool will be called by the model and in tool_use blocks.
+          #   #
+          #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
+          #   #
+          #   # @param description [String, nil] Description of what this tool does.
+          #   #
+          #   #   Tool descriptions should be as detailed as possible. The more information that
+          #   #   the model has about what the tool is and how to use it, the better it will
+          #   #   perform. You can use natural language descriptions to reinforce important
+          #   #   aspects of the tool input JSON schema.
+          #   #
+          #   # @param type [String, nil]
+          #   #
+          #   def initialize(input_schema:, name:, cache_control: nil, description: nil, type: nil, **) = super
+
+          # def initialize: (Hash | Anthropic::BaseModel) -> void
+
+          class InputSchema < Anthropic::BaseModel
+            # @!attribute type
+            #
+            #   @return [Symbol, Anthropic::Models::Beta::BetaTool::InputSchema::Type]
+            required :type, enum: -> { Anthropic::Models::Beta::BetaTool::InputSchema::Type }
+
+            # @!attribute properties
+            #
+            #   @return [Object]
+            optional :properties, Anthropic::Unknown
+
+            # @!parse
+            #   # [JSON schema](https://json-schema.org/) for this tool's input.
+            #   #
+            #   #   This defines the shape of the `input` that your tool accepts and that the model
+            #   #   will produce.
+            #   #
+            #   # @param type [String]
+            #   # @param properties [Object, nil]
+            #   #
+            #   def initialize(type:, properties: nil, **) = super
+
+            # def initialize: (Hash | Anthropic::BaseModel) -> void
+
+            # @example
+            #
+            # ```ruby
+            # case enum
+            # in :object
+            #   # ...
+            # end
+            # ```
+            class Type < Anthropic::Enum
+              OBJECT = :object
+            end
+          end
+
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :custom
+          #   # ...
+          # end
+          # ```
+          class Type < Anthropic::Enum
+            CUSTOM = :custom
+          end
+        end
+
+        class BetaToolComputerUse20241022 < Anthropic::BaseModel
+          # @!attribute display_height_px
+          #   The height of the display in pixels.
+          #
+          #   @return [Integer]
+          required :display_height_px, Integer
+
+          # @!attribute display_width_px
+          #   The width of the display in pixels.
+          #
+          #   @return [Integer]
+          required :display_width_px, Integer
+
+          # @!attribute name
+          #   Name of the tool.
+          #
+          # This is how the tool will be called by the model and in tool_use blocks.
+          #
+          #   @return [Symbol, Anthropic::Models::Beta::BetaToolComputerUse20241022::Name]
+          required :name, enum: -> { Anthropic::Models::Beta::BetaToolComputerUse20241022::Name }
+
+          # @!attribute type
+          #
+          #   @return [Symbol, Anthropic::Models::Beta::BetaToolComputerUse20241022::Type]
+          required :type, enum: -> { Anthropic::Models::Beta::BetaToolComputerUse20241022::Type }
+
+          # @!attribute cache_control
+          #
+          #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral]
+          optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
+
+          # @!attribute display_number
+          #   The X11 display number (e.g. 0, 1) for the display.
+          #
+          #   @return [Integer]
+          optional :display_number, Integer
+
+          # @!parse
+          #   # @param display_height_px [Integer] The height of the display in pixels.
+          #   #
+          #   # @param display_width_px [Integer] The width of the display in pixels.
+          #   #
+          #   # @param name [String] Name of the tool.
+          #   #
+          #   #   This is how the tool will be called by the model and in tool_use blocks.
+          #   #
+          #   # @param type [String]
+          #   #
+          #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
+          #   #
+          #   # @param display_number [Integer, nil] The X11 display number (e.g. 0, 1) for the display.
+          #   #
+          #   def initialize(display_height_px:, display_width_px:, name:, type:, cache_control: nil, display_number: nil, **) = super
+
+          # def initialize: (Hash | Anthropic::BaseModel) -> void
+
+          # Name of the tool.
+          #
+          # This is how the tool will be called by the model and in tool_use blocks.
+          #
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :computer
+          #   # ...
+          # end
+          # ```
+          class Name < Anthropic::Enum
+            COMPUTER = :computer
+          end
+
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :computer_20241022
+          #   # ...
+          # end
+          # ```
+          class Type < Anthropic::Enum
+            COMPUTER_20241022 = :computer_20241022
+          end
+        end
+
+        class BetaToolBash20241022 < Anthropic::BaseModel
+          # @!attribute name
+          #   Name of the tool.
+          #
+          # This is how the tool will be called by the model and in tool_use blocks.
+          #
+          #   @return [Symbol, Anthropic::Models::Beta::BetaToolBash20241022::Name]
+          required :name, enum: -> { Anthropic::Models::Beta::BetaToolBash20241022::Name }
+
+          # @!attribute type
+          #
+          #   @return [Symbol, Anthropic::Models::Beta::BetaToolBash20241022::Type]
+          required :type, enum: -> { Anthropic::Models::Beta::BetaToolBash20241022::Type }
+
+          # @!attribute cache_control
+          #
+          #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral]
+          optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
+
+          # @!parse
+          #   # @param name [String] Name of the tool.
+          #   #
+          #   #   This is how the tool will be called by the model and in tool_use blocks.
+          #   #
+          #   # @param type [String]
+          #   #
+          #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
+          #   #
+          #   def initialize(name:, type:, cache_control: nil, **) = super
+
+          # def initialize: (Hash | Anthropic::BaseModel) -> void
+
+          # Name of the tool.
+          #
+          # This is how the tool will be called by the model and in tool_use blocks.
+          #
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :bash
+          #   # ...
+          # end
+          # ```
+          class Name < Anthropic::Enum
+            BASH = :bash
+          end
+
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :bash_20241022
+          #   # ...
+          # end
+          # ```
+          class Type < Anthropic::Enum
+            BASH_20241022 = :bash_20241022
+          end
+        end
+
+        class BetaToolTextEditor20241022 < Anthropic::BaseModel
+          # @!attribute name
+          #   Name of the tool.
+          #
+          # This is how the tool will be called by the model and in tool_use blocks.
+          #
+          #   @return [Symbol, Anthropic::Models::Beta::BetaToolTextEditor20241022::Name]
+          required :name, enum: -> { Anthropic::Models::Beta::BetaToolTextEditor20241022::Name }
+
+          # @!attribute type
+          #
+          #   @return [Symbol, Anthropic::Models::Beta::BetaToolTextEditor20241022::Type]
+          required :type, enum: -> { Anthropic::Models::Beta::BetaToolTextEditor20241022::Type }
+
+          # @!attribute cache_control
+          #
+          #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral]
+          optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
+
+          # @!parse
+          #   # @param name [String] Name of the tool.
+          #   #
+          #   #   This is how the tool will be called by the model and in tool_use blocks.
+          #   #
+          #   # @param type [String]
+          #   #
+          #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
+          #   #
+          #   def initialize(name:, type:, cache_control: nil, **) = super
+
+          # def initialize: (Hash | Anthropic::BaseModel) -> void
+
+          # Name of the tool.
+          #
+          # This is how the tool will be called by the model and in tool_use blocks.
+          #
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :str_replace_editor
+          #   # ...
+          # end
+          # ```
+          class Name < Anthropic::Enum
+            STR_REPLACE_EDITOR = :str_replace_editor
+          end
+
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :text_editor_20241022
+          #   # ...
+          # end
+          # ```
+          class Type < Anthropic::Enum
+            TEXT_EDITOR_20241022 = :text_editor_20241022
+          end
+        end
       end
     end
   end

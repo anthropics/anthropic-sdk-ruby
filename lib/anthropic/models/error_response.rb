@@ -5,8 +5,8 @@ module Anthropic
     class ErrorResponse < Anthropic::BaseModel
       # @!attribute error
       #
-      #   @return [Anthropic::Models::APIErrorObject, Anthropic::Models::AuthenticationError_, Anthropic::Models::BillingError, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::InvalidRequestError, Anthropic::Models::NotFoundError_, Anthropic::Models::OverloadedError, Anthropic::Models::PermissionError, Anthropic::Models::RateLimitError_]
-      required :error, Anthropic::Unknown
+      #   @return [Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError_, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError_, Anthropic::Models::RateLimitError_, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError]
+      required :error, union: -> { Anthropic::Models::ErrorObject }
 
       # @!attribute type
       #
@@ -14,7 +14,7 @@ module Anthropic
       required :type, enum: -> { Anthropic::Models::ErrorResponse::Type }
 
       # @!parse
-      #   # @param error [Anthropic::Models::APIErrorObject, Anthropic::Models::AuthenticationError_, Anthropic::Models::BillingError, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::InvalidRequestError, Anthropic::Models::NotFoundError_, Anthropic::Models::OverloadedError, Anthropic::Models::PermissionError, Anthropic::Models::RateLimitError_]
+      #   # @param error [Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError_, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError_, Anthropic::Models::RateLimitError_, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError]
       #   # @param type [String]
       #   #
       #   def initialize(error:, type:, **) = super

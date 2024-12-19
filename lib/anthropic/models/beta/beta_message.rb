@@ -40,13 +40,13 @@ module Anthropic
         # ```
         #
         #   @return [Array<Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock>]
-        required :content, Anthropic::ArrayOf[Anthropic::Unknown]
+        required :content, Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlock }]
 
         # @!attribute model
         #   The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
         #
-        #   @return [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent17]
-        required :model, Anthropic::Unknown
+        #   @return [String, Symbol, Anthropic::Models::Model::UnionMember1]
+        required :model, union: -> { Anthropic::Models::Model }
 
         # @!attribute role
         #   Conversational role of the generated message.
@@ -136,7 +136,7 @@ module Anthropic
         #   #   [{ "type": "text", "text": "B)" }]
         #   #   ```
         #   #
-        #   # @param model [String] The model that will complete your prompt.\n\nSee
+        #   # @param model [String, String] The model that will complete your prompt.\n\nSee
         #   #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #   #   details and options.
         #   #

@@ -9,9 +9,10 @@ module Anthropic
     # @private
     #
     # Based on `target`, transform `value` into `target`, to the extent possible:
-    # - If the given `value` conforms to `target` already, return the given `value`.
-    # - If it's possible and safe to convert the given `value` to `target`, then the converted value.
-    # - Otherwise, the given `value` unaltered.
+    #
+    # 1. if the given `value` conforms to `target` already, return the given `value`
+    # 2. if it's possible and safe to convert the given `value` to `target`, then the converted value
+    # 3. otherwise, the given `value` unaltered
     #
     # @param target [Class, Anthropic::Converter]
     # @param value [Object]
@@ -55,6 +56,48 @@ module Anthropic
         value
       end
     end
+
+    # @private
+    #
+    # The underlying algorithm for computing maximal compatibility is subject to future improvements.
+    #
+    # Similar to `#.coerce`, used to determine the best union variant to decode into.
+    # 1. determine if strict-ish coercion is possible
+    # 2. return either result of successful coercion or if loose coercion is possible
+    # 3. return a score for recursively tallied count for fields that can be coerced
+    #
+    # @param target [Class, Anthropic::Converter]
+    # @param value [Object]
+    #
+    # @return [Array(true, Object, nil), Array(false, bool, Integer)]
+    def self.try_strict_coerce(target, value)
+      case target
+      in Converter
+        target.try_strict_coerce(value)
+      in Class
+        case [target, value]
+        in [-> { _1 <= Converter }, _]
+          target.try_strict_coerce(value)
+        in [-> { _1 <= NilClass }, _]
+          [true, nil, value.nil? ? 1 : 0]
+        in [-> { _1 <= Integer }, Numeric]
+          [true, Integer(value), 1]
+        in [-> { _1 <= Float }, Numeric]
+          [true, Float(value), 1]
+        in [-> { _1 <= Date || _1 <= Time }, String]
+          Anthropic::Util.suppress(ArgumentError, Date::Error) do
+            return [true, target.parse(value), 1]
+          end
+          [false, false, 0]
+        in [-> { _1 <= String }, Symbol]
+          [true, value.to_s, 1]
+        in [_, ^target]
+          [true, value, 1]
+        else
+          [false, false, 0]
+        end
+      end
+    end
   end
 
   # @private
@@ -80,6 +123,16 @@ module Anthropic
 
     class << self
       alias_method :dump, :coerce
+    end
+
+    # @private
+    #
+    # @param value [Object]
+    #
+    # @return [Array(true, Object, nil), Array(false, bool, Integer)]
+    def self.try_strict_coerce(value)
+      # prevent unknown variant from being chosen during the first coercion pass
+      [false, true, 0]
     end
 
     # rubocop:enable Lint/UnusedMethodArgument
@@ -108,13 +161,27 @@ module Anthropic
     class << self
       alias_method :dump, :coerce
     end
+
+    # @private
+    #
+    # @param value [Object]
+    #
+    # @return [Array(true, Object, nil), Array(false, bool, Integer)]
+    def self.try_strict_coerce(value)
+      case value
+      in true | false
+        [true, value, 1]
+      else
+        [false, false, 0]
+      end
+    end
   end
 
   # @private
   #
   # A value from among a specified list of options. OpenAPI enum values map to
   # Ruby values in the SDK as follows:
-  # boolean => true|false
+  # boolean => true | false
   # integer => Integer
   # float => Float
   # string => Symbol
@@ -148,10 +215,205 @@ module Anthropic
       alias_method :dump, :coerce
     end
 
+    # @private
+    #
+    # @param target [Class, Anthropic::Converter]
+    # @param value [Object]
+    #
+    # @return [Array(true, Object, nil), Array(false, bool, Integer)]
+    def self.try_strict_coerce(value)
+      return [true, value, 1] if values.include?(value)
+
+      case value
+      in String if values.include?(val = value.to_sym)
+        [true, val, 1]
+      else
+        case [value, values.first]
+        in [true | false, true | false] | [Integer, Integer] | [Symbol | String, Symbol]
+          [false, true, 0]
+        else
+          [false, false, 0]
+        end
+      end
+    end
+
     # @return [Array<Symbol>] All of the valid Symbol values for this enum.
     def self.values
       @values ||= constants.map { |c| const_get(c) }
     end
+  end
+
+  # @private
+  #
+  class Union
+    include Anthropic::Converter
+    # rubocop:disable Style/NumberedParametersLimit
+    # rubocop:disable Style/HashEachMethods
+
+    # @param other [Object]
+    #
+    # @return [Boolean]
+    def self.===(other)
+      variants.any? do |_, variant_fn|
+        variant_fn.call === other
+      end
+    end
+
+    # @private
+    #
+    # @param value [Object]
+    #
+    # @return [Class, RubyModuleName::Converter, nil]
+    private_class_method def self.resolve_variant(value)
+      case [@discriminator, value]
+      in [_, Anthropic::BaseModel]
+        value.class
+      in [Symbol, Hash]
+        key =
+          if value.key?(@discriminator)
+            value.fetch(@discriminator)
+          elsif value.key?((discriminator = @discriminator.to_s))
+            value.fetch(discriminator)
+          end
+
+        key = key.to_sym if key.is_a?(String)
+        _, resolved = variants.find { |k,| k == key }
+        resolved.nil? ? Anthropic::Unknown : resolved.call
+      else
+        nil
+      end
+    end
+
+    # @private
+    #
+    # @param value [Object]
+    #
+    # @return [Object]
+    def self.coerce(value)
+      if (variant = resolve_variant(value))
+        return Converter.coerce(variant, value)
+      end
+
+      matches = []
+
+      variants.each do |_, variant_fn|
+        variant = variant_fn.call
+
+        case Converter.try_strict_coerce(variant, value)
+        in [true, coerced, _]
+          return coerced
+        in [false, true, score]
+          matches << [score, variant]
+        in [false, false, _]
+          nil
+        end
+      end
+
+      _, variant = matches.sort! { _2.first <=> _1.first }.find { |score,| !score.zero? }
+      variant.nil? ? value : Converter.coerce(variant, value)
+    end
+
+    # @private
+    #
+    # @param value [Object]
+    #
+    # @return [Object]
+    def self.dump(value)
+      if (variant = resolve_variant(value))
+        return Converter.dump(variant, value)
+      end
+
+      variants.each do |_, variant_fn|
+        variant = variant_fn.call
+        if variant === value
+          return Converter.dump(variant, value)
+        end
+      end
+      value
+    end
+
+    # @private
+    #
+    # @param target [Class, Anthropic::Converter]
+    # @param value [Object]
+    #
+    # @return [Array(true, Object, nil), Array(false, bool, Integer)]
+    def self.try_strict_coerce(value)
+      # TODO(ruby) this will result in super linear decoding behaviour for nested unions
+      # follow up with a decoding context that captures current strictness levels
+      if (variant = resolve_variant(value))
+        return Converter.try_strict_coerce(variant, value)
+      end
+
+      coercible = false
+      max_score = 0
+
+      variants.each do |_, variant_fn|
+        variant = variant_fn.call
+
+        case Converter.try_strict_coerce(variant, value)
+        in [true, coerced, score]
+          return [true, coerced, score]
+        in [false, true, score]
+          coercible = true
+          max_score = [max_score, score].max
+        in [false, false, _]
+          nil
+        end
+      end
+
+      [false, coercible, max_score]
+    end
+
+    # @private
+    #
+    # @return [Array<Array(Symbol, Object)>] All of the specified variants for this union.
+    private_class_method def self.variants
+      @variants ||= []
+    end
+
+    # @private
+    #
+    # @param variant [Proc, Object]
+    # @param key [Symbol, nil]
+    #
+    # @return [void]
+    private_class_method def self.discriminator(property)
+      case property
+      in Symbol
+        @discriminator = property
+      end
+    end
+
+    # @private
+    #
+    # @param key [Symbol, Anthropic::Converter, Proc]
+    # @param variant [Proc, Object]
+    # @param key [Symbol, nil]
+    #
+    # @return [void]
+    private_class_method def self.variant(key = nil, type_info = nil, enum: nil, union: nil)
+      variant_info =
+        case [key, type_info, enum, union]
+        in [Proc, nil, nil, nil]
+          [nil, key]
+        in [Class | Anthropic::Converter, nil, nil, nil]
+          [nil, -> { key }]
+        in [Symbol, Proc, nil, nil]
+          [key, type_info]
+        in [Symbol, Class | Anthropic::Converter, nil, nil]
+          [key, -> { type_info }]
+        in [Symbol | nil, nil, Proc, nil]
+          [key, enum]
+        in [Symbol | nil, nil, nil, Proc]
+          [key, union]
+        end
+
+      variants << variant_info
+    end
+
+    # rubocop:enable Style/HashEachMethods
+    # rubocop:enable Style/NumberedParametersLimit
   end
 
   # @private
@@ -188,7 +450,7 @@ module Anthropic
       items_type = @items_type_fn.call
       case value
       in Enumerable unless value.is_a?(Hash)
-        value.map { |item| Anthropic::Converter.coerce(items_type, item) }
+        value.map { |item| Converter.coerce(items_type, item) }
       else
         value
       end
@@ -203,9 +465,47 @@ module Anthropic
       items_type = @items_type_fn.call
       case value
       in Enumerable unless value.is_a?(Hash)
-        value.map { |item| Anthropic::Converter.dump(items_type, item) }.to_a
+        value.map { |item| Converter.dump(items_type, item) }.to_a
       else
         value
+      end
+    end
+
+    # @private
+    #
+    # @param value [Object]
+    #
+    # @return [Array(true, Object, nil), Array(false, bool, Integer)]
+    def try_strict_coerce(value)
+      case value
+      in Array
+        items_type = @items_type_fn.call
+        great_success = true
+        tally = 0
+
+        mapped =
+          value.map do |item|
+            case Converter.try_strict_coerce(items_type, item)
+            in [true, coerced, score]
+              tally += score
+              coerced
+            in [false, true, score]
+              great_success = false
+              tally += score
+              item
+            in [false, false, _]
+              great_success &&= item.nil?
+              item
+            end
+          end
+
+        if great_success
+          [true, mapped, tally]
+        else
+          [false, true, tally]
+        end
+      else
+        [false, false, 0]
       end
     end
 
@@ -294,6 +594,44 @@ module Anthropic
       end
     end
 
+    # @private
+    #
+    # @param value [Object]
+    #
+    # @return [Array(true, Object, nil), Array(false, bool, Integer)]
+    def try_strict_coerce(value)
+      case value
+      in Hash
+        items_type = @items_type_fn.call
+        great_success = true
+        tally = 0
+
+        mapped =
+          value.transform_values do |val|
+            case Converter.try_strict_coerce(items_type, val)
+            in [true, coerced, score]
+              tally += score
+              coerced
+            in [false, true, score]
+              great_success = false
+              tally += score
+              val
+            in [false, false, _]
+              great_success &&= val.nil?
+              val
+            end
+          end
+
+        if great_success
+          [true, mapped, tally]
+        else
+          [false, true, tally]
+        end
+      else
+        [false, false, 0]
+      end
+    end
+
     # @param item_type [Proc, Object, nil]
     # @param enum [Proc, nil]
     # @param union [Proc, nil]
@@ -347,16 +685,67 @@ module Anthropic
         in nil
           [name, val]
         else
-          mode, target_fn, api_name = field.fetch_values(:mode, :type_fn, :key)
+          mode, type_fn, api_name = field.fetch_values(:mode, :type_fn, :key)
           case mode
-          in :dump | nil
-            target = target_fn.call
-            [api_name, Anthropic::Converter.dump(target, val)]
-          else
+          in :coerce
             next
+          else
+            target = type_fn.call
+            [api_name, Converter.dump(target, val)]
           end
         end
       end.to_h
+    end
+
+    # @private
+    #
+    # @param value [Object]
+    #
+    # @return [Array(true, Object, nil), Array(false, bool, Integer)]
+    def self.try_strict_coerce(value)
+      case value
+      in Hash | Anthropic::BaseModel
+        value = value.to_h
+      else
+        return [false, false, 0]
+      end
+
+      keys = value.keys.to_set
+      great_success = true
+      tally = 0
+      acc = {}
+
+      fields.each_value do |field|
+        mode, required, type_fn, api_name = field.fetch_values(:mode, :required, :type_fn, :key)
+        keys.delete(api_name)
+
+        case [required && mode != :dump, value.key?(api_name)]
+        in [_, true]
+          target = type_fn.call
+          item = value.fetch(api_name)
+          case Converter.try_strict_coerce(target, item)
+          in [true, coerced, score]
+            tally += score
+            acc[api_name] = coerced
+          in [false, true, score]
+            great_success = false
+            tally += score
+            acc[api_name] = item
+          in [false, false, _]
+            great_success &&= item.nil?
+          end
+        in [true, false]
+          great_success = false
+        in [false, false]
+          nil
+        end
+      end
+
+      keys.each do |key|
+        acc[key] = value.fetch(key)
+      end
+
+      great_success ? [true, new(acc), tally] : [false, true, tally]
     end
 
     # @private
@@ -390,7 +779,7 @@ module Anthropic
 
       define_method(name_sym) do
         field_type = type_fn.call
-        Anthropic::Converter.coerce(field_type, @data[key])
+        Converter.coerce(field_type, @data[key])
       rescue StandardError
         name = self.class.name.split("::").last
         raise Anthropic::ConversionError.new(
@@ -402,14 +791,12 @@ module Anthropic
 
     # @private
     #
-    # NB `required` is just a signal to the reader. We don't do runtime validation anyway.
     private_class_method def self.required(name_sym, type_info = nil, api_name: nil, enum: nil, union: nil)
       add_field(name_sym, required: true, api_name: api_name, type_info: enum || union || type_info)
     end
 
     # @private
     #
-    # NB `optional` is just a signal to the reader. We don't do runtime validation anyway.
     private_class_method def self.optional(name_sym, type_info = nil, api_name: nil, enum: nil, union: nil)
       add_field(name_sym, required: false, api_name: api_name, type_info: enum || union || type_info)
     end
