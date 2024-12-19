@@ -50,6 +50,14 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Minitest::Test
     end
   end
 
+  def test_delete
+    response = @anthropic.beta.messages.batches.delete("message_batch_id")
+
+    assert_pattern do
+      response => Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch
+    end
+  end
+
   def test_cancel
     response = @anthropic.beta.messages.batches.cancel("message_batch_id")
 

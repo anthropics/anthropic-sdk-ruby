@@ -82,6 +82,24 @@ module Anthropic
           @client.request(req, opts)
         end
 
+        # This endpoint is idempotent and can be used to poll for Message Batch
+        #   completion. To access the results of a Message Batch, make a request to the
+        #   `results_url` field in the response.
+        #
+        # @param message_batch_id [String] ID of the Message Batch.
+        #
+        # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+        #
+        # @return [Anthropic::Models::Messages::DeletedMessageBatch]
+        def delete(message_batch_id, opts = {})
+          req = {
+            method: :delete,
+            path: ["v1/messages/batches/%0s", message_batch_id],
+            model: Anthropic::Models::Messages::DeletedMessageBatch
+          }
+          @client.request(req, opts)
+        end
+
         # Batches may be canceled any time before processing ends. Once cancellation is
         #   initiated, the batch enters a `canceling` state, at which time the system may
         #   complete any in-progress, non-interruptible requests before finalizing
