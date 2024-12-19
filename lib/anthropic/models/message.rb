@@ -177,7 +177,7 @@ module Anthropic
       #   #   For example, `output_tokens` will be non-zero, even for an empty string response
       #   #   from Claude.
       #   #
-      #   def initialize(id:, content:, model:, role:, stop_reason:, stop_sequence:, type:, usage:) = super
+      #   def initialize(id:, content:, model:, role:, stop_reason:, stop_sequence:, type:, usage:, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 

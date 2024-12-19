@@ -14,7 +14,7 @@ module Anthropic
         #   # @param input_tokens [Integer] The total number of tokens across the provided list of messages, system prompt,
         #   #   and tools.
         #   #
-        #   def initialize(input_tokens:) = super
+        #   def initialize(input_tokens:, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
       end

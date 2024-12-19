@@ -23,7 +23,7 @@ module Anthropic
       #   # @param type [String]
       #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
       #   #
-      #   def initialize(source:, type:, cache_control: nil) = super
+      #   def initialize(source:, type:, cache_control: nil, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
@@ -48,7 +48,7 @@ module Anthropic
         #   # @param media_type [String]
         #   # @param type [String]
         #   #
-        #   def initialize(data:, media_type:, type:) = super
+        #   def initialize(data:, media_type:, type:, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 

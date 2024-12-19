@@ -17,7 +17,7 @@ module Anthropic
       #   # @param error [Anthropic::Models::APIErrorObject, Anthropic::Models::AuthenticationError_, Anthropic::Models::BillingError, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::InvalidRequestError, Anthropic::Models::NotFoundError_, Anthropic::Models::OverloadedError, Anthropic::Models::PermissionError, Anthropic::Models::RateLimitError_]
       #   # @param type [String]
       #   #
-      #   def initialize(error:, type:) = super
+      #   def initialize(error:, type:, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 

@@ -464,7 +464,8 @@ module Anthropic
         #     tools: nil,
         #     top_k: nil,
         #     top_p: nil,
-        #     betas: nil
+        #     betas: nil,
+        #     **
         #   )
         #     super
         #   end

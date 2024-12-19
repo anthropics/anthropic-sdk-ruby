@@ -4,7 +4,7 @@ module Anthropic
   module Models
     class ModelRetrieveParams < Anthropic::BaseModel
       # @!parse
-      #   def initialize = super
+      #   def initialize(**) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
     end

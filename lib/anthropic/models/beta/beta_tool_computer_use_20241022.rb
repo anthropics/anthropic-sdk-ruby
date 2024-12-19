@@ -55,7 +55,7 @@ module Anthropic
         #   #
         #   # @param display_number [Integer, nil] The X11 display number (e.g. 0, 1) for the display.
         #   #
-        #   def initialize(display_height_px:, display_width_px:, name:, type:, cache_control: nil, display_number: nil) = super
+        #   def initialize(display_height_px:, display_width_px:, name:, type:, cache_control: nil, display_number: nil, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 

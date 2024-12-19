@@ -33,7 +33,7 @@ module Anthropic
           #   #   processing failed, or the reason why processing was not attempted, such as
           #   #   cancellation or expiration.
           #   #
-          #   def initialize(custom_id:, result:) = super
+          #   def initialize(custom_id:, result:, **) = super
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
         end

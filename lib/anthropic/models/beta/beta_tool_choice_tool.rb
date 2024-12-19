@@ -35,7 +35,7 @@ module Anthropic
         #   #   Defaults to `false`. If set to `true`, the model will output exactly one tool
         #   #   use.
         #   #
-        #   def initialize(name:, type:, disable_parallel_tool_use: nil) = super
+        #   def initialize(name:, type:, disable_parallel_tool_use: nil, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 

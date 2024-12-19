@@ -44,7 +44,7 @@ module Anthropic
         #   #   For example, `output_tokens` will be non-zero, even for an empty string response
         #   #   from Claude.
         #   #
-        #   def initialize(delta:, type:, usage:) = super
+        #   def initialize(delta:, type:, usage:, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
@@ -66,7 +66,7 @@ module Anthropic
           #   # @param stop_reason [String, nil]
           #   # @param stop_sequence [String, nil]
           #   #
-          #   def initialize(stop_reason:, stop_sequence:) = super
+          #   def initialize(stop_reason:, stop_sequence:, **) = super
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 

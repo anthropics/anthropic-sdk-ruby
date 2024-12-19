@@ -17,7 +17,7 @@ module Anthropic
       #   # @param error [Anthropic::Models::BetaAPIError, Anthropic::Models::BetaAuthenticationError, Anthropic::Models::BetaBillingError, Anthropic::Models::BetaGatewayTimeoutError, Anthropic::Models::BetaInvalidRequestError, Anthropic::Models::BetaNotFoundError, Anthropic::Models::BetaOverloadedError, Anthropic::Models::BetaPermissionError, Anthropic::Models::BetaRateLimitError]
       #   # @param type [String]
       #   #
-      #   def initialize(error:, type:) = super
+      #   def initialize(error:, type:, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 

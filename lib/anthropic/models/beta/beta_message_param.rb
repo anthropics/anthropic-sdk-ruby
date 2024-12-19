@@ -18,7 +18,7 @@ module Anthropic
         #   # @param content [Array<Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam>, String]
         #   # @param role [String]
         #   #
-        #   def initialize(content:, role:) = super
+        #   def initialize(content:, role:, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 

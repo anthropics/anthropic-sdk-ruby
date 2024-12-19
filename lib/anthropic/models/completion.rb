@@ -64,7 +64,7 @@ module Anthropic
       #   #
       #   #   For Text Completions, this is always `"completion"`.
       #   #
-      #   def initialize(id:, completion:, model:, stop_reason:, type:) = super
+      #   def initialize(id:, completion:, model:, stop_reason:, type:, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 

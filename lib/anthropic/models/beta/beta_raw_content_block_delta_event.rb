@@ -24,7 +24,7 @@ module Anthropic
         #   # @param index [Integer]
         #   # @param type [String]
         #   #
-        #   def initialize(delta:, index:, type:) = super
+        #   def initialize(delta:, index:, type:, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 

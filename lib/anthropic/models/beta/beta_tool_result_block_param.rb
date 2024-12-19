@@ -36,7 +36,7 @@ module Anthropic
         #   # @param content [Array<Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaTextBlockParam>, String, nil]
         #   # @param is_error [Boolean, nil]
         #   #
-        #   def initialize(tool_use_id:, type:, cache_control: nil, content: nil, is_error: nil) = super
+        #   def initialize(tool_use_id:, type:, cache_control: nil, content: nil, is_error: nil, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 

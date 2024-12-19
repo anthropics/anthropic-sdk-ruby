@@ -14,7 +14,7 @@ module Anthropic
           # @!parse
           #   # @param betas [Array<String>, nil] Optional header to specify the beta version(s) you want to use.
           #   #
-          #   def initialize(betas: nil) = super
+          #   def initialize(betas: nil, **) = super
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
         end

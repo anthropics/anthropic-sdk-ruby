@@ -59,7 +59,7 @@ module Anthropic
         #   #
         #   # @param type [String, nil]
         #   #
-        #   def initialize(input_schema:, name:, cache_control: nil, description: nil, type: nil) = super
+        #   def initialize(input_schema:, name:, cache_control: nil, description: nil, type: nil, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
@@ -83,7 +83,7 @@ module Anthropic
           #   # @param type [String]
           #   # @param properties [Object, nil]
           #   #
-          #   def initialize(type:, properties: nil) = super
+          #   def initialize(type:, properties: nil, **) = super
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 

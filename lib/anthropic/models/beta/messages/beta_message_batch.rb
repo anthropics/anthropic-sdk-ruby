@@ -127,7 +127,8 @@ module Anthropic
           #     processing_status:,
           #     request_counts:,
           #     results_url:,
-          #     type:
+          #     type:,
+          #     **
           #   )
           #     super
           #   end
