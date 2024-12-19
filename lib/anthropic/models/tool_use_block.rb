@@ -29,7 +29,7 @@ module Anthropic
       #   # @param name [String]
       #   # @param type [String]
       #   #
-      #   def initialize(id:, input:, name:, type:) = super
+      #   def initialize(id:, input:, name:, type:, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 

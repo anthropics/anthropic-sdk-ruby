@@ -17,7 +17,7 @@ module Anthropic
       #   # @param message [String]
       #   # @param type [String]
       #   #
-      #   def initialize(message:, type:) = super
+      #   def initialize(message:, type:, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 

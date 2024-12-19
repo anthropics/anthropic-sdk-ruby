@@ -17,7 +17,7 @@ module Anthropic
       #   # @param content [Array<Anthropic::Models::DocumentBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::TextBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::ToolUseBlockParam>, String]
       #   # @param role [String]
       #   #
-      #   def initialize(content:, role:) = super
+      #   def initialize(content:, role:, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 

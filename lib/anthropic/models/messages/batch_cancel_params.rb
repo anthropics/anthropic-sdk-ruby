@@ -5,7 +5,7 @@ module Anthropic
     module Messages
       class BatchCancelParams < Anthropic::BaseModel
         # @!parse
-        #   def initialize = super
+        #   def initialize(**) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
       end

@@ -155,7 +155,8 @@ module Anthropic
       #     stream:,
       #     temperature: nil,
       #     top_k: nil,
-      #     top_p: nil
+      #     top_p: nil,
+      #     **
       #   )
       #     super
       #   end

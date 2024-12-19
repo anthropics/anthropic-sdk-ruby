@@ -14,7 +14,7 @@ module Anthropic
         #   # @param requests [Array<Anthropic::Models::Messages::BatchCreateParams::Request>] List of requests for prompt completion. Each is an individual request to create
         #   #   a Message.
         #   #
-        #   def initialize(requests:) = super
+        #   def initialize(requests:, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
@@ -46,7 +46,7 @@ module Anthropic
           #   #   See the [Messages API reference](/en/api/messages) for full documentation on
           #   #   available parameters.
           #   #
-          #   def initialize(custom_id:, params:) = super
+          #   def initialize(custom_id:, params:, **) = super
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
@@ -507,7 +507,8 @@ module Anthropic
             #     tool_choice: nil,
             #     tools: nil,
             #     top_k: nil,
-            #     top_p: nil
+            #     top_p: nil,
+            #     **
             #   )
             #     super
             #   end

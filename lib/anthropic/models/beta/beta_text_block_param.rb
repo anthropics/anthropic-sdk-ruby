@@ -24,7 +24,7 @@ module Anthropic
         #   # @param type [String]
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   #
-        #   def initialize(text:, type:, cache_control: nil) = super
+        #   def initialize(text:, type:, cache_control: nil, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 

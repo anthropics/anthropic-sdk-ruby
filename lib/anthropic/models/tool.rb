@@ -51,7 +51,7 @@ module Anthropic
       #   #   perform. You can use natural language descriptions to reinforce important
       #   #   aspects of the tool input JSON schema.
       #   #
-      #   def initialize(input_schema:, name:, cache_control: nil, description: nil) = super
+      #   def initialize(input_schema:, name:, cache_control: nil, description: nil, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
@@ -75,7 +75,7 @@ module Anthropic
         #   # @param type [String]
         #   # @param properties [Object, nil]
         #   #
-        #   def initialize(type:, properties: nil) = super
+        #   def initialize(type:, properties: nil, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 

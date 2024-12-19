@@ -24,7 +24,7 @@ module Anthropic
           #   #
           #   # @param betas [Array<String>, nil] Optional header to specify the beta version(s) you want to use.
           #   #
-          #   def initialize(requests:, betas: nil) = super
+          #   def initialize(requests:, betas: nil, **) = super
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
@@ -56,7 +56,7 @@ module Anthropic
             #   #   See the [Messages API reference](/en/api/messages) for full documentation on
             #   #   available parameters.
             #   #
-            #   def initialize(custom_id:, params:) = super
+            #   def initialize(custom_id:, params:, **) = super
 
             # def initialize: (Hash | Anthropic::BaseModel) -> void
 
@@ -517,7 +517,8 @@ module Anthropic
               #     tool_choice: nil,
               #     tools: nil,
               #     top_k: nil,
-              #     top_p: nil
+              #     top_p: nil,
+              #     **
               #   )
               #     super
               #   end

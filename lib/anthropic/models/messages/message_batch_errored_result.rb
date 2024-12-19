@@ -18,7 +18,7 @@ module Anthropic
         #   # @param error [Anthropic::Models::ErrorResponse]
         #   # @param type [String]
         #   #
-        #   def initialize(error:, type:) = super
+        #   def initialize(error:, type:, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 

@@ -35,7 +35,7 @@ module Anthropic
         #   #
         #   #   Defaults to `20`. Ranges from `1` to `1000`.
         #   #
-        #   def initialize(after_id: nil, before_id: nil, limit: nil) = super
+        #   def initialize(after_id: nil, before_id: nil, limit: nil, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
       end

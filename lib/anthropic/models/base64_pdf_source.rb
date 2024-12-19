@@ -23,7 +23,7 @@ module Anthropic
       #   # @param media_type [String]
       #   # @param type [String]
       #   #
-      #   def initialize(data:, media_type:, type:) = super
+      #   def initialize(data:, media_type:, type:, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 

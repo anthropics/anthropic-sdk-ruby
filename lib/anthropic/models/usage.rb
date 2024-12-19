@@ -36,7 +36,7 @@ module Anthropic
       #   #
       #   # @param output_tokens [Integer] The number of output tokens which were used.
       #   #
-      #   def initialize(cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, output_tokens:) = super
+      #   def initialize(cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, output_tokens:, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
     end

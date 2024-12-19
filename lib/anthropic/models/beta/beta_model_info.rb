@@ -42,7 +42,7 @@ module Anthropic
         #   #
         #   #   For Models, this is always `"model"`.
         #   #
-        #   def initialize(id:, created_at:, display_name:, type:) = super
+        #   def initialize(id:, created_at:, display_name:, type:, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 

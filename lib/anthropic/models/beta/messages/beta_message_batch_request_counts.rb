@@ -62,7 +62,7 @@ module Anthropic
           #   #
           #   #   This is zero until processing of the entire Message Batch has ended.
           #   #
-          #   def initialize(canceled:, errored:, expired:, processing:, succeeded:) = super
+          #   def initialize(canceled:, errored:, expired:, processing:, succeeded:, **) = super
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
         end

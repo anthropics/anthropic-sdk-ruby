@@ -12,7 +12,7 @@ module Anthropic
       # @!parse
       #   # @param output_tokens [Integer] The cumulative number of output tokens which were used.
       #   #
-      #   def initialize(output_tokens:) = super
+      #   def initialize(output_tokens:, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
     end

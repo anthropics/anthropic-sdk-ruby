@@ -17,7 +17,7 @@ module Anthropic
       #   # @param partial_json [String]
       #   # @param type [String]
       #   #
-      #   def initialize(partial_json:, type:) = super
+      #   def initialize(partial_json:, type:, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 

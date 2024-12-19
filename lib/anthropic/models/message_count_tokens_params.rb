@@ -326,7 +326,7 @@ module Anthropic
       #   #
       #   #   See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
       #   #
-      #   def initialize(messages:, model:, system_: nil, tool_choice: nil, tools: nil) = super
+      #   def initialize(messages:, model:, system_: nil, tool_choice: nil, tools: nil, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
     end

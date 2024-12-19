@@ -23,7 +23,7 @@ module Anthropic
       #   # @param index [Integer]
       #   # @param type [String]
       #   #
-      #   def initialize(content_block:, index:, type:) = super
+      #   def initialize(content_block:, index:, type:, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 

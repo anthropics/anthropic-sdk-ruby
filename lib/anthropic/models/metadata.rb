@@ -18,7 +18,7 @@ module Anthropic
       #   #   this id to help detect abuse. Do not include any identifying information such as
       #   #   name, email address, or phone number.
       #   #
-      #   def initialize(user_id: nil) = super
+      #   def initialize(user_id: nil, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
     end
