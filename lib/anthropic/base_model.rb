@@ -33,7 +33,9 @@ module Anthropic
           value.is_a?(Numeric) ? Float(value) : value
         in -> { _1 <= Date || _1 <= Time }
           value.is_a?(String) ? target.parse(value) : value
-        in -> { _1 <= String || _1 <= Hash } | -> { _1 == Object }
+        in -> { _1 <= String }
+          value.is_a?(Symbol) ? value.to_s : value
+        else
           value
         end
       end
@@ -202,6 +204,91 @@ module Anthropic
       case value
       in Enumerable unless value.is_a?(Hash)
         value.map { |item| Anthropic::Converter.dump(items_type, item) }.to_a
+      else
+        value
+      end
+    end
+
+    # @param item_type [Proc, Object, nil]
+    # @param enum [Proc, nil]
+    # @param union [Proc, nil]
+    def initialize(item_type = nil, enum: nil, union: nil)
+      @items_type_fn =
+        case [enum, union, item_type]
+        in [Proc, nil, nil]
+          enum
+        in [nil, Proc, nil]
+          union
+        in [nil, nil, Proc]
+          item_type
+        in [nil, nil, Class | Anthropic::Converter]
+          -> { item_type }
+        end
+    end
+  end
+
+  # @private
+  #
+  # Hash of items of a given type.
+  class HashOf
+    include Anthropic::Converter
+
+    private_class_method :new
+
+    # @private
+    #
+    def self.[](...) = new(...)
+
+    # @param other [Object]
+    #
+    # @return [Boolean]
+    def ===(other)
+      items_type = @items_type_fn.call
+      case other
+      in Hash
+        other.to_enum.all? do |key, val|
+          case [key, val]
+          in [Symbol | String, ^items_type]
+            true
+          else
+            false
+          end
+        end
+      else
+        false
+      end
+    end
+
+    # @private
+    #
+    # @param value [Enumerable, Object]
+    #
+    # @return [Array<Object>]
+    def coerce(value)
+      items_type = @items_type_fn.call
+      case value
+      in Hash
+        value.to_h do |key, val|
+          coerced = Anthropic::Converter.coerce(items_type, val)
+          [key.is_a?(String) ? key.to_sym : key, coerced]
+        end
+      else
+        value
+      end
+    end
+
+    # @private
+    #
+    # @param value [Enumerable, Object]
+    #
+    # @return [Array<Object>]
+    def dump(value)
+      items_type = @items_type_fn.call
+      case value
+      in Hash
+        value.transform_values do |val|
+          Anthropic::Converter.dump(items_type, val)
+        end
       else
         value
       end

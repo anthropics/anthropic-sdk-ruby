@@ -63,6 +63,8 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Minitest::Test
 
     response = @anthropic.beta.messages.batches.results("message_batch_id")
 
-    refute_nil(response)
+    assert_pattern do
+      response => Anthropic::Unknown
+    end
   end
 end
