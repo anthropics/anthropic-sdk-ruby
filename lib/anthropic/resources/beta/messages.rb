@@ -252,7 +252,7 @@ module Anthropic
           parsed = Anthropic::Models::Beta::MessageCreateParams.dump(params)
           req = {
             method: :post,
-            path: "v1/messages?beta=true",
+            path: "/v1/messages?beta=true",
             body: parsed,
             model: Anthropic::Models::Beta::BetaMessage
           }
@@ -444,7 +444,7 @@ module Anthropic
           parsed = Anthropic::Models::Beta::MessageCountTokensParams.dump(params)
           req = {
             method: :post,
-            path: "v1/messages/count_tokens?beta=true",
+            path: "/v1/messages/count_tokens?beta=true",
             body: parsed,
             model: Anthropic::Models::Beta::BetaMessageTokensCount
           }

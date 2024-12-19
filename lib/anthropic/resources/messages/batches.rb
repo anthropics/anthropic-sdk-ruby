@@ -27,7 +27,7 @@ module Anthropic
           parsed = Anthropic::Models::Messages::BatchCreateParams.dump(params)
           req = {
             method: :post,
-            path: "v1/messages/batches",
+            path: "/v1/messages/batches",
             body: parsed,
             model: Anthropic::Models::Messages::MessageBatch
           }
@@ -46,7 +46,7 @@ module Anthropic
         def retrieve(message_batch_id, opts = {})
           req = {
             method: :get,
-            path: ["v1/messages/batches/%0s", message_batch_id],
+            path: "/v1/messages/batches/#{message_batch_id}",
             model: Anthropic::Models::Messages::MessageBatch
           }
           @client.request(req, opts)
@@ -74,7 +74,7 @@ module Anthropic
           parsed = Anthropic::Models::Messages::BatchListParams.dump(params)
           req = {
             method: :get,
-            path: "v1/messages/batches",
+            path: "/v1/messages/batches",
             query: parsed,
             page: Anthropic::Page,
             model: Anthropic::Models::Messages::MessageBatch
@@ -100,7 +100,7 @@ module Anthropic
         def cancel(message_batch_id, opts = {})
           req = {
             method: :post,
-            path: ["v1/messages/batches/%0s/cancel", message_batch_id],
+            path: "/v1/messages/batches/#{message_batch_id}/cancel",
             model: Anthropic::Models::Messages::MessageBatch
           }
           @client.request(req, opts)
@@ -120,7 +120,7 @@ module Anthropic
         def results(message_batch_id, opts = {})
           req = {
             method: :get,
-            path: ["v1/messages/batches/%0s/results", message_batch_id],
+            path: "/v1/messages/batches/#{message_batch_id}/results",
             headers: {"Accept" => "application/binary"},
             model: Anthropic::Unknown
           }

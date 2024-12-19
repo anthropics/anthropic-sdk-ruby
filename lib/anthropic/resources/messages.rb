@@ -248,7 +248,7 @@ module Anthropic
         parsed = Anthropic::Models::MessageCreateParams.dump(params)
         req = {
           method: :post,
-          path: "v1/messages",
+          path: "/v1/messages",
           body: parsed,
           model: Anthropic::Models::Message
         }
@@ -438,7 +438,7 @@ module Anthropic
         parsed = Anthropic::Models::MessageCountTokensParams.dump(params)
         req = {
           method: :post,
-          path: "v1/messages/count_tokens",
+          path: "/v1/messages/count_tokens",
           body: parsed,
           model: Anthropic::Models::MessageTokensCount
         }
