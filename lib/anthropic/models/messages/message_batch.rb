@@ -79,16 +79,16 @@ module Anthropic
         #   #
         #   #   The format and length of IDs may change over time.
         #   #
-        #   # @param archived_at [String] RFC 3339 datetime string representing the time at which the Message Batch was
+        #   # @param archived_at [String, nil] RFC 3339 datetime string representing the time at which the Message Batch was
         #   #   archived and its results became unavailable.
         #   #
-        #   # @param cancel_initiated_at [String] RFC 3339 datetime string representing the time at which cancellation was
+        #   # @param cancel_initiated_at [String, nil] RFC 3339 datetime string representing the time at which cancellation was
         #   #   initiated for the Message Batch. Specified only if cancellation was initiated.
         #   #
         #   # @param created_at [String] RFC 3339 datetime string representing the time at which the Message Batch was
         #   #   created.
         #   #
-        #   # @param ended_at [String] RFC 3339 datetime string representing the time at which processing for the
+        #   # @param ended_at [String, nil] RFC 3339 datetime string representing the time at which processing for the
         #   #   Message Batch ended. Specified only once processing ends.
         #   #
         #   #   Processing ends when every request in a Message Batch has either succeeded,
@@ -105,7 +105,7 @@ module Anthropic
         #   #   processing of the entire batch ends. The sum of all values always matches the
         #   #   total number of requests in the batch.
         #   #
-        #   # @param results_url [String] URL to a `.jsonl` file containing the results of the Message Batch requests.
+        #   # @param results_url [String, nil] URL to a `.jsonl` file containing the results of the Message Batch requests.
         #   #   Specified only once processing ends.
         #   #
         #   #   Results in the file are not guaranteed to be in the same order as requests. Use

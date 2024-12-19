@@ -143,7 +143,7 @@ module Anthropic
       #   #
       #   #   This will always be `"assistant"`.
       #   #
-      #   # @param stop_reason [String] The reason that we stopped.
+      #   # @param stop_reason [String, nil] The reason that we stopped.
       #   #
       #   #   This may be one the following values:
       #   #
@@ -155,7 +155,7 @@ module Anthropic
       #   #   In non-streaming mode this value is always non-null. In streaming mode, it is
       #   #   null in the `message_start` event and non-null otherwise.
       #   #
-      #   # @param stop_sequence [String] Which custom stop sequence was generated, if any.
+      #   # @param stop_sequence [String, nil] Which custom stop sequence was generated, if any.
       #   #
       #   #   This value will be a non-null string if one of your custom stop sequences was
       #   #   generated.

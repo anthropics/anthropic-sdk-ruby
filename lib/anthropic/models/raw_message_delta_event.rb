@@ -59,8 +59,8 @@ module Anthropic
         required :stop_sequence, String
 
         # @!parse
-        #   # @param stop_reason [String]
-        #   # @param stop_sequence [String]
+        #   # @param stop_reason [String, nil]
+        #   # @param stop_sequence [String, nil]
         #   #
         #   def initialize(stop_reason:, stop_sequence:) = super
 
