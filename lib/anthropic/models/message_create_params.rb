@@ -85,8 +85,8 @@ module Anthropic
       # @!attribute model
       #   The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
       #
-      #   @return [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent1]
-      required :model, Anthropic::Unknown
+      #   @return [String, Symbol, Anthropic::Models::Model::UnionMember1]
+      required :model, union: -> { Anthropic::Models::Model }
 
       # @!attribute metadata
       #   An object describing metadata about the request.
@@ -117,8 +117,8 @@ module Anthropic
       #
       # A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
       #
-      #   @return [Array<Anthropic::Models::TextBlockParam>, String]
-      optional :system_, Anthropic::Unknown, api_name: :system
+      #   @return [String, Array<Anthropic::Models::TextBlockParam>]
+      optional :system_, union: -> { Anthropic::Models::MessageCreateParams::System }, api_name: :system
 
       # @!attribute temperature
       #   Amount of randomness injected into the response.
@@ -133,8 +133,8 @@ module Anthropic
       # @!attribute tool_choice
       #   How the model should use the provided tools. The model can use a specific tool, any available tool, or decide by itself.
       #
-      #   @return [Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceTool]
-      optional :tool_choice, Anthropic::Unknown
+      #   @return [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool]
+      optional :tool_choice, union: -> { Anthropic::Models::ToolChoice }
 
       # @!attribute tools
       #   Definitions of tools that the model may use.
@@ -316,7 +316,7 @@ module Anthropic
       #   #   the top-level `system` parameter — there is no `"system"` role for input
       #   #   messages in the Messages API.
       #   #
-      #   # @param model [String] The model that will complete your prompt.\n\nSee
+      #   # @param model [String, String] The model that will complete your prompt.\n\nSee
       #   #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   #   details and options.
       #   #
@@ -337,7 +337,7 @@ module Anthropic
       #   #   See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
       #   #   details.
       #   #
-      #   # @param system_ [Array<Anthropic::Models::TextBlockParam>, String, nil] System prompt.
+      #   # @param system_ [String, Array<Anthropic::Models::TextBlockParam>, nil] System prompt.
       #   #
       #   #   A system prompt is a way of providing context and instructions to Claude, such
       #   #   as specifying a particular goal or role. See our
@@ -352,7 +352,7 @@ module Anthropic
       #   #   Note that even with `temperature` of `0.0`, the results will not be fully
       #   #   deterministic.
       #   #
-      #   # @param tool_choice [Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceTool, nil] How the model should use the provided tools. The model can use a specific tool,
+      #   # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, nil] How the model should use the provided tools. The model can use a specific tool,
       #   #   any available tool, or decide by itself.
       #   #
       #   # @param tools [Array<Anthropic::Models::Tool>, nil] Definitions of tools that the model may use.
@@ -476,6 +476,28 @@ module Anthropic
       # ```
       class Stream < Anthropic::Enum
         TRUE = true
+      end
+
+      # System prompt.
+      #
+      # A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
+      #
+      # @example
+      #
+      # ```ruby
+      # case union
+      # in String
+      #   # ...
+      # in Anthropic::Models::MessageCreateParams::System::TextBlockParamArray
+      #   # ...
+      # end
+      # ```
+      class System < Anthropic::Union
+        TextBlockParamArray = Anthropic::ArrayOf[-> { Anthropic::Models::TextBlockParam }]
+
+        variant String
+
+        variant -> { Anthropic::Models::MessageCreateParams::System::TextBlockParamArray }
       end
     end
   end

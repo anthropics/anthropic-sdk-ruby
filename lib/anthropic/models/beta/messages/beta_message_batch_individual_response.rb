@@ -18,8 +18,8 @@ module Anthropic
           #
           # Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
           #
-          #   @return [Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult]
-          required :result, Anthropic::Unknown
+          #   @return [Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult]
+          required :result, union: -> { Anthropic::Models::Beta::Messages::BetaMessageBatchResult }
 
           # @!parse
           #   # @param custom_id [String] Developer-provided ID created for each request in a Message Batch. Useful for
@@ -27,7 +27,7 @@ module Anthropic
           #   #
           #   #   Must be unique for each request within the Message Batch.
           #   #
-          #   # @param result [Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult] Processing result for this request.
+          #   # @param result [Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult] Processing result for this request.
           #   #
           #   #   Contains a Message output if processing was successful, an error response if
           #   #   processing failed, or the reason why processing was not attempted, such as

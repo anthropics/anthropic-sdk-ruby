@@ -14,8 +14,8 @@ module Anthropic
       # @!attribute model
       #   The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
       #
-      #   @return [String, Symbol, Anthropic::Models::Model::UnnamedTypeWithunionParent0]
-      required :model, Anthropic::Unknown
+      #   @return [String, Symbol, Anthropic::Models::Model::UnionMember1]
+      required :model, union: -> { Anthropic::Models::Model }
 
       # @!attribute prompt
       #   The prompt that you want Claude to complete.
@@ -89,7 +89,7 @@ module Anthropic
       #   #   Note that our models may stop _before_ reaching this maximum. This parameter
       #   #   only specifies the absolute maximum number of tokens to generate.
       #   #
-      #   # @param model [String] The model that will complete your prompt.\n\nSee
+      #   # @param model [String, String] The model that will complete your prompt.\n\nSee
       #   #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   #   details and options.
       #   #

@@ -7,7 +7,8 @@ module Anthropic
         # @!attribute content_block
         #
         #   @return [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock]
-        required :content_block, Anthropic::Unknown
+        required :content_block,
+                 union: -> { Anthropic::Models::Beta::BetaRawContentBlockStartEvent::ContentBlock }
 
         # @!attribute index
         #
@@ -27,6 +28,100 @@ module Anthropic
         #   def initialize(content_block:, index:, type:, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
+
+        # @example
+        #
+        # ```ruby
+        # case union
+        # in Anthropic::Models::Beta::BetaTextBlock
+        #   # ...
+        # in Anthropic::Models::Beta::BetaToolUseBlock
+        #   # ...
+        # end
+        # ```
+        class ContentBlock < Anthropic::Union
+          discriminator :type
+
+          variant :text, -> { Anthropic::Models::Beta::BetaTextBlock }
+
+          variant :tool_use, -> { Anthropic::Models::Beta::BetaToolUseBlock }
+        end
+
+        class BetaTextBlock < Anthropic::BaseModel
+          # @!attribute text
+          #
+          #   @return [String]
+          required :text, String
+
+          # @!attribute type
+          #
+          #   @return [Symbol, Anthropic::Models::Beta::BetaTextBlock::Type]
+          required :type, enum: -> { Anthropic::Models::Beta::BetaTextBlock::Type }
+
+          # @!parse
+          #   # @param text [String]
+          #   # @param type [String]
+          #   #
+          #   def initialize(text:, type:, **) = super
+
+          # def initialize: (Hash | Anthropic::BaseModel) -> void
+
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :text
+          #   # ...
+          # end
+          # ```
+          class Type < Anthropic::Enum
+            TEXT = :text
+          end
+        end
+
+        class BetaToolUseBlock < Anthropic::BaseModel
+          # @!attribute id
+          #
+          #   @return [String]
+          required :id, String
+
+          # @!attribute input
+          #
+          #   @return [Object]
+          required :input, Anthropic::Unknown
+
+          # @!attribute name
+          #
+          #   @return [String]
+          required :name, String
+
+          # @!attribute type
+          #
+          #   @return [Symbol, Anthropic::Models::Beta::BetaToolUseBlock::Type]
+          required :type, enum: -> { Anthropic::Models::Beta::BetaToolUseBlock::Type }
+
+          # @!parse
+          #   # @param id [String]
+          #   # @param input [Object]
+          #   # @param name [String]
+          #   # @param type [String]
+          #   #
+          #   def initialize(id:, input:, name:, type:, **) = super
+
+          # def initialize: (Hash | Anthropic::BaseModel) -> void
+
+          # @example
+          #
+          # ```ruby
+          # case enum
+          # in :tool_use
+          #   # ...
+          # end
+          # ```
+          class Type < Anthropic::Enum
+            TOOL_USE = :tool_use
+          end
+        end
 
         # @example
         #

@@ -6,8 +6,8 @@ module Anthropic
       class BetaMessageParam < Anthropic::BaseModel
         # @!attribute content
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam>, String]
-        required :content, Anthropic::Unknown
+        #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock>]
+        required :content, union: -> { Anthropic::Models::Beta::BetaMessageParam::Content }
 
         # @!attribute role
         #
@@ -15,12 +15,32 @@ module Anthropic
         required :role, enum: -> { Anthropic::Models::Beta::BetaMessageParam::Role }
 
         # @!parse
-        #   # @param content [Array<Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam>, String]
+        #   # @param content [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock>]
         #   # @param role [String]
         #   #
         #   def initialize(content:, role:, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
+
+        # @example
+        #
+        # ```ruby
+        # case union
+        # in String
+        #   # ...
+        # in Anthropic::Models::Beta::BetaMessageParam::Content::BetaContentBlockParamArray
+        #   # ...
+        # end
+        # ```
+        class Content < Anthropic::Union
+          BetaContentBlockParamArray = Anthropic::ArrayOf[union: -> {
+            Anthropic::Models::Beta::BetaContentBlockParam
+          }]
+
+          variant String
+
+          variant -> { Anthropic::Models::Beta::BetaMessageParam::Content::BetaContentBlockParamArray }
+        end
 
         # @example
         #

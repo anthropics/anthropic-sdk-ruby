@@ -28,8 +28,10 @@ module Anthropic
           # @!attribute betas
           #   Optional header to specify the beta version(s) you want to use.
           #
-          #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnnamedTypeWithunionParent11>]
-          optional :betas, Anthropic::ArrayOf[Anthropic::Unknown], api_name: :"anthropic-beta"
+          #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>]
+          optional :betas,
+                   Anthropic::ArrayOf[union: -> { Anthropic::Models::AnthropicBeta }],
+                   api_name: :"anthropic-beta"
 
           # @!parse
           #   # @param after_id [String, nil] ID of the object to use as a cursor for pagination. When provided, returns the
@@ -42,7 +44,7 @@ module Anthropic
           #   #
           #   #   Defaults to `20`. Ranges from `1` to `1000`.
           #   #
-          #   # @param betas [Array<String>, nil] Optional header to specify the beta version(s) you want to use.
+          #   # @param betas [Array<String, String>, nil] Optional header to specify the beta version(s) you want to use.
           #   #
           #   def initialize(after_id: nil, before_id: nil, limit: nil, betas: nil, **) = super
 

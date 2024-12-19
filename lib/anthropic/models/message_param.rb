@@ -5,8 +5,8 @@ module Anthropic
     class MessageParam < Anthropic::BaseModel
       # @!attribute content
       #
-      #   @return [Array<Anthropic::Models::DocumentBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::TextBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::ToolUseBlockParam>, String]
-      required :content, Anthropic::Unknown
+      #   @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam>]
+      required :content, union: -> { Anthropic::Models::MessageParam::Content }
 
       # @!attribute role
       #
@@ -14,12 +14,30 @@ module Anthropic
       required :role, enum: -> { Anthropic::Models::MessageParam::Role }
 
       # @!parse
-      #   # @param content [Array<Anthropic::Models::DocumentBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::TextBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::ToolUseBlockParam>, String]
+      #   # @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam>]
       #   # @param role [String]
       #   #
       #   def initialize(content:, role:, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
+
+      # @example
+      #
+      # ```ruby
+      # case union
+      # in String
+      #   # ...
+      # in Anthropic::Models::MessageParam::Content::ContentBlockParamArray
+      #   # ...
+      # end
+      # ```
+      class Content < Anthropic::Union
+        ContentBlockParamArray = Anthropic::ArrayOf[union: -> { Anthropic::Models::ContentBlockParam }]
+
+        variant String
+
+        variant -> { Anthropic::Models::MessageParam::Content::ContentBlockParamArray }
+      end
 
       # @example
       #
