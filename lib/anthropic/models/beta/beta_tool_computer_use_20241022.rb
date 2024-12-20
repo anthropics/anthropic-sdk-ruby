@@ -73,6 +73,8 @@ module Anthropic
         # ```
         class Name < Anthropic::Enum
           COMPUTER = :computer
+
+          finalize!
         end
 
         # @example
@@ -85,6 +87,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           COMPUTER_20241022 = :computer_20241022
+
+          finalize!
         end
       end
     end

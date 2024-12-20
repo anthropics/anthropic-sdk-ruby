@@ -26,6 +26,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           EPHEMERAL = :ephemeral
+
+          finalize!
         end
       end
     end

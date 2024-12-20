@@ -74,6 +74,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           TEXT = :text
+
+          finalize!
         end
       end
 
@@ -118,6 +120,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           TOOL_USE = :tool_use
+
+          finalize!
         end
       end
 
@@ -131,6 +135,8 @@ module Anthropic
       # ```
       class Type < Anthropic::Enum
         CONTENT_BLOCK_START = :content_block_start
+
+        finalize!
       end
     end
   end

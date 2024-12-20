@@ -32,6 +32,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           TEXT_DELTA = :text_delta
+
+          finalize!
         end
       end
     end

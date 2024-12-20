@@ -60,6 +60,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           MODEL = :model
+
+          finalize!
         end
       end
     end

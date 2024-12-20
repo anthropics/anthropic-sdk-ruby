@@ -32,6 +32,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           CONTENT_BLOCK_STOP = :content_block_stop
+
+          finalize!
         end
       end
     end

@@ -151,6 +151,8 @@ module Anthropic
           IN_PROGRESS = :in_progress
           CANCELING = :canceling
           ENDED = :ended
+
+          finalize!
         end
 
         # Object type.
@@ -167,6 +169,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           MESSAGE_BATCH = :message_batch
+
+          finalize!
         end
       end
     end

@@ -44,6 +44,8 @@ module Anthropic
           # ```
           class Type < Anthropic::Enum
             MESSAGE_BATCH_DELETED = :message_batch_deleted
+
+            finalize!
           end
         end
       end

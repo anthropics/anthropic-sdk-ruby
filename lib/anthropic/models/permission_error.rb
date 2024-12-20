@@ -31,6 +31,8 @@ module Anthropic
       # ```
       class Type < Anthropic::Enum
         PERMISSION_ERROR = :permission_error
+
+        finalize!
       end
     end
   end

@@ -33,6 +33,8 @@ module Anthropic
           # ```
           class Type < Anthropic::Enum
             ERRORED = :errored
+
+            finalize!
           end
         end
       end

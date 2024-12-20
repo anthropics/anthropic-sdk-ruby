@@ -71,6 +71,8 @@ module Anthropic
         CLAUDE_2_1 = :"claude-2.1"
 
         CLAUDE_2_0 = :"claude-2.0"
+
+        finalize!
       end
     end
   end

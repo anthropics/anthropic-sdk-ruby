@@ -72,6 +72,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           TEXT_DELTA = :text_delta
+
+          finalize!
         end
       end
 
@@ -104,6 +106,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           INPUT_JSON_DELTA = :input_json_delta
+
+          finalize!
         end
       end
 
@@ -117,6 +121,8 @@ module Anthropic
       # ```
       class Type < Anthropic::Enum
         CONTENT_BLOCK_DELTA = :content_block_delta
+
+        finalize!
       end
     end
   end

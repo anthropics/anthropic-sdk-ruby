@@ -26,6 +26,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           EXPIRED = :expired
+
+          finalize!
         end
       end
     end

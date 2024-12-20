@@ -40,6 +40,8 @@ module Anthropic
       # ```
       class Type < Anthropic::Enum
         AUTO = :auto
+
+        finalize!
       end
     end
   end

@@ -31,6 +31,8 @@ module Anthropic
       # ```
       class Type < Anthropic::Enum
         TIMEOUT_ERROR = :timeout_error
+
+        finalize!
       end
     end
   end

@@ -48,6 +48,8 @@ module Anthropic
       # ```
       class Type < Anthropic::Enum
         TOOL = :tool
+
+        finalize!
       end
     end
   end

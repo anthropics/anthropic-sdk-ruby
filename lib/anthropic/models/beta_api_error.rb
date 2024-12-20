@@ -31,6 +31,8 @@ module Anthropic
       # ```
       class Type < Anthropic::Enum
         API_ERROR = :api_error
+
+        finalize!
       end
     end
   end

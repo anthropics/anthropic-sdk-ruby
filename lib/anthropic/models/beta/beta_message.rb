@@ -196,6 +196,8 @@ module Anthropic
         # ```
         class Role < Anthropic::Enum
           ASSISTANT = :assistant
+
+          finalize!
         end
 
         # The reason that we stopped.
@@ -227,6 +229,8 @@ module Anthropic
           MAX_TOKENS = :max_tokens
           STOP_SEQUENCE = :stop_sequence
           TOOL_USE = :tool_use
+
+          finalize!
         end
 
         # Object type.
@@ -243,6 +247,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           MESSAGE = :message
+
+          finalize!
         end
       end
     end

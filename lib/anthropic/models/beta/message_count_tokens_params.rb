@@ -486,6 +486,8 @@ module Anthropic
             # ```
             class Type < Anthropic::Enum
               OBJECT = :object
+
+              finalize!
             end
           end
 
@@ -499,6 +501,8 @@ module Anthropic
           # ```
           class Type < Anthropic::Enum
             CUSTOM = :custom
+
+            finalize!
           end
         end
 
@@ -572,6 +576,8 @@ module Anthropic
           # ```
           class Name < Anthropic::Enum
             COMPUTER = :computer
+
+            finalize!
           end
 
           # @example
@@ -584,6 +590,8 @@ module Anthropic
           # ```
           class Type < Anthropic::Enum
             COMPUTER_20241022 = :computer_20241022
+
+            finalize!
           end
         end
 
@@ -633,6 +641,8 @@ module Anthropic
           # ```
           class Name < Anthropic::Enum
             BASH = :bash
+
+            finalize!
           end
 
           # @example
@@ -645,6 +655,8 @@ module Anthropic
           # ```
           class Type < Anthropic::Enum
             BASH_20241022 = :bash_20241022
+
+            finalize!
           end
         end
 
@@ -694,6 +706,8 @@ module Anthropic
           # ```
           class Name < Anthropic::Enum
             STR_REPLACE_EDITOR = :str_replace_editor
+
+            finalize!
           end
 
           # @example
@@ -706,6 +720,8 @@ module Anthropic
           # ```
           class Type < Anthropic::Enum
             TEXT_EDITOR_20241022 = :text_editor_20241022
+
+            finalize!
           end
         end
       end

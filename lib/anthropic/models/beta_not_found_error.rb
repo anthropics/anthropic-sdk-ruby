@@ -31,6 +31,8 @@ module Anthropic
       # ```
       class Type < Anthropic::Enum
         NOT_FOUND_ERROR = :not_found_error
+
+        finalize!
       end
     end
   end

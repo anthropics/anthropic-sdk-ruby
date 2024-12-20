@@ -31,6 +31,8 @@ module Anthropic
       # ```
       class Type < Anthropic::Enum
         RATE_LIMIT_ERROR = :rate_limit_error
+
+        finalize!
       end
     end
   end

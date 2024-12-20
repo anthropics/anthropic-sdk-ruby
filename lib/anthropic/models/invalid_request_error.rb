@@ -31,6 +31,8 @@ module Anthropic
       # ```
       class Type < Anthropic::Enum
         INVALID_REQUEST_ERROR = :invalid_request_error
+
+        finalize!
       end
     end
   end

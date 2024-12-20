@@ -36,6 +36,8 @@ module Anthropic
           # ```
           class Type < Anthropic::Enum
             SUCCEEDED = :succeeded
+
+            finalize!
           end
         end
       end

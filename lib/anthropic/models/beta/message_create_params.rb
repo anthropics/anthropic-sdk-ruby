@@ -492,6 +492,8 @@ module Anthropic
         # ```
         class Stream < Anthropic::Enum
           TRUE = true
+
+          finalize!
         end
 
         # System prompt.

@@ -31,6 +31,8 @@ module Anthropic
       # ```
       class Type < Anthropic::Enum
         OVERLOADED_ERROR = :overloaded_error
+
+        finalize!
       end
     end
   end
