@@ -41,6 +41,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           ANY = :any
+
+          finalize!
         end
       end
     end

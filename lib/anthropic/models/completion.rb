@@ -82,6 +82,8 @@ module Anthropic
       # ```
       class Type < Anthropic::Enum
         COMPLETION = :completion
+
+        finalize!
       end
     end
   end

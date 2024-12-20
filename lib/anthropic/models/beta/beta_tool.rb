@@ -97,6 +97,8 @@ module Anthropic
           # ```
           class Type < Anthropic::Enum
             OBJECT = :object
+
+            finalize!
           end
         end
 
@@ -110,6 +112,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           CUSTOM = :custom
+
+          finalize!
         end
       end
     end

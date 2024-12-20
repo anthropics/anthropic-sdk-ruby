@@ -32,6 +32,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           MESSAGE_START = :message_start
+
+          finalize!
         end
       end
     end

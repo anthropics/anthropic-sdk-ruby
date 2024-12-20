@@ -52,6 +52,8 @@ module Anthropic
       class Role < Anthropic::Enum
         USER = :user
         ASSISTANT = :assistant
+
+        finalize!
       end
     end
   end

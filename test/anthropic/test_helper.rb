@@ -10,6 +10,7 @@ require_relative "../../lib/anthropic"
 require_relative "test_namespaces"
 
 require "minitest"
+require "minitest/focus"
 require "stringio"
 
 class Minitest::Test

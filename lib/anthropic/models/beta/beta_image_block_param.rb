@@ -72,6 +72,8 @@ module Anthropic
             IMAGE_PNG = :"image/png"
             IMAGE_GIF = :"image/gif"
             IMAGE_WEBP = :"image/webp"
+
+            finalize!
           end
 
           # @example
@@ -84,6 +86,8 @@ module Anthropic
           # ```
           class Type < Anthropic::Enum
             BASE64 = :base64
+
+            finalize!
           end
         end
 
@@ -97,6 +101,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           IMAGE = :image
+
+          finalize!
         end
       end
     end

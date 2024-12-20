@@ -31,6 +31,8 @@ module Anthropic
       # ```
       class Type < Anthropic::Enum
         BILLING_ERROR = :billing_error
+
+        finalize!
       end
     end
   end

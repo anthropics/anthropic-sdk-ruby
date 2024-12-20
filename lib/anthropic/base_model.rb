@@ -241,6 +241,13 @@ module Anthropic
     def self.values
       @values ||= constants.map { |c| const_get(c) }
     end
+
+    # @private
+    #
+    # guard against thread safety issues by instantiating `@values`
+    #
+    # @return [void]
+    private_class_method def self.finalize! = values
   end
 
   # @private

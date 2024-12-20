@@ -26,6 +26,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           CANCELED = :canceled
+
+          finalize!
         end
       end
     end

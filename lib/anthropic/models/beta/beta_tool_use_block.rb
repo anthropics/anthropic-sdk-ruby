@@ -44,6 +44,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           TOOL_USE = :tool_use
+
+          finalize!
         end
       end
     end

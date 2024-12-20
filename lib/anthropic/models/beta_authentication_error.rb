@@ -31,6 +31,8 @@ module Anthropic
       # ```
       class Type < Anthropic::Enum
         AUTHENTICATION_ERROR = :authentication_error
+
+        finalize!
       end
     end
   end

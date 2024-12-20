@@ -38,6 +38,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           DOCUMENT = :document
+
+          finalize!
         end
       end
     end

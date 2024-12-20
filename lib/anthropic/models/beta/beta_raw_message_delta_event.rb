@@ -89,6 +89,8 @@ module Anthropic
             MAX_TOKENS = :max_tokens
             STOP_SEQUENCE = :stop_sequence
             TOOL_USE = :tool_use
+
+            finalize!
           end
         end
 
@@ -102,6 +104,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           MESSAGE_DELTA = :message_delta
+
+          finalize!
         end
       end
     end

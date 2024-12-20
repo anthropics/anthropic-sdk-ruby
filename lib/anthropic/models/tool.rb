@@ -89,6 +89,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           OBJECT = :object
+
+          finalize!
         end
       end
     end

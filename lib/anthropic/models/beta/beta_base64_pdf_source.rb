@@ -38,6 +38,8 @@ module Anthropic
         # ```
         class MediaType < Anthropic::Enum
           APPLICATION_PDF = :"application/pdf"
+
+          finalize!
         end
 
         # @example
@@ -50,6 +52,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           BASE64 = :base64
+
+          finalize!
         end
       end
     end

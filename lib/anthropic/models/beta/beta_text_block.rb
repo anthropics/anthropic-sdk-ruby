@@ -32,6 +32,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           TEXT = :text
+
+          finalize!
         end
       end
     end

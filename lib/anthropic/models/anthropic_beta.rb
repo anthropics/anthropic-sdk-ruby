@@ -39,6 +39,8 @@ module Anthropic
         COMPUTER_USE_2024_10_22 = :"computer-use-2024-10-22"
         PDFS_2024_09_25 = :"pdfs-2024-09-25"
         TOKEN_COUNTING_2024_11_01 = :"token-counting-2024-11-01"
+
+        finalize!
       end
     end
   end

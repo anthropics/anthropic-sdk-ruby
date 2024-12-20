@@ -6,8 +6,8 @@ gemspec
 
 group :development do
   gem "minitest"
+  gem "minitest-focus"
   gem "rake"
   gem "rubocop"
-  gem "webrick"
   gem "yard"
 end

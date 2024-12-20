@@ -25,6 +25,8 @@ module Anthropic
       # ```
       class Type < Anthropic::Enum
         MESSAGE_STOP = :message_stop
+
+        finalize!
       end
     end
   end

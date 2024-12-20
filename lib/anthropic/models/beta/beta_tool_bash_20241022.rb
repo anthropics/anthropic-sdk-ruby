@@ -49,6 +49,8 @@ module Anthropic
         # ```
         class Name < Anthropic::Enum
           BASH = :bash
+
+          finalize!
         end
 
         # @example
@@ -61,6 +63,8 @@ module Anthropic
         # ```
         class Type < Anthropic::Enum
           BASH_20241022 = :bash_20241022
+
+          finalize!
         end
       end
     end
