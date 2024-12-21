@@ -5,7 +5,7 @@ application.
 
 ## Documentation
 
-Documentation for the most recent version of this gem can be found [on RubyDoc](https://rubydoc.info/github/stainless-sdks/anthropic-ruby).
+Documentation for the most recent release of this gem can be found [on RubyDoc](https://gemdocs.org/gems/anthropic/latest).
 
 The underlying REST API documentation can be found on [docs.anthropic.com](https://docs.anthropic.com/claude/reference/).
 

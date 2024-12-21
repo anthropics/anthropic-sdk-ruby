@@ -103,9 +103,9 @@ module Anthropic
     #   attr_reader :status
 
     def initialize(url:, status:, body:, request:, response:, message: nil)
-      message ||= {url: url, status: status, body: body}
+      message ||= {url: url.to_s, status: status, body: body}
       super(
-        url: url.to_s,
+        url: url,
         status: status,
         body: body,
         request: request,
