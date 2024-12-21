@@ -11,11 +11,14 @@ require_relative "test_namespaces"
 
 require "minitest"
 require "minitest/focus"
+require "minitest/hooks/test"
 require "stringio"
 
 class Minitest::Test
   parallelize_me!
   make_my_diffs_pretty!
+
+  include Minitest::Hooks
 end
 
 class Time
