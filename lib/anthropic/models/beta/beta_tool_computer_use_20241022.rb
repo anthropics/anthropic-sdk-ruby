@@ -31,13 +31,13 @@ module Anthropic
 
         # @!attribute cache_control
         #
-        #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral]
+        #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
 
         # @!attribute display_number
         #   The X11 display number (e.g. 0, 1) for the display.
         #
-        #   @return [Integer]
+        #   @return [Integer, nil]
         optional :display_number, Integer
 
         # @!parse

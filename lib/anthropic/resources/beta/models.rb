@@ -35,13 +35,13 @@ module Anthropic
         #
         # @param params [Hash{Symbol => Object}, Anthropic::Models::Beta::ModelListParams] Attributes to send in this request.
         #
-        #   @option params [String, nil] :after_id ID of the object to use as a cursor for pagination. When provided, returns the
+        #   @option params [String] :after_id ID of the object to use as a cursor for pagination. When provided, returns the
         #     page of results immediately after this object.
         #
-        #   @option params [String, nil] :before_id ID of the object to use as a cursor for pagination. When provided, returns the
+        #   @option params [String] :before_id ID of the object to use as a cursor for pagination. When provided, returns the
         #     page of results immediately before this object.
         #
-        #   @option params [Integer, nil] :limit Number of items to return per page.
+        #   @option params [Integer] :limit Number of items to return per page.
         #
         #     Defaults to `20`. Ranges from `1` to `1000`.
         #

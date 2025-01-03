@@ -42,19 +42,19 @@ module Anthropic
       #     [prompt design](https://docs.anthropic.com/en/docs/intro-to-prompting) for more
       #     details.
       #
-      #   @option params [Anthropic::Models::Metadata, nil] :metadata An object describing metadata about the request.
+      #   @option params [Anthropic::Models::Metadata] :metadata An object describing metadata about the request.
       #
-      #   @option params [Array<String>, nil] :stop_sequences Sequences that will cause the model to stop generating.
+      #   @option params [Array<String>] :stop_sequences Sequences that will cause the model to stop generating.
       #
       #     Our models stop on `"\n\nHuman:"`, and may include additional built-in stop
       #     sequences in the future. By providing the stop_sequences parameter, you may
       #     include additional strings that will cause the model to stop generating.
       #
-      #   @option params [Boolean] :stream Whether to incrementally stream the response using server-sent events.
+      #   @option params [Boolean, Anthropic::Models::CompletionCreateParams::Stream] :stream Whether to incrementally stream the response using server-sent events.
       #
       #     See [streaming](https://docs.anthropic.com/en/api/streaming) for details.
       #
-      #   @option params [Float, nil] :temperature Amount of randomness injected into the response.
+      #   @option params [Float] :temperature Amount of randomness injected into the response.
       #
       #     Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
       #     for analytical / multiple choice, and closer to `1.0` for creative and
@@ -63,7 +63,7 @@ module Anthropic
       #     Note that even with `temperature` of `0.0`, the results will not be fully
       #     deterministic.
       #
-      #   @option params [Integer, nil] :top_k Only sample from the top K options for each subsequent token.
+      #   @option params [Integer] :top_k Only sample from the top K options for each subsequent token.
       #
       #     Used to remove "long tail" low probability responses.
       #     [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
@@ -71,7 +71,7 @@ module Anthropic
       #     Recommended for advanced use cases only. You usually only need to use
       #     `temperature`.
       #
-      #   @option params [Float, nil] :top_p Use nucleus sampling.
+      #   @option params [Float] :top_p Use nucleus sampling.
       #
       #     In nucleus sampling, we compute the cumulative distribution over all the options
       #     for each subsequent token in decreasing probability order and cut it off once it

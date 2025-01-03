@@ -21,7 +21,7 @@ module Anthropic
           #   @option params [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>] :requests Body param: List of requests for prompt completion. Each is an individual
           #     request to create a Message.
           #
-          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>, nil] :betas Header param: Optional header to specify the beta version(s) you want to use.
+          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
           #
@@ -45,7 +45,7 @@ module Anthropic
           #
           # @param params [Hash{Symbol => Object}, Anthropic::Models::Beta::Messages::BatchRetrieveParams] Attributes to send in this request.
           #
-          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>, nil] :betas Optional header to specify the beta version(s) you want to use.
+          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Optional header to specify the beta version(s) you want to use.
           #
           # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
           #
@@ -65,17 +65,17 @@ module Anthropic
           #
           # @param params [Hash{Symbol => Object}, Anthropic::Models::Beta::Messages::BatchListParams] Attributes to send in this request.
           #
-          #   @option params [String, nil] :after_id Query param: ID of the object to use as a cursor for pagination. When provided,
+          #   @option params [String] :after_id Query param: ID of the object to use as a cursor for pagination. When provided,
           #     returns the page of results immediately after this object.
           #
-          #   @option params [String, nil] :before_id Query param: ID of the object to use as a cursor for pagination. When provided,
+          #   @option params [String] :before_id Query param: ID of the object to use as a cursor for pagination. When provided,
           #     returns the page of results immediately before this object.
           #
-          #   @option params [Integer, nil] :limit Query param: Number of items to return per page.
+          #   @option params [Integer] :limit Query param: Number of items to return per page.
           #
           #     Defaults to `20`. Ranges from `1` to `1000`.
           #
-          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>, nil] :betas Header param: Optional header to specify the beta version(s) you want to use.
+          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
           #
@@ -100,7 +100,7 @@ module Anthropic
           #
           # @param params [Hash{Symbol => Object}, Anthropic::Models::Beta::Messages::BatchDeleteParams] Attributes to send in this request.
           #
-          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>, nil] :betas Optional header to specify the beta version(s) you want to use.
+          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Optional header to specify the beta version(s) you want to use.
           #
           # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
           #
@@ -129,7 +129,7 @@ module Anthropic
           #
           # @param params [Hash{Symbol => Object}, Anthropic::Models::Beta::Messages::BatchCancelParams] Attributes to send in this request.
           #
-          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>, nil] :betas Optional header to specify the beta version(s) you want to use.
+          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Optional header to specify the beta version(s) you want to use.
           #
           # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
           #
@@ -154,7 +154,7 @@ module Anthropic
           #
           # @param params [Hash{Symbol => Object}, Anthropic::Models::Beta::Messages::BatchResultsParams] Attributes to send in this request.
           #
-          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>, nil] :betas Optional header to specify the beta version(s) you want to use.
+          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Optional header to specify the beta version(s) you want to use.
           #
           # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
           #

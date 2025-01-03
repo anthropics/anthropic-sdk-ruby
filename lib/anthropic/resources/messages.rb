@@ -119,9 +119,9 @@ module Anthropic
       #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #     details and options.
       #
-      #   @option params [Anthropic::Models::Metadata, nil] :metadata An object describing metadata about the request.
+      #   @option params [Anthropic::Models::Metadata] :metadata An object describing metadata about the request.
       #
-      #   @option params [Array<String>, nil] :stop_sequences Custom text sequences that will cause the model to stop generating.
+      #   @option params [Array<String>] :stop_sequences Custom text sequences that will cause the model to stop generating.
       #
       #     Our models will normally stop when they have naturally completed their turn,
       #     which will result in a response `stop_reason` of `"end_turn"`.
@@ -131,18 +131,18 @@ module Anthropic
       #     the custom sequences, the response `stop_reason` value will be `"stop_sequence"`
       #     and the response `stop_sequence` value will contain the matched stop sequence.
       #
-      #   @option params [Boolean] :stream Whether to incrementally stream the response using server-sent events.
+      #   @option params [Boolean, Anthropic::Models::MessageCreateParams::Stream] :stream Whether to incrementally stream the response using server-sent events.
       #
       #     See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
       #     details.
       #
-      #   @option params [String, Array<Anthropic::Models::TextBlockParam>, nil] :system_ System prompt.
+      #   @option params [String, Array<Anthropic::Models::TextBlockParam>] :system_ System prompt.
       #
       #     A system prompt is a way of providing context and instructions to Claude, such
       #     as specifying a particular goal or role. See our
       #     [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
       #
-      #   @option params [Float, nil] :temperature Amount of randomness injected into the response.
+      #   @option params [Float] :temperature Amount of randomness injected into the response.
       #
       #     Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
       #     for analytical / multiple choice, and closer to `1.0` for creative and
@@ -151,10 +151,10 @@ module Anthropic
       #     Note that even with `temperature` of `0.0`, the results will not be fully
       #     deterministic.
       #
-      #   @option params [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, nil] :tool_choice How the model should use the provided tools. The model can use a specific tool,
+      #   @option params [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool] :tool_choice How the model should use the provided tools. The model can use a specific tool,
       #     any available tool, or decide by itself.
       #
-      #   @option params [Array<Anthropic::Models::Tool>, nil] :tools Definitions of tools that the model may use.
+      #   @option params [Array<Anthropic::Models::Tool>] :tools Definitions of tools that the model may use.
       #
       #     If you include `tools` in your API request, the model may return `tool_use`
       #     content blocks that represent the model's use of those tools. You can then run
@@ -223,7 +223,7 @@ module Anthropic
       #
       #     See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
       #
-      #   @option params [Integer, nil] :top_k Only sample from the top K options for each subsequent token.
+      #   @option params [Integer] :top_k Only sample from the top K options for each subsequent token.
       #
       #     Used to remove "long tail" low probability responses.
       #     [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
@@ -231,7 +231,7 @@ module Anthropic
       #     Recommended for advanced use cases only. You usually only need to use
       #     `temperature`.
       #
-      #   @option params [Float, nil] :top_p Use nucleus sampling.
+      #   @option params [Float] :top_p Use nucleus sampling.
       #
       #     In nucleus sampling, we compute the cumulative distribution over all the options
       #     for each subsequent token in decreasing probability order and cut it off once it
@@ -353,16 +353,16 @@ module Anthropic
       #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #     details and options.
       #
-      #   @option params [String, Array<Anthropic::Models::TextBlockParam>, nil] :system_ System prompt.
+      #   @option params [String, Array<Anthropic::Models::TextBlockParam>] :system_ System prompt.
       #
       #     A system prompt is a way of providing context and instructions to Claude, such
       #     as specifying a particular goal or role. See our
       #     [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
       #
-      #   @option params [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, nil] :tool_choice How the model should use the provided tools. The model can use a specific tool,
+      #   @option params [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool] :tool_choice How the model should use the provided tools. The model can use a specific tool,
       #     any available tool, or decide by itself.
       #
-      #   @option params [Array<Anthropic::Models::Tool>, nil] :tools Definitions of tools that the model may use.
+      #   @option params [Array<Anthropic::Models::Tool>] :tools Definitions of tools that the model may use.
       #
       #     If you include `tools` in your API request, the model may return `tool_use`
       #     content blocks that represent the model's use of those tools. You can then run

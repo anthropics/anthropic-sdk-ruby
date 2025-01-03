@@ -244,20 +244,20 @@ module Anthropic
       #   #   the top-level `system` parameter — there is no `"system"` role for input
       #   #   messages in the Messages API.
       #   #
-      #   # @param model [String, String] The model that will complete your prompt.\n\nSee
+      #   # @param model [String] The model that will complete your prompt.\n\nSee
       #   #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   #   details and options.
       #   #
-      #   # @param system_ [String, Array<Anthropic::Models::TextBlockParam>, nil] System prompt.
+      #   # @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt.
       #   #
       #   #   A system prompt is a way of providing context and instructions to Claude, such
       #   #   as specifying a particular goal or role. See our
       #   #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
       #   #
-      #   # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, nil] How the model should use the provided tools. The model can use a specific tool,
+      #   # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool] How the model should use the provided tools. The model can use a specific tool,
       #   #   any available tool, or decide by itself.
       #   #
-      #   # @param tools [Array<Anthropic::Models::Tool>, nil] Definitions of tools that the model may use.
+      #   # @param tools [Array<Anthropic::Models::Tool>] Definitions of tools that the model may use.
       #   #
       #   #   If you include `tools` in your API request, the model may return `tool_use`
       #   #   content blocks that represent the model's use of those tools. You can then run

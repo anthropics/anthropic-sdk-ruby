@@ -16,7 +16,7 @@ module Anthropic
 
         # @!attribute cache_control
         #
-        #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral]
+        #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
 
         # @!attribute content
@@ -33,8 +33,8 @@ module Anthropic
         #   # @param tool_use_id [String]
         #   # @param type [String]
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        #   # @param content [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>, nil]
-        #   # @param is_error [Boolean, nil]
+        #   # @param content [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>]
+        #   # @param is_error [Boolean]
         #   #
         #   def initialize(tool_use_id:, type:, cache_control: nil, content: nil, is_error: nil, **) = super
 
@@ -123,7 +123,7 @@ module Anthropic
 
           # @!attribute cache_control
           #
-          #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral]
+          #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
           optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
 
           # @!parse
@@ -163,7 +163,7 @@ module Anthropic
 
           # @!attribute cache_control
           #
-          #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral]
+          #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
           optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
 
           # @!parse

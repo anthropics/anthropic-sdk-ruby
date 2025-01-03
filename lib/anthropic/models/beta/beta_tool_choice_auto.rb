@@ -22,7 +22,7 @@ module Anthropic
         #   #
         #   # @param type [String]
         #   #
-        #   # @param disable_parallel_tool_use [Boolean, nil] Whether to disable parallel tool use.
+        #   # @param disable_parallel_tool_use [Boolean] Whether to disable parallel tool use.
         #   #
         #   #   Defaults to `false`. If set to `true`, the model will output at most one tool
         #   #   use.

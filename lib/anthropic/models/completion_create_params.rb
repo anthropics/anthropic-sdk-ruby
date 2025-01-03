@@ -50,7 +50,7 @@ module Anthropic
       #
       # See [streaming](https://docs.anthropic.com/en/api/streaming) for details.
       #
-      #   @return [Boolean]
+      #   @return [Boolean, Anthropic::Models::CompletionCreateParams::Stream]
       required :stream, enum: -> { Anthropic::Models::CompletionCreateParams::Stream }
 
       # @!attribute temperature
@@ -89,7 +89,7 @@ module Anthropic
       #   #   Note that our models may stop _before_ reaching this maximum. This parameter
       #   #   only specifies the absolute maximum number of tokens to generate.
       #   #
-      #   # @param model [String, String] The model that will complete your prompt.\n\nSee
+      #   # @param model [String] The model that will complete your prompt.\n\nSee
       #   #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   #   details and options.
       #   #
@@ -107,9 +107,9 @@ module Anthropic
       #   #   [prompt design](https://docs.anthropic.com/en/docs/intro-to-prompting) for more
       #   #   details.
       #   #
-      #   # @param metadata [Anthropic::Models::Metadata, nil] An object describing metadata about the request.
+      #   # @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
       #   #
-      #   # @param stop_sequences [Array<String>, nil] Sequences that will cause the model to stop generating.
+      #   # @param stop_sequences [Array<String>] Sequences that will cause the model to stop generating.
       #   #
       #   #   Our models stop on `"\n\nHuman:"`, and may include additional built-in stop
       #   #   sequences in the future. By providing the stop_sequences parameter, you may
@@ -119,7 +119,7 @@ module Anthropic
       #   #
       #   #   See [streaming](https://docs.anthropic.com/en/api/streaming) for details.
       #   #
-      #   # @param temperature [Float, nil] Amount of randomness injected into the response.
+      #   # @param temperature [Float] Amount of randomness injected into the response.
       #   #
       #   #   Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
       #   #   for analytical / multiple choice, and closer to `1.0` for creative and
@@ -128,7 +128,7 @@ module Anthropic
       #   #   Note that even with `temperature` of `0.0`, the results will not be fully
       #   #   deterministic.
       #   #
-      #   # @param top_k [Integer, nil] Only sample from the top K options for each subsequent token.
+      #   # @param top_k [Integer] Only sample from the top K options for each subsequent token.
       #   #
       #   #   Used to remove "long tail" low probability responses.
       #   #   [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
@@ -136,7 +136,7 @@ module Anthropic
       #   #   Recommended for advanced use cases only. You usually only need to use
       #   #   `temperature`.
       #   #
-      #   # @param top_p [Float, nil] Use nucleus sampling.
+      #   # @param top_p [Float] Use nucleus sampling.
       #   #
       #   #   In nucleus sampling, we compute the cumulative distribution over all the options
       #   #   for each subsequent token in decreasing probability order and cut it off once it

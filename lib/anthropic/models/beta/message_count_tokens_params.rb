@@ -258,20 +258,20 @@ module Anthropic
         #   #   the top-level `system` parameter — there is no `"system"` role for input
         #   #   messages in the Messages API.
         #   #
-        #   # @param model [String, String] The model that will complete your prompt.\n\nSee
+        #   # @param model [String] The model that will complete your prompt.\n\nSee
         #   #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #   #   details and options.
         #   #
-        #   # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>, nil] System prompt.
+        #   # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] System prompt.
         #   #
         #   #   A system prompt is a way of providing context and instructions to Claude, such
         #   #   as specifying a particular goal or role. See our
         #   #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
         #   #
-        #   # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, nil] How the model should use the provided tools. The model can use a specific tool,
+        #   # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool] How the model should use the provided tools. The model can use a specific tool,
         #   #   any available tool, or decide by itself.
         #   #
-        #   # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>, nil] Definitions of tools that the model may use.
+        #   # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>] Definitions of tools that the model may use.
         #   #
         #   #   If you include `tools` in your API request, the model may return `tool_use`
         #   #   content blocks that represent the model's use of those tools. You can then run
@@ -340,7 +340,7 @@ module Anthropic
         #   #
         #   #   See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
         #   #
-        #   # @param betas [Array<String, String>, nil] Optional header to specify the beta version(s) you want to use.
+        #   # @param betas [Array<String>] Optional header to specify the beta version(s) you want to use.
         #   #
         #   def initialize(messages:, model:, system_: nil, tool_choice: nil, tools: nil, betas: nil, **) = super
 
@@ -411,7 +411,7 @@ module Anthropic
 
           # @!attribute cache_control
           #
-          #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral]
+          #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
           optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
 
           # @!attribute description
@@ -424,7 +424,7 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::BetaTool::Type]
+          #   @return [Symbol, Anthropic::Models::Beta::BetaTool::Type, nil]
           optional :type, enum: -> { Anthropic::Models::Beta::BetaTool::Type }
 
           # @!parse
@@ -439,7 +439,7 @@ module Anthropic
           #   #
           #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
           #   #
-          #   # @param description [String, nil] Description of what this tool does.
+          #   # @param description [String] Description of what this tool does.
           #   #
           #   #   Tool descriptions should be as detailed as possible. The more information that
           #   #   the model has about what the tool is and how to use it, the better it will
@@ -460,7 +460,7 @@ module Anthropic
 
             # @!attribute properties
             #
-            #   @return [Object]
+            #   @return [Object, nil]
             optional :properties, Anthropic::Unknown
 
             # @!parse
@@ -534,13 +534,13 @@ module Anthropic
 
           # @!attribute cache_control
           #
-          #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral]
+          #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
           optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
 
           # @!attribute display_number
           #   The X11 display number (e.g. 0, 1) for the display.
           #
-          #   @return [Integer]
+          #   @return [Integer, nil]
           optional :display_number, Integer
 
           # @!parse
@@ -611,7 +611,7 @@ module Anthropic
 
           # @!attribute cache_control
           #
-          #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral]
+          #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
           optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
 
           # @!parse
@@ -676,7 +676,7 @@ module Anthropic
 
           # @!attribute cache_control
           #
-          #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral]
+          #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
           optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
 
           # @!parse
