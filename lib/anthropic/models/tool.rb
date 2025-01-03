@@ -21,7 +21,7 @@ module Anthropic
 
       # @!attribute cache_control
       #
-      #   @return [Anthropic::Models::CacheControlEphemeral]
+      #   @return [Anthropic::Models::CacheControlEphemeral, nil]
       optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }
 
       # @!attribute description
@@ -44,7 +44,7 @@ module Anthropic
       #   #
       #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
       #   #
-      #   # @param description [String, nil] Description of what this tool does.
+      #   # @param description [String] Description of what this tool does.
       #   #
       #   #   Tool descriptions should be as detailed as possible. The more information that
       #   #   the model has about what the tool is and how to use it, the better it will
@@ -63,7 +63,7 @@ module Anthropic
 
         # @!attribute properties
         #
-        #   @return [Object]
+        #   @return [Object, nil]
         optional :properties, Anthropic::Unknown
 
         # @!parse

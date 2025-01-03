@@ -7,13 +7,13 @@ module Anthropic
         # @!attribute cache_creation_input_tokens
         #   The number of input tokens used to create the cache entry.
         #
-        #   @return [Integer]
+        #   @return [Integer, nil]
         required :cache_creation_input_tokens, Integer
 
         # @!attribute cache_read_input_tokens
         #   The number of input tokens read from the cache.
         #
-        #   @return [Integer]
+        #   @return [Integer, nil]
         required :cache_read_input_tokens, Integer
 
         # @!attribute input_tokens

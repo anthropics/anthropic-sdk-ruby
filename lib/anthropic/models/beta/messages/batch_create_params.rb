@@ -24,7 +24,7 @@ module Anthropic
           #   # @param requests [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>] List of requests for prompt completion. Each is an individual request to create
           #   #   a Message.
           #   #
-          #   # @param betas [Array<String, String>, nil] Optional header to specify the beta version(s) you want to use.
+          #   # @param betas [Array<String>] Optional header to specify the beta version(s) you want to use.
           #   #
           #   def initialize(requests:, betas: nil, **) = super
 
@@ -385,13 +385,13 @@ module Anthropic
               #   #   the top-level `system` parameter — there is no `"system"` role for input
               #   #   messages in the Messages API.
               #   #
-              #   # @param model [String, String] The model that will complete your prompt.\n\nSee
+              #   # @param model [String] The model that will complete your prompt.\n\nSee
               #   #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
               #   #   details and options.
               #   #
-              #   # @param metadata [Anthropic::Models::Beta::BetaMetadata, nil] An object describing metadata about the request.
+              #   # @param metadata [Anthropic::Models::Beta::BetaMetadata] An object describing metadata about the request.
               #   #
-              #   # @param stop_sequences [Array<String>, nil] Custom text sequences that will cause the model to stop generating.
+              #   # @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
               #   #
               #   #   Our models will normally stop when they have naturally completed their turn,
               #   #   which will result in a response `stop_reason` of `"end_turn"`.
@@ -401,18 +401,18 @@ module Anthropic
               #   #   the custom sequences, the response `stop_reason` value will be `"stop_sequence"`
               #   #   and the response `stop_sequence` value will contain the matched stop sequence.
               #   #
-              #   # @param stream [Boolean, nil] Whether to incrementally stream the response using server-sent events.
+              #   # @param stream [Boolean] Whether to incrementally stream the response using server-sent events.
               #   #
               #   #   See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
               #   #   details.
               #   #
-              #   # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>, nil] System prompt.
+              #   # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] System prompt.
               #   #
               #   #   A system prompt is a way of providing context and instructions to Claude, such
               #   #   as specifying a particular goal or role. See our
               #   #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
               #   #
-              #   # @param temperature [Float, nil] Amount of randomness injected into the response.
+              #   # @param temperature [Float] Amount of randomness injected into the response.
               #   #
               #   #   Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
               #   #   for analytical / multiple choice, and closer to `1.0` for creative and
@@ -421,10 +421,10 @@ module Anthropic
               #   #   Note that even with `temperature` of `0.0`, the results will not be fully
               #   #   deterministic.
               #   #
-              #   # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, nil] How the model should use the provided tools. The model can use a specific tool,
+              #   # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool] How the model should use the provided tools. The model can use a specific tool,
               #   #   any available tool, or decide by itself.
               #   #
-              #   # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>, nil] Definitions of tools that the model may use.
+              #   # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>] Definitions of tools that the model may use.
               #   #
               #   #   If you include `tools` in your API request, the model may return `tool_use`
               #   #   content blocks that represent the model's use of those tools. You can then run
@@ -493,7 +493,7 @@ module Anthropic
               #   #
               #   #   See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
               #   #
-              #   # @param top_k [Integer, nil] Only sample from the top K options for each subsequent token.
+              #   # @param top_k [Integer] Only sample from the top K options for each subsequent token.
               #   #
               #   #   Used to remove "long tail" low probability responses.
               #   #   [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
@@ -501,7 +501,7 @@ module Anthropic
               #   #   Recommended for advanced use cases only. You usually only need to use
               #   #   `temperature`.
               #   #
-              #   # @param top_p [Float, nil] Use nucleus sampling.
+              #   # @param top_p [Float] Use nucleus sampling.
               #   #
               #   #   In nucleus sampling, we compute the cumulative distribution over all the options
               #   #   for each subsequent token in decreasing probability order and cut it off once it

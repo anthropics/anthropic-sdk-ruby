@@ -15,7 +15,7 @@ module Anthropic
 
       # @!attribute cache_control
       #
-      #   @return [Anthropic::Models::CacheControlEphemeral]
+      #   @return [Anthropic::Models::CacheControlEphemeral, nil]
       optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }
 
       # @!attribute content
@@ -32,8 +32,8 @@ module Anthropic
       #   # @param tool_use_id [String]
       #   # @param type [String]
       #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   # @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>, nil]
-      #   # @param is_error [Boolean, nil]
+      #   # @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>]
+      #   # @param is_error [Boolean]
       #   #
       #   def initialize(tool_use_id:, type:, cache_control: nil, content: nil, is_error: nil, **) = super
 
@@ -122,7 +122,7 @@ module Anthropic
 
         # @!attribute cache_control
         #
-        #   @return [Anthropic::Models::CacheControlEphemeral]
+        #   @return [Anthropic::Models::CacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }
 
         # @!parse
@@ -162,7 +162,7 @@ module Anthropic
 
         # @!attribute cache_control
         #
-        #   @return [Anthropic::Models::CacheControlEphemeral]
+        #   @return [Anthropic::Models::CacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }
 
         # @!parse

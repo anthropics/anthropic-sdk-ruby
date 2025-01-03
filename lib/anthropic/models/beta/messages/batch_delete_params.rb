@@ -14,7 +14,7 @@ module Anthropic
                    api_name: :"anthropic-beta"
 
           # @!parse
-          #   # @param betas [Array<String, String>, nil] Optional header to specify the beta version(s) you want to use.
+          #   # @param betas [Array<String>] Optional header to specify the beta version(s) you want to use.
           #   #
           #   def initialize(betas: nil, **) = super
 

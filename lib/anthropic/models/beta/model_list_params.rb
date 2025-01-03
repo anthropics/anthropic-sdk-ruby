@@ -25,13 +25,13 @@ module Anthropic
         optional :limit, Integer
 
         # @!parse
-        #   # @param after_id [String, nil] ID of the object to use as a cursor for pagination. When provided, returns the
+        #   # @param after_id [String] ID of the object to use as a cursor for pagination. When provided, returns the
         #   #   page of results immediately after this object.
         #   #
-        #   # @param before_id [String, nil] ID of the object to use as a cursor for pagination. When provided, returns the
+        #   # @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the
         #   #   page of results immediately before this object.
         #   #
-        #   # @param limit [Integer, nil] Number of items to return per page.
+        #   # @param limit [Integer] Number of items to return per page.
         #   #
         #   #   Defaults to `20`. Ranges from `1` to `1000`.
         #   #

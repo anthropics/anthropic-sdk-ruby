@@ -8,10 +8,10 @@ module Anthropic
     # @return [Boolean]
     attr_accessor :has_more
 
-    # @return [String]
+    # @return [String, nil]
     attr_accessor :first_id
 
-    # @return [String]
+    # @return [String, nil]
     attr_accessor :last_id
 
     # @private

@@ -22,7 +22,7 @@ module Anthropic
 
         # @!attribute cache_control
         #
-        #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral]
+        #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
 
         # @!attribute description
@@ -35,7 +35,7 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaTool::Type]
+        #   @return [Symbol, Anthropic::Models::Beta::BetaTool::Type, nil]
         optional :type, enum: -> { Anthropic::Models::Beta::BetaTool::Type }
 
         # @!parse
@@ -50,7 +50,7 @@ module Anthropic
         #   #
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   #
-        #   # @param description [String, nil] Description of what this tool does.
+        #   # @param description [String] Description of what this tool does.
         #   #
         #   #   Tool descriptions should be as detailed as possible. The more information that
         #   #   the model has about what the tool is and how to use it, the better it will
@@ -71,7 +71,7 @@ module Anthropic
 
           # @!attribute properties
           #
-          #   @return [Object]
+          #   @return [Object, nil]
           optional :properties, Anthropic::Unknown
 
           # @!parse

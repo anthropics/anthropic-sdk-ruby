@@ -30,7 +30,7 @@ module Anthropic
       # * `"stop_sequence"`: we reached a stop sequence — either provided by you via the `stop_sequences` parameter, or a stop sequence built into the model
       # * `"max_tokens"`: we exceeded `max_tokens_to_sample` or the model's maximum
       #
-      #   @return [String]
+      #   @return [String, nil]
       required :stop_reason, String
 
       # @!attribute type
@@ -48,7 +48,7 @@ module Anthropic
       #   #
       #   # @param completion [String] The resulting completion up to and excluding the stop sequences.
       #   #
-      #   # @param model [String, String] The model that will complete your prompt.\n\nSee
+      #   # @param model [String] The model that will complete your prompt.\n\nSee
       #   #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   #   details and options.
       #   #

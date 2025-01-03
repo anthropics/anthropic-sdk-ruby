@@ -8,7 +8,7 @@ module Anthropic
       #
       # This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
       #
-      #   @return [String]
+      #   @return [String, nil]
       optional :user_id, String
 
       # @!parse
