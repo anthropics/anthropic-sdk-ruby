@@ -85,6 +85,10 @@ Style/CaseEquality:
 Style/RaiseArgs:
   Enabled: false
 
+# Literally nothing wrong with `symbol_1`
+Naming/VariableNumber:
+  Enabled: false
+
 # Set a reasonable line length; rely on other cops to correct long lines.
 Layout/LineLength:
   Max: 110
