@@ -12,6 +12,7 @@ module Anthropic
     # when using `Anthropic::Util.deep_merge`.
     # E.g. merging `{a: 1}` and `{a: OMIT}` should produce `{}`, where merging `{a: 1}` and
     # `{}` would produce `{a: 1}`.
+    #
     OMIT = Object.new.freeze
 
     # @private
@@ -24,6 +25,7 @@ module Anthropic
     # @param concat [true, false] whether to merge sequences by concatenation
     #
     # @return [Object]
+    #
     def self.deep_merge(*values, sentinel: nil, concat: false)
       case values
       in [value, *values]
@@ -42,6 +44,7 @@ module Anthropic
     # @param concat [true, false]
     #
     # @return [Object]
+    #
     private_class_method def self._deep_merge(lhs, rhs, concat: false)
       rhs_cleaned =
         case rhs
@@ -72,6 +75,7 @@ module Anthropic
     # @param blk [Proc]
     #
     # @return [Object, nil]
+    #
     def self.suppress(*exceptions, sentinel: nil, &blk)
       blk.call
     rescue *exceptions
@@ -86,6 +90,7 @@ module Anthropic
     # @param blk [Proc, nil]
     #
     # @return [Object, nil]
+    #
     def self.dig(data, pick, default = nil, &blk)
       case [data, pick, blk]
       in [_, nil, nil]
@@ -113,6 +118,7 @@ module Anthropic
     # @param input [String, Numeric, Boolean, nil]
     #
     # @return [Integer, String, nil]
+    #
     def self.coerce_integer(input)
       case input
       in true
@@ -129,6 +135,7 @@ module Anthropic
     # @param input [String, Numeric, Boolean, nil]
     #
     # @return [Float, String, nil]
+    #
     def self.coerce_float(input)
       case input
       in true
@@ -145,6 +152,7 @@ module Anthropic
     # @param input [String, Numeric, Boolean, nil]
     #
     # @return [Boolean, String, Numeric, nil]
+    #
     def self.coerce_boolean(input)
       case input.is_a?(String) ? input.downcase : input
       in Numeric
@@ -164,6 +172,7 @@ module Anthropic
     #
     # @raise [ArgumentError]
     # @return [Boolean, nil]
+    #
     def self.coerce_boolean!(input)
       case (coerced = coerce_boolean(input))
       in true | false | nil
@@ -178,6 +187,7 @@ module Anthropic
     # @param query [Hash{String => String | Array<String>}]
     #
     # @return [String, nil]
+    #
     def self.encode_query(query)
       query.empty? ? nil : URI.encode_www_form(query)
     end
@@ -187,6 +197,7 @@ module Anthropic
     # @param query [String, nil]
     #
     # @return [Hash{String => Array<String>}]
+    #
     def self.decode_query(query)
       CGI.parse(query.to_s)
     end
@@ -196,6 +207,7 @@ module Anthropic
     # @param input [Hash, Object]
     #
     # @return [Hash, Object]
+    #
     def self.coerce_hash(input)
       case input
       in NilClass | Array | Set | Enumerator
@@ -210,6 +222,7 @@ module Anthropic
     # @param url [URI::Generic, String]
     #
     # @return [Hash{Symbol => Object}]
+    #
     def self.parse_uri(url)
       parsed = URI::Generic.component.zip(URI.split(url)).to_h
       {**parsed, query: decode_query(parsed.fetch(:query))}
@@ -223,6 +236,7 @@ module Anthropic
     #   @option parsed [Hash{String => Array<String>}] :query
     #
     # @return [URI::Generic]
+    #
     def self.unparse_uri(parsed)
       URI::Generic.build(**parsed, query: encode_query(parsed.fetch(:query)))
     end
@@ -234,6 +248,7 @@ module Anthropic
     #   @option rhs [Hash{String => Array<String>}] :extra_query
     #
     # @return [URI::Generic]
+    #
     def self.join_parsed_uri(lhs, rhs)
       base_path, base_query = lhs.fetch_values(:path, :query)
       slashed = base_path.end_with?("/") ? base_path : "#{base_path}/"
@@ -258,6 +273,7 @@ module Anthropic
     # @param path [String, Array<String>]
     #
     # @return [String]
+    #
     def self.interpolate_path(path)
       case path
       in String
@@ -277,6 +293,7 @@ module Anthropic
     # @param uri [URI::Generic]
     #
     # @return [String]
+    #
     def self.uri_origin(uri)
       "#{uri.scheme}://#{uri.host}#{uri.port == uri.default_port ? '' : ":#{uri.port}"}"
     end
@@ -286,6 +303,7 @@ module Anthropic
     # @param headers [Array<Hash{String => String, Integer, nil}>]
     #
     # @return [Hash{String => String, nil}]
+    #
     def self.normalized_headers(*headers)
       {}.merge(*headers.compact).to_h do |key, val|
         [key.downcase, val&.to_s&.strip]

@@ -22,6 +22,7 @@ module Anthropic
     # @param max_retry_delay [Float]
     # @param headers [Hash{String => String}]
     # @param idempotency_header [String, nil]
+    #
     def initialize(
       base_url:,
       timeout: 0.0,
@@ -54,11 +55,13 @@ module Anthropic
     # @private
     #
     # @return [Hash{String => String}]
+    #
     private def auth_headers = {}
 
     # @private
     #
     # @return [String]
+    #
     private def generate_idempotency_key = "stainless-ruby-retry-#{SecureRandom.uuid}"
 
     # @private
@@ -67,6 +70,7 @@ module Anthropic
     # @param opts [Anthropic::RequestOptions, Hash{Symbol => Object}]
     #
     # @return [Hash{Symbol => Object}]
+    #
     private def build_request(req, opts)
       options = Anthropic::Util.deep_merge(req, opts)
       method, uninterpolated_path = options.fetch_values(:method, :path)
@@ -119,6 +123,7 @@ module Anthropic
     #
     # @raise [JSON::ParserError]
     # @return [Object]
+    #
     private def parse_body(response, suppress_error: false)
       case response.content_type
       in "application/json"
@@ -140,6 +145,7 @@ module Anthropic
     # @param headers [Hash{String => String}]
     #
     # @return [Boolean]
+    #
     private def should_retry?(status, headers:)
       coerced = Anthropic::Util.coerce_boolean(headers["x-should-retry"])
       case [coerced, status]
@@ -163,6 +169,7 @@ module Anthropic
     # @param retry_count [Integer]
     #
     # @return [Float]
+    #
     private def retry_delay(headers, retry_count:)
       # Note the `retry-after-ms` header may not be standard, but is a good idea and we'd like proactive support for it.
       span = Float(headers["retry-after-ms"], exception: false)&.then { _1 / 1000 }
@@ -194,6 +201,7 @@ module Anthropic
     #
     # @raise [Anthropic::APIError]
     # @return [Hash{Symbol => Object}]
+    #
     private def follow_redirect(request, url:, status:, location_header:)
       method, headers = request.fetch_values(:method, :headers)
       location =
@@ -254,6 +262,7 @@ module Anthropic
     #
     # @raise [Anthropic::APIError]
     # @return [Net::HTTPResponse]
+    #
     private def send_request(
       request,
       max_retries:,
@@ -322,6 +331,7 @@ module Anthropic
     #
     # @raise [Anthropic::APIError]
     # @return [Object]
+    #
     private def parse_response(req, opts, response)
       parsed = parse_body(response)
       unwrapped = Anthropic::Util.dig(parsed, req[:unwrap])
@@ -345,6 +355,7 @@ module Anthropic
     #
     # @raise [Anthropic::APIError]
     # @return [Object]
+    #
     def request(req, opts)
       Anthropic::RequestOptions.validate!(opts)
       request = build_request(req, opts)

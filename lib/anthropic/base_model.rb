@@ -18,6 +18,7 @@ module Anthropic
     # @param value [Object]
     #
     # @return [Object]
+    #
     def self.coerce(target, value)
       case target
       in Anthropic::Converter
@@ -48,6 +49,7 @@ module Anthropic
     # @param value [Object]
     #
     # @return [Object]
+    #
     def self.dump(target, value)
       case target
       in Anthropic::Converter | -> { _1.is_a?(Class) && _1.include?(Anthropic::Converter) }
@@ -70,6 +72,7 @@ module Anthropic
     # @param value [Object]
     #
     # @return [Array(true, Object, nil), Array(false, bool, Integer)]
+    #
     def self.try_strict_coerce(target, value)
       case target
       in Converter
@@ -103,6 +106,7 @@ module Anthropic
   # @private
   #
   # When we don't know what to expect for the value.
+  #
   class Unknown
     include Anthropic::Converter
     # rubocop:disable Lint/UnusedMethodArgument
@@ -141,6 +145,7 @@ module Anthropic
   # @private
   #
   # Ruby has no Boolean class; this is something for models to refer to.
+  #
   class BooleanModel
     include Anthropic::Converter
 
@@ -149,6 +154,7 @@ module Anthropic
     # @param other [Object]
     #
     # @return [Boolean]
+    #
     def self.===(other) = other == true || other == false
 
     # @private
@@ -156,6 +162,7 @@ module Anthropic
     # @param value [Boolean, Object]
     #
     # @return [Boolean, Object]
+    #
     def self.coerce(value) = value
 
     class << self
@@ -167,6 +174,7 @@ module Anthropic
     # @param value [Object]
     #
     # @return [Array(true, Object, nil), Array(false, bool, Integer)]
+    #
     def self.try_strict_coerce(value)
       case value
       in true | false
@@ -187,6 +195,7 @@ module Anthropic
   # string => Symbol
   # We can therefore convert string values to Symbols, but can't convert other
   # values safely.
+  #
   class Enum
     include Anthropic::Converter
 
@@ -195,6 +204,7 @@ module Anthropic
     # @param other [Object]
     #
     # @return [Boolean]
+    #
     def self.===(other) = values.include?(other)
 
     # @private
@@ -202,6 +212,7 @@ module Anthropic
     # @param value [Symbol, String, Object]
     #
     # @return [Symbol, Object]
+    #
     def self.coerce(value)
       case value
       in String
@@ -221,6 +232,7 @@ module Anthropic
     # @param value [Object]
     #
     # @return [Array(true, Object, nil), Array(false, bool, Integer)]
+    #
     def self.try_strict_coerce(value)
       return [true, value, 1] if values.include?(value)
 
@@ -247,6 +259,7 @@ module Anthropic
     # guard against thread safety issues by instantiating `@values`
     #
     # @return [void]
+    #
     private_class_method def self.finalize! = values
   end
 
@@ -260,8 +273,9 @@ module Anthropic
     # @param other [Object]
     #
     # @return [Boolean]
+    #
     def self.===(other)
-      variants.any? do |_, variant_fn|
+      known_variants.any? do |_, variant_fn|
         variant_fn.call === other
       end
     end
@@ -271,6 +285,7 @@ module Anthropic
     # @param value [Object]
     #
     # @return [Class, RubyModuleName::Converter, nil]
+    #
     private_class_method def self.resolve_variant(value)
       case [@discriminator, value]
       in [_, Anthropic::BaseModel]
@@ -284,7 +299,7 @@ module Anthropic
           end
 
         key = key.to_sym if key.is_a?(String)
-        _, resolved = variants.find { |k,| k == key }
+        _, resolved = known_variants.find { |k,| k == key }
         resolved.nil? ? Anthropic::Unknown : resolved.call
       else
         nil
@@ -296,6 +311,7 @@ module Anthropic
     # @param value [Object]
     #
     # @return [Object]
+    #
     def self.coerce(value)
       if (variant = resolve_variant(value))
         return Converter.coerce(variant, value)
@@ -303,7 +319,7 @@ module Anthropic
 
       matches = []
 
-      variants.each do |_, variant_fn|
+      known_variants.each do |_, variant_fn|
         variant = variant_fn.call
 
         case Converter.try_strict_coerce(variant, value)
@@ -325,12 +341,13 @@ module Anthropic
     # @param value [Object]
     #
     # @return [Object]
+    #
     def self.dump(value)
       if (variant = resolve_variant(value))
         return Converter.dump(variant, value)
       end
 
-      variants.each do |_, variant_fn|
+      known_variants.each do |_, variant_fn|
         variant = variant_fn.call
         if variant === value
           return Converter.dump(variant, value)
@@ -345,6 +362,7 @@ module Anthropic
     # @param value [Object]
     #
     # @return [Array(true, Object, nil), Array(false, bool, Integer)]
+    #
     def self.try_strict_coerce(value)
       # TODO(ruby) this will result in super linear decoding behaviour for nested unions
       # follow up with a decoding context that captures current strictness levels
@@ -355,7 +373,7 @@ module Anthropic
       coercible = false
       max_score = 0
 
-      variants.each do |_, variant_fn|
+      known_variants.each do |_, variant_fn|
         variant = variant_fn.call
 
         case Converter.try_strict_coerce(variant, value)
@@ -374,9 +392,18 @@ module Anthropic
 
     # @private
     #
-    # @return [Array<Array(Symbol, Object)>] All of the specified variants for this union.
+    # @return [Array<Array(Symbol, Proc)>] All of the specified known variants info for this union.
+    #
+    private_class_method def self.known_variants
+      @known_variants ||= []
+    end
+
+    # @private
+    #
+    # @return [Array<Object>] All of the specified known variants for this union.
+    #
     private_class_method def self.variants
-      @variants ||= []
+      @known_variants.map { |_, variant_fn| variant_fn.call }
     end
 
     # @private
@@ -385,6 +412,7 @@ module Anthropic
     # @param key [Symbol, nil]
     #
     # @return [void]
+    #
     private_class_method def self.discriminator(property)
       case property
       in Symbol
@@ -399,6 +427,7 @@ module Anthropic
     # @param key [Symbol, nil]
     #
     # @return [void]
+    #
     private_class_method def self.variant(key = nil, type_info = nil, enum: nil, union: nil)
       variant_info =
         case [key, type_info, enum, union]
@@ -416,7 +445,7 @@ module Anthropic
           [key, union]
         end
 
-      variants << variant_info
+      known_variants << variant_info
     end
 
     # rubocop:enable Style/HashEachMethods
@@ -426,6 +455,7 @@ module Anthropic
   # @private
   #
   # Array of items of a given type.
+  #
   class ArrayOf
     include Anthropic::Converter
 
@@ -438,6 +468,7 @@ module Anthropic
     # @param other [Object]
     #
     # @return [Boolean]
+    #
     def ===(other)
       items_type = @items_type_fn.call
       case other
@@ -453,6 +484,7 @@ module Anthropic
     # @param value [Enumerable, Object]
     #
     # @return [Array<Object>]
+    #
     def coerce(value)
       items_type = @items_type_fn.call
       case value
@@ -468,6 +500,7 @@ module Anthropic
     # @param value [Enumerable, Object]
     #
     # @return [Array<Object>]
+    #
     def dump(value)
       items_type = @items_type_fn.call
       case value
@@ -483,6 +516,7 @@ module Anthropic
     # @param value [Object]
     #
     # @return [Array(true, Object, nil), Array(false, bool, Integer)]
+    #
     def try_strict_coerce(value)
       case value
       in Array
@@ -519,6 +553,7 @@ module Anthropic
     # @param item_type [Proc, Object, nil]
     # @param enum [Proc, nil]
     # @param union [Proc, nil]
+    #
     def initialize(item_type = nil, enum: nil, union: nil)
       @items_type_fn =
         case [enum, union, item_type]
@@ -537,6 +572,7 @@ module Anthropic
   # @private
   #
   # Hash of items of a given type.
+  #
   class HashOf
     include Anthropic::Converter
 
@@ -549,6 +585,7 @@ module Anthropic
     # @param other [Object]
     #
     # @return [Boolean]
+    #
     def ===(other)
       items_type = @items_type_fn.call
       case other
@@ -571,6 +608,7 @@ module Anthropic
     # @param value [Enumerable, Object]
     #
     # @return [Array<Object>]
+    #
     def coerce(value)
       items_type = @items_type_fn.call
       case value
@@ -589,6 +627,7 @@ module Anthropic
     # @param value [Enumerable, Object]
     #
     # @return [Array<Object>]
+    #
     def dump(value)
       items_type = @items_type_fn.call
       case value
@@ -606,6 +645,7 @@ module Anthropic
     # @param value [Object]
     #
     # @return [Array(true, Object, nil), Array(false, bool, Integer)]
+    #
     def try_strict_coerce(value)
       case value
       in Hash
@@ -642,6 +682,7 @@ module Anthropic
     # @param item_type [Proc, Object, nil]
     # @param enum [Proc, nil]
     # @param union [Proc, nil]
+    #
     def initialize(item_type = nil, enum: nil, union: nil)
       @items_type_fn =
         case [enum, union, item_type]
@@ -667,6 +708,7 @@ module Anthropic
     # @param data [Anthropic::BaseModel, Hash{Symbol => Object}]
     #
     # @return [Hash{Symbol => Object}]
+    #
     def self.coerce(value)
       case (coerced = Anthropic::Util.coerce_hash(value))
       in Hash
@@ -681,6 +723,7 @@ module Anthropic
     # @param data [Anthropic::BaseModel, Hash{Symbol => Object}]
     #
     # @return [Hash{Symbol => Object}]
+    #
     def self.dump(value)
       unless (coerced = Anthropic::Util.coerce_hash(value)).is_a?(Hash)
         return value
@@ -709,6 +752,7 @@ module Anthropic
     # @param value [Object]
     #
     # @return [Array(true, Object, nil), Array(false, bool, Integer)]
+    #
     def self.try_strict_coerce(value)
       case value
       in Hash | Anthropic::BaseModel
@@ -760,6 +804,7 @@ module Anthropic
     # Assumes superclass fields are totally defined before fields are accessed / defined on subclasses.
     #
     # @return [Hash{Symbol => Hash{Symbol => Object}}]
+    #
     def self.fields
       @fields ||= (superclass == Anthropic::BaseModel ? {} : superclass.fields.dup)
     end
@@ -772,6 +817,7 @@ module Anthropic
     # @param type_info [Proc, Object]
     #
     # @return [void]
+    #
     private_class_method def self.add_field(name_sym, required:, api_name:, type_info:)
       type_fn = type_info.is_a?(Proc) ? type_info : -> { type_info }
       key = api_name || name_sym
@@ -812,6 +858,7 @@ module Anthropic
     #
     # `request_only` attributes not excluded from `.#coerce` when receiving responses
     # even if well behaved servers should not send them
+    #
     def self.request_only(&blk)
       @mode = :dump
       blk.call
@@ -822,6 +869,7 @@ module Anthropic
     # @private
     #
     # `response_only` attributes are omitted from `.#dump` when making requests
+    #
     def self.response_only(&blk)
       @mode = :coerce
       blk.call
@@ -831,6 +879,7 @@ module Anthropic
 
     # Create a new instance of a model.
     # @param data [Hash{Symbol => Object}, Anthropic::BaseModel] Raw data to initialize the model with.
+    #
     def initialize(data = {})
       case (coerced = Anthropic::Util.coerce_hash(data))
       in Hash
@@ -843,6 +892,7 @@ module Anthropic
     # @param other [Object]
     #
     # @return [Boolean]
+    #
     def ==(other)
       case other
       in Anthropic::BaseModel
@@ -861,6 +911,7 @@ module Anthropic
     # The returned value is shared by the object, so it should not be mutated.
     #
     # @return [Hash{Symbol => Object}] Data for this object.
+    #
     def to_h = @data
 
     alias_method :to_hash, :to_h
@@ -874,6 +925,7 @@ module Anthropic
     # @param key [Symbol] Key to look up by.
     #
     # @return [Object, nil] The raw value at the given key.
+    #
     def [](key)
       unless key.instance_of?(Symbol)
         raise ArgumentError.new("Expected symbol key for lookup, got #{key.inspect}")
@@ -885,6 +937,7 @@ module Anthropic
     # @param keys [Array<Symbol>, nil]
     #
     # @return [Hash{Symbol => Object}]
+    #
     def deconstruct_keys(keys)
       (keys || self.class.fields.keys).filter_map do |k|
         unless self.class.fields.key?(k)
@@ -897,6 +950,7 @@ module Anthropic
     end
 
     # @return [String]
+    #
     def inspect
       "#<#{self.class.name}:0x#{object_id.to_s(16)} #{deconstruct_keys(nil).map do |k, v|
         "#{k}=#{v.inspect}"
@@ -904,6 +958,7 @@ module Anthropic
     end
 
     # @return [String]
+    #
     def to_s = @data.to_s
   end
 
