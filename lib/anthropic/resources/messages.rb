@@ -7,6 +7,7 @@ module Anthropic
       attr_reader :batches
 
       # @param client [Anthropic::Client]
+      #
       def initialize(client:)
         @client = client
         @batches = Anthropic::Resources::Messages::Batches.new(client: client)
@@ -244,6 +245,7 @@ module Anthropic
       # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
       #
       # @return [Anthropic::Models::Message]
+      #
       def create(params = {}, opts = {})
         parsed = Anthropic::Models::MessageCreateParams.dump(params)
         req = {
@@ -434,6 +436,7 @@ module Anthropic
       # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
       #
       # @return [Anthropic::Models::MessageTokensCount]
+      #
       def count_tokens(params = {}, opts = {})
         parsed = Anthropic::Models::MessageCountTokensParams.dump(params)
         req = {

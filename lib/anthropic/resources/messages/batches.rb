@@ -5,6 +5,7 @@ module Anthropic
     class Messages
       class Batches
         # @param client [Anthropic::Client]
+        #
         def initialize(client:)
           @client = client
         end
@@ -23,6 +24,7 @@ module Anthropic
         # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
         #
         # @return [Anthropic::Models::Messages::MessageBatch]
+        #
         def create(params = {}, opts = {})
           parsed = Anthropic::Models::Messages::BatchCreateParams.dump(params)
           req = {
@@ -43,6 +45,7 @@ module Anthropic
         # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
         #
         # @return [Anthropic::Models::Messages::MessageBatch]
+        #
         def retrieve(message_batch_id, opts = {})
           req = {
             method: :get,
@@ -70,6 +73,7 @@ module Anthropic
         # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
         #
         # @return [Anthropic::Page<Anthropic::Models::Messages::MessageBatch>]
+        #
         def list(params = {}, opts = {})
           parsed = Anthropic::Models::Messages::BatchListParams.dump(params)
           req = {
@@ -91,6 +95,7 @@ module Anthropic
         # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
         #
         # @return [Anthropic::Models::Messages::DeletedMessageBatch]
+        #
         def delete(message_batch_id, opts = {})
           req = {
             method: :delete,
@@ -115,6 +120,7 @@ module Anthropic
         # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
         #
         # @return [Anthropic::Models::Messages::MessageBatch]
+        #
         def cancel(message_batch_id, opts = {})
           req = {
             method: :post,
@@ -135,6 +141,7 @@ module Anthropic
         # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
         #
         # @return [Object]
+        #
         def results(message_batch_id, opts = {})
           req = {
             method: :get,

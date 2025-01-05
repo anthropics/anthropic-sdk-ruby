@@ -20,6 +20,15 @@ module Anthropic
     # @return [Object, nil]
     attr_reader :body
 
+    # @private
+    #
+    # @param url [URI::Generic]
+    # @param status [Integer, nil]
+    # @param body [Object, nil]
+    # @param request [nil]
+    # @param response [nil]
+    # @param message [String, nil]
+    #
     def initialize(url:, status: nil, body: nil, request: nil, response: nil, message: nil)
       @url = url
       @status = status
@@ -39,6 +48,15 @@ module Anthropic
     #   # @return [nil]
     #   attr_reader :body
 
+    # @private
+    #
+    # @param url [URI::Generic]
+    # @param status [nil]
+    # @param body [nil]
+    # @param request [nil]
+    # @param response [nil]
+    # @param message [String, nil]
+    #
     def initialize(
       url:,
       status: nil,
@@ -52,6 +70,15 @@ module Anthropic
   end
 
   class APITimeoutError < Anthropic::APIConnectionError
+    # @private
+    #
+    # @param url [URI::Generic]
+    # @param status [nil]
+    # @param body [nil]
+    # @param request [nil]
+    # @param response [nil]
+    # @param message [String, nil]
+    #
     def initialize(
       url:,
       status: nil,
@@ -67,12 +94,14 @@ module Anthropic
   class APIStatusError < Anthropic::APIError
     # @private
     #
+    # @param url [URI::Generic]
     # @param status [Integer]
     # @param body [Object, nil]
-    # @param request [Object]
-    # @param response [Object]
+    # @param request [nil]
+    # @param response [nil]
     #
     # @return [Anthropic::APIStatusError]
+    #
     def self.for(url:, status:, body:, request:, response:)
       kwargs = {url: url, status: status, body: body, request: request, response: response}
 
@@ -102,6 +131,15 @@ module Anthropic
     #   # @return [Integer]
     #   attr_reader :status
 
+    # @private
+    #
+    # @param url [URI::Generic]
+    # @param status [Integer]
+    # @param body [Object, nil]
+    # @param request [nil]
+    # @param response [nil]
+    # @param message [String, nil]
+    #
     def initialize(url:, status:, body:, request:, response:, message: nil)
       message ||= {url: url.to_s, status: status, body: body}
       super(
