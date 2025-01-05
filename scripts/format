@@ -2,7 +2,7 @@
 
 set -e
 
-cd "$(dirname "$0")/.."
+cd -- "$(dirname -- "$0")/.."
 
 echo "==> Running formatters"
-bundle exec rake format
+exec -- bundle exec rake format "$@"

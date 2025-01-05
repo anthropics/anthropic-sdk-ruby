@@ -57,7 +57,7 @@ non-success status code (i.e., 4xx or 5xx response), a subclass of
 
 ```ruby
 begin
-  anthropic.messages.create(
+  message = anthropic.messages.create(
     max_tokens: 1024,
     messages: [{"role" => "user", "content" => "Hello, Claude"}],
     model: "claude-3-5-sonnet-latest"
