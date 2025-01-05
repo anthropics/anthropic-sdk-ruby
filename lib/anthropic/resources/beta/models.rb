@@ -5,6 +5,7 @@ module Anthropic
     class Beta
       class Models
         # @param client [Anthropic::Client]
+        #
         def initialize(client:)
           @client = client
         end
@@ -19,6 +20,7 @@ module Anthropic
         # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
         #
         # @return [Anthropic::Models::Beta::BetaModelInfo]
+        #
         def retrieve(model_id, opts = {})
           req = {
             method: :get,
@@ -48,6 +50,7 @@ module Anthropic
         # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
         #
         # @return [Anthropic::Page<Anthropic::Models::Beta::BetaModelInfo>]
+        #
         def list(params = {}, opts = {})
           parsed = Anthropic::Models::Beta::ModelListParams.dump(params)
           req = {

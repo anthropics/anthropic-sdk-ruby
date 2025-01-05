@@ -44,6 +44,13 @@ module Anthropic
     # @param auth_token [String, nil] Defaults to `ENV["ANTHROPIC_AUTH_TOKEN"]`
     #
     # @param max_retries [Integer] Max number of retries to attempt after a failed retryable request.
+    #
+    # @param timeout [Float]
+    #
+    # @param initial_retry_delay [Float]
+    #
+    # @param max_retry_delay [Float]
+    #
     def initialize(
       base_url: nil,
       api_key: ENV["ANTHROPIC_API_KEY"],
