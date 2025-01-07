@@ -16,7 +16,7 @@ module Anthropic
 
     # @private
     #
-    # @param client [Anthropic::Client]
+    # @param client [Anthropic::BaseClient]
     # @param req [Hash{Symbol => Object}]
     # @param opts [Hash{Symbol => Object}]
     # @param headers [Hash{String => String}]
