@@ -16,7 +16,7 @@ module Anthropic
         #   once. Once a Message Batch is created, it begins processing immediately. Batches
         #   can take up to 24 hours to complete.
         #
-        # @param params [Hash{Symbol => Object}, Anthropic::Models::Messages::BatchCreateParams] Attributes to send in this request.
+        # @param params [Anthropic::Models::Messages::BatchCreateParams, Hash{Symbol => Object}] Attributes to send in this request.
         #
         #   @option params [Array<Anthropic::Models::Messages::BatchCreateParams::Request>] :requests List of requests for prompt completion. Each is an individual request to create
         #     a Message.
@@ -58,7 +58,7 @@ module Anthropic
         # List all Message Batches within a Workspace. Most recently created batches are
         #   returned first.
         #
-        # @param params [Hash{Symbol => Object}, Anthropic::Models::Messages::BatchListParams] Attributes to send in this request.
+        # @param params [Anthropic::Models::Messages::BatchListParams, Hash{Symbol => Object}] Attributes to send in this request.
         #
         #   @option params [String] :after_id ID of the object to use as a cursor for pagination. When provided, returns the
         #     page of results immediately after this object.

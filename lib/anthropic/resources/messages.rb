@@ -19,7 +19,7 @@ module Anthropic
       #   The Messages API can be used for either single queries or stateless multi-turn
       #   conversations.
       #
-      # @param params [Hash{Symbol => Object}, Anthropic::Models::MessageCreateParams] Attributes to send in this request.
+      # @param params [Anthropic::Models::MessageCreateParams, Hash{Symbol => Object}] Attributes to send in this request.
       #
       #   @option params [Integer] :max_tokens The maximum number of tokens to generate before stopping.
       #
@@ -262,7 +262,7 @@ module Anthropic
       #   The Token Count API can be used to count the number of tokens in a Message,
       #   including tools, images, and documents, without creating it.
       #
-      # @param params [Hash{Symbol => Object}, Anthropic::Models::MessageCountTokensParams] Attributes to send in this request.
+      # @param params [Anthropic::Models::MessageCountTokensParams, Hash{Symbol => Object}] Attributes to send in this request.
       #
       #   @option params [Array<Anthropic::Models::MessageParam>] :messages Input messages.
       #
