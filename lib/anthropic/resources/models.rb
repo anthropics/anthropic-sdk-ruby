@@ -34,7 +34,7 @@ module Anthropic
       #   The Models API response can be used to determine which models are available for
       #   use in the API. More recently released models are listed first.
       #
-      # @param params [Hash{Symbol => Object}, Anthropic::Models::ModelListParams] Attributes to send in this request.
+      # @param params [Anthropic::Models::ModelListParams, Hash{Symbol => Object}] Attributes to send in this request.
       #
       #   @option params [String] :after_id ID of the object to use as a cursor for pagination. When provided, returns the
       #     page of results immediately after this object.
