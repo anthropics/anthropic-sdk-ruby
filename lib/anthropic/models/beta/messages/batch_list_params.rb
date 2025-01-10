@@ -30,7 +30,7 @@ module Anthropic
           #
           #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>]
           optional :betas,
-                   Anthropic::ArrayOf[union: -> { Anthropic::Models::AnthropicBeta }],
+                   -> { Anthropic::ArrayOf[union: Anthropic::Models::AnthropicBeta] },
                    api_name: :"anthropic-beta"
 
           # @!parse
