@@ -349,7 +349,7 @@ module Anthropic
 
         variant String
 
-        variant -> { Anthropic::Models::MessageCountTokensParams::System::TextBlockParamArray }
+        variant Anthropic::Models::MessageCountTokensParams::System::TextBlockParamArray
       end
     end
   end

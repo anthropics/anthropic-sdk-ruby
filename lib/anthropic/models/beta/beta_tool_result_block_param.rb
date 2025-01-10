@@ -71,7 +71,7 @@ module Anthropic
 
           variant String
 
-          variant -> { Anthropic::Models::Beta::BetaToolResultBlockParam::Content::ContentArray }
+          variant Anthropic::Models::Beta::BetaToolResultBlockParam::Content::ContentArray
 
           # @example
           #
