@@ -3,6 +3,16 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_tool_use_block => {
+      #   id: String,
+      #   input: Anthropic::Unknown,
+      #   name: String,
+      #   type: Anthropic::Models::Beta::BetaToolUseBlock::Type
+      # }
+      # ```
       class BetaToolUseBlock < Anthropic::BaseModel
         # @!attribute id
         #
@@ -37,7 +47,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :tool_use
         #   # ...
         # end

@@ -2,6 +2,14 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # message_param => {
+    #   content: Anthropic::Models::MessageParam::Content,
+    #   role: Anthropic::Models::MessageParam::Role
+    # }
+    # ```
     class MessageParam < Anthropic::BaseModel
       # @!attribute content
       #
@@ -24,7 +32,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case union
+      # case content
       # in String
       #   # ...
       # in Anthropic::Models::MessageParam::Content::ContentBlockParamArray
@@ -42,7 +50,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case role
       # in :user
       #   # ...
       # in :assistant

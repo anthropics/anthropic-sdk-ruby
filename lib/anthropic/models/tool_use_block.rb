@@ -2,6 +2,16 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # tool_use_block => {
+    #   id: String,
+    #   input: Anthropic::Unknown,
+    #   name: String,
+    #   type: Anthropic::Models::ToolUseBlock::Type
+    # }
+    # ```
     class ToolUseBlock < Anthropic::BaseModel
       # @!attribute id
       #
@@ -36,7 +46,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :tool_use
       #   # ...
       # end

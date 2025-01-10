@@ -2,6 +2,14 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # beta_rate_limit_error => {
+    #   message: String,
+    #   type: Anthropic::Models::BetaRateLimitError::Type
+    # }
+    # ```
     class BetaRateLimitError < Anthropic::BaseModel
       # @!attribute message
       #
@@ -24,7 +32,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :rate_limit_error
       #   # ...
       # end

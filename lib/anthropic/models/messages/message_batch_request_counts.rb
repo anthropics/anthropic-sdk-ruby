@@ -3,6 +3,17 @@
 module Anthropic
   module Models
     module Messages
+      # @example
+      #
+      # ```ruby
+      # message_batch_request_counts => {
+      #   canceled: Integer,
+      #   errored: Integer,
+      #   expired: Integer,
+      #   processing: Integer,
+      #   succeeded: Integer
+      # }
+      # ```
       class MessageBatchRequestCounts < Anthropic::BaseModel
         # @!attribute canceled
         #   Number of requests in the Message Batch that have been canceled.

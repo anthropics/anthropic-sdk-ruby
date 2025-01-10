@@ -3,6 +3,16 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_model_info => {
+      #   id: String,
+      #   created_at: Time,
+      #   display_name: String,
+      #   type: Anthropic::Models::Beta::BetaModelInfo::Type
+      # }
+      # ```
       class BetaModelInfo < Anthropic::BaseModel
         # @!attribute id
         #   Unique model identifier.
@@ -53,7 +63,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :model
         #   # ...
         # end

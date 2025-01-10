@@ -2,6 +2,14 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # beta_authentication_error => {
+    #   message: String,
+    #   type: Anthropic::Models::BetaAuthenticationError::Type
+    # }
+    # ```
     class BetaAuthenticationError < Anthropic::BaseModel
       # @!attribute message
       #
@@ -24,7 +32,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :authentication_error
       #   # ...
       # end

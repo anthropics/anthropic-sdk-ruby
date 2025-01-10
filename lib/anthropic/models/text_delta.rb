@@ -2,6 +2,14 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # text_delta => {
+    #   text: String,
+    #   type: Anthropic::Models::TextDelta::Type
+    # }
+    # ```
     class TextDelta < Anthropic::BaseModel
       # @!attribute text
       #
@@ -24,7 +32,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :text_delta
       #   # ...
       # end

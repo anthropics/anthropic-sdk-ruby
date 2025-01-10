@@ -3,6 +3,15 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_base64_pdf_block => {
+      #   source: Anthropic::Models::Beta::BetaBase64PDFSource,
+      #   type: Anthropic::Models::Beta::BetaBase64PDFBlock::Type,
+      #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
+      # }
+      # ```
       class BetaBase64PDFBlock < Anthropic::BaseModel
         # @!attribute source
         #
@@ -31,7 +40,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :document
         #   # ...
         # end

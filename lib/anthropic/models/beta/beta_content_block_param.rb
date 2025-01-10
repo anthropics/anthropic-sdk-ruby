@@ -6,7 +6,24 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case union
+      # case beta_content_block_param
+      # in {type: "text", text: String, type: Anthropic::Models::Beta::BetaTextBlockParam::Type, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
+      #   # Anthropic::Models::Beta::BetaTextBlockParam ...
+      # in {type: "image", source: Anthropic::Models::Beta::BetaImageBlockParam::Source, type: Anthropic::Models::Beta::BetaImageBlockParam::Type, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
+      #   # Anthropic::Models::Beta::BetaImageBlockParam ...
+      # in {type: "tool_use", id: String, input: Anthropic::Unknown, name: String}
+      #   # Anthropic::Models::Beta::BetaToolUseBlockParam ...
+      # in {type: "tool_result", tool_use_id: String, type: Anthropic::Models::Beta::BetaToolResultBlockParam::Type, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
+      #   # Anthropic::Models::Beta::BetaToolResultBlockParam ...
+      # in {type: "document", source: Anthropic::Models::Beta::BetaBase64PDFSource, type: Anthropic::Models::Beta::BetaBase64PDFBlock::Type, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
+      #   # Anthropic::Models::Beta::BetaBase64PDFBlock ...
+      # end
+      # ```
+      #
+      # @example
+      #
+      # ```ruby
+      # case beta_content_block_param
       # in Anthropic::Models::Beta::BetaTextBlockParam
       #   # ...
       # in Anthropic::Models::Beta::BetaImageBlockParam

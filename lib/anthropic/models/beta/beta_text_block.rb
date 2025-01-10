@@ -3,6 +3,14 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_text_block => {
+      #   text: String,
+      #   type: Anthropic::Models::Beta::BetaTextBlock::Type
+      # }
+      # ```
       class BetaTextBlock < Anthropic::BaseModel
         # @!attribute text
         #
@@ -25,7 +33,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :text
         #   # ...
         # end

@@ -2,6 +2,15 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # document_block_param => {
+    #   source: Anthropic::Models::Base64PDFSource,
+    #   type: Anthropic::Models::DocumentBlockParam::Type,
+    #   cache_control: Anthropic::Models::CacheControlEphemeral
+    # }
+    # ```
     class DocumentBlockParam < Anthropic::BaseModel
       # @!attribute source
       #
@@ -30,7 +39,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :document
       #   # ...
       # end

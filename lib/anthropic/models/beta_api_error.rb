@@ -2,6 +2,14 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # beta_api_error => {
+    #   message: String,
+    #   type: Anthropic::Models::BetaAPIError::Type
+    # }
+    # ```
     class BetaAPIError < Anthropic::BaseModel
       # @!attribute message
       #
@@ -24,7 +32,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :api_error
       #   # ...
       # end

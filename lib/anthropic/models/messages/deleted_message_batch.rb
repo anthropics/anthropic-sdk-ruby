@@ -3,6 +3,14 @@
 module Anthropic
   module Models
     module Messages
+      # @example
+      #
+      # ```ruby
+      # deleted_message_batch => {
+      #   id: String,
+      #   type: Anthropic::Models::Messages::DeletedMessageBatch::Type
+      # }
+      # ```
       class DeletedMessageBatch < Anthropic::BaseModel
         # @!attribute id
         #   ID of the Message Batch.
@@ -36,7 +44,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :message_batch_deleted
         #   # ...
         # end

@@ -3,6 +3,14 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_raw_message_start_event => {
+      #   message: Anthropic::Models::Beta::BetaMessage,
+      #   type: Anthropic::Models::Beta::BetaRawMessageStartEvent::Type
+      # }
+      # ```
       class BetaRawMessageStartEvent < Anthropic::BaseModel
         # @!attribute message
         #
@@ -25,7 +33,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :message_start
         #   # ...
         # end

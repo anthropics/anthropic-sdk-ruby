@@ -2,6 +2,14 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # raw_content_block_stop_event => {
+    #   index: Integer,
+    #   type: Anthropic::Models::RawContentBlockStopEvent::Type
+    # }
+    # ```
     class RawContentBlockStopEvent < Anthropic::BaseModel
       # @!attribute index
       #
@@ -24,7 +32,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :content_block_stop
       #   # ...
       # end

@@ -2,6 +2,14 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # input_json_delta => {
+    #   partial_json: String,
+    #   type: Anthropic::Models::InputJSONDelta::Type
+    # }
+    # ```
     class InputJSONDelta < Anthropic::BaseModel
       # @!attribute partial_json
       #
@@ -24,7 +32,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :input_json_delta
       #   # ...
       # end

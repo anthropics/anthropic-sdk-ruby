@@ -2,6 +2,15 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # raw_content_block_start_event => {
+    #   content_block: Anthropic::Models::RawContentBlockStartEvent::ContentBlock,
+    #   index: Integer,
+    #   type: Anthropic::Models::RawContentBlockStartEvent::Type
+    # }
+    # ```
     class RawContentBlockStartEvent < Anthropic::BaseModel
       # @!attribute content_block
       #
@@ -30,7 +39,18 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case union
+      # case content_block
+      # in {type: "text", text: String, type: Anthropic::Models::TextBlock::Type}
+      #   # Anthropic::Models::TextBlock ...
+      # in {type: "tool_use", id: String, input: Anthropic::Unknown, name: String}
+      #   # Anthropic::Models::ToolUseBlock ...
+      # end
+      # ```
+      #
+      # @example
+      #
+      # ```ruby
+      # case content_block
       # in Anthropic::Models::TextBlock
       #   # ...
       # in Anthropic::Models::ToolUseBlock
@@ -48,7 +68,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :content_block_start
       #   # ...
       # end

@@ -3,6 +3,14 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_text_delta => {
+      #   text: String,
+      #   type: Anthropic::Models::Beta::BetaTextDelta::Type
+      # }
+      # ```
       class BetaTextDelta < Anthropic::BaseModel
         # @!attribute text
         #
@@ -25,7 +33,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :text_delta
         #   # ...
         # end

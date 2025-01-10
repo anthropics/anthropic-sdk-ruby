@@ -3,6 +3,15 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_tool_bash20241022 => {
+      #   name: Anthropic::Models::Beta::BetaToolBash20241022::Name,
+      #   type: Anthropic::Models::Beta::BetaToolBash20241022::Type,
+      #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
+      # }
+      # ```
       class BetaToolBash20241022 < Anthropic::BaseModel
         # @!attribute name
         #   Name of the tool.
@@ -42,7 +51,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case name
         # in :bash
         #   # ...
         # end
@@ -56,7 +65,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :bash_20241022
         #   # ...
         # end

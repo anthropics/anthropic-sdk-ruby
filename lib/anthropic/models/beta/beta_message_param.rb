@@ -3,6 +3,14 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_message_param => {
+      #   content: Anthropic::Models::Beta::BetaMessageParam::Content,
+      #   role: Anthropic::Models::Beta::BetaMessageParam::Role
+      # }
+      # ```
       class BetaMessageParam < Anthropic::BaseModel
         # @!attribute content
         #
@@ -25,7 +33,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case union
+        # case content
         # in String
         #   # ...
         # in Anthropic::Models::Beta::BetaMessageParam::Content::BetaContentBlockParamArray
@@ -45,7 +53,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case role
         # in :user
         #   # ...
         # in :assistant

@@ -485,7 +485,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case stream
         # in true
         #   # ...
         # end
@@ -503,7 +503,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case union
+        # case system
         # in String
         #   # ...
         # in Anthropic::Models::Beta::MessageCreateParams::System::BetaTextBlockParamArray

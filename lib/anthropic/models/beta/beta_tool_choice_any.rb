@@ -3,6 +3,14 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_tool_choice_any => {
+      #   type: Anthropic::Models::Beta::BetaToolChoiceAny::Type,
+      #   disable_parallel_tool_use: Anthropic::BooleanModel
+      # }
+      # ```
       class BetaToolChoiceAny < Anthropic::BaseModel
         # @!attribute type
         #
@@ -34,7 +42,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :any
         #   # ...
         # end

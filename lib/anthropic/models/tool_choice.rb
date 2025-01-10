@@ -7,7 +7,20 @@ module Anthropic
     # @example
     #
     # ```ruby
-    # case union
+    # case tool_choice
+    # in {type: "auto", type: Anthropic::Models::ToolChoiceAuto::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
+    #   # Anthropic::Models::ToolChoiceAuto ...
+    # in {type: "any", type: Anthropic::Models::ToolChoiceAny::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
+    #   # Anthropic::Models::ToolChoiceAny ...
+    # in {type: "tool", name: String, type: Anthropic::Models::ToolChoiceTool::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
+    #   # Anthropic::Models::ToolChoiceTool ...
+    # end
+    # ```
+    #
+    # @example
+    #
+    # ```ruby
+    # case tool_choice
     # in Anthropic::Models::ToolChoiceAuto
     #   # ...
     # in Anthropic::Models::ToolChoiceAny

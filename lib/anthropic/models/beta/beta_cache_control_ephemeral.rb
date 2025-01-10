@@ -3,6 +3,13 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_cache_control_ephemeral => {
+      #   type: Anthropic::Models::Beta::BetaCacheControlEphemeral::Type
+      # }
+      # ```
       class BetaCacheControlEphemeral < Anthropic::BaseModel
         # @!attribute type
         #
@@ -19,7 +26,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :ephemeral
         #   # ...
         # end

@@ -2,6 +2,17 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # completion => {
+    #   id: String,
+    #   completion: String,
+    #   model: Anthropic::Models::Model,
+    #   stop_reason: String,
+    #   type: Anthropic::Models::Completion::Type
+    # }
+    # ```
     class Completion < Anthropic::BaseModel
       # @!attribute id
       #   Unique object identifier.
@@ -75,7 +86,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :completion
       #   # ...
       # end

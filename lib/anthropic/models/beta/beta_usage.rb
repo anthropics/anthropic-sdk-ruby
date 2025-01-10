@@ -3,6 +3,16 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_usage => {
+      #   cache_creation_input_tokens: Integer,
+      #   cache_read_input_tokens: Integer,
+      #   input_tokens: Integer,
+      #   output_tokens: Integer
+      # }
+      # ```
       class BetaUsage < Anthropic::BaseModel
         # @!attribute cache_creation_input_tokens
         #   The number of input tokens used to create the cache entry.

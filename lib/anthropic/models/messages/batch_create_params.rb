@@ -18,6 +18,14 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+        # @example
+        #
+        # ```ruby
+        # request => {
+        #   custom_id: String,
+        #   params: Anthropic::Models::Messages::BatchCreateParams::Request::Params
+        # }
+        # ```
         class Request < Anthropic::BaseModel
           # @!attribute custom_id
           #   Developer-provided ID created for each request in a Message Batch. Useful for matching results to requests, as results may be given out of request order.
@@ -50,6 +58,18 @@ module Anthropic
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+          # @example
+          #
+          # ```ruby
+          # params => {
+          #   max_tokens: Integer,
+          #   messages: -> { Anthropic::ArrayOf[Anthropic::Models::MessageParam] === _1 },
+          #   model: Anthropic::Models::Model,
+          #   metadata: Anthropic::Models::Metadata,
+          #   stop_sequences: -> { Anthropic::ArrayOf[String] === _1 },
+          #   **_
+          # }
+          # ```
           class Params < Anthropic::BaseModel
             # @!attribute max_tokens
             #   The maximum number of tokens to generate before stopping.
@@ -524,7 +544,7 @@ module Anthropic
             # @example
             #
             # ```ruby
-            # case union
+            # case system
             # in String
             #   # ...
             # in Anthropic::Models::Messages::BatchCreateParams::Request::Params::System::TextBlockParamArray

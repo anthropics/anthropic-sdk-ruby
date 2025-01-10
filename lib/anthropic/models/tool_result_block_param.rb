@@ -2,6 +2,17 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # tool_result_block_param => {
+    #   tool_use_id: String,
+    #   type: Anthropic::Models::ToolResultBlockParam::Type,
+    #   cache_control: Anthropic::Models::CacheControlEphemeral,
+    #   content: Anthropic::Models::ToolResultBlockParam::Content,
+    #   is_error: Anthropic::BooleanModel
+    # }
+    # ```
     class ToolResultBlockParam < Anthropic::BaseModel
       # @!attribute tool_use_id
       #
@@ -42,7 +53,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :tool_result
       #   # ...
       # end
@@ -56,7 +67,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case union
+      # case content
       # in String
       #   # ...
       # in Anthropic::Models::ToolResultBlockParam::Content::ContentArray
@@ -75,7 +86,18 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case union
+        # case content
+        # in {type: "text", text: String, type: Anthropic::Models::TextBlockParam::Type, cache_control: Anthropic::Models::CacheControlEphemeral}
+        #   # Anthropic::Models::TextBlockParam ...
+        # in {type: "image", source: Anthropic::Models::ImageBlockParam::Source, type: Anthropic::Models::ImageBlockParam::Type, cache_control: Anthropic::Models::CacheControlEphemeral}
+        #   # Anthropic::Models::ImageBlockParam ...
+        # end
+        # ```
+        #
+        # @example
+        #
+        # ```ruby
+        # case content
         # in Anthropic::Models::TextBlockParam
         #   # ...
         # in Anthropic::Models::ImageBlockParam

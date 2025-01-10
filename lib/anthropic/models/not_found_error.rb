@@ -2,6 +2,14 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # not_found_error => {
+    #   message: String,
+    #   type: Anthropic::Models::NotFoundError_::Type
+    # }
+    # ```
     class NotFoundError_ < Anthropic::BaseModel
       # @!attribute message
       #
@@ -24,7 +32,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :not_found_error
       #   # ...
       # end

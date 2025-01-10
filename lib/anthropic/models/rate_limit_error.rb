@@ -2,6 +2,14 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # rate_limit_error => {
+    #   message: String,
+    #   type: Anthropic::Models::RateLimitError_::Type
+    # }
+    # ```
     class RateLimitError_ < Anthropic::BaseModel
       # @!attribute message
       #
@@ -24,7 +32,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :rate_limit_error
       #   # ...
       # end

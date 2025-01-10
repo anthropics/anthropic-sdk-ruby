@@ -3,6 +3,13 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_raw_message_stop_event => {
+      #   type: Anthropic::Models::Beta::BetaRawMessageStopEvent::Type
+      # }
+      # ```
       class BetaRawMessageStopEvent < Anthropic::BaseModel
         # @!attribute type
         #
@@ -19,7 +26,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :message_stop
         #   # ...
         # end

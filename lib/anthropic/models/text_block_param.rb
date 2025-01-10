@@ -2,6 +2,15 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # text_block_param => {
+    #   text: String,
+    #   type: Anthropic::Models::TextBlockParam::Type,
+    #   cache_control: Anthropic::Models::CacheControlEphemeral
+    # }
+    # ```
     class TextBlockParam < Anthropic::BaseModel
       # @!attribute text
       #
@@ -30,7 +39,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :text
       #   # ...
       # end

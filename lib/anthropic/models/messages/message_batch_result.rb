@@ -10,7 +10,22 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case union
+      # case message_batch_result
+      # in {type: "succeeded", message: Anthropic::Models::Message, type: Anthropic::Models::Messages::MessageBatchSucceededResult::Type}
+      #   # Anthropic::Models::Messages::MessageBatchSucceededResult ...
+      # in {type: "errored", error: Anthropic::Models::ErrorResponse, type: Anthropic::Models::Messages::MessageBatchErroredResult::Type}
+      #   # Anthropic::Models::Messages::MessageBatchErroredResult ...
+      # in {type: "canceled", type: Anthropic::Models::Messages::MessageBatchCanceledResult::Type}
+      #   # Anthropic::Models::Messages::MessageBatchCanceledResult ...
+      # in {type: "expired", type: Anthropic::Models::Messages::MessageBatchExpiredResult::Type}
+      #   # Anthropic::Models::Messages::MessageBatchExpiredResult ...
+      # end
+      # ```
+      #
+      # @example
+      #
+      # ```ruby
+      # case message_batch_result
       # in Anthropic::Models::Messages::MessageBatchSucceededResult
       #   # ...
       # in Anthropic::Models::Messages::MessageBatchErroredResult

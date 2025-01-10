@@ -2,6 +2,14 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # beta_billing_error => {
+    #   message: String,
+    #   type: Anthropic::Models::BetaBillingError::Type
+    # }
+    # ```
     class BetaBillingError < Anthropic::BaseModel
       # @!attribute message
       #
@@ -24,7 +32,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :billing_error
       #   # ...
       # end

@@ -337,7 +337,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case union
+      # case system
       # in String
       #   # ...
       # in Anthropic::Models::MessageCountTokensParams::System::TextBlockParamArray

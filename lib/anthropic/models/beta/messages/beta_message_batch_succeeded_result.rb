@@ -4,6 +4,14 @@ module Anthropic
   module Models
     module Beta
       module Messages
+        # @example
+        #
+        # ```ruby
+        # beta_message_batch_succeeded_result => {
+        #   message: Anthropic::Models::Beta::BetaMessage,
+        #   type: Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult::Type
+        # }
+        # ```
         class BetaMessageBatchSucceededResult < Anthropic::BaseModel
           # @!attribute message
           #
@@ -29,7 +37,7 @@ module Anthropic
           # @example
           #
           # ```ruby
-          # case enum
+          # case type
           # in :succeeded
           #   # ...
           # end

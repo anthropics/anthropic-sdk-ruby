@@ -7,7 +7,7 @@ module Anthropic
     # @example
     #
     # ```ruby
-    # case union
+    # case model
     # in String
     #   # ...
     # in Anthropic::Models::Model::UnionMember1
@@ -25,7 +25,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case union_member1
       # in :"claude-3-5-haiku-latest"
       #   # ...
       # in :"claude-3-5-haiku-20241022"
