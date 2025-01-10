@@ -36,7 +36,7 @@ module Anthropic
 
         variant String
 
-        variant -> { Anthropic::Models::MessageParam::Content::ContentBlockParamArray }
+        variant Anthropic::Models::MessageParam::Content::ContentBlockParamArray
       end
 
       # @example

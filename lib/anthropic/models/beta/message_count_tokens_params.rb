@@ -365,7 +365,7 @@ module Anthropic
 
           variant String
 
-          variant -> { Anthropic::Models::Beta::MessageCountTokensParams::System::BetaTextBlockParamArray }
+          variant Anthropic::Models::Beta::MessageCountTokensParams::System::BetaTextBlockParamArray
         end
 
         # @example

@@ -515,7 +515,7 @@ module Anthropic
 
           variant String
 
-          variant -> { Anthropic::Models::Beta::MessageCreateParams::System::BetaTextBlockParamArray }
+          variant Anthropic::Models::Beta::MessageCreateParams::System::BetaTextBlockParamArray
         end
       end
     end

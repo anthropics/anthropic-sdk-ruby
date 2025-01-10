@@ -39,7 +39,7 @@ module Anthropic
 
           variant String
 
-          variant -> { Anthropic::Models::Beta::BetaMessageParam::Content::BetaContentBlockParamArray }
+          variant Anthropic::Models::Beta::BetaMessageParam::Content::BetaContentBlockParamArray
         end
 
         # @example
