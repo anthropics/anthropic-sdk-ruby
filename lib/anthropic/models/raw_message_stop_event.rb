@@ -2,6 +2,13 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # raw_message_stop_event => {
+    #   type: Anthropic::Models::RawMessageStopEvent::Type
+    # }
+    # ```
     class RawMessageStopEvent < Anthropic::BaseModel
       # @!attribute type
       #
@@ -18,7 +25,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :message_stop
       #   # ...
       # end

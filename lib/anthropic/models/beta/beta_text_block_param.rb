@@ -3,6 +3,15 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_text_block_param => {
+      #   text: String,
+      #   type: Anthropic::Models::Beta::BetaTextBlockParam::Type,
+      #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
+      # }
+      # ```
       class BetaTextBlockParam < Anthropic::BaseModel
         # @!attribute text
         #
@@ -31,7 +40,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :text
         #   # ...
         # end

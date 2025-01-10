@@ -2,6 +2,18 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # message => {
+    #   id: String,
+    #   content: -> { Anthropic::ArrayOf[Anthropic::Models::ContentBlock] === _1 },
+    #   model: Anthropic::Models::Model,
+    #   role: Anthropic::Models::Message::Role,
+    #   stop_reason: Anthropic::Models::Message::StopReason,
+    #   **_
+    # }
+    # ```
     class Message < Anthropic::BaseModel
       # @!attribute id
       #   Unique object identifier.
@@ -188,7 +200,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case role
       # in :assistant
       #   # ...
       # end
@@ -212,7 +224,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case stop_reason
       # in :end_turn
       #   # ...
       # in :max_tokens
@@ -239,7 +251,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :message
       #   # ...
       # end

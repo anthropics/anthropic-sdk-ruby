@@ -3,6 +3,13 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_metadata => {
+      #   user_id: String
+      # }
+      # ```
       class BetaMetadata < Anthropic::BaseModel
         # @!attribute user_id
         #   An external identifier for the user who is associated with the request.

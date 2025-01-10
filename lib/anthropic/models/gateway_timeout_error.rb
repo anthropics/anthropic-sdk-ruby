@@ -2,6 +2,14 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # gateway_timeout_error => {
+    #   message: String,
+    #   type: Anthropic::Models::GatewayTimeoutError::Type
+    # }
+    # ```
     class GatewayTimeoutError < Anthropic::BaseModel
       # @!attribute message
       #
@@ -24,7 +32,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :timeout_error
       #   # ...
       # end

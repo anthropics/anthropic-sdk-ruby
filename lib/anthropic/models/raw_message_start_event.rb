@@ -2,6 +2,14 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # raw_message_start_event => {
+    #   message: Anthropic::Models::Message,
+    #   type: Anthropic::Models::RawMessageStartEvent::Type
+    # }
+    # ```
     class RawMessageStartEvent < Anthropic::BaseModel
       # @!attribute message
       #
@@ -24,7 +32,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :message_start
       #   # ...
       # end

@@ -2,6 +2,16 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # model_info => {
+    #   id: String,
+    #   created_at: Time,
+    #   display_name: String,
+    #   type: Anthropic::Models::ModelInfo::Type
+    # }
+    # ```
     class ModelInfo < Anthropic::BaseModel
       # @!attribute id
       #   Unique model identifier.
@@ -52,7 +62,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :model
       #   # ...
       # end

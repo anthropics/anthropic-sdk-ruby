@@ -6,7 +6,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case union
+      # case beta_tool_union
       # in Anthropic::Models::Beta::BetaTool
       #   # ...
       # in Anthropic::Models::Beta::BetaToolComputerUse20241022

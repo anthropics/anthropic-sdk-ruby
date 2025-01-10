@@ -170,7 +170,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case stream
       # in true
       #   # ...
       # end

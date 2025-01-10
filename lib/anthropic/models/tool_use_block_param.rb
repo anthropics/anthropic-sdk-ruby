@@ -2,6 +2,17 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # tool_use_block_param => {
+    #   id: String,
+    #   input: Anthropic::Unknown,
+    #   name: String,
+    #   type: Anthropic::Models::ToolUseBlockParam::Type,
+    #   cache_control: Anthropic::Models::CacheControlEphemeral
+    # }
+    # ```
     class ToolUseBlockParam < Anthropic::BaseModel
       # @!attribute id
       #
@@ -42,7 +53,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :tool_use
       #   # ...
       # end

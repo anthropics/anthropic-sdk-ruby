@@ -2,6 +2,15 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # raw_message_delta_event => {
+    #   delta: Anthropic::Models::RawMessageDeltaEvent::Delta,
+    #   type: Anthropic::Models::RawMessageDeltaEvent::Type,
+    #   usage: Anthropic::Models::MessageDeltaUsage
+    # }
+    # ```
     class RawMessageDeltaEvent < Anthropic::BaseModel
       # @!attribute delta
       #
@@ -47,6 +56,14 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+      # @example
+      #
+      # ```ruby
+      # delta => {
+      #   stop_reason: Anthropic::Models::RawMessageDeltaEvent::Delta::StopReason,
+      #   stop_sequence: String
+      # }
+      # ```
       class Delta < Anthropic::BaseModel
         # @!attribute stop_reason
         #
@@ -69,7 +86,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case stop_reason
         # in :end_turn
         #   # ...
         # in :max_tokens
@@ -93,7 +110,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :message_delta
       #   # ...
       # end

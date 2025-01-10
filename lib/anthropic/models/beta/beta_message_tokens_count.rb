@@ -3,6 +3,13 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_message_tokens_count => {
+      #   input_tokens: Integer
+      # }
+      # ```
       class BetaMessageTokensCount < Anthropic::BaseModel
         # @!attribute input_tokens
         #   The total number of tokens across the provided list of messages, system prompt, and tools.

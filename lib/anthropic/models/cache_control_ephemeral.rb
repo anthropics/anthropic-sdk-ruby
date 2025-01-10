@@ -2,6 +2,13 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # cache_control_ephemeral => {
+    #   type: Anthropic::Models::CacheControlEphemeral::Type
+    # }
+    # ```
     class CacheControlEphemeral < Anthropic::BaseModel
       # @!attribute type
       #
@@ -18,7 +25,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :ephemeral
       #   # ...
       # end

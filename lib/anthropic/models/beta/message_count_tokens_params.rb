@@ -353,7 +353,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case union
+        # case system
         # in String
         #   # ...
         # in Anthropic::Models::Beta::MessageCountTokensParams::System::BetaTextBlockParamArray
@@ -371,7 +371,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case union
+        # case tool
         # in Anthropic::Models::Beta::BetaTool
         #   # ...
         # in Anthropic::Models::Beta::BetaToolComputerUse20241022

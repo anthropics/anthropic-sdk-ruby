@@ -5,7 +5,7 @@ module Anthropic
     # @example
     #
     # ```ruby
-    # case union
+    # case anthropic_beta
     # in String
     #   # ...
     # in Anthropic::Models::AnthropicBeta::UnionMember1
@@ -20,7 +20,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case union_member1
       # in :"message-batches-2024-09-24"
       #   # ...
       # in :"prompt-caching-2024-07-31"

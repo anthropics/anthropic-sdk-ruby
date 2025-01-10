@@ -2,6 +2,14 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # beta_error_response => {
+    #   error: Anthropic::Models::BetaError,
+    #   type: Anthropic::Models::BetaErrorResponse::Type
+    # }
+    # ```
     class BetaErrorResponse < Anthropic::BaseModel
       # @!attribute error
       #
@@ -24,7 +32,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :error
       #   # ...
       # end

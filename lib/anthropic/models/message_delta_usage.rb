@@ -2,6 +2,13 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # message_delta_usage => {
+    #   output_tokens: Integer
+    # }
+    # ```
     class MessageDeltaUsage < Anthropic::BaseModel
       # @!attribute output_tokens
       #   The cumulative number of output tokens which were used.

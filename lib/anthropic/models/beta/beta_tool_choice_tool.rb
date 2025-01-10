@@ -3,6 +3,15 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_tool_choice_tool => {
+      #   name: String,
+      #   type: Anthropic::Models::Beta::BetaToolChoiceTool::Type,
+      #   disable_parallel_tool_use: Anthropic::BooleanModel
+      # }
+      # ```
       class BetaToolChoiceTool < Anthropic::BaseModel
         # @!attribute name
         #   The name of the tool to use.
@@ -42,7 +51,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :tool
         #   # ...
         # end

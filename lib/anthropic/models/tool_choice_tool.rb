@@ -2,6 +2,15 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # tool_choice_tool => {
+    #   name: String,
+    #   type: Anthropic::Models::ToolChoiceTool::Type,
+    #   disable_parallel_tool_use: Anthropic::BooleanModel
+    # }
+    # ```
     class ToolChoiceTool < Anthropic::BaseModel
       # @!attribute name
       #   The name of the tool to use.
@@ -41,7 +50,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :tool
       #   # ...
       # end

@@ -2,6 +2,14 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # beta_permission_error => {
+    #   message: String,
+    #   type: Anthropic::Models::BetaPermissionError::Type
+    # }
+    # ```
     class BetaPermissionError < Anthropic::BaseModel
       # @!attribute message
       #
@@ -24,7 +32,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :permission_error
       #   # ...
       # end

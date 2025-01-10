@@ -4,6 +4,14 @@ module Anthropic
   module Models
     module Beta
       module Messages
+        # @example
+        #
+        # ```ruby
+        # beta_message_batch_errored_result => {
+        #   error: Anthropic::Models::BetaErrorResponse,
+        #   type: Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult::Type
+        # }
+        # ```
         class BetaMessageBatchErroredResult < Anthropic::BaseModel
           # @!attribute error
           #
@@ -26,7 +34,7 @@ module Anthropic
           # @example
           #
           # ```ruby
-          # case enum
+          # case type
           # in :errored
           #   # ...
           # end

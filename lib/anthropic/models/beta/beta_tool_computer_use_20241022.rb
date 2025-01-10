@@ -3,6 +3,17 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_tool_computer_use20241022 => {
+      #   display_height_px: Integer,
+      #   display_width_px: Integer,
+      #   name: Anthropic::Models::Beta::BetaToolComputerUse20241022::Name,
+      #   type: Anthropic::Models::Beta::BetaToolComputerUse20241022::Type,
+      #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
+      # }
+      # ```
       class BetaToolComputerUse20241022 < Anthropic::BaseModel
         # @!attribute display_height_px
         #   The height of the display in pixels.
@@ -66,7 +77,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case name
         # in :computer
         #   # ...
         # end
@@ -80,7 +91,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :computer_20241022
         #   # ...
         # end

@@ -3,6 +3,17 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_tool_result_block_param => {
+      #   tool_use_id: String,
+      #   type: Anthropic::Models::Beta::BetaToolResultBlockParam::Type,
+      #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral,
+      #   content: Anthropic::Models::Beta::BetaToolResultBlockParam::Content,
+      #   is_error: Anthropic::BooleanModel
+      # }
+      # ```
       class BetaToolResultBlockParam < Anthropic::BaseModel
         # @!attribute tool_use_id
         #
@@ -43,7 +54,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :tool_result
         #   # ...
         # end
@@ -57,7 +68,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case union
+        # case content
         # in String
         #   # ...
         # in Anthropic::Models::Beta::BetaToolResultBlockParam::Content::ContentArray
@@ -76,7 +87,18 @@ module Anthropic
           # @example
           #
           # ```ruby
-          # case union
+          # case content
+          # in {type: "text", text: String, type: Anthropic::Models::Beta::BetaTextBlockParam::Type, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
+          #   # Anthropic::Models::Beta::BetaTextBlockParam ...
+          # in {type: "image", source: Anthropic::Models::Beta::BetaImageBlockParam::Source, type: Anthropic::Models::Beta::BetaImageBlockParam::Type, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
+          #   # Anthropic::Models::Beta::BetaImageBlockParam ...
+          # end
+          # ```
+          #
+          # @example
+          #
+          # ```ruby
+          # case content
           # in Anthropic::Models::Beta::BetaTextBlockParam
           #   # ...
           # in Anthropic::Models::Beta::BetaImageBlockParam

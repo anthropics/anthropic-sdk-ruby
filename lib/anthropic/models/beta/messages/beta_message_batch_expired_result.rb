@@ -4,6 +4,13 @@ module Anthropic
   module Models
     module Beta
       module Messages
+        # @example
+        #
+        # ```ruby
+        # beta_message_batch_expired_result => {
+        #   type: Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult::Type
+        # }
+        # ```
         class BetaMessageBatchExpiredResult < Anthropic::BaseModel
           # @!attribute type
           #
@@ -20,7 +27,7 @@ module Anthropic
           # @example
           #
           # ```ruby
-          # case enum
+          # case type
           # in :expired
           #   # ...
           # end

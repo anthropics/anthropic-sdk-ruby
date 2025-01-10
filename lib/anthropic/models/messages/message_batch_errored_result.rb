@@ -3,6 +3,14 @@
 module Anthropic
   module Models
     module Messages
+      # @example
+      #
+      # ```ruby
+      # message_batch_errored_result => {
+      #   error: Anthropic::Models::ErrorResponse,
+      #   type: Anthropic::Models::Messages::MessageBatchErroredResult::Type
+      # }
+      # ```
       class MessageBatchErroredResult < Anthropic::BaseModel
         # @!attribute error
         #
@@ -25,7 +33,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :errored
         #   # ...
         # end

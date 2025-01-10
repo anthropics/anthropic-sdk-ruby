@@ -8,7 +8,20 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case union
+      # case beta_tool_choice
+      # in {type: "auto", type: Anthropic::Models::Beta::BetaToolChoiceAuto::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
+      #   # Anthropic::Models::Beta::BetaToolChoiceAuto ...
+      # in {type: "any", type: Anthropic::Models::Beta::BetaToolChoiceAny::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
+      #   # Anthropic::Models::Beta::BetaToolChoiceAny ...
+      # in {type: "tool", name: String, type: Anthropic::Models::Beta::BetaToolChoiceTool::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
+      #   # Anthropic::Models::Beta::BetaToolChoiceTool ...
+      # end
+      # ```
+      #
+      # @example
+      #
+      # ```ruby
+      # case beta_tool_choice
       # in Anthropic::Models::Beta::BetaToolChoiceAuto
       #   # ...
       # in Anthropic::Models::Beta::BetaToolChoiceAny

@@ -2,6 +2,14 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # beta_not_found_error => {
+    #   message: String,
+    #   type: Anthropic::Models::BetaNotFoundError::Type
+    # }
+    # ```
     class BetaNotFoundError < Anthropic::BaseModel
       # @!attribute message
       #
@@ -24,7 +32,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :not_found_error
       #   # ...
       # end

@@ -5,7 +5,32 @@ module Anthropic
     # @example
     #
     # ```ruby
-    # case union
+    # case beta_error
+    # in {type: "invalid_request_error", message: String, type: Anthropic::Models::BetaInvalidRequestError::Type}
+    #   # Anthropic::Models::BetaInvalidRequestError ...
+    # in {type: "authentication_error", message: String, type: Anthropic::Models::BetaAuthenticationError::Type}
+    #   # Anthropic::Models::BetaAuthenticationError ...
+    # in {type: "billing_error", message: String, type: Anthropic::Models::BetaBillingError::Type}
+    #   # Anthropic::Models::BetaBillingError ...
+    # in {type: "permission_error", message: String, type: Anthropic::Models::BetaPermissionError::Type}
+    #   # Anthropic::Models::BetaPermissionError ...
+    # in {type: "not_found_error", message: String, type: Anthropic::Models::BetaNotFoundError::Type}
+    #   # Anthropic::Models::BetaNotFoundError ...
+    # in {type: "rate_limit_error", message: String, type: Anthropic::Models::BetaRateLimitError::Type}
+    #   # Anthropic::Models::BetaRateLimitError ...
+    # in {type: "timeout_error", message: String, type: Anthropic::Models::BetaGatewayTimeoutError::Type}
+    #   # Anthropic::Models::BetaGatewayTimeoutError ...
+    # in {type: "api_error", message: String, type: Anthropic::Models::BetaAPIError::Type}
+    #   # Anthropic::Models::BetaAPIError ...
+    # in {type: "overloaded_error", message: String, type: Anthropic::Models::BetaOverloadedError::Type}
+    #   # Anthropic::Models::BetaOverloadedError ...
+    # end
+    # ```
+    #
+    # @example
+    #
+    # ```ruby
+    # case beta_error
     # in Anthropic::Models::BetaInvalidRequestError
     #   # ...
     # in Anthropic::Models::BetaAuthenticationError

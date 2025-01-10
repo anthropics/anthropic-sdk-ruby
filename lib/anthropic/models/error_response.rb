@@ -2,6 +2,14 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # error_response => {
+    #   error: Anthropic::Models::ErrorObject,
+    #   type: Anthropic::Models::ErrorResponse::Type
+    # }
+    # ```
     class ErrorResponse < Anthropic::BaseModel
       # @!attribute error
       #
@@ -24,7 +32,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :error
       #   # ...
       # end

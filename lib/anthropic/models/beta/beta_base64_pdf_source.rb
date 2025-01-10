@@ -3,6 +3,15 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_base64_pdf_source => {
+      #   data: String,
+      #   media_type: Anthropic::Models::Beta::BetaBase64PDFSource::MediaType,
+      #   type: Anthropic::Models::Beta::BetaBase64PDFSource::Type
+      # }
+      # ```
       class BetaBase64PDFSource < Anthropic::BaseModel
         # @!attribute data
         #
@@ -31,7 +40,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case media_type
         # in :"application/pdf"
         #   # ...
         # end
@@ -45,7 +54,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :base64
         #   # ...
         # end

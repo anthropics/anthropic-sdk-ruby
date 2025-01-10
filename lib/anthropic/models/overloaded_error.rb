@@ -2,6 +2,14 @@
 
 module Anthropic
   module Models
+    # @example
+    #
+    # ```ruby
+    # overloaded_error => {
+    #   message: String,
+    #   type: Anthropic::Models::OverloadedError::Type
+    # }
+    # ```
     class OverloadedError < Anthropic::BaseModel
       # @!attribute message
       #
@@ -24,7 +32,7 @@ module Anthropic
       # @example
       #
       # ```ruby
-      # case enum
+      # case type
       # in :overloaded_error
       #   # ...
       # end

@@ -3,6 +3,14 @@
 module Anthropic
   module Models
     module Messages
+      # @example
+      #
+      # ```ruby
+      # message_batch_succeeded_result => {
+      #   message: Anthropic::Models::Message,
+      #   type: Anthropic::Models::Messages::MessageBatchSucceededResult::Type
+      # }
+      # ```
       class MessageBatchSucceededResult < Anthropic::BaseModel
         # @!attribute message
         #
@@ -25,7 +33,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :succeeded
         #   # ...
         # end

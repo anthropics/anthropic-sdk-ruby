@@ -3,6 +3,15 @@
 module Anthropic
   module Models
     module Beta
+      # @example
+      #
+      # ```ruby
+      # beta_raw_content_block_delta_event => {
+      #   delta: Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Delta,
+      #   index: Integer,
+      #   type: Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Type
+      # }
+      # ```
       class BetaRawContentBlockDeltaEvent < Anthropic::BaseModel
         # @!attribute delta
         #
@@ -31,7 +40,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case union
+        # case delta
         # in Anthropic::Models::Beta::BetaTextDelta
         #   # ...
         # in Anthropic::Models::Beta::BetaInputJSONDelta
@@ -47,7 +56,7 @@ module Anthropic
         # @example
         #
         # ```ruby
-        # case enum
+        # case type
         # in :content_block_delta
         #   # ...
         # end
