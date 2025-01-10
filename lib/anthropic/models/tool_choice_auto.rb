@@ -6,7 +6,7 @@ module Anthropic
     #
     # ```ruby
     # tool_choice_auto => {
-    #   type: Anthropic::Models::ToolChoiceAuto::Type,
+    #   type: enum: Anthropic::Models::ToolChoiceAuto::Type,
     #   disable_parallel_tool_use: Anthropic::BooleanModel
     # }
     # ```

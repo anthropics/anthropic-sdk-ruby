@@ -8,10 +8,10 @@ module Anthropic
       # ```ruby
       # beta_message => {
       #   id: String,
-      #   content: -> { Anthropic::ArrayOf[Anthropic::Models::Beta::BetaContentBlock] === _1 },
-      #   model: Anthropic::Models::Model,
-      #   role: Anthropic::Models::Beta::BetaMessage::Role,
-      #   stop_reason: Anthropic::Models::Beta::BetaMessage::StopReason,
+      #   content: -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlock] === _1 },
+      #   model: union: Anthropic::Models::Model,
+      #   role: enum: Anthropic::Models::Beta::BetaMessage::Role,
+      #   stop_reason: enum: Anthropic::Models::Beta::BetaMessage::StopReason,
       #   **_
       # }
       # ```

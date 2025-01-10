@@ -7,7 +7,7 @@ module Anthropic
     # ```ruby
     # text_block_param => {
     #   text: String,
-    #   type: Anthropic::Models::TextBlockParam::Type,
+    #   type: enum: Anthropic::Models::TextBlockParam::Type,
     #   cache_control: Anthropic::Models::CacheControlEphemeral
     # }
     # ```

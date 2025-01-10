@@ -8,7 +8,7 @@ module Anthropic
       # ```ruby
       # message_batch_errored_result => {
       #   error: Anthropic::Models::ErrorResponse,
-      #   type: Anthropic::Models::Messages::MessageBatchErroredResult::Type
+      #   type: enum: Anthropic::Models::Messages::MessageBatchErroredResult::Type
       # }
       # ```
       class MessageBatchErroredResult < Anthropic::BaseModel

@@ -9,7 +9,7 @@ module Anthropic
         # ```ruby
         # beta_message_batch_individual_response => {
         #   custom_id: String,
-        #   result: Anthropic::Models::Beta::Messages::BetaMessageBatchResult
+        #   result: union: Anthropic::Models::Beta::Messages::BetaMessageBatchResult
         # }
         # ```
         class BetaMessageBatchIndividualResponse < Anthropic::BaseModel

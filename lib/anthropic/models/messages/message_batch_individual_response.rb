@@ -8,7 +8,7 @@ module Anthropic
       # ```ruby
       # message_batch_individual_response => {
       #   custom_id: String,
-      #   result: Anthropic::Models::Messages::MessageBatchResult
+      #   result: union: Anthropic::Models::Messages::MessageBatchResult
       # }
       # ```
       class MessageBatchIndividualResponse < Anthropic::BaseModel

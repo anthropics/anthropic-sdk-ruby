@@ -7,7 +7,7 @@ module Anthropic
     # ```ruby
     # document_block_param => {
     #   source: Anthropic::Models::Base64PDFSource,
-    #   type: Anthropic::Models::DocumentBlockParam::Type,
+    #   type: enum: Anthropic::Models::DocumentBlockParam::Type,
     #   cache_control: Anthropic::Models::CacheControlEphemeral
     # }
     # ```

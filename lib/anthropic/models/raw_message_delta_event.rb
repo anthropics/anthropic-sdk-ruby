@@ -7,7 +7,7 @@ module Anthropic
     # ```ruby
     # raw_message_delta_event => {
     #   delta: Anthropic::Models::RawMessageDeltaEvent::Delta,
-    #   type: Anthropic::Models::RawMessageDeltaEvent::Type,
+    #   type: enum: Anthropic::Models::RawMessageDeltaEvent::Type,
     #   usage: Anthropic::Models::MessageDeltaUsage
     # }
     # ```
@@ -60,7 +60,7 @@ module Anthropic
       #
       # ```ruby
       # delta => {
-      #   stop_reason: Anthropic::Models::RawMessageDeltaEvent::Delta::StopReason,
+      #   stop_reason: enum: Anthropic::Models::RawMessageDeltaEvent::Delta::StopReason,
       #   stop_sequence: String
       # }
       # ```

@@ -12,13 +12,13 @@ module Anthropic
         #
         # ```ruby
         # case beta_message_batch_result
-        # in {type: "succeeded", message: Anthropic::Models::Beta::BetaMessage, type: Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult::Type}
+        # in {type: "succeeded", message: Anthropic::Models::Beta::BetaMessage, type: enum: Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult::Type}
         #   # Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult ...
-        # in {type: "errored", error: Anthropic::Models::BetaErrorResponse, type: Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult::Type}
+        # in {type: "errored", error: Anthropic::Models::BetaErrorResponse, type: enum: Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult::Type}
         #   # Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult ...
-        # in {type: "canceled", type: Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult::Type}
+        # in {type: "canceled", type: enum: Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult::Type}
         #   # Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult ...
-        # in {type: "expired", type: Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult::Type}
+        # in {type: "expired", type: enum: Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult::Type}
         #   # Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult ...
         # end
         # ```

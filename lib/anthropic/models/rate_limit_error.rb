@@ -7,7 +7,7 @@ module Anthropic
     # ```ruby
     # rate_limit_error => {
     #   message: String,
-    #   type: Anthropic::Models::RateLimitError_::Type
+    #   type: enum: Anthropic::Models::RateLimitError_::Type
     # }
     # ```
     class RateLimitError_ < Anthropic::BaseModel

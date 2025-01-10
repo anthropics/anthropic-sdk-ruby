@@ -7,7 +7,7 @@ module Anthropic
       #
       # ```ruby
       # message_batch_expired_result => {
-      #   type: Anthropic::Models::Messages::MessageBatchExpiredResult::Type
+      #   type: enum: Anthropic::Models::Messages::MessageBatchExpiredResult::Type
       # }
       # ```
       class MessageBatchExpiredResult < Anthropic::BaseModel

@@ -8,7 +8,7 @@ module Anthropic
       # ```ruby
       # message_batch_succeeded_result => {
       #   message: Anthropic::Models::Message,
-      #   type: Anthropic::Models::Messages::MessageBatchSucceededResult::Type
+      #   type: enum: Anthropic::Models::Messages::MessageBatchSucceededResult::Type
       # }
       # ```
       class MessageBatchSucceededResult < Anthropic::BaseModel

@@ -9,7 +9,7 @@ module Anthropic
         # ```ruby
         # beta_message_batch_succeeded_result => {
         #   message: Anthropic::Models::Beta::BetaMessage,
-        #   type: Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult::Type
+        #   type: enum: Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult::Type
         # }
         # ```
         class BetaMessageBatchSucceededResult < Anthropic::BaseModel

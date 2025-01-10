@@ -9,7 +9,7 @@ module Anthropic
     #   id: String,
     #   input: Anthropic::Unknown,
     #   name: String,
-    #   type: Anthropic::Models::ToolUseBlockParam::Type,
+    #   type: enum: Anthropic::Models::ToolUseBlockParam::Type,
     #   cache_control: Anthropic::Models::CacheControlEphemeral
     # }
     # ```

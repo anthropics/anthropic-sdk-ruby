@@ -9,7 +9,7 @@ module Anthropic
     #   id: String,
     #   created_at: Time,
     #   display_name: String,
-    #   type: Anthropic::Models::ModelInfo::Type
+    #   type: enum: Anthropic::Models::ModelInfo::Type
     # }
     # ```
     class ModelInfo < Anthropic::BaseModel

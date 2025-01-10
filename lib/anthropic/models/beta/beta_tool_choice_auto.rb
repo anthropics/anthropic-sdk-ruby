@@ -7,7 +7,7 @@ module Anthropic
       #
       # ```ruby
       # beta_tool_choice_auto => {
-      #   type: Anthropic::Models::Beta::BetaToolChoiceAuto::Type,
+      #   type: enum: Anthropic::Models::Beta::BetaToolChoiceAuto::Type,
       #   disable_parallel_tool_use: Anthropic::BooleanModel
       # }
       # ```

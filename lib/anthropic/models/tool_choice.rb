@@ -8,11 +8,11 @@ module Anthropic
     #
     # ```ruby
     # case tool_choice
-    # in {type: "auto", type: Anthropic::Models::ToolChoiceAuto::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
+    # in {type: "auto", type: enum: Anthropic::Models::ToolChoiceAuto::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
     #   # Anthropic::Models::ToolChoiceAuto ...
-    # in {type: "any", type: Anthropic::Models::ToolChoiceAny::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
+    # in {type: "any", type: enum: Anthropic::Models::ToolChoiceAny::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
     #   # Anthropic::Models::ToolChoiceAny ...
-    # in {type: "tool", name: String, type: Anthropic::Models::ToolChoiceTool::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
+    # in {type: "tool", name: String, type: enum: Anthropic::Models::ToolChoiceTool::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
     #   # Anthropic::Models::ToolChoiceTool ...
     # end
     # ```

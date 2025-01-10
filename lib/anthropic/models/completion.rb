@@ -8,9 +8,9 @@ module Anthropic
     # completion => {
     #   id: String,
     #   completion: String,
-    #   model: Anthropic::Models::Model,
+    #   model: union: Anthropic::Models::Model,
     #   stop_reason: String,
-    #   type: Anthropic::Models::Completion::Type
+    #   type: enum: Anthropic::Models::Completion::Type
     # }
     # ```
     class Completion < Anthropic::BaseModel

@@ -10,7 +10,7 @@ module Anthropic
     # case model
     # in String
     #   # ...
-    # in Anthropic::Models::Model::UnionMember1
+    # in enum: Anthropic::Models::Model::UnionMember1
     #   # ...
     # end
     # ```

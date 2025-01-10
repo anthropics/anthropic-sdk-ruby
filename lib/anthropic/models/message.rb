@@ -7,10 +7,10 @@ module Anthropic
     # ```ruby
     # message => {
     #   id: String,
-    #   content: -> { Anthropic::ArrayOf[Anthropic::Models::ContentBlock] === _1 },
-    #   model: Anthropic::Models::Model,
-    #   role: Anthropic::Models::Message::Role,
-    #   stop_reason: Anthropic::Models::Message::StopReason,
+    #   content: -> { Anthropic::ArrayOf[union: Anthropic::Models::ContentBlock] === _1 },
+    #   model: union: Anthropic::Models::Model,
+    #   role: enum: Anthropic::Models::Message::Role,
+    #   stop_reason: enum: Anthropic::Models::Message::StopReason,
     #   **_
     # }
     # ```

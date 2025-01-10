@@ -7,7 +7,7 @@ module Anthropic
     # ```ruby
     # authentication_error => {
     #   message: String,
-    #   type: Anthropic::Models::AuthenticationError_::Type
+    #   type: enum: Anthropic::Models::AuthenticationError_::Type
     # }
     # ```
     class AuthenticationError_ < Anthropic::BaseModel

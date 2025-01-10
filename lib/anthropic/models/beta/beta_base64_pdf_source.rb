@@ -8,8 +8,8 @@ module Anthropic
       # ```ruby
       # beta_base64_pdf_source => {
       #   data: String,
-      #   media_type: Anthropic::Models::Beta::BetaBase64PDFSource::MediaType,
-      #   type: Anthropic::Models::Beta::BetaBase64PDFSource::Type
+      #   media_type: enum: Anthropic::Models::Beta::BetaBase64PDFSource::MediaType,
+      #   type: enum: Anthropic::Models::Beta::BetaBase64PDFSource::Type
       # }
       # ```
       class BetaBase64PDFSource < Anthropic::BaseModel
