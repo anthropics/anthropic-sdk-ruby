@@ -9,7 +9,7 @@ module Anthropic
     #   id: String,
     #   input: Anthropic::Unknown,
     #   name: String,
-    #   type: Anthropic::Models::ToolUseBlock::Type
+    #   type: enum: Anthropic::Models::ToolUseBlock::Type
     # }
     # ```
     class ToolUseBlock < Anthropic::BaseModel

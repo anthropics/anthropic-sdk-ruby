@@ -6,7 +6,7 @@ module Anthropic
     #
     # ```ruby
     # cache_control_ephemeral => {
-    #   type: Anthropic::Models::CacheControlEphemeral::Type
+    #   type: enum: Anthropic::Models::CacheControlEphemeral::Type
     # }
     # ```
     class CacheControlEphemeral < Anthropic::BaseModel

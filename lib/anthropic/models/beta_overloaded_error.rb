@@ -7,7 +7,7 @@ module Anthropic
     # ```ruby
     # beta_overloaded_error => {
     #   message: String,
-    #   type: Anthropic::Models::BetaOverloadedError::Type
+    #   type: enum: Anthropic::Models::BetaOverloadedError::Type
     # }
     # ```
     class BetaOverloadedError < Anthropic::BaseModel

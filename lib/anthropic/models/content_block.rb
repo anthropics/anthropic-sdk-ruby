@@ -6,7 +6,7 @@ module Anthropic
     #
     # ```ruby
     # case content_block
-    # in {type: "text", text: String, type: Anthropic::Models::TextBlock::Type}
+    # in {type: "text", text: String, type: enum: Anthropic::Models::TextBlock::Type}
     #   # Anthropic::Models::TextBlock ...
     # in {type: "tool_use", id: String, input: Anthropic::Unknown, name: String}
     #   # Anthropic::Models::ToolUseBlock ...

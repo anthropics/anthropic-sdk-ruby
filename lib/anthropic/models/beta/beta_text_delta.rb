@@ -8,7 +8,7 @@ module Anthropic
       # ```ruby
       # beta_text_delta => {
       #   text: String,
-      #   type: Anthropic::Models::Beta::BetaTextDelta::Type
+      #   type: enum: Anthropic::Models::Beta::BetaTextDelta::Type
       # }
       # ```
       class BetaTextDelta < Anthropic::BaseModel

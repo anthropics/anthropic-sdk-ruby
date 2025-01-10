@@ -7,8 +7,8 @@ module Anthropic
       #
       # ```ruby
       # beta_message_param => {
-      #   content: Anthropic::Models::Beta::BetaMessageParam::Content,
-      #   role: Anthropic::Models::Beta::BetaMessageParam::Role
+      #   content: union: Anthropic::Models::Beta::BetaMessageParam::Content,
+      #   role: enum: Anthropic::Models::Beta::BetaMessageParam::Role
       # }
       # ```
       class BetaMessageParam < Anthropic::BaseModel

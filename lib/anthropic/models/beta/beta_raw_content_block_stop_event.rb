@@ -8,7 +8,7 @@ module Anthropic
       # ```ruby
       # beta_raw_content_block_stop_event => {
       #   index: Integer,
-      #   type: Anthropic::Models::Beta::BetaRawContentBlockStopEvent::Type
+      #   type: enum: Anthropic::Models::Beta::BetaRawContentBlockStopEvent::Type
       # }
       # ```
       class BetaRawContentBlockStopEvent < Anthropic::BaseModel

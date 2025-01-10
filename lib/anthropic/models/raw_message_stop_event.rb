@@ -6,7 +6,7 @@ module Anthropic
     #
     # ```ruby
     # raw_message_stop_event => {
-    #   type: Anthropic::Models::RawMessageStopEvent::Type
+    #   type: enum: Anthropic::Models::RawMessageStopEvent::Type
     # }
     # ```
     class RawMessageStopEvent < Anthropic::BaseModel

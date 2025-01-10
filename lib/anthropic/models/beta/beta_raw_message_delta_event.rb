@@ -8,7 +8,7 @@ module Anthropic
       # ```ruby
       # beta_raw_message_delta_event => {
       #   delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta,
-      #   type: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Type,
+      #   type: enum: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Type,
       #   usage: Anthropic::Models::Beta::BetaMessageDeltaUsage
       # }
       # ```
@@ -61,7 +61,7 @@ module Anthropic
         #
         # ```ruby
         # delta => {
-        #   stop_reason: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason,
+        #   stop_reason: enum: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason,
         #   stop_sequence: String
         # }
         # ```

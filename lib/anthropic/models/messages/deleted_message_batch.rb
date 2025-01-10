@@ -8,7 +8,7 @@ module Anthropic
       # ```ruby
       # deleted_message_batch => {
       #   id: String,
-      #   type: Anthropic::Models::Messages::DeletedMessageBatch::Type
+      #   type: enum: Anthropic::Models::Messages::DeletedMessageBatch::Type
       # }
       # ```
       class DeletedMessageBatch < Anthropic::BaseModel

@@ -7,7 +7,7 @@ module Anthropic
     # ```ruby
     # beta_api_error => {
     #   message: String,
-    #   type: Anthropic::Models::BetaAPIError::Type
+    #   type: enum: Anthropic::Models::BetaAPIError::Type
     # }
     # ```
     class BetaAPIError < Anthropic::BaseModel

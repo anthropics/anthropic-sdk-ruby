@@ -7,7 +7,7 @@ module Anthropic
     # ```ruby
     # beta_rate_limit_error => {
     #   message: String,
-    #   type: Anthropic::Models::BetaRateLimitError::Type
+    #   type: enum: Anthropic::Models::BetaRateLimitError::Type
     # }
     # ```
     class BetaRateLimitError < Anthropic::BaseModel

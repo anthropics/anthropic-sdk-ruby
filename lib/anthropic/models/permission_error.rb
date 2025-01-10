@@ -7,7 +7,7 @@ module Anthropic
     # ```ruby
     # permission_error => {
     #   message: String,
-    #   type: Anthropic::Models::PermissionError::Type
+    #   type: enum: Anthropic::Models::PermissionError::Type
     # }
     # ```
     class PermissionError < Anthropic::BaseModel

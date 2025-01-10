@@ -10,7 +10,7 @@ module Anthropic
       #   id: String,
       #   created_at: Time,
       #   display_name: String,
-      #   type: Anthropic::Models::Beta::BetaModelInfo::Type
+      #   type: enum: Anthropic::Models::Beta::BetaModelInfo::Type
       # }
       # ```
       class BetaModelInfo < Anthropic::BaseModel

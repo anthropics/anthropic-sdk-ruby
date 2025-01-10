@@ -64,7 +64,7 @@ module Anthropic
           # params => {
           #   max_tokens: Integer,
           #   messages: -> { Anthropic::ArrayOf[Anthropic::Models::MessageParam] === _1 },
-          #   model: Anthropic::Models::Model,
+          #   model: union: Anthropic::Models::Model,
           #   metadata: Anthropic::Models::Metadata,
           #   stop_sequences: -> { Anthropic::ArrayOf[String] === _1 },
           #   **_

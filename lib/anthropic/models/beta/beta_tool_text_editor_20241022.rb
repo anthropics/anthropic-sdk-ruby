@@ -7,8 +7,8 @@ module Anthropic
       #
       # ```ruby
       # beta_tool_text_editor20241022 => {
-      #   name: Anthropic::Models::Beta::BetaToolTextEditor20241022::Name,
-      #   type: Anthropic::Models::Beta::BetaToolTextEditor20241022::Type,
+      #   name: enum: Anthropic::Models::Beta::BetaToolTextEditor20241022::Name,
+      #   type: enum: Anthropic::Models::Beta::BetaToolTextEditor20241022::Type,
       #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
       # }
       # ```

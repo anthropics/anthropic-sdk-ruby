@@ -7,7 +7,7 @@ module Anthropic
     # ```ruby
     # text_delta => {
     #   text: String,
-    #   type: Anthropic::Models::TextDelta::Type
+    #   type: enum: Anthropic::Models::TextDelta::Type
     # }
     # ```
     class TextDelta < Anthropic::BaseModel

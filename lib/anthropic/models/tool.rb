@@ -69,7 +69,7 @@ module Anthropic
       #
       # ```ruby
       # input_schema => {
-      #   type: Anthropic::Models::Tool::InputSchema::Type,
+      #   type: enum: Anthropic::Models::Tool::InputSchema::Type,
       #   properties: Anthropic::Unknown
       # }
       # ```

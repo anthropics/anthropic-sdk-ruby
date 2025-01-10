@@ -9,8 +9,8 @@ module Anthropic
       # beta_tool_computer_use20241022 => {
       #   display_height_px: Integer,
       #   display_width_px: Integer,
-      #   name: Anthropic::Models::Beta::BetaToolComputerUse20241022::Name,
-      #   type: Anthropic::Models::Beta::BetaToolComputerUse20241022::Type,
+      #   name: enum: Anthropic::Models::Beta::BetaToolComputerUse20241022::Name,
+      #   type: enum: Anthropic::Models::Beta::BetaToolComputerUse20241022::Type,
       #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
       # }
       # ```

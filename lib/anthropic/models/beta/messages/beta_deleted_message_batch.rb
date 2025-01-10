@@ -9,7 +9,7 @@ module Anthropic
         # ```ruby
         # beta_deleted_message_batch => {
         #   id: String,
-        #   type: Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch::Type
+        #   type: enum: Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch::Type
         # }
         # ```
         class BetaDeletedMessageBatch < Anthropic::BaseModel

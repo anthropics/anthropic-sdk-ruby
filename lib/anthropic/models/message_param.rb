@@ -6,8 +6,8 @@ module Anthropic
     #
     # ```ruby
     # message_param => {
-    #   content: Anthropic::Models::MessageParam::Content,
-    #   role: Anthropic::Models::MessageParam::Role
+    #   content: union: Anthropic::Models::MessageParam::Content,
+    #   role: enum: Anthropic::Models::MessageParam::Role
     # }
     # ```
     class MessageParam < Anthropic::BaseModel

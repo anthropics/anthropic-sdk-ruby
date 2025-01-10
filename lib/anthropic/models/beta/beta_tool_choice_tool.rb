@@ -8,7 +8,7 @@ module Anthropic
       # ```ruby
       # beta_tool_choice_tool => {
       #   name: String,
-      #   type: Anthropic::Models::Beta::BetaToolChoiceTool::Type,
+      #   type: enum: Anthropic::Models::Beta::BetaToolChoiceTool::Type,
       #   disable_parallel_tool_use: Anthropic::BooleanModel
       # }
       # ```

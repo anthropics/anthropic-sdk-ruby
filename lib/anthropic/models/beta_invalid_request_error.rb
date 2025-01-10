@@ -7,7 +7,7 @@ module Anthropic
     # ```ruby
     # beta_invalid_request_error => {
     #   message: String,
-    #   type: Anthropic::Models::BetaInvalidRequestError::Type
+    #   type: enum: Anthropic::Models::BetaInvalidRequestError::Type
     # }
     # ```
     class BetaInvalidRequestError < Anthropic::BaseModel

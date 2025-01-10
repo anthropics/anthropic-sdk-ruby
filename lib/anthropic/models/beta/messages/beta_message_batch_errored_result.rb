@@ -9,7 +9,7 @@ module Anthropic
         # ```ruby
         # beta_message_batch_errored_result => {
         #   error: Anthropic::Models::BetaErrorResponse,
-        #   type: Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult::Type
+        #   type: enum: Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult::Type
         # }
         # ```
         class BetaMessageBatchErroredResult < Anthropic::BaseModel

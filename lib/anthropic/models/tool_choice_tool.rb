@@ -7,7 +7,7 @@ module Anthropic
     # ```ruby
     # tool_choice_tool => {
     #   name: String,
-    #   type: Anthropic::Models::ToolChoiceTool::Type,
+    #   type: enum: Anthropic::Models::ToolChoiceTool::Type,
     #   disable_parallel_tool_use: Anthropic::BooleanModel
     # }
     # ```

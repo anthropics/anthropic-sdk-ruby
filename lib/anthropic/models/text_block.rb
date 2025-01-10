@@ -7,7 +7,7 @@ module Anthropic
     # ```ruby
     # text_block => {
     #   text: String,
-    #   type: Anthropic::Models::TextBlock::Type
+    #   type: enum: Anthropic::Models::TextBlock::Type
     # }
     # ```
     class TextBlock < Anthropic::BaseModel

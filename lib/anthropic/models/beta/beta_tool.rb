@@ -11,7 +11,7 @@ module Anthropic
       #   name: String,
       #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral,
       #   description: String,
-      #   type: Anthropic::Models::Beta::BetaTool::Type
+      #   type: enum: Anthropic::Models::Beta::BetaTool::Type
       # }
       # ```
       class BetaTool < Anthropic::BaseModel
@@ -78,7 +78,7 @@ module Anthropic
         #
         # ```ruby
         # input_schema => {
-        #   type: Anthropic::Models::Beta::BetaTool::InputSchema::Type,
+        #   type: enum: Anthropic::Models::Beta::BetaTool::InputSchema::Type,
         #   properties: Anthropic::Unknown
         # }
         # ```

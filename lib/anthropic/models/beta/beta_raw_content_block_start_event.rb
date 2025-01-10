@@ -7,9 +7,9 @@ module Anthropic
       #
       # ```ruby
       # beta_raw_content_block_start_event => {
-      #   content_block: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::ContentBlock,
+      #   content_block: union: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::ContentBlock,
       #   index: Integer,
-      #   type: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::Type
+      #   type: enum: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::Type
       # }
       # ```
       class BetaRawContentBlockStartEvent < Anthropic::BaseModel
@@ -42,7 +42,7 @@ module Anthropic
         #
         # ```ruby
         # case content_block
-        # in {type: "text", text: String, type: Anthropic::Models::Beta::BetaTextBlock::Type}
+        # in {type: "text", text: String, type: enum: Anthropic::Models::Beta::BetaTextBlock::Type}
         #   # Anthropic::Models::Beta::BetaTextBlock ...
         # in {type: "tool_use", id: String, input: Anthropic::Unknown, name: String}
         #   # Anthropic::Models::Beta::BetaToolUseBlock ...

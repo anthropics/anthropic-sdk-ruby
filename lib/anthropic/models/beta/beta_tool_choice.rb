@@ -9,11 +9,11 @@ module Anthropic
       #
       # ```ruby
       # case beta_tool_choice
-      # in {type: "auto", type: Anthropic::Models::Beta::BetaToolChoiceAuto::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
+      # in {type: "auto", type: enum: Anthropic::Models::Beta::BetaToolChoiceAuto::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
       #   # Anthropic::Models::Beta::BetaToolChoiceAuto ...
-      # in {type: "any", type: Anthropic::Models::Beta::BetaToolChoiceAny::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
+      # in {type: "any", type: enum: Anthropic::Models::Beta::BetaToolChoiceAny::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
       #   # Anthropic::Models::Beta::BetaToolChoiceAny ...
-      # in {type: "tool", name: String, type: Anthropic::Models::Beta::BetaToolChoiceTool::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
+      # in {type: "tool", name: String, type: enum: Anthropic::Models::Beta::BetaToolChoiceTool::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
       #   # Anthropic::Models::Beta::BetaToolChoiceTool ...
       # end
       # ```
