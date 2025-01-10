@@ -51,7 +51,7 @@ module Anthropic
       # ```
       #
       #   @return [Array<Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock>]
-      required :content, Anthropic::ArrayOf[union: -> { Anthropic::Models::ContentBlock }]
+      required :content, -> { Anthropic::ArrayOf[union: Anthropic::Models::ContentBlock] }
 
       # @!attribute model
       #   The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.

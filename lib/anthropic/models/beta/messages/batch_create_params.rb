@@ -10,14 +10,14 @@ module Anthropic
           #
           #   @return [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>]
           required :requests,
-                   Anthropic::ArrayOf[-> { Anthropic::Models::Beta::Messages::BatchCreateParams::Request }]
+                   -> { Anthropic::ArrayOf[Anthropic::Models::Beta::Messages::BatchCreateParams::Request] }
 
           # @!attribute betas
           #   Optional header to specify the beta version(s) you want to use.
           #
           #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>]
           optional :betas,
-                   Anthropic::ArrayOf[union: -> { Anthropic::Models::AnthropicBeta }],
+                   -> { Anthropic::ArrayOf[union: Anthropic::Models::AnthropicBeta] },
                    api_name: :"anthropic-beta"
 
           # @!parse
@@ -160,7 +160,7 @@ module Anthropic
               # Note that if you want to include a [system prompt](https://docs.anthropic.com/en/docs/system-prompts), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
               #
               #   @return [Array<Anthropic::Models::Beta::BetaMessageParam>]
-              required :messages, Anthropic::ArrayOf[-> { Anthropic::Models::Beta::BetaMessageParam }]
+              required :messages, -> { Anthropic::ArrayOf[Anthropic::Models::Beta::BetaMessageParam] }
 
               # @!attribute model
               #   The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
@@ -282,7 +282,7 @@ module Anthropic
               # See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
               #
               #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>]
-              optional :tools, Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaToolUnion }]
+              optional :tools, -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaToolUnion] }
 
               # @!attribute top_k
               #   Only sample from the top K options for each subsequent token.

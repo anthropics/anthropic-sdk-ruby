@@ -52,7 +52,7 @@ module Anthropic
         # ```
         #
         #   @return [Array<Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock>]
-        required :content, Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlock }]
+        required :content, -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlock] }
 
         # @!attribute model
         #   The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
