@@ -3,6 +3,7 @@
 # Standard libraries.
 require "cgi"
 require "date"
+require "erb"
 require "json"
 require "net/http"
 require "securerandom"

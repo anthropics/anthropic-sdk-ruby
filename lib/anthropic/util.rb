@@ -281,9 +281,7 @@ module Anthropic
       in []
         ""
       in [String, *interpolations]
-        encoded = interpolations.map do |val|
-          CGI.escape(val.to_s).tr("+", "%20")
-        end
+        encoded = interpolations.map { |v| ERB::Util.url_encode(v) }
         path.first % encoded
       end
     end
