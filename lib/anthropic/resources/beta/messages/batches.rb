@@ -5,12 +5,6 @@ module Anthropic
     class Beta
       class Messages
         class Batches
-          # @param client [Anthropic::Client]
-          #
-          def initialize(client:)
-            @client = client
-          end
-
           # Send a batch of Message creation requests.
           #
           #   The Message Batches API can be used to process multiple Messages API requests at
@@ -175,6 +169,12 @@ module Anthropic
               model: Anthropic::Unknown
             }
             @client.request(req, opts)
+          end
+
+          # @param client [Anthropic::Client]
+          #
+          def initialize(client:)
+            @client = client
           end
         end
       end
