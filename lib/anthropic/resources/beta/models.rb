@@ -4,12 +4,6 @@ module Anthropic
   module Resources
     class Beta
       class Models
-        # @param client [Anthropic::Client]
-        #
-        def initialize(client:)
-          @client = client
-        end
-
         # Get a specific model.
         #
         #   The Models API response can be used to determine information about a specific
@@ -61,6 +55,12 @@ module Anthropic
             model: Anthropic::Models::Beta::BetaModelInfo
           }
           @client.request(req, opts)
+        end
+
+        # @param client [Anthropic::Client]
+        #
+        def initialize(client:)
+          @client = client
         end
       end
     end

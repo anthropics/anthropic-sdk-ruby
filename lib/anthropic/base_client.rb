@@ -27,8 +27,8 @@ module Anthropic
       base_url:,
       timeout: 0.0,
       max_retries: 0,
-      initial_retry_delay: 0,
-      max_retry_delay: 0,
+      initial_retry_delay: 0.0,
+      max_retry_delay: 0.0,
       headers: {},
       idempotency_header: nil
     )

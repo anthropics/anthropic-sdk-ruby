@@ -3,12 +3,6 @@
 module Anthropic
   module Resources
     class Completions
-      # @param client [Anthropic::Client]
-      #
-      def initialize(client:)
-        @client = client
-      end
-
       # [Legacy] Create a Text Completion.
       #
       #   The Text Completions API is a legacy API. We recommend using the
@@ -95,6 +89,12 @@ module Anthropic
           model: Anthropic::Models::Completion
         }
         @client.request(req, opts)
+      end
+
+      # @param client [Anthropic::Client]
+      #
+      def initialize(client:)
+        @client = client
       end
     end
   end

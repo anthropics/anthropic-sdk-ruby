@@ -7,13 +7,6 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::Messages::Batches]
         attr_reader :batches
 
-        # @param client [Anthropic::Client]
-        #
-        def initialize(client:)
-          @client = client
-          @batches = Anthropic::Resources::Beta::Messages::Batches.new(client: client)
-        end
-
         # Send a structured list of input messages with text and/or image content, and the
         #   model will generate the next message in the conversation.
         #
@@ -452,6 +445,13 @@ module Anthropic
             model: Anthropic::Models::Beta::BetaMessageTokensCount
           }
           @client.request(req, opts)
+        end
+
+        # @param client [Anthropic::Client]
+        #
+        def initialize(client:)
+          @client = client
+          @batches = Anthropic::Resources::Beta::Messages::Batches.new(client: client)
         end
       end
     end
