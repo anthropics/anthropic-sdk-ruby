@@ -38,6 +38,7 @@ GEM
       parser (>= 3.3.1.0)
     ruby-progressbar (1.13.0)
     unicode-display_width (2.5.0)
+    webrick (1.9.1)
     yard (0.9.37)
 
 PLATFORMS
@@ -50,6 +51,7 @@ DEPENDENCIES
   minitest-hooks
   rake
   rubocop
+  webrick
   yard
 
 BUNDLED WITH

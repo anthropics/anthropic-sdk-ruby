@@ -5,7 +5,6 @@ module Anthropic
     # How the model should use the provided tools. The model can use a specific tool, any available tool, or decide by itself.
     #
     # @example
-    #
     # ```ruby
     # case tool_choice
     # in {type: "auto", type: enum: Anthropic::Models::ToolChoiceAuto::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
@@ -18,7 +17,6 @@ module Anthropic
     # ```
     #
     # @example
-    #
     # ```ruby
     # case tool_choice
     # in Anthropic::Models::ToolChoiceAuto

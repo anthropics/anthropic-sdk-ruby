@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @example
-      #
       # ```ruby
       # beta_raw_message_stop_event => {
       #   type: enum: Anthropic::Models::Beta::BetaRawMessageStopEvent::Type
@@ -24,7 +23,6 @@ module Anthropic
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         # @example
-        #
         # ```ruby
         # case type
         # in :message_stop

@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @example
-      #
       # ```ruby
       # case beta_tool_union
       # in Anthropic::Models::Beta::BetaTool

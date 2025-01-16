@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # tool_result_block_param => {
     #   tool_use_id: String,
@@ -51,7 +50,6 @@ module Anthropic
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
       # @example
-      #
       # ```ruby
       # case type
       # in :tool_result
@@ -65,7 +63,6 @@ module Anthropic
       end
 
       # @example
-      #
       # ```ruby
       # case content
       # in String
@@ -84,7 +81,6 @@ module Anthropic
         variant Anthropic::Models::ToolResultBlockParam::Content::ContentArray
 
         # @example
-        #
         # ```ruby
         # case content
         # in {type: "text", text: String, type: enum: Anthropic::Models::TextBlockParam::Type, cache_control: Anthropic::Models::CacheControlEphemeral}
@@ -95,7 +91,6 @@ module Anthropic
         # ```
         #
         # @example
-        #
         # ```ruby
         # case content
         # in Anthropic::Models::TextBlockParam

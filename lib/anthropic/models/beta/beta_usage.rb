@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @example
-      #
       # ```ruby
       # beta_usage => {
       #   cache_creation_input_tokens: Integer,

@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # completion => {
     #   id: String,
@@ -84,7 +83,6 @@ module Anthropic
       # For Text Completions, this is always `"completion"`.
       #
       # @example
-      #
       # ```ruby
       # case type
       # in :completion

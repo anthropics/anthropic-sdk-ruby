@@ -5,7 +5,6 @@ module Anthropic
     module Beta
       module Messages
         # @example
-        #
         # ```ruby
         # beta_message_batch_expired_result => {
         #   type: enum: Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult::Type
@@ -25,7 +24,6 @@ module Anthropic
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
           # @example
-          #
           # ```ruby
           # case type
           # in :expired

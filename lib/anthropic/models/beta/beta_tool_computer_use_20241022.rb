@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @example
-      #
       # ```ruby
       # beta_tool_computer_use20241022 => {
       #   display_height_px: Integer,
@@ -75,7 +74,6 @@ module Anthropic
         # This is how the tool will be called by the model and in tool_use blocks.
         #
         # @example
-        #
         # ```ruby
         # case name
         # in :computer
@@ -89,7 +87,6 @@ module Anthropic
         end
 
         # @example
-        #
         # ```ruby
         # case type
         # in :computer_20241022

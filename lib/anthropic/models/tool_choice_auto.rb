@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # tool_choice_auto => {
     #   type: enum: Anthropic::Models::ToolChoiceAuto::Type,
@@ -39,7 +38,6 @@ module Anthropic
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
       # @example
-      #
       # ```ruby
       # case type
       # in :auto

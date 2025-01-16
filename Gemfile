@@ -10,5 +10,6 @@ group :development do
   gem "minitest-hooks"
   gem "rake"
   gem "rubocop"
+  gem "webrick"
   gem "yard"
 end

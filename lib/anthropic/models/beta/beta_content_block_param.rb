@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @example
-      #
       # ```ruby
       # case beta_content_block_param
       # in {type: "text", text: String, type: enum: Anthropic::Models::Beta::BetaTextBlockParam::Type, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
@@ -21,7 +20,6 @@ module Anthropic
       # ```
       #
       # @example
-      #
       # ```ruby
       # case beta_content_block_param
       # in Anthropic::Models::Beta::BetaTextBlockParam

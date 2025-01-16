@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @example
-      #
       # ```ruby
       # beta_base64_pdf_block => {
       #   source: Anthropic::Models::Beta::BetaBase64PDFSource,
@@ -38,7 +37,6 @@ module Anthropic
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         # @example
-        #
         # ```ruby
         # case type
         # in :document

@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # message_delta_usage => {
     #   output_tokens: Integer

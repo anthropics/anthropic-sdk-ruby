@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @example
-      #
       # ```ruby
       # case beta_content_block
       # in {type: "text", text: String, type: enum: Anthropic::Models::Beta::BetaTextBlock::Type}
@@ -15,7 +14,6 @@ module Anthropic
       # ```
       #
       # @example
-      #
       # ```ruby
       # case beta_content_block
       # in Anthropic::Models::Beta::BetaTextBlock

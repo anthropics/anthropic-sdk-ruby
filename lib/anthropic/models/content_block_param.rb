@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # case content_block_param
     # in {type: "text", text: String, type: enum: Anthropic::Models::TextBlockParam::Type, cache_control: Anthropic::Models::CacheControlEphemeral}
@@ -20,7 +19,6 @@ module Anthropic
     # ```
     #
     # @example
-    #
     # ```ruby
     # case content_block_param
     # in Anthropic::Models::TextBlockParam

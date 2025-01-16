@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # usage => {
     #   cache_creation_input_tokens: Integer,

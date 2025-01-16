@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # case content_block
     # in {type: "text", text: String, type: enum: Anthropic::Models::TextBlock::Type}
@@ -14,7 +13,6 @@ module Anthropic
     # ```
     #
     # @example
-    #
     # ```ruby
     # case content_block
     # in Anthropic::Models::TextBlock

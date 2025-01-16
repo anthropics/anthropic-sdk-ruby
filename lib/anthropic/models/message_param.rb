@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # message_param => {
     #   content: union: Anthropic::Models::MessageParam::Content,
@@ -30,7 +29,6 @@ module Anthropic
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
       # @example
-      #
       # ```ruby
       # case content
       # in String
@@ -48,7 +46,6 @@ module Anthropic
       end
 
       # @example
-      #
       # ```ruby
       # case role
       # in :user

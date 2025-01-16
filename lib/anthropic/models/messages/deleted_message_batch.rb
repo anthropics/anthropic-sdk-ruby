@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Messages
       # @example
-      #
       # ```ruby
       # deleted_message_batch => {
       #   id: String,
@@ -42,7 +41,6 @@ module Anthropic
         # For Message Batches, this is always `"message_batch_deleted"`.
         #
         # @example
-        #
         # ```ruby
         # case type
         # in :message_batch_deleted

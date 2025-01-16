@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # message => {
     #   id: String,
@@ -198,7 +197,6 @@ module Anthropic
       # This will always be `"assistant"`.
       #
       # @example
-      #
       # ```ruby
       # case role
       # in :assistant
@@ -222,7 +220,6 @@ module Anthropic
       # In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
       #
       # @example
-      #
       # ```ruby
       # case stop_reason
       # in :end_turn
@@ -249,7 +246,6 @@ module Anthropic
       # For Messages, this is always `"message"`.
       #
       # @example
-      #
       # ```ruby
       # case type
       # in :message

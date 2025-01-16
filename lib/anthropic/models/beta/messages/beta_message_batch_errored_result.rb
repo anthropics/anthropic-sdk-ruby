@@ -5,7 +5,6 @@ module Anthropic
     module Beta
       module Messages
         # @example
-        #
         # ```ruby
         # beta_message_batch_errored_result => {
         #   error: Anthropic::Models::BetaErrorResponse,
@@ -32,7 +31,6 @@ module Anthropic
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
           # @example
-          #
           # ```ruby
           # case type
           # in :errored

@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Messages
       # @example
-      #
       # ```ruby
       # message_batch_request_counts => {
       #   canceled: Integer,

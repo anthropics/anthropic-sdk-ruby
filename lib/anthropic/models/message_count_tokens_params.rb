@@ -335,7 +335,6 @@ module Anthropic
       # A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
       #
       # @example
-      #
       # ```ruby
       # case system
       # in String

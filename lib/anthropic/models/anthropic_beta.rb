@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # case anthropic_beta
     # in String
@@ -18,7 +17,6 @@ module Anthropic
       variant enum: -> { Anthropic::Models::AnthropicBeta::UnionMember1 }
 
       # @example
-      #
       # ```ruby
       # case union_member1
       # in :"message-batches-2024-09-24"
