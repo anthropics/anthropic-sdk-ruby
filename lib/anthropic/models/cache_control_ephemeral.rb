@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # cache_control_ephemeral => {
     #   type: enum: Anthropic::Models::CacheControlEphemeral::Type
@@ -23,7 +22,6 @@ module Anthropic
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
       # @example
-      #
       # ```ruby
       # case type
       # in :ephemeral

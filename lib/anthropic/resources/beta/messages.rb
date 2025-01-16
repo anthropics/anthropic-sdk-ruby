@@ -13,7 +13,7 @@ module Anthropic
         #   The Messages API can be used for either single queries or stateless multi-turn
         #   conversations.
         #
-        # @param params [Anthropic::Models::Beta::MessageCreateParams, Hash{Symbol => Object}] Attributes to send in this request.
+        # @param params [Anthropic::Models::Beta::MessageCreateParams, Hash{Symbol=>Object}] Attributes to send in this request.
         #
         #   @option params [Integer] :max_tokens Body param: The maximum number of tokens to generate before stopping.
         #
@@ -239,7 +239,7 @@ module Anthropic
         #
         #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Header param: Optional header to specify the beta version(s) you want to use.
         #
-        # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+        # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
         #
         # @return [Anthropic::Models::Beta::BetaMessage]
         #
@@ -259,7 +259,7 @@ module Anthropic
         #   The Token Count API can be used to count the number of tokens in a Message,
         #   including tools, images, and documents, without creating it.
         #
-        # @param params [Anthropic::Models::Beta::MessageCountTokensParams, Hash{Symbol => Object}] Attributes to send in this request.
+        # @param params [Anthropic::Models::Beta::MessageCountTokensParams, Hash{Symbol=>Object}] Attributes to send in this request.
         #
         #   @option params [Array<Anthropic::Models::Beta::BetaMessageParam>] :messages Body param: Input messages.
         #
@@ -432,7 +432,7 @@ module Anthropic
         #
         #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Header param: Optional header to specify the beta version(s) you want to use.
         #
-        # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+        # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
         #
         # @return [Anthropic::Models::Beta::BetaMessageTokensCount]
         #

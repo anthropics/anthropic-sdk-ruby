@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @example
-      #
       # ```ruby
       # beta_message_tokens_count => {
       #   input_tokens: Integer

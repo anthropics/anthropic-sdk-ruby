@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Messages
       # @example
-      #
       # ```ruby
       # message_batch => {
       #   id: String,
@@ -148,7 +147,6 @@ module Anthropic
         # Processing status of the Message Batch.
         #
         # @example
-        #
         # ```ruby
         # case processing_status
         # in :in_progress
@@ -172,7 +170,6 @@ module Anthropic
         # For Message Batches, this is always `"message_batch"`.
         #
         # @example
-        #
         # ```ruby
         # case type
         # in :message_batch

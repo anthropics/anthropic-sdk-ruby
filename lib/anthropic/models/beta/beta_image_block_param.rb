@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @example
-      #
       # ```ruby
       # beta_image_block_param => {
       #   source: Anthropic::Models::Beta::BetaImageBlockParam::Source,
@@ -38,7 +37,6 @@ module Anthropic
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         # @example
-        #
         # ```ruby
         # source => {
         #   data: String,
@@ -72,7 +70,6 @@ module Anthropic
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
           # @example
-          #
           # ```ruby
           # case media_type
           # in :"image/jpeg"
@@ -95,7 +92,6 @@ module Anthropic
           end
 
           # @example
-          #
           # ```ruby
           # case type
           # in :base64
@@ -110,7 +106,6 @@ module Anthropic
         end
 
         # @example
-        #
         # ```ruby
         # case type
         # in :image

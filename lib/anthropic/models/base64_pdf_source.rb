@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # base64_pdf_source => {
     #   data: String,
@@ -37,7 +36,6 @@ module Anthropic
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
       # @example
-      #
       # ```ruby
       # case media_type
       # in :"application/pdf"
@@ -51,7 +49,6 @@ module Anthropic
       end
 
       # @example
-      #
       # ```ruby
       # case type
       # in :base64

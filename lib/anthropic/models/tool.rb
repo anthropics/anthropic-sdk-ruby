@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # tool => {
     #   input_schema: Anthropic::Models::Tool::InputSchema,
@@ -66,7 +65,6 @@ module Anthropic
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
       # @example
-      #
       # ```ruby
       # input_schema => {
       #   type: enum: Anthropic::Models::Tool::InputSchema::Type,
@@ -98,7 +96,6 @@ module Anthropic
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         # @example
-        #
         # ```ruby
         # case type
         # in :object

@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # permission_error => {
     #   message: String,
@@ -30,7 +29,6 @@ module Anthropic
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
       # @example
-      #
       # ```ruby
       # case type
       # in :permission_error

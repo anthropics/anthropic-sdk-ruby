@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # raw_content_block_start_event => {
     #   content_block: union: Anthropic::Models::RawContentBlockStartEvent::ContentBlock,
@@ -37,7 +36,6 @@ module Anthropic
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
       # @example
-      #
       # ```ruby
       # case content_block
       # in {type: "text", text: String, type: enum: Anthropic::Models::TextBlock::Type}
@@ -48,7 +46,6 @@ module Anthropic
       # ```
       #
       # @example
-      #
       # ```ruby
       # case content_block
       # in Anthropic::Models::TextBlock
@@ -66,7 +63,6 @@ module Anthropic
       end
 
       # @example
-      #
       # ```ruby
       # case type
       # in :content_block_start

@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @example
-      #
       # ```ruby
       # case beta_raw_message_stream_event
       # in {type: "message_start", message: Anthropic::Models::Beta::BetaMessage, type: enum: Anthropic::Models::Beta::BetaRawMessageStartEvent::Type}
@@ -23,7 +22,6 @@ module Anthropic
       # ```
       #
       # @example
-      #
       # ```ruby
       # case beta_raw_message_stream_event
       # in Anthropic::Models::Beta::BetaRawMessageStartEvent

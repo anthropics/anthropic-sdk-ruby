@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @example
-      #
       # ```ruby
       # beta_raw_content_block_start_event => {
       #   content_block: union: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::ContentBlock,
@@ -39,7 +38,6 @@ module Anthropic
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         # @example
-        #
         # ```ruby
         # case content_block
         # in {type: "text", text: String, type: enum: Anthropic::Models::Beta::BetaTextBlock::Type}
@@ -50,7 +48,6 @@ module Anthropic
         # ```
         #
         # @example
-        #
         # ```ruby
         # case content_block
         # in Anthropic::Models::Beta::BetaTextBlock
@@ -68,7 +65,6 @@ module Anthropic
         end
 
         # @example
-        #
         # ```ruby
         # case type
         # in :content_block_start

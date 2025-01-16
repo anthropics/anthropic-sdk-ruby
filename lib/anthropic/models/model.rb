@@ -5,7 +5,6 @@ module Anthropic
     # The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
     #
     # @example
-    #
     # ```ruby
     # case model
     # in String
@@ -23,7 +22,6 @@ module Anthropic
       # The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
       #
       # @example
-      #
       # ```ruby
       # case union_member1
       # in :"claude-3-5-haiku-latest"

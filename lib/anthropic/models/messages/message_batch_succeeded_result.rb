@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Messages
       # @example
-      #
       # ```ruby
       # message_batch_succeeded_result => {
       #   message: Anthropic::Models::Message,
@@ -31,7 +30,6 @@ module Anthropic
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         # @example
-        #
         # ```ruby
         # case type
         # in :succeeded

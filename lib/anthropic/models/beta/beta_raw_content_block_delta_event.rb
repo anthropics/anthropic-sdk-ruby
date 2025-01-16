@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @example
-      #
       # ```ruby
       # beta_raw_content_block_delta_event => {
       #   delta: union: Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Delta,
@@ -38,7 +37,6 @@ module Anthropic
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         # @example
-        #
         # ```ruby
         # case delta
         # in Anthropic::Models::Beta::BetaTextDelta
@@ -54,7 +52,6 @@ module Anthropic
         end
 
         # @example
-        #
         # ```ruby
         # case type
         # in :content_block_delta

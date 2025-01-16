@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @example
-      #
       # ```ruby
       # beta_tool_result_block_param => {
       #   tool_use_id: String,
@@ -52,7 +51,6 @@ module Anthropic
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         # @example
-        #
         # ```ruby
         # case type
         # in :tool_result
@@ -66,7 +64,6 @@ module Anthropic
         end
 
         # @example
-        #
         # ```ruby
         # case content
         # in String
@@ -85,7 +82,6 @@ module Anthropic
           variant Anthropic::Models::Beta::BetaToolResultBlockParam::Content::ContentArray
 
           # @example
-          #
           # ```ruby
           # case content
           # in {type: "text", text: String, type: enum: Anthropic::Models::Beta::BetaTextBlockParam::Type, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
@@ -96,7 +92,6 @@ module Anthropic
           # ```
           #
           # @example
-          #
           # ```ruby
           # case content
           # in Anthropic::Models::Beta::BetaTextBlockParam

@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @example
-      #
       # ```ruby
       # beta_tool => {
       #   input_schema: Anthropic::Models::Beta::BetaTool::InputSchema,
@@ -75,7 +74,6 @@ module Anthropic
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         # @example
-        #
         # ```ruby
         # input_schema => {
         #   type: enum: Anthropic::Models::Beta::BetaTool::InputSchema::Type,
@@ -107,7 +105,6 @@ module Anthropic
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
           # @example
-          #
           # ```ruby
           # case type
           # in :object
@@ -122,7 +119,6 @@ module Anthropic
         end
 
         # @example
-        #
         # ```ruby
         # case type
         # in :custom

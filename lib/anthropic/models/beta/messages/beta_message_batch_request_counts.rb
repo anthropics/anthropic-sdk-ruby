@@ -5,7 +5,6 @@ module Anthropic
     module Beta
       module Messages
         # @example
-        #
         # ```ruby
         # beta_message_batch_request_counts => {
         #   canceled: Integer,

@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @example
-      #
       # ```ruby
       # beta_model_info => {
       #   id: String,
@@ -61,7 +60,6 @@ module Anthropic
         # For Models, this is always `"model"`.
         #
         # @example
-        #
         # ```ruby
         # case type
         # in :model

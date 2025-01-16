@@ -12,7 +12,7 @@ module Anthropic
       #   The Messages API can be used for either single queries or stateless multi-turn
       #   conversations.
       #
-      # @param params [Anthropic::Models::MessageCreateParams, Hash{Symbol => Object}] Attributes to send in this request.
+      # @param params [Anthropic::Models::MessageCreateParams, Hash{Symbol=>Object}] Attributes to send in this request.
       #
       #   @option params [Integer] :max_tokens The maximum number of tokens to generate before stopping.
       #
@@ -235,7 +235,7 @@ module Anthropic
       #     Recommended for advanced use cases only. You usually only need to use
       #     `temperature`.
       #
-      # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+      # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
       #
       # @return [Anthropic::Models::Message]
       #
@@ -255,7 +255,7 @@ module Anthropic
       #   The Token Count API can be used to count the number of tokens in a Message,
       #   including tools, images, and documents, without creating it.
       #
-      # @param params [Anthropic::Models::MessageCountTokensParams, Hash{Symbol => Object}] Attributes to send in this request.
+      # @param params [Anthropic::Models::MessageCountTokensParams, Hash{Symbol=>Object}] Attributes to send in this request.
       #
       #   @option params [Array<Anthropic::Models::MessageParam>] :messages Input messages.
       #
@@ -426,7 +426,7 @@ module Anthropic
       #
       #     See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
       #
-      # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+      # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
       #
       # @return [Anthropic::Models::MessageTokensCount]
       #

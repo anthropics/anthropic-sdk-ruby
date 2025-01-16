@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # document_block_param => {
     #   source: Anthropic::Models::Base64PDFSource,
@@ -37,7 +36,6 @@ module Anthropic
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
       # @example
-      #
       # ```ruby
       # case type
       # in :document

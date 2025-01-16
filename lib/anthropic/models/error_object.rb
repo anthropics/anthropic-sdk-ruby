@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # case error_object
     # in {type: "invalid_request_error", message: String, type: enum: Anthropic::Models::InvalidRequestError::Type}
@@ -28,7 +27,6 @@ module Anthropic
     # ```
     #
     # @example
-    #
     # ```ruby
     # case error_object
     # in Anthropic::Models::InvalidRequestError

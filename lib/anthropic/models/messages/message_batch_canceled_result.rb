@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Messages
       # @example
-      #
       # ```ruby
       # message_batch_canceled_result => {
       #   type: enum: Anthropic::Models::Messages::MessageBatchCanceledResult::Type
@@ -24,7 +23,6 @@ module Anthropic
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         # @example
-        #
         # ```ruby
         # case type
         # in :canceled

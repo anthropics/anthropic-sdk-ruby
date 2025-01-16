@@ -11,7 +11,7 @@ module Anthropic
         #
         # @param model_id [String] Model identifier or alias.
         #
-        # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+        # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
         #
         # @return [Anthropic::Models::Beta::BetaModelInfo]
         #
@@ -29,7 +29,7 @@ module Anthropic
         #   The Models API response can be used to determine which models are available for
         #   use in the API. More recently released models are listed first.
         #
-        # @param params [Anthropic::Models::Beta::ModelListParams, Hash{Symbol => Object}] Attributes to send in this request.
+        # @param params [Anthropic::Models::Beta::ModelListParams, Hash{Symbol=>Object}] Attributes to send in this request.
         #
         #   @option params [String] :after_id ID of the object to use as a cursor for pagination. When provided, returns the
         #     page of results immediately after this object.
@@ -41,7 +41,7 @@ module Anthropic
         #
         #     Defaults to `20`. Ranges from `1` to `1000`.
         #
-        # @param opts [Hash{Symbol => Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+        # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
         #
         # @return [Anthropic::Page<Anthropic::Models::Beta::BetaModelInfo>]
         #

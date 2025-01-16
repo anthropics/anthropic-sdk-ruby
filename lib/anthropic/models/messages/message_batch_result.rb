@@ -8,7 +8,6 @@ module Anthropic
       # Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
       #
       # @example
-      #
       # ```ruby
       # case message_batch_result
       # in {type: "succeeded", message: Anthropic::Models::Message, type: enum: Anthropic::Models::Messages::MessageBatchSucceededResult::Type}
@@ -23,7 +22,6 @@ module Anthropic
       # ```
       #
       # @example
-      #
       # ```ruby
       # case message_batch_result
       # in Anthropic::Models::Messages::MessageBatchSucceededResult

@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @example
-      #
       # ```ruby
       # beta_tool_choice_any => {
       #   type: enum: Anthropic::Models::Beta::BetaToolChoiceAny::Type,
@@ -40,7 +39,6 @@ module Anthropic
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         # @example
-        #
         # ```ruby
         # case type
         # in :any

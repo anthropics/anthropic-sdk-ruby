@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # case raw_message_stream_event
     # in {type: "message_start", message: Anthropic::Models::Message, type: enum: Anthropic::Models::RawMessageStartEvent::Type}
@@ -22,7 +21,6 @@ module Anthropic
     # ```
     #
     # @example
-    #
     # ```ruby
     # case raw_message_stream_event
     # in Anthropic::Models::RawMessageStartEvent

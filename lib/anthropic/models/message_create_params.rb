@@ -467,7 +467,6 @@ module Anthropic
       # See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for details.
       #
       # @example
-      #
       # ```ruby
       # case stream
       # in true
@@ -485,7 +484,6 @@ module Anthropic
       # A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
       #
       # @example
-      #
       # ```ruby
       # case system
       # in String

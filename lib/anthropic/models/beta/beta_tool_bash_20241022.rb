@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @example
-      #
       # ```ruby
       # beta_tool_bash20241022 => {
       #   name: enum: Anthropic::Models::Beta::BetaToolBash20241022::Name,
@@ -49,7 +48,6 @@ module Anthropic
         # This is how the tool will be called by the model and in tool_use blocks.
         #
         # @example
-        #
         # ```ruby
         # case name
         # in :bash
@@ -63,7 +61,6 @@ module Anthropic
         end
 
         # @example
-        #
         # ```ruby
         # case type
         # in :bash_20241022

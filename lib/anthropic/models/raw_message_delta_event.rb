@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # raw_message_delta_event => {
     #   delta: Anthropic::Models::RawMessageDeltaEvent::Delta,
@@ -57,7 +56,6 @@ module Anthropic
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
       # @example
-      #
       # ```ruby
       # delta => {
       #   stop_reason: enum: Anthropic::Models::RawMessageDeltaEvent::Delta::StopReason,
@@ -84,7 +82,6 @@ module Anthropic
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         # @example
-        #
         # ```ruby
         # case stop_reason
         # in :end_turn
@@ -108,7 +105,6 @@ module Anthropic
       end
 
       # @example
-      #
       # ```ruby
       # case type
       # in :message_delta

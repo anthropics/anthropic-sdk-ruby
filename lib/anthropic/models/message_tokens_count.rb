@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @example
-    #
     # ```ruby
     # message_tokens_count => {
     #   input_tokens: Integer

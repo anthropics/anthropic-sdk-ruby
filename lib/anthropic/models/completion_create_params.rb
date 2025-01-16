@@ -168,7 +168,6 @@ module Anthropic
       # See [streaming](https://docs.anthropic.com/en/api/streaming) for details.
       #
       # @example
-      #
       # ```ruby
       # case stream
       # in true

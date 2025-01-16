@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @example
-      #
       # ```ruby
       # beta_message_param => {
       #   content: union: Anthropic::Models::Beta::BetaMessageParam::Content,
@@ -31,7 +30,6 @@ module Anthropic
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         # @example
-        #
         # ```ruby
         # case content
         # in String
@@ -51,7 +49,6 @@ module Anthropic
         end
 
         # @example
-        #
         # ```ruby
         # case role
         # in :user
