@@ -31,15 +31,19 @@ module Anthropic
       # @!attribute cache_control
       #
       #   @return [Anthropic::Models::CacheControlEphemeral, nil]
-      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }
+      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
 
-      # @!attribute description
+      # @!attribute [r] description
       #   Description of what this tool does.
       #
       # Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
       #
-      #   @return [String]
+      #   @return [String, nil]
       optional :description, String
+
+      # @!parse
+      #   # @return [String]
+      #   attr_writer :description
 
       # @!parse
       #   # @param input_schema [Anthropic::Models::Tool::InputSchema] [JSON schema](https://json-schema.org/) for this tool's input.
@@ -80,7 +84,7 @@ module Anthropic
         # @!attribute properties
         #
         #   @return [Object, nil]
-        optional :properties, Anthropic::Unknown
+        optional :properties, Anthropic::Unknown, nil?: true
 
         # @!parse
         #   # [JSON schema](https://json-schema.org/) for this tool's input.

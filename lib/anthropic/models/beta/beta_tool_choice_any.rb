@@ -16,13 +16,17 @@ module Anthropic
         #   @return [Symbol, Anthropic::Models::Beta::BetaToolChoiceAny::Type]
         required :type, enum: -> { Anthropic::Models::Beta::BetaToolChoiceAny::Type }
 
-        # @!attribute disable_parallel_tool_use
+        # @!attribute [r] disable_parallel_tool_use
         #   Whether to disable parallel tool use.
         #
         # Defaults to `false`. If set to `true`, the model will output exactly one tool use.
         #
-        #   @return [Boolean]
+        #   @return [Boolean, nil]
         optional :disable_parallel_tool_use, Anthropic::BooleanModel
+
+        # @!parse
+        #   # @return [Boolean]
+        #   attr_writer :disable_parallel_tool_use
 
         # @!parse
         #   # The model will use any available tools.

@@ -28,7 +28,7 @@ module Anthropic
         # @!attribute cache_control
         #
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
+        optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!parse
         #   # @param name [String] Name of the tool.

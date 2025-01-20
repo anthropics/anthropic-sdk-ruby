@@ -5,13 +5,17 @@ module Anthropic
     module Beta
       module Messages
         class BatchResultsParams < Anthropic::BaseModel
-          # @!attribute betas
+          # @!attribute [r] betas
           #   Optional header to specify the beta version(s) you want to use.
           #
           #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>]
           optional :betas,
                    -> { Anthropic::ArrayOf[union: Anthropic::Models::AnthropicBeta] },
                    api_name: :"anthropic-beta"
+
+          # @!parse
+          #   # @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>]
+          #   attr_writer :betas
 
           # @!parse
           #   # @param betas [Array<String>] Optional header to specify the beta version(s) you want to use.

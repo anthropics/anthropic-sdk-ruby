@@ -4,25 +4,37 @@ module Anthropic
   module Models
     module Messages
       class BatchListParams < Anthropic::BaseModel
-        # @!attribute after_id
+        # @!attribute [r] after_id
         #   ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
         #
-        #   @return [String]
+        #   @return [String, nil]
         optional :after_id, String
 
-        # @!attribute before_id
+        # @!parse
+        #   # @return [String]
+        #   attr_writer :after_id
+
+        # @!attribute [r] before_id
         #   ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
         #
-        #   @return [String]
+        #   @return [String, nil]
         optional :before_id, String
 
-        # @!attribute limit
+        # @!parse
+        #   # @return [String]
+        #   attr_writer :before_id
+
+        # @!attribute [r] limit
         #   Number of items to return per page.
         #
         # Defaults to `20`. Ranges from `1` to `1000`.
         #
-        #   @return [Integer]
+        #   @return [Integer, nil]
         optional :limit, Integer
+
+        # @!parse
+        #   # @return [Integer]
+        #   attr_writer :limit
 
         # @!parse
         #   # @param after_id [String] ID of the object to use as a cursor for pagination. When provided, returns the
