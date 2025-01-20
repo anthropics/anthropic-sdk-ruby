@@ -85,6 +85,20 @@ Style/CaseEquality:
 Style/RaiseArgs:
   Enabled: false
 
+# Sorbet files should be excluded from some style considerations
+Style/AccessorGrouping:
+  Exclude:
+    - '**/*.rbi'
+Style/EmptyMethod:
+  Exclude:
+    - '**/*.rbi'
+Style/RedundantInitialize:
+  Exclude:
+    - '**/*.rbi'
+Lint/MissingSuper:
+  Exclude:
+    - '**/*.rbi'
+
 # Literally nothing wrong with `symbol_1`
 Naming/VariableNumber:
   Enabled: false

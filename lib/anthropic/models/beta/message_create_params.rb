@@ -333,6 +333,11 @@ module Anthropic
         #   #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #   #   details and options.
         #   #
+        #   # @param stream [Boolean] Whether to incrementally stream the response using server-sent events.
+        #   #
+        #   #   See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
+        #   #   details.
+        #   #
         #   # @param metadata [Anthropic::Models::Beta::BetaMetadata] An object describing metadata about the request.
         #   #
         #   # @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
@@ -344,11 +349,6 @@ module Anthropic
         #   #   text, you can use the `stop_sequences` parameter. If the model encounters one of
         #   #   the custom sequences, the response `stop_reason` value will be `"stop_sequence"`
         #   #   and the response `stop_sequence` value will contain the matched stop sequence.
-        #   #
-        #   # @param stream [Boolean] Whether to incrementally stream the response using server-sent events.
-        #   #
-        #   #   See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
-        #   #   details.
         #   #
         #   # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] System prompt.
         #   #
@@ -461,9 +461,9 @@ module Anthropic
         #     max_tokens:,
         #     messages:,
         #     model:,
+        #     stream:,
         #     metadata: nil,
         #     stop_sequences: nil,
-        #     stream:,
         #     system_: nil,
         #     temperature: nil,
         #     tool_choice: nil,

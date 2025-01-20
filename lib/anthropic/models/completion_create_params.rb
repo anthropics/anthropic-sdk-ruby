@@ -107,6 +107,10 @@ module Anthropic
       #   #   [prompt design](https://docs.anthropic.com/en/docs/intro-to-prompting) for more
       #   #   details.
       #   #
+      #   # @param stream [Boolean] Whether to incrementally stream the response using server-sent events.
+      #   #
+      #   #   See [streaming](https://docs.anthropic.com/en/api/streaming) for details.
+      #   #
       #   # @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
       #   #
       #   # @param stop_sequences [Array<String>] Sequences that will cause the model to stop generating.
@@ -114,10 +118,6 @@ module Anthropic
       #   #   Our models stop on `"\n\nHuman:"`, and may include additional built-in stop
       #   #   sequences in the future. By providing the stop_sequences parameter, you may
       #   #   include additional strings that will cause the model to stop generating.
-      #   #
-      #   # @param stream [Boolean] Whether to incrementally stream the response using server-sent events.
-      #   #
-      #   #   See [streaming](https://docs.anthropic.com/en/api/streaming) for details.
       #   #
       #   # @param temperature [Float] Amount of randomness injected into the response.
       #   #
@@ -150,9 +150,9 @@ module Anthropic
       #     max_tokens_to_sample:,
       #     model:,
       #     prompt:,
+      #     stream:,
       #     metadata: nil,
       #     stop_sequences: nil,
-      #     stream:,
       #     temperature: nil,
       #     top_k: nil,
       #     top_p: nil,
