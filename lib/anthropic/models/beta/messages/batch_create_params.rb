@@ -12,13 +12,17 @@ module Anthropic
           required :requests,
                    -> { Anthropic::ArrayOf[Anthropic::Models::Beta::Messages::BatchCreateParams::Request] }
 
-          # @!attribute betas
+          # @!attribute [r] betas
           #   Optional header to specify the beta version(s) you want to use.
           #
           #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>]
           optional :betas,
                    -> { Anthropic::ArrayOf[union: Anthropic::Models::AnthropicBeta] },
                    api_name: :"anthropic-beta"
+
+          # @!parse
+          #   # @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>]
+          #   attr_writer :betas
 
           # @!parse
           #   # @param requests [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>] List of requests for prompt completion. Each is an individual request to create
@@ -166,13 +170,17 @@ module Anthropic
               #   @return [String, Symbol, Anthropic::Models::Model::UnionMember1]
               required :model, union: -> { Anthropic::Models::Model }
 
-              # @!attribute metadata
+              # @!attribute [r] metadata
               #   An object describing metadata about the request.
               #
-              #   @return [Anthropic::Models::Beta::BetaMetadata]
+              #   @return [Anthropic::Models::Beta::BetaMetadata, nil]
               optional :metadata, -> { Anthropic::Models::Beta::BetaMetadata }
 
-              # @!attribute stop_sequences
+              # @!parse
+              #   # @return [Anthropic::Models::Beta::BetaMetadata]
+              #   attr_writer :metadata
+
+              # @!attribute [r] stop_sequences
               #   Custom text sequences that will cause the model to stop generating.
               #
               # Our models will normally stop when they have naturally completed their turn, which will result in a response `stop_reason` of `"end_turn"`.
@@ -182,43 +190,63 @@ module Anthropic
               #   @return [Array<String>]
               optional :stop_sequences, Anthropic::ArrayOf[String]
 
-              # @!attribute stream
+              # @!parse
+              #   # @return [Array<String>]
+              #   attr_writer :stop_sequences
+
+              # @!attribute [r] stream
               #   Whether to incrementally stream the response using server-sent events.
               #
               # See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for details.
               #
-              #   @return [Boolean]
+              #   @return [Boolean, nil]
               optional :stream, Anthropic::BooleanModel
 
-              # @!attribute system_
+              # @!parse
+              #   # @return [Boolean]
+              #   attr_writer :stream
+
+              # @!attribute [r] system_
               #   System prompt.
               #
               # A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
               #
-              #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
+              #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>, nil]
               optional :system_,
                        union: -> {
                          Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::System
                        },
                        api_name: :system
 
-              # @!attribute temperature
+              # @!parse
+              #   # @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
+              #   attr_writer :system_
+
+              # @!attribute [r] temperature
               #   Amount of randomness injected into the response.
               #
               # Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0` for analytical / multiple choice, and closer to `1.0` for creative and generative tasks.
               #
               # Note that even with `temperature` of `0.0`, the results will not be fully deterministic.
               #
-              #   @return [Float]
+              #   @return [Float, nil]
               optional :temperature, Float
 
-              # @!attribute tool_choice
+              # @!parse
+              #   # @return [Float]
+              #   attr_writer :temperature
+
+              # @!attribute [r] tool_choice
               #   How the model should use the provided tools. The model can use a specific tool, any available tool, or decide by itself.
               #
-              #   @return [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool]
+              #   @return [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, nil]
               optional :tool_choice, union: -> { Anthropic::Models::Beta::BetaToolChoice }
 
-              # @!attribute tools
+              # @!parse
+              #   # @return [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool]
+              #   attr_writer :tool_choice
+
+              # @!attribute [r] tools
               #   Definitions of tools that the model may use.
               #
               # If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
@@ -282,25 +310,37 @@ module Anthropic
               #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>]
               optional :tools, -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaToolUnion] }
 
-              # @!attribute top_k
+              # @!parse
+              #   # @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>]
+              #   attr_writer :tools
+
+              # @!attribute [r] top_k
               #   Only sample from the top K options for each subsequent token.
               #
               # Used to remove "long tail" low probability responses. [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
               #
               # Recommended for advanced use cases only. You usually only need to use `temperature`.
               #
-              #   @return [Integer]
+              #   @return [Integer, nil]
               optional :top_k, Integer
 
-              # @!attribute top_p
+              # @!parse
+              #   # @return [Integer]
+              #   attr_writer :top_k
+
+              # @!attribute [r] top_p
               #   Use nucleus sampling.
               #
               # In nucleus sampling, we compute the cumulative distribution over all the options for each subsequent token in decreasing probability order and cut it off once it reaches a particular probability specified by `top_p`. You should either alter `temperature` or `top_p`, but not both.
               #
               # Recommended for advanced use cases only. You usually only need to use `temperature`.
               #
-              #   @return [Float]
+              #   @return [Float, nil]
               optional :top_p, Float
+
+              # @!parse
+              #   # @return [Float]
+              #   attr_writer :top_p
 
               # @!parse
               #   # Messages API creation parameters for the individual request.

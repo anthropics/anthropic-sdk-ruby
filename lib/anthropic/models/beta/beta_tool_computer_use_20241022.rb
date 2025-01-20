@@ -42,13 +42,13 @@ module Anthropic
         # @!attribute cache_control
         #
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
+        optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!attribute display_number
         #   The X11 display number (e.g. 0, 1) for the display.
         #
         #   @return [Integer, nil]
-        optional :display_number, Integer
+        optional :display_number, Integer, nil?: true
 
         # @!parse
         #   # @param display_height_px [Integer] The height of the display in pixels.

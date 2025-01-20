@@ -41,7 +41,7 @@ module Anthropic
       # * `"max_tokens"`: we exceeded `max_tokens_to_sample` or the model's maximum
       #
       #   @return [String, nil]
-      required :stop_reason, String
+      required :stop_reason, String, nil?: true
 
       # @!attribute type
       #   Object type.

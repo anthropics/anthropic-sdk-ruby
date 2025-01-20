@@ -24,7 +24,7 @@ module Anthropic
       # @!attribute cache_control
       #
       #   @return [Anthropic::Models::CacheControlEphemeral, nil]
-      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }
+      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
 
       # @!parse
       #   # @param text [String]

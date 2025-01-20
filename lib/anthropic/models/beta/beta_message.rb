@@ -79,7 +79,7 @@ module Anthropic
         # In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaMessage::StopReason, nil]
-        required :stop_reason, enum: -> { Anthropic::Models::Beta::BetaMessage::StopReason }
+        required :stop_reason, enum: -> { Anthropic::Models::Beta::BetaMessage::StopReason }, nil?: true
 
         # @!attribute stop_sequence
         #   Which custom stop sequence was generated, if any.
@@ -87,7 +87,7 @@ module Anthropic
         # This value will be a non-null string if one of your custom stop sequences was generated.
         #
         #   @return [String, nil]
-        required :stop_sequence, String
+        required :stop_sequence, String, nil?: true
 
         # @!attribute type
         #   Object type.

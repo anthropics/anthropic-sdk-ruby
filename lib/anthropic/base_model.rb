@@ -7,6 +7,22 @@ module Anthropic
   #
   module Converter
     # @private
+    # @param spec [Proc, Class, Anthropic::Converter, Hash]
+    #
+    # @return [Proc]
+    #
+    def self.type_info(spec)
+      case spec
+      in Hash
+        type_info(spec.values_at(:enum, :union).compact.first)
+      in Proc
+        spec
+      in Class | Anthropic::Converter
+        -> { spec }
+      end
+    end
+
+    # @private
     #
     # Based on `target`, transform `value` into `target`, to the extent possible:
     #
@@ -550,26 +566,8 @@ module Anthropic
       end
     end
 
-    # @param item_type [Proc, Object, nil]
-    # @param enum [Proc, nil]
-    # @param union [Proc, nil]
-    #
-    def initialize(item_type = nil, enum: nil, union: nil)
-      @items_type_fn =
-        case [enum, union, item_type]
-        in [Proc, nil, nil]
-          enum
-        in [Class | Anthropic::Converter, nil, nil]
-          -> { enum }
-        in [nil, Proc, nil]
-          union
-        in [nil, Class | Anthropic::Converter, nil]
-          -> { union }
-        in [nil, nil, Proc]
-          item_type
-        in [nil, nil, Class | Anthropic::Converter]
-          -> { item_type }
-        end
+    def initialize(spec = {})
+      @items_type_fn = Anthropic::Converter.type_info(spec)
     end
   end
 
@@ -683,26 +681,8 @@ module Anthropic
       end
     end
 
-    # @param item_type [Proc, Object, nil]
-    # @param enum [Proc, nil]
-    # @param union [Proc, nil]
-    #
-    def initialize(item_type = nil, enum: nil, union: nil)
-      @items_type_fn =
-        case [enum, union, item_type]
-        in [Proc, nil, nil]
-          enum
-        in [Class | Anthropic::Converter, nil, nil]
-          -> { enum }
-        in [nil, Proc, nil]
-          union
-        in [nil, Class | Anthropic::Converter, nil]
-          -> { union }
-        in [nil, nil, Proc]
-          item_type
-        in [nil, nil, Class | Anthropic::Converter]
-          -> { item_type }
-        end
+    def initialize(spec = {})
+      @items_type_fn = Anthropic::Converter.type_info(spec)
     end
   end
 
@@ -821,13 +801,18 @@ module Anthropic
     #
     # @param name_sym [Symbol]
     # @param required [Boolean]
-    # @param api_name [Symbol, nil]
-    # @param type_info [Proc, Object]
     #
     # @return [void]
     #
-    private_class_method def self.add_field(name_sym, required:, api_name:, type_info:)
-      type_fn = type_info.is_a?(Proc) ? type_info : -> { type_info }
+    private_class_method def self.add_field(name_sym, required:, type_info:, spec:)
+      type_fn, api_name =
+        case type_info
+        in Proc | Class | Anthropic::Converter
+          [Anthropic::Converter.type_info({**spec, union: type_info}), spec[:api_name]]
+        in Hash
+          [Anthropic::Converter.type_info(type_info), type_info[:api_name]]
+        end
+
       key = api_name || name_sym
 
       setter = "#{name_sym}="
@@ -852,14 +837,14 @@ module Anthropic
 
     # @private
     #
-    private_class_method def self.required(name_sym, type_info = nil, api_name: nil, enum: nil, union: nil)
-      add_field(name_sym, required: true, api_name: api_name, type_info: enum || union || type_info)
+    private_class_method def self.required(name_sym, type_info = nil, spec = {})
+      add_field(name_sym, required: true, type_info: type_info, spec: spec)
     end
 
     # @private
     #
-    private_class_method def self.optional(name_sym, type_info = nil, api_name: nil, enum: nil, union: nil)
-      add_field(name_sym, required: false, api_name: api_name, type_info: enum || union || type_info)
+    private_class_method def self.optional(name_sym, type_info = nil, spec = {})
+      add_field(name_sym, required: false, type_info: type_info, spec: spec)
     end
 
     # @private

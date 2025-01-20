@@ -26,17 +26,25 @@ module Anthropic
       # @!attribute cache_control
       #
       #   @return [Anthropic::Models::CacheControlEphemeral, nil]
-      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }
+      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
 
-      # @!attribute content
+      # @!attribute [r] content
       #
-      #   @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>]
+      #   @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>, nil]
       optional :content, union: -> { Anthropic::Models::ToolResultBlockParam::Content }
 
-      # @!attribute is_error
+      # @!parse
+      #   # @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>]
+      #   attr_writer :content
+
+      # @!attribute [r] is_error
       #
-      #   @return [Boolean]
+      #   @return [Boolean, nil]
       optional :is_error, Anthropic::BooleanModel
+
+      # @!parse
+      #   # @return [Boolean]
+      #   attr_writer :is_error
 
       # @!parse
       #   # @param tool_use_id [String]

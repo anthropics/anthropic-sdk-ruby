@@ -68,14 +68,13 @@ module Anthropic
           #
           #   @return [Symbol, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason, nil]
           required :stop_reason,
-                   enum: -> {
-                     Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason
-                   }
+                   enum: -> { Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason },
+                   nil?: true
 
           # @!attribute stop_sequence
           #
           #   @return [String, nil]
-          required :stop_sequence, String
+          required :stop_sequence, String, nil?: true
 
           # @!parse
           #   # @param stop_reason [String, nil]

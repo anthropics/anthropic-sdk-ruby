@@ -25,7 +25,7 @@ module Anthropic
         # @!attribute cache_control
         #
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }
+        optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!parse
         #   # @param source [Anthropic::Models::Beta::BetaBase64PDFSource]
