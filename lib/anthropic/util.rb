@@ -6,23 +6,23 @@ module Anthropic
   # @private
   #
   module Util
-    # @private
+    # Use this to indicate that a value should be explicitly removed from a data
+    #   structure when using `SDK_RubyModuleName::Util.deep_merge`.
     #
-    # Use this to indicate that a value should be explicitly removed from a data structure
-    # when using `Anthropic::Util.deep_merge`.
-    # E.g. merging `{a: 1}` and `{a: OMIT}` should produce `{}`, where merging `{a: 1}` and
-    # `{}` would produce `{a: 1}`.
-    #
+    #   e.g. merging `{a: 1}` and `{a: OMIT}` should produce `{}`, where merging
+    #   `{a: 1}` and `{}` would produce `{a: 1}`.
     OMIT = Object.new.freeze
 
     # @private
     #
-    # Recursively merge one hash with another.
-    # If the values at a given key are not both hashes, just take the new value.
+    # Recursively merge one hash with another. If the values at a given key are not
+    #   both hashes, just take the new value.
     #
-    # @param values [Array<Hash, Array, Symbol, String, Integer, Float, nil, Object>]
-    # @param sentinel [nil, Object] the value to return if no values are provided
-    # @param concat [true, false] whether to merge sequences by concatenation
+    # @param values [Array<Object>]
+    #
+    # @param sentinel [Object, nil] the value to return if no values are provided.
+    #
+    # @param concat [Boolean] whether to merge sequences by concatenation.
     #
     # @return [Object]
     #
@@ -39,9 +39,9 @@ module Anthropic
 
     # @private
     #
-    # @param lhs [Hash, Array, Symbol, String, Integer, Float, nil, Object]
-    # @param rhs [Hash, Array, Symbol, String, Integer, Float, nil, Object]
-    # @param concat [true, false]
+    # @param lhs [Object]
+    # @param rhs [Object]
+    # @param concat [Boolean]
     #
     # @return [Object]
     #
@@ -71,7 +71,7 @@ module Anthropic
     # @private
     #
     # @param exceptions [Array<Exception>]
-    # @param sentinel [nil, Object]
+    # @param sentinel [Object, nil]
     # @param blk [Proc]
     #
     # @return [Object, nil]
@@ -84,8 +84,8 @@ module Anthropic
 
     # @private
     #
-    # @param data [Hash, Array, Object]
-    # @param pick [Symbol, Integer, Array, nil]
+    # @param data [Hash{Symbol=>Object}, Array<Object>, Object]
+    # @param pick [Symbol, Integer, Array<Symbol, Integer>, nil]
     # @param default [Object, nil]
     # @param blk [Proc, nil]
     #
@@ -115,9 +115,9 @@ module Anthropic
 
     # @private
     #
-    # @param input [String, Numeric, Boolean, nil]
+    # @param input [Object]
     #
-    # @return [Integer, String, nil]
+    # @return [Integer, Object]
     #
     def self.coerce_integer(input)
       case input
@@ -132,9 +132,9 @@ module Anthropic
 
     # @private
     #
-    # @param input [String, Numeric, Boolean, nil]
+    # @param input [Object]
     #
-    # @return [Float, String, nil]
+    # @return [Float, Object]
     #
     def self.coerce_float(input)
       case input
@@ -149,9 +149,9 @@ module Anthropic
 
     # @private
     #
-    # @param input [String, Numeric, Boolean, nil]
+    # @param input [Object]
     #
-    # @return [Boolean, String, Numeric, nil]
+    # @return [Boolean, Object]
     #
     def self.coerce_boolean(input)
       case input.is_a?(String) ? input.downcase : input
@@ -168,7 +168,7 @@ module Anthropic
 
     # @private
     #
-    # @param input [String, Numeric, Boolean, nil]
+    # @param input [Object]
     #
     # @raise [ArgumentError]
     # @return [Boolean, nil]
@@ -184,29 +184,9 @@ module Anthropic
 
     # @private
     #
-    # @param query [Hash{String => String | Array<String>}]
+    # @param input [Object]
     #
-    # @return [String, nil]
-    #
-    def self.encode_query(query)
-      query.empty? ? nil : URI.encode_www_form(query)
-    end
-
-    # @private
-    #
-    # @param query [String, nil]
-    #
-    # @return [Hash{String => Array<String>}]
-    #
-    def self.decode_query(query)
-      CGI.parse(query.to_s)
-    end
-
-    # @private
-    #
-    # @param input [Hash, Object]
-    #
-    # @return [Hash, Object]
+    # @return [Hash{Object=>Object}, Object]
     #
     def self.coerce_hash(input)
       case input
@@ -219,21 +199,48 @@ module Anthropic
 
     # @private
     #
+    # @param query [String, nil]
+    #
+    # @return [Hash{String=>Array<String>}]
+    #
+    def self.decode_query(query)
+      CGI.parse(query.to_s)
+    end
+
+    # @private
+    #
+    # @param query [Hash{String=>Array<String>}]
+    #
+    # @return [String, nil]
+    #
+    def self.encode_query(query)
+      query.empty? ? nil : URI.encode_www_form(query)
+    end
+
+    # @private
+    #
     # @param url [URI::Generic, String]
     #
-    # @return [Hash{Symbol => Object}]
+    # @return [Hash{Symbol=>String, Integer, nil}]
     #
     def self.parse_uri(url)
       parsed = URI::Generic.component.zip(URI.split(url)).to_h
       {**parsed, query: decode_query(parsed.fetch(:query))}
     end
 
-    # @param parsed [Hash{Symbol => String}] -
+    # @private
+    #
+    # @param parsed [Hash{Symbol=>String, Integer, nil}] .
+    #
     #   @option parsed [String] :scheme
+    #
     #   @option parsed [String] :host
+    #
     #   @option parsed [Integer] :port
+    #
     #   @option parsed [String] :path
-    #   @option parsed [Hash{String => Array<String>}] :query
+    #
+    #   @option parsed [Hash{String=>Array<String>}] :query
     #
     # @return [URI::Generic]
     #
@@ -243,9 +250,31 @@ module Anthropic
 
     # @private
     #
-    # @param lhs [Hash{Symbol => String}]
-    # @param rhs [Hash{Symbol => String}] -
-    #   @option rhs [Hash{String => Array<String>}] :extra_query
+    # @param lhs [Hash{Symbol=>String, Integer, nil}] .
+    #
+    #   @option lhs [String] :scheme
+    #
+    #   @option lhs [String] :host
+    #
+    #   @option lhs [Integer] :port
+    #
+    #   @option lhs [String] :path
+    #
+    #   @option lhs [Hash{String=>Array<String>}] :query
+    #
+    # @param rhs [Hash{Symbol=>String, Integer, nil}] .
+    #
+    #   @option rhs [String] :scheme
+    #
+    #   @option rhs [String] :host
+    #
+    #   @option rhs [Integer] :port
+    #
+    #   @option rhs [String] :path
+    #
+    #   @option rhs [Hash{String=>Array<String>}] :query
+    #
+    #   @option rhs [Hash{String=>Array<String>}] :extra_query
     #
     # @return [URI::Generic]
     #
@@ -298,9 +327,9 @@ module Anthropic
 
     # @private
     #
-    # @param headers [Array<Hash{String => String, Integer, nil}>]
+    # @param headers [Array<Hash{String=>String, Integer, nil}>]
     #
-    # @return [Hash{String => String, nil}]
+    # @return [Hash{String=>String}]
     #
     def self.normalized_headers(*headers)
       {}.merge(*headers.compact).to_h do |key, val|
