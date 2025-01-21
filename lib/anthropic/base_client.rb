@@ -4,13 +4,12 @@ module Anthropic
   # @private
   #
   class BaseClient
-    MAX_REDIRECTS = 20 # from whatwg fetch spec
+    # from whatwg fetch spec
+    MAX_REDIRECTS = 20
 
     # @private
     #
-    # @!attribute requester
-    #
-    #   @return [Anthropic::PooledNetRequester]
+    # @return [Anthropic::PooledNetRequester]
     attr_accessor :requester
 
     # @private
@@ -20,7 +19,7 @@ module Anthropic
     # @param max_retries [Integer]
     # @param initial_retry_delay [Float]
     # @param max_retry_delay [Float]
-    # @param headers [Hash{String => String}]
+    # @param headers [Hash{String=>String, nil}]
     # @param idempotency_header [String, nil]
     #
     def initialize(
@@ -54,7 +53,7 @@ module Anthropic
 
     # @private
     #
-    # @return [Hash{String => String}]
+    # @return [Hash{String=>String}]
     #
     private def auth_headers = {}
 
@@ -66,10 +65,37 @@ module Anthropic
 
     # @private
     #
-    # @param req [Hash{Symbol => Object}]
-    # @param opts [Anthropic::RequestOptions, Hash{Symbol => Object}]
+    # @param req [req, Hash{Symbol=>Object}] .
     #
-    # @return [Hash{Symbol => Object}]
+    #   @option req [Symbol] :method
+    #
+    #   @option req [String, Array<String>, nil] :path
+    #
+    #   @option req [Hash{String=>Array<String>, String, nil}, nil] :query
+    #
+    #   @option req [Hash{String=>String, nil}, nil] :headers
+    #
+    #   @option req [Object, nil] :body
+    #
+    #   @option req [Class, nil] :page
+    #
+    #   @option req [Class, Anthropic::Converter] :model
+    #
+    # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] .
+    #
+    #   @option opts [String, nil] :idempotency_key
+    #
+    #   @option opts [Hash{String=>String}, nil] :extra_headers
+    #
+    #   @option opts [Hash{String=>Array<String>, String, nil}, nil] :extra_query
+    #
+    #   @option opts [Hash{Symbol=>Object}, nil] :extra_body
+    #
+    #   @option opts [Integer, nil] :max_retries
+    #
+    #   @option opts [Float, nil] :timeout
+    #
+    # @return [Hash{Symbol=>Object}]
     #
     private def build_request(req, opts)
       options = Anthropic::Util.deep_merge(req, opts)
@@ -118,31 +144,8 @@ module Anthropic
 
     # @private
     #
-    # @param response [Net::HTTPResponse]
-    # @param suppress_error [Boolean]
-    #
-    # @raise [JSON::ParserError]
-    # @return [Object]
-    #
-    private def parse_body(response, suppress_error: false)
-      case response.content_type
-      in "application/json"
-        begin
-          JSON.parse(response.body, symbolize_names: true)
-        rescue JSON::ParserError => e
-          raise e unless suppress_error
-          response.body
-        end
-      else
-        # TODO: parsing other response types
-        response.body
-      end
-    end
-
-    # @private
-    #
     # @param status [Integer]
-    # @param headers [Hash{String => String}]
+    # @param headers [Hash{String=>String}]
     #
     # @return [Boolean]
     #
@@ -165,13 +168,13 @@ module Anthropic
 
     # @private
     #
-    # @param headers [Hash{String => String}]
+    # @param headers [Hash{String=>String}]
     # @param retry_count [Integer]
     #
     # @return [Float]
     #
     private def retry_delay(headers, retry_count:)
-      # Note the `retry-after-ms` header may not be standard, but is a good idea and we'd like proactive support for it.
+      # Non-standard extension
       span = Float(headers["retry-after-ms"], exception: false)&.then { _1 / 1000 }
       return span if span
 
@@ -190,20 +193,26 @@ module Anthropic
 
     # @private
     #
-    # @param request [Hash{Symbol => Object}]
-    #   @option options [Symbol] :method
-    #   @option options [Hash{String => String}] :headers
-    #   @option options [String, nil] :body
+    # @param request [request, Hash{Symbol=>Object}] .
     #
-    # @param url [URI::Generic]
+    #   @option request [Symbol] :method
+    #
+    #   @option request [URI::Generic] :url
+    #
+    #   @option request [Hash{String=>String}] :headers
+    #
+    #   @option request [Object] :body
+    #
+    #   @option request [Float] :timeout
+    #
     # @param status [Integer]
+    #
     # @param location_header [String]
     #
-    # @raise [Anthropic::APIError]
-    # @return [Hash{Symbol => Object}]
+    # @return [Hash{Symbol=>Object}]
     #
-    private def follow_redirect(request, url:, status:, location_header:)
-      method, headers = request.fetch_values(:method, :headers)
+    private def follow_redirect(request, status:, location_header:)
+      method, url, headers = request.fetch_values(:method, :url, :headers)
       location =
         Anthropic::Util.suppress(ArgumentError) do
           URI.join(url, location_header)
@@ -248,28 +257,30 @@ module Anthropic
 
     # @private
     #
-    # @param request [Hash{Symbol => Object}]
-    #   @option options [Symbol] :method
-    #   @option options [URI::Generic] :url
-    #   @option options [Hash{String => String}] :headers
-    #   @option options [String, nil] :body
-    #   @option options [Float] :timeout
+    # @param request [request, Hash{Symbol=>Object}] .
+    #
+    #   @option request [Symbol] :method
+    #
+    #   @option request [URI::Generic] :url
+    #
+    #   @option request [Hash{String=>String}] :headers
+    #
+    #   @option request [Object] :body
+    #
+    #   @option request [Float] :timeout
     #
     # @param max_retries [Integer]
+    #
     # @param redirect_count [Integer]
+    #
     # @param retry_count [Integer]
+    #
     # @param send_retry_header [Boolean]
     #
     # @raise [Anthropic::APIError]
     # @return [Net::HTTPResponse]
     #
-    private def send_request(
-      request,
-      max_retries:,
-      redirect_count:,
-      retry_count:,
-      send_retry_header:
-    )
+    private def send_request(request, max_retries:, redirect_count:, retry_count:, send_retry_header:)
       url, headers = request.fetch_values(:url, :headers)
 
       if send_retry_header
@@ -290,7 +301,7 @@ module Anthropic
         message = "Failed to complete the request within #{MAX_REDIRECTS} redirects."
         raise Anthropic::APIConnectionError.new(url: url, message: message)
       in 300..399
-        request = follow_redirect(request, url: url, status: status, location_header: response["location"])
+        request = follow_redirect(request, status: status, location_header: response["location"])
         send_request(
           request,
           max_retries: max_retries,
@@ -326,10 +337,61 @@ module Anthropic
 
     # @private
     #
-    # @param req [Hash{Symbol => Object}]
-    # @param opts [Anthropic::RequestOptions, Hash{Symbol => Object}]
+    # @param response [Net::HTTPResponse]
+    # @param suppress_error [Boolean]
     #
-    # @raise [Anthropic::APIError]
+    # @raise [JSON::ParserError]
+    # @return [Object]
+    #
+    private def parse_body(response, suppress_error: false)
+      case response.content_type
+      in "application/json"
+        begin
+          JSON.parse(response.body, symbolize_names: true)
+        rescue JSON::ParserError => e
+          raise e unless suppress_error
+          response.body
+        end
+      else
+        # TODO: parsing other response types
+        response.body
+      end
+    end
+
+    # @private
+    #
+    # @param req [req, Hash{Symbol=>Object}] .
+    #
+    #   @option req [Symbol] :method
+    #
+    #   @option req [String, Array<String>, nil] :path
+    #
+    #   @option req [Hash{String=>Array<String>, String, nil}, nil] :query
+    #
+    #   @option req [Hash{String=>String, nil}, nil] :headers
+    #
+    #   @option req [Object, nil] :body
+    #
+    #   @option req [Class, nil] :page
+    #
+    #   @option req [Class, Anthropic::Converter] :model
+    #
+    # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] .
+    #
+    #   @option opts [String, nil] :idempotency_key
+    #
+    #   @option opts [Hash{String=>String}, nil] :extra_headers
+    #
+    #   @option opts [Hash{String=>Array<String>, String, nil}, nil] :extra_query
+    #
+    #   @option opts [Hash{Symbol=>Object}, nil] :extra_body
+    #
+    #   @option opts [Integer, nil] :max_retries
+    #
+    #   @option opts [Float, nil] :timeout
+    #
+    # @param response [nil]
+    #
     # @return [Object]
     #
     private def parse_response(req, opts, response)
@@ -347,10 +409,39 @@ module Anthropic
       end
     end
 
-    # Execute the request specified by req + opts. This is the method that all resource methods call into.
-    # Params req & opts are kept separate up until this point so that we can
-    # @param req [Hash{Symbol => Object}, Array<Object>]
-    # @param opts [Anthropic::RequestOptions, Hash{Symbol => Object}]
+    # Execute the request specified by req + opts. This is the method that all
+    #   resource methods call into. Params req & opts are kept separate up until this
+    #   point.
+    #
+    # @param req [req, Hash{Symbol=>Object}] .
+    #
+    #   @option req [Symbol] :method
+    #
+    #   @option req [String, Array<String>, nil] :path
+    #
+    #   @option req [Hash{String=>Array<String>, String, nil}, nil] :query
+    #
+    #   @option req [Hash{String=>String, nil}, nil] :headers
+    #
+    #   @option req [Object, nil] :body
+    #
+    #   @option req [Class, nil] :page
+    #
+    #   @option req [Class, Anthropic::Converter] :model
+    #
+    # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] .
+    #
+    #   @option opts [String, nil] :idempotency_key
+    #
+    #   @option opts [Hash{String=>String}, nil] :extra_headers
+    #
+    #   @option opts [Hash{String=>Array<String>, String, nil}, nil] :extra_query
+    #
+    #   @option opts [Hash{Symbol=>Object}, nil] :extra_body
+    #
+    #   @option opts [Integer, nil] :max_retries
+    #
+    #   @option opts [Float, nil] :timeout
     #
     # @raise [Anthropic::APIError]
     # @return [Object]
@@ -372,6 +463,7 @@ module Anthropic
     end
 
     # @return [String]
+    #
     def inspect
       base_url = Anthropic::Util.unparse_uri(@base_url)
       "#<#{self.class.name}:0x#{object_id.to_s(16)} base_url=#{base_url} max_retries=#{@max_retries} timeout=#{@timeout}>"

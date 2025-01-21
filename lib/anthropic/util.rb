@@ -209,7 +209,7 @@ module Anthropic
 
     # @private
     #
-    # @param query [Hash{String=>Array<String>}]
+    # @param query [Hash{String=>Array<String>, String, nil}]
     #
     # @return [String, nil]
     #

@@ -60,7 +60,7 @@ module Anthropic
     #   Extra query params to send with the request. These are `.merge`’d into any
     #   `query` given at the client level.
     #
-    #   @return [Hash{String=>Array<String>}]
+    #   @return [Hash{String=>Array<String>, String, nil}]
     option :extra_query
 
     # @!attribute extra_body
@@ -110,7 +110,7 @@ module Anthropic
     #   @option values [Hash{String=>String}] :extra_headers Extra headers to send with the request. These are `.merged`’d into any
     #     `extra_headers` given at the client level.
     #
-    #   @option values [Hash{String=>Array<String>}] :extra_query Extra query params to send with the request. These are `.merge`’d into any
+    #   @option values [Hash{String=>Array<String>, String, nil}] :extra_query Extra query params to send with the request. These are `.merge`’d into any
     #     `query` given at the client level.
     #
     #   @option values [Hash{Symbol=>Object}] :extra_body Extra data to send with the request. These are deep merged into any data
