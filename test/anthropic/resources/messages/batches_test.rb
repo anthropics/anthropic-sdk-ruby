@@ -67,12 +67,12 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Minitest::Test
   end
 
   def test_results
-    skip("skipped: test server currently has no support for method content-type")
+    skip("Prism doesn't support JSONL responses yet")
 
     response = @anthropic.messages.batches.results("message_batch_id")
 
     assert_pattern do
-      response => Anthropic::Unknown
+      response => Anthropic::Models::Messages::MessageBatchIndividualResponse
     end
   end
 end
