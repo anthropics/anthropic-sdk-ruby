@@ -158,15 +158,15 @@ module Anthropic
           #
           # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
           #
-          # @return [Object]
+          # @return [Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse]
           #
           def results(message_batch_id, params = {}, opts = {})
             Anthropic::Models::Beta::Messages::BatchResultsParams.dump(params)
             req = {
               method: :get,
               path: ["v1/messages/batches/%0s/results?beta=true", message_batch_id],
-              headers: {"Accept" => "application/binary"},
-              model: Anthropic::Unknown
+              headers: {"Accept" => "application/x-jsonl"},
+              model: Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse
             }
             @client.request(req, opts)
           end
