@@ -5,7 +5,7 @@ module Anthropic
     # @example
     # ```ruby
     # tool_choice_auto => {
-    #   type: enum: Anthropic::Models::ToolChoiceAuto::Type,
+    #   type: Anthropic::Models::ToolChoiceAuto::Type,
     #   disable_parallel_tool_use: Anthropic::BooleanModel
     # }
     # ```
@@ -18,7 +18,8 @@ module Anthropic
       # @!attribute [r] disable_parallel_tool_use
       #   Whether to disable parallel tool use.
       #
-      # Defaults to `false`. If set to `true`, the model will output at most one tool use.
+      #     Defaults to `false`. If set to `true`, the model will output at most one tool
+      #     use.
       #
       #   @return [Boolean, nil]
       optional :disable_parallel_tool_use, Anthropic::BooleanModel
@@ -31,11 +32,7 @@ module Anthropic
       #   # The model will automatically decide whether to use tools.
       #   #
       #   # @param type [String]
-      #   #
-      #   # @param disable_parallel_tool_use [Boolean] Whether to disable parallel tool use.
-      #   #
-      #   #   Defaults to `false`. If set to `true`, the model will output at most one tool
-      #   #   use.
+      #   # @param disable_parallel_tool_use [Boolean]
       #   #
       #   def initialize(type:, disable_parallel_tool_use: nil, **) = super
 

@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # beta_gateway_timeout_error => {
     #   message: String,
-    #   type: enum: Anthropic::Models::BetaGatewayTimeoutError::Type
+    #   type: Anthropic::Models::BetaGatewayTimeoutError::Type
     # }
     # ```
     class BetaGatewayTimeoutError < Anthropic::BaseModel

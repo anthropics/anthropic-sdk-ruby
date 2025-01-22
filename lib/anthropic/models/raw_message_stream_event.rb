@@ -5,17 +5,17 @@ module Anthropic
     # @example
     # ```ruby
     # case raw_message_stream_event
-    # in {type: "message_start", message: Anthropic::Models::Message, type: enum: Anthropic::Models::RawMessageStartEvent::Type}
+    # in {type: "message_start", message: Anthropic::Models::Message}
     #   # Anthropic::Models::RawMessageStartEvent ...
-    # in {type: "message_delta", delta: Anthropic::Models::RawMessageDeltaEvent::Delta, type: enum: Anthropic::Models::RawMessageDeltaEvent::Type, usage: Anthropic::Models::MessageDeltaUsage}
+    # in {type: "message_delta", delta: Anthropic::Models::RawMessageDeltaEvent::Delta, usage: Anthropic::Models::MessageDeltaUsage}
     #   # Anthropic::Models::RawMessageDeltaEvent ...
-    # in {type: "message_stop", type: enum: Anthropic::Models::RawMessageStopEvent::Type}
+    # in {type: "message_stop"}
     #   # Anthropic::Models::RawMessageStopEvent ...
-    # in {type: "content_block_start", content_block: union: Anthropic::Models::RawContentBlockStartEvent::ContentBlock, index: Integer, type: enum: Anthropic::Models::RawContentBlockStartEvent::Type}
+    # in {type: "content_block_start", content_block: Anthropic::Models::RawContentBlockStartEvent::ContentBlock, index: Integer}
     #   # Anthropic::Models::RawContentBlockStartEvent ...
-    # in {type: "content_block_delta", delta: union: Anthropic::Models::RawContentBlockDeltaEvent::Delta, index: Integer, type: enum: Anthropic::Models::RawContentBlockDeltaEvent::Type}
+    # in {type: "content_block_delta", delta: Anthropic::Models::RawContentBlockDeltaEvent::Delta, index: Integer}
     #   # Anthropic::Models::RawContentBlockDeltaEvent ...
-    # in {type: "content_block_stop", index: Integer, type: enum: Anthropic::Models::RawContentBlockStopEvent::Type}
+    # in {type: "content_block_stop", index: Integer}
     #   # Anthropic::Models::RawContentBlockStopEvent ...
     # end
     # ```

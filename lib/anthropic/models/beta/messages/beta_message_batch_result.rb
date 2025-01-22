@@ -6,18 +6,20 @@ module Anthropic
       module Messages
         # Processing result for this request.
         #
-        # Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
+        #   Contains a Message output if processing was successful, an error response if
+        #   processing failed, or the reason why processing was not attempted, such as
+        #   cancellation or expiration.
         #
         # @example
         # ```ruby
         # case beta_message_batch_result
-        # in {type: "succeeded", message: Anthropic::Models::Beta::BetaMessage, type: enum: Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult::Type}
+        # in {type: "succeeded", message: Anthropic::Models::Beta::BetaMessage}
         #   # Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult ...
-        # in {type: "errored", error: Anthropic::Models::BetaErrorResponse, type: enum: Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult::Type}
+        # in {type: "errored", error: Anthropic::Models::BetaErrorResponse}
         #   # Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult ...
-        # in {type: "canceled", type: enum: Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult::Type}
+        # in {type: "canceled"}
         #   # Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult ...
-        # in {type: "expired", type: enum: Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult::Type}
+        # in {type: "expired"}
         #   # Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult ...
         # end
         # ```

@@ -7,7 +7,7 @@ module Anthropic
     # case anthropic_beta
     # in String
     #   # ...
-    # in enum: Anthropic::Models::AnthropicBeta::UnionMember1
+    # in Anthropic::Models::AnthropicBeta::UnionMember1
     #   # ...
     # end
     # ```

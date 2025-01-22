@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # beta_not_found_error => {
     #   message: String,
-    #   type: enum: Anthropic::Models::BetaNotFoundError::Type
+    #   type: Anthropic::Models::BetaNotFoundError::Type
     # }
     # ```
     class BetaNotFoundError < Anthropic::BaseModel

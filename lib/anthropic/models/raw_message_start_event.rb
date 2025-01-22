@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # raw_message_start_event => {
     #   message: Anthropic::Models::Message,
-    #   type: enum: Anthropic::Models::RawMessageStartEvent::Type
+    #   type: Anthropic::Models::RawMessageStartEvent::Type
     # }
     # ```
     class RawMessageStartEvent < Anthropic::BaseModel

@@ -7,7 +7,7 @@ module Anthropic
       # ```ruby
       # beta_base64_pdf_block => {
       #   source: Anthropic::Models::Beta::BetaBase64PDFSource,
-      #   type: enum: Anthropic::Models::Beta::BetaBase64PDFBlock::Type,
+      #   type: Anthropic::Models::Beta::BetaBase64PDFBlock::Type,
       #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
       # }
       # ```

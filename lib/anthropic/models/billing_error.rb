@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # billing_error => {
     #   message: String,
-    #   type: enum: Anthropic::Models::BillingError::Type
+    #   type: Anthropic::Models::BillingError::Type
     # }
     # ```
     class BillingError < Anthropic::BaseModel

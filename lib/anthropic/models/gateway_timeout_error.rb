@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # gateway_timeout_error => {
     #   message: String,
-    #   type: enum: Anthropic::Models::GatewayTimeoutError::Type
+    #   type: Anthropic::Models::GatewayTimeoutError::Type
     # }
     # ```
     class GatewayTimeoutError < Anthropic::BaseModel

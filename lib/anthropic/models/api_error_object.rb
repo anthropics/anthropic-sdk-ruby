@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # api_error_object => {
     #   message: String,
-    #   type: enum: Anthropic::Models::APIErrorObject::Type
+    #   type: Anthropic::Models::APIErrorObject::Type
     # }
     # ```
     class APIErrorObject < Anthropic::BaseModel

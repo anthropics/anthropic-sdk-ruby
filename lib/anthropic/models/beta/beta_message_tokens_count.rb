@@ -11,14 +11,14 @@ module Anthropic
       # ```
       class BetaMessageTokensCount < Anthropic::BaseModel
         # @!attribute input_tokens
-        #   The total number of tokens across the provided list of messages, system prompt, and tools.
+        #   The total number of tokens across the provided list of messages, system prompt,
+        #     and tools.
         #
         #   @return [Integer]
         required :input_tokens, Integer
 
         # @!parse
-        #   # @param input_tokens [Integer] The total number of tokens across the provided list of messages, system prompt,
-        #   #   and tools.
+        #   # @param input_tokens [Integer]
         #   #
         #   def initialize(input_tokens:, **) = super
 

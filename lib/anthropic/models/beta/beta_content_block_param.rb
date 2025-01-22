@@ -6,15 +6,15 @@ module Anthropic
       # @example
       # ```ruby
       # case beta_content_block_param
-      # in {type: "text", text: String, type: enum: Anthropic::Models::Beta::BetaTextBlockParam::Type, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
+      # in {type: "text", text: String, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
       #   # Anthropic::Models::Beta::BetaTextBlockParam ...
-      # in {type: "image", source: Anthropic::Models::Beta::BetaImageBlockParam::Source, type: enum: Anthropic::Models::Beta::BetaImageBlockParam::Type, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
+      # in {type: "image", source: Anthropic::Models::Beta::BetaImageBlockParam::Source, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
       #   # Anthropic::Models::Beta::BetaImageBlockParam ...
       # in {type: "tool_use", id: String, input: Anthropic::Unknown, name: String}
       #   # Anthropic::Models::Beta::BetaToolUseBlockParam ...
-      # in {type: "tool_result", tool_use_id: String, type: enum: Anthropic::Models::Beta::BetaToolResultBlockParam::Type, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
+      # in {type: "tool_result", tool_use_id: String, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral, content: Anthropic::Models::Beta::BetaToolResultBlockParam::Content}
       #   # Anthropic::Models::Beta::BetaToolResultBlockParam ...
-      # in {type: "document", source: Anthropic::Models::Beta::BetaBase64PDFSource, type: enum: Anthropic::Models::Beta::BetaBase64PDFBlock::Type, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
+      # in {type: "document", source: Anthropic::Models::Beta::BetaBase64PDFSource, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
       #   # Anthropic::Models::Beta::BetaBase64PDFBlock ...
       # end
       # ```

@@ -5,7 +5,7 @@ module Anthropic
     # @example
     # ```ruby
     # case content_block
-    # in {type: "text", text: String, type: enum: Anthropic::Models::TextBlock::Type}
+    # in {type: "text", text: String}
     #   # Anthropic::Models::TextBlock ...
     # in {type: "tool_use", id: String, input: Anthropic::Unknown, name: String}
     #   # Anthropic::Models::ToolUseBlock ...

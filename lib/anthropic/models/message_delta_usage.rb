@@ -16,7 +16,7 @@ module Anthropic
       required :output_tokens, Integer
 
       # @!parse
-      #   # @param output_tokens [Integer] The cumulative number of output tokens which were used.
+      #   # @param output_tokens [Integer]
       #   #
       #   def initialize(output_tokens:, **) = super
 

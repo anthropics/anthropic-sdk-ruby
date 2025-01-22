@@ -6,17 +6,17 @@ module Anthropic
       # @example
       # ```ruby
       # case beta_raw_message_stream_event
-      # in {type: "message_start", message: Anthropic::Models::Beta::BetaMessage, type: enum: Anthropic::Models::Beta::BetaRawMessageStartEvent::Type}
+      # in {type: "message_start", message: Anthropic::Models::Beta::BetaMessage}
       #   # Anthropic::Models::Beta::BetaRawMessageStartEvent ...
-      # in {type: "message_delta", delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta, type: enum: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Type, usage: Anthropic::Models::Beta::BetaMessageDeltaUsage}
+      # in {type: "message_delta", delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta, usage: Anthropic::Models::Beta::BetaMessageDeltaUsage}
       #   # Anthropic::Models::Beta::BetaRawMessageDeltaEvent ...
-      # in {type: "message_stop", type: enum: Anthropic::Models::Beta::BetaRawMessageStopEvent::Type}
+      # in {type: "message_stop"}
       #   # Anthropic::Models::Beta::BetaRawMessageStopEvent ...
-      # in {type: "content_block_start", content_block: union: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::ContentBlock, index: Integer, type: enum: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::Type}
+      # in {type: "content_block_start", content_block: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::ContentBlock, index: Integer}
       #   # Anthropic::Models::Beta::BetaRawContentBlockStartEvent ...
-      # in {type: "content_block_delta", delta: union: Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Delta, index: Integer, type: enum: Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Type}
+      # in {type: "content_block_delta", delta: Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Delta, index: Integer}
       #   # Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent ...
-      # in {type: "content_block_stop", index: Integer, type: enum: Anthropic::Models::Beta::BetaRawContentBlockStopEvent::Type}
+      # in {type: "content_block_stop", index: Integer}
       #   # Anthropic::Models::Beta::BetaRawContentBlockStopEvent ...
       # end
       # ```

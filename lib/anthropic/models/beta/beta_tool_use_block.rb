@@ -9,7 +9,7 @@ module Anthropic
       #   id: String,
       #   input: Anthropic::Unknown,
       #   name: String,
-      #   type: enum: Anthropic::Models::Beta::BetaToolUseBlock::Type
+      #   type: Anthropic::Models::Beta::BetaToolUseBlock::Type
       # }
       # ```
       class BetaToolUseBlock < Anthropic::BaseModel

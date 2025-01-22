@@ -5,8 +5,8 @@ module Anthropic
     # @example
     # ```ruby
     # beta_error_response => {
-    #   error: union: Anthropic::Models::BetaError,
-    #   type: enum: Anthropic::Models::BetaErrorResponse::Type
+    #   error: Anthropic::Models::BetaError,
+    #   type: Anthropic::Models::BetaErrorResponse::Type
     # }
     # ```
     class BetaErrorResponse < Anthropic::BaseModel

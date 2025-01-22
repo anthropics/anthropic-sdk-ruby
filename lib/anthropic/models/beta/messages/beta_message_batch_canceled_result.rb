@@ -7,7 +7,7 @@ module Anthropic
         # @example
         # ```ruby
         # beta_message_batch_canceled_result => {
-        #   type: enum: Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult::Type
+        #   type: Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult::Type
         # }
         # ```
         class BetaMessageBatchCanceledResult < Anthropic::BaseModel

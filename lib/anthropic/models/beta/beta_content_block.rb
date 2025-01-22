@@ -6,7 +6,7 @@ module Anthropic
       # @example
       # ```ruby
       # case beta_content_block
-      # in {type: "text", text: String, type: enum: Anthropic::Models::Beta::BetaTextBlock::Type}
+      # in {type: "text", text: String}
       #   # Anthropic::Models::Beta::BetaTextBlock ...
       # in {type: "tool_use", id: String, input: Anthropic::Unknown, name: String}
       #   # Anthropic::Models::Beta::BetaToolUseBlock ...

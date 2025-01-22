@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # beta_authentication_error => {
     #   message: String,
-    #   type: enum: Anthropic::Models::BetaAuthenticationError::Type
+    #   type: Anthropic::Models::BetaAuthenticationError::Type
     # }
     # ```
     class BetaAuthenticationError < Anthropic::BaseModel

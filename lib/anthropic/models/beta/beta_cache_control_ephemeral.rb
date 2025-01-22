@@ -6,7 +6,7 @@ module Anthropic
       # @example
       # ```ruby
       # beta_cache_control_ephemeral => {
-      #   type: enum: Anthropic::Models::Beta::BetaCacheControlEphemeral::Type
+      #   type: Anthropic::Models::Beta::BetaCacheControlEphemeral::Type
       # }
       # ```
       class BetaCacheControlEphemeral < Anthropic::BaseModel

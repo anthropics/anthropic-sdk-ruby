@@ -2,16 +2,17 @@
 
 module Anthropic
   module Models
-    # How the model should use the provided tools. The model can use a specific tool, any available tool, or decide by itself.
+    # How the model should use the provided tools. The model can use a specific tool,
+    #   any available tool, or decide by itself.
     #
     # @example
     # ```ruby
     # case tool_choice
-    # in {type: "auto", type: enum: Anthropic::Models::ToolChoiceAuto::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
+    # in {type: "auto", disable_parallel_tool_use: Anthropic::BooleanModel}
     #   # Anthropic::Models::ToolChoiceAuto ...
-    # in {type: "any", type: enum: Anthropic::Models::ToolChoiceAny::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
+    # in {type: "any", disable_parallel_tool_use: Anthropic::BooleanModel}
     #   # Anthropic::Models::ToolChoiceAny ...
-    # in {type: "tool", name: String, type: enum: Anthropic::Models::ToolChoiceTool::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
+    # in {type: "tool", name: String, disable_parallel_tool_use: Anthropic::BooleanModel}
     #   # Anthropic::Models::ToolChoiceTool ...
     # end
     # ```

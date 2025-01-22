@@ -9,7 +9,7 @@ module Anthropic
       #   id: String,
       #   input: Anthropic::Unknown,
       #   name: String,
-      #   type: enum: Anthropic::Models::Beta::BetaToolUseBlockParam::Type,
+      #   type: Anthropic::Models::Beta::BetaToolUseBlockParam::Type,
       #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
       # }
       # ```

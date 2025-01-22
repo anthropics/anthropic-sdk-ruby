@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # overloaded_error => {
     #   message: String,
-    #   type: enum: Anthropic::Models::OverloadedError::Type
+    #   type: Anthropic::Models::OverloadedError::Type
     # }
     # ```
     class OverloadedError < Anthropic::BaseModel

@@ -5,18 +5,20 @@ module Anthropic
     module Messages
       # Processing result for this request.
       #
-      # Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
+      #   Contains a Message output if processing was successful, an error response if
+      #   processing failed, or the reason why processing was not attempted, such as
+      #   cancellation or expiration.
       #
       # @example
       # ```ruby
       # case message_batch_result
-      # in {type: "succeeded", message: Anthropic::Models::Message, type: enum: Anthropic::Models::Messages::MessageBatchSucceededResult::Type}
+      # in {type: "succeeded", message: Anthropic::Models::Message}
       #   # Anthropic::Models::Messages::MessageBatchSucceededResult ...
-      # in {type: "errored", error: Anthropic::Models::ErrorResponse, type: enum: Anthropic::Models::Messages::MessageBatchErroredResult::Type}
+      # in {type: "errored", error: Anthropic::Models::ErrorResponse}
       #   # Anthropic::Models::Messages::MessageBatchErroredResult ...
-      # in {type: "canceled", type: enum: Anthropic::Models::Messages::MessageBatchCanceledResult::Type}
+      # in {type: "canceled"}
       #   # Anthropic::Models::Messages::MessageBatchCanceledResult ...
-      # in {type: "expired", type: enum: Anthropic::Models::Messages::MessageBatchExpiredResult::Type}
+      # in {type: "expired"}
       #   # Anthropic::Models::Messages::MessageBatchExpiredResult ...
       # end
       # ```

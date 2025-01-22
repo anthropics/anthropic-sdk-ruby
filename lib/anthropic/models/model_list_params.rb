@@ -4,7 +4,8 @@ module Anthropic
   module Models
     class ModelListParams < Anthropic::BaseModel
       # @!attribute [r] after_id
-      #   ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+      #   ID of the object to use as a cursor for pagination. When provided, returns the
+      #     page of results immediately after this object.
       #
       #   @return [String, nil]
       optional :after_id, String
@@ -14,7 +15,8 @@ module Anthropic
       #   attr_writer :after_id
 
       # @!attribute [r] before_id
-      #   ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+      #   ID of the object to use as a cursor for pagination. When provided, returns the
+      #     page of results immediately before this object.
       #
       #   @return [String, nil]
       optional :before_id, String
@@ -26,7 +28,7 @@ module Anthropic
       # @!attribute [r] limit
       #   Number of items to return per page.
       #
-      # Defaults to `20`. Ranges from `1` to `1000`.
+      #     Defaults to `20`. Ranges from `1` to `1000`.
       #
       #   @return [Integer, nil]
       optional :limit, Integer
@@ -36,15 +38,9 @@ module Anthropic
       #   attr_writer :limit
 
       # @!parse
-      #   # @param after_id [String] ID of the object to use as a cursor for pagination. When provided, returns the
-      #   #   page of results immediately after this object.
-      #   #
-      #   # @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the
-      #   #   page of results immediately before this object.
-      #   #
-      #   # @param limit [Integer] Number of items to return per page.
-      #   #
-      #   #   Defaults to `20`. Ranges from `1` to `1000`.
+      #   # @param after_id [String]
+      #   # @param before_id [String]
+      #   # @param limit [Integer]
       #   #
       #   def initialize(after_id: nil, before_id: nil, limit: nil, **) = super
 

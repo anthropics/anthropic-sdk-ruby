@@ -7,7 +7,7 @@ module Anthropic
       # ```ruby
       # beta_image_block_param => {
       #   source: Anthropic::Models::Beta::BetaImageBlockParam::Source,
-      #   type: enum: Anthropic::Models::Beta::BetaImageBlockParam::Type,
+      #   type: Anthropic::Models::Beta::BetaImageBlockParam::Type,
       #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
       # }
       # ```
@@ -40,8 +40,8 @@ module Anthropic
         # ```ruby
         # source => {
         #   data: String,
-        #   media_type: enum: Anthropic::Models::Beta::BetaImageBlockParam::Source::MediaType,
-        #   type: enum: Anthropic::Models::Beta::BetaImageBlockParam::Source::Type
+        #   media_type: Anthropic::Models::Beta::BetaImageBlockParam::Source::MediaType,
+        #   type: Anthropic::Models::Beta::BetaImageBlockParam::Source::Type
         # }
         # ```
         class Source < Anthropic::BaseModel

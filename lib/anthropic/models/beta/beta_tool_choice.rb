@@ -3,16 +3,17 @@
 module Anthropic
   module Models
     module Beta
-      # How the model should use the provided tools. The model can use a specific tool, any available tool, or decide by itself.
+      # How the model should use the provided tools. The model can use a specific tool,
+      #   any available tool, or decide by itself.
       #
       # @example
       # ```ruby
       # case beta_tool_choice
-      # in {type: "auto", type: enum: Anthropic::Models::Beta::BetaToolChoiceAuto::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
+      # in {type: "auto", disable_parallel_tool_use: Anthropic::BooleanModel}
       #   # Anthropic::Models::Beta::BetaToolChoiceAuto ...
-      # in {type: "any", type: enum: Anthropic::Models::Beta::BetaToolChoiceAny::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
+      # in {type: "any", disable_parallel_tool_use: Anthropic::BooleanModel}
       #   # Anthropic::Models::Beta::BetaToolChoiceAny ...
-      # in {type: "tool", name: String, type: enum: Anthropic::Models::Beta::BetaToolChoiceTool::Type, disable_parallel_tool_use: Anthropic::BooleanModel}
+      # in {type: "tool", name: String, disable_parallel_tool_use: Anthropic::BooleanModel}
       #   # Anthropic::Models::Beta::BetaToolChoiceTool ...
       # end
       # ```

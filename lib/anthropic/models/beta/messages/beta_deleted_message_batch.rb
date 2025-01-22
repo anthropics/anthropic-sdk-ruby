@@ -8,7 +8,7 @@ module Anthropic
         # ```ruby
         # beta_deleted_message_batch => {
         #   id: String,
-        #   type: enum: Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch::Type
+        #   type: Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch::Type
         # }
         # ```
         class BetaDeletedMessageBatch < Anthropic::BaseModel
@@ -21,17 +21,14 @@ module Anthropic
           # @!attribute type
           #   Deleted object type.
           #
-          # For Message Batches, this is always `"message_batch_deleted"`.
+          #     For Message Batches, this is always `"message_batch_deleted"`.
           #
           #   @return [Symbol, Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch::Type]
           required :type, enum: -> { Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch::Type }
 
           # @!parse
-          #   # @param id [String] ID of the Message Batch.
-          #   #
-          #   # @param type [String] Deleted object type.
-          #   #
-          #   #   For Message Batches, this is always `"message_batch_deleted"`.
+          #   # @param id [String]
+          #   # @param type [String]
           #   #
           #   def initialize(id:, type:, **) = super
 
@@ -39,7 +36,7 @@ module Anthropic
 
           # Deleted object type.
           #
-          # For Message Batches, this is always `"message_batch_deleted"`.
+          #   For Message Batches, this is always `"message_batch_deleted"`.
           #
           # @example
           # ```ruby

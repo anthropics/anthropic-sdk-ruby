@@ -5,8 +5,8 @@ module Anthropic
     # @example
     # ```ruby
     # error_response => {
-    #   error: union: Anthropic::Models::ErrorObject,
-    #   type: enum: Anthropic::Models::ErrorResponse::Type
+    #   error: Anthropic::Models::ErrorObject,
+    #   type: Anthropic::Models::ErrorResponse::Type
     # }
     # ```
     class ErrorResponse < Anthropic::BaseModel
