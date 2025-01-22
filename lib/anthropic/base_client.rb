@@ -79,7 +79,7 @@ module Anthropic
     #
     #   @option req [Class, nil] :page
     #
-    #   @option req [Class, Anthropic::Converter] :model
+    #   @option req [Class, Anthropic::Converter, Symbol, Boolean, Integer, Float] :model
     #
     # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] .
     #
@@ -374,7 +374,7 @@ module Anthropic
     #
     #   @option req [Class, nil] :page
     #
-    #   @option req [Class, Anthropic::Converter] :model
+    #   @option req [Class, Anthropic::Converter, Symbol, Boolean, Integer, Float] :model
     #
     # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] .
     #
@@ -427,7 +427,7 @@ module Anthropic
     #
     #   @option req [Class, nil] :page
     #
-    #   @option req [Class, Anthropic::Converter] :model
+    #   @option req [Class, Anthropic::Converter, Symbol, Boolean, Integer, Float] :model
     #
     # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] .
     #
