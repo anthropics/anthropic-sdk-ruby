@@ -7,7 +7,7 @@ module Anthropic
       # ```ruby
       # beta_text_block_param => {
       #   text: String,
-      #   type: enum: Anthropic::Models::Beta::BetaTextBlockParam::Type,
+      #   type: Anthropic::Models::Beta::BetaTextBlockParam::Type,
       #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
       # }
       # ```

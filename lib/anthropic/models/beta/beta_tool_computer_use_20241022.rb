@@ -8,8 +8,8 @@ module Anthropic
       # beta_tool_computer_use20241022 => {
       #   display_height_px: Integer,
       #   display_width_px: Integer,
-      #   name: enum: Anthropic::Models::Beta::BetaToolComputerUse20241022::Name,
-      #   type: enum: Anthropic::Models::Beta::BetaToolComputerUse20241022::Type,
+      #   name: Anthropic::Models::Beta::BetaToolComputerUse20241022::Name,
+      #   type: Anthropic::Models::Beta::BetaToolComputerUse20241022::Type,
       #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
       # }
       # ```
@@ -29,7 +29,7 @@ module Anthropic
         # @!attribute name
         #   Name of the tool.
         #
-        # This is how the tool will be called by the model and in tool_use blocks.
+        #     This is how the tool will be called by the model and in tool_use blocks.
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaToolComputerUse20241022::Name]
         required :name, enum: -> { Anthropic::Models::Beta::BetaToolComputerUse20241022::Name }
@@ -51,19 +51,12 @@ module Anthropic
         optional :display_number, Integer, nil?: true
 
         # @!parse
-        #   # @param display_height_px [Integer] The height of the display in pixels.
-        #   #
-        #   # @param display_width_px [Integer] The width of the display in pixels.
-        #   #
-        #   # @param name [String] Name of the tool.
-        #   #
-        #   #   This is how the tool will be called by the model and in tool_use blocks.
-        #   #
+        #   # @param display_height_px [Integer]
+        #   # @param display_width_px [Integer]
+        #   # @param name [String]
         #   # @param type [String]
-        #   #
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        #   #
-        #   # @param display_number [Integer, nil] The X11 display number (e.g. 0, 1) for the display.
+        #   # @param display_number [Integer, nil]
         #   #
         #   def initialize(display_height_px:, display_width_px:, name:, type:, cache_control: nil, display_number: nil, **) = super
 
@@ -71,7 +64,7 @@ module Anthropic
 
         # Name of the tool.
         #
-        # This is how the tool will be called by the model and in tool_use blocks.
+        #   This is how the tool will be called by the model and in tool_use blocks.
         #
         # @example
         # ```ruby

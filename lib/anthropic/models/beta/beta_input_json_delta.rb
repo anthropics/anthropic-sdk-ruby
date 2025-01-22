@@ -7,7 +7,7 @@ module Anthropic
       # ```ruby
       # beta_input_json_delta => {
       #   partial_json: String,
-      #   type: enum: Anthropic::Models::Beta::BetaInputJSONDelta::Type
+      #   type: Anthropic::Models::Beta::BetaInputJSONDelta::Type
       # }
       # ```
       class BetaInputJSONDelta < Anthropic::BaseModel

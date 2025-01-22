@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # beta_billing_error => {
     #   message: String,
-    #   type: enum: Anthropic::Models::BetaBillingError::Type
+    #   type: Anthropic::Models::BetaBillingError::Type
     # }
     # ```
     class BetaBillingError < Anthropic::BaseModel

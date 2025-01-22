@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # raw_content_block_stop_event => {
     #   index: Integer,
-    #   type: enum: Anthropic::Models::RawContentBlockStopEvent::Type
+    #   type: Anthropic::Models::RawContentBlockStopEvent::Type
     # }
     # ```
     class RawContentBlockStopEvent < Anthropic::BaseModel

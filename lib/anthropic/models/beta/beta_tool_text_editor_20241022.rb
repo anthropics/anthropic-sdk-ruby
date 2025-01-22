@@ -6,8 +6,8 @@ module Anthropic
       # @example
       # ```ruby
       # beta_tool_text_editor20241022 => {
-      #   name: enum: Anthropic::Models::Beta::BetaToolTextEditor20241022::Name,
-      #   type: enum: Anthropic::Models::Beta::BetaToolTextEditor20241022::Type,
+      #   name: Anthropic::Models::Beta::BetaToolTextEditor20241022::Name,
+      #   type: Anthropic::Models::Beta::BetaToolTextEditor20241022::Type,
       #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
       # }
       # ```
@@ -15,7 +15,7 @@ module Anthropic
         # @!attribute name
         #   Name of the tool.
         #
-        # This is how the tool will be called by the model and in tool_use blocks.
+        #     This is how the tool will be called by the model and in tool_use blocks.
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaToolTextEditor20241022::Name]
         required :name, enum: -> { Anthropic::Models::Beta::BetaToolTextEditor20241022::Name }
@@ -31,12 +31,8 @@ module Anthropic
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!parse
-        #   # @param name [String] Name of the tool.
-        #   #
-        #   #   This is how the tool will be called by the model and in tool_use blocks.
-        #   #
+        #   # @param name [String]
         #   # @param type [String]
-        #   #
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   #
         #   def initialize(name:, type:, cache_control: nil, **) = super
@@ -45,7 +41,7 @@ module Anthropic
 
         # Name of the tool.
         #
-        # This is how the tool will be called by the model and in tool_use blocks.
+        #   This is how the tool will be called by the model and in tool_use blocks.
         #
         # @example
         # ```ruby

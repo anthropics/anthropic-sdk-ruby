@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # invalid_request_error => {
     #   message: String,
-    #   type: enum: Anthropic::Models::InvalidRequestError::Type
+    #   type: Anthropic::Models::InvalidRequestError::Type
     # }
     # ```
     class InvalidRequestError < Anthropic::BaseModel

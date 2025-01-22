@@ -6,9 +6,9 @@ module Anthropic
     # ```ruby
     # tool_result_block_param => {
     #   tool_use_id: String,
-    #   type: enum: Anthropic::Models::ToolResultBlockParam::Type,
+    #   type: Anthropic::Models::ToolResultBlockParam::Type,
     #   cache_control: Anthropic::Models::CacheControlEphemeral,
-    #   content: union: Anthropic::Models::ToolResultBlockParam::Content,
+    #   content: Anthropic::Models::ToolResultBlockParam::Content,
     #   is_error: Anthropic::BooleanModel
     # }
     # ```
@@ -91,9 +91,9 @@ module Anthropic
         # @example
         # ```ruby
         # case content
-        # in {type: "text", text: String, type: enum: Anthropic::Models::TextBlockParam::Type, cache_control: Anthropic::Models::CacheControlEphemeral}
+        # in {type: "text", text: String, cache_control: Anthropic::Models::CacheControlEphemeral}
         #   # Anthropic::Models::TextBlockParam ...
-        # in {type: "image", source: Anthropic::Models::ImageBlockParam::Source, type: enum: Anthropic::Models::ImageBlockParam::Type, cache_control: Anthropic::Models::CacheControlEphemeral}
+        # in {type: "image", source: Anthropic::Models::ImageBlockParam::Source, cache_control: Anthropic::Models::CacheControlEphemeral}
         #   # Anthropic::Models::ImageBlockParam ...
         # end
         # ```

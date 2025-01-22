@@ -6,7 +6,7 @@ module Anthropic
       # @example
       # ```ruby
       # beta_raw_message_stop_event => {
-      #   type: enum: Anthropic::Models::Beta::BetaRawMessageStopEvent::Type
+      #   type: Anthropic::Models::Beta::BetaRawMessageStopEvent::Type
       # }
       # ```
       class BetaRawMessageStopEvent < Anthropic::BaseModel

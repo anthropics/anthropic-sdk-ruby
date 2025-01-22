@@ -18,7 +18,7 @@ module Anthropic
           #   attr_writer :betas
 
           # @!parse
-          #   # @param betas [Array<String>] Optional header to specify the beta version(s) you want to use.
+          #   # @param betas [Array<String>]
           #   #
           #   def initialize(betas: nil, **) = super
 

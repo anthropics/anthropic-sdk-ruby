@@ -7,7 +7,7 @@ module Anthropic
       # ```ruby
       # beta_raw_message_delta_event => {
       #   delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta,
-      #   type: enum: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Type,
+      #   type: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Type,
       #   usage: Anthropic::Models::Beta::BetaMessageDeltaUsage
       # }
       # ```
@@ -25,32 +25,24 @@ module Anthropic
         # @!attribute usage
         #   Billing and rate-limit usage.
         #
-        # Anthropic's API bills and rate-limits by token counts, as tokens represent the underlying cost to our systems.
+        #     Anthropic's API bills and rate-limits by token counts, as tokens represent the
+        #     underlying cost to our systems.
         #
-        # Under the hood, the API transforms requests into a format suitable for the model. The model's output then goes through a parsing stage before becoming an API response. As a result, the token counts in `usage` will not match one-to-one with the exact visible content of an API request or response.
+        #     Under the hood, the API transforms requests into a format suitable for the
+        #     model. The model's output then goes through a parsing stage before becoming an
+        #     API response. As a result, the token counts in `usage` will not match one-to-one
+        #     with the exact visible content of an API request or response.
         #
-        # For example, `output_tokens` will be non-zero, even for an empty string response from Claude.
+        #     For example, `output_tokens` will be non-zero, even for an empty string response
+        #     from Claude.
         #
         #   @return [Anthropic::Models::Beta::BetaMessageDeltaUsage]
         required :usage, -> { Anthropic::Models::Beta::BetaMessageDeltaUsage }
 
         # @!parse
         #   # @param delta [Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta]
-        #   #
         #   # @param type [String]
-        #   #
-        #   # @param usage [Anthropic::Models::Beta::BetaMessageDeltaUsage] Billing and rate-limit usage.
-        #   #
-        #   #   Anthropic's API bills and rate-limits by token counts, as tokens represent the
-        #   #   underlying cost to our systems.
-        #   #
-        #   #   Under the hood, the API transforms requests into a format suitable for the
-        #   #   model. The model's output then goes through a parsing stage before becoming an
-        #   #   API response. As a result, the token counts in `usage` will not match one-to-one
-        #   #   with the exact visible content of an API request or response.
-        #   #
-        #   #   For example, `output_tokens` will be non-zero, even for an empty string response
-        #   #   from Claude.
+        #   # @param usage [Anthropic::Models::Beta::BetaMessageDeltaUsage]
         #   #
         #   def initialize(delta:, type:, usage:, **) = super
 
@@ -59,7 +51,7 @@ module Anthropic
         # @example
         # ```ruby
         # delta => {
-        #   stop_reason: enum: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason,
+        #   stop_reason: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason,
         #   stop_sequence: String
         # }
         # ```

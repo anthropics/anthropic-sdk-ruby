@@ -5,23 +5,23 @@ module Anthropic
     # @example
     # ```ruby
     # case error_object
-    # in {type: "invalid_request_error", message: String, type: enum: Anthropic::Models::InvalidRequestError::Type}
+    # in {type: "invalid_request_error", message: String}
     #   # Anthropic::Models::InvalidRequestError ...
-    # in {type: "authentication_error", message: String, type: enum: Anthropic::Models::AuthenticationError_::Type}
+    # in {type: "authentication_error", message: String}
     #   # Anthropic::Models::AuthenticationError_ ...
-    # in {type: "billing_error", message: String, type: enum: Anthropic::Models::BillingError::Type}
+    # in {type: "billing_error", message: String}
     #   # Anthropic::Models::BillingError ...
-    # in {type: "permission_error", message: String, type: enum: Anthropic::Models::PermissionError::Type}
+    # in {type: "permission_error", message: String}
     #   # Anthropic::Models::PermissionError ...
-    # in {type: "not_found_error", message: String, type: enum: Anthropic::Models::NotFoundError_::Type}
+    # in {type: "not_found_error", message: String}
     #   # Anthropic::Models::NotFoundError_ ...
-    # in {type: "rate_limit_error", message: String, type: enum: Anthropic::Models::RateLimitError_::Type}
+    # in {type: "rate_limit_error", message: String}
     #   # Anthropic::Models::RateLimitError_ ...
-    # in {type: "timeout_error", message: String, type: enum: Anthropic::Models::GatewayTimeoutError::Type}
+    # in {type: "timeout_error", message: String}
     #   # Anthropic::Models::GatewayTimeoutError ...
-    # in {type: "api_error", message: String, type: enum: Anthropic::Models::APIErrorObject::Type}
+    # in {type: "api_error", message: String}
     #   # Anthropic::Models::APIErrorObject ...
-    # in {type: "overloaded_error", message: String, type: enum: Anthropic::Models::OverloadedError::Type}
+    # in {type: "overloaded_error", message: String}
     #   # Anthropic::Models::OverloadedError ...
     # end
     # ```

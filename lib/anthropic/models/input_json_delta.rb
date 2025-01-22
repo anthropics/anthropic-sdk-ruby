@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # input_json_delta => {
     #   partial_json: String,
-    #   type: enum: Anthropic::Models::InputJSONDelta::Type
+    #   type: Anthropic::Models::InputJSONDelta::Type
     # }
     # ```
     class InputJSONDelta < Anthropic::BaseModel

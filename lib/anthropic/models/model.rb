@@ -2,14 +2,16 @@
 
 module Anthropic
   module Models
-    # The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+    # The model that will complete your prompt.\n\nSee
+    #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+    #   details and options.
     #
     # @example
     # ```ruby
     # case model
     # in String
     #   # ...
-    # in enum: Anthropic::Models::Model::UnionMember1
+    # in Anthropic::Models::Model::UnionMember1
     #   # ...
     # end
     # ```
@@ -19,7 +21,9 @@ module Anthropic
       # The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
       variant enum: -> { Anthropic::Models::Model::UnionMember1 }
 
-      # The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+      # The model that will complete your prompt.\n\nSee
+      #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+      #   details and options.
       #
       # @example
       # ```ruby

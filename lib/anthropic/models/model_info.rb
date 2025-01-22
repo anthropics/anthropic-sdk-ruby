@@ -8,7 +8,7 @@ module Anthropic
     #   id: String,
     #   created_at: Time,
     #   display_name: String,
-    #   type: enum: Anthropic::Models::ModelInfo::Type
+    #   type: Anthropic::Models::ModelInfo::Type
     # }
     # ```
     class ModelInfo < Anthropic::BaseModel
@@ -19,7 +19,8 @@ module Anthropic
       required :id, String
 
       # @!attribute created_at
-      #   RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
+      #   RFC 3339 datetime string representing the time at which the model was released.
+      #     May be set to an epoch value if the release date is unknown.
       #
       #   @return [Time]
       required :created_at, Time
@@ -33,22 +34,16 @@ module Anthropic
       # @!attribute type
       #   Object type.
       #
-      # For Models, this is always `"model"`.
+      #     For Models, this is always `"model"`.
       #
       #   @return [Symbol, Anthropic::Models::ModelInfo::Type]
       required :type, enum: -> { Anthropic::Models::ModelInfo::Type }
 
       # @!parse
-      #   # @param id [String] Unique model identifier.
-      #   #
-      #   # @param created_at [String] RFC 3339 datetime string representing the time at which the model was released.
-      #   #   May be set to an epoch value if the release date is unknown.
-      #   #
-      #   # @param display_name [String] A human-readable name for the model.
-      #   #
-      #   # @param type [String] Object type.
-      #   #
-      #   #   For Models, this is always `"model"`.
+      #   # @param id [String]
+      #   # @param created_at [String]
+      #   # @param display_name [String]
+      #   # @param type [String]
       #   #
       #   def initialize(id:, created_at:, display_name:, type:, **) = super
 
@@ -56,7 +51,7 @@ module Anthropic
 
       # Object type.
       #
-      # For Models, this is always `"model"`.
+      #   For Models, this is always `"model"`.
       #
       # @example
       # ```ruby

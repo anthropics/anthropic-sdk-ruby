@@ -6,9 +6,9 @@ module Anthropic
       # @example
       # ```ruby
       # beta_raw_content_block_delta_event => {
-      #   delta: union: Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Delta,
+      #   delta: Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Delta,
       #   index: Integer,
-      #   type: enum: Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Type
+      #   type: Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Type
       # }
       # ```
       class BetaRawContentBlockDeltaEvent < Anthropic::BaseModel

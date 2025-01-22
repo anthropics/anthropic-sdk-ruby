@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # not_found_error => {
     #   message: String,
-    #   type: enum: Anthropic::Models::NotFoundError_::Type
+    #   type: Anthropic::Models::NotFoundError_::Type
     # }
     # ```
     class NotFoundError_ < Anthropic::BaseModel

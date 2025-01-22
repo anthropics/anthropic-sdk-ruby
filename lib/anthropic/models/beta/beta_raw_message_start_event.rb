@@ -7,7 +7,7 @@ module Anthropic
       # ```ruby
       # beta_raw_message_start_event => {
       #   message: Anthropic::Models::Beta::BetaMessage,
-      #   type: enum: Anthropic::Models::Beta::BetaRawMessageStartEvent::Type
+      #   type: Anthropic::Models::Beta::BetaRawMessageStartEvent::Type
       # }
       # ```
       class BetaRawMessageStartEvent < Anthropic::BaseModel

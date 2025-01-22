@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # image_block_param => {
     #   source: Anthropic::Models::ImageBlockParam::Source,
-    #   type: enum: Anthropic::Models::ImageBlockParam::Type,
+    #   type: Anthropic::Models::ImageBlockParam::Type,
     #   cache_control: Anthropic::Models::CacheControlEphemeral
     # }
     # ```
@@ -39,8 +39,8 @@ module Anthropic
       # ```ruby
       # source => {
       #   data: String,
-      #   media_type: enum: Anthropic::Models::ImageBlockParam::Source::MediaType,
-      #   type: enum: Anthropic::Models::ImageBlockParam::Source::Type
+      #   media_type: Anthropic::Models::ImageBlockParam::Source::MediaType,
+      #   type: Anthropic::Models::ImageBlockParam::Source::Type
       # }
       # ```
       class Source < Anthropic::BaseModel
