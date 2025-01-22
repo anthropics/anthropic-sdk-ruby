@@ -98,6 +98,12 @@ Style/RedundantInitialize:
 Lint/MissingSuper:
   Exclude:
     - '**/*.rbi'
+Style/BisectedAttrAccessor:
+  Exclude:
+    - '**/*.rbi'
+Naming/MethodParameterName:
+  Exclude:
+    - '**/*.rbi'
 
 # Literally nothing wrong with `symbol_1`
 Naming/VariableNumber:
