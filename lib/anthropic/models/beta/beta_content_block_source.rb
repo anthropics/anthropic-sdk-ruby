@@ -1,0 +1,68 @@
+# frozen_string_literal: true
+
+module Anthropic
+  module Models
+    module Beta
+      # @example
+      # ```ruby
+      # beta_content_block_source => {
+      #   content: Anthropic::Models::Beta::BetaContentBlockSource::Content,
+      #   type: Anthropic::Models::Beta::BetaContentBlockSource::Type
+      # }
+      # ```
+      class BetaContentBlockSource < Anthropic::BaseModel
+        # @!attribute content
+        #
+        #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>]
+        required :content, union: -> { Anthropic::Models::Beta::BetaContentBlockSource::Content }
+
+        # @!attribute type
+        #
+        #   @return [Symbol, Anthropic::Models::Beta::BetaContentBlockSource::Type]
+        required :type, enum: -> { Anthropic::Models::Beta::BetaContentBlockSource::Type }
+
+        # @!parse
+        #   # @param content [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>]
+        #   # @param type [String]
+        #   #
+        #   def initialize(content:, type:, **) = super
+
+        # def initialize: (Hash | Anthropic::BaseModel) -> void
+
+        # @example
+        # ```ruby
+        # case content
+        # in String
+        #   # ...
+        # in Anthropic::Models::Beta::BetaContentBlockSource::Content::BetaContentBlockSourceContentArray
+        #   # ...
+        # end
+        # ```
+        class Content < Anthropic::Union
+          BetaContentBlockSourceContentArray = Anthropic::ArrayOf[union: -> {
+            Anthropic::Models::Beta::BetaContentBlockSourceContent
+          }]
+
+          variant String
+
+          variant Anthropic::Models::Beta::BetaContentBlockSource::Content::BetaContentBlockSourceContentArray
+        end
+
+        # @example
+        # ```ruby
+        # case type
+        # in :content
+        #   # ...
+        # end
+        # ```
+        class Type < Anthropic::Enum
+          CONTENT = :content
+
+          finalize!
+        end
+      end
+    end
+
+    BetaContentBlockSource = Beta::BetaContentBlockSource
+  end
+end

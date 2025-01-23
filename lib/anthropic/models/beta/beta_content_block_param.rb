@@ -6,7 +6,7 @@ module Anthropic
       # @example
       # ```ruby
       # case beta_content_block_param
-      # in {type: "text", text: String, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
+      # in {type: "text", text: String, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral, citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitationParam] === _1 }}
       #   # Anthropic::Models::Beta::BetaTextBlockParam ...
       # in {type: "image", source: Anthropic::Models::Beta::BetaImageBlockParam::Source, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
       #   # Anthropic::Models::Beta::BetaImageBlockParam ...
@@ -14,7 +14,7 @@ module Anthropic
       #   # Anthropic::Models::Beta::BetaToolUseBlockParam ...
       # in {type: "tool_result", tool_use_id: String, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral, content: Anthropic::Models::Beta::BetaToolResultBlockParam::Content}
       #   # Anthropic::Models::Beta::BetaToolResultBlockParam ...
-      # in {type: "document", source: Anthropic::Models::Beta::BetaBase64PDFSource, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
+      # in {type: "document", source: Anthropic::Models::Beta::BetaBase64PDFBlock::Source, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral, citations: Anthropic::Models::Beta::BetaCitationsConfigParam}
       #   # Anthropic::Models::Beta::BetaBase64PDFBlock ...
       # end
       # ```
