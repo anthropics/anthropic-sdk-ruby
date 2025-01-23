@@ -8,7 +8,8 @@ module Anthropic
       # beta_text_block_param => {
       #   text: String,
       #   type: Anthropic::Models::Beta::BetaTextBlockParam::Type,
-      #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
+      #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral,
+      #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitationParam] === _1 }
       # }
       # ```
       class BetaTextBlockParam < Anthropic::BaseModel
@@ -27,12 +28,20 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }, nil?: true
 
+        # @!attribute citations
+        #
+        #   @return [Array<Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam>]
+        optional :citations,
+                 -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitationParam] },
+                 nil?: true
+
         # @!parse
         #   # @param text [String]
         #   # @param type [String]
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
+        #   # @param citations [Array<Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam>]
         #   #
-        #   def initialize(text:, type:, cache_control: nil, **) = super
+        #   def initialize(text:, type:, cache_control: nil, citations: nil, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
