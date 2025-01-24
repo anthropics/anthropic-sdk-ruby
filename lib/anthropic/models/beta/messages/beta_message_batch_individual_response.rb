@@ -32,6 +32,9 @@ module Anthropic
           required :result, union: -> { Anthropic::Models::Beta::Messages::BetaMessageBatchResult }
 
           # @!parse
+          #   # This is a single line in the response `.jsonl` file and does not represent the
+          #   #   response as a whole.
+          #   #
           #   # @param custom_id [String]
           #   # @param result [Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult]
           #   #
