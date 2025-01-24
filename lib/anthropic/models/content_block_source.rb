@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # content_block_source => {
     #   content: Anthropic::Models::ContentBlockSource::Content,
-    #   type: Anthropic::Models::ContentBlockSource::Type
+    #   type: :content
     # }
     # ```
     class ContentBlockSource < Anthropic::BaseModel
@@ -17,14 +17,14 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::ContentBlockSource::Type]
-      required :type, enum: -> { Anthropic::Models::ContentBlockSource::Type }
+      #   @return [Symbol, :content]
+      required :type, const: :content
 
       # @!parse
       #   # @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>]
       #   # @param type [String]
       #   #
-      #   def initialize(content:, type:, **) = super
+      #   def initialize(content:, type: :content, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
@@ -45,19 +45,6 @@ module Anthropic
         variant String
 
         variant Anthropic::Models::ContentBlockSource::Content::ContentBlockSourceContentArray
-      end
-
-      # @example
-      # ```ruby
-      # case type
-      # in :content
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        CONTENT = :content
-
-        finalize!
       end
     end
   end

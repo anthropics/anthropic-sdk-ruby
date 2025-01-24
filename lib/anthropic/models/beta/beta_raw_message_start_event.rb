@@ -7,7 +7,7 @@ module Anthropic
       # ```ruby
       # beta_raw_message_start_event => {
       #   message: Anthropic::Models::Beta::BetaMessage,
-      #   type: Anthropic::Models::Beta::BetaRawMessageStartEvent::Type
+      #   type: :message_start
       # }
       # ```
       class BetaRawMessageStartEvent < Anthropic::BaseModel
@@ -18,29 +18,16 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaRawMessageStartEvent::Type]
-        required :type, enum: -> { Anthropic::Models::Beta::BetaRawMessageStartEvent::Type }
+        #   @return [Symbol, :message_start]
+        required :type, const: :message_start
 
         # @!parse
         #   # @param message [Anthropic::Models::Beta::BetaMessage]
         #   # @param type [String]
         #   #
-        #   def initialize(message:, type:, **) = super
+        #   def initialize(message:, type: :message_start, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-        # @example
-        # ```ruby
-        # case type
-        # in :message_start
-        #   # ...
-        # end
-        # ```
-        class Type < Anthropic::Enum
-          MESSAGE_START = :message_start
-
-          finalize!
-        end
       end
     end
 

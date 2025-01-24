@@ -7,7 +7,7 @@ module Anthropic
       # ```ruby
       # beta_base64_pdf_block => {
       #   source: Anthropic::Models::Beta::BetaBase64PDFBlock::Source,
-      #   type: Anthropic::Models::Beta::BetaBase64PDFBlock::Type,
+      #   type: :document,
       #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral,
       #   citations: Anthropic::Models::Beta::BetaCitationsConfigParam,
       #   context: String
@@ -21,8 +21,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaBase64PDFBlock::Type]
-        required :type, enum: -> { Anthropic::Models::Beta::BetaBase64PDFBlock::Type }
+        #   @return [Symbol, :document]
+        required :type, const: :document
 
         # @!attribute cache_control
         #
@@ -50,22 +50,22 @@ module Anthropic
 
         # @!parse
         #   # @param source [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource]
-        #   # @param type [String]
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   # @param citations [Anthropic::Models::Beta::BetaCitationsConfigParam]
         #   # @param context [String, nil]
         #   # @param title [String, nil]
+        #   # @param type [String]
         #   #
-        #   def initialize(source:, type:, cache_control: nil, citations: nil, context: nil, title: nil, **) = super
+        #   def initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         # @example
         # ```ruby
         # case source
-        # in {type: "base64", data: String, media_type: Anthropic::Models::Beta::BetaBase64PDFSource::MediaType}
+        # in {type: "base64", data: String, media_type: :"application/pdf"}
         #   # Anthropic::Models::Beta::BetaBase64PDFSource ...
-        # in {type: "text", data: String, media_type: Anthropic::Models::Beta::BetaPlainTextSource::MediaType}
+        # in {type: "text", data: String, media_type: :"text/plain"}
         #   # Anthropic::Models::Beta::BetaPlainTextSource ...
         # in {type: "content", content: Anthropic::Models::Beta::BetaContentBlockSource::Content}
         #   # Anthropic::Models::Beta::BetaContentBlockSource ...
@@ -91,19 +91,6 @@ module Anthropic
           variant :text, -> { Anthropic::Models::Beta::BetaPlainTextSource }
 
           variant :content, -> { Anthropic::Models::Beta::BetaContentBlockSource }
-        end
-
-        # @example
-        # ```ruby
-        # case type
-        # in :document
-        #   # ...
-        # end
-        # ```
-        class Type < Anthropic::Enum
-          DOCUMENT = :document
-
-          finalize!
         end
       end
     end

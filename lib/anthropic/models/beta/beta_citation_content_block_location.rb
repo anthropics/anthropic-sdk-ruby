@@ -41,8 +41,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaCitationContentBlockLocation::Type]
-        required :type, enum: -> { Anthropic::Models::Beta::BetaCitationContentBlockLocation::Type }
+        #   @return [Symbol, :content_block_location]
+        required :type, const: :content_block_location
 
         # @!parse
         #   # @param cited_text [String]
@@ -52,22 +52,19 @@ module Anthropic
         #   # @param start_block_index [Integer]
         #   # @param type [String]
         #   #
-        #   def initialize(cited_text:, document_index:, document_title:, end_block_index:, start_block_index:, type:, **) = super
+        #   def initialize(
+        #     cited_text:,
+        #     document_index:,
+        #     document_title:,
+        #     end_block_index:,
+        #     start_block_index:,
+        #     type: :content_block_location,
+        #     **
+        #   )
+        #     super
+        #   end
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-        # @example
-        # ```ruby
-        # case type
-        # in :content_block_location
-        #   # ...
-        # end
-        # ```
-        class Type < Anthropic::Enum
-          CONTENT_BLOCK_LOCATION = :content_block_location
-
-          finalize!
-        end
       end
     end
 

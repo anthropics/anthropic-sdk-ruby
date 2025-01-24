@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # billing_error => {
     #   message: String,
-    #   type: Anthropic::Models::BillingError::Type
+    #   type: :billing_error
     # }
     # ```
     class BillingError < Anthropic::BaseModel
@@ -17,29 +17,16 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::BillingError::Type]
-      required :type, enum: -> { Anthropic::Models::BillingError::Type }
+      #   @return [Symbol, :billing_error]
+      required :type, const: :billing_error
 
       # @!parse
       #   # @param message [String]
       #   # @param type [String]
       #   #
-      #   def initialize(message:, type:, **) = super
+      #   def initialize(message:, type: :billing_error, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case type
-      # in :billing_error
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        BILLING_ERROR = :billing_error
-
-        finalize!
-      end
     end
   end
 end

@@ -8,7 +8,7 @@ module Anthropic
     #   id: String,
     #   content: -> { Anthropic::ArrayOf[union: Anthropic::Models::ContentBlock] === _1 },
     #   model: Anthropic::Models::Model,
-    #   role: Anthropic::Models::Message::Role,
+    #   role: :assistant,
     #   stop_reason: Anthropic::Models::Message::StopReason,
     #   **_
     # }
@@ -72,8 +72,8 @@ module Anthropic
       #
       #     This will always be `"assistant"`.
       #
-      #   @return [Symbol, Anthropic::Models::Message::Role]
-      required :role, enum: -> { Anthropic::Models::Message::Role }
+      #   @return [Symbol, :assistant]
+      required :role, const: :assistant
 
       # @!attribute stop_reason
       #   The reason that we stopped.
@@ -105,8 +105,8 @@ module Anthropic
       #
       #     For Messages, this is always `"message"`.
       #
-      #   @return [Symbol, Anthropic::Models::Message::Type]
-      required :type, enum: -> { Anthropic::Models::Message::Type }
+      #   @return [Symbol, :message]
+      required :type, const: :message
 
       # @!attribute usage
       #   Billing and rate-limit usage.
@@ -129,32 +129,15 @@ module Anthropic
       #   # @param id [String]
       #   # @param content [Array<Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock>]
       #   # @param model [String]
-      #   # @param role [String]
       #   # @param stop_reason [String, nil]
       #   # @param stop_sequence [String, nil]
-      #   # @param type [String]
       #   # @param usage [Anthropic::Models::Usage]
+      #   # @param role [String]
+      #   # @param type [String]
       #   #
-      #   def initialize(id:, content:, model:, role:, stop_reason:, stop_sequence:, type:, usage:, **) = super
+      #   def initialize(id:, content:, model:, stop_reason:, stop_sequence:, usage:, role: :assistant, type: :message, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # Conversational role of the generated message.
-      #
-      #   This will always be `"assistant"`.
-      #
-      # @example
-      # ```ruby
-      # case role
-      # in :assistant
-      #   # ...
-      # end
-      # ```
-      class Role < Anthropic::Enum
-        ASSISTANT = :assistant
-
-        finalize!
-      end
 
       # The reason that we stopped.
       #
@@ -186,23 +169,6 @@ module Anthropic
         MAX_TOKENS = :max_tokens
         STOP_SEQUENCE = :stop_sequence
         TOOL_USE = :tool_use
-
-        finalize!
-      end
-
-      # Object type.
-      #
-      #   For Messages, this is always `"message"`.
-      #
-      # @example
-      # ```ruby
-      # case type
-      # in :message
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        MESSAGE = :message
 
         finalize!
       end

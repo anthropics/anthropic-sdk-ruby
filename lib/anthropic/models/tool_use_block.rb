@@ -8,7 +8,7 @@ module Anthropic
     #   id: String,
     #   input: Anthropic::Unknown,
     #   name: String,
-    #   type: Anthropic::Models::ToolUseBlock::Type
+    #   type: :tool_use
     # }
     # ```
     class ToolUseBlock < Anthropic::BaseModel
@@ -29,8 +29,8 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::ToolUseBlock::Type]
-      required :type, enum: -> { Anthropic::Models::ToolUseBlock::Type }
+      #   @return [Symbol, :tool_use]
+      required :type, const: :tool_use
 
       # @!parse
       #   # @param id [String]
@@ -38,22 +38,9 @@ module Anthropic
       #   # @param name [String]
       #   # @param type [String]
       #   #
-      #   def initialize(id:, input:, name:, type:, **) = super
+      #   def initialize(id:, input:, name:, type: :tool_use, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case type
-      # in :tool_use
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        TOOL_USE = :tool_use
-
-        finalize!
-      end
     end
   end
 end

@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # beta_authentication_error => {
     #   message: String,
-    #   type: Anthropic::Models::BetaAuthenticationError::Type
+    #   type: :authentication_error
     # }
     # ```
     class BetaAuthenticationError < Anthropic::BaseModel
@@ -17,29 +17,16 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::BetaAuthenticationError::Type]
-      required :type, enum: -> { Anthropic::Models::BetaAuthenticationError::Type }
+      #   @return [Symbol, :authentication_error]
+      required :type, const: :authentication_error
 
       # @!parse
       #   # @param message [String]
       #   # @param type [String]
       #   #
-      #   def initialize(message:, type:, **) = super
+      #   def initialize(message:, type: :authentication_error, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case type
-      # in :authentication_error
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        AUTHENTICATION_ERROR = :authentication_error
-
-        finalize!
-      end
     end
   end
 end

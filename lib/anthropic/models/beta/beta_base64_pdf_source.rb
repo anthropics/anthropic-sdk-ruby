@@ -7,8 +7,8 @@ module Anthropic
       # ```ruby
       # beta_base64_pdf_source => {
       #   data: String,
-      #   media_type: Anthropic::Models::Beta::BetaBase64PDFSource::MediaType,
-      #   type: Anthropic::Models::Beta::BetaBase64PDFSource::Type
+      #   media_type: :"application/pdf",
+      #   type: :base64
       # }
       # ```
       class BetaBase64PDFSource < Anthropic::BaseModel
@@ -19,48 +19,22 @@ module Anthropic
 
         # @!attribute media_type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaBase64PDFSource::MediaType]
-        required :media_type, enum: -> { Anthropic::Models::Beta::BetaBase64PDFSource::MediaType }
+        #   @return [Symbol, :"application/pdf"]
+        required :media_type, const: :"application/pdf"
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaBase64PDFSource::Type]
-        required :type, enum: -> { Anthropic::Models::Beta::BetaBase64PDFSource::Type }
+        #   @return [Symbol, :base64]
+        required :type, const: :base64
 
         # @!parse
         #   # @param data [String]
         #   # @param media_type [String]
         #   # @param type [String]
         #   #
-        #   def initialize(data:, media_type:, type:, **) = super
+        #   def initialize(data:, media_type: :"application/pdf", type: :base64, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-        # @example
-        # ```ruby
-        # case media_type
-        # in :"application/pdf"
-        #   # ...
-        # end
-        # ```
-        class MediaType < Anthropic::Enum
-          APPLICATION_PDF = :"application/pdf"
-
-          finalize!
-        end
-
-        # @example
-        # ```ruby
-        # case type
-        # in :base64
-        #   # ...
-        # end
-        # ```
-        class Type < Anthropic::Enum
-          BASE64 = :base64
-
-          finalize!
-        end
       end
     end
 

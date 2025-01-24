@@ -8,7 +8,7 @@ module Anthropic
       # beta_raw_content_block_start_event => {
       #   content_block: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::ContentBlock,
       #   index: Integer,
-      #   type: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::Type
+      #   type: :content_block_start
       # }
       # ```
       class BetaRawContentBlockStartEvent < Anthropic::BaseModel
@@ -25,15 +25,15 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaRawContentBlockStartEvent::Type]
-        required :type, enum: -> { Anthropic::Models::Beta::BetaRawContentBlockStartEvent::Type }
+        #   @return [Symbol, :content_block_start]
+        required :type, const: :content_block_start
 
         # @!parse
         #   # @param content_block [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock]
         #   # @param index [Integer]
         #   # @param type [String]
         #   #
-        #   def initialize(content_block:, index:, type:, **) = super
+        #   def initialize(content_block:, index:, type: :content_block_start, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
@@ -62,19 +62,6 @@ module Anthropic
           variant :text, -> { Anthropic::Models::Beta::BetaTextBlock }
 
           variant :tool_use, -> { Anthropic::Models::Beta::BetaToolUseBlock }
-        end
-
-        # @example
-        # ```ruby
-        # case type
-        # in :content_block_start
-        #   # ...
-        # end
-        # ```
-        class Type < Anthropic::Enum
-          CONTENT_BLOCK_START = :content_block_start
-
-          finalize!
         end
       end
     end

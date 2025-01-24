@@ -94,8 +94,8 @@ module Anthropic
           #
           #     For Message Batches, this is always `"message_batch"`.
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatch::Type]
-          required :type, enum: -> { Anthropic::Models::Beta::Messages::BetaMessageBatch::Type }
+          #   @return [Symbol, :message_batch]
+          required :type, const: :message_batch
 
           # @!parse
           #   # @param id [String]
@@ -119,7 +119,7 @@ module Anthropic
           #     processing_status:,
           #     request_counts:,
           #     results_url:,
-          #     type:,
+          #     type: :message_batch,
           #     **
           #   )
           #     super
@@ -144,23 +144,6 @@ module Anthropic
             IN_PROGRESS = :in_progress
             CANCELING = :canceling
             ENDED = :ended
-
-            finalize!
-          end
-
-          # Object type.
-          #
-          #   For Message Batches, this is always `"message_batch"`.
-          #
-          # @example
-          # ```ruby
-          # case type
-          # in :message_batch
-          #   # ...
-          # end
-          # ```
-          class Type < Anthropic::Enum
-            MESSAGE_BATCH = :message_batch
 
             finalize!
           end

@@ -7,7 +7,7 @@ module Anthropic
       # ```ruby
       # beta_tool_result_block_param => {
       #   tool_use_id: String,
-      #   type: Anthropic::Models::Beta::BetaToolResultBlockParam::Type,
+      #   type: :tool_result,
       #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral,
       #   content: Anthropic::Models::Beta::BetaToolResultBlockParam::Content,
       #   is_error: Anthropic::BooleanModel
@@ -21,8 +21,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaToolResultBlockParam::Type]
-        required :type, enum: -> { Anthropic::Models::Beta::BetaToolResultBlockParam::Type }
+        #   @return [Symbol, :tool_result]
+        required :type, const: :tool_result
 
         # @!attribute cache_control
         #
@@ -49,27 +49,14 @@ module Anthropic
 
         # @!parse
         #   # @param tool_use_id [String]
-        #   # @param type [String]
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   # @param content [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>]
         #   # @param is_error [Boolean]
+        #   # @param type [String]
         #   #
-        #   def initialize(tool_use_id:, type:, cache_control: nil, content: nil, is_error: nil, **) = super
+        #   def initialize(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-        # @example
-        # ```ruby
-        # case type
-        # in :tool_result
-        #   # ...
-        # end
-        # ```
-        class Type < Anthropic::Enum
-          TOOL_RESULT = :tool_result
-
-          finalize!
-        end
 
         # @example
         # ```ruby

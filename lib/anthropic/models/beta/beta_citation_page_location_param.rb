@@ -41,8 +41,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaCitationPageLocationParam::Type]
-        required :type, enum: -> { Anthropic::Models::Beta::BetaCitationPageLocationParam::Type }
+        #   @return [Symbol, :page_location]
+        required :type, const: :page_location
 
         # @!parse
         #   # @param cited_text [String]
@@ -52,22 +52,19 @@ module Anthropic
         #   # @param start_page_number [Integer]
         #   # @param type [String]
         #   #
-        #   def initialize(cited_text:, document_index:, document_title:, end_page_number:, start_page_number:, type:, **) = super
+        #   def initialize(
+        #     cited_text:,
+        #     document_index:,
+        #     document_title:,
+        #     end_page_number:,
+        #     start_page_number:,
+        #     type: :page_location,
+        #     **
+        #   )
+        #     super
+        #   end
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-        # @example
-        # ```ruby
-        # case type
-        # in :page_location
-        #   # ...
-        # end
-        # ```
-        class Type < Anthropic::Enum
-          PAGE_LOCATION = :page_location
-
-          finalize!
-        end
       end
     end
 

@@ -6,8 +6,8 @@ module Anthropic
     # ```ruby
     # plain_text_source => {
     #   data: String,
-    #   media_type: Anthropic::Models::PlainTextSource::MediaType,
-    #   type: Anthropic::Models::PlainTextSource::Type
+    #   media_type: :"text/plain",
+    #   type: :text
     # }
     # ```
     class PlainTextSource < Anthropic::BaseModel
@@ -18,48 +18,22 @@ module Anthropic
 
       # @!attribute media_type
       #
-      #   @return [Symbol, Anthropic::Models::PlainTextSource::MediaType]
-      required :media_type, enum: -> { Anthropic::Models::PlainTextSource::MediaType }
+      #   @return [Symbol, :"text/plain"]
+      required :media_type, const: :"text/plain"
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::PlainTextSource::Type]
-      required :type, enum: -> { Anthropic::Models::PlainTextSource::Type }
+      #   @return [Symbol, :text]
+      required :type, const: :text
 
       # @!parse
       #   # @param data [String]
       #   # @param media_type [String]
       #   # @param type [String]
       #   #
-      #   def initialize(data:, media_type:, type:, **) = super
+      #   def initialize(data:, media_type: :"text/plain", type: :text, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case media_type
-      # in :"text/plain"
-      #   # ...
-      # end
-      # ```
-      class MediaType < Anthropic::Enum
-        TEXT_PLAIN = :"text/plain"
-
-        finalize!
-      end
-
-      # @example
-      # ```ruby
-      # case type
-      # in :text
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        TEXT = :text
-
-        finalize!
-      end
     end
   end
 end

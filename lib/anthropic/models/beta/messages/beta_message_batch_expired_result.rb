@@ -7,34 +7,21 @@ module Anthropic
         # @example
         # ```ruby
         # beta_message_batch_expired_result => {
-        #   type: Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult::Type
+        #   type: :expired
         # }
         # ```
         class BetaMessageBatchExpiredResult < Anthropic::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult::Type]
-          required :type, enum: -> { Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult::Type }
+          #   @return [Symbol, :expired]
+          required :type, const: :expired
 
           # @!parse
           #   # @param type [String]
           #   #
-          #   def initialize(type:, **) = super
+          #   def initialize(type: :expired, **) = super
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-          # @example
-          # ```ruby
-          # case type
-          # in :expired
-          #   # ...
-          # end
-          # ```
-          class Type < Anthropic::Enum
-            EXPIRED = :expired
-
-            finalize!
-          end
         end
       end
     end

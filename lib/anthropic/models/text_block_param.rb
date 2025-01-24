@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # text_block_param => {
     #   text: String,
-    #   type: Anthropic::Models::TextBlockParam::Type,
+    #   type: :text,
     #   cache_control: Anthropic::Models::CacheControlEphemeral,
     #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::TextCitationParam] === _1 }
     # }
@@ -19,8 +19,8 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::TextBlockParam::Type]
-      required :type, enum: -> { Anthropic::Models::TextBlockParam::Type }
+      #   @return [Symbol, :text]
+      required :type, const: :text
 
       # @!attribute cache_control
       #
@@ -34,26 +34,13 @@ module Anthropic
 
       # @!parse
       #   # @param text [String]
-      #   # @param type [String]
       #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
       #   # @param citations [Array<Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam>]
+      #   # @param type [String]
       #   #
-      #   def initialize(text:, type:, cache_control: nil, citations: nil, **) = super
+      #   def initialize(text:, cache_control: nil, citations: nil, type: :text, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case type
-      # in :text
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        TEXT = :text
-
-        finalize!
-      end
     end
   end
 end

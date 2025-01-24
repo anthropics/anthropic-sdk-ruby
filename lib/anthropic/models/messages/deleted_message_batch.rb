@@ -7,7 +7,7 @@ module Anthropic
       # ```ruby
       # deleted_message_batch => {
       #   id: String,
-      #   type: Anthropic::Models::Messages::DeletedMessageBatch::Type
+      #   type: :message_batch_deleted
       # }
       # ```
       class DeletedMessageBatch < Anthropic::BaseModel
@@ -22,33 +22,16 @@ module Anthropic
         #
         #     For Message Batches, this is always `"message_batch_deleted"`.
         #
-        #   @return [Symbol, Anthropic::Models::Messages::DeletedMessageBatch::Type]
-        required :type, enum: -> { Anthropic::Models::Messages::DeletedMessageBatch::Type }
+        #   @return [Symbol, :message_batch_deleted]
+        required :type, const: :message_batch_deleted
 
         # @!parse
         #   # @param id [String]
         #   # @param type [String]
         #   #
-        #   def initialize(id:, type:, **) = super
+        #   def initialize(id:, type: :message_batch_deleted, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-        # Deleted object type.
-        #
-        #   For Message Batches, this is always `"message_batch_deleted"`.
-        #
-        # @example
-        # ```ruby
-        # case type
-        # in :message_batch_deleted
-        #   # ...
-        # end
-        # ```
-        class Type < Anthropic::Enum
-          MESSAGE_BATCH_DELETED = :message_batch_deleted
-
-          finalize!
-        end
       end
     end
   end

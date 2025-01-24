@@ -8,7 +8,7 @@ module Anthropic
     #   id: String,
     #   input: Anthropic::Unknown,
     #   name: String,
-    #   type: Anthropic::Models::ToolUseBlockParam::Type,
+    #   type: :tool_use,
     #   cache_control: Anthropic::Models::CacheControlEphemeral
     # }
     # ```
@@ -30,8 +30,8 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::ToolUseBlockParam::Type]
-      required :type, enum: -> { Anthropic::Models::ToolUseBlockParam::Type }
+      #   @return [Symbol, :tool_use]
+      required :type, const: :tool_use
 
       # @!attribute cache_control
       #
@@ -42,25 +42,12 @@ module Anthropic
       #   # @param id [String]
       #   # @param input [Object]
       #   # @param name [String]
-      #   # @param type [String]
       #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
+      #   # @param type [String]
       #   #
-      #   def initialize(id:, input:, name:, type:, cache_control: nil, **) = super
+      #   def initialize(id:, input:, name:, cache_control: nil, type: :tool_use, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case type
-      # in :tool_use
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        TOOL_USE = :tool_use
-
-        finalize!
-      end
     end
   end
 end

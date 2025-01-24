@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # error_response => {
     #   error: Anthropic::Models::ErrorObject,
-    #   type: Anthropic::Models::ErrorResponse::Type
+    #   type: :error
     # }
     # ```
     class ErrorResponse < Anthropic::BaseModel
@@ -17,29 +17,16 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::ErrorResponse::Type]
-      required :type, enum: -> { Anthropic::Models::ErrorResponse::Type }
+      #   @return [Symbol, :error]
+      required :type, const: :error
 
       # @!parse
       #   # @param error [Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError_, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError_, Anthropic::Models::RateLimitError_, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError]
       #   # @param type [String]
       #   #
-      #   def initialize(error:, type:, **) = super
+      #   def initialize(error:, type: :error, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case type
-      # in :error
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        ERROR = :error
-
-        finalize!
-      end
     end
   end
 end

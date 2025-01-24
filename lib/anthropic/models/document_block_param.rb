@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # document_block_param => {
     #   source: Anthropic::Models::DocumentBlockParam::Source,
-    #   type: Anthropic::Models::DocumentBlockParam::Type,
+    #   type: :document,
     #   cache_control: Anthropic::Models::CacheControlEphemeral,
     #   citations: Anthropic::Models::CitationsConfigParam,
     #   context: String
@@ -20,8 +20,8 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::DocumentBlockParam::Type]
-      required :type, enum: -> { Anthropic::Models::DocumentBlockParam::Type }
+      #   @return [Symbol, :document]
+      required :type, const: :document
 
       # @!attribute cache_control
       #
@@ -49,22 +49,22 @@ module Anthropic
 
       # @!parse
       #   # @param source [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource]
-      #   # @param type [String]
       #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
       #   # @param citations [Anthropic::Models::CitationsConfigParam]
       #   # @param context [String, nil]
       #   # @param title [String, nil]
+      #   # @param type [String]
       #   #
-      #   def initialize(source:, type:, cache_control: nil, citations: nil, context: nil, title: nil, **) = super
+      #   def initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
       # @example
       # ```ruby
       # case source
-      # in {type: "base64", data: String, media_type: Anthropic::Models::Base64PDFSource::MediaType}
+      # in {type: "base64", data: String, media_type: :"application/pdf"}
       #   # Anthropic::Models::Base64PDFSource ...
-      # in {type: "text", data: String, media_type: Anthropic::Models::PlainTextSource::MediaType}
+      # in {type: "text", data: String, media_type: :"text/plain"}
       #   # Anthropic::Models::PlainTextSource ...
       # in {type: "content", content: Anthropic::Models::ContentBlockSource::Content}
       #   # Anthropic::Models::ContentBlockSource ...
@@ -90,19 +90,6 @@ module Anthropic
         variant :text, -> { Anthropic::Models::PlainTextSource }
 
         variant :content, -> { Anthropic::Models::ContentBlockSource }
-      end
-
-      # @example
-      # ```ruby
-      # case type
-      # in :document
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        DOCUMENT = :document
-
-        finalize!
       end
     end
   end

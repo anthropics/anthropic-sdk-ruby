@@ -6,15 +6,15 @@ module Anthropic
       # @example
       # ```ruby
       # beta_tool_choice_any => {
-      #   type: Anthropic::Models::Beta::BetaToolChoiceAny::Type,
+      #   type: :any,
       #   disable_parallel_tool_use: Anthropic::BooleanModel
       # }
       # ```
       class BetaToolChoiceAny < Anthropic::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaToolChoiceAny::Type]
-        required :type, enum: -> { Anthropic::Models::Beta::BetaToolChoiceAny::Type }
+        #   @return [Symbol, :any]
+        required :type, const: :any
 
         # @!attribute [r] disable_parallel_tool_use
         #   Whether to disable parallel tool use.
@@ -32,25 +32,12 @@ module Anthropic
         # @!parse
         #   # The model will use any available tools.
         #   #
-        #   # @param type [String]
         #   # @param disable_parallel_tool_use [Boolean]
+        #   # @param type [String]
         #   #
-        #   def initialize(type:, disable_parallel_tool_use: nil, **) = super
+        #   def initialize(disable_parallel_tool_use: nil, type: :any, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-        # @example
-        # ```ruby
-        # case type
-        # in :any
-        #   # ...
-        # end
-        # ```
-        class Type < Anthropic::Enum
-          ANY = :any
-
-          finalize!
-        end
       end
     end
 

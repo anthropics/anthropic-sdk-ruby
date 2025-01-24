@@ -8,7 +8,7 @@ module Anthropic
         # ```ruby
         # beta_message_batch_errored_result => {
         #   error: Anthropic::Models::BetaErrorResponse,
-        #   type: Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult::Type
+        #   type: :errored
         # }
         # ```
         class BetaMessageBatchErroredResult < Anthropic::BaseModel
@@ -19,29 +19,16 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult::Type]
-          required :type, enum: -> { Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult::Type }
+          #   @return [Symbol, :errored]
+          required :type, const: :errored
 
           # @!parse
           #   # @param error [Anthropic::Models::BetaErrorResponse]
           #   # @param type [String]
           #   #
-          #   def initialize(error:, type:, **) = super
+          #   def initialize(error:, type: :errored, **) = super
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-          # @example
-          # ```ruby
-          # case type
-          # in :errored
-          #   # ...
-          # end
-          # ```
-          class Type < Anthropic::Enum
-            ERRORED = :errored
-
-            finalize!
-          end
         end
       end
     end

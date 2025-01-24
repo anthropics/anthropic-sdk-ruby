@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # permission_error => {
     #   message: String,
-    #   type: Anthropic::Models::PermissionError::Type
+    #   type: :permission_error
     # }
     # ```
     class PermissionError < Anthropic::BaseModel
@@ -17,29 +17,16 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::PermissionError::Type]
-      required :type, enum: -> { Anthropic::Models::PermissionError::Type }
+      #   @return [Symbol, :permission_error]
+      required :type, const: :permission_error
 
       # @!parse
       #   # @param message [String]
       #   # @param type [String]
       #   #
-      #   def initialize(message:, type:, **) = super
+      #   def initialize(message:, type: :permission_error, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case type
-      # in :permission_error
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        PERMISSION_ERROR = :permission_error
-
-        finalize!
-      end
     end
   end
 end
