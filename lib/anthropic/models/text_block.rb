@@ -7,7 +7,7 @@ module Anthropic
     # text_block => {
     #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::TextCitation] === _1 },
     #   text: String,
-    #   type: Anthropic::Models::TextBlock::Type
+    #   type: :text
     # }
     # ```
     class TextBlock < Anthropic::BaseModel
@@ -28,30 +28,17 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::TextBlock::Type]
-      required :type, enum: -> { Anthropic::Models::TextBlock::Type }
+      #   @return [Symbol, :text]
+      required :type, const: :text
 
       # @!parse
       #   # @param citations [Array<Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation>]
       #   # @param text [String]
       #   # @param type [String]
       #   #
-      #   def initialize(citations:, text:, type:, **) = super
+      #   def initialize(citations:, text:, type: :text, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case type
-      # in :text
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        TEXT = :text
-
-        finalize!
-      end
     end
   end
 end

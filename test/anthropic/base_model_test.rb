@@ -290,4 +290,22 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
       end
     end
   end
+
+  class C1 < Anthropic::BaseModel
+    required :a, const: :a
+    required :b, const: :b, nil?: true
+    optional :c, const: :c
+  end
+
+  def test_basic_const
+    assert_pattern do
+      C1.dump(C1.new) => {a: :a}
+      C1.new => {a: :a}
+      C1.new(a: "a") => {a: :a}
+      C1.new(b: 2) => {b: 2}
+      C1.new.a => :a
+      C1.new.b => nil
+      C1.new.c => nil
+    end
+  end
 end

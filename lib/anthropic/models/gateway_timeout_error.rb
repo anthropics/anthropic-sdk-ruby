@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # gateway_timeout_error => {
     #   message: String,
-    #   type: Anthropic::Models::GatewayTimeoutError::Type
+    #   type: :timeout_error
     # }
     # ```
     class GatewayTimeoutError < Anthropic::BaseModel
@@ -17,29 +17,16 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::GatewayTimeoutError::Type]
-      required :type, enum: -> { Anthropic::Models::GatewayTimeoutError::Type }
+      #   @return [Symbol, :timeout_error]
+      required :type, const: :timeout_error
 
       # @!parse
       #   # @param message [String]
       #   # @param type [String]
       #   #
-      #   def initialize(message:, type:, **) = super
+      #   def initialize(message:, type: :timeout_error, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case type
-      # in :timeout_error
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        TIMEOUT_ERROR = :timeout_error
-
-        finalize!
-      end
     end
   end
 end

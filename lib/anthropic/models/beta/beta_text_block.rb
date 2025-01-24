@@ -8,7 +8,7 @@ module Anthropic
       # beta_text_block => {
       #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitation] === _1 },
       #   text: String,
-      #   type: Anthropic::Models::Beta::BetaTextBlock::Type
+      #   type: :text
       # }
       # ```
       class BetaTextBlock < Anthropic::BaseModel
@@ -31,30 +31,17 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaTextBlock::Type]
-        required :type, enum: -> { Anthropic::Models::Beta::BetaTextBlock::Type }
+        #   @return [Symbol, :text]
+        required :type, const: :text
 
         # @!parse
         #   # @param citations [Array<Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation>]
         #   # @param text [String]
         #   # @param type [String]
         #   #
-        #   def initialize(citations:, text:, type:, **) = super
+        #   def initialize(citations:, text:, type: :text, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-        # @example
-        # ```ruby
-        # case type
-        # in :text
-        #   # ...
-        # end
-        # ```
-        class Type < Anthropic::Enum
-          TEXT = :text
-
-          finalize!
-        end
       end
     end
 

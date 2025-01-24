@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # beta_overloaded_error => {
     #   message: String,
-    #   type: Anthropic::Models::BetaOverloadedError::Type
+    #   type: :overloaded_error
     # }
     # ```
     class BetaOverloadedError < Anthropic::BaseModel
@@ -17,29 +17,16 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::BetaOverloadedError::Type]
-      required :type, enum: -> { Anthropic::Models::BetaOverloadedError::Type }
+      #   @return [Symbol, :overloaded_error]
+      required :type, const: :overloaded_error
 
       # @!parse
       #   # @param message [String]
       #   # @param type [String]
       #   #
-      #   def initialize(message:, type:, **) = super
+      #   def initialize(message:, type: :overloaded_error, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case type
-      # in :overloaded_error
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        OVERLOADED_ERROR = :overloaded_error
-
-        finalize!
-      end
     end
   end
 end

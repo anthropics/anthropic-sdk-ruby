@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # beta_rate_limit_error => {
     #   message: String,
-    #   type: Anthropic::Models::BetaRateLimitError::Type
+    #   type: :rate_limit_error
     # }
     # ```
     class BetaRateLimitError < Anthropic::BaseModel
@@ -17,29 +17,16 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::BetaRateLimitError::Type]
-      required :type, enum: -> { Anthropic::Models::BetaRateLimitError::Type }
+      #   @return [Symbol, :rate_limit_error]
+      required :type, const: :rate_limit_error
 
       # @!parse
       #   # @param message [String]
       #   # @param type [String]
       #   #
-      #   def initialize(message:, type:, **) = super
+      #   def initialize(message:, type: :rate_limit_error, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case type
-      # in :rate_limit_error
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        RATE_LIMIT_ERROR = :rate_limit_error
-
-        finalize!
-      end
     end
   end
 end

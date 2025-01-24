@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # raw_message_delta_event => {
     #   delta: Anthropic::Models::RawMessageDeltaEvent::Delta,
-    #   type: Anthropic::Models::RawMessageDeltaEvent::Type,
+    #   type: :message_delta,
     #   usage: Anthropic::Models::MessageDeltaUsage
     # }
     # ```
@@ -18,8 +18,8 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::RawMessageDeltaEvent::Type]
-      required :type, enum: -> { Anthropic::Models::RawMessageDeltaEvent::Type }
+      #   @return [Symbol, :message_delta]
+      required :type, const: :message_delta
 
       # @!attribute usage
       #   Billing and rate-limit usage.
@@ -40,10 +40,10 @@ module Anthropic
 
       # @!parse
       #   # @param delta [Anthropic::Models::RawMessageDeltaEvent::Delta]
-      #   # @param type [String]
       #   # @param usage [Anthropic::Models::MessageDeltaUsage]
+      #   # @param type [String]
       #   #
-      #   def initialize(delta:, type:, usage:, **) = super
+      #   def initialize(delta:, usage:, type: :message_delta, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
@@ -98,19 +98,6 @@ module Anthropic
 
           finalize!
         end
-      end
-
-      # @example
-      # ```ruby
-      # case type
-      # in :message_delta
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        MESSAGE_DELTA = :message_delta
-
-        finalize!
       end
     end
   end

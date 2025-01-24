@@ -7,7 +7,7 @@ module Anthropic
     # raw_content_block_delta_event => {
     #   delta: Anthropic::Models::RawContentBlockDeltaEvent::Delta,
     #   index: Integer,
-    #   type: Anthropic::Models::RawContentBlockDeltaEvent::Type
+    #   type: :content_block_delta
     # }
     # ```
     class RawContentBlockDeltaEvent < Anthropic::BaseModel
@@ -23,15 +23,15 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::RawContentBlockDeltaEvent::Type]
-      required :type, enum: -> { Anthropic::Models::RawContentBlockDeltaEvent::Type }
+      #   @return [Symbol, :content_block_delta]
+      required :type, const: :content_block_delta
 
       # @!parse
       #   # @param delta [Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta]
       #   # @param index [Integer]
       #   # @param type [String]
       #   #
-      #   def initialize(delta:, index:, type:, **) = super
+      #   def initialize(delta:, index:, type: :content_block_delta, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
@@ -66,19 +66,6 @@ module Anthropic
         variant :input_json_delta, -> { Anthropic::Models::InputJSONDelta }
 
         variant :citations_delta, -> { Anthropic::Models::CitationsDelta }
-      end
-
-      # @example
-      # ```ruby
-      # case type
-      # in :content_block_delta
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        CONTENT_BLOCK_DELTA = :content_block_delta
-
-        finalize!
       end
     end
   end

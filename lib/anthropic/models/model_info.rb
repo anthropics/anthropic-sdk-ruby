@@ -8,7 +8,7 @@ module Anthropic
     #   id: String,
     #   created_at: Time,
     #   display_name: String,
-    #   type: Anthropic::Models::ModelInfo::Type
+    #   type: :model
     # }
     # ```
     class ModelInfo < Anthropic::BaseModel
@@ -36,8 +36,8 @@ module Anthropic
       #
       #     For Models, this is always `"model"`.
       #
-      #   @return [Symbol, Anthropic::Models::ModelInfo::Type]
-      required :type, enum: -> { Anthropic::Models::ModelInfo::Type }
+      #   @return [Symbol, :model]
+      required :type, const: :model
 
       # @!parse
       #   # @param id [String]
@@ -45,26 +45,9 @@ module Anthropic
       #   # @param display_name [String]
       #   # @param type [String]
       #   #
-      #   def initialize(id:, created_at:, display_name:, type:, **) = super
+      #   def initialize(id:, created_at:, display_name:, type: :model, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # Object type.
-      #
-      #   For Models, this is always `"model"`.
-      #
-      # @example
-      # ```ruby
-      # case type
-      # in :model
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        MODEL = :model
-
-        finalize!
-      end
     end
   end
 end

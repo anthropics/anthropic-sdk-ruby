@@ -5,34 +5,21 @@ module Anthropic
     # @example
     # ```ruby
     # raw_message_stop_event => {
-    #   type: Anthropic::Models::RawMessageStopEvent::Type
+    #   type: :message_stop
     # }
     # ```
     class RawMessageStopEvent < Anthropic::BaseModel
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::RawMessageStopEvent::Type]
-      required :type, enum: -> { Anthropic::Models::RawMessageStopEvent::Type }
+      #   @return [Symbol, :message_stop]
+      required :type, const: :message_stop
 
       # @!parse
       #   # @param type [String]
       #   #
-      #   def initialize(type:, **) = super
+      #   def initialize(type: :message_stop, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case type
-      # in :message_stop
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        MESSAGE_STOP = :message_stop
-
-        finalize!
-      end
     end
   end
 end

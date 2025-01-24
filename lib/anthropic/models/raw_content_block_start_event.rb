@@ -7,7 +7,7 @@ module Anthropic
     # raw_content_block_start_event => {
     #   content_block: Anthropic::Models::RawContentBlockStartEvent::ContentBlock,
     #   index: Integer,
-    #   type: Anthropic::Models::RawContentBlockStartEvent::Type
+    #   type: :content_block_start
     # }
     # ```
     class RawContentBlockStartEvent < Anthropic::BaseModel
@@ -23,15 +23,15 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::RawContentBlockStartEvent::Type]
-      required :type, enum: -> { Anthropic::Models::RawContentBlockStartEvent::Type }
+      #   @return [Symbol, :content_block_start]
+      required :type, const: :content_block_start
 
       # @!parse
       #   # @param content_block [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock]
       #   # @param index [Integer]
       #   # @param type [String]
       #   #
-      #   def initialize(content_block:, index:, type:, **) = super
+      #   def initialize(content_block:, index:, type: :content_block_start, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
@@ -60,19 +60,6 @@ module Anthropic
         variant :text, -> { Anthropic::Models::TextBlock }
 
         variant :tool_use, -> { Anthropic::Models::ToolUseBlock }
-      end
-
-      # @example
-      # ```ruby
-      # case type
-      # in :content_block_start
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        CONTENT_BLOCK_START = :content_block_start
-
-        finalize!
       end
     end
   end

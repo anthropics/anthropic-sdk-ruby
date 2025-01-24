@@ -6,15 +6,15 @@ module Anthropic
       # @example
       # ```ruby
       # beta_tool_choice_auto => {
-      #   type: Anthropic::Models::Beta::BetaToolChoiceAuto::Type,
+      #   type: :auto,
       #   disable_parallel_tool_use: Anthropic::BooleanModel
       # }
       # ```
       class BetaToolChoiceAuto < Anthropic::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaToolChoiceAuto::Type]
-        required :type, enum: -> { Anthropic::Models::Beta::BetaToolChoiceAuto::Type }
+        #   @return [Symbol, :auto]
+        required :type, const: :auto
 
         # @!attribute [r] disable_parallel_tool_use
         #   Whether to disable parallel tool use.
@@ -32,25 +32,12 @@ module Anthropic
         # @!parse
         #   # The model will automatically decide whether to use tools.
         #   #
-        #   # @param type [String]
         #   # @param disable_parallel_tool_use [Boolean]
+        #   # @param type [String]
         #   #
-        #   def initialize(type:, disable_parallel_tool_use: nil, **) = super
+        #   def initialize(disable_parallel_tool_use: nil, type: :auto, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-        # @example
-        # ```ruby
-        # case type
-        # in :auto
-        #   # ...
-        # end
-        # ```
-        class Type < Anthropic::Enum
-          AUTO = :auto
-
-          finalize!
-        end
       end
     end
 

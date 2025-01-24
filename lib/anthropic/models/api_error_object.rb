@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # api_error_object => {
     #   message: String,
-    #   type: Anthropic::Models::APIErrorObject::Type
+    #   type: :api_error
     # }
     # ```
     class APIErrorObject < Anthropic::BaseModel
@@ -17,29 +17,16 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::APIErrorObject::Type]
-      required :type, enum: -> { Anthropic::Models::APIErrorObject::Type }
+      #   @return [Symbol, :api_error]
+      required :type, const: :api_error
 
       # @!parse
       #   # @param message [String]
       #   # @param type [String]
       #   #
-      #   def initialize(message:, type:, **) = super
+      #   def initialize(message:, type: :api_error, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case type
-      # in :api_error
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        API_ERROR = :api_error
-
-        finalize!
-      end
     end
   end
 end

@@ -8,8 +8,8 @@ module Anthropic
       # beta_tool_computer_use20241022 => {
       #   display_height_px: Integer,
       #   display_width_px: Integer,
-      #   name: Anthropic::Models::Beta::BetaToolComputerUse20241022::Name,
-      #   type: Anthropic::Models::Beta::BetaToolComputerUse20241022::Type,
+      #   name: :computer,
+      #   type: :computer_20241022,
       #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
       # }
       # ```
@@ -31,13 +31,13 @@ module Anthropic
         #
         #     This is how the tool will be called by the model and in tool_use blocks.
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaToolComputerUse20241022::Name]
-        required :name, enum: -> { Anthropic::Models::Beta::BetaToolComputerUse20241022::Name }
+        #   @return [Symbol, :computer]
+        required :name, const: :computer
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaToolComputerUse20241022::Type]
-        required :type, enum: -> { Anthropic::Models::Beta::BetaToolComputerUse20241022::Type }
+        #   @return [Symbol, :computer_20241022]
+        required :type, const: :computer_20241022
 
         # @!attribute cache_control
         #
@@ -53,44 +53,24 @@ module Anthropic
         # @!parse
         #   # @param display_height_px [Integer]
         #   # @param display_width_px [Integer]
-        #   # @param name [String]
-        #   # @param type [String]
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   # @param display_number [Integer, nil]
+        #   # @param name [String]
+        #   # @param type [String]
         #   #
-        #   def initialize(display_height_px:, display_width_px:, name:, type:, cache_control: nil, display_number: nil, **) = super
+        #   def initialize(
+        #     display_height_px:,
+        #     display_width_px:,
+        #     cache_control: nil,
+        #     display_number: nil,
+        #     name: :computer,
+        #     type: :computer_20241022,
+        #     **
+        #   )
+        #     super
+        #   end
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-        # Name of the tool.
-        #
-        #   This is how the tool will be called by the model and in tool_use blocks.
-        #
-        # @example
-        # ```ruby
-        # case name
-        # in :computer
-        #   # ...
-        # end
-        # ```
-        class Name < Anthropic::Enum
-          COMPUTER = :computer
-
-          finalize!
-        end
-
-        # @example
-        # ```ruby
-        # case type
-        # in :computer_20241022
-        #   # ...
-        # end
-        # ```
-        class Type < Anthropic::Enum
-          COMPUTER_20241022 = :computer_20241022
-
-          finalize!
-        end
       end
     end
 

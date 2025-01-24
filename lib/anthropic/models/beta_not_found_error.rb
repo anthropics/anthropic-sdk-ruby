@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # beta_not_found_error => {
     #   message: String,
-    #   type: Anthropic::Models::BetaNotFoundError::Type
+    #   type: :not_found_error
     # }
     # ```
     class BetaNotFoundError < Anthropic::BaseModel
@@ -17,29 +17,16 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::BetaNotFoundError::Type]
-      required :type, enum: -> { Anthropic::Models::BetaNotFoundError::Type }
+      #   @return [Symbol, :not_found_error]
+      required :type, const: :not_found_error
 
       # @!parse
       #   # @param message [String]
       #   # @param type [String]
       #   #
-      #   def initialize(message:, type:, **) = super
+      #   def initialize(message:, type: :not_found_error, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case type
-      # in :not_found_error
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        NOT_FOUND_ERROR = :not_found_error
-
-        finalize!
-      end
     end
   end
 end

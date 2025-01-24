@@ -6,34 +6,21 @@ module Anthropic
       # @example
       # ```ruby
       # message_batch_canceled_result => {
-      #   type: Anthropic::Models::Messages::MessageBatchCanceledResult::Type
+      #   type: :canceled
       # }
       # ```
       class MessageBatchCanceledResult < Anthropic::BaseModel
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Messages::MessageBatchCanceledResult::Type]
-        required :type, enum: -> { Anthropic::Models::Messages::MessageBatchCanceledResult::Type }
+        #   @return [Symbol, :canceled]
+        required :type, const: :canceled
 
         # @!parse
         #   # @param type [String]
         #   #
-        #   def initialize(type:, **) = super
+        #   def initialize(type: :canceled, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-        # @example
-        # ```ruby
-        # case type
-        # in :canceled
-        #   # ...
-        # end
-        # ```
-        class Type < Anthropic::Enum
-          CANCELED = :canceled
-
-          finalize!
-        end
       end
     end
 

@@ -8,7 +8,7 @@ module Anthropic
         # ```ruby
         # beta_message_batch_succeeded_result => {
         #   message: Anthropic::Models::Beta::BetaMessage,
-        #   type: Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult::Type
+        #   type: :succeeded
         # }
         # ```
         class BetaMessageBatchSucceededResult < Anthropic::BaseModel
@@ -19,32 +19,16 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult::Type]
-          required :type,
-                   enum: -> {
-                     Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult::Type
-                   }
+          #   @return [Symbol, :succeeded]
+          required :type, const: :succeeded
 
           # @!parse
           #   # @param message [Anthropic::Models::Beta::BetaMessage]
           #   # @param type [String]
           #   #
-          #   def initialize(message:, type:, **) = super
+          #   def initialize(message:, type: :succeeded, **) = super
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-          # @example
-          # ```ruby
-          # case type
-          # in :succeeded
-          #   # ...
-          # end
-          # ```
-          class Type < Anthropic::Enum
-            SUCCEEDED = :succeeded
-
-            finalize!
-          end
         end
       end
     end

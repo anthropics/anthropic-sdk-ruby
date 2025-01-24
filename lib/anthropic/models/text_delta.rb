@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # text_delta => {
     #   text: String,
-    #   type: Anthropic::Models::TextDelta::Type
+    #   type: :text_delta
     # }
     # ```
     class TextDelta < Anthropic::BaseModel
@@ -17,29 +17,16 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::TextDelta::Type]
-      required :type, enum: -> { Anthropic::Models::TextDelta::Type }
+      #   @return [Symbol, :text_delta]
+      required :type, const: :text_delta
 
       # @!parse
       #   # @param text [String]
       #   # @param type [String]
       #   #
-      #   def initialize(text:, type:, **) = super
+      #   def initialize(text:, type: :text_delta, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case type
-      # in :text_delta
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        TEXT_DELTA = :text_delta
-
-        finalize!
-      end
     end
   end
 end

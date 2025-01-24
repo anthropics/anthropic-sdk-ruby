@@ -70,15 +70,15 @@ module Anthropic
         # @example
         # ```ruby
         # input_schema => {
-        #   type: Anthropic::Models::Beta::BetaTool::InputSchema::Type,
+        #   type: :object,
         #   properties: Anthropic::Unknown
         # }
         # ```
         class InputSchema < Anthropic::BaseModel
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::BetaTool::InputSchema::Type]
-          required :type, enum: -> { Anthropic::Models::Beta::BetaTool::InputSchema::Type }
+          #   @return [Symbol, :object]
+          required :type, const: :object
 
           # @!attribute properties
           #
@@ -91,25 +91,12 @@ module Anthropic
           #   #   This defines the shape of the `input` that your tool accepts and that the model
           #   #   will produce.
           #   #
-          #   # @param type [String]
           #   # @param properties [Object, nil]
+          #   # @param type [String]
           #   #
-          #   def initialize(type:, properties: nil, **) = super
+          #   def initialize(properties: nil, type: :object, **) = super
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-          # @example
-          # ```ruby
-          # case type
-          # in :object
-          #   # ...
-          # end
-          # ```
-          class Type < Anthropic::Enum
-            OBJECT = :object
-
-            finalize!
-          end
         end
 
         # @example

@@ -7,7 +7,7 @@ module Anthropic
       # ```ruby
       # beta_image_block_param => {
       #   source: Anthropic::Models::Beta::BetaImageBlockParam::Source,
-      #   type: Anthropic::Models::Beta::BetaImageBlockParam::Type,
+      #   type: :image,
       #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
       # }
       # ```
@@ -19,8 +19,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaImageBlockParam::Type]
-        required :type, enum: -> { Anthropic::Models::Beta::BetaImageBlockParam::Type }
+        #   @return [Symbol, :image]
+        required :type, const: :image
 
         # @!attribute cache_control
         #
@@ -29,10 +29,10 @@ module Anthropic
 
         # @!parse
         #   # @param source [Anthropic::Models::Beta::BetaImageBlockParam::Source]
-        #   # @param type [String]
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
+        #   # @param type [String]
         #   #
-        #   def initialize(source:, type:, cache_control: nil, **) = super
+        #   def initialize(source:, cache_control: nil, type: :image, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
@@ -41,7 +41,7 @@ module Anthropic
         # source => {
         #   data: String,
         #   media_type: Anthropic::Models::Beta::BetaImageBlockParam::Source::MediaType,
-        #   type: Anthropic::Models::Beta::BetaImageBlockParam::Source::Type
+        #   type: :base64
         # }
         # ```
         class Source < Anthropic::BaseModel
@@ -57,15 +57,15 @@ module Anthropic
 
           # @!attribute type
           #
-          #   @return [Symbol, Anthropic::Models::Beta::BetaImageBlockParam::Source::Type]
-          required :type, enum: -> { Anthropic::Models::Beta::BetaImageBlockParam::Source::Type }
+          #   @return [Symbol, :base64]
+          required :type, const: :base64
 
           # @!parse
           #   # @param data [String]
           #   # @param media_type [String]
           #   # @param type [String]
           #   #
-          #   def initialize(data:, media_type:, type:, **) = super
+          #   def initialize(data:, media_type:, type: :base64, **) = super
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
@@ -90,32 +90,6 @@ module Anthropic
 
             finalize!
           end
-
-          # @example
-          # ```ruby
-          # case type
-          # in :base64
-          #   # ...
-          # end
-          # ```
-          class Type < Anthropic::Enum
-            BASE64 = :base64
-
-            finalize!
-          end
-        end
-
-        # @example
-        # ```ruby
-        # case type
-        # in :image
-        #   # ...
-        # end
-        # ```
-        class Type < Anthropic::Enum
-          IMAGE = :image
-
-          finalize!
         end
       end
     end

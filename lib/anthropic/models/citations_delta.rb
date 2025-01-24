@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # citations_delta => {
     #   citation: Anthropic::Models::CitationsDelta::Citation,
-    #   type: Anthropic::Models::CitationsDelta::Type
+    #   type: :citations_delta
     # }
     # ```
     class CitationsDelta < Anthropic::BaseModel
@@ -17,14 +17,14 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::CitationsDelta::Type]
-      required :type, enum: -> { Anthropic::Models::CitationsDelta::Type }
+      #   @return [Symbol, :citations_delta]
+      required :type, const: :citations_delta
 
       # @!parse
       #   # @param citation [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation]
       #   # @param type [String]
       #   #
-      #   def initialize(citation:, type:, **) = super
+      #   def initialize(citation:, type: :citations_delta, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
@@ -59,19 +59,6 @@ module Anthropic
         variant :page_location, -> { Anthropic::Models::CitationPageLocation }
 
         variant :content_block_location, -> { Anthropic::Models::CitationContentBlockLocation }
-      end
-
-      # @example
-      # ```ruby
-      # case type
-      # in :citations_delta
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        CITATIONS_DELTA = :citations_delta
-
-        finalize!
       end
     end
   end

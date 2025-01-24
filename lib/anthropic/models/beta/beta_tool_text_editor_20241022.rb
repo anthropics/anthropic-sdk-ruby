@@ -6,8 +6,8 @@ module Anthropic
       # @example
       # ```ruby
       # beta_tool_text_editor20241022 => {
-      #   name: Anthropic::Models::Beta::BetaToolTextEditor20241022::Name,
-      #   type: Anthropic::Models::Beta::BetaToolTextEditor20241022::Type,
+      #   name: :str_replace_editor,
+      #   type: :text_editor_20241022,
       #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
       # }
       # ```
@@ -17,13 +17,13 @@ module Anthropic
         #
         #     This is how the tool will be called by the model and in tool_use blocks.
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaToolTextEditor20241022::Name]
-        required :name, enum: -> { Anthropic::Models::Beta::BetaToolTextEditor20241022::Name }
+        #   @return [Symbol, :str_replace_editor]
+        required :name, const: :str_replace_editor
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaToolTextEditor20241022::Type]
-        required :type, enum: -> { Anthropic::Models::Beta::BetaToolTextEditor20241022::Type }
+        #   @return [Symbol, :text_editor_20241022]
+        required :type, const: :text_editor_20241022
 
         # @!attribute cache_control
         #
@@ -31,43 +31,13 @@ module Anthropic
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!parse
+        #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   # @param name [String]
         #   # @param type [String]
-        #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   #
-        #   def initialize(name:, type:, cache_control: nil, **) = super
+        #   def initialize(cache_control: nil, name: :str_replace_editor, type: :text_editor_20241022, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-        # Name of the tool.
-        #
-        #   This is how the tool will be called by the model and in tool_use blocks.
-        #
-        # @example
-        # ```ruby
-        # case name
-        # in :str_replace_editor
-        #   # ...
-        # end
-        # ```
-        class Name < Anthropic::Enum
-          STR_REPLACE_EDITOR = :str_replace_editor
-
-          finalize!
-        end
-
-        # @example
-        # ```ruby
-        # case type
-        # in :text_editor_20241022
-        #   # ...
-        # end
-        # ```
-        class Type < Anthropic::Enum
-          TEXT_EDITOR_20241022 = :text_editor_20241022
-
-          finalize!
-        end
       end
     end
 

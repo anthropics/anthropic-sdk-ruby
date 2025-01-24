@@ -8,7 +8,7 @@ module Anthropic
       # beta_raw_content_block_delta_event => {
       #   delta: Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Delta,
       #   index: Integer,
-      #   type: Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Type
+      #   type: :content_block_delta
       # }
       # ```
       class BetaRawContentBlockDeltaEvent < Anthropic::BaseModel
@@ -24,15 +24,15 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Type]
-        required :type, enum: -> { Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Type }
+        #   @return [Symbol, :content_block_delta]
+        required :type, const: :content_block_delta
 
         # @!parse
         #   # @param delta [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta]
         #   # @param index [Integer]
         #   # @param type [String]
         #   #
-        #   def initialize(delta:, index:, type:, **) = super
+        #   def initialize(delta:, index:, type: :content_block_delta, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
@@ -67,19 +67,6 @@ module Anthropic
           variant :input_json_delta, -> { Anthropic::Models::Beta::BetaInputJSONDelta }
 
           variant :citations_delta, -> { Anthropic::Models::Beta::BetaCitationsDelta }
-        end
-
-        # @example
-        # ```ruby
-        # case type
-        # in :content_block_delta
-        #   # ...
-        # end
-        # ```
-        class Type < Anthropic::Enum
-          CONTENT_BLOCK_DELTA = :content_block_delta
-
-          finalize!
         end
       end
     end

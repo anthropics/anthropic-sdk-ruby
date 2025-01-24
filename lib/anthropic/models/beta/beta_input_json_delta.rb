@@ -7,7 +7,7 @@ module Anthropic
       # ```ruby
       # beta_input_json_delta => {
       #   partial_json: String,
-      #   type: Anthropic::Models::Beta::BetaInputJSONDelta::Type
+      #   type: :input_json_delta
       # }
       # ```
       class BetaInputJSONDelta < Anthropic::BaseModel
@@ -18,29 +18,16 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaInputJSONDelta::Type]
-        required :type, enum: -> { Anthropic::Models::Beta::BetaInputJSONDelta::Type }
+        #   @return [Symbol, :input_json_delta]
+        required :type, const: :input_json_delta
 
         # @!parse
         #   # @param partial_json [String]
         #   # @param type [String]
         #   #
-        #   def initialize(partial_json:, type:, **) = super
+        #   def initialize(partial_json:, type: :input_json_delta, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-        # @example
-        # ```ruby
-        # case type
-        # in :input_json_delta
-        #   # ...
-        # end
-        # ```
-        class Type < Anthropic::Enum
-          INPUT_JSON_DELTA = :input_json_delta
-
-          finalize!
-        end
       end
     end
 

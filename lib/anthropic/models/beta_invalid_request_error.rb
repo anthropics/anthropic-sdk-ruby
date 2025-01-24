@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # beta_invalid_request_error => {
     #   message: String,
-    #   type: Anthropic::Models::BetaInvalidRequestError::Type
+    #   type: :invalid_request_error
     # }
     # ```
     class BetaInvalidRequestError < Anthropic::BaseModel
@@ -17,29 +17,16 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::BetaInvalidRequestError::Type]
-      required :type, enum: -> { Anthropic::Models::BetaInvalidRequestError::Type }
+      #   @return [Symbol, :invalid_request_error]
+      required :type, const: :invalid_request_error
 
       # @!parse
       #   # @param message [String]
       #   # @param type [String]
       #   #
-      #   def initialize(message:, type:, **) = super
+      #   def initialize(message:, type: :invalid_request_error, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case type
-      # in :invalid_request_error
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        INVALID_REQUEST_ERROR = :invalid_request_error
-
-        finalize!
-      end
     end
   end
 end

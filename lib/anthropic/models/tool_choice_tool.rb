@@ -6,7 +6,7 @@ module Anthropic
     # ```ruby
     # tool_choice_tool => {
     #   name: String,
-    #   type: Anthropic::Models::ToolChoiceTool::Type,
+    #   type: :tool,
     #   disable_parallel_tool_use: Anthropic::BooleanModel
     # }
     # ```
@@ -19,8 +19,8 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::ToolChoiceTool::Type]
-      required :type, enum: -> { Anthropic::Models::ToolChoiceTool::Type }
+      #   @return [Symbol, :tool]
+      required :type, const: :tool
 
       # @!attribute [r] disable_parallel_tool_use
       #   Whether to disable parallel tool use.
@@ -39,25 +39,12 @@ module Anthropic
       #   # The model will use the specified tool with `tool_choice.name`.
       #   #
       #   # @param name [String]
-      #   # @param type [String]
       #   # @param disable_parallel_tool_use [Boolean]
+      #   # @param type [String]
       #   #
-      #   def initialize(name:, type:, disable_parallel_tool_use: nil, **) = super
+      #   def initialize(name:, disable_parallel_tool_use: nil, type: :tool, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case type
-      # in :tool
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        TOOL = :tool
-
-        finalize!
-      end
     end
   end
 end

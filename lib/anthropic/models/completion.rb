@@ -9,7 +9,7 @@ module Anthropic
     #   completion: String,
     #   model: Anthropic::Models::Model,
     #   stop_reason: String,
-    #   type: Anthropic::Models::Completion::Type
+    #   type: :completion
     # }
     # ```
     class Completion < Anthropic::BaseModel
@@ -52,8 +52,8 @@ module Anthropic
       #
       #     For Text Completions, this is always `"completion"`.
       #
-      #   @return [Symbol, Anthropic::Models::Completion::Type]
-      required :type, enum: -> { Anthropic::Models::Completion::Type }
+      #   @return [Symbol, :completion]
+      required :type, const: :completion
 
       # @!parse
       #   # @param id [String]
@@ -62,26 +62,9 @@ module Anthropic
       #   # @param stop_reason [String, nil]
       #   # @param type [String]
       #   #
-      #   def initialize(id:, completion:, model:, stop_reason:, type:, **) = super
+      #   def initialize(id:, completion:, model:, stop_reason:, type: :completion, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # Object type.
-      #
-      #   For Text Completions, this is always `"completion"`.
-      #
-      # @example
-      # ```ruby
-      # case type
-      # in :completion
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        COMPLETION = :completion
-
-        finalize!
-      end
     end
   end
 end

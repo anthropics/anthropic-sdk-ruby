@@ -7,7 +7,7 @@ module Anthropic
       # ```ruby
       # beta_text_block_param => {
       #   text: String,
-      #   type: Anthropic::Models::Beta::BetaTextBlockParam::Type,
+      #   type: :text,
       #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral,
       #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitationParam] === _1 }
       # }
@@ -20,8 +20,8 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaTextBlockParam::Type]
-        required :type, enum: -> { Anthropic::Models::Beta::BetaTextBlockParam::Type }
+        #   @return [Symbol, :text]
+        required :type, const: :text
 
         # @!attribute cache_control
         #
@@ -37,26 +37,13 @@ module Anthropic
 
         # @!parse
         #   # @param text [String]
-        #   # @param type [String]
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   # @param citations [Array<Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam>]
+        #   # @param type [String]
         #   #
-        #   def initialize(text:, type:, cache_control: nil, citations: nil, **) = super
+        #   def initialize(text:, cache_control: nil, citations: nil, type: :text, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-        # @example
-        # ```ruby
-        # case type
-        # in :text
-        #   # ...
-        # end
-        # ```
-        class Type < Anthropic::Enum
-          TEXT = :text
-
-          finalize!
-        end
       end
     end
 

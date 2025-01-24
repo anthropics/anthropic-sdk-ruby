@@ -14,11 +14,15 @@ module Anthropic
     def self.type_info(spec)
       case spec
       in Hash
-        type_info(spec.values_at(:enum, :union).compact.first)
+        type_info(spec.values_at(:const, :enum, :union).find { !_1.nil? })
       in Proc
         spec
       in Class | Anthropic::Converter
         -> { spec }
+      in true | false
+        -> { Anthropic::BooleanModel }
+      in NilClass | Symbol | Integer | Float
+        -> { spec.class }
       end
     end
 
@@ -51,6 +55,8 @@ module Anthropic
           value.is_a?(Numeric) ? Float(value) : value
         in -> { _1 <= Date || _1 <= Time }
           value.is_a?(String) ? target.parse(value) : value
+        in -> { _1 <= Symbol }
+          value.is_a?(String) ? value.to_sym : value
         in -> { _1 <= String }
           value.is_a?(Symbol) ? value.to_s : value
         else
@@ -444,21 +450,13 @@ module Anthropic
     #
     # @return [void]
     #
-    private_class_method def self.variant(key = nil, type_info = nil, enum: nil, union: nil)
+    private_class_method def self.variant(key, spec = {})
       variant_info =
-        case [key, type_info, enum, union]
-        in [Proc, nil, nil, nil]
-          [nil, key]
-        in [Class | Anthropic::Converter, nil, nil, nil]
-          [nil, -> { key }]
-        in [Symbol, Proc, nil, nil]
-          [key, type_info]
-        in [Symbol, Class | Anthropic::Converter, nil, nil]
-          [key, -> { type_info }]
-        in [Symbol | nil, nil, Proc, nil]
-          [key, enum]
-        in [Symbol | nil, nil, nil, Proc]
-          [key, union]
+        case key
+        in Symbol
+          [key, Anthropic::Converter.type_info(spec)]
+        in Proc | Class | Anthropic::Converter | Hash
+          [nil, Anthropic::Converter.type_info(key)]
         end
 
       known_variants << variant_info
@@ -566,8 +564,8 @@ module Anthropic
       end
     end
 
-    def initialize(spec = {})
-      @items_type_fn = Anthropic::Converter.type_info(spec)
+    def initialize(type_info, spec = {})
+      @items_type_fn = Anthropic::Converter.type_info(type_info || spec)
     end
   end
 
@@ -681,8 +679,8 @@ module Anthropic
       end
     end
 
-    def initialize(spec = {})
-      @items_type_fn = Anthropic::Converter.type_info(spec)
+    def initialize(type_info, spec = {})
+      @items_type_fn = Anthropic::Converter.type_info(type_info || spec)
     end
   end
 
@@ -717,7 +715,7 @@ module Anthropic
         return value
       end
 
-      coerced.filter_map do |key, val|
+      values = coerced.filter_map do |key, val|
         name = key.to_sym
         case (field = fields[name])
         in nil
@@ -733,6 +731,14 @@ module Anthropic
           end
         end
       end.to_h
+
+      defaults.each do |key, val|
+        next if values.key?(key)
+
+        values[key] = val
+      end
+
+      values
     end
 
     # @private
@@ -799,33 +805,46 @@ module Anthropic
 
     # @private
     #
+    # @return [Hash{Symbol => Proc}]
+    #
+    def self.defaults = (@defaults ||= {})
+
+    # @private
+    #
     # @param name_sym [Symbol]
     # @param required [Boolean]
     #
     # @return [void]
     #
     private_class_method def self.add_field(name_sym, required:, type_info:, spec:)
-      type_fn, api_name =
+      type_fn, info =
         case type_info
         in Proc | Class | Anthropic::Converter
-          [Anthropic::Converter.type_info({**spec, union: type_info}), spec[:api_name]]
+          [Anthropic::Converter.type_info({**spec, union: type_info}), spec]
         in Hash
-          [Anthropic::Converter.type_info(type_info), type_info[:api_name]]
+          [Anthropic::Converter.type_info(type_info), type_info]
         end
 
-      key = api_name || name_sym
+      fallback = info[:const]
+      defaults[name_sym] = fallback if required && !info[:nil?] && info.key?(:const)
 
+      key = info.fetch(:api_name, name_sym)
       setter = "#{name_sym}="
+
       if fields.key?(name_sym)
         [name_sym, setter].each { |name| undef_method(name) }
       end
+
       fields[name_sym] = {mode: @mode, required: required, type_fn: type_fn, key: key}
 
-      define_method(setter) { |val| @data[key] = val }
+      define_method(setter) do |val|
+        @data[key] = val
+      end
 
       define_method(name_sym) do
         field_type = type_fn.call
-        Converter.coerce(field_type, @data[key])
+        value = @data.fetch(key) { self.class.defaults[key] }
+        Converter.coerce(field_type, value)
       rescue StandardError
         name = self.class.name.split("::").last
         raise Anthropic::ConversionError.new(

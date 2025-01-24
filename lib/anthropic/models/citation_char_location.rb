@@ -40,8 +40,8 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Models::CitationCharLocation::Type]
-      required :type, enum: -> { Anthropic::Models::CitationCharLocation::Type }
+      #   @return [Symbol, :char_location]
+      required :type, const: :char_location
 
       # @!parse
       #   # @param cited_text [String]
@@ -51,22 +51,19 @@ module Anthropic
       #   # @param start_char_index [Integer]
       #   # @param type [String]
       #   #
-      #   def initialize(cited_text:, document_index:, document_title:, end_char_index:, start_char_index:, type:, **) = super
+      #   def initialize(
+      #     cited_text:,
+      #     document_index:,
+      #     document_title:,
+      #     end_char_index:,
+      #     start_char_index:,
+      #     type: :char_location,
+      #     **
+      #   )
+      #     super
+      #   end
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @example
-      # ```ruby
-      # case type
-      # in :char_location
-      #   # ...
-      # end
-      # ```
-      class Type < Anthropic::Enum
-        CHAR_LOCATION = :char_location
-
-        finalize!
-      end
     end
   end
 end
