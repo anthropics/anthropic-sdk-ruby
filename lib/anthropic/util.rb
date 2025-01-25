@@ -6,6 +6,104 @@ module Anthropic
   # @private
   #
   module Util
+    # @private
+    #
+    # @param input [Object]
+    #
+    # @return [Boolean, Object]
+    #
+    def self.coerce_boolean(input)
+      case input.is_a?(String) ? input.downcase : input
+      in Numeric
+        !input.zero?
+      in "true"
+        true
+      in "false"
+        false
+      else
+        input
+      end
+    end
+
+    # @private
+    #
+    # @param input [Object]
+    #
+    # @raise [ArgumentError]
+    # @return [Boolean, nil]
+    #
+    def self.coerce_boolean!(input)
+      case (coerced = coerce_boolean(input))
+      in true | false | nil
+        coerced
+      else
+        raise ArgumentError.new("Unable to coerce #{input.inspect} into boolean value")
+      end
+    end
+
+    # @private
+    #
+    # @param input [Object]
+    #
+    # @return [Integer, Object]
+    #
+    def self.coerce_integer(input)
+      case input
+      in true
+        1
+      in false
+        0
+      else
+        Integer(input, exception: false) || input
+      end
+    end
+
+    # @private
+    #
+    # @param input [Object]
+    #
+    # @return [Float, Object]
+    #
+    def self.coerce_float(input)
+      case input
+      in true
+        1.0
+      in false
+        0.0
+      else
+        Float(input, exception: false) || input
+      end
+    end
+
+    # @private
+    #
+    # @param input [Object]
+    #
+    # @return [Hash{Object=>Object}, Object]
+    #
+    def self.coerce_hash(input)
+      case input
+      in NilClass | Array | Set | Enumerator
+        input
+      else
+        input.respond_to?(:to_h) ? input.to_h : input
+      end
+    end
+
+    # @private
+    #
+    # @param exceptions [Array<Exception>]
+    # @param sentinel [Object, nil]
+    # @param blk [Proc]
+    #
+    # @return [Object, nil]
+    #
+    def self.suppress(*exceptions, sentinel: nil, &blk)
+      blk.call
+    rescue *exceptions
+      sentinel
+    end
+
     # Use this to indicate that a value should be explicitly removed from a data
     #   structure when using `SDK_RubyModuleName::Util.deep_merge`.
     #
@@ -70,20 +168,6 @@ module Anthropic
 
     # @private
     #
-    # @param exceptions [Array<Exception>]
-    # @param sentinel [Object, nil]
-    # @param blk [Proc]
-    #
-    # @return [Object, nil]
-    #
-    def self.suppress(*exceptions, sentinel: nil, &blk)
-      blk.call
-    rescue *exceptions
-      sentinel
-    end
-
-    # @private
-    #
     # @param data [Hash{Symbol=>Object}, Array<Object>, Object]
     # @param pick [Symbol, Integer, Array<Symbol, Integer>, nil]
     # @param default [Object, nil]
@@ -115,106 +199,30 @@ module Anthropic
 
     # @private
     #
-    # @param input [Object]
+    # @param uri [URI::Generic]
     #
-    # @return [Integer, Object]
+    # @return [String]
     #
-    def self.coerce_integer(input)
-      case input
-      in true
-        1
-      in false
-        0
-      else
-        Integer(input, exception: false) || input
+    def self.uri_origin(uri)
+      "#{uri.scheme}://#{uri.host}#{uri.port == uri.default_port ? '' : ":#{uri.port}"}"
+    end
+
+    # @private
+    #
+    # @param path [String, Array<String>]
+    #
+    # @return [String]
+    #
+    def self.interpolate_path(path)
+      case path
+      in String
+        path
+      in []
+        ""
+      in [String, *interpolations]
+        encoded = interpolations.map { |v| ERB::Util.url_encode(v) }
+        path.first % encoded
       end
-    end
-
-    # @private
-    #
-    # @param input [Object]
-    #
-    # @return [Float, Object]
-    #
-    def self.coerce_float(input)
-      case input
-      in true
-        1.0
-      in false
-        0.0
-      else
-        Float(input, exception: false) || input
-      end
-    end
-
-    # @private
-    #
-    # @param input [Object]
-    #
-    # @return [Boolean, Object]
-    #
-    def self.coerce_boolean(input)
-      case input.is_a?(String) ? input.downcase : input
-      in Numeric
-        !input.zero?
-      in "true"
-        true
-      in "false"
-        false
-      else
-        input
-      end
-    end
-
-    # @private
-    #
-    # @param input [Object]
-    #
-    # @raise [ArgumentError]
-    # @return [Boolean, nil]
-    #
-    def self.coerce_boolean!(input)
-      case (coerced = coerce_boolean(input))
-      in true | false | nil
-        coerced
-      else
-        raise ArgumentError.new("Unable to coerce #{input.inspect} into boolean value")
-      end
-    end
-
-    # @private
-    #
-    # @param input [Object]
-    #
-    # @return [Hash{Object=>Object}, Object]
-    #
-    def self.coerce_hash(input)
-      case input
-      in NilClass | Array | Set | Enumerator
-        input
-      else
-        input.respond_to?(:to_h) ? input.to_h : input
-      end
-    end
-
-    # @private
-    #
-    # @param query [String, nil]
-    #
-    # @return [Hash{String=>Array<String>}]
-    #
-    def self.decode_query(query)
-      CGI.parse(query.to_s)
-    end
-
-    # @private
-    #
-    # @param query [Hash{String=>Array<String>, String, nil}]
-    #
-    # @return [String, nil]
-    #
-    def self.encode_query(query)
-      query.empty? ? nil : URI.encode_www_form(query)
     end
 
     # @private
@@ -299,30 +307,22 @@ module Anthropic
 
     # @private
     #
-    # @param path [String, Array<String>]
+    # @param query [String, nil]
     #
-    # @return [String]
+    # @return [Hash{String=>Array<String>}]
     #
-    def self.interpolate_path(path)
-      case path
-      in String
-        path
-      in []
-        ""
-      in [String, *interpolations]
-        encoded = interpolations.map { |v| ERB::Util.url_encode(v) }
-        path.first % encoded
-      end
+    def self.decode_query(query)
+      CGI.parse(query.to_s)
     end
 
     # @private
     #
-    # @param uri [URI::Generic]
+    # @param query [Hash{String=>Array<String>, String, nil}]
     #
-    # @return [String]
+    # @return [String, nil]
     #
-    def self.uri_origin(uri)
-      "#{uri.scheme}://#{uri.host}#{uri.port == uri.default_port ? '' : ":#{uri.port}"}"
+    def self.encode_query(query)
+      query.empty? ? nil : URI.encode_www_form(query)
     end
 
     # @private
@@ -334,6 +334,45 @@ module Anthropic
     def self.normalized_headers(*headers)
       {}.merge(*headers.compact).to_h do |key, val|
         [key.downcase, val&.to_s&.strip]
+      end
+    end
+
+    # @private
+    #
+    # @param headers [Hash{String=>String}]
+    # @param body [Object]
+    #
+    # @return [Object]
+    #
+    def self.encode_body(headers, body)
+      case [headers["content-type"], body]
+      in ["application/json", Hash | Array]
+        JSON.fast_generate(body)
+      else
+        body
+      end
+    end
+
+    # @private
+    #
+    # @param response [Net::HTTPResponse]
+    # @param suppress_error [Boolean]
+    #
+    # @raise [JSON::ParserError]
+    # @return [Object]
+    #
+    def self.decode_body(response, suppress_error: false)
+      case response.content_type
+      in "application/json"
+        begin
+          JSON.parse(response.body, symbolize_names: true)
+        rescue JSON::ParserError => e
+          raise e unless suppress_error
+          response.body
+        end
+      else
+        # TODO: parsing other response types
+        response.body
       end
     end
   end
