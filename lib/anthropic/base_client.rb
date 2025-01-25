@@ -99,7 +99,7 @@ module Anthropic
     #
     #   @option req [Symbol, nil] :unwrap
     #
-    #   @option req [Class, nil, nil] :page
+    #   @option req [Class, nil] :page
     #
     #   @option req [Anthropic::Converter, Class, nil] :model
     #
@@ -396,7 +396,7 @@ module Anthropic
     #
     #   @option req [Symbol, nil] :unwrap
     #
-    #   @option req [Class, nil, nil] :page
+    #   @option req [Class, nil] :page
     #
     #   @option req [Anthropic::Converter, Class, nil] :model
     #
@@ -439,7 +439,7 @@ module Anthropic
     #
     #   @option req [Symbol, nil] :unwrap
     #
-    #   @option req [Class, nil, nil] :page
+    #   @option req [Class, nil] :page
     #
     #   @option req [Anthropic::Converter, Class, nil] :model
     #
