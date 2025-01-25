@@ -1,28 +1,49 @@
 # frozen_string_literal: true
 
 module Anthropic
+  # @private
+  #
+  module RequestParameters
+    # @!parse
+    #   # Options to specify HTTP behaviour for this request.
+    #   # @return [Anthropic::RequestOptions, Hash{Symbol=>Object}]
+    #   attr_accessor :request_options
+
+    # @param mod [Module]
+    #
+    def self.included(mod)
+      return unless mod <= Anthropic::BaseModel
+
+      mod.extend(Anthropic::RequestParameters::Converter)
+      mod.optional(:request_options, Anthropic::RequestOptions)
+    end
+
+    # @private
+    #
+    module Converter
+      # @private
+      #
+      # @param params [Object]
+      #
+      # @return [Array(Object, Hash{Symbol=>Object})]
+      #
+      def dump_request(params)
+        case (dumped = dump(params))
+        in Hash
+          [dumped.except(:request_options), dumped[:request_options]]
+        else
+          [dumped, nil]
+        end
+      end
+    end
+  end
+
   # Specify HTTP behaviour to use for a specific request. These options supplement
   #   or override those provided at the client level.
   #
   #   When making a request, you can pass an actual {RequestOptions} instance, or
   #   simply pass a Hash with symbol keys matching the attributes on this class.
-  class RequestOptions
-    # @private
-    #
-    # @return [Array<Symbol>]
-    #
-    private_class_method def self.options = @options ||= []
-
-    # @private
-    #
-    # @param name [Symbol]
-    #
-    private_class_method def self.option(name)
-      define_method("#{name}=") { |val| @values[name] = val }
-      define_method(name) { @values[name] }
-      options << name
-    end
-
+  class RequestOptions < Anthropic::BaseModel
     # @private
     #
     # @param opts [Anthropic::RequestOptions, Hash{Symbol=>Object}]
@@ -33,8 +54,8 @@ module Anthropic
       case opts
       in Anthropic::RequestOptions | Hash
         opts.to_h.each_key do |k|
-          unless options.include?(k)
-            raise ArgumentError.new("Request `opts` keys must be one of #{options}, got #{k.inspect}")
+          unless fields.include?(k)
+            raise ArgumentError.new("Request `opts` keys must be one of #{fields.keys}, got #{k.inspect}")
           end
         end
       else
@@ -46,90 +67,47 @@ module Anthropic
     #   Idempotency key to send with request and all associated retries. Will only be
     #     sent for write requests.
     #
-    #   @return [String]
-    option :idempotency_key
-
-    # @!attribute extra_headers
-    #   Extra headers to send with the request. These are `.merged`’d into any
-    #     `extra_headers` given at the client level.
-    #
-    #   @return [Hash{String=>String}]
-    option :extra_headers
+    #   @return [String, nil]
+    optional :idempotency_key, String
 
     # @!attribute extra_query
     #   Extra query params to send with the request. These are `.merge`’d into any
     #     `query` given at the client level.
     #
-    #   @return [Hash{String=>Array<String>, String, nil}]
-    option :extra_query
+    #   @return [Hash{String=>Array<String>, String, nil}, nil]
+    optional :extra_query, Anthropic::HashOf[Anthropic::ArrayOf[String]]
+
+    # @!attribute extra_headers
+    #   Extra headers to send with the request. These are `.merged`’d into any
+    #     `extra_headers` given at the client level.
+    #
+    #   @return [Hash{String=>String, nil}, nil]
+    optional :extra_headers, Anthropic::HashOf[String, nil?: true]
 
     # @!attribute extra_body
     #   Extra data to send with the request. These are deep merged into any data
     #     generated as part of the normal request.
     #
-    #   @return [Hash{Symbol=>Object}]
-    option :extra_body
+    #   @return [Hash{Symbol=>Object}, nil]
+    optional :extra_body, Anthropic::HashOf[Anthropic::Unknown]
 
     # @!attribute max_retries
     #   Maximum number of retries to attempt after a failed initial request.
     #
-    #   @return [Integer]
-    option :max_retries
+    #   @return [Integer, nil]
+    optional :max_retries, Integer
 
     # @!attribute timeout
     #   Request timeout in seconds.
     #
-    #   @return [Float]
-    option :timeout
+    #   @return [Float, nil]
+    optional :timeout, Float
 
-    # @param key [Symbol]
-    #
-    def [](key) = @values[key]
-
-    # Return a Hash containing the options set on this instance.
-    #
-    # @return [Hash{Symbol=>Object}]
-    #
-    def to_h = @values
-
-    alias_method :to_hash, :to_h
-
-    # @param keys [Array<Symbol>, nil]
-    #
-    # @return [Hash{Symbol=>Object}]
-    #
-    def deconstruct_keys(keys) = @values.deconstruct_keys(keys)
-
-    # Returns a new instance of RequestOptions.
-    #
-    # @param values [Hash{Symbol=>Object}] .
-    #
-    #   @option values [String] :idempotency_key Idempotency key to send with request and all associated retries. Will only be
-    #     sent for write requests.
-    #
-    #   @option values [Hash{String=>String}] :extra_headers Extra headers to send with the request. These are `.merged`’d into any
-    #     `extra_headers` given at the client level.
-    #
-    #   @option values [Hash{String=>Array<String>, String, nil}] :extra_query Extra query params to send with the request. These are `.merge`’d into any
-    #     `query` given at the client level.
-    #
-    #   @option values [Hash{Symbol=>Object}] :extra_body Extra data to send with the request. These are deep merged into any data
-    #     generated as part of the normal request.
-    #
-    #   @option values [Integer] :max_retries Maximum number of retries to attempt after a failed initial request.
-    #
-    #   @option values [Float] :timeout Request timeout in seconds.
-    #
-    def initialize(values = {}) = (@values = values)
-
-    # @return [String]
-    #
-    def to_s = @values.to_s
-
-    # @return [String]
-    #
-    def inspect
-      "#<#{self.class}:0x#{object_id.to_s(16)} #{@values.inspect}>"
-    end
+    # @!parse
+    #   # Returns a new instance of RequestOptions.
+    #   #
+    #   # @param values [Hash{Symbol=>Object}]
+    #   #
+    #   def initialize(values = {}) = super
   end
 end

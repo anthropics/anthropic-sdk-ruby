@@ -3,6 +3,10 @@
 module Anthropic
   module Models
     class ModelListParams < Anthropic::BaseModel
+      # @!parse
+      #   extend Anthropic::RequestParameters::Converter
+      include Anthropic::RequestParameters
+
       # @!attribute [r] after_id
       #   ID of the object to use as a cursor for pagination. When provided, returns the
       #     page of results immediately after this object.
@@ -41,8 +45,9 @@ module Anthropic
       #   # @param after_id [String]
       #   # @param before_id [String]
       #   # @param limit [Integer]
+      #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
       #   #
-      #   def initialize(after_id: nil, before_id: nil, limit: nil, **) = super
+      #   def initialize(after_id: nil, before_id: nil, limit: nil, request_options: {}, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
     end

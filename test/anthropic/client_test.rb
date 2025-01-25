@@ -91,7 +91,8 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022"
+        model: "claude-3-5-sonnet-20241022",
+        stream: true
       )
     end
 
@@ -111,7 +112,8 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022"
+        model: "claude-3-5-sonnet-20241022",
+        stream: true
       )
     end
 
@@ -125,12 +127,11 @@ class AnthropicTest < Minitest::Test
 
     assert_raises(Anthropic::InternalServerError) do
       anthropic.messages.create(
-        {
-          max_tokens: 1024,
-          messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20241022"
-        },
-        max_retries: 3
+        max_tokens: 1024,
+        messages: [{"content" => "Hello, world", "role" => "user"}],
+        model: "claude-3-5-sonnet-20241022",
+        stream: true,
+        request_options: {max_retries: 3}
       )
     end
 
@@ -148,12 +149,11 @@ class AnthropicTest < Minitest::Test
 
     assert_raises(Anthropic::InternalServerError) do
       anthropic.messages.create(
-        {
-          max_tokens: 1024,
-          messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20241022"
-        },
-        max_retries: 4
+        max_tokens: 1024,
+        messages: [{"content" => "Hello, world", "role" => "user"}],
+        model: "claude-3-5-sonnet-20241022",
+        stream: true,
+        request_options: {max_retries: 4}
       )
     end
 
@@ -173,7 +173,8 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022"
+        model: "claude-3-5-sonnet-20241022",
+        stream: true
       )
     end
 
@@ -195,7 +196,8 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022"
+        model: "claude-3-5-sonnet-20241022",
+        stream: true
       )
       Thread.current.thread_variable_set(:time_now, nil)
     end
@@ -217,7 +219,8 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022"
+        model: "claude-3-5-sonnet-20241022",
+        stream: true
       )
     end
 
@@ -234,7 +237,8 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022"
+        model: "claude-3-5-sonnet-20241022",
+        stream: true
       )
     end
 
@@ -249,12 +253,11 @@ class AnthropicTest < Minitest::Test
 
     assert_raises(Anthropic::InternalServerError) do
       anthropic.messages.create(
-        {
-          max_tokens: 1024,
-          messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20241022"
-        },
-        extra_headers: {"x-stainless-retry-count" => nil}
+        max_tokens: 1024,
+        messages: [{"content" => "Hello, world", "role" => "user"}],
+        model: "claude-3-5-sonnet-20241022",
+        stream: true,
+        request_options: {extra_headers: {"x-stainless-retry-count" => nil}}
       )
     end
 
@@ -269,12 +272,11 @@ class AnthropicTest < Minitest::Test
 
     assert_raises(Anthropic::InternalServerError) do
       anthropic.messages.create(
-        {
-          max_tokens: 1024,
-          messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20241022"
-        },
-        extra_headers: {"x-stainless-retry-count" => "42"}
+        max_tokens: 1024,
+        messages: [{"content" => "Hello, world", "role" => "user"}],
+        model: "claude-3-5-sonnet-20241022",
+        stream: true,
+        request_options: {extra_headers: {"x-stainless-retry-count" => "42"}}
       )
     end
 
@@ -289,12 +291,11 @@ class AnthropicTest < Minitest::Test
 
     assert_raises(Anthropic::APIConnectionError) do
       anthropic.messages.create(
-        {
-          max_tokens: 1024,
-          messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20241022"
-        },
-        extra_headers: {}
+        max_tokens: 1024,
+        messages: [{"content" => "Hello, world", "role" => "user"}],
+        model: "claude-3-5-sonnet-20241022",
+        stream: true,
+        request_options: {extra_headers: {}}
       )
     end
 
@@ -314,12 +315,11 @@ class AnthropicTest < Minitest::Test
 
     assert_raises(Anthropic::APIConnectionError) do
       anthropic.messages.create(
-        {
-          max_tokens: 1024,
-          messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20241022"
-        },
-        extra_headers: {}
+        max_tokens: 1024,
+        messages: [{"content" => "Hello, world", "role" => "user"}],
+        model: "claude-3-5-sonnet-20241022",
+        stream: true,
+        request_options: {extra_headers: {}}
       )
     end
 
@@ -336,12 +336,11 @@ class AnthropicTest < Minitest::Test
 
     assert_raises(Anthropic::APIConnectionError) do
       anthropic.messages.create(
-        {
-          max_tokens: 1024,
-          messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20241022"
-        },
-        extra_headers: {"Authorization" => "Bearer xyz"}
+        max_tokens: 1024,
+        messages: [{"content" => "Hello, world", "role" => "user"}],
+        model: "claude-3-5-sonnet-20241022",
+        stream: true,
+        request_options: {extra_headers: {"Authorization" => "Bearer xyz"}}
       )
     end
 
@@ -358,12 +357,11 @@ class AnthropicTest < Minitest::Test
 
     assert_raises(Anthropic::APIConnectionError) do
       anthropic.messages.create(
-        {
-          max_tokens: 1024,
-          messages: [{"content" => "Hello, world", "role" => "user"}],
-          model: "claude-3-5-sonnet-20241022"
-        },
-        extra_headers: {"Authorization" => "Bearer xyz"}
+        max_tokens: 1024,
+        messages: [{"content" => "Hello, world", "role" => "user"}],
+        model: "claude-3-5-sonnet-20241022",
+        stream: true,
+        request_options: {extra_headers: {"Authorization" => "Bearer xyz"}}
       )
     end
 
@@ -377,7 +375,8 @@ class AnthropicTest < Minitest::Test
     anthropic.messages.create(
       max_tokens: 1024,
       messages: [{"content" => "Hello, world", "role" => "user"}],
-      model: "claude-3-5-sonnet-20241022"
+      model: "claude-3-5-sonnet-20241022",
+      stream: true
     )
     headers = requester.attempts.first[:headers]
 

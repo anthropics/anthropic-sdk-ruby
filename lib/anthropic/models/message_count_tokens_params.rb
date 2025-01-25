@@ -3,6 +3,10 @@
 module Anthropic
   module Models
     class MessageCountTokensParams < Anthropic::BaseModel
+      # @!parse
+      #   extend Anthropic::RequestParameters::Converter
+      include Anthropic::RequestParameters
+
       # @!attribute messages
       #   Input messages.
       #
@@ -210,8 +214,9 @@ module Anthropic
       #   # @param system_ [String, Array<Anthropic::Models::TextBlockParam>]
       #   # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool]
       #   # @param tools [Array<Anthropic::Models::Tool>]
+      #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
       #   #
-      #   def initialize(messages:, model:, system_: nil, tool_choice: nil, tools: nil, **) = super
+      #   def initialize(messages:, model:, system_: nil, tool_choice: nil, tools: nil, request_options: {}, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 

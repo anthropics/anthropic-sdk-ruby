@@ -38,11 +38,10 @@ module Anthropic
     #
     # @param client [Anthropic::BaseClient]
     # @param req [Hash{Symbol=>Object}]
-    # @param opts [Hash{Symbol=>Object}]
     # @param headers [Hash{String=>String}]
     # @param unwrapped [Hash{Symbol=>Object}]
     #
-    def initialize(client:, req:, opts:, headers:, unwrapped:)
+    def initialize(client:, req:, headers:, unwrapped:)
       model = req.fetch(:model)
 
       case unwrapped
@@ -87,7 +86,7 @@ module Anthropic
       end
 
       req = Anthropic::Util.deep_merge(@req, {query: {after_id: last_id}})
-      @client.request(req, @opts)
+      @client.request(req)
     end
 
     # @param blk [Proc]

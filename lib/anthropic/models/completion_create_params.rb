@@ -3,6 +3,10 @@
 module Anthropic
   module Models
     class CompletionCreateParams < Anthropic::BaseModel
+      # @!parse
+      #   extend Anthropic::RequestParameters::Converter
+      include Anthropic::RequestParameters
+
       # @!attribute max_tokens_to_sample
       #   The maximum number of tokens to generate before stopping.
       #
@@ -131,6 +135,7 @@ module Anthropic
       #   # @param temperature [Float]
       #   # @param top_k [Integer]
       #   # @param top_p [Float]
+      #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
       #   #
       #   def initialize(
       #     max_tokens_to_sample:,
@@ -142,6 +147,7 @@ module Anthropic
       #     temperature: nil,
       #     top_k: nil,
       #     top_p: nil,
+      #     request_options: {},
       #     **
       #   )
       #     super

@@ -5,7 +5,13 @@ module Anthropic
     module Beta
       class ModelRetrieveParams < Anthropic::BaseModel
         # @!parse
-        #   def initialize(**) = super
+        #   extend Anthropic::RequestParameters::Converter
+        include Anthropic::RequestParameters
+
+        # @!parse
+        #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
+        #   #
+        #   def initialize(request_options: {}, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
       end

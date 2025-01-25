@@ -4,6 +4,10 @@ module Anthropic
   module Models
     module Beta
       class MessageCreateParams < Anthropic::BaseModel
+        # @!parse
+        #   extend Anthropic::RequestParameters::Converter
+        include Anthropic::RequestParameters
+
         # @!attribute max_tokens
         #   The maximum number of tokens to generate before stopping.
         #
@@ -335,6 +339,7 @@ module Anthropic
         #   # @param top_k [Integer]
         #   # @param top_p [Float]
         #   # @param betas [Array<String>]
+        #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
         #   #
         #   def initialize(
         #     max_tokens:,
@@ -350,6 +355,7 @@ module Anthropic
         #     top_k: nil,
         #     top_p: nil,
         #     betas: nil,
+        #     request_options: {},
         #     **
         #   )
         #     super

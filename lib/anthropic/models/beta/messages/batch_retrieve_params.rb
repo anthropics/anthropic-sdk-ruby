@@ -5,6 +5,10 @@ module Anthropic
     module Beta
       module Messages
         class BatchRetrieveParams < Anthropic::BaseModel
+          # @!parse
+          #   extend Anthropic::RequestParameters::Converter
+          include Anthropic::RequestParameters
+
           # @!attribute [r] betas
           #   Optional header to specify the beta version(s) you want to use.
           #
@@ -19,8 +23,9 @@ module Anthropic
 
           # @!parse
           #   # @param betas [Array<String>]
+          #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
           #   #
-          #   def initialize(betas: nil, **) = super
+          #   def initialize(betas: nil, request_options: {}, **) = super
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
         end

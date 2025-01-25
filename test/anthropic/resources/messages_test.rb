@@ -14,7 +14,8 @@ class Anthropic::Test::Resources::MessagesTest < Minitest::Test
     response = @anthropic.messages.create(
       max_tokens: 1024,
       messages: [{"content" => "Hello, world", "role" => "user"}],
-      model: "claude-3-5-sonnet-20241022"
+      model: "claude-3-5-sonnet-20241022",
+      stream: true
     )
 
     assert_pattern do
