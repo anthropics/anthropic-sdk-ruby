@@ -14,7 +14,8 @@ class Anthropic::Test::Resources::CompletionsTest < Minitest::Test
     response = @anthropic.completions.create(
       max_tokens_to_sample: 256,
       model: "string",
-      prompt: "\n\nHuman: Hello, world!\n\nAssistant:"
+      prompt: "\n\nHuman: Hello, world!\n\nAssistant:",
+      stream: true
     )
 
     assert_pattern do

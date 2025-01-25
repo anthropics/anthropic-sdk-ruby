@@ -4,6 +4,10 @@ module Anthropic
   module Models
     module Beta
       class MessageCountTokensParams < Anthropic::BaseModel
+        # @!parse
+        #   extend Anthropic::RequestParameters::Converter
+        include Anthropic::RequestParameters
+
         # @!attribute messages
         #   Input messages.
         #
@@ -229,8 +233,9 @@ module Anthropic
         #   # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool]
         #   # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>]
         #   # @param betas [Array<String>]
+        #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
         #   #
-        #   def initialize(messages:, model:, system_: nil, tool_choice: nil, tools: nil, betas: nil, **) = super
+        #   def initialize(messages:, model:, system_: nil, tool_choice: nil, tools: nil, betas: nil, request_options: {}, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 

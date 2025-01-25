@@ -31,14 +31,12 @@ module Anthropic
     #
     # @param client [Anthropic::BaseClient]
     # @param req [Hash{Symbol=>Object}]
-    # @param opts [Hash{Symbol=>Object}]
     # @param headers [Hash{String=>String}]
     # @param unwrapped [Object]
     #
-    def initialize(client:, req:, opts:, headers:, unwrapped:)
+    def initialize(client:, req:, headers:, unwrapped:)
       @client = client
       @req = req
-      @opts = opts
     end
 
     # rubocop:enable Lint/UnusedMethodArgument

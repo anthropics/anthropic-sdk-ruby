@@ -856,13 +856,13 @@ module Anthropic
 
     # @private
     #
-    private_class_method def self.required(name_sym, type_info = nil, spec = {})
+    def self.required(name_sym, type_info = nil, spec = {})
       add_field(name_sym, required: true, type_info: type_info, spec: spec)
     end
 
     # @private
     #
-    private_class_method def self.optional(name_sym, type_info = nil, spec = {})
+    def self.optional(name_sym, type_info = nil, spec = {})
       add_field(name_sym, required: false, type_info: type_info, spec: spec)
     end
 

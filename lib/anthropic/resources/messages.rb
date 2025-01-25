@@ -12,7 +12,7 @@ module Anthropic
       #   The Messages API can be used for either single queries or stateless multi-turn
       #   conversations.
       #
-      # @param params [Anthropic::Models::MessageCreateParams, Hash{Symbol=>Object}] Attributes to send in this request.
+      # @param params [Anthropic::Models::MessageCreateParams, Hash{Symbol=>Object}] .
       #
       #   @option params [Integer] :max_tokens The maximum number of tokens to generate before stopping.
       #
@@ -235,19 +235,19 @@ module Anthropic
       #     Recommended for advanced use cases only. You usually only need to use
       #     `temperature`.
       #
-      # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+      #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}] :request_options
       #
       # @return [Anthropic::Models::Message]
       #
-      def create(params = {}, opts = {})
-        parsed = Anthropic::Models::MessageCreateParams.dump(params)
-        req = {
+      def create(params)
+        parsed, options = Anthropic::Models::MessageCreateParams.dump_request(params)
+        @client.request(
           method: :post,
           path: "v1/messages",
           body: parsed,
-          model: Anthropic::Models::Message
-        }
-        @client.request(req, opts)
+          model: Anthropic::Models::Message,
+          options: options
+        )
       end
 
       # Count the number of tokens in a Message.
@@ -255,7 +255,7 @@ module Anthropic
       #   The Token Count API can be used to count the number of tokens in a Message,
       #   including tools, images, and documents, without creating it.
       #
-      # @param params [Anthropic::Models::MessageCountTokensParams, Hash{Symbol=>Object}] Attributes to send in this request.
+      # @param params [Anthropic::Models::MessageCountTokensParams, Hash{Symbol=>Object}] .
       #
       #   @option params [Array<Anthropic::Models::MessageParam>] :messages Input messages.
       #
@@ -426,19 +426,19 @@ module Anthropic
       #
       #     See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
       #
-      # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+      #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}] :request_options
       #
       # @return [Anthropic::Models::MessageTokensCount]
       #
-      def count_tokens(params = {}, opts = {})
-        parsed = Anthropic::Models::MessageCountTokensParams.dump(params)
-        req = {
+      def count_tokens(params)
+        parsed, options = Anthropic::Models::MessageCountTokensParams.dump_request(params)
+        @client.request(
           method: :post,
           path: "v1/messages/count_tokens",
           body: parsed,
-          model: Anthropic::Models::MessageTokensCount
-        }
-        @client.request(req, opts)
+          model: Anthropic::Models::MessageTokensCount,
+          options: options
+        )
       end
 
       # @param client [Anthropic::Client]

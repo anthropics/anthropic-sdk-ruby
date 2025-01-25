@@ -11,17 +11,19 @@ module Anthropic
         #
         # @param model_id [String] Model identifier or alias.
         #
-        # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+        # @param params [Anthropic::Models::Beta::ModelRetrieveParams, Hash{Symbol=>Object}] .
+        #
+        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}] :request_options
         #
         # @return [Anthropic::Models::Beta::BetaModelInfo]
         #
-        def retrieve(model_id, opts = {})
-          req = {
+        def retrieve(model_id, params = {})
+          @client.request(
             method: :get,
             path: ["v1/models/%0s?beta=true", model_id],
-            model: Anthropic::Models::Beta::BetaModelInfo
-          }
-          @client.request(req, opts)
+            model: Anthropic::Models::Beta::BetaModelInfo,
+            options: params[:request_options]
+          )
         end
 
         # List available models.
@@ -29,7 +31,7 @@ module Anthropic
         #   The Models API response can be used to determine which models are available for
         #   use in the API. More recently released models are listed first.
         #
-        # @param params [Anthropic::Models::Beta::ModelListParams, Hash{Symbol=>Object}] Attributes to send in this request.
+        # @param params [Anthropic::Models::Beta::ModelListParams, Hash{Symbol=>Object}] .
         #
         #   @option params [String] :after_id ID of the object to use as a cursor for pagination. When provided, returns the
         #     page of results immediately after this object.
@@ -41,20 +43,20 @@ module Anthropic
         #
         #     Defaults to `20`. Ranges from `1` to `1000`.
         #
-        # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}] :request_options
         #
         # @return [Anthropic::Page<Anthropic::Models::Beta::BetaModelInfo>]
         #
-        def list(params = {}, opts = {})
-          parsed = Anthropic::Models::Beta::ModelListParams.dump(params)
-          req = {
+        def list(params = {})
+          parsed, options = Anthropic::Models::Beta::ModelListParams.dump_request(params)
+          @client.request(
             method: :get,
             path: "v1/models?beta=true",
             query: parsed,
             page: Anthropic::Page,
-            model: Anthropic::Models::Beta::BetaModelInfo
-          }
-          @client.request(req, opts)
+            model: Anthropic::Models::Beta::BetaModelInfo,
+            options: options
+          )
         end
 
         # @param client [Anthropic::Client]

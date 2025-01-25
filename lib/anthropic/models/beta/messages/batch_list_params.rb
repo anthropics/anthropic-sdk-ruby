@@ -5,6 +5,10 @@ module Anthropic
     module Beta
       module Messages
         class BatchListParams < Anthropic::BaseModel
+          # @!parse
+          #   extend Anthropic::RequestParameters::Converter
+          include Anthropic::RequestParameters
+
           # @!attribute [r] after_id
           #   ID of the object to use as a cursor for pagination. When provided, returns the
           #     page of results immediately after this object.
@@ -56,8 +60,9 @@ module Anthropic
           #   # @param before_id [String]
           #   # @param limit [Integer]
           #   # @param betas [Array<String>]
+          #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
           #   #
-          #   def initialize(after_id: nil, before_id: nil, limit: nil, betas: nil, **) = super
+          #   def initialize(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {}, **) = super
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
         end

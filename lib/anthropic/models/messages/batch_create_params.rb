@@ -4,6 +4,10 @@ module Anthropic
   module Models
     module Messages
       class BatchCreateParams < Anthropic::BaseModel
+        # @!parse
+        #   extend Anthropic::RequestParameters::Converter
+        include Anthropic::RequestParameters
+
         # @!attribute requests
         #   List of requests for prompt completion. Each is an individual request to create
         #     a Message.
@@ -13,8 +17,9 @@ module Anthropic
 
         # @!parse
         #   # @param requests [Array<Anthropic::Models::Messages::BatchCreateParams::Request>]
+        #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
         #   #
-        #   def initialize(requests:, **) = super
+        #   def initialize(requests:, request_options: {}, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 

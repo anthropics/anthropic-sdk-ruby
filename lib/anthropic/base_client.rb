@@ -9,6 +9,26 @@ module Anthropic
 
     # @private
     #
+    # @param req [RequestShape]
+    #
+    # @raise [ArgumentError]
+    #
+    def self.validate!(req)
+      keys = [:method, :path, :query, :headers, :body, :unwrap, :page, :model, :options]
+      case req
+      in Hash
+        req.each_key do |k|
+          unless keys.include?(k)
+            raise ArgumentError.new("Request `req` keys must be one of #{keys}, got #{k.inspect}")
+          end
+        end
+      else
+        raise ArgumentError.new("Request `req` must be a Hash or RequestOptions, got #{req.inspect}")
+      end
+    end
+
+    # @private
+    #
     # @return [Anthropic::PooledNetRequester]
     attr_accessor :requester
 
@@ -65,11 +85,11 @@ module Anthropic
 
     # @private
     #
-    # @param req [req, Hash{Symbol=>Object}] .
+    # @param req [Hash{Symbol=>Object}] .
     #
     #   @option req [Symbol] :method
     #
-    #   @option req [String, Array<String>, nil] :path
+    #   @option req [String, Array<String>] :path
     #
     #   @option req [Hash{String=>Array<String>, String, nil}, nil] :query
     #
@@ -77,17 +97,19 @@ module Anthropic
     #
     #   @option req [Object, nil] :body
     #
-    #   @option req [Class, nil] :page
+    #   @option req [Symbol, nil] :unwrap
     #
-    #   @option req [Class, Anthropic::Converter, Symbol, Boolean, Integer, Float] :model
+    #   @option req [Class, nil, nil] :page
     #
-    # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] .
+    #   @option req [Anthropic::Converter, Class, nil] :model
+    #
+    # @param opts [Hash{Symbol=>Object}] .
     #
     #   @option opts [String, nil] :idempotency_key
     #
-    #   @option opts [Hash{String=>String}, nil] :extra_headers
-    #
     #   @option opts [Hash{String=>Array<String>, String, nil}, nil] :extra_query
+    #
+    #   @option opts [Hash{String=>String, nil}, nil] :extra_headers
     #
     #   @option opts [Hash{Symbol=>Object}, nil] :extra_body
     #
@@ -98,20 +120,20 @@ module Anthropic
     # @return [Hash{Symbol=>Object}]
     #
     private def build_request(req, opts)
-      options = Anthropic::Util.deep_merge(req, opts)
-      method, uninterpolated_path = options.fetch_values(:method, :path)
+      method, uninterpolated_path = req.fetch_values(:method, :path)
+
       path = Anthropic::Util.interpolate_path(uninterpolated_path)
 
       headers = Anthropic::Util.normalized_headers(
         @headers,
         auth_headers,
-        *options.values_at(:headers, :extra_headers)
+        *[req[:headers], opts[:extra_headers]].compact
       )
 
       if @idempotency_header &&
          !headers.key?(@idempotency_header) &&
          !Net::HTTP::IDEMPOTENT_METHODS_.include?(method.to_s.upcase)
-        headers[@idempotency_header] = options.fetch(:idempotency_key) { generate_idempotency_key }
+        headers[@idempotency_header] = opts.fetch(:idempotency_key) { generate_idempotency_key }
       end
 
       unless headers.key?("x-stainless-retry-count")
@@ -125,8 +147,7 @@ module Anthropic
         in :get | :head | :options | :trace
           nil
         else
-          values = options.values_at(:body, :extra_body).compact
-          Anthropic::Util.deep_merge(*values)
+          Anthropic::Util.deep_merge(*[req[:body], opts[:extra_body]].compact)
         end
 
       encoded =
@@ -137,9 +158,10 @@ module Anthropic
           body
         end
 
-      url = Anthropic::Util.join_parsed_uri(@base_url, {**options, path: path})
-      timeout = options.fetch(:timeout, @timeout)
-      {method: method, url: url, headers: headers, body: encoded, timeout: timeout}
+      url = Anthropic::Util.join_parsed_uri(@base_url, {**req, path: path})
+      max_retries = opts.fetch(:max_retries, @max_retries)
+      timeout = opts.fetch(:timeout, @timeout)
+      {method: method, url: url, headers: headers, body: encoded, max_retries: max_retries, timeout: timeout}
     end
 
     # @private
@@ -193,7 +215,7 @@ module Anthropic
 
     # @private
     #
-    # @param request [request, Hash{Symbol=>Object}] .
+    # @param request [Hash{Symbol=>Object}] .
     #
     #   @option request [Symbol] :method
     #
@@ -202,6 +224,8 @@ module Anthropic
     #   @option request [Hash{String=>String}] :headers
     #
     #   @option request [Object] :body
+    #
+    #   @option request [Integer] :max_retries
     #
     #   @option request [Float] :timeout
     #
@@ -257,7 +281,7 @@ module Anthropic
 
     # @private
     #
-    # @param request [request, Hash{Symbol=>Object}] .
+    # @param request [Hash{Symbol=>Object}] .
     #
     #   @option request [Symbol] :method
     #
@@ -267,9 +291,9 @@ module Anthropic
     #
     #   @option request [Object] :body
     #
-    #   @option request [Float] :timeout
+    #   @option request [Integer] :max_retries
     #
-    # @param max_retries [Integer]
+    #   @option request [Float] :timeout
     #
     # @param redirect_count [Integer]
     #
@@ -280,8 +304,8 @@ module Anthropic
     # @raise [Anthropic::APIError]
     # @return [Net::HTTPResponse]
     #
-    private def send_request(request, max_retries:, redirect_count:, retry_count:, send_retry_header:)
-      url, headers = request.fetch_values(:url, :headers)
+    private def send_request(request, redirect_count:, retry_count:, send_retry_header:)
+      url, headers, max_retries = request.fetch_values(:url, :headers, :max_retries)
 
       if send_retry_header
         headers["x-stainless-retry-count"] = retry_count.to_s
@@ -304,7 +328,6 @@ module Anthropic
         request = follow_redirect(request, status: status, location_header: response["location"])
         send_request(
           request,
-          max_retries: max_retries,
           redirect_count: redirect_count + 1,
           retry_count: retry_count,
           send_retry_header: send_retry_header
@@ -327,7 +350,6 @@ module Anthropic
 
         send_request(
           request,
-          max_retries: max_retries,
           redirect_count: redirect_count,
           retry_count: retry_count + 1,
           send_retry_header: send_retry_header
@@ -360,11 +382,11 @@ module Anthropic
 
     # @private
     #
-    # @param req [req, Hash{Symbol=>Object}] .
+    # @param req [Hash{Symbol=>Object}] .
     #
     #   @option req [Symbol] :method
     #
-    #   @option req [String, Array<String>, nil] :path
+    #   @option req [String, Array<String>] :path
     #
     #   @option req [Hash{String=>Array<String>, String, nil}, nil] :query
     #
@@ -372,36 +394,27 @@ module Anthropic
     #
     #   @option req [Object, nil] :body
     #
-    #   @option req [Class, nil] :page
+    #   @option req [Symbol, nil] :unwrap
     #
-    #   @option req [Class, Anthropic::Converter, Symbol, Boolean, Integer, Float] :model
+    #   @option req [Class, nil, nil] :page
     #
-    # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] .
+    #   @option req [Anthropic::Converter, Class, nil] :model
     #
-    #   @option opts [String, nil] :idempotency_key
-    #
-    #   @option opts [Hash{String=>String}, nil] :extra_headers
-    #
-    #   @option opts [Hash{String=>Array<String>, String, nil}, nil] :extra_query
-    #
-    #   @option opts [Hash{Symbol=>Object}, nil] :extra_body
-    #
-    #   @option opts [Integer, nil] :max_retries
-    #
-    #   @option opts [Float, nil] :timeout
+    #   @option req [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :options
     #
     # @param response [nil]
     #
     # @return [Object]
     #
-    private def parse_response(req, opts, response)
+    private def parse_response(req, response)
       parsed = parse_body(response)
       unwrapped = Anthropic::Util.dig(parsed, req[:unwrap])
 
-      page, model = req.values_at(:page, :model)
+      page = req[:page]
+      model = req.fetch(:model, Anthropic::Unknown)
       case [page, model]
       in [Class, Class | Anthropic::Converter | nil]
-        page.new(client: self, req: req, opts: opts, headers: response, unwrapped: unwrapped)
+        page.new(client: self, req: req, headers: response, unwrapped: unwrapped)
       in [nil, Class | Anthropic::Converter]
         Anthropic::Converter.coerce(model, unwrapped)
       in [nil, nil]
@@ -409,15 +422,14 @@ module Anthropic
       end
     end
 
-    # Execute the request specified by req + opts. This is the method that all
-    #   resource methods call into. Params req & opts are kept separate up until this
-    #   point.
+    # Execute the request specified by `req`. This is the method that all resource
+    #   methods call into.
     #
-    # @param req [req, Hash{Symbol=>Object}] .
+    # @param req [Hash{Symbol=>Object}] .
     #
     #   @option req [Symbol] :method
     #
-    #   @option req [String, Array<String>, nil] :path
+    #   @option req [String, Array<String>] :path
     #
     #   @option req [Hash{String=>Array<String>, String, nil}, nil] :query
     #
@@ -425,28 +437,20 @@ module Anthropic
     #
     #   @option req [Object, nil] :body
     #
-    #   @option req [Class, nil] :page
+    #   @option req [Symbol, nil] :unwrap
     #
-    #   @option req [Class, Anthropic::Converter, Symbol, Boolean, Integer, Float] :model
+    #   @option req [Class, nil, nil] :page
     #
-    # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] .
+    #   @option req [Anthropic::Converter, Class, nil] :model
     #
-    #   @option opts [String, nil] :idempotency_key
-    #
-    #   @option opts [Hash{String=>String}, nil] :extra_headers
-    #
-    #   @option opts [Hash{String=>Array<String>, String, nil}, nil] :extra_query
-    #
-    #   @option opts [Hash{Symbol=>Object}, nil] :extra_body
-    #
-    #   @option opts [Integer, nil] :max_retries
-    #
-    #   @option opts [Float, nil] :timeout
+    #   @option req [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :options
     #
     # @raise [Anthropic::APIError]
     # @return [Object]
     #
-    def request(req, opts)
+    def request(req)
+      self.class.validate!(req)
+      opts = req[:options].to_h
       Anthropic::RequestOptions.validate!(opts)
       request = build_request(req, opts)
 
@@ -454,12 +458,11 @@ module Anthropic
       send_retry_header = request.fetch(:headers)["x-stainless-retry-count"] == "0"
       response = send_request(
         request,
-        max_retries: opts.fetch(:max_retries, @max_retries),
         redirect_count: 0,
         retry_count: 0,
         send_retry_header: send_retry_header
       )
-      parse_response(req, opts, response)
+      parse_response(req, response)
     end
 
     # @return [String]

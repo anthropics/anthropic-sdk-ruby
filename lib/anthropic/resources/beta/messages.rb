@@ -13,7 +13,7 @@ module Anthropic
         #   The Messages API can be used for either single queries or stateless multi-turn
         #   conversations.
         #
-        # @param params [Anthropic::Models::Beta::MessageCreateParams, Hash{Symbol=>Object}] Attributes to send in this request.
+        # @param params [Anthropic::Models::Beta::MessageCreateParams, Hash{Symbol=>Object}] .
         #
         #   @option params [Integer] :max_tokens Body param: The maximum number of tokens to generate before stopping.
         #
@@ -239,19 +239,19 @@ module Anthropic
         #
         #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Header param: Optional header to specify the beta version(s) you want to use.
         #
-        # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}] :request_options
         #
         # @return [Anthropic::Models::Beta::BetaMessage]
         #
-        def create(params = {}, opts = {})
-          parsed = Anthropic::Models::Beta::MessageCreateParams.dump(params)
-          req = {
+        def create(params)
+          parsed, options = Anthropic::Models::Beta::MessageCreateParams.dump_request(params)
+          @client.request(
             method: :post,
             path: "v1/messages?beta=true",
             body: parsed,
-            model: Anthropic::Models::Beta::BetaMessage
-          }
-          @client.request(req, opts)
+            model: Anthropic::Models::Beta::BetaMessage,
+            options: options
+          )
         end
 
         # Count the number of tokens in a Message.
@@ -259,7 +259,7 @@ module Anthropic
         #   The Token Count API can be used to count the number of tokens in a Message,
         #   including tools, images, and documents, without creating it.
         #
-        # @param params [Anthropic::Models::Beta::MessageCountTokensParams, Hash{Symbol=>Object}] Attributes to send in this request.
+        # @param params [Anthropic::Models::Beta::MessageCountTokensParams, Hash{Symbol=>Object}] .
         #
         #   @option params [Array<Anthropic::Models::Beta::BetaMessageParam>] :messages Body param: Input messages.
         #
@@ -432,19 +432,19 @@ module Anthropic
         #
         #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Header param: Optional header to specify the beta version(s) you want to use.
         #
-        # @param opts [Hash{Symbol=>Object}, Anthropic::RequestOptions] Options to specify HTTP behaviour for this request.
+        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}] :request_options
         #
         # @return [Anthropic::Models::Beta::BetaMessageTokensCount]
         #
-        def count_tokens(params = {}, opts = {})
-          parsed = Anthropic::Models::Beta::MessageCountTokensParams.dump(params)
-          req = {
+        def count_tokens(params)
+          parsed, options = Anthropic::Models::Beta::MessageCountTokensParams.dump_request(params)
+          @client.request(
             method: :post,
             path: "v1/messages/count_tokens?beta=true",
             body: parsed,
-            model: Anthropic::Models::Beta::BetaMessageTokensCount
-          }
-          @client.request(req, opts)
+            model: Anthropic::Models::Beta::BetaMessageTokensCount,
+            options: options
+          )
         end
 
         # @param client [Anthropic::Client]
