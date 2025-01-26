@@ -344,12 +344,12 @@ module Anthropic
     #
     # @return [Object]
     #
-    def self.encode_body(headers, body)
+    def self.encode_content(headers, body)
       case [headers["content-type"], body]
       in ["application/json", Hash | Array]
-        JSON.fast_generate(body)
+        [headers, JSON.fast_generate(body)]
       else
-        body
+        [headers, body]
       end
     end
 
@@ -361,7 +361,7 @@ module Anthropic
     # @raise [JSON::ParserError]
     # @return [Object]
     #
-    def self.decode_body(response, suppress_error: false)
+    def self.decode_content(response, suppress_error: false)
       case response.content_type
       in "application/json"
         begin

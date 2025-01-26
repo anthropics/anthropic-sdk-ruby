@@ -12,7 +12,6 @@ require_relative "test_namespaces"
 require "minitest"
 require "minitest/focus"
 require "minitest/hooks/test"
-require "stringio"
 
 class Minitest::Test
   parallelize_me!
