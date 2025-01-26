@@ -8,6 +8,7 @@ require "json"
 require "net/http"
 require "securerandom"
 require "set"
+require "stringio"
 require "time"
 require "uri"
 
