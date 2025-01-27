@@ -42,7 +42,7 @@ module Anthropic
         # @!parse
         #   # @param delta [Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta]
         #   # @param usage [Anthropic::Models::Beta::BetaMessageDeltaUsage]
-        #   # @param type [String]
+        #   # @param type [Symbol, :message_delta]
         #   #
         #   def initialize(delta:, usage:, type: :message_delta, **) = super
 
@@ -69,7 +69,7 @@ module Anthropic
           required :stop_sequence, String, nil?: true
 
           # @!parse
-          #   # @param stop_reason [String, nil]
+          #   # @param stop_reason [Symbol, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason, nil]
           #   # @param stop_sequence [String, nil]
           #   #
           #   def initialize(stop_reason:, stop_sequence:, **) = super

@@ -27,7 +27,7 @@ module Anthropic
 
         # @!parse
         #   # @param id [String]
-        #   # @param type [String]
+        #   # @param type [Symbol, :message_batch_deleted]
         #   #
         #   def initialize(id:, type: :message_batch_deleted, **) = super
 

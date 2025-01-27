@@ -59,7 +59,7 @@ module Anthropic
           #   # @param after_id [String]
           #   # @param before_id [String]
           #   # @param limit [Integer]
-          #   # @param betas [Array<String>]
+          #   # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>]
           #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
           #   #
           #   def initialize(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {}, **) = super

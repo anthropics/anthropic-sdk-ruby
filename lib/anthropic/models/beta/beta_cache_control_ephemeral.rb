@@ -16,7 +16,7 @@ module Anthropic
         required :type, const: :ephemeral
 
         # @!parse
-        #   # @param type [String]
+        #   # @param type [Symbol, :ephemeral]
         #   #
         #   def initialize(type: :ephemeral, **) = super
 

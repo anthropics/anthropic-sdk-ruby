@@ -29,8 +29,8 @@ module Anthropic
 
         # @!parse
         #   # @param data [String]
-        #   # @param media_type [String]
-        #   # @param type [String]
+        #   # @param media_type [Symbol, :"text/plain"]
+        #   # @param type [Symbol, :text]
         #   #
         #   def initialize(data:, media_type: :"text/plain", type: :text, **) = super
 

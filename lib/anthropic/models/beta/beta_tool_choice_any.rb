@@ -33,7 +33,7 @@ module Anthropic
         #   # The model will use any available tools.
         #   #
         #   # @param disable_parallel_tool_use [Boolean]
-        #   # @param type [String]
+        #   # @param type [Symbol, :any]
         #   #
         #   def initialize(disable_parallel_tool_use: nil, type: :any, **) = super
 

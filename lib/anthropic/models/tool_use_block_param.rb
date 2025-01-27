@@ -43,7 +43,7 @@ module Anthropic
       #   # @param input [Object]
       #   # @param name [String]
       #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   # @param type [String]
+      #   # @param type [Symbol, :tool_use]
       #   #
       #   def initialize(id:, input:, name:, cache_control: nil, type: :tool_use, **) = super
 

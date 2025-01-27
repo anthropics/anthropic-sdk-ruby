@@ -40,7 +40,7 @@ module Anthropic
       #   #
       #   # @param name [String]
       #   # @param disable_parallel_tool_use [Boolean]
-      #   # @param type [String]
+      #   # @param type [Symbol, :tool]
       #   #
       #   def initialize(name:, disable_parallel_tool_use: nil, type: :tool, **) = super
 

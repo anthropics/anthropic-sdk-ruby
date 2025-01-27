@@ -54,7 +54,7 @@ module Anthropic
         #   # @param citations [Anthropic::Models::Beta::BetaCitationsConfigParam]
         #   # @param context [String, nil]
         #   # @param title [String, nil]
-        #   # @param type [String]
+        #   # @param type [Symbol, :document]
         #   #
         #   def initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document, **) = super
 

@@ -22,7 +22,7 @@ module Anthropic
 
       # @!parse
       #   # @param message [String]
-      #   # @param type [String]
+      #   # @param type [Symbol, :permission_error]
       #   #
       #   def initialize(message:, type: :permission_error, **) = super
 

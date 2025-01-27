@@ -22,7 +22,7 @@ module Anthropic
 
       # @!parse
       #   # @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>]
-      #   # @param type [String]
+      #   # @param type [Symbol, :content]
       #   #
       #   def initialize(content:, type: :content, **) = super
 

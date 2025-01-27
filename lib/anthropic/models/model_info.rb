@@ -41,9 +41,9 @@ module Anthropic
 
       # @!parse
       #   # @param id [String]
-      #   # @param created_at [String]
+      #   # @param created_at [Time]
       #   # @param display_name [String]
-      #   # @param type [String]
+      #   # @param type [Symbol, :model]
       #   #
       #   def initialize(id:, created_at:, display_name:, type: :model, **) = super
 

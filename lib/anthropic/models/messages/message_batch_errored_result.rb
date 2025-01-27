@@ -23,7 +23,7 @@ module Anthropic
 
         # @!parse
         #   # @param error [Anthropic::Models::ErrorResponse]
-        #   # @param type [String]
+        #   # @param type [Symbol, :errored]
         #   #
         #   def initialize(error:, type: :errored, **) = super
 

@@ -210,7 +210,7 @@ module Anthropic
 
       # @!parse
       #   # @param messages [Array<Anthropic::Models::MessageParam>]
-      #   # @param model [String]
+      #   # @param model [String, Symbol, Anthropic::Models::Model::UnionMember1]
       #   # @param system_ [String, Array<Anthropic::Models::TextBlockParam>]
       #   # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool]
       #   # @param tools [Array<Anthropic::Models::Tool>]

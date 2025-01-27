@@ -384,7 +384,7 @@ module Anthropic
             #   #
             #   # @param max_tokens [Integer]
             #   # @param messages [Array<Anthropic::Models::MessageParam>]
-            #   # @param model [String]
+            #   # @param model [String, Symbol, Anthropic::Models::Model::UnionMember1]
             #   # @param metadata [Anthropic::Models::Metadata]
             #   # @param stop_sequences [Array<String>]
             #   # @param stream [Boolean]

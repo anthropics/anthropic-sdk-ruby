@@ -22,7 +22,7 @@ module Anthropic
 
       # @!parse
       #   # @param message [String]
-      #   # @param type [String]
+      #   # @param type [Symbol, :rate_limit_error]
       #   #
       #   def initialize(message:, type: :rate_limit_error, **) = super
 

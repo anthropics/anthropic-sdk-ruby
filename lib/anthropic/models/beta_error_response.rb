@@ -22,7 +22,7 @@ module Anthropic
 
       # @!parse
       #   # @param error [Anthropic::Models::BetaInvalidRequestError, Anthropic::Models::BetaAuthenticationError, Anthropic::Models::BetaBillingError, Anthropic::Models::BetaPermissionError, Anthropic::Models::BetaNotFoundError, Anthropic::Models::BetaRateLimitError, Anthropic::Models::BetaGatewayTimeoutError, Anthropic::Models::BetaAPIError, Anthropic::Models::BetaOverloadedError]
-      #   # @param type [String]
+      #   # @param type [Symbol, :error]
       #   #
       #   def initialize(error:, type: :error, **) = super
 

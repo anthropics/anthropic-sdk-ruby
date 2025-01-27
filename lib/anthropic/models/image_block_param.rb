@@ -29,7 +29,7 @@ module Anthropic
       # @!parse
       #   # @param source [Anthropic::Models::ImageBlockParam::Source]
       #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   # @param type [String]
+      #   # @param type [Symbol, :image]
       #   #
       #   def initialize(source:, cache_control: nil, type: :image, **) = super
 
@@ -61,8 +61,8 @@ module Anthropic
 
         # @!parse
         #   # @param data [String]
-        #   # @param media_type [String]
-        #   # @param type [String]
+        #   # @param media_type [Symbol, Anthropic::Models::ImageBlockParam::Source::MediaType]
+        #   # @param type [Symbol, :base64]
         #   #
         #   def initialize(data:, media_type:, type: :base64, **) = super
 

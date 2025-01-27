@@ -31,7 +31,7 @@ module Anthropic
         # @!parse
         #   # @param content_block [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock]
         #   # @param index [Integer]
-        #   # @param type [String]
+        #   # @param type [Symbol, :content_block_start]
         #   #
         #   def initialize(content_block:, index:, type: :content_block_start, **) = super
 

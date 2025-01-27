@@ -49,7 +49,7 @@ module Anthropic
       #   # @param document_title [String, nil]
       #   # @param end_char_index [Integer]
       #   # @param start_char_index [Integer]
-      #   # @param type [String]
+      #   # @param type [Symbol, :char_location]
       #   #
       #   def initialize(
       #     cited_text:,

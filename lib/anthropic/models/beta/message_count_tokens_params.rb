@@ -228,11 +228,11 @@ module Anthropic
 
         # @!parse
         #   # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>]
-        #   # @param model [String]
+        #   # @param model [String, Symbol, Anthropic::Models::Model::UnionMember1]
         #   # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
         #   # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool]
         #   # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>]
-        #   # @param betas [Array<String>]
+        #   # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>]
         #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
         #   #
         #   def initialize(messages:, model:, system_: nil, tool_choice: nil, tools: nil, betas: nil, request_options: {}, **) = super

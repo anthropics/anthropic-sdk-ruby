@@ -15,7 +15,7 @@ module Anthropic
       required :type, const: :message_stop
 
       # @!parse
-      #   # @param type [String]
+      #   # @param type [Symbol, :message_stop]
       #   #
       #   def initialize(type: :message_stop, **) = super
 

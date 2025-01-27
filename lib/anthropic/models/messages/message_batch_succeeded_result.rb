@@ -23,7 +23,7 @@ module Anthropic
 
         # @!parse
         #   # @param message [Anthropic::Models::Message]
-        #   # @param type [String]
+        #   # @param type [Symbol, :succeeded]
         #   #
         #   def initialize(message:, type: :succeeded, **) = super
 

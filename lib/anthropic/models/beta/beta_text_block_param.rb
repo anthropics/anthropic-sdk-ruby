@@ -39,7 +39,7 @@ module Anthropic
         #   # @param text [String]
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   # @param citations [Array<Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam>]
-        #   # @param type [String]
+        #   # @param type [Symbol, :text]
         #   #
         #   def initialize(text:, cache_control: nil, citations: nil, type: :text, **) = super
 

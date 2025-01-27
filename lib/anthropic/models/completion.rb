@@ -58,9 +58,9 @@ module Anthropic
       # @!parse
       #   # @param id [String]
       #   # @param completion [String]
-      #   # @param model [String]
+      #   # @param model [String, Symbol, Anthropic::Models::Model::UnionMember1]
       #   # @param stop_reason [String, nil]
-      #   # @param type [String]
+      #   # @param type [Symbol, :completion]
       #   #
       #   def initialize(id:, completion:, model:, stop_reason:, type: :completion, **) = super
 

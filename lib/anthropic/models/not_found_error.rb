@@ -22,7 +22,7 @@ module Anthropic
 
       # @!parse
       #   # @param message [String]
-      #   # @param type [String]
+      #   # @param type [Symbol, :not_found_error]
       #   #
       #   def initialize(message:, type: :not_found_error, **) = super
 

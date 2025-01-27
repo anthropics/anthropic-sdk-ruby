@@ -33,7 +33,7 @@ module Anthropic
         #   # The model will automatically decide whether to use tools.
         #   #
         #   # @param disable_parallel_tool_use [Boolean]
-        #   # @param type [String]
+        #   # @param type [Symbol, :auto]
         #   #
         #   def initialize(disable_parallel_tool_use: nil, type: :auto, **) = super
 

@@ -30,7 +30,7 @@ module Anthropic
         # @!parse
         #   # @param delta [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta]
         #   # @param index [Integer]
-        #   # @param type [String]
+        #   # @param type [Symbol, :content_block_delta]
         #   #
         #   def initialize(delta:, index:, type: :content_block_delta, **) = super
 

@@ -328,8 +328,8 @@ module Anthropic
         # @!parse
         #   # @param max_tokens [Integer]
         #   # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>]
-        #   # @param model [String]
-        #   # @param stream [Boolean]
+        #   # @param model [String, Symbol, Anthropic::Models::Model::UnionMember1]
+        #   # @param stream [Boolean, Anthropic::Models::Beta::MessageCreateParams::Stream]
         #   # @param metadata [Anthropic::Models::Beta::BetaMetadata]
         #   # @param stop_sequences [Array<String>]
         #   # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
@@ -338,7 +338,7 @@ module Anthropic
         #   # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>]
         #   # @param top_k [Integer]
         #   # @param top_p [Float]
-        #   # @param betas [Array<String>]
+        #   # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>]
         #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
         #   #
         #   def initialize(
