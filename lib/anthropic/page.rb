@@ -21,7 +21,9 @@ module Anthropic
   #
   # items => Array
   # ```
-  class Page < Anthropic::BasePage
+  class Page
+    include Anthropic::BasePage
+
     # @return [Array<Object>]
     attr_accessor :data
 
@@ -42,6 +44,9 @@ module Anthropic
     # @param unwrapped [Hash{Symbol=>Object}]
     #
     def initialize(client:, req:, headers:, unwrapped:)
+      @client = client
+      @req = req
+
       model = req.fetch(:model)
 
       case unwrapped
@@ -67,8 +72,6 @@ module Anthropic
         @last_id = last_id
       else
       end
-
-      super
     end
 
     # @return [Boolean]
