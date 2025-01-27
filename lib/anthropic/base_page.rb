@@ -3,7 +3,7 @@
 module Anthropic
   # @private
   #
-  class BasePage
+  module BasePage
     # rubocop:disable Lint/UnusedMethodArgument
 
     # @return [Boolean]
@@ -27,17 +27,15 @@ module Anthropic
 
     alias_method :enum_for, :to_enum
 
-    # @private
-    #
-    # @param client [Anthropic::BaseClient]
-    # @param req [Hash{Symbol=>Object}]
-    # @param headers [Hash{String=>String}]
-    # @param unwrapped [Object]
-    #
-    def initialize(client:, req:, headers:, unwrapped:)
-      @client = client
-      @req = req
-    end
+    # @!parse
+    #   # @private
+    #   #
+    #   # @param client [Anthropic::BaseClient]
+    #   # @param req [Hash{Symbol=>Object}]
+    #   # @param headers [Hash{String=>String}]
+    #   # @param unwrapped [Object]
+    #   #
+    #   def initialize(client:, req:, headers:, unwrapped:); end
 
     # rubocop:enable Lint/UnusedMethodArgument
   end
