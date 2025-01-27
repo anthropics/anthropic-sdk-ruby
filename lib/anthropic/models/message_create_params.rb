@@ -115,7 +115,7 @@ module Anthropic
       #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #     details and options.
       #
-      #   @return [String, Symbol, Anthropic::Models::Model::UnionMember1]
+      #   @return [Symbol, Anthropic::Models::Model::UnionMember0, String]
       required :model, union: -> { Anthropic::Models::Model }
 
       # @!attribute [r] metadata
@@ -311,7 +311,7 @@ module Anthropic
       # @!parse
       #   # @param max_tokens [Integer]
       #   # @param messages [Array<Anthropic::Models::MessageParam>]
-      #   # @param model [String, Symbol, Anthropic::Models::Model::UnionMember1]
+      #   # @param model [Symbol, Anthropic::Models::Model::UnionMember0, String]
       #   # @param stream [Boolean, Anthropic::Models::MessageCreateParams::Stream]
       #   # @param metadata [Anthropic::Models::Metadata]
       #   # @param stop_sequences [Array<String>]

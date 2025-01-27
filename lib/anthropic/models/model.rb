@@ -9,17 +9,17 @@ module Anthropic
     # @example
     # ```ruby
     # case model
-    # in String
+    # in Anthropic::Models::Model::UnionMember0
     #   # ...
-    # in Anthropic::Models::Model::UnionMember1
+    # in String
     #   # ...
     # end
     # ```
     class Model < Anthropic::Union
-      variant String
-
       # The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-      variant enum: -> { Anthropic::Models::Model::UnionMember1 }
+      variant enum: -> { Anthropic::Models::Model::UnionMember0 }
+
+      variant String
 
       # The model that will complete your prompt.\n\nSee
       #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
@@ -27,7 +27,7 @@ module Anthropic
       #
       # @example
       # ```ruby
-      # case union_member1
+      # case union_member0
       # in :"claude-3-5-haiku-latest"
       #   # ...
       # in :"claude-3-5-haiku-20241022"
@@ -42,7 +42,7 @@ module Anthropic
       #   #...
       # end
       # ```
-      class UnionMember1 < Anthropic::Enum
+      class UnionMember0 < Anthropic::Enum
         # Fast and cost-effective model
         CLAUDE_3_5_HAIKU_LATEST = :"claude-3-5-haiku-latest"
 

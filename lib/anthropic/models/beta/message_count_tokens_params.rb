@@ -104,7 +104,7 @@ module Anthropic
         #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #     details and options.
         #
-        #   @return [String, Symbol, Anthropic::Models::Model::UnionMember1]
+        #   @return [Symbol, Anthropic::Models::Model::UnionMember0, String]
         required :model, union: -> { Anthropic::Models::Model }
 
         # @!attribute [r] system_
@@ -228,7 +228,7 @@ module Anthropic
 
         # @!parse
         #   # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>]
-        #   # @param model [String, Symbol, Anthropic::Models::Model::UnionMember1]
+        #   # @param model [Symbol, Anthropic::Models::Model::UnionMember0, String]
         #   # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
         #   # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool]
         #   # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>]

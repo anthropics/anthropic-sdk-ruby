@@ -18,7 +18,7 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Minitest::Test
           "params" => {
             "max_tokens" => 1024,
             "messages" => [{"content" => "Hello, world", "role" => "user"}],
-            "model" => "claude-3-5-sonnet-20241022"
+            "model" => "claude-3-5-haiku-latest"
           }
         }
       ]

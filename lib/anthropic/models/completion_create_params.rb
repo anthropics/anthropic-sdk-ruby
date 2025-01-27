@@ -21,7 +21,7 @@ module Anthropic
       #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #     details and options.
       #
-      #   @return [String, Symbol, Anthropic::Models::Model::UnionMember1]
+      #   @return [Symbol, Anthropic::Models::Model::UnionMember0, String]
       required :model, union: -> { Anthropic::Models::Model }
 
       # @!attribute prompt
@@ -127,7 +127,7 @@ module Anthropic
 
       # @!parse
       #   # @param max_tokens_to_sample [Integer]
-      #   # @param model [String, Symbol, Anthropic::Models::Model::UnionMember1]
+      #   # @param model [Symbol, Anthropic::Models::Model::UnionMember0, String]
       #   # @param prompt [String]
       #   # @param stream [Boolean, Anthropic::Models::CompletionCreateParams::Stream]
       #   # @param metadata [Anthropic::Models::Metadata]

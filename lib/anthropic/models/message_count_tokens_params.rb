@@ -103,7 +103,7 @@ module Anthropic
       #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #     details and options.
       #
-      #   @return [String, Symbol, Anthropic::Models::Model::UnionMember1]
+      #   @return [Symbol, Anthropic::Models::Model::UnionMember0, String]
       required :model, union: -> { Anthropic::Models::Model }
 
       # @!attribute [r] system_
@@ -210,7 +210,7 @@ module Anthropic
 
       # @!parse
       #   # @param messages [Array<Anthropic::Models::MessageParam>]
-      #   # @param model [String, Symbol, Anthropic::Models::Model::UnionMember1]
+      #   # @param model [Symbol, Anthropic::Models::Model::UnionMember0, String]
       #   # @param system_ [String, Array<Anthropic::Models::TextBlockParam>]
       #   # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool]
       #   # @param tools [Array<Anthropic::Models::Tool>]

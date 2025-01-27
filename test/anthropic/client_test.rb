@@ -91,7 +91,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022",
+        model: "claude-3-5-haiku-latest",
         stream: true
       )
     end
@@ -112,7 +112,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022",
+        model: "claude-3-5-haiku-latest",
         stream: true
       )
     end
@@ -129,7 +129,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022",
+        model: "claude-3-5-haiku-latest",
         stream: true,
         request_options: {max_retries: 3}
       )
@@ -151,7 +151,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022",
+        model: "claude-3-5-haiku-latest",
         stream: true,
         request_options: {max_retries: 4}
       )
@@ -173,7 +173,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022",
+        model: "claude-3-5-haiku-latest",
         stream: true
       )
     end
@@ -196,7 +196,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022",
+        model: "claude-3-5-haiku-latest",
         stream: true
       )
       Thread.current.thread_variable_set(:time_now, nil)
@@ -219,7 +219,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022",
+        model: "claude-3-5-haiku-latest",
         stream: true
       )
     end
@@ -237,7 +237,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022",
+        model: "claude-3-5-haiku-latest",
         stream: true
       )
     end
@@ -255,7 +255,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022",
+        model: "claude-3-5-haiku-latest",
         stream: true,
         request_options: {extra_headers: {"x-stainless-retry-count" => nil}}
       )
@@ -274,7 +274,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022",
+        model: "claude-3-5-haiku-latest",
         stream: true,
         request_options: {extra_headers: {"x-stainless-retry-count" => "42"}}
       )
@@ -293,7 +293,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022",
+        model: "claude-3-5-haiku-latest",
         stream: true,
         request_options: {extra_headers: {}}
       )
@@ -317,7 +317,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022",
+        model: "claude-3-5-haiku-latest",
         stream: true,
         request_options: {extra_headers: {}}
       )
@@ -338,7 +338,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022",
+        model: "claude-3-5-haiku-latest",
         stream: true,
         request_options: {extra_headers: {"Authorization" => "Bearer xyz"}}
       )
@@ -359,7 +359,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{"content" => "Hello, world", "role" => "user"}],
-        model: "claude-3-5-sonnet-20241022",
+        model: "claude-3-5-haiku-latest",
         stream: true,
         request_options: {extra_headers: {"Authorization" => "Bearer xyz"}}
       )
@@ -375,7 +375,7 @@ class AnthropicTest < Minitest::Test
     anthropic.messages.create(
       max_tokens: 1024,
       messages: [{"content" => "Hello, world", "role" => "user"}],
-      model: "claude-3-5-sonnet-20241022",
+      model: "claude-3-5-haiku-latest",
       stream: true
     )
     headers = requester.attempts.first[:headers]
