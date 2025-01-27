@@ -19,7 +19,7 @@ module Anthropic
       #     Note that our models may stop _before_ reaching this maximum. This parameter
       #     only specifies the absolute maximum number of tokens to generate.
       #
-      #   @option params [String, Symbol, Anthropic::Models::Model::UnionMember1] :model The model that will complete your prompt.\n\nSee
+      #   @option params [Symbol, Anthropic::Models::Model::UnionMember0, String] :model The model that will complete your prompt.\n\nSee
       #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #     details and options.
       #

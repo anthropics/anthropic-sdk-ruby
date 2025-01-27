@@ -32,7 +32,7 @@ module Anthropic
       #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #     details and options.
       #
-      #   @return [String, Symbol, Anthropic::Models::Model::UnionMember1]
+      #   @return [Symbol, Anthropic::Models::Model::UnionMember0, String]
       required :model, union: -> { Anthropic::Models::Model }
 
       # @!attribute stop_reason
@@ -58,7 +58,7 @@ module Anthropic
       # @!parse
       #   # @param id [String]
       #   # @param completion [String]
-      #   # @param model [String, Symbol, Anthropic::Models::Model::UnionMember1]
+      #   # @param model [Symbol, Anthropic::Models::Model::UnionMember0, String]
       #   # @param stop_reason [String, nil]
       #   # @param type [Symbol, :completion]
       #   #

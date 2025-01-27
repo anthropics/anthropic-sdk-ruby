@@ -109,7 +109,7 @@ module Anthropic
       #     the top-level `system` parameter — there is no `"system"` role for input
       #     messages in the Messages API.
       #
-      #   @option params [String, Symbol, Anthropic::Models::Model::UnionMember1] :model The model that will complete your prompt.\n\nSee
+      #   @option params [Symbol, Anthropic::Models::Model::UnionMember0, String] :model The model that will complete your prompt.\n\nSee
       #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #     details and options.
       #
@@ -344,7 +344,7 @@ module Anthropic
       #     the top-level `system` parameter — there is no `"system"` role for input
       #     messages in the Messages API.
       #
-      #   @option params [String, Symbol, Anthropic::Models::Model::UnionMember1] :model The model that will complete your prompt.\n\nSee
+      #   @option params [Symbol, Anthropic::Models::Model::UnionMember0, String] :model The model that will complete your prompt.\n\nSee
       #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #     details and options.
       #
