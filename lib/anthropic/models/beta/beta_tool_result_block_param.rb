@@ -52,7 +52,7 @@ module Anthropic
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   # @param content [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>]
         #   # @param is_error [Boolean]
-        #   # @param type [String]
+        #   # @param type [Symbol, :tool_result]
         #   #
         #   def initialize(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result, **) = super
 

@@ -16,7 +16,7 @@ module Anthropic
         required :type, const: :canceled
 
         # @!parse
-        #   # @param type [String]
+        #   # @param type [Symbol, :canceled]
         #   #
         #   def initialize(type: :canceled, **) = super
 

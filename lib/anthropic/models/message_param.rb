@@ -22,7 +22,7 @@ module Anthropic
 
       # @!parse
       #   # @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam>]
-      #   # @param role [String]
+      #   # @param role [Symbol, Anthropic::Models::MessageParam::Role]
       #   #
       #   def initialize(content:, role:, **) = super
 

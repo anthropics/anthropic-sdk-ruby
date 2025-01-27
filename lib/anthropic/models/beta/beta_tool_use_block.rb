@@ -37,7 +37,7 @@ module Anthropic
         #   # @param id [String]
         #   # @param input [Object]
         #   # @param name [String]
-        #   # @param type [String]
+        #   # @param type [Symbol, :tool_use]
         #   #
         #   def initialize(id:, input:, name:, type: :tool_use, **) = super
 

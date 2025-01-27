@@ -61,7 +61,7 @@ module Anthropic
         #   # @param name [String]
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   # @param description [String]
-        #   # @param type [String, nil]
+        #   # @param type [Symbol, Anthropic::Models::Beta::BetaTool::Type, nil]
         #   #
         #   def initialize(input_schema:, name:, cache_control: nil, description: nil, type: nil, **) = super
 
@@ -92,7 +92,7 @@ module Anthropic
           #   #   will produce.
           #   #
           #   # @param properties [Object, nil]
-          #   # @param type [String]
+          #   # @param type [Symbol, :object]
           #   #
           #   def initialize(properties: nil, type: :object, **) = super
 

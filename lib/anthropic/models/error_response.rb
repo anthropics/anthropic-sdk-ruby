@@ -22,7 +22,7 @@ module Anthropic
 
       # @!parse
       #   # @param error [Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError_, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError_, Anthropic::Models::RateLimitError_, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError]
-      #   # @param type [String]
+      #   # @param type [Symbol, :error]
       #   #
       #   def initialize(error:, type: :error, **) = super
 

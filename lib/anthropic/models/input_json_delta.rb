@@ -22,7 +22,7 @@ module Anthropic
 
       # @!parse
       #   # @param partial_json [String]
-      #   # @param type [String]
+      #   # @param type [Symbol, :input_json_delta]
       #   #
       #   def initialize(partial_json:, type: :input_json_delta, **) = super
 

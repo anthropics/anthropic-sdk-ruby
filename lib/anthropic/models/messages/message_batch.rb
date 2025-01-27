@@ -97,15 +97,15 @@ module Anthropic
 
         # @!parse
         #   # @param id [String]
-        #   # @param archived_at [String, nil]
-        #   # @param cancel_initiated_at [String, nil]
-        #   # @param created_at [String]
-        #   # @param ended_at [String, nil]
-        #   # @param expires_at [String]
-        #   # @param processing_status [String]
+        #   # @param archived_at [Time, nil]
+        #   # @param cancel_initiated_at [Time, nil]
+        #   # @param created_at [Time]
+        #   # @param ended_at [Time, nil]
+        #   # @param expires_at [Time]
+        #   # @param processing_status [Symbol, Anthropic::Models::Messages::MessageBatch::ProcessingStatus]
         #   # @param request_counts [Anthropic::Models::Messages::MessageBatchRequestCounts]
         #   # @param results_url [String, nil]
-        #   # @param type [String]
+        #   # @param type [Symbol, :message_batch]
         #   #
         #   def initialize(
         #     id:,

@@ -17,7 +17,7 @@ module Anthropic
           required :type, const: :expired
 
           # @!parse
-          #   # @param type [String]
+          #   # @param type [Symbol, :expired]
           #   #
           #   def initialize(type: :expired, **) = super
 

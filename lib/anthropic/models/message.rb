@@ -128,12 +128,12 @@ module Anthropic
       # @!parse
       #   # @param id [String]
       #   # @param content [Array<Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock>]
-      #   # @param model [String]
-      #   # @param stop_reason [String, nil]
+      #   # @param model [String, Symbol, Anthropic::Models::Model::UnionMember1]
+      #   # @param stop_reason [Symbol, Anthropic::Models::Message::StopReason, nil]
       #   # @param stop_sequence [String, nil]
       #   # @param usage [Anthropic::Models::Usage]
-      #   # @param role [String]
-      #   # @param type [String]
+      #   # @param role [Symbol, :assistant]
+      #   # @param type [Symbol, :message]
       #   #
       #   def initialize(id:, content:, model:, stop_reason:, stop_sequence:, usage:, role: :assistant, type: :message, **) = super
 

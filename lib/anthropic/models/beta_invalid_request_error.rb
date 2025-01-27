@@ -22,7 +22,7 @@ module Anthropic
 
       # @!parse
       #   # @param message [String]
-      #   # @param type [String]
+      #   # @param type [Symbol, :invalid_request_error]
       #   #
       #   def initialize(message:, type: :invalid_request_error, **) = super
 

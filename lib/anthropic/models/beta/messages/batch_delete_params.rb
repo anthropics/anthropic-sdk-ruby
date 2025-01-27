@@ -22,7 +22,7 @@ module Anthropic
           #   attr_writer :betas
 
           # @!parse
-          #   # @param betas [Array<String>]
+          #   # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>]
           #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
           #   #
           #   def initialize(betas: nil, request_options: {}, **) = super

@@ -32,8 +32,8 @@ module Anthropic
 
         # @!parse
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        #   # @param name [String]
-        #   # @param type [String]
+        #   # @param name [Symbol, :str_replace_editor]
+        #   # @param type [Symbol, :text_editor_20241022]
         #   #
         #   def initialize(cache_control: nil, name: :str_replace_editor, type: :text_editor_20241022, **) = super
 

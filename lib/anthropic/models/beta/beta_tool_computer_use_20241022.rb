@@ -55,8 +55,8 @@ module Anthropic
         #   # @param display_width_px [Integer]
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   # @param display_number [Integer, nil]
-        #   # @param name [String]
-        #   # @param type [String]
+        #   # @param name [Symbol, :computer]
+        #   # @param type [Symbol, :computer_20241022]
         #   #
         #   def initialize(
         #     display_height_px:,

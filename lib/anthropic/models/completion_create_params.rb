@@ -127,9 +127,9 @@ module Anthropic
 
       # @!parse
       #   # @param max_tokens_to_sample [Integer]
-      #   # @param model [String]
+      #   # @param model [String, Symbol, Anthropic::Models::Model::UnionMember1]
       #   # @param prompt [String]
-      #   # @param stream [Boolean]
+      #   # @param stream [Boolean, Anthropic::Models::CompletionCreateParams::Stream]
       #   # @param metadata [Anthropic::Models::Metadata]
       #   # @param stop_sequences [Array<String>]
       #   # @param temperature [Float]

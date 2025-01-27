@@ -22,7 +22,7 @@ module Anthropic
 
       # @!parse
       #   # @param text [String]
-      #   # @param type [String]
+      #   # @param type [Symbol, :text_delta]
       #   #
       #   def initialize(text:, type: :text_delta, **) = super
 

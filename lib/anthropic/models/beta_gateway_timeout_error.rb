@@ -22,7 +22,7 @@ module Anthropic
 
       # @!parse
       #   # @param message [String]
-      #   # @param type [String]
+      #   # @param type [Symbol, :timeout_error]
       #   #
       #   def initialize(message:, type: :timeout_error, **) = super
 

@@ -22,7 +22,7 @@ module Anthropic
 
       # @!parse
       #   # @param message [String]
-      #   # @param type [String]
+      #   # @param type [Symbol, :overloaded_error]
       #   #
       #   def initialize(message:, type: :overloaded_error, **) = super
 

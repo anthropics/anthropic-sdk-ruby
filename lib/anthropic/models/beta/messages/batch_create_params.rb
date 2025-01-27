@@ -31,7 +31,7 @@ module Anthropic
 
           # @!parse
           #   # @param requests [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>]
-          #   # @param betas [Array<String>]
+          #   # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>]
           #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
           #   #
           #   def initialize(requests:, betas: nil, request_options: {}, **) = super
@@ -401,7 +401,7 @@ module Anthropic
               #   #
               #   # @param max_tokens [Integer]
               #   # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>]
-              #   # @param model [String]
+              #   # @param model [String, Symbol, Anthropic::Models::Model::UnionMember1]
               #   # @param metadata [Anthropic::Models::Beta::BetaMetadata]
               #   # @param stop_sequences [Array<String>]
               #   # @param stream [Boolean]

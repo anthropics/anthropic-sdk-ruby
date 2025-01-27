@@ -23,7 +23,7 @@ module Anthropic
 
         # @!parse
         #   # @param index [Integer]
-        #   # @param type [String]
+        #   # @param type [Symbol, :content_block_stop]
         #   #
         #   def initialize(index:, type: :content_block_stop, **) = super
 

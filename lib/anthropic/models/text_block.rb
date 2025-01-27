@@ -34,7 +34,7 @@ module Anthropic
       # @!parse
       #   # @param citations [Array<Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation>]
       #   # @param text [String]
-      #   # @param type [String]
+      #   # @param type [Symbol, :text]
       #   #
       #   def initialize(citations:, text:, type: :text, **) = super
 

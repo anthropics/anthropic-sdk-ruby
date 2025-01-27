@@ -84,7 +84,7 @@ module Anthropic
         #   #   will produce.
         #   #
         #   # @param properties [Object, nil]
-        #   # @param type [String]
+        #   # @param type [Symbol, :object]
         #   #
         #   def initialize(properties: nil, type: :object, **) = super
 

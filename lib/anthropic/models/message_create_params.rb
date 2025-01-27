@@ -311,8 +311,8 @@ module Anthropic
       # @!parse
       #   # @param max_tokens [Integer]
       #   # @param messages [Array<Anthropic::Models::MessageParam>]
-      #   # @param model [String]
-      #   # @param stream [Boolean]
+      #   # @param model [String, Symbol, Anthropic::Models::Model::UnionMember1]
+      #   # @param stream [Boolean, Anthropic::Models::MessageCreateParams::Stream]
       #   # @param metadata [Anthropic::Models::Metadata]
       #   # @param stop_sequences [Array<String>]
       #   # @param system_ [String, Array<Anthropic::Models::TextBlockParam>]

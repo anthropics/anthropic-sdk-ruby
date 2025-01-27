@@ -29,8 +29,8 @@ module Anthropic
 
         # @!parse
         #   # @param data [String]
-        #   # @param media_type [String]
-        #   # @param type [String]
+        #   # @param media_type [Symbol, :"application/pdf"]
+        #   # @param type [Symbol, :base64]
         #   #
         #   def initialize(data:, media_type: :"application/pdf", type: :base64, **) = super
 

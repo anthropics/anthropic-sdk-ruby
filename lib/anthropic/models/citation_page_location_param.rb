@@ -49,7 +49,7 @@ module Anthropic
       #   # @param document_title [String, nil]
       #   # @param end_page_number [Integer]
       #   # @param start_page_number [Integer]
-      #   # @param type [String]
+      #   # @param type [Symbol, :page_location]
       #   #
       #   def initialize(
       #     cited_text:,

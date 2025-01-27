@@ -23,7 +23,7 @@ module Anthropic
 
         # @!parse
         #   # @param citation [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation]
-        #   # @param type [String]
+        #   # @param type [Symbol, :citations_delta]
         #   #
         #   def initialize(citation:, type: :citations_delta, **) = super
 
