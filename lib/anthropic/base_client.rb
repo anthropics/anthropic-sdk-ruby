@@ -298,7 +298,8 @@ module Anthropic
     # @return [Net::HTTPResponse]
     #
     private def send_request(request, redirect_count:, retry_count:, send_retry_header:)
-      url, headers, max_retries = request.fetch_values(:url, :headers, :max_retries)
+      url, headers, body, max_retries = request.fetch_values(:url, :headers, :body, :max_retries)
+      no_retry = retry_count >= max_retries || body.is_a?(IO) || body.is_a?(StringIO)
 
       if send_retry_header
         headers["x-stainless-retry-count"] = retry_count.to_s
@@ -327,7 +328,7 @@ module Anthropic
         )
       in Anthropic::APIConnectionError if retry_count >= max_retries
         raise status
-      in (400..) if retry_count >= max_retries || (response && !should_retry?(status, headers: response))
+      in (400..) if no_retry || (response && !should_retry?(status, headers: response))
         body = Anthropic::Util.decode_content(response, suppress_error: true)
 
         raise Anthropic::APIStatusError.for(
