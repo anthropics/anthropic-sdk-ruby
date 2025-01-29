@@ -1,0 +1,100 @@
+module Anthropic
+  class BaseClient
+    type request =
+      {
+        method: Symbol,
+        path: String | Array[String],
+        query: Hash[String, (Array[String] | String)?]?,
+        headers: Hash[String, String?]?,
+        body: top?,
+        unwrap: Symbol?,
+        page: Class?,
+        model: Anthropic::Converter::input?,
+        options: (Anthropic::RequestOptions
+        | Anthropic::request_options
+        | Hash[Symbol, top])?
+      }
+
+    type normalized_request =
+      {
+        method: Symbol,
+        url: URI::Generic,
+        headers: Hash[String, String],
+        body: top,
+        max_retries: Integer,
+        timeout: Float
+      }
+
+    MAX_REDIRECTS: 20
+
+    def self.validate!: (request req) -> void
+
+    # @private
+    attr_accessor requester: top
+
+    def initialize: (
+      base_url: String,
+      timeout: Float,
+      max_retries: Integer,
+      initial_retry_delay: Float,
+      max_retry_delay: Float,
+      headers: Hash[String, String?],
+      idempotency_header: String?
+    ) -> void
+
+    private def auth_headers: -> Hash[String, String]
+
+    private def generate_idempotency_key: -> String
+
+    private def build_request: (
+      Anthropic::BaseClient::request req,
+      Anthropic::request_options opts
+    ) -> Anthropic::BaseClient::normalized_request
+
+    private def should_retry?: (
+      Integer status,
+      headers: Hash[String, String]
+    ) -> bool
+
+    private def retry_delay: (
+      Hash[String, String] headers,
+      retry_count: Integer
+    ) -> Float
+
+    private def follow_redirect: (
+      Anthropic::BaseClient::normalized_request request,
+      status: Integer,
+      location_header: String
+    ) -> Anthropic::BaseClient::normalized_request
+
+    private def send_request: (
+      Anthropic::BaseClient::normalized_request request,
+      redirect_count: Integer,
+      retry_count: Integer,
+      send_retry_header: bool
+    ) -> top
+
+    private def parse_response: (
+      Anthropic::BaseClient::request req,
+      nil response
+    ) -> top
+
+    def request:
+      (
+        Symbol method,
+        String | Array[String] path,
+        query: Hash[String, (Array[String] | String)?]?,
+        headers: Hash[String, String?]?,
+        body: top?,
+        unwrap: Symbol?,
+        page: Class?,
+        model: Anthropic::Converter::input?,
+        options: (Anthropic::RequestOptions
+        | Anthropic::request_options
+        | Hash[Symbol, top])?
+      ) -> top
+      | (Anthropic::BaseClient::request req) -> top
+
+    def inspect: -> String
+  end
+end

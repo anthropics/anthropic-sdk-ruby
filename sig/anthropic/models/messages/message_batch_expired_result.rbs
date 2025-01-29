@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    
+    class MessageBatchExpiredResult = Messages::MessageBatchExpiredResult
+
+    module Messages
+      type message_batch_expired_result = { type: :expired }
+
+      class MessageBatchExpiredResult < Anthropic::BaseModel
+        attr_accessor type: :expired
+
+        def initialize:
+          (type: :expired) -> void
+          | (
+            ?Anthropic::Models::Messages::message_batch_expired_result
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Messages::message_batch_expired_result
+      end
+    end
+  end
+end

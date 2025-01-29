@@ -1,0 +1,77 @@
+module Anthropic
+  module Resources
+    class Messages
+      class Batches
+        def create:
+          (
+            Anthropic::Models::Messages::BatchCreateParams
+            | Hash[Symbol, top] params
+          ) -> Anthropic::Models::Messages::MessageBatch
+          | (
+            Anthropic::Models::Messages::BatchCreateParams
+            | Hash[Symbol, top] params,
+            requests: Array[Anthropic::Models::Messages::BatchCreateParams::Request],
+            request_options: Anthropic::request_opts
+          ) -> Anthropic::Models::Messages::MessageBatch
+
+        def retrieve:
+          (
+            String message_batch_id,
+            ?Anthropic::Models::Messages::BatchRetrieveParams
+            | Hash[Symbol, top] params
+          ) -> Anthropic::Models::Messages::MessageBatch
+          | (
+            String message_batch_id,
+            request_options: Anthropic::request_opts
+          ) -> Anthropic::Models::Messages::MessageBatch
+
+        def list:
+          (
+            ?Anthropic::Models::Messages::BatchListParams
+            | Hash[Symbol, top] params
+          ) -> Anthropic::Page[Anthropic::Models::Messages::MessageBatch]
+          | (
+            after_id: String,
+            before_id: String,
+            limit: Integer,
+            request_options: Anthropic::request_opts
+          ) -> Anthropic::Page[Anthropic::Models::Messages::MessageBatch]
+
+        def delete:
+          (
+            String message_batch_id,
+            ?Anthropic::Models::Messages::BatchDeleteParams
+            | Hash[Symbol, top] params
+          ) -> Anthropic::Models::Messages::DeletedMessageBatch
+          | (
+            String message_batch_id,
+            request_options: Anthropic::request_opts
+          ) -> Anthropic::Models::Messages::DeletedMessageBatch
+
+        def cancel:
+          (
+            String message_batch_id,
+            ?Anthropic::Models::Messages::BatchCancelParams
+            | Hash[Symbol, top] params
+          ) -> Anthropic::Models::Messages::MessageBatch
+          | (
+            String message_batch_id,
+            request_options: Anthropic::request_opts
+          ) -> Anthropic::Models::Messages::MessageBatch
+
+        def results:
+          (
+            String message_batch_id,
+            ?Anthropic::Models::Messages::BatchResultsParams
+            | Hash[Symbol, top] params
+          ) -> Anthropic::Models::Messages::MessageBatchIndividualResponse
+          | (
+            String message_batch_id,
+            request_options: Anthropic::request_opts
+          ) -> Anthropic::Models::Messages::MessageBatchIndividualResponse
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

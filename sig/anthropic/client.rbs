@@ -1,0 +1,33 @@
+module Anthropic
+  class Client < Anthropic::BaseClient
+    DEFAULT_MAX_RETRIES: 2
+
+    DEFAULT_TIMEOUT_IN_SECONDS: Float
+
+    DEFAULT_INITIAL_RETRY_DELAY: Float
+
+    DEFAULT_MAX_RETRY_DELAY: Float
+
+    attr_reader api_key: String?
+
+    attr_reader auth_token: String?
+
+    attr_reader completions: Anthropic::Resources::Completions
+
+    attr_reader messages: Anthropic::Resources::Messages
+
+    attr_reader models: Anthropic::Resources::Models
+
+    attr_reader beta: Anthropic::Resources::Beta
+
+    def initialize: (
+      base_url: String?,
+      api_key: String?,
+      auth_token: String?,
+      max_retries: Integer,
+      timeout: Float,
+      initial_retry_delay: Float,
+      max_retry_delay: Float
+    ) -> void
+  end
+end

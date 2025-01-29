@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    type cache_control_ephemeral = { type: :ephemeral }
+
+    class CacheControlEphemeral < Anthropic::BaseModel
+      attr_accessor type: :ephemeral
+
+      def initialize:
+        (type: :ephemeral) -> void
+        | (
+          ?Anthropic::Models::cache_control_ephemeral
+          | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::cache_control_ephemeral
+    end
+  end
+end

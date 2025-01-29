@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    type plain_text_source =
+      { data: String, media_type: :"text/plain", type: :text }
+
+    class PlainTextSource < Anthropic::BaseModel
+      attr_accessor data: String
+
+      attr_accessor media_type: :"text/plain"
+
+      attr_accessor type: :text
+
+      def initialize:
+        (data: String, media_type: :"text/plain", type: :text) -> void
+        | (
+          ?Anthropic::Models::plain_text_source | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::plain_text_source
+    end
+  end
+end

@@ -1,0 +1,62 @@
+module Anthropic
+  module Models
+    type message_count_tokens_params =
+      {
+        messages: Array[Anthropic::Models::MessageParam],
+        model: Anthropic::Models::model,
+        system_: Anthropic::Models::MessageCountTokensParams::system_,
+        tool_choice: Anthropic::Models::tool_choice,
+        tools: Array[Anthropic::Models::Tool]
+      }
+      & Anthropic::request_parameters
+
+    class MessageCountTokensParams < Anthropic::BaseModel
+      extend Anthropic::RequestParameters::Converter
+      include Anthropic::RequestParameters
+
+      attr_accessor messages: Array[Anthropic::Models::MessageParam]
+
+      attr_accessor model: Anthropic::Models::model
+
+      attr_reader system_: Anthropic::Models::MessageCountTokensParams::system_?
+
+      def system_=: (
+        Anthropic::Models::MessageCountTokensParams::system_
+      ) -> void
+
+      attr_reader tool_choice: Anthropic::Models::tool_choice?
+
+      def tool_choice=: (Anthropic::Models::tool_choice) -> void
+
+      attr_reader tools: Array[Anthropic::Models::Tool]
+
+      def tools=: (Array[Anthropic::Models::Tool]) -> void
+
+      def initialize:
+        (
+          messages: Array[Anthropic::Models::MessageParam],
+          model: Anthropic::Models::model,
+          system_: Anthropic::Models::MessageCountTokensParams::system_,
+          tool_choice: Anthropic::Models::tool_choice,
+          tools: Array[Anthropic::Models::Tool],
+          request_options: Anthropic::request_opts
+        ) -> void
+        | (
+          ?Anthropic::Models::message_count_tokens_params
+          | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::message_count_tokens_params
+
+      type system_ = String | Array[Anthropic::Models::TextBlockParam]
+
+      class System < Anthropic::Union
+        type text_block_param_array = Array[Anthropic::Models::TextBlockParam]
+
+        TextBlockParamArray: text_block_param_array
+
+        private def self.variants: -> [[nil, String], [nil, Array[Anthropic::Models::TextBlockParam]]]
+      end
+    end
+  end
+end

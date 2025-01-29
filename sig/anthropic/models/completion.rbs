@@ -1,0 +1,36 @@
+module Anthropic
+  module Models
+    type completion =
+      {
+        id: String,
+        completion: String,
+        model: Anthropic::Models::model,
+        stop_reason: String?,
+        type: :completion
+      }
+
+    class Completion < Anthropic::BaseModel
+      attr_accessor id: String
+
+      attr_accessor completion: String
+
+      attr_accessor model: Anthropic::Models::model
+
+      attr_accessor stop_reason: String?
+
+      attr_accessor type: :completion
+
+      def initialize:
+        (
+          id: String,
+          completion: String,
+          model: Anthropic::Models::model,
+          stop_reason: String?,
+          type: :completion
+        ) -> void
+        | (?Anthropic::Models::completion | Anthropic::BaseModel data) -> void
+
+      def to_h: -> Anthropic::Models::completion
+    end
+  end
+end

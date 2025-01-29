@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    type gateway_timeout_error = { message: String, type: :timeout_error }
+
+    class GatewayTimeoutError < Anthropic::BaseModel
+      attr_accessor message: String
+
+      attr_accessor type: :timeout_error
+
+      def initialize:
+        (message: String, type: :timeout_error) -> void
+        | (
+          ?Anthropic::Models::gateway_timeout_error | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::gateway_timeout_error
+    end
+  end
+end

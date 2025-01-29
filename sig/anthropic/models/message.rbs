@@ -1,0 +1,59 @@
+module Anthropic
+  module Models
+    type message =
+      {
+        id: String,
+        content: Array[Anthropic::Models::content_block],
+        model: Anthropic::Models::model,
+        role: :assistant,
+        stop_reason: Anthropic::Models::Message::stop_reason?,
+        stop_sequence: String?,
+        type: :message,
+        usage: Anthropic::Models::Usage
+      }
+
+    class Message < Anthropic::BaseModel
+      attr_accessor id: String
+
+      attr_accessor content: Array[Anthropic::Models::content_block]
+
+      attr_accessor model: Anthropic::Models::model
+
+      attr_accessor role: :assistant
+
+      attr_accessor stop_reason: Anthropic::Models::Message::stop_reason?
+
+      attr_accessor stop_sequence: String?
+
+      attr_accessor type: :message
+
+      attr_accessor usage: Anthropic::Models::Usage
+
+      def initialize:
+        (
+          id: String,
+          content: Array[Anthropic::Models::content_block],
+          model: Anthropic::Models::model,
+          stop_reason: Anthropic::Models::Message::stop_reason?,
+          stop_sequence: String?,
+          usage: Anthropic::Models::Usage,
+          role: :assistant,
+          type: :message
+        ) -> void
+        | (?Anthropic::Models::message | Anthropic::BaseModel data) -> void
+
+      def to_h: -> Anthropic::Models::message
+
+      type stop_reason = :end_turn | :max_tokens | :stop_sequence | :tool_use
+
+      class StopReason < Anthropic::Enum
+        END_TURN: :end_turn
+        MAX_TOKENS: :max_tokens
+        STOP_SEQUENCE: :stop_sequence
+        TOOL_USE: :tool_use
+
+        def self.values: -> Array[Anthropic::Models::Message::stop_reason]
+      end
+    end
+  end
+end

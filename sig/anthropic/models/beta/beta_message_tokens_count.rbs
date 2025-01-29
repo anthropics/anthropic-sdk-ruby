@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    
+    class BetaMessageTokensCount = Beta::BetaMessageTokensCount
+
+    module Beta
+      type beta_message_tokens_count = { input_tokens: Integer }
+
+      class BetaMessageTokensCount < Anthropic::BaseModel
+        attr_accessor input_tokens: Integer
+
+        def initialize:
+          (input_tokens: Integer) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_message_tokens_count
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Beta::beta_message_tokens_count
+      end
+    end
+  end
+end

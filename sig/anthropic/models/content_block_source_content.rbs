@@ -1,0 +1,10 @@
+module Anthropic
+  module Models
+    type content_block_source_content =
+      Anthropic::Models::TextBlockParam | Anthropic::Models::ImageBlockParam
+
+    class ContentBlockSourceContent < Anthropic::Union
+      private def self.variants: -> [[:text, Anthropic::Models::TextBlockParam], [:image, Anthropic::Models::ImageBlockParam]]
+    end
+  end
+end

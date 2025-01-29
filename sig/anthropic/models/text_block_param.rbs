@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    type text_block_param =
+      {
+        text: String,
+        type: :text,
+        cache_control: Anthropic::Models::CacheControlEphemeral?,
+        citations: Array[Anthropic::Models::text_citation_param]
+      }
+
+    class TextBlockParam < Anthropic::BaseModel
+      attr_accessor text: String
+
+      attr_accessor type: :text
+
+      attr_accessor cache_control: Anthropic::Models::CacheControlEphemeral?
+
+      attr_accessor citations: Array[Anthropic::Models::text_citation_param]
+
+      def initialize:
+        (
+          text: String,
+          cache_control: Anthropic::Models::CacheControlEphemeral?,
+          citations: Array[Anthropic::Models::text_citation_param],
+          type: :text
+        ) -> void
+        | (
+          ?Anthropic::Models::text_block_param | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::text_block_param
+    end
+  end
+end

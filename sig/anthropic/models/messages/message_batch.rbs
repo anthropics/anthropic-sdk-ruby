@@ -1,0 +1,74 @@
+module Anthropic
+  module Models
+    
+    class MessageBatch = Messages::MessageBatch
+
+    module Messages
+      type message_batch =
+        {
+          id: String,
+          archived_at: Time?,
+          cancel_initiated_at: Time?,
+          created_at: Time,
+          ended_at: Time?,
+          expires_at: Time,
+          processing_status: Anthropic::Models::Messages::MessageBatch::processing_status,
+          request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts,
+          results_url: String?,
+          type: :message_batch
+        }
+
+      class MessageBatch < Anthropic::BaseModel
+        attr_accessor id: String
+
+        attr_accessor archived_at: Time?
+
+        attr_accessor cancel_initiated_at: Time?
+
+        attr_accessor created_at: Time
+
+        attr_accessor ended_at: Time?
+
+        attr_accessor expires_at: Time
+
+        attr_accessor processing_status: Anthropic::Models::Messages::MessageBatch::processing_status
+
+        attr_accessor request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts
+
+        attr_accessor results_url: String?
+
+        attr_accessor type: :message_batch
+
+        def initialize:
+          (
+            id: String,
+            archived_at: Time?,
+            cancel_initiated_at: Time?,
+            created_at: Time,
+            ended_at: Time?,
+            expires_at: Time,
+            processing_status: Anthropic::Models::Messages::MessageBatch::processing_status,
+            request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts,
+            results_url: String?,
+            type: :message_batch
+          ) -> void
+          | (
+            ?Anthropic::Models::Messages::message_batch
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Messages::message_batch
+
+        type processing_status = :in_progress | :canceling | :ended
+
+        class ProcessingStatus < Anthropic::Enum
+          IN_PROGRESS: :in_progress
+          CANCELING: :canceling
+          ENDED: :ended
+
+          def self.values: -> Array[Anthropic::Models::Messages::MessageBatch::processing_status]
+        end
+      end
+    end
+  end
+end

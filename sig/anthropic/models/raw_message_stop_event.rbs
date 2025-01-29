@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    type raw_message_stop_event = { type: :message_stop }
+
+    class RawMessageStopEvent < Anthropic::BaseModel
+      attr_accessor type: :message_stop
+
+      def initialize:
+        (type: :message_stop) -> void
+        | (
+          ?Anthropic::Models::raw_message_stop_event | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::raw_message_stop_event
+    end
+  end
+end

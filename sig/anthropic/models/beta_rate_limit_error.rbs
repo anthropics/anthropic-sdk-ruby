@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    type beta_rate_limit_error = { message: String, type: :rate_limit_error }
+
+    class BetaRateLimitError < Anthropic::BaseModel
+      attr_accessor message: String
+
+      attr_accessor type: :rate_limit_error
+
+      def initialize:
+        (message: String, type: :rate_limit_error) -> void
+        | (
+          ?Anthropic::Models::beta_rate_limit_error | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::beta_rate_limit_error
+    end
+  end
+end

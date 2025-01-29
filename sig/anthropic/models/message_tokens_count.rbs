@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    type message_tokens_count = { input_tokens: Integer }
+
+    class MessageTokensCount < Anthropic::BaseModel
+      attr_accessor input_tokens: Integer
+
+      def initialize:
+        (input_tokens: Integer) -> void
+        | (
+          ?Anthropic::Models::message_tokens_count | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::message_tokens_count
+    end
+  end
+end

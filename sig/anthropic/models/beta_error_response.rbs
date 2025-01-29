@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    type beta_error_response =
+      { error: Anthropic::Models::beta_error, type: :error }
+
+    class BetaErrorResponse < Anthropic::BaseModel
+      attr_accessor error: Anthropic::Models::beta_error
+
+      attr_accessor type: :error
+
+      def initialize:
+        (error: Anthropic::Models::beta_error, type: :error) -> void
+        | (
+          ?Anthropic::Models::beta_error_response | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::beta_error_response
+    end
+  end
+end

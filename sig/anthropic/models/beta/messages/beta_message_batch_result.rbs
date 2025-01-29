@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Messages
+        type beta_message_batch_result =
+          Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult
+          | Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult
+          | Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult
+          | Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
+
+        class BetaMessageBatchResult < Anthropic::Union
+          private def self.variants: -> [[:succeeded, Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult], [:errored, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult], [:canceled, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult], [:expired, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult]]
+        end
+      end
+    end
+  end
+end

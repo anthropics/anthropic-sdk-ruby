@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    type metadata = { user_id: String? }
+
+    class Metadata < Anthropic::BaseModel
+      attr_accessor user_id: String?
+
+      def initialize:
+        (user_id: String?) -> void
+        | (?Anthropic::Models::metadata | Anthropic::BaseModel data) -> void
+
+      def to_h: -> Anthropic::Models::metadata
+    end
+  end
+end

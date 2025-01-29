@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    
+    class BetaMessageParam = Beta::BetaMessageParam
+
+    module Beta
+      type beta_message_param =
+        {
+          content: Anthropic::Models::Beta::BetaMessageParam::content,
+          role: Anthropic::Models::Beta::BetaMessageParam::role
+        }
+
+      class BetaMessageParam < Anthropic::BaseModel
+        attr_accessor content: Anthropic::Models::Beta::BetaMessageParam::content
+
+        attr_accessor role: Anthropic::Models::Beta::BetaMessageParam::role
+
+        def initialize:
+          (
+            content: Anthropic::Models::Beta::BetaMessageParam::content,
+            role: Anthropic::Models::Beta::BetaMessageParam::role
+          ) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_message_param
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Beta::beta_message_param
+
+        type content =
+          String | Array[Anthropic::Models::Beta::beta_content_block_param]
+
+        class Content < Anthropic::Union
+          type beta_content_block_param_array =
+            Array[Anthropic::Models::Beta::beta_content_block_param]
+
+          BetaContentBlockParamArray: beta_content_block_param_array
+
+          private def self.variants: -> [[nil, String], [nil, Array[Anthropic::Models::Beta::beta_content_block_param]]]
+        end
+
+        type role = :user | :assistant
+
+        class Role < Anthropic::Enum
+          USER: :user
+          ASSISTANT: :assistant
+
+          def self.values: -> Array[Anthropic::Models::Beta::BetaMessageParam::role]
+        end
+      end
+    end
+  end
+end

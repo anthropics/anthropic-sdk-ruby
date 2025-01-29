@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    type text_delta = { text: String, type: :text_delta }
+
+    class TextDelta < Anthropic::BaseModel
+      attr_accessor text: String
+
+      attr_accessor type: :text_delta
+
+      def initialize:
+        (text: String, type: :text_delta) -> void
+        | (?Anthropic::Models::text_delta | Anthropic::BaseModel data) -> void
+
+      def to_h: -> Anthropic::Models::text_delta
+    end
+  end
+end

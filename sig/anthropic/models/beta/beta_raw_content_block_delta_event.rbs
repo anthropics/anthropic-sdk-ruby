@@ -1,0 +1,45 @@
+module Anthropic
+  module Models
+    
+    class BetaRawContentBlockDeltaEvent = Beta::BetaRawContentBlockDeltaEvent
+
+    module Beta
+      type beta_raw_content_block_delta_event =
+        {
+          delta: Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::delta,
+          index: Integer,
+          type: :content_block_delta
+        }
+
+      class BetaRawContentBlockDeltaEvent < Anthropic::BaseModel
+        attr_accessor delta: Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::delta
+
+        attr_accessor index: Integer
+
+        attr_accessor type: :content_block_delta
+
+        def initialize:
+          (
+            delta: Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::delta,
+            index: Integer,
+            type: :content_block_delta
+          ) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_raw_content_block_delta_event
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Beta::beta_raw_content_block_delta_event
+
+        type delta =
+          Anthropic::Models::Beta::BetaTextDelta
+          | Anthropic::Models::Beta::BetaInputJSONDelta
+          | Anthropic::Models::Beta::BetaCitationsDelta
+
+        class Delta < Anthropic::Union
+          private def self.variants: -> [[:text_delta, Anthropic::Models::Beta::BetaTextDelta], [:input_json_delta, Anthropic::Models::Beta::BetaInputJSONDelta], [:citations_delta, Anthropic::Models::Beta::BetaCitationsDelta]]
+        end
+      end
+    end
+  end
+end

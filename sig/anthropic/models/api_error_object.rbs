@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    type api_error_object = { message: String, type: :api_error }
+
+    class APIErrorObject < Anthropic::BaseModel
+      attr_accessor message: String
+
+      attr_accessor type: :api_error
+
+      def initialize:
+        (message: String, type: :api_error) -> void
+        | (
+          ?Anthropic::Models::api_error_object | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::api_error_object
+    end
+  end
+end

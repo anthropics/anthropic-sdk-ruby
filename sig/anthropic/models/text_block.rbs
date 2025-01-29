@@ -1,0 +1,28 @@
+module Anthropic
+  module Models
+    type text_block =
+      {
+        citations: Array[Anthropic::Models::text_citation],
+        text: String,
+        type: :text
+      }
+
+    class TextBlock < Anthropic::BaseModel
+      attr_accessor citations: Array[Anthropic::Models::text_citation]
+
+      attr_accessor text: String
+
+      attr_accessor type: :text
+
+      def initialize:
+        (
+          citations: Array[Anthropic::Models::text_citation],
+          text: String,
+          type: :text
+        ) -> void
+        | (?Anthropic::Models::text_block | Anthropic::BaseModel data) -> void
+
+      def to_h: -> Anthropic::Models::text_block
+    end
+  end
+end

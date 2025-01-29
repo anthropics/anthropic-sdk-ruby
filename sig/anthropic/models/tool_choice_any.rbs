@@ -1,0 +1,21 @@
+module Anthropic
+  module Models
+    type tool_choice_any = { type: :any, disable_parallel_tool_use: bool }
+
+    class ToolChoiceAny < Anthropic::BaseModel
+      attr_accessor type: :any
+
+      attr_reader disable_parallel_tool_use: bool?
+
+      def disable_parallel_tool_use=: (bool) -> void
+
+      def initialize:
+        (disable_parallel_tool_use: bool, type: :any) -> void
+        | (
+          ?Anthropic::Models::tool_choice_any | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::tool_choice_any
+    end
+  end
+end

@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    
+    class BetaMessageDeltaUsage = Beta::BetaMessageDeltaUsage
+
+    module Beta
+      type beta_message_delta_usage = { output_tokens: Integer }
+
+      class BetaMessageDeltaUsage < Anthropic::BaseModel
+        attr_accessor output_tokens: Integer
+
+        def initialize:
+          (output_tokens: Integer) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_message_delta_usage
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Beta::beta_message_delta_usage
+      end
+    end
+  end
+end

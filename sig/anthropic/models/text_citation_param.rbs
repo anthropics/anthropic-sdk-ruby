@@ -1,0 +1,12 @@
+module Anthropic
+  module Models
+    type text_citation_param =
+      Anthropic::Models::CitationCharLocationParam
+      | Anthropic::Models::CitationPageLocationParam
+      | Anthropic::Models::CitationContentBlockLocationParam
+
+    class TextCitationParam < Anthropic::Union
+      private def self.variants: -> [[:char_location, Anthropic::Models::CitationCharLocationParam], [:page_location, Anthropic::Models::CitationPageLocationParam], [:content_block_location, Anthropic::Models::CitationContentBlockLocationParam]]
+    end
+  end
+end
