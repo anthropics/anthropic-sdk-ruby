@@ -1,0 +1,63 @@
+module Anthropic
+  module Models
+    type tool_result_block_param =
+      {
+        tool_use_id: String,
+        type: :tool_result,
+        cache_control: Anthropic::Models::CacheControlEphemeral?,
+        content: Anthropic::Models::ToolResultBlockParam::content,
+        is_error: bool
+      }
+
+    class ToolResultBlockParam < Anthropic::BaseModel
+      attr_accessor tool_use_id: String
+
+      attr_accessor type: :tool_result
+
+      attr_accessor cache_control: Anthropic::Models::CacheControlEphemeral?
+
+      attr_reader content: Anthropic::Models::ToolResultBlockParam::content?
+
+      def content=: (Anthropic::Models::ToolResultBlockParam::content) -> void
+
+      attr_reader is_error: bool?
+
+      def is_error=: (bool) -> void
+
+      def initialize:
+        (
+          tool_use_id: String,
+          cache_control: Anthropic::Models::CacheControlEphemeral?,
+          content: Anthropic::Models::ToolResultBlockParam::content,
+          is_error: bool,
+          type: :tool_result
+        ) -> void
+        | (
+          ?Anthropic::Models::tool_result_block_param
+          | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::tool_result_block_param
+
+      type content =
+        String
+        | Array[Anthropic::Models::ToolResultBlockParam::Content::content]
+
+      class Content < Anthropic::Union
+        type content_array =
+          Array[Anthropic::Models::ToolResultBlockParam::Content::content]
+
+        ContentArray: content_array
+
+        type content =
+          Anthropic::Models::TextBlockParam | Anthropic::Models::ImageBlockParam
+
+        class Content < Anthropic::Union
+          private def self.variants: -> [[:text, Anthropic::Models::TextBlockParam], [:image, Anthropic::Models::ImageBlockParam]]
+        end
+
+        private def self.variants: -> [[nil, String], [nil, Array[Anthropic::Models::ToolResultBlockParam::Content::content]]]
+      end
+    end
+  end
+end

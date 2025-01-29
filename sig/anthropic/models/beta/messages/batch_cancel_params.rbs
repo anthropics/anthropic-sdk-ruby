@@ -1,0 +1,32 @@
+module Anthropic
+  module Models
+    module Beta
+      module Messages
+        type batch_cancel_params =
+          { betas: Array[Anthropic::Models::anthropic_beta] }
+          & Anthropic::request_parameters
+
+        class BatchCancelParams < Anthropic::BaseModel
+          extend Anthropic::RequestParameters::Converter
+          include Anthropic::RequestParameters
+
+          attr_reader betas: Array[Anthropic::Models::anthropic_beta]
+
+          def betas=: (Array[Anthropic::Models::anthropic_beta]) -> void
+
+          def initialize:
+            (
+              betas: Array[Anthropic::Models::anthropic_beta],
+              request_options: Anthropic::request_opts
+            ) -> void
+            | (
+              ?Anthropic::Models::Beta::Messages::batch_cancel_params
+              | Anthropic::BaseModel data
+            ) -> void
+
+          def to_h: -> Anthropic::Models::Beta::Messages::batch_cancel_params
+        end
+      end
+    end
+  end
+end

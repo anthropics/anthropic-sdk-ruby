@@ -105,7 +105,7 @@ module Anthropic
     end
 
     # Use this to indicate that a value should be explicitly removed from a data
-    #   structure when using `SDK_RubyModuleName::Util.deep_merge`.
+    #   structure when using `Anthropic::Util.deep_merge`.
     #
     #   e.g. merging `{a: 1}` and `{a: OMIT}` should produce `{}`, where merging
     #   `{a: 1}` and `{}` would produce `{a: 1}`.
@@ -170,17 +170,17 @@ module Anthropic
     #
     # @param data [Hash{Symbol=>Object}, Array<Object>, Object]
     # @param pick [Symbol, Integer, Array<Symbol, Integer>, nil]
-    # @param default [Object, nil]
+    # @param sentinel [Object, nil]
     # @param blk [Proc, nil]
     #
     # @return [Object, nil]
     #
-    def self.dig(data, pick, default = nil, &blk)
+    def self.dig(data, pick, sentinel = nil, &blk)
       case [data, pick, blk]
       in [_, nil, nil]
         data
       in [Hash, Symbol, _] | [Array, Integer, _]
-        blk.nil? ? data.fetch(pick, default) : data.fetch(pick, &blk)
+        blk.nil? ? data.fetch(pick, sentinel) : data.fetch(pick, &blk)
       in [Hash | Array, Array, _]
         pick.reduce(data) do |acc, key|
           case acc
@@ -189,11 +189,11 @@ module Anthropic
           in Array if key.is_a?(Integer) && key < acc.length
             acc[key]
           else
-            return blk.nil? ? default : blk.call
+            return blk.nil? ? sentinel : blk.call
           end
         end
       in _
-        blk.nil? ? default : blk.call
+        blk.nil? ? sentinel : blk.call
       end
     end
 
@@ -240,13 +240,13 @@ module Anthropic
     #
     # @param parsed [Hash{Symbol=>String, Integer, nil}] .
     #
-    #   @option parsed [String] :scheme
+    #   @option parsed [String, nil] :scheme
     #
-    #   @option parsed [String] :host
+    #   @option parsed [String, nil] :host
     #
-    #   @option parsed [Integer] :port
+    #   @option parsed [Integer, nil] :port
     #
-    #   @option parsed [String] :path
+    #   @option parsed [String, nil] :path
     #
     #   @option parsed [Hash{String=>Array<String>}] :query
     #
@@ -260,25 +260,25 @@ module Anthropic
     #
     # @param lhs [Hash{Symbol=>String, Integer, nil}] .
     #
-    #   @option lhs [String] :scheme
+    #   @option lhs [String, nil] :scheme
     #
-    #   @option lhs [String] :host
+    #   @option lhs [String, nil] :host
     #
-    #   @option lhs [Integer] :port
+    #   @option lhs [Integer, nil] :port
     #
-    #   @option lhs [String] :path
+    #   @option lhs [String, nil] :path
     #
     #   @option lhs [Hash{String=>Array<String>}] :query
     #
     # @param rhs [Hash{Symbol=>String, Integer, nil}] .
     #
-    #   @option rhs [String] :scheme
+    #   @option rhs [String, nil] :scheme
     #
-    #   @option rhs [String] :host
+    #   @option rhs [String, nil] :host
     #
-    #   @option rhs [Integer] :port
+    #   @option rhs [Integer, nil] :port
     #
-    #   @option rhs [String] :path
+    #   @option rhs [String, nil] :path
     #
     #   @option rhs [Hash{String=>Array<String>}] :query
     #

@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    type permission_error = { message: String, type: :permission_error }
+
+    class PermissionError < Anthropic::BaseModel
+      attr_accessor message: String
+
+      attr_accessor type: :permission_error
+
+      def initialize:
+        (message: String, type: :permission_error) -> void
+        | (
+          ?Anthropic::Models::permission_error | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::permission_error
+    end
+  end
+end

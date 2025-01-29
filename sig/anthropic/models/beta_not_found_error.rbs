@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    type beta_not_found_error = { message: String, type: :not_found_error }
+
+    class BetaNotFoundError < Anthropic::BaseModel
+      attr_accessor message: String
+
+      attr_accessor type: :not_found_error
+
+      def initialize:
+        (message: String, type: :not_found_error) -> void
+        | (
+          ?Anthropic::Models::beta_not_found_error | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::beta_not_found_error
+    end
+  end
+end

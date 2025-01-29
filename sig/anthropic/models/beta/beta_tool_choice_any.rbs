@@ -1,0 +1,28 @@
+module Anthropic
+  module Models
+    
+    class BetaToolChoiceAny = Beta::BetaToolChoiceAny
+
+    module Beta
+      type beta_tool_choice_any =
+        { type: :any, disable_parallel_tool_use: bool }
+
+      class BetaToolChoiceAny < Anthropic::BaseModel
+        attr_accessor type: :any
+
+        attr_reader disable_parallel_tool_use: bool?
+
+        def disable_parallel_tool_use=: (bool) -> void
+
+        def initialize:
+          (disable_parallel_tool_use: bool, type: :any) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_tool_choice_any
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Beta::beta_tool_choice_any
+      end
+    end
+  end
+end

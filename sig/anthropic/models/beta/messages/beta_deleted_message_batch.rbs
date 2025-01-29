@@ -1,0 +1,25 @@
+module Anthropic
+  module Models
+    module Beta
+      module Messages
+        type beta_deleted_message_batch =
+          { id: String, type: :message_batch_deleted }
+
+        class BetaDeletedMessageBatch < Anthropic::BaseModel
+          attr_accessor id: String
+
+          attr_accessor type: :message_batch_deleted
+
+          def initialize:
+            (id: String, type: :message_batch_deleted) -> void
+            | (
+              ?Anthropic::Models::Beta::Messages::beta_deleted_message_batch
+              | Anthropic::BaseModel data
+            ) -> void
+
+          def to_h: -> Anthropic::Models::Beta::Messages::beta_deleted_message_batch
+        end
+      end
+    end
+  end
+end

@@ -6,7 +6,7 @@ module Anthropic
     DEFAULT_MAX_RETRIES = 2
 
     # Default per-request timeout.
-    DEFAULT_TIMEOUT_IN_SECONDS = 600
+    DEFAULT_TIMEOUT_IN_SECONDS = 600.0
 
     # Default initial retry delay in seconds.
     # Overall delay is calculated using exponential backoff + jitter.

@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    
+    class BetaCacheControlEphemeral = Beta::BetaCacheControlEphemeral
+
+    module Beta
+      type beta_cache_control_ephemeral = { type: :ephemeral }
+
+      class BetaCacheControlEphemeral < Anthropic::BaseModel
+        attr_accessor type: :ephemeral
+
+        def initialize:
+          (type: :ephemeral) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_cache_control_ephemeral
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Beta::beta_cache_control_ephemeral
+      end
+    end
+  end
+end

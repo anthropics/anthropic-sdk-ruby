@@ -1,0 +1,10 @@
+module Anthropic
+  module Models
+    type content_block =
+      Anthropic::Models::TextBlock | Anthropic::Models::ToolUseBlock
+
+    class ContentBlock < Anthropic::Union
+      private def self.variants: -> [[:text, Anthropic::Models::TextBlock], [:tool_use, Anthropic::Models::ToolUseBlock]]
+    end
+  end
+end

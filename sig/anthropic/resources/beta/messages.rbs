@@ -1,0 +1,52 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Messages
+        attr_reader batches: Anthropic::Resources::Beta::Messages::Batches
+
+        def create:
+          (
+            Anthropic::Models::Beta::MessageCreateParams
+            | Hash[Symbol, top] params
+          ) -> Anthropic::Models::Beta::BetaMessage
+          | (
+            Anthropic::Models::Beta::MessageCreateParams
+            | Hash[Symbol, top] params,
+            max_tokens: Integer,
+            messages: Array[Anthropic::Models::Beta::BetaMessageParam],
+            model: Anthropic::Models::model,
+            metadata: Anthropic::Models::Beta::BetaMetadata,
+            stop_sequences: Array[String],
+            stream: Anthropic::Models::Beta::MessageCreateParams::stream,
+            system_: Anthropic::Models::Beta::MessageCreateParams::system_,
+            temperature: Float,
+            tool_choice: Anthropic::Models::Beta::beta_tool_choice,
+            tools: Array[Anthropic::Models::Beta::beta_tool_union],
+            top_k: Integer,
+            top_p: Float,
+            betas: Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::request_opts
+          ) -> Anthropic::Models::Beta::BetaMessage
+
+        def count_tokens:
+          (
+            Anthropic::Models::Beta::MessageCountTokensParams
+            | Hash[Symbol, top] params
+          ) -> Anthropic::Models::Beta::BetaMessageTokensCount
+          | (
+            Anthropic::Models::Beta::MessageCountTokensParams
+            | Hash[Symbol, top] params,
+            messages: Array[Anthropic::Models::Beta::BetaMessageParam],
+            model: Anthropic::Models::model,
+            system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
+            tool_choice: Anthropic::Models::Beta::beta_tool_choice,
+            tools: Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
+            betas: Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::request_opts
+          ) -> Anthropic::Models::Beta::BetaMessageTokensCount
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

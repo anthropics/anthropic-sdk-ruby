@@ -1,0 +1,46 @@
+module Anthropic
+  module Models
+    type message_param =
+      {
+        content: Anthropic::Models::MessageParam::content,
+        role: Anthropic::Models::MessageParam::role
+      }
+
+    class MessageParam < Anthropic::BaseModel
+      attr_accessor content: Anthropic::Models::MessageParam::content
+
+      attr_accessor role: Anthropic::Models::MessageParam::role
+
+      def initialize:
+        (
+          content: Anthropic::Models::MessageParam::content,
+          role: Anthropic::Models::MessageParam::role
+        ) -> void
+        | (
+          ?Anthropic::Models::message_param | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::message_param
+
+      type content = String | Array[Anthropic::Models::content_block_param]
+
+      class Content < Anthropic::Union
+        type content_block_param_array =
+          Array[Anthropic::Models::content_block_param]
+
+        ContentBlockParamArray: content_block_param_array
+
+        private def self.variants: -> [[nil, String], [nil, Array[Anthropic::Models::content_block_param]]]
+      end
+
+      type role = :user | :assistant
+
+      class Role < Anthropic::Enum
+        USER: :user
+        ASSISTANT: :assistant
+
+        def self.values: -> Array[Anthropic::Models::MessageParam::role]
+      end
+    end
+  end
+end

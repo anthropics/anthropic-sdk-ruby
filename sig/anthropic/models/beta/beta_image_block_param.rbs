@@ -1,0 +1,76 @@
+module Anthropic
+  module Models
+    
+    class BetaImageBlockParam = Beta::BetaImageBlockParam
+
+    module Beta
+      type beta_image_block_param =
+        {
+          source: Anthropic::Models::Beta::BetaImageBlockParam::Source,
+          type: :image,
+          cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?
+        }
+
+      class BetaImageBlockParam < Anthropic::BaseModel
+        attr_accessor source: Anthropic::Models::Beta::BetaImageBlockParam::Source
+
+        attr_accessor type: :image
+
+        attr_accessor cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?
+
+        def initialize:
+          (
+            source: Anthropic::Models::Beta::BetaImageBlockParam::Source,
+            cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?,
+            type: :image
+          ) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_image_block_param
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Beta::beta_image_block_param
+
+        type source =
+          {
+            data: String,
+            media_type: Anthropic::Models::Beta::BetaImageBlockParam::Source::media_type,
+            type: :base64
+          }
+
+        class Source < Anthropic::BaseModel
+          attr_accessor data: String
+
+          attr_accessor media_type: Anthropic::Models::Beta::BetaImageBlockParam::Source::media_type
+
+          attr_accessor type: :base64
+
+          def initialize:
+            (
+              data: String,
+              media_type: Anthropic::Models::Beta::BetaImageBlockParam::Source::media_type,
+              type: :base64
+            ) -> void
+            | (
+              ?Anthropic::Models::Beta::BetaImageBlockParam::source
+              | Anthropic::BaseModel data
+            ) -> void
+
+          def to_h: -> Anthropic::Models::Beta::BetaImageBlockParam::source
+
+          type media_type =
+            :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
+
+          class MediaType < Anthropic::Enum
+            IMAGE_JPEG: :"image/jpeg"
+            IMAGE_PNG: :"image/png"
+            IMAGE_GIF: :"image/gif"
+            IMAGE_WEBP: :"image/webp"
+
+            def self.values: -> Array[Anthropic::Models::Beta::BetaImageBlockParam::Source::media_type]
+          end
+        end
+      end
+    end
+  end
+end

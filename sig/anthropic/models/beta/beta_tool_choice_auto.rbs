@@ -1,0 +1,28 @@
+module Anthropic
+  module Models
+    
+    class BetaToolChoiceAuto = Beta::BetaToolChoiceAuto
+
+    module Beta
+      type beta_tool_choice_auto =
+        { type: :auto, disable_parallel_tool_use: bool }
+
+      class BetaToolChoiceAuto < Anthropic::BaseModel
+        attr_accessor type: :auto
+
+        attr_reader disable_parallel_tool_use: bool?
+
+        def disable_parallel_tool_use=: (bool) -> void
+
+        def initialize:
+          (disable_parallel_tool_use: bool, type: :auto) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_tool_choice_auto
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Beta::beta_tool_choice_auto
+      end
+    end
+  end
+end

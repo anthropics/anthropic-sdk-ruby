@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    
+    class MessageBatchErroredResult = Messages::MessageBatchErroredResult
+
+    module Messages
+      type message_batch_errored_result =
+        { error: Anthropic::Models::ErrorResponse, type: :errored }
+
+      class MessageBatchErroredResult < Anthropic::BaseModel
+        attr_accessor error: Anthropic::Models::ErrorResponse
+
+        attr_accessor type: :errored
+
+        def initialize:
+          (error: Anthropic::Models::ErrorResponse, type: :errored) -> void
+          | (
+            ?Anthropic::Models::Messages::message_batch_errored_result
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Messages::message_batch_errored_result
+      end
+    end
+  end
+end

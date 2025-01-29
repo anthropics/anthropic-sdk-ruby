@@ -9,7 +9,13 @@ group :development do
   gem "minitest-focus"
   gem "minitest-hooks"
   gem "rake"
+  gem "rbs"
   gem "rubocop"
+  gem "sorbet"
+  gem "steep"
+  gem "syntax_tree"
+  # TODO: using a fork for now, the prettier below has a bug
+  gem "syntax_tree-rbs", git: "https://github.com/stainless-api/syntax_tree-rbs.git"
   gem "webrick"
   gem "yard"
 end

@@ -1,0 +1,12 @@
+module Anthropic
+  module Models
+    type tool_choice =
+      Anthropic::Models::ToolChoiceAuto
+      | Anthropic::Models::ToolChoiceAny
+      | Anthropic::Models::ToolChoiceTool
+
+    class ToolChoice < Anthropic::Union
+      private def self.variants: -> [[:auto, Anthropic::Models::ToolChoiceAuto], [:any, Anthropic::Models::ToolChoiceAny], [:tool, Anthropic::Models::ToolChoiceTool]]
+    end
+  end
+end

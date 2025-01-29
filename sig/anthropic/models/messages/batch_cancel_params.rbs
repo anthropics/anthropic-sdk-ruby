@@ -1,0 +1,21 @@
+module Anthropic
+  module Models
+    module Messages
+      type batch_cancel_params = {  } & Anthropic::request_parameters
+
+      class BatchCancelParams < Anthropic::BaseModel
+        extend Anthropic::RequestParameters::Converter
+        include Anthropic::RequestParameters
+
+        def initialize:
+          (request_options: Anthropic::request_opts) -> void
+          | (
+            ?Anthropic::Models::Messages::batch_cancel_params
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Messages::batch_cancel_params
+      end
+    end
+  end
+end

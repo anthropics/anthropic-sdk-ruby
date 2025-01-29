@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    type overloaded_error = { message: String, type: :overloaded_error }
+
+    class OverloadedError < Anthropic::BaseModel
+      attr_accessor message: String
+
+      attr_accessor type: :overloaded_error
+
+      def initialize:
+        (message: String, type: :overloaded_error) -> void
+        | (
+          ?Anthropic::Models::overloaded_error | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::overloaded_error
+    end
+  end
+end

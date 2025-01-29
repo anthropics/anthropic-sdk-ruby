@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    
+    class BetaContentBlockParam = Beta::BetaContentBlockParam
+
+    module Beta
+      type beta_content_block_param =
+        Anthropic::Models::Beta::BetaTextBlockParam
+        | Anthropic::Models::Beta::BetaImageBlockParam
+        | Anthropic::Models::Beta::BetaToolUseBlockParam
+        | Anthropic::Models::Beta::BetaToolResultBlockParam
+        | Anthropic::Models::Beta::BetaBase64PDFBlock
+
+      class BetaContentBlockParam < Anthropic::Union
+        private def self.variants: -> [[:text, Anthropic::Models::Beta::BetaTextBlockParam], [:image, Anthropic::Models::Beta::BetaImageBlockParam], [:tool_use, Anthropic::Models::Beta::BetaToolUseBlockParam], [:tool_result, Anthropic::Models::Beta::BetaToolResultBlockParam], [:document, Anthropic::Models::Beta::BetaBase64PDFBlock]]
+      end
+    end
+  end
+end

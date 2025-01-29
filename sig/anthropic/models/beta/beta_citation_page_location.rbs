@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    
+    class BetaCitationPageLocation = Beta::BetaCitationPageLocation
+
+    module Beta
+      type beta_citation_page_location =
+        {
+          cited_text: String,
+          document_index: Integer,
+          document_title: String?,
+          end_page_number: Integer,
+          start_page_number: Integer,
+          type: :page_location
+        }
+
+      class BetaCitationPageLocation < Anthropic::BaseModel
+        attr_accessor cited_text: String
+
+        attr_accessor document_index: Integer
+
+        attr_accessor document_title: String?
+
+        attr_accessor end_page_number: Integer
+
+        attr_accessor start_page_number: Integer
+
+        attr_accessor type: :page_location
+
+        def initialize:
+          (
+            cited_text: String,
+            document_index: Integer,
+            document_title: String?,
+            end_page_number: Integer,
+            start_page_number: Integer,
+            type: :page_location
+          ) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_citation_page_location
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Beta::beta_citation_page_location
+      end
+    end
+  end
+end

@@ -1,0 +1,5 @@
+module Anthropic
+  module Extern
+    def sorbet!: { -> void } -> void
+  end
+end

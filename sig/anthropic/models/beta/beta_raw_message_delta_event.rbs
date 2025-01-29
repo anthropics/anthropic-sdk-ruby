@@ -1,0 +1,72 @@
+module Anthropic
+  module Models
+    
+    class BetaRawMessageDeltaEvent = Beta::BetaRawMessageDeltaEvent
+
+    module Beta
+      type beta_raw_message_delta_event =
+        {
+          delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta,
+          type: :message_delta,
+          usage: Anthropic::Models::Beta::BetaMessageDeltaUsage
+        }
+
+      class BetaRawMessageDeltaEvent < Anthropic::BaseModel
+        attr_accessor delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta
+
+        attr_accessor type: :message_delta
+
+        attr_accessor usage: Anthropic::Models::Beta::BetaMessageDeltaUsage
+
+        def initialize:
+          (
+            delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta,
+            usage: Anthropic::Models::Beta::BetaMessageDeltaUsage,
+            type: :message_delta
+          ) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_raw_message_delta_event
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Beta::beta_raw_message_delta_event
+
+        type delta =
+          {
+            stop_reason: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::stop_reason?,
+            stop_sequence: String?
+          }
+
+        class Delta < Anthropic::BaseModel
+          attr_accessor stop_reason: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::stop_reason?
+
+          attr_accessor stop_sequence: String?
+
+          def initialize:
+            (
+              stop_reason: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::stop_reason?,
+              stop_sequence: String?
+            ) -> void
+            | (
+              ?Anthropic::Models::Beta::BetaRawMessageDeltaEvent::delta
+              | Anthropic::BaseModel data
+            ) -> void
+
+          def to_h: -> Anthropic::Models::Beta::BetaRawMessageDeltaEvent::delta
+
+          type stop_reason =
+            :end_turn | :max_tokens | :stop_sequence | :tool_use
+
+          class StopReason < Anthropic::Enum
+            END_TURN: :end_turn
+            MAX_TOKENS: :max_tokens
+            STOP_SEQUENCE: :stop_sequence
+            TOOL_USE: :tool_use
+
+            def self.values: -> Array[Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::stop_reason]
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,61 @@
+module Anthropic
+  module Models
+    
+    class BetaBase64PDFBlock = Beta::BetaBase64PDFBlock
+
+    module Beta
+      type beta_base64_pdf_block =
+        {
+          source: Anthropic::Models::Beta::BetaBase64PDFBlock::source,
+          type: :document,
+          cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?,
+          citations: Anthropic::Models::Beta::BetaCitationsConfigParam,
+          context: String?,
+          title: String?
+        }
+
+      class BetaBase64PDFBlock < Anthropic::BaseModel
+        attr_accessor source: Anthropic::Models::Beta::BetaBase64PDFBlock::source
+
+        attr_accessor type: :document
+
+        attr_accessor cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?
+
+        attr_reader citations: Anthropic::Models::Beta::BetaCitationsConfigParam?
+
+        def citations=: (
+          Anthropic::Models::Beta::BetaCitationsConfigParam
+        ) -> void
+
+        attr_accessor context: String?
+
+        attr_accessor title: String?
+
+        def initialize:
+          (
+            source: Anthropic::Models::Beta::BetaBase64PDFBlock::source,
+            cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?,
+            citations: Anthropic::Models::Beta::BetaCitationsConfigParam,
+            context: String?,
+            title: String?,
+            type: :document
+          ) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_base64_pdf_block
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Beta::beta_base64_pdf_block
+
+        type source =
+          Anthropic::Models::Beta::BetaBase64PDFSource
+          | Anthropic::Models::Beta::BetaPlainTextSource
+          | Anthropic::Models::Beta::BetaContentBlockSource
+
+        class Source < Anthropic::Union
+          private def self.variants: -> [[:base64, Anthropic::Models::Beta::BetaBase64PDFSource], [:text, Anthropic::Models::Beta::BetaPlainTextSource], [:content, Anthropic::Models::Beta::BetaContentBlockSource]]
+        end
+      end
+    end
+  end
+end

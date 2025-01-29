@@ -1,6 +1,8 @@
 # Just to be safe, ensure nobody is mutating our internal strings.
 Style/FrozenStringLiteralComment:
   EnforcedStyle: always
+  Exclude:
+    - '**/*.rbi'
 
 # And/or have confusing precedence, avoid them.
 Style/AndOr:
@@ -84,6 +86,11 @@ Style/CaseEquality:
 # Reasonable to use brackets for errors with long messages.
 Style/RaiseArgs:
   Enabled: false
+
+# Reasonable for a library to define dynamic type-aliases depending on sorbet-runtime availability
+Lint/ConstantDefinitionInBlock:
+  Exclude:
+    - 'lib/**/*'
 
 # Sorbet files should be excluded from some style considerations
 Style/AccessorGrouping:

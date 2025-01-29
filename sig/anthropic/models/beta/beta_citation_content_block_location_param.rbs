@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    
+    class BetaCitationContentBlockLocationParam = Beta::BetaCitationContentBlockLocationParam
+
+    module Beta
+      type beta_citation_content_block_location_param =
+        {
+          cited_text: String,
+          document_index: Integer,
+          document_title: String?,
+          end_block_index: Integer,
+          start_block_index: Integer,
+          type: :content_block_location
+        }
+
+      class BetaCitationContentBlockLocationParam < Anthropic::BaseModel
+        attr_accessor cited_text: String
+
+        attr_accessor document_index: Integer
+
+        attr_accessor document_title: String?
+
+        attr_accessor end_block_index: Integer
+
+        attr_accessor start_block_index: Integer
+
+        attr_accessor type: :content_block_location
+
+        def initialize:
+          (
+            cited_text: String,
+            document_index: Integer,
+            document_title: String?,
+            end_block_index: Integer,
+            start_block_index: Integer,
+            type: :content_block_location
+          ) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_citation_content_block_location_param
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Beta::beta_citation_content_block_location_param
+      end
+    end
+  end
+end

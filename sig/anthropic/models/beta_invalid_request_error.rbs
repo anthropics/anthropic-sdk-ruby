@@ -1,0 +1,21 @@
+module Anthropic
+  module Models
+    type beta_invalid_request_error =
+      { message: String, type: :invalid_request_error }
+
+    class BetaInvalidRequestError < Anthropic::BaseModel
+      attr_accessor message: String
+
+      attr_accessor type: :invalid_request_error
+
+      def initialize:
+        (message: String, type: :invalid_request_error) -> void
+        | (
+          ?Anthropic::Models::beta_invalid_request_error
+          | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::beta_invalid_request_error
+    end
+  end
+end

@@ -1,0 +1,45 @@
+module Anthropic
+  module Models
+    
+    class BetaContentBlockSource = Beta::BetaContentBlockSource
+
+    module Beta
+      type beta_content_block_source =
+        {
+          content: Anthropic::Models::Beta::BetaContentBlockSource::content,
+          type: :content
+        }
+
+      class BetaContentBlockSource < Anthropic::BaseModel
+        attr_accessor content: Anthropic::Models::Beta::BetaContentBlockSource::content
+
+        attr_accessor type: :content
+
+        def initialize:
+          (
+            content: Anthropic::Models::Beta::BetaContentBlockSource::content,
+            type: :content
+          ) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_content_block_source
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Beta::beta_content_block_source
+
+        type content =
+          String
+          | Array[Anthropic::Models::Beta::beta_content_block_source_content]
+
+        class Content < Anthropic::Union
+          type beta_content_block_source_content_array =
+            Array[Anthropic::Models::Beta::beta_content_block_source_content]
+
+          BetaContentBlockSourceContentArray: beta_content_block_source_content_array
+
+          private def self.variants: -> [[nil, String], [nil, Array[Anthropic::Models::Beta::beta_content_block_source_content]]]
+        end
+      end
+    end
+  end
+end

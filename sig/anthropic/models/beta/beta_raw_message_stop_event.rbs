@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    
+    class BetaRawMessageStopEvent = Beta::BetaRawMessageStopEvent
+
+    module Beta
+      type beta_raw_message_stop_event = { type: :message_stop }
+
+      class BetaRawMessageStopEvent < Anthropic::BaseModel
+        attr_accessor type: :message_stop
+
+        def initialize:
+          (type: :message_stop) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_raw_message_stop_event
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Beta::beta_raw_message_stop_event
+      end
+    end
+  end
+end

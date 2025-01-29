@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    
+    class BetaCitationCharLocation = Beta::BetaCitationCharLocation
+
+    module Beta
+      type beta_citation_char_location =
+        {
+          cited_text: String,
+          document_index: Integer,
+          document_title: String?,
+          end_char_index: Integer,
+          start_char_index: Integer,
+          type: :char_location
+        }
+
+      class BetaCitationCharLocation < Anthropic::BaseModel
+        attr_accessor cited_text: String
+
+        attr_accessor document_index: Integer
+
+        attr_accessor document_title: String?
+
+        attr_accessor end_char_index: Integer
+
+        attr_accessor start_char_index: Integer
+
+        attr_accessor type: :char_location
+
+        def initialize:
+          (
+            cited_text: String,
+            document_index: Integer,
+            document_title: String?,
+            end_char_index: Integer,
+            start_char_index: Integer,
+            type: :char_location
+          ) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_citation_char_location
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Beta::beta_citation_char_location
+      end
+    end
+  end
+end

@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    
+    class BetaToolChoice = Beta::BetaToolChoice
+
+    module Beta
+      type beta_tool_choice =
+        Anthropic::Models::Beta::BetaToolChoiceAuto
+        | Anthropic::Models::Beta::BetaToolChoiceAny
+        | Anthropic::Models::Beta::BetaToolChoiceTool
+
+      class BetaToolChoice < Anthropic::Union
+        private def self.variants: -> [[:auto, Anthropic::Models::Beta::BetaToolChoiceAuto], [:any, Anthropic::Models::Beta::BetaToolChoiceAny], [:tool, Anthropic::Models::Beta::BetaToolChoiceTool]]
+      end
+    end
+  end
+end

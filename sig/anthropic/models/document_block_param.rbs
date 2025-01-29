@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    type document_block_param =
+      {
+        source: Anthropic::Models::DocumentBlockParam::source,
+        type: :document,
+        cache_control: Anthropic::Models::CacheControlEphemeral?,
+        citations: Anthropic::Models::CitationsConfigParam,
+        context: String?,
+        title: String?
+      }
+
+    class DocumentBlockParam < Anthropic::BaseModel
+      attr_accessor source: Anthropic::Models::DocumentBlockParam::source
+
+      attr_accessor type: :document
+
+      attr_accessor cache_control: Anthropic::Models::CacheControlEphemeral?
+
+      attr_reader citations: Anthropic::Models::CitationsConfigParam?
+
+      def citations=: (Anthropic::Models::CitationsConfigParam) -> void
+
+      attr_accessor context: String?
+
+      attr_accessor title: String?
+
+      def initialize:
+        (
+          source: Anthropic::Models::DocumentBlockParam::source,
+          cache_control: Anthropic::Models::CacheControlEphemeral?,
+          citations: Anthropic::Models::CitationsConfigParam,
+          context: String?,
+          title: String?,
+          type: :document
+        ) -> void
+        | (
+          ?Anthropic::Models::document_block_param | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::document_block_param
+
+      type source =
+        Anthropic::Models::Base64PDFSource
+        | Anthropic::Models::PlainTextSource
+        | Anthropic::Models::ContentBlockSource
+
+      class Source < Anthropic::Union
+        private def self.variants: -> [[:base64, Anthropic::Models::Base64PDFSource], [:text, Anthropic::Models::PlainTextSource], [:content, Anthropic::Models::ContentBlockSource]]
+      end
+    end
+  end
+end

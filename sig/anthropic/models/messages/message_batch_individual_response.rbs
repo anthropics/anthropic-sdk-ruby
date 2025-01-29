@@ -1,0 +1,32 @@
+module Anthropic
+  module Models
+    
+    class MessageBatchIndividualResponse = Messages::MessageBatchIndividualResponse
+
+    module Messages
+      type message_batch_individual_response =
+        {
+          custom_id: String,
+          result: Anthropic::Models::Messages::message_batch_result
+        }
+
+      class MessageBatchIndividualResponse < Anthropic::BaseModel
+        attr_accessor custom_id: String
+
+        attr_accessor result: Anthropic::Models::Messages::message_batch_result
+
+        def initialize:
+          (
+            custom_id: String,
+            result: Anthropic::Models::Messages::message_batch_result
+          ) -> void
+          | (
+            ?Anthropic::Models::Messages::message_batch_individual_response
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Messages::message_batch_individual_response
+      end
+    end
+  end
+end

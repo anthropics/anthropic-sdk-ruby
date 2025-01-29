@@ -1,0 +1,41 @@
+module Anthropic
+  module Models
+    
+    class BetaCitationsDelta = Beta::BetaCitationsDelta
+
+    module Beta
+      type beta_citations_delta =
+        {
+          citation: Anthropic::Models::Beta::BetaCitationsDelta::citation,
+          type: :citations_delta
+        }
+
+      class BetaCitationsDelta < Anthropic::BaseModel
+        attr_accessor citation: Anthropic::Models::Beta::BetaCitationsDelta::citation
+
+        attr_accessor type: :citations_delta
+
+        def initialize:
+          (
+            citation: Anthropic::Models::Beta::BetaCitationsDelta::citation,
+            type: :citations_delta
+          ) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_citations_delta
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Beta::beta_citations_delta
+
+        type citation =
+          Anthropic::Models::Beta::BetaCitationCharLocation
+          | Anthropic::Models::Beta::BetaCitationPageLocation
+          | Anthropic::Models::Beta::BetaCitationContentBlockLocation
+
+        class Citation < Anthropic::Union
+          private def self.variants: -> [[:char_location, Anthropic::Models::Beta::BetaCitationCharLocation], [:page_location, Anthropic::Models::Beta::BetaCitationPageLocation], [:content_block_location, Anthropic::Models::Beta::BetaCitationContentBlockLocation]]
+        end
+      end
+    end
+  end
+end

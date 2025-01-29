@@ -1,0 +1,84 @@
+module Anthropic
+  module Models
+    module Beta
+      type message_count_tokens_params =
+        {
+          messages: Array[Anthropic::Models::Beta::BetaMessageParam],
+          model: Anthropic::Models::model,
+          system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
+          tool_choice: Anthropic::Models::Beta::beta_tool_choice,
+          tools: Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
+          betas: Array[Anthropic::Models::anthropic_beta]
+        }
+        & Anthropic::request_parameters
+
+      class MessageCountTokensParams < Anthropic::BaseModel
+        extend Anthropic::RequestParameters::Converter
+        include Anthropic::RequestParameters
+
+        attr_accessor messages: Array[Anthropic::Models::Beta::BetaMessageParam]
+
+        attr_accessor model: Anthropic::Models::model
+
+        attr_reader system_: Anthropic::Models::Beta::MessageCountTokensParams::system_?
+
+        def system_=: (
+          Anthropic::Models::Beta::MessageCountTokensParams::system_
+        ) -> void
+
+        attr_reader tool_choice: Anthropic::Models::Beta::beta_tool_choice?
+
+        def tool_choice=: (Anthropic::Models::Beta::beta_tool_choice) -> void
+
+        attr_reader tools: Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]
+
+        def tools=: (
+          Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]
+        ) -> void
+
+        attr_reader betas: Array[Anthropic::Models::anthropic_beta]
+
+        def betas=: (Array[Anthropic::Models::anthropic_beta]) -> void
+
+        def initialize:
+          (
+            messages: Array[Anthropic::Models::Beta::BetaMessageParam],
+            model: Anthropic::Models::model,
+            system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
+            tool_choice: Anthropic::Models::Beta::beta_tool_choice,
+            tools: Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
+            betas: Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::request_opts
+          ) -> void
+          | (
+            ?Anthropic::Models::Beta::message_count_tokens_params
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Beta::message_count_tokens_params
+
+        type system_ =
+          String | Array[Anthropic::Models::Beta::BetaTextBlockParam]
+
+        class System < Anthropic::Union
+          type beta_text_block_param_array =
+            Array[Anthropic::Models::Beta::BetaTextBlockParam]
+
+          BetaTextBlockParamArray: beta_text_block_param_array
+
+          private def self.variants: -> [[nil, String], [nil, Array[Anthropic::Models::Beta::BetaTextBlockParam]]]
+        end
+
+        type tool =
+          Anthropic::Models::Beta::BetaTool
+          | Anthropic::Models::Beta::BetaToolComputerUse20241022
+          | Anthropic::Models::Beta::BetaToolBash20241022
+          | Anthropic::Models::Beta::BetaToolTextEditor20241022
+
+        class Tool < Anthropic::Union
+          private def self.variants: -> [[nil, Anthropic::Models::Beta::BetaTool], [nil, Anthropic::Models::Beta::BetaToolComputerUse20241022], [nil, Anthropic::Models::Beta::BetaToolBash20241022], [nil, Anthropic::Models::Beta::BetaToolTextEditor20241022]]
+        end
+      end
+    end
+  end
+end

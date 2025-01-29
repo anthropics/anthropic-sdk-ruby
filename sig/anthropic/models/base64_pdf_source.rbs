@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    type base64_pdf_source =
+      { data: String, media_type: :"application/pdf", type: :base64 }
+
+    class Base64PDFSource < Anthropic::BaseModel
+      attr_accessor data: String
+
+      attr_accessor media_type: :"application/pdf"
+
+      attr_accessor type: :base64
+
+      def initialize:
+        (data: String, media_type: :"application/pdf", type: :base64) -> void
+        | (
+          ?Anthropic::Models::base64_pdf_source | Anthropic::BaseModel data
+        ) -> void
+
+      def to_h: -> Anthropic::Models::base64_pdf_source
+    end
+  end
+end

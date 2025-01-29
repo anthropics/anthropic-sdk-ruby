@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    
+    class BetaMetadata = Beta::BetaMetadata
+
+    module Beta
+      type beta_metadata = { user_id: String? }
+
+      class BetaMetadata < Anthropic::BaseModel
+        attr_accessor user_id: String?
+
+        def initialize:
+          (user_id: String?) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_metadata | Anthropic::BaseModel data
+          ) -> void
+
+        def to_h: -> Anthropic::Models::Beta::beta_metadata
+      end
+    end
+  end
+end
