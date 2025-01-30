@@ -41,7 +41,7 @@ module Anthropic
       sig { params(metadata: Anthropic::Models::Metadata).void }
       attr_writer :metadata
 
-      sig { returns(T::Array[String]) }
+      sig { returns(T.nilable(T::Array[String])) }
       attr_reader :stop_sequences
 
       sig { params(stop_sequences: T::Array[String]).void }
@@ -68,7 +68,7 @@ module Anthropic
       sig { params(tool_choice: Anthropic::Models::ToolChoice::Variants).void }
       attr_writer :tool_choice
 
-      sig { returns(T::Array[Anthropic::Models::Tool]) }
+      sig { returns(T.nilable(T::Array[Anthropic::Models::Tool])) }
       attr_reader :tools
 
       sig { params(tools: T::Array[Anthropic::Models::Tool]).void }

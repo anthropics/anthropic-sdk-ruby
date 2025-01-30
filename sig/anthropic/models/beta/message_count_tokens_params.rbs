@@ -30,13 +30,13 @@ module Anthropic
 
         def tool_choice=: (Anthropic::Models::Beta::beta_tool_choice) -> void
 
-        attr_reader tools: Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]
+        attr_reader tools: Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]?
 
         def tools=: (
           Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]
         ) -> void
 
-        attr_reader betas: Array[Anthropic::Models::anthropic_beta]
+        attr_reader betas: Array[Anthropic::Models::anthropic_beta]?
 
         def betas=: (Array[Anthropic::Models::anthropic_beta]) -> void
 

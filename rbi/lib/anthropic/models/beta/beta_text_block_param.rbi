@@ -11,7 +11,7 @@ module Anthropic
             text: String,
             type: Symbol,
             cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
-            citations: T::Array[Anthropic::Models::Beta::BetaTextCitationParam::Variants]
+            citations: T.nilable(T::Array[Anthropic::Models::Beta::BetaTextCitationParam::Variants])
           }
         end
 
@@ -24,14 +24,14 @@ module Anthropic
         sig { returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)) }
         attr_accessor :cache_control
 
-        sig { returns(T::Array[Anthropic::Models::Beta::BetaTextCitationParam::Variants]) }
+        sig { returns(T.nilable(T::Array[Anthropic::Models::Beta::BetaTextCitationParam::Variants])) }
         attr_accessor :citations
 
         sig do
           params(
             text: String,
             cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
-            citations: T::Array[Anthropic::Models::Beta::BetaTextCitationParam::Variants],
+            citations: T.nilable(T::Array[Anthropic::Models::Beta::BetaTextCitationParam::Variants]),
             type: Symbol
           ).void
         end

@@ -59,7 +59,7 @@ module Anthropic
       #     sequences in the future. By providing the stop_sequences parameter, you may
       #     include additional strings that will cause the model to stop generating.
       #
-      #   @return [Array<String>]
+      #   @return [Array<String>, nil]
       optional :stop_sequences, Anthropic::ArrayOf[String]
 
       # @!parse

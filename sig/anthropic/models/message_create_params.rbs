@@ -31,7 +31,7 @@ module Anthropic
 
       def metadata=: (Anthropic::Models::Metadata) -> void
 
-      attr_reader stop_sequences: Array[String]
+      attr_reader stop_sequences: Array[String]?
 
       def stop_sequences=: (Array[String]) -> void
 
@@ -49,7 +49,7 @@ module Anthropic
 
       def tool_choice=: (Anthropic::Models::tool_choice) -> void
 
-      attr_reader tools: Array[Anthropic::Models::Tool]
+      attr_reader tools: Array[Anthropic::Models::Tool]?
 
       def tools=: (Array[Anthropic::Models::Tool]) -> void
 

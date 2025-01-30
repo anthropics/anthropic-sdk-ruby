@@ -39,7 +39,9 @@ module Anthropic
         sig { params(tool_choice: Anthropic::Models::Beta::BetaToolChoice::Variants).void }
         attr_writer :tool_choice
 
-        sig { returns(T::Array[Anthropic::Models::Beta::MessageCountTokensParams::Tool::Variants]) }
+        sig do
+          returns(T.nilable(T::Array[Anthropic::Models::Beta::MessageCountTokensParams::Tool::Variants]))
+        end
         attr_reader :tools
 
         sig do
@@ -47,7 +49,7 @@ module Anthropic
         end
         attr_writer :tools
 
-        sig { returns(T::Array[Anthropic::Models::AnthropicBeta::Variants]) }
+        sig { returns(T.nilable(T::Array[Anthropic::Models::AnthropicBeta::Variants])) }
         attr_reader :betas
 
         sig { params(betas: T::Array[Anthropic::Models::AnthropicBeta::Variants]).void }

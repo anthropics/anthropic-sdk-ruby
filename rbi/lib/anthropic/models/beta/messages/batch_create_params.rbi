@@ -21,7 +21,7 @@ module Anthropic
           sig { returns(T::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request]) }
           attr_accessor :requests
 
-          sig { returns(T::Array[Anthropic::Models::AnthropicBeta::Variants]) }
+          sig { returns(T.nilable(T::Array[Anthropic::Models::AnthropicBeta::Variants])) }
           attr_reader :betas
 
           sig { params(betas: T::Array[Anthropic::Models::AnthropicBeta::Variants]).void }
@@ -97,7 +97,7 @@ module Anthropic
               sig { params(metadata: Anthropic::Models::Beta::BetaMetadata).void }
               attr_writer :metadata
 
-              sig { returns(T::Array[String]) }
+              sig { returns(T.nilable(T::Array[String])) }
               attr_reader :stop_sequences
 
               sig { params(stop_sequences: T::Array[String]).void }
@@ -131,7 +131,7 @@ module Anthropic
               sig { params(tool_choice: Anthropic::Models::Beta::BetaToolChoice::Variants).void }
               attr_writer :tool_choice
 
-              sig { returns(T::Array[Anthropic::Models::Beta::BetaToolUnion::Variants]) }
+              sig { returns(T.nilable(T::Array[Anthropic::Models::Beta::BetaToolUnion::Variants])) }
               attr_reader :tools
 
               sig { params(tools: T::Array[Anthropic::Models::Beta::BetaToolUnion::Variants]).void }

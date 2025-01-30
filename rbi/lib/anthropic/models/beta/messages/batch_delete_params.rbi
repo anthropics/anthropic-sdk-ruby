@@ -15,7 +15,7 @@ module Anthropic
             )
           end
 
-          sig { returns(T::Array[Anthropic::Models::AnthropicBeta::Variants]) }
+          sig { returns(T.nilable(T::Array[Anthropic::Models::AnthropicBeta::Variants])) }
           attr_reader :betas
 
           sig { params(betas: T::Array[Anthropic::Models::AnthropicBeta::Variants]).void }

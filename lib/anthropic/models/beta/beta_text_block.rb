@@ -19,7 +19,7 @@ module Anthropic
         #     Citing a PDF results in `page_location`, plain text results in `char_location`,
         #     and content document results in `content_block_location`.
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation>]
+        #   @return [Array<Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation>, nil]
         required :citations,
                  -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitation] },
                  nil?: true
@@ -35,7 +35,7 @@ module Anthropic
         required :type, const: :text
 
         # @!parse
-        #   # @param citations [Array<Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation>]
+        #   # @param citations [Array<Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation>, nil]
         #   # @param text [String]
         #   # @param type [Symbol, :text]
         #   #

@@ -111,6 +111,9 @@ Style/BisectedAttrAccessor:
 Naming/MethodParameterName:
   Exclude:
     - '**/*.rbi'
+Style/MutableConstant:
+  Exclude:
+    - '**/*.rbi'
 
 # Literally nothing wrong with `symbol_1`
 Naming/VariableNumber:

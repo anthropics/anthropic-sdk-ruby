@@ -37,7 +37,7 @@ module Anthropic
       sig { params(tool_choice: Anthropic::Models::ToolChoice::Variants).void }
       attr_writer :tool_choice
 
-      sig { returns(T::Array[Anthropic::Models::Tool]) }
+      sig { returns(T.nilable(T::Array[Anthropic::Models::Tool])) }
       attr_reader :tools
 
       sig { params(tools: T::Array[Anthropic::Models::Tool]).void }

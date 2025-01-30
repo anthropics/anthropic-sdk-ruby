@@ -28,7 +28,7 @@ module Anthropic
 
       def metadata=: (Anthropic::Models::Metadata) -> void
 
-      attr_reader stop_sequences: Array[String]
+      attr_reader stop_sequences: Array[String]?
 
       def stop_sequences=: (Array[String]) -> void
 
