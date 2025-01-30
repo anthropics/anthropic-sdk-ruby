@@ -4,10 +4,14 @@ module Anthropic
   module Models
     class TextBlock < Anthropic::BaseModel
       Shape = T.type_alias do
-        {citations: T::Array[Anthropic::Models::TextCitation::Variants], text: String, type: Symbol}
+        {
+          citations: T.nilable(T::Array[Anthropic::Models::TextCitation::Variants]),
+          text: String,
+          type: Symbol
+        }
       end
 
-      sig { returns(T::Array[Anthropic::Models::TextCitation::Variants]) }
+      sig { returns(T.nilable(T::Array[Anthropic::Models::TextCitation::Variants])) }
       attr_accessor :citations
 
       sig { returns(String) }
@@ -18,7 +22,7 @@ module Anthropic
 
       sig do
         params(
-          citations: T::Array[Anthropic::Models::TextCitation::Variants],
+          citations: T.nilable(T::Array[Anthropic::Models::TextCitation::Variants]),
           text: String,
           type: Symbol
         ).void

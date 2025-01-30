@@ -201,7 +201,7 @@ module Anthropic
       #
       #     See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
       #
-      #   @return [Array<Anthropic::Models::Tool>]
+      #   @return [Array<Anthropic::Models::Tool>, nil]
       optional :tools, -> { Anthropic::ArrayOf[Anthropic::Models::Tool] }
 
       # @!parse

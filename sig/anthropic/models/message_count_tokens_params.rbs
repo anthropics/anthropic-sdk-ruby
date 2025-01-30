@@ -28,7 +28,7 @@ module Anthropic
 
       def tool_choice=: (Anthropic::Models::tool_choice) -> void
 
-      attr_reader tools: Array[Anthropic::Models::Tool]
+      attr_reader tools: Array[Anthropic::Models::Tool]?
 
       def tools=: (Array[Anthropic::Models::Tool]) -> void
 

@@ -8,7 +8,7 @@ module Anthropic
           text: String,
           type: Symbol,
           cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
-          citations: T::Array[Anthropic::Models::TextCitationParam::Variants]
+          citations: T.nilable(T::Array[Anthropic::Models::TextCitationParam::Variants])
         }
       end
 
@@ -21,14 +21,14 @@ module Anthropic
       sig { returns(T.nilable(Anthropic::Models::CacheControlEphemeral)) }
       attr_accessor :cache_control
 
-      sig { returns(T::Array[Anthropic::Models::TextCitationParam::Variants]) }
+      sig { returns(T.nilable(T::Array[Anthropic::Models::TextCitationParam::Variants])) }
       attr_accessor :citations
 
       sig do
         params(
           text: String,
           cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
-          citations: T::Array[Anthropic::Models::TextCitationParam::Variants],
+          citations: T.nilable(T::Array[Anthropic::Models::TextCitationParam::Variants]),
           type: Symbol
         ).void
       end

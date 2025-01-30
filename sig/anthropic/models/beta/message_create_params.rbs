@@ -33,7 +33,7 @@ module Anthropic
 
         def metadata=: (Anthropic::Models::Beta::BetaMetadata) -> void
 
-        attr_reader stop_sequences: Array[String]
+        attr_reader stop_sequences: Array[String]?
 
         def stop_sequences=: (Array[String]) -> void
 
@@ -53,7 +53,7 @@ module Anthropic
 
         def tool_choice=: (Anthropic::Models::Beta::beta_tool_choice) -> void
 
-        attr_reader tools: Array[Anthropic::Models::Beta::beta_tool_union]
+        attr_reader tools: Array[Anthropic::Models::Beta::beta_tool_union]?
 
         def tools=: (Array[Anthropic::Models::Beta::beta_tool_union]) -> void
 
@@ -65,7 +65,7 @@ module Anthropic
 
         def top_p=: (Float) -> void
 
-        attr_reader betas: Array[Anthropic::Models::anthropic_beta]
+        attr_reader betas: Array[Anthropic::Models::anthropic_beta]?
 
         def betas=: (Array[Anthropic::Models::anthropic_beta]) -> void
 

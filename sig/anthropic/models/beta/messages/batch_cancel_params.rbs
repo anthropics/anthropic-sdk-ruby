@@ -10,7 +10,7 @@ module Anthropic
           extend Anthropic::RequestParameters::Converter
           include Anthropic::RequestParameters
 
-          attr_reader betas: Array[Anthropic::Models::anthropic_beta]
+          attr_reader betas: Array[Anthropic::Models::anthropic_beta]?
 
           def betas=: (Array[Anthropic::Models::anthropic_beta]) -> void
 

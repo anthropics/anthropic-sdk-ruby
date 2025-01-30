@@ -20,7 +20,7 @@ module Anthropic
           # @!attribute [r] betas
           #   Optional header to specify the beta version(s) you want to use.
           #
-          #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>]
+          #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>, nil]
           optional :betas,
                    -> { Anthropic::ArrayOf[union: Anthropic::Models::AnthropicBeta] },
                    api_name: :"anthropic-beta"
@@ -216,7 +216,7 @@ module Anthropic
               #     the custom sequences, the response `stop_reason` value will be `"stop_sequence"`
               #     and the response `stop_sequence` value will contain the matched stop sequence.
               #
-              #   @return [Array<String>]
+              #   @return [Array<String>, nil]
               optional :stop_sequences, Anthropic::ArrayOf[String]
 
               # @!parse
@@ -352,7 +352,7 @@ module Anthropic
               #
               #     See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
               #
-              #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>]
+              #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>, nil]
               optional :tools, -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaToolUnion] }
 
               # @!parse

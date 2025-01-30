@@ -38,7 +38,7 @@ module Anthropic
           sig { params(limit: Integer).void }
           attr_writer :limit
 
-          sig { returns(T::Array[Anthropic::Models::AnthropicBeta::Variants]) }
+          sig { returns(T.nilable(T::Array[Anthropic::Models::AnthropicBeta::Variants])) }
           attr_reader :betas
 
           sig { params(betas: T::Array[Anthropic::Models::AnthropicBeta::Variants]).void }

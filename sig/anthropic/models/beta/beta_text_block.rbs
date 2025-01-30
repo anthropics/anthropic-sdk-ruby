@@ -6,13 +6,13 @@ module Anthropic
     module Beta
       type beta_text_block =
         {
-          citations: Array[Anthropic::Models::Beta::beta_text_citation],
+          citations: Array[Anthropic::Models::Beta::beta_text_citation]?,
           text: String,
           type: :text
         }
 
       class BetaTextBlock < Anthropic::BaseModel
-        attr_accessor citations: Array[Anthropic::Models::Beta::beta_text_citation]
+        attr_accessor citations: Array[Anthropic::Models::Beta::beta_text_citation]?
 
         attr_accessor text: String
 
@@ -20,7 +20,7 @@ module Anthropic
 
         def initialize:
           (
-            citations: Array[Anthropic::Models::Beta::beta_text_citation],
+            citations: Array[Anthropic::Models::Beta::beta_text_citation]?,
             text: String,
             type: :text
           ) -> void

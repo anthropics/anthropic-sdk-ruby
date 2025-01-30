@@ -139,7 +139,7 @@ module Anthropic
       #     the custom sequences, the response `stop_reason` value will be `"stop_sequence"`
       #     and the response `stop_sequence` value will contain the matched stop sequence.
       #
-      #   @return [Array<String>]
+      #   @return [Array<String>, nil]
       optional :stop_sequences, Anthropic::ArrayOf[String]
 
       # @!parse
@@ -267,7 +267,7 @@ module Anthropic
       #
       #     See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
       #
-      #   @return [Array<Anthropic::Models::Tool>]
+      #   @return [Array<Anthropic::Models::Tool>, nil]
       optional :tools, -> { Anthropic::ArrayOf[Anthropic::Models::Tool] }
 
       # @!parse

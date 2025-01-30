@@ -29,13 +29,13 @@ module Anthropic
 
       # @!attribute citations
       #
-      #   @return [Array<Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam>]
+      #   @return [Array<Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam>, nil]
       optional :citations, -> { Anthropic::ArrayOf[union: Anthropic::Models::TextCitationParam] }, nil?: true
 
       # @!parse
       #   # @param text [String]
       #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   # @param citations [Array<Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam>]
+      #   # @param citations [Array<Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam>, nil]
       #   # @param type [Symbol, :text]
       #   #
       #   def initialize(text:, cache_control: nil, citations: nil, type: :text, **) = super

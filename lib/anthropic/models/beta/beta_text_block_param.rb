@@ -30,7 +30,7 @@ module Anthropic
 
         # @!attribute citations
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam>]
+        #   @return [Array<Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam>, nil]
         optional :citations,
                  -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitationParam] },
                  nil?: true
@@ -38,7 +38,7 @@ module Anthropic
         # @!parse
         #   # @param text [String]
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        #   # @param citations [Array<Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam>]
+        #   # @param citations [Array<Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam>, nil]
         #   # @param type [Symbol, :text]
         #   #
         #   def initialize(text:, cache_control: nil, citations: nil, type: :text, **) = super

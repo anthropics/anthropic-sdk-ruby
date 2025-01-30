@@ -8,13 +8,13 @@ module Anthropic
       class BetaTextBlock < Anthropic::BaseModel
         Shape = T.type_alias do
           {
-            citations: T::Array[Anthropic::Models::Beta::BetaTextCitation::Variants],
+            citations: T.nilable(T::Array[Anthropic::Models::Beta::BetaTextCitation::Variants]),
             text: String,
             type: Symbol
           }
         end
 
-        sig { returns(T::Array[Anthropic::Models::Beta::BetaTextCitation::Variants]) }
+        sig { returns(T.nilable(T::Array[Anthropic::Models::Beta::BetaTextCitation::Variants])) }
         attr_accessor :citations
 
         sig { returns(String) }
@@ -25,7 +25,7 @@ module Anthropic
 
         sig do
           params(
-            citations: T::Array[Anthropic::Models::Beta::BetaTextCitation::Variants],
+            citations: T.nilable(T::Array[Anthropic::Models::Beta::BetaTextCitation::Variants]),
             text: String,
             type: Symbol
           ).void
