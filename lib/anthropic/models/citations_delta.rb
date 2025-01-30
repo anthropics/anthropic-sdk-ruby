@@ -28,6 +28,8 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+      # @abstract
+      #
       # @example
       # ```ruby
       # case citation

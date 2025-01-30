@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    # @abstract
+    #
     # @example
     # ```ruby
     # case content_block

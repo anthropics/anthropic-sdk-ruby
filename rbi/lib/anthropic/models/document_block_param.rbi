@@ -63,7 +63,7 @@ module Anthropic
         end
 
         sig do
-          returns(
+          override.returns(
             [
               [Symbol, Anthropic::Models::Base64PDFSource],
               [Symbol, Anthropic::Models::PlainTextSource],

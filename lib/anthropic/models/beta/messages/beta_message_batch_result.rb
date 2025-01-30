@@ -4,6 +4,8 @@ module Anthropic
   module Models
     module Beta
       module Messages
+        # @abstract
+        #
         # Processing result for this request.
         #
         #   Contains a Message output if processing was successful, an error response if

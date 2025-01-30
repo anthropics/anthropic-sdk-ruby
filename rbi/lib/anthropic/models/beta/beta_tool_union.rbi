@@ -18,7 +18,7 @@ module Anthropic
         end
 
         sig do
-          returns(
+          override.returns(
             [
               [NilClass, Anthropic::Models::Beta::BetaTool],
               [NilClass, Anthropic::Models::Beta::BetaToolComputerUse20241022],

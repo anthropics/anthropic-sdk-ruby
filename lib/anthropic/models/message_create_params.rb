@@ -344,6 +344,8 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+      # @abstract
+      #
       # Whether to incrementally stream the response using server-sent events.
       #
       #   See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
@@ -360,8 +362,15 @@ module Anthropic
         TRUE = true
 
         finalize!
+
+        # @!parse
+        #   # @return [Array<Boolean>]
+        #   #
+        #   def self.values; end
       end
 
+      # @abstract
+      #
       # System prompt.
       #
       #   A system prompt is a way of providing context and instructions to Claude, such

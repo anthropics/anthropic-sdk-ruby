@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    # @abstract
+    #
     # @example
     # ```ruby
     # case anthropic_beta
@@ -16,6 +18,8 @@ module Anthropic
 
       variant enum: -> { Anthropic::Models::AnthropicBeta::UnionMember1 }
 
+      # @abstract
+      #
       # @example
       # ```ruby
       # case union_member1
@@ -39,6 +43,11 @@ module Anthropic
         TOKEN_COUNTING_2024_11_01 = :"token-counting-2024-11-01"
 
         finalize!
+
+        # @!parse
+        #   # @return [Array<Symbol>]
+        #   #
+        #   def self.values; end
       end
     end
   end

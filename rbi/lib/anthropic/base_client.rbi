@@ -2,6 +2,8 @@
 
 module Anthropic
   class BaseClient
+    abstract!
+
     RequestShape = T.type_alias do
       {
         method: Symbol,
@@ -64,7 +66,7 @@ module Anthropic
       idempotency_header: nil
     ); end
 
-    sig { returns(T::Hash[String, String]) }
+    sig { overridable.returns(T::Hash[String, String]) }
     private def auth_headers; end
 
     sig { returns(String) }

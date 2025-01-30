@@ -6,6 +6,8 @@ module Anthropic
   end
 
   module RequestParameters
+    abstract!
+
     Shape = T.type_alias { {request_options: Anthropic::RequestOpts} }
 
     sig { returns(Anthropic::RequestOpts) }

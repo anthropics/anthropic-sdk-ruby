@@ -40,7 +40,7 @@ module Anthropic
         end
 
         sig do
-          returns(
+          override.returns(
             [
               [Symbol, Anthropic::Models::TextDelta],
               [Symbol, Anthropic::Models::InputJSONDelta],

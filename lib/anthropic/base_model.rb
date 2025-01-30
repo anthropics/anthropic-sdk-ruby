@@ -3,133 +3,9 @@
 module Anthropic
   # @private
   #
+  # @abstract
+  #
   module Converter
-    # @private
-    #
-    # @param spec [Hash{Symbol=>Object}, Proc, Anthropic::Converter, Class] .
-    #
-    #   @option spec [NilClass, TrueClass, FalseClass, Integer, Float, Symbol] :const
-    #
-    #   @option spec [Proc] :enum
-    #
-    #   @option spec [Proc] :union
-    #
-    #   @option spec [Boolean] :"nil?"
-    #
-    # @return [Proc]
-    #
-    def self.type_info(spec)
-      case spec
-      in Hash
-        type_info(spec.slice(:const, :enum, :union).first&.last)
-      in Proc
-        spec
-      in Anthropic::Converter | Class
-        -> { spec }
-      in true | false
-        -> { Anthropic::BooleanModel }
-      in NilClass | true | false | Symbol | Integer | Float
-        -> { spec.class }
-      end
-    end
-
-    # @private
-    #
-    # Based on `target`, transform `value` into `target`, to the extent possible:
-    #
-    #   1. if the given `value` conforms to `target` already, return the given `value`
-    #   2. if it's possible and safe to convert the given `value` to `target`, then the
-    #      converted value
-    #   3. otherwise, the given `value` unaltered
-    #
-    # @param target [Anthropic::Converter, Class]
-    # @param value [Object]
-    #
-    # @return [Object]
-    #
-    def self.coerce(target, value)
-      case target
-      in Anthropic::Converter
-        target.coerce(value)
-      in Class
-        case target
-        in -> { _1 <= NilClass }
-          nil
-        in -> { _1 <= Integer }
-          value.is_a?(Numeric) ? Integer(value) : value
-        in -> { _1 <= Float }
-          value.is_a?(Numeric) ? Float(value) : value
-        in -> { _1 <= Symbol }
-          value.is_a?(String) ? value.to_sym : value
-        in -> { _1 <= String }
-          value.is_a?(Symbol) ? value.to_s : value
-        in -> { _1 <= Date || _1 <= Time }
-          value.is_a?(String) ? target.parse(value) : value
-        else
-          value
-        end
-      end
-    end
-
-    # @private
-    #
-    # @param target [Anthropic::Converter, Class]
-    # @param value [Object]
-    #
-    # @return [Object]
-    #
-    def self.dump(target, value)
-      case target
-      in Anthropic::Converter
-        target.dump(value)
-      else
-        value
-      end
-    end
-
-    # @private
-    #
-    # The underlying algorithm for computing maximal compatibility is subject to
-    #   future improvements.
-    #
-    #   Similar to `#.coerce`, used to determine the best union variant to decode into.
-    #
-    #   1. determine if strict-ish coercion is possible
-    #   2. return either result of successful coercion or if loose coercion is possible
-    #   3. return a score for recursively tallied count for fields that can be coerced
-    #
-    # @param target [Anthropic::Converter, Class]
-    # @param value [Object]
-    #
-    # @return [Object]
-    #
-    def self.try_strict_coerce(target, value)
-      case target
-      in Anthropic::Converter
-        target.try_strict_coerce(value)
-      in Class
-        case [target, value]
-        in [-> { _1 <= NilClass }, _]
-          [true, nil, value.nil? ? 1 : 0]
-        in [-> { _1 <= Integer }, Numeric]
-          [true, Integer(value), 1]
-        in [-> { _1 <= Float }, Numeric]
-          [true, Float(value), 1]
-        in [-> { _1 <= String }, Symbol]
-          [true, value.to_s, 1]
-        in [-> { _1 <= Date || _1 <= Time }, String]
-          Anthropic::Util.suppress(ArgumentError, Date::Error) do
-            return [true, target.parse(value), 1]
-          end
-          [false, false, 0]
-        in [_, ^target]
-          [true, value, 1]
-        else
-          [false, false, 0]
-        end
-      end
-    end
-
     # rubocop:disable Lint/UnusedMethodArgument
 
     # @private
@@ -157,9 +33,139 @@ module Anthropic
     def try_strict_coerce(value) = (raise NotImplementedError)
 
     # rubocop:enable Lint/UnusedMethodArgument
+
+    class << self
+      # @private
+      #
+      # @param spec [Hash{Symbol=>Object}, Proc, Anthropic::Converter, Class] .
+      #
+      #   @option spec [NilClass, TrueClass, FalseClass, Integer, Float, Symbol] :const
+      #
+      #   @option spec [Proc] :enum
+      #
+      #   @option spec [Proc] :union
+      #
+      #   @option spec [Boolean] :"nil?"
+      #
+      # @return [Proc]
+      #
+      def type_info(spec)
+        case spec
+        in Hash
+          type_info(spec.slice(:const, :enum, :union).first&.last)
+        in Proc
+          spec
+        in Anthropic::Converter | Class
+          -> { spec }
+        in true | false
+          -> { Anthropic::BooleanModel }
+        in NilClass | true | false | Symbol | Integer | Float
+          -> { spec.class }
+        end
+      end
+
+      # @private
+      #
+      # Based on `target`, transform `value` into `target`, to the extent possible:
+      #
+      #   1. if the given `value` conforms to `target` already, return the given `value`
+      #   2. if it's possible and safe to convert the given `value` to `target`, then the
+      #      converted value
+      #   3. otherwise, the given `value` unaltered
+      #
+      # @param target [Anthropic::Converter, Class]
+      # @param value [Object]
+      #
+      # @return [Object]
+      #
+      def coerce(target, value)
+        case target
+        in Anthropic::Converter
+          target.coerce(value)
+        in Class
+          case target
+          in -> { _1 <= NilClass }
+            nil
+          in -> { _1 <= Integer }
+            value.is_a?(Numeric) ? Integer(value) : value
+          in -> { _1 <= Float }
+            value.is_a?(Numeric) ? Float(value) : value
+          in -> { _1 <= Symbol }
+            value.is_a?(String) ? value.to_sym : value
+          in -> { _1 <= String }
+            value.is_a?(Symbol) ? value.to_s : value
+          in -> { _1 <= Date || _1 <= Time }
+            value.is_a?(String) ? target.parse(value) : value
+          else
+            value
+          end
+        end
+      end
+
+      # @private
+      #
+      # @param target [Anthropic::Converter, Class]
+      # @param value [Object]
+      #
+      # @return [Object]
+      #
+      def dump(target, value)
+        case target
+        in Anthropic::Converter
+          target.dump(value)
+        else
+          value
+        end
+      end
+
+      # @private
+      #
+      # The underlying algorithm for computing maximal compatibility is subject to
+      #   future improvements.
+      #
+      #   Similar to `#.coerce`, used to determine the best union variant to decode into.
+      #
+      #   1. determine if strict-ish coercion is possible
+      #   2. return either result of successful coercion or if loose coercion is possible
+      #   3. return a score for recursively tallied count for fields that can be coerced
+      #
+      # @param target [Anthropic::Converter, Class]
+      # @param value [Object]
+      #
+      # @return [Object]
+      #
+      def try_strict_coerce(target, value)
+        case target
+        in Anthropic::Converter
+          target.try_strict_coerce(value)
+        in Class
+          case [target, value]
+          in [-> { _1 <= NilClass }, _]
+            [true, nil, value.nil? ? 1 : 0]
+          in [-> { _1 <= Integer }, Numeric]
+            [true, Integer(value), 1]
+          in [-> { _1 <= Float }, Numeric]
+            [true, Float(value), 1]
+          in [-> { _1 <= String }, Symbol]
+            [true, value.to_s, 1]
+          in [-> { _1 <= Date || _1 <= Time }, String]
+            Anthropic::Util.suppress(ArgumentError, Date::Error) do
+              return [true, target.parse(value), 1]
+            end
+            [false, false, 0]
+          in [_, ^target]
+            [true, value, 1]
+          else
+            [false, false, 0]
+          end
+        end
+      end
+    end
   end
 
   # @private
+  #
+  # @abstract
   #
   # When we don't know what to expect for the value.
   class Unknown
@@ -215,6 +221,8 @@ module Anthropic
 
   # @private
   #
+  # @abstract
+  #
   # Ruby has no Boolean class; this is something for models to refer to.
   class BooleanModel
     extend Anthropic::Converter
@@ -268,6 +276,8 @@ module Anthropic
   end
 
   # @private
+  #
+  # @abstract
   #
   # A value from among a specified list of options. OpenAPI enum values map to Ruby
   #   values in the SDK as follows:
@@ -351,6 +361,8 @@ module Anthropic
   end
 
   # @private
+  #
+  # @abstract
   #
   class Union
     extend Anthropic::Extern
@@ -553,6 +565,8 @@ module Anthropic
 
   # @private
   #
+  # @abstract
+  #
   # Array of items of a given type.
   class ArrayOf
     include Anthropic::Converter
@@ -680,6 +694,8 @@ module Anthropic
   end
 
   # @private
+  #
+  # @abstract
   #
   # Hash of items of a given type.
   class HashOf
@@ -818,6 +834,8 @@ module Anthropic
   end
 
   # @private
+  #
+  # @abstract
   #
   class BaseModel
     extend Anthropic::Extern

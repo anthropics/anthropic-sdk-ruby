@@ -127,6 +127,8 @@ module Anthropic
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+          # @abstract
+          #
           # Processing status of the Message Batch.
           #
           # @example
@@ -146,6 +148,11 @@ module Anthropic
             ENDED = :ended
 
             finalize!
+
+            # @!parse
+            #   # @return [Array<Symbol>]
+            #   #
+            #   def self.values; end
           end
         end
       end

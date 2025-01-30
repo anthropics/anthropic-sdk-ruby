@@ -176,7 +176,14 @@ module Anthropic
 
               TextBlockParamArray = T.type_alias { T::Array[Anthropic::Models::TextBlockParam] }
 
-              sig { returns([[NilClass, String], [NilClass, T::Array[Anthropic::Models::TextBlockParam]]]) }
+              sig do
+                override.returns(
+                  [
+                    [NilClass, String],
+                    [NilClass, T::Array[Anthropic::Models::TextBlockParam]]
+                  ]
+                )
+              end
               private_class_method def self.variants; end
             end
           end

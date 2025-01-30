@@ -29,7 +29,7 @@ module Anthropic
         end
 
         sig do
-          returns(
+          override.returns(
             [
               [Symbol, Anthropic::Models::CitationCharLocation],
               [Symbol, Anthropic::Models::CitationPageLocation],

@@ -3,6 +3,8 @@
 module Anthropic
   # @private
   #
+  # @abstract
+  #
   module Extern
     # @private
     #

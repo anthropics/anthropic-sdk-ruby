@@ -58,7 +58,7 @@ module Anthropic
           IMAGE_GIF = :"image/gif"
           IMAGE_WEBP = :"image/webp"
 
-          sig { returns(T::Array[Symbol]) }
+          sig { override.returns(T::Array[Symbol]) }
           def self.values; end
         end
       end

@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    # @abstract
+    #
     # @example
     # ```ruby
     # case beta_error

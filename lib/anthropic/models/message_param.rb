@@ -28,6 +28,8 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+      # @abstract
+      #
       # @example
       # ```ruby
       # case content
@@ -45,6 +47,8 @@ module Anthropic
         variant Anthropic::Models::MessageParam::Content::ContentBlockParamArray
       end
 
+      # @abstract
+      #
       # @example
       # ```ruby
       # case role
@@ -59,6 +63,11 @@ module Anthropic
         ASSISTANT = :assistant
 
         finalize!
+
+        # @!parse
+        #   # @return [Array<Symbol>]
+        #   #
+        #   def self.values; end
       end
     end
   end

@@ -16,11 +16,11 @@ module Anthropic
         PDFS_2024_09_25 = :"pdfs-2024-09-25"
         TOKEN_COUNTING_2024_11_01 = :"token-counting-2024-11-01"
 
-        sig { returns(T::Array[Symbol]) }
+        sig { override.returns(T::Array[Symbol]) }
         def self.values; end
       end
 
-      sig { returns([[NilClass, String], [NilClass, Symbol]]) }
+      sig { override.returns([[NilClass, String], [NilClass, Symbol]]) }
       private_class_method def self.variants; end
     end
   end

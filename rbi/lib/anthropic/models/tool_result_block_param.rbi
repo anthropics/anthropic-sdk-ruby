@@ -67,7 +67,7 @@ module Anthropic
           end
 
           sig do
-            returns(
+            override.returns(
               [
                 [Symbol, Anthropic::Models::TextBlockParam],
                 [Symbol, Anthropic::Models::ImageBlockParam]
@@ -78,10 +78,13 @@ module Anthropic
         end
 
         sig do
-          returns(
+          override.returns(
             [
               [NilClass, String],
-              [NilClass, T::Array[Anthropic::Models::ToolResultBlockParam::Content::Content::Variants]]
+              [
+                NilClass,
+                T::Array[Anthropic::Models::ToolResultBlockParam::Content::Content::Variants]
+              ]
             ]
           )
         end

@@ -99,6 +99,8 @@ module Anthropic
           # def initialize: (Hash | Anthropic::BaseModel) -> void
         end
 
+        # @abstract
+        #
         # @example
         # ```ruby
         # case type
@@ -110,6 +112,11 @@ module Anthropic
           CUSTOM = :custom
 
           finalize!
+
+          # @!parse
+          #   # @return [Array<Symbol>]
+          #   #
+          #   def self.values; end
         end
       end
     end
