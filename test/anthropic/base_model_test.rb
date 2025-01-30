@@ -142,6 +142,13 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
     end
   end
 
+  def test_model_conversion_accessor
+    model = M2.new(c: {})
+    assert_pattern do
+      model.c => M1
+    end
+  end
+
   def test_model_equality
     now = Time.now
     model1 = M2.new(a: now, b: "b", renamed: "a", c: M1.new, w: 1, y: 1)
