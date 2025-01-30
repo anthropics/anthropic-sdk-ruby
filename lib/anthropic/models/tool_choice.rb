@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    # @abstract
+    #
     # How the model should use the provided tools. The model can use a specific tool,
     #   any available tool, or decide by itself.
     #

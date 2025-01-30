@@ -13,7 +13,7 @@ module Anthropic
         end
 
         sig do
-          returns(
+          override.returns(
             [
               [Symbol, Anthropic::Models::Beta::BetaTextBlock],
               [Symbol, Anthropic::Models::Beta::BetaToolUseBlock]

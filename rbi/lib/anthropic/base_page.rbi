@@ -2,15 +2,17 @@
 
 module Anthropic
   module BasePage
+    abstract!
+
     Elem = type_member(:out)
 
-    sig { returns(T::Boolean) }
+    sig { overridable.returns(T::Boolean) }
     def next_page?; end
 
-    sig { returns(T.self_type) }
+    sig { overridable.returns(T.self_type) }
     def next_page; end
 
-    sig { params(blk: T.proc.params(arg0: Elem).void).void }
+    sig { overridable.params(blk: T.proc.params(arg0: Elem).void).void }
     def auto_paging_each(&blk); end
 
     sig { returns(T::Enumerable[Elem]) }

@@ -14,7 +14,7 @@ module Anthropic
       end
 
       sig do
-        returns(
+        override.returns(
           [
             [Symbol, Anthropic::Models::CitationCharLocationParam],
             [Symbol, Anthropic::Models::CitationPageLocationParam],

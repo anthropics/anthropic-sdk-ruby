@@ -2,7 +2,25 @@
 
 module Anthropic
   module Converter
+    abstract!
+
     Input = T.type_alias { T.any(Anthropic::Converter, T::Class[T.anything]) }
+
+    sig { overridable.params(value: T.anything).returns(T.anything) }
+    def coerce(value); end
+
+    sig { overridable.params(value: T.anything).returns(T.anything) }
+    def dump(value); end
+
+    sig do
+      overridable.params(value: T.anything).returns(
+        T.any(
+          [T::Boolean, T.anything, NilClass],
+          [T::Boolean, T::Boolean, Integer]
+        )
+      )
+    end
+    def try_strict_coerce(value); end
 
     sig do
       params(
@@ -27,25 +45,11 @@ module Anthropic
 
     sig { params(target: Anthropic::Converter::Input, value: T.anything).returns(T.anything) }
     def self.try_strict_coerce(target, value); end
-
-    sig { params(value: T.anything).returns(T.anything) }
-    def coerce(value); end
-
-    sig { params(value: T.anything).returns(T.anything) }
-    def dump(value); end
-
-    sig do
-      params(value: T.anything).returns(
-        T.any(
-          [T::Boolean, T.anything, NilClass],
-          [T::Boolean, T::Boolean, Integer]
-        )
-      )
-    end
-    def try_strict_coerce(value); end
   end
 
   class Unknown
+    abstract!
+
     extend Anthropic::Converter
 
     sig { params(other: T.anything).returns(T::Boolean) }
@@ -54,14 +58,14 @@ module Anthropic
     sig { params(other: T.anything).returns(T::Boolean) }
     def self.==(other); end
 
-    sig { params(value: T.anything).returns(T.anything) }
+    sig { override.params(value: T.anything).returns(T.anything) }
     def self.coerce(value); end
 
-    sig { params(value: T.anything).returns(T.anything) }
+    sig { override.params(value: T.anything).returns(T.anything) }
     def self.dump(value); end
 
     sig do
-      params(value: T.anything).returns(
+      override.params(value: T.anything).returns(
         T.any(
           [T::Boolean, T.anything, NilClass],
           [T::Boolean, T::Boolean, Integer]
@@ -72,6 +76,8 @@ module Anthropic
   end
 
   class BooleanModel
+    abstract!
+
     extend Anthropic::Converter
 
     sig { params(other: T.anything).returns(T::Boolean) }
@@ -80,14 +86,14 @@ module Anthropic
     sig { params(other: T.anything).returns(T::Boolean) }
     def self.==(other); end
 
-    sig { params(value: T.any(T::Boolean, T.anything)).returns(T.any(T::Boolean, T.anything)) }
+    sig { override.params(value: T.any(T::Boolean, T.anything)).returns(T.any(T::Boolean, T.anything)) }
     def self.coerce(value); end
 
-    sig { params(value: T.any(T::Boolean, T.anything)).returns(T.any(T::Boolean, T.anything)) }
+    sig { override.params(value: T.any(T::Boolean, T.anything)).returns(T.any(T::Boolean, T.anything)) }
     def self.dump(value); end
 
     sig do
-      params(value: T.anything).returns(
+      override.params(value: T.anything).returns(
         T.any(
           [T::Boolean, T.anything, NilClass],
           [T::Boolean, T::Boolean, Integer]
@@ -98,9 +104,11 @@ module Anthropic
   end
 
   class Enum
+    abstract!
+
     extend Anthropic::Converter
 
-    sig { returns(T::Array[T.any(NilClass, T::Boolean, Integer, Float, Symbol)]) }
+    sig { overridable.returns(T::Array[T.any(NilClass, T::Boolean, Integer, Float, Symbol)]) }
     def self.values; end
 
     sig { void }
@@ -112,14 +120,14 @@ module Anthropic
     sig { params(other: T.anything).returns(T::Boolean) }
     def self.==(other); end
 
-    sig { params(value: T.any(String, Symbol, T.anything)).returns(T.any(Symbol, T.anything)) }
+    sig { override.params(value: T.any(String, Symbol, T.anything)).returns(T.any(Symbol, T.anything)) }
     def self.coerce(value); end
 
-    sig { params(value: T.any(Symbol, T.anything)).returns(T.any(Symbol, T.anything)) }
+    sig { override.params(value: T.any(Symbol, T.anything)).returns(T.any(Symbol, T.anything)) }
     def self.dump(value); end
 
     sig do
-      params(value: T.anything).returns(
+      override.params(value: T.anything).returns(
         T.any(
           [T::Boolean, T.anything, NilClass],
           [T::Boolean, T::Boolean, Integer]
@@ -130,13 +138,15 @@ module Anthropic
   end
 
   class Union
+    abstract!
+
     extend Anthropic::Extern
     extend Anthropic::Converter
 
     sig { returns(T::Array[[T.nilable(Symbol), Proc]]) }
     private_class_method def self.known_variants; end
 
-    sig { returns(T::Array[[T.nilable(Symbol), T.anything]]) }
+    sig { overridable.returns(T::Array[[T.nilable(Symbol), T.anything]]) }
     private_class_method def self.variants; end
 
     sig { params(property: Symbol).void }
@@ -168,14 +178,14 @@ module Anthropic
     sig { params(other: T.anything).returns(T::Boolean) }
     def self.==(other); end
 
-    sig { params(value: T.anything).returns(T.anything) }
+    sig { override.params(value: T.anything).returns(T.anything) }
     def self.coerce(value); end
 
-    sig { params(value: T.anything).returns(T.anything) }
+    sig { override.params(value: T.anything).returns(T.anything) }
     def self.dump(value); end
 
     sig do
-      params(value: T.anything).returns(
+      override.params(value: T.anything).returns(
         T.any(
           [T::Boolean, T.anything, NilClass],
           [T::Boolean, T::Boolean, Integer]
@@ -197,7 +207,7 @@ module Anthropic
     def ==(other); end
 
     sig do
-      params(
+      override.params(
         value: T.any(
           T::Enumerable[T.anything],
           T.anything
@@ -207,7 +217,7 @@ module Anthropic
     def coerce(value); end
 
     sig do
-      params(
+      override.params(
         value: T.any(
           T::Enumerable[T.anything],
           T.anything
@@ -217,7 +227,7 @@ module Anthropic
     def dump(value); end
 
     sig do
-      params(value: T.anything).returns(
+      override.params(value: T.anything).returns(
         T.any(
           [T::Boolean, T.anything, NilClass],
           [T::Boolean, T::Boolean, Integer]
@@ -254,7 +264,7 @@ module Anthropic
     def ==(other); end
 
     sig do
-      params(
+      override.params(
         value: T.any(
           T::Hash[T.anything, T.anything],
           T.anything
@@ -264,7 +274,7 @@ module Anthropic
     def coerce(value); end
 
     sig do
-      params(
+      override.params(
         value: T.any(
           T::Hash[T.anything, T.anything],
           T.anything
@@ -274,7 +284,7 @@ module Anthropic
     def dump(value); end
 
     sig do
-      params(value: T.anything).returns(
+      override.params(value: T.anything).returns(
         T.any(
           [T::Boolean, T.anything, NilClass],
           [T::Boolean, T::Boolean, Integer]
@@ -300,6 +310,8 @@ module Anthropic
   end
 
   class BaseModel
+    abstract!
+
     extend Anthropic::Extern
     extend Anthropic::Converter
 
@@ -383,7 +395,7 @@ module Anthropic
     def ==(other); end
 
     sig do
-      params(
+      override.params(
         value: T.any(
           Anthropic::BaseModel,
           T::Hash[T.anything, T.anything],
@@ -394,7 +406,7 @@ module Anthropic
     def self.coerce(value); end
 
     sig do
-      params(
+      override.params(
         value: T.any(
           T.attached_class,
           T.anything
@@ -404,7 +416,7 @@ module Anthropic
     def self.dump(value); end
 
     sig do
-      params(value: T.anything).returns(
+      override.params(value: T.anything).returns(
         T.any(
           [T::Boolean, T.anything, NilClass],
           [T::Boolean, T::Boolean, Integer]

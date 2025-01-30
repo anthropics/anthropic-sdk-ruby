@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    # @abstract
+    #
     # The model that will complete your prompt.\n\nSee
     #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
     #   details and options.
@@ -21,6 +23,8 @@ module Anthropic
 
       variant String
 
+      # @abstract
+      #
       # The model that will complete your prompt.\n\nSee
       #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
@@ -75,6 +79,11 @@ module Anthropic
         CLAUDE_2_0 = :"claude-2.0"
 
         finalize!
+
+        # @!parse
+        #   # @return [Array<Symbol>]
+        #   #
+        #   def self.values; end
       end
     end
   end

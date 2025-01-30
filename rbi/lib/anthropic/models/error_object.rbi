@@ -20,7 +20,7 @@ module Anthropic
       end
 
       sig do
-        returns(
+        override.returns(
           [
             [Symbol, Anthropic::Models::InvalidRequestError],
             [Symbol, Anthropic::Models::AuthenticationError_],

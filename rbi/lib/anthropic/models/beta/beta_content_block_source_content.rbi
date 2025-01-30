@@ -13,7 +13,7 @@ module Anthropic
         end
 
         sig do
-          returns(
+          override.returns(
             [
               [Symbol, Anthropic::Models::Beta::BetaTextBlockParam],
               [Symbol, Anthropic::Models::Beta::BetaImageBlockParam]

@@ -128,7 +128,7 @@ module Anthropic
       case values
       in [value, *values]
         values.reduce(value) do |acc, val|
-          _deep_merge(acc, val, concat: concat)
+          deep_merge_lr(acc, val, concat: concat)
         end
       else
         sentinel
@@ -143,7 +143,7 @@ module Anthropic
     #
     # @return [Object]
     #
-    private_class_method def self._deep_merge(lhs, rhs, concat: false)
+    private_class_method def self.deep_merge_lr(lhs, rhs, concat: false)
       rhs_cleaned =
         case rhs
         in Hash
@@ -157,7 +157,7 @@ module Anthropic
         lhs
           .reject { |key, _| rhs[key] == OMIT }
           .merge(rhs_cleaned) do |_, old_val, new_val|
-            _deep_merge(old_val, new_val, concat: concat)
+            deep_merge_lr(old_val, new_val, concat: concat)
           end
       in [Array, Array, true]
         lhs.concat(rhs_cleaned)

@@ -31,7 +31,7 @@ module Anthropic
         end
 
         sig do
-          returns(
+          override.returns(
             [
               [NilClass, String],
               [NilClass, T::Array[Anthropic::Models::ContentBlockSourceContent::Variants]]

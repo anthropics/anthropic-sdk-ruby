@@ -17,7 +17,7 @@ module Anthropic
           end
 
           sig do
-            returns(
+            override.returns(
               [
                 [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult],
                 [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult],

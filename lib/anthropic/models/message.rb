@@ -139,6 +139,8 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+      # @abstract
+      #
       # The reason that we stopped.
       #
       #   This may be one the following values:
@@ -171,6 +173,11 @@ module Anthropic
         TOOL_USE = :tool_use
 
         finalize!
+
+        # @!parse
+        #   # @return [Array<Symbol>]
+        #   #
+        #   def self.values; end
       end
     end
   end

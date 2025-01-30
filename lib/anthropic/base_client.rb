@@ -3,6 +3,8 @@
 module Anthropic
   # @private
   #
+  # @abstract
+  #
   class BaseClient
     # from whatwg fetch spec
     MAX_REDIRECTS = 20

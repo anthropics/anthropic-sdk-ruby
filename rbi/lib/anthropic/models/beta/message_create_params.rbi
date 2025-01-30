@@ -137,7 +137,7 @@ module Anthropic
 
           TRUE = T.let(true, T::Boolean)
 
-          sig { returns(T::Array[T::Boolean]) }
+          sig { override.returns(T::Array[T::Boolean]) }
           def self.values; end
         end
 
@@ -149,7 +149,12 @@ module Anthropic
           BetaTextBlockParamArray = T.type_alias { T::Array[Anthropic::Models::Beta::BetaTextBlockParam] }
 
           sig do
-            returns([[NilClass, String], [NilClass, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]]])
+            override.returns(
+              [
+                [NilClass, String],
+                [NilClass, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]]
+              ]
+            )
           end
           private_class_method def self.variants; end
         end

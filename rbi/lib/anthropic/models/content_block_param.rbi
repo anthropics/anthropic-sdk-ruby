@@ -16,7 +16,7 @@ module Anthropic
       end
 
       sig do
-        returns(
+        override.returns(
           [
             [Symbol, Anthropic::Models::TextBlockParam],
             [Symbol, Anthropic::Models::ImageBlockParam],

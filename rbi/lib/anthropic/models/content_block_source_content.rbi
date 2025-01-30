@@ -8,7 +8,12 @@ module Anthropic
       Variants = T.type_alias { T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam) }
 
       sig do
-        returns([[Symbol, Anthropic::Models::TextBlockParam], [Symbol, Anthropic::Models::ImageBlockParam]])
+        override.returns(
+          [
+            [Symbol, Anthropic::Models::TextBlockParam],
+            [Symbol, Anthropic::Models::ImageBlockParam]
+          ]
+        )
       end
       private_class_method def self.variants; end
     end

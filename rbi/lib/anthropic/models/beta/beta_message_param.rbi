@@ -36,7 +36,7 @@ module Anthropic
           end
 
           sig do
-            returns(
+            override.returns(
               [
                 [NilClass, String],
                 [NilClass, T::Array[Anthropic::Models::Beta::BetaContentBlockParam::Variants]]
@@ -52,7 +52,7 @@ module Anthropic
           USER = :user
           ASSISTANT = :assistant
 
-          sig { returns(T::Array[Symbol]) }
+          sig { override.returns(T::Array[Symbol]) }
           def self.values; end
         end
       end

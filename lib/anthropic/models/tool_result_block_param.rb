@@ -57,6 +57,8 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+      # @abstract
+      #
       # @example
       # ```ruby
       # case content
@@ -75,6 +77,8 @@ module Anthropic
 
         variant Anthropic::Models::ToolResultBlockParam::Content::ContentArray
 
+        # @abstract
+        #
         # @example
         # ```ruby
         # case content

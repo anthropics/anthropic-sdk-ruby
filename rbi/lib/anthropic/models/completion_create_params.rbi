@@ -100,7 +100,7 @@ module Anthropic
 
         TRUE = T.let(true, T::Boolean)
 
-        sig { returns(T::Array[T::Boolean]) }
+        sig { override.returns(T::Array[T::Boolean]) }
         def self.values; end
       end
     end

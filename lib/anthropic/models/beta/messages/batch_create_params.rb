@@ -432,6 +432,8 @@ module Anthropic
 
               # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+              # @abstract
+              #
               # System prompt.
               #
               #   A system prompt is a way of providing context and instructions to Claude, such

@@ -17,7 +17,7 @@ module Anthropic
         end
 
         sig do
-          returns(
+          override.returns(
             [
               [Symbol, Anthropic::Models::Beta::BetaCitationCharLocationParam],
               [Symbol, Anthropic::Models::Beta::BetaCitationPageLocationParam],

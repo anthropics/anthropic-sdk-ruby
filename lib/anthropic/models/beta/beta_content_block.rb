@@ -3,6 +3,8 @@
 module Anthropic
   module Models
     module Beta
+      # @abstract
+      #
       # @example
       # ```ruby
       # case beta_content_block
