@@ -2,6 +2,7 @@ dependencies:
   - cgi
   - date
   - erb
+  - etc
   - json
   - net/http
   - securerandom

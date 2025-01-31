@@ -8,7 +8,6 @@ module Anthropic
           Anthropic::Models::MessageCreateParams | Hash[Symbol, top] params
         ) -> Anthropic::Models::Message
         | (
-          Anthropic::Models::MessageCreateParams | Hash[Symbol, top] params,
           max_tokens: Integer,
           messages: Array[Anthropic::Models::MessageParam],
           model: Anthropic::Models::model,
@@ -29,8 +28,6 @@ module Anthropic
           Anthropic::Models::MessageCountTokensParams | Hash[Symbol, top] params
         ) -> Anthropic::Models::MessageTokensCount
         | (
-          Anthropic::Models::MessageCountTokensParams
-          | Hash[Symbol, top] params,
           messages: Array[Anthropic::Models::MessageParam],
           model: Anthropic::Models::model,
           system_: Anthropic::Models::MessageCountTokensParams::system_,

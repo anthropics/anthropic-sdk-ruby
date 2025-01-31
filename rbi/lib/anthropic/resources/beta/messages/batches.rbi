@@ -7,16 +7,12 @@ module Anthropic
         class Batches
           sig do
             params(
-              params: T.any(
-                Anthropic::Models::Beta::Messages::BatchCreateParams,
-                T::Hash[Symbol, T.anything]
-              ),
               requests: T::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request],
               betas: T::Array[Anthropic::Models::AnthropicBeta::Variants],
               request_options: Anthropic::RequestOpts
             ).returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
           end
-          def create(params, requests:, betas:, request_options: {}); end
+          def create(requests:, betas:, request_options: {}); end
 
           sig do
             params(

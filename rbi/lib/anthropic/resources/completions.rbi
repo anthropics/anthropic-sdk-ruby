@@ -5,7 +5,6 @@ module Anthropic
     class Completions
       sig do
         params(
-          params: T.any(Anthropic::Models::CompletionCreateParams, T::Hash[Symbol, T.anything]),
           max_tokens_to_sample: Integer,
           model: Anthropic::Models::Model::Variants,
           prompt: String,
@@ -19,7 +18,6 @@ module Anthropic
         ).returns(Anthropic::Models::Completion)
       end
       def create(
-        params,
         max_tokens_to_sample:,
         model:,
         prompt:,

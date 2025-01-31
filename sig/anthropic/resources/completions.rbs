@@ -6,7 +6,6 @@ module Anthropic
           Anthropic::Models::CompletionCreateParams | Hash[Symbol, top] params
         ) -> Anthropic::Models::Completion
         | (
-          Anthropic::Models::CompletionCreateParams | Hash[Symbol, top] params,
           max_tokens_to_sample: Integer,
           model: Anthropic::Models::model,
           prompt: String,

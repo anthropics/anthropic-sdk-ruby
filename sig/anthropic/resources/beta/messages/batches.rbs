@@ -9,8 +9,6 @@ module Anthropic
               | Hash[Symbol, top] params
             ) -> Anthropic::Models::Beta::Messages::BetaMessageBatch
             | (
-              Anthropic::Models::Beta::Messages::BatchCreateParams
-              | Hash[Symbol, top] params,
               requests: Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request],
               betas: Array[Anthropic::Models::anthropic_beta],
               request_options: Anthropic::request_opts

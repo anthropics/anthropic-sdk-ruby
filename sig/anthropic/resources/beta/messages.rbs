@@ -10,8 +10,6 @@ module Anthropic
             | Hash[Symbol, top] params
           ) -> Anthropic::Models::Beta::BetaMessage
           | (
-            Anthropic::Models::Beta::MessageCreateParams
-            | Hash[Symbol, top] params,
             max_tokens: Integer,
             messages: Array[Anthropic::Models::Beta::BetaMessageParam],
             model: Anthropic::Models::model,
@@ -34,8 +32,6 @@ module Anthropic
             | Hash[Symbol, top] params
           ) -> Anthropic::Models::Beta::BetaMessageTokensCount
           | (
-            Anthropic::Models::Beta::MessageCountTokensParams
-            | Hash[Symbol, top] params,
             messages: Array[Anthropic::Models::Beta::BetaMessageParam],
             model: Anthropic::Models::model,
             system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
