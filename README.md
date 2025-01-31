@@ -34,6 +34,7 @@ bundle update anthropic
 ## Usage
 
 ```ruby
+require "bundler/setup"
 require "anthropic"
 
 anthropic = Anthropic::Client.new(

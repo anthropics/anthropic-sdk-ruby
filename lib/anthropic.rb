@@ -4,6 +4,7 @@
 require "cgi"
 require "date"
 require "erb"
+require "etc"
 require "json"
 require "net/http"
 require "securerandom"

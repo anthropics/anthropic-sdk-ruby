@@ -8,8 +8,6 @@ module Anthropic
             | Hash[Symbol, top] params
           ) -> Anthropic::Models::Messages::MessageBatch
           | (
-            Anthropic::Models::Messages::BatchCreateParams
-            | Hash[Symbol, top] params,
             requests: Array[Anthropic::Models::Messages::BatchCreateParams::Request],
             request_options: Anthropic::request_opts
           ) -> Anthropic::Models::Messages::MessageBatch
