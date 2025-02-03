@@ -50,9 +50,22 @@ module Anthropic
     # @return [Net::HTTPResponse]
     #
     def execute(req)
-      # rubocop:disable Metrics/BlockLength
       method, url, headers, body, timeout = req.fetch_values(:method, :url, :headers, :body, :timeout)
-      content_type = headers["content-type"]
+
+      request = Net::HTTPGenericRequest.new(
+        method.to_s.upcase,
+        !body.nil?,
+        ![:head, :options].include?(method),
+        url.to_s
+      )
+
+      headers.each { |k, v| request[k] = v }
+      case body
+      in String | nil
+        request.body = body
+      in IO | StringIO
+        request.body_stream = body
+      end
 
       # This timeout is for acquiring a connection from the pool
       # The default 5 seconds seems too short, lets just have a nearly unbounded queue for now
@@ -63,40 +76,19 @@ module Anthropic
         conn.read_timeout = timeout
         conn.write_timeout = timeout
         conn.continue_timeout = timeout
+
         conn.start unless conn.started?
 
-        request = Net::HTTPGenericRequest.new(
-          method.to_s.upcase,
-          !body.nil?,
-          method != :head,
-          url.to_s
-        )
-
-        case [content_type, body]
-        in ["multipart/form-data", Hash]
-          form_data =
-            body.filter_map do |k, v|
-              next if v.nil?
-              [k.to_s, v].flatten
-            end
-          request.set_form(form_data, content_type)
-          headers = headers.except("content-type")
-        else
-          request.body = body
-        end
-
-        headers.each do |k, v|
-          request[k] = v
-        end
-
         conn.request(request)
-      rescue StandardError => e
+        # rubocop:disable Lint/RescueException
+      rescue Exception => e
+        # rubocop:enable Lint/RescueException
+        # should close connection on all errors to ensure no invalid state persists
         conn.finish if conn.started?
         raise e
       end
     rescue ConnectionPool::TimeoutError
       raise Anthropic::APITimeoutError.new(url: url)
     end
-    # rubocop:enable Metrics/BlockLength
   end
 end

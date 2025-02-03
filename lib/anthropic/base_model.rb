@@ -96,6 +96,8 @@ module Anthropic
             value.is_a?(Symbol) ? value.to_s : value
           in -> { _1 <= Date || _1 <= Time }
             value.is_a?(String) ? target.parse(value) : value
+          in -> { _1 <= IO }
+            value.is_a?(String) ? StringIO.new(value) : value
           else
             value
           end

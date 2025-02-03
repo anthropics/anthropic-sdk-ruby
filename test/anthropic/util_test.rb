@@ -156,4 +156,56 @@ class Anthropic::Test::UtilTest < Minitest::Test
       )
     end
   end
+
+  class FakeCGI < CGI
+    def initialize(headers, io)
+      @ctype = headers["content-type"]
+      @io = io
+      super()
+    end
+
+    def stdinput = @io
+
+    def env_table
+      {
+        "REQUEST_METHOD" => "POST",
+        "CONTENT_TYPE" => @ctype,
+        "CONTENT_LENGTH" => stdinput.string.length
+      }
+    end
+  end
+
+  def test_multipart_file_encode
+    headers = {"content-type" => "multipart/form-data"}
+    File.open(__FILE__) do |fd|
+      cases = {
+        StringIO.new("abc") => "abc",
+        fd => StringIO
+      }
+      cases.each do |body, val|
+        encoded = Anthropic::Util.encode_content(headers, body)
+        cgi = FakeCGI.new(*encoded)
+        assert_pattern do
+          cgi[""] => ^val
+        end
+      end
+    end
+  end
+
+  def test_multipart_hash_encode
+    headers = {"content-type" => "multipart/form-data"}
+    cases = {
+      {a: 2, b: 3} => {"a" => "2", "b" => "3"},
+      {a: 2, b: nil} => {"a" => "2", "b" => "null"},
+      {a: 2, b: [1, 2, 3]} => {"a" => "2", "b" => "1"},
+      {file: StringIO.new("a")} => {"file" => "a"}
+    }
+    cases.each do |body, testcase|
+      encoded = Anthropic::Util.encode_content(headers, body)
+      cgi = FakeCGI.new(*encoded)
+      testcase.each do |key, val|
+        assert_equal(val, cgi[key])
+      end
+    end
+  end
 end

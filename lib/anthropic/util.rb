@@ -12,6 +12,21 @@ module Anthropic
     #
     # @return [Boolean, Object]
     #
+    def self.primitive?(input)
+      case input
+      in true | false | Integer | Float | Symbol | String
+        true
+      else
+        false
+      end
+    end
+
+    # @private
+    #
+    # @param input [Object]
+    #
+    # @return [Boolean, Object]
+    #
     def self.coerce_boolean(input)
       case input.is_a?(String) ? input.downcase : input
       in Numeric
@@ -345,9 +360,37 @@ module Anthropic
     # @return [Object]
     #
     def self.encode_content(headers, body)
-      case [headers["content-type"], body]
+      content_type = headers["content-type"]
+      case [content_type, body]
       in ["application/json", Hash | Array]
         [headers, JSON.fast_generate(body)]
+      in [%r{^multipart/form-data}, Hash | IO | StringIO]
+        boundary = SecureRandom.urlsafe_base64(60)
+        strio = StringIO.new.tap do |io|
+          case body
+          in Hash
+            body.each do |key, val|
+              case val
+              in Array if val.all? { primitive?(_1) }
+                val.each do |v|
+                  encode_multipart_formdata(io, boundary: boundary, key: key, val: v)
+                end
+              else
+                encode_multipart_formdata(io, boundary: boundary, key: key, val: val)
+              end
+            end
+          else
+            encode_multipart_formdata(io, boundary: boundary, key: nil, val: body)
+          end
+          io << "--#{boundary}--\r\n"
+          io.rewind
+        end
+        headers = {
+          **headers,
+          "content-type" => "#{content_type}; boundary=#{boundary}",
+          "transfer-encoding" => "chunked"
+        }
+        [headers, strio]
       else
         [headers, body]
       end
@@ -374,6 +417,42 @@ module Anthropic
         # TODO: parsing other response types
         response.body
       end
+    end
+
+    # @private
+    #
+    # @param io [StringIO]
+    # @param boundary [String]
+    # @param key [Symbol, String]
+    # @param val [Object]
+    #
+    private_class_method def self.encode_multipart_formdata(io, boundary:, key:, val:)
+      io << "--#{boundary}\r\n"
+      io << "Content-Disposition: form-data"
+      unless key.nil?
+        name = ERB::Util.url_encode(key.to_s)
+        io << "; name=\"#{name}\""
+      end
+      if val.is_a?(IO)
+        filename = ERB::Util.url_encode(File.basename(val.to_path))
+        io << "; filename=\"#{filename}\""
+      end
+      io << "\r\n"
+      case val
+      in IO | StringIO
+        io << "Content-Type: application/octet-stream\r\n\r\n"
+        IO.copy_stream(val, io)
+      in String
+        io << "Content-Type: application/octet-stream\r\n\r\n"
+        io << val.to_s
+      in true | false | Integer | Float | Symbol
+        io << "Content-Type: text/plain\r\n\r\n"
+        io << val.to_s
+      else
+        io << "Content-Type: application/json\r\n\r\n"
+        io << JSON.fast_generate(val)
+      end
+      io << "\r\n"
     end
   end
 

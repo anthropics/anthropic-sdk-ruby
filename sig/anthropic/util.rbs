@@ -1,5 +1,7 @@
 module Anthropic
   module Util
+    def self?.primitive?: (top input) -> (bool | top)
+
     def self?.coerce_boolean: (top input) -> (bool | top)
 
     def self?.coerce_boolean!: (top input) -> bool?
@@ -70,5 +72,12 @@ module Anthropic
     def self?.encode_content: (Hash[String, String] headers, top body) -> top
 
     def self?.decode_content: (top response, suppress_error: bool) -> top
+
+    def self?.encode_multipart_formdata: (
+      StringIO io,
+      boundary: String,
+      key: Symbol | String,
+      val: top
+    ) -> void
   end
 end
