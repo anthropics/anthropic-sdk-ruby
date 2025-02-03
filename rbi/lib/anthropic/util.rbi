@@ -3,6 +3,9 @@
 module Anthropic
   module Util
     sig { params(input: T.anything).returns(T.any(T::Boolean, T.anything)) }
+    def self.primitive?(input); end
+
+    sig { params(input: T.anything).returns(T.any(T::Boolean, T.anything)) }
     def self.coerce_boolean(input); end
 
     sig { params(input: T.anything).returns(T.nilable(T::Boolean)) }
@@ -95,5 +98,8 @@ module Anthropic
 
     sig { params(response: Net::HTTPResponse, suppress_error: T::Boolean).returns(T.anything) }
     def self.decode_content(response, suppress_error: false); end
+
+    sig { params(io: StringIO, boundary: String, key: T.any(Symbol, String), val: T.anything).void }
+    private_class_method def self.encode_multipart_formdata(io, boundary:, key:, val:); end
   end
 end
