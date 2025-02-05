@@ -43,16 +43,16 @@ multitask(:format_rbs) do
   fmt = xargs + %w[stree write --plugin=rbs --]
   # remove the unique comment and transform class aliases to type aliases
   subst = <<~SED
-    # delete the unique comment
     s/# #{uuid}//
-    # if deletion happened, branch to label `l1`, else continue
     t l1
     b
-    # transform the class alias to a type alias at label `l1`
     : l1
     n
     s/([^ :]+): (.+$)/class \\1 = \\2/
   SED
+  # 1. delete the unique comment
+  # 2. if deletion happened, branch to label `l1`, else continue
+  # 3. transform the class alias to a type alias at label `l1`
   pst = sed + [subst, "--"]
 
   # transform class aliases to type aliases, which syntax tree has no trouble with

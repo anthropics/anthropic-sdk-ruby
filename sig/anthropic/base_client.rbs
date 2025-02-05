@@ -27,7 +27,7 @@ module Anthropic
 
     MAX_REDIRECTS: 20
 
-    def self.validate!: (request req) -> void
+    def self.validate!: (Anthropic::BaseClient::request req) -> void
 
     # @private
     attr_accessor requester: top
