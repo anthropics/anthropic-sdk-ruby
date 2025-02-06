@@ -15,7 +15,7 @@ group :development do
   gem "steep"
   gem "syntax_tree"
   # TODO: using a fork for now, the prettier below has a bug
-  gem "syntax_tree-rbs", git: "https://github.com/stainless-api/syntax_tree-rbs.git"
+  gem "syntax_tree-rbs", github: "stainless-api/syntax_tree-rbs", branch: "main"
   gem "webrick"
   gem "yard"
 end
