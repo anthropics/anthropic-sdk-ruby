@@ -20,7 +20,7 @@ module Anthropic
             request_options: Anthropic::RequestOpts
           ).returns(Anthropic::Page[Anthropic::Models::Beta::BetaModelInfo])
         end
-        def list(after_id:, before_id:, limit:, request_options: {}); end
+        def list(after_id: nil, before_id: nil, limit: nil, request_options: {}); end
 
         sig { params(client: Anthropic::Client).void }
         def initialize(client:); end
