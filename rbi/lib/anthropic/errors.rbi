@@ -29,7 +29,8 @@ module Anthropic
         message: T.nilable(String)
       ).void
     end
-    def initialize(url:, status: nil, body: nil, request: nil, response: nil, message: nil); end
+    def initialize(url:, status: nil, body: nil, request: nil, response: nil, message: nil)
+    end
   end
 
   class APIConnectionError < Anthropic::APIError
@@ -78,7 +79,8 @@ module Anthropic
         response: NilClass
       ).returns(T.attached_class)
     end
-    def self.for(url:, status:, body:, request:, response:); end
+    def self.for(url:, status:, body:, request:, response:)
+    end
 
     sig { returns(Integer) }
     attr_reader :status
@@ -93,7 +95,8 @@ module Anthropic
         message: T.nilable(String)
       ).void
     end
-    def initialize(url:, status:, body:, request:, response:, message: nil); end
+    def initialize(url:, status:, body:, request:, response:, message: nil)
+    end
   end
 
   class BadRequestError < Anthropic::APIStatusError

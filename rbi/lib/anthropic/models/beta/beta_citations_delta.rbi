@@ -30,7 +30,8 @@ module Anthropic
             type: Symbol
           ).void
         end
-        def initialize(citation:, type: :citations_delta); end
+        def initialize(citation:, type: :citations_delta)
+        end
 
         sig do
           override.returns(
@@ -44,7 +45,8 @@ module Anthropic
             }
           )
         end
-        def to_hash; end
+        def to_hash
+        end
 
         class Citation < Anthropic::Union
           abstract!
@@ -58,7 +60,8 @@ module Anthropic
               ]
             )
           end
-          private_class_method def self.variants; end
+          private_class_method def self.variants
+          end
         end
       end
     end

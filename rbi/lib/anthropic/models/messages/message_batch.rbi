@@ -61,7 +61,8 @@ module Anthropic
           request_counts:,
           results_url:,
           type: :message_batch
-        ); end
+        )
+        end
 
         sig do
           override.returns(
@@ -79,7 +80,8 @@ module Anthropic
             }
           )
         end
-        def to_hash; end
+        def to_hash
+        end
 
         class ProcessingStatus < Anthropic::Enum
           abstract!
@@ -89,7 +91,8 @@ module Anthropic
           ENDED = :ended
 
           sig { override.returns(T::Array[Symbol]) }
-          def self.values; end
+          def self.values
+          end
         end
       end
     end

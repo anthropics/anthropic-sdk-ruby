@@ -15,11 +15,13 @@ module Anthropic
         TOKEN_COUNTING_2024_11_01 = :"token-counting-2024-11-01"
 
         sig { override.returns(T::Array[Symbol]) }
-        def self.values; end
+        def self.values
+        end
       end
 
       sig { override.returns([[NilClass, String], [NilClass, Symbol]]) }
-      private_class_method def self.variants; end
+      private_class_method def self.variants
+      end
     end
   end
 end

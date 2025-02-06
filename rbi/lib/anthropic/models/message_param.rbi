@@ -37,7 +37,8 @@ module Anthropic
           role: Symbol
         ).void
       end
-      def initialize(content:, role:); end
+      def initialize(content:, role:)
+      end
 
       sig do
         override.returns(
@@ -56,7 +57,8 @@ module Anthropic
           }
         )
       end
-      def to_hash; end
+      def to_hash
+      end
 
       class Content < Anthropic::Union
         abstract!
@@ -88,7 +90,8 @@ module Anthropic
             ]
           )
         end
-        private_class_method def self.variants; end
+        private_class_method def self.variants
+        end
       end
 
       class Role < Anthropic::Enum
@@ -98,7 +101,8 @@ module Anthropic
         ASSISTANT = :assistant
 
         sig { override.returns(T::Array[Symbol]) }
-        def self.values; end
+        def self.values
+        end
       end
     end
   end

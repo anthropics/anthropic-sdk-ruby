@@ -49,7 +49,8 @@ module Anthropic
           top_p: nil,
           betas: nil,
           request_options: {}
-        ); end
+        )
+        end
 
         sig do
           params(
@@ -83,7 +84,8 @@ module Anthropic
         end
 
         sig { params(client: Anthropic::Client).void }
-        def initialize(client:); end
+        def initialize(client:)
+        end
       end
     end
   end

@@ -12,10 +12,12 @@ module Anthropic
           attr_accessor :type
 
           sig { params(id: String, type: Symbol).void }
-          def initialize(id:, type: :message_batch_deleted); end
+          def initialize(id:, type: :message_batch_deleted)
+          end
 
           sig { override.returns({id: String, type: Symbol}) }
-          def to_hash; end
+          def to_hash
+          end
         end
       end
     end

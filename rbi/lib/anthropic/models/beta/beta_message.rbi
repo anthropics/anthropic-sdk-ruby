@@ -81,7 +81,8 @@ module Anthropic
             }
           )
         end
-        def to_hash; end
+        def to_hash
+        end
 
         class StopReason < Anthropic::Enum
           abstract!
@@ -92,7 +93,8 @@ module Anthropic
           TOOL_USE = T.let(:tool_use, T.nilable(Symbol))
 
           sig { override.returns(T::Array[Symbol]) }
-          def self.values; end
+          def self.values
+          end
         end
       end
     end

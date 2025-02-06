@@ -16,10 +16,12 @@ module Anthropic
         attr_accessor :type
 
         sig { params(data: String, media_type: Symbol, type: Symbol).void }
-        def initialize(data:, media_type: :"application/pdf", type: :base64); end
+        def initialize(data:, media_type: :"application/pdf", type: :base64)
+        end
 
         sig { override.returns({data: String, media_type: Symbol, type: Symbol}) }
-        def to_hash; end
+        def to_hash
+        end
       end
     end
   end

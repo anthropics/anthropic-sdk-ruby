@@ -9,7 +9,8 @@ module Anthropic
           request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
         ).returns(Anthropic::Models::ModelInfo)
       end
-      def retrieve(model_id, request_options: {}); end
+      def retrieve(model_id, request_options: {})
+      end
 
       sig do
         params(
@@ -19,10 +20,12 @@ module Anthropic
           request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
         ).returns(Anthropic::Page[Anthropic::Models::ModelInfo])
       end
-      def list(after_id: nil, before_id: nil, limit: nil, request_options: {}); end
+      def list(after_id: nil, before_id: nil, limit: nil, request_options: {})
+      end
 
       sig { params(client: Anthropic::Client).void }
-      def initialize(client:); end
+      def initialize(client:)
+      end
     end
   end
 end

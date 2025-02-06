@@ -22,7 +22,8 @@ module Anthropic
             type: Symbol
           ).void
         end
-        def initialize(cache_control: nil, name: :bash, type: :bash_20241022); end
+        def initialize(cache_control: nil, name: :bash, type: :bash_20241022)
+        end
 
         sig do
           override.returns(
@@ -33,7 +34,8 @@ module Anthropic
             }
           )
         end
-        def to_hash; end
+        def to_hash
+        end
       end
     end
   end

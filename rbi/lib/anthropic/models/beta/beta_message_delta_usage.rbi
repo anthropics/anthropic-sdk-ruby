@@ -10,10 +10,12 @@ module Anthropic
         attr_accessor :output_tokens
 
         sig { params(output_tokens: Integer).void }
-        def initialize(output_tokens:); end
+        def initialize(output_tokens:)
+        end
 
         sig { override.returns({output_tokens: Integer}) }
-        def to_hash; end
+        def to_hash
+        end
       end
     end
   end

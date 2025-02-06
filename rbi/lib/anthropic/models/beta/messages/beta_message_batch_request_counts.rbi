@@ -29,7 +29,8 @@ module Anthropic
               succeeded: Integer
             ).void
           end
-          def initialize(canceled:, errored:, expired:, processing:, succeeded:); end
+          def initialize(canceled:, errored:, expired:, processing:, succeeded:)
+          end
 
           sig do
             override.returns(
@@ -42,7 +43,8 @@ module Anthropic
               }
             )
           end
-          def to_hash; end
+          def to_hash
+          end
         end
       end
     end

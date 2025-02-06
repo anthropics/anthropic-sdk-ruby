@@ -28,10 +28,12 @@ module Anthropic
         top_k: nil,
         top_p: nil,
         request_options: {}
-      ); end
+      )
+      end
 
       sig { params(client: Anthropic::Client).void }
-      def initialize(client:); end
+      def initialize(client:)
+      end
     end
   end
 end

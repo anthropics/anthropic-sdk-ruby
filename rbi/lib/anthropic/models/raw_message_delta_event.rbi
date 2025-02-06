@@ -19,7 +19,8 @@ module Anthropic
           type: Symbol
         ).void
       end
-      def initialize(delta:, usage:, type: :message_delta); end
+      def initialize(delta:, usage:, type: :message_delta)
+      end
 
       sig do
         override.returns(
@@ -30,7 +31,8 @@ module Anthropic
           }
         )
       end
-      def to_hash; end
+      def to_hash
+      end
 
       class Delta < Anthropic::BaseModel
         sig { returns(T.nilable(Symbol)) }
@@ -40,10 +42,12 @@ module Anthropic
         attr_accessor :stop_sequence
 
         sig { params(stop_reason: T.nilable(Symbol), stop_sequence: T.nilable(String)).void }
-        def initialize(stop_reason:, stop_sequence:); end
+        def initialize(stop_reason:, stop_sequence:)
+        end
 
         sig { override.returns({stop_reason: T.nilable(Symbol), stop_sequence: T.nilable(String)}) }
-        def to_hash; end
+        def to_hash
+        end
 
         class StopReason < Anthropic::Enum
           abstract!
@@ -54,7 +58,8 @@ module Anthropic
           TOOL_USE = T.let(:tool_use, T.nilable(Symbol))
 
           sig { override.returns(T::Array[Symbol]) }
-          def self.values; end
+          def self.values
+          end
         end
       end
     end

@@ -16,10 +16,12 @@ module Anthropic
       attr_writer :disable_parallel_tool_use
 
       sig { params(name: String, disable_parallel_tool_use: T::Boolean, type: Symbol).void }
-      def initialize(name:, disable_parallel_tool_use: nil, type: :tool); end
+      def initialize(name:, disable_parallel_tool_use: nil, type: :tool)
+      end
 
       sig { override.returns({name: String, type: Symbol, disable_parallel_tool_use: T::Boolean}) }
-      def to_hash; end
+      def to_hash
+      end
     end
   end
 end

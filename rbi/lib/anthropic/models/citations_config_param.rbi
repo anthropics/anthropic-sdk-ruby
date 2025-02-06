@@ -10,10 +10,12 @@ module Anthropic
       attr_writer :enabled
 
       sig { params(enabled: T::Boolean).void }
-      def initialize(enabled: nil); end
+      def initialize(enabled: nil)
+      end
 
       sig { override.returns({enabled: T::Boolean}) }
-      def to_hash; end
+      def to_hash
+      end
     end
   end
 end

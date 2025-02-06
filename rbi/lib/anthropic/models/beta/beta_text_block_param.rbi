@@ -42,7 +42,8 @@ module Anthropic
             type: Symbol
           ).void
         end
-        def initialize(text:, cache_control: nil, citations: nil, type: :text); end
+        def initialize(text:, cache_control: nil, citations: nil, type: :text)
+        end
 
         sig do
           override.returns(
@@ -60,7 +61,8 @@ module Anthropic
             }
           )
         end
-        def to_hash; end
+        def to_hash
+        end
       end
     end
   end

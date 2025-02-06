@@ -12,10 +12,12 @@ module Anthropic
           attr_accessor :type
 
           sig { params(message: Anthropic::Models::Beta::BetaMessage, type: Symbol).void }
-          def initialize(message:, type: :succeeded); end
+          def initialize(message:, type: :succeeded)
+          end
 
           sig { override.returns({message: Anthropic::Models::Beta::BetaMessage, type: Symbol}) }
-          def to_hash; end
+          def to_hash
+          end
         end
       end
     end
