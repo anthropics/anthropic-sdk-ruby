@@ -37,7 +37,7 @@ module Anthropic
           | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::citation_page_location_param
+      def to_hash: -> Anthropic::Models::citation_page_location_param
     end
   end
 end

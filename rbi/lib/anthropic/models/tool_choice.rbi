@@ -5,14 +5,6 @@ module Anthropic
     class ToolChoice < Anthropic::Union
       abstract!
 
-      Variants = T.type_alias do
-        T.any(
-          Anthropic::Models::ToolChoiceAuto,
-          Anthropic::Models::ToolChoiceAny,
-          Anthropic::Models::ToolChoiceTool
-        )
-      end
-
       sig do
         override.returns(
           [

@@ -9,7 +9,7 @@ module Anthropic
         (user_id: String?) -> void
         | (?Anthropic::Models::metadata | Anthropic::BaseModel data) -> void
 
-      def to_h: -> Anthropic::Models::metadata
+      def to_hash: -> Anthropic::Models::metadata
     end
   end
 end

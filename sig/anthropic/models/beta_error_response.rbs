@@ -14,7 +14,7 @@ module Anthropic
           ?Anthropic::Models::beta_error_response | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::beta_error_response
+      def to_hash: -> Anthropic::Models::beta_error_response
     end
   end
 end

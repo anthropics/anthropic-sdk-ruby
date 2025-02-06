@@ -8,10 +8,6 @@ module Anthropic
       class BetaContentBlock < Anthropic::Union
         abstract!
 
-        Variants = T.type_alias do
-          T.any(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock)
-        end
-
         sig do
           override.returns(
             [

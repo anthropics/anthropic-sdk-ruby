@@ -6,8 +6,6 @@ module Anthropic
 
     module Beta
       class BetaToolChoiceTool < Anthropic::BaseModel
-        Shape = T.type_alias { {name: String, type: Symbol, disable_parallel_tool_use: T::Boolean} }
-
         sig { returns(String) }
         attr_accessor :name
 
@@ -23,8 +21,8 @@ module Anthropic
         sig { params(name: String, disable_parallel_tool_use: T::Boolean, type: Symbol).void }
         def initialize(name:, disable_parallel_tool_use: nil, type: :tool); end
 
-        sig { returns(Anthropic::Models::Beta::BetaToolChoiceTool::Shape) }
-        def to_h; end
+        sig { override.returns({name: String, type: Symbol, disable_parallel_tool_use: T::Boolean}) }
+        def to_hash; end
       end
     end
   end

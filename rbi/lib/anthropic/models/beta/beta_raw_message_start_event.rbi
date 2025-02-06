@@ -6,8 +6,6 @@ module Anthropic
 
     module Beta
       class BetaRawMessageStartEvent < Anthropic::BaseModel
-        Shape = T.type_alias { {message: Anthropic::Models::Beta::BetaMessage, type: Symbol} }
-
         sig { returns(Anthropic::Models::Beta::BetaMessage) }
         attr_accessor :message
 
@@ -17,8 +15,8 @@ module Anthropic
         sig { params(message: Anthropic::Models::Beta::BetaMessage, type: Symbol).void }
         def initialize(message:, type: :message_start); end
 
-        sig { returns(Anthropic::Models::Beta::BetaRawMessageStartEvent::Shape) }
-        def to_h; end
+        sig { override.returns({message: Anthropic::Models::Beta::BetaMessage, type: Symbol}) }
+        def to_hash; end
       end
     end
   end

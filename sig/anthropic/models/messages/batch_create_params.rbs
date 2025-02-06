@@ -23,7 +23,7 @@ module Anthropic
             | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::Messages::batch_create_params
+        def to_hash: -> Anthropic::Models::Messages::batch_create_params
 
         type request =
           {
@@ -46,7 +46,7 @@ module Anthropic
               | Anthropic::BaseModel data
             ) -> void
 
-          def to_h: -> Anthropic::Models::Messages::BatchCreateParams::request
+          def to_hash: -> Anthropic::Models::Messages::BatchCreateParams::request
 
           type params =
             {
@@ -129,7 +129,7 @@ module Anthropic
                 | Anthropic::BaseModel data
               ) -> void
 
-            def to_h: -> Anthropic::Models::Messages::BatchCreateParams::Request::params
+            def to_hash: -> Anthropic::Models::Messages::BatchCreateParams::Request::params
 
             type system_ = String | Array[Anthropic::Models::TextBlockParam]
 

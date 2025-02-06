@@ -25,7 +25,7 @@ module Anthropic
           | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::raw_content_block_start_event
+      def to_hash: -> Anthropic::Models::raw_content_block_start_event
 
       type content_block =
         Anthropic::Models::TextBlock | Anthropic::Models::ToolUseBlock

@@ -6,34 +6,48 @@ module Anthropic
 
     module Beta
       class BetaCitationsDelta < Anthropic::BaseModel
-        Shape = T.type_alias do
-          {citation: Anthropic::Models::Beta::BetaCitationsDelta::Citation::Variants, type: Symbol}
+        sig do
+          returns(
+            T.any(
+              Anthropic::Models::Beta::BetaCitationCharLocation,
+              Anthropic::Models::Beta::BetaCitationPageLocation,
+              Anthropic::Models::Beta::BetaCitationContentBlockLocation
+            )
+          )
         end
-
-        sig { returns(Anthropic::Models::Beta::BetaCitationsDelta::Citation::Variants) }
         attr_accessor :citation
 
         sig { returns(Symbol) }
         attr_accessor :type
 
         sig do
-          params(citation: Anthropic::Models::Beta::BetaCitationsDelta::Citation::Variants, type: Symbol).void
-        end
-        def initialize(citation:, type: :citations_delta); end
-
-        sig { returns(Anthropic::Models::Beta::BetaCitationsDelta::Shape) }
-        def to_h; end
-
-        class Citation < Anthropic::Union
-          abstract!
-
-          Variants = T.type_alias do
-            T.any(
+          params(
+            citation: T.any(
               Anthropic::Models::Beta::BetaCitationCharLocation,
               Anthropic::Models::Beta::BetaCitationPageLocation,
               Anthropic::Models::Beta::BetaCitationContentBlockLocation
-            )
-          end
+            ),
+            type: Symbol
+          ).void
+        end
+        def initialize(citation:, type: :citations_delta); end
+
+        sig do
+          override.returns(
+            {
+              citation: T.any(
+                Anthropic::Models::Beta::BetaCitationCharLocation,
+                Anthropic::Models::Beta::BetaCitationPageLocation,
+                Anthropic::Models::Beta::BetaCitationContentBlockLocation
+              ),
+              type: Symbol
+            }
+          )
+        end
+        def to_hash; end
+
+        class Citation < Anthropic::Union
+          abstract!
 
           sig do
             override.returns(

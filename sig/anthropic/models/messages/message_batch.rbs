@@ -57,7 +57,7 @@ module Anthropic
             | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::Messages::message_batch
+        def to_hash: -> Anthropic::Models::Messages::message_batch
 
         type processing_status = :in_progress | :canceling | :ended
 

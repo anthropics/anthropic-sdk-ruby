@@ -3,38 +3,64 @@
 module Anthropic
   module Models
     class ContentBlockSource < Anthropic::BaseModel
-      Shape = T.type_alias do
-        {content: Anthropic::Models::ContentBlockSource::Content::Variants, type: Symbol}
+      sig do
+        returns(
+          T.any(
+            String,
+            T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
+          )
+        )
       end
-
-      sig { returns(Anthropic::Models::ContentBlockSource::Content::Variants) }
       attr_accessor :content
 
       sig { returns(Symbol) }
       attr_accessor :type
 
-      sig { params(content: Anthropic::Models::ContentBlockSource::Content::Variants, type: Symbol).void }
+      sig do
+        params(
+          content: T.any(
+            String,
+            T::Array[T.any(
+              Anthropic::Models::TextBlockParam,
+              Anthropic::Models::ImageBlockParam
+            )]
+          ),
+          type: Symbol
+        ).void
+      end
       def initialize(content:, type: :content); end
 
-      sig { returns(Anthropic::Models::ContentBlockSource::Shape) }
-      def to_h; end
+      sig do
+        override.returns(
+          {
+            content: T.any(
+              String,
+              T::Array[T.any(
+                Anthropic::Models::TextBlockParam,
+                Anthropic::Models::ImageBlockParam
+              )]
+            ),
+            type: Symbol
+          }
+        )
+      end
+      def to_hash; end
 
       class Content < Anthropic::Union
         abstract!
 
-        Variants = T.type_alias do
-          T.any(String, T::Array[Anthropic::Models::ContentBlockSourceContent::Variants])
-        end
-
         ContentBlockSourceContentArray = T.type_alias do
-          T::Array[Anthropic::Models::ContentBlockSourceContent::Variants]
+          T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
         end
 
         sig do
           override.returns(
             [
               [NilClass, String],
-              [NilClass, T::Array[Anthropic::Models::ContentBlockSourceContent::Variants]]
+              [
+                NilClass,
+                T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
+              ]
             ]
           )
         end

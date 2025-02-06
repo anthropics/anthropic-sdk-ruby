@@ -6,26 +6,20 @@ module Anthropic
 
     module Beta
       class BetaMessage < Anthropic::BaseModel
-        Shape = T.type_alias do
-          {
-            id: String,
-            content: T::Array[Anthropic::Models::Beta::BetaContentBlock::Variants],
-            model: Anthropic::Models::Model::Variants,
-            role: Symbol,
-            stop_reason: T.nilable(Symbol),
-            stop_sequence: T.nilable(String),
-            type: Symbol,
-            usage: Anthropic::Models::Beta::BetaUsage
-          }
-        end
-
         sig { returns(String) }
         attr_accessor :id
 
-        sig { returns(T::Array[Anthropic::Models::Beta::BetaContentBlock::Variants]) }
+        sig do
+          returns(
+            T::Array[T.any(
+              Anthropic::Models::Beta::BetaTextBlock,
+              Anthropic::Models::Beta::BetaToolUseBlock
+            )]
+          )
+        end
         attr_accessor :content
 
-        sig { returns(Anthropic::Models::Model::Variants) }
+        sig { returns(T.any(Symbol, String)) }
         attr_accessor :model
 
         sig { returns(Symbol) }
@@ -46,8 +40,11 @@ module Anthropic
         sig do
           params(
             id: String,
-            content: T::Array[Anthropic::Models::Beta::BetaContentBlock::Variants],
-            model: Anthropic::Models::Model::Variants,
+            content: T::Array[T.any(
+              Anthropic::Models::Beta::BetaTextBlock,
+              Anthropic::Models::Beta::BetaToolUseBlock
+            )],
+            model: T.any(Symbol, String),
             stop_reason: T.nilable(Symbol),
             stop_sequence: T.nilable(String),
             usage: Anthropic::Models::Beta::BetaUsage,
@@ -67,8 +64,24 @@ module Anthropic
         )
         end
 
-        sig { returns(Anthropic::Models::Beta::BetaMessage::Shape) }
-        def to_h; end
+        sig do
+          override.returns(
+            {
+              id: String,
+              content: T::Array[T.any(
+                Anthropic::Models::Beta::BetaTextBlock,
+                Anthropic::Models::Beta::BetaToolUseBlock
+              )],
+              model: T.any(Symbol, String),
+              role: Symbol,
+              stop_reason: T.nilable(Symbol),
+              stop_sequence: T.nilable(String),
+              type: Symbol,
+              usage: Anthropic::Models::Beta::BetaUsage
+            }
+          )
+        end
+        def to_hash; end
 
         class StopReason < Anthropic::Enum
           abstract!

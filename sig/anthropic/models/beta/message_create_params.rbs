@@ -91,7 +91,7 @@ module Anthropic
             | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::Beta::message_create_params
+        def to_hash: -> Anthropic::Models::Beta::message_create_params
 
         type stream = true
 

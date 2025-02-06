@@ -22,7 +22,7 @@ module Anthropic
         ) -> void
         | (?Anthropic::Models::text_block | Anthropic::BaseModel data) -> void
 
-      def to_h: -> Anthropic::Models::text_block
+      def to_hash: -> Anthropic::Models::text_block
     end
   end
 end

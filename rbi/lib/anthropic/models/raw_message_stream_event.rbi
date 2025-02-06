@@ -5,17 +5,6 @@ module Anthropic
     class RawMessageStreamEvent < Anthropic::Union
       abstract!
 
-      Variants = T.type_alias do
-        T.any(
-          Anthropic::Models::RawMessageStartEvent,
-          Anthropic::Models::RawMessageDeltaEvent,
-          Anthropic::Models::RawMessageStopEvent,
-          Anthropic::Models::RawContentBlockStartEvent,
-          Anthropic::Models::RawContentBlockDeltaEvent,
-          Anthropic::Models::RawContentBlockStopEvent
-        )
-      end
-
       sig do
         override.returns(
           [

@@ -45,7 +45,7 @@ module Anthropic
             | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::Beta::beta_base64_pdf_block
+        def to_hash: -> Anthropic::Models::Beta::beta_base64_pdf_block
 
         type source =
           Anthropic::Models::Beta::BetaBase64PDFSource

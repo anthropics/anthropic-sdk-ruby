@@ -13,7 +13,7 @@ module Anthropic
           ?Anthropic::Models::input_json_delta | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::input_json_delta
+      def to_hash: -> Anthropic::Models::input_json_delta
     end
   end
 end

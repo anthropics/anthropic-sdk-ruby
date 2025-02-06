@@ -3,15 +3,7 @@
 module Anthropic
   module Models
     class RawContentBlockStartEvent < Anthropic::BaseModel
-      Shape = T.type_alias do
-        {
-          content_block: Anthropic::Models::RawContentBlockStartEvent::ContentBlock::Variants,
-          index: Integer,
-          type: Symbol
-        }
-      end
-
-      sig { returns(Anthropic::Models::RawContentBlockStartEvent::ContentBlock::Variants) }
+      sig { returns(T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock)) }
       attr_accessor :content_block
 
       sig { returns(Integer) }
@@ -22,20 +14,26 @@ module Anthropic
 
       sig do
         params(
-          content_block: Anthropic::Models::RawContentBlockStartEvent::ContentBlock::Variants,
+          content_block: T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock),
           index: Integer,
           type: Symbol
         ).void
       end
       def initialize(content_block:, index:, type: :content_block_start); end
 
-      sig { returns(Anthropic::Models::RawContentBlockStartEvent::Shape) }
-      def to_h; end
+      sig do
+        override.returns(
+          {
+            content_block: T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock),
+            index: Integer,
+            type: Symbol
+          }
+        )
+      end
+      def to_hash; end
 
       class ContentBlock < Anthropic::Union
         abstract!
-
-        Variants = T.type_alias { T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock) }
 
         sig do
           override.returns(

@@ -6,16 +6,6 @@ module Anthropic
 
     module Beta
       class BetaToolUseBlockParam < Anthropic::BaseModel
-        Shape = T.type_alias do
-          {
-            id: String,
-            input: T.anything,
-            name: String,
-            type: Symbol,
-            cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)
-          }
-        end
-
         sig { returns(String) }
         attr_accessor :id
 
@@ -42,8 +32,18 @@ module Anthropic
         end
         def initialize(id:, input:, name:, cache_control: nil, type: :tool_use); end
 
-        sig { returns(Anthropic::Models::Beta::BetaToolUseBlockParam::Shape) }
-        def to_h; end
+        sig do
+          override.returns(
+            {
+              id: String,
+              input: T.anything,
+              name: String,
+              type: Symbol,
+              cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)
+            }
+          )
+        end
+        def to_hash; end
       end
     end
   end

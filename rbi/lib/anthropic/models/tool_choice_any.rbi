@@ -3,8 +3,6 @@
 module Anthropic
   module Models
     class ToolChoiceAny < Anthropic::BaseModel
-      Shape = T.type_alias { {type: Symbol, disable_parallel_tool_use: T::Boolean} }
-
       sig { returns(Symbol) }
       attr_accessor :type
 
@@ -17,8 +15,8 @@ module Anthropic
       sig { params(disable_parallel_tool_use: T::Boolean, type: Symbol).void }
       def initialize(disable_parallel_tool_use: nil, type: :any); end
 
-      sig { returns(Anthropic::Models::ToolChoiceAny::Shape) }
-      def to_h; end
+      sig { override.returns({type: Symbol, disable_parallel_tool_use: T::Boolean}) }
+      def to_hash; end
     end
   end
 end

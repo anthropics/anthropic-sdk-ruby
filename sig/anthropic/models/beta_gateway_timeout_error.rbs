@@ -14,7 +14,7 @@ module Anthropic
           | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::beta_gateway_timeout_error
+      def to_hash: -> Anthropic::Models::beta_gateway_timeout_error
     end
   end
 end

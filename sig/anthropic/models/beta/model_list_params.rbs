@@ -33,7 +33,7 @@ module Anthropic
             | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::Beta::model_list_params
+        def to_hash: -> Anthropic::Models::Beta::model_list_params
       end
     end
   end

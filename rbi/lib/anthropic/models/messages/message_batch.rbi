@@ -6,21 +6,6 @@ module Anthropic
 
     module Messages
       class MessageBatch < Anthropic::BaseModel
-        Shape = T.type_alias do
-          {
-            id: String,
-            archived_at: T.nilable(Time),
-            cancel_initiated_at: T.nilable(Time),
-            created_at: Time,
-            ended_at: T.nilable(Time),
-            expires_at: Time,
-            processing_status: Symbol,
-            request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts,
-            results_url: T.nilable(String),
-            type: Symbol
-          }
-        end
-
         sig { returns(String) }
         attr_accessor :id
 
@@ -78,8 +63,23 @@ module Anthropic
           type: :message_batch
         ); end
 
-        sig { returns(Anthropic::Models::Messages::MessageBatch::Shape) }
-        def to_h; end
+        sig do
+          override.returns(
+            {
+              id: String,
+              archived_at: T.nilable(Time),
+              cancel_initiated_at: T.nilable(Time),
+              created_at: Time,
+              ended_at: T.nilable(Time),
+              expires_at: Time,
+              processing_status: Symbol,
+              request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts,
+              results_url: T.nilable(String),
+              type: Symbol
+            }
+          )
+        end
+        def to_hash; end
 
         class ProcessingStatus < Anthropic::Enum
           abstract!

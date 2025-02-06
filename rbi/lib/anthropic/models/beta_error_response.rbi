@@ -3,19 +3,63 @@
 module Anthropic
   module Models
     class BetaErrorResponse < Anthropic::BaseModel
-      Shape = T.type_alias { {error: Anthropic::Models::BetaError::Variants, type: Symbol} }
-
-      sig { returns(Anthropic::Models::BetaError::Variants) }
+      sig do
+        returns(
+          T.any(
+            Anthropic::Models::BetaInvalidRequestError,
+            Anthropic::Models::BetaAuthenticationError,
+            Anthropic::Models::BetaBillingError,
+            Anthropic::Models::BetaPermissionError,
+            Anthropic::Models::BetaNotFoundError,
+            Anthropic::Models::BetaRateLimitError,
+            Anthropic::Models::BetaGatewayTimeoutError,
+            Anthropic::Models::BetaAPIError,
+            Anthropic::Models::BetaOverloadedError
+          )
+        )
+      end
       attr_accessor :error
 
       sig { returns(Symbol) }
       attr_accessor :type
 
-      sig { params(error: Anthropic::Models::BetaError::Variants, type: Symbol).void }
+      sig do
+        params(
+          error: T.any(
+            Anthropic::Models::BetaInvalidRequestError,
+            Anthropic::Models::BetaAuthenticationError,
+            Anthropic::Models::BetaBillingError,
+            Anthropic::Models::BetaPermissionError,
+            Anthropic::Models::BetaNotFoundError,
+            Anthropic::Models::BetaRateLimitError,
+            Anthropic::Models::BetaGatewayTimeoutError,
+            Anthropic::Models::BetaAPIError,
+            Anthropic::Models::BetaOverloadedError
+          ),
+          type: Symbol
+        ).void
+      end
       def initialize(error:, type: :error); end
 
-      sig { returns(Anthropic::Models::BetaErrorResponse::Shape) }
-      def to_h; end
+      sig do
+        override.returns(
+          {
+            error: T.any(
+              Anthropic::Models::BetaInvalidRequestError,
+              Anthropic::Models::BetaAuthenticationError,
+              Anthropic::Models::BetaBillingError,
+              Anthropic::Models::BetaPermissionError,
+              Anthropic::Models::BetaNotFoundError,
+              Anthropic::Models::BetaRateLimitError,
+              Anthropic::Models::BetaGatewayTimeoutError,
+              Anthropic::Models::BetaAPIError,
+              Anthropic::Models::BetaOverloadedError
+            ),
+            type: Symbol
+          }
+        )
+      end
+      def to_hash; end
     end
   end
 end

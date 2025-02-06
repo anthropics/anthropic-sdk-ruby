@@ -7,32 +7,28 @@ module Anthropic
         extend Anthropic::RequestParameters::Converter
         include Anthropic::RequestParameters
 
-        Shape = T.type_alias do
-          T.all(
-            {requests: T::Array[Anthropic::Models::Messages::BatchCreateParams::Request]},
-            Anthropic::RequestParameters::Shape
-          )
-        end
-
         sig { returns(T::Array[Anthropic::Models::Messages::BatchCreateParams::Request]) }
         attr_accessor :requests
 
         sig do
           params(
             requests: T::Array[Anthropic::Models::Messages::BatchCreateParams::Request],
-            request_options: Anthropic::RequestOpts
+            request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
           ).void
         end
         def initialize(requests:, request_options: {}); end
 
-        sig { returns(Anthropic::Models::Messages::BatchCreateParams::Shape) }
-        def to_h; end
+        sig do
+          override.returns(
+            {
+              requests: T::Array[Anthropic::Models::Messages::BatchCreateParams::Request],
+              request_options: Anthropic::RequestOptions
+            }
+          )
+        end
+        def to_hash; end
 
         class Request < Anthropic::BaseModel
-          Shape = T.type_alias do
-            {custom_id: String, params: Anthropic::Models::Messages::BatchCreateParams::Request::Params}
-          end
-
           sig { returns(String) }
           attr_accessor :custom_id
 
@@ -47,34 +43,24 @@ module Anthropic
           end
           def initialize(custom_id:, params:); end
 
-          sig { returns(Anthropic::Models::Messages::BatchCreateParams::Request::Shape) }
-          def to_h; end
+          sig do
+            override.returns(
+              {
+                custom_id: String,
+                params: Anthropic::Models::Messages::BatchCreateParams::Request::Params
+              }
+            )
+          end
+          def to_hash; end
 
           class Params < Anthropic::BaseModel
-            Shape = T.type_alias do
-              {
-                max_tokens: Integer,
-                messages: T::Array[Anthropic::Models::MessageParam],
-                model: Anthropic::Models::Model::Variants,
-                metadata: Anthropic::Models::Metadata,
-                stop_sequences: T::Array[String],
-                stream: T::Boolean,
-                system_: Anthropic::Models::Messages::BatchCreateParams::Request::Params::System::Variants,
-                temperature: Float,
-                tool_choice: Anthropic::Models::ToolChoice::Variants,
-                tools: T::Array[Anthropic::Models::Tool],
-                top_k: Integer,
-                top_p: Float
-              }
-            end
-
             sig { returns(Integer) }
             attr_accessor :max_tokens
 
             sig { returns(T::Array[Anthropic::Models::MessageParam]) }
             attr_accessor :messages
 
-            sig { returns(Anthropic::Models::Model::Variants) }
+            sig { returns(T.any(Symbol, String)) }
             attr_accessor :model
 
             sig { returns(T.nilable(Anthropic::Models::Metadata)) }
@@ -95,14 +81,10 @@ module Anthropic
             sig { params(stream: T::Boolean).void }
             attr_writer :stream
 
-            sig do
-              returns(T.nilable(Anthropic::Models::Messages::BatchCreateParams::Request::Params::System::Variants))
-            end
+            sig { returns(T.nilable(T.any(String, T::Array[Anthropic::Models::TextBlockParam]))) }
             attr_reader :system_
 
-            sig do
-              params(system_: Anthropic::Models::Messages::BatchCreateParams::Request::Params::System::Variants).void
-            end
+            sig { params(system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam])).void }
             attr_writer :system_
 
             sig { returns(T.nilable(Float)) }
@@ -111,10 +93,28 @@ module Anthropic
             sig { params(temperature: Float).void }
             attr_writer :temperature
 
-            sig { returns(T.nilable(Anthropic::Models::ToolChoice::Variants)) }
+            sig do
+              returns(
+                T.nilable(
+                  T.any(
+                    Anthropic::Models::ToolChoiceAuto,
+                    Anthropic::Models::ToolChoiceAny,
+                    Anthropic::Models::ToolChoiceTool
+                  )
+                )
+              )
+            end
             attr_reader :tool_choice
 
-            sig { params(tool_choice: Anthropic::Models::ToolChoice::Variants).void }
+            sig do
+              params(
+                tool_choice: T.any(
+                  Anthropic::Models::ToolChoiceAuto,
+                  Anthropic::Models::ToolChoiceAny,
+                  Anthropic::Models::ToolChoiceTool
+                )
+              ).void
+            end
             attr_writer :tool_choice
 
             sig { returns(T.nilable(T::Array[Anthropic::Models::Tool])) }
@@ -139,13 +139,17 @@ module Anthropic
               params(
                 max_tokens: Integer,
                 messages: T::Array[Anthropic::Models::MessageParam],
-                model: Anthropic::Models::Model::Variants,
+                model: T.any(Symbol, String),
                 metadata: Anthropic::Models::Metadata,
                 stop_sequences: T::Array[String],
                 stream: T::Boolean,
-                system_: Anthropic::Models::Messages::BatchCreateParams::Request::Params::System::Variants,
+                system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
                 temperature: Float,
-                tool_choice: Anthropic::Models::ToolChoice::Variants,
+                tool_choice: T.any(
+                  Anthropic::Models::ToolChoiceAuto,
+                  Anthropic::Models::ToolChoiceAny,
+                  Anthropic::Models::ToolChoiceTool
+                ),
                 tools: T::Array[Anthropic::Models::Tool],
                 top_k: Integer,
                 top_p: Float
@@ -166,13 +170,32 @@ module Anthropic
               top_p: nil
             ); end
 
-            sig { returns(Anthropic::Models::Messages::BatchCreateParams::Request::Params::Shape) }
-            def to_h; end
+            sig do
+              override.returns(
+                {
+                  max_tokens: Integer,
+                  messages: T::Array[Anthropic::Models::MessageParam],
+                  model: T.any(Symbol, String),
+                  metadata: Anthropic::Models::Metadata,
+                  stop_sequences: T::Array[String],
+                  stream: T::Boolean,
+                  system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
+                  temperature: Float,
+                  tool_choice: T.any(
+                    Anthropic::Models::ToolChoiceAuto,
+                    Anthropic::Models::ToolChoiceAny,
+                    Anthropic::Models::ToolChoiceTool
+                  ),
+                  tools: T::Array[Anthropic::Models::Tool],
+                  top_k: Integer,
+                  top_p: Float
+                }
+              )
+            end
+            def to_hash; end
 
             class System < Anthropic::Union
               abstract!
-
-              Variants = T.type_alias { T.any(String, T::Array[Anthropic::Models::TextBlockParam]) }
 
               TextBlockParamArray = T.type_alias { T::Array[Anthropic::Models::TextBlockParam] }
 

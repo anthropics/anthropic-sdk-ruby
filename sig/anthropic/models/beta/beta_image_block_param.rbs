@@ -29,7 +29,7 @@ module Anthropic
             | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::Beta::beta_image_block_param
+        def to_hash: -> Anthropic::Models::Beta::beta_image_block_param
 
         type source =
           {
@@ -56,7 +56,7 @@ module Anthropic
               | Anthropic::BaseModel data
             ) -> void
 
-          def to_h: -> Anthropic::Models::Beta::BetaImageBlockParam::source
+          def to_hash: -> Anthropic::Models::Beta::BetaImageBlockParam::source
 
           type media_type =
             :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"

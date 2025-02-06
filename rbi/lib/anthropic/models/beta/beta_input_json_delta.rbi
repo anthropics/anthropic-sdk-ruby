@@ -6,8 +6,6 @@ module Anthropic
 
     module Beta
       class BetaInputJSONDelta < Anthropic::BaseModel
-        Shape = T.type_alias { {partial_json: String, type: Symbol} }
-
         sig { returns(String) }
         attr_accessor :partial_json
 
@@ -17,8 +15,8 @@ module Anthropic
         sig { params(partial_json: String, type: Symbol).void }
         def initialize(partial_json:, type: :input_json_delta); end
 
-        sig { returns(Anthropic::Models::Beta::BetaInputJSONDelta::Shape) }
-        def to_h; end
+        sig { override.returns({partial_json: String, type: Symbol}) }
+        def to_hash; end
       end
     end
   end

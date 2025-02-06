@@ -23,7 +23,7 @@ module Anthropic
               | Anthropic::BaseModel data
             ) -> void
 
-          def to_h: -> Anthropic::Models::Beta::Messages::beta_message_batch_individual_response
+          def to_hash: -> Anthropic::Models::Beta::Messages::beta_message_batch_individual_response
         end
       end
     end

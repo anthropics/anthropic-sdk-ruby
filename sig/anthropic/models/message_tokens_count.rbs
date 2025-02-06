@@ -11,7 +11,7 @@ module Anthropic
           ?Anthropic::Models::message_tokens_count | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::message_tokens_count
+      def to_hash: -> Anthropic::Models::message_tokens_count
     end
   end
 end

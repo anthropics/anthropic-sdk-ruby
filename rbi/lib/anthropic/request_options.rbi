@@ -1,16 +1,10 @@
 # typed: strong
 
 module Anthropic
-  RequestOpts = T.type_alias do
-    T.any(Anthropic::RequestOptions, Anthropic::RequestOptions::Shape, T::Hash[Symbol, T.anything])
-  end
-
   module RequestParameters
     abstract!
 
-    Shape = T.type_alias { {request_options: Anthropic::RequestOpts} }
-
-    sig { returns(Anthropic::RequestOpts) }
+    sig { returns(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])) }
     attr_accessor :request_options
 
     module Converter
@@ -20,17 +14,6 @@ module Anthropic
   end
 
   class RequestOptions < Anthropic::BaseModel
-    Shape = T.type_alias do
-      {
-        idempotency_key: T.nilable(String),
-        extra_query: T.nilable(T::Hash[String, T.nilable(T.any(T::Array[String], String))]),
-        extra_headers: T.nilable(T::Hash[String, T.nilable(String)]),
-        extra_body: T.nilable(T::Hash[Symbol, T.anything]),
-        max_retries: T.nilable(Integer),
-        timeout: T.nilable(Float)
-      }
-    end
-
     sig { params(opts: T.any(T.self_type, T::Hash[Symbol, T.anything])).void }
     def self.validate!(opts); end
 

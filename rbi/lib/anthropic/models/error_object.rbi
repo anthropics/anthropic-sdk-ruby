@@ -5,20 +5,6 @@ module Anthropic
     class ErrorObject < Anthropic::Union
       abstract!
 
-      Variants = T.type_alias do
-        T.any(
-          Anthropic::Models::InvalidRequestError,
-          Anthropic::Models::AuthenticationError_,
-          Anthropic::Models::BillingError,
-          Anthropic::Models::PermissionError,
-          Anthropic::Models::NotFoundError_,
-          Anthropic::Models::RateLimitError_,
-          Anthropic::Models::GatewayTimeoutError,
-          Anthropic::Models::APIErrorObject,
-          Anthropic::Models::OverloadedError
-        )
-      end
-
       sig do
         override.returns(
           [

@@ -42,7 +42,7 @@ module Anthropic
         ) -> void
         | (?Anthropic::Models::message | Anthropic::BaseModel data) -> void
 
-      def to_h: -> Anthropic::Models::message
+      def to_hash: -> Anthropic::Models::message
 
       type stop_reason = :end_turn | :max_tokens | :stop_sequence | :tool_use
 

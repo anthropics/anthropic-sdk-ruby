@@ -25,7 +25,7 @@ module Anthropic
             | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::Beta::beta_message_param
+        def to_hash: -> Anthropic::Models::Beta::beta_message_param
 
         type content =
           String | Array[Anthropic::Models::Beta::beta_content_block_param]

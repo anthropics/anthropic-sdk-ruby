@@ -15,7 +15,7 @@ module Anthropic
           | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::raw_message_start_event
+      def to_hash: -> Anthropic::Models::raw_message_start_event
     end
   end
 end

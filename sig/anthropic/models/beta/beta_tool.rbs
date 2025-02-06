@@ -38,7 +38,7 @@ module Anthropic
             ?Anthropic::Models::Beta::beta_tool | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::Beta::beta_tool
+        def to_hash: -> Anthropic::Models::Beta::beta_tool
 
         type input_schema = { type: :object, properties: top? }
 
@@ -54,7 +54,7 @@ module Anthropic
               | Anthropic::BaseModel data
             ) -> void
 
-          def to_h: -> Anthropic::Models::Beta::BetaTool::input_schema
+          def to_hash: -> Anthropic::Models::Beta::BetaTool::input_schema
         end
 
         type type_ = :custom

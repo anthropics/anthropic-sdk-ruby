@@ -3,26 +3,13 @@
 module Anthropic
   module Models
     class Message < Anthropic::BaseModel
-      Shape = T.type_alias do
-        {
-          id: String,
-          content: T::Array[Anthropic::Models::ContentBlock::Variants],
-          model: Anthropic::Models::Model::Variants,
-          role: Symbol,
-          stop_reason: T.nilable(Symbol),
-          stop_sequence: T.nilable(String),
-          type: Symbol,
-          usage: Anthropic::Models::Usage
-        }
-      end
-
       sig { returns(String) }
       attr_accessor :id
 
-      sig { returns(T::Array[Anthropic::Models::ContentBlock::Variants]) }
+      sig { returns(T::Array[T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock)]) }
       attr_accessor :content
 
-      sig { returns(Anthropic::Models::Model::Variants) }
+      sig { returns(T.any(Symbol, String)) }
       attr_accessor :model
 
       sig { returns(Symbol) }
@@ -43,8 +30,8 @@ module Anthropic
       sig do
         params(
           id: String,
-          content: T::Array[Anthropic::Models::ContentBlock::Variants],
-          model: Anthropic::Models::Model::Variants,
+          content: T::Array[T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock)],
+          model: T.any(Symbol, String),
           stop_reason: T.nilable(Symbol),
           stop_sequence: T.nilable(String),
           usage: Anthropic::Models::Usage,
@@ -64,8 +51,21 @@ module Anthropic
       )
       end
 
-      sig { returns(Anthropic::Models::Message::Shape) }
-      def to_h; end
+      sig do
+        override.returns(
+          {
+            id: String,
+            content: T::Array[T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock)],
+            model: T.any(Symbol, String),
+            role: Symbol,
+            stop_reason: T.nilable(Symbol),
+            stop_sequence: T.nilable(String),
+            type: Symbol,
+            usage: Anthropic::Models::Usage
+          }
+        )
+      end
+      def to_hash; end
 
       class StopReason < Anthropic::Enum
         abstract!

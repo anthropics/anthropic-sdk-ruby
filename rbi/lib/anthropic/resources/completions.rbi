@@ -6,7 +6,7 @@ module Anthropic
       sig do
         params(
           max_tokens_to_sample: Integer,
-          model: Anthropic::Models::Model::Variants,
+          model: T.any(Symbol, String),
           prompt: String,
           stream: T::Boolean,
           metadata: Anthropic::Models::Metadata,
@@ -14,7 +14,7 @@ module Anthropic
           temperature: Float,
           top_k: Integer,
           top_p: Float,
-          request_options: Anthropic::RequestOpts
+          request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
         ).returns(Anthropic::Models::Completion)
       end
       def create(

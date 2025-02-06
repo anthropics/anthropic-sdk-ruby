@@ -6,14 +6,6 @@ module Anthropic
 
     module Beta
       class BetaToolBash20241022 < Anthropic::BaseModel
-        Shape = T.type_alias do
-          {
-            name: Symbol,
-            type: Symbol,
-            cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)
-          }
-        end
-
         sig { returns(Symbol) }
         attr_accessor :name
 
@@ -32,8 +24,16 @@ module Anthropic
         end
         def initialize(cache_control: nil, name: :bash, type: :bash_20241022); end
 
-        sig { returns(Anthropic::Models::Beta::BetaToolBash20241022::Shape) }
-        def to_h; end
+        sig do
+          override.returns(
+            {
+              name: Symbol,
+              type: Symbol,
+              cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)
+            }
+          )
+        end
+        def to_hash; end
       end
     end
   end

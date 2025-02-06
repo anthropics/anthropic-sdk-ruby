@@ -3,15 +3,6 @@
 module Anthropic
   module Models
     class TextBlockParam < Anthropic::BaseModel
-      Shape = T.type_alias do
-        {
-          text: String,
-          type: Symbol,
-          cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
-          citations: T.nilable(T::Array[Anthropic::Models::TextCitationParam::Variants])
-        }
-      end
-
       sig { returns(String) }
       attr_accessor :text
 
@@ -21,21 +12,52 @@ module Anthropic
       sig { returns(T.nilable(Anthropic::Models::CacheControlEphemeral)) }
       attr_accessor :cache_control
 
-      sig { returns(T.nilable(T::Array[Anthropic::Models::TextCitationParam::Variants])) }
+      sig do
+        returns(
+          T.nilable(
+            T::Array[T.any(
+              Anthropic::Models::CitationCharLocationParam,
+              Anthropic::Models::CitationPageLocationParam,
+              Anthropic::Models::CitationContentBlockLocationParam
+            )]
+          )
+        )
+      end
       attr_accessor :citations
 
       sig do
         params(
           text: String,
           cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
-          citations: T.nilable(T::Array[Anthropic::Models::TextCitationParam::Variants]),
+          citations: T.nilable(
+            T::Array[T.any(
+              Anthropic::Models::CitationCharLocationParam,
+              Anthropic::Models::CitationPageLocationParam,
+              Anthropic::Models::CitationContentBlockLocationParam
+            )]
+          ),
           type: Symbol
         ).void
       end
       def initialize(text:, cache_control: nil, citations: nil, type: :text); end
 
-      sig { returns(Anthropic::Models::TextBlockParam::Shape) }
-      def to_h; end
+      sig do
+        override.returns(
+          {
+            text: String,
+            type: Symbol,
+            cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
+            citations: T.nilable(
+              T::Array[T.any(
+                Anthropic::Models::CitationCharLocationParam,
+                Anthropic::Models::CitationPageLocationParam,
+                Anthropic::Models::CitationContentBlockLocationParam
+              )]
+            )
+          }
+        )
+      end
+      def to_hash; end
     end
   end
 end

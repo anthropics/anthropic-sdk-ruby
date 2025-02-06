@@ -20,7 +20,7 @@ module Anthropic
               | Anthropic::BaseModel data
             ) -> void
 
-          def to_h: -> Anthropic::Models::Beta::Messages::beta_message_batch_succeeded_result
+          def to_hash: -> Anthropic::Models::Beta::Messages::beta_message_batch_succeeded_result
         end
       end
     end

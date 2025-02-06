@@ -6,35 +6,40 @@ module Anthropic
       extend Anthropic::RequestParameters::Converter
       include Anthropic::RequestParameters
 
-      Shape = T.type_alias do
-        T.all(
-          {
-            messages: T::Array[Anthropic::Models::MessageParam],
-            model: Anthropic::Models::Model::Variants,
-            system_: Anthropic::Models::MessageCountTokensParams::System::Variants,
-            tool_choice: Anthropic::Models::ToolChoice::Variants,
-            tools: T::Array[Anthropic::Models::Tool]
-          },
-          Anthropic::RequestParameters::Shape
-        )
-      end
-
       sig { returns(T::Array[Anthropic::Models::MessageParam]) }
       attr_accessor :messages
 
-      sig { returns(Anthropic::Models::Model::Variants) }
+      sig { returns(T.any(Symbol, String)) }
       attr_accessor :model
 
-      sig { returns(T.nilable(Anthropic::Models::MessageCountTokensParams::System::Variants)) }
+      sig { returns(T.nilable(T.any(String, T::Array[Anthropic::Models::TextBlockParam]))) }
       attr_reader :system_
 
-      sig { params(system_: Anthropic::Models::MessageCountTokensParams::System::Variants).void }
+      sig { params(system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam])).void }
       attr_writer :system_
 
-      sig { returns(T.nilable(Anthropic::Models::ToolChoice::Variants)) }
+      sig do
+        returns(
+          T.nilable(
+            T.any(
+              Anthropic::Models::ToolChoiceAuto,
+              Anthropic::Models::ToolChoiceAny,
+              Anthropic::Models::ToolChoiceTool
+            )
+          )
+        )
+      end
       attr_reader :tool_choice
 
-      sig { params(tool_choice: Anthropic::Models::ToolChoice::Variants).void }
+      sig do
+        params(
+          tool_choice: T.any(
+            Anthropic::Models::ToolChoiceAuto,
+            Anthropic::Models::ToolChoiceAny,
+            Anthropic::Models::ToolChoiceTool
+          )
+        ).void
+      end
       attr_writer :tool_choice
 
       sig { returns(T.nilable(T::Array[Anthropic::Models::Tool])) }
@@ -46,22 +51,39 @@ module Anthropic
       sig do
         params(
           messages: T::Array[Anthropic::Models::MessageParam],
-          model: Anthropic::Models::Model::Variants,
-          system_: Anthropic::Models::MessageCountTokensParams::System::Variants,
-          tool_choice: Anthropic::Models::ToolChoice::Variants,
+          model: T.any(Symbol, String),
+          system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
+          tool_choice: T.any(
+            Anthropic::Models::ToolChoiceAuto,
+            Anthropic::Models::ToolChoiceAny,
+            Anthropic::Models::ToolChoiceTool
+          ),
           tools: T::Array[Anthropic::Models::Tool],
-          request_options: Anthropic::RequestOpts
+          request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
         ).void
       end
       def initialize(messages:, model:, system_: nil, tool_choice: nil, tools: nil, request_options: {}); end
 
-      sig { returns(Anthropic::Models::MessageCountTokensParams::Shape) }
-      def to_h; end
+      sig do
+        override.returns(
+          {
+            messages: T::Array[Anthropic::Models::MessageParam],
+            model: T.any(Symbol, String),
+            system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
+            tool_choice: T.any(
+              Anthropic::Models::ToolChoiceAuto,
+              Anthropic::Models::ToolChoiceAny,
+              Anthropic::Models::ToolChoiceTool
+            ),
+            tools: T::Array[Anthropic::Models::Tool],
+            request_options: Anthropic::RequestOptions
+          }
+        )
+      end
+      def to_hash; end
 
       class System < Anthropic::Union
         abstract!
-
-        Variants = T.type_alias { T.any(String, T::Array[Anthropic::Models::TextBlockParam]) }
 
         TextBlockParamArray = T.type_alias { T::Array[Anthropic::Models::TextBlockParam] }
 

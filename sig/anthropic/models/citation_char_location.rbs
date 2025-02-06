@@ -36,7 +36,7 @@ module Anthropic
           ?Anthropic::Models::citation_char_location | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::citation_char_location
+      def to_hash: -> Anthropic::Models::citation_char_location
     end
   end
 end

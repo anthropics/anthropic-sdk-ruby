@@ -16,7 +16,7 @@ module Anthropic
           ?Anthropic::Models::base64_pdf_source | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::base64_pdf_source
+      def to_hash: -> Anthropic::Models::base64_pdf_source
     end
   end
 end

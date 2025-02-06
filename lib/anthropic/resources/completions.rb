@@ -76,7 +76,7 @@ module Anthropic
       #     Recommended for advanced use cases only. You usually only need to use
       #     `temperature`.
       #
-      #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}] :request_options
+      #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Anthropic::Models::Completion]
       #

@@ -6,8 +6,6 @@ module Anthropic
 
     module Beta
       class BetaBase64PDFSource < Anthropic::BaseModel
-        Shape = T.type_alias { {data: String, media_type: Symbol, type: Symbol} }
-
         sig { returns(String) }
         attr_accessor :data
 
@@ -20,8 +18,8 @@ module Anthropic
         sig { params(data: String, media_type: Symbol, type: Symbol).void }
         def initialize(data:, media_type: :"application/pdf", type: :base64); end
 
-        sig { returns(Anthropic::Models::Beta::BetaBase64PDFSource::Shape) }
-        def to_h; end
+        sig { override.returns({data: String, media_type: Symbol, type: Symbol}) }
+        def to_hash; end
       end
     end
   end

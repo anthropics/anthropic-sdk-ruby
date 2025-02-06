@@ -6,8 +6,6 @@ module Anthropic
 
     module Beta
       class BetaRawContentBlockStopEvent < Anthropic::BaseModel
-        Shape = T.type_alias { {index: Integer, type: Symbol} }
-
         sig { returns(Integer) }
         attr_accessor :index
 
@@ -17,8 +15,8 @@ module Anthropic
         sig { params(index: Integer, type: Symbol).void }
         def initialize(index:, type: :content_block_stop); end
 
-        sig { returns(Anthropic::Models::Beta::BetaRawContentBlockStopEvent::Shape) }
-        def to_h; end
+        sig { override.returns({index: Integer, type: Symbol}) }
+        def to_hash; end
       end
     end
   end

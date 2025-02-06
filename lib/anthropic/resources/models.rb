@@ -12,7 +12,7 @@ module Anthropic
       #
       # @param params [Anthropic::Models::ModelRetrieveParams, Hash{Symbol=>Object}] .
       #
-      #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}] :request_options
+      #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Anthropic::Models::ModelInfo]
       #
@@ -42,7 +42,7 @@ module Anthropic
       #
       #     Defaults to `20`. Ranges from `1` to `1000`.
       #
-      #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}] :request_options
+      #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Anthropic::Page<Anthropic::Models::ModelInfo>]
       #

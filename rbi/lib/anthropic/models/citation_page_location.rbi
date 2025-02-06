@@ -3,17 +3,6 @@
 module Anthropic
   module Models
     class CitationPageLocation < Anthropic::BaseModel
-      Shape = T.type_alias do
-        {
-          cited_text: String,
-          document_index: Integer,
-          document_title: T.nilable(String),
-          end_page_number: Integer,
-          start_page_number: Integer,
-          type: Symbol
-        }
-      end
-
       sig { returns(String) }
       attr_accessor :cited_text
 
@@ -52,8 +41,19 @@ module Anthropic
       )
       end
 
-      sig { returns(Anthropic::Models::CitationPageLocation::Shape) }
-      def to_h; end
+      sig do
+        override.returns(
+          {
+            cited_text: String,
+            document_index: Integer,
+            document_title: T.nilable(String),
+            end_page_number: Integer,
+            start_page_number: Integer,
+            type: Symbol
+          }
+        )
+      end
+      def to_hash; end
     end
   end
 end

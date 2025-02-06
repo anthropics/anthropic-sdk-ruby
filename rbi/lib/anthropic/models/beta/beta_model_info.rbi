@@ -6,8 +6,6 @@ module Anthropic
 
     module Beta
       class BetaModelInfo < Anthropic::BaseModel
-        Shape = T.type_alias { {id: String, created_at: Time, display_name: String, type: Symbol} }
-
         sig { returns(String) }
         attr_accessor :id
 
@@ -23,8 +21,8 @@ module Anthropic
         sig { params(id: String, created_at: Time, display_name: String, type: Symbol).void }
         def initialize(id:, created_at:, display_name:, type: :model); end
 
-        sig { returns(Anthropic::Models::Beta::BetaModelInfo::Shape) }
-        def to_h; end
+        sig { override.returns({id: String, created_at: Time, display_name: String, type: Symbol}) }
+        def to_hash; end
       end
     end
   end

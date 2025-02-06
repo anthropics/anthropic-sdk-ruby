@@ -32,7 +32,7 @@ module Anthropic
             ?Anthropic::Models::Beta::beta_usage | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::Beta::beta_usage
+        def to_hash: -> Anthropic::Models::Beta::beta_usage
       end
     end
   end

@@ -29,7 +29,7 @@ module Anthropic
             | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::Beta::beta_raw_content_block_delta_event
+        def to_hash: -> Anthropic::Models::Beta::beta_raw_content_block_delta_event
 
         type delta =
           Anthropic::Models::Beta::BetaTextDelta

@@ -3,8 +3,6 @@
 module Anthropic
   module Models
     class BetaOverloadedError < Anthropic::BaseModel
-      Shape = T.type_alias { {message: String, type: Symbol} }
-
       sig { returns(String) }
       attr_accessor :message
 
@@ -14,8 +12,8 @@ module Anthropic
       sig { params(message: String, type: Symbol).void }
       def initialize(message:, type: :overloaded_error); end
 
-      sig { returns(Anthropic::Models::BetaOverloadedError::Shape) }
-      def to_h; end
+      sig { override.returns({message: String, type: Symbol}) }
+      def to_hash; end
     end
   end
 end

@@ -6,10 +6,6 @@ module Anthropic
       extend Anthropic::RequestParameters::Converter
       include Anthropic::RequestParameters
 
-      Shape = T.type_alias do
-        T.all({after_id: String, before_id: String, limit: Integer}, Anthropic::RequestParameters::Shape)
-      end
-
       sig { returns(T.nilable(String)) }
       attr_reader :after_id
 
@@ -33,13 +29,22 @@ module Anthropic
           after_id: String,
           before_id: String,
           limit: Integer,
-          request_options: Anthropic::RequestOpts
+          request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
         ).void
       end
       def initialize(after_id: nil, before_id: nil, limit: nil, request_options: {}); end
 
-      sig { returns(Anthropic::Models::ModelListParams::Shape) }
-      def to_h; end
+      sig do
+        override.returns(
+          {
+            after_id: String,
+            before_id: String,
+            limit: Integer,
+            request_options: Anthropic::RequestOptions
+          }
+        )
+      end
+      def to_hash; end
     end
   end
 end

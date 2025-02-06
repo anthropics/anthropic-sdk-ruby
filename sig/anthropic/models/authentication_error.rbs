@@ -13,7 +13,7 @@ module Anthropic
           ?Anthropic::Models::authentication_error | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::authentication_error
+      def to_hash: -> Anthropic::Models::authentication_error
     end
   end
 end

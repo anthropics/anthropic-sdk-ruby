@@ -3,17 +3,6 @@
 module Anthropic
   module Models
     class CitationCharLocationParam < Anthropic::BaseModel
-      Shape = T.type_alias do
-        {
-          cited_text: String,
-          document_index: Integer,
-          document_title: T.nilable(String),
-          end_char_index: Integer,
-          start_char_index: Integer,
-          type: Symbol
-        }
-      end
-
       sig { returns(String) }
       attr_accessor :cited_text
 
@@ -52,8 +41,19 @@ module Anthropic
       )
       end
 
-      sig { returns(Anthropic::Models::CitationCharLocationParam::Shape) }
-      def to_h; end
+      sig do
+        override.returns(
+          {
+            cited_text: String,
+            document_index: Integer,
+            document_title: T.nilable(String),
+            end_char_index: Integer,
+            start_char_index: Integer,
+            type: Symbol
+          }
+        )
+      end
+      def to_hash; end
     end
   end
 end
