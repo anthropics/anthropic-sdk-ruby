@@ -14,11 +14,11 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Minitest::Test
     response = @anthropic.beta.messages.batches.create(
       requests: [
         {
-          "custom_id" => "my-custom-id-1",
-          "params" => {
-            "max_tokens" => 1024,
-            "messages" => [{"content" => "Hello, world", "role" => "user"}],
-            "model" => "claude-3-5-haiku-latest"
+          custom_id: "my-custom-id-1",
+          params: {
+            max_tokens: 1024,
+            messages: [{content: "Hello, world", role: :user}],
+            model: :"claude-3-5-haiku-latest"
           }
         }
       ]
