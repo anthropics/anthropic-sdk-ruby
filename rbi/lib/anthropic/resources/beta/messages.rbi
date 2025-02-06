@@ -12,9 +12,9 @@ module Anthropic
             max_tokens: Integer,
             messages: T::Array[Anthropic::Models::Beta::BetaMessageParam],
             model: Anthropic::Models::Model::Variants,
+            stream: T::Boolean,
             metadata: Anthropic::Models::Beta::BetaMetadata,
             stop_sequences: T::Array[String],
-            stream: T::Boolean,
             system_: Anthropic::Models::Beta::MessageCreateParams::System::Variants,
             temperature: Float,
             tool_choice: Anthropic::Models::Beta::BetaToolChoice::Variants,
@@ -29,16 +29,16 @@ module Anthropic
           max_tokens:,
           messages:,
           model:,
-          metadata:,
-          stop_sequences:,
-          stream:,
-          system_:,
-          temperature:,
-          tool_choice:,
-          tools:,
-          top_k:,
-          top_p:,
-          betas:,
+          stream: nil,
+          metadata: nil,
+          stop_sequences: nil,
+          system_: nil,
+          temperature: nil,
+          tool_choice: nil,
+          tools: nil,
+          top_k: nil,
+          top_p: nil,
+          betas: nil,
           request_options: {}
         ); end
 
@@ -53,7 +53,16 @@ module Anthropic
             request_options: Anthropic::RequestOpts
           ).returns(Anthropic::Models::Beta::BetaMessageTokensCount)
         end
-        def count_tokens(messages:, model:, system_:, tool_choice:, tools:, betas:, request_options: {}); end
+        def count_tokens(
+          messages:,
+          model:,
+          system_: nil,
+          tool_choice: nil,
+          tools: nil,
+          betas: nil,
+          request_options: {}
+        )
+        end
 
         sig { params(client: Anthropic::Client).void }
         def initialize(client:); end
