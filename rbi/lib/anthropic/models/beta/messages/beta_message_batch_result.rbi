@@ -7,15 +7,6 @@ module Anthropic
         class BetaMessageBatchResult < Anthropic::Union
           abstract!
 
-          Variants = T.type_alias do
-            T.any(
-              Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult,
-              Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult,
-              Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
-              Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
-            )
-          end
-
           sig do
             override.returns(
               [

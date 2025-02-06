@@ -13,7 +13,7 @@ module Anthropic
           ?Anthropic::Models::billing_error | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::billing_error
+      def to_hash: -> Anthropic::Models::billing_error
     end
   end
 end

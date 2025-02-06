@@ -29,7 +29,7 @@ module Anthropic
             | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::Beta::beta_text_block
+        def to_hash: -> Anthropic::Models::Beta::beta_text_block
       end
     end
   end

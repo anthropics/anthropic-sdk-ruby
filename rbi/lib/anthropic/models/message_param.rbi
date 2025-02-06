@@ -3,32 +3,88 @@
 module Anthropic
   module Models
     class MessageParam < Anthropic::BaseModel
-      Shape = T.type_alias { {content: Anthropic::Models::MessageParam::Content::Variants, role: Symbol} }
-
-      sig { returns(Anthropic::Models::MessageParam::Content::Variants) }
+      sig do
+        returns(
+          T.any(
+            String,
+            T::Array[T.any(
+              Anthropic::Models::TextBlockParam,
+              Anthropic::Models::ImageBlockParam,
+              Anthropic::Models::ToolUseBlockParam,
+              Anthropic::Models::ToolResultBlockParam,
+              Anthropic::Models::DocumentBlockParam
+            )]
+          )
+        )
+      end
       attr_accessor :content
 
       sig { returns(Symbol) }
       attr_accessor :role
 
-      sig { params(content: Anthropic::Models::MessageParam::Content::Variants, role: Symbol).void }
+      sig do
+        params(
+          content: T.any(
+            String,
+            T::Array[T.any(
+              Anthropic::Models::TextBlockParam,
+              Anthropic::Models::ImageBlockParam,
+              Anthropic::Models::ToolUseBlockParam,
+              Anthropic::Models::ToolResultBlockParam,
+              Anthropic::Models::DocumentBlockParam
+            )]
+          ),
+          role: Symbol
+        ).void
+      end
       def initialize(content:, role:); end
 
-      sig { returns(Anthropic::Models::MessageParam::Shape) }
-      def to_h; end
+      sig do
+        override.returns(
+          {
+            content: T.any(
+              String,
+              T::Array[T.any(
+                Anthropic::Models::TextBlockParam,
+                Anthropic::Models::ImageBlockParam,
+                Anthropic::Models::ToolUseBlockParam,
+                Anthropic::Models::ToolResultBlockParam,
+                Anthropic::Models::DocumentBlockParam
+              )]
+            ),
+            role: Symbol
+          }
+        )
+      end
+      def to_hash; end
 
       class Content < Anthropic::Union
         abstract!
 
-        Variants = T.type_alias { T.any(String, T::Array[Anthropic::Models::ContentBlockParam::Variants]) }
-
-        ContentBlockParamArray = T.type_alias { T::Array[Anthropic::Models::ContentBlockParam::Variants] }
+        ContentBlockParamArray = T.type_alias do
+          T::Array[T.any(
+            Anthropic::Models::TextBlockParam,
+            Anthropic::Models::ImageBlockParam,
+            Anthropic::Models::ToolUseBlockParam,
+            Anthropic::Models::ToolResultBlockParam,
+            Anthropic::Models::DocumentBlockParam
+          )]
+        end
 
         sig do
           override.returns(
             [
               [NilClass, String],
-              [NilClass, T::Array[Anthropic::Models::ContentBlockParam::Variants]]
+              [
+                NilClass,
+                T::Array[T.any(
+                  Anthropic::Models::TextBlockParam,
+                  Anthropic::Models::ImageBlockParam,
+                  Anthropic::Models::ToolUseBlockParam,
+                  Anthropic::Models::ToolResultBlockParam,
+                  Anthropic::Models::DocumentBlockParam
+                )]
+              ]
             ]
           )
         end

@@ -14,7 +14,7 @@ module Anthropic
             | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::Beta::model_retrieve_params
+        def to_hash: -> Anthropic::Models::Beta::model_retrieve_params
       end
     end
   end

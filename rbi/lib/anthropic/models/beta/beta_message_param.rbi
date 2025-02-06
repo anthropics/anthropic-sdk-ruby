@@ -6,40 +6,88 @@ module Anthropic
 
     module Beta
       class BetaMessageParam < Anthropic::BaseModel
-        Shape = T.type_alias do
-          {content: Anthropic::Models::Beta::BetaMessageParam::Content::Variants, role: Symbol}
+        sig do
+          returns(
+            T.any(
+              String,
+              T::Array[T.any(
+                Anthropic::Models::Beta::BetaTextBlockParam,
+                Anthropic::Models::Beta::BetaImageBlockParam,
+                Anthropic::Models::Beta::BetaToolUseBlockParam,
+                Anthropic::Models::Beta::BetaToolResultBlockParam,
+                Anthropic::Models::Beta::BetaBase64PDFBlock
+              )]
+            )
+          )
         end
-
-        sig { returns(Anthropic::Models::Beta::BetaMessageParam::Content::Variants) }
         attr_accessor :content
 
         sig { returns(Symbol) }
         attr_accessor :role
 
         sig do
-          params(content: Anthropic::Models::Beta::BetaMessageParam::Content::Variants, role: Symbol).void
+          params(
+            content: T.any(
+              String,
+              T::Array[T.any(
+                Anthropic::Models::Beta::BetaTextBlockParam,
+                Anthropic::Models::Beta::BetaImageBlockParam,
+                Anthropic::Models::Beta::BetaToolUseBlockParam,
+                Anthropic::Models::Beta::BetaToolResultBlockParam,
+                Anthropic::Models::Beta::BetaBase64PDFBlock
+              )]
+            ),
+            role: Symbol
+          ).void
         end
         def initialize(content:, role:); end
 
-        sig { returns(Anthropic::Models::Beta::BetaMessageParam::Shape) }
-        def to_h; end
+        sig do
+          override.returns(
+            {
+              content: T.any(
+                String,
+                T::Array[T.any(
+                  Anthropic::Models::Beta::BetaTextBlockParam,
+                  Anthropic::Models::Beta::BetaImageBlockParam,
+                  Anthropic::Models::Beta::BetaToolUseBlockParam,
+                  Anthropic::Models::Beta::BetaToolResultBlockParam,
+                  Anthropic::Models::Beta::BetaBase64PDFBlock
+                )]
+              ),
+              role: Symbol
+            }
+          )
+        end
+        def to_hash; end
 
         class Content < Anthropic::Union
           abstract!
 
-          Variants = T.type_alias do
-            T.any(String, T::Array[Anthropic::Models::Beta::BetaContentBlockParam::Variants])
-          end
-
           BetaContentBlockParamArray = T.type_alias do
-            T::Array[Anthropic::Models::Beta::BetaContentBlockParam::Variants]
+            T::Array[T.any(
+              Anthropic::Models::Beta::BetaTextBlockParam,
+              Anthropic::Models::Beta::BetaImageBlockParam,
+              Anthropic::Models::Beta::BetaToolUseBlockParam,
+              Anthropic::Models::Beta::BetaToolResultBlockParam,
+              Anthropic::Models::Beta::BetaBase64PDFBlock
+            )]
           end
 
           sig do
             override.returns(
               [
                 [NilClass, String],
-                [NilClass, T::Array[Anthropic::Models::Beta::BetaContentBlockParam::Variants]]
+                [
+                  NilClass,
+                  T::Array[T.any(
+                    Anthropic::Models::Beta::BetaTextBlockParam,
+                    Anthropic::Models::Beta::BetaImageBlockParam,
+                    Anthropic::Models::Beta::BetaToolUseBlockParam,
+                    Anthropic::Models::Beta::BetaToolResultBlockParam,
+                    Anthropic::Models::Beta::BetaBase64PDFBlock
+                  )]
+                ]
               ]
             )
           end

@@ -14,7 +14,7 @@ module Anthropic
           ?Anthropic::Models::invalid_request_error | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::invalid_request_error
+      def to_hash: -> Anthropic::Models::invalid_request_error
     end
   end
 end

@@ -6,16 +6,6 @@ module Anthropic
 
     module Beta
       class BetaTool < Anthropic::BaseModel
-        Shape = T.type_alias do
-          {
-            input_schema: Anthropic::Models::Beta::BetaTool::InputSchema,
-            name: String,
-            cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
-            description: String,
-            type: T.nilable(Symbol)
-          }
-        end
-
         sig { returns(Anthropic::Models::Beta::BetaTool::InputSchema) }
         attr_accessor :input_schema
 
@@ -45,12 +35,20 @@ module Anthropic
         end
         def initialize(input_schema:, name:, cache_control: nil, description: nil, type: nil); end
 
-        sig { returns(Anthropic::Models::Beta::BetaTool::Shape) }
-        def to_h; end
+        sig do
+          override.returns(
+            {
+              input_schema: Anthropic::Models::Beta::BetaTool::InputSchema,
+              name: String,
+              cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
+              description: String,
+              type: T.nilable(Symbol)
+            }
+          )
+        end
+        def to_hash; end
 
         class InputSchema < Anthropic::BaseModel
-          Shape = T.type_alias { {type: Symbol, properties: T.nilable(T.anything)} }
-
           sig { returns(Symbol) }
           attr_accessor :type
 
@@ -60,8 +58,8 @@ module Anthropic
           sig { params(properties: T.nilable(T.anything), type: Symbol).void }
           def initialize(properties: nil, type: :object); end
 
-          sig { returns(Anthropic::Models::Beta::BetaTool::InputSchema::Shape) }
-          def to_h; end
+          sig { override.returns({type: Symbol, properties: T.nilable(T.anything)}) }
+          def to_hash; end
         end
 
         class Type < Anthropic::Enum

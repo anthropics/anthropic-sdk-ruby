@@ -6,15 +6,6 @@ module Anthropic
 
     module Beta
       class BetaTextBlockParam < Anthropic::BaseModel
-        Shape = T.type_alias do
-          {
-            text: String,
-            type: Symbol,
-            cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
-            citations: T.nilable(T::Array[Anthropic::Models::Beta::BetaTextCitationParam::Variants])
-          }
-        end
-
         sig { returns(String) }
         attr_accessor :text
 
@@ -24,21 +15,52 @@ module Anthropic
         sig { returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)) }
         attr_accessor :cache_control
 
-        sig { returns(T.nilable(T::Array[Anthropic::Models::Beta::BetaTextCitationParam::Variants])) }
+        sig do
+          returns(
+            T.nilable(
+              T::Array[T.any(
+                Anthropic::Models::Beta::BetaCitationCharLocationParam,
+                Anthropic::Models::Beta::BetaCitationPageLocationParam,
+                Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
+              )]
+            )
+          )
+        end
         attr_accessor :citations
 
         sig do
           params(
             text: String,
             cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
-            citations: T.nilable(T::Array[Anthropic::Models::Beta::BetaTextCitationParam::Variants]),
+            citations: T.nilable(
+              T::Array[T.any(
+                Anthropic::Models::Beta::BetaCitationCharLocationParam,
+                Anthropic::Models::Beta::BetaCitationPageLocationParam,
+                Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
+              )]
+            ),
             type: Symbol
           ).void
         end
         def initialize(text:, cache_control: nil, citations: nil, type: :text); end
 
-        sig { returns(Anthropic::Models::Beta::BetaTextBlockParam::Shape) }
-        def to_h; end
+        sig do
+          override.returns(
+            {
+              text: String,
+              type: Symbol,
+              cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
+              citations: T.nilable(
+                T::Array[T.any(
+                  Anthropic::Models::Beta::BetaCitationCharLocationParam,
+                  Anthropic::Models::Beta::BetaCitationPageLocationParam,
+                  Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
+                )]
+              )
+            }
+          )
+        end
+        def to_hash; end
       end
     end
   end

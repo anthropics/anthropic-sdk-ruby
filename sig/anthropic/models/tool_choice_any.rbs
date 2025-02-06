@@ -15,7 +15,7 @@ module Anthropic
           ?Anthropic::Models::tool_choice_any | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::tool_choice_any
+      def to_hash: -> Anthropic::Models::tool_choice_any
     end
   end
 end

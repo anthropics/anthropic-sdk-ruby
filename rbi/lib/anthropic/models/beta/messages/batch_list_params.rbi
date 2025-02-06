@@ -8,18 +8,6 @@ module Anthropic
           extend Anthropic::RequestParameters::Converter
           include Anthropic::RequestParameters
 
-          Shape = T.type_alias do
-            T.all(
-              {
-                after_id: String,
-                before_id: String,
-                limit: Integer,
-                betas: T::Array[Anthropic::Models::AnthropicBeta::Variants]
-              },
-              Anthropic::RequestParameters::Shape
-            )
-          end
-
           sig { returns(T.nilable(String)) }
           attr_reader :after_id
 
@@ -38,10 +26,10 @@ module Anthropic
           sig { params(limit: Integer).void }
           attr_writer :limit
 
-          sig { returns(T.nilable(T::Array[Anthropic::Models::AnthropicBeta::Variants])) }
+          sig { returns(T.nilable(T::Array[T.any(String, Symbol)])) }
           attr_reader :betas
 
-          sig { params(betas: T::Array[Anthropic::Models::AnthropicBeta::Variants]).void }
+          sig { params(betas: T::Array[T.any(String, Symbol)]).void }
           attr_writer :betas
 
           sig do
@@ -49,14 +37,24 @@ module Anthropic
               after_id: String,
               before_id: String,
               limit: Integer,
-              betas: T::Array[Anthropic::Models::AnthropicBeta::Variants],
-              request_options: Anthropic::RequestOpts
+              betas: T::Array[T.any(String, Symbol)],
+              request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
             ).void
           end
           def initialize(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {}); end
 
-          sig { returns(Anthropic::Models::Beta::Messages::BatchListParams::Shape) }
-          def to_h; end
+          sig do
+            override.returns(
+              {
+                after_id: String,
+                before_id: String,
+                limit: Integer,
+                betas: T::Array[T.any(String, Symbol)],
+                request_options: Anthropic::RequestOptions
+              }
+            )
+          end
+          def to_hash; end
         end
       end
     end

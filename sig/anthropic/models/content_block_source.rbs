@@ -20,7 +20,7 @@ module Anthropic
           ?Anthropic::Models::content_block_source | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::content_block_source
+      def to_hash: -> Anthropic::Models::content_block_source
 
       type content =
         String | Array[Anthropic::Models::content_block_source_content]

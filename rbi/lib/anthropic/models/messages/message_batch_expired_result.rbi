@@ -6,16 +6,14 @@ module Anthropic
 
     module Messages
       class MessageBatchExpiredResult < Anthropic::BaseModel
-        Shape = T.type_alias { {type: Symbol} }
-
         sig { returns(Symbol) }
         attr_accessor :type
 
         sig { params(type: Symbol).void }
         def initialize(type: :expired); end
 
-        sig { returns(Anthropic::Models::Messages::MessageBatchExpiredResult::Shape) }
-        def to_h; end
+        sig { override.returns({type: Symbol}) }
+        def to_hash; end
       end
     end
   end

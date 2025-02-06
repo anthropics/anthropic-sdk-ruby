@@ -8,17 +8,6 @@ module Anthropic
       class BetaRawMessageStreamEvent < Anthropic::Union
         abstract!
 
-        Variants = T.type_alias do
-          T.any(
-            Anthropic::Models::Beta::BetaRawMessageStartEvent,
-            Anthropic::Models::Beta::BetaRawMessageDeltaEvent,
-            Anthropic::Models::Beta::BetaRawMessageStopEvent,
-            Anthropic::Models::Beta::BetaRawContentBlockStartEvent,
-            Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent,
-            Anthropic::Models::Beta::BetaRawContentBlockStopEvent
-          )
-        end
-
         sig do
           override.returns(
             [

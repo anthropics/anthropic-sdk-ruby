@@ -24,7 +24,7 @@ module Anthropic
               | Anthropic::BaseModel data
             ) -> void
 
-          def to_h: -> Anthropic::Models::Beta::Messages::batch_retrieve_params
+          def to_hash: -> Anthropic::Models::Beta::Messages::batch_retrieve_params
         end
       end
     end

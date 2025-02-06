@@ -11,7 +11,7 @@ module Anthropic
         (text: String, type: :text_delta) -> void
         | (?Anthropic::Models::text_delta | Anthropic::BaseModel data) -> void
 
-      def to_h: -> Anthropic::Models::text_delta
+      def to_hash: -> Anthropic::Models::text_delta
     end
   end
 end

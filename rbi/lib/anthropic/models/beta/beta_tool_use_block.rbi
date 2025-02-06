@@ -6,8 +6,6 @@ module Anthropic
 
     module Beta
       class BetaToolUseBlock < Anthropic::BaseModel
-        Shape = T.type_alias { {id: String, input: T.anything, name: String, type: Symbol} }
-
         sig { returns(String) }
         attr_accessor :id
 
@@ -23,8 +21,8 @@ module Anthropic
         sig { params(id: String, input: T.anything, name: String, type: Symbol).void }
         def initialize(id:, input:, name:, type: :tool_use); end
 
-        sig { returns(Anthropic::Models::Beta::BetaToolUseBlock::Shape) }
-        def to_h; end
+        sig { override.returns({id: String, input: T.anything, name: String, type: Symbol}) }
+        def to_hash; end
       end
     end
   end

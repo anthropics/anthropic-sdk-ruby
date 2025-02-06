@@ -6,27 +6,10 @@ module Anthropic
       extend Anthropic::RequestParameters::Converter
       include Anthropic::RequestParameters
 
-      Shape = T.type_alias do
-        T.all(
-          {
-            max_tokens_to_sample: Integer,
-            model: Anthropic::Models::Model::Variants,
-            prompt: String,
-            metadata: Anthropic::Models::Metadata,
-            stop_sequences: T::Array[String],
-            stream: T::Boolean,
-            temperature: Float,
-            top_k: Integer,
-            top_p: Float
-          },
-          Anthropic::RequestParameters::Shape
-        )
-      end
-
       sig { returns(Integer) }
       attr_accessor :max_tokens_to_sample
 
-      sig { returns(Anthropic::Models::Model::Variants) }
+      sig { returns(T.any(Symbol, String)) }
       attr_accessor :model
 
       sig { returns(String) }
@@ -68,7 +51,7 @@ module Anthropic
       sig do
         params(
           max_tokens_to_sample: Integer,
-          model: Anthropic::Models::Model::Variants,
+          model: T.any(Symbol, String),
           prompt: String,
           stream: T::Boolean,
           metadata: Anthropic::Models::Metadata,
@@ -76,7 +59,7 @@ module Anthropic
           temperature: Float,
           top_k: Integer,
           top_p: Float,
-          request_options: Anthropic::RequestOpts
+          request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
         ).void
       end
       def initialize(
@@ -92,8 +75,23 @@ module Anthropic
         request_options: {}
       ); end
 
-      sig { returns(Anthropic::Models::CompletionCreateParams::Shape) }
-      def to_h; end
+      sig do
+        override.returns(
+          {
+            max_tokens_to_sample: Integer,
+            model: T.any(Symbol, String),
+            prompt: String,
+            metadata: Anthropic::Models::Metadata,
+            stop_sequences: T::Array[String],
+            stream: T::Boolean,
+            temperature: Float,
+            top_k: Integer,
+            top_p: Float,
+            request_options: Anthropic::RequestOptions
+          }
+        )
+      end
+      def to_hash; end
 
       class Stream < Anthropic::Enum
         abstract!

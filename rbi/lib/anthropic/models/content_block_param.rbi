@@ -5,16 +5,6 @@ module Anthropic
     class ContentBlockParam < Anthropic::Union
       abstract!
 
-      Variants = T.type_alias do
-        T.any(
-          Anthropic::Models::TextBlockParam,
-          Anthropic::Models::ImageBlockParam,
-          Anthropic::Models::ToolUseBlockParam,
-          Anthropic::Models::ToolResultBlockParam,
-          Anthropic::Models::DocumentBlockParam
-        )
-      end
-
       sig do
         override.returns(
           [

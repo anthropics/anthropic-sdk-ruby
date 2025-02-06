@@ -23,7 +23,7 @@ module Anthropic
             | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::Beta::beta_tool_choice_tool
+        def to_hash: -> Anthropic::Models::Beta::beta_tool_choice_tool
       end
     end
   end

@@ -7,63 +7,92 @@ module Anthropic
         extend Anthropic::RequestParameters::Converter
         include Anthropic::RequestParameters
 
-        Shape = T.type_alias do
-          T.all(
-            {
-              messages: T::Array[Anthropic::Models::Beta::BetaMessageParam],
-              model: Anthropic::Models::Model::Variants,
-              system_: Anthropic::Models::Beta::MessageCountTokensParams::System::Variants,
-              tool_choice: Anthropic::Models::Beta::BetaToolChoice::Variants,
-              tools: T::Array[Anthropic::Models::Beta::MessageCountTokensParams::Tool::Variants],
-              betas: T::Array[Anthropic::Models::AnthropicBeta::Variants]
-            },
-            Anthropic::RequestParameters::Shape
-          )
-        end
-
         sig { returns(T::Array[Anthropic::Models::Beta::BetaMessageParam]) }
         attr_accessor :messages
 
-        sig { returns(Anthropic::Models::Model::Variants) }
+        sig { returns(T.any(Symbol, String)) }
         attr_accessor :model
 
-        sig { returns(T.nilable(Anthropic::Models::Beta::MessageCountTokensParams::System::Variants)) }
+        sig { returns(T.nilable(T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]))) }
         attr_reader :system_
 
-        sig { params(system_: Anthropic::Models::Beta::MessageCountTokensParams::System::Variants).void }
+        sig { params(system_: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam])).void }
         attr_writer :system_
 
-        sig { returns(T.nilable(Anthropic::Models::Beta::BetaToolChoice::Variants)) }
+        sig do
+          returns(
+            T.nilable(
+              T.any(
+                Anthropic::Models::Beta::BetaToolChoiceAuto,
+                Anthropic::Models::Beta::BetaToolChoiceAny,
+                Anthropic::Models::Beta::BetaToolChoiceTool
+              )
+            )
+          )
+        end
         attr_reader :tool_choice
 
-        sig { params(tool_choice: Anthropic::Models::Beta::BetaToolChoice::Variants).void }
+        sig do
+          params(
+            tool_choice: T.any(
+              Anthropic::Models::Beta::BetaToolChoiceAuto,
+              Anthropic::Models::Beta::BetaToolChoiceAny,
+              Anthropic::Models::Beta::BetaToolChoiceTool
+            )
+          ).void
+        end
         attr_writer :tool_choice
 
         sig do
-          returns(T.nilable(T::Array[Anthropic::Models::Beta::MessageCountTokensParams::Tool::Variants]))
+          returns(
+            T.nilable(
+              T::Array[T.any(
+                Anthropic::Models::Beta::BetaTool,
+                Anthropic::Models::Beta::BetaToolComputerUse20241022,
+                Anthropic::Models::Beta::BetaToolBash20241022,
+                Anthropic::Models::Beta::BetaToolTextEditor20241022
+              )]
+            )
+          )
         end
         attr_reader :tools
 
         sig do
-          params(tools: T::Array[Anthropic::Models::Beta::MessageCountTokensParams::Tool::Variants]).void
+          params(
+            tools: T::Array[T.any(
+              Anthropic::Models::Beta::BetaTool,
+              Anthropic::Models::Beta::BetaToolComputerUse20241022,
+              Anthropic::Models::Beta::BetaToolBash20241022,
+              Anthropic::Models::Beta::BetaToolTextEditor20241022
+            )]
+          ).void
         end
         attr_writer :tools
 
-        sig { returns(T.nilable(T::Array[Anthropic::Models::AnthropicBeta::Variants])) }
+        sig { returns(T.nilable(T::Array[T.any(String, Symbol)])) }
         attr_reader :betas
 
-        sig { params(betas: T::Array[Anthropic::Models::AnthropicBeta::Variants]).void }
+        sig { params(betas: T::Array[T.any(String, Symbol)]).void }
         attr_writer :betas
 
         sig do
           params(
             messages: T::Array[Anthropic::Models::Beta::BetaMessageParam],
-            model: Anthropic::Models::Model::Variants,
-            system_: Anthropic::Models::Beta::MessageCountTokensParams::System::Variants,
-            tool_choice: Anthropic::Models::Beta::BetaToolChoice::Variants,
-            tools: T::Array[Anthropic::Models::Beta::MessageCountTokensParams::Tool::Variants],
-            betas: T::Array[Anthropic::Models::AnthropicBeta::Variants],
-            request_options: Anthropic::RequestOpts
+            model: T.any(Symbol, String),
+            system_: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]),
+            tool_choice: T.any(
+              Anthropic::Models::Beta::BetaToolChoiceAuto,
+              Anthropic::Models::Beta::BetaToolChoiceAny,
+              Anthropic::Models::Beta::BetaToolChoiceTool
+            ),
+            tools: T::Array[T.any(
+              Anthropic::Models::Beta::BetaTool,
+              Anthropic::Models::Beta::BetaToolComputerUse20241022,
+              Anthropic::Models::Beta::BetaToolBash20241022,
+              Anthropic::Models::Beta::BetaToolTextEditor20241022
+            )],
+            betas: T::Array[T.any(String, Symbol)],
+            request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
           ).void
         end
         def initialize(
@@ -77,13 +106,32 @@ module Anthropic
         )
         end
 
-        sig { returns(Anthropic::Models::Beta::MessageCountTokensParams::Shape) }
-        def to_h; end
+        sig do
+          override.returns(
+            {
+              messages: T::Array[Anthropic::Models::Beta::BetaMessageParam],
+              model: T.any(Symbol, String),
+              system_: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]),
+              tool_choice: T.any(
+                Anthropic::Models::Beta::BetaToolChoiceAuto,
+                Anthropic::Models::Beta::BetaToolChoiceAny,
+                Anthropic::Models::Beta::BetaToolChoiceTool
+              ),
+              tools: T::Array[T.any(
+                Anthropic::Models::Beta::BetaTool,
+                Anthropic::Models::Beta::BetaToolComputerUse20241022,
+                Anthropic::Models::Beta::BetaToolBash20241022,
+                Anthropic::Models::Beta::BetaToolTextEditor20241022
+              )],
+              betas: T::Array[T.any(String, Symbol)],
+              request_options: Anthropic::RequestOptions
+            }
+          )
+        end
+        def to_hash; end
 
         class System < Anthropic::Union
           abstract!
-
-          Variants = T.type_alias { T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]) }
 
           BetaTextBlockParamArray = T.type_alias { T::Array[Anthropic::Models::Beta::BetaTextBlockParam] }
 
@@ -100,15 +148,6 @@ module Anthropic
 
         class Tool < Anthropic::Union
           abstract!
-
-          Variants = T.type_alias do
-            T.any(
-              Anthropic::Models::Beta::BetaTool,
-              Anthropic::Models::Beta::BetaToolComputerUse20241022,
-              Anthropic::Models::Beta::BetaToolBash20241022,
-              Anthropic::Models::Beta::BetaToolTextEditor20241022
-            )
-          end
 
           sig do
             override.returns(

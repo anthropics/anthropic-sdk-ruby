@@ -5,8 +5,6 @@ module Anthropic
     class AnthropicBeta < Anthropic::Union
       abstract!
 
-      Variants = T.type_alias { T.any(String, Symbol) }
-
       class UnionMember1 < Anthropic::Enum
         abstract!
 

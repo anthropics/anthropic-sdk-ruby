@@ -32,7 +32,7 @@ module Anthropic
           ?Anthropic::Models::tool_use_block_param | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::tool_use_block_param
+      def to_hash: -> Anthropic::Models::tool_use_block_param
     end
   end
 end

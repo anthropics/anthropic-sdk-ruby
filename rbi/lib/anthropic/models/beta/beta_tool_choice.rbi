@@ -8,14 +8,6 @@ module Anthropic
       class BetaToolChoice < Anthropic::Union
         abstract!
 
-        Variants = T.type_alias do
-          T.any(
-            Anthropic::Models::Beta::BetaToolChoiceAuto,
-            Anthropic::Models::Beta::BetaToolChoiceAny,
-            Anthropic::Models::Beta::BetaToolChoiceTool
-          )
-        end
-
         sig do
           override.returns(
             [

@@ -6,15 +6,17 @@ module Anthropic
 
     module Beta
       class BetaTextBlock < Anthropic::BaseModel
-        Shape = T.type_alias do
-          {
-            citations: T.nilable(T::Array[Anthropic::Models::Beta::BetaTextCitation::Variants]),
-            text: String,
-            type: Symbol
-          }
+        sig do
+          returns(
+            T.nilable(
+              T::Array[T.any(
+                Anthropic::Models::Beta::BetaCitationCharLocation,
+                Anthropic::Models::Beta::BetaCitationPageLocation,
+                Anthropic::Models::Beta::BetaCitationContentBlockLocation
+              )]
+            )
+          )
         end
-
-        sig { returns(T.nilable(T::Array[Anthropic::Models::Beta::BetaTextCitation::Variants])) }
         attr_accessor :citations
 
         sig { returns(String) }
@@ -25,15 +27,35 @@ module Anthropic
 
         sig do
           params(
-            citations: T.nilable(T::Array[Anthropic::Models::Beta::BetaTextCitation::Variants]),
+            citations: T.nilable(
+              T::Array[T.any(
+                Anthropic::Models::Beta::BetaCitationCharLocation,
+                Anthropic::Models::Beta::BetaCitationPageLocation,
+                Anthropic::Models::Beta::BetaCitationContentBlockLocation
+              )]
+            ),
             text: String,
             type: Symbol
           ).void
         end
         def initialize(citations:, text:, type: :text); end
 
-        sig { returns(Anthropic::Models::Beta::BetaTextBlock::Shape) }
-        def to_h; end
+        sig do
+          override.returns(
+            {
+              citations: T.nilable(
+                T::Array[T.any(
+                  Anthropic::Models::Beta::BetaCitationCharLocation,
+                  Anthropic::Models::Beta::BetaCitationPageLocation,
+                  Anthropic::Models::Beta::BetaCitationContentBlockLocation
+                )]
+              ),
+              text: String,
+              type: Symbol
+            }
+          )
+        end
+        def to_hash; end
       end
     end
   end

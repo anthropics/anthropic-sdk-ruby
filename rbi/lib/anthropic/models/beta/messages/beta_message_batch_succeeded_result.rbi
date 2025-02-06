@@ -5,8 +5,6 @@ module Anthropic
     module Beta
       module Messages
         class BetaMessageBatchSucceededResult < Anthropic::BaseModel
-          Shape = T.type_alias { {message: Anthropic::Models::Beta::BetaMessage, type: Symbol} }
-
           sig { returns(Anthropic::Models::Beta::BetaMessage) }
           attr_accessor :message
 
@@ -16,8 +14,8 @@ module Anthropic
           sig { params(message: Anthropic::Models::Beta::BetaMessage, type: Symbol).void }
           def initialize(message:, type: :succeeded); end
 
-          sig { returns(Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult::Shape) }
-          def to_h; end
+          sig { override.returns({message: Anthropic::Models::Beta::BetaMessage, type: Symbol}) }
+          def to_hash; end
         end
       end
     end

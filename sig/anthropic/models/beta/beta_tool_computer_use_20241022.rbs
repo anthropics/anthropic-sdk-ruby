@@ -41,7 +41,7 @@ module Anthropic
             | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::Beta::beta_tool_computer_use20241022
+        def to_hash: -> Anthropic::Models::Beta::beta_tool_computer_use20241022
       end
     end
   end

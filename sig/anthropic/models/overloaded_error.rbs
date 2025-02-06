@@ -13,7 +13,7 @@ module Anthropic
           ?Anthropic::Models::overloaded_error | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::overloaded_error
+      def to_hash: -> Anthropic::Models::overloaded_error
     end
   end
 end

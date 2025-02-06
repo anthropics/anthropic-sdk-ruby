@@ -13,7 +13,7 @@ module Anthropic
           ?Anthropic::Models::api_error_object | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::api_error_object
+      def to_hash: -> Anthropic::Models::api_error_object
     end
   end
 end

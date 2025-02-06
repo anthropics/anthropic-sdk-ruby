@@ -7,13 +7,11 @@ module Anthropic
         extend Anthropic::RequestParameters::Converter
         include Anthropic::RequestParameters
 
-        Shape = T.type_alias { T.all({}, Anthropic::RequestParameters::Shape) }
-
-        sig { params(request_options: Anthropic::RequestOpts).void }
+        sig { params(request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])).void }
         def initialize(request_options: {}); end
 
-        sig { returns(Anthropic::Models::Messages::BatchDeleteParams::Shape) }
-        def to_h; end
+        sig { override.returns({request_options: Anthropic::RequestOptions}) }
+        def to_hash; end
       end
     end
   end

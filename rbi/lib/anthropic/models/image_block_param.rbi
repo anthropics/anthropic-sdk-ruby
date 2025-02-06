@@ -3,14 +3,6 @@
 module Anthropic
   module Models
     class ImageBlockParam < Anthropic::BaseModel
-      Shape = T.type_alias do
-        {
-          source: Anthropic::Models::ImageBlockParam::Source,
-          type: Symbol,
-          cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral)
-        }
-      end
-
       sig { returns(Anthropic::Models::ImageBlockParam::Source) }
       attr_accessor :source
 
@@ -29,12 +21,18 @@ module Anthropic
       end
       def initialize(source:, cache_control: nil, type: :image); end
 
-      sig { returns(Anthropic::Models::ImageBlockParam::Shape) }
-      def to_h; end
+      sig do
+        override.returns(
+          {
+            source: Anthropic::Models::ImageBlockParam::Source,
+            type: Symbol,
+            cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral)
+          }
+        )
+      end
+      def to_hash; end
 
       class Source < Anthropic::BaseModel
-        Shape = T.type_alias { {data: String, media_type: Symbol, type: Symbol} }
-
         sig { returns(String) }
         attr_accessor :data
 
@@ -47,8 +45,8 @@ module Anthropic
         sig { params(data: String, media_type: Symbol, type: Symbol).void }
         def initialize(data:, media_type:, type: :base64); end
 
-        sig { returns(Anthropic::Models::ImageBlockParam::Source::Shape) }
-        def to_h; end
+        sig { override.returns({data: String, media_type: Symbol, type: Symbol}) }
+        def to_hash; end
 
         class MediaType < Anthropic::Enum
           abstract!

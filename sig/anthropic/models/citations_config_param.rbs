@@ -13,7 +13,7 @@ module Anthropic
           ?Anthropic::Models::citations_config_param | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::citations_config_param
+      def to_hash: -> Anthropic::Models::citations_config_param
     end
   end
 end

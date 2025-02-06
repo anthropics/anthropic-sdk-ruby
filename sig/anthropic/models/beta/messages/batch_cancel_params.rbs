@@ -24,7 +24,7 @@ module Anthropic
               | Anthropic::BaseModel data
             ) -> void
 
-          def to_h: -> Anthropic::Models::Beta::Messages::batch_cancel_params
+          def to_hash: -> Anthropic::Models::Beta::Messages::batch_cancel_params
         end
       end
     end

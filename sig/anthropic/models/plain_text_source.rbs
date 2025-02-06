@@ -16,7 +16,7 @@ module Anthropic
           ?Anthropic::Models::plain_text_source | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::plain_text_source
+      def to_hash: -> Anthropic::Models::plain_text_source
     end
   end
 end

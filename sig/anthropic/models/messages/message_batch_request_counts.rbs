@@ -37,7 +37,7 @@ module Anthropic
             | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::Messages::message_batch_request_counts
+        def to_hash: -> Anthropic::Models::Messages::message_batch_request_counts
       end
     end
   end

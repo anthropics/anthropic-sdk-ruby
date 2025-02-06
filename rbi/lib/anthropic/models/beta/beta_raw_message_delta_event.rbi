@@ -6,14 +6,6 @@ module Anthropic
 
     module Beta
       class BetaRawMessageDeltaEvent < Anthropic::BaseModel
-        Shape = T.type_alias do
-          {
-            delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta,
-            type: Symbol,
-            usage: Anthropic::Models::Beta::BetaMessageDeltaUsage
-          }
-        end
-
         sig { returns(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta) }
         attr_accessor :delta
 
@@ -32,12 +24,18 @@ module Anthropic
         end
         def initialize(delta:, usage:, type: :message_delta); end
 
-        sig { returns(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Shape) }
-        def to_h; end
+        sig do
+          override.returns(
+            {
+              delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta,
+              type: Symbol,
+              usage: Anthropic::Models::Beta::BetaMessageDeltaUsage
+            }
+          )
+        end
+        def to_hash; end
 
         class Delta < Anthropic::BaseModel
-          Shape = T.type_alias { {stop_reason: T.nilable(Symbol), stop_sequence: T.nilable(String)} }
-
           sig { returns(T.nilable(Symbol)) }
           attr_accessor :stop_reason
 
@@ -47,8 +45,8 @@ module Anthropic
           sig { params(stop_reason: T.nilable(Symbol), stop_sequence: T.nilable(String)).void }
           def initialize(stop_reason:, stop_sequence:); end
 
-          sig { returns(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::Shape) }
-          def to_h; end
+          sig { override.returns({stop_reason: T.nilable(Symbol), stop_sequence: T.nilable(String)}) }
+          def to_hash; end
 
           class StopReason < Anthropic::Enum
             abstract!

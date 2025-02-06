@@ -48,7 +48,7 @@ module Anthropic
             ?Anthropic::Models::Beta::beta_message | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::Beta::beta_message
+        def to_hash: -> Anthropic::Models::Beta::beta_message
 
         type stop_reason = :end_turn | :max_tokens | :stop_sequence | :tool_use
 

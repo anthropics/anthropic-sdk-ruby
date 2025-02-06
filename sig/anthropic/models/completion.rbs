@@ -30,7 +30,7 @@ module Anthropic
         ) -> void
         | (?Anthropic::Models::completion | Anthropic::BaseModel data) -> void
 
-      def to_h: -> Anthropic::Models::completion
+      def to_hash: -> Anthropic::Models::completion
     end
   end
 end

@@ -8,15 +8,6 @@ module Anthropic
       class MessageBatchResult < Anthropic::Union
         abstract!
 
-        Variants = T.type_alias do
-          T.any(
-            Anthropic::Models::Messages::MessageBatchSucceededResult,
-            Anthropic::Models::Messages::MessageBatchErroredResult,
-            Anthropic::Models::Messages::MessageBatchCanceledResult,
-            Anthropic::Models::Messages::MessageBatchExpiredResult
-          )
-        end
-
         sig do
           override.returns(
             [

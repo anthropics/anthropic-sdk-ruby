@@ -25,7 +25,7 @@ module Anthropic
           | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::raw_message_delta_event
+      def to_hash: -> Anthropic::Models::raw_message_delta_event
 
       type delta =
         {
@@ -48,7 +48,7 @@ module Anthropic
             | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::RawMessageDeltaEvent::delta
+        def to_hash: -> Anthropic::Models::RawMessageDeltaEvent::delta
 
         type stop_reason = :end_turn | :max_tokens | :stop_sequence | :tool_use
 

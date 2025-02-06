@@ -6,10 +6,6 @@ module Anthropic
 
     module Messages
       class MessageBatchRequestCounts < Anthropic::BaseModel
-        Shape = T.type_alias do
-          {canceled: Integer, errored: Integer, expired: Integer, processing: Integer, succeeded: Integer}
-        end
-
         sig { returns(Integer) }
         attr_accessor :canceled
 
@@ -36,8 +32,18 @@ module Anthropic
         end
         def initialize(canceled:, errored:, expired:, processing:, succeeded:); end
 
-        sig { returns(Anthropic::Models::Messages::MessageBatchRequestCounts::Shape) }
-        def to_h; end
+        sig do
+          override.returns(
+            {
+              canceled: Integer,
+              errored: Integer,
+              expired: Integer,
+              processing: Integer,
+              succeeded: Integer
+            }
+          )
+        end
+        def to_hash; end
       end
     end
   end

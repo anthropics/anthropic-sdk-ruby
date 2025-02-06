@@ -21,7 +21,7 @@ module Anthropic
         ) -> void
         | (?Anthropic::Models::model_info | Anthropic::BaseModel data) -> void
 
-      def to_h: -> Anthropic::Models::model_info
+      def to_hash: -> Anthropic::Models::model_info
     end
   end
 end

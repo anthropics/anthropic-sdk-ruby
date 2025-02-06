@@ -6,17 +6,6 @@ module Anthropic
 
     module Beta
       class BetaCitationContentBlockLocation < Anthropic::BaseModel
-        Shape = T.type_alias do
-          {
-            cited_text: String,
-            document_index: Integer,
-            document_title: T.nilable(String),
-            end_block_index: Integer,
-            start_block_index: Integer,
-            type: Symbol
-          }
-        end
-
         sig { returns(String) }
         attr_accessor :cited_text
 
@@ -54,8 +43,19 @@ module Anthropic
           type: :content_block_location
         ); end
 
-        sig { returns(Anthropic::Models::Beta::BetaCitationContentBlockLocation::Shape) }
-        def to_h; end
+        sig do
+          override.returns(
+            {
+              cited_text: String,
+              document_index: Integer,
+              document_title: T.nilable(String),
+              end_block_index: Integer,
+              start_block_index: Integer,
+              type: Symbol
+            }
+          )
+        end
+        def to_hash; end
       end
     end
   end

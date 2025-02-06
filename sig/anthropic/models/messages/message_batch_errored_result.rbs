@@ -19,7 +19,7 @@ module Anthropic
             | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::Messages::message_batch_errored_result
+        def to_hash: -> Anthropic::Models::Messages::message_batch_errored_result
       end
     end
   end

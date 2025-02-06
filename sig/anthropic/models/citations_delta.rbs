@@ -20,7 +20,7 @@ module Anthropic
           ?Anthropic::Models::citations_delta | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::citations_delta
+      def to_hash: -> Anthropic::Models::citations_delta
 
       type citation =
         Anthropic::Models::CitationCharLocation

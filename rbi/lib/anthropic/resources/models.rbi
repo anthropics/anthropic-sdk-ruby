@@ -6,7 +6,7 @@ module Anthropic
       sig do
         params(
           model_id: String,
-          request_options: Anthropic::RequestOpts
+          request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
         ).returns(Anthropic::Models::ModelInfo)
       end
       def retrieve(model_id, request_options: {}); end
@@ -16,7 +16,7 @@ module Anthropic
           after_id: String,
           before_id: String,
           limit: Integer,
-          request_options: Anthropic::RequestOpts
+          request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
         ).returns(Anthropic::Page[Anthropic::Models::ModelInfo])
       end
       def list(after_id: nil, before_id: nil, limit: nil, request_options: {}); end

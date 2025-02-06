@@ -11,18 +11,27 @@ module Anthropic
           params(
             max_tokens: Integer,
             messages: T::Array[Anthropic::Models::Beta::BetaMessageParam],
-            model: Anthropic::Models::Model::Variants,
+            model: T.any(Symbol, String),
             stream: T::Boolean,
             metadata: Anthropic::Models::Beta::BetaMetadata,
             stop_sequences: T::Array[String],
-            system_: Anthropic::Models::Beta::MessageCreateParams::System::Variants,
+            system_: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]),
             temperature: Float,
-            tool_choice: Anthropic::Models::Beta::BetaToolChoice::Variants,
-            tools: T::Array[Anthropic::Models::Beta::BetaToolUnion::Variants],
+            tool_choice: T.any(
+              Anthropic::Models::Beta::BetaToolChoiceAuto,
+              Anthropic::Models::Beta::BetaToolChoiceAny,
+              Anthropic::Models::Beta::BetaToolChoiceTool
+            ),
+            tools: T::Array[T.any(
+              Anthropic::Models::Beta::BetaTool,
+              Anthropic::Models::Beta::BetaToolComputerUse20241022,
+              Anthropic::Models::Beta::BetaToolBash20241022,
+              Anthropic::Models::Beta::BetaToolTextEditor20241022
+            )],
             top_k: Integer,
             top_p: Float,
-            betas: T::Array[Anthropic::Models::AnthropicBeta::Variants],
-            request_options: Anthropic::RequestOpts
+            betas: T::Array[T.any(String, Symbol)],
+            request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
           ).returns(Anthropic::Models::Beta::BetaMessage)
         end
         def create(
@@ -45,12 +54,21 @@ module Anthropic
         sig do
           params(
             messages: T::Array[Anthropic::Models::Beta::BetaMessageParam],
-            model: Anthropic::Models::Model::Variants,
-            system_: Anthropic::Models::Beta::MessageCountTokensParams::System::Variants,
-            tool_choice: Anthropic::Models::Beta::BetaToolChoice::Variants,
-            tools: T::Array[Anthropic::Models::Beta::MessageCountTokensParams::Tool::Variants],
-            betas: T::Array[Anthropic::Models::AnthropicBeta::Variants],
-            request_options: Anthropic::RequestOpts
+            model: T.any(Symbol, String),
+            system_: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]),
+            tool_choice: T.any(
+              Anthropic::Models::Beta::BetaToolChoiceAuto,
+              Anthropic::Models::Beta::BetaToolChoiceAny,
+              Anthropic::Models::Beta::BetaToolChoiceTool
+            ),
+            tools: T::Array[T.any(
+              Anthropic::Models::Beta::BetaTool,
+              Anthropic::Models::Beta::BetaToolComputerUse20241022,
+              Anthropic::Models::Beta::BetaToolBash20241022,
+              Anthropic::Models::Beta::BetaToolTextEditor20241022
+            )],
+            betas: T::Array[T.any(String, Symbol)],
+            request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
           ).returns(Anthropic::Models::Beta::BetaMessageTokensCount)
         end
         def count_tokens(

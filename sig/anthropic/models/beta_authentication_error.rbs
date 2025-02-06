@@ -15,7 +15,7 @@ module Anthropic
           | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::beta_authentication_error
+      def to_hash: -> Anthropic::Models::beta_authentication_error
     end
   end
 end

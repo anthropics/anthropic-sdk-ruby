@@ -6,11 +6,17 @@ module Anthropic
 
     module Beta
       class BetaContentBlockSource < Anthropic::BaseModel
-        Shape = T.type_alias do
-          {content: Anthropic::Models::Beta::BetaContentBlockSource::Content::Variants, type: Symbol}
+        sig do
+          returns(
+            T.any(
+              String,
+              T::Array[T.any(
+                Anthropic::Models::Beta::BetaTextBlockParam,
+                Anthropic::Models::Beta::BetaImageBlockParam
+              )]
+            )
+          )
         end
-
-        sig { returns(Anthropic::Models::Beta::BetaContentBlockSource::Content::Variants) }
         attr_accessor :content
 
         sig { returns(Symbol) }
@@ -18,31 +24,55 @@ module Anthropic
 
         sig do
           params(
-            content: Anthropic::Models::Beta::BetaContentBlockSource::Content::Variants,
+            content: T.any(
+              String,
+              T::Array[T.any(
+                Anthropic::Models::Beta::BetaTextBlockParam,
+                Anthropic::Models::Beta::BetaImageBlockParam
+              )]
+            ),
             type: Symbol
           ).void
         end
         def initialize(content:, type: :content); end
 
-        sig { returns(Anthropic::Models::Beta::BetaContentBlockSource::Shape) }
-        def to_h; end
+        sig do
+          override.returns(
+            {
+              content: T.any(
+                String,
+                T::Array[T.any(
+                  Anthropic::Models::Beta::BetaTextBlockParam,
+                  Anthropic::Models::Beta::BetaImageBlockParam
+                )]
+              ),
+              type: Symbol
+            }
+          )
+        end
+        def to_hash; end
 
         class Content < Anthropic::Union
           abstract!
 
-          Variants = T.type_alias do
-            T.any(String, T::Array[Anthropic::Models::Beta::BetaContentBlockSourceContent::Variants])
-          end
-
           BetaContentBlockSourceContentArray = T.type_alias do
-            T::Array[Anthropic::Models::Beta::BetaContentBlockSourceContent::Variants]
+            T::Array[T.any(
+              Anthropic::Models::Beta::BetaTextBlockParam,
+              Anthropic::Models::Beta::BetaImageBlockParam
+            )]
           end
 
           sig do
             override.returns(
               [
                 [NilClass, String],
-                [NilClass, T::Array[Anthropic::Models::Beta::BetaContentBlockSourceContent::Variants]]
+                [
+                  NilClass,
+                  T::Array[T.any(
+                    Anthropic::Models::Beta::BetaTextBlockParam,
+                    Anthropic::Models::Beta::BetaImageBlockParam
+                  )]
+                ]
               ]
             )
           end

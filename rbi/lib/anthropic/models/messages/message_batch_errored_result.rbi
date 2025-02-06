@@ -6,8 +6,6 @@ module Anthropic
 
     module Messages
       class MessageBatchErroredResult < Anthropic::BaseModel
-        Shape = T.type_alias { {error: Anthropic::Models::ErrorResponse, type: Symbol} }
-
         sig { returns(Anthropic::Models::ErrorResponse) }
         attr_accessor :error
 
@@ -17,8 +15,8 @@ module Anthropic
         sig { params(error: Anthropic::Models::ErrorResponse, type: Symbol).void }
         def initialize(error:, type: :errored); end
 
-        sig { returns(Anthropic::Models::Messages::MessageBatchErroredResult::Shape) }
-        def to_h; end
+        sig { override.returns({error: Anthropic::Models::ErrorResponse, type: Symbol}) }
+        def to_hash; end
       end
     end
   end

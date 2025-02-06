@@ -15,7 +15,7 @@ module Anthropic
         #   @option params [Array<Anthropic::Models::Messages::BatchCreateParams::Request>] :requests List of requests for prompt completion. Each is an individual request to create
         #     a Message.
         #
-        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}] :request_options
+        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [Anthropic::Models::Messages::MessageBatch]
         #
@@ -38,7 +38,7 @@ module Anthropic
         #
         # @param params [Anthropic::Models::Messages::BatchRetrieveParams, Hash{Symbol=>Object}] .
         #
-        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}] :request_options
+        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [Anthropic::Models::Messages::MessageBatch]
         #
@@ -66,7 +66,7 @@ module Anthropic
         #
         #     Defaults to `20`. Ranges from `1` to `1000`.
         #
-        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}] :request_options
+        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [Anthropic::Page<Anthropic::Models::Messages::MessageBatch>]
         #
@@ -91,7 +91,7 @@ module Anthropic
         #
         # @param params [Anthropic::Models::Messages::BatchDeleteParams, Hash{Symbol=>Object}] .
         #
-        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}] :request_options
+        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [Anthropic::Models::Messages::DeletedMessageBatch]
         #
@@ -118,7 +118,7 @@ module Anthropic
         #
         # @param params [Anthropic::Models::Messages::BatchCancelParams, Hash{Symbol=>Object}] .
         #
-        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}] :request_options
+        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [Anthropic::Models::Messages::MessageBatch]
         #
@@ -141,7 +141,7 @@ module Anthropic
         #
         # @param params [Anthropic::Models::Messages::BatchResultsParams, Hash{Symbol=>Object}] .
         #
-        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}] :request_options
+        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [Anthropic::Models::Messages::MessageBatchIndividualResponse]
         #

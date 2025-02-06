@@ -3,18 +3,15 @@
 module Anthropic
   module Models
     class DocumentBlockParam < Anthropic::BaseModel
-      Shape = T.type_alias do
-        {
-          source: Anthropic::Models::DocumentBlockParam::Source::Variants,
-          type: Symbol,
-          cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
-          citations: Anthropic::Models::CitationsConfigParam,
-          context: T.nilable(String),
-          title: T.nilable(String)
-        }
+      sig do
+        returns(
+          T.any(
+            Anthropic::Models::Base64PDFSource,
+            Anthropic::Models::PlainTextSource,
+            Anthropic::Models::ContentBlockSource
+          )
+        )
       end
-
-      sig { returns(Anthropic::Models::DocumentBlockParam::Source::Variants) }
       attr_accessor :source
 
       sig { returns(Symbol) }
@@ -37,7 +34,11 @@ module Anthropic
 
       sig do
         params(
-          source: Anthropic::Models::DocumentBlockParam::Source::Variants,
+          source: T.any(
+            Anthropic::Models::Base64PDFSource,
+            Anthropic::Models::PlainTextSource,
+            Anthropic::Models::ContentBlockSource
+          ),
           cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
           citations: Anthropic::Models::CitationsConfigParam,
           context: T.nilable(String),
@@ -48,19 +49,26 @@ module Anthropic
       def initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document)
       end
 
-      sig { returns(Anthropic::Models::DocumentBlockParam::Shape) }
-      def to_h; end
+      sig do
+        override.returns(
+          {
+            source: T.any(
+              Anthropic::Models::Base64PDFSource,
+              Anthropic::Models::PlainTextSource,
+              Anthropic::Models::ContentBlockSource
+            ),
+            type: Symbol,
+            cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
+            citations: Anthropic::Models::CitationsConfigParam,
+            context: T.nilable(String),
+            title: T.nilable(String)
+          }
+        )
+      end
+      def to_hash; end
 
       class Source < Anthropic::Union
         abstract!
-
-        Variants = T.type_alias do
-          T.any(
-            Anthropic::Models::Base64PDFSource,
-            Anthropic::Models::PlainTextSource,
-            Anthropic::Models::ContentBlockSource
-          )
-        end
 
         sig do
           override.returns(

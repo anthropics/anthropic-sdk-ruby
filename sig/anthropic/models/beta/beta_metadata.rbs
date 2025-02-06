@@ -15,7 +15,7 @@ module Anthropic
             ?Anthropic::Models::Beta::beta_metadata | Anthropic::BaseModel data
           ) -> void
 
-        def to_h: -> Anthropic::Models::Beta::beta_metadata
+        def to_hash: -> Anthropic::Models::Beta::beta_metadata
       end
     end
   end

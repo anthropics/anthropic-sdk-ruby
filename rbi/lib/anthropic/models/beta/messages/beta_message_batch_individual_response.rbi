@@ -5,26 +5,48 @@ module Anthropic
     module Beta
       module Messages
         class BetaMessageBatchIndividualResponse < Anthropic::BaseModel
-          Shape = T.type_alias do
-            {custom_id: String, result: Anthropic::Models::Beta::Messages::BetaMessageBatchResult::Variants}
-          end
-
           sig { returns(String) }
           attr_accessor :custom_id
 
-          sig { returns(Anthropic::Models::Beta::Messages::BetaMessageBatchResult::Variants) }
+          sig do
+            returns(
+              T.any(
+                Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult,
+                Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult,
+                Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
+                Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
+              )
+            )
+          end
           attr_accessor :result
 
           sig do
             params(
               custom_id: String,
-              result: Anthropic::Models::Beta::Messages::BetaMessageBatchResult::Variants
+              result: T.any(
+                Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult,
+                Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult,
+                Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
+                Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
+              )
             ).void
           end
           def initialize(custom_id:, result:); end
 
-          sig { returns(Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse::Shape) }
-          def to_h; end
+          sig do
+            override.returns(
+              {
+                custom_id: String,
+                result: T.any(
+                  Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult,
+                  Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult,
+                  Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
+                  Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
+                )
+              }
+            )
+          end
+          def to_hash; end
         end
       end
     end

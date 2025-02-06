@@ -13,7 +13,7 @@ module Anthropic
           ?Anthropic::Models::beta_permission_error | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::beta_permission_error
+      def to_hash: -> Anthropic::Models::beta_permission_error
     end
   end
 end

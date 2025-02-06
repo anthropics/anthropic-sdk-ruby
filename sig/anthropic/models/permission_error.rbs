@@ -13,7 +13,7 @@ module Anthropic
           ?Anthropic::Models::permission_error | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::permission_error
+      def to_hash: -> Anthropic::Models::permission_error
     end
   end
 end

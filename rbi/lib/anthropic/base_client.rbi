@@ -14,13 +14,7 @@ module Anthropic
         unwrap: T.nilable(Symbol),
         page: T.nilable(T::Class[Anthropic::BaseModel]),
         model: T.nilable(Anthropic::Converter::Input),
-        options: T.nilable(
-          T.any(
-            Anthropic::RequestOptions,
-            Anthropic::RequestOptions::Shape,
-            T::Hash[Symbol, T.anything]
-          )
-        )
+        options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
       }
     end
 
@@ -75,7 +69,7 @@ module Anthropic
     sig do
       params(
         req: Anthropic::BaseClient::RequestShape,
-        opts: Anthropic::RequestOptions::Shape
+        opts: T::Hash[Symbol, T.anything]
       ).returns(Anthropic::BaseClient::NormalizedRequestShape)
     end
     private def build_request(req, opts); end
@@ -118,13 +112,7 @@ module Anthropic
         unwrap: T.nilable(Symbol),
         page: T.nilable(T::Class[Anthropic::BaseModel]),
         model: T.nilable(Anthropic::Converter::Input),
-        options: T.nilable(
-          T.any(
-            Anthropic::RequestOptions,
-            Anthropic::RequestOptions::Shape,
-            T::Hash[Symbol, T.anything]
-          )
-        )
+        options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
       ).returns(T.anything)
     end
     def request(

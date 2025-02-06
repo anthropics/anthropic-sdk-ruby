@@ -3,15 +3,6 @@
 module Anthropic
   module Models
     class Tool < Anthropic::BaseModel
-      Shape = T.type_alias do
-        {
-          input_schema: Anthropic::Models::Tool::InputSchema,
-          name: String,
-          cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
-          description: String
-        }
-      end
-
       sig { returns(Anthropic::Models::Tool::InputSchema) }
       attr_accessor :input_schema
 
@@ -37,12 +28,19 @@ module Anthropic
       end
       def initialize(input_schema:, name:, cache_control: nil, description: nil); end
 
-      sig { returns(Anthropic::Models::Tool::Shape) }
-      def to_h; end
+      sig do
+        override.returns(
+          {
+            input_schema: Anthropic::Models::Tool::InputSchema,
+            name: String,
+            cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
+            description: String
+          }
+        )
+      end
+      def to_hash; end
 
       class InputSchema < Anthropic::BaseModel
-        Shape = T.type_alias { {type: Symbol, properties: T.nilable(T.anything)} }
-
         sig { returns(Symbol) }
         attr_accessor :type
 
@@ -52,8 +50,8 @@ module Anthropic
         sig { params(properties: T.nilable(T.anything), type: Symbol).void }
         def initialize(properties: nil, type: :object); end
 
-        sig { returns(Anthropic::Models::Tool::InputSchema::Shape) }
-        def to_h; end
+        sig { override.returns({type: Symbol, properties: T.nilable(T.anything)}) }
+        def to_hash; end
       end
     end
   end

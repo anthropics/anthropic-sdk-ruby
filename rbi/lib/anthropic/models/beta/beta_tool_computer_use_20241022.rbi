@@ -6,17 +6,6 @@ module Anthropic
 
     module Beta
       class BetaToolComputerUse20241022 < Anthropic::BaseModel
-        Shape = T.type_alias do
-          {
-            display_height_px: Integer,
-            display_width_px: Integer,
-            name: Symbol,
-            type: Symbol,
-            cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
-            display_number: T.nilable(Integer)
-          }
-        end
-
         sig { returns(Integer) }
         attr_accessor :display_height_px
 
@@ -54,8 +43,19 @@ module Anthropic
           type: :computer_20241022
         ); end
 
-        sig { returns(Anthropic::Models::Beta::BetaToolComputerUse20241022::Shape) }
-        def to_h; end
+        sig do
+          override.returns(
+            {
+              display_height_px: Integer,
+              display_width_px: Integer,
+              name: Symbol,
+              type: Symbol,
+              cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
+              display_number: T.nilable(Integer)
+            }
+          )
+        end
+        def to_hash; end
       end
     end
   end

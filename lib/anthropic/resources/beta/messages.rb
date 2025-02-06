@@ -239,7 +239,7 @@ module Anthropic
         #
         #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Header param: Optional header to specify the beta version(s) you want to use.
         #
-        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}] :request_options
+        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [Anthropic::Models::Beta::BetaMessage]
         #
@@ -432,7 +432,7 @@ module Anthropic
         #
         #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Header param: Optional header to specify the beta version(s) you want to use.
         #
-        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}] :request_options
+        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [Anthropic::Models::Beta::BetaMessageTokensCount]
         #

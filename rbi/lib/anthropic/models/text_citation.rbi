@@ -5,14 +5,6 @@ module Anthropic
     class TextCitation < Anthropic::Union
       abstract!
 
-      Variants = T.type_alias do
-        T.any(
-          Anthropic::Models::CitationCharLocation,
-          Anthropic::Models::CitationPageLocation,
-          Anthropic::Models::CitationContentBlockLocation
-        )
-      end
-
       sig do
         override.returns(
           [

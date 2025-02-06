@@ -3,8 +3,6 @@
 module Anthropic
   module Models
     class CitationsConfigParam < Anthropic::BaseModel
-      Shape = T.type_alias { {enabled: T::Boolean} }
-
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :enabled
 
@@ -14,8 +12,8 @@ module Anthropic
       sig { params(enabled: T::Boolean).void }
       def initialize(enabled: nil); end
 
-      sig { returns(Anthropic::Models::CitationsConfigParam::Shape) }
-      def to_h; end
+      sig { override.returns({enabled: T::Boolean}) }
+      def to_hash; end
     end
   end
 end

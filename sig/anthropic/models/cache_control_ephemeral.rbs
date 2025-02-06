@@ -12,7 +12,7 @@ module Anthropic
           | Anthropic::BaseModel data
         ) -> void
 
-      def to_h: -> Anthropic::Models::cache_control_ephemeral
+      def to_hash: -> Anthropic::Models::cache_control_ephemeral
     end
   end
 end
