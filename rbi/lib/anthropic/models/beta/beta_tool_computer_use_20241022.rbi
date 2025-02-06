@@ -41,7 +41,8 @@ module Anthropic
           display_number: nil,
           name: :computer,
           type: :computer_20241022
-        ); end
+        )
+        end
 
         sig do
           override.returns(
@@ -55,7 +56,8 @@ module Anthropic
             }
           )
         end
-        def to_hash; end
+        def to_hash
+        end
       end
     end
   end

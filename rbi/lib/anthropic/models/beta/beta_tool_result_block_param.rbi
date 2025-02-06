@@ -64,7 +64,8 @@ module Anthropic
             type: Symbol
           ).void
         end
-        def initialize(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result); end
+        def initialize(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result)
+        end
 
         sig do
           override.returns(
@@ -83,7 +84,8 @@ module Anthropic
             }
           )
         end
-        def to_hash; end
+        def to_hash
+        end
 
         class Content < Anthropic::Union
           abstract!
@@ -106,7 +108,8 @@ module Anthropic
                 ]
               )
             end
-            private_class_method def self.variants; end
+            private_class_method def self.variants
+            end
           end
 
           sig do
@@ -123,7 +126,8 @@ module Anthropic
               ]
             )
           end
-          private_class_method def self.variants; end
+          private_class_method def self.variants
+          end
         end
       end
     end

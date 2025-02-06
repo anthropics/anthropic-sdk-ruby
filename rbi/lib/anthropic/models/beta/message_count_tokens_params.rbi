@@ -128,7 +128,8 @@ module Anthropic
             }
           )
         end
-        def to_hash; end
+        def to_hash
+        end
 
         class System < Anthropic::Union
           abstract!
@@ -143,7 +144,8 @@ module Anthropic
               ]
             )
           end
-          private_class_method def self.variants; end
+          private_class_method def self.variants
+          end
         end
 
         class Tool < Anthropic::Union
@@ -159,7 +161,8 @@ module Anthropic
               ]
             )
           end
-          private_class_method def self.variants; end
+          private_class_method def self.variants
+          end
         end
       end
     end

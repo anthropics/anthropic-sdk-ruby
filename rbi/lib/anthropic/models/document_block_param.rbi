@@ -65,7 +65,8 @@ module Anthropic
           }
         )
       end
-      def to_hash; end
+      def to_hash
+      end
 
       class Source < Anthropic::Union
         abstract!
@@ -79,7 +80,8 @@ module Anthropic
             ]
           )
         end
-        private_class_method def self.variants; end
+        private_class_method def self.variants
+        end
       end
     end
   end

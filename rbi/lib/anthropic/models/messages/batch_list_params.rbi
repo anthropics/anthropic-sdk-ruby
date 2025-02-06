@@ -33,7 +33,8 @@ module Anthropic
             request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
           ).void
         end
-        def initialize(after_id: nil, before_id: nil, limit: nil, request_options: {}); end
+        def initialize(after_id: nil, before_id: nil, limit: nil, request_options: {})
+        end
 
         sig do
           override.returns(
@@ -45,7 +46,8 @@ module Anthropic
             }
           )
         end
-        def to_hash; end
+        def to_hash
+        end
       end
     end
   end

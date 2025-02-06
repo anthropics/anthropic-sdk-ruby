@@ -12,7 +12,8 @@ module Anthropic
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
             ).returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
           end
-          def create(requests:, betas: nil, request_options: {}); end
+          def create(requests:, betas: nil, request_options: {})
+          end
 
           sig do
             params(
@@ -21,7 +22,8 @@ module Anthropic
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
             ).returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
           end
-          def retrieve(message_batch_id, betas: nil, request_options: {}); end
+          def retrieve(message_batch_id, betas: nil, request_options: {})
+          end
 
           sig do
             params(
@@ -32,7 +34,8 @@ module Anthropic
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
             ).returns(Anthropic::Page[Anthropic::Models::Beta::Messages::BetaMessageBatch])
           end
-          def list(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {}); end
+          def list(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {})
+          end
 
           sig do
             params(
@@ -41,7 +44,8 @@ module Anthropic
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
             ).returns(Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch)
           end
-          def delete(message_batch_id, betas: nil, request_options: {}); end
+          def delete(message_batch_id, betas: nil, request_options: {})
+          end
 
           sig do
             params(
@@ -50,7 +54,8 @@ module Anthropic
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
             ).returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
           end
-          def cancel(message_batch_id, betas: nil, request_options: {}); end
+          def cancel(message_batch_id, betas: nil, request_options: {})
+          end
 
           sig do
             params(
@@ -59,10 +64,12 @@ module Anthropic
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
             ).returns(Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse)
           end
-          def results(message_batch_id, betas: nil, request_options: {}); end
+          def results(message_batch_id, betas: nil, request_options: {})
+          end
 
           sig { params(client: Anthropic::Client).void }
-          def initialize(client:); end
+          def initialize(client:)
+          end
         end
       end
     end

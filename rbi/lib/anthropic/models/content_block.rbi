@@ -8,7 +8,8 @@ module Anthropic
       sig do
         override.returns([[Symbol, Anthropic::Models::TextBlock], [Symbol, Anthropic::Models::ToolUseBlock]])
       end
-      private_class_method def self.variants; end
+      private_class_method def self.variants
+      end
     end
   end
 end

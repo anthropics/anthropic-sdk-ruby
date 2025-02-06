@@ -19,10 +19,12 @@ module Anthropic
         attr_accessor :type
 
         sig { params(id: String, created_at: Time, display_name: String, type: Symbol).void }
-        def initialize(id:, created_at:, display_name:, type: :model); end
+        def initialize(id:, created_at:, display_name:, type: :model)
+        end
 
         sig { override.returns({id: String, created_at: Time, display_name: String, type: Symbol}) }
-        def to_hash; end
+        def to_hash
+        end
       end
     end
   end

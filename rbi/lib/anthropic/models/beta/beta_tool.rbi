@@ -33,7 +33,8 @@ module Anthropic
             type: T.nilable(Symbol)
           ).void
         end
-        def initialize(input_schema:, name:, cache_control: nil, description: nil, type: nil); end
+        def initialize(input_schema:, name:, cache_control: nil, description: nil, type: nil)
+        end
 
         sig do
           override.returns(
@@ -46,7 +47,8 @@ module Anthropic
             }
           )
         end
-        def to_hash; end
+        def to_hash
+        end
 
         class InputSchema < Anthropic::BaseModel
           sig { returns(Symbol) }
@@ -56,10 +58,12 @@ module Anthropic
           attr_accessor :properties
 
           sig { params(properties: T.nilable(T.anything), type: Symbol).void }
-          def initialize(properties: nil, type: :object); end
+          def initialize(properties: nil, type: :object)
+          end
 
           sig { override.returns({type: Symbol, properties: T.nilable(T.anything)}) }
-          def to_hash; end
+          def to_hash
+          end
         end
 
         class Type < Anthropic::Enum
@@ -68,7 +72,8 @@ module Anthropic
           CUSTOM = T.let(:custom, T.nilable(Symbol))
 
           sig { override.returns(T::Array[Symbol]) }
-          def self.values; end
+          def self.values
+          end
         end
       end
     end

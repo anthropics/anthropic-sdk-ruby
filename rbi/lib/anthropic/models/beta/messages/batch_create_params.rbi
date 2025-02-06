@@ -24,7 +24,8 @@ module Anthropic
               request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
             ).void
           end
-          def initialize(requests:, betas: nil, request_options: {}); end
+          def initialize(requests:, betas: nil, request_options: {})
+          end
 
           sig do
             override.returns(
@@ -35,7 +36,8 @@ module Anthropic
               }
             )
           end
-          def to_hash; end
+          def to_hash
+          end
 
           class Request < Anthropic::BaseModel
             sig { returns(String) }
@@ -50,7 +52,8 @@ module Anthropic
                 params: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params
               ).void
             end
-            def initialize(custom_id:, params:); end
+            def initialize(custom_id:, params:)
+            end
 
             sig do
               override.returns(
@@ -60,7 +63,8 @@ module Anthropic
                 }
               )
             end
-            def to_hash; end
+            def to_hash
+            end
 
             class Params < Anthropic::BaseModel
               sig { returns(Integer) }
@@ -204,7 +208,8 @@ module Anthropic
                 tools: nil,
                 top_k: nil,
                 top_p: nil
-              ); end
+              )
+              end
 
               sig do
                 override.returns(
@@ -233,7 +238,8 @@ module Anthropic
                   }
                 )
               end
-              def to_hash; end
+              def to_hash
+              end
 
               class System < Anthropic::Union
                 abstract!
@@ -250,7 +256,8 @@ module Anthropic
                     ]
                   )
                 end
-                private_class_method def self.variants; end
+                private_class_method def self.variants
+                end
               end
             end
           end

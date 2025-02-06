@@ -20,7 +20,8 @@ module Anthropic
             ]
           )
         end
-        private_class_method def self.variants; end
+        private_class_method def self.variants
+        end
       end
     end
   end

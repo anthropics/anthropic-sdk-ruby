@@ -10,7 +10,8 @@ module Anthropic
       attr_reader :messages
 
       sig { params(client: Anthropic::Client).void }
-      def initialize(client:); end
+      def initialize(client:)
+      end
     end
   end
 end

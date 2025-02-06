@@ -40,11 +40,13 @@ module Anthropic
         CLAUDE_2_0 = :"claude-2.0"
 
         sig { override.returns(T::Array[Symbol]) }
-        def self.values; end
+        def self.values
+        end
       end
 
       sig { override.returns([[NilClass, Symbol], [NilClass, String]]) }
-      private_class_method def self.variants; end
+      private_class_method def self.variants
+      end
     end
   end
 end

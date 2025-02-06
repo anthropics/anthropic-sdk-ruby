@@ -49,14 +49,7 @@ module Anthropic
             type: Symbol
           ).void
         end
-        def initialize(
-          source:,
-          cache_control: nil,
-          citations: nil,
-          context: nil,
-          title: nil,
-          type: :document
-        )
+        def initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document)
         end
 
         sig do
@@ -75,7 +68,8 @@ module Anthropic
             }
           )
         end
-        def to_hash; end
+        def to_hash
+        end
 
         class Source < Anthropic::Union
           abstract!
@@ -89,7 +83,8 @@ module Anthropic
               ]
             )
           end
-          private_class_method def self.variants; end
+          private_class_method def self.variants
+          end
         end
       end
     end

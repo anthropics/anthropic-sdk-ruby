@@ -9,13 +9,15 @@ module Anthropic
 
     module Converter
       sig { params(params: T.anything).returns([T.anything, T::Hash[Symbol, T.anything]]) }
-      def dump_request(params); end
+      def dump_request(params)
+      end
     end
   end
 
   class RequestOptions < Anthropic::BaseModel
     sig { params(opts: T.any(T.self_type, T::Hash[Symbol, T.anything])).void }
-    def self.validate!(opts); end
+    def self.validate!(opts)
+    end
 
     sig { returns(T.nilable(String)) }
     attr_accessor :idempotency_key

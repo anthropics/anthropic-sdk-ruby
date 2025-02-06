@@ -62,7 +62,8 @@ module Anthropic
           request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
         ).void
       end
-      def initialize(messages:, model:, system_: nil, tool_choice: nil, tools: nil, request_options: {}); end
+      def initialize(messages:, model:, system_: nil, tool_choice: nil, tools: nil, request_options: {})
+      end
 
       sig do
         override.returns(
@@ -80,7 +81,8 @@ module Anthropic
           }
         )
       end
-      def to_hash; end
+      def to_hash
+      end
 
       class System < Anthropic::Union
         abstract!
@@ -90,7 +92,8 @@ module Anthropic
         sig do
           override.returns([[NilClass, String], [NilClass, T::Array[Anthropic::Models::TextBlockParam]]])
         end
-        private_class_method def self.variants; end
+        private_class_method def self.variants
+        end
       end
     end
   end

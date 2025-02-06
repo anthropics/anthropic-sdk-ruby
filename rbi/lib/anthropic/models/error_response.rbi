@@ -39,7 +39,8 @@ module Anthropic
           type: Symbol
         ).void
       end
-      def initialize(error:, type: :error); end
+      def initialize(error:, type: :error)
+      end
 
       sig do
         override.returns(
@@ -59,7 +60,8 @@ module Anthropic
           }
         )
       end
-      def to_hash; end
+      def to_hash
+      end
     end
   end
 end

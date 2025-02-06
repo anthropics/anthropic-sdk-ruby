@@ -153,7 +153,8 @@ module Anthropic
           top_p: nil,
           betas: nil,
           request_options: {}
-        ); end
+        )
+        end
 
         sig do
           override.returns(
@@ -184,7 +185,8 @@ module Anthropic
             }
           )
         end
-        def to_hash; end
+        def to_hash
+        end
 
         class Stream < Anthropic::Enum
           abstract!
@@ -192,7 +194,8 @@ module Anthropic
           TRUE = T.let(true, T::Boolean)
 
           sig { override.returns(T::Array[T::Boolean]) }
-          def self.values; end
+          def self.values
+          end
         end
 
         class System < Anthropic::Union
@@ -208,7 +211,8 @@ module Anthropic
               ]
             )
           end
-          private_class_method def self.variants; end
+          private_class_method def self.variants
+          end
         end
       end
     end

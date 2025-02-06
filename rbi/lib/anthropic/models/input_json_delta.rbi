@@ -10,10 +10,12 @@ module Anthropic
       attr_accessor :type
 
       sig { params(partial_json: String, type: Symbol).void }
-      def initialize(partial_json:, type: :input_json_delta); end
+      def initialize(partial_json:, type: :input_json_delta)
+      end
 
       sig { override.returns({partial_json: String, type: Symbol}) }
-      def to_hash; end
+      def to_hash
+      end
     end
   end
 end

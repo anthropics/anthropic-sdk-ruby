@@ -9,10 +9,12 @@ module Anthropic
           attr_accessor :type
 
           sig { params(type: Symbol).void }
-          def initialize(type: :expired); end
+          def initialize(type: :expired)
+          end
 
           sig { override.returns({type: Symbol}) }
-          def to_hash; end
+          def to_hash
+          end
         end
       end
     end

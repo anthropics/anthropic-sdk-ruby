@@ -31,7 +31,8 @@ module Anthropic
               )
             ).void
           end
-          def initialize(custom_id:, result:); end
+          def initialize(custom_id:, result:)
+          end
 
           sig do
             override.returns(
@@ -46,7 +47,8 @@ module Anthropic
               }
             )
           end
-          def to_hash; end
+          def to_hash
+          end
         end
       end
     end

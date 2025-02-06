@@ -22,7 +22,8 @@ module Anthropic
             type: Symbol
           ).void
         end
-        def initialize(source:, cache_control: nil, type: :image); end
+        def initialize(source:, cache_control: nil, type: :image)
+        end
 
         sig do
           override.returns(
@@ -33,7 +34,8 @@ module Anthropic
             }
           )
         end
-        def to_hash; end
+        def to_hash
+        end
 
         class Source < Anthropic::BaseModel
           sig { returns(String) }
@@ -46,10 +48,12 @@ module Anthropic
           attr_accessor :type
 
           sig { params(data: String, media_type: Symbol, type: Symbol).void }
-          def initialize(data:, media_type:, type: :base64); end
+          def initialize(data:, media_type:, type: :base64)
+          end
 
           sig { override.returns({data: String, media_type: Symbol, type: Symbol}) }
-          def to_hash; end
+          def to_hash
+          end
 
           class MediaType < Anthropic::Enum
             abstract!
@@ -60,7 +64,8 @@ module Anthropic
             IMAGE_WEBP = :"image/webp"
 
             sig { override.returns(T::Array[Symbol]) }
-            def self.values; end
+            def self.values
+            end
           end
         end
       end

@@ -10,10 +10,12 @@ module Anthropic
       attr_accessor :type
 
       sig { params(text: String, type: Symbol).void }
-      def initialize(text:, type: :text_delta); end
+      def initialize(text:, type: :text_delta)
+      end
 
       sig { override.returns({text: String, type: Symbol}) }
-      def to_hash; end
+      def to_hash
+      end
     end
   end
 end
