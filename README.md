@@ -43,7 +43,10 @@ anthropic = Anthropic::Client.new(
 
 message = anthropic.messages.create(
   max_tokens: 1024,
-  messages: [{"role" => "user", "content" => "Hello, Claude"}],
+  messages: [{
+    role: "user",
+    content: "Hello, Claude"
+  }],
   model: "claude-3-5-sonnet-latest"
 )
 
@@ -60,11 +63,14 @@ non-success status code (i.e., 4xx or 5xx response), a subclass of
 begin
   message = anthropic.messages.create(
     max_tokens: 1024,
-    messages: [{"role" => "user", "content" => "Hello, Claude"}],
+    messages: [{
+      role: "user",
+      content: "Hello, Claude"
+    }],
     model: "claude-3-5-sonnet-latest"
   )
 rescue Anthropic::Error => e
-  puts(e.code) # 400
+  puts(e.status) # 400
 end
 ```
 
@@ -102,9 +108,12 @@ anthropic = Anthropic::Client.new(
 # Or, configure per-request:
 anthropic.messages.create(
   max_tokens: 1024,
-  messages: [{"role" => "user", "content" => "Hello, Claude"}],
+  messages: [{
+    role: "user",
+    content: "Hello, Claude"
+  }],
   model: "claude-3-5-sonnet-latest",
-  max_retries: 5
+  request_options: {max_retries: 5}
 )
 ```
 
@@ -125,9 +134,12 @@ anthropic = Anthropic::Client.new(
 # Or, configure per-request:
 anthropic.messages.create(
   max_tokens: 1024,
-  messages: [{"role" => "user", "content" => "Hello, Claude"}],
+  messages: [{
+    role: "user",
+    content: "Hello, Claude"
+  }],
   model: "claude-3-5-sonnet-latest",
-  timeout: 5
+  request_options: {timeout: 5}
 )
 ```
 

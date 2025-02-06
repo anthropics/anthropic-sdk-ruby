@@ -13,8 +13,8 @@ class Anthropic::Test::Resources::MessagesTest < Minitest::Test
   def test_create_required_params
     response = @anthropic.messages.create(
       max_tokens: 1024,
-      messages: [{"content" => "Hello, world", "role" => "user"}],
-      model: "claude-3-5-haiku-latest",
+      messages: [{content: "Hello, world", role: :user}],
+      model: :"claude-3-5-haiku-latest",
       stream: true
     )
 
@@ -25,8 +25,8 @@ class Anthropic::Test::Resources::MessagesTest < Minitest::Test
 
   def test_count_tokens_required_params
     response = @anthropic.messages.count_tokens(
-      messages: [{"content" => "string", "role" => "user"}],
-      model: "claude-3-5-haiku-latest"
+      messages: [{content: "string", role: :user}],
+      model: :"claude-3-5-haiku-latest"
     )
 
     assert_pattern do
