@@ -28,15 +28,15 @@ module Anthropic
         def to_hash: -> Anthropic::Models::Beta::beta_message_param
 
         type content =
-          String | Array[Anthropic::Models::Beta::beta_content_block_param]
+          String | ::Array[Anthropic::Models::Beta::beta_content_block_param]
 
         class Content < Anthropic::Union
           type beta_content_block_param_array =
-            Array[Anthropic::Models::Beta::beta_content_block_param]
+            ::Array[Anthropic::Models::Beta::beta_content_block_param]
 
           BetaContentBlockParamArray: beta_content_block_param_array
 
-          private def self.variants: -> [[nil, String], [nil, Array[Anthropic::Models::Beta::beta_content_block_param]]]
+          private def self.variants: -> [[nil, String], [nil, ::Array[Anthropic::Models::Beta::beta_content_block_param]]]
         end
 
         type role = :user | :assistant
@@ -45,7 +45,7 @@ module Anthropic
           USER: :user
           ASSISTANT: :assistant
 
-          def self.values: -> Array[Anthropic::Models::Beta::BetaMessageParam::role]
+          def self.values: -> ::Array[Anthropic::Models::Beta::BetaMessageParam::role]
         end
       end
     end

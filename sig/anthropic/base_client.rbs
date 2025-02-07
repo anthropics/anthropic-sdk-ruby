@@ -3,23 +3,23 @@ module Anthropic
     type request =
       {
         method: Symbol,
-        path: String | Array[String],
-        query: Hash[String, (Array[String] | String)?]?,
-        headers: Hash[String, String?]?,
+        path: String | ::Array[String],
+        query: ::Hash[String, (::Array[String] | String)?]?,
+        headers: ::Hash[String, String?]?,
         body: top?,
         unwrap: Symbol?,
         page: Class?,
         model: Anthropic::Converter::input?,
         options: (Anthropic::RequestOptions
         | Anthropic::request_options
-        | Hash[Symbol, top])?
+        | ::Hash[Symbol, top])?
       }
 
     type normalized_request =
       {
         method: Symbol,
         url: URI::Generic,
-        headers: Hash[String, String],
+        headers: ::Hash[String, String],
         body: top,
         max_retries: Integer,
         timeout: Float
@@ -38,11 +38,11 @@ module Anthropic
       max_retries: Integer,
       initial_retry_delay: Float,
       max_retry_delay: Float,
-      headers: Hash[String, String?],
+      headers: ::Hash[String, String?],
       idempotency_header: String?
     ) -> void
 
-    private def auth_headers: -> Hash[String, String]
+    private def auth_headers: -> ::Hash[String, String]
 
     private def generate_idempotency_key: -> String
 
@@ -53,11 +53,11 @@ module Anthropic
 
     private def should_retry?: (
       Integer status,
-      headers: Hash[String, String]
+      headers: ::Hash[String, String]
     ) -> bool
 
     private def retry_delay: (
-      Hash[String, String] headers,
+      ::Hash[String, String] headers,
       retry_count: Integer
     ) -> Float
 
@@ -82,16 +82,16 @@ module Anthropic
     def request:
       (
         Symbol method,
-        String | Array[String] path,
-        query: Hash[String, (Array[String] | String)?]?,
-        headers: Hash[String, String?]?,
+        String | ::Array[String] path,
+        query: ::Hash[String, (::Array[String] | String)?]?,
+        headers: ::Hash[String, String?]?,
         body: top?,
         unwrap: Symbol?,
         page: Class?,
         model: Anthropic::Converter::input?,
         options: (Anthropic::RequestOptions
         | Anthropic::request_options
-        | Hash[Symbol, top])?
+        | ::Hash[Symbol, top])?
       ) -> top
       | (Anthropic::BaseClient::request req) -> top
 

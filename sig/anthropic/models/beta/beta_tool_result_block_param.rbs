@@ -47,11 +47,11 @@ module Anthropic
 
         type content =
           String
-          | Array[Anthropic::Models::Beta::BetaToolResultBlockParam::Content::content]
+          | ::Array[Anthropic::Models::Beta::BetaToolResultBlockParam::Content::content]
 
         class Content < Anthropic::Union
           type content_array =
-            Array[Anthropic::Models::Beta::BetaToolResultBlockParam::Content::content]
+            ::Array[Anthropic::Models::Beta::BetaToolResultBlockParam::Content::content]
 
           ContentArray: content_array
 
@@ -63,7 +63,7 @@ module Anthropic
             private def self.variants: -> [[:text, Anthropic::Models::Beta::BetaTextBlockParam], [:image, Anthropic::Models::Beta::BetaImageBlockParam]]
           end
 
-          private def self.variants: -> [[nil, String], [nil, Array[Anthropic::Models::Beta::BetaToolResultBlockParam::Content::content]]]
+          private def self.variants: -> [[nil, String], [nil, ::Array[Anthropic::Models::Beta::BetaToolResultBlockParam::Content::content]]]
         end
       end
     end

@@ -4,7 +4,7 @@ module Anthropic
       def retrieve:
         (
           String model_id,
-          ?Anthropic::Models::ModelRetrieveParams | Hash[Symbol, top] params
+          ?Anthropic::Models::ModelRetrieveParams | ::Hash[Symbol, top] params
         ) -> Anthropic::Models::ModelInfo
         | (
           String model_id,
@@ -13,7 +13,7 @@ module Anthropic
 
       def list:
         (
-          ?Anthropic::Models::ModelListParams | Hash[Symbol, top] params
+          ?Anthropic::Models::ModelListParams | ::Hash[Symbol, top] params
         ) -> Anthropic::Page[Anthropic::Models::ModelInfo]
         | (
           after_id: String,

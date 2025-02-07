@@ -3,7 +3,7 @@ module Anthropic
     type message =
       {
         id: String,
-        content: Array[Anthropic::Models::content_block],
+        content: ::Array[Anthropic::Models::content_block],
         model: Anthropic::Models::model,
         role: :assistant,
         stop_reason: Anthropic::Models::Message::stop_reason?,
@@ -15,7 +15,7 @@ module Anthropic
     class Message < Anthropic::BaseModel
       attr_accessor id: String
 
-      attr_accessor content: Array[Anthropic::Models::content_block]
+      attr_accessor content: ::Array[Anthropic::Models::content_block]
 
       attr_accessor model: Anthropic::Models::model
 
@@ -32,7 +32,7 @@ module Anthropic
       def initialize:
         (
           id: String,
-          content: Array[Anthropic::Models::content_block],
+          content: ::Array[Anthropic::Models::content_block],
           model: Anthropic::Models::model,
           stop_reason: Anthropic::Models::Message::stop_reason?,
           stop_sequence: String?,
@@ -52,7 +52,7 @@ module Anthropic
         STOP_SEQUENCE: :stop_sequence
         TOOL_USE: :tool_use
 
-        def self.values: -> Array[Anthropic::Models::Message::stop_reason]
+        def self.values: -> ::Array[Anthropic::Models::Message::stop_reason]
       end
     end
   end

@@ -62,7 +62,7 @@ module Anthropic
           IMAGE_GIF: :"image/gif"
           IMAGE_WEBP: :"image/webp"
 
-          def self.values: -> Array[Anthropic::Models::ImageBlockParam::Source::media_type]
+          def self.values: -> ::Array[Anthropic::Models::ImageBlockParam::Source::media_type]
         end
       end
     end

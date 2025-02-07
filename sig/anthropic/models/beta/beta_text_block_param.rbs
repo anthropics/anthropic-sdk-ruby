@@ -9,7 +9,7 @@ module Anthropic
           text: String,
           type: :text,
           cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?,
-          citations: Array[Anthropic::Models::Beta::beta_text_citation_param]?
+          citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?
         }
 
       class BetaTextBlockParam < Anthropic::BaseModel
@@ -19,13 +19,13 @@ module Anthropic
 
         attr_accessor cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?
 
-        attr_accessor citations: Array[Anthropic::Models::Beta::beta_text_citation_param]?
+        attr_accessor citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?
 
         def initialize:
           (
             text: String,
             cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?,
-            citations: Array[Anthropic::Models::Beta::beta_text_citation_param]?,
+            citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?,
             type: :text
           ) -> void
           | (

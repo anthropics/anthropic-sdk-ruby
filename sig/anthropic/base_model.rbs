@@ -65,7 +65,7 @@ module Anthropic
   class Enum
     extend Anthropic::Converter
 
-    def self.values: -> Array[(nil | bool | Integer | Float | Symbol)]
+    def self.values: -> ::Array[(nil | bool | Integer | Float | Symbol)]
 
     private def self.finalize!: -> void
 
@@ -86,18 +86,18 @@ module Anthropic
     extend Anthropic::Extern
     extend Anthropic::Converter
 
-    private def self.known_variants: -> Array[[Symbol?, Proc]]
+    private def self.known_variants: -> ::Array[[Symbol?, Proc]]
 
-    def self.variants: -> Array[[Symbol?, top]]
+    def self.variants: -> ::Array[[Symbol?, top]]
 
     private def self.discriminator: (Symbol property) -> void
 
     private def self.variant: (
       Symbol
-      | Hash[Symbol, top]
+      | ::Hash[Symbol, top]
       | ^-> Anthropic::Converter::input
       | Anthropic::Converter::input key,
-      ?Hash[Symbol, top]
+      ?::Hash[Symbol, top]
       | ^-> Anthropic::Converter::input
       | Anthropic::Converter::input spec
     ) -> void
@@ -126,9 +126,9 @@ module Anthropic
 
     def ==: (top other) -> bool
 
-    def coerce: (Enumerable[top] | top value) -> (Array[top] | top)
+    def coerce: (Enumerable[top] | top value) -> (::Array[top] | top)
 
-    def dump: (Enumerable[top] | top value) -> (Array[top] | top)
+    def dump: (Enumerable[top] | top value) -> (::Array[top] | top)
 
     def try_strict_coerce: (
       top value
@@ -137,10 +137,10 @@ module Anthropic
     def item_type: -> Anthropic::Converter::input
 
     def initialize: (
-      Hash[Symbol, top]
+      ::Hash[Symbol, top]
       | ^-> Anthropic::Converter::input
       | Anthropic::Converter::input type_info,
-      ?Hash[Symbol, top] spec
+      ?::Hash[Symbol, top] spec
     ) -> void
   end
 
@@ -151,9 +151,9 @@ module Anthropic
 
     def ==: (top other) -> bool
 
-    def coerce: (Hash[top, top] | top value) -> (Hash[Symbol, top] | top)
+    def coerce: (::Hash[top, top] | top value) -> (::Hash[Symbol, top] | top)
 
-    def dump: (Hash[top, top] | top value) -> (Hash[Symbol, top] | top)
+    def dump: (::Hash[top, top] | top value) -> (::Hash[Symbol, top] | top)
 
     def try_strict_coerce: (
       top value
@@ -162,10 +162,10 @@ module Anthropic
     def item_type: -> Anthropic::Converter::input
 
     def initialize: (
-      Hash[Symbol, top]
+      ::Hash[Symbol, top]
       | ^-> Anthropic::Converter::input
       | Anthropic::Converter::input type_info,
-      ?Hash[Symbol, top] spec
+      ?::Hash[Symbol, top] spec
     ) -> void
   end
 
@@ -175,13 +175,13 @@ module Anthropic
 
     type known_field = { mode: (:coerce | :dump)?, required: bool }
 
-    def self.known_fields: -> Hash[Symbol, (Anthropic::BaseModel::known_field
+    def self.known_fields: -> ::Hash[Symbol, (Anthropic::BaseModel::known_field
     & { type_fn: (^-> Anthropic::Converter::input) })]
 
-    def self.fields: -> Hash[Symbol, (Anthropic::BaseModel::known_field
+    def self.fields: -> ::Hash[Symbol, (Anthropic::BaseModel::known_field
     & { type: Anthropic::Converter::input })]
 
-    def self.defaults: -> Hash[Symbol, (^-> Class)]
+    def self.defaults: -> ::Hash[Symbol, (^-> Class)]
 
     private def self.add_field: (
       Symbol name_sym,
@@ -194,23 +194,23 @@ module Anthropic
       }
       | ^-> Anthropic::Converter::input
       | Anthropic::Converter::input,
-      spec: Hash[Symbol, top]
+      spec: ::Hash[Symbol, top]
     ) -> void
 
     def self.required: (
       Symbol name_sym,
-      Hash[Symbol, top]
+      ::Hash[Symbol, top]
       | ^-> Anthropic::Converter::input
       | Anthropic::Converter::input type_info,
-      ?Hash[Symbol, top] spec
+      ?::Hash[Symbol, top] spec
     ) -> void
 
     def self.optional: (
       Symbol name_sym,
-      Hash[Symbol, top]
+      ::Hash[Symbol, top]
       | ^-> Anthropic::Converter::input
       | Anthropic::Converter::input type_info,
-      ?Hash[Symbol, top] spec
+      ?::Hash[Symbol, top] spec
     ) -> void
 
     private def self.request_only: { -> void } -> void
@@ -220,10 +220,10 @@ module Anthropic
     def ==: (top other) -> bool
 
     def self.coerce: (
-      Anthropic::BaseModel | Hash[top, top] | top value
+      Anthropic::BaseModel | ::Hash[top, top] | top value
     ) -> (instance | top)
 
-    def self.dump: (instance | top value) -> (Hash[top, top] | top)
+    def self.dump: (instance | top value) -> (::Hash[top, top] | top)
 
     def self.try_strict_coerce: (
       top value
@@ -231,13 +231,13 @@ module Anthropic
 
     def []: (Symbol key) -> top?
 
-    def to_h: -> Hash[Symbol, top]
+    def to_h: -> ::Hash[Symbol, top]
 
     alias to_hash to_h
 
-    def deconstruct_keys: (Array[Symbol]? keys) -> Hash[Symbol, top]
+    def deconstruct_keys: (::Array[Symbol]? keys) -> ::Hash[Symbol, top]
 
-    def initialize: (?Hash[Symbol, top] | self data) -> void
+    def initialize: (?::Hash[Symbol, top] | self data) -> void
 
     def to_s: -> String
 

@@ -7,7 +7,7 @@ module Anthropic
             after_id: String,
             before_id: String,
             limit: Integer,
-            betas: Array[Anthropic::Models::anthropic_beta]
+            betas: ::Array[Anthropic::Models::anthropic_beta]
           }
           & Anthropic::request_parameters
 
@@ -27,16 +27,16 @@ module Anthropic
 
           def limit=: (Integer) -> void
 
-          attr_reader betas: Array[Anthropic::Models::anthropic_beta]?
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
-          def betas=: (Array[Anthropic::Models::anthropic_beta]) -> void
+          def betas=: (::Array[Anthropic::Models::anthropic_beta]) -> void
 
           def initialize:
             (
               after_id: String,
               before_id: String,
               limit: Integer,
-              betas: Array[Anthropic::Models::anthropic_beta],
+              betas: ::Array[Anthropic::Models::anthropic_beta],
               request_options: Anthropic::request_opts
             ) -> void
             | (

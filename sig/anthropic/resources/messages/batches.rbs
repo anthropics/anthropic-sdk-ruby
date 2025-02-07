@@ -5,10 +5,10 @@ module Anthropic
         def create:
           (
             Anthropic::Models::Messages::BatchCreateParams
-            | Hash[Symbol, top] params
+            | ::Hash[Symbol, top] params
           ) -> Anthropic::Models::Messages::MessageBatch
           | (
-            requests: Array[Anthropic::Models::Messages::BatchCreateParams::Request],
+            requests: ::Array[Anthropic::Models::Messages::BatchCreateParams::Request],
             request_options: Anthropic::request_opts
           ) -> Anthropic::Models::Messages::MessageBatch
 
@@ -16,7 +16,7 @@ module Anthropic
           (
             String message_batch_id,
             ?Anthropic::Models::Messages::BatchRetrieveParams
-            | Hash[Symbol, top] params
+            | ::Hash[Symbol, top] params
           ) -> Anthropic::Models::Messages::MessageBatch
           | (
             String message_batch_id,
@@ -26,7 +26,7 @@ module Anthropic
         def list:
           (
             ?Anthropic::Models::Messages::BatchListParams
-            | Hash[Symbol, top] params
+            | ::Hash[Symbol, top] params
           ) -> Anthropic::Page[Anthropic::Models::Messages::MessageBatch]
           | (
             after_id: String,
@@ -39,7 +39,7 @@ module Anthropic
           (
             String message_batch_id,
             ?Anthropic::Models::Messages::BatchDeleteParams
-            | Hash[Symbol, top] params
+            | ::Hash[Symbol, top] params
           ) -> Anthropic::Models::Messages::DeletedMessageBatch
           | (
             String message_batch_id,
@@ -50,7 +50,7 @@ module Anthropic
           (
             String message_batch_id,
             ?Anthropic::Models::Messages::BatchCancelParams
-            | Hash[Symbol, top] params
+            | ::Hash[Symbol, top] params
           ) -> Anthropic::Models::Messages::MessageBatch
           | (
             String message_batch_id,
@@ -61,7 +61,7 @@ module Anthropic
           (
             String message_batch_id,
             ?Anthropic::Models::Messages::BatchResultsParams
-            | Hash[Symbol, top] params
+            | ::Hash[Symbol, top] params
           ) -> Anthropic::Models::Messages::MessageBatchIndividualResponse
           | (
             String message_batch_id,

@@ -6,7 +6,7 @@ module Anthropic
         model: Anthropic::Models::model,
         prompt: String,
         metadata: Anthropic::Models::Metadata,
-        stop_sequences: Array[String],
+        stop_sequences: ::Array[String],
         stream: Anthropic::Models::CompletionCreateParams::stream,
         temperature: Float,
         top_k: Integer,
@@ -28,9 +28,9 @@ module Anthropic
 
       def metadata=: (Anthropic::Models::Metadata) -> void
 
-      attr_reader stop_sequences: Array[String]?
+      attr_reader stop_sequences: ::Array[String]?
 
-      def stop_sequences=: (Array[String]) -> void
+      def stop_sequences=: (::Array[String]) -> void
 
       attr_accessor stream: Anthropic::Models::CompletionCreateParams::stream
 
@@ -53,7 +53,7 @@ module Anthropic
           prompt: String,
           stream: Anthropic::Models::CompletionCreateParams::stream,
           metadata: Anthropic::Models::Metadata,
-          stop_sequences: Array[String],
+          stop_sequences: ::Array[String],
           temperature: Float,
           top_k: Integer,
           top_p: Float,
@@ -71,7 +71,7 @@ module Anthropic
       class Stream < Anthropic::Enum
         TRUE: true
 
-        def self.values: -> Array[Anthropic::Models::CompletionCreateParams::stream]
+        def self.values: -> ::Array[Anthropic::Models::CompletionCreateParams::stream]
       end
     end
   end

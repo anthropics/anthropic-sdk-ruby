@@ -48,7 +48,7 @@ module Anthropic
 
         CLAUDE_2_0: :"claude-2.0"
 
-        def self.values: -> Array[Anthropic::Models::Model::union_member0]
+        def self.values: -> ::Array[Anthropic::Models::Model::union_member0]
       end
 
       private def self.variants: -> [[nil, Anthropic::Models::Model::union_member0], [nil, String]]
