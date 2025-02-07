@@ -6,7 +6,7 @@ module Anthropic
           (
             String model_id,
             ?Anthropic::Models::Beta::ModelRetrieveParams
-            | Hash[Symbol, top] params
+            | ::Hash[Symbol, top] params
           ) -> Anthropic::Models::Beta::BetaModelInfo
           | (
             String model_id,
@@ -15,7 +15,8 @@ module Anthropic
 
         def list:
           (
-            ?Anthropic::Models::Beta::ModelListParams | Hash[Symbol, top] params
+            ?Anthropic::Models::Beta::ModelListParams
+            | ::Hash[Symbol, top] params
           ) -> Anthropic::Page[Anthropic::Models::Beta::BetaModelInfo]
           | (
             after_id: String,

@@ -5,19 +5,19 @@ module Anthropic
 
       def create:
         (
-          Anthropic::Models::MessageCreateParams | Hash[Symbol, top] params
+          Anthropic::Models::MessageCreateParams | ::Hash[Symbol, top] params
         ) -> Anthropic::Models::Message
         | (
           max_tokens: Integer,
-          messages: Array[Anthropic::Models::MessageParam],
+          messages: ::Array[Anthropic::Models::MessageParam],
           model: Anthropic::Models::model,
           stream: Anthropic::Models::MessageCreateParams::stream,
           metadata: Anthropic::Models::Metadata,
-          stop_sequences: Array[String],
+          stop_sequences: ::Array[String],
           system_: Anthropic::Models::MessageCreateParams::system_,
           temperature: Float,
           tool_choice: Anthropic::Models::tool_choice,
-          tools: Array[Anthropic::Models::Tool],
+          tools: ::Array[Anthropic::Models::Tool],
           top_k: Integer,
           top_p: Float,
           request_options: Anthropic::request_opts
@@ -25,14 +25,15 @@ module Anthropic
 
       def count_tokens:
         (
-          Anthropic::Models::MessageCountTokensParams | Hash[Symbol, top] params
+          Anthropic::Models::MessageCountTokensParams
+          | ::Hash[Symbol, top] params
         ) -> Anthropic::Models::MessageTokensCount
         | (
-          messages: Array[Anthropic::Models::MessageParam],
+          messages: ::Array[Anthropic::Models::MessageParam],
           model: Anthropic::Models::model,
           system_: Anthropic::Models::MessageCountTokensParams::system_,
           tool_choice: Anthropic::Models::tool_choice,
-          tools: Array[Anthropic::Models::Tool],
+          tools: ::Array[Anthropic::Models::Tool],
           request_options: Anthropic::request_opts
         ) -> Anthropic::Models::MessageTokensCount
 

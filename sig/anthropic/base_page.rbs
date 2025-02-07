@@ -13,7 +13,7 @@ module Anthropic
     def initialize: (
       client: Anthropic::BaseClient,
       req: Anthropic::BaseClient::request,
-      headers: Hash[String, String],
+      headers: ::Hash[String, String],
       unwrapped: top
     ) -> void
   end

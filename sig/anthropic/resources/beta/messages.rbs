@@ -7,37 +7,37 @@ module Anthropic
         def create:
           (
             Anthropic::Models::Beta::MessageCreateParams
-            | Hash[Symbol, top] params
+            | ::Hash[Symbol, top] params
           ) -> Anthropic::Models::Beta::BetaMessage
           | (
             max_tokens: Integer,
-            messages: Array[Anthropic::Models::Beta::BetaMessageParam],
+            messages: ::Array[Anthropic::Models::Beta::BetaMessageParam],
             model: Anthropic::Models::model,
             stream: Anthropic::Models::Beta::MessageCreateParams::stream,
             metadata: Anthropic::Models::Beta::BetaMetadata,
-            stop_sequences: Array[String],
+            stop_sequences: ::Array[String],
             system_: Anthropic::Models::Beta::MessageCreateParams::system_,
             temperature: Float,
             tool_choice: Anthropic::Models::Beta::beta_tool_choice,
-            tools: Array[Anthropic::Models::Beta::beta_tool_union],
+            tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
             top_k: Integer,
             top_p: Float,
-            betas: Array[Anthropic::Models::anthropic_beta],
+            betas: ::Array[Anthropic::Models::anthropic_beta],
             request_options: Anthropic::request_opts
           ) -> Anthropic::Models::Beta::BetaMessage
 
         def count_tokens:
           (
             Anthropic::Models::Beta::MessageCountTokensParams
-            | Hash[Symbol, top] params
+            | ::Hash[Symbol, top] params
           ) -> Anthropic::Models::Beta::BetaMessageTokensCount
           | (
-            messages: Array[Anthropic::Models::Beta::BetaMessageParam],
+            messages: ::Array[Anthropic::Models::Beta::BetaMessageParam],
             model: Anthropic::Models::model,
             system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
             tool_choice: Anthropic::Models::Beta::beta_tool_choice,
-            tools: Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
-            betas: Array[Anthropic::Models::anthropic_beta],
+            tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
+            betas: ::Array[Anthropic::Models::anthropic_beta],
             request_options: Anthropic::request_opts
           ) -> Anthropic::Models::Beta::BetaMessageTokensCount
 

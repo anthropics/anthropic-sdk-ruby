@@ -2,7 +2,7 @@ module Anthropic
   class Page[Elem]
     include Anthropic::BasePage[Elem]
 
-    attr_accessor data: Array[Elem]
+    attr_accessor data: ::Array[Elem]
 
     attr_accessor has_more: bool
 
@@ -13,8 +13,8 @@ module Anthropic
     def initialize: (
       client: Anthropic::BaseClient,
       req: Anthropic::BaseClient::request,
-      headers: Hash[String, String],
-      unwrapped: Hash[Symbol, top]
+      headers: ::Hash[String, String],
+      unwrapped: ::Hash[Symbol, top]
     ) -> void
   end
 end

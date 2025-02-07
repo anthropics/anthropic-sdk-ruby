@@ -4,8 +4,8 @@ module Anthropic
       module Messages
         type batch_create_params =
           {
-            requests: Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request],
-            betas: Array[Anthropic::Models::anthropic_beta]
+            requests: ::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request],
+            betas: ::Array[Anthropic::Models::anthropic_beta]
           }
           & Anthropic::request_parameters
 
@@ -13,16 +13,16 @@ module Anthropic
           extend Anthropic::RequestParameters::Converter
           include Anthropic::RequestParameters
 
-          attr_accessor requests: Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request]
+          attr_accessor requests: ::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request]
 
-          attr_reader betas: Array[Anthropic::Models::anthropic_beta]?
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
-          def betas=: (Array[Anthropic::Models::anthropic_beta]) -> void
+          def betas=: (::Array[Anthropic::Models::anthropic_beta]) -> void
 
           def initialize:
             (
-              requests: Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request],
-              betas: Array[Anthropic::Models::anthropic_beta],
+              requests: ::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request],
+              betas: ::Array[Anthropic::Models::anthropic_beta],
               request_options: Anthropic::request_opts
             ) -> void
             | (
@@ -58,15 +58,15 @@ module Anthropic
             type params =
               {
                 max_tokens: Integer,
-                messages: Array[Anthropic::Models::Beta::BetaMessageParam],
+                messages: ::Array[Anthropic::Models::Beta::BetaMessageParam],
                 model: Anthropic::Models::model,
                 metadata: Anthropic::Models::Beta::BetaMetadata,
-                stop_sequences: Array[String],
+                stop_sequences: ::Array[String],
                 stream: bool,
                 system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
                 temperature: Float,
                 tool_choice: Anthropic::Models::Beta::beta_tool_choice,
-                tools: Array[Anthropic::Models::Beta::beta_tool_union],
+                tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
                 top_k: Integer,
                 top_p: Float
               }
@@ -74,7 +74,7 @@ module Anthropic
             class Params < Anthropic::BaseModel
               attr_accessor max_tokens: Integer
 
-              attr_accessor messages: Array[Anthropic::Models::Beta::BetaMessageParam]
+              attr_accessor messages: ::Array[Anthropic::Models::Beta::BetaMessageParam]
 
               attr_accessor model: Anthropic::Models::model
 
@@ -82,9 +82,9 @@ module Anthropic
 
               def metadata=: (Anthropic::Models::Beta::BetaMetadata) -> void
 
-              attr_reader stop_sequences: Array[String]?
+              attr_reader stop_sequences: ::Array[String]?
 
-              def stop_sequences=: (Array[String]) -> void
+              def stop_sequences=: (::Array[String]) -> void
 
               attr_reader stream: bool?
 
@@ -106,10 +106,10 @@ module Anthropic
                 Anthropic::Models::Beta::beta_tool_choice
               ) -> void
 
-              attr_reader tools: Array[Anthropic::Models::Beta::beta_tool_union]?
+              attr_reader tools: ::Array[Anthropic::Models::Beta::beta_tool_union]?
 
               def tools=: (
-                Array[Anthropic::Models::Beta::beta_tool_union]
+                ::Array[Anthropic::Models::Beta::beta_tool_union]
               ) -> void
 
               attr_reader top_k: Integer?
@@ -123,15 +123,15 @@ module Anthropic
               def initialize:
                 (
                   max_tokens: Integer,
-                  messages: Array[Anthropic::Models::Beta::BetaMessageParam],
+                  messages: ::Array[Anthropic::Models::Beta::BetaMessageParam],
                   model: Anthropic::Models::model,
                   metadata: Anthropic::Models::Beta::BetaMetadata,
-                  stop_sequences: Array[String],
+                  stop_sequences: ::Array[String],
                   stream: bool,
                   system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
                   temperature: Float,
                   tool_choice: Anthropic::Models::Beta::beta_tool_choice,
-                  tools: Array[Anthropic::Models::Beta::beta_tool_union],
+                  tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
                   top_k: Integer,
                   top_p: Float
                 ) -> void
@@ -143,15 +143,15 @@ module Anthropic
               def to_hash: -> Anthropic::Models::Beta::Messages::BatchCreateParams::Request::params
 
               type system_ =
-                String | Array[Anthropic::Models::Beta::BetaTextBlockParam]
+                String | ::Array[Anthropic::Models::Beta::BetaTextBlockParam]
 
               class System < Anthropic::Union
                 type beta_text_block_param_array =
-                  Array[Anthropic::Models::Beta::BetaTextBlockParam]
+                  ::Array[Anthropic::Models::Beta::BetaTextBlockParam]
 
                 BetaTextBlockParamArray: beta_text_block_param_array
 
-                private def self.variants: -> [[nil, String], [nil, Array[Anthropic::Models::Beta::BetaTextBlockParam]]]
+                private def self.variants: -> [[nil, String], [nil, ::Array[Anthropic::Models::Beta::BetaTextBlockParam]]]
               end
             end
           end

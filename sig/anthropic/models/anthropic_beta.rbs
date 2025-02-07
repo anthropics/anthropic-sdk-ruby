@@ -18,7 +18,7 @@ module Anthropic
         PDFS_2024_09_25: :"pdfs-2024-09-25"
         TOKEN_COUNTING_2024_11_01: :"token-counting-2024-11-01"
 
-        def self.values: -> Array[Anthropic::Models::AnthropicBeta::union_member1]
+        def self.values: -> ::Array[Anthropic::Models::AnthropicBeta::union_member1]
       end
 
       private def self.variants: -> [[nil, String], [nil, Anthropic::Models::AnthropicBeta::union_member1]]

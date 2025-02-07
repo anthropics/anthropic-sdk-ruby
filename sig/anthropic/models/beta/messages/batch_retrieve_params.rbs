@@ -3,20 +3,20 @@ module Anthropic
     module Beta
       module Messages
         type batch_retrieve_params =
-          { betas: Array[Anthropic::Models::anthropic_beta] }
+          { betas: ::Array[Anthropic::Models::anthropic_beta] }
           & Anthropic::request_parameters
 
         class BatchRetrieveParams < Anthropic::BaseModel
           extend Anthropic::RequestParameters::Converter
           include Anthropic::RequestParameters
 
-          attr_reader betas: Array[Anthropic::Models::anthropic_beta]?
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
-          def betas=: (Array[Anthropic::Models::anthropic_beta]) -> void
+          def betas=: (::Array[Anthropic::Models::anthropic_beta]) -> void
 
           def initialize:
             (
-              betas: Array[Anthropic::Models::anthropic_beta],
+              betas: ::Array[Anthropic::Models::anthropic_beta],
               request_options: Anthropic::request_opts
             ) -> void
             | (

@@ -3,15 +3,15 @@ module Anthropic
     type message_create_params =
       {
         max_tokens: Integer,
-        messages: Array[Anthropic::Models::MessageParam],
+        messages: ::Array[Anthropic::Models::MessageParam],
         model: Anthropic::Models::model,
         metadata: Anthropic::Models::Metadata,
-        stop_sequences: Array[String],
+        stop_sequences: ::Array[String],
         stream: Anthropic::Models::MessageCreateParams::stream,
         system_: Anthropic::Models::MessageCreateParams::system_,
         temperature: Float,
         tool_choice: Anthropic::Models::tool_choice,
-        tools: Array[Anthropic::Models::Tool],
+        tools: ::Array[Anthropic::Models::Tool],
         top_k: Integer,
         top_p: Float
       }
@@ -23,7 +23,7 @@ module Anthropic
 
       attr_accessor max_tokens: Integer
 
-      attr_accessor messages: Array[Anthropic::Models::MessageParam]
+      attr_accessor messages: ::Array[Anthropic::Models::MessageParam]
 
       attr_accessor model: Anthropic::Models::model
 
@@ -31,9 +31,9 @@ module Anthropic
 
       def metadata=: (Anthropic::Models::Metadata) -> void
 
-      attr_reader stop_sequences: Array[String]?
+      attr_reader stop_sequences: ::Array[String]?
 
-      def stop_sequences=: (Array[String]) -> void
+      def stop_sequences=: (::Array[String]) -> void
 
       attr_accessor stream: Anthropic::Models::MessageCreateParams::stream
 
@@ -49,9 +49,9 @@ module Anthropic
 
       def tool_choice=: (Anthropic::Models::tool_choice) -> void
 
-      attr_reader tools: Array[Anthropic::Models::Tool]?
+      attr_reader tools: ::Array[Anthropic::Models::Tool]?
 
-      def tools=: (Array[Anthropic::Models::Tool]) -> void
+      def tools=: (::Array[Anthropic::Models::Tool]) -> void
 
       attr_reader top_k: Integer?
 
@@ -64,15 +64,15 @@ module Anthropic
       def initialize:
         (
           max_tokens: Integer,
-          messages: Array[Anthropic::Models::MessageParam],
+          messages: ::Array[Anthropic::Models::MessageParam],
           model: Anthropic::Models::model,
           stream: Anthropic::Models::MessageCreateParams::stream,
           metadata: Anthropic::Models::Metadata,
-          stop_sequences: Array[String],
+          stop_sequences: ::Array[String],
           system_: Anthropic::Models::MessageCreateParams::system_,
           temperature: Float,
           tool_choice: Anthropic::Models::tool_choice,
-          tools: Array[Anthropic::Models::Tool],
+          tools: ::Array[Anthropic::Models::Tool],
           top_k: Integer,
           top_p: Float,
           request_options: Anthropic::request_opts
@@ -88,17 +88,17 @@ module Anthropic
       class Stream < Anthropic::Enum
         TRUE: true
 
-        def self.values: -> Array[Anthropic::Models::MessageCreateParams::stream]
+        def self.values: -> ::Array[Anthropic::Models::MessageCreateParams::stream]
       end
 
-      type system_ = String | Array[Anthropic::Models::TextBlockParam]
+      type system_ = String | ::Array[Anthropic::Models::TextBlockParam]
 
       class System < Anthropic::Union
-        type text_block_param_array = Array[Anthropic::Models::TextBlockParam]
+        type text_block_param_array = ::Array[Anthropic::Models::TextBlockParam]
 
         TextBlockParamArray: text_block_param_array
 
-        private def self.variants: -> [[nil, String], [nil, Array[Anthropic::Models::TextBlockParam]]]
+        private def self.variants: -> [[nil, String], [nil, ::Array[Anthropic::Models::TextBlockParam]]]
       end
     end
   end

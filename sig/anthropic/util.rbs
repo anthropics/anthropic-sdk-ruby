@@ -10,10 +10,10 @@ module Anthropic
 
     def self?.coerce_float: (top input) -> (Float | top)
 
-    def self?.coerce_hash: (top input) -> (Hash[top, top] | top)
+    def self?.coerce_hash: (top input) -> (::Hash[top, top] | top)
 
     def self?.suppress: (
-      *Array[Exception] exceptions,
+      *::Array[Exception] exceptions,
       sentinel: top?
     ) {
       -> top?
@@ -22,14 +22,14 @@ module Anthropic
     OMIT: top
 
     def self?.deep_merge: (
-      *Array[top] values,
+      *::Array[top] values,
       sentinel: top?,
       concat: bool
     ) -> top
 
     def self?.dig: (
-      Hash[Symbol, top] | Array[top] | top data,
-      (Symbol | Integer | Array[(Symbol | Integer)])? pick,
+      ::Hash[Symbol, top] | ::Array[top] | top data,
+      (Symbol | Integer | ::Array[(Symbol | Integer)])? pick,
       ?top? sentinel
     ) {
       -> top?
@@ -37,7 +37,7 @@ module Anthropic
 
     def self?.uri_origin: (URI::Generic uri) -> String
 
-    def self?.interpolate_path: (String | Array[String] path) -> String
+    def self?.interpolate_path: (String | ::Array[String] path) -> String
 
     type parsed_uri =
       {
@@ -45,7 +45,7 @@ module Anthropic
         host: String?,
         port: Integer?,
         path: String?,
-        query: Hash[String, Array[String]]
+        query: ::Hash[String, ::Array[String]]
       }
 
     def self?.parse_uri: (
@@ -59,17 +59,17 @@ module Anthropic
       Anthropic::Util::parsed_uri rhs
     ) -> URI::Generic
 
-    def self?.decode_query: (String? query) -> Hash[String, Array[String]]
+    def self?.decode_query: (String? query) -> ::Hash[String, ::Array[String]]
 
     def self?.encode_query: (
-      Hash[String, (Array[String] | String)?] query
+      ::Hash[String, (::Array[String] | String)?] query
     ) -> String?
 
     def self?.normalized_headers: (
-      *Array[Hash[String, (String | Integer)?]] headers
-    ) -> Hash[String, String]
+      *::Array[::Hash[String, (String | Integer)?]] headers
+    ) -> ::Hash[String, String]
 
-    def self?.encode_content: (Hash[String, String] headers, top body) -> top
+    def self?.encode_content: (::Hash[String, String] headers, top body) -> top
 
     def self?.decode_content: (top response, suppress_error: bool) -> top
 

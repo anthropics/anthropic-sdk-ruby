@@ -3,7 +3,7 @@ module Anthropic
     class Completions
       def create:
         (
-          Anthropic::Models::CompletionCreateParams | Hash[Symbol, top] params
+          Anthropic::Models::CompletionCreateParams | ::Hash[Symbol, top] params
         ) -> Anthropic::Models::Completion
         | (
           max_tokens_to_sample: Integer,
@@ -11,7 +11,7 @@ module Anthropic
           prompt: String,
           stream: Anthropic::Models::CompletionCreateParams::stream,
           metadata: Anthropic::Models::Metadata,
-          stop_sequences: Array[String],
+          stop_sequences: ::Array[String],
           temperature: Float,
           top_k: Integer,
           top_p: Float,
