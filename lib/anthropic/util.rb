@@ -48,8 +48,8 @@ module Anthropic
     # @return [Boolean, nil]
     #
     def self.coerce_boolean!(input)
-      case (coerced = coerce_boolean(input))
-      in true | false | nil
+      case coerce_boolean(input)
+      in true | false | nil => coerced
         coerced
       else
         raise ArgumentError.new("Unable to coerce #{input.inspect} into boolean value")
@@ -159,25 +159,20 @@ module Anthropic
     # @return [Object]
     #
     private_class_method def self.deep_merge_lr(lhs, rhs, concat: false)
-      rhs_cleaned =
-        case rhs
-        in Hash
-          rhs.reject { |_, value| value == OMIT }
-        else
-          rhs
-        end
-
-      case [lhs, rhs_cleaned, concat]
+      case [lhs, rhs, concat]
       in [Hash, Hash, _]
+        # rubocop:disable Style/YodaCondition
+        rhs_cleaned = rhs.reject { |_, val| OMIT == val }
         lhs
-          .reject { |key, _| rhs[key] == OMIT }
+          .reject { |key, _| OMIT == rhs[key] }
           .merge(rhs_cleaned) do |_, old_val, new_val|
             deep_merge_lr(old_val, new_val, concat: concat)
           end
+        # rubocop:enable Style/YodaCondition
       in [Array, Array, true]
-        lhs.concat(rhs_cleaned)
+        lhs.concat(rhs)
       else
-        rhs_cleaned
+        rhs
       end
     end
 
@@ -235,7 +230,7 @@ module Anthropic
       in []
         ""
       in [String, *interpolations]
-        encoded = interpolations.map { |v| ERB::Util.url_encode(v) }
+        encoded = interpolations.map { ERB::Util.url_encode(_1) }
         path.first % encoded
       end
     end
