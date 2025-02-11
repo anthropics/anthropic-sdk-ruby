@@ -32,8 +32,8 @@ module Kernel
   alias_method :_sleep, :sleep
 
   def sleep(secs)
-    case (counter = Thread.current.thread_variable_get(:mock_sleep))
-    in Array
+    case Thread.current.thread_variable_get(:mock_sleep)
+    in Array => counter
       counter << secs
       secs
     else

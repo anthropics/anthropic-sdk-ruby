@@ -50,8 +50,8 @@ module Anthropic
       model = req.fetch(:model)
 
       case unwrapped
-      in {data: data} if data.is_a?(Array) || data.nil?
-        @data = data&.map { |row| model.coerce(row) }
+      in {data: Array | nil => data}
+        @data = data&.map { model.coerce(_1) }
       else
       end
 
@@ -62,13 +62,13 @@ module Anthropic
       end
 
       case unwrapped
-      in {first_id: first_id} if first_id.is_a?(String) || first_id.is_nil?
+      in {first_id: String | nil => first_id}
         @first_id = first_id
       else
       end
 
       case unwrapped
-      in {last_id: last_id} if last_id.is_a?(String) || last_id.is_nil?
+      in {last_id: String | nil => last_id}
         @last_id = last_id
       else
       end
@@ -100,7 +100,7 @@ module Anthropic
       end
       page = self
       loop do
-        page.data&.each { |row| blk.call(row) }
+        page.data&.each { blk.call(_1) }
         break unless page.next_page?
         page = page.next_page
       end
