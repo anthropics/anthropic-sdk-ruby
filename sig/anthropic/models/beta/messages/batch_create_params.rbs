@@ -17,7 +17,9 @@ module Anthropic
 
           attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
-          def betas=: (::Array[Anthropic::Models::anthropic_beta]) -> void
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
 
           def initialize:
             (
@@ -80,45 +82,47 @@ module Anthropic
 
               attr_reader metadata: Anthropic::Models::Beta::BetaMetadata?
 
-              def metadata=: (Anthropic::Models::Beta::BetaMetadata) -> void
+              def metadata=: (
+                Anthropic::Models::Beta::BetaMetadata
+              ) -> Anthropic::Models::Beta::BetaMetadata
 
               attr_reader stop_sequences: ::Array[String]?
 
-              def stop_sequences=: (::Array[String]) -> void
+              def stop_sequences=: (::Array[String]) -> ::Array[String]
 
               attr_reader stream: bool?
 
-              def stream=: (bool) -> void
+              def stream=: (bool) -> bool
 
               attr_reader system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_?
 
               def system_=: (
                 Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_
-              ) -> void
+              ) -> Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_
 
               attr_reader temperature: Float?
 
-              def temperature=: (Float) -> void
+              def temperature=: (Float) -> Float
 
               attr_reader tool_choice: Anthropic::Models::Beta::beta_tool_choice?
 
               def tool_choice=: (
                 Anthropic::Models::Beta::beta_tool_choice
-              ) -> void
+              ) -> Anthropic::Models::Beta::beta_tool_choice
 
               attr_reader tools: ::Array[Anthropic::Models::Beta::beta_tool_union]?
 
               def tools=: (
                 ::Array[Anthropic::Models::Beta::beta_tool_union]
-              ) -> void
+              ) -> ::Array[Anthropic::Models::Beta::beta_tool_union]
 
               attr_reader top_k: Integer?
 
-              def top_k=: (Integer) -> void
+              def top_k=: (Integer) -> Integer
 
               attr_reader top_p: Float?
 
-              def top_p=: (Float) -> void
+              def top_p=: (Float) -> Float
 
               def initialize:
                 (

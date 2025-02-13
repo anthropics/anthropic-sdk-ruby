@@ -17,19 +17,21 @@ module Anthropic
 
           attr_reader after_id: String?
 
-          def after_id=: (String) -> void
+          def after_id=: (String) -> String
 
           attr_reader before_id: String?
 
-          def before_id=: (String) -> void
+          def before_id=: (String) -> String
 
           attr_reader limit: Integer?
 
-          def limit=: (Integer) -> void
+          def limit=: (Integer) -> Integer
 
           attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
-          def betas=: (::Array[Anthropic::Models::anthropic_beta]) -> void
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
 
           def initialize:
             (

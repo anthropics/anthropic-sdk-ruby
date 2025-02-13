@@ -4,13 +4,30 @@ module Anthropic
   module Models
     class ToolResultBlockParam < Anthropic::BaseModel
       sig { returns(String) }
-      attr_accessor :tool_use_id
+      def tool_use_id
+      end
+
+      sig { params(_: String).returns(String) }
+      def tool_use_id=(_)
+      end
 
       sig { returns(Symbol) }
-      attr_accessor :type
+      def type
+      end
+
+      sig { params(_: Symbol).returns(Symbol) }
+      def type=(_)
+      end
 
       sig { returns(T.nilable(Anthropic::Models::CacheControlEphemeral)) }
-      attr_accessor :cache_control
+      def cache_control
+      end
+
+      sig do
+        params(_: T.nilable(Anthropic::Models::CacheControlEphemeral)).returns(T.nilable(Anthropic::Models::CacheControlEphemeral))
+      end
+      def cache_control=(_)
+      end
 
       sig do
         returns(
@@ -25,26 +42,30 @@ module Anthropic
           )
         )
       end
-      attr_reader :content
+      def content
+      end
 
       sig do
         params(
-          content: T.any(
+          _: T.any(
             String,
-            T::Array[T.any(
-              Anthropic::Models::TextBlockParam,
-              Anthropic::Models::ImageBlockParam
-            )]
+            T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
           )
-        ).void
+        ).returns(T.any(
+                    String,
+                    T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
+                  ))
       end
-      attr_writer :content
+      def content=(_)
+      end
 
       sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :is_error
+      def is_error
+      end
 
-      sig { params(is_error: T::Boolean).void }
-      attr_writer :is_error
+      sig { params(_: T::Boolean).returns(T::Boolean) }
+      def is_error=(_)
+      end
 
       sig do
         params(

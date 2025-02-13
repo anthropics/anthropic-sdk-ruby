@@ -3,7 +3,8 @@
 module Anthropic
   class Error < StandardError
     sig { returns(T.nilable(StandardError)) }
-    attr_reader :cause
+    def cause
+    end
   end
 
   class ConversionError < Anthropic::Error
@@ -11,13 +12,16 @@ module Anthropic
 
   class APIError < Anthropic::Error
     sig { returns(URI::Generic) }
-    attr_reader :url
+    def url
+    end
 
     sig { returns(T.nilable(Integer)) }
-    attr_reader :status
+    def status
+    end
 
     sig { returns(T.nilable(T.anything)) }
-    attr_reader :body
+    def body
+    end
 
     sig do
       params(
@@ -35,10 +39,12 @@ module Anthropic
 
   class APIConnectionError < Anthropic::APIError
     sig { void }
-    attr_reader :status
+    def status
+    end
 
     sig { void }
-    attr_reader :body
+    def body
+    end
 
     sig do
       params(
@@ -83,7 +89,8 @@ module Anthropic
     end
 
     sig { returns(Integer) }
-    attr_reader :status
+    def status
+    end
 
     sig do
       params(

@@ -7,13 +7,32 @@ module Anthropic
     module Beta
       class BetaImageBlockParam < Anthropic::BaseModel
         sig { returns(Anthropic::Models::Beta::BetaImageBlockParam::Source) }
-        attr_accessor :source
+        def source
+        end
+
+        sig do
+          params(_: Anthropic::Models::Beta::BetaImageBlockParam::Source).returns(Anthropic::Models::Beta::BetaImageBlockParam::Source)
+        end
+        def source=(_)
+        end
 
         sig { returns(Symbol) }
-        attr_accessor :type
+        def type
+        end
+
+        sig { params(_: Symbol).returns(Symbol) }
+        def type=(_)
+        end
 
         sig { returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)) }
-        attr_accessor :cache_control
+        def cache_control
+        end
+
+        sig do
+          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)).returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+        end
+        def cache_control=(_)
+        end
 
         sig do
           params(
@@ -39,13 +58,28 @@ module Anthropic
 
         class Source < Anthropic::BaseModel
           sig { returns(String) }
-          attr_accessor :data
+          def data
+          end
+
+          sig { params(_: String).returns(String) }
+          def data=(_)
+          end
 
           sig { returns(Symbol) }
-          attr_accessor :media_type
+          def media_type
+          end
+
+          sig { params(_: Symbol).returns(Symbol) }
+          def media_type=(_)
+          end
 
           sig { returns(Symbol) }
-          attr_accessor :type
+          def type
+          end
+
+          sig { params(_: Symbol).returns(Symbol) }
+          def type=(_)
+          end
 
           sig { params(data: String, media_type: Symbol, type: Symbol).void }
           def initialize(data:, media_type:, type: :base64)

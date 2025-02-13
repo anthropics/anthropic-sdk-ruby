@@ -46,7 +46,6 @@ module Anthropic
     def initialize(client:, req:, headers:, unwrapped:)
       @client = client
       @req = req
-
       model = req.fetch(:model)
 
       case unwrapped

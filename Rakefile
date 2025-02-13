@@ -30,7 +30,7 @@ multitask(:format_rb) do
   sh("#{find.shelljoin} | #{fmt.shelljoin}")
 end
 
-multitask(:format_rbs) do
+multitask(:syntax_tree) do
   find = %w[find ./sig -type f -name *.rbs -print0]
   inplace = /darwin|bsd/ =~ RUBY_PLATFORM ? %w[-i''] : %w[-i]
   uuid = SecureRandom.uuid
@@ -63,7 +63,7 @@ multitask(:format_rbs) do
   sh("#{find.shelljoin} | #{pst.shelljoin}")
 end
 
-multitask(format: [:format_rb, :format_rbs])
+multitask(format: [:format_rb, :syntax_tree])
 
 multitask(:steep) do
   sh(*%w[steep check])
@@ -71,6 +71,10 @@ end
 
 multitask(:sorbet) do
   sh(*%w[srb typecheck -- .], chdir: "./rbi")
+end
+
+file("sorbet/tapioca") do
+  sh(*%w[tapioca init])
 end
 
 multitask(typecheck: [:steep, :sorbet])

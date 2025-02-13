@@ -15,25 +15,68 @@ module Anthropic
             )
           )
         end
-        attr_accessor :source
+        def source
+        end
+
+        sig do
+          params(
+            _: T.any(
+              Anthropic::Models::Beta::BetaBase64PDFSource,
+              Anthropic::Models::Beta::BetaPlainTextSource,
+              Anthropic::Models::Beta::BetaContentBlockSource
+            )
+          ).returns(T.any(
+                      Anthropic::Models::Beta::BetaBase64PDFSource,
+                      Anthropic::Models::Beta::BetaPlainTextSource,
+                      Anthropic::Models::Beta::BetaContentBlockSource
+                    ))
+        end
+        def source=(_)
+        end
 
         sig { returns(Symbol) }
-        attr_accessor :type
+        def type
+        end
+
+        sig { params(_: Symbol).returns(Symbol) }
+        def type=(_)
+        end
 
         sig { returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)) }
-        attr_accessor :cache_control
+        def cache_control
+        end
+
+        sig do
+          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)).returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+        end
+        def cache_control=(_)
+        end
 
         sig { returns(T.nilable(Anthropic::Models::Beta::BetaCitationsConfigParam)) }
-        attr_reader :citations
+        def citations
+        end
 
-        sig { params(citations: Anthropic::Models::Beta::BetaCitationsConfigParam).void }
-        attr_writer :citations
+        sig do
+          params(_: Anthropic::Models::Beta::BetaCitationsConfigParam).returns(Anthropic::Models::Beta::BetaCitationsConfigParam)
+        end
+        def citations=(_)
+        end
 
         sig { returns(T.nilable(String)) }
-        attr_accessor :context
+        def context
+        end
+
+        sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
+        def context=(_)
+        end
 
         sig { returns(T.nilable(String)) }
-        attr_accessor :title
+        def title
+        end
+
+        sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
+        def title=(_)
+        end
 
         sig do
           params(

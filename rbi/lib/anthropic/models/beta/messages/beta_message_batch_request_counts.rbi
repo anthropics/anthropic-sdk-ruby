@@ -6,19 +6,44 @@ module Anthropic
       module Messages
         class BetaMessageBatchRequestCounts < Anthropic::BaseModel
           sig { returns(Integer) }
-          attr_accessor :canceled
+          def canceled
+          end
+
+          sig { params(_: Integer).returns(Integer) }
+          def canceled=(_)
+          end
 
           sig { returns(Integer) }
-          attr_accessor :errored
+          def errored
+          end
+
+          sig { params(_: Integer).returns(Integer) }
+          def errored=(_)
+          end
 
           sig { returns(Integer) }
-          attr_accessor :expired
+          def expired
+          end
+
+          sig { params(_: Integer).returns(Integer) }
+          def expired=(_)
+          end
 
           sig { returns(Integer) }
-          attr_accessor :processing
+          def processing
+          end
+
+          sig { params(_: Integer).returns(Integer) }
+          def processing=(_)
+          end
 
           sig { returns(Integer) }
-          attr_accessor :succeeded
+          def succeeded
+          end
+
+          sig { params(_: Integer).returns(Integer) }
+          def succeeded=(_)
+          end
 
           sig do
             params(

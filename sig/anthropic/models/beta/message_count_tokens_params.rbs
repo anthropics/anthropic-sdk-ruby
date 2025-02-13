@@ -24,21 +24,25 @@ module Anthropic
 
         def system_=: (
           Anthropic::Models::Beta::MessageCountTokensParams::system_
-        ) -> void
+        ) -> Anthropic::Models::Beta::MessageCountTokensParams::system_
 
         attr_reader tool_choice: Anthropic::Models::Beta::beta_tool_choice?
 
-        def tool_choice=: (Anthropic::Models::Beta::beta_tool_choice) -> void
+        def tool_choice=: (
+          Anthropic::Models::Beta::beta_tool_choice
+        ) -> Anthropic::Models::Beta::beta_tool_choice
 
         attr_reader tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]?
 
         def tools=: (
           ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]
-        ) -> void
+        ) -> ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]
 
         attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
-        def betas=: (::Array[Anthropic::Models::anthropic_beta]) -> void
+        def betas=: (
+          ::Array[Anthropic::Models::anthropic_beta]
+        ) -> ::Array[Anthropic::Models::anthropic_beta]
 
         def initialize:
           (

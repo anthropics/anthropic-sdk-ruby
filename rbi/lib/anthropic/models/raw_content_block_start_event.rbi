@@ -4,13 +4,38 @@ module Anthropic
   module Models
     class RawContentBlockStartEvent < Anthropic::BaseModel
       sig { returns(T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock)) }
-      attr_accessor :content_block
+      def content_block
+      end
+
+      sig do
+        params(
+          _: T.any(
+            Anthropic::Models::TextBlock,
+            Anthropic::Models::ToolUseBlock
+          )
+        ).returns(T.any(
+                    Anthropic::Models::TextBlock,
+                    Anthropic::Models::ToolUseBlock
+                  ))
+      end
+      def content_block=(_)
+      end
 
       sig { returns(Integer) }
-      attr_accessor :index
+      def index
+      end
+
+      sig { params(_: Integer).returns(Integer) }
+      def index=(_)
+      end
 
       sig { returns(Symbol) }
-      attr_accessor :type
+      def type
+      end
+
+      sig { params(_: Symbol).returns(Symbol) }
+      def type=(_)
+      end
 
       sig do
         params(

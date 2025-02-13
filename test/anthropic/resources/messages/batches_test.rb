@@ -48,6 +48,11 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Minitest::Test
     assert_pattern do
       page => Anthropic::Page
     end
+
+    row = response.to_enum.first
+    assert_pattern do
+      row => Anthropic::Models::Messages::MessageBatch
+    end
   end
 
   def test_delete

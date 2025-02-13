@@ -5,10 +5,20 @@ module Anthropic
     module Messages
       class DeletedMessageBatch < Anthropic::BaseModel
         sig { returns(String) }
-        attr_accessor :id
+        def id
+        end
+
+        sig { params(_: String).returns(String) }
+        def id=(_)
+        end
 
         sig { returns(Symbol) }
-        attr_accessor :type
+        def type
+        end
+
+        sig { params(_: Symbol).returns(Symbol) }
+        def type=(_)
+        end
 
         sig { params(id: String, type: Symbol).void }
         def initialize(id:, type: :message_batch_deleted)

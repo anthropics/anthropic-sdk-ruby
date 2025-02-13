@@ -4,16 +4,28 @@ module Anthropic
   module Models
     class ToolChoiceTool < Anthropic::BaseModel
       sig { returns(String) }
-      attr_accessor :name
+      def name
+      end
+
+      sig { params(_: String).returns(String) }
+      def name=(_)
+      end
 
       sig { returns(Symbol) }
-      attr_accessor :type
+      def type
+      end
+
+      sig { params(_: Symbol).returns(Symbol) }
+      def type=(_)
+      end
 
       sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :disable_parallel_tool_use
+      def disable_parallel_tool_use
+      end
 
-      sig { params(disable_parallel_tool_use: T::Boolean).void }
-      attr_writer :disable_parallel_tool_use
+      sig { params(_: T::Boolean).returns(T::Boolean) }
+      def disable_parallel_tool_use=(_)
+      end
 
       sig { params(name: String, disable_parallel_tool_use: T::Boolean, type: Symbol).void }
       def initialize(name:, disable_parallel_tool_use: nil, type: :tool)

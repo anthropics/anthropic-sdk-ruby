@@ -4,28 +4,78 @@ module Anthropic
   module Models
     class Message < Anthropic::BaseModel
       sig { returns(String) }
-      attr_accessor :id
+      def id
+      end
+
+      sig { params(_: String).returns(String) }
+      def id=(_)
+      end
 
       sig { returns(T::Array[T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock)]) }
-      attr_accessor :content
+      def content
+      end
+
+      sig do
+        params(
+          _: T::Array[T.any(
+            Anthropic::Models::TextBlock,
+            Anthropic::Models::ToolUseBlock
+          )]
+        ).returns(T::Array[T.any(
+          Anthropic::Models::TextBlock,
+          Anthropic::Models::ToolUseBlock
+        )])
+      end
+      def content=(_)
+      end
 
       sig { returns(T.any(Symbol, String)) }
-      attr_accessor :model
+      def model
+      end
+
+      sig { params(_: T.any(Symbol, String)).returns(T.any(Symbol, String)) }
+      def model=(_)
+      end
 
       sig { returns(Symbol) }
-      attr_accessor :role
+      def role
+      end
+
+      sig { params(_: Symbol).returns(Symbol) }
+      def role=(_)
+      end
 
       sig { returns(T.nilable(Symbol)) }
-      attr_accessor :stop_reason
+      def stop_reason
+      end
+
+      sig { params(_: T.nilable(Symbol)).returns(T.nilable(Symbol)) }
+      def stop_reason=(_)
+      end
 
       sig { returns(T.nilable(String)) }
-      attr_accessor :stop_sequence
+      def stop_sequence
+      end
+
+      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
+      def stop_sequence=(_)
+      end
 
       sig { returns(Symbol) }
-      attr_accessor :type
+      def type
+      end
+
+      sig { params(_: Symbol).returns(Symbol) }
+      def type=(_)
+      end
 
       sig { returns(Anthropic::Models::Usage) }
-      attr_accessor :usage
+      def usage
+      end
+
+      sig { params(_: Anthropic::Models::Usage).returns(Anthropic::Models::Usage) }
+      def usage=(_)
+      end
 
       sig do
         params(

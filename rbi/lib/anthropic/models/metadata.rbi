@@ -4,7 +4,12 @@ module Anthropic
   module Models
     class Metadata < Anthropic::BaseModel
       sig { returns(T.nilable(String)) }
-      attr_accessor :user_id
+      def user_id
+      end
+
+      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
+      def user_id=(_)
+      end
 
       sig { params(user_id: T.nilable(String)).void }
       def initialize(user_id: nil)

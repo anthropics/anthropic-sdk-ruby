@@ -18,10 +18,44 @@ module Anthropic
           )
         )
       end
-      attr_accessor :error
+      def error
+      end
+
+      sig do
+        params(
+          _: T.any(
+            Anthropic::Models::InvalidRequestError,
+            Anthropic::Models::AuthenticationError_,
+            Anthropic::Models::BillingError,
+            Anthropic::Models::PermissionError,
+            Anthropic::Models::NotFoundError_,
+            Anthropic::Models::RateLimitError_,
+            Anthropic::Models::GatewayTimeoutError,
+            Anthropic::Models::APIErrorObject,
+            Anthropic::Models::OverloadedError
+          )
+        ).returns(T.any(
+                    Anthropic::Models::InvalidRequestError,
+                    Anthropic::Models::AuthenticationError_,
+                    Anthropic::Models::BillingError,
+                    Anthropic::Models::PermissionError,
+                    Anthropic::Models::NotFoundError_,
+                    Anthropic::Models::RateLimitError_,
+                    Anthropic::Models::GatewayTimeoutError,
+                    Anthropic::Models::APIErrorObject,
+                    Anthropic::Models::OverloadedError
+                  ))
+      end
+      def error=(_)
+      end
 
       sig { returns(Symbol) }
-      attr_accessor :type
+      def type
+      end
+
+      sig { params(_: Symbol).returns(Symbol) }
+      def type=(_)
+      end
 
       sig do
         params(

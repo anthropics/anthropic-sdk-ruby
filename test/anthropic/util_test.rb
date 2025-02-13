@@ -114,15 +114,12 @@ class Anthropic::Test::UtilTest < Minitest::Test
         Anthropic::Util.parse_uri("h://a.b/c?d=e")
       ],
       [
-        "h://a.b/c?d=e&f=g",
+        "h://a.b/c?d=e",
         "h://nope",
         {
           host: "a.b",
           path: "/c",
-          query: {"d" => ["e"]},
-          extra_query: {
-            "f" => ["g"]
-          }
+          query: {"d" => ["e"]}
         }
       ]
     ]

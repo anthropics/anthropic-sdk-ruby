@@ -18,11 +18,13 @@ module Anthropic
 
       attr_reader content: Anthropic::Models::ToolResultBlockParam::content?
 
-      def content=: (Anthropic::Models::ToolResultBlockParam::content) -> void
+      def content=: (
+        Anthropic::Models::ToolResultBlockParam::content
+      ) -> Anthropic::Models::ToolResultBlockParam::content
 
       attr_reader is_error: bool?
 
-      def is_error=: (bool) -> void
+      def is_error=: (bool) -> bool
 
       def initialize:
         (

@@ -24,11 +24,11 @@ module Anthropic
 
         def content=: (
           Anthropic::Models::Beta::BetaToolResultBlockParam::content
-        ) -> void
+        ) -> Anthropic::Models::Beta::BetaToolResultBlockParam::content
 
         attr_reader is_error: bool?
 
-        def is_error=: (bool) -> void
+        def is_error=: (bool) -> bool
 
         def initialize:
           (

@@ -4,22 +4,52 @@ module Anthropic
   module Models
     class CitationPageLocationParam < Anthropic::BaseModel
       sig { returns(String) }
-      attr_accessor :cited_text
+      def cited_text
+      end
+
+      sig { params(_: String).returns(String) }
+      def cited_text=(_)
+      end
 
       sig { returns(Integer) }
-      attr_accessor :document_index
+      def document_index
+      end
+
+      sig { params(_: Integer).returns(Integer) }
+      def document_index=(_)
+      end
 
       sig { returns(T.nilable(String)) }
-      attr_accessor :document_title
+      def document_title
+      end
+
+      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
+      def document_title=(_)
+      end
 
       sig { returns(Integer) }
-      attr_accessor :end_page_number
+      def end_page_number
+      end
+
+      sig { params(_: Integer).returns(Integer) }
+      def end_page_number=(_)
+      end
 
       sig { returns(Integer) }
-      attr_accessor :start_page_number
+      def start_page_number
+      end
+
+      sig { params(_: Integer).returns(Integer) }
+      def start_page_number=(_)
+      end
 
       sig { returns(Symbol) }
-      attr_accessor :type
+      def type
+      end
+
+      sig { params(_: Symbol).returns(Symbol) }
+      def type=(_)
+      end
 
       sig do
         params(

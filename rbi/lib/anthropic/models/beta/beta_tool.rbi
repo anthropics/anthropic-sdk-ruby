@@ -7,22 +7,48 @@ module Anthropic
     module Beta
       class BetaTool < Anthropic::BaseModel
         sig { returns(Anthropic::Models::Beta::BetaTool::InputSchema) }
-        attr_accessor :input_schema
+        def input_schema
+        end
+
+        sig do
+          params(_: Anthropic::Models::Beta::BetaTool::InputSchema).returns(Anthropic::Models::Beta::BetaTool::InputSchema)
+        end
+        def input_schema=(_)
+        end
 
         sig { returns(String) }
-        attr_accessor :name
+        def name
+        end
+
+        sig { params(_: String).returns(String) }
+        def name=(_)
+        end
 
         sig { returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)) }
-        attr_accessor :cache_control
+        def cache_control
+        end
+
+        sig do
+          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)).returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+        end
+        def cache_control=(_)
+        end
 
         sig { returns(T.nilable(String)) }
-        attr_reader :description
+        def description
+        end
 
-        sig { params(description: String).void }
-        attr_writer :description
+        sig { params(_: String).returns(String) }
+        def description=(_)
+        end
 
         sig { returns(T.nilable(Symbol)) }
-        attr_accessor :type
+        def type
+        end
+
+        sig { params(_: T.nilable(Symbol)).returns(T.nilable(Symbol)) }
+        def type=(_)
+        end
 
         sig do
           params(
@@ -52,10 +78,20 @@ module Anthropic
 
         class InputSchema < Anthropic::BaseModel
           sig { returns(Symbol) }
-          attr_accessor :type
+          def type
+          end
+
+          sig { params(_: Symbol).returns(Symbol) }
+          def type=(_)
+          end
 
           sig { returns(T.nilable(T.anything)) }
-          attr_accessor :properties
+          def properties
+          end
+
+          sig { params(_: T.nilable(T.anything)).returns(T.nilable(T.anything)) }
+          def properties=(_)
+          end
 
           sig { params(properties: T.nilable(T.anything), type: Symbol).void }
           def initialize(properties: nil, type: :object)

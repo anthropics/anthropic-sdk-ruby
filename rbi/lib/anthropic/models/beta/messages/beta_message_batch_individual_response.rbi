@@ -6,7 +6,12 @@ module Anthropic
       module Messages
         class BetaMessageBatchIndividualResponse < Anthropic::BaseModel
           sig { returns(String) }
-          attr_accessor :custom_id
+          def custom_id
+          end
+
+          sig { params(_: String).returns(String) }
+          def custom_id=(_)
+          end
 
           sig do
             returns(
@@ -18,7 +23,26 @@ module Anthropic
               )
             )
           end
-          attr_accessor :result
+          def result
+          end
+
+          sig do
+            params(
+              _: T.any(
+                Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult,
+                Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult,
+                Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
+                Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
+              )
+            ).returns(T.any(
+                        Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult,
+                        Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult,
+                        Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
+                        Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
+                      ))
+          end
+          def result=(_)
+          end
 
           sig do
             params(

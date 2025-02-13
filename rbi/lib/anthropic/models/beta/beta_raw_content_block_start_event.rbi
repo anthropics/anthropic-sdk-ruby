@@ -9,13 +9,38 @@ module Anthropic
         sig do
           returns(T.any(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock))
         end
-        attr_accessor :content_block
+        def content_block
+        end
+
+        sig do
+          params(
+            _: T.any(
+              Anthropic::Models::Beta::BetaTextBlock,
+              Anthropic::Models::Beta::BetaToolUseBlock
+            )
+          ).returns(T.any(
+                      Anthropic::Models::Beta::BetaTextBlock,
+                      Anthropic::Models::Beta::BetaToolUseBlock
+                    ))
+        end
+        def content_block=(_)
+        end
 
         sig { returns(Integer) }
-        attr_accessor :index
+        def index
+        end
+
+        sig { params(_: Integer).returns(Integer) }
+        def index=(_)
+        end
 
         sig { returns(Symbol) }
-        attr_accessor :type
+        def type
+        end
+
+        sig { params(_: Symbol).returns(Symbol) }
+        def type=(_)
+        end
 
         sig do
           params(

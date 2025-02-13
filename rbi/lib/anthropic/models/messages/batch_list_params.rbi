@@ -8,22 +8,28 @@ module Anthropic
         include Anthropic::RequestParameters
 
         sig { returns(T.nilable(String)) }
-        attr_reader :after_id
+        def after_id
+        end
 
-        sig { params(after_id: String).void }
-        attr_writer :after_id
+        sig { params(_: String).returns(String) }
+        def after_id=(_)
+        end
 
         sig { returns(T.nilable(String)) }
-        attr_reader :before_id
+        def before_id
+        end
 
-        sig { params(before_id: String).void }
-        attr_writer :before_id
+        sig { params(_: String).returns(String) }
+        def before_id=(_)
+        end
 
         sig { returns(T.nilable(Integer)) }
-        attr_reader :limit
+        def limit
+        end
 
-        sig { params(limit: Integer).void }
-        attr_writer :limit
+        sig { params(_: Integer).returns(Integer) }
+        def limit=(_)
+        end
 
         sig do
           params(

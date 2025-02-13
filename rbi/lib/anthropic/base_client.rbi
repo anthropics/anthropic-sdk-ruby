@@ -35,10 +35,13 @@ module Anthropic
     def self.validate!(req)
     end
 
-    # @private
-    #
     sig { returns(T.anything) }
-    attr_accessor :requester
+    def requester
+    end
+
+    sig { params(_: T.anything).returns(T.anything) }
+    def requester=(_)
+    end
 
     sig do
       params(

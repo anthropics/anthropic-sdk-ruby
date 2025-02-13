@@ -7,34 +7,86 @@ module Anthropic
     module Messages
       class MessageBatch < Anthropic::BaseModel
         sig { returns(String) }
-        attr_accessor :id
+        def id
+        end
+
+        sig { params(_: String).returns(String) }
+        def id=(_)
+        end
 
         sig { returns(T.nilable(Time)) }
-        attr_accessor :archived_at
+        def archived_at
+        end
+
+        sig { params(_: T.nilable(Time)).returns(T.nilable(Time)) }
+        def archived_at=(_)
+        end
 
         sig { returns(T.nilable(Time)) }
-        attr_accessor :cancel_initiated_at
+        def cancel_initiated_at
+        end
+
+        sig { params(_: T.nilable(Time)).returns(T.nilable(Time)) }
+        def cancel_initiated_at=(_)
+        end
 
         sig { returns(Time) }
-        attr_accessor :created_at
+        def created_at
+        end
+
+        sig { params(_: Time).returns(Time) }
+        def created_at=(_)
+        end
 
         sig { returns(T.nilable(Time)) }
-        attr_accessor :ended_at
+        def ended_at
+        end
+
+        sig { params(_: T.nilable(Time)).returns(T.nilable(Time)) }
+        def ended_at=(_)
+        end
 
         sig { returns(Time) }
-        attr_accessor :expires_at
+        def expires_at
+        end
+
+        sig { params(_: Time).returns(Time) }
+        def expires_at=(_)
+        end
 
         sig { returns(Symbol) }
-        attr_accessor :processing_status
+        def processing_status
+        end
+
+        sig { params(_: Symbol).returns(Symbol) }
+        def processing_status=(_)
+        end
 
         sig { returns(Anthropic::Models::Messages::MessageBatchRequestCounts) }
-        attr_accessor :request_counts
+        def request_counts
+        end
+
+        sig do
+          params(_: Anthropic::Models::Messages::MessageBatchRequestCounts).returns(Anthropic::Models::Messages::MessageBatchRequestCounts)
+        end
+        def request_counts=(_)
+        end
 
         sig { returns(T.nilable(String)) }
-        attr_accessor :results_url
+        def results_url
+        end
+
+        sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
+        def results_url=(_)
+        end
 
         sig { returns(Symbol) }
-        attr_accessor :type
+        def type
+        end
+
+        sig { params(_: Symbol).returns(Symbol) }
+        def type=(_)
+        end
 
         sig do
           params(

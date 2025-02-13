@@ -7,13 +7,32 @@ module Anthropic
     module Beta
       class BetaRawMessageDeltaEvent < Anthropic::BaseModel
         sig { returns(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta) }
-        attr_accessor :delta
+        def delta
+        end
+
+        sig do
+          params(_: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta).returns(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta)
+        end
+        def delta=(_)
+        end
 
         sig { returns(Symbol) }
-        attr_accessor :type
+        def type
+        end
+
+        sig { params(_: Symbol).returns(Symbol) }
+        def type=(_)
+        end
 
         sig { returns(Anthropic::Models::Beta::BetaMessageDeltaUsage) }
-        attr_accessor :usage
+        def usage
+        end
+
+        sig do
+          params(_: Anthropic::Models::Beta::BetaMessageDeltaUsage).returns(Anthropic::Models::Beta::BetaMessageDeltaUsage)
+        end
+        def usage=(_)
+        end
 
         sig do
           params(
@@ -39,10 +58,20 @@ module Anthropic
 
         class Delta < Anthropic::BaseModel
           sig { returns(T.nilable(Symbol)) }
-          attr_accessor :stop_reason
+          def stop_reason
+          end
+
+          sig { params(_: T.nilable(Symbol)).returns(T.nilable(Symbol)) }
+          def stop_reason=(_)
+          end
 
           sig { returns(T.nilable(String)) }
-          attr_accessor :stop_sequence
+          def stop_sequence
+          end
+
+          sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
+          def stop_sequence=(_)
+          end
 
           sig { params(stop_reason: T.nilable(Symbol), stop_sequence: T.nilable(String)).void }
           def initialize(stop_reason:, stop_sequence:)

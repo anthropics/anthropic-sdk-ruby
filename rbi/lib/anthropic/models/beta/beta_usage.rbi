@@ -7,16 +7,36 @@ module Anthropic
     module Beta
       class BetaUsage < Anthropic::BaseModel
         sig { returns(T.nilable(Integer)) }
-        attr_accessor :cache_creation_input_tokens
+        def cache_creation_input_tokens
+        end
+
+        sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
+        def cache_creation_input_tokens=(_)
+        end
 
         sig { returns(T.nilable(Integer)) }
-        attr_accessor :cache_read_input_tokens
+        def cache_read_input_tokens
+        end
+
+        sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
+        def cache_read_input_tokens=(_)
+        end
 
         sig { returns(Integer) }
-        attr_accessor :input_tokens
+        def input_tokens
+        end
+
+        sig { params(_: Integer).returns(Integer) }
+        def input_tokens=(_)
+        end
 
         sig { returns(Integer) }
-        attr_accessor :output_tokens
+        def output_tokens
+        end
+
+        sig { params(_: Integer).returns(Integer) }
+        def output_tokens=(_)
+        end
 
         sig do
           params(

@@ -4,7 +4,12 @@ module Anthropic
   module Models
     class MessageTokensCount < Anthropic::BaseModel
       sig { returns(Integer) }
-      attr_accessor :input_tokens
+      def input_tokens
+      end
+
+      sig { params(_: Integer).returns(Integer) }
+      def input_tokens=(_)
+      end
 
       sig { params(input_tokens: Integer).void }
       def initialize(input_tokens:)

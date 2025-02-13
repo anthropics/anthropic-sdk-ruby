@@ -7,22 +7,54 @@ module Anthropic
     module Beta
       class BetaToolComputerUse20241022 < Anthropic::BaseModel
         sig { returns(Integer) }
-        attr_accessor :display_height_px
+        def display_height_px
+        end
+
+        sig { params(_: Integer).returns(Integer) }
+        def display_height_px=(_)
+        end
 
         sig { returns(Integer) }
-        attr_accessor :display_width_px
+        def display_width_px
+        end
+
+        sig { params(_: Integer).returns(Integer) }
+        def display_width_px=(_)
+        end
 
         sig { returns(Symbol) }
-        attr_accessor :name
+        def name
+        end
+
+        sig { params(_: Symbol).returns(Symbol) }
+        def name=(_)
+        end
 
         sig { returns(Symbol) }
-        attr_accessor :type
+        def type
+        end
+
+        sig { params(_: Symbol).returns(Symbol) }
+        def type=(_)
+        end
 
         sig { returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)) }
-        attr_accessor :cache_control
+        def cache_control
+        end
+
+        sig do
+          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)).returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+        end
+        def cache_control=(_)
+        end
 
         sig { returns(T.nilable(Integer)) }
-        attr_accessor :display_number
+        def display_number
+        end
+
+        sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
+        def display_number=(_)
+        end
 
         sig do
           params(

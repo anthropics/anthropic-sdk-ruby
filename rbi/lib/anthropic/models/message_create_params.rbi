@@ -7,40 +7,80 @@ module Anthropic
       include Anthropic::RequestParameters
 
       sig { returns(Integer) }
-      attr_accessor :max_tokens
+      def max_tokens
+      end
+
+      sig { params(_: Integer).returns(Integer) }
+      def max_tokens=(_)
+      end
 
       sig { returns(T::Array[Anthropic::Models::MessageParam]) }
-      attr_accessor :messages
+      def messages
+      end
+
+      sig do
+        params(_: T::Array[Anthropic::Models::MessageParam]).returns(T::Array[Anthropic::Models::MessageParam])
+      end
+      def messages=(_)
+      end
 
       sig { returns(T.any(Symbol, String)) }
-      attr_accessor :model
+      def model
+      end
+
+      sig { params(_: T.any(Symbol, String)).returns(T.any(Symbol, String)) }
+      def model=(_)
+      end
 
       sig { returns(T.nilable(Anthropic::Models::Metadata)) }
-      attr_reader :metadata
+      def metadata
+      end
 
-      sig { params(metadata: Anthropic::Models::Metadata).void }
-      attr_writer :metadata
+      sig { params(_: Anthropic::Models::Metadata).returns(Anthropic::Models::Metadata) }
+      def metadata=(_)
+      end
 
       sig { returns(T.nilable(T::Array[String])) }
-      attr_reader :stop_sequences
+      def stop_sequences
+      end
 
-      sig { params(stop_sequences: T::Array[String]).void }
-      attr_writer :stop_sequences
+      sig { params(_: T::Array[String]).returns(T::Array[String]) }
+      def stop_sequences=(_)
+      end
 
       sig { returns(T::Boolean) }
-      attr_accessor :stream
+      def stream
+      end
+
+      sig { params(_: T::Boolean).returns(T::Boolean) }
+      def stream=(_)
+      end
 
       sig { returns(T.nilable(T.any(String, T::Array[Anthropic::Models::TextBlockParam]))) }
-      attr_reader :system_
+      def system_
+      end
 
-      sig { params(system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam])).void }
-      attr_writer :system_
+      sig do
+        params(
+          _: T.any(
+            String,
+            T::Array[Anthropic::Models::TextBlockParam]
+          )
+        ).returns(T.any(
+                    String,
+                    T::Array[Anthropic::Models::TextBlockParam]
+                  ))
+      end
+      def system_=(_)
+      end
 
       sig { returns(T.nilable(Float)) }
-      attr_reader :temperature
+      def temperature
+      end
 
-      sig { params(temperature: Float).void }
-      attr_writer :temperature
+      sig { params(_: Float).returns(Float) }
+      def temperature=(_)
+      end
 
       sig do
         returns(
@@ -53,36 +93,48 @@ module Anthropic
           )
         )
       end
-      attr_reader :tool_choice
+      def tool_choice
+      end
 
       sig do
         params(
-          tool_choice: T.any(
+          _: T.any(
             Anthropic::Models::ToolChoiceAuto,
             Anthropic::Models::ToolChoiceAny,
             Anthropic::Models::ToolChoiceTool
           )
-        ).void
+        ).returns(T.any(
+                    Anthropic::Models::ToolChoiceAuto,
+                    Anthropic::Models::ToolChoiceAny,
+                    Anthropic::Models::ToolChoiceTool
+                  ))
       end
-      attr_writer :tool_choice
+      def tool_choice=(_)
+      end
 
       sig { returns(T.nilable(T::Array[Anthropic::Models::Tool])) }
-      attr_reader :tools
+      def tools
+      end
 
-      sig { params(tools: T::Array[Anthropic::Models::Tool]).void }
-      attr_writer :tools
+      sig { params(_: T::Array[Anthropic::Models::Tool]).returns(T::Array[Anthropic::Models::Tool]) }
+      def tools=(_)
+      end
 
       sig { returns(T.nilable(Integer)) }
-      attr_reader :top_k
+      def top_k
+      end
 
-      sig { params(top_k: Integer).void }
-      attr_writer :top_k
+      sig { params(_: Integer).returns(Integer) }
+      def top_k=(_)
+      end
 
       sig { returns(T.nilable(Float)) }
-      attr_reader :top_p
+      def top_p
+      end
 
-      sig { params(top_p: Float).void }
-      attr_writer :top_p
+      sig { params(_: Float).returns(Float) }
+      def top_p=(_)
+      end
 
       sig do
         params(

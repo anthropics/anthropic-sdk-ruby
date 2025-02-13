@@ -4,10 +4,20 @@ module Anthropic
   module Models
     class TextDelta < Anthropic::BaseModel
       sig { returns(String) }
-      attr_accessor :text
+      def text
+      end
+
+      sig { params(_: String).returns(String) }
+      def text=(_)
+      end
 
       sig { returns(Symbol) }
-      attr_accessor :type
+      def type
+      end
+
+      sig { params(_: Symbol).returns(Symbol) }
+      def type=(_)
+      end
 
       sig { params(text: String, type: Symbol).void }
       def initialize(text:, type: :text_delta)
