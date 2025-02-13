@@ -7,46 +7,76 @@ module Anthropic
       include Anthropic::RequestParameters
 
       sig { returns(Integer) }
-      attr_accessor :max_tokens_to_sample
+      def max_tokens_to_sample
+      end
+
+      sig { params(_: Integer).returns(Integer) }
+      def max_tokens_to_sample=(_)
+      end
 
       sig { returns(T.any(Symbol, String)) }
-      attr_accessor :model
+      def model
+      end
+
+      sig { params(_: T.any(Symbol, String)).returns(T.any(Symbol, String)) }
+      def model=(_)
+      end
 
       sig { returns(String) }
-      attr_accessor :prompt
+      def prompt
+      end
+
+      sig { params(_: String).returns(String) }
+      def prompt=(_)
+      end
 
       sig { returns(T.nilable(Anthropic::Models::Metadata)) }
-      attr_reader :metadata
+      def metadata
+      end
 
-      sig { params(metadata: Anthropic::Models::Metadata).void }
-      attr_writer :metadata
+      sig { params(_: Anthropic::Models::Metadata).returns(Anthropic::Models::Metadata) }
+      def metadata=(_)
+      end
 
       sig { returns(T.nilable(T::Array[String])) }
-      attr_reader :stop_sequences
+      def stop_sequences
+      end
 
-      sig { params(stop_sequences: T::Array[String]).void }
-      attr_writer :stop_sequences
+      sig { params(_: T::Array[String]).returns(T::Array[String]) }
+      def stop_sequences=(_)
+      end
 
       sig { returns(T::Boolean) }
-      attr_accessor :stream
+      def stream
+      end
+
+      sig { params(_: T::Boolean).returns(T::Boolean) }
+      def stream=(_)
+      end
 
       sig { returns(T.nilable(Float)) }
-      attr_reader :temperature
+      def temperature
+      end
 
-      sig { params(temperature: Float).void }
-      attr_writer :temperature
+      sig { params(_: Float).returns(Float) }
+      def temperature=(_)
+      end
 
       sig { returns(T.nilable(Integer)) }
-      attr_reader :top_k
+      def top_k
+      end
 
-      sig { params(top_k: Integer).void }
-      attr_writer :top_k
+      sig { params(_: Integer).returns(Integer) }
+      def top_k=(_)
+      end
 
       sig { returns(T.nilable(Float)) }
-      attr_reader :top_p
+      def top_p
+      end
 
-      sig { params(top_p: Float).void }
-      attr_writer :top_p
+      sig { params(_: Float).returns(Float) }
+      def top_p=(_)
+      end
 
       sig do
         params(

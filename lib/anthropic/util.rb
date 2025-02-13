@@ -292,8 +292,6 @@ module Anthropic
     #
     #   @option rhs [Hash{String=>Array<String>}] :query
     #
-    #   @option rhs [Hash{String=>Array<String>}] :extra_query
-    #
     # @return [URI::Generic]
     #
     def self.join_parsed_uri(lhs, rhs)
@@ -307,7 +305,7 @@ module Anthropic
       query = deep_merge(
         joined.path == base_path ? base_query : {},
         parsed_query,
-        *rhs.values_at(:query, :extra_query).compact,
+        rhs[:query].to_h,
         concat: true
       )
 
@@ -327,12 +325,12 @@ module Anthropic
 
     # @private
     #
-    # @param query [Hash{String=>Array<String>, String, nil}]
+    # @param query [Hash{String=>Array<String>, String, nil}, nil]
     #
     # @return [String, nil]
     #
     def self.encode_query(query)
-      query.empty? ? nil : URI.encode_www_form(query)
+      query.to_h.empty? ? nil : URI.encode_www_form(query)
     end
 
     # @private

@@ -62,7 +62,7 @@ module Anthropic
     def self?.decode_query: (String? query) -> ::Hash[String, ::Array[String]]
 
     def self?.encode_query: (
-      ::Hash[String, (::Array[String] | String)?] query
+      ::Hash[String, (::Array[String] | String)?]? query
     ) -> String?
 
     def self?.normalized_headers: (

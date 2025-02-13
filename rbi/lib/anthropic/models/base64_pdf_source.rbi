@@ -4,13 +4,28 @@ module Anthropic
   module Models
     class Base64PDFSource < Anthropic::BaseModel
       sig { returns(String) }
-      attr_accessor :data
+      def data
+      end
+
+      sig { params(_: String).returns(String) }
+      def data=(_)
+      end
 
       sig { returns(Symbol) }
-      attr_accessor :media_type
+      def media_type
+      end
+
+      sig { params(_: Symbol).returns(Symbol) }
+      def media_type=(_)
+      end
 
       sig { returns(Symbol) }
-      attr_accessor :type
+      def type
+      end
+
+      sig { params(_: Symbol).returns(Symbol) }
+      def type=(_)
+      end
 
       sig { params(data: String, media_type: Symbol, type: Symbol).void }
       def initialize(data:, media_type: :"application/pdf", type: :base64)

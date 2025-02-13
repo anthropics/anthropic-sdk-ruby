@@ -12,13 +12,40 @@ module Anthropic
           )
         )
       end
-      attr_accessor :delta
+      def delta
+      end
+
+      sig do
+        params(
+          _: T.any(
+            Anthropic::Models::TextDelta,
+            Anthropic::Models::InputJSONDelta,
+            Anthropic::Models::CitationsDelta
+          )
+        ).returns(T.any(
+                    Anthropic::Models::TextDelta,
+                    Anthropic::Models::InputJSONDelta,
+                    Anthropic::Models::CitationsDelta
+                  ))
+      end
+      def delta=(_)
+      end
 
       sig { returns(Integer) }
-      attr_accessor :index
+      def index
+      end
+
+      sig { params(_: Integer).returns(Integer) }
+      def index=(_)
+      end
 
       sig { returns(Symbol) }
-      attr_accessor :type
+      def type
+      end
+
+      sig { params(_: Symbol).returns(Symbol) }
+      def type=(_)
+      end
 
       sig do
         params(

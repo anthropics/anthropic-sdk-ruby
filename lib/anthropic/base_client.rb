@@ -126,10 +126,16 @@ module Anthropic
 
       path = Anthropic::Util.interpolate_path(uninterpolated_path)
 
+      query = Anthropic::Util.deep_merge(
+        req[:query].to_h,
+        opts[:extra_query].to_h
+      )
+
       headers = Anthropic::Util.normalized_headers(
         @headers,
         auth_headers,
-        *[req[:headers], opts[:extra_headers]].compact
+        req[:headers].to_h,
+        opts[:extra_headers].to_h
       )
 
       if @idempotency_header &&
@@ -157,7 +163,7 @@ module Anthropic
           Anthropic::Util.deep_merge(*[req[:body], opts[:extra_body]].compact)
         end
 
-      url = Anthropic::Util.join_parsed_uri(@base_url, {**req, path: path})
+      url = Anthropic::Util.join_parsed_uri(@base_url, {**req, path: path, query: query})
       headers, encoded = Anthropic::Util.encode_content(headers, body)
       max_retries = opts.fetch(:max_retries, @max_retries)
       {method: method, url: url, headers: headers, body: encoded, max_retries: max_retries, timeout: timeout}
@@ -387,12 +393,10 @@ module Anthropic
       parsed = Anthropic::Util.decode_content(response)
       unwrapped = Anthropic::Util.dig(parsed, req[:unwrap])
 
-      page = req[:page]
-      model = req.fetch(:model, Anthropic::Unknown)
-      case [page, model]
-      in [Class, Class | Anthropic::Converter | nil]
+      case [req[:page], req.fetch(:model, Anthropic::Unknown)]
+      in [Class => page, _]
         page.new(client: self, req: req, headers: response, unwrapped: unwrapped)
-      in [nil, Class | Anthropic::Converter]
+      in [nil, Class | Anthropic::Converter => model]
         Anthropic::Converter.coerce(model, unwrapped)
       in [nil, nil]
         unwrapped

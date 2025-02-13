@@ -17,13 +17,44 @@ module Anthropic
             )
           )
         end
-        attr_accessor :citations
+        def citations
+        end
+
+        sig do
+          params(
+            _: T.nilable(
+              T::Array[T.any(
+                Anthropic::Models::Beta::BetaCitationCharLocation,
+                Anthropic::Models::Beta::BetaCitationPageLocation,
+                Anthropic::Models::Beta::BetaCitationContentBlockLocation
+              )]
+            )
+          ).returns(T.nilable(
+                      T::Array[T.any(
+                        Anthropic::Models::Beta::BetaCitationCharLocation,
+                        Anthropic::Models::Beta::BetaCitationPageLocation,
+                        Anthropic::Models::Beta::BetaCitationContentBlockLocation
+                      )]
+                    ))
+        end
+        def citations=(_)
+        end
 
         sig { returns(String) }
-        attr_accessor :text
+        def text
+        end
+
+        sig { params(_: String).returns(String) }
+        def text=(_)
+        end
 
         sig { returns(Symbol) }
-        attr_accessor :type
+        def type
+        end
+
+        sig { params(_: Symbol).returns(Symbol) }
+        def type=(_)
+        end
 
         sig do
           params(

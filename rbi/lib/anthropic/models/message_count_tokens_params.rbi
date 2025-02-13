@@ -7,16 +7,40 @@ module Anthropic
       include Anthropic::RequestParameters
 
       sig { returns(T::Array[Anthropic::Models::MessageParam]) }
-      attr_accessor :messages
+      def messages
+      end
+
+      sig do
+        params(_: T::Array[Anthropic::Models::MessageParam]).returns(T::Array[Anthropic::Models::MessageParam])
+      end
+      def messages=(_)
+      end
 
       sig { returns(T.any(Symbol, String)) }
-      attr_accessor :model
+      def model
+      end
+
+      sig { params(_: T.any(Symbol, String)).returns(T.any(Symbol, String)) }
+      def model=(_)
+      end
 
       sig { returns(T.nilable(T.any(String, T::Array[Anthropic::Models::TextBlockParam]))) }
-      attr_reader :system_
+      def system_
+      end
 
-      sig { params(system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam])).void }
-      attr_writer :system_
+      sig do
+        params(
+          _: T.any(
+            String,
+            T::Array[Anthropic::Models::TextBlockParam]
+          )
+        ).returns(T.any(
+                    String,
+                    T::Array[Anthropic::Models::TextBlockParam]
+                  ))
+      end
+      def system_=(_)
+      end
 
       sig do
         returns(
@@ -29,24 +53,32 @@ module Anthropic
           )
         )
       end
-      attr_reader :tool_choice
+      def tool_choice
+      end
 
       sig do
         params(
-          tool_choice: T.any(
+          _: T.any(
             Anthropic::Models::ToolChoiceAuto,
             Anthropic::Models::ToolChoiceAny,
             Anthropic::Models::ToolChoiceTool
           )
-        ).void
+        ).returns(T.any(
+                    Anthropic::Models::ToolChoiceAuto,
+                    Anthropic::Models::ToolChoiceAny,
+                    Anthropic::Models::ToolChoiceTool
+                  ))
       end
-      attr_writer :tool_choice
+      def tool_choice=(_)
+      end
 
       sig { returns(T.nilable(T::Array[Anthropic::Models::Tool])) }
-      attr_reader :tools
+      def tools
+      end
 
-      sig { params(tools: T::Array[Anthropic::Models::Tool]).void }
-      attr_writer :tools
+      sig { params(_: T::Array[Anthropic::Models::Tool]).returns(T::Array[Anthropic::Models::Tool]) }
+      def tools=(_)
+      end
 
       sig do
         params(

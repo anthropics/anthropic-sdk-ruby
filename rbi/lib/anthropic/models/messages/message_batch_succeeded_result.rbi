@@ -7,10 +7,20 @@ module Anthropic
     module Messages
       class MessageBatchSucceededResult < Anthropic::BaseModel
         sig { returns(Anthropic::Models::Message) }
-        attr_accessor :message
+        def message
+        end
+
+        sig { params(_: Anthropic::Models::Message).returns(Anthropic::Models::Message) }
+        def message=(_)
+        end
 
         sig { returns(Symbol) }
-        attr_accessor :type
+        def type
+        end
+
+        sig { params(_: Symbol).returns(Symbol) }
+        def type=(_)
+        end
 
         sig { params(message: Anthropic::Models::Message, type: Symbol).void }
         def initialize(message:, type: :succeeded)

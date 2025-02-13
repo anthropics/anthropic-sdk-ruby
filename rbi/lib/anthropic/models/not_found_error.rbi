@@ -4,10 +4,20 @@ module Anthropic
   module Models
     class NotFoundError_ < Anthropic::BaseModel
       sig { returns(String) }
-      attr_accessor :message
+      def message
+      end
+
+      sig { params(_: String).returns(String) }
+      def message=(_)
+      end
 
       sig { returns(Symbol) }
-      attr_accessor :type
+      def type
+      end
+
+      sig { params(_: Symbol).returns(Symbol) }
+      def type=(_)
+      end
 
       sig { params(message: String, type: Symbol).void }
       def initialize(message:, type: :not_found_error)

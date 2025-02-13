@@ -5,7 +5,7 @@ module Anthropic
     class CitationsConfigParam < Anthropic::BaseModel
       attr_reader enabled: bool?
 
-      def enabled=: (bool) -> void
+      def enabled=: (bool) -> bool
 
       def initialize:
         (enabled: bool) -> void

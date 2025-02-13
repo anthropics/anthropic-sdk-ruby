@@ -7,7 +7,12 @@ module Anthropic
     module Beta
       class BetaRawMessageStopEvent < Anthropic::BaseModel
         sig { returns(Symbol) }
-        attr_accessor :type
+        def type
+        end
+
+        sig { params(_: Symbol).returns(Symbol) }
+        def type=(_)
+        end
 
         sig { params(type: Symbol).void }
         def initialize(type: :message_stop)

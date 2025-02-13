@@ -22,7 +22,7 @@ module Anthropic
 
         attr_reader description: String?
 
-        def description=: (String) -> void
+        def description=: (String) -> String
 
         attr_accessor type: Anthropic::Models::Beta::BetaTool::type_?
 

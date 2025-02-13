@@ -5,4 +5,5 @@
 doc/
 sorbet/
 Brewfile.lock.json
+bin/tapioca
 *.gem

@@ -96,7 +96,12 @@ module Anthropic
     end
 
     sig do
-      params(query: T::Hash[String, T.nilable(T.any(T::Array[String], String))]).returns(T.nilable(String))
+      params(
+        query: T.nilable(
+          T::Hash[String,
+                  T.nilable(T.any(T::Array[String], String))]
+        )
+      ).returns(T.nilable(String))
     end
     def self.encode_query(query)
     end

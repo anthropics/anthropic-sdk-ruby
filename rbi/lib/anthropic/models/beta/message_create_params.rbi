@@ -8,40 +8,82 @@ module Anthropic
         include Anthropic::RequestParameters
 
         sig { returns(Integer) }
-        attr_accessor :max_tokens
+        def max_tokens
+        end
+
+        sig { params(_: Integer).returns(Integer) }
+        def max_tokens=(_)
+        end
 
         sig { returns(T::Array[Anthropic::Models::Beta::BetaMessageParam]) }
-        attr_accessor :messages
+        def messages
+        end
+
+        sig do
+          params(_: T::Array[Anthropic::Models::Beta::BetaMessageParam]).returns(T::Array[Anthropic::Models::Beta::BetaMessageParam])
+        end
+        def messages=(_)
+        end
 
         sig { returns(T.any(Symbol, String)) }
-        attr_accessor :model
+        def model
+        end
+
+        sig { params(_: T.any(Symbol, String)).returns(T.any(Symbol, String)) }
+        def model=(_)
+        end
 
         sig { returns(T.nilable(Anthropic::Models::Beta::BetaMetadata)) }
-        attr_reader :metadata
+        def metadata
+        end
 
-        sig { params(metadata: Anthropic::Models::Beta::BetaMetadata).void }
-        attr_writer :metadata
+        sig do
+          params(_: Anthropic::Models::Beta::BetaMetadata).returns(Anthropic::Models::Beta::BetaMetadata)
+        end
+        def metadata=(_)
+        end
 
         sig { returns(T.nilable(T::Array[String])) }
-        attr_reader :stop_sequences
+        def stop_sequences
+        end
 
-        sig { params(stop_sequences: T::Array[String]).void }
-        attr_writer :stop_sequences
+        sig { params(_: T::Array[String]).returns(T::Array[String]) }
+        def stop_sequences=(_)
+        end
 
         sig { returns(T::Boolean) }
-        attr_accessor :stream
+        def stream
+        end
+
+        sig { params(_: T::Boolean).returns(T::Boolean) }
+        def stream=(_)
+        end
 
         sig { returns(T.nilable(T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]))) }
-        attr_reader :system_
+        def system_
+        end
 
-        sig { params(system_: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam])).void }
-        attr_writer :system_
+        sig do
+          params(
+            _: T.any(
+              String,
+              T::Array[Anthropic::Models::Beta::BetaTextBlockParam]
+            )
+          ).returns(T.any(
+                      String,
+                      T::Array[Anthropic::Models::Beta::BetaTextBlockParam]
+                    ))
+        end
+        def system_=(_)
+        end
 
         sig { returns(T.nilable(Float)) }
-        attr_reader :temperature
+        def temperature
+        end
 
-        sig { params(temperature: Float).void }
-        attr_writer :temperature
+        sig { params(_: Float).returns(Float) }
+        def temperature=(_)
+        end
 
         sig do
           returns(
@@ -54,18 +96,24 @@ module Anthropic
             )
           )
         end
-        attr_reader :tool_choice
+        def tool_choice
+        end
 
         sig do
           params(
-            tool_choice: T.any(
+            _: T.any(
               Anthropic::Models::Beta::BetaToolChoiceAuto,
               Anthropic::Models::Beta::BetaToolChoiceAny,
               Anthropic::Models::Beta::BetaToolChoiceTool
             )
-          ).void
+          ).returns(T.any(
+                      Anthropic::Models::Beta::BetaToolChoiceAuto,
+                      Anthropic::Models::Beta::BetaToolChoiceAny,
+                      Anthropic::Models::Beta::BetaToolChoiceTool
+                    ))
         end
-        attr_writer :tool_choice
+        def tool_choice=(_)
+        end
 
         sig do
           returns(
@@ -79,37 +127,50 @@ module Anthropic
             )
           )
         end
-        attr_reader :tools
+        def tools
+        end
 
         sig do
           params(
-            tools: T::Array[T.any(
+            _: T::Array[T.any(
               Anthropic::Models::Beta::BetaTool,
               Anthropic::Models::Beta::BetaToolComputerUse20241022,
               Anthropic::Models::Beta::BetaToolBash20241022,
               Anthropic::Models::Beta::BetaToolTextEditor20241022
             )]
-          ).void
+          ).returns(T::Array[T.any(
+            Anthropic::Models::Beta::BetaTool,
+            Anthropic::Models::Beta::BetaToolComputerUse20241022,
+            Anthropic::Models::Beta::BetaToolBash20241022,
+            Anthropic::Models::Beta::BetaToolTextEditor20241022
+          )])
         end
-        attr_writer :tools
+        def tools=(_)
+        end
 
         sig { returns(T.nilable(Integer)) }
-        attr_reader :top_k
+        def top_k
+        end
 
-        sig { params(top_k: Integer).void }
-        attr_writer :top_k
+        sig { params(_: Integer).returns(Integer) }
+        def top_k=(_)
+        end
 
         sig { returns(T.nilable(Float)) }
-        attr_reader :top_p
+        def top_p
+        end
 
-        sig { params(top_p: Float).void }
-        attr_writer :top_p
+        sig { params(_: Float).returns(Float) }
+        def top_p=(_)
+        end
 
         sig { returns(T.nilable(T::Array[T.any(String, Symbol)])) }
-        attr_reader :betas
+        def betas
+        end
 
-        sig { params(betas: T::Array[T.any(String, Symbol)]).void }
-        attr_writer :betas
+        sig { params(_: T::Array[T.any(String, Symbol)]).returns(T::Array[T.any(String, Symbol)]) }
+        def betas=(_)
+        end
 
         sig do
           params(

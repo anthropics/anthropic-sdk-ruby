@@ -7,10 +7,20 @@ module Anthropic
     module Beta
       class BetaRawMessageStartEvent < Anthropic::BaseModel
         sig { returns(Anthropic::Models::Beta::BetaMessage) }
-        attr_accessor :message
+        def message
+        end
+
+        sig { params(_: Anthropic::Models::Beta::BetaMessage).returns(Anthropic::Models::Beta::BetaMessage) }
+        def message=(_)
+        end
 
         sig { returns(Symbol) }
-        attr_accessor :type
+        def type
+        end
+
+        sig { params(_: Symbol).returns(Symbol) }
+        def type=(_)
+        end
 
         sig { params(message: Anthropic::Models::Beta::BetaMessage, type: Symbol).void }
         def initialize(message:, type: :message_start)

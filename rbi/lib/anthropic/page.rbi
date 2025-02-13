@@ -7,16 +7,36 @@ module Anthropic
     Elem = type_member
 
     sig { returns(T::Array[Elem]) }
-    attr_accessor :data
+    def data
+    end
+
+    sig { params(_: T::Array[Elem]).returns(T::Array[Elem]) }
+    def data=(_)
+    end
 
     sig { returns(T::Boolean) }
-    attr_accessor :has_more
+    def has_more
+    end
+
+    sig { params(_: T::Boolean).returns(T::Boolean) }
+    def has_more=(_)
+    end
 
     sig { returns(T.nilable(String)) }
-    attr_accessor :first_id
+    def first_id
+    end
+
+    sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
+    def first_id=(_)
+    end
 
     sig { returns(T.nilable(String)) }
-    attr_accessor :last_id
+    def last_id
+    end
+
+    sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
+    def last_id=(_)
+    end
 
     sig do
       params(

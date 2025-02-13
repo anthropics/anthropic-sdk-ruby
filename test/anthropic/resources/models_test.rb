@@ -29,5 +29,10 @@ class Anthropic::Test::Resources::ModelsTest < Minitest::Test
     assert_pattern do
       page => Anthropic::Page
     end
+
+    row = response.to_enum.first
+    assert_pattern do
+      row => Anthropic::Models::ModelInfo
+    end
   end
 end

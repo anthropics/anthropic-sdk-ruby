@@ -16,6 +16,7 @@ group :development do
   gem "syntax_tree"
   # TODO: using a fork for now, the prettier below has a bug
   gem "syntax_tree-rbs", github: "stainless-api/syntax_tree-rbs", branch: "main"
+  gem "tapioca"
   gem "webrick"
   gem "yard"
 end

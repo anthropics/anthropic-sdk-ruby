@@ -7,10 +7,20 @@ module Anthropic
     module Messages
       class MessageBatchErroredResult < Anthropic::BaseModel
         sig { returns(Anthropic::Models::ErrorResponse) }
-        attr_accessor :error
+        def error
+        end
+
+        sig { params(_: Anthropic::Models::ErrorResponse).returns(Anthropic::Models::ErrorResponse) }
+        def error=(_)
+        end
 
         sig { returns(Symbol) }
-        attr_accessor :type
+        def type
+        end
+
+        sig { params(_: Symbol).returns(Symbol) }
+        def type=(_)
+        end
 
         sig { params(error: Anthropic::Models::ErrorResponse, type: Symbol).void }
         def initialize(error:, type: :errored)

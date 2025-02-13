@@ -189,6 +189,8 @@ Style/Documentation:
 # Stop RuboCop nagging about rubocop-rake.
 # Ensure that RuboCop validates according to the lowest version of Ruby that we support.
 AllCops:
+  Exclude:
+    - bin/*
   NewCops: enable
   SuggestExtensions: false
   TargetRubyVersion: 3.0.0

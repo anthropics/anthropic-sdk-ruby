@@ -12,7 +12,7 @@ module Anthropic
 
         attr_reader disable_parallel_tool_use: bool?
 
-        def disable_parallel_tool_use=: (bool) -> void
+        def disable_parallel_tool_use=: (bool) -> bool
 
         def initialize:
           (disable_parallel_tool_use: bool, type: :any) -> void

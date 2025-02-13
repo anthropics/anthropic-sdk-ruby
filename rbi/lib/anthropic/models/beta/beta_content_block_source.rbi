@@ -17,10 +17,36 @@ module Anthropic
             )
           )
         end
-        attr_accessor :content
+        def content
+        end
+
+        sig do
+          params(
+            _: T.any(
+              String,
+              T::Array[T.any(
+                Anthropic::Models::Beta::BetaTextBlockParam,
+                Anthropic::Models::Beta::BetaImageBlockParam
+              )]
+            )
+          ).returns(T.any(
+                      String,
+                      T::Array[T.any(
+                        Anthropic::Models::Beta::BetaTextBlockParam,
+                        Anthropic::Models::Beta::BetaImageBlockParam
+                      )]
+                    ))
+        end
+        def content=(_)
+        end
 
         sig { returns(Symbol) }
-        attr_accessor :type
+        def type
+        end
+
+        sig { params(_: Symbol).returns(Symbol) }
+        def type=(_)
+        end
 
         sig do
           params(

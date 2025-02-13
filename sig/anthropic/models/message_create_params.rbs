@@ -29,37 +29,45 @@ module Anthropic
 
       attr_reader metadata: Anthropic::Models::Metadata?
 
-      def metadata=: (Anthropic::Models::Metadata) -> void
+      def metadata=: (
+        Anthropic::Models::Metadata
+      ) -> Anthropic::Models::Metadata
 
       attr_reader stop_sequences: ::Array[String]?
 
-      def stop_sequences=: (::Array[String]) -> void
+      def stop_sequences=: (::Array[String]) -> ::Array[String]
 
       attr_accessor stream: Anthropic::Models::MessageCreateParams::stream
 
       attr_reader system_: Anthropic::Models::MessageCreateParams::system_?
 
-      def system_=: (Anthropic::Models::MessageCreateParams::system_) -> void
+      def system_=: (
+        Anthropic::Models::MessageCreateParams::system_
+      ) -> Anthropic::Models::MessageCreateParams::system_
 
       attr_reader temperature: Float?
 
-      def temperature=: (Float) -> void
+      def temperature=: (Float) -> Float
 
       attr_reader tool_choice: Anthropic::Models::tool_choice?
 
-      def tool_choice=: (Anthropic::Models::tool_choice) -> void
+      def tool_choice=: (
+        Anthropic::Models::tool_choice
+      ) -> Anthropic::Models::tool_choice
 
       attr_reader tools: ::Array[Anthropic::Models::Tool]?
 
-      def tools=: (::Array[Anthropic::Models::Tool]) -> void
+      def tools=: (
+        ::Array[Anthropic::Models::Tool]
+      ) -> ::Array[Anthropic::Models::Tool]
 
       attr_reader top_k: Integer?
 
-      def top_k=: (Integer) -> void
+      def top_k=: (Integer) -> Integer
 
       attr_reader top_p: Float?
 
-      def top_p=: (Float) -> void
+      def top_p=: (Float) -> Float
 
       def initialize:
         (

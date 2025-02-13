@@ -22,15 +22,19 @@ module Anthropic
 
       def system_=: (
         Anthropic::Models::MessageCountTokensParams::system_
-      ) -> void
+      ) -> Anthropic::Models::MessageCountTokensParams::system_
 
       attr_reader tool_choice: Anthropic::Models::tool_choice?
 
-      def tool_choice=: (Anthropic::Models::tool_choice) -> void
+      def tool_choice=: (
+        Anthropic::Models::tool_choice
+      ) -> Anthropic::Models::tool_choice
 
       attr_reader tools: ::Array[Anthropic::Models::Tool]?
 
-      def tools=: (::Array[Anthropic::Models::Tool]) -> void
+      def tools=: (
+        ::Array[Anthropic::Models::Tool]
+      ) -> ::Array[Anthropic::Models::Tool]
 
       def initialize:
         (

@@ -4,19 +4,44 @@ module Anthropic
   module Models
     class Completion < Anthropic::BaseModel
       sig { returns(String) }
-      attr_accessor :id
+      def id
+      end
+
+      sig { params(_: String).returns(String) }
+      def id=(_)
+      end
 
       sig { returns(String) }
-      attr_accessor :completion
+      def completion
+      end
+
+      sig { params(_: String).returns(String) }
+      def completion=(_)
+      end
 
       sig { returns(T.any(Symbol, String)) }
-      attr_accessor :model
+      def model
+      end
+
+      sig { params(_: T.any(Symbol, String)).returns(T.any(Symbol, String)) }
+      def model=(_)
+      end
 
       sig { returns(T.nilable(String)) }
-      attr_accessor :stop_reason
+      def stop_reason
+      end
+
+      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
+      def stop_reason=(_)
+      end
 
       sig { returns(Symbol) }
-      attr_accessor :type
+      def type
+      end
+
+      sig { params(_: Symbol).returns(Symbol) }
+      def type=(_)
+      end
 
       sig do
         params(

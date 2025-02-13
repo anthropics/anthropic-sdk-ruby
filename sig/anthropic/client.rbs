@@ -20,6 +20,12 @@ module Anthropic
 
     attr_reader beta: Anthropic::Resources::Beta
 
+    private def auth_headers: -> ::Hash[String, String]
+
+    private def api_key_auth: -> ::Hash[String, String]
+
+    private def bearer_auth: -> ::Hash[String, String]
+
     def initialize: (
       base_url: String?,
       api_key: String?,

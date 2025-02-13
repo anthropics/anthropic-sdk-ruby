@@ -7,13 +7,30 @@ module Anthropic
     module Beta
       class BetaTextBlockParam < Anthropic::BaseModel
         sig { returns(String) }
-        attr_accessor :text
+        def text
+        end
+
+        sig { params(_: String).returns(String) }
+        def text=(_)
+        end
 
         sig { returns(Symbol) }
-        attr_accessor :type
+        def type
+        end
+
+        sig { params(_: Symbol).returns(Symbol) }
+        def type=(_)
+        end
 
         sig { returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)) }
-        attr_accessor :cache_control
+        def cache_control
+        end
+
+        sig do
+          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)).returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+        end
+        def cache_control=(_)
+        end
 
         sig do
           returns(
@@ -26,7 +43,28 @@ module Anthropic
             )
           )
         end
-        attr_accessor :citations
+        def citations
+        end
+
+        sig do
+          params(
+            _: T.nilable(
+              T::Array[T.any(
+                Anthropic::Models::Beta::BetaCitationCharLocationParam,
+                Anthropic::Models::Beta::BetaCitationPageLocationParam,
+                Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
+              )]
+            )
+          ).returns(T.nilable(
+                      T::Array[T.any(
+                        Anthropic::Models::Beta::BetaCitationCharLocationParam,
+                        Anthropic::Models::Beta::BetaCitationPageLocationParam,
+                        Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
+                      )]
+                    ))
+        end
+        def citations=(_)
+        end
 
         sig do
           params(

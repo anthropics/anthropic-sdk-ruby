@@ -7,10 +7,20 @@ module Anthropic
     module Beta
       class BetaInputJSONDelta < Anthropic::BaseModel
         sig { returns(String) }
-        attr_accessor :partial_json
+        def partial_json
+        end
+
+        sig { params(_: String).returns(String) }
+        def partial_json=(_)
+        end
 
         sig { returns(Symbol) }
-        attr_accessor :type
+        def type
+        end
+
+        sig { params(_: Symbol).returns(Symbol) }
+        def type=(_)
+        end
 
         sig { params(partial_json: String, type: Symbol).void }
         def initialize(partial_json:, type: :input_json_delta)

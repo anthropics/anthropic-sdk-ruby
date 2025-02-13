@@ -9,10 +9,12 @@ module Anthropic
           include Anthropic::RequestParameters
 
           sig { returns(T.nilable(T::Array[T.any(String, Symbol)])) }
-          attr_reader :betas
+          def betas
+          end
 
-          sig { params(betas: T::Array[T.any(String, Symbol)]).void }
-          attr_writer :betas
+          sig { params(_: T::Array[T.any(String, Symbol)]).returns(T::Array[T.any(String, Symbol)]) }
+          def betas=(_)
+          end
 
           sig do
             params(

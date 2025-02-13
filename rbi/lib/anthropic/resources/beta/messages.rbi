@@ -5,7 +5,8 @@ module Anthropic
     class Beta
       class Messages
         sig { returns(Anthropic::Resources::Beta::Messages::Batches) }
-        attr_reader :batches
+        def batches
+        end
 
         sig do
           params(

@@ -19,7 +19,9 @@ module Anthropic
 
       attr_reader citations: Anthropic::Models::CitationsConfigParam?
 
-      def citations=: (Anthropic::Models::CitationsConfigParam) -> void
+      def citations=: (
+        Anthropic::Models::CitationsConfigParam
+      ) -> Anthropic::Models::CitationsConfigParam
 
       attr_accessor context: String?
 

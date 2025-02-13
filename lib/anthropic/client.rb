@@ -35,6 +35,32 @@ module Anthropic
     # @return [Anthropic::Resources::Beta]
     attr_reader :beta
 
+    # @private
+    #
+    # @return [Hash{String=>String}]
+    #
+    private def auth_headers
+      {**api_key_auth, **bearer_auth}
+    end
+
+    # @private
+    #
+    # @return [Hash{String=>String}]
+    #
+    private def api_key_auth
+      {"X-Api-Key" => @api_key}
+    end
+
+    # @private
+    #
+    # @return [Hash{String=>String}]
+    #
+    private def bearer_auth
+      return {} if @auth_token.nil?
+
+      {"Authorization" => "Bearer #{@auth_token}"}
+    end
+
     # Creates and returns a new client for interacting with the API.
     #
     # @param base_url [String, nil] Override the default base URL for the API, e.g., `"https://api.example.com/v2/"`

@@ -9,7 +9,7 @@
 require_relative "../../lib/anthropic"
 require_relative "test_namespaces"
 
-require "minitest"
+require "minitest/autorun"
 require "minitest/focus"
 require "minitest/hooks/test"
 
