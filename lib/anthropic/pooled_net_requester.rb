@@ -112,7 +112,6 @@ module Anthropic
     private def make_request(conn, request, timeout)
       unless conn.started?
         conn.open_timeout = timeout
-        conn.ssl_timeout = timeout if conn.use_ssl?
         conn.start
       end
 
