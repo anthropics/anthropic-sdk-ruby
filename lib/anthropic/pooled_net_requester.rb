@@ -12,29 +12,58 @@ module Anthropic
     # @private
     #
     # @param url [URL::Generic]
-    # @param timeout [Float]
+    # @param blk [Proc]
     #
     # @return [ConnectionPool]
     #
-    private def get_pool(url)
+    private def with_pool(url, &blk)
       origin = Anthropic::Util.uri_origin(url)
-      @mutex.synchronize do
-        @pools[origin] ||= ConnectionPool.new(size: Etc.nprocessors) do
-          port =
-            case [url.port, url.scheme]
-            in [Integer, _]
-              url.port
-            in [nil, "http" | "ws"]
-              Net::HTTP.http_default_port
-            in [nil, "https" | "wss"]
-              Net::HTTP.https_default_port
-            end
+      key = :"#{self.class.name}-connection_in_use_for_#{origin}"
 
-          session = Net::HTTP.new(url.host, port)
-          session.use_ssl = %w[https wss].include?(url.scheme)
-          session.max_retries = 0
-          session
+      return blk.call(make_conn(url)) if Thread.current[key]
+
+      pool =
+        @mutex.synchronize do
+          @pools[origin] ||= ConnectionPool.new(size: Etc.nprocessors) do
+            make_conn(url)
+          end
         end
+
+      pool.with do |conn|
+        Thread.current[key] = true
+
+        blk.call(conn)
+        # rubocop:disable Lint/RescueException
+      rescue Exception => e
+        # rubocop:enable Lint/RescueException
+        # should close connection on all errors to ensure no invalid state persists
+        conn.finish if conn.started?
+        raise e
+      ensure
+        Thread.current[key] = nil
+      end
+    end
+
+    # @private
+    #
+    # @param url [URI::Generic]
+    #
+    # @return [Net::HTTP]
+    #
+    private def make_conn(url)
+      port =
+        case [url.port, url.scheme]
+        in [Integer, _]
+          url.port
+        in [nil, "http" | "ws"]
+          Net::HTTP.http_default_port
+        in [nil, "https" | "wss"]
+          Net::HTTP.https_default_port
+        end
+
+      Net::HTTP.new(url.host, port).tap do
+        _1.use_ssl = %w[https wss].include?(url.scheme)
+        _1.max_retries = 0
       end
     end
 
@@ -44,7 +73,7 @@ module Anthropic
     #   @option req [Symbol] :method
     #   @option req [URI::Generic] :url
     #   @option req [Hash{String => String}] :headers
-    #   @option req [String, Hash] :body
+    #   @option req [String, Hash, IO, StringIO] :body
     #   @option req [Float] :timeout
     #
     # @return [Net::HTTPResponse]
@@ -55,7 +84,7 @@ module Anthropic
       request = Net::HTTPGenericRequest.new(
         method.to_s.upcase,
         !body.nil?,
-        ![:head, :options].include?(method),
+        method != :head,
         url.to_s
       )
 
@@ -67,28 +96,31 @@ module Anthropic
         request.body_stream = body
       end
 
-      # This timeout is for acquiring a connection from the pool
-      # The default 5 seconds seems too short, lets just have a nearly unbounded queue for now
-      #
-      # TODO: revisit this around granular timeout / concurrency control
-      get_pool(url).with(timeout: 600) do |conn|
-        conn.open_timeout = timeout
-        conn.read_timeout = timeout
-        conn.write_timeout = timeout
-        conn.continue_timeout = timeout
-
-        conn.start unless conn.started?
-
-        conn.request(request)
-        # rubocop:disable Lint/RescueException
-      rescue Exception => e
-        # rubocop:enable Lint/RescueException
-        # should close connection on all errors to ensure no invalid state persists
-        conn.finish if conn.started?
-        raise e
+      with_pool(url) do |conn|
+        make_request(conn, request, timeout)
       end
-    rescue ConnectionPool::TimeoutError
-      raise Anthropic::APITimeoutError.new(url: url)
+    end
+
+    # @private
+    #
+    # @param conn [Net::HTTP]
+    # @param request [Net::HTTPGenericRequest]
+    # @param timeout [Float]
+    #
+    # @return [Net::HTTPResponse]
+    #
+    private def make_request(conn, request, timeout)
+      unless conn.started?
+        conn.open_timeout = timeout
+        conn.ssl_timeout = timeout if conn.use_ssl?
+        conn.start
+      end
+
+      conn.read_timeout = timeout
+      conn.write_timeout = timeout
+      conn.continue_timeout = timeout
+
+      conn.request(request)
     end
   end
 end
