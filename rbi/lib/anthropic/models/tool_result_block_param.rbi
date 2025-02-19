@@ -24,7 +24,8 @@ module Anthropic
       end
 
       sig do
-        params(_: T.nilable(Anthropic::Models::CacheControlEphemeral)).returns(T.nilable(Anthropic::Models::CacheControlEphemeral))
+        params(_: T.nilable(Anthropic::Models::CacheControlEphemeral))
+          .returns(T.nilable(Anthropic::Models::CacheControlEphemeral))
       end
       def cache_control=(_)
       end
@@ -32,13 +33,7 @@ module Anthropic
       sig do
         returns(
           T.nilable(
-            T.any(
-              String,
-              T::Array[T.any(
-                Anthropic::Models::TextBlockParam,
-                Anthropic::Models::ImageBlockParam
-              )]
-            )
+            T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)])
           )
         )
       end
@@ -47,14 +42,11 @@ module Anthropic
 
       sig do
         params(
-          _: T.any(
-            String,
-            T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
+          _: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)])
+        )
+          .returns(
+            T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)])
           )
-        ).returns(T.any(
-                    String,
-                    T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
-                  ))
       end
       def content=(_)
       end
@@ -71,36 +63,26 @@ module Anthropic
         params(
           tool_use_id: String,
           cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
-          content: T.any(
-            String,
-            T::Array[T.any(
-              Anthropic::Models::TextBlockParam,
-              Anthropic::Models::ImageBlockParam
-            )]
-          ),
+          content: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]),
           is_error: T::Boolean,
           type: Symbol
-        ).void
+        )
+          .void
       end
       def initialize(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result)
       end
 
       sig do
-        override.returns(
-          {
-            tool_use_id: String,
-            type: Symbol,
-            cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
-            content: T.any(
-              String,
-              T::Array[T.any(
-                Anthropic::Models::TextBlockParam,
-                Anthropic::Models::ImageBlockParam
-              )]
-            ),
-            is_error: T::Boolean
-          }
-        )
+        override
+          .returns(
+            {
+              tool_use_id: String,
+              type: Symbol,
+              cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
+              content: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]),
+              is_error: T::Boolean
+            }
+          )
       end
       def to_hash
       end
@@ -108,35 +90,24 @@ module Anthropic
       class Content < Anthropic::Union
         abstract!
 
-        ContentArray = T.type_alias do
-          T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
-        end
+        ContentArray = T.type_alias { T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)] }
 
         class Content < Anthropic::Union
           abstract!
 
           sig do
-            override.returns(
-              [
-                [Symbol, Anthropic::Models::TextBlockParam],
-                [Symbol, Anthropic::Models::ImageBlockParam]
-              ]
-            )
+            override
+              .returns([[Symbol, Anthropic::Models::TextBlockParam], [Symbol, Anthropic::Models::ImageBlockParam]])
           end
           private_class_method def self.variants
           end
         end
 
         sig do
-          override.returns(
-            [
-              [NilClass, String],
-              [
-                NilClass,
-                T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
-              ]
-            ]
-          )
+          override
+            .returns(
+              [[NilClass, String], [NilClass, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]]]
+            )
         end
         private_class_method def self.variants
         end

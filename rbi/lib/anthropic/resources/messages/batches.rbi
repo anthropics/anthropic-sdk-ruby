@@ -8,7 +8,8 @@ module Anthropic
           params(
             requests: T::Array[Anthropic::Models::Messages::BatchCreateParams::Request],
             request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-          ).returns(Anthropic::Models::Messages::MessageBatch)
+          )
+            .returns(Anthropic::Models::Messages::MessageBatch)
         end
         def create(requests:, request_options: {})
         end
@@ -17,7 +18,8 @@ module Anthropic
           params(
             message_batch_id: String,
             request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-          ).returns(Anthropic::Models::Messages::MessageBatch)
+          )
+            .returns(Anthropic::Models::Messages::MessageBatch)
         end
         def retrieve(message_batch_id, request_options: {})
         end
@@ -28,7 +30,8 @@ module Anthropic
             before_id: String,
             limit: Integer,
             request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-          ).returns(Anthropic::Page[Anthropic::Models::Messages::MessageBatch])
+          )
+            .returns(Anthropic::Page[Anthropic::Models::Messages::MessageBatch])
         end
         def list(after_id: nil, before_id: nil, limit: nil, request_options: {})
         end
@@ -37,7 +40,8 @@ module Anthropic
           params(
             message_batch_id: String,
             request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-          ).returns(Anthropic::Models::Messages::DeletedMessageBatch)
+          )
+            .returns(Anthropic::Models::Messages::DeletedMessageBatch)
         end
         def delete(message_batch_id, request_options: {})
         end
@@ -46,7 +50,8 @@ module Anthropic
           params(
             message_batch_id: String,
             request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-          ).returns(Anthropic::Models::Messages::MessageBatch)
+          )
+            .returns(Anthropic::Models::Messages::MessageBatch)
         end
         def cancel(message_batch_id, request_options: {})
         end
@@ -55,7 +60,8 @@ module Anthropic
           params(
             message_batch_id: String,
             request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-          ).returns(Anthropic::Models::Messages::MessageBatchIndividualResponse)
+          )
+            .returns(Anthropic::Models::Messages::MessageBatchIndividualResponse)
         end
         def results(message_batch_id, request_options: {})
         end

@@ -245,9 +245,7 @@ module Anthropic
               #
               #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>, nil]
               optional :system_,
-                       union: -> {
-                         Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::System
-                       },
+                       union: -> { Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::System },
                        api_name: :system
 
               # @!parse
@@ -450,9 +448,7 @@ module Anthropic
               # end
               # ```
               class System < Anthropic::Union
-                BetaTextBlockParamArray = Anthropic::ArrayOf[-> {
-                  Anthropic::Models::Beta::BetaTextBlockParam
-                }]
+                BetaTextBlockParamArray = Anthropic::ArrayOf[-> { Anthropic::Models::Beta::BetaTextBlockParam }]
 
                 variant String
 

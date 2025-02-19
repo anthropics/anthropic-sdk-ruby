@@ -25,11 +25,14 @@ module Anthropic
               Anthropic::Models::Beta::BetaPlainTextSource,
               Anthropic::Models::Beta::BetaContentBlockSource
             )
-          ).returns(T.any(
-                      Anthropic::Models::Beta::BetaBase64PDFSource,
-                      Anthropic::Models::Beta::BetaPlainTextSource,
-                      Anthropic::Models::Beta::BetaContentBlockSource
-                    ))
+          )
+            .returns(
+              T.any(
+                Anthropic::Models::Beta::BetaBase64PDFSource,
+                Anthropic::Models::Beta::BetaPlainTextSource,
+                Anthropic::Models::Beta::BetaContentBlockSource
+              )
+            )
         end
         def source=(_)
         end
@@ -47,7 +50,8 @@ module Anthropic
         end
 
         sig do
-          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)).returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+            .returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
         end
         def cache_control=(_)
         end
@@ -57,7 +61,8 @@ module Anthropic
         end
 
         sig do
-          params(_: Anthropic::Models::Beta::BetaCitationsConfigParam).returns(Anthropic::Models::Beta::BetaCitationsConfigParam)
+          params(_: Anthropic::Models::Beta::BetaCitationsConfigParam)
+            .returns(Anthropic::Models::Beta::BetaCitationsConfigParam)
         end
         def citations=(_)
         end
@@ -90,26 +95,28 @@ module Anthropic
             context: T.nilable(String),
             title: T.nilable(String),
             type: Symbol
-          ).void
+          )
+            .void
         end
         def initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document)
         end
 
         sig do
-          override.returns(
-            {
-              source: T.any(
-                Anthropic::Models::Beta::BetaBase64PDFSource,
-                Anthropic::Models::Beta::BetaPlainTextSource,
-                Anthropic::Models::Beta::BetaContentBlockSource
-              ),
-              type: Symbol,
-              cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
-              citations: Anthropic::Models::Beta::BetaCitationsConfigParam,
-              context: T.nilable(String),
-              title: T.nilable(String)
-            }
-          )
+          override
+            .returns(
+              {
+                source: T.any(
+                  Anthropic::Models::Beta::BetaBase64PDFSource,
+                  Anthropic::Models::Beta::BetaPlainTextSource,
+                  Anthropic::Models::Beta::BetaContentBlockSource
+                ),
+                type: Symbol,
+                cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
+                citations: Anthropic::Models::Beta::BetaCitationsConfigParam,
+                context: T.nilable(String),
+                title: T.nilable(String)
+              }
+            )
         end
         def to_hash
         end
@@ -118,13 +125,10 @@ module Anthropic
           abstract!
 
           sig do
-            override.returns(
-              [
-                [Symbol, Anthropic::Models::Beta::BetaBase64PDFSource],
-                [Symbol, Anthropic::Models::Beta::BetaPlainTextSource],
-                [Symbol, Anthropic::Models::Beta::BetaContentBlockSource]
-              ]
-            )
+            override
+              .returns(
+                [[Symbol, Anthropic::Models::Beta::BetaBase64PDFSource], [Symbol, Anthropic::Models::Beta::BetaPlainTextSource], [Symbol, Anthropic::Models::Beta::BetaContentBlockSource]]
+              )
           end
           private_class_method def self.variants
           end

@@ -12,7 +12,8 @@ module Anthropic
         end
 
         sig do
-          params(_: T::Array[Anthropic::Models::Messages::BatchCreateParams::Request]).returns(T::Array[Anthropic::Models::Messages::BatchCreateParams::Request])
+          params(_: T::Array[Anthropic::Models::Messages::BatchCreateParams::Request])
+            .returns(T::Array[Anthropic::Models::Messages::BatchCreateParams::Request])
         end
         def requests=(_)
         end
@@ -21,18 +22,20 @@ module Anthropic
           params(
             requests: T::Array[Anthropic::Models::Messages::BatchCreateParams::Request],
             request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
-          ).void
+          )
+            .void
         end
         def initialize(requests:, request_options: {})
         end
 
         sig do
-          override.returns(
-            {
-              requests: T::Array[Anthropic::Models::Messages::BatchCreateParams::Request],
-              request_options: Anthropic::RequestOptions
-            }
-          )
+          override
+            .returns(
+              {
+                requests: T::Array[Anthropic::Models::Messages::BatchCreateParams::Request],
+                request_options: Anthropic::RequestOptions
+              }
+            )
         end
         def to_hash
         end
@@ -51,27 +54,19 @@ module Anthropic
           end
 
           sig do
-            params(_: Anthropic::Models::Messages::BatchCreateParams::Request::Params).returns(Anthropic::Models::Messages::BatchCreateParams::Request::Params)
+            params(_: Anthropic::Models::Messages::BatchCreateParams::Request::Params)
+              .returns(Anthropic::Models::Messages::BatchCreateParams::Request::Params)
           end
           def params=(_)
           end
 
-          sig do
-            params(
-              custom_id: String,
-              params: Anthropic::Models::Messages::BatchCreateParams::Request::Params
-            ).void
-          end
+          sig { params(custom_id: String, params: Anthropic::Models::Messages::BatchCreateParams::Request::Params).void }
           def initialize(custom_id:, params:)
           end
 
           sig do
-            override.returns(
-              {
-                custom_id: String,
-                params: Anthropic::Models::Messages::BatchCreateParams::Request::Params
-              }
-            )
+            override
+              .returns({custom_id: String, params: Anthropic::Models::Messages::BatchCreateParams::Request::Params})
           end
           def to_hash
           end
@@ -89,9 +84,7 @@ module Anthropic
             def messages
             end
 
-            sig do
-              params(_: T::Array[Anthropic::Models::MessageParam]).returns(T::Array[Anthropic::Models::MessageParam])
-            end
+            sig { params(_: T::Array[Anthropic::Models::MessageParam]).returns(T::Array[Anthropic::Models::MessageParam]) }
             def messages=(_)
             end
 
@@ -132,15 +125,8 @@ module Anthropic
             end
 
             sig do
-              params(
-                _: T.any(
-                  String,
-                  T::Array[Anthropic::Models::TextBlockParam]
-                )
-              ).returns(T.any(
-                          String,
-                          T::Array[Anthropic::Models::TextBlockParam]
-                        ))
+              params(_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]))
+                .returns(T.any(String, T::Array[Anthropic::Models::TextBlockParam]))
             end
             def system_=(_)
             end
@@ -174,11 +160,14 @@ module Anthropic
                   Anthropic::Models::ToolChoiceAny,
                   Anthropic::Models::ToolChoiceTool
                 )
-              ).returns(T.any(
-                          Anthropic::Models::ToolChoiceAuto,
-                          Anthropic::Models::ToolChoiceAny,
-                          Anthropic::Models::ToolChoiceTool
-                        ))
+              )
+                .returns(
+                  T.any(
+                    Anthropic::Models::ToolChoiceAuto,
+                    Anthropic::Models::ToolChoiceAny,
+                    Anthropic::Models::ToolChoiceTool
+                  )
+                )
             end
             def tool_choice=(_)
             end
@@ -225,7 +214,8 @@ module Anthropic
                 tools: T::Array[Anthropic::Models::Tool],
                 top_k: Integer,
                 top_p: Float
-              ).void
+              )
+                .void
             end
             def initialize(
               max_tokens:,
@@ -244,26 +234,27 @@ module Anthropic
             end
 
             sig do
-              override.returns(
-                {
-                  max_tokens: Integer,
-                  messages: T::Array[Anthropic::Models::MessageParam],
-                  model: T.any(Symbol, String),
-                  metadata: Anthropic::Models::Metadata,
-                  stop_sequences: T::Array[String],
-                  stream: T::Boolean,
-                  system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
-                  temperature: Float,
-                  tool_choice: T.any(
-                    Anthropic::Models::ToolChoiceAuto,
-                    Anthropic::Models::ToolChoiceAny,
-                    Anthropic::Models::ToolChoiceTool
-                  ),
-                  tools: T::Array[Anthropic::Models::Tool],
-                  top_k: Integer,
-                  top_p: Float
-                }
-              )
+              override
+                .returns(
+                  {
+                    max_tokens: Integer,
+                    messages: T::Array[Anthropic::Models::MessageParam],
+                    model: T.any(Symbol, String),
+                    metadata: Anthropic::Models::Metadata,
+                    stop_sequences: T::Array[String],
+                    stream: T::Boolean,
+                    system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
+                    temperature: Float,
+                    tool_choice: T.any(
+                      Anthropic::Models::ToolChoiceAuto,
+                      Anthropic::Models::ToolChoiceAny,
+                      Anthropic::Models::ToolChoiceTool
+                    ),
+                    tools: T::Array[Anthropic::Models::Tool],
+                    top_k: Integer,
+                    top_p: Float
+                  }
+                )
             end
             def to_hash
             end
@@ -273,14 +264,7 @@ module Anthropic
 
               TextBlockParamArray = T.type_alias { T::Array[Anthropic::Models::TextBlockParam] }
 
-              sig do
-                override.returns(
-                  [
-                    [NilClass, String],
-                    [NilClass, T::Array[Anthropic::Models::TextBlockParam]]
-                  ]
-                )
-              end
+              sig { override.returns([[NilClass, String], [NilClass, T::Array[Anthropic::Models::TextBlockParam]]]) }
               private_class_method def self.variants
               end
             end

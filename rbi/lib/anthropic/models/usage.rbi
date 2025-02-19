@@ -41,20 +41,22 @@ module Anthropic
           cache_read_input_tokens: T.nilable(Integer),
           input_tokens: Integer,
           output_tokens: Integer
-        ).void
+        )
+          .void
       end
       def initialize(cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, output_tokens:)
       end
 
       sig do
-        override.returns(
-          {
-            cache_creation_input_tokens: T.nilable(Integer),
-            cache_read_input_tokens: T.nilable(Integer),
-            input_tokens: Integer,
-            output_tokens: Integer
-          }
-        )
+        override
+          .returns(
+            {
+              cache_creation_input_tokens: T.nilable(Integer),
+              cache_read_input_tokens: T.nilable(Integer),
+              input_tokens: Integer,
+              output_tokens: Integer
+            }
+          )
       end
       def to_hash
       end

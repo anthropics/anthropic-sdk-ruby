@@ -10,10 +10,7 @@ module Anthropic
           returns(
             T.any(
               String,
-              T::Array[T.any(
-                Anthropic::Models::Beta::BetaTextBlockParam,
-                Anthropic::Models::Beta::BetaImageBlockParam
-              )]
+              T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
             )
           )
         end
@@ -24,18 +21,15 @@ module Anthropic
           params(
             _: T.any(
               String,
-              T::Array[T.any(
-                Anthropic::Models::Beta::BetaTextBlockParam,
-                Anthropic::Models::Beta::BetaImageBlockParam
-              )]
+              T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
             )
-          ).returns(T.any(
-                      String,
-                      T::Array[T.any(
-                        Anthropic::Models::Beta::BetaTextBlockParam,
-                        Anthropic::Models::Beta::BetaImageBlockParam
-                      )]
-                    ))
+          )
+            .returns(
+              T.any(
+                String,
+                T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
+              )
+            )
         end
         def content=(_)
         end
@@ -52,30 +46,26 @@ module Anthropic
           params(
             content: T.any(
               String,
-              T::Array[T.any(
-                Anthropic::Models::Beta::BetaTextBlockParam,
-                Anthropic::Models::Beta::BetaImageBlockParam
-              )]
+              T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
             ),
             type: Symbol
-          ).void
+          )
+            .void
         end
         def initialize(content:, type: :content)
         end
 
         sig do
-          override.returns(
-            {
-              content: T.any(
-                String,
-                T::Array[T.any(
-                  Anthropic::Models::Beta::BetaTextBlockParam,
-                  Anthropic::Models::Beta::BetaImageBlockParam
-                )]
-              ),
-              type: Symbol
-            }
-          )
+          override
+            .returns(
+              {
+                content: T.any(
+                  String,
+                  T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
+                ),
+                type: Symbol
+              }
+            )
         end
         def to_hash
         end
@@ -83,26 +73,13 @@ module Anthropic
         class Content < Anthropic::Union
           abstract!
 
-          BetaContentBlockSourceContentArray = T.type_alias do
-            T::Array[T.any(
-              Anthropic::Models::Beta::BetaTextBlockParam,
-              Anthropic::Models::Beta::BetaImageBlockParam
-            )]
-          end
+          BetaContentBlockSourceContentArray = T.type_alias { T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)] }
 
           sig do
-            override.returns(
-              [
-                [NilClass, String],
-                [
-                  NilClass,
-                  T::Array[T.any(
-                    Anthropic::Models::Beta::BetaTextBlockParam,
-                    Anthropic::Models::Beta::BetaImageBlockParam
-                  )]
-                ]
-              ]
-            )
+            override
+              .returns(
+                [[NilClass, String], [NilClass, T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]]]
+              )
           end
           private_class_method def self.variants
           end

@@ -9,9 +9,7 @@ module Anthropic
           def error
           end
 
-          sig do
-            params(_: Anthropic::Models::BetaErrorResponse).returns(Anthropic::Models::BetaErrorResponse)
-          end
+          sig { params(_: Anthropic::Models::BetaErrorResponse).returns(Anthropic::Models::BetaErrorResponse) }
           def error=(_)
           end
 

@@ -27,7 +27,8 @@ module Anthropic
         end
 
         sig do
-          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)).returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+            .returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
         end
         def cache_control=(_)
         end
@@ -35,11 +36,13 @@ module Anthropic
         sig do
           returns(
             T.nilable(
-              T::Array[T.any(
+              T::Array[
+              T.any(
                 Anthropic::Models::Beta::BetaCitationCharLocationParam,
                 Anthropic::Models::Beta::BetaCitationPageLocationParam,
                 Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
-              )]
+              )
+              ]
             )
           )
         end
@@ -49,19 +52,26 @@ module Anthropic
         sig do
           params(
             _: T.nilable(
-              T::Array[T.any(
+              T::Array[
+              T.any(
                 Anthropic::Models::Beta::BetaCitationCharLocationParam,
                 Anthropic::Models::Beta::BetaCitationPageLocationParam,
                 Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
-              )]
+              )
+              ]
             )
-          ).returns(T.nilable(
-                      T::Array[T.any(
-                        Anthropic::Models::Beta::BetaCitationCharLocationParam,
-                        Anthropic::Models::Beta::BetaCitationPageLocationParam,
-                        Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
-                      )]
-                    ))
+          )
+            .returns(
+              T.nilable(
+                T::Array[
+                T.any(
+                  Anthropic::Models::Beta::BetaCitationCharLocationParam,
+                  Anthropic::Models::Beta::BetaCitationPageLocationParam,
+                  Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
+                )
+                ]
+              )
+            )
         end
         def citations=(_)
         end
@@ -71,33 +81,39 @@ module Anthropic
             text: String,
             cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
             citations: T.nilable(
-              T::Array[T.any(
+              T::Array[
+              T.any(
                 Anthropic::Models::Beta::BetaCitationCharLocationParam,
                 Anthropic::Models::Beta::BetaCitationPageLocationParam,
                 Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
-              )]
+              )
+              ]
             ),
             type: Symbol
-          ).void
+          )
+            .void
         end
         def initialize(text:, cache_control: nil, citations: nil, type: :text)
         end
 
         sig do
-          override.returns(
-            {
-              text: String,
-              type: Symbol,
-              cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
-              citations: T.nilable(
-                T::Array[T.any(
-                  Anthropic::Models::Beta::BetaCitationCharLocationParam,
-                  Anthropic::Models::Beta::BetaCitationPageLocationParam,
-                  Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
-                )]
-              )
-            }
-          )
+          override
+            .returns(
+              {
+                text: String,
+                type: Symbol,
+                cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
+                citations: T.nilable(
+                  T::Array[
+                  T.any(
+                    Anthropic::Models::Beta::BetaCitationCharLocationParam,
+                    Anthropic::Models::Beta::BetaCitationPageLocationParam,
+                    Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
+                  )
+                  ]
+                )
+              }
+            )
         end
         def to_hash
         end

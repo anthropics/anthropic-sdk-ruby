@@ -15,7 +15,8 @@ module Anthropic
           top_k: Integer,
           top_p: Float,
           request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-        ).returns(Anthropic::Models::Completion)
+        )
+          .returns(Anthropic::Models::Completion)
       end
       def create(
         max_tokens_to_sample:,

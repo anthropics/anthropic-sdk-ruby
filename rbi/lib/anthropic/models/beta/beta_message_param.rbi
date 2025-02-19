@@ -10,13 +10,15 @@ module Anthropic
           returns(
             T.any(
               String,
-              T::Array[T.any(
+              T::Array[
+              T.any(
                 Anthropic::Models::Beta::BetaTextBlockParam,
                 Anthropic::Models::Beta::BetaImageBlockParam,
                 Anthropic::Models::Beta::BetaToolUseBlockParam,
                 Anthropic::Models::Beta::BetaToolResultBlockParam,
                 Anthropic::Models::Beta::BetaBase64PDFBlock
-              )]
+              )
+              ]
             )
           )
         end
@@ -27,24 +29,31 @@ module Anthropic
           params(
             _: T.any(
               String,
-              T::Array[T.any(
+              T::Array[
+              T.any(
                 Anthropic::Models::Beta::BetaTextBlockParam,
                 Anthropic::Models::Beta::BetaImageBlockParam,
                 Anthropic::Models::Beta::BetaToolUseBlockParam,
                 Anthropic::Models::Beta::BetaToolResultBlockParam,
                 Anthropic::Models::Beta::BetaBase64PDFBlock
-              )]
+              )
+              ]
             )
-          ).returns(T.any(
-                      String,
-                      T::Array[T.any(
-                        Anthropic::Models::Beta::BetaTextBlockParam,
-                        Anthropic::Models::Beta::BetaImageBlockParam,
-                        Anthropic::Models::Beta::BetaToolUseBlockParam,
-                        Anthropic::Models::Beta::BetaToolResultBlockParam,
-                        Anthropic::Models::Beta::BetaBase64PDFBlock
-                      )]
-                    ))
+          )
+            .returns(
+              T.any(
+                String,
+                T::Array[
+                T.any(
+                  Anthropic::Models::Beta::BetaTextBlockParam,
+                  Anthropic::Models::Beta::BetaImageBlockParam,
+                  Anthropic::Models::Beta::BetaToolUseBlockParam,
+                  Anthropic::Models::Beta::BetaToolResultBlockParam,
+                  Anthropic::Models::Beta::BetaBase64PDFBlock
+                )
+                ]
+              )
+            )
         end
         def content=(_)
         end
@@ -61,36 +70,42 @@ module Anthropic
           params(
             content: T.any(
               String,
-              T::Array[T.any(
+              T::Array[
+              T.any(
                 Anthropic::Models::Beta::BetaTextBlockParam,
                 Anthropic::Models::Beta::BetaImageBlockParam,
                 Anthropic::Models::Beta::BetaToolUseBlockParam,
                 Anthropic::Models::Beta::BetaToolResultBlockParam,
                 Anthropic::Models::Beta::BetaBase64PDFBlock
-              )]
+              )
+              ]
             ),
             role: Symbol
-          ).void
+          )
+            .void
         end
         def initialize(content:, role:)
         end
 
         sig do
-          override.returns(
-            {
-              content: T.any(
-                String,
-                T::Array[T.any(
-                  Anthropic::Models::Beta::BetaTextBlockParam,
-                  Anthropic::Models::Beta::BetaImageBlockParam,
-                  Anthropic::Models::Beta::BetaToolUseBlockParam,
-                  Anthropic::Models::Beta::BetaToolResultBlockParam,
-                  Anthropic::Models::Beta::BetaBase64PDFBlock
-                )]
-              ),
-              role: Symbol
-            }
-          )
+          override
+            .returns(
+              {
+                content: T.any(
+                  String,
+                  T::Array[
+                  T.any(
+                    Anthropic::Models::Beta::BetaTextBlockParam,
+                    Anthropic::Models::Beta::BetaImageBlockParam,
+                    Anthropic::Models::Beta::BetaToolUseBlockParam,
+                    Anthropic::Models::Beta::BetaToolResultBlockParam,
+                    Anthropic::Models::Beta::BetaBase64PDFBlock
+                  )
+                  ]
+                ),
+                role: Symbol
+              }
+            )
         end
         def to_hash
         end
@@ -99,31 +114,36 @@ module Anthropic
           abstract!
 
           BetaContentBlockParamArray = T.type_alias do
-            T::Array[T.any(
+            T::Array[
+            T.any(
               Anthropic::Models::Beta::BetaTextBlockParam,
               Anthropic::Models::Beta::BetaImageBlockParam,
               Anthropic::Models::Beta::BetaToolUseBlockParam,
               Anthropic::Models::Beta::BetaToolResultBlockParam,
               Anthropic::Models::Beta::BetaBase64PDFBlock
-            )]
+            )
+            ]
           end
 
           sig do
-            override.returns(
-              [
-                [NilClass, String],
+            override
+              .returns(
                 [
-                  NilClass,
-                  T::Array[T.any(
-                    Anthropic::Models::Beta::BetaTextBlockParam,
-                    Anthropic::Models::Beta::BetaImageBlockParam,
-                    Anthropic::Models::Beta::BetaToolUseBlockParam,
-                    Anthropic::Models::Beta::BetaToolResultBlockParam,
-                    Anthropic::Models::Beta::BetaBase64PDFBlock
-                  )]
+                  [NilClass, String],
+                  [
+                    NilClass,
+                    T::Array[
+                                    T.any(
+                                      Anthropic::Models::Beta::BetaTextBlockParam,
+                                      Anthropic::Models::Beta::BetaImageBlockParam,
+                                      Anthropic::Models::Beta::BetaToolUseBlockParam,
+                                      Anthropic::Models::Beta::BetaToolResultBlockParam,
+                                      Anthropic::Models::Beta::BetaBase64PDFBlock
+                                    )
+                                    ]
+                  ]
                 ]
-              ]
-            )
+              )
           end
           private_class_method def self.variants
           end

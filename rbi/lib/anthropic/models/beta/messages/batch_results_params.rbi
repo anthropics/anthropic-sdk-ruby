@@ -20,7 +20,8 @@ module Anthropic
             params(
               betas: T::Array[T.any(String, Symbol)],
               request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
-            ).void
+            )
+              .void
           end
           def initialize(betas: nil, request_options: {})
           end

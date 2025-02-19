@@ -11,7 +11,8 @@ module Anthropic
         end
 
         sig do
-          params(_: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta).returns(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta)
+          params(_: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta)
+            .returns(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta)
         end
         def delta=(_)
         end
@@ -29,7 +30,8 @@ module Anthropic
         end
 
         sig do
-          params(_: Anthropic::Models::Beta::BetaMessageDeltaUsage).returns(Anthropic::Models::Beta::BetaMessageDeltaUsage)
+          params(_: Anthropic::Models::Beta::BetaMessageDeltaUsage)
+            .returns(Anthropic::Models::Beta::BetaMessageDeltaUsage)
         end
         def usage=(_)
         end
@@ -39,19 +41,21 @@ module Anthropic
             delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta,
             usage: Anthropic::Models::Beta::BetaMessageDeltaUsage,
             type: Symbol
-          ).void
+          )
+            .void
         end
         def initialize(delta:, usage:, type: :message_delta)
         end
 
         sig do
-          override.returns(
-            {
-              delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta,
-              type: Symbol,
-              usage: Anthropic::Models::Beta::BetaMessageDeltaUsage
-            }
-          )
+          override
+            .returns(
+              {
+                delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta,
+                type: Symbol,
+                usage: Anthropic::Models::Beta::BetaMessageDeltaUsage
+              }
+            )
         end
         def to_hash
         end

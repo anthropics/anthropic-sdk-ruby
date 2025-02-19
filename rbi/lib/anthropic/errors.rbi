@@ -31,7 +31,8 @@ module Anthropic
         request: NilClass,
         response: NilClass,
         message: T.nilable(String)
-      ).void
+      )
+        .void
     end
     def initialize(url:, status: nil, body: nil, request: nil, response: nil, message: nil)
     end
@@ -54,7 +55,8 @@ module Anthropic
         request: NilClass,
         response: NilClass,
         message: T.nilable(String)
-      ).void
+      )
+        .void
     end
     def initialize(url:, status: nil, body: nil, request: nil, response: nil, message: "Connection error.")
     end
@@ -69,7 +71,8 @@ module Anthropic
         request: NilClass,
         response: NilClass,
         message: T.nilable(String)
-      ).void
+      )
+        .void
     end
     def initialize(url:, status: nil, body: nil, request: nil, response: nil, message: "Request timed out.")
     end
@@ -83,7 +86,8 @@ module Anthropic
         body: T.nilable(Object),
         request: NilClass,
         response: NilClass
-      ).returns(T.attached_class)
+      )
+        .returns(T.attached_class)
     end
     def self.for(url:, status:, body:, request:, response:)
     end
@@ -100,7 +104,8 @@ module Anthropic
         request: NilClass,
         response: NilClass,
         message: T.nilable(String)
-      ).void
+      )
+        .void
     end
     def initialize(url:, status:, body:, request:, response:, message: nil)
     end

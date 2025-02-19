@@ -11,7 +11,8 @@ module Anthropic
         end
 
         sig do
-          params(_: Anthropic::Models::Beta::BetaTool::InputSchema).returns(Anthropic::Models::Beta::BetaTool::InputSchema)
+          params(_: Anthropic::Models::Beta::BetaTool::InputSchema)
+            .returns(Anthropic::Models::Beta::BetaTool::InputSchema)
         end
         def input_schema=(_)
         end
@@ -29,7 +30,8 @@ module Anthropic
         end
 
         sig do
-          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)).returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+            .returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
         end
         def cache_control=(_)
         end
@@ -57,21 +59,23 @@ module Anthropic
             cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
             description: String,
             type: T.nilable(Symbol)
-          ).void
+          )
+            .void
         end
         def initialize(input_schema:, name:, cache_control: nil, description: nil, type: nil)
         end
 
         sig do
-          override.returns(
-            {
-              input_schema: Anthropic::Models::Beta::BetaTool::InputSchema,
-              name: String,
-              cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
-              description: String,
-              type: T.nilable(Symbol)
-            }
-          )
+          override
+            .returns(
+              {
+                input_schema: Anthropic::Models::Beta::BetaTool::InputSchema,
+                name: String,
+                cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
+                description: String,
+                type: T.nilable(Symbol)
+              }
+            )
         end
         def to_hash
         end

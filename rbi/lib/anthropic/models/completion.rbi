@@ -50,21 +50,23 @@ module Anthropic
           model: T.any(Symbol, String),
           stop_reason: T.nilable(String),
           type: Symbol
-        ).void
+        )
+          .void
       end
       def initialize(id:, completion:, model:, stop_reason:, type: :completion)
       end
 
       sig do
-        override.returns(
-          {
-            id: String,
-            completion: String,
-            model: T.any(Symbol, String),
-            stop_reason: T.nilable(String),
-            type: Symbol
-          }
-        )
+        override
+          .returns(
+            {
+              id: String,
+              completion: String,
+              model: T.any(Symbol, String),
+              stop_reason: T.nilable(String),
+              type: Symbol
+            }
+          )
       end
       def to_hash
       end

@@ -40,9 +40,7 @@ module Anthropic
       # end
       # ```
       class Content < Anthropic::Union
-        ContentBlockSourceContentArray = Anthropic::ArrayOf[union: -> {
-          Anthropic::Models::ContentBlockSourceContent
-        }]
+        ContentBlockSourceContentArray = Anthropic::ArrayOf[union: -> { Anthropic::Models::ContentBlockSourceContent }]
 
         variant String
 

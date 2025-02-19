@@ -22,11 +22,14 @@ module Anthropic
             Anthropic::Models::CitationPageLocation,
             Anthropic::Models::CitationContentBlockLocation
           )
-        ).returns(T.any(
-                    Anthropic::Models::CitationCharLocation,
-                    Anthropic::Models::CitationPageLocation,
-                    Anthropic::Models::CitationContentBlockLocation
-                  ))
+        )
+          .returns(
+            T.any(
+              Anthropic::Models::CitationCharLocation,
+              Anthropic::Models::CitationPageLocation,
+              Anthropic::Models::CitationContentBlockLocation
+            )
+          )
       end
       def citation=(_)
       end
@@ -47,22 +50,24 @@ module Anthropic
             Anthropic::Models::CitationContentBlockLocation
           ),
           type: Symbol
-        ).void
+        )
+          .void
       end
       def initialize(citation:, type: :citations_delta)
       end
 
       sig do
-        override.returns(
-          {
-            citation: T.any(
-              Anthropic::Models::CitationCharLocation,
-              Anthropic::Models::CitationPageLocation,
-              Anthropic::Models::CitationContentBlockLocation
-            ),
-            type: Symbol
-          }
-        )
+        override
+          .returns(
+            {
+              citation: T.any(
+                Anthropic::Models::CitationCharLocation,
+                Anthropic::Models::CitationPageLocation,
+                Anthropic::Models::CitationContentBlockLocation
+              ),
+              type: Symbol
+            }
+          )
       end
       def to_hash
       end
@@ -71,13 +76,10 @@ module Anthropic
         abstract!
 
         sig do
-          override.returns(
-            [
-              [Symbol, Anthropic::Models::CitationCharLocation],
-              [Symbol, Anthropic::Models::CitationPageLocation],
-              [Symbol, Anthropic::Models::CitationContentBlockLocation]
-            ]
-          )
+          override
+            .returns(
+              [[Symbol, Anthropic::Models::CitationCharLocation], [Symbol, Anthropic::Models::CitationPageLocation], [Symbol, Anthropic::Models::CitationContentBlockLocation]]
+            )
         end
         private_class_method def self.variants
         end

@@ -8,7 +8,8 @@ module Anthropic
           params(
             model_id: String,
             request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-          ).returns(Anthropic::Models::Beta::BetaModelInfo)
+          )
+            .returns(Anthropic::Models::Beta::BetaModelInfo)
         end
         def retrieve(model_id, request_options: {})
         end
@@ -19,7 +20,8 @@ module Anthropic
             before_id: String,
             limit: Integer,
             request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-          ).returns(Anthropic::Page[Anthropic::Models::Beta::BetaModelInfo])
+          )
+            .returns(Anthropic::Page[Anthropic::Models::Beta::BetaModelInfo])
         end
         def list(after_id: nil, before_id: nil, limit: nil, request_options: {})
         end

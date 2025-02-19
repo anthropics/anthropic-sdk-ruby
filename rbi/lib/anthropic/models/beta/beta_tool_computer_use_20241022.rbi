@@ -43,7 +43,8 @@ module Anthropic
         end
 
         sig do
-          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)).returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+            .returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
         end
         def cache_control=(_)
         end
@@ -64,7 +65,8 @@ module Anthropic
             display_number: T.nilable(Integer),
             name: Symbol,
             type: Symbol
-          ).void
+          )
+            .void
         end
         def initialize(
           display_height_px:,
@@ -77,16 +79,17 @@ module Anthropic
         end
 
         sig do
-          override.returns(
-            {
-              display_height_px: Integer,
-              display_width_px: Integer,
-              name: Symbol,
-              type: Symbol,
-              cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
-              display_number: T.nilable(Integer)
-            }
-          )
+          override
+            .returns(
+              {
+                display_height_px: Integer,
+                display_width_px: Integer,
+                name: Symbol,
+                type: Symbol,
+                cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
+                display_number: T.nilable(Integer)
+              }
+            )
         end
         def to_hash
         end

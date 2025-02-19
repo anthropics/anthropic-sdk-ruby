@@ -24,7 +24,8 @@ module Anthropic
       end
 
       sig do
-        params(_: T.nilable(Anthropic::Models::CacheControlEphemeral)).returns(T.nilable(Anthropic::Models::CacheControlEphemeral))
+        params(_: T.nilable(Anthropic::Models::CacheControlEphemeral))
+          .returns(T.nilable(Anthropic::Models::CacheControlEphemeral))
       end
       def cache_control=(_)
       end
@@ -32,11 +33,13 @@ module Anthropic
       sig do
         returns(
           T.nilable(
-            T::Array[T.any(
+            T::Array[
+            T.any(
               Anthropic::Models::CitationCharLocationParam,
               Anthropic::Models::CitationPageLocationParam,
               Anthropic::Models::CitationContentBlockLocationParam
-            )]
+            )
+            ]
           )
         )
       end
@@ -46,19 +49,26 @@ module Anthropic
       sig do
         params(
           _: T.nilable(
-            T::Array[T.any(
+            T::Array[
+            T.any(
               Anthropic::Models::CitationCharLocationParam,
               Anthropic::Models::CitationPageLocationParam,
               Anthropic::Models::CitationContentBlockLocationParam
-            )]
+            )
+            ]
           )
-        ).returns(T.nilable(
-                    T::Array[T.any(
-                      Anthropic::Models::CitationCharLocationParam,
-                      Anthropic::Models::CitationPageLocationParam,
-                      Anthropic::Models::CitationContentBlockLocationParam
-                    )]
-                  ))
+        )
+          .returns(
+            T.nilable(
+              T::Array[
+              T.any(
+                Anthropic::Models::CitationCharLocationParam,
+                Anthropic::Models::CitationPageLocationParam,
+                Anthropic::Models::CitationContentBlockLocationParam
+              )
+              ]
+            )
+          )
       end
       def citations=(_)
       end
@@ -68,33 +78,39 @@ module Anthropic
           text: String,
           cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
           citations: T.nilable(
-            T::Array[T.any(
+            T::Array[
+            T.any(
               Anthropic::Models::CitationCharLocationParam,
               Anthropic::Models::CitationPageLocationParam,
               Anthropic::Models::CitationContentBlockLocationParam
-            )]
+            )
+            ]
           ),
           type: Symbol
-        ).void
+        )
+          .void
       end
       def initialize(text:, cache_control: nil, citations: nil, type: :text)
       end
 
       sig do
-        override.returns(
-          {
-            text: String,
-            type: Symbol,
-            cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
-            citations: T.nilable(
-              T::Array[T.any(
-                Anthropic::Models::CitationCharLocationParam,
-                Anthropic::Models::CitationPageLocationParam,
-                Anthropic::Models::CitationContentBlockLocationParam
-              )]
-            )
-          }
-        )
+        override
+          .returns(
+            {
+              text: String,
+              type: Symbol,
+              cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
+              citations: T.nilable(
+                T::Array[
+                T.any(
+                  Anthropic::Models::CitationCharLocationParam,
+                  Anthropic::Models::CitationPageLocationParam,
+                  Anthropic::Models::CitationContentBlockLocationParam
+                )
+                ]
+              )
+            }
+          )
       end
       def to_hash
       end

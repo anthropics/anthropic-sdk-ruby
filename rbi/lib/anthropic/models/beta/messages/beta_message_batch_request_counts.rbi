@@ -58,15 +58,14 @@ module Anthropic
           end
 
           sig do
-            override.returns(
-              {
-                canceled: Integer,
-                errored: Integer,
-                expired: Integer,
-                processing: Integer,
-                succeeded: Integer
-              }
-            )
+            override
+              .returns({
+                         canceled: Integer,
+                         errored: Integer,
+                         expired: Integer,
+                         processing: Integer,
+                         succeeded: Integer
+                       })
           end
           def to_hash
           end

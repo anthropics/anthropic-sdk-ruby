@@ -36,6 +36,7 @@ module Anthropic
     # @return [String, nil]
     attr_accessor :last_id
 
+    # rubocop:disable Lint/UnusedMethodArgument
     # @private
     #
     # @param client [Anthropic::BaseClient]
@@ -72,6 +73,7 @@ module Anthropic
       else
       end
     end
+    # rubocop:enable Lint/UnusedMethodArgument
 
     # @return [Boolean]
     #
@@ -84,7 +86,7 @@ module Anthropic
     #
     def next_page
       unless next_page?
-        raise "No more pages available; please check #next_page? before calling #next_page"
+        raise RuntimeError.new("No more pages available; please check #next_page? before calling #next_page")
       end
 
       req = Anthropic::Util.deep_merge(@req, {query: {after_id: last_id}})

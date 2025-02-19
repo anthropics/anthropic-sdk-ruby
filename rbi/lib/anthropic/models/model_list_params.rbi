@@ -36,20 +36,20 @@ module Anthropic
           before_id: String,
           limit: Integer,
           request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
-        ).void
+        )
+          .void
       end
       def initialize(after_id: nil, before_id: nil, limit: nil, request_options: {})
       end
 
       sig do
-        override.returns(
-          {
-            after_id: String,
-            before_id: String,
-            limit: Integer,
-            request_options: Anthropic::RequestOptions
-          }
-        )
+        override
+          .returns({
+                     after_id: String,
+                     before_id: String,
+                     limit: Integer,
+                     request_options: Anthropic::RequestOptions
+                   })
       end
       def to_hash
       end

@@ -23,17 +23,20 @@ module Anthropic
               Anthropic::Models::Beta::BetaToolChoiceAny,
               Anthropic::Models::Beta::BetaToolChoiceTool
             ),
-            tools: T::Array[T.any(
+            tools: T::Array[
+            T.any(
               Anthropic::Models::Beta::BetaTool,
               Anthropic::Models::Beta::BetaToolComputerUse20241022,
               Anthropic::Models::Beta::BetaToolBash20241022,
               Anthropic::Models::Beta::BetaToolTextEditor20241022
-            )],
+            )
+            ],
             top_k: Integer,
             top_p: Float,
             betas: T::Array[T.any(String, Symbol)],
             request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-          ).returns(Anthropic::Models::Beta::BetaMessage)
+          )
+            .returns(Anthropic::Models::Beta::BetaMessage)
         end
         def create(
           max_tokens:,
@@ -63,15 +66,18 @@ module Anthropic
               Anthropic::Models::Beta::BetaToolChoiceAny,
               Anthropic::Models::Beta::BetaToolChoiceTool
             ),
-            tools: T::Array[T.any(
+            tools: T::Array[
+            T.any(
               Anthropic::Models::Beta::BetaTool,
               Anthropic::Models::Beta::BetaToolComputerUse20241022,
               Anthropic::Models::Beta::BetaToolBash20241022,
               Anthropic::Models::Beta::BetaToolTextEditor20241022
-            )],
+            )
+            ],
             betas: T::Array[T.any(String, Symbol)],
             request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-          ).returns(Anthropic::Models::Beta::BetaMessageTokensCount)
+          )
+            .returns(Anthropic::Models::Beta::BetaMessageTokensCount)
         end
         def count_tokens(
           messages:,

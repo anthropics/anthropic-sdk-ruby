@@ -9,13 +9,10 @@ module Anthropic
         abstract!
 
         sig do
-          override.returns(
-            [
-              [Symbol, Anthropic::Models::Beta::BetaToolChoiceAuto],
-              [Symbol, Anthropic::Models::Beta::BetaToolChoiceAny],
-              [Symbol, Anthropic::Models::Beta::BetaToolChoiceTool]
-            ]
-          )
+          override
+            .returns(
+              [[Symbol, Anthropic::Models::Beta::BetaToolChoiceAuto], [Symbol, Anthropic::Models::Beta::BetaToolChoiceAny], [Symbol, Anthropic::Models::Beta::BetaToolChoiceTool]]
+            )
         end
         private_class_method def self.variants
         end

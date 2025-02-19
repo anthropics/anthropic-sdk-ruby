@@ -69,9 +69,7 @@ module Anthropic
       # end
       # ```
       class Content < Anthropic::Union
-        ContentArray = Anthropic::ArrayOf[union: -> {
-          Anthropic::Models::ToolResultBlockParam::Content::Content
-        }]
+        ContentArray = Anthropic::ArrayOf[union: -> { Anthropic::Models::ToolResultBlockParam::Content::Content }]
 
         variant String
 
@@ -82,9 +80,18 @@ module Anthropic
         # @example
         # ```ruby
         # case content
-        # in {type: "text", text: String, cache_control: Anthropic::Models::CacheControlEphemeral, citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::TextCitationParam] === _1 }}
+        # in {
+        #   type: "text",
+        #   text: String,
+        #   cache_control: Anthropic::Models::CacheControlEphemeral,
+        #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::TextCitationParam] === _1 }
+        # }
         #   # Anthropic::Models::TextBlockParam ...
-        # in {type: "image", source: Anthropic::Models::ImageBlockParam::Source, cache_control: Anthropic::Models::CacheControlEphemeral}
+        # in {
+        #   type: "image",
+        #   source: Anthropic::Models::ImageBlockParam::Source,
+        #   cache_control: Anthropic::Models::CacheControlEphemeral
+        # }
         #   # Anthropic::Models::ImageBlockParam ...
         # end
         # ```

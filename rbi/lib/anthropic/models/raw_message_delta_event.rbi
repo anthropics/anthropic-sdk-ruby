@@ -8,7 +8,8 @@ module Anthropic
       end
 
       sig do
-        params(_: Anthropic::Models::RawMessageDeltaEvent::Delta).returns(Anthropic::Models::RawMessageDeltaEvent::Delta)
+        params(_: Anthropic::Models::RawMessageDeltaEvent::Delta)
+          .returns(Anthropic::Models::RawMessageDeltaEvent::Delta)
       end
       def delta=(_)
       end
@@ -34,19 +35,21 @@ module Anthropic
           delta: Anthropic::Models::RawMessageDeltaEvent::Delta,
           usage: Anthropic::Models::MessageDeltaUsage,
           type: Symbol
-        ).void
+        )
+          .void
       end
       def initialize(delta:, usage:, type: :message_delta)
       end
 
       sig do
-        override.returns(
-          {
-            delta: Anthropic::Models::RawMessageDeltaEvent::Delta,
-            type: Symbol,
-            usage: Anthropic::Models::MessageDeltaUsage
-          }
-        )
+        override
+          .returns(
+            {
+              delta: Anthropic::Models::RawMessageDeltaEvent::Delta,
+              type: Symbol,
+              usage: Anthropic::Models::MessageDeltaUsage
+            }
+          )
       end
       def to_hash
       end
