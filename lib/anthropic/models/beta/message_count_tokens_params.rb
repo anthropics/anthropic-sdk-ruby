@@ -205,10 +205,7 @@ module Anthropic
         #     See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
         #
         #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>, nil]
-        optional :tools,
-                 -> {
-                   Anthropic::ArrayOf[union: Anthropic::Models::Beta::MessageCountTokensParams::Tool]
-                 }
+        optional :tools, -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::MessageCountTokensParams::Tool] }
 
         # @!parse
         #   # @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>]

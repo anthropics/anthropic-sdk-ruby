@@ -9,9 +9,7 @@ module Anthropic
           def message
           end
 
-          sig do
-            params(_: Anthropic::Models::Beta::BetaMessage).returns(Anthropic::Models::Beta::BetaMessage)
-          end
+          sig { params(_: Anthropic::Models::Beta::BetaMessage).returns(Anthropic::Models::Beta::BetaMessage) }
           def message=(_)
           end
 

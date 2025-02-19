@@ -8,15 +8,8 @@ module Anthropic
       end
 
       sig do
-        params(
-          _: T.any(
-            Anthropic::Models::TextBlock,
-            Anthropic::Models::ToolUseBlock
-          )
-        ).returns(T.any(
-                    Anthropic::Models::TextBlock,
-                    Anthropic::Models::ToolUseBlock
-                  ))
+        params(_: T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock))
+          .returns(T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock))
       end
       def content_block=(_)
       end
@@ -42,19 +35,21 @@ module Anthropic
           content_block: T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock),
           index: Integer,
           type: Symbol
-        ).void
+        )
+          .void
       end
       def initialize(content_block:, index:, type: :content_block_start)
       end
 
       sig do
-        override.returns(
-          {
-            content_block: T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock),
-            index: Integer,
-            type: Symbol
-          }
-        )
+        override
+          .returns(
+            {
+              content_block: T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock),
+              index: Integer,
+              type: Symbol
+            }
+          )
       end
       def to_hash
       end
@@ -62,14 +57,7 @@ module Anthropic
       class ContentBlock < Anthropic::Union
         abstract!
 
-        sig do
-          override.returns(
-            [
-              [Symbol, Anthropic::Models::TextBlock],
-              [Symbol, Anthropic::Models::ToolUseBlock]
-            ]
-          )
-        end
+        sig { override.returns([[Symbol, Anthropic::Models::TextBlock], [Symbol, Anthropic::Models::ToolUseBlock]]) }
         private_class_method def self.variants
         end
       end

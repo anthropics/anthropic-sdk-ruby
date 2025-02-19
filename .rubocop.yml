@@ -1,43 +1,195 @@
-# Just to be safe, ensure nobody is mutating our internal strings.
-Style/FrozenStringLiteralComment:
-  EnforcedStyle: always
-  Exclude:
-    - '**/*.rbi'
+---
+
+# Explicitly disable pending cops for now. This is the default behaviour but
+# this avoids a large warning every time we run it.
+# Stop RuboCop nagging about rubocop-rake.
+# Ensure that RuboCop validates according to the lowest version of Ruby that we support.
+AllCops:
+  Exclude: 
+    - "bin/*"
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: 3.0.0
+
+# Don't require this extra line break, it can be excessive.
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+
+# Don't leave complex assignment values hanging off to the right.
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: variable
+
+Layout/FirstArrayElementLineBreak:
+  Enabled: true
+
+Layout/FirstHashElementLineBreak:
+  Enabled: true
+
+Layout/FirstMethodArgumentLineBreak:
+  Enabled: true
+
+Layout/FirstMethodParameterLineBreak:
+  Enabled: true
+
+# Set a reasonable line length; rely on other cops to correct long lines.
+Layout/LineLength:
+  AllowedPatterns: 
+    - "^\\s*#.*$"
+    - ^require(_relative)?
+    - "Anthropic::(Models|Resources)::"
+  Max: 110
+
+Layout/MultilineArrayLineBreaks:
+  Enabled: true
+
+# Start the assignment on the same line variable is mentioned.
+Layout/MultilineAssignmentLayout:
+  EnforcedStyle: same_line
+
+Layout/MultilineHashKeyLineBreaks:
+  Enabled: true
+
+Layout/MultilineMethodArgumentLineBreaks:
+  Enabled: true
+
+Layout/MultilineMethodParameterLineBreaks:
+  Enabled: true
+
+# Prefer compact hash literals.
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+Lint/ConstantDefinitionInBlock:
+  Exclude: 
+    - "lib/**/*"
+
+Lint/MissingSuper:
+  Exclude: 
+    - "**/*.rbi"
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Naming/MethodParameterName:
+  Exclude: 
+    - "**/*.rbi"
+
+Naming/VariableNumber:
+  Enabled: false
+
+# Nothing wrong with inline private methods.
+Style/AccessModifierDeclarations:
+  Enabled: false
+
+Style/AccessorGrouping:
+  Exclude: 
+    - "**/*.rbi"
+
+# Behaviour of alias_method is more predictable.
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
 
 # And/or have confusing precedence, avoid them.
 Style/AndOr:
   EnforcedStyle: always
 
-# Prefer double quotes so that interpolation can be easily added.
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
+Style/BisectedAttrAccessor:
+  Exclude: 
+    - "**/*.rbi"
 
-# Most common style in Ruby.
-Style/RegexpLiteral:
-  EnforcedStyle: slashes
+# Fairly useful in tests for pattern matching.
+Style/CaseEquality:
+  Exclude: 
+    - "test/**/*"
 
-# Prefer explicit symbols for clarity; you can search for `:the_symbol`.
-Style/SymbolArray:
-  EnforcedStyle: brackets
+# We prefer nested modules in lib/, but are currently using compact style for tests.
+Style/ClassAndModuleChildren:
+  Exclude: 
+    - "test/**/*"
 
-# Prefer consistency in method calling syntax
-Style/MethodCallWithArgsParentheses:
-  Enabled: true
-  Exclude:
-    - '**/*.gemspec'
-  AllowedMethods:
-    - raise
-
-# Nothing wrong with inline private methods
-Style/AccessModifierDeclarations:
+# We should go back and add these docs, but ignore for now.
+Style/Documentation:
   Enabled: false
+
+# Allow explicit empty elses, for clarity.
+Style/EmptyElse:
+  Enabled: false
+
+Style/EmptyMethod:
+  Exclude: 
+    - "**/*.rbi"
+
+# We commonly use ENV['KEY'], it's OK.
+Style/FetchEnvVar:
+  Enabled: false
+
+# Just to be safe, ensure nobody is mutating our internal strings.
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always
+  Exclude: 
+    - "**/*.rbi"
 
 # Nothing wrong with clear if statements.
 Style/IfUnlessModifier:
   Enabled: false
 
-# Unless is not necessarily clearer.
-Style/NegatedIf:
+# Rubocop is pretty bad about mangling single line lambdas.
+Style/Lambda:
+  Enabled: false
+
+# Prefer consistency in method calling syntax.
+Style/MethodCallWithArgsParentheses:
+  AllowedMethods: 
+    - raise
+  Enabled: true
+  Exclude: 
+    - "**/*.gemspec"
+
+# Perfectly fine.
+Style/MultipleComparison:
+  Enabled: false
+
+Style/MutableConstant:
+  Exclude: 
+    - "**/*.rbi"
+
+# Not all parameters should be named.
+Style/NumberedParameters:
+  Enabled: false
+
+# Reasonable to use brackets for errors with long messages.
+Style/RaiseArgs:
+  Enabled: false
+
+# Be explicit about `RuntimeError`s.
+Style/RedundantException:
+  Enabled: false
+
+Style/RedundantInitialize:
+  Exclude: 
+    - "**/*.rbi"
+
+# Prefer slashes for regex literals.
+Style/RegexpLiteral:
+  EnforcedStyle: slashes
+
+# Allow explicit ifs, especially for imperative use.
+Style/SafeNavigation:
   Enabled: false
 
 # We use these sparingly, where we anticipate future branches for the
@@ -45,152 +197,10 @@ Style/NegatedIf:
 Style/SoleNestedConditional:
   Enabled: false
 
-# Allow explicit empty elses, for clarity.
-Style/EmptyElse:
-  Enabled: false
+# Prefer double quotes so that interpolation can be easily added.
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
 
-# Allow explicit ifs, especially for imperative use.
-Style/SafeNavigation:
-  Enabled: false
-
-# We commonly use ENV['KEY'], it's OK.
-Style/FetchEnvVar:
-  Enabled: false
-
-# Behaviour of alias_method is more predictable.
-Style/Alias:
-  EnforcedStyle: prefer_alias_method
-
-# We prefer nested modules in lib/, but are currently using compact style for tests.
-Style/ClassAndModuleChildren:
-  Exclude:
-    - test/**/*
-
-# Perfectly fine
-Style/MultipleComparison:
-  Enabled: false
-
-# Rubocop is pretty bad about mangling single line lambdas
-Style/Lambda:
-  Enabled: false
-
-# Not all parameters should be named
-Style/NumberedParameters:
-  Enabled: false
-
-# Fairly useful in tests for pattern matching
-Style/CaseEquality:
-  Exclude:
-    - test/**/*
-
-# Reasonable to use brackets for errors with long messages.
-Style/RaiseArgs:
-  Enabled: false
-
-# Reasonable for a library to define dynamic type-aliases depending on sorbet-runtime availability
-Lint/ConstantDefinitionInBlock:
-  Exclude:
-    - 'lib/**/*'
-
-# Sorbet files should be excluded from some style considerations
-Style/AccessorGrouping:
-  Exclude:
-    - '**/*.rbi'
-Style/EmptyMethod:
-  Exclude:
-    - '**/*.rbi'
-Style/RedundantInitialize:
-  Exclude:
-    - '**/*.rbi'
-Lint/MissingSuper:
-  Exclude:
-    - '**/*.rbi'
-Style/BisectedAttrAccessor:
-  Exclude:
-    - '**/*.rbi'
-Naming/MethodParameterName:
-  Exclude:
-    - '**/*.rbi'
-Style/MutableConstant:
-  Exclude:
-    - '**/*.rbi'
-
-# Literally nothing wrong with `symbol_1`
-Naming/VariableNumber:
-  Enabled: false
-
-# Set a reasonable line length; rely on other cops to correct long lines.
-Layout/LineLength:
-  Max: 110
-  AllowedPatterns:
-    - '^(\s*#)' # Comments for YARD docs: @param and similar.
-    - '= Anthropic::Resources::\S+\.new\(client: (self|client)\)$' # Instantiating resources.
-    - '^\s*(-> { )?Anthropic::Models::[a-zA-Z0-9:]+( })?$' # Line is entirely a reference to a fully-qualified Model.
-
-# Start the assignment on the same line variable is mentioned.
-Layout/MultilineAssignmentLayout:
-  EnforcedStyle: same_line
-
-# Don't leave complex assignment values hanging off to the right.
-Layout/EndAlignment:
-  EnforcedStyleAlignWith: variable
-
-# Don't require this extra line break, it can be excessive.
-Layout/EmptyLineAfterGuardClause:
-  Enabled: false
-
-# For arrays, hashes, method arguments, and method params, if they are broken onto multiple lines:
-# * Should have one element per line.
-# * Should have a line break before the first element.
-Layout/MultilineArrayLineBreaks:
-  Enabled: true
-Layout/FirstArrayElementLineBreak:
-  Enabled: true
-Layout/MultilineHashKeyLineBreaks:
-  Enabled: true
-Layout/FirstHashElementLineBreak:
-  Enabled: true
-Layout/MultilineMethodArgumentLineBreaks:
-  Enabled: true
-Layout/FirstMethodArgumentLineBreak:
-  Enabled: true
-Layout/MultilineMethodParameterLineBreaks:
-  Enabled: true
-Layout/FirstMethodParameterLineBreak:
-  Enabled: true
-
-# Prefer compact hash literals.
-Layout/SpaceInsideHashLiteralBraces:
-  EnforcedStyle: no_space
-
-# These cops are not as applicable to generated code.
-Metrics/ParameterLists:
-  Enabled: false
-Metrics/MethodLength:
-  Enabled: false
-Metrics/ClassLength:
-  Enabled: false
-
-# These cops are too aggressive for us or now, but we may want to address them
-# later.
-Metrics/CyclomaticComplexity:
-  Enabled: false
-Metrics/PerceivedComplexity:
-  Enabled: false
-Metrics/AbcSize:
-  Enabled: false
-
-# We should go back and add these docs, but ignore for now.
-Style/Documentation:
-  Enabled: false
-
-# Explicitly disable pending cops for now. This is the default behaviour but
-# this avoids a large warning every time we run it.
-# Stop RuboCop nagging about rubocop-rake.
-# Ensure that RuboCop validates according to the lowest version of Ruby that we support.
-AllCops:
-  Exclude:
-    - bin/*
-  NewCops: enable
-  SuggestExtensions: false
-  TargetRubyVersion: 3.0.0
+# Prefer explicit symbols for clarity; you can search for `:the_symbol`.
+Style/SymbolArray:
+  EnforcedStyle: brackets

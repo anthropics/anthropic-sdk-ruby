@@ -26,7 +26,8 @@ module Anthropic
           top_k: Integer,
           top_p: Float,
           request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-        ).returns(Anthropic::Models::Message)
+        )
+          .returns(Anthropic::Models::Message)
       end
       def create(
         max_tokens:,
@@ -57,7 +58,8 @@ module Anthropic
           ),
           tools: T::Array[Anthropic::Models::Tool],
           request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-        ).returns(Anthropic::Models::MessageTokensCount)
+        )
+          .returns(Anthropic::Models::MessageTokensCount)
       end
       def count_tokens(messages:, model:, system_: nil, tool_choice: nil, tools: nil, request_options: {})
       end

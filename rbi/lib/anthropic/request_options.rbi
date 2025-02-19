@@ -9,13 +9,8 @@ module Anthropic
     end
 
     sig do
-      params(
-        _: T.any(
-          Anthropic::RequestOptions,
-          T::Hash[Symbol,
-                  T.anything]
-        )
-      ).returns(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
+      params(_: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
+        .returns(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
     end
     def request_options=(_)
     end
@@ -45,17 +40,8 @@ module Anthropic
     end
 
     sig do
-      params(
-        _: T.nilable(
-          T::Hash[String,
-                  T.nilable(
-                    T.any(
-                      T::Array[String],
-                      String
-                    )
-                  )]
-        )
-      ).returns(T.nilable(T::Hash[String, T.nilable(T.any(T::Array[String], String))]))
+      params(_: T.nilable(T::Hash[String, T.nilable(T.any(T::Array[String], String))]))
+        .returns(T.nilable(T::Hash[String, T.nilable(T.any(T::Array[String], String))]))
     end
     def extra_query=(_)
     end
@@ -65,12 +51,8 @@ module Anthropic
     end
 
     sig do
-      params(
-        _: T.nilable(
-          T::Hash[String,
-                  T.nilable(String)]
-        )
-      ).returns(T.nilable(T::Hash[String, T.nilable(String)]))
+      params(_: T.nilable(T::Hash[String, T.nilable(String)]))
+        .returns(T.nilable(T::Hash[String, T.nilable(String)]))
     end
     def extra_headers=(_)
     end

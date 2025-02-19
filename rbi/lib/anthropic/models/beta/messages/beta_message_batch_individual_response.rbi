@@ -34,12 +34,15 @@ module Anthropic
                 Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
                 Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
               )
-            ).returns(T.any(
-                        Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult,
-                        Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult,
-                        Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
-                        Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
-                      ))
+            )
+              .returns(
+                T.any(
+                  Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult,
+                  Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult,
+                  Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
+                  Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
+                )
+              )
           end
           def result=(_)
           end
@@ -53,23 +56,25 @@ module Anthropic
                 Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
                 Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
               )
-            ).void
+            )
+              .void
           end
           def initialize(custom_id:, result:)
           end
 
           sig do
-            override.returns(
-              {
-                custom_id: String,
-                result: T.any(
-                  Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult,
-                  Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult,
-                  Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
-                  Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
-                )
-              }
-            )
+            override
+              .returns(
+                {
+                  custom_id: String,
+                  result: T.any(
+                    Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult,
+                    Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult,
+                    Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
+                    Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
+                  )
+                }
+              )
           end
           def to_hash
           end

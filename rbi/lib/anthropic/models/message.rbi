@@ -16,15 +16,8 @@ module Anthropic
       end
 
       sig do
-        params(
-          _: T::Array[T.any(
-            Anthropic::Models::TextBlock,
-            Anthropic::Models::ToolUseBlock
-          )]
-        ).returns(T::Array[T.any(
-          Anthropic::Models::TextBlock,
-          Anthropic::Models::ToolUseBlock
-        )])
+        params(_: T::Array[T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock)])
+          .returns(T::Array[T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock)])
       end
       def content=(_)
       end
@@ -87,7 +80,8 @@ module Anthropic
           usage: Anthropic::Models::Usage,
           role: Symbol,
           type: Symbol
-        ).void
+        )
+          .void
       end
       def initialize(
         id:,
@@ -102,18 +96,19 @@ module Anthropic
       end
 
       sig do
-        override.returns(
-          {
-            id: String,
-            content: T::Array[T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock)],
-            model: T.any(Symbol, String),
-            role: Symbol,
-            stop_reason: T.nilable(Symbol),
-            stop_sequence: T.nilable(String),
-            type: Symbol,
-            usage: Anthropic::Models::Usage
-          }
-        )
+        override
+          .returns(
+            {
+              id: String,
+              content: T::Array[T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock)],
+              model: T.any(Symbol, String),
+              role: Symbol,
+              stop_reason: T.nilable(Symbol),
+              stop_sequence: T.nilable(String),
+              type: Symbol,
+              usage: Anthropic::Models::Usage
+            }
+          )
       end
       def to_hash
       end

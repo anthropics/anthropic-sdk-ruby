@@ -5,11 +5,7 @@ module Anthropic
     class RawContentBlockDeltaEvent < Anthropic::BaseModel
       sig do
         returns(
-          T.any(
-            Anthropic::Models::TextDelta,
-            Anthropic::Models::InputJSONDelta,
-            Anthropic::Models::CitationsDelta
-          )
+          T.any(Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta)
         )
       end
       def delta
@@ -17,16 +13,11 @@ module Anthropic
 
       sig do
         params(
-          _: T.any(
-            Anthropic::Models::TextDelta,
-            Anthropic::Models::InputJSONDelta,
-            Anthropic::Models::CitationsDelta
+          _: T.any(Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta)
+        )
+          .returns(
+            T.any(Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta)
           )
-        ).returns(T.any(
-                    Anthropic::Models::TextDelta,
-                    Anthropic::Models::InputJSONDelta,
-                    Anthropic::Models::CitationsDelta
-                  ))
       end
       def delta=(_)
       end
@@ -49,30 +40,24 @@ module Anthropic
 
       sig do
         params(
-          delta: T.any(
-            Anthropic::Models::TextDelta,
-            Anthropic::Models::InputJSONDelta,
-            Anthropic::Models::CitationsDelta
-          ),
+          delta: T.any(Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta),
           index: Integer,
           type: Symbol
-        ).void
+        )
+          .void
       end
       def initialize(delta:, index:, type: :content_block_delta)
       end
 
       sig do
-        override.returns(
-          {
-            delta: T.any(
-              Anthropic::Models::TextDelta,
-              Anthropic::Models::InputJSONDelta,
-              Anthropic::Models::CitationsDelta
-            ),
-            index: Integer,
-            type: Symbol
-          }
-        )
+        override
+          .returns(
+            {
+              delta: T.any(Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta),
+              index: Integer,
+              type: Symbol
+            }
+          )
       end
       def to_hash
       end
@@ -81,13 +66,10 @@ module Anthropic
         abstract!
 
         sig do
-          override.returns(
-            [
-              [Symbol, Anthropic::Models::TextDelta],
-              [Symbol, Anthropic::Models::InputJSONDelta],
-              [Symbol, Anthropic::Models::CitationsDelta]
-            ]
-          )
+          override
+            .returns(
+              [[Symbol, Anthropic::Models::TextDelta], [Symbol, Anthropic::Models::InputJSONDelta], [Symbol, Anthropic::Models::CitationsDelta]]
+            )
         end
         private_class_method def self.variants
         end

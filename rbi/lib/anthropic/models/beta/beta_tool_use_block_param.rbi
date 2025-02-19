@@ -43,7 +43,8 @@ module Anthropic
         end
 
         sig do
-          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)).returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+            .returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
         end
         def cache_control=(_)
         end
@@ -55,21 +56,23 @@ module Anthropic
             name: String,
             cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
             type: Symbol
-          ).void
+          )
+            .void
         end
         def initialize(id:, input:, name:, cache_control: nil, type: :tool_use)
         end
 
         sig do
-          override.returns(
-            {
-              id: String,
-              input: T.anything,
-              name: String,
-              type: Symbol,
-              cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)
-            }
-          )
+          override
+            .returns(
+              {
+                id: String,
+                input: T.anything,
+                name: String,
+                type: Symbol,
+                cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)
+              }
+            )
         end
         def to_hash
         end

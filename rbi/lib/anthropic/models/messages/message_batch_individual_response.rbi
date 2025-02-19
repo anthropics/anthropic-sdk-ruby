@@ -35,12 +35,15 @@ module Anthropic
               Anthropic::Models::Messages::MessageBatchCanceledResult,
               Anthropic::Models::Messages::MessageBatchExpiredResult
             )
-          ).returns(T.any(
-                      Anthropic::Models::Messages::MessageBatchSucceededResult,
-                      Anthropic::Models::Messages::MessageBatchErroredResult,
-                      Anthropic::Models::Messages::MessageBatchCanceledResult,
-                      Anthropic::Models::Messages::MessageBatchExpiredResult
-                    ))
+          )
+            .returns(
+              T.any(
+                Anthropic::Models::Messages::MessageBatchSucceededResult,
+                Anthropic::Models::Messages::MessageBatchErroredResult,
+                Anthropic::Models::Messages::MessageBatchCanceledResult,
+                Anthropic::Models::Messages::MessageBatchExpiredResult
+              )
+            )
         end
         def result=(_)
         end
@@ -54,23 +57,25 @@ module Anthropic
               Anthropic::Models::Messages::MessageBatchCanceledResult,
               Anthropic::Models::Messages::MessageBatchExpiredResult
             )
-          ).void
+          )
+            .void
         end
         def initialize(custom_id:, result:)
         end
 
         sig do
-          override.returns(
-            {
-              custom_id: String,
-              result: T.any(
-                Anthropic::Models::Messages::MessageBatchSucceededResult,
-                Anthropic::Models::Messages::MessageBatchErroredResult,
-                Anthropic::Models::Messages::MessageBatchCanceledResult,
-                Anthropic::Models::Messages::MessageBatchExpiredResult
-              )
-            }
-          )
+          override
+            .returns(
+              {
+                custom_id: String,
+                result: T.any(
+                  Anthropic::Models::Messages::MessageBatchSucceededResult,
+                  Anthropic::Models::Messages::MessageBatchErroredResult,
+                  Anthropic::Models::Messages::MessageBatchCanceledResult,
+                  Anthropic::Models::Messages::MessageBatchExpiredResult
+                )
+              }
+            )
         end
         def to_hash
         end

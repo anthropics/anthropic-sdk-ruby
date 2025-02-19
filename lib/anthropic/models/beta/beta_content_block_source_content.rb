@@ -8,9 +8,18 @@ module Anthropic
       # @example
       # ```ruby
       # case beta_content_block_source_content
-      # in {type: "text", text: String, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral, citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitationParam] === _1 }}
+      # in {
+      #   type: "text",
+      #   text: String,
+      #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral,
+      #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitationParam] === _1 }
+      # }
       #   # Anthropic::Models::Beta::BetaTextBlockParam ...
-      # in {type: "image", source: Anthropic::Models::Beta::BetaImageBlockParam::Source, cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral}
+      # in {
+      #   type: "image",
+      #   source: Anthropic::Models::Beta::BetaImageBlockParam::Source,
+      #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
+      # }
       #   # Anthropic::Models::Beta::BetaImageBlockParam ...
       # end
       # ```

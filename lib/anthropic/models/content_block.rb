@@ -7,7 +7,11 @@ module Anthropic
     # @example
     # ```ruby
     # case content_block
-    # in {type: "text", citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::TextCitation] === _1 }, text: String}
+    # in {
+    #   type: "text",
+    #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::TextCitation] === _1 },
+    #   text: String
+    # }
     #   # Anthropic::Models::TextBlock ...
     # in {type: "tool_use", id: String, input: Anthropic::Unknown, name: String}
     #   # Anthropic::Models::ToolUseBlock ...

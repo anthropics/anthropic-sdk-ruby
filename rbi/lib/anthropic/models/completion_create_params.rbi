@@ -90,7 +90,8 @@ module Anthropic
           top_k: Integer,
           top_p: Float,
           request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
-        ).void
+        )
+          .void
       end
       def initialize(
         max_tokens_to_sample:,
@@ -107,20 +108,21 @@ module Anthropic
       end
 
       sig do
-        override.returns(
-          {
-            max_tokens_to_sample: Integer,
-            model: T.any(Symbol, String),
-            prompt: String,
-            metadata: Anthropic::Models::Metadata,
-            stop_sequences: T::Array[String],
-            stream: T::Boolean,
-            temperature: Float,
-            top_k: Integer,
-            top_p: Float,
-            request_options: Anthropic::RequestOptions
-          }
-        )
+        override
+          .returns(
+            {
+              max_tokens_to_sample: Integer,
+              model: T.any(Symbol, String),
+              prompt: String,
+              metadata: Anthropic::Models::Metadata,
+              stop_sequences: T::Array[String],
+              stream: T::Boolean,
+              temperature: Float,
+              top_k: Integer,
+              top_p: Float,
+              request_options: Anthropic::RequestOptions
+            }
+          )
       end
       def to_hash
       end

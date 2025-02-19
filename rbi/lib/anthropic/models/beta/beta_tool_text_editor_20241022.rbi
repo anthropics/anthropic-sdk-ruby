@@ -27,7 +27,8 @@ module Anthropic
         end
 
         sig do
-          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)).returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+            .returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
         end
         def cache_control=(_)
         end
@@ -37,19 +38,17 @@ module Anthropic
             cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
             name: Symbol,
             type: Symbol
-          ).void
+          )
+            .void
         end
         def initialize(cache_control: nil, name: :str_replace_editor, type: :text_editor_20241022)
         end
 
         sig do
-          override.returns(
-            {
-              name: Symbol,
-              type: Symbol,
-              cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)
-            }
-          )
+          override
+            .returns(
+              {name: Symbol, type: Symbol, cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)}
+            )
         end
         def to_hash
         end

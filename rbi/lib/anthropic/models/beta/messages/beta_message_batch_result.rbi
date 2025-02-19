@@ -8,14 +8,10 @@ module Anthropic
           abstract!
 
           sig do
-            override.returns(
-              [
-                [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult],
-                [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult],
-                [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult],
-                [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult]
-              ]
-            )
+            override
+              .returns(
+                [[Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult], [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult], [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult], [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult]]
+              )
           end
           private_class_method def self.variants
           end

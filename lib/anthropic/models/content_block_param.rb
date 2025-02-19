@@ -7,15 +7,34 @@ module Anthropic
     # @example
     # ```ruby
     # case content_block_param
-    # in {type: "text", text: String, cache_control: Anthropic::Models::CacheControlEphemeral, citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::TextCitationParam] === _1 }}
+    # in {
+    #   type: "text",
+    #   text: String,
+    #   cache_control: Anthropic::Models::CacheControlEphemeral,
+    #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::TextCitationParam] === _1 }
+    # }
     #   # Anthropic::Models::TextBlockParam ...
-    # in {type: "image", source: Anthropic::Models::ImageBlockParam::Source, cache_control: Anthropic::Models::CacheControlEphemeral}
+    # in {
+    #   type: "image",
+    #   source: Anthropic::Models::ImageBlockParam::Source,
+    #   cache_control: Anthropic::Models::CacheControlEphemeral
+    # }
     #   # Anthropic::Models::ImageBlockParam ...
     # in {type: "tool_use", id: String, input: Anthropic::Unknown, name: String}
     #   # Anthropic::Models::ToolUseBlockParam ...
-    # in {type: "tool_result", tool_use_id: String, cache_control: Anthropic::Models::CacheControlEphemeral, content: Anthropic::Models::ToolResultBlockParam::Content}
+    # in {
+    #   type: "tool_result",
+    #   tool_use_id: String,
+    #   cache_control: Anthropic::Models::CacheControlEphemeral,
+    #   content: Anthropic::Models::ToolResultBlockParam::Content
+    # }
     #   # Anthropic::Models::ToolResultBlockParam ...
-    # in {type: "document", source: Anthropic::Models::DocumentBlockParam::Source, cache_control: Anthropic::Models::CacheControlEphemeral, citations: Anthropic::Models::CitationsConfigParam}
+    # in {
+    #   type: "document",
+    #   source: Anthropic::Models::DocumentBlockParam::Source,
+    #   cache_control: Anthropic::Models::CacheControlEphemeral,
+    #   citations: Anthropic::Models::CitationsConfigParam
+    # }
     #   # Anthropic::Models::DocumentBlockParam ...
     # end
     # ```

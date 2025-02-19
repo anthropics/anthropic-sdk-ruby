@@ -10,7 +10,8 @@ module Anthropic
               requests: T::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request],
               betas: T::Array[T.any(String, Symbol)],
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-            ).returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
+            )
+              .returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
           end
           def create(requests:, betas: nil, request_options: {})
           end
@@ -20,7 +21,8 @@ module Anthropic
               message_batch_id: String,
               betas: T::Array[T.any(String, Symbol)],
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-            ).returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
+            )
+              .returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
           end
           def retrieve(message_batch_id, betas: nil, request_options: {})
           end
@@ -32,7 +34,8 @@ module Anthropic
               limit: Integer,
               betas: T::Array[T.any(String, Symbol)],
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-            ).returns(Anthropic::Page[Anthropic::Models::Beta::Messages::BetaMessageBatch])
+            )
+              .returns(Anthropic::Page[Anthropic::Models::Beta::Messages::BetaMessageBatch])
           end
           def list(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {})
           end
@@ -42,7 +45,8 @@ module Anthropic
               message_batch_id: String,
               betas: T::Array[T.any(String, Symbol)],
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-            ).returns(Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch)
+            )
+              .returns(Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch)
           end
           def delete(message_batch_id, betas: nil, request_options: {})
           end
@@ -52,7 +56,8 @@ module Anthropic
               message_batch_id: String,
               betas: T::Array[T.any(String, Symbol)],
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-            ).returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
+            )
+              .returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
           end
           def cancel(message_batch_id, betas: nil, request_options: {})
           end
@@ -62,7 +67,8 @@ module Anthropic
               message_batch_id: String,
               betas: T::Array[T.any(String, Symbol)],
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-            ).returns(Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse)
+            )
+              .returns(Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse)
           end
           def results(message_batch_id, betas: nil, request_options: {})
           end

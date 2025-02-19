@@ -16,10 +16,7 @@ module Anthropic
 
         sig do
           returns(
-            T::Array[T.any(
-              Anthropic::Models::Beta::BetaTextBlock,
-              Anthropic::Models::Beta::BetaToolUseBlock
-            )]
+            T::Array[T.any(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock)]
           )
         end
         def content
@@ -27,14 +24,11 @@ module Anthropic
 
         sig do
           params(
-            _: T::Array[T.any(
-              Anthropic::Models::Beta::BetaTextBlock,
-              Anthropic::Models::Beta::BetaToolUseBlock
-            )]
-          ).returns(T::Array[T.any(
-            Anthropic::Models::Beta::BetaTextBlock,
-            Anthropic::Models::Beta::BetaToolUseBlock
-          )])
+            _: T::Array[T.any(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock)]
+          )
+            .returns(
+              T::Array[T.any(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock)]
+            )
         end
         def content=(_)
         end
@@ -90,17 +84,15 @@ module Anthropic
         sig do
           params(
             id: String,
-            content: T::Array[T.any(
-              Anthropic::Models::Beta::BetaTextBlock,
-              Anthropic::Models::Beta::BetaToolUseBlock
-            )],
+            content: T::Array[T.any(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock)],
             model: T.any(Symbol, String),
             stop_reason: T.nilable(Symbol),
             stop_sequence: T.nilable(String),
             usage: Anthropic::Models::Beta::BetaUsage,
             role: Symbol,
             type: Symbol
-          ).void
+          )
+            .void
         end
         def initialize(
           id:,
@@ -115,21 +107,19 @@ module Anthropic
         end
 
         sig do
-          override.returns(
-            {
-              id: String,
-              content: T::Array[T.any(
-                Anthropic::Models::Beta::BetaTextBlock,
-                Anthropic::Models::Beta::BetaToolUseBlock
-              )],
-              model: T.any(Symbol, String),
-              role: Symbol,
-              stop_reason: T.nilable(Symbol),
-              stop_sequence: T.nilable(String),
-              type: Symbol,
-              usage: Anthropic::Models::Beta::BetaUsage
-            }
-          )
+          override
+            .returns(
+              {
+                id: String,
+                content: T::Array[T.any(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock)],
+                model: T.any(Symbol, String),
+                role: Symbol,
+                stop_reason: T.nilable(Symbol),
+                stop_sequence: T.nilable(String),
+                type: Symbol,
+                usage: Anthropic::Models::Beta::BetaUsage
+              }
+            )
         end
         def to_hash
         end

@@ -25,11 +25,14 @@ module Anthropic
               Anthropic::Models::Beta::BetaInputJSONDelta,
               Anthropic::Models::Beta::BetaCitationsDelta
             )
-          ).returns(T.any(
-                      Anthropic::Models::Beta::BetaTextDelta,
-                      Anthropic::Models::Beta::BetaInputJSONDelta,
-                      Anthropic::Models::Beta::BetaCitationsDelta
-                    ))
+          )
+            .returns(
+              T.any(
+                Anthropic::Models::Beta::BetaTextDelta,
+                Anthropic::Models::Beta::BetaInputJSONDelta,
+                Anthropic::Models::Beta::BetaCitationsDelta
+              )
+            )
         end
         def delta=(_)
         end
@@ -59,23 +62,25 @@ module Anthropic
             ),
             index: Integer,
             type: Symbol
-          ).void
+          )
+            .void
         end
         def initialize(delta:, index:, type: :content_block_delta)
         end
 
         sig do
-          override.returns(
-            {
-              delta: T.any(
-                Anthropic::Models::Beta::BetaTextDelta,
-                Anthropic::Models::Beta::BetaInputJSONDelta,
-                Anthropic::Models::Beta::BetaCitationsDelta
-              ),
-              index: Integer,
-              type: Symbol
-            }
-          )
+          override
+            .returns(
+              {
+                delta: T.any(
+                  Anthropic::Models::Beta::BetaTextDelta,
+                  Anthropic::Models::Beta::BetaInputJSONDelta,
+                  Anthropic::Models::Beta::BetaCitationsDelta
+                ),
+                index: Integer,
+                type: Symbol
+              }
+            )
         end
         def to_hash
         end
@@ -84,13 +89,10 @@ module Anthropic
           abstract!
 
           sig do
-            override.returns(
-              [
-                [Symbol, Anthropic::Models::Beta::BetaTextDelta],
-                [Symbol, Anthropic::Models::Beta::BetaInputJSONDelta],
-                [Symbol, Anthropic::Models::Beta::BetaCitationsDelta]
-              ]
-            )
+            override
+              .returns(
+                [[Symbol, Anthropic::Models::Beta::BetaTextDelta], [Symbol, Anthropic::Models::Beta::BetaInputJSONDelta], [Symbol, Anthropic::Models::Beta::BetaCitationsDelta]]
+              )
           end
           private_class_method def self.variants
           end

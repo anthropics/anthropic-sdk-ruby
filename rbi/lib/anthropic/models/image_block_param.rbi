@@ -7,9 +7,7 @@ module Anthropic
       def source
       end
 
-      sig do
-        params(_: Anthropic::Models::ImageBlockParam::Source).returns(Anthropic::Models::ImageBlockParam::Source)
-      end
+      sig { params(_: Anthropic::Models::ImageBlockParam::Source).returns(Anthropic::Models::ImageBlockParam::Source) }
       def source=(_)
       end
 
@@ -26,7 +24,8 @@ module Anthropic
       end
 
       sig do
-        params(_: T.nilable(Anthropic::Models::CacheControlEphemeral)).returns(T.nilable(Anthropic::Models::CacheControlEphemeral))
+        params(_: T.nilable(Anthropic::Models::CacheControlEphemeral))
+          .returns(T.nilable(Anthropic::Models::CacheControlEphemeral))
       end
       def cache_control=(_)
       end
@@ -36,19 +35,21 @@ module Anthropic
           source: Anthropic::Models::ImageBlockParam::Source,
           cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
           type: Symbol
-        ).void
+        )
+          .void
       end
       def initialize(source:, cache_control: nil, type: :image)
       end
 
       sig do
-        override.returns(
-          {
-            source: Anthropic::Models::ImageBlockParam::Source,
-            type: Symbol,
-            cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral)
-          }
-        )
+        override
+          .returns(
+            {
+              source: Anthropic::Models::ImageBlockParam::Source,
+              type: Symbol,
+              cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral)
+            }
+          )
       end
       def to_hash
       end

@@ -25,11 +25,14 @@ module Anthropic
               Anthropic::Models::Beta::BetaCitationPageLocation,
               Anthropic::Models::Beta::BetaCitationContentBlockLocation
             )
-          ).returns(T.any(
-                      Anthropic::Models::Beta::BetaCitationCharLocation,
-                      Anthropic::Models::Beta::BetaCitationPageLocation,
-                      Anthropic::Models::Beta::BetaCitationContentBlockLocation
-                    ))
+          )
+            .returns(
+              T.any(
+                Anthropic::Models::Beta::BetaCitationCharLocation,
+                Anthropic::Models::Beta::BetaCitationPageLocation,
+                Anthropic::Models::Beta::BetaCitationContentBlockLocation
+              )
+            )
         end
         def citation=(_)
         end
@@ -50,22 +53,24 @@ module Anthropic
               Anthropic::Models::Beta::BetaCitationContentBlockLocation
             ),
             type: Symbol
-          ).void
+          )
+            .void
         end
         def initialize(citation:, type: :citations_delta)
         end
 
         sig do
-          override.returns(
-            {
-              citation: T.any(
-                Anthropic::Models::Beta::BetaCitationCharLocation,
-                Anthropic::Models::Beta::BetaCitationPageLocation,
-                Anthropic::Models::Beta::BetaCitationContentBlockLocation
-              ),
-              type: Symbol
-            }
-          )
+          override
+            .returns(
+              {
+                citation: T.any(
+                  Anthropic::Models::Beta::BetaCitationCharLocation,
+                  Anthropic::Models::Beta::BetaCitationPageLocation,
+                  Anthropic::Models::Beta::BetaCitationContentBlockLocation
+                ),
+                type: Symbol
+              }
+            )
         end
         def to_hash
         end
@@ -74,13 +79,10 @@ module Anthropic
           abstract!
 
           sig do
-            override.returns(
-              [
-                [Symbol, Anthropic::Models::Beta::BetaCitationCharLocation],
-                [Symbol, Anthropic::Models::Beta::BetaCitationPageLocation],
-                [Symbol, Anthropic::Models::Beta::BetaCitationContentBlockLocation]
-              ]
-            )
+            override
+              .returns(
+                [[Symbol, Anthropic::Models::Beta::BetaCitationCharLocation], [Symbol, Anthropic::Models::Beta::BetaCitationPageLocation], [Symbol, Anthropic::Models::Beta::BetaCitationContentBlockLocation]]
+              )
           end
           private_class_method def self.variants
           end

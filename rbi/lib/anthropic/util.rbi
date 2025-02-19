@@ -31,7 +31,8 @@ module Anthropic
         exceptions: T::Array[Exception],
         sentinel: T.nilable(T.anything),
         blk: T.nilable(T.proc.returns(T.anything))
-      ).returns(T.nilable(T.anything))
+      )
+        .returns(T.nilable(T.anything))
     end
     def self.suppress(*exceptions, sentinel: nil, &blk)
     end
@@ -39,11 +40,8 @@ module Anthropic
     OMIT = T.let(T.anything, T.anything)
 
     sig do
-      params(
-        values: T::Array[T.anything],
-        sentinel: T.nilable(T.anything),
-        concat: T::Boolean
-      ).returns(T.anything)
+      params(values: T::Array[T.anything], sentinel: T.nilable(T.anything), concat: T::Boolean)
+        .returns(T.anything)
     end
     def self.deep_merge(*values, sentinel: nil, concat: false)
     end
@@ -54,7 +52,8 @@ module Anthropic
         pick: T.nilable(T.any(Symbol, Integer, T::Array[T.any(Symbol, Integer)])),
         sentinel: T.nilable(T.anything),
         blk: T.nilable(T.proc.returns(T.anything))
-      ).returns(T.nilable(T.anything))
+      )
+        .returns(T.nilable(T.anything))
     end
     def self.dig(data, pick, sentinel = nil, &blk)
     end
@@ -96,21 +95,15 @@ module Anthropic
     end
 
     sig do
-      params(
-        query: T.nilable(
-          T::Hash[String,
-                  T.nilable(T.any(T::Array[String], String))]
-        )
-      ).returns(T.nilable(String))
+      params(query: T.nilable(T::Hash[String, T.nilable(T.any(T::Array[String], String))]))
+        .returns(T.nilable(String))
     end
     def self.encode_query(query)
     end
 
     sig do
-      params(
-        headers: T::Array[T::Hash[String,
-                                  T.nilable(T.any(String, Integer))]]
-      ).returns(T::Hash[String, String])
+      params(headers: T::Array[T::Hash[String, T.nilable(T.any(String, Integer))]])
+        .returns(T::Hash[String, String])
     end
     def self.normalized_headers(*headers)
     end

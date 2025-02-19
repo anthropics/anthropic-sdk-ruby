@@ -164,11 +164,7 @@ module Anthropic
         #     [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
         #
         #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>, nil]
-        optional :system_,
-                 union: -> {
-                   Anthropic::Models::Beta::MessageCreateParams::System
-                 },
-                 api_name: :system
+        optional :system_, union: -> { Anthropic::Models::Beta::MessageCreateParams::System }, api_name: :system
 
         # @!parse
         #   # @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]

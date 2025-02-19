@@ -9,11 +9,19 @@ module Anthropic
     # case raw_message_stream_event
     # in {type: "message_start", message: Anthropic::Models::Message}
     #   # Anthropic::Models::RawMessageStartEvent ...
-    # in {type: "message_delta", delta: Anthropic::Models::RawMessageDeltaEvent::Delta, usage: Anthropic::Models::MessageDeltaUsage}
+    # in {
+    #   type: "message_delta",
+    #   delta: Anthropic::Models::RawMessageDeltaEvent::Delta,
+    #   usage: Anthropic::Models::MessageDeltaUsage
+    # }
     #   # Anthropic::Models::RawMessageDeltaEvent ...
     # in {type: "message_stop"}
     #   # Anthropic::Models::RawMessageStopEvent ...
-    # in {type: "content_block_start", content_block: Anthropic::Models::RawContentBlockStartEvent::ContentBlock, index: Integer}
+    # in {
+    #   type: "content_block_start",
+    #   content_block: Anthropic::Models::RawContentBlockStartEvent::ContentBlock,
+    #   index: Integer
+    # }
     #   # Anthropic::Models::RawContentBlockStartEvent ...
     # in {type: "content_block_delta", delta: Anthropic::Models::RawContentBlockDeltaEvent::Delta, index: Integer}
     #   # Anthropic::Models::RawContentBlockDeltaEvent ...

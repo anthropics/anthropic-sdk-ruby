@@ -66,7 +66,8 @@ module Anthropic
           end
 
           sig do
-            params(_: Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts).returns(Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts)
+            params(_: Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts)
+              .returns(Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts)
           end
           def request_counts=(_)
           end
@@ -99,7 +100,8 @@ module Anthropic
               request_counts: Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts,
               results_url: T.nilable(String),
               type: Symbol
-            ).void
+            )
+              .void
           end
           def initialize(
             id:,
@@ -116,20 +118,21 @@ module Anthropic
           end
 
           sig do
-            override.returns(
-              {
-                id: String,
-                archived_at: T.nilable(Time),
-                cancel_initiated_at: T.nilable(Time),
-                created_at: Time,
-                ended_at: T.nilable(Time),
-                expires_at: Time,
-                processing_status: Symbol,
-                request_counts: Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts,
-                results_url: T.nilable(String),
-                type: Symbol
-              }
-            )
+            override
+              .returns(
+                {
+                  id: String,
+                  archived_at: T.nilable(Time),
+                  cancel_initiated_at: T.nilable(Time),
+                  created_at: Time,
+                  ended_at: T.nilable(Time),
+                  expires_at: Time,
+                  processing_status: Symbol,
+                  request_counts: Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts,
+                  results_url: T.nilable(String),
+                  type: Symbol
+                }
+              )
           end
           def to_hash
           end

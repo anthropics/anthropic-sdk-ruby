@@ -9,14 +9,10 @@ module Anthropic
         abstract!
 
         sig do
-          override.returns(
-            [
-              [NilClass, Anthropic::Models::Beta::BetaTool],
-              [NilClass, Anthropic::Models::Beta::BetaToolComputerUse20241022],
-              [NilClass, Anthropic::Models::Beta::BetaToolBash20241022],
-              [NilClass, Anthropic::Models::Beta::BetaToolTextEditor20241022]
-            ]
-          )
+          override
+            .returns(
+              [[NilClass, Anthropic::Models::Beta::BetaTool], [NilClass, Anthropic::Models::Beta::BetaToolComputerUse20241022], [NilClass, Anthropic::Models::Beta::BetaToolBash20241022], [NilClass, Anthropic::Models::Beta::BetaToolTextEditor20241022]]
+            )
         end
         private_class_method def self.variants
         end

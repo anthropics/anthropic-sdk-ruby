@@ -62,7 +62,8 @@ module Anthropic
             end_char_index: Integer,
             start_char_index: Integer,
             type: Symbol
-          ).void
+          )
+            .void
         end
         def initialize(
           cited_text:,
@@ -75,16 +76,17 @@ module Anthropic
         end
 
         sig do
-          override.returns(
-            {
-              cited_text: String,
-              document_index: Integer,
-              document_title: T.nilable(String),
-              end_char_index: Integer,
-              start_char_index: Integer,
-              type: Symbol
-            }
-          )
+          override
+            .returns(
+              {
+                cited_text: String,
+                document_index: Integer,
+                document_title: T.nilable(String),
+                end_char_index: Integer,
+                start_char_index: Integer,
+                type: Symbol
+              }
+            )
         end
         def to_hash
         end

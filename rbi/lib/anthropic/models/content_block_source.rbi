@@ -5,10 +5,7 @@ module Anthropic
     class ContentBlockSource < Anthropic::BaseModel
       sig do
         returns(
-          T.any(
-            String,
-            T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
-          )
+          T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)])
         )
       end
       def content
@@ -16,14 +13,11 @@ module Anthropic
 
       sig do
         params(
-          _: T.any(
-            String,
-            T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
+          _: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)])
+        )
+          .returns(
+            T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)])
           )
-        ).returns(T.any(
-                    String,
-                    T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
-                  ))
       end
       def content=(_)
       end
@@ -38,32 +32,22 @@ module Anthropic
 
       sig do
         params(
-          content: T.any(
-            String,
-            T::Array[T.any(
-              Anthropic::Models::TextBlockParam,
-              Anthropic::Models::ImageBlockParam
-            )]
-          ),
+          content: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]),
           type: Symbol
-        ).void
+        )
+          .void
       end
       def initialize(content:, type: :content)
       end
 
       sig do
-        override.returns(
-          {
-            content: T.any(
-              String,
-              T::Array[T.any(
-                Anthropic::Models::TextBlockParam,
-                Anthropic::Models::ImageBlockParam
-              )]
-            ),
-            type: Symbol
-          }
-        )
+        override
+          .returns(
+            {
+              content: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]),
+              type: Symbol
+            }
+          )
       end
       def to_hash
       end
@@ -71,20 +55,13 @@ module Anthropic
       class Content < Anthropic::Union
         abstract!
 
-        ContentBlockSourceContentArray = T.type_alias do
-          T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
-        end
+        ContentBlockSourceContentArray = T.type_alias { T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)] }
 
         sig do
-          override.returns(
-            [
-              [NilClass, String],
-              [
-                NilClass,
-                T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
-              ]
-            ]
-          )
+          override
+            .returns(
+              [[NilClass, String], [NilClass, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]]]
+            )
         end
         private_class_method def self.variants
         end
