@@ -27,7 +27,7 @@ module Anthropic
     sig do
       params(
         client: Anthropic::BaseClient,
-        req: Anthropic::BaseClient::RequestShape,
+        req: Anthropic::BaseClient::RequestComponentsShape,
         headers: T::Hash[String, String],
         unwrapped: T.anything
       )

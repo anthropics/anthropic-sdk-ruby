@@ -1,6 +1,6 @@
 module Anthropic
   class BaseClient
-    type request =
+    type request_components =
       {
         method: Symbol,
         path: String | ::Array[String],
@@ -10,12 +10,10 @@ module Anthropic
         unwrap: Symbol?,
         page: Class?,
         model: Anthropic::Converter::input?,
-        options: (Anthropic::RequestOptions
-        | Anthropic::request_options
-        | ::Hash[Symbol, top])?
+        options: Anthropic::request_opts?
       }
 
-    type normalized_request =
+    type request_input =
       {
         method: Symbol,
         url: URI::Generic,
@@ -27,7 +25,7 @@ module Anthropic
 
     MAX_REDIRECTS: 20
 
-    def self.validate!: (Anthropic::BaseClient::request req) -> void
+    def self.validate!: (Anthropic::BaseClient::request_components req) -> void
 
     # @private
     attr_accessor requester: top
@@ -47,9 +45,9 @@ module Anthropic
     private def generate_idempotency_key: -> String
 
     private def build_request: (
-      Anthropic::BaseClient::request req,
+      Anthropic::BaseClient::request_components req,
       Anthropic::request_options opts
-    ) -> Anthropic::BaseClient::normalized_request
+    ) -> Anthropic::BaseClient::request_input
 
     private def should_retry?: (
       Integer status,
@@ -62,20 +60,20 @@ module Anthropic
     ) -> Float
 
     private def follow_redirect: (
-      Anthropic::BaseClient::normalized_request request,
+      Anthropic::BaseClient::request_input request,
       status: Integer,
       location_header: String
-    ) -> Anthropic::BaseClient::normalized_request
+    ) -> Anthropic::BaseClient::request_input
 
     private def send_request: (
-      Anthropic::BaseClient::normalized_request request,
+      Anthropic::BaseClient::request_input request,
       redirect_count: Integer,
       retry_count: Integer,
       send_retry_header: bool
     ) -> top
 
     private def parse_response: (
-      Anthropic::BaseClient::request req,
+      Anthropic::BaseClient::request_components req,
       nil response
     ) -> top
 
@@ -89,11 +87,9 @@ module Anthropic
         unwrap: Symbol?,
         page: Class?,
         model: Anthropic::Converter::input?,
-        options: (Anthropic::RequestOptions
-        | Anthropic::request_options
-        | ::Hash[Symbol, top])?
+        options: Anthropic::request_opts?
       ) -> top
-      | (Anthropic::BaseClient::request req) -> top
+      | (Anthropic::BaseClient::request_components req) -> top
 
     def inspect: -> String
   end
