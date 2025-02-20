@@ -93,7 +93,8 @@ module Anthropic
     end
 
     sig do
-      params(req: Anthropic::BaseClient::RequestComponentsShape, opts: T::Hash[Symbol, T.anything])
+      overridable
+        .params(req: Anthropic::BaseClient::RequestComponentsShape, opts: T::Hash[Symbol, T.anything])
         .returns(Anthropic::BaseClient::RequestInputShape)
     end
     private def build_request(req, opts)
