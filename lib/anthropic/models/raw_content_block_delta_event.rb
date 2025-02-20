@@ -2,14 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # raw_content_block_delta_event => {
-    #   delta: Anthropic::Models::RawContentBlockDeltaEvent::Delta,
-    #   index: Integer,
-    #   type: :content_block_delta
-    # }
-    # ```
     class RawContentBlockDeltaEvent < Anthropic::BaseModel
       # @!attribute delta
       #

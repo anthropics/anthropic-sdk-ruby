@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # beta_rate_limit_error => {
-    #   message: String,
-    #   type: :rate_limit_error
-    # }
-    # ```
     class BetaRateLimitError < Anthropic::BaseModel
       # @!attribute message
       #

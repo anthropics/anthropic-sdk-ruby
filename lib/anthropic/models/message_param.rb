@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # message_param => {
-    #   content: Anthropic::Models::MessageParam::Content,
-    #   role: Anthropic::Models::MessageParam::Role
-    # }
-    # ```
     class MessageParam < Anthropic::BaseModel
       # @!attribute content
       #

@@ -3,13 +3,6 @@
 module Anthropic
   module Models
     module Messages
-      # @example
-      # ```ruby
-      # message_batch_succeeded_result => {
-      #   message: Anthropic::Models::Message,
-      #   type: :succeeded
-      # }
-      # ```
       class MessageBatchSucceededResult < Anthropic::BaseModel
         # @!attribute message
         #

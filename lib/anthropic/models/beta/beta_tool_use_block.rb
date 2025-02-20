@@ -3,15 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_tool_use_block => {
-      #   id: String,
-      #   input: Anthropic::Unknown,
-      #   name: String,
-      #   type: :tool_use
-      # }
-      # ```
       class BetaToolUseBlock < Anthropic::BaseModel
         # @!attribute id
         #

@@ -2,15 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # tool => {
-    #   input_schema: Anthropic::Models::Tool::InputSchema,
-    #   name: String,
-    #   cache_control: Anthropic::Models::CacheControlEphemeral,
-    #   description: String
-    # }
-    # ```
     class Tool < Anthropic::BaseModel
       # @!attribute input_schema
       #   [JSON schema](https://json-schema.org/) for this tool's input.
@@ -59,13 +50,6 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-      # @example
-      # ```ruby
-      # input_schema => {
-      #   type: :object,
-      #   properties: Anthropic::Unknown
-      # }
-      # ```
       class InputSchema < Anthropic::BaseModel
         # @!attribute type
         #

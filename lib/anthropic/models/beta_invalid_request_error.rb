@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # beta_invalid_request_error => {
-    #   message: String,
-    #   type: :invalid_request_error
-    # }
-    # ```
     class BetaInvalidRequestError < Anthropic::BaseModel
       # @!attribute message
       #

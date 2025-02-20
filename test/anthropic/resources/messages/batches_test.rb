@@ -27,6 +27,21 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Minitest::Test
     assert_pattern do
       response => Anthropic::Models::Messages::MessageBatch
     end
+
+    assert_pattern do
+      response => {
+        id: String,
+        archived_at: Time | nil,
+        cancel_initiated_at: Time | nil,
+        created_at: Time,
+        ended_at: Time | nil,
+        expires_at: Time,
+        processing_status: Anthropic::Models::Messages::MessageBatch::ProcessingStatus,
+        request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts,
+        results_url: String | nil,
+        type: Symbol
+      }
+    end
   end
 
   def test_retrieve
@@ -34,6 +49,21 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Minitest::Test
 
     assert_pattern do
       response => Anthropic::Models::Messages::MessageBatch
+    end
+
+    assert_pattern do
+      response => {
+        id: String,
+        archived_at: Time | nil,
+        cancel_initiated_at: Time | nil,
+        created_at: Time,
+        ended_at: Time | nil,
+        expires_at: Time,
+        processing_status: Anthropic::Models::Messages::MessageBatch::ProcessingStatus,
+        request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts,
+        results_url: String | nil,
+        type: Symbol
+      }
     end
   end
 
@@ -53,6 +83,21 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Minitest::Test
     assert_pattern do
       row => Anthropic::Models::Messages::MessageBatch
     end
+
+    assert_pattern do
+      row => {
+        id: String,
+        archived_at: Time | nil,
+        cancel_initiated_at: Time | nil,
+        created_at: Time,
+        ended_at: Time | nil,
+        expires_at: Time,
+        processing_status: Anthropic::Models::Messages::MessageBatch::ProcessingStatus,
+        request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts,
+        results_url: String | nil,
+        type: Symbol
+      }
+    end
   end
 
   def test_delete
@@ -61,6 +106,13 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Minitest::Test
     assert_pattern do
       response => Anthropic::Models::Messages::DeletedMessageBatch
     end
+
+    assert_pattern do
+      response => {
+        id: String,
+        type: Symbol
+      }
+    end
   end
 
   def test_cancel
@@ -68,6 +120,21 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Minitest::Test
 
     assert_pattern do
       response => Anthropic::Models::Messages::MessageBatch
+    end
+
+    assert_pattern do
+      response => {
+        id: String,
+        archived_at: Time | nil,
+        cancel_initiated_at: Time | nil,
+        created_at: Time,
+        ended_at: Time | nil,
+        expires_at: Time,
+        processing_status: Anthropic::Models::Messages::MessageBatch::ProcessingStatus,
+        request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts,
+        results_url: String | nil,
+        type: Symbol
+      }
     end
   end
 
@@ -78,6 +145,13 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Minitest::Test
 
     assert_pattern do
       response => Anthropic::Models::Messages::MessageBatchIndividualResponse
+    end
+
+    assert_pattern do
+      response => {
+        custom_id: String,
+        result: Anthropic::Models::Messages::MessageBatchResult
+      }
     end
   end
 end

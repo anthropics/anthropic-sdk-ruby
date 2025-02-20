@@ -3,16 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_citation_page_location_param => {
-      #   cited_text: String,
-      #   document_index: Integer,
-      #   document_title: String,
-      #   end_page_number: Integer,
-      #   start_page_number: Integer
-      # }
-      # ```
       class BetaCitationPageLocationParam < Anthropic::BaseModel
         # @!attribute cited_text
         #

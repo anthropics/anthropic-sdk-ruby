@@ -4,16 +4,6 @@ module Anthropic
   module Models
     module Beta
       module Messages
-        # @example
-        # ```ruby
-        # beta_message_batch_request_counts => {
-        #   canceled: Integer,
-        #   errored: Integer,
-        #   expired: Integer,
-        #   processing: Integer,
-        #   succeeded: Integer
-        # }
-        # ```
         class BetaMessageBatchRequestCounts < Anthropic::BaseModel
           # @!attribute canceled
           #   Number of requests in the Message Batch that have been canceled.

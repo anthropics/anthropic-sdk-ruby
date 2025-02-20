@@ -2,16 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # citation_content_block_location => {
-    #   cited_text: String,
-    #   document_index: Integer,
-    #   document_title: String,
-    #   end_block_index: Integer,
-    #   start_block_index: Integer
-    # }
-    # ```
     class CitationContentBlockLocation < Anthropic::BaseModel
       # @!attribute cited_text
       #

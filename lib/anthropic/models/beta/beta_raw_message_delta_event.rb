@@ -3,14 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_raw_message_delta_event => {
-      #   delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta,
-      #   type: :message_delta,
-      #   usage: Anthropic::Models::Beta::BetaMessageDeltaUsage
-      # }
-      # ```
       class BetaRawMessageDeltaEvent < Anthropic::BaseModel
         # @!attribute delta
         #
@@ -48,13 +40,6 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-        # @example
-        # ```ruby
-        # delta => {
-        #   stop_reason: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason,
-        #   stop_sequence: String
-        # }
-        # ```
         class Delta < Anthropic::BaseModel
           # @!attribute stop_reason
           #

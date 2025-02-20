@@ -3,13 +3,6 @@
 module Anthropic
   module Models
     module Messages
-      # @example
-      # ```ruby
-      # message_batch_individual_response => {
-      #   custom_id: String,
-      #   result: Anthropic::Models::Messages::MessageBatchResult
-      # }
-      # ```
       class MessageBatchIndividualResponse < Anthropic::BaseModel
         # @!attribute custom_id
         #   Developer-provided ID created for each request in a Message Batch. Useful for

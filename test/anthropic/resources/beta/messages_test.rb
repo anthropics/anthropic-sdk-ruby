@@ -21,6 +21,19 @@ class Anthropic::Test::Resources::Beta::MessagesTest < Minitest::Test
     assert_pattern do
       response => Anthropic::Models::Beta::BetaMessage
     end
+
+    assert_pattern do
+      response => {
+        id: String,
+        content: ^(Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlock]),
+        model: Anthropic::Models::Model,
+        role: Symbol,
+        stop_reason: Anthropic::Models::Beta::BetaMessage::StopReason | nil,
+        stop_sequence: String | nil,
+        type: Symbol,
+        usage: Anthropic::Models::Beta::BetaUsage
+      }
+    end
   end
 
   def test_count_tokens_required_params
@@ -31,6 +44,12 @@ class Anthropic::Test::Resources::Beta::MessagesTest < Minitest::Test
 
     assert_pattern do
       response => Anthropic::Models::Beta::BetaMessageTokensCount
+    end
+
+    assert_pattern do
+      response => {
+        input_tokens: Integer
+      }
     end
   end
 end

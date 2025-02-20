@@ -2,12 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # cache_control_ephemeral => {
-    #   type: :ephemeral
-    # }
-    # ```
     class CacheControlEphemeral < Anthropic::BaseModel
       # @!attribute type
       #

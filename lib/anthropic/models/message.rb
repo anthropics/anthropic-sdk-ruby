@@ -2,17 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # message => {
-    #   id: String,
-    #   content: -> { Anthropic::ArrayOf[union: Anthropic::Models::ContentBlock] === _1 },
-    #   model: Anthropic::Models::Model,
-    #   role: :assistant,
-    #   stop_reason: Anthropic::Models::Message::StopReason,
-    #   **_
-    # }
-    # ```
     class Message < Anthropic::BaseModel
       # @!attribute id
       #   Unique object identifier.

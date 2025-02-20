@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # input_json_delta => {
-    #   partial_json: String,
-    #   type: :input_json_delta
-    # }
-    # ```
     class InputJSONDelta < Anthropic::BaseModel
       # @!attribute partial_json
       #

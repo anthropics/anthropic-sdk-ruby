@@ -2,12 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # citations_config_param => {
-    #   enabled: Anthropic::BooleanModel
-    # }
-    # ```
     class CitationsConfigParam < Anthropic::BaseModel
       # @!attribute [r] enabled
       #

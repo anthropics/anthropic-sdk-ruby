@@ -3,12 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_citations_config_param => {
-      #   enabled: Anthropic::BooleanModel
-      # }
-      # ```
       class BetaCitationsConfigParam < Anthropic::BaseModel
         # @!attribute [r] enabled
         #

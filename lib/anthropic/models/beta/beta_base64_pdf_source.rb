@@ -3,14 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_base64_pdf_source => {
-      #   data: String,
-      #   media_type: :"application/pdf",
-      #   type: :base64
-      # }
-      # ```
       class BetaBase64PDFSource < Anthropic::BaseModel
         # @!attribute data
         #

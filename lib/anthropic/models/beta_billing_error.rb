@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # beta_billing_error => {
-    #   message: String,
-    #   type: :billing_error
-    # }
-    # ```
     class BetaBillingError < Anthropic::BaseModel
       # @!attribute message
       #

@@ -2,16 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # citation_char_location_param => {
-    #   cited_text: String,
-    #   document_index: Integer,
-    #   document_title: String,
-    #   end_char_index: Integer,
-    #   start_char_index: Integer
-    # }
-    # ```
     class CitationCharLocationParam < Anthropic::BaseModel
       # @!attribute cited_text
       #

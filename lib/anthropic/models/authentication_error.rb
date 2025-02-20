@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # authentication_error => {
-    #   message: String,
-    #   type: :authentication_error
-    # }
-    # ```
     class AuthenticationError_ < Anthropic::BaseModel
       # @!attribute message
       #

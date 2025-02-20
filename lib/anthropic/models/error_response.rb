@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # error_response => {
-    #   error: Anthropic::Models::ErrorObject,
-    #   type: :error
-    # }
-    # ```
     class ErrorResponse < Anthropic::BaseModel
       # @!attribute error
       #

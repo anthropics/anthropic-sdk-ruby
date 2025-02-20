@@ -3,14 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_tool_bash20241022 => {
-      #   name: :bash,
-      #   type: :bash_20241022,
-      #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
-      # }
-      # ```
       class BetaToolBash20241022 < Anthropic::BaseModel
         # @!attribute name
         #   Name of the tool.

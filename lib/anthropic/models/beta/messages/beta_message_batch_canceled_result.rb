@@ -4,12 +4,6 @@ module Anthropic
   module Models
     module Beta
       module Messages
-        # @example
-        # ```ruby
-        # beta_message_batch_canceled_result => {
-        #   type: :canceled
-        # }
-        # ```
         class BetaMessageBatchCanceledResult < Anthropic::BaseModel
           # @!attribute type
           #

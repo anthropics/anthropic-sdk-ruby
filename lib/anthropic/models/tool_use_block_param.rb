@@ -2,16 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # tool_use_block_param => {
-    #   id: String,
-    #   input: Anthropic::Unknown,
-    #   name: String,
-    #   type: :tool_use,
-    #   cache_control: Anthropic::Models::CacheControlEphemeral
-    # }
-    # ```
     class ToolUseBlockParam < Anthropic::BaseModel
       # @!attribute id
       #

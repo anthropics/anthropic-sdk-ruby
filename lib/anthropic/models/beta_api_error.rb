@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # beta_api_error => {
-    #   message: String,
-    #   type: :api_error
-    # }
-    # ```
     class BetaAPIError < Anthropic::BaseModel
       # @!attribute message
       #

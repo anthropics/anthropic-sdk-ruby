@@ -2,15 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # tool_use_block => {
-    #   id: String,
-    #   input: Anthropic::Unknown,
-    #   name: String,
-    #   type: :tool_use
-    # }
-    # ```
     class ToolUseBlock < Anthropic::BaseModel
       # @!attribute id
       #

@@ -12,7 +12,7 @@ module Anthropic
       #   type: "text",
       #   text: String,
       #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral,
-      #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitationParam] === _1 }
+      #   citations: ^(Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitationParam])
       # }
       #   # Anthropic::Models::Beta::BetaTextBlockParam ...
       # in {

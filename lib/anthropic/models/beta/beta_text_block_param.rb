@@ -3,15 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_text_block_param => {
-      #   text: String,
-      #   type: :text,
-      #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral,
-      #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitationParam] === _1 }
-      # }
-      # ```
       class BetaTextBlockParam < Anthropic::BaseModel
         # @!attribute text
         #

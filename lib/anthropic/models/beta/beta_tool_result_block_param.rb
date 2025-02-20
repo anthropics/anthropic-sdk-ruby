@@ -3,16 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_tool_result_block_param => {
-      #   tool_use_id: String,
-      #   type: :tool_result,
-      #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral,
-      #   content: Anthropic::Models::Beta::BetaToolResultBlockParam::Content,
-      #   is_error: Anthropic::BooleanModel
-      # }
-      # ```
       class BetaToolResultBlockParam < Anthropic::BaseModel
         # @!attribute tool_use_id
         #
@@ -85,7 +75,7 @@ module Anthropic
           #   type: "text",
           #   text: String,
           #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral,
-          #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitationParam] === _1 }
+          #   citations: ^(Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitationParam])
           # }
           #   # Anthropic::Models::Beta::BetaTextBlockParam ...
           # in {

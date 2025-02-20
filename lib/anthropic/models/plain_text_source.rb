@@ -2,14 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # plain_text_source => {
-    #   data: String,
-    #   media_type: :"text/plain",
-    #   type: :text
-    # }
-    # ```
     class PlainTextSource < Anthropic::BaseModel
       # @!attribute data
       #

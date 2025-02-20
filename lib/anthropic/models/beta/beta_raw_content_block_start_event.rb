@@ -3,14 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_raw_content_block_start_event => {
-      #   content_block: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::ContentBlock,
-      #   index: Integer,
-      #   type: :content_block_start
-      # }
-      # ```
       class BetaRawContentBlockStartEvent < Anthropic::BaseModel
         # @!attribute content_block
         #
@@ -42,11 +34,7 @@ module Anthropic
         # @example
         # ```ruby
         # case content_block
-        # in {
-        #   type: "text",
-        #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitation] === _1 },
-        #   text: String
-        # }
+        # in {type: "text", citations: ^(Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitation]), text: String}
         #   # Anthropic::Models::Beta::BetaTextBlock ...
         # in {type: "tool_use", id: String, input: Anthropic::Unknown, name: String}
         #   # Anthropic::Models::Beta::BetaToolUseBlock ...

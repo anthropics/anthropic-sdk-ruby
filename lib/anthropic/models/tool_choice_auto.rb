@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # tool_choice_auto => {
-    #   type: :auto,
-    #   disable_parallel_tool_use: Anthropic::BooleanModel
-    # }
-    # ```
     class ToolChoiceAuto < Anthropic::BaseModel
       # @!attribute type
       #

@@ -3,12 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_raw_message_stop_event => {
-      #   type: :message_stop
-      # }
-      # ```
       class BetaRawMessageStopEvent < Anthropic::BaseModel
         # @!attribute type
         #

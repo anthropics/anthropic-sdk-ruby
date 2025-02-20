@@ -3,14 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_plain_text_source => {
-      #   data: String,
-      #   media_type: :"text/plain",
-      #   type: :text
-      # }
-      # ```
       class BetaPlainTextSource < Anthropic::BaseModel
         # @!attribute data
         #

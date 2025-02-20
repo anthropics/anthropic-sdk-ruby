@@ -6,8 +6,6 @@ module Anthropic
   # @abstract
   #
   module BasePage
-    # rubocop:disable Lint/UnusedMethodArgument
-
     # @return [Boolean]
     #
     def next_page? = (raise NotImplementedError)
@@ -21,7 +19,7 @@ module Anthropic
     #
     # @return [void]
     #
-    def auto_paging_each(&blk) = (raise NotImplementedError)
+    def auto_paging_each(&) = (raise NotImplementedError)
 
     # @return [Enumerable]
     #
@@ -38,7 +36,5 @@ module Anthropic
     #   # @param unwrapped [Object]
     #   #
     #   def initialize(client:, req:, headers:, unwrapped:); end
-
-    # rubocop:enable Lint/UnusedMethodArgument
   end
 end

@@ -38,13 +38,6 @@ module Anthropic
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-          # @example
-          # ```ruby
-          # request => {
-          #   custom_id: String,
-          #   params: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params
-          # }
-          # ```
           class Request < Anthropic::BaseModel
             # @!attribute custom_id
             #   Developer-provided ID created for each request in a Message Batch. Useful for
@@ -72,17 +65,6 @@ module Anthropic
 
             # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-            # @example
-            # ```ruby
-            # params => {
-            #   max_tokens: Integer,
-            #   messages: -> { Anthropic::ArrayOf[Anthropic::Models::Beta::BetaMessageParam] === _1 },
-            #   model: Anthropic::Models::Model,
-            #   metadata: Anthropic::Models::Beta::BetaMetadata,
-            #   stop_sequences: -> { Anthropic::ArrayOf[String] === _1 },
-            #   **_
-            # }
-            # ```
             class Params < Anthropic::BaseModel
               # @!attribute max_tokens
               #   The maximum number of tokens to generate before stopping.

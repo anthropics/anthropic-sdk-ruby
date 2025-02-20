@@ -3,13 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_citations_delta => {
-      #   citation: Anthropic::Models::Beta::BetaCitationsDelta::Citation,
-      #   type: :citations_delta
-      # }
-      # ```
       class BetaCitationsDelta < Anthropic::BaseModel
         # @!attribute citation
         #

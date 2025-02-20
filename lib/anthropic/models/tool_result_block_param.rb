@@ -2,16 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # tool_result_block_param => {
-    #   tool_use_id: String,
-    #   type: :tool_result,
-    #   cache_control: Anthropic::Models::CacheControlEphemeral,
-    #   content: Anthropic::Models::ToolResultBlockParam::Content,
-    #   is_error: Anthropic::BooleanModel
-    # }
-    # ```
     class ToolResultBlockParam < Anthropic::BaseModel
       # @!attribute tool_use_id
       #
@@ -84,7 +74,7 @@ module Anthropic
         #   type: "text",
         #   text: String,
         #   cache_control: Anthropic::Models::CacheControlEphemeral,
-        #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::TextCitationParam] === _1 }
+        #   citations: ^(Anthropic::ArrayOf[union: Anthropic::Models::TextCitationParam])
         # }
         #   # Anthropic::Models::TextBlockParam ...
         # in {
