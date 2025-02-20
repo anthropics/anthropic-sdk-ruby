@@ -3,13 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_raw_content_block_stop_event => {
-      #   index: Integer,
-      #   type: :content_block_stop
-      # }
-      # ```
       class BetaRawContentBlockStopEvent < Anthropic::BaseModel
         # @!attribute index
         #

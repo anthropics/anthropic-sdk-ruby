@@ -21,5 +21,15 @@ class Anthropic::Test::Resources::CompletionsTest < Minitest::Test
     assert_pattern do
       response => Anthropic::Models::Completion
     end
+
+    assert_pattern do
+      response => {
+        id: String,
+        completion: String,
+        model: Anthropic::Models::Model,
+        stop_reason: String | nil,
+        type: Symbol
+      }
+    end
   end
 end

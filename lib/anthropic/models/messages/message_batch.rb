@@ -3,17 +3,6 @@
 module Anthropic
   module Models
     module Messages
-      # @example
-      # ```ruby
-      # message_batch => {
-      #   id: String,
-      #   archived_at: Time,
-      #   cancel_initiated_at: Time,
-      #   created_at: Time,
-      #   ended_at: Time,
-      #   **_
-      # }
-      # ```
       class MessageBatch < Anthropic::BaseModel
         # @!attribute id
         #   Unique object identifier.

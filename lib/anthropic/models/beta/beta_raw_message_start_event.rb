@@ -3,13 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_raw_message_start_event => {
-      #   message: Anthropic::Models::Beta::BetaMessage,
-      #   type: :message_start
-      # }
-      # ```
       class BetaRawMessageStartEvent < Anthropic::BaseModel
         # @!attribute message
         #

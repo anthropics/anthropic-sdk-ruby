@@ -2,16 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # document_block_param => {
-    #   source: Anthropic::Models::DocumentBlockParam::Source,
-    #   type: :document,
-    #   cache_control: Anthropic::Models::CacheControlEphemeral,
-    #   citations: Anthropic::Models::CitationsConfigParam,
-    #   context: String
-    # }
-    # ```
     class DocumentBlockParam < Anthropic::BaseModel
       # @!attribute source
       #
@@ -64,9 +54,9 @@ module Anthropic
       # @example
       # ```ruby
       # case source
-      # in {type: "base64", data: String, media_type: :"application/pdf"}
+      # in {type: "base64", data: String, media_type: Symbol}
       #   # Anthropic::Models::Base64PDFSource ...
-      # in {type: "text", data: String, media_type: :"text/plain"}
+      # in {type: "text", data: String, media_type: Symbol}
       #   # Anthropic::Models::PlainTextSource ...
       # in {type: "content", content: Anthropic::Models::ContentBlockSource::Content}
       #   # Anthropic::Models::ContentBlockSource ...

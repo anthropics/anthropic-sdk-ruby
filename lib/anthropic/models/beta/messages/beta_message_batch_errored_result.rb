@@ -4,13 +4,6 @@ module Anthropic
   module Models
     module Beta
       module Messages
-        # @example
-        # ```ruby
-        # beta_message_batch_errored_result => {
-        #   error: Anthropic::Models::BetaErrorResponse,
-        #   type: :errored
-        # }
-        # ```
         class BetaMessageBatchErroredResult < Anthropic::BaseModel
           # @!attribute error
           #

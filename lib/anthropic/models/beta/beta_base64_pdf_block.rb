@@ -3,16 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_base64_pdf_block => {
-      #   source: Anthropic::Models::Beta::BetaBase64PDFBlock::Source,
-      #   type: :document,
-      #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral,
-      #   citations: Anthropic::Models::Beta::BetaCitationsConfigParam,
-      #   context: String
-      # }
-      # ```
       class BetaBase64PDFBlock < Anthropic::BaseModel
         # @!attribute source
         #
@@ -65,9 +55,9 @@ module Anthropic
         # @example
         # ```ruby
         # case source
-        # in {type: "base64", data: String, media_type: :"application/pdf"}
+        # in {type: "base64", data: String, media_type: Symbol}
         #   # Anthropic::Models::Beta::BetaBase64PDFSource ...
-        # in {type: "text", data: String, media_type: :"text/plain"}
+        # in {type: "text", data: String, media_type: Symbol}
         #   # Anthropic::Models::Beta::BetaPlainTextSource ...
         # in {type: "content", content: Anthropic::Models::Beta::BetaContentBlockSource::Content}
         #   # Anthropic::Models::Beta::BetaContentBlockSource ...

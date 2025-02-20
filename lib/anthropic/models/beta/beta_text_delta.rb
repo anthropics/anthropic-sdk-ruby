@@ -3,13 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_text_delta => {
-      #   text: String,
-      #   type: :text_delta
-      # }
-      # ```
       class BetaTextDelta < Anthropic::BaseModel
         # @!attribute text
         #

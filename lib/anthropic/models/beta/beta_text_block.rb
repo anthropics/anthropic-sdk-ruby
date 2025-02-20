@@ -3,14 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_text_block => {
-      #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitation] === _1 },
-      #   text: String,
-      #   type: :text
-      # }
-      # ```
       class BetaTextBlock < Anthropic::BaseModel
         # @!attribute citations
         #   Citations supporting the text block.

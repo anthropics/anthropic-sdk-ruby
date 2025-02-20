@@ -3,16 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_tool => {
-      #   input_schema: Anthropic::Models::Beta::BetaTool::InputSchema,
-      #   name: String,
-      #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral,
-      #   description: String,
-      #   type: Anthropic::Models::Beta::BetaTool::Type
-      # }
-      # ```
       class BetaTool < Anthropic::BaseModel
         # @!attribute input_schema
         #   [JSON schema](https://json-schema.org/) for this tool's input.
@@ -67,13 +57,6 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-        # @example
-        # ```ruby
-        # input_schema => {
-        #   type: :object,
-        #   properties: Anthropic::Unknown
-        # }
-        # ```
         class InputSchema < Anthropic::BaseModel
           # @!attribute type
           #

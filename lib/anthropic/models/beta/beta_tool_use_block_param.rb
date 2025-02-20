@@ -3,16 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_tool_use_block_param => {
-      #   id: String,
-      #   input: Anthropic::Unknown,
-      #   name: String,
-      #   type: :tool_use,
-      #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
-      # }
-      # ```
       class BetaToolUseBlockParam < Anthropic::BaseModel
         # @!attribute id
         #

@@ -2,12 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # raw_message_stop_event => {
-    #   type: :message_stop
-    # }
-    # ```
     class RawMessageStopEvent < Anthropic::BaseModel
       # @!attribute type
       #

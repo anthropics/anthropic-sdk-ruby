@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # tool_choice_any => {
-    #   type: :any,
-    #   disable_parallel_tool_use: Anthropic::BooleanModel
-    # }
-    # ```
     class ToolChoiceAny < Anthropic::BaseModel
       # @!attribute type
       #

@@ -1,15 +1,14 @@
 ---
-
 # Explicitly disable pending cops for now. This is the default behaviour but
 # this avoids a large warning every time we run it.
 # Stop RuboCop nagging about rubocop-rake.
 # Ensure that RuboCop validates according to the lowest version of Ruby that we support.
 AllCops:
-  Exclude: 
+  Exclude:
     - "bin/*"
   NewCops: enable
   SuggestExtensions: false
-  TargetRubyVersion: 3.0.0
+  TargetRubyVersion: 3.1.0
 
 # Don't require this extra line break, it can be excessive.
 Layout/EmptyLineAfterGuardClause:
@@ -33,7 +32,7 @@ Layout/FirstMethodParameterLineBreak:
 
 # Set a reasonable line length; rely on other cops to correct long lines.
 Layout/LineLength:
-  AllowedPatterns: 
+  AllowedPatterns:
     - "^\\s*#.*$"
     - ^require(_relative)?
     - "Anthropic::(Models|Resources)::"
@@ -59,13 +58,13 @@ Layout/MultilineMethodParameterLineBreaks:
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
-Lint/ConstantDefinitionInBlock:
-  Exclude: 
-    - "lib/**/*"
-
 Lint/MissingSuper:
-  Exclude: 
+  Exclude:
     - "**/*.rbi"
+
+# Disabled for safety reasons, this option changes code semantics.
+Lint/UnusedMethodArgument:
+  AutoCorrect: false
 
 Metrics/AbcSize:
   Enabled: false
@@ -85,8 +84,12 @@ Metrics/ParameterLists:
 Metrics/PerceivedComplexity:
   Enabled: false
 
+Naming/BlockForwarding:
+  Exclude:
+    - "**/*.rbi"
+
 Naming/MethodParameterName:
-  Exclude: 
+  Exclude:
     - "**/*.rbi"
 
 Naming/VariableNumber:
@@ -97,7 +100,7 @@ Style/AccessModifierDeclarations:
   Enabled: false
 
 Style/AccessorGrouping:
-  Exclude: 
+  Exclude:
     - "**/*.rbi"
 
 # Behaviour of alias_method is more predictable.
@@ -109,17 +112,17 @@ Style/AndOr:
   EnforcedStyle: always
 
 Style/BisectedAttrAccessor:
-  Exclude: 
+  Exclude:
     - "**/*.rbi"
 
 # Fairly useful in tests for pattern matching.
 Style/CaseEquality:
-  Exclude: 
+  Exclude:
     - "test/**/*"
 
 # We prefer nested modules in lib/, but are currently using compact style for tests.
 Style/ClassAndModuleChildren:
-  Exclude: 
+  Exclude:
     - "test/**/*"
 
 # We should go back and add these docs, but ignore for now.
@@ -131,7 +134,7 @@ Style/EmptyElse:
   Enabled: false
 
 Style/EmptyMethod:
-  Exclude: 
+  Exclude:
     - "**/*.rbi"
 
 # We commonly use ENV['KEY'], it's OK.
@@ -141,7 +144,7 @@ Style/FetchEnvVar:
 # Just to be safe, ensure nobody is mutating our internal strings.
 Style/FrozenStringLiteralComment:
   EnforcedStyle: always
-  Exclude: 
+  Exclude:
     - "**/*.rbi"
 
 # Nothing wrong with clear if statements.
@@ -154,10 +157,10 @@ Style/Lambda:
 
 # Prefer consistency in method calling syntax.
 Style/MethodCallWithArgsParentheses:
-  AllowedMethods: 
+  AllowedMethods:
     - raise
   Enabled: true
-  Exclude: 
+  Exclude:
     - "**/*.gemspec"
 
 # Perfectly fine.
@@ -165,7 +168,7 @@ Style/MultipleComparison:
   Enabled: false
 
 Style/MutableConstant:
-  Exclude: 
+  Exclude:
     - "**/*.rbi"
 
 # Not all parameters should be named.
@@ -181,7 +184,7 @@ Style/RedundantException:
   Enabled: false
 
 Style/RedundantInitialize:
-  Exclude: 
+  Exclude:
     - "**/*.rbi"
 
 # Prefer slashes for regex literals.

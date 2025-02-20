@@ -3,13 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_content_block_source => {
-      #   content: Anthropic::Models::Beta::BetaContentBlockSource::Content,
-      #   type: :content
-      # }
-      # ```
       class BetaContentBlockSource < Anthropic::BaseModel
         # @!attribute content
         #

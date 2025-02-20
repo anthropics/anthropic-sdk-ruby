@@ -2,14 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # raw_content_block_start_event => {
-    #   content_block: Anthropic::Models::RawContentBlockStartEvent::ContentBlock,
-    #   index: Integer,
-    #   type: :content_block_start
-    # }
-    # ```
     class RawContentBlockStartEvent < Anthropic::BaseModel
       # @!attribute content_block
       #
@@ -40,11 +32,7 @@ module Anthropic
       # @example
       # ```ruby
       # case content_block
-      # in {
-      #   type: "text",
-      #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::TextCitation] === _1 },
-      #   text: String
-      # }
+      # in {type: "text", citations: ^(Anthropic::ArrayOf[union: Anthropic::Models::TextCitation]), text: String}
       #   # Anthropic::Models::TextBlock ...
       # in {type: "tool_use", id: String, input: Anthropic::Unknown, name: String}
       #   # Anthropic::Models::ToolUseBlock ...

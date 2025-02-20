@@ -16,6 +16,15 @@ class Anthropic::Test::Resources::ModelsTest < Minitest::Test
     assert_pattern do
       response => Anthropic::Models::ModelInfo
     end
+
+    assert_pattern do
+      response => {
+        id: String,
+        created_at: Time,
+        display_name: String,
+        type: Symbol
+      }
+    end
   end
 
   def test_list
@@ -33,6 +42,15 @@ class Anthropic::Test::Resources::ModelsTest < Minitest::Test
     row = response.to_enum.first
     assert_pattern do
       row => Anthropic::Models::ModelInfo
+    end
+
+    assert_pattern do
+      row => {
+        id: String,
+        created_at: Time,
+        display_name: String,
+        type: Symbol
+      }
     end
   end
 end

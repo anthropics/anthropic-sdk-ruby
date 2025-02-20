@@ -3,14 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_tool_text_editor20241022 => {
-      #   name: :str_replace_editor,
-      #   type: :text_editor_20241022,
-      #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
-      # }
-      # ```
       class BetaToolTextEditor20241022 < Anthropic::BaseModel
         # @!attribute name
         #   Name of the tool.

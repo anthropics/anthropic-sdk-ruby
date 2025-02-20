@@ -3,16 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_citation_char_location => {
-      #   cited_text: String,
-      #   document_index: Integer,
-      #   document_title: String,
-      #   end_char_index: Integer,
-      #   start_char_index: Integer
-      # }
-      # ```
       class BetaCitationCharLocation < Anthropic::BaseModel
         # @!attribute cited_text
         #

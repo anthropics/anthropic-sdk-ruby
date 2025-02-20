@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # not_found_error => {
-    #   message: String,
-    #   type: :not_found_error
-    # }
-    # ```
     class NotFoundError_ < Anthropic::BaseModel
       # @!attribute message
       #

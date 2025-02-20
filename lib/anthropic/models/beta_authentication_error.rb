@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # beta_authentication_error => {
-    #   message: String,
-    #   type: :authentication_error
-    # }
-    # ```
     class BetaAuthenticationError < Anthropic::BaseModel
       # @!attribute message
       #

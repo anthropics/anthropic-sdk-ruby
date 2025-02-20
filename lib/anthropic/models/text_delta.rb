@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # text_delta => {
-    #   text: String,
-    #   type: :text_delta
-    # }
-    # ```
     class TextDelta < Anthropic::BaseModel
       # @!attribute text
       #

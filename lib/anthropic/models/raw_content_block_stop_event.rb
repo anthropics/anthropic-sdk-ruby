@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # raw_content_block_stop_event => {
-    #   index: Integer,
-    #   type: :content_block_stop
-    # }
-    # ```
     class RawContentBlockStopEvent < Anthropic::BaseModel
       # @!attribute index
       #

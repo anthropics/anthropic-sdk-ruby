@@ -2,15 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # text_block_param => {
-    #   text: String,
-    #   type: :text,
-    #   cache_control: Anthropic::Models::CacheControlEphemeral,
-    #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::TextCitationParam] === _1 }
-    # }
-    # ```
     class TextBlockParam < Anthropic::BaseModel
       # @!attribute text
       #

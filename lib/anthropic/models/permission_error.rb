@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # permission_error => {
-    #   message: String,
-    #   type: :permission_error
-    # }
-    # ```
     class PermissionError < Anthropic::BaseModel
       # @!attribute message
       #

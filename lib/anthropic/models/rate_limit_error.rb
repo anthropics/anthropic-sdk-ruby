@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # rate_limit_error => {
-    #   message: String,
-    #   type: :rate_limit_error
-    # }
-    # ```
     class RateLimitError_ < Anthropic::BaseModel
       # @!attribute message
       #

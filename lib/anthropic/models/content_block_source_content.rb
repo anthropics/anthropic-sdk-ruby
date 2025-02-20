@@ -11,7 +11,7 @@ module Anthropic
     #   type: "text",
     #   text: String,
     #   cache_control: Anthropic::Models::CacheControlEphemeral,
-    #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::TextCitationParam] === _1 }
+    #   citations: ^(Anthropic::ArrayOf[union: Anthropic::Models::TextCitationParam])
     # }
     #   # Anthropic::Models::TextBlockParam ...
     # in {

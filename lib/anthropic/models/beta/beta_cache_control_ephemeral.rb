@@ -3,12 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_cache_control_ephemeral => {
-      #   type: :ephemeral
-      # }
-      # ```
       class BetaCacheControlEphemeral < Anthropic::BaseModel
         # @!attribute type
         #

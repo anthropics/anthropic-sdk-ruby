@@ -3,15 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_model_info => {
-      #   id: String,
-      #   created_at: Time,
-      #   display_name: String,
-      #   type: :model
-      # }
-      # ```
       class BetaModelInfo < Anthropic::BaseModel
         # @!attribute id
         #   Unique model identifier.

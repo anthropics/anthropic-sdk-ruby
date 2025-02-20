@@ -2,14 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # image_block_param => {
-    #   source: Anthropic::Models::ImageBlockParam::Source,
-    #   type: :image,
-    #   cache_control: Anthropic::Models::CacheControlEphemeral
-    # }
-    # ```
     class ImageBlockParam < Anthropic::BaseModel
       # @!attribute source
       #
@@ -35,14 +27,6 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-      # @example
-      # ```ruby
-      # source => {
-      #   data: String,
-      #   media_type: Anthropic::Models::ImageBlockParam::Source::MediaType,
-      #   type: :base64
-      # }
-      # ```
       class Source < Anthropic::BaseModel
         # @!attribute data
         #

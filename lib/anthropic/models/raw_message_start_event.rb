@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # raw_message_start_event => {
-    #   message: Anthropic::Models::Message,
-    #   type: :message_start
-    # }
-    # ```
     class RawMessageStartEvent < Anthropic::BaseModel
       # @!attribute message
       #

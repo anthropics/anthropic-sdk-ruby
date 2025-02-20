@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # content_block_source => {
-    #   content: Anthropic::Models::ContentBlockSource::Content,
-    #   type: :content
-    # }
-    # ```
     class ContentBlockSource < Anthropic::BaseModel
       # @!attribute content
       #

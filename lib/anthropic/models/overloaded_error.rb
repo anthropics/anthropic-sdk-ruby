@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # overloaded_error => {
-    #   message: String,
-    #   type: :overloaded_error
-    # }
-    # ```
     class OverloadedError < Anthropic::BaseModel
       # @!attribute message
       #

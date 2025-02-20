@@ -148,6 +148,8 @@ module Anthropic
             [true, Integer(value), 1]
           in [-> { _1 <= Float }, Numeric]
             [true, Float(value), 1]
+          in [-> { _1 <= Symbol }, String]
+            [true, value.to_sym, 1]
           in [-> { _1 <= String }, Symbol]
             [true, value.to_s, 1]
           in [-> { _1 <= Date || _1 <= Time }, String]

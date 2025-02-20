@@ -3,12 +3,6 @@
 module Anthropic
   module Models
     module Messages
-      # @example
-      # ```ruby
-      # message_batch_expired_result => {
-      #   type: :expired
-      # }
-      # ```
       class MessageBatchExpiredResult < Anthropic::BaseModel
         # @!attribute type
         #

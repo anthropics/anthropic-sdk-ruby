@@ -2,16 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # citation_page_location_param => {
-    #   cited_text: String,
-    #   document_index: Integer,
-    #   document_title: String,
-    #   end_page_number: Integer,
-    #   start_page_number: Integer
-    # }
-    # ```
     class CitationPageLocationParam < Anthropic::BaseModel
       # @!attribute cited_text
       #

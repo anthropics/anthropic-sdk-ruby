@@ -3,12 +3,6 @@
 module Anthropic
   module Models
     module Messages
-      # @example
-      # ```ruby
-      # message_batch_canceled_result => {
-      #   type: :canceled
-      # }
-      # ```
       class MessageBatchCanceledResult < Anthropic::BaseModel
         # @!attribute type
         #

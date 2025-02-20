@@ -2,13 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # beta_gateway_timeout_error => {
-    #   message: String,
-    #   type: :timeout_error
-    # }
-    # ```
     class BetaGatewayTimeoutError < Anthropic::BaseModel
       # @!attribute message
       #

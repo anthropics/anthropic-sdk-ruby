@@ -3,17 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @example
-      # ```ruby
-      # beta_message => {
-      #   id: String,
-      #   content: -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlock] === _1 },
-      #   model: Anthropic::Models::Model,
-      #   role: :assistant,
-      #   stop_reason: Anthropic::Models::Beta::BetaMessage::StopReason,
-      #   **_
-      # }
-      # ```
       class BetaMessage < Anthropic::BaseModel
         # @!attribute id
         #   Unique object identifier.

@@ -2,14 +2,6 @@
 
 module Anthropic
   module Models
-    # @example
-    # ```ruby
-    # text_block => {
-    #   citations: -> { Anthropic::ArrayOf[union: Anthropic::Models::TextCitation] === _1 },
-    #   text: String,
-    #   type: :text
-    # }
-    # ```
     class TextBlock < Anthropic::BaseModel
       # @!attribute citations
       #   Citations supporting the text block.
