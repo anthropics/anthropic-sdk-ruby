@@ -19,6 +19,7 @@ module Anthropic
         url: URI::Generic,
         headers: ::Hash[String, String],
         body: top,
+        streaming: bool,
         max_retries: Integer,
         timeout: Float
       }
@@ -26,6 +27,17 @@ module Anthropic
     MAX_REDIRECTS: 20
 
     def self.validate!: (Anthropic::BaseClient::request_components req) -> void
+
+    def self.should_retry?: (
+      Integer status,
+      headers: ::Hash[String, String]
+    ) -> bool
+
+    def self.follow_redirect: (
+      Anthropic::BaseClient::request_input request,
+      status: Integer,
+      response_headers: ::Hash[String, String]
+    ) -> Anthropic::BaseClient::request_input
 
     # @private
     attr_accessor requester: top
@@ -49,32 +61,22 @@ module Anthropic
       Anthropic::request_options opts
     ) -> Anthropic::BaseClient::request_input
 
-    private def should_retry?: (
-      Integer status,
-      headers: ::Hash[String, String]
-    ) -> bool
-
     private def retry_delay: (
       ::Hash[String, String] headers,
       retry_count: Integer
     ) -> Float
-
-    private def follow_redirect: (
-      Anthropic::BaseClient::request_input request,
-      status: Integer,
-      location_header: String
-    ) -> Anthropic::BaseClient::request_input
 
     private def send_request: (
       Anthropic::BaseClient::request_input request,
       redirect_count: Integer,
       retry_count: Integer,
       send_retry_header: bool
-    ) -> top
+    ) -> [top, Enumerable[String]]
 
     private def parse_response: (
       Anthropic::BaseClient::request_components req,
-      nil response
+      headers: ::Hash[String, String],
+      stream: Enumerable[String]
     ) -> top
 
     def request:

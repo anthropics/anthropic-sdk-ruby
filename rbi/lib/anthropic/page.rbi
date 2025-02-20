@@ -42,7 +42,7 @@ module Anthropic
       params(
         client: Anthropic::BaseClient,
         req: Anthropic::BaseClient::RequestComponentsShape,
-        headers: T::Hash[String, String],
+        headers: T.any(T::Hash[String, String], Net::HTTPHeader),
         unwrapped: T::Hash[Symbol, T.anything]
       )
         .void
