@@ -1,0 +1,42 @@
+module Anthropic
+  class PooledNetRequester
+    type request =
+      {
+        method: Symbol,
+        url: URI::Generic,
+        headers: ::Hash[String, String],
+        body: top,
+        streaming: bool,
+        max_retries: Integer,
+        deadline: Float
+      }
+
+    def self.connect: (URI::Generic url) -> top
+
+    private def self.calibrate_socket_timeout: (
+      top conn,
+      Float deadline
+    ) -> void
+
+    def self.transport: (
+      top conn,
+      top req,
+      Float deadline
+    ) {
+      (top | String arg0) -> void
+    } -> void
+
+    private def with_pool: (
+      URI::Generic url,
+      streaming: bool
+    ) {
+      (top arg0, Enumerator::Yielder arg1) -> void
+    } -> void
+
+    def execute: (
+      Anthropic::PooledNetRequester::request request
+    ) -> [top, Enumerable[String]]
+
+    def initialize: -> void
+  end
+end
