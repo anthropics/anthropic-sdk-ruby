@@ -12,6 +12,8 @@ module Anthropic
 
     def self?.coerce_hash: (top input) -> (::Hash[top, top] | top)
 
+    def self?.monotonic_secs: -> Float
+
     def self?.suppress: (
       *::Array[Exception] exceptions,
       sentinel: top?
@@ -71,7 +73,11 @@ module Anthropic
 
     def self?.encode_content: (::Hash[String, String] headers, top body) -> top
 
-    def self?.decode_content: (top response, suppress_error: bool) -> top
+    def self?.decode_content: (
+      ::Hash[String, String] headers,
+      stream: Enumerable[String],
+      suppress_error: bool
+    ) -> top
 
     def self?.encode_multipart_formdata: (
       StringIO io,

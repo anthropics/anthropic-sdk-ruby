@@ -9,23 +9,117 @@ module Anthropic
     # from whatwg fetch spec
     MAX_REDIRECTS = 20
 
-    # @private
-    #
-    # @param req [Hash{Symbol=>Object}]
-    #
-    # @raise [ArgumentError]
-    #
-    def self.validate!(req)
-      keys = [:method, :path, :query, :headers, :body, :unwrap, :page, :model, :options]
-      case req
-      in Hash
-        req.each_key do |k|
-          unless keys.include?(k)
-            raise ArgumentError.new("Request `req` keys must be one of #{keys}, got #{k.inspect}")
+    class << self
+      # @private
+      #
+      # @param req [Hash{Symbol=>Object}]
+      #
+      # @raise [ArgumentError]
+      #
+      def validate!(req)
+        keys = [:method, :path, :query, :headers, :body, :unwrap, :page, :model, :options]
+        case req
+        in Hash
+          req.each_key do |k|
+            unless keys.include?(k)
+              raise ArgumentError.new("Request `req` keys must be one of #{keys}, got #{k.inspect}")
+            end
           end
+        else
+          raise ArgumentError.new("Request `req` must be a Hash or RequestOptions, got #{req.inspect}")
         end
-      else
-        raise ArgumentError.new("Request `req` must be a Hash or RequestOptions, got #{req.inspect}")
+      end
+
+      # @private
+      #
+      # @param status [Integer]
+      # @param headers [Hash{String=>String}, Net::HTTPHeader]
+      #
+      # @return [Boolean]
+      #
+      def should_retry?(status, headers:)
+        coerced = Anthropic::Util.coerce_boolean(headers["x-should-retry"])
+        case [coerced, status]
+        in [true | false, _]
+          coerced
+        in [_, 408 | 409 | 429 | (500..)]
+          # retry on:
+          # 408: timeouts
+          # 409: locks
+          # 429: rate limits
+          # 500+: unknown errors
+          true
+        else
+          false
+        end
+      end
+
+      # @private
+      #
+      # @param request [Hash{Symbol=>Object}] .
+      #
+      #   @option request [Symbol] :method
+      #
+      #   @option request [URI::Generic] :url
+      #
+      #   @option request [Hash{String=>String}] :headers
+      #
+      #   @option request [Object] :body
+      #
+      #   @option request [Boolean] :streaming
+      #
+      #   @option request [Integer] :max_retries
+      #
+      #   @option request [Float] :timeout
+      #
+      # @param status [Integer]
+      #
+      # @param response_headers [Hash{String=>String}, Net::HTTPHeader]
+      #
+      # @return [Hash{Symbol=>Object}]
+      #
+      def follow_redirect(request, status:, response_headers:)
+        method, url, headers = request.fetch_values(:method, :url, :headers)
+        location =
+          Anthropic::Util.suppress(ArgumentError) do
+            URI.join(url, response_headers["location"])
+          end
+
+        unless location
+          message = "Server responded with status #{status} but no valid location header."
+          raise Anthropic::APIConnectionError.new(url: url, message: message)
+        end
+
+        request = {**request, url: location}
+
+        case [url.scheme, location.scheme]
+        in ["https", "http"]
+          message = "Tried to redirect to a insecure URL"
+          raise Anthropic::APIConnectionError.new(url: url, message: message)
+        else
+          nil
+        end
+
+        # from whatwg fetch spec
+        case [status, method]
+        in [301 | 302, :post] | [303, _]
+          drop = %w[content-encoding content-language content-length content-location content-type]
+          request = {
+            **request,
+            method: method == :head ? :head : :get,
+            headers: headers.except(*drop),
+            body: nil
+          }
+        else
+        end
+
+        # from undici
+        if Anthropic::Util.uri_origin(url) != Anthropic::Util.uri_origin(location)
+          drop = %w[authorization cookie host proxy-authorization]
+          request = {**request, headers: request.fetch(:headers).except(*drop)}
+        end
+
+        request
       end
     end
 
@@ -163,34 +257,16 @@ module Anthropic
           Anthropic::Util.deep_merge(*[req[:body], opts[:extra_body]].compact)
         end
 
-      url = Anthropic::Util.join_parsed_uri(@base_url, {**req, path: path, query: query})
       headers, encoded = Anthropic::Util.encode_content(headers, body)
-      max_retries = opts.fetch(:max_retries, @max_retries)
-      {method: method, url: url, headers: headers, body: encoded, max_retries: max_retries, timeout: timeout}
-    end
-
-    # @private
-    #
-    # @param status [Integer]
-    # @param headers [Hash{String=>String}]
-    #
-    # @return [Boolean]
-    #
-    private def should_retry?(status, headers:)
-      coerced = Anthropic::Util.coerce_boolean(headers["x-should-retry"])
-      case [coerced, status]
-      in [true | false, _]
-        coerced
-      in [_, 408 | 409 | 429 | (500..)]
-        # retry on:
-        # 408: timeouts
-        # 409: locks
-        # 429: rate limits
-        # 500+: unknown errors
-        true
-      else
-        false
-      end
+      {
+        method: method,
+        url: Anthropic::Util.join_parsed_uri(@base_url, {**req, path: path, query: query}),
+        headers: headers,
+        body: encoded,
+        streaming: false,
+        max_retries: opts.fetch(:max_retries, @max_retries),
+        timeout: timeout
+      }
     end
 
     # @private
@@ -230,71 +306,7 @@ module Anthropic
     #
     #   @option request [Object] :body
     #
-    #   @option request [Integer] :max_retries
-    #
-    #   @option request [Float] :timeout
-    #
-    # @param status [Integer]
-    #
-    # @param location_header [String]
-    #
-    # @return [Hash{Symbol=>Object}]
-    #
-    private def follow_redirect(request, status:, location_header:)
-      method, url, headers = request.fetch_values(:method, :url, :headers)
-      location =
-        Anthropic::Util.suppress(ArgumentError) do
-          URI.join(url, location_header)
-        end
-
-      unless location
-        message = "Server responded with status #{status} but no valid location header."
-        raise Anthropic::APIConnectionError.new(url: url, message: message)
-      end
-
-      request = {**request, url: location}
-
-      case [url.scheme, location.scheme]
-      in ["https", "http"]
-        message = "Tried to redirect to a insecure URL"
-        raise Anthropic::APIConnectionError.new(url: url, message: message)
-      else
-        nil
-      end
-
-      # from whatwg fetch spec
-      case [status, method]
-      in [301 | 302, :post] | [303, _]
-        drop = %w[content-encoding content-language content-length content-location content-type]
-        request = {
-          **request,
-          method: method == :head ? :head : :get,
-          headers: headers.except(*drop),
-          body: nil
-        }
-      else
-      end
-
-      # from undici
-      if Anthropic::Util.uri_origin(url) != Anthropic::Util.uri_origin(location)
-        drop = %w[authorization cookie host proxy-authorization]
-        request = {**request, headers: request.fetch(:headers).except(*drop)}
-      end
-
-      request
-    end
-
-    # @private
-    #
-    # @param request [Hash{Symbol=>Object}] .
-    #
-    #   @option request [Symbol] :method
-    #
-    #   @option request [URI::Generic] :url
-    #
-    #   @option request [Hash{String=>String}] :headers
-    #
-    #   @option request [Object] :body
+    #   @option request [Boolean] :streaming
     #
     #   @option request [Integer] :max_retries
     #
@@ -307,18 +319,18 @@ module Anthropic
     # @param send_retry_header [Boolean]
     #
     # @raise [Anthropic::APIError]
-    # @return [Net::HTTPResponse]
+    # @return [Array(Net::HTTPResponse, Enumerable)]
     #
     private def send_request(request, redirect_count:, retry_count:, send_retry_header:)
-      url, headers, body, max_retries = request.fetch_values(:url, :headers, :body, :max_retries)
-      no_retry = retry_count >= max_retries || body.is_a?(IO) || body.is_a?(StringIO)
+      url, headers, max_retries, timeout = request.fetch_values(:url, :headers, :max_retries, :timeout)
+      input = {**request.except(:timeout), deadline: Anthropic::Util.monotonic_secs + timeout}
 
       if send_retry_header
         headers["x-stainless-retry-count"] = retry_count.to_s
       end
 
       begin
-        response = @requester.execute(request)
+        response, stream = @requester.execute(input)
         status = Integer(response.code)
       rescue Anthropic::APIConnectionError => e
         status = e
@@ -326,12 +338,12 @@ module Anthropic
 
       case status
       in ..299
-        response
+        [response, stream]
       in 300..399 if redirect_count >= MAX_REDIRECTS
         message = "Failed to complete the request within #{MAX_REDIRECTS} redirects."
         raise Anthropic::APIConnectionError.new(url: url, message: message)
       in 300..399
-        request = follow_redirect(request, status: status, location_header: response["location"])
+        request = self.class.follow_redirect(request, status: status, response_headers: response)
         send_request(
           request,
           redirect_count: redirect_count + 1,
@@ -340,13 +352,16 @@ module Anthropic
         )
       in Anthropic::APIConnectionError if retry_count >= max_retries
         raise status
-      in (400..) if no_retry || (response && !should_retry?(status, headers: response))
-        body = Anthropic::Util.decode_content(response, suppress_error: true)
+      in (400..) if retry_count >= max_retries || (response && !self.class.should_retry?(
+        status,
+        headers: response
+      ))
+        decoded = Anthropic::Util.decode_content(response, stream: stream, suppress_error: true)
 
         raise Anthropic::APIStatusError.for(
           url: url,
           status: status,
-          body: body,
+          body: decoded,
           request: nil,
           response: response
         )
@@ -361,6 +376,8 @@ module Anthropic
           send_retry_header: send_retry_header
         )
       end
+    ensure
+      stream&.each { break } unless status.is_a?(Integer) && status < 300
     end
 
     # @private
@@ -385,17 +402,19 @@ module Anthropic
     #
     #   @option req [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :options
     #
-    # @param response [nil]
+    # @param headers [Hash{String=>String}, Net::HTTPHeader]
+    #
+    # @param stream [Enumerable]
     #
     # @return [Object]
     #
-    private def parse_response(req, response)
-      parsed = Anthropic::Util.decode_content(response)
-      unwrapped = Anthropic::Util.dig(parsed, req[:unwrap])
+    private def parse_response(req, headers:, stream:)
+      decoded = Anthropic::Util.decode_content(headers, stream: stream)
+      unwrapped = Anthropic::Util.dig(decoded, req[:unwrap])
 
       case [req[:page], req.fetch(:model, Anthropic::Unknown)]
       in [Class => page, _]
-        page.new(client: self, req: req, headers: response, unwrapped: unwrapped)
+        page.new(client: self, req: req, headers: headers, unwrapped: unwrapped)
       in [nil, Class | Anthropic::Converter => model]
         Anthropic::Converter.coerce(model, unwrapped)
       in [nil, nil]
@@ -437,13 +456,13 @@ module Anthropic
 
       # Don't send the current retry count in the headers if the caller modified the header defaults.
       send_retry_header = request.fetch(:headers)["x-stainless-retry-count"] == "0"
-      response = send_request(
+      response, stream = send_request(
         request,
         redirect_count: 0,
         retry_count: 0,
         send_retry_header: send_retry_header
       )
-      parse_response(req, response)
+      parse_response(req, headers: response, stream: stream)
     end
 
     # @return [String]

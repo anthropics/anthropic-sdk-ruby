@@ -26,6 +26,10 @@ module Anthropic
     def self.coerce_hash(input)
     end
 
+    sig { returns(Float) }
+    def self.monotonic_secs
+    end
+
     sig do
       params(
         exceptions: T::Array[Exception],
@@ -112,8 +116,15 @@ module Anthropic
     def self.encode_content(headers, body)
     end
 
-    sig { params(response: Net::HTTPResponse, suppress_error: T::Boolean).returns(T.anything) }
-    def self.decode_content(response, suppress_error: false)
+    sig do
+      params(
+        headers: T.any(T::Hash[String, String], Net::HTTPHeader),
+        stream: T::Enumerable[String],
+        suppress_error: T::Boolean
+      )
+        .returns(T.anything)
+    end
+    def self.decode_content(headers, stream:, suppress_error: false)
     end
 
     sig { params(io: StringIO, boundary: String, key: T.any(Symbol, String), val: T.anything).void }
