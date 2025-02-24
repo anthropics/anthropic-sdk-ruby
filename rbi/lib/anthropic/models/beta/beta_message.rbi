@@ -16,7 +16,14 @@ module Anthropic
 
         sig do
           returns(
-            T::Array[T.any(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock)]
+            T::Array[
+            T.any(
+              Anthropic::Models::Beta::BetaTextBlock,
+              Anthropic::Models::Beta::BetaToolUseBlock,
+              Anthropic::Models::Beta::BetaThinkingBlock,
+              Anthropic::Models::Beta::BetaRedactedThinkingBlock
+            )
+            ]
           )
         end
         def content
@@ -24,10 +31,24 @@ module Anthropic
 
         sig do
           params(
-            _: T::Array[T.any(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock)]
+            _: T::Array[
+            T.any(
+              Anthropic::Models::Beta::BetaTextBlock,
+              Anthropic::Models::Beta::BetaToolUseBlock,
+              Anthropic::Models::Beta::BetaThinkingBlock,
+              Anthropic::Models::Beta::BetaRedactedThinkingBlock
+            )
+            ]
           )
             .returns(
-              T::Array[T.any(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock)]
+              T::Array[
+              T.any(
+                Anthropic::Models::Beta::BetaTextBlock,
+                Anthropic::Models::Beta::BetaToolUseBlock,
+                Anthropic::Models::Beta::BetaThinkingBlock,
+                Anthropic::Models::Beta::BetaRedactedThinkingBlock
+              )
+              ]
             )
         end
         def content=(_)
@@ -84,7 +105,14 @@ module Anthropic
         sig do
           params(
             id: String,
-            content: T::Array[T.any(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock)],
+            content: T::Array[
+            T.any(
+              Anthropic::Models::Beta::BetaTextBlock,
+              Anthropic::Models::Beta::BetaToolUseBlock,
+              Anthropic::Models::Beta::BetaThinkingBlock,
+              Anthropic::Models::Beta::BetaRedactedThinkingBlock
+            )
+            ],
             model: T.any(Symbol, String),
             stop_reason: T.nilable(Symbol),
             stop_sequence: T.nilable(String),
@@ -111,7 +139,14 @@ module Anthropic
             .returns(
               {
                 id: String,
-                content: T::Array[T.any(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock)],
+                content: T::Array[
+                T.any(
+                  Anthropic::Models::Beta::BetaTextBlock,
+                  Anthropic::Models::Beta::BetaToolUseBlock,
+                  Anthropic::Models::Beta::BetaThinkingBlock,
+                  Anthropic::Models::Beta::BetaRedactedThinkingBlock
+                )
+                ],
                 model: T.any(Symbol, String),
                 role: Symbol,
                 stop_reason: T.nilable(Symbol),

@@ -5,8 +5,9 @@ module Anthropic
         messages: ::Array[Anthropic::Models::MessageParam],
         model: Anthropic::Models::model,
         system_: Anthropic::Models::MessageCountTokensParams::system_,
+        thinking: Anthropic::Models::thinking_config_param,
         tool_choice: Anthropic::Models::tool_choice,
-        tools: ::Array[Anthropic::Models::Tool]
+        tools: ::Array[Anthropic::Models::message_count_tokens_tool]
       }
       & Anthropic::request_parameters
 
@@ -24,25 +25,32 @@ module Anthropic
         Anthropic::Models::MessageCountTokensParams::system_
       ) -> Anthropic::Models::MessageCountTokensParams::system_
 
+      attr_reader thinking: Anthropic::Models::thinking_config_param?
+
+      def thinking=: (
+        Anthropic::Models::thinking_config_param
+      ) -> Anthropic::Models::thinking_config_param
+
       attr_reader tool_choice: Anthropic::Models::tool_choice?
 
       def tool_choice=: (
         Anthropic::Models::tool_choice
       ) -> Anthropic::Models::tool_choice
 
-      attr_reader tools: ::Array[Anthropic::Models::Tool]?
+      attr_reader tools: ::Array[Anthropic::Models::message_count_tokens_tool]?
 
       def tools=: (
-        ::Array[Anthropic::Models::Tool]
-      ) -> ::Array[Anthropic::Models::Tool]
+        ::Array[Anthropic::Models::message_count_tokens_tool]
+      ) -> ::Array[Anthropic::Models::message_count_tokens_tool]
 
       def initialize:
         (
           messages: ::Array[Anthropic::Models::MessageParam],
           model: Anthropic::Models::model,
           system_: Anthropic::Models::MessageCountTokensParams::system_,
+          thinking: Anthropic::Models::thinking_config_param,
           tool_choice: Anthropic::Models::tool_choice,
-          tools: ::Array[Anthropic::Models::Tool],
+          tools: ::Array[Anthropic::Models::message_count_tokens_tool],
           request_options: Anthropic::request_opts
         ) -> void
         | (

@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    type thinking_config_param =
+      Anthropic::Models::ThinkingConfigEnabled
+      | Anthropic::Models::ThinkingConfigDisabled
+
+    class ThinkingConfigParam < Anthropic::Union
+      private def self.variants: -> [[:enabled, Anthropic::Models::ThinkingConfigEnabled], [:disabled, Anthropic::Models::ThinkingConfigDisabled]]
+    end
+  end
+end

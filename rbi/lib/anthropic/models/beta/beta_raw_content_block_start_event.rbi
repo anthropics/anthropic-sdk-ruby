@@ -6,13 +6,36 @@ module Anthropic
 
     module Beta
       class BetaRawContentBlockStartEvent < Anthropic::BaseModel
-        sig { returns(T.any(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock)) }
+        sig do
+          returns(
+            T.any(
+              Anthropic::Models::Beta::BetaTextBlock,
+              Anthropic::Models::Beta::BetaToolUseBlock,
+              Anthropic::Models::Beta::BetaThinkingBlock,
+              Anthropic::Models::Beta::BetaRedactedThinkingBlock
+            )
+          )
+        end
         def content_block
         end
 
         sig do
-          params(_: T.any(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock))
-            .returns(T.any(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock))
+          params(
+            _: T.any(
+              Anthropic::Models::Beta::BetaTextBlock,
+              Anthropic::Models::Beta::BetaToolUseBlock,
+              Anthropic::Models::Beta::BetaThinkingBlock,
+              Anthropic::Models::Beta::BetaRedactedThinkingBlock
+            )
+          )
+            .returns(
+              T.any(
+                Anthropic::Models::Beta::BetaTextBlock,
+                Anthropic::Models::Beta::BetaToolUseBlock,
+                Anthropic::Models::Beta::BetaThinkingBlock,
+                Anthropic::Models::Beta::BetaRedactedThinkingBlock
+              )
+            )
         end
         def content_block=(_)
         end
@@ -35,7 +58,12 @@ module Anthropic
 
         sig do
           params(
-            content_block: T.any(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock),
+            content_block: T.any(
+              Anthropic::Models::Beta::BetaTextBlock,
+              Anthropic::Models::Beta::BetaToolUseBlock,
+              Anthropic::Models::Beta::BetaThinkingBlock,
+              Anthropic::Models::Beta::BetaRedactedThinkingBlock
+            ),
             index: Integer,
             type: Symbol
           )
@@ -48,7 +76,12 @@ module Anthropic
           override
             .returns(
               {
-                content_block: T.any(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock),
+                content_block: T.any(
+                  Anthropic::Models::Beta::BetaTextBlock,
+                  Anthropic::Models::Beta::BetaToolUseBlock,
+                  Anthropic::Models::Beta::BetaThinkingBlock,
+                  Anthropic::Models::Beta::BetaRedactedThinkingBlock
+                ),
                 index: Integer,
                 type: Symbol
               }
@@ -63,7 +96,7 @@ module Anthropic
           sig do
             override
               .returns(
-                [[Symbol, Anthropic::Models::Beta::BetaTextBlock], [Symbol, Anthropic::Models::Beta::BetaToolUseBlock]]
+                [[Symbol, Anthropic::Models::Beta::BetaTextBlock], [Symbol, Anthropic::Models::Beta::BetaToolUseBlock], [Symbol, Anthropic::Models::Beta::BetaThinkingBlock], [Symbol, Anthropic::Models::Beta::BetaRedactedThinkingBlock]]
               )
           end
           private_class_method def self.variants

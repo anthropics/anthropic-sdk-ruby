@@ -16,7 +16,9 @@ module Anthropic
                 Anthropic::Models::Beta::BetaImageBlockParam,
                 Anthropic::Models::Beta::BetaToolUseBlockParam,
                 Anthropic::Models::Beta::BetaToolResultBlockParam,
-                Anthropic::Models::Beta::BetaBase64PDFBlock
+                Anthropic::Models::Beta::BetaBase64PDFBlock,
+                Anthropic::Models::Beta::BetaThinkingBlockParam,
+                Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
               )
               ]
             )
@@ -35,7 +37,9 @@ module Anthropic
                 Anthropic::Models::Beta::BetaImageBlockParam,
                 Anthropic::Models::Beta::BetaToolUseBlockParam,
                 Anthropic::Models::Beta::BetaToolResultBlockParam,
-                Anthropic::Models::Beta::BetaBase64PDFBlock
+                Anthropic::Models::Beta::BetaBase64PDFBlock,
+                Anthropic::Models::Beta::BetaThinkingBlockParam,
+                Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
               )
               ]
             )
@@ -49,7 +53,9 @@ module Anthropic
                   Anthropic::Models::Beta::BetaImageBlockParam,
                   Anthropic::Models::Beta::BetaToolUseBlockParam,
                   Anthropic::Models::Beta::BetaToolResultBlockParam,
-                  Anthropic::Models::Beta::BetaBase64PDFBlock
+                  Anthropic::Models::Beta::BetaBase64PDFBlock,
+                  Anthropic::Models::Beta::BetaThinkingBlockParam,
+                  Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
                 )
                 ]
               )
@@ -76,7 +82,9 @@ module Anthropic
                 Anthropic::Models::Beta::BetaImageBlockParam,
                 Anthropic::Models::Beta::BetaToolUseBlockParam,
                 Anthropic::Models::Beta::BetaToolResultBlockParam,
-                Anthropic::Models::Beta::BetaBase64PDFBlock
+                Anthropic::Models::Beta::BetaBase64PDFBlock,
+                Anthropic::Models::Beta::BetaThinkingBlockParam,
+                Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
               )
               ]
             ),
@@ -99,7 +107,9 @@ module Anthropic
                     Anthropic::Models::Beta::BetaImageBlockParam,
                     Anthropic::Models::Beta::BetaToolUseBlockParam,
                     Anthropic::Models::Beta::BetaToolResultBlockParam,
-                    Anthropic::Models::Beta::BetaBase64PDFBlock
+                    Anthropic::Models::Beta::BetaBase64PDFBlock,
+                    Anthropic::Models::Beta::BetaThinkingBlockParam,
+                    Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
                   )
                   ]
                 ),
@@ -120,7 +130,9 @@ module Anthropic
               Anthropic::Models::Beta::BetaImageBlockParam,
               Anthropic::Models::Beta::BetaToolUseBlockParam,
               Anthropic::Models::Beta::BetaToolResultBlockParam,
-              Anthropic::Models::Beta::BetaBase64PDFBlock
+              Anthropic::Models::Beta::BetaBase64PDFBlock,
+              Anthropic::Models::Beta::BetaThinkingBlockParam,
+              Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
             )
             ]
           end
@@ -138,7 +150,9 @@ module Anthropic
                                       Anthropic::Models::Beta::BetaImageBlockParam,
                                       Anthropic::Models::Beta::BetaToolUseBlockParam,
                                       Anthropic::Models::Beta::BetaToolResultBlockParam,
-                                      Anthropic::Models::Beta::BetaBase64PDFBlock
+                                      Anthropic::Models::Beta::BetaBase64PDFBlock,
+                                      Anthropic::Models::Beta::BetaThinkingBlockParam,
+                                      Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
                                     )
                                     ]
                   ]

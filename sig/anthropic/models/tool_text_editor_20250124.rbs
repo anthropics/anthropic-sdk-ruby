@@ -1,0 +1,31 @@
+module Anthropic
+  module Models
+    type tool_text_editor20250124 =
+      {
+        name: :str_replace_editor,
+        type: :text_editor_20250124,
+        cache_control: Anthropic::Models::CacheControlEphemeral?
+      }
+
+    class ToolTextEditor20250124 < Anthropic::BaseModel
+      attr_accessor name: :str_replace_editor
+
+      attr_accessor type: :text_editor_20250124
+
+      attr_accessor cache_control: Anthropic::Models::CacheControlEphemeral?
+
+      def initialize:
+        (
+          cache_control: Anthropic::Models::CacheControlEphemeral?,
+          name: :str_replace_editor,
+          type: :text_editor_20250124
+        ) -> void
+        | (
+          ?Anthropic::Models::tool_text_editor20250124
+          | Anthropic::BaseModel data
+        ) -> void
+
+      def to_hash: -> Anthropic::Models::tool_text_editor20250124
+    end
+  end
+end

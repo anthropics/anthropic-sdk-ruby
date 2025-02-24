@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    type signature_delta = { signature: String, type: :signature_delta }
+
+    class SignatureDelta < Anthropic::BaseModel
+      attr_accessor signature: String
+
+      attr_accessor type: :signature_delta
+
+      def initialize:
+        (signature: String, type: :signature_delta) -> void
+        | (
+          ?Anthropic::Models::signature_delta | Anthropic::BaseModel data
+        ) -> void
+
+      def to_hash: -> Anthropic::Models::signature_delta
+    end
+  end
+end

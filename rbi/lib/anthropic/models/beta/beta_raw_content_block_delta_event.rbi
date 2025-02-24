@@ -11,7 +11,9 @@ module Anthropic
             T.any(
               Anthropic::Models::Beta::BetaTextDelta,
               Anthropic::Models::Beta::BetaInputJSONDelta,
-              Anthropic::Models::Beta::BetaCitationsDelta
+              Anthropic::Models::Beta::BetaCitationsDelta,
+              Anthropic::Models::Beta::BetaThinkingDelta,
+              Anthropic::Models::Beta::BetaSignatureDelta
             )
           )
         end
@@ -23,14 +25,18 @@ module Anthropic
             _: T.any(
               Anthropic::Models::Beta::BetaTextDelta,
               Anthropic::Models::Beta::BetaInputJSONDelta,
-              Anthropic::Models::Beta::BetaCitationsDelta
+              Anthropic::Models::Beta::BetaCitationsDelta,
+              Anthropic::Models::Beta::BetaThinkingDelta,
+              Anthropic::Models::Beta::BetaSignatureDelta
             )
           )
             .returns(
               T.any(
                 Anthropic::Models::Beta::BetaTextDelta,
                 Anthropic::Models::Beta::BetaInputJSONDelta,
-                Anthropic::Models::Beta::BetaCitationsDelta
+                Anthropic::Models::Beta::BetaCitationsDelta,
+                Anthropic::Models::Beta::BetaThinkingDelta,
+                Anthropic::Models::Beta::BetaSignatureDelta
               )
             )
         end
@@ -58,7 +64,9 @@ module Anthropic
             delta: T.any(
               Anthropic::Models::Beta::BetaTextDelta,
               Anthropic::Models::Beta::BetaInputJSONDelta,
-              Anthropic::Models::Beta::BetaCitationsDelta
+              Anthropic::Models::Beta::BetaCitationsDelta,
+              Anthropic::Models::Beta::BetaThinkingDelta,
+              Anthropic::Models::Beta::BetaSignatureDelta
             ),
             index: Integer,
             type: Symbol
@@ -75,7 +83,9 @@ module Anthropic
                 delta: T.any(
                   Anthropic::Models::Beta::BetaTextDelta,
                   Anthropic::Models::Beta::BetaInputJSONDelta,
-                  Anthropic::Models::Beta::BetaCitationsDelta
+                  Anthropic::Models::Beta::BetaCitationsDelta,
+                  Anthropic::Models::Beta::BetaThinkingDelta,
+                  Anthropic::Models::Beta::BetaSignatureDelta
                 ),
                 index: Integer,
                 type: Symbol
@@ -91,7 +101,7 @@ module Anthropic
           sig do
             override
               .returns(
-                [[Symbol, Anthropic::Models::Beta::BetaTextDelta], [Symbol, Anthropic::Models::Beta::BetaInputJSONDelta], [Symbol, Anthropic::Models::Beta::BetaCitationsDelta]]
+                [[Symbol, Anthropic::Models::Beta::BetaTextDelta], [Symbol, Anthropic::Models::Beta::BetaInputJSONDelta], [Symbol, Anthropic::Models::Beta::BetaCitationsDelta], [Symbol, Anthropic::Models::Beta::BetaThinkingDelta], [Symbol, Anthropic::Models::Beta::BetaSignatureDelta]]
               )
           end
           private_class_method def self.variants

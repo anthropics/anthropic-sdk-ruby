@@ -5,7 +5,7 @@ module Anthropic
     class MessageParam < Anthropic::BaseModel
       # @!attribute content
       #
-      #   @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam>]
+      #   @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam>]
       required :content, union: -> { Anthropic::Models::MessageParam::Content }
 
       # @!attribute role
@@ -14,7 +14,7 @@ module Anthropic
       required :role, enum: -> { Anthropic::Models::MessageParam::Role }
 
       # @!parse
-      #   # @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam>]
+      #   # @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam>]
       #   # @param role [Symbol, Anthropic::Models::MessageParam::Role]
       #   #
       #   def initialize(content:, role:, **) = super

@@ -5,7 +5,7 @@ module Anthropic
     class RawContentBlockDeltaEvent < Anthropic::BaseModel
       # @!attribute delta
       #
-      #   @return [Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta]
+      #   @return [Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta, Anthropic::Models::ThinkingDelta, Anthropic::Models::SignatureDelta]
       required :delta, union: -> { Anthropic::Models::RawContentBlockDeltaEvent::Delta }
 
       # @!attribute index
@@ -19,7 +19,7 @@ module Anthropic
       required :type, const: :content_block_delta
 
       # @!parse
-      #   # @param delta [Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta]
+      #   # @param delta [Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta, Anthropic::Models::ThinkingDelta, Anthropic::Models::SignatureDelta]
       #   # @param index [Integer]
       #   # @param type [Symbol, :content_block_delta]
       #   #
@@ -38,6 +38,10 @@ module Anthropic
       #   # Anthropic::Models::InputJSONDelta ...
       # in {type: "citations_delta", citation: Anthropic::Models::CitationsDelta::Citation}
       #   # Anthropic::Models::CitationsDelta ...
+      # in {type: "thinking_delta", thinking: String}
+      #   # Anthropic::Models::ThinkingDelta ...
+      # in {type: "signature_delta", signature: String}
+      #   # Anthropic::Models::SignatureDelta ...
       # end
       # ```
       #
@@ -50,6 +54,10 @@ module Anthropic
       #   # ...
       # in Anthropic::Models::CitationsDelta
       #   # ...
+      # in Anthropic::Models::ThinkingDelta
+      #   # ...
+      # in Anthropic::Models::SignatureDelta
+      #   # ...
       # end
       # ```
       class Delta < Anthropic::Union
@@ -60,6 +68,10 @@ module Anthropic
         variant :input_json_delta, -> { Anthropic::Models::InputJSONDelta }
 
         variant :citations_delta, -> { Anthropic::Models::CitationsDelta }
+
+        variant :thinking_delta, -> { Anthropic::Models::ThinkingDelta }
+
+        variant :signature_delta, -> { Anthropic::Models::SignatureDelta }
       end
     end
   end

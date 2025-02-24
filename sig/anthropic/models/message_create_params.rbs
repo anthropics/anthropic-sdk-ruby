@@ -10,8 +10,9 @@ module Anthropic
         stream: Anthropic::Models::MessageCreateParams::stream,
         system_: Anthropic::Models::MessageCreateParams::system_,
         temperature: Float,
+        thinking: Anthropic::Models::thinking_config_param,
         tool_choice: Anthropic::Models::tool_choice,
-        tools: ::Array[Anthropic::Models::Tool],
+        tools: ::Array[Anthropic::Models::tool_union],
         top_k: Integer,
         top_p: Float
       }
@@ -49,17 +50,23 @@ module Anthropic
 
       def temperature=: (Float) -> Float
 
+      attr_reader thinking: Anthropic::Models::thinking_config_param?
+
+      def thinking=: (
+        Anthropic::Models::thinking_config_param
+      ) -> Anthropic::Models::thinking_config_param
+
       attr_reader tool_choice: Anthropic::Models::tool_choice?
 
       def tool_choice=: (
         Anthropic::Models::tool_choice
       ) -> Anthropic::Models::tool_choice
 
-      attr_reader tools: ::Array[Anthropic::Models::Tool]?
+      attr_reader tools: ::Array[Anthropic::Models::tool_union]?
 
       def tools=: (
-        ::Array[Anthropic::Models::Tool]
-      ) -> ::Array[Anthropic::Models::Tool]
+        ::Array[Anthropic::Models::tool_union]
+      ) -> ::Array[Anthropic::Models::tool_union]
 
       attr_reader top_k: Integer?
 
@@ -79,8 +86,9 @@ module Anthropic
           stop_sequences: ::Array[String],
           system_: Anthropic::Models::MessageCreateParams::system_,
           temperature: Float,
+          thinking: Anthropic::Models::thinking_config_param,
           tool_choice: Anthropic::Models::tool_choice,
-          tools: ::Array[Anthropic::Models::Tool],
+          tools: ::Array[Anthropic::Models::tool_union],
           top_k: Integer,
           top_p: Float,
           request_options: Anthropic::request_opts

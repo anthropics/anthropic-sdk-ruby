@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    type redacted_thinking_block = { data: String, type: :redacted_thinking }
+
+    class RedactedThinkingBlock < Anthropic::BaseModel
+      attr_accessor data: String
+
+      attr_accessor type: :redacted_thinking
+
+      def initialize:
+        (data: String, type: :redacted_thinking) -> void
+        | (
+          ?Anthropic::Models::redacted_thinking_block
+          | Anthropic::BaseModel data
+        ) -> void
+
+      def to_hash: -> Anthropic::Models::redacted_thinking_block
+    end
+  end
+end

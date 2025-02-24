@@ -36,6 +36,10 @@ module Anthropic
     #   citations: Anthropic::Models::CitationsConfigParam
     # }
     #   # Anthropic::Models::DocumentBlockParam ...
+    # in {type: "thinking", signature: String, thinking: String}
+    #   # Anthropic::Models::ThinkingBlockParam ...
+    # in {type: "redacted_thinking", data: String}
+    #   # Anthropic::Models::RedactedThinkingBlockParam ...
     # end
     # ```
     #
@@ -52,6 +56,10 @@ module Anthropic
     #   # ...
     # in Anthropic::Models::DocumentBlockParam
     #   # ...
+    # in Anthropic::Models::ThinkingBlockParam
+    #   # ...
+    # in Anthropic::Models::RedactedThinkingBlockParam
+    #   # ...
     # end
     # ```
     class ContentBlockParam < Anthropic::Union
@@ -66,6 +74,10 @@ module Anthropic
       variant :tool_result, -> { Anthropic::Models::ToolResultBlockParam }
 
       variant :document, -> { Anthropic::Models::DocumentBlockParam }
+
+      variant :thinking, -> { Anthropic::Models::ThinkingBlockParam }
+
+      variant :redacted_thinking, -> { Anthropic::Models::RedactedThinkingBlockParam }
     end
   end
 end

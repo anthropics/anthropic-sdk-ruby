@@ -35,6 +35,21 @@ module Anthropic
 
       sig do
         returns(
+          T.nilable(T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled))
+        )
+      end
+      def thinking
+      end
+
+      sig do
+        params(_: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled))
+          .returns(T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled))
+      end
+      def thinking=(_)
+      end
+
+      sig do
+        returns(
           T.nilable(
             T.any(
               Anthropic::Models::ToolChoiceAuto,
@@ -66,11 +81,42 @@ module Anthropic
       def tool_choice=(_)
       end
 
-      sig { returns(T.nilable(T::Array[Anthropic::Models::Tool])) }
+      sig do
+        returns(
+          T.nilable(
+            T::Array[
+            T.any(
+              Anthropic::Models::ToolBash20250124,
+              Anthropic::Models::ToolTextEditor20250124,
+              Anthropic::Models::Tool
+            )
+            ]
+          )
+        )
+      end
       def tools
       end
 
-      sig { params(_: T::Array[Anthropic::Models::Tool]).returns(T::Array[Anthropic::Models::Tool]) }
+      sig do
+        params(
+          _: T::Array[
+          T.any(
+            Anthropic::Models::ToolBash20250124,
+            Anthropic::Models::ToolTextEditor20250124,
+            Anthropic::Models::Tool
+          )
+          ]
+        )
+          .returns(
+            T::Array[
+            T.any(
+              Anthropic::Models::ToolBash20250124,
+              Anthropic::Models::ToolTextEditor20250124,
+              Anthropic::Models::Tool
+            )
+            ]
+          )
+      end
       def tools=(_)
       end
 
@@ -79,17 +125,32 @@ module Anthropic
           messages: T::Array[Anthropic::Models::MessageParam],
           model: T.any(Symbol, String),
           system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
+          thinking: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled),
           tool_choice: T.any(
             Anthropic::Models::ToolChoiceAuto,
             Anthropic::Models::ToolChoiceAny,
             Anthropic::Models::ToolChoiceTool
           ),
-          tools: T::Array[Anthropic::Models::Tool],
+          tools: T::Array[
+          T.any(
+            Anthropic::Models::ToolBash20250124,
+            Anthropic::Models::ToolTextEditor20250124,
+            Anthropic::Models::Tool
+          )
+          ],
           request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
         )
           .void
       end
-      def initialize(messages:, model:, system_: nil, tool_choice: nil, tools: nil, request_options: {})
+      def initialize(
+        messages:,
+        model:,
+        system_: nil,
+        thinking: nil,
+        tool_choice: nil,
+        tools: nil,
+        request_options: {}
+      )
       end
 
       sig do
@@ -99,12 +160,19 @@ module Anthropic
               messages: T::Array[Anthropic::Models::MessageParam],
               model: T.any(Symbol, String),
               system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
+              thinking: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled),
               tool_choice: T.any(
                 Anthropic::Models::ToolChoiceAuto,
                 Anthropic::Models::ToolChoiceAny,
                 Anthropic::Models::ToolChoiceTool
               ),
-              tools: T::Array[Anthropic::Models::Tool],
+              tools: T::Array[
+              T.any(
+                Anthropic::Models::ToolBash20250124,
+                Anthropic::Models::ToolTextEditor20250124,
+                Anthropic::Models::Tool
+              )
+              ],
               request_options: Anthropic::RequestOptions
             }
           )

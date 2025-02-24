@@ -18,6 +18,10 @@ module Anthropic
             stop_sequences: T::Array[String],
             system_: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]),
             temperature: Float,
+            thinking: T.any(
+              Anthropic::Models::Beta::BetaThinkingConfigEnabled,
+              Anthropic::Models::Beta::BetaThinkingConfigDisabled
+            ),
             tool_choice: T.any(
               Anthropic::Models::Beta::BetaToolChoiceAuto,
               Anthropic::Models::Beta::BetaToolChoiceAny,
@@ -25,10 +29,13 @@ module Anthropic
             ),
             tools: T::Array[
             T.any(
-              Anthropic::Models::Beta::BetaTool,
               Anthropic::Models::Beta::BetaToolComputerUse20241022,
               Anthropic::Models::Beta::BetaToolBash20241022,
-              Anthropic::Models::Beta::BetaToolTextEditor20241022
+              Anthropic::Models::Beta::BetaToolTextEditor20241022,
+              Anthropic::Models::Beta::BetaToolComputerUse20250124,
+              Anthropic::Models::Beta::BetaToolBash20250124,
+              Anthropic::Models::Beta::BetaToolTextEditor20250124,
+              Anthropic::Models::Beta::BetaTool
             )
             ],
             top_k: Integer,
@@ -47,6 +54,7 @@ module Anthropic
           stop_sequences: nil,
           system_: nil,
           temperature: nil,
+          thinking: nil,
           tool_choice: nil,
           tools: nil,
           top_k: nil,
@@ -61,6 +69,10 @@ module Anthropic
             messages: T::Array[Anthropic::Models::Beta::BetaMessageParam],
             model: T.any(Symbol, String),
             system_: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]),
+            thinking: T.any(
+              Anthropic::Models::Beta::BetaThinkingConfigEnabled,
+              Anthropic::Models::Beta::BetaThinkingConfigDisabled
+            ),
             tool_choice: T.any(
               Anthropic::Models::Beta::BetaToolChoiceAuto,
               Anthropic::Models::Beta::BetaToolChoiceAny,
@@ -68,10 +80,13 @@ module Anthropic
             ),
             tools: T::Array[
             T.any(
-              Anthropic::Models::Beta::BetaTool,
               Anthropic::Models::Beta::BetaToolComputerUse20241022,
               Anthropic::Models::Beta::BetaToolBash20241022,
-              Anthropic::Models::Beta::BetaToolTextEditor20241022
+              Anthropic::Models::Beta::BetaToolTextEditor20241022,
+              Anthropic::Models::Beta::BetaToolComputerUse20250124,
+              Anthropic::Models::Beta::BetaToolBash20250124,
+              Anthropic::Models::Beta::BetaToolTextEditor20250124,
+              Anthropic::Models::Beta::BetaTool
             )
             ],
             betas: T::Array[T.any(String, Symbol)],
@@ -83,6 +98,7 @@ module Anthropic
           messages:,
           model:,
           system_: nil,
+          thinking: nil,
           tool_choice: nil,
           tools: nil,
           betas: nil,

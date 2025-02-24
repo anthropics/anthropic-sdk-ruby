@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    type tool_bash20250124 =
+      {
+        name: :bash,
+        type: :bash_20250124,
+        cache_control: Anthropic::Models::CacheControlEphemeral?
+      }
+
+    class ToolBash20250124 < Anthropic::BaseModel
+      attr_accessor name: :bash
+
+      attr_accessor type: :bash_20250124
+
+      attr_accessor cache_control: Anthropic::Models::CacheControlEphemeral?
+
+      def initialize:
+        (
+          cache_control: Anthropic::Models::CacheControlEphemeral?,
+          name: :bash,
+          type: :bash_20250124
+        ) -> void
+        | (
+          ?Anthropic::Models::tool_bash20250124 | Anthropic::BaseModel data
+        ) -> void
+
+      def to_hash: -> Anthropic::Models::tool_bash20250124
+    end
+  end
+end

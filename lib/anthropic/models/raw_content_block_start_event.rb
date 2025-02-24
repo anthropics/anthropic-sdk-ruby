@@ -5,7 +5,7 @@ module Anthropic
     class RawContentBlockStartEvent < Anthropic::BaseModel
       # @!attribute content_block
       #
-      #   @return [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock]
+      #   @return [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock]
       required :content_block, union: -> { Anthropic::Models::RawContentBlockStartEvent::ContentBlock }
 
       # @!attribute index
@@ -19,7 +19,7 @@ module Anthropic
       required :type, const: :content_block_start
 
       # @!parse
-      #   # @param content_block [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock]
+      #   # @param content_block [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock]
       #   # @param index [Integer]
       #   # @param type [Symbol, :content_block_start]
       #   #
@@ -36,6 +36,10 @@ module Anthropic
       #   # Anthropic::Models::TextBlock ...
       # in {type: "tool_use", id: String, input: Anthropic::Unknown, name: String}
       #   # Anthropic::Models::ToolUseBlock ...
+      # in {type: "thinking", signature: String, thinking: String}
+      #   # Anthropic::Models::ThinkingBlock ...
+      # in {type: "redacted_thinking", data: String}
+      #   # Anthropic::Models::RedactedThinkingBlock ...
       # end
       # ```
       #
@@ -46,6 +50,10 @@ module Anthropic
       #   # ...
       # in Anthropic::Models::ToolUseBlock
       #   # ...
+      # in Anthropic::Models::ThinkingBlock
+      #   # ...
+      # in Anthropic::Models::RedactedThinkingBlock
+      #   # ...
       # end
       # ```
       class ContentBlock < Anthropic::Union
@@ -54,6 +62,10 @@ module Anthropic
         variant :text, -> { Anthropic::Models::TextBlock }
 
         variant :tool_use, -> { Anthropic::Models::ToolUseBlock }
+
+        variant :thinking, -> { Anthropic::Models::ThinkingBlock }
+
+        variant :redacted_thinking, -> { Anthropic::Models::RedactedThinkingBlock }
       end
     end
   end

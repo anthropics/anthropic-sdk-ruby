@@ -14,7 +14,7 @@ class Anthropic::Test::Resources::Beta::MessagesTest < Minitest::Test
     response = @anthropic.beta.messages.create(
       max_tokens: 1024,
       messages: [{content: "Hello, world", role: :user}],
-      model: :"claude-3-5-haiku-latest",
+      model: :"claude-3-7-sonnet-latest",
       stream: true
     )
 
@@ -39,7 +39,7 @@ class Anthropic::Test::Resources::Beta::MessagesTest < Minitest::Test
   def test_count_tokens_required_params
     response = @anthropic.beta.messages.count_tokens(
       messages: [{content: "string", role: :user}],
-      model: :"claude-3-5-haiku-latest"
+      model: :"claude-3-7-sonnet-latest"
     )
 
     assert_pattern do

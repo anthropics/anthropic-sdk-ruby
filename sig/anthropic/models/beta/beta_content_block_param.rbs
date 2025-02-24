@@ -10,9 +10,11 @@ module Anthropic
         | Anthropic::Models::Beta::BetaToolUseBlockParam
         | Anthropic::Models::Beta::BetaToolResultBlockParam
         | Anthropic::Models::Beta::BetaBase64PDFBlock
+        | Anthropic::Models::Beta::BetaThinkingBlockParam
+        | Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
 
       class BetaContentBlockParam < Anthropic::Union
-        private def self.variants: -> [[:text, Anthropic::Models::Beta::BetaTextBlockParam], [:image, Anthropic::Models::Beta::BetaImageBlockParam], [:tool_use, Anthropic::Models::Beta::BetaToolUseBlockParam], [:tool_result, Anthropic::Models::Beta::BetaToolResultBlockParam], [:document, Anthropic::Models::Beta::BetaBase64PDFBlock]]
+        private def self.variants: -> [[:text, Anthropic::Models::Beta::BetaTextBlockParam], [:image, Anthropic::Models::Beta::BetaImageBlockParam], [:tool_use, Anthropic::Models::Beta::BetaToolUseBlockParam], [:tool_result, Anthropic::Models::Beta::BetaToolResultBlockParam], [:document, Anthropic::Models::Beta::BetaBase64PDFBlock], [:thinking, Anthropic::Models::Beta::BetaThinkingBlockParam], [:redacted_thinking, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam]]
       end
     end
   end

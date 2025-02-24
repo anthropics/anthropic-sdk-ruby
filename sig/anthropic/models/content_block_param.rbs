@@ -6,9 +6,11 @@ module Anthropic
       | Anthropic::Models::ToolUseBlockParam
       | Anthropic::Models::ToolResultBlockParam
       | Anthropic::Models::DocumentBlockParam
+      | Anthropic::Models::ThinkingBlockParam
+      | Anthropic::Models::RedactedThinkingBlockParam
 
     class ContentBlockParam < Anthropic::Union
-      private def self.variants: -> [[:text, Anthropic::Models::TextBlockParam], [:image, Anthropic::Models::ImageBlockParam], [:tool_use, Anthropic::Models::ToolUseBlockParam], [:tool_result, Anthropic::Models::ToolResultBlockParam], [:document, Anthropic::Models::DocumentBlockParam]]
+      private def self.variants: -> [[:text, Anthropic::Models::TextBlockParam], [:image, Anthropic::Models::ImageBlockParam], [:tool_use, Anthropic::Models::ToolUseBlockParam], [:tool_result, Anthropic::Models::ToolResultBlockParam], [:document, Anthropic::Models::DocumentBlockParam], [:thinking, Anthropic::Models::ThinkingBlockParam], [:redacted_thinking, Anthropic::Models::RedactedThinkingBlockParam]]
     end
   end
 end

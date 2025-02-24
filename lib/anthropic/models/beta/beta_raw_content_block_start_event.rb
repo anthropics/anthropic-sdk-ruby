@@ -6,7 +6,7 @@ module Anthropic
       class BetaRawContentBlockStartEvent < Anthropic::BaseModel
         # @!attribute content_block
         #
-        #   @return [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock]
+        #   @return [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock]
         required :content_block,
                  union: -> { Anthropic::Models::Beta::BetaRawContentBlockStartEvent::ContentBlock }
 
@@ -21,7 +21,7 @@ module Anthropic
         required :type, const: :content_block_start
 
         # @!parse
-        #   # @param content_block [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock]
+        #   # @param content_block [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock]
         #   # @param index [Integer]
         #   # @param type [Symbol, :content_block_start]
         #   #
@@ -38,6 +38,10 @@ module Anthropic
         #   # Anthropic::Models::Beta::BetaTextBlock ...
         # in {type: "tool_use", id: String, input: Anthropic::Unknown, name: String}
         #   # Anthropic::Models::Beta::BetaToolUseBlock ...
+        # in {type: "thinking", signature: String, thinking: String}
+        #   # Anthropic::Models::Beta::BetaThinkingBlock ...
+        # in {type: "redacted_thinking", data: String}
+        #   # Anthropic::Models::Beta::BetaRedactedThinkingBlock ...
         # end
         # ```
         #
@@ -48,6 +52,10 @@ module Anthropic
         #   # ...
         # in Anthropic::Models::Beta::BetaToolUseBlock
         #   # ...
+        # in Anthropic::Models::Beta::BetaThinkingBlock
+        #   # ...
+        # in Anthropic::Models::Beta::BetaRedactedThinkingBlock
+        #   # ...
         # end
         # ```
         class ContentBlock < Anthropic::Union
@@ -56,6 +64,10 @@ module Anthropic
           variant :text, -> { Anthropic::Models::Beta::BetaTextBlock }
 
           variant :tool_use, -> { Anthropic::Models::Beta::BetaToolUseBlock }
+
+          variant :thinking, -> { Anthropic::Models::Beta::BetaThinkingBlock }
+
+          variant :redacted_thinking, -> { Anthropic::Models::Beta::BetaRedactedThinkingBlock }
         end
       end
     end

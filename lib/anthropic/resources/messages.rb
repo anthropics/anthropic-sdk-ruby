@@ -12,6 +12,8 @@ module Anthropic
       #   The Messages API can be used for either single queries or stateless multi-turn
       #   conversations.
       #
+      #   Learn more about the Messages API in our [user guide](/en/docs/initial-setup)
+      #
       # @param params [Anthropic::Models::MessageCreateParams, Hash{Symbol=>Object}] .
       #
       #   @option params [Integer] :max_tokens The maximum number of tokens to generate before stopping.
@@ -145,10 +147,20 @@ module Anthropic
       #     Note that even with `temperature` of `0.0`, the results will not be fully
       #     deterministic.
       #
+      #   @option params [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled] :thinking Configuration for enabling Claude's extended thinking.
+      #
+      #     When enabled, responses include `thinking` content blocks showing Claude's
+      #     thinking process before the final answer. Requires a minimum budget of 1,024
+      #     tokens and counts towards your `max_tokens` limit.
+      #
+      #     See
+      #     [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
+      #     for details.
+      #
       #   @option params [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool] :tool_choice How the model should use the provided tools. The model can use a specific tool,
       #     any available tool, or decide by itself.
       #
-      #   @option params [Array<Anthropic::Models::Tool>] :tools Definitions of tools that the model may use.
+      #   @option params [Array<Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::Tool>] :tools Definitions of tools that the model may use.
       #
       #     If you include `tools` in your API request, the model may return `tool_use`
       #     content blocks that represent the model's use of those tools. You can then run
@@ -159,8 +171,9 @@ module Anthropic
       #
       #     - `name`: Name of the tool.
       #     - `description`: Optional, but strongly-recommended description of the tool.
-      #     - `input_schema`: [JSON schema](https://json-schema.org/) for the tool `input`
-      #       shape that the model will produce in `tool_use` output content blocks.
+      #     - `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the
+      #       tool `input` shape that the model will produce in `tool_use` output content
+      #       blocks.
       #
       #     For example, if you defined `tools` as:
       #
@@ -254,6 +267,9 @@ module Anthropic
       #
       #   The Token Count API can be used to count the number of tokens in a Message,
       #   including tools, images, and documents, without creating it.
+      #
+      #   Learn more about token counting in our
+      #   [user guide](/en/docs/build-with-claude/token-counting)
       #
       # @param params [Anthropic::Models::MessageCountTokensParams, Hash{Symbol=>Object}] .
       #
@@ -354,10 +370,20 @@ module Anthropic
       #     as specifying a particular goal or role. See our
       #     [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
       #
+      #   @option params [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled] :thinking Configuration for enabling Claude's extended thinking.
+      #
+      #     When enabled, responses include `thinking` content blocks showing Claude's
+      #     thinking process before the final answer. Requires a minimum budget of 1,024
+      #     tokens and counts towards your `max_tokens` limit.
+      #
+      #     See
+      #     [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
+      #     for details.
+      #
       #   @option params [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool] :tool_choice How the model should use the provided tools. The model can use a specific tool,
       #     any available tool, or decide by itself.
       #
-      #   @option params [Array<Anthropic::Models::Tool>] :tools Definitions of tools that the model may use.
+      #   @option params [Array<Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::Tool>] :tools Definitions of tools that the model may use.
       #
       #     If you include `tools` in your API request, the model may return `tool_use`
       #     content blocks that represent the model's use of those tools. You can then run
@@ -368,8 +394,9 @@ module Anthropic
       #
       #     - `name`: Name of the tool.
       #     - `description`: Optional, but strongly-recommended description of the tool.
-      #     - `input_schema`: [JSON schema](https://json-schema.org/) for the tool `input`
-      #       shape that the model will produce in `tool_use` output content blocks.
+      #     - `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the
+      #       tool `input` shape that the model will produce in `tool_use` output content
+      #       blocks.
       #
       #     For example, if you defined `tools` as:
       #

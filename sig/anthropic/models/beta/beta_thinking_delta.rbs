@@ -1,0 +1,25 @@
+module Anthropic
+  module Models
+    
+    class BetaThinkingDelta = Beta::BetaThinkingDelta
+
+    module Beta
+      type beta_thinking_delta = { thinking: String, type: :thinking_delta }
+
+      class BetaThinkingDelta < Anthropic::BaseModel
+        attr_accessor thinking: String
+
+        attr_accessor type: :thinking_delta
+
+        def initialize:
+          (thinking: String, type: :thinking_delta) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_thinking_delta
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_hash: -> Anthropic::Models::Beta::beta_thinking_delta
+      end
+    end
+  end
+end
