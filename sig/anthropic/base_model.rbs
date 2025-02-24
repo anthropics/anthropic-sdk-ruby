@@ -83,7 +83,6 @@ module Anthropic
   end
 
   class Union
-    extend Anthropic::Extern
     extend Anthropic::Converter
 
     private def self.known_variants: -> ::Array[[Symbol?, Proc]]
@@ -170,7 +169,6 @@ module Anthropic
   end
 
   class BaseModel
-    extend Anthropic::Extern
     extend Anthropic::Converter
 
     type known_field = { mode: (:coerce | :dump)?, required: bool }

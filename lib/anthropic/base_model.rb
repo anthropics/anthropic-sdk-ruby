@@ -369,7 +369,6 @@ module Anthropic
   # @abstract
   #
   class Union
-    extend Anthropic::Extern
     extend Anthropic::Converter
 
     # @private
@@ -842,7 +841,6 @@ module Anthropic
   # @abstract
   #
   class BaseModel
-    extend Anthropic::Extern
     extend Anthropic::Converter
 
     # @private
