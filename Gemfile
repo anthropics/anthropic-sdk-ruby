@@ -5,6 +5,7 @@ source "https://rubygems.org"
 gemspec
 
 group :development do
+  gem "aws-sdk-bedrockruntime"
   gem "minitest"
   gem "minitest-focus"
   gem "minitest-hooks"

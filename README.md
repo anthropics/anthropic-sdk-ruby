@@ -143,6 +143,36 @@ anthropic.messages.create(
 )
 ```
 
+## AWS Bedrock
+
+This library also provides support for the [Anthropic Bedrock API](https://aws.amazon.com/bedrock/claude/) if you install this library with the `aws-sdk-bedrockruntime` gem. 
+
+You can then instantiate a separate `Anthropic::Bedrock::Client` class, and use AWS's standard guide for configuring credentials (see [the aws-sdk-ruby gem README](https://github.com/aws/aws-sdk-ruby?tab=readme-ov-file#configuration) or [AWS Documentation](https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html#credchain)).  The rest of the API is largely the same. 
+
+Note that the model ID required is different for Bedrock models, and, depending on the model you want to use, you will need to use either the AWS's model ID for Anthropic models -- which can be found in [AWS's Bedrock model catalog](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html) -- or an inference profile id (e.g. `us.anthropic.claude-3-5-haiku-20241022-v1:0` for Claude 3.5 Haiku).
+
+```rb
+require "bundler/setup"
+require "anthropic"
+
+anthropic = Anthropic::Bedrock::Client.new
+
+message = anthropic.messages.create(
+  max_tokens: 1024,
+  messages: [
+    {
+      role: "user",
+      content: "Hello, Claude"
+    }
+  ],
+  model: "us.anthropic.claude-3-5-haiku-20241022-v1:0"
+)
+
+puts(message.content)
+```
+
+For more examples see [`examples/bedrock`](examples/bedrock).
+
 ## Versioning
 
 This package follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions. As the
