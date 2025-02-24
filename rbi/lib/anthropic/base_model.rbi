@@ -153,7 +153,6 @@ module Anthropic
   class Union
     abstract!
 
-    extend Anthropic::Extern
     extend Anthropic::Converter
 
     sig { returns(T::Array[[T.nilable(Symbol), Proc]]) }
@@ -331,7 +330,6 @@ module Anthropic
   class BaseModel
     abstract!
 
-    extend Anthropic::Extern
     extend Anthropic::Converter
 
     KnownFieldShape = T.type_alias { {mode: T.nilable(Symbol), required: T::Boolean} }
