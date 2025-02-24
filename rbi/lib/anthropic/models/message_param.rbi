@@ -13,7 +13,9 @@ module Anthropic
               Anthropic::Models::ImageBlockParam,
               Anthropic::Models::ToolUseBlockParam,
               Anthropic::Models::ToolResultBlockParam,
-              Anthropic::Models::DocumentBlockParam
+              Anthropic::Models::DocumentBlockParam,
+              Anthropic::Models::ThinkingBlockParam,
+              Anthropic::Models::RedactedThinkingBlockParam
             )
             ]
           )
@@ -32,7 +34,9 @@ module Anthropic
               Anthropic::Models::ImageBlockParam,
               Anthropic::Models::ToolUseBlockParam,
               Anthropic::Models::ToolResultBlockParam,
-              Anthropic::Models::DocumentBlockParam
+              Anthropic::Models::DocumentBlockParam,
+              Anthropic::Models::ThinkingBlockParam,
+              Anthropic::Models::RedactedThinkingBlockParam
             )
             ]
           )
@@ -46,7 +50,9 @@ module Anthropic
                 Anthropic::Models::ImageBlockParam,
                 Anthropic::Models::ToolUseBlockParam,
                 Anthropic::Models::ToolResultBlockParam,
-                Anthropic::Models::DocumentBlockParam
+                Anthropic::Models::DocumentBlockParam,
+                Anthropic::Models::ThinkingBlockParam,
+                Anthropic::Models::RedactedThinkingBlockParam
               )
               ]
             )
@@ -73,7 +79,9 @@ module Anthropic
               Anthropic::Models::ImageBlockParam,
               Anthropic::Models::ToolUseBlockParam,
               Anthropic::Models::ToolResultBlockParam,
-              Anthropic::Models::DocumentBlockParam
+              Anthropic::Models::DocumentBlockParam,
+              Anthropic::Models::ThinkingBlockParam,
+              Anthropic::Models::RedactedThinkingBlockParam
             )
             ]
           ),
@@ -96,7 +104,9 @@ module Anthropic
                   Anthropic::Models::ImageBlockParam,
                   Anthropic::Models::ToolUseBlockParam,
                   Anthropic::Models::ToolResultBlockParam,
-                  Anthropic::Models::DocumentBlockParam
+                  Anthropic::Models::DocumentBlockParam,
+                  Anthropic::Models::ThinkingBlockParam,
+                  Anthropic::Models::RedactedThinkingBlockParam
                 )
                 ]
               ),
@@ -117,7 +127,9 @@ module Anthropic
             Anthropic::Models::ImageBlockParam,
             Anthropic::Models::ToolUseBlockParam,
             Anthropic::Models::ToolResultBlockParam,
-            Anthropic::Models::DocumentBlockParam
+            Anthropic::Models::DocumentBlockParam,
+            Anthropic::Models::ThinkingBlockParam,
+            Anthropic::Models::RedactedThinkingBlockParam
           )
           ]
         end
@@ -135,7 +147,9 @@ module Anthropic
                                   Anthropic::Models::ImageBlockParam,
                                   Anthropic::Models::ToolUseBlockParam,
                                   Anthropic::Models::ToolResultBlockParam,
-                                  Anthropic::Models::DocumentBlockParam
+                                  Anthropic::Models::DocumentBlockParam,
+                                  Anthropic::Models::ThinkingBlockParam,
+                                  Anthropic::Models::RedactedThinkingBlockParam
                                 )
                                 ]
                 ]

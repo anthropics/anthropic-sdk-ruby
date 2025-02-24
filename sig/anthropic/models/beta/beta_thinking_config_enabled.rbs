@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    
+    class BetaThinkingConfigEnabled = Beta::BetaThinkingConfigEnabled
+
+    module Beta
+      type beta_thinking_config_enabled =
+        { budget_tokens: Integer, type: :enabled }
+
+      class BetaThinkingConfigEnabled < Anthropic::BaseModel
+        attr_accessor budget_tokens: Integer
+
+        attr_accessor type: :enabled
+
+        def initialize:
+          (budget_tokens: Integer, type: :enabled) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_thinking_config_enabled
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_hash: -> Anthropic::Models::Beta::beta_thinking_config_enabled
+      end
+    end
+  end
+end

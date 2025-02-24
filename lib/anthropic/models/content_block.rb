@@ -11,6 +11,10 @@ module Anthropic
     #   # Anthropic::Models::TextBlock ...
     # in {type: "tool_use", id: String, input: Anthropic::Unknown, name: String}
     #   # Anthropic::Models::ToolUseBlock ...
+    # in {type: "thinking", signature: String, thinking: String}
+    #   # Anthropic::Models::ThinkingBlock ...
+    # in {type: "redacted_thinking", data: String}
+    #   # Anthropic::Models::RedactedThinkingBlock ...
     # end
     # ```
     #
@@ -21,6 +25,10 @@ module Anthropic
     #   # ...
     # in Anthropic::Models::ToolUseBlock
     #   # ...
+    # in Anthropic::Models::ThinkingBlock
+    #   # ...
+    # in Anthropic::Models::RedactedThinkingBlock
+    #   # ...
     # end
     # ```
     class ContentBlock < Anthropic::Union
@@ -29,6 +37,10 @@ module Anthropic
       variant :text, -> { Anthropic::Models::TextBlock }
 
       variant :tool_use, -> { Anthropic::Models::ToolUseBlock }
+
+      variant :thinking, -> { Anthropic::Models::ThinkingBlock }
+
+      variant :redacted_thinking, -> { Anthropic::Models::RedactedThinkingBlock }
     end
   end
 end

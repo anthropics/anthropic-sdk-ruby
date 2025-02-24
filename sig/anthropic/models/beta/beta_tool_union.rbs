@@ -5,13 +5,16 @@ module Anthropic
 
     module Beta
       type beta_tool_union =
-        Anthropic::Models::Beta::BetaTool
-        | Anthropic::Models::Beta::BetaToolComputerUse20241022
+        Anthropic::Models::Beta::BetaToolComputerUse20241022
         | Anthropic::Models::Beta::BetaToolBash20241022
         | Anthropic::Models::Beta::BetaToolTextEditor20241022
+        | Anthropic::Models::Beta::BetaToolComputerUse20250124
+        | Anthropic::Models::Beta::BetaToolBash20250124
+        | Anthropic::Models::Beta::BetaToolTextEditor20250124
+        | Anthropic::Models::Beta::BetaTool
 
       class BetaToolUnion < Anthropic::Union
-        private def self.variants: -> [[nil, Anthropic::Models::Beta::BetaTool], [nil, Anthropic::Models::Beta::BetaToolComputerUse20241022], [nil, Anthropic::Models::Beta::BetaToolBash20241022], [nil, Anthropic::Models::Beta::BetaToolTextEditor20241022]]
+        private def self.variants: -> [[nil, Anthropic::Models::Beta::BetaToolComputerUse20241022], [nil, Anthropic::Models::Beta::BetaToolBash20241022], [nil, Anthropic::Models::Beta::BetaToolTextEditor20241022], [nil, Anthropic::Models::Beta::BetaToolComputerUse20250124], [nil, Anthropic::Models::Beta::BetaToolBash20250124], [nil, Anthropic::Models::Beta::BetaToolTextEditor20250124], [nil, Anthropic::Models::Beta::BetaTool]]
       end
     end
   end

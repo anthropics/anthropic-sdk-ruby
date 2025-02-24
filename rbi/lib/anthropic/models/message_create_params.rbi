@@ -75,6 +75,21 @@ module Anthropic
 
       sig do
         returns(
+          T.nilable(T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled))
+        )
+      end
+      def thinking
+      end
+
+      sig do
+        params(_: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled))
+          .returns(T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled))
+      end
+      def thinking=(_)
+      end
+
+      sig do
+        returns(
           T.nilable(
             T.any(
               Anthropic::Models::ToolChoiceAuto,
@@ -106,11 +121,42 @@ module Anthropic
       def tool_choice=(_)
       end
 
-      sig { returns(T.nilable(T::Array[Anthropic::Models::Tool])) }
+      sig do
+        returns(
+          T.nilable(
+            T::Array[
+            T.any(
+              Anthropic::Models::ToolBash20250124,
+              Anthropic::Models::ToolTextEditor20250124,
+              Anthropic::Models::Tool
+            )
+            ]
+          )
+        )
+      end
       def tools
       end
 
-      sig { params(_: T::Array[Anthropic::Models::Tool]).returns(T::Array[Anthropic::Models::Tool]) }
+      sig do
+        params(
+          _: T::Array[
+          T.any(
+            Anthropic::Models::ToolBash20250124,
+            Anthropic::Models::ToolTextEditor20250124,
+            Anthropic::Models::Tool
+          )
+          ]
+        )
+          .returns(
+            T::Array[
+            T.any(
+              Anthropic::Models::ToolBash20250124,
+              Anthropic::Models::ToolTextEditor20250124,
+              Anthropic::Models::Tool
+            )
+            ]
+          )
+      end
       def tools=(_)
       end
 
@@ -140,12 +186,19 @@ module Anthropic
           stop_sequences: T::Array[String],
           system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
           temperature: Float,
+          thinking: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled),
           tool_choice: T.any(
             Anthropic::Models::ToolChoiceAuto,
             Anthropic::Models::ToolChoiceAny,
             Anthropic::Models::ToolChoiceTool
           ),
-          tools: T::Array[Anthropic::Models::Tool],
+          tools: T::Array[
+          T.any(
+            Anthropic::Models::ToolBash20250124,
+            Anthropic::Models::ToolTextEditor20250124,
+            Anthropic::Models::Tool
+          )
+          ],
           top_k: Integer,
           top_p: Float,
           request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
@@ -161,6 +214,7 @@ module Anthropic
         stop_sequences: nil,
         system_: nil,
         temperature: nil,
+        thinking: nil,
         tool_choice: nil,
         tools: nil,
         top_k: nil,
@@ -181,12 +235,19 @@ module Anthropic
               stream: T::Boolean,
               system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
               temperature: Float,
+              thinking: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled),
               tool_choice: T.any(
                 Anthropic::Models::ToolChoiceAuto,
                 Anthropic::Models::ToolChoiceAny,
                 Anthropic::Models::ToolChoiceTool
               ),
-              tools: T::Array[Anthropic::Models::Tool],
+              tools: T::Array[
+              T.any(
+                Anthropic::Models::ToolBash20250124,
+                Anthropic::Models::ToolTextEditor20250124,
+                Anthropic::Models::Tool
+              )
+              ],
               top_k: Integer,
               top_p: Float,
               request_options: Anthropic::RequestOptions

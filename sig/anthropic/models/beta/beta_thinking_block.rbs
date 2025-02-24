@@ -1,0 +1,28 @@
+module Anthropic
+  module Models
+    
+    class BetaThinkingBlock = Beta::BetaThinkingBlock
+
+    module Beta
+      type beta_thinking_block =
+        { signature: String, thinking: String, type: :thinking }
+
+      class BetaThinkingBlock < Anthropic::BaseModel
+        attr_accessor signature: String
+
+        attr_accessor thinking: String
+
+        attr_accessor type: :thinking
+
+        def initialize:
+          (signature: String, thinking: String, type: :thinking) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_thinking_block
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_hash: -> Anthropic::Models::Beta::beta_thinking_block
+      end
+    end
+  end
+end

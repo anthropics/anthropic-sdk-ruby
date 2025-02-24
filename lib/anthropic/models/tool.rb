@@ -4,7 +4,7 @@ module Anthropic
   module Models
     class Tool < Anthropic::BaseModel
       # @!attribute input_schema
-      #   [JSON schema](https://json-schema.org/) for this tool's input.
+      #   [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
       #
       #     This defines the shape of the `input` that your tool accepts and that the model
       #     will produce.
@@ -62,7 +62,7 @@ module Anthropic
         optional :properties, Anthropic::Unknown, nil?: true
 
         # @!parse
-        #   # [JSON schema](https://json-schema.org/) for this tool's input.
+        #   # [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
         #   #
         #   #   This defines the shape of the `input` that your tool accepts and that the model
         #   #   will produce.

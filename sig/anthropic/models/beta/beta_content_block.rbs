@@ -7,9 +7,11 @@ module Anthropic
       type beta_content_block =
         Anthropic::Models::Beta::BetaTextBlock
         | Anthropic::Models::Beta::BetaToolUseBlock
+        | Anthropic::Models::Beta::BetaThinkingBlock
+        | Anthropic::Models::Beta::BetaRedactedThinkingBlock
 
       class BetaContentBlock < Anthropic::Union
-        private def self.variants: -> [[:text, Anthropic::Models::Beta::BetaTextBlock], [:tool_use, Anthropic::Models::Beta::BetaToolUseBlock]]
+        private def self.variants: -> [[:text, Anthropic::Models::Beta::BetaTextBlock], [:tool_use, Anthropic::Models::Beta::BetaToolUseBlock], [:thinking, Anthropic::Models::Beta::BetaThinkingBlock], [:redacted_thinking, Anthropic::Models::Beta::BetaRedactedThinkingBlock]]
       end
     end
   end

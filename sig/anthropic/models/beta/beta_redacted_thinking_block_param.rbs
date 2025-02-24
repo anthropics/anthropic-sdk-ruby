@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    
+    class BetaRedactedThinkingBlockParam = Beta::BetaRedactedThinkingBlockParam
+
+    module Beta
+      type beta_redacted_thinking_block_param =
+        { data: String, type: :redacted_thinking }
+
+      class BetaRedactedThinkingBlockParam < Anthropic::BaseModel
+        attr_accessor data: String
+
+        attr_accessor type: :redacted_thinking
+
+        def initialize:
+          (data: String, type: :redacted_thinking) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_redacted_thinking_block_param
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_hash: -> Anthropic::Models::Beta::beta_redacted_thinking_block_param
+      end
+    end
+  end
+end

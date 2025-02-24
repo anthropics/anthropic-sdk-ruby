@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    type thinking_config_enabled = { budget_tokens: Integer, type: :enabled }
+
+    class ThinkingConfigEnabled < Anthropic::BaseModel
+      attr_accessor budget_tokens: Integer
+
+      attr_accessor type: :enabled
+
+      def initialize:
+        (budget_tokens: Integer, type: :enabled) -> void
+        | (
+          ?Anthropic::Models::thinking_config_enabled
+          | Anthropic::BaseModel data
+        ) -> void
+
+      def to_hash: -> Anthropic::Models::thinking_config_enabled
+    end
+  end
+end

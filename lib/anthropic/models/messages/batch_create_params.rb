@@ -236,6 +236,24 @@ module Anthropic
             #   # @return [Float]
             #   attr_writer :temperature
 
+            # @!attribute [r] thinking
+            #   Configuration for enabling Claude's extended thinking.
+            #
+            #     When enabled, responses include `thinking` content blocks showing Claude's
+            #     thinking process before the final answer. Requires a minimum budget of 1,024
+            #     tokens and counts towards your `max_tokens` limit.
+            #
+            #     See
+            #     [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
+            #     for details.
+            #
+            #   @return [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, nil]
+            optional :thinking, union: -> { Anthropic::Models::ThinkingConfigParam }
+
+            # @!parse
+            #   # @return [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]
+            #   attr_writer :thinking
+
             # @!attribute [r] tool_choice
             #   How the model should use the provided tools. The model can use a specific tool,
             #     any available tool, or decide by itself.
@@ -259,8 +277,9 @@ module Anthropic
             #
             #     - `name`: Name of the tool.
             #     - `description`: Optional, but strongly-recommended description of the tool.
-            #     - `input_schema`: [JSON schema](https://json-schema.org/) for the tool `input`
-            #       shape that the model will produce in `tool_use` output content blocks.
+            #     - `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the
+            #       tool `input` shape that the model will produce in `tool_use` output content
+            #       blocks.
             #
             #     For example, if you defined `tools` as:
             #
@@ -317,11 +336,11 @@ module Anthropic
             #
             #     See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
             #
-            #   @return [Array<Anthropic::Models::Tool>, nil]
-            optional :tools, -> { Anthropic::ArrayOf[Anthropic::Models::Tool] }
+            #   @return [Array<Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::Tool>, nil]
+            optional :tools, -> { Anthropic::ArrayOf[union: Anthropic::Models::ToolUnion] }
 
             # @!parse
-            #   # @return [Array<Anthropic::Models::Tool>]
+            #   # @return [Array<Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::Tool>]
             #   attr_writer :tools
 
             # @!attribute [r] top_k
@@ -372,8 +391,9 @@ module Anthropic
             #   # @param stream [Boolean]
             #   # @param system_ [String, Array<Anthropic::Models::TextBlockParam>]
             #   # @param temperature [Float]
+            #   # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]
             #   # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool]
-            #   # @param tools [Array<Anthropic::Models::Tool>]
+            #   # @param tools [Array<Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::Tool>]
             #   # @param top_k [Integer]
             #   # @param top_p [Float]
             #   #
@@ -386,6 +406,7 @@ module Anthropic
             #     stream: nil,
             #     system_: nil,
             #     temperature: nil,
+            #     thinking: nil,
             #     tool_choice: nil,
             #     tools: nil,
             #     top_k: nil,

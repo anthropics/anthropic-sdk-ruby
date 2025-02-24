@@ -46,7 +46,7 @@ module Anthropic
         #     [{ "type": "text", "text": "B)" }]
         #     ```
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock>]
+        #   @return [Array<Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock>]
         required :content, -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlock] }
 
         # @!attribute model
@@ -112,12 +112,15 @@ module Anthropic
         #     For example, `output_tokens` will be non-zero, even for an empty string response
         #     from Claude.
         #
+        #     Total input tokens in a request is the summation of `input_tokens`,
+        #     `cache_creation_input_tokens`, and `cache_read_input_tokens`.
+        #
         #   @return [Anthropic::Models::Beta::BetaUsage]
         required :usage, -> { Anthropic::Models::Beta::BetaUsage }
 
         # @!parse
         #   # @param id [String]
-        #   # @param content [Array<Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock>]
+        #   # @param content [Array<Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock>]
         #   # @param model [Symbol, Anthropic::Models::Model::UnionMember0, String]
         #   # @param stop_reason [Symbol, Anthropic::Models::Beta::BetaMessage::StopReason, nil]
         #   # @param stop_sequence [String, nil]

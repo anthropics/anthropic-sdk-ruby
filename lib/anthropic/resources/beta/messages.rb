@@ -13,6 +13,8 @@ module Anthropic
         #   The Messages API can be used for either single queries or stateless multi-turn
         #   conversations.
         #
+        #   Learn more about the Messages API in our [user guide](/en/docs/initial-setup)
+        #
         # @param params [Anthropic::Models::Beta::MessageCreateParams, Hash{Symbol=>Object}] .
         #
         #   @option params [Integer] :max_tokens Body param: The maximum number of tokens to generate before stopping.
@@ -147,10 +149,20 @@ module Anthropic
         #     Note that even with `temperature` of `0.0`, the results will not be fully
         #     deterministic.
         #
+        #   @option params [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled] :thinking Body param: Configuration for enabling Claude's extended thinking.
+        #
+        #     When enabled, responses include `thinking` content blocks showing Claude's
+        #     thinking process before the final answer. Requires a minimum budget of 1,024
+        #     tokens and counts towards your `max_tokens` limit.
+        #
+        #     See
+        #     [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
+        #     for details.
+        #
         #   @option params [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool] :tool_choice Body param: How the model should use the provided tools. The model can use a
         #     specific tool, any available tool, or decide by itself.
         #
-        #   @option params [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>] :tools Body param: Definitions of tools that the model may use.
+        #   @option params [Array<Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaTool>] :tools Body param: Definitions of tools that the model may use.
         #
         #     If you include `tools` in your API request, the model may return `tool_use`
         #     content blocks that represent the model's use of those tools. You can then run
@@ -161,8 +173,9 @@ module Anthropic
         #
         #     - `name`: Name of the tool.
         #     - `description`: Optional, but strongly-recommended description of the tool.
-        #     - `input_schema`: [JSON schema](https://json-schema.org/) for the tool `input`
-        #       shape that the model will produce in `tool_use` output content blocks.
+        #     - `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the
+        #       tool `input` shape that the model will produce in `tool_use` output content
+        #       blocks.
         #
         #     For example, if you defined `tools` as:
         #
@@ -258,6 +271,9 @@ module Anthropic
         #
         #   The Token Count API can be used to count the number of tokens in a Message,
         #   including tools, images, and documents, without creating it.
+        #
+        #   Learn more about token counting in our
+        #   [user guide](/en/docs/build-with-claude/token-counting)
         #
         # @param params [Anthropic::Models::Beta::MessageCountTokensParams, Hash{Symbol=>Object}] .
         #
@@ -358,10 +374,20 @@ module Anthropic
         #     as specifying a particular goal or role. See our
         #     [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
         #
+        #   @option params [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled] :thinking Body param: Configuration for enabling Claude's extended thinking.
+        #
+        #     When enabled, responses include `thinking` content blocks showing Claude's
+        #     thinking process before the final answer. Requires a minimum budget of 1,024
+        #     tokens and counts towards your `max_tokens` limit.
+        #
+        #     See
+        #     [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
+        #     for details.
+        #
         #   @option params [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool] :tool_choice Body param: How the model should use the provided tools. The model can use a
         #     specific tool, any available tool, or decide by itself.
         #
-        #   @option params [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022>] :tools Body param: Definitions of tools that the model may use.
+        #   @option params [Array<Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaTool>] :tools Body param: Definitions of tools that the model may use.
         #
         #     If you include `tools` in your API request, the model may return `tool_use`
         #     content blocks that represent the model's use of those tools. You can then run
@@ -372,8 +398,9 @@ module Anthropic
         #
         #     - `name`: Name of the tool.
         #     - `description`: Optional, but strongly-recommended description of the tool.
-        #     - `input_schema`: [JSON schema](https://json-schema.org/) for the tool `input`
-        #       shape that the model will produce in `tool_use` output content blocks.
+        #     - `input_schema`: [JSON schema](https://json-schema.org/draft/2020-12) for the
+        #       tool `input` shape that the model will produce in `tool_use` output content
+        #       blocks.
         #
         #     For example, if you defined `tools` as:
         #

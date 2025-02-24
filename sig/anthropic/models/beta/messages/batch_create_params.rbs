@@ -67,6 +67,7 @@ module Anthropic
                 stream: bool,
                 system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
                 temperature: Float,
+                thinking: Anthropic::Models::Beta::beta_thinking_config_param,
                 tool_choice: Anthropic::Models::Beta::beta_tool_choice,
                 tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
                 top_k: Integer,
@@ -104,6 +105,12 @@ module Anthropic
 
               def temperature=: (Float) -> Float
 
+              attr_reader thinking: Anthropic::Models::Beta::beta_thinking_config_param?
+
+              def thinking=: (
+                Anthropic::Models::Beta::beta_thinking_config_param
+              ) -> Anthropic::Models::Beta::beta_thinking_config_param
+
               attr_reader tool_choice: Anthropic::Models::Beta::beta_tool_choice?
 
               def tool_choice=: (
@@ -134,6 +141,7 @@ module Anthropic
                   stream: bool,
                   system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
                   temperature: Float,
+                  thinking: Anthropic::Models::Beta::beta_thinking_config_param,
                   tool_choice: Anthropic::Models::Beta::beta_tool_choice,
                   tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
                   top_k: Integer,

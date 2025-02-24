@@ -11,13 +11,42 @@ module Anthropic
       def id=(_)
       end
 
-      sig { returns(T::Array[T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock)]) }
+      sig do
+        returns(
+          T::Array[
+          T.any(
+            Anthropic::Models::TextBlock,
+            Anthropic::Models::ToolUseBlock,
+            Anthropic::Models::ThinkingBlock,
+            Anthropic::Models::RedactedThinkingBlock
+          )
+          ]
+        )
+      end
       def content
       end
 
       sig do
-        params(_: T::Array[T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock)])
-          .returns(T::Array[T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock)])
+        params(
+          _: T::Array[
+          T.any(
+            Anthropic::Models::TextBlock,
+            Anthropic::Models::ToolUseBlock,
+            Anthropic::Models::ThinkingBlock,
+            Anthropic::Models::RedactedThinkingBlock
+          )
+          ]
+        )
+          .returns(
+            T::Array[
+            T.any(
+              Anthropic::Models::TextBlock,
+              Anthropic::Models::ToolUseBlock,
+              Anthropic::Models::ThinkingBlock,
+              Anthropic::Models::RedactedThinkingBlock
+            )
+            ]
+          )
       end
       def content=(_)
       end
@@ -73,7 +102,14 @@ module Anthropic
       sig do
         params(
           id: String,
-          content: T::Array[T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock)],
+          content: T::Array[
+          T.any(
+            Anthropic::Models::TextBlock,
+            Anthropic::Models::ToolUseBlock,
+            Anthropic::Models::ThinkingBlock,
+            Anthropic::Models::RedactedThinkingBlock
+          )
+          ],
           model: T.any(Symbol, String),
           stop_reason: T.nilable(Symbol),
           stop_sequence: T.nilable(String),
@@ -100,7 +136,14 @@ module Anthropic
           .returns(
             {
               id: String,
-              content: T::Array[T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock)],
+              content: T::Array[
+              T.any(
+                Anthropic::Models::TextBlock,
+                Anthropic::Models::ToolUseBlock,
+                Anthropic::Models::ThinkingBlock,
+                Anthropic::Models::RedactedThinkingBlock
+              )
+              ],
               model: T.any(Symbol, String),
               role: Symbol,
               stop_reason: T.nilable(Symbol),

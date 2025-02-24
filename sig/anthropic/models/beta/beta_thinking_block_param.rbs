@@ -1,0 +1,28 @@
+module Anthropic
+  module Models
+    
+    class BetaThinkingBlockParam = Beta::BetaThinkingBlockParam
+
+    module Beta
+      type beta_thinking_block_param =
+        { signature: String, thinking: String, type: :thinking }
+
+      class BetaThinkingBlockParam < Anthropic::BaseModel
+        attr_accessor signature: String
+
+        attr_accessor thinking: String
+
+        attr_accessor type: :thinking
+
+        def initialize:
+          (signature: String, thinking: String, type: :thinking) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_thinking_block_param
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_hash: -> Anthropic::Models::Beta::beta_thinking_block_param
+      end
+    end
+  end
+end

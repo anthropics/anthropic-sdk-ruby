@@ -3,13 +3,36 @@
 module Anthropic
   module Models
     class RawContentBlockStartEvent < Anthropic::BaseModel
-      sig { returns(T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock)) }
+      sig do
+        returns(
+          T.any(
+            Anthropic::Models::TextBlock,
+            Anthropic::Models::ToolUseBlock,
+            Anthropic::Models::ThinkingBlock,
+            Anthropic::Models::RedactedThinkingBlock
+          )
+        )
+      end
       def content_block
       end
 
       sig do
-        params(_: T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock))
-          .returns(T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock))
+        params(
+          _: T.any(
+            Anthropic::Models::TextBlock,
+            Anthropic::Models::ToolUseBlock,
+            Anthropic::Models::ThinkingBlock,
+            Anthropic::Models::RedactedThinkingBlock
+          )
+        )
+          .returns(
+            T.any(
+              Anthropic::Models::TextBlock,
+              Anthropic::Models::ToolUseBlock,
+              Anthropic::Models::ThinkingBlock,
+              Anthropic::Models::RedactedThinkingBlock
+            )
+          )
       end
       def content_block=(_)
       end
@@ -32,7 +55,12 @@ module Anthropic
 
       sig do
         params(
-          content_block: T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock),
+          content_block: T.any(
+            Anthropic::Models::TextBlock,
+            Anthropic::Models::ToolUseBlock,
+            Anthropic::Models::ThinkingBlock,
+            Anthropic::Models::RedactedThinkingBlock
+          ),
           index: Integer,
           type: Symbol
         )
@@ -45,7 +73,12 @@ module Anthropic
         override
           .returns(
             {
-              content_block: T.any(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock),
+              content_block: T.any(
+                Anthropic::Models::TextBlock,
+                Anthropic::Models::ToolUseBlock,
+                Anthropic::Models::ThinkingBlock,
+                Anthropic::Models::RedactedThinkingBlock
+              ),
               index: Integer,
               type: Symbol
             }
@@ -57,7 +90,12 @@ module Anthropic
       class ContentBlock < Anthropic::Union
         abstract!
 
-        sig { override.returns([[Symbol, Anthropic::Models::TextBlock], [Symbol, Anthropic::Models::ToolUseBlock]]) }
+        sig do
+          override
+            .returns(
+              [[Symbol, Anthropic::Models::TextBlock], [Symbol, Anthropic::Models::ToolUseBlock], [Symbol, Anthropic::Models::ThinkingBlock], [Symbol, Anthropic::Models::RedactedThinkingBlock]]
+            )
+        end
         private_class_method def self.variants
         end
       end

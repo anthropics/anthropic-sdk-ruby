@@ -6,6 +6,7 @@ module Anthropic
           messages: ::Array[Anthropic::Models::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
           system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
+          thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           tool_choice: Anthropic::Models::Beta::beta_tool_choice,
           tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
           betas: ::Array[Anthropic::Models::anthropic_beta]
@@ -25,6 +26,12 @@ module Anthropic
         def system_=: (
           Anthropic::Models::Beta::MessageCountTokensParams::system_
         ) -> Anthropic::Models::Beta::MessageCountTokensParams::system_
+
+        attr_reader thinking: Anthropic::Models::Beta::beta_thinking_config_param?
+
+        def thinking=: (
+          Anthropic::Models::Beta::beta_thinking_config_param
+        ) -> Anthropic::Models::Beta::beta_thinking_config_param
 
         attr_reader tool_choice: Anthropic::Models::Beta::beta_tool_choice?
 
@@ -49,6 +56,7 @@ module Anthropic
             messages: ::Array[Anthropic::Models::Beta::BetaMessageParam],
             model: Anthropic::Models::model,
             system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
+            thinking: Anthropic::Models::Beta::beta_thinking_config_param,
             tool_choice: Anthropic::Models::Beta::beta_tool_choice,
             tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
             betas: ::Array[Anthropic::Models::anthropic_beta],
@@ -74,13 +82,16 @@ module Anthropic
         end
 
         type tool =
-          Anthropic::Models::Beta::BetaTool
-          | Anthropic::Models::Beta::BetaToolComputerUse20241022
+          Anthropic::Models::Beta::BetaToolComputerUse20241022
           | Anthropic::Models::Beta::BetaToolBash20241022
           | Anthropic::Models::Beta::BetaToolTextEditor20241022
+          | Anthropic::Models::Beta::BetaToolComputerUse20250124
+          | Anthropic::Models::Beta::BetaToolBash20250124
+          | Anthropic::Models::Beta::BetaToolTextEditor20250124
+          | Anthropic::Models::Beta::BetaTool
 
         class Tool < Anthropic::Union
-          private def self.variants: -> [[nil, Anthropic::Models::Beta::BetaTool], [nil, Anthropic::Models::Beta::BetaToolComputerUse20241022], [nil, Anthropic::Models::Beta::BetaToolBash20241022], [nil, Anthropic::Models::Beta::BetaToolTextEditor20241022]]
+          private def self.variants: -> [[nil, Anthropic::Models::Beta::BetaToolComputerUse20241022], [nil, Anthropic::Models::Beta::BetaToolBash20241022], [nil, Anthropic::Models::Beta::BetaToolTextEditor20241022], [nil, Anthropic::Models::Beta::BetaToolComputerUse20250124], [nil, Anthropic::Models::Beta::BetaToolBash20250124], [nil, Anthropic::Models::Beta::BetaToolTextEditor20250124], [nil, Anthropic::Models::Beta::BetaTool]]
         end
       end
     end

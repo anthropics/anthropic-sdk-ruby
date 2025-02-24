@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    type thinking_block_param =
+      { signature: String, thinking: String, type: :thinking }
+
+    class ThinkingBlockParam < Anthropic::BaseModel
+      attr_accessor signature: String
+
+      attr_accessor thinking: String
+
+      attr_accessor type: :thinking
+
+      def initialize:
+        (signature: String, thinking: String, type: :thinking) -> void
+        | (
+          ?Anthropic::Models::thinking_block_param | Anthropic::BaseModel data
+        ) -> void
+
+      def to_hash: -> Anthropic::Models::thinking_block_param
+    end
+  end
+end

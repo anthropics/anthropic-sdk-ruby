@@ -6,7 +6,7 @@ module Anthropic
       class BetaRawContentBlockDeltaEvent < Anthropic::BaseModel
         # @!attribute delta
         #
-        #   @return [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta]
+        #   @return [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta]
         required :delta, union: -> { Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Delta }
 
         # @!attribute index
@@ -20,7 +20,7 @@ module Anthropic
         required :type, const: :content_block_delta
 
         # @!parse
-        #   # @param delta [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta]
+        #   # @param delta [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta]
         #   # @param index [Integer]
         #   # @param type [Symbol, :content_block_delta]
         #   #
@@ -39,6 +39,10 @@ module Anthropic
         #   # Anthropic::Models::Beta::BetaInputJSONDelta ...
         # in {type: "citations_delta", citation: Anthropic::Models::Beta::BetaCitationsDelta::Citation}
         #   # Anthropic::Models::Beta::BetaCitationsDelta ...
+        # in {type: "thinking_delta", thinking: String}
+        #   # Anthropic::Models::Beta::BetaThinkingDelta ...
+        # in {type: "signature_delta", signature: String}
+        #   # Anthropic::Models::Beta::BetaSignatureDelta ...
         # end
         # ```
         #
@@ -51,6 +55,10 @@ module Anthropic
         #   # ...
         # in Anthropic::Models::Beta::BetaCitationsDelta
         #   # ...
+        # in Anthropic::Models::Beta::BetaThinkingDelta
+        #   # ...
+        # in Anthropic::Models::Beta::BetaSignatureDelta
+        #   # ...
         # end
         # ```
         class Delta < Anthropic::Union
@@ -61,6 +69,10 @@ module Anthropic
           variant :input_json_delta, -> { Anthropic::Models::Beta::BetaInputJSONDelta }
 
           variant :citations_delta, -> { Anthropic::Models::Beta::BetaCitationsDelta }
+
+          variant :thinking_delta, -> { Anthropic::Models::Beta::BetaThinkingDelta }
+
+          variant :signature_delta, -> { Anthropic::Models::Beta::BetaSignatureDelta }
         end
       end
     end

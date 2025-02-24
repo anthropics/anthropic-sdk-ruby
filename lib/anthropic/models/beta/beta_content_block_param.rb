@@ -37,6 +37,10 @@ module Anthropic
       #   citations: Anthropic::Models::Beta::BetaCitationsConfigParam
       # }
       #   # Anthropic::Models::Beta::BetaBase64PDFBlock ...
+      # in {type: "thinking", signature: String, thinking: String}
+      #   # Anthropic::Models::Beta::BetaThinkingBlockParam ...
+      # in {type: "redacted_thinking", data: String}
+      #   # Anthropic::Models::Beta::BetaRedactedThinkingBlockParam ...
       # end
       # ```
       #
@@ -53,6 +57,10 @@ module Anthropic
       #   # ...
       # in Anthropic::Models::Beta::BetaBase64PDFBlock
       #   # ...
+      # in Anthropic::Models::Beta::BetaThinkingBlockParam
+      #   # ...
+      # in Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
+      #   # ...
       # end
       # ```
       class BetaContentBlockParam < Anthropic::Union
@@ -67,6 +75,10 @@ module Anthropic
         variant :tool_result, -> { Anthropic::Models::Beta::BetaToolResultBlockParam }
 
         variant :document, -> { Anthropic::Models::Beta::BetaBase64PDFBlock }
+
+        variant :thinking, -> { Anthropic::Models::Beta::BetaThinkingBlockParam }
+
+        variant :redacted_thinking, -> { Anthropic::Models::Beta::BetaRedactedThinkingBlockParam }
       end
     end
 

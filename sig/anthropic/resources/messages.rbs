@@ -16,8 +16,9 @@ module Anthropic
           stop_sequences: ::Array[String],
           system_: Anthropic::Models::MessageCreateParams::system_,
           temperature: Float,
+          thinking: Anthropic::Models::thinking_config_param,
           tool_choice: Anthropic::Models::tool_choice,
-          tools: ::Array[Anthropic::Models::Tool],
+          tools: ::Array[Anthropic::Models::tool_union],
           top_k: Integer,
           top_p: Float,
           request_options: Anthropic::request_opts
@@ -32,8 +33,9 @@ module Anthropic
           messages: ::Array[Anthropic::Models::MessageParam],
           model: Anthropic::Models::model,
           system_: Anthropic::Models::MessageCountTokensParams::system_,
+          thinking: Anthropic::Models::thinking_config_param,
           tool_choice: Anthropic::Models::tool_choice,
-          tools: ::Array[Anthropic::Models::Tool],
+          tools: ::Array[Anthropic::Models::message_count_tokens_tool],
           request_options: Anthropic::request_opts
         ) -> Anthropic::Models::MessageTokensCount
 
