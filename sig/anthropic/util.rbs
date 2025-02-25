@@ -1,5 +1,9 @@
 module Anthropic
   module Util
+    def self?.arch: -> String
+
+    def self?.os: -> String
+
     def self?.primitive?: (top input) -> (bool | top)
 
     def self?.coerce_boolean: (top input) -> (bool | top)

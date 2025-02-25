@@ -32,6 +32,8 @@ module Anthropic
 
     MAX_REDIRECTS = 20
 
+    PLATFORM_HEADERS = T::Hash[String, String]
+
     sig { params(req: Anthropic::BaseClient::RequestComponentsShape).void }
     def self.validate!(req)
     end
