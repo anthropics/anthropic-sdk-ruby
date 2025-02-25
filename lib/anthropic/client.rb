@@ -15,11 +15,9 @@ module Anthropic
     # Default max retry delay in seconds.
     DEFAULT_MAX_RETRY_DELAY = 8.0
 
-    # Client option
     # @return [String, nil]
     attr_reader :api_key
 
-    # Client option
     # @return [String, nil]
     attr_reader :auth_token
 
