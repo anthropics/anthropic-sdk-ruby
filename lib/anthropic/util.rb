@@ -8,6 +8,48 @@ module Anthropic
   module Util
     # @private
     #
+    # @return [String]
+    #
+    def self.arch
+      case (arch = RbConfig::CONFIG["arch"])&.downcase
+      in nil
+        "unknown"
+      in /aarch64|arm64/
+        "arm64"
+      in /x86_64/
+        "x64"
+      in /arm/
+        "arm"
+      else
+        "other:#{arch}"
+      end
+    end
+
+    # @private
+    #
+    # @return [String]
+    #
+    def self.os
+      case (host = RbConfig::CONFIG["host_os"])&.downcase
+      in nil
+        "Unknown"
+      in /linux/
+        "Linux"
+      in /darwin/
+        "MacOS"
+      in /freebsd/
+        "FreeBSD"
+      in /openbsd/
+        "OpenBSD"
+      in /mswin|mingw|cygwin|ucrt/
+        "Windows"
+      else
+        "Other:#{host}"
+      end
+    end
+
+    # @private
+    #
     # @param input [Object]
     #
     # @return [Boolean, Object]
