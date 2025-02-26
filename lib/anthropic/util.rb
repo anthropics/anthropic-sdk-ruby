@@ -454,7 +454,7 @@ module Anthropic
     def self.decode_content(headers, stream:, suppress_error: false)
       case headers["content-type"]
       in %r{^application/json}
-        json = stream.to_a.join("")
+        json = stream.to_a.join
         begin
           JSON.parse(json, symbolize_names: true)
         rescue JSON::ParserError => e
@@ -462,10 +462,10 @@ module Anthropic
           json
         end
       in %r{^text/}
-        stream.to_a.join("")
+        stream.to_a.join
       else
         # TODO: parsing other response types
-        StringIO.new(stream.to_a.join(""))
+        StringIO.new(stream.to_a.join)
       end
     end
 

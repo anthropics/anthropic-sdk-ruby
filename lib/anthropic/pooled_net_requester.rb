@@ -33,50 +33,66 @@ module Anthropic
       # @param conn [Net::HTTP]
       # @param deadline [Float]
       #
-      private def calibrate_socket_timeout(conn, deadline)
+      def calibrate_socket_timeout(conn, deadline)
         timeout = deadline - Anthropic::Util.monotonic_secs
+        (conn.open_timeout = timeout) unless conn.started?
         conn.read_timeout = conn.write_timeout = conn.continue_timeout = timeout
       end
 
       # @private
       #
-      # @param conn [Net::HTTP]
-      # @param req [Net::HTTPGenericRequest]
-      # @param deadline [Float]
-      # @param blk [Proc]
+      # @param request [Hash{Symbol=>Object}] .
       #
-      def transport(conn, req, deadline, &blk)
-        unless conn.started?
-          conn.open_timeout = deadline - Anthropic::Util.monotonic_secs
-          conn.start
+      #   @option request [Symbol] :method
+      #
+      #   @option request [URI::Generic] :url
+      #
+      #   @option request [Hash{String=>String}] :headers
+      #
+      # @return [Net::HTTPGenericRequest]
+      #
+      def build_request(request)
+        method, url, headers, body = request.fetch_values(:method, :url, :headers, :body)
+        req = Net::HTTPGenericRequest.new(
+          method.to_s.upcase,
+          !body.nil?,
+          method != :head,
+          url.to_s
+        )
+
+        headers.each { req[_1] = _2 }
+
+        case body
+        in nil
+        in String
+          req.body = body
+        in StringIO
+          req.body = body.string
+        in IO
+          body.rewind
+          req.body_stream = body
         end
 
-        calibrate_socket_timeout(conn, deadline)
-        conn.request(req) do |rsp|
-          blk.call(rsp)
-          rsp.read_body do |bytes|
-            blk.call(bytes)
-            calibrate_socket_timeout(conn, deadline)
-          end
-        end
+        req
       end
     end
 
     # @private
     #
     # @param url [URI::Generic]
-    # @param streaming [Boolean]
     # @param blk [Proc]
     #
-    private def with_pool(url, streaming:, &blk)
+    private def with_pool(url, &blk)
       origin = Anthropic::Util.uri_origin(url)
       th = Thread.current
       key = :"#{object_id}-#{self.class.name}-connection_in_use_for_#{origin}"
 
-      if th[key] || streaming
-        return Enumerator.new do |y|
+      if th[key]
+        tap do
           conn = self.class.connect(url)
-          blk.call(conn, y)
+          return blk.call(conn)
+        ensure
+          conn.finish if conn&.started?
         end
       end
 
@@ -87,20 +103,11 @@ module Anthropic
           end
         end
 
-      Enumerator.new do |y|
-        pool.with do |conn|
-          th[key] = true
-
-          blk.call(conn, y)
-          # rubocop:disable Lint/RescueException
-        rescue Exception => e
-          # rubocop:enable Lint/RescueException
-          # should close connection on all errors to ensure no invalid state persists
-          conn.finish if conn.started?
-          raise e
-        ensure
-          th[key] = nil
-        end
+      pool.with do |conn|
+        th[key] = true
+        blk.call(conn)
+      ensure
+        th[key] = nil
       end
     end
 
@@ -116,43 +123,43 @@ module Anthropic
     #
     #   @option request [Object] :body
     #
-    #   @option request [Boolean] :streaming
-    #
-    #   @option request [Integer] :max_retries
-    #
     #   @option request [Float] :deadline
     #
     # @return [Array(Net::HTTPResponse, Enumerable)]
     #
     def execute(request)
-      method, url, headers, body, deadline = request.fetch_values(:method, :url, :headers, :body, :deadline)
-      streaming = request.fetch(:streaming)
+      url, deadline = request.fetch_values(:url, :deadline)
+      req = self.class.build_request(request)
 
-      req = Net::HTTPGenericRequest.new(
-        method.to_s.upcase,
-        !body.nil?,
-        method != :head,
-        url.to_s
-      )
+      eof = false
+      enum = Enumerator.new do |y|
+        with_pool(url) do |conn|
+          conn.start unless conn.started?
+          self.class.calibrate_socket_timeout(conn, deadline)
 
-      headers.each { req[_1] = _2 }
-      case body
-      in nil
-      in String
-        req.body = body
-      in IO | StringIO
-        body.rewind
-        req.body_stream = body
+          conn.request(req) do |rsp|
+            y << [conn, rsp]
+            rsp.read_body do |bytes|
+              y << bytes
+              self.class.calibrate_socket_timeout(conn, deadline)
+            end
+            eof = true
+          end
+        end
       end
 
-      enum =
-        with_pool(url, streaming: streaming) do |conn, y|
-          self.class.transport(conn, req, deadline, &y)
-        end
+      # need to protect the `Enumerator` against `#.rewind`
+      fused = false
+      conn, response = enum.next
+      body = Enumerator.new do |y|
+        next if fused
 
-      enum = streaming ? enum.lazy : enum.to_a
-      response = enum.take(1).first
-      [response, (response.body = enum.drop(1))]
+        fused = true
+        loop { y << enum.next }
+      ensure
+        conn.finish if !eof && conn.started?
+      end
+      [response, (response.body = body)]
     end
 
     def initialize

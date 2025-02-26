@@ -19,7 +19,6 @@ module Anthropic
         url: URI::Generic,
         headers: ::Hash[String, String],
         body: top,
-        streaming: bool,
         max_retries: Integer,
         timeout: Float
       }
