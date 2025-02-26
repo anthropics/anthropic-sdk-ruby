@@ -90,14 +90,12 @@ module Anthropic
       def follow_redirect(request, status:, response_headers:)
         method, url, headers = request.fetch_values(:method, :url, :headers)
         location =
-          Anthropic::Util.suppress(ArgumentError) do
+          Kernel.then do
             URI.join(url, response_headers["location"])
+          rescue ArgumentError
+            message = "Server responded with status #{status} but no valid location header."
+            raise Anthropic::APIConnectionError.new(url: url, message: message)
           end
-
-        unless location
-          message = "Server responded with status #{status} but no valid location header."
-          raise Anthropic::APIConnectionError.new(url: url, message: message)
-        end
 
         request = {**request, url: location}
 
@@ -286,8 +284,10 @@ module Anthropic
       retry_header = headers["retry-after"]
       return span if (span = Float(retry_header, exception: false))
 
-      span = retry_header && Anthropic::Util.suppress(ArgumentError) do
-        Time.httpdate(retry_header) - Time.now
+      span = retry_header&.then do
+        Time.httpdate(_1) - Time.now
+      rescue ArgumentError
+        nil
       end
       return span if span
 

@@ -2,6 +2,10 @@
 
 module Anthropic
   module Util
+    sig { returns(Float) }
+    def self.monotonic_secs
+    end
+
     sig { returns(String) }
     def self.arch
     end
@@ -34,22 +38,11 @@ module Anthropic
     def self.coerce_hash(input)
     end
 
-    sig { returns(Float) }
-    def self.monotonic_secs
-    end
-
-    sig do
-      params(
-        exceptions: T::Array[Exception],
-        sentinel: T.nilable(T.anything),
-        blk: T.nilable(T.proc.returns(T.anything))
-      )
-        .returns(T.nilable(T.anything))
-    end
-    def self.suppress(*exceptions, sentinel: nil, &blk)
-    end
-
     OMIT = T.let(T.anything, T.anything)
+
+    sig { params(lhs: T.anything, rhs: T.anything, concat: T::Boolean).returns(T.anything) }
+    private_class_method def self.deep_merge_lr(lhs, rhs, concat: false)
+    end
 
     sig do
       params(values: T::Array[T.anything], sentinel: T.nilable(T.anything), concat: T::Boolean)
@@ -78,6 +71,17 @@ module Anthropic
     def self.interpolate_path(path)
     end
 
+    sig { params(query: T.nilable(String)).returns(T::Hash[String, T::Array[String]]) }
+    def self.decode_query(query)
+    end
+
+    sig do
+      params(query: T.nilable(T::Hash[String, T.nilable(T.any(T::Array[String], String))]))
+        .returns(T.nilable(String))
+    end
+    def self.encode_query(query)
+    end
+
     ParsedUriShape = T.type_alias do
       {
         scheme: T.nilable(String),
@@ -102,22 +106,15 @@ module Anthropic
     def self.join_parsed_uri(lhs, rhs)
     end
 
-    sig { params(query: T.nilable(String)).returns(T::Hash[String, T::Array[String]]) }
-    def self.decode_query(query)
-    end
-
-    sig do
-      params(query: T.nilable(T::Hash[String, T.nilable(T.any(T::Array[String], String))]))
-        .returns(T.nilable(String))
-    end
-    def self.encode_query(query)
-    end
-
     sig do
       params(headers: T::Array[T::Hash[String, T.nilable(T.any(String, Integer))]])
         .returns(T::Hash[String, String])
     end
     def self.normalized_headers(*headers)
+    end
+
+    sig { params(io: StringIO, boundary: String, key: T.any(Symbol, String), val: T.anything).void }
+    private_class_method def self.encode_multipart_formdata(io, boundary:, key:, val:)
     end
 
     sig { params(headers: T::Hash[String, String], body: T.anything).returns(T.anything) }
@@ -133,10 +130,6 @@ module Anthropic
         .returns(T.anything)
     end
     def self.decode_content(headers, stream:, suppress_error: false)
-    end
-
-    sig { params(io: StringIO, boundary: String, key: T.any(Symbol, String), val: T.anything).void }
-    private_class_method def self.encode_multipart_formdata(io, boundary:, key:, val:)
     end
   end
 end
