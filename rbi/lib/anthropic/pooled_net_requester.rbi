@@ -18,9 +18,7 @@ module Anthropic
     def self.build_request(request)
     end
 
-    sig do
-      params(url: URI::Generic, blk: T.proc.params(arg0: Net::HTTP, arg1: Enumerator::Yielder).void).void
-    end
+    sig { params(url: URI::Generic, blk: T.proc.params(arg0: Net::HTTP).void).void }
     private def with_pool(url, &blk)
     end
 
