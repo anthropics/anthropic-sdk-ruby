@@ -175,6 +175,9 @@ Style/MutableConstant:
 Style/NumberedParameters:
   Enabled: false
 
+Style/NumberedParametersLimit:
+  Max: 2
+
 # Reasonable to use brackets for errors with long messages.
 Style/RaiseArgs:
   Enabled: false
