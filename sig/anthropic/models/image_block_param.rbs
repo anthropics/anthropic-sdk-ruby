@@ -2,13 +2,13 @@ module Anthropic
   module Models
     type image_block_param =
       {
-        source: Anthropic::Models::ImageBlockParam::Source,
+        source: Anthropic::Models::ImageBlockParam::source,
         type: :image,
         cache_control: Anthropic::Models::CacheControlEphemeral?
       }
 
     class ImageBlockParam < Anthropic::BaseModel
-      attr_accessor source: Anthropic::Models::ImageBlockParam::Source
+      attr_accessor source: Anthropic::Models::ImageBlockParam::source
 
       attr_accessor type: :image
 
@@ -16,7 +16,7 @@ module Anthropic
 
       def initialize:
         (
-          source: Anthropic::Models::ImageBlockParam::Source,
+          source: Anthropic::Models::ImageBlockParam::source,
           cache_control: Anthropic::Models::CacheControlEphemeral?,
           type: :image
         ) -> void
@@ -27,43 +27,10 @@ module Anthropic
       def to_hash: -> Anthropic::Models::image_block_param
 
       type source =
-        {
-          data: String,
-          media_type: Anthropic::Models::ImageBlockParam::Source::media_type,
-          type: :base64
-        }
+        Anthropic::Models::Base64ImageSource | Anthropic::Models::URLImageSource
 
-      class Source < Anthropic::BaseModel
-        attr_accessor data: String
-
-        attr_accessor media_type: Anthropic::Models::ImageBlockParam::Source::media_type
-
-        attr_accessor type: :base64
-
-        def initialize:
-          (
-            data: String,
-            media_type: Anthropic::Models::ImageBlockParam::Source::media_type,
-            type: :base64
-          ) -> void
-          | (
-            ?Anthropic::Models::ImageBlockParam::source
-            | Anthropic::BaseModel data
-          ) -> void
-
-        def to_hash: -> Anthropic::Models::ImageBlockParam::source
-
-        type media_type =
-          :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
-
-        class MediaType < Anthropic::Enum
-          IMAGE_JPEG: :"image/jpeg"
-          IMAGE_PNG: :"image/png"
-          IMAGE_GIF: :"image/gif"
-          IMAGE_WEBP: :"image/webp"
-
-          def self.values: -> ::Array[Anthropic::Models::ImageBlockParam::Source::media_type]
-        end
+      class Source < Anthropic::Union
+        private def self.variants: -> [[:base64, Anthropic::Models::Base64ImageSource], [:url, Anthropic::Models::URLImageSource]]
       end
     end
   end

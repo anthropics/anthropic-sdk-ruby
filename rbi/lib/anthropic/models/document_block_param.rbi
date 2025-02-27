@@ -8,7 +8,8 @@ module Anthropic
           T.any(
             Anthropic::Models::Base64PDFSource,
             Anthropic::Models::PlainTextSource,
-            Anthropic::Models::ContentBlockSource
+            Anthropic::Models::ContentBlockSource,
+            Anthropic::Models::URLPDFSource
           )
         )
       end
@@ -20,14 +21,16 @@ module Anthropic
           _: T.any(
             Anthropic::Models::Base64PDFSource,
             Anthropic::Models::PlainTextSource,
-            Anthropic::Models::ContentBlockSource
+            Anthropic::Models::ContentBlockSource,
+            Anthropic::Models::URLPDFSource
           )
         )
           .returns(
             T.any(
               Anthropic::Models::Base64PDFSource,
               Anthropic::Models::PlainTextSource,
-              Anthropic::Models::ContentBlockSource
+              Anthropic::Models::ContentBlockSource,
+              Anthropic::Models::URLPDFSource
             )
           )
       end
@@ -82,7 +85,8 @@ module Anthropic
           source: T.any(
             Anthropic::Models::Base64PDFSource,
             Anthropic::Models::PlainTextSource,
-            Anthropic::Models::ContentBlockSource
+            Anthropic::Models::ContentBlockSource,
+            Anthropic::Models::URLPDFSource
           ),
           cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
           citations: Anthropic::Models::CitationsConfigParam,
@@ -102,7 +106,8 @@ module Anthropic
               source: T.any(
                 Anthropic::Models::Base64PDFSource,
                 Anthropic::Models::PlainTextSource,
-                Anthropic::Models::ContentBlockSource
+                Anthropic::Models::ContentBlockSource,
+                Anthropic::Models::URLPDFSource
               ),
               type: Symbol,
               cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
@@ -121,7 +126,7 @@ module Anthropic
         sig do
           override
             .returns(
-              [[Symbol, Anthropic::Models::Base64PDFSource], [Symbol, Anthropic::Models::PlainTextSource], [Symbol, Anthropic::Models::ContentBlockSource]]
+              [[Symbol, Anthropic::Models::Base64PDFSource], [Symbol, Anthropic::Models::PlainTextSource], [Symbol, Anthropic::Models::ContentBlockSource], [Symbol, Anthropic::Models::URLPDFSource]]
             )
         end
         private_class_method def self.variants

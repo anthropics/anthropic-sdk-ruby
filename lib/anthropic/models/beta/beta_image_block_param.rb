@@ -6,8 +6,8 @@ module Anthropic
       class BetaImageBlockParam < Anthropic::BaseModel
         # @!attribute source
         #
-        #   @return [Anthropic::Models::Beta::BetaImageBlockParam::Source]
-        required :source, -> { Anthropic::Models::Beta::BetaImageBlockParam::Source }
+        #   @return [Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource]
+        required :source, union: -> { Anthropic::Models::Beta::BetaImageBlockParam::Source }
 
         # @!attribute type
         #
@@ -20,7 +20,7 @@ module Anthropic
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!parse
-        #   # @param source [Anthropic::Models::Beta::BetaImageBlockParam::Source]
+        #   # @param source [Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource]
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   # @param type [Symbol, :image]
         #   #
@@ -28,59 +28,33 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-        class Source < Anthropic::BaseModel
-          # @!attribute data
-          #
-          #   @return [String]
-          required :data, String
+        # @abstract
+        #
+        # @example
+        # ```ruby
+        # case source
+        # in {type: "base64", data: String, media_type: Anthropic::Models::Beta::BetaBase64ImageSource::MediaType}
+        #   # Anthropic::Models::Beta::BetaBase64ImageSource ...
+        # in {type: "url", url: String}
+        #   # Anthropic::Models::Beta::BetaURLImageSource ...
+        # end
+        # ```
+        #
+        # @example
+        # ```ruby
+        # case source
+        # in Anthropic::Models::Beta::BetaBase64ImageSource
+        #   # ...
+        # in Anthropic::Models::Beta::BetaURLImageSource
+        #   # ...
+        # end
+        # ```
+        class Source < Anthropic::Union
+          discriminator :type
 
-          # @!attribute media_type
-          #
-          #   @return [Symbol, Anthropic::Models::Beta::BetaImageBlockParam::Source::MediaType]
-          required :media_type, enum: -> { Anthropic::Models::Beta::BetaImageBlockParam::Source::MediaType }
+          variant :base64, -> { Anthropic::Models::Beta::BetaBase64ImageSource }
 
-          # @!attribute type
-          #
-          #   @return [Symbol, :base64]
-          required :type, const: :base64
-
-          # @!parse
-          #   # @param data [String]
-          #   # @param media_type [Symbol, Anthropic::Models::Beta::BetaImageBlockParam::Source::MediaType]
-          #   # @param type [Symbol, :base64]
-          #   #
-          #   def initialize(data:, media_type:, type: :base64, **) = super
-
-          # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-          # @abstract
-          #
-          # @example
-          # ```ruby
-          # case media_type
-          # in :"image/jpeg"
-          #   # ...
-          # in :"image/png"
-          #   # ...
-          # in :"image/gif"
-          #   # ...
-          # in :"image/webp"
-          #   # ...
-          # end
-          # ```
-          class MediaType < Anthropic::Enum
-            IMAGE_JPEG = :"image/jpeg"
-            IMAGE_PNG = :"image/png"
-            IMAGE_GIF = :"image/gif"
-            IMAGE_WEBP = :"image/webp"
-
-            finalize!
-
-            # @!parse
-            #   # @return [Array<Symbol>]
-            #   #
-            #   def self.values; end
-          end
+          variant :url, -> { Anthropic::Models::Beta::BetaURLImageSource }
         end
       end
     end

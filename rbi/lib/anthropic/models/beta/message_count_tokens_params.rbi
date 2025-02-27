@@ -105,13 +105,13 @@ module Anthropic
             T.nilable(
               T::Array[
               T.any(
+                Anthropic::Models::Beta::BetaTool,
                 Anthropic::Models::Beta::BetaToolComputerUse20241022,
                 Anthropic::Models::Beta::BetaToolBash20241022,
                 Anthropic::Models::Beta::BetaToolTextEditor20241022,
                 Anthropic::Models::Beta::BetaToolComputerUse20250124,
                 Anthropic::Models::Beta::BetaToolBash20250124,
-                Anthropic::Models::Beta::BetaToolTextEditor20250124,
-                Anthropic::Models::Beta::BetaTool
+                Anthropic::Models::Beta::BetaToolTextEditor20250124
               )
               ]
             )
@@ -124,26 +124,26 @@ module Anthropic
           params(
             _: T::Array[
             T.any(
+              Anthropic::Models::Beta::BetaTool,
               Anthropic::Models::Beta::BetaToolComputerUse20241022,
               Anthropic::Models::Beta::BetaToolBash20241022,
               Anthropic::Models::Beta::BetaToolTextEditor20241022,
               Anthropic::Models::Beta::BetaToolComputerUse20250124,
               Anthropic::Models::Beta::BetaToolBash20250124,
-              Anthropic::Models::Beta::BetaToolTextEditor20250124,
-              Anthropic::Models::Beta::BetaTool
+              Anthropic::Models::Beta::BetaToolTextEditor20250124
             )
             ]
           )
             .returns(
               T::Array[
               T.any(
+                Anthropic::Models::Beta::BetaTool,
                 Anthropic::Models::Beta::BetaToolComputerUse20241022,
                 Anthropic::Models::Beta::BetaToolBash20241022,
                 Anthropic::Models::Beta::BetaToolTextEditor20241022,
                 Anthropic::Models::Beta::BetaToolComputerUse20250124,
                 Anthropic::Models::Beta::BetaToolBash20250124,
-                Anthropic::Models::Beta::BetaToolTextEditor20250124,
-                Anthropic::Models::Beta::BetaTool
+                Anthropic::Models::Beta::BetaToolTextEditor20250124
               )
               ]
             )
@@ -175,13 +175,13 @@ module Anthropic
             ),
             tools: T::Array[
             T.any(
+              Anthropic::Models::Beta::BetaTool,
               Anthropic::Models::Beta::BetaToolComputerUse20241022,
               Anthropic::Models::Beta::BetaToolBash20241022,
               Anthropic::Models::Beta::BetaToolTextEditor20241022,
               Anthropic::Models::Beta::BetaToolComputerUse20250124,
               Anthropic::Models::Beta::BetaToolBash20250124,
-              Anthropic::Models::Beta::BetaToolTextEditor20250124,
-              Anthropic::Models::Beta::BetaTool
+              Anthropic::Models::Beta::BetaToolTextEditor20250124
             )
             ],
             betas: T::Array[T.any(String, Symbol)],
@@ -219,13 +219,13 @@ module Anthropic
                 ),
                 tools: T::Array[
                 T.any(
+                  Anthropic::Models::Beta::BetaTool,
                   Anthropic::Models::Beta::BetaToolComputerUse20241022,
                   Anthropic::Models::Beta::BetaToolBash20241022,
                   Anthropic::Models::Beta::BetaToolTextEditor20241022,
                   Anthropic::Models::Beta::BetaToolComputerUse20250124,
                   Anthropic::Models::Beta::BetaToolBash20250124,
-                  Anthropic::Models::Beta::BetaToolTextEditor20250124,
-                  Anthropic::Models::Beta::BetaTool
+                  Anthropic::Models::Beta::BetaToolTextEditor20250124
                 )
                 ],
                 betas: T::Array[T.any(String, Symbol)],
@@ -252,7 +252,7 @@ module Anthropic
           sig do
             override
               .returns(
-                [[NilClass, Anthropic::Models::Beta::BetaToolComputerUse20241022], [NilClass, Anthropic::Models::Beta::BetaToolBash20241022], [NilClass, Anthropic::Models::Beta::BetaToolTextEditor20241022], [NilClass, Anthropic::Models::Beta::BetaToolComputerUse20250124], [NilClass, Anthropic::Models::Beta::BetaToolBash20250124], [NilClass, Anthropic::Models::Beta::BetaToolTextEditor20250124], [NilClass, Anthropic::Models::Beta::BetaTool]]
+                [[NilClass, Anthropic::Models::Beta::BetaTool], [NilClass, Anthropic::Models::Beta::BetaToolComputerUse20241022], [NilClass, Anthropic::Models::Beta::BetaToolBash20241022], [NilClass, Anthropic::Models::Beta::BetaToolTextEditor20241022], [NilClass, Anthropic::Models::Beta::BetaToolComputerUse20250124], [NilClass, Anthropic::Models::Beta::BetaToolBash20250124], [NilClass, Anthropic::Models::Beta::BetaToolTextEditor20250124]]
               )
           end
           private_class_method def self.variants

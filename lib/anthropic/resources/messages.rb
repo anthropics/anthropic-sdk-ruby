@@ -160,7 +160,7 @@ module Anthropic
       #   @option params [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool] :tool_choice How the model should use the provided tools. The model can use a specific tool,
       #     any available tool, or decide by itself.
       #
-      #   @option params [Array<Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::Tool>] :tools Definitions of tools that the model may use.
+      #   @option params [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>] :tools Definitions of tools that the model may use.
       #
       #     If you include `tools` in your API request, the model may return `tool_use`
       #     content blocks that represent the model's use of those tools. You can then run
@@ -383,7 +383,7 @@ module Anthropic
       #   @option params [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool] :tool_choice How the model should use the provided tools. The model can use a specific tool,
       #     any available tool, or decide by itself.
       #
-      #   @option params [Array<Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::Tool>] :tools Definitions of tools that the model may use.
+      #   @option params [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>] :tools Definitions of tools that the model may use.
       #
       #     If you include `tools` in your API request, the model may return `tool_use`
       #     content blocks that represent the model's use of those tools. You can then run

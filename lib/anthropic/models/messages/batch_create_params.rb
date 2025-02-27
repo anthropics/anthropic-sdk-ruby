@@ -336,11 +336,11 @@ module Anthropic
             #
             #     See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
             #
-            #   @return [Array<Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::Tool>, nil]
+            #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>, nil]
             optional :tools, -> { Anthropic::ArrayOf[union: Anthropic::Models::ToolUnion] }
 
             # @!parse
-            #   # @return [Array<Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::Tool>]
+            #   # @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>]
             #   attr_writer :tools
 
             # @!attribute [r] top_k
@@ -393,7 +393,7 @@ module Anthropic
             #   # @param temperature [Float]
             #   # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]
             #   # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool]
-            #   # @param tools [Array<Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::Tool>]
+            #   # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>]
             #   # @param top_k [Integer]
             #   # @param top_p [Float]
             #   #

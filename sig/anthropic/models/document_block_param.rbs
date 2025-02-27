@@ -46,9 +46,10 @@ module Anthropic
         Anthropic::Models::Base64PDFSource
         | Anthropic::Models::PlainTextSource
         | Anthropic::Models::ContentBlockSource
+        | Anthropic::Models::URLPDFSource
 
       class Source < Anthropic::Union
-        private def self.variants: -> [[:base64, Anthropic::Models::Base64PDFSource], [:text, Anthropic::Models::PlainTextSource], [:content, Anthropic::Models::ContentBlockSource]]
+        private def self.variants: -> [[:base64, Anthropic::Models::Base64PDFSource], [:text, Anthropic::Models::PlainTextSource], [:content, Anthropic::Models::ContentBlockSource], [:url, Anthropic::Models::URLPDFSource]]
       end
     end
   end

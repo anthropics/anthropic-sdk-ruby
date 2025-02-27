@@ -6,7 +6,7 @@ module Anthropic
       class BetaBase64PDFBlock < Anthropic::BaseModel
         # @!attribute source
         #
-        #   @return [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource]
+        #   @return [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource]
         required :source, union: -> { Anthropic::Models::Beta::BetaBase64PDFBlock::Source }
 
         # @!attribute type
@@ -39,7 +39,7 @@ module Anthropic
         optional :title, String, nil?: true
 
         # @!parse
-        #   # @param source [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource]
+        #   # @param source [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource]
         #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         #   # @param citations [Anthropic::Models::Beta::BetaCitationsConfigParam]
         #   # @param context [String, nil]
@@ -61,6 +61,8 @@ module Anthropic
         #   # Anthropic::Models::Beta::BetaPlainTextSource ...
         # in {type: "content", content: Anthropic::Models::Beta::BetaContentBlockSource::Content}
         #   # Anthropic::Models::Beta::BetaContentBlockSource ...
+        # in {type: "url", url: String}
+        #   # Anthropic::Models::Beta::BetaURLPDFSource ...
         # end
         # ```
         #
@@ -73,6 +75,8 @@ module Anthropic
         #   # ...
         # in Anthropic::Models::Beta::BetaContentBlockSource
         #   # ...
+        # in Anthropic::Models::Beta::BetaURLPDFSource
+        #   # ...
         # end
         # ```
         class Source < Anthropic::Union
@@ -83,6 +87,8 @@ module Anthropic
           variant :text, -> { Anthropic::Models::Beta::BetaPlainTextSource }
 
           variant :content, -> { Anthropic::Models::Beta::BetaContentBlockSource }
+
+          variant :url, -> { Anthropic::Models::Beta::BetaURLPDFSource }
         end
       end
     end

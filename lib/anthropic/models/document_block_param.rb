@@ -5,7 +5,7 @@ module Anthropic
     class DocumentBlockParam < Anthropic::BaseModel
       # @!attribute source
       #
-      #   @return [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource]
+      #   @return [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
       required :source, union: -> { Anthropic::Models::DocumentBlockParam::Source }
 
       # @!attribute type
@@ -38,7 +38,7 @@ module Anthropic
       optional :title, String, nil?: true
 
       # @!parse
-      #   # @param source [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource]
+      #   # @param source [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
       #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
       #   # @param citations [Anthropic::Models::CitationsConfigParam]
       #   # @param context [String, nil]
@@ -60,6 +60,8 @@ module Anthropic
       #   # Anthropic::Models::PlainTextSource ...
       # in {type: "content", content: Anthropic::Models::ContentBlockSource::Content}
       #   # Anthropic::Models::ContentBlockSource ...
+      # in {type: "url", url: String}
+      #   # Anthropic::Models::URLPDFSource ...
       # end
       # ```
       #
@@ -72,6 +74,8 @@ module Anthropic
       #   # ...
       # in Anthropic::Models::ContentBlockSource
       #   # ...
+      # in Anthropic::Models::URLPDFSource
+      #   # ...
       # end
       # ```
       class Source < Anthropic::Union
@@ -82,6 +86,8 @@ module Anthropic
         variant :text, -> { Anthropic::Models::PlainTextSource }
 
         variant :content, -> { Anthropic::Models::ContentBlockSource }
+
+        variant :url, -> { Anthropic::Models::URLPDFSource }
       end
     end
   end

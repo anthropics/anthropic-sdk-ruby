@@ -220,11 +220,11 @@ module Anthropic
       #
       #     See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
       #
-      #   @return [Array<Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::Tool>, nil]
+      #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>, nil]
       optional :tools, -> { Anthropic::ArrayOf[union: Anthropic::Models::MessageCountTokensTool] }
 
       # @!parse
-      #   # @return [Array<Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::Tool>]
+      #   # @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>]
       #   attr_writer :tools
 
       # @!parse
@@ -233,7 +233,7 @@ module Anthropic
       #   # @param system_ [String, Array<Anthropic::Models::TextBlockParam>]
       #   # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]
       #   # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool]
-      #   # @param tools [Array<Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::Tool>]
+      #   # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>]
       #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
       #   #
       #   def initialize(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {}, **) = super

@@ -86,9 +86,9 @@ module Anthropic
           T.nilable(
             T::Array[
             T.any(
+              Anthropic::Models::Tool,
               Anthropic::Models::ToolBash20250124,
-              Anthropic::Models::ToolTextEditor20250124,
-              Anthropic::Models::Tool
+              Anthropic::Models::ToolTextEditor20250124
             )
             ]
           )
@@ -101,18 +101,18 @@ module Anthropic
         params(
           _: T::Array[
           T.any(
+            Anthropic::Models::Tool,
             Anthropic::Models::ToolBash20250124,
-            Anthropic::Models::ToolTextEditor20250124,
-            Anthropic::Models::Tool
+            Anthropic::Models::ToolTextEditor20250124
           )
           ]
         )
           .returns(
             T::Array[
             T.any(
+              Anthropic::Models::Tool,
               Anthropic::Models::ToolBash20250124,
-              Anthropic::Models::ToolTextEditor20250124,
-              Anthropic::Models::Tool
+              Anthropic::Models::ToolTextEditor20250124
             )
             ]
           )
@@ -133,9 +133,9 @@ module Anthropic
           ),
           tools: T::Array[
           T.any(
+            Anthropic::Models::Tool,
             Anthropic::Models::ToolBash20250124,
-            Anthropic::Models::ToolTextEditor20250124,
-            Anthropic::Models::Tool
+            Anthropic::Models::ToolTextEditor20250124
           )
           ],
           request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
@@ -168,9 +168,9 @@ module Anthropic
               ),
               tools: T::Array[
               T.any(
+                Anthropic::Models::Tool,
                 Anthropic::Models::ToolBash20250124,
-                Anthropic::Models::ToolTextEditor20250124,
-                Anthropic::Models::Tool
+                Anthropic::Models::ToolTextEditor20250124
               )
               ],
               request_options: Anthropic::RequestOptions
