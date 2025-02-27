@@ -2,6 +2,7 @@
 
 module Anthropic
   module Bedrock
+
     class Client < Anthropic::Client
 
       DEFAULT_VERSION = "bedrock-2023-05-31"

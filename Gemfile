@@ -6,6 +6,7 @@ gemspec
 
 group :development do
   gem "aws-sdk-bedrockruntime"
+  gem "googleauth"
   gem "minitest"
   gem "minitest-focus"
   gem "minitest-hooks"
