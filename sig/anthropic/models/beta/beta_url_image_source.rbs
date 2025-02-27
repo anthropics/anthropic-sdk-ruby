@@ -1,0 +1,25 @@
+module Anthropic
+  module Models
+    
+    class BetaURLImageSource = Beta::BetaURLImageSource
+
+    module Beta
+      type beta_url_image_source = { type: :url, url: String }
+
+      class BetaURLImageSource < Anthropic::BaseModel
+        attr_accessor type: :url
+
+        attr_accessor url: String
+
+        def initialize:
+          (url: String, type: :url) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_url_image_source
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_hash: -> Anthropic::Models::Beta::beta_url_image_source
+      end
+    end
+  end
+end

@@ -223,11 +223,11 @@ module Anthropic
         #
         #     See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaTool>, nil]
+        #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>, nil]
         optional :tools, -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::MessageCountTokensParams::Tool] }
 
         # @!parse
-        #   # @return [Array<Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaTool>]
+        #   # @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>]
         #   attr_writer :tools
 
         # @!attribute [r] betas
@@ -248,7 +248,7 @@ module Anthropic
         #   # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
         #   # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
         #   # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool]
-        #   # @param tools [Array<Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaTool>]
+        #   # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>]
         #   # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>]
         #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
         #   #
@@ -298,6 +298,8 @@ module Anthropic
         # @example
         # ```ruby
         # case tool
+        # in Anthropic::Models::Beta::BetaTool
+        #   # ...
         # in Anthropic::Models::Beta::BetaToolComputerUse20241022
         #   # ...
         # in Anthropic::Models::Beta::BetaToolBash20241022
@@ -310,11 +312,11 @@ module Anthropic
         #   # ...
         # in Anthropic::Models::Beta::BetaToolTextEditor20250124
         #   # ...
-        # in Anthropic::Models::Beta::BetaTool
-        #   # ...
         # end
         # ```
         class Tool < Anthropic::Union
+          variant -> { Anthropic::Models::Beta::BetaTool }
+
           variant -> { Anthropic::Models::Beta::BetaToolComputerUse20241022 }
 
           variant -> { Anthropic::Models::Beta::BetaToolBash20241022 }
@@ -326,8 +328,6 @@ module Anthropic
           variant -> { Anthropic::Models::Beta::BetaToolBash20250124 }
 
           variant -> { Anthropic::Models::Beta::BetaToolTextEditor20250124 }
-
-          variant -> { Anthropic::Models::Beta::BetaTool }
         end
       end
     end

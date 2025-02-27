@@ -192,9 +192,9 @@ module Anthropic
                 T.nilable(
                   T::Array[
                   T.any(
+                    Anthropic::Models::Tool,
                     Anthropic::Models::ToolBash20250124,
-                    Anthropic::Models::ToolTextEditor20250124,
-                    Anthropic::Models::Tool
+                    Anthropic::Models::ToolTextEditor20250124
                   )
                   ]
                 )
@@ -207,18 +207,18 @@ module Anthropic
               params(
                 _: T::Array[
                 T.any(
+                  Anthropic::Models::Tool,
                   Anthropic::Models::ToolBash20250124,
-                  Anthropic::Models::ToolTextEditor20250124,
-                  Anthropic::Models::Tool
+                  Anthropic::Models::ToolTextEditor20250124
                 )
                 ]
               )
                 .returns(
                   T::Array[
                   T.any(
+                    Anthropic::Models::Tool,
                     Anthropic::Models::ToolBash20250124,
-                    Anthropic::Models::ToolTextEditor20250124,
-                    Anthropic::Models::Tool
+                    Anthropic::Models::ToolTextEditor20250124
                   )
                   ]
                 )
@@ -260,9 +260,9 @@ module Anthropic
                 ),
                 tools: T::Array[
                 T.any(
+                  Anthropic::Models::Tool,
                   Anthropic::Models::ToolBash20250124,
-                  Anthropic::Models::ToolTextEditor20250124,
-                  Anthropic::Models::Tool
+                  Anthropic::Models::ToolTextEditor20250124
                 )
                 ],
                 top_k: Integer,
@@ -307,9 +307,9 @@ module Anthropic
                     ),
                     tools: T::Array[
                     T.any(
+                      Anthropic::Models::Tool,
                       Anthropic::Models::ToolBash20250124,
-                      Anthropic::Models::ToolTextEditor20250124,
-                      Anthropic::Models::Tool
+                      Anthropic::Models::ToolTextEditor20250124
                     )
                     ],
                     top_k: Integer,

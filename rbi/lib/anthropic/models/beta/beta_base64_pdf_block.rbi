@@ -11,7 +11,8 @@ module Anthropic
             T.any(
               Anthropic::Models::Beta::BetaBase64PDFSource,
               Anthropic::Models::Beta::BetaPlainTextSource,
-              Anthropic::Models::Beta::BetaContentBlockSource
+              Anthropic::Models::Beta::BetaContentBlockSource,
+              Anthropic::Models::Beta::BetaURLPDFSource
             )
           )
         end
@@ -23,14 +24,16 @@ module Anthropic
             _: T.any(
               Anthropic::Models::Beta::BetaBase64PDFSource,
               Anthropic::Models::Beta::BetaPlainTextSource,
-              Anthropic::Models::Beta::BetaContentBlockSource
+              Anthropic::Models::Beta::BetaContentBlockSource,
+              Anthropic::Models::Beta::BetaURLPDFSource
             )
           )
             .returns(
               T.any(
                 Anthropic::Models::Beta::BetaBase64PDFSource,
                 Anthropic::Models::Beta::BetaPlainTextSource,
-                Anthropic::Models::Beta::BetaContentBlockSource
+                Anthropic::Models::Beta::BetaContentBlockSource,
+                Anthropic::Models::Beta::BetaURLPDFSource
               )
             )
         end
@@ -88,7 +91,8 @@ module Anthropic
             source: T.any(
               Anthropic::Models::Beta::BetaBase64PDFSource,
               Anthropic::Models::Beta::BetaPlainTextSource,
-              Anthropic::Models::Beta::BetaContentBlockSource
+              Anthropic::Models::Beta::BetaContentBlockSource,
+              Anthropic::Models::Beta::BetaURLPDFSource
             ),
             cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
             citations: Anthropic::Models::Beta::BetaCitationsConfigParam,
@@ -108,7 +112,8 @@ module Anthropic
                 source: T.any(
                   Anthropic::Models::Beta::BetaBase64PDFSource,
                   Anthropic::Models::Beta::BetaPlainTextSource,
-                  Anthropic::Models::Beta::BetaContentBlockSource
+                  Anthropic::Models::Beta::BetaContentBlockSource,
+                  Anthropic::Models::Beta::BetaURLPDFSource
                 ),
                 type: Symbol,
                 cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
@@ -127,7 +132,7 @@ module Anthropic
           sig do
             override
               .returns(
-                [[Symbol, Anthropic::Models::Beta::BetaBase64PDFSource], [Symbol, Anthropic::Models::Beta::BetaPlainTextSource], [Symbol, Anthropic::Models::Beta::BetaContentBlockSource]]
+                [[Symbol, Anthropic::Models::Beta::BetaBase64PDFSource], [Symbol, Anthropic::Models::Beta::BetaPlainTextSource], [Symbol, Anthropic::Models::Beta::BetaContentBlockSource], [Symbol, Anthropic::Models::Beta::BetaURLPDFSource]]
               )
           end
           private_class_method def self.variants

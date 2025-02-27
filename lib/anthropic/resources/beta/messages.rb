@@ -162,7 +162,7 @@ module Anthropic
         #   @option params [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool] :tool_choice Body param: How the model should use the provided tools. The model can use a
         #     specific tool, any available tool, or decide by itself.
         #
-        #   @option params [Array<Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaTool>] :tools Body param: Definitions of tools that the model may use.
+        #   @option params [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>] :tools Body param: Definitions of tools that the model may use.
         #
         #     If you include `tools` in your API request, the model may return `tool_use`
         #     content blocks that represent the model's use of those tools. You can then run
@@ -387,7 +387,7 @@ module Anthropic
         #   @option params [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool] :tool_choice Body param: How the model should use the provided tools. The model can use a
         #     specific tool, any available tool, or decide by itself.
         #
-        #   @option params [Array<Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaTool>] :tools Body param: Definitions of tools that the model may use.
+        #   @option params [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>] :tools Body param: Definitions of tools that the model may use.
         #
         #     If you include `tools` in your API request, the model may return `tool_use`
         #     content blocks that represent the model's use of those tools. You can then run

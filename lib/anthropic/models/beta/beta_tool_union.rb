@@ -8,6 +8,8 @@ module Anthropic
       # @example
       # ```ruby
       # case beta_tool_union
+      # in Anthropic::Models::Beta::BetaTool
+      #   # ...
       # in Anthropic::Models::Beta::BetaToolComputerUse20241022
       #   # ...
       # in Anthropic::Models::Beta::BetaToolBash20241022
@@ -20,11 +22,11 @@ module Anthropic
       #   # ...
       # in Anthropic::Models::Beta::BetaToolTextEditor20250124
       #   # ...
-      # in Anthropic::Models::Beta::BetaTool
-      #   # ...
       # end
       # ```
       class BetaToolUnion < Anthropic::Union
+        variant -> { Anthropic::Models::Beta::BetaTool }
+
         variant -> { Anthropic::Models::Beta::BetaToolComputerUse20241022 }
 
         variant -> { Anthropic::Models::Beta::BetaToolBash20241022 }
@@ -36,8 +38,6 @@ module Anthropic
         variant -> { Anthropic::Models::Beta::BetaToolBash20250124 }
 
         variant -> { Anthropic::Models::Beta::BetaToolTextEditor20250124 }
-
-        variant -> { Anthropic::Models::Beta::BetaTool }
       end
     end
 

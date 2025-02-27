@@ -226,13 +226,13 @@ module Anthropic
                   T.nilable(
                     T::Array[
                     T.any(
+                      Anthropic::Models::Beta::BetaTool,
                       Anthropic::Models::Beta::BetaToolComputerUse20241022,
                       Anthropic::Models::Beta::BetaToolBash20241022,
                       Anthropic::Models::Beta::BetaToolTextEditor20241022,
                       Anthropic::Models::Beta::BetaToolComputerUse20250124,
                       Anthropic::Models::Beta::BetaToolBash20250124,
-                      Anthropic::Models::Beta::BetaToolTextEditor20250124,
-                      Anthropic::Models::Beta::BetaTool
+                      Anthropic::Models::Beta::BetaToolTextEditor20250124
                     )
                     ]
                   )
@@ -245,26 +245,26 @@ module Anthropic
                 params(
                   _: T::Array[
                   T.any(
+                    Anthropic::Models::Beta::BetaTool,
                     Anthropic::Models::Beta::BetaToolComputerUse20241022,
                     Anthropic::Models::Beta::BetaToolBash20241022,
                     Anthropic::Models::Beta::BetaToolTextEditor20241022,
                     Anthropic::Models::Beta::BetaToolComputerUse20250124,
                     Anthropic::Models::Beta::BetaToolBash20250124,
-                    Anthropic::Models::Beta::BetaToolTextEditor20250124,
-                    Anthropic::Models::Beta::BetaTool
+                    Anthropic::Models::Beta::BetaToolTextEditor20250124
                   )
                   ]
                 )
                   .returns(
                     T::Array[
                     T.any(
+                      Anthropic::Models::Beta::BetaTool,
                       Anthropic::Models::Beta::BetaToolComputerUse20241022,
                       Anthropic::Models::Beta::BetaToolBash20241022,
                       Anthropic::Models::Beta::BetaToolTextEditor20241022,
                       Anthropic::Models::Beta::BetaToolComputerUse20250124,
                       Anthropic::Models::Beta::BetaToolBash20250124,
-                      Anthropic::Models::Beta::BetaToolTextEditor20250124,
-                      Anthropic::Models::Beta::BetaTool
+                      Anthropic::Models::Beta::BetaToolTextEditor20250124
                     )
                     ]
                   )
@@ -309,13 +309,13 @@ module Anthropic
                   ),
                   tools: T::Array[
                   T.any(
+                    Anthropic::Models::Beta::BetaTool,
                     Anthropic::Models::Beta::BetaToolComputerUse20241022,
                     Anthropic::Models::Beta::BetaToolBash20241022,
                     Anthropic::Models::Beta::BetaToolTextEditor20241022,
                     Anthropic::Models::Beta::BetaToolComputerUse20250124,
                     Anthropic::Models::Beta::BetaToolBash20250124,
-                    Anthropic::Models::Beta::BetaToolTextEditor20250124,
-                    Anthropic::Models::Beta::BetaTool
+                    Anthropic::Models::Beta::BetaToolTextEditor20250124
                   )
                   ],
                   top_k: Integer,
@@ -363,13 +363,13 @@ module Anthropic
                       ),
                       tools: T::Array[
                       T.any(
+                        Anthropic::Models::Beta::BetaTool,
                         Anthropic::Models::Beta::BetaToolComputerUse20241022,
                         Anthropic::Models::Beta::BetaToolBash20241022,
                         Anthropic::Models::Beta::BetaToolTextEditor20241022,
                         Anthropic::Models::Beta::BetaToolComputerUse20250124,
                         Anthropic::Models::Beta::BetaToolBash20250124,
-                        Anthropic::Models::Beta::BetaToolTextEditor20250124,
-                        Anthropic::Models::Beta::BetaTool
+                        Anthropic::Models::Beta::BetaToolTextEditor20250124
                       )
                       ],
                       top_k: Integer,

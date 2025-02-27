@@ -25,9 +25,9 @@ module Anthropic
           ),
           tools: T::Array[
           T.any(
+            Anthropic::Models::Tool,
             Anthropic::Models::ToolBash20250124,
-            Anthropic::Models::ToolTextEditor20250124,
-            Anthropic::Models::Tool
+            Anthropic::Models::ToolTextEditor20250124
           )
           ],
           top_k: Integer,
@@ -67,9 +67,9 @@ module Anthropic
           ),
           tools: T::Array[
           T.any(
+            Anthropic::Models::Tool,
             Anthropic::Models::ToolBash20250124,
-            Anthropic::Models::ToolTextEditor20250124,
-            Anthropic::Models::Tool
+            Anthropic::Models::ToolTextEditor20250124
           )
           ],
           request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))

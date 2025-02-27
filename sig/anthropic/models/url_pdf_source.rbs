@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    type urlpdf_source = { type: :url, url: String }
+
+    class URLPDFSource < Anthropic::BaseModel
+      attr_accessor type: :url
+
+      attr_accessor url: String
+
+      def initialize:
+        (url: String, type: :url) -> void
+        | (
+          ?Anthropic::Models::urlpdf_source | Anthropic::BaseModel data
+        ) -> void
+
+      def to_hash: -> Anthropic::Models::urlpdf_source
+    end
+  end
+end

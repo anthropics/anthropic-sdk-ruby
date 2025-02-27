@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    
+    class BetaBase64ImageSource = Beta::BetaBase64ImageSource
+
+    module Beta
+      type beta_base64_image_source =
+        {
+          data: String,
+          media_type: Anthropic::Models::Beta::BetaBase64ImageSource::media_type,
+          type: :base64
+        }
+
+      class BetaBase64ImageSource < Anthropic::BaseModel
+        attr_accessor data: String
+
+        attr_accessor media_type: Anthropic::Models::Beta::BetaBase64ImageSource::media_type
+
+        attr_accessor type: :base64
+
+        def initialize:
+          (
+            data: String,
+            media_type: Anthropic::Models::Beta::BetaBase64ImageSource::media_type,
+            type: :base64
+          ) -> void
+          | (
+            ?Anthropic::Models::Beta::beta_base64_image_source
+            | Anthropic::BaseModel data
+          ) -> void
+
+        def to_hash: -> Anthropic::Models::Beta::beta_base64_image_source
+
+        type media_type =
+          :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
+
+        class MediaType < Anthropic::Enum
+          IMAGE_JPEG: :"image/jpeg"
+          IMAGE_PNG: :"image/png"
+          IMAGE_GIF: :"image/gif"
+          IMAGE_WEBP: :"image/webp"
+
+          def self.values: -> ::Array[Anthropic::Models::Beta::BetaBase64ImageSource::media_type]
+        end
+      end
+    end
+  end
+end

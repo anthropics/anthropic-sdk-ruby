@@ -5,8 +5,8 @@ module Anthropic
     class ImageBlockParam < Anthropic::BaseModel
       # @!attribute source
       #
-      #   @return [Anthropic::Models::ImageBlockParam::Source]
-      required :source, -> { Anthropic::Models::ImageBlockParam::Source }
+      #   @return [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]
+      required :source, union: -> { Anthropic::Models::ImageBlockParam::Source }
 
       # @!attribute type
       #
@@ -19,7 +19,7 @@ module Anthropic
       optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
 
       # @!parse
-      #   # @param source [Anthropic::Models::ImageBlockParam::Source]
+      #   # @param source [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]
       #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
       #   # @param type [Symbol, :image]
       #   #
@@ -27,59 +27,33 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-      class Source < Anthropic::BaseModel
-        # @!attribute data
-        #
-        #   @return [String]
-        required :data, String
+      # @abstract
+      #
+      # @example
+      # ```ruby
+      # case source
+      # in {type: "base64", data: String, media_type: Anthropic::Models::Base64ImageSource::MediaType}
+      #   # Anthropic::Models::Base64ImageSource ...
+      # in {type: "url", url: String}
+      #   # Anthropic::Models::URLImageSource ...
+      # end
+      # ```
+      #
+      # @example
+      # ```ruby
+      # case source
+      # in Anthropic::Models::Base64ImageSource
+      #   # ...
+      # in Anthropic::Models::URLImageSource
+      #   # ...
+      # end
+      # ```
+      class Source < Anthropic::Union
+        discriminator :type
 
-        # @!attribute media_type
-        #
-        #   @return [Symbol, Anthropic::Models::ImageBlockParam::Source::MediaType]
-        required :media_type, enum: -> { Anthropic::Models::ImageBlockParam::Source::MediaType }
+        variant :base64, -> { Anthropic::Models::Base64ImageSource }
 
-        # @!attribute type
-        #
-        #   @return [Symbol, :base64]
-        required :type, const: :base64
-
-        # @!parse
-        #   # @param data [String]
-        #   # @param media_type [Symbol, Anthropic::Models::ImageBlockParam::Source::MediaType]
-        #   # @param type [Symbol, :base64]
-        #   #
-        #   def initialize(data:, media_type:, type: :base64, **) = super
-
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-        # @abstract
-        #
-        # @example
-        # ```ruby
-        # case media_type
-        # in :"image/jpeg"
-        #   # ...
-        # in :"image/png"
-        #   # ...
-        # in :"image/gif"
-        #   # ...
-        # in :"image/webp"
-        #   # ...
-        # end
-        # ```
-        class MediaType < Anthropic::Enum
-          IMAGE_JPEG = :"image/jpeg"
-          IMAGE_PNG = :"image/png"
-          IMAGE_GIF = :"image/gif"
-          IMAGE_WEBP = :"image/webp"
-
-          finalize!
-
-          # @!parse
-          #   # @return [Array<Symbol>]
-          #   #
-          #   def self.values; end
-        end
+        variant :url, -> { Anthropic::Models::URLImageSource }
       end
     end
   end
