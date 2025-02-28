@@ -258,10 +258,12 @@ module Anthropic
         #
         def create(params)
           parsed, options = Anthropic::Models::Beta::MessageCreateParams.dump_request(params)
+          header_params = [:"anthropic-beta"]
           @client.request(
             method: :post,
             path: "v1/messages?beta=true",
-            body: parsed,
+            headers: parsed.slice(*header_params),
+            body: parsed.except(*header_params),
             model: Anthropic::Models::Beta::BetaMessage,
             options: options
           )
@@ -465,10 +467,12 @@ module Anthropic
         #
         def count_tokens(params)
           parsed, options = Anthropic::Models::Beta::MessageCountTokensParams.dump_request(params)
+          header_params = [:"anthropic-beta"]
           @client.request(
             method: :post,
             path: "v1/messages/count_tokens?beta=true",
-            body: parsed,
+            headers: parsed.slice(*header_params),
+            body: parsed.except(*header_params),
             model: Anthropic::Models::Beta::BetaMessageTokensCount,
             options: options
           )

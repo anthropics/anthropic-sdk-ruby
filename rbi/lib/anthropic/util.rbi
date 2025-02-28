@@ -107,7 +107,10 @@ module Anthropic
     end
 
     sig do
-      params(headers: T::Array[T::Hash[String, T.nilable(T.any(String, Integer))]])
+      params(
+        headers: T::Hash[String,
+                         T.nilable(T.any(String, Integer, T::Array[T.nilable(T.any(String, Integer))]))]
+      )
         .returns(T::Hash[String, String])
     end
     def self.normalized_headers(*headers)

@@ -9,7 +9,16 @@ module Anthropic
         method: Symbol,
         path: T.any(String, T::Array[String]),
         query: T.nilable(T::Hash[String, T.nilable(T.any(T::Array[String], String))]),
-        headers: T.nilable(T::Hash[String, T.nilable(String)]),
+        headers: T.nilable(
+          T::Hash[String,
+                  T.nilable(
+                    T.any(
+                      String,
+                      Integer,
+                      T::Array[T.nilable(T.any(String, Integer))]
+                    )
+                  )]
+        ),
         body: T.nilable(T.anything),
         unwrap: T.nilable(Symbol),
         page: T.nilable(T::Class[Anthropic::BaseModel]),
@@ -69,7 +78,8 @@ module Anthropic
         max_retries: Integer,
         initial_retry_delay: Float,
         max_retry_delay: Float,
-        headers: T::Hash[String, T.nilable(String)],
+        headers: T::Hash[String,
+                         T.nilable(T.any(String, Integer, T::Array[T.nilable(T.any(String, Integer))]))],
         idempotency_header: T.nilable(String)
       )
         .void
@@ -133,7 +143,16 @@ module Anthropic
         method: Symbol,
         path: T.any(String, T::Array[String]),
         query: T.nilable(T::Hash[String, T.nilable(T.any(T::Array[String], String))]),
-        headers: T.nilable(T::Hash[String, T.nilable(String)]),
+        headers: T.nilable(
+          T::Hash[String,
+                  T.nilable(
+                    T.any(
+                      String,
+                      Integer,
+                      T::Array[T.nilable(T.any(String, Integer))]
+                    )
+                  )]
+        ),
         body: T.nilable(T.anything),
         unwrap: T.nilable(Symbol),
         page: T.nilable(T::Class[Anthropic::BaseModel]),
