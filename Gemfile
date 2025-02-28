@@ -5,9 +5,12 @@ source "https://rubygems.org"
 gemspec
 
 group :development do
+  gem "async"
   gem "minitest"
   gem "minitest-focus"
   gem "minitest-hooks"
+  gem "minitest-proveit"
+  gem "minitest-rg"
   gem "rake"
   gem "rbs"
   gem "rubocop"
