@@ -382,13 +382,19 @@ module Anthropic
     class << self
       # @private
       #
-      # @param headers [Array<Hash{String=>String, Integer, nil}>]
+      # @param headers [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}]
       #
       # @return [Hash{String=>String}]
       #
       def normalized_headers(*headers)
         {}.merge(*headers.compact).to_h do |key, val|
-          [key.downcase, val&.to_s&.strip]
+          case val
+          in Array
+            val.map { _1.to_s.strip }.join(", ")
+          else
+            val&.to_s&.strip
+          end
+          [key.downcase, val]
         end
       end
     end

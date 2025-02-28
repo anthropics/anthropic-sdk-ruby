@@ -142,7 +142,7 @@ module Anthropic
     # @param max_retries [Integer]
     # @param initial_retry_delay [Float]
     # @param max_retry_delay [Float]
-    # @param headers [Hash{String=>String, nil}]
+    # @param headers [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}]
     # @param idempotency_header [String, nil]
     #
     def initialize(
@@ -193,7 +193,7 @@ module Anthropic
     #
     #   @option req [Hash{String=>Array<String>, String, nil}, nil] :query
     #
-    #   @option req [Hash{String=>String, nil}, nil] :headers
+    #   @option req [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}, nil] :headers
     #
     #   @option req [Object, nil] :body
     #
@@ -399,7 +399,7 @@ module Anthropic
     #
     #   @option req [Hash{String=>Array<String>, String, nil}, nil] :query
     #
-    #   @option req [Hash{String=>String, nil}, nil] :headers
+    #   @option req [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}, nil] :headers
     #
     #   @option req [Object, nil] :body
     #
@@ -442,7 +442,7 @@ module Anthropic
     #
     #   @option req [Hash{String=>Array<String>, String, nil}, nil] :query
     #
-    #   @option req [Hash{String=>String, nil}, nil] :headers
+    #   @option req [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}, nil] :headers
     #
     #   @option req [Object, nil] :body
     #

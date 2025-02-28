@@ -27,10 +27,12 @@ module Anthropic
           #
           def create(params)
             parsed, options = Anthropic::Models::Beta::Messages::BatchCreateParams.dump_request(params)
+            header_params = [:"anthropic-beta"]
             @client.request(
               method: :post,
               path: "v1/messages/batches?beta=true",
-              body: parsed,
+              headers: parsed.slice(*header_params),
+              body: parsed.except(*header_params),
               model: Anthropic::Models::Beta::Messages::BetaMessageBatch,
               options: options
             )
@@ -54,10 +56,11 @@ module Anthropic
           # @return [Anthropic::Models::Beta::Messages::BetaMessageBatch]
           #
           def retrieve(message_batch_id, params = {})
-            _, options = Anthropic::Models::Beta::Messages::BatchRetrieveParams.dump_request(params)
+            parsed, options = Anthropic::Models::Beta::Messages::BatchRetrieveParams.dump_request(params)
             @client.request(
               method: :get,
               path: ["v1/messages/batches/%0s?beta=true", message_batch_id],
+              headers: parsed,
               model: Anthropic::Models::Beta::Messages::BetaMessageBatch,
               options: options
             )
@@ -89,10 +92,12 @@ module Anthropic
           #
           def list(params = {})
             parsed, options = Anthropic::Models::Beta::Messages::BatchListParams.dump_request(params)
+            query_params = [:after_id, :before_id, :limit]
             @client.request(
               method: :get,
               path: "v1/messages/batches?beta=true",
-              query: parsed,
+              query: parsed.slice(*query_params),
+              headers: parsed.except(*query_params),
               page: Anthropic::Page,
               model: Anthropic::Models::Beta::Messages::BetaMessageBatch,
               options: options
@@ -118,10 +123,11 @@ module Anthropic
           # @return [Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch]
           #
           def delete(message_batch_id, params = {})
-            _, options = Anthropic::Models::Beta::Messages::BatchDeleteParams.dump_request(params)
+            parsed, options = Anthropic::Models::Beta::Messages::BatchDeleteParams.dump_request(params)
             @client.request(
               method: :delete,
               path: ["v1/messages/batches/%0s?beta=true", message_batch_id],
+              headers: parsed,
               model: Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch,
               options: options
             )
@@ -151,10 +157,11 @@ module Anthropic
           # @return [Anthropic::Models::Beta::Messages::BetaMessageBatch]
           #
           def cancel(message_batch_id, params = {})
-            _, options = Anthropic::Models::Beta::Messages::BatchCancelParams.dump_request(params)
+            parsed, options = Anthropic::Models::Beta::Messages::BatchCancelParams.dump_request(params)
             @client.request(
               method: :post,
               path: ["v1/messages/batches/%0s/cancel?beta=true", message_batch_id],
+              headers: parsed,
               model: Anthropic::Models::Beta::Messages::BetaMessageBatch,
               options: options
             )
@@ -180,11 +187,11 @@ module Anthropic
           # @return [Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse]
           #
           def results(message_batch_id, params = {})
-            _, options = Anthropic::Models::Beta::Messages::BatchResultsParams.dump_request(params)
+            parsed, options = Anthropic::Models::Beta::Messages::BatchResultsParams.dump_request(params)
             @client.request(
               method: :get,
               path: ["v1/messages/batches/%0s/results?beta=true", message_batch_id],
-              headers: {"Accept" => "application/x-jsonl"},
+              headers: {"Accept" => "application/x-jsonl", **parsed},
               model: Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse,
               options: options
             )
