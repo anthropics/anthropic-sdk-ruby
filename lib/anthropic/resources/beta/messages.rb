@@ -159,8 +159,8 @@ module Anthropic
         #     [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
         #     for details.
         #
-        #   @option params [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool] :tool_choice Body param: How the model should use the provided tools. The model can use a
-        #     specific tool, any available tool, or decide by itself.
+        #   @option params [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] :tool_choice Body param: How the model should use the provided tools. The model can use a
+        #     specific tool, any available tool, decide by itself, or not use tools at all.
         #
         #   @option params [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>] :tools Body param: Definitions of tools that the model may use.
         #
@@ -384,8 +384,8 @@ module Anthropic
         #     [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
         #     for details.
         #
-        #   @option params [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool] :tool_choice Body param: How the model should use the provided tools. The model can use a
-        #     specific tool, any available tool, or decide by itself.
+        #   @option params [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] :tool_choice Body param: How the model should use the provided tools. The model can use a
+        #     specific tool, any available tool, decide by itself, or not use tools at all.
         #
         #   @option params [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>] :tools Body param: Definitions of tools that the model may use.
         #

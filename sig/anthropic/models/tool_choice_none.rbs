@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    type tool_choice_none = { type: :none }
+
+    class ToolChoiceNone < Anthropic::BaseModel
+      attr_accessor type: :none
+
+      def initialize:
+        (type: :none) -> void
+        | (
+          ?Anthropic::Models::tool_choice_none | Anthropic::BaseModel data
+        ) -> void
+
+      def to_hash: -> Anthropic::Models::tool_choice_none
+    end
+  end
+end

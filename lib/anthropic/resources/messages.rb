@@ -157,8 +157,8 @@ module Anthropic
       #     [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
       #     for details.
       #
-      #   @option params [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool] :tool_choice How the model should use the provided tools. The model can use a specific tool,
-      #     any available tool, or decide by itself.
+      #   @option params [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] :tool_choice How the model should use the provided tools. The model can use a specific tool,
+      #     any available tool, decide by itself, or not use tools at all.
       #
       #   @option params [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>] :tools Definitions of tools that the model may use.
       #
@@ -380,8 +380,8 @@ module Anthropic
       #     [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
       #     for details.
       #
-      #   @option params [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool] :tool_choice How the model should use the provided tools. The model can use a specific tool,
-      #     any available tool, or decide by itself.
+      #   @option params [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] :tool_choice How the model should use the provided tools. The model can use a specific tool,
+      #     any available tool, decide by itself, or not use tools at all.
       #
       #   @option params [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>] :tools Definitions of tools that the model may use.
       #
