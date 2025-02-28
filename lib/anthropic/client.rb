@@ -46,7 +46,7 @@ module Anthropic
     # @return [Hash{String=>String}]
     #
     private def api_key_auth
-      {"X-Api-Key" => @api_key}
+      {"x-api-key" => @api_key}
     end
 
     # @private
@@ -56,7 +56,7 @@ module Anthropic
     private def bearer_auth
       return {} if @auth_token.nil?
 
-      {"Authorization" => "Bearer #{@auth_token}"}
+      {"authorization" => "Bearer #{@auth_token}"}
     end
 
     # Creates and returns a new client for interacting with the API.
