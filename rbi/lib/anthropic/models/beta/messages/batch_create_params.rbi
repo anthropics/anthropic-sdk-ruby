@@ -194,7 +194,8 @@ module Anthropic
                     T.any(
                       Anthropic::Models::Beta::BetaToolChoiceAuto,
                       Anthropic::Models::Beta::BetaToolChoiceAny,
-                      Anthropic::Models::Beta::BetaToolChoiceTool
+                      Anthropic::Models::Beta::BetaToolChoiceTool,
+                      Anthropic::Models::Beta::BetaToolChoiceNone
                     )
                   )
                 )
@@ -207,14 +208,16 @@ module Anthropic
                   _: T.any(
                     Anthropic::Models::Beta::BetaToolChoiceAuto,
                     Anthropic::Models::Beta::BetaToolChoiceAny,
-                    Anthropic::Models::Beta::BetaToolChoiceTool
+                    Anthropic::Models::Beta::BetaToolChoiceTool,
+                    Anthropic::Models::Beta::BetaToolChoiceNone
                   )
                 )
                   .returns(
                     T.any(
                       Anthropic::Models::Beta::BetaToolChoiceAuto,
                       Anthropic::Models::Beta::BetaToolChoiceAny,
-                      Anthropic::Models::Beta::BetaToolChoiceTool
+                      Anthropic::Models::Beta::BetaToolChoiceTool,
+                      Anthropic::Models::Beta::BetaToolChoiceNone
                     )
                   )
               end
@@ -305,7 +308,8 @@ module Anthropic
                   tool_choice: T.any(
                     Anthropic::Models::Beta::BetaToolChoiceAuto,
                     Anthropic::Models::Beta::BetaToolChoiceAny,
-                    Anthropic::Models::Beta::BetaToolChoiceTool
+                    Anthropic::Models::Beta::BetaToolChoiceTool,
+                    Anthropic::Models::Beta::BetaToolChoiceNone
                   ),
                   tools: T::Array[
                   T.any(
@@ -359,7 +363,8 @@ module Anthropic
                       tool_choice: T.any(
                         Anthropic::Models::Beta::BetaToolChoiceAuto,
                         Anthropic::Models::Beta::BetaToolChoiceAny,
-                        Anthropic::Models::Beta::BetaToolChoiceTool
+                        Anthropic::Models::Beta::BetaToolChoiceTool,
+                        Anthropic::Models::Beta::BetaToolChoiceNone
                       ),
                       tools: T::Array[
                       T.any(

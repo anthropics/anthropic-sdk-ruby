@@ -8,7 +8,7 @@ module Anthropic
       sig do
         override
           .returns(
-            [[Symbol, Anthropic::Models::ToolChoiceAuto], [Symbol, Anthropic::Models::ToolChoiceAny], [Symbol, Anthropic::Models::ToolChoiceTool]]
+            [[Symbol, Anthropic::Models::ToolChoiceAuto], [Symbol, Anthropic::Models::ToolChoiceAny], [Symbol, Anthropic::Models::ToolChoiceTool], [Symbol, Anthropic::Models::ToolChoiceNone]]
           )
       end
       private_class_method def self.variants

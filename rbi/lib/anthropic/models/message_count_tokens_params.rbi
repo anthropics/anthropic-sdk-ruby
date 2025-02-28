@@ -54,7 +54,8 @@ module Anthropic
             T.any(
               Anthropic::Models::ToolChoiceAuto,
               Anthropic::Models::ToolChoiceAny,
-              Anthropic::Models::ToolChoiceTool
+              Anthropic::Models::ToolChoiceTool,
+              Anthropic::Models::ToolChoiceNone
             )
           )
         )
@@ -67,14 +68,16 @@ module Anthropic
           _: T.any(
             Anthropic::Models::ToolChoiceAuto,
             Anthropic::Models::ToolChoiceAny,
-            Anthropic::Models::ToolChoiceTool
+            Anthropic::Models::ToolChoiceTool,
+            Anthropic::Models::ToolChoiceNone
           )
         )
           .returns(
             T.any(
               Anthropic::Models::ToolChoiceAuto,
               Anthropic::Models::ToolChoiceAny,
-              Anthropic::Models::ToolChoiceTool
+              Anthropic::Models::ToolChoiceTool,
+              Anthropic::Models::ToolChoiceNone
             )
           )
       end
@@ -129,7 +132,8 @@ module Anthropic
           tool_choice: T.any(
             Anthropic::Models::ToolChoiceAuto,
             Anthropic::Models::ToolChoiceAny,
-            Anthropic::Models::ToolChoiceTool
+            Anthropic::Models::ToolChoiceTool,
+            Anthropic::Models::ToolChoiceNone
           ),
           tools: T::Array[
           T.any(
@@ -164,7 +168,8 @@ module Anthropic
               tool_choice: T.any(
                 Anthropic::Models::ToolChoiceAuto,
                 Anthropic::Models::ToolChoiceAny,
-                Anthropic::Models::ToolChoiceTool
+                Anthropic::Models::ToolChoiceTool,
+                Anthropic::Models::ToolChoiceNone
               ),
               tools: T::Array[
               T.any(

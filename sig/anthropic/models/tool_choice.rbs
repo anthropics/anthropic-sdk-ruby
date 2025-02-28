@@ -4,9 +4,10 @@ module Anthropic
       Anthropic::Models::ToolChoiceAuto
       | Anthropic::Models::ToolChoiceAny
       | Anthropic::Models::ToolChoiceTool
+      | Anthropic::Models::ToolChoiceNone
 
     class ToolChoice < Anthropic::Union
-      private def self.variants: -> [[:auto, Anthropic::Models::ToolChoiceAuto], [:any, Anthropic::Models::ToolChoiceAny], [:tool, Anthropic::Models::ToolChoiceTool]]
+      private def self.variants: -> [[:auto, Anthropic::Models::ToolChoiceAuto], [:any, Anthropic::Models::ToolChoiceAny], [:tool, Anthropic::Models::ToolChoiceTool], [:none, Anthropic::Models::ToolChoiceNone]]
     end
   end
 end

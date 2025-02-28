@@ -256,13 +256,13 @@ module Anthropic
 
             # @!attribute [r] tool_choice
             #   How the model should use the provided tools. The model can use a specific tool,
-            #     any available tool, or decide by itself.
+            #     any available tool, decide by itself, or not use tools at all.
             #
-            #   @return [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, nil]
+            #   @return [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone, nil]
             optional :tool_choice, union: -> { Anthropic::Models::ToolChoice }
 
             # @!parse
-            #   # @return [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool]
+            #   # @return [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
             #   attr_writer :tool_choice
 
             # @!attribute [r] tools
@@ -392,7 +392,7 @@ module Anthropic
             #   # @param system_ [String, Array<Anthropic::Models::TextBlockParam>]
             #   # @param temperature [Float]
             #   # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]
-            #   # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool]
+            #   # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
             #   # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>]
             #   # @param top_k [Integer]
             #   # @param top_p [Float]

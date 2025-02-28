@@ -8,9 +8,10 @@ module Anthropic
         Anthropic::Models::Beta::BetaToolChoiceAuto
         | Anthropic::Models::Beta::BetaToolChoiceAny
         | Anthropic::Models::Beta::BetaToolChoiceTool
+        | Anthropic::Models::Beta::BetaToolChoiceNone
 
       class BetaToolChoice < Anthropic::Union
-        private def self.variants: -> [[:auto, Anthropic::Models::Beta::BetaToolChoiceAuto], [:any, Anthropic::Models::Beta::BetaToolChoiceAny], [:tool, Anthropic::Models::Beta::BetaToolChoiceTool]]
+        private def self.variants: -> [[:auto, Anthropic::Models::Beta::BetaToolChoiceAuto], [:any, Anthropic::Models::Beta::BetaToolChoiceAny], [:tool, Anthropic::Models::Beta::BetaToolChoiceTool], [:none, Anthropic::Models::Beta::BetaToolChoiceNone]]
       end
     end
   end

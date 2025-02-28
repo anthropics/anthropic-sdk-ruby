@@ -5,7 +5,7 @@ module Anthropic
     # @abstract
     #
     # How the model should use the provided tools. The model can use a specific tool,
-    #   any available tool, or decide by itself.
+    #   any available tool, decide by itself, or not use tools at all.
     #
     # @example
     # ```ruby
@@ -16,6 +16,8 @@ module Anthropic
     #   # Anthropic::Models::ToolChoiceAny ...
     # in {type: "tool", name: String, disable_parallel_tool_use: Anthropic::BooleanModel}
     #   # Anthropic::Models::ToolChoiceTool ...
+    # in {type: "none"}
+    #   # Anthropic::Models::ToolChoiceNone ...
     # end
     # ```
     #
@@ -27,6 +29,8 @@ module Anthropic
     # in Anthropic::Models::ToolChoiceAny
     #   # ...
     # in Anthropic::Models::ToolChoiceTool
+    #   # ...
+    # in Anthropic::Models::ToolChoiceNone
     #   # ...
     # end
     # ```
@@ -41,6 +45,9 @@ module Anthropic
 
       # The model will use the specified tool with `tool_choice.name`.
       variant :tool, -> { Anthropic::Models::ToolChoiceTool }
+
+      # The model will not be allowed to use tools.
+      variant :none, -> { Anthropic::Models::ToolChoiceNone }
     end
   end
 end
