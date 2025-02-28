@@ -191,7 +191,7 @@ module Anthropic
             @client.request(
               method: :get,
               path: ["v1/messages/batches/%0s/results?beta=true", message_batch_id],
-              headers: {"Accept" => "application/x-jsonl", **parsed},
+              headers: {"accept" => "application/x-jsonl", **parsed},
               model: Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse,
               options: options
             )
