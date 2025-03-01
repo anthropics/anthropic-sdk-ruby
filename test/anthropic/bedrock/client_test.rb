@@ -19,7 +19,11 @@ module Anthropic
             options: nil
           }
 
-        client = Anthropic::Bedrock::Client.new
+        client = Anthropic::Bedrock::Client.new(
+          aws_region: "us-east-1",
+          aws_access_key: "test",
+          aws_secret_key: "test"
+        )
         request_components = client.send(:fit_req_to_bedrock_specs!, request_components)
 
         assert_equal(
