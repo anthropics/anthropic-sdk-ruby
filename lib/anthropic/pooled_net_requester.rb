@@ -131,16 +131,23 @@ module Anthropic
       req = self.class.build_request(request)
 
       eof = false
+      finished = false
       enum = Enumerator.new do |y|
         with_pool(url) do |conn|
+          next if finished
+
           self.class.calibrate_socket_timeout(conn, deadline)
           conn.start unless conn.started?
 
           self.class.calibrate_socket_timeout(conn, deadline)
           conn.request(req) do |rsp|
             y << [conn, rsp]
+            break if finished
+
             rsp.read_body do |bytes|
               y << bytes
+              break if finished
+
               self.class.calibrate_socket_timeout(conn, deadline)
             end
             eof = true
@@ -148,16 +155,14 @@ module Anthropic
         end
       end
 
-      # need to protect the `Enumerator` against `#.rewind`
-      fused = false
       conn, response = enum.next
-      body = Enumerator.new do |y|
-        next if fused
-
-        fused = true
-        loop { y << enum.next }
-      ensure
-        conn.finish if !eof && conn.started?
+      body = Anthropic::Util.fused_enum(enum) do
+        finished = true
+        tap do
+          enum.next
+        rescue StopIteration
+        end
+        conn.finish if !eof && conn&.started?
       end
       [response, (response.body = body)]
     end

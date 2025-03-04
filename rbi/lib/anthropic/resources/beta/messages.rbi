@@ -13,7 +13,6 @@ module Anthropic
             max_tokens: Integer,
             messages: T::Array[Anthropic::Models::Beta::BetaMessageParam],
             model: T.any(Symbol, String),
-            stream: T::Boolean,
             metadata: Anthropic::Models::Beta::BetaMetadata,
             stop_sequences: T::Array[String],
             system_: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]),
@@ -50,7 +49,72 @@ module Anthropic
           max_tokens:,
           messages:,
           model:,
-          stream: nil,
+          metadata: nil,
+          stop_sequences: nil,
+          system_: nil,
+          temperature: nil,
+          thinking: nil,
+          tool_choice: nil,
+          tools: nil,
+          top_k: nil,
+          top_p: nil,
+          betas: nil,
+          request_options: {}
+        )
+        end
+
+        sig do
+          params(
+            max_tokens: Integer,
+            messages: T::Array[Anthropic::Models::Beta::BetaMessageParam],
+            model: T.any(Symbol, String),
+            metadata: Anthropic::Models::Beta::BetaMetadata,
+            stop_sequences: T::Array[String],
+            system_: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]),
+            temperature: Float,
+            thinking: T.any(
+              Anthropic::Models::Beta::BetaThinkingConfigEnabled,
+              Anthropic::Models::Beta::BetaThinkingConfigDisabled
+            ),
+            tool_choice: T.any(
+              Anthropic::Models::Beta::BetaToolChoiceAuto,
+              Anthropic::Models::Beta::BetaToolChoiceAny,
+              Anthropic::Models::Beta::BetaToolChoiceTool,
+              Anthropic::Models::Beta::BetaToolChoiceNone
+            ),
+            tools: T::Array[
+            T.any(
+              Anthropic::Models::Beta::BetaTool,
+              Anthropic::Models::Beta::BetaToolComputerUse20241022,
+              Anthropic::Models::Beta::BetaToolBash20241022,
+              Anthropic::Models::Beta::BetaToolTextEditor20241022,
+              Anthropic::Models::Beta::BetaToolComputerUse20250124,
+              Anthropic::Models::Beta::BetaToolBash20250124,
+              Anthropic::Models::Beta::BetaToolTextEditor20250124
+            )
+            ],
+            top_k: Integer,
+            top_p: Float,
+            betas: T::Array[T.any(String, Symbol)],
+            request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
+          )
+            .returns(
+              Anthropic::Stream[
+              T.any(
+                Anthropic::Models::Beta::BetaRawMessageStartEvent,
+                Anthropic::Models::Beta::BetaRawMessageDeltaEvent,
+                Anthropic::Models::Beta::BetaRawMessageStopEvent,
+                Anthropic::Models::Beta::BetaRawContentBlockStartEvent,
+                Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent,
+                Anthropic::Models::Beta::BetaRawContentBlockStopEvent
+              )
+              ]
+            )
+        end
+        def create_streaming(
+          max_tokens:,
+          messages:,
+          model:,
           metadata: nil,
           stop_sequences: nil,
           system_: nil,

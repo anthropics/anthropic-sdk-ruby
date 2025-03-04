@@ -2,7 +2,7 @@
 
 require_relative "test_helper"
 
-class Anthropic::Test::UtilTest < Minitest::Test
+class Anthropic::Test::UtilDataHandlingTest < Minitest::Test
   def test_left_map
     assert_pattern do
       Anthropic::Util.deep_merge({a: 1}, nil) => nil
@@ -91,8 +91,10 @@ class Anthropic::Test::UtilTest < Minitest::Test
       Anthropic::Util.dig([], 1.0) { 2 } => 2
     end
   end
+end
 
-  def test_uri_parsing
+class Anthropic::Test::UtilUriHandlingTest < Minitest::Test
+  def test_parsing
     %w[
       http://example.com
       https://example.com/
@@ -106,7 +108,7 @@ class Anthropic::Test::UtilTest < Minitest::Test
     end
   end
 
-  def test_joining_uris
+  def test_joining
     cases = [
       [
         "h://a.b/c?d=e",
@@ -135,7 +137,7 @@ class Anthropic::Test::UtilTest < Minitest::Test
     end
   end
 
-  def test_joining_uri_queries
+  def test_joining_queries
     base_url = "h://a.b/c?d=e"
     cases = {
       "c2" => "h://a.b/c/c2",
@@ -153,7 +155,9 @@ class Anthropic::Test::UtilTest < Minitest::Test
       )
     end
   end
+end
 
+class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
   class FakeCGI < CGI
     def initialize(headers, io)
       @ctype = headers["content-type"]
@@ -172,24 +176,21 @@ class Anthropic::Test::UtilTest < Minitest::Test
     end
   end
 
-  def test_multipart_file_encode
+  def test_file_encode
     headers = {"content-type" => "multipart/form-data"}
-    File.open(__FILE__) do |fd|
-      cases = {
-        StringIO.new("abc") => "abc",
-        fd => StringIO
-      }
-      cases.each do |body, val|
-        encoded = Anthropic::Util.encode_content(headers, body)
-        cgi = FakeCGI.new(*encoded)
-        assert_pattern do
-          cgi[""] => ^val
-        end
+    cases = {
+      StringIO.new("abc") => "abc"
+    }
+    cases.each do |body, val|
+      encoded = Anthropic::Util.encode_content(headers, body)
+      cgi = FakeCGI.new(*encoded)
+      assert_pattern do
+        cgi[""] => ^val
       end
     end
   end
 
-  def test_multipart_hash_encode
+  def test_hash_encode
     headers = {"content-type" => "multipart/form-data"}
     cases = {
       {a: 2, b: 3} => {"a" => "2", "b" => "3"},
@@ -202,6 +203,264 @@ class Anthropic::Test::UtilTest < Minitest::Test
       cgi = FakeCGI.new(*encoded)
       testcase.each do |key, val|
         assert_equal(val, cgi[key])
+      end
+    end
+  end
+end
+
+class Anthropic::Test::UtilFusedEnumTest < Minitest::Test
+  def test_closing
+    arr = [1, 2, 3]
+    once = 0
+    fused = Anthropic::Util.fused_enum(arr.to_enum) do
+      once = once.succ
+    end
+
+    enumerated_1 = fused.to_a
+    assert_equal(arr, enumerated_1)
+    assert_equal(1, once)
+
+    enumerated_2 = fused.to_a
+    assert_equal([], enumerated_2)
+    assert_equal(1, once)
+  end
+
+  def test_rewind_chain
+    once = 0
+    fused = Anthropic::Util.fused_enum([1, 2, 3].to_enum) do
+      once = once.succ
+    end
+      .lazy
+      .map(&:succ)
+      .filter(&:odd?)
+    first = fused.next
+
+    assert_equal(3, first)
+    assert_equal(0, once)
+    assert_raises(StopIteration) { fused.rewind.next }
+    assert_equal(1, once)
+  end
+
+  def test_external_iteration
+    it = [1, 2, 3].to_enum
+    first = it.next
+    fused = Anthropic::Util.fused_enum(it)
+
+    assert_equal(1, first)
+    assert_equal([2, 3], fused.to_a)
+  end
+
+  def test_close_fused
+    once = 0
+    fused = Anthropic::Util.fused_enum([1, 2, 3].to_enum) do
+      once = once.succ
+    end
+
+    Anthropic::Util.close_fused!(fused)
+
+    assert_equal(1, once)
+    assert_equal([], fused.to_a)
+    assert_equal(1, once)
+  end
+
+  def test_closed_fused_extern_iteration
+    taken = 0
+    enum = [1, 2, 3].to_enum.lazy.map do
+      taken = taken.succ
+      _1
+    end
+    fused = Anthropic::Util.fused_enum(enum)
+    first = fused.next
+
+    assert_equal(1, first)
+    Anthropic::Util.close_fused!(fused)
+    assert_equal(1, taken)
+  end
+
+  def test_closed_fused_taken_count
+    taken = 0
+    enum = [1, 2, 3].to_enum.lazy.map do
+      taken = taken.succ
+      _1
+    end
+      .map(&:succ)
+      .filter(&:odd?)
+    fused = Anthropic::Util.fused_enum(enum)
+
+    assert_equal(0, taken)
+    Anthropic::Util.close_fused!(fused)
+    assert_equal(0, taken)
+  end
+
+  def test_closed_fused_extern_iter_taken_count
+    taken = 0
+    enum = [1, 2, 3].to_enum.lazy.map do
+      taken = taken.succ
+      _1
+    end
+      .map(&:succ)
+      .filter(&:itself)
+    first = enum.next
+    assert_equal(2, first)
+    assert_equal(1, taken)
+
+    fused = Anthropic::Util.fused_enum(enum)
+    Anthropic::Util.close_fused!(fused)
+    assert_equal(1, taken)
+  end
+
+  def test_close_fused_sse_chain
+    taken = 0
+    enum = [1, 2, 3].to_enum.lazy.map do
+      taken = taken.succ
+      _1
+    end
+      .map(&:succ)
+      .filter(&:odd?)
+      .map(&:to_s)
+
+    fused_1 = Anthropic::Util.fused_enum(enum)
+    fused_2 = Anthropic::Util.enum_lines(fused_1)
+    fused_3 = Anthropic::Util.parse_sse(fused_2)
+
+    assert_equal(0, taken)
+    Anthropic::Util.close_fused!(fused_3)
+    assert_equal(0, taken)
+  end
+end
+
+class Anthropic::Test::UtilSseTest < Minitest::Test
+  def test_enum_lines
+    cases = {
+      %w[] => %w[],
+      %W[\n\n] => %W[\n \n],
+      %W[\n \n] => %W[\n \n],
+      %w[a] => %w[a],
+      %W[a\nb] => %W[a\n b],
+      %W[a\nb\n] => %W[a\n b\n],
+      %W[\na b\n] => %W[\n ab\n],
+      %W[\na b\n\n] => %W[\n ab\n \n],
+      %W[\na b] => %W[\n ab]
+    }
+    cases.each do |enum, expected|
+      lines = Anthropic::Util.enum_lines(enum)
+      assert_equal(expected, lines.to_a)
+    end
+  end
+
+  def test_parse_sse
+    cases = {
+      "empty input" => {
+        [] => []
+      },
+      "single data event" => {
+        [
+          "data: hello world\n",
+          "\n"
+        ] => [
+          {data: "hello world\n"}
+        ]
+      },
+      "multiple data lines" => {
+        [
+          "data: line 1\n",
+          "data: line 2\n",
+          "\n"
+        ] => [
+          {data: "line 1\nline 2\n"}
+        ]
+      },
+      "complete event" => {
+        [
+          "event: update\n",
+          "id: 123\n",
+          "data: hello world\n",
+          "retry: 5000\n",
+          "\n"
+        ] => [
+          {
+            event: "update",
+            id: "123",
+            data: "hello world\n",
+            retry: 5000
+          }
+        ]
+      },
+      "multiple events" => {
+        [
+          "event: update\n",
+          "data: first\n",
+          "\n",
+          "event: message\n",
+          "data: second\n",
+          "\n"
+        ] => [
+          {event: "update", data: "first\n"},
+          {event: "message", data: "second\n"}
+        ]
+      },
+      "comments" => {
+        [
+          ": this is a comment\n",
+          "data: actual data\n",
+          "\n"
+        ] => [
+          {data: "actual data\n"}
+        ]
+      },
+      "invalid retry" => {
+        [
+          "retry: not a number\n",
+          "data: hello\n",
+          "\n"
+        ] => [
+          {data: "hello\n"}
+        ]
+      },
+      "invalid id with null" => {
+        [
+          "id: bad\0id\n",
+          "data: hello\n",
+          "\n"
+        ] => [
+          {data: "hello\n"}
+        ]
+      },
+      "leading space in value" => {
+        [
+          "data: hello world\n",
+          "data:  leading space\n",
+          "\n"
+        ] => [
+          {data: "hello world\n leading space\n"}
+        ]
+      },
+      "no final newline" => {
+        [
+          "data: hello\n",
+          "id: 1"
+        ] => [
+          {data: "hello\n", id: "1"}
+        ]
+      },
+      "multiple empty lines" => {
+        [
+          "data: first\n",
+          "\n",
+          "\n",
+          "data: second\n",
+          "\n"
+        ] => [
+          {data: "first\n"},
+          {data: "second\n"}
+        ]
+      }
+    }
+
+    cases.each do |name, test_cases|
+      test_cases.each do |input, expected|
+        actual = Anthropic::Util.parse_sse(input).map(&:compact)
+        assert_equal(expected, actual, name)
       end
     end
   end

@@ -99,11 +99,12 @@ module Anthropic
     # @param body [Object, nil]
     # @param request [nil]
     # @param response [nil]
+    # @param message [String, nil]
     #
     # @return [Anthropic::APIStatusError]
     #
-    def self.for(url:, status:, body:, request:, response:)
-      kwargs = {url: url, status: status, body: body, request: request, response: response}
+    def self.for(url:, status:, body:, request:, response:, message: nil)
+      kwargs = {url: url, status: status, body: body, request: request, response: response, message: message}
 
       case status
       in 400
