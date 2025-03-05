@@ -246,8 +246,8 @@ module Anthropic
       end
 
       timeout = opts.fetch(:timeout, @timeout).to_f.clamp((0..))
-      unless headers.key?("x-stainless-read-timeout") || timeout.zero?
-        headers["x-stainless-read-timeout"] = timeout.to_s
+      unless headers.key?("x-stainless-timeout") || timeout.zero?
+        headers["x-stainless-timeout"] = timeout.to_s
       end
 
       headers.reject! { |_, v| v.to_s.empty? }
