@@ -52,33 +52,6 @@ module Anthropic
 
         # @abstract
         #
-        # @example
-        # ```ruby
-        # case source
-        # in {type: "base64", data: String, media_type: Symbol}
-        #   # Anthropic::Models::Beta::BetaBase64PDFSource ...
-        # in {type: "text", data: String, media_type: Symbol}
-        #   # Anthropic::Models::Beta::BetaPlainTextSource ...
-        # in {type: "content", content: Anthropic::Models::Beta::BetaContentBlockSource::Content}
-        #   # Anthropic::Models::Beta::BetaContentBlockSource ...
-        # in {type: "url", url: String}
-        #   # Anthropic::Models::Beta::BetaURLPDFSource ...
-        # end
-        # ```
-        #
-        # @example
-        # ```ruby
-        # case source
-        # in Anthropic::Models::Beta::BetaBase64PDFSource
-        #   # ...
-        # in Anthropic::Models::Beta::BetaPlainTextSource
-        #   # ...
-        # in Anthropic::Models::Beta::BetaContentBlockSource
-        #   # ...
-        # in Anthropic::Models::Beta::BetaURLPDFSource
-        #   # ...
-        # end
-        # ```
         class Source < Anthropic::Union
           discriminator :type
 

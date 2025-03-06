@@ -84,13 +84,6 @@ module Anthropic
 
         # @abstract
         #
-        # @example
-        # ```ruby
-        # case type
-        # in :custom
-        #   # ...
-        # end
-        # ```
         class Type < Anthropic::Enum
           CUSTOM = :custom
 

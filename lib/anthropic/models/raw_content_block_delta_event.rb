@@ -29,37 +29,6 @@ module Anthropic
 
       # @abstract
       #
-      # @example
-      # ```ruby
-      # case delta
-      # in {type: "text_delta", text: String}
-      #   # Anthropic::Models::TextDelta ...
-      # in {type: "input_json_delta", partial_json: String}
-      #   # Anthropic::Models::InputJSONDelta ...
-      # in {type: "citations_delta", citation: Anthropic::Models::CitationsDelta::Citation}
-      #   # Anthropic::Models::CitationsDelta ...
-      # in {type: "thinking_delta", thinking: String}
-      #   # Anthropic::Models::ThinkingDelta ...
-      # in {type: "signature_delta", signature: String}
-      #   # Anthropic::Models::SignatureDelta ...
-      # end
-      # ```
-      #
-      # @example
-      # ```ruby
-      # case delta
-      # in Anthropic::Models::TextDelta
-      #   # ...
-      # in Anthropic::Models::InputJSONDelta
-      #   # ...
-      # in Anthropic::Models::CitationsDelta
-      #   # ...
-      # in Anthropic::Models::ThinkingDelta
-      #   # ...
-      # in Anthropic::Models::SignatureDelta
-      #   # ...
-      # end
-      # ```
       class Delta < Anthropic::Union
         discriminator :type
 

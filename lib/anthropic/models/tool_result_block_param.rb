@@ -49,15 +49,6 @@ module Anthropic
 
       # @abstract
       #
-      # @example
-      # ```ruby
-      # case content
-      # in String
-      #   # ...
-      # in Anthropic::Models::ToolResultBlockParam::Content::ContentArray
-      #   # ...
-      # end
-      # ```
       class Content < Anthropic::Union
         ContentArray = Anthropic::ArrayOf[union: -> { Anthropic::Models::ToolResultBlockParam::Content::Content }]
 
@@ -67,34 +58,6 @@ module Anthropic
 
         # @abstract
         #
-        # @example
-        # ```ruby
-        # case content
-        # in {
-        #   type: "text",
-        #   text: String,
-        #   cache_control: Anthropic::Models::CacheControlEphemeral,
-        #   citations: ^(Anthropic::ArrayOf[union: Anthropic::Models::TextCitationParam])
-        # }
-        #   # Anthropic::Models::TextBlockParam ...
-        # in {
-        #   type: "image",
-        #   source: Anthropic::Models::ImageBlockParam::Source,
-        #   cache_control: Anthropic::Models::CacheControlEphemeral
-        # }
-        #   # Anthropic::Models::ImageBlockParam ...
-        # end
-        # ```
-        #
-        # @example
-        # ```ruby
-        # case content
-        # in Anthropic::Models::TextBlockParam
-        #   # ...
-        # in Anthropic::Models::ImageBlockParam
-        #   # ...
-        # end
-        # ```
         class Content < Anthropic::Union
           discriminator :type
 

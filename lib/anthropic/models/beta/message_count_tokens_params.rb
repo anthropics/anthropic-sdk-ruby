@@ -275,16 +275,6 @@ module Anthropic
         #   A system prompt is a way of providing context and instructions to Claude, such
         #   as specifying a particular goal or role. See our
         #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
-        #
-        # @example
-        # ```ruby
-        # case system
-        # in String
-        #   # ...
-        # in Anthropic::Models::Beta::MessageCountTokensParams::System::BetaTextBlockParamArray
-        #   # ...
-        # end
-        # ```
         class System < Anthropic::Union
           BetaTextBlockParamArray = Anthropic::ArrayOf[-> { Anthropic::Models::Beta::BetaTextBlockParam }]
 
@@ -295,25 +285,6 @@ module Anthropic
 
         # @abstract
         #
-        # @example
-        # ```ruby
-        # case tool
-        # in Anthropic::Models::Beta::BetaTool
-        #   # ...
-        # in Anthropic::Models::Beta::BetaToolComputerUse20241022
-        #   # ...
-        # in Anthropic::Models::Beta::BetaToolBash20241022
-        #   # ...
-        # in Anthropic::Models::Beta::BetaToolTextEditor20241022
-        #   # ...
-        # in Anthropic::Models::Beta::BetaToolComputerUse20250124
-        #   # ...
-        # in Anthropic::Models::Beta::BetaToolBash20250124
-        #   # ...
-        # in Anthropic::Models::Beta::BetaToolTextEditor20250124
-        #   # ...
-        # end
-        # ```
         class Tool < Anthropic::Union
           variant -> { Anthropic::Models::Beta::BetaTool }
 

@@ -66,19 +66,6 @@ module Anthropic
 
           # @abstract
           #
-          # @example
-          # ```ruby
-          # case stop_reason
-          # in :end_turn
-          #   # ...
-          # in :max_tokens
-          #   # ...
-          # in :stop_sequence
-          #   # ...
-          # in :tool_use
-          #   # ...
-          # end
-          # ```
           class StopReason < Anthropic::Enum
             END_TURN = :end_turn
             MAX_TOKENS = :max_tokens

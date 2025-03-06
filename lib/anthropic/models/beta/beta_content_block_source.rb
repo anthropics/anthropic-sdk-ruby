@@ -24,15 +24,6 @@ module Anthropic
 
         # @abstract
         #
-        # @example
-        # ```ruby
-        # case content
-        # in String
-        #   # ...
-        # in Anthropic::Models::Beta::BetaContentBlockSource::Content::BetaContentBlockSourceContentArray
-        #   # ...
-        # end
-        # ```
         class Content < Anthropic::Union
           BetaContentBlockSourceContentArray = Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlockSourceContent }]
 

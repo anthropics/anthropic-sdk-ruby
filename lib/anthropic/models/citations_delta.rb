@@ -23,29 +23,6 @@ module Anthropic
 
       # @abstract
       #
-      # @example
-      # ```ruby
-      # case citation
-      # in {type: "char_location", cited_text: String, document_index: Integer, document_title: String}
-      #   # Anthropic::Models::CitationCharLocation ...
-      # in {type: "page_location", cited_text: String, document_index: Integer, document_title: String}
-      #   # Anthropic::Models::CitationPageLocation ...
-      # in {type: "content_block_location", cited_text: String, document_index: Integer, document_title: String}
-      #   # Anthropic::Models::CitationContentBlockLocation ...
-      # end
-      # ```
-      #
-      # @example
-      # ```ruby
-      # case citation
-      # in Anthropic::Models::CitationCharLocation
-      #   # ...
-      # in Anthropic::Models::CitationPageLocation
-      #   # ...
-      # in Anthropic::Models::CitationContentBlockLocation
-      #   # ...
-      # end
-      # ```
       class Citation < Anthropic::Union
         discriminator :type
 

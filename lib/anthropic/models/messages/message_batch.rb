@@ -117,18 +117,6 @@ module Anthropic
         # @abstract
         #
         # Processing status of the Message Batch.
-        #
-        # @example
-        # ```ruby
-        # case processing_status
-        # in :in_progress
-        #   # ...
-        # in :canceling
-        #   # ...
-        # in :ended
-        #   # ...
-        # end
-        # ```
         class ProcessingStatus < Anthropic::Enum
           IN_PROGRESS = :in_progress
           CANCELING = :canceling

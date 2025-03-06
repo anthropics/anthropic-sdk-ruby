@@ -4,15 +4,6 @@ module Anthropic
   module Models
     # @abstract
     #
-    # @example
-    # ```ruby
-    # case anthropic_beta
-    # in String
-    #   # ...
-    # in Anthropic::Models::AnthropicBeta::UnionMember1
-    #   # ...
-    # end
-    # ```
     class AnthropicBeta < Anthropic::Union
       variant String
 
@@ -20,23 +11,6 @@ module Anthropic
 
       # @abstract
       #
-      # @example
-      # ```ruby
-      # case union_member1
-      # in :"message-batches-2024-09-24"
-      #   # ...
-      # in :"prompt-caching-2024-07-31"
-      #   # ...
-      # in :"computer-use-2024-10-22"
-      #   # ...
-      # in :"computer-use-2025-01-24"
-      #   # ...
-      # in :"pdfs-2024-09-25"
-      #   # ...
-      # in ...
-      #   #...
-      # end
-      # ```
       class UnionMember1 < Anthropic::Enum
         MESSAGE_BATCHES_2024_09_24 = :"message-batches-2024-09-24"
         PROMPT_CACHING_2024_07_31 = :"prompt-caching-2024-07-31"

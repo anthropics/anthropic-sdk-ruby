@@ -24,29 +24,6 @@ module Anthropic
 
         # @abstract
         #
-        # @example
-        # ```ruby
-        # case citation
-        # in {type: "char_location", cited_text: String, document_index: Integer, document_title: String}
-        #   # Anthropic::Models::Beta::BetaCitationCharLocation ...
-        # in {type: "page_location", cited_text: String, document_index: Integer, document_title: String}
-        #   # Anthropic::Models::Beta::BetaCitationPageLocation ...
-        # in {type: "content_block_location", cited_text: String, document_index: Integer, document_title: String}
-        #   # Anthropic::Models::Beta::BetaCitationContentBlockLocation ...
-        # end
-        # ```
-        #
-        # @example
-        # ```ruby
-        # case citation
-        # in Anthropic::Models::Beta::BetaCitationCharLocation
-        #   # ...
-        # in Anthropic::Models::Beta::BetaCitationPageLocation
-        #   # ...
-        # in Anthropic::Models::Beta::BetaCitationContentBlockLocation
-        #   # ...
-        # end
-        # ```
         class Citation < Anthropic::Union
           discriminator :type
 

@@ -369,6 +369,46 @@ module Anthropic
   #
   # @abstract
   #
+  # @example
+  # ```ruby
+  # # `error_object` is a `Anthropic::Models::ErrorObject`
+  # case error_object
+  # when Anthropic::Models::InvalidRequestError
+  #   # ...
+  # when Anthropic::Models::AuthenticationError_
+  #   # ...
+  # when Anthropic::Models::BillingError
+  #   # ...
+  # else
+  #   # ...
+  # end
+  # ```
+  #
+  # @example
+  # ```ruby
+  # case error_object
+  # in {type: :invalid_request_error, message: message}
+  #   # ...
+  # in {type: :authentication_error, message: message}
+  #   # ...
+  # in {type: :billing_error, message: message}
+  #   # ...
+  # in {type: :permission_error, message: message}
+  #   # ...
+  # in {type: :not_found_error, message: message}
+  #   # ...
+  # in {type: :rate_limit_error, message: message}
+  #   # ...
+  # in {type: :timeout_error, message: message}
+  #   # ...
+  # in {type: :api_error, message: message}
+  #   # ...
+  # in {type: :overloaded_error, message: message}
+  #   # ...
+  # else
+  #   # ...
+  # end
+  # ```
   class Union
     extend Anthropic::Converter
 
@@ -839,6 +879,14 @@ module Anthropic
   #
   # @abstract
   #
+  # @example
+  # ```ruby
+  # # `api_error_object` is a `Anthropic::Models::APIErrorObject`
+  # api_error_object => {
+  #   message: message,
+  #   type: type
+  # }
+  # ```
   class BaseModel
     extend Anthropic::Converter
 

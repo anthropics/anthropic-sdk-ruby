@@ -29,25 +29,6 @@ module Anthropic
 
       # @abstract
       #
-      # @example
-      # ```ruby
-      # case source
-      # in {type: "base64", data: String, media_type: Anthropic::Models::Base64ImageSource::MediaType}
-      #   # Anthropic::Models::Base64ImageSource ...
-      # in {type: "url", url: String}
-      #   # Anthropic::Models::URLImageSource ...
-      # end
-      # ```
-      #
-      # @example
-      # ```ruby
-      # case source
-      # in Anthropic::Models::Base64ImageSource
-      #   # ...
-      # in Anthropic::Models::URLImageSource
-      #   # ...
-      # end
-      # ```
       class Source < Anthropic::Union
         discriminator :type
 

@@ -11,34 +11,6 @@ module Anthropic
         #   Contains a Message output if processing was successful, an error response if
         #   processing failed, or the reason why processing was not attempted, such as
         #   cancellation or expiration.
-        #
-        # @example
-        # ```ruby
-        # case beta_message_batch_result
-        # in {type: "succeeded", message: Anthropic::Models::Beta::BetaMessage}
-        #   # Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult ...
-        # in {type: "errored", error: Anthropic::Models::BetaErrorResponse}
-        #   # Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult ...
-        # in {type: "canceled"}
-        #   # Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult ...
-        # in {type: "expired"}
-        #   # Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult ...
-        # end
-        # ```
-        #
-        # @example
-        # ```ruby
-        # case beta_message_batch_result
-        # in Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult
-        #   # ...
-        # in Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult
-        #   # ...
-        # in Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult
-        #   # ...
-        # in Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
-        #   # ...
-        # end
-        # ```
         class BetaMessageBatchResult < Anthropic::Union
           discriminator :type
 
