@@ -43,11 +43,11 @@ module Anthropic
         client: Anthropic::BaseClient,
         req: Anthropic::BaseClient::RequestComponentsShape,
         headers: T.any(T::Hash[String, String], Net::HTTPHeader),
-        unwrapped: T::Hash[Symbol, T.anything]
+        page_data: T::Hash[Symbol, T.anything]
       )
         .void
     end
-    def initialize(client:, req:, headers:, unwrapped:)
+    def initialize(client:, req:, headers:, page_data:)
     end
   end
 end

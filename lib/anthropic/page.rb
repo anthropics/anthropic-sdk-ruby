@@ -42,32 +42,32 @@ module Anthropic
     # @param client [Anthropic::BaseClient]
     # @param req [Hash{Symbol=>Object}]
     # @param headers [Hash{String=>String}, Net::HTTPHeader]
-    # @param unwrapped [Hash{Symbol=>Object}]
+    # @param page_data [Hash{Symbol=>Object}]
     #
-    def initialize(client:, req:, headers:, unwrapped:)
+    def initialize(client:, req:, headers:, page_data:)
       @client = client
       @req = req
       model = req.fetch(:model)
 
-      case unwrapped
+      case page_data
       in {data: Array | nil => data}
         @data = data&.map { model.coerce(_1) }
       else
       end
 
-      case unwrapped
+      case page_data
       in {has_more: has_more}
         @has_more = has_more
       else
       end
 
-      case unwrapped
+      case page_data
       in {first_id: String | nil => first_id}
         @first_id = first_id
       else
       end
 
-      case unwrapped
+      case page_data
       in {last_id: String | nil => last_id}
         @last_id = last_id
       else

@@ -14,7 +14,7 @@ module Anthropic
       client: Anthropic::BaseClient,
       req: Anthropic::BaseClient::request_components,
       headers: ::Hash[String, String],
-      unwrapped: ::Hash[Symbol, top]
+      page_data: ::Hash[Symbol, top]
     ) -> void
   end
 end
