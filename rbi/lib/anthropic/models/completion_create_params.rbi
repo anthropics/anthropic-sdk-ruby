@@ -46,14 +46,6 @@ module Anthropic
       def stop_sequences=(_)
       end
 
-      sig { returns(T::Boolean) }
-      def stream
-      end
-
-      sig { params(_: T::Boolean).returns(T::Boolean) }
-      def stream=(_)
-      end
-
       sig { returns(T.nilable(Float)) }
       def temperature
       end
@@ -83,7 +75,6 @@ module Anthropic
           max_tokens_to_sample: Integer,
           model: T.any(Symbol, String),
           prompt: String,
-          stream: T::Boolean,
           metadata: Anthropic::Models::Metadata,
           stop_sequences: T::Array[String],
           temperature: Float,
@@ -97,7 +88,6 @@ module Anthropic
         max_tokens_to_sample:,
         model:,
         prompt:,
-        stream:,
         metadata: nil,
         stop_sequences: nil,
         temperature: nil,
@@ -116,7 +106,6 @@ module Anthropic
               prompt: String,
               metadata: Anthropic::Models::Metadata,
               stop_sequences: T::Array[String],
-              stream: T::Boolean,
               temperature: Float,
               top_k: Integer,
               top_p: Float,
@@ -125,16 +114,6 @@ module Anthropic
           )
       end
       def to_hash
-      end
-
-      class Stream < Anthropic::Enum
-        abstract!
-
-        TRUE = T.let(true, T::Boolean)
-
-        sig { override.returns(T::Array[T::Boolean]) }
-        def self.values
-        end
       end
     end
   end

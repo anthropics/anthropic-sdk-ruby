@@ -147,15 +147,6 @@ module Anthropic
         #   # @return [Array<String>]
         #   attr_writer :stop_sequences
 
-        # @!attribute stream
-        #   Whether to incrementally stream the response using server-sent events.
-        #
-        #     See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
-        #     details.
-        #
-        #   @return [Boolean, Anthropic::Models::Beta::MessageCreateParams::Stream]
-        required :stream, enum: -> { Anthropic::Models::Beta::MessageCreateParams::Stream }
-
         # @!attribute [r] system_
         #   System prompt.
         #
@@ -344,7 +335,6 @@ module Anthropic
         #   # @param max_tokens [Integer]
         #   # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>]
         #   # @param model [Symbol, Anthropic::Models::Model::UnionMember0, String]
-        #   # @param stream [Boolean, Anthropic::Models::Beta::MessageCreateParams::Stream]
         #   # @param metadata [Anthropic::Models::Beta::BetaMetadata]
         #   # @param stop_sequences [Array<String>]
         #   # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
@@ -361,7 +351,6 @@ module Anthropic
         #     max_tokens:,
         #     messages:,
         #     model:,
-        #     stream:,
         #     metadata: nil,
         #     stop_sequences: nil,
         #     system_: nil,
@@ -379,31 +368,6 @@ module Anthropic
         #   end
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-        # @abstract
-        #
-        # Whether to incrementally stream the response using server-sent events.
-        #
-        #   See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
-        #   details.
-        #
-        # @example
-        # ```ruby
-        # case stream
-        # in true
-        #   # ...
-        # end
-        # ```
-        class Stream < Anthropic::Enum
-          TRUE = true
-
-          finalize!
-
-          # @!parse
-          #   # @return [Array<Boolean>]
-          #   #
-          #   def self.values; end
-        end
 
         # @abstract
         #

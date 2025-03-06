@@ -66,14 +66,6 @@ module Anthropic
       #   # @return [Array<String>]
       #   attr_writer :stop_sequences
 
-      # @!attribute stream
-      #   Whether to incrementally stream the response using server-sent events.
-      #
-      #     See [streaming](https://docs.anthropic.com/en/api/streaming) for details.
-      #
-      #   @return [Boolean, Anthropic::Models::CompletionCreateParams::Stream]
-      required :stream, enum: -> { Anthropic::Models::CompletionCreateParams::Stream }
-
       # @!attribute [r] temperature
       #   Amount of randomness injected into the response.
       #
@@ -129,7 +121,6 @@ module Anthropic
       #   # @param max_tokens_to_sample [Integer]
       #   # @param model [Symbol, Anthropic::Models::Model::UnionMember0, String]
       #   # @param prompt [String]
-      #   # @param stream [Boolean, Anthropic::Models::CompletionCreateParams::Stream]
       #   # @param metadata [Anthropic::Models::Metadata]
       #   # @param stop_sequences [Array<String>]
       #   # @param temperature [Float]
@@ -141,7 +132,6 @@ module Anthropic
       #     max_tokens_to_sample:,
       #     model:,
       #     prompt:,
-      #     stream:,
       #     metadata: nil,
       #     stop_sequences: nil,
       #     temperature: nil,
@@ -154,30 +144,6 @@ module Anthropic
       #   end
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @abstract
-      #
-      # Whether to incrementally stream the response using server-sent events.
-      #
-      #   See [streaming](https://docs.anthropic.com/en/api/streaming) for details.
-      #
-      # @example
-      # ```ruby
-      # case stream
-      # in true
-      #   # ...
-      # end
-      # ```
-      class Stream < Anthropic::Enum
-        TRUE = true
-
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Boolean>]
-        #   #
-        #   def self.values; end
-      end
     end
   end
 end

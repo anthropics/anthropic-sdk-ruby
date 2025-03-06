@@ -7,7 +7,6 @@ module Anthropic
         model: Anthropic::Models::model,
         metadata: Anthropic::Models::Metadata,
         stop_sequences: ::Array[String],
-        stream: Anthropic::Models::MessageCreateParams::stream,
         system_: Anthropic::Models::MessageCreateParams::system_,
         temperature: Float,
         thinking: Anthropic::Models::thinking_config_param,
@@ -37,8 +36,6 @@ module Anthropic
       attr_reader stop_sequences: ::Array[String]?
 
       def stop_sequences=: (::Array[String]) -> ::Array[String]
-
-      attr_accessor stream: Anthropic::Models::MessageCreateParams::stream
 
       attr_reader system_: Anthropic::Models::MessageCreateParams::system_?
 
@@ -81,7 +78,6 @@ module Anthropic
           max_tokens: Integer,
           messages: ::Array[Anthropic::Models::MessageParam],
           model: Anthropic::Models::model,
-          stream: Anthropic::Models::MessageCreateParams::stream,
           metadata: Anthropic::Models::Metadata,
           stop_sequences: ::Array[String],
           system_: Anthropic::Models::MessageCreateParams::system_,
@@ -98,14 +94,6 @@ module Anthropic
         ) -> void
 
       def to_hash: -> Anthropic::Models::message_create_params
-
-      type stream = true
-
-      class Stream < Anthropic::Enum
-        TRUE: true
-
-        def self.values: -> ::Array[Anthropic::Models::MessageCreateParams::stream]
-      end
 
       type system_ = String | ::Array[Anthropic::Models::TextBlockParam]
 

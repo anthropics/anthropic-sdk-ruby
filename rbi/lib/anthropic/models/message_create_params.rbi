@@ -46,14 +46,6 @@ module Anthropic
       def stop_sequences=(_)
       end
 
-      sig { returns(T::Boolean) }
-      def stream
-      end
-
-      sig { params(_: T::Boolean).returns(T::Boolean) }
-      def stream=(_)
-      end
-
       sig { returns(T.nilable(T.any(String, T::Array[Anthropic::Models::TextBlockParam]))) }
       def system_
       end
@@ -184,7 +176,6 @@ module Anthropic
           max_tokens: Integer,
           messages: T::Array[Anthropic::Models::MessageParam],
           model: T.any(Symbol, String),
-          stream: T::Boolean,
           metadata: Anthropic::Models::Metadata,
           stop_sequences: T::Array[String],
           system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
@@ -213,7 +204,6 @@ module Anthropic
         max_tokens:,
         messages:,
         model:,
-        stream:,
         metadata: nil,
         stop_sequences: nil,
         system_: nil,
@@ -236,7 +226,6 @@ module Anthropic
               model: T.any(Symbol, String),
               metadata: Anthropic::Models::Metadata,
               stop_sequences: T::Array[String],
-              stream: T::Boolean,
               system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
               temperature: Float,
               thinking: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled),
@@ -260,16 +249,6 @@ module Anthropic
           )
       end
       def to_hash
-      end
-
-      class Stream < Anthropic::Enum
-        abstract!
-
-        TRUE = T.let(true, T::Boolean)
-
-        sig { override.returns(T::Array[T::Boolean]) }
-        def self.values
-        end
       end
 
       class System < Anthropic::Union
