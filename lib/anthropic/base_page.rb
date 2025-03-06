@@ -33,8 +33,8 @@ module Anthropic
     #   # @param client [Anthropic::BaseClient]
     #   # @param req [Hash{Symbol=>Object}]
     #   # @param headers [Hash{String=>String}, Net::HTTPHeader]
-    #   # @param unwrapped [Object]
+    #   # @param page_data [Object]
     #   #
-    #   def initialize(client:, req:, headers:, unwrapped:); end
+    #   def initialize(client:, req:, headers:, page_data:); end
   end
 end
