@@ -24,15 +24,6 @@ module Anthropic
 
         # @abstract
         #
-        # @example
-        # ```ruby
-        # case content
-        # in String
-        #   # ...
-        # in Anthropic::Models::Beta::BetaMessageParam::Content::BetaContentBlockParamArray
-        #   # ...
-        # end
-        # ```
         class Content < Anthropic::Union
           BetaContentBlockParamArray = Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlockParam }]
 
@@ -43,15 +34,6 @@ module Anthropic
 
         # @abstract
         #
-        # @example
-        # ```ruby
-        # case role
-        # in :user
-        #   # ...
-        # in :assistant
-        #   # ...
-        # end
-        # ```
         class Role < Anthropic::Enum
           USER = :user
           ASSISTANT = :assistant

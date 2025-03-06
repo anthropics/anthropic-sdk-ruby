@@ -29,33 +29,6 @@ module Anthropic
 
       # @abstract
       #
-      # @example
-      # ```ruby
-      # case content_block
-      # in {type: "text", citations: ^(Anthropic::ArrayOf[union: Anthropic::Models::TextCitation]), text: String}
-      #   # Anthropic::Models::TextBlock ...
-      # in {type: "tool_use", id: String, input: Anthropic::Unknown, name: String}
-      #   # Anthropic::Models::ToolUseBlock ...
-      # in {type: "thinking", signature: String, thinking: String}
-      #   # Anthropic::Models::ThinkingBlock ...
-      # in {type: "redacted_thinking", data: String}
-      #   # Anthropic::Models::RedactedThinkingBlock ...
-      # end
-      # ```
-      #
-      # @example
-      # ```ruby
-      # case content_block
-      # in Anthropic::Models::TextBlock
-      #   # ...
-      # in Anthropic::Models::ToolUseBlock
-      #   # ...
-      # in Anthropic::Models::ThinkingBlock
-      #   # ...
-      # in Anthropic::Models::RedactedThinkingBlock
-      #   # ...
-      # end
-      # ```
       class ContentBlock < Anthropic::Union
         discriminator :type
 

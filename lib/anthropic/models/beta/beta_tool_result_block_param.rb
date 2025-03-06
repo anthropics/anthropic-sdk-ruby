@@ -50,15 +50,6 @@ module Anthropic
 
         # @abstract
         #
-        # @example
-        # ```ruby
-        # case content
-        # in String
-        #   # ...
-        # in Anthropic::Models::Beta::BetaToolResultBlockParam::Content::ContentArray
-        #   # ...
-        # end
-        # ```
         class Content < Anthropic::Union
           ContentArray = Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaToolResultBlockParam::Content::Content }]
 
@@ -68,34 +59,6 @@ module Anthropic
 
           # @abstract
           #
-          # @example
-          # ```ruby
-          # case content
-          # in {
-          #   type: "text",
-          #   text: String,
-          #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral,
-          #   citations: ^(Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitationParam])
-          # }
-          #   # Anthropic::Models::Beta::BetaTextBlockParam ...
-          # in {
-          #   type: "image",
-          #   source: Anthropic::Models::Beta::BetaImageBlockParam::Source,
-          #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
-          # }
-          #   # Anthropic::Models::Beta::BetaImageBlockParam ...
-          # end
-          # ```
-          #
-          # @example
-          # ```ruby
-          # case content
-          # in Anthropic::Models::Beta::BetaTextBlockParam
-          #   # ...
-          # in Anthropic::Models::Beta::BetaImageBlockParam
-          #   # ...
-          # end
-          # ```
           class Content < Anthropic::Union
             discriminator :type
 

@@ -5,25 +5,6 @@ module Anthropic
     module Beta
       # @abstract
       #
-      # @example
-      # ```ruby
-      # case beta_tool_union
-      # in Anthropic::Models::Beta::BetaTool
-      #   # ...
-      # in Anthropic::Models::Beta::BetaToolComputerUse20241022
-      #   # ...
-      # in Anthropic::Models::Beta::BetaToolBash20241022
-      #   # ...
-      # in Anthropic::Models::Beta::BetaToolTextEditor20241022
-      #   # ...
-      # in Anthropic::Models::Beta::BetaToolComputerUse20250124
-      #   # ...
-      # in Anthropic::Models::Beta::BetaToolBash20250124
-      #   # ...
-      # in Anthropic::Models::Beta::BetaToolTextEditor20250124
-      #   # ...
-      # end
-      # ```
       class BetaToolUnion < Anthropic::Union
         variant -> { Anthropic::Models::Beta::BetaTool }
 

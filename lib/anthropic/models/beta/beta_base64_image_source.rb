@@ -30,19 +30,6 @@ module Anthropic
 
         # @abstract
         #
-        # @example
-        # ```ruby
-        # case media_type
-        # in :"image/jpeg"
-        #   # ...
-        # in :"image/png"
-        #   # ...
-        # in :"image/gif"
-        #   # ...
-        # in :"image/webp"
-        #   # ...
-        # end
-        # ```
         class MediaType < Anthropic::Enum
           IMAGE_JPEG = :"image/jpeg"
           IMAGE_PNG = :"image/png"

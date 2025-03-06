@@ -7,16 +7,6 @@ module Anthropic
     # The model that will complete your prompt.\n\nSee
     #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
     #   details and options.
-    #
-    # @example
-    # ```ruby
-    # case model
-    # in Anthropic::Models::Model::UnionMember0
-    #   # ...
-    # in String
-    #   # ...
-    # end
-    # ```
     class Model < Anthropic::Union
       # The model that will complete your prompt.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
       variant enum: -> { Anthropic::Models::Model::UnionMember0 }
@@ -28,24 +18,6 @@ module Anthropic
       # The model that will complete your prompt.\n\nSee
       #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
-      #
-      # @example
-      # ```ruby
-      # case union_member0
-      # in :"claude-3-7-sonnet-latest"
-      #   # ...
-      # in :"claude-3-7-sonnet-20250219"
-      #   # ...
-      # in :"claude-3-5-haiku-latest"
-      #   # ...
-      # in :"claude-3-5-haiku-20241022"
-      #   # ...
-      # in :"claude-3-5-sonnet-latest"
-      #   # ...
-      # in ...
-      #   #...
-      # end
-      # ```
       class UnionMember0 < Anthropic::Enum
         # Our most intelligent model
         CLAUDE_3_7_SONNET_LATEST = :"claude-3-7-sonnet-latest"

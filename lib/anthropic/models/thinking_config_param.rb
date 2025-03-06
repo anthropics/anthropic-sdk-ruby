@@ -13,26 +13,6 @@ module Anthropic
     #   See
     #   [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
     #   for details.
-    #
-    # @example
-    # ```ruby
-    # case thinking_config_param
-    # in {type: "enabled", budget_tokens: Integer}
-    #   # Anthropic::Models::ThinkingConfigEnabled ...
-    # in {type: "disabled"}
-    #   # Anthropic::Models::ThinkingConfigDisabled ...
-    # end
-    # ```
-    #
-    # @example
-    # ```ruby
-    # case thinking_config_param
-    # in Anthropic::Models::ThinkingConfigEnabled
-    #   # ...
-    # in Anthropic::Models::ThinkingConfigDisabled
-    #   # ...
-    # end
-    # ```
     class ThinkingConfigParam < Anthropic::Union
       discriminator :type
 

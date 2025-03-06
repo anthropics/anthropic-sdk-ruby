@@ -14,26 +14,6 @@ module Anthropic
       #   See
       #   [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
       #   for details.
-      #
-      # @example
-      # ```ruby
-      # case beta_thinking_config_param
-      # in {type: "enabled", budget_tokens: Integer}
-      #   # Anthropic::Models::Beta::BetaThinkingConfigEnabled ...
-      # in {type: "disabled"}
-      #   # Anthropic::Models::Beta::BetaThinkingConfigDisabled ...
-      # end
-      # ```
-      #
-      # @example
-      # ```ruby
-      # case beta_thinking_config_param
-      # in Anthropic::Models::Beta::BetaThinkingConfigEnabled
-      #   # ...
-      # in Anthropic::Models::Beta::BetaThinkingConfigDisabled
-      #   # ...
-      # end
-      # ```
       class BetaThinkingConfigParam < Anthropic::Union
         discriminator :type
 

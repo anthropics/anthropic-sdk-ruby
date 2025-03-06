@@ -5,34 +5,6 @@ module Anthropic
     module Beta
       # @abstract
       #
-      # @example
-      # ```ruby
-      # case beta_content_block_source_content
-      # in {
-      #   type: "text",
-      #   text: String,
-      #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral,
-      #   citations: ^(Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitationParam])
-      # }
-      #   # Anthropic::Models::Beta::BetaTextBlockParam ...
-      # in {
-      #   type: "image",
-      #   source: Anthropic::Models::Beta::BetaImageBlockParam::Source,
-      #   cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral
-      # }
-      #   # Anthropic::Models::Beta::BetaImageBlockParam ...
-      # end
-      # ```
-      #
-      # @example
-      # ```ruby
-      # case beta_content_block_source_content
-      # in Anthropic::Models::Beta::BetaTextBlockParam
-      #   # ...
-      # in Anthropic::Models::Beta::BetaImageBlockParam
-      #   # ...
-      # end
-      # ```
       class BetaContentBlockSourceContent < Anthropic::Union
         discriminator :type
 
