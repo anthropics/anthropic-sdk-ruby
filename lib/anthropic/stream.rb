@@ -9,7 +9,7 @@ module Anthropic
     # @return [Enumerable]
     #
     private def iterator
-      @iter ||= Anthropic::Util.chain_fused(@messages) do |y|
+      @iterator ||= Anthropic::Util.chain_fused(@messages) do |y|
         @messages.each do |msg|
           case msg
           in {event: "completion", data: String => data}

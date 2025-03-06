@@ -61,7 +61,7 @@ module Anthropic
             message_batch_id: String,
             request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
           )
-            .returns(Anthropic::Models::Messages::MessageBatchIndividualResponse)
+            .returns(Anthropic::JsonLStream[Anthropic::Models::Messages::MessageBatchIndividualResponse])
         end
         def results(message_batch_id, request_options: {})
         end

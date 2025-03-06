@@ -184,7 +184,7 @@ module Anthropic
           #
           #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
           #
-          # @return [Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse]
+          # @return [Anthropic::JsonLStream<Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse>]
           #
           def results(message_batch_id, params = {})
             parsed, options = Anthropic::Models::Beta::Messages::BatchResultsParams.dump_request(params)
@@ -192,6 +192,7 @@ module Anthropic
               method: :get,
               path: ["v1/messages/batches/%0s/results?beta=true", message_batch_id],
               headers: {"accept" => "application/x-jsonl", **parsed},
+              stream: Anthropic::JsonLStream,
               model: Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse,
               options: options
             )

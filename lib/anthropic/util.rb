@@ -496,10 +496,7 @@ module Anthropic
       #
       def decode_content(headers, stream:, suppress_error: false)
         case headers["content-type"]
-        in %r{^text/event-stream}
-          lines = enum_lines(stream)
-          parse_sse(lines)
-        in %r{^application/json}
+        in %r{^application/(?:vnd\.api\+)?json}
           json = stream.to_a.join
           begin
             JSON.parse(json, symbolize_names: true)
@@ -507,6 +504,11 @@ module Anthropic
             raise e unless suppress_error
             json
           end
+        in %r{^text/event-stream}
+          lines = enum_lines(stream)
+          parse_sse(lines)
+        in %r{^application/(?:x-)?jsonl}
+          enum_lines(stream)
         in %r{^text/}
           stream.to_a.join
         else
@@ -615,7 +617,7 @@ module Anthropic
               in "event"
                 current.merge!(event: value)
               in "data"
-                (current[:data] ||= String.new) << value << "\n"
+                (current[:data] ||= String.new) << (value << "\n")
               in "id" unless value.include?("\0")
                 current.merge!(id: value)
               in "retry" if /^\d+$/ =~ value
