@@ -18,7 +18,7 @@ module Anthropic
       @status = status
       @response = response
       @messages = messages
-      @iter = iterator
+      @iterator = iterator
     end
 
     # @private
@@ -29,7 +29,7 @@ module Anthropic
 
     # @return [void]
     #
-    def close = Anthropic::Util.close_fused!(@iter)
+    def close = Anthropic::Util.close_fused!(@iterator)
 
     # @param blk [Proc]
     #
@@ -39,12 +39,12 @@ module Anthropic
       unless block_given?
         raise ArgumentError.new("A block must be given to #for_each")
       end
-      @iter.each(&)
+      @iterator.each(&)
     end
 
     # @return [Enumerable]
     #
-    def to_enum = @iter
+    def to_enum = @iterator
 
     alias_method :enum_for, :to_enum
   end

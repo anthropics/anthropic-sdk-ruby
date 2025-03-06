@@ -62,11 +62,11 @@ module Anthropic
             String message_batch_id,
             ?Anthropic::Models::Messages::BatchResultsParams
             | ::Hash[Symbol, top] params
-          ) -> Anthropic::Models::Messages::MessageBatchIndividualResponse
+          ) -> Anthropic::JsonLStream[Anthropic::Models::Messages::MessageBatchIndividualResponse]
           | (
             String message_batch_id,
             request_options: Anthropic::request_opts
-          ) -> Anthropic::Models::Messages::MessageBatchIndividualResponse
+          ) -> Anthropic::JsonLStream[Anthropic::Models::Messages::MessageBatchIndividualResponse]
 
         def initialize: (client: Anthropic::Client) -> void
       end

@@ -68,7 +68,7 @@ module Anthropic
               betas: T::Array[T.any(String, Symbol)],
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
             )
-              .returns(Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse)
+              .returns(Anthropic::JsonLStream[Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse])
           end
           def results(message_batch_id, betas: nil, request_options: {})
           end
