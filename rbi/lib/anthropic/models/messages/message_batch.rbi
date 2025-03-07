@@ -102,9 +102,9 @@ module Anthropic
             results_url: T.nilable(String),
             type: Symbol
           )
-            .void
+            .returns(T.attached_class)
         end
-        def initialize(
+        def self.new(
           id:,
           archived_at:,
           cancel_initiated_at:,

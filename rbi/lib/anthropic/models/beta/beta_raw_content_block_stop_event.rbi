@@ -22,8 +22,8 @@ module Anthropic
         def type=(_)
         end
 
-        sig { params(index: Integer, type: Symbol).void }
-        def initialize(index:, type: :content_block_stop)
+        sig { params(index: Integer, type: Symbol).returns(T.attached_class) }
+        def self.new(index:, type: :content_block_stop)
         end
 
         sig { override.returns({index: Integer, type: Symbol}) }

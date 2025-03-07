@@ -279,9 +279,9 @@ module Anthropic
         ),
         spec: T::Hash[Symbol, T.anything]
       )
-        .void
+        .returns(T.attached_class)
     end
-    def initialize(type_info, spec = {})
+    def self.new(type_info, spec = {})
     end
   end
 
@@ -335,9 +335,9 @@ module Anthropic
         ),
         spec: T::Hash[Symbol, T.anything]
       )
-        .void
+        .returns(T.attached_class)
     end
-    def initialize(type_info, spec = {})
+    def self.new(type_info, spec = {})
     end
   end
 
@@ -478,8 +478,8 @@ module Anthropic
     def deconstruct_keys(keys)
     end
 
-    sig { params(data: T.any(T::Hash[Symbol, T.anything], T.self_type)).void }
-    def initialize(data = {})
+    sig { params(data: T.any(T::Hash[Symbol, T.anything], T.self_type)).returns(T.attached_class) }
+    def self.new(data = {})
     end
 
     sig { returns(String) }

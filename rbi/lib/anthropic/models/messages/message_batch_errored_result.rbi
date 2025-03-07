@@ -22,8 +22,8 @@ module Anthropic
         def type=(_)
         end
 
-        sig { params(error: Anthropic::Models::ErrorResponse, type: Symbol).void }
-        def initialize(error:, type: :errored)
+        sig { params(error: Anthropic::Models::ErrorResponse, type: Symbol).returns(T.attached_class) }
+        def self.new(error:, type: :errored)
         end
 
         sig { override.returns({error: Anthropic::Models::ErrorResponse, type: Symbol}) }

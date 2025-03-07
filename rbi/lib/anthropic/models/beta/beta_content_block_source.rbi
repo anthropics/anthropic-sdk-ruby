@@ -50,9 +50,9 @@ module Anthropic
             ),
             type: Symbol
           )
-            .void
+            .returns(T.attached_class)
         end
-        def initialize(content:, type: :content)
+        def self.new(content:, type: :content)
         end
 
         sig do

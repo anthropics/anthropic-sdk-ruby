@@ -57,9 +57,9 @@ module Anthropic
                 Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
               )
             )
-              .void
+              .returns(T.attached_class)
           end
-          def initialize(custom_id:, result:)
+          def self.new(custom_id:, result:)
           end
 
           sig do

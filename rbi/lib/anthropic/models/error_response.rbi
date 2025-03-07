@@ -75,9 +75,9 @@ module Anthropic
           ),
           type: Symbol
         )
-          .void
+          .returns(T.attached_class)
       end
-      def initialize(error:, type: :error)
+      def self.new(error:, type: :error)
       end
 
       sig do

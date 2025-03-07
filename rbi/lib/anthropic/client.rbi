@@ -56,9 +56,9 @@ module Anthropic
         initial_retry_delay: Float,
         max_retry_delay: Float
       )
-        .void
+        .returns(T.attached_class)
     end
-    def initialize(
+    def self.new(
       base_url: nil,
       api_key: ENV["ANTHROPIC_API_KEY"],
       auth_token: ENV["ANTHROPIC_AUTH_TOKEN"],

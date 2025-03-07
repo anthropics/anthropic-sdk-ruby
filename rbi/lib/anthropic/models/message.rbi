@@ -117,18 +117,9 @@ module Anthropic
           role: Symbol,
           type: Symbol
         )
-          .void
+          .returns(T.attached_class)
       end
-      def initialize(
-        id:,
-        content:,
-        model:,
-        stop_reason:,
-        stop_sequence:,
-        usage:,
-        role: :assistant,
-        type: :message
-      )
+      def self.new(id:, content:, model:, stop_reason:, stop_sequence:, usage:, role: :assistant, type: :message)
       end
 
       sig do

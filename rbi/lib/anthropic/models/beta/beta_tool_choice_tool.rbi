@@ -30,8 +30,10 @@ module Anthropic
         def disable_parallel_tool_use=(_)
         end
 
-        sig { params(name: String, disable_parallel_tool_use: T::Boolean, type: Symbol).void }
-        def initialize(name:, disable_parallel_tool_use: nil, type: :tool)
+        sig do
+          params(name: String, disable_parallel_tool_use: T::Boolean, type: Symbol).returns(T.attached_class)
+        end
+        def self.new(name:, disable_parallel_tool_use: nil, type: :tool)
         end
 
         sig { override.returns({name: String, type: Symbol, disable_parallel_tool_use: T::Boolean}) }

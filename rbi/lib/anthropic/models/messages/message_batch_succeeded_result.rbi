@@ -22,8 +22,8 @@ module Anthropic
         def type=(_)
         end
 
-        sig { params(message: Anthropic::Models::Message, type: Symbol).void }
-        def initialize(message:, type: :succeeded)
+        sig { params(message: Anthropic::Models::Message, type: Symbol).returns(T.attached_class) }
+        def self.new(message:, type: :succeeded)
         end
 
         sig { override.returns({message: Anthropic::Models::Message, type: Symbol}) }

@@ -88,9 +88,9 @@ module Anthropic
           ),
           type: Symbol
         )
-          .void
+          .returns(T.attached_class)
       end
-      def initialize(text:, cache_control: nil, citations: nil, type: :text)
+      def self.new(text:, cache_control: nil, citations: nil, type: :text)
       end
 
       sig do

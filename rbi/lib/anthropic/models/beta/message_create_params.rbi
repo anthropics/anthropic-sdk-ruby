@@ -245,9 +245,9 @@ module Anthropic
             betas: T::Array[T.any(String, Symbol)],
             request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
           )
-            .void
+            .returns(T.attached_class)
         end
-        def initialize(
+        def self.new(
           max_tokens:,
           messages:,
           model:,

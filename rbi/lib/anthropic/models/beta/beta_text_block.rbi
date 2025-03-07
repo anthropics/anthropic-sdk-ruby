@@ -79,9 +79,9 @@ module Anthropic
             text: String,
             type: Symbol
           )
-            .void
+            .returns(T.attached_class)
         end
-        def initialize(citations:, text:, type: :text)
+        def self.new(citations:, text:, type: :text)
         end
 
         sig do

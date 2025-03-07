@@ -38,9 +38,9 @@ module Anthropic
             limit: Integer,
             request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
           )
-            .void
+            .returns(T.attached_class)
         end
-        def initialize(after_id: nil, before_id: nil, limit: nil, request_options: {})
+        def self.new(after_id: nil, before_id: nil, limit: nil, request_options: {})
         end
 
         sig do

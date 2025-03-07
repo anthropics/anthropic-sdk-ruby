@@ -36,9 +36,9 @@ module Anthropic
           usage: Anthropic::Models::MessageDeltaUsage,
           type: Symbol
         )
-          .void
+          .returns(T.attached_class)
       end
-      def initialize(delta:, usage:, type: :message_delta)
+      def self.new(delta:, usage:, type: :message_delta)
       end
 
       sig do
@@ -71,8 +71,10 @@ module Anthropic
         def stop_sequence=(_)
         end
 
-        sig { params(stop_reason: T.nilable(Symbol), stop_sequence: T.nilable(String)).void }
-        def initialize(stop_reason:, stop_sequence:)
+        sig do
+          params(stop_reason: T.nilable(Symbol), stop_sequence: T.nilable(String)).returns(T.attached_class)
+        end
+        def self.new(stop_reason:, stop_sequence:)
         end
 
         sig { override.returns({stop_reason: T.nilable(Symbol), stop_sequence: T.nilable(String)}) }

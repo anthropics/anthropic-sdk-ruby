@@ -20,8 +20,8 @@ module Anthropic
         def type=(_)
         end
 
-        sig { params(id: String, type: Symbol).void }
-        def initialize(id:, type: :message_batch_deleted)
+        sig { params(id: String, type: Symbol).returns(T.attached_class) }
+        def self.new(id:, type: :message_batch_deleted)
         end
 
         sig { override.returns({id: String, type: Symbol}) }

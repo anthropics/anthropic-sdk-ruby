@@ -66,9 +66,9 @@ module Anthropic
             name: Symbol,
             type: Symbol
           )
-            .void
+            .returns(T.attached_class)
         end
-        def initialize(
+        def self.new(
           display_height_px:,
           display_width_px:,
           cache_control: nil,

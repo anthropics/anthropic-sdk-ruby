@@ -14,8 +14,8 @@ module Anthropic
         def enabled=(_)
         end
 
-        sig { params(enabled: T::Boolean).void }
-        def initialize(enabled: nil)
+        sig { params(enabled: T::Boolean).returns(T.attached_class) }
+        def self.new(enabled: nil)
         end
 
         sig { override.returns({enabled: T::Boolean}) }

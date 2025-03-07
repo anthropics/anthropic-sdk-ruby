@@ -45,13 +45,13 @@ module Anthropic
 
     class << self
       sig { params(req: Anthropic::BaseClient::RequestComponentsShape).void }
-      def self.validate!(req)
+      def validate!(req)
       end
 
       sig do
         params(status: Integer, headers: T.any(T::Hash[String, String], Net::HTTPHeader)).returns(T::Boolean)
       end
-      def self.should_retry?(status, headers:)
+      def should_retry?(status, headers:)
       end
 
       sig do
@@ -62,7 +62,7 @@ module Anthropic
         )
           .returns(Anthropic::BaseClient::RequestInputShape)
       end
-      def self.follow_redirect(request, status:, response_headers:)
+      def follow_redirect(request, status:, response_headers:)
       end
     end
 
@@ -85,9 +85,9 @@ module Anthropic
                          T.nilable(T.any(String, Integer, T::Array[T.nilable(T.any(String, Integer))]))],
         idempotency_header: T.nilable(String)
       )
-        .void
+        .returns(T.attached_class)
     end
-    def initialize(
+    def self.new(
       base_url:,
       timeout: 0.0,
       max_retries: 0,

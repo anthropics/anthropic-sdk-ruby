@@ -45,9 +45,9 @@ module Anthropic
           cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
           description: String
         )
-          .void
+          .returns(T.attached_class)
       end
-      def initialize(input_schema:, name:, cache_control: nil, description: nil)
+      def self.new(input_schema:, name:, cache_control: nil, description: nil)
       end
 
       sig do
@@ -81,8 +81,8 @@ module Anthropic
         def properties=(_)
         end
 
-        sig { params(properties: T.nilable(T.anything), type: Symbol).void }
-        def initialize(properties: nil, type: :object)
+        sig { params(properties: T.nilable(T.anything), type: Symbol).returns(T.attached_class) }
+        def self.new(properties: nil, type: :object)
         end
 
         sig { override.returns({type: Symbol, properties: T.nilable(T.anything)}) }

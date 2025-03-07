@@ -53,9 +53,10 @@ module Anthropic
             expired: Integer,
             processing: Integer,
             succeeded: Integer
-          ).void
+          )
+            .returns(T.attached_class)
         end
-        def initialize(canceled:, errored:, expired:, processing:, succeeded:)
+        def self.new(canceled:, errored:, expired:, processing:, succeeded:)
         end
 
         sig do

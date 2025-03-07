@@ -45,9 +45,9 @@ module Anthropic
             input_tokens: Integer,
             output_tokens: Integer
           )
-            .void
+            .returns(T.attached_class)
         end
-        def initialize(cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, output_tokens:)
+        def self.new(cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, output_tokens:)
         end
 
         sig do

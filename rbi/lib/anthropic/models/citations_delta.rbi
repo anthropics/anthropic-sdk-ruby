@@ -51,9 +51,9 @@ module Anthropic
           ),
           type: Symbol
         )
-          .void
+          .returns(T.attached_class)
       end
-      def initialize(citation:, type: :citations_delta)
+      def self.new(citation:, type: :citations_delta)
       end
 
       sig do

@@ -11,8 +11,8 @@ module Anthropic
       def output_tokens=(_)
       end
 
-      sig { params(output_tokens: Integer).void }
-      def initialize(output_tokens:)
+      sig { params(output_tokens: Integer).returns(T.attached_class) }
+      def self.new(output_tokens:)
       end
 
       sig { override.returns({output_tokens: Integer}) }

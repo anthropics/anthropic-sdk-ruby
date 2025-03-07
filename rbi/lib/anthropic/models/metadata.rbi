@@ -11,8 +11,8 @@ module Anthropic
       def user_id=(_)
       end
 
-      sig { params(user_id: T.nilable(String)).void }
-      def initialize(user_id: nil)
+      sig { params(user_id: T.nilable(String)).returns(T.attached_class) }
+      def self.new(user_id: nil)
       end
 
       sig { override.returns({user_id: T.nilable(String)}) }

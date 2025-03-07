@@ -68,9 +68,9 @@ module Anthropic
           index: Integer,
           type: Symbol
         )
-          .void
+          .returns(T.attached_class)
       end
-      def initialize(delta:, index:, type: :content_block_delta)
+      def self.new(delta:, index:, type: :content_block_delta)
       end
 
       sig do

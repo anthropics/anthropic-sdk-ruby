@@ -39,9 +39,9 @@ module Anthropic
           cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
           type: Symbol
         )
-          .void
+          .returns(T.attached_class)
       end
-      def initialize(source:, cache_control: nil, type: :image)
+      def self.new(source:, cache_control: nil, type: :image)
       end
 
       sig do

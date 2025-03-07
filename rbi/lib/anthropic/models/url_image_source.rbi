@@ -19,8 +19,8 @@ module Anthropic
       def url=(_)
       end
 
-      sig { params(url: String, type: Symbol).void }
-      def initialize(url:, type: :url)
+      sig { params(url: String, type: Symbol).returns(T.attached_class) }
+      def self.new(url:, type: :url)
       end
 
       sig { override.returns({type: Symbol, url: String}) }

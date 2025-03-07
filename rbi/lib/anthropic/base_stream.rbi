@@ -12,9 +12,9 @@ module Anthropic
         response: Net::HTTPResponse,
         messages: T::Enumerable[Anthropic::Util::SSEMessage]
       )
-        .void
+        .returns(T.attached_class)
     end
-    def initialize(model:, url:, status:, response:, messages:)
+    def self.new(model:, url:, status:, response:, messages:)
     end
 
     sig { overridable.returns(T::Enumerable[Elem]) }
