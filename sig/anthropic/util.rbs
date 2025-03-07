@@ -100,9 +100,9 @@ module Anthropic
     type sse_message =
       { event: String?, data: String?, id: String?, retry: Integer? }
 
-    def self?.enum_lines: (Enumerable[String] enum) -> Enumerable[String]
+    def self?.decode_lines: (Enumerable[String] enum) -> Enumerable[String]
 
-    def self?.parse_sse: (
+    def self?.decode_sse: (
       Enumerable[String] lines
     ) -> Anthropic::Util::sse_message
   end

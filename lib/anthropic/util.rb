@@ -577,15 +577,29 @@ module Anthropic
       #
       # @return [Enumerable]
       #
-      def enum_lines(enum)
+      def decode_lines(enum)
+        re = /(\r\n|\r|\n)/
+        buffer = String.new.b
+        cr_seen = nil
+
         chain_fused(enum) do |y|
-          buffer = String.new
           enum.each do |row|
             buffer << row
-            while (idx = buffer.index("\n"))
-              y << buffer.slice!(..idx)
+            while (match = re.match(buffer, cr_seen.to_i))
+              case [match.captures.first, cr_seen]
+              in ["\r", nil]
+                cr_seen = match.end(1)
+                next
+              in ["\r" | "\r\n", Integer]
+                y << buffer.slice!(..(cr_seen.pred))
+              else
+                y << buffer.slice!(..(match.end(1).pred))
+              end
+              cr_seen = nil
             end
           end
+
+          y << buffer.slice!(..(cr_seen.pred)) unless cr_seen.nil?
           y << buffer unless buffer.empty?
         end
       end
@@ -598,13 +612,13 @@ module Anthropic
       #
       # @return [Hash{Symbol=>Object}]
       #
-      def parse_sse(lines)
+      def decode_sse(lines)
         chain_fused(lines) do |y|
           blank = {event: nil, data: nil, id: nil, retry: nil}
           current = {}
 
           lines.each do |line|
-            case line.strip
+            case line.sub(/\R$/, "")
             in ""
               next if current.empty?
               y << {**blank, **current}
@@ -612,12 +626,12 @@ module Anthropic
             in /^:/
               next
             in /^([^:]+):\s?(.*)$/
-              _, field, value = Regexp.last_match.to_a
+              field, value = Regexp.last_match.captures
               case field
               in "event"
                 current.merge!(event: value)
               in "data"
-                (current[:data] ||= String.new) << (value << "\n")
+                (current[:data] ||= String.new.b) << value << "\n"
               in "id" unless value.include?("\0")
                 current.merge!(id: value)
               in "retry" if /^\d+$/ =~ value
