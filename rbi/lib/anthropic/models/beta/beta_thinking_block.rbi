@@ -30,8 +30,8 @@ module Anthropic
         def type=(_)
         end
 
-        sig { params(signature: String, thinking: String, type: Symbol).void }
-        def initialize(signature:, thinking:, type: :thinking)
+        sig { params(signature: String, thinking: String, type: Symbol).returns(T.attached_class) }
+        def self.new(signature:, thinking:, type: :thinking)
         end
 
         sig { override.returns({signature: String, thinking: String, type: Symbol}) }

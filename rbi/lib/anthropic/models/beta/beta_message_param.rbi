@@ -90,9 +90,9 @@ module Anthropic
             ),
             role: Symbol
           )
-            .void
+            .returns(T.attached_class)
         end
-        def initialize(content:, role:)
+        def self.new(content:, role:)
         end
 
         sig do

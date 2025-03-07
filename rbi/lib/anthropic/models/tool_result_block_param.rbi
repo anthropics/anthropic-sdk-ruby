@@ -67,9 +67,9 @@ module Anthropic
           is_error: T::Boolean,
           type: Symbol
         )
-          .void
+          .returns(T.attached_class)
       end
-      def initialize(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result)
+      def self.new(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result)
       end
 
       sig do

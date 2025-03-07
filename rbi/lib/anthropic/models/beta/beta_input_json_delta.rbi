@@ -22,8 +22,8 @@ module Anthropic
         def type=(_)
         end
 
-        sig { params(partial_json: String, type: Symbol).void }
-        def initialize(partial_json:, type: :input_json_delta)
+        sig { params(partial_json: String, type: Symbol).returns(T.attached_class) }
+        def self.new(partial_json:, type: :input_json_delta)
         end
 
         sig { override.returns({partial_json: String, type: Symbol}) }

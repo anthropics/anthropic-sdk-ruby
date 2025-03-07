@@ -66,8 +66,8 @@ module Anthropic
         def results(message_batch_id, request_options: {})
         end
 
-        sig { params(client: Anthropic::Client).void }
-        def initialize(client:)
+        sig { params(client: Anthropic::Client).returns(T.attached_class) }
+        def self.new(client:)
         end
       end
     end

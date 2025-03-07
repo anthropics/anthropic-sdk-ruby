@@ -63,9 +63,9 @@ module Anthropic
             start_block_index: Integer,
             type: Symbol
           )
-            .void
+            .returns(T.attached_class)
         end
-        def initialize(
+        def self.new(
           cited_text:,
           document_index:,
           document_title:,

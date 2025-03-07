@@ -14,8 +14,8 @@ module Anthropic
         def input_tokens=(_)
         end
 
-        sig { params(input_tokens: Integer).void }
-        def initialize(input_tokens:)
+        sig { params(input_tokens: Integer).returns(T.attached_class) }
+        def self.new(input_tokens:)
         end
 
         sig { override.returns({input_tokens: Integer}) }

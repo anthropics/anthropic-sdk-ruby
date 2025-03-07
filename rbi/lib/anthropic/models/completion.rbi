@@ -51,9 +51,9 @@ module Anthropic
           stop_reason: T.nilable(String),
           type: Symbol
         )
-          .void
+          .returns(T.attached_class)
       end
-      def initialize(id:, completion:, model:, stop_reason:, type: :completion)
+      def self.new(id:, completion:, model:, stop_reason:, type: :completion)
       end
 
       sig do

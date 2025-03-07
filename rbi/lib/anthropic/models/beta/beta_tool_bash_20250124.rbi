@@ -39,9 +39,9 @@ module Anthropic
             name: Symbol,
             type: Symbol
           )
-            .void
+            .returns(T.attached_class)
         end
-        def initialize(cache_control: nil, name: :bash, type: :bash_20250124)
+        def self.new(cache_control: nil, name: :bash, type: :bash_20250124)
         end
 
         sig do

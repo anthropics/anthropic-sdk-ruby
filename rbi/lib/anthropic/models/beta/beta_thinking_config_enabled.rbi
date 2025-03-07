@@ -22,8 +22,8 @@ module Anthropic
         def type=(_)
         end
 
-        sig { params(budget_tokens: Integer, type: Symbol).void }
-        def initialize(budget_tokens:, type: :enabled)
+        sig { params(budget_tokens: Integer, type: Symbol).returns(T.attached_class) }
+        def self.new(budget_tokens:, type: :enabled)
         end
 
         sig { override.returns({budget_tokens: Integer, type: Symbol}) }

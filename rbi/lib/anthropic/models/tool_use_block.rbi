@@ -35,8 +35,8 @@ module Anthropic
       def type=(_)
       end
 
-      sig { params(id: String, input: T.anything, name: String, type: Symbol).void }
-      def initialize(id:, input:, name:, type: :tool_use)
+      sig { params(id: String, input: T.anything, name: String, type: Symbol).returns(T.attached_class) }
+      def self.new(id:, input:, name:, type: :tool_use)
       end
 
       sig { override.returns({id: String, input: T.anything, name: String, type: Symbol}) }

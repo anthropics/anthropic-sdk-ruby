@@ -22,8 +22,8 @@ module Anthropic
         def type=(_)
         end
 
-        sig { params(thinking: String, type: Symbol).void }
-        def initialize(thinking:, type: :thinking_delta)
+        sig { params(thinking: String, type: Symbol).returns(T.attached_class) }
+        def self.new(thinking:, type: :thinking_delta)
         end
 
         sig { override.returns({thinking: String, type: Symbol}) }

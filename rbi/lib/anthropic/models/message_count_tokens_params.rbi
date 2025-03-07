@@ -144,17 +144,9 @@ module Anthropic
           ],
           request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
         )
-          .void
+          .returns(T.attached_class)
       end
-      def initialize(
-        messages:,
-        model:,
-        system_: nil,
-        thinking: nil,
-        tool_choice: nil,
-        tools: nil,
-        request_options: {}
-      )
+      def self.new(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
       end
 
       sig do

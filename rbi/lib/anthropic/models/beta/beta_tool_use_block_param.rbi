@@ -57,9 +57,9 @@ module Anthropic
             cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
             type: Symbol
           )
-            .void
+            .returns(T.attached_class)
         end
-        def initialize(id:, input:, name:, cache_control: nil, type: :tool_use)
+        def self.new(id:, input:, name:, cache_control: nil, type: :tool_use)
         end
 
         sig do

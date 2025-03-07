@@ -14,8 +14,8 @@ module Anthropic
         def type=(_)
         end
 
-        sig { params(type: Symbol).void }
-        def initialize(type: :ephemeral)
+        sig { params(type: Symbol).returns(T.attached_class) }
+        def self.new(type: :ephemeral)
         end
 
         sig { override.returns({type: Symbol}) }

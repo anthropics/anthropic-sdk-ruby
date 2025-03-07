@@ -80,5 +80,9 @@ module Anthropic
     sig { params(_: T.nilable(Float)).returns(T.nilable(Float)) }
     def timeout=(_)
     end
+
+    sig { params(values: T::Hash[Symbol, T.anything]).returns(T.attached_class) }
+    def self.new(values = {})
+    end
   end
 end

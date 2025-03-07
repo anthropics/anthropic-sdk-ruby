@@ -35,9 +35,9 @@ module Anthropic
           content: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]),
           type: Symbol
         )
-          .void
+          .returns(T.attached_class)
       end
-      def initialize(content:, type: :content)
+      def self.new(content:, type: :content)
       end
 
       sig do

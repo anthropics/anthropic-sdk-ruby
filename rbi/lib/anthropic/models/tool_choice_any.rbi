@@ -19,8 +19,8 @@ module Anthropic
       def disable_parallel_tool_use=(_)
       end
 
-      sig { params(disable_parallel_tool_use: T::Boolean, type: Symbol).void }
-      def initialize(disable_parallel_tool_use: nil, type: :any)
+      sig { params(disable_parallel_tool_use: T::Boolean, type: Symbol).returns(T.attached_class) }
+      def self.new(disable_parallel_tool_use: nil, type: :any)
       end
 
       sig { override.returns({type: Symbol, disable_parallel_tool_use: T::Boolean}) }

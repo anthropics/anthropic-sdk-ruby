@@ -23,9 +23,9 @@ module Anthropic
             requests: T::Array[Anthropic::Models::Messages::BatchCreateParams::Request],
             request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
           )
-            .void
+            .returns(T.attached_class)
         end
-        def initialize(requests:, request_options: {})
+        def self.new(requests:, request_options: {})
         end
 
         sig do
@@ -60,8 +60,11 @@ module Anthropic
           def params=(_)
           end
 
-          sig { params(custom_id: String, params: Anthropic::Models::Messages::BatchCreateParams::Request::Params).void }
-          def initialize(custom_id:, params:)
+          sig do
+            params(custom_id: String, params: Anthropic::Models::Messages::BatchCreateParams::Request::Params)
+              .returns(T.attached_class)
+          end
+          def self.new(custom_id:, params:)
           end
 
           sig do
@@ -272,9 +275,9 @@ module Anthropic
                 top_k: Integer,
                 top_p: Float
               )
-                .void
+                .returns(T.attached_class)
             end
-            def initialize(
+            def self.new(
               max_tokens:,
               messages:,
               model:,

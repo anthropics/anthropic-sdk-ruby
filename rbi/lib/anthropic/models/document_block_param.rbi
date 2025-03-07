@@ -94,9 +94,9 @@ module Anthropic
           title: T.nilable(String),
           type: Symbol
         )
-          .void
+          .returns(T.attached_class)
       end
-      def initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document)
+      def self.new(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document)
       end
 
       sig do

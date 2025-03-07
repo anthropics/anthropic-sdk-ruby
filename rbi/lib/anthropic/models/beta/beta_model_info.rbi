@@ -38,8 +38,10 @@ module Anthropic
         def type=(_)
         end
 
-        sig { params(id: String, created_at: Time, display_name: String, type: Symbol).void }
-        def initialize(id:, created_at:, display_name:, type: :model)
+        sig do
+          params(id: String, created_at: Time, display_name: String, type: Symbol).returns(T.attached_class)
+        end
+        def self.new(id:, created_at:, display_name:, type: :model)
         end
 
         sig { override.returns({id: String, created_at: Time, display_name: String, type: Symbol}) }

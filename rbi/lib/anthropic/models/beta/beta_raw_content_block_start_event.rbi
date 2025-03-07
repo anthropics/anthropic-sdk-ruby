@@ -67,9 +67,9 @@ module Anthropic
             index: Integer,
             type: Symbol
           )
-            .void
+            .returns(T.attached_class)
         end
-        def initialize(content_block:, index:, type: :content_block_start)
+        def self.new(content_block:, index:, type: :content_block_start)
         end
 
         sig do

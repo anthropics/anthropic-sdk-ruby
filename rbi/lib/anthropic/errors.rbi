@@ -32,9 +32,9 @@ module Anthropic
         response: NilClass,
         message: T.nilable(String)
       )
-        .void
+        .returns(T.attached_class)
     end
-    def initialize(url:, status: nil, body: nil, request: nil, response: nil, message: nil)
+    def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: nil)
     end
   end
 
@@ -56,9 +56,9 @@ module Anthropic
         response: NilClass,
         message: T.nilable(String)
       )
-        .void
+        .returns(T.attached_class)
     end
-    def initialize(url:, status: nil, body: nil, request: nil, response: nil, message: "Connection error.")
+    def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: "Connection error.")
     end
   end
 
@@ -72,9 +72,9 @@ module Anthropic
         response: NilClass,
         message: T.nilable(String)
       )
-        .void
+        .returns(T.attached_class)
     end
-    def initialize(url:, status: nil, body: nil, request: nil, response: nil, message: "Request timed out.")
+    def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: "Request timed out.")
     end
   end
 
@@ -106,9 +106,9 @@ module Anthropic
         response: NilClass,
         message: T.nilable(String)
       )
-        .void
+        .returns(T.attached_class)
     end
-    def initialize(url:, status:, body:, request:, response:, message: nil)
+    def self.new(url:, status:, body:, request:, response:, message: nil)
     end
   end
 

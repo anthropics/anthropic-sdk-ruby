@@ -19,8 +19,8 @@ module Anthropic
       def type=(_)
       end
 
-      sig { params(message: String, type: Symbol).void }
-      def initialize(message:, type: :invalid_request_error)
+      sig { params(message: String, type: Symbol).returns(T.attached_class) }
+      def self.new(message:, type: :invalid_request_error)
       end
 
       sig { override.returns({message: String, type: Symbol}) }
