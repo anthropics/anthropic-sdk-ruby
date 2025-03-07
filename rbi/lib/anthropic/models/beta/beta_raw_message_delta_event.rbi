@@ -93,8 +93,10 @@ module Anthropic
             STOP_SEQUENCE = T.let(:stop_sequence, T.nilable(Symbol))
             TOOL_USE = T.let(:tool_use, T.nilable(Symbol))
 
-            sig { override.returns(T::Array[Symbol]) }
-            def self.values
+            class << self
+              sig { override.returns(T::Array[Symbol]) }
+              def values
+              end
             end
           end
         end

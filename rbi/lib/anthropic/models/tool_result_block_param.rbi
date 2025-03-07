@@ -95,21 +95,25 @@ module Anthropic
         class Content < Anthropic::Union
           abstract!
 
-          sig do
-            override
-              .returns([[Symbol, Anthropic::Models::TextBlockParam], [Symbol, Anthropic::Models::ImageBlockParam]])
-          end
-          private_class_method def self.variants
+          class << self
+            sig do
+              override
+                .returns([[Symbol, Anthropic::Models::TextBlockParam], [Symbol, Anthropic::Models::ImageBlockParam]])
+            end
+            private def variants
+            end
           end
         end
 
-        sig do
-          override
-            .returns(
-              [[NilClass, String], [NilClass, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]]]
-            )
-        end
-        private_class_method def self.variants
+        class << self
+          sig do
+            override
+              .returns(
+                [[NilClass, String], [NilClass, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]]]
+              )
+          end
+          private def variants
+          end
         end
       end
     end

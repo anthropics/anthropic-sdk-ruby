@@ -5,13 +5,15 @@ module Anthropic
     class TextCitation < Anthropic::Union
       abstract!
 
-      sig do
-        override
-          .returns(
-            [[Symbol, Anthropic::Models::CitationCharLocation], [Symbol, Anthropic::Models::CitationPageLocation], [Symbol, Anthropic::Models::CitationContentBlockLocation]]
-          )
-      end
-      private_class_method def self.variants
+      class << self
+        sig do
+          override
+            .returns(
+              [[Symbol, Anthropic::Models::CitationCharLocation], [Symbol, Anthropic::Models::CitationPageLocation], [Symbol, Anthropic::Models::CitationContentBlockLocation]]
+            )
+        end
+        private def variants
+        end
       end
     end
   end

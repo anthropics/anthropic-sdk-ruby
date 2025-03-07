@@ -123,11 +123,6 @@ module Anthropic
           ENDED = :ended
 
           finalize!
-
-          # @!parse
-          #   # @return [Array<Symbol>]
-          #   #
-          #   def self.values; end
         end
       end
     end

@@ -5,11 +5,13 @@ module Anthropic
     class ContentBlockSourceContent < Anthropic::Union
       abstract!
 
-      sig do
-        override
-          .returns([[Symbol, Anthropic::Models::TextBlockParam], [Symbol, Anthropic::Models::ImageBlockParam]])
-      end
-      private_class_method def self.variants
+      class << self
+        sig do
+          override
+            .returns([[Symbol, Anthropic::Models::TextBlockParam], [Symbol, Anthropic::Models::ImageBlockParam]])
+        end
+        private def variants
+        end
       end
     end
   end

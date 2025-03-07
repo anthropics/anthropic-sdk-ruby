@@ -98,13 +98,15 @@ module Anthropic
         class Delta < Anthropic::Union
           abstract!
 
-          sig do
-            override
-              .returns(
-                [[Symbol, Anthropic::Models::Beta::BetaTextDelta], [Symbol, Anthropic::Models::Beta::BetaInputJSONDelta], [Symbol, Anthropic::Models::Beta::BetaCitationsDelta], [Symbol, Anthropic::Models::Beta::BetaThinkingDelta], [Symbol, Anthropic::Models::Beta::BetaSignatureDelta]]
-              )
-          end
-          private_class_method def self.variants
+          class << self
+            sig do
+              override
+                .returns(
+                  [[Symbol, Anthropic::Models::Beta::BetaTextDelta], [Symbol, Anthropic::Models::Beta::BetaInputJSONDelta], [Symbol, Anthropic::Models::Beta::BetaCitationsDelta], [Symbol, Anthropic::Models::Beta::BetaThinkingDelta], [Symbol, Anthropic::Models::Beta::BetaSignatureDelta]]
+                )
+            end
+            private def variants
+            end
           end
         end
       end

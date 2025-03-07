@@ -390,8 +390,10 @@ module Anthropic
 
                 BetaTextBlockParamArray = T.type_alias { T::Array[Anthropic::Models::Beta::BetaTextBlockParam] }
 
-                sig { override.returns([[NilClass, String], [NilClass, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]]]) }
-                private_class_method def self.variants
+                class << self
+                  sig { override.returns([[NilClass, String], [NilClass, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]]]) }
+                  private def variants
+                  end
                 end
               end
             end

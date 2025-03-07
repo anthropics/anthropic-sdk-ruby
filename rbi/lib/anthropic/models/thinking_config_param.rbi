@@ -5,13 +5,15 @@ module Anthropic
     class ThinkingConfigParam < Anthropic::Union
       abstract!
 
-      sig do
-        override
-          .returns(
-            [[Symbol, Anthropic::Models::ThinkingConfigEnabled], [Symbol, Anthropic::Models::ThinkingConfigDisabled]]
-          )
-      end
-      private_class_method def self.variants
+      class << self
+        sig do
+          override
+            .returns(
+              [[Symbol, Anthropic::Models::ThinkingConfigEnabled], [Symbol, Anthropic::Models::ThinkingConfigDisabled]]
+            )
+        end
+        private def variants
+        end
       end
     end
   end

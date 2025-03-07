@@ -7,13 +7,15 @@ module Anthropic
         class BetaMessageBatchResult < Anthropic::Union
           abstract!
 
-          sig do
-            override
-              .returns(
-                [[Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult], [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult], [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult], [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult]]
-              )
-          end
-          private_class_method def self.variants
+          class << self
+            sig do
+              override
+                .returns(
+                  [[Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult], [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult], [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult], [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult]]
+                )
+            end
+            private def variants
+            end
           end
         end
       end
