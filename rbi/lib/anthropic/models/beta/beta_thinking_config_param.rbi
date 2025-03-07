@@ -8,13 +8,15 @@ module Anthropic
       class BetaThinkingConfigParam < Anthropic::Union
         abstract!
 
-        sig do
-          override
-            .returns(
-              [[Symbol, Anthropic::Models::Beta::BetaThinkingConfigEnabled], [Symbol, Anthropic::Models::Beta::BetaThinkingConfigDisabled]]
-            )
-        end
-        private_class_method def self.variants
+        class << self
+          sig do
+            override
+              .returns(
+                [[Symbol, Anthropic::Models::Beta::BetaThinkingConfigEnabled], [Symbol, Anthropic::Models::Beta::BetaThinkingConfigDisabled]]
+              )
+          end
+          private def variants
+          end
         end
       end
     end

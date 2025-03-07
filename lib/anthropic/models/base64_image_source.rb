@@ -36,11 +36,6 @@ module Anthropic
         IMAGE_WEBP = :"image/webp"
 
         finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   #
-        #   def self.values; end
       end
     end
   end

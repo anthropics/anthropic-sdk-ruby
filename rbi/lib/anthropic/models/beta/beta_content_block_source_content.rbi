@@ -8,13 +8,15 @@ module Anthropic
       class BetaContentBlockSourceContent < Anthropic::Union
         abstract!
 
-        sig do
-          override
-            .returns(
-              [[Symbol, Anthropic::Models::Beta::BetaTextBlockParam], [Symbol, Anthropic::Models::Beta::BetaImageBlockParam]]
-            )
-        end
-        private_class_method def self.variants
+        class << self
+          sig do
+            override
+              .returns(
+                [[Symbol, Anthropic::Models::Beta::BetaTextBlockParam], [Symbol, Anthropic::Models::Beta::BetaImageBlockParam]]
+              )
+          end
+          private def variants
+          end
         end
       end
     end

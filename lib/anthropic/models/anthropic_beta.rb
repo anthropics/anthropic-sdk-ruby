@@ -22,11 +22,6 @@ module Anthropic
         OUTPUT_128K_2025_02_19 = :"output-128k-2025-02-19"
 
         finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   #
-        #   def self.values; end
       end
     end
   end

@@ -68,11 +68,6 @@ module Anthropic
         CLAUDE_2_0 = :"claude-2.0"
 
         finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   #
-        #   def self.values; end
       end
     end
   end

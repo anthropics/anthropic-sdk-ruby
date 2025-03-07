@@ -134,29 +134,31 @@ module Anthropic
           ]
         end
 
-        sig do
-          override
-            .returns(
-              [
-                [NilClass, String],
+        class << self
+          sig do
+            override
+              .returns(
                 [
-                  NilClass,
-                  T::Array[
-                                T.any(
-                                  Anthropic::Models::TextBlockParam,
-                                  Anthropic::Models::ImageBlockParam,
-                                  Anthropic::Models::ToolUseBlockParam,
-                                  Anthropic::Models::ToolResultBlockParam,
-                                  Anthropic::Models::DocumentBlockParam,
-                                  Anthropic::Models::ThinkingBlockParam,
-                                  Anthropic::Models::RedactedThinkingBlockParam
-                                )
-                                ]
+                  [NilClass, String],
+                  [
+                    NilClass,
+                    T::Array[
+                                    T.any(
+                                      Anthropic::Models::TextBlockParam,
+                                      Anthropic::Models::ImageBlockParam,
+                                      Anthropic::Models::ToolUseBlockParam,
+                                      Anthropic::Models::ToolResultBlockParam,
+                                      Anthropic::Models::DocumentBlockParam,
+                                      Anthropic::Models::ThinkingBlockParam,
+                                      Anthropic::Models::RedactedThinkingBlockParam
+                                    )
+                                    ]
+                  ]
                 ]
-              ]
-            )
-        end
-        private_class_method def self.variants
+              )
+          end
+          private def variants
+          end
         end
       end
 
@@ -166,8 +168,10 @@ module Anthropic
         USER = :user
         ASSISTANT = :assistant
 
-        sig { override.returns(T::Array[Symbol]) }
-        def self.values
+        class << self
+          sig { override.returns(T::Array[Symbol]) }
+          def values
+          end
         end
       end
     end

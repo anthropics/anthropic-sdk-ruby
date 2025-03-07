@@ -137,29 +137,31 @@ module Anthropic
             ]
           end
 
-          sig do
-            override
-              .returns(
-                [
-                  [NilClass, String],
+          class << self
+            sig do
+              override
+                .returns(
                   [
-                    NilClass,
-                    T::Array[
-                                    T.any(
-                                      Anthropic::Models::Beta::BetaTextBlockParam,
-                                      Anthropic::Models::Beta::BetaImageBlockParam,
-                                      Anthropic::Models::Beta::BetaToolUseBlockParam,
-                                      Anthropic::Models::Beta::BetaToolResultBlockParam,
-                                      Anthropic::Models::Beta::BetaBase64PDFBlock,
-                                      Anthropic::Models::Beta::BetaThinkingBlockParam,
-                                      Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
-                                    )
-                                    ]
+                    [NilClass, String],
+                    [
+                      NilClass,
+                      T::Array[
+                                        T.any(
+                                          Anthropic::Models::Beta::BetaTextBlockParam,
+                                          Anthropic::Models::Beta::BetaImageBlockParam,
+                                          Anthropic::Models::Beta::BetaToolUseBlockParam,
+                                          Anthropic::Models::Beta::BetaToolResultBlockParam,
+                                          Anthropic::Models::Beta::BetaBase64PDFBlock,
+                                          Anthropic::Models::Beta::BetaThinkingBlockParam,
+                                          Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
+                                        )
+                                        ]
+                    ]
                   ]
-                ]
-              )
-          end
-          private_class_method def self.variants
+                )
+            end
+            private def variants
+            end
           end
         end
 
@@ -169,8 +171,10 @@ module Anthropic
           USER = :user
           ASSISTANT = :assistant
 
-          sig { override.returns(T::Array[Symbol]) }
-          def self.values
+          class << self
+            sig { override.returns(T::Array[Symbol]) }
+            def values
+            end
           end
         end
       end

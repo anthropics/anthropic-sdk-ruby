@@ -123,13 +123,15 @@ module Anthropic
       class Source < Anthropic::Union
         abstract!
 
-        sig do
-          override
-            .returns(
-              [[Symbol, Anthropic::Models::Base64PDFSource], [Symbol, Anthropic::Models::PlainTextSource], [Symbol, Anthropic::Models::ContentBlockSource], [Symbol, Anthropic::Models::URLPDFSource]]
-            )
-        end
-        private_class_method def self.variants
+        class << self
+          sig do
+            override
+              .returns(
+                [[Symbol, Anthropic::Models::Base64PDFSource], [Symbol, Anthropic::Models::PlainTextSource], [Symbol, Anthropic::Models::ContentBlockSource], [Symbol, Anthropic::Models::URLPDFSource]]
+              )
+          end
+          private def variants
+          end
         end
       end
     end

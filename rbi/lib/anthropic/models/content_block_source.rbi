@@ -57,13 +57,15 @@ module Anthropic
 
         ContentBlockSourceContentArray = T.type_alias { T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)] }
 
-        sig do
-          override
-            .returns(
-              [[NilClass, String], [NilClass, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]]]
-            )
-        end
-        private_class_method def self.variants
+        class << self
+          sig do
+            override
+              .returns(
+                [[NilClass, String], [NilClass, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]]]
+              )
+          end
+          private def variants
+          end
         end
       end
     end

@@ -8,13 +8,15 @@ module Anthropic
       class BetaToolChoice < Anthropic::Union
         abstract!
 
-        sig do
-          override
-            .returns(
-              [[Symbol, Anthropic::Models::Beta::BetaToolChoiceAuto], [Symbol, Anthropic::Models::Beta::BetaToolChoiceAny], [Symbol, Anthropic::Models::Beta::BetaToolChoiceTool], [Symbol, Anthropic::Models::Beta::BetaToolChoiceNone]]
-            )
-        end
-        private_class_method def self.variants
+        class << self
+          sig do
+            override
+              .returns(
+                [[Symbol, Anthropic::Models::Beta::BetaToolChoiceAuto], [Symbol, Anthropic::Models::Beta::BetaToolChoiceAny], [Symbol, Anthropic::Models::Beta::BetaToolChoiceTool], [Symbol, Anthropic::Models::Beta::BetaToolChoiceNone]]
+              )
+          end
+          private def variants
+          end
         end
       end
     end

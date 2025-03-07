@@ -78,13 +78,15 @@ module Anthropic
         class Citation < Anthropic::Union
           abstract!
 
-          sig do
-            override
-              .returns(
-                [[Symbol, Anthropic::Models::Beta::BetaCitationCharLocation], [Symbol, Anthropic::Models::Beta::BetaCitationPageLocation], [Symbol, Anthropic::Models::Beta::BetaCitationContentBlockLocation]]
-              )
-          end
-          private_class_method def self.variants
+          class << self
+            sig do
+              override
+                .returns(
+                  [[Symbol, Anthropic::Models::Beta::BetaCitationCharLocation], [Symbol, Anthropic::Models::Beta::BetaCitationPageLocation], [Symbol, Anthropic::Models::Beta::BetaCitationContentBlockLocation]]
+                )
+            end
+            private def variants
+            end
           end
         end
       end

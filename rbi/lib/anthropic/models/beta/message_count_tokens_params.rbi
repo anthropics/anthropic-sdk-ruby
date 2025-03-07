@@ -246,21 +246,25 @@ module Anthropic
 
           BetaTextBlockParamArray = T.type_alias { T::Array[Anthropic::Models::Beta::BetaTextBlockParam] }
 
-          sig { override.returns([[NilClass, String], [NilClass, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]]]) }
-          private_class_method def self.variants
+          class << self
+            sig { override.returns([[NilClass, String], [NilClass, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]]]) }
+            private def variants
+            end
           end
         end
 
         class Tool < Anthropic::Union
           abstract!
 
-          sig do
-            override
-              .returns(
-                [[NilClass, Anthropic::Models::Beta::BetaTool], [NilClass, Anthropic::Models::Beta::BetaToolComputerUse20241022], [NilClass, Anthropic::Models::Beta::BetaToolBash20241022], [NilClass, Anthropic::Models::Beta::BetaToolTextEditor20241022], [NilClass, Anthropic::Models::Beta::BetaToolComputerUse20250124], [NilClass, Anthropic::Models::Beta::BetaToolBash20250124], [NilClass, Anthropic::Models::Beta::BetaToolTextEditor20250124]]
-              )
-          end
-          private_class_method def self.variants
+          class << self
+            sig do
+              override
+                .returns(
+                  [[NilClass, Anthropic::Models::Beta::BetaTool], [NilClass, Anthropic::Models::Beta::BetaToolComputerUse20241022], [NilClass, Anthropic::Models::Beta::BetaToolBash20241022], [NilClass, Anthropic::Models::Beta::BetaToolTextEditor20241022], [NilClass, Anthropic::Models::Beta::BetaToolComputerUse20250124], [NilClass, Anthropic::Models::Beta::BetaToolBash20250124], [NilClass, Anthropic::Models::Beta::BetaToolTextEditor20250124]]
+                )
+            end
+            private def variants
+            end
           end
         end
       end

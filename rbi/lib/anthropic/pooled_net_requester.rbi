@@ -6,16 +6,18 @@ module Anthropic
       {method: Symbol, url: URI::Generic, headers: T::Hash[String, String], body: T.anything, deadline: Float}
     end
 
-    sig { params(url: URI::Generic).returns(Net::HTTP) }
-    def self.connect(url)
-    end
+    class << self
+      sig { params(url: URI::Generic).returns(Net::HTTP) }
+      def connect(url)
+      end
 
-    sig { params(conn: Net::HTTP, deadline: Float).void }
-    def self.calibrate_socket_timeout(conn, deadline)
-    end
+      sig { params(conn: Net::HTTP, deadline: Float).void }
+      def calibrate_socket_timeout(conn, deadline)
+      end
 
-    sig { params(request: Anthropic::PooledNetRequester::RequestShape).returns(Net::HTTPGenericRequest) }
-    def self.build_request(request)
+      sig { params(request: Anthropic::PooledNetRequester::RequestShape).returns(Net::HTTPGenericRequest) }
+      def build_request(request)
+      end
     end
 
     sig { params(url: URI::Generic, blk: T.proc.params(arg0: Net::HTTP).void).void }

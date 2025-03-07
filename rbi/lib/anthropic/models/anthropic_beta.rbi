@@ -17,13 +17,17 @@ module Anthropic
         TOKEN_EFFICIENT_TOOLS_2025_02_19 = :"token-efficient-tools-2025-02-19"
         OUTPUT_128K_2025_02_19 = :"output-128k-2025-02-19"
 
-        sig { override.returns(T::Array[Symbol]) }
-        def self.values
+        class << self
+          sig { override.returns(T::Array[Symbol]) }
+          def values
+          end
         end
       end
 
-      sig { override.returns([[NilClass, String], [NilClass, Symbol]]) }
-      private_class_method def self.variants
+      class << self
+        sig { override.returns([[NilClass, String], [NilClass, Symbol]]) }
+        private def variants
+        end
       end
     end
   end
