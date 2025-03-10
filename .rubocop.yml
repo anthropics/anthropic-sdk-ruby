@@ -58,6 +58,11 @@ Layout/MultilineMethodParameterLineBreaks:
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
+# Fairly useful in tests for pattern assertions.
+Lint/EmptyInPattern:
+  Exclude:
+    - "test/**/*"
+
 Lint/MissingSuper:
   Exclude:
     - "**/*.rbi"
@@ -114,11 +119,6 @@ Style/AndOr:
 Style/BisectedAttrAccessor:
   Exclude:
     - "**/*.rbi"
-
-# Fairly useful in tests for pattern matching.
-Style/CaseEquality:
-  Exclude:
-    - "test/**/*"
 
 # We prefer nested modules in lib/, but are currently using compact style for tests.
 Style/ClassAndModuleChildren:

@@ -155,7 +155,7 @@ module Anthropic
           in [-> { _1 <= Date || _1 <= Time }, String]
             Kernel.then do
               [true, target.parse(value), 1]
-            rescue ArgumentError, Date::Error
+            rescue ArgumentError
               [false, false, 0]
             end
           in [_, ^target]
