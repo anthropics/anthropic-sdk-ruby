@@ -505,10 +505,10 @@ module Anthropic
             json
           end
         in %r{^text/event-stream}
-          lines = enum_lines(stream)
-          parse_sse(lines)
+          lines = decode_lines(stream)
+          decode_sse(lines)
         in %r{^application/(?:x-)?jsonl}
-          enum_lines(stream)
+          decode_lines(stream)
         in %r{^text/}
           stream.to_a.join
         else
