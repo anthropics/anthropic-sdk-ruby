@@ -27,11 +27,6 @@ class Anthropic::Test::Resources::Beta::ModelsTest < Anthropic::Test::ResourceTe
       response => Anthropic::Page
     end
 
-    page = response.next_page
-    assert_pattern do
-      page => Anthropic::Page
-    end
-
     row = response.to_enum.first
     assert_pattern do
       row => Anthropic::Models::Beta::BetaModelInfo

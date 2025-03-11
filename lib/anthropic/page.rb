@@ -56,7 +56,7 @@ module Anthropic
       end
 
       case page_data
-      in {has_more: has_more}
+      in {has_more: true | false | nil => has_more}
         @has_more = has_more
       else
       end
@@ -78,7 +78,7 @@ module Anthropic
     # @return [Boolean]
     #
     def next_page?
-      !last_id.nil?
+      has_more
     end
 
     # @raise [Anthropic::HTTP::Error]
@@ -86,10 +86,13 @@ module Anthropic
     #
     def next_page
       unless next_page?
-        raise RuntimeError.new("No more pages available; please check #next_page? before calling #next_page")
+        raise RuntimeError.new("No more pages available. Please check #next_page? before calling ##{__method__}")
       end
 
-      req = Anthropic::Util.deep_merge(@req, {query: {after_id: last_id}})
+      req = Anthropic::Util.deep_merge(
+        @req,
+        {query: first_id.nil? ? {after_id: last_id} : {before_id: first_id}}
+      )
       @client.request(req)
     end
 
@@ -97,7 +100,7 @@ module Anthropic
     #
     def auto_paging_each(&blk)
       unless block_given?
-        raise ArgumentError.new("A block must be given to #auto_paging_each")
+        raise ArgumentError.new("A block must be given to ##{__method__}")
       end
       page = self
       loop do

@@ -37,7 +37,7 @@ module Anthropic
     #
     def for_each(&)
       unless block_given?
-        raise ArgumentError.new("A block must be given to #for_each")
+        raise ArgumentError.new("A block must be given to ##{__method__}")
       end
       @iterator.each(&)
     end
