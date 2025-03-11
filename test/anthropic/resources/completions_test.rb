@@ -2,14 +2,7 @@
 
 require_relative "../test_helper"
 
-class Anthropic::Test::Resources::CompletionsTest < Minitest::Test
-  def before_all
-    @anthropic = Anthropic::Client.new(
-      base_url: ENV.fetch("TEST_API_BASE_URL", "http://localhost:4010"),
-      api_key: "my-anthropic-api-key"
-    )
-  end
-
+class Anthropic::Test::Resources::CompletionsTest < Anthropic::Test::ResourceTest
   def test_create_required_params
     response = @anthropic.completions.create(
       max_tokens_to_sample: 256,

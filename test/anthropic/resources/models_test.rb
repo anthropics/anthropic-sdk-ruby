@@ -2,14 +2,7 @@
 
 require_relative "../test_helper"
 
-class Anthropic::Test::Resources::ModelsTest < Minitest::Test
-  def before_all
-    @anthropic = Anthropic::Client.new(
-      base_url: ENV.fetch("TEST_API_BASE_URL", "http://localhost:4010"),
-      api_key: "my-anthropic-api-key"
-    )
-  end
-
+class Anthropic::Test::Resources::ModelsTest < Anthropic::Test::ResourceTest
   def test_retrieve
     response = @anthropic.models.retrieve("model_id")
 
