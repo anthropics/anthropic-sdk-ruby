@@ -22,7 +22,7 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
     end
 
     assert_pattern do
-      Anthropic::Converter.coerce(A2, %w[a b c]) => [:a, :b, :c]
+      Anthropic::Converter.coerce(A2, %w[a b c]) => [:a, :b, "c"]
     end
   end
 
@@ -337,5 +337,19 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
 
     refute_equal(U1, U2)
     assert_equal(U1, U3)
+  end
+
+  class U4 < Anthropic::Union
+    variant :a, const: :a
+    variant :b, const: :b
+  end
+
+  def test_basic_const_union
+    assert_pattern do
+      U4.coerce(nil) => nil
+      U4.coerce("") => ""
+      U4.coerce(:a) => :a
+      U4.coerce("a") => :a
+    end
   end
 end
