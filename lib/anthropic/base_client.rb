@@ -28,7 +28,7 @@ module Anthropic
       # @raise [ArgumentError]
       #
       def validate!(req)
-        keys = [:method, :path, :query, :headers, :body, :unwrap, :page, :model, :options]
+        keys = [:method, :path, :query, :headers, :body, :unwrap, :page, :stream, :model, :options]
         case req
         in Hash
           req.each_key do |k|
@@ -201,6 +201,8 @@ module Anthropic
     #
     #   @option req [Class, nil] :page
     #
+    #   @option req [Class, nil] :stream
+    #
     #   @option req [Anthropic::Converter, Class, nil] :model
     #
     # @param opts [Hash{Symbol=>Object}] .
@@ -319,7 +321,7 @@ module Anthropic
     # @param send_retry_header [Boolean]
     #
     # @raise [Anthropic::APIError]
-    # @return [Array(Net::HTTPResponse, Enumerable)]
+    # @return [Array(Integer, Net::HTTPResponse, Enumerable)]
     #
     private def send_request(request, redirect_count:, retry_count:, send_retry_header:)
       url, headers, max_retries, timeout = request.fetch_values(:url, :headers, :max_retries, :timeout)
@@ -342,7 +344,7 @@ module Anthropic
 
       case status
       in ..299
-        [response, stream]
+        [status, response, stream]
       in 300..399 if redirect_count >= self.class::MAX_REDIRECTS
         message = "Failed to complete the request within #{self.class::MAX_REDIRECTS} redirects."
 
@@ -360,13 +362,15 @@ module Anthropic
         )
       in Anthropic::APIConnectionError if retry_count >= max_retries
         raise status
-      in (400..) if retry_count >= max_retries || (response && !self.class.should_retry?(
-        status,
-        headers: response
-      ))
+      in (400..) if retry_count >= max_retries || !self.class.should_retry?(status, headers: response)
         decoded = Anthropic::Util.decode_content(response, stream: stream, suppress_error: true)
 
-        stream.each { srv_fault ? break : next }
+        if srv_fault
+          Anthropic::Util.close_fused!(stream)
+        else
+          stream.each { next }
+        end
+
         raise Anthropic::APIStatusError.for(
           url: url,
           status: status,
@@ -377,7 +381,11 @@ module Anthropic
       in (400..) | Anthropic::APIConnectionError
         delay = retry_delay(response, retry_count: retry_count)
 
-        stream&.each { srv_fault ? break : next }
+        if srv_fault
+          Anthropic::Util.close_fused!(stream)
+        else
+          stream&.each { next }
+        end
         sleep(delay)
 
         send_request(
@@ -386,48 +394,6 @@ module Anthropic
           retry_count: retry_count + 1,
           send_retry_header: send_retry_header
         )
-      end
-    end
-
-    # @private
-    #
-    # @param req [Hash{Symbol=>Object}] .
-    #
-    #   @option req [Symbol] :method
-    #
-    #   @option req [String, Array<String>] :path
-    #
-    #   @option req [Hash{String=>Array<String>, String, nil}, nil] :query
-    #
-    #   @option req [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}, nil] :headers
-    #
-    #   @option req [Object, nil] :body
-    #
-    #   @option req [Symbol, nil] :unwrap
-    #
-    #   @option req [Class, nil] :page
-    #
-    #   @option req [Anthropic::Converter, Class, nil] :model
-    #
-    #   @option req [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :options
-    #
-    # @param headers [Hash{String=>String}, Net::HTTPHeader]
-    #
-    # @param stream [Enumerable]
-    #
-    # @return [Object]
-    #
-    private def parse_response(req, headers:, stream:)
-      decoded = Anthropic::Util.decode_content(headers, stream: stream)
-      unwrapped = Anthropic::Util.dig(decoded, req[:unwrap])
-
-      case [req[:page], req.fetch(:model, Anthropic::Unknown)]
-      in [Class => page, _]
-        page.new(client: self, req: req, headers: headers, unwrapped: unwrapped)
-      in [nil, Class | Anthropic::Converter => model]
-        Anthropic::Converter.coerce(model, unwrapped)
-      in [nil, nil]
-        unwrapped
       end
     end
 
@@ -450,6 +416,8 @@ module Anthropic
     #
     #   @option req [Class, nil] :page
     #
+    #   @option req [Class, nil] :stream
+    #
     #   @option req [Anthropic::Converter, Class, nil] :model
     #
     #   @option req [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :options
@@ -459,18 +427,31 @@ module Anthropic
     #
     def request(req)
       self.class.validate!(req)
+      model = req.fetch(:model) { Anthropic::Unknown }
       opts = req[:options].to_h
       Anthropic::RequestOptions.validate!(opts)
       request = build_request(req.except(:options), opts)
+      url = request.fetch(:url)
+
       # Don't send the current retry count in the headers if the caller modified the header defaults.
       send_retry_header = request.fetch(:headers)["x-stainless-retry-count"] == "0"
-      response, stream = send_request(
+      status, response, stream = send_request(
         request,
         redirect_count: 0,
         retry_count: 0,
         send_retry_header: send_retry_header
       )
-      parse_response(req, headers: response, stream: stream)
+
+      decoded = Anthropic::Util.decode_content(response, stream: stream)
+      case req
+      in { stream: Class => st }
+        st.new(model: model, url: url, status: status, response: response, messages: decoded)
+      in { page: Class => page }
+        page.new(client: self, req: req, headers: response, page_data: decoded)
+      else
+        unwrapped = Anthropic::Util.dig(decoded, req[:unwrap])
+        Anthropic::Converter.coerce(model, unwrapped)
+      end
     end
 
     # @return [String]

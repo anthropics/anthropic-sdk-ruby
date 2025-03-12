@@ -85,11 +85,12 @@ module Anthropic
         status: Integer,
         body: T.nilable(Object),
         request: NilClass,
-        response: NilClass
+        response: NilClass,
+        message: T.nilable(String)
       )
         .returns(T.attached_class)
     end
-    def self.for(url:, status:, body:, request:, response:)
+    def self.for(url:, status:, body:, request:, response:, message: nil)
     end
 
     sig { returns(Integer) }

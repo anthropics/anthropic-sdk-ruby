@@ -86,5 +86,24 @@ module Anthropic
       stream: Enumerable[String],
       suppress_error: bool
     ) -> top
+
+    def self?.fused_enum: (Enumerable[top] enum) { -> void } -> Enumerable[top]
+
+    def self?.close_fused!: (Enumerable[top]? enum) -> void
+
+    def self?.chain_fused: (
+      Enumerable[top]? enum
+    ) {
+      (Enumerator::Yielder arg0) -> void
+    } -> void
+
+    type sse_message =
+      { event: String?, data: String?, id: String?, retry: Integer? }
+
+    def self?.enum_lines: (Enumerable[String] enum) -> Enumerable[String]
+
+    def self?.parse_sse: (
+      Enumerable[String] lines
+    ) -> Anthropic::Util::sse_message
   end
 end

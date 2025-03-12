@@ -11,6 +11,7 @@ module Anthropic
         body: top?,
         unwrap: Symbol?,
         page: Class?,
+        stream: Class?,
         model: Anthropic::Converter::input?,
         options: Anthropic::request_opts?
       }
@@ -76,13 +77,7 @@ module Anthropic
       redirect_count: Integer,
       retry_count: Integer,
       send_retry_header: bool
-    ) -> [top, Enumerable[String]]
-
-    private def parse_response: (
-      Anthropic::BaseClient::request_components req,
-      headers: ::Hash[String, String],
-      stream: Enumerable[String]
-    ) -> top
+    ) -> [Integer, top, Enumerable[String]]
 
     def request:
       (
@@ -95,6 +90,7 @@ module Anthropic
         body: top?,
         unwrap: Symbol?,
         page: Class?,
+        stream: Class?,
         model: Anthropic::Converter::input?,
         options: Anthropic::request_opts?
       ) -> top

@@ -134,5 +134,34 @@ module Anthropic
     end
     def self.decode_content(headers, stream:, suppress_error: false)
     end
+
+    sig { params(enum: T::Enumerable[T.anything], close: T.proc.void).returns(T::Enumerable[T.anything]) }
+    def self.fused_enum(enum, &close)
+    end
+
+    sig { params(enum: T.nilable(T::Enumerable[T.anything])).void }
+    def self.close_fused!(enum)
+    end
+
+    sig do
+      params(
+        enum: T.nilable(T::Enumerable[T.anything]),
+        blk: T.proc.params(arg0: Enumerator::Yielder).void
+      ).void
+    end
+    def self.chain_fused(enum, &blk)
+    end
+
+    SSEMessage = T.type_alias do
+      {event: T.nilable(String), data: T.nilable(String), id: T.nilable(String), retry: T.nilable(Integer)}
+    end
+
+    sig { params(enum: T::Enumerable[String]).returns(T::Enumerable[String]) }
+    def self.enum_lines(enum)
+    end
+
+    sig { params(lines: T::Enumerable[String]).returns(Anthropic::Util::SSEMessage) }
+    def self.parse_sse(lines)
+    end
   end
 end
