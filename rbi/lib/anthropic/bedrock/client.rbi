@@ -66,7 +66,7 @@ module Anthropic
           aws_profile: T.nilable(String),
         ).void
       end
-      def initialize(
+      def self.new(
         aws_region: nil,
         base_url: nil,
         max_retries: DEFAULT_MAX_RETRIES,

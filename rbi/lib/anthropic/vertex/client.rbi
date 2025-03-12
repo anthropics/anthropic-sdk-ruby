@@ -46,7 +46,7 @@ module Anthropic
           max_retry_delay: Float,
         ).void
       end
-      def initialize(
+      def self.new(
         region: ENV["CLOUD_ML_REGION"],
         project_id: ENV["ANTHROPIC_VERTEX_PROJECT_ID"],
         base_url: nil,
