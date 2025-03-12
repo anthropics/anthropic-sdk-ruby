@@ -3,6 +3,19 @@
 module Anthropic
   # @private
   #
+  # @example
+  # ```ruby
+  # stream.for_each do |message|
+  #   puts(message)
+  # end
+  # ```
+  #
+  # @example
+  # ```ruby
+  # messages = stream.to_enum.take(2)
+  #
+  # messages => Array
+  # ```
   class BaseStream
     # @private
     #

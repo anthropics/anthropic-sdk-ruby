@@ -50,7 +50,7 @@ message = anthropic.messages.create(
 puts(message.content)
 ```
 
-## Pagination
+### Pagination
 
 List methods in the Anthropic API are paginated.
 
