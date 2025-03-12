@@ -155,8 +155,11 @@ module Anthropic
     end
 
     class << self
-      sig { params(enum: T::Enumerable[T.anything], close: T.proc.void).returns(T::Enumerable[T.anything]) }
-      def fused_enum(enum, &close)
+      sig do
+        params(enum: T::Enumerable[T.anything], external: T::Boolean, close: T.proc.void)
+          .returns(T::Enumerable[T.anything])
+      end
+      def fused_enum(enum, external: false, &close)
       end
 
       sig { params(enum: T.nilable(T::Enumerable[T.anything])).void }
