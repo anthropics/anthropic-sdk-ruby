@@ -5,6 +5,26 @@ module Anthropic
   #
   # @abstract
   #
+  # @example
+  # ```ruby
+  # if page.has_next?
+  #   page = page.next_page
+  # end
+  # ```
+  #
+  # @example
+  # ```ruby
+  # page.auto_paging_each do |completion|
+  #   puts(completion)
+  # end
+  # ```
+  #
+  # @example
+  # ```ruby
+  # completions = page.to_enum.take(2)
+  #
+  # completions => Array
+  # ```
   module BasePage
     # @return [Boolean]
     #

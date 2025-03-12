@@ -10,16 +10,16 @@ module Anthropic
   #
   # @example
   # ```ruby
-  # page.auto_paging_each do |item|
-  # #   item ...
+  # page.auto_paging_each do |batch|
+  #   puts(batch)
   # end
   # ```
   #
   # @example
   # ```ruby
-  # items = page.to_enum.take(2)
+  # batches = page.to_enum.take(2)
   #
-  # items => Array
+  # batches => Array
   # ```
   class Page
     include Anthropic::BasePage

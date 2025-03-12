@@ -3,6 +3,19 @@
 module Anthropic
   # @private
   #
+  # @example
+  # ```ruby
+  # stream.for_each do |completion|
+  #   puts(completion)
+  # end
+  # ```
+  #
+  # @example
+  # ```ruby
+  # completions = stream.to_enum.take(2)
+  #
+  # completions => Array
+  # ```
   class JsonLStream < Anthropic::BaseStream
     # @private
     #
