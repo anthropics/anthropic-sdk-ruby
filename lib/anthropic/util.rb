@@ -524,17 +524,22 @@ module Anthropic
       # https://doc.rust-lang.org/std/iter/trait.FusedIterator.html
       #
       # @param enum [Enumerable]
+      # @param external [Boolean]
       # @param close [Proc]
       #
       # @return [Enumerable]
       #
-      def fused_enum(enum, &close)
+      def fused_enum(enum, external: false, &close)
         fused = false
         iter = Enumerator.new do |y|
           next if fused
 
           fused = true
-          loop { y << enum.next }
+          if external
+            loop { y << enum.next }
+          else
+            enum.each(&y)
+          end
         ensure
           close&.call
           close = nil
@@ -613,6 +618,7 @@ module Anthropic
       # @return [Hash{Symbol=>Object}]
       #
       def decode_sse(lines)
+        # rubocop:disable Metrics/BlockLength
         chain_fused(lines) do |y|
           blank = {event: nil, data: nil, id: nil, retry: nil}
           current = {}
@@ -641,6 +647,7 @@ module Anthropic
             else
             end
           end
+          # rubocop:enable Metrics/BlockLength
 
           y << {**blank, **current} unless current.empty?
         end

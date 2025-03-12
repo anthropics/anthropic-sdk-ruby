@@ -87,7 +87,12 @@ module Anthropic
       suppress_error: bool
     ) -> top
 
-    def self?.fused_enum: (Enumerable[top] enum) { -> void } -> Enumerable[top]
+    def self?.fused_enum: (
+      Enumerable[top] enum,
+      external: bool
+    ) {
+      -> void
+    } -> Enumerable[top]
 
     def self?.close_fused!: (Enumerable[top]? enum) -> void
 

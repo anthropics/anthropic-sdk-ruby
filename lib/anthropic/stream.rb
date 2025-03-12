@@ -9,6 +9,7 @@ module Anthropic
     # @return [Enumerable]
     #
     private def iterator
+      # rubocop:disable Metrics/BlockLength
       @iterator ||= Anthropic::Util.chain_fused(@messages) do |y|
         @messages.each do |msg|
           case msg
@@ -40,6 +41,7 @@ module Anthropic
           end
         end
       end
+      # rubocop:enable Metrics/BlockLength
     end
   end
 end
