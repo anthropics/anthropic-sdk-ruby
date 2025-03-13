@@ -3,13 +3,5 @@ module Anthropic
     include Anthropic::BaseStream[top, Elem]
 
     private def iterator: -> Enumerable[Elem]
-
-    def initialize: (
-      model: Class | Anthropic::Converter,
-      url: URI::Generic,
-      status: Integer,
-      response: top,
-      messages: Enumerable[top]
-    ) -> void
   end
 end
