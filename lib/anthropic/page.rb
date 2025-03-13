@@ -36,7 +36,6 @@ module Anthropic
     # @return [String, nil]
     attr_accessor :last_id
 
-    # rubocop:disable Lint/UnusedMethodArgument
     # @private
     #
     # @param client [Anthropic::BaseClient]
@@ -45,8 +44,7 @@ module Anthropic
     # @param page_data [Hash{Symbol=>Object}]
     #
     def initialize(client:, req:, headers:, page_data:)
-      @client = client
-      @req = req
+      super
       model = req.fetch(:model)
 
       case page_data
@@ -73,10 +71,8 @@ module Anthropic
       else
       end
     end
-    # rubocop:enable Lint/UnusedMethodArgument
 
     # @return [Boolean]
-    #
     def next_page?
       has_more
     end
