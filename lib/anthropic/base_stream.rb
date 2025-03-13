@@ -16,7 +16,7 @@ module Anthropic
   #
   # messages => Array
   # ```
-  class BaseStream
+  module BaseStream
     # @return [void]
     #
     def close = Anthropic::Util.close_fused!(@iterator)
