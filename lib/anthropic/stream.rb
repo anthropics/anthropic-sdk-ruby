@@ -16,7 +16,9 @@ module Anthropic
   #
   # batches => Array
   # ```
-  class Stream < Anthropic::BaseStream
+  class Stream
+    include Anthropic::BaseStream
+
     # @private
     #
     # @return [Enumerable]

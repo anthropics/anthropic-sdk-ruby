@@ -16,7 +16,9 @@ module Anthropic
   #
   # completions => Array
   # ```
-  class JsonLStream < Anthropic::BaseStream
+  class JsonLStream
+    include Anthropic::BaseStream
+
     # @private
     #
     # @return [Enumerable]

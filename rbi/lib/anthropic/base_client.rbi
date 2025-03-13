@@ -22,7 +22,7 @@ module Anthropic
         body: T.nilable(T.anything),
         unwrap: T.nilable(Symbol),
         page: T.nilable(T::Class[Anthropic::BasePage[Anthropic::BaseModel]]),
-        stream: T.nilable(T::Class[Anthropic::BaseStream[Anthropic::BaseModel]]),
+        stream: T.nilable(T::Class[Anthropic::BaseStream[T.anything, Anthropic::BaseModel]]),
         model: T.nilable(Anthropic::Converter::Input),
         options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
       }
@@ -148,7 +148,7 @@ module Anthropic
         body: T.nilable(T.anything),
         unwrap: T.nilable(Symbol),
         page: T.nilable(T::Class[Anthropic::BasePage[Anthropic::BaseModel]]),
-        stream: T.nilable(T::Class[Anthropic::BaseStream[Anthropic::BaseModel]]),
+        stream: T.nilable(T::Class[Anthropic::BaseStream[T.anything, Anthropic::BaseModel]]),
         model: T.nilable(Anthropic::Converter::Input),
         options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
       )

@@ -1,5 +1,15 @@
 module Anthropic
-  class JsonLStream[Elem] < Anthropic::BaseStream[Elem]
+  class JsonLStream[Elem]
+    include Anthropic::BaseStream[top, Elem]
+
     private def iterator: -> Enumerable[Elem]
+
+    def initialize: (
+      model: Class | Anthropic::Converter,
+      url: URI::Generic,
+      status: Integer,
+      response: top,
+      messages: Enumerable[top]
+    ) -> void
   end
 end
