@@ -9,12 +9,5 @@ module Anthropic
     attr_accessor first_id: String?
 
     attr_accessor last_id: String?
-
-    def initialize: (
-      client: Anthropic::BaseClient,
-      req: Anthropic::BaseClient::request_components,
-      headers: ::Hash[String, String],
-      page_data: ::Hash[Symbol, top]
-    ) -> void
   end
 end
