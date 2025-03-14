@@ -6,14 +6,13 @@ module Anthropic
       abstract!
 
       class << self
-        # @api private
         sig do
           override
             .returns(
-              [[Symbol, Anthropic::Models::CitationCharLocationParam], [Symbol, Anthropic::Models::CitationPageLocationParam], [Symbol, Anthropic::Models::CitationContentBlockLocationParam]]
+              [Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam]
             )
         end
-        private def variants
+        def variants
         end
       end
     end

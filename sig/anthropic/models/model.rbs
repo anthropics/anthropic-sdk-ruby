@@ -58,7 +58,7 @@ module Anthropic
         def self.values: -> ::Array[Anthropic::Models::Model::union_member0]
       end
 
-      private def self.variants: -> [[nil, Anthropic::Models::Model::union_member0], [nil, String]]
+      def self.variants: -> [Anthropic::Models::Model::union_member0, String]
     end
   end
 end

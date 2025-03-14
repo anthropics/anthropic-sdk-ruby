@@ -54,7 +54,7 @@ module Anthropic
           | Anthropic::Models::Beta::BetaURLPDFSource
 
         class Source < Anthropic::Union
-          private def self.variants: -> [[:base64, Anthropic::Models::Beta::BetaBase64PDFSource], [:text, Anthropic::Models::Beta::BetaPlainTextSource], [:content, Anthropic::Models::Beta::BetaContentBlockSource], [:url, Anthropic::Models::Beta::BetaURLPDFSource]]
+          def self.variants: -> [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource]
         end
       end
     end

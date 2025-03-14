@@ -10,7 +10,7 @@ module Anthropic
         | Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
 
       class BetaTextCitationParam < Anthropic::Union
-        private def self.variants: -> [[:char_location, Anthropic::Models::Beta::BetaCitationCharLocationParam], [:page_location, Anthropic::Models::Beta::BetaCitationPageLocationParam], [:content_block_location, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam]]
+        def self.variants: -> [Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam]
       end
     end
   end

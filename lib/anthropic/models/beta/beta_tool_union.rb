@@ -18,6 +18,12 @@ module Anthropic
         variant -> { Anthropic::Models::Beta::BetaToolBash20250124 }
 
         variant -> { Anthropic::Models::Beta::BetaToolTextEditor20250124 }
+
+        # @!parse
+        #   class << self
+        #     # @return [Array(Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124)]
+        #     def variants; end
+        #   end
       end
     end
 

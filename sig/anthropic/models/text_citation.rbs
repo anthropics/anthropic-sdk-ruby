@@ -6,7 +6,7 @@ module Anthropic
       | Anthropic::Models::CitationContentBlockLocation
 
     class TextCitation < Anthropic::Union
-      private def self.variants: -> [[:char_location, Anthropic::Models::CitationCharLocation], [:page_location, Anthropic::Models::CitationPageLocation], [:content_block_location, Anthropic::Models::CitationContentBlockLocation]]
+      def self.variants: -> [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation]
     end
   end
 end

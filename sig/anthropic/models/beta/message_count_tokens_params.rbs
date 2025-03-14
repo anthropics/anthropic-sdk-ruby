@@ -78,7 +78,7 @@ module Anthropic
 
           BetaTextBlockParamArray: beta_text_block_param_array
 
-          private def self.variants: -> [[nil, String], [nil, ::Array[Anthropic::Models::Beta::BetaTextBlockParam]]]
+          def self.variants: -> [String, ::Array[Anthropic::Models::Beta::BetaTextBlockParam]]
         end
 
         type tool =
@@ -91,7 +91,7 @@ module Anthropic
           | Anthropic::Models::Beta::BetaToolTextEditor20250124
 
         class Tool < Anthropic::Union
-          private def self.variants: -> [[nil, Anthropic::Models::Beta::BetaTool], [nil, Anthropic::Models::Beta::BetaToolComputerUse20241022], [nil, Anthropic::Models::Beta::BetaToolBash20241022], [nil, Anthropic::Models::Beta::BetaToolTextEditor20241022], [nil, Anthropic::Models::Beta::BetaToolComputerUse20250124], [nil, Anthropic::Models::Beta::BetaToolBash20250124], [nil, Anthropic::Models::Beta::BetaToolTextEditor20250124]]
+          def self.variants: -> [Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124]
         end
       end
     end

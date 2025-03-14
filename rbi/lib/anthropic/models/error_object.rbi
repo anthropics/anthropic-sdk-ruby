@@ -6,14 +6,13 @@ module Anthropic
       abstract!
 
       class << self
-        # @api private
         sig do
           override
             .returns(
-              [[Symbol, Anthropic::Models::InvalidRequestError], [Symbol, Anthropic::Models::AuthenticationError_], [Symbol, Anthropic::Models::BillingError], [Symbol, Anthropic::Models::PermissionError], [Symbol, Anthropic::Models::NotFoundError_], [Symbol, Anthropic::Models::RateLimitError_], [Symbol, Anthropic::Models::GatewayTimeoutError], [Symbol, Anthropic::Models::APIErrorObject], [Symbol, Anthropic::Models::OverloadedError]]
+              [Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError_, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError_, Anthropic::Models::RateLimitError_, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError]
             )
         end
-        private def variants
+        def variants
         end
       end
     end

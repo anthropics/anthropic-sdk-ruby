@@ -4,7 +4,7 @@ module Anthropic
       Anthropic::Models::TextBlockParam | Anthropic::Models::ImageBlockParam
 
     class ContentBlockSourceContent < Anthropic::Union
-      private def self.variants: -> [[:text, Anthropic::Models::TextBlockParam], [:image, Anthropic::Models::ImageBlockParam]]
+      def self.variants: -> [Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam]
     end
   end
 end

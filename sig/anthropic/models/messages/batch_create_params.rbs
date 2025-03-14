@@ -153,7 +153,7 @@ module Anthropic
 
               TextBlockParamArray: text_block_param_array
 
-              private def self.variants: -> [[nil, String], [nil, ::Array[Anthropic::Models::TextBlockParam]]]
+              def self.variants: -> [String, ::Array[Anthropic::Models::TextBlockParam]]
             end
           end
         end

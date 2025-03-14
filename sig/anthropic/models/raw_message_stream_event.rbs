@@ -9,7 +9,7 @@ module Anthropic
       | Anthropic::Models::RawContentBlockStopEvent
 
     class RawMessageStreamEvent < Anthropic::Union
-      private def self.variants: -> [[:message_start, Anthropic::Models::RawMessageStartEvent], [:message_delta, Anthropic::Models::RawMessageDeltaEvent], [:message_stop, Anthropic::Models::RawMessageStopEvent], [:content_block_start, Anthropic::Models::RawContentBlockStartEvent], [:content_block_delta, Anthropic::Models::RawContentBlockDeltaEvent], [:content_block_stop, Anthropic::Models::RawContentBlockStopEvent]]
+      def self.variants: -> [Anthropic::Models::RawMessageStartEvent, Anthropic::Models::RawMessageDeltaEvent, Anthropic::Models::RawMessageStopEvent, Anthropic::Models::RawContentBlockStartEvent, Anthropic::Models::RawContentBlockDeltaEvent, Anthropic::Models::RawContentBlockStopEvent]
     end
   end
 end

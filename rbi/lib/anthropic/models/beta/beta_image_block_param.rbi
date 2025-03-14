@@ -72,14 +72,11 @@ module Anthropic
           abstract!
 
           class << self
-            # @api private
             sig do
               override
-                .returns(
-                  [[Symbol, Anthropic::Models::Beta::BetaBase64ImageSource], [Symbol, Anthropic::Models::Beta::BetaURLImageSource]]
-                )
+                .returns([Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource])
             end
-            private def variants
+            def variants
             end
           end
         end

@@ -18,14 +18,13 @@ module Anthropic
         abstract!
 
         class << self
-          # @api private
           sig do
             override
               .returns(
-                [[Symbol, Anthropic::Models::Beta::BetaThinkingConfigEnabled], [Symbol, Anthropic::Models::Beta::BetaThinkingConfigDisabled]]
+                [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
               )
           end
-          private def variants
+          def variants
           end
         end
       end

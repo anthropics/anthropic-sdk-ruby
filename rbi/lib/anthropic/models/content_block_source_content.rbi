@@ -6,12 +6,8 @@ module Anthropic
       abstract!
 
       class << self
-        # @api private
-        sig do
-          override
-            .returns([[Symbol, Anthropic::Models::TextBlockParam], [Symbol, Anthropic::Models::ImageBlockParam]])
-        end
-        private def variants
+        sig { override.returns([Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam]) }
+        def variants
         end
       end
     end

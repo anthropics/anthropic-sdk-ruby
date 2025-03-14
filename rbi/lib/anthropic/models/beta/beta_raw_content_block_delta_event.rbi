@@ -99,14 +99,13 @@ module Anthropic
           abstract!
 
           class << self
-            # @api private
             sig do
               override
                 .returns(
-                  [[Symbol, Anthropic::Models::Beta::BetaTextDelta], [Symbol, Anthropic::Models::Beta::BetaInputJSONDelta], [Symbol, Anthropic::Models::Beta::BetaCitationsDelta], [Symbol, Anthropic::Models::Beta::BetaThinkingDelta], [Symbol, Anthropic::Models::Beta::BetaSignatureDelta]]
+                  [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta]
                 )
             end
-            private def variants
+            def variants
             end
           end
         end

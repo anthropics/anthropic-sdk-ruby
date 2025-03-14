@@ -446,6 +446,12 @@ module Anthropic
                 variant String
 
                 variant Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::System::BetaTextBlockParamArray
+
+                # @!parse
+                #   class << self
+                #     # @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam>)]
+                #     def variants; end
+                #   end
               end
             end
           end

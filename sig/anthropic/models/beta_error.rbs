@@ -12,7 +12,7 @@ module Anthropic
       | Anthropic::Models::BetaOverloadedError
 
     class BetaError < Anthropic::Union
-      private def self.variants: -> [[:invalid_request_error, Anthropic::Models::BetaInvalidRequestError], [:authentication_error, Anthropic::Models::BetaAuthenticationError], [:billing_error, Anthropic::Models::BetaBillingError], [:permission_error, Anthropic::Models::BetaPermissionError], [:not_found_error, Anthropic::Models::BetaNotFoundError], [:rate_limit_error, Anthropic::Models::BetaRateLimitError], [:timeout_error, Anthropic::Models::BetaGatewayTimeoutError], [:api_error, Anthropic::Models::BetaAPIError], [:overloaded_error, Anthropic::Models::BetaOverloadedError]]
+      def self.variants: -> [Anthropic::Models::BetaInvalidRequestError, Anthropic::Models::BetaAuthenticationError, Anthropic::Models::BetaBillingError, Anthropic::Models::BetaPermissionError, Anthropic::Models::BetaNotFoundError, Anthropic::Models::BetaRateLimitError, Anthropic::Models::BetaGatewayTimeoutError, Anthropic::Models::BetaAPIError, Anthropic::Models::BetaOverloadedError]
     end
   end
 end

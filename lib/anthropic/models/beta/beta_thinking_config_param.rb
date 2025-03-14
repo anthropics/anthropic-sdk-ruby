@@ -20,6 +20,12 @@ module Anthropic
         variant :enabled, -> { Anthropic::Models::Beta::BetaThinkingConfigEnabled }
 
         variant :disabled, -> { Anthropic::Models::Beta::BetaThinkingConfigDisabled }
+
+        # @!parse
+        #   class << self
+        #     # @return [Array(Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled)]
+        #     def variants; end
+        #   end
       end
     end
 

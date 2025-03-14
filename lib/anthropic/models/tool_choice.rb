@@ -20,6 +20,12 @@ module Anthropic
 
       # The model will not be allowed to use tools.
       variant :none, -> { Anthropic::Models::ToolChoiceNone }
+
+      # @!parse
+      #   class << self
+      #     # @return [Array(Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone)]
+      #     def variants; end
+      #   end
     end
   end
 end

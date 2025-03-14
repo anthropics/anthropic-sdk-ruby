@@ -28,6 +28,12 @@ module Anthropic
         variant String
 
         variant Anthropic::Models::MessageParam::Content::ContentBlockParamArray
+
+        # @!parse
+        #   class << self
+        #     # @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam>)]
+        #     def variants; end
+        #   end
       end
 
       # @abstract

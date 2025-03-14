@@ -21,6 +21,12 @@ module Anthropic
 
         finalize!
       end
+
+      # @!parse
+      #   class << self
+      #     # @return [Array(String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1)]
+      #     def variants; end
+      #   end
     end
   end
 end

@@ -15,14 +15,8 @@ module Anthropic
       abstract!
 
       class << self
-        # @api private
-        sig do
-          override
-            .returns(
-              [[Symbol, Anthropic::Models::ThinkingConfigEnabled], [Symbol, Anthropic::Models::ThinkingConfigDisabled]]
-            )
-        end
-        private def variants
+        sig { override.returns([Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]) }
+        def variants
         end
       end
     end

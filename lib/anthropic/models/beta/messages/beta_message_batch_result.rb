@@ -21,6 +21,12 @@ module Anthropic
           variant :canceled, -> { Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult }
 
           variant :expired, -> { Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult }
+
+          # @!parse
+          #   class << self
+          #     # @return [Array(Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult)]
+          #     def variants; end
+          #   end
         end
       end
     end
