@@ -1,7 +1,6 @@
 # typed: strong
 
 module Anthropic
-  # @api private
   module BasePage
     abstract!
 
