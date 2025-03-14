@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @abstract
-      #
       class BetaContentBlock < Anthropic::Union
         discriminator :type
 

@@ -284,7 +284,6 @@ module Anthropic
         end
 
         # @abstract
-        #
         class Tool < Anthropic::Union
           variant -> { Anthropic::Models::Beta::BetaTool }
 

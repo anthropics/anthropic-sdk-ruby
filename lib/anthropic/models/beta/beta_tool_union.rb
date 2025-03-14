@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @abstract
-      #
       class BetaToolUnion < Anthropic::Union
         variant -> { Anthropic::Models::Beta::BetaTool }
 

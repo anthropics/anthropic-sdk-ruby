@@ -1,6 +1,7 @@
 # typed: strong
 
 module Anthropic
+  # @api private
   module BaseStream
     Message = type_member(:in)
     Elem = type_member(:out)
@@ -9,6 +10,7 @@ module Anthropic
     def close
     end
 
+    # @api private
     sig { overridable.returns(T::Enumerable[Elem]) }
     private def iterator
     end
@@ -23,6 +25,7 @@ module Anthropic
 
     alias_method :enum_for, :to_enum
 
+    # @api private
     sig do
       params(
         model: T.any(T::Class[T.anything], Anthropic::Converter),

@@ -3,6 +3,15 @@
 module Anthropic
   module Models
     class ThinkingConfigEnabled < Anthropic::BaseModel
+      # Determines how many tokens Claude can use for its internal reasoning process.
+      #   Larger budgets can enable more thorough analysis for complex problems, improving
+      #   response quality.
+      #
+      #   Must be ≥1024 and less than `max_tokens`.
+      #
+      #   See
+      #   [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
+      #   for details.
       sig { returns(Integer) }
       def budget_tokens
       end

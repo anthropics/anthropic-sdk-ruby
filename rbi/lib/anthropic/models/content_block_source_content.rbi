@@ -6,6 +6,7 @@ module Anthropic
       abstract!
 
       class << self
+        # @api private
         sig do
           override
             .returns([[Symbol, Anthropic::Models::TextBlockParam], [Symbol, Anthropic::Models::ImageBlockParam]])

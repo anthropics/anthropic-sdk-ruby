@@ -5,6 +5,9 @@ module Anthropic
     module Beta
       module Messages
         class BetaMessageBatchRequestCounts < Anthropic::BaseModel
+          # Number of requests in the Message Batch that have been canceled.
+          #
+          #   This is zero until processing of the entire Message Batch has ended.
           sig { returns(Integer) }
           def canceled
           end
@@ -13,6 +16,9 @@ module Anthropic
           def canceled=(_)
           end
 
+          # Number of requests in the Message Batch that encountered an error.
+          #
+          #   This is zero until processing of the entire Message Batch has ended.
           sig { returns(Integer) }
           def errored
           end
@@ -21,6 +27,9 @@ module Anthropic
           def errored=(_)
           end
 
+          # Number of requests in the Message Batch that have expired.
+          #
+          #   This is zero until processing of the entire Message Batch has ended.
           sig { returns(Integer) }
           def expired
           end
@@ -29,6 +38,7 @@ module Anthropic
           def expired=(_)
           end
 
+          # Number of requests in the Message Batch that are processing.
           sig { returns(Integer) }
           def processing
           end
@@ -37,6 +47,9 @@ module Anthropic
           def processing=(_)
           end
 
+          # Number of requests in the Message Batch that have completed successfully.
+          #
+          #   This is zero until processing of the entire Message Batch has ended.
           sig { returns(Integer) }
           def succeeded
           end

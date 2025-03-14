@@ -76,6 +76,7 @@ module Anthropic
           BetaContentBlockSourceContentArray = T.type_alias { T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)] }
 
           class << self
+            # @api private
             sig do
               override
                 .returns(

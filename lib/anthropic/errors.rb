@@ -20,7 +20,7 @@ module Anthropic
     # @return [Object, nil]
     attr_reader :body
 
-    # @private
+    # @api private
     #
     # @param url [URI::Generic]
     # @param status [Integer, nil]
@@ -28,7 +28,6 @@ module Anthropic
     # @param request [nil]
     # @param response [nil]
     # @param message [String, nil]
-    #
     def initialize(url:, status: nil, body: nil, request: nil, response: nil, message: nil)
       @url = url
       @status = status
@@ -48,7 +47,7 @@ module Anthropic
     #   # @return [nil]
     #   attr_reader :body
 
-    # @private
+    # @api private
     #
     # @param url [URI::Generic]
     # @param status [nil]
@@ -56,7 +55,6 @@ module Anthropic
     # @param request [nil]
     # @param response [nil]
     # @param message [String, nil]
-    #
     def initialize(
       url:,
       status: nil,
@@ -70,7 +68,7 @@ module Anthropic
   end
 
   class APITimeoutError < Anthropic::APIConnectionError
-    # @private
+    # @api private
     #
     # @param url [URI::Generic]
     # @param status [nil]
@@ -78,7 +76,6 @@ module Anthropic
     # @param request [nil]
     # @param response [nil]
     # @param message [String, nil]
-    #
     def initialize(
       url:,
       status: nil,
@@ -92,7 +89,7 @@ module Anthropic
   end
 
   class APIStatusError < Anthropic::APIError
-    # @private
+    # @api private
     #
     # @param url [URI::Generic]
     # @param status [Integer]
@@ -102,7 +99,6 @@ module Anthropic
     # @param message [String, nil]
     #
     # @return [Anthropic::APIStatusError]
-    #
     def self.for(url:, status:, body:, request:, response:, message: nil)
       kwargs = {url: url, status: status, body: body, request: request, response: response, message: message}
 
@@ -132,7 +128,7 @@ module Anthropic
     #   # @return [Integer]
     #   attr_reader :status
 
-    # @private
+    # @api private
     #
     # @param url [URI::Generic]
     # @param status [Integer]
@@ -140,7 +136,6 @@ module Anthropic
     # @param request [nil]
     # @param response [nil]
     # @param message [String, nil]
-    #
     def initialize(url:, status:, body:, request:, response:, message: nil)
       message ||= {url: url.to_s, status: status, body: body}
       super(

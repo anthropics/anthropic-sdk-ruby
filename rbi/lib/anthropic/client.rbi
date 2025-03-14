@@ -34,18 +34,22 @@ module Anthropic
     def beta
     end
 
+    # @api private
     sig { override.returns(T::Hash[String, String]) }
     private def auth_headers
     end
 
+    # @api private
     sig { returns(T::Hash[String, String]) }
     private def api_key_auth
     end
 
+    # @api private
     sig { returns(T::Hash[String, String]) }
     private def bearer_auth
     end
 
+    # Creates and returns a new client for interacting with the API.
     sig do
       params(
         base_url: T.nilable(String),

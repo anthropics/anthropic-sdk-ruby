@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @abstract
-    #
     class ToolUnion < Anthropic::Union
       variant -> { Anthropic::Models::Tool }
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Anthropic
-  # @private
+  # @api private
   #
   # @example
   # ```ruby
@@ -19,10 +19,9 @@ module Anthropic
   class Stream
     include Anthropic::BaseStream
 
-    # @private
+    # @api private
     #
     # @return [Enumerable]
-    #
     private def iterator
       # rubocop:disable Metrics/BlockLength
       @iterator ||= Anthropic::Util.chain_fused(@messages) do |y|

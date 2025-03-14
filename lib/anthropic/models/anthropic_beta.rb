@@ -3,14 +3,12 @@
 module Anthropic
   module Models
     # @abstract
-    #
     class AnthropicBeta < Anthropic::Union
       variant String
 
       variant enum: -> { Anthropic::Models::AnthropicBeta::UnionMember1 }
 
       # @abstract
-      #
       class UnionMember1 < Anthropic::Enum
         MESSAGE_BATCHES_2024_09_24 = :"message-batches-2024-09-24"
         PROMPT_CACHING_2024_07_31 = :"prompt-caching-2024-07-31"

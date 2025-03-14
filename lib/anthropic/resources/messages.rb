@@ -246,7 +246,6 @@ module Anthropic
       #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Anthropic::Models::Message]
-      #
       def create(params)
         parsed, options = Anthropic::Models::MessageCreateParams.dump_request(params)
         parsed.delete(:stream)
@@ -499,7 +498,6 @@ module Anthropic
       #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Anthropic::Stream<Anthropic::Models::RawMessageStartEvent, Anthropic::Models::RawMessageDeltaEvent, Anthropic::Models::RawMessageStopEvent, Anthropic::Models::RawContentBlockStartEvent, Anthropic::Models::RawContentBlockDeltaEvent, Anthropic::Models::RawContentBlockStopEvent>]
-      #
       def create_streaming(params)
         parsed, options = Anthropic::Models::MessageCreateParams.dump_request(params)
         parsed.store(:stream, true)
@@ -707,7 +705,6 @@ module Anthropic
       #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Anthropic::Models::MessageTokensCount]
-      #
       def count_tokens(params)
         parsed, options = Anthropic::Models::MessageCountTokensParams.dump_request(params)
         @client.request(
@@ -720,7 +717,6 @@ module Anthropic
       end
 
       # @param client [Anthropic::Client]
-      #
       def initialize(client:)
         @client = client
         @batches = Anthropic::Resources::Messages::Batches.new(client: client)

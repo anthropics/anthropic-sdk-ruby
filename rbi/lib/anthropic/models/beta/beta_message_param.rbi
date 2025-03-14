@@ -138,6 +138,7 @@ module Anthropic
           end
 
           class << self
+            # @api private
             sig do
               override
                 .returns(

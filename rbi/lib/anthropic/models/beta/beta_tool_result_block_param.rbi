@@ -114,6 +114,7 @@ module Anthropic
             abstract!
 
             class << self
+              # @api private
               sig do
                 override
                   .returns(
@@ -126,6 +127,7 @@ module Anthropic
           end
 
           class << self
+            # @api private
             sig do
               override
                 .returns(

@@ -4,6 +4,10 @@ module Anthropic
   module Resources
     class Beta
       class Models
+        # Get a specific model.
+        #
+        #   The Models API response can be used to determine information about a specific
+        #   model or resolve a model alias to a model ID.
         sig do
           params(
             model_id: String,
@@ -14,6 +18,10 @@ module Anthropic
         def retrieve(model_id, request_options: {})
         end
 
+        # List available models.
+        #
+        #   The Models API response can be used to determine which models are available for
+        #   use in the API. More recently released models are listed first.
         sig do
           params(
             after_id: String,

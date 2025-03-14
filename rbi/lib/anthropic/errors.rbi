@@ -23,6 +23,7 @@ module Anthropic
     def body
     end
 
+    # @api private
     sig do
       params(
         url: URI::Generic,
@@ -47,6 +48,7 @@ module Anthropic
     def body
     end
 
+    # @api private
     sig do
       params(
         url: URI::Generic,
@@ -63,6 +65,7 @@ module Anthropic
   end
 
   class APITimeoutError < Anthropic::APIConnectionError
+    # @api private
     sig do
       params(
         url: URI::Generic,
@@ -79,6 +82,7 @@ module Anthropic
   end
 
   class APIStatusError < Anthropic::APIError
+    # @api private
     sig do
       params(
         url: URI::Generic,
@@ -97,6 +101,7 @@ module Anthropic
     def status
     end
 
+    # @api private
     sig do
       params(
         url: URI::Generic,

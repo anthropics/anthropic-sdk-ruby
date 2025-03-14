@@ -96,6 +96,7 @@ module Anthropic
         abstract!
 
         class << self
+          # @api private
           sig do
             override
               .returns(

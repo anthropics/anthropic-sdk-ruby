@@ -23,7 +23,6 @@ module Anthropic
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         # @abstract
-        #
         class Content < Anthropic::Union
           BetaContentBlockParamArray = Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlockParam }]
 
@@ -33,7 +32,6 @@ module Anthropic
         end
 
         # @abstract
-        #
         class Role < Anthropic::Enum
           USER = :user
           ASSISTANT = :assistant

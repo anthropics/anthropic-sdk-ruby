@@ -249,7 +249,6 @@ module Anthropic
         #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [Anthropic::Models::Beta::BetaMessage]
-        #
         def create(params)
           parsed, options = Anthropic::Models::Beta::MessageCreateParams.dump_request(params)
           parsed.delete(:stream)
@@ -506,7 +505,6 @@ module Anthropic
         #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [Anthropic::Stream<Anthropic::Models::Beta::BetaRawMessageStartEvent, Anthropic::Models::Beta::BetaRawMessageDeltaEvent, Anthropic::Models::Beta::BetaRawMessageStopEvent, Anthropic::Models::Beta::BetaRawContentBlockStartEvent, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Models::Beta::BetaRawContentBlockStopEvent>]
-        #
         def create_streaming(params)
           parsed, options = Anthropic::Models::Beta::MessageCreateParams.dump_request(params)
           parsed.store(:stream, true)
@@ -717,7 +715,6 @@ module Anthropic
         #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [Anthropic::Models::Beta::BetaMessageTokensCount]
-        #
         def count_tokens(params)
           parsed, options = Anthropic::Models::Beta::MessageCountTokensParams.dump_request(params)
           header_params = [:"anthropic-beta"]
@@ -732,7 +729,6 @@ module Anthropic
         end
 
         # @param client [Anthropic::Client]
-        #
         def initialize(client:)
           @client = client
           @batches = Anthropic::Resources::Beta::Messages::Batches.new(client: client)

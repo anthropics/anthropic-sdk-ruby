@@ -1,16 +1,14 @@
 # frozen_string_literal: true
 
 module Anthropic
-  # @private
-  #
+  # @api private
   class PooledNetRequester
     class << self
-      # @private
+      # @api private
       #
       # @param url [URI::Generic]
       #
       # @return [Net::HTTP]
-      #
       def connect(url)
         port =
           case [url.port, url.scheme]
@@ -28,17 +26,16 @@ module Anthropic
         end
       end
 
-      # @private
+      # @api private
       #
       # @param conn [Net::HTTP]
       # @param deadline [Float]
-      #
       def calibrate_socket_timeout(conn, deadline)
         timeout = deadline - Anthropic::Util.monotonic_secs
         conn.open_timeout = conn.read_timeout = conn.write_timeout = conn.continue_timeout = timeout
       end
 
-      # @private
+      # @api private
       #
       # @param request [Hash{Symbol=>Object}] .
       #
@@ -51,7 +48,6 @@ module Anthropic
       # @param blk [Proc]
       #
       # @return [Net::HTTPGenericRequest]
-      #
       def build_request(request, &)
         method, url, headers, body = request.fetch_values(:method, :url, :headers, :body)
         req = Net::HTTPGenericRequest.new(
@@ -80,11 +76,10 @@ module Anthropic
       end
     end
 
-    # @private
+    # @api private
     #
     # @param url [URI::Generic]
     # @param blk [Proc]
-    #
     private def with_pool(url, &)
       origin = Anthropic::Util.uri_origin(url)
       pool =
@@ -97,7 +92,7 @@ module Anthropic
       pool.with(&)
     end
 
-    # @private
+    # @api private
     #
     # @param request [Hash{Symbol=>Object}] .
     #
@@ -112,7 +107,6 @@ module Anthropic
     #   @option request [Float] :deadline
     #
     # @return [Array(Net::HTTPResponse, Enumerable)]
-    #
     def execute(request)
       url, deadline = request.fetch_values(:url, :deadline)
 
@@ -158,10 +152,9 @@ module Anthropic
       [response, (response.body = body)]
     end
 
-    # @private
+    # @api private
     #
     # @param size [Integer]
-    #
     def initialize(size: Etc.nprocessors)
       @mutex = Mutex.new
       @size = size

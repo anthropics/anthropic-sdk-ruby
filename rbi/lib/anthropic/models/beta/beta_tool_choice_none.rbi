@@ -14,6 +14,7 @@ module Anthropic
         def type=(_)
         end
 
+        # The model will not be allowed to use tools.
         sig { params(type: Symbol).returns(T.attached_class) }
         def self.new(type: :none)
         end

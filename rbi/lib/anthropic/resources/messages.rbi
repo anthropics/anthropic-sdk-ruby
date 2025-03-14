@@ -7,6 +7,13 @@ module Anthropic
       def batches
       end
 
+      # Send a structured list of input messages with text and/or image content, and the
+      #   model will generate the next message in the conversation.
+      #
+      #   The Messages API can be used for either single queries or stateless multi-turn
+      #   conversations.
+      #
+      #   Learn more about the Messages API in our [user guide](/en/docs/initial-setup)
       sig do
         params(
           max_tokens: Integer,
@@ -53,6 +60,13 @@ module Anthropic
       )
       end
 
+      # Send a structured list of input messages with text and/or image content, and the
+      #   model will generate the next message in the conversation.
+      #
+      #   The Messages API can be used for either single queries or stateless multi-turn
+      #   conversations.
+      #
+      #   Learn more about the Messages API in our [user guide](/en/docs/initial-setup)
       sig do
         params(
           max_tokens: Integer,
@@ -110,6 +124,13 @@ module Anthropic
       )
       end
 
+      # Count the number of tokens in a Message.
+      #
+      #   The Token Count API can be used to count the number of tokens in a Message,
+      #   including tools, images, and documents, without creating it.
+      #
+      #   Learn more about token counting in our
+      #   [user guide](/en/docs/build-with-claude/token-counting)
       sig do
         params(
           messages: T::Array[Anthropic::Models::MessageParam],
