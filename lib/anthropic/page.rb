@@ -30,7 +30,7 @@ module Anthropic
   class Page
     include Anthropic::BasePage
 
-    # @return [Array<Object>]
+    # @return [Array<Object>, nil]
     attr_accessor :data
 
     # @return [Boolean]

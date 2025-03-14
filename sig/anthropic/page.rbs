@@ -2,7 +2,7 @@ module Anthropic
   class Page[Elem]
     include Anthropic::BasePage[Elem]
 
-    attr_accessor data: ::Array[Elem]
+    attr_accessor data: ::Array[Elem]?
 
     attr_accessor has_more: bool
 

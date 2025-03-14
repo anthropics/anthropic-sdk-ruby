@@ -1,17 +1,17 @@
 module Anthropic
   class Error < StandardError
-    attr_reader cause: StandardError?
+    attr_accessor cause: StandardError?
   end
 
   class ConversionError < Anthropic::Error
   end
 
   class APIError < Anthropic::Error
-    attr_reader url: URI::Generic
+    attr_accessor url: URI::Generic
 
-    attr_reader status: Integer?
+    attr_accessor status: Integer?
 
-    attr_reader body: top?
+    attr_accessor body: top?
 
     def initialize: (
       url: URI::Generic,
