@@ -375,42 +375,30 @@ module Anthropic
   #
   # @example
   # ```ruby
-  # # `error_object` is a `Anthropic::Models::ErrorObject`
-  # case error_object
-  # when Anthropic::Models::InvalidRequestError
-  #   # ...
-  # when Anthropic::Models::AuthenticationError_
-  #   # ...
-  # when Anthropic::Models::BillingError
-  #   # ...
+  # # `raw_message_stream_event` is a `Anthropic::Models::RawMessageStreamEvent`
+  # case raw_message_stream_event
+  # when Anthropic::Models::RawMessageStartEvent
+  #   puts(raw_message_stream_event.message)
+  # when Anthropic::Models::RawMessageDeltaEvent
+  #   puts(raw_message_stream_event.delta)
+  # when Anthropic::Models::RawMessageStopEvent
+  #   puts(raw_message_stream_event.type)
   # else
-  #   # ...
+  #   puts(raw_message_stream_event)
   # end
   # ```
   #
   # @example
   # ```ruby
-  # case error_object
-  # in {type: :invalid_request_error, message: message}
-  #   # ...
-  # in {type: :authentication_error, message: message}
-  #   # ...
-  # in {type: :billing_error, message: message}
-  #   # ...
-  # in {type: :permission_error, message: message}
-  #   # ...
-  # in {type: :not_found_error, message: message}
-  #   # ...
-  # in {type: :rate_limit_error, message: message}
-  #   # ...
-  # in {type: :timeout_error, message: message}
-  #   # ...
-  # in {type: :api_error, message: message}
-  #   # ...
-  # in {type: :overloaded_error, message: message}
+  # case raw_message_stream_event
+  # in {type: :message_start, message: message}
+  #   puts(message)
+  # in {type: :message_delta, delta: delta, usage: usage}
+  #   puts(delta)
+  # in {type: :message_stop}
   #   # ...
   # else
-  #   # ...
+  #   puts(raw_message_stream_event)
   # end
   # ```
   class Union

@@ -74,7 +74,7 @@ end
 We provide support for streaming responses using Server Side Events (SSE).
 
 ```ruby
-stream = anthropic.messages_create_streaming(
+stream = anthropic.messages.create_streaming(
   max_tokens: 1024,
   messages: [{
     role: "user",
