@@ -25,6 +25,7 @@ module Anthropic
       end
 
       class << self
+        # @api private
         sig { override.returns([[NilClass, String], [NilClass, Symbol]]) }
         private def variants
         end

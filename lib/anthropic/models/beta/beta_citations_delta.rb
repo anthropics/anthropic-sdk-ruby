@@ -23,7 +23,6 @@ module Anthropic
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         # @abstract
-        #
         class Citation < Anthropic::Union
           discriminator :type
 

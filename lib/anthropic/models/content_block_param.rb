@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @abstract
-    #
     class ContentBlockParam < Anthropic::Union
       discriminator :type
 

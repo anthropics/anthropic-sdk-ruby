@@ -33,26 +33,23 @@ module Anthropic
     # @return [Anthropic::Resources::Beta]
     attr_reader :beta
 
-    # @private
+    # @api private
     #
     # @return [Hash{String=>String}]
-    #
     private def auth_headers
       {**api_key_auth, **bearer_auth}
     end
 
-    # @private
+    # @api private
     #
     # @return [Hash{String=>String}]
-    #
     private def api_key_auth
       {"x-api-key" => @api_key}
     end
 
-    # @private
+    # @api private
     #
     # @return [Hash{String=>String}]
-    #
     private def bearer_auth
       return {} if @auth_token.nil?
 
@@ -74,7 +71,6 @@ module Anthropic
     # @param initial_retry_delay [Float]
     #
     # @param max_retry_delay [Float]
-    #
     def initialize(
       base_url: nil,
       api_key: ENV["ANTHROPIC_API_KEY"],

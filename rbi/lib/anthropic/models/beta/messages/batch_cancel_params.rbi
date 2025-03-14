@@ -8,6 +8,7 @@ module Anthropic
           extend Anthropic::RequestParameters::Converter
           include Anthropic::RequestParameters
 
+          # Optional header to specify the beta version(s) you want to use.
           sig { returns(T.nilable(T::Array[T.any(String, Symbol)])) }
           def betas
           end

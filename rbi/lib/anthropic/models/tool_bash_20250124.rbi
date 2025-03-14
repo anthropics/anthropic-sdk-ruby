@@ -3,6 +3,9 @@
 module Anthropic
   module Models
     class ToolBash20250124 < Anthropic::BaseModel
+      # Name of the tool.
+      #
+      #   This is how the tool will be called by the model and in tool_use blocks.
       sig { returns(Symbol) }
       def name
       end

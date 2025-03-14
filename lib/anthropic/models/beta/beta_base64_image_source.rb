@@ -29,7 +29,6 @@ module Anthropic
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         # @abstract
-        #
         class MediaType < Anthropic::Enum
           IMAGE_JPEG = :"image/jpeg"
           IMAGE_PNG = :"image/png"

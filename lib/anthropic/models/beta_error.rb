@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @abstract
-    #
     class BetaError < Anthropic::Union
       discriminator :type
 

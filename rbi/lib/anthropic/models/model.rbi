@@ -2,9 +2,15 @@
 
 module Anthropic
   module Models
+    # The model that will complete your prompt.\n\nSee
+    #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+    #   details and options.
     class Model < Anthropic::Union
       abstract!
 
+      # The model that will complete your prompt.\n\nSee
+      #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+      #   details and options.
       class UnionMember0 < Anthropic::Enum
         abstract!
 
@@ -52,6 +58,7 @@ module Anthropic
       end
 
       class << self
+        # @api private
         sig { override.returns([[NilClass, Symbol], [NilClass, String]]) }
         private def variants
         end

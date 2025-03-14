@@ -24,7 +24,6 @@ module Anthropic
           #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
           #
           # @return [Anthropic::Models::Beta::Messages::BetaMessageBatch]
-          #
           def create(params)
             parsed, options = Anthropic::Models::Beta::Messages::BatchCreateParams.dump_request(params)
             header_params = [:"anthropic-beta"]
@@ -54,7 +53,6 @@ module Anthropic
           #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
           #
           # @return [Anthropic::Models::Beta::Messages::BetaMessageBatch]
-          #
           def retrieve(message_batch_id, params = {})
             parsed, options = Anthropic::Models::Beta::Messages::BatchRetrieveParams.dump_request(params)
             @client.request(
@@ -89,7 +87,6 @@ module Anthropic
           #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
           #
           # @return [Anthropic::Page<Anthropic::Models::Beta::Messages::BetaMessageBatch>]
-          #
           def list(params = {})
             parsed, options = Anthropic::Models::Beta::Messages::BatchListParams.dump_request(params)
             query_params = [:after_id, :before_id, :limit]
@@ -121,7 +118,6 @@ module Anthropic
           #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
           #
           # @return [Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch]
-          #
           def delete(message_batch_id, params = {})
             parsed, options = Anthropic::Models::Beta::Messages::BatchDeleteParams.dump_request(params)
             @client.request(
@@ -155,7 +151,6 @@ module Anthropic
           #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
           #
           # @return [Anthropic::Models::Beta::Messages::BetaMessageBatch]
-          #
           def cancel(message_batch_id, params = {})
             parsed, options = Anthropic::Models::Beta::Messages::BatchCancelParams.dump_request(params)
             @client.request(
@@ -185,7 +180,6 @@ module Anthropic
           #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
           #
           # @return [Anthropic::JsonLStream<Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse>]
-          #
           def results(message_batch_id, params = {})
             parsed, options = Anthropic::Models::Beta::Messages::BatchResultsParams.dump_request(params)
             @client.request(
@@ -199,7 +193,6 @@ module Anthropic
           end
 
           # @param client [Anthropic::Client]
-          #
           def initialize(client:)
             @client = client
           end

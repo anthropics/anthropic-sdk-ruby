@@ -3,6 +3,8 @@
 module Anthropic
   module Models
     class MessageTokensCount < Anthropic::BaseModel
+      # The total number of tokens across the provided list of messages, system prompt,
+      #   and tools.
       sig { returns(Integer) }
       def input_tokens
       end

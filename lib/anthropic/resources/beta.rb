@@ -10,7 +10,6 @@ module Anthropic
       attr_reader :messages
 
       # @param client [Anthropic::Client]
-      #
       def initialize(client:)
         @client = client
         @models = Anthropic::Resources::Beta::Models.new(client: client)

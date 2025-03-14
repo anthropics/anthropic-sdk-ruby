@@ -36,13 +36,12 @@ module Anthropic
     # @return [String, nil]
     attr_accessor :last_id
 
-    # @private
+    # @api private
     #
     # @param client [Anthropic::BaseClient]
     # @param req [Hash{Symbol=>Object}]
     # @param headers [Hash{String=>String}, Net::HTTPHeader]
     # @param page_data [Hash{Symbol=>Object}]
-    #
     def initialize(client:, req:, headers:, page_data:)
       super
       model = req.fetch(:model)
@@ -79,7 +78,6 @@ module Anthropic
 
     # @raise [Anthropic::HTTP::Error]
     # @return [Anthropic::Page]
-    #
     def next_page
       unless next_page?
         raise RuntimeError.new("No more pages available. Please check #next_page? before calling ##{__method__}")
@@ -93,7 +91,6 @@ module Anthropic
     end
 
     # @param blk [Proc]
-    #
     def auto_paging_each(&blk)
       unless block_given?
         raise ArgumentError.new("A block must be given to ##{__method__}")
@@ -107,7 +104,6 @@ module Anthropic
     end
 
     # @return [String]
-    #
     def inspect
       "#<#{self.class}:0x#{object_id.to_s(16)} data=#{data.inspect} has_more=#{has_more.inspect} first_id=#{first_id.inspect} last_id=#{last_id.inspect}>"
     end

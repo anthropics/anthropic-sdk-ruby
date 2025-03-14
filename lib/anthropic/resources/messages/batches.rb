@@ -21,7 +21,6 @@ module Anthropic
         #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [Anthropic::Models::Messages::MessageBatch]
-        #
         def create(params)
           parsed, options = Anthropic::Models::Messages::BatchCreateParams.dump_request(params)
           @client.request(
@@ -47,7 +46,6 @@ module Anthropic
         #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [Anthropic::Models::Messages::MessageBatch]
-        #
         def retrieve(message_batch_id, params = {})
           @client.request(
             method: :get,
@@ -78,7 +76,6 @@ module Anthropic
         #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [Anthropic::Page<Anthropic::Models::Messages::MessageBatch>]
-        #
         def list(params = {})
           parsed, options = Anthropic::Models::Messages::BatchListParams.dump_request(params)
           @client.request(
@@ -106,7 +103,6 @@ module Anthropic
         #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [Anthropic::Models::Messages::DeletedMessageBatch]
-        #
         def delete(message_batch_id, params = {})
           @client.request(
             method: :delete,
@@ -136,7 +132,6 @@ module Anthropic
         #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [Anthropic::Models::Messages::MessageBatch]
-        #
         def cancel(message_batch_id, params = {})
           @client.request(
             method: :post,
@@ -162,7 +157,6 @@ module Anthropic
         #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
         # @return [Anthropic::JsonLStream<Anthropic::Models::Messages::MessageBatchIndividualResponse>]
-        #
         def results(message_batch_id, params = {})
           @client.request(
             method: :get,
@@ -175,7 +169,6 @@ module Anthropic
         end
 
         # @param client [Anthropic::Client]
-        #
         def initialize(client:)
           @client = client
         end

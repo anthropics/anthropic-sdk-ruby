@@ -28,7 +28,6 @@ module Anthropic
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
       # @abstract
-      #
       class Delta < Anthropic::Union
         discriminator :type
 

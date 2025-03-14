@@ -61,6 +61,7 @@ module Anthropic
         abstract!
 
         class << self
+          # @api private
           sig do
             override
               .returns([[Symbol, Anthropic::Models::Base64ImageSource], [Symbol, Anthropic::Models::URLImageSource]])

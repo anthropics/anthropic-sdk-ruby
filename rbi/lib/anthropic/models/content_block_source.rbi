@@ -58,6 +58,7 @@ module Anthropic
         ContentBlockSourceContentArray = T.type_alias { T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)] }
 
         class << self
+          # @api private
           sig do
             override
               .returns(

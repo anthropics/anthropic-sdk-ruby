@@ -8,6 +8,8 @@ module Anthropic
           extend Anthropic::RequestParameters::Converter
           include Anthropic::RequestParameters
 
+          # ID of the object to use as a cursor for pagination. When provided, returns the
+          #   page of results immediately after this object.
           sig { returns(T.nilable(String)) }
           def after_id
           end
@@ -16,6 +18,8 @@ module Anthropic
           def after_id=(_)
           end
 
+          # ID of the object to use as a cursor for pagination. When provided, returns the
+          #   page of results immediately before this object.
           sig { returns(T.nilable(String)) }
           def before_id
           end
@@ -24,6 +28,9 @@ module Anthropic
           def before_id=(_)
           end
 
+          # Number of items to return per page.
+          #
+          #   Defaults to `20`. Ranges from `1` to `1000`.
           sig { returns(T.nilable(Integer)) }
           def limit
           end
@@ -32,6 +39,7 @@ module Anthropic
           def limit=(_)
           end
 
+          # Optional header to specify the beta version(s) you want to use.
           sig { returns(T.nilable(T::Array[T.any(String, Symbol)])) }
           def betas
           end

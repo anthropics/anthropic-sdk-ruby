@@ -6,6 +6,7 @@ module Anthropic
 
     module Beta
       class BetaModelInfo < Anthropic::BaseModel
+        # Unique model identifier.
         sig { returns(String) }
         def id
         end
@@ -14,6 +15,8 @@ module Anthropic
         def id=(_)
         end
 
+        # RFC 3339 datetime string representing the time at which the model was released.
+        #   May be set to an epoch value if the release date is unknown.
         sig { returns(Time) }
         def created_at
         end
@@ -22,6 +25,7 @@ module Anthropic
         def created_at=(_)
         end
 
+        # A human-readable name for the model.
         sig { returns(String) }
         def display_name
         end
@@ -30,6 +34,9 @@ module Anthropic
         def display_name=(_)
         end
 
+        # Object type.
+        #
+        #   For Models, this is always `"model"`.
         sig { returns(Symbol) }
         def type
         end

@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @abstract
-    #
     class ErrorObject < Anthropic::Union
       discriminator :type
 

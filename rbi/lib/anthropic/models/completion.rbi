@@ -3,6 +3,9 @@
 module Anthropic
   module Models
     class Completion < Anthropic::BaseModel
+      # Unique object identifier.
+      #
+      #   The format and length of IDs may change over time.
       sig { returns(String) }
       def id
       end
@@ -11,6 +14,7 @@ module Anthropic
       def id=(_)
       end
 
+      # The resulting completion up to and excluding the stop sequences.
       sig { returns(String) }
       def completion
       end
@@ -19,6 +23,9 @@ module Anthropic
       def completion=(_)
       end
 
+      # The model that will complete your prompt.\n\nSee
+      #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+      #   details and options.
       sig { returns(T.any(Symbol, String)) }
       def model
       end
@@ -27,6 +34,13 @@ module Anthropic
       def model=(_)
       end
 
+      # The reason that we stopped.
+      #
+      #   This may be one the following values:
+      #
+      #   - `"stop_sequence"`: we reached a stop sequence — either provided by you via the
+      #     `stop_sequences` parameter, or a stop sequence built into the model
+      #   - `"max_tokens"`: we exceeded `max_tokens_to_sample` or the model's maximum
       sig { returns(T.nilable(String)) }
       def stop_reason
       end
@@ -35,6 +49,9 @@ module Anthropic
       def stop_reason=(_)
       end
 
+      # Object type.
+      #
+      #   For Text Completions, this is always `"completion"`.
       sig { returns(Symbol) }
       def type
       end

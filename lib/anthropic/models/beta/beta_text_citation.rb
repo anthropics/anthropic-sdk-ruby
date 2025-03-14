@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @abstract
-      #
       class BetaTextCitation < Anthropic::Union
         discriminator :type
 

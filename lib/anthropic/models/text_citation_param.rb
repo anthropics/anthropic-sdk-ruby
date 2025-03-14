@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     # @abstract
-    #
     class TextCitationParam < Anthropic::Union
       discriminator :type
 

@@ -6,6 +6,7 @@ module Anthropic
 
     module Beta
       class BetaUsage < Anthropic::BaseModel
+        # The number of input tokens used to create the cache entry.
         sig { returns(T.nilable(Integer)) }
         def cache_creation_input_tokens
         end
@@ -14,6 +15,7 @@ module Anthropic
         def cache_creation_input_tokens=(_)
         end
 
+        # The number of input tokens read from the cache.
         sig { returns(T.nilable(Integer)) }
         def cache_read_input_tokens
         end
@@ -22,6 +24,7 @@ module Anthropic
         def cache_read_input_tokens=(_)
         end
 
+        # The number of input tokens which were used.
         sig { returns(Integer) }
         def input_tokens
         end
@@ -30,6 +33,7 @@ module Anthropic
         def input_tokens=(_)
         end
 
+        # The number of output tokens which were used.
         sig { returns(Integer) }
         def output_tokens
         end

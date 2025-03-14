@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       # @abstract
-      #
       class BetaRawMessageStreamEvent < Anthropic::Union
         discriminator :type
 

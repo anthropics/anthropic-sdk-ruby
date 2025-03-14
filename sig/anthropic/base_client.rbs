@@ -43,7 +43,7 @@ module Anthropic
       response_headers: ::Hash[String, String]
     ) -> Anthropic::BaseClient::request_input
 
-    # @private
+    # @api private
     attr_accessor requester: top
 
     def initialize: (

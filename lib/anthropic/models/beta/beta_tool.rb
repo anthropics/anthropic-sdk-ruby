@@ -83,7 +83,6 @@ module Anthropic
         end
 
         # @abstract
-        #
         class Type < Anthropic::Enum
           CUSTOM = :custom
 

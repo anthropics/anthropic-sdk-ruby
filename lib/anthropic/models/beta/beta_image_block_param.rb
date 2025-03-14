@@ -29,7 +29,6 @@ module Anthropic
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
         # @abstract
-        #
         class Source < Anthropic::Union
           discriminator :type
 
