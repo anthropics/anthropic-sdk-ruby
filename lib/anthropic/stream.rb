@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 module Anthropic
-  # @api private
-  #
   # @example
   # ```ruby
   # stream.for_each do |batch|

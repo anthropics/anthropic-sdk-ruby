@@ -1,7 +1,6 @@
 # typed: strong
 
 module Anthropic
-  # @api private
   module BaseStream
     Message = type_member(:in)
     Elem = type_member(:out)

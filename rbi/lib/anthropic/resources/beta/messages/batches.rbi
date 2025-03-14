@@ -21,7 +21,14 @@ module Anthropic
             )
               .returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
           end
-          def create(requests:, betas: nil, request_options: {})
+          def create(
+            # Body param: List of requests for prompt completion. Each is an individual
+            #   request to create a Message.
+            requests:,
+            # Header param: Optional header to specify the beta version(s) you want to use.
+            betas: nil,
+            request_options: {}
+          )
           end
 
           # This endpoint is idempotent and can be used to poll for Message Batch
@@ -38,7 +45,13 @@ module Anthropic
             )
               .returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
           end
-          def retrieve(message_batch_id, betas: nil, request_options: {})
+          def retrieve(
+            # ID of the Message Batch.
+            message_batch_id,
+            # Optional header to specify the beta version(s) you want to use.
+            betas: nil,
+            request_options: {}
+          )
           end
 
           # List all Message Batches within a Workspace. Most recently created batches are
@@ -56,7 +69,21 @@ module Anthropic
             )
               .returns(Anthropic::Page[Anthropic::Models::Beta::Messages::BetaMessageBatch])
           end
-          def list(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {})
+          def list(
+            # Query param: ID of the object to use as a cursor for pagination. When provided,
+            #   returns the page of results immediately after this object.
+            after_id: nil,
+            # Query param: ID of the object to use as a cursor for pagination. When provided,
+            #   returns the page of results immediately before this object.
+            before_id: nil,
+            # Query param: Number of items to return per page.
+            #
+            #   Defaults to `20`. Ranges from `1` to `1000`.
+            limit: nil,
+            # Header param: Optional header to specify the beta version(s) you want to use.
+            betas: nil,
+            request_options: {}
+          )
           end
 
           # Delete a Message Batch.
@@ -74,7 +101,13 @@ module Anthropic
             )
               .returns(Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch)
           end
-          def delete(message_batch_id, betas: nil, request_options: {})
+          def delete(
+            # ID of the Message Batch.
+            message_batch_id,
+            # Optional header to specify the beta version(s) you want to use.
+            betas: nil,
+            request_options: {}
+          )
           end
 
           # Batches may be canceled any time before processing ends. Once cancellation is
@@ -97,7 +130,13 @@ module Anthropic
             )
               .returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
           end
-          def cancel(message_batch_id, betas: nil, request_options: {})
+          def cancel(
+            # ID of the Message Batch.
+            message_batch_id,
+            # Optional header to specify the beta version(s) you want to use.
+            betas: nil,
+            request_options: {}
+          )
           end
 
           # Streams the results of a Message Batch as a `.jsonl` file.
@@ -116,7 +155,13 @@ module Anthropic
             )
               .returns(Anthropic::JsonLStream[Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse])
           end
-          def results(message_batch_id, betas: nil, request_options: {})
+          def results(
+            # ID of the Message Batch.
+            message_batch_id,
+            # Optional header to specify the beta version(s) you want to use.
+            betas: nil,
+            request_options: {}
+          )
           end
 
           sig { params(client: Anthropic::Client).returns(T.attached_class) }

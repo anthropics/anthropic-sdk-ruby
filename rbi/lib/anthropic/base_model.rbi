@@ -438,6 +438,7 @@ module Anthropic
       def known_fields
       end
 
+      # @api private
       sig do
         returns(
           T::Hash[Symbol, T.all(Anthropic::BaseModel::KnownFieldShape, {type: Anthropic::Converter::Input})]

@@ -857,8 +857,6 @@ module Anthropic
     end
   end
 
-  # @api private
-  #
   # @abstract
   #
   # @example
@@ -883,6 +881,8 @@ module Anthropic
         @known_fields ||= (self < Anthropic::BaseModel ? superclass.known_fields.dup : {})
       end
 
+      # @api private
+      #
       # @return [Hash{Symbol=>Hash{Symbol=>Object}}]
       def fields
         known_fields.transform_values do |field|
