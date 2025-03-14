@@ -138,30 +138,26 @@ module Anthropic
           end
 
           class << self
-            # @api private
             sig do
               override
                 .returns(
                   [
-                    [NilClass, String],
-                    [
-                      NilClass,
-                      T::Array[
-                                        T.any(
-                                          Anthropic::Models::Beta::BetaTextBlockParam,
-                                          Anthropic::Models::Beta::BetaImageBlockParam,
-                                          Anthropic::Models::Beta::BetaToolUseBlockParam,
-                                          Anthropic::Models::Beta::BetaToolResultBlockParam,
-                                          Anthropic::Models::Beta::BetaBase64PDFBlock,
-                                          Anthropic::Models::Beta::BetaThinkingBlockParam,
-                                          Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
-                                        )
-                                        ]
-                    ]
+                    String,
+                    T::Array[
+                                      T.any(
+                                        Anthropic::Models::Beta::BetaTextBlockParam,
+                                        Anthropic::Models::Beta::BetaImageBlockParam,
+                                        Anthropic::Models::Beta::BetaToolUseBlockParam,
+                                        Anthropic::Models::Beta::BetaToolResultBlockParam,
+                                        Anthropic::Models::Beta::BetaBase64PDFBlock,
+                                        Anthropic::Models::Beta::BetaThinkingBlockParam,
+                                        Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
+                                      )
+                                      ]
                   ]
                 )
             end
-            private def variants
+            def variants
             end
           end
         end

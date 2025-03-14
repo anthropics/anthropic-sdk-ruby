@@ -30,7 +30,7 @@ module Anthropic
 
         ContentBlockParamArray: content_block_param_array
 
-        private def self.variants: -> [[nil, String], [nil, ::Array[Anthropic::Models::content_block_param]]]
+        def self.variants: -> [String, ::Array[Anthropic::Models::content_block_param]]
       end
 
       type role = :user | :assistant

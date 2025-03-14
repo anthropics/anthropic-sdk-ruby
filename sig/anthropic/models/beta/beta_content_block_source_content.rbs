@@ -9,7 +9,7 @@ module Anthropic
         | Anthropic::Models::Beta::BetaImageBlockParam
 
       class BetaContentBlockSourceContent < Anthropic::Union
-        private def self.variants: -> [[:text, Anthropic::Models::Beta::BetaTextBlockParam], [:image, Anthropic::Models::Beta::BetaImageBlockParam]]
+        def self.variants: -> [Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam]
       end
     end
   end

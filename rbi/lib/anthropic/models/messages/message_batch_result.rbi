@@ -14,14 +14,13 @@ module Anthropic
         abstract!
 
         class << self
-          # @api private
           sig do
             override
               .returns(
-                [[Symbol, Anthropic::Models::Messages::MessageBatchSucceededResult], [Symbol, Anthropic::Models::Messages::MessageBatchErroredResult], [Symbol, Anthropic::Models::Messages::MessageBatchCanceledResult], [Symbol, Anthropic::Models::Messages::MessageBatchExpiredResult]]
+                [Anthropic::Models::Messages::MessageBatchSucceededResult, Anthropic::Models::Messages::MessageBatchErroredResult, Anthropic::Models::Messages::MessageBatchCanceledResult, Anthropic::Models::Messages::MessageBatchExpiredResult]
               )
           end
-          private def variants
+          def variants
           end
         end
       end

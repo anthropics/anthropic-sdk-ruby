@@ -23,6 +23,12 @@ module Anthropic
       variant :api_error, -> { Anthropic::Models::BetaAPIError }
 
       variant :overloaded_error, -> { Anthropic::Models::BetaOverloadedError }
+
+      # @!parse
+      #   class << self
+      #     # @return [Array(Anthropic::Models::BetaInvalidRequestError, Anthropic::Models::BetaAuthenticationError, Anthropic::Models::BetaBillingError, Anthropic::Models::BetaPermissionError, Anthropic::Models::BetaNotFoundError, Anthropic::Models::BetaRateLimitError, Anthropic::Models::BetaGatewayTimeoutError, Anthropic::Models::BetaAPIError, Anthropic::Models::BetaOverloadedError)]
+      #     def variants; end
+      #   end
     end
   end
 end

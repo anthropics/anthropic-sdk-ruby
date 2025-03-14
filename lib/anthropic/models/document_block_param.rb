@@ -60,6 +60,12 @@ module Anthropic
         variant :content, -> { Anthropic::Models::ContentBlockSource }
 
         variant :url, -> { Anthropic::Models::URLPDFSource }
+
+        # @!parse
+        #   class << self
+        #     # @return [Array(Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource)]
+        #     def variants; end
+        #   end
       end
     end
   end

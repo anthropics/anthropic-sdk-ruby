@@ -60,10 +60,10 @@ module Anthropic
             | Anthropic::Models::Beta::BetaImageBlockParam
 
           class Content < Anthropic::Union
-            private def self.variants: -> [[:text, Anthropic::Models::Beta::BetaTextBlockParam], [:image, Anthropic::Models::Beta::BetaImageBlockParam]]
+            def self.variants: -> [Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam]
           end
 
-          private def self.variants: -> [[nil, String], [nil, ::Array[Anthropic::Models::Beta::BetaToolResultBlockParam::Content::content]]]
+          def self.variants: -> [String, ::Array[Anthropic::Models::Beta::BetaToolResultBlockParam::Content::content]]
         end
       end
     end

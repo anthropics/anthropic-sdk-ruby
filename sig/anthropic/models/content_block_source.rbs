@@ -31,7 +31,7 @@ module Anthropic
 
         ContentBlockSourceContentArray: content_block_source_content_array
 
-        private def self.variants: -> [[nil, String], [nil, ::Array[Anthropic::Models::content_block_source_content]]]
+        def self.variants: -> [String, ::Array[Anthropic::Models::content_block_source_content]]
       end
     end
   end

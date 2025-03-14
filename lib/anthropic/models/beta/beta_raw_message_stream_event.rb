@@ -18,6 +18,12 @@ module Anthropic
         variant :content_block_delta, -> { Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent }
 
         variant :content_block_stop, -> { Anthropic::Models::Beta::BetaRawContentBlockStopEvent }
+
+        # @!parse
+        #   class << self
+        #     # @return [Array(Anthropic::Models::Beta::BetaRawMessageStartEvent, Anthropic::Models::Beta::BetaRawMessageDeltaEvent, Anthropic::Models::Beta::BetaRawMessageStopEvent, Anthropic::Models::Beta::BetaRawContentBlockStartEvent, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Models::Beta::BetaRawContentBlockStopEvent)]
+        #     def variants; end
+        #   end
       end
     end
 

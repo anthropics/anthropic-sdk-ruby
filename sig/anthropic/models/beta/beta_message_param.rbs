@@ -36,7 +36,7 @@ module Anthropic
 
           BetaContentBlockParamArray: beta_content_block_param_array
 
-          private def self.variants: -> [[nil, String], [nil, ::Array[Anthropic::Models::Beta::beta_content_block_param]]]
+          def self.variants: -> [String, ::Array[Anthropic::Models::Beta::beta_content_block_param]]
         end
 
         type role = :user | :assistant

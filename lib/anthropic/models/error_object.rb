@@ -23,6 +23,12 @@ module Anthropic
       variant :api_error, -> { Anthropic::Models::APIErrorObject }
 
       variant :overloaded_error, -> { Anthropic::Models::OverloadedError }
+
+      # @!parse
+      #   class << self
+      #     # @return [Array(Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError_, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError_, Anthropic::Models::RateLimitError_, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError)]
+      #     def variants; end
+      #   end
     end
   end
 end

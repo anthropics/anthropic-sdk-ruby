@@ -21,6 +21,12 @@ module Anthropic
 
         # The model will not be allowed to use tools.
         variant :none, -> { Anthropic::Models::Beta::BetaToolChoiceNone }
+
+        # @!parse
+        #   class << self
+        #     # @return [Array(Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone)]
+        #     def variants; end
+        #   end
       end
     end
 

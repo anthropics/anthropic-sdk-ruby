@@ -12,6 +12,12 @@ module Anthropic
         variant :page_location, -> { Anthropic::Models::Beta::BetaCitationPageLocationParam }
 
         variant :content_block_location, -> { Anthropic::Models::Beta::BetaCitationContentBlockLocationParam }
+
+        # @!parse
+        #   class << self
+        #     # @return [Array(Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam)]
+        #     def variants; end
+        #   end
       end
     end
 

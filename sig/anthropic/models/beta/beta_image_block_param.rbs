@@ -36,7 +36,7 @@ module Anthropic
           | Anthropic::Models::Beta::BetaURLImageSource
 
         class Source < Anthropic::Union
-          private def self.variants: -> [[:base64, Anthropic::Models::Beta::BetaBase64ImageSource], [:url, Anthropic::Models::Beta::BetaURLImageSource]]
+          def self.variants: -> [Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource]
         end
       end
     end

@@ -7,7 +7,7 @@ module Anthropic
       | Anthropic::Models::RedactedThinkingBlock
 
     class ContentBlock < Anthropic::Union
-      private def self.variants: -> [[:text, Anthropic::Models::TextBlock], [:tool_use, Anthropic::Models::ToolUseBlock], [:thinking, Anthropic::Models::ThinkingBlock], [:redacted_thinking, Anthropic::Models::RedactedThinkingBlock]]
+      def self.variants: -> [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock]
     end
   end
 end

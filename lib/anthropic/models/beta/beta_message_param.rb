@@ -29,6 +29,12 @@ module Anthropic
           variant String
 
           variant Anthropic::Models::Beta::BetaMessageParam::Content::BetaContentBlockParamArray
+
+          # @!parse
+          #   class << self
+          #     # @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam>)]
+          #     def variants; end
+          #   end
         end
 
         # @abstract

@@ -34,6 +34,12 @@ module Anthropic
         variant :base64, -> { Anthropic::Models::Base64ImageSource }
 
         variant :url, -> { Anthropic::Models::URLImageSource }
+
+        # @!parse
+        #   class << self
+        #     # @return [Array(Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource)]
+        #     def variants; end
+        #   end
       end
     end
   end

@@ -135,30 +135,26 @@ module Anthropic
         end
 
         class << self
-          # @api private
           sig do
             override
               .returns(
                 [
-                  [NilClass, String],
-                  [
-                    NilClass,
-                    T::Array[
-                                    T.any(
-                                      Anthropic::Models::TextBlockParam,
-                                      Anthropic::Models::ImageBlockParam,
-                                      Anthropic::Models::ToolUseBlockParam,
-                                      Anthropic::Models::ToolResultBlockParam,
-                                      Anthropic::Models::DocumentBlockParam,
-                                      Anthropic::Models::ThinkingBlockParam,
-                                      Anthropic::Models::RedactedThinkingBlockParam
-                                    )
-                                    ]
-                  ]
+                  String,
+                  T::Array[
+                                  T.any(
+                                    Anthropic::Models::TextBlockParam,
+                                    Anthropic::Models::ImageBlockParam,
+                                    Anthropic::Models::ToolUseBlockParam,
+                                    Anthropic::Models::ToolResultBlockParam,
+                                    Anthropic::Models::DocumentBlockParam,
+                                    Anthropic::Models::ThinkingBlockParam,
+                                    Anthropic::Models::RedactedThinkingBlockParam
+                                  )
+                                  ]
                 ]
               )
           end
-          private def variants
+          def variants
           end
         end
       end

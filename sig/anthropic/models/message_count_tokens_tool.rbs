@@ -6,7 +6,7 @@ module Anthropic
       | Anthropic::Models::ToolTextEditor20250124
 
     class MessageCountTokensTool < Anthropic::Union
-      private def self.variants: -> [[nil, Anthropic::Models::Tool], [nil, Anthropic::Models::ToolBash20250124], [nil, Anthropic::Models::ToolTextEditor20250124]]
+      def self.variants: -> [Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124]
     end
   end
 end

@@ -41,6 +41,12 @@ module Anthropic
           variant :thinking_delta, -> { Anthropic::Models::Beta::BetaThinkingDelta }
 
           variant :signature_delta, -> { Anthropic::Models::Beta::BetaSignatureDelta }
+
+          # @!parse
+          #   class << self
+          #     # @return [Array(Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta)]
+          #     def variants; end
+          #   end
         end
       end
     end

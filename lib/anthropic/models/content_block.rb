@@ -13,6 +13,12 @@ module Anthropic
       variant :thinking, -> { Anthropic::Models::ThinkingBlock }
 
       variant :redacted_thinking, -> { Anthropic::Models::RedactedThinkingBlock }
+
+      # @!parse
+      #   class << self
+      #     # @return [Array(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock)]
+      #     def variants; end
+      #   end
     end
   end
 end

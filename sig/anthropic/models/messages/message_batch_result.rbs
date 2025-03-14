@@ -11,7 +11,7 @@ module Anthropic
         | Anthropic::Models::Messages::MessageBatchExpiredResult
 
       class MessageBatchResult < Anthropic::Union
-        private def self.variants: -> [[:succeeded, Anthropic::Models::Messages::MessageBatchSucceededResult], [:errored, Anthropic::Models::Messages::MessageBatchErroredResult], [:canceled, Anthropic::Models::Messages::MessageBatchCanceledResult], [:expired, Anthropic::Models::Messages::MessageBatchExpiredResult]]
+        def self.variants: -> [Anthropic::Models::Messages::MessageBatchSucceededResult, Anthropic::Models::Messages::MessageBatchErroredResult, Anthropic::Models::Messages::MessageBatchCanceledResult, Anthropic::Models::Messages::MessageBatchExpiredResult]
       end
     end
   end
