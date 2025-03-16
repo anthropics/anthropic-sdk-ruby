@@ -17,15 +17,13 @@ module Anthropic
       class BetaThinkingConfigParam < Anthropic::Union
         abstract!
 
-        class << self
-          sig do
-            override
-              .returns(
-                [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
-              )
-          end
-          def variants
-          end
+        Variants = type_template(:out) do
+          {
+            fixed: T.any(
+              Anthropic::Models::Beta::BetaThinkingConfigEnabled,
+              Anthropic::Models::Beta::BetaThinkingConfigDisabled
+            )
+          }
         end
       end
     end

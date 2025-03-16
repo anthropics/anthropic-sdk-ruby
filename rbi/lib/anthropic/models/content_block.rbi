@@ -5,15 +5,15 @@ module Anthropic
     class ContentBlock < Anthropic::Union
       abstract!
 
-      class << self
-        sig do
-          override
-            .returns(
-              [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock]
-            )
-        end
-        def variants
-        end
+      Variants = type_template(:out) do
+        {
+          fixed: T.any(
+            Anthropic::Models::TextBlock,
+            Anthropic::Models::ToolUseBlock,
+            Anthropic::Models::ThinkingBlock,
+            Anthropic::Models::RedactedThinkingBlock
+          )
+        }
       end
     end
   end

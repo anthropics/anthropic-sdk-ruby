@@ -8,14 +8,7 @@ module Anthropic
       class BetaContentBlockSourceContent < Anthropic::Union
         abstract!
 
-        class << self
-          sig do
-            override
-              .returns([Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam])
-          end
-          def variants
-          end
-        end
+        Variants = type_template(:out) { {fixed: T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)} }
       end
     end
   end

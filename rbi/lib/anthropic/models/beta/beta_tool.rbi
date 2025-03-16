@@ -126,13 +126,9 @@ module Anthropic
         class Type < Anthropic::Enum
           abstract!
 
-          CUSTOM = T.let(:custom, T.nilable(Symbol))
+          Value = type_template(:out) { {fixed: Symbol} }
 
-          class << self
-            sig { override.returns(T::Array[Symbol]) }
-            def values
-            end
-          end
+          CUSTOM = :custom
         end
       end
     end

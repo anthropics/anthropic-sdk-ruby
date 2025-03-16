@@ -5,11 +5,7 @@ module Anthropic
     class ContentBlockSourceContent < Anthropic::Union
       abstract!
 
-      class << self
-        sig { override.returns([Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam]) }
-        def variants
-        end
-      end
+      Variants = type_template(:out) { {fixed: T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)} }
     end
   end
 end

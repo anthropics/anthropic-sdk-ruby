@@ -5,15 +5,14 @@ module Anthropic
     class ToolUnion < Anthropic::Union
       abstract!
 
-      class << self
-        sig do
-          override
-            .returns(
-              [Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124]
-            )
-        end
-        def variants
-        end
+      Variants = type_template(:out) do
+        {
+          fixed: T.any(
+            Anthropic::Models::Tool,
+            Anthropic::Models::ToolBash20250124,
+            Anthropic::Models::ToolTextEditor20250124
+          )
+        }
       end
     end
   end

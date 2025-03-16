@@ -71,13 +71,8 @@ module Anthropic
         class Source < Anthropic::Union
           abstract!
 
-          class << self
-            sig do
-              override
-                .returns([Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource])
-            end
-            def variants
-            end
+          Variants = type_template(:out) do
+            {fixed: T.any(Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource)}
           end
         end
       end

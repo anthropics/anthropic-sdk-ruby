@@ -41,16 +41,12 @@ module Anthropic
         class MediaType < Anthropic::Enum
           abstract!
 
+          Value = type_template(:out) { {fixed: Symbol} }
+
           IMAGE_JPEG = :"image/jpeg"
           IMAGE_PNG = :"image/png"
           IMAGE_GIF = :"image/gif"
           IMAGE_WEBP = :"image/webp"
-
-          class << self
-            sig { override.returns(T::Array[Symbol]) }
-            def values
-            end
-          end
         end
       end
     end

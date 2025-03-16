@@ -531,13 +531,9 @@ module Anthropic
         class System < Anthropic::Union
           abstract!
 
-          BetaTextBlockParamArray = T.type_alias { T::Array[Anthropic::Models::Beta::BetaTextBlockParam] }
+          Variants = type_template(:out) { {fixed: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam])} }
 
-          class << self
-            sig { override.returns([String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]]) }
-            def variants
-            end
-          end
+          BetaTextBlockParamArray = T.type_alias { T::Array[Anthropic::Models::Beta::BetaTextBlockParam] }
         end
       end
     end

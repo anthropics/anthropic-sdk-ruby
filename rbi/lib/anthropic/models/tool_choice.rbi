@@ -7,15 +7,15 @@ module Anthropic
     class ToolChoice < Anthropic::Union
       abstract!
 
-      class << self
-        sig do
-          override
-            .returns(
-              [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
-            )
-        end
-        def variants
-        end
+      Variants = type_template(:out) do
+        {
+          fixed: T.any(
+            Anthropic::Models::ToolChoiceAuto,
+            Anthropic::Models::ToolChoiceAny,
+            Anthropic::Models::ToolChoiceTool,
+            Anthropic::Models::ToolChoiceNone
+          )
+        }
       end
     end
   end

@@ -359,13 +359,9 @@ module Anthropic
       class System < Anthropic::Union
         abstract!
 
-        TextBlockParamArray = T.type_alias { T::Array[Anthropic::Models::TextBlockParam] }
+        Variants = type_template(:out) { {fixed: T.any(String, T::Array[Anthropic::Models::TextBlockParam])} }
 
-        class << self
-          sig { override.returns([String, T::Array[Anthropic::Models::TextBlockParam]]) }
-          def variants
-          end
-        end
+        TextBlockParamArray = T.type_alias { T::Array[Anthropic::Models::TextBlockParam] }
       end
     end
   end

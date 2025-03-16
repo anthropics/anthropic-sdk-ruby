@@ -171,15 +171,11 @@ module Anthropic
           class ProcessingStatus < Anthropic::Enum
             abstract!
 
+            Value = type_template(:out) { {fixed: Symbol} }
+
             IN_PROGRESS = :in_progress
             CANCELING = :canceling
             ENDED = :ended
-
-            class << self
-              sig { override.returns(T::Array[Symbol]) }
-              def values
-              end
-            end
           end
         end
       end

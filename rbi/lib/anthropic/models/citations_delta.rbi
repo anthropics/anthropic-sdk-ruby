@@ -75,15 +75,14 @@ module Anthropic
       class Citation < Anthropic::Union
         abstract!
 
-        class << self
-          sig do
-            override
-              .returns(
-                [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation]
-              )
-          end
-          def variants
-          end
+        Variants = type_template(:out) do
+          {
+            fixed: T.any(
+              Anthropic::Models::CitationCharLocation,
+              Anthropic::Models::CitationPageLocation,
+              Anthropic::Models::CitationContentBlockLocation
+            )
+          }
         end
       end
     end

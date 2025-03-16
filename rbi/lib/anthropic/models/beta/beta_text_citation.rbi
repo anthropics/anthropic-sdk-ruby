@@ -8,15 +8,14 @@ module Anthropic
       class BetaTextCitation < Anthropic::Union
         abstract!
 
-        class << self
-          sig do
-            override
-              .returns(
-                [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation]
-              )
-          end
-          def variants
-          end
+        Variants = type_template(:out) do
+          {
+            fixed: T.any(
+              Anthropic::Models::Beta::BetaCitationCharLocation,
+              Anthropic::Models::Beta::BetaCitationPageLocation,
+              Anthropic::Models::Beta::BetaCitationContentBlockLocation
+            )
+          }
         end
       end
     end

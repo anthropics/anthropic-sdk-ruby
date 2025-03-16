@@ -8,15 +8,18 @@ module Anthropic
       class BetaToolUnion < Anthropic::Union
         abstract!
 
-        class << self
-          sig do
-            override
-              .returns(
-                [Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124]
-              )
-          end
-          def variants
-          end
+        Variants = type_template(:out) do
+          {
+            fixed: T.any(
+              Anthropic::Models::Beta::BetaTool,
+              Anthropic::Models::Beta::BetaToolComputerUse20241022,
+              Anthropic::Models::Beta::BetaToolBash20241022,
+              Anthropic::Models::Beta::BetaToolTextEditor20241022,
+              Anthropic::Models::Beta::BetaToolComputerUse20250124,
+              Anthropic::Models::Beta::BetaToolBash20250124,
+              Anthropic::Models::Beta::BetaToolTextEditor20250124
+            )
+          }
         end
       end
     end

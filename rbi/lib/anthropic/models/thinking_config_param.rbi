@@ -14,11 +14,7 @@ module Anthropic
     class ThinkingConfigParam < Anthropic::Union
       abstract!
 
-      class << self
-        sig { override.returns([Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]) }
-        def variants
-        end
-      end
+      Variants = type_template(:out) { {fixed: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled)} }
     end
   end
 end
