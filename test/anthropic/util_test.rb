@@ -161,7 +161,9 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
   class FakeCGI < CGI
     def initialize(headers, io)
       @ctype = headers["content-type"]
+      # rubocop:disable Lint/EmptyBlock
       @io = Anthropic::Util::ReadIOAdapter.new(io) {}
+      # rubocop:enable Lint/EmptyBlock
       @c_len = io.to_a.join.bytesize.to_s
       super()
     end
@@ -217,7 +219,9 @@ class Anthropic::Test::UtilIOAdapterTest < Minitest::Test
     }
     cases.each do |input, expected|
       io = StringIO.new
+      # rubocop:disable Lint/EmptyBlock
       adapter = Anthropic::Util::ReadIOAdapter.new(input) {}
+      # rubocop:enable Lint/EmptyBlock
       IO.copy_stream(adapter, io)
       assert_equal(expected, io.string)
     end
