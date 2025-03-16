@@ -98,15 +98,16 @@ module Anthropic
         class Delta < Anthropic::Union
           abstract!
 
-          class << self
-            sig do
-              override
-                .returns(
-                  [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta]
-                )
-            end
-            def variants
-            end
+          Variants = type_template(:out) do
+            {
+              fixed: T.any(
+                Anthropic::Models::Beta::BetaTextDelta,
+                Anthropic::Models::Beta::BetaInputJSONDelta,
+                Anthropic::Models::Beta::BetaCitationsDelta,
+                Anthropic::Models::Beta::BetaThinkingDelta,
+                Anthropic::Models::Beta::BetaSignatureDelta
+              )
+            }
           end
         end
       end

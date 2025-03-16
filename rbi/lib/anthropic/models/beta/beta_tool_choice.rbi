@@ -10,15 +10,15 @@ module Anthropic
       class BetaToolChoice < Anthropic::Union
         abstract!
 
-        class << self
-          sig do
-            override
-              .returns(
-                [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone]
-              )
-          end
-          def variants
-          end
+        Variants = type_template(:out) do
+          {
+            fixed: T.any(
+              Anthropic::Models::Beta::BetaToolChoiceAuto,
+              Anthropic::Models::Beta::BetaToolChoiceAny,
+              Anthropic::Models::Beta::BetaToolChoiceTool,
+              Anthropic::Models::Beta::BetaToolChoiceNone
+            )
+          }
         end
       end
     end

@@ -5,8 +5,12 @@ module Anthropic
     class AnthropicBeta < Anthropic::Union
       abstract!
 
+      Variants = type_template(:out) { {fixed: T.any(String, Symbol)} }
+
       class UnionMember1 < Anthropic::Enum
         abstract!
+
+        Value = type_template(:out) { {fixed: Symbol} }
 
         MESSAGE_BATCHES_2024_09_24 = :"message-batches-2024-09-24"
         PROMPT_CACHING_2024_07_31 = :"prompt-caching-2024-07-31"
@@ -16,18 +20,6 @@ module Anthropic
         TOKEN_COUNTING_2024_11_01 = :"token-counting-2024-11-01"
         TOKEN_EFFICIENT_TOOLS_2025_02_19 = :"token-efficient-tools-2025-02-19"
         OUTPUT_128K_2025_02_19 = :"output-128k-2025-02-19"
-
-        class << self
-          sig { override.returns(T::Array[Symbol]) }
-          def values
-          end
-        end
-      end
-
-      class << self
-        sig { override.returns([String, Symbol]) }
-        def variants
-        end
       end
     end
   end

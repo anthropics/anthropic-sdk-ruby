@@ -123,15 +123,15 @@ module Anthropic
       class Source < Anthropic::Union
         abstract!
 
-        class << self
-          sig do
-            override
-              .returns(
-                [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
-              )
-          end
-          def variants
-          end
+        Variants = type_template(:out) do
+          {
+            fixed: T.any(
+              Anthropic::Models::Base64PDFSource,
+              Anthropic::Models::PlainTextSource,
+              Anthropic::Models::ContentBlockSource,
+              Anthropic::Models::URLPDFSource
+            )
+          }
         end
       end
     end

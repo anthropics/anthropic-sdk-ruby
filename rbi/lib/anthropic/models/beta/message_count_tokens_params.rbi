@@ -424,27 +424,26 @@ module Anthropic
         class System < Anthropic::Union
           abstract!
 
-          BetaTextBlockParamArray = T.type_alias { T::Array[Anthropic::Models::Beta::BetaTextBlockParam] }
+          Variants = type_template(:out) { {fixed: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam])} }
 
-          class << self
-            sig { override.returns([String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]]) }
-            def variants
-            end
-          end
+          BetaTextBlockParamArray = T.type_alias { T::Array[Anthropic::Models::Beta::BetaTextBlockParam] }
         end
 
         class Tool < Anthropic::Union
           abstract!
 
-          class << self
-            sig do
-              override
-                .returns(
-                  [Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124]
-                )
-            end
-            def variants
-            end
+          Variants = type_template(:out) do
+            {
+              fixed: T.any(
+                Anthropic::Models::Beta::BetaTool,
+                Anthropic::Models::Beta::BetaToolComputerUse20241022,
+                Anthropic::Models::Beta::BetaToolBash20241022,
+                Anthropic::Models::Beta::BetaToolTextEditor20241022,
+                Anthropic::Models::Beta::BetaToolComputerUse20250124,
+                Anthropic::Models::Beta::BetaToolBash20250124,
+                Anthropic::Models::Beta::BetaToolTextEditor20250124
+              )
+            }
           end
         end
       end

@@ -120,6 +120,25 @@ module Anthropic
       class Content < Anthropic::Union
         abstract!
 
+        Variants = type_template(:out) do
+          {
+            fixed: T.any(
+              String,
+              T::Array[
+              T.any(
+                Anthropic::Models::TextBlockParam,
+                Anthropic::Models::ImageBlockParam,
+                Anthropic::Models::ToolUseBlockParam,
+                Anthropic::Models::ToolResultBlockParam,
+                Anthropic::Models::DocumentBlockParam,
+                Anthropic::Models::ThinkingBlockParam,
+                Anthropic::Models::RedactedThinkingBlockParam
+              )
+              ]
+            )
+          }
+        end
+
         ContentBlockParamArray = T.type_alias do
           T::Array[
           T.any(
@@ -133,43 +152,15 @@ module Anthropic
           )
           ]
         end
-
-        class << self
-          sig do
-            override
-              .returns(
-                [
-                  String,
-                  T::Array[
-                                  T.any(
-                                    Anthropic::Models::TextBlockParam,
-                                    Anthropic::Models::ImageBlockParam,
-                                    Anthropic::Models::ToolUseBlockParam,
-                                    Anthropic::Models::ToolResultBlockParam,
-                                    Anthropic::Models::DocumentBlockParam,
-                                    Anthropic::Models::ThinkingBlockParam,
-                                    Anthropic::Models::RedactedThinkingBlockParam
-                                  )
-                                  ]
-                ]
-              )
-          end
-          def variants
-          end
-        end
       end
 
       class Role < Anthropic::Enum
         abstract!
 
+        Value = type_template(:out) { {fixed: Symbol} }
+
         USER = :user
         ASSISTANT = :assistant
-
-        class << self
-          sig { override.returns(T::Array[Symbol]) }
-          def values
-          end
-        end
       end
     end
   end

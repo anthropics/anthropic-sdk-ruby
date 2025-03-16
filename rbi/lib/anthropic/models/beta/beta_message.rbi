@@ -238,16 +238,12 @@ module Anthropic
         class StopReason < Anthropic::Enum
           abstract!
 
-          END_TURN = T.let(:end_turn, T.nilable(Symbol))
-          MAX_TOKENS = T.let(:max_tokens, T.nilable(Symbol))
-          STOP_SEQUENCE = T.let(:stop_sequence, T.nilable(Symbol))
-          TOOL_USE = T.let(:tool_use, T.nilable(Symbol))
+          Value = type_template(:out) { {fixed: Symbol} }
 
-          class << self
-            sig { override.returns(T::Array[Symbol]) }
-            def values
-            end
-          end
+          END_TURN = :end_turn
+          MAX_TOKENS = :max_tokens
+          STOP_SEQUENCE = :stop_sequence
+          TOOL_USE = :tool_use
         end
       end
     end

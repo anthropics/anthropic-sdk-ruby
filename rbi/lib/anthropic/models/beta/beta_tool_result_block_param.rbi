@@ -108,30 +108,21 @@ module Anthropic
         class Content < Anthropic::Union
           abstract!
 
+          Variants = type_template(:out) do
+            {
+              fixed: T.any(
+                String,
+                T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
+              )
+            }
+          end
+
           ContentArray = T.type_alias { T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)] }
 
           class Content < Anthropic::Union
             abstract!
 
-            class << self
-              sig do
-                override
-                  .returns([Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam])
-              end
-              def variants
-              end
-            end
-          end
-
-          class << self
-            sig do
-              override
-                .returns(
-                  [String, T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]]
-                )
-            end
-            def variants
-            end
+            Variants = type_template(:out) { {fixed: T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)} }
           end
         end
       end

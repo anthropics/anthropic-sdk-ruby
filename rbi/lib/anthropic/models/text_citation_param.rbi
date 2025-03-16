@@ -5,15 +5,14 @@ module Anthropic
     class TextCitationParam < Anthropic::Union
       abstract!
 
-      class << self
-        sig do
-          override
-            .returns(
-              [Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam]
-            )
-        end
-        def variants
-        end
+      Variants = type_template(:out) do
+        {
+          fixed: T.any(
+            Anthropic::Models::CitationCharLocationParam,
+            Anthropic::Models::CitationPageLocationParam,
+            Anthropic::Models::CitationContentBlockLocationParam
+          )
+        }
       end
     end
   end

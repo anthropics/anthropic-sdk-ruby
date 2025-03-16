@@ -8,11 +8,15 @@ module Anthropic
     class Model < Anthropic::Union
       abstract!
 
+      Variants = type_template(:out) { {fixed: T.any(Symbol, String)} }
+
       # The model that will complete your prompt.\n\nSee
       #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
       class UnionMember0 < Anthropic::Enum
         abstract!
+
+        Value = type_template(:out) { {fixed: Symbol} }
 
         # Our most intelligent model
         CLAUDE_3_7_SONNET_LATEST = :"claude-3-7-sonnet-latest"
@@ -49,18 +53,6 @@ module Anthropic
         CLAUDE_2_1 = :"claude-2.1"
 
         CLAUDE_2_0 = :"claude-2.0"
-
-        class << self
-          sig { override.returns(T::Array[Symbol]) }
-          def values
-          end
-        end
-      end
-
-      class << self
-        sig { override.returns([Symbol, String]) }
-        def variants
-        end
       end
     end
   end

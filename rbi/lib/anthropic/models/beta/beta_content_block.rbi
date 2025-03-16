@@ -8,15 +8,15 @@ module Anthropic
       class BetaContentBlock < Anthropic::Union
         abstract!
 
-        class << self
-          sig do
-            override
-              .returns(
-                [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock]
-              )
-          end
-          def variants
-          end
+        Variants = type_template(:out) do
+          {
+            fixed: T.any(
+              Anthropic::Models::Beta::BetaTextBlock,
+              Anthropic::Models::Beta::BetaToolUseBlock,
+              Anthropic::Models::Beta::BetaThinkingBlock,
+              Anthropic::Models::Beta::BetaRedactedThinkingBlock
+            )
+          }
         end
       end
     end

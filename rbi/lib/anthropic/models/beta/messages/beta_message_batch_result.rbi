@@ -12,15 +12,15 @@ module Anthropic
         class BetaMessageBatchResult < Anthropic::Union
           abstract!
 
-          class << self
-            sig do
-              override
-                .returns(
-                  [Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult]
-                )
-            end
-            def variants
-            end
+          Variants = type_template(:out) do
+            {
+              fixed: T.any(
+                Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult,
+                Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult,
+                Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
+                Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
+              )
+            }
           end
         end
       end
