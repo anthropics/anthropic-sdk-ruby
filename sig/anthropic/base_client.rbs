@@ -43,6 +43,11 @@ module Anthropic
       response_headers: ::Hash[String, String]
     ) -> Anthropic::BaseClient::request_input
 
+    def self.reap_connection!: (
+      Integer | Anthropic::APIConnectionError status,
+      stream: Enumerable[String]?
+    ) -> void
+
     # @api private
     attr_accessor requester: top
 
