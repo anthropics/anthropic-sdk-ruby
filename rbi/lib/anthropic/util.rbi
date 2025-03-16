@@ -163,6 +163,8 @@ module Anthropic
       end
     end
 
+    # @api private
+    #
     # An adapter that satisfies the IO interface required by `::IO.copy_stream`
     class ReadIOAdapter
       # @api private
