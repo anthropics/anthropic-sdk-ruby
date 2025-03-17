@@ -53,7 +53,7 @@ module Anthropic
       #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #     details and options.
       #
-      #   @return [Symbol, Anthropic::Models::Model::UnionMember0, String]
+      #   @return [Symbol, String]
       required :model, union: -> { Anthropic::Models::Model }
 
       # @!attribute role
@@ -120,7 +120,7 @@ module Anthropic
       # @!parse
       #   # @param id [String]
       #   # @param content [Array<Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock>]
-      #   # @param model [Symbol, Anthropic::Models::Model::UnionMember0, String]
+      #   # @param model [Symbol, String]
       #   # @param stop_reason [Symbol, Anthropic::Models::Message::StopReason, nil]
       #   # @param stop_sequence [String, nil]
       #   # @param usage [Anthropic::Models::Usage]
