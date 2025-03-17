@@ -19,7 +19,7 @@ module Anthropic
           #   @option params [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>] :requests Body param: List of requests for prompt completion. Each is an individual
           #     request to create a Message.
           #
-          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Header param: Optional header to specify the beta version(s) you want to use.
+          #   @option params [Array<String, Symbol>] :betas Header param: Optional header to specify the beta version(s) you want to use.
           #
           #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
           #
@@ -48,7 +48,7 @@ module Anthropic
           #
           # @param params [Anthropic::Models::Beta::Messages::BatchRetrieveParams, Hash{Symbol=>Object}] .
           #
-          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Optional header to specify the beta version(s) you want to use.
+          #   @option params [Array<String, Symbol>] :betas Optional header to specify the beta version(s) you want to use.
           #
           #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
           #
@@ -82,7 +82,7 @@ module Anthropic
           #
           #     Defaults to `20`. Ranges from `1` to `1000`.
           #
-          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Header param: Optional header to specify the beta version(s) you want to use.
+          #   @option params [Array<String, Symbol>] :betas Header param: Optional header to specify the beta version(s) you want to use.
           #
           #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
           #
@@ -113,7 +113,7 @@ module Anthropic
           #
           # @param params [Anthropic::Models::Beta::Messages::BatchDeleteParams, Hash{Symbol=>Object}] .
           #
-          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Optional header to specify the beta version(s) you want to use.
+          #   @option params [Array<String, Symbol>] :betas Optional header to specify the beta version(s) you want to use.
           #
           #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
           #
@@ -146,7 +146,7 @@ module Anthropic
           #
           # @param params [Anthropic::Models::Beta::Messages::BatchCancelParams, Hash{Symbol=>Object}] .
           #
-          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Optional header to specify the beta version(s) you want to use.
+          #   @option params [Array<String, Symbol>] :betas Optional header to specify the beta version(s) you want to use.
           #
           #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
           #
@@ -175,7 +175,7 @@ module Anthropic
           #
           # @param params [Anthropic::Models::Beta::Messages::BatchResultsParams, Hash{Symbol=>Object}] .
           #
-          #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Optional header to specify the beta version(s) you want to use.
+          #   @option params [Array<String, Symbol>] :betas Optional header to specify the beta version(s) you want to use.
           #
           #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
           #

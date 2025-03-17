@@ -112,7 +112,7 @@ module Anthropic
         #     the top-level `system` parameter — there is no `"system"` role for input
         #     messages in the Messages API.
         #
-        #   @option params [Symbol, Anthropic::Models::Model::UnionMember0, String] :model Body param: The model that will complete your prompt.\n\nSee
+        #   @option params [Symbol, String] :model Body param: The model that will complete your prompt.\n\nSee
         #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #     details and options.
         #
@@ -244,7 +244,7 @@ module Anthropic
         #     Recommended for advanced use cases only. You usually only need to use
         #     `temperature`.
         #
-        #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Header param: Optional header to specify the beta version(s) you want to use.
+        #   @option params [Array<String, Symbol>] :betas Header param: Optional header to specify the beta version(s) you want to use.
         #
         #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
@@ -368,7 +368,7 @@ module Anthropic
         #     the top-level `system` parameter — there is no `"system"` role for input
         #     messages in the Messages API.
         #
-        #   @option params [Symbol, Anthropic::Models::Model::UnionMember0, String] :model Body param: The model that will complete your prompt.\n\nSee
+        #   @option params [Symbol, String] :model Body param: The model that will complete your prompt.\n\nSee
         #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #     details and options.
         #
@@ -500,7 +500,7 @@ module Anthropic
         #     Recommended for advanced use cases only. You usually only need to use
         #     `temperature`.
         #
-        #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Header param: Optional header to specify the beta version(s) you want to use.
+        #   @option params [Array<String, Symbol>] :betas Header param: Optional header to specify the beta version(s) you want to use.
         #
         #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
@@ -617,7 +617,7 @@ module Anthropic
         #     the top-level `system` parameter — there is no `"system"` role for input
         #     messages in the Messages API.
         #
-        #   @option params [Symbol, Anthropic::Models::Model::UnionMember0, String] :model Body param: The model that will complete your prompt.\n\nSee
+        #   @option params [Symbol, String] :model Body param: The model that will complete your prompt.\n\nSee
         #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #     details and options.
         #
@@ -710,7 +710,7 @@ module Anthropic
         #
         #     See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
         #
-        #   @option params [Array<String, Symbol, Anthropic::Models::AnthropicBeta::UnionMember1>] :betas Header param: Optional header to specify the beta version(s) you want to use.
+        #   @option params [Array<String, Symbol>] :betas Header param: Optional header to specify the beta version(s) you want to use.
         #
         #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
         #
