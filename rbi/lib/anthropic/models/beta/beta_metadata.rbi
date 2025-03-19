@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaMetadata = T.type_alias { Beta::BetaMetadata }
-
     module Beta
       class BetaMetadata < Anthropic::BaseModel
         # An external identifier for the user who is associated with the request.
@@ -28,5 +26,7 @@ module Anthropic
         end
       end
     end
+
+    BetaMetadata = Beta::BetaMetadata
   end
 end

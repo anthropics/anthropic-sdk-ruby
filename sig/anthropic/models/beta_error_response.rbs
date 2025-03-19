@@ -8,11 +8,10 @@ module Anthropic
 
       attr_accessor type: :error
 
-      def initialize:
-        (error: Anthropic::Models::beta_error, type: :error) -> void
-        | (
-          ?Anthropic::Models::beta_error_response | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (
+        error: Anthropic::Models::beta_error,
+        ?type: :error
+      ) -> void
 
       def to_hash: -> Anthropic::Models::beta_error_response
     end

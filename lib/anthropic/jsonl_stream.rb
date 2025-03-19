@@ -3,15 +3,15 @@
 module Anthropic
   # @example
   # ```ruby
-  # stream.for_each do |batch|
+  # stream.each do |batch|
   #   puts(batch)
   # end
   # ```
   #
   # @example
   # ```ruby
-  # batches = stream
-  #   .to_enum
+  # batches =
+  #   stream
   #   .lazy
   #   .select { _1.object_id.even? }
   #   .map(&:itself)
@@ -27,8 +27,8 @@ module Anthropic
     #
     # @return [Enumerable]
     private def iterator
-      @iterator ||= Anthropic::Util.chain_fused(@messages) do |y|
-        @messages.each do
+      @iterator ||= Anthropic::Util.chain_fused(@stream) do |y|
+        @stream.each do
           y << Anthropic::Converter.coerce(@model, _1)
         end
       end

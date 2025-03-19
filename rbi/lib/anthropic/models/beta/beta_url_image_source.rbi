@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaURLImageSource = T.type_alias { Beta::BetaURLImageSource }
-
     module Beta
       class BetaURLImageSource < Anthropic::BaseModel
         sig { returns(Symbol) }
@@ -31,5 +29,7 @@ module Anthropic
         end
       end
     end
+
+    BetaURLImageSource = Beta::BetaURLImageSource
   end
 end

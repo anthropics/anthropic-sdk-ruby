@@ -7,12 +7,7 @@ module Anthropic
 
       attr_accessor type: :enabled
 
-      def initialize:
-        (budget_tokens: Integer, type: :enabled) -> void
-        | (
-          ?Anthropic::Models::thinking_config_enabled
-          | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (budget_tokens: Integer, ?type: :enabled) -> void
 
       def to_hash: -> Anthropic::Models::thinking_config_enabled
     end

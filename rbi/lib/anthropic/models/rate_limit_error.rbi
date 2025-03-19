@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class RateLimitError_ < Anthropic::BaseModel
+    class RateLimitError < Anthropic::BaseModel
       sig { returns(String) }
       def message
       end

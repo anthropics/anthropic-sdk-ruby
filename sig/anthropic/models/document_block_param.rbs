@@ -27,18 +27,14 @@ module Anthropic
 
       attr_accessor title: String?
 
-      def initialize:
-        (
-          source: Anthropic::Models::DocumentBlockParam::source,
-          cache_control: Anthropic::Models::CacheControlEphemeral?,
-          citations: Anthropic::Models::CitationsConfigParam,
-          context: String?,
-          title: String?,
-          type: :document
-        ) -> void
-        | (
-          ?Anthropic::Models::document_block_param | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (
+        source: Anthropic::Models::DocumentBlockParam::source,
+        ?cache_control: Anthropic::Models::CacheControlEphemeral?,
+        ?citations: Anthropic::Models::CitationsConfigParam,
+        ?context: String?,
+        ?title: String?,
+        ?type: :document
+      ) -> void
 
       def to_hash: -> Anthropic::Models::document_block_param
 

@@ -14,15 +14,11 @@ module Anthropic
 
       attr_accessor type: :base64
 
-      def initialize:
-        (
-          data: String,
-          media_type: Anthropic::Models::Base64ImageSource::media_type,
-          type: :base64
-        ) -> void
-        | (
-          ?Anthropic::Models::base64_image_source | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (
+        data: String,
+        media_type: Anthropic::Models::Base64ImageSource::media_type,
+        ?type: :base64
+      ) -> void
 
       def to_hash: -> Anthropic::Models::base64_image_source
 

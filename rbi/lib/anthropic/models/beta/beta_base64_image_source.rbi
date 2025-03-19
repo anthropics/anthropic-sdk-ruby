@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaBase64ImageSource = T.type_alias { Beta::BetaBase64ImageSource }
-
     module Beta
       class BetaBase64ImageSource < Anthropic::BaseModel
         sig { returns(String) }
@@ -50,5 +48,7 @@ module Anthropic
         end
       end
     end
+
+    BetaBase64ImageSource = Beta::BetaBase64ImageSource
   end
 end

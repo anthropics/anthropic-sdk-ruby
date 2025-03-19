@@ -7,11 +7,7 @@ module Anthropic
 
       attr_accessor type: :api_error
 
-      def initialize:
-        (message: String, type: :api_error) -> void
-        | (
-          ?Anthropic::Models::api_error_object | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (message: String, ?type: :api_error) -> void
 
       def to_hash: -> Anthropic::Models::api_error_object
     end

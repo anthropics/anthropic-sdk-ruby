@@ -10,15 +10,10 @@ module Anthropic
 
           attr_accessor type: :errored
 
-          def initialize:
-            (
-              error: Anthropic::Models::BetaErrorResponse,
-              type: :errored
-            ) -> void
-            | (
-              ?Anthropic::Models::Beta::Messages::beta_message_batch_errored_result
-              | Anthropic::BaseModel data
-            ) -> void
+          def initialize: (
+            error: Anthropic::Models::BetaErrorResponse,
+            ?type: :errored
+          ) -> void
 
           def to_hash: -> Anthropic::Models::Beta::Messages::beta_message_batch_errored_result
         end

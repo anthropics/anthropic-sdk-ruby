@@ -7,11 +7,7 @@ module Anthropic
 
       attr_accessor url: String
 
-      def initialize:
-        (url: String, type: :url) -> void
-        | (
-          ?Anthropic::Models::url_image_source | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (url: String, ?type: :url) -> void
 
       def to_hash: -> Anthropic::Models::url_image_source
     end

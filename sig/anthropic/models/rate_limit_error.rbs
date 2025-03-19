@@ -2,16 +2,12 @@ module Anthropic
   module Models
     type rate_limit_error = { message: String, type: :rate_limit_error }
 
-    class RateLimitError_ < Anthropic::BaseModel
+    class RateLimitError < Anthropic::BaseModel
       attr_accessor message: String
 
       attr_accessor type: :rate_limit_error
 
-      def initialize:
-        (message: String, type: :rate_limit_error) -> void
-        | (
-          ?Anthropic::Models::rate_limit_error | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (message: String, ?type: :rate_limit_error) -> void
 
       def to_hash: -> Anthropic::Models::rate_limit_error
     end

@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    MessageBatchExpiredResult = T.type_alias { Messages::MessageBatchExpiredResult }
-
     module Messages
       class MessageBatchExpiredResult < Anthropic::BaseModel
         sig { returns(Symbol) }
@@ -23,5 +21,7 @@ module Anthropic
         end
       end
     end
+
+    MessageBatchExpiredResult = Messages::MessageBatchExpiredResult
   end
 end

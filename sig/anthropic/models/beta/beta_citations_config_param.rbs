@@ -11,12 +11,7 @@ module Anthropic
 
         def enabled=: (bool) -> bool
 
-        def initialize:
-          (enabled: bool) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_citations_config_param
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (?enabled: bool) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_citations_config_param
       end

@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaToolResultBlockParam = T.type_alias { Beta::BetaToolResultBlockParam }
-
     module Beta
       class BetaToolResultBlockParam < Anthropic::BaseModel
         sig { returns(String) }
@@ -108,24 +106,29 @@ module Anthropic
         class Content < Anthropic::Union
           abstract!
 
-          Variants = type_template(:out) do
-            {
-              fixed: T.any(
-                String,
-                T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
-              )
-            }
-          end
+          Variants =
+            type_template(:out) do
+              {
+                fixed: T.any(
+                  String,
+                  T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
+                )
+              }
+            end
 
-          ContentArray = T.type_alias { T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)] }
+          ContentArray =
+            T.type_alias { T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)] }
 
           class Content < Anthropic::Union
             abstract!
 
-            Variants = type_template(:out) { {fixed: T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)} }
+            Variants =
+              type_template(:out) { {fixed: T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)} }
           end
         end
       end
     end
+
+    BetaToolResultBlockParam = Beta::BetaToolResultBlockParam
   end
 end

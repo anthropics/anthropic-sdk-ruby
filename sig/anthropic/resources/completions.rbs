@@ -1,37 +1,29 @@
 module Anthropic
   module Resources
     class Completions
-      def create:
-        (
-          Anthropic::Models::CompletionCreateParams | ::Hash[Symbol, top] params
-        ) -> Anthropic::Models::Completion
-        | (
-          max_tokens_to_sample: Integer,
-          model: Anthropic::Models::model,
-          prompt: String,
-          metadata: Anthropic::Models::Metadata,
-          stop_sequences: ::Array[String],
-          temperature: Float,
-          top_k: Integer,
-          top_p: Float,
-          request_options: Anthropic::request_opts
-        ) -> Anthropic::Models::Completion
+      def create: (
+        max_tokens_to_sample: Integer,
+        model: Anthropic::Models::model,
+        prompt: String,
+        ?metadata: Anthropic::Models::Metadata,
+        ?stop_sequences: ::Array[String],
+        ?temperature: Float,
+        ?top_k: Integer,
+        ?top_p: Float,
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::Models::Completion
 
-      def create_streaming:
-        (
-          Anthropic::Models::CompletionCreateParams | ::Hash[Symbol, top] params
-        ) -> Anthropic::Stream[Anthropic::Models::Completion]
-        | (
-          max_tokens_to_sample: Integer,
-          model: Anthropic::Models::model,
-          prompt: String,
-          metadata: Anthropic::Models::Metadata,
-          stop_sequences: ::Array[String],
-          temperature: Float,
-          top_k: Integer,
-          top_p: Float,
-          request_options: Anthropic::request_opts
-        ) -> Anthropic::Stream[Anthropic::Models::Completion]
+      def create_streaming: (
+        max_tokens_to_sample: Integer,
+        model: Anthropic::Models::model,
+        prompt: String,
+        ?metadata: Anthropic::Models::Metadata,
+        ?stop_sequences: ::Array[String],
+        ?temperature: Float,
+        ?top_k: Integer,
+        ?top_p: Float,
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::Stream[Anthropic::Models::Completion]
 
       def initialize: (client: Anthropic::Client) -> void
     end

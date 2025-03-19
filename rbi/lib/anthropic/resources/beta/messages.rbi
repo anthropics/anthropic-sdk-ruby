@@ -48,6 +48,7 @@ module Anthropic
             top_k: Integer,
             top_p: Float,
             betas: T::Array[T.any(String, Symbol)],
+            stream: T.noreturn,
             request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
           )
             .returns(Anthropic::Models::Beta::BetaMessage)
@@ -282,6 +283,9 @@ module Anthropic
           top_p: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
+          # There is no need to provide `stream:`. Instead, use `#create_streaming` or
+          #   `#create` for streaming and non-streaming use cases, respectively.
+          stream: false,
           request_options: {}
         )
         end
@@ -326,6 +330,7 @@ module Anthropic
             top_k: Integer,
             top_p: Float,
             betas: T::Array[T.any(String, Symbol)],
+            stream: T.noreturn,
             request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
           )
             .returns(
@@ -571,6 +576,9 @@ module Anthropic
           top_p: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
+          # There is no need to provide `stream:`. Instead, use `#create_streaming` or
+          #   `#create` for streaming and non-streaming use cases, respectively.
+          stream: true,
           request_options: {}
         )
         end

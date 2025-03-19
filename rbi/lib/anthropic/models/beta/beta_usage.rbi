@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaUsage = T.type_alias { Beta::BetaUsage }
-
     module Beta
       class BetaUsage < Anthropic::BaseModel
         # The number of input tokens used to create the cache entry.
@@ -69,5 +67,7 @@ module Anthropic
         end
       end
     end
+
+    BetaUsage = Beta::BetaUsage
   end
 end

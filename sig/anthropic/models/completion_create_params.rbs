@@ -45,22 +45,17 @@ module Anthropic
 
       def top_p=: (Float) -> Float
 
-      def initialize:
-        (
-          max_tokens_to_sample: Integer,
-          model: Anthropic::Models::model,
-          prompt: String,
-          metadata: Anthropic::Models::Metadata,
-          stop_sequences: ::Array[String],
-          temperature: Float,
-          top_k: Integer,
-          top_p: Float,
-          request_options: Anthropic::request_opts
-        ) -> void
-        | (
-          ?Anthropic::Models::completion_create_params
-          | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (
+        max_tokens_to_sample: Integer,
+        model: Anthropic::Models::model,
+        prompt: String,
+        ?metadata: Anthropic::Models::Metadata,
+        ?stop_sequences: ::Array[String],
+        ?temperature: Float,
+        ?top_k: Integer,
+        ?top_p: Float,
+        ?request_options: Anthropic::request_opts
+      ) -> void
 
       def to_hash: -> Anthropic::Models::completion_create_params
     end

@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    MessageBatchSucceededResult = T.type_alias { Messages::MessageBatchSucceededResult }
-
     module Messages
       class MessageBatchSucceededResult < Anthropic::BaseModel
         sig { returns(Anthropic::Models::Message) }
@@ -31,5 +29,7 @@ module Anthropic
         end
       end
     end
+
+    MessageBatchSucceededResult = Messages::MessageBatchSucceededResult
   end
 end

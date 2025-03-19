@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaRedactedThinkingBlockParam = T.type_alias { Beta::BetaRedactedThinkingBlockParam }
-
     module Beta
       class BetaRedactedThinkingBlockParam < Anthropic::BaseModel
         sig { returns(String) }
@@ -31,5 +29,7 @@ module Anthropic
         end
       end
     end
+
+    BetaRedactedThinkingBlockParam = Beta::BetaRedactedThinkingBlockParam
   end
 end

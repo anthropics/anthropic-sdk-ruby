@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaPlainTextSource = T.type_alias { Beta::BetaPlainTextSource }
-
     module Beta
       class BetaPlainTextSource < Anthropic::BaseModel
         sig { returns(String) }
@@ -39,5 +37,7 @@ module Anthropic
         end
       end
     end
+
+    BetaPlainTextSource = Beta::BetaPlainTextSource
   end
 end

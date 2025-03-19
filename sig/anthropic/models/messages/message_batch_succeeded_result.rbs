@@ -12,12 +12,10 @@ module Anthropic
 
         attr_accessor type: :succeeded
 
-        def initialize:
-          (message: Anthropic::Models::Message, type: :succeeded) -> void
-          | (
-            ?Anthropic::Models::Messages::message_batch_succeeded_result
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          message: Anthropic::Models::Message,
+          ?type: :succeeded
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Messages::message_batch_succeeded_result
       end

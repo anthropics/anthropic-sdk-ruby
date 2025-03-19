@@ -17,7 +17,8 @@ module Anthropic
   #
   # @example
   # ```ruby
-  # batches = page
+  # batches =
+  #   page
   #   .to_enum
   #   .lazy
   #   .select { _1.object_id.even? }
@@ -112,7 +113,9 @@ module Anthropic
 
     # @return [String]
     def inspect
+      # rubocop:disable Layout/LineLength
       "#<#{self.class}:0x#{object_id.to_s(16)} data=#{data.inspect} has_more=#{has_more.inspect} first_id=#{first_id.inspect} last_id=#{last_id.inspect}>"
+      # rubocop:enable Layout/LineLength
     end
   end
 end

@@ -3,60 +3,47 @@ module Anthropic
     class Messages
       attr_reader batches: Anthropic::Resources::Messages::Batches
 
-      def create:
-        (
-          Anthropic::Models::MessageCreateParams | ::Hash[Symbol, top] params
-        ) -> Anthropic::Models::Message
-        | (
-          max_tokens: Integer,
-          messages: ::Array[Anthropic::Models::MessageParam],
-          model: Anthropic::Models::model,
-          metadata: Anthropic::Models::Metadata,
-          stop_sequences: ::Array[String],
-          system_: Anthropic::Models::MessageCreateParams::system_,
-          temperature: Float,
-          thinking: Anthropic::Models::thinking_config_param,
-          tool_choice: Anthropic::Models::tool_choice,
-          tools: ::Array[Anthropic::Models::tool_union],
-          top_k: Integer,
-          top_p: Float,
-          request_options: Anthropic::request_opts
-        ) -> Anthropic::Models::Message
+      def create: (
+        max_tokens: Integer,
+        messages: ::Array[Anthropic::Models::MessageParam],
+        model: Anthropic::Models::model,
+        ?metadata: Anthropic::Models::Metadata,
+        ?stop_sequences: ::Array[String],
+        ?system_: Anthropic::Models::MessageCreateParams::system_,
+        ?temperature: Float,
+        ?thinking: Anthropic::Models::thinking_config_param,
+        ?tool_choice: Anthropic::Models::tool_choice,
+        ?tools: ::Array[Anthropic::Models::tool_union],
+        ?top_k: Integer,
+        ?top_p: Float,
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::Models::Message
 
-      def create_streaming:
-        (
-          Anthropic::Models::MessageCreateParams | ::Hash[Symbol, top] params
-        ) -> Anthropic::Stream[Anthropic::Models::raw_message_stream_event]
-        | (
-          max_tokens: Integer,
-          messages: ::Array[Anthropic::Models::MessageParam],
-          model: Anthropic::Models::model,
-          metadata: Anthropic::Models::Metadata,
-          stop_sequences: ::Array[String],
-          system_: Anthropic::Models::MessageCreateParams::system_,
-          temperature: Float,
-          thinking: Anthropic::Models::thinking_config_param,
-          tool_choice: Anthropic::Models::tool_choice,
-          tools: ::Array[Anthropic::Models::tool_union],
-          top_k: Integer,
-          top_p: Float,
-          request_options: Anthropic::request_opts
-        ) -> Anthropic::Stream[Anthropic::Models::raw_message_stream_event]
+      def create_streaming: (
+        max_tokens: Integer,
+        messages: ::Array[Anthropic::Models::MessageParam],
+        model: Anthropic::Models::model,
+        ?metadata: Anthropic::Models::Metadata,
+        ?stop_sequences: ::Array[String],
+        ?system_: Anthropic::Models::MessageCreateParams::system_,
+        ?temperature: Float,
+        ?thinking: Anthropic::Models::thinking_config_param,
+        ?tool_choice: Anthropic::Models::tool_choice,
+        ?tools: ::Array[Anthropic::Models::tool_union],
+        ?top_k: Integer,
+        ?top_p: Float,
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::Stream[Anthropic::Models::raw_message_stream_event]
 
-      def count_tokens:
-        (
-          Anthropic::Models::MessageCountTokensParams
-          | ::Hash[Symbol, top] params
-        ) -> Anthropic::Models::MessageTokensCount
-        | (
-          messages: ::Array[Anthropic::Models::MessageParam],
-          model: Anthropic::Models::model,
-          system_: Anthropic::Models::MessageCountTokensParams::system_,
-          thinking: Anthropic::Models::thinking_config_param,
-          tool_choice: Anthropic::Models::tool_choice,
-          tools: ::Array[Anthropic::Models::message_count_tokens_tool],
-          request_options: Anthropic::request_opts
-        ) -> Anthropic::Models::MessageTokensCount
+      def count_tokens: (
+        messages: ::Array[Anthropic::Models::MessageParam],
+        model: Anthropic::Models::model,
+        ?system_: Anthropic::Models::MessageCountTokensParams::system_,
+        ?thinking: Anthropic::Models::thinking_config_param,
+        ?tool_choice: Anthropic::Models::tool_choice,
+        ?tools: ::Array[Anthropic::Models::message_count_tokens_tool],
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::Models::MessageTokensCount
 
       def initialize: (client: Anthropic::Client) -> void
     end

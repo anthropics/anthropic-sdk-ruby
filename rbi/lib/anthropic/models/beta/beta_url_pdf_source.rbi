@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaURLPDFSource = T.type_alias { Beta::BetaURLPDFSource }
-
     module Beta
       class BetaURLPDFSource < Anthropic::BaseModel
         sig { returns(Symbol) }
@@ -31,5 +29,7 @@ module Anthropic
         end
       end
     end
+
+    BetaURLPDFSource = Beta::BetaURLPDFSource
   end
 end

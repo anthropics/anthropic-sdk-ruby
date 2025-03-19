@@ -9,14 +9,15 @@ module Anthropic
     MAX_REDIRECTS = 20
 
     # rubocop:disable Style/MutableConstant
-    PLATFORM_HEADERS = {
-      "x-stainless-arch" => Anthropic::Util.arch,
-      "x-stainless-lang" => "ruby",
-      "x-stainless-os" => Anthropic::Util.os,
-      "x-stainless-package-version" => Anthropic::VERSION,
-      "x-stainless-runtime" => ::RUBY_ENGINE,
-      "x-stainless-runtime-version" => ::RUBY_ENGINE_VERSION
-    }
+    PLATFORM_HEADERS =
+      {
+        "x-stainless-arch" => Anthropic::Util.arch,
+        "x-stainless-lang" => "ruby",
+        "x-stainless-os" => Anthropic::Util.os,
+        "x-stainless-package-version" => Anthropic::VERSION,
+        "x-stainless-runtime" => ::RUBY_ENGINE,
+        "x-stainless-runtime-version" => ::RUBY_ENGINE_VERSION
+      }
     # rubocop:enable Style/MutableConstant
 
     class << self
@@ -436,7 +437,7 @@ module Anthropic
       decoded = Anthropic::Util.decode_content(response, stream: stream)
       case req
       in { stream: Class => st }
-        st.new(model: model, url: url, status: status, response: response, messages: decoded)
+        st.new(model: model, url: url, status: status, response: response, stream: decoded)
       in { page: Class => page }
         page.new(client: self, req: req, headers: response, page_data: decoded)
       else

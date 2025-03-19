@@ -9,12 +9,7 @@ module Anthropic
       class MessageBatchCanceledResult < Anthropic::BaseModel
         attr_accessor type: :canceled
 
-        def initialize:
-          (type: :canceled) -> void
-          | (
-            ?Anthropic::Models::Messages::message_batch_canceled_result
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (?type: :canceled) -> void
 
         def to_hash: -> Anthropic::Models::Messages::message_batch_canceled_result
       end

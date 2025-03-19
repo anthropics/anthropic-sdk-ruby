@@ -367,13 +367,14 @@ module Anthropic
       # @return [Hash{String=>String}]
       def normalized_headers(*headers)
         {}.merge(*headers.compact).to_h do |key, val|
-          case val
-          in Array
-            val.map { _1.to_s.strip }.join(", ")
-          else
-            val&.to_s&.strip
-          end
-          [key.downcase, val]
+          value =
+            case val
+            in Array
+              val.map { _1.to_s.strip }.join(", ")
+            else
+              val&.to_s&.strip
+            end
+          [key.downcase, value]
         end
       end
     end
@@ -428,6 +429,8 @@ module Anthropic
       #
       # @param stream [String, IO, StringIO, Enumerable]
       # @param blk [Proc]
+      #
+      # @yieldparam [String]
       def initialize(stream, &blk)
         @stream = stream.is_a?(String) ? StringIO.new(stream) : stream
         @buf = String.new.b
@@ -438,6 +441,7 @@ module Anthropic
     class << self
       # @param blk [Proc]
       #
+      # @yieldparam [Enumerator::Yielder]
       # @return [Enumerable]
       def string_io(&blk)
         Enumerator.new do |y|
@@ -452,6 +456,8 @@ module Anthropic
     end
 
     class << self
+      # rubocop:disable Naming/MethodParameterName
+
       # @api private
       #
       # @param y [Enumerator::Yielder]
@@ -489,6 +495,8 @@ module Anthropic
         end
         y << "\r\n"
       end
+
+      # rubocop:enable Naming/MethodParameterName
 
       # @api private
       #
@@ -628,6 +636,7 @@ module Anthropic
       # @param enum [Enumerable, nil]
       # @param blk [Proc]
       #
+      # @yieldparam [Enumerator::Yielder]
       # @return [Enumerable]
       def chain_fused(enum, &blk)
         iter = Enumerator.new { blk.call(_1) }

@@ -4,12 +4,12 @@ require_relative "../test_helper"
 
 class Anthropic::Test::Resources::MessagesTest < Anthropic::Test::ResourceTest
   def test_create_required_params
-    response = @anthropic.messages.create(
-      max_tokens: 1024,
-      messages: [{content: "Hello, world", role: :user}],
-      model: :"claude-3-7-sonnet-latest",
-      stream: true
-    )
+    response =
+      @anthropic.messages.create(
+        max_tokens: 1024,
+        messages: [{content: "Hello, world", role: :user}],
+        model: :"claude-3-7-sonnet-latest"
+      )
 
     assert_pattern do
       response => Anthropic::Models::Message
@@ -30,10 +30,11 @@ class Anthropic::Test::Resources::MessagesTest < Anthropic::Test::ResourceTest
   end
 
   def test_count_tokens_required_params
-    response = @anthropic.messages.count_tokens(
-      messages: [{content: "string", role: :user}],
-      model: :"claude-3-7-sonnet-latest"
-    )
+    response =
+      @anthropic.messages.count_tokens(
+        messages: [{content: "string", role: :user}],
+        model: :"claude-3-7-sonnet-latest"
+      )
 
     assert_pattern do
       response => Anthropic::Models::MessageTokensCount

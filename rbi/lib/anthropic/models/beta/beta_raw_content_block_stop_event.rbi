@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaRawContentBlockStopEvent = T.type_alias { Beta::BetaRawContentBlockStopEvent }
-
     module Beta
       class BetaRawContentBlockStopEvent < Anthropic::BaseModel
         sig { returns(Integer) }
@@ -31,5 +29,7 @@ module Anthropic
         end
       end
     end
+
+    BetaRawContentBlockStopEvent = Beta::BetaRawContentBlockStopEvent
   end
 end

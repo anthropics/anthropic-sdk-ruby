@@ -248,7 +248,10 @@ module Anthropic
       # @return [Anthropic::Models::Message]
       def create(params)
         parsed, options = Anthropic::Models::MessageCreateParams.dump_request(params)
-        parsed.delete(:stream)
+        if parsed[:stream]
+          message = "Please use `#create_streaming` for the streaming use case."
+          raise ArgumentError.new(message)
+        end
         @client.request(
           method: :post,
           path: "v1/messages",
@@ -500,6 +503,10 @@ module Anthropic
       # @return [Anthropic::Stream<Anthropic::Models::RawMessageStartEvent, Anthropic::Models::RawMessageDeltaEvent, Anthropic::Models::RawMessageStopEvent, Anthropic::Models::RawContentBlockStartEvent, Anthropic::Models::RawContentBlockDeltaEvent, Anthropic::Models::RawContentBlockStopEvent>]
       def create_streaming(params)
         parsed, options = Anthropic::Models::MessageCreateParams.dump_request(params)
+        unless parsed.fetch(:stream, true)
+          message = "Please use `#create` for the non-streaming use case."
+          raise ArgumentError.new(message)
+        end
         parsed.store(:stream, true)
         @client.request(
           method: :post,

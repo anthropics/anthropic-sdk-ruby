@@ -11,14 +11,10 @@ module Anthropic
 
       attr_accessor type: :citations_delta
 
-      def initialize:
-        (
-          citation: Anthropic::Models::CitationsDelta::citation,
-          type: :citations_delta
-        ) -> void
-        | (
-          ?Anthropic::Models::citations_delta | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (
+        citation: Anthropic::Models::CitationsDelta::citation,
+        ?type: :citations_delta
+      ) -> void
 
       def to_hash: -> Anthropic::Models::citations_delta
 

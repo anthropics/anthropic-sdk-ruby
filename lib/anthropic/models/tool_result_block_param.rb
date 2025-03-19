@@ -49,7 +49,8 @@ module Anthropic
 
       # @abstract
       class Content < Anthropic::Union
-        ContentArray = Anthropic::ArrayOf[union: -> { Anthropic::Models::ToolResultBlockParam::Content::Content }]
+        ContentArray =
+          Anthropic::ArrayOf[union: -> { Anthropic::Models::ToolResultBlockParam::Content::Content }]
 
         variant String
 

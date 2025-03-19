@@ -7,11 +7,7 @@ module Anthropic
 
       attr_accessor type: :input_json_delta
 
-      def initialize:
-        (partial_json: String, type: :input_json_delta) -> void
-        | (
-          ?Anthropic::Models::input_json_delta | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (partial_json: String, ?type: :input_json_delta) -> void
 
       def to_hash: -> Anthropic::Models::input_json_delta
     end

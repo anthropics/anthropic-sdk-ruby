@@ -19,14 +19,12 @@ module Anthropic
 
       def description=: (String) -> String
 
-      def initialize:
-        (
-          input_schema: Anthropic::Models::Tool::InputSchema,
-          name: String,
-          cache_control: Anthropic::Models::CacheControlEphemeral?,
-          description: String
-        ) -> void
-        | (?Anthropic::Models::tool | Anthropic::BaseModel data) -> void
+      def initialize: (
+        input_schema: Anthropic::Models::Tool::InputSchema,
+        name: String,
+        ?cache_control: Anthropic::Models::CacheControlEphemeral?,
+        ?description: String
+      ) -> void
 
       def to_hash: -> Anthropic::Models::tool
 
@@ -37,11 +35,7 @@ module Anthropic
 
         attr_accessor properties: top?
 
-        def initialize:
-          (properties: top?, type: :object) -> void
-          | (
-            ?Anthropic::Models::Tool::input_schema | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (?properties: top?, ?type: :object) -> void
 
         def to_hash: -> Anthropic::Models::Tool::input_schema
       end

@@ -21,17 +21,12 @@ module Anthropic
 
         def limit=: (Integer) -> Integer
 
-        def initialize:
-          (
-            after_id: String,
-            before_id: String,
-            limit: Integer,
-            request_options: Anthropic::request_opts
-          ) -> void
-          | (
-            ?Anthropic::Models::Beta::model_list_params
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          ?after_id: String,
+          ?before_id: String,
+          ?limit: Integer,
+          ?request_options: Anthropic::request_opts
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Beta::model_list_params
       end

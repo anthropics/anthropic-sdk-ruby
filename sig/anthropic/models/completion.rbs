@@ -20,15 +20,13 @@ module Anthropic
 
       attr_accessor type: :completion
 
-      def initialize:
-        (
-          id: String,
-          completion: String,
-          model: Anthropic::Models::model,
-          stop_reason: String?,
-          type: :completion
-        ) -> void
-        | (?Anthropic::Models::completion | Anthropic::BaseModel data) -> void
+      def initialize: (
+        id: String,
+        completion: String,
+        model: Anthropic::Models::model,
+        stop_reason: String?,
+        ?type: :completion
+      ) -> void
 
       def to_hash: -> Anthropic::Models::completion
     end

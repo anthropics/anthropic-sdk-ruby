@@ -18,16 +18,11 @@ module Anthropic
 
         attr_accessor type: :content_block_delta
 
-        def initialize:
-          (
-            delta: Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::delta,
-            index: Integer,
-            type: :content_block_delta
-          ) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_raw_content_block_delta_event
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          delta: Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::delta,
+          index: Integer,
+          ?type: :content_block_delta
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_raw_content_block_delta_event
 

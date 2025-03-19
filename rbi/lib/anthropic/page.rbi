@@ -37,5 +37,9 @@ module Anthropic
     sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
     def last_id=(_)
     end
+
+    sig { returns(String) }
+    def inspect
+    end
   end
 end
