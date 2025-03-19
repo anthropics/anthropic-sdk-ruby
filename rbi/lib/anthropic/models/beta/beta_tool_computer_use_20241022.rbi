@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaToolComputerUse20241022 = T.type_alias { Beta::BetaToolComputerUse20241022 }
-
     module Beta
       class BetaToolComputerUse20241022 < Anthropic::BaseModel
         # The height of the display in pixels.
@@ -101,5 +99,7 @@ module Anthropic
         end
       end
     end
+
+    BetaToolComputerUse20241022 = Beta::BetaToolComputerUse20241022
   end
 end

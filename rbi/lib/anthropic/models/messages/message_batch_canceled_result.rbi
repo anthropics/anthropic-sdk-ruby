@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    MessageBatchCanceledResult = T.type_alias { Messages::MessageBatchCanceledResult }
-
     module Messages
       class MessageBatchCanceledResult < Anthropic::BaseModel
         sig { returns(Symbol) }
@@ -23,5 +21,7 @@ module Anthropic
         end
       end
     end
+
+    MessageBatchCanceledResult = Messages::MessageBatchCanceledResult
   end
 end

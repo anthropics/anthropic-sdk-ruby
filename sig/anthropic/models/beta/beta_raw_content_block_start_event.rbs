@@ -18,16 +18,11 @@ module Anthropic
 
         attr_accessor type: :content_block_start
 
-        def initialize:
-          (
-            content_block: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::content_block,
-            index: Integer,
-            type: :content_block_start
-          ) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_raw_content_block_start_event
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          content_block: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::content_block,
+          index: Integer,
+          ?type: :content_block_start
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_raw_content_block_start_event
 

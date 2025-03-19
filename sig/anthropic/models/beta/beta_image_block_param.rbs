@@ -18,16 +18,11 @@ module Anthropic
 
         attr_accessor cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?
 
-        def initialize:
-          (
-            source: Anthropic::Models::Beta::BetaImageBlockParam::source,
-            cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?,
-            type: :image
-          ) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_image_block_param
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          source: Anthropic::Models::Beta::BetaImageBlockParam::source,
+          ?cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?,
+          ?type: :image
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_image_block_param
 

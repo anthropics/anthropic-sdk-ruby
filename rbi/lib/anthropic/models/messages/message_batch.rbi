@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    MessageBatch = T.type_alias { Messages::MessageBatch }
-
     module Messages
       class MessageBatch < Anthropic::BaseModel
         # Unique object identifier.
@@ -180,5 +178,7 @@ module Anthropic
         end
       end
     end
+
+    MessageBatch = Messages::MessageBatch
   end
 end

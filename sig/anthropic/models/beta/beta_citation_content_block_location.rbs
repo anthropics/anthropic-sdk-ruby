@@ -27,19 +27,14 @@ module Anthropic
 
         attr_accessor type: :content_block_location
 
-        def initialize:
-          (
-            cited_text: String,
-            document_index: Integer,
-            document_title: String?,
-            end_block_index: Integer,
-            start_block_index: Integer,
-            type: :content_block_location
-          ) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_citation_content_block_location
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          cited_text: String,
+          document_index: Integer,
+          document_title: String?,
+          end_block_index: Integer,
+          start_block_index: Integer,
+          ?type: :content_block_location
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_citation_content_block_location
       end

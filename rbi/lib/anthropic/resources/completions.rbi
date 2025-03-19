@@ -21,6 +21,7 @@ module Anthropic
           temperature: Float,
           top_k: Integer,
           top_p: Float,
+          stream: T.noreturn,
           request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
         )
           .returns(Anthropic::Models::Completion)
@@ -84,6 +85,9 @@ module Anthropic
         #   Recommended for advanced use cases only. You usually only need to use
         #   `temperature`.
         top_p: nil,
+        # There is no need to provide `stream:`. Instead, use `#create_streaming` or
+        #   `#create` for streaming and non-streaming use cases, respectively.
+        stream: false,
         request_options: {}
       )
       end
@@ -106,6 +110,7 @@ module Anthropic
           temperature: Float,
           top_k: Integer,
           top_p: Float,
+          stream: T.noreturn,
           request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
         )
           .returns(Anthropic::Stream[Anthropic::Models::Completion])
@@ -169,6 +174,9 @@ module Anthropic
         #   Recommended for advanced use cases only. You usually only need to use
         #   `temperature`.
         top_p: nil,
+        # There is no need to provide `stream:`. Instead, use `#create_streaming` or
+        #   `#create` for streaming and non-streaming use cases, respectively.
+        stream: true,
         request_options: {}
       )
       end

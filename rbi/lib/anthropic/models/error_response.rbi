@@ -7,11 +7,11 @@ module Anthropic
         returns(
           T.any(
             Anthropic::Models::InvalidRequestError,
-            Anthropic::Models::AuthenticationError_,
+            Anthropic::Models::AuthenticationError,
             Anthropic::Models::BillingError,
             Anthropic::Models::PermissionError,
-            Anthropic::Models::NotFoundError_,
-            Anthropic::Models::RateLimitError_,
+            Anthropic::Models::NotFoundError,
+            Anthropic::Models::RateLimitError,
             Anthropic::Models::GatewayTimeoutError,
             Anthropic::Models::APIErrorObject,
             Anthropic::Models::OverloadedError
@@ -25,11 +25,11 @@ module Anthropic
         params(
           _: T.any(
             Anthropic::Models::InvalidRequestError,
-            Anthropic::Models::AuthenticationError_,
+            Anthropic::Models::AuthenticationError,
             Anthropic::Models::BillingError,
             Anthropic::Models::PermissionError,
-            Anthropic::Models::NotFoundError_,
-            Anthropic::Models::RateLimitError_,
+            Anthropic::Models::NotFoundError,
+            Anthropic::Models::RateLimitError,
             Anthropic::Models::GatewayTimeoutError,
             Anthropic::Models::APIErrorObject,
             Anthropic::Models::OverloadedError
@@ -38,11 +38,11 @@ module Anthropic
           .returns(
             T.any(
               Anthropic::Models::InvalidRequestError,
-              Anthropic::Models::AuthenticationError_,
+              Anthropic::Models::AuthenticationError,
               Anthropic::Models::BillingError,
               Anthropic::Models::PermissionError,
-              Anthropic::Models::NotFoundError_,
-              Anthropic::Models::RateLimitError_,
+              Anthropic::Models::NotFoundError,
+              Anthropic::Models::RateLimitError,
               Anthropic::Models::GatewayTimeoutError,
               Anthropic::Models::APIErrorObject,
               Anthropic::Models::OverloadedError
@@ -64,11 +64,11 @@ module Anthropic
         params(
           error: T.any(
             Anthropic::Models::InvalidRequestError,
-            Anthropic::Models::AuthenticationError_,
+            Anthropic::Models::AuthenticationError,
             Anthropic::Models::BillingError,
             Anthropic::Models::PermissionError,
-            Anthropic::Models::NotFoundError_,
-            Anthropic::Models::RateLimitError_,
+            Anthropic::Models::NotFoundError,
+            Anthropic::Models::RateLimitError,
             Anthropic::Models::GatewayTimeoutError,
             Anthropic::Models::APIErrorObject,
             Anthropic::Models::OverloadedError
@@ -86,11 +86,11 @@ module Anthropic
             {
               error: T.any(
                 Anthropic::Models::InvalidRequestError,
-                Anthropic::Models::AuthenticationError_,
+                Anthropic::Models::AuthenticationError,
                 Anthropic::Models::BillingError,
                 Anthropic::Models::PermissionError,
-                Anthropic::Models::NotFoundError_,
-                Anthropic::Models::RateLimitError_,
+                Anthropic::Models::NotFoundError,
+                Anthropic::Models::RateLimitError,
                 Anthropic::Models::GatewayTimeoutError,
                 Anthropic::Models::APIErrorObject,
                 Anthropic::Models::OverloadedError

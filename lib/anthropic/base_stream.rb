@@ -3,15 +3,15 @@
 module Anthropic
   # @example
   # ```ruby
-  # stream.for_each do |chunk|
+  # stream.each do |chunk|
   #   puts(chunk)
   # end
   # ```
   #
   # @example
   # ```ruby
-  # chunks = stream
-  #   .to_enum
+  # chunks =
+  #   stream
   #   .lazy
   #   .select { _1.object_id.even? }
   #   .map(&:itself)
@@ -21,6 +21,8 @@ module Anthropic
   # chunks => Array
   # ```
   module BaseStream
+    include Enumerable
+
     # @return [void]
     def close = Anthropic::Util.close_fused!(@iterator)
 
@@ -32,14 +34,14 @@ module Anthropic
     # @param blk [Proc]
     #
     # @return [void]
-    def for_each(&)
+    def each(&)
       unless block_given?
         raise ArgumentError.new("A block must be given to ##{__method__}")
       end
       @iterator.each(&)
     end
 
-    # @return [Enumerable]
+    # @return [Enumerator]
     def to_enum = @iterator
 
     alias_method :enum_for, :to_enum
@@ -50,13 +52,13 @@ module Anthropic
     # @param url [URI::Generic]
     # @param status [Integer]
     # @param response [Net::HTTPResponse]
-    # @param messages [Enumerable]
-    def initialize(model:, url:, status:, response:, messages:)
+    # @param stream [Enumerable]
+    def initialize(model:, url:, status:, response:, stream:)
       @model = model
       @url = url
       @status = status
       @response = response
-      @messages = messages
+      @stream = stream
       @iterator = iterator
     end
   end

@@ -4,12 +4,12 @@ require_relative "../test_helper"
 
 class Anthropic::Test::Resources::CompletionsTest < Anthropic::Test::ResourceTest
   def test_create_required_params
-    response = @anthropic.completions.create(
-      max_tokens_to_sample: 256,
-      model: :"claude-3-7-sonnet-latest",
-      prompt: "\n\nHuman: Hello, world!\n\nAssistant:",
-      stream: true
-    )
+    response =
+      @anthropic.completions.create(
+        max_tokens_to_sample: 256,
+        model: :"claude-3-7-sonnet-latest",
+        prompt: "\n\nHuman: Hello, world!\n\nAssistant:"
+      )
 
     assert_pattern do
       response => Anthropic::Models::Completion

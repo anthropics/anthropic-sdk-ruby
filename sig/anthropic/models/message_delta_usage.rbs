@@ -5,11 +5,7 @@ module Anthropic
     class MessageDeltaUsage < Anthropic::BaseModel
       attr_accessor output_tokens: Integer
 
-      def initialize:
-        (output_tokens: Integer) -> void
-        | (
-          ?Anthropic::Models::message_delta_usage | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (output_tokens: Integer) -> void
 
       def to_hash: -> Anthropic::Models::message_delta_usage
     end

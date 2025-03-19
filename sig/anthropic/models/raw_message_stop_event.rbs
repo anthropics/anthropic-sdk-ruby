@@ -5,11 +5,7 @@ module Anthropic
     class RawMessageStopEvent < Anthropic::BaseModel
       attr_accessor type: :message_stop
 
-      def initialize:
-        (type: :message_stop) -> void
-        | (
-          ?Anthropic::Models::raw_message_stop_event | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (?type: :message_stop) -> void
 
       def to_hash: -> Anthropic::Models::raw_message_stop_event
     end

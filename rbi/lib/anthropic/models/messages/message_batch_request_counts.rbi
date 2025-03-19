@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    MessageBatchRequestCounts = T.type_alias { Messages::MessageBatchRequestCounts }
-
     module Messages
       class MessageBatchRequestCounts < Anthropic::BaseModel
         # Number of requests in the Message Batch that have been canceled.
@@ -86,5 +84,7 @@ module Anthropic
         end
       end
     end
+
+    MessageBatchRequestCounts = Messages::MessageBatchRequestCounts
   end
 end

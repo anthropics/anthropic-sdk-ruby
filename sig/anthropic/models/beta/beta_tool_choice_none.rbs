@@ -9,12 +9,7 @@ module Anthropic
       class BetaToolChoiceNone < Anthropic::BaseModel
         attr_accessor type: :none
 
-        def initialize:
-          (type: :none) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_tool_choice_none
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (?type: :none) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_tool_choice_none
       end

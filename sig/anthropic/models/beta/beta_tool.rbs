@@ -26,17 +26,13 @@ module Anthropic
 
         attr_accessor type: Anthropic::Models::Beta::BetaTool::type_?
 
-        def initialize:
-          (
-            input_schema: Anthropic::Models::Beta::BetaTool::InputSchema,
-            name: String,
-            cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?,
-            description: String,
-            type: Anthropic::Models::Beta::BetaTool::type_?
-          ) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_tool | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          input_schema: Anthropic::Models::Beta::BetaTool::InputSchema,
+          name: String,
+          ?cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?,
+          ?description: String,
+          ?type: Anthropic::Models::Beta::BetaTool::type_?
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_tool
 
@@ -47,12 +43,7 @@ module Anthropic
 
           attr_accessor properties: top?
 
-          def initialize:
-            (properties: top?, type: :object) -> void
-            | (
-              ?Anthropic::Models::Beta::BetaTool::input_schema
-              | Anthropic::BaseModel data
-            ) -> void
+          def initialize: (?properties: top?, ?type: :object) -> void
 
           def to_hash: -> Anthropic::Models::Beta::BetaTool::input_schema
         end

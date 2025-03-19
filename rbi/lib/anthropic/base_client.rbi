@@ -5,41 +5,44 @@ module Anthropic
   class BaseClient
     abstract!
 
-    RequestComponentsShape = T.type_alias do
-      {
-        method: Symbol,
-        path: T.any(String, T::Array[String]),
-        query: T.nilable(T::Hash[String, T.nilable(T.any(T::Array[String], String))]),
-        headers: T.nilable(
-          T::Hash[String,
-                  T.nilable(
-                    T.any(
-                      String,
-                      Integer,
-                      T::Array[T.nilable(T.any(String, Integer))]
-                    )
-                  )]
-        ),
-        body: T.nilable(T.anything),
-        unwrap: T.nilable(Symbol),
-        page: T.nilable(T::Class[Anthropic::BasePage[Anthropic::BaseModel]]),
-        stream: T.nilable(T::Class[Anthropic::BaseStream[T.anything, Anthropic::BaseModel]]),
-        model: T.nilable(Anthropic::Converter::Input),
-        options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
-      }
-    end
+    RequestComponentsShape =
+      T.type_alias do
+        {
+          method: Symbol,
+          path: T.any(String, T::Array[String]),
+          query: T.nilable(T::Hash[String, T.nilable(T.any(T::Array[String], String))]),
+          headers: T.nilable(
+            T::Hash[String,
+                    T.nilable(
+                      T.any(
+                        String,
+                        Integer,
+                        T::Array[T.nilable(T.any(String, Integer))]
+                      )
+                    )]
+          ),
+          body: T.nilable(T.anything),
+          unwrap: T.nilable(Symbol),
+          page: T.nilable(T::Class[Anthropic::BasePage[Anthropic::BaseModel]]),
+          stream: T.nilable(T::Class[Anthropic::BaseStream[T.anything, Anthropic::BaseModel]]),
+          model: T.nilable(Anthropic::Converter::Input),
+          options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
+        }
+      end
 
-    RequestInputShape = T.type_alias do
-      {
-        method: Symbol,
-        url: URI::Generic,
-        headers: T::Hash[String, String],
-        body: T.anything,
-        max_retries: Integer,
-        timeout: Float
-      }
-    end
+    RequestInputShape =
+      T.type_alias do
+        {
+          method: Symbol,
+          url: URI::Generic,
+          headers: T::Hash[String, String],
+          body: T.anything,
+          max_retries: Integer,
+          timeout: Float
+        }
+      end
 
+    # from whatwg fetch spec
     MAX_REDIRECTS = 20
 
     PLATFORM_HEADERS = T::Hash[String, String]

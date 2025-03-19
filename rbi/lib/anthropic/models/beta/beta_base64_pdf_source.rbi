@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaBase64PDFSource = T.type_alias { Beta::BetaBase64PDFSource }
-
     module Beta
       class BetaBase64PDFSource < Anthropic::BaseModel
         sig { returns(String) }
@@ -39,5 +37,7 @@ module Anthropic
         end
       end
     end
+
+    BetaBase64PDFSource = Beta::BetaBase64PDFSource
   end
 end

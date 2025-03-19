@@ -10,11 +10,11 @@ module Anthropic
 
       attr_accessor type: :thinking
 
-      def initialize:
-        (signature: String, thinking: String, type: :thinking) -> void
-        | (
-          ?Anthropic::Models::thinking_block | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (
+        signature: String,
+        thinking: String,
+        ?type: :thinking
+      ) -> void
 
       def to_hash: -> Anthropic::Models::thinking_block
     end

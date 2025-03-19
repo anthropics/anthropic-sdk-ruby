@@ -12,11 +12,12 @@ module Anthropic
 
       attr_accessor type: :tool_use
 
-      def initialize:
-        (id: String, input: top, name: String, type: :tool_use) -> void
-        | (
-          ?Anthropic::Models::tool_use_block | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (
+        id: String,
+        input: top,
+        name: String,
+        ?type: :tool_use
+      ) -> void
 
       def to_hash: -> Anthropic::Models::tool_use_block
     end

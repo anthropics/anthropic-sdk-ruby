@@ -24,7 +24,8 @@ module Anthropic
 
         # @abstract
         class Content < Anthropic::Union
-          BetaContentBlockSourceContentArray = Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlockSourceContent }]
+          BetaContentBlockSourceContentArray =
+            Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlockSourceContent }]
 
           variant String
 

@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaToolChoiceAuto = T.type_alias { Beta::BetaToolChoiceAuto }
-
     module Beta
       class BetaToolChoiceAuto < Anthropic::BaseModel
         sig { returns(Symbol) }
@@ -36,5 +34,7 @@ module Anthropic
         end
       end
     end
+
+    BetaToolChoiceAuto = Beta::BetaToolChoiceAuto
   end
 end

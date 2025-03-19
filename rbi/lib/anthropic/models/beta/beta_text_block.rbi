@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaTextBlock = T.type_alias { Beta::BetaTextBlock }
-
     module Beta
       class BetaTextBlock < Anthropic::BaseModel
         # Citations supporting the text block.
@@ -111,5 +109,7 @@ module Anthropic
         end
       end
     end
+
+    BetaTextBlock = Beta::BetaTextBlock
   end
 end

@@ -14,13 +14,11 @@ module Anthropic
 
       attr_accessor type: :text
 
-      def initialize:
-        (
-          citations: ::Array[Anthropic::Models::text_citation]?,
-          text: String,
-          type: :text
-        ) -> void
-        | (?Anthropic::Models::text_block | Anthropic::BaseModel data) -> void
+      def initialize: (
+        citations: ::Array[Anthropic::Models::text_citation]?,
+        text: String,
+        ?type: :text
+      ) -> void
 
       def to_hash: -> Anthropic::Models::text_block
     end

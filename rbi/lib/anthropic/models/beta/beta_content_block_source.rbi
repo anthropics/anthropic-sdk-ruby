@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaContentBlockSource = T.type_alias { Beta::BetaContentBlockSource }
-
     module Beta
       class BetaContentBlockSource < Anthropic::BaseModel
         sig do
@@ -73,18 +71,22 @@ module Anthropic
         class Content < Anthropic::Union
           abstract!
 
-          Variants = type_template(:out) do
-            {
-              fixed: T.any(
-                String,
-                T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
-              )
-            }
-          end
+          Variants =
+            type_template(:out) do
+              {
+                fixed: T.any(
+                  String,
+                  T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
+                )
+              }
+            end
 
-          BetaContentBlockSourceContentArray = T.type_alias { T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)] }
+          BetaContentBlockSourceContentArray =
+            T.type_alias { T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)] }
         end
       end
     end
+
+    BetaContentBlockSource = Beta::BetaContentBlockSource
   end
 end

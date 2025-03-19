@@ -12,15 +12,10 @@ module Anthropic
 
         attr_accessor type: :message_start
 
-        def initialize:
-          (
-            message: Anthropic::Models::Beta::BetaMessage,
-            type: :message_start
-          ) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_raw_message_start_event
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          message: Anthropic::Models::Beta::BetaMessage,
+          ?type: :message_start
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_raw_message_start_event
       end

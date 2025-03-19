@@ -15,15 +15,10 @@ module Anthropic
 
         attr_accessor type: :content
 
-        def initialize:
-          (
-            content: Anthropic::Models::Beta::BetaContentBlockSource::content,
-            type: :content
-          ) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_content_block_source
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          content: Anthropic::Models::Beta::BetaContentBlockSource::content,
+          ?type: :content
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_content_block_source
 

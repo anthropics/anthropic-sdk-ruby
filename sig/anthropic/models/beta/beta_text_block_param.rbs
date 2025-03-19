@@ -21,17 +21,12 @@ module Anthropic
 
         attr_accessor citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?
 
-        def initialize:
-          (
-            text: String,
-            cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?,
-            citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?,
-            type: :text
-          ) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_text_block_param
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          text: String,
+          ?cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?,
+          ?citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?,
+          ?type: :text
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_text_block_param
       end

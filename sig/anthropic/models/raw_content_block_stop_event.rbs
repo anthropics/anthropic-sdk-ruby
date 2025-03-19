@@ -8,12 +8,7 @@ module Anthropic
 
       attr_accessor type: :content_block_stop
 
-      def initialize:
-        (index: Integer, type: :content_block_stop) -> void
-        | (
-          ?Anthropic::Models::raw_content_block_stop_event
-          | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (index: Integer, ?type: :content_block_stop) -> void
 
       def to_hash: -> Anthropic::Models::raw_content_block_stop_event
     end

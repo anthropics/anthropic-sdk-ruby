@@ -11,14 +11,10 @@ module Anthropic
 
       attr_accessor role: Anthropic::Models::MessageParam::role
 
-      def initialize:
-        (
-          content: Anthropic::Models::MessageParam::content,
-          role: Anthropic::Models::MessageParam::role
-        ) -> void
-        | (
-          ?Anthropic::Models::message_param | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (
+        content: Anthropic::Models::MessageParam::content,
+        role: Anthropic::Models::MessageParam::role
+      ) -> void
 
       def to_hash: -> Anthropic::Models::message_param
 

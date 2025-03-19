@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaRawMessageStartEvent = T.type_alias { Beta::BetaRawMessageStartEvent }
-
     module Beta
       class BetaRawMessageStartEvent < Anthropic::BaseModel
         sig { returns(Anthropic::Models::Beta::BetaMessage) }
@@ -31,5 +29,7 @@ module Anthropic
         end
       end
     end
+
+    BetaRawMessageStartEvent = Beta::BetaRawMessageStartEvent
   end
 end

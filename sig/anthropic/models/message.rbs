@@ -29,18 +29,16 @@ module Anthropic
 
       attr_accessor usage: Anthropic::Models::Usage
 
-      def initialize:
-        (
-          id: String,
-          content: ::Array[Anthropic::Models::content_block],
-          model: Anthropic::Models::model,
-          stop_reason: Anthropic::Models::Message::stop_reason?,
-          stop_sequence: String?,
-          usage: Anthropic::Models::Usage,
-          role: :assistant,
-          type: :message
-        ) -> void
-        | (?Anthropic::Models::message | Anthropic::BaseModel data) -> void
+      def initialize: (
+        id: String,
+        content: ::Array[Anthropic::Models::content_block],
+        model: Anthropic::Models::model,
+        stop_reason: Anthropic::Models::Message::stop_reason?,
+        stop_sequence: String?,
+        usage: Anthropic::Models::Usage,
+        ?role: :assistant,
+        ?type: :message
+      ) -> void
 
       def to_hash: -> Anthropic::Models::message
 

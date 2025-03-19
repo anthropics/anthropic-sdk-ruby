@@ -7,11 +7,7 @@ module Anthropic
 
       attr_accessor type: :overloaded_error
 
-      def initialize:
-        (message: String, type: :overloaded_error) -> void
-        | (
-          ?Anthropic::Models::overloaded_error | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (message: String, ?type: :overloaded_error) -> void
 
       def to_hash: -> Anthropic::Models::overloaded_error
     end

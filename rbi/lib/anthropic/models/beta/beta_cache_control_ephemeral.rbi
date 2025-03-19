@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaCacheControlEphemeral = T.type_alias { Beta::BetaCacheControlEphemeral }
-
     module Beta
       class BetaCacheControlEphemeral < Anthropic::BaseModel
         sig { returns(Symbol) }
@@ -23,5 +21,7 @@ module Anthropic
         end
       end
     end
+
+    BetaCacheControlEphemeral = Beta::BetaCacheControlEphemeral
   end
 end

@@ -7,11 +7,7 @@ module Anthropic
 
       attr_accessor type: :signature_delta
 
-      def initialize:
-        (signature: String, type: :signature_delta) -> void
-        | (
-          ?Anthropic::Models::signature_delta | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (signature: String, ?type: :signature_delta) -> void
 
       def to_hash: -> Anthropic::Models::signature_delta
     end

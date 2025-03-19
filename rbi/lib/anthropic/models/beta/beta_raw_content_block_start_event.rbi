@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaRawContentBlockStartEvent = T.type_alias { Beta::BetaRawContentBlockStartEvent }
-
     module Beta
       class BetaRawContentBlockStartEvent < Anthropic::BaseModel
         sig do
@@ -93,18 +91,21 @@ module Anthropic
         class ContentBlock < Anthropic::Union
           abstract!
 
-          Variants = type_template(:out) do
-            {
-              fixed: T.any(
-                Anthropic::Models::Beta::BetaTextBlock,
-                Anthropic::Models::Beta::BetaToolUseBlock,
-                Anthropic::Models::Beta::BetaThinkingBlock,
-                Anthropic::Models::Beta::BetaRedactedThinkingBlock
-              )
-            }
-          end
+          Variants =
+            type_template(:out) do
+              {
+                fixed: T.any(
+                  Anthropic::Models::Beta::BetaTextBlock,
+                  Anthropic::Models::Beta::BetaToolUseBlock,
+                  Anthropic::Models::Beta::BetaThinkingBlock,
+                  Anthropic::Models::Beta::BetaRedactedThinkingBlock
+                )
+              }
+            end
         end
       end
     end
+
+    BetaRawContentBlockStartEvent = Beta::BetaRawContentBlockStartEvent
   end
 end

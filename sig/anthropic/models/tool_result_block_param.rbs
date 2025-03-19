@@ -26,18 +26,13 @@ module Anthropic
 
       def is_error=: (bool) -> bool
 
-      def initialize:
-        (
-          tool_use_id: String,
-          cache_control: Anthropic::Models::CacheControlEphemeral?,
-          content: Anthropic::Models::ToolResultBlockParam::content,
-          is_error: bool,
-          type: :tool_result
-        ) -> void
-        | (
-          ?Anthropic::Models::tool_result_block_param
-          | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (
+        tool_use_id: String,
+        ?cache_control: Anthropic::Models::CacheControlEphemeral?,
+        ?content: Anthropic::Models::ToolResultBlockParam::content,
+        ?is_error: bool,
+        ?type: :tool_result
+      ) -> void
 
       def to_hash: -> Anthropic::Models::tool_result_block_param
 

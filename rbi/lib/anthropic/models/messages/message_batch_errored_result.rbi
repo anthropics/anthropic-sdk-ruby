@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    MessageBatchErroredResult = T.type_alias { Messages::MessageBatchErroredResult }
-
     module Messages
       class MessageBatchErroredResult < Anthropic::BaseModel
         sig { returns(Anthropic::Models::ErrorResponse) }
@@ -31,5 +29,7 @@ module Anthropic
         end
       end
     end
+
+    MessageBatchErroredResult = Messages::MessageBatchErroredResult
   end
 end

@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaCitationPageLocationParam = T.type_alias { Beta::BetaCitationPageLocationParam }
-
     module Beta
       class BetaCitationPageLocationParam < Anthropic::BaseModel
         sig { returns(String) }
@@ -85,5 +83,7 @@ module Anthropic
         end
       end
     end
+
+    BetaCitationPageLocationParam = Beta::BetaCitationPageLocationParam
   end
 end

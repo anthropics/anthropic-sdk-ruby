@@ -33,18 +33,13 @@ module Anthropic
             ::Array[Anthropic::Models::anthropic_beta]
           ) -> ::Array[Anthropic::Models::anthropic_beta]
 
-          def initialize:
-            (
-              after_id: String,
-              before_id: String,
-              limit: Integer,
-              betas: ::Array[Anthropic::Models::anthropic_beta],
-              request_options: Anthropic::request_opts
-            ) -> void
-            | (
-              ?Anthropic::Models::Beta::Messages::batch_list_params
-              | Anthropic::BaseModel data
-            ) -> void
+          def initialize: (
+            ?after_id: String,
+            ?before_id: String,
+            ?limit: Integer,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
 
           def to_hash: -> Anthropic::Models::Beta::Messages::batch_list_params
         end

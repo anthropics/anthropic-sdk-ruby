@@ -10,11 +10,11 @@ module Anthropic
 
       attr_accessor type: :base64
 
-      def initialize:
-        (data: String, media_type: :"application/pdf", type: :base64) -> void
-        | (
-          ?Anthropic::Models::base64_pdf_source | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (
+        data: String,
+        ?media_type: :"application/pdf",
+        ?type: :base64
+      ) -> void
 
       def to_hash: -> Anthropic::Models::base64_pdf_source
     end

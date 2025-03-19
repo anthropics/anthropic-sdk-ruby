@@ -33,20 +33,16 @@ module Anthropic
 
         attr_accessor usage: Anthropic::Models::Beta::BetaUsage
 
-        def initialize:
-          (
-            id: String,
-            content: ::Array[Anthropic::Models::Beta::beta_content_block],
-            model: Anthropic::Models::model,
-            stop_reason: Anthropic::Models::Beta::BetaMessage::stop_reason?,
-            stop_sequence: String?,
-            usage: Anthropic::Models::Beta::BetaUsage,
-            role: :assistant,
-            type: :message
-          ) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_message | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          id: String,
+          content: ::Array[Anthropic::Models::Beta::beta_content_block],
+          model: Anthropic::Models::model,
+          stop_reason: Anthropic::Models::Beta::BetaMessage::stop_reason?,
+          stop_sequence: String?,
+          usage: Anthropic::Models::Beta::BetaUsage,
+          ?role: :assistant,
+          ?type: :message
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_message
 

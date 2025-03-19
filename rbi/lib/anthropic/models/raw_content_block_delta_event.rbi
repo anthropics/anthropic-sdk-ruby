@@ -95,17 +95,18 @@ module Anthropic
       class Delta < Anthropic::Union
         abstract!
 
-        Variants = type_template(:out) do
-          {
-            fixed: T.any(
-              Anthropic::Models::TextDelta,
-              Anthropic::Models::InputJSONDelta,
-              Anthropic::Models::CitationsDelta,
-              Anthropic::Models::ThinkingDelta,
-              Anthropic::Models::SignatureDelta
-            )
-          }
-        end
+        Variants =
+          type_template(:out) do
+            {
+              fixed: T.any(
+                Anthropic::Models::TextDelta,
+                Anthropic::Models::InputJSONDelta,
+                Anthropic::Models::CitationsDelta,
+                Anthropic::Models::ThinkingDelta,
+                Anthropic::Models::SignatureDelta
+              )
+            }
+          end
       end
     end
   end

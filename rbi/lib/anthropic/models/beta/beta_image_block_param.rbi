@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaImageBlockParam = T.type_alias { Beta::BetaImageBlockParam }
-
     module Beta
       class BetaImageBlockParam < Anthropic::BaseModel
         sig do
@@ -71,11 +69,14 @@ module Anthropic
         class Source < Anthropic::Union
           abstract!
 
-          Variants = type_template(:out) do
-            {fixed: T.any(Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource)}
-          end
+          Variants =
+            type_template(:out) do
+              {fixed: T.any(Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource)}
+            end
         end
       end
     end
+
+    BetaImageBlockParam = Beta::BetaImageBlockParam
   end
 end

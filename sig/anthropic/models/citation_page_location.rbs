@@ -23,18 +23,14 @@ module Anthropic
 
       attr_accessor type: :page_location
 
-      def initialize:
-        (
-          cited_text: String,
-          document_index: Integer,
-          document_title: String?,
-          end_page_number: Integer,
-          start_page_number: Integer,
-          type: :page_location
-        ) -> void
-        | (
-          ?Anthropic::Models::citation_page_location | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (
+        cited_text: String,
+        document_index: Integer,
+        document_title: String?,
+        end_page_number: Integer,
+        start_page_number: Integer,
+        ?type: :page_location
+      ) -> void
 
       def to_hash: -> Anthropic::Models::citation_page_location
     end
