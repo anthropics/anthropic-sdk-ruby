@@ -17,16 +17,12 @@ module Anthropic
 
       attr_accessor citations: ::Array[Anthropic::Models::text_citation_param]?
 
-      def initialize:
-        (
-          text: String,
-          cache_control: Anthropic::Models::CacheControlEphemeral?,
-          citations: ::Array[Anthropic::Models::text_citation_param]?,
-          type: :text
-        ) -> void
-        | (
-          ?Anthropic::Models::text_block_param | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (
+        text: String,
+        ?cache_control: Anthropic::Models::CacheControlEphemeral?,
+        ?citations: ::Array[Anthropic::Models::text_citation_param]?,
+        ?type: :text
+      ) -> void
 
       def to_hash: -> Anthropic::Models::text_block_param
     end

@@ -7,11 +7,7 @@ module Anthropic
 
       attr_accessor type: :rate_limit_error
 
-      def initialize:
-        (message: String, type: :rate_limit_error) -> void
-        | (
-          ?Anthropic::Models::beta_rate_limit_error | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (message: String, ?type: :rate_limit_error) -> void
 
       def to_hash: -> Anthropic::Models::beta_rate_limit_error
     end

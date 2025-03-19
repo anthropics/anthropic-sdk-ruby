@@ -3,15 +3,15 @@
 module Anthropic
   # @example
   # ```ruby
-  # stream.for_each do |event|
+  # stream.each do |event|
   #   puts(event)
   # end
   # ```
   #
   # @example
   # ```ruby
-  # events = stream
-  #   .to_enum
+  # events =
+  #   stream
   #   .lazy
   #   .select { _1.object_id.even? }
   #   .map(&:itself)
@@ -28,8 +28,10 @@ module Anthropic
     # @return [Enumerable]
     private def iterator
       # rubocop:disable Metrics/BlockLength
-      @iterator ||= Anthropic::Util.chain_fused(@messages) do |y|
-        @messages.each do |msg|
+      # rubocop:disable Layout/LineLength
+      # rubocop:disable Lint/DuplicateBranch
+      @iterator ||= Anthropic::Util.chain_fused(@stream) do |y|
+        @stream.each do |msg|
           case msg
           in {event: "completion", data: String => data}
             decoded = JSON.parse(data, symbolize_names: true)
@@ -59,6 +61,8 @@ module Anthropic
           end
         end
       end
+      # rubocop:enable Lint/DuplicateBranch
+      # rubocop:enable Layout/LineLength
       # rubocop:enable Metrics/BlockLength
     end
   end

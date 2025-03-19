@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaTextBlockParam = T.type_alias { Beta::BetaTextBlockParam }
-
     module Beta
       class BetaTextBlockParam < Anthropic::BaseModel
         sig { returns(String) }
@@ -119,5 +117,7 @@ module Anthropic
         end
       end
     end
+
+    BetaTextBlockParam = Beta::BetaTextBlockParam
   end
 end

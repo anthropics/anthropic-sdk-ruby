@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaToolTextEditor20241022 = T.type_alias { Beta::BetaToolTextEditor20241022 }
-
     module Beta
       class BetaToolTextEditor20241022 < Anthropic::BaseModel
         # Name of the tool.
@@ -57,5 +55,7 @@ module Anthropic
         end
       end
     end
+
+    BetaToolTextEditor20241022 = Beta::BetaToolTextEditor20241022
   end
 end

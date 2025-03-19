@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaThinkingBlock = T.type_alias { Beta::BetaThinkingBlock }
-
     module Beta
       class BetaThinkingBlock < Anthropic::BaseModel
         sig { returns(String) }
@@ -39,5 +37,7 @@ module Anthropic
         end
       end
     end
+
+    BetaThinkingBlock = Beta::BetaThinkingBlock
   end
 end

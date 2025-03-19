@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    MessageBatchIndividualResponse = T.type_alias { Messages::MessageBatchIndividualResponse }
-
     module Messages
       class MessageBatchIndividualResponse < Anthropic::BaseModel
         # Developer-provided ID created for each request in a Message Batch. Useful for
@@ -92,5 +90,7 @@ module Anthropic
         end
       end
     end
+
+    MessageBatchIndividualResponse = Messages::MessageBatchIndividualResponse
   end
 end

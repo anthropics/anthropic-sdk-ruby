@@ -7,11 +7,7 @@ module Anthropic
 
       attr_accessor type: :thinking_delta
 
-      def initialize:
-        (thinking: String, type: :thinking_delta) -> void
-        | (
-          ?Anthropic::Models::thinking_delta | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (thinking: String, ?type: :thinking_delta) -> void
 
       def to_hash: -> Anthropic::Models::thinking_delta
     end

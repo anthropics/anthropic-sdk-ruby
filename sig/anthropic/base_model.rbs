@@ -123,6 +123,13 @@ module Anthropic
   class ArrayOf[Elem]
     include Anthropic::Converter
 
+    def self.[]: (
+      ::Hash[Symbol, top]
+      | ^-> Anthropic::Converter::input
+      | Anthropic::Converter::input type_info,
+      ?::Hash[Symbol, top] spec
+    ) -> instance
+
     def ===: (top other) -> bool
 
     def ==: (top other) -> bool
@@ -147,6 +154,13 @@ module Anthropic
 
   class HashOf[Elem]
     include Anthropic::Converter
+
+    def self.[]: (
+      ::Hash[Symbol, top]
+      | ^-> Anthropic::Converter::input
+      | Anthropic::Converter::input type_info,
+      ?::Hash[Symbol, top] spec
+    ) -> instance
 
     def ===: (top other) -> bool
 
@@ -177,6 +191,8 @@ module Anthropic
 
     def self.known_fields: -> ::Hash[Symbol, (Anthropic::BaseModel::known_field
     & { type_fn: (^-> Anthropic::Converter::input) })]
+
+    def self.reverse_map: -> ::Hash[Symbol, Symbol]
 
     def self.fields: -> ::Hash[Symbol, (Anthropic::BaseModel::known_field
     & { type: Anthropic::Converter::input })]

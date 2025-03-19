@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaToolBash20241022 = T.type_alias { Beta::BetaToolBash20241022 }
-
     module Beta
       class BetaToolBash20241022 < Anthropic::BaseModel
         # Name of the tool.
@@ -57,5 +55,7 @@ module Anthropic
         end
       end
     end
+
+    BetaToolBash20241022 = Beta::BetaToolBash20241022
   end
 end

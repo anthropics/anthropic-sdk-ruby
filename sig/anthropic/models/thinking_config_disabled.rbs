@@ -5,12 +5,7 @@ module Anthropic
     class ThinkingConfigDisabled < Anthropic::BaseModel
       attr_accessor type: :disabled
 
-      def initialize:
-        (type: :disabled) -> void
-        | (
-          ?Anthropic::Models::thinking_config_disabled
-          | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (?type: :disabled) -> void
 
       def to_hash: -> Anthropic::Models::thinking_config_disabled
     end

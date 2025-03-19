@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaThinkingConfigDisabled = T.type_alias { Beta::BetaThinkingConfigDisabled }
-
     module Beta
       class BetaThinkingConfigDisabled < Anthropic::BaseModel
         sig { returns(Symbol) }
@@ -23,5 +21,7 @@ module Anthropic
         end
       end
     end
+
+    BetaThinkingConfigDisabled = Beta::BetaThinkingConfigDisabled
   end
 end

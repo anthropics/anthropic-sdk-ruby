@@ -18,16 +18,11 @@ module Anthropic
 
         attr_accessor usage: Anthropic::Models::Beta::BetaMessageDeltaUsage
 
-        def initialize:
-          (
-            delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta,
-            usage: Anthropic::Models::Beta::BetaMessageDeltaUsage,
-            type: :message_delta
-          ) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_raw_message_delta_event
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta,
+          usage: Anthropic::Models::Beta::BetaMessageDeltaUsage,
+          ?type: :message_delta
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_raw_message_delta_event
 
@@ -42,15 +37,10 @@ module Anthropic
 
           attr_accessor stop_sequence: String?
 
-          def initialize:
-            (
-              stop_reason: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::stop_reason?,
-              stop_sequence: String?
-            ) -> void
-            | (
-              ?Anthropic::Models::Beta::BetaRawMessageDeltaEvent::delta
-              | Anthropic::BaseModel data
-            ) -> void
+          def initialize: (
+            stop_reason: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::stop_reason?,
+            stop_sequence: String?
+          ) -> void
 
           def to_hash: -> Anthropic::Models::Beta::BetaRawMessageDeltaEvent::delta
 

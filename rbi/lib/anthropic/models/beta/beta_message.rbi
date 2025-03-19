@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaMessage = T.type_alias { Beta::BetaMessage }
-
     module Beta
       class BetaMessage < Anthropic::BaseModel
         # Unique object identifier.
@@ -247,5 +245,7 @@ module Anthropic
         end
       end
     end
+
+    BetaMessage = Beta::BetaMessage
   end
 end

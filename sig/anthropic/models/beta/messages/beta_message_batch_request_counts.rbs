@@ -22,18 +22,13 @@ module Anthropic
 
           attr_accessor succeeded: Integer
 
-          def initialize:
-            (
-              canceled: Integer,
-              errored: Integer,
-              expired: Integer,
-              processing: Integer,
-              succeeded: Integer
-            ) -> void
-            | (
-              ?Anthropic::Models::Beta::Messages::beta_message_batch_request_counts
-              | Anthropic::BaseModel data
-            ) -> void
+          def initialize: (
+            canceled: Integer,
+            errored: Integer,
+            expired: Integer,
+            processing: Integer,
+            succeeded: Integer
+          ) -> void
 
           def to_hash: -> Anthropic::Models::Beta::Messages::beta_message_batch_request_counts
         end

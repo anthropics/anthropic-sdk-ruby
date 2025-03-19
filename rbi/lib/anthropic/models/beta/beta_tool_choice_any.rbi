@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaToolChoiceAny = T.type_alias { Beta::BetaToolChoiceAny }
-
     module Beta
       class BetaToolChoiceAny < Anthropic::BaseModel
         sig { returns(Symbol) }
@@ -36,5 +34,7 @@ module Anthropic
         end
       end
     end
+
+    BetaToolChoiceAny = Beta::BetaToolChoiceAny
   end
 end

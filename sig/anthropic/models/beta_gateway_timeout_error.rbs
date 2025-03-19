@@ -7,12 +7,7 @@ module Anthropic
 
       attr_accessor type: :timeout_error
 
-      def initialize:
-        (message: String, type: :timeout_error) -> void
-        | (
-          ?Anthropic::Models::beta_gateway_timeout_error
-          | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (message: String, ?type: :timeout_error) -> void
 
       def to_hash: -> Anthropic::Models::beta_gateway_timeout_error
     end

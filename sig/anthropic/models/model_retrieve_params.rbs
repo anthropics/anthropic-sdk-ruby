@@ -6,11 +6,7 @@ module Anthropic
       extend Anthropic::RequestParameters::Converter
       include Anthropic::RequestParameters
 
-      def initialize:
-        (request_options: Anthropic::request_opts) -> void
-        | (
-          ?Anthropic::Models::model_retrieve_params | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (?request_options: Anthropic::request_opts) -> void
 
       def to_hash: -> Anthropic::Models::model_retrieve_params
     end

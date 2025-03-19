@@ -14,15 +14,11 @@ module Anthropic
 
       attr_accessor cache_control: Anthropic::Models::CacheControlEphemeral?
 
-      def initialize:
-        (
-          source: Anthropic::Models::ImageBlockParam::source,
-          cache_control: Anthropic::Models::CacheControlEphemeral?,
-          type: :image
-        ) -> void
-        | (
-          ?Anthropic::Models::image_block_param | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (
+        source: Anthropic::Models::ImageBlockParam::source,
+        ?cache_control: Anthropic::Models::CacheControlEphemeral?,
+        ?type: :image
+      ) -> void
 
       def to_hash: -> Anthropic::Models::image_block_param
 

@@ -16,17 +16,12 @@ module Anthropic
 
         attr_accessor type: :model
 
-        def initialize:
-          (
-            id: String,
-            created_at: Time,
-            display_name: String,
-            type: :model
-          ) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_model_info
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          id: String,
+          created_at: Time,
+          display_name: String,
+          ?type: :model
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_model_info
       end

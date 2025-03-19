@@ -9,6 +9,8 @@ module Anthropic
         deadline: Float
       }
 
+    KEEP_ALIVE_TIMEOUT: 30
+
     def self.connect: (URI::Generic url) -> top
 
     def self.calibrate_socket_timeout: (top conn, Float deadline) -> void
@@ -30,6 +32,6 @@ module Anthropic
       Anthropic::PooledNetRequester::request request
     ) -> [Integer, top, Enumerable[String]]
 
-    def initialize: (size: Integer) -> void
+    def initialize: (?size: Integer) -> void
   end
 end

@@ -17,7 +17,8 @@ module Anthropic
   #
   # @example
   # ```ruby
-  # completions = page
+  # completions =
+  #   page
   #   .to_enum
   #   .lazy
   #   .select { _1.object_id.even? }
@@ -28,6 +29,8 @@ module Anthropic
   # completions => Array
   # ```
   module BasePage
+    # rubocop:disable Lint/UnusedMethodArgument
+
     # @return [Boolean]
     def next_page? = (raise NotImplementedError)
 
@@ -56,5 +59,7 @@ module Anthropic
       @req = req
       super()
     end
+
+    # rubocop:enable Lint/UnusedMethodArgument
   end
 end

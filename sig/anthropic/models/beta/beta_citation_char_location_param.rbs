@@ -27,19 +27,14 @@ module Anthropic
 
         attr_accessor type: :char_location
 
-        def initialize:
-          (
-            cited_text: String,
-            document_index: Integer,
-            document_title: String?,
-            end_char_index: Integer,
-            start_char_index: Integer,
-            type: :char_location
-          ) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_citation_char_location_param
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          cited_text: String,
+          document_index: Integer,
+          document_title: String?,
+          end_char_index: Integer,
+          start_char_index: Integer,
+          ?type: :char_location
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_citation_char_location_param
       end

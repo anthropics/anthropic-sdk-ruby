@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaModelInfo = T.type_alias { Beta::BetaModelInfo }
-
     module Beta
       class BetaModelInfo < Anthropic::BaseModel
         # Unique model identifier.
@@ -56,5 +54,7 @@ module Anthropic
         end
       end
     end
+
+    BetaModelInfo = Beta::BetaModelInfo
   end
 end

@@ -12,11 +12,11 @@ module Anthropic
 
       def disable_parallel_tool_use=: (bool) -> bool
 
-      def initialize:
-        (name: String, disable_parallel_tool_use: bool, type: :tool) -> void
-        | (
-          ?Anthropic::Models::tool_choice_tool | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (
+        name: String,
+        ?disable_parallel_tool_use: bool,
+        ?type: :tool
+      ) -> void
 
       def to_hash: -> Anthropic::Models::tool_choice_tool
     end

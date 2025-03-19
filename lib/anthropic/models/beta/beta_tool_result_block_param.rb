@@ -50,7 +50,8 @@ module Anthropic
 
         # @abstract
         class Content < Anthropic::Union
-          ContentArray = Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaToolResultBlockParam::Content::Content }]
+          ContentArray =
+            Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaToolResultBlockParam::Content::Content }]
 
           variant String
 

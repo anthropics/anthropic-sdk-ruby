@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaCitationsDelta = T.type_alias { Beta::BetaCitationsDelta }
-
     module Beta
       class BetaCitationsDelta < Anthropic::BaseModel
         sig do
@@ -78,17 +76,20 @@ module Anthropic
         class Citation < Anthropic::Union
           abstract!
 
-          Variants = type_template(:out) do
-            {
-              fixed: T.any(
-                Anthropic::Models::Beta::BetaCitationCharLocation,
-                Anthropic::Models::Beta::BetaCitationPageLocation,
-                Anthropic::Models::Beta::BetaCitationContentBlockLocation
-              )
-            }
-          end
+          Variants =
+            type_template(:out) do
+              {
+                fixed: T.any(
+                  Anthropic::Models::Beta::BetaCitationCharLocation,
+                  Anthropic::Models::Beta::BetaCitationPageLocation,
+                  Anthropic::Models::Beta::BetaCitationContentBlockLocation
+                )
+              }
+            end
         end
       end
     end
+
+    BetaCitationsDelta = Beta::BetaCitationsDelta
   end
 end

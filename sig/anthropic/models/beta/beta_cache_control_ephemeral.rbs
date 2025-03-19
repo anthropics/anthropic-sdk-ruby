@@ -9,12 +9,7 @@ module Anthropic
       class BetaCacheControlEphemeral < Anthropic::BaseModel
         attr_accessor type: :ephemeral
 
-        def initialize:
-          (type: :ephemeral) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_cache_control_ephemeral
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (?type: :ephemeral) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_cache_control_ephemeral
       end

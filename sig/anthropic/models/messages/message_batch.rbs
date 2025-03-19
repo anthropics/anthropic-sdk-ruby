@@ -39,23 +39,18 @@ module Anthropic
 
         attr_accessor type: :message_batch
 
-        def initialize:
-          (
-            id: String,
-            archived_at: Time?,
-            cancel_initiated_at: Time?,
-            created_at: Time,
-            ended_at: Time?,
-            expires_at: Time,
-            processing_status: Anthropic::Models::Messages::MessageBatch::processing_status,
-            request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts,
-            results_url: String?,
-            type: :message_batch
-          ) -> void
-          | (
-            ?Anthropic::Models::Messages::message_batch
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          id: String,
+          archived_at: Time?,
+          cancel_initiated_at: Time?,
+          created_at: Time,
+          ended_at: Time?,
+          expires_at: Time,
+          processing_status: Anthropic::Models::Messages::MessageBatch::processing_status,
+          request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts,
+          results_url: String?,
+          ?type: :message_batch
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Messages::message_batch
 

@@ -23,7 +23,8 @@ module Anthropic
 
       # @abstract
       class Content < Anthropic::Union
-        ContentBlockSourceContentArray = Anthropic::ArrayOf[union: -> { Anthropic::Models::ContentBlockSourceContent }]
+        ContentBlockSourceContentArray =
+          Anthropic::ArrayOf[union: -> { Anthropic::Models::ContentBlockSourceContent }]
 
         variant String
 

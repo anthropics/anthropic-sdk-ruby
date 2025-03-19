@@ -4,7 +4,7 @@ The Anthropic Ruby library provides convenient access to the Anthropic REST API 
 
 ## Documentation
 
-Documentation for the most recent release of this gem can be found [on RubyDoc](https://gemdocs.org/gems/anthropic/latest).
+Documentation for released of this gem can be found [on RubyDoc](https://gemdocs.org/gems/anthropic).
 
 The underlying REST API documentation can be found on [docs.anthropic.com](https://docs.anthropic.com/claude/reference/).
 
@@ -13,7 +13,7 @@ The underlying REST API documentation can be found on [docs.anthropic.com](https
 To use this gem during the beta, install directly from GitHub with Bundler by adding the following to your application's `Gemfile`:
 
 ```ruby
-gem "anthropic", git: "https://github.com/stainless-sdks/anthropic-ruby", branch: "main"
+gem "anthropic", git: "https://github.com/anthropics/anthropic-sdk-ruby", branch: "main"
 ```
 
 To fetch an initial copy of the gem:
@@ -83,7 +83,7 @@ stream = anthropic.messages.create_streaming(
   model: "claude-3-5-sonnet-latest"
 )
 
-stream.for_each do |message|
+stream.each do |message|
   puts(message.type)
 end
 ```
@@ -183,6 +183,8 @@ What this means is that while you can use Sorbet to type check your code statica
 
 Due to limitations with the Sorbet type system, where a method otherwise can take an instance of `Anthropic::BaseModel` class, you will need to use the `**` splat operator to pass the arguments:
 
+Please follow Sorbet's [setup guides](https://sorbet.org/docs/adopting) for best experience.
+
 ```ruby
 model = MessageCreateParams.new(
   max_tokens: 1024,
@@ -195,6 +197,18 @@ model = MessageCreateParams.new(
 
 anthropic.messages.create(**model)
 ```
+
+## Advanced
+
+### Concurrency & Connection Pooling
+
+The `Anthropic::Client` instances are thread-safe, and should be re-used across multiple threads. By default, each `Client` have their own HTTP connection pool, with a maximum number of connections equal to thread count.
+
+When the maximum number of connections has been checked out from the connection pool, the `Client` will wait for an in use connection to become available. The queue time for this mechanism is accounted for by the per-request timeout.
+
+Unless otherwise specified, other classes in the SDK do not have locks protecting their underlying data structure.
+
+Currently, `Anthropic::Client` instances are only fork-safe if there are no in-flight HTTP requests.
 
 ## Versioning
 

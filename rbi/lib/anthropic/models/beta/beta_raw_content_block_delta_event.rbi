@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaRawContentBlockDeltaEvent = T.type_alias { Beta::BetaRawContentBlockDeltaEvent }
-
     module Beta
       class BetaRawContentBlockDeltaEvent < Anthropic::BaseModel
         sig do
@@ -98,19 +96,22 @@ module Anthropic
         class Delta < Anthropic::Union
           abstract!
 
-          Variants = type_template(:out) do
-            {
-              fixed: T.any(
-                Anthropic::Models::Beta::BetaTextDelta,
-                Anthropic::Models::Beta::BetaInputJSONDelta,
-                Anthropic::Models::Beta::BetaCitationsDelta,
-                Anthropic::Models::Beta::BetaThinkingDelta,
-                Anthropic::Models::Beta::BetaSignatureDelta
-              )
-            }
-          end
+          Variants =
+            type_template(:out) do
+              {
+                fixed: T.any(
+                  Anthropic::Models::Beta::BetaTextDelta,
+                  Anthropic::Models::Beta::BetaInputJSONDelta,
+                  Anthropic::Models::Beta::BetaCitationsDelta,
+                  Anthropic::Models::Beta::BetaThinkingDelta,
+                  Anthropic::Models::Beta::BetaSignatureDelta
+                )
+              }
+            end
         end
       end
     end
+
+    BetaRawContentBlockDeltaEvent = Beta::BetaRawContentBlockDeltaEvent
   end
 end

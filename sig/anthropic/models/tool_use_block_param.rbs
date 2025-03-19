@@ -20,17 +20,13 @@ module Anthropic
 
       attr_accessor cache_control: Anthropic::Models::CacheControlEphemeral?
 
-      def initialize:
-        (
-          id: String,
-          input: top,
-          name: String,
-          cache_control: Anthropic::Models::CacheControlEphemeral?,
-          type: :tool_use
-        ) -> void
-        | (
-          ?Anthropic::Models::tool_use_block_param | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (
+        id: String,
+        input: top,
+        name: String,
+        ?cache_control: Anthropic::Models::CacheControlEphemeral?,
+        ?type: :tool_use
+      ) -> void
 
       def to_hash: -> Anthropic::Models::tool_use_block_param
     end

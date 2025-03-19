@@ -5,9 +5,7 @@ module Anthropic
     class Metadata < Anthropic::BaseModel
       attr_accessor user_id: String?
 
-      def initialize:
-        (user_id: String?) -> void
-        | (?Anthropic::Models::metadata | Anthropic::BaseModel data) -> void
+      def initialize: (?user_id: String?) -> void
 
       def to_hash: -> Anthropic::Models::metadata
     end

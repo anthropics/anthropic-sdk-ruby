@@ -21,16 +21,11 @@ module Anthropic
             ::Array[Anthropic::Models::anthropic_beta]
           ) -> ::Array[Anthropic::Models::anthropic_beta]
 
-          def initialize:
-            (
-              requests: ::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request],
-              betas: ::Array[Anthropic::Models::anthropic_beta],
-              request_options: Anthropic::request_opts
-            ) -> void
-            | (
-              ?Anthropic::Models::Beta::Messages::batch_create_params
-              | Anthropic::BaseModel data
-            ) -> void
+          def initialize: (
+            requests: ::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request],
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
 
           def to_hash: -> Anthropic::Models::Beta::Messages::batch_create_params
 
@@ -45,15 +40,10 @@ module Anthropic
 
             attr_accessor params: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params
 
-            def initialize:
-              (
-                custom_id: String,
-                params: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params
-              ) -> void
-              | (
-                ?Anthropic::Models::Beta::Messages::BatchCreateParams::request
-                | Anthropic::BaseModel data
-              ) -> void
+            def initialize: (
+              custom_id: String,
+              params: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params
+            ) -> void
 
             def to_hash: -> Anthropic::Models::Beta::Messages::BatchCreateParams::request
 
@@ -131,26 +121,21 @@ module Anthropic
 
               def top_p=: (Float) -> Float
 
-              def initialize:
-                (
-                  max_tokens: Integer,
-                  messages: ::Array[Anthropic::Models::Beta::BetaMessageParam],
-                  model: Anthropic::Models::model,
-                  metadata: Anthropic::Models::Beta::BetaMetadata,
-                  stop_sequences: ::Array[String],
-                  stream: bool,
-                  system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
-                  temperature: Float,
-                  thinking: Anthropic::Models::Beta::beta_thinking_config_param,
-                  tool_choice: Anthropic::Models::Beta::beta_tool_choice,
-                  tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
-                  top_k: Integer,
-                  top_p: Float
-                ) -> void
-                | (
-                  ?Anthropic::Models::Beta::Messages::BatchCreateParams::Request::params
-                  | Anthropic::BaseModel data
-                ) -> void
+              def initialize: (
+                max_tokens: Integer,
+                messages: ::Array[Anthropic::Models::Beta::BetaMessageParam],
+                model: Anthropic::Models::model,
+                ?metadata: Anthropic::Models::Beta::BetaMetadata,
+                ?stop_sequences: ::Array[String],
+                ?stream: bool,
+                ?system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
+                ?temperature: Float,
+                ?thinking: Anthropic::Models::Beta::beta_thinking_config_param,
+                ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
+                ?tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
+                ?top_k: Integer,
+                ?top_p: Float
+              ) -> void
 
               def to_hash: -> Anthropic::Models::Beta::Messages::BatchCreateParams::Request::params
 

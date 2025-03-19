@@ -60,7 +60,8 @@ module Anthropic
       class Source < Anthropic::Union
         abstract!
 
-        Variants = type_template(:out) { {fixed: T.any(Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource)} }
+        Variants =
+          type_template(:out) { {fixed: T.any(Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource)} }
       end
     end
   end

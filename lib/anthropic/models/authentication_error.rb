@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class AuthenticationError_ < Anthropic::BaseModel
+    class AuthenticationError < Anthropic::BaseModel
       # @!attribute message
       #
       #   @return [String]

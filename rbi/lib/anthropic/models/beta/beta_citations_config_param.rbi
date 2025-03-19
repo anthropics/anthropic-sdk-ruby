@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaCitationsConfigParam = T.type_alias { Beta::BetaCitationsConfigParam }
-
     module Beta
       class BetaCitationsConfigParam < Anthropic::BaseModel
         sig { returns(T.nilable(T::Boolean)) }
@@ -23,5 +21,7 @@ module Anthropic
         end
       end
     end
+
+    BetaCitationsConfigParam = Beta::BetaCitationsConfigParam
   end
 end

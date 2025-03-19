@@ -14,12 +14,7 @@ module Anthropic
 
         def disable_parallel_tool_use=: (bool) -> bool
 
-        def initialize:
-          (disable_parallel_tool_use: bool, type: :any) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_tool_choice_any
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (?disable_parallel_tool_use: bool, ?type: :any) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_tool_choice_any
       end

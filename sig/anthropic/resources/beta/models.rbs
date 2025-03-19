@@ -2,28 +2,17 @@ module Anthropic
   module Resources
     class Beta
       class Models
-        def retrieve:
-          (
-            String model_id,
-            ?Anthropic::Models::Beta::ModelRetrieveParams
-            | ::Hash[Symbol, top] params
-          ) -> Anthropic::Models::Beta::BetaModelInfo
-          | (
-            String model_id,
-            request_options: Anthropic::request_opts
-          ) -> Anthropic::Models::Beta::BetaModelInfo
+        def retrieve: (
+          String model_id,
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Models::Beta::BetaModelInfo
 
-        def list:
-          (
-            ?Anthropic::Models::Beta::ModelListParams
-            | ::Hash[Symbol, top] params
-          ) -> Anthropic::Page[Anthropic::Models::Beta::BetaModelInfo]
-          | (
-            after_id: String,
-            before_id: String,
-            limit: Integer,
-            request_options: Anthropic::request_opts
-          ) -> Anthropic::Page[Anthropic::Models::Beta::BetaModelInfo]
+        def list: (
+          ?after_id: String,
+          ?before_id: String,
+          ?limit: Integer,
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Page[Anthropic::Models::Beta::BetaModelInfo]
 
         def initialize: (client: Anthropic::Client) -> void
       end

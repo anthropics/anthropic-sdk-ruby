@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaBase64PDFBlock = T.type_alias { Beta::BetaBase64PDFBlock }
-
     module Beta
       class BetaBase64PDFBlock < Anthropic::BaseModel
         sig do
@@ -129,18 +127,21 @@ module Anthropic
         class Source < Anthropic::Union
           abstract!
 
-          Variants = type_template(:out) do
-            {
-              fixed: T.any(
-                Anthropic::Models::Beta::BetaBase64PDFSource,
-                Anthropic::Models::Beta::BetaPlainTextSource,
-                Anthropic::Models::Beta::BetaContentBlockSource,
-                Anthropic::Models::Beta::BetaURLPDFSource
-              )
-            }
-          end
+          Variants =
+            type_template(:out) do
+              {
+                fixed: T.any(
+                  Anthropic::Models::Beta::BetaBase64PDFSource,
+                  Anthropic::Models::Beta::BetaPlainTextSource,
+                  Anthropic::Models::Beta::BetaContentBlockSource,
+                  Anthropic::Models::Beta::BetaURLPDFSource
+                )
+              }
+            end
         end
       end
     end
+
+    BetaBase64PDFBlock = Beta::BetaBase64PDFBlock
   end
 end
