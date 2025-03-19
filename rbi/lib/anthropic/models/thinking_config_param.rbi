@@ -14,7 +14,8 @@ module Anthropic
     class ThinkingConfigParam < Anthropic::Union
       abstract!
 
-      Variants = type_template(:out) { {fixed: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled)} }
+      Variants =
+        type_template(:out) { {fixed: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled)} }
     end
   end
 end

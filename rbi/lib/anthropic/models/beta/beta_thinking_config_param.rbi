@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaThinkingConfigParam = T.type_alias { Beta::BetaThinkingConfigParam }
-
     module Beta
       # Configuration for enabling Claude's extended thinking.
       #
@@ -17,15 +15,18 @@ module Anthropic
       class BetaThinkingConfigParam < Anthropic::Union
         abstract!
 
-        Variants = type_template(:out) do
-          {
-            fixed: T.any(
-              Anthropic::Models::Beta::BetaThinkingConfigEnabled,
-              Anthropic::Models::Beta::BetaThinkingConfigDisabled
-            )
-          }
-        end
+        Variants =
+          type_template(:out) do
+            {
+              fixed: T.any(
+                Anthropic::Models::Beta::BetaThinkingConfigEnabled,
+                Anthropic::Models::Beta::BetaThinkingConfigDisabled
+              )
+            }
+          end
       end
     end
+
+    BetaThinkingConfigParam = Beta::BetaThinkingConfigParam
   end
 end

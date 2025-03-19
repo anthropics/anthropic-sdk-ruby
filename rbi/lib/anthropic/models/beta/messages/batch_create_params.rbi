@@ -627,7 +627,8 @@ module Anthropic
               class System < Anthropic::Union
                 abstract!
 
-                Variants = type_template(:out) { {fixed: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam])} }
+                Variants =
+                  type_template(:out) { {fixed: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam])} }
 
                 BetaTextBlockParamArray = T.type_alias { T::Array[Anthropic::Models::Beta::BetaTextBlockParam] }
               end

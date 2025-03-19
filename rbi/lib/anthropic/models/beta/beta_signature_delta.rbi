@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaSignatureDelta = T.type_alias { Beta::BetaSignatureDelta }
-
     module Beta
       class BetaSignatureDelta < Anthropic::BaseModel
         sig { returns(String) }
@@ -31,5 +29,7 @@ module Anthropic
         end
       end
     end
+
+    BetaSignatureDelta = Beta::BetaSignatureDelta
   end
 end

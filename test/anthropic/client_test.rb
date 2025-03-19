@@ -52,8 +52,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-3-7-sonnet-latest",
-        stream: true
+        model: :"claude-3-7-sonnet-latest"
       )
     end
 
@@ -61,11 +60,12 @@ class AnthropicTest < Minitest::Test
   end
 
   def test_client_given_request_default_retry_attempts
-    anthropic = Anthropic::Client.new(
-      base_url: "http://localhost:4010",
-      api_key: "my-anthropic-api-key",
-      max_retries: 3
-    )
+    anthropic =
+      Anthropic::Client.new(
+        base_url: "http://localhost:4010",
+        api_key: "my-anthropic-api-key",
+        max_retries: 3
+      )
     requester = MockRequester.new(500, {}, {})
     anthropic.requester = requester
 
@@ -73,8 +73,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-3-7-sonnet-latest",
-        stream: true
+        model: :"claude-3-7-sonnet-latest"
       )
     end
 
@@ -91,7 +90,6 @@ class AnthropicTest < Minitest::Test
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
         model: :"claude-3-7-sonnet-latest",
-        stream: true,
         request_options: {max_retries: 3}
       )
     end
@@ -100,11 +98,12 @@ class AnthropicTest < Minitest::Test
   end
 
   def test_client_given_request_given_retry_attempts
-    anthropic = Anthropic::Client.new(
-      base_url: "http://localhost:4010",
-      api_key: "my-anthropic-api-key",
-      max_retries: 3
-    )
+    anthropic =
+      Anthropic::Client.new(
+        base_url: "http://localhost:4010",
+        api_key: "my-anthropic-api-key",
+        max_retries: 3
+      )
     requester = MockRequester.new(500, {}, {})
     anthropic.requester = requester
 
@@ -113,7 +112,6 @@ class AnthropicTest < Minitest::Test
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
         model: :"claude-3-7-sonnet-latest",
-        stream: true,
         request_options: {max_retries: 4}
       )
     end
@@ -122,11 +120,12 @@ class AnthropicTest < Minitest::Test
   end
 
   def test_client_retry_after_seconds
-    anthropic = Anthropic::Client.new(
-      base_url: "http://localhost:4010",
-      api_key: "my-anthropic-api-key",
-      max_retries: 1
-    )
+    anthropic =
+      Anthropic::Client.new(
+        base_url: "http://localhost:4010",
+        api_key: "my-anthropic-api-key",
+        max_retries: 1
+      )
     requester = MockRequester.new(500, {"retry-after" => "1.3"}, {})
     anthropic.requester = requester
 
@@ -134,8 +133,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-3-7-sonnet-latest",
-        stream: true
+        model: :"claude-3-7-sonnet-latest"
       )
     end
 
@@ -144,11 +142,12 @@ class AnthropicTest < Minitest::Test
   end
 
   def test_client_retry_after_date
-    anthropic = Anthropic::Client.new(
-      base_url: "http://localhost:4010",
-      api_key: "my-anthropic-api-key",
-      max_retries: 1
-    )
+    anthropic =
+      Anthropic::Client.new(
+        base_url: "http://localhost:4010",
+        api_key: "my-anthropic-api-key",
+        max_retries: 1
+      )
     requester = MockRequester.new(500, {"retry-after" => (Time.now + 10).httpdate}, {})
     anthropic.requester = requester
 
@@ -157,8 +156,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-3-7-sonnet-latest",
-        stream: true
+        model: :"claude-3-7-sonnet-latest"
       )
       Thread.current.thread_variable_set(:time_now, nil)
     end
@@ -168,11 +166,12 @@ class AnthropicTest < Minitest::Test
   end
 
   def test_client_retry_after_ms
-    anthropic = Anthropic::Client.new(
-      base_url: "http://localhost:4010",
-      api_key: "my-anthropic-api-key",
-      max_retries: 1
-    )
+    anthropic =
+      Anthropic::Client.new(
+        base_url: "http://localhost:4010",
+        api_key: "my-anthropic-api-key",
+        max_retries: 1
+      )
     requester = MockRequester.new(500, {"retry-after-ms" => "1300"}, {})
     anthropic.requester = requester
 
@@ -180,8 +179,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-3-7-sonnet-latest",
-        stream: true
+        model: :"claude-3-7-sonnet-latest"
       )
     end
 
@@ -198,8 +196,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-3-7-sonnet-latest",
-        stream: true
+        model: :"claude-3-7-sonnet-latest"
       )
     end
 
@@ -217,7 +214,6 @@ class AnthropicTest < Minitest::Test
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
         model: :"claude-3-7-sonnet-latest",
-        stream: true,
         request_options: {extra_headers: {"x-stainless-retry-count" => nil}}
       )
     end
@@ -236,7 +232,6 @@ class AnthropicTest < Minitest::Test
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
         model: :"claude-3-7-sonnet-latest",
-        stream: true,
         request_options: {extra_headers: {"x-stainless-retry-count" => "42"}}
       )
     end
@@ -255,7 +250,6 @@ class AnthropicTest < Minitest::Test
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
         model: :"claude-3-7-sonnet-latest",
-        stream: true,
         request_options: {extra_headers: {}}
       )
     end
@@ -279,7 +273,6 @@ class AnthropicTest < Minitest::Test
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
         model: :"claude-3-7-sonnet-latest",
-        stream: true,
         request_options: {extra_headers: {}}
       )
     end
@@ -300,7 +293,6 @@ class AnthropicTest < Minitest::Test
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
         model: :"claude-3-7-sonnet-latest",
-        stream: true,
         request_options: {extra_headers: {"Authorization" => "Bearer xyz"}}
       )
     end
@@ -321,7 +313,6 @@ class AnthropicTest < Minitest::Test
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
         model: :"claude-3-7-sonnet-latest",
-        stream: true,
         request_options: {extra_headers: {"Authorization" => "Bearer xyz"}}
       )
     end
@@ -336,8 +327,7 @@ class AnthropicTest < Minitest::Test
     anthropic.messages.create(
       max_tokens: 1024,
       messages: [{content: "Hello, world", role: :user}],
-      model: :"claude-3-7-sonnet-latest",
-      stream: true
+      model: :"claude-3-7-sonnet-latest"
     )
     headers = requester.attempts.first[:headers]
 

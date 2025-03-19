@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaCitationContentBlockLocation = T.type_alias { Beta::BetaCitationContentBlockLocation }
-
     module Beta
       class BetaCitationContentBlockLocation < Anthropic::BaseModel
         sig { returns(String) }
@@ -92,5 +90,7 @@ module Anthropic
         end
       end
     end
+
+    BetaCitationContentBlockLocation = Beta::BetaCitationContentBlockLocation
   end
 end

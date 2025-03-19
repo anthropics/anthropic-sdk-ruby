@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaToolUseBlock = T.type_alias { Beta::BetaToolUseBlock }
-
     module Beta
       class BetaToolUseBlock < Anthropic::BaseModel
         sig { returns(String) }
@@ -47,5 +45,7 @@ module Anthropic
         end
       end
     end
+
+    BetaToolUseBlock = Beta::BetaToolUseBlock
   end
 end

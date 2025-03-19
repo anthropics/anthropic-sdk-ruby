@@ -9,12 +9,7 @@ module Anthropic
       class BetaThinkingConfigDisabled < Anthropic::BaseModel
         attr_accessor type: :disabled
 
-        def initialize:
-          (type: :disabled) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_thinking_config_disabled
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (?type: :disabled) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_thinking_config_disabled
       end

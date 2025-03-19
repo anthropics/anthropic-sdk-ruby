@@ -120,38 +120,40 @@ module Anthropic
       class Content < Anthropic::Union
         abstract!
 
-        Variants = type_template(:out) do
-          {
-            fixed: T.any(
-              String,
-              T::Array[
-              T.any(
-                Anthropic::Models::TextBlockParam,
-                Anthropic::Models::ImageBlockParam,
-                Anthropic::Models::ToolUseBlockParam,
-                Anthropic::Models::ToolResultBlockParam,
-                Anthropic::Models::DocumentBlockParam,
-                Anthropic::Models::ThinkingBlockParam,
-                Anthropic::Models::RedactedThinkingBlockParam
+        Variants =
+          type_template(:out) do
+            {
+              fixed: T.any(
+                String,
+                T::Array[
+                T.any(
+                  Anthropic::Models::TextBlockParam,
+                  Anthropic::Models::ImageBlockParam,
+                  Anthropic::Models::ToolUseBlockParam,
+                  Anthropic::Models::ToolResultBlockParam,
+                  Anthropic::Models::DocumentBlockParam,
+                  Anthropic::Models::ThinkingBlockParam,
+                  Anthropic::Models::RedactedThinkingBlockParam
+                )
+                ]
               )
-              ]
-            )
-          }
-        end
+            }
+          end
 
-        ContentBlockParamArray = T.type_alias do
-          T::Array[
-          T.any(
-            Anthropic::Models::TextBlockParam,
-            Anthropic::Models::ImageBlockParam,
-            Anthropic::Models::ToolUseBlockParam,
-            Anthropic::Models::ToolResultBlockParam,
-            Anthropic::Models::DocumentBlockParam,
-            Anthropic::Models::ThinkingBlockParam,
-            Anthropic::Models::RedactedThinkingBlockParam
-          )
-          ]
-        end
+        ContentBlockParamArray =
+          T.type_alias do
+            T::Array[
+            T.any(
+              Anthropic::Models::TextBlockParam,
+              Anthropic::Models::ImageBlockParam,
+              Anthropic::Models::ToolUseBlockParam,
+              Anthropic::Models::ToolResultBlockParam,
+              Anthropic::Models::DocumentBlockParam,
+              Anthropic::Models::ThinkingBlockParam,
+              Anthropic::Models::RedactedThinkingBlockParam
+            )
+            ]
+          end
       end
 
       class Role < Anthropic::Enum

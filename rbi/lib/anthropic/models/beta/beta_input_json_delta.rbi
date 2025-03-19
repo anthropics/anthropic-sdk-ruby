@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaInputJSONDelta = T.type_alias { Beta::BetaInputJSONDelta }
-
     module Beta
       class BetaInputJSONDelta < Anthropic::BaseModel
         sig { returns(String) }
@@ -31,5 +29,7 @@ module Anthropic
         end
       end
     end
+
+    BetaInputJSONDelta = Beta::BetaInputJSONDelta
   end
 end

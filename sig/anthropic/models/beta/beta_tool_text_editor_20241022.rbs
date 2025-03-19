@@ -18,16 +18,11 @@ module Anthropic
 
         attr_accessor cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?
 
-        def initialize:
-          (
-            cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?,
-            name: :str_replace_editor,
-            type: :text_editor_20241022
-          ) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_tool_text_editor20241022
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          ?cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?,
+          ?name: :str_replace_editor,
+          ?type: :text_editor_20241022
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_tool_text_editor20241022
       end

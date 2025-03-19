@@ -55,13 +55,15 @@ module Anthropic
       class Content < Anthropic::Union
         abstract!
 
-        Variants = type_template(:out) do
-          {
-            fixed: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)])
-          }
-        end
+        Variants =
+          type_template(:out) do
+            {
+              fixed: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)])
+            }
+          end
 
-        ContentBlockSourceContentArray = T.type_alias { T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)] }
+        ContentBlockSourceContentArray =
+          T.type_alias { T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)] }
       end
     end
   end

@@ -7,11 +7,7 @@ module Anthropic
 
       attr_accessor type: :billing_error
 
-      def initialize:
-        (message: String, type: :billing_error) -> void
-        | (
-          ?Anthropic::Models::billing_error | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (message: String, ?type: :billing_error) -> void
 
       def to_hash: -> Anthropic::Models::billing_error
     end

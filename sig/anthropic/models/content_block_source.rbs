@@ -11,14 +11,10 @@ module Anthropic
 
       attr_accessor type: :content
 
-      def initialize:
-        (
-          content: Anthropic::Models::ContentBlockSource::content,
-          type: :content
-        ) -> void
-        | (
-          ?Anthropic::Models::content_block_source | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (
+        content: Anthropic::Models::ContentBlockSource::content,
+        ?type: :content
+      ) -> void
 
       def to_hash: -> Anthropic::Models::content_block_source
 

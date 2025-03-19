@@ -15,15 +15,10 @@ module Anthropic
 
         attr_accessor role: Anthropic::Models::Beta::BetaMessageParam::role
 
-        def initialize:
-          (
-            content: Anthropic::Models::Beta::BetaMessageParam::content,
-            role: Anthropic::Models::Beta::BetaMessageParam::role
-          ) -> void
-          | (
-            ?Anthropic::Models::Beta::beta_message_param
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          content: Anthropic::Models::Beta::BetaMessageParam::content,
+          role: Anthropic::Models::Beta::BetaMessageParam::role
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Beta::beta_message_param
 

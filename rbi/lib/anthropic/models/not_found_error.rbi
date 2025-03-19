@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class NotFoundError_ < Anthropic::BaseModel
+    class NotFoundError < Anthropic::BaseModel
       sig { returns(String) }
       def message
       end

@@ -10,11 +10,11 @@ module Anthropic
 
       attr_accessor type: :text
 
-      def initialize:
-        (data: String, media_type: :"text/plain", type: :text) -> void
-        | (
-          ?Anthropic::Models::plain_text_source | Anthropic::BaseModel data
-        ) -> void
+      def initialize: (
+        data: String,
+        ?media_type: :"text/plain",
+        ?type: :text
+      ) -> void
 
       def to_hash: -> Anthropic::Models::plain_text_source
     end

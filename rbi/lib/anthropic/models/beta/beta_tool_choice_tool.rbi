@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaToolChoiceTool = T.type_alias { Beta::BetaToolChoiceTool }
-
     module Beta
       class BetaToolChoiceTool < Anthropic::BaseModel
         # The name of the tool to use.
@@ -47,5 +45,7 @@ module Anthropic
         end
       end
     end
+
+    BetaToolChoiceTool = Beta::BetaToolChoiceTool
   end
 end

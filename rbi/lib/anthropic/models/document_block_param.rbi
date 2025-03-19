@@ -123,16 +123,17 @@ module Anthropic
       class Source < Anthropic::Union
         abstract!
 
-        Variants = type_template(:out) do
-          {
-            fixed: T.any(
-              Anthropic::Models::Base64PDFSource,
-              Anthropic::Models::PlainTextSource,
-              Anthropic::Models::ContentBlockSource,
-              Anthropic::Models::URLPDFSource
-            )
-          }
-        end
+        Variants =
+          type_template(:out) do
+            {
+              fixed: T.any(
+                Anthropic::Models::Base64PDFSource,
+                Anthropic::Models::PlainTextSource,
+                Anthropic::Models::ContentBlockSource,
+                Anthropic::Models::URLPDFSource
+              )
+            }
+          end
       end
     end
   end

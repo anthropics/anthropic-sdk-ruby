@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaMessageParam = T.type_alias { Beta::BetaMessageParam }
-
     module Beta
       class BetaMessageParam < Anthropic::BaseModel
         sig do
@@ -123,38 +121,40 @@ module Anthropic
         class Content < Anthropic::Union
           abstract!
 
-          Variants = type_template(:out) do
-            {
-              fixed: T.any(
-                String,
-                T::Array[
-                T.any(
-                  Anthropic::Models::Beta::BetaTextBlockParam,
-                  Anthropic::Models::Beta::BetaImageBlockParam,
-                  Anthropic::Models::Beta::BetaToolUseBlockParam,
-                  Anthropic::Models::Beta::BetaToolResultBlockParam,
-                  Anthropic::Models::Beta::BetaBase64PDFBlock,
-                  Anthropic::Models::Beta::BetaThinkingBlockParam,
-                  Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
+          Variants =
+            type_template(:out) do
+              {
+                fixed: T.any(
+                  String,
+                  T::Array[
+                  T.any(
+                    Anthropic::Models::Beta::BetaTextBlockParam,
+                    Anthropic::Models::Beta::BetaImageBlockParam,
+                    Anthropic::Models::Beta::BetaToolUseBlockParam,
+                    Anthropic::Models::Beta::BetaToolResultBlockParam,
+                    Anthropic::Models::Beta::BetaBase64PDFBlock,
+                    Anthropic::Models::Beta::BetaThinkingBlockParam,
+                    Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
+                  )
+                  ]
                 )
-                ]
-              )
-            }
-          end
+              }
+            end
 
-          BetaContentBlockParamArray = T.type_alias do
-            T::Array[
-            T.any(
-              Anthropic::Models::Beta::BetaTextBlockParam,
-              Anthropic::Models::Beta::BetaImageBlockParam,
-              Anthropic::Models::Beta::BetaToolUseBlockParam,
-              Anthropic::Models::Beta::BetaToolResultBlockParam,
-              Anthropic::Models::Beta::BetaBase64PDFBlock,
-              Anthropic::Models::Beta::BetaThinkingBlockParam,
-              Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
-            )
-            ]
-          end
+          BetaContentBlockParamArray =
+            T.type_alias do
+              T::Array[
+              T.any(
+                Anthropic::Models::Beta::BetaTextBlockParam,
+                Anthropic::Models::Beta::BetaImageBlockParam,
+                Anthropic::Models::Beta::BetaToolUseBlockParam,
+                Anthropic::Models::Beta::BetaToolResultBlockParam,
+                Anthropic::Models::Beta::BetaBase64PDFBlock,
+                Anthropic::Models::Beta::BetaThinkingBlockParam,
+                Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
+              )
+              ]
+            end
         end
 
         class Role < Anthropic::Enum
@@ -167,5 +167,7 @@ module Anthropic
         end
       end
     end
+
+    BetaMessageParam = Beta::BetaMessageParam
   end
 end

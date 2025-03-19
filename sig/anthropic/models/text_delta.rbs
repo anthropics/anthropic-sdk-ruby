@@ -7,9 +7,7 @@ module Anthropic
 
       attr_accessor type: :text_delta
 
-      def initialize:
-        (text: String, type: :text_delta) -> void
-        | (?Anthropic::Models::text_delta | Anthropic::BaseModel data) -> void
+      def initialize: (text: String, ?type: :text_delta) -> void
 
       def to_hash: -> Anthropic::Models::text_delta
     end

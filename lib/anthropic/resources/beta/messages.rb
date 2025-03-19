@@ -251,7 +251,10 @@ module Anthropic
         # @return [Anthropic::Models::Beta::BetaMessage]
         def create(params)
           parsed, options = Anthropic::Models::Beta::MessageCreateParams.dump_request(params)
-          parsed.delete(:stream)
+          if parsed[:stream]
+            message = "Please use `#create_streaming` for the streaming use case."
+            raise ArgumentError.new(message)
+          end
           header_params = [:"anthropic-beta"]
           @client.request(
             method: :post,
@@ -507,6 +510,10 @@ module Anthropic
         # @return [Anthropic::Stream<Anthropic::Models::Beta::BetaRawMessageStartEvent, Anthropic::Models::Beta::BetaRawMessageDeltaEvent, Anthropic::Models::Beta::BetaRawMessageStopEvent, Anthropic::Models::Beta::BetaRawContentBlockStartEvent, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Models::Beta::BetaRawContentBlockStopEvent>]
         def create_streaming(params)
           parsed, options = Anthropic::Models::Beta::MessageCreateParams.dump_request(params)
+          unless parsed.fetch(:stream, true)
+            message = "Please use `#create` for the non-streaming use case."
+            raise ArgumentError.new(message)
+          end
           parsed.store(:stream, true)
           header_params = [:"anthropic-beta"]
           @client.request(

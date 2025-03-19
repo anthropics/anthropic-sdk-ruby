@@ -17,14 +17,12 @@ module Anthropic
 
       attr_accessor output_tokens: Integer
 
-      def initialize:
-        (
-          cache_creation_input_tokens: Integer?,
-          cache_read_input_tokens: Integer?,
-          input_tokens: Integer,
-          output_tokens: Integer
-        ) -> void
-        | (?Anthropic::Models::usage | Anthropic::BaseModel data) -> void
+      def initialize: (
+        cache_creation_input_tokens: Integer?,
+        cache_read_input_tokens: Integer?,
+        input_tokens: Integer,
+        output_tokens: Integer
+      ) -> void
 
       def to_hash: -> Anthropic::Models::usage
     end

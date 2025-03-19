@@ -4,18 +4,19 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Anthropic::Test::ResourceTest
   def test_create_required_params
-    response = @anthropic.beta.messages.batches.create(
-      requests: [
-        {
-          custom_id: "my-custom-id-1",
-          params: {
-            max_tokens: 1024,
-            messages: [{content: "Hello, world", role: :user}],
-            model: :"claude-3-7-sonnet-latest"
+    response =
+      @anthropic.beta.messages.batches.create(
+        requests: [
+          {
+            custom_id: "my-custom-id-1",
+            params: {
+              max_tokens: 1024,
+              messages: [{content: "Hello, world", role: :user}],
+              model: :"claude-3-7-sonnet-latest"
+            }
           }
-        }
-      ]
-    )
+        ]
+      )
 
     assert_pattern do
       response => Anthropic::Models::Beta::Messages::BetaMessageBatch

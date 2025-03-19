@@ -24,7 +24,8 @@ module Anthropic
 
         # @abstract
         class Content < Anthropic::Union
-          BetaContentBlockParamArray = Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlockParam }]
+          BetaContentBlockParamArray =
+            Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlockParam }]
 
           variant String
 

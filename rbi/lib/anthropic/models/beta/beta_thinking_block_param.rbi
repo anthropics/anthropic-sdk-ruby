@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    BetaThinkingBlockParam = T.type_alias { Beta::BetaThinkingBlockParam }
-
     module Beta
       class BetaThinkingBlockParam < Anthropic::BaseModel
         sig { returns(String) }
@@ -39,5 +37,7 @@ module Anthropic
         end
       end
     end
+
+    BetaThinkingBlockParam = Beta::BetaThinkingBlockParam
   end
 end

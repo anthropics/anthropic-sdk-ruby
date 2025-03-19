@@ -51,21 +51,16 @@ module Anthropic
           ::Array[Anthropic::Models::anthropic_beta]
         ) -> ::Array[Anthropic::Models::anthropic_beta]
 
-        def initialize:
-          (
-            messages: ::Array[Anthropic::Models::Beta::BetaMessageParam],
-            model: Anthropic::Models::model,
-            system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
-            thinking: Anthropic::Models::Beta::beta_thinking_config_param,
-            tool_choice: Anthropic::Models::Beta::beta_tool_choice,
-            tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
-            betas: ::Array[Anthropic::Models::anthropic_beta],
-            request_options: Anthropic::request_opts
-          ) -> void
-          | (
-            ?Anthropic::Models::Beta::message_count_tokens_params
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          messages: ::Array[Anthropic::Models::Beta::BetaMessageParam],
+          model: Anthropic::Models::model,
+          ?system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
+          ?thinking: Anthropic::Models::Beta::beta_thinking_config_param,
+          ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
+          ?tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Beta::message_count_tokens_params
 

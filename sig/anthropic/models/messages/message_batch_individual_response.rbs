@@ -15,15 +15,10 @@ module Anthropic
 
         attr_accessor result: Anthropic::Models::Messages::message_batch_result
 
-        def initialize:
-          (
-            custom_id: String,
-            result: Anthropic::Models::Messages::message_batch_result
-          ) -> void
-          | (
-            ?Anthropic::Models::Messages::message_batch_individual_response
-            | Anthropic::BaseModel data
-          ) -> void
+        def initialize: (
+          custom_id: String,
+          result: Anthropic::Models::Messages::message_batch_result
+        ) -> void
 
         def to_hash: -> Anthropic::Models::Messages::message_batch_individual_response
       end

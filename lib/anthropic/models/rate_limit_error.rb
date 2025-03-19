@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class RateLimitError_ < Anthropic::BaseModel
+    class RateLimitError < Anthropic::BaseModel
       # @!attribute message
       #
       #   @return [String]

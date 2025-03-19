@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    MessageBatchResult = T.type_alias { Messages::MessageBatchResult }
-
     module Messages
       # Processing result for this request.
       #
@@ -13,17 +11,20 @@ module Anthropic
       class MessageBatchResult < Anthropic::Union
         abstract!
 
-        Variants = type_template(:out) do
-          {
-            fixed: T.any(
-              Anthropic::Models::Messages::MessageBatchSucceededResult,
-              Anthropic::Models::Messages::MessageBatchErroredResult,
-              Anthropic::Models::Messages::MessageBatchCanceledResult,
-              Anthropic::Models::Messages::MessageBatchExpiredResult
-            )
-          }
-        end
+        Variants =
+          type_template(:out) do
+            {
+              fixed: T.any(
+                Anthropic::Models::Messages::MessageBatchSucceededResult,
+                Anthropic::Models::Messages::MessageBatchErroredResult,
+                Anthropic::Models::Messages::MessageBatchCanceledResult,
+                Anthropic::Models::Messages::MessageBatchExpiredResult
+              )
+            }
+          end
       end
     end
+
+    MessageBatchResult = Messages::MessageBatchResult
   end
 end

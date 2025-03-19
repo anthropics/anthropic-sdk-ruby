@@ -27,13 +27,13 @@ module Anthropic
     private def bearer_auth: -> ::Hash[String, String]
 
     def initialize: (
-      base_url: String?,
-      api_key: String?,
-      auth_token: String?,
-      max_retries: Integer,
-      timeout: Float,
-      initial_retry_delay: Float,
-      max_retry_delay: Float
+      ?base_url: String?,
+      ?api_key: String?,
+      ?auth_token: String?,
+      ?max_retries: Integer,
+      ?timeout: Float,
+      ?initial_retry_delay: Float,
+      ?max_retry_delay: Float
     ) -> void
   end
 end

@@ -12,16 +12,17 @@ module Anthropic
         class BetaMessageBatchResult < Anthropic::Union
           abstract!
 
-          Variants = type_template(:out) do
-            {
-              fixed: T.any(
-                Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult,
-                Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult,
-                Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
-                Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
-              )
-            }
-          end
+          Variants =
+            type_template(:out) do
+              {
+                fixed: T.any(
+                  Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult,
+                  Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult,
+                  Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
+                  Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
+                )
+              }
+            end
         end
       end
     end
