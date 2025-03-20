@@ -2,24 +2,20 @@
 
 module Anthropic
   # @example
-  # ```ruby
-  # stream.each do |batch|
-  #   puts(batch)
-  # end
-  # ```
+  #   stream.each do |batch|
+  #     puts(batch)
+  #   end
   #
   # @example
-  # ```ruby
-  # batches =
-  #   stream
-  #   .lazy
-  #   .select { _1.object_id.even? }
-  #   .map(&:itself)
-  #   .take(2)
-  #   .to_a
+  #   batches =
+  #     stream
+  #     .lazy
+  #     .select { _1.object_id.even? }
+  #     .map(&:itself)
+  #     .take(2)
+  #     .to_a
   #
-  # batches => Array
-  # ```
+  #   batches => Array
   class JsonLStream
     include Anthropic::BaseStream
 
