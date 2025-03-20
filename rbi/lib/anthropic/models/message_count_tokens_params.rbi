@@ -361,7 +361,7 @@ module Anthropic
 
         Variants = type_template(:out) { {fixed: T.any(String, T::Array[Anthropic::Models::TextBlockParam])} }
 
-        TextBlockParamArray = T.type_alias { T::Array[Anthropic::Models::TextBlockParam] }
+        TextBlockParamArray = T.let(Anthropic::ArrayOf[Anthropic::Models::TextBlockParam], Anthropic::Converter)
       end
     end
   end

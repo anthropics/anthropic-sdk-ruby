@@ -141,19 +141,7 @@ module Anthropic
           end
 
         ContentBlockParamArray =
-          T.type_alias do
-            T::Array[
-            T.any(
-              Anthropic::Models::TextBlockParam,
-              Anthropic::Models::ImageBlockParam,
-              Anthropic::Models::ToolUseBlockParam,
-              Anthropic::Models::ToolResultBlockParam,
-              Anthropic::Models::DocumentBlockParam,
-              Anthropic::Models::ThinkingBlockParam,
-              Anthropic::Models::RedactedThinkingBlockParam
-            )
-            ]
-          end
+          T.let(Anthropic::ArrayOf[union: Anthropic::Models::ContentBlockParam], Anthropic::Converter)
       end
 
       class Role < Anthropic::Enum
