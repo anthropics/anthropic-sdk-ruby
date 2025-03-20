@@ -8,8 +8,8 @@ module Anthropic
       end
 
       sig do
-        params(_: Anthropic::Models::RawMessageDeltaEvent::Delta)
-          .returns(Anthropic::Models::RawMessageDeltaEvent::Delta)
+        params(_: T.any(Anthropic::Models::RawMessageDeltaEvent::Delta, Anthropic::Util::AnyHash))
+          .returns(T.any(Anthropic::Models::RawMessageDeltaEvent::Delta, Anthropic::Util::AnyHash))
       end
       def delta=(_)
       end
@@ -41,7 +41,10 @@ module Anthropic
       def usage
       end
 
-      sig { params(_: Anthropic::Models::MessageDeltaUsage).returns(Anthropic::Models::MessageDeltaUsage) }
+      sig do
+        params(_: T.any(Anthropic::Models::MessageDeltaUsage, Anthropic::Util::AnyHash))
+          .returns(T.any(Anthropic::Models::MessageDeltaUsage, Anthropic::Util::AnyHash))
+      end
       def usage=(_)
       end
 

@@ -50,8 +50,8 @@ module Anthropic
       end
 
       sig do
-        params(_: T.nilable(Anthropic::Models::CacheControlEphemeral))
-          .returns(T.nilable(Anthropic::Models::CacheControlEphemeral))
+        params(_: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)))
+          .returns(T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)))
       end
       def cache_control=(_)
       end
@@ -60,7 +60,10 @@ module Anthropic
       def citations
       end
 
-      sig { params(_: Anthropic::Models::CitationsConfigParam).returns(Anthropic::Models::CitationsConfigParam) }
+      sig do
+        params(_: T.any(Anthropic::Models::CitationsConfigParam, Anthropic::Util::AnyHash))
+          .returns(T.any(Anthropic::Models::CitationsConfigParam, Anthropic::Util::AnyHash))
+      end
       def citations=(_)
       end
 

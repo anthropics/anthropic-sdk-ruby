@@ -13,8 +13,8 @@ module Anthropic
         end
 
         sig do
-          params(_: Anthropic::Models::Beta::BetaTool::InputSchema)
-            .returns(Anthropic::Models::Beta::BetaTool::InputSchema)
+          params(_: T.any(Anthropic::Models::Beta::BetaTool::InputSchema, Anthropic::Util::AnyHash))
+            .returns(T.any(Anthropic::Models::Beta::BetaTool::InputSchema, Anthropic::Util::AnyHash))
         end
         def input_schema=(_)
         end
@@ -35,8 +35,8 @@ module Anthropic
         end
 
         sig do
-          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
-            .returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+          params(_: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)))
+            .returns(T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)))
         end
         def cache_control=(_)
         end

@@ -79,8 +79,12 @@ module Anthropic
             end
 
             sig do
-              params(_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params)
-                .returns(Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params)
+              params(
+                _: T.any(Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params, Anthropic::Util::AnyHash)
+              )
+                .returns(
+                  T.any(Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params, Anthropic::Util::AnyHash)
+                )
             end
             def params=(_)
             end
@@ -233,7 +237,10 @@ module Anthropic
               def metadata
               end
 
-              sig { params(_: Anthropic::Models::Beta::BetaMetadata).returns(Anthropic::Models::Beta::BetaMetadata) }
+              sig do
+                params(_: T.any(Anthropic::Models::Beta::BetaMetadata, Anthropic::Util::AnyHash))
+                  .returns(T.any(Anthropic::Models::Beta::BetaMetadata, Anthropic::Util::AnyHash))
+              end
               def metadata=(_)
               end
 
