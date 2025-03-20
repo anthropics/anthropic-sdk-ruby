@@ -8,7 +8,7 @@ module Anthropic
     module MessageCountTokensTool
       extend Anthropic::Union
 
-      def self.variants: -> [Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124]
+      def self?.variants: -> [Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124]
     end
   end
 end

@@ -21,6 +21,17 @@ module Anthropic
             )
           }
         end
+
+      class << self
+        sig do
+          override
+            .returns(
+              [Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError, Anthropic::Models::RateLimitError, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError]
+            )
+        end
+        def variants
+        end
+      end
     end
   end
 end

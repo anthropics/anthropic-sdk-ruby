@@ -127,6 +127,26 @@ module Anthropic
 
             Variants =
               type_template(:out) { {fixed: T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)} }
+
+            class << self
+              sig do
+                override
+                  .returns([Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam])
+              end
+              def variants
+              end
+            end
+          end
+
+          class << self
+            sig do
+              override
+                .returns(
+                  [String, T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]]
+                )
+            end
+            def variants
+            end
           end
         end
       end

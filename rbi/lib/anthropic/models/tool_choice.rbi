@@ -18,6 +18,17 @@ module Anthropic
             )
           }
         end
+
+      class << self
+        sig do
+          override
+            .returns(
+              [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
+            )
+        end
+        def variants
+        end
+      end
     end
   end
 end

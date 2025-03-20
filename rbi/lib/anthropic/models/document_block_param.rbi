@@ -137,6 +137,17 @@ module Anthropic
               )
             }
           end
+
+        class << self
+          sig do
+            override
+              .returns(
+                [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
+              )
+          end
+          def variants
+          end
+        end
       end
     end
   end

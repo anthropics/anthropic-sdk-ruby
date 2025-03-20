@@ -58,10 +58,18 @@ module Anthropic
           OrSymbol =
             T.type_alias { T.any(Symbol, Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol) }
 
-          IMAGE_JPEG = T.let(:"image/jpeg", Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol)
-          IMAGE_PNG = T.let(:"image/png", Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol)
-          IMAGE_GIF = T.let(:"image/gif", Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol)
-          IMAGE_WEBP = T.let(:"image/webp", Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol)
+          IMAGE_JPEG =
+            T.let(:"image/jpeg", Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol)
+          IMAGE_PNG = T.let(:"image/png", Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol)
+          IMAGE_GIF = T.let(:"image/gif", Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol)
+          IMAGE_WEBP =
+            T.let(:"image/webp", Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol)
+
+          class << self
+            sig { override.returns(T::Array[Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol]) }
+            def values
+            end
+          end
         end
       end
     end

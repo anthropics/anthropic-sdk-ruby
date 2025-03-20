@@ -47,7 +47,7 @@ module Anthropic
       module Source
         extend Anthropic::Union
 
-        def self.variants: -> [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
+        def self?.variants: -> [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
       end
     end
   end

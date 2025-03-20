@@ -130,7 +130,13 @@ module Anthropic
           TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Beta::BetaTool::Type) }
           OrSymbol = T.type_alias { T.any(Symbol, Anthropic::Models::Beta::BetaTool::Type::TaggedSymbol) }
 
-          CUSTOM = T.let(:custom, Anthropic::Models::Beta::BetaTool::Type::OrSymbol)
+          CUSTOM = T.let(:custom, Anthropic::Models::Beta::BetaTool::Type::TaggedSymbol)
+
+          class << self
+            sig { override.returns(T::Array[Anthropic::Models::Beta::BetaTool::Type::TaggedSymbol]) }
+            def values
+            end
+          end
         end
       end
     end

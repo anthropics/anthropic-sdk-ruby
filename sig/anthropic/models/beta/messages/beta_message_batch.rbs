@@ -61,7 +61,7 @@ module Anthropic
             CANCELING: :canceling
             ENDED: :ended
 
-            def self.values: -> ::Array[Anthropic::Models::Beta::Messages::BetaMessageBatch::processing_status]
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Messages::BetaMessageBatch::processing_status]
           end
         end
       end
