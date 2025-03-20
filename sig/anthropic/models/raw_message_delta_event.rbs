@@ -50,7 +50,7 @@ module Anthropic
           STOP_SEQUENCE: :stop_sequence
           TOOL_USE: :tool_use
 
-          def self.values: -> ::Array[Anthropic::Models::RawMessageDeltaEvent::Delta::stop_reason]
+          def self?.values: -> ::Array[Anthropic::Models::RawMessageDeltaEvent::Delta::stop_reason]
         end
       end
     end

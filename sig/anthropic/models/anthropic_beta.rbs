@@ -23,7 +23,7 @@ module Anthropic
       TOKEN_EFFICIENT_TOOLS_2025_02_19: :"token-efficient-tools-2025-02-19"
       OUTPUT_128K_2025_02_19: :"output-128k-2025-02-19"
 
-      def self.variants: -> [String, (:"message-batches-2024-09-24"
+      def self?.variants: -> [String, (:"message-batches-2024-09-24"
       | :"prompt-caching-2024-07-31"
       | :"computer-use-2024-10-22"
       | :"computer-use-2025-01-24"

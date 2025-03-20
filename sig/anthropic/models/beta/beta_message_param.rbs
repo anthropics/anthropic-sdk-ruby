@@ -32,7 +32,7 @@ module Anthropic
 
           BetaContentBlockParamArray: beta_content_block_param_array
 
-          def self.variants: -> [String, ::Array[Anthropic::Models::Beta::beta_content_block_param]]
+          def self?.variants: -> [String, ::Array[Anthropic::Models::Beta::beta_content_block_param]]
         end
 
         type role = :user | :assistant
@@ -43,7 +43,7 @@ module Anthropic
           USER: :user
           ASSISTANT: :assistant
 
-          def self.values: -> ::Array[Anthropic::Models::Beta::BetaMessageParam::role]
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaMessageParam::role]
         end
       end
     end

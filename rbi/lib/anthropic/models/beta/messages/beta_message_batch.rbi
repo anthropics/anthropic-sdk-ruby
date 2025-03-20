@@ -187,6 +187,15 @@ module Anthropic
               T.let(:canceling, Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol)
             ENDED =
               T.let(:ended, Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol)
+
+            class << self
+              sig do
+                override
+                  .returns(T::Array[Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol])
+              end
+              def values
+              end
+            end
           end
         end
       end

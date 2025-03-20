@@ -31,7 +31,7 @@ module Anthropic
       module ContentBlock
         extend Anthropic::Union
 
-        def self.variants: -> [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock]
+        def self?.variants: -> [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock]
       end
     end
   end

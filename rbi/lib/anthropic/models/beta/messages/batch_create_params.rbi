@@ -645,6 +645,12 @@ module Anthropic
 
                 BetaTextBlockParamArray =
                   T.let(Anthropic::ArrayOf[Anthropic::Models::Beta::BetaTextBlockParam], Anthropic::Converter)
+
+                class << self
+                  sig { override.returns([String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]]) }
+                  def variants
+                  end
+                end
               end
             end
           end

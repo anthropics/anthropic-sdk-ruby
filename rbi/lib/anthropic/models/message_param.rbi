@@ -145,6 +145,30 @@ module Anthropic
 
         ContentBlockParamArray =
           T.let(Anthropic::ArrayOf[union: Anthropic::Models::ContentBlockParam], Anthropic::Converter)
+
+        class << self
+          sig do
+            override
+              .returns(
+                [
+                  String,
+                  T::Array[
+                                  T.any(
+                                    Anthropic::Models::TextBlockParam,
+                                    Anthropic::Models::ImageBlockParam,
+                                    Anthropic::Models::ToolUseBlockParam,
+                                    Anthropic::Models::ToolResultBlockParam,
+                                    Anthropic::Models::DocumentBlockParam,
+                                    Anthropic::Models::ThinkingBlockParam,
+                                    Anthropic::Models::RedactedThinkingBlockParam
+                                  )
+                                  ]
+                ]
+              )
+          end
+          def variants
+          end
+        end
       end
 
       module Role
@@ -153,8 +177,14 @@ module Anthropic
         TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::MessageParam::Role) }
         OrSymbol = T.type_alias { T.any(Symbol, Anthropic::Models::MessageParam::Role::TaggedSymbol) }
 
-        USER = T.let(:user, Anthropic::Models::MessageParam::Role::OrSymbol)
-        ASSISTANT = T.let(:assistant, Anthropic::Models::MessageParam::Role::OrSymbol)
+        USER = T.let(:user, Anthropic::Models::MessageParam::Role::TaggedSymbol)
+        ASSISTANT = T.let(:assistant, Anthropic::Models::MessageParam::Role::TaggedSymbol)
+
+        class << self
+          sig { override.returns(T::Array[Anthropic::Models::MessageParam::Role::TaggedSymbol]) }
+          def values
+          end
+        end
       end
     end
   end
