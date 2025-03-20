@@ -69,11 +69,14 @@ module Anthropic
         end
 
         # Processing status of the Message Batch.
-        sig { returns(Symbol) }
+        sig { returns(Anthropic::Models::Messages::MessageBatch::ProcessingStatus::TaggedSymbol) }
         def processing_status
         end
 
-        sig { params(_: Symbol).returns(Symbol) }
+        sig do
+          params(_: Anthropic::Models::Messages::MessageBatch::ProcessingStatus::TaggedSymbol)
+            .returns(Anthropic::Models::Messages::MessageBatch::ProcessingStatus::TaggedSymbol)
+        end
         def processing_status=(_)
         end
 
@@ -125,7 +128,7 @@ module Anthropic
             created_at: Time,
             ended_at: T.nilable(Time),
             expires_at: Time,
-            processing_status: Symbol,
+            processing_status: Anthropic::Models::Messages::MessageBatch::ProcessingStatus::TaggedSymbol,
             request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts,
             results_url: T.nilable(String),
             type: Symbol
@@ -156,7 +159,7 @@ module Anthropic
                 created_at: Time,
                 ended_at: T.nilable(Time),
                 expires_at: Time,
-                processing_status: Symbol,
+                processing_status: Anthropic::Models::Messages::MessageBatch::ProcessingStatus::TaggedSymbol,
                 request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts,
                 results_url: T.nilable(String),
                 type: Symbol
@@ -167,14 +170,18 @@ module Anthropic
         end
 
         # Processing status of the Message Batch.
-        class ProcessingStatus < Anthropic::Enum
-          abstract!
+        module ProcessingStatus
+          extend Anthropic::Enum
 
-          Value = type_template(:out) { {fixed: Symbol} }
+          TaggedSymbol =
+            T.type_alias { T.all(Symbol, Anthropic::Models::Messages::MessageBatch::ProcessingStatus) }
+          OrSymbol =
+            T.type_alias { T.any(Symbol, Anthropic::Models::Messages::MessageBatch::ProcessingStatus::TaggedSymbol) }
 
-          IN_PROGRESS = :in_progress
-          CANCELING = :canceling
-          ENDED = :ended
+          IN_PROGRESS =
+            T.let(:in_progress, Anthropic::Models::Messages::MessageBatch::ProcessingStatus::TaggedSymbol)
+          CANCELING = T.let(:canceling, Anthropic::Models::Messages::MessageBatch::ProcessingStatus::TaggedSymbol)
+          ENDED = T.let(:ended, Anthropic::Models::Messages::MessageBatch::ProcessingStatus::TaggedSymbol)
         end
       end
     end

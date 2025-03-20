@@ -2,8 +2,8 @@
 
 module Anthropic
   module Models
-    class BetaError < Anthropic::Union
-      abstract!
+    module BetaError
+      extend Anthropic::Union
 
       Variants =
         type_template(:out) do

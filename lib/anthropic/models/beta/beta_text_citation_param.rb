@@ -3,8 +3,9 @@
 module Anthropic
   module Models
     module Beta
-      # @abstract
-      class BetaTextCitationParam < Anthropic::Union
+      module BetaTextCitationParam
+        extend Anthropic::Union
+
         discriminator :type
 
         variant :char_location, -> { Anthropic::Models::Beta::BetaCitationCharLocationParam }

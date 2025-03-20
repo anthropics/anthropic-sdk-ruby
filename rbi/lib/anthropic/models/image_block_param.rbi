@@ -57,8 +57,8 @@ module Anthropic
       def to_hash
       end
 
-      class Source < Anthropic::Union
-        abstract!
+      module Source
+        extend Anthropic::Union
 
         Variants =
           type_template(:out) { {fixed: T.any(Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource)} }

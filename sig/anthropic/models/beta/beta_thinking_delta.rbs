@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaThinkingDelta = Beta::BetaThinkingDelta
 
     module Beta

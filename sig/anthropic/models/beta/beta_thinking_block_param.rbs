@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaThinkingBlockParam = Beta::BetaThinkingBlockParam
 
     module Beta

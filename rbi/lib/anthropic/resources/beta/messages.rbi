@@ -19,7 +19,7 @@ module Anthropic
           params(
             max_tokens: Integer,
             messages: T::Array[Anthropic::Models::Beta::BetaMessageParam],
-            model: T.any(Symbol, String),
+            model: T.any(Anthropic::Models::Model::OrSymbol, String),
             metadata: Anthropic::Models::Beta::BetaMetadata,
             stop_sequences: T::Array[String],
             system_: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]),
@@ -47,7 +47,7 @@ module Anthropic
             ],
             top_k: Integer,
             top_p: Float,
-            betas: T::Array[T.any(String, Symbol)],
+            betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
             stream: T.noreturn,
             request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
           )
@@ -301,7 +301,7 @@ module Anthropic
           params(
             max_tokens: Integer,
             messages: T::Array[Anthropic::Models::Beta::BetaMessageParam],
-            model: T.any(Symbol, String),
+            model: T.any(Anthropic::Models::Model::OrSymbol, String),
             metadata: Anthropic::Models::Beta::BetaMetadata,
             stop_sequences: T::Array[String],
             system_: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]),
@@ -329,7 +329,7 @@ module Anthropic
             ],
             top_k: Integer,
             top_p: Float,
-            betas: T::Array[T.any(String, Symbol)],
+            betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
             stream: T.noreturn,
             request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
           )
@@ -593,7 +593,7 @@ module Anthropic
         sig do
           params(
             messages: T::Array[Anthropic::Models::Beta::BetaMessageParam],
-            model: T.any(Symbol, String),
+            model: T.any(Anthropic::Models::Model::OrSymbol, String),
             system_: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]),
             thinking: T.any(
               Anthropic::Models::Beta::BetaThinkingConfigEnabled,
@@ -616,7 +616,7 @@ module Anthropic
               Anthropic::Models::Beta::BetaToolTextEditor20250124
             )
             ],
-            betas: T::Array[T.any(String, Symbol)],
+            betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
             request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
           )
             .returns(Anthropic::Models::Beta::BetaMessageTokensCount)

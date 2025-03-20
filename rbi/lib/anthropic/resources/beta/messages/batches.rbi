@@ -16,7 +16,7 @@ module Anthropic
           sig do
             params(
               requests: T::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request],
-              betas: T::Array[T.any(String, Symbol)],
+              betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
             )
               .returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
@@ -40,7 +40,7 @@ module Anthropic
           sig do
             params(
               message_batch_id: String,
-              betas: T::Array[T.any(String, Symbol)],
+              betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
             )
               .returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
@@ -64,7 +64,7 @@ module Anthropic
               after_id: String,
               before_id: String,
               limit: Integer,
-              betas: T::Array[T.any(String, Symbol)],
+              betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
             )
               .returns(Anthropic::Page[Anthropic::Models::Beta::Messages::BetaMessageBatch])
@@ -96,7 +96,7 @@ module Anthropic
           sig do
             params(
               message_batch_id: String,
-              betas: T::Array[T.any(String, Symbol)],
+              betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
             )
               .returns(Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch)
@@ -125,7 +125,7 @@ module Anthropic
           sig do
             params(
               message_batch_id: String,
-              betas: T::Array[T.any(String, Symbol)],
+              betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
             )
               .returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
@@ -150,7 +150,7 @@ module Anthropic
           sig do
             params(
               message_batch_id: String,
-              betas: T::Array[T.any(String, Symbol)],
+              betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
               request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
             )
               .returns(Anthropic::JsonLStream[Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse])

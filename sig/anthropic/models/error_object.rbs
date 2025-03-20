@@ -11,7 +11,9 @@ module Anthropic
       | Anthropic::Models::APIErrorObject
       | Anthropic::Models::OverloadedError
 
-    class ErrorObject < Anthropic::Union
+    module ErrorObject
+      extend Anthropic::Union
+
       def self.variants: -> [Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError, Anthropic::Models::RateLimitError, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError]
     end
   end

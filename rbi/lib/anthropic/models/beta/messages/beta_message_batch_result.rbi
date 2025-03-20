@@ -9,8 +9,8 @@ module Anthropic
         #   Contains a Message output if processing was successful, an error response if
         #   processing failed, or the reason why processing was not attempted, such as
         #   cancellation or expiration.
-        class BetaMessageBatchResult < Anthropic::Union
-          abstract!
+        module BetaMessageBatchResult
+          extend Anthropic::Union
 
           Variants =
             type_template(:out) do

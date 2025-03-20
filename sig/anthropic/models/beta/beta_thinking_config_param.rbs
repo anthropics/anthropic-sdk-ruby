@@ -1,14 +1,15 @@
 module Anthropic
   module Models
-    
-    class BetaThinkingConfigParam = Beta::BetaThinkingConfigParam
+    module BetaThinkingConfigParam = Beta::BetaThinkingConfigParam
 
     module Beta
       type beta_thinking_config_param =
         Anthropic::Models::Beta::BetaThinkingConfigEnabled
         | Anthropic::Models::Beta::BetaThinkingConfigDisabled
 
-      class BetaThinkingConfigParam < Anthropic::Union
+      module BetaThinkingConfigParam
+        extend Anthropic::Union
+
         def self.variants: -> [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
       end
     end

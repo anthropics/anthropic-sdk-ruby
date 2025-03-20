@@ -29,7 +29,9 @@ module Anthropic
         | Anthropic::Models::ThinkingDelta
         | Anthropic::Models::SignatureDelta
 
-      class Delta < Anthropic::Union
+      module Delta
+        extend Anthropic::Union
+
         def self.variants: -> [Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta, Anthropic::Models::ThinkingDelta, Anthropic::Models::SignatureDelta]
       end
     end

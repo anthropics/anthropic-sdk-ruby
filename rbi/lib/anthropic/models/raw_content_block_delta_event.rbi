@@ -92,8 +92,8 @@ module Anthropic
       def to_hash
       end
 
-      class Delta < Anthropic::Union
-        abstract!
+      module Delta
+        extend Anthropic::Union
 
         Variants =
           type_template(:out) do

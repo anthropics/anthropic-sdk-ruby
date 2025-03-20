@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaBase64ImageSource = Beta::BetaBase64ImageSource
 
     module Beta
@@ -29,7 +28,9 @@ module Anthropic
         type media_type =
           :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
 
-        class MediaType < Anthropic::Enum
+        module MediaType
+          extend Anthropic::Enum
+
           IMAGE_JPEG: :"image/jpeg"
           IMAGE_PNG: :"image/png"
           IMAGE_GIF: :"image/gif"

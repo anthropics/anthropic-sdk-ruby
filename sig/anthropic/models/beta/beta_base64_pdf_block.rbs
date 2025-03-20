@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaBase64PDFBlock = Beta::BetaBase64PDFBlock
 
     module Beta
@@ -48,7 +47,9 @@ module Anthropic
           | Anthropic::Models::Beta::BetaContentBlockSource
           | Anthropic::Models::Beta::BetaURLPDFSource
 
-        class Source < Anthropic::Union
+        module Source
+          extend Anthropic::Union
+
           def self.variants: -> [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource]
         end
       end

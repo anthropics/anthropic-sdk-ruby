@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaInputJSONDelta = Beta::BetaInputJSONDelta
 
     module Beta

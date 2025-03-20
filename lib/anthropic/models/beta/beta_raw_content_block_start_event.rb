@@ -29,8 +29,9 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-        # @abstract
-        class ContentBlock < Anthropic::Union
+        module ContentBlock
+          extend Anthropic::Union
+
           discriminator :type
 
           variant :text, -> { Anthropic::Models::Beta::BetaTextBlock }

@@ -21,8 +21,9 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-      # @abstract
-      class Content < Anthropic::Union
+      module Content
+        extend Anthropic::Union
+
         ContentBlockParamArray = Anthropic::ArrayOf[union: -> { Anthropic::Models::ContentBlockParam }]
 
         variant String
@@ -36,8 +37,9 @@ module Anthropic
         #   end
       end
 
-      # @abstract
-      class Role < Anthropic::Enum
+      module Role
+        extend Anthropic::Enum
+
         USER = :user
         ASSISTANT = :assistant
 

@@ -5,7 +5,9 @@ module Anthropic
       | Anthropic::Models::ToolBash20250124
       | Anthropic::Models::ToolTextEditor20250124
 
-    class MessageCountTokensTool < Anthropic::Union
+    module MessageCountTokensTool
+      extend Anthropic::Union
+
       def self.variants: -> [Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124]
     end
   end

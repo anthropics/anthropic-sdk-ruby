@@ -3,8 +3,8 @@
 module Anthropic
   module Models
     module Beta
-      class BetaContentBlock < Anthropic::Union
-        abstract!
+      module BetaContentBlock
+        extend Anthropic::Union
 
         Variants =
           type_template(:out) do

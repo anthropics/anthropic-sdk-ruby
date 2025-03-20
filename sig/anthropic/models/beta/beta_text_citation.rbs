@@ -1,7 +1,6 @@
 module Anthropic
   module Models
-    
-    class BetaTextCitation = Beta::BetaTextCitation
+    module BetaTextCitation = Beta::BetaTextCitation
 
     module Beta
       type beta_text_citation =
@@ -9,7 +8,9 @@ module Anthropic
         | Anthropic::Models::Beta::BetaCitationPageLocation
         | Anthropic::Models::Beta::BetaCitationContentBlockLocation
 
-      class BetaTextCitation < Anthropic::Union
+      module BetaTextCitation
+        extend Anthropic::Union
+
         def self.variants: -> [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation]
       end
     end

@@ -20,7 +20,9 @@ module Anthropic
 
       type content = String | ::Array[Anthropic::Models::content_block_param]
 
-      class Content < Anthropic::Union
+      module Content
+        extend Anthropic::Union
+
         type content_block_param_array =
           ::Array[Anthropic::Models::content_block_param]
 
@@ -31,7 +33,9 @@ module Anthropic
 
       type role = :user | :assistant
 
-      class Role < Anthropic::Enum
+      module Role
+        extend Anthropic::Enum
+
         USER: :user
         ASSISTANT: :assistant
 

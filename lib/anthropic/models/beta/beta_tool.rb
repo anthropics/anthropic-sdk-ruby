@@ -82,8 +82,9 @@ module Anthropic
           # def initialize: (Hash | Anthropic::BaseModel) -> void
         end
 
-        # @abstract
-        class Type < Anthropic::Enum
+        module Type
+          extend Anthropic::Enum
+
           CUSTOM = :custom
 
           finalize!

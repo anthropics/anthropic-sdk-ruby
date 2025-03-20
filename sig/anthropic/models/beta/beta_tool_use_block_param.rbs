@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaToolUseBlockParam = Beta::BetaToolUseBlockParam
 
     module Beta

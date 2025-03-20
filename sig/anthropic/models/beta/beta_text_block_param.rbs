@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaTextBlockParam = Beta::BetaTextBlockParam
 
     module Beta

@@ -3,7 +3,9 @@ module Anthropic
     type content_block_source_content =
       Anthropic::Models::TextBlockParam | Anthropic::Models::ImageBlockParam
 
-    class ContentBlockSourceContent < Anthropic::Union
+    module ContentBlockSourceContent
+      extend Anthropic::Union
+
       def self.variants: -> [Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam]
     end
   end

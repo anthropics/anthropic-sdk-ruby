@@ -64,8 +64,9 @@ module Anthropic
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-          # @abstract
-          class StopReason < Anthropic::Enum
+          module StopReason
+            extend Anthropic::Enum
+
             END_TURN = :end_turn
             MAX_TOKENS = :max_tokens
             STOP_SEQUENCE = :stop_sequence

@@ -21,11 +21,14 @@ module Anthropic
       # The model that will complete your prompt.\n\nSee
       #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
-      sig { returns(T.any(Symbol, String)) }
+      sig { returns(T.any(Anthropic::Models::Model::OrSymbol, String)) }
       def model
       end
 
-      sig { params(_: T.any(Symbol, String)).returns(T.any(Symbol, String)) }
+      sig do
+        params(_: T.any(Anthropic::Models::Model::OrSymbol, String))
+          .returns(T.any(Anthropic::Models::Model::OrSymbol, String))
+      end
       def model=(_)
       end
 
@@ -123,7 +126,7 @@ module Anthropic
       sig do
         params(
           max_tokens_to_sample: Integer,
-          model: T.any(Symbol, String),
+          model: T.any(Anthropic::Models::Model::OrSymbol, String),
           prompt: String,
           metadata: Anthropic::Models::Metadata,
           stop_sequences: T::Array[String],
@@ -152,7 +155,7 @@ module Anthropic
           .returns(
             {
               max_tokens_to_sample: Integer,
-              model: T.any(Symbol, String),
+              model: T.any(Anthropic::Models::Model::OrSymbol, String),
               prompt: String,
               metadata: Anthropic::Models::Metadata,
               stop_sequences: T::Array[String],

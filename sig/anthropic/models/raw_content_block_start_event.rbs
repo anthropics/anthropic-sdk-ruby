@@ -28,7 +28,9 @@ module Anthropic
         | Anthropic::Models::ThinkingBlock
         | Anthropic::Models::RedactedThinkingBlock
 
-      class ContentBlock < Anthropic::Union
+      module ContentBlock
+        extend Anthropic::Union
+
         def self.variants: -> [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock]
       end
     end

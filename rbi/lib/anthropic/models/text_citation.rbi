@@ -2,8 +2,8 @@
 
 module Anthropic
   module Models
-    class TextCitation < Anthropic::Union
-      abstract!
+    module TextCitation
+      extend Anthropic::Union
 
       Variants =
         type_template(:out) do

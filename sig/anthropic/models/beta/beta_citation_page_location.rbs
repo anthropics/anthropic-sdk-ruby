@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaCitationPageLocation = Beta::BetaCitationPageLocation
 
     module Beta

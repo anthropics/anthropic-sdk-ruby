@@ -3,8 +3,8 @@
 module Anthropic
   module Models
     module Beta
-      class BetaToolUnion < Anthropic::Union
-        abstract!
+      module BetaToolUnion
+        extend Anthropic::Union
 
         Variants =
           type_template(:out) do

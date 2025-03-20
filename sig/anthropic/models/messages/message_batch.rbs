@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class MessageBatch = Messages::MessageBatch
 
     module Messages
@@ -56,7 +55,9 @@ module Anthropic
 
         type processing_status = :in_progress | :canceling | :ended
 
-        class ProcessingStatus < Anthropic::Enum
+        module ProcessingStatus
+          extend Anthropic::Enum
+
           IN_PROGRESS: :in_progress
           CANCELING: :canceling
           ENDED: :ended

@@ -4,7 +4,9 @@ module Anthropic
       Anthropic::Models::ThinkingConfigEnabled
       | Anthropic::Models::ThinkingConfigDisabled
 
-    class ThinkingConfigParam < Anthropic::Union
+    module ThinkingConfigParam
+      extend Anthropic::Union
+
       def self.variants: -> [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]
     end
   end
