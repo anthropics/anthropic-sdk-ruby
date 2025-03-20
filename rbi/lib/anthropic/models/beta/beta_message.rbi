@@ -252,6 +252,12 @@ module Anthropic
           MAX_TOKENS = T.let(:max_tokens, Anthropic::Models::Beta::BetaMessage::StopReason::TaggedSymbol)
           STOP_SEQUENCE = T.let(:stop_sequence, Anthropic::Models::Beta::BetaMessage::StopReason::TaggedSymbol)
           TOOL_USE = T.let(:tool_use, Anthropic::Models::Beta::BetaMessage::StopReason::TaggedSymbol)
+
+          class << self
+            sig { override.returns(T::Array[Anthropic::Models::Beta::BetaMessage::StopReason::TaggedSymbol]) }
+            def values
+            end
+          end
         end
       end
     end

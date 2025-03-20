@@ -33,7 +33,7 @@ module Anthropic
 
           BetaContentBlockSourceContentArray: beta_content_block_source_content_array
 
-          def self.variants: -> [String, ::Array[Anthropic::Models::Beta::beta_content_block_source_content]]
+          def self?.variants: -> [String, ::Array[Anthropic::Models::Beta::beta_content_block_source_content]]
         end
       end
     end

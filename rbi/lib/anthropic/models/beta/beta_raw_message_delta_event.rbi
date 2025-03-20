@@ -131,6 +131,15 @@ module Anthropic
               T.let(:stop_sequence, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol)
             TOOL_USE =
               T.let(:tool_use, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol)
+
+            class << self
+              sig do
+                override
+                  .returns(T::Array[Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol])
+              end
+              def values
+              end
+            end
           end
         end
       end

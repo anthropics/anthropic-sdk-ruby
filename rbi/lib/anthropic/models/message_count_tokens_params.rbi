@@ -365,6 +365,12 @@ module Anthropic
         Variants = type_template(:out) { {fixed: T.any(String, T::Array[Anthropic::Models::TextBlockParam])} }
 
         TextBlockParamArray = T.let(Anthropic::ArrayOf[Anthropic::Models::TextBlockParam], Anthropic::Converter)
+
+        class << self
+          sig { override.returns([String, T::Array[Anthropic::Models::TextBlockParam]]) }
+          def variants
+          end
+        end
       end
     end
   end

@@ -23,6 +23,17 @@ module Anthropic
                 )
               }
             end
+
+          class << self
+            sig do
+              override
+                .returns(
+                  [Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult]
+                )
+            end
+            def variants
+            end
+          end
         end
       end
     end
