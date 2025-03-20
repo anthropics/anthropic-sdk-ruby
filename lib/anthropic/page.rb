@@ -2,32 +2,26 @@
 
 module Anthropic
   # @example
-  # ```ruby
-  # if page.has_next?
-  #   page = page.next_page
-  # end
-  # ```
+  #   if page.has_next?
+  #     page = page.next_page
+  #   end
   #
   # @example
-  # ```ruby
-  # page.auto_paging_each do |batch|
-  #   puts(batch)
-  # end
-  # ```
+  #   page.auto_paging_each do |batch|
+  #     puts(batch)
+  #   end
   #
   # @example
-  # ```ruby
-  # batches =
-  #   page
-  #   .to_enum
-  #   .lazy
-  #   .select { _1.object_id.even? }
-  #   .map(&:itself)
-  #   .take(2)
-  #   .to_a
+  #   batches =
+  #     page
+  #     .to_enum
+  #     .lazy
+  #     .select { _1.object_id.even? }
+  #     .map(&:itself)
+  #     .take(2)
+  #     .to_a
   #
-  # batches => Array
-  # ```
+  #   batches => Array
   class Page
     include Anthropic::BasePage
 

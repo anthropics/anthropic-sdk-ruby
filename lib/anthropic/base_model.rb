@@ -358,33 +358,29 @@ module Anthropic
   # @api private
   #
   # @example
-  # ```ruby
-  # # `raw_message_stream_event` is a `Anthropic::Models::RawMessageStreamEvent`
-  # case raw_message_stream_event
-  # when Anthropic::Models::RawMessageStartEvent
-  #   puts(raw_message_stream_event.message)
-  # when Anthropic::Models::RawMessageDeltaEvent
-  #   puts(raw_message_stream_event.delta)
-  # when Anthropic::Models::RawMessageStopEvent
-  #   puts(raw_message_stream_event.type)
-  # else
-  #   puts(raw_message_stream_event)
-  # end
-  # ```
+  #   # `raw_message_stream_event` is a `Anthropic::Models::RawMessageStreamEvent`
+  #   case raw_message_stream_event
+  #   when Anthropic::Models::RawMessageStartEvent
+  #     puts(raw_message_stream_event.message)
+  #   when Anthropic::Models::RawMessageDeltaEvent
+  #     puts(raw_message_stream_event.delta)
+  #   when Anthropic::Models::RawMessageStopEvent
+  #     puts(raw_message_stream_event.type)
+  #   else
+  #     puts(raw_message_stream_event)
+  #   end
   #
   # @example
-  # ```ruby
-  # case raw_message_stream_event
-  # in {type: :message_start, message: message}
-  #   puts(message)
-  # in {type: :message_delta, delta: delta, usage: usage}
-  #   puts(delta)
-  # in {type: :message_stop}
-  #   # ...
-  # else
-  #   puts(raw_message_stream_event)
-  # end
-  # ```
+  #   case raw_message_stream_event
+  #   in {type: :message_start, message: message}
+  #     puts(message)
+  #   in {type: :message_delta, delta: delta, usage: usage}
+  #     puts(delta)
+  #   in {type: :message_stop}
+  #     # ...
+  #   else
+  #     puts(raw_message_stream_event)
+  #   end
   module Union
     include Anthropic::Converter
 
@@ -849,13 +845,11 @@ module Anthropic
   # @abstract
   #
   # @example
-  # ```ruby
-  # # `api_error_object` is a `Anthropic::Models::APIErrorObject`
-  # api_error_object => {
-  #   message: message,
-  #   type: type
-  # }
-  # ```
+  #   # `api_error_object` is a `Anthropic::Models::APIErrorObject`
+  #   api_error_object => {
+  #     message: message,
+  #     type: type
+  #   }
   class BaseModel
     extend Anthropic::Converter
 
