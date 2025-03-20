@@ -25,8 +25,8 @@ module Anthropic
         end
 
         sig do
-          params(_: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
-            .returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral))
+          params(_: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)))
+            .returns(T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)))
         end
         def cache_control=(_)
         end

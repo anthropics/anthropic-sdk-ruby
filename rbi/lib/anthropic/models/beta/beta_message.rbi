@@ -176,7 +176,10 @@ module Anthropic
         def usage
         end
 
-        sig { params(_: Anthropic::Models::Beta::BetaUsage).returns(Anthropic::Models::Beta::BetaUsage) }
+        sig do
+          params(_: T.any(Anthropic::Models::Beta::BetaUsage, Anthropic::Util::AnyHash))
+            .returns(T.any(Anthropic::Models::Beta::BetaUsage, Anthropic::Util::AnyHash))
+        end
         def usage=(_)
         end
 

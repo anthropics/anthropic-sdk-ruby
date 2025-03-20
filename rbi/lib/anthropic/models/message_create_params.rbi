@@ -134,7 +134,10 @@ module Anthropic
       def metadata
       end
 
-      sig { params(_: Anthropic::Models::Metadata).returns(Anthropic::Models::Metadata) }
+      sig do
+        params(_: T.any(Anthropic::Models::Metadata, Anthropic::Util::AnyHash))
+          .returns(T.any(Anthropic::Models::Metadata, Anthropic::Util::AnyHash))
+      end
       def metadata=(_)
       end
 
