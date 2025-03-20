@@ -630,7 +630,8 @@ module Anthropic
                 Variants =
                   type_template(:out) { {fixed: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam])} }
 
-                BetaTextBlockParamArray = T.type_alias { T::Array[Anthropic::Models::Beta::BetaTextBlockParam] }
+                BetaTextBlockParamArray =
+                  T.let(Anthropic::ArrayOf[Anthropic::Models::Beta::BetaTextBlockParam], Anthropic::Converter)
               end
             end
           end

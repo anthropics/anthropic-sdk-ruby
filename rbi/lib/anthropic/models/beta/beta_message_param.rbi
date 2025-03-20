@@ -142,19 +142,7 @@ module Anthropic
             end
 
           BetaContentBlockParamArray =
-            T.type_alias do
-              T::Array[
-              T.any(
-                Anthropic::Models::Beta::BetaTextBlockParam,
-                Anthropic::Models::Beta::BetaImageBlockParam,
-                Anthropic::Models::Beta::BetaToolUseBlockParam,
-                Anthropic::Models::Beta::BetaToolResultBlockParam,
-                Anthropic::Models::Beta::BetaBase64PDFBlock,
-                Anthropic::Models::Beta::BetaThinkingBlockParam,
-                Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
-              )
-              ]
-            end
+            T.let(Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlockParam], Anthropic::Converter)
         end
 
         class Role < Anthropic::Enum
