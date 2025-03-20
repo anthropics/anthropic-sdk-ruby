@@ -88,8 +88,8 @@ module Anthropic
         def to_hash
         end
 
-        class ContentBlock < Anthropic::Union
-          abstract!
+        module ContentBlock
+          extend Anthropic::Union
 
           Variants =
             type_template(:out) do

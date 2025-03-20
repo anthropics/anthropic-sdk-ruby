@@ -22,8 +22,9 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-        # @abstract
-        class Citation < Anthropic::Union
+        module Citation
+          extend Anthropic::Union
+
           discriminator :type
 
           variant :char_location, -> { Anthropic::Models::Beta::BetaCitationCharLocation }

@@ -2,8 +2,8 @@
 
 module Anthropic
   module Models
-    class MessageCountTokensTool < Anthropic::Union
-      abstract!
+    module MessageCountTokensTool
+      extend Anthropic::Union
 
       Variants =
         type_template(:out) do

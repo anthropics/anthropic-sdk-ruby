@@ -2,8 +2,9 @@
 
 module Anthropic
   module Models
-    # @abstract
-    class TextCitationParam < Anthropic::Union
+    module TextCitationParam
+      extend Anthropic::Union
+
       discriminator :type
 
       variant :char_location, -> { Anthropic::Models::CitationCharLocationParam }

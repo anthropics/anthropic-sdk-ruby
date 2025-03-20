@@ -62,28 +62,28 @@ module Anthropic
     ) -> ([true, top, nil] | [false, bool, Integer])
   end
 
-  class Enum
-    extend Anthropic::Converter
+  module Enum
+    include Anthropic::Converter
 
     def self.values: -> ::Array[(nil | bool | Integer | Float | Symbol)]
 
     private def self.finalize!: -> void
 
-    def self.===: (top other) -> bool
+    def ===: (top other) -> bool
 
-    def self.==: (top other) -> bool
+    def ==: (top other) -> bool
 
-    def self.coerce: (String | Symbol | top value) -> (Symbol | top)
+    def coerce: (String | Symbol | top value) -> (Symbol | top)
 
-    def self.dump: (Symbol | top value) -> (Symbol | top)
+    def dump: (Symbol | top value) -> (Symbol | top)
 
-    def self.try_strict_coerce: (
+    def try_strict_coerce: (
       top value
     ) -> ([true, top, nil] | [false, bool, Integer])
   end
 
-  class Union
-    extend Anthropic::Converter
+  module Union
+    include Anthropic::Converter
 
     private def self.known_variants: -> ::Array[[Symbol?, (^-> Anthropic::Converter::input)]]
 
@@ -107,15 +107,15 @@ module Anthropic
       top value
     ) -> Anthropic::Converter::input?
 
-    def self.===: (top other) -> bool
+    def ===: (top other) -> bool
 
-    def self.==: (top other) -> bool
+    def ==: (top other) -> bool
 
-    def self.coerce: (top value) -> top
+    def coerce: (top value) -> top
 
-    def self.dump: (top value) -> top
+    def dump: (top value) -> top
 
-    def self.try_strict_coerce: (
+    def try_strict_coerce: (
       top value
     ) -> ([true, top, nil] | [false, bool, Integer])
   end

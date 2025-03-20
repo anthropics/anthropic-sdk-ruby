@@ -22,8 +22,9 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-        # @abstract
-        class Content < Anthropic::Union
+        module Content
+          extend Anthropic::Union
+
           BetaContentBlockSourceContentArray =
             Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlockSourceContent }]
 

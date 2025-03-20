@@ -142,7 +142,9 @@ module Anthropic
               type system_ =
                 String | ::Array[Anthropic::Models::Beta::BetaTextBlockParam]
 
-              class System < Anthropic::Union
+              module System
+                extend Anthropic::Union
+
                 type beta_text_block_param_array =
                   ::Array[Anthropic::Models::Beta::BetaTextBlockParam]
 

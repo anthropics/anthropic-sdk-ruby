@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaMessageParam = Beta::BetaMessageParam
 
     module Beta
@@ -25,7 +24,9 @@ module Anthropic
         type content =
           String | ::Array[Anthropic::Models::Beta::beta_content_block_param]
 
-        class Content < Anthropic::Union
+        module Content
+          extend Anthropic::Union
+
           type beta_content_block_param_array =
             ::Array[Anthropic::Models::Beta::beta_content_block_param]
 
@@ -36,7 +37,9 @@ module Anthropic
 
         type role = :user | :assistant
 
-        class Role < Anthropic::Enum
+        module Role
+          extend Anthropic::Enum
+
           USER: :user
           ASSISTANT: :assistant
 

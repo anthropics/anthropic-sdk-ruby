@@ -1,7 +1,6 @@
 module Anthropic
   module Models
-    
-    class BetaContentBlock = Beta::BetaContentBlock
+    module BetaContentBlock = Beta::BetaContentBlock
 
     module Beta
       type beta_content_block =
@@ -10,7 +9,9 @@ module Anthropic
         | Anthropic::Models::Beta::BetaThinkingBlock
         | Anthropic::Models::Beta::BetaRedactedThinkingBlock
 
-      class BetaContentBlock < Anthropic::Union
+      module BetaContentBlock
+        extend Anthropic::Union
+
         def self.variants: -> [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock]
       end
     end

@@ -11,8 +11,8 @@ module Anthropic
     #   See
     #   [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
     #   for details.
-    class ThinkingConfigParam < Anthropic::Union
-      abstract!
+    module ThinkingConfigParam
+      extend Anthropic::Union
 
       Variants =
         type_template(:out) { {fixed: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled)} }

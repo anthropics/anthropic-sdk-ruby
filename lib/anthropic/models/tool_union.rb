@@ -2,8 +2,9 @@
 
 module Anthropic
   module Models
-    # @abstract
-    class ToolUnion < Anthropic::Union
+    module ToolUnion
+      extend Anthropic::Union
+
       variant -> { Anthropic::Models::Tool }
 
       variant -> { Anthropic::Models::ToolBash20250124 }

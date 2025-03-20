@@ -74,11 +74,14 @@ module Anthropic
         end
 
         class Delta < Anthropic::BaseModel
-          sig { returns(T.nilable(Symbol)) }
+          sig { returns(T.nilable(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol)) }
           def stop_reason
           end
 
-          sig { params(_: T.nilable(Symbol)).returns(T.nilable(Symbol)) }
+          sig do
+            params(_: T.nilable(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol))
+              .returns(T.nilable(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol))
+          end
           def stop_reason=(_)
           end
 
@@ -91,24 +94,43 @@ module Anthropic
           end
 
           sig do
-            params(stop_reason: T.nilable(Symbol), stop_sequence: T.nilable(String)).returns(T.attached_class)
+            params(
+              stop_reason: T.nilable(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol),
+              stop_sequence: T.nilable(String)
+            )
+              .returns(T.attached_class)
           end
           def self.new(stop_reason:, stop_sequence:)
           end
 
-          sig { override.returns({stop_reason: T.nilable(Symbol), stop_sequence: T.nilable(String)}) }
+          sig do
+            override
+              .returns(
+                {
+                  stop_reason: T.nilable(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol),
+                  stop_sequence: T.nilable(String)
+                }
+              )
+          end
           def to_hash
           end
 
-          class StopReason < Anthropic::Enum
-            abstract!
+          module StopReason
+            extend Anthropic::Enum
 
-            Value = type_template(:out) { {fixed: Symbol} }
+            TaggedSymbol =
+              T.type_alias { T.all(Symbol, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason) }
+            OrSymbol =
+              T.type_alias { T.any(Symbol, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol) }
 
-            END_TURN = :end_turn
-            MAX_TOKENS = :max_tokens
-            STOP_SEQUENCE = :stop_sequence
-            TOOL_USE = :tool_use
+            END_TURN =
+              T.let(:end_turn, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol)
+            MAX_TOKENS =
+              T.let(:max_tokens, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol)
+            STOP_SEQUENCE =
+              T.let(:stop_sequence, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol)
+            TOOL_USE =
+              T.let(:tool_use, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol)
           end
         end
       end

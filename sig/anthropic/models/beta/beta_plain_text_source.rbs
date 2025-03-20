@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaPlainTextSource = Beta::BetaPlainTextSource
 
     module Beta

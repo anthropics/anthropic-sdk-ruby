@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaCitationsDelta = Beta::BetaCitationsDelta
 
     module Beta
@@ -27,7 +26,9 @@ module Anthropic
           | Anthropic::Models::Beta::BetaCitationPageLocation
           | Anthropic::Models::Beta::BetaCitationContentBlockLocation
 
-        class Citation < Anthropic::Union
+        module Citation
+          extend Anthropic::Union
+
           def self.variants: -> [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation]
         end
       end

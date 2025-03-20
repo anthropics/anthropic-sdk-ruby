@@ -40,11 +40,14 @@ module Anthropic
           end
 
           # Optional header to specify the beta version(s) you want to use.
-          sig { returns(T.nilable(T::Array[T.any(String, Symbol)])) }
+          sig { returns(T.nilable(T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])) }
           def betas
           end
 
-          sig { params(_: T::Array[T.any(String, Symbol)]).returns(T::Array[T.any(String, Symbol)]) }
+          sig do
+            params(_: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])
+              .returns(T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])
+          end
           def betas=(_)
           end
 
@@ -53,7 +56,7 @@ module Anthropic
               after_id: String,
               before_id: String,
               limit: Integer,
-              betas: T::Array[T.any(String, Symbol)],
+              betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
               request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
             )
               .returns(T.attached_class)
@@ -68,7 +71,7 @@ module Anthropic
                   after_id: String,
                   before_id: String,
                   limit: Integer,
-                  betas: T::Array[T.any(String, Symbol)],
+                  betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
                   request_options: Anthropic::RequestOptions
                 }
               )

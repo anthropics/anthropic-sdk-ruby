@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaToolBash20241022 = Beta::BetaToolBash20241022
 
     module Beta

@@ -103,8 +103,8 @@ module Anthropic
         def to_hash
         end
 
-        class Content < Anthropic::Union
-          abstract!
+        module Content
+          extend Anthropic::Union
 
           Variants =
             type_template(:out) do
@@ -122,8 +122,8 @@ module Anthropic
               Anthropic::Converter
             )
 
-          class Content < Anthropic::Union
-            abstract!
+          module Content
+            extend Anthropic::Union
 
             Variants =
               type_template(:out) { {fixed: T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)} }

@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class MessageBatchSucceededResult = Messages::MessageBatchSucceededResult
 
     module Messages

@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaTool = Beta::BetaTool
 
     module Beta
@@ -50,7 +49,9 @@ module Anthropic
 
         type type_ = :custom
 
-        class Type < Anthropic::Enum
+        module Type
+          extend Anthropic::Enum
+
           CUSTOM: :custom
 
           def self.values: -> ::Array[Anthropic::Models::Beta::BetaTool::type_]

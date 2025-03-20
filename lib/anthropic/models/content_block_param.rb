@@ -2,8 +2,9 @@
 
 module Anthropic
   module Models
-    # @abstract
-    class ContentBlockParam < Anthropic::Union
+    module ContentBlockParam
+      extend Anthropic::Union
+
       discriminator :type
 
       variant :text, -> { Anthropic::Models::TextBlockParam }

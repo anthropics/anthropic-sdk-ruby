@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaCitationCharLocationParam = Beta::BetaCitationCharLocationParam
 
     module Beta

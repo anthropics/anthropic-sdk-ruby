@@ -2,8 +2,9 @@
 
 module Anthropic
   module Models
-    # @abstract
-    class RawMessageStreamEvent < Anthropic::Union
+    module RawMessageStreamEvent
+      extend Anthropic::Union
+
       discriminator :type
 
       variant :message_start, -> { Anthropic::Models::RawMessageStartEvent }

@@ -28,8 +28,9 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-        # @abstract
-        class Delta < Anthropic::Union
+        module Delta
+          extend Anthropic::Union
+
           discriminator :type
 
           variant :text_delta, -> { Anthropic::Models::Beta::BetaTextDelta }

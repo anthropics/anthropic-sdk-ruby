@@ -2,8 +2,8 @@
 
 module Anthropic
   module Models
-    class ErrorObject < Anthropic::Union
-      abstract!
+    module ErrorObject
+      extend Anthropic::Union
 
       Variants =
         type_template(:out) do

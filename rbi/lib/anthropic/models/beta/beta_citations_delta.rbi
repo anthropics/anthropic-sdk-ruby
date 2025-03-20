@@ -73,8 +73,8 @@ module Anthropic
         def to_hash
         end
 
-        class Citation < Anthropic::Union
-          abstract!
+        module Citation
+          extend Anthropic::Union
 
           Variants =
             type_template(:out) do

@@ -22,18 +22,21 @@ module Anthropic
           end
 
           # Optional header to specify the beta version(s) you want to use.
-          sig { returns(T.nilable(T::Array[T.any(String, Symbol)])) }
+          sig { returns(T.nilable(T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])) }
           def betas
           end
 
-          sig { params(_: T::Array[T.any(String, Symbol)]).returns(T::Array[T.any(String, Symbol)]) }
+          sig do
+            params(_: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])
+              .returns(T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])
+          end
           def betas=(_)
           end
 
           sig do
             params(
               requests: T::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request],
-              betas: T::Array[T.any(String, Symbol)],
+              betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
               request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
             )
               .returns(T.attached_class)
@@ -46,7 +49,7 @@ module Anthropic
               .returns(
                 {
                   requests: T::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request],
-                  betas: T::Array[T.any(String, Symbol)],
+                  betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
                   request_options: Anthropic::RequestOptions
                 }
               )
@@ -214,11 +217,14 @@ module Anthropic
               # The model that will complete your prompt.\n\nSee
               #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
               #   details and options.
-              sig { returns(T.any(Symbol, String)) }
+              sig { returns(T.any(Anthropic::Models::Model::OrSymbol, String)) }
               def model
               end
 
-              sig { params(_: T.any(Symbol, String)).returns(T.any(Symbol, String)) }
+              sig do
+                params(_: T.any(Anthropic::Models::Model::OrSymbol, String))
+                  .returns(T.any(Anthropic::Models::Model::OrSymbol, String))
+              end
               def model=(_)
               end
 
@@ -529,7 +535,7 @@ module Anthropic
                 params(
                   max_tokens: Integer,
                   messages: T::Array[Anthropic::Models::Beta::BetaMessageParam],
-                  model: T.any(Symbol, String),
+                  model: T.any(Anthropic::Models::Model::OrSymbol, String),
                   metadata: Anthropic::Models::Beta::BetaMetadata,
                   stop_sequences: T::Array[String],
                   stream: T::Boolean,
@@ -584,7 +590,7 @@ module Anthropic
                     {
                       max_tokens: Integer,
                       messages: T::Array[Anthropic::Models::Beta::BetaMessageParam],
-                      model: T.any(Symbol, String),
+                      model: T.any(Anthropic::Models::Model::OrSymbol, String),
                       metadata: Anthropic::Models::Beta::BetaMetadata,
                       stop_sequences: T::Array[String],
                       stream: T::Boolean,
@@ -624,8 +630,8 @@ module Anthropic
               #   A system prompt is a way of providing context and instructions to Claude, such
               #   as specifying a particular goal or role. See our
               #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
-              class System < Anthropic::Union
-                abstract!
+              module System
+                extend Anthropic::Union
 
                 Variants =
                   type_template(:out) { {fixed: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam])} }

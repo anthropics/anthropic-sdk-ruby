@@ -2,8 +2,9 @@
 
 module Anthropic
   module Models
-    # @abstract
-    class AnthropicBeta < Anthropic::Union
+    module AnthropicBeta
+      extend Anthropic::Union
+
       # @!group
 
       MESSAGE_BATCHES_2024_09_24 = :"message-batches-2024-09-24"

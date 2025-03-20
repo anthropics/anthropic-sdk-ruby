@@ -12,11 +12,14 @@ module Anthropic
         def data=(_)
         end
 
-        sig { returns(Symbol) }
+        sig { returns(Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol) }
         def media_type
         end
 
-        sig { params(_: Symbol).returns(Symbol) }
+        sig do
+          params(_: Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol)
+            .returns(Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol)
+        end
         def media_type=(_)
         end
 
@@ -28,23 +31,37 @@ module Anthropic
         def type=(_)
         end
 
-        sig { params(data: String, media_type: Symbol, type: Symbol).returns(T.attached_class) }
+        sig do
+          params(
+            data: String,
+            media_type: Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol,
+            type: Symbol
+          )
+            .returns(T.attached_class)
+        end
         def self.new(data:, media_type:, type: :base64)
         end
 
-        sig { override.returns({data: String, media_type: Symbol, type: Symbol}) }
+        sig do
+          override
+            .returns(
+              {data: String, media_type: Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol, type: Symbol}
+            )
+        end
         def to_hash
         end
 
-        class MediaType < Anthropic::Enum
-          abstract!
+        module MediaType
+          extend Anthropic::Enum
 
-          Value = type_template(:out) { {fixed: Symbol} }
+          TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Beta::BetaBase64ImageSource::MediaType) }
+          OrSymbol =
+            T.type_alias { T.any(Symbol, Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol) }
 
-          IMAGE_JPEG = :"image/jpeg"
-          IMAGE_PNG = :"image/png"
-          IMAGE_GIF = :"image/gif"
-          IMAGE_WEBP = :"image/webp"
+          IMAGE_JPEG = T.let(:"image/jpeg", Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol)
+          IMAGE_PNG = T.let(:"image/png", Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol)
+          IMAGE_GIF = T.let(:"image/gif", Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol)
+          IMAGE_WEBP = T.let(:"image/webp", Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol)
         end
       end
     end

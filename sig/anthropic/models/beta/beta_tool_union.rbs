@@ -1,7 +1,6 @@
 module Anthropic
   module Models
-    
-    class BetaToolUnion = Beta::BetaToolUnion
+    module BetaToolUnion = Beta::BetaToolUnion
 
     module Beta
       type beta_tool_union =
@@ -13,7 +12,9 @@ module Anthropic
         | Anthropic::Models::Beta::BetaToolBash20250124
         | Anthropic::Models::Beta::BetaToolTextEditor20250124
 
-      class BetaToolUnion < Anthropic::Union
+      module BetaToolUnion
+        extend Anthropic::Union
+
         def self.variants: -> [Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124]
       end
     end
