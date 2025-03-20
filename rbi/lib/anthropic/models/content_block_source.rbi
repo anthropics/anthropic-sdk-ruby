@@ -63,7 +63,7 @@ module Anthropic
           end
 
         ContentBlockSourceContentArray =
-          T.type_alias { T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)] }
+          T.let(Anthropic::ArrayOf[union: Anthropic::Models::ContentBlockSourceContent], Anthropic::Converter)
       end
     end
   end

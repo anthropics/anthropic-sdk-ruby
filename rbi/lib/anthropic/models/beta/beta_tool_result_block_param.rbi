@@ -117,7 +117,10 @@ module Anthropic
             end
 
           ContentArray =
-            T.type_alias { T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)] }
+            T.let(
+              Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaToolResultBlockParam::Content::Content],
+              Anthropic::Converter
+            )
 
           class Content < Anthropic::Union
             abstract!
