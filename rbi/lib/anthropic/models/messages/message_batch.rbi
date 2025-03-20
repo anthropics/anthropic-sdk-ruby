@@ -90,8 +90,8 @@ module Anthropic
         end
 
         sig do
-          params(_: Anthropic::Models::Messages::MessageBatchRequestCounts)
-            .returns(Anthropic::Models::Messages::MessageBatchRequestCounts)
+          params(_: T.any(Anthropic::Models::Messages::MessageBatchRequestCounts, Anthropic::Util::AnyHash))
+            .returns(T.any(Anthropic::Models::Messages::MessageBatchRequestCounts, Anthropic::Util::AnyHash))
         end
         def request_counts=(_)
         end
