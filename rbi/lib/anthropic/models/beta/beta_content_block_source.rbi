@@ -82,7 +82,10 @@ module Anthropic
             end
 
           BetaContentBlockSourceContentArray =
-            T.type_alias { T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)] }
+            T.let(
+              Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlockSourceContent],
+              Anthropic::Converter
+            )
         end
       end
     end

@@ -98,7 +98,10 @@ module Anthropic
           end
 
         ContentArray =
-          T.type_alias { T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)] }
+          T.let(
+            Anthropic::ArrayOf[union: Anthropic::Models::ToolResultBlockParam::Content::Content],
+            Anthropic::Converter
+          )
 
         class Content < Anthropic::Union
           abstract!

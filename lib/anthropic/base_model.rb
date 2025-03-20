@@ -182,8 +182,6 @@ module Anthropic
 
     # rubocop:disable Lint/UnusedMethodArgument
 
-    private_class_method :new
-
     # @param other [Object]
     #
     # @return [Boolean]
@@ -232,8 +230,6 @@ module Anthropic
   # Ruby has no Boolean class; this is something for models to refer to.
   class BooleanModel
     extend Anthropic::Converter
-
-    private_class_method :new
 
     # @param other [Object]
     #
@@ -306,8 +302,6 @@ module Anthropic
       # Guard against thread safety issues by instantiating `@values`.
       private def finalize! = values
     end
-
-    private_class_method :new
 
     # @param other [Object]
     #
@@ -488,8 +482,6 @@ module Anthropic
     # rubocop:disable Style/HashEachMethods
     # rubocop:disable Style/CaseEquality
 
-    private_class_method :new
-
     # @param other [Object]
     #
     # @return [Boolean]
@@ -600,9 +592,18 @@ module Anthropic
   class ArrayOf
     include Anthropic::Converter
 
-    private_class_method :new
-
-    def self.[](...) = new(...)
+    # @param type_info [Hash{Symbol=>Object}, Proc, Anthropic::Converter, Class]
+    #
+    # @param spec [Hash{Symbol=>Object}] .
+    #
+    #   @option spec [NilClass, TrueClass, FalseClass, Integer, Float, Symbol] :const
+    #
+    #   @option spec [Proc] :enum
+    #
+    #   @option spec [Proc] :union
+    #
+    #   @option spec [Boolean] :"nil?"
+    def self.[](type_info, spec = {}) = new(type_info, spec)
 
     # @param other [Object]
     #
@@ -723,9 +724,18 @@ module Anthropic
   class HashOf
     include Anthropic::Converter
 
-    private_class_method :new
-
-    def self.[](...) = new(...)
+    # @param type_info [Hash{Symbol=>Object}, Proc, Anthropic::Converter, Class]
+    #
+    # @param spec [Hash{Symbol=>Object}] .
+    #
+    #   @option spec [NilClass, TrueClass, FalseClass, Integer, Float, Symbol] :const
+    #
+    #   @option spec [Proc] :enum
+    #
+    #   @option spec [Proc] :union
+    #
+    #   @option spec [Boolean] :"nil?"
+    def self.[](type_info, spec = {}) = new(type_info, spec)
 
     # @param other [Object]
     #
