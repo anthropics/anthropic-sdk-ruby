@@ -8,7 +8,7 @@ module Anthropic
     module TextCitationParam
       extend Anthropic::Union
 
-      def self.variants: -> [Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam]
+      def self?.variants: -> [Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam]
     end
   end
 end

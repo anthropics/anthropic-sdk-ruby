@@ -15,6 +15,17 @@ module Anthropic
             )
           }
         end
+
+      class << self
+        sig do
+          override
+            .returns(
+              [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation]
+            )
+        end
+        def variants
+        end
+      end
     end
   end
 end

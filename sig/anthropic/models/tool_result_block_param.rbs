@@ -54,10 +54,10 @@ module Anthropic
         module Content
           extend Anthropic::Union
 
-          def self.variants: -> [Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam]
+          def self?.variants: -> [Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam]
         end
 
-        def self.variants: -> [String, ::Array[Anthropic::Models::ToolResultBlockParam::Content::content]]
+        def self?.variants: -> [String, ::Array[Anthropic::Models::ToolResultBlockParam::Content::content]]
       end
     end
   end

@@ -111,7 +111,7 @@ module Anthropic
 
           BetaTextBlockParamArray: beta_text_block_param_array
 
-          def self.variants: -> [String, ::Array[Anthropic::Models::Beta::BetaTextBlockParam]]
+          def self?.variants: -> [String, ::Array[Anthropic::Models::Beta::BetaTextBlockParam]]
         end
       end
     end

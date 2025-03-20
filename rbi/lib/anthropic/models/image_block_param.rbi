@@ -62,6 +62,12 @@ module Anthropic
 
         Variants =
           type_template(:out) { {fixed: T.any(Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource)} }
+
+        class << self
+          sig { override.returns([Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]) }
+          def variants
+          end
+        end
       end
     end
   end

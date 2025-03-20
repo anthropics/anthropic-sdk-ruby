@@ -32,7 +32,7 @@ module Anthropic
         module Source
           extend Anthropic::Union
 
-          def self.variants: -> [Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource]
+          def self?.variants: -> [Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource]
         end
       end
     end

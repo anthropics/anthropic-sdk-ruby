@@ -54,7 +54,7 @@ module Anthropic
 
           CUSTOM: :custom
 
-          def self.values: -> ::Array[Anthropic::Models::Beta::BetaTool::type_]
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaTool::type_]
         end
       end
     end

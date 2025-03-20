@@ -24,6 +24,17 @@ module Anthropic
               )
             }
           end
+
+        class << self
+          sig do
+            override
+              .returns(
+                [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
+              )
+          end
+          def variants
+          end
+        end
       end
     end
 

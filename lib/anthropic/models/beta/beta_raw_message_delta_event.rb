@@ -73,6 +73,12 @@ module Anthropic
             TOOL_USE = :tool_use
 
             finalize!
+
+            class << self
+              # @!parse
+              #   # @return [Array<Symbol>]
+              #   def values; end
+            end
           end
         end
       end

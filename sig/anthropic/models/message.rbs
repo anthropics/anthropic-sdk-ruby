@@ -52,7 +52,7 @@ module Anthropic
         STOP_SEQUENCE: :stop_sequence
         TOOL_USE: :tool_use
 
-        def self.values: -> ::Array[Anthropic::Models::Message::stop_reason]
+        def self?.values: -> ::Array[Anthropic::Models::Message::stop_reason]
       end
     end
   end

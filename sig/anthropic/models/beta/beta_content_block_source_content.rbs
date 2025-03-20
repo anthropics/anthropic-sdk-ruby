@@ -10,7 +10,7 @@ module Anthropic
       module BetaContentBlockSourceContent
         extend Anthropic::Union
 
-        def self.variants: -> [Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam]
+        def self?.variants: -> [Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam]
       end
     end
   end

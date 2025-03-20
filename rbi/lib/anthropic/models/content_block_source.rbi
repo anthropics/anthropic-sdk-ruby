@@ -64,6 +64,15 @@ module Anthropic
 
         ContentBlockSourceContentArray =
           T.let(Anthropic::ArrayOf[union: Anthropic::Models::ContentBlockSourceContent], Anthropic::Converter)
+
+        class << self
+          sig do
+            override
+              .returns([String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]])
+          end
+          def variants
+          end
+        end
       end
     end
   end

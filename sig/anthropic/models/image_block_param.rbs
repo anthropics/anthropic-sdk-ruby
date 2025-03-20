@@ -28,7 +28,7 @@ module Anthropic
       module Source
         extend Anthropic::Union
 
-        def self.variants: -> [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]
+        def self?.variants: -> [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]
       end
     end
   end
