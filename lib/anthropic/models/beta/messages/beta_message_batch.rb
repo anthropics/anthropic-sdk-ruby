@@ -116,10 +116,10 @@ module Anthropic
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-          # @abstract
-          #
           # Processing status of the Message Batch.
-          class ProcessingStatus < Anthropic::Enum
+          module ProcessingStatus
+            extend Anthropic::Enum
+
             IN_PROGRESS = :in_progress
             CANCELING = :canceling
             ENDED = :ended

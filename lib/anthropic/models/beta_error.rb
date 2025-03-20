@@ -2,8 +2,9 @@
 
 module Anthropic
   module Models
-    # @abstract
-    class BetaError < Anthropic::Union
+    module BetaError
+      extend Anthropic::Union
+
       discriminator :type
 
       variant :invalid_request_error, -> { Anthropic::Models::BetaInvalidRequestError }

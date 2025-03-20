@@ -3,8 +3,9 @@
 module Anthropic
   module Models
     module Beta
-      # @abstract
-      class BetaRawMessageStreamEvent < Anthropic::Union
+      module BetaRawMessageStreamEvent
+        extend Anthropic::Union
+
         discriminator :type
 
         variant :message_start, -> { Anthropic::Models::Beta::BetaRawMessageStartEvent }

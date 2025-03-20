@@ -132,8 +132,6 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-        # @abstract
-        #
         # The reason that we stopped.
         #
         #   This may be one the following values:
@@ -145,7 +143,9 @@ module Anthropic
         #
         #   In non-streaming mode this value is always non-null. In streaming mode, it is
         #   null in the `message_start` event and non-null otherwise.
-        class StopReason < Anthropic::Enum
+        module StopReason
+          extend Anthropic::Enum
+
           END_TURN = :end_turn
           MAX_TOKENS = :max_tokens
           STOP_SEQUENCE = :stop_sequence

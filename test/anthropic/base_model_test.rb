@@ -3,7 +3,9 @@
 require_relative "test_helper"
 
 class Anthropic::Test::BaseModelTest < Minitest::Test
-  class E1 < Anthropic::Enum
+  module E1
+    extend Anthropic::Enum
+
     A = :a
     B = :b
   end
@@ -242,13 +244,17 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
     optional :b, E1, api_name: :renamed_again
   end
 
-  class U1 < Anthropic::Union
+  module U1
+    extend Anthropic::Union
+
     discriminator :type
     variant :a, M1
     variant :b, M3
   end
 
-  class U2 < Anthropic::Union
+  module U2
+    extend Anthropic::Union
+
     variant A1
     variant A3
   end
@@ -330,12 +336,16 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
     end
   end
 
-  class E2 < Anthropic::Enum
+  module E2
+    extend Anthropic::Enum
+
     A = :a
     B = :b
   end
 
-  class U3 < Anthropic::Union
+  module U3
+    extend Anthropic::Union
+
     discriminator :type
     variant :a, M1
     variant :b, M3
@@ -353,7 +363,9 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
     assert_equal(U1, U3)
   end
 
-  class U4 < Anthropic::Union
+  module U4
+    extend Anthropic::Union
+
     variant :a, const: :a
     variant :b, const: :b
   end

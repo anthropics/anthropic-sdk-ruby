@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaMessageTokensCount = Beta::BetaMessageTokensCount
 
     module Beta

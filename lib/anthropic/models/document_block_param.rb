@@ -49,8 +49,9 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-      # @abstract
-      class Source < Anthropic::Union
+      module Source
+        extend Anthropic::Union
+
         discriminator :type
 
         variant :base64, -> { Anthropic::Models::Base64PDFSource }

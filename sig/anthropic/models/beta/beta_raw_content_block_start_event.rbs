@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaRawContentBlockStartEvent = Beta::BetaRawContentBlockStartEvent
 
     module Beta
@@ -32,7 +31,9 @@ module Anthropic
           | Anthropic::Models::Beta::BetaThinkingBlock
           | Anthropic::Models::Beta::BetaRedactedThinkingBlock
 
-        class ContentBlock < Anthropic::Union
+        module ContentBlock
+          extend Anthropic::Union
+
           def self.variants: -> [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock]
         end
       end

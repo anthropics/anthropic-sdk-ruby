@@ -21,7 +21,9 @@ module Anthropic
       type content =
         String | ::Array[Anthropic::Models::content_block_source_content]
 
-      class Content < Anthropic::Union
+      module Content
+        extend Anthropic::Union
+
         type content_block_source_content_array =
           ::Array[Anthropic::Models::content_block_source_content]
 

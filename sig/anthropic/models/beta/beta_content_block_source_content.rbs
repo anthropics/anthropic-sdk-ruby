@@ -1,14 +1,15 @@
 module Anthropic
   module Models
-    
-    class BetaContentBlockSourceContent = Beta::BetaContentBlockSourceContent
+    module BetaContentBlockSourceContent = Beta::BetaContentBlockSourceContent
 
     module Beta
       type beta_content_block_source_content =
         Anthropic::Models::Beta::BetaTextBlockParam
         | Anthropic::Models::Beta::BetaImageBlockParam
 
-      class BetaContentBlockSourceContent < Anthropic::Union
+      module BetaContentBlockSourceContent
+        extend Anthropic::Union
+
         def self.variants: -> [Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam]
       end
     end

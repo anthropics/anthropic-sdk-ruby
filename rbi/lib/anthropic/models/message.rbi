@@ -89,11 +89,14 @@ module Anthropic
       # The model that will complete your prompt.\n\nSee
       #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
-      sig { returns(T.any(Symbol, String)) }
+      sig { returns(T.any(Anthropic::Models::Model::TaggedSymbol, String)) }
       def model
       end
 
-      sig { params(_: T.any(Symbol, String)).returns(T.any(Symbol, String)) }
+      sig do
+        params(_: T.any(Anthropic::Models::Model::TaggedSymbol, String))
+          .returns(T.any(Anthropic::Models::Model::TaggedSymbol, String))
+      end
       def model=(_)
       end
 
@@ -119,11 +122,14 @@ module Anthropic
       #
       #   In non-streaming mode this value is always non-null. In streaming mode, it is
       #   null in the `message_start` event and non-null otherwise.
-      sig { returns(T.nilable(Symbol)) }
+      sig { returns(T.nilable(Anthropic::Models::Message::StopReason::TaggedSymbol)) }
       def stop_reason
       end
 
-      sig { params(_: T.nilable(Symbol)).returns(T.nilable(Symbol)) }
+      sig do
+        params(_: T.nilable(Anthropic::Models::Message::StopReason::TaggedSymbol))
+          .returns(T.nilable(Anthropic::Models::Message::StopReason::TaggedSymbol))
+      end
       def stop_reason=(_)
       end
 
@@ -184,8 +190,8 @@ module Anthropic
             Anthropic::Models::RedactedThinkingBlock
           )
           ],
-          model: T.any(Symbol, String),
-          stop_reason: T.nilable(Symbol),
+          model: T.any(Anthropic::Models::Model::TaggedSymbol, String),
+          stop_reason: T.nilable(Anthropic::Models::Message::StopReason::TaggedSymbol),
           stop_sequence: T.nilable(String),
           usage: Anthropic::Models::Usage,
           role: Symbol,
@@ -209,9 +215,9 @@ module Anthropic
                 Anthropic::Models::RedactedThinkingBlock
               )
               ],
-              model: T.any(Symbol, String),
+              model: T.any(Anthropic::Models::Model::TaggedSymbol, String),
               role: Symbol,
-              stop_reason: T.nilable(Symbol),
+              stop_reason: T.nilable(Anthropic::Models::Message::StopReason::TaggedSymbol),
               stop_sequence: T.nilable(String),
               type: Symbol,
               usage: Anthropic::Models::Usage
@@ -232,15 +238,16 @@ module Anthropic
       #
       #   In non-streaming mode this value is always non-null. In streaming mode, it is
       #   null in the `message_start` event and non-null otherwise.
-      class StopReason < Anthropic::Enum
-        abstract!
+      module StopReason
+        extend Anthropic::Enum
 
-        Value = type_template(:out) { {fixed: Symbol} }
+        TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Message::StopReason) }
+        OrSymbol = T.type_alias { T.any(Symbol, Anthropic::Models::Message::StopReason::TaggedSymbol) }
 
-        END_TURN = :end_turn
-        MAX_TOKENS = :max_tokens
-        STOP_SEQUENCE = :stop_sequence
-        TOOL_USE = :tool_use
+        END_TURN = T.let(:end_turn, Anthropic::Models::Message::StopReason::TaggedSymbol)
+        MAX_TOKENS = T.let(:max_tokens, Anthropic::Models::Message::StopReason::TaggedSymbol)
+        STOP_SEQUENCE = T.let(:stop_sequence, Anthropic::Models::Message::StopReason::TaggedSymbol)
+        TOOL_USE = T.let(:tool_use, Anthropic::Models::Message::StopReason::TaggedSymbol)
       end
     end
   end

@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    # @abstract
-    #
     # Configuration for enabling Claude's extended thinking.
     #
     #   When enabled, responses include `thinking` content blocks showing Claude's
@@ -13,7 +11,9 @@ module Anthropic
     #   See
     #   [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
     #   for details.
-    class ThinkingConfigParam < Anthropic::Union
+    module ThinkingConfigParam
+      extend Anthropic::Union
+
       discriminator :type
 
       variant :enabled, -> { Anthropic::Models::ThinkingConfigEnabled }

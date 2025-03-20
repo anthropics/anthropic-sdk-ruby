@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaTextBlock = Beta::BetaTextBlock
 
     module Beta

@@ -2,8 +2,9 @@
 
 module Anthropic
   module Models
-    # @abstract
-    class ErrorObject < Anthropic::Union
+    module ErrorObject
+      extend Anthropic::Union
+
       discriminator :type
 
       variant :invalid_request_error, -> { Anthropic::Models::InvalidRequestError }

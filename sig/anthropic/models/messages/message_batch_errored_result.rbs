@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class MessageBatchErroredResult = Messages::MessageBatchErroredResult
 
     module Messages

@@ -26,11 +26,14 @@ module Anthropic
       # The model that will complete your prompt.\n\nSee
       #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
-      sig { returns(T.any(Symbol, String)) }
+      sig { returns(T.any(Anthropic::Models::Model::TaggedSymbol, String)) }
       def model
       end
 
-      sig { params(_: T.any(Symbol, String)).returns(T.any(Symbol, String)) }
+      sig do
+        params(_: T.any(Anthropic::Models::Model::TaggedSymbol, String))
+          .returns(T.any(Anthropic::Models::Model::TaggedSymbol, String))
+      end
       def model=(_)
       end
 
@@ -64,7 +67,7 @@ module Anthropic
         params(
           id: String,
           completion: String,
-          model: T.any(Symbol, String),
+          model: T.any(Anthropic::Models::Model::TaggedSymbol, String),
           stop_reason: T.nilable(String),
           type: Symbol
         )
@@ -79,7 +82,7 @@ module Anthropic
             {
               id: String,
               completion: String,
-              model: T.any(Symbol, String),
+              model: T.any(Anthropic::Models::Model::TaggedSymbol, String),
               stop_reason: T.nilable(String),
               type: Symbol
             }

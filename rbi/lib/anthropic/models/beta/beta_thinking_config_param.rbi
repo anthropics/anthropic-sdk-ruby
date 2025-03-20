@@ -12,8 +12,8 @@ module Anthropic
       #   See
       #   [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
       #   for details.
-      class BetaThinkingConfigParam < Anthropic::Union
-        abstract!
+      module BetaThinkingConfigParam
+        extend Anthropic::Union
 
         Variants =
           type_template(:out) do

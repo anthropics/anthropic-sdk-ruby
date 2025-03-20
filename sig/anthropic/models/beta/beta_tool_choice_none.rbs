@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaToolChoiceNone = Beta::BetaToolChoiceNone
 
     module Beta

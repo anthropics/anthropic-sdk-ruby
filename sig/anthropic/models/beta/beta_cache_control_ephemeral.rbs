@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaCacheControlEphemeral = Beta::BetaCacheControlEphemeral
 
     module Beta

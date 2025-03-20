@@ -67,7 +67,9 @@ module Anthropic
         type system_ =
           String | ::Array[Anthropic::Models::Beta::BetaTextBlockParam]
 
-        class System < Anthropic::Union
+        module System
+          extend Anthropic::Union
+
           type beta_text_block_param_array =
             ::Array[Anthropic::Models::Beta::BetaTextBlockParam]
 
@@ -85,7 +87,9 @@ module Anthropic
           | Anthropic::Models::Beta::BetaToolBash20250124
           | Anthropic::Models::Beta::BetaToolTextEditor20250124
 
-        class Tool < Anthropic::Union
+        module Tool
+          extend Anthropic::Union
+
           def self.variants: -> [Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124]
         end
       end

@@ -3,8 +3,9 @@
 module Anthropic
   module Models
     module Beta
-      # @abstract
-      class BetaContentBlock < Anthropic::Union
+      module BetaContentBlock
+        extend Anthropic::Union
+
         discriminator :type
 
         variant :text, -> { Anthropic::Models::Beta::BetaTextBlock }

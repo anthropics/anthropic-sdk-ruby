@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class MessageBatchCanceledResult = Messages::MessageBatchCanceledResult
 
     module Messages

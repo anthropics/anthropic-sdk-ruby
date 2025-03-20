@@ -418,14 +418,14 @@ module Anthropic
 
             # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-            # @abstract
-            #
             # System prompt.
             #
             #   A system prompt is a way of providing context and instructions to Claude, such
             #   as specifying a particular goal or role. See our
             #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
-            class System < Anthropic::Union
+            module System
+              extend Anthropic::Union
+
               TextBlockParamArray = Anthropic::ArrayOf[-> { Anthropic::Models::TextBlockParam }]
 
               variant String

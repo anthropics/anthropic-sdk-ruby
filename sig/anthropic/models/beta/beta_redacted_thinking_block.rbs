@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaRedactedThinkingBlock = Beta::BetaRedactedThinkingBlock
 
     module Beta

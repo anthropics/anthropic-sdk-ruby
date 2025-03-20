@@ -55,11 +55,14 @@ module Anthropic
         def description=(_)
         end
 
-        sig { returns(T.nilable(Symbol)) }
+        sig { returns(T.nilable(Anthropic::Models::Beta::BetaTool::Type::OrSymbol)) }
         def type
         end
 
-        sig { params(_: T.nilable(Symbol)).returns(T.nilable(Symbol)) }
+        sig do
+          params(_: T.nilable(Anthropic::Models::Beta::BetaTool::Type::OrSymbol))
+            .returns(T.nilable(Anthropic::Models::Beta::BetaTool::Type::OrSymbol))
+        end
         def type=(_)
         end
 
@@ -69,7 +72,7 @@ module Anthropic
             name: String,
             cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
             description: String,
-            type: T.nilable(Symbol)
+            type: T.nilable(Anthropic::Models::Beta::BetaTool::Type::OrSymbol)
           )
             .returns(T.attached_class)
         end
@@ -84,7 +87,7 @@ module Anthropic
                 name: String,
                 cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
                 description: String,
-                type: T.nilable(Symbol)
+                type: T.nilable(Anthropic::Models::Beta::BetaTool::Type::OrSymbol)
               }
             )
         end
@@ -121,12 +124,13 @@ module Anthropic
           end
         end
 
-        class Type < Anthropic::Enum
-          abstract!
+        module Type
+          extend Anthropic::Enum
 
-          Value = type_template(:out) { {fixed: Symbol} }
+          TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Beta::BetaTool::Type) }
+          OrSymbol = T.type_alias { T.any(Symbol, Anthropic::Models::Beta::BetaTool::Type::TaggedSymbol) }
 
-          CUSTOM = :custom
+          CUSTOM = T.let(:custom, Anthropic::Models::Beta::BetaTool::Type::OrSymbol)
         end
       end
     end
