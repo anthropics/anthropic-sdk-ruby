@@ -14,7 +14,7 @@ module Anthropic
       sig do
         params(
           max_tokens_to_sample: Integer,
-          model: T.any(Symbol, String),
+          model: T.any(Anthropic::Models::Model::OrSymbol, String),
           prompt: String,
           metadata: Anthropic::Models::Metadata,
           stop_sequences: T::Array[String],
@@ -103,7 +103,7 @@ module Anthropic
       sig do
         params(
           max_tokens_to_sample: Integer,
-          model: T.any(Symbol, String),
+          model: T.any(Anthropic::Models::Model::OrSymbol, String),
           prompt: String,
           metadata: Anthropic::Models::Metadata,
           stop_sequences: T::Array[String],

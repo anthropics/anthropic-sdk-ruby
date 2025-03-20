@@ -16,7 +16,9 @@ module Anthropic
       | :"claude-2.0"
       | String
 
-    class Model < Anthropic::Union
+    module Model
+      extend Anthropic::Union
+
       # Our most intelligent model
       CLAUDE_3_7_SONNET_LATEST: :"claude-3-7-sonnet-latest"
 

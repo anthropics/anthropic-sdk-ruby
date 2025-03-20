@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaBase64PDFSource = Beta::BetaBase64PDFSource
 
     module Beta

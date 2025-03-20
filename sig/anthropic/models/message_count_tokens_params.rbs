@@ -57,7 +57,9 @@ module Anthropic
 
       type system_ = String | ::Array[Anthropic::Models::TextBlockParam]
 
-      class System < Anthropic::Union
+      module System
+        extend Anthropic::Union
+
         type text_block_param_array = ::Array[Anthropic::Models::TextBlockParam]
 
         TextBlockParamArray: text_block_param_array

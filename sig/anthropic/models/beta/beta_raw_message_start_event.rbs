@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaRawMessageStartEvent = Beta::BetaRawMessageStartEvent
 
     module Beta

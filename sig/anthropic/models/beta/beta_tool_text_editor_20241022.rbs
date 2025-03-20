@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaToolTextEditor20241022 = Beta::BetaToolTextEditor20241022
 
     module Beta

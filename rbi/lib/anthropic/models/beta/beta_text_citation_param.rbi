@@ -3,8 +3,8 @@
 module Anthropic
   module Models
     module Beta
-      class BetaTextCitationParam < Anthropic::Union
-        abstract!
+      module BetaTextCitationParam
+        extend Anthropic::Union
 
         Variants =
           type_template(:out) do

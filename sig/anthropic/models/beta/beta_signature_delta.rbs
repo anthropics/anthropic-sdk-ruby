@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaSignatureDelta = Beta::BetaSignatureDelta
 
     module Beta

@@ -25,7 +25,9 @@ module Anthropic
       type source =
         Anthropic::Models::Base64ImageSource | Anthropic::Models::URLImageSource
 
-      class Source < Anthropic::Union
+      module Source
+        extend Anthropic::Union
+
         def self.variants: -> [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]
       end
     end

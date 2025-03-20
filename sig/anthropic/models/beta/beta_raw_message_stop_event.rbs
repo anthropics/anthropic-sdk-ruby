@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaRawMessageStopEvent = Beta::BetaRawMessageStopEvent
 
     module Beta

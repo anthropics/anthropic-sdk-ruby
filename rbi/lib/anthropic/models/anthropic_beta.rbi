@@ -2,19 +2,26 @@
 
 module Anthropic
   module Models
-    class AnthropicBeta < Anthropic::Union
-      abstract!
+    module AnthropicBeta
+      extend Anthropic::Union
 
-      Variants = type_template(:out) { {fixed: T.any(String, Symbol)} }
+      Variants = type_template(:out) { {fixed: T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)} }
 
-      MESSAGE_BATCHES_2024_09_24 = :"message-batches-2024-09-24"
-      PROMPT_CACHING_2024_07_31 = :"prompt-caching-2024-07-31"
-      COMPUTER_USE_2024_10_22 = :"computer-use-2024-10-22"
-      COMPUTER_USE_2025_01_24 = :"computer-use-2025-01-24"
-      PDFS_2024_09_25 = :"pdfs-2024-09-25"
-      TOKEN_COUNTING_2024_11_01 = :"token-counting-2024-11-01"
-      TOKEN_EFFICIENT_TOOLS_2025_02_19 = :"token-efficient-tools-2025-02-19"
-      OUTPUT_128K_2025_02_19 = :"output-128k-2025-02-19"
+      TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::AnthropicBeta) }
+      OrSymbol = T.type_alias { T.any(Symbol, Anthropic::Models::AnthropicBeta::TaggedSymbol) }
+
+      MESSAGE_BATCHES_2024_09_24 =
+        T.let(:"message-batches-2024-09-24", Anthropic::Models::AnthropicBeta::OrSymbol)
+      PROMPT_CACHING_2024_07_31 =
+        T.let(:"prompt-caching-2024-07-31", Anthropic::Models::AnthropicBeta::OrSymbol)
+      COMPUTER_USE_2024_10_22 = T.let(:"computer-use-2024-10-22", Anthropic::Models::AnthropicBeta::OrSymbol)
+      COMPUTER_USE_2025_01_24 = T.let(:"computer-use-2025-01-24", Anthropic::Models::AnthropicBeta::OrSymbol)
+      PDFS_2024_09_25 = T.let(:"pdfs-2024-09-25", Anthropic::Models::AnthropicBeta::OrSymbol)
+      TOKEN_COUNTING_2024_11_01 =
+        T.let(:"token-counting-2024-11-01", Anthropic::Models::AnthropicBeta::OrSymbol)
+      TOKEN_EFFICIENT_TOOLS_2025_02_19 =
+        T.let(:"token-efficient-tools-2025-02-19", Anthropic::Models::AnthropicBeta::OrSymbol)
+      OUTPUT_128K_2025_02_19 = T.let(:"output-128k-2025-02-19", Anthropic::Models::AnthropicBeta::OrSymbol)
     end
   end
 end

@@ -3,8 +3,8 @@
 module Anthropic
   module Models
     module Beta
-      class BetaContentBlockSourceContent < Anthropic::Union
-        abstract!
+      module BetaContentBlockSourceContent
+        extend Anthropic::Union
 
         Variants =
           type_template(:out) { {fixed: T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)} }

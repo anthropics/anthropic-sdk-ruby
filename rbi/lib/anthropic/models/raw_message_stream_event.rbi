@@ -2,8 +2,8 @@
 
 module Anthropic
   module Models
-    class RawMessageStreamEvent < Anthropic::Union
-      abstract!
+    module RawMessageStreamEvent
+      extend Anthropic::Union
 
       Variants =
         type_template(:out) do

@@ -4,8 +4,8 @@ module Anthropic
   module Models
     # How the model should use the provided tools. The model can use a specific tool,
     #   any available tool, decide by itself, or not use tools at all.
-    class ToolChoice < Anthropic::Union
-      abstract!
+    module ToolChoice
+      extend Anthropic::Union
 
       Variants =
         type_template(:out) do

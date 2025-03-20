@@ -2,12 +2,12 @@
 
 module Anthropic
   module Models
-    # @abstract
-    #
     # The model that will complete your prompt.\n\nSee
     #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
     #   details and options.
-    class Model < Anthropic::Union
+    module Model
+      extend Anthropic::Union
+
       # @!group
 
       # Our most intelligent model

@@ -3,8 +3,8 @@
 module Anthropic
   module Models
     module Beta
-      class BetaRawMessageStreamEvent < Anthropic::Union
-        abstract!
+      module BetaRawMessageStreamEvent
+        extend Anthropic::Union
 
         Variants =
           type_template(:out) do

@@ -44,7 +44,9 @@ module Anthropic
         | Anthropic::Models::ContentBlockSource
         | Anthropic::Models::URLPDFSource
 
-      class Source < Anthropic::Union
+      module Source
+        extend Anthropic::Union
+
         def self.variants: -> [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
       end
     end

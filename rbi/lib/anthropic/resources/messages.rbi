@@ -18,7 +18,7 @@ module Anthropic
         params(
           max_tokens: Integer,
           messages: T::Array[Anthropic::Models::MessageParam],
-          model: T.any(Symbol, String),
+          model: T.any(Anthropic::Models::Model::OrSymbol, String),
           metadata: Anthropic::Models::Metadata,
           stop_sequences: T::Array[String],
           system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
@@ -290,7 +290,7 @@ module Anthropic
         params(
           max_tokens: Integer,
           messages: T::Array[Anthropic::Models::MessageParam],
-          model: T.any(Symbol, String),
+          model: T.any(Anthropic::Models::Model::OrSymbol, String),
           metadata: Anthropic::Models::Metadata,
           stop_sequences: T::Array[String],
           system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
@@ -572,7 +572,7 @@ module Anthropic
       sig do
         params(
           messages: T::Array[Anthropic::Models::MessageParam],
-          model: T.any(Symbol, String),
+          model: T.any(Anthropic::Models::Model::OrSymbol, String),
           system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
           thinking: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled),
           tool_choice: T.any(

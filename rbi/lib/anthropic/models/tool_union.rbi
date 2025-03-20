@@ -2,8 +2,8 @@
 
 module Anthropic
   module Models
-    class ToolUnion < Anthropic::Union
-      abstract!
+    module ToolUnion
+      extend Anthropic::Union
 
       Variants =
         type_template(:out) do

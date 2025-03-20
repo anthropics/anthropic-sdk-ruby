@@ -9,17 +9,20 @@ module Anthropic
           include Anthropic::RequestParameters
 
           # Optional header to specify the beta version(s) you want to use.
-          sig { returns(T.nilable(T::Array[T.any(String, Symbol)])) }
+          sig { returns(T.nilable(T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])) }
           def betas
           end
 
-          sig { params(_: T::Array[T.any(String, Symbol)]).returns(T::Array[T.any(String, Symbol)]) }
+          sig do
+            params(_: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])
+              .returns(T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])
+          end
           def betas=(_)
           end
 
           sig do
             params(
-              betas: T::Array[T.any(String, Symbol)],
+              betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
               request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
             )
               .returns(T.attached_class)
@@ -28,12 +31,13 @@ module Anthropic
           end
 
           sig do
-            override.returns(
-              {
-                betas: T::Array[T.any(String, Symbol)],
-                request_options: Anthropic::RequestOptions
-              }
-            )
+            override
+              .returns(
+                {
+                  betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
+                  request_options: Anthropic::RequestOptions
+                }
+              )
           end
           def to_hash
           end

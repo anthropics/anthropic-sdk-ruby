@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaCitationsConfigParam = Beta::BetaCitationsConfigParam
 
     module Beta

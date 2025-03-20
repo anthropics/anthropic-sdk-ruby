@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaURLImageSource = Beta::BetaURLImageSource
 
     module Beta

@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaUsage = Beta::BetaUsage
 
     module Beta

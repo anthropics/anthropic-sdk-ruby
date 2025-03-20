@@ -23,7 +23,9 @@ module Anthropic
         | Anthropic::Models::CitationPageLocation
         | Anthropic::Models::CitationContentBlockLocation
 
-      class Citation < Anthropic::Union
+      module Citation
+        extend Anthropic::Union
+
         def self.variants: -> [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation]
       end
     end

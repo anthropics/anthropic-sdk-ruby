@@ -1,7 +1,6 @@
 module Anthropic
   module Models
-    
-    class BetaContentBlockParam = Beta::BetaContentBlockParam
+    module BetaContentBlockParam = Beta::BetaContentBlockParam
 
     module Beta
       type beta_content_block_param =
@@ -13,7 +12,9 @@ module Anthropic
         | Anthropic::Models::Beta::BetaThinkingBlockParam
         | Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
 
-      class BetaContentBlockParam < Anthropic::Union
+      module BetaContentBlockParam
+        extend Anthropic::Union
+
         def self.variants: -> [Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam]
       end
     end

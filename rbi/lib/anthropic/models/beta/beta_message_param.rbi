@@ -62,11 +62,14 @@ module Anthropic
         def content=(_)
         end
 
-        sig { returns(Symbol) }
+        sig { returns(Anthropic::Models::Beta::BetaMessageParam::Role::OrSymbol) }
         def role
         end
 
-        sig { params(_: Symbol).returns(Symbol) }
+        sig do
+          params(_: Anthropic::Models::Beta::BetaMessageParam::Role::OrSymbol)
+            .returns(Anthropic::Models::Beta::BetaMessageParam::Role::OrSymbol)
+        end
         def role=(_)
         end
 
@@ -86,7 +89,7 @@ module Anthropic
               )
               ]
             ),
-            role: Symbol
+            role: Anthropic::Models::Beta::BetaMessageParam::Role::OrSymbol
           )
             .returns(T.attached_class)
         end
@@ -111,15 +114,15 @@ module Anthropic
                   )
                   ]
                 ),
-                role: Symbol
+                role: Anthropic::Models::Beta::BetaMessageParam::Role::OrSymbol
               }
             )
         end
         def to_hash
         end
 
-        class Content < Anthropic::Union
-          abstract!
+        module Content
+          extend Anthropic::Union
 
           Variants =
             type_template(:out) do
@@ -145,13 +148,14 @@ module Anthropic
             T.let(Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlockParam], Anthropic::Converter)
         end
 
-        class Role < Anthropic::Enum
-          abstract!
+        module Role
+          extend Anthropic::Enum
 
-          Value = type_template(:out) { {fixed: Symbol} }
+          TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Beta::BetaMessageParam::Role) }
+          OrSymbol = T.type_alias { T.any(Symbol, Anthropic::Models::Beta::BetaMessageParam::Role::TaggedSymbol) }
 
-          USER = :user
-          ASSISTANT = :assistant
+          USER = T.let(:user, Anthropic::Models::Beta::BetaMessageParam::Role::OrSymbol)
+          ASSISTANT = T.let(:assistant, Anthropic::Models::Beta::BetaMessageParam::Role::OrSymbol)
         end
       end
     end

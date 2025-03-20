@@ -47,8 +47,9 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
-      # @abstract
-      class Content < Anthropic::Union
+      module Content
+        extend Anthropic::Union
+
         ContentArray =
           Anthropic::ArrayOf[union: -> { Anthropic::Models::ToolResultBlockParam::Content::Content }]
 
@@ -56,8 +57,9 @@ module Anthropic
 
         variant Anthropic::Models::ToolResultBlockParam::Content::ContentArray
 
-        # @abstract
-        class Content < Anthropic::Union
+        module Content
+          extend Anthropic::Union
+
           discriminator :type
 
           variant :text, -> { Anthropic::Models::TextBlockParam }

@@ -2,8 +2,8 @@
 
 module Anthropic
   module Models
-    class ContentBlockParam < Anthropic::Union
-      abstract!
+    module ContentBlockParam
+      extend Anthropic::Union
 
       Variants =
         type_template(:out) do

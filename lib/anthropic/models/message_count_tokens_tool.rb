@@ -2,8 +2,9 @@
 
 module Anthropic
   module Models
-    # @abstract
-    class MessageCountTokensTool < Anthropic::Union
+    module MessageCountTokensTool
+      extend Anthropic::Union
+
       variant -> { Anthropic::Models::Tool }
 
       variant -> { Anthropic::Models::ToolBash20250124 }

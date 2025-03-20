@@ -52,8 +52,8 @@ module Anthropic
       def to_hash
       end
 
-      class Content < Anthropic::Union
-        abstract!
+      module Content
+        extend Anthropic::Union
 
         Variants =
           type_template(:out) do

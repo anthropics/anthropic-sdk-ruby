@@ -3,8 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # @abstract
-      #
       # Configuration for enabling Claude's extended thinking.
       #
       #   When enabled, responses include `thinking` content blocks showing Claude's
@@ -14,7 +12,9 @@ module Anthropic
       #   See
       #   [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
       #   for details.
-      class BetaThinkingConfigParam < Anthropic::Union
+      module BetaThinkingConfigParam
+        extend Anthropic::Union
+
         discriminator :type
 
         variant :enabled, -> { Anthropic::Models::Beta::BetaThinkingConfigEnabled }

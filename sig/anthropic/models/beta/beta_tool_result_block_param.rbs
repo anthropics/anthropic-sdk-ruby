@@ -1,6 +1,5 @@
 module Anthropic
   module Models
-    
     class BetaToolResultBlockParam = Beta::BetaToolResultBlockParam
 
     module Beta
@@ -44,7 +43,9 @@ module Anthropic
           String
           | ::Array[Anthropic::Models::Beta::BetaToolResultBlockParam::Content::content]
 
-        class Content < Anthropic::Union
+        module Content
+          extend Anthropic::Union
+
           type content_array =
             ::Array[Anthropic::Models::Beta::BetaToolResultBlockParam::Content::content]
 
@@ -54,7 +55,9 @@ module Anthropic
             Anthropic::Models::Beta::BetaTextBlockParam
             | Anthropic::Models::Beta::BetaImageBlockParam
 
-          class Content < Anthropic::Union
+          module Content
+            extend Anthropic::Union
+
             def self.variants: -> [Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam]
           end
 
