@@ -64,6 +64,7 @@ module Anthropic
         params(
           error: T.any(
             Anthropic::Models::InvalidRequestError,
+            Anthropic::Util::AnyHash,
             Anthropic::Models::AuthenticationError,
             Anthropic::Models::BillingError,
             Anthropic::Models::PermissionError,

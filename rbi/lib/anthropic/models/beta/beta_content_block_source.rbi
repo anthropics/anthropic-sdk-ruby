@@ -44,7 +44,13 @@ module Anthropic
           params(
             content: T.any(
               String,
-              T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
+              T::Array[
+              T.any(
+                Anthropic::Models::Beta::BetaTextBlockParam,
+                Anthropic::Util::AnyHash,
+                Anthropic::Models::Beta::BetaImageBlockParam
+              )
+              ]
             ),
             type: Symbol
           )

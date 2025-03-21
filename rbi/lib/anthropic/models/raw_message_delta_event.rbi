@@ -94,7 +94,7 @@ module Anthropic
 
         sig do
           params(
-            stop_reason: T.nilable(Anthropic::Models::RawMessageDeltaEvent::Delta::StopReason::TaggedSymbol),
+            stop_reason: T.nilable(Anthropic::Models::RawMessageDeltaEvent::Delta::StopReason::OrSymbol),
             stop_sequence: T.nilable(String)
           )
             .returns(T.attached_class)

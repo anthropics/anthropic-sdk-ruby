@@ -67,7 +67,7 @@ module Anthropic
         params(
           id: String,
           completion: String,
-          model: T.any(Anthropic::Models::Model::TaggedSymbol, String),
+          model: T.any(Anthropic::Models::Model::OrSymbol, String),
           stop_reason: T.nilable(String),
           type: Symbol
         )

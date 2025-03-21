@@ -44,7 +44,11 @@ module Anthropic
 
         sig do
           params(
-            source: T.any(Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource),
+            source: T.any(
+              Anthropic::Models::Beta::BetaBase64ImageSource,
+              Anthropic::Util::AnyHash,
+              Anthropic::Models::Beta::BetaURLImageSource
+            ),
             cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)),
             type: Symbol
           )

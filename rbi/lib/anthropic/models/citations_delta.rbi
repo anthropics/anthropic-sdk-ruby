@@ -46,6 +46,7 @@ module Anthropic
         params(
           citation: T.any(
             Anthropic::Models::CitationCharLocation,
+            Anthropic::Util::AnyHash,
             Anthropic::Models::CitationPageLocation,
             Anthropic::Models::CitationContentBlockLocation
           ),
