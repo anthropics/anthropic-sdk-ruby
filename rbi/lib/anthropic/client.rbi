@@ -11,28 +11,22 @@ module Anthropic
     DEFAULT_MAX_RETRY_DELAY = T.let(8.0, Float)
 
     sig { returns(T.nilable(String)) }
-    def api_key
-    end
+    attr_reader :api_key
 
     sig { returns(T.nilable(String)) }
-    def auth_token
-    end
+    attr_reader :auth_token
 
     sig { returns(Anthropic::Resources::Completions) }
-    def completions
-    end
+    attr_reader :completions
 
     sig { returns(Anthropic::Resources::Messages) }
-    def messages
-    end
+    attr_reader :messages
 
     sig { returns(Anthropic::Resources::Models) }
-    def models
-    end
+    attr_reader :models
 
     sig { returns(Anthropic::Resources::Beta) }
-    def beta
-    end
+    attr_reader :beta
 
     # @api private
     sig { override.returns(T::Hash[String, String]) }

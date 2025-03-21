@@ -9,37 +9,27 @@ module Anthropic
         #   This defines the shape of the `input` that your tool accepts and that the model
         #   will produce.
         sig { returns(Anthropic::Models::Beta::BetaTool::InputSchema) }
-        def input_schema
-        end
+        attr_reader :input_schema
 
-        sig do
-          params(_: T.any(Anthropic::Models::Beta::BetaTool::InputSchema, Anthropic::Util::AnyHash))
-            .returns(T.any(Anthropic::Models::Beta::BetaTool::InputSchema, Anthropic::Util::AnyHash))
-        end
-        def input_schema=(_)
-        end
+        sig { params(input_schema: T.any(Anthropic::Models::Beta::BetaTool::InputSchema, Anthropic::Util::AnyHash)).void }
+        attr_writer :input_schema
 
         # Name of the tool.
         #
         #   This is how the tool will be called by the model and in tool_use blocks.
         sig { returns(String) }
-        def name
-        end
-
-        sig { params(_: String).returns(String) }
-        def name=(_)
-        end
+        attr_accessor :name
 
         sig { returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)) }
-        def cache_control
-        end
+        attr_reader :cache_control
 
         sig do
-          params(_: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)))
-            .returns(T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)))
+          params(
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash))
+          )
+            .void
         end
-        def cache_control=(_)
-        end
+        attr_writer :cache_control
 
         # Description of what this tool does.
         #
@@ -48,23 +38,13 @@ module Anthropic
         #   perform. You can use natural language descriptions to reinforce important
         #   aspects of the tool input JSON schema.
         sig { returns(T.nilable(String)) }
-        def description
-        end
+        attr_reader :description
 
-        sig { params(_: String).returns(String) }
-        def description=(_)
-        end
+        sig { params(description: String).void }
+        attr_writer :description
 
         sig { returns(T.nilable(Anthropic::Models::Beta::BetaTool::Type::OrSymbol)) }
-        def type
-        end
-
-        sig do
-          params(_: T.nilable(Anthropic::Models::Beta::BetaTool::Type::OrSymbol))
-            .returns(T.nilable(Anthropic::Models::Beta::BetaTool::Type::OrSymbol))
-        end
-        def type=(_)
-        end
+        attr_accessor :type
 
         sig do
           params(
@@ -96,20 +76,10 @@ module Anthropic
 
         class InputSchema < Anthropic::BaseModel
           sig { returns(Symbol) }
-          def type
-          end
-
-          sig { params(_: Symbol).returns(Symbol) }
-          def type=(_)
-          end
+          attr_accessor :type
 
           sig { returns(T.nilable(T.anything)) }
-          def properties
-          end
-
-          sig { params(_: T.nilable(T.anything)).returns(T.nilable(T.anything)) }
-          def properties=(_)
-          end
+          attr_accessor :properties
 
           # [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
           #

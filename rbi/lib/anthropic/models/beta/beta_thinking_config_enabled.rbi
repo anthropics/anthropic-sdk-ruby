@@ -14,20 +14,10 @@ module Anthropic
         #   [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
         #   for details.
         sig { returns(Integer) }
-        def budget_tokens
-        end
-
-        sig { params(_: Integer).returns(Integer) }
-        def budget_tokens=(_)
-        end
+        attr_accessor :budget_tokens
 
         sig { returns(Symbol) }
-        def type
-        end
-
-        sig { params(_: Symbol).returns(Symbol) }
-        def type=(_)
-        end
+        attr_accessor :type
 
         sig { params(budget_tokens: Integer, type: Symbol).returns(T.attached_class) }
         def self.new(budget_tokens:, type: :enabled)

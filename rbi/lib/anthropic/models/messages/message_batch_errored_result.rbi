@@ -5,23 +5,13 @@ module Anthropic
     module Messages
       class MessageBatchErroredResult < Anthropic::BaseModel
         sig { returns(Anthropic::Models::ErrorResponse) }
-        def error
-        end
+        attr_reader :error
 
-        sig do
-          params(_: T.any(Anthropic::Models::ErrorResponse, Anthropic::Util::AnyHash))
-            .returns(T.any(Anthropic::Models::ErrorResponse, Anthropic::Util::AnyHash))
-        end
-        def error=(_)
-        end
+        sig { params(error: T.any(Anthropic::Models::ErrorResponse, Anthropic::Util::AnyHash)).void }
+        attr_writer :error
 
         sig { returns(Symbol) }
-        def type
-        end
-
-        sig { params(_: Symbol).returns(Symbol) }
-        def type=(_)
-        end
+        attr_accessor :type
 
         sig do
           params(error: T.any(Anthropic::Models::ErrorResponse, Anthropic::Util::AnyHash), type: Symbol)

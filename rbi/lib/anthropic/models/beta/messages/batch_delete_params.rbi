@@ -10,15 +10,10 @@ module Anthropic
 
           # Optional header to specify the beta version(s) you want to use.
           sig { returns(T.nilable(T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])) }
-          def betas
-          end
+          attr_reader :betas
 
-          sig do
-            params(_: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])
-              .returns(T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])
-          end
-          def betas=(_)
-          end
+          sig { params(betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)]).void }
+          attr_writer :betas
 
           sig do
             params(

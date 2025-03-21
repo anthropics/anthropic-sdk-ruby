@@ -5,12 +5,7 @@ module Anthropic
     class MessageDeltaUsage < Anthropic::BaseModel
       # The cumulative number of output tokens which were used.
       sig { returns(Integer) }
-      def output_tokens
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def output_tokens=(_)
-      end
+      attr_accessor :output_tokens
 
       sig { params(output_tokens: Integer).returns(T.attached_class) }
       def self.new(output_tokens:)

@@ -4,31 +4,21 @@ module Anthropic
   module Models
     class ToolResultBlockParam < Anthropic::BaseModel
       sig { returns(String) }
-      def tool_use_id
-      end
-
-      sig { params(_: String).returns(String) }
-      def tool_use_id=(_)
-      end
+      attr_accessor :tool_use_id
 
       sig { returns(Symbol) }
-      def type
-      end
-
-      sig { params(_: Symbol).returns(Symbol) }
-      def type=(_)
-      end
+      attr_accessor :type
 
       sig { returns(T.nilable(Anthropic::Models::CacheControlEphemeral)) }
-      def cache_control
-      end
+      attr_reader :cache_control
 
       sig do
-        params(_: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)))
-          .returns(T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)))
+        params(
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash))
+        )
+          .void
       end
-      def cache_control=(_)
-      end
+      attr_writer :cache_control
 
       sig do
         returns(
@@ -37,33 +27,24 @@ module Anthropic
           )
         )
       end
-      def content
-      end
+      attr_reader :content
 
       sig do
         params(
-          _: T.any(
+          content: T.any(
             String,
             T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash, Anthropic::Models::ImageBlockParam)]
           )
         )
-          .returns(
-            T.any(
-              String,
-              T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash, Anthropic::Models::ImageBlockParam)]
-            )
-          )
+          .void
       end
-      def content=(_)
-      end
+      attr_writer :content
 
       sig { returns(T.nilable(T::Boolean)) }
-      def is_error
-      end
+      attr_reader :is_error
 
-      sig { params(_: T::Boolean).returns(T::Boolean) }
-      def is_error=(_)
-      end
+      sig { params(is_error: T::Boolean).void }
+      attr_writer :is_error
 
       sig do
         params(

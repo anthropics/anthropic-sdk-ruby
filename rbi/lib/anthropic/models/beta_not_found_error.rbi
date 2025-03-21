@@ -4,20 +4,10 @@ module Anthropic
   module Models
     class BetaNotFoundError < Anthropic::BaseModel
       sig { returns(String) }
-      def message
-      end
-
-      sig { params(_: String).returns(String) }
-      def message=(_)
-      end
+      attr_accessor :message
 
       sig { returns(Symbol) }
-      def type
-      end
-
-      sig { params(_: Symbol).returns(Symbol) }
-      def type=(_)
-      end
+      attr_accessor :type
 
       sig { params(message: String, type: Symbol).returns(T.attached_class) }
       def self.new(message:, type: :not_found_error)

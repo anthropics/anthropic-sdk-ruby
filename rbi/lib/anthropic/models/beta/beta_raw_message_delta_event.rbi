@@ -5,23 +5,16 @@ module Anthropic
     module Beta
       class BetaRawMessageDeltaEvent < Anthropic::BaseModel
         sig { returns(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta) }
-        def delta
-        end
+        attr_reader :delta
 
         sig do
-          params(_: T.any(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta, Anthropic::Util::AnyHash))
-            .returns(T.any(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta, Anthropic::Util::AnyHash))
+          params(delta: T.any(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta, Anthropic::Util::AnyHash))
+            .void
         end
-        def delta=(_)
-        end
+        attr_writer :delta
 
         sig { returns(Symbol) }
-        def type
-        end
-
-        sig { params(_: Symbol).returns(Symbol) }
-        def type=(_)
-        end
+        attr_accessor :type
 
         # Billing and rate-limit usage.
         #
@@ -39,15 +32,10 @@ module Anthropic
         #   Total input tokens in a request is the summation of `input_tokens`,
         #   `cache_creation_input_tokens`, and `cache_read_input_tokens`.
         sig { returns(Anthropic::Models::Beta::BetaMessageDeltaUsage) }
-        def usage
-        end
+        attr_reader :usage
 
-        sig do
-          params(_: T.any(Anthropic::Models::Beta::BetaMessageDeltaUsage, Anthropic::Util::AnyHash))
-            .returns(T.any(Anthropic::Models::Beta::BetaMessageDeltaUsage, Anthropic::Util::AnyHash))
-        end
-        def usage=(_)
-        end
+        sig { params(usage: T.any(Anthropic::Models::Beta::BetaMessageDeltaUsage, Anthropic::Util::AnyHash)).void }
+        attr_writer :usage
 
         sig do
           params(
@@ -75,23 +63,10 @@ module Anthropic
 
         class Delta < Anthropic::BaseModel
           sig { returns(T.nilable(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol)) }
-          def stop_reason
-          end
-
-          sig do
-            params(_: T.nilable(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol))
-              .returns(T.nilable(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol))
-          end
-          def stop_reason=(_)
-          end
+          attr_accessor :stop_reason
 
           sig { returns(T.nilable(String)) }
-          def stop_sequence
-          end
-
-          sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-          def stop_sequence=(_)
-          end
+          attr_accessor :stop_sequence
 
           sig do
             params(

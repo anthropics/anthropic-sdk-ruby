@@ -14,45 +14,13 @@ module Anthropic
             )
           )
         end
-        def content_block
-        end
-
-        sig do
-          params(
-            _: T.any(
-              Anthropic::Models::Beta::BetaTextBlock,
-              Anthropic::Models::Beta::BetaToolUseBlock,
-              Anthropic::Models::Beta::BetaThinkingBlock,
-              Anthropic::Models::Beta::BetaRedactedThinkingBlock
-            )
-          )
-            .returns(
-              T.any(
-                Anthropic::Models::Beta::BetaTextBlock,
-                Anthropic::Models::Beta::BetaToolUseBlock,
-                Anthropic::Models::Beta::BetaThinkingBlock,
-                Anthropic::Models::Beta::BetaRedactedThinkingBlock
-              )
-            )
-        end
-        def content_block=(_)
-        end
+        attr_accessor :content_block
 
         sig { returns(Integer) }
-        def index
-        end
-
-        sig { params(_: Integer).returns(Integer) }
-        def index=(_)
-        end
+        attr_accessor :index
 
         sig { returns(Symbol) }
-        def type
-        end
-
-        sig { params(_: Symbol).returns(Symbol) }
-        def type=(_)
-        end
+        attr_accessor :type
 
         sig do
           params(

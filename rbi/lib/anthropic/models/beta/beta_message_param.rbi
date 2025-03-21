@@ -22,56 +22,10 @@ module Anthropic
             )
           )
         end
-        def content
-        end
-
-        sig do
-          params(
-            _: T.any(
-              String,
-              T::Array[
-              T.any(
-                Anthropic::Models::Beta::BetaTextBlockParam,
-                Anthropic::Models::Beta::BetaImageBlockParam,
-                Anthropic::Models::Beta::BetaToolUseBlockParam,
-                Anthropic::Models::Beta::BetaToolResultBlockParam,
-                Anthropic::Models::Beta::BetaBase64PDFBlock,
-                Anthropic::Models::Beta::BetaThinkingBlockParam,
-                Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
-              )
-              ]
-            )
-          )
-            .returns(
-              T.any(
-                String,
-                T::Array[
-                T.any(
-                  Anthropic::Models::Beta::BetaTextBlockParam,
-                  Anthropic::Models::Beta::BetaImageBlockParam,
-                  Anthropic::Models::Beta::BetaToolUseBlockParam,
-                  Anthropic::Models::Beta::BetaToolResultBlockParam,
-                  Anthropic::Models::Beta::BetaBase64PDFBlock,
-                  Anthropic::Models::Beta::BetaThinkingBlockParam,
-                  Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
-                )
-                ]
-              )
-            )
-        end
-        def content=(_)
-        end
+        attr_accessor :content
 
         sig { returns(Anthropic::Models::Beta::BetaMessageParam::Role::OrSymbol) }
-        def role
-        end
-
-        sig do
-          params(_: Anthropic::Models::Beta::BetaMessageParam::Role::OrSymbol)
-            .returns(Anthropic::Models::Beta::BetaMessageParam::Role::OrSymbol)
-        end
-        def role=(_)
-        end
+        attr_accessor :role
 
         sig do
           params(

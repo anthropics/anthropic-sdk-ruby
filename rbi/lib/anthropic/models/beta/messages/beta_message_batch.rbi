@@ -9,42 +9,22 @@ module Anthropic
           #
           #   The format and length of IDs may change over time.
           sig { returns(String) }
-          def id
-          end
-
-          sig { params(_: String).returns(String) }
-          def id=(_)
-          end
+          attr_accessor :id
 
           # RFC 3339 datetime string representing the time at which the Message Batch was
           #   archived and its results became unavailable.
           sig { returns(T.nilable(Time)) }
-          def archived_at
-          end
-
-          sig { params(_: T.nilable(Time)).returns(T.nilable(Time)) }
-          def archived_at=(_)
-          end
+          attr_accessor :archived_at
 
           # RFC 3339 datetime string representing the time at which cancellation was
           #   initiated for the Message Batch. Specified only if cancellation was initiated.
           sig { returns(T.nilable(Time)) }
-          def cancel_initiated_at
-          end
-
-          sig { params(_: T.nilable(Time)).returns(T.nilable(Time)) }
-          def cancel_initiated_at=(_)
-          end
+          attr_accessor :cancel_initiated_at
 
           # RFC 3339 datetime string representing the time at which the Message Batch was
           #   created.
           sig { returns(Time) }
-          def created_at
-          end
-
-          sig { params(_: Time).returns(Time) }
-          def created_at=(_)
-          end
+          attr_accessor :created_at
 
           # RFC 3339 datetime string representing the time at which processing for the
           #   Message Batch ended. Specified only once processing ends.
@@ -52,34 +32,16 @@ module Anthropic
           #   Processing ends when every request in a Message Batch has either succeeded,
           #   errored, canceled, or expired.
           sig { returns(T.nilable(Time)) }
-          def ended_at
-          end
-
-          sig { params(_: T.nilable(Time)).returns(T.nilable(Time)) }
-          def ended_at=(_)
-          end
+          attr_accessor :ended_at
 
           # RFC 3339 datetime string representing the time at which the Message Batch will
           #   expire and end processing, which is 24 hours after creation.
           sig { returns(Time) }
-          def expires_at
-          end
-
-          sig { params(_: Time).returns(Time) }
-          def expires_at=(_)
-          end
+          attr_accessor :expires_at
 
           # Processing status of the Message Batch.
           sig { returns(Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol) }
-          def processing_status
-          end
-
-          sig do
-            params(_: Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol)
-              .returns(Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol)
-          end
-          def processing_status=(_)
-          end
+          attr_accessor :processing_status
 
           # Tallies requests within the Message Batch, categorized by their status.
           #
@@ -87,17 +49,15 @@ module Anthropic
           #   processing of the entire batch ends. The sum of all values always matches the
           #   total number of requests in the batch.
           sig { returns(Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts) }
-          def request_counts
-          end
+          attr_reader :request_counts
 
           sig do
             params(
-              _: T.any(Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts, Anthropic::Util::AnyHash)
+              request_counts: T.any(Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts, Anthropic::Util::AnyHash)
             )
-              .returns(T.any(Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts, Anthropic::Util::AnyHash))
+              .void
           end
-          def request_counts=(_)
-          end
+          attr_writer :request_counts
 
           # URL to a `.jsonl` file containing the results of the Message Batch requests.
           #   Specified only once processing ends.
@@ -105,23 +65,13 @@ module Anthropic
           #   Results in the file are not guaranteed to be in the same order as requests. Use
           #   the `custom_id` field to match results to requests.
           sig { returns(T.nilable(String)) }
-          def results_url
-          end
-
-          sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-          def results_url=(_)
-          end
+          attr_accessor :results_url
 
           # Object type.
           #
           #   For Message Batches, this is always `"message_batch"`.
           sig { returns(Symbol) }
-          def type
-          end
-
-          sig { params(_: Symbol).returns(Symbol) }
-          def type=(_)
-          end
+          attr_accessor :type
 
           sig do
             params(

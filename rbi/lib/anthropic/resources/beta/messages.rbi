@@ -5,8 +5,7 @@ module Anthropic
     class Beta
       class Messages
         sig { returns(Anthropic::Resources::Beta::Messages::Batches) }
-        def batches
-        end
+        attr_reader :batches
 
         # Send a structured list of input messages with text and/or image content, and the
         #   model will generate the next message in the conversation.

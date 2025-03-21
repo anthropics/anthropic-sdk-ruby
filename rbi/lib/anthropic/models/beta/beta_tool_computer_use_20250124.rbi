@@ -6,60 +6,35 @@ module Anthropic
       class BetaToolComputerUse20250124 < Anthropic::BaseModel
         # The height of the display in pixels.
         sig { returns(Integer) }
-        def display_height_px
-        end
-
-        sig { params(_: Integer).returns(Integer) }
-        def display_height_px=(_)
-        end
+        attr_accessor :display_height_px
 
         # The width of the display in pixels.
         sig { returns(Integer) }
-        def display_width_px
-        end
-
-        sig { params(_: Integer).returns(Integer) }
-        def display_width_px=(_)
-        end
+        attr_accessor :display_width_px
 
         # Name of the tool.
         #
         #   This is how the tool will be called by the model and in tool_use blocks.
         sig { returns(Symbol) }
-        def name
-        end
-
-        sig { params(_: Symbol).returns(Symbol) }
-        def name=(_)
-        end
+        attr_accessor :name
 
         sig { returns(Symbol) }
-        def type
-        end
-
-        sig { params(_: Symbol).returns(Symbol) }
-        def type=(_)
-        end
+        attr_accessor :type
 
         sig { returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)) }
-        def cache_control
-        end
+        attr_reader :cache_control
 
         sig do
-          params(_: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)))
-            .returns(T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)))
+          params(
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash))
+          )
+            .void
         end
-        def cache_control=(_)
-        end
+        attr_writer :cache_control
 
         # The X11 display number (e.g. 0, 1) for the display.
         sig { returns(T.nilable(Integer)) }
-        def display_number
-        end
-
-        sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-        def display_number=(_)
-        end
+        attr_accessor :display_number
 
         sig do
           params(

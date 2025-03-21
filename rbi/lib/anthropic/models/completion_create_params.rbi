@@ -11,26 +11,13 @@ module Anthropic
       #   Note that our models may stop _before_ reaching this maximum. This parameter
       #   only specifies the absolute maximum number of tokens to generate.
       sig { returns(Integer) }
-      def max_tokens_to_sample
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def max_tokens_to_sample=(_)
-      end
+      attr_accessor :max_tokens_to_sample
 
       # The model that will complete your prompt.\n\nSee
       #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
       sig { returns(T.any(Anthropic::Models::Model::OrSymbol, String)) }
-      def model
-      end
-
-      sig do
-        params(_: T.any(Anthropic::Models::Model::OrSymbol, String))
-          .returns(T.any(Anthropic::Models::Model::OrSymbol, String))
-      end
-      def model=(_)
-      end
+      attr_accessor :model
 
       # The prompt that you want Claude to complete.
       #
@@ -46,24 +33,14 @@ module Anthropic
       #   [prompt design](https://docs.anthropic.com/en/docs/intro-to-prompting) for more
       #   details.
       sig { returns(String) }
-      def prompt
-      end
-
-      sig { params(_: String).returns(String) }
-      def prompt=(_)
-      end
+      attr_accessor :prompt
 
       # An object describing metadata about the request.
       sig { returns(T.nilable(Anthropic::Models::Metadata)) }
-      def metadata
-      end
+      attr_reader :metadata
 
-      sig do
-        params(_: T.any(Anthropic::Models::Metadata, Anthropic::Util::AnyHash))
-          .returns(T.any(Anthropic::Models::Metadata, Anthropic::Util::AnyHash))
-      end
-      def metadata=(_)
-      end
+      sig { params(metadata: T.any(Anthropic::Models::Metadata, Anthropic::Util::AnyHash)).void }
+      attr_writer :metadata
 
       # Sequences that will cause the model to stop generating.
       #
@@ -71,12 +48,10 @@ module Anthropic
       #   sequences in the future. By providing the stop_sequences parameter, you may
       #   include additional strings that will cause the model to stop generating.
       sig { returns(T.nilable(T::Array[String])) }
-      def stop_sequences
-      end
+      attr_reader :stop_sequences
 
-      sig { params(_: T::Array[String]).returns(T::Array[String]) }
-      def stop_sequences=(_)
-      end
+      sig { params(stop_sequences: T::Array[String]).void }
+      attr_writer :stop_sequences
 
       # Amount of randomness injected into the response.
       #
@@ -87,12 +62,10 @@ module Anthropic
       #   Note that even with `temperature` of `0.0`, the results will not be fully
       #   deterministic.
       sig { returns(T.nilable(Float)) }
-      def temperature
-      end
+      attr_reader :temperature
 
-      sig { params(_: Float).returns(Float) }
-      def temperature=(_)
-      end
+      sig { params(temperature: Float).void }
+      attr_writer :temperature
 
       # Only sample from the top K options for each subsequent token.
       #
@@ -102,12 +75,10 @@ module Anthropic
       #   Recommended for advanced use cases only. You usually only need to use
       #   `temperature`.
       sig { returns(T.nilable(Integer)) }
-      def top_k
-      end
+      attr_reader :top_k
 
-      sig { params(_: Integer).returns(Integer) }
-      def top_k=(_)
-      end
+      sig { params(top_k: Integer).void }
+      attr_writer :top_k
 
       # Use nucleus sampling.
       #
@@ -119,12 +90,10 @@ module Anthropic
       #   Recommended for advanced use cases only. You usually only need to use
       #   `temperature`.
       sig { returns(T.nilable(Float)) }
-      def top_p
-      end
+      attr_reader :top_p
 
-      sig { params(_: Float).returns(Float) }
-      def top_p=(_)
-      end
+      sig { params(top_p: Float).void }
+      attr_writer :top_p
 
       sig do
         params(
