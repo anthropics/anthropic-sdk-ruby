@@ -172,8 +172,12 @@ module Anthropic
         end
 
         sig do
-          params(_: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]))
-            .returns(T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]))
+          params(
+            _: T.any(String, T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Util::AnyHash)])
+          )
+            .returns(
+              T.any(String, T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Util::AnyHash)])
+            )
         end
         def system_=(_)
         end
@@ -220,12 +224,14 @@ module Anthropic
           params(
             _: T.any(
               Anthropic::Models::Beta::BetaThinkingConfigEnabled,
+              Anthropic::Util::AnyHash,
               Anthropic::Models::Beta::BetaThinkingConfigDisabled
             )
           )
             .returns(
               T.any(
                 Anthropic::Models::Beta::BetaThinkingConfigEnabled,
+                Anthropic::Util::AnyHash,
                 Anthropic::Models::Beta::BetaThinkingConfigDisabled
               )
             )
@@ -254,6 +260,7 @@ module Anthropic
           params(
             _: T.any(
               Anthropic::Models::Beta::BetaToolChoiceAuto,
+              Anthropic::Util::AnyHash,
               Anthropic::Models::Beta::BetaToolChoiceAny,
               Anthropic::Models::Beta::BetaToolChoiceTool,
               Anthropic::Models::Beta::BetaToolChoiceNone
@@ -262,6 +269,7 @@ module Anthropic
             .returns(
               T.any(
                 Anthropic::Models::Beta::BetaToolChoiceAuto,
+                Anthropic::Util::AnyHash,
                 Anthropic::Models::Beta::BetaToolChoiceAny,
                 Anthropic::Models::Beta::BetaToolChoiceTool,
                 Anthropic::Models::Beta::BetaToolChoiceNone
@@ -365,6 +373,7 @@ module Anthropic
             _: T::Array[
             T.any(
               Anthropic::Models::Beta::BetaTool,
+              Anthropic::Util::AnyHash,
               Anthropic::Models::Beta::BetaToolComputerUse20241022,
               Anthropic::Models::Beta::BetaToolBash20241022,
               Anthropic::Models::Beta::BetaToolTextEditor20241022,
@@ -378,6 +387,7 @@ module Anthropic
               T::Array[
               T.any(
                 Anthropic::Models::Beta::BetaTool,
+                Anthropic::Util::AnyHash,
                 Anthropic::Models::Beta::BetaToolComputerUse20241022,
                 Anthropic::Models::Beta::BetaToolBash20241022,
                 Anthropic::Models::Beta::BetaToolTextEditor20241022,
@@ -438,18 +448,20 @@ module Anthropic
         sig do
           params(
             max_tokens: Integer,
-            messages: T::Array[Anthropic::Models::Beta::BetaMessageParam],
+            messages: T::Array[T.any(Anthropic::Models::Beta::BetaMessageParam, Anthropic::Util::AnyHash)],
             model: T.any(Anthropic::Models::Model::OrSymbol, String),
             metadata: T.any(Anthropic::Models::Beta::BetaMetadata, Anthropic::Util::AnyHash),
             stop_sequences: T::Array[String],
-            system_: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]),
+            system_: T.any(String, T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Util::AnyHash)]),
             temperature: Float,
             thinking: T.any(
               Anthropic::Models::Beta::BetaThinkingConfigEnabled,
+              Anthropic::Util::AnyHash,
               Anthropic::Models::Beta::BetaThinkingConfigDisabled
             ),
             tool_choice: T.any(
               Anthropic::Models::Beta::BetaToolChoiceAuto,
+              Anthropic::Util::AnyHash,
               Anthropic::Models::Beta::BetaToolChoiceAny,
               Anthropic::Models::Beta::BetaToolChoiceTool,
               Anthropic::Models::Beta::BetaToolChoiceNone
@@ -457,6 +469,7 @@ module Anthropic
             tools: T::Array[
             T.any(
               Anthropic::Models::Beta::BetaTool,
+              Anthropic::Util::AnyHash,
               Anthropic::Models::Beta::BetaToolComputerUse20241022,
               Anthropic::Models::Beta::BetaToolBash20241022,
               Anthropic::Models::Beta::BetaToolTextEditor20241022,

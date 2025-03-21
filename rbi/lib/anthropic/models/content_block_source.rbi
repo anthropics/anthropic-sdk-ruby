@@ -32,7 +32,10 @@ module Anthropic
 
       sig do
         params(
-          content: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]),
+          content: T.any(
+            String,
+            T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash, Anthropic::Models::ImageBlockParam)]
+          ),
           type: Symbol
         )
           .returns(T.attached_class)

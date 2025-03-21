@@ -79,6 +79,7 @@ module Anthropic
             T::Array[
             T.any(
               Anthropic::Models::TextBlockParam,
+              Anthropic::Util::AnyHash,
               Anthropic::Models::ImageBlockParam,
               Anthropic::Models::ToolUseBlockParam,
               Anthropic::Models::ToolResultBlockParam,

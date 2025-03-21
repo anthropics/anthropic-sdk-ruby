@@ -87,6 +87,7 @@ module Anthropic
         params(
           source: T.any(
             Anthropic::Models::Base64PDFSource,
+            Anthropic::Util::AnyHash,
             Anthropic::Models::PlainTextSource,
             Anthropic::Models::ContentBlockSource,
             Anthropic::Models::URLPDFSource

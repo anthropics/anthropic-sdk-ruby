@@ -47,6 +47,7 @@ module Anthropic
           params(
             citation: T.any(
               Anthropic::Models::Beta::BetaCitationCharLocation,
+              Anthropic::Util::AnyHash,
               Anthropic::Models::Beta::BetaCitationPageLocation,
               Anthropic::Models::Beta::BetaCitationContentBlockLocation
             ),

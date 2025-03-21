@@ -82,6 +82,7 @@ module Anthropic
               T::Array[
               T.any(
                 Anthropic::Models::Beta::BetaCitationCharLocationParam,
+                Anthropic::Util::AnyHash,
                 Anthropic::Models::Beta::BetaCitationPageLocationParam,
                 Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
               )

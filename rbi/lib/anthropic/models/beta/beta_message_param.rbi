@@ -80,6 +80,7 @@ module Anthropic
               T::Array[
               T.any(
                 Anthropic::Models::Beta::BetaTextBlockParam,
+                Anthropic::Util::AnyHash,
                 Anthropic::Models::Beta::BetaImageBlockParam,
                 Anthropic::Models::Beta::BetaToolUseBlockParam,
                 Anthropic::Models::Beta::BetaToolResultBlockParam,
