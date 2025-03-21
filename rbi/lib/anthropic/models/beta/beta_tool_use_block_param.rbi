@@ -52,7 +52,7 @@ module Anthropic
             id: String,
             input: T.anything,
             name: String,
-            cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)),
             type: Symbol
           )
             .returns(T.attached_class)

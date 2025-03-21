@@ -319,7 +319,7 @@ module Anthropic
             Anthropic::Models::ToolTextEditor20250124
           )
           ],
-          request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
+          request_options: T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

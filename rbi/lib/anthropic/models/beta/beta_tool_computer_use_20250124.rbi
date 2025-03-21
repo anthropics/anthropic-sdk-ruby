@@ -65,7 +65,7 @@ module Anthropic
           params(
             display_height_px: Integer,
             display_width_px: Integer,
-            cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)),
             display_number: T.nilable(Integer),
             name: Symbol,
             type: Symbol

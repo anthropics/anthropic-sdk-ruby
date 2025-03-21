@@ -23,7 +23,10 @@ module Anthropic
         def type=(_)
         end
 
-        sig { params(message: Anthropic::Models::Message, type: Symbol).returns(T.attached_class) }
+        sig do
+          params(message: T.any(Anthropic::Models::Message, Anthropic::Util::AnyHash), type: Symbol)
+            .returns(T.attached_class)
+        end
         def self.new(message:, type: :succeeded)
         end
 

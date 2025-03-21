@@ -10,7 +10,7 @@ module Anthropic
       sig do
         params(
           model_id: String,
-          request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
+          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
         )
           .returns(Anthropic::Models::ModelInfo)
       end
@@ -30,7 +30,7 @@ module Anthropic
           after_id: String,
           before_id: String,
           limit: Integer,
-          request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
+          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
         )
           .returns(Anthropic::Page[Anthropic::Models::ModelInfo])
       end

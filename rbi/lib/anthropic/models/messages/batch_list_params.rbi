@@ -43,7 +43,7 @@ module Anthropic
             after_id: String,
             before_id: String,
             limit: Integer,
-            request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
+            request_options: T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash)
           )
             .returns(T.attached_class)
         end
