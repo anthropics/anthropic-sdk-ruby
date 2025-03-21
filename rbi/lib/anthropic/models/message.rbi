@@ -186,10 +186,8 @@ module Anthropic
         STOP_SEQUENCE = T.let(:stop_sequence, Anthropic::Models::Message::StopReason::TaggedSymbol)
         TOOL_USE = T.let(:tool_use, Anthropic::Models::Message::StopReason::TaggedSymbol)
 
-        class << self
-          sig { override.returns(T::Array[Anthropic::Models::Message::StopReason::TaggedSymbol]) }
-          def values
-          end
+        sig { override.returns(T::Array[Anthropic::Models::Message::StopReason::TaggedSymbol]) }
+        def self.values
         end
       end
     end

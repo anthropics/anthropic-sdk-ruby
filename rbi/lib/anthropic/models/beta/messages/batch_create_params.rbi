@@ -561,16 +561,11 @@ module Anthropic
               module System
                 extend Anthropic::Union
 
-                Variants =
-                  type_template(:out) { {fixed: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam])} }
-
                 BetaTextBlockParamArray =
                   T.let(Anthropic::ArrayOf[Anthropic::Models::Beta::BetaTextBlockParam], Anthropic::Converter)
 
-                class << self
-                  sig { override.returns([String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]]) }
-                  def variants
-                  end
+                sig { override.returns([String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]]) }
+                def self.variants
                 end
               end
             end

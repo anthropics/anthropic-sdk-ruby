@@ -102,10 +102,8 @@ module Anthropic
 
           CUSTOM = T.let(:custom, Anthropic::Models::Beta::BetaTool::Type::TaggedSymbol)
 
-          class << self
-            sig { override.returns(T::Array[Anthropic::Models::Beta::BetaTool::Type::TaggedSymbol]) }
-            def values
-            end
+          sig { override.returns(T::Array[Anthropic::Models::Beta::BetaTool::Type::TaggedSymbol]) }
+          def self.values
           end
         end
       end

@@ -23,10 +23,8 @@ module Anthropic
         variant :none, -> { Anthropic::Models::Beta::BetaToolChoiceNone }
 
         # @!parse
-        #   class << self
-        #     # @return [Array(Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone)]
-        #     def variants; end
-        #   end
+        #   # @return [Array(Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone)]
+        #   def self.variants; end
       end
     end
 
