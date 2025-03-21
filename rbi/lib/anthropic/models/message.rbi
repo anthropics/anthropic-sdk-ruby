@@ -196,7 +196,7 @@ module Anthropic
           model: T.any(Anthropic::Models::Model::TaggedSymbol, String),
           stop_reason: T.nilable(Anthropic::Models::Message::StopReason::TaggedSymbol),
           stop_sequence: T.nilable(String),
-          usage: Anthropic::Models::Usage,
+          usage: T.any(Anthropic::Models::Usage, Anthropic::Util::AnyHash),
           role: Symbol,
           type: Symbol
         )

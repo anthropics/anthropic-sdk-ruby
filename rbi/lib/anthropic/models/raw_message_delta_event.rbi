@@ -50,8 +50,8 @@ module Anthropic
 
       sig do
         params(
-          delta: Anthropic::Models::RawMessageDeltaEvent::Delta,
-          usage: Anthropic::Models::MessageDeltaUsage,
+          delta: T.any(Anthropic::Models::RawMessageDeltaEvent::Delta, Anthropic::Util::AnyHash),
+          usage: T.any(Anthropic::Models::MessageDeltaUsage, Anthropic::Util::AnyHash),
           type: Symbol
         )
           .returns(T.attached_class)

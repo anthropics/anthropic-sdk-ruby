@@ -24,7 +24,10 @@ module Anthropic
           def type=(_)
           end
 
-          sig { params(error: Anthropic::Models::BetaErrorResponse, type: Symbol).returns(T.attached_class) }
+          sig do
+            params(error: T.any(Anthropic::Models::BetaErrorResponse, Anthropic::Util::AnyHash), type: Symbol)
+              .returns(T.attached_class)
+          end
           def self.new(error:, type: :errored)
           end
 

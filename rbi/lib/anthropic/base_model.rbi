@@ -242,8 +242,8 @@ module Anthropic
     # @api private
     sig do
       params(
-        key: T.any(Symbol, T::Hash[Symbol, T.anything], T.proc.returns(T.anything), T.anything),
-        spec: T.any(T::Hash[Symbol, T.anything], T.proc.returns(T.anything), T.anything)
+        key: T.any(Symbol, Anthropic::Util::AnyHash, T.proc.returns(T.anything), T.anything),
+        spec: T.any(Anthropic::Util::AnyHash, T.proc.returns(T.anything), T.anything)
       )
         .void
     end
@@ -295,11 +295,11 @@ module Anthropic
     sig(:final) do
       params(
         type_info: T.any(
-          T::Hash[Symbol, T.anything],
+          Anthropic::Util::AnyHash,
           T.proc.returns(Anthropic::Converter::Input),
           Anthropic::Converter::Input
         ),
-        spec: T::Hash[Symbol, T.anything]
+        spec: Anthropic::Util::AnyHash
       )
         .returns(T.attached_class)
     end
@@ -350,11 +350,11 @@ module Anthropic
     sig(:final) do
       params(
         type_info: T.any(
-          T::Hash[Symbol, T.anything],
+          Anthropic::Util::AnyHash,
           T.proc.returns(Anthropic::Converter::Input),
           Anthropic::Converter::Input
         ),
-        spec: T::Hash[Symbol, T.anything]
+        spec: Anthropic::Util::AnyHash
       )
         .void
     end
@@ -374,11 +374,11 @@ module Anthropic
     sig(:final) do
       params(
         type_info: T.any(
-          T::Hash[Symbol, T.anything],
+          Anthropic::Util::AnyHash,
           T.proc.returns(Anthropic::Converter::Input),
           Anthropic::Converter::Input
         ),
-        spec: T::Hash[Symbol, T.anything]
+        spec: Anthropic::Util::AnyHash
       )
         .returns(T.attached_class)
     end
@@ -397,7 +397,7 @@ module Anthropic
     sig(:final) do
       override
         .params(value: T.any(T::Hash[T.anything, T.anything], T.anything))
-        .returns(T.any(T::Hash[Symbol, T.anything], T.anything))
+        .returns(T.any(Anthropic::Util::AnyHash, T.anything))
     end
     def coerce(value)
     end
@@ -406,7 +406,7 @@ module Anthropic
     sig(:final) do
       override
         .params(value: T.any(T::Hash[T.anything, T.anything], T.anything))
-        .returns(T.any(T::Hash[Symbol, T.anything], T.anything))
+        .returns(T.any(Anthropic::Util::AnyHash, T.anything))
     end
     def dump(value)
     end
@@ -429,11 +429,11 @@ module Anthropic
     sig(:final) do
       params(
         type_info: T.any(
-          T::Hash[Symbol, T.anything],
+          Anthropic::Util::AnyHash,
           T.proc.returns(Anthropic::Converter::Input),
           Anthropic::Converter::Input
         ),
-        spec: T::Hash[Symbol, T.anything]
+        spec: Anthropic::Util::AnyHash
       )
         .void
     end
@@ -500,7 +500,7 @@ module Anthropic
             T.proc.returns(Anthropic::Converter::Input),
             Anthropic::Converter::Input
           ),
-          spec: T::Hash[Symbol, T.anything]
+          spec: Anthropic::Util::AnyHash
         )
           .void
       end
@@ -512,11 +512,11 @@ module Anthropic
         params(
           name_sym: Symbol,
           type_info: T.any(
-            T::Hash[Symbol, T.anything],
+            Anthropic::Util::AnyHash,
             T.proc.returns(Anthropic::Converter::Input),
             Anthropic::Converter::Input
           ),
-          spec: T::Hash[Symbol, T.anything]
+          spec: Anthropic::Util::AnyHash
         )
           .void
       end
@@ -528,11 +528,11 @@ module Anthropic
         params(
           name_sym: Symbol,
           type_info: T.any(
-            T::Hash[Symbol, T.anything],
+            Anthropic::Util::AnyHash,
             T.proc.returns(Anthropic::Converter::Input),
             Anthropic::Converter::Input
           ),
-          spec: T::Hash[Symbol, T.anything]
+          spec: Anthropic::Util::AnyHash
         )
           .void
       end
@@ -606,7 +606,7 @@ module Anthropic
     #
     #   This method is not recursive. The returned value is shared by the object, so it
     #   should not be mutated.
-    sig { overridable.returns(T::Hash[Symbol, T.anything]) }
+    sig { overridable.returns(Anthropic::Util::AnyHash) }
     def to_h
     end
 
@@ -618,11 +618,11 @@ module Anthropic
     #
     #   This method is not recursive. The returned value is shared by the object, so it
     #   should not be mutated.
-    sig { overridable.returns(T::Hash[Symbol, T.anything]) }
+    sig { overridable.returns(Anthropic::Util::AnyHash) }
     def to_hash
     end
 
-    sig { params(keys: T.nilable(T::Array[Symbol])).returns(T::Hash[Symbol, T.anything]) }
+    sig { params(keys: T.nilable(T::Array[Symbol])).returns(Anthropic::Util::AnyHash) }
     def deconstruct_keys(keys)
     end
 

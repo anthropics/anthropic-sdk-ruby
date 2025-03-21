@@ -23,7 +23,10 @@ module Anthropic
         def type=(_)
         end
 
-        sig { params(error: Anthropic::Models::ErrorResponse, type: Symbol).returns(T.attached_class) }
+        sig do
+          params(error: T.any(Anthropic::Models::ErrorResponse, Anthropic::Util::AnyHash), type: Symbol)
+            .returns(T.attached_class)
+        end
         def self.new(error:, type: :errored)
         end
 

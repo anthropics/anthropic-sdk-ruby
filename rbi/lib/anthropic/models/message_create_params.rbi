@@ -397,7 +397,7 @@ module Anthropic
           max_tokens: Integer,
           messages: T::Array[Anthropic::Models::MessageParam],
           model: T.any(Anthropic::Models::Model::OrSymbol, String),
-          metadata: Anthropic::Models::Metadata,
+          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Util::AnyHash),
           stop_sequences: T::Array[String],
           system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
           temperature: Float,
@@ -417,7 +417,7 @@ module Anthropic
           ],
           top_k: Integer,
           top_p: Float,
-          request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
+          request_options: T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

@@ -51,8 +51,8 @@ module Anthropic
 
         sig do
           params(
-            delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta,
-            usage: Anthropic::Models::Beta::BetaMessageDeltaUsage,
+            delta: T.any(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta, Anthropic::Util::AnyHash),
+            usage: T.any(Anthropic::Models::Beta::BetaMessageDeltaUsage, Anthropic::Util::AnyHash),
             type: Symbol
           )
             .returns(T.attached_class)

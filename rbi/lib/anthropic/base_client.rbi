@@ -26,7 +26,7 @@ module Anthropic
           page: T.nilable(T::Class[Anthropic::BasePage[Anthropic::BaseModel]]),
           stream: T.nilable(T::Class[Anthropic::BaseStream[T.anything, Anthropic::BaseModel]]),
           model: T.nilable(Anthropic::Converter::Input),
-          options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
+          options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
         }
       end
 
@@ -130,7 +130,7 @@ module Anthropic
     # @api private
     sig do
       overridable
-        .params(req: Anthropic::BaseClient::RequestComponentsShape, opts: T::Hash[Symbol, T.anything])
+        .params(req: Anthropic::BaseClient::RequestComponentsShape, opts: Anthropic::Util::AnyHash)
         .returns(Anthropic::BaseClient::RequestInputShape)
     end
     private def build_request(req, opts)
@@ -176,7 +176,7 @@ module Anthropic
         page: T.nilable(T::Class[Anthropic::BasePage[Anthropic::BaseModel]]),
         stream: T.nilable(T::Class[Anthropic::BaseStream[T.anything, Anthropic::BaseModel]]),
         model: T.nilable(Anthropic::Converter::Input),
-        options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
+        options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
       )
         .returns(T.anything)
     end
