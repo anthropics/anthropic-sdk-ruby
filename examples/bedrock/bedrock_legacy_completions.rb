@@ -1,8 +1,10 @@
+#!/usr/bin/env -S -- ruby
 # frozen_string_literal: true
+# typed: strong
 
-require "bundler/setup"
-require "anthropic"
+require_relative "../../lib/anthropic"
 
+# gets API credentials from environment variable `AWS_REGION` and `AWS_SECRET_ACCESS_KEY`
 anthropic = Anthropic::Bedrock::Client.new
 
 completion =  anthropic.completions.create(
@@ -16,4 +18,4 @@ completion =  anthropic.completions.create(
   model: "anthropic.claude-v2:1"
 )
 
-puts completion
+pp(completion)
