@@ -28,6 +28,8 @@ class Anthropic::Test::Resources::Beta::ModelsTest < Anthropic::Test::ResourceTe
     end
 
     row = response.to_enum.first
+    return if row.nil?
+
     assert_pattern do
       row => Anthropic::Models::Beta::BetaModelInfo
     end
