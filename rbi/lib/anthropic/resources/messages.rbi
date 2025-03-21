@@ -17,15 +17,20 @@ module Anthropic
       sig do
         params(
           max_tokens: Integer,
-          messages: T::Array[Anthropic::Models::MessageParam],
+          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Util::AnyHash)],
           model: T.any(Anthropic::Models::Model::OrSymbol, String),
-          metadata: Anthropic::Models::Metadata,
+          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Util::AnyHash),
           stop_sequences: T::Array[String],
-          system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
+          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash)]),
           temperature: Float,
-          thinking: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled),
+          thinking: T.any(
+            Anthropic::Models::ThinkingConfigEnabled,
+            Anthropic::Util::AnyHash,
+            Anthropic::Models::ThinkingConfigDisabled
+          ),
           tool_choice: T.any(
             Anthropic::Models::ToolChoiceAuto,
+            Anthropic::Util::AnyHash,
             Anthropic::Models::ToolChoiceAny,
             Anthropic::Models::ToolChoiceTool,
             Anthropic::Models::ToolChoiceNone
@@ -33,6 +38,7 @@ module Anthropic
           tools: T::Array[
           T.any(
             Anthropic::Models::Tool,
+            Anthropic::Util::AnyHash,
             Anthropic::Models::ToolBash20250124,
             Anthropic::Models::ToolTextEditor20250124
           )
@@ -289,15 +295,20 @@ module Anthropic
       sig do
         params(
           max_tokens: Integer,
-          messages: T::Array[Anthropic::Models::MessageParam],
+          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Util::AnyHash)],
           model: T.any(Anthropic::Models::Model::OrSymbol, String),
-          metadata: Anthropic::Models::Metadata,
+          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Util::AnyHash),
           stop_sequences: T::Array[String],
-          system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
+          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash)]),
           temperature: Float,
-          thinking: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled),
+          thinking: T.any(
+            Anthropic::Models::ThinkingConfigEnabled,
+            Anthropic::Util::AnyHash,
+            Anthropic::Models::ThinkingConfigDisabled
+          ),
           tool_choice: T.any(
             Anthropic::Models::ToolChoiceAuto,
+            Anthropic::Util::AnyHash,
             Anthropic::Models::ToolChoiceAny,
             Anthropic::Models::ToolChoiceTool,
             Anthropic::Models::ToolChoiceNone
@@ -305,6 +316,7 @@ module Anthropic
           tools: T::Array[
           T.any(
             Anthropic::Models::Tool,
+            Anthropic::Util::AnyHash,
             Anthropic::Models::ToolBash20250124,
             Anthropic::Models::ToolTextEditor20250124
           )
@@ -571,12 +583,17 @@ module Anthropic
       #   [user guide](/en/docs/build-with-claude/token-counting)
       sig do
         params(
-          messages: T::Array[Anthropic::Models::MessageParam],
+          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Util::AnyHash)],
           model: T.any(Anthropic::Models::Model::OrSymbol, String),
-          system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
-          thinking: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled),
+          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash)]),
+          thinking: T.any(
+            Anthropic::Models::ThinkingConfigEnabled,
+            Anthropic::Util::AnyHash,
+            Anthropic::Models::ThinkingConfigDisabled
+          ),
           tool_choice: T.any(
             Anthropic::Models::ToolChoiceAuto,
+            Anthropic::Util::AnyHash,
             Anthropic::Models::ToolChoiceAny,
             Anthropic::Models::ToolChoiceTool,
             Anthropic::Models::ToolChoiceNone
@@ -584,6 +601,7 @@ module Anthropic
           tools: T::Array[
           T.any(
             Anthropic::Models::Tool,
+            Anthropic::Util::AnyHash,
             Anthropic::Models::ToolBash20250124,
             Anthropic::Models::ToolTextEditor20250124
           )

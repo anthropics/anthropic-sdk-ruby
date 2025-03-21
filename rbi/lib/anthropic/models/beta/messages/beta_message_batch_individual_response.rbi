@@ -63,6 +63,7 @@ module Anthropic
               custom_id: String,
               result: T.any(
                 Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult,
+                Anthropic::Util::AnyHash,
                 Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult,
                 Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
                 Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
