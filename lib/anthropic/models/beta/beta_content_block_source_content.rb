@@ -13,10 +13,8 @@ module Anthropic
         variant :image, -> { Anthropic::Models::Beta::BetaImageBlockParam }
 
         # @!parse
-        #   class << self
-        #     # @return [Array(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
-        #     def variants; end
-        #   end
+        #   # @return [Array(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
+        #   def self.variants; end
       end
     end
 

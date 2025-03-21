@@ -37,10 +37,8 @@ module Anthropic
       variant const: Anthropic::Models::AnthropicBeta::OUTPUT_128K_2025_02_19
 
       # @!parse
-      #   class << self
-      #     # @return [Array(String, Symbol)]
-      #     def variants; end
-      #   end
+      #   # @return [Array(String, Symbol)]
+      #   def self.variants; end
     end
   end
 end

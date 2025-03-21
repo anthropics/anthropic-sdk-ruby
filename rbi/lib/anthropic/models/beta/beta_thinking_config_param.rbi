@@ -15,25 +15,13 @@ module Anthropic
       module BetaThinkingConfigParam
         extend Anthropic::Union
 
-        Variants =
-          type_template(:out) do
-            {
-              fixed: T.any(
-                Anthropic::Models::Beta::BetaThinkingConfigEnabled,
-                Anthropic::Models::Beta::BetaThinkingConfigDisabled
-              )
-            }
-          end
-
-        class << self
-          sig do
-            override
-              .returns(
-                [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
-              )
-          end
-          def variants
-          end
+        sig do
+          override
+            .returns(
+              [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
+            )
+        end
+        def self.variants
         end
       end
     end

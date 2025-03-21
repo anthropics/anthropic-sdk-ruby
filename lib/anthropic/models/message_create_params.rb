@@ -369,10 +369,8 @@ module Anthropic
         variant Anthropic::Models::MessageCreateParams::System::TextBlockParamArray
 
         # @!parse
-        #   class << self
-        #     # @return [Array(String, Array<Anthropic::Models::TextBlockParam>)]
-        #     def variants; end
-        #   end
+        #   # @return [Array(String, Array<Anthropic::Models::TextBlockParam>)]
+        #   def self.variants; end
       end
     end
   end

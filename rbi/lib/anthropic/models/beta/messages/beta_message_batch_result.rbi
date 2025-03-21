@@ -12,27 +12,13 @@ module Anthropic
         module BetaMessageBatchResult
           extend Anthropic::Union
 
-          Variants =
-            type_template(:out) do
-              {
-                fixed: T.any(
-                  Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult,
-                  Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult,
-                  Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
-                  Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
-                )
-              }
-            end
-
-          class << self
-            sig do
-              override
-                .returns(
-                  [Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult]
-                )
-            end
-            def variants
-            end
+          sig do
+            override
+              .returns(
+                [Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult]
+              )
+          end
+          def self.variants
           end
         end
       end

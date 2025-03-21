@@ -60,27 +60,13 @@ module Anthropic
         module ContentBlock
           extend Anthropic::Union
 
-          Variants =
-            type_template(:out) do
-              {
-                fixed: T.any(
-                  Anthropic::Models::Beta::BetaTextBlock,
-                  Anthropic::Models::Beta::BetaToolUseBlock,
-                  Anthropic::Models::Beta::BetaThinkingBlock,
-                  Anthropic::Models::Beta::BetaRedactedThinkingBlock
-                )
-              }
-            end
-
-          class << self
-            sig do
-              override
-                .returns(
-                  [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock]
-                )
-            end
-            def variants
-            end
+          sig do
+            override
+              .returns(
+                [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock]
+              )
+          end
+          def self.variants
           end
         end
       end

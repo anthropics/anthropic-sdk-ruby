@@ -63,28 +63,13 @@ module Anthropic
         module Delta
           extend Anthropic::Union
 
-          Variants =
-            type_template(:out) do
-              {
-                fixed: T.any(
-                  Anthropic::Models::Beta::BetaTextDelta,
-                  Anthropic::Models::Beta::BetaInputJSONDelta,
-                  Anthropic::Models::Beta::BetaCitationsDelta,
-                  Anthropic::Models::Beta::BetaThinkingDelta,
-                  Anthropic::Models::Beta::BetaSignatureDelta
-                )
-              }
-            end
-
-          class << self
-            sig do
-              override
-                .returns(
-                  [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta]
-                )
-            end
-            def variants
-            end
+          sig do
+            override
+              .returns(
+                [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta]
+              )
+          end
+          def self.variants
           end
         end
       end

@@ -22,10 +22,8 @@ module Anthropic
         variant :expired, -> { Anthropic::Models::Messages::MessageBatchExpiredResult }
 
         # @!parse
-        #   class << self
-        #     # @return [Array(Anthropic::Models::Messages::MessageBatchSucceededResult, Anthropic::Models::Messages::MessageBatchErroredResult, Anthropic::Models::Messages::MessageBatchCanceledResult, Anthropic::Models::Messages::MessageBatchExpiredResult)]
-        #     def variants; end
-        #   end
+        #   # @return [Array(Anthropic::Models::Messages::MessageBatchSucceededResult, Anthropic::Models::Messages::MessageBatchErroredResult, Anthropic::Models::Messages::MessageBatchCanceledResult, Anthropic::Models::Messages::MessageBatchExpiredResult)]
+        #   def self.variants; end
       end
     end
 

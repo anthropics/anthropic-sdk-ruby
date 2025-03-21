@@ -39,10 +39,8 @@ module Anthropic
         IMAGE_GIF = T.let(:"image/gif", Anthropic::Models::Base64ImageSource::MediaType::TaggedSymbol)
         IMAGE_WEBP = T.let(:"image/webp", Anthropic::Models::Base64ImageSource::MediaType::TaggedSymbol)
 
-        class << self
-          sig { override.returns(T::Array[Anthropic::Models::Base64ImageSource::MediaType::TaggedSymbol]) }
-          def values
-          end
+        sig { override.returns(T::Array[Anthropic::Models::Base64ImageSource::MediaType::TaggedSymbol]) }
+        def self.values
         end
       end
     end

@@ -47,10 +47,8 @@ module Anthropic
           IMAGE_WEBP =
             T.let(:"image/webp", Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol)
 
-          class << self
-            sig { override.returns(T::Array[Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol]) }
-            def values
-            end
+          sig { override.returns(T::Array[Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol]) }
+          def self.values
           end
         end
       end

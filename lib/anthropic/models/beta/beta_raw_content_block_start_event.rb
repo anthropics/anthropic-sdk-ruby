@@ -43,10 +43,8 @@ module Anthropic
           variant :redacted_thinking, -> { Anthropic::Models::Beta::BetaRedactedThinkingBlock }
 
           # @!parse
-          #   class << self
-          #     # @return [Array(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock)]
-          #     def variants; end
-          #   end
+          #   # @return [Array(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock)]
+          #   def self.variants; end
         end
       end
     end
