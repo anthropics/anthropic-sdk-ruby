@@ -14,7 +14,7 @@ module Anthropic
         #   [user guide](/en/docs/build-with-claude/batch-processing)
         sig do
           params(
-            requests: T::Array[Anthropic::Models::Messages::BatchCreateParams::Request],
+            requests: T::Array[T.any(Anthropic::Models::Messages::BatchCreateParams::Request, Anthropic::Util::AnyHash)],
             request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
           )
             .returns(Anthropic::Models::Messages::MessageBatch)

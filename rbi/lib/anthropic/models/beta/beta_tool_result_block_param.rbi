@@ -48,13 +48,25 @@ module Anthropic
           params(
             _: T.any(
               String,
-              T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
+              T::Array[
+              T.any(
+                Anthropic::Models::Beta::BetaTextBlockParam,
+                Anthropic::Util::AnyHash,
+                Anthropic::Models::Beta::BetaImageBlockParam
+              )
+              ]
             )
           )
             .returns(
               T.any(
                 String,
-                T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
+                T::Array[
+                T.any(
+                  Anthropic::Models::Beta::BetaTextBlockParam,
+                  Anthropic::Util::AnyHash,
+                  Anthropic::Models::Beta::BetaImageBlockParam
+                )
+                ]
               )
             )
         end
@@ -75,7 +87,13 @@ module Anthropic
             cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)),
             content: T.any(
               String,
-              T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
+              T::Array[
+              T.any(
+                Anthropic::Models::Beta::BetaTextBlockParam,
+                Anthropic::Util::AnyHash,
+                Anthropic::Models::Beta::BetaImageBlockParam
+              )
+              ]
             ),
             is_error: T::Boolean,
             type: Symbol

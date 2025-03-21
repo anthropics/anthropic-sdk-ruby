@@ -58,6 +58,7 @@ module Anthropic
           params(
             content_block: T.any(
               Anthropic::Models::Beta::BetaTextBlock,
+              Anthropic::Util::AnyHash,
               Anthropic::Models::Beta::BetaToolUseBlock,
               Anthropic::Models::Beta::BetaThinkingBlock,
               Anthropic::Models::Beta::BetaRedactedThinkingBlock

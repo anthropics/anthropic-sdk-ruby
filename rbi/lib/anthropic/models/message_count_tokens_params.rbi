@@ -124,8 +124,8 @@ module Anthropic
       end
 
       sig do
-        params(_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]))
-          .returns(T.any(String, T::Array[Anthropic::Models::TextBlockParam]))
+        params(_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash)]))
+          .returns(T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash)]))
       end
       def system_=(_)
       end
@@ -148,8 +148,20 @@ module Anthropic
       end
 
       sig do
-        params(_: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled))
-          .returns(T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled))
+        params(
+          _: T.any(
+            Anthropic::Models::ThinkingConfigEnabled,
+            Anthropic::Util::AnyHash,
+            Anthropic::Models::ThinkingConfigDisabled
+          )
+        )
+          .returns(
+            T.any(
+              Anthropic::Models::ThinkingConfigEnabled,
+              Anthropic::Util::AnyHash,
+              Anthropic::Models::ThinkingConfigDisabled
+            )
+          )
       end
       def thinking=(_)
       end
@@ -175,6 +187,7 @@ module Anthropic
         params(
           _: T.any(
             Anthropic::Models::ToolChoiceAuto,
+            Anthropic::Util::AnyHash,
             Anthropic::Models::ToolChoiceAny,
             Anthropic::Models::ToolChoiceTool,
             Anthropic::Models::ToolChoiceNone
@@ -183,6 +196,7 @@ module Anthropic
           .returns(
             T.any(
               Anthropic::Models::ToolChoiceAuto,
+              Anthropic::Util::AnyHash,
               Anthropic::Models::ToolChoiceAny,
               Anthropic::Models::ToolChoiceTool,
               Anthropic::Models::ToolChoiceNone
@@ -282,6 +296,7 @@ module Anthropic
           _: T::Array[
           T.any(
             Anthropic::Models::Tool,
+            Anthropic::Util::AnyHash,
             Anthropic::Models::ToolBash20250124,
             Anthropic::Models::ToolTextEditor20250124
           )
@@ -291,6 +306,7 @@ module Anthropic
             T::Array[
             T.any(
               Anthropic::Models::Tool,
+              Anthropic::Util::AnyHash,
               Anthropic::Models::ToolBash20250124,
               Anthropic::Models::ToolTextEditor20250124
             )
@@ -302,12 +318,17 @@ module Anthropic
 
       sig do
         params(
-          messages: T::Array[Anthropic::Models::MessageParam],
+          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Util::AnyHash)],
           model: T.any(Anthropic::Models::Model::OrSymbol, String),
-          system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
-          thinking: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled),
+          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash)]),
+          thinking: T.any(
+            Anthropic::Models::ThinkingConfigEnabled,
+            Anthropic::Util::AnyHash,
+            Anthropic::Models::ThinkingConfigDisabled
+          ),
           tool_choice: T.any(
             Anthropic::Models::ToolChoiceAuto,
+            Anthropic::Util::AnyHash,
             Anthropic::Models::ToolChoiceAny,
             Anthropic::Models::ToolChoiceTool,
             Anthropic::Models::ToolChoiceNone
@@ -315,6 +336,7 @@ module Anthropic
           tools: T::Array[
           T.any(
             Anthropic::Models::Tool,
+            Anthropic::Util::AnyHash,
             Anthropic::Models::ToolBash20250124,
             Anthropic::Models::ToolTextEditor20250124
           )

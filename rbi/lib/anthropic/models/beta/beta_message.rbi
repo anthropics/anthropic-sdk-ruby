@@ -189,13 +189,14 @@ module Anthropic
             content: T::Array[
             T.any(
               Anthropic::Models::Beta::BetaTextBlock,
+              Anthropic::Util::AnyHash,
               Anthropic::Models::Beta::BetaToolUseBlock,
               Anthropic::Models::Beta::BetaThinkingBlock,
               Anthropic::Models::Beta::BetaRedactedThinkingBlock
             )
             ],
-            model: T.any(Anthropic::Models::Model::TaggedSymbol, String),
-            stop_reason: T.nilable(Anthropic::Models::Beta::BetaMessage::StopReason::TaggedSymbol),
+            model: T.any(Anthropic::Models::Model::OrSymbol, String),
+            stop_reason: T.nilable(Anthropic::Models::Beta::BetaMessage::StopReason::OrSymbol),
             stop_sequence: T.nilable(String),
             usage: T.any(Anthropic::Models::Beta::BetaUsage, Anthropic::Util::AnyHash),
             role: Symbol,

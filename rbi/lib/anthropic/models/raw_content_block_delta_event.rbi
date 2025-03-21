@@ -60,6 +60,7 @@ module Anthropic
         params(
           delta: T.any(
             Anthropic::Models::TextDelta,
+            Anthropic::Util::AnyHash,
             Anthropic::Models::InputJSONDelta,
             Anthropic::Models::CitationsDelta,
             Anthropic::Models::ThinkingDelta,

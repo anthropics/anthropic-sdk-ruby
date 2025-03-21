@@ -42,10 +42,16 @@ module Anthropic
 
       sig do
         params(
-          _: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)])
+          _: T.any(
+            String,
+            T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash, Anthropic::Models::ImageBlockParam)]
+          )
         )
           .returns(
-            T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)])
+            T.any(
+              String,
+              T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash, Anthropic::Models::ImageBlockParam)]
+            )
           )
       end
       def content=(_)
@@ -63,7 +69,10 @@ module Anthropic
         params(
           tool_use_id: String,
           cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)),
-          content: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]),
+          content: T.any(
+            String,
+            T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash, Anthropic::Models::ImageBlockParam)]
+          ),
           is_error: T::Boolean,
           type: Symbol
         )
