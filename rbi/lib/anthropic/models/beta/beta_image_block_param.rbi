@@ -9,38 +9,21 @@ module Anthropic
             T.any(Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource)
           )
         end
-        def source
-        end
+        attr_accessor :source
+
+        sig { returns(Symbol) }
+        attr_accessor :type
+
+        sig { returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)) }
+        attr_reader :cache_control
 
         sig do
           params(
-            _: T.any(Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource)
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash))
           )
-            .returns(
-              T.any(Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource)
-            )
+            .void
         end
-        def source=(_)
-        end
-
-        sig { returns(Symbol) }
-        def type
-        end
-
-        sig { params(_: Symbol).returns(Symbol) }
-        def type=(_)
-        end
-
-        sig { returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)) }
-        def cache_control
-        end
-
-        sig do
-          params(_: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)))
-            .returns(T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)))
-        end
-        def cache_control=(_)
-        end
+        attr_writer :cache_control
 
         sig do
           params(

@@ -8,54 +8,29 @@ module Anthropic
         #
         #   This is zero until processing of the entire Message Batch has ended.
         sig { returns(Integer) }
-        def canceled
-        end
-
-        sig { params(_: Integer).returns(Integer) }
-        def canceled=(_)
-        end
+        attr_accessor :canceled
 
         # Number of requests in the Message Batch that encountered an error.
         #
         #   This is zero until processing of the entire Message Batch has ended.
         sig { returns(Integer) }
-        def errored
-        end
-
-        sig { params(_: Integer).returns(Integer) }
-        def errored=(_)
-        end
+        attr_accessor :errored
 
         # Number of requests in the Message Batch that have expired.
         #
         #   This is zero until processing of the entire Message Batch has ended.
         sig { returns(Integer) }
-        def expired
-        end
-
-        sig { params(_: Integer).returns(Integer) }
-        def expired=(_)
-        end
+        attr_accessor :expired
 
         # Number of requests in the Message Batch that are processing.
         sig { returns(Integer) }
-        def processing
-        end
-
-        sig { params(_: Integer).returns(Integer) }
-        def processing=(_)
-        end
+        attr_accessor :processing
 
         # Number of requests in the Message Batch that have completed successfully.
         #
         #   This is zero until processing of the entire Message Batch has ended.
         sig { returns(Integer) }
-        def succeeded
-        end
-
-        sig { params(_: Integer).returns(Integer) }
-        def succeeded=(_)
-        end
+        attr_accessor :succeeded
 
         sig do
           params(

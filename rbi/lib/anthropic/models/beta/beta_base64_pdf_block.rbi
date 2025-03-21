@@ -14,75 +14,33 @@ module Anthropic
             )
           )
         end
-        def source
-        end
+        attr_accessor :source
+
+        sig { returns(Symbol) }
+        attr_accessor :type
+
+        sig { returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)) }
+        attr_reader :cache_control
 
         sig do
           params(
-            _: T.any(
-              Anthropic::Models::Beta::BetaBase64PDFSource,
-              Anthropic::Models::Beta::BetaPlainTextSource,
-              Anthropic::Models::Beta::BetaContentBlockSource,
-              Anthropic::Models::Beta::BetaURLPDFSource
-            )
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash))
           )
-            .returns(
-              T.any(
-                Anthropic::Models::Beta::BetaBase64PDFSource,
-                Anthropic::Models::Beta::BetaPlainTextSource,
-                Anthropic::Models::Beta::BetaContentBlockSource,
-                Anthropic::Models::Beta::BetaURLPDFSource
-              )
-            )
+            .void
         end
-        def source=(_)
-        end
-
-        sig { returns(Symbol) }
-        def type
-        end
-
-        sig { params(_: Symbol).returns(Symbol) }
-        def type=(_)
-        end
-
-        sig { returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)) }
-        def cache_control
-        end
-
-        sig do
-          params(_: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)))
-            .returns(T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)))
-        end
-        def cache_control=(_)
-        end
+        attr_writer :cache_control
 
         sig { returns(T.nilable(Anthropic::Models::Beta::BetaCitationsConfigParam)) }
-        def citations
-        end
+        attr_reader :citations
 
-        sig do
-          params(_: T.any(Anthropic::Models::Beta::BetaCitationsConfigParam, Anthropic::Util::AnyHash))
-            .returns(T.any(Anthropic::Models::Beta::BetaCitationsConfigParam, Anthropic::Util::AnyHash))
-        end
-        def citations=(_)
-        end
+        sig { params(citations: T.any(Anthropic::Models::Beta::BetaCitationsConfigParam, Anthropic::Util::AnyHash)).void }
+        attr_writer :citations
 
         sig { returns(T.nilable(String)) }
-        def context
-        end
-
-        sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-        def context=(_)
-        end
+        attr_accessor :context
 
         sig { returns(T.nilable(String)) }
-        def title
-        end
-
-        sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-        def title=(_)
-        end
+        attr_accessor :title
 
         sig do
           params(

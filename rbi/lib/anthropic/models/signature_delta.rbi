@@ -4,20 +4,10 @@ module Anthropic
   module Models
     class SignatureDelta < Anthropic::BaseModel
       sig { returns(String) }
-      def signature
-      end
-
-      sig { params(_: String).returns(String) }
-      def signature=(_)
-      end
+      attr_accessor :signature
 
       sig { returns(Symbol) }
-      def type
-      end
-
-      sig { params(_: Symbol).returns(Symbol) }
-      def type=(_)
-      end
+      attr_accessor :type
 
       sig { params(signature: String, type: Symbol).returns(T.attached_class) }
       def self.new(signature:, type: :signature_delta)

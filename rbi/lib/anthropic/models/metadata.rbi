@@ -9,12 +9,7 @@ module Anthropic
       #   this id to help detect abuse. Do not include any identifying information such as
       #   name, email address, or phone number.
       sig { returns(T.nilable(String)) }
-      def user_id
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def user_id=(_)
-      end
+      attr_accessor :user_id
 
       sig { params(user_id: T.nilable(String)).returns(T.attached_class) }
       def self.new(user_id: nil)

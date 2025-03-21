@@ -4,20 +4,10 @@ module Anthropic
   module Models
     class URLPDFSource < Anthropic::BaseModel
       sig { returns(Symbol) }
-      def type
-      end
-
-      sig { params(_: Symbol).returns(Symbol) }
-      def type=(_)
-      end
+      attr_accessor :type
 
       sig { returns(String) }
-      def url
-      end
-
-      sig { params(_: String).returns(String) }
-      def url=(_)
-      end
+      attr_accessor :url
 
       sig { params(url: String, type: Symbol).returns(T.attached_class) }
       def self.new(url:, type: :url)

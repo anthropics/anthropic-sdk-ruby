@@ -12,35 +12,10 @@ module Anthropic
           )
         )
       end
-      def citation
-      end
-
-      sig do
-        params(
-          _: T.any(
-            Anthropic::Models::CitationCharLocation,
-            Anthropic::Models::CitationPageLocation,
-            Anthropic::Models::CitationContentBlockLocation
-          )
-        )
-          .returns(
-            T.any(
-              Anthropic::Models::CitationCharLocation,
-              Anthropic::Models::CitationPageLocation,
-              Anthropic::Models::CitationContentBlockLocation
-            )
-          )
-      end
-      def citation=(_)
-      end
+      attr_accessor :citation
 
       sig { returns(Symbol) }
-      def type
-      end
-
-      sig { params(_: Symbol).returns(Symbol) }
-      def type=(_)
-      end
+      attr_accessor :type
 
       sig do
         params(

@@ -15,12 +15,7 @@ module Anthropic
         #   Different models have different maximum values for this parameter. See
         #   [models](https://docs.anthropic.com/en/docs/models-overview) for details.
         sig { returns(Integer) }
-        def max_tokens
-        end
-
-        sig { params(_: Integer).returns(Integer) }
-        def max_tokens=(_)
-        end
+        attr_accessor :max_tokens
 
         # Input messages.
         #
@@ -109,41 +104,20 @@ module Anthropic
         #   the top-level `system` parameter — there is no `"system"` role for input
         #   messages in the Messages API.
         sig { returns(T::Array[Anthropic::Models::Beta::BetaMessageParam]) }
-        def messages
-        end
-
-        sig do
-          params(_: T::Array[Anthropic::Models::Beta::BetaMessageParam])
-            .returns(T::Array[Anthropic::Models::Beta::BetaMessageParam])
-        end
-        def messages=(_)
-        end
+        attr_accessor :messages
 
         # The model that will complete your prompt.\n\nSee
         #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #   details and options.
         sig { returns(T.any(Anthropic::Models::Model::OrSymbol, String)) }
-        def model
-        end
-
-        sig do
-          params(_: T.any(Anthropic::Models::Model::OrSymbol, String))
-            .returns(T.any(Anthropic::Models::Model::OrSymbol, String))
-        end
-        def model=(_)
-        end
+        attr_accessor :model
 
         # An object describing metadata about the request.
         sig { returns(T.nilable(Anthropic::Models::Beta::BetaMetadata)) }
-        def metadata
-        end
+        attr_reader :metadata
 
-        sig do
-          params(_: T.any(Anthropic::Models::Beta::BetaMetadata, Anthropic::Util::AnyHash))
-            .returns(T.any(Anthropic::Models::Beta::BetaMetadata, Anthropic::Util::AnyHash))
-        end
-        def metadata=(_)
-        end
+        sig { params(metadata: T.any(Anthropic::Models::Beta::BetaMetadata, Anthropic::Util::AnyHash)).void }
+        attr_writer :metadata
 
         # Custom text sequences that will cause the model to stop generating.
         #
@@ -155,12 +129,10 @@ module Anthropic
         #   the custom sequences, the response `stop_reason` value will be `"stop_sequence"`
         #   and the response `stop_sequence` value will contain the matched stop sequence.
         sig { returns(T.nilable(T::Array[String])) }
-        def stop_sequences
-        end
+        attr_reader :stop_sequences
 
-        sig { params(_: T::Array[String]).returns(T::Array[String]) }
-        def stop_sequences=(_)
-        end
+        sig { params(stop_sequences: T::Array[String]).void }
+        attr_writer :stop_sequences
 
         # System prompt.
         #
@@ -168,19 +140,15 @@ module Anthropic
         #   as specifying a particular goal or role. See our
         #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
         sig { returns(T.nilable(T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]))) }
-        def system_
-        end
+        attr_reader :system_
 
         sig do
           params(
-            _: T.any(String, T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Util::AnyHash)])
+            system_: T.any(String, T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Util::AnyHash)])
           )
-            .returns(
-              T.any(String, T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Util::AnyHash)])
-            )
+            .void
         end
-        def system_=(_)
-        end
+        attr_writer :system_
 
         # Amount of randomness injected into the response.
         #
@@ -191,12 +159,10 @@ module Anthropic
         #   Note that even with `temperature` of `0.0`, the results will not be fully
         #   deterministic.
         sig { returns(T.nilable(Float)) }
-        def temperature
-        end
+        attr_reader :temperature
 
-        sig { params(_: Float).returns(Float) }
-        def temperature=(_)
-        end
+        sig { params(temperature: Float).void }
+        attr_writer :temperature
 
         # Configuration for enabling Claude's extended thinking.
         #
@@ -217,27 +183,19 @@ module Anthropic
             )
           )
         end
-        def thinking
-        end
+        attr_reader :thinking
 
         sig do
           params(
-            _: T.any(
+            thinking: T.any(
               Anthropic::Models::Beta::BetaThinkingConfigEnabled,
               Anthropic::Util::AnyHash,
               Anthropic::Models::Beta::BetaThinkingConfigDisabled
             )
           )
-            .returns(
-              T.any(
-                Anthropic::Models::Beta::BetaThinkingConfigEnabled,
-                Anthropic::Util::AnyHash,
-                Anthropic::Models::Beta::BetaThinkingConfigDisabled
-              )
-            )
+            .void
         end
-        def thinking=(_)
-        end
+        attr_writer :thinking
 
         # How the model should use the provided tools. The model can use a specific tool,
         #   any available tool, decide by itself, or not use tools at all.
@@ -253,12 +211,11 @@ module Anthropic
             )
           )
         end
-        def tool_choice
-        end
+        attr_reader :tool_choice
 
         sig do
           params(
-            _: T.any(
+            tool_choice: T.any(
               Anthropic::Models::Beta::BetaToolChoiceAuto,
               Anthropic::Util::AnyHash,
               Anthropic::Models::Beta::BetaToolChoiceAny,
@@ -266,18 +223,9 @@ module Anthropic
               Anthropic::Models::Beta::BetaToolChoiceNone
             )
           )
-            .returns(
-              T.any(
-                Anthropic::Models::Beta::BetaToolChoiceAuto,
-                Anthropic::Util::AnyHash,
-                Anthropic::Models::Beta::BetaToolChoiceAny,
-                Anthropic::Models::Beta::BetaToolChoiceTool,
-                Anthropic::Models::Beta::BetaToolChoiceNone
-              )
-            )
+            .void
         end
-        def tool_choice=(_)
-        end
+        attr_writer :tool_choice
 
         # Definitions of tools that the model may use.
         #
@@ -365,12 +313,11 @@ module Anthropic
             )
           )
         end
-        def tools
-        end
+        attr_reader :tools
 
         sig do
           params(
-            _: T::Array[
+            tools: T::Array[
             T.any(
               Anthropic::Models::Beta::BetaTool,
               Anthropic::Util::AnyHash,
@@ -383,23 +330,9 @@ module Anthropic
             )
             ]
           )
-            .returns(
-              T::Array[
-              T.any(
-                Anthropic::Models::Beta::BetaTool,
-                Anthropic::Util::AnyHash,
-                Anthropic::Models::Beta::BetaToolComputerUse20241022,
-                Anthropic::Models::Beta::BetaToolBash20241022,
-                Anthropic::Models::Beta::BetaToolTextEditor20241022,
-                Anthropic::Models::Beta::BetaToolComputerUse20250124,
-                Anthropic::Models::Beta::BetaToolBash20250124,
-                Anthropic::Models::Beta::BetaToolTextEditor20250124
-              )
-              ]
-            )
+            .void
         end
-        def tools=(_)
-        end
+        attr_writer :tools
 
         # Only sample from the top K options for each subsequent token.
         #
@@ -409,12 +342,10 @@ module Anthropic
         #   Recommended for advanced use cases only. You usually only need to use
         #   `temperature`.
         sig { returns(T.nilable(Integer)) }
-        def top_k
-        end
+        attr_reader :top_k
 
-        sig { params(_: Integer).returns(Integer) }
-        def top_k=(_)
-        end
+        sig { params(top_k: Integer).void }
+        attr_writer :top_k
 
         # Use nucleus sampling.
         #
@@ -426,24 +357,17 @@ module Anthropic
         #   Recommended for advanced use cases only. You usually only need to use
         #   `temperature`.
         sig { returns(T.nilable(Float)) }
-        def top_p
-        end
+        attr_reader :top_p
 
-        sig { params(_: Float).returns(Float) }
-        def top_p=(_)
-        end
+        sig { params(top_p: Float).void }
+        attr_writer :top_p
 
         # Optional header to specify the beta version(s) you want to use.
         sig { returns(T.nilable(T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])) }
-        def betas
-        end
+        attr_reader :betas
 
-        sig do
-          params(_: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])
-            .returns(T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])
-        end
-        def betas=(_)
-        end
+        sig { params(betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)]).void }
+        attr_writer :betas
 
         sig do
           params(

@@ -10,12 +10,7 @@ module Anthropic
           #
           #   Must be unique for each request within the Message Batch.
           sig { returns(String) }
-          def custom_id
-          end
-
-          sig { params(_: String).returns(String) }
-          def custom_id=(_)
-          end
+          attr_accessor :custom_id
 
           # Processing result for this request.
           #
@@ -32,29 +27,7 @@ module Anthropic
               )
             )
           end
-          def result
-          end
-
-          sig do
-            params(
-              _: T.any(
-                Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult,
-                Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult,
-                Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
-                Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
-              )
-            )
-              .returns(
-                T.any(
-                  Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult,
-                  Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult,
-                  Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult,
-                  Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
-                )
-              )
-          end
-          def result=(_)
-          end
+          attr_accessor :result
 
           # This is a single line in the response `.jsonl` file and does not represent the
           #   response as a whole.
