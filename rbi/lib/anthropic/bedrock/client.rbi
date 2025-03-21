@@ -6,35 +6,32 @@ module Anthropic
       DEFAULT_VERSION = "bedrock-2023-05-31"
 
       sig { returns(String) }
-      def aws_region
-      end
+      attr_reader :aws_region
 
       sig { returns(Anthropic::Resources::Completions) }
-      def completions
-      end
+      attr_reader :completions
 
       sig { returns(Anthropic::Resources::Messages) }
-      def messages
-      end
+      attr_reader :messages
 
       sig { returns(Anthropic::Resources::Beta) }
-      def beta
-      end
+      attr_reader :beta
 
+      # @api private
       sig do
         override
-          .params(req: Anthropic::BaseClient::RequestComponentsShape, opts: T::Hash[Symbol, T.anything])
+          .params(req: Anthropic::BaseClient::RequestComponentsShape, opts: Anthropic::Util::AnyHash)
           .returns(Anthropic::BaseClient::RequestInputShape)
       end
-      private def build_request(req, opts)
-      end
+      private def build_request(req, opts); end
 
       sig do
-        params(aws_region: T.nilable(String),
-               aws_access_key: T.nilable(String),
-               aws_secret_key: T.nilable(String),
-               aws_session_token: T.nilable(String),
-               aws_profile: T.nilable(String)
+        params(
+          aws_region: T.nilable(String),
+          aws_access_key: T.nilable(String),
+          aws_secret_key: T.nilable(String),
+          aws_session_token: T.nilable(String),
+          aws_profile: T.nilable(String)
         ).returns(T::Array[T.anything])
       end
       private def resolve_region_and_credentials(
@@ -63,8 +60,8 @@ module Anthropic
           aws_access_key: T.nilable(String),
           aws_secret_key: T.nilable(String),
           aws_session_token: T.nilable(String),
-          aws_profile: T.nilable(String),
-        ).void
+          aws_profile: T.nilable(String)
+        ).returns(T.attached_class)
       end
       def self.new(
         aws_region: nil,
@@ -77,7 +74,6 @@ module Anthropic
         aws_secret_key: nil,
         aws_session_token: nil,
         aws_profile: nil
-
       ) end
     end
   end

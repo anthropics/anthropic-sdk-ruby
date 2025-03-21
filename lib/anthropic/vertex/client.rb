@@ -20,7 +20,7 @@ module Anthropic
       # Creates and returns a new client for interacting with the GCP Vertex API for Anthropic models.
       #
       # GCP credentials are resolved according to Application Default Credentials, described at
-      # https://cloud.google.com/docs/authentication/provide-credentials-adc
+      #   https://cloud.google.com/docs/authentication/provide-credentials-adc
       #
       # @param region [String, nil] Enforce the GCP Region to use. If unset, the region may be set with the CLOUD_ML_REGION environment variable.
       #
@@ -53,7 +53,7 @@ module Anthropic
             In order to access Anthropic models on Vertex you must require the `googleauth` gem.
             You can install it by adding the following to your Gemfile:
 
-                gem 'googleauth'
+                gem "googleauth"
 
             and then running `bundle install`.
 
@@ -63,21 +63,20 @@ module Anthropic
           MSG
         end
 
-        if region.nil? || region.empty?
+        if region.to_s.empty?
           raise ArgumentError,
                 "No region was given. The client should be instantiated with the `region` argument or the `CLOUD_ML_REGION` environment variable should be set."
         end
         @region = region
 
-
-        if project_id.nil? || project_id.empty?
+        if project_id.to_s.empty?
           raise ArgumentError,
                 "No project_id was given and it could not be resolved from credentials. The client should be instantiated with the `project_id` argument or the `ANTHROPIC_VERTEX_PROJECT_ID` environment variable should be set."
 
         end
         @project_id = project_id
 
-        base_url = base_url || ENV["ANTHROPIC_VERTEX_BASE_URL"] || "https://#{@region}-aiplatform.googleapis.com/v1"
+        base_url = base_url || ENV.fetch("ANTHROPIC_VERTEX_BASE_URL", "https://#{@region}-aiplatform.googleapis.com/v1")
 
         super(
           base_url: base_url,
@@ -88,7 +87,6 @@ module Anthropic
         )
 
         @messages = Anthropic::Resources::Messages.new(client: self)
-
         @beta = Anthropic::Resources::Beta.new(client: self)
       end
 

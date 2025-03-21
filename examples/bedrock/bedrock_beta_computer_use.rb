@@ -1,8 +1,10 @@
+#!/usr/bin/env -S -- ruby
 # frozen_string_literal: true
+# typed: strong
 
-require "bundler/setup"
-require "anthropic"
+require_relative "../../lib/anthropic"
 
+# gets API credentials from environment variable `AWS_REGION` and `AWS_SECRET_ACCESS_KEY`
 anthropic = Anthropic::Bedrock::Client.new
 
 message = anthropic.beta.messages.create(
@@ -34,4 +36,4 @@ message = anthropic.beta.messages.create(
   betas: ["computer-use-2024-10-22"]
 )
 
-puts(message.content)
+pp(message.content)
