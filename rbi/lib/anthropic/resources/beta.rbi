@@ -4,12 +4,10 @@ module Anthropic
   module Resources
     class Beta
       sig { returns(Anthropic::Resources::Beta::Models) }
-      def models
-      end
+      attr_reader :models
 
       sig { returns(Anthropic::Resources::Beta::Messages) }
-      def messages
-      end
+      attr_reader :messages
 
       sig { params(client: Anthropic::Client).returns(T.attached_class) }
       def self.new(client:)

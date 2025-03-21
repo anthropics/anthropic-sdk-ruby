@@ -93,26 +93,13 @@ module Anthropic
       #   the top-level `system` parameter — there is no `"system"` role for input
       #   messages in the Messages API.
       sig { returns(T::Array[Anthropic::Models::MessageParam]) }
-      def messages
-      end
-
-      sig { params(_: T::Array[Anthropic::Models::MessageParam]).returns(T::Array[Anthropic::Models::MessageParam]) }
-      def messages=(_)
-      end
+      attr_accessor :messages
 
       # The model that will complete your prompt.\n\nSee
       #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
       sig { returns(T.any(Anthropic::Models::Model::OrSymbol, String)) }
-      def model
-      end
-
-      sig do
-        params(_: T.any(Anthropic::Models::Model::OrSymbol, String))
-          .returns(T.any(Anthropic::Models::Model::OrSymbol, String))
-      end
-      def model=(_)
-      end
+      attr_accessor :model
 
       # System prompt.
       #
@@ -120,15 +107,15 @@ module Anthropic
       #   as specifying a particular goal or role. See our
       #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
       sig { returns(T.nilable(T.any(String, T::Array[Anthropic::Models::TextBlockParam]))) }
-      def system_
-      end
+      attr_reader :system_
 
       sig do
-        params(_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash)]))
-          .returns(T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash)]))
+        params(
+          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash)])
+        )
+          .void
       end
-      def system_=(_)
-      end
+      attr_writer :system_
 
       # Configuration for enabling Claude's extended thinking.
       #
@@ -144,27 +131,19 @@ module Anthropic
           T.nilable(T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled))
         )
       end
-      def thinking
-      end
+      attr_reader :thinking
 
       sig do
         params(
-          _: T.any(
+          thinking: T.any(
             Anthropic::Models::ThinkingConfigEnabled,
             Anthropic::Util::AnyHash,
             Anthropic::Models::ThinkingConfigDisabled
           )
         )
-          .returns(
-            T.any(
-              Anthropic::Models::ThinkingConfigEnabled,
-              Anthropic::Util::AnyHash,
-              Anthropic::Models::ThinkingConfigDisabled
-            )
-          )
+          .void
       end
-      def thinking=(_)
-      end
+      attr_writer :thinking
 
       # How the model should use the provided tools. The model can use a specific tool,
       #   any available tool, decide by itself, or not use tools at all.
@@ -180,12 +159,11 @@ module Anthropic
           )
         )
       end
-      def tool_choice
-      end
+      attr_reader :tool_choice
 
       sig do
         params(
-          _: T.any(
+          tool_choice: T.any(
             Anthropic::Models::ToolChoiceAuto,
             Anthropic::Util::AnyHash,
             Anthropic::Models::ToolChoiceAny,
@@ -193,18 +171,9 @@ module Anthropic
             Anthropic::Models::ToolChoiceNone
           )
         )
-          .returns(
-            T.any(
-              Anthropic::Models::ToolChoiceAuto,
-              Anthropic::Util::AnyHash,
-              Anthropic::Models::ToolChoiceAny,
-              Anthropic::Models::ToolChoiceTool,
-              Anthropic::Models::ToolChoiceNone
-            )
-          )
+          .void
       end
-      def tool_choice=(_)
-      end
+      attr_writer :tool_choice
 
       # Definitions of tools that the model may use.
       #
@@ -288,12 +257,11 @@ module Anthropic
           )
         )
       end
-      def tools
-      end
+      attr_reader :tools
 
       sig do
         params(
-          _: T::Array[
+          tools: T::Array[
           T.any(
             Anthropic::Models::Tool,
             Anthropic::Util::AnyHash,
@@ -302,19 +270,9 @@ module Anthropic
           )
           ]
         )
-          .returns(
-            T::Array[
-            T.any(
-              Anthropic::Models::Tool,
-              Anthropic::Util::AnyHash,
-              Anthropic::Models::ToolBash20250124,
-              Anthropic::Models::ToolTextEditor20250124
-            )
-            ]
-          )
+          .void
       end
-      def tools=(_)
-      end
+      attr_writer :tools
 
       sig do
         params(

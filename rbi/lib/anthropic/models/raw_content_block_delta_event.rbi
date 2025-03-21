@@ -14,47 +14,13 @@ module Anthropic
           )
         )
       end
-      def delta
-      end
-
-      sig do
-        params(
-          _: T.any(
-            Anthropic::Models::TextDelta,
-            Anthropic::Models::InputJSONDelta,
-            Anthropic::Models::CitationsDelta,
-            Anthropic::Models::ThinkingDelta,
-            Anthropic::Models::SignatureDelta
-          )
-        )
-          .returns(
-            T.any(
-              Anthropic::Models::TextDelta,
-              Anthropic::Models::InputJSONDelta,
-              Anthropic::Models::CitationsDelta,
-              Anthropic::Models::ThinkingDelta,
-              Anthropic::Models::SignatureDelta
-            )
-          )
-      end
-      def delta=(_)
-      end
+      attr_accessor :delta
 
       sig { returns(Integer) }
-      def index
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def index=(_)
-      end
+      attr_accessor :index
 
       sig { returns(Symbol) }
-      def type
-      end
-
-      sig { params(_: Symbol).returns(Symbol) }
-      def type=(_)
-      end
+      attr_accessor :type
 
       sig do
         params(

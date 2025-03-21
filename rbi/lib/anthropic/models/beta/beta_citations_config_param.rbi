@@ -5,12 +5,10 @@ module Anthropic
     module Beta
       class BetaCitationsConfigParam < Anthropic::BaseModel
         sig { returns(T.nilable(T::Boolean)) }
-        def enabled
-        end
+        attr_reader :enabled
 
-        sig { params(_: T::Boolean).returns(T::Boolean) }
-        def enabled=(_)
-        end
+        sig { params(enabled: T::Boolean).void }
+        attr_writer :enabled
 
         sig { params(enabled: T::Boolean).returns(T.attached_class) }
         def self.new(enabled: nil)

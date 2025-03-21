@@ -21,51 +21,13 @@ module Anthropic
           )
         )
       end
-      def citations
-      end
-
-      sig do
-        params(
-          _: T.nilable(
-            T::Array[
-            T.any(
-              Anthropic::Models::CitationCharLocation,
-              Anthropic::Models::CitationPageLocation,
-              Anthropic::Models::CitationContentBlockLocation
-            )
-            ]
-          )
-        )
-          .returns(
-            T.nilable(
-              T::Array[
-              T.any(
-                Anthropic::Models::CitationCharLocation,
-                Anthropic::Models::CitationPageLocation,
-                Anthropic::Models::CitationContentBlockLocation
-              )
-              ]
-            )
-          )
-      end
-      def citations=(_)
-      end
+      attr_accessor :citations
 
       sig { returns(String) }
-      def text
-      end
-
-      sig { params(_: String).returns(String) }
-      def text=(_)
-      end
+      attr_accessor :text
 
       sig { returns(Symbol) }
-      def type
-      end
-
-      sig { params(_: Symbol).returns(Symbol) }
-      def type=(_)
-      end
+      attr_accessor :type
 
       sig do
         params(

@@ -7,35 +7,17 @@ module Anthropic
       #
       #   The format and length of IDs may change over time.
       sig { returns(String) }
-      def id
-      end
-
-      sig { params(_: String).returns(String) }
-      def id=(_)
-      end
+      attr_accessor :id
 
       # The resulting completion up to and excluding the stop sequences.
       sig { returns(String) }
-      def completion
-      end
-
-      sig { params(_: String).returns(String) }
-      def completion=(_)
-      end
+      attr_accessor :completion
 
       # The model that will complete your prompt.\n\nSee
       #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
       sig { returns(T.any(Anthropic::Models::Model::TaggedSymbol, String)) }
-      def model
-      end
-
-      sig do
-        params(_: T.any(Anthropic::Models::Model::TaggedSymbol, String))
-          .returns(T.any(Anthropic::Models::Model::TaggedSymbol, String))
-      end
-      def model=(_)
-      end
+      attr_accessor :model
 
       # The reason that we stopped.
       #
@@ -45,23 +27,13 @@ module Anthropic
       #     `stop_sequences` parameter, or a stop sequence built into the model
       #   - `"max_tokens"`: we exceeded `max_tokens_to_sample` or the model's maximum
       sig { returns(T.nilable(String)) }
-      def stop_reason
-      end
-
-      sig { params(_: T.nilable(String)).returns(T.nilable(String)) }
-      def stop_reason=(_)
-      end
+      attr_accessor :stop_reason
 
       # Object type.
       #
       #   For Text Completions, this is always `"completion"`.
       sig { returns(Symbol) }
-      def type
-      end
-
-      sig { params(_: Symbol).returns(Symbol) }
-      def type=(_)
-      end
+      attr_accessor :type
 
       sig do
         params(

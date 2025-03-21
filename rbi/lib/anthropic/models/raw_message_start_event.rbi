@@ -4,23 +4,13 @@ module Anthropic
   module Models
     class RawMessageStartEvent < Anthropic::BaseModel
       sig { returns(Anthropic::Models::Message) }
-      def message
-      end
+      attr_reader :message
 
-      sig do
-        params(_: T.any(Anthropic::Models::Message, Anthropic::Util::AnyHash))
-          .returns(T.any(Anthropic::Models::Message, Anthropic::Util::AnyHash))
-      end
-      def message=(_)
-      end
+      sig { params(message: T.any(Anthropic::Models::Message, Anthropic::Util::AnyHash)).void }
+      attr_writer :message
 
       sig { returns(Symbol) }
-      def type
-      end
-
-      sig { params(_: Symbol).returns(Symbol) }
-      def type=(_)
-      end
+      attr_accessor :type
 
       sig do
         params(message: T.any(Anthropic::Models::Message, Anthropic::Util::AnyHash), type: Symbol)

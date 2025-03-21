@@ -18,47 +18,10 @@ module Anthropic
           )
         )
       end
-      def error
-      end
-
-      sig do
-        params(
-          _: T.any(
-            Anthropic::Models::BetaInvalidRequestError,
-            Anthropic::Models::BetaAuthenticationError,
-            Anthropic::Models::BetaBillingError,
-            Anthropic::Models::BetaPermissionError,
-            Anthropic::Models::BetaNotFoundError,
-            Anthropic::Models::BetaRateLimitError,
-            Anthropic::Models::BetaGatewayTimeoutError,
-            Anthropic::Models::BetaAPIError,
-            Anthropic::Models::BetaOverloadedError
-          )
-        )
-          .returns(
-            T.any(
-              Anthropic::Models::BetaInvalidRequestError,
-              Anthropic::Models::BetaAuthenticationError,
-              Anthropic::Models::BetaBillingError,
-              Anthropic::Models::BetaPermissionError,
-              Anthropic::Models::BetaNotFoundError,
-              Anthropic::Models::BetaRateLimitError,
-              Anthropic::Models::BetaGatewayTimeoutError,
-              Anthropic::Models::BetaAPIError,
-              Anthropic::Models::BetaOverloadedError
-            )
-          )
-      end
-      def error=(_)
-      end
+      attr_accessor :error
 
       sig { returns(Symbol) }
-      def type
-      end
-
-      sig { params(_: Symbol).returns(Symbol) }
-      def type=(_)
-      end
+      attr_accessor :type
 
       sig do
         params(

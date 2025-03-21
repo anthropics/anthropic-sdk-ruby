@@ -4,12 +4,7 @@ module Anthropic
   module Models
     class ThinkingConfigDisabled < Anthropic::BaseModel
       sig { returns(Symbol) }
-      def type
-      end
-
-      sig { params(_: Symbol).returns(Symbol) }
-      def type=(_)
-      end
+      attr_accessor :type
 
       sig { params(type: Symbol).returns(T.attached_class) }
       def self.new(type: :disabled)

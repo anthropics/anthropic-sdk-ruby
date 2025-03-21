@@ -4,20 +4,10 @@ module Anthropic
   module Models
     class RawContentBlockStopEvent < Anthropic::BaseModel
       sig { returns(Integer) }
-      def index
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def index=(_)
-      end
+      attr_accessor :index
 
       sig { returns(Symbol) }
-      def type
-      end
-
-      sig { params(_: Symbol).returns(Symbol) }
-      def type=(_)
-      end
+      attr_accessor :type
 
       sig { params(index: Integer, type: Symbol).returns(T.attached_class) }
       def self.new(index:, type: :content_block_stop)

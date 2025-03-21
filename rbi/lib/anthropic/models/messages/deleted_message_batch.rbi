@@ -6,23 +6,13 @@ module Anthropic
       class DeletedMessageBatch < Anthropic::BaseModel
         # ID of the Message Batch.
         sig { returns(String) }
-        def id
-        end
-
-        sig { params(_: String).returns(String) }
-        def id=(_)
-        end
+        attr_accessor :id
 
         # Deleted object type.
         #
         #   For Message Batches, this is always `"message_batch_deleted"`.
         sig { returns(Symbol) }
-        def type
-        end
-
-        sig { params(_: Symbol).returns(Symbol) }
-        def type=(_)
-        end
+        attr_accessor :type
 
         sig { params(id: String, type: Symbol).returns(T.attached_class) }
         def self.new(id:, type: :message_batch_deleted)

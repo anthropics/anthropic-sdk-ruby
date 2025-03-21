@@ -5,39 +5,19 @@ module Anthropic
     class Usage < Anthropic::BaseModel
       # The number of input tokens used to create the cache entry.
       sig { returns(T.nilable(Integer)) }
-      def cache_creation_input_tokens
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def cache_creation_input_tokens=(_)
-      end
+      attr_accessor :cache_creation_input_tokens
 
       # The number of input tokens read from the cache.
       sig { returns(T.nilable(Integer)) }
-      def cache_read_input_tokens
-      end
-
-      sig { params(_: T.nilable(Integer)).returns(T.nilable(Integer)) }
-      def cache_read_input_tokens=(_)
-      end
+      attr_accessor :cache_read_input_tokens
 
       # The number of input tokens which were used.
       sig { returns(Integer) }
-      def input_tokens
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def input_tokens=(_)
-      end
+      attr_accessor :input_tokens
 
       # The number of output tokens which were used.
       sig { returns(Integer) }
-      def output_tokens
-      end
-
-      sig { params(_: Integer).returns(Integer) }
-      def output_tokens=(_)
-      end
+      attr_accessor :output_tokens
 
       sig do
         params(
