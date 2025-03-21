@@ -80,13 +80,6 @@ module Anthropic
       module Content
         extend Anthropic::Union
 
-        Variants =
-          type_template(:out) do
-            {
-              fixed: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)])
-            }
-          end
-
         ContentArray =
           T.let(
             Anthropic::ArrayOf[union: Anthropic::Models::ToolResultBlockParam::Content::Content],
@@ -96,23 +89,16 @@ module Anthropic
         module Content
           extend Anthropic::Union
 
-          Variants =
-            type_template(:out) { {fixed: T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)} }
-
-          class << self
-            sig { override.returns([Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam]) }
-            def variants
-            end
+          sig { override.returns([Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam]) }
+          def self.variants
           end
         end
 
-        class << self
-          sig do
-            override
-              .returns([String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]])
-          end
-          def variants
-          end
+        sig do
+          override
+            .returns([String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]])
+        end
+        def self.variants
         end
       end
     end

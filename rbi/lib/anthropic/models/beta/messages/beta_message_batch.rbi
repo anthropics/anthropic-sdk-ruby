@@ -138,13 +138,11 @@ module Anthropic
             ENDED =
               T.let(:ended, Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol)
 
-            class << self
-              sig do
-                override
-                  .returns(T::Array[Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol])
-              end
-              def values
-              end
+            sig do
+              override
+                .returns(T::Array[Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol])
+            end
+            def self.values
             end
           end
         end

@@ -47,13 +47,8 @@ module Anthropic
       module Source
         extend Anthropic::Union
 
-        Variants =
-          type_template(:out) { {fixed: T.any(Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource)} }
-
-        class << self
-          sig { override.returns([Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]) }
-          def variants
-          end
+        sig { override.returns([Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]) }
+        def self.variants
         end
       end
     end

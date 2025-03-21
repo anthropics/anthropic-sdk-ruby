@@ -448,10 +448,8 @@ module Anthropic
                 variant Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::System::BetaTextBlockParamArray
 
                 # @!parse
-                #   class << self
-                #     # @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam>)]
-                #     def variants; end
-                #   end
+                #   # @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam>)]
+                #   def self.variants; end
               end
             end
           end

@@ -11,27 +11,13 @@ module Anthropic
       module MessageBatchResult
         extend Anthropic::Union
 
-        Variants =
-          type_template(:out) do
-            {
-              fixed: T.any(
-                Anthropic::Models::Messages::MessageBatchSucceededResult,
-                Anthropic::Models::Messages::MessageBatchErroredResult,
-                Anthropic::Models::Messages::MessageBatchCanceledResult,
-                Anthropic::Models::Messages::MessageBatchExpiredResult
-              )
-            }
-          end
-
-        class << self
-          sig do
-            override
-              .returns(
-                [Anthropic::Models::Messages::MessageBatchSucceededResult, Anthropic::Models::Messages::MessageBatchErroredResult, Anthropic::Models::Messages::MessageBatchCanceledResult, Anthropic::Models::Messages::MessageBatchExpiredResult]
-              )
-          end
-          def variants
-          end
+        sig do
+          override
+            .returns(
+              [Anthropic::Models::Messages::MessageBatchSucceededResult, Anthropic::Models::Messages::MessageBatchErroredResult, Anthropic::Models::Messages::MessageBatchCanceledResult, Anthropic::Models::Messages::MessageBatchExpiredResult]
+            )
+        end
+        def self.variants
         end
       end
     end

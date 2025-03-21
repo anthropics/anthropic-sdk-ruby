@@ -12,10 +12,8 @@ module Anthropic
       variant -> { Anthropic::Models::ToolTextEditor20250124 }
 
       # @!parse
-      #   class << self
-      #     # @return [Array(Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124)]
-      #     def variants; end
-      #   end
+      #   # @return [Array(Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124)]
+      #   def self.variants; end
     end
   end
 end
