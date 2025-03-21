@@ -22,10 +22,8 @@ module Anthropic
       variant :none, -> { Anthropic::Models::ToolChoiceNone }
 
       # @!parse
-      #   class << self
-      #     # @return [Array(Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone)]
-      #     def variants; end
-      #   end
+      #   # @return [Array(Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone)]
+      #   def self.variants; end
     end
   end
 end

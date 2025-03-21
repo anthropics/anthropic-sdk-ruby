@@ -7,27 +7,13 @@ module Anthropic
     module ToolChoice
       extend Anthropic::Union
 
-      Variants =
-        type_template(:out) do
-          {
-            fixed: T.any(
-              Anthropic::Models::ToolChoiceAuto,
-              Anthropic::Models::ToolChoiceAny,
-              Anthropic::Models::ToolChoiceTool,
-              Anthropic::Models::ToolChoiceNone
-            )
-          }
-        end
-
-      class << self
-        sig do
-          override
-            .returns(
-              [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
-            )
-        end
-        def variants
-        end
+      sig do
+        override
+          .returns(
+            [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
+          )
+      end
+      def self.variants
       end
     end
   end

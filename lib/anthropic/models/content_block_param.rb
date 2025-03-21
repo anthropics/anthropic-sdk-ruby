@@ -22,10 +22,8 @@ module Anthropic
       variant :redacted_thinking, -> { Anthropic::Models::RedactedThinkingBlockParam }
 
       # @!parse
-      #   class << self
-      #     # @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam)]
-      #     def variants; end
-      #   end
+      #   # @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam)]
+      #   def self.variants; end
     end
   end
 end

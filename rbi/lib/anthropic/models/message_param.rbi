@@ -78,51 +78,29 @@ module Anthropic
       module Content
         extend Anthropic::Union
 
-        Variants =
-          type_template(:out) do
-            {
-              fixed: T.any(
-                String,
-                T::Array[
-                T.any(
-                  Anthropic::Models::TextBlockParam,
-                  Anthropic::Models::ImageBlockParam,
-                  Anthropic::Models::ToolUseBlockParam,
-                  Anthropic::Models::ToolResultBlockParam,
-                  Anthropic::Models::DocumentBlockParam,
-                  Anthropic::Models::ThinkingBlockParam,
-                  Anthropic::Models::RedactedThinkingBlockParam
-                )
-                ]
-              )
-            }
-          end
-
         ContentBlockParamArray =
           T.let(Anthropic::ArrayOf[union: Anthropic::Models::ContentBlockParam], Anthropic::Converter)
 
-        class << self
-          sig do
-            override
-              .returns(
-                [
-                  String,
-                  T::Array[
-                                  T.any(
-                                    Anthropic::Models::TextBlockParam,
-                                    Anthropic::Models::ImageBlockParam,
-                                    Anthropic::Models::ToolUseBlockParam,
-                                    Anthropic::Models::ToolResultBlockParam,
-                                    Anthropic::Models::DocumentBlockParam,
-                                    Anthropic::Models::ThinkingBlockParam,
-                                    Anthropic::Models::RedactedThinkingBlockParam
-                                  )
-                                  ]
-                ]
-              )
-          end
-          def variants
-          end
+        sig do
+          override
+            .returns(
+              [
+                String,
+                T::Array[
+                              T.any(
+                                Anthropic::Models::TextBlockParam,
+                                Anthropic::Models::ImageBlockParam,
+                                Anthropic::Models::ToolUseBlockParam,
+                                Anthropic::Models::ToolResultBlockParam,
+                                Anthropic::Models::DocumentBlockParam,
+                                Anthropic::Models::ThinkingBlockParam,
+                                Anthropic::Models::RedactedThinkingBlockParam
+                              )
+                              ]
+              ]
+            )
+        end
+        def self.variants
         end
       end
 
@@ -135,10 +113,8 @@ module Anthropic
         USER = T.let(:user, Anthropic::Models::MessageParam::Role::TaggedSymbol)
         ASSISTANT = T.let(:assistant, Anthropic::Models::MessageParam::Role::TaggedSymbol)
 
-        class << self
-          sig { override.returns(T::Array[Anthropic::Models::MessageParam::Role::TaggedSymbol]) }
-          def values
-          end
+        sig { override.returns(T::Array[Anthropic::Models::MessageParam::Role::TaggedSymbol]) }
+        def self.values
         end
       end
     end

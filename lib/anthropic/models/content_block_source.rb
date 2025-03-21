@@ -32,10 +32,8 @@ module Anthropic
         variant Anthropic::Models::ContentBlockSource::Content::ContentBlockSourceContentArray
 
         # @!parse
-        #   class << self
-        #     # @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>)]
-        #     def variants; end
-        #   end
+        #   # @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>)]
+        #   def self.variants; end
       end
     end
   end
