@@ -37,7 +37,7 @@ module Anthropic
             params(
               requests: T::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request],
               betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
-              request_options: T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything])
+              request_options: T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash)
             )
               .returns(T.attached_class)
           end
@@ -90,7 +90,10 @@ module Anthropic
             end
 
             sig do
-              params(custom_id: String, params: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params)
+              params(
+                custom_id: String,
+                params: T.any(Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params, Anthropic::Util::AnyHash)
+              )
                 .returns(T.attached_class)
             end
             def self.new(custom_id:, params:)
@@ -543,7 +546,7 @@ module Anthropic
                   max_tokens: Integer,
                   messages: T::Array[Anthropic::Models::Beta::BetaMessageParam],
                   model: T.any(Anthropic::Models::Model::OrSymbol, String),
-                  metadata: Anthropic::Models::Beta::BetaMetadata,
+                  metadata: T.any(Anthropic::Models::Beta::BetaMetadata, Anthropic::Util::AnyHash),
                   stop_sequences: T::Array[String],
                   stream: T::Boolean,
                   system_: T.any(String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]),

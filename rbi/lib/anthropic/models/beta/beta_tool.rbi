@@ -68,9 +68,9 @@ module Anthropic
 
         sig do
           params(
-            input_schema: Anthropic::Models::Beta::BetaTool::InputSchema,
+            input_schema: T.any(Anthropic::Models::Beta::BetaTool::InputSchema, Anthropic::Util::AnyHash),
             name: String,
-            cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)),
             description: String,
             type: T.nilable(Anthropic::Models::Beta::BetaTool::Type::OrSymbol)
           )

@@ -36,7 +36,7 @@ module Anthropic
       sig do
         params(
           source: T.any(Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource),
-          cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)),
           type: Symbol
         )
           .returns(T.attached_class)

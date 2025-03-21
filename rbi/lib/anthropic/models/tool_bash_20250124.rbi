@@ -34,7 +34,11 @@ module Anthropic
       end
 
       sig do
-        params(cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral), name: Symbol, type: Symbol)
+        params(
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)),
+          name: Symbol,
+          type: Symbol
+        )
           .returns(T.attached_class)
       end
       def self.new(cache_control: nil, name: :bash, type: :bash_20250124)

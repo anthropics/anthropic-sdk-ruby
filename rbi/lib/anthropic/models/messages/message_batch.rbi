@@ -129,7 +129,7 @@ module Anthropic
             ended_at: T.nilable(Time),
             expires_at: Time,
             processing_status: Anthropic::Models::Messages::MessageBatch::ProcessingStatus::TaggedSymbol,
-            request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts,
+            request_counts: T.any(Anthropic::Models::Messages::MessageBatchRequestCounts, Anthropic::Util::AnyHash),
             results_url: T.nilable(String),
             type: Symbol
           )
