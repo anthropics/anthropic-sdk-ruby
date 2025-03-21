@@ -5,31 +5,13 @@ module Anthropic
     module Beta
       class BetaBase64ImageSource < Anthropic::BaseModel
         sig { returns(String) }
-        def data
-        end
-
-        sig { params(_: String).returns(String) }
-        def data=(_)
-        end
+        attr_accessor :data
 
         sig { returns(Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol) }
-        def media_type
-        end
-
-        sig do
-          params(_: Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol)
-            .returns(Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol)
-        end
-        def media_type=(_)
-        end
+        attr_accessor :media_type
 
         sig { returns(Symbol) }
-        def type
-        end
-
-        sig { params(_: Symbol).returns(Symbol) }
-        def type=(_)
-        end
+        attr_accessor :type
 
         sig do
           params(

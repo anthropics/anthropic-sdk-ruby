@@ -4,31 +4,21 @@ module Anthropic
   module Models
     class TextBlockParam < Anthropic::BaseModel
       sig { returns(String) }
-      def text
-      end
-
-      sig { params(_: String).returns(String) }
-      def text=(_)
-      end
+      attr_accessor :text
 
       sig { returns(Symbol) }
-      def type
-      end
-
-      sig { params(_: Symbol).returns(Symbol) }
-      def type=(_)
-      end
+      attr_accessor :type
 
       sig { returns(T.nilable(Anthropic::Models::CacheControlEphemeral)) }
-      def cache_control
-      end
+      attr_reader :cache_control
 
       sig do
-        params(_: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)))
-          .returns(T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)))
+        params(
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash))
+        )
+          .void
       end
-      def cache_control=(_)
-      end
+      attr_writer :cache_control
 
       sig do
         returns(
@@ -43,35 +33,7 @@ module Anthropic
           )
         )
       end
-      def citations
-      end
-
-      sig do
-        params(
-          _: T.nilable(
-            T::Array[
-            T.any(
-              Anthropic::Models::CitationCharLocationParam,
-              Anthropic::Models::CitationPageLocationParam,
-              Anthropic::Models::CitationContentBlockLocationParam
-            )
-            ]
-          )
-        )
-          .returns(
-            T.nilable(
-              T::Array[
-              T.any(
-                Anthropic::Models::CitationCharLocationParam,
-                Anthropic::Models::CitationPageLocationParam,
-                Anthropic::Models::CitationContentBlockLocationParam
-              )
-              ]
-            )
-          )
-      end
-      def citations=(_)
-      end
+      attr_accessor :citations
 
       sig do
         params(

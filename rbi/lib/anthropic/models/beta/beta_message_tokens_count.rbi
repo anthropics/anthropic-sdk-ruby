@@ -7,12 +7,7 @@ module Anthropic
         # The total number of tokens across the provided list of messages, system prompt,
         #   and tools.
         sig { returns(Integer) }
-        def input_tokens
-        end
-
-        sig { params(_: Integer).returns(Integer) }
-        def input_tokens=(_)
-        end
+        attr_accessor :input_tokens
 
         sig { params(input_tokens: Integer).returns(T.attached_class) }
         def self.new(input_tokens:)

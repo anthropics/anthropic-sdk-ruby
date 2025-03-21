@@ -11,45 +11,34 @@ module Anthropic
           # ID of the object to use as a cursor for pagination. When provided, returns the
           #   page of results immediately after this object.
           sig { returns(T.nilable(String)) }
-          def after_id
-          end
+          attr_reader :after_id
 
-          sig { params(_: String).returns(String) }
-          def after_id=(_)
-          end
+          sig { params(after_id: String).void }
+          attr_writer :after_id
 
           # ID of the object to use as a cursor for pagination. When provided, returns the
           #   page of results immediately before this object.
           sig { returns(T.nilable(String)) }
-          def before_id
-          end
+          attr_reader :before_id
 
-          sig { params(_: String).returns(String) }
-          def before_id=(_)
-          end
+          sig { params(before_id: String).void }
+          attr_writer :before_id
 
           # Number of items to return per page.
           #
           #   Defaults to `20`. Ranges from `1` to `1000`.
           sig { returns(T.nilable(Integer)) }
-          def limit
-          end
+          attr_reader :limit
 
-          sig { params(_: Integer).returns(Integer) }
-          def limit=(_)
-          end
+          sig { params(limit: Integer).void }
+          attr_writer :limit
 
           # Optional header to specify the beta version(s) you want to use.
           sig { returns(T.nilable(T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])) }
-          def betas
-          end
+          attr_reader :betas
 
-          sig do
-            params(_: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])
-              .returns(T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])
-          end
-          def betas=(_)
-          end
+          sig { params(betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)]).void }
+          attr_writer :betas
 
           sig do
             params(

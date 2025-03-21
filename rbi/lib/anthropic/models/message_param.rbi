@@ -21,56 +21,10 @@ module Anthropic
           )
         )
       end
-      def content
-      end
-
-      sig do
-        params(
-          _: T.any(
-            String,
-            T::Array[
-            T.any(
-              Anthropic::Models::TextBlockParam,
-              Anthropic::Models::ImageBlockParam,
-              Anthropic::Models::ToolUseBlockParam,
-              Anthropic::Models::ToolResultBlockParam,
-              Anthropic::Models::DocumentBlockParam,
-              Anthropic::Models::ThinkingBlockParam,
-              Anthropic::Models::RedactedThinkingBlockParam
-            )
-            ]
-          )
-        )
-          .returns(
-            T.any(
-              String,
-              T::Array[
-              T.any(
-                Anthropic::Models::TextBlockParam,
-                Anthropic::Models::ImageBlockParam,
-                Anthropic::Models::ToolUseBlockParam,
-                Anthropic::Models::ToolResultBlockParam,
-                Anthropic::Models::DocumentBlockParam,
-                Anthropic::Models::ThinkingBlockParam,
-                Anthropic::Models::RedactedThinkingBlockParam
-              )
-              ]
-            )
-          )
-      end
-      def content=(_)
-      end
+      attr_accessor :content
 
       sig { returns(Anthropic::Models::MessageParam::Role::OrSymbol) }
-      def role
-      end
-
-      sig do
-        params(_: Anthropic::Models::MessageParam::Role::OrSymbol)
-          .returns(Anthropic::Models::MessageParam::Role::OrSymbol)
-      end
-      def role=(_)
-      end
+      attr_accessor :role
 
       sig do
         params(

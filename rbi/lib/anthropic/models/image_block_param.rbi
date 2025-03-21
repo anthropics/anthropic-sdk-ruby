@@ -4,34 +4,21 @@ module Anthropic
   module Models
     class ImageBlockParam < Anthropic::BaseModel
       sig { returns(T.any(Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource)) }
-      def source
-      end
-
-      sig do
-        params(_: T.any(Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource))
-          .returns(T.any(Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource))
-      end
-      def source=(_)
-      end
+      attr_accessor :source
 
       sig { returns(Symbol) }
-      def type
-      end
-
-      sig { params(_: Symbol).returns(Symbol) }
-      def type=(_)
-      end
+      attr_accessor :type
 
       sig { returns(T.nilable(Anthropic::Models::CacheControlEphemeral)) }
-      def cache_control
-      end
+      attr_reader :cache_control
 
       sig do
-        params(_: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)))
-          .returns(T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)))
+        params(
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash))
+        )
+          .void
       end
-      def cache_control=(_)
-      end
+      attr_writer :cache_control
 
       sig do
         params(

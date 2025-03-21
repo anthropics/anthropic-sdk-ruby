@@ -5,28 +5,13 @@ module Anthropic
     module Beta
       class BetaThinkingBlockParam < Anthropic::BaseModel
         sig { returns(String) }
-        def signature
-        end
-
-        sig { params(_: String).returns(String) }
-        def signature=(_)
-        end
+        attr_accessor :signature
 
         sig { returns(String) }
-        def thinking
-        end
-
-        sig { params(_: String).returns(String) }
-        def thinking=(_)
-        end
+        attr_accessor :thinking
 
         sig { returns(Symbol) }
-        def type
-        end
-
-        sig { params(_: Symbol).returns(Symbol) }
-        def type=(_)
-        end
+        attr_accessor :type
 
         sig { params(signature: String, thinking: String, type: Symbol).returns(T.attached_class) }
         def self.new(signature:, thinking:, type: :thinking)

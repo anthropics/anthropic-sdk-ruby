@@ -4,47 +4,27 @@ module Anthropic
   module Models
     class ToolUseBlockParam < Anthropic::BaseModel
       sig { returns(String) }
-      def id
-      end
-
-      sig { params(_: String).returns(String) }
-      def id=(_)
-      end
+      attr_accessor :id
 
       sig { returns(T.anything) }
-      def input
-      end
-
-      sig { params(_: T.anything).returns(T.anything) }
-      def input=(_)
-      end
+      attr_accessor :input
 
       sig { returns(String) }
-      def name
-      end
-
-      sig { params(_: String).returns(String) }
-      def name=(_)
-      end
+      attr_accessor :name
 
       sig { returns(Symbol) }
-      def type
-      end
-
-      sig { params(_: Symbol).returns(Symbol) }
-      def type=(_)
-      end
+      attr_accessor :type
 
       sig { returns(T.nilable(Anthropic::Models::CacheControlEphemeral)) }
-      def cache_control
-      end
+      attr_reader :cache_control
 
       sig do
-        params(_: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)))
-          .returns(T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)))
+        params(
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash))
+        )
+          .void
       end
-      def cache_control=(_)
-      end
+      attr_writer :cache_control
 
       sig do
         params(

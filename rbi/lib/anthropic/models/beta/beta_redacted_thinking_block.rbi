@@ -5,20 +5,10 @@ module Anthropic
     module Beta
       class BetaRedactedThinkingBlock < Anthropic::BaseModel
         sig { returns(String) }
-        def data
-        end
-
-        sig { params(_: String).returns(String) }
-        def data=(_)
-        end
+        attr_accessor :data
 
         sig { returns(Symbol) }
-        def type
-        end
-
-        sig { params(_: Symbol).returns(Symbol) }
-        def type=(_)
-        end
+        attr_accessor :type
 
         sig { params(data: String, type: Symbol).returns(T.attached_class) }
         def self.new(data:, type: :redacted_thinking)
