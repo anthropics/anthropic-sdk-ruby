@@ -62,7 +62,7 @@ module Anthropic
       sig do
         params(
           tool_use_id: String,
-          cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)),
           content: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]),
           is_error: T::Boolean,
           type: Symbol

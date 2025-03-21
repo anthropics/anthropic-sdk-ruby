@@ -77,7 +77,7 @@ module Anthropic
         sig do
           params(
             text: String,
-            cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)),
             citations: T.nilable(
               T::Array[
               T.any(

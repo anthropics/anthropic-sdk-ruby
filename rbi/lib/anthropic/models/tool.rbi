@@ -56,9 +56,9 @@ module Anthropic
 
       sig do
         params(
-          input_schema: Anthropic::Models::Tool::InputSchema,
+          input_schema: T.any(Anthropic::Models::Tool::InputSchema, Anthropic::Util::AnyHash),
           name: String,
-          cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)),
           description: String
         )
           .returns(T.attached_class)

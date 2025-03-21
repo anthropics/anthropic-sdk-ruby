@@ -92,8 +92,8 @@ module Anthropic
               Anthropic::Models::Beta::BetaContentBlockSource,
               Anthropic::Models::Beta::BetaURLPDFSource
             ),
-            cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
-            citations: Anthropic::Models::Beta::BetaCitationsConfigParam,
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)),
+            citations: T.any(Anthropic::Models::Beta::BetaCitationsConfigParam, Anthropic::Util::AnyHash),
             context: T.nilable(String),
             title: T.nilable(String),
             type: Symbol

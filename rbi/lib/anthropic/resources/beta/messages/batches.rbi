@@ -17,7 +17,7 @@ module Anthropic
             params(
               requests: T::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request],
               betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
-              request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
+              request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
             )
               .returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
           end
@@ -41,7 +41,7 @@ module Anthropic
             params(
               message_batch_id: String,
               betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
-              request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
+              request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
             )
               .returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
           end
@@ -65,7 +65,7 @@ module Anthropic
               before_id: String,
               limit: Integer,
               betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
-              request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
+              request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
             )
               .returns(Anthropic::Page[Anthropic::Models::Beta::Messages::BetaMessageBatch])
           end
@@ -97,7 +97,7 @@ module Anthropic
             params(
               message_batch_id: String,
               betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
-              request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
+              request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
             )
               .returns(Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch)
           end
@@ -126,7 +126,7 @@ module Anthropic
             params(
               message_batch_id: String,
               betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
-              request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
+              request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
             )
               .returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
           end
@@ -151,7 +151,7 @@ module Anthropic
             params(
               message_batch_id: String,
               betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
-              request_options: T.nilable(T.any(Anthropic::RequestOptions, T::Hash[Symbol, T.anything]))
+              request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
             )
               .returns(Anthropic::JsonLStream[Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse])
           end

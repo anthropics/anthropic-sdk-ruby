@@ -72,7 +72,7 @@ module Anthropic
         sig do
           params(
             tool_use_id: String,
-            cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)),
             content: T.any(
               String,
               T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
