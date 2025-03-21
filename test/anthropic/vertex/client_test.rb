@@ -13,7 +13,7 @@ module Anthropic
             path: "v1/messages",
             body: {
               max_tokens: 1024,
-              messages: [{ role: "user", content: "Hello, Claude" }],
+              messages: [{role: "user", content: "Hello, Claude"}],
               model: model
             },
             model: Anthropic::Models::Message,
@@ -32,7 +32,7 @@ module Anthropic
             body: {
               anthropic_version: Anthropic::Vertex::Client::DEFAULT_VERSION,
               max_tokens: 1024,
-              messages: [{ role: "user", content: "Hello, Claude" }]
+              messages: [{role: "user", content: "Hello, Claude"}]
             },
             model: Anthropic::Models::Message,
             options: nil
@@ -49,7 +49,7 @@ module Anthropic
             name: "computer",
             display_width_px: 1024,
             display_height_px: 768,
-            display_number: 1,
+            display_number: 1
           },
           {
             type: "text_editor_20241022",
@@ -66,7 +66,7 @@ module Anthropic
             path: "v1/messages?beta=true",
             body: {
               max_tokens: 1024,
-              messages: [{ role: "user", content: "Save a picture of a cat to my desktop." }],
+              messages: [{role: "user", content: "Save a picture of a cat to my desktop."}],
               model: model,
               tools: tools,
               "anthropic-beta": ["computer-use-2025-01-24"]
@@ -87,12 +87,12 @@ module Anthropic
             body: {
               anthropic_version: Anthropic::Vertex::Client::DEFAULT_VERSION,
               max_tokens: 1024,
-              messages: [{ role: "user", content: "Save a picture of a cat to my desktop." }],
+              messages: [{role: "user", content: "Save a picture of a cat to my desktop."}],
               tools: tools
             },
             model: Anthropic::Models::Message,
             options: nil,
-            headers: { "anthropic-beta" => "computer-use-2025-01-24" }
+            headers: {"anthropic-beta" => "computer-use-2025-01-24"}
           },
           request_components
         )

@@ -1,8 +1,10 @@
+#!/usr/bin/env -S -- ruby
 # frozen_string_literal: true
+# typed: strong
 
-require "bundler/setup"
-require "anthropic"
+require_relative "../../lib/anthropic"
 
+# gets API credentials from environment variable `CLOUD_ML_REGION` and `ANTHROPIC_VERTEX_PROJECT_ID`
 anthropic = Anthropic::Vertex::Client.new
 
 message = anthropic.messages.create(

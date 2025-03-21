@@ -1,7 +1,6 @@
 module Anthropic
   module Vertex
     class Client < Anthropic::Client
-
       DEFAULT_VERSION: String
 
       attr_reader region: String
@@ -13,23 +12,23 @@ module Anthropic
       attr_reader beta: Anthropic::Resources::Beta
 
       private def build_request: (
-          Anthropic::BaseClient::request_components req,
-          Anthropic::request_options opts
-        ) -> Anthropic::BaseClient::request_input
+        Anthropic::BaseClient::request_components req,
+        Anthropic::request_options opts
+      ) -> Anthropic::BaseClient::request_input
 
       private def fit_req_to_vertex_specs!: (
-          BaseClient::request_components request_components,
-        ) -> Anthropic::BaseClient::request_components
+        BaseClient::request_components request_components
+      ) -> Anthropic::BaseClient::request_components
 
       def initialize: (
-          region: String?,
-          project_id: String?,
-          base_url: String?,
-          max_retries: Integer,
-          timeout: Float,
-          initial_retry_delay: Float,
-          max_retry_delay: Float
-        ) -> void
+        region: String?,
+        project_id: String?,
+        base_url: String?,
+        max_retries: Integer,
+        timeout: Float,
+        initial_retry_delay: Float,
+        max_retry_delay: Float
+      ) -> void
     end
   end
 end

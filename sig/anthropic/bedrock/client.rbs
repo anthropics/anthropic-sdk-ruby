@@ -1,7 +1,6 @@
 module Anthropic
   module Bedrock
     class Client < Anthropic::Client
-
       DEFAULT_VERSION: String
 
       attr_reader aws_region: String
@@ -13,30 +12,30 @@ module Anthropic
       attr_reader beta: Anthropic::Resources::Beta
 
       private def build_request: (
-          Anthropic::BaseClient::request_components req,
-          Anthropic::request_options opts
-        ) -> Anthropic::BaseClient::request_input
+        Anthropic::BaseClient::request_components req,
+        Anthropic::request_options opts
+      ) -> Anthropic::BaseClient::request_input
 
-      def resolve_region_and_credentials: () -> top
+      def resolve_region_and_credentials: -> top
 
       private def signer: -> top
 
       private def fit_req_to_bedrock_specs!: (
-          BaseClient::request_components request_components,
-        ) -> Anthropic::BaseClient::request_components
+        BaseClient::request_components request_components
+      ) -> Anthropic::BaseClient::request_components
 
       def initialize: (
-          aws_region: String?,
-          base_url: String?,
-          max_retries: Integer,
-          timeout: Float,
-          initial_retry_delay: Float,
-          max_retry_delay: Float,
-          aws_access_key: String?,
-          aws_secret_key: String?,
-          aws_session_token: String?,
-          aws_profile: String?
-        ) -> void
+        aws_region: String?,
+        base_url: String?,
+        max_retries: Integer,
+        timeout: Float,
+        initial_retry_delay: Float,
+        max_retry_delay: Float,
+        aws_access_key: String?,
+        aws_secret_key: String?,
+        aws_session_token: String?,
+        aws_profile: String?
+      ) -> void
     end
   end
 end

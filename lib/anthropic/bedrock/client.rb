@@ -2,9 +2,7 @@
 
 module Anthropic
   module Bedrock
-
     class Client < Anthropic::Client
-
       DEFAULT_VERSION = "bedrock-2023-05-31"
 
       # @return [Anthropic::Resources::Messages]
@@ -29,7 +27,7 @@ module Anthropic
       # Creates and returns a new client for interacting with the AWS Bedrock API for Anthropic models.
       #
       # AWS credentials are resolved according to the AWS SDK's default resolution order, described at
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html#credchain or https://github.com/aws/aws-sdk-ruby?tab=readme-ov-file#configuration
+      #   https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html#credchain or https://github.com/aws/aws-sdk-ruby?tab=readme-ov-file#configuration
       #
       # @param aws_region [String, nil] Enforce the AWS Region to use. If unset, the region is set according to the
       #   AWS SDK's default resolution order, described at https://github.com/aws/aws-sdk-ruby?tab=readme-ov-file#configuration
@@ -72,7 +70,7 @@ module Anthropic
             In order to access Anthropic models on Bedrock you must require the `aws-sdk-bedrockruntime` gem.
             You can install it by adding the following to your Gemfile:
 
-                gem 'aws-sdk-bedrockruntime'
+                gem "aws-sdk-bedrockruntime"
 
             and then running `bundle install`.
 
@@ -96,7 +94,10 @@ module Anthropic
           credentials: @aws_credentials
         )
 
-        base_url = base_url || ENV["ANTHROPIC_BEDROCK_BASE_URL"] || "https://bedrock-runtime.#{@aws_region}.amazonaws.com"
+        base_url ||= ENV.fetch(
+          "ANTHROPIC_BEDROCK_BASE_URL",
+          "https://bedrock-runtime.#{@aws_region}.amazonaws.com"
+        )
 
         super(
           base_url: base_url,
