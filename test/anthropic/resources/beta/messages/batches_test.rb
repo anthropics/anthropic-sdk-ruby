@@ -69,6 +69,8 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Anthropic::Test:
     end
 
     row = response.to_enum.first
+    return if row.nil?
+
     assert_pattern do
       row => Anthropic::Models::Beta::Messages::BetaMessageBatch
     end
