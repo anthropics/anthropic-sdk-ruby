@@ -286,6 +286,31 @@ module Anthropic
   #
   #   We can therefore convert string values to Symbols, but can't convert other
   #   values safely.
+  #
+  # @example
+  #   # `stop_reason` is a `Anthropic::Models::StopReason`
+  #   case stop_reason
+  #   when Anthropic::Models::StopReason::END_TURN
+  #     # ...
+  #   when Anthropic::Models::StopReason::MAX_TOKENS
+  #     # ...
+  #   when Anthropic::Models::StopReason::STOP_SEQUENCE
+  #     # ...
+  #   else
+  #     puts(stop_reason)
+  #   end
+  #
+  # @example
+  #   case stop_reason
+  #   in :end_turn
+  #     # ...
+  #   in :max_tokens
+  #     # ...
+  #   in :stop_sequence
+  #     # ...
+  #   else
+  #     puts(stop_reason)
+  #   end
   module Enum
     include Anthropic::Converter
 

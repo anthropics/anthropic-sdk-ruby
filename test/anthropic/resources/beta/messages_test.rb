@@ -21,7 +21,7 @@ class Anthropic::Test::Resources::Beta::MessagesTest < Anthropic::Test::Resource
         content: ^(Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlock]),
         model: Anthropic::Models::Model,
         role: Symbol,
-        stop_reason: Anthropic::Models::Beta::BetaMessage::StopReason | nil,
+        stop_reason: Anthropic::Models::Beta::BetaStopReason | nil,
         stop_sequence: String | nil,
         type: Symbol,
         usage: Anthropic::Models::Beta::BetaUsage
