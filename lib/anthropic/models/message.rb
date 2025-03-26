@@ -77,8 +77,8 @@ module Anthropic
       #     In non-streaming mode this value is always non-null. In streaming mode, it is
       #     null in the `message_start` event and non-null otherwise.
       #
-      #   @return [Symbol, Anthropic::Models::Message::StopReason, nil]
-      required :stop_reason, enum: -> { Anthropic::Models::Message::StopReason }, nil?: true
+      #   @return [Symbol, Anthropic::Models::StopReason, nil]
+      required :stop_reason, enum: -> { Anthropic::Models::StopReason }, nil?: true
 
       # @!attribute stop_sequence
       #   Which custom stop sequence was generated, if any.
@@ -121,7 +121,7 @@ module Anthropic
       #   # @param id [String]
       #   # @param content [Array<Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock>]
       #   # @param model [Symbol, String]
-      #   # @param stop_reason [Symbol, Anthropic::Models::Message::StopReason, nil]
+      #   # @param stop_reason [Symbol, Anthropic::Models::StopReason, nil]
       #   # @param stop_sequence [String, nil]
       #   # @param usage [Anthropic::Models::Usage]
       #   # @param role [Symbol, :assistant]
@@ -130,32 +130,6 @@ module Anthropic
       #   def initialize(id:, content:, model:, stop_reason:, stop_sequence:, usage:, role: :assistant, type: :message, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # The reason that we stopped.
-      #
-      #   This may be one the following values:
-      #
-      #   - `"end_turn"`: the model reached a natural stopping point
-      #   - `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-      #   - `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-      #   - `"tool_use"`: the model invoked one or more tools
-      #
-      #   In non-streaming mode this value is always non-null. In streaming mode, it is
-      #   null in the `message_start` event and non-null otherwise.
-      module StopReason
-        extend Anthropic::Enum
-
-        END_TURN = :end_turn
-        MAX_TOKENS = :max_tokens
-        STOP_SEQUENCE = :stop_sequence
-        TOOL_USE = :tool_use
-
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   def self.values; end
-      end
     end
   end
 end
