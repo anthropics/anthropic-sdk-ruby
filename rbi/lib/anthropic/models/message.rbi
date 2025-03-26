@@ -78,7 +78,7 @@ module Anthropic
       #
       #   In non-streaming mode this value is always non-null. In streaming mode, it is
       #   null in the `message_start` event and non-null otherwise.
-      sig { returns(T.nilable(Anthropic::Models::Message::StopReason::TaggedSymbol)) }
+      sig { returns(T.nilable(Anthropic::Models::StopReason::TaggedSymbol)) }
       attr_accessor :stop_reason
 
       # Which custom stop sequence was generated, if any.
@@ -128,7 +128,7 @@ module Anthropic
           )
           ],
           model: T.any(Anthropic::Models::Model::OrSymbol, String),
-          stop_reason: T.nilable(Anthropic::Models::Message::StopReason::OrSymbol),
+          stop_reason: T.nilable(Anthropic::Models::StopReason::OrSymbol),
           stop_sequence: T.nilable(String),
           usage: T.any(Anthropic::Models::Usage, Anthropic::Util::AnyHash),
           role: Symbol,
@@ -154,7 +154,7 @@ module Anthropic
               ],
               model: T.any(Anthropic::Models::Model::TaggedSymbol, String),
               role: Symbol,
-              stop_reason: T.nilable(Anthropic::Models::Message::StopReason::TaggedSymbol),
+              stop_reason: T.nilable(Anthropic::Models::StopReason::TaggedSymbol),
               stop_sequence: T.nilable(String),
               type: Symbol,
               usage: Anthropic::Models::Usage
@@ -162,33 +162,6 @@ module Anthropic
           )
       end
       def to_hash
-      end
-
-      # The reason that we stopped.
-      #
-      #   This may be one the following values:
-      #
-      #   - `"end_turn"`: the model reached a natural stopping point
-      #   - `"max_tokens"`: we exceeded the requested `max_tokens` or the model's maximum
-      #   - `"stop_sequence"`: one of your provided custom `stop_sequences` was generated
-      #   - `"tool_use"`: the model invoked one or more tools
-      #
-      #   In non-streaming mode this value is always non-null. In streaming mode, it is
-      #   null in the `message_start` event and non-null otherwise.
-      module StopReason
-        extend Anthropic::Enum
-
-        TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Message::StopReason) }
-        OrSymbol = T.type_alias { T.any(Symbol, Anthropic::Models::Message::StopReason::TaggedSymbol) }
-
-        END_TURN = T.let(:end_turn, Anthropic::Models::Message::StopReason::TaggedSymbol)
-        MAX_TOKENS = T.let(:max_tokens, Anthropic::Models::Message::StopReason::TaggedSymbol)
-        STOP_SEQUENCE = T.let(:stop_sequence, Anthropic::Models::Message::StopReason::TaggedSymbol)
-        TOOL_USE = T.let(:tool_use, Anthropic::Models::Message::StopReason::TaggedSymbol)
-
-        sig { override.returns(T::Array[Anthropic::Models::Message::StopReason::TaggedSymbol]) }
-        def self.values
-        end
       end
     end
   end

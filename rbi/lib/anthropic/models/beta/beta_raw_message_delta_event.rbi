@@ -62,7 +62,7 @@ module Anthropic
         end
 
         class Delta < Anthropic::BaseModel
-          sig { returns(T.nilable(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol)) }
+          sig { returns(T.nilable(Anthropic::Models::Beta::BetaStopReason::TaggedSymbol)) }
           attr_accessor :stop_reason
 
           sig { returns(T.nilable(String)) }
@@ -70,7 +70,7 @@ module Anthropic
 
           sig do
             params(
-              stop_reason: T.nilable(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::OrSymbol),
+              stop_reason: T.nilable(Anthropic::Models::Beta::BetaStopReason::OrSymbol),
               stop_sequence: T.nilable(String)
             )
               .returns(T.attached_class)
@@ -82,37 +82,12 @@ module Anthropic
             override
               .returns(
                 {
-                  stop_reason: T.nilable(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol),
+                  stop_reason: T.nilable(Anthropic::Models::Beta::BetaStopReason::TaggedSymbol),
                   stop_sequence: T.nilable(String)
                 }
               )
           end
           def to_hash
-          end
-
-          module StopReason
-            extend Anthropic::Enum
-
-            TaggedSymbol =
-              T.type_alias { T.all(Symbol, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason) }
-            OrSymbol =
-              T.type_alias { T.any(Symbol, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol) }
-
-            END_TURN =
-              T.let(:end_turn, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol)
-            MAX_TOKENS =
-              T.let(:max_tokens, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol)
-            STOP_SEQUENCE =
-              T.let(:stop_sequence, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol)
-            TOOL_USE =
-              T.let(:tool_use, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol)
-
-            sig do
-              override
-                .returns(T::Array[Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason::TaggedSymbol])
-            end
-            def self.values
-            end
           end
         end
       end
