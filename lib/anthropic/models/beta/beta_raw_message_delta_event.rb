@@ -46,10 +46,8 @@ module Anthropic
         class Delta < Anthropic::BaseModel
           # @!attribute stop_reason
           #
-          #   @return [Symbol, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason, nil]
-          required :stop_reason,
-                   enum: -> { Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason },
-                   nil?: true
+          #   @return [Symbol, Anthropic::Models::Beta::BetaStopReason, nil]
+          required :stop_reason, enum: -> { Anthropic::Models::Beta::BetaStopReason }, nil?: true
 
           # @!attribute stop_sequence
           #
@@ -57,27 +55,12 @@ module Anthropic
           required :stop_sequence, String, nil?: true
 
           # @!parse
-          #   # @param stop_reason [Symbol, Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta::StopReason, nil]
+          #   # @param stop_reason [Symbol, Anthropic::Models::Beta::BetaStopReason, nil]
           #   # @param stop_sequence [String, nil]
           #   #
           #   def initialize(stop_reason:, stop_sequence:, **) = super
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-          module StopReason
-            extend Anthropic::Enum
-
-            END_TURN = :end_turn
-            MAX_TOKENS = :max_tokens
-            STOP_SEQUENCE = :stop_sequence
-            TOOL_USE = :tool_use
-
-            finalize!
-
-            # @!parse
-            #   # @return [Array<Symbol>]
-            #   def self.values; end
-          end
         end
       end
     end
