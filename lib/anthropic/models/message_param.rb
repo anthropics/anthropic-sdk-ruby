@@ -24,15 +24,15 @@ module Anthropic
       module Content
         extend Anthropic::Union
 
-        ContentBlockParamArray = Anthropic::ArrayOf[union: -> { Anthropic::Models::ContentBlockParam }]
-
         variant String
 
-        variant Anthropic::Models::MessageParam::Content::ContentBlockParamArray
+        variant -> { Anthropic::Models::MessageParam::Content::ContentBlockParamArray }
 
         # @!parse
         #   # @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam>)]
         #   def self.variants; end
+
+        ContentBlockParamArray = Anthropic::ArrayOf[union: -> { Anthropic::Models::ContentBlockParam }]
       end
 
       module Role

@@ -25,16 +25,16 @@ module Anthropic
         module Content
           extend Anthropic::Union
 
-          BetaContentBlockParamArray =
-            Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlockParam }]
-
           variant String
 
-          variant Anthropic::Models::Beta::BetaMessageParam::Content::BetaContentBlockParamArray
+          variant -> { Anthropic::Models::Beta::BetaMessageParam::Content::BetaContentBlockParamArray }
 
           # @!parse
           #   # @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam>)]
           #   def self.variants; end
+
+          BetaContentBlockParamArray =
+            Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlockParam }]
         end
 
         module Role

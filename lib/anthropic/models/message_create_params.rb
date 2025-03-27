@@ -362,15 +362,15 @@ module Anthropic
       module System
         extend Anthropic::Union
 
-        TextBlockParamArray = Anthropic::ArrayOf[-> { Anthropic::Models::TextBlockParam }]
-
         variant String
 
-        variant Anthropic::Models::MessageCreateParams::System::TextBlockParamArray
+        variant -> { Anthropic::Models::MessageCreateParams::System::TextBlockParamArray }
 
         # @!parse
         #   # @return [Array(String, Array<Anthropic::Models::TextBlockParam>)]
         #   def self.variants; end
+
+        TextBlockParamArray = Anthropic::ArrayOf[-> { Anthropic::Models::TextBlockParam }]
       end
     end
   end

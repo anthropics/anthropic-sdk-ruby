@@ -5,6 +5,10 @@ module Anthropic
     module AnthropicBeta
       extend Anthropic::Union
 
+      sig { override.returns([String, Anthropic::Models::AnthropicBeta::OrSymbol]) }
+      def self.variants
+      end
+
       TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::AnthropicBeta) }
       OrSymbol = T.type_alias { T.any(Symbol, Anthropic::Models::AnthropicBeta::TaggedSymbol) }
 
@@ -22,10 +26,6 @@ module Anthropic
       TOKEN_EFFICIENT_TOOLS_2025_02_19 =
         T.let(:"token-efficient-tools-2025-02-19", Anthropic::Models::AnthropicBeta::TaggedSymbol)
       OUTPUT_128K_2025_02_19 = T.let(:"output-128k-2025-02-19", Anthropic::Models::AnthropicBeta::TaggedSymbol)
-
-      sig { override.returns([String, Anthropic::Models::AnthropicBeta::OrSymbol]) }
-      def self.variants
-      end
     end
   end
 end
