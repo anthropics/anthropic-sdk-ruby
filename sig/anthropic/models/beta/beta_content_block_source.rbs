@@ -28,12 +28,12 @@ module Anthropic
         module Content
           extend Anthropic::Union
 
+          def self?.variants: -> [String, ::Array[Anthropic::Models::Beta::beta_content_block_source_content]]
+
           type beta_content_block_source_content_array =
             ::Array[Anthropic::Models::Beta::beta_content_block_source_content]
 
           BetaContentBlockSourceContentArray: beta_content_block_source_content_array
-
-          def self?.variants: -> [String, ::Array[Anthropic::Models::Beta::beta_content_block_source_content]]
         end
       end
     end

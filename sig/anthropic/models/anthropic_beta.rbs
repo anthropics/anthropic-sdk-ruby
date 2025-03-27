@@ -14,15 +14,6 @@ module Anthropic
     module AnthropicBeta
       extend Anthropic::Union
 
-      MESSAGE_BATCHES_2024_09_24: :"message-batches-2024-09-24"
-      PROMPT_CACHING_2024_07_31: :"prompt-caching-2024-07-31"
-      COMPUTER_USE_2024_10_22: :"computer-use-2024-10-22"
-      COMPUTER_USE_2025_01_24: :"computer-use-2025-01-24"
-      PDFS_2024_09_25: :"pdfs-2024-09-25"
-      TOKEN_COUNTING_2024_11_01: :"token-counting-2024-11-01"
-      TOKEN_EFFICIENT_TOOLS_2025_02_19: :"token-efficient-tools-2025-02-19"
-      OUTPUT_128K_2025_02_19: :"output-128k-2025-02-19"
-
       def self?.variants: -> [String, (:"message-batches-2024-09-24"
       | :"prompt-caching-2024-07-31"
       | :"computer-use-2024-10-22"
@@ -31,6 +22,15 @@ module Anthropic
       | :"token-counting-2024-11-01"
       | :"token-efficient-tools-2025-02-19"
       | :"output-128k-2025-02-19")]
+
+      MESSAGE_BATCHES_2024_09_24: :"message-batches-2024-09-24"
+      PROMPT_CACHING_2024_07_31: :"prompt-caching-2024-07-31"
+      COMPUTER_USE_2024_10_22: :"computer-use-2024-10-22"
+      COMPUTER_USE_2025_01_24: :"computer-use-2025-01-24"
+      PDFS_2024_09_25: :"pdfs-2024-09-25"
+      TOKEN_COUNTING_2024_11_01: :"token-counting-2024-11-01"
+      TOKEN_EFFICIENT_TOOLS_2025_02_19: :"token-efficient-tools-2025-02-19"
+      OUTPUT_128K_2025_02_19: :"output-128k-2025-02-19"
     end
   end
 end

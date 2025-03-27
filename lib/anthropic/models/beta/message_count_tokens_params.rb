@@ -276,15 +276,15 @@ module Anthropic
         module System
           extend Anthropic::Union
 
-          BetaTextBlockParamArray = Anthropic::ArrayOf[-> { Anthropic::Models::Beta::BetaTextBlockParam }]
-
           variant String
 
-          variant Anthropic::Models::Beta::MessageCountTokensParams::System::BetaTextBlockParamArray
+          variant -> { Anthropic::Models::Beta::MessageCountTokensParams::System::BetaTextBlockParamArray }
 
           # @!parse
           #   # @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam>)]
           #   def self.variants; end
+
+          BetaTextBlockParamArray = Anthropic::ArrayOf[-> { Anthropic::Models::Beta::BetaTextBlockParam }]
         end
 
         module Tool
