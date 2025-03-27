@@ -50,12 +50,9 @@ module Anthropic
       module Content
         extend Anthropic::Union
 
-        ContentArray =
-          Anthropic::ArrayOf[union: -> { Anthropic::Models::ToolResultBlockParam::Content::Content }]
-
         variant String
 
-        variant Anthropic::Models::ToolResultBlockParam::Content::ContentArray
+        variant -> { Anthropic::Models::ToolResultBlockParam::Content::ContentArray }
 
         module Content
           extend Anthropic::Union
@@ -74,6 +71,9 @@ module Anthropic
         # @!parse
         #   # @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>)]
         #   def self.variants; end
+
+        ContentArray =
+          Anthropic::ArrayOf[union: -> { Anthropic::Models::ToolResultBlockParam::Content::Content }]
       end
     end
   end

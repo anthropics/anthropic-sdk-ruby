@@ -27,12 +27,12 @@ module Anthropic
         module Content
           extend Anthropic::Union
 
+          def self?.variants: -> [String, ::Array[Anthropic::Models::Beta::beta_content_block_param]]
+
           type beta_content_block_param_array =
             ::Array[Anthropic::Models::Beta::beta_content_block_param]
 
           BetaContentBlockParamArray: beta_content_block_param_array
-
-          def self?.variants: -> [String, ::Array[Anthropic::Models::Beta::beta_content_block_param]]
         end
 
         type role = :user | :assistant

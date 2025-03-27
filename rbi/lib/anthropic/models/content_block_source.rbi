@@ -41,15 +41,15 @@ module Anthropic
       module Content
         extend Anthropic::Union
 
-        ContentBlockSourceContentArray =
-          T.let(Anthropic::ArrayOf[union: Anthropic::Models::ContentBlockSourceContent], Anthropic::Converter)
-
         sig do
           override
             .returns([String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]])
         end
         def self.variants
         end
+
+        ContentBlockSourceContentArray =
+          T.let(Anthropic::ArrayOf[union: Anthropic::Models::ContentBlockSourceContent], Anthropic::Converter)
       end
     end
   end

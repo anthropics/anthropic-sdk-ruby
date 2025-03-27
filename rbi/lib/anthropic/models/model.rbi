@@ -8,6 +8,10 @@ module Anthropic
     module Model
       extend Anthropic::Union
 
+      sig { override.returns([Anthropic::Models::Model::OrSymbol, String]) }
+      def self.variants
+      end
+
       TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Model) }
       OrSymbol = T.type_alias { T.any(Symbol, Anthropic::Models::Model::TaggedSymbol) }
 
@@ -46,10 +50,6 @@ module Anthropic
       CLAUDE_2_1 = T.let(:"claude-2.1", Anthropic::Models::Model::TaggedSymbol)
 
       CLAUDE_2_0 = T.let(:"claude-2.0", Anthropic::Models::Model::TaggedSymbol)
-
-      sig { override.returns([Anthropic::Models::Model::OrSymbol, String]) }
-      def self.variants
-      end
     end
   end
 end

@@ -80,12 +80,6 @@ module Anthropic
       module Content
         extend Anthropic::Union
 
-        ContentArray =
-          T.let(
-            Anthropic::ArrayOf[union: Anthropic::Models::ToolResultBlockParam::Content::Content],
-            Anthropic::Converter
-          )
-
         module Content
           extend Anthropic::Union
 
@@ -100,6 +94,12 @@ module Anthropic
         end
         def self.variants
         end
+
+        ContentArray =
+          T.let(
+            Anthropic::ArrayOf[union: Anthropic::Models::ToolResultBlockParam::Content::Content],
+            Anthropic::Converter
+          )
       end
     end
   end
