@@ -70,12 +70,12 @@ module Anthropic
         module System
           extend Anthropic::Union
 
+          def self?.variants: -> [String, ::Array[Anthropic::Models::Beta::BetaTextBlockParam]]
+
           type beta_text_block_param_array =
             ::Array[Anthropic::Models::Beta::BetaTextBlockParam]
 
           BetaTextBlockParamArray: beta_text_block_param_array
-
-          def self?.variants: -> [String, ::Array[Anthropic::Models::Beta::BetaTextBlockParam]]
         end
 
         type tool =

@@ -442,11 +442,11 @@ module Anthropic
       module System
         extend Anthropic::Union
 
-        TextBlockParamArray = T.let(Anthropic::ArrayOf[Anthropic::Models::TextBlockParam], Anthropic::Converter)
-
         sig { override.returns([String, T::Array[Anthropic::Models::TextBlockParam]]) }
         def self.variants
         end
+
+        TextBlockParamArray = T.let(Anthropic::ArrayOf[Anthropic::Models::TextBlockParam], Anthropic::Converter)
       end
     end
   end

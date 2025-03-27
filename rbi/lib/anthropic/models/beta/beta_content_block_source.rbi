@@ -54,12 +54,6 @@ module Anthropic
         module Content
           extend Anthropic::Union
 
-          BetaContentBlockSourceContentArray =
-            T.let(
-              Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlockSourceContent],
-              Anthropic::Converter
-            )
-
           sig do
             override
               .returns(
@@ -68,6 +62,12 @@ module Anthropic
           end
           def self.variants
           end
+
+          BetaContentBlockSourceContentArray =
+            T.let(
+              Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlockSourceContent],
+              Anthropic::Converter
+            )
         end
       end
     end

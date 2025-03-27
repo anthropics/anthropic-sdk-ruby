@@ -79,9 +79,6 @@ module Anthropic
         module Content
           extend Anthropic::Union
 
-          BetaContentBlockParamArray =
-            T.let(Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlockParam], Anthropic::Converter)
-
           sig do
             override
               .returns(
@@ -103,6 +100,9 @@ module Anthropic
           end
           def self.variants
           end
+
+          BetaContentBlockParamArray =
+            T.let(Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlockParam], Anthropic::Converter)
         end
 
         module Role

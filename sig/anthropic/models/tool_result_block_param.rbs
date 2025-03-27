@@ -43,11 +43,6 @@ module Anthropic
       module Content
         extend Anthropic::Union
 
-        type content_array =
-          ::Array[Anthropic::Models::ToolResultBlockParam::Content::content]
-
-        ContentArray: content_array
-
         type content =
           Anthropic::Models::TextBlockParam | Anthropic::Models::ImageBlockParam
 
@@ -58,6 +53,11 @@ module Anthropic
         end
 
         def self?.variants: -> [String, ::Array[Anthropic::Models::ToolResultBlockParam::Content::content]]
+
+        type content_array =
+          ::Array[Anthropic::Models::ToolResultBlockParam::Content::content]
+
+        ContentArray: content_array
       end
     end
   end

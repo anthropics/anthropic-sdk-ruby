@@ -385,12 +385,12 @@ module Anthropic
         module System
           extend Anthropic::Union
 
-          BetaTextBlockParamArray =
-            T.let(Anthropic::ArrayOf[Anthropic::Models::Beta::BetaTextBlockParam], Anthropic::Converter)
-
           sig { override.returns([String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]]) }
           def self.variants
           end
+
+          BetaTextBlockParamArray =
+            T.let(Anthropic::ArrayOf[Anthropic::Models::Beta::BetaTextBlockParam], Anthropic::Converter)
         end
 
         module Tool
