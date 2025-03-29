@@ -85,7 +85,7 @@ module Anthropic
     end
 
     # @api private
-    sig { returns(T.anything) }
+    sig { returns(Anthropic::PooledNetRequester) }
     attr_accessor :requester
 
     # @api private

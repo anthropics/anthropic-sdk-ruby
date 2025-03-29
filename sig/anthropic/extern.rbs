@@ -1,4 +1,0 @@
-module Anthropic
-  module Extern
-  end
-end
