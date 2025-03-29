@@ -36,7 +36,6 @@ require "connection_pool"
 # Package files.
 require_relative "anthropic/version"
 require_relative "anthropic/util"
-require_relative "anthropic/extern"
 require_relative "anthropic/base_model"
 require_relative "anthropic/base_page"
 require_relative "anthropic/base_stream"
