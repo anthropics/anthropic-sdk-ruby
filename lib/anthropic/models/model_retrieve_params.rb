@@ -4,7 +4,7 @@ module Anthropic
   module Models
     class ModelRetrieveParams < Anthropic::BaseModel
       # @!parse
-      #   extend Anthropic::RequestParameters::Converter
+      #   extend Anthropic::Type::RequestParameters::Converter
       include Anthropic::RequestParameters
 
       # @!parse

@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Messages
       class BatchCancelParams < Anthropic::BaseModel
-        extend Anthropic::RequestParameters::Converter
+        extend Anthropic::Type::RequestParameters::Converter
         include Anthropic::RequestParameters
 
         sig do

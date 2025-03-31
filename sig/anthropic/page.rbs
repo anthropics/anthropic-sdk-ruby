@@ -1,6 +1,6 @@
 module Anthropic
   class Page[Elem]
-    include Anthropic::BasePage[Elem]
+    include Anthropic::Type::BasePage[Elem]
 
     attr_accessor data: ::Array[Elem]?
 

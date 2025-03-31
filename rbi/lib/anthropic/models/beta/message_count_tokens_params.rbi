@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Beta
       class MessageCountTokensParams < Anthropic::BaseModel
-        extend Anthropic::RequestParameters::Converter
+        extend Anthropic::Type::RequestParameters::Converter
         include Anthropic::RequestParameters
 
         # Input messages.
@@ -390,7 +390,7 @@ module Anthropic
           end
 
           BetaTextBlockParamArray =
-            T.let(Anthropic::ArrayOf[Anthropic::Models::Beta::BetaTextBlockParam], Anthropic::Converter)
+            T.let(Anthropic::ArrayOf[Anthropic::Models::Beta::BetaTextBlockParam], Anthropic::Type::Converter)
         end
 
         module Tool

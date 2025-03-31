@@ -1,0 +1,36 @@
+module Anthropic
+  module Type
+    class ArrayOf
+      include Anthropic::Type::Converter
+
+      def self.[]: (
+        ::Hash[Symbol, top]
+        | ^-> Anthropic::Type::Converter::input
+        | Anthropic::Type::Converter::input type_info,
+        ?::Hash[Symbol, top] spec
+      ) -> instance
+
+      def ===: (top other) -> bool
+
+      def ==: (top other) -> bool
+
+      def coerce: (
+        Enumerable[top] | top value,
+        state: Anthropic::Type::Converter::state
+      ) -> (::Array[top] | top)
+
+      def dump: (Enumerable[top] | top value) -> (::Array[top] | top)
+
+      def item_type: -> top
+
+      def nilable?: -> bool
+
+      def initialize: (
+        ::Hash[Symbol, top]
+        | ^-> Anthropic::Type::Converter::input
+        | Anthropic::Type::Converter::input type_info,
+        ?::Hash[Symbol, top] spec
+      ) -> void
+    end
+  end
+end

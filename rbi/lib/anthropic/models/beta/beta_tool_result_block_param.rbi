@@ -122,7 +122,7 @@ module Anthropic
           ContentArray =
             T.let(
               Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaToolResultBlockParam::Content::Content],
-              Anthropic::Converter
+              Anthropic::Type::Converter
             )
         end
       end

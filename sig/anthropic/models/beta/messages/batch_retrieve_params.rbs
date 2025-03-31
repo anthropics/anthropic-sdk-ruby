@@ -7,7 +7,7 @@ module Anthropic
           & Anthropic::request_parameters
 
         class BatchRetrieveParams < Anthropic::BaseModel
-          extend Anthropic::RequestParameters::Converter
+          extend Anthropic::Type::RequestParameters::Converter
           include Anthropic::RequestParameters
 
           attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?

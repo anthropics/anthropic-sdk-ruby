@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       module Messages
         class BatchListParams < Anthropic::BaseModel
-          extend Anthropic::RequestParameters::Converter
+          extend Anthropic::Type::RequestParameters::Converter
           include Anthropic::RequestParameters
 
           # ID of the object to use as a cursor for pagination. When provided, returns the

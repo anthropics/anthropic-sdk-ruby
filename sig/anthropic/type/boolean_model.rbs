@@ -1,0 +1,18 @@
+module Anthropic
+  module Type
+    class BooleanModel
+      extend Anthropic::Type::Converter
+
+      def self.===: (top other) -> bool
+
+      def self.==: (top other) -> bool
+
+      def self.coerce: (
+        bool | top value,
+        state: Anthropic::Type::Converter::state
+      ) -> (bool | top)
+
+      def self.dump: (bool | top value) -> (bool | top)
+    end
+  end
+end
