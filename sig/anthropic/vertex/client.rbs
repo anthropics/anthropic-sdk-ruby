@@ -12,13 +12,13 @@ module Anthropic
       attr_reader beta: Anthropic::Resources::Beta
 
       private def build_request: (
-        Anthropic::BaseClient::request_components req,
+        Anthropic::Transport::BaseClient::request_components req,
         Anthropic::request_options opts
-      ) -> Anthropic::BaseClient::request_input
+      ) -> Anthropic::Transport::BaseClient::request_input
 
       private def fit_req_to_vertex_specs!: (
-        BaseClient::request_components request_components
-      ) -> Anthropic::BaseClient::request_components
+        Anthropic::Transport::BaseClient::request_components request_components
+      ) -> Anthropic::Transport::BaseClient::request_components
 
       def initialize: (
         region: String?,
