@@ -4,7 +4,7 @@ module Anthropic
       type model_retrieve_params = {  } & Anthropic::request_parameters
 
       class ModelRetrieveParams < Anthropic::BaseModel
-        extend Anthropic::RequestParameters::Converter
+        extend Anthropic::Type::RequestParameters::Converter
         include Anthropic::RequestParameters
 
         def initialize: (?request_options: Anthropic::request_opts) -> void

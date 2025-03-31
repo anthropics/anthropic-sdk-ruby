@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Messages
       class BatchCreateParams < Anthropic::BaseModel
-        extend Anthropic::RequestParameters::Converter
+        extend Anthropic::Type::RequestParameters::Converter
         include Anthropic::RequestParameters
 
         # List of requests for prompt completion. Each is an individual request to create
@@ -529,7 +529,8 @@ module Anthropic
               def self.variants
               end
 
-              TextBlockParamArray = T.let(Anthropic::ArrayOf[Anthropic::Models::TextBlockParam], Anthropic::Converter)
+              TextBlockParamArray =
+                T.let(Anthropic::ArrayOf[Anthropic::Models::TextBlockParam], Anthropic::Type::Converter)
             end
           end
         end

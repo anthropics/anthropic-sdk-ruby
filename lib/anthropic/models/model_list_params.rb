@@ -4,7 +4,7 @@ module Anthropic
   module Models
     class ModelListParams < Anthropic::BaseModel
       # @!parse
-      #   extend Anthropic::RequestParameters::Converter
+      #   extend Anthropic::Type::RequestParameters::Converter
       include Anthropic::RequestParameters
 
       # @!attribute [r] after_id

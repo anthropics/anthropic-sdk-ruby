@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       class MessageCreateParams < Anthropic::BaseModel
         # @!parse
-        #   extend Anthropic::RequestParameters::Converter
+        #   extend Anthropic::Type::RequestParameters::Converter
         include Anthropic::RequestParameters
 
         # @!attribute max_tokens

@@ -2,7 +2,7 @@
 
 module Anthropic
   class JsonLStream
-    include Anthropic::BaseStream
+    include Anthropic::Type::BaseStream
 
     Message = type_member(:in) { {fixed: T.anything} }
     Elem = type_member(:out)

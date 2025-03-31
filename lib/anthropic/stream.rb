@@ -17,7 +17,7 @@ module Anthropic
   #
   #   events => Array
   class Stream
-    include Anthropic::BaseStream
+    include Anthropic::Type::BaseStream
 
     # @api private
     #
@@ -31,13 +31,13 @@ module Anthropic
           case msg
           in {event: "completion", data: String => data}
             decoded = JSON.parse(data, symbolize_names: true)
-            y << Anthropic::Converter.coerce(@model, decoded)
+            y << Anthropic::Type::Converter.coerce(@model, decoded)
           in {
             event: "message_start" | "message_delta" | "message_stop" | "content_block_start" | "content_block_delta" | "content_block_stop",
             data: String => data
           }
             decoded = JSON.parse(data, symbolize_names: true)
-            y << Anthropic::Converter.coerce(@model, decoded)
+            y << Anthropic::Type::Converter.coerce(@model, decoded)
           in {event: "ping"}
             next
           in {event: "error", data: String => data}

@@ -6,7 +6,7 @@ module Anthropic
       module Messages
         class BatchDeleteParams < Anthropic::BaseModel
           # @!parse
-          #   extend Anthropic::RequestParameters::Converter
+          #   extend Anthropic::Type::RequestParameters::Converter
           include Anthropic::RequestParameters
 
           # @!attribute [r] betas

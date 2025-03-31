@@ -12,7 +12,7 @@ module Anthropic
           & Anthropic::request_parameters
 
         class BatchListParams < Anthropic::BaseModel
-          extend Anthropic::RequestParameters::Converter
+          extend Anthropic::Type::RequestParameters::Converter
           include Anthropic::RequestParameters
 
           attr_reader after_id: String?

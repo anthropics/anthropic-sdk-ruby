@@ -14,7 +14,7 @@ module Anthropic
       & Anthropic::request_parameters
 
     class CompletionCreateParams < Anthropic::BaseModel
-      extend Anthropic::RequestParameters::Converter
+      extend Anthropic::Type::RequestParameters::Converter
       include Anthropic::RequestParameters
 
       attr_accessor max_tokens_to_sample: Integer
