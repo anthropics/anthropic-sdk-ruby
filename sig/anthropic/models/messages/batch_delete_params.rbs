@@ -4,7 +4,7 @@ module Anthropic
       type batch_delete_params = {  } & Anthropic::request_parameters
 
       class BatchDeleteParams < Anthropic::BaseModel
-        extend Anthropic::RequestParameters::Converter
+        extend Anthropic::Type::RequestParameters::Converter
         include Anthropic::RequestParameters
 
         def initialize: (?request_options: Anthropic::request_opts) -> void

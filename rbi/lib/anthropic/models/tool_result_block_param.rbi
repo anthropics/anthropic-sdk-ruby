@@ -98,7 +98,7 @@ module Anthropic
         ContentArray =
           T.let(
             Anthropic::ArrayOf[union: Anthropic::Models::ToolResultBlockParam::Content::Content],
-            Anthropic::Converter
+            Anthropic::Type::Converter
           )
       end
     end

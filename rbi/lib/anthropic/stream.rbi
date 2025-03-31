@@ -2,7 +2,7 @@
 
 module Anthropic
   class Stream
-    include Anthropic::BaseStream
+    include Anthropic::Type::BaseStream
 
     Message = type_member(:in) { {fixed: Anthropic::Util::ServerSentEvent} }
     Elem = type_member(:out)

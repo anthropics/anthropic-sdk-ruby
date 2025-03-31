@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     class CompletionCreateParams < Anthropic::BaseModel
-      extend Anthropic::RequestParameters::Converter
+      extend Anthropic::Type::RequestParameters::Converter
       include Anthropic::RequestParameters
 
       # The maximum number of tokens to generate before stopping.

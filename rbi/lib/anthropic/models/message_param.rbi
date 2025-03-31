@@ -101,7 +101,7 @@ module Anthropic
         end
 
         ContentBlockParamArray =
-          T.let(Anthropic::ArrayOf[union: Anthropic::Models::ContentBlockParam], Anthropic::Converter)
+          T.let(Anthropic::ArrayOf[union: Anthropic::Models::ContentBlockParam], Anthropic::Type::Converter)
       end
 
       module Role

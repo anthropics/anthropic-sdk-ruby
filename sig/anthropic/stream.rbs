@@ -1,6 +1,6 @@
 module Anthropic
   class Stream[Elem]
-    include Anthropic::BaseStream[Anthropic::Util::server_sent_event, Elem]
+    include Anthropic::Type::BaseStream[Anthropic::Util::server_sent_event, Elem]
 
     private def iterator: -> Enumerable[Elem]
   end

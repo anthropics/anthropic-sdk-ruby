@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       module Messages
         class BatchDeleteParams < Anthropic::BaseModel
-          extend Anthropic::RequestParameters::Converter
+          extend Anthropic::Type::RequestParameters::Converter
           include Anthropic::RequestParameters
 
           # Optional header to specify the beta version(s) you want to use.

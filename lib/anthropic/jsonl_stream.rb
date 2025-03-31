@@ -17,7 +17,7 @@ module Anthropic
   #
   #   batches => Array
   class JsonLStream
-    include Anthropic::BaseStream
+    include Anthropic::Type::BaseStream
 
     # @api private
     #
@@ -25,7 +25,7 @@ module Anthropic
     private def iterator
       @iterator ||= Anthropic::Util.chain_fused(@stream) do |y|
         @stream.each do
-          y << Anthropic::Converter.coerce(@model, _1)
+          y << Anthropic::Type::Converter.coerce(@model, _1)
         end
       end
     end

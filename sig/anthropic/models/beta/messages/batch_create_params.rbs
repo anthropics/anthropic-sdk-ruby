@@ -10,7 +10,7 @@ module Anthropic
           & Anthropic::request_parameters
 
         class BatchCreateParams < Anthropic::BaseModel
-          extend Anthropic::RequestParameters::Converter
+          extend Anthropic::Type::RequestParameters::Converter
           include Anthropic::RequestParameters
 
           attr_accessor requests: ::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request]
