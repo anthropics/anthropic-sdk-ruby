@@ -11,6 +11,8 @@ module Anthropic
       abstract!
       final!
 
+      Elem = type_member(:out)
+
       sig(:final) do
         params(
           type_info: T.any(
@@ -36,11 +38,7 @@ module Anthropic
       # @api private
       sig(:final) do
         override
-          .params(value: T.any(
-            T::Enumerable[T.anything],
-            T.anything
-          ),
-                  state: Anthropic::Type::Converter::State)
+          .params(value: T.any(T::Enumerable[Elem], T.anything), state: Anthropic::Type::Converter::State)
           .returns(T.any(T::Array[T.anything], T.anything))
       end
       def coerce(value, state:)
@@ -49,14 +47,14 @@ module Anthropic
       # @api private
       sig(:final) do
         override
-          .params(value: T.any(T::Enumerable[T.anything], T.anything))
+          .params(value: T.any(T::Enumerable[Elem], T.anything))
           .returns(T.any(T::Array[T.anything], T.anything))
       end
       def dump(value)
       end
 
       # @api private
-      sig(:final) { returns(T.anything) }
+      sig(:final) { returns(Elem) }
       protected def item_type
       end
 
