@@ -2,7 +2,7 @@
 
 module Anthropic
   class Page
-    include Anthropic::BasePage
+    include Anthropic::Type::BasePage
 
     Elem = type_member
 

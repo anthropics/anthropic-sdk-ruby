@@ -49,7 +49,7 @@ module Anthropic
         end
 
         ContentBlockSourceContentArray =
-          T.let(Anthropic::ArrayOf[union: Anthropic::Models::ContentBlockSourceContent], Anthropic::Converter)
+          T.let(Anthropic::ArrayOf[union: Anthropic::Models::ContentBlockSourceContent], Anthropic::Type::Converter)
       end
     end
   end

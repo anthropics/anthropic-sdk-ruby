@@ -5,7 +5,7 @@ module Anthropic
     module Messages
       class BatchResultsParams < Anthropic::BaseModel
         # @!parse
-        #   extend Anthropic::RequestParameters::Converter
+        #   extend Anthropic::Type::RequestParameters::Converter
         include Anthropic::RequestParameters
 
         # @!parse

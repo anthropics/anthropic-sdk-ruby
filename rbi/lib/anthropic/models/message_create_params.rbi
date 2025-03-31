@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     class MessageCreateParams < Anthropic::BaseModel
-      extend Anthropic::RequestParameters::Converter
+      extend Anthropic::Type::RequestParameters::Converter
       include Anthropic::RequestParameters
 
       # The maximum number of tokens to generate before stopping.
@@ -446,7 +446,8 @@ module Anthropic
         def self.variants
         end
 
-        TextBlockParamArray = T.let(Anthropic::ArrayOf[Anthropic::Models::TextBlockParam], Anthropic::Converter)
+        TextBlockParamArray =
+          T.let(Anthropic::ArrayOf[Anthropic::Models::TextBlockParam], Anthropic::Type::Converter)
       end
     end
   end

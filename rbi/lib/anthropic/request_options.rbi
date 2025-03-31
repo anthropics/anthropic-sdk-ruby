@@ -1,21 +1,6 @@
 # typed: strong
 
 module Anthropic
-  # @api private
-  module RequestParameters
-    # Options to specify HTTP behaviour for this request.
-    sig { returns(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash)) }
-    attr_accessor :request_options
-
-    # @api private
-    module Converter
-      # @api private
-      sig { params(params: T.anything).returns([T.anything, Anthropic::Util::AnyHash]) }
-      def dump_request(params)
-      end
-    end
-  end
-
   # Specify HTTP behaviour to use for a specific request. These options supplement
   #   or override those provided at the client level.
   #

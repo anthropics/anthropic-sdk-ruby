@@ -14,7 +14,7 @@ module Anthropic
         & Anthropic::request_parameters
 
       class MessageCountTokensParams < Anthropic::BaseModel
-        extend Anthropic::RequestParameters::Converter
+        extend Anthropic::Type::RequestParameters::Converter
         include Anthropic::RequestParameters
 
         attr_accessor messages: ::Array[Anthropic::Models::Beta::BetaMessageParam]

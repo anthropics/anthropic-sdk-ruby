@@ -23,7 +23,7 @@ module Anthropic
   #
   #   batches => Array
   class Page
-    include Anthropic::BasePage
+    include Anthropic::Type::BasePage
 
     # @return [Array<Object>, nil]
     attr_accessor :data
@@ -39,7 +39,7 @@ module Anthropic
 
     # @api private
     #
-    # @param client [Anthropic::BaseClient]
+    # @param client [Anthropic::Transport::BaseClient]
     # @param req [Hash{Symbol=>Object}]
     # @param headers [Hash{String=>String}, Net::HTTPHeader]
     # @param page_data [Hash{Symbol=>Object}]
@@ -49,7 +49,7 @@ module Anthropic
 
       case page_data
       in {data: Array | nil => data}
-        @data = data&.map { Anthropic::Converter.coerce(model, _1) }
+        @data = data&.map { Anthropic::Type::Converter.coerce(model, _1) }
       else
       end
 

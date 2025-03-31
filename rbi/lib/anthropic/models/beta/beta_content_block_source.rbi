@@ -66,7 +66,7 @@ module Anthropic
           BetaContentBlockSourceContentArray =
             T.let(
               Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlockSourceContent],
-              Anthropic::Converter
+              Anthropic::Type::Converter
             )
         end
       end
