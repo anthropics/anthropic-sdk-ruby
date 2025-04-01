@@ -3,6 +3,7 @@
 module Anthropic
   module Models
     module Messages
+      # @see Anthropic::Resources::Messages::Batches#create
       class MessageBatch < Anthropic::BaseModel
         # @!attribute id
         #   Unique object identifier.

@@ -2,6 +2,9 @@
 
 module Anthropic
   module Models
+    # @see Anthropic::Resources::Messages#create
+    #
+    # @see Anthropic::Resources::Messages#create_streaming
     class Message < Anthropic::BaseModel
       # @!attribute id
       #   Unique object identifier.
