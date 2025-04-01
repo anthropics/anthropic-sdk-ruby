@@ -17,7 +17,7 @@ module Anthropic
           # @overload create(requests:, betas: nil, request_options: {})
           #
           # @param requests [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>]
-          # @param betas [Array<String, Symbol>]
+          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @return [Anthropic::Models::Beta::Messages::BetaMessageBatch]
@@ -46,7 +46,7 @@ module Anthropic
           # @overload retrieve(message_batch_id, betas: nil, request_options: {})
           #
           # @param message_batch_id [String]
-          # @param betas [Array<String, Symbol>]
+          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @return [Anthropic::Models::Beta::Messages::BetaMessageBatch]
@@ -74,7 +74,7 @@ module Anthropic
           # @param after_id [String]
           # @param before_id [String]
           # @param limit [Integer]
-          # @param betas [Array<String, Symbol>]
+          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @return [Anthropic::Page<Anthropic::Models::Beta::Messages::BetaMessageBatch>]
@@ -105,7 +105,7 @@ module Anthropic
           # @overload delete(message_batch_id, betas: nil, request_options: {})
           #
           # @param message_batch_id [String]
-          # @param betas [Array<String, Symbol>]
+          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @return [Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch]
@@ -138,7 +138,7 @@ module Anthropic
           # @overload cancel(message_batch_id, betas: nil, request_options: {})
           #
           # @param message_batch_id [String]
-          # @param betas [Array<String, Symbol>]
+          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @return [Anthropic::Models::Beta::Messages::BetaMessageBatch]
@@ -167,7 +167,7 @@ module Anthropic
           # @overload results(message_batch_id, betas: nil, request_options: {})
           #
           # @param message_batch_id [String]
-          # @param betas [Array<String, Symbol>]
+          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @return [Anthropic::JsonLStream<Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse>]

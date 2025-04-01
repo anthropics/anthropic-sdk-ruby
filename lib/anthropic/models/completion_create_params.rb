@@ -24,7 +24,7 @@ module Anthropic
       #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #     details and options.
       #
-      #   @return [Symbol, String]
+      #   @return [Symbol, String, Anthropic::Models::Model]
       required :model, union: -> { Anthropic::Models::Model }
 
       # @!attribute prompt
@@ -122,7 +122,7 @@ module Anthropic
 
       # @!parse
       #   # @param max_tokens_to_sample [Integer]
-      #   # @param model [Symbol, String]
+      #   # @param model [Symbol, String, Anthropic::Models::Model]
       #   # @param prompt [String]
       #   # @param metadata [Anthropic::Models::Metadata]
       #   # @param stop_sequences [Array<String>]

@@ -15,7 +15,7 @@ module Anthropic
       # @overload create(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, request_options: {})
       #
       # @param max_tokens_to_sample [Integer]
-      # @param model [Symbol, String]
+      # @param model [Symbol, String, Anthropic::Models::Model]
       # @param prompt [String]
       # @param metadata [Anthropic::Models::Metadata]
       # @param stop_sequences [Array<String>]
@@ -54,7 +54,7 @@ module Anthropic
       # @overload create_streaming(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, request_options: {})
       #
       # @param max_tokens_to_sample [Integer]
-      # @param model [Symbol, String]
+      # @param model [Symbol, String, Anthropic::Models::Model]
       # @param prompt [String]
       # @param metadata [Anthropic::Models::Metadata]
       # @param stop_sequences [Array<String>]

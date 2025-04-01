@@ -13,17 +13,17 @@ module Anthropic
           # @!attribute [r] betas
           #   Optional header to specify the beta version(s) you want to use.
           #
-          #   @return [Array<String, Symbol>, nil]
+          #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas,
                    -> { Anthropic::ArrayOf[union: Anthropic::Models::AnthropicBeta] },
                    api_name: :"anthropic-beta"
 
           # @!parse
-          #   # @return [Array<String, Symbol>]
+          #   # @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
           #   attr_writer :betas
 
           # @!parse
-          #   # @param betas [Array<String, Symbol>]
+          #   # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
           #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
           #   #
           #   def initialize(betas: nil, request_options: {}, **) = super

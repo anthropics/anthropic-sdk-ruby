@@ -6,7 +6,7 @@ module Anthropic
       extend Anthropic::Enum
 
       TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::StopReason) }
-      OrSymbol = T.type_alias { T.any(Symbol, Anthropic::Models::StopReason::TaggedSymbol) }
+      OrSymbol = T.type_alias { T.any(Symbol, String, Anthropic::Models::StopReason::TaggedSymbol) }
 
       END_TURN = T.let(:end_turn, Anthropic::Models::StopReason::TaggedSymbol)
       MAX_TOKENS = T.let(:max_tokens, Anthropic::Models::StopReason::TaggedSymbol)
