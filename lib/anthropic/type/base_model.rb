@@ -93,7 +93,9 @@ module Anthropic
             end
           rescue StandardError
             cls = self.class.name.split("::").last
+            # rubocop:disable Layout/LineLength
             message = "Failed to parse #{cls}.#{__method__} from #{value.class} to #{target.inspect}. To get the unparsed API response, use #{cls}[:#{__method__}]."
+            # rubocop:enable Layout/LineLength
             raise Anthropic::ConversionError.new(message)
           end
         end
@@ -204,14 +206,13 @@ module Anthropic
           instance = new
           data = instance.to_h
 
+          # rubocop:disable Metrics/BlockLength
           fields.each do |name, field|
             mode, required, target = field.fetch_values(:mode, :required, :type)
             api_name, nilable, const = field.fetch_values(:api_name, :nilable, :const)
 
             unless val.key?(api_name)
-              if const != Anthropic::Util::OMIT
-                exactness[:yes] += 1
-              elsif required && mode != :dump
+              if required && mode != :dump && const == Anthropic::Util::OMIT
                 exactness[nilable ? :maybe : :no] += 1
               else
                 exactness[:yes] += 1
@@ -237,6 +238,7 @@ module Anthropic
               end
             data.store(name, converted)
           end
+          # rubocop:enable Metrics/BlockLength
 
           keys.each { data.store(_1, val.fetch(_1)) }
           instance
