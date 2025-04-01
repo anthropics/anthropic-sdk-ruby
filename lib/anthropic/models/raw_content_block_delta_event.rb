@@ -6,7 +6,7 @@ module Anthropic
       # @!attribute delta
       #
       #   @return [Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta, Anthropic::Models::ThinkingDelta, Anthropic::Models::SignatureDelta]
-      required :delta, union: -> { Anthropic::Models::RawContentBlockDeltaEvent::Delta }
+      required :delta, union: -> { Anthropic::Models::RawContentBlockDelta }
 
       # @!attribute index
       #
@@ -26,27 +26,6 @@ module Anthropic
       #   def initialize(delta:, index:, type: :content_block_delta, **) = super
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-      # @see Anthropic::Models::RawContentBlockDeltaEvent#delta
-      module Delta
-        extend Anthropic::Union
-
-        discriminator :type
-
-        variant :text_delta, -> { Anthropic::Models::TextDelta }
-
-        variant :input_json_delta, -> { Anthropic::Models::InputJSONDelta }
-
-        variant :citations_delta, -> { Anthropic::Models::CitationsDelta }
-
-        variant :thinking_delta, -> { Anthropic::Models::ThinkingDelta }
-
-        variant :signature_delta, -> { Anthropic::Models::SignatureDelta }
-
-        # @!parse
-        #   # @return [Array(Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta, Anthropic::Models::ThinkingDelta, Anthropic::Models::SignatureDelta)]
-        #   def self.variants; end
-      end
     end
   end
 end
