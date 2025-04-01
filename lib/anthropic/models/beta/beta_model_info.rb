@@ -3,6 +3,7 @@
 module Anthropic
   module Models
     module Beta
+      # @see Anthropic::Resources::Beta::Models#retrieve
       class BetaModelInfo < Anthropic::BaseModel
         # @!attribute id
         #   Unique model identifier.

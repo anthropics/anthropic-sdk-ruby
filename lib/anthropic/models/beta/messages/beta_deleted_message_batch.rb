@@ -4,6 +4,7 @@ module Anthropic
   module Models
     module Beta
       module Messages
+        # @see Anthropic::Resources::Beta::Messages::Batches#delete
         class BetaDeletedMessageBatch < Anthropic::BaseModel
           # @!attribute id
           #   ID of the Message Batch.
