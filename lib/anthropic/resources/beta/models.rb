@@ -19,7 +19,7 @@ module Anthropic
         def retrieve(model_id, params = {})
           @client.request(
             method: :get,
-            path: ["v1/models/%0s?beta=true", model_id],
+            path: ["v1/models/%1$s?beta=true", model_id],
             model: Anthropic::Models::Beta::BetaModelInfo,
             options: params[:request_options]
           )

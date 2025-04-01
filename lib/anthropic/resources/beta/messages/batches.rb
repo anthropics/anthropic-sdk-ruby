@@ -57,7 +57,7 @@ module Anthropic
             parsed, options = Anthropic::Models::Beta::Messages::BatchRetrieveParams.dump_request(params)
             @client.request(
               method: :get,
-              path: ["v1/messages/batches/%0s?beta=true", message_batch_id],
+              path: ["v1/messages/batches/%1$s?beta=true", message_batch_id],
               headers: parsed,
               model: Anthropic::Models::Beta::Messages::BetaMessageBatch,
               options: options
@@ -122,7 +122,7 @@ module Anthropic
             parsed, options = Anthropic::Models::Beta::Messages::BatchDeleteParams.dump_request(params)
             @client.request(
               method: :delete,
-              path: ["v1/messages/batches/%0s?beta=true", message_batch_id],
+              path: ["v1/messages/batches/%1$s?beta=true", message_batch_id],
               headers: parsed,
               model: Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch,
               options: options
@@ -155,7 +155,7 @@ module Anthropic
             parsed, options = Anthropic::Models::Beta::Messages::BatchCancelParams.dump_request(params)
             @client.request(
               method: :post,
-              path: ["v1/messages/batches/%0s/cancel?beta=true", message_batch_id],
+              path: ["v1/messages/batches/%1$s/cancel?beta=true", message_batch_id],
               headers: parsed,
               model: Anthropic::Models::Beta::Messages::BetaMessageBatch,
               options: options
@@ -184,7 +184,7 @@ module Anthropic
             parsed, options = Anthropic::Models::Beta::Messages::BatchResultsParams.dump_request(params)
             @client.request(
               method: :get,
-              path: ["v1/messages/batches/%0s/results?beta=true", message_batch_id],
+              path: ["v1/messages/batches/%1$s/results?beta=true", message_batch_id],
               headers: {"accept" => "application/x-jsonl", **parsed},
               stream: Anthropic::JsonLStream,
               model: Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse,
