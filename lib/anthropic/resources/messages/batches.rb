@@ -49,7 +49,7 @@ module Anthropic
         def retrieve(message_batch_id, params = {})
           @client.request(
             method: :get,
-            path: ["v1/messages/batches/%0s", message_batch_id],
+            path: ["v1/messages/batches/%1$s", message_batch_id],
             model: Anthropic::Models::Messages::MessageBatch,
             options: params[:request_options]
           )
@@ -106,7 +106,7 @@ module Anthropic
         def delete(message_batch_id, params = {})
           @client.request(
             method: :delete,
-            path: ["v1/messages/batches/%0s", message_batch_id],
+            path: ["v1/messages/batches/%1$s", message_batch_id],
             model: Anthropic::Models::Messages::DeletedMessageBatch,
             options: params[:request_options]
           )
@@ -135,7 +135,7 @@ module Anthropic
         def cancel(message_batch_id, params = {})
           @client.request(
             method: :post,
-            path: ["v1/messages/batches/%0s/cancel", message_batch_id],
+            path: ["v1/messages/batches/%1$s/cancel", message_batch_id],
             model: Anthropic::Models::Messages::MessageBatch,
             options: params[:request_options]
           )
@@ -160,7 +160,7 @@ module Anthropic
         def results(message_batch_id, params = {})
           @client.request(
             method: :get,
-            path: ["v1/messages/batches/%0s/results", message_batch_id],
+            path: ["v1/messages/batches/%1$s/results", message_batch_id],
             headers: {"accept" => "application/x-jsonl"},
             stream: Anthropic::JsonLStream,
             model: Anthropic::Models::Messages::MessageBatchIndividualResponse,
