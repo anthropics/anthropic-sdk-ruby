@@ -13,12 +13,10 @@ module Anthropic
         #   Learn more about the Message Batches API in our
         #   [user guide](/en/docs/build-with-claude/batch-processing)
         #
-        # @param params [Anthropic::Models::Messages::BatchCreateParams, Hash{Symbol=>Object}] .
+        # @overload create(requests:, request_options: {})
         #
-        #   @option params [Array<Anthropic::Models::Messages::BatchCreateParams::Request>] :requests List of requests for prompt completion. Each is an individual request to create
-        #     a Message.
-        #
-        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+        # @param requests [Array<Anthropic::Models::Messages::BatchCreateParams::Request>]
+        # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Messages::MessageBatch]
         #
@@ -41,11 +39,10 @@ module Anthropic
         #   Learn more about the Message Batches API in our
         #   [user guide](/en/docs/build-with-claude/batch-processing)
         #
-        # @param message_batch_id [String] ID of the Message Batch.
+        # @overload retrieve(message_batch_id, request_options: {})
         #
-        # @param params [Anthropic::Models::Messages::BatchRetrieveParams, Hash{Symbol=>Object}] .
-        #
-        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+        # @param message_batch_id [String]
+        # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Messages::MessageBatch]
         #
@@ -65,19 +62,12 @@ module Anthropic
         #   Learn more about the Message Batches API in our
         #   [user guide](/en/docs/build-with-claude/batch-processing)
         #
-        # @param params [Anthropic::Models::Messages::BatchListParams, Hash{Symbol=>Object}] .
+        # @overload list(after_id: nil, before_id: nil, limit: nil, request_options: {})
         #
-        #   @option params [String] :after_id ID of the object to use as a cursor for pagination. When provided, returns the
-        #     page of results immediately after this object.
-        #
-        #   @option params [String] :before_id ID of the object to use as a cursor for pagination. When provided, returns the
-        #     page of results immediately before this object.
-        #
-        #   @option params [Integer] :limit Number of items to return per page.
-        #
-        #     Defaults to `20`. Ranges from `1` to `1000`.
-        #
-        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+        # @param after_id [String]
+        # @param before_id [String]
+        # @param limit [Integer]
+        # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Page<Anthropic::Models::Messages::MessageBatch>]
         #
@@ -102,11 +92,10 @@ module Anthropic
         #   Learn more about the Message Batches API in our
         #   [user guide](/en/docs/build-with-claude/batch-processing)
         #
-        # @param message_batch_id [String] ID of the Message Batch.
+        # @overload delete(message_batch_id, request_options: {})
         #
-        # @param params [Anthropic::Models::Messages::BatchDeleteParams, Hash{Symbol=>Object}] .
-        #
-        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+        # @param message_batch_id [String]
+        # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Messages::DeletedMessageBatch]
         #
@@ -133,11 +122,10 @@ module Anthropic
         #   Learn more about the Message Batches API in our
         #   [user guide](/en/docs/build-with-claude/batch-processing)
         #
-        # @param message_batch_id [String] ID of the Message Batch.
+        # @overload cancel(message_batch_id, request_options: {})
         #
-        # @param params [Anthropic::Models::Messages::BatchCancelParams, Hash{Symbol=>Object}] .
-        #
-        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+        # @param message_batch_id [String]
+        # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Messages::MessageBatch]
         #
@@ -160,11 +148,10 @@ module Anthropic
         #   Learn more about the Message Batches API in our
         #   [user guide](/en/docs/build-with-claude/batch-processing)
         #
-        # @param message_batch_id [String] ID of the Message Batch.
+        # @overload results(message_batch_id, request_options: {})
         #
-        # @param params [Anthropic::Models::Messages::BatchResultsParams, Hash{Symbol=>Object}] .
-        #
-        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+        # @param message_batch_id [String]
+        # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::JsonLStream<Anthropic::Models::Messages::MessageBatchIndividualResponse>]
         #
