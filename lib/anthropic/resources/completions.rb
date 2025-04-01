@@ -12,67 +12,17 @@ module Anthropic
       #   [migration guide](https://docs.anthropic.com/en/api/migrating-from-text-completions-to-messages)
       #   for guidance in migrating from Text Completions to Messages.
       #
-      # @param params [Anthropic::Models::CompletionCreateParams, Hash{Symbol=>Object}] .
+      # @overload create(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, request_options: {})
       #
-      #   @option params [Integer] :max_tokens_to_sample The maximum number of tokens to generate before stopping.
-      #
-      #     Note that our models may stop _before_ reaching this maximum. This parameter
-      #     only specifies the absolute maximum number of tokens to generate.
-      #
-      #   @option params [Symbol, String] :model The model that will complete your prompt.\n\nSee
-      #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
-      #     details and options.
-      #
-      #   @option params [String] :prompt The prompt that you want Claude to complete.
-      #
-      #     For proper response generation you will need to format your prompt using
-      #     alternating `\n\nHuman:` and `\n\nAssistant:` conversational turns. For example:
-      #
-      #     ```
-      #     "\n\nHuman: {userQuestion}\n\nAssistant:"
-      #     ```
-      #
-      #     See [prompt validation](https://docs.anthropic.com/en/api/prompt-validation) and
-      #     our guide to
-      #     [prompt design](https://docs.anthropic.com/en/docs/intro-to-prompting) for more
-      #     details.
-      #
-      #   @option params [Anthropic::Models::Metadata] :metadata An object describing metadata about the request.
-      #
-      #   @option params [Array<String>] :stop_sequences Sequences that will cause the model to stop generating.
-      #
-      #     Our models stop on `"\n\nHuman:"`, and may include additional built-in stop
-      #     sequences in the future. By providing the stop_sequences parameter, you may
-      #     include additional strings that will cause the model to stop generating.
-      #
-      #   @option params [Float] :temperature Amount of randomness injected into the response.
-      #
-      #     Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
-      #     for analytical / multiple choice, and closer to `1.0` for creative and
-      #     generative tasks.
-      #
-      #     Note that even with `temperature` of `0.0`, the results will not be fully
-      #     deterministic.
-      #
-      #   @option params [Integer] :top_k Only sample from the top K options for each subsequent token.
-      #
-      #     Used to remove "long tail" low probability responses.
-      #     [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
-      #
-      #     Recommended for advanced use cases only. You usually only need to use
-      #     `temperature`.
-      #
-      #   @option params [Float] :top_p Use nucleus sampling.
-      #
-      #     In nucleus sampling, we compute the cumulative distribution over all the options
-      #     for each subsequent token in decreasing probability order and cut it off once it
-      #     reaches a particular probability specified by `top_p`. You should either alter
-      #     `temperature` or `top_p`, but not both.
-      #
-      #     Recommended for advanced use cases only. You usually only need to use
-      #     `temperature`.
-      #
-      #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param max_tokens_to_sample [Integer]
+      # @param model [Symbol, String]
+      # @param prompt [String]
+      # @param metadata [Anthropic::Models::Metadata]
+      # @param stop_sequences [Array<String>]
+      # @param temperature [Float]
+      # @param top_k [Integer]
+      # @param top_p [Float]
+      # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Anthropic::Models::Completion]
       #
@@ -101,67 +51,17 @@ module Anthropic
       #   [migration guide](https://docs.anthropic.com/en/api/migrating-from-text-completions-to-messages)
       #   for guidance in migrating from Text Completions to Messages.
       #
-      # @param params [Anthropic::Models::CompletionCreateParams, Hash{Symbol=>Object}] .
+      # @overload create_streaming(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, request_options: {})
       #
-      #   @option params [Integer] :max_tokens_to_sample The maximum number of tokens to generate before stopping.
-      #
-      #     Note that our models may stop _before_ reaching this maximum. This parameter
-      #     only specifies the absolute maximum number of tokens to generate.
-      #
-      #   @option params [Symbol, String] :model The model that will complete your prompt.\n\nSee
-      #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
-      #     details and options.
-      #
-      #   @option params [String] :prompt The prompt that you want Claude to complete.
-      #
-      #     For proper response generation you will need to format your prompt using
-      #     alternating `\n\nHuman:` and `\n\nAssistant:` conversational turns. For example:
-      #
-      #     ```
-      #     "\n\nHuman: {userQuestion}\n\nAssistant:"
-      #     ```
-      #
-      #     See [prompt validation](https://docs.anthropic.com/en/api/prompt-validation) and
-      #     our guide to
-      #     [prompt design](https://docs.anthropic.com/en/docs/intro-to-prompting) for more
-      #     details.
-      #
-      #   @option params [Anthropic::Models::Metadata] :metadata An object describing metadata about the request.
-      #
-      #   @option params [Array<String>] :stop_sequences Sequences that will cause the model to stop generating.
-      #
-      #     Our models stop on `"\n\nHuman:"`, and may include additional built-in stop
-      #     sequences in the future. By providing the stop_sequences parameter, you may
-      #     include additional strings that will cause the model to stop generating.
-      #
-      #   @option params [Float] :temperature Amount of randomness injected into the response.
-      #
-      #     Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
-      #     for analytical / multiple choice, and closer to `1.0` for creative and
-      #     generative tasks.
-      #
-      #     Note that even with `temperature` of `0.0`, the results will not be fully
-      #     deterministic.
-      #
-      #   @option params [Integer] :top_k Only sample from the top K options for each subsequent token.
-      #
-      #     Used to remove "long tail" low probability responses.
-      #     [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
-      #
-      #     Recommended for advanced use cases only. You usually only need to use
-      #     `temperature`.
-      #
-      #   @option params [Float] :top_p Use nucleus sampling.
-      #
-      #     In nucleus sampling, we compute the cumulative distribution over all the options
-      #     for each subsequent token in decreasing probability order and cut it off once it
-      #     reaches a particular probability specified by `top_p`. You should either alter
-      #     `temperature` or `top_p`, but not both.
-      #
-      #     Recommended for advanced use cases only. You usually only need to use
-      #     `temperature`.
-      #
-      #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+      # @param max_tokens_to_sample [Integer]
+      # @param model [Symbol, String]
+      # @param prompt [String]
+      # @param metadata [Anthropic::Models::Metadata]
+      # @param stop_sequences [Array<String>]
+      # @param temperature [Float]
+      # @param top_k [Integer]
+      # @param top_p [Float]
+      # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Anthropic::Stream<Anthropic::Models::Completion>]
       #
