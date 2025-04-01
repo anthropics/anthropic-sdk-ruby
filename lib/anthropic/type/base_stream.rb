@@ -31,11 +31,11 @@ module Anthropic
       # @param blk [Proc]
       #
       # @return [void]
-      def each(&)
+      def each(&blk)
         unless block_given?
           raise ArgumentError.new("A block must be given to ##{__method__}")
         end
-        @iterator.each(&)
+        @iterator.each(&blk)
       end
 
       # @return [Enumerator]
