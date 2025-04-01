@@ -43,6 +43,7 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+        # @see Anthropic::Models::Beta::BetaRawMessageDeltaEvent#delta
         class Delta < Anthropic::BaseModel
           # @!attribute stop_reason
           #

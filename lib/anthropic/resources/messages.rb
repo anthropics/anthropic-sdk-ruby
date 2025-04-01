@@ -246,6 +246,8 @@ module Anthropic
       #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Anthropic::Models::Message]
+      #
+      # @see Anthropic::Models::MessageCreateParams
       def create(params)
         parsed, options = Anthropic::Models::MessageCreateParams.dump_request(params)
         if parsed[:stream]
@@ -501,6 +503,8 @@ module Anthropic
       #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Anthropic::Stream<Anthropic::Models::RawMessageStartEvent, Anthropic::Models::RawMessageDeltaEvent, Anthropic::Models::RawMessageStopEvent, Anthropic::Models::RawContentBlockStartEvent, Anthropic::Models::RawContentBlockDeltaEvent, Anthropic::Models::RawContentBlockStopEvent>]
+      #
+      # @see Anthropic::Models::MessageCreateParams
       def create_streaming(params)
         parsed, options = Anthropic::Models::MessageCreateParams.dump_request(params)
         unless parsed.fetch(:stream, true)
@@ -712,6 +716,8 @@ module Anthropic
       #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Anthropic::Models::MessageTokensCount]
+      #
+      # @see Anthropic::Models::MessageCountTokensParams
       def count_tokens(params)
         parsed, options = Anthropic::Models::MessageCountTokensParams.dump_request(params)
         @client.request(
@@ -723,6 +729,8 @@ module Anthropic
         )
       end
 
+      # @api private
+      #
       # @param client [Anthropic::Client]
       def initialize(client:)
         @client = client

@@ -3,6 +3,9 @@
 module Anthropic
   module Models
     module Beta
+      # @see Anthropic::Resources::Beta::Messages#create
+      #
+      # @see Anthropic::Resources::Beta::Messages#create_streaming
       class MessageCreateParams < Anthropic::BaseModel
         # @!parse
         #   extend Anthropic::Type::RequestParameters::Converter

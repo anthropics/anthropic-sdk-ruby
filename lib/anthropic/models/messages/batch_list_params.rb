@@ -3,6 +3,7 @@
 module Anthropic
   module Models
     module Messages
+      # @see Anthropic::Resources::Messages::Batches#list
       class BatchListParams < Anthropic::BaseModel
         # @!parse
         #   extend Anthropic::Type::RequestParameters::Converter

@@ -49,6 +49,7 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+      # @see Anthropic::Models::DocumentBlockParam#source
       module Source
         extend Anthropic::Union
 

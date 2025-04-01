@@ -3,6 +3,7 @@
 module Anthropic
   module Models
     module Beta
+      # @see Anthropic::Resources::Beta::Models#list
       class ModelListParams < Anthropic::BaseModel
         # @!parse
         #   extend Anthropic::Type::RequestParameters::Converter

@@ -2,6 +2,7 @@
 
 module Anthropic
   module Models
+    # @see Anthropic::Resources::Models#list
     class ModelListParams < Anthropic::BaseModel
       # @!parse
       #   extend Anthropic::Type::RequestParameters::Converter

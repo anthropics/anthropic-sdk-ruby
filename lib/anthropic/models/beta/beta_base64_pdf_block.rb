@@ -50,6 +50,7 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+        # @see Anthropic::Models::Beta::BetaBase64PDFBlock#source
         module Source
           extend Anthropic::Union
 

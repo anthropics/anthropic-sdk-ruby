@@ -2,6 +2,9 @@
 
 module Anthropic
   module Models
+    # @see Anthropic::Resources::Messages#create
+    #
+    # @see Anthropic::Resources::Messages#create_streaming
     class MessageCreateParams < Anthropic::BaseModel
       # @!parse
       #   extend Anthropic::Type::RequestParameters::Converter
