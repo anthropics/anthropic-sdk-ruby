@@ -303,7 +303,15 @@ module Anthropic
         )
           .returns(T.attached_class)
       end
-      def self.new(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
+      def self.new(
+        messages:,
+        model:,
+        system_: nil,
+        thinking: nil,
+        tool_choice: nil,
+        tools: nil,
+        request_options: {}
+      )
       end
 
       sig do
