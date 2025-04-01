@@ -10,7 +10,7 @@ module Anthropic
       end
 
       TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::AnthropicBeta) }
-      OrSymbol = T.type_alias { T.any(Symbol, Anthropic::Models::AnthropicBeta::TaggedSymbol) }
+      OrSymbol = T.type_alias { T.any(Symbol, String, Anthropic::Models::AnthropicBeta::TaggedSymbol) }
 
       MESSAGE_BATCHES_2024_09_24 =
         T.let(:"message-batches-2024-09-24", Anthropic::Models::AnthropicBeta::TaggedSymbol)
