@@ -48,6 +48,7 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+        # @see Anthropic::Models::Beta::BetaToolResultBlockParam#content
         module Content
           extend Anthropic::Union
 

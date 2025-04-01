@@ -21,6 +21,7 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+      # @see Anthropic::Models::CitationsDelta#citation
       module Citation
         extend Anthropic::Union
 

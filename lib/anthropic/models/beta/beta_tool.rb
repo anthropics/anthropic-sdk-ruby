@@ -57,6 +57,7 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+        # @see Anthropic::Models::Beta::BetaTool#input_schema
         class InputSchema < Anthropic::BaseModel
           # @!attribute type
           #
@@ -82,6 +83,7 @@ module Anthropic
           # def initialize: (Hash | Anthropic::BaseModel) -> void
         end
 
+        # @see Anthropic::Models::Beta::BetaTool#type
         module Type
           extend Anthropic::Enum
 

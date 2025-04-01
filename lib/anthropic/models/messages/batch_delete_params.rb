@@ -3,6 +3,7 @@
 module Anthropic
   module Models
     module Messages
+      # @see Anthropic::Resources::Messages::Batches#delete
       class BatchDeleteParams < Anthropic::BaseModel
         # @!parse
         #   extend Anthropic::Type::RequestParameters::Converter

@@ -22,6 +22,7 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+        # @see Anthropic::Models::Beta::BetaMessageParam#content
         module Content
           extend Anthropic::Union
 
@@ -37,6 +38,7 @@ module Anthropic
             Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlockParam }]
         end
 
+        # @see Anthropic::Models::Beta::BetaMessageParam#role
         module Role
           extend Anthropic::Enum
 

@@ -117,6 +117,8 @@ module Anthropic
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
           # Processing status of the Message Batch.
+          #
+          # @see Anthropic::Models::Beta::Messages::BetaMessageBatch#processing_status
           module ProcessingStatus
             extend Anthropic::Enum
 
