@@ -13,7 +13,7 @@ module Anthropic
       end
 
       TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Model) }
-      OrSymbol = T.type_alias { T.any(Symbol, Anthropic::Models::Model::TaggedSymbol) }
+      OrSymbol = T.type_alias { T.any(Symbol, String, Anthropic::Models::Model::TaggedSymbol) }
 
       # Our most intelligent model
       CLAUDE_3_7_SONNET_LATEST = T.let(:"claude-3-7-sonnet-latest", Anthropic::Models::Model::TaggedSymbol)

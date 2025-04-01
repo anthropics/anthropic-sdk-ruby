@@ -18,7 +18,7 @@ module Anthropic
       #
       # @param max_tokens [Integer]
       # @param messages [Array<Anthropic::Models::MessageParam>]
-      # @param model [Symbol, String]
+      # @param model [Symbol, String, Anthropic::Models::Model]
       # @param metadata [Anthropic::Models::Metadata]
       # @param stop_sequences [Array<String>]
       # @param system_ [String, Array<Anthropic::Models::TextBlockParam>]
@@ -60,7 +60,7 @@ module Anthropic
       #
       # @param max_tokens [Integer]
       # @param messages [Array<Anthropic::Models::MessageParam>]
-      # @param model [Symbol, String]
+      # @param model [Symbol, String, Anthropic::Models::Model]
       # @param metadata [Anthropic::Models::Metadata]
       # @param stop_sequences [Array<String>]
       # @param system_ [String, Array<Anthropic::Models::TextBlockParam>]
@@ -104,7 +104,7 @@ module Anthropic
       # @overload count_tokens(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
       #
       # @param messages [Array<Anthropic::Models::MessageParam>]
-      # @param model [Symbol, String]
+      # @param model [Symbol, String, Anthropic::Models::Model]
       # @param system_ [String, Array<Anthropic::Models::TextBlockParam>]
       # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]
       # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]

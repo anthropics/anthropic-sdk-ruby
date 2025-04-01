@@ -38,7 +38,7 @@ module Anthropic
 
           TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Beta::BetaBase64ImageSource::MediaType) }
           OrSymbol =
-            T.type_alias { T.any(Symbol, Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol) }
+            T.type_alias { T.any(Symbol, String, Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol) }
 
           IMAGE_JPEG =
             T.let(:"image/jpeg", Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol)

@@ -21,18 +21,18 @@ module Anthropic
           # @!attribute [r] betas
           #   Optional header to specify the beta version(s) you want to use.
           #
-          #   @return [Array<String, Symbol>, nil]
+          #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas,
                    -> { Anthropic::ArrayOf[union: Anthropic::Models::AnthropicBeta] },
                    api_name: :"anthropic-beta"
 
           # @!parse
-          #   # @return [Array<String, Symbol>]
+          #   # @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
           #   attr_writer :betas
 
           # @!parse
           #   # @param requests [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>]
-          #   # @param betas [Array<String, Symbol>]
+          #   # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
           #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
           #   #
           #   def initialize(requests:, betas: nil, request_options: {}, **) = super
@@ -176,7 +176,7 @@ module Anthropic
               #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
               #     details and options.
               #
-              #   @return [Symbol, String]
+              #   @return [Symbol, String, Anthropic::Models::Model]
               required :model, union: -> { Anthropic::Models::Model }
 
               # @!attribute [r] metadata
@@ -402,7 +402,7 @@ module Anthropic
               #   #
               #   # @param max_tokens [Integer]
               #   # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>]
-              #   # @param model [Symbol, String]
+              #   # @param model [Symbol, String, Anthropic::Models::Model]
               #   # @param metadata [Anthropic::Models::Beta::BetaMetadata]
               #   # @param stop_sequences [Array<String>]
               #   # @param stream [Boolean]
