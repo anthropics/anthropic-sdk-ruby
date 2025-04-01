@@ -7,7 +7,7 @@ module Anthropic
         # @!attribute delta
         #
         #   @return [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta]
-        required :delta, union: -> { Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent::Delta }
+        required :delta, union: -> { Anthropic::Models::Beta::BetaRawContentBlockDelta }
 
         # @!attribute index
         #
@@ -27,27 +27,6 @@ module Anthropic
         #   def initialize(delta:, index:, type: :content_block_delta, **) = super
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
-
-        # @see Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent#delta
-        module Delta
-          extend Anthropic::Union
-
-          discriminator :type
-
-          variant :text_delta, -> { Anthropic::Models::Beta::BetaTextDelta }
-
-          variant :input_json_delta, -> { Anthropic::Models::Beta::BetaInputJSONDelta }
-
-          variant :citations_delta, -> { Anthropic::Models::Beta::BetaCitationsDelta }
-
-          variant :thinking_delta, -> { Anthropic::Models::Beta::BetaThinkingDelta }
-
-          variant :signature_delta, -> { Anthropic::Models::Beta::BetaSignatureDelta }
-
-          # @!parse
-          #   # @return [Array(Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta)]
-          #   def self.variants; end
-        end
       end
     end
 

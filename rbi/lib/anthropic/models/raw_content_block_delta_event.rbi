@@ -58,19 +58,6 @@ module Anthropic
       end
       def to_hash
       end
-
-      module Delta
-        extend Anthropic::Union
-
-        sig do
-          override
-            .returns(
-              [Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta, Anthropic::Models::ThinkingDelta, Anthropic::Models::SignatureDelta]
-            )
-        end
-        def self.variants
-        end
-      end
     end
   end
 end
