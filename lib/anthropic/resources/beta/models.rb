@@ -9,11 +9,10 @@ module Anthropic
         #   The Models API response can be used to determine information about a specific
         #   model or resolve a model alias to a model ID.
         #
-        # @param model_id [String] Model identifier or alias.
+        # @overload retrieve(model_id, request_options: {})
         #
-        # @param params [Anthropic::Models::Beta::ModelRetrieveParams, Hash{Symbol=>Object}] .
-        #
-        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+        # @param model_id [String]
+        # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Beta::BetaModelInfo]
         #
@@ -32,19 +31,12 @@ module Anthropic
         #   The Models API response can be used to determine which models are available for
         #   use in the API. More recently released models are listed first.
         #
-        # @param params [Anthropic::Models::Beta::ModelListParams, Hash{Symbol=>Object}] .
+        # @overload list(after_id: nil, before_id: nil, limit: nil, request_options: {})
         #
-        #   @option params [String] :after_id ID of the object to use as a cursor for pagination. When provided, returns the
-        #     page of results immediately after this object.
-        #
-        #   @option params [String] :before_id ID of the object to use as a cursor for pagination. When provided, returns the
-        #     page of results immediately before this object.
-        #
-        #   @option params [Integer] :limit Number of items to return per page.
-        #
-        #     Defaults to `20`. Ranges from `1` to `1000`.
-        #
-        #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
+        # @param after_id [String]
+        # @param before_id [String]
+        # @param limit [Integer]
+        # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Page<Anthropic::Models::Beta::BetaModelInfo>]
         #
