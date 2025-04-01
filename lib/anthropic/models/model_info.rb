@@ -2,6 +2,7 @@
 
 module Anthropic
   module Models
+    # @see Anthropic::Resources::Models#retrieve
     class ModelInfo < Anthropic::BaseModel
       # @!attribute id
       #   Unique model identifier.

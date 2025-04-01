@@ -3,6 +3,7 @@
 module Anthropic
   module Models
     module Messages
+      # @see Anthropic::Resources::Messages::Batches#results
       class MessageBatchIndividualResponse < Anthropic::BaseModel
         # @!attribute custom_id
         #   Developer-provided ID created for each request in a Message Batch. Useful for

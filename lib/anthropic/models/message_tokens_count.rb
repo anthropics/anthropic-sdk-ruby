@@ -2,6 +2,7 @@
 
 module Anthropic
   module Models
+    # @see Anthropic::Resources::Messages#count_tokens
     class MessageTokensCount < Anthropic::BaseModel
       # @!attribute input_tokens
       #   The total number of tokens across the provided list of messages, system prompt,
