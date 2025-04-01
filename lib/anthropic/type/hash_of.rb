@@ -46,7 +46,9 @@ module Anthropic
       # @param other [Object]
       #
       # @return [Boolean]
-      def ==(other) = other.is_a?(Anthropic::HashOf) && other.nilable? == nilable? && other.item_type == item_type
+      def ==(other)
+        other.is_a?(Anthropic::HashOf) && other.nilable? == nilable? && other.item_type == item_type
+      end
 
       # @api private
       #
