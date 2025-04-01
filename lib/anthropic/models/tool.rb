@@ -50,6 +50,7 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+      # @see Anthropic::Models::Tool#input_schema
       class InputSchema < Anthropic::BaseModel
         # @!attribute type
         #

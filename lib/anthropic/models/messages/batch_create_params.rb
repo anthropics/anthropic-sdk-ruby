@@ -3,6 +3,7 @@
 module Anthropic
   module Models
     module Messages
+      # @see Anthropic::Resources::Messages::Batches#create
       class BatchCreateParams < Anthropic::BaseModel
         # @!parse
         #   extend Anthropic::Type::RequestParameters::Converter
@@ -50,6 +51,7 @@ module Anthropic
 
           # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+          # @see Anthropic::Models::Messages::BatchCreateParams::Request#params
           class Params < Anthropic::BaseModel
             # @!attribute max_tokens
             #   The maximum number of tokens to generate before stopping.
@@ -423,6 +425,8 @@ module Anthropic
             #   A system prompt is a way of providing context and instructions to Claude, such
             #   as specifying a particular goal or role. See our
             #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
+            #
+            # @see Anthropic::Models::Messages::BatchCreateParams::Request::Params#system_
             module System
               extend Anthropic::Union
 

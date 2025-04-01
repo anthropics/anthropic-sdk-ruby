@@ -2,6 +2,7 @@
 
 module Anthropic
   module Models
+    # @see Anthropic::Resources::Messages#count_tokens
     class MessageCountTokensParams < Anthropic::BaseModel
       # @!parse
       #   extend Anthropic::Type::RequestParameters::Converter

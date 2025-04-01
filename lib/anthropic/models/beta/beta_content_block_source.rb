@@ -22,6 +22,7 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+        # @see Anthropic::Models::Beta::BetaContentBlockSource#content
         module Content
           extend Anthropic::Union
 

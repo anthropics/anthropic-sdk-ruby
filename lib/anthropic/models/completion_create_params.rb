@@ -2,6 +2,9 @@
 
 module Anthropic
   module Models
+    # @see Anthropic::Resources::Completions#create
+    #
+    # @see Anthropic::Resources::Completions#create_streaming
     class CompletionCreateParams < Anthropic::BaseModel
       # @!parse
       #   extend Anthropic::Type::RequestParameters::Converter
