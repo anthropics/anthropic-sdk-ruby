@@ -27,6 +27,7 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+      # @see Anthropic::Models::RawContentBlockStartEvent#content_block
       module ContentBlock
         extend Anthropic::Union
 

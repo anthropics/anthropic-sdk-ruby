@@ -27,6 +27,7 @@ module Anthropic
 
       # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+      # @see Anthropic::Models::Base64ImageSource#media_type
       module MediaType
         extend Anthropic::Enum
 

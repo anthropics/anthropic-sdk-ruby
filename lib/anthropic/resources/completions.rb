@@ -75,6 +75,8 @@ module Anthropic
       #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Anthropic::Models::Completion]
+      #
+      # @see Anthropic::Models::CompletionCreateParams
       def create(params)
         parsed, options = Anthropic::Models::CompletionCreateParams.dump_request(params)
         if parsed[:stream]
@@ -162,6 +164,8 @@ module Anthropic
       #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Anthropic::Stream<Anthropic::Models::Completion>]
+      #
+      # @see Anthropic::Models::CompletionCreateParams
       def create_streaming(params)
         parsed, options = Anthropic::Models::CompletionCreateParams.dump_request(params)
         unless parsed.fetch(:stream, true)
@@ -180,6 +184,8 @@ module Anthropic
         )
       end
 
+      # @api private
+      #
       # @param client [Anthropic::Client]
       def initialize(client:)
         @client = client

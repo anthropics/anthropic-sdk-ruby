@@ -28,6 +28,7 @@ module Anthropic
 
         # def initialize: (Hash | Anthropic::BaseModel) -> void
 
+        # @see Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent#delta
         module Delta
           extend Anthropic::Union
 

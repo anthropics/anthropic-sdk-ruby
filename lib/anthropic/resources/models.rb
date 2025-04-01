@@ -15,6 +15,8 @@ module Anthropic
       #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Anthropic::Models::ModelInfo]
+      #
+      # @see Anthropic::Models::ModelRetrieveParams
       def retrieve(model_id, params = {})
         @client.request(
           method: :get,
@@ -44,6 +46,8 @@ module Anthropic
       #   @option params [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :request_options
       #
       # @return [Anthropic::Page<Anthropic::Models::ModelInfo>]
+      #
+      # @see Anthropic::Models::ModelListParams
       def list(params = {})
         parsed, options = Anthropic::Models::ModelListParams.dump_request(params)
         @client.request(
@@ -56,6 +60,8 @@ module Anthropic
         )
       end
 
+      # @api private
+      #
       # @param client [Anthropic::Client]
       def initialize(client:)
         @client = client

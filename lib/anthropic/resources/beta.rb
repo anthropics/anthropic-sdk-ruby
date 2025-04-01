@@ -9,6 +9,8 @@ module Anthropic
       # @return [Anthropic::Resources::Beta::Messages]
       attr_reader :messages
 
+      # @api private
+      #
       # @param client [Anthropic::Client]
       def initialize(client:)
         @client = client
