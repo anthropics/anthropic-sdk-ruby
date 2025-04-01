@@ -2,6 +2,7 @@
 
 module Anthropic
   module Type
+    # rubocop:disable Metrics/ModuleLength
     # @api private
     module Converter
       # rubocop:disable Lint/UnusedMethodArgument
@@ -118,6 +119,8 @@ module Anthropic
           value,
           state: {strictness: true, exactness: {yes: 0, no: 0, maybe: 0}, branched: 0}
         )
+          # rubocop:disable Lint/SuppressedException
+          # rubocop:disable Metrics/BlockNesting
           strictness, exactness = state.fetch_values(:strictness, :exactness)
 
           case target
@@ -194,6 +197,8 @@ module Anthropic
 
           exactness[:no] += 1
           value
+          # rubocop:enable Metrics/BlockNesting
+          # rubocop:enable Lint/SuppressedException
         end
 
         # @api private
@@ -207,5 +212,6 @@ module Anthropic
         end
       end
     end
+    # rubocop:enable Metrics/ModuleLength
   end
 end
