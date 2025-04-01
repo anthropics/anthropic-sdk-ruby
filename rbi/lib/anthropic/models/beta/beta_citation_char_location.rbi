@@ -33,7 +33,14 @@ module Anthropic
           )
             .returns(T.attached_class)
         end
-        def self.new(cited_text:, document_index:, document_title:, end_char_index:, start_char_index:, type: :char_location)
+        def self.new(
+          cited_text:,
+          document_index:,
+          document_title:,
+          end_char_index:,
+          start_char_index:,
+          type: :char_location
+        )
         end
 
         sig do
