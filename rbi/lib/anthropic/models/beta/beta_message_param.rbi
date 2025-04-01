@@ -112,7 +112,8 @@ module Anthropic
           extend Anthropic::Enum
 
           TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Beta::BetaMessageParam::Role) }
-          OrSymbol = T.type_alias { T.any(Symbol, Anthropic::Models::Beta::BetaMessageParam::Role::TaggedSymbol) }
+          OrSymbol =
+            T.type_alias { T.any(Symbol, String, Anthropic::Models::Beta::BetaMessageParam::Role::TaggedSymbol) }
 
           USER = T.let(:user, Anthropic::Models::Beta::BetaMessageParam::Role::TaggedSymbol)
           ASSISTANT = T.let(:assistant, Anthropic::Models::Beta::BetaMessageParam::Role::TaggedSymbol)

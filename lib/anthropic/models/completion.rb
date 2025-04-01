@@ -25,7 +25,7 @@ module Anthropic
       #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #     details and options.
       #
-      #   @return [Symbol, String]
+      #   @return [Symbol, String, Anthropic::Models::Model]
       required :model, union: -> { Anthropic::Models::Model }
 
       # @!attribute stop_reason
@@ -51,7 +51,7 @@ module Anthropic
       # @!parse
       #   # @param id [String]
       #   # @param completion [String]
-      #   # @param model [Symbol, String]
+      #   # @param model [Symbol, String, Anthropic::Models::Model]
       #   # @param stop_reason [String, nil]
       #   # @param type [Symbol, :completion]
       #   #

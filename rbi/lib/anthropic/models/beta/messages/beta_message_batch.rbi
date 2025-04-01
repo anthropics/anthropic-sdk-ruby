@@ -129,7 +129,7 @@ module Anthropic
             TaggedSymbol =
               T.type_alias { T.all(Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus) }
             OrSymbol =
-              T.type_alias { T.any(Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol) }
+              T.type_alias { T.any(Symbol, String, Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol) }
 
             IN_PROGRESS =
               T.let(:in_progress, Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol)

@@ -98,7 +98,7 @@ module Anthropic
           extend Anthropic::Enum
 
           TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Beta::BetaTool::Type) }
-          OrSymbol = T.type_alias { T.any(Symbol, Anthropic::Models::Beta::BetaTool::Type::TaggedSymbol) }
+          OrSymbol = T.type_alias { T.any(Symbol, String, Anthropic::Models::Beta::BetaTool::Type::TaggedSymbol) }
 
           CUSTOM = T.let(:custom, Anthropic::Models::Beta::BetaTool::Type::TaggedSymbol)
 
