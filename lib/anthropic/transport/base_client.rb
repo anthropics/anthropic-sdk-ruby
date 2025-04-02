@@ -92,7 +92,7 @@ module Anthropic
               URI.join(url, response_headers["location"])
             rescue ArgumentError
               message = "Server responded with status #{status} but no valid location header."
-              raise Anthropic::APIConnectionError.new(url: url, message: message)
+              raise Anthropic::Errors::APIConnectionError.new(url: url, message: message)
             end
 
           request = {**request, url: location}
@@ -100,7 +100,7 @@ module Anthropic
           case [url.scheme, location.scheme]
           in ["https", "http"]
             message = "Tried to redirect to a insecure URL"
-            raise Anthropic::APIConnectionError.new(url: url, message: message)
+            raise Anthropic::Errors::APIConnectionError.new(url: url, message: message)
           else
             nil
           end
@@ -129,13 +129,13 @@ module Anthropic
 
         # @api private
         #
-        # @param status [Integer, Anthropic::APIConnectionError]
+        # @param status [Integer, Anthropic::Errors::APIConnectionError]
         # @param stream [Enumerable, nil]
         def reap_connection!(status, stream:)
           case status
           in (..199) | (300..499)
             stream&.each { next }
-          in Anthropic::APIConnectionError | (500..)
+          in Anthropic::Errors::APIConnectionError | (500..)
             Anthropic::Util.close_fused!(stream)
           else
           end
@@ -326,7 +326,7 @@ module Anthropic
       #
       # @param send_retry_header [Boolean]
       #
-      # @raise [Anthropic::APIError]
+      # @raise [Anthropic::Errors::APIError]
       # @return [Array(Integer, Net::HTTPResponse, Enumerable)]
       private def send_request(request, redirect_count:, retry_count:, send_retry_header:)
         url, headers, max_retries, timeout = request.fetch_values(:url, :headers, :max_retries, :timeout)
@@ -349,7 +349,7 @@ module Anthropic
           self.class.reap_connection!(status, stream: stream)
 
           message = "Failed to complete the request within #{self.class::MAX_REDIRECTS} redirects."
-          raise Anthropic::APIConnectionError.new(url: url, message: message)
+          raise Anthropic::Errors::APIConnectionError.new(url: url, message: message)
         in 300..399
           self.class.reap_connection!(status, stream: stream)
 
@@ -369,14 +369,14 @@ module Anthropic
             self.class.reap_connection!(status, stream: stream)
           end
 
-          raise Anthropic::APIStatusError.for(
+          raise Anthropic::Errors::APIStatusError.for(
             url: url,
             status: status,
             body: decoded,
             request: nil,
             response: response
           )
-        in (400..) | Anthropic::APIConnectionError
+        in (400..) | Anthropic::Errors::APIConnectionError
           self.class.reap_connection!(status, stream: stream)
 
           delay = retry_delay(response, retry_count: retry_count)
@@ -416,7 +416,7 @@ module Anthropic
       #
       #   @option req [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] :options
       #
-      # @raise [Anthropic::APIError]
+      # @raise [Anthropic::Errors::APIError]
       # @return [Object]
       def request(req)
         self.class.validate!(req)
