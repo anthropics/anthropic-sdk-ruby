@@ -153,7 +153,7 @@ module Anthropic
             end
           end
         rescue Timeout::Error
-          raise Anthropic::APITimeoutError
+          raise Anthropic::Errors::APITimeoutError
         end
 
         conn, _, response = enum.next

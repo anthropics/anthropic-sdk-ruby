@@ -390,7 +390,7 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
           tap do
             target.public_send(accessor)
             flunk
-          rescue Anthropic::ConversionError => e
+          rescue Anthropic::Errors::ConversionError => e
             assert_kind_of(expect, e.cause)
           end
         else

@@ -1,99 +1,129 @@
 module Anthropic
-  class Error < StandardError
-    attr_accessor cause: StandardError?
+  module Errors
+    class Error < StandardError
+      attr_accessor cause: StandardError?
+    end
+
+    class ConversionError < Anthropic::Errors::Error
+    end
+
+    class APIError < Anthropic::Errors::Error
+      attr_accessor url: URI::Generic
+
+      attr_accessor status: Integer?
+
+      attr_accessor body: top?
+
+      def initialize: (
+        url: URI::Generic,
+        ?status: Integer?,
+        ?body: Object?,
+        ?request: nil,
+        ?response: nil,
+        ?message: String?
+      ) -> void
+    end
+
+    class APIConnectionError < Anthropic::Errors::APIError
+      def initialize: (
+        url: URI::Generic,
+        ?status: nil,
+        ?body: nil,
+        ?request: nil,
+        ?response: nil,
+        ?message: String?
+      ) -> void
+    end
+
+    class APITimeoutError < Anthropic::Errors::APIConnectionError
+      def initialize: (
+        url: URI::Generic,
+        ?status: nil,
+        ?body: nil,
+        ?request: nil,
+        ?response: nil,
+        ?message: String?
+      ) -> void
+    end
+
+    class APIStatusError < Anthropic::Errors::APIError
+      def self.for: (
+        url: URI::Generic,
+        status: Integer,
+        body: Object?,
+        request: nil,
+        response: nil,
+        ?message: String?
+      ) -> instance
+
+      def initialize: (
+        url: URI::Generic,
+        status: Integer,
+        body: Object?,
+        request: nil,
+        response: nil,
+        ?message: String?
+      ) -> void
+    end
+
+    class BadRequestError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS: 400
+    end
+
+    class AuthenticationError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS: 401
+    end
+
+    class PermissionDeniedError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS: 403
+    end
+
+    class NotFoundError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS: 404
+    end
+
+    class ConflictError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS: 409
+    end
+
+    class UnprocessableEntityError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS: 422
+    end
+
+    class RateLimitError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS: 429
+    end
+
+    class InternalServerError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS: Range[Integer]
+    end
   end
 
-  class ConversionError < Anthropic::Error
-  end
+  class Error = Anthropic::Errors::Error
 
-  class APIError < Anthropic::Error
-    attr_accessor url: URI::Generic
+  class ConversionError = Anthropic::Errors::ConversionError
 
-    attr_accessor status: Integer?
+  class APIError = Anthropic::Errors::APIError
 
-    attr_accessor body: top?
+  class APIStatusError = Anthropic::Errors::APIStatusError
 
-    def initialize: (
-      url: URI::Generic,
-      ?status: Integer?,
-      ?body: Object?,
-      ?request: nil,
-      ?response: nil,
-      ?message: String?
-    ) -> void
-  end
+  class APIConnectionError = Anthropic::Errors::APIConnectionError
 
-  class APIConnectionError < Anthropic::APIError
-    def initialize: (
-      url: URI::Generic,
-      ?status: nil,
-      ?body: nil,
-      ?request: nil,
-      ?response: nil,
-      ?message: String?
-    ) -> void
-  end
+  class APITimeoutError = Anthropic::Errors::APITimeoutError
 
-  class APITimeoutError < Anthropic::APIConnectionError
-    def initialize: (
-      url: URI::Generic,
-      ?status: nil,
-      ?body: nil,
-      ?request: nil,
-      ?response: nil,
-      ?message: String?
-    ) -> void
-  end
+  class BadRequestError = Anthropic::Errors::BadRequestError
 
-  class APIStatusError < Anthropic::APIError
-    def self.for: (
-      url: URI::Generic,
-      status: Integer,
-      body: Object?,
-      request: nil,
-      response: nil,
-      ?message: String?
-    ) -> instance
+  class AuthenticationError = Anthropic::Errors::AuthenticationError
 
-    def initialize: (
-      url: URI::Generic,
-      status: Integer,
-      body: Object?,
-      request: nil,
-      response: nil,
-      ?message: String?
-    ) -> void
-  end
+  class PermissionDeniedError = Anthropic::Errors::PermissionDeniedError
 
-  class BadRequestError < Anthropic::APIStatusError
-    HTTP_STATUS: 400
-  end
+  class NotFoundError = Anthropic::Errors::NotFoundError
 
-  class AuthenticationError < Anthropic::APIStatusError
-    HTTP_STATUS: 401
-  end
+  class ConflictError = Anthropic::Errors::ConflictError
 
-  class PermissionDeniedError < Anthropic::APIStatusError
-    HTTP_STATUS: 403
-  end
+  class UnprocessableEntityError = Anthropic::Errors::UnprocessableEntityError
 
-  class NotFoundError < Anthropic::APIStatusError
-    HTTP_STATUS: 404
-  end
+  class RateLimitError = Anthropic::Errors::RateLimitError
 
-  class ConflictError < Anthropic::APIStatusError
-    HTTP_STATUS: 409
-  end
-
-  class UnprocessableEntityError < Anthropic::APIStatusError
-    HTTP_STATUS: 422
-  end
-
-  class RateLimitError < Anthropic::APIStatusError
-    HTTP_STATUS: 429
-  end
-
-  class InternalServerError < Anthropic::APIStatusError
-    HTTP_STATUS: Range[Integer]
-  end
+  class InternalServerError = Anthropic::Errors::InternalServerError
 end

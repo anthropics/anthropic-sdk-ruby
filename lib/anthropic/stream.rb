@@ -46,7 +46,7 @@ module Anthropic
             rescue JSON::ParserError
               data
             end
-            Anthropic::APIError.for(
+            Anthropic::Errors::APIStatusError.for(
               url: @url,
               status: @status,
               body: decoded,
