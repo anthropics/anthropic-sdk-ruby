@@ -285,8 +285,8 @@ module Anthropic
           top_p: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
-          # There is no need to provide `stream:`. Instead, use `#create_streaming` or
-          #   `#create` for streaming and non-streaming use cases, respectively.
+          # There is no need to provide `stream:`. Instead, use `#stream_raw` or `#create`
+          #   for streaming and non-streaming use cases, respectively.
           stream: false,
           request_options: {}
         )
@@ -351,7 +351,7 @@ module Anthropic
               ]
             )
         end
-        def create_streaming(
+        def stream_raw(
           # Body param: The maximum number of tokens to generate before stopping.
           #
           #   Note that our models may stop _before_ reaching this maximum. This parameter
@@ -581,8 +581,8 @@ module Anthropic
           top_p: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
-          # There is no need to provide `stream:`. Instead, use `#create_streaming` or
-          #   `#create` for streaming and non-streaming use cases, respectively.
+          # There is no need to provide `stream:`. Instead, use `#stream_raw` or `#create`
+          #   for streaming and non-streaming use cases, respectively.
           stream: true,
           request_options: {}
         )
