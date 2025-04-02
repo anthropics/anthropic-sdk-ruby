@@ -330,6 +330,16 @@ module Anthropic
           .to_h
       end
 
+      # @param a [Object]
+      #
+      # @return [String]
+      def to_json(*a) = self.class.dump(self).to_json(*a)
+
+      # @param a [Object]
+      #
+      # @return [String]
+      def to_yaml(*a) = self.class.dump(self).to_yaml(*a)
+
       # Create a new instance of a model.
       #
       # @param data [Hash{Symbol=>Object}, Anthropic::BaseModel]
