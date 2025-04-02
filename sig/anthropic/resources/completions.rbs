@@ -13,7 +13,7 @@ module Anthropic
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::Models::Completion
 
-      def create_streaming: (
+      def stream_raw: (
         max_tokens_to_sample: Integer,
         model: Anthropic::Models::model,
         prompt: String,

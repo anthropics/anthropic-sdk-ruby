@@ -4,7 +4,7 @@ module Anthropic
   module Models
     # @see Anthropic::Resources::Completions#create
     #
-    # @see Anthropic::Resources::Completions#create_streaming
+    # @see Anthropic::Resources::Completions#stream_raw
     class Completion < Anthropic::BaseModel
       # @!attribute id
       #   Unique object identifier.

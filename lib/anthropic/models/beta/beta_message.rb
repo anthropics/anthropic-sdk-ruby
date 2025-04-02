@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       # @see Anthropic::Resources::Beta::Messages#create
       #
-      # @see Anthropic::Resources::Beta::Messages#create_streaming
+      # @see Anthropic::Resources::Beta::Messages#stream_raw
       class BetaMessage < Anthropic::BaseModel
         # @!attribute id
         #   Unique object identifier.

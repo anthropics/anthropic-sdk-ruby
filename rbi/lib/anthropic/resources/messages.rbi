@@ -277,8 +277,8 @@ module Anthropic
         #   Recommended for advanced use cases only. You usually only need to use
         #   `temperature`.
         top_p: nil,
-        # There is no need to provide `stream:`. Instead, use `#create_streaming` or
-        #   `#create` for streaming and non-streaming use cases, respectively.
+        # There is no need to provide `stream:`. Instead, use `#stream_raw` or `#create`
+        #   for streaming and non-streaming use cases, respectively.
         stream: false,
         request_options: {}
       )
@@ -338,7 +338,7 @@ module Anthropic
             ]
           )
       end
-      def create_streaming(
+      def stream_raw(
         # The maximum number of tokens to generate before stopping.
         #
         #   Note that our models may stop _before_ reaching this maximum. This parameter
@@ -566,8 +566,8 @@ module Anthropic
         #   Recommended for advanced use cases only. You usually only need to use
         #   `temperature`.
         top_p: nil,
-        # There is no need to provide `stream:`. Instead, use `#create_streaming` or
-        #   `#create` for streaming and non-streaming use cases, respectively.
+        # There is no need to provide `stream:`. Instead, use `#stream_raw` or `#create`
+        #   for streaming and non-streaming use cases, respectively.
         stream: true,
         request_options: {}
       )

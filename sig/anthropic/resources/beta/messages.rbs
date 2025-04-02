@@ -21,7 +21,7 @@ module Anthropic
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Models::Beta::BetaMessage
 
-        def create_streaming: (
+        def stream_raw: (
           max_tokens: Integer,
           messages: ::Array[Anthropic::Models::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
