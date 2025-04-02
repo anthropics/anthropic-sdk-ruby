@@ -19,7 +19,7 @@ module Anthropic
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::Models::Message
 
-      def create_streaming: (
+      def stream_raw: (
         max_tokens: Integer,
         messages: ::Array[Anthropic::Models::MessageParam],
         model: Anthropic::Models::model,

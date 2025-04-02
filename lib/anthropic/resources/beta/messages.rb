@@ -38,7 +38,7 @@ module Anthropic
         def create(params)
           parsed, options = Anthropic::Models::Beta::MessageCreateParams.dump_request(params)
           if parsed[:stream]
-            message = "Please use `#create_streaming` for the streaming use case."
+            message = "Please use `#stream_raw` for the streaming use case."
             raise ArgumentError.new(message)
           end
           header_params = [:"anthropic-beta"]
@@ -60,7 +60,7 @@ module Anthropic
         #
         #   Learn more about the Messages API in our [user guide](/en/docs/initial-setup)
         #
-        # @overload create_streaming(max_tokens:, messages:, model:, metadata: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
+        # @overload stream_raw(max_tokens:, messages:, model:, metadata: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
         #
         # @param max_tokens [Integer]
         # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>]
@@ -80,7 +80,7 @@ module Anthropic
         # @return [Anthropic::Stream<Anthropic::Models::Beta::BetaRawMessageStartEvent, Anthropic::Models::Beta::BetaRawMessageDeltaEvent, Anthropic::Models::Beta::BetaRawMessageStopEvent, Anthropic::Models::Beta::BetaRawContentBlockStartEvent, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Models::Beta::BetaRawContentBlockStopEvent>]
         #
         # @see Anthropic::Models::Beta::MessageCreateParams
-        def create_streaming(params)
+        def stream_raw(params)
           parsed, options = Anthropic::Models::Beta::MessageCreateParams.dump_request(params)
           unless parsed.fetch(:stream, true)
             message = "Please use `#create` for the non-streaming use case."

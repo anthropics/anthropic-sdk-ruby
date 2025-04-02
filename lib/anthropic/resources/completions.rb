@@ -30,7 +30,7 @@ module Anthropic
       def create(params)
         parsed, options = Anthropic::Models::CompletionCreateParams.dump_request(params)
         if parsed[:stream]
-          message = "Please use `#create_streaming` for the streaming use case."
+          message = "Please use `#stream_raw` for the streaming use case."
           raise ArgumentError.new(message)
         end
         @client.request(
@@ -51,7 +51,7 @@ module Anthropic
       #   [migration guide](https://docs.anthropic.com/en/api/migrating-from-text-completions-to-messages)
       #   for guidance in migrating from Text Completions to Messages.
       #
-      # @overload create_streaming(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, request_options: {})
+      # @overload stream_raw(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, request_options: {})
       #
       # @param max_tokens_to_sample [Integer]
       # @param model [Symbol, String, Anthropic::Models::Model]
@@ -66,7 +66,7 @@ module Anthropic
       # @return [Anthropic::Stream<Anthropic::Models::Completion>]
       #
       # @see Anthropic::Models::CompletionCreateParams
-      def create_streaming(params)
+      def stream_raw(params)
         parsed, options = Anthropic::Models::CompletionCreateParams.dump_request(params)
         unless parsed.fetch(:stream, true)
           message = "Please use `#create` for the non-streaming use case."
