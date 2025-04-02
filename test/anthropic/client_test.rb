@@ -245,7 +245,7 @@ class AnthropicTest < Minitest::Test
     requester = MockRequester.new(307, {"location" => "/redirected"}, {})
     anthropic.requester = requester
 
-    assert_raises(Anthropic::APIConnectionError) do
+    assert_raises(Anthropic::Errors::APIConnectionError) do
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
@@ -268,7 +268,7 @@ class AnthropicTest < Minitest::Test
     requester = MockRequester.new(303, {"location" => "/redirected"}, {})
     anthropic.requester = requester
 
-    assert_raises(Anthropic::APIConnectionError) do
+    assert_raises(Anthropic::Errors::APIConnectionError) do
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
@@ -288,7 +288,7 @@ class AnthropicTest < Minitest::Test
     requester = MockRequester.new(307, {"location" => "/redirected"}, {})
     anthropic.requester = requester
 
-    assert_raises(Anthropic::APIConnectionError) do
+    assert_raises(Anthropic::Errors::APIConnectionError) do
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
@@ -308,7 +308,7 @@ class AnthropicTest < Minitest::Test
     requester = MockRequester.new(307, {"location" => "https://example.com/redirected"}, {})
     anthropic.requester = requester
 
-    assert_raises(Anthropic::APIConnectionError) do
+    assert_raises(Anthropic::Errors::APIConnectionError) do
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],

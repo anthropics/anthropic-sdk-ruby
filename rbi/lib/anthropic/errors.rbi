@@ -1,144 +1,174 @@
 # typed: strong
 
 module Anthropic
-  class Error < StandardError
-    sig { returns(T.nilable(StandardError)) }
-    attr_accessor :cause
-  end
-
-  class ConversionError < Anthropic::Error
-  end
-
-  class APIError < Anthropic::Error
-    sig { returns(URI::Generic) }
-    attr_accessor :url
-
-    sig { returns(T.nilable(Integer)) }
-    attr_accessor :status
-
-    sig { returns(T.nilable(T.anything)) }
-    attr_accessor :body
-
-    # @api private
-    sig do
-      params(
-        url: URI::Generic,
-        status: T.nilable(Integer),
-        body: T.nilable(Object),
-        request: NilClass,
-        response: NilClass,
-        message: T.nilable(String)
-      )
-        .returns(T.attached_class)
-    end
-    def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: nil)
-    end
-  end
-
-  class APIConnectionError < Anthropic::APIError
-    sig { void }
-    attr_accessor :status
-
-    sig { void }
-    attr_accessor :body
-
-    # @api private
-    sig do
-      params(
-        url: URI::Generic,
-        status: NilClass,
-        body: NilClass,
-        request: NilClass,
-        response: NilClass,
-        message: T.nilable(String)
-      )
-        .returns(T.attached_class)
-    end
-    def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: "Connection error.")
-    end
-  end
-
-  class APITimeoutError < Anthropic::APIConnectionError
-    # @api private
-    sig do
-      params(
-        url: URI::Generic,
-        status: NilClass,
-        body: NilClass,
-        request: NilClass,
-        response: NilClass,
-        message: T.nilable(String)
-      )
-        .returns(T.attached_class)
-    end
-    def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: "Request timed out.")
-    end
-  end
-
-  class APIStatusError < Anthropic::APIError
-    # @api private
-    sig do
-      params(
-        url: URI::Generic,
-        status: Integer,
-        body: T.nilable(Object),
-        request: NilClass,
-        response: NilClass,
-        message: T.nilable(String)
-      )
-        .returns(T.attached_class)
-    end
-    def self.for(url:, status:, body:, request:, response:, message: nil)
+  module Errors
+    class Error < StandardError
+      sig { returns(T.nilable(StandardError)) }
+      attr_accessor :cause
     end
 
-    sig { returns(Integer) }
-    attr_accessor :status
-
-    # @api private
-    sig do
-      params(
-        url: URI::Generic,
-        status: Integer,
-        body: T.nilable(Object),
-        request: NilClass,
-        response: NilClass,
-        message: T.nilable(String)
-      )
-        .returns(T.attached_class)
+    class ConversionError < Anthropic::Errors::Error
     end
-    def self.new(url:, status:, body:, request:, response:, message: nil)
+
+    class APIError < Anthropic::Errors::Error
+      sig { returns(URI::Generic) }
+      attr_accessor :url
+
+      sig { returns(T.nilable(Integer)) }
+      attr_accessor :status
+
+      sig { returns(T.nilable(T.anything)) }
+      attr_accessor :body
+
+      # @api private
+      sig do
+        params(
+          url: URI::Generic,
+          status: T.nilable(Integer),
+          body: T.nilable(Object),
+          request: NilClass,
+          response: NilClass,
+          message: T.nilable(String)
+        )
+          .returns(T.attached_class)
+      end
+      def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: nil)
+      end
+    end
+
+    class APIConnectionError < Anthropic::Errors::APIError
+      sig { void }
+      attr_accessor :status
+
+      sig { void }
+      attr_accessor :body
+
+      # @api private
+      sig do
+        params(
+          url: URI::Generic,
+          status: NilClass,
+          body: NilClass,
+          request: NilClass,
+          response: NilClass,
+          message: T.nilable(String)
+        )
+          .returns(T.attached_class)
+      end
+      def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: "Connection error.")
+      end
+    end
+
+    class APITimeoutError < Anthropic::Errors::APIConnectionError
+      # @api private
+      sig do
+        params(
+          url: URI::Generic,
+          status: NilClass,
+          body: NilClass,
+          request: NilClass,
+          response: NilClass,
+          message: T.nilable(String)
+        )
+          .returns(T.attached_class)
+      end
+      def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: "Request timed out.")
+      end
+    end
+
+    class APIStatusError < Anthropic::Errors::APIError
+      # @api private
+      sig do
+        params(
+          url: URI::Generic,
+          status: Integer,
+          body: T.nilable(Object),
+          request: NilClass,
+          response: NilClass,
+          message: T.nilable(String)
+        )
+          .returns(T.attached_class)
+      end
+      def self.for(url:, status:, body:, request:, response:, message: nil)
+      end
+
+      sig { returns(Integer) }
+      attr_accessor :status
+
+      # @api private
+      sig do
+        params(
+          url: URI::Generic,
+          status: Integer,
+          body: T.nilable(Object),
+          request: NilClass,
+          response: NilClass,
+          message: T.nilable(String)
+        )
+          .returns(T.attached_class)
+      end
+      def self.new(url:, status:, body:, request:, response:, message: nil)
+      end
+    end
+
+    class BadRequestError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = 400
+    end
+
+    class AuthenticationError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = 401
+    end
+
+    class PermissionDeniedError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = 403
+    end
+
+    class NotFoundError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = 404
+    end
+
+    class ConflictError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = 409
+    end
+
+    class UnprocessableEntityError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = 422
+    end
+
+    class RateLimitError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = 429
+    end
+
+    class InternalServerError < Anthropic::Errors::APIStatusError
+      HTTP_STATUS = T.let((500..), T::Range[Integer])
     end
   end
 
-  class BadRequestError < Anthropic::APIStatusError
-    HTTP_STATUS = 400
-  end
+  Error = Anthropic::Errors::Error
 
-  class AuthenticationError < Anthropic::APIStatusError
-    HTTP_STATUS = 401
-  end
+  ConversionError = Anthropic::Errors::ConversionError
 
-  class PermissionDeniedError < Anthropic::APIStatusError
-    HTTP_STATUS = 403
-  end
+  APIError = Anthropic::Errors::APIError
 
-  class NotFoundError < Anthropic::APIStatusError
-    HTTP_STATUS = 404
-  end
+  APIStatusError = Anthropic::Errors::APIStatusError
 
-  class ConflictError < Anthropic::APIStatusError
-    HTTP_STATUS = 409
-  end
+  APIConnectionError = Anthropic::Errors::APIConnectionError
 
-  class UnprocessableEntityError < Anthropic::APIStatusError
-    HTTP_STATUS = 422
-  end
+  APITimeoutError = Anthropic::Errors::APITimeoutError
 
-  class RateLimitError < Anthropic::APIStatusError
-    HTTP_STATUS = 429
-  end
+  BadRequestError = Anthropic::Errors::BadRequestError
 
-  class InternalServerError < Anthropic::APIStatusError
-    HTTP_STATUS = T.let((500..), T::Range[Integer])
-  end
+  AuthenticationError = Anthropic::Errors::AuthenticationError
+
+  PermissionDeniedError = Anthropic::Errors::PermissionDeniedError
+
+  NotFoundError = Anthropic::Errors::NotFoundError
+
+  ConflictError = Anthropic::Errors::ConflictError
+
+  UnprocessableEntityError = Anthropic::Errors::UnprocessableEntityError
+
+  RateLimitError = Anthropic::Errors::RateLimitError
+
+  InternalServerError = Anthropic::Errors::InternalServerError
 end

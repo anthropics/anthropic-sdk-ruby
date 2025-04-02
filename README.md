@@ -96,7 +96,7 @@ begin
     }],
     model: "claude-3-5-sonnet-latest"
   )
-rescue Anthropic::Error => e
+rescue Anthropic::Errors::APIError => e
   puts(e.status) # 400
 end
 ```
@@ -112,7 +112,7 @@ Error codes are as followed:
 | HTTP 409         | `ConflictError`            |
 | HTTP 422         | `UnprocessableEntityError` |
 | HTTP 429         | `RateLimitError`           |
-| HTTP >=500       | `InternalServerError`      |
+| HTTP >= 500      | `InternalServerError`      |
 | Other HTTP error | `APIStatusError`           |
 | Timeout          | `APITimeoutError`          |
 | Network error    | `APIConnectionError`       |

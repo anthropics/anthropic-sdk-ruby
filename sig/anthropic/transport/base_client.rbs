@@ -47,7 +47,7 @@ module Anthropic
       ) -> Anthropic::Transport::BaseClient::request_input
 
       def self.reap_connection!: (
-        Integer | Anthropic::APIConnectionError status,
+        Integer | Anthropic::Errors::APIConnectionError status,
         stream: Enumerable[String]?
       ) -> void
 

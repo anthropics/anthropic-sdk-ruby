@@ -29,7 +29,7 @@ module Anthropic
       # @return [Boolean]
       def next_page? = (raise NotImplementedError)
 
-      # @raise [Anthropic::APIError]
+      # @raise [Anthropic::Errors::APIError]
       # @return [Anthropic::Type::BasePage]
       def next_page = (raise NotImplementedError)
 

@@ -82,7 +82,7 @@ module Anthropic
         # @api private
         sig do
           params(
-            status: T.any(Integer, Anthropic::APIConnectionError),
+            status: T.any(Integer, Anthropic::Errors::APIConnectionError),
             stream: T.nilable(T::Enumerable[String])
           )
             .void
