@@ -1,4 +1,5 @@
 module Anthropic
   module Internal
+    OMIT: top
   end
 end

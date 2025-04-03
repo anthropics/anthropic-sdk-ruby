@@ -6,17 +6,6 @@ module Anthropic
     #   stream.each do |event|
     #     puts(event)
     #   end
-    #
-    # @example
-    #   events =
-    #     stream
-    #     .lazy
-    #     .select { _1.object_id.even? }
-    #     .map(&:itself)
-    #     .take(2)
-    #     .to_a
-    #
-    #   events => Array
     class Stream
       include Anthropic::Internal::Type::BaseStream
 
