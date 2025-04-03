@@ -12,17 +12,17 @@ module Anthropic
       attr_reader beta: Anthropic::Resources::Beta
 
       private def build_request: (
-        Anthropic::Transport::BaseClient::request_components req,
+        Anthropic::Internal::Transport::BaseClient::request_components req,
         Anthropic::request_options opts
-      ) -> Anthropic::Transport::BaseClient::request_input
+      ) -> Anthropic::Internal::Transport::BaseClient::request_input
 
       def resolve_region_and_credentials: -> top
 
       private def signer: -> top
 
       private def fit_req_to_bedrock_specs!: (
-        Anthropic::Transport::BaseClient::request_components request_components
-      ) -> Anthropic::Transport::BaseClient::request_components
+        Anthropic::Internal::Transport::BaseClient::request_components request_components
+      ) -> Anthropic::Internal::Transport::BaseClient::request_components
 
       def initialize: (
         aws_region: String?,

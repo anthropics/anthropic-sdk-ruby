@@ -20,8 +20,8 @@ module Anthropic
       # @api private
       sig do
         override
-          .params(req: Anthropic::Transport::BaseClient::RequestComponentsShape, opts: Anthropic::Util::AnyHash)
-          .returns(Anthropic::Transport::BaseClient::RequestInputShape)
+          .params(req: Anthropic::Internal::Transport::BaseClient::RequestComponentsShape, opts: Anthropic::Internal::AnyHash)
+          .returns(Anthropic::Internal::Transport::BaseClient::RequestInputShape)
       end
       private def build_request(req, opts); end
 
@@ -44,8 +44,8 @@ module Anthropic
       end
 
       sig do
-        params(request_components: Anthropic::Transport::BaseClient::RequestComponentsShape)
-          .returns(Anthropic::Transport::BaseClient::RequestComponentsShape)
+        params(request_components: Anthropic::Internal::Transport::BaseClient::RequestComponentsShape)
+          .returns(Anthropic::Internal::Transport::BaseClient::RequestComponentsShape)
       end
       private def fit_req_to_bedrock_specs!(request_components) end
 

@@ -14,7 +14,8 @@ begin
   #   the following example type checks.
   message = anthropic.messages.create(
     max_tokens: 1024,
-    messages: [{role: :user, content: "hello"}],
+    # Sorbet works best when using `Class` types instead of raw `Hash`es
+    messages: [Anthropic::Models::MessageParam.new(role: :user, content: "hello")],
     model: :"claude-3-7-sonnet-latest"
   )
 
@@ -26,6 +27,8 @@ begin
 
   params = Anthropic::Models::MessageCreateParams.new(
     max_tokens: 1024,
+    # Using a raw `Hash` where sorbet expects `Class`es still works
+    #   but due to current limitations of the typechecker, the SDK cannot provide type safety when doing so.
     messages: [{role: :user, content: "hello"}],
     model: :"claude-3-7-sonnet-latest"
   )
@@ -44,7 +47,7 @@ begin
 
   params = Anthropic::Models::MessageCreateParams.new(
     max_tokens: 1024,
-    messages: [{role: :user, content: "hello"}],
+    messages: [Anthropic::Models::MessageParam.new(role: :user, content: "hello")],
     model: :"claude-3-7-sonnet-latest"
   )
 
