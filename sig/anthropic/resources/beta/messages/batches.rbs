@@ -35,7 +35,7 @@ module Anthropic
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Models::Beta::Messages::BetaMessageBatch
 
-          def results: (
+          def results_streaming: (
             String message_batch_id,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts

@@ -29,7 +29,7 @@ module Anthropic
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Models::Messages::MessageBatch
 
-        def results: (
+        def results_streaming: (
           String message_batch_id,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Internal::JsonLStream[Anthropic::Models::Messages::MessageBatchIndividualResponse]

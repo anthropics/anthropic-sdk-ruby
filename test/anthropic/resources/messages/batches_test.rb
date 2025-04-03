@@ -128,21 +128,4 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Anthropic::Test::Resou
       }
     end
   end
-
-  def test_results
-    skip("Prism doesn't support JSONL responses yet")
-
-    response = @anthropic.messages.batches.results("message_batch_id")
-
-    assert_pattern do
-      response => Anthropic::Models::Messages::MessageBatchIndividualResponse
-    end
-
-    assert_pattern do
-      response => {
-        custom_id: String,
-        result: Anthropic::Models::Messages::MessageBatchResult
-      }
-    end
-  end
 end
