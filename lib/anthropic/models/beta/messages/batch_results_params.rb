@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Beta
       module Messages
-        # @see Anthropic::Resources::Beta::Messages::Batches#results
+        # @see Anthropic::Resources::Beta::Messages::Batches#results_streaming
         class BatchResultsParams < Anthropic::BaseModel
           # @!parse
           #   extend Anthropic::Internal::Type::RequestParameters::Converter

@@ -148,7 +148,7 @@ module Anthropic
         #   Learn more about the Message Batches API in our
         #   [user guide](/en/docs/build-with-claude/batch-processing)
         #
-        # @overload results(message_batch_id, request_options: {})
+        # @overload results_streaming(message_batch_id, request_options: {})
         #
         # @param message_batch_id [String]
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
@@ -156,7 +156,7 @@ module Anthropic
         # @return [Anthropic::Internal::JsonLStream<Anthropic::Models::Messages::MessageBatchIndividualResponse>]
         #
         # @see Anthropic::Models::Messages::BatchResultsParams
-        def results(message_batch_id, params = {})
+        def results_streaming(message_batch_id, params = {})
           @client.request(
             method: :get,
             path: ["v1/messages/batches/%1$s/results", message_batch_id],
