@@ -1,0 +1,20 @@
+module Anthropic
+  module Internal
+    module Type
+      class Unknown
+        extend Anthropic::Internal::Type::Converter
+
+        def self.===: (top other) -> bool
+
+        def self.==: (top other) -> bool
+
+        def self.coerce: (
+          top value,
+          state: Anthropic::Internal::Type::Converter::state
+        ) -> top
+
+        def self.dump: (top value) -> top
+      end
+    end
+  end
+end

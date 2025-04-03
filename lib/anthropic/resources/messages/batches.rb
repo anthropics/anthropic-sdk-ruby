@@ -69,7 +69,7 @@ module Anthropic
         # @param limit [Integer]
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Page<Anthropic::Models::Messages::MessageBatch>]
+        # @return [Anthropic::Internal::Page<Anthropic::Models::Messages::MessageBatch>]
         #
         # @see Anthropic::Models::Messages::BatchListParams
         def list(params = {})
@@ -78,7 +78,7 @@ module Anthropic
             method: :get,
             path: "v1/messages/batches",
             query: parsed,
-            page: Anthropic::Page,
+            page: Anthropic::Internal::Page,
             model: Anthropic::Models::Messages::MessageBatch,
             options: options
           )
@@ -153,7 +153,7 @@ module Anthropic
         # @param message_batch_id [String]
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::JsonLStream<Anthropic::Models::Messages::MessageBatchIndividualResponse>]
+        # @return [Anthropic::Internal::JsonLStream<Anthropic::Models::Messages::MessageBatchIndividualResponse>]
         #
         # @see Anthropic::Models::Messages::BatchResultsParams
         def results(message_batch_id, params = {})
@@ -161,7 +161,7 @@ module Anthropic
             method: :get,
             path: ["v1/messages/batches/%1$s/results", message_batch_id],
             headers: {"accept" => "application/x-jsonl"},
-            stream: Anthropic::JsonLStream,
+            stream: Anthropic::Internal::JsonLStream,
             model: Anthropic::Models::Messages::MessageBatchIndividualResponse,
             options: params[:request_options]
           )

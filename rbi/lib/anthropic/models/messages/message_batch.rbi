@@ -52,7 +52,7 @@ module Anthropic
 
         sig do
           params(
-            request_counts: T.any(Anthropic::Models::Messages::MessageBatchRequestCounts, Anthropic::Util::AnyHash)
+            request_counts: T.any(Anthropic::Models::Messages::MessageBatchRequestCounts, Anthropic::Internal::Util::AnyHash)
           )
             .void
         end
@@ -81,7 +81,7 @@ module Anthropic
             ended_at: T.nilable(Time),
             expires_at: Time,
             processing_status: Anthropic::Models::Messages::MessageBatch::ProcessingStatus::OrSymbol,
-            request_counts: T.any(Anthropic::Models::Messages::MessageBatchRequestCounts, Anthropic::Util::AnyHash),
+            request_counts: T.any(Anthropic::Models::Messages::MessageBatchRequestCounts, Anthropic::Internal::Util::AnyHash),
             results_url: T.nilable(String),
             type: Symbol
           )

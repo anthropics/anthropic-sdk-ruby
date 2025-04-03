@@ -10,7 +10,7 @@ module Anthropic
       sig do
         params(
           model_id: String,
-          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
+          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash))
         )
           .returns(Anthropic::Models::ModelInfo)
       end
@@ -30,9 +30,9 @@ module Anthropic
           after_id: String,
           before_id: String,
           limit: Integer,
-          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
+          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash))
         )
-          .returns(Anthropic::Page[Anthropic::Models::ModelInfo])
+          .returns(Anthropic::Internal::Page[Anthropic::Models::ModelInfo])
       end
       def list(
         # ID of the object to use as a cursor for pagination. When provided, returns the

@@ -14,8 +14,8 @@ module Anthropic
         #   [user guide](/en/docs/build-with-claude/batch-processing)
         sig do
           params(
-            requests: T::Array[T.any(Anthropic::Models::Messages::BatchCreateParams::Request, Anthropic::Util::AnyHash)],
-            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
+            requests: T::Array[T.any(Anthropic::Models::Messages::BatchCreateParams::Request, Anthropic::Internal::Util::AnyHash)],
+            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash))
           )
             .returns(Anthropic::Models::Messages::MessageBatch)
         end
@@ -36,7 +36,7 @@ module Anthropic
         sig do
           params(
             message_batch_id: String,
-            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
+            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash))
           )
             .returns(Anthropic::Models::Messages::MessageBatch)
         end
@@ -57,9 +57,9 @@ module Anthropic
             after_id: String,
             before_id: String,
             limit: Integer,
-            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
+            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash))
           )
-            .returns(Anthropic::Page[Anthropic::Models::Messages::MessageBatch])
+            .returns(Anthropic::Internal::Page[Anthropic::Models::Messages::MessageBatch])
         end
         def list(
           # ID of the object to use as a cursor for pagination. When provided, returns the
@@ -86,7 +86,7 @@ module Anthropic
         sig do
           params(
             message_batch_id: String,
-            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
+            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash))
           )
             .returns(Anthropic::Models::Messages::DeletedMessageBatch)
         end
@@ -112,7 +112,7 @@ module Anthropic
         sig do
           params(
             message_batch_id: String,
-            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
+            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash))
           )
             .returns(Anthropic::Models::Messages::MessageBatch)
         end
@@ -134,9 +134,9 @@ module Anthropic
         sig do
           params(
             message_batch_id: String,
-            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
+            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash))
           )
-            .returns(Anthropic::JsonLStream[Anthropic::Models::Messages::MessageBatchIndividualResponse])
+            .returns(Anthropic::Internal::JsonLStream[Anthropic::Models::Messages::MessageBatchIndividualResponse])
         end
         def results(
           # ID of the Message Batch.

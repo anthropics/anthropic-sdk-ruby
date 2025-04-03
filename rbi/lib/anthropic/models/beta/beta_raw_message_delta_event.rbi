@@ -8,7 +8,9 @@ module Anthropic
         attr_reader :delta
 
         sig do
-          params(delta: T.any(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta, Anthropic::Util::AnyHash))
+          params(
+            delta: T.any(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta, Anthropic::Internal::Util::AnyHash)
+          )
             .void
         end
         attr_writer :delta
@@ -34,13 +36,16 @@ module Anthropic
         sig { returns(Anthropic::Models::Beta::BetaMessageDeltaUsage) }
         attr_reader :usage
 
-        sig { params(usage: T.any(Anthropic::Models::Beta::BetaMessageDeltaUsage, Anthropic::Util::AnyHash)).void }
+        sig do
+          params(usage: T.any(Anthropic::Models::Beta::BetaMessageDeltaUsage, Anthropic::Internal::Util::AnyHash))
+            .void
+        end
         attr_writer :usage
 
         sig do
           params(
-            delta: T.any(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta, Anthropic::Util::AnyHash),
-            usage: T.any(Anthropic::Models::Beta::BetaMessageDeltaUsage, Anthropic::Util::AnyHash),
+            delta: T.any(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta, Anthropic::Internal::Util::AnyHash),
+            usage: T.any(Anthropic::Models::Beta::BetaMessageDeltaUsage, Anthropic::Internal::Util::AnyHash),
             type: Symbol
           )
             .returns(T.attached_class)

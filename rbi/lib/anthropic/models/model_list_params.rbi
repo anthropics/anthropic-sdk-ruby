@@ -3,8 +3,8 @@
 module Anthropic
   module Models
     class ModelListParams < Anthropic::BaseModel
-      extend Anthropic::Type::RequestParameters::Converter
-      include Anthropic::RequestParameters
+      extend Anthropic::Internal::Type::RequestParameters::Converter
+      include Anthropic::Internal::Type::RequestParameters
 
       # ID of the object to use as a cursor for pagination. When provided, returns the
       #   page of results immediately after this object.
@@ -36,7 +36,7 @@ module Anthropic
           after_id: String,
           before_id: String,
           limit: Integer,
-          request_options: T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash)
+          request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash)
         )
           .returns(T.attached_class)
       end

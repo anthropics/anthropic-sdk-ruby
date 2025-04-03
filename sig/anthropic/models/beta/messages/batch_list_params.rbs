@@ -9,11 +9,11 @@ module Anthropic
             limit: Integer,
             betas: ::Array[Anthropic::Models::anthropic_beta]
           }
-          & Anthropic::request_parameters
+          & Anthropic::Internal::Type::request_parameters
 
         class BatchListParams < Anthropic::BaseModel
-          extend Anthropic::Type::RequestParameters::Converter
-          include Anthropic::RequestParameters
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
 
           attr_reader after_id: String?
 

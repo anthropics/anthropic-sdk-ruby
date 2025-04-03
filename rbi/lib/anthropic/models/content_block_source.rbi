@@ -17,7 +17,13 @@ module Anthropic
         params(
           content: T.any(
             String,
-            T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash, Anthropic::Models::ImageBlockParam)]
+            T::Array[
+            T.any(
+              Anthropic::Models::TextBlockParam,
+              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Models::ImageBlockParam
+            )
+            ]
           ),
           type: Symbol
         )
@@ -49,7 +55,10 @@ module Anthropic
         end
 
         ContentBlockSourceContentArray =
-          T.let(Anthropic::ArrayOf[union: Anthropic::Models::ContentBlockSourceContent], Anthropic::Type::Converter)
+          T.let(
+            Anthropic::ArrayOf[union: Anthropic::Models::ContentBlockSourceContent],
+            Anthropic::Internal::Type::Converter
+          )
       end
     end
   end

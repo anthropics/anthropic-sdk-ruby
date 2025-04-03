@@ -11,7 +11,7 @@ module Anthropic
         ?before_id: String,
         ?limit: Integer,
         ?request_options: Anthropic::request_opts
-      ) -> Anthropic::Page[Anthropic::Models::ModelInfo]
+      ) -> Anthropic::Internal::Page[Anthropic::Models::ModelInfo]
 
       def initialize: (client: Anthropic::Client) -> void
     end

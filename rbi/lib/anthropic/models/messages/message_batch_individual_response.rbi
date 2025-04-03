@@ -35,7 +35,7 @@ module Anthropic
             custom_id: String,
             result: T.any(
               Anthropic::Models::Messages::MessageBatchSucceededResult,
-              Anthropic::Util::AnyHash,
+              Anthropic::Internal::Util::AnyHash,
               Anthropic::Models::Messages::MessageBatchErroredResult,
               Anthropic::Models::Messages::MessageBatchCanceledResult,
               Anthropic::Models::Messages::MessageBatchExpiredResult

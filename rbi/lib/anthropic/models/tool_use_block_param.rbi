@@ -20,7 +20,7 @@ module Anthropic
 
       sig do
         params(
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash))
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
         )
           .void
       end
@@ -31,7 +31,7 @@ module Anthropic
           id: String,
           input: T.anything,
           name: String,
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)),
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
           type: Symbol
         )
           .returns(T.attached_class)

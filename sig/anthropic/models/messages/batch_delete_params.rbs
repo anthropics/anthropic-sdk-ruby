@@ -1,11 +1,12 @@
 module Anthropic
   module Models
     module Messages
-      type batch_delete_params = {  } & Anthropic::request_parameters
+      type batch_delete_params =
+        {  } & Anthropic::Internal::Type::request_parameters
 
       class BatchDeleteParams < Anthropic::BaseModel
-        extend Anthropic::Type::RequestParameters::Converter
-        include Anthropic::RequestParameters
+        extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
 
         def initialize: (?request_options: Anthropic::request_opts) -> void
 

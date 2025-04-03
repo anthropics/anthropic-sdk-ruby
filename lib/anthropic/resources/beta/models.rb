@@ -38,7 +38,7 @@ module Anthropic
         # @param limit [Integer]
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Page<Anthropic::Models::Beta::BetaModelInfo>]
+        # @return [Anthropic::Internal::Page<Anthropic::Models::Beta::BetaModelInfo>]
         #
         # @see Anthropic::Models::Beta::ModelListParams
         def list(params = {})
@@ -47,7 +47,7 @@ module Anthropic
             method: :get,
             path: "v1/models?beta=true",
             query: parsed,
-            page: Anthropic::Page,
+            page: Anthropic::Internal::Page,
             model: Anthropic::Models::Beta::BetaModelInfo,
             options: options
           )

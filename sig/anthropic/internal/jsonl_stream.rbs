@@ -1,0 +1,9 @@
+module Anthropic
+  module Internal
+    class JsonLStream[Elem]
+      include Anthropic::Internal::Type::BaseStream[top, Elem]
+
+      private def iterator: -> Enumerable[Elem]
+    end
+  end
+end

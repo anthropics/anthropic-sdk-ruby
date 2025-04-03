@@ -63,7 +63,7 @@ module Anthropic
       # @param top_p [Float]
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Anthropic::Stream<Anthropic::Models::Completion>]
+      # @return [Anthropic::Internal::Stream<Anthropic::Models::Completion>]
       #
       # @see Anthropic::Models::CompletionCreateParams
       def stream_raw(params)
@@ -78,7 +78,7 @@ module Anthropic
           path: "v1/complete",
           headers: {"accept" => "text/event-stream"},
           body: parsed,
-          stream: Anthropic::Stream,
+          stream: Anthropic::Internal::Stream,
           model: Anthropic::Models::Completion,
           options: options
         )

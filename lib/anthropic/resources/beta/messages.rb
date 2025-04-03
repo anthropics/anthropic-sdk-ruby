@@ -77,7 +77,7 @@ module Anthropic
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Stream<Anthropic::Models::Beta::BetaRawMessageStartEvent, Anthropic::Models::Beta::BetaRawMessageDeltaEvent, Anthropic::Models::Beta::BetaRawMessageStopEvent, Anthropic::Models::Beta::BetaRawContentBlockStartEvent, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Models::Beta::BetaRawContentBlockStopEvent>]
+        # @return [Anthropic::Internal::Stream<Anthropic::Models::Beta::BetaRawMessageStartEvent, Anthropic::Models::Beta::BetaRawMessageDeltaEvent, Anthropic::Models::Beta::BetaRawMessageStopEvent, Anthropic::Models::Beta::BetaRawContentBlockStartEvent, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Models::Beta::BetaRawContentBlockStopEvent>]
         #
         # @see Anthropic::Models::Beta::MessageCreateParams
         def stream_raw(params)
@@ -93,7 +93,7 @@ module Anthropic
             path: "v1/messages?beta=true",
             headers: {"accept" => "text/event-stream", **parsed.slice(*header_params)},
             body: parsed.except(*header_params),
-            stream: Anthropic::Stream,
+            stream: Anthropic::Internal::Stream,
             model: Anthropic::Models::Beta::BetaRawMessageStreamEvent,
             options: options
           )
