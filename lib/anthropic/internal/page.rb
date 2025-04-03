@@ -11,18 +11,6 @@ module Anthropic
     #   page.auto_paging_each do |batch|
     #     puts(batch)
     #   end
-    #
-    # @example
-    #   batches =
-    #     page
-    #     .to_enum
-    #     .lazy
-    #     .select { _1.object_id.even? }
-    #     .map(&:itself)
-    #     .take(2)
-    #     .to_a
-    #
-    #   batches => Array
     class Page
       include Anthropic::Internal::Type::BasePage
 

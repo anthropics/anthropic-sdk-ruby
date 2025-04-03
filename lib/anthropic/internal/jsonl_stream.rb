@@ -6,17 +6,6 @@ module Anthropic
     #   stream.each do |batch|
     #     puts(batch)
     #   end
-    #
-    # @example
-    #   batches =
-    #     stream
-    #     .lazy
-    #     .select { _1.object_id.even? }
-    #     .map(&:itself)
-    #     .take(2)
-    #     .to_a
-    #
-    #   batches => Array
     class JsonLStream
       include Anthropic::Internal::Type::BaseStream
 
