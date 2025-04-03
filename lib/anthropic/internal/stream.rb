@@ -2,6 +2,8 @@
 
 module Anthropic
   module Internal
+    # @generic Elem
+    #
     # @example
     #   stream.each do |event|
     #     puts(event)
@@ -11,7 +13,7 @@ module Anthropic
 
       # @api private
       #
-      # @return [Enumerable]
+      # @return [Enumerable<generic<Elem>>]
       private def iterator
         # rubocop:disable Metrics/BlockLength
         # rubocop:disable Layout/LineLength
