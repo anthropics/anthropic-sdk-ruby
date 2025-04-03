@@ -54,6 +54,10 @@ module Anthropic
           )
         end
 
+        def stream
+          raise NotImplementedError.new("higher level helpers are coming soon!")
+        end
+
         # See {Anthropic::Resources::Beta::Messages#create} for non-streaming counterpart.
         #
         #   Send a structured list of input messages with text and/or image content, and the
