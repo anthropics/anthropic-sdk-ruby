@@ -4,7 +4,7 @@ module Anthropic
   module Models
     # @see Anthropic::Resources::Completions#create
     #
-    # @see Anthropic::Resources::Completions#stream_raw
+    # @see Anthropic::Resources::Completions#create_streaming
     class CompletionCreateParams < Anthropic::Internal::Type::BaseModel
       # @!parse
       #   extend Anthropic::Internal::Type::RequestParameters::Converter
