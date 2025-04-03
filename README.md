@@ -1,6 +1,6 @@
 # Anthropic Ruby API library
 
-The Anthropic Ruby library provides convenient access to the Anthropic REST API from any Ruby 3.0.0+ application.
+The Anthropic Ruby library provides convenient access to the Anthropic REST API from any Ruby 3.1.0+ application.
 
 ## Documentation
 
@@ -214,4 +214,4 @@ This package considers improvements to the (non-runtime) `*.rbi` and `*.rbs` typ
 
 ## Requirements
 
-Ruby 3.0.0 or higher.
+Ruby 3.1.0 or higher.
