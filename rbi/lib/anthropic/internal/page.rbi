@@ -3,9 +3,9 @@
 module Anthropic
   module Internal
     class Page
-      include Anthropic::Internal::Type::BasePage
-
       Elem = type_member
+
+      include Anthropic::Internal::Type::BasePage
 
       sig { returns(T.nilable(T::Array[Elem])) }
       attr_accessor :data
