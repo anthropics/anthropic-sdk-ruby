@@ -6,8 +6,8 @@ module Anthropic
       # @see Anthropic::Resources::Messages::Batches#results
       class BatchResultsParams < Anthropic::BaseModel
         # @!parse
-        #   extend Anthropic::Type::RequestParameters::Converter
-        include Anthropic::RequestParameters
+        #   extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
 
         # @!parse
         #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]

@@ -15,9 +15,14 @@ module Anthropic
           #   [user guide](/en/docs/build-with-claude/batch-processing)
           sig do
             params(
-              requests: T::Array[T.any(Anthropic::Models::Beta::Messages::BatchCreateParams::Request, Anthropic::Util::AnyHash)],
+              requests: T::Array[T.any(Anthropic::Models::Beta::Messages::BatchCreateParams::Request, Anthropic::Internal::Util::AnyHash)],
               betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
-              request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
+              request_options: T.nilable(
+                T.any(
+                  Anthropic::RequestOptions,
+                  Anthropic::Internal::Util::AnyHash
+                )
+              )
             )
               .returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
           end
@@ -41,7 +46,12 @@ module Anthropic
             params(
               message_batch_id: String,
               betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
-              request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
+              request_options: T.nilable(
+                T.any(
+                  Anthropic::RequestOptions,
+                  Anthropic::Internal::Util::AnyHash
+                )
+              )
             )
               .returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
           end
@@ -65,9 +75,14 @@ module Anthropic
               before_id: String,
               limit: Integer,
               betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
-              request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
+              request_options: T.nilable(
+                T.any(
+                  Anthropic::RequestOptions,
+                  Anthropic::Internal::Util::AnyHash
+                )
+              )
             )
-              .returns(Anthropic::Page[Anthropic::Models::Beta::Messages::BetaMessageBatch])
+              .returns(Anthropic::Internal::Page[Anthropic::Models::Beta::Messages::BetaMessageBatch])
           end
           def list(
             # Query param: ID of the object to use as a cursor for pagination. When provided,
@@ -97,7 +112,12 @@ module Anthropic
             params(
               message_batch_id: String,
               betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
-              request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
+              request_options: T.nilable(
+                T.any(
+                  Anthropic::RequestOptions,
+                  Anthropic::Internal::Util::AnyHash
+                )
+              )
             )
               .returns(Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch)
           end
@@ -126,7 +146,12 @@ module Anthropic
             params(
               message_batch_id: String,
               betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
-              request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
+              request_options: T.nilable(
+                T.any(
+                  Anthropic::RequestOptions,
+                  Anthropic::Internal::Util::AnyHash
+                )
+              )
             )
               .returns(Anthropic::Models::Beta::Messages::BetaMessageBatch)
           end
@@ -151,9 +176,16 @@ module Anthropic
             params(
               message_batch_id: String,
               betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
-              request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
+              request_options: T.nilable(
+                T.any(
+                  Anthropic::RequestOptions,
+                  Anthropic::Internal::Util::AnyHash
+                )
+              )
             )
-              .returns(Anthropic::JsonLStream[Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse])
+              .returns(
+                Anthropic::Internal::JsonLStream[Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse]
+              )
           end
           def results(
             # ID of the Message Batch.

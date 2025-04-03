@@ -4,11 +4,11 @@ module Anthropic
       module Messages
         type batch_retrieve_params =
           { betas: ::Array[Anthropic::Models::anthropic_beta] }
-          & Anthropic::request_parameters
+          & Anthropic::Internal::Type::request_parameters
 
         class BatchRetrieveParams < Anthropic::BaseModel
-          extend Anthropic::Type::RequestParameters::Converter
-          include Anthropic::RequestParameters
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
 
           attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 

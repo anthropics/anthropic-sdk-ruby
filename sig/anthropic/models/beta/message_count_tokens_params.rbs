@@ -11,11 +11,11 @@ module Anthropic
           tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
           betas: ::Array[Anthropic::Models::anthropic_beta]
         }
-        & Anthropic::request_parameters
+        & Anthropic::Internal::Type::request_parameters
 
       class MessageCountTokensParams < Anthropic::BaseModel
-        extend Anthropic::Type::RequestParameters::Converter
-        include Anthropic::RequestParameters
+        extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
 
         attr_accessor messages: ::Array[Anthropic::Models::Beta::BetaMessageParam]
 

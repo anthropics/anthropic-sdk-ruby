@@ -11,7 +11,12 @@ module Anthropic
         sig { returns(Anthropic::Models::Beta::BetaTool::InputSchema) }
         attr_reader :input_schema
 
-        sig { params(input_schema: T.any(Anthropic::Models::Beta::BetaTool::InputSchema, Anthropic::Util::AnyHash)).void }
+        sig do
+          params(
+            input_schema: T.any(Anthropic::Models::Beta::BetaTool::InputSchema, Anthropic::Internal::Util::AnyHash)
+          )
+            .void
+        end
         attr_writer :input_schema
 
         # Name of the tool.
@@ -25,7 +30,7 @@ module Anthropic
 
         sig do
           params(
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash))
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
           )
             .void
         end
@@ -48,9 +53,9 @@ module Anthropic
 
         sig do
           params(
-            input_schema: T.any(Anthropic::Models::Beta::BetaTool::InputSchema, Anthropic::Util::AnyHash),
+            input_schema: T.any(Anthropic::Models::Beta::BetaTool::InputSchema, Anthropic::Internal::Util::AnyHash),
             name: String,
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)),
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
             description: String,
             type: T.nilable(Anthropic::Models::Beta::BetaTool::Type::OrSymbol)
           )

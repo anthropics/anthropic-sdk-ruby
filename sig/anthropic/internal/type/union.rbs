@@ -1,0 +1,42 @@
+module Anthropic
+  module Internal
+    module Type
+      module Union
+        include Anthropic::Internal::Type::Converter
+
+        private def self.known_variants: -> ::Array[[Symbol?, (^-> Anthropic::Internal::Type::Converter::input)]]
+
+        def self.derefed_variants: -> ::Array[[Symbol?, top]]
+
+        def self.variants: -> ::Array[top]
+
+        private def self.discriminator: (Symbol property) -> void
+
+        private def self.variant: (
+          Symbol
+          | ::Hash[Symbol, top]
+          | ^-> Anthropic::Internal::Type::Converter::input
+          | Anthropic::Internal::Type::Converter::input key,
+          ?::Hash[Symbol, top]
+          | ^-> Anthropic::Internal::Type::Converter::input
+          | Anthropic::Internal::Type::Converter::input spec
+        ) -> void
+
+        private def self.resolve_variant: (
+          top value
+        ) -> Anthropic::Internal::Type::Converter::input?
+
+        def ===: (top other) -> bool
+
+        def ==: (top other) -> bool
+
+        def coerce: (
+          top value,
+          state: Anthropic::Internal::Type::Converter::state
+        ) -> top
+
+        def dump: (top value) -> top
+      end
+    end
+  end
+end

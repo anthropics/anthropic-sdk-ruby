@@ -25,7 +25,7 @@ module Anthropic
         params(
           content_block: T.any(
             Anthropic::Models::TextBlock,
-            Anthropic::Util::AnyHash,
+            Anthropic::Internal::Util::AnyHash,
             Anthropic::Models::ToolUseBlock,
             Anthropic::Models::ThinkingBlock,
             Anthropic::Models::RedactedThinkingBlock

@@ -3,11 +3,11 @@
 module Anthropic
   module Models
     class ModelRetrieveParams < Anthropic::BaseModel
-      extend Anthropic::Type::RequestParameters::Converter
-      include Anthropic::RequestParameters
+      extend Anthropic::Internal::Type::RequestParameters::Converter
+      include Anthropic::Internal::Type::RequestParameters
 
       sig do
-        params(request_options: T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash))
+        params(request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash))
           .returns(T.attached_class)
       end
       def self.new(request_options: {})

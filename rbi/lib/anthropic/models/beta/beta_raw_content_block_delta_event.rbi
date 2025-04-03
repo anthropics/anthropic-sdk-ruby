@@ -27,7 +27,7 @@ module Anthropic
           params(
             delta: T.any(
               Anthropic::Models::Beta::BetaTextDelta,
-              Anthropic::Util::AnyHash,
+              Anthropic::Internal::Util::AnyHash,
               Anthropic::Models::Beta::BetaInputJSONDelta,
               Anthropic::Models::Beta::BetaCitationsDelta,
               Anthropic::Models::Beta::BetaThinkingDelta,

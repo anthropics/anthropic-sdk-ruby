@@ -24,7 +24,7 @@ class Anthropic::Test::Resources::ModelsTest < Anthropic::Test::ResourceTest
     response = @anthropic.models.list
 
     assert_pattern do
-      response => Anthropic::Page
+      response => Anthropic::Internal::Page
     end
 
     row = response.to_enum.first

@@ -24,7 +24,7 @@ module Anthropic
               T::Array[
               T.any(
                 Anthropic::Models::Beta::BetaTextBlockParam,
-                Anthropic::Util::AnyHash,
+                Anthropic::Internal::Util::AnyHash,
                 Anthropic::Models::Beta::BetaImageBlockParam
               )
               ]
@@ -66,7 +66,7 @@ module Anthropic
           BetaContentBlockSourceContentArray =
             T.let(
               Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlockSourceContent],
-              Anthropic::Type::Converter
+              Anthropic::Internal::Type::Converter
             )
         end
       end
