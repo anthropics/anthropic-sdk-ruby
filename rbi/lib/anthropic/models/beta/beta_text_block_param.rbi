@@ -15,7 +15,7 @@ module Anthropic
 
         sig do
           params(
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash))
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
           )
             .void
         end
@@ -39,12 +39,12 @@ module Anthropic
         sig do
           params(
             text: String,
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)),
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
             citations: T.nilable(
               T::Array[
               T.any(
                 Anthropic::Models::Beta::BetaCitationCharLocationParam,
-                Anthropic::Util::AnyHash,
+                Anthropic::Internal::Util::AnyHash,
                 Anthropic::Models::Beta::BetaCitationPageLocationParam,
                 Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
               )

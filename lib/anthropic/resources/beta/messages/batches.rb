@@ -77,7 +77,7 @@ module Anthropic
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Anthropic::Page<Anthropic::Models::Beta::Messages::BetaMessageBatch>]
+          # @return [Anthropic::Internal::Page<Anthropic::Models::Beta::Messages::BetaMessageBatch>]
           #
           # @see Anthropic::Models::Beta::Messages::BatchListParams
           def list(params = {})
@@ -88,7 +88,7 @@ module Anthropic
               path: "v1/messages/batches?beta=true",
               query: parsed.slice(*query_params),
               headers: parsed.except(*query_params),
-              page: Anthropic::Page,
+              page: Anthropic::Internal::Page,
               model: Anthropic::Models::Beta::Messages::BetaMessageBatch,
               options: options
             )
@@ -170,7 +170,7 @@ module Anthropic
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Anthropic::JsonLStream<Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse>]
+          # @return [Anthropic::Internal::JsonLStream<Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse>]
           #
           # @see Anthropic::Models::Beta::Messages::BatchResultsParams
           def results(message_batch_id, params = {})
@@ -179,7 +179,7 @@ module Anthropic
               method: :get,
               path: ["v1/messages/batches/%1$s/results?beta=true", message_batch_id],
               headers: {"accept" => "application/x-jsonl", **parsed},
-              stream: Anthropic::JsonLStream,
+              stream: Anthropic::Internal::JsonLStream,
               model: Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse,
               options: options
             )

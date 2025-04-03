@@ -7,14 +7,17 @@ module Anthropic
         sig { returns(Anthropic::Models::Beta::BetaMessage) }
         attr_reader :message
 
-        sig { params(message: T.any(Anthropic::Models::Beta::BetaMessage, Anthropic::Util::AnyHash)).void }
+        sig { params(message: T.any(Anthropic::Models::Beta::BetaMessage, Anthropic::Internal::Util::AnyHash)).void }
         attr_writer :message
 
         sig { returns(Symbol) }
         attr_accessor :type
 
         sig do
-          params(message: T.any(Anthropic::Models::Beta::BetaMessage, Anthropic::Util::AnyHash), type: Symbol)
+          params(
+            message: T.any(Anthropic::Models::Beta::BetaMessage, Anthropic::Internal::Util::AnyHash),
+            type: Symbol
+          )
             .returns(T.attached_class)
         end
         def self.new(message:, type: :message_start)

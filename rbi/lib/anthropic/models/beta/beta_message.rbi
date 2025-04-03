@@ -113,7 +113,7 @@ module Anthropic
         sig { returns(Anthropic::Models::Beta::BetaUsage) }
         attr_reader :usage
 
-        sig { params(usage: T.any(Anthropic::Models::Beta::BetaUsage, Anthropic::Util::AnyHash)).void }
+        sig { params(usage: T.any(Anthropic::Models::Beta::BetaUsage, Anthropic::Internal::Util::AnyHash)).void }
         attr_writer :usage
 
         sig do
@@ -122,7 +122,7 @@ module Anthropic
             content: T::Array[
             T.any(
               Anthropic::Models::Beta::BetaTextBlock,
-              Anthropic::Util::AnyHash,
+              Anthropic::Internal::Util::AnyHash,
               Anthropic::Models::Beta::BetaToolUseBlock,
               Anthropic::Models::Beta::BetaThinkingBlock,
               Anthropic::Models::Beta::BetaRedactedThinkingBlock
@@ -131,7 +131,7 @@ module Anthropic
             model: T.any(Anthropic::Models::Model::OrSymbol, String),
             stop_reason: T.nilable(Anthropic::Models::Beta::BetaStopReason::OrSymbol),
             stop_sequence: T.nilable(String),
-            usage: T.any(Anthropic::Models::Beta::BetaUsage, Anthropic::Util::AnyHash),
+            usage: T.any(Anthropic::Models::Beta::BetaUsage, Anthropic::Internal::Util::AnyHash),
             role: Symbol,
             type: Symbol
           )

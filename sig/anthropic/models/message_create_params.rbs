@@ -15,11 +15,11 @@ module Anthropic
         top_k: Integer,
         top_p: Float
       }
-      & Anthropic::request_parameters
+      & Anthropic::Internal::Type::request_parameters
 
     class MessageCreateParams < Anthropic::BaseModel
-      extend Anthropic::Type::RequestParameters::Converter
-      include Anthropic::RequestParameters
+      extend Anthropic::Internal::Type::RequestParameters::Converter
+      include Anthropic::Internal::Type::RequestParameters
 
       attr_accessor max_tokens: Integer
 

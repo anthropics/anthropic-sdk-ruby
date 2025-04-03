@@ -5,8 +5,8 @@ module Anthropic
     module Beta
       module Messages
         class BatchResultsParams < Anthropic::BaseModel
-          extend Anthropic::Type::RequestParameters::Converter
-          include Anthropic::RequestParameters
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
 
           # Optional header to specify the beta version(s) you want to use.
           sig { returns(T.nilable(T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)])) }
@@ -18,7 +18,7 @@ module Anthropic
           sig do
             params(
               betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
-              request_options: T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash)
+              request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash)
             )
               .returns(T.attached_class)
           end

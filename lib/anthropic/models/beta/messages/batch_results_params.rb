@@ -7,8 +7,8 @@ module Anthropic
         # @see Anthropic::Resources::Beta::Messages::Batches#results
         class BatchResultsParams < Anthropic::BaseModel
           # @!parse
-          #   extend Anthropic::Type::RequestParameters::Converter
-          include Anthropic::RequestParameters
+          #   extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
 
           # @!attribute [r] betas
           #   Optional header to specify the beta version(s) you want to use.

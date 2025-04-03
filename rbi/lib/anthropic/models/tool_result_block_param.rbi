@@ -14,7 +14,7 @@ module Anthropic
 
       sig do
         params(
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash))
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
         )
           .void
       end
@@ -33,7 +33,13 @@ module Anthropic
         params(
           content: T.any(
             String,
-            T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash, Anthropic::Models::ImageBlockParam)]
+            T::Array[
+            T.any(
+              Anthropic::Models::TextBlockParam,
+              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Models::ImageBlockParam
+            )
+            ]
           )
         )
           .void
@@ -49,10 +55,16 @@ module Anthropic
       sig do
         params(
           tool_use_id: String,
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)),
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
           content: T.any(
             String,
-            T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash, Anthropic::Models::ImageBlockParam)]
+            T::Array[
+            T.any(
+              Anthropic::Models::TextBlockParam,
+              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Models::ImageBlockParam
+            )
+            ]
           ),
           is_error: T::Boolean,
           type: Symbol
@@ -98,7 +110,7 @@ module Anthropic
         ContentArray =
           T.let(
             Anthropic::ArrayOf[union: Anthropic::Models::ToolResultBlockParam::Content::Content],
-            Anthropic::Type::Converter
+            Anthropic::Internal::Type::Converter
           )
       end
     end

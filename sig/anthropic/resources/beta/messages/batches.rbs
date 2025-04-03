@@ -21,7 +21,7 @@ module Anthropic
             ?limit: Integer,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
-          ) -> Anthropic::Page[Anthropic::Models::Beta::Messages::BetaMessageBatch]
+          ) -> Anthropic::Internal::Page[Anthropic::Models::Beta::Messages::BetaMessageBatch]
 
           def delete: (
             String message_batch_id,
@@ -39,7 +39,7 @@ module Anthropic
             String message_batch_id,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
-          ) -> Anthropic::JsonLStream[Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse]
+          ) -> Anthropic::Internal::JsonLStream[Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse]
 
           def initialize: (client: Anthropic::Client) -> void
         end

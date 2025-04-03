@@ -1,0 +1,38 @@
+module Anthropic
+  module Internal
+    module Type
+      class HashOf[Elem]
+        include Anthropic::Internal::Type::Converter
+
+        def self.[]: (
+          ::Hash[Symbol, top]
+          | ^-> Anthropic::Internal::Type::Converter::input
+          | Anthropic::Internal::Type::Converter::input type_info,
+          ?::Hash[Symbol, top] spec
+        ) -> instance
+
+        def ===: (top other) -> bool
+
+        def ==: (top other) -> bool
+
+        def coerce: (
+          ::Hash[top, top] | top value,
+          state: Anthropic::Internal::Type::Converter::state
+        ) -> (::Hash[Symbol, top] | top)
+
+        def dump: (::Hash[top, top] | top value) -> (::Hash[Symbol, top] | top)
+
+        def item_type: -> Elem
+
+        def nilable?: -> bool
+
+        def initialize: (
+          ::Hash[Symbol, top]
+          | ^-> Anthropic::Internal::Type::Converter::input
+          | Anthropic::Internal::Type::Converter::input type_info,
+          ?::Hash[Symbol, top] spec
+        ) -> void
+      end
+    end
+  end
+end

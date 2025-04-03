@@ -6,8 +6,8 @@ module Anthropic
       # @see Anthropic::Resources::Messages::Batches#list
       class BatchListParams < Anthropic::BaseModel
         # @!parse
-        #   extend Anthropic::Type::RequestParameters::Converter
-        include Anthropic::RequestParameters
+        #   extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
 
         # @!attribute [r] after_id
         #   ID of the object to use as a cursor for pagination. When provided, returns the

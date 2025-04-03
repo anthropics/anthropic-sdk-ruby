@@ -15,7 +15,7 @@ module Anthropic
 
         sig do
           params(
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash))
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
           )
             .void
         end
@@ -40,7 +40,7 @@ module Anthropic
               T::Array[
               T.any(
                 Anthropic::Models::Beta::BetaTextBlockParam,
-                Anthropic::Util::AnyHash,
+                Anthropic::Internal::Util::AnyHash,
                 Anthropic::Models::Beta::BetaImageBlockParam
               )
               ]
@@ -59,13 +59,13 @@ module Anthropic
         sig do
           params(
             tool_use_id: String,
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)),
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
             content: T.any(
               String,
               T::Array[
               T.any(
                 Anthropic::Models::Beta::BetaTextBlockParam,
-                Anthropic::Util::AnyHash,
+                Anthropic::Internal::Util::AnyHash,
                 Anthropic::Models::Beta::BetaImageBlockParam
               )
               ]
@@ -122,7 +122,7 @@ module Anthropic
           ContentArray =
             T.let(
               Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaToolResultBlockParam::Content::Content],
-              Anthropic::Type::Converter
+              Anthropic::Internal::Type::Converter
             )
         end
       end

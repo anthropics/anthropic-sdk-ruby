@@ -36,7 +36,7 @@ module Anthropic
           ?top_p: Float,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
-        ) -> Anthropic::Stream[Anthropic::Models::Beta::beta_raw_message_stream_event]
+        ) -> Anthropic::Internal::Stream[Anthropic::Models::Beta::beta_raw_message_stream_event]
 
         def count_tokens: (
           messages: ::Array[Anthropic::Models::Beta::BetaMessageParam],

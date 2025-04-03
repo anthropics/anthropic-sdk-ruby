@@ -65,7 +65,7 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Anthropic::Test::Resou
     response = @anthropic.messages.batches.list
 
     assert_pattern do
-      response => Anthropic::Page
+      response => Anthropic::Internal::Page
     end
 
     row = response.to_enum.first

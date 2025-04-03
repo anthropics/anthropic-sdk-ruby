@@ -3,8 +3,8 @@
 module Anthropic
   module Models
     class MessageCreateParams < Anthropic::BaseModel
-      extend Anthropic::Type::RequestParameters::Converter
-      include Anthropic::RequestParameters
+      extend Anthropic::Internal::Type::RequestParameters::Converter
+      include Anthropic::Internal::Type::RequestParameters
 
       # The maximum number of tokens to generate before stopping.
       #
@@ -115,7 +115,7 @@ module Anthropic
       sig { returns(T.nilable(Anthropic::Models::Metadata)) }
       attr_reader :metadata
 
-      sig { params(metadata: T.any(Anthropic::Models::Metadata, Anthropic::Util::AnyHash)).void }
+      sig { params(metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::Util::AnyHash)).void }
       attr_writer :metadata
 
       # Custom text sequences that will cause the model to stop generating.
@@ -143,7 +143,7 @@ module Anthropic
 
       sig do
         params(
-          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash)])
+          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::Util::AnyHash)])
         )
           .void
       end
@@ -183,7 +183,7 @@ module Anthropic
         params(
           thinking: T.any(
             Anthropic::Models::ThinkingConfigEnabled,
-            Anthropic::Util::AnyHash,
+            Anthropic::Internal::Util::AnyHash,
             Anthropic::Models::ThinkingConfigDisabled
           )
         )
@@ -211,7 +211,7 @@ module Anthropic
         params(
           tool_choice: T.any(
             Anthropic::Models::ToolChoiceAuto,
-            Anthropic::Util::AnyHash,
+            Anthropic::Internal::Util::AnyHash,
             Anthropic::Models::ToolChoiceAny,
             Anthropic::Models::ToolChoiceTool,
             Anthropic::Models::ToolChoiceNone
@@ -310,7 +310,7 @@ module Anthropic
           tools: T::Array[
           T.any(
             Anthropic::Models::Tool,
-            Anthropic::Util::AnyHash,
+            Anthropic::Internal::Util::AnyHash,
             Anthropic::Models::ToolBash20250124,
             Anthropic::Models::ToolTextEditor20250124
           )
@@ -351,20 +351,20 @@ module Anthropic
       sig do
         params(
           max_tokens: Integer,
-          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Util::AnyHash)],
+          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Internal::Util::AnyHash)],
           model: T.any(Anthropic::Models::Model::OrSymbol, String),
-          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Util::AnyHash),
+          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::Util::AnyHash),
           stop_sequences: T::Array[String],
-          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash)]),
+          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::Util::AnyHash)]),
           temperature: Float,
           thinking: T.any(
             Anthropic::Models::ThinkingConfigEnabled,
-            Anthropic::Util::AnyHash,
+            Anthropic::Internal::Util::AnyHash,
             Anthropic::Models::ThinkingConfigDisabled
           ),
           tool_choice: T.any(
             Anthropic::Models::ToolChoiceAuto,
-            Anthropic::Util::AnyHash,
+            Anthropic::Internal::Util::AnyHash,
             Anthropic::Models::ToolChoiceAny,
             Anthropic::Models::ToolChoiceTool,
             Anthropic::Models::ToolChoiceNone
@@ -372,14 +372,14 @@ module Anthropic
           tools: T::Array[
           T.any(
             Anthropic::Models::Tool,
-            Anthropic::Util::AnyHash,
+            Anthropic::Internal::Util::AnyHash,
             Anthropic::Models::ToolBash20250124,
             Anthropic::Models::ToolTextEditor20250124
           )
           ],
           top_k: Integer,
           top_p: Float,
-          request_options: T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash)
+          request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash)
         )
           .returns(T.attached_class)
       end
@@ -447,7 +447,7 @@ module Anthropic
         end
 
         TextBlockParamArray =
-          T.let(Anthropic::ArrayOf[Anthropic::Models::TextBlockParam], Anthropic::Type::Converter)
+          T.let(Anthropic::ArrayOf[Anthropic::Models::TextBlockParam], Anthropic::Internal::Type::Converter)
       end
     end
   end

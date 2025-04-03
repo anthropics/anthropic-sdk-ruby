@@ -4,8 +4,8 @@ module Anthropic
   module Models
     module Messages
       class BatchCreateParams < Anthropic::BaseModel
-        extend Anthropic::Type::RequestParameters::Converter
-        include Anthropic::RequestParameters
+        extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
 
         # List of requests for prompt completion. Each is an individual request to create
         #   a Message.
@@ -14,8 +14,8 @@ module Anthropic
 
         sig do
           params(
-            requests: T::Array[T.any(Anthropic::Models::Messages::BatchCreateParams::Request, Anthropic::Util::AnyHash)],
-            request_options: T.any(Anthropic::RequestOptions, Anthropic::Util::AnyHash)
+            requests: T::Array[T.any(Anthropic::Models::Messages::BatchCreateParams::Request, Anthropic::Internal::Util::AnyHash)],
+            request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash)
           )
             .returns(T.attached_class)
         end
@@ -51,7 +51,7 @@ module Anthropic
 
           sig do
             params(
-              params: T.any(Anthropic::Models::Messages::BatchCreateParams::Request::Params, Anthropic::Util::AnyHash)
+              params: T.any(Anthropic::Models::Messages::BatchCreateParams::Request::Params, Anthropic::Internal::Util::AnyHash)
             )
               .void
           end
@@ -60,7 +60,7 @@ module Anthropic
           sig do
             params(
               custom_id: String,
-              params: T.any(Anthropic::Models::Messages::BatchCreateParams::Request::Params, Anthropic::Util::AnyHash)
+              params: T.any(Anthropic::Models::Messages::BatchCreateParams::Request::Params, Anthropic::Internal::Util::AnyHash)
             )
               .returns(T.attached_class)
           end
@@ -184,7 +184,7 @@ module Anthropic
             sig { returns(T.nilable(Anthropic::Models::Metadata)) }
             attr_reader :metadata
 
-            sig { params(metadata: T.any(Anthropic::Models::Metadata, Anthropic::Util::AnyHash)).void }
+            sig { params(metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::Util::AnyHash)).void }
             attr_writer :metadata
 
             # Custom text sequences that will cause the model to stop generating.
@@ -222,7 +222,7 @@ module Anthropic
 
             sig do
               params(
-                system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash)])
+                system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::Util::AnyHash)])
               )
                 .void
             end
@@ -262,7 +262,7 @@ module Anthropic
               params(
                 thinking: T.any(
                   Anthropic::Models::ThinkingConfigEnabled,
-                  Anthropic::Util::AnyHash,
+                  Anthropic::Internal::Util::AnyHash,
                   Anthropic::Models::ThinkingConfigDisabled
                 )
               )
@@ -290,7 +290,7 @@ module Anthropic
               params(
                 tool_choice: T.any(
                   Anthropic::Models::ToolChoiceAuto,
-                  Anthropic::Util::AnyHash,
+                  Anthropic::Internal::Util::AnyHash,
                   Anthropic::Models::ToolChoiceAny,
                   Anthropic::Models::ToolChoiceTool,
                   Anthropic::Models::ToolChoiceNone
@@ -389,7 +389,7 @@ module Anthropic
                 tools: T::Array[
                 T.any(
                   Anthropic::Models::Tool,
-                  Anthropic::Util::AnyHash,
+                  Anthropic::Internal::Util::AnyHash,
                   Anthropic::Models::ToolBash20250124,
                   Anthropic::Models::ToolTextEditor20250124
                 )
@@ -434,21 +434,21 @@ module Anthropic
             sig do
               params(
                 max_tokens: Integer,
-                messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Util::AnyHash)],
+                messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Internal::Util::AnyHash)],
                 model: T.any(Anthropic::Models::Model::OrSymbol, String),
-                metadata: T.any(Anthropic::Models::Metadata, Anthropic::Util::AnyHash),
+                metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::Util::AnyHash),
                 stop_sequences: T::Array[String],
                 stream: T::Boolean,
-                system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Util::AnyHash)]),
+                system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::Util::AnyHash)]),
                 temperature: Float,
                 thinking: T.any(
                   Anthropic::Models::ThinkingConfigEnabled,
-                  Anthropic::Util::AnyHash,
+                  Anthropic::Internal::Util::AnyHash,
                   Anthropic::Models::ThinkingConfigDisabled
                 ),
                 tool_choice: T.any(
                   Anthropic::Models::ToolChoiceAuto,
-                  Anthropic::Util::AnyHash,
+                  Anthropic::Internal::Util::AnyHash,
                   Anthropic::Models::ToolChoiceAny,
                   Anthropic::Models::ToolChoiceTool,
                   Anthropic::Models::ToolChoiceNone
@@ -456,7 +456,7 @@ module Anthropic
                 tools: T::Array[
                 T.any(
                   Anthropic::Models::Tool,
-                  Anthropic::Util::AnyHash,
+                  Anthropic::Internal::Util::AnyHash,
                   Anthropic::Models::ToolBash20250124,
                   Anthropic::Models::ToolTextEditor20250124
                 )
@@ -530,7 +530,7 @@ module Anthropic
               end
 
               TextBlockParamArray =
-                T.let(Anthropic::ArrayOf[Anthropic::Models::TextBlockParam], Anthropic::Type::Converter)
+                T.let(Anthropic::ArrayOf[Anthropic::Models::TextBlockParam], Anthropic::Internal::Type::Converter)
             end
           end
         end

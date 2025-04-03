@@ -35,7 +35,7 @@ module Anthropic
             T::Array[
             T.any(
               Anthropic::Models::CitationCharLocation,
-              Anthropic::Util::AnyHash,
+              Anthropic::Internal::Util::AnyHash,
               Anthropic::Models::CitationPageLocation,
               Anthropic::Models::CitationContentBlockLocation
             )
