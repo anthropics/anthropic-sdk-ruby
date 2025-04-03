@@ -164,7 +164,7 @@ module Anthropic
           #   Learn more about the Message Batches API in our
           #   [user guide](/en/docs/build-with-claude/batch-processing)
           #
-          # @overload results(message_batch_id, betas: nil, request_options: {})
+          # @overload results_streaming(message_batch_id, betas: nil, request_options: {})
           #
           # @param message_batch_id [String]
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
@@ -173,7 +173,7 @@ module Anthropic
           # @return [Anthropic::Internal::JsonLStream<Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse>]
           #
           # @see Anthropic::Models::Beta::Messages::BatchResultsParams
-          def results(message_batch_id, params = {})
+          def results_streaming(message_batch_id, params = {})
             parsed, options = Anthropic::Models::Beta::Messages::BatchResultsParams.dump_request(params)
             @client.request(
               method: :get,

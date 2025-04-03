@@ -187,7 +187,7 @@ module Anthropic
                 Anthropic::Internal::JsonLStream[Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse]
               )
           end
-          def results(
+          def results_streaming(
             # ID of the Message Batch.
             message_batch_id,
             # Optional header to specify the beta version(s) you want to use.
