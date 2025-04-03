@@ -3,7 +3,10 @@
 module Anthropic
   module Resources
     class Completions
-      # [Legacy] Create a Text Completion.
+      # See {Anthropic::Resources::Completions#create_streaming} for streaming
+      #   counterpart.
+      #
+      #   [Legacy] Create a Text Completion.
       #
       #   The Text Completions API is a legacy API. We recommend using the
       #   [Messages API](https://docs.anthropic.com/en/api/messages) going forward.
@@ -92,7 +95,9 @@ module Anthropic
       )
       end
 
-      # [Legacy] Create a Text Completion.
+      # See {Anthropic::Resources::Completions#create} for non-streaming counterpart.
+      #
+      #   [Legacy] Create a Text Completion.
       #
       #   The Text Completions API is a legacy API. We recommend using the
       #   [Messages API](https://docs.anthropic.com/en/api/messages) going forward.
