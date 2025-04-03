@@ -6,7 +6,9 @@ module Anthropic
       # @return [Anthropic::Resources::Messages::Batches]
       attr_reader :batches
 
-      # Send a structured list of input messages with text and/or image content, and the
+      # See {Anthropic::Resources::Messages#stream_raw} for streaming counterpart.
+      #
+      #   Send a structured list of input messages with text and/or image content, and the
       #   model will generate the next message in the conversation.
       #
       #   The Messages API can be used for either single queries or stateless multi-turn
@@ -48,7 +50,9 @@ module Anthropic
         )
       end
 
-      # Send a structured list of input messages with text and/or image content, and the
+      # See {Anthropic::Resources::Messages#create} for non-streaming counterpart.
+      #
+      #   Send a structured list of input messages with text and/or image content, and the
       #   model will generate the next message in the conversation.
       #
       #   The Messages API can be used for either single queries or stateless multi-turn
