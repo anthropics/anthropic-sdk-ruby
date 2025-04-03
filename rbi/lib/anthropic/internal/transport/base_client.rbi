@@ -25,13 +25,13 @@ module Anthropic
               ),
               body: T.nilable(T.anything),
               unwrap: T.nilable(Symbol),
-              page: T.nilable(T::Class[Anthropic::Internal::Type::BasePage[Anthropic::BaseModel]]),
+              page: T.nilable(T::Class[Anthropic::Internal::Type::BasePage[Anthropic::Internal::Type::BaseModel]]),
               stream: T.nilable(
                 T::Class[Anthropic::Internal::Type::BaseStream[T.anything,
-                                                               Anthropic::BaseModel]]
+                                                               Anthropic::Internal::Type::BaseModel]]
               ),
               model: T.nilable(Anthropic::Internal::Type::Converter::Input),
-              options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash))
+              options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
             }
           end
 
@@ -139,7 +139,7 @@ module Anthropic
           overridable
             .params(
               req: Anthropic::Internal::Transport::BaseClient::RequestComponentsShape,
-              opts: Anthropic::Internal::Util::AnyHash
+              opts: Anthropic::Internal::AnyHash
             )
             .returns(Anthropic::Internal::Transport::BaseClient::RequestInputShape)
         end
@@ -183,13 +183,13 @@ module Anthropic
             ),
             body: T.nilable(T.anything),
             unwrap: T.nilable(Symbol),
-            page: T.nilable(T::Class[Anthropic::Internal::Type::BasePage[Anthropic::BaseModel]]),
+            page: T.nilable(T::Class[Anthropic::Internal::Type::BasePage[Anthropic::Internal::Type::BaseModel]]),
             stream: T.nilable(
               T::Class[Anthropic::Internal::Type::BaseStream[T.anything,
-                                                             Anthropic::BaseModel]]
+                                                             Anthropic::Internal::Type::BaseModel]]
             ),
             model: T.nilable(Anthropic::Internal::Type::Converter::Input),
-            options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash))
+            options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
           )
             .returns(T.anything)
         end
@@ -202,7 +202,7 @@ module Anthropic
           unwrap: nil,
           page: nil,
           stream: nil,
-          model: Anthropic::Unknown,
+          model: Anthropic::Internal::Type::Unknown,
           options: {}
         )
         end

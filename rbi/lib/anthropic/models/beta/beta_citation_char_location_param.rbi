@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaCitationCharLocationParam < Anthropic::BaseModel
+      class BetaCitationCharLocationParam < Anthropic::Internal::Type::BaseModel
         sig { returns(String) }
         attr_accessor :cited_text
 

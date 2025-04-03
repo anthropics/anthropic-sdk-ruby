@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaToolResultBlockParam < Anthropic::BaseModel
+      class BetaToolResultBlockParam < Anthropic::Internal::Type::BaseModel
         sig { returns(String) }
         attr_accessor :tool_use_id
 
@@ -15,7 +15,7 @@ module Anthropic
 
         sig do
           params(
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash))
           )
             .void
         end
@@ -40,7 +40,7 @@ module Anthropic
               T::Array[
               T.any(
                 Anthropic::Models::Beta::BetaTextBlockParam,
-                Anthropic::Internal::Util::AnyHash,
+                Anthropic::Internal::AnyHash,
                 Anthropic::Models::Beta::BetaImageBlockParam
               )
               ]
@@ -59,13 +59,13 @@ module Anthropic
         sig do
           params(
             tool_use_id: String,
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash)),
             content: T.any(
               String,
               T::Array[
               T.any(
                 Anthropic::Models::Beta::BetaTextBlockParam,
-                Anthropic::Internal::Util::AnyHash,
+                Anthropic::Internal::AnyHash,
                 Anthropic::Models::Beta::BetaImageBlockParam
               )
               ]
@@ -97,10 +97,10 @@ module Anthropic
         end
 
         module Content
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           module Content
-            extend Anthropic::Union
+            extend Anthropic::Internal::Type::Union
 
             sig do
               override
@@ -121,7 +121,7 @@ module Anthropic
 
           ContentArray =
             T.let(
-              Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaToolResultBlockParam::Content::Content],
+              Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::Beta::BetaToolResultBlockParam::Content::Content],
               Anthropic::Internal::Type::Converter
             )
         end

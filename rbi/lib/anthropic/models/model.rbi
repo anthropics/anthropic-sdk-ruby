@@ -6,7 +6,7 @@ module Anthropic
     #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
     #   details and options.
     module Model
-      extend Anthropic::Union
+      extend Anthropic::Internal::Type::Union
 
       sig { override.returns([Anthropic::Models::Model::OrSymbol, String]) }
       def self.variants

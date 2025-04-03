@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaToolComputerUse20241022 < Anthropic::BaseModel
+      class BetaToolComputerUse20241022 < Anthropic::Internal::Type::BaseModel
         # @!attribute display_height_px
         #   The height of the display in pixels.
         #
@@ -60,7 +60,7 @@ module Anthropic
         #     super
         #   end
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

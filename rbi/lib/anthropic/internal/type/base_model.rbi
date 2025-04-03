@@ -22,7 +22,7 @@ module Anthropic
               T::Hash[
               Symbol,
               T.all(
-                Anthropic::BaseModel::KnownFieldShape,
+                Anthropic::Internal::Type::BaseModel::KnownFieldShape,
                 {type_fn: T.proc.returns(Anthropic::Internal::Type::Converter::Input)}
               )
               ]
@@ -34,11 +34,13 @@ module Anthropic
           # @api private
           sig do
             returns(
-              T::Hash[Symbol,
-                      T.all(
-                        Anthropic::BaseModel::KnownFieldShape,
-                        {type: Anthropic::Internal::Type::Converter::Input}
-                      )]
+              T::Hash[
+              Symbol,
+              T.all(
+                Anthropic::Internal::Type::BaseModel::KnownFieldShape,
+                {type: Anthropic::Internal::Type::Converter::Input}
+              )
+              ]
             )
           end
           def fields
@@ -60,7 +62,7 @@ module Anthropic
                 T.proc.returns(Anthropic::Internal::Type::Converter::Input),
                 Anthropic::Internal::Type::Converter::Input
               ),
-              spec: Anthropic::Internal::Util::AnyHash
+              spec: Anthropic::Internal::AnyHash
             )
               .void
           end
@@ -72,11 +74,11 @@ module Anthropic
             params(
               name_sym: Symbol,
               type_info: T.any(
-                Anthropic::Internal::Util::AnyHash,
+                Anthropic::Internal::AnyHash,
                 T.proc.returns(Anthropic::Internal::Type::Converter::Input),
                 Anthropic::Internal::Type::Converter::Input
               ),
-              spec: Anthropic::Internal::Util::AnyHash
+              spec: Anthropic::Internal::AnyHash
             )
               .void
           end
@@ -88,11 +90,11 @@ module Anthropic
             params(
               name_sym: Symbol,
               type_info: T.any(
-                Anthropic::Internal::Util::AnyHash,
+                Anthropic::Internal::AnyHash,
                 T.proc.returns(Anthropic::Internal::Type::Converter::Input),
                 Anthropic::Internal::Type::Converter::Input
               ),
-              spec: Anthropic::Internal::Util::AnyHash
+              spec: Anthropic::Internal::AnyHash
             )
               .void
           end
@@ -128,7 +130,11 @@ module Anthropic
           sig do
             override
               .params(
-                value: T.any(Anthropic::BaseModel, T::Hash[T.anything, T.anything], T.anything),
+                value: T.any(
+                  Anthropic::Internal::Type::BaseModel,
+                  T::Hash[T.anything, T.anything],
+                  T.anything
+                ),
                 state: Anthropic::Internal::Type::Converter::State
               )
               .returns(T.any(T.attached_class, T.anything))
@@ -164,7 +170,7 @@ module Anthropic
         #
         #   This method is not recursive. The returned value is shared by the object, so it
         #   should not be mutated.
-        sig { overridable.returns(Anthropic::Internal::Util::AnyHash) }
+        sig { overridable.returns(Anthropic::Internal::AnyHash) }
         def to_h
         end
 
@@ -176,11 +182,11 @@ module Anthropic
         #
         #   This method is not recursive. The returned value is shared by the object, so it
         #   should not be mutated.
-        sig { overridable.returns(Anthropic::Internal::Util::AnyHash) }
+        sig { overridable.returns(Anthropic::Internal::AnyHash) }
         def to_hash
         end
 
-        sig { params(keys: T.nilable(T::Array[Symbol])).returns(Anthropic::Internal::Util::AnyHash) }
+        sig { params(keys: T.nilable(T::Array[Symbol])).returns(Anthropic::Internal::AnyHash) }
         def deconstruct_keys(keys)
         end
 

@@ -3,7 +3,7 @@ module Anthropic
     type model_retrieve_params =
       {  } & Anthropic::Internal::Type::request_parameters
 
-    class ModelRetrieveParams < Anthropic::BaseModel
+    class ModelRetrieveParams < Anthropic::Internal::Type::BaseModel
       extend Anthropic::Internal::Type::RequestParameters::Converter
       include Anthropic::Internal::Type::RequestParameters
 

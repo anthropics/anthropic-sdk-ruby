@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Beta
       module Messages
-        class BetaMessageBatchRequestCounts < Anthropic::BaseModel
+        class BetaMessageBatchRequestCounts < Anthropic::Internal::Type::BaseModel
           # Number of requests in the Message Batch that have been canceled.
           #
           #   This is zero until processing of the entire Message Batch has ended.

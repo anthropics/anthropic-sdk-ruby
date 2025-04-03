@@ -5,7 +5,7 @@ module Anthropic
     # How the model should use the provided tools. The model can use a specific tool,
     #   any available tool, decide by itself, or not use tools at all.
     module ToolChoice
-      extend Anthropic::Union
+      extend Anthropic::Internal::Type::Union
 
       sig do
         override

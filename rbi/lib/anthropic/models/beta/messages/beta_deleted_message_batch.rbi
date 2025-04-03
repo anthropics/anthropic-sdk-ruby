@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Beta
       module Messages
-        class BetaDeletedMessageBatch < Anthropic::BaseModel
+        class BetaDeletedMessageBatch < Anthropic::Internal::Type::BaseModel
           # ID of the Message Batch.
           sig { returns(String) }
           attr_accessor :id

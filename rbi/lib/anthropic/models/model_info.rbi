@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ModelInfo < Anthropic::BaseModel
+    class ModelInfo < Anthropic::Internal::Type::BaseModel
       # Unique model identifier.
       sig { returns(String) }
       attr_accessor :id

@@ -19,7 +19,7 @@ module Anthropic
         # @param other [Object]
         #
         # @return [Boolean]
-        def self.==(other) = other.is_a?(Class) && other <= Anthropic::BooleanModel
+        def self.==(other) = other.is_a?(Class) && other <= Anthropic::Internal::Type::BooleanModel
 
         class << self
           # @api private

@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class RawContentBlockStartEvent < Anthropic::BaseModel
+    class RawContentBlockStartEvent < Anthropic::Internal::Type::BaseModel
       sig do
         returns(
           T.any(
@@ -25,7 +25,7 @@ module Anthropic
         params(
           content_block: T.any(
             Anthropic::Models::TextBlock,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::ToolUseBlock,
             Anthropic::Models::ThinkingBlock,
             Anthropic::Models::RedactedThinkingBlock
@@ -57,7 +57,7 @@ module Anthropic
       end
 
       module ContentBlock
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         sig do
           override

@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class Tool < Anthropic::BaseModel
+    class Tool < Anthropic::Internal::Type::BaseModel
       # [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
       #
       #   This defines the shape of the `input` that your tool accepts and that the model
@@ -10,7 +10,7 @@ module Anthropic
       sig { returns(Anthropic::Models::Tool::InputSchema) }
       attr_reader :input_schema
 
-      sig { params(input_schema: T.any(Anthropic::Models::Tool::InputSchema, Anthropic::Internal::Util::AnyHash)).void }
+      sig { params(input_schema: T.any(Anthropic::Models::Tool::InputSchema, Anthropic::Internal::AnyHash)).void }
       attr_writer :input_schema
 
       # Name of the tool.
@@ -24,7 +24,7 @@ module Anthropic
 
       sig do
         params(
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash))
         )
           .void
       end
@@ -44,9 +44,9 @@ module Anthropic
 
       sig do
         params(
-          input_schema: T.any(Anthropic::Models::Tool::InputSchema, Anthropic::Internal::Util::AnyHash),
+          input_schema: T.any(Anthropic::Models::Tool::InputSchema, Anthropic::Internal::AnyHash),
           name: String,
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash)),
           description: String
         )
           .returns(T.attached_class)
@@ -68,7 +68,7 @@ module Anthropic
       def to_hash
       end
 
-      class InputSchema < Anthropic::BaseModel
+      class InputSchema < Anthropic::Internal::Type::BaseModel
         sig { returns(Symbol) }
         attr_accessor :type
 

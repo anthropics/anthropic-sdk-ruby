@@ -5,7 +5,7 @@ module Anthropic
     # @see Anthropic::Resources::Completions#create
     #
     # @see Anthropic::Resources::Completions#stream_raw
-    class Completion < Anthropic::BaseModel
+    class Completion < Anthropic::Internal::Type::BaseModel
       # @!attribute id
       #   Unique object identifier.
       #
@@ -57,7 +57,7 @@ module Anthropic
       #   #
       #   def initialize(id:, completion:, model:, stop_reason:, type: :completion, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

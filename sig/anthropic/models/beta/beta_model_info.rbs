@@ -6,7 +6,7 @@ module Anthropic
       type beta_model_info =
         { id: String, created_at: Time, display_name: String, type: :model }
 
-      class BetaModelInfo < Anthropic::BaseModel
+      class BetaModelInfo < Anthropic::Internal::Type::BaseModel
         attr_accessor id: String
 
         attr_accessor created_at: Time

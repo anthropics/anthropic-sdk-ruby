@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class Base64PDFSource < Anthropic::BaseModel
+    class Base64PDFSource < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :data
 

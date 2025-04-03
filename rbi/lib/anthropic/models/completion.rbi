@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class Completion < Anthropic::BaseModel
+    class Completion < Anthropic::Internal::Type::BaseModel
       # Unique object identifier.
       #
       #   The format and length of IDs may change over time.

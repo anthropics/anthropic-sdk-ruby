@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class APIErrorObject < Anthropic::BaseModel
+    class APIErrorObject < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :message
 

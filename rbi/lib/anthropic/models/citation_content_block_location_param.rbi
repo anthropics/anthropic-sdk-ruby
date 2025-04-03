@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class CitationContentBlockLocationParam < Anthropic::BaseModel
+    class CitationContentBlockLocationParam < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :cited_text
 

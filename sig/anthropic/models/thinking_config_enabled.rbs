@@ -2,7 +2,7 @@ module Anthropic
   module Models
     type thinking_config_enabled = { budget_tokens: Integer, type: :enabled }
 
-    class ThinkingConfigEnabled < Anthropic::BaseModel
+    class ThinkingConfigEnabled < Anthropic::Internal::Type::BaseModel
       attr_accessor budget_tokens: Integer
 
       attr_accessor type: :enabled

@@ -12,7 +12,7 @@ module Anthropic
       timeout: Float?
     }
 
-  class RequestOptions < Anthropic::BaseModel
+  class RequestOptions < Anthropic::Internal::Type::BaseModel
     def self.validate!: (self | ::Hash[Symbol, top] opts) -> void
 
     attr_accessor idempotency_key: String?

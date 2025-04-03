@@ -3,7 +3,7 @@ module Anthropic
     type beta_authentication_error =
       { message: String, type: :authentication_error }
 
-    class BetaAuthenticationError < Anthropic::BaseModel
+    class BetaAuthenticationError < Anthropic::Internal::Type::BaseModel
       attr_accessor message: String
 
       attr_accessor type: :authentication_error

@@ -7,7 +7,7 @@ module Anthropic
         :end_turn | :max_tokens | :stop_sequence | :tool_use
 
       module BetaStopReason
-        extend Anthropic::Enum
+        extend Anthropic::Internal::Type::Enum
 
         END_TURN: :end_turn
         MAX_TOKENS: :max_tokens

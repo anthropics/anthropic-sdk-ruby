@@ -12,7 +12,7 @@ module Anthropic
       | :"output-128k-2025-02-19"
 
     module AnthropicBeta
-      extend Anthropic::Union
+      extend Anthropic::Internal::Type::Union
 
       def self?.variants: -> [String, (:"message-batches-2024-09-24"
       | :"prompt-caching-2024-07-31"

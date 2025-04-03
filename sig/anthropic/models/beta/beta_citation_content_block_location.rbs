@@ -13,7 +13,7 @@ module Anthropic
           type: :content_block_location
         }
 
-      class BetaCitationContentBlockLocation < Anthropic::BaseModel
+      class BetaCitationContentBlockLocation < Anthropic::Internal::Type::BaseModel
         attr_accessor cited_text: String
 
         attr_accessor document_index: Integer

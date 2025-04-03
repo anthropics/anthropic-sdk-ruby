@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaRawMessageStartEvent < Anthropic::BaseModel
+      class BetaRawMessageStartEvent < Anthropic::Internal::Type::BaseModel
         # @!attribute message
         #
         #   @return [Anthropic::Models::Beta::BetaMessage]
@@ -20,7 +20,7 @@ module Anthropic
         #   #
         #   def initialize(message:, type: :message_start, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

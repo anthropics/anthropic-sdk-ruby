@@ -3,7 +3,7 @@ module Anthropic
     type error_response =
       { error: Anthropic::Models::error_object, type: :error }
 
-    class ErrorResponse < Anthropic::BaseModel
+    class ErrorResponse < Anthropic::Internal::Type::BaseModel
       attr_accessor error: Anthropic::Models::error_object
 
       attr_accessor type: :error

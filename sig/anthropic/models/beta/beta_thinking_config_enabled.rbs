@@ -6,7 +6,7 @@ module Anthropic
       type beta_thinking_config_enabled =
         { budget_tokens: Integer, type: :enabled }
 
-      class BetaThinkingConfigEnabled < Anthropic::BaseModel
+      class BetaThinkingConfigEnabled < Anthropic::Internal::Type::BaseModel
         attr_accessor budget_tokens: Integer
 
         attr_accessor type: :enabled

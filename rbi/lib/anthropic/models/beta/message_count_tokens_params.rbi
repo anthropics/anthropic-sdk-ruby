@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class MessageCountTokensParams < Anthropic::BaseModel
+      class MessageCountTokensParams < Anthropic::Internal::Type::BaseModel
         extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
@@ -112,10 +112,7 @@ module Anthropic
 
         sig do
           params(
-            system_: T.any(
-              String,
-              T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Internal::Util::AnyHash)]
-            )
+            system_: T.any(String, T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Internal::AnyHash)])
           )
             .void
         end
@@ -146,7 +143,7 @@ module Anthropic
           params(
             thinking: T.any(
               Anthropic::Models::Beta::BetaThinkingConfigEnabled,
-              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Internal::AnyHash,
               Anthropic::Models::Beta::BetaThinkingConfigDisabled
             )
           )
@@ -174,7 +171,7 @@ module Anthropic
           params(
             tool_choice: T.any(
               Anthropic::Models::Beta::BetaToolChoiceAuto,
-              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Internal::AnyHash,
               Anthropic::Models::Beta::BetaToolChoiceAny,
               Anthropic::Models::Beta::BetaToolChoiceTool,
               Anthropic::Models::Beta::BetaToolChoiceNone
@@ -277,7 +274,7 @@ module Anthropic
             tools: T::Array[
             T.any(
               Anthropic::Models::Beta::BetaTool,
-              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Internal::AnyHash,
               Anthropic::Models::Beta::BetaToolComputerUse20241022,
               Anthropic::Models::Beta::BetaToolBash20241022,
               Anthropic::Models::Beta::BetaToolTextEditor20241022,
@@ -300,20 +297,17 @@ module Anthropic
 
         sig do
           params(
-            messages: T::Array[T.any(Anthropic::Models::Beta::BetaMessageParam, Anthropic::Internal::Util::AnyHash)],
+            messages: T::Array[T.any(Anthropic::Models::Beta::BetaMessageParam, Anthropic::Internal::AnyHash)],
             model: T.any(Anthropic::Models::Model::OrSymbol, String),
-            system_: T.any(
-              String,
-              T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Internal::Util::AnyHash)]
-            ),
+            system_: T.any(String, T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Internal::AnyHash)]),
             thinking: T.any(
               Anthropic::Models::Beta::BetaThinkingConfigEnabled,
-              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Internal::AnyHash,
               Anthropic::Models::Beta::BetaThinkingConfigDisabled
             ),
             tool_choice: T.any(
               Anthropic::Models::Beta::BetaToolChoiceAuto,
-              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Internal::AnyHash,
               Anthropic::Models::Beta::BetaToolChoiceAny,
               Anthropic::Models::Beta::BetaToolChoiceTool,
               Anthropic::Models::Beta::BetaToolChoiceNone
@@ -321,7 +315,7 @@ module Anthropic
             tools: T::Array[
             T.any(
               Anthropic::Models::Beta::BetaTool,
-              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Internal::AnyHash,
               Anthropic::Models::Beta::BetaToolComputerUse20241022,
               Anthropic::Models::Beta::BetaToolBash20241022,
               Anthropic::Models::Beta::BetaToolTextEditor20241022,
@@ -331,7 +325,7 @@ module Anthropic
             )
             ],
             betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
-            request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash)
+            request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash)
           )
             .returns(T.attached_class)
         end
@@ -389,7 +383,7 @@ module Anthropic
         #   as specifying a particular goal or role. See our
         #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
         module System
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           sig { override.returns([String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]]) }
           def self.variants
@@ -397,13 +391,13 @@ module Anthropic
 
           BetaTextBlockParamArray =
             T.let(
-              Anthropic::ArrayOf[Anthropic::Models::Beta::BetaTextBlockParam],
+              Anthropic::Internal::Type::ArrayOf[Anthropic::Models::Beta::BetaTextBlockParam],
               Anthropic::Internal::Type::Converter
             )
         end
 
         module Tool
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           sig do
             override

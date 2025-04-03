@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class PlainTextSource < Anthropic::BaseModel
+    class PlainTextSource < Anthropic::Internal::Type::BaseModel
       # @!attribute data
       #
       #   @return [String]
@@ -25,7 +25,7 @@ module Anthropic
       #   #
       #   def initialize(data:, media_type: :"text/plain", type: :text, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Messages
-      class MessageBatchIndividualResponse < Anthropic::BaseModel
+      class MessageBatchIndividualResponse < Anthropic::Internal::Type::BaseModel
         # Developer-provided ID created for each request in a Message Batch. Useful for
         #   matching results to requests, as results may be given out of request order.
         #
@@ -35,7 +35,7 @@ module Anthropic
             custom_id: String,
             result: T.any(
               Anthropic::Models::Messages::MessageBatchSucceededResult,
-              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Internal::AnyHash,
               Anthropic::Models::Messages::MessageBatchErroredResult,
               Anthropic::Models::Messages::MessageBatchCanceledResult,
               Anthropic::Models::Messages::MessageBatchExpiredResult

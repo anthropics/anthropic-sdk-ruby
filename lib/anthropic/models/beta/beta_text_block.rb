@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaTextBlock < Anthropic::BaseModel
+      class BetaTextBlock < Anthropic::Internal::Type::BaseModel
         # @!attribute citations
         #   Citations supporting the text block.
         #
@@ -13,7 +13,7 @@ module Anthropic
         #
         #   @return [Array<Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation>, nil]
         required :citations,
-                 -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitation] },
+                 -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitation] },
                  nil?: true
 
         # @!attribute text
@@ -33,7 +33,7 @@ module Anthropic
         #   #
         #   def initialize(citations:, text:, type: :text, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

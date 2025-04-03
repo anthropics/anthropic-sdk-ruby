@@ -13,7 +13,7 @@ module Anthropic
           type: :char_location
         }
 
-      class BetaCitationCharLocationParam < Anthropic::BaseModel
+      class BetaCitationCharLocationParam < Anthropic::Internal::Type::BaseModel
         attr_accessor cited_text: String
 
         attr_accessor document_index: Integer

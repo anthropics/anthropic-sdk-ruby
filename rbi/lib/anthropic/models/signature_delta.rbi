@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class SignatureDelta < Anthropic::BaseModel
+    class SignatureDelta < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :signature
 

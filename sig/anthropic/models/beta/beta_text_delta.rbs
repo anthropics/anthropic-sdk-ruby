@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       type beta_text_delta = { text: String, type: :text_delta }
 
-      class BetaTextDelta < Anthropic::BaseModel
+      class BetaTextDelta < Anthropic::Internal::Type::BaseModel
         attr_accessor text: String
 
         attr_accessor type: :text_delta

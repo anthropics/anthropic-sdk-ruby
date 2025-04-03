@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Beta
       module Messages
-        class BetaMessageBatchRequestCounts < Anthropic::BaseModel
+        class BetaMessageBatchRequestCounts < Anthropic::Internal::Type::BaseModel
           # @!attribute canceled
           #   Number of requests in the Message Batch that have been canceled.
           #
@@ -52,7 +52,7 @@ module Anthropic
           #   #
           #   def initialize(canceled:, errored:, expired:, processing:, succeeded:, **) = super
 
-          # def initialize: (Hash | Anthropic::BaseModel) -> void
+          # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
         end
       end
     end

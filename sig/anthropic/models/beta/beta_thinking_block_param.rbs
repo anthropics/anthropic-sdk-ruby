@@ -6,7 +6,7 @@ module Anthropic
       type beta_thinking_block_param =
         { signature: String, thinking: String, type: :thinking }
 
-      class BetaThinkingBlockParam < Anthropic::BaseModel
+      class BetaThinkingBlockParam < Anthropic::Internal::Type::BaseModel
         attr_accessor signature: String
 
         attr_accessor thinking: String

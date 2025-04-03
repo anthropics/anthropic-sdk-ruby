@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaRawContentBlockStopEvent < Anthropic::BaseModel
+      class BetaRawContentBlockStopEvent < Anthropic::Internal::Type::BaseModel
         sig { returns(Integer) }
         attr_accessor :index
 

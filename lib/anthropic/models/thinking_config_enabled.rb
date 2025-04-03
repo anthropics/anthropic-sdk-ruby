@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ThinkingConfigEnabled < Anthropic::BaseModel
+    class ThinkingConfigEnabled < Anthropic::Internal::Type::BaseModel
       # @!attribute budget_tokens
       #   Determines how many tokens Claude can use for its internal reasoning process.
       #     Larger budgets can enable more thorough analysis for complex problems, improving
@@ -28,7 +28,7 @@ module Anthropic
       #   #
       #   def initialize(budget_tokens:, type: :enabled, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

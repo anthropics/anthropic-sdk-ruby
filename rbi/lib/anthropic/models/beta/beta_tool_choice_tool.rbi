@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaToolChoiceTool < Anthropic::BaseModel
+      class BetaToolChoiceTool < Anthropic::Internal::Type::BaseModel
         # The name of the tool to use.
         sig { returns(String) }
         attr_accessor :name

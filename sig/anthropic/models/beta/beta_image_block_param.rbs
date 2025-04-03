@@ -10,7 +10,7 @@ module Anthropic
           cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?
         }
 
-      class BetaImageBlockParam < Anthropic::BaseModel
+      class BetaImageBlockParam < Anthropic::Internal::Type::BaseModel
         attr_accessor source: Anthropic::Models::Beta::BetaImageBlockParam::source
 
         attr_accessor type: :image
@@ -30,7 +30,7 @@ module Anthropic
           | Anthropic::Models::Beta::BetaURLImageSource
 
         module Source
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> [Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource]
         end

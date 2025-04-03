@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ToolChoiceTool < Anthropic::BaseModel
+    class ToolChoiceTool < Anthropic::Internal::Type::BaseModel
       # The name of the tool to use.
       sig { returns(String) }
       attr_accessor :name

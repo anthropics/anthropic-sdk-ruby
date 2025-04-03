@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class DocumentBlockParam < Anthropic::BaseModel
+    class DocumentBlockParam < Anthropic::Internal::Type::BaseModel
       # @!attribute source
       #
       #   @return [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
@@ -47,11 +47,11 @@ module Anthropic
       #   #
       #   def initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
       # @see Anthropic::Models::DocumentBlockParam#source
       module Source
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         discriminator :type
 

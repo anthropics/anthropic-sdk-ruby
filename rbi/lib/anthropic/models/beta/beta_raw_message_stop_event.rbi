@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaRawMessageStopEvent < Anthropic::BaseModel
+      class BetaRawMessageStopEvent < Anthropic::Internal::Type::BaseModel
         sig { returns(Symbol) }
         attr_accessor :type
 

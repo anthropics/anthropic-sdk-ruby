@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       type beta_citations_config_param = { enabled: bool }
 
-      class BetaCitationsConfigParam < Anthropic::BaseModel
+      class BetaCitationsConfigParam < Anthropic::Internal::Type::BaseModel
         attr_reader enabled: bool?
 
         def enabled=: (bool) -> bool

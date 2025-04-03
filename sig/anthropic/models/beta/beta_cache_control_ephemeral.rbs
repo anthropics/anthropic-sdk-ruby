@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       type beta_cache_control_ephemeral = { type: :ephemeral }
 
-      class BetaCacheControlEphemeral < Anthropic::BaseModel
+      class BetaCacheControlEphemeral < Anthropic::Internal::Type::BaseModel
         attr_accessor type: :ephemeral
 
         def initialize: (?type: :ephemeral) -> void

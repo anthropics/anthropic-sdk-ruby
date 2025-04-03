@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     # @see Anthropic::Resources::Models#retrieve
-    class ModelInfo < Anthropic::BaseModel
+    class ModelInfo < Anthropic::Internal::Type::BaseModel
       # @!attribute id
       #   Unique model identifier.
       #
@@ -39,7 +39,7 @@ module Anthropic
       #   #
       #   def initialize(id:, created_at:, display_name:, type: :model, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

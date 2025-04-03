@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class RawContentBlockStartEvent < Anthropic::BaseModel
+    class RawContentBlockStartEvent < Anthropic::Internal::Type::BaseModel
       # @!attribute content_block
       #
       #   @return [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock]
@@ -25,11 +25,11 @@ module Anthropic
       #   #
       #   def initialize(content_block:, index:, type: :content_block_start, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
       # @see Anthropic::Models::RawContentBlockStartEvent#content_block
       module ContentBlock
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         discriminator :type
 

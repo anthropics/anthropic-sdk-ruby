@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module MessageCountTokensTool
-      extend Anthropic::Union
+      extend Anthropic::Internal::Type::Union
 
       variant -> { Anthropic::Models::Tool }
 

@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaRedactedThinkingBlock < Anthropic::BaseModel
+      class BetaRedactedThinkingBlock < Anthropic::Internal::Type::BaseModel
         sig { returns(String) }
         attr_accessor :data
 

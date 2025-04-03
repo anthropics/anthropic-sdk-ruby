@@ -12,7 +12,7 @@ module Anthropic
           type: Anthropic::Models::Beta::BetaTool::type_?
         }
 
-      class BetaTool < Anthropic::BaseModel
+      class BetaTool < Anthropic::Internal::Type::BaseModel
         attr_accessor input_schema: Anthropic::Models::Beta::BetaTool::InputSchema
 
         attr_accessor name: String
@@ -37,7 +37,7 @@ module Anthropic
 
         type input_schema = { type: :object, properties: top? }
 
-        class InputSchema < Anthropic::BaseModel
+        class InputSchema < Anthropic::Internal::Type::BaseModel
           attr_accessor type: :object
 
           attr_accessor properties: top?
@@ -50,7 +50,7 @@ module Anthropic
         type type_ = :custom
 
         module Type
-          extend Anthropic::Enum
+          extend Anthropic::Internal::Type::Enum
 
           CUSTOM: :custom
 

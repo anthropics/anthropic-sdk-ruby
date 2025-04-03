@@ -6,7 +6,7 @@ module Anthropic
         role: Anthropic::Models::MessageParam::role
       }
 
-    class MessageParam < Anthropic::BaseModel
+    class MessageParam < Anthropic::Internal::Type::BaseModel
       attr_accessor content: Anthropic::Models::MessageParam::content
 
       attr_accessor role: Anthropic::Models::MessageParam::role
@@ -21,7 +21,7 @@ module Anthropic
       type content = String | ::Array[Anthropic::Models::content_block_param]
 
       module Content
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> [String, ::Array[Anthropic::Models::content_block_param]]
 
@@ -34,7 +34,7 @@ module Anthropic
       type role = :user | :assistant
 
       module Role
-        extend Anthropic::Enum
+        extend Anthropic::Internal::Type::Enum
 
         USER: :user
         ASSISTANT: :assistant

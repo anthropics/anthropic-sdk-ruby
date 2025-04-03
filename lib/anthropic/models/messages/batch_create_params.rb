@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Messages
       # @see Anthropic::Resources::Messages::Batches#create
-      class BatchCreateParams < Anthropic::BaseModel
+      class BatchCreateParams < Anthropic::Internal::Type::BaseModel
         # @!parse
         #   extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
@@ -14,7 +14,8 @@ module Anthropic
         #     a Message.
         #
         #   @return [Array<Anthropic::Models::Messages::BatchCreateParams::Request>]
-        required :requests, -> { Anthropic::ArrayOf[Anthropic::Models::Messages::BatchCreateParams::Request] }
+        required :requests,
+                 -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Models::Messages::BatchCreateParams::Request] }
 
         # @!parse
         #   # @param requests [Array<Anthropic::Models::Messages::BatchCreateParams::Request>]
@@ -22,9 +23,9 @@ module Anthropic
         #   #
         #   def initialize(requests:, request_options: {}, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
-        class Request < Anthropic::BaseModel
+        class Request < Anthropic::Internal::Type::BaseModel
           # @!attribute custom_id
           #   Developer-provided ID created for each request in a Message Batch. Useful for
           #     matching results to requests, as results may be given out of request order.
@@ -49,10 +50,10 @@ module Anthropic
           #   #
           #   def initialize(custom_id:, params:, **) = super
 
-          # def initialize: (Hash | Anthropic::BaseModel) -> void
+          # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
           # @see Anthropic::Models::Messages::BatchCreateParams::Request#params
-          class Params < Anthropic::BaseModel
+          class Params < Anthropic::Internal::Type::BaseModel
             # @!attribute max_tokens
             #   The maximum number of tokens to generate before stopping.
             #
@@ -154,7 +155,7 @@ module Anthropic
             #     messages in the Messages API.
             #
             #   @return [Array<Anthropic::Models::MessageParam>]
-            required :messages, -> { Anthropic::ArrayOf[Anthropic::Models::MessageParam] }
+            required :messages, -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Models::MessageParam] }
 
             # @!attribute model
             #   The model that will complete your prompt.\n\nSee
@@ -186,7 +187,7 @@ module Anthropic
             #     and the response `stop_sequence` value will contain the matched stop sequence.
             #
             #   @return [Array<String>, nil]
-            optional :stop_sequences, Anthropic::ArrayOf[String]
+            optional :stop_sequences, Anthropic::Internal::Type::ArrayOf[String]
 
             # @!parse
             #   # @return [Array<String>]
@@ -199,7 +200,7 @@ module Anthropic
             #     details.
             #
             #   @return [Boolean, nil]
-            optional :stream, Anthropic::BooleanModel
+            optional :stream, Anthropic::Internal::Type::BooleanModel
 
             # @!parse
             #   # @return [Boolean]
@@ -339,7 +340,7 @@ module Anthropic
             #     See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
             #
             #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>, nil]
-            optional :tools, -> { Anthropic::ArrayOf[union: Anthropic::Models::ToolUnion] }
+            optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::ToolUnion] }
 
             # @!parse
             #   # @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>]
@@ -418,7 +419,7 @@ module Anthropic
             #     super
             #   end
 
-            # def initialize: (Hash | Anthropic::BaseModel) -> void
+            # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
             # System prompt.
             #
@@ -428,7 +429,7 @@ module Anthropic
             #
             # @see Anthropic::Models::Messages::BatchCreateParams::Request::Params#system_
             module System
-              extend Anthropic::Union
+              extend Anthropic::Internal::Type::Union
 
               variant String
 
@@ -438,7 +439,7 @@ module Anthropic
               #   # @return [Array(String, Array<Anthropic::Models::TextBlockParam>)]
               #   def self.variants; end
 
-              TextBlockParamArray = Anthropic::ArrayOf[-> { Anthropic::Models::TextBlockParam }]
+              TextBlockParamArray = Anthropic::Internal::Type::ArrayOf[-> { Anthropic::Models::TextBlockParam }]
             end
           end
         end

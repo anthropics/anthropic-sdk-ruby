@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class InputJSONDelta < Anthropic::BaseModel
+    class InputJSONDelta < Anthropic::Internal::Type::BaseModel
       # @!attribute partial_json
       #
       #   @return [String]
@@ -19,7 +19,7 @@ module Anthropic
       #   #
       #   def initialize(partial_json:, type: :input_json_delta, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

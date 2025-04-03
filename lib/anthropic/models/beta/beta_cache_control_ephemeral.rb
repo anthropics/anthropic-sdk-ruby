@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaCacheControlEphemeral < Anthropic::BaseModel
+      class BetaCacheControlEphemeral < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
         #   @return [Symbol, :ephemeral]
@@ -14,7 +14,7 @@ module Anthropic
         #   #
         #   def initialize(type: :ephemeral, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

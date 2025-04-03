@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module RawMessageStreamEvent
-      extend Anthropic::Union
+      extend Anthropic::Internal::Type::Union
 
       sig do
         override

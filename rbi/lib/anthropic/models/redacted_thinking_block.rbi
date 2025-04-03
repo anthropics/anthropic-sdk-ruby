@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class RedactedThinkingBlock < Anthropic::BaseModel
+    class RedactedThinkingBlock < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :data
 

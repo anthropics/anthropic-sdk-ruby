@@ -3,11 +3,11 @@
 module Anthropic
   module Models
     module Beta
-      class BetaCitationsConfigParam < Anthropic::BaseModel
+      class BetaCitationsConfigParam < Anthropic::Internal::Type::BaseModel
         # @!attribute [r] enabled
         #
         #   @return [Boolean, nil]
-        optional :enabled, Anthropic::BooleanModel
+        optional :enabled, Anthropic::Internal::Type::BooleanModel
 
         # @!parse
         #   # @return [Boolean]
@@ -18,7 +18,7 @@ module Anthropic
         #   #
         #   def initialize(enabled: nil, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

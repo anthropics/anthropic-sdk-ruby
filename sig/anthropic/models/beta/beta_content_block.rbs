@@ -10,7 +10,7 @@ module Anthropic
         | Anthropic::Models::Beta::BetaRedactedThinkingBlock
 
       module BetaContentBlock
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock]
       end

@@ -6,7 +6,7 @@ module Anthropic
         type: :content
       }
 
-    class ContentBlockSource < Anthropic::BaseModel
+    class ContentBlockSource < Anthropic::Internal::Type::BaseModel
       attr_accessor content: Anthropic::Models::ContentBlockSource::content
 
       attr_accessor type: :content
@@ -22,7 +22,7 @@ module Anthropic
         String | ::Array[Anthropic::Models::content_block_source_content]
 
       module Content
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> [String, ::Array[Anthropic::Models::content_block_source_content]]
 

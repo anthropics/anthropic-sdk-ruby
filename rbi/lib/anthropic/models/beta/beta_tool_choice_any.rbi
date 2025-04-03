@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaToolChoiceAny < Anthropic::BaseModel
+      class BetaToolChoiceAny < Anthropic::Internal::Type::BaseModel
         sig { returns(Symbol) }
         attr_accessor :type
 

@@ -19,7 +19,7 @@ module Anthropic
         }
         & Anthropic::Internal::Type::request_parameters
 
-      class MessageCreateParams < Anthropic::BaseModel
+      class MessageCreateParams < Anthropic::Internal::Type::BaseModel
         extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
@@ -104,7 +104,7 @@ module Anthropic
           String | ::Array[Anthropic::Models::Beta::BetaTextBlockParam]
 
         module System
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> [String, ::Array[Anthropic::Models::Beta::BetaTextBlockParam]]
 

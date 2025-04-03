@@ -15,7 +15,7 @@ module Anthropic
           usage: Anthropic::Models::Beta::BetaUsage
         }
 
-      class BetaMessage < Anthropic::BaseModel
+      class BetaMessage < Anthropic::Internal::Type::BaseModel
         attr_accessor id: String
 
         attr_accessor content: ::Array[Anthropic::Models::Beta::beta_content_block]

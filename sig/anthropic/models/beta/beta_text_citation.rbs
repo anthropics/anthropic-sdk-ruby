@@ -9,7 +9,7 @@ module Anthropic
         | Anthropic::Models::Beta::BetaCitationContentBlockLocation
 
       module BetaTextCitation
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation]
       end

@@ -6,7 +6,7 @@ module Anthropic
       type beta_tool_use_block =
         { id: String, input: top, name: String, type: :tool_use }
 
-      class BetaToolUseBlock < Anthropic::BaseModel
+      class BetaToolUseBlock < Anthropic::Internal::Type::BaseModel
         attr_accessor id: String
 
         attr_accessor input: top

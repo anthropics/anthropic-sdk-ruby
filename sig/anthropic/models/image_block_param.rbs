@@ -7,7 +7,7 @@ module Anthropic
         cache_control: Anthropic::Models::CacheControlEphemeral?
       }
 
-    class ImageBlockParam < Anthropic::BaseModel
+    class ImageBlockParam < Anthropic::Internal::Type::BaseModel
       attr_accessor source: Anthropic::Models::ImageBlockParam::source
 
       attr_accessor type: :image
@@ -26,7 +26,7 @@ module Anthropic
         Anthropic::Models::Base64ImageSource | Anthropic::Models::URLImageSource
 
       module Source
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]
       end

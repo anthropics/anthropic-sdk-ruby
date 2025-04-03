@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaCacheControlEphemeral < Anthropic::BaseModel
+      class BetaCacheControlEphemeral < Anthropic::Internal::Type::BaseModel
         sig { returns(Symbol) }
         attr_accessor :type
 

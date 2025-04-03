@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaRawMessageDeltaEvent < Anthropic::BaseModel
+      class BetaRawMessageDeltaEvent < Anthropic::Internal::Type::BaseModel
         # @!attribute delta
         #
         #   @return [Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta]
@@ -41,10 +41,10 @@ module Anthropic
         #   #
         #   def initialize(delta:, usage:, type: :message_delta, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
         # @see Anthropic::Models::Beta::BetaRawMessageDeltaEvent#delta
-        class Delta < Anthropic::BaseModel
+        class Delta < Anthropic::Internal::Type::BaseModel
           # @!attribute stop_reason
           #
           #   @return [Symbol, Anthropic::Models::Beta::BetaStopReason, nil]
@@ -61,7 +61,7 @@ module Anthropic
           #   #
           #   def initialize(stop_reason:, stop_sequence:, **) = super
 
-          # def initialize: (Hash | Anthropic::BaseModel) -> void
+          # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
         end
       end
     end

@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaModelInfo < Anthropic::BaseModel
+      class BetaModelInfo < Anthropic::Internal::Type::BaseModel
         # Unique model identifier.
         sig { returns(String) }
         attr_accessor :id

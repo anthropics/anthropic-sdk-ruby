@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class MessageDeltaUsage < Anthropic::BaseModel
+    class MessageDeltaUsage < Anthropic::Internal::Type::BaseModel
       # @!attribute output_tokens
       #   The cumulative number of output tokens which were used.
       #
@@ -14,7 +14,7 @@ module Anthropic
       #   #
       #   def initialize(output_tokens:, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

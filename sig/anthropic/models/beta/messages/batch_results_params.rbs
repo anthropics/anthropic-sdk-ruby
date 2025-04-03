@@ -6,7 +6,7 @@ module Anthropic
           { betas: ::Array[Anthropic::Models::anthropic_beta] }
           & Anthropic::Internal::Type::request_parameters
 
-        class BatchResultsParams < Anthropic::BaseModel
+        class BatchResultsParams < Anthropic::Internal::Type::BaseModel
           extend Anthropic::Internal::Type::RequestParameters::Converter
           include Anthropic::Internal::Type::RequestParameters
 

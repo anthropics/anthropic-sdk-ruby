@@ -7,7 +7,7 @@ module Anthropic
         type: :base64
       }
 
-    class Base64ImageSource < Anthropic::BaseModel
+    class Base64ImageSource < Anthropic::Internal::Type::BaseModel
       attr_accessor data: String
 
       attr_accessor media_type: Anthropic::Models::Base64ImageSource::media_type
@@ -26,7 +26,7 @@ module Anthropic
         :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
 
       module MediaType
-        extend Anthropic::Enum
+        extend Anthropic::Internal::Type::Enum
 
         IMAGE_JPEG: :"image/jpeg"
         IMAGE_PNG: :"image/png"

@@ -8,7 +8,7 @@ module Anthropic
         output_tokens: Integer
       }
 
-    class Usage < Anthropic::BaseModel
+    class Usage < Anthropic::Internal::Type::BaseModel
       attr_accessor cache_creation_input_tokens: Integer?
 
       attr_accessor cache_read_input_tokens: Integer?

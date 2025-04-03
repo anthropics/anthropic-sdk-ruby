@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaAPIError < Anthropic::BaseModel
+    class BetaAPIError < Anthropic::Internal::Type::BaseModel
       # @!attribute message
       #
       #   @return [String]
@@ -19,7 +19,7 @@ module Anthropic
       #   #
       #   def initialize(message:, type: :api_error, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

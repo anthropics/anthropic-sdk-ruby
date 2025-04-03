@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaRawContentBlockStartEvent < Anthropic::BaseModel
+      class BetaRawContentBlockStartEvent < Anthropic::Internal::Type::BaseModel
         # @!attribute content_block
         #
         #   @return [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock]
@@ -27,11 +27,11 @@ module Anthropic
         #   #
         #   def initialize(content_block:, index:, type: :content_block_start, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
         # @see Anthropic::Models::Beta::BetaRawContentBlockStartEvent#content_block
         module ContentBlock
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           discriminator :type
 

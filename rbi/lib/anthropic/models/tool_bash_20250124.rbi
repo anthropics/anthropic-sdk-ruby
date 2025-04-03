@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ToolBash20250124 < Anthropic::BaseModel
+    class ToolBash20250124 < Anthropic::Internal::Type::BaseModel
       # Name of the tool.
       #
       #   This is how the tool will be called by the model and in tool_use blocks.
@@ -17,7 +17,7 @@ module Anthropic
 
       sig do
         params(
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash))
         )
           .void
       end
@@ -25,7 +25,7 @@ module Anthropic
 
       sig do
         params(
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash)),
           name: Symbol,
           type: Symbol
         )

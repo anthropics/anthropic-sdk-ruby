@@ -6,7 +6,7 @@ module Anthropic
       type message_batch_errored_result =
         { error: Anthropic::Models::ErrorResponse, type: :errored }
 
-      class MessageBatchErroredResult < Anthropic::BaseModel
+      class MessageBatchErroredResult < Anthropic::Internal::Type::BaseModel
         attr_accessor error: Anthropic::Models::ErrorResponse
 
         attr_accessor type: :errored
