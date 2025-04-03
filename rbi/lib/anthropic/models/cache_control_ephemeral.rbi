@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class CacheControlEphemeral < Anthropic::BaseModel
+    class CacheControlEphemeral < Anthropic::Internal::Type::BaseModel
       sig { returns(Symbol) }
       attr_accessor :type
 

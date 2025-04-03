@@ -48,7 +48,7 @@ class AnthropicTest < Minitest::Test
     requester = MockRequester.new(500, {}, {})
     anthropic.requester = requester
 
-    assert_raises(Anthropic::InternalServerError) do
+    assert_raises(Anthropic::Errors::InternalServerError) do
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
@@ -69,7 +69,7 @@ class AnthropicTest < Minitest::Test
     requester = MockRequester.new(500, {}, {})
     anthropic.requester = requester
 
-    assert_raises(Anthropic::InternalServerError) do
+    assert_raises(Anthropic::Errors::InternalServerError) do
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
@@ -85,7 +85,7 @@ class AnthropicTest < Minitest::Test
     requester = MockRequester.new(500, {}, {})
     anthropic.requester = requester
 
-    assert_raises(Anthropic::InternalServerError) do
+    assert_raises(Anthropic::Errors::InternalServerError) do
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
@@ -107,7 +107,7 @@ class AnthropicTest < Minitest::Test
     requester = MockRequester.new(500, {}, {})
     anthropic.requester = requester
 
-    assert_raises(Anthropic::InternalServerError) do
+    assert_raises(Anthropic::Errors::InternalServerError) do
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
@@ -129,7 +129,7 @@ class AnthropicTest < Minitest::Test
     requester = MockRequester.new(500, {"retry-after" => "1.3"}, {})
     anthropic.requester = requester
 
-    assert_raises(Anthropic::InternalServerError) do
+    assert_raises(Anthropic::Errors::InternalServerError) do
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
@@ -151,7 +151,7 @@ class AnthropicTest < Minitest::Test
     requester = MockRequester.new(500, {"retry-after" => (Time.now + 10).httpdate}, {})
     anthropic.requester = requester
 
-    assert_raises(Anthropic::InternalServerError) do
+    assert_raises(Anthropic::Errors::InternalServerError) do
       Thread.current.thread_variable_set(:time_now, Time.now)
       anthropic.messages.create(
         max_tokens: 1024,
@@ -175,7 +175,7 @@ class AnthropicTest < Minitest::Test
     requester = MockRequester.new(500, {"retry-after-ms" => "1300"}, {})
     anthropic.requester = requester
 
-    assert_raises(Anthropic::InternalServerError) do
+    assert_raises(Anthropic::Errors::InternalServerError) do
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
@@ -192,7 +192,7 @@ class AnthropicTest < Minitest::Test
     requester = MockRequester.new(500, {}, {})
     anthropic.requester = requester
 
-    assert_raises(Anthropic::InternalServerError) do
+    assert_raises(Anthropic::Errors::InternalServerError) do
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
@@ -209,7 +209,7 @@ class AnthropicTest < Minitest::Test
     requester = MockRequester.new(500, {}, {})
     anthropic.requester = requester
 
-    assert_raises(Anthropic::InternalServerError) do
+    assert_raises(Anthropic::Errors::InternalServerError) do
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
@@ -227,7 +227,7 @@ class AnthropicTest < Minitest::Test
     requester = MockRequester.new(500, {}, {})
     anthropic.requester = requester
 
-    assert_raises(Anthropic::InternalServerError) do
+    assert_raises(Anthropic::Errors::InternalServerError) do
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],

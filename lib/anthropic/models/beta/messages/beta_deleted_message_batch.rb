@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       module Messages
         # @see Anthropic::Resources::Beta::Messages::Batches#delete
-        class BetaDeletedMessageBatch < Anthropic::BaseModel
+        class BetaDeletedMessageBatch < Anthropic::Internal::Type::BaseModel
           # @!attribute id
           #   ID of the Message Batch.
           #
@@ -26,7 +26,7 @@ module Anthropic
           #   #
           #   def initialize(id:, type: :message_batch_deleted, **) = super
 
-          # def initialize: (Hash | Anthropic::BaseModel) -> void
+          # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
         end
       end
     end

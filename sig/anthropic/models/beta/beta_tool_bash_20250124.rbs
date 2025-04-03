@@ -10,7 +10,7 @@ module Anthropic
           cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?
         }
 
-      class BetaToolBash20250124 < Anthropic::BaseModel
+      class BetaToolBash20250124 < Anthropic::Internal::Type::BaseModel
         attr_accessor name: :bash
 
         attr_accessor type: :bash_20250124

@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaBase64PDFBlock < Anthropic::BaseModel
+      class BetaBase64PDFBlock < Anthropic::Internal::Type::BaseModel
         # @!attribute source
         #
         #   @return [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource]
@@ -48,11 +48,11 @@ module Anthropic
         #   #
         #   def initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
         # @see Anthropic::Models::Beta::BetaBase64PDFBlock#source
         module Source
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           discriminator :type
 

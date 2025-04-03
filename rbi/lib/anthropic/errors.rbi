@@ -143,32 +143,4 @@ module Anthropic
       HTTP_STATUS = T.let((500..), T::Range[Integer])
     end
   end
-
-  Error = Anthropic::Errors::Error
-
-  ConversionError = Anthropic::Errors::ConversionError
-
-  APIError = Anthropic::Errors::APIError
-
-  APIStatusError = Anthropic::Errors::APIStatusError
-
-  APIConnectionError = Anthropic::Errors::APIConnectionError
-
-  APITimeoutError = Anthropic::Errors::APITimeoutError
-
-  BadRequestError = Anthropic::Errors::BadRequestError
-
-  AuthenticationError = Anthropic::Errors::AuthenticationError
-
-  PermissionDeniedError = Anthropic::Errors::PermissionDeniedError
-
-  NotFoundError = Anthropic::Errors::NotFoundError
-
-  ConflictError = Anthropic::Errors::ConflictError
-
-  UnprocessableEntityError = Anthropic::Errors::UnprocessableEntityError
-
-  RateLimitError = Anthropic::Errors::RateLimitError
-
-  InternalServerError = Anthropic::Errors::InternalServerError
 end

@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Messages
-      class MessageBatchErroredResult < Anthropic::BaseModel
+      class MessageBatchErroredResult < Anthropic::Internal::Type::BaseModel
         # @!attribute error
         #
         #   @return [Anthropic::Models::ErrorResponse]
@@ -20,7 +20,7 @@ module Anthropic
         #   #
         #   def initialize(error:, type: :errored, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

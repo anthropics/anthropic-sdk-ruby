@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaMessageParam < Anthropic::BaseModel
+      class BetaMessageParam < Anthropic::Internal::Type::BaseModel
         # @!attribute content
         #
         #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam>]
@@ -20,11 +20,11 @@ module Anthropic
         #   #
         #   def initialize(content:, role:, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
         # @see Anthropic::Models::Beta::BetaMessageParam#content
         module Content
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           variant String
 
@@ -35,12 +35,12 @@ module Anthropic
           #   def self.variants; end
 
           BetaContentBlockParamArray =
-            Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlockParam }]
+            Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlockParam }]
         end
 
         # @see Anthropic::Models::Beta::BetaMessageParam#role
         module Role
-          extend Anthropic::Enum
+          extend Anthropic::Internal::Type::Enum
 
           USER = :user
           ASSISTANT = :assistant

@@ -10,7 +10,7 @@ module Anthropic
         type: :char_location
       }
 
-    class CitationCharLocation < Anthropic::BaseModel
+    class CitationCharLocation < Anthropic::Internal::Type::BaseModel
       attr_accessor cited_text: String
 
       attr_accessor document_index: Integer

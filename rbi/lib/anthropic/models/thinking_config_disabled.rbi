@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ThinkingConfigDisabled < Anthropic::BaseModel
+    class ThinkingConfigDisabled < Anthropic::Internal::Type::BaseModel
       sig { returns(Symbol) }
       attr_accessor :type
 

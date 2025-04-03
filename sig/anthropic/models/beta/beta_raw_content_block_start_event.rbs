@@ -10,7 +10,7 @@ module Anthropic
           type: :content_block_start
         }
 
-      class BetaRawContentBlockStartEvent < Anthropic::BaseModel
+      class BetaRawContentBlockStartEvent < Anthropic::Internal::Type::BaseModel
         attr_accessor content_block: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::content_block
 
         attr_accessor index: Integer
@@ -32,7 +32,7 @@ module Anthropic
           | Anthropic::Models::Beta::BetaRedactedThinkingBlock
 
         module ContentBlock
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock]
         end

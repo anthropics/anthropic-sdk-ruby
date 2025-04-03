@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class Message < Anthropic::BaseModel
+    class Message < Anthropic::Internal::Type::BaseModel
       # Unique object identifier.
       #
       #   The format and length of IDs may change over time.
@@ -112,7 +112,7 @@ module Anthropic
       sig { returns(Anthropic::Models::Usage) }
       attr_reader :usage
 
-      sig { params(usage: T.any(Anthropic::Models::Usage, Anthropic::Internal::Util::AnyHash)).void }
+      sig { params(usage: T.any(Anthropic::Models::Usage, Anthropic::Internal::AnyHash)).void }
       attr_writer :usage
 
       sig do
@@ -121,7 +121,7 @@ module Anthropic
           content: T::Array[
           T.any(
             Anthropic::Models::TextBlock,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::ToolUseBlock,
             Anthropic::Models::ThinkingBlock,
             Anthropic::Models::RedactedThinkingBlock
@@ -130,7 +130,7 @@ module Anthropic
           model: T.any(Anthropic::Models::Model::OrSymbol, String),
           stop_reason: T.nilable(Anthropic::Models::StopReason::OrSymbol),
           stop_sequence: T.nilable(String),
-          usage: T.any(Anthropic::Models::Usage, Anthropic::Internal::Util::AnyHash),
+          usage: T.any(Anthropic::Models::Usage, Anthropic::Internal::AnyHash),
           role: Symbol,
           type: Symbol
         )

@@ -12,7 +12,7 @@ module Anthropic
         | Anthropic::Models::Beta::BetaRawContentBlockStopEvent
 
       module BetaRawMessageStreamEvent
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> [Anthropic::Models::Beta::BetaRawMessageStartEvent, Anthropic::Models::Beta::BetaRawMessageDeltaEvent, Anthropic::Models::Beta::BetaRawMessageStopEvent, Anthropic::Models::Beta::BetaRawContentBlockStartEvent, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Models::Beta::BetaRawContentBlockStopEvent]
       end

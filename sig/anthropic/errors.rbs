@@ -98,32 +98,4 @@ module Anthropic
       HTTP_STATUS: Range[Integer]
     end
   end
-
-  class Error = Anthropic::Errors::Error
-
-  class ConversionError = Anthropic::Errors::ConversionError
-
-  class APIError = Anthropic::Errors::APIError
-
-  class APIStatusError = Anthropic::Errors::APIStatusError
-
-  class APIConnectionError = Anthropic::Errors::APIConnectionError
-
-  class APITimeoutError = Anthropic::Errors::APITimeoutError
-
-  class BadRequestError = Anthropic::Errors::BadRequestError
-
-  class AuthenticationError = Anthropic::Errors::AuthenticationError
-
-  class PermissionDeniedError = Anthropic::Errors::PermissionDeniedError
-
-  class NotFoundError = Anthropic::Errors::NotFoundError
-
-  class ConflictError = Anthropic::Errors::ConflictError
-
-  class UnprocessableEntityError = Anthropic::Errors::UnprocessableEntityError
-
-  class RateLimitError = Anthropic::Errors::RateLimitError
-
-  class InternalServerError = Anthropic::Errors::InternalServerError
 end

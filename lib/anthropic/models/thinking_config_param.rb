@@ -12,7 +12,7 @@ module Anthropic
     #   [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
     #   for details.
     module ThinkingConfigParam
-      extend Anthropic::Union
+      extend Anthropic::Internal::Type::Union
 
       discriminator :type
 

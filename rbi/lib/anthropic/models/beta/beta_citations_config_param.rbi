@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaCitationsConfigParam < Anthropic::BaseModel
+      class BetaCitationsConfigParam < Anthropic::Internal::Type::BaseModel
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :enabled
 

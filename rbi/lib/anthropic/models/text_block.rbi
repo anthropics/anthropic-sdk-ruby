@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class TextBlock < Anthropic::BaseModel
+    class TextBlock < Anthropic::Internal::Type::BaseModel
       # Citations supporting the text block.
       #
       #   The type of citation returned will depend on the type of document being cited.
@@ -35,7 +35,7 @@ module Anthropic
             T::Array[
             T.any(
               Anthropic::Models::CitationCharLocation,
-              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Internal::AnyHash,
               Anthropic::Models::CitationPageLocation,
               Anthropic::Models::CitationContentBlockLocation
             )

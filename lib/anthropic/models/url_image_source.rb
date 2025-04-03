@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class URLImageSource < Anthropic::BaseModel
+    class URLImageSource < Anthropic::Internal::Type::BaseModel
       # @!attribute type
       #
       #   @return [Symbol, :url]
@@ -19,7 +19,7 @@ module Anthropic
       #   #
       #   def initialize(url:, type: :url, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

@@ -2,7 +2,7 @@ module Anthropic
   module Models
     type beta_overloaded_error = { message: String, type: :overloaded_error }
 
-    class BetaOverloadedError < Anthropic::BaseModel
+    class BetaOverloadedError < Anthropic::Internal::Type::BaseModel
       attr_accessor message: String
 
       attr_accessor type: :overloaded_error

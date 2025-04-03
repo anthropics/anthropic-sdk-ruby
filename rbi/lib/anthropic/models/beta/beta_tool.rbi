@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaTool < Anthropic::BaseModel
+      class BetaTool < Anthropic::Internal::Type::BaseModel
         # [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
         #
         #   This defines the shape of the `input` that your tool accepts and that the model
@@ -12,9 +12,7 @@ module Anthropic
         attr_reader :input_schema
 
         sig do
-          params(
-            input_schema: T.any(Anthropic::Models::Beta::BetaTool::InputSchema, Anthropic::Internal::Util::AnyHash)
-          )
+          params(input_schema: T.any(Anthropic::Models::Beta::BetaTool::InputSchema, Anthropic::Internal::AnyHash))
             .void
         end
         attr_writer :input_schema
@@ -30,7 +28,7 @@ module Anthropic
 
         sig do
           params(
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash))
           )
             .void
         end
@@ -53,9 +51,9 @@ module Anthropic
 
         sig do
           params(
-            input_schema: T.any(Anthropic::Models::Beta::BetaTool::InputSchema, Anthropic::Internal::Util::AnyHash),
+            input_schema: T.any(Anthropic::Models::Beta::BetaTool::InputSchema, Anthropic::Internal::AnyHash),
             name: String,
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash)),
             description: String,
             type: T.nilable(Anthropic::Models::Beta::BetaTool::Type::OrSymbol)
           )
@@ -79,7 +77,7 @@ module Anthropic
         def to_hash
         end
 
-        class InputSchema < Anthropic::BaseModel
+        class InputSchema < Anthropic::Internal::Type::BaseModel
           sig { returns(Symbol) }
           attr_accessor :type
 
@@ -100,7 +98,7 @@ module Anthropic
         end
 
         module Type
-          extend Anthropic::Enum
+          extend Anthropic::Internal::Type::Enum
 
           TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Beta::BetaTool::Type) }
           OrSymbol = T.type_alias { T.any(Symbol, String, Anthropic::Models::Beta::BetaTool::Type::TaggedSymbol) }

@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class TextBlockParam < Anthropic::BaseModel
+    class TextBlockParam < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :text
 
@@ -14,7 +14,7 @@ module Anthropic
 
       sig do
         params(
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash))
         )
           .void
       end
@@ -38,12 +38,12 @@ module Anthropic
       sig do
         params(
           text: String,
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash)),
           citations: T.nilable(
             T::Array[
             T.any(
               Anthropic::Models::CitationCharLocationParam,
-              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Internal::AnyHash,
               Anthropic::Models::CitationPageLocationParam,
               Anthropic::Models::CitationContentBlockLocationParam
             )

@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class TextDelta < Anthropic::BaseModel
+    class TextDelta < Anthropic::Internal::Type::BaseModel
       # @!attribute text
       #
       #   @return [String]
@@ -19,7 +19,7 @@ module Anthropic
       #   #
       #   def initialize(text:, type: :text_delta, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

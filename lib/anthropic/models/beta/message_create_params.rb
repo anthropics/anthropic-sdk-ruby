@@ -6,7 +6,7 @@ module Anthropic
       # @see Anthropic::Resources::Beta::Messages#create
       #
       # @see Anthropic::Resources::Beta::Messages#stream_raw
-      class MessageCreateParams < Anthropic::BaseModel
+      class MessageCreateParams < Anthropic::Internal::Type::BaseModel
         # @!parse
         #   extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
@@ -112,7 +112,7 @@ module Anthropic
         #     messages in the Messages API.
         #
         #   @return [Array<Anthropic::Models::Beta::BetaMessageParam>]
-        required :messages, -> { Anthropic::ArrayOf[Anthropic::Models::Beta::BetaMessageParam] }
+        required :messages, -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Models::Beta::BetaMessageParam] }
 
         # @!attribute model
         #   The model that will complete your prompt.\n\nSee
@@ -144,7 +144,7 @@ module Anthropic
         #     and the response `stop_sequence` value will contain the matched stop sequence.
         #
         #   @return [Array<String>, nil]
-        optional :stop_sequences, Anthropic::ArrayOf[String]
+        optional :stop_sequences, Anthropic::Internal::Type::ArrayOf[String]
 
         # @!parse
         #   # @return [Array<String>]
@@ -282,7 +282,7 @@ module Anthropic
         #     See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
         #
         #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>, nil]
-        optional :tools, -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaToolUnion] }
+        optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::Beta::BetaToolUnion] }
 
         # @!parse
         #   # @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>]
@@ -327,7 +327,7 @@ module Anthropic
         #
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas,
-                 -> { Anthropic::ArrayOf[union: Anthropic::Models::AnthropicBeta] },
+                 -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::AnthropicBeta] },
                  api_name: :"anthropic-beta"
 
         # @!parse
@@ -370,7 +370,7 @@ module Anthropic
         #     super
         #   end
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
         # System prompt.
         #
@@ -378,7 +378,7 @@ module Anthropic
         #   as specifying a particular goal or role. See our
         #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
         module System
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           variant String
 
@@ -388,7 +388,8 @@ module Anthropic
           #   # @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam>)]
           #   def self.variants; end
 
-          BetaTextBlockParamArray = Anthropic::ArrayOf[-> { Anthropic::Models::Beta::BetaTextBlockParam }]
+          BetaTextBlockParamArray =
+            Anthropic::Internal::Type::ArrayOf[-> { Anthropic::Models::Beta::BetaTextBlockParam }]
         end
       end
     end

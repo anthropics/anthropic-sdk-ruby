@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     # @see Anthropic::Resources::Models#retrieve
-    class ModelRetrieveParams < Anthropic::BaseModel
+    class ModelRetrieveParams < Anthropic::Internal::Type::BaseModel
       # @!parse
       #   extend Anthropic::Internal::Type::RequestParameters::Converter
       include Anthropic::Internal::Type::RequestParameters
@@ -13,7 +13,7 @@ module Anthropic
       #   #
       #   def initialize(request_options: {}, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

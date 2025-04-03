@@ -13,7 +13,7 @@ module Anthropic
         | Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
 
       module BetaContentBlockParam
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> [Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam]
       end

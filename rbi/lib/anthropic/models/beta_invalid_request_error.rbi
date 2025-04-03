@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaInvalidRequestError < Anthropic::BaseModel
+    class BetaInvalidRequestError < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :message
 

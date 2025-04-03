@@ -2,7 +2,7 @@ module Anthropic
   module Models
     type cache_control_ephemeral = { type: :ephemeral }
 
-    class CacheControlEphemeral < Anthropic::BaseModel
+    class CacheControlEphemeral < Anthropic::Internal::Type::BaseModel
       attr_accessor type: :ephemeral
 
       def initialize: (?type: :ephemeral) -> void

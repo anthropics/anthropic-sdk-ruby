@@ -7,7 +7,7 @@ module Anthropic
       | Anthropic::Models::ToolChoiceNone
 
     module ToolChoice
-      extend Anthropic::Union
+      extend Anthropic::Internal::Type::Union
 
       def self?.variants: -> [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
     end

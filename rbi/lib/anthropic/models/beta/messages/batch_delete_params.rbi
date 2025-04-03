@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Beta
       module Messages
-        class BatchDeleteParams < Anthropic::BaseModel
+        class BatchDeleteParams < Anthropic::Internal::Type::BaseModel
           extend Anthropic::Internal::Type::RequestParameters::Converter
           include Anthropic::Internal::Type::RequestParameters
 
@@ -18,7 +18,7 @@ module Anthropic
           sig do
             params(
               betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
-              request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash)
+              request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash)
             )
               .returns(T.attached_class)
           end

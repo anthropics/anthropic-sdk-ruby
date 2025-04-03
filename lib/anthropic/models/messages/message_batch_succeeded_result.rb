@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Messages
-      class MessageBatchSucceededResult < Anthropic::BaseModel
+      class MessageBatchSucceededResult < Anthropic::Internal::Type::BaseModel
         # @!attribute message
         #
         #   @return [Anthropic::Models::Message]
@@ -20,7 +20,7 @@ module Anthropic
         #   #
         #   def initialize(message:, type: :succeeded, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class MessageParam < Anthropic::BaseModel
+    class MessageParam < Anthropic::Internal::Type::BaseModel
       # @!attribute content
       #
       #   @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam>]
@@ -19,11 +19,11 @@ module Anthropic
       #   #
       #   def initialize(content:, role:, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
       # @see Anthropic::Models::MessageParam#content
       module Content
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         variant String
 
@@ -33,12 +33,13 @@ module Anthropic
         #   # @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam>)]
         #   def self.variants; end
 
-        ContentBlockParamArray = Anthropic::ArrayOf[union: -> { Anthropic::Models::ContentBlockParam }]
+        ContentBlockParamArray =
+          Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::Models::ContentBlockParam }]
       end
 
       # @see Anthropic::Models::MessageParam#role
       module Role
-        extend Anthropic::Enum
+        extend Anthropic::Internal::Type::Enum
 
         USER = :user
         ASSISTANT = :assistant

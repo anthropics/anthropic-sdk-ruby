@@ -3,12 +3,12 @@
 module Anthropic
   module Models
     module Messages
-      class BatchRetrieveParams < Anthropic::BaseModel
+      class BatchRetrieveParams < Anthropic::Internal::Type::BaseModel
         extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
         sig do
-          params(request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash))
+          params(request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
             .returns(T.attached_class)
         end
         def self.new(request_options: {})

@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class NotFoundError < Anthropic::BaseModel
+    class NotFoundError < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :message
 

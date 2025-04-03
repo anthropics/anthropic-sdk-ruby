@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaAPIError < Anthropic::BaseModel
+    class BetaAPIError < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :message
 

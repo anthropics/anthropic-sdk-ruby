@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaTextDelta < Anthropic::BaseModel
+      class BetaTextDelta < Anthropic::Internal::Type::BaseModel
         sig { returns(String) }
         attr_accessor :text
 

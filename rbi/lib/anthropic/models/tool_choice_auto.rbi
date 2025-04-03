@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ToolChoiceAuto < Anthropic::BaseModel
+    class ToolChoiceAuto < Anthropic::Internal::Type::BaseModel
       sig { returns(Symbol) }
       attr_accessor :type
 

@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class URLPDFSource < Anthropic::BaseModel
+    class URLPDFSource < Anthropic::Internal::Type::BaseModel
       sig { returns(Symbol) }
       attr_accessor :type
 

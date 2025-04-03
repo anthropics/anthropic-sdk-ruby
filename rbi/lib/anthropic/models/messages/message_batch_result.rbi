@@ -9,7 +9,7 @@ module Anthropic
       #   processing failed, or the reason why processing was not attempted, such as
       #   cancellation or expiration.
       module MessageBatchResult
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         sig do
           override

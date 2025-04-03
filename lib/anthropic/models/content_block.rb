@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module ContentBlock
-      extend Anthropic::Union
+      extend Anthropic::Internal::Type::Union
 
       discriminator :type
 

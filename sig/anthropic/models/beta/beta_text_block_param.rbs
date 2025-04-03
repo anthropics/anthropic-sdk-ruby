@@ -11,7 +11,7 @@ module Anthropic
           citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?
         }
 
-      class BetaTextBlockParam < Anthropic::BaseModel
+      class BetaTextBlockParam < Anthropic::Internal::Type::BaseModel
         attr_accessor text: String
 
         attr_accessor type: :text

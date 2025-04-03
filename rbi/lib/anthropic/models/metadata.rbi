@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class Metadata < Anthropic::BaseModel
+    class Metadata < Anthropic::Internal::Type::BaseModel
       # An external identifier for the user who is associated with the request.
       #
       #   This should be a uuid, hash value, or other opaque identifier. Anthropic may use

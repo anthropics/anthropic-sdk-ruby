@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ToolChoiceTool < Anthropic::BaseModel
+    class ToolChoiceTool < Anthropic::Internal::Type::BaseModel
       # @!attribute name
       #   The name of the tool to use.
       #
@@ -21,7 +21,7 @@ module Anthropic
       #     use.
       #
       #   @return [Boolean, nil]
-      optional :disable_parallel_tool_use, Anthropic::BooleanModel
+      optional :disable_parallel_tool_use, Anthropic::Internal::Type::BooleanModel
 
       # @!parse
       #   # @return [Boolean]
@@ -36,7 +36,7 @@ module Anthropic
       #   #
       #   def initialize(name:, disable_parallel_tool_use: nil, type: :tool, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

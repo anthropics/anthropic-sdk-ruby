@@ -48,7 +48,9 @@ module Anthropic
         #
         # @return [Boolean]
         def ==(other)
-          other.is_a?(Anthropic::HashOf) && other.nilable? == nilable? && other.item_type == item_type
+          # rubocop:disable Layout/LineLength
+          other.is_a?(Anthropic::Internal::Type::HashOf) && other.nilable? == nilable? && other.item_type == item_type
+          # rubocop:enable Layout/LineLength
         end
 
         # @api private

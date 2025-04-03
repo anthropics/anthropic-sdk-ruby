@@ -11,7 +11,7 @@ module Anthropic
           }
           & Anthropic::Internal::Type::request_parameters
 
-        class BatchListParams < Anthropic::BaseModel
+        class BatchListParams < Anthropic::Internal::Type::BaseModel
           extend Anthropic::Internal::Type::RequestParameters::Converter
           include Anthropic::Internal::Type::RequestParameters
 

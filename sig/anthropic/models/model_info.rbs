@@ -3,7 +3,7 @@ module Anthropic
     type model_info =
       { id: String, created_at: Time, display_name: String, type: :model }
 
-    class ModelInfo < Anthropic::BaseModel
+    class ModelInfo < Anthropic::Internal::Type::BaseModel
       attr_accessor id: String
 
       attr_accessor created_at: Time

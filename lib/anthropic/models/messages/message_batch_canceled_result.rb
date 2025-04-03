@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Messages
-      class MessageBatchCanceledResult < Anthropic::BaseModel
+      class MessageBatchCanceledResult < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
         #   @return [Symbol, :canceled]
@@ -14,7 +14,7 @@ module Anthropic
         #   #
         #   def initialize(type: :canceled, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

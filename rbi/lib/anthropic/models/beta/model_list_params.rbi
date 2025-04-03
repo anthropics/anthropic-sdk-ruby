@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class ModelListParams < Anthropic::BaseModel
+      class ModelListParams < Anthropic::Internal::Type::BaseModel
         extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
@@ -37,7 +37,7 @@ module Anthropic
             after_id: String,
             before_id: String,
             limit: Integer,
-            request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash)
+            request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash)
           )
             .returns(T.attached_class)
         end

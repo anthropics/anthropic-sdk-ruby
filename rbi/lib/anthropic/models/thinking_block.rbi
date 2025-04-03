@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ThinkingBlock < Anthropic::BaseModel
+    class ThinkingBlock < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :signature
 

@@ -2,7 +2,7 @@ module Anthropic
   module Models
     type message_tokens_count = { input_tokens: Integer }
 
-    class MessageTokensCount < Anthropic::BaseModel
+    class MessageTokensCount < Anthropic::Internal::Type::BaseModel
       attr_accessor input_tokens: Integer
 
       def initialize: (input_tokens: Integer) -> void

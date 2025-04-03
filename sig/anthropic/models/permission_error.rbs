@@ -2,7 +2,7 @@ module Anthropic
   module Models
     type permission_error = { message: String, type: :permission_error }
 
-    class PermissionError < Anthropic::BaseModel
+    class PermissionError < Anthropic::Internal::Type::BaseModel
       attr_accessor message: String
 
       attr_accessor type: :permission_error

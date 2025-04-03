@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class MessageCountTokensParams < Anthropic::BaseModel
+    class MessageCountTokensParams < Anthropic::Internal::Type::BaseModel
       extend Anthropic::Internal::Type::RequestParameters::Converter
       include Anthropic::Internal::Type::RequestParameters
 
@@ -111,7 +111,7 @@ module Anthropic
 
       sig do
         params(
-          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::Util::AnyHash)])
+          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::AnyHash)])
         )
           .void
       end
@@ -137,7 +137,7 @@ module Anthropic
         params(
           thinking: T.any(
             Anthropic::Models::ThinkingConfigEnabled,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::ThinkingConfigDisabled
           )
         )
@@ -165,7 +165,7 @@ module Anthropic
         params(
           tool_choice: T.any(
             Anthropic::Models::ToolChoiceAuto,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::ToolChoiceAny,
             Anthropic::Models::ToolChoiceTool,
             Anthropic::Models::ToolChoiceNone
@@ -264,7 +264,7 @@ module Anthropic
           tools: T::Array[
           T.any(
             Anthropic::Models::Tool,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::ToolBash20250124,
             Anthropic::Models::ToolTextEditor20250124
           )
@@ -276,17 +276,17 @@ module Anthropic
 
       sig do
         params(
-          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Internal::Util::AnyHash)],
+          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Internal::AnyHash)],
           model: T.any(Anthropic::Models::Model::OrSymbol, String),
-          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::Util::AnyHash)]),
+          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::AnyHash)]),
           thinking: T.any(
             Anthropic::Models::ThinkingConfigEnabled,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::ThinkingConfigDisabled
           ),
           tool_choice: T.any(
             Anthropic::Models::ToolChoiceAuto,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::ToolChoiceAny,
             Anthropic::Models::ToolChoiceTool,
             Anthropic::Models::ToolChoiceNone
@@ -294,12 +294,12 @@ module Anthropic
           tools: T::Array[
           T.any(
             Anthropic::Models::Tool,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::ToolBash20250124,
             Anthropic::Models::ToolTextEditor20250124
           )
           ],
-          request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash)
+          request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash)
         )
           .returns(T.attached_class)
       end
@@ -348,14 +348,17 @@ module Anthropic
       #   as specifying a particular goal or role. See our
       #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
       module System
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         sig { override.returns([String, T::Array[Anthropic::Models::TextBlockParam]]) }
         def self.variants
         end
 
         TextBlockParamArray =
-          T.let(Anthropic::ArrayOf[Anthropic::Models::TextBlockParam], Anthropic::Internal::Type::Converter)
+          T.let(
+            Anthropic::Internal::Type::ArrayOf[Anthropic::Models::TextBlockParam],
+            Anthropic::Internal::Type::Converter
+          )
       end
     end
   end

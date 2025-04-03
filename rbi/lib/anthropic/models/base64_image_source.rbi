@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class Base64ImageSource < Anthropic::BaseModel
+    class Base64ImageSource < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :data
 
@@ -29,7 +29,7 @@ module Anthropic
       end
 
       module MediaType
-        extend Anthropic::Enum
+        extend Anthropic::Internal::Type::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Base64ImageSource::MediaType) }
         OrSymbol =

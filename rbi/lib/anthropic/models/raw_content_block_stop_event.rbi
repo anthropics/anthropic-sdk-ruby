@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class RawContentBlockStopEvent < Anthropic::BaseModel
+    class RawContentBlockStopEvent < Anthropic::Internal::Type::BaseModel
       sig { returns(Integer) }
       attr_accessor :index
 

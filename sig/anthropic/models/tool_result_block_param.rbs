@@ -9,7 +9,7 @@ module Anthropic
         is_error: bool
       }
 
-    class ToolResultBlockParam < Anthropic::BaseModel
+    class ToolResultBlockParam < Anthropic::Internal::Type::BaseModel
       attr_accessor tool_use_id: String
 
       attr_accessor type: :tool_result
@@ -41,13 +41,13 @@ module Anthropic
         | ::Array[Anthropic::Models::ToolResultBlockParam::Content::content]
 
       module Content
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         type content =
           Anthropic::Models::TextBlockParam | Anthropic::Models::ImageBlockParam
 
         module Content
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> [Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam]
         end

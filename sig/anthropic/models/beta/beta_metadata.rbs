@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       type beta_metadata = { user_id: String? }
 
-      class BetaMetadata < Anthropic::BaseModel
+      class BetaMetadata < Anthropic::Internal::Type::BaseModel
         attr_accessor user_id: String?
 
         def initialize: (?user_id: String?) -> void

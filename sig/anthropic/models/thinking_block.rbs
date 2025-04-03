@@ -3,7 +3,7 @@ module Anthropic
     type thinking_block =
       { signature: String, thinking: String, type: :thinking }
 
-    class ThinkingBlock < Anthropic::BaseModel
+    class ThinkingBlock < Anthropic::Internal::Type::BaseModel
       attr_accessor signature: String
 
       attr_accessor thinking: String

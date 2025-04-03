@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaBase64PDFSource < Anthropic::BaseModel
+      class BetaBase64PDFSource < Anthropic::Internal::Type::BaseModel
         # @!attribute data
         #
         #   @return [String]
@@ -26,7 +26,7 @@ module Anthropic
         #   #
         #   def initialize(data:, media_type: :"application/pdf", type: :base64, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     # @see Anthropic::Resources::Messages#count_tokens
-    class MessageCountTokensParams < Anthropic::BaseModel
+    class MessageCountTokensParams < Anthropic::Internal::Type::BaseModel
       # @!parse
       #   extend Anthropic::Internal::Type::RequestParameters::Converter
       include Anthropic::Internal::Type::RequestParameters
@@ -97,7 +97,7 @@ module Anthropic
       #     messages in the Messages API.
       #
       #   @return [Array<Anthropic::Models::MessageParam>]
-      required :messages, -> { Anthropic::ArrayOf[Anthropic::Models::MessageParam] }
+      required :messages, -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Models::MessageParam] }
 
       # @!attribute model
       #   The model that will complete your prompt.\n\nSee
@@ -222,7 +222,8 @@ module Anthropic
       #     See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
       #
       #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>, nil]
-      optional :tools, -> { Anthropic::ArrayOf[union: Anthropic::Models::MessageCountTokensTool] }
+      optional :tools,
+               -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::MessageCountTokensTool] }
 
       # @!parse
       #   # @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>]
@@ -239,7 +240,7 @@ module Anthropic
       #   #
       #   def initialize(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {}, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
       # System prompt.
       #
@@ -247,7 +248,7 @@ module Anthropic
       #   as specifying a particular goal or role. See our
       #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
       module System
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         variant String
 
@@ -257,7 +258,7 @@ module Anthropic
         #   # @return [Array(String, Array<Anthropic::Models::TextBlockParam>)]
         #   def self.variants; end
 
-        TextBlockParamArray = Anthropic::ArrayOf[-> { Anthropic::Models::TextBlockParam }]
+        TextBlockParamArray = Anthropic::Internal::Type::ArrayOf[-> { Anthropic::Models::TextBlockParam }]
       end
     end
   end

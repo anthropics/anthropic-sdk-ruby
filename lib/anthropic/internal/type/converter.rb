@@ -31,10 +31,10 @@ module Anthropic
         def dump(value)
           case value
           in Array
-            value.map { Anthropic::Unknown.dump(_1) }
+            value.map { Anthropic::Internal::Type::Unknown.dump(_1) }
           in Hash
-            value.transform_values { Anthropic::Unknown.dump(_1) }
-          in Anthropic::BaseModel
+            value.transform_values { Anthropic::Internal::Type::Unknown.dump(_1) }
+          in Anthropic::Internal::Type::BaseModel
             value.class.dump(value)
           else
             value
@@ -64,7 +64,7 @@ module Anthropic
             in Hash
               type_info(spec.slice(:const, :enum, :union).first&.last)
             in true | false
-              -> { Anthropic::BooleanModel }
+              -> { Anthropic::Internal::Type::BooleanModel }
             in Anthropic::Internal::Type::Converter | Class | Symbol
               -> { spec }
             in NilClass | Integer | Float
@@ -209,7 +209,7 @@ module Anthropic
           #
           # @return [Object]
           def dump(target, value)
-            target.is_a?(Anthropic::Internal::Type::Converter) ? target.dump(value) : Anthropic::Unknown.dump(value)
+            target.is_a?(Anthropic::Internal::Type::Converter) ? target.dump(value) : Anthropic::Internal::Type::Unknown.dump(value)
           end
         end
       end

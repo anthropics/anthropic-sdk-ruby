@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ContentBlockSource < Anthropic::BaseModel
+    class ContentBlockSource < Anthropic::Internal::Type::BaseModel
       sig do
         returns(
           T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)])
@@ -17,13 +17,7 @@ module Anthropic
         params(
           content: T.any(
             String,
-            T::Array[
-            T.any(
-              Anthropic::Models::TextBlockParam,
-              Anthropic::Internal::Util::AnyHash,
-              Anthropic::Models::ImageBlockParam
-            )
-            ]
+            T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::AnyHash, Anthropic::Models::ImageBlockParam)]
           ),
           type: Symbol
         )
@@ -45,7 +39,7 @@ module Anthropic
       end
 
       module Content
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         sig do
           override
@@ -56,7 +50,7 @@ module Anthropic
 
         ContentBlockSourceContentArray =
           T.let(
-            Anthropic::ArrayOf[union: Anthropic::Models::ContentBlockSourceContent],
+            Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::ContentBlockSourceContent],
             Anthropic::Internal::Type::Converter
           )
       end

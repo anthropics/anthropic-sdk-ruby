@@ -21,7 +21,7 @@ module Anthropic
         # @param other [Object]
         #
         # @return [Boolean]
-        def self.==(other) = other.is_a?(Class) && other <= Anthropic::Unknown
+        def self.==(other) = other.is_a?(Class) && other <= Anthropic::Internal::Type::Unknown
 
         class << self
           # @api private

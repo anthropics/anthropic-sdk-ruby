@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module AnthropicBeta
-      extend Anthropic::Union
+      extend Anthropic::Internal::Type::Union
 
       sig { override.returns([String, Anthropic::Models::AnthropicBeta::OrSymbol]) }
       def self.variants

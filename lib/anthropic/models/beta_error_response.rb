@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaErrorResponse < Anthropic::BaseModel
+    class BetaErrorResponse < Anthropic::Internal::Type::BaseModel
       # @!attribute error
       #
       #   @return [Anthropic::Models::BetaInvalidRequestError, Anthropic::Models::BetaAuthenticationError, Anthropic::Models::BetaBillingError, Anthropic::Models::BetaPermissionError, Anthropic::Models::BetaNotFoundError, Anthropic::Models::BetaRateLimitError, Anthropic::Models::BetaGatewayTimeoutError, Anthropic::Models::BetaAPIError, Anthropic::Models::BetaOverloadedError]
@@ -19,7 +19,7 @@ module Anthropic
       #   #
       #   def initialize(error:, type: :error, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

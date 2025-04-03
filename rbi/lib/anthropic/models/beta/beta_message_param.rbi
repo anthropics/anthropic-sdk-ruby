@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaMessageParam < Anthropic::BaseModel
+      class BetaMessageParam < Anthropic::Internal::Type::BaseModel
         sig do
           returns(
             T.any(
@@ -34,7 +34,7 @@ module Anthropic
               T::Array[
               T.any(
                 Anthropic::Models::Beta::BetaTextBlockParam,
-                Anthropic::Internal::Util::AnyHash,
+                Anthropic::Internal::AnyHash,
                 Anthropic::Models::Beta::BetaImageBlockParam,
                 Anthropic::Models::Beta::BetaToolUseBlockParam,
                 Anthropic::Models::Beta::BetaToolResultBlockParam,
@@ -77,7 +77,7 @@ module Anthropic
         end
 
         module Content
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           sig do
             override
@@ -103,13 +103,13 @@ module Anthropic
 
           BetaContentBlockParamArray =
             T.let(
-              Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlockParam],
+              Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlockParam],
               Anthropic::Internal::Type::Converter
             )
         end
 
         module Role
-          extend Anthropic::Enum
+          extend Anthropic::Internal::Type::Enum
 
           TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Beta::BetaMessageParam::Role) }
           OrSymbol =

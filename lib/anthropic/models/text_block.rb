@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class TextBlock < Anthropic::BaseModel
+    class TextBlock < Anthropic::Internal::Type::BaseModel
       # @!attribute citations
       #   Citations supporting the text block.
       #
@@ -11,7 +11,9 @@ module Anthropic
       #     and content document results in `content_block_location`.
       #
       #   @return [Array<Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation>, nil]
-      required :citations, -> { Anthropic::ArrayOf[union: Anthropic::Models::TextCitation] }, nil?: true
+      required :citations,
+               -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::TextCitation] },
+               nil?: true
 
       # @!attribute text
       #
@@ -30,7 +32,7 @@ module Anthropic
       #   #
       #   def initialize(citations:, text:, type: :text, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

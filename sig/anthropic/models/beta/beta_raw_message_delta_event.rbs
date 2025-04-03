@@ -10,7 +10,7 @@ module Anthropic
           usage: Anthropic::Models::Beta::BetaMessageDeltaUsage
         }
 
-      class BetaRawMessageDeltaEvent < Anthropic::BaseModel
+      class BetaRawMessageDeltaEvent < Anthropic::Internal::Type::BaseModel
         attr_accessor delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta
 
         attr_accessor type: :message_delta
@@ -31,7 +31,7 @@ module Anthropic
             stop_sequence: String?
           }
 
-        class Delta < Anthropic::BaseModel
+        class Delta < Anthropic::Internal::Type::BaseModel
           attr_accessor stop_reason: Anthropic::Models::Beta::beta_stop_reason?
 
           attr_accessor stop_sequence: String?

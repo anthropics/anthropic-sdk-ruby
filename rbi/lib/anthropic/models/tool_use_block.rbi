@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ToolUseBlock < Anthropic::BaseModel
+    class ToolUseBlock < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :id
 

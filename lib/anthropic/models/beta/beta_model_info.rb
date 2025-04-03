@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Beta
       # @see Anthropic::Resources::Beta::Models#retrieve
-      class BetaModelInfo < Anthropic::BaseModel
+      class BetaModelInfo < Anthropic::Internal::Type::BaseModel
         # @!attribute id
         #   Unique model identifier.
         #
@@ -40,7 +40,7 @@ module Anthropic
         #   #
         #   def initialize(id:, created_at:, display_name:, type: :model, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

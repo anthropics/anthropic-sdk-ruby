@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaBillingError < Anthropic::BaseModel
+    class BetaBillingError < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :message
 

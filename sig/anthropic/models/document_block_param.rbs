@@ -10,7 +10,7 @@ module Anthropic
         title: String?
       }
 
-    class DocumentBlockParam < Anthropic::BaseModel
+    class DocumentBlockParam < Anthropic::Internal::Type::BaseModel
       attr_accessor source: Anthropic::Models::DocumentBlockParam::source
 
       attr_accessor type: :document
@@ -45,7 +45,7 @@ module Anthropic
         | Anthropic::Models::URLPDFSource
 
       module Source
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
       end

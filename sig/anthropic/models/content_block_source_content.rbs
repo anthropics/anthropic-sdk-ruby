@@ -4,7 +4,7 @@ module Anthropic
       Anthropic::Models::TextBlockParam | Anthropic::Models::ImageBlockParam
 
     module ContentBlockSourceContent
-      extend Anthropic::Union
+      extend Anthropic::Internal::Type::Union
 
       def self?.variants: -> [Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam]
     end

@@ -7,7 +7,7 @@ module Anthropic
         cache_control: Anthropic::Models::CacheControlEphemeral?
       }
 
-    class ToolTextEditor20250124 < Anthropic::BaseModel
+    class ToolTextEditor20250124 < Anthropic::Internal::Type::BaseModel
       attr_accessor name: :str_replace_editor
 
       attr_accessor type: :text_editor_20250124

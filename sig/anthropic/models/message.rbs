@@ -12,7 +12,7 @@ module Anthropic
         usage: Anthropic::Models::Usage
       }
 
-    class Message < Anthropic::BaseModel
+    class Message < Anthropic::Internal::Type::BaseModel
       attr_accessor id: String
 
       attr_accessor content: ::Array[Anthropic::Models::content_block]

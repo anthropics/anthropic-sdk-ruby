@@ -9,7 +9,7 @@ module Anthropic
       | Anthropic::Models::RawContentBlockStopEvent
 
     module RawMessageStreamEvent
-      extend Anthropic::Union
+      extend Anthropic::Internal::Type::Union
 
       def self?.variants: -> [Anthropic::Models::RawMessageStartEvent, Anthropic::Models::RawMessageDeltaEvent, Anthropic::Models::RawMessageStopEvent, Anthropic::Models::RawContentBlockStartEvent, Anthropic::Models::RawContentBlockDeltaEvent, Anthropic::Models::RawContentBlockStopEvent]
     end

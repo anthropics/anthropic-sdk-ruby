@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaThinkingConfigEnabled < Anthropic::BaseModel
+      class BetaThinkingConfigEnabled < Anthropic::Internal::Type::BaseModel
         # Determines how many tokens Claude can use for its internal reasoning process.
         #   Larger budgets can enable more thorough analysis for complex problems, improving
         #   response quality.

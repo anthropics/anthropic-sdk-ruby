@@ -5,7 +5,7 @@ module Anthropic
         type beta_message_batch_errored_result =
           { error: Anthropic::Models::BetaErrorResponse, type: :errored }
 
-        class BetaMessageBatchErroredResult < Anthropic::BaseModel
+        class BetaMessageBatchErroredResult < Anthropic::Internal::Type::BaseModel
           attr_accessor error: Anthropic::Models::BetaErrorResponse
 
           attr_accessor type: :errored

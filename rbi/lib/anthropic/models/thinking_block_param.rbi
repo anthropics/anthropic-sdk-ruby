@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ThinkingBlockParam < Anthropic::BaseModel
+    class ThinkingBlockParam < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :signature
 
