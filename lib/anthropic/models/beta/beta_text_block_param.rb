@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaTextBlockParam < Anthropic::BaseModel
+      class BetaTextBlockParam < Anthropic::Internal::Type::BaseModel
         # @!attribute text
         #
         #   @return [String]
@@ -23,7 +23,7 @@ module Anthropic
         #
         #   @return [Array<Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam>, nil]
         optional :citations,
-                 -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitationParam] },
+                 -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitationParam] },
                  nil?: true
 
         # @!parse
@@ -34,7 +34,7 @@ module Anthropic
         #   #
         #   def initialize(text:, cache_control: nil, citations: nil, type: :text, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

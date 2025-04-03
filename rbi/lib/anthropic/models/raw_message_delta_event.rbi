@@ -2,14 +2,11 @@
 
 module Anthropic
   module Models
-    class RawMessageDeltaEvent < Anthropic::BaseModel
+    class RawMessageDeltaEvent < Anthropic::Internal::Type::BaseModel
       sig { returns(Anthropic::Models::RawMessageDeltaEvent::Delta) }
       attr_reader :delta
 
-      sig do
-        params(delta: T.any(Anthropic::Models::RawMessageDeltaEvent::Delta, Anthropic::Internal::Util::AnyHash))
-          .void
-      end
+      sig { params(delta: T.any(Anthropic::Models::RawMessageDeltaEvent::Delta, Anthropic::Internal::AnyHash)).void }
       attr_writer :delta
 
       sig { returns(Symbol) }
@@ -33,13 +30,13 @@ module Anthropic
       sig { returns(Anthropic::Models::MessageDeltaUsage) }
       attr_reader :usage
 
-      sig { params(usage: T.any(Anthropic::Models::MessageDeltaUsage, Anthropic::Internal::Util::AnyHash)).void }
+      sig { params(usage: T.any(Anthropic::Models::MessageDeltaUsage, Anthropic::Internal::AnyHash)).void }
       attr_writer :usage
 
       sig do
         params(
-          delta: T.any(Anthropic::Models::RawMessageDeltaEvent::Delta, Anthropic::Internal::Util::AnyHash),
-          usage: T.any(Anthropic::Models::MessageDeltaUsage, Anthropic::Internal::Util::AnyHash),
+          delta: T.any(Anthropic::Models::RawMessageDeltaEvent::Delta, Anthropic::Internal::AnyHash),
+          usage: T.any(Anthropic::Models::MessageDeltaUsage, Anthropic::Internal::AnyHash),
           type: Symbol
         )
           .returns(T.attached_class)
@@ -60,7 +57,7 @@ module Anthropic
       def to_hash
       end
 
-      class Delta < Anthropic::BaseModel
+      class Delta < Anthropic::Internal::Type::BaseModel
         sig { returns(T.nilable(Anthropic::Models::StopReason::TaggedSymbol)) }
         attr_accessor :stop_reason
 

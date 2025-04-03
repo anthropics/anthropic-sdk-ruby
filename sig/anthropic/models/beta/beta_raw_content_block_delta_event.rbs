@@ -10,7 +10,7 @@ module Anthropic
           type: :content_block_delta
         }
 
-      class BetaRawContentBlockDeltaEvent < Anthropic::BaseModel
+      class BetaRawContentBlockDeltaEvent < Anthropic::Internal::Type::BaseModel
         attr_accessor delta: Anthropic::Models::Beta::beta_raw_content_block_delta
 
         attr_accessor index: Integer

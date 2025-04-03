@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Messages
-      class MessageBatch < Anthropic::BaseModel
+      class MessageBatch < Anthropic::Internal::Type::BaseModel
         # Unique object identifier.
         #
         #   The format and length of IDs may change over time.
@@ -52,7 +52,7 @@ module Anthropic
 
         sig do
           params(
-            request_counts: T.any(Anthropic::Models::Messages::MessageBatchRequestCounts, Anthropic::Internal::Util::AnyHash)
+            request_counts: T.any(Anthropic::Models::Messages::MessageBatchRequestCounts, Anthropic::Internal::AnyHash)
           )
             .void
         end
@@ -81,7 +81,7 @@ module Anthropic
             ended_at: T.nilable(Time),
             expires_at: Time,
             processing_status: Anthropic::Models::Messages::MessageBatch::ProcessingStatus::OrSymbol,
-            request_counts: T.any(Anthropic::Models::Messages::MessageBatchRequestCounts, Anthropic::Internal::Util::AnyHash),
+            request_counts: T.any(Anthropic::Models::Messages::MessageBatchRequestCounts, Anthropic::Internal::AnyHash),
             results_url: T.nilable(String),
             type: Symbol
           )
@@ -123,7 +123,7 @@ module Anthropic
 
         # Processing status of the Message Batch.
         module ProcessingStatus
-          extend Anthropic::Enum
+          extend Anthropic::Internal::Type::Enum
 
           TaggedSymbol =
             T.type_alias { T.all(Symbol, Anthropic::Models::Messages::MessageBatch::ProcessingStatus) }

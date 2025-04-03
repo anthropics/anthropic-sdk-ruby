@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ToolUseBlockParam < Anthropic::BaseModel
+    class ToolUseBlockParam < Anthropic::Internal::Type::BaseModel
       # @!attribute id
       #
       #   @return [String]
@@ -11,7 +11,7 @@ module Anthropic
       # @!attribute input
       #
       #   @return [Object]
-      required :input, Anthropic::Unknown
+      required :input, Anthropic::Internal::Type::Unknown
 
       # @!attribute name
       #
@@ -37,7 +37,7 @@ module Anthropic
       #   #
       #   def initialize(id:, input:, name:, cache_control: nil, type: :tool_use, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

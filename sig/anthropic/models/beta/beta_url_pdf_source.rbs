@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       type beta_urlpdf_source = { type: :url, url: String }
 
-      class BetaURLPDFSource < Anthropic::BaseModel
+      class BetaURLPDFSource < Anthropic::Internal::Type::BaseModel
         attr_accessor type: :url
 
         attr_accessor url: String

@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaToolResultBlockParam < Anthropic::BaseModel
+      class BetaToolResultBlockParam < Anthropic::Internal::Type::BaseModel
         # @!attribute tool_use_id
         #
         #   @return [String]
@@ -31,7 +31,7 @@ module Anthropic
         # @!attribute [r] is_error
         #
         #   @return [Boolean, nil]
-        optional :is_error, Anthropic::BooleanModel
+        optional :is_error, Anthropic::Internal::Type::BooleanModel
 
         # @!parse
         #   # @return [Boolean]
@@ -46,18 +46,18 @@ module Anthropic
         #   #
         #   def initialize(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
         # @see Anthropic::Models::Beta::BetaToolResultBlockParam#content
         module Content
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           variant String
 
           variant -> { Anthropic::Models::Beta::BetaToolResultBlockParam::Content::ContentArray }
 
           module Content
-            extend Anthropic::Union
+            extend Anthropic::Internal::Type::Union
 
             discriminator :type
 
@@ -75,7 +75,7 @@ module Anthropic
           #   def self.variants; end
 
           ContentArray =
-            Anthropic::ArrayOf[union: -> { Anthropic::Models::Beta::BetaToolResultBlockParam::Content::Content }]
+            Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::Models::Beta::BetaToolResultBlockParam::Content::Content }]
         end
       end
     end

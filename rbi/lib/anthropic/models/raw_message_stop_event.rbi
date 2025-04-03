@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class RawMessageStopEvent < Anthropic::BaseModel
+    class RawMessageStopEvent < Anthropic::Internal::Type::BaseModel
       sig { returns(Symbol) }
       attr_accessor :type
 

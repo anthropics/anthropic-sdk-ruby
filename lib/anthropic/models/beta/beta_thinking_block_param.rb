@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaThinkingBlockParam < Anthropic::BaseModel
+      class BetaThinkingBlockParam < Anthropic::Internal::Type::BaseModel
         # @!attribute signature
         #
         #   @return [String]
@@ -26,7 +26,7 @@ module Anthropic
         #   #
         #   def initialize(signature:, thinking:, type: :thinking, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

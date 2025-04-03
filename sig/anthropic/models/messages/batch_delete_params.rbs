@@ -4,7 +4,7 @@ module Anthropic
       type batch_delete_params =
         {  } & Anthropic::Internal::Type::request_parameters
 
-      class BatchDeleteParams < Anthropic::BaseModel
+      class BatchDeleteParams < Anthropic::Internal::Type::BaseModel
         extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 

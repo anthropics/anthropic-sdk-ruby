@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaAuthenticationError < Anthropic::BaseModel
+    class BetaAuthenticationError < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :message
 

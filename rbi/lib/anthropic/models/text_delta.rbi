@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class TextDelta < Anthropic::BaseModel
+    class TextDelta < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :text
 

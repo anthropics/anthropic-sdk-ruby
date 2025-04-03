@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaRawContentBlockDeltaEvent < Anthropic::BaseModel
+      class BetaRawContentBlockDeltaEvent < Anthropic::Internal::Type::BaseModel
         # @!attribute delta
         #
         #   @return [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta]
@@ -26,7 +26,7 @@ module Anthropic
         #   #
         #   def initialize(delta:, index:, type: :content_block_delta, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

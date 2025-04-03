@@ -3,7 +3,7 @@ module Anthropic
     type raw_message_start_event =
       { message: Anthropic::Models::Message, type: :message_start }
 
-    class RawMessageStartEvent < Anthropic::BaseModel
+    class RawMessageStartEvent < Anthropic::Internal::Type::BaseModel
       attr_accessor message: Anthropic::Models::Message
 
       attr_accessor type: :message_start

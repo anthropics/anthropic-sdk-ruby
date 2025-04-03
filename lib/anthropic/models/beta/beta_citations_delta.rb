@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaCitationsDelta < Anthropic::BaseModel
+      class BetaCitationsDelta < Anthropic::Internal::Type::BaseModel
         # @!attribute citation
         #
         #   @return [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation]
@@ -20,11 +20,11 @@ module Anthropic
         #   #
         #   def initialize(citation:, type: :citations_delta, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
         # @see Anthropic::Models::Beta::BetaCitationsDelta#citation
         module Citation
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           discriminator :type
 

@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaBase64PDFBlock < Anthropic::BaseModel
+      class BetaBase64PDFBlock < Anthropic::Internal::Type::BaseModel
         sig do
           returns(
             T.any(
@@ -24,7 +24,7 @@ module Anthropic
 
         sig do
           params(
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash))
           )
             .void
         end
@@ -34,9 +34,7 @@ module Anthropic
         attr_reader :citations
 
         sig do
-          params(
-            citations: T.any(Anthropic::Models::Beta::BetaCitationsConfigParam, Anthropic::Internal::Util::AnyHash)
-          )
+          params(citations: T.any(Anthropic::Models::Beta::BetaCitationsConfigParam, Anthropic::Internal::AnyHash))
             .void
         end
         attr_writer :citations
@@ -51,13 +49,13 @@ module Anthropic
           params(
             source: T.any(
               Anthropic::Models::Beta::BetaBase64PDFSource,
-              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Internal::AnyHash,
               Anthropic::Models::Beta::BetaPlainTextSource,
               Anthropic::Models::Beta::BetaContentBlockSource,
               Anthropic::Models::Beta::BetaURLPDFSource
             ),
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
-            citations: T.any(Anthropic::Models::Beta::BetaCitationsConfigParam, Anthropic::Internal::Util::AnyHash),
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash)),
+            citations: T.any(Anthropic::Models::Beta::BetaCitationsConfigParam, Anthropic::Internal::AnyHash),
             context: T.nilable(String),
             title: T.nilable(String),
             type: Symbol
@@ -89,7 +87,7 @@ module Anthropic
         end
 
         module Source
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           sig do
             override

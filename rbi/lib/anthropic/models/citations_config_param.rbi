@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class CitationsConfigParam < Anthropic::BaseModel
+    class CitationsConfigParam < Anthropic::Internal::Type::BaseModel
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :enabled
 

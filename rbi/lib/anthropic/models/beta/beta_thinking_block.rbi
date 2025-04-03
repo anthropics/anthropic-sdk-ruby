@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaThinkingBlock < Anthropic::BaseModel
+      class BetaThinkingBlock < Anthropic::Internal::Type::BaseModel
         sig { returns(String) }
         attr_accessor :signature
 

@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class PlainTextSource < Anthropic::BaseModel
+    class PlainTextSource < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :data
 

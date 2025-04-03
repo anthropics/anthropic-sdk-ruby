@@ -10,7 +10,7 @@ module Anthropic
           cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?
         }
 
-      class BetaToolTextEditor20250124 < Anthropic::BaseModel
+      class BetaToolTextEditor20250124 < Anthropic::Internal::Type::BaseModel
         attr_accessor name: :str_replace_editor
 
         attr_accessor type: :text_editor_20250124

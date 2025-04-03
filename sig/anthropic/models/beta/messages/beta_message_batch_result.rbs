@@ -9,7 +9,7 @@ module Anthropic
           | Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
 
         module BetaMessageBatchResult
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> [Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult]
         end

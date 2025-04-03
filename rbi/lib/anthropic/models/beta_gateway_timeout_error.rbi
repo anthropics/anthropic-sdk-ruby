@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaGatewayTimeoutError < Anthropic::BaseModel
+    class BetaGatewayTimeoutError < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :message
 

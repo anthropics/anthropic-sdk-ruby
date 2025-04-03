@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaURLImageSource < Anthropic::BaseModel
+      class BetaURLImageSource < Anthropic::Internal::Type::BaseModel
         sig { returns(Symbol) }
         attr_accessor :type
 

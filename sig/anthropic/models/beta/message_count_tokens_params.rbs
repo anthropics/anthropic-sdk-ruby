@@ -13,7 +13,7 @@ module Anthropic
         }
         & Anthropic::Internal::Type::request_parameters
 
-      class MessageCountTokensParams < Anthropic::BaseModel
+      class MessageCountTokensParams < Anthropic::Internal::Type::BaseModel
         extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
@@ -68,7 +68,7 @@ module Anthropic
           String | ::Array[Anthropic::Models::Beta::BetaTextBlockParam]
 
         module System
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> [String, ::Array[Anthropic::Models::Beta::BetaTextBlockParam]]
 
@@ -88,7 +88,7 @@ module Anthropic
           | Anthropic::Models::Beta::BetaToolTextEditor20250124
 
         module Tool
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> [Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124]
         end

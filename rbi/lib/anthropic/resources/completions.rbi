@@ -16,13 +16,13 @@ module Anthropic
           max_tokens_to_sample: Integer,
           model: T.any(Anthropic::Models::Model::OrSymbol, String),
           prompt: String,
-          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::Util::AnyHash),
+          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::AnyHash),
           stop_sequences: T::Array[String],
           temperature: Float,
           top_k: Integer,
           top_p: Float,
           stream: T.noreturn,
-          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash))
+          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
         )
           .returns(Anthropic::Models::Completion)
       end
@@ -105,13 +105,13 @@ module Anthropic
           max_tokens_to_sample: Integer,
           model: T.any(Anthropic::Models::Model::OrSymbol, String),
           prompt: String,
-          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::Util::AnyHash),
+          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::AnyHash),
           stop_sequences: T::Array[String],
           temperature: Float,
           top_k: Integer,
           top_p: Float,
           stream: T.noreturn,
-          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash))
+          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
         )
           .returns(Anthropic::Internal::Stream[Anthropic::Models::Completion])
       end

@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Beta
       module BetaStopReason
-        extend Anthropic::Enum
+        extend Anthropic::Internal::Type::Enum
 
         END_TURN = :end_turn
         MAX_TOKENS = :max_tokens

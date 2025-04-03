@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class GatewayTimeoutError < Anthropic::BaseModel
+    class GatewayTimeoutError < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :message
 

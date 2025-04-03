@@ -12,7 +12,7 @@ module Anthropic
           is_error: bool
         }
 
-      class BetaToolResultBlockParam < Anthropic::BaseModel
+      class BetaToolResultBlockParam < Anthropic::Internal::Type::BaseModel
         attr_accessor tool_use_id: String
 
         attr_accessor type: :tool_result
@@ -44,14 +44,14 @@ module Anthropic
           | ::Array[Anthropic::Models::Beta::BetaToolResultBlockParam::Content::content]
 
         module Content
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           type content =
             Anthropic::Models::Beta::BetaTextBlockParam
             | Anthropic::Models::Beta::BetaImageBlockParam
 
           module Content
-            extend Anthropic::Union
+            extend Anthropic::Internal::Type::Union
 
             def self?.variants: -> [Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam]
           end

@@ -2,7 +2,7 @@ module Anthropic
   module Models
     type message_delta_usage = { output_tokens: Integer }
 
-    class MessageDeltaUsage < Anthropic::BaseModel
+    class MessageDeltaUsage < Anthropic::Internal::Type::BaseModel
       attr_accessor output_tokens: Integer
 
       def initialize: (output_tokens: Integer) -> void

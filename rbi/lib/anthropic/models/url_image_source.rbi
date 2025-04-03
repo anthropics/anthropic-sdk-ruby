@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class URLImageSource < Anthropic::BaseModel
+    class URLImageSource < Anthropic::Internal::Type::BaseModel
       sig { returns(Symbol) }
       attr_accessor :type
 

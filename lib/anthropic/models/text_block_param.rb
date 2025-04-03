@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class TextBlockParam < Anthropic::BaseModel
+    class TextBlockParam < Anthropic::Internal::Type::BaseModel
       # @!attribute text
       #
       #   @return [String]
@@ -21,7 +21,9 @@ module Anthropic
       # @!attribute citations
       #
       #   @return [Array<Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam>, nil]
-      optional :citations, -> { Anthropic::ArrayOf[union: Anthropic::Models::TextCitationParam] }, nil?: true
+      optional :citations,
+               -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::TextCitationParam] },
+               nil?: true
 
       # @!parse
       #   # @param text [String]
@@ -31,7 +33,7 @@ module Anthropic
       #   #
       #   def initialize(text:, cache_control: nil, citations: nil, type: :text, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

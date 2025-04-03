@@ -13,7 +13,7 @@ module Anthropic
           display_number: Integer?
         }
 
-      class BetaToolComputerUse20241022 < Anthropic::BaseModel
+      class BetaToolComputerUse20241022 < Anthropic::Internal::Type::BaseModel
         attr_accessor display_height_px: Integer
 
         attr_accessor display_width_px: Integer

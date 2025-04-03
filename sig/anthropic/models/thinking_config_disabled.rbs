@@ -2,7 +2,7 @@ module Anthropic
   module Models
     type thinking_config_disabled = { type: :disabled }
 
-    class ThinkingConfigDisabled < Anthropic::BaseModel
+    class ThinkingConfigDisabled < Anthropic::Internal::Type::BaseModel
       attr_accessor type: :disabled
 
       def initialize: (?type: :disabled) -> void

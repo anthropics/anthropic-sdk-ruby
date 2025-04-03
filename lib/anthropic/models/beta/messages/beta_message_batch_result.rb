@@ -10,7 +10,7 @@ module Anthropic
         #   processing failed, or the reason why processing was not attempted, such as
         #   cancellation or expiration.
         module BetaMessageBatchResult
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           discriminator :type
 

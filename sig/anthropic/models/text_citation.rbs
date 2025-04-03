@@ -6,7 +6,7 @@ module Anthropic
       | Anthropic::Models::CitationContentBlockLocation
 
     module TextCitation
-      extend Anthropic::Union
+      extend Anthropic::Internal::Type::Union
 
       def self?.variants: -> [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation]
     end

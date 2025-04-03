@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class MessageTokensCount < Anthropic::BaseModel
+    class MessageTokensCount < Anthropic::Internal::Type::BaseModel
       # The total number of tokens across the provided list of messages, system prompt,
       #   and tools.
       sig { returns(Integer) }

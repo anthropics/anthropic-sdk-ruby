@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaTool < Anthropic::BaseModel
+      class BetaTool < Anthropic::Internal::Type::BaseModel
         # @!attribute input_schema
         #   [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
         #
@@ -55,10 +55,10 @@ module Anthropic
         #   #
         #   def initialize(input_schema:, name:, cache_control: nil, description: nil, type: nil, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
         # @see Anthropic::Models::Beta::BetaTool#input_schema
-        class InputSchema < Anthropic::BaseModel
+        class InputSchema < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
           #   @return [Symbol, :object]
@@ -67,7 +67,7 @@ module Anthropic
           # @!attribute properties
           #
           #   @return [Object, nil]
-          optional :properties, Anthropic::Unknown, nil?: true
+          optional :properties, Anthropic::Internal::Type::Unknown, nil?: true
 
           # @!parse
           #   # [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -80,12 +80,12 @@ module Anthropic
           #   #
           #   def initialize(properties: nil, type: :object, **) = super
 
-          # def initialize: (Hash | Anthropic::BaseModel) -> void
+          # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
         end
 
         # @see Anthropic::Models::Beta::BetaTool#type
         module Type
-          extend Anthropic::Enum
+          extend Anthropic::Internal::Type::Enum
 
           CUSTOM = :custom
 

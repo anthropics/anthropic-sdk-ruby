@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module StopReason
-      extend Anthropic::Enum
+      extend Anthropic::Internal::Type::Enum
 
       END_TURN = :end_turn
       MAX_TOKENS = :max_tokens

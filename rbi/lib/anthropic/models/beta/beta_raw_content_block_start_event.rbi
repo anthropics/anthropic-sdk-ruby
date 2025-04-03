@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaRawContentBlockStartEvent < Anthropic::BaseModel
+      class BetaRawContentBlockStartEvent < Anthropic::Internal::Type::BaseModel
         sig do
           returns(
             T.any(
@@ -26,7 +26,7 @@ module Anthropic
           params(
             content_block: T.any(
               Anthropic::Models::Beta::BetaTextBlock,
-              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Internal::AnyHash,
               Anthropic::Models::Beta::BetaToolUseBlock,
               Anthropic::Models::Beta::BetaThinkingBlock,
               Anthropic::Models::Beta::BetaRedactedThinkingBlock
@@ -58,7 +58,7 @@ module Anthropic
         end
 
         module ContentBlock
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           sig do
             override

@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ThinkingConfigEnabled < Anthropic::BaseModel
+    class ThinkingConfigEnabled < Anthropic::Internal::Type::BaseModel
       # Determines how many tokens Claude can use for its internal reasoning process.
       #   Larger budgets can enable more thorough analysis for complex problems, improving
       #   response quality.

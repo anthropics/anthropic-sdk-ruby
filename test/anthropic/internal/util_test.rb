@@ -42,7 +42,7 @@ class Anthropic::Test::UtilDataHandlingTest < Minitest::Test
   def test_omission
     merged = Anthropic::Internal::Util.deep_merge(
       {b: {b2: 1, b3: {c: 4, d: 5}}},
-      {b: {b2: 1, b3: {c: Anthropic::Internal::Util::OMIT, d: 5}}}
+      {b: {b2: 1, b3: {c: Anthropic::Internal::OMIT, d: 5}}}
     )
 
     assert_pattern do

@@ -3,7 +3,7 @@ module Anthropic
     type thinking_block_param =
       { signature: String, thinking: String, type: :thinking }
 
-    class ThinkingBlockParam < Anthropic::BaseModel
+    class ThinkingBlockParam < Anthropic::Internal::Type::BaseModel
       attr_accessor signature: String
 
       attr_accessor thinking: String

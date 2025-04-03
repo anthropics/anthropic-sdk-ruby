@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class RateLimitError < Anthropic::BaseModel
+    class RateLimitError < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :message
 

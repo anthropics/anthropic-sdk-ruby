@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class Base64ImageSource < Anthropic::BaseModel
+    class Base64ImageSource < Anthropic::Internal::Type::BaseModel
       # @!attribute data
       #
       #   @return [String]
@@ -25,11 +25,11 @@ module Anthropic
       #   #
       #   def initialize(data:, media_type:, type: :base64, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
       # @see Anthropic::Models::Base64ImageSource#media_type
       module MediaType
-        extend Anthropic::Enum
+        extend Anthropic::Internal::Type::Enum
 
         IMAGE_JPEG = :"image/jpeg"
         IMAGE_PNG = :"image/png"

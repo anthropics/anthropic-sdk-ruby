@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Beta
       module Messages
-        class BetaMessageBatchExpiredResult < Anthropic::BaseModel
+        class BetaMessageBatchExpiredResult < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
           #   @return [Symbol, :expired]
@@ -15,7 +15,7 @@ module Anthropic
           #   #
           #   def initialize(type: :expired, **) = super
 
-          # def initialize: (Hash | Anthropic::BaseModel) -> void
+          # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
         end
       end
     end

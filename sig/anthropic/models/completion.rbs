@@ -9,7 +9,7 @@ module Anthropic
         type: :completion
       }
 
-    class Completion < Anthropic::BaseModel
+    class Completion < Anthropic::Internal::Type::BaseModel
       attr_accessor id: String
 
       attr_accessor completion: String

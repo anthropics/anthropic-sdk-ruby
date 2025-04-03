@@ -2,7 +2,7 @@ module Anthropic
   module Models
     type billing_error = { message: String, type: :billing_error }
 
-    class BillingError < Anthropic::BaseModel
+    class BillingError < Anthropic::Internal::Type::BaseModel
       attr_accessor message: String
 
       attr_accessor type: :billing_error

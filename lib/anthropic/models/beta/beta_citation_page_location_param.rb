@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaCitationPageLocationParam < Anthropic::BaseModel
+      class BetaCitationPageLocationParam < Anthropic::Internal::Type::BaseModel
         # @!attribute cited_text
         #
         #   @return [String]
@@ -54,7 +54,7 @@ module Anthropic
         #     super
         #   end
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

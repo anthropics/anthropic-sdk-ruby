@@ -16,7 +16,7 @@ module Anthropic
             type: :message_batch
           }
 
-        class BetaMessageBatch < Anthropic::BaseModel
+        class BetaMessageBatch < Anthropic::Internal::Type::BaseModel
           attr_accessor id: String
 
           attr_accessor archived_at: Time?
@@ -55,7 +55,7 @@ module Anthropic
           type processing_status = :in_progress | :canceling | :ended
 
           module ProcessingStatus
-            extend Anthropic::Enum
+            extend Anthropic::Internal::Type::Enum
 
             IN_PROGRESS: :in_progress
             CANCELING: :canceling

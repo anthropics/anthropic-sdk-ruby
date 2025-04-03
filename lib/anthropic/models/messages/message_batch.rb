@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Messages
       # @see Anthropic::Resources::Messages::Batches#create
-      class MessageBatch < Anthropic::BaseModel
+      class MessageBatch < Anthropic::Internal::Type::BaseModel
         # @!attribute id
         #   Unique object identifier.
         #
@@ -113,13 +113,13 @@ module Anthropic
         #     super
         #   end
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
         # Processing status of the Message Batch.
         #
         # @see Anthropic::Models::Messages::MessageBatch#processing_status
         module ProcessingStatus
-          extend Anthropic::Enum
+          extend Anthropic::Internal::Type::Enum
 
           IN_PROGRESS = :in_progress
           CANCELING = :canceling

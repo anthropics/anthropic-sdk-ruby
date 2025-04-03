@@ -7,7 +7,7 @@ module Anthropic
         type: :content_block_delta
       }
 
-    class RawContentBlockDeltaEvent < Anthropic::BaseModel
+    class RawContentBlockDeltaEvent < Anthropic::Internal::Type::BaseModel
       attr_accessor delta: Anthropic::Models::raw_content_block_delta
 
       attr_accessor index: Integer

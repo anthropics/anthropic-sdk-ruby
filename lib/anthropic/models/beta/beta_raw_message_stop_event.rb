@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaRawMessageStopEvent < Anthropic::BaseModel
+      class BetaRawMessageStopEvent < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
         #   @return [Symbol, :message_stop]
@@ -14,7 +14,7 @@ module Anthropic
         #   #
         #   def initialize(type: :message_stop, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

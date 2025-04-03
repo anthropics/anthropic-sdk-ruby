@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaErrorResponse < Anthropic::BaseModel
+    class BetaErrorResponse < Anthropic::Internal::Type::BaseModel
       sig do
         returns(
           T.any(
@@ -27,7 +27,7 @@ module Anthropic
         params(
           error: T.any(
             Anthropic::Models::BetaInvalidRequestError,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::BetaAuthenticationError,
             Anthropic::Models::BetaBillingError,
             Anthropic::Models::BetaPermissionError,

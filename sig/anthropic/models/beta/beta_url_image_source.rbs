@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       type beta_url_image_source = { type: :url, url: String }
 
-      class BetaURLImageSource < Anthropic::BaseModel
+      class BetaURLImageSource < Anthropic::Internal::Type::BaseModel
         attr_accessor type: :url
 
         attr_accessor url: String

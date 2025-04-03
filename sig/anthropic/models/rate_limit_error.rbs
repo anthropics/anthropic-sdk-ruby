@@ -2,7 +2,7 @@ module Anthropic
   module Models
     type rate_limit_error = { message: String, type: :rate_limit_error }
 
-    class RateLimitError < Anthropic::BaseModel
+    class RateLimitError < Anthropic::Internal::Type::BaseModel
       attr_accessor message: String
 
       attr_accessor type: :rate_limit_error

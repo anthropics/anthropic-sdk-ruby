@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class CompletionCreateParams < Anthropic::BaseModel
+    class CompletionCreateParams < Anthropic::Internal::Type::BaseModel
       extend Anthropic::Internal::Type::RequestParameters::Converter
       include Anthropic::Internal::Type::RequestParameters
 
@@ -39,7 +39,7 @@ module Anthropic
       sig { returns(T.nilable(Anthropic::Models::Metadata)) }
       attr_reader :metadata
 
-      sig { params(metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::Util::AnyHash)).void }
+      sig { params(metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::AnyHash)).void }
       attr_writer :metadata
 
       # Sequences that will cause the model to stop generating.
@@ -100,12 +100,12 @@ module Anthropic
           max_tokens_to_sample: Integer,
           model: T.any(Anthropic::Models::Model::OrSymbol, String),
           prompt: String,
-          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::Util::AnyHash),
+          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::AnyHash),
           stop_sequences: T::Array[String],
           temperature: Float,
           top_k: Integer,
           top_p: Float,
-          request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash)
+          request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash)
         )
           .returns(T.attached_class)
       end

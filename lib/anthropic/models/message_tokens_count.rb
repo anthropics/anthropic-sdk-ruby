@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     # @see Anthropic::Resources::Messages#count_tokens
-    class MessageTokensCount < Anthropic::BaseModel
+    class MessageTokensCount < Anthropic::Internal::Type::BaseModel
       # @!attribute input_tokens
       #   The total number of tokens across the provided list of messages, system prompt,
       #     and tools.
@@ -16,7 +16,7 @@ module Anthropic
       #   #
       #   def initialize(input_tokens:, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

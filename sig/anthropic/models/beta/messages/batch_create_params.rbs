@@ -9,7 +9,7 @@ module Anthropic
           }
           & Anthropic::Internal::Type::request_parameters
 
-        class BatchCreateParams < Anthropic::BaseModel
+        class BatchCreateParams < Anthropic::Internal::Type::BaseModel
           extend Anthropic::Internal::Type::RequestParameters::Converter
           include Anthropic::Internal::Type::RequestParameters
 
@@ -35,7 +35,7 @@ module Anthropic
               params: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params
             }
 
-          class Request < Anthropic::BaseModel
+          class Request < Anthropic::Internal::Type::BaseModel
             attr_accessor custom_id: String
 
             attr_accessor params: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params
@@ -64,7 +64,7 @@ module Anthropic
                 top_p: Float
               }
 
-            class Params < Anthropic::BaseModel
+            class Params < Anthropic::Internal::Type::BaseModel
               attr_accessor max_tokens: Integer
 
               attr_accessor messages: ::Array[Anthropic::Models::Beta::BetaMessageParam]
@@ -143,7 +143,7 @@ module Anthropic
                 String | ::Array[Anthropic::Models::Beta::BetaTextBlockParam]
 
               module System
-                extend Anthropic::Union
+                extend Anthropic::Internal::Type::Union
 
                 def self?.variants: -> [String, ::Array[Anthropic::Models::Beta::BetaTextBlockParam]]
 

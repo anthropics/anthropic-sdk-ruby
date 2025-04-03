@@ -2,7 +2,7 @@ module Anthropic
   module Models
     type input_json_delta = { partial_json: String, type: :input_json_delta }
 
-    class InputJSONDelta < Anthropic::BaseModel
+    class InputJSONDelta < Anthropic::Internal::Type::BaseModel
       attr_accessor partial_json: String
 
       attr_accessor type: :input_json_delta

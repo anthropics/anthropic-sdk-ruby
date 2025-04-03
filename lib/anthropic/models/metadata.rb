@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class Metadata < Anthropic::BaseModel
+    class Metadata < Anthropic::Internal::Type::BaseModel
       # @!attribute user_id
       #   An external identifier for the user who is associated with the request.
       #
@@ -18,7 +18,7 @@ module Anthropic
       #   #
       #   def initialize(user_id: nil, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

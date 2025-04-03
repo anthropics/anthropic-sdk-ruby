@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ImageBlockParam < Anthropic::BaseModel
+    class ImageBlockParam < Anthropic::Internal::Type::BaseModel
       sig { returns(T.any(Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource)) }
       attr_accessor :source
 
@@ -14,7 +14,7 @@ module Anthropic
 
       sig do
         params(
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash))
         )
           .void
       end
@@ -24,10 +24,10 @@ module Anthropic
         params(
           source: T.any(
             Anthropic::Models::Base64ImageSource,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::URLImageSource
           ),
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash)),
           type: Symbol
         )
           .returns(T.attached_class)
@@ -49,7 +49,7 @@ module Anthropic
       end
 
       module Source
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         sig { override.returns([Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]) }
         def self.variants

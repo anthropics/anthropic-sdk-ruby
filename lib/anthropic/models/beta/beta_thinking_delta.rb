@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaThinkingDelta < Anthropic::BaseModel
+      class BetaThinkingDelta < Anthropic::Internal::Type::BaseModel
         # @!attribute thinking
         #
         #   @return [String]
@@ -20,7 +20,7 @@ module Anthropic
         #   #
         #   def initialize(thinking:, type: :thinking_delta, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

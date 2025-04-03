@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class DocumentBlockParam < Anthropic::BaseModel
+    class DocumentBlockParam < Anthropic::Internal::Type::BaseModel
       sig do
         returns(
           T.any(
@@ -23,7 +23,7 @@ module Anthropic
 
       sig do
         params(
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash))
         )
           .void
       end
@@ -32,7 +32,7 @@ module Anthropic
       sig { returns(T.nilable(Anthropic::Models::CitationsConfigParam)) }
       attr_reader :citations
 
-      sig { params(citations: T.any(Anthropic::Models::CitationsConfigParam, Anthropic::Internal::Util::AnyHash)).void }
+      sig { params(citations: T.any(Anthropic::Models::CitationsConfigParam, Anthropic::Internal::AnyHash)).void }
       attr_writer :citations
 
       sig { returns(T.nilable(String)) }
@@ -45,13 +45,13 @@ module Anthropic
         params(
           source: T.any(
             Anthropic::Models::Base64PDFSource,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::PlainTextSource,
             Anthropic::Models::ContentBlockSource,
             Anthropic::Models::URLPDFSource
           ),
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
-          citations: T.any(Anthropic::Models::CitationsConfigParam, Anthropic::Internal::Util::AnyHash),
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash)),
+          citations: T.any(Anthropic::Models::CitationsConfigParam, Anthropic::Internal::AnyHash),
           context: T.nilable(String),
           title: T.nilable(String),
           type: Symbol
@@ -83,7 +83,7 @@ module Anthropic
       end
 
       module Source
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         sig do
           override

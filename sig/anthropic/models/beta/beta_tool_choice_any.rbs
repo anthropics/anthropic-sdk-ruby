@@ -6,7 +6,7 @@ module Anthropic
       type beta_tool_choice_any =
         { type: :any, disable_parallel_tool_use: bool }
 
-      class BetaToolChoiceAny < Anthropic::BaseModel
+      class BetaToolChoiceAny < Anthropic::Internal::Type::BaseModel
         attr_accessor type: :any
 
         attr_reader disable_parallel_tool_use: bool?

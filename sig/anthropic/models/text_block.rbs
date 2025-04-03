@@ -7,7 +7,7 @@ module Anthropic
         type: :text
       }
 
-    class TextBlock < Anthropic::BaseModel
+    class TextBlock < Anthropic::Internal::Type::BaseModel
       attr_accessor citations: ::Array[Anthropic::Models::text_citation]?
 
       attr_accessor text: String

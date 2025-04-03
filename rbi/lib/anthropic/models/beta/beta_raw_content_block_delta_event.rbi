@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaRawContentBlockDeltaEvent < Anthropic::BaseModel
+      class BetaRawContentBlockDeltaEvent < Anthropic::Internal::Type::BaseModel
         sig do
           returns(
             T.any(
@@ -27,7 +27,7 @@ module Anthropic
           params(
             delta: T.any(
               Anthropic::Models::Beta::BetaTextDelta,
-              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Internal::AnyHash,
               Anthropic::Models::Beta::BetaInputJSONDelta,
               Anthropic::Models::Beta::BetaCitationsDelta,
               Anthropic::Models::Beta::BetaThinkingDelta,

@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       type beta_thinking_delta = { thinking: String, type: :thinking_delta }
 
-      class BetaThinkingDelta < Anthropic::BaseModel
+      class BetaThinkingDelta < Anthropic::Internal::Type::BaseModel
         attr_accessor thinking: String
 
         attr_accessor type: :thinking_delta

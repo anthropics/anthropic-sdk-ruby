@@ -2,7 +2,7 @@ module Anthropic
   module Models
     type tool_choice_auto = { type: :auto, disable_parallel_tool_use: bool }
 
-    class ToolChoiceAuto < Anthropic::BaseModel
+    class ToolChoiceAuto < Anthropic::Internal::Type::BaseModel
       attr_accessor type: :auto
 
       attr_reader disable_parallel_tool_use: bool?

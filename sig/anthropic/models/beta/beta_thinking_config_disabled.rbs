@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       type beta_thinking_config_disabled = { type: :disabled }
 
-      class BetaThinkingConfigDisabled < Anthropic::BaseModel
+      class BetaThinkingConfigDisabled < Anthropic::Internal::Type::BaseModel
         attr_accessor type: :disabled
 
         def initialize: (?type: :disabled) -> void

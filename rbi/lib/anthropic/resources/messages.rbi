@@ -16,20 +16,20 @@ module Anthropic
       sig do
         params(
           max_tokens: Integer,
-          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Internal::Util::AnyHash)],
+          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Internal::AnyHash)],
           model: T.any(Anthropic::Models::Model::OrSymbol, String),
-          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::Util::AnyHash),
+          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::AnyHash),
           stop_sequences: T::Array[String],
-          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::Util::AnyHash)]),
+          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::AnyHash)]),
           temperature: Float,
           thinking: T.any(
             Anthropic::Models::ThinkingConfigEnabled,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::ThinkingConfigDisabled
           ),
           tool_choice: T.any(
             Anthropic::Models::ToolChoiceAuto,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::ToolChoiceAny,
             Anthropic::Models::ToolChoiceTool,
             Anthropic::Models::ToolChoiceNone
@@ -37,7 +37,7 @@ module Anthropic
           tools: T::Array[
           T.any(
             Anthropic::Models::Tool,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::ToolBash20250124,
             Anthropic::Models::ToolTextEditor20250124
           )
@@ -45,7 +45,7 @@ module Anthropic
           top_k: Integer,
           top_p: Float,
           stream: T.noreturn,
-          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash))
+          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
         )
           .returns(Anthropic::Models::Message)
       end
@@ -294,20 +294,20 @@ module Anthropic
       sig do
         params(
           max_tokens: Integer,
-          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Internal::Util::AnyHash)],
+          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Internal::AnyHash)],
           model: T.any(Anthropic::Models::Model::OrSymbol, String),
-          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::Util::AnyHash),
+          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::AnyHash),
           stop_sequences: T::Array[String],
-          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::Util::AnyHash)]),
+          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::AnyHash)]),
           temperature: Float,
           thinking: T.any(
             Anthropic::Models::ThinkingConfigEnabled,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::ThinkingConfigDisabled
           ),
           tool_choice: T.any(
             Anthropic::Models::ToolChoiceAuto,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::ToolChoiceAny,
             Anthropic::Models::ToolChoiceTool,
             Anthropic::Models::ToolChoiceNone
@@ -315,7 +315,7 @@ module Anthropic
           tools: T::Array[
           T.any(
             Anthropic::Models::Tool,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::ToolBash20250124,
             Anthropic::Models::ToolTextEditor20250124
           )
@@ -323,7 +323,7 @@ module Anthropic
           top_k: Integer,
           top_p: Float,
           stream: T.noreturn,
-          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash))
+          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
         )
           .returns(
             Anthropic::Internal::Stream[
@@ -582,17 +582,17 @@ module Anthropic
       #   [user guide](/en/docs/build-with-claude/token-counting)
       sig do
         params(
-          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Internal::Util::AnyHash)],
+          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Internal::AnyHash)],
           model: T.any(Anthropic::Models::Model::OrSymbol, String),
-          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::Util::AnyHash)]),
+          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::AnyHash)]),
           thinking: T.any(
             Anthropic::Models::ThinkingConfigEnabled,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::ThinkingConfigDisabled
           ),
           tool_choice: T.any(
             Anthropic::Models::ToolChoiceAuto,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::ToolChoiceAny,
             Anthropic::Models::ToolChoiceTool,
             Anthropic::Models::ToolChoiceNone
@@ -600,12 +600,12 @@ module Anthropic
           tools: T::Array[
           T.any(
             Anthropic::Models::Tool,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::ToolBash20250124,
             Anthropic::Models::ToolTextEditor20250124
           )
           ],
-          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::Util::AnyHash))
+          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
         )
           .returns(Anthropic::Models::MessageTokensCount)
       end

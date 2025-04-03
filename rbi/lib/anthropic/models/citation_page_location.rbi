@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class CitationPageLocation < Anthropic::BaseModel
+    class CitationPageLocation < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :cited_text
 

@@ -3,18 +3,18 @@
 module Anthropic
   module Models
     module Messages
-      class MessageBatchErroredResult < Anthropic::BaseModel
+      class MessageBatchErroredResult < Anthropic::Internal::Type::BaseModel
         sig { returns(Anthropic::Models::ErrorResponse) }
         attr_reader :error
 
-        sig { params(error: T.any(Anthropic::Models::ErrorResponse, Anthropic::Internal::Util::AnyHash)).void }
+        sig { params(error: T.any(Anthropic::Models::ErrorResponse, Anthropic::Internal::AnyHash)).void }
         attr_writer :error
 
         sig { returns(Symbol) }
         attr_accessor :type
 
         sig do
-          params(error: T.any(Anthropic::Models::ErrorResponse, Anthropic::Internal::Util::AnyHash), type: Symbol)
+          params(error: T.any(Anthropic::Models::ErrorResponse, Anthropic::Internal::AnyHash), type: Symbol)
             .returns(T.attached_class)
         end
         def self.new(error:, type: :errored)

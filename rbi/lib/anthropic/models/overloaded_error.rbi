@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class OverloadedError < Anthropic::BaseModel
+    class OverloadedError < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :message
 

@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BillingError < Anthropic::BaseModel
+    class BillingError < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :message
 

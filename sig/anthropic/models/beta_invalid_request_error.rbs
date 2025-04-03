@@ -3,7 +3,7 @@ module Anthropic
     type beta_invalid_request_error =
       { message: String, type: :invalid_request_error }
 
-    class BetaInvalidRequestError < Anthropic::BaseModel
+    class BetaInvalidRequestError < Anthropic::Internal::Type::BaseModel
       attr_accessor message: String
 
       attr_accessor type: :invalid_request_error

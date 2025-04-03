@@ -17,11 +17,11 @@ module Anthropic
         sig(:final) do
           params(
             type_info: T.any(
-              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Internal::AnyHash,
               T.proc.returns(Anthropic::Internal::Type::Converter::Input),
               Anthropic::Internal::Type::Converter::Input
             ),
-            spec: Anthropic::Internal::Util::AnyHash
+            spec: Anthropic::Internal::AnyHash
           )
             .returns(T.attached_class)
         end
@@ -43,7 +43,7 @@ module Anthropic
               value: T.any(T::Hash[T.anything, T.anything], T.anything),
               state: Anthropic::Internal::Type::Converter::State
             )
-            .returns(T.any(Anthropic::Internal::Util::AnyHash, T.anything))
+            .returns(T.any(Anthropic::Internal::AnyHash, T.anything))
         end
         def coerce(value, state:)
         end
@@ -52,7 +52,7 @@ module Anthropic
         sig(:final) do
           override
             .params(value: T.any(T::Hash[T.anything, T.anything], T.anything))
-            .returns(T.any(Anthropic::Internal::Util::AnyHash, T.anything))
+            .returns(T.any(Anthropic::Internal::AnyHash, T.anything))
         end
         def dump(value)
         end
@@ -71,11 +71,11 @@ module Anthropic
         sig(:final) do
           params(
             type_info: T.any(
-              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Internal::AnyHash,
               T.proc.returns(Anthropic::Internal::Type::Converter::Input),
               Anthropic::Internal::Type::Converter::Input
             ),
-            spec: Anthropic::Internal::Util::AnyHash
+            spec: Anthropic::Internal::AnyHash
           )
             .void
         end

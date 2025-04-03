@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       module Messages
         # @see Anthropic::Resources::Beta::Messages::Batches#results_streaming
-        class BatchResultsParams < Anthropic::BaseModel
+        class BatchResultsParams < Anthropic::Internal::Type::BaseModel
           # @!parse
           #   extend Anthropic::Internal::Type::RequestParameters::Converter
           include Anthropic::Internal::Type::RequestParameters
@@ -15,7 +15,7 @@ module Anthropic
           #
           #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas,
-                   -> { Anthropic::ArrayOf[union: Anthropic::Models::AnthropicBeta] },
+                   -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::AnthropicBeta] },
                    api_name: :"anthropic-beta"
 
           # @!parse
@@ -28,7 +28,7 @@ module Anthropic
           #   #
           #   def initialize(betas: nil, request_options: {}, **) = super
 
-          # def initialize: (Hash | Anthropic::BaseModel) -> void
+          # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
         end
       end
     end

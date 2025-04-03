@@ -34,8 +34,8 @@ module Anthropic
         # @api private
         sig do
           params(
-            key: T.any(Symbol, Anthropic::Internal::Util::AnyHash, T.proc.returns(T.anything), T.anything),
-            spec: T.any(Anthropic::Internal::Util::AnyHash, T.proc.returns(T.anything), T.anything)
+            key: T.any(Symbol, Anthropic::Internal::AnyHash, T.proc.returns(T.anything), T.anything),
+            spec: T.any(Anthropic::Internal::AnyHash, T.proc.returns(T.anything), T.anything)
           )
             .void
         end
