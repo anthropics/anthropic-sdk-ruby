@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaCitationsDelta < Anthropic::BaseModel
+      class BetaCitationsDelta < Anthropic::Internal::Type::BaseModel
         sig do
           returns(
             T.any(
@@ -22,7 +22,7 @@ module Anthropic
           params(
             citation: T.any(
               Anthropic::Models::Beta::BetaCitationCharLocation,
-              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Internal::AnyHash,
               Anthropic::Models::Beta::BetaCitationPageLocation,
               Anthropic::Models::Beta::BetaCitationContentBlockLocation
             ),
@@ -50,7 +50,7 @@ module Anthropic
         end
 
         module Citation
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           sig do
             override

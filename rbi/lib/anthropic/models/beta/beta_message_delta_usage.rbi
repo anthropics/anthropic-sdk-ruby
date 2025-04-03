@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaMessageDeltaUsage < Anthropic::BaseModel
+      class BetaMessageDeltaUsage < Anthropic::Internal::Type::BaseModel
         # The cumulative number of output tokens which were used.
         sig { returns(Integer) }
         attr_accessor :output_tokens

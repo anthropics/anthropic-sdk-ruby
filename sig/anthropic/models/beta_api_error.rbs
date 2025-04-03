@@ -2,7 +2,7 @@ module Anthropic
   module Models
     type beta_api_error = { message: String, type: :api_error }
 
-    class BetaAPIError < Anthropic::BaseModel
+    class BetaAPIError < Anthropic::Internal::Type::BaseModel
       attr_accessor message: String
 
       attr_accessor type: :api_error

@@ -2,7 +2,7 @@ module Anthropic
   module Models
     type not_found_error = { message: String, type: :not_found_error }
 
-    class NotFoundError < Anthropic::BaseModel
+    class NotFoundError < Anthropic::Internal::Type::BaseModel
       attr_accessor message: String
 
       attr_accessor type: :not_found_error

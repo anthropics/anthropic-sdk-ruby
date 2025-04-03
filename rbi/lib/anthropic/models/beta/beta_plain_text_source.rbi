@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaPlainTextSource < Anthropic::BaseModel
+      class BetaPlainTextSource < Anthropic::Internal::Type::BaseModel
         sig { returns(String) }
         attr_accessor :data
 

@@ -6,7 +6,7 @@ module Anthropic
         type: :citations_delta
       }
 
-    class CitationsDelta < Anthropic::BaseModel
+    class CitationsDelta < Anthropic::Internal::Type::BaseModel
       attr_accessor citation: Anthropic::Models::CitationsDelta::citation
 
       attr_accessor type: :citations_delta
@@ -24,7 +24,7 @@ module Anthropic
         | Anthropic::Models::CitationContentBlockLocation
 
       module Citation
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation]
       end

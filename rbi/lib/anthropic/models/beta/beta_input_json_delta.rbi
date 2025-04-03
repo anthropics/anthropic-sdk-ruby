@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaInputJSONDelta < Anthropic::BaseModel
+      class BetaInputJSONDelta < Anthropic::Internal::Type::BaseModel
         sig { returns(String) }
         attr_accessor :partial_json
 

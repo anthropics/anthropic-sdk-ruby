@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ToolResultBlockParam < Anthropic::BaseModel
+    class ToolResultBlockParam < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :tool_use_id
 
@@ -14,7 +14,7 @@ module Anthropic
 
       sig do
         params(
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash))
         )
           .void
       end
@@ -33,13 +33,7 @@ module Anthropic
         params(
           content: T.any(
             String,
-            T::Array[
-            T.any(
-              Anthropic::Models::TextBlockParam,
-              Anthropic::Internal::Util::AnyHash,
-              Anthropic::Models::ImageBlockParam
-            )
-            ]
+            T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::AnyHash, Anthropic::Models::ImageBlockParam)]
           )
         )
           .void
@@ -55,16 +49,10 @@ module Anthropic
       sig do
         params(
           tool_use_id: String,
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash)),
           content: T.any(
             String,
-            T::Array[
-            T.any(
-              Anthropic::Models::TextBlockParam,
-              Anthropic::Internal::Util::AnyHash,
-              Anthropic::Models::ImageBlockParam
-            )
-            ]
+            T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::AnyHash, Anthropic::Models::ImageBlockParam)]
           ),
           is_error: T::Boolean,
           type: Symbol
@@ -90,10 +78,10 @@ module Anthropic
       end
 
       module Content
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         module Content
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           sig { override.returns([Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam]) }
           def self.variants
@@ -109,7 +97,7 @@ module Anthropic
 
         ContentArray =
           T.let(
-            Anthropic::ArrayOf[union: Anthropic::Models::ToolResultBlockParam::Content::Content],
+            Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::ToolResultBlockParam::Content::Content],
             Anthropic::Internal::Type::Converter
           )
       end

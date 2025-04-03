@@ -10,7 +10,7 @@ module Anthropic
           type: :text
         }
 
-      class BetaTextBlock < Anthropic::BaseModel
+      class BetaTextBlock < Anthropic::Internal::Type::BaseModel
         attr_accessor citations: ::Array[Anthropic::Models::Beta::beta_text_citation]?
 
         attr_accessor text: String

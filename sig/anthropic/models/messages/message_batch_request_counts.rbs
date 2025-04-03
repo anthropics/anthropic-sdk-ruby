@@ -12,7 +12,7 @@ module Anthropic
           succeeded: Integer
         }
 
-      class MessageBatchRequestCounts < Anthropic::BaseModel
+      class MessageBatchRequestCounts < Anthropic::Internal::Type::BaseModel
         attr_accessor canceled: Integer
 
         attr_accessor errored: Integer

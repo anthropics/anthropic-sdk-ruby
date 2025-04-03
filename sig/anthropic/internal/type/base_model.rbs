@@ -7,10 +7,10 @@ module Anthropic
         type known_field =
           { mode: (:coerce | :dump)?, required: bool, nilable: bool }
 
-        def self.known_fields: -> ::Hash[Symbol, (Anthropic::BaseModel::known_field
+        def self.known_fields: -> ::Hash[Symbol, (Anthropic::Internal::Type::BaseModel::known_field
         & { type_fn: (^-> Anthropic::Internal::Type::Converter::input) })]
 
-        def self.fields: -> ::Hash[Symbol, (Anthropic::BaseModel::known_field
+        def self.fields: -> ::Hash[Symbol, (Anthropic::Internal::Type::BaseModel::known_field
         & { type: Anthropic::Internal::Type::Converter::input })]
 
         private def self.add_field: (
@@ -52,7 +52,7 @@ module Anthropic
         def ==: (top other) -> bool
 
         def self.coerce: (
-          Anthropic::BaseModel | ::Hash[top, top] | top value,
+          Anthropic::Internal::Type::BaseModel | ::Hash[top, top] | top value,
           state: Anthropic::Internal::Type::Converter::state
         ) -> (instance | top)
 

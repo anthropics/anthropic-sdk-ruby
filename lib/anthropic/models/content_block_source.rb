@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ContentBlockSource < Anthropic::BaseModel
+    class ContentBlockSource < Anthropic::Internal::Type::BaseModel
       # @!attribute content
       #
       #   @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>]
@@ -19,11 +19,11 @@ module Anthropic
       #   #
       #   def initialize(content:, type: :content, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
       # @see Anthropic::Models::ContentBlockSource#content
       module Content
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         variant String
 
@@ -34,7 +34,7 @@ module Anthropic
         #   def self.variants; end
 
         ContentBlockSourceContentArray =
-          Anthropic::ArrayOf[union: -> { Anthropic::Models::ContentBlockSourceContent }]
+          Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::Models::ContentBlockSourceContent }]
       end
     end
   end

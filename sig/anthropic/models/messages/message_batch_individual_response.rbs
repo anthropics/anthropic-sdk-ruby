@@ -9,7 +9,7 @@ module Anthropic
           result: Anthropic::Models::Messages::message_batch_result
         }
 
-      class MessageBatchIndividualResponse < Anthropic::BaseModel
+      class MessageBatchIndividualResponse < Anthropic::Internal::Type::BaseModel
         attr_accessor custom_id: String
 
         attr_accessor result: Anthropic::Models::Messages::message_batch_result

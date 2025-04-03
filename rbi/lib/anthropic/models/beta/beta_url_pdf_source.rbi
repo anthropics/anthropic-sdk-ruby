@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaURLPDFSource < Anthropic::BaseModel
+      class BetaURLPDFSource < Anthropic::Internal::Type::BaseModel
         sig { returns(Symbol) }
         attr_accessor :type
 

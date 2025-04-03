@@ -3,7 +3,7 @@ module Anthropic
     module Messages
       type deleted_message_batch = { id: String, type: :message_batch_deleted }
 
-      class DeletedMessageBatch < Anthropic::BaseModel
+      class DeletedMessageBatch < Anthropic::Internal::Type::BaseModel
         attr_accessor id: String
 
         attr_accessor type: :message_batch_deleted

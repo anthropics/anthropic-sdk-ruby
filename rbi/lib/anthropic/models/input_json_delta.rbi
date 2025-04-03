@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class InputJSONDelta < Anthropic::BaseModel
+    class InputJSONDelta < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :partial_json
 

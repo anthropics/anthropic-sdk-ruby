@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ThinkingDelta < Anthropic::BaseModel
+    class ThinkingDelta < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :thinking
 

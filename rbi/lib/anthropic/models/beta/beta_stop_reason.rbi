@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Beta
       module BetaStopReason
-        extend Anthropic::Enum
+        extend Anthropic::Internal::Type::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Beta::BetaStopReason) }
         OrSymbol = T.type_alias { T.any(Symbol, String, Anthropic::Models::Beta::BetaStopReason::TaggedSymbol) }

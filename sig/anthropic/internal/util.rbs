@@ -19,8 +19,6 @@ module Anthropic
 
       def self?.coerce_hash: (top input) -> (::Hash[top, top] | top)
 
-      OMIT: top
-
       def self?.deep_merge_lr: (top lhs, top rhs, ?concat: bool) -> top
 
       def self?.deep_merge: (

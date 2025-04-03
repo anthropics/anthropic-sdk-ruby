@@ -8,7 +8,7 @@ module Anthropic
         citations: ::Array[Anthropic::Models::text_citation_param]?
       }
 
-    class TextBlockParam < Anthropic::BaseModel
+    class TextBlockParam < Anthropic::Internal::Type::BaseModel
       attr_accessor text: String
 
       attr_accessor type: :text

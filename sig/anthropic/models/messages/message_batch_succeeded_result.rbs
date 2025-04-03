@@ -6,7 +6,7 @@ module Anthropic
       type message_batch_succeeded_result =
         { message: Anthropic::Models::Message, type: :succeeded }
 
-      class MessageBatchSucceededResult < Anthropic::BaseModel
+      class MessageBatchSucceededResult < Anthropic::Internal::Type::BaseModel
         attr_accessor message: Anthropic::Models::Message
 
         attr_accessor type: :succeeded

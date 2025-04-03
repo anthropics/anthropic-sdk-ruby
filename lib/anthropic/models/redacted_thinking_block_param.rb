@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class RedactedThinkingBlockParam < Anthropic::BaseModel
+    class RedactedThinkingBlockParam < Anthropic::Internal::Type::BaseModel
       # @!attribute data
       #
       #   @return [String]
@@ -19,7 +19,7 @@ module Anthropic
       #   #
       #   def initialize(data:, type: :redacted_thinking, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

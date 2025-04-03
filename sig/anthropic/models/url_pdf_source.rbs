@@ -2,7 +2,7 @@ module Anthropic
   module Models
     type urlpdf_source = { type: :url, url: String }
 
-    class URLPDFSource < Anthropic::BaseModel
+    class URLPDFSource < Anthropic::Internal::Type::BaseModel
       attr_accessor type: :url
 
       attr_accessor url: String

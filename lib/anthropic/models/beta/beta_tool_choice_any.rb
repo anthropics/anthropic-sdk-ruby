@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaToolChoiceAny < Anthropic::BaseModel
+      class BetaToolChoiceAny < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
         #   @return [Symbol, :any]
@@ -16,7 +16,7 @@ module Anthropic
         #     use.
         #
         #   @return [Boolean, nil]
-        optional :disable_parallel_tool_use, Anthropic::BooleanModel
+        optional :disable_parallel_tool_use, Anthropic::Internal::Type::BooleanModel
 
         # @!parse
         #   # @return [Boolean]
@@ -30,7 +30,7 @@ module Anthropic
         #   #
         #   def initialize(disable_parallel_tool_use: nil, type: :any, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

@@ -2,7 +2,7 @@ module Anthropic
   module Models
     type citations_config_param = { enabled: bool }
 
-    class CitationsConfigParam < Anthropic::BaseModel
+    class CitationsConfigParam < Anthropic::Internal::Type::BaseModel
       attr_reader enabled: bool?
 
       def enabled=: (bool) -> bool

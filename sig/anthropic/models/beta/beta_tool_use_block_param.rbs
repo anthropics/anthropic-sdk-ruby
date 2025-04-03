@@ -12,7 +12,7 @@ module Anthropic
           cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?
         }
 
-      class BetaToolUseBlockParam < Anthropic::BaseModel
+      class BetaToolUseBlockParam < Anthropic::Internal::Type::BaseModel
         attr_accessor id: String
 
         attr_accessor input: top

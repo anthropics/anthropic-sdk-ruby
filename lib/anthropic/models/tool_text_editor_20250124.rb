@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ToolTextEditor20250124 < Anthropic::BaseModel
+    class ToolTextEditor20250124 < Anthropic::Internal::Type::BaseModel
       # @!attribute name
       #   Name of the tool.
       #
@@ -28,7 +28,7 @@ module Anthropic
       #   #
       #   def initialize(cache_control: nil, name: :str_replace_editor, type: :text_editor_20250124, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

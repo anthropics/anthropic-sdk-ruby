@@ -3,26 +3,26 @@
 require_relative "../../test_helper"
 
 class Anthropic::Test::PrimitiveModelTest < Minitest::Test
-  A = Anthropic::ArrayOf[-> { Integer }]
-  H = Anthropic::HashOf[-> { Integer }, nil?: true]
+  A = Anthropic::Internal::Type::ArrayOf[-> { Integer }]
+  H = Anthropic::Internal::Type::HashOf[-> { Integer }, nil?: true]
 
   module E
-    extend Anthropic::Enum
+    extend Anthropic::Internal::Type::Enum
   end
 
   module U
-    extend Anthropic::Union
+    extend Anthropic::Internal::Type::Union
   end
 
-  class B < Anthropic::BaseModel
+  class B < Anthropic::Internal::Type::BaseModel
     optional :a, Integer
     optional :b, B
   end
 
   def test_typing
     converters = [
-      Anthropic::Unknown,
-      Anthropic::BooleanModel,
+      Anthropic::Internal::Type::Unknown,
+      Anthropic::Internal::Type::BooleanModel,
       A,
       H,
       E,
@@ -39,11 +39,11 @@ class Anthropic::Test::PrimitiveModelTest < Minitest::Test
 
   def test_coerce
     cases = {
-      [Anthropic::Unknown, :a] => [{yes: 1}, :a],
+      [Anthropic::Internal::Type::Unknown, :a] => [{yes: 1}, :a],
       [NilClass, :a] => [{maybe: 1}, nil],
       [NilClass, nil] => [{yes: 1}, nil],
-      [Anthropic::BooleanModel, true] => [{yes: 1}, true],
-      [Anthropic::BooleanModel, "true"] => [{no: 1}, "true"],
+      [Anthropic::Internal::Type::BooleanModel, true] => [{yes: 1}, true],
+      [Anthropic::Internal::Type::BooleanModel, "true"] => [{no: 1}, "true"],
       [Integer, 1] => [{yes: 1}, 1],
       [Integer, 1.0] => [{maybe: 1}, 1],
       [Integer, "1"] => [{maybe: 1}, 1],
@@ -76,7 +76,7 @@ class Anthropic::Test::PrimitiveModelTest < Minitest::Test
 
   def test_dump
     cases = {
-      [Anthropic::Unknown, B.new(a: "one", b: B.new(a: 1.0))] => {a: "one", b: {a: 1}},
+      [Anthropic::Internal::Type::Unknown, B.new(a: "one", b: B.new(a: 1.0))] => {a: "one", b: {a: 1}},
       [A, B.new(a: "one", b: B.new(a: 1.0))] => {a: "one", b: {a: 1}},
       [H, B.new(a: "one", b: B.new(a: 1.0))] => {a: "one", b: {a: 1}},
       [E, B.new(a: "one", b: B.new(a: 1.0))] => {a: "one", b: {a: 1}},
@@ -85,8 +85,8 @@ class Anthropic::Test::PrimitiveModelTest < Minitest::Test
       [String, B.new(a: "one", b: B.new(a: 1.0))] => {a: "one", b: {a: 1}},
       [:b, B.new(a: "one", b: B.new(a: 1.0))] => {a: "one", b: {a: 1}},
       [nil, B.new(a: "one", b: B.new(a: 1.0))] => {a: "one", b: {a: 1}},
-      [Anthropic::BooleanModel, true] => true,
-      [Anthropic::BooleanModel, "true"] => "true",
+      [Anthropic::Internal::Type::BooleanModel, true] => true,
+      [Anthropic::Internal::Type::BooleanModel, "true"] => "true",
       [Integer, "1"] => "1",
       [Float, 1] => 1,
       [String, "one"] => "one",
@@ -126,27 +126,27 @@ end
 
 class Anthropic::Test::EnumModelTest < Minitest::Test
   module E1
-    extend Anthropic::Enum
+    extend Anthropic::Internal::Type::Enum
 
     TRUE = true
   end
 
   module E2
-    extend Anthropic::Enum
+    extend Anthropic::Internal::Type::Enum
 
     ONE = 1
     TWO = 2
   end
 
   module E3
-    extend Anthropic::Enum
+    extend Anthropic::Internal::Type::Enum
 
     ONE = 1.0
     TWO = 2.0
   end
 
   module E4
-    extend Anthropic::Enum
+    extend Anthropic::Internal::Type::Enum
 
     ONE = :one
     TWO = :two
@@ -216,14 +216,14 @@ class Anthropic::Test::EnumModelTest < Minitest::Test
 end
 
 class Anthropic::Test::CollectionModelTest < Minitest::Test
-  A1 = Anthropic::ArrayOf[-> { Integer }]
-  H1 = Anthropic::HashOf[Integer]
+  A1 = Anthropic::Internal::Type::ArrayOf[-> { Integer }]
+  H1 = Anthropic::Internal::Type::HashOf[Integer]
 
-  A2 = Anthropic::ArrayOf[H1]
-  H2 = Anthropic::HashOf[-> { A1 }]
+  A2 = Anthropic::Internal::Type::ArrayOf[H1]
+  H2 = Anthropic::Internal::Type::HashOf[-> { A1 }]
 
-  A3 = Anthropic::ArrayOf[Integer, nil?: true]
-  H3 = Anthropic::HashOf[Integer, nil?: true]
+  A3 = Anthropic::Internal::Type::ArrayOf[Integer, nil?: true]
+  H3 = Anthropic::Internal::Type::HashOf[Integer, nil?: true]
 
   def test_coerce
     cases = {
@@ -263,7 +263,7 @@ class Anthropic::Test::CollectionModelTest < Minitest::Test
 end
 
 class Anthropic::Test::BaseModelTest < Minitest::Test
-  class M1 < Anthropic::BaseModel
+  class M1 < Anthropic::Internal::Type::BaseModel
     required :a, Integer
   end
 
@@ -273,7 +273,7 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
     optional :c, String
   end
 
-  class M3 < Anthropic::BaseModel
+  class M3 < Anthropic::Internal::Type::BaseModel
     optional :c, const: :c
     required :d, const: :d
   end
@@ -290,7 +290,7 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
     end
   end
 
-  class M5 < Anthropic::BaseModel
+  class M5 < Anthropic::Internal::Type::BaseModel
     request_only do
       required :c, const: :c
     end
@@ -301,7 +301,7 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
   end
 
   class M6 < M1
-    required :a, Anthropic::ArrayOf[M6]
+    required :a, Anthropic::Internal::Type::ArrayOf[M6]
   end
 
   def test_coerce
@@ -337,7 +337,7 @@ class Anthropic::Test::BaseModelTest < Minitest::Test
       assert_pattern do
         coerced = Anthropic::Internal::Type::Converter.coerce(target, input, state: state)
         assert_equal(coerced, coerced)
-        if coerced.is_a?(Anthropic::BaseModel)
+        if coerced.is_a?(Anthropic::Internal::Type::BaseModel)
           coerced.to_h => ^expect
         else
           coerced => ^expect
@@ -403,27 +403,27 @@ end
 
 class Anthropic::Test::UnionTest < Minitest::Test
   module U0
-    extend Anthropic::Union
+    extend Anthropic::Internal::Type::Union
   end
 
   module U1
-    extend Anthropic::Union
+    extend Anthropic::Internal::Type::Union
     variant const: :a
     variant const: 2
   end
 
-  class M1 < Anthropic::BaseModel
+  class M1 < Anthropic::Internal::Type::BaseModel
     required :t, const: :a, api_name: :type
     optional :c, String
   end
 
-  class M2 < Anthropic::BaseModel
+  class M2 < Anthropic::Internal::Type::BaseModel
     required :type, const: :b
     optional :c, String
   end
 
   module U2
-    extend Anthropic::Union
+    extend Anthropic::Internal::Type::Union
     discriminator :type
 
     variant :a, M1
@@ -431,7 +431,7 @@ class Anthropic::Test::UnionTest < Minitest::Test
   end
 
   module U3
-    extend Anthropic::Union
+    extend Anthropic::Internal::Type::Union
     discriminator :type
 
     variant :a, M1
@@ -439,37 +439,37 @@ class Anthropic::Test::UnionTest < Minitest::Test
   end
 
   module U4
-    extend Anthropic::Union
+    extend Anthropic::Internal::Type::Union
     discriminator :type
 
     variant String
     variant :a, M1
   end
 
-  class M3 < Anthropic::BaseModel
+  class M3 < Anthropic::Internal::Type::BaseModel
     optional :recur, -> { U5 }
     required :a, Integer
   end
 
-  class M4 < Anthropic::BaseModel
+  class M4 < Anthropic::Internal::Type::BaseModel
     optional :recur, -> { U5 }
-    required :a, Anthropic::ArrayOf[-> { U5 }]
+    required :a, Anthropic::Internal::Type::ArrayOf[-> { U5 }]
   end
 
-  class M5 < Anthropic::BaseModel
+  class M5 < Anthropic::Internal::Type::BaseModel
     optional :recur, -> { U5 }
-    required :b, Anthropic::ArrayOf[-> { U5 }]
+    required :b, Anthropic::Internal::Type::ArrayOf[-> { U5 }]
   end
 
   module U5
-    extend Anthropic::Union
+    extend Anthropic::Internal::Type::Union
 
     variant -> { M3 }
     variant -> { M4 }
   end
 
   module U6
-    extend Anthropic::Union
+    extend Anthropic::Internal::Type::Union
 
     variant -> { M3 }
     variant -> { M5 }
@@ -480,7 +480,7 @@ class Anthropic::Test::UnionTest < Minitest::Test
     tap do
       model.recur
       flunk
-    rescue Anthropic::ConversionError => e
+    rescue Anthropic::Errors::ConversionError => e
       assert_kind_of(ArgumentError, e.cause)
     end
   end
@@ -513,7 +513,7 @@ class Anthropic::Test::UnionTest < Minitest::Test
       assert_pattern do
         coerced = Anthropic::Internal::Type::Converter.coerce(target, input, state: state)
         assert_equal(coerced, coerced)
-        if coerced.is_a?(Anthropic::BaseModel)
+        if coerced.is_a?(Anthropic::Internal::Type::BaseModel)
           coerced.to_h => ^expect
         else
           coerced => ^expect
@@ -527,29 +527,29 @@ end
 
 class Anthropic::Test::BaseModelQoLTest < Minitest::Test
   module E1
-    extend Anthropic::Enum
+    extend Anthropic::Internal::Type::Enum
 
     A = 1
   end
 
   module E2
-    extend Anthropic::Enum
+    extend Anthropic::Internal::Type::Enum
 
     A = 1
   end
 
   module E3
-    extend Anthropic::Enum
+    extend Anthropic::Internal::Type::Enum
 
     A = 2
     B = 3
   end
 
-  class M1 < Anthropic::BaseModel
+  class M1 < Anthropic::Internal::Type::BaseModel
     required :a, Integer
   end
 
-  class M2 < Anthropic::BaseModel
+  class M2 < Anthropic::Internal::Type::BaseModel
     required :a, Integer, nil?: true
   end
 
@@ -559,9 +559,9 @@ class Anthropic::Test::BaseModelQoLTest < Minitest::Test
 
   def test_equality
     cases = {
-      [Anthropic::Unknown, Anthropic::Unknown] => true,
-      [Anthropic::BooleanModel, Anthropic::BooleanModel] => true,
-      [Anthropic::Unknown, Anthropic::BooleanModel] => false,
+      [Anthropic::Internal::Type::Unknown, Anthropic::Internal::Type::Unknown] => true,
+      [Anthropic::Internal::Type::BooleanModel, Anthropic::Internal::Type::BooleanModel] => true,
+      [Anthropic::Internal::Type::Unknown, Anthropic::Internal::Type::BooleanModel] => false,
       [E1, E2] => true,
       [E1, E3] => false,
       [M1, M2] => false,

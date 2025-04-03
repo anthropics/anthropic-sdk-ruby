@@ -6,7 +6,7 @@ module Anthropic
   #
   #   When making a request, you can pass an actual {RequestOptions} instance, or
   #   simply pass a Hash with symbol keys matching the attributes on this class.
-  class RequestOptions < Anthropic::BaseModel
+  class RequestOptions < Anthropic::Internal::Type::BaseModel
     # @api private
     #
     # @param opts [Anthropic::RequestOptions, Hash{Symbol=>Object}]
@@ -37,21 +37,21 @@ module Anthropic
     #     `query` given at the client level.
     #
     #   @return [Hash{String=>Array<String>, String, nil}, nil]
-    optional :extra_query, Anthropic::HashOf[Anthropic::ArrayOf[String]]
+    optional :extra_query, Anthropic::Internal::Type::HashOf[Anthropic::Internal::Type::ArrayOf[String]]
 
     # @!attribute extra_headers
     #   Extra headers to send with the request. These are `.merged`’d into any
     #     `extra_headers` given at the client level.
     #
     #   @return [Hash{String=>String, nil}, nil]
-    optional :extra_headers, Anthropic::HashOf[String, nil?: true]
+    optional :extra_headers, Anthropic::Internal::Type::HashOf[String, nil?: true]
 
     # @!attribute extra_body
     #   Extra data to send with the request. These are deep merged into any data
     #     generated as part of the normal request.
     #
     #   @return [Object, nil]
-    optional :extra_body, Anthropic::HashOf[Anthropic::Unknown]
+    optional :extra_body, Anthropic::Internal::Type::HashOf[Anthropic::Internal::Type::Unknown]
 
     # @!attribute max_retries
     #   Maximum number of retries to attempt after a failed initial request.

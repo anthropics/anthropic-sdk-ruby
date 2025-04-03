@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Beta
       module Messages
-        class BetaMessageBatchExpiredResult < Anthropic::BaseModel
+        class BetaMessageBatchExpiredResult < Anthropic::Internal::Type::BaseModel
           sig { returns(Symbol) }
           attr_accessor :type
 

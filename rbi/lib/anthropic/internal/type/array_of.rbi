@@ -17,11 +17,11 @@ module Anthropic
         sig(:final) do
           params(
             type_info: T.any(
-              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Internal::AnyHash,
               T.proc.returns(Anthropic::Internal::Type::Converter::Input),
               Anthropic::Internal::Type::Converter::Input
             ),
-            spec: Anthropic::Internal::Util::AnyHash
+            spec: Anthropic::Internal::AnyHash
           )
             .returns(T.attached_class)
         end
@@ -72,11 +72,11 @@ module Anthropic
         sig(:final) do
           params(
             type_info: T.any(
-              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Internal::AnyHash,
               T.proc.returns(Anthropic::Internal::Type::Converter::Input),
               Anthropic::Internal::Type::Converter::Input
             ),
-            spec: Anthropic::Internal::Util::AnyHash
+            spec: Anthropic::Internal::AnyHash
           )
             .void
         end

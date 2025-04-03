@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Beta
       module BetaTextCitationParam
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         sig do
           override

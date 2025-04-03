@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaNotFoundError < Anthropic::BaseModel
+    class BetaNotFoundError < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :message
 

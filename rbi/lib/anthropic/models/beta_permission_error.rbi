@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaPermissionError < Anthropic::BaseModel
+    class BetaPermissionError < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :message
 

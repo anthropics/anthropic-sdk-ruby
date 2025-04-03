@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaThinkingConfigDisabled < Anthropic::BaseModel
+      class BetaThinkingConfigDisabled < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
         #   @return [Symbol, :disabled]
@@ -14,7 +14,7 @@ module Anthropic
         #   #
         #   def initialize(type: :disabled, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

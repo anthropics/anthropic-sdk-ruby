@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       type beta_signature_delta = { signature: String, type: :signature_delta }
 
-      class BetaSignatureDelta < Anthropic::BaseModel
+      class BetaSignatureDelta < Anthropic::Internal::Type::BaseModel
         attr_accessor signature: String
 
         attr_accessor type: :signature_delta

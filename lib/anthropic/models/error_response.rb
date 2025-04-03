@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ErrorResponse < Anthropic::BaseModel
+    class ErrorResponse < Anthropic::Internal::Type::BaseModel
       # @!attribute error
       #
       #   @return [Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError, Anthropic::Models::RateLimitError, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError]
@@ -19,7 +19,7 @@ module Anthropic
       #   #
       #   def initialize(error:, type: :error, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaToolComputerUse20241022 < Anthropic::BaseModel
+      class BetaToolComputerUse20241022 < Anthropic::Internal::Type::BaseModel
         # The height of the display in pixels.
         sig { returns(Integer) }
         attr_accessor :display_height_px
@@ -26,7 +26,7 @@ module Anthropic
 
         sig do
           params(
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash))
           )
             .void
         end
@@ -40,7 +40,7 @@ module Anthropic
           params(
             display_height_px: Integer,
             display_width_px: Integer,
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash)),
             display_number: T.nilable(Integer),
             name: Symbol,
             type: Symbol

@@ -5,7 +5,7 @@ module Anthropic
         { after_id: String, before_id: String, limit: Integer }
         & Anthropic::Internal::Type::request_parameters
 
-      class ModelListParams < Anthropic::BaseModel
+      class ModelListParams < Anthropic::Internal::Type::BaseModel
         extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 

@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class Usage < Anthropic::BaseModel
+    class Usage < Anthropic::Internal::Type::BaseModel
       # The number of input tokens used to create the cache entry.
       sig { returns(T.nilable(Integer)) }
       attr_accessor :cache_creation_input_tokens

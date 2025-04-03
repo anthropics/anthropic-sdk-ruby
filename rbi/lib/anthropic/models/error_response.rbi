@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ErrorResponse < Anthropic::BaseModel
+    class ErrorResponse < Anthropic::Internal::Type::BaseModel
       sig do
         returns(
           T.any(
@@ -27,7 +27,7 @@ module Anthropic
         params(
           error: T.any(
             Anthropic::Models::InvalidRequestError,
-            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Internal::AnyHash,
             Anthropic::Models::AuthenticationError,
             Anthropic::Models::BillingError,
             Anthropic::Models::PermissionError,

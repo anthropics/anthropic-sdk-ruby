@@ -4,10 +4,6 @@ module Anthropic
   module Internal
     # @api private
     module Util
-      # Due to the current WIP status of Shapes support in Sorbet, types referencing
-      #   this alias might be refined in the future.
-      AnyHash = T.type_alias { T::Hash[Symbol, T.anything] }
-
       # @api private
       sig { returns(Float) }
       def self.monotonic_secs
@@ -57,13 +53,6 @@ module Anthropic
         end
       end
 
-      # Use this to indicate that a value should be explicitly removed from a data
-      #   structure when using `Anthropic::Internal::Util.deep_merge`.
-      #
-      #   e.g. merging `{a: 1}` and `{a: OMIT}` should produce `{}`, where merging
-      #   `{a: 1}` and `{}` would produce `{a: 1}`.
-      OMIT = T.let(T.anything, T.anything)
-
       class << self
         # @api private
         sig { params(lhs: T.anything, rhs: T.anything, concat: T::Boolean).returns(T.anything) }
@@ -90,7 +79,7 @@ module Anthropic
         # @api private
         sig do
           params(
-            data: T.any(Anthropic::Internal::Util::AnyHash, T::Array[T.anything], T.anything),
+            data: T.any(Anthropic::Internal::AnyHash, T::Array[T.anything], T.anything),
             pick: T.nilable(T.any(Symbol, Integer, T::Array[T.any(Symbol, Integer)])),
             sentinel: T.nilable(T.anything),
             blk: T.nilable(T.proc.returns(T.anything))

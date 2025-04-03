@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Beta
       module Messages
-        class BetaMessageBatch < Anthropic::BaseModel
+        class BetaMessageBatch < Anthropic::Internal::Type::BaseModel
           # Unique object identifier.
           #
           #   The format and length of IDs may change over time.
@@ -53,10 +53,7 @@ module Anthropic
 
           sig do
             params(
-              request_counts: T.any(
-                Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts,
-                Anthropic::Internal::Util::AnyHash
-              )
+              request_counts: T.any(Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts, Anthropic::Internal::AnyHash)
             )
               .void
           end
@@ -85,10 +82,7 @@ module Anthropic
               ended_at: T.nilable(Time),
               expires_at: Time,
               processing_status: Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::OrSymbol,
-              request_counts: T.any(
-                Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts,
-                Anthropic::Internal::Util::AnyHash
-              ),
+              request_counts: T.any(Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts, Anthropic::Internal::AnyHash),
               results_url: T.nilable(String),
               type: Symbol
             )
@@ -130,7 +124,7 @@ module Anthropic
 
           # Processing status of the Message Batch.
           module ProcessingStatus
-            extend Anthropic::Enum
+            extend Anthropic::Internal::Type::Enum
 
             TaggedSymbol =
               T.type_alias { T.all(Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus) }

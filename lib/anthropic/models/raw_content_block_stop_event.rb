@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class RawContentBlockStopEvent < Anthropic::BaseModel
+    class RawContentBlockStopEvent < Anthropic::Internal::Type::BaseModel
       # @!attribute index
       #
       #   @return [Integer]
@@ -19,7 +19,7 @@ module Anthropic
       #   #
       #   def initialize(index:, type: :content_block_stop, **) = super
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

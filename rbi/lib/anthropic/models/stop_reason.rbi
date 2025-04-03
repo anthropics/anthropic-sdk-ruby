@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module StopReason
-      extend Anthropic::Enum
+      extend Anthropic::Internal::Type::Enum
 
       TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::StopReason) }
       OrSymbol = T.type_alias { T.any(Symbol, String, Anthropic::Models::StopReason::TaggedSymbol) }

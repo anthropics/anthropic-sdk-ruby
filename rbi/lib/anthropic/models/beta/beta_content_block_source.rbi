@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaContentBlockSource < Anthropic::BaseModel
+      class BetaContentBlockSource < Anthropic::Internal::Type::BaseModel
         sig do
           returns(
             T.any(
@@ -24,7 +24,7 @@ module Anthropic
               T::Array[
               T.any(
                 Anthropic::Models::Beta::BetaTextBlockParam,
-                Anthropic::Internal::Util::AnyHash,
+                Anthropic::Internal::AnyHash,
                 Anthropic::Models::Beta::BetaImageBlockParam
               )
               ]
@@ -52,7 +52,7 @@ module Anthropic
         end
 
         module Content
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           sig do
             override
@@ -65,7 +65,7 @@ module Anthropic
 
           BetaContentBlockSourceContentArray =
             T.let(
-              Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlockSourceContent],
+              Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlockSourceContent],
               Anthropic::Internal::Type::Converter
             )
         end

@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaImageBlockParam < Anthropic::BaseModel
+      class BetaImageBlockParam < Anthropic::Internal::Type::BaseModel
         # @!attribute source
         #
         #   @return [Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource]
@@ -26,11 +26,11 @@ module Anthropic
         #   #
         #   def initialize(source:, cache_control: nil, type: :image, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
 
         # @see Anthropic::Models::Beta::BetaImageBlockParam#source
         module Source
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           discriminator :type
 

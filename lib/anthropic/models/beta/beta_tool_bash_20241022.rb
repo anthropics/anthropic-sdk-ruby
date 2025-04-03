@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaToolBash20241022 < Anthropic::BaseModel
+      class BetaToolBash20241022 < Anthropic::Internal::Type::BaseModel
         # @!attribute name
         #   Name of the tool.
         #
@@ -29,7 +29,7 @@ module Anthropic
         #   #
         #   def initialize(cache_control: nil, name: :bash, type: :bash_20241022, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

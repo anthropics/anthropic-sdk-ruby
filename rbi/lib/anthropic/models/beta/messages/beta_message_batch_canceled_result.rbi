@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Beta
       module Messages
-        class BetaMessageBatchCanceledResult < Anthropic::BaseModel
+        class BetaMessageBatchCanceledResult < Anthropic::Internal::Type::BaseModel
           sig { returns(Symbol) }
           attr_accessor :type
 

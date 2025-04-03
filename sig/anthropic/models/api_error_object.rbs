@@ -2,7 +2,7 @@ module Anthropic
   module Models
     type api_error_object = { message: String, type: :api_error }
 
-    class APIErrorObject < Anthropic::BaseModel
+    class APIErrorObject < Anthropic::Internal::Type::BaseModel
       attr_accessor message: String
 
       attr_accessor type: :api_error

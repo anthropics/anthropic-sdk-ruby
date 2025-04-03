@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaTextBlock < Anthropic::BaseModel
+      class BetaTextBlock < Anthropic::Internal::Type::BaseModel
         # Citations supporting the text block.
         #
         #   The type of citation returned will depend on the type of document being cited.
@@ -36,7 +36,7 @@ module Anthropic
               T::Array[
               T.any(
                 Anthropic::Models::Beta::BetaCitationCharLocation,
-                Anthropic::Internal::Util::AnyHash,
+                Anthropic::Internal::AnyHash,
                 Anthropic::Models::Beta::BetaCitationPageLocation,
                 Anthropic::Models::Beta::BetaCitationContentBlockLocation
               )

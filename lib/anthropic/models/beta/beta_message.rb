@@ -6,7 +6,7 @@ module Anthropic
       # @see Anthropic::Resources::Beta::Messages#create
       #
       # @see Anthropic::Resources::Beta::Messages#stream_raw
-      class BetaMessage < Anthropic::BaseModel
+      class BetaMessage < Anthropic::Internal::Type::BaseModel
         # @!attribute id
         #   Unique object identifier.
         #
@@ -50,7 +50,8 @@ module Anthropic
         #     ```
         #
         #   @return [Array<Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock>]
-        required :content, -> { Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlock] }
+        required :content,
+                 -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlock] }
 
         # @!attribute model
         #   The model that will complete your prompt.\n\nSee
@@ -133,7 +134,7 @@ module Anthropic
         #   #
         #   def initialize(id:, content:, model:, stop_reason:, stop_sequence:, usage:, role: :assistant, type: :message, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

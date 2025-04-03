@@ -13,7 +13,7 @@ module Anthropic
           title: String?
         }
 
-      class BetaBase64PDFBlock < Anthropic::BaseModel
+      class BetaBase64PDFBlock < Anthropic::Internal::Type::BaseModel
         attr_accessor source: Anthropic::Models::Beta::BetaBase64PDFBlock::source
 
         attr_accessor type: :document
@@ -48,7 +48,7 @@ module Anthropic
           | Anthropic::Models::Beta::BetaURLPDFSource
 
         module Source
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource]
         end

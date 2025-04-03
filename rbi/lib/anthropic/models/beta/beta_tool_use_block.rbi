@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaToolUseBlock < Anthropic::BaseModel
+      class BetaToolUseBlock < Anthropic::Internal::Type::BaseModel
         sig { returns(String) }
         attr_accessor :id
 

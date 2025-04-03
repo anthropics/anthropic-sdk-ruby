@@ -18,7 +18,7 @@ class Anthropic::Test::Resources::Beta::MessagesTest < Anthropic::Test::Resource
     assert_pattern do
       response => {
         id: String,
-        content: ^(Anthropic::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlock]),
+        content: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlock]),
         model: Anthropic::Models::Model,
         role: Symbol,
         stop_reason: Anthropic::Models::Beta::BetaStopReason | nil,

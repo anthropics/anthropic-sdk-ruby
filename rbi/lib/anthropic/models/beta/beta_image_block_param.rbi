@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaImageBlockParam < Anthropic::BaseModel
+      class BetaImageBlockParam < Anthropic::Internal::Type::BaseModel
         sig do
           returns(
             T.any(Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource)
@@ -19,7 +19,7 @@ module Anthropic
 
         sig do
           params(
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash))
           )
             .void
         end
@@ -29,10 +29,10 @@ module Anthropic
           params(
             source: T.any(
               Anthropic::Models::Beta::BetaBase64ImageSource,
-              Anthropic::Internal::Util::AnyHash,
+              Anthropic::Internal::AnyHash,
               Anthropic::Models::Beta::BetaURLImageSource
             ),
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash)),
             type: Symbol
           )
             .returns(T.attached_class)
@@ -54,7 +54,7 @@ module Anthropic
         end
 
         module Source
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           sig do
             override

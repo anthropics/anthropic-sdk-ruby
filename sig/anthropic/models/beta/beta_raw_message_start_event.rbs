@@ -6,7 +6,7 @@ module Anthropic
       type beta_raw_message_start_event =
         { message: Anthropic::Models::Beta::BetaMessage, type: :message_start }
 
-      class BetaRawMessageStartEvent < Anthropic::BaseModel
+      class BetaRawMessageStartEvent < Anthropic::Internal::Type::BaseModel
         attr_accessor message: Anthropic::Models::Beta::BetaMessage
 
         attr_accessor type: :message_start

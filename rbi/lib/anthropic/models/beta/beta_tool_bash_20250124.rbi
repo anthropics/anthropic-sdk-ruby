@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaToolBash20250124 < Anthropic::BaseModel
+      class BetaToolBash20250124 < Anthropic::Internal::Type::BaseModel
         # Name of the tool.
         #
         #   This is how the tool will be called by the model and in tool_use blocks.
@@ -18,7 +18,7 @@ module Anthropic
 
         sig do
           params(
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash))
           )
             .void
         end
@@ -26,7 +26,7 @@ module Anthropic
 
         sig do
           params(
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash)),
             name: Symbol,
             type: Symbol
           )

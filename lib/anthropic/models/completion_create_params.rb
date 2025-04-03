@@ -5,7 +5,7 @@ module Anthropic
     # @see Anthropic::Resources::Completions#create
     #
     # @see Anthropic::Resources::Completions#stream_raw
-    class CompletionCreateParams < Anthropic::BaseModel
+    class CompletionCreateParams < Anthropic::Internal::Type::BaseModel
       # @!parse
       #   extend Anthropic::Internal::Type::RequestParameters::Converter
       include Anthropic::Internal::Type::RequestParameters
@@ -63,7 +63,7 @@ module Anthropic
       #     include additional strings that will cause the model to stop generating.
       #
       #   @return [Array<String>, nil]
-      optional :stop_sequences, Anthropic::ArrayOf[String]
+      optional :stop_sequences, Anthropic::Internal::Type::ArrayOf[String]
 
       # @!parse
       #   # @return [Array<String>]
@@ -146,7 +146,7 @@ module Anthropic
       #     super
       #   end
 
-      # def initialize: (Hash | Anthropic::BaseModel) -> void
+      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
     end
   end
 end

@@ -6,7 +6,7 @@ module Anthropic
       type beta_redacted_thinking_block_param =
         { data: String, type: :redacted_thinking }
 
-      class BetaRedactedThinkingBlockParam < Anthropic::BaseModel
+      class BetaRedactedThinkingBlockParam < Anthropic::Internal::Type::BaseModel
         attr_accessor data: String
 
         attr_accessor type: :redacted_thinking

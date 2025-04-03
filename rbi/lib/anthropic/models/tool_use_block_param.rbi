@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class ToolUseBlockParam < Anthropic::BaseModel
+    class ToolUseBlockParam < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :id
 
@@ -20,7 +20,7 @@ module Anthropic
 
       sig do
         params(
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash))
         )
           .void
       end
@@ -31,7 +31,7 @@ module Anthropic
           id: String,
           input: T.anything,
           name: String,
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash)),
           type: Symbol
         )
           .returns(T.attached_class)

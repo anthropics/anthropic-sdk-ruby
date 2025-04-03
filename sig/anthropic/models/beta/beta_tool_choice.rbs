@@ -10,7 +10,7 @@ module Anthropic
         | Anthropic::Models::Beta::BetaToolChoiceNone
 
       module BetaToolChoice
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone]
       end

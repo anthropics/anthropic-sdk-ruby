@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Beta
       # @see Anthropic::Resources::Beta::Models#list
-      class ModelListParams < Anthropic::BaseModel
+      class ModelListParams < Anthropic::Internal::Type::BaseModel
         # @!parse
         #   extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
@@ -51,7 +51,7 @@ module Anthropic
         #   #
         #   def initialize(after_id: nil, before_id: nil, limit: nil, request_options: {}, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
   end

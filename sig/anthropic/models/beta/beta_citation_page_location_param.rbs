@@ -13,7 +13,7 @@ module Anthropic
           type: :page_location
         }
 
-      class BetaCitationPageLocationParam < Anthropic::BaseModel
+      class BetaCitationPageLocationParam < Anthropic::Internal::Type::BaseModel
         attr_accessor cited_text: String
 
         attr_accessor document_index: Integer

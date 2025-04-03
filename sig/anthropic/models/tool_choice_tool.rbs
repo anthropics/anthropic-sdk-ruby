@@ -3,7 +3,7 @@ module Anthropic
     type tool_choice_tool =
       { name: String, type: :tool, disable_parallel_tool_use: bool }
 
-    class ToolChoiceTool < Anthropic::BaseModel
+    class ToolChoiceTool < Anthropic::Internal::Type::BaseModel
       attr_accessor name: String
 
       attr_accessor type: :tool

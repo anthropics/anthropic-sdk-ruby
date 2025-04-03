@@ -9,7 +9,7 @@ module Anthropic
           role: Anthropic::Models::Beta::BetaMessageParam::role
         }
 
-      class BetaMessageParam < Anthropic::BaseModel
+      class BetaMessageParam < Anthropic::Internal::Type::BaseModel
         attr_accessor content: Anthropic::Models::Beta::BetaMessageParam::content
 
         attr_accessor role: Anthropic::Models::Beta::BetaMessageParam::role
@@ -25,7 +25,7 @@ module Anthropic
           String | ::Array[Anthropic::Models::Beta::beta_content_block_param]
 
         module Content
-          extend Anthropic::Union
+          extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> [String, ::Array[Anthropic::Models::Beta::beta_content_block_param]]
 
@@ -38,7 +38,7 @@ module Anthropic
         type role = :user | :assistant
 
         module Role
-          extend Anthropic::Enum
+          extend Anthropic::Internal::Type::Enum
 
           USER: :user
           ASSISTANT: :assistant

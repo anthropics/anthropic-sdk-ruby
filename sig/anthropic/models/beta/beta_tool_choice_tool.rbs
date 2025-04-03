@@ -6,7 +6,7 @@ module Anthropic
       type beta_tool_choice_tool =
         { name: String, type: :tool, disable_parallel_tool_use: bool }
 
-      class BetaToolChoiceTool < Anthropic::BaseModel
+      class BetaToolChoiceTool < Anthropic::Internal::Type::BaseModel
         attr_accessor name: String
 
         attr_accessor type: :tool

@@ -8,7 +8,7 @@ module Anthropic
         description: String
       }
 
-    class Tool < Anthropic::BaseModel
+    class Tool < Anthropic::Internal::Type::BaseModel
       attr_accessor input_schema: Anthropic::Models::Tool::InputSchema
 
       attr_accessor name: String
@@ -30,7 +30,7 @@ module Anthropic
 
       type input_schema = { type: :object, properties: top? }
 
-      class InputSchema < Anthropic::BaseModel
+      class InputSchema < Anthropic::Internal::Type::BaseModel
         attr_accessor type: :object
 
         attr_accessor properties: top?

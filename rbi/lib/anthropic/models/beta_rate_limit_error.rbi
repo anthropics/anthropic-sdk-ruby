@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class BetaRateLimitError < Anthropic::BaseModel
+    class BetaRateLimitError < Anthropic::Internal::Type::BaseModel
       sig { returns(String) }
       attr_accessor :message
 

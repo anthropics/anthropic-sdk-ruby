@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaUsage < Anthropic::BaseModel
+      class BetaUsage < Anthropic::Internal::Type::BaseModel
         # @!attribute cache_creation_input_tokens
         #   The number of input tokens used to create the cache entry.
         #
@@ -36,7 +36,7 @@ module Anthropic
         #   #
         #   def initialize(cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, output_tokens:, **) = super
 
-        # def initialize: (Hash | Anthropic::BaseModel) -> void
+        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
       end
     end
 

@@ -4,7 +4,7 @@ module Anthropic
       module Messages
         type beta_message_batch_canceled_result = { type: :canceled }
 
-        class BetaMessageBatchCanceledResult < Anthropic::BaseModel
+        class BetaMessageBatchCanceledResult < Anthropic::Internal::Type::BaseModel
           attr_accessor type: :canceled
 
           def initialize: (?type: :canceled) -> void

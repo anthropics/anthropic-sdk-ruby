@@ -3,7 +3,7 @@ module Anthropic
     type base64_pdf_source =
       { data: String, media_type: :"application/pdf", type: :base64 }
 
-    class Base64PDFSource < Anthropic::BaseModel
+    class Base64PDFSource < Anthropic::Internal::Type::BaseModel
       attr_accessor data: String
 
       attr_accessor media_type: :"application/pdf"

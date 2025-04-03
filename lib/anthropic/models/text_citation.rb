@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module TextCitation
-      extend Anthropic::Union
+      extend Anthropic::Internal::Type::Union
 
       discriminator :type
 

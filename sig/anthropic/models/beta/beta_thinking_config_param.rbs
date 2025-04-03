@@ -8,7 +8,7 @@ module Anthropic
         | Anthropic::Models::Beta::BetaThinkingConfigDisabled
 
       module BetaThinkingConfigParam
-        extend Anthropic::Union
+        extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
       end

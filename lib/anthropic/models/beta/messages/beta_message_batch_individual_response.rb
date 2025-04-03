@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       module Messages
         # @see Anthropic::Resources::Beta::Messages::Batches#results_streaming
-        class BetaMessageBatchIndividualResponse < Anthropic::BaseModel
+        class BetaMessageBatchIndividualResponse < Anthropic::Internal::Type::BaseModel
           # @!attribute custom_id
           #   Developer-provided ID created for each request in a Message Batch. Useful for
           #     matching results to requests, as results may be given out of request order.
@@ -34,7 +34,7 @@ module Anthropic
           #   #
           #   def initialize(custom_id:, result:, **) = super
 
-          # def initialize: (Hash | Anthropic::BaseModel) -> void
+          # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
         end
       end
     end
