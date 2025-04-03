@@ -138,7 +138,7 @@ module Anthropic
           )
             .returns(Anthropic::Internal::JsonLStream[Anthropic::Models::Messages::MessageBatchIndividualResponse])
         end
-        def results(
+        def results_streaming(
           # ID of the Message Batch.
           message_batch_id,
           request_options: {}
