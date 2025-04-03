@@ -33,7 +33,7 @@ module Anthropic
         ?top_k: Integer,
         ?top_p: Float,
         ?request_options: Anthropic::request_opts
-      ) -> Anthropic::Stream[Anthropic::Models::raw_message_stream_event]
+      ) -> Anthropic::Internal::Stream[Anthropic::Models::raw_message_stream_event]
 
       def count_tokens: (
         messages: ::Array[Anthropic::Models::MessageParam],

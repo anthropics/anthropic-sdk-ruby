@@ -33,7 +33,7 @@ module Anthropic
             T::Array[
             T.any(
               Anthropic::Models::TextBlockParam,
-              Anthropic::Util::AnyHash,
+              Anthropic::Internal::Util::AnyHash,
               Anthropic::Models::ImageBlockParam,
               Anthropic::Models::ToolUseBlockParam,
               Anthropic::Models::ToolResultBlockParam,
@@ -101,7 +101,10 @@ module Anthropic
         end
 
         ContentBlockParamArray =
-          T.let(Anthropic::ArrayOf[union: Anthropic::Models::ContentBlockParam], Anthropic::Type::Converter)
+          T.let(
+            Anthropic::ArrayOf[union: Anthropic::Models::ContentBlockParam],
+            Anthropic::Internal::Type::Converter
+          )
       end
 
       module Role

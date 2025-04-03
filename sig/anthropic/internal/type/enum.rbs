@@ -1,0 +1,24 @@
+module Anthropic
+  module Internal
+    module Type
+      module Enum
+        include Anthropic::Internal::Type::Converter
+
+        def self.values: -> ::Array[(nil | bool | Integer | Float | Symbol)]
+
+        private def self.finalize!: -> void
+
+        def ===: (top other) -> bool
+
+        def ==: (top other) -> bool
+
+        def coerce: (
+          String | Symbol | top value,
+          state: Anthropic::Internal::Type::Converter::state
+        ) -> (Symbol | top)
+
+        def dump: (Symbol | top value) -> (Symbol | top)
+      end
+    end
+  end
+end

@@ -6,8 +6,8 @@ module Anthropic
       # @see Anthropic::Resources::Messages::Batches#create
       class BatchCreateParams < Anthropic::BaseModel
         # @!parse
-        #   extend Anthropic::Type::RequestParameters::Converter
-        include Anthropic::RequestParameters
+        #   extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
 
         # @!attribute requests
         #   List of requests for prompt completion. Each is an individual request to create

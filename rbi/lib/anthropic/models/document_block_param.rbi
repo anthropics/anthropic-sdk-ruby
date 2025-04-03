@@ -23,7 +23,7 @@ module Anthropic
 
       sig do
         params(
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash))
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
         )
           .void
       end
@@ -32,7 +32,7 @@ module Anthropic
       sig { returns(T.nilable(Anthropic::Models::CitationsConfigParam)) }
       attr_reader :citations
 
-      sig { params(citations: T.any(Anthropic::Models::CitationsConfigParam, Anthropic::Util::AnyHash)).void }
+      sig { params(citations: T.any(Anthropic::Models::CitationsConfigParam, Anthropic::Internal::Util::AnyHash)).void }
       attr_writer :citations
 
       sig { returns(T.nilable(String)) }
@@ -45,13 +45,13 @@ module Anthropic
         params(
           source: T.any(
             Anthropic::Models::Base64PDFSource,
-            Anthropic::Util::AnyHash,
+            Anthropic::Internal::Util::AnyHash,
             Anthropic::Models::PlainTextSource,
             Anthropic::Models::ContentBlockSource,
             Anthropic::Models::URLPDFSource
           ),
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)),
-          citations: T.any(Anthropic::Models::CitationsConfigParam, Anthropic::Util::AnyHash),
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
+          citations: T.any(Anthropic::Models::CitationsConfigParam, Anthropic::Internal::Util::AnyHash),
           context: T.nilable(String),
           title: T.nilable(String),
           type: Symbol

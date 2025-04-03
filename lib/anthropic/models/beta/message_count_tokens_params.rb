@@ -6,8 +6,8 @@ module Anthropic
       # @see Anthropic::Resources::Beta::Messages#count_tokens
       class MessageCountTokensParams < Anthropic::BaseModel
         # @!parse
-        #   extend Anthropic::Type::RequestParameters::Converter
-        include Anthropic::RequestParameters
+        #   extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
 
         # @!attribute messages
         #   Input messages.

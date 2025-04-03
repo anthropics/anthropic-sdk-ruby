@@ -14,7 +14,7 @@ module Anthropic
 
       sig do
         params(
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash))
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
         )
           .void
       end
@@ -22,8 +22,12 @@ module Anthropic
 
       sig do
         params(
-          source: T.any(Anthropic::Models::Base64ImageSource, Anthropic::Util::AnyHash, Anthropic::Models::URLImageSource),
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)),
+          source: T.any(
+            Anthropic::Models::Base64ImageSource,
+            Anthropic::Internal::Util::AnyHash,
+            Anthropic::Models::URLImageSource
+          ),
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
           type: Symbol
         )
           .returns(T.attached_class)

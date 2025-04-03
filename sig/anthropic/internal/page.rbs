@@ -1,0 +1,17 @@
+module Anthropic
+  module Internal
+    class Page[Elem]
+      include Anthropic::Internal::Type::BasePage[Elem]
+
+      attr_accessor data: ::Array[Elem]?
+
+      attr_accessor has_more: bool
+
+      attr_accessor first_id: String?
+
+      attr_accessor last_id: String?
+
+      def inspect: -> String
+    end
+  end
+end

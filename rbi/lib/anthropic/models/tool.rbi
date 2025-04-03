@@ -10,7 +10,7 @@ module Anthropic
       sig { returns(Anthropic::Models::Tool::InputSchema) }
       attr_reader :input_schema
 
-      sig { params(input_schema: T.any(Anthropic::Models::Tool::InputSchema, Anthropic::Util::AnyHash)).void }
+      sig { params(input_schema: T.any(Anthropic::Models::Tool::InputSchema, Anthropic::Internal::Util::AnyHash)).void }
       attr_writer :input_schema
 
       # Name of the tool.
@@ -24,7 +24,7 @@ module Anthropic
 
       sig do
         params(
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash))
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
         )
           .void
       end
@@ -44,9 +44,9 @@ module Anthropic
 
       sig do
         params(
-          input_schema: T.any(Anthropic::Models::Tool::InputSchema, Anthropic::Util::AnyHash),
+          input_schema: T.any(Anthropic::Models::Tool::InputSchema, Anthropic::Internal::Util::AnyHash),
           name: String,
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Util::AnyHash)),
+          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
           description: String
         )
           .returns(T.attached_class)

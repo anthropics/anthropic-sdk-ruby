@@ -7,8 +7,8 @@ module Anthropic
     # @see Anthropic::Resources::Completions#stream_raw
     class CompletionCreateParams < Anthropic::BaseModel
       # @!parse
-      #   extend Anthropic::Type::RequestParameters::Converter
-      include Anthropic::RequestParameters
+      #   extend Anthropic::Internal::Type::RequestParameters::Converter
+      include Anthropic::Internal::Type::RequestParameters
 
       # @!attribute max_tokens_to_sample
       #   The maximum number of tokens to generate before stopping.

@@ -24,7 +24,7 @@ module Anthropic
 
         sig do
           params(
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash))
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash))
           )
             .void
         end
@@ -33,7 +33,12 @@ module Anthropic
         sig { returns(T.nilable(Anthropic::Models::Beta::BetaCitationsConfigParam)) }
         attr_reader :citations
 
-        sig { params(citations: T.any(Anthropic::Models::Beta::BetaCitationsConfigParam, Anthropic::Util::AnyHash)).void }
+        sig do
+          params(
+            citations: T.any(Anthropic::Models::Beta::BetaCitationsConfigParam, Anthropic::Internal::Util::AnyHash)
+          )
+            .void
+        end
         attr_writer :citations
 
         sig { returns(T.nilable(String)) }
@@ -46,13 +51,13 @@ module Anthropic
           params(
             source: T.any(
               Anthropic::Models::Beta::BetaBase64PDFSource,
-              Anthropic::Util::AnyHash,
+              Anthropic::Internal::Util::AnyHash,
               Anthropic::Models::Beta::BetaPlainTextSource,
               Anthropic::Models::Beta::BetaContentBlockSource,
               Anthropic::Models::Beta::BetaURLPDFSource
             ),
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Util::AnyHash)),
-            citations: T.any(Anthropic::Models::Beta::BetaCitationsConfigParam, Anthropic::Util::AnyHash),
+            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::Util::AnyHash)),
+            citations: T.any(Anthropic::Models::Beta::BetaCitationsConfigParam, Anthropic::Internal::Util::AnyHash),
             context: T.nilable(String),
             title: T.nilable(String),
             type: Symbol

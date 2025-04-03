@@ -9,11 +9,11 @@ module Anthropic
         tool_choice: Anthropic::Models::tool_choice,
         tools: ::Array[Anthropic::Models::message_count_tokens_tool]
       }
-      & Anthropic::request_parameters
+      & Anthropic::Internal::Type::request_parameters
 
     class MessageCountTokensParams < Anthropic::BaseModel
-      extend Anthropic::Type::RequestParameters::Converter
-      include Anthropic::RequestParameters
+      extend Anthropic::Internal::Type::RequestParameters::Converter
+      include Anthropic::Internal::Type::RequestParameters
 
       attr_accessor messages: ::Array[Anthropic::Models::MessageParam]
 

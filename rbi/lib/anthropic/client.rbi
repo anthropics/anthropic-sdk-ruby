@@ -1,7 +1,7 @@
 # typed: strong
 
 module Anthropic
-  class Client < Anthropic::Transport::BaseClient
+  class Client < Anthropic::Internal::Transport::BaseClient
     DEFAULT_MAX_RETRIES = 2
 
     DEFAULT_TIMEOUT_IN_SECONDS = T.let(600.0, Float)
