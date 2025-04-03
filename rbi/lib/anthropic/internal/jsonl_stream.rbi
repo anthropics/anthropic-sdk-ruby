@@ -3,10 +3,10 @@
 module Anthropic
   module Internal
     class JsonLStream
-      include Anthropic::Internal::Type::BaseStream
-
       Message = type_member(:in) { {fixed: T.anything} }
       Elem = type_member(:out)
+
+      include Anthropic::Internal::Type::BaseStream
 
       # @api private
       sig { override.returns(T::Enumerable[Elem]) }

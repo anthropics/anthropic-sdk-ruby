@@ -2,6 +2,8 @@
 
 module Anthropic
   module Internal
+    # @generic Elem
+    #
     # @example
     #   stream.each do |batch|
     #     puts(batch)
@@ -11,7 +13,7 @@ module Anthropic
 
       # @api private
       #
-      # @return [Enumerable]
+      # @return [Enumerable<generic<Elem>>]
       private def iterator
         @iterator ||= Anthropic::Internal::Util.chain_fused(@stream) do |y|
           @stream.each do
