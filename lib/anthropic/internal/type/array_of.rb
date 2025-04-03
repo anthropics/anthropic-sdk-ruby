@@ -7,6 +7,8 @@ module Anthropic
       #
       # @abstract
       #
+      # @generic Elem
+      #
       # Array of items of a given type.
       class ArrayOf
         include Anthropic::Internal::Type::Converter
@@ -40,7 +42,7 @@ module Anthropic
 
         # @api private
         #
-        # @param value [Enumerable, Object]
+        # @param value [Array<Object>, Object]
         #
         # @param state [Hash{Symbol=>Object}] .
         #
@@ -75,7 +77,7 @@ module Anthropic
 
         # @api private
         #
-        # @param value [Enumerable, Object]
+        # @param value [Array<Object>, Object]
         #
         # @return [Array<Object>, Object]
         def dump(value)
@@ -91,7 +93,7 @@ module Anthropic
 
         # @api private
         #
-        # @return [Anthropic::Internal::Type::Converter, Class]
+        # @return [generic<Elem>]
         protected def item_type = @item_type_fn.call
 
         # @api private
