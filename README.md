@@ -67,6 +67,8 @@ end
 
 We provide support for streaming responses using Server Side Events (SSE).
 
+**coming soon**: `anthropic.messages.stream` will have [Python SDK](https://github.com/anthropics/anthropic-sdk-python?tab=readme-ov-file#streaming-helpers) style streaming response helpers.
+
 ```ruby
 stream = anthropic.messages.stream_raw(
   max_tokens: 1024,
