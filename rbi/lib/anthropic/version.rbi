@@ -1,5 +1,5 @@
 # typed: strong
 
 module Anthropic
-  VERSION = "0.0.1.pre.alpha.0"
+  VERSION = T.let(T.unsafe(nil), String)
 end
