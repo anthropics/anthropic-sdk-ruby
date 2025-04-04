@@ -188,7 +188,7 @@ Due to limitations with the Sorbet type system, where a method otherwise can tak
 Please follow Sorbet's [setup guides](https://sorbet.org/docs/adopting) for best experience.
 
 ```ruby
-model = Anthropic::Models::MessageCreateParams.new(
+params = Anthropic::Models::MessageCreateParams.new(
   max_tokens: 1024,
   messages: [{
     role: "user",
@@ -197,7 +197,7 @@ model = Anthropic::Models::MessageCreateParams.new(
   model: "claude-3-5-sonnet-latest"
 )
 
-anthropic.messages.create(**model)
+anthropic.messages.create(**params)
 ```
 
 ## Advanced
