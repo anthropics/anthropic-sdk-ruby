@@ -200,7 +200,7 @@ module Anthropic
             #     details.
             #
             #   @return [Boolean, nil]
-            optional :stream, Anthropic::Internal::Type::BooleanModel
+            optional :stream, Anthropic::Internal::Type::Boolean
 
             # @!parse
             #   # @return [Boolean]

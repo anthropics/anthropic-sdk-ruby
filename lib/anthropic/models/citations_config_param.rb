@@ -6,7 +6,7 @@ module Anthropic
       # @!attribute [r] enabled
       #
       #   @return [Boolean, nil]
-      optional :enabled, Anthropic::Internal::Type::BooleanModel
+      optional :enabled, Anthropic::Internal::Type::Boolean
 
       # @!parse
       #   # @return [Boolean]
