@@ -6,7 +6,7 @@ module Anthropic
       class BetaToolTextEditor20250124 < Anthropic::Internal::Type::BaseModel
         # Name of the tool.
         #
-        #   This is how the tool will be called by the model and in tool_use blocks.
+        # This is how the tool will be called by the model and in tool_use blocks.
         sig { returns(Symbol) }
         attr_accessor :name
 

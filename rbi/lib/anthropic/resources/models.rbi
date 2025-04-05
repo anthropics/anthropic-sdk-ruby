@@ -5,8 +5,8 @@ module Anthropic
     class Models
       # Get a specific model.
       #
-      #   The Models API response can be used to determine information about a specific
-      #   model or resolve a model alias to a model ID.
+      # The Models API response can be used to determine information about a specific
+      # model or resolve a model alias to a model ID.
       sig do
         params(
           model_id: String,
@@ -21,8 +21,8 @@ module Anthropic
       ); end
       # List available models.
       #
-      #   The Models API response can be used to determine which models are available for
-      #   use in the API. More recently released models are listed first.
+      # The Models API response can be used to determine which models are available for
+      # use in the API. More recently released models are listed first.
       sig do
         params(
           after_id: String,
@@ -34,14 +34,14 @@ module Anthropic
       end
       def list(
         # ID of the object to use as a cursor for pagination. When provided, returns the
-        #   page of results immediately after this object.
+        # page of results immediately after this object.
         after_id: nil,
         # ID of the object to use as a cursor for pagination. When provided, returns the
-        #   page of results immediately before this object.
+        # page of results immediately before this object.
         before_id: nil,
         # Number of items to return per page.
         #
-        #   Defaults to `20`. Ranges from `1` to `1000`.
+        # Defaults to `20`. Ranges from `1` to `1000`.
         limit: nil,
         request_options: {}
       ); end

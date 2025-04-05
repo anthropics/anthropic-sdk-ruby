@@ -7,7 +7,7 @@ module Anthropic
         # @!attribute name
         #   Name of the tool.
         #
-        #     This is how the tool will be called by the model and in tool_use blocks.
+        #   This is how the tool will be called by the model and in tool_use blocks.
         #
         #   @return [Symbol, :bash]
         required :name, const: :bash
