@@ -8,15 +8,15 @@ module Anthropic
           T.any(
             String,
             T::Array[
-            T.any(
-              Anthropic::Models::TextBlockParam,
-              Anthropic::Models::ImageBlockParam,
-              Anthropic::Models::ToolUseBlockParam,
-              Anthropic::Models::ToolResultBlockParam,
-              Anthropic::Models::DocumentBlockParam,
-              Anthropic::Models::ThinkingBlockParam,
-              Anthropic::Models::RedactedThinkingBlockParam
-            )
+              T.any(
+                Anthropic::Models::TextBlockParam,
+                Anthropic::Models::ImageBlockParam,
+                Anthropic::Models::ToolUseBlockParam,
+                Anthropic::Models::ToolResultBlockParam,
+                Anthropic::Models::DocumentBlockParam,
+                Anthropic::Models::ThinkingBlockParam,
+                Anthropic::Models::RedactedThinkingBlockParam
+              )
             ]
           )
         )
@@ -31,24 +31,23 @@ module Anthropic
           content: T.any(
             String,
             T::Array[
-            T.any(
-              Anthropic::Models::TextBlockParam,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::ImageBlockParam,
-              Anthropic::Models::ToolUseBlockParam,
-              Anthropic::Models::ToolResultBlockParam,
-              Anthropic::Models::DocumentBlockParam,
-              Anthropic::Models::ThinkingBlockParam,
-              Anthropic::Models::RedactedThinkingBlockParam
-            )
+              T.any(
+                Anthropic::Models::TextBlockParam,
+                Anthropic::Internal::AnyHash,
+                Anthropic::Models::ImageBlockParam,
+                Anthropic::Models::ToolUseBlockParam,
+                Anthropic::Models::ToolResultBlockParam,
+                Anthropic::Models::DocumentBlockParam,
+                Anthropic::Models::ThinkingBlockParam,
+                Anthropic::Models::RedactedThinkingBlockParam
+              )
             ]
           ),
           role: Anthropic::Models::MessageParam::Role::OrSymbol
         )
           .returns(T.attached_class)
       end
-      def self.new(content:, role:)
-      end
+      def self.new(content:, role:); end
 
       sig do
         override
@@ -57,23 +56,22 @@ module Anthropic
               content: T.any(
                 String,
                 T::Array[
-                T.any(
-                  Anthropic::Models::TextBlockParam,
-                  Anthropic::Models::ImageBlockParam,
-                  Anthropic::Models::ToolUseBlockParam,
-                  Anthropic::Models::ToolResultBlockParam,
-                  Anthropic::Models::DocumentBlockParam,
-                  Anthropic::Models::ThinkingBlockParam,
-                  Anthropic::Models::RedactedThinkingBlockParam
-                )
+                  T.any(
+                    Anthropic::Models::TextBlockParam,
+                    Anthropic::Models::ImageBlockParam,
+                    Anthropic::Models::ToolUseBlockParam,
+                    Anthropic::Models::ToolResultBlockParam,
+                    Anthropic::Models::DocumentBlockParam,
+                    Anthropic::Models::ThinkingBlockParam,
+                    Anthropic::Models::RedactedThinkingBlockParam
+                  )
                 ]
               ),
               role: Anthropic::Models::MessageParam::Role::OrSymbol
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       module Content
         extend Anthropic::Internal::Type::Union
@@ -84,21 +82,20 @@ module Anthropic
               [
                 String,
                 T::Array[
-                              T.any(
-                                Anthropic::Models::TextBlockParam,
-                                Anthropic::Models::ImageBlockParam,
-                                Anthropic::Models::ToolUseBlockParam,
-                                Anthropic::Models::ToolResultBlockParam,
-                                Anthropic::Models::DocumentBlockParam,
-                                Anthropic::Models::ThinkingBlockParam,
-                                Anthropic::Models::RedactedThinkingBlockParam
-                              )
+                                T.any(
+                                  Anthropic::Models::TextBlockParam,
+                                  Anthropic::Models::ImageBlockParam,
+                                  Anthropic::Models::ToolUseBlockParam,
+                                  Anthropic::Models::ToolResultBlockParam,
+                                  Anthropic::Models::DocumentBlockParam,
+                                  Anthropic::Models::ThinkingBlockParam,
+                                  Anthropic::Models::RedactedThinkingBlockParam
+                                )
                               ]
               ]
             )
         end
-        def self.variants
-        end
+        def self.variants; end
 
         ContentBlockParamArray =
           T.let(
@@ -117,8 +114,7 @@ module Anthropic
         ASSISTANT = T.let(:assistant, Anthropic::Models::MessageParam::Role::TaggedSymbol)
 
         sig { override.returns(T::Array[Anthropic::Models::MessageParam::Role::TaggedSymbol]) }
-        def self.values
-        end
+        def self.values; end
       end
     end
   end

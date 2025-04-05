@@ -10,8 +10,7 @@ module Anthropic
           override
             .returns([Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam])
         end
-        def self.variants
-        end
+        def self.variants; end
       end
     end
 

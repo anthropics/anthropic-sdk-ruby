@@ -19,8 +19,7 @@ module Anthropic
           )
             .returns(T.attached_class)
         end
-        def self.new(requests:, request_options: {})
-        end
+        def self.new(requests:, request_options: {}); end
 
         sig do
           override
@@ -31,8 +30,7 @@ module Anthropic
               }
             )
         end
-        def to_hash
-        end
+        def to_hash; end
 
         class Request < Anthropic::Internal::Type::BaseModel
           # Developer-provided ID created for each request in a Message Batch. Useful for
@@ -64,15 +62,13 @@ module Anthropic
             )
               .returns(T.attached_class)
           end
-          def self.new(custom_id:, params:)
-          end
+          def self.new(custom_id:, params:); end
 
           sig do
             override
               .returns({custom_id: String, params: Anthropic::Models::Messages::BatchCreateParams::Request::Params})
           end
-          def to_hash
-          end
+          def to_hash; end
 
           class Params < Anthropic::Internal::Type::BaseModel
             # The maximum number of tokens to generate before stopping.
@@ -373,11 +369,11 @@ module Anthropic
               returns(
                 T.nilable(
                   T::Array[
-                  T.any(
-                    Anthropic::Models::Tool,
-                    Anthropic::Models::ToolBash20250124,
-                    Anthropic::Models::ToolTextEditor20250124
-                  )
+                    T.any(
+                      Anthropic::Models::Tool,
+                      Anthropic::Models::ToolBash20250124,
+                      Anthropic::Models::ToolTextEditor20250124
+                    )
                   ]
                 )
               )
@@ -387,12 +383,12 @@ module Anthropic
             sig do
               params(
                 tools: T::Array[
-                T.any(
-                  Anthropic::Models::Tool,
-                  Anthropic::Internal::AnyHash,
-                  Anthropic::Models::ToolBash20250124,
-                  Anthropic::Models::ToolTextEditor20250124
-                )
+                  T.any(
+                    Anthropic::Models::Tool,
+                    Anthropic::Internal::AnyHash,
+                    Anthropic::Models::ToolBash20250124,
+                    Anthropic::Models::ToolTextEditor20250124
+                  )
                 ]
               )
                 .void
@@ -454,12 +450,12 @@ module Anthropic
                   Anthropic::Models::ToolChoiceNone
                 ),
                 tools: T::Array[
-                T.any(
-                  Anthropic::Models::Tool,
-                  Anthropic::Internal::AnyHash,
-                  Anthropic::Models::ToolBash20250124,
-                  Anthropic::Models::ToolTextEditor20250124
-                )
+                  T.any(
+                    Anthropic::Models::Tool,
+                    Anthropic::Internal::AnyHash,
+                    Anthropic::Models::ToolBash20250124,
+                    Anthropic::Models::ToolTextEditor20250124
+                  )
                 ],
                 top_k: Integer,
                 top_p: Float
@@ -480,9 +476,7 @@ module Anthropic
               tools: nil,
               top_k: nil,
               top_p: nil
-            )
-            end
-
+            ); end
             sig do
               override
                 .returns(
@@ -503,19 +497,18 @@ module Anthropic
                       Anthropic::Models::ToolChoiceNone
                     ),
                     tools: T::Array[
-                    T.any(
-                      Anthropic::Models::Tool,
-                      Anthropic::Models::ToolBash20250124,
-                      Anthropic::Models::ToolTextEditor20250124
-                    )
+                      T.any(
+                        Anthropic::Models::Tool,
+                        Anthropic::Models::ToolBash20250124,
+                        Anthropic::Models::ToolTextEditor20250124
+                      )
                     ],
                     top_k: Integer,
                     top_p: Float
                   }
                 )
             end
-            def to_hash
-            end
+            def to_hash; end
 
             # System prompt.
             #
@@ -526,8 +519,7 @@ module Anthropic
               extend Anthropic::Internal::Type::Union
 
               sig { override.returns([String, T::Array[Anthropic::Models::TextBlockParam]]) }
-              def self.variants
-              end
+              def self.variants; end
 
               TextBlockParamArray =
                 T.let(

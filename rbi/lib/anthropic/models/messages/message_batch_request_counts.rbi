@@ -42,8 +42,7 @@ module Anthropic
           )
             .returns(T.attached_class)
         end
-        def self.new(canceled:, errored:, expired:, processing:, succeeded:)
-        end
+        def self.new(canceled:, errored:, expired:, processing:, succeeded:); end
 
         sig do
           override
@@ -55,8 +54,7 @@ module Anthropic
                        succeeded: Integer
                      })
         end
-        def to_hash
-        end
+        def to_hash; end
       end
     end
 

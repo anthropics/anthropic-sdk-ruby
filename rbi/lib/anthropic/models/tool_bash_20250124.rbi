@@ -31,15 +31,13 @@ module Anthropic
         )
           .returns(T.attached_class)
       end
-      def self.new(cache_control: nil, name: :bash, type: :bash_20250124)
-      end
+      def self.new(cache_control: nil, name: :bash, type: :bash_20250124); end
 
       sig do
         override
           .returns({name: Symbol, type: Symbol, cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral)})
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

@@ -32,8 +32,7 @@ module Anthropic
           )
             .returns(T.attached_class)
         end
-        def self.new(cache_control: nil, name: :str_replace_editor, type: :text_editor_20250124)
-        end
+        def self.new(cache_control: nil, name: :str_replace_editor, type: :text_editor_20250124); end
 
         sig do
           override
@@ -41,8 +40,7 @@ module Anthropic
               {name: Symbol, type: Symbol, cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)}
             )
         end
-        def to_hash
-        end
+        def to_hash; end
       end
     end
 

@@ -6,8 +6,7 @@ module Anthropic
       extend Anthropic::Internal::Type::Union
 
       sig { override.returns([String, Anthropic::Models::AnthropicBeta::OrSymbol]) }
-      def self.variants
-      end
+      def self.variants; end
 
       TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::AnthropicBeta) }
       OrSymbol = T.type_alias { T.any(Symbol, String, Anthropic::Models::AnthropicBeta::TaggedSymbol) }

@@ -38,11 +38,11 @@ module Anthropic
             content: T.any(
               String,
               T::Array[
-              T.any(
-                Anthropic::Models::Beta::BetaTextBlockParam,
-                Anthropic::Internal::AnyHash,
-                Anthropic::Models::Beta::BetaImageBlockParam
-              )
+                T.any(
+                  Anthropic::Models::Beta::BetaTextBlockParam,
+                  Anthropic::Internal::AnyHash,
+                  Anthropic::Models::Beta::BetaImageBlockParam
+                )
               ]
             )
           )
@@ -63,11 +63,11 @@ module Anthropic
             content: T.any(
               String,
               T::Array[
-              T.any(
-                Anthropic::Models::Beta::BetaTextBlockParam,
-                Anthropic::Internal::AnyHash,
-                Anthropic::Models::Beta::BetaImageBlockParam
-              )
+                T.any(
+                  Anthropic::Models::Beta::BetaTextBlockParam,
+                  Anthropic::Internal::AnyHash,
+                  Anthropic::Models::Beta::BetaImageBlockParam
+                )
               ]
             ),
             is_error: T::Boolean,
@@ -75,8 +75,7 @@ module Anthropic
           )
             .returns(T.attached_class)
         end
-        def self.new(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result)
-        end
+        def self.new(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result); end
 
         sig do
           override
@@ -93,8 +92,7 @@ module Anthropic
               }
             )
         end
-        def to_hash
-        end
+        def to_hash; end
 
         module Content
           extend Anthropic::Internal::Type::Union
@@ -106,8 +104,7 @@ module Anthropic
               override
                 .returns([Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam])
             end
-            def self.variants
-            end
+            def self.variants; end
           end
 
           sig do
@@ -116,8 +113,7 @@ module Anthropic
                 [String, T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]]
               )
           end
-          def self.variants
-          end
+          def self.variants; end
 
           ContentArray =
             T.let(

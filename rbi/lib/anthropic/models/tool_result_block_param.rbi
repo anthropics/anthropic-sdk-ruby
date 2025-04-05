@@ -59,8 +59,7 @@ module Anthropic
         )
           .returns(T.attached_class)
       end
-      def self.new(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result)
-      end
+      def self.new(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result); end
 
       sig do
         override
@@ -74,8 +73,7 @@ module Anthropic
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       module Content
         extend Anthropic::Internal::Type::Union
@@ -84,16 +82,14 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           sig { override.returns([Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam]) }
-          def self.variants
-          end
+          def self.variants; end
         end
 
         sig do
           override
             .returns([String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]])
         end
-        def self.variants
-        end
+        def self.variants; end
 
         ContentArray =
           T.let(

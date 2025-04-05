@@ -41,8 +41,7 @@ module Anthropic
         )
           .returns(T.attached_class)
       end
-      def self.new(delta:, usage:, type: :message_delta)
-      end
+      def self.new(delta:, usage:, type: :message_delta); end
 
       sig do
         override
@@ -54,8 +53,7 @@ module Anthropic
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       class Delta < Anthropic::Internal::Type::BaseModel
         sig { returns(T.nilable(Anthropic::Models::StopReason::TaggedSymbol)) }
@@ -68,8 +66,7 @@ module Anthropic
           params(stop_reason: T.nilable(Anthropic::Models::StopReason::OrSymbol), stop_sequence: T.nilable(String))
             .returns(T.attached_class)
         end
-        def self.new(stop_reason:, stop_sequence:)
-        end
+        def self.new(stop_reason:, stop_sequence:); end
 
         sig do
           override
@@ -77,8 +74,7 @@ module Anthropic
               {stop_reason: T.nilable(Anthropic::Models::StopReason::TaggedSymbol), stop_sequence: T.nilable(String)}
             )
         end
-        def to_hash
-        end
+        def to_hash; end
       end
     end
   end

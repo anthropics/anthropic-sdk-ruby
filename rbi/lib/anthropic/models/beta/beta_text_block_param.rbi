@@ -25,11 +25,11 @@ module Anthropic
           returns(
             T.nilable(
               T::Array[
-              T.any(
-                Anthropic::Models::Beta::BetaCitationCharLocationParam,
-                Anthropic::Models::Beta::BetaCitationPageLocationParam,
-                Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
-              )
+                T.any(
+                  Anthropic::Models::Beta::BetaCitationCharLocationParam,
+                  Anthropic::Models::Beta::BetaCitationPageLocationParam,
+                  Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
+                )
               ]
             )
           )
@@ -42,20 +42,19 @@ module Anthropic
             cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash)),
             citations: T.nilable(
               T::Array[
-              T.any(
-                Anthropic::Models::Beta::BetaCitationCharLocationParam,
-                Anthropic::Internal::AnyHash,
-                Anthropic::Models::Beta::BetaCitationPageLocationParam,
-                Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
-              )
+                T.any(
+                  Anthropic::Models::Beta::BetaCitationCharLocationParam,
+                  Anthropic::Internal::AnyHash,
+                  Anthropic::Models::Beta::BetaCitationPageLocationParam,
+                  Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
+                )
               ]
             ),
             type: Symbol
           )
             .returns(T.attached_class)
         end
-        def self.new(text:, cache_control: nil, citations: nil, type: :text)
-        end
+        def self.new(text:, cache_control: nil, citations: nil, type: :text); end
 
         sig do
           override
@@ -66,18 +65,17 @@ module Anthropic
                 cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
                 citations: T.nilable(
                   T::Array[
-                  T.any(
-                    Anthropic::Models::Beta::BetaCitationCharLocationParam,
-                    Anthropic::Models::Beta::BetaCitationPageLocationParam,
-                    Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
-                  )
+                    T.any(
+                      Anthropic::Models::Beta::BetaCitationCharLocationParam,
+                      Anthropic::Models::Beta::BetaCitationPageLocationParam,
+                      Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
+                    )
                   ]
                 )
               }
             )
         end
-        def to_hash
-        end
+        def to_hash; end
       end
     end
 

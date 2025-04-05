@@ -14,8 +14,7 @@ module Anthropic
       TOOL_USE = T.let(:tool_use, Anthropic::Models::StopReason::TaggedSymbol)
 
       sig { override.returns(T::Array[Anthropic::Models::StopReason::TaggedSymbol]) }
-      def self.values
-      end
+      def self.values; end
     end
   end
 end

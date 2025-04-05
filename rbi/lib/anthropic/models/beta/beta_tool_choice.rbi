@@ -14,8 +14,7 @@ module Anthropic
               [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone]
             )
         end
-        def self.variants
-        end
+        def self.variants; end
       end
     end
 
