@@ -15,7 +15,7 @@ module Anthropic
       #     use.
       #
       #   @return [Boolean, nil]
-      optional :disable_parallel_tool_use, Anthropic::Internal::Type::BooleanModel
+      optional :disable_parallel_tool_use, Anthropic::Internal::Type::Boolean
 
       # @!parse
       #   # @return [Boolean]

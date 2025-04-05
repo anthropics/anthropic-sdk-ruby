@@ -30,7 +30,7 @@ module Anthropic
       # @!attribute [r] is_error
       #
       #   @return [Boolean, nil]
-      optional :is_error, Anthropic::Internal::Type::BooleanModel
+      optional :is_error, Anthropic::Internal::Type::Boolean
 
       # @!parse
       #   # @return [Boolean]
