@@ -79,8 +79,7 @@ module Anthropic
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       module Source
         extend Anthropic::Internal::Type::Union
@@ -91,8 +90,7 @@ module Anthropic
               [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
             )
         end
-        def self.variants
-        end
+        def self.variants; end
       end
     end
   end

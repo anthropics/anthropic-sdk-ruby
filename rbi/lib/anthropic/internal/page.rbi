@@ -20,8 +20,7 @@ module Anthropic
       attr_accessor :last_id
 
       sig { returns(String) }
-      def inspect
-      end
+      def inspect; end
     end
   end
 end

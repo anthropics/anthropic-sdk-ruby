@@ -9,12 +9,10 @@ module Anthropic
 
         # The model will not be allowed to use tools.
         sig { params(type: Symbol).returns(T.attached_class) }
-        def self.new(type: :none)
-        end
+        def self.new(type: :none); end
 
         sig { override.returns({type: Symbol}) }
-        def to_hash
-        end
+        def to_hash; end
       end
     end
 

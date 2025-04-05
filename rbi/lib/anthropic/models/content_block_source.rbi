@@ -23,8 +23,7 @@ module Anthropic
         )
           .returns(T.attached_class)
       end
-      def self.new(content:, type: :content)
-      end
+      def self.new(content:, type: :content); end
 
       sig do
         override
@@ -35,8 +34,7 @@ module Anthropic
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       module Content
         extend Anthropic::Internal::Type::Union
@@ -45,8 +43,7 @@ module Anthropic
           override
             .returns([String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]])
         end
-        def self.variants
-        end
+        def self.variants; end
 
         ContentBlockSourceContentArray =
           T.let(

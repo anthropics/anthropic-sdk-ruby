@@ -119,9 +119,7 @@ module Anthropic
         top_k: nil,
         top_p: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       sig do
         override
           .returns(
@@ -138,8 +136,7 @@ module Anthropic
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

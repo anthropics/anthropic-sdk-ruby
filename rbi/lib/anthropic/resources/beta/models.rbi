@@ -19,9 +19,7 @@ module Anthropic
           # Model identifier or alias.
           model_id,
           request_options: {}
-        )
-        end
-
+        ); end
         # List available models.
         #
         #   The Models API response can be used to determine which models are available for
@@ -47,13 +45,10 @@ module Anthropic
           #   Defaults to `20`. Ranges from `1` to `1000`.
           limit: nil,
           request_options: {}
-        )
-        end
-
+        ); end
         # @api private
         sig { params(client: Anthropic::Client).returns(T.attached_class) }
-        def self.new(client:)
-        end
+        def self.new(client:); end
       end
     end
   end

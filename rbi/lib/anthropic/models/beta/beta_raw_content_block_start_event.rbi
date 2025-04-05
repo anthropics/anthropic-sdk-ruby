@@ -36,8 +36,7 @@ module Anthropic
           )
             .returns(T.attached_class)
         end
-        def self.new(content_block:, index:, type: :content_block_start)
-        end
+        def self.new(content_block:, index:, type: :content_block_start); end
 
         sig do
           override
@@ -54,8 +53,7 @@ module Anthropic
               }
             )
         end
-        def to_hash
-        end
+        def to_hash; end
 
         module ContentBlock
           extend Anthropic::Internal::Type::Union
@@ -66,8 +64,7 @@ module Anthropic
                 [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock]
               )
           end
-          def self.variants
-          end
+          def self.variants; end
         end
       end
     end

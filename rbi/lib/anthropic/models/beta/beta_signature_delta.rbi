@@ -11,12 +11,10 @@ module Anthropic
         attr_accessor :type
 
         sig { params(signature: String, type: Symbol).returns(T.attached_class) }
-        def self.new(signature:, type: :signature_delta)
-        end
+        def self.new(signature:, type: :signature_delta); end
 
         sig { override.returns({signature: String, type: Symbol}) }
-        def to_hash
-        end
+        def to_hash; end
       end
     end
 

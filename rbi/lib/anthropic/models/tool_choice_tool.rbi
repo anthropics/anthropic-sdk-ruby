@@ -24,12 +24,10 @@ module Anthropic
       sig do
         params(name: String, disable_parallel_tool_use: T::Boolean, type: Symbol).returns(T.attached_class)
       end
-      def self.new(name:, disable_parallel_tool_use: nil, type: :tool)
-      end
+      def self.new(name:, disable_parallel_tool_use: nil, type: :tool); end
 
       sig { override.returns({name: String, type: Symbol, disable_parallel_tool_use: T::Boolean}) }
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

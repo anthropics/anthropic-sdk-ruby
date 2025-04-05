@@ -13,12 +13,10 @@ module Anthropic
         attr_accessor :user_id
 
         sig { params(user_id: T.nilable(String)).returns(T.attached_class) }
-        def self.new(user_id: nil)
-        end
+        def self.new(user_id: nil); end
 
         sig { override.returns({user_id: T.nilable(String)}) }
-        def to_hash
-        end
+        def to_hash; end
       end
     end
 

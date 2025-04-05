@@ -19,12 +19,10 @@ module Anthropic
 
         # The model will automatically decide whether to use tools.
         sig { params(disable_parallel_tool_use: T::Boolean, type: Symbol).returns(T.attached_class) }
-        def self.new(disable_parallel_tool_use: nil, type: :auto)
-        end
+        def self.new(disable_parallel_tool_use: nil, type: :auto); end
 
         sig { override.returns({type: Symbol, disable_parallel_tool_use: T::Boolean}) }
-        def to_hash
-        end
+        def to_hash; end
       end
     end
 

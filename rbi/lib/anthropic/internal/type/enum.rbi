@@ -20,23 +20,19 @@ module Anthropic
 
         # All of the valid Symbol values for this enum.
         sig { overridable.returns(T::Array[T.any(NilClass, T::Boolean, Integer, Float, Symbol)]) }
-        def values
-        end
+        def values; end
 
         # @api private
         #
         # Guard against thread safety issues by instantiating `@values`.
         sig { void }
-        private def finalize!
-        end
+        private def finalize!; end
 
         sig { params(other: T.anything).returns(T::Boolean) }
-        def ===(other)
-        end
+        def ===(other); end
 
         sig { params(other: T.anything).returns(T::Boolean) }
-        def ==(other)
-        end
+        def ==(other); end
 
         # @api private
         #
@@ -52,13 +48,11 @@ module Anthropic
                     state: Anthropic::Internal::Type::Converter::State)
             .returns(T.any(Symbol, T.anything))
         end
-        def coerce(value, state:)
-        end
+        def coerce(value, state:); end
 
         # @api private
         sig { override.params(value: T.any(Symbol, T.anything)).returns(T.any(Symbol, T.anything)) }
-        def dump(value)
-        end
+        def dump(value); end
       end
     end
   end

@@ -38,16 +38,16 @@ module Anthropic
               Anthropic::Models::Beta::BetaToolChoiceNone
             ),
             tools: T::Array[
-            T.any(
-              Anthropic::Models::Beta::BetaTool,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::Beta::BetaToolComputerUse20241022,
-              Anthropic::Models::Beta::BetaToolBash20241022,
-              Anthropic::Models::Beta::BetaToolTextEditor20241022,
-              Anthropic::Models::Beta::BetaToolComputerUse20250124,
-              Anthropic::Models::Beta::BetaToolBash20250124,
-              Anthropic::Models::Beta::BetaToolTextEditor20250124
-            )
+              T.any(
+                Anthropic::Models::Beta::BetaTool,
+                Anthropic::Internal::AnyHash,
+                Anthropic::Models::Beta::BetaToolComputerUse20241022,
+                Anthropic::Models::Beta::BetaToolBash20241022,
+                Anthropic::Models::Beta::BetaToolTextEditor20241022,
+                Anthropic::Models::Beta::BetaToolComputerUse20250124,
+                Anthropic::Models::Beta::BetaToolBash20250124,
+                Anthropic::Models::Beta::BetaToolTextEditor20250124
+              )
             ],
             top_k: Integer,
             top_p: Float,
@@ -291,9 +291,7 @@ module Anthropic
           #   for streaming and non-streaming use cases, respectively.
           stream: false,
           request_options: {}
-        )
-        end
-
+        ); end
         # See {Anthropic::Resources::Beta::Messages#create} for non-streaming counterpart.
         #
         #   Send a structured list of input messages with text and/or image content, and the
@@ -325,16 +323,16 @@ module Anthropic
               Anthropic::Models::Beta::BetaToolChoiceNone
             ),
             tools: T::Array[
-            T.any(
-              Anthropic::Models::Beta::BetaTool,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::Beta::BetaToolComputerUse20241022,
-              Anthropic::Models::Beta::BetaToolBash20241022,
-              Anthropic::Models::Beta::BetaToolTextEditor20241022,
-              Anthropic::Models::Beta::BetaToolComputerUse20250124,
-              Anthropic::Models::Beta::BetaToolBash20250124,
-              Anthropic::Models::Beta::BetaToolTextEditor20250124
-            )
+              T.any(
+                Anthropic::Models::Beta::BetaTool,
+                Anthropic::Internal::AnyHash,
+                Anthropic::Models::Beta::BetaToolComputerUse20241022,
+                Anthropic::Models::Beta::BetaToolBash20241022,
+                Anthropic::Models::Beta::BetaToolTextEditor20241022,
+                Anthropic::Models::Beta::BetaToolComputerUse20250124,
+                Anthropic::Models::Beta::BetaToolBash20250124,
+                Anthropic::Models::Beta::BetaToolTextEditor20250124
+              )
             ],
             top_k: Integer,
             top_p: Float,
@@ -344,14 +342,14 @@ module Anthropic
           )
             .returns(
               Anthropic::Internal::Stream[
-              T.any(
-                Anthropic::Models::Beta::BetaRawMessageStartEvent,
-                Anthropic::Models::Beta::BetaRawMessageDeltaEvent,
-                Anthropic::Models::Beta::BetaRawMessageStopEvent,
-                Anthropic::Models::Beta::BetaRawContentBlockStartEvent,
-                Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent,
-                Anthropic::Models::Beta::BetaRawContentBlockStopEvent
-              )
+                T.any(
+                  Anthropic::Models::Beta::BetaRawMessageStartEvent,
+                  Anthropic::Models::Beta::BetaRawMessageDeltaEvent,
+                  Anthropic::Models::Beta::BetaRawMessageStopEvent,
+                  Anthropic::Models::Beta::BetaRawContentBlockStartEvent,
+                  Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent,
+                  Anthropic::Models::Beta::BetaRawContentBlockStopEvent
+                )
               ]
             )
         end
@@ -589,9 +587,7 @@ module Anthropic
           #   for streaming and non-streaming use cases, respectively.
           stream: true,
           request_options: {}
-        )
-        end
-
+        ); end
         # Count the number of tokens in a Message.
         #
         #   The Token Count API can be used to count the number of tokens in a Message,
@@ -617,16 +613,16 @@ module Anthropic
               Anthropic::Models::Beta::BetaToolChoiceNone
             ),
             tools: T::Array[
-            T.any(
-              Anthropic::Models::Beta::BetaTool,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::Beta::BetaToolComputerUse20241022,
-              Anthropic::Models::Beta::BetaToolBash20241022,
-              Anthropic::Models::Beta::BetaToolTextEditor20241022,
-              Anthropic::Models::Beta::BetaToolComputerUse20250124,
-              Anthropic::Models::Beta::BetaToolBash20250124,
-              Anthropic::Models::Beta::BetaToolTextEditor20250124
-            )
+              T.any(
+                Anthropic::Models::Beta::BetaTool,
+                Anthropic::Internal::AnyHash,
+                Anthropic::Models::Beta::BetaToolComputerUse20241022,
+                Anthropic::Models::Beta::BetaToolBash20241022,
+                Anthropic::Models::Beta::BetaToolTextEditor20241022,
+                Anthropic::Models::Beta::BetaToolComputerUse20250124,
+                Anthropic::Models::Beta::BetaToolBash20250124,
+                Anthropic::Models::Beta::BetaToolTextEditor20250124
+              )
             ],
             betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
             request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
@@ -817,13 +813,10 @@ module Anthropic
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}
-        )
-        end
-
+        ); end
         # @api private
         sig { params(client: Anthropic::Client).returns(T.attached_class) }
-        def self.new(client:)
-        end
+        def self.new(client:); end
       end
     end
   end

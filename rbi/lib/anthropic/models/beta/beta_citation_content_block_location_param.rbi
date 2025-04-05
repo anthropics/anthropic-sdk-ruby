@@ -40,9 +40,7 @@ module Anthropic
           end_block_index:,
           start_block_index:,
           type: :content_block_location
-        )
-        end
-
+        ); end
         sig do
           override
             .returns(
@@ -56,8 +54,7 @@ module Anthropic
               }
             )
         end
-        def to_hash
-        end
+        def to_hash; end
       end
     end
 

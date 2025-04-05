@@ -28,9 +28,7 @@ module Anthropic
             # Header param: Optional header to specify the beta version(s) you want to use.
             betas: nil,
             request_options: {}
-          )
-          end
-
+          ); end
           # This endpoint is idempotent and can be used to poll for Message Batch
           #   completion. To access the results of a Message Batch, make a request to the
           #   `results_url` field in the response.
@@ -51,9 +49,7 @@ module Anthropic
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,
             request_options: {}
-          )
-          end
-
+          ); end
           # List all Message Batches within a Workspace. Most recently created batches are
           #   returned first.
           #
@@ -83,9 +79,7 @@ module Anthropic
             # Header param: Optional header to specify the beta version(s) you want to use.
             betas: nil,
             request_options: {}
-          )
-          end
-
+          ); end
           # Delete a Message Batch.
           #
           #   Message Batches can only be deleted once they've finished processing. If you'd
@@ -107,9 +101,7 @@ module Anthropic
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,
             request_options: {}
-          )
-          end
-
+          ); end
           # Batches may be canceled any time before processing ends. Once cancellation is
           #   initiated, the batch enters a `canceling` state, at which time the system may
           #   complete any in-progress, non-interruptible requests before finalizing
@@ -136,9 +128,7 @@ module Anthropic
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,
             request_options: {}
-          )
-          end
-
+          ); end
           # Streams the results of a Message Batch as a `.jsonl` file.
           #
           #   Each line in the file is a JSON object containing the result of a single request
@@ -163,13 +153,10 @@ module Anthropic
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,
             request_options: {}
-          )
-          end
-
+          ); end
           # @api private
           sig { params(client: Anthropic::Client).returns(T.attached_class) }
-          def self.new(client:)
-          end
+          def self.new(client:); end
         end
       end
     end

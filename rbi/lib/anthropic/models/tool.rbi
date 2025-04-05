@@ -51,8 +51,7 @@ module Anthropic
         )
           .returns(T.attached_class)
       end
-      def self.new(input_schema:, name:, cache_control: nil, description: nil)
-      end
+      def self.new(input_schema:, name:, cache_control: nil, description: nil); end
 
       sig do
         override
@@ -65,8 +64,7 @@ module Anthropic
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       class InputSchema < Anthropic::Internal::Type::BaseModel
         sig { returns(Symbol) }
@@ -80,12 +78,10 @@ module Anthropic
         #   This defines the shape of the `input` that your tool accepts and that the model
         #   will produce.
         sig { params(properties: T.nilable(T.anything), type: Symbol).returns(T.attached_class) }
-        def self.new(properties: nil, type: :object)
-        end
+        def self.new(properties: nil, type: :object); end
 
         sig { override.returns({type: Symbol, properties: T.nilable(T.anything)}) }
-        def to_hash
-        end
+        def to_hash; end
       end
     end
   end

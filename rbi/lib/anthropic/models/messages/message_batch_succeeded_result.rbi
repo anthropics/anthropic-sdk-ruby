@@ -17,12 +17,10 @@ module Anthropic
           params(message: T.any(Anthropic::Models::Message, Anthropic::Internal::AnyHash), type: Symbol)
             .returns(T.attached_class)
         end
-        def self.new(message:, type: :succeeded)
-        end
+        def self.new(message:, type: :succeeded); end
 
         sig { override.returns({message: Anthropic::Models::Message, type: Symbol}) }
-        def to_hash
-        end
+        def to_hash; end
       end
     end
 

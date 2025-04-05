@@ -13,8 +13,7 @@ module Anthropic
             [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
           )
       end
-      def self.variants
-      end
+      def self.variants; end
     end
   end
 end

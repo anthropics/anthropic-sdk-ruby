@@ -11,8 +11,7 @@ module Anthropic
             [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation]
           )
       end
-      def self.variants
-      end
+      def self.variants; end
     end
   end
 end

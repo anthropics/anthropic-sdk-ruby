@@ -10,12 +10,10 @@ module Anthropic
       attr_accessor :type
 
       sig { params(message: String, type: Symbol).returns(T.attached_class) }
-      def self.new(message:, type: :rate_limit_error)
-      end
+      def self.new(message:, type: :rate_limit_error); end
 
       sig { override.returns({message: String, type: Symbol}) }
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end
