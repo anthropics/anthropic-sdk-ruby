@@ -64,7 +64,7 @@ module Anthropic
             in Hash
               type_info(spec.slice(:const, :enum, :union).first&.last)
             in true | false
-              -> { Anthropic::Internal::Type::BooleanModel }
+              -> { Anthropic::Internal::Type::Boolean }
             in Anthropic::Internal::Type::Converter | Class | Symbol
               -> { spec }
             in NilClass | Integer | Float

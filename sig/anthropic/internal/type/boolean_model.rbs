@@ -1,7 +1,7 @@
 module Anthropic
   module Internal
     module Type
-      class BooleanModel
+      class Boolean
         extend Anthropic::Internal::Type::Converter
 
         def self.===: (top other) -> bool
