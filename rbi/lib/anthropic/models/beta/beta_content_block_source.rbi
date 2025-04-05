@@ -22,19 +22,18 @@ module Anthropic
             content: T.any(
               String,
               T::Array[
-              T.any(
-                Anthropic::Models::Beta::BetaTextBlockParam,
-                Anthropic::Internal::AnyHash,
-                Anthropic::Models::Beta::BetaImageBlockParam
-              )
+                T.any(
+                  Anthropic::Models::Beta::BetaTextBlockParam,
+                  Anthropic::Internal::AnyHash,
+                  Anthropic::Models::Beta::BetaImageBlockParam
+                )
               ]
             ),
             type: Symbol
           )
             .returns(T.attached_class)
         end
-        def self.new(content:, type: :content)
-        end
+        def self.new(content:, type: :content); end
 
         sig do
           override
@@ -48,8 +47,7 @@ module Anthropic
               }
             )
         end
-        def to_hash
-        end
+        def to_hash; end
 
         module Content
           extend Anthropic::Internal::Type::Union
@@ -60,8 +58,7 @@ module Anthropic
                 [String, T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]]
               )
           end
-          def self.variants
-          end
+          def self.variants; end
 
           BetaContentBlockSourceContentArray =
             T.let(

@@ -28,8 +28,7 @@ module Anthropic
             )
               .returns(T.attached_class)
           end
-          def self.new(requests:, betas: nil, request_options: {})
-          end
+          def self.new(requests:, betas: nil, request_options: {}); end
 
           sig do
             override
@@ -41,8 +40,7 @@ module Anthropic
                 }
               )
           end
-          def to_hash
-          end
+          def to_hash; end
 
           class Request < Anthropic::Internal::Type::BaseModel
             # Developer-provided ID created for each request in a Message Batch. Useful for
@@ -74,8 +72,7 @@ module Anthropic
               )
                 .returns(T.attached_class)
             end
-            def self.new(custom_id:, params:)
-            end
+            def self.new(custom_id:, params:); end
 
             sig do
               override
@@ -83,8 +80,7 @@ module Anthropic
                   {custom_id: String, params: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params}
                 )
             end
-            def to_hash
-            end
+            def to_hash; end
 
             class Params < Anthropic::Internal::Type::BaseModel
               # The maximum number of tokens to generate before stopping.
@@ -390,15 +386,15 @@ module Anthropic
                 returns(
                   T.nilable(
                     T::Array[
-                    T.any(
-                      Anthropic::Models::Beta::BetaTool,
-                      Anthropic::Models::Beta::BetaToolComputerUse20241022,
-                      Anthropic::Models::Beta::BetaToolBash20241022,
-                      Anthropic::Models::Beta::BetaToolTextEditor20241022,
-                      Anthropic::Models::Beta::BetaToolComputerUse20250124,
-                      Anthropic::Models::Beta::BetaToolBash20250124,
-                      Anthropic::Models::Beta::BetaToolTextEditor20250124
-                    )
+                      T.any(
+                        Anthropic::Models::Beta::BetaTool,
+                        Anthropic::Models::Beta::BetaToolComputerUse20241022,
+                        Anthropic::Models::Beta::BetaToolBash20241022,
+                        Anthropic::Models::Beta::BetaToolTextEditor20241022,
+                        Anthropic::Models::Beta::BetaToolComputerUse20250124,
+                        Anthropic::Models::Beta::BetaToolBash20250124,
+                        Anthropic::Models::Beta::BetaToolTextEditor20250124
+                      )
                     ]
                   )
                 )
@@ -408,16 +404,16 @@ module Anthropic
               sig do
                 params(
                   tools: T::Array[
-                  T.any(
-                    Anthropic::Models::Beta::BetaTool,
-                    Anthropic::Internal::AnyHash,
-                    Anthropic::Models::Beta::BetaToolComputerUse20241022,
-                    Anthropic::Models::Beta::BetaToolBash20241022,
-                    Anthropic::Models::Beta::BetaToolTextEditor20241022,
-                    Anthropic::Models::Beta::BetaToolComputerUse20250124,
-                    Anthropic::Models::Beta::BetaToolBash20250124,
-                    Anthropic::Models::Beta::BetaToolTextEditor20250124
-                  )
+                    T.any(
+                      Anthropic::Models::Beta::BetaTool,
+                      Anthropic::Internal::AnyHash,
+                      Anthropic::Models::Beta::BetaToolComputerUse20241022,
+                      Anthropic::Models::Beta::BetaToolBash20241022,
+                      Anthropic::Models::Beta::BetaToolTextEditor20241022,
+                      Anthropic::Models::Beta::BetaToolComputerUse20250124,
+                      Anthropic::Models::Beta::BetaToolBash20250124,
+                      Anthropic::Models::Beta::BetaToolTextEditor20250124
+                    )
                   ]
                 )
                   .void
@@ -479,16 +475,16 @@ module Anthropic
                     Anthropic::Models::Beta::BetaToolChoiceNone
                   ),
                   tools: T::Array[
-                  T.any(
-                    Anthropic::Models::Beta::BetaTool,
-                    Anthropic::Internal::AnyHash,
-                    Anthropic::Models::Beta::BetaToolComputerUse20241022,
-                    Anthropic::Models::Beta::BetaToolBash20241022,
-                    Anthropic::Models::Beta::BetaToolTextEditor20241022,
-                    Anthropic::Models::Beta::BetaToolComputerUse20250124,
-                    Anthropic::Models::Beta::BetaToolBash20250124,
-                    Anthropic::Models::Beta::BetaToolTextEditor20250124
-                  )
+                    T.any(
+                      Anthropic::Models::Beta::BetaTool,
+                      Anthropic::Internal::AnyHash,
+                      Anthropic::Models::Beta::BetaToolComputerUse20241022,
+                      Anthropic::Models::Beta::BetaToolBash20241022,
+                      Anthropic::Models::Beta::BetaToolTextEditor20241022,
+                      Anthropic::Models::Beta::BetaToolComputerUse20250124,
+                      Anthropic::Models::Beta::BetaToolBash20250124,
+                      Anthropic::Models::Beta::BetaToolTextEditor20250124
+                    )
                   ],
                   top_k: Integer,
                   top_p: Float
@@ -509,9 +505,7 @@ module Anthropic
                 tools: nil,
                 top_k: nil,
                 top_p: nil
-              )
-              end
-
+              ); end
               sig do
                 override
                   .returns(
@@ -535,23 +529,22 @@ module Anthropic
                         Anthropic::Models::Beta::BetaToolChoiceNone
                       ),
                       tools: T::Array[
-                      T.any(
-                        Anthropic::Models::Beta::BetaTool,
-                        Anthropic::Models::Beta::BetaToolComputerUse20241022,
-                        Anthropic::Models::Beta::BetaToolBash20241022,
-                        Anthropic::Models::Beta::BetaToolTextEditor20241022,
-                        Anthropic::Models::Beta::BetaToolComputerUse20250124,
-                        Anthropic::Models::Beta::BetaToolBash20250124,
-                        Anthropic::Models::Beta::BetaToolTextEditor20250124
-                      )
+                        T.any(
+                          Anthropic::Models::Beta::BetaTool,
+                          Anthropic::Models::Beta::BetaToolComputerUse20241022,
+                          Anthropic::Models::Beta::BetaToolBash20241022,
+                          Anthropic::Models::Beta::BetaToolTextEditor20241022,
+                          Anthropic::Models::Beta::BetaToolComputerUse20250124,
+                          Anthropic::Models::Beta::BetaToolBash20250124,
+                          Anthropic::Models::Beta::BetaToolTextEditor20250124
+                        )
                       ],
                       top_k: Integer,
                       top_p: Float
                     }
                   )
               end
-              def to_hash
-              end
+              def to_hash; end
 
               # System prompt.
               #
@@ -562,8 +555,7 @@ module Anthropic
                 extend Anthropic::Internal::Type::Union
 
                 sig { override.returns([String, T::Array[Anthropic::Models::Beta::BetaTextBlockParam]]) }
-                def self.variants
-                end
+                def self.variants; end
 
                 BetaTextBlockParamArray =
                   T.let(

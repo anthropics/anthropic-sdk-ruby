@@ -45,8 +45,7 @@ module Anthropic
         )
           .returns(T.attached_class)
       end
-      def self.new(id:, completion:, model:, stop_reason:, type: :completion)
-      end
+      def self.new(id:, completion:, model:, stop_reason:, type: :completion); end
 
       sig do
         override
@@ -60,8 +59,7 @@ module Anthropic
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

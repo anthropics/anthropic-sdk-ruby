@@ -11,8 +11,7 @@ module Anthropic
             [Anthropic::Models::RawMessageStartEvent, Anthropic::Models::RawMessageDeltaEvent, Anthropic::Models::RawMessageStopEvent, Anthropic::Models::RawContentBlockStartEvent, Anthropic::Models::RawContentBlockDeltaEvent, Anthropic::Models::RawContentBlockStopEvent]
           )
       end
-      def self.variants
-      end
+      def self.variants; end
     end
   end
 end

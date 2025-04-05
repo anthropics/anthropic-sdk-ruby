@@ -11,8 +11,7 @@ module Anthropic
             [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock]
           )
       end
-      def self.variants
-      end
+      def self.variants; end
     end
   end
 end

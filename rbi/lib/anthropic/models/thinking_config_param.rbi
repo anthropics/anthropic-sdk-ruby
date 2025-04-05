@@ -15,8 +15,7 @@ module Anthropic
       extend Anthropic::Internal::Type::Union
 
       sig { override.returns([Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]) }
-      def self.variants
-      end
+      def self.variants; end
     end
   end
 end

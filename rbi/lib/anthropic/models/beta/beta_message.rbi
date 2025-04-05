@@ -45,12 +45,12 @@ module Anthropic
         sig do
           returns(
             T::Array[
-            T.any(
-              Anthropic::Models::Beta::BetaTextBlock,
-              Anthropic::Models::Beta::BetaToolUseBlock,
-              Anthropic::Models::Beta::BetaThinkingBlock,
-              Anthropic::Models::Beta::BetaRedactedThinkingBlock
-            )
+              T.any(
+                Anthropic::Models::Beta::BetaTextBlock,
+                Anthropic::Models::Beta::BetaToolUseBlock,
+                Anthropic::Models::Beta::BetaThinkingBlock,
+                Anthropic::Models::Beta::BetaRedactedThinkingBlock
+              )
             ]
           )
         end
@@ -120,13 +120,13 @@ module Anthropic
           params(
             id: String,
             content: T::Array[
-            T.any(
-              Anthropic::Models::Beta::BetaTextBlock,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::Beta::BetaToolUseBlock,
-              Anthropic::Models::Beta::BetaThinkingBlock,
-              Anthropic::Models::Beta::BetaRedactedThinkingBlock
-            )
+              T.any(
+                Anthropic::Models::Beta::BetaTextBlock,
+                Anthropic::Internal::AnyHash,
+                Anthropic::Models::Beta::BetaToolUseBlock,
+                Anthropic::Models::Beta::BetaThinkingBlock,
+                Anthropic::Models::Beta::BetaRedactedThinkingBlock
+              )
             ],
             model: T.any(Anthropic::Models::Model::OrSymbol, String),
             stop_reason: T.nilable(Anthropic::Models::Beta::BetaStopReason::OrSymbol),
@@ -155,12 +155,12 @@ module Anthropic
               {
                 id: String,
                 content: T::Array[
-                T.any(
-                  Anthropic::Models::Beta::BetaTextBlock,
-                  Anthropic::Models::Beta::BetaToolUseBlock,
-                  Anthropic::Models::Beta::BetaThinkingBlock,
-                  Anthropic::Models::Beta::BetaRedactedThinkingBlock
-                )
+                  T.any(
+                    Anthropic::Models::Beta::BetaTextBlock,
+                    Anthropic::Models::Beta::BetaToolUseBlock,
+                    Anthropic::Models::Beta::BetaThinkingBlock,
+                    Anthropic::Models::Beta::BetaRedactedThinkingBlock
+                  )
                 ],
                 model: T.any(Anthropic::Models::Model::TaggedSymbol, String),
                 role: Symbol,
@@ -171,8 +171,7 @@ module Anthropic
               }
             )
         end
-        def to_hash
-        end
+        def to_hash; end
       end
     end
 

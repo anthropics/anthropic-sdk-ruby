@@ -44,8 +44,7 @@ module Anthropic
             )
               .returns(T.attached_class)
           end
-          def self.new(custom_id:, result:)
-          end
+          def self.new(custom_id:, result:); end
 
           sig do
             override
@@ -61,8 +60,7 @@ module Anthropic
                 }
               )
           end
-          def to_hash
-          end
+          def to_hash; end
         end
       end
     end

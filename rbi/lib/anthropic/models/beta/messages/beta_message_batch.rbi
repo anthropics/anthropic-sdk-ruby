@@ -99,9 +99,7 @@ module Anthropic
             request_counts:,
             results_url:,
             type: :message_batch
-          )
-          end
-
+          ); end
           sig do
             override
               .returns(
@@ -119,8 +117,7 @@ module Anthropic
                 }
               )
           end
-          def to_hash
-          end
+          def to_hash; end
 
           # Processing status of the Message Batch.
           module ProcessingStatus
@@ -142,8 +139,7 @@ module Anthropic
               override
                 .returns(T::Array[Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol])
             end
-            def self.values
-            end
+            def self.values; end
           end
         end
       end

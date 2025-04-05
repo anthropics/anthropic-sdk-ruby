@@ -11,8 +11,7 @@ module Anthropic
             [Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124]
           )
       end
-      def self.variants
-      end
+      def self.variants; end
     end
   end
 end

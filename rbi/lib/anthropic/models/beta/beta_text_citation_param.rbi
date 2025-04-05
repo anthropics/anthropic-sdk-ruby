@@ -12,8 +12,7 @@ module Anthropic
               [Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam]
             )
         end
-        def self.variants
-        end
+        def self.variants; end
       end
     end
 

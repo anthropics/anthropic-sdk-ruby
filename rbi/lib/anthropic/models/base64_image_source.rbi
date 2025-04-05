@@ -16,8 +16,7 @@ module Anthropic
         params(data: String, media_type: Anthropic::Models::Base64ImageSource::MediaType::OrSymbol, type: Symbol)
           .returns(T.attached_class)
       end
-      def self.new(data:, media_type:, type: :base64)
-      end
+      def self.new(data:, media_type:, type: :base64); end
 
       sig do
         override
@@ -25,8 +24,7 @@ module Anthropic
             {data: String, media_type: Anthropic::Models::Base64ImageSource::MediaType::OrSymbol, type: Symbol}
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       module MediaType
         extend Anthropic::Internal::Type::Enum
@@ -41,8 +39,7 @@ module Anthropic
         IMAGE_WEBP = T.let(:"image/webp", Anthropic::Models::Base64ImageSource::MediaType::TaggedSymbol)
 
         sig { override.returns(T::Array[Anthropic::Models::Base64ImageSource::MediaType::TaggedSymbol]) }
-        def self.values
-        end
+        def self.values; end
       end
     end
   end

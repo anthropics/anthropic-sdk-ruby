@@ -37,8 +37,7 @@ module Anthropic
         )
           .returns(T.attached_class)
       end
-      def self.new(delta:, index:, type: :content_block_delta)
-      end
+      def self.new(delta:, index:, type: :content_block_delta); end
 
       sig do
         override
@@ -56,8 +55,7 @@ module Anthropic
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

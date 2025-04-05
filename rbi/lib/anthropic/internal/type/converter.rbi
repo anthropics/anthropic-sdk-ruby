@@ -22,13 +22,11 @@ module Anthropic
             .params(value: T.anything, state: Anthropic::Internal::Type::Converter::State)
             .returns(T.anything)
         end
-        def coerce(value, state:)
-        end
+        def coerce(value, state:); end
 
         # @api private
         sig { overridable.params(value: T.anything).returns(T.anything) }
-        def dump(value)
-        end
+        def dump(value); end
 
         class << self
           # @api private
@@ -46,8 +44,7 @@ module Anthropic
             )
               .returns(T.proc.returns(T.anything))
           end
-          def self.type_info(spec)
-          end
+          def self.type_info(spec); end
 
           # @api private
           #
@@ -91,15 +88,12 @@ module Anthropic
             #
             #   See implementation below for more details.
             state: {strictness: true, exactness: {yes: 0, no: 0, maybe: 0}, branched: 0}
-          )
-          end
-
+          ); end
           # @api private
           sig do
             params(target: Anthropic::Internal::Type::Converter::Input, value: T.anything).returns(T.anything)
           end
-          def self.dump(target, value)
-          end
+          def self.dump(target, value); end
         end
       end
     end

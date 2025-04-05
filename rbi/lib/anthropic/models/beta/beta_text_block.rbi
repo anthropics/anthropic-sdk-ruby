@@ -13,11 +13,11 @@ module Anthropic
           returns(
             T.nilable(
               T::Array[
-              T.any(
-                Anthropic::Models::Beta::BetaCitationCharLocation,
-                Anthropic::Models::Beta::BetaCitationPageLocation,
-                Anthropic::Models::Beta::BetaCitationContentBlockLocation
-              )
+                T.any(
+                  Anthropic::Models::Beta::BetaCitationCharLocation,
+                  Anthropic::Models::Beta::BetaCitationPageLocation,
+                  Anthropic::Models::Beta::BetaCitationContentBlockLocation
+                )
               ]
             )
           )
@@ -34,12 +34,12 @@ module Anthropic
           params(
             citations: T.nilable(
               T::Array[
-              T.any(
-                Anthropic::Models::Beta::BetaCitationCharLocation,
-                Anthropic::Internal::AnyHash,
-                Anthropic::Models::Beta::BetaCitationPageLocation,
-                Anthropic::Models::Beta::BetaCitationContentBlockLocation
-              )
+                T.any(
+                  Anthropic::Models::Beta::BetaCitationCharLocation,
+                  Anthropic::Internal::AnyHash,
+                  Anthropic::Models::Beta::BetaCitationPageLocation,
+                  Anthropic::Models::Beta::BetaCitationContentBlockLocation
+                )
               ]
             ),
             text: String,
@@ -47,8 +47,7 @@ module Anthropic
           )
             .returns(T.attached_class)
         end
-        def self.new(citations:, text:, type: :text)
-        end
+        def self.new(citations:, text:, type: :text); end
 
         sig do
           override
@@ -56,11 +55,11 @@ module Anthropic
               {
                 citations: T.nilable(
                   T::Array[
-                  T.any(
-                    Anthropic::Models::Beta::BetaCitationCharLocation,
-                    Anthropic::Models::Beta::BetaCitationPageLocation,
-                    Anthropic::Models::Beta::BetaCitationContentBlockLocation
-                  )
+                    T.any(
+                      Anthropic::Models::Beta::BetaCitationCharLocation,
+                      Anthropic::Models::Beta::BetaCitationPageLocation,
+                      Anthropic::Models::Beta::BetaCitationContentBlockLocation
+                    )
                   ]
                 ),
                 text: String,
@@ -68,8 +67,7 @@ module Anthropic
               }
             )
         end
-        def to_hash
-        end
+        def to_hash; end
       end
     end
 

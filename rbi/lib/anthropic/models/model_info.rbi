@@ -25,12 +25,10 @@ module Anthropic
       sig do
         params(id: String, created_at: Time, display_name: String, type: Symbol).returns(T.attached_class)
       end
-      def self.new(id:, created_at:, display_name:, type: :model)
-      end
+      def self.new(id:, created_at:, display_name:, type: :model); end
 
       sig { override.returns({id: String, created_at: Time, display_name: String, type: Symbol}) }
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

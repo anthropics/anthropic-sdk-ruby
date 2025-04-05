@@ -11,12 +11,10 @@ module Anthropic
         attr_accessor :type
 
         sig { params(partial_json: String, type: Symbol).returns(T.attached_class) }
-        def self.new(partial_json:, type: :input_json_delta)
-        end
+        def self.new(partial_json:, type: :input_json_delta); end
 
         sig { override.returns({partial_json: String, type: Symbol}) }
-        def to_hash
-        end
+        def to_hash; end
       end
     end
 

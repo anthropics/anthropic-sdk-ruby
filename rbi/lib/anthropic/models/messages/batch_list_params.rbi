@@ -41,8 +41,7 @@ module Anthropic
           )
             .returns(T.attached_class)
         end
-        def self.new(after_id: nil, before_id: nil, limit: nil, request_options: {})
-        end
+        def self.new(after_id: nil, before_id: nil, limit: nil, request_options: {}); end
 
         sig do
           override
@@ -53,8 +52,7 @@ module Anthropic
                        request_options: Anthropic::RequestOptions
                      })
         end
-        def to_hash
-        end
+        def to_hash; end
       end
     end
   end
