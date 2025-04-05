@@ -25,12 +25,12 @@ module Anthropic
           # @see Anthropic::Models::Beta::Messages::BatchCreateParams
           def create(params)
             parsed, options = Anthropic::Models::Beta::Messages::BatchCreateParams.dump_request(params)
-            header_params = [:"anthropic-beta"]
+            header_params = {betas: "anthropic-beta"}
             @client.request(
               method: :post,
               path: "v1/messages/batches?beta=true",
-              headers: parsed.slice(*header_params),
-              body: parsed.except(*header_params),
+              headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+              body: parsed.except(*header_params.keys),
               model: Anthropic::Models::Beta::Messages::BetaMessageBatch,
               options: options
             )
@@ -57,7 +57,7 @@ module Anthropic
             @client.request(
               method: :get,
               path: ["v1/messages/batches/%1$s?beta=true", message_batch_id],
-              headers: parsed,
+              headers: parsed.transform_keys(betas: "anthropic-beta"),
               model: Anthropic::Models::Beta::Messages::BetaMessageBatch,
               options: options
             )
@@ -87,7 +87,7 @@ module Anthropic
               method: :get,
               path: "v1/messages/batches?beta=true",
               query: parsed.slice(*query_params),
-              headers: parsed.except(*query_params),
+              headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
               page: Anthropic::Internal::Page,
               model: Anthropic::Models::Beta::Messages::BetaMessageBatch,
               options: options
@@ -116,7 +116,7 @@ module Anthropic
             @client.request(
               method: :delete,
               path: ["v1/messages/batches/%1$s?beta=true", message_batch_id],
-              headers: parsed,
+              headers: parsed.transform_keys(betas: "anthropic-beta"),
               model: Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch,
               options: options
             )
@@ -149,7 +149,7 @@ module Anthropic
             @client.request(
               method: :post,
               path: ["v1/messages/batches/%1$s/cancel?beta=true", message_batch_id],
-              headers: parsed,
+              headers: parsed.transform_keys(betas: "anthropic-beta"),
               model: Anthropic::Models::Beta::Messages::BetaMessageBatch,
               options: options
             )
@@ -178,7 +178,7 @@ module Anthropic
             @client.request(
               method: :get,
               path: ["v1/messages/batches/%1$s/results?beta=true", message_batch_id],
-              headers: {"accept" => "application/x-jsonl", **parsed},
+              headers: {"accept" => "application/x-jsonl", **parsed}.transform_keys(betas: "anthropic-beta"),
               stream: Anthropic::Internal::JsonLStream,
               model: Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse,
               options: options

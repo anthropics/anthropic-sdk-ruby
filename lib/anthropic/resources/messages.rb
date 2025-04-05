@@ -44,7 +44,7 @@ module Anthropic
         @client.request(
           method: :post,
           path: "v1/messages",
-          body: parsed,
+          body: parsed.transform_keys(system_: :system),
           model: Anthropic::Models::Message,
           options: options
         )
@@ -90,7 +90,7 @@ module Anthropic
           method: :post,
           path: "v1/messages",
           headers: {"accept" => "text/event-stream"},
-          body: parsed,
+          body: parsed.transform_keys(system_: :system),
           stream: Anthropic::Internal::Stream,
           model: Anthropic::Models::RawMessageStreamEvent,
           options: options
@@ -123,7 +123,7 @@ module Anthropic
         @client.request(
           method: :post,
           path: "v1/messages/count_tokens",
-          body: parsed,
+          body: parsed.transform_keys(system_: :system),
           model: Anthropic::Models::MessageTokensCount,
           options: options
         )

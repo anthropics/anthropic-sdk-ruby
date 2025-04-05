@@ -43,12 +43,12 @@ module Anthropic
             message = "Please use `#stream_raw` for the streaming use case."
             raise ArgumentError.new(message)
           end
-          header_params = [:"anthropic-beta"]
+          header_params = {betas: "anthropic-beta"}
           @client.request(
             method: :post,
             path: "v1/messages?beta=true",
-            headers: parsed.slice(*header_params),
-            body: parsed.except(*header_params),
+            headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+            body: parsed.except(*header_params.keys).transform_keys(system_: :system),
             model: Anthropic::Models::Beta::BetaMessage,
             options: options
           )
@@ -91,12 +91,15 @@ module Anthropic
             raise ArgumentError.new(message)
           end
           parsed.store(:stream, true)
-          header_params = [:"anthropic-beta"]
+          header_params = {betas: "anthropic-beta"}
           @client.request(
             method: :post,
             path: "v1/messages?beta=true",
-            headers: {"accept" => "text/event-stream", **parsed.slice(*header_params)},
-            body: parsed.except(*header_params),
+            headers: {
+              "accept" => "text/event-stream",
+              **parsed.slice(*header_params.keys)
+            }.transform_keys(header_params),
+            body: parsed.except(*header_params.keys).transform_keys(system_: :system),
             stream: Anthropic::Internal::Stream,
             model: Anthropic::Models::Beta::BetaRawMessageStreamEvent,
             options: options
@@ -127,12 +130,12 @@ module Anthropic
         # @see Anthropic::Models::Beta::MessageCountTokensParams
         def count_tokens(params)
           parsed, options = Anthropic::Models::Beta::MessageCountTokensParams.dump_request(params)
-          header_params = [:"anthropic-beta"]
+          header_params = {betas: "anthropic-beta"}
           @client.request(
             method: :post,
             path: "v1/messages/count_tokens?beta=true",
-            headers: parsed.slice(*header_params),
-            body: parsed.except(*header_params),
+            headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+            body: parsed.except(*header_params.keys).transform_keys(system_: :system),
             model: Anthropic::Models::Beta::BetaMessageTokensCount,
             options: options
           )
