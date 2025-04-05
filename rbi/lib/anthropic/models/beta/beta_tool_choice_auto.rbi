@@ -9,8 +9,8 @@ module Anthropic
 
         # Whether to disable parallel tool use.
         #
-        #   Defaults to `false`. If set to `true`, the model will output at most one tool
-        #   use.
+        # Defaults to `false`. If set to `true`, the model will output at most one tool
+        # use.
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :disable_parallel_tool_use
 

@@ -7,19 +7,19 @@ module Anthropic
         class BetaMessageBatchRequestCounts < Anthropic::Internal::Type::BaseModel
           # Number of requests in the Message Batch that have been canceled.
           #
-          #   This is zero until processing of the entire Message Batch has ended.
+          # This is zero until processing of the entire Message Batch has ended.
           sig { returns(Integer) }
           attr_accessor :canceled
 
           # Number of requests in the Message Batch that encountered an error.
           #
-          #   This is zero until processing of the entire Message Batch has ended.
+          # This is zero until processing of the entire Message Batch has ended.
           sig { returns(Integer) }
           attr_accessor :errored
 
           # Number of requests in the Message Batch that have expired.
           #
-          #   This is zero until processing of the entire Message Batch has ended.
+          # This is zero until processing of the entire Message Batch has ended.
           sig { returns(Integer) }
           attr_accessor :expired
 
@@ -29,7 +29,7 @@ module Anthropic
 
           # Number of requests in the Message Batch that have completed successfully.
           #
-          #   This is zero until processing of the entire Message Batch has ended.
+          # This is zero until processing of the entire Message Batch has ended.
           sig { returns(Integer) }
           attr_accessor :succeeded
 

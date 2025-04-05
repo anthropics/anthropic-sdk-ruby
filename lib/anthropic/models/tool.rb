@@ -6,8 +6,8 @@ module Anthropic
       # @!attribute input_schema
       #   [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
       #
-      #     This defines the shape of the `input` that your tool accepts and that the model
-      #     will produce.
+      #   This defines the shape of the `input` that your tool accepts and that the model
+      #   will produce.
       #
       #   @return [Anthropic::Models::Tool::InputSchema]
       required :input_schema, -> { Anthropic::Models::Tool::InputSchema }
@@ -15,7 +15,7 @@ module Anthropic
       # @!attribute name
       #   Name of the tool.
       #
-      #     This is how the tool will be called by the model and in tool_use blocks.
+      #   This is how the tool will be called by the model and in tool_use blocks.
       #
       #   @return [String]
       required :name, String
@@ -28,10 +28,10 @@ module Anthropic
       # @!attribute [r] description
       #   Description of what this tool does.
       #
-      #     Tool descriptions should be as detailed as possible. The more information that
-      #     the model has about what the tool is and how to use it, the better it will
-      #     perform. You can use natural language descriptions to reinforce important
-      #     aspects of the tool input JSON schema.
+      #   Tool descriptions should be as detailed as possible. The more information that
+      #   the model has about what the tool is and how to use it, the better it will
+      #   perform. You can use natural language descriptions to reinforce important
+      #   aspects of the tool input JSON schema.
       #
       #   @return [String, nil]
       optional :description, String
@@ -65,8 +65,8 @@ module Anthropic
         # @!parse
         #   # [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
         #   #
-        #   #   This defines the shape of the `input` that your tool accepts and that the model
-        #   #   will produce.
+        #   # This defines the shape of the `input` that your tool accepts and that the model
+        #   # will produce.
         #   #
         #   # @param properties [Object, nil]
         #   # @param type [Symbol, :object]

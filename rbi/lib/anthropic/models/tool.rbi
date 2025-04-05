@@ -5,8 +5,8 @@ module Anthropic
     class Tool < Anthropic::Internal::Type::BaseModel
       # [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
       #
-      #   This defines the shape of the `input` that your tool accepts and that the model
-      #   will produce.
+      # This defines the shape of the `input` that your tool accepts and that the model
+      # will produce.
       sig { returns(Anthropic::Models::Tool::InputSchema) }
       attr_reader :input_schema
 
@@ -15,7 +15,7 @@ module Anthropic
 
       # Name of the tool.
       #
-      #   This is how the tool will be called by the model and in tool_use blocks.
+      # This is how the tool will be called by the model and in tool_use blocks.
       sig { returns(String) }
       attr_accessor :name
 
@@ -32,10 +32,10 @@ module Anthropic
 
       # Description of what this tool does.
       #
-      #   Tool descriptions should be as detailed as possible. The more information that
-      #   the model has about what the tool is and how to use it, the better it will
-      #   perform. You can use natural language descriptions to reinforce important
-      #   aspects of the tool input JSON schema.
+      # Tool descriptions should be as detailed as possible. The more information that
+      # the model has about what the tool is and how to use it, the better it will
+      # perform. You can use natural language descriptions to reinforce important
+      # aspects of the tool input JSON schema.
       sig { returns(T.nilable(String)) }
       attr_reader :description
 
@@ -75,8 +75,8 @@ module Anthropic
 
         # [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
         #
-        #   This defines the shape of the `input` that your tool accepts and that the model
-        #   will produce.
+        # This defines the shape of the `input` that your tool accepts and that the model
+        # will produce.
         sig { params(properties: T.nilable(T.anything), type: Symbol).returns(T.attached_class) }
         def self.new(properties: nil, type: :object); end
 

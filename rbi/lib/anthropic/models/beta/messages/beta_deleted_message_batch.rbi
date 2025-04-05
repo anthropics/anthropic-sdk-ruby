@@ -11,7 +11,7 @@ module Anthropic
 
           # Deleted object type.
           #
-          #   For Message Batches, this is always `"message_batch_deleted"`.
+          # For Message Batches, this is always `"message_batch_deleted"`.
           sig { returns(Symbol) }
           attr_accessor :type
 

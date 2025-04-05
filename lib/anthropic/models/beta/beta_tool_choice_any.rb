@@ -12,8 +12,8 @@ module Anthropic
         # @!attribute [r] disable_parallel_tool_use
         #   Whether to disable parallel tool use.
         #
-        #     Defaults to `false`. If set to `true`, the model will output exactly one tool
-        #     use.
+        #   Defaults to `false`. If set to `true`, the model will output exactly one tool
+        #   use.
         #
         #   @return [Boolean, nil]
         optional :disable_parallel_tool_use, Anthropic::Internal::Type::Boolean
