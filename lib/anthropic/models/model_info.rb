@@ -12,7 +12,7 @@ module Anthropic
 
       # @!attribute created_at
       #   RFC 3339 datetime string representing the time at which the model was released.
-      #     May be set to an epoch value if the release date is unknown.
+      #   May be set to an epoch value if the release date is unknown.
       #
       #   @return [Time]
       required :created_at, Time
@@ -26,7 +26,7 @@ module Anthropic
       # @!attribute type
       #   Object type.
       #
-      #     For Models, this is always `"model"`.
+      #   For Models, this is always `"model"`.
       #
       #   @return [Symbol, :model]
       required :type, const: :model

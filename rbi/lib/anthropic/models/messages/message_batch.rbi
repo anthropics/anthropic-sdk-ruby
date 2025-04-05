@@ -6,35 +6,35 @@ module Anthropic
       class MessageBatch < Anthropic::Internal::Type::BaseModel
         # Unique object identifier.
         #
-        #   The format and length of IDs may change over time.
+        # The format and length of IDs may change over time.
         sig { returns(String) }
         attr_accessor :id
 
         # RFC 3339 datetime string representing the time at which the Message Batch was
-        #   archived and its results became unavailable.
+        # archived and its results became unavailable.
         sig { returns(T.nilable(Time)) }
         attr_accessor :archived_at
 
         # RFC 3339 datetime string representing the time at which cancellation was
-        #   initiated for the Message Batch. Specified only if cancellation was initiated.
+        # initiated for the Message Batch. Specified only if cancellation was initiated.
         sig { returns(T.nilable(Time)) }
         attr_accessor :cancel_initiated_at
 
         # RFC 3339 datetime string representing the time at which the Message Batch was
-        #   created.
+        # created.
         sig { returns(Time) }
         attr_accessor :created_at
 
         # RFC 3339 datetime string representing the time at which processing for the
-        #   Message Batch ended. Specified only once processing ends.
+        # Message Batch ended. Specified only once processing ends.
         #
-        #   Processing ends when every request in a Message Batch has either succeeded,
-        #   errored, canceled, or expired.
+        # Processing ends when every request in a Message Batch has either succeeded,
+        # errored, canceled, or expired.
         sig { returns(T.nilable(Time)) }
         attr_accessor :ended_at
 
         # RFC 3339 datetime string representing the time at which the Message Batch will
-        #   expire and end processing, which is 24 hours after creation.
+        # expire and end processing, which is 24 hours after creation.
         sig { returns(Time) }
         attr_accessor :expires_at
 
@@ -44,9 +44,9 @@ module Anthropic
 
         # Tallies requests within the Message Batch, categorized by their status.
         #
-        #   Requests start as `processing` and move to one of the other statuses only once
-        #   processing of the entire batch ends. The sum of all values always matches the
-        #   total number of requests in the batch.
+        # Requests start as `processing` and move to one of the other statuses only once
+        # processing of the entire batch ends. The sum of all values always matches the
+        # total number of requests in the batch.
         sig { returns(Anthropic::Models::Messages::MessageBatchRequestCounts) }
         attr_reader :request_counts
 
@@ -59,16 +59,16 @@ module Anthropic
         attr_writer :request_counts
 
         # URL to a `.jsonl` file containing the results of the Message Batch requests.
-        #   Specified only once processing ends.
+        # Specified only once processing ends.
         #
-        #   Results in the file are not guaranteed to be in the same order as requests. Use
-        #   the `custom_id` field to match results to requests.
+        # Results in the file are not guaranteed to be in the same order as requests. Use
+        # the `custom_id` field to match results to requests.
         sig { returns(T.nilable(String)) }
         attr_accessor :results_url
 
         # Object type.
         #
-        #   For Message Batches, this is always `"message_batch"`.
+        # For Message Batches, this is always `"message_batch"`.
         sig { returns(Symbol) }
         attr_accessor :type
 

@@ -7,7 +7,7 @@ module Anthropic
         # @!attribute canceled
         #   Number of requests in the Message Batch that have been canceled.
         #
-        #     This is zero until processing of the entire Message Batch has ended.
+        #   This is zero until processing of the entire Message Batch has ended.
         #
         #   @return [Integer]
         required :canceled, Integer
@@ -15,7 +15,7 @@ module Anthropic
         # @!attribute errored
         #   Number of requests in the Message Batch that encountered an error.
         #
-        #     This is zero until processing of the entire Message Batch has ended.
+        #   This is zero until processing of the entire Message Batch has ended.
         #
         #   @return [Integer]
         required :errored, Integer
@@ -23,7 +23,7 @@ module Anthropic
         # @!attribute expired
         #   Number of requests in the Message Batch that have expired.
         #
-        #     This is zero until processing of the entire Message Batch has ended.
+        #   This is zero until processing of the entire Message Batch has ended.
         #
         #   @return [Integer]
         required :expired, Integer
@@ -37,7 +37,7 @@ module Anthropic
         # @!attribute succeeded
         #   Number of requests in the Message Batch that have completed successfully.
         #
-        #     This is zero until processing of the entire Message Batch has ended.
+        #   This is zero until processing of the entire Message Batch has ended.
         #
         #   @return [Integer]
         required :succeeded, Integer

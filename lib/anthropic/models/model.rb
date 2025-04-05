@@ -3,8 +3,8 @@
 module Anthropic
   module Models
     # The model that will complete your prompt.\n\nSee
-    #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
-    #   details and options.
+    # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+    # details and options.
     module Model
       extend Anthropic::Internal::Type::Union
 
@@ -70,21 +70,21 @@ module Anthropic
 
       # Balance of speed and intelligence
       # @deprecated Will reach end-of-life on July 21st, 2025. Please migrate to a newer model.
-      #   Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
-      #   information.
+      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
+      # information.
       CLAUDE_3_SONNET_20240229 = :"claude-3-sonnet-20240229"
 
       # Our previous most fast and cost-effective
       CLAUDE_3_HAIKU_20240307 = :"claude-3-haiku-20240307"
 
       # @deprecated Will reach end-of-life on July 21st, 2025. Please migrate to a newer model.
-      #   Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
-      #   information.
+      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
+      # information.
       CLAUDE_2_1 = :"claude-2.1"
 
       # @deprecated Will reach end-of-life on July 21st, 2025. Please migrate to a newer model.
-      #   Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
-      #   information.
+      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
+      # information.
       CLAUDE_2_0 = :"claude-2.0"
 
       # @!endgroup

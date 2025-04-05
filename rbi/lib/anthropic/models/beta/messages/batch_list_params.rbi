@@ -9,7 +9,7 @@ module Anthropic
           include Anthropic::Internal::Type::RequestParameters
 
           # ID of the object to use as a cursor for pagination. When provided, returns the
-          #   page of results immediately after this object.
+          # page of results immediately after this object.
           sig { returns(T.nilable(String)) }
           attr_reader :after_id
 
@@ -17,7 +17,7 @@ module Anthropic
           attr_writer :after_id
 
           # ID of the object to use as a cursor for pagination. When provided, returns the
-          #   page of results immediately before this object.
+          # page of results immediately before this object.
           sig { returns(T.nilable(String)) }
           attr_reader :before_id
 
@@ -26,7 +26,7 @@ module Anthropic
 
           # Number of items to return per page.
           #
-          #   Defaults to `20`. Ranges from `1` to `1000`.
+          # Defaults to `20`. Ranges from `1` to `1000`.
           sig { returns(T.nilable(Integer)) }
           attr_reader :limit
 
