@@ -4,7 +4,7 @@ module Anthropic
   module Models
     class MessageTokensCount < Anthropic::Internal::Type::BaseModel
       # The total number of tokens across the provided list of messages, system prompt,
-      #   and tools.
+      # and tools.
       sig { returns(Integer) }
       attr_accessor :input_tokens
 

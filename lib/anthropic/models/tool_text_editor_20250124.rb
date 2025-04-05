@@ -6,7 +6,7 @@ module Anthropic
       # @!attribute name
       #   Name of the tool.
       #
-      #     This is how the tool will be called by the model and in tool_use blocks.
+      #   This is how the tool will be called by the model and in tool_use blocks.
       #
       #   @return [Symbol, :str_replace_editor]
       required :name, const: :str_replace_editor

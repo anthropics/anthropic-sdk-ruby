@@ -8,7 +8,7 @@ module Anthropic
       attr_accessor :id
 
       # RFC 3339 datetime string representing the time at which the model was released.
-      #   May be set to an epoch value if the release date is unknown.
+      # May be set to an epoch value if the release date is unknown.
       sig { returns(Time) }
       attr_accessor :created_at
 
@@ -18,7 +18,7 @@ module Anthropic
 
       # Object type.
       #
-      #   For Models, this is always `"model"`.
+      # For Models, this is always `"model"`.
       sig { returns(Symbol) }
       attr_accessor :type
 

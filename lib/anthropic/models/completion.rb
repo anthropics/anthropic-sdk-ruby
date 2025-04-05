@@ -9,7 +9,7 @@ module Anthropic
       # @!attribute id
       #   Unique object identifier.
       #
-      #     The format and length of IDs may change over time.
+      #   The format and length of IDs may change over time.
       #
       #   @return [String]
       required :id, String
@@ -22,8 +22,8 @@ module Anthropic
 
       # @!attribute model
       #   The model that will complete your prompt.\n\nSee
-      #     [models](https://docs.anthropic.com/en/docs/models-overview) for additional
-      #     details and options.
+      #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+      #   details and options.
       #
       #   @return [Symbol, String, Anthropic::Models::Model]
       required :model, union: -> { Anthropic::Models::Model }
@@ -31,11 +31,11 @@ module Anthropic
       # @!attribute stop_reason
       #   The reason that we stopped.
       #
-      #     This may be one the following values:
+      #   This may be one the following values:
       #
-      #     - `"stop_sequence"`: we reached a stop sequence — either provided by you via the
-      #       `stop_sequences` parameter, or a stop sequence built into the model
-      #     - `"max_tokens"`: we exceeded `max_tokens_to_sample` or the model's maximum
+      #   - `"stop_sequence"`: we reached a stop sequence — either provided by you via the
+      #     `stop_sequences` parameter, or a stop sequence built into the model
+      #   - `"max_tokens"`: we exceeded `max_tokens_to_sample` or the model's maximum
       #
       #   @return [String, nil]
       required :stop_reason, String, nil?: true
@@ -43,7 +43,7 @@ module Anthropic
       # @!attribute type
       #   Object type.
       #
-      #     For Text Completions, this is always `"completion"`.
+      #   For Text Completions, this is always `"completion"`.
       #
       #   @return [Symbol, :completion]
       required :type, const: :completion

@@ -3,8 +3,8 @@
 module Anthropic
   module Models
     # The model that will complete your prompt.\n\nSee
-    #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
-    #   details and options.
+    # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+    # details and options.
     module Model
       extend Anthropic::Internal::Type::Union
 

@@ -12,7 +12,7 @@ module Anthropic
 
           # @!attribute [r] after_id
           #   ID of the object to use as a cursor for pagination. When provided, returns the
-          #     page of results immediately after this object.
+          #   page of results immediately after this object.
           #
           #   @return [String, nil]
           optional :after_id, String
@@ -23,7 +23,7 @@ module Anthropic
 
           # @!attribute [r] before_id
           #   ID of the object to use as a cursor for pagination. When provided, returns the
-          #     page of results immediately before this object.
+          #   page of results immediately before this object.
           #
           #   @return [String, nil]
           optional :before_id, String
@@ -35,7 +35,7 @@ module Anthropic
           # @!attribute [r] limit
           #   Number of items to return per page.
           #
-          #     Defaults to `20`. Ranges from `1` to `1000`.
+          #   Defaults to `20`. Ranges from `1` to `1000`.
           #
           #   @return [Integer, nil]
           optional :limit, Integer
