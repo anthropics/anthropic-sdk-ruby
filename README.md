@@ -177,9 +177,23 @@ anthropic.messages.create(
 
 ## LSP Support
 
-### Sorbet
+### Solargraph
 
-**This library emits an intentional warning under the [`tapioca` toolchain](https://github.com/Shopify/tapioca)**. This is normal, and does not impact functionality.
+This library includes [Solargraph](https://solargraph.org) support for both auto completion and go to definition.
+
+```ruby
+gem "solargraph", group: :development
+```
+
+After Solargraph is installed, **you must populate its index** either via the provided editor command, or by running the following in your terminal:
+
+```sh
+bundle exec solargraph gems
+```
+
+Otherwise Solargraph will not be able to provide type information or auto-completion for any non-indexed libraries.
+
+### Sorbet
 
 This library is written with [Sorbet type definitions](https://sorbet.org/docs/rbi). However, there is no runtime dependency on the `sorbet-runtime`.
 
@@ -192,15 +206,22 @@ Please follow Sorbet's [setup guides](https://sorbet.org/docs/adopting) for best
 ```ruby
 params = Anthropic::Models::MessageCreateParams.new(
   max_tokens: 1024,
-  messages: [Anthropic::Models::MessageParam.new(
+  messages: [{
     role: "user",
     content: "Hello, Claude"
-  )],
+  }],
   model: "claude-3-5-sonnet-latest"
 )
 
 anthropic.messages.create(**params)
 ```
+
+Note: **This library emits an intentional warning under the [`tapioca` toolchain](https://github.com/Shopify/tapioca)**. This is normal, and does not impact functionality.
+
+### Ruby LSP
+
+The Ruby LSP has [best effort support](https://shopify.github.io/ruby-lsp/#guessed-types) for inferring type information from Ruby code, and as such it may not always be able to provide accurate type information.
+
 
 ## AWS Bedrock
 
@@ -210,7 +231,7 @@ You can then instantiate a separate `Anthropic::Bedrock::Client` class, and use 
 
 Note that the model ID required is different for Bedrock models, and, depending on the model you want to use, you will need to use either the AWS's model ID for Anthropic models -- which can be found in [AWS's Bedrock model catalog](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html) -- or an inference profile id (e.g. `us.anthropic.claude-3-5-haiku-20241022-v1:0` for Claude 3.5 Haiku).
 
-```rb
+```ruby
 require "bundler/setup"
 require "anthropic"
 
@@ -238,7 +259,7 @@ This library also provides support for the [Anthropic Vertex API](https://cloud.
 
 You can then import and instantiate a separate `Anthropic::Vertex::Client` class, and use Google's guide for configuring [Application Default Credentials](https://cloud.google.com/docs/authentication/provide-credentials-adc). It has the same API as the base `Anthropic::Client` class.
 
-```rb
+```ruby
 require "bundler/setup"
 require "anthropic"
 
@@ -256,7 +277,6 @@ message = anthropic.messages.create(
 )
 
 puts message
-
 ```
 
 For more examples see [`examples/vertex`](examples/vertex).
