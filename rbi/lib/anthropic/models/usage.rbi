@@ -28,8 +28,7 @@ module Anthropic
         )
           .returns(T.attached_class)
       end
-      def self.new(cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, output_tokens:)
-      end
+      def self.new(cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, output_tokens:); end
 
       sig do
         override
@@ -42,8 +41,7 @@ module Anthropic
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

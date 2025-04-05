@@ -15,8 +15,7 @@ module Anthropic
         TOOL_USE = T.let(:tool_use, Anthropic::Models::Beta::BetaStopReason::TaggedSymbol)
 
         sig { override.returns(T::Array[Anthropic::Models::Beta::BetaStopReason::TaggedSymbol]) }
-        def self.values
-        end
+        def self.values; end
       end
     end
 

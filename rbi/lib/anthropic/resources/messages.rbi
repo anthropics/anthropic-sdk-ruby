@@ -37,12 +37,12 @@ module Anthropic
             Anthropic::Models::ToolChoiceNone
           ),
           tools: T::Array[
-          T.any(
-            Anthropic::Models::Tool,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::ToolBash20250124,
-            Anthropic::Models::ToolTextEditor20250124
-          )
+            T.any(
+              Anthropic::Models::Tool,
+              Anthropic::Internal::AnyHash,
+              Anthropic::Models::ToolBash20250124,
+              Anthropic::Models::ToolTextEditor20250124
+            )
           ],
           top_k: Integer,
           top_p: Float,
@@ -283,9 +283,7 @@ module Anthropic
         #   for streaming and non-streaming use cases, respectively.
         stream: false,
         request_options: {}
-      )
-      end
-
+      ); end
       # See {Anthropic::Resources::Messages#create} for non-streaming counterpart.
       #
       #   Send a structured list of input messages with text and/or image content, and the
@@ -317,12 +315,12 @@ module Anthropic
             Anthropic::Models::ToolChoiceNone
           ),
           tools: T::Array[
-          T.any(
-            Anthropic::Models::Tool,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::ToolBash20250124,
-            Anthropic::Models::ToolTextEditor20250124
-          )
+            T.any(
+              Anthropic::Models::Tool,
+              Anthropic::Internal::AnyHash,
+              Anthropic::Models::ToolBash20250124,
+              Anthropic::Models::ToolTextEditor20250124
+            )
           ],
           top_k: Integer,
           top_p: Float,
@@ -331,14 +329,14 @@ module Anthropic
         )
           .returns(
             Anthropic::Internal::Stream[
-            T.any(
-              Anthropic::Models::RawMessageStartEvent,
-              Anthropic::Models::RawMessageDeltaEvent,
-              Anthropic::Models::RawMessageStopEvent,
-              Anthropic::Models::RawContentBlockStartEvent,
-              Anthropic::Models::RawContentBlockDeltaEvent,
-              Anthropic::Models::RawContentBlockStopEvent
-            )
+              T.any(
+                Anthropic::Models::RawMessageStartEvent,
+                Anthropic::Models::RawMessageDeltaEvent,
+                Anthropic::Models::RawMessageStopEvent,
+                Anthropic::Models::RawContentBlockStartEvent,
+                Anthropic::Models::RawContentBlockDeltaEvent,
+                Anthropic::Models::RawContentBlockStopEvent
+              )
             ]
           )
       end
@@ -574,9 +572,7 @@ module Anthropic
         #   for streaming and non-streaming use cases, respectively.
         stream: true,
         request_options: {}
-      )
-      end
-
+      ); end
       # Count the number of tokens in a Message.
       #
       #   The Token Count API can be used to count the number of tokens in a Message,
@@ -602,12 +598,12 @@ module Anthropic
             Anthropic::Models::ToolChoiceNone
           ),
           tools: T::Array[
-          T.any(
-            Anthropic::Models::Tool,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::ToolBash20250124,
-            Anthropic::Models::ToolTextEditor20250124
-          )
+            T.any(
+              Anthropic::Models::Tool,
+              Anthropic::Internal::AnyHash,
+              Anthropic::Models::ToolBash20250124,
+              Anthropic::Models::ToolTextEditor20250124
+            )
           ],
           request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
         )
@@ -795,13 +791,10 @@ module Anthropic
         #   See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
         tools: nil,
         request_options: {}
-      )
-      end
-
+      ); end
       # @api private
       sig { params(client: Anthropic::Client).returns(T.attached_class) }
-      def self.new(client:)
-      end
+      def self.new(client:); end
     end
   end
 end

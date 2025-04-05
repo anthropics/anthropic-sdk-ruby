@@ -32,8 +32,7 @@ module Anthropic
         )
           .returns(T.attached_class)
       end
-      def self.new(source:, cache_control: nil, type: :image)
-      end
+      def self.new(source:, cache_control: nil, type: :image); end
 
       sig do
         override
@@ -45,15 +44,13 @@ module Anthropic
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
 
       module Source
         extend Anthropic::Internal::Type::Union
 
         sig { override.returns([Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]) }
-        def self.variants
-        end
+        def self.variants; end
       end
     end
   end

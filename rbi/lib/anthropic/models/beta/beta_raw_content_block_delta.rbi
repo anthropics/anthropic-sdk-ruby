@@ -12,8 +12,7 @@ module Anthropic
               [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta]
             )
         end
-        def self.variants
-        end
+        def self.variants; end
       end
     end
 

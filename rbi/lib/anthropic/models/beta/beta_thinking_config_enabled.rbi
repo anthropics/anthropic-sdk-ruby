@@ -20,12 +20,10 @@ module Anthropic
         attr_accessor :type
 
         sig { params(budget_tokens: Integer, type: Symbol).returns(T.attached_class) }
-        def self.new(budget_tokens:, type: :enabled)
-        end
+        def self.new(budget_tokens:, type: :enabled); end
 
         sig { override.returns({budget_tokens: Integer, type: Symbol}) }
-        def to_hash
-        end
+        def to_hash; end
       end
     end
 

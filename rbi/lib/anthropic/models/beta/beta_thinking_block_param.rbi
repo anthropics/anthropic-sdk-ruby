@@ -14,12 +14,10 @@ module Anthropic
         attr_accessor :type
 
         sig { params(signature: String, thinking: String, type: Symbol).returns(T.attached_class) }
-        def self.new(signature:, thinking:, type: :thinking)
-        end
+        def self.new(signature:, thinking:, type: :thinking); end
 
         sig { override.returns({signature: String, thinking: String, type: Symbol}) }
-        def to_hash
-        end
+        def to_hash; end
       end
     end
 

@@ -17,8 +17,7 @@ module Anthropic
               [Anthropic::Models::Messages::MessageBatchSucceededResult, Anthropic::Models::Messages::MessageBatchErroredResult, Anthropic::Models::Messages::MessageBatchCanceledResult, Anthropic::Models::Messages::MessageBatchExpiredResult]
             )
         end
-        def self.variants
-        end
+        def self.variants; end
       end
     end
 

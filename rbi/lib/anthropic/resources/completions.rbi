@@ -92,9 +92,7 @@ module Anthropic
         #   `#create` for streaming and non-streaming use cases, respectively.
         stream: false,
         request_options: {}
-      )
-      end
-
+      ); end
       # See {Anthropic::Resources::Completions#create} for non-streaming counterpart.
       #
       #   [Legacy] Create a Text Completion.
@@ -183,13 +181,10 @@ module Anthropic
         #   `#create` for streaming and non-streaming use cases, respectively.
         stream: true,
         request_options: {}
-      )
-      end
-
+      ); end
       # @api private
       sig { params(client: Anthropic::Client).returns(T.attached_class) }
-      def self.new(client:)
-      end
+      def self.new(client:); end
     end
   end
 end

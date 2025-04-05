@@ -21,8 +21,7 @@ module Anthropic
               [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
             )
         end
-        def self.variants
-        end
+        def self.variants; end
       end
     end
 

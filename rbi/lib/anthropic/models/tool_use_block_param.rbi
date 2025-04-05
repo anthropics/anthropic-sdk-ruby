@@ -36,8 +36,7 @@ module Anthropic
         )
           .returns(T.attached_class)
       end
-      def self.new(id:, input:, name:, cache_control: nil, type: :tool_use)
-      end
+      def self.new(id:, input:, name:, cache_control: nil, type: :tool_use); end
 
       sig do
         override
@@ -51,8 +50,7 @@ module Anthropic
             }
           )
       end
-      def to_hash
-      end
+      def to_hash; end
     end
   end
 end

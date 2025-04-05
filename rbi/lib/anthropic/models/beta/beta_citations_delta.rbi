@@ -30,8 +30,7 @@ module Anthropic
           )
             .returns(T.attached_class)
         end
-        def self.new(citation:, type: :citations_delta)
-        end
+        def self.new(citation:, type: :citations_delta); end
 
         sig do
           override
@@ -46,8 +45,7 @@ module Anthropic
               }
             )
         end
-        def to_hash
-        end
+        def to_hash; end
 
         module Citation
           extend Anthropic::Internal::Type::Union
@@ -58,8 +56,7 @@ module Anthropic
                 [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation]
               )
           end
-          def self.variants
-          end
+          def self.variants; end
         end
       end
     end
