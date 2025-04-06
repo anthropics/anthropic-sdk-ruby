@@ -236,9 +236,7 @@ module Anthropic
         #   Optional header to specify the beta version(s) you want to use.
         #
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
-        optional :betas,
-                 -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::AnthropicBeta] },
-                 api_name: :"anthropic-beta"
+        optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::AnthropicBeta] }
 
         # @!parse
         #   # @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
