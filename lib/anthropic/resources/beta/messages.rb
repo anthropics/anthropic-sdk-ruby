@@ -48,7 +48,7 @@ module Anthropic
             method: :post,
             path: "v1/messages?beta=true",
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
-            body: parsed.except(*header_params.keys).transform_keys(system_: :system),
+            body: parsed.except(*header_params.keys),
             model: Anthropic::Models::Beta::BetaMessage,
             options: options
           )
@@ -103,7 +103,7 @@ module Anthropic
               "accept" => "text/event-stream",
               **parsed.slice(*header_params.keys)
             }.transform_keys(header_params),
-            body: parsed.except(*header_params.keys).transform_keys(system_: :system),
+            body: parsed.except(*header_params.keys),
             stream: Anthropic::Internal::Stream,
             model: Anthropic::Models::Beta::BetaRawMessageStreamEvent,
             options: options
@@ -139,7 +139,7 @@ module Anthropic
             method: :post,
             path: "v1/messages/count_tokens?beta=true",
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
-            body: parsed.except(*header_params.keys).transform_keys(system_: :system),
+            body: parsed.except(*header_params.keys),
             model: Anthropic::Models::Beta::BetaMessageTokensCount,
             options: options
           )
