@@ -17,10 +17,13 @@ module Anthropic
 
         def coerce: (
           ::Hash[top, top] | top value,
-          state: Anthropic::Internal::Type::Converter::state
+          state: Anthropic::Internal::Type::Converter::coerce_state
         ) -> (::Hash[Symbol, top] | top)
 
-        def dump: (::Hash[top, top] | top value) -> (::Hash[Symbol, top] | top)
+        def dump: (
+          ::Hash[top, top] | top value,
+          state: Anthropic::Internal::Type::Converter::dump_state
+        ) -> (::Hash[Symbol, top] | top)
 
         def item_type: -> Elem
 

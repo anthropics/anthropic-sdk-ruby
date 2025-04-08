@@ -38,7 +38,7 @@ module Anthropic
           override
             .params(
               value: T.any(T::Hash[T.anything, T.anything], T.anything),
-              state: Anthropic::Internal::Type::Converter::State
+              state: Anthropic::Internal::Type::Converter::CoerceState
             )
             .returns(T.any(Anthropic::Internal::AnyHash, T.anything))
         end
@@ -47,10 +47,13 @@ module Anthropic
         # @api private
         sig(:final) do
           override
-            .params(value: T.any(T::Hash[T.anything, T.anything], T.anything))
+            .params(
+              value: T.any(T::Hash[T.anything, T.anything], T.anything),
+              state: Anthropic::Internal::Type::Converter::DumpState
+            )
             .returns(T.any(Anthropic::Internal::AnyHash, T.anything))
         end
-        def dump(value); end
+        def dump(value, state:); end
 
         # @api private
         sig(:final) { returns(Elem) }
