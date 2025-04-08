@@ -217,10 +217,7 @@ Please follow Sorbet's [setup guides](https://sorbet.org/docs/adopting) for best
 params =
   Anthropic::Models::MessageCreateParams.new(
     max_tokens: 1024,
-    messages: [{
-      role: "user",
-      content: "Hello, Claude"
-    }],
+    messages: [Anthropic::Models::MessageParam.new(role: :user, content: "hello")],
     model: "claude-3-5-sonnet-latest"
   )
 
