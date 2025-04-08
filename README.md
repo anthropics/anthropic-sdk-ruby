@@ -36,14 +36,15 @@ anthropic = Anthropic::Client.new(
   api_key: "my-anthropic-api-key" # defaults to ENV["ANTHROPIC_API_KEY"]
 )
 
-message = anthropic.messages.create(
-  max_tokens: 1024,
-  messages: [{
-    role: "user",
-    content: "Hello, Claude"
-  }],
-  model: "claude-3-5-sonnet-latest"
-)
+message =
+  anthropic.messages.create(
+    max_tokens: 1024,
+    messages: [{
+      role: "user",
+      content: "Hello, Claude"
+    }],
+    model: "claude-3-5-sonnet-latest"
+  )
 
 puts(message.content)
 ```
@@ -72,14 +73,15 @@ end
 We provide support for streaming responses using Server Side Events (SSE).
 
 ```ruby
-stream = anthropic.messages.stream_raw(
-  max_tokens: 1024,
-  messages: [{
-    role: "user",
-    content: "Hello, Claude"
-  }],
-  model: "claude-3-5-sonnet-latest"
-)
+stream =
+  anthropic.messages.stream_raw(
+    max_tokens: 1024,
+    messages: [{
+      role: "user",
+      content: "Hello, Claude"
+    }],
+    model: "claude-3-5-sonnet-latest"
+  )
 
 stream.each do |message|
   puts(message.type)
@@ -92,14 +94,15 @@ When the library is unable to connect to the API, or if the API returns a non-su
 
 ```ruby
 begin
-  message = anthropic.messages.create(
-    max_tokens: 1024,
-    messages: [{
-      role: "user",
-      content: "Hello, Claude"
-    }],
-    model: "claude-3-5-sonnet-latest"
-  )
+  message =
+    anthropic.messages.create(
+      max_tokens: 1024,
+      messages: [{
+        role: "user",
+        content: "Hello, Claude"
+      }],
+      model: "claude-3-5-sonnet-latest"
+    )
 rescue Anthropic::Errors::APIError => e
   puts(e.status) # 400
 end
@@ -202,14 +205,15 @@ Due to limitations with the Sorbet type system, where a method otherwise can tak
 Please follow Sorbet's [setup guides](https://sorbet.org/docs/adopting) for best experience.
 
 ```ruby
-params = Anthropic::Models::MessageCreateParams.new(
-  max_tokens: 1024,
-  messages: [{
-    role: "user",
-    content: "Hello, Claude"
-  }],
-  model: "claude-3-5-sonnet-latest"
-)
+params =
+  Anthropic::Models::MessageCreateParams.new(
+    max_tokens: 1024,
+    messages: [{
+      role: "user",
+      content: "Hello, Claude"
+    }],
+    model: "claude-3-5-sonnet-latest"
+  )
 
 anthropic.messages.create(**params)
 ```
