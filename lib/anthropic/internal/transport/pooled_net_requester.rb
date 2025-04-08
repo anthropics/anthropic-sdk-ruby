@@ -123,9 +123,12 @@ module Anthropic
         def execute(request)
           url, deadline = request.fetch_values(:url, :deadline)
 
+          req = nil
           eof = false
           finished = false
           closing = nil
+
+          # rubocop:disable Metrics/BlockLength
           enum = Enumerator.new do |y|
             with_pool(url, deadline: deadline) do |conn|
               next if finished
@@ -155,8 +158,11 @@ module Anthropic
               end
             end
           rescue Timeout::Error
-            raise Anthropic::Errors::APITimeoutError
+            raise Anthropic::Errors::APITimeoutError.new(url: url, request: req)
+          rescue StandardError
+            raise Anthropic::Errors::APIConnectionError.new(url: url, request: req)
           end
+          # rubocop:enable Metrics/BlockLength
 
           conn, _, response = enum.next
           body = Anthropic::Internal::Util.fused_enum(enum, external: true) do
