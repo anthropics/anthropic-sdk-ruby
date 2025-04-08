@@ -26,15 +26,24 @@ module Anthropic
         #
         # @param value [Object]
         #
+        # @param state [Hash{Symbol=>Object}] .
+        #
+        #   @option state [Boolean] :can_retry
+        #
         # @return [Object]
-        def dump(value)
+        def dump(value, state:)
           case value
           in Array
-            value.map { Anthropic::Internal::Type::Unknown.dump(_1) }
+            value.map { Anthropic::Internal::Type::Unknown.dump(_1, state: state) }
           in Hash
-            value.transform_values { Anthropic::Internal::Type::Unknown.dump(_1) }
+            value.transform_values { Anthropic::Internal::Type::Unknown.dump(_1, state: state) }
           in Anthropic::Internal::Type::BaseModel
-            value.class.dump(value)
+            value.class.dump(value, state: state)
+          in StringIO
+            value.string
+          in Pathname | IO
+            state[:can_retry] = false if value.is_a?(IO)
+            Anthropic::Internal::Util::SerializationAdapter.new(value)
           else
             value
           end
@@ -182,7 +191,7 @@ module Anthropic
                 rescue ArgumentError, TypeError => e
                   raise e if strictness == :strong
                 end
-              in -> { _1 <= IO } if value.is_a?(String)
+              in -> { _1 <= StringIO } if value.is_a?(String)
                 exactness[:yes] += 1
                 return StringIO.new(value.b)
               else
@@ -207,13 +216,21 @@ module Anthropic
           # @api private
           #
           # @param target [Anthropic::Internal::Type::Converter, Class]
+          #
           # @param value [Object]
           #
+          # @param state [Hash{Symbol=>Object}] .
+          #
+          #   @option state [Boolean] :can_retry
+          #
           # @return [Object]
-          def dump(target, value)
-            # rubocop:disable Layout/LineLength
-            target.is_a?(Anthropic::Internal::Type::Converter) ? target.dump(value) : Anthropic::Internal::Type::Unknown.dump(value)
-            # rubocop:enable Layout/LineLength
+          def dump(target, value, state: {can_retry: true})
+            case target
+            in Anthropic::Internal::Type::Converter
+              target.dump(value, state: state)
+            else
+              Anthropic::Internal::Type::Unknown.dump(value, state: state)
+            end
           end
         end
       end

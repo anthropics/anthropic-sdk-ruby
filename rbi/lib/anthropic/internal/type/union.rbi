@@ -49,16 +49,19 @@ module Anthropic
 
         # @api private
         sig do
-          override.params(
-            value: T.anything,
-            state: Anthropic::Internal::Type::Converter::State
-          ).returns(T.anything)
+          override
+            .params(value: T.anything, state: Anthropic::Internal::Type::Converter::CoerceState)
+            .returns(T.anything)
         end
         def coerce(value, state:); end
 
         # @api private
-        sig { override.params(value: T.anything).returns(T.anything) }
-        def dump(value); end
+        sig do
+          override
+            .params(value: T.anything, state: Anthropic::Internal::Type::Converter::DumpState)
+            .returns(T.anything)
+        end
+        def dump(value, state:); end
       end
     end
   end

@@ -10,10 +10,13 @@ module Anthropic
 
         def self.coerce: (
           bool | top value,
-          state: Anthropic::Internal::Type::Converter::state
+          state: Anthropic::Internal::Type::Converter::coerce_state
         ) -> (bool | top)
 
-        def self.dump: (bool | top value) -> (bool | top)
+        def self.dump: (
+          bool | top value,
+          state: Anthropic::Internal::Type::Converter::dump_state
+        ) -> (bool | top)
       end
     end
   end
