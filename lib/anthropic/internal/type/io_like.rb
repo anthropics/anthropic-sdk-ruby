@@ -7,24 +7,31 @@ module Anthropic
       #
       # @abstract
       #
-      # Ruby has no Boolean class; this is something for models to refer to.
-      class Boolean
+      # Either `Pathname` or `StringIO`.
+      class IOLike
         extend Anthropic::Internal::Type::Converter
 
         # @param other [Object]
         #
         # @return [Boolean]
-        def self.===(other) = other == true || other == false
+        def self.===(other)
+          case other
+          in StringIO | Pathname | IO
+            true
+          else
+            false
+          end
+        end
 
         # @param other [Object]
         #
         # @return [Boolean]
-        def self.==(other) = other.is_a?(Class) && other <= Anthropic::Internal::Type::Boolean
+        def self.==(other) = other.is_a?(Class) && other <= Anthropic::Internal::Type::IOLike
 
         class << self
           # @api private
           #
-          # @param value [Boolean, Object]
+          # @param value [StringIO, String, Object]
           #
           # @param state [Hash{Symbol=>Object}] .
           #
@@ -34,22 +41,32 @@ module Anthropic
           #
           #   @option state [Integer] :branched
           #
-          # @return [Boolean, Object]
+          # @return [StringIO, Object]
           def coerce(value, state:)
-            state.fetch(:exactness)[value == true || value == false ? :yes : :no] += 1
-            value
+            exactness = state.fetch(:exactness)
+            case value
+            in String
+              exactness[:yes] += 1
+              StringIO.new(value)
+            in StringIO
+              exactness[:yes] += 1
+              value
+            else
+              exactness[:no] += 1
+              value
+            end
           end
 
           # @!parse
           #   # @api private
           #   #
-          #   # @param value [Boolean, Object]
+          #   # @param value [Pathname, StringIO, IO, String, Object]
           #   #
           #   # @param state [Hash{Symbol=>Object}] .
           #   #
           #   #   @option state [Boolean] :can_retry
           #   #
-          #   # @return [Boolean, Object]
+          #   # @return [Pathname, StringIO, IO, String, Object]
           #   def dump(value, state:) = super
         end
       end
