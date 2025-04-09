@@ -60,5 +60,8 @@
     }
   ],
   "release-type": "ruby",
-  "version-file": "lib/anthropic/version.rb"
+  "version-file": "lib/anthropic/version.rb",
+  "extra-files": [
+    "README.md"
+  ]
 }
