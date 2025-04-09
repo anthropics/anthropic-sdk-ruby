@@ -9,7 +9,7 @@ Documentation for released of this gem can be found [on RubyDoc](https://gemdocs
 The underlying REST API documentation can be found on [docs.anthropic.com](https://docs.anthropic.com/claude/reference/).
 
 ## Installation
-ℹ️ The `anthropic-sdk-beta` gem name is temporary. @alexrudall will be transitioning the [anthropic gem name](https://github.com/alexrudall/anthropic) to this repository. Here's the timeline:
+ℹ️ The `anthropic-sdk-beta` gem name is temporary. [@alexrudall](https://github.com/alexrudall) will be transitioning the [anthropic gem name](https://github.com/alexrudall/anthropic) to this repository. Here's the timeline:
 - Early April, 2025: This library is released under the `anthropic-sdk-beta` gem name. We'll be gathering feedback from the community.
 - Late April/early May: Bump the version `1.0`, and transition the `anthropic` gem name to this repository.
 
@@ -340,4 +340,4 @@ This package considers improvements to the (non-runtime) `*.rbi` and `*.rbs` typ
 Ruby 3.1.0 or higher.
 
 ## Acknowledgements
-Thank you @alexrudall for giving feedback, donating the `anthropic` Ruby Gem name, and paving the way by building the first Anthropic Ruby SDK.
+Thank you [@alexrudall](https://github.com/alexrudall) for giving feedback, donating the `anthropic` Ruby Gem name, and paving the way by building the first Anthropic Ruby SDK.
