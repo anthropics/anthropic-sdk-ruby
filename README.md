@@ -4,7 +4,7 @@ The Anthropic Ruby library provides convenient access to the Anthropic REST API 
 
 ## Documentation
 
-Documentation for released of this gem can be found [on RubyDoc](https://gemdocs.org/gems/anthropic).
+Documentation for released of this gem can be found [on RubyDoc](https://gemdocs.org/gems/anthropic-sdk-beta).
 
 The underlying REST API documentation can be found on [docs.anthropic.com](https://docs.anthropic.com/claude/reference/).
 
@@ -15,7 +15,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "anthropic", "~> 0.1.0.pre.alpha.1"
+gem "anthropic-sdk-beta", "~> 0.1.0.pre.alpha.1"
 ```
 
 <!-- x-release-please-end -->
@@ -30,7 +30,7 @@ bundle install
 
 ```ruby
 require "bundler/setup"
-require "anthropic"
+require "anthropic-sdk-beta"
 
 anthropic = Anthropic::Client.new(
   api_key: "my-anthropic-api-key" # defaults to ENV["ANTHROPIC_API_KEY"]
@@ -198,7 +198,7 @@ Note: if you had installed the gem either using a `git:` or `github:` URL, or ha
 
 ```yaml
 include:
-  - 'vendor/bundle/ruby/*/gems/anthropic-*/lib/**/*.rb'
+  - 'vendor/bundle/ruby/*/gems/anthropic-sdk-beta-*/lib/**/*.rb'
 ```
 
 Otherwise Solargraph will not be able to provide type information or auto-completion for any non-indexed libraries.
