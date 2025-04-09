@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-beta.3 (2025-04-09)
+
+Full Changelog: [v0.1.0-beta.2...v0.1.0-beta.3](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.1.0-beta.2...v0.1.0-beta.3)
+
+### Chores
+
+* add release trigger to publish-gem.yml ([660d3a0](https://github.com/anthropics/anthropic-sdk-ruby/commit/660d3a04a4db23ffa900c8ed8c46abb65fb2a202))
+* **internal:** version bump ([ff3effe](https://github.com/anthropics/anthropic-sdk-ruby/commit/ff3effe91c77f2f9adfca40f57031d4a7a01c4fb))
+
 ## 0.1.0-beta.2 (2025-04-09)
 
 Full Changelog: [v0.1.0-alpha.1...v0.1.0-beta.2](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.1.0-alpha.1...v0.1.0-beta.2)
