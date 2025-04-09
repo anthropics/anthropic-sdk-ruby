@@ -52,6 +52,10 @@ message =
 puts(message.content)
 ```
 
+### Feedback
+
+We're looking for as much feedback as possible while the SDK is in Beta. If you have recommendations, notice bugs, find things confusing, or anything else, create a github issue. Don't be shy -- we're very open to hearing any thoughts and musings you have!
+
 ### Pagination
 
 List methods in the Anthropic API are paginated.
