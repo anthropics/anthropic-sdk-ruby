@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module Anthropic
-  VERSION = "0.1.0.pre.beta.4"
+  VERSION = "0.1.0.pre.beta.5"
 end

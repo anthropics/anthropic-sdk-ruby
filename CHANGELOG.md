@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-beta.5 (2025-04-09)
+
+Full Changelog: [v0.1.0-beta.4...v0.1.0-beta.5](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.1.0-beta.4...v0.1.0-beta.5)
+
+### Chores
+
+* **internal:** reduce CI branch coverage ([52ba9ab](https://github.com/anthropics/anthropic-sdk-ruby/commit/52ba9ab8d17bd798fdfbdcdaeb7765500c6a35c6))
+* **internal:** version bump ([5eed725](https://github.com/anthropics/anthropic-sdk-ruby/commit/5eed725fbe49fe86a7bf85331c40880a7f9ac3e7))
+
 ## 0.1.0-beta.4 (2025-04-09)
 
 Full Changelog: [v0.1.0-beta.3...v0.1.0-beta.4](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.1.0-beta.3...v0.1.0-beta.4)
