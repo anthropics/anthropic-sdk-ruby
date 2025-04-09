@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    anthropic (0.1.0.pre.alpha.1)
+    anthropic-sdk-beta (0.1.0.pre.alpha.1)
       connection_pool
 
 GEM
@@ -175,7 +175,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  anthropic!
+  anthropic-sdk-beta!
   async
   minitest
   minitest-focus
