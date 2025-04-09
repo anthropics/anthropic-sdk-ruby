@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    anthropic-sdk-beta (0.1.0.pre.beta.2)
+    anthropic-sdk-beta (0.1.0.pre.beta.3)
       connection_pool
 
 GEM
