@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.1.0-beta.2 (2025-04-09)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-beta.2](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.1.0-alpha.1...v0.1.0-beta.2)
+
+### Features
+
+* **api:** manual updates ([#75](https://github.com/anthropics/anthropic-sdk-ruby/issues/75)) ([5a6b5cc](https://github.com/anthropics/anthropic-sdk-ruby/commit/5a6b5cc8d49083a7ebc28d48d9bb8d7c214c8a0a))
+* use Pathname alongside raw IO handles for file uploads ([#68](https://github.com/anthropics/anthropic-sdk-ruby/issues/68)) ([a900382](https://github.com/anthropics/anthropic-sdk-ruby/commit/a9003825c9b4f377dba511f4d00aa0e834728f08))
+
+
+### Bug Fixes
+
+* **internal:** update release-please to use ruby strategy for README.md ([#73](https://github.com/anthropics/anthropic-sdk-ruby/issues/73)) ([f0466d1](https://github.com/anthropics/anthropic-sdk-ruby/commit/f0466d1b15f68d822df6bc73c6d9c80c7a330d4f))
+* raise connection error for errors that result from HTTP transports ([#70](https://github.com/anthropics/anthropic-sdk-ruby/issues/70)) ([0885db3](https://github.com/anthropics/anthropic-sdk-ruby/commit/0885db3f4c0ec1b43e91231a8ed922ab9c4a428e))
+
+
+### Chores
+
+* add README docs for using solargraph when installing gem from git ([#67](https://github.com/anthropics/anthropic-sdk-ruby/issues/67)) ([bf8e537](https://github.com/anthropics/anthropic-sdk-ruby/commit/bf8e5371a291e1fe0b335e734a7208ff8b3d739c))
+* ensure readme.md is bumped when release please updates versions ([#72](https://github.com/anthropics/anthropic-sdk-ruby/issues/72)) ([99323d0](https://github.com/anthropics/anthropic-sdk-ruby/commit/99323d08371ecc5b494fd0604619d5815410202f))
+* **internal:** expand CI branch coverage ([#74](https://github.com/anthropics/anthropic-sdk-ruby/issues/74)) ([a058c31](https://github.com/anthropics/anthropic-sdk-ruby/commit/a058c31e98cd5920705380539f69222321d2a1b7))
+* **internal:** version bump ([0d1f04a](https://github.com/anthropics/anthropic-sdk-ruby/commit/0d1f04a5ac2f8a323e3590d43bd7a6e550115fdc))
+* loosen const and integer coercion rules ([#71](https://github.com/anthropics/anthropic-sdk-ruby/issues/71)) ([6fcb07c](https://github.com/anthropics/anthropic-sdk-ruby/commit/6fcb07c70a269a362afc6ead4b670ce2f8b03470))
+* update readme sorbet example ([5fee7e7](https://github.com/anthropics/anthropic-sdk-ruby/commit/5fee7e7484ca3c7587137804cbafe1afabe49364))
+
 ## 0.1.0-alpha.1 (2025-04-08)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
