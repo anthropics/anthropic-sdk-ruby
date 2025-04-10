@@ -56,6 +56,8 @@ puts(message.content)
 
 We're looking for as much feedback as possible while the SDK is in Beta. If you have recommendations, notice bugs, find things confusing, or anything else, create a github issue. Don't be shy -- we're very open to hearing any thoughts and musings you have!
 
+Feel free to make an issue for more substantial issues. For smaller issues or stream-of-thought, you can use the [pinned issue here](https://github.com/anthropics/anthropic-sdk-ruby/issues/85).
+
 ### Pagination
 
 List methods in the Anthropic API are paginated.
