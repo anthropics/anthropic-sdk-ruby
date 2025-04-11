@@ -10,7 +10,7 @@ anthropic = Anthropic::Client.new
 begin
   pp("----- streams are enumerable -----")
 
-  stream = anthropic.messages.create_streaming(
+  stream = anthropic.messages.stream_raw(
     max_tokens: 1024,
     messages: [{role: :user, content: "Say hello there!"}],
     model: :"claude-3-7-sonnet-latest"
@@ -37,7 +37,7 @@ end
 begin
   pp("----- streams can be lazy -----")
 
-  stream = anthropic.messages.create_streaming(
+  stream = anthropic.messages.stream_raw(
     max_tokens: 1024,
     messages: [{role: :user, content: "Say hello there!"}],
     model: :"claude-3-7-sonnet-latest"
