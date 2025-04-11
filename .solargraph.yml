@@ -5,7 +5,7 @@ include:
   - 'Rakefile'
   - 'examples/**/*.rb'
   - 'lib/**/*.rb'
-  - 'test/anthropic-sdk-beta/resource_namespaces.rb'
-  - 'test/anthropic-sdk-beta/test_helper.rb'
+  - 'test/anthropic/resource_namespaces.rb'
+  - 'test/anthropic/test_helper.rb'
 exclude:
   - 'rbi/**/*'

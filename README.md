@@ -18,7 +18,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "anthropic-sdk-beta", "~> 0.1.0.pre.beta.5"
+gem "anthropic-sdk-beta", "~> 0.1.0.pre.beta.6"
 ```
 
 <!-- x-release-please-end -->
@@ -55,6 +55,8 @@ puts(message.content)
 ### Feedback
 
 We're looking for as much feedback as possible while the SDK is in Beta. If you have recommendations, notice bugs, find things confusing, or anything else, create a github issue. Don't be shy -- we're very open to hearing any thoughts and musings you have!
+
+Feel free to make an issue for more substantial issues. For smaller issues or stream-of-thought, you can use the [pinned issue here](https://github.com/anthropics/anthropic-sdk-ruby/issues/85).
 
 ### Pagination
 
