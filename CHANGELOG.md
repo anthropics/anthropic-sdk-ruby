@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.1.0-beta.6 (2025-04-11)
+
+Full Changelog: [v0.1.0-beta.5...v0.1.0-beta.6](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.1.0-beta.5...v0.1.0-beta.6)
+
+### Bug Fixes
+
+* inaccuracies in the README.md ([9fa4a77](https://github.com/anthropics/anthropic-sdk-ruby/commit/9fa4a7772cfd01ec0c7d2ec20205740390984d27))
+* outdated examples ([c82c0e3](https://github.com/anthropics/anthropic-sdk-ruby/commit/c82c0e3eb1cb9e56f6bb2ff7fbbdd98afae15bed))
+
+
+### Chores
+
+* fix lsp configuration file for local development ([2928009](https://github.com/anthropics/anthropic-sdk-ruby/commit/2928009aecdcf522fcf2d2f71e82eb4b72e4693a))
+* **internal:** update readme with pinned issue thread ([4ef25a4](https://github.com/anthropics/anthropic-sdk-ruby/commit/4ef25a4c1a5a8e3a1a03daf6c614d6da6fd9acba))
+* **internal:** version bump ([b12584c](https://github.com/anthropics/anthropic-sdk-ruby/commit/b12584c4f49946c81bc067339d9627ba8b32763b))
+
 ## 0.1.0-beta.5 (2025-04-09)
 
 Full Changelog: [v0.1.0-beta.4...v0.1.0-beta.5](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.1.0-beta.4...v0.1.0-beta.5)
