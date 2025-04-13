@@ -28,40 +28,6 @@ module Anthropic
       # @return [String, nil]
       attr_accessor :last_id
 
-      # @api private
-      #
-      # @param client [Anthropic::Internal::Transport::BaseClient]
-      # @param req [Hash{Symbol=>Object}]
-      # @param headers [Hash{String=>String}, Net::HTTPHeader]
-      # @param page_data [Hash{Symbol=>Object}]
-      def initialize(client:, req:, headers:, page_data:)
-        super
-
-        case page_data
-        in {data: Array | nil => data}
-          @data = data&.map { Anthropic::Internal::Type::Converter.coerce(@model, _1) }
-        else
-        end
-
-        case page_data
-        in {has_more: true | false | nil => has_more}
-          @has_more = has_more
-        else
-        end
-
-        case page_data
-        in {first_id: String | nil => first_id}
-          @first_id = first_id
-        else
-        end
-
-        case page_data
-        in {last_id: String | nil => last_id}
-          @last_id = last_id
-        else
-        end
-      end
-
       # @return [Boolean]
       def next_page?
         has_more
@@ -97,6 +63,25 @@ module Anthropic
           break unless page.next_page?
           page = page.next_page
         end
+      end
+
+      # @api private
+      #
+      # @param client [Anthropic::Internal::Transport::BaseClient]
+      # @param req [Hash{Symbol=>Object}]
+      # @param headers [Hash{String=>String}, Net::HTTPHeader]
+      # @param page_data [Hash{Symbol=>Object}]
+      def initialize(client:, req:, headers:, page_data:)
+        super
+
+        case page_data
+        in {data: Array | nil => data}
+          @data = data&.map { Anthropic::Internal::Type::Converter.coerce(@model, _1) }
+        else
+        end
+        @has_more = page_data[:has_more]
+        @first_id = page_data[:first_id]
+        @last_id = page_data[:last_id]
       end
 
       # @api private
