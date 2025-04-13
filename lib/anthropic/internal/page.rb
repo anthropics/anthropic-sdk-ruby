@@ -36,11 +36,10 @@ module Anthropic
       # @param page_data [Hash{Symbol=>Object}]
       def initialize(client:, req:, headers:, page_data:)
         super
-        model = req.fetch(:model)
 
         case page_data
         in {data: Array | nil => data}
-          @data = data&.map { Anthropic::Internal::Type::Converter.coerce(model, _1) }
+          @data = data&.map { Anthropic::Internal::Type::Converter.coerce(@model, _1) }
         else
         end
 
@@ -90,18 +89,24 @@ module Anthropic
         unless block_given?
           raise ArgumentError.new("A block must be given to ##{__method__}")
         end
+
         page = self
         loop do
-          page.data&.each { blk.call(_1) }
+          page.data&.each(&blk)
+
           break unless page.next_page?
           page = page.next_page
         end
       end
 
+      # @api private
+      #
       # @return [String]
       def inspect
         # rubocop:disable Layout/LineLength
-        "#<#{self.class}:0x#{object_id.to_s(16)} data=#{data.inspect} has_more=#{has_more.inspect} first_id=#{first_id.inspect} last_id=#{last_id.inspect}>"
+        model = Anthropic::Internal::Type::Converter.inspect(@model, depth: 1)
+
+        "#<#{self.class}[#{model}]:0x#{object_id.to_s(16)} has_more=#{has_more.inspect} first_id=#{first_id.inspect} last_id=#{last_id.inspect}>"
         # rubocop:enable Layout/LineLength
       end
     end

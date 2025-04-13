@@ -39,6 +39,8 @@ module Anthropic
           top value,
           state: Anthropic::Internal::Type::Converter::dump_state
         ) -> top
+
+        def inspect: (?depth: Integer) -> String
       end
     end
   end

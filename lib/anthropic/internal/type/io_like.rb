@@ -11,6 +11,8 @@ module Anthropic
       class IOLike
         extend Anthropic::Internal::Type::Converter
 
+        private_class_method :new
+
         # @param other [Object]
         #
         # @return [Boolean]
