@@ -19,6 +19,7 @@ module Anthropic
       sig { returns(T.nilable(String)) }
       attr_accessor :last_id
 
+      # @api private
       sig { returns(String) }
       def inspect; end
     end
