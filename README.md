@@ -4,7 +4,7 @@ The Anthropic Ruby library provides convenient access to the Anthropic REST API 
 
 ## Documentation
 
-Documentation for released of this gem can be found [on RubyDoc](https://gemdocs.org/gems/anthropic-sdk-beta).
+Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/anthropic-sdk-beta).
 
 The underlying REST API documentation can be found on [docs.anthropic.com](https://docs.anthropic.com/claude/reference/).
 
@@ -72,7 +72,7 @@ end
 
 ### Streaming
 
-We provide support for streaming responses using Server Side Events (SSE).
+We provide support for streaming responses using Server-Sent Events (SSE).
 
 **coming soon**: `anthropic.messages.stream` will have [Python SDK](https://github.com/anthropics/anthropic-sdk-python?tab=readme-ov-file#streaming-helpers) style streaming response helpers.
 
