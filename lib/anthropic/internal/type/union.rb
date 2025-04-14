@@ -125,9 +125,7 @@ module Anthropic
         #
         # @return [Boolean]
         def ==(other)
-          # rubocop:disable Layout/LineLength
-          other.is_a?(Module) && other.singleton_class <= Anthropic::Internal::Type::Union && other.derefed_variants == derefed_variants
-          # rubocop:enable Layout/LineLength
+          Anthropic::Internal::Type::Union === other && other.derefed_variants == derefed_variants
         end
 
         # @api private
