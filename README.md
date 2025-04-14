@@ -6,7 +6,7 @@ The Anthropic Ruby library provides convenient access to the Anthropic REST API 
 
 Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/anthropic-sdk-beta).
 
-The underlying REST API documentation can be found on [docs.anthropic.com](https://docs.anthropic.com/claude/reference/).
+The REST API documentation can be found on [docs.anthropic.com](https://docs.anthropic.com/claude/reference/).
 
 ## Installation
 
