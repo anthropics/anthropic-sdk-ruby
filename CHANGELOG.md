@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.1.0-beta.7 (2025-04-15)
+
+Full Changelog: [v0.1.0-beta.6...v0.1.0-beta.7](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.1.0-beta.6...v0.1.0-beta.7)
+
+### Chores
+
+* **internal:** always run post-processing when formatting when syntax_tree ([6b66ae9](https://github.com/anthropics/anthropic-sdk-ruby/commit/6b66ae9b0b7bcb695a531ea37242b6ab666490b7))
+* **internal:** loosen internal type restrictions ([7675f8e](https://github.com/anthropics/anthropic-sdk-ruby/commit/7675f8efad31278d372ac1d778fe542202706681))
+* **internal:** minor touch ups on sdk internals ([3b4a873](https://github.com/anthropics/anthropic-sdk-ruby/commit/3b4a873177d9cdddcb6c07440619da007615c0bd))
+* **internal:** mostly README touch ups ([b29f388](https://github.com/anthropics/anthropic-sdk-ruby/commit/b29f3887bd12df092cd8398ac6fb82b327c7d2b1))
+* **internal:** protect SSE parsing pipeline from broken UTF-8 characters ([74056ed](https://github.com/anthropics/anthropic-sdk-ruby/commit/74056edcb149d9237db1ef83f6afab46ce489689))
+* **internal:** version bump ([8478780](https://github.com/anthropics/anthropic-sdk-ruby/commit/8478780254d9ea6b489baccefe0b4a33c314e0c8))
+* make internal types pretty print ([99c01e4](https://github.com/anthropics/anthropic-sdk-ruby/commit/99c01e43cceeebd97875bdfa8551352076dfb69f))
+
+
+### Documentation
+
+* update documentation links to be more uniform ([6b95412](https://github.com/anthropics/anthropic-sdk-ruby/commit/6b95412c1193c99bd7f1c701929e76a021f6e39e))
+
 ## 0.1.0-beta.6 (2025-04-11)
 
 Full Changelog: [v0.1.0-beta.5...v0.1.0-beta.6](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.1.0-beta.5...v0.1.0-beta.6)
