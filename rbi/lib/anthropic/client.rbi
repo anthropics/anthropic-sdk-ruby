@@ -58,8 +58,9 @@ module Anthropic
       api_key: ENV["ANTHROPIC_API_KEY"],
       # Defaults to `ENV["ANTHROPIC_AUTH_TOKEN"]`
       auth_token: ENV["ANTHROPIC_AUTH_TOKEN"],
-      # Override the default base URL for the API, e.g., `"https://api.example.com/v2/"`
-      base_url: nil,
+      # Override the default base URL for the API, e.g.,
+      # `"https://api.example.com/v2/"`. Defaults to `ENV["ANTHROPIC_BASE_URL"]`
+      base_url: ENV["ANTHROPIC_BASE_URL"],
       # Max number of retries to attempt after a failed retryable request.
       max_retries: DEFAULT_MAX_RETRIES,
       timeout: DEFAULT_TIMEOUT_IN_SECONDS,
