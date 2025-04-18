@@ -5,8 +5,7 @@ module Anthropic
     module Beta
       # @see Anthropic::Resources::Beta::Models#retrieve
       class ModelRetrieveParams < Anthropic::Internal::Type::BaseModel
-        # @!parse
-        #   extend Anthropic::Internal::Type::RequestParameters::Converter
+        extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
         # @!method initialize(request_options: {})

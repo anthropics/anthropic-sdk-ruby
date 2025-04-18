@@ -18,14 +18,10 @@ module Anthropic
       #   @return [Anthropic::Models::CacheControlEphemeral, nil]
       optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
 
-      # @!attribute [r] citations
+      # @!attribute citations
       #
       #   @return [Anthropic::Models::CitationsConfigParam, nil]
       optional :citations, -> { Anthropic::Models::CitationsConfigParam }
-
-      # @!parse
-      #   # @return [Anthropic::Models::CitationsConfigParam]
-      #   attr_writer :citations
 
       # @!attribute context
       #

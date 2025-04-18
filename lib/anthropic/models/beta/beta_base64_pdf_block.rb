@@ -19,14 +19,10 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }, nil?: true
 
-        # @!attribute [r] citations
+        # @!attribute citations
         #
         #   @return [Anthropic::Models::Beta::BetaCitationsConfigParam, nil]
         optional :citations, -> { Anthropic::Models::Beta::BetaCitationsConfigParam }
-
-        # @!parse
-        #   # @return [Anthropic::Models::Beta::BetaCitationsConfigParam]
-        #   attr_writer :citations
 
         # @!attribute context
         #
