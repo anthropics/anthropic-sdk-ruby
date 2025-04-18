@@ -14,13 +14,9 @@ module Anthropic
         #   @return [Symbol, :errored]
         required :type, const: :errored
 
-        # @!parse
-        #   # @param error [Anthropic::Models::ErrorResponse]
-        #   # @param type [Symbol, :errored]
-        #   #
-        #   def initialize(error:, type: :errored, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(error:, type: :errored)
+        #   @param error [Anthropic::Models::ErrorResponse]
+        #   @param type [Symbol, :errored]
       end
     end
 

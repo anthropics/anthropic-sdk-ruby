@@ -54,16 +54,12 @@ module Anthropic
           #   # @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
           #   attr_writer :betas
 
-          # @!parse
-          #   # @param after_id [String]
-          #   # @param before_id [String]
-          #   # @param limit [Integer]
-          #   # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
-          #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
-          #   #
-          #   def initialize(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {}, **) = super
-
-          # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+          # @!method initialize(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {})
+          #   @param after_id [String]
+          #   @param before_id [String]
+          #   @param limit [Integer]
+          #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
+          #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
         end
       end
     end

@@ -12,12 +12,8 @@ module Anthropic
       #   # @return [Boolean]
       #   attr_writer :enabled
 
-      # @!parse
-      #   # @param enabled [Boolean]
-      #   #
-      #   def initialize(enabled: nil, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(enabled: nil)
+      #   @param enabled [Boolean]
     end
   end
 end

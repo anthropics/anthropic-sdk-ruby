@@ -32,15 +32,11 @@ module Anthropic
         #   @return [Symbol, :model]
         required :type, const: :model
 
-        # @!parse
-        #   # @param id [String]
-        #   # @param created_at [Time]
-        #   # @param display_name [String]
-        #   # @param type [Symbol, :model]
-        #   #
-        #   def initialize(id:, created_at:, display_name:, type: :model, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(id:, created_at:, display_name:, type: :model)
+        #   @param id [String]
+        #   @param created_at [Time]
+        #   @param display_name [String]
+        #   @param type [Symbol, :model]
       end
     end
 

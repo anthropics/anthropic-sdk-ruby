@@ -9,12 +9,8 @@ module Anthropic
         #   @return [Symbol, :disabled]
         required :type, const: :disabled
 
-        # @!parse
-        #   # @param type [Symbol, :disabled]
-        #   #
-        #   def initialize(type: :disabled, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(type: :disabled)
+        #   @param type [Symbol, :disabled]
       end
     end
 

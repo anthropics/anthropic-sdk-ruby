@@ -33,27 +33,13 @@ module Anthropic
       #   @return [Symbol, :content_block_location]
       required :type, const: :content_block_location
 
-      # @!parse
-      #   # @param cited_text [String]
-      #   # @param document_index [Integer]
-      #   # @param document_title [String, nil]
-      #   # @param end_block_index [Integer]
-      #   # @param start_block_index [Integer]
-      #   # @param type [Symbol, :content_block_location]
-      #   #
-      #   def initialize(
-      #     cited_text:,
-      #     document_index:,
-      #     document_title:,
-      #     end_block_index:,
-      #     start_block_index:,
-      #     type: :content_block_location,
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(cited_text:, document_index:, document_title:, end_block_index:, start_block_index:, type: :content_block_location)
+      #   @param cited_text [String]
+      #   @param document_index [Integer]
+      #   @param document_title [String, nil]
+      #   @param end_block_index [Integer]
+      #   @param start_block_index [Integer]
+      #   @param type [Symbol, :content_block_location]
     end
   end
 end

@@ -21,15 +21,11 @@ module Anthropic
       #   # @return [Boolean]
       #   attr_writer :disable_parallel_tool_use
 
-      # @!parse
-      #   # The model will use any available tools.
-      #   #
-      #   # @param disable_parallel_tool_use [Boolean]
-      #   # @param type [Symbol, :any]
-      #   #
-      #   def initialize(disable_parallel_tool_use: nil, type: :any, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(disable_parallel_tool_use: nil, type: :any)
+      #   The model will use any available tools.
+      #
+      #   @param disable_parallel_tool_use [Boolean]
+      #   @param type [Symbol, :any]
     end
   end
 end

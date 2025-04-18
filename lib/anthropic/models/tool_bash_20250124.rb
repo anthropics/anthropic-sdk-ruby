@@ -21,14 +21,10 @@ module Anthropic
       #   @return [Anthropic::Models::CacheControlEphemeral, nil]
       optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
 
-      # @!parse
-      #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   # @param name [Symbol, :bash]
-      #   # @param type [Symbol, :bash_20250124]
-      #   #
-      #   def initialize(cache_control: nil, name: :bash, type: :bash_20250124, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(cache_control: nil, name: :bash, type: :bash_20250124)
+      #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
+      #   @param name [Symbol, :bash]
+      #   @param type [Symbol, :bash_20250124]
     end
   end
 end

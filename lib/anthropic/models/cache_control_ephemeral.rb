@@ -8,12 +8,8 @@ module Anthropic
       #   @return [Symbol, :ephemeral]
       required :type, const: :ephemeral
 
-      # @!parse
-      #   # @param type [Symbol, :ephemeral]
-      #   #
-      #   def initialize(type: :ephemeral, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(type: :ephemeral)
+      #   @param type [Symbol, :ephemeral]
     end
   end
 end

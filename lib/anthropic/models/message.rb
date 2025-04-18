@@ -120,19 +120,15 @@ module Anthropic
       #   @return [Anthropic::Models::Usage]
       required :usage, -> { Anthropic::Models::Usage }
 
-      # @!parse
-      #   # @param id [String]
-      #   # @param content [Array<Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock>]
-      #   # @param model [Symbol, String, Anthropic::Models::Model]
-      #   # @param stop_reason [Symbol, Anthropic::Models::StopReason, nil]
-      #   # @param stop_sequence [String, nil]
-      #   # @param usage [Anthropic::Models::Usage]
-      #   # @param role [Symbol, :assistant]
-      #   # @param type [Symbol, :message]
-      #   #
-      #   def initialize(id:, content:, model:, stop_reason:, stop_sequence:, usage:, role: :assistant, type: :message, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(id:, content:, model:, stop_reason:, stop_sequence:, usage:, role: :assistant, type: :message)
+      #   @param id [String]
+      #   @param content [Array<Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock>]
+      #   @param model [Symbol, String, Anthropic::Models::Model]
+      #   @param stop_reason [Symbol, Anthropic::Models::StopReason, nil]
+      #   @param stop_sequence [String, nil]
+      #   @param usage [Anthropic::Models::Usage]
+      #   @param role [Symbol, :assistant]
+      #   @param type [Symbol, :message]
     end
   end
 end

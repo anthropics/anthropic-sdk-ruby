@@ -343,6 +343,8 @@ module Anthropic
         end
 
         class << self
+          # @api private
+          #
           # @param model [Anthropic::Internal::Type::BaseModel]
           #
           # @return [Hash{Symbol=>Object}]

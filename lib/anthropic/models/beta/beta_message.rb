@@ -122,19 +122,15 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaUsage]
         required :usage, -> { Anthropic::Models::Beta::BetaUsage }
 
-        # @!parse
-        #   # @param id [String]
-        #   # @param content [Array<Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock>]
-        #   # @param model [Symbol, String, Anthropic::Models::Model]
-        #   # @param stop_reason [Symbol, Anthropic::Models::Beta::BetaStopReason, nil]
-        #   # @param stop_sequence [String, nil]
-        #   # @param usage [Anthropic::Models::Beta::BetaUsage]
-        #   # @param role [Symbol, :assistant]
-        #   # @param type [Symbol, :message]
-        #   #
-        #   def initialize(id:, content:, model:, stop_reason:, stop_sequence:, usage:, role: :assistant, type: :message, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(id:, content:, model:, stop_reason:, stop_sequence:, usage:, role: :assistant, type: :message)
+        #   @param id [String]
+        #   @param content [Array<Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock>]
+        #   @param model [Symbol, String, Anthropic::Models::Model]
+        #   @param stop_reason [Symbol, Anthropic::Models::Beta::BetaStopReason, nil]
+        #   @param stop_sequence [String, nil]
+        #   @param usage [Anthropic::Models::Beta::BetaUsage]
+        #   @param role [Symbol, :assistant]
+        #   @param type [Symbol, :message]
       end
     end
 

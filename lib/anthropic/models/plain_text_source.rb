@@ -18,14 +18,10 @@ module Anthropic
       #   @return [Symbol, :text]
       required :type, const: :text
 
-      # @!parse
-      #   # @param data [String]
-      #   # @param media_type [Symbol, :"text/plain"]
-      #   # @param type [Symbol, :text]
-      #   #
-      #   def initialize(data:, media_type: :"text/plain", type: :text, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(data:, media_type: :"text/plain", type: :text)
+      #   @param data [String]
+      #   @param media_type [Symbol, :"text/plain"]
+      #   @param type [Symbol, :text]
     end
   end
 end
