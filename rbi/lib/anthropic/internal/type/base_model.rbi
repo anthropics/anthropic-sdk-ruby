@@ -111,10 +111,16 @@ module Anthropic
 
           sig { params(other: T.anything).returns(T::Boolean) }
           def ==(other); end
+
+          sig { returns(Integer) }
+          def hash; end
         end
 
         sig { params(other: T.anything).returns(T::Boolean) }
         def ==(other); end
+
+        sig { returns(Integer) }
+        def hash; end
 
         class << self
           # @api private

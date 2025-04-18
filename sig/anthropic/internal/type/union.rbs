@@ -30,6 +30,8 @@ module Anthropic
 
         def ==: (top other) -> bool
 
+        def hash: -> Integer
+
         def coerce: (
           top value,
           state: Anthropic::Internal::Type::Converter::coerce_state
