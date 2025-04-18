@@ -14,9 +14,8 @@ module Anthropic
 
         variant :content_block_location, -> { Anthropic::Models::Beta::BetaCitationContentBlockLocationParam }
 
-        # @!parse
-        #   # @return [Array(Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam)]
-        #   def self.variants; end
+        # @!method self.variants
+        #   @return [Array(Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam)]
       end
     end
 

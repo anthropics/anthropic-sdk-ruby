@@ -22,14 +22,10 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }, nil?: true
 
-        # @!parse
-        #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        #   # @param name [Symbol, :str_replace_editor]
-        #   # @param type [Symbol, :text_editor_20241022]
-        #   #
-        #   def initialize(cache_control: nil, name: :str_replace_editor, type: :text_editor_20241022, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(cache_control: nil, name: :str_replace_editor, type: :text_editor_20241022)
+        #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
+        #   @param name [Symbol, :str_replace_editor]
+        #   @param type [Symbol, :text_editor_20241022]
       end
     end
 

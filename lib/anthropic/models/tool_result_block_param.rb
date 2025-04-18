@@ -36,16 +36,12 @@ module Anthropic
       #   # @return [Boolean]
       #   attr_writer :is_error
 
-      # @!parse
-      #   # @param tool_use_id [String]
-      #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   # @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>]
-      #   # @param is_error [Boolean]
-      #   # @param type [Symbol, :tool_result]
-      #   #
-      #   def initialize(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result)
+      #   @param tool_use_id [String]
+      #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
+      #   @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>]
+      #   @param is_error [Boolean]
+      #   @param type [Symbol, :tool_result]
 
       # @see Anthropic::Models::ToolResultBlockParam#content
       module Content
@@ -64,14 +60,12 @@ module Anthropic
 
           variant :image, -> { Anthropic::Models::ImageBlockParam }
 
-          # @!parse
-          #   # @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
-          #   def self.variants; end
+          # @!method self.variants
+          #   @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
         end
 
-        # @!parse
-        #   # @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>)]
-        #   def self.variants; end
+        # @!method self.variants
+        #   @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>)]
 
         ContentArray =
           Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::Models::ToolResultBlockParam::Content::Content }]

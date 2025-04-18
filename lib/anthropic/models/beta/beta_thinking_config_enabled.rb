@@ -23,13 +23,9 @@ module Anthropic
         #   @return [Symbol, :enabled]
         required :type, const: :enabled
 
-        # @!parse
-        #   # @param budget_tokens [Integer]
-        #   # @param type [Symbol, :enabled]
-        #   #
-        #   def initialize(budget_tokens:, type: :enabled, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(budget_tokens:, type: :enabled)
+        #   @param budget_tokens [Integer]
+        #   @param type [Symbol, :enabled]
       end
     end
 

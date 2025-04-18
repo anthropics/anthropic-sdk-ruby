@@ -15,9 +15,8 @@ module Anthropic
 
       variant :redacted_thinking, -> { Anthropic::Models::RedactedThinkingBlock }
 
-      # @!parse
-      #   # @return [Array(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock)]
-      #   def self.variants; end
+      # @!method self.variants
+      #   @return [Array(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock)]
     end
   end
 end

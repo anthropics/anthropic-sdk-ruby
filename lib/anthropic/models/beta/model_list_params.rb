@@ -43,15 +43,11 @@ module Anthropic
         #   # @return [Integer]
         #   attr_writer :limit
 
-        # @!parse
-        #   # @param after_id [String]
-        #   # @param before_id [String]
-        #   # @param limit [Integer]
-        #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
-        #   #
-        #   def initialize(after_id: nil, before_id: nil, limit: nil, request_options: {}, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(after_id: nil, before_id: nil, limit: nil, request_options: {})
+        #   @param after_id [String]
+        #   @param before_id [String]
+        #   @param limit [Integer]
+        #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
       end
     end
   end

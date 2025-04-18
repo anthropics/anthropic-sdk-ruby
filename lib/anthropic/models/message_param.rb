@@ -13,13 +13,9 @@ module Anthropic
       #   @return [Symbol, Anthropic::Models::MessageParam::Role]
       required :role, enum: -> { Anthropic::Models::MessageParam::Role }
 
-      # @!parse
-      #   # @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam>]
-      #   # @param role [Symbol, Anthropic::Models::MessageParam::Role]
-      #   #
-      #   def initialize(content:, role:, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(content:, role:)
+      #   @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam>]
+      #   @param role [Symbol, Anthropic::Models::MessageParam::Role]
 
       # @see Anthropic::Models::MessageParam#content
       module Content
@@ -29,9 +25,8 @@ module Anthropic
 
         variant -> { Anthropic::Models::MessageParam::Content::ContentBlockParamArray }
 
-        # @!parse
-        #   # @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam>)]
-        #   def self.variants; end
+        # @!method self.variants
+        #   @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam>)]
 
         ContentBlockParamArray =
           Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::Models::ContentBlockParam }]
@@ -44,11 +39,8 @@ module Anthropic
         USER = :user
         ASSISTANT = :assistant
 
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   def self.values; end
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
     end
   end

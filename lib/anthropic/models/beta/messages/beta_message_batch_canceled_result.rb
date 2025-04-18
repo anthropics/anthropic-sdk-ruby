@@ -10,12 +10,8 @@ module Anthropic
           #   @return [Symbol, :canceled]
           required :type, const: :canceled
 
-          # @!parse
-          #   # @param type [Symbol, :canceled]
-          #   #
-          #   def initialize(type: :canceled, **) = super
-
-          # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+          # @!method initialize(type: :canceled)
+          #   @param type [Symbol, :canceled]
         end
       end
     end

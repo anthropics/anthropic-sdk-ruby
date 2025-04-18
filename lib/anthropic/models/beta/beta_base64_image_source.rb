@@ -19,14 +19,10 @@ module Anthropic
         #   @return [Symbol, :base64]
         required :type, const: :base64
 
-        # @!parse
-        #   # @param data [String]
-        #   # @param media_type [Symbol, Anthropic::Models::Beta::BetaBase64ImageSource::MediaType]
-        #   # @param type [Symbol, :base64]
-        #   #
-        #   def initialize(data:, media_type:, type: :base64, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(data:, media_type:, type: :base64)
+        #   @param data [String]
+        #   @param media_type [Symbol, Anthropic::Models::Beta::BetaBase64ImageSource::MediaType]
+        #   @param type [Symbol, :base64]
 
         # @see Anthropic::Models::Beta::BetaBase64ImageSource#media_type
         module MediaType
@@ -37,11 +33,8 @@ module Anthropic
           IMAGE_GIF = :"image/gif"
           IMAGE_WEBP = :"image/webp"
 
-          finalize!
-
-          # @!parse
-          #   # @return [Array<Symbol>]
-          #   def self.values; end
+          # @!method self.values
+          #   @return [Array<Symbol>]
         end
       end
     end

@@ -14,13 +14,9 @@ module Anthropic
         #   @return [Symbol, :thinking_delta]
         required :type, const: :thinking_delta
 
-        # @!parse
-        #   # @param thinking [String]
-        #   # @param type [Symbol, :thinking_delta]
-        #   #
-        #   def initialize(thinking:, type: :thinking_delta, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(thinking:, type: :thinking_delta)
+        #   @param thinking [String]
+        #   @param type [Symbol, :thinking_delta]
       end
     end
 

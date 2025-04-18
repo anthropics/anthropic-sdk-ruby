@@ -14,13 +14,9 @@ module Anthropic
         #   @return [Symbol, :signature_delta]
         required :type, const: :signature_delta
 
-        # @!parse
-        #   # @param signature [String]
-        #   # @param type [Symbol, :signature_delta]
-        #   #
-        #   def initialize(signature:, type: :signature_delta, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(signature:, type: :signature_delta)
+        #   @param signature [String]
+        #   @param type [Symbol, :signature_delta]
       end
     end
 

@@ -37,17 +37,13 @@ module Anthropic
       #   @return [String, nil]
       optional :title, String, nil?: true
 
-      # @!parse
-      #   # @param source [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
-      #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   # @param citations [Anthropic::Models::CitationsConfigParam]
-      #   # @param context [String, nil]
-      #   # @param title [String, nil]
-      #   # @param type [Symbol, :document]
-      #   #
-      #   def initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document)
+      #   @param source [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
+      #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
+      #   @param citations [Anthropic::Models::CitationsConfigParam]
+      #   @param context [String, nil]
+      #   @param title [String, nil]
+      #   @param type [Symbol, :document]
 
       # @see Anthropic::Models::DocumentBlockParam#source
       module Source
@@ -63,9 +59,8 @@ module Anthropic
 
         variant :url, -> { Anthropic::Models::URLPDFSource }
 
-        # @!parse
-        #   # @return [Array(Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource)]
-        #   def self.variants; end
+        # @!method self.variants
+        #   @return [Array(Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource)]
       end
     end
   end

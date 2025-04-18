@@ -13,13 +13,9 @@ module Anthropic
       #   @return [Symbol, :billing_error]
       required :type, const: :billing_error
 
-      # @!parse
-      #   # @param message [String]
-      #   # @param type [Symbol, :billing_error]
-      #   #
-      #   def initialize(message:, type: :billing_error, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(message:, type: :billing_error)
+      #   @param message [String]
+      #   @param type [Symbol, :billing_error]
     end
   end
 end

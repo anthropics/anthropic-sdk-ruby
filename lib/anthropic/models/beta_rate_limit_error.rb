@@ -13,13 +13,9 @@ module Anthropic
       #   @return [Symbol, :rate_limit_error]
       required :type, const: :rate_limit_error
 
-      # @!parse
-      #   # @param message [String]
-      #   # @param type [Symbol, :rate_limit_error]
-      #   #
-      #   def initialize(message:, type: :rate_limit_error, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(message:, type: :rate_limit_error)
+      #   @param message [String]
+      #   @param type [Symbol, :rate_limit_error]
     end
   end
 end

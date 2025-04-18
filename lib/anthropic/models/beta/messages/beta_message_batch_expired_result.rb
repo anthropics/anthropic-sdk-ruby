@@ -10,12 +10,8 @@ module Anthropic
           #   @return [Symbol, :expired]
           required :type, const: :expired
 
-          # @!parse
-          #   # @param type [Symbol, :expired]
-          #   #
-          #   def initialize(type: :expired, **) = super
-
-          # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+          # @!method initialize(type: :expired)
+          #   @param type [Symbol, :expired]
         end
       end
     end

@@ -34,14 +34,10 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaMessageDeltaUsage]
         required :usage, -> { Anthropic::Models::Beta::BetaMessageDeltaUsage }
 
-        # @!parse
-        #   # @param delta [Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta]
-        #   # @param usage [Anthropic::Models::Beta::BetaMessageDeltaUsage]
-        #   # @param type [Symbol, :message_delta]
-        #   #
-        #   def initialize(delta:, usage:, type: :message_delta, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(delta:, usage:, type: :message_delta)
+        #   @param delta [Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta]
+        #   @param usage [Anthropic::Models::Beta::BetaMessageDeltaUsage]
+        #   @param type [Symbol, :message_delta]
 
         # @see Anthropic::Models::Beta::BetaRawMessageDeltaEvent#delta
         class Delta < Anthropic::Internal::Type::BaseModel
@@ -55,13 +51,9 @@ module Anthropic
           #   @return [String, nil]
           required :stop_sequence, String, nil?: true
 
-          # @!parse
-          #   # @param stop_reason [Symbol, Anthropic::Models::Beta::BetaStopReason, nil]
-          #   # @param stop_sequence [String, nil]
-          #   #
-          #   def initialize(stop_reason:, stop_sequence:, **) = super
-
-          # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+          # @!method initialize(stop_reason:, stop_sequence:)
+          #   @param stop_reason [Symbol, Anthropic::Models::Beta::BetaStopReason, nil]
+          #   @param stop_sequence [String, nil]
         end
       end
     end

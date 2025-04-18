@@ -40,27 +40,13 @@ module Anthropic
         #   @return [Integer, nil]
         optional :display_number, Integer, nil?: true
 
-        # @!parse
-        #   # @param display_height_px [Integer]
-        #   # @param display_width_px [Integer]
-        #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        #   # @param display_number [Integer, nil]
-        #   # @param name [Symbol, :computer]
-        #   # @param type [Symbol, :computer_20250124]
-        #   #
-        #   def initialize(
-        #     display_height_px:,
-        #     display_width_px:,
-        #     cache_control: nil,
-        #     display_number: nil,
-        #     name: :computer,
-        #     type: :computer_20250124,
-        #     **
-        #   )
-        #     super
-        #   end
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(display_height_px:, display_width_px:, cache_control: nil, display_number: nil, name: :computer, type: :computer_20250124)
+        #   @param display_height_px [Integer]
+        #   @param display_width_px [Integer]
+        #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
+        #   @param display_number [Integer, nil]
+        #   @param name [Symbol, :computer]
+        #   @param type [Symbol, :computer_20250124]
       end
     end
 

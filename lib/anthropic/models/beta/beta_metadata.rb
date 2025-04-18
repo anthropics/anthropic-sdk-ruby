@@ -14,12 +14,8 @@ module Anthropic
         #   @return [String, nil]
         optional :user_id, String, nil?: true
 
-        # @!parse
-        #   # @param user_id [String, nil]
-        #   #
-        #   def initialize(user_id: nil, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(user_id: nil)
+        #   @param user_id [String, nil]
       end
     end
 
