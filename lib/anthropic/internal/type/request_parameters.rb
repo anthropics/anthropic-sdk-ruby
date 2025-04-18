@@ -12,9 +12,8 @@ module Anthropic
 
         # @param mod [Module]
         def self.included(mod)
-          return unless mod <= Anthropic::Internal::Type::BaseModel
+          raise ArgumentError.new(mod) unless mod <= Anthropic::Internal::Type::BaseModel
 
-          mod.extend(Anthropic::Internal::Type::RequestParameters::Converter)
           mod.optional(:request_options, Anthropic::RequestOptions)
         end
 

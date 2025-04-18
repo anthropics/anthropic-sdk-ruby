@@ -25,7 +25,7 @@ module Anthropic
       #   @return [Anthropic::Models::CacheControlEphemeral, nil]
       optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
 
-      # @!attribute [r] description
+      # @!attribute description
       #   Description of what this tool does.
       #
       #   Tool descriptions should be as detailed as possible. The more information that
@@ -35,10 +35,6 @@ module Anthropic
       #
       #   @return [String, nil]
       optional :description, String
-
-      # @!parse
-      #   # @return [String]
-      #   attr_writer :description
 
       # @!method initialize(input_schema:, name:, cache_control: nil, description: nil)
       #   @param input_schema [Anthropic::Models::Tool::InputSchema]

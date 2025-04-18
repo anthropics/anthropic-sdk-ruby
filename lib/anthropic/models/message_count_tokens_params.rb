@@ -4,8 +4,7 @@ module Anthropic
   module Models
     # @see Anthropic::Resources::Messages#count_tokens
     class MessageCountTokensParams < Anthropic::Internal::Type::BaseModel
-      # @!parse
-      #   extend Anthropic::Internal::Type::RequestParameters::Converter
+      extend Anthropic::Internal::Type::RequestParameters::Converter
       include Anthropic::Internal::Type::RequestParameters
 
       # @!attribute messages
@@ -107,7 +106,7 @@ module Anthropic
       #   @return [Symbol, String, Anthropic::Models::Model]
       required :model, union: -> { Anthropic::Models::Model }
 
-      # @!attribute [r] system_
+      # @!attribute system_
       #   System prompt.
       #
       #   A system prompt is a way of providing context and instructions to Claude, such
@@ -117,11 +116,7 @@ module Anthropic
       #   @return [String, Array<Anthropic::Models::TextBlockParam>, nil]
       optional :system_, union: -> { Anthropic::Models::MessageCountTokensParams::System }, api_name: :system
 
-      # @!parse
-      #   # @return [String, Array<Anthropic::Models::TextBlockParam>]
-      #   attr_writer :system_
-
-      # @!attribute [r] thinking
+      # @!attribute thinking
       #   Configuration for enabling Claude's extended thinking.
       #
       #   When enabled, responses include `thinking` content blocks showing Claude's
@@ -135,22 +130,14 @@ module Anthropic
       #   @return [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, nil]
       optional :thinking, union: -> { Anthropic::Models::ThinkingConfigParam }
 
-      # @!parse
-      #   # @return [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]
-      #   attr_writer :thinking
-
-      # @!attribute [r] tool_choice
+      # @!attribute tool_choice
       #   How the model should use the provided tools. The model can use a specific tool,
       #   any available tool, decide by itself, or not use tools at all.
       #
       #   @return [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone, nil]
       optional :tool_choice, union: -> { Anthropic::Models::ToolChoice }
 
-      # @!parse
-      #   # @return [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
-      #   attr_writer :tool_choice
-
-      # @!attribute [r] tools
+      # @!attribute tools
       #   Definitions of tools that the model may use.
       #
       #   If you include `tools` in your API request, the model may return `tool_use`
@@ -224,10 +211,6 @@ module Anthropic
       #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>, nil]
       optional :tools,
                -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::MessageCountTokensTool] }
-
-      # @!parse
-      #   # @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>]
-      #   attr_writer :tools
 
       # @!method initialize(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
       #   @param messages [Array<Anthropic::Models::MessageParam>]

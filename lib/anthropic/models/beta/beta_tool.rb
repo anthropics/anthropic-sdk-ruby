@@ -26,7 +26,7 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }, nil?: true
 
-        # @!attribute [r] description
+        # @!attribute description
         #   Description of what this tool does.
         #
         #   Tool descriptions should be as detailed as possible. The more information that
@@ -36,10 +36,6 @@ module Anthropic
         #
         #   @return [String, nil]
         optional :description, String
-
-        # @!parse
-        #   # @return [String]
-        #   attr_writer :description
 
         # @!attribute type
         #
