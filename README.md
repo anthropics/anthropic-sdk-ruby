@@ -9,8 +9,11 @@ Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs
 The REST API documentation can be found on [docs.anthropic.com](https://docs.anthropic.com/claude/reference/).
 
 ## Installation
+
 ℹ️ The `anthropic-sdk-beta` gem name is temporary. [@alexrudall](https://github.com/alexrudall) will be transitioning the [anthropic gem name](https://github.com/alexrudall/anthropic) to this repository. Here's the timeline:
+
 - Early April, 2025: This library is released under the `anthropic-sdk-beta` gem name. We'll be gathering feedback from the community.
+
 - Late April/early May: Bump the version `1.0`, and transition the `anthropic` gem name to this repository.
 
 To use this gem, install via Bundler by adding the following to your application's `Gemfile`:
@@ -35,11 +38,8 @@ anthropic = Anthropic::Client.new(
 
 message = anthropic.messages.create(
   max_tokens: 1024,
-  messages: [{
-    role: "user",
-    content: "Hello, Claude"
-  }],
-  model: "claude-3-5-sonnet-latest"
+  messages: [{role: :user, content: "Hello, Claude"}],
+  model: :"claude-3-7-sonnet-latest"
 )
 
 puts(message.content)
@@ -50,6 +50,20 @@ puts(message.content)
 We're looking for as much feedback as possible while the SDK is in Beta. If you have recommendations, notice bugs, find things confusing, or anything else, create a github issue. Don't be shy -- we're very open to hearing any thoughts and musings you have!
 
 Feel free to make an issue for more substantial issues. For smaller issues or stream-of-thought, you can use the [pinned issue here](https://github.com/anthropics/anthropic-sdk-ruby/issues/85).
+
+## Sorbet
+
+This library is written with [Sorbet type definitions](https://sorbet.org/docs/rbi). However, there is no runtime dependency on the `sorbet-runtime`.
+
+When using sorbet, it is recommended to use model classes as below. This provides stronger type checking and tooling integration.
+
+```ruby
+anthropic.messages.create(
+  max_tokens: 1024,
+  messages: [Anthropic::Models::MessageParam.new(role: :user, content: "Hello, Claude")],
+  model: :"claude-3-7-sonnet-latest"
+)
+```
 
 ### Pagination
 
@@ -79,11 +93,8 @@ We provide support for streaming responses using Server-Sent Events (SSE).
 ```ruby
 stream = anthropic.messages.stream_raw(
   max_tokens: 1024,
-  messages: [{
-    role: "user",
-    content: "Hello, Claude"
-  }],
-  model: "claude-3-5-sonnet-latest"
+  messages: [{role: :user, content: "Hello, Claude"}],
+  model: :"claude-3-7-sonnet-latest"
 )
 
 stream.each do |message|
@@ -99,11 +110,8 @@ When the library is unable to connect to the API, or if the API returns a non-su
 begin
   message = anthropic.messages.create(
     max_tokens: 1024,
-    messages: [{
-      role: "user",
-      content: "Hello, Claude"
-    }],
-    model: "claude-3-5-sonnet-latest"
+    messages: [{role: :user, content: "Hello, Claude"}],
+    model: :"claude-3-7-sonnet-latest"
   )
 rescue Anthropic::Errors::APIError => e
   puts(e.status) # 400
@@ -143,11 +151,8 @@ anthropic = Anthropic::Client.new(
 # Or, configure per-request:
 anthropic.messages.create(
   max_tokens: 1024,
-  messages: [{
-    role: "user",
-    content: "Hello, Claude"
-  }],
-  model: "claude-3-5-sonnet-latest",
+  messages: [{role: :user, content: "Hello, Claude"}],
+  model: :"claude-3-7-sonnet-latest",
   request_options: {max_retries: 5}
 )
 ```
@@ -169,66 +174,39 @@ anthropic = Anthropic::Client.new(
 # Or, configure per-request:
 anthropic.messages.create(
   max_tokens: 1024,
-  messages: [{
-    role: "user",
-    content: "Hello, Claude"
-  }],
-  model: "claude-3-5-sonnet-latest",
+  messages: [{role: :user, content: "Hello, Claude"}],
+  model: :"claude-3-7-sonnet-latest",
   request_options: {timeout: 5}
 )
 ```
 
-## LSP Support
+## Model DSL
 
-### Solargraph
+This library uses a simple DSL to represent request parameters and response shapes in `lib/anthropic/models`.
 
-This library includes [Solargraph](https://solargraph.org) support for both auto completion and go to definition.
+With the right [editor plugins](https://shopify.github.io/ruby-lsp), you can ctrl-click on elements of the DSL to navigate around and explore the library.
 
-```ruby
-gem "solargraph", group: :development
-```
-
-After Solargraph is installed, **you must populate its index** either via the provided editor command, or by running the following in your terminal:
-
-```sh
-bundle exec solargraph gems
-```
-
-Note: if you had installed the gem either using a `git:` or `github:` URL, or had vendored the gem using bundler, you will need to set up your [`.solargraph.yml`](https://solargraph.org/guides/configuration) to include the path to the gem's `lib` directory.
-
-```yaml
-include:
-  - 'vendor/bundle/ruby/*/gems/anthropic-sdk-beta-*/lib/**/*.rb'
-```
-
-Otherwise Solargraph will not be able to provide type information or auto-completion for any non-indexed libraries.
-
-### Sorbet
-
-This library is written with [Sorbet type definitions](https://sorbet.org/docs/rbi). However, there is no runtime dependency on the `sorbet-runtime`.
-
-What this means is that while you can use Sorbet to type check your code statically, and benefit from the [Sorbet Language Server](https://sorbet.org/docs/lsp) in your editor, there is no runtime type checking and execution overhead from Sorbet itself.
-
-Due to limitations with the Sorbet type system, where a method otherwise can take an instance of `Anthropic::BaseModel` class, you will need to use the `**` splat operator to pass the arguments:
-
-Please follow Sorbet's [setup guides](https://sorbet.org/docs/adopting) for best experience.
+In all places where a `BaseModel` type is specified, vanilla Ruby `Hash` can also be used. For example, the following are interchangeable as arguments:
 
 ```ruby
+# This has tooling readability, for auto-completion, static analysis, and goto definition with supported language services
 params = Anthropic::Models::MessageCreateParams.new(
-    max_tokens: 1024,
-    messages: [Anthropic::Models::MessageParam.new(role: :user, content: "hello")],
-    model: "claude-3-5-sonnet-latest"
-  )
+  max_tokens: 1024,
+  messages: [Anthropic::Models::MessageParam.new(role: :user, content: "Hello, Claude")],
+  model: :"claude-3-7-sonnet-latest"
+)
 
-anthropic.messages.create(**params)
+# This also works
+params = {
+  max_tokens: 1024,
+  messages: [{role: :user, content: "Hello, Claude"}],
+  model: :"claude-3-7-sonnet-latest"
+}
 ```
 
-Note: **This library emits an intentional warning under the [`tapioca` toolchain](https://github.com/Shopify/tapioca)**. This is normal, and does not impact functionality.
+## Editor support
 
-### Ruby LSP
-
-The Ruby LSP has [best effort support](https://shopify.github.io/ruby-lsp/#guessed-types) for inferring type information from Ruby code, and as such it may not always be able to provide accurate type information.
-
+A combination of [Shopify LSP](https://shopify.github.io/ruby-lsp) and [Solargraph](https://solargraph.org/) is recommended for non-[Sorbet](https://sorbet.org) users. The former is especially good at go to definition, while the latter has much better auto-completion support.
 
 ## AWS Bedrock
 
@@ -255,7 +233,7 @@ message = anthropic.messages.create(
   model: "anthropic.claude-3-5-sonnet-20241022-v2:0"
 )
 
-puts message
+puts(message)
 ```
 
 For more examples see [`examples/bedrock`](examples/bedrock).
@@ -283,18 +261,14 @@ message = anthropic.messages.create(
   model: "claude-3-7-sonnet@20250219"
 )
 
-puts message
+puts(message)
 ```
 
 For more examples see [`examples/vertex`](examples/vertex).
 
-## Advanced
+## Advanced concepts
 
 ### Making custom/undocumented requests
-
-This library is typed for convenient access to the documented API.
-
-If you need to access undocumented endpoints, params, or response properties, the library can still be used.
 
 #### Undocumented request params
 
@@ -306,15 +280,15 @@ To make requests to undocumented endpoints, you can make requests using `client.
 
 ```ruby
 response = client.request(
-    method: :post,
-    path: '/undocumented/endpoint',
-    query: {"dog": "woof"},
-    headers: {"useful-header": "interesting-value"},
-    body: {"he": "llo"},
-  )
+  method: :post,
+  path: '/undocumented/endpoint',
+  query: {"dog": "woof"},
+  headers: {"useful-header": "interesting-value"},
+  body: {"he": "llo"},
+)
 ```
 
-### Concurrency & Connection Pooling
+### Concurrency & connection pooling
 
 The `Anthropic::Client` instances are thread-safe, and should be re-used across multiple threads. By default, each `Client` have their own HTTP connection pool, with a maximum number of connections equal to thread count.
 
@@ -323,6 +297,34 @@ When the maximum number of connections has been checked out from the connection 
 Unless otherwise specified, other classes in the SDK do not have locks protecting their underlying data structure.
 
 Currently, `Anthropic::Client` instances are only fork-safe if there are no in-flight HTTP requests.
+
+### Sorbet
+
+#### Enums
+
+Sorbet's typed enums require sub-classing of the [`T::Enum` class](https://sorbet.org/docs/tenum) from the `sorbet-runtime` gem.
+
+Since this library does not depend on `sorbet-runtime`, it uses a [`T.all` intersection type](https://sorbet.org/docs/intersection-types) with a ruby primitive type to construct a "tagged alias" instead.
+
+```ruby
+module Anthropic::Models::StopReason
+  # This alias aids language service driven navigation.
+  TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::StopReason) }
+end
+```
+
+#### Argument passing trick
+
+It is possible to pass a compatible model / parameter class to a method that expects keyword arguments by using the `**` splat operator.
+
+```ruby
+params = Anthropic::Models::MessageCreateParams.new(
+  max_tokens: 1024,
+  messages: [Anthropic::Models::MessageParam.new(role: :user, content: "Hello, Claude")],
+  model: :"claude-3-7-sonnet-latest"
+)
+anthropic.messages.create(**params)
+```
 
 ## Versioning
 
@@ -334,5 +336,10 @@ This package considers improvements to the (non-runtime) `*.rbi` and `*.rbs` typ
 
 Ruby 3.1.0 or higher.
 
+## Contributing
+
+See [the contributing documentation](https://github.com/anthropics/anthropic-sdk-ruby/tree/main/CONTRIBUTING.md).
+
 ## Acknowledgements
+
 Thank you [@alexrudall](https://github.com/alexrudall) for giving feedback, donating the `anthropic` Ruby Gem name, and paving the way by building the first Anthropic Ruby SDK.
