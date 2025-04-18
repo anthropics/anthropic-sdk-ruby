@@ -20,13 +20,9 @@ module Anthropic
           #   # @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
           #   attr_writer :betas
 
-          # @!parse
-          #   # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
-          #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
-          #   #
-          #   def initialize(betas: nil, request_options: {}, **) = super
-
-          # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+          # @!method initialize(betas: nil, request_options: {})
+          #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
+          #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
         end
       end
     end

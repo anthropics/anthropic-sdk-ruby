@@ -85,35 +85,17 @@ module Anthropic
         #   @return [Symbol, :message_batch]
         required :type, const: :message_batch
 
-        # @!parse
-        #   # @param id [String]
-        #   # @param archived_at [Time, nil]
-        #   # @param cancel_initiated_at [Time, nil]
-        #   # @param created_at [Time]
-        #   # @param ended_at [Time, nil]
-        #   # @param expires_at [Time]
-        #   # @param processing_status [Symbol, Anthropic::Models::Messages::MessageBatch::ProcessingStatus]
-        #   # @param request_counts [Anthropic::Models::Messages::MessageBatchRequestCounts]
-        #   # @param results_url [String, nil]
-        #   # @param type [Symbol, :message_batch]
-        #   #
-        #   def initialize(
-        #     id:,
-        #     archived_at:,
-        #     cancel_initiated_at:,
-        #     created_at:,
-        #     ended_at:,
-        #     expires_at:,
-        #     processing_status:,
-        #     request_counts:,
-        #     results_url:,
-        #     type: :message_batch,
-        #     **
-        #   )
-        #     super
-        #   end
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(id:, archived_at:, cancel_initiated_at:, created_at:, ended_at:, expires_at:, processing_status:, request_counts:, results_url:, type: :message_batch)
+        #   @param id [String]
+        #   @param archived_at [Time, nil]
+        #   @param cancel_initiated_at [Time, nil]
+        #   @param created_at [Time]
+        #   @param ended_at [Time, nil]
+        #   @param expires_at [Time]
+        #   @param processing_status [Symbol, Anthropic::Models::Messages::MessageBatch::ProcessingStatus]
+        #   @param request_counts [Anthropic::Models::Messages::MessageBatchRequestCounts]
+        #   @param results_url [String, nil]
+        #   @param type [Symbol, :message_batch]
 
         # Processing status of the Message Batch.
         #
@@ -125,11 +107,8 @@ module Anthropic
           CANCELING = :canceling
           ENDED = :ended
 
-          finalize!
-
-          # @!parse
-          #   # @return [Array<Symbol>]
-          #   def self.values; end
+          # @!method self.values
+          #   @return [Array<Symbol>]
         end
       end
     end

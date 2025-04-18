@@ -18,14 +18,10 @@ module Anthropic
       #   @return [Symbol, :thinking]
       required :type, const: :thinking
 
-      # @!parse
-      #   # @param signature [String]
-      #   # @param thinking [String]
-      #   # @param type [Symbol, :thinking]
-      #   #
-      #   def initialize(signature:, thinking:, type: :thinking, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(signature:, thinking:, type: :thinking)
+      #   @param signature [String]
+      #   @param thinking [String]
+      #   @param type [Symbol, :thinking]
     end
   end
 end

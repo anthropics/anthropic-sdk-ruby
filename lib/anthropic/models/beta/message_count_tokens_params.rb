@@ -242,31 +242,15 @@ module Anthropic
         #   # @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
         #   attr_writer :betas
 
-        # @!parse
-        #   # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>]
-        #   # @param model [Symbol, String, Anthropic::Models::Model]
-        #   # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
-        #   # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
-        #   # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone]
-        #   # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>]
-        #   # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
-        #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
-        #   #
-        #   def initialize(
-        #     messages:,
-        #     model:,
-        #     system_: nil,
-        #     thinking: nil,
-        #     tool_choice: nil,
-        #     tools: nil,
-        #     betas: nil,
-        #     request_options: {},
-        #     **
-        #   )
-        #     super
-        #   end
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, request_options: {})
+        #   @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>]
+        #   @param model [Symbol, String, Anthropic::Models::Model]
+        #   @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
+        #   @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
+        #   @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone]
+        #   @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>]
+        #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
+        #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
         # System prompt.
         #
@@ -280,9 +264,8 @@ module Anthropic
 
           variant -> { Anthropic::Models::Beta::MessageCountTokensParams::System::BetaTextBlockParamArray }
 
-          # @!parse
-          #   # @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam>)]
-          #   def self.variants; end
+          # @!method self.variants
+          #   @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam>)]
 
           BetaTextBlockParamArray =
             Anthropic::Internal::Type::ArrayOf[-> { Anthropic::Models::Beta::BetaTextBlockParam }]
@@ -305,9 +288,8 @@ module Anthropic
 
           variant -> { Anthropic::Models::Beta::BetaToolTextEditor20250124 }
 
-          # @!parse
-          #   # @return [Array(Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124)]
-          #   def self.variants; end
+          # @!method self.variants
+          #   @return [Array(Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124)]
         end
       end
     end

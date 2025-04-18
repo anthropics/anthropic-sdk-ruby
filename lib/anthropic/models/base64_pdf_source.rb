@@ -18,14 +18,10 @@ module Anthropic
       #   @return [Symbol, :base64]
       required :type, const: :base64
 
-      # @!parse
-      #   # @param data [String]
-      #   # @param media_type [Symbol, :"application/pdf"]
-      #   # @param type [Symbol, :base64]
-      #   #
-      #   def initialize(data:, media_type: :"application/pdf", type: :base64, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(data:, media_type: :"application/pdf", type: :base64)
+      #   @param data [String]
+      #   @param media_type [Symbol, :"application/pdf"]
+      #   @param type [Symbol, :base64]
     end
   end
 end

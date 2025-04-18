@@ -28,14 +28,10 @@ module Anthropic
           #   # @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
           #   attr_writer :betas
 
-          # @!parse
-          #   # @param requests [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>]
-          #   # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
-          #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
-          #   #
-          #   def initialize(requests:, betas: nil, request_options: {}, **) = super
-
-          # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+          # @!method initialize(requests:, betas: nil, request_options: {})
+          #   @param requests [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>]
+          #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
+          #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
           class Request < Anthropic::Internal::Type::BaseModel
             # @!attribute custom_id
@@ -56,13 +52,9 @@ module Anthropic
             #   @return [Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params]
             required :params, -> { Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params }
 
-            # @!parse
-            #   # @param custom_id [String]
-            #   # @param params [Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params]
-            #   #
-            #   def initialize(custom_id:, params:, **) = super
-
-            # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+            # @!method initialize(custom_id:, params:)
+            #   @param custom_id [String]
+            #   @param params [Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params]
 
             # @see Anthropic::Models::Beta::Messages::BatchCreateParams::Request#params
             class Params < Anthropic::Internal::Type::BaseModel
@@ -392,46 +384,25 @@ module Anthropic
               #   # @return [Float]
               #   attr_writer :top_p
 
-              # @!parse
-              #   # Messages API creation parameters for the individual request.
-              #   #
-              #   # See the [Messages API reference](/en/api/messages) for full documentation on
-              #   # available parameters.
-              #   #
-              #   # @param max_tokens [Integer]
-              #   # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>]
-              #   # @param model [Symbol, String, Anthropic::Models::Model]
-              #   # @param metadata [Anthropic::Models::Beta::BetaMetadata]
-              #   # @param stop_sequences [Array<String>]
-              #   # @param stream [Boolean]
-              #   # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
-              #   # @param temperature [Float]
-              #   # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
-              #   # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone]
-              #   # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>]
-              #   # @param top_k [Integer]
-              #   # @param top_p [Float]
-              #   #
-              #   def initialize(
-              #     max_tokens:,
-              #     messages:,
-              #     model:,
-              #     metadata: nil,
-              #     stop_sequences: nil,
-              #     stream: nil,
-              #     system_: nil,
-              #     temperature: nil,
-              #     thinking: nil,
-              #     tool_choice: nil,
-              #     tools: nil,
-              #     top_k: nil,
-              #     top_p: nil,
-              #     **
-              #   )
-              #     super
-              #   end
-
-              # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+              # @!method initialize(max_tokens:, messages:, model:, metadata: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
+              #   Messages API creation parameters for the individual request.
+              #
+              #   See the [Messages API reference](/en/api/messages) for full documentation on
+              #   available parameters.
+              #
+              #   @param max_tokens [Integer]
+              #   @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>]
+              #   @param model [Symbol, String, Anthropic::Models::Model]
+              #   @param metadata [Anthropic::Models::Beta::BetaMetadata]
+              #   @param stop_sequences [Array<String>]
+              #   @param stream [Boolean]
+              #   @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
+              #   @param temperature [Float]
+              #   @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
+              #   @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone]
+              #   @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>]
+              #   @param top_k [Integer]
+              #   @param top_p [Float]
 
               # System prompt.
               #
@@ -447,9 +418,8 @@ module Anthropic
 
                 variant -> { Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::System::BetaTextBlockParamArray }
 
-                # @!parse
-                #   # @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam>)]
-                #   def self.variants; end
+                # @!method self.variants
+                #   @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam>)]
 
                 BetaTextBlockParamArray =
                   Anthropic::Internal::Type::ArrayOf[-> { Anthropic::Models::Beta::BetaTextBlockParam }]

@@ -38,17 +38,13 @@ module Anthropic
         #   @return [String, nil]
         optional :title, String, nil?: true
 
-        # @!parse
-        #   # @param source [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource]
-        #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        #   # @param citations [Anthropic::Models::Beta::BetaCitationsConfigParam]
-        #   # @param context [String, nil]
-        #   # @param title [String, nil]
-        #   # @param type [Symbol, :document]
-        #   #
-        #   def initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document)
+        #   @param source [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource]
+        #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
+        #   @param citations [Anthropic::Models::Beta::BetaCitationsConfigParam]
+        #   @param context [String, nil]
+        #   @param title [String, nil]
+        #   @param type [Symbol, :document]
 
         # @see Anthropic::Models::Beta::BetaBase64PDFBlock#source
         module Source
@@ -64,9 +60,8 @@ module Anthropic
 
           variant :url, -> { Anthropic::Models::Beta::BetaURLPDFSource }
 
-          # @!parse
-          #   # @return [Array(Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource)]
-          #   def self.variants; end
+          # @!method self.variants
+          #   @return [Array(Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource)]
         end
       end
     end

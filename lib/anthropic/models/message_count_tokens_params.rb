@@ -229,18 +229,14 @@ module Anthropic
       #   # @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>]
       #   attr_writer :tools
 
-      # @!parse
-      #   # @param messages [Array<Anthropic::Models::MessageParam>]
-      #   # @param model [Symbol, String, Anthropic::Models::Model]
-      #   # @param system_ [String, Array<Anthropic::Models::TextBlockParam>]
-      #   # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]
-      #   # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
-      #   # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>]
-      #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {}, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
+      #   @param messages [Array<Anthropic::Models::MessageParam>]
+      #   @param model [Symbol, String, Anthropic::Models::Model]
+      #   @param system_ [String, Array<Anthropic::Models::TextBlockParam>]
+      #   @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]
+      #   @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
+      #   @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>]
+      #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
       # System prompt.
       #
@@ -254,9 +250,8 @@ module Anthropic
 
         variant -> { Anthropic::Models::MessageCountTokensParams::System::TextBlockParamArray }
 
-        # @!parse
-        #   # @return [Array(String, Array<Anthropic::Models::TextBlockParam>)]
-        #   def self.variants; end
+        # @!method self.variants
+        #   @return [Array(String, Array<Anthropic::Models::TextBlockParam>)]
 
         TextBlockParamArray = Anthropic::Internal::Type::ArrayOf[-> { Anthropic::Models::TextBlockParam }]
       end

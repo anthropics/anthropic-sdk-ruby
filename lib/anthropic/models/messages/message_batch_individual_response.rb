@@ -24,16 +24,12 @@ module Anthropic
         #   @return [Anthropic::Models::Messages::MessageBatchSucceededResult, Anthropic::Models::Messages::MessageBatchErroredResult, Anthropic::Models::Messages::MessageBatchCanceledResult, Anthropic::Models::Messages::MessageBatchExpiredResult]
         required :result, union: -> { Anthropic::Models::Messages::MessageBatchResult }
 
-        # @!parse
-        #   # This is a single line in the response `.jsonl` file and does not represent the
-        #   # response as a whole.
-        #   #
-        #   # @param custom_id [String]
-        #   # @param result [Anthropic::Models::Messages::MessageBatchSucceededResult, Anthropic::Models::Messages::MessageBatchErroredResult, Anthropic::Models::Messages::MessageBatchCanceledResult, Anthropic::Models::Messages::MessageBatchExpiredResult]
-        #   #
-        #   def initialize(custom_id:, result:, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(custom_id:, result:)
+        #   This is a single line in the response `.jsonl` file and does not represent the
+        #   response as a whole.
+        #
+        #   @param custom_id [String]
+        #   @param result [Anthropic::Models::Messages::MessageBatchSucceededResult, Anthropic::Models::Messages::MessageBatchErroredResult, Anthropic::Models::Messages::MessageBatchCanceledResult, Anthropic::Models::Messages::MessageBatchExpiredResult]
       end
     end
 

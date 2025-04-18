@@ -40,15 +40,11 @@ module Anthropic
       #   # @return [String]
       #   attr_writer :description
 
-      # @!parse
-      #   # @param input_schema [Anthropic::Models::Tool::InputSchema]
-      #   # @param name [String]
-      #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   # @param description [String]
-      #   #
-      #   def initialize(input_schema:, name:, cache_control: nil, description: nil, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(input_schema:, name:, cache_control: nil, description: nil)
+      #   @param input_schema [Anthropic::Models::Tool::InputSchema]
+      #   @param name [String]
+      #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
+      #   @param description [String]
 
       # @see Anthropic::Models::Tool#input_schema
       class InputSchema < Anthropic::Internal::Type::BaseModel
@@ -62,18 +58,14 @@ module Anthropic
         #   @return [Object, nil]
         optional :properties, Anthropic::Internal::Type::Unknown, nil?: true
 
-        # @!parse
-        #   # [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
-        #   #
-        #   # This defines the shape of the `input` that your tool accepts and that the model
-        #   # will produce.
-        #   #
-        #   # @param properties [Object, nil]
-        #   # @param type [Symbol, :object]
-        #   #
-        #   def initialize(properties: nil, type: :object, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(properties: nil, type: :object)
+        #   [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
+        #
+        #   This defines the shape of the `input` that your tool accepts and that the model
+        #   will produce.
+        #
+        #   @param properties [Object, nil]
+        #   @param type [Symbol, :object]
       end
     end
   end

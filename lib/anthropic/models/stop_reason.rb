@@ -10,11 +10,8 @@ module Anthropic
       STOP_SEQUENCE = :stop_sequence
       TOOL_USE = :tool_use
 
-      finalize!
-
-      # @!parse
-      #   # @return [Array<Symbol>]
-      #   def self.values; end
+      # @!method self.values
+      #   @return [Array<Symbol>]
     end
   end
 end

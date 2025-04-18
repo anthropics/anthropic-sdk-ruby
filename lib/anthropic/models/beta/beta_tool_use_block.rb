@@ -24,15 +24,11 @@ module Anthropic
         #   @return [Symbol, :tool_use]
         required :type, const: :tool_use
 
-        # @!parse
-        #   # @param id [String]
-        #   # @param input [Object]
-        #   # @param name [String]
-        #   # @param type [Symbol, :tool_use]
-        #   #
-        #   def initialize(id:, input:, name:, type: :tool_use, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(id:, input:, name:, type: :tool_use)
+        #   @param id [String]
+        #   @param input [Object]
+        #   @param name [String]
+        #   @param type [Symbol, :tool_use]
       end
     end
 

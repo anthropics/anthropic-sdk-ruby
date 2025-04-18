@@ -14,13 +14,9 @@ module Anthropic
         #   @return [Symbol, :citations_delta]
         required :type, const: :citations_delta
 
-        # @!parse
-        #   # @param citation [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation]
-        #   # @param type [Symbol, :citations_delta]
-        #   #
-        #   def initialize(citation:, type: :citations_delta, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(citation:, type: :citations_delta)
+        #   @param citation [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation]
+        #   @param type [Symbol, :citations_delta]
 
         # @see Anthropic::Models::Beta::BetaCitationsDelta#citation
         module Citation
@@ -34,9 +30,8 @@ module Anthropic
 
           variant :content_block_location, -> { Anthropic::Models::Beta::BetaCitationContentBlockLocation }
 
-          # @!parse
-          #   # @return [Array(Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation)]
-          #   def self.variants; end
+          # @!method self.variants
+          #   @return [Array(Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation)]
         end
       end
     end

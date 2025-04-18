@@ -13,13 +13,9 @@ module Anthropic
       #   @return [String]
       required :url, String
 
-      # @!parse
-      #   # @param url [String]
-      #   # @param type [Symbol, :url]
-      #   #
-      #   def initialize(url:, type: :url, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(url:, type: :url)
+      #   @param url [String]
+      #   @param type [Symbol, :url]
     end
   end
 end

@@ -27,15 +27,11 @@ module Anthropic
       #   @return [Integer]
       required :output_tokens, Integer
 
-      # @!parse
-      #   # @param cache_creation_input_tokens [Integer, nil]
-      #   # @param cache_read_input_tokens [Integer, nil]
-      #   # @param input_tokens [Integer]
-      #   # @param output_tokens [Integer]
-      #   #
-      #   def initialize(cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, output_tokens:, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, output_tokens:)
+      #   @param cache_creation_input_tokens [Integer, nil]
+      #   @param cache_read_input_tokens [Integer, nil]
+      #   @param input_tokens [Integer]
+      #   @param output_tokens [Integer]
     end
   end
 end

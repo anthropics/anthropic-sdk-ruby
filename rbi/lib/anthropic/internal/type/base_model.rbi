@@ -180,6 +180,7 @@ module Anthropic
         def deconstruct_keys(keys); end
 
         class << self
+          # @api private
           sig { params(model: Anthropic::Internal::Type::BaseModel).returns(Anthropic::Internal::AnyHash) }
           def walk(model); end
         end

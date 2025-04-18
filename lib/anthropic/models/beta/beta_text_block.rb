@@ -26,14 +26,10 @@ module Anthropic
         #   @return [Symbol, :text]
         required :type, const: :text
 
-        # @!parse
-        #   # @param citations [Array<Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation>, nil]
-        #   # @param text [String]
-        #   # @param type [Symbol, :text]
-        #   #
-        #   def initialize(citations:, text:, type: :text, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(citations:, text:, type: :text)
+        #   @param citations [Array<Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation>, nil]
+        #   @param text [String]
+        #   @param type [Symbol, :text]
       end
     end
 

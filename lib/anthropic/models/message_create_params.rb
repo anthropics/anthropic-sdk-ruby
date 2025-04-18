@@ -321,41 +321,20 @@ module Anthropic
       #   # @return [Float]
       #   attr_writer :top_p
 
-      # @!parse
-      #   # @param max_tokens [Integer]
-      #   # @param messages [Array<Anthropic::Models::MessageParam>]
-      #   # @param model [Symbol, String, Anthropic::Models::Model]
-      #   # @param metadata [Anthropic::Models::Metadata]
-      #   # @param stop_sequences [Array<String>]
-      #   # @param system_ [String, Array<Anthropic::Models::TextBlockParam>]
-      #   # @param temperature [Float]
-      #   # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]
-      #   # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
-      #   # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>]
-      #   # @param top_k [Integer]
-      #   # @param top_p [Float]
-      #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(
-      #     max_tokens:,
-      #     messages:,
-      #     model:,
-      #     metadata: nil,
-      #     stop_sequences: nil,
-      #     system_: nil,
-      #     temperature: nil,
-      #     thinking: nil,
-      #     tool_choice: nil,
-      #     tools: nil,
-      #     top_k: nil,
-      #     top_p: nil,
-      #     request_options: {},
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(max_tokens:, messages:, model:, metadata: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      #   @param max_tokens [Integer]
+      #   @param messages [Array<Anthropic::Models::MessageParam>]
+      #   @param model [Symbol, String, Anthropic::Models::Model]
+      #   @param metadata [Anthropic::Models::Metadata]
+      #   @param stop_sequences [Array<String>]
+      #   @param system_ [String, Array<Anthropic::Models::TextBlockParam>]
+      #   @param temperature [Float]
+      #   @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]
+      #   @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
+      #   @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>]
+      #   @param top_k [Integer]
+      #   @param top_p [Float]
+      #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
       # System prompt.
       #
@@ -369,9 +348,8 @@ module Anthropic
 
         variant -> { Anthropic::Models::MessageCreateParams::System::TextBlockParamArray }
 
-        # @!parse
-        #   # @return [Array(String, Array<Anthropic::Models::TextBlockParam>)]
-        #   def self.variants; end
+        # @!method self.variants
+        #   @return [Array(String, Array<Anthropic::Models::TextBlockParam>)]
 
         TextBlockParamArray = Anthropic::Internal::Type::ArrayOf[-> { Anthropic::Models::TextBlockParam }]
       end

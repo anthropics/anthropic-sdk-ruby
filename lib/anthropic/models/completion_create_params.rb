@@ -120,33 +120,16 @@ module Anthropic
       #   # @return [Float]
       #   attr_writer :top_p
 
-      # @!parse
-      #   # @param max_tokens_to_sample [Integer]
-      #   # @param model [Symbol, String, Anthropic::Models::Model]
-      #   # @param prompt [String]
-      #   # @param metadata [Anthropic::Models::Metadata]
-      #   # @param stop_sequences [Array<String>]
-      #   # @param temperature [Float]
-      #   # @param top_k [Integer]
-      #   # @param top_p [Float]
-      #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(
-      #     max_tokens_to_sample:,
-      #     model:,
-      #     prompt:,
-      #     metadata: nil,
-      #     stop_sequences: nil,
-      #     temperature: nil,
-      #     top_k: nil,
-      #     top_p: nil,
-      #     request_options: {},
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, request_options: {})
+      #   @param max_tokens_to_sample [Integer]
+      #   @param model [Symbol, String, Anthropic::Models::Model]
+      #   @param prompt [String]
+      #   @param metadata [Anthropic::Models::Metadata]
+      #   @param stop_sequences [Array<String>]
+      #   @param temperature [Float]
+      #   @param top_k [Integer]
+      #   @param top_p [Float]
+      #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
     end
   end
 end
