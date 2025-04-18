@@ -8,7 +8,7 @@ module Anthropic
       #   @return [Symbol, :auto]
       required :type, const: :auto
 
-      # @!attribute [r] disable_parallel_tool_use
+      # @!attribute disable_parallel_tool_use
       #   Whether to disable parallel tool use.
       #
       #   Defaults to `false`. If set to `true`, the model will output at most one tool
@@ -16,10 +16,6 @@ module Anthropic
       #
       #   @return [Boolean, nil]
       optional :disable_parallel_tool_use, Anthropic::Internal::Type::Boolean
-
-      # @!parse
-      #   # @return [Boolean]
-      #   attr_writer :disable_parallel_tool_use
 
       # @!method initialize(disable_parallel_tool_use: nil, type: :auto)
       #   The model will automatically decide whether to use tools.

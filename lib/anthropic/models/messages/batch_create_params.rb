@@ -5,8 +5,7 @@ module Anthropic
     module Messages
       # @see Anthropic::Resources::Messages::Batches#create
       class BatchCreateParams < Anthropic::Internal::Type::BaseModel
-        # @!parse
-        #   extend Anthropic::Internal::Type::RequestParameters::Converter
+        extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
         # @!attribute requests
@@ -157,17 +156,13 @@ module Anthropic
             #   @return [Symbol, String, Anthropic::Models::Model]
             required :model, union: -> { Anthropic::Models::Model }
 
-            # @!attribute [r] metadata
+            # @!attribute metadata
             #   An object describing metadata about the request.
             #
             #   @return [Anthropic::Models::Metadata, nil]
             optional :metadata, -> { Anthropic::Models::Metadata }
 
-            # @!parse
-            #   # @return [Anthropic::Models::Metadata]
-            #   attr_writer :metadata
-
-            # @!attribute [r] stop_sequences
+            # @!attribute stop_sequences
             #   Custom text sequences that will cause the model to stop generating.
             #
             #   Our models will normally stop when they have naturally completed their turn,
@@ -181,11 +176,7 @@ module Anthropic
             #   @return [Array<String>, nil]
             optional :stop_sequences, Anthropic::Internal::Type::ArrayOf[String]
 
-            # @!parse
-            #   # @return [Array<String>]
-            #   attr_writer :stop_sequences
-
-            # @!attribute [r] stream
+            # @!attribute stream
             #   Whether to incrementally stream the response using server-sent events.
             #
             #   See [streaming](https://docs.anthropic.com/en/api/messages-streaming) for
@@ -194,11 +185,7 @@ module Anthropic
             #   @return [Boolean, nil]
             optional :stream, Anthropic::Internal::Type::Boolean
 
-            # @!parse
-            #   # @return [Boolean]
-            #   attr_writer :stream
-
-            # @!attribute [r] system_
+            # @!attribute system_
             #   System prompt.
             #
             #   A system prompt is a way of providing context and instructions to Claude, such
@@ -210,11 +197,7 @@ module Anthropic
                      union: -> { Anthropic::Models::Messages::BatchCreateParams::Request::Params::System },
                      api_name: :system
 
-            # @!parse
-            #   # @return [String, Array<Anthropic::Models::TextBlockParam>]
-            #   attr_writer :system_
-
-            # @!attribute [r] temperature
+            # @!attribute temperature
             #   Amount of randomness injected into the response.
             #
             #   Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
@@ -227,11 +210,7 @@ module Anthropic
             #   @return [Float, nil]
             optional :temperature, Float
 
-            # @!parse
-            #   # @return [Float]
-            #   attr_writer :temperature
-
-            # @!attribute [r] thinking
+            # @!attribute thinking
             #   Configuration for enabling Claude's extended thinking.
             #
             #   When enabled, responses include `thinking` content blocks showing Claude's
@@ -245,22 +224,14 @@ module Anthropic
             #   @return [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, nil]
             optional :thinking, union: -> { Anthropic::Models::ThinkingConfigParam }
 
-            # @!parse
-            #   # @return [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]
-            #   attr_writer :thinking
-
-            # @!attribute [r] tool_choice
+            # @!attribute tool_choice
             #   How the model should use the provided tools. The model can use a specific tool,
             #   any available tool, decide by itself, or not use tools at all.
             #
             #   @return [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone, nil]
             optional :tool_choice, union: -> { Anthropic::Models::ToolChoice }
 
-            # @!parse
-            #   # @return [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
-            #   attr_writer :tool_choice
-
-            # @!attribute [r] tools
+            # @!attribute tools
             #   Definitions of tools that the model may use.
             #
             #   If you include `tools` in your API request, the model may return `tool_use`
@@ -334,11 +305,7 @@ module Anthropic
             #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>, nil]
             optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::ToolUnion] }
 
-            # @!parse
-            #   # @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>]
-            #   attr_writer :tools
-
-            # @!attribute [r] top_k
+            # @!attribute top_k
             #   Only sample from the top K options for each subsequent token.
             #
             #   Used to remove "long tail" low probability responses.
@@ -350,11 +317,7 @@ module Anthropic
             #   @return [Integer, nil]
             optional :top_k, Integer
 
-            # @!parse
-            #   # @return [Integer]
-            #   attr_writer :top_k
-
-            # @!attribute [r] top_p
+            # @!attribute top_p
             #   Use nucleus sampling.
             #
             #   In nucleus sampling, we compute the cumulative distribution over all the options
@@ -367,10 +330,6 @@ module Anthropic
             #
             #   @return [Float, nil]
             optional :top_p, Float
-
-            # @!parse
-            #   # @return [Float]
-            #   attr_writer :top_p
 
             # @!method initialize(max_tokens:, messages:, model:, metadata: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
             #   Messages API creation parameters for the individual request.

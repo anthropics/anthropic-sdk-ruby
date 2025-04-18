@@ -5,8 +5,7 @@ module Anthropic
     module Messages
       # @see Anthropic::Resources::Messages::Batches#results_streaming
       class BatchResultsParams < Anthropic::Internal::Type::BaseModel
-        # @!parse
-        #   extend Anthropic::Internal::Type::RequestParameters::Converter
+        extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
         # @!method initialize(request_options: {})

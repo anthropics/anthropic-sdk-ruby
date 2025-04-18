@@ -5,8 +5,7 @@ module Anthropic
     module Beta
       # @see Anthropic::Resources::Beta::Messages#count_tokens
       class MessageCountTokensParams < Anthropic::Internal::Type::BaseModel
-        # @!parse
-        #   extend Anthropic::Internal::Type::RequestParameters::Converter
+        extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
         # @!attribute messages
@@ -108,7 +107,7 @@ module Anthropic
         #   @return [Symbol, String, Anthropic::Models::Model]
         required :model, union: -> { Anthropic::Models::Model }
 
-        # @!attribute [r] system_
+        # @!attribute system_
         #   System prompt.
         #
         #   A system prompt is a way of providing context and instructions to Claude, such
@@ -120,11 +119,7 @@ module Anthropic
                  union: -> { Anthropic::Models::Beta::MessageCountTokensParams::System },
                  api_name: :system
 
-        # @!parse
-        #   # @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
-        #   attr_writer :system_
-
-        # @!attribute [r] thinking
+        # @!attribute thinking
         #   Configuration for enabling Claude's extended thinking.
         #
         #   When enabled, responses include `thinking` content blocks showing Claude's
@@ -138,22 +133,14 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, nil]
         optional :thinking, union: -> { Anthropic::Models::Beta::BetaThinkingConfigParam }
 
-        # @!parse
-        #   # @return [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
-        #   attr_writer :thinking
-
-        # @!attribute [r] tool_choice
+        # @!attribute tool_choice
         #   How the model should use the provided tools. The model can use a specific tool,
         #   any available tool, decide by itself, or not use tools at all.
         #
         #   @return [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone, nil]
         optional :tool_choice, union: -> { Anthropic::Models::Beta::BetaToolChoice }
 
-        # @!parse
-        #   # @return [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone]
-        #   attr_writer :tool_choice
-
-        # @!attribute [r] tools
+        # @!attribute tools
         #   Definitions of tools that the model may use.
         #
         #   If you include `tools` in your API request, the model may return `tool_use`
@@ -228,19 +215,11 @@ module Anthropic
         optional :tools,
                  -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::Beta::MessageCountTokensParams::Tool] }
 
-        # @!parse
-        #   # @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>]
-        #   attr_writer :tools
-
-        # @!attribute [r] betas
+        # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::AnthropicBeta] }
-
-        # @!parse
-        #   # @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
-        #   attr_writer :betas
 
         # @!method initialize(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, request_options: {})
         #   @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>]

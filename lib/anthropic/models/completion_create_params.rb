@@ -6,8 +6,7 @@ module Anthropic
     #
     # @see Anthropic::Resources::Completions#create_streaming
     class CompletionCreateParams < Anthropic::Internal::Type::BaseModel
-      # @!parse
-      #   extend Anthropic::Internal::Type::RequestParameters::Converter
+      extend Anthropic::Internal::Type::RequestParameters::Converter
       include Anthropic::Internal::Type::RequestParameters
 
       # @!attribute max_tokens_to_sample
@@ -45,17 +44,13 @@ module Anthropic
       #   @return [String]
       required :prompt, String
 
-      # @!attribute [r] metadata
+      # @!attribute metadata
       #   An object describing metadata about the request.
       #
       #   @return [Anthropic::Models::Metadata, nil]
       optional :metadata, -> { Anthropic::Models::Metadata }
 
-      # @!parse
-      #   # @return [Anthropic::Models::Metadata]
-      #   attr_writer :metadata
-
-      # @!attribute [r] stop_sequences
+      # @!attribute stop_sequences
       #   Sequences that will cause the model to stop generating.
       #
       #   Our models stop on `"\n\nHuman:"`, and may include additional built-in stop
@@ -65,11 +60,7 @@ module Anthropic
       #   @return [Array<String>, nil]
       optional :stop_sequences, Anthropic::Internal::Type::ArrayOf[String]
 
-      # @!parse
-      #   # @return [Array<String>]
-      #   attr_writer :stop_sequences
-
-      # @!attribute [r] temperature
+      # @!attribute temperature
       #   Amount of randomness injected into the response.
       #
       #   Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
@@ -82,11 +73,7 @@ module Anthropic
       #   @return [Float, nil]
       optional :temperature, Float
 
-      # @!parse
-      #   # @return [Float]
-      #   attr_writer :temperature
-
-      # @!attribute [r] top_k
+      # @!attribute top_k
       #   Only sample from the top K options for each subsequent token.
       #
       #   Used to remove "long tail" low probability responses.
@@ -98,11 +85,7 @@ module Anthropic
       #   @return [Integer, nil]
       optional :top_k, Integer
 
-      # @!parse
-      #   # @return [Integer]
-      #   attr_writer :top_k
-
-      # @!attribute [r] top_p
+      # @!attribute top_p
       #   Use nucleus sampling.
       #
       #   In nucleus sampling, we compute the cumulative distribution over all the options
@@ -115,10 +98,6 @@ module Anthropic
       #
       #   @return [Float, nil]
       optional :top_p, Float
-
-      # @!parse
-      #   # @return [Float]
-      #   attr_writer :top_p
 
       # @!method initialize(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, request_options: {})
       #   @param max_tokens_to_sample [Integer]
