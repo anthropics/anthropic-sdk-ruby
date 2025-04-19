@@ -3,6 +3,8 @@
 module Anthropic
   module Internal
     module Type
+      # @api private
+      #
       # @generic Elem
       #
       # This module provides a base implementation for streaming responses in the SDK.
@@ -26,6 +28,8 @@ module Anthropic
           def defer_closing(stream) = ->(_id) { Anthropic::Internal::Util.close_fused!(stream) }
         end
 
+        # @api public
+        #
         # @return [void]
         def close = Anthropic::Internal::Util.close_fused!(@iterator)
 
@@ -34,6 +38,8 @@ module Anthropic
         # @return [Enumerable<generic<Elem>>]
         private def iterator = (raise NotImplementedError)
 
+        # @api public
+        #
         # @param blk [Proc]
         #
         # @yieldparam [generic<Elem>]
@@ -45,6 +51,8 @@ module Anthropic
           @iterator.each(&blk)
         end
 
+        # @api public
+        #
         # @return [Enumerator<generic<Elem>>]
         def to_enum = @iterator
 
