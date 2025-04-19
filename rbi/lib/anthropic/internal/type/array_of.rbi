@@ -10,11 +10,10 @@ module Anthropic
         include Anthropic::Internal::Type::Converter
 
         abstract!
-        final!
 
         Elem = type_member(:out)
 
-        sig(:final) do
+        sig do
           params(
             type_info: T.any(
               Anthropic::Internal::AnyHash,
@@ -27,14 +26,17 @@ module Anthropic
         end
         def self.[](type_info, spec = {}); end
 
-        sig(:final) { params(other: T.anything).returns(T::Boolean) }
+        sig { params(other: T.anything).returns(T::Boolean) }
         def ===(other); end
 
-        sig(:final) { params(other: T.anything).returns(T::Boolean) }
+        sig { params(other: T.anything).returns(T::Boolean) }
         def ==(other); end
 
+        sig { returns(Integer) }
+        def hash; end
+
         # @api private
-        sig(:final) do
+        sig do
           override
             .params(
               value: T.any(T::Array[T.anything], T.anything),
@@ -45,7 +47,7 @@ module Anthropic
         def coerce(value, state:); end
 
         # @api private
-        sig(:final) do
+        sig do
           override
             .params(
               value: T.any(T::Array[T.anything], T.anything),
@@ -56,15 +58,15 @@ module Anthropic
         def dump(value, state:); end
 
         # @api private
-        sig(:final) { returns(Elem) }
+        sig { returns(Elem) }
         protected def item_type; end
 
         # @api private
-        sig(:final) { returns(T::Boolean) }
+        sig { returns(T::Boolean) }
         protected def nilable?; end
 
         # @api private
-        sig(:final) do
+        sig do
           params(
             type_info: T.any(
               Anthropic::Internal::AnyHash,
@@ -76,6 +78,10 @@ module Anthropic
             .void
         end
         def initialize(type_info, spec = {}); end
+
+        # @api private
+        sig { params(depth: Integer).returns(String) }
+        def inspect(depth: 0); end
       end
     end
   end

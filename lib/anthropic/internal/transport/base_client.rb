@@ -93,7 +93,11 @@ module Anthropic
                 URI.join(url, response_headers["location"])
               rescue ArgumentError
                 message = "Server responded with status #{status} but no valid location header."
-                raise Anthropic::Errors::APIConnectionError.new(url: url, message: message)
+                raise Anthropic::Errors::APIConnectionError.new(
+                  url: url,
+                  response: response_headers,
+                  message: message
+                )
               end
 
             request = {**request, url: location}
@@ -101,7 +105,11 @@ module Anthropic
             case [url.scheme, location.scheme]
             in ["https", "http"]
               message = "Tried to redirect to a insecure URL"
-              raise Anthropic::Errors::APIConnectionError.new(url: url, message: message)
+              raise Anthropic::Errors::APIConnectionError.new(
+                url: url,
+                response: response_headers,
+                message: message
+              )
             else
               nil
             end
@@ -245,7 +253,7 @@ module Anthropic
 
           if @idempotency_header &&
              !headers.key?(@idempotency_header) &&
-             !Net::HTTP::IDEMPOTENT_METHODS_.include?(method.to_s.upcase)
+             (!Net::HTTP::IDEMPOTENT_METHODS_.include?(method.to_s.upcase) || opts.key?(:idempotency_key))
             headers[@idempotency_header] = opts.fetch(:idempotency_key) { generate_idempotency_key }
           end
 
@@ -350,7 +358,7 @@ module Anthropic
             self.class.reap_connection!(status, stream: stream)
 
             message = "Failed to complete the request within #{self.class::MAX_REDIRECTS} redirects."
-            raise Anthropic::Errors::APIConnectionError.new(url: url, message: message)
+            raise Anthropic::Errors::APIConnectionError.new(url: url, response: response, message: message)
           in 300..399
             self.class.reap_connection!(status, stream: stream)
 
@@ -460,6 +468,8 @@ module Anthropic
           end
         end
 
+        # @api private
+        #
         # @return [String]
         def inspect
           # rubocop:disable Layout/LineLength

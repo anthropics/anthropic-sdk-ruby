@@ -4,13 +4,6 @@ module Anthropic
   module Internal
     module Type
       # @abstract
-      #
-      # @example
-      #   # `api_error_object` is a `Anthropic::Models::APIErrorObject`
-      #   api_error_object => {
-      #     message: message,
-      #     type: type
-      #   }
       class BaseModel
         extend Anthropic::Internal::Type::Converter
 
@@ -62,7 +55,7 @@ module Anthropic
 
             setter = "#{name_sym}="
             api_name = info.fetch(:api_name, name_sym)
-            nilable = info[:nil?]
+            nilable = info.fetch(:nil?, false)
             const = if required && !nilable
               info.fetch(
                 :const,
@@ -97,11 +90,13 @@ module Anthropic
                   target, value, state: state
                 )
               end
-            rescue StandardError
+            rescue StandardError => e
               cls = self.class.name.split("::").last
-              # rubocop:disable Layout/LineLength
-              message = "Failed to parse #{cls}.#{__method__} from #{value.class} to #{target.inspect}. To get the unparsed API response, use #{cls}[:#{__method__}]."
-              # rubocop:enable Layout/LineLength
+              message = [
+                "Failed to parse #{cls}.#{__method__} from #{value.class} to #{target.inspect}.",
+                "To get the unparsed API response, use #{cls}[#{__method__.inspect}].",
+                "Cause: #{e.message}"
+              ].join(" ")
               raise Anthropic::Errors::ConversionError.new(message)
             end
           end
@@ -175,12 +170,18 @@ module Anthropic
           def ==(other)
             other.is_a?(Class) && other <= Anthropic::Internal::Type::BaseModel && other.fields == fields
           end
+
+          # @return [Integer]
+          def hash = fields.hash
         end
 
         # @param other [Object]
         #
         # @return [Boolean]
         def ==(other) = self.class == other.class && @data == other.to_h
+
+        # @return [Integer]
+        def hash = [self.class, @data].hash
 
         class << self
           # @api private
@@ -342,6 +343,29 @@ module Anthropic
             .to_h
         end
 
+        class << self
+          # @api private
+          #
+          # @param model [Anthropic::Internal::Type::BaseModel]
+          #
+          # @return [Hash{Symbol=>Object}]
+          def walk(model)
+            walk = ->(x) do
+              case x
+              in Anthropic::Internal::Type::BaseModel
+                walk.call(x.to_h)
+              in Hash
+                x.transform_values(&walk)
+              in Array
+                x.map(&walk)
+              else
+                x
+              end
+            end
+            walk.call(model)
+          end
+        end
+
         # @param a [Object]
         #
         # @return [String]
@@ -365,15 +389,38 @@ module Anthropic
           end
         end
 
-        # @return [String]
-        def inspect
-          rows = self.class.known_fields.keys.map do
-            "#{_1}=#{@data.key?(_1) ? public_send(_1) : ''}"
-          rescue Anthropic::Errors::ConversionError
-            "#{_1}=#{@data.fetch(_1)}"
+        class << self
+          # @api private
+          #
+          # @param depth [Integer]
+          #
+          # @return [String]
+          def inspect(depth: 0)
+            return super() if depth.positive?
+
+            depth = depth.succ
+            deferred = fields.transform_values do |field|
+              type, required, nilable = field.fetch_values(:type, :required, :nilable)
+              inspected = [
+                Anthropic::Internal::Type::Converter.inspect(type, depth: depth),
+                !required || nilable ? "nil" : nil
+              ].compact.join(" | ")
+              -> { inspected }.tap { _1.define_singleton_method(:inspect) { call } }
+            end
+
+            "#{name}[#{deferred.inspect}]"
           end
-          "#<#{self.class.name}:0x#{object_id.to_s(16)} #{rows.join(' ')}>"
         end
+
+        # @api private
+        #
+        # @return [String]
+        def to_s = self.class.walk(@data).to_s
+
+        # @api private
+        #
+        # @return [String]
+        def inspect = "#<#{self.class}:0x#{object_id.to_s(16)} #{self}>"
       end
     end
   end

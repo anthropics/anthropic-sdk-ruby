@@ -48,16 +48,12 @@ module Anthropic
       #   @return [Symbol, :completion]
       required :type, const: :completion
 
-      # @!parse
-      #   # @param id [String]
-      #   # @param completion [String]
-      #   # @param model [Symbol, String, Anthropic::Models::Model]
-      #   # @param stop_reason [String, nil]
-      #   # @param type [Symbol, :completion]
-      #   #
-      #   def initialize(id:, completion:, model:, stop_reason:, type: :completion, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(id:, completion:, model:, stop_reason:, type: :completion)
+      #   @param id [String]
+      #   @param completion [String]
+      #   @param model [Symbol, String, Anthropic::Models::Model]
+      #   @param stop_reason [String, nil]
+      #   @param type [Symbol, :completion]
     end
   end
 end

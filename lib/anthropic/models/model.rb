@@ -36,9 +36,8 @@ module Anthropic
 
       variant String
 
-      # @!parse
-      #   # @return [Array(Symbol, String)]
-      #   def self.variants; end
+      # @!method self.variants
+      #   @return [Array(Symbol, String)]
 
       # @!group
 

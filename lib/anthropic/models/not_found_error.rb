@@ -13,13 +13,9 @@ module Anthropic
       #   @return [Symbol, :not_found_error]
       required :type, const: :not_found_error
 
-      # @!parse
-      #   # @param message [String]
-      #   # @param type [Symbol, :not_found_error]
-      #   #
-      #   def initialize(message:, type: :not_found_error, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(message:, type: :not_found_error)
+      #   @param message [String]
+      #   @param type [Symbol, :not_found_error]
     end
   end
 end

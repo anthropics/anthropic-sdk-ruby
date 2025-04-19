@@ -14,13 +14,9 @@ module Anthropic
         #   @return [Symbol, :content]
         required :type, const: :content
 
-        # @!parse
-        #   # @param content [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>]
-        #   # @param type [Symbol, :content]
-        #   #
-        #   def initialize(content:, type: :content, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(content:, type: :content)
+        #   @param content [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>]
+        #   @param type [Symbol, :content]
 
         # @see Anthropic::Models::Beta::BetaContentBlockSource#content
         module Content
@@ -30,9 +26,8 @@ module Anthropic
 
           variant -> { Anthropic::Models::Beta::BetaContentBlockSource::Content::BetaContentBlockSourceContentArray }
 
-          # @!parse
-          #   # @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>)]
-          #   def self.variants; end
+          # @!method self.variants
+          #   @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>)]
 
           BetaContentBlockSourceContentArray =
             Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlockSourceContent }]

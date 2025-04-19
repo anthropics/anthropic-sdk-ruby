@@ -22,17 +22,14 @@ module Anthropic
         sig { overridable.returns(T::Array[T.any(NilClass, T::Boolean, Integer, Float, Symbol)]) }
         def values; end
 
-        # @api private
-        #
-        # Guard against thread safety issues by instantiating `@values`.
-        sig { void }
-        private def finalize!; end
-
         sig { params(other: T.anything).returns(T::Boolean) }
         def ===(other); end
 
         sig { params(other: T.anything).returns(T::Boolean) }
         def ==(other); end
+
+        sig { returns(Integer) }
+        def hash; end
 
         # @api private
         #
@@ -57,6 +54,10 @@ module Anthropic
             .returns(T.any(Symbol, T.anything))
         end
         def dump(value, state:); end
+
+        # @api private
+        sig { params(depth: Integer).returns(String) }
+        def inspect(depth: 0); end
       end
     end
   end

@@ -67,6 +67,15 @@ module Anthropic
 
           ObjectSpace.define_finalizer(self, Anthropic::Internal::Type::BaseStream.defer_closing(@stream))
         end
+
+        # @api private
+        #
+        # @return [String]
+        def inspect
+          model = Anthropic::Internal::Type::Converter.inspect(@model, depth: 1)
+
+          "#<#{self.class}[#{model}]:0x#{object_id.to_s(16)}>"
+        end
       end
     end
   end

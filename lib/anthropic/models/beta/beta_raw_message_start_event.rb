@@ -14,13 +14,9 @@ module Anthropic
         #   @return [Symbol, :message_start]
         required :type, const: :message_start
 
-        # @!parse
-        #   # @param message [Anthropic::Models::Beta::BetaMessage]
-        #   # @param type [Symbol, :message_start]
-        #   #
-        #   def initialize(message:, type: :message_start, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(message:, type: :message_start)
+        #   @param message [Anthropic::Models::Beta::BetaMessage]
+        #   @param type [Symbol, :message_start]
       end
     end
 

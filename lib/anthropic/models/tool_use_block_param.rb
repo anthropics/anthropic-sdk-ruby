@@ -28,16 +28,12 @@ module Anthropic
       #   @return [Anthropic::Models::CacheControlEphemeral, nil]
       optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
 
-      # @!parse
-      #   # @param id [String]
-      #   # @param input [Object]
-      #   # @param name [String]
-      #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   # @param type [Symbol, :tool_use]
-      #   #
-      #   def initialize(id:, input:, name:, cache_control: nil, type: :tool_use, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(id:, input:, name:, cache_control: nil, type: :tool_use)
+      #   @param id [String]
+      #   @param input [Object]
+      #   @param name [String]
+      #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
+      #   @param type [Symbol, :tool_use]
     end
   end
 end

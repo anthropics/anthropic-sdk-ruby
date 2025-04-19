@@ -43,16 +43,12 @@ module Anthropic
           #   @return [Integer]
           required :succeeded, Integer
 
-          # @!parse
-          #   # @param canceled [Integer]
-          #   # @param errored [Integer]
-          #   # @param expired [Integer]
-          #   # @param processing [Integer]
-          #   # @param succeeded [Integer]
-          #   #
-          #   def initialize(canceled:, errored:, expired:, processing:, succeeded:, **) = super
-
-          # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+          # @!method initialize(canceled:, errored:, expired:, processing:, succeeded:)
+          #   @param canceled [Integer]
+          #   @param errored [Integer]
+          #   @param expired [Integer]
+          #   @param processing [Integer]
+          #   @param succeeded [Integer]
         end
       end
     end

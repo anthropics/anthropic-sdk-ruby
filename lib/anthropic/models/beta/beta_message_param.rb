@@ -14,13 +14,9 @@ module Anthropic
         #   @return [Symbol, Anthropic::Models::Beta::BetaMessageParam::Role]
         required :role, enum: -> { Anthropic::Models::Beta::BetaMessageParam::Role }
 
-        # @!parse
-        #   # @param content [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam>]
-        #   # @param role [Symbol, Anthropic::Models::Beta::BetaMessageParam::Role]
-        #   #
-        #   def initialize(content:, role:, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(content:, role:)
+        #   @param content [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam>]
+        #   @param role [Symbol, Anthropic::Models::Beta::BetaMessageParam::Role]
 
         # @see Anthropic::Models::Beta::BetaMessageParam#content
         module Content
@@ -30,9 +26,8 @@ module Anthropic
 
           variant -> { Anthropic::Models::Beta::BetaMessageParam::Content::BetaContentBlockParamArray }
 
-          # @!parse
-          #   # @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam>)]
-          #   def self.variants; end
+          # @!method self.variants
+          #   @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam>)]
 
           BetaContentBlockParamArray =
             Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlockParam }]
@@ -45,11 +40,8 @@ module Anthropic
           USER = :user
           ASSISTANT = :assistant
 
-          finalize!
-
-          # @!parse
-          #   # @return [Array<Symbol>]
-          #   def self.values; end
+          # @!method self.values
+          #   @return [Array<Symbol>]
         end
       end
     end

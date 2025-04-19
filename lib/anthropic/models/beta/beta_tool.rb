@@ -26,7 +26,7 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }, nil?: true
 
-        # @!attribute [r] description
+        # @!attribute description
         #   Description of what this tool does.
         #
         #   Tool descriptions should be as detailed as possible. The more information that
@@ -37,25 +37,17 @@ module Anthropic
         #   @return [String, nil]
         optional :description, String
 
-        # @!parse
-        #   # @return [String]
-        #   attr_writer :description
-
         # @!attribute type
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaTool::Type, nil]
         optional :type, enum: -> { Anthropic::Models::Beta::BetaTool::Type }, nil?: true
 
-        # @!parse
-        #   # @param input_schema [Anthropic::Models::Beta::BetaTool::InputSchema]
-        #   # @param name [String]
-        #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        #   # @param description [String]
-        #   # @param type [Symbol, Anthropic::Models::Beta::BetaTool::Type, nil]
-        #   #
-        #   def initialize(input_schema:, name:, cache_control: nil, description: nil, type: nil, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(input_schema:, name:, cache_control: nil, description: nil, type: nil)
+        #   @param input_schema [Anthropic::Models::Beta::BetaTool::InputSchema]
+        #   @param name [String]
+        #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
+        #   @param description [String]
+        #   @param type [Symbol, Anthropic::Models::Beta::BetaTool::Type, nil]
 
         # @see Anthropic::Models::Beta::BetaTool#input_schema
         class InputSchema < Anthropic::Internal::Type::BaseModel
@@ -69,18 +61,14 @@ module Anthropic
           #   @return [Object, nil]
           optional :properties, Anthropic::Internal::Type::Unknown, nil?: true
 
-          # @!parse
-          #   # [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
-          #   #
-          #   # This defines the shape of the `input` that your tool accepts and that the model
-          #   # will produce.
-          #   #
-          #   # @param properties [Object, nil]
-          #   # @param type [Symbol, :object]
-          #   #
-          #   def initialize(properties: nil, type: :object, **) = super
-
-          # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+          # @!method initialize(properties: nil, type: :object)
+          #   [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
+          #
+          #   This defines the shape of the `input` that your tool accepts and that the model
+          #   will produce.
+          #
+          #   @param properties [Object, nil]
+          #   @param type [Symbol, :object]
         end
 
         # @see Anthropic::Models::Beta::BetaTool#type
@@ -89,11 +77,8 @@ module Anthropic
 
           CUSTOM = :custom
 
-          finalize!
-
-          # @!parse
-          #   # @return [Array<Symbol>]
-          #   def self.values; end
+          # @!method self.values
+          #   @return [Array<Symbol>]
         end
       end
     end

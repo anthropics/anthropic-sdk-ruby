@@ -3,21 +3,13 @@
 module Anthropic
   module Models
     class CitationsConfigParam < Anthropic::Internal::Type::BaseModel
-      # @!attribute [r] enabled
+      # @!attribute enabled
       #
       #   @return [Boolean, nil]
       optional :enabled, Anthropic::Internal::Type::Boolean
 
-      # @!parse
-      #   # @return [Boolean]
-      #   attr_writer :enabled
-
-      # @!parse
-      #   # @param enabled [Boolean]
-      #   #
-      #   def initialize(enabled: nil, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(enabled: nil)
+      #   @param enabled [Boolean]
     end
   end
 end

@@ -34,27 +34,13 @@ module Anthropic
         #   @return [Symbol, :page_location]
         required :type, const: :page_location
 
-        # @!parse
-        #   # @param cited_text [String]
-        #   # @param document_index [Integer]
-        #   # @param document_title [String, nil]
-        #   # @param end_page_number [Integer]
-        #   # @param start_page_number [Integer]
-        #   # @param type [Symbol, :page_location]
-        #   #
-        #   def initialize(
-        #     cited_text:,
-        #     document_index:,
-        #     document_title:,
-        #     end_page_number:,
-        #     start_page_number:,
-        #     type: :page_location,
-        #     **
-        #   )
-        #     super
-        #   end
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(cited_text:, document_index:, document_title:, end_page_number:, start_page_number:, type: :page_location)
+        #   @param cited_text [String]
+        #   @param document_index [Integer]
+        #   @param document_title [String, nil]
+        #   @param end_page_number [Integer]
+        #   @param start_page_number [Integer]
+        #   @param type [Symbol, :page_location]
       end
     end
 

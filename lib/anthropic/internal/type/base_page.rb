@@ -36,6 +36,7 @@ module Anthropic
         def initialize(client:, req:, headers:, page_data:)
           @client = client
           @req = req
+          @model = req.fetch(:model)
           super()
         end
 

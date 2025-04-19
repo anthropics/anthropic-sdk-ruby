@@ -14,13 +14,9 @@ module Anthropic
         #   @return [Symbol, :succeeded]
         required :type, const: :succeeded
 
-        # @!parse
-        #   # @param message [Anthropic::Models::Message]
-        #   # @param type [Symbol, :succeeded]
-        #   #
-        #   def initialize(message:, type: :succeeded, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(message:, type: :succeeded)
+        #   @param message [Anthropic::Models::Message]
+        #   @param type [Symbol, :succeeded]
       end
     end
 

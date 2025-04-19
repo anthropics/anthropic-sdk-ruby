@@ -5,11 +5,11 @@ module Anthropic
     module AnthropicBeta
       extend Anthropic::Internal::Type::Union
 
-      sig { override.returns([String, Anthropic::Models::AnthropicBeta::OrSymbol]) }
+      sig { override.returns([String, Anthropic::Models::AnthropicBeta::TaggedSymbol]) }
       def self.variants; end
 
       TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::AnthropicBeta) }
-      OrSymbol = T.type_alias { T.any(Symbol, String, Anthropic::Models::AnthropicBeta::TaggedSymbol) }
+      OrSymbol = T.type_alias { T.any(Symbol, String) }
 
       MESSAGE_BATCHES_2024_09_24 =
         T.let(:"message-batches-2024-09-24", Anthropic::Models::AnthropicBeta::TaggedSymbol)

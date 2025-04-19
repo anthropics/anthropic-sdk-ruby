@@ -61,7 +61,7 @@ module Anthropic
               method.to_s.upcase,
               !body.nil?,
               method != :head,
-              url.to_s
+              URI(url.to_s) # ensure we construct a URI class of the right scheme
             )
 
             headers.each { req[_1] = _2 }
@@ -149,7 +149,7 @@ module Anthropic
                 break if finished
 
                 rsp.read_body do |bytes|
-                  y << bytes
+                  y << bytes.force_encoding(Encoding::BINARY)
                   break if finished
 
                   self.class.calibrate_socket_timeout(conn, deadline)

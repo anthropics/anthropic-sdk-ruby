@@ -20,9 +20,8 @@ module Anthropic
 
       variant :disabled, -> { Anthropic::Models::ThinkingConfigDisabled }
 
-      # @!parse
-      #   # @return [Array(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled)]
-      #   def self.variants; end
+      # @!method self.variants
+      #   @return [Array(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled)]
     end
   end
 end

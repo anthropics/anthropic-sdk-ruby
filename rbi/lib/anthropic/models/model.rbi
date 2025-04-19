@@ -8,11 +8,11 @@ module Anthropic
     module Model
       extend Anthropic::Internal::Type::Union
 
-      sig { override.returns([Anthropic::Models::Model::OrSymbol, String]) }
+      sig { override.returns([Anthropic::Models::Model::TaggedSymbol, String]) }
       def self.variants; end
 
       TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Model) }
-      OrSymbol = T.type_alias { T.any(Symbol, String, Anthropic::Models::Model::TaggedSymbol) }
+      OrSymbol = T.type_alias { T.any(Symbol, String) }
 
       # Our most intelligent model
       CLAUDE_3_7_SONNET_LATEST = T.let(:"claude-3-7-sonnet-latest", Anthropic::Models::Model::TaggedSymbol)

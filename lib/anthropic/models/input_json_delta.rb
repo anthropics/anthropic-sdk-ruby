@@ -13,13 +13,9 @@ module Anthropic
       #   @return [Symbol, :input_json_delta]
       required :type, const: :input_json_delta
 
-      # @!parse
-      #   # @param partial_json [String]
-      #   # @param type [Symbol, :input_json_delta]
-      #   #
-      #   def initialize(partial_json:, type: :input_json_delta, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(partial_json:, type: :input_json_delta)
+      #   @param partial_json [String]
+      #   @param type [Symbol, :input_json_delta]
     end
   end
 end

@@ -30,8 +30,7 @@ module Anthropic
         extend Anthropic::Internal::Type::Enum
 
         TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Base64ImageSource::MediaType) }
-        OrSymbol =
-          T.type_alias { T.any(Symbol, String, Anthropic::Models::Base64ImageSource::MediaType::TaggedSymbol) }
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
 
         IMAGE_JPEG = T.let(:"image/jpeg", Anthropic::Models::Base64ImageSource::MediaType::TaggedSymbol)
         IMAGE_PNG = T.let(:"image/png", Anthropic::Models::Base64ImageSource::MediaType::TaggedSymbol)

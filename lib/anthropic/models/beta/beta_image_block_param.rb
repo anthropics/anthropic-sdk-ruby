@@ -19,14 +19,10 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }, nil?: true
 
-        # @!parse
-        #   # @param source [Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource]
-        #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        #   # @param type [Symbol, :image]
-        #   #
-        #   def initialize(source:, cache_control: nil, type: :image, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(source:, cache_control: nil, type: :image)
+        #   @param source [Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource]
+        #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
+        #   @param type [Symbol, :image]
 
         # @see Anthropic::Models::Beta::BetaImageBlockParam#source
         module Source
@@ -38,9 +34,8 @@ module Anthropic
 
           variant :url, -> { Anthropic::Models::Beta::BetaURLImageSource }
 
-          # @!parse
-          #   # @return [Array(Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource)]
-          #   def self.variants; end
+          # @!method self.variants
+          #   @return [Array(Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource)]
         end
       end
     end

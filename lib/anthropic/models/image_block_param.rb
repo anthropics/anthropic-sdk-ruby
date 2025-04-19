@@ -18,14 +18,10 @@ module Anthropic
       #   @return [Anthropic::Models::CacheControlEphemeral, nil]
       optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
 
-      # @!parse
-      #   # @param source [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]
-      #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   # @param type [Symbol, :image]
-      #   #
-      #   def initialize(source:, cache_control: nil, type: :image, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(source:, cache_control: nil, type: :image)
+      #   @param source [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]
+      #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
+      #   @param type [Symbol, :image]
 
       # @see Anthropic::Models::ImageBlockParam#source
       module Source
@@ -37,9 +33,8 @@ module Anthropic
 
         variant :url, -> { Anthropic::Models::URLImageSource }
 
-        # @!parse
-        #   # @return [Array(Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource)]
-        #   def self.variants; end
+        # @!method self.variants
+        #   @return [Array(Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource)]
       end
     end
   end

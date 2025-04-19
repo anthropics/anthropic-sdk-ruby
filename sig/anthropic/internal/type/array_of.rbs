@@ -15,6 +15,8 @@ module Anthropic
 
         def ==: (top other) -> bool
 
+        def hash: -> Integer
+
         def coerce: (
           ::Array[top] | top value,
           state: Anthropic::Internal::Type::Converter::coerce_state
@@ -35,6 +37,8 @@ module Anthropic
           | Anthropic::Internal::Type::Converter::input type_info,
           ?::Hash[Symbol, top] spec
         ) -> void
+
+        def inspect: (?depth: Integer) -> String
       end
     end
   end

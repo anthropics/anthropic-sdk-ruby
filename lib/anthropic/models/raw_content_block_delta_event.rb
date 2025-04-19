@@ -18,14 +18,10 @@ module Anthropic
       #   @return [Symbol, :content_block_delta]
       required :type, const: :content_block_delta
 
-      # @!parse
-      #   # @param delta [Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta, Anthropic::Models::ThinkingDelta, Anthropic::Models::SignatureDelta]
-      #   # @param index [Integer]
-      #   # @param type [Symbol, :content_block_delta]
-      #   #
-      #   def initialize(delta:, index:, type: :content_block_delta, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(delta:, index:, type: :content_block_delta)
+      #   @param delta [Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta, Anthropic::Models::ThinkingDelta, Anthropic::Models::SignatureDelta]
+      #   @param index [Integer]
+      #   @param type [Symbol, :content_block_delta]
     end
   end
 end

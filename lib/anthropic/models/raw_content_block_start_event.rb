@@ -18,14 +18,10 @@ module Anthropic
       #   @return [Symbol, :content_block_start]
       required :type, const: :content_block_start
 
-      # @!parse
-      #   # @param content_block [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock]
-      #   # @param index [Integer]
-      #   # @param type [Symbol, :content_block_start]
-      #   #
-      #   def initialize(content_block:, index:, type: :content_block_start, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(content_block:, index:, type: :content_block_start)
+      #   @param content_block [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock]
+      #   @param index [Integer]
+      #   @param type [Symbol, :content_block_start]
 
       # @see Anthropic::Models::RawContentBlockStartEvent#content_block
       module ContentBlock
@@ -41,9 +37,8 @@ module Anthropic
 
         variant :redacted_thinking, -> { Anthropic::Models::RedactedThinkingBlock }
 
-        # @!parse
-        #   # @return [Array(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock)]
-        #   def self.variants; end
+        # @!method self.variants
+        #   @return [Array(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock)]
       end
     end
   end

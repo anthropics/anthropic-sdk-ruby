@@ -46,12 +46,7 @@ module Anthropic
         # All of the valid Symbol values for this enum.
         #
         # @return [Array<NilClass, Boolean, Integer, Float, Symbol>]
-        def values = (@values ||= constants.map { const_get(_1) })
-
-        # @api private
-        #
-        # Guard against thread safety issues by instantiating `@values`.
-        private def finalize! = values
+        def values = constants.map { const_get(_1) }
 
         # @param other [Object]
         #
@@ -62,10 +57,13 @@ module Anthropic
         #
         # @return [Boolean]
         def ==(other)
-          # rubocop:disable Layout/LineLength
-          other.is_a?(Module) && other.singleton_class <= Anthropic::Internal::Type::Enum && other.values.to_set == values.to_set
-          # rubocop:enable Layout/LineLength
+          # rubocop:disable Style/CaseEquality
+          Anthropic::Internal::Type::Enum === other && other.values.to_set == values.to_set
+          # rubocop:enable Style/CaseEquality
         end
+
+        # @return [Integer]
+        def hash = values.to_set.hash
 
         # @api private
         #
@@ -107,6 +105,22 @@ module Anthropic
         #   #
         #   # @return [Symbol, Object]
         #   def dump(value, state:) = super
+
+        # @api private
+        #
+        # @param depth [Integer]
+        #
+        # @return [String]
+        def inspect(depth: 0)
+          if depth.positive?
+            return is_a?(Module) ? super() : self.class.name
+          end
+
+          members = values.map { Anthropic::Internal::Type::Converter.inspect(_1, depth: depth.succ) }
+          prefix = is_a?(Module) ? name : self.class.name
+
+          "#{prefix}[#{members.join(' | ')}]"
+        end
       end
     end
   end

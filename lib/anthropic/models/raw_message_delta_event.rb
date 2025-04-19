@@ -33,14 +33,10 @@ module Anthropic
       #   @return [Anthropic::Models::MessageDeltaUsage]
       required :usage, -> { Anthropic::Models::MessageDeltaUsage }
 
-      # @!parse
-      #   # @param delta [Anthropic::Models::RawMessageDeltaEvent::Delta]
-      #   # @param usage [Anthropic::Models::MessageDeltaUsage]
-      #   # @param type [Symbol, :message_delta]
-      #   #
-      #   def initialize(delta:, usage:, type: :message_delta, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(delta:, usage:, type: :message_delta)
+      #   @param delta [Anthropic::Models::RawMessageDeltaEvent::Delta]
+      #   @param usage [Anthropic::Models::MessageDeltaUsage]
+      #   @param type [Symbol, :message_delta]
 
       # @see Anthropic::Models::RawMessageDeltaEvent#delta
       class Delta < Anthropic::Internal::Type::BaseModel
@@ -54,13 +50,9 @@ module Anthropic
         #   @return [String, nil]
         required :stop_sequence, String, nil?: true
 
-        # @!parse
-        #   # @param stop_reason [Symbol, Anthropic::Models::StopReason, nil]
-        #   # @param stop_sequence [String, nil]
-        #   #
-        #   def initialize(stop_reason:, stop_sequence:, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(stop_reason:, stop_sequence:)
+        #   @param stop_reason [Symbol, Anthropic::Models::StopReason, nil]
+        #   @param stop_sequence [String, nil]
       end
     end
   end

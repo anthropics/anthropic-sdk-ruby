@@ -25,15 +25,11 @@ module Anthropic
                -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::TextCitationParam] },
                nil?: true
 
-      # @!parse
-      #   # @param text [String]
-      #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   # @param citations [Array<Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam>, nil]
-      #   # @param type [Symbol, :text]
-      #   #
-      #   def initialize(text:, cache_control: nil, citations: nil, type: :text, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(text:, cache_control: nil, citations: nil, type: :text)
+      #   @param text [String]
+      #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
+      #   @param citations [Array<Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam>, nil]
+      #   @param type [Symbol, :text]
     end
   end
 end
