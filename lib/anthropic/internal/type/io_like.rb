@@ -13,6 +13,8 @@ module Anthropic
 
         private_class_method :new
 
+        # @api public
+        #
         # @param other [Object]
         #
         # @return [Boolean]
@@ -25,6 +27,8 @@ module Anthropic
           end
         end
 
+        # @api public
+        #
         # @param other [Object]
         #
         # @return [Boolean]
