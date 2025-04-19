@@ -1,5 +1,42 @@
 # Changelog
 
+## 0.1.0-beta.7 (2025-04-19)
+
+Full Changelog: [v0.1.0-beta.6...v0.1.0-beta.7](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.1.0-beta.6...v0.1.0-beta.7)
+
+### Features
+
+* **client:** enable setting base URL from environment variable ([9cb10b1](https://github.com/anthropics/anthropic-sdk-ruby/commit/9cb10b1491761bb101269b92f4229183355ff77b))
+* implement `#hash` for data containers ([f289994](https://github.com/anthropics/anthropic-sdk-ruby/commit/f2899941f30d6ce62414a1a866a5c9b47d54c340))
+
+
+### Bug Fixes
+
+* always send idempotency header when specified as a request option ([c53396e](https://github.com/anthropics/anthropic-sdk-ruby/commit/c53396ea8e8b3afdb572c338af34f7bb0a712151))
+* **client:** send correct HTTP path ([4ff371b](https://github.com/anthropics/anthropic-sdk-ruby/commit/4ff371b538e07f3a2ab6c7c4be72616bf425789b))
+
+
+### Chores
+
+* documentation improvements ([e479e74](https://github.com/anthropics/anthropic-sdk-ruby/commit/e479e7423fd7db99723af7e000af7915d9025128))
+* **internal:** always run post-processing when formatting when syntax_tree ([6b66ae9](https://github.com/anthropics/anthropic-sdk-ruby/commit/6b66ae9b0b7bcb695a531ea37242b6ab666490b7))
+* **internal:** contribute.md and contributor QoL improvements ([c48b418](https://github.com/anthropics/anthropic-sdk-ruby/commit/c48b418733b923bf8d470004df4a179aba989e96))
+* **internal:** loosen internal type restrictions ([7675f8e](https://github.com/anthropics/anthropic-sdk-ruby/commit/7675f8efad31278d372ac1d778fe542202706681))
+* **internal:** minor touch ups on sdk internals ([3b4a873](https://github.com/anthropics/anthropic-sdk-ruby/commit/3b4a873177d9cdddcb6c07440619da007615c0bd))
+* **internal:** mostly README touch ups ([b29f388](https://github.com/anthropics/anthropic-sdk-ruby/commit/b29f3887bd12df092cd8398ac6fb82b327c7d2b1))
+* **internal:** protect SSE parsing pipeline from broken UTF-8 characters ([74056ed](https://github.com/anthropics/anthropic-sdk-ruby/commit/74056edcb149d9237db1ef83f6afab46ce489689))
+* **internal:** version bump ([8478780](https://github.com/anthropics/anthropic-sdk-ruby/commit/8478780254d9ea6b489baccefe0b4a33c314e0c8))
+* make internal types pretty print ([99c01e4](https://github.com/anthropics/anthropic-sdk-ruby/commit/99c01e43cceeebd97875bdfa8551352076dfb69f))
+* make sorbet enums easier to read ([1909c6e](https://github.com/anthropics/anthropic-sdk-ruby/commit/1909c6ed7049fcf0d3b05a32318bd142f8116af7))
+* refine `#inspect` and `#to_s` for model classes ([de00260](https://github.com/anthropics/anthropic-sdk-ruby/commit/de002609060018c1f61ec5ed84cc497b6a0ef7bb))
+* simplify yard annotations by removing most `@!parse` directives ([5b23af5](https://github.com/anthropics/anthropic-sdk-ruby/commit/5b23af5a32f8317576e1f37e2685fead060956a6))
+* use `@!method` instead of `@!parse` for virtual method type definitions ([2834dd6](https://github.com/anthropics/anthropic-sdk-ruby/commit/2834dd6f8bcb7ac7fbf2319c3ca948a8ecaa6c07))
+
+
+### Documentation
+
+* update documentation links to be more uniform ([6b95412](https://github.com/anthropics/anthropic-sdk-ruby/commit/6b95412c1193c99bd7f1c701929e76a021f6e39e))
+
 ## 0.1.0-beta.6 (2025-04-11)
 
 Full Changelog: [v0.1.0-beta.5...v0.1.0-beta.6](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.1.0-beta.5...v0.1.0-beta.6)
