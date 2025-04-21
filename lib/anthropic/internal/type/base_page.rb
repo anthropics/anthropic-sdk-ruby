@@ -19,7 +19,7 @@ module Anthropic
         # @api public
         #
         # @raise [Anthropic::Errors::APIError]
-        # @return [Anthropic::Internal::Type::BasePage]
+        # @return [self]
         def next_page = (raise NotImplementedError)
 
         # @api public
