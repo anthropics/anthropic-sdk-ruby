@@ -28,6 +28,8 @@ module Anthropic
         #   @option spec [Proc] :union
         #
         #   @option spec [Boolean] :"nil?"
+        #
+        # @return [Anthropic::Internal::Type::HashOf]
         def self.[](...) = new(...)
 
         # @api public

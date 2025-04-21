@@ -216,9 +216,9 @@ module Anthropic
         #
         #   @option req [Symbol, nil] :unwrap
         #
-        #   @option req [Class, nil] :page
+        #   @option req [Class<Anthropic::Internal::Type::BasePage>, nil] :page
         #
-        #   @option req [Class, nil] :stream
+        #   @option req [Class<Anthropic::Internal::Type::BaseStream>, nil] :stream
         #
         #   @option req [Anthropic::Internal::Type::Converter, Class, nil] :model
         #
@@ -417,9 +417,9 @@ module Anthropic
         #
         # @param unwrap [Symbol, nil]
         #
-        # @param page [Class, nil]
+        # @param page [Class<Anthropic::Internal::Type::BasePage>, nil]
         #
-        # @param stream [Class, nil]
+        # @param stream [Class<Anthropic::Internal::Type::BaseStream>, nil]
         #
         # @param model [Anthropic::Internal::Type::Converter, Class, nil]
         #
