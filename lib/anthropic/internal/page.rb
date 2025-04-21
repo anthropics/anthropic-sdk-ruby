@@ -34,7 +34,7 @@ module Anthropic
       end
 
       # @raise [Anthropic::HTTP::Error]
-      # @return [Anthropic::Internal::Page]
+      # @return [self]
       def next_page
         unless next_page?
           message = "No more pages available. Please check #next_page? before calling ##{__method__}"
