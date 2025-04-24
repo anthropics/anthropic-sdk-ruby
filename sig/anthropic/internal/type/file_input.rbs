@@ -1,7 +1,7 @@
 module Anthropic
   module Internal
     module Type
-      class IOLike
+      class FileInput
         extend Anthropic::Internal::Type::Converter
 
         def self.===: (top other) -> bool
