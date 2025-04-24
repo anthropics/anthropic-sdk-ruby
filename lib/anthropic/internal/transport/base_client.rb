@@ -153,7 +153,7 @@ module Anthropic
 
         # @api private
         # @return [Anthropic::Internal::Transport::PooledNetRequester]
-        attr_accessor :requester
+        attr_reader :requester
 
         # @api private
         #
