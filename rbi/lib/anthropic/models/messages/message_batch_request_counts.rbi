@@ -42,8 +42,26 @@ module Anthropic
           )
             .returns(T.attached_class)
         end
-        def self.new(canceled:, errored:, expired:, processing:, succeeded:); end
-
+        def self.new(
+          # Number of requests in the Message Batch that have been canceled.
+          #
+          # This is zero until processing of the entire Message Batch has ended.
+          canceled:,
+          # Number of requests in the Message Batch that encountered an error.
+          #
+          # This is zero until processing of the entire Message Batch has ended.
+          errored:,
+          # Number of requests in the Message Batch that have expired.
+          #
+          # This is zero until processing of the entire Message Batch has ended.
+          expired:,
+          # Number of requests in the Message Batch that are processing.
+          processing:,
+          # Number of requests in the Message Batch that have completed successfully.
+          #
+          # This is zero until processing of the entire Message Batch has ended.
+          succeeded:
+        ); end
         sig do
           override
             .returns({

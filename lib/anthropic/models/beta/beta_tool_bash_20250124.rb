@@ -23,8 +23,13 @@ module Anthropic
         optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!method initialize(cache_control: nil, name: :bash, type: :bash_20250124)
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaToolBash20250124} for more details.
+        #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        #   @param name [Symbol, :bash]
+        #
+        #   @param name [Symbol, :bash] Name of the tool. ...
+        #
         #   @param type [Symbol, :bash_20250124]
       end
     end

@@ -32,8 +32,14 @@ module Anthropic
           )
             .returns(T.attached_class)
         end
-        def self.new(cache_control: nil, name: :str_replace_editor, type: :text_editor_20241022); end
-
+        def self.new(
+          cache_control: nil,
+          # Name of the tool.
+          #
+          # This is how the tool will be called by the model and in tool_use blocks.
+          name: :str_replace_editor,
+          type: :text_editor_20241022
+        ); end
         sig do
           override
             .returns(

@@ -13,7 +13,11 @@ module Anthropic
         required :input_tokens, Integer
 
         # @!method initialize(input_tokens:)
-        #   @param input_tokens [Integer]
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaMessageTokensCount} for more details.
+        #
+        #   @param input_tokens [Integer] The total number of tokens across the provided list of messages, system prompt,
+        #   ...
       end
     end
 

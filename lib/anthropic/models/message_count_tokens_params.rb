@@ -213,12 +213,23 @@ module Anthropic
                -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::MessageCountTokensTool] }
 
       # @!method initialize(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
-      #   @param messages [Array<Anthropic::Models::MessageParam>]
-      #   @param model [Symbol, String, Anthropic::Models::Model]
-      #   @param system_ [String, Array<Anthropic::Models::TextBlockParam>]
-      #   @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]
-      #   @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
-      #   @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>]
+      #   Some parameter documentations has been truncated, see
+      #   {Anthropic::Models::MessageCountTokensParams} for more details.
+      #
+      #   @param messages [Array<Anthropic::Models::MessageParam>] Input messages. ...
+      #
+      #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      #   ...
+      #
+      #   @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt. ...
+      #
+      #   @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking. ...
+      #
+      #   @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
+      #   ...
+      #
+      #   @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>] Definitions of tools that the model may use. ...
+      #
       #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
       # System prompt.

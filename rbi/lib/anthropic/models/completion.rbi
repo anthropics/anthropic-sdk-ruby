@@ -45,8 +45,30 @@ module Anthropic
         )
           .returns(T.attached_class)
       end
-      def self.new(id:, completion:, model:, stop_reason:, type: :completion); end
-
+      def self.new(
+        # Unique object identifier.
+        #
+        # The format and length of IDs may change over time.
+        id:,
+        # The resulting completion up to and excluding the stop sequences.
+        completion:,
+        # The model that will complete your prompt.\n\nSee
+        # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+        # details and options.
+        model:,
+        # The reason that we stopped.
+        #
+        # This may be one the following values:
+        #
+        # - `"stop_sequence"`: we reached a stop sequence — either provided by you via the
+        #   `stop_sequences` parameter, or a stop sequence built into the model
+        # - `"max_tokens"`: we exceeded `max_tokens_to_sample` or the model's maximum
+        stop_reason:,
+        # Object type.
+        #
+        # For Text Completions, this is always `"completion"`.
+        type: :completion
+      ); end
       sig do
         override
           .returns(

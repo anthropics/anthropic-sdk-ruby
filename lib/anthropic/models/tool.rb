@@ -37,10 +37,16 @@ module Anthropic
       optional :description, String
 
       # @!method initialize(input_schema:, name:, cache_control: nil, description: nil)
-      #   @param input_schema [Anthropic::Models::Tool::InputSchema]
-      #   @param name [String]
+      #   Some parameter documentations has been truncated, see {Anthropic::Models::Tool}
+      #   for more details.
+      #
+      #   @param input_schema [Anthropic::Models::Tool::InputSchema] [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input. ...
+      #
+      #   @param name [String] Name of the tool. ...
+      #
       #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   @param description [String]
+      #
+      #   @param description [String] Description of what this tool does. ...
 
       # @see Anthropic::Models::Tool#input_schema
       class InputSchema < Anthropic::Internal::Type::BaseModel

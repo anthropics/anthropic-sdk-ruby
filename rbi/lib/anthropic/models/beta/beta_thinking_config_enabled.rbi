@@ -20,8 +20,19 @@ module Anthropic
         attr_accessor :type
 
         sig { params(budget_tokens: Integer, type: Symbol).returns(T.attached_class) }
-        def self.new(budget_tokens:, type: :enabled); end
-
+        def self.new(
+          # Determines how many tokens Claude can use for its internal reasoning process.
+          # Larger budgets can enable more thorough analysis for complex problems, improving
+          # response quality.
+          #
+          # Must be ≥1024 and less than `max_tokens`.
+          #
+          # See
+          # [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
+          # for details.
+          budget_tokens:,
+          type: :enabled
+        ); end
         sig { override.returns({budget_tokens: Integer, type: Symbol}) }
         def to_hash; end
       end

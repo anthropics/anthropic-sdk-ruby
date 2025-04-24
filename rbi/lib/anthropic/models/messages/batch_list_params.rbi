@@ -41,8 +41,19 @@ module Anthropic
           )
             .returns(T.attached_class)
         end
-        def self.new(after_id: nil, before_id: nil, limit: nil, request_options: {}); end
-
+        def self.new(
+          # ID of the object to use as a cursor for pagination. When provided, returns the
+          # page of results immediately after this object.
+          after_id: nil,
+          # ID of the object to use as a cursor for pagination. When provided, returns the
+          # page of results immediately before this object.
+          before_id: nil,
+          # Number of items to return per page.
+          #
+          # Defaults to `20`. Ranges from `1` to `1000`.
+          limit: nil,
+          request_options: {}
+        ); end
         sig do
           override
             .returns({

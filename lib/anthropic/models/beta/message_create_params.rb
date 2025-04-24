@@ -292,19 +292,37 @@ module Anthropic
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::AnthropicBeta] }
 
         # @!method initialize(max_tokens:, messages:, model:, metadata: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
-        #   @param max_tokens [Integer]
-        #   @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>]
-        #   @param model [Symbol, String, Anthropic::Models::Model]
-        #   @param metadata [Anthropic::Models::Beta::BetaMetadata]
-        #   @param stop_sequences [Array<String>]
-        #   @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
-        #   @param temperature [Float]
-        #   @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
-        #   @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone]
-        #   @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>]
-        #   @param top_k [Integer]
-        #   @param top_p [Float]
-        #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::MessageCreateParams} for more details.
+        #
+        #   @param max_tokens [Integer] The maximum number of tokens to generate before stopping. ...
+        #
+        #   @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Input messages. ...
+        #
+        #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+        #   ...
+        #
+        #   @param metadata [Anthropic::Models::Beta::BetaMetadata] An object describing metadata about the request.
+        #
+        #   @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating. ...
+        #
+        #   @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] System prompt. ...
+        #
+        #   @param temperature [Float] Amount of randomness injected into the response. ...
+        #
+        #   @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled] Configuration for enabling Claude's extended thinking. ...
+        #
+        #   @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
+        #   ...
+        #
+        #   @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>] Definitions of tools that the model may use. ...
+        #
+        #   @param top_k [Integer] Only sample from the top K options for each subsequent token. ...
+        #
+        #   @param top_p [Float] Use nucleus sampling. ...
+        #
+        #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
         # System prompt.

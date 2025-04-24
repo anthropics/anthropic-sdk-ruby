@@ -25,8 +25,19 @@ module Anthropic
       sig do
         params(id: String, created_at: Time, display_name: String, type: Symbol).returns(T.attached_class)
       end
-      def self.new(id:, created_at:, display_name:, type: :model); end
-
+      def self.new(
+        # Unique model identifier.
+        id:,
+        # RFC 3339 datetime string representing the time at which the model was released.
+        # May be set to an epoch value if the release date is unknown.
+        created_at:,
+        # A human-readable name for the model.
+        display_name:,
+        # Object type.
+        #
+        # For Models, this is always `"model"`.
+        type: :model
+      ); end
       sig { override.returns({id: String, created_at: Time, display_name: String, type: Symbol}) }
       def to_hash; end
     end

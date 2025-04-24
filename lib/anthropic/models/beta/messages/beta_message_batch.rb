@@ -88,16 +88,34 @@ module Anthropic
           required :type, const: :message_batch
 
           # @!method initialize(id:, archived_at:, cancel_initiated_at:, created_at:, ended_at:, expires_at:, processing_status:, request_counts:, results_url:, type: :message_batch)
-          #   @param id [String]
-          #   @param archived_at [Time, nil]
-          #   @param cancel_initiated_at [Time, nil]
-          #   @param created_at [Time]
-          #   @param ended_at [Time, nil]
-          #   @param expires_at [Time]
-          #   @param processing_status [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus]
-          #   @param request_counts [Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts]
-          #   @param results_url [String, nil]
-          #   @param type [Symbol, :message_batch]
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Messages::BetaMessageBatch} for more details.
+          #
+          #   @param id [String] Unique object identifier. ...
+          #
+          #   @param archived_at [Time, nil] RFC 3339 datetime string representing the time at which the Message Batch was ar
+          #   ...
+          #
+          #   @param cancel_initiated_at [Time, nil] RFC 3339 datetime string representing the time at which cancellation was initiat
+          #   ...
+          #
+          #   @param created_at [Time] RFC 3339 datetime string representing the time at which the Message Batch was cr
+          #   ...
+          #
+          #   @param ended_at [Time, nil] RFC 3339 datetime string representing the time at which processing for the Messa
+          #   ...
+          #
+          #   @param expires_at [Time] RFC 3339 datetime string representing the time at which the Message Batch will e
+          #   ...
+          #
+          #   @param processing_status [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus] Processing status of the Message Batch.
+          #
+          #   @param request_counts [Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts] Tallies requests within the Message Batch, categorized by their status. ...
+          #
+          #   @param results_url [String, nil] URL to a `.jsonl` file containing the results of the Message Batch requests. Spe
+          #   ...
+          #
+          #   @param type [Symbol, :message_batch] Object type. ...
 
           # Processing status of the Message Batch.
           #

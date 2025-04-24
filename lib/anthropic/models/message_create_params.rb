@@ -285,18 +285,35 @@ module Anthropic
       optional :top_p, Float
 
       # @!method initialize(max_tokens:, messages:, model:, metadata: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
-      #   @param max_tokens [Integer]
-      #   @param messages [Array<Anthropic::Models::MessageParam>]
-      #   @param model [Symbol, String, Anthropic::Models::Model]
-      #   @param metadata [Anthropic::Models::Metadata]
-      #   @param stop_sequences [Array<String>]
-      #   @param system_ [String, Array<Anthropic::Models::TextBlockParam>]
-      #   @param temperature [Float]
-      #   @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]
-      #   @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
-      #   @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>]
-      #   @param top_k [Integer]
-      #   @param top_p [Float]
+      #   Some parameter documentations has been truncated, see
+      #   {Anthropic::Models::MessageCreateParams} for more details.
+      #
+      #   @param max_tokens [Integer] The maximum number of tokens to generate before stopping. ...
+      #
+      #   @param messages [Array<Anthropic::Models::MessageParam>] Input messages. ...
+      #
+      #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      #   ...
+      #
+      #   @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
+      #
+      #   @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating. ...
+      #
+      #   @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt. ...
+      #
+      #   @param temperature [Float] Amount of randomness injected into the response. ...
+      #
+      #   @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking. ...
+      #
+      #   @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
+      #   ...
+      #
+      #   @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>] Definitions of tools that the model may use. ...
+      #
+      #   @param top_k [Integer] Only sample from the top K options for each subsequent token. ...
+      #
+      #   @param top_p [Float] Use nucleus sampling. ...
+      #
       #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
       # System prompt.

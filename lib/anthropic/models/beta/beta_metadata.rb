@@ -15,7 +15,10 @@ module Anthropic
         optional :user_id, String, nil?: true
 
         # @!method initialize(user_id: nil)
-        #   @param user_id [String, nil]
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaMetadata} for more details.
+        #
+        #   @param user_id [String, nil] An external identifier for the user who is associated with the request. ...
       end
     end
 

@@ -25,8 +25,16 @@ module Anthropic
         sig do
           params(name: String, disable_parallel_tool_use: T::Boolean, type: Symbol).returns(T.attached_class)
         end
-        def self.new(name:, disable_parallel_tool_use: nil, type: :tool); end
-
+        def self.new(
+          # The name of the tool to use.
+          name:,
+          # Whether to disable parallel tool use.
+          #
+          # Defaults to `false`. If set to `true`, the model will output exactly one tool
+          # use.
+          disable_parallel_tool_use: nil,
+          type: :tool
+        ); end
         sig { override.returns({name: String, type: Symbol, disable_parallel_tool_use: T::Boolean}) }
         def to_hash; end
       end

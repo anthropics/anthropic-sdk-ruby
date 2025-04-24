@@ -10,7 +10,8 @@ module Anthropic
       #
       # @overload retrieve(model_id, request_options: {})
       #
-      # @param model_id [String]
+      # @param model_id [String] Model identifier or alias.
+      #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Anthropic::Models::ModelInfo]
@@ -25,6 +26,9 @@ module Anthropic
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {Anthropic::Models::ModelListParams} for more details.
+      #
       # List available models.
       #
       # The Models API response can be used to determine which models are available for
@@ -32,9 +36,14 @@ module Anthropic
       #
       # @overload list(after_id: nil, before_id: nil, limit: nil, request_options: {})
       #
-      # @param after_id [String]
-      # @param before_id [String]
-      # @param limit [Integer]
+      # @param after_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
+      # ...
+      #
+      # @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
+      # ...
+      #
+      # @param limit [Integer] Number of items to return per page. ...
+      #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Anthropic::Internal::Page<Anthropic::Models::ModelInfo>]
