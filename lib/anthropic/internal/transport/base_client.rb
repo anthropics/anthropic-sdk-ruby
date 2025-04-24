@@ -214,7 +214,7 @@ module Anthropic
         #
         #   @option req [Object, nil] :body
         #
-        #   @option req [Symbol, nil] :unwrap
+        #   @option req [Symbol, Integer, Array<Symbol, Integer>, Proc, nil] :unwrap
         #
         #   @option req [Class<Anthropic::Internal::Type::BasePage>, nil] :page
         #
@@ -415,7 +415,7 @@ module Anthropic
         #
         # @param body [Object, nil]
         #
-        # @param unwrap [Symbol, nil]
+        # @param unwrap [Symbol, Integer, Array<Symbol, Integer>, Proc, nil]
         #
         # @param page [Class<Anthropic::Internal::Type::BasePage>, nil]
         #
