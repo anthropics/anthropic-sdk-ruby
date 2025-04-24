@@ -32,8 +32,14 @@ module Anthropic
           )
             .returns(T.attached_class)
         end
-        def self.new(cache_control: nil, name: :bash, type: :bash_20250124); end
-
+        def self.new(
+          cache_control: nil,
+          # Name of the tool.
+          #
+          # This is how the tool will be called by the model and in tool_use blocks.
+          name: :bash,
+          type: :bash_20250124
+        ); end
         sig do
           override
             .returns(

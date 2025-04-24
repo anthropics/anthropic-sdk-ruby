@@ -43,10 +43,17 @@ module Anthropic
         optional :type, enum: -> { Anthropic::Models::Beta::BetaTool::Type }, nil?: true
 
         # @!method initialize(input_schema:, name:, cache_control: nil, description: nil, type: nil)
-        #   @param input_schema [Anthropic::Models::Beta::BetaTool::InputSchema]
-        #   @param name [String]
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaTool} for more details.
+        #
+        #   @param input_schema [Anthropic::Models::Beta::BetaTool::InputSchema] [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input. ...
+        #
+        #   @param name [String] Name of the tool. ...
+        #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        #   @param description [String]
+        #
+        #   @param description [String] Description of what this tool does. ...
+        #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaTool::Type, nil]
 
         # @see Anthropic::Models::Beta::BetaTool#input_schema

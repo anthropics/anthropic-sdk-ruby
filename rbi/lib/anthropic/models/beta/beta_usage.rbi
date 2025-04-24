@@ -29,9 +29,16 @@ module Anthropic
           )
             .returns(T.attached_class)
         end
-        def self.new(cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, output_tokens:)
-        end
-
+        def self.new(
+          # The number of input tokens used to create the cache entry.
+          cache_creation_input_tokens:,
+          # The number of input tokens read from the cache.
+          cache_read_input_tokens:,
+          # The number of input tokens which were used.
+          input_tokens:,
+          # The number of output tokens which were used.
+          output_tokens:
+        ); end
         sig do
           override
             .returns(

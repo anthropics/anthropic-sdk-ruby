@@ -16,8 +16,14 @@ module Anthropic
           attr_accessor :type
 
           sig { params(id: String, type: Symbol).returns(T.attached_class) }
-          def self.new(id:, type: :message_batch_deleted); end
-
+          def self.new(
+            # ID of the Message Batch.
+            id:,
+            # Deleted object type.
+            #
+            # For Message Batches, this is always `"message_batch_deleted"`.
+            type: :message_batch_deleted
+          ); end
           sig { override.returns({id: String, type: Symbol}) }
           def to_hash; end
         end

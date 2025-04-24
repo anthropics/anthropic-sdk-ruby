@@ -49,11 +49,19 @@ module Anthropic
       required :type, const: :completion
 
       # @!method initialize(id:, completion:, model:, stop_reason:, type: :completion)
-      #   @param id [String]
-      #   @param completion [String]
-      #   @param model [Symbol, String, Anthropic::Models::Model]
-      #   @param stop_reason [String, nil]
-      #   @param type [Symbol, :completion]
+      #   Some parameter documentations has been truncated, see
+      #   {Anthropic::Models::Completion} for more details.
+      #
+      #   @param id [String] Unique object identifier. ...
+      #
+      #   @param completion [String] The resulting completion up to and excluding the stop sequences.
+      #
+      #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      #   ...
+      #
+      #   @param stop_reason [String, nil] The reason that we stopped. ...
+      #
+      #   @param type [Symbol, :completion] Object type. ...
     end
   end
 end

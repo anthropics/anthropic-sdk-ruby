@@ -23,7 +23,12 @@ module Anthropic
       required :type, const: :enabled
 
       # @!method initialize(budget_tokens:, type: :enabled)
-      #   @param budget_tokens [Integer]
+      #   Some parameter documentations has been truncated, see
+      #   {Anthropic::Models::ThinkingConfigEnabled} for more details.
+      #
+      #   @param budget_tokens [Integer] Determines how many tokens Claude can use for its internal reasoning process. La
+      #   ...
+      #
       #   @param type [Symbol, :enabled]
     end
   end

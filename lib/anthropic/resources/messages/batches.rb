@@ -4,6 +4,9 @@ module Anthropic
   module Resources
     class Messages
       class Batches
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Messages::BatchCreateParams} for more details.
+        #
         # Send a batch of Message creation requests.
         #
         # The Message Batches API can be used to process multiple Messages API requests at
@@ -15,7 +18,9 @@ module Anthropic
         #
         # @overload create(requests:, request_options: {})
         #
-        # @param requests [Array<Anthropic::Models::Messages::BatchCreateParams::Request>]
+        # @param requests [Array<Anthropic::Models::Messages::BatchCreateParams::Request>] List of requests for prompt completion. Each is an individual request to create
+        # ...
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Messages::MessageBatch]
@@ -41,7 +46,8 @@ module Anthropic
         #
         # @overload retrieve(message_batch_id, request_options: {})
         #
-        # @param message_batch_id [String]
+        # @param message_batch_id [String] ID of the Message Batch.
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Messages::MessageBatch]
@@ -56,6 +62,9 @@ module Anthropic
           )
         end
 
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Messages::BatchListParams} for more details.
+        #
         # List all Message Batches within a Workspace. Most recently created batches are
         # returned first.
         #
@@ -64,9 +73,14 @@ module Anthropic
         #
         # @overload list(after_id: nil, before_id: nil, limit: nil, request_options: {})
         #
-        # @param after_id [String]
-        # @param before_id [String]
-        # @param limit [Integer]
+        # @param after_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
+        # ...
+        #
+        # @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
+        # ...
+        #
+        # @param limit [Integer] Number of items to return per page. ...
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Internal::Page<Anthropic::Models::Messages::MessageBatch>]
@@ -94,7 +108,8 @@ module Anthropic
         #
         # @overload delete(message_batch_id, request_options: {})
         #
-        # @param message_batch_id [String]
+        # @param message_batch_id [String] ID of the Message Batch.
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Messages::DeletedMessageBatch]
@@ -124,7 +139,8 @@ module Anthropic
         #
         # @overload cancel(message_batch_id, request_options: {})
         #
-        # @param message_batch_id [String]
+        # @param message_batch_id [String] ID of the Message Batch.
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Messages::MessageBatch]
@@ -150,7 +166,8 @@ module Anthropic
         #
         # @overload results_streaming(message_batch_id, request_options: {})
         #
-        # @param message_batch_id [String]
+        # @param message_batch_id [String] ID of the Message Batch.
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Internal::JsonLStream<Anthropic::Models::Messages::MessageBatchIndividualResponse>]

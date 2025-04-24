@@ -27,8 +27,13 @@ module Anthropic
         required :type, const: :text
 
         # @!method initialize(citations:, text:, type: :text)
-        #   @param citations [Array<Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation>, nil]
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaTextBlock} for more details.
+        #
+        #   @param citations [Array<Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation>, nil] Citations supporting the text block. ...
+        #
         #   @param text [String]
+        #
         #   @param type [Symbol, :text]
       end
     end

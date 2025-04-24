@@ -44,8 +44,19 @@ module Anthropic
             )
               .returns(T.attached_class)
           end
-          def self.new(custom_id:, result:); end
-
+          def self.new(
+            # Developer-provided ID created for each request in a Message Batch. Useful for
+            # matching results to requests, as results may be given out of request order.
+            #
+            # Must be unique for each request within the Message Batch.
+            custom_id:,
+            # Processing result for this request.
+            #
+            # Contains a Message output if processing was successful, an error response if
+            # processing failed, or the reason why processing was not attempted, such as
+            # cancellation or expiration.
+            result:
+          ); end
           sig do
             override
               .returns(
