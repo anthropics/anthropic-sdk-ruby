@@ -43,7 +43,7 @@ module Anthropic
             value.string
           in Pathname | IO
             state[:can_retry] = false if value.is_a?(IO)
-            Anthropic::Internal::Util::SerializationAdapter.new(value)
+            Anthropic::FilePart.new(value)
           else
             value
           end
