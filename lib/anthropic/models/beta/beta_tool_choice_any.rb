@@ -19,9 +19,13 @@ module Anthropic
         optional :disable_parallel_tool_use, Anthropic::Internal::Type::Boolean
 
         # @!method initialize(disable_parallel_tool_use: nil, type: :any)
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaToolChoiceAny} for more details.
+        #
         #   The model will use any available tools.
         #
-        #   @param disable_parallel_tool_use [Boolean]
+        #   @param disable_parallel_tool_use [Boolean] Whether to disable parallel tool use. ...
+        #
         #   @param type [Symbol, :any]
       end
     end

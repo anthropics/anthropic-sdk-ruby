@@ -31,9 +31,17 @@ module Anthropic
         optional :limit, Integer
 
         # @!method initialize(after_id: nil, before_id: nil, limit: nil, request_options: {})
-        #   @param after_id [String]
-        #   @param before_id [String]
-        #   @param limit [Integer]
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Messages::BatchListParams} for more details.
+        #
+        #   @param after_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
+        #   ...
+        #
+        #   @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
+        #   ...
+        #
+        #   @param limit [Integer] Number of items to return per page. ...
+        #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
       end
     end

@@ -35,8 +35,13 @@ module Anthropic
         required :usage, -> { Anthropic::Models::Beta::BetaMessageDeltaUsage }
 
         # @!method initialize(delta:, usage:, type: :message_delta)
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaRawMessageDeltaEvent} for more details.
+        #
         #   @param delta [Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta]
-        #   @param usage [Anthropic::Models::Beta::BetaMessageDeltaUsage]
+        #
+        #   @param usage [Anthropic::Models::Beta::BetaMessageDeltaUsage] Billing and rate-limit usage. ...
+        #
         #   @param type [Symbol, :message_delta]
 
         # @see Anthropic::Models::Beta::BetaRawMessageDeltaEvent#delta

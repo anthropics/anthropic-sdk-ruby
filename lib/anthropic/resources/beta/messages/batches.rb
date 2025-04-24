@@ -5,6 +5,9 @@ module Anthropic
     class Beta
       class Messages
         class Batches
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Messages::BatchCreateParams} for more details.
+          #
           # Send a batch of Message creation requests.
           #
           # The Message Batches API can be used to process multiple Messages API requests at
@@ -16,8 +19,11 @@ module Anthropic
           #
           # @overload create(requests:, betas: nil, request_options: {})
           #
-          # @param requests [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>]
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
+          # @param requests [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>] Body param: List of requests for prompt completion. Each is an individual reques
+          # ...
+          #
+          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @return [Anthropic::Models::Beta::Messages::BetaMessageBatch]
@@ -45,8 +51,10 @@ module Anthropic
           #
           # @overload retrieve(message_batch_id, betas: nil, request_options: {})
           #
-          # @param message_batch_id [String]
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
+          # @param message_batch_id [String] ID of the Message Batch.
+          #
+          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @return [Anthropic::Models::Beta::Messages::BetaMessageBatch]
@@ -63,6 +71,9 @@ module Anthropic
             )
           end
 
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Messages::BatchListParams} for more details.
+          #
           # List all Message Batches within a Workspace. Most recently created batches are
           # returned first.
           #
@@ -71,10 +82,16 @@ module Anthropic
           #
           # @overload list(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {})
           #
-          # @param after_id [String]
-          # @param before_id [String]
-          # @param limit [Integer]
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
+          # @param after_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
+          # ...
+          #
+          # @param before_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
+          # ...
+          #
+          # @param limit [Integer] Query param: Number of items to return per page. ...
+          #
+          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @return [Anthropic::Internal::Page<Anthropic::Models::Beta::Messages::BetaMessageBatch>]
@@ -104,8 +121,10 @@ module Anthropic
           #
           # @overload delete(message_batch_id, betas: nil, request_options: {})
           #
-          # @param message_batch_id [String]
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
+          # @param message_batch_id [String] ID of the Message Batch.
+          #
+          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @return [Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch]
@@ -137,8 +156,10 @@ module Anthropic
           #
           # @overload cancel(message_batch_id, betas: nil, request_options: {})
           #
-          # @param message_batch_id [String]
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
+          # @param message_batch_id [String] ID of the Message Batch.
+          #
+          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @return [Anthropic::Models::Beta::Messages::BetaMessageBatch]
@@ -166,8 +187,10 @@ module Anthropic
           #
           # @overload results_streaming(message_batch_id, betas: nil, request_options: {})
           #
-          # @param message_batch_id [String]
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
+          # @param message_batch_id [String] ID of the Message Batch.
+          #
+          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
           # @return [Anthropic::Internal::JsonLStream<Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse>]

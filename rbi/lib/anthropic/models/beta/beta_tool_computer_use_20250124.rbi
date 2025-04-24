@@ -48,10 +48,16 @@ module Anthropic
             .returns(T.attached_class)
         end
         def self.new(
+          # The height of the display in pixels.
           display_height_px:,
+          # The width of the display in pixels.
           display_width_px:,
           cache_control: nil,
+          # The X11 display number (e.g. 0, 1) for the display.
           display_number: nil,
+          # Name of the tool.
+          #
+          # This is how the tool will be called by the model and in tool_use blocks.
           name: :computer,
           type: :computer_20250124
         ); end

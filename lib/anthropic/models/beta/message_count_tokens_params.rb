@@ -222,13 +222,25 @@ module Anthropic
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::AnthropicBeta] }
 
         # @!method initialize(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, request_options: {})
-        #   @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>]
-        #   @param model [Symbol, String, Anthropic::Models::Model]
-        #   @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
-        #   @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
-        #   @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone]
-        #   @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>]
-        #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::MessageCountTokensParams} for more details.
+        #
+        #   @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Input messages. ...
+        #
+        #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+        #   ...
+        #
+        #   @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] System prompt. ...
+        #
+        #   @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled] Configuration for enabling Claude's extended thinking. ...
+        #
+        #   @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
+        #   ...
+        #
+        #   @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>] Definitions of tools that the model may use. ...
+        #
+        #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
         # System prompt.

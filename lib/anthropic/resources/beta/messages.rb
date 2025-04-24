@@ -9,6 +9,9 @@ module Anthropic
 
         # See {Anthropic::Resources::Beta::Messages#stream_raw} for streaming counterpart.
         #
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::MessageCreateParams} for more details.
+        #
         # Send a structured list of input messages with text and/or image content, and the
         # model will generate the next message in the conversation.
         #
@@ -19,19 +22,35 @@ module Anthropic
         #
         # @overload create(max_tokens:, messages:, model:, metadata: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
         #
-        # @param max_tokens [Integer]
-        # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>]
-        # @param model [Symbol, String, Anthropic::Models::Model]
-        # @param metadata [Anthropic::Models::Beta::BetaMetadata]
-        # @param stop_sequences [Array<String>]
-        # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
-        # @param temperature [Float]
-        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
-        # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone]
-        # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>]
-        # @param top_k [Integer]
-        # @param top_p [Float]
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
+        # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping. ...
+        #
+        # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Body param: Input messages. ...
+        #
+        # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.\n\nSee [models](https://do
+        # ...
+        #
+        # @param metadata [Anthropic::Models::Beta::BetaMetadata] Body param: An object describing metadata about the request.
+        #
+        # @param stop_sequences [Array<String>] Body param: Custom text sequences that will cause the model to stop generating.
+        # ...
+        #
+        # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] Body param: System prompt. ...
+        #
+        # @param temperature [Float] Body param: Amount of randomness injected into the response. ...
+        #
+        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled] Body param: Configuration for enabling Claude's extended thinking. ...
+        #
+        # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
+        # ...
+        #
+        # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>] Body param: Definitions of tools that the model may use. ...
+        #
+        # @param top_k [Integer] Body param: Only sample from the top K options for each subsequent token. ...
+        #
+        # @param top_p [Float] Body param: Use nucleus sampling. ...
+        #
+        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Beta::BetaMessage]
@@ -56,6 +75,9 @@ module Anthropic
 
         # See {Anthropic::Resources::Beta::Messages#create} for non-streaming counterpart.
         #
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::MessageCreateParams} for more details.
+        #
         # Send a structured list of input messages with text and/or image content, and the
         # model will generate the next message in the conversation.
         #
@@ -66,19 +88,35 @@ module Anthropic
         #
         # @overload stream_raw(max_tokens:, messages:, model:, metadata: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
         #
-        # @param max_tokens [Integer]
-        # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>]
-        # @param model [Symbol, String, Anthropic::Models::Model]
-        # @param metadata [Anthropic::Models::Beta::BetaMetadata]
-        # @param stop_sequences [Array<String>]
-        # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
-        # @param temperature [Float]
-        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
-        # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone]
-        # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>]
-        # @param top_k [Integer]
-        # @param top_p [Float]
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
+        # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping. ...
+        #
+        # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Body param: Input messages. ...
+        #
+        # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.\n\nSee [models](https://do
+        # ...
+        #
+        # @param metadata [Anthropic::Models::Beta::BetaMetadata] Body param: An object describing metadata about the request.
+        #
+        # @param stop_sequences [Array<String>] Body param: Custom text sequences that will cause the model to stop generating.
+        # ...
+        #
+        # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] Body param: System prompt. ...
+        #
+        # @param temperature [Float] Body param: Amount of randomness injected into the response. ...
+        #
+        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled] Body param: Configuration for enabling Claude's extended thinking. ...
+        #
+        # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
+        # ...
+        #
+        # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>] Body param: Definitions of tools that the model may use. ...
+        #
+        # @param top_k [Integer] Body param: Only sample from the top K options for each subsequent token. ...
+        #
+        # @param top_p [Float] Body param: Use nucleus sampling. ...
+        #
+        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Internal::Stream<Anthropic::Models::Beta::BetaRawMessageStartEvent, Anthropic::Models::Beta::BetaRawMessageDeltaEvent, Anthropic::Models::Beta::BetaRawMessageStopEvent, Anthropic::Models::Beta::BetaRawContentBlockStartEvent, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Models::Beta::BetaRawContentBlockStopEvent>]
@@ -106,6 +144,9 @@ module Anthropic
           )
         end
 
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::MessageCountTokensParams} for more details.
+        #
         # Count the number of tokens in a Message.
         #
         # The Token Count API can be used to count the number of tokens in a Message,
@@ -116,13 +157,22 @@ module Anthropic
         #
         # @overload count_tokens(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, request_options: {})
         #
-        # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>]
-        # @param model [Symbol, String, Anthropic::Models::Model]
-        # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>]
-        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
-        # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone]
-        # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>]
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
+        # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Body param: Input messages. ...
+        #
+        # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.\n\nSee [models](https://do
+        # ...
+        #
+        # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] Body param: System prompt. ...
+        #
+        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled] Body param: Configuration for enabling Claude's extended thinking. ...
+        #
+        # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
+        # ...
+        #
+        # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124>] Body param: Definitions of tools that the model may use. ...
+        #
+        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Beta::BetaMessageTokensCount]

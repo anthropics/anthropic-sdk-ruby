@@ -11,7 +11,7 @@ module Anthropic
         required :output_tokens, Integer
 
         # @!method initialize(output_tokens:)
-        #   @param output_tokens [Integer]
+        #   @param output_tokens [Integer] The cumulative number of output tokens which were used.
       end
     end
 
