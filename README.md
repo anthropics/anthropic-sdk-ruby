@@ -38,7 +38,7 @@ anthropic = Anthropic::Client.new(
 
 message = anthropic.messages.create(
   max_tokens: 1024,
-  messages: [{role: :user, content: "Hello, Claude"}],
+  messages: [{role: "user", content: "Hello, Claude"}],
   model: :"claude-3-7-sonnet-latest"
 )
 
@@ -60,7 +60,7 @@ When using sorbet, it is recommended to use model classes as below. This provide
 ```ruby
 anthropic.messages.create(
   max_tokens: 1024,
-  messages: [Anthropic::Models::MessageParam.new(role: :user, content: "Hello, Claude")],
+  messages: [Anthropic::Models::MessageParam.new(role: "user", content: "Hello, Claude")],
   model: :"claude-3-7-sonnet-latest"
 )
 ```
@@ -93,7 +93,7 @@ We provide support for streaming responses using Server-Sent Events (SSE).
 ```ruby
 stream = anthropic.messages.stream_raw(
   max_tokens: 1024,
-  messages: [{role: :user, content: "Hello, Claude"}],
+  messages: [{role: "user", content: "Hello, Claude"}],
   model: :"claude-3-7-sonnet-latest"
 )
 
@@ -110,7 +110,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 begin
   message = anthropic.messages.create(
     max_tokens: 1024,
-    messages: [{role: :user, content: "Hello, Claude"}],
+    messages: [{role: "user", content: "Hello, Claude"}],
     model: :"claude-3-7-sonnet-latest"
   )
 rescue Anthropic::Errors::APIError => e
@@ -151,7 +151,7 @@ anthropic = Anthropic::Client.new(
 # Or, configure per-request:
 anthropic.messages.create(
   max_tokens: 1024,
-  messages: [{role: :user, content: "Hello, Claude"}],
+  messages: [{role: "user", content: "Hello, Claude"}],
   model: :"claude-3-7-sonnet-latest",
   request_options: {max_retries: 5}
 )
@@ -174,7 +174,7 @@ anthropic = Anthropic::Client.new(
 # Or, configure per-request:
 anthropic.messages.create(
   max_tokens: 1024,
-  messages: [{role: :user, content: "Hello, Claude"}],
+  messages: [{role: "user", content: "Hello, Claude"}],
   model: :"claude-3-7-sonnet-latest",
   request_options: {timeout: 5}
 )
@@ -192,14 +192,14 @@ In all places where a `BaseModel` type is specified, vanilla Ruby `Hash` can als
 # This has tooling readability, for auto-completion, static analysis, and goto definition with supported language services
 params = Anthropic::Models::MessageCreateParams.new(
   max_tokens: 1024,
-  messages: [Anthropic::Models::MessageParam.new(role: :user, content: "Hello, Claude")],
+  messages: [Anthropic::Models::MessageParam.new(role: "user", content: "Hello, Claude")],
   model: :"claude-3-7-sonnet-latest"
 )
 
 # This also works
 params = {
   max_tokens: 1024,
-  messages: [{role: :user, content: "Hello, Claude"}],
+  messages: [{role: "user", content: "Hello, Claude"}],
   model: :"claude-3-7-sonnet-latest"
 }
 ```
@@ -320,7 +320,7 @@ It is possible to pass a compatible model / parameter class to a method that exp
 ```ruby
 params = Anthropic::Models::MessageCreateParams.new(
   max_tokens: 1024,
-  messages: [Anthropic::Models::MessageParam.new(role: :user, content: "Hello, Claude")],
+  messages: [Anthropic::Models::MessageParam.new(role: "user", content: "Hello, Claude")],
   model: :"claude-3-7-sonnet-latest"
 )
 anthropic.messages.create(**params)
