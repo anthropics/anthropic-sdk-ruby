@@ -15,15 +15,15 @@ module Anthropic
     #
     # @return [String]
     private def read
-      case contents
+      case content
       in Pathname
-        contents.read(binmode: true)
+        content.read(binmode: true)
       in StringIO
-        contents.string
+        content.string
       in IO
-        contents.read
+        content.read
       in String
-        contents
+        content
       end
     end
 

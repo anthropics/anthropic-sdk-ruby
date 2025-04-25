@@ -44,6 +44,9 @@ module Anthropic
           in Pathname | IO
             state[:can_retry] = false if value.is_a?(IO)
             Anthropic::FilePart.new(value)
+          in Anthropic::FilePart
+            state[:can_retry] = false if value.content.is_a?(IO)
+            value
           else
             value
           end
