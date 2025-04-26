@@ -6,7 +6,7 @@ module Anthropic
       # @api private
       module RequestParameters
         # Options to specify HTTP behaviour for this request.
-        sig { returns(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash)) }
+        sig { returns(Anthropic::RequestOpts) }
         attr_accessor :request_options
 
         # @api private

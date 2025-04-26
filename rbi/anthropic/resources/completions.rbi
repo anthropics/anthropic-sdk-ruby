@@ -25,7 +25,7 @@ module Anthropic
           top_k: Integer,
           top_p: Float,
           stream: T.noreturn,
-          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
+          request_options: Anthropic::RequestOpts
         )
           .returns(Anthropic::Models::Completion)
       end
@@ -114,7 +114,7 @@ module Anthropic
           top_k: Integer,
           top_p: Float,
           stream: T.noreturn,
-          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
+          request_options: Anthropic::RequestOpts
         )
           .returns(Anthropic::Internal::Stream[Anthropic::Models::Completion])
       end

@@ -47,7 +47,7 @@ module Anthropic
           top_k: Integer,
           top_p: Float,
           stream: T.noreturn,
-          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
+          request_options: Anthropic::RequestOpts
         )
           .returns(Anthropic::Models::Message)
       end
@@ -325,7 +325,7 @@ module Anthropic
           top_k: Integer,
           top_p: Float,
           stream: T.noreturn,
-          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
+          request_options: Anthropic::RequestOpts
         )
           .returns(
             Anthropic::Internal::Stream[
@@ -605,7 +605,7 @@ module Anthropic
               Anthropic::Models::ToolTextEditor20250124
             )
           ],
-          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
+          request_options: Anthropic::RequestOpts
         )
           .returns(Anthropic::Models::MessageTokensCount)
       end

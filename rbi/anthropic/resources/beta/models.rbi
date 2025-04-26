@@ -9,10 +9,7 @@ module Anthropic
         # The Models API response can be used to determine information about a specific
         # model or resolve a model alias to a model ID.
         sig do
-          params(
-            model_id: String,
-            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
-          )
+          params(model_id: String, request_options: Anthropic::RequestOpts)
             .returns(Anthropic::Models::Beta::BetaModelInfo)
         end
         def retrieve(
@@ -25,12 +22,7 @@ module Anthropic
         # The Models API response can be used to determine which models are available for
         # use in the API. More recently released models are listed first.
         sig do
-          params(
-            after_id: String,
-            before_id: String,
-            limit: Integer,
-            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
-          )
+          params(after_id: String, before_id: String, limit: Integer, request_options: Anthropic::RequestOpts)
             .returns(Anthropic::Internal::Page[Anthropic::Models::Beta::BetaModelInfo])
         end
         def list(
