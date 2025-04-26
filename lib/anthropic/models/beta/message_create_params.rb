@@ -340,6 +340,7 @@ module Anthropic
           # @!method self.variants
           #   @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam>)]
 
+          # @type [Anthropic::Internal::Type::Converter]
           BetaTextBlockParamArray =
             Anthropic::Internal::Type::ArrayOf[-> { Anthropic::Models::Beta::BetaTextBlockParam }]
         end

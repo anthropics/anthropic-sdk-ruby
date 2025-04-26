@@ -62,9 +62,7 @@ module Anthropic
 
         def self?.variants: -> [String, ::Array[Anthropic::Models::TextBlockParam]]
 
-        type text_block_param_array = ::Array[Anthropic::Models::TextBlockParam]
-
-        TextBlockParamArray: text_block_param_array
+        TextBlockParamArray: Anthropic::Internal::Type::Converter
       end
     end
   end

@@ -331,6 +331,7 @@ module Anthropic
         # @!method self.variants
         #   @return [Array(String, Array<Anthropic::Models::TextBlockParam>)]
 
+        # @type [Anthropic::Internal::Type::Converter]
         TextBlockParamArray = Anthropic::Internal::Type::ArrayOf[-> { Anthropic::Models::TextBlockParam }]
       end
     end

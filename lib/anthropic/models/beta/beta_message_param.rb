@@ -29,6 +29,7 @@ module Anthropic
           # @!method self.variants
           #   @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam>)]
 
+          # @type [Anthropic::Internal::Type::Converter]
           BetaContentBlockParamArray =
             Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlockParam }]
         end

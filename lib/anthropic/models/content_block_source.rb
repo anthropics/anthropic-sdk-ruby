@@ -28,6 +28,7 @@ module Anthropic
         # @!method self.variants
         #   @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>)]
 
+        # @type [Anthropic::Internal::Type::Converter]
         ContentBlockSourceContentArray =
           Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::Models::ContentBlockSourceContent }]
       end
