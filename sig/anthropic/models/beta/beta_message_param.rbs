@@ -29,10 +29,7 @@ module Anthropic
 
           def self?.variants: -> [String, ::Array[Anthropic::Models::Beta::beta_content_block_param]]
 
-          type beta_content_block_param_array =
-            ::Array[Anthropic::Models::Beta::beta_content_block_param]
-
-          BetaContentBlockParamArray: beta_content_block_param_array
+          BetaContentBlockParamArray: Anthropic::Internal::Type::Converter
         end
 
         type role = :user | :assistant
