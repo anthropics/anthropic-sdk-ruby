@@ -53,7 +53,7 @@ module Anthropic
             top_p: Float,
             betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
             stream: T.noreturn,
-            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
+            request_options: Anthropic::RequestOpts
           )
             .returns(Anthropic::Models::Beta::BetaMessage)
         end
@@ -338,7 +338,7 @@ module Anthropic
             top_p: Float,
             betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
             stream: T.noreturn,
-            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
+            request_options: Anthropic::RequestOpts
           )
             .returns(
               Anthropic::Internal::Stream[
@@ -625,7 +625,7 @@ module Anthropic
               )
             ],
             betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
-            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
+            request_options: Anthropic::RequestOpts
           )
             .returns(Anthropic::Models::Beta::BetaMessageTokensCount)
         end
