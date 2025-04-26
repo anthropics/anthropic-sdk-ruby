@@ -54,10 +54,7 @@ module Anthropic
 
         def self?.variants: -> [String, ::Array[Anthropic::Models::ToolResultBlockParam::Content::content]]
 
-        type content_array =
-          ::Array[Anthropic::Models::ToolResultBlockParam::Content::content]
-
-        ContentArray: content_array
+        ContentArray: Anthropic::Internal::Type::Converter
       end
     end
   end
