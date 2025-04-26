@@ -15,7 +15,7 @@ module Anthropic
         sig do
           params(
             requests: T::Array[T.any(Anthropic::Models::Messages::BatchCreateParams::Request, Anthropic::Internal::AnyHash)],
-            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
+            request_options: Anthropic::RequestOpts
           )
             .returns(Anthropic::Models::Messages::MessageBatch)
         end
@@ -32,10 +32,7 @@ module Anthropic
         # Learn more about the Message Batches API in our
         # [user guide](/en/docs/build-with-claude/batch-processing)
         sig do
-          params(
-            message_batch_id: String,
-            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
-          )
+          params(message_batch_id: String, request_options: Anthropic::RequestOpts)
             .returns(Anthropic::Models::Messages::MessageBatch)
         end
         def retrieve(
@@ -49,12 +46,7 @@ module Anthropic
         # Learn more about the Message Batches API in our
         # [user guide](/en/docs/build-with-claude/batch-processing)
         sig do
-          params(
-            after_id: String,
-            before_id: String,
-            limit: Integer,
-            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
-          )
+          params(after_id: String, before_id: String, limit: Integer, request_options: Anthropic::RequestOpts)
             .returns(Anthropic::Internal::Page[Anthropic::Models::Messages::MessageBatch])
         end
         def list(
@@ -78,10 +70,7 @@ module Anthropic
         # Learn more about the Message Batches API in our
         # [user guide](/en/docs/build-with-claude/batch-processing)
         sig do
-          params(
-            message_batch_id: String,
-            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
-          )
+          params(message_batch_id: String, request_options: Anthropic::RequestOpts)
             .returns(Anthropic::Models::Messages::DeletedMessageBatch)
         end
         def delete(
@@ -102,10 +91,7 @@ module Anthropic
         # Learn more about the Message Batches API in our
         # [user guide](/en/docs/build-with-claude/batch-processing)
         sig do
-          params(
-            message_batch_id: String,
-            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
-          )
+          params(message_batch_id: String, request_options: Anthropic::RequestOpts)
             .returns(Anthropic::Models::Messages::MessageBatch)
         end
         def cancel(
@@ -122,10 +108,7 @@ module Anthropic
         # Learn more about the Message Batches API in our
         # [user guide](/en/docs/build-with-claude/batch-processing)
         sig do
-          params(
-            message_batch_id: String,
-            request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
-          )
+          params(message_batch_id: String, request_options: Anthropic::RequestOpts)
             .returns(Anthropic::Internal::JsonLStream[Anthropic::Models::Messages::MessageBatchIndividualResponse])
         end
         def results_streaming(

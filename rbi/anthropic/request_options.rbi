@@ -1,6 +1,8 @@
 # typed: strong
 
 module Anthropic
+  RequestOpts = T.type_alias { T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash) }
+
   # Specify HTTP behaviour to use for a specific request. These options supplement
   # or override those provided at the client level.
   #

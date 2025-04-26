@@ -38,7 +38,7 @@ module Anthropic
                                                                Anthropic::Internal::Type::BaseModel]]
               ),
               model: T.nilable(Anthropic::Internal::Type::Converter::Input),
-              options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
+              options: T.nilable(Anthropic::RequestOpts)
             }
           end
 
@@ -194,7 +194,7 @@ module Anthropic
                                                              Anthropic::Internal::Type::BaseModel]]
             ),
             model: T.nilable(Anthropic::Internal::Type::Converter::Input),
-            options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
+            options: T.nilable(Anthropic::RequestOpts)
           )
             .returns(T.anything)
         end
