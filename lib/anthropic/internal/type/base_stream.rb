@@ -9,7 +9,7 @@ module Anthropic
       #
       # This module provides a base implementation for streaming responses in the SDK.
       #
-      # @see https://rubyapi.org/3.1/o/enumerable
+      # @see https://rubyapi.org/3.2/o/enumerable
       module BaseStream
         include Enumerable
 
@@ -24,7 +24,7 @@ module Anthropic
           #
           # @return [Proc]
           #
-          # @see https://rubyapi.org/3.1/o/objectspace#method-c-define_finalizer
+          # @see https://rubyapi.org/3.2/o/objectspace#method-c-define_finalizer
           def defer_closing(stream) = ->(_id) { Anthropic::Internal::Util.close_fused!(stream) }
         end
 
