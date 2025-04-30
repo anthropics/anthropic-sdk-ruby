@@ -104,7 +104,7 @@ rescue Anthropic::Errors::APIError => e
 end
 ```
 
-Error codes are as followed:
+Error codes are as follows:
 
 | Cause            | Error Type                 |
 | ---------------- | -------------------------- |
