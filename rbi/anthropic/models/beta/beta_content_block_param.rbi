@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaContentBlockParam = Beta::BetaContentBlockParam
+
     module Beta
       module BetaContentBlockParam
         extend Anthropic::Internal::Type::Union
@@ -15,7 +17,5 @@ module Anthropic
         def self.variants; end
       end
     end
-
-    BetaContentBlockParam = Beta::BetaContentBlockParam
   end
 end

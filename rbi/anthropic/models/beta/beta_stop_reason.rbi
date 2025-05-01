@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaStopReason = Beta::BetaStopReason
+
     module Beta
       module BetaStopReason
         extend Anthropic::Internal::Type::Enum
@@ -18,7 +20,5 @@ module Anthropic
         def self.values; end
       end
     end
-
-    BetaStopReason = Beta::BetaStopReason
   end
 end

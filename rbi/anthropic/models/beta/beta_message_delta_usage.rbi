@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaMessageDeltaUsage = Beta::BetaMessageDeltaUsage
+
     module Beta
       class BetaMessageDeltaUsage < Anthropic::Internal::Type::BaseModel
         # The cumulative number of output tokens which were used.
@@ -17,7 +19,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaMessageDeltaUsage = Beta::BetaMessageDeltaUsage
   end
 end

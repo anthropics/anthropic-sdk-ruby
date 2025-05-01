@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaThinkingConfigEnabled = Beta::BetaThinkingConfigEnabled
+
     module Beta
       class BetaThinkingConfigEnabled < Anthropic::Internal::Type::BaseModel
         # Determines how many tokens Claude can use for its internal reasoning process.
@@ -37,7 +39,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaThinkingConfigEnabled = Beta::BetaThinkingConfigEnabled
   end
 end

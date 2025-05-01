@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    MessageBatchErroredResult = Messages::MessageBatchErroredResult
+
     module Messages
       class MessageBatchErroredResult < Anthropic::Internal::Type::BaseModel
         sig { returns(Anthropic::Models::ErrorResponse) }
@@ -23,7 +25,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    MessageBatchErroredResult = Messages::MessageBatchErroredResult
   end
 end

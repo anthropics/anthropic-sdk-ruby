@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    MessageBatchCanceledResult = Messages::MessageBatchCanceledResult
+
     module Messages
       class MessageBatchCanceledResult < Anthropic::Internal::Type::BaseModel
         sig { returns(Symbol) }
@@ -14,7 +16,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    MessageBatchCanceledResult = Messages::MessageBatchCanceledResult
   end
 end

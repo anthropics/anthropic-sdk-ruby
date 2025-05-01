@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaThinkingDelta = Beta::BetaThinkingDelta
+
     module Beta
       class BetaThinkingDelta < Anthropic::Internal::Type::BaseModel
         sig { returns(String) }
@@ -17,7 +19,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaThinkingDelta = Beta::BetaThinkingDelta
   end
 end

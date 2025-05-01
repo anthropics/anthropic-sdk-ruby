@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaRawMessageStartEvent = Beta::BetaRawMessageStartEvent
+
     module Beta
       class BetaRawMessageStartEvent < Anthropic::Internal::Type::BaseModel
         sig { returns(Anthropic::Models::Beta::BetaMessage) }
@@ -23,7 +25,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaRawMessageStartEvent = Beta::BetaRawMessageStartEvent
   end
 end

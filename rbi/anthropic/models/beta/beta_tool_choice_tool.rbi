@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaToolChoiceTool = Beta::BetaToolChoiceTool
+
     module Beta
       class BetaToolChoiceTool < Anthropic::Internal::Type::BaseModel
         # The name of the tool to use.
@@ -39,7 +41,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaToolChoiceTool = Beta::BetaToolChoiceTool
   end
 end

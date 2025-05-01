@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaCitationsDelta = Beta::BetaCitationsDelta
+
     module Beta
       class BetaCitationsDelta < Anthropic::Internal::Type::BaseModel
         sig do
@@ -60,7 +62,5 @@ module Anthropic
         end
       end
     end
-
-    BetaCitationsDelta = Beta::BetaCitationsDelta
   end
 end

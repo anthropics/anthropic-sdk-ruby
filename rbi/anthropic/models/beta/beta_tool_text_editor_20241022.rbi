@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaToolTextEditor20241022 = Beta::BetaToolTextEditor20241022
+
     module Beta
       class BetaToolTextEditor20241022 < Anthropic::Internal::Type::BaseModel
         # Name of the tool.
@@ -49,7 +51,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaToolTextEditor20241022 = Beta::BetaToolTextEditor20241022
   end
 end

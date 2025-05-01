@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaThinkingConfigDisabled = Beta::BetaThinkingConfigDisabled
+
     module Beta
       class BetaThinkingConfigDisabled < Anthropic::Internal::Type::BaseModel
         sig { returns(Symbol) }
@@ -14,7 +16,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaThinkingConfigDisabled = Beta::BetaThinkingConfigDisabled
   end
 end

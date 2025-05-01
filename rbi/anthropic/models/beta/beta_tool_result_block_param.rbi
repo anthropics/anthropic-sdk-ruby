@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaToolResultBlockParam = Beta::BetaToolResultBlockParam
+
     module Beta
       class BetaToolResultBlockParam < Anthropic::Internal::Type::BaseModel
         sig { returns(String) }
@@ -123,7 +125,5 @@ module Anthropic
         end
       end
     end
-
-    BetaToolResultBlockParam = Beta::BetaToolResultBlockParam
   end
 end

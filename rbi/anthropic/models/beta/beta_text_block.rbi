@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaTextBlock = Beta::BetaTextBlock
+
     module Beta
       class BetaTextBlock < Anthropic::Internal::Type::BaseModel
         # Citations supporting the text block.
@@ -78,7 +80,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaTextBlock = Beta::BetaTextBlock
   end
 end

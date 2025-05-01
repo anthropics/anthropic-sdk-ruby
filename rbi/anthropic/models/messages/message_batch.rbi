@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    MessageBatch = Messages::MessageBatch
+
     module Messages
       class MessageBatch < Anthropic::Internal::Type::BaseModel
         # Unique object identifier.
@@ -166,7 +168,5 @@ module Anthropic
         end
       end
     end
-
-    MessageBatch = Messages::MessageBatch
   end
 end

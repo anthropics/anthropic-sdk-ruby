@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaRawMessageDeltaEvent = Beta::BetaRawMessageDeltaEvent
+
     module Beta
       class BetaRawMessageDeltaEvent < Anthropic::Internal::Type::BaseModel
         sig { returns(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta) }
@@ -108,7 +110,5 @@ module Anthropic
         end
       end
     end
-
-    BetaRawMessageDeltaEvent = Beta::BetaRawMessageDeltaEvent
   end
 end

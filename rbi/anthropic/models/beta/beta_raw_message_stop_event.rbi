@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaRawMessageStopEvent = Beta::BetaRawMessageStopEvent
+
     module Beta
       class BetaRawMessageStopEvent < Anthropic::Internal::Type::BaseModel
         sig { returns(Symbol) }
@@ -14,7 +16,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaRawMessageStopEvent = Beta::BetaRawMessageStopEvent
   end
 end

@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaModelInfo = Beta::BetaModelInfo
+
     module Beta
       class BetaModelInfo < Anthropic::Internal::Type::BaseModel
         # Unique model identifier.
@@ -43,7 +45,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaModelInfo = Beta::BetaModelInfo
   end
 end

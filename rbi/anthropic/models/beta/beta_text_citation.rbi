@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaTextCitation = Beta::BetaTextCitation
+
     module Beta
       module BetaTextCitation
         extend Anthropic::Internal::Type::Union
@@ -15,7 +17,5 @@ module Anthropic
         def self.variants; end
       end
     end
-
-    BetaTextCitation = Beta::BetaTextCitation
   end
 end

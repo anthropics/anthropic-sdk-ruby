@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaMessageTokensCount = Beta::BetaMessageTokensCount
+
     module Beta
       class BetaMessageTokensCount < Anthropic::Internal::Type::BaseModel
         # The total number of tokens across the provided list of messages, system prompt,
@@ -19,7 +21,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaMessageTokensCount = Beta::BetaMessageTokensCount
   end
 end
