@@ -53,7 +53,7 @@ module Anthropic
           path: "v1/complete",
           body: parsed,
           model: Anthropic::Models::Completion,
-          options: options
+          options: {timeout: 600, **options}
         )
       end
 
@@ -109,7 +109,7 @@ module Anthropic
           body: parsed,
           stream: Anthropic::Internal::Stream,
           model: Anthropic::Models::Completion,
-          options: options
+          options: {timeout: 600, **options}
         )
       end
 

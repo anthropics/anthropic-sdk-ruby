@@ -63,7 +63,7 @@ module Anthropic
           path: "v1/messages",
           body: parsed,
           model: Anthropic::Models::Message,
-          options: options
+          options: {timeout: 600, **options}
         )
       end
 
@@ -131,7 +131,7 @@ module Anthropic
           body: parsed,
           stream: Anthropic::Internal::Stream,
           model: Anthropic::Models::RawMessageStreamEvent,
-          options: options
+          options: {timeout: 600, **options}
         )
       end
 
