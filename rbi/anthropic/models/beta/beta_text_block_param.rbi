@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaTextBlockParam = Beta::BetaTextBlockParam
+
     module Beta
       class BetaTextBlockParam < Anthropic::Internal::Type::BaseModel
         sig { returns(String) }
@@ -78,7 +80,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaTextBlockParam = Beta::BetaTextBlockParam
   end
 end

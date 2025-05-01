@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaMessage = Beta::BetaMessage
+
     module Beta
       class BetaMessage < Anthropic::Internal::Type::BaseModel
         # Unique object identifier.
@@ -246,7 +248,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaMessage = Beta::BetaMessage
   end
 end

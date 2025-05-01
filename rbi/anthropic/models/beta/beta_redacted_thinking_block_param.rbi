@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaRedactedThinkingBlockParam = Beta::BetaRedactedThinkingBlockParam
+
     module Beta
       class BetaRedactedThinkingBlockParam < Anthropic::Internal::Type::BaseModel
         sig { returns(String) }
@@ -17,7 +19,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaRedactedThinkingBlockParam = Beta::BetaRedactedThinkingBlockParam
   end
 end

@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    MessageBatchIndividualResponse = Messages::MessageBatchIndividualResponse
+
     module Messages
       class MessageBatchIndividualResponse < Anthropic::Internal::Type::BaseModel
         # Developer-provided ID created for each request in a Message Batch. Useful for
@@ -73,7 +75,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    MessageBatchIndividualResponse = Messages::MessageBatchIndividualResponse
   end
 end

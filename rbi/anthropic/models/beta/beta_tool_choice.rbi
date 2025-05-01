@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaToolChoice = Beta::BetaToolChoice
+
     module Beta
       # How the model should use the provided tools. The model can use a specific tool,
       # any available tool, decide by itself, or not use tools at all.
@@ -17,7 +19,5 @@ module Anthropic
         def self.variants; end
       end
     end
-
-    BetaToolChoice = Beta::BetaToolChoice
   end
 end

@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaToolUnion = Beta::BetaToolUnion
+
     module Beta
       module BetaToolUnion
         extend Anthropic::Internal::Type::Union
@@ -15,7 +17,5 @@ module Anthropic
         def self.variants; end
       end
     end
-
-    BetaToolUnion = Beta::BetaToolUnion
   end
 end

@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaToolBash20241022 = Beta::BetaToolBash20241022
+
     module Beta
       class BetaToolBash20241022 < Anthropic::Internal::Type::BaseModel
         # Name of the tool.
@@ -49,7 +51,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaToolBash20241022 = Beta::BetaToolBash20241022
   end
 end

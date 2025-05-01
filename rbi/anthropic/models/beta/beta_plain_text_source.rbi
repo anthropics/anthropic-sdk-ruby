@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaPlainTextSource = Beta::BetaPlainTextSource
+
     module Beta
       class BetaPlainTextSource < Anthropic::Internal::Type::BaseModel
         sig { returns(String) }
@@ -20,7 +22,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaPlainTextSource = Beta::BetaPlainTextSource
   end
 end

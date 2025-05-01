@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaBase64PDFBlock = Beta::BetaBase64PDFBlock
+
     module Beta
       class BetaBase64PDFBlock < Anthropic::Internal::Type::BaseModel
         sig do
@@ -98,7 +100,5 @@ module Anthropic
         end
       end
     end
-
-    BetaBase64PDFBlock = Beta::BetaBase64PDFBlock
   end
 end

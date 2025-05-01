@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    MessageBatchRequestCounts = Messages::MessageBatchRequestCounts
+
     module Messages
       class MessageBatchRequestCounts < Anthropic::Internal::Type::BaseModel
         # Number of requests in the Message Batch that have been canceled.
@@ -75,7 +77,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    MessageBatchRequestCounts = Messages::MessageBatchRequestCounts
   end
 end

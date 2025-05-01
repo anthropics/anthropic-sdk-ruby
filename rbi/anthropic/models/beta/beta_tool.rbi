@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaTool = Beta::BetaTool
+
     module Beta
       class BetaTool < Anthropic::Internal::Type::BaseModel
         # [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -124,7 +126,5 @@ module Anthropic
         end
       end
     end
-
-    BetaTool = Beta::BetaTool
   end
 end

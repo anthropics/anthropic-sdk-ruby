@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaCitationsConfigParam = Beta::BetaCitationsConfigParam
+
     module Beta
       class BetaCitationsConfigParam < Anthropic::Internal::Type::BaseModel
         sig { returns(T.nilable(T::Boolean)) }
@@ -17,7 +19,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaCitationsConfigParam = Beta::BetaCitationsConfigParam
   end
 end

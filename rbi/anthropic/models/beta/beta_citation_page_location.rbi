@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaCitationPageLocation = Beta::BetaCitationPageLocation
+
     module Beta
       class BetaCitationPageLocation < Anthropic::Internal::Type::BaseModel
         sig { returns(String) }
@@ -59,7 +61,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaCitationPageLocation = Beta::BetaCitationPageLocation
   end
 end

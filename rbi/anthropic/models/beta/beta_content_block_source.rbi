@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaContentBlockSource = Beta::BetaContentBlockSource
+
     module Beta
       class BetaContentBlockSource < Anthropic::Internal::Type::BaseModel
         sig do
@@ -68,7 +70,5 @@ module Anthropic
         end
       end
     end
-
-    BetaContentBlockSource = Beta::BetaContentBlockSource
   end
 end

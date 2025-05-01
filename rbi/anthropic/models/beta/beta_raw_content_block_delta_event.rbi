@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaRawContentBlockDeltaEvent = Beta::BetaRawContentBlockDeltaEvent
+
     module Beta
       class BetaRawContentBlockDeltaEvent < Anthropic::Internal::Type::BaseModel
         sig do
@@ -59,7 +61,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaRawContentBlockDeltaEvent = Beta::BetaRawContentBlockDeltaEvent
   end
 end

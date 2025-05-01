@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaBase64PDFSource = Beta::BetaBase64PDFSource
+
     module Beta
       class BetaBase64PDFSource < Anthropic::Internal::Type::BaseModel
         sig { returns(String) }
@@ -20,7 +22,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaBase64PDFSource = Beta::BetaBase64PDFSource
   end
 end

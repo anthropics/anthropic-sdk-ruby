@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaToolUseBlock = Beta::BetaToolUseBlock
+
     module Beta
       class BetaToolUseBlock < Anthropic::Internal::Type::BaseModel
         sig { returns(String) }
@@ -23,7 +25,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaToolUseBlock = Beta::BetaToolUseBlock
   end
 end
