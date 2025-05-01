@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaRawContentBlockDelta = Beta::BetaRawContentBlockDelta
+
     module Beta
       module BetaRawContentBlockDelta
         extend Anthropic::Internal::Type::Union
@@ -15,7 +17,5 @@ module Anthropic
         def self.variants; end
       end
     end
-
-    BetaRawContentBlockDelta = Beta::BetaRawContentBlockDelta
   end
 end

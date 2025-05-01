@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    MessageBatchResult = Messages::MessageBatchResult
+
     module Messages
       # Processing result for this request.
       #
@@ -20,7 +22,5 @@ module Anthropic
         def self.variants; end
       end
     end
-
-    MessageBatchResult = Messages::MessageBatchResult
   end
 end

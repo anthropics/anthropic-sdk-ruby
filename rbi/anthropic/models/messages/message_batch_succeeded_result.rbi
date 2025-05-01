@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    MessageBatchSucceededResult = Messages::MessageBatchSucceededResult
+
     module Messages
       class MessageBatchSucceededResult < Anthropic::Internal::Type::BaseModel
         sig { returns(Anthropic::Models::Message) }
@@ -23,7 +25,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    MessageBatchSucceededResult = Messages::MessageBatchSucceededResult
   end
 end

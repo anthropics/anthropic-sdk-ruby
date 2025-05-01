@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaMetadata = Beta::BetaMetadata
+
     module Beta
       class BetaMetadata < Anthropic::Internal::Type::BaseModel
         # An external identifier for the user who is associated with the request.
@@ -25,7 +27,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaMetadata = Beta::BetaMetadata
   end
 end

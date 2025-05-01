@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaCitationContentBlockLocationParam = Beta::BetaCitationContentBlockLocationParam
+
     module Beta
       class BetaCitationContentBlockLocationParam < Anthropic::Internal::Type::BaseModel
         sig { returns(String) }
@@ -57,7 +59,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaCitationContentBlockLocationParam = Beta::BetaCitationContentBlockLocationParam
   end
 end

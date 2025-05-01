@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaRawContentBlockStartEvent = Beta::BetaRawContentBlockStartEvent
+
     module Beta
       class BetaRawContentBlockStartEvent < Anthropic::Internal::Type::BaseModel
         sig do
@@ -68,7 +70,5 @@ module Anthropic
         end
       end
     end
-
-    BetaRawContentBlockStartEvent = Beta::BetaRawContentBlockStartEvent
   end
 end

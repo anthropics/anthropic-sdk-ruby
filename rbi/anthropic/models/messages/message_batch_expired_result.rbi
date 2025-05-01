@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    MessageBatchExpiredResult = Messages::MessageBatchExpiredResult
+
     module Messages
       class MessageBatchExpiredResult < Anthropic::Internal::Type::BaseModel
         sig { returns(Symbol) }
@@ -14,7 +16,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    MessageBatchExpiredResult = Messages::MessageBatchExpiredResult
   end
 end

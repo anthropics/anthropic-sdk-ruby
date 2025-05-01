@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaRawContentBlockStopEvent = Beta::BetaRawContentBlockStopEvent
+
     module Beta
       class BetaRawContentBlockStopEvent < Anthropic::Internal::Type::BaseModel
         sig { returns(Integer) }
@@ -17,7 +19,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaRawContentBlockStopEvent = Beta::BetaRawContentBlockStopEvent
   end
 end

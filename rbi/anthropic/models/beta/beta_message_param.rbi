@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaMessageParam = Beta::BetaMessageParam
+
     module Beta
       class BetaMessageParam < Anthropic::Internal::Type::BaseModel
         sig do
@@ -119,7 +121,5 @@ module Anthropic
         end
       end
     end
-
-    BetaMessageParam = Beta::BetaMessageParam
   end
 end

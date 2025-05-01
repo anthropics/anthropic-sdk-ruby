@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaToolChoiceNone = Beta::BetaToolChoiceNone
+
     module Beta
       class BetaToolChoiceNone < Anthropic::Internal::Type::BaseModel
         sig { returns(Symbol) }
@@ -15,7 +17,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaToolChoiceNone = Beta::BetaToolChoiceNone
   end
 end

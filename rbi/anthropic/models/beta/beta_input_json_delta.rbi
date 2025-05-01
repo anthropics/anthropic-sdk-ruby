@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaInputJSONDelta = Beta::BetaInputJSONDelta
+
     module Beta
       class BetaInputJSONDelta < Anthropic::Internal::Type::BaseModel
         sig { returns(String) }
@@ -17,7 +19,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaInputJSONDelta = Beta::BetaInputJSONDelta
   end
 end

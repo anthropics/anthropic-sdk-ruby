@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaContentBlockSourceContent = Beta::BetaContentBlockSourceContent
+
     module Beta
       module BetaContentBlockSourceContent
         extend Anthropic::Internal::Type::Union
@@ -13,7 +15,5 @@ module Anthropic
         def self.variants; end
       end
     end
-
-    BetaContentBlockSourceContent = Beta::BetaContentBlockSourceContent
   end
 end

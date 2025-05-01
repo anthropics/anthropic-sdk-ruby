@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaImageBlockParam = Beta::BetaImageBlockParam
+
     module Beta
       class BetaImageBlockParam < Anthropic::Internal::Type::BaseModel
         sig do
@@ -62,7 +64,5 @@ module Anthropic
         end
       end
     end
-
-    BetaImageBlockParam = Beta::BetaImageBlockParam
   end
 end

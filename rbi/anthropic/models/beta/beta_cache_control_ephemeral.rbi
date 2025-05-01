@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaCacheControlEphemeral = Beta::BetaCacheControlEphemeral
+
     module Beta
       class BetaCacheControlEphemeral < Anthropic::Internal::Type::BaseModel
         sig { returns(Symbol) }
@@ -14,7 +16,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaCacheControlEphemeral = Beta::BetaCacheControlEphemeral
   end
 end

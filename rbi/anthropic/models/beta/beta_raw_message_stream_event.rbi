@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaRawMessageStreamEvent = Beta::BetaRawMessageStreamEvent
+
     module Beta
       module BetaRawMessageStreamEvent
         extend Anthropic::Internal::Type::Union
@@ -15,7 +17,5 @@ module Anthropic
         def self.variants; end
       end
     end
-
-    BetaRawMessageStreamEvent = Beta::BetaRawMessageStreamEvent
   end
 end

@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaURLImageSource = Beta::BetaURLImageSource
+
     module Beta
       class BetaURLImageSource < Anthropic::Internal::Type::BaseModel
         sig { returns(Symbol) }
@@ -17,7 +19,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaURLImageSource = Beta::BetaURLImageSource
   end
 end

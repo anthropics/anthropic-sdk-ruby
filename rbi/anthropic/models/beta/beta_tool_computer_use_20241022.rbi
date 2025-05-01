@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaToolComputerUse20241022 = Beta::BetaToolComputerUse20241022
+
     module Beta
       class BetaToolComputerUse20241022 < Anthropic::Internal::Type::BaseModel
         # The height of the display in pixels.
@@ -77,7 +79,5 @@ module Anthropic
         def to_hash; end
       end
     end
-
-    BetaToolComputerUse20241022 = Beta::BetaToolComputerUse20241022
   end
 end

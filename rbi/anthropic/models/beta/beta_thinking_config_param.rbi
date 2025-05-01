@@ -2,6 +2,8 @@
 
 module Anthropic
   module Models
+    BetaThinkingConfigParam = Beta::BetaThinkingConfigParam
+
     module Beta
       # Configuration for enabling Claude's extended thinking.
       #
@@ -24,7 +26,5 @@ module Anthropic
         def self.variants; end
       end
     end
-
-    BetaThinkingConfigParam = Beta::BetaThinkingConfigParam
   end
 end
