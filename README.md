@@ -212,7 +212,7 @@ A combination of [Shopify LSP](https://shopify.github.io/ruby-lsp) and [Solargra
 
 This library also provides support for the [Anthropic Bedrock API](https://aws.amazon.com/bedrock/claude/) if you install this library with the `aws-sdk-bedrockruntime` gem.
 
-You can then instantiate a separate `Anthropic::Bedrock::Client` class, and use AWS's standard guide for configuring credentials (see [the aws-sdk-ruby gem README](https://github.com/aws/aws-sdk-ruby?tab=readme-ov-file#configuration) or [AWS Documentation](https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html#credchain)). It has the same API as the base `Anthropic::Client` class.
+You can then instantiate a separate `Anthropic::BedrockClient` class, and use AWS's standard guide for configuring credentials (see [the aws-sdk-ruby gem README](https://github.com/aws/aws-sdk-ruby?tab=readme-ov-file#configuration) or [AWS Documentation](https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html#credchain)). It has the same API as the base `Anthropic::Client` class.
 
 Note that the model ID required is different for Bedrock models, and, depending on the model you want to use, you will need to use either the AWS's model ID for Anthropic models -- which can be found in [AWS's Bedrock model catalog](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html) -- or an inference profile id (e.g. `us.anthropic.claude-3-5-haiku-20241022-v1:0` for Claude 3.5 Haiku).
 
@@ -220,7 +220,7 @@ Note that the model ID required is different for Bedrock models, and, depending 
 require "bundler/setup"
 require "anthropic"
 
-anthropic = Anthropic::Bedrock::Client.new
+anthropic = Anthropic::BedrockClient.new
 
 message = anthropic.messages.create(
   max_tokens: 1024,
@@ -242,13 +242,13 @@ For more examples see [`examples/bedrock`](examples/bedrock).
 
 This library also provides support for the [Anthropic Vertex API](https://cloud.google.com/vertex-ai?hl=en) if you install this library with the `googleauth` gem.
 
-You can then import and instantiate a separate `Anthropic::Vertex::Client` class, and use Google's guide for configuring [Application Default Credentials](https://cloud.google.com/docs/authentication/provide-credentials-adc). It has the same API as the base `Anthropic::Client` class.
+You can then import and instantiate a separate `Anthropic::VertexClient` class, and use Google's guide for configuring [Application Default Credentials](https://cloud.google.com/docs/authentication/provide-credentials-adc). It has the same API as the base `Anthropic::Client` class.
 
 ```ruby
 require "bundler/setup"
 require "anthropic"
 
-anthropic = Anthropic::Vertex::Client.new(region: "us-east5", project_id: "my-project-id")
+anthropic = Anthropic::VertexClient.new(region: "us-east5", project_id: "my-project-id")
 
 message = anthropic.messages.create(
   max_tokens: 1024,

@@ -1,0 +1,43 @@
+module Anthropic
+  module Helpers
+    module Bedrock
+      class Client < Anthropic::Client
+        DEFAULT_VERSION: String
+
+        attr_reader aws_region: String
+
+        attr_reader completions: Anthropic::Resources::Completions
+
+        attr_reader messages: Anthropic::Resources::Messages
+
+        attr_reader beta: Anthropic::Resources::Beta
+
+        private def build_request: (
+          Anthropic::Internal::Transport::BaseClient::request_components req,
+          Anthropic::request_options opts
+        ) -> Anthropic::Internal::Transport::BaseClient::request_input
+
+        def resolve_region_and_credentials: -> top
+
+        private def signer: -> top
+
+        private def fit_req_to_bedrock_specs!: (
+          Anthropic::Internal::Transport::BaseClient::request_components request_components
+        ) -> Anthropic::Internal::Transport::BaseClient::request_components
+
+        def initialize: (
+          aws_region: String?,
+          base_url: String?,
+          max_retries: Integer,
+          timeout: Float,
+          initial_retry_delay: Float,
+          max_retry_delay: Float,
+          aws_access_key: String?,
+          aws_secret_key: String?,
+          aws_session_token: String?,
+          aws_profile: String?
+        ) -> void
+      end
+    end
+  end
+end
