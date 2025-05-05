@@ -33,7 +33,7 @@ require "bundler/setup"
 require "anthropic"
 
 anthropic = Anthropic::Client.new(
-  api_key: "my-anthropic-api-key" # defaults to ENV["ANTHROPIC_API_KEY"]
+  api_key: ENV["ANTHROPIC_API_KEY"] # This is the default and can be omitted
 )
 
 message = anthropic.messages.create(
