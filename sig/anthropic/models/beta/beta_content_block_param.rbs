@@ -4,18 +4,18 @@ module Anthropic
 
     module Beta
       type beta_content_block_param =
-        Anthropic::Models::Beta::BetaTextBlockParam
-        | Anthropic::Models::Beta::BetaImageBlockParam
-        | Anthropic::Models::Beta::BetaToolUseBlockParam
-        | Anthropic::Models::Beta::BetaToolResultBlockParam
-        | Anthropic::Models::Beta::BetaBase64PDFBlock
-        | Anthropic::Models::Beta::BetaThinkingBlockParam
-        | Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
+        Anthropic::Beta::BetaTextBlockParam
+        | Anthropic::Beta::BetaImageBlockParam
+        | Anthropic::Beta::BetaToolUseBlockParam
+        | Anthropic::Beta::BetaToolResultBlockParam
+        | Anthropic::Beta::BetaBase64PDFBlock
+        | Anthropic::Beta::BetaThinkingBlockParam
+        | Anthropic::Beta::BetaRedactedThinkingBlockParam
 
       module BetaContentBlockParam
         extend Anthropic::Internal::Type::Union
 
-        def self?.variants: -> [Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam]
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_content_block_param]
       end
     end
   end

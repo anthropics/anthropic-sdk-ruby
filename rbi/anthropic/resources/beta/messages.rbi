@@ -19,43 +19,46 @@ module Anthropic
         sig do
           params(
             max_tokens: Integer,
-            messages: T::Array[T.any(Anthropic::Models::Beta::BetaMessageParam, Anthropic::Internal::AnyHash)],
-            model: T.any(Anthropic::Models::Model::OrSymbol, String),
-            metadata: T.any(Anthropic::Models::Beta::BetaMetadata, Anthropic::Internal::AnyHash),
+            messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
+            model: T.any(Anthropic::Model::OrSymbol, String),
+            metadata: Anthropic::Beta::BetaMetadata::OrHash,
             stop_sequences: T::Array[String],
-            system_: T.any(String, T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Internal::AnyHash)]),
-            temperature: Float,
-            thinking: T.any(
-              Anthropic::Models::Beta::BetaThinkingConfigEnabled,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::Beta::BetaThinkingConfigDisabled
-            ),
-            tool_choice: T.any(
-              Anthropic::Models::Beta::BetaToolChoiceAuto,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::Beta::BetaToolChoiceAny,
-              Anthropic::Models::Beta::BetaToolChoiceTool,
-              Anthropic::Models::Beta::BetaToolChoiceNone
-            ),
-            tools: T::Array[
+            system_:
               T.any(
-                Anthropic::Models::Beta::BetaTool,
-                Anthropic::Internal::AnyHash,
-                Anthropic::Models::Beta::BetaToolComputerUse20241022,
-                Anthropic::Models::Beta::BetaToolBash20241022,
-                Anthropic::Models::Beta::BetaToolTextEditor20241022,
-                Anthropic::Models::Beta::BetaToolComputerUse20250124,
-                Anthropic::Models::Beta::BetaToolBash20250124,
-                Anthropic::Models::Beta::BetaToolTextEditor20250124
-              )
-            ],
+                String,
+                T::Array[Anthropic::Beta::BetaTextBlockParam::OrHash]
+              ),
+            temperature: Float,
+            thinking:
+              T.any(
+                Anthropic::Beta::BetaThinkingConfigEnabled::OrHash,
+                Anthropic::Beta::BetaThinkingConfigDisabled::OrHash
+              ),
+            tool_choice:
+              T.any(
+                Anthropic::Beta::BetaToolChoiceAuto::OrHash,
+                Anthropic::Beta::BetaToolChoiceAny::OrHash,
+                Anthropic::Beta::BetaToolChoiceTool::OrHash,
+                Anthropic::Beta::BetaToolChoiceNone::OrHash
+              ),
+            tools:
+              T::Array[
+                T.any(
+                  Anthropic::Beta::BetaTool::OrHash,
+                  Anthropic::Beta::BetaToolComputerUse20241022::OrHash,
+                  Anthropic::Beta::BetaToolBash20241022::OrHash,
+                  Anthropic::Beta::BetaToolTextEditor20241022::OrHash,
+                  Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
+                  Anthropic::Beta::BetaToolBash20250124::OrHash,
+                  Anthropic::Beta::BetaToolTextEditor20250124::OrHash
+                )
+              ],
             top_k: Integer,
             top_p: Float,
-            betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             stream: T.noreturn,
-            request_options: Anthropic::RequestOpts
-          )
-            .returns(Anthropic::Models::Beta::BetaMessage)
+            request_options: Anthropic::RequestOptions::OrHash
+          ).returns(Anthropic::Beta::BetaMessage)
         end
         def create(
           # Body param: The maximum number of tokens to generate before stopping.
@@ -291,7 +294,9 @@ module Anthropic
           # for streaming and non-streaming use cases, respectively.
           stream: false,
           request_options: {}
-        ); end
+        )
+        end
+
         # See {Anthropic::Resources::Beta::Messages#create} for non-streaming counterpart.
         #
         # Send a structured list of input messages with text and/or image content, and the
@@ -304,54 +309,57 @@ module Anthropic
         sig do
           params(
             max_tokens: Integer,
-            messages: T::Array[T.any(Anthropic::Models::Beta::BetaMessageParam, Anthropic::Internal::AnyHash)],
-            model: T.any(Anthropic::Models::Model::OrSymbol, String),
-            metadata: T.any(Anthropic::Models::Beta::BetaMetadata, Anthropic::Internal::AnyHash),
+            messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
+            model: T.any(Anthropic::Model::OrSymbol, String),
+            metadata: Anthropic::Beta::BetaMetadata::OrHash,
             stop_sequences: T::Array[String],
-            system_: T.any(String, T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Internal::AnyHash)]),
-            temperature: Float,
-            thinking: T.any(
-              Anthropic::Models::Beta::BetaThinkingConfigEnabled,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::Beta::BetaThinkingConfigDisabled
-            ),
-            tool_choice: T.any(
-              Anthropic::Models::Beta::BetaToolChoiceAuto,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::Beta::BetaToolChoiceAny,
-              Anthropic::Models::Beta::BetaToolChoiceTool,
-              Anthropic::Models::Beta::BetaToolChoiceNone
-            ),
-            tools: T::Array[
+            system_:
               T.any(
-                Anthropic::Models::Beta::BetaTool,
-                Anthropic::Internal::AnyHash,
-                Anthropic::Models::Beta::BetaToolComputerUse20241022,
-                Anthropic::Models::Beta::BetaToolBash20241022,
-                Anthropic::Models::Beta::BetaToolTextEditor20241022,
-                Anthropic::Models::Beta::BetaToolComputerUse20250124,
-                Anthropic::Models::Beta::BetaToolBash20250124,
-                Anthropic::Models::Beta::BetaToolTextEditor20250124
-              )
-            ],
+                String,
+                T::Array[Anthropic::Beta::BetaTextBlockParam::OrHash]
+              ),
+            temperature: Float,
+            thinking:
+              T.any(
+                Anthropic::Beta::BetaThinkingConfigEnabled::OrHash,
+                Anthropic::Beta::BetaThinkingConfigDisabled::OrHash
+              ),
+            tool_choice:
+              T.any(
+                Anthropic::Beta::BetaToolChoiceAuto::OrHash,
+                Anthropic::Beta::BetaToolChoiceAny::OrHash,
+                Anthropic::Beta::BetaToolChoiceTool::OrHash,
+                Anthropic::Beta::BetaToolChoiceNone::OrHash
+              ),
+            tools:
+              T::Array[
+                T.any(
+                  Anthropic::Beta::BetaTool::OrHash,
+                  Anthropic::Beta::BetaToolComputerUse20241022::OrHash,
+                  Anthropic::Beta::BetaToolBash20241022::OrHash,
+                  Anthropic::Beta::BetaToolTextEditor20241022::OrHash,
+                  Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
+                  Anthropic::Beta::BetaToolBash20250124::OrHash,
+                  Anthropic::Beta::BetaToolTextEditor20250124::OrHash
+                )
+              ],
             top_k: Integer,
             top_p: Float,
-            betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             stream: T.noreturn,
-            request_options: Anthropic::RequestOpts
+            request_options: Anthropic::RequestOptions::OrHash
+          ).returns(
+            Anthropic::Internal::Stream[
+              T.any(
+                Anthropic::Beta::BetaRawMessageStartEvent,
+                Anthropic::Beta::BetaRawMessageDeltaEvent,
+                Anthropic::Beta::BetaRawMessageStopEvent,
+                Anthropic::Beta::BetaRawContentBlockStartEvent,
+                Anthropic::Beta::BetaRawContentBlockDeltaEvent,
+                Anthropic::Beta::BetaRawContentBlockStopEvent
+              )
+            ]
           )
-            .returns(
-              Anthropic::Internal::Stream[
-                T.any(
-                  Anthropic::Models::Beta::BetaRawMessageStartEvent,
-                  Anthropic::Models::Beta::BetaRawMessageDeltaEvent,
-                  Anthropic::Models::Beta::BetaRawMessageStopEvent,
-                  Anthropic::Models::Beta::BetaRawContentBlockStartEvent,
-                  Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent,
-                  Anthropic::Models::Beta::BetaRawContentBlockStopEvent
-                )
-              ]
-            )
         end
         def stream_raw(
           # Body param: The maximum number of tokens to generate before stopping.
@@ -587,7 +595,9 @@ module Anthropic
           # for streaming and non-streaming use cases, respectively.
           stream: true,
           request_options: {}
-        ); end
+        )
+        end
+
         # Count the number of tokens in a Message.
         #
         # The Token Count API can be used to count the number of tokens in a Message,
@@ -597,37 +607,40 @@ module Anthropic
         # [user guide](/en/docs/build-with-claude/token-counting)
         sig do
           params(
-            messages: T::Array[T.any(Anthropic::Models::Beta::BetaMessageParam, Anthropic::Internal::AnyHash)],
-            model: T.any(Anthropic::Models::Model::OrSymbol, String),
-            system_: T.any(String, T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Internal::AnyHash)]),
-            thinking: T.any(
-              Anthropic::Models::Beta::BetaThinkingConfigEnabled,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::Beta::BetaThinkingConfigDisabled
-            ),
-            tool_choice: T.any(
-              Anthropic::Models::Beta::BetaToolChoiceAuto,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::Beta::BetaToolChoiceAny,
-              Anthropic::Models::Beta::BetaToolChoiceTool,
-              Anthropic::Models::Beta::BetaToolChoiceNone
-            ),
-            tools: T::Array[
+            messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
+            model: T.any(Anthropic::Model::OrSymbol, String),
+            system_:
               T.any(
-                Anthropic::Models::Beta::BetaTool,
-                Anthropic::Internal::AnyHash,
-                Anthropic::Models::Beta::BetaToolComputerUse20241022,
-                Anthropic::Models::Beta::BetaToolBash20241022,
-                Anthropic::Models::Beta::BetaToolTextEditor20241022,
-                Anthropic::Models::Beta::BetaToolComputerUse20250124,
-                Anthropic::Models::Beta::BetaToolBash20250124,
-                Anthropic::Models::Beta::BetaToolTextEditor20250124
-              )
-            ],
-            betas: T::Array[T.any(String, Anthropic::Models::AnthropicBeta::OrSymbol)],
-            request_options: Anthropic::RequestOpts
-          )
-            .returns(Anthropic::Models::Beta::BetaMessageTokensCount)
+                String,
+                T::Array[Anthropic::Beta::BetaTextBlockParam::OrHash]
+              ),
+            thinking:
+              T.any(
+                Anthropic::Beta::BetaThinkingConfigEnabled::OrHash,
+                Anthropic::Beta::BetaThinkingConfigDisabled::OrHash
+              ),
+            tool_choice:
+              T.any(
+                Anthropic::Beta::BetaToolChoiceAuto::OrHash,
+                Anthropic::Beta::BetaToolChoiceAny::OrHash,
+                Anthropic::Beta::BetaToolChoiceTool::OrHash,
+                Anthropic::Beta::BetaToolChoiceNone::OrHash
+              ),
+            tools:
+              T::Array[
+                T.any(
+                  Anthropic::Beta::BetaTool::OrHash,
+                  Anthropic::Beta::BetaToolComputerUse20241022::OrHash,
+                  Anthropic::Beta::BetaToolBash20241022::OrHash,
+                  Anthropic::Beta::BetaToolTextEditor20241022::OrHash,
+                  Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
+                  Anthropic::Beta::BetaToolBash20250124::OrHash,
+                  Anthropic::Beta::BetaToolTextEditor20250124::OrHash
+                )
+              ],
+            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            request_options: Anthropic::RequestOptions::OrHash
+          ).returns(Anthropic::Beta::BetaMessageTokensCount)
         end
         def count_tokens(
           # Body param: Input messages.
@@ -813,10 +826,13 @@ module Anthropic
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}
-        ); end
+        )
+        end
+
         # @api private
         sig { params(client: Anthropic::Client).returns(T.attached_class) }
-        def self.new(client:); end
+        def self.new(client:)
+        end
       end
     end
   end

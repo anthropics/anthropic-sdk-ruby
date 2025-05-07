@@ -12,8 +12,6 @@ module Anthropic
         attr_accessor type: :enabled
 
         def initialize: (budget_tokens: Integer, ?type: :enabled) -> void
-
-        def to_hash: -> Anthropic::Models::Beta::beta_thinking_config_enabled
       end
     end
   end

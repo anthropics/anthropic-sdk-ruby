@@ -45,18 +45,17 @@ module Anthropic
 
           # @!method initialize(canceled:, errored:, expired:, processing:, succeeded:)
           #   Some parameter documentations has been truncated, see
-          #   {Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts} for more
-          #   details.
+          #   {Anthropic::Beta::Messages::BetaMessageBatchRequestCounts} for more details.
           #
-          #   @param canceled [Integer] Number of requests in the Message Batch that have been canceled. ...
+          #   @param canceled [Integer] Number of requests in the Message Batch that have been canceled.
           #
-          #   @param errored [Integer] Number of requests in the Message Batch that encountered an error. ...
+          #   @param errored [Integer] Number of requests in the Message Batch that encountered an error.
           #
-          #   @param expired [Integer] Number of requests in the Message Batch that have expired. ...
+          #   @param expired [Integer] Number of requests in the Message Batch that have expired.
           #
           #   @param processing [Integer] Number of requests in the Message Batch that are processing.
           #
-          #   @param succeeded [Integer] Number of requests in the Message Batch that have completed successfully. ...
+          #   @param succeeded [Integer] Number of requests in the Message Batch that have completed successfully.
         end
       end
     end

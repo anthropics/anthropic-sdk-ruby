@@ -9,8 +9,6 @@ module Anthropic
         attr_accessor type: :expired
 
         def initialize: (?type: :expired) -> void
-
-        def to_hash: -> Anthropic::Models::Messages::message_batch_expired_result
       end
     end
   end

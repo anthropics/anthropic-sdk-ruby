@@ -13,16 +13,16 @@ module Anthropic
 
         discriminator :type
 
-        variant :succeeded, -> { Anthropic::Models::Messages::MessageBatchSucceededResult }
+        variant :succeeded, -> { Anthropic::Messages::MessageBatchSucceededResult }
 
-        variant :errored, -> { Anthropic::Models::Messages::MessageBatchErroredResult }
+        variant :errored, -> { Anthropic::Messages::MessageBatchErroredResult }
 
-        variant :canceled, -> { Anthropic::Models::Messages::MessageBatchCanceledResult }
+        variant :canceled, -> { Anthropic::Messages::MessageBatchCanceledResult }
 
-        variant :expired, -> { Anthropic::Models::Messages::MessageBatchExpiredResult }
+        variant :expired, -> { Anthropic::Messages::MessageBatchExpiredResult }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::Messages::MessageBatchSucceededResult, Anthropic::Models::Messages::MessageBatchErroredResult, Anthropic::Models::Messages::MessageBatchCanceledResult, Anthropic::Models::Messages::MessageBatchExpiredResult)]
+        #   @return [Array(Anthropic::Messages::MessageBatchSucceededResult, Anthropic::Messages::MessageBatchErroredResult, Anthropic::Messages::MessageBatchCanceledResult, Anthropic::Messages::MessageBatchExpiredResult)]
       end
     end
 

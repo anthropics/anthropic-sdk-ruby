@@ -6,14 +6,17 @@ module Anthropic
 
     module Beta
       class BetaRawContentBlockDeltaEvent < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         sig do
           returns(
             T.any(
-              Anthropic::Models::Beta::BetaTextDelta,
-              Anthropic::Models::Beta::BetaInputJSONDelta,
-              Anthropic::Models::Beta::BetaCitationsDelta,
-              Anthropic::Models::Beta::BetaThinkingDelta,
-              Anthropic::Models::Beta::BetaSignatureDelta
+              Anthropic::Beta::BetaTextDelta,
+              Anthropic::Beta::BetaInputJSONDelta,
+              Anthropic::Beta::BetaCitationsDelta,
+              Anthropic::Beta::BetaThinkingDelta,
+              Anthropic::Beta::BetaSignatureDelta
             )
           )
         end
@@ -27,38 +30,39 @@ module Anthropic
 
         sig do
           params(
-            delta: T.any(
-              Anthropic::Models::Beta::BetaTextDelta,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::Beta::BetaInputJSONDelta,
-              Anthropic::Models::Beta::BetaCitationsDelta,
-              Anthropic::Models::Beta::BetaThinkingDelta,
-              Anthropic::Models::Beta::BetaSignatureDelta
-            ),
+            delta:
+              T.any(
+                Anthropic::Beta::BetaTextDelta::OrHash,
+                Anthropic::Beta::BetaInputJSONDelta::OrHash,
+                Anthropic::Beta::BetaCitationsDelta::OrHash,
+                Anthropic::Beta::BetaThinkingDelta::OrHash,
+                Anthropic::Beta::BetaSignatureDelta::OrHash
+              ),
             index: Integer,
             type: Symbol
-          )
-            .returns(T.attached_class)
+          ).returns(T.attached_class)
         end
-        def self.new(delta:, index:, type: :content_block_delta); end
+        def self.new(delta:, index:, type: :content_block_delta)
+        end
 
         sig do
-          override
-            .returns(
-              {
-                delta: T.any(
-                  Anthropic::Models::Beta::BetaTextDelta,
-                  Anthropic::Models::Beta::BetaInputJSONDelta,
-                  Anthropic::Models::Beta::BetaCitationsDelta,
-                  Anthropic::Models::Beta::BetaThinkingDelta,
-                  Anthropic::Models::Beta::BetaSignatureDelta
+          override.returns(
+            {
+              delta:
+                T.any(
+                  Anthropic::Beta::BetaTextDelta,
+                  Anthropic::Beta::BetaInputJSONDelta,
+                  Anthropic::Beta::BetaCitationsDelta,
+                  Anthropic::Beta::BetaThinkingDelta,
+                  Anthropic::Beta::BetaSignatureDelta
                 ),
-                index: Integer,
-                type: Symbol
-              }
-            )
+              index: Integer,
+              type: Symbol
+            }
+          )
         end
-        def to_hash; end
+        def to_hash
+        end
       end
     end
   end

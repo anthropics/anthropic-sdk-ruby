@@ -8,8 +8,6 @@ module Anthropic
       attr_accessor type: :billing_error
 
       def initialize: (message: String, ?type: :billing_error) -> void
-
-      def to_hash: -> Anthropic::Models::beta_billing_error
     end
   end
 end

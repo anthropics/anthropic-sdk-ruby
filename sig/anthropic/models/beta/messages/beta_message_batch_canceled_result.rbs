@@ -8,8 +8,6 @@ module Anthropic
           attr_accessor type: :canceled
 
           def initialize: (?type: :canceled) -> void
-
-          def to_hash: -> Anthropic::Models::Beta::Messages::beta_message_batch_canceled_result
         end
       end
     end

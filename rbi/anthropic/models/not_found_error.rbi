@@ -3,6 +3,8 @@
 module Anthropic
   module Models
     class NotFoundError < Anthropic::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
       sig { returns(String) }
       attr_accessor :message
 
@@ -10,10 +12,12 @@ module Anthropic
       attr_accessor :type
 
       sig { params(message: String, type: Symbol).returns(T.attached_class) }
-      def self.new(message:, type: :not_found_error); end
+      def self.new(message:, type: :not_found_error)
+      end
 
-      sig { override.returns({message: String, type: Symbol}) }
-      def to_hash; end
+      sig { override.returns({ message: String, type: Symbol }) }
+      def to_hash
+      end
     end
   end
 end

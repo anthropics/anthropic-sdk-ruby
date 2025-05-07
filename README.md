@@ -60,7 +60,7 @@ When using sorbet, it is recommended to use model classes as below. This provide
 ```ruby
 anthropic.messages.create(
   max_tokens: 1024,
-  messages: [Anthropic::Models::MessageParam.new(role: "user", content: "Hello, Claude")],
+  messages: [Anthropic::MessageParam.new(role: "user", content: "Hello, Claude")],
   model: :"claude-3-7-sonnet-latest"
 )
 ```
@@ -192,7 +192,7 @@ In all places where a `BaseModel` type is specified, vanilla Ruby `Hash` can als
 # This has tooling readability, for auto-completion, static analysis, and goto definition with supported language services
 params = Anthropic::Models::MessageCreateParams.new(
   max_tokens: 1024,
-  messages: [Anthropic::Models::MessageParam.new(role: "user", content: "Hello, Claude")],
+  messages: [Anthropic::MessageParam.new(role: "user", content: "Hello, Claude")],
   model: :"claude-3-7-sonnet-latest"
 )
 
@@ -307,9 +307,9 @@ Sorbet's typed enums require sub-classing of the [`T::Enum` class](https://sorbe
 Since this library does not depend on `sorbet-runtime`, it uses a [`T.all` intersection type](https://sorbet.org/docs/intersection-types) with a ruby primitive type to construct a "tagged alias" instead.
 
 ```ruby
-module Anthropic::Models::StopReason
+module Anthropic::StopReason
   # This alias aids language service driven navigation.
-  TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::StopReason) }
+  TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::StopReason) }
 end
 ```
 
@@ -320,7 +320,7 @@ It is possible to pass a compatible model / parameter class to a method that exp
 ```ruby
 params = Anthropic::Models::MessageCreateParams.new(
   max_tokens: 1024,
-  messages: [Anthropic::Models::MessageParam.new(role: "user", content: "Hello, Claude")],
+  messages: [Anthropic::MessageParam.new(role: "user", content: "Hello, Claude")],
   model: :"claude-3-7-sonnet-latest"
 )
 anthropic.messages.create(**params)

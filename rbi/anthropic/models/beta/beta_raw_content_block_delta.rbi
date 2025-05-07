@@ -8,13 +8,24 @@ module Anthropic
       module BetaRawContentBlockDelta
         extend Anthropic::Internal::Type::Union
 
-        sig do
-          override
-            .returns(
-              [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta]
+        Variants =
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaTextDelta,
+              Anthropic::Beta::BetaInputJSONDelta,
+              Anthropic::Beta::BetaCitationsDelta,
+              Anthropic::Beta::BetaThinkingDelta,
+              Anthropic::Beta::BetaSignatureDelta
             )
+          end
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::Beta::BetaRawContentBlockDelta::Variants]
+          )
         end
-        def self.variants; end
+        def self.variants
+        end
       end
     end
   end

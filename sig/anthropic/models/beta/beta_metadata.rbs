@@ -9,8 +9,6 @@ module Anthropic
         attr_accessor user_id: String?
 
         def initialize: (?user_id: String?) -> void
-
-        def to_hash: -> Anthropic::Models::Beta::beta_metadata
       end
     end
   end

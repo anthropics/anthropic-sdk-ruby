@@ -6,6 +6,8 @@ module Anthropic
       extend Anthropic::Internal::Type::RequestParameters::Converter
       include Anthropic::Internal::Type::RequestParameters
 
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
       # The maximum number of tokens to generate before stopping.
       #
       # Note that our models may stop _before_ reaching this maximum. This parameter
@@ -16,7 +18,7 @@ module Anthropic
       # The model that will complete your prompt.\n\nSee
       # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       # details and options.
-      sig { returns(T.any(Anthropic::Models::Model::OrSymbol, String)) }
+      sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
       attr_accessor :model
 
       # The prompt that you want Claude to complete.
@@ -36,10 +38,10 @@ module Anthropic
       attr_accessor :prompt
 
       # An object describing metadata about the request.
-      sig { returns(T.nilable(Anthropic::Models::Metadata)) }
+      sig { returns(T.nilable(Anthropic::Metadata)) }
       attr_reader :metadata
 
-      sig { params(metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::AnyHash)).void }
+      sig { params(metadata: Anthropic::Metadata::OrHash).void }
       attr_writer :metadata
 
       # Sequences that will cause the model to stop generating.
@@ -98,16 +100,15 @@ module Anthropic
       sig do
         params(
           max_tokens_to_sample: Integer,
-          model: T.any(Anthropic::Models::Model::OrSymbol, String),
+          model: T.any(Anthropic::Model::OrSymbol, String),
           prompt: String,
-          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::AnyHash),
+          metadata: Anthropic::Metadata::OrHash,
           stop_sequences: T::Array[String],
           temperature: Float,
           top_k: Integer,
           top_p: Float,
-          request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash)
-        )
-          .returns(T.attached_class)
+          request_options: Anthropic::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
       def self.new(
         # The maximum number of tokens to generate before stopping.
@@ -169,24 +170,26 @@ module Anthropic
         # `temperature`.
         top_p: nil,
         request_options: {}
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              max_tokens_to_sample: Integer,
-              model: T.any(Anthropic::Models::Model::OrSymbol, String),
-              prompt: String,
-              metadata: Anthropic::Models::Metadata,
-              stop_sequences: T::Array[String],
-              temperature: Float,
-              top_k: Integer,
-              top_p: Float,
-              request_options: Anthropic::RequestOptions
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            max_tokens_to_sample: Integer,
+            model: T.any(Anthropic::Model::OrSymbol, String),
+            prompt: String,
+            metadata: Anthropic::Metadata,
+            stop_sequences: T::Array[String],
+            temperature: Float,
+            top_k: Integer,
+            top_p: Float,
+            request_options: Anthropic::RequestOptions
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

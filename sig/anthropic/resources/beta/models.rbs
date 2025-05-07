@@ -5,14 +5,14 @@ module Anthropic
         def retrieve: (
           String model_id,
           ?request_options: Anthropic::request_opts
-        ) -> Anthropic::Models::Beta::BetaModelInfo
+        ) -> Anthropic::Beta::BetaModelInfo
 
         def list: (
           ?after_id: String,
           ?before_id: String,
           ?limit: Integer,
           ?request_options: Anthropic::request_opts
-        ) -> Anthropic::Internal::Page[Anthropic::Models::Beta::BetaModelInfo]
+        ) -> Anthropic::Internal::Page[Anthropic::Beta::BetaModelInfo]
 
         def initialize: (client: Anthropic::Client) -> void
       end

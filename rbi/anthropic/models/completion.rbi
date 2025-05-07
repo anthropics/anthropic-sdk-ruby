@@ -3,6 +3,8 @@
 module Anthropic
   module Models
     class Completion < Anthropic::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
       # Unique object identifier.
       #
       # The format and length of IDs may change over time.
@@ -16,7 +18,7 @@ module Anthropic
       # The model that will complete your prompt.\n\nSee
       # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       # details and options.
-      sig { returns(T.any(Anthropic::Models::Model::TaggedSymbol, String)) }
+      sig { returns(T.any(Anthropic::Model::TaggedSymbol, String)) }
       attr_accessor :model
 
       # The reason that we stopped.
@@ -39,11 +41,10 @@ module Anthropic
         params(
           id: String,
           completion: String,
-          model: T.any(Anthropic::Models::Model::OrSymbol, String),
+          model: T.any(Anthropic::Model::OrSymbol, String),
           stop_reason: T.nilable(String),
           type: Symbol
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         # Unique object identifier.
@@ -68,20 +69,22 @@ module Anthropic
         #
         # For Text Completions, this is always `"completion"`.
         type: :completion
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              id: String,
-              completion: String,
-              model: T.any(Anthropic::Models::Model::TaggedSymbol, String),
-              stop_reason: T.nilable(String),
-              type: Symbol
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            id: String,
+            completion: String,
+            model: T.any(Anthropic::Model::TaggedSymbol, String),
+            stop_reason: T.nilable(String),
+            type: Symbol
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

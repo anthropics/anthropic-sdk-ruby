@@ -17,17 +17,16 @@ module Anthropic
       sig do
         params(
           max_tokens_to_sample: Integer,
-          model: T.any(Anthropic::Models::Model::OrSymbol, String),
+          model: T.any(Anthropic::Model::OrSymbol, String),
           prompt: String,
-          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::AnyHash),
+          metadata: Anthropic::Metadata::OrHash,
           stop_sequences: T::Array[String],
           temperature: Float,
           top_k: Integer,
           top_p: Float,
           stream: T.noreturn,
-          request_options: Anthropic::RequestOpts
-        )
-          .returns(Anthropic::Models::Completion)
+          request_options: Anthropic::RequestOptions::OrHash
+        ).returns(Anthropic::Completion)
       end
       def create(
         # The maximum number of tokens to generate before stopping.
@@ -92,7 +91,9 @@ module Anthropic
         # `#create` for streaming and non-streaming use cases, respectively.
         stream: false,
         request_options: {}
-      ); end
+      )
+      end
+
       # See {Anthropic::Resources::Completions#create} for non-streaming counterpart.
       #
       # [Legacy] Create a Text Completion.
@@ -106,17 +107,16 @@ module Anthropic
       sig do
         params(
           max_tokens_to_sample: Integer,
-          model: T.any(Anthropic::Models::Model::OrSymbol, String),
+          model: T.any(Anthropic::Model::OrSymbol, String),
           prompt: String,
-          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::AnyHash),
+          metadata: Anthropic::Metadata::OrHash,
           stop_sequences: T::Array[String],
           temperature: Float,
           top_k: Integer,
           top_p: Float,
           stream: T.noreturn,
-          request_options: Anthropic::RequestOpts
-        )
-          .returns(Anthropic::Internal::Stream[Anthropic::Models::Completion])
+          request_options: Anthropic::RequestOptions::OrHash
+        ).returns(Anthropic::Internal::Stream[Anthropic::Completion])
       end
       def create_streaming(
         # The maximum number of tokens to generate before stopping.
@@ -181,10 +181,13 @@ module Anthropic
         # `#create` for streaming and non-streaming use cases, respectively.
         stream: true,
         request_options: {}
-      ); end
+      )
+      end
+
       # @api private
       sig { params(client: Anthropic::Client).returns(T.attached_class) }
-      def self.new(client:); end
+      def self.new(client:)
+      end
     end
   end
 end

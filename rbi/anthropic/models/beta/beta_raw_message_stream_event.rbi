@@ -8,13 +8,25 @@ module Anthropic
       module BetaRawMessageStreamEvent
         extend Anthropic::Internal::Type::Union
 
-        sig do
-          override
-            .returns(
-              [Anthropic::Models::Beta::BetaRawMessageStartEvent, Anthropic::Models::Beta::BetaRawMessageDeltaEvent, Anthropic::Models::Beta::BetaRawMessageStopEvent, Anthropic::Models::Beta::BetaRawContentBlockStartEvent, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Models::Beta::BetaRawContentBlockStopEvent]
+        Variants =
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaRawMessageStartEvent,
+              Anthropic::Beta::BetaRawMessageDeltaEvent,
+              Anthropic::Beta::BetaRawMessageStopEvent,
+              Anthropic::Beta::BetaRawContentBlockStartEvent,
+              Anthropic::Beta::BetaRawContentBlockDeltaEvent,
+              Anthropic::Beta::BetaRawContentBlockStopEvent
             )
+          end
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::Beta::BetaRawMessageStreamEvent::Variants]
+          )
         end
-        def self.variants; end
+        def self.variants
+        end
       end
     end
   end

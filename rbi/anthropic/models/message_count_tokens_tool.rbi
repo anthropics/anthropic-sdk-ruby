@@ -5,13 +5,20 @@ module Anthropic
     module MessageCountTokensTool
       extend Anthropic::Internal::Type::Union
 
-      sig do
-        override
-          .returns(
-            [Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124]
+      Variants =
+        T.type_alias do
+          T.any(
+            Anthropic::Tool,
+            Anthropic::ToolBash20250124,
+            Anthropic::ToolTextEditor20250124
           )
+        end
+
+      sig do
+        override.returns(T::Array[Anthropic::MessageCountTokensTool::Variants])
       end
-      def self.variants; end
+      def self.variants
+      end
     end
   end
 end

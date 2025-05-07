@@ -6,6 +6,9 @@ module Anthropic
 
     module Beta
       class BetaToolUseBlock < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         sig { returns(String) }
         attr_accessor :id
 
@@ -18,11 +21,24 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
-        sig { params(id: String, input: T.anything, name: String, type: Symbol).returns(T.attached_class) }
-        def self.new(id:, input:, name:, type: :tool_use); end
+        sig do
+          params(
+            id: String,
+            input: T.anything,
+            name: String,
+            type: Symbol
+          ).returns(T.attached_class)
+        end
+        def self.new(id:, input:, name:, type: :tool_use)
+        end
 
-        sig { override.returns({id: String, input: T.anything, name: String, type: Symbol}) }
-        def to_hash; end
+        sig do
+          override.returns(
+            { id: String, input: T.anything, name: String, type: Symbol }
+          )
+        end
+        def to_hash
+        end
       end
     end
   end

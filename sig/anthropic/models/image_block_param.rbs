@@ -2,33 +2,30 @@ module Anthropic
   module Models
     type image_block_param =
       {
-        source: Anthropic::Models::ImageBlockParam::source,
+        source: Anthropic::ImageBlockParam::source,
         type: :image,
-        cache_control: Anthropic::Models::CacheControlEphemeral?
+        cache_control: Anthropic::CacheControlEphemeral?
       }
 
     class ImageBlockParam < Anthropic::Internal::Type::BaseModel
-      attr_accessor source: Anthropic::Models::ImageBlockParam::source
+      attr_accessor source: Anthropic::ImageBlockParam::source
 
       attr_accessor type: :image
 
-      attr_accessor cache_control: Anthropic::Models::CacheControlEphemeral?
+      attr_accessor cache_control: Anthropic::CacheControlEphemeral?
 
       def initialize: (
-        source: Anthropic::Models::ImageBlockParam::source,
-        ?cache_control: Anthropic::Models::CacheControlEphemeral?,
+        source: Anthropic::ImageBlockParam::source,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
         ?type: :image
       ) -> void
 
-      def to_hash: -> Anthropic::Models::image_block_param
-
-      type source =
-        Anthropic::Models::Base64ImageSource | Anthropic::Models::URLImageSource
+      type source = Anthropic::Base64ImageSource | Anthropic::URLImageSource
 
       module Source
         extend Anthropic::Internal::Type::Union
 
-        def self?.variants: -> [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]
+        def self?.variants: -> ::Array[Anthropic::ImageBlockParam::source]
       end
     end
   end

@@ -6,6 +6,9 @@ module Anthropic
 
     module Beta
       class BetaMessageTokensCount < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         # The total number of tokens across the provided list of messages, system prompt,
         # and tools.
         sig { returns(Integer) }
@@ -16,9 +19,12 @@ module Anthropic
           # The total number of tokens across the provided list of messages, system prompt,
           # and tools.
           input_tokens:
-        ); end
-        sig { override.returns({input_tokens: Integer}) }
-        def to_hash; end
+        )
+        end
+
+        sig { override.returns({ input_tokens: Integer }) }
+        def to_hash
+        end
       end
     end
   end

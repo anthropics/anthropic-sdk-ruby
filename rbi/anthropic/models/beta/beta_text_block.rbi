@@ -6,6 +6,9 @@ module Anthropic
 
     module Beta
       class BetaTextBlock < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         # Citations supporting the text block.
         #
         # The type of citation returned will depend on the type of document being cited.
@@ -16,9 +19,9 @@ module Anthropic
             T.nilable(
               T::Array[
                 T.any(
-                  Anthropic::Models::Beta::BetaCitationCharLocation,
-                  Anthropic::Models::Beta::BetaCitationPageLocation,
-                  Anthropic::Models::Beta::BetaCitationContentBlockLocation
+                  Anthropic::Beta::BetaCitationCharLocation,
+                  Anthropic::Beta::BetaCitationPageLocation,
+                  Anthropic::Beta::BetaCitationContentBlockLocation
                 )
               ]
             )
@@ -34,20 +37,19 @@ module Anthropic
 
         sig do
           params(
-            citations: T.nilable(
-              T::Array[
-                T.any(
-                  Anthropic::Models::Beta::BetaCitationCharLocation,
-                  Anthropic::Internal::AnyHash,
-                  Anthropic::Models::Beta::BetaCitationPageLocation,
-                  Anthropic::Models::Beta::BetaCitationContentBlockLocation
-                )
-              ]
-            ),
+            citations:
+              T.nilable(
+                T::Array[
+                  T.any(
+                    Anthropic::Beta::BetaCitationCharLocation::OrHash,
+                    Anthropic::Beta::BetaCitationPageLocation::OrHash,
+                    Anthropic::Beta::BetaCitationContentBlockLocation::OrHash
+                  )
+                ]
+              ),
             text: String,
             type: Symbol
-          )
-            .returns(T.attached_class)
+          ).returns(T.attached_class)
         end
         def self.new(
           # Citations supporting the text block.
@@ -58,26 +60,29 @@ module Anthropic
           citations:,
           text:,
           type: :text
-        ); end
+        )
+        end
+
         sig do
-          override
-            .returns(
-              {
-                citations: T.nilable(
+          override.returns(
+            {
+              citations:
+                T.nilable(
                   T::Array[
                     T.any(
-                      Anthropic::Models::Beta::BetaCitationCharLocation,
-                      Anthropic::Models::Beta::BetaCitationPageLocation,
-                      Anthropic::Models::Beta::BetaCitationContentBlockLocation
+                      Anthropic::Beta::BetaCitationCharLocation,
+                      Anthropic::Beta::BetaCitationPageLocation,
+                      Anthropic::Beta::BetaCitationContentBlockLocation
                     )
                   ]
                 ),
-                text: String,
-                type: Symbol
-              }
-            )
+              text: String,
+              type: Symbol
+            }
+          )
         end
-        def to_hash; end
+        def to_hash
+        end
       end
     end
   end

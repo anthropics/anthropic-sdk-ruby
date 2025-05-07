@@ -11,8 +11,8 @@ module Anthropic
 
         # @!attribute media_type
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaBase64ImageSource::MediaType]
-        required :media_type, enum: -> { Anthropic::Models::Beta::BetaBase64ImageSource::MediaType }
+        #   @return [Symbol, Anthropic::Beta::BetaBase64ImageSource::MediaType]
+        required :media_type, enum: -> { Anthropic::Beta::BetaBase64ImageSource::MediaType }
 
         # @!attribute type
         #
@@ -21,10 +21,10 @@ module Anthropic
 
         # @!method initialize(data:, media_type:, type: :base64)
         #   @param data [String]
-        #   @param media_type [Symbol, Anthropic::Models::Beta::BetaBase64ImageSource::MediaType]
+        #   @param media_type [Symbol, Anthropic::Beta::BetaBase64ImageSource::MediaType]
         #   @param type [Symbol, :base64]
 
-        # @see Anthropic::Models::Beta::BetaBase64ImageSource#media_type
+        # @see Anthropic::Beta::BetaBase64ImageSource#media_type
         module MediaType
           extend Anthropic::Internal::Type::Enum
 

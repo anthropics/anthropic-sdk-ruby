@@ -1,20 +1,20 @@
 module Anthropic
   module Models
     type error_object =
-      Anthropic::Models::InvalidRequestError
-      | Anthropic::Models::AuthenticationError
-      | Anthropic::Models::BillingError
-      | Anthropic::Models::PermissionError
-      | Anthropic::Models::NotFoundError
-      | Anthropic::Models::RateLimitError
-      | Anthropic::Models::GatewayTimeoutError
-      | Anthropic::Models::APIErrorObject
-      | Anthropic::Models::OverloadedError
+      Anthropic::InvalidRequestError
+      | Anthropic::AuthenticationError
+      | Anthropic::BillingError
+      | Anthropic::PermissionError
+      | Anthropic::NotFoundError
+      | Anthropic::RateLimitError
+      | Anthropic::GatewayTimeoutError
+      | Anthropic::APIErrorObject
+      | Anthropic::OverloadedError
 
     module ErrorObject
       extend Anthropic::Internal::Type::Union
 
-      def self?.variants: -> [Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError, Anthropic::Models::RateLimitError, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError]
+      def self?.variants: -> ::Array[Anthropic::Models::error_object]
     end
   end
 end

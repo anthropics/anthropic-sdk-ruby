@@ -1,16 +1,16 @@
 module Anthropic
   module Models
     type raw_content_block_delta =
-      Anthropic::Models::TextDelta
-      | Anthropic::Models::InputJSONDelta
-      | Anthropic::Models::CitationsDelta
-      | Anthropic::Models::ThinkingDelta
-      | Anthropic::Models::SignatureDelta
+      Anthropic::TextDelta
+      | Anthropic::InputJSONDelta
+      | Anthropic::CitationsDelta
+      | Anthropic::ThinkingDelta
+      | Anthropic::SignatureDelta
 
     module RawContentBlockDelta
       extend Anthropic::Internal::Type::Union
 
-      def self?.variants: -> [Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta, Anthropic::Models::ThinkingDelta, Anthropic::Models::SignatureDelta]
+      def self?.variants: -> ::Array[Anthropic::Models::raw_content_block_delta]
     end
   end
 end

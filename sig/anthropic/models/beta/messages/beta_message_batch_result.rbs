@@ -3,15 +3,15 @@ module Anthropic
     module Beta
       module Messages
         type beta_message_batch_result =
-          Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult
-          | Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult
-          | Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult
-          | Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult
+          Anthropic::Beta::Messages::BetaMessageBatchSucceededResult
+          | Anthropic::Beta::Messages::BetaMessageBatchErroredResult
+          | Anthropic::Beta::Messages::BetaMessageBatchCanceledResult
+          | Anthropic::Beta::Messages::BetaMessageBatchExpiredResult
 
         module BetaMessageBatchResult
           extend Anthropic::Internal::Type::Union
 
-          def self?.variants: -> [Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult]
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::Messages::beta_message_batch_result]
         end
       end
     end

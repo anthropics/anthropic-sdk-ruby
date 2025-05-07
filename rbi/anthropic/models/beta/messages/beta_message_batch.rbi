@@ -5,6 +5,9 @@ module Anthropic
     module Beta
       module Messages
         class BetaMessageBatch < Anthropic::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
           # Unique object identifier.
           #
           # The format and length of IDs may change over time.
@@ -40,7 +43,11 @@ module Anthropic
           attr_accessor :expires_at
 
           # Processing status of the Message Batch.
-          sig { returns(Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol) }
+          sig do
+            returns(
+              Anthropic::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol
+            )
+          end
           attr_accessor :processing_status
 
           # Tallies requests within the Message Batch, categorized by their status.
@@ -48,14 +55,16 @@ module Anthropic
           # Requests start as `processing` and move to one of the other statuses only once
           # processing of the entire batch ends. The sum of all values always matches the
           # total number of requests in the batch.
-          sig { returns(Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts) }
+          sig do
+            returns(Anthropic::Beta::Messages::BetaMessageBatchRequestCounts)
+          end
           attr_reader :request_counts
 
           sig do
             params(
-              request_counts: T.any(Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts, Anthropic::Internal::AnyHash)
-            )
-              .void
+              request_counts:
+                Anthropic::Beta::Messages::BetaMessageBatchRequestCounts::OrHash
+            ).void
           end
           attr_writer :request_counts
 
@@ -81,12 +90,13 @@ module Anthropic
               created_at: Time,
               ended_at: T.nilable(Time),
               expires_at: Time,
-              processing_status: Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::OrSymbol,
-              request_counts: T.any(Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts, Anthropic::Internal::AnyHash),
+              processing_status:
+                Anthropic::Beta::Messages::BetaMessageBatch::ProcessingStatus::OrSymbol,
+              request_counts:
+                Anthropic::Beta::Messages::BetaMessageBatchRequestCounts::OrHash,
               results_url: T.nilable(String),
               type: Symbol
-            )
-              .returns(T.attached_class)
+            ).returns(T.attached_class)
           end
           def self.new(
             # Unique object identifier.
@@ -129,46 +139,68 @@ module Anthropic
             #
             # For Message Batches, this is always `"message_batch"`.
             type: :message_batch
-          ); end
-          sig do
-            override
-              .returns(
-                {
-                  id: String,
-                  archived_at: T.nilable(Time),
-                  cancel_initiated_at: T.nilable(Time),
-                  created_at: Time,
-                  ended_at: T.nilable(Time),
-                  expires_at: Time,
-                  processing_status: Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol,
-                  request_counts: Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts,
-                  results_url: T.nilable(String),
-                  type: Symbol
-                }
-              )
+          )
           end
-          def to_hash; end
+
+          sig do
+            override.returns(
+              {
+                id: String,
+                archived_at: T.nilable(Time),
+                cancel_initiated_at: T.nilable(Time),
+                created_at: Time,
+                ended_at: T.nilable(Time),
+                expires_at: Time,
+                processing_status:
+                  Anthropic::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol,
+                request_counts:
+                  Anthropic::Beta::Messages::BetaMessageBatchRequestCounts,
+                results_url: T.nilable(String),
+                type: Symbol
+              }
+            )
+          end
+          def to_hash
+          end
 
           # Processing status of the Message Batch.
           module ProcessingStatus
             extend Anthropic::Internal::Type::Enum
 
             TaggedSymbol =
-              T.type_alias { T.all(Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus) }
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::Messages::BetaMessageBatch::ProcessingStatus
+                )
+              end
             OrSymbol = T.type_alias { T.any(Symbol, String) }
 
             IN_PROGRESS =
-              T.let(:in_progress, Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol)
+              T.let(
+                :in_progress,
+                Anthropic::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol
+              )
             CANCELING =
-              T.let(:canceling, Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol)
+              T.let(
+                :canceling,
+                Anthropic::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol
+              )
             ENDED =
-              T.let(:ended, Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol)
+              T.let(
+                :ended,
+                Anthropic::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol
+              )
 
             sig do
-              override
-                .returns(T::Array[Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol])
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::Messages::BetaMessageBatch::ProcessingStatus::TaggedSymbol
+                ]
+              )
             end
-            def self.values; end
+            def self.values
+            end
           end
         end
       end

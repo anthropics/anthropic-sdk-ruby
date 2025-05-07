@@ -4,8 +4,8 @@ module Anthropic
       {
         tool_use_id: String,
         type: :tool_result,
-        cache_control: Anthropic::Models::CacheControlEphemeral?,
-        content: Anthropic::Models::ToolResultBlockParam::content,
+        cache_control: Anthropic::CacheControlEphemeral?,
+        content: Anthropic::ToolResultBlockParam::content,
         is_error: bool
       }
 
@@ -14,13 +14,13 @@ module Anthropic
 
       attr_accessor type: :tool_result
 
-      attr_accessor cache_control: Anthropic::Models::CacheControlEphemeral?
+      attr_accessor cache_control: Anthropic::CacheControlEphemeral?
 
-      attr_reader content: Anthropic::Models::ToolResultBlockParam::content?
+      attr_reader content: Anthropic::ToolResultBlockParam::content?
 
       def content=: (
-        Anthropic::Models::ToolResultBlockParam::content
-      ) -> Anthropic::Models::ToolResultBlockParam::content
+        Anthropic::ToolResultBlockParam::content
+      ) -> Anthropic::ToolResultBlockParam::content
 
       attr_reader is_error: bool?
 
@@ -28,31 +28,27 @@ module Anthropic
 
       def initialize: (
         tool_use_id: String,
-        ?cache_control: Anthropic::Models::CacheControlEphemeral?,
-        ?content: Anthropic::Models::ToolResultBlockParam::content,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
+        ?content: Anthropic::ToolResultBlockParam::content,
         ?is_error: bool,
         ?type: :tool_result
       ) -> void
 
-      def to_hash: -> Anthropic::Models::tool_result_block_param
-
       type content =
-        String
-        | ::Array[Anthropic::Models::ToolResultBlockParam::Content::content]
+        String | ::Array[Anthropic::ToolResultBlockParam::Content::content]
 
       module Content
         extend Anthropic::Internal::Type::Union
 
-        type content =
-          Anthropic::Models::TextBlockParam | Anthropic::Models::ImageBlockParam
+        type content = Anthropic::TextBlockParam | Anthropic::ImageBlockParam
 
         module Content
           extend Anthropic::Internal::Type::Union
 
-          def self?.variants: -> [Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam]
+          def self?.variants: -> ::Array[Anthropic::ToolResultBlockParam::Content::content]
         end
 
-        def self?.variants: -> [String, ::Array[Anthropic::Models::ToolResultBlockParam::Content::content]]
+        def self?.variants: -> ::Array[Anthropic::ToolResultBlockParam::content]
 
         ContentArray: Anthropic::Internal::Type::Converter
       end

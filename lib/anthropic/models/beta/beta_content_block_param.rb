@@ -8,22 +8,22 @@ module Anthropic
 
         discriminator :type
 
-        variant :text, -> { Anthropic::Models::Beta::BetaTextBlockParam }
+        variant :text, -> { Anthropic::Beta::BetaTextBlockParam }
 
-        variant :image, -> { Anthropic::Models::Beta::BetaImageBlockParam }
+        variant :image, -> { Anthropic::Beta::BetaImageBlockParam }
 
-        variant :tool_use, -> { Anthropic::Models::Beta::BetaToolUseBlockParam }
+        variant :tool_use, -> { Anthropic::Beta::BetaToolUseBlockParam }
 
-        variant :tool_result, -> { Anthropic::Models::Beta::BetaToolResultBlockParam }
+        variant :tool_result, -> { Anthropic::Beta::BetaToolResultBlockParam }
 
-        variant :document, -> { Anthropic::Models::Beta::BetaBase64PDFBlock }
+        variant :document, -> { Anthropic::Beta::BetaBase64PDFBlock }
 
-        variant :thinking, -> { Anthropic::Models::Beta::BetaThinkingBlockParam }
+        variant :thinking, -> { Anthropic::Beta::BetaThinkingBlockParam }
 
-        variant :redacted_thinking, -> { Anthropic::Models::Beta::BetaRedactedThinkingBlockParam }
+        variant :redacted_thinking, -> { Anthropic::Beta::BetaRedactedThinkingBlockParam }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam)]
+        #   @return [Array(Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam, Anthropic::Beta::BetaToolUseBlockParam, Anthropic::Beta::BetaToolResultBlockParam, Anthropic::Beta::BetaBase64PDFBlock, Anthropic::Beta::BetaThinkingBlockParam, Anthropic::Beta::BetaRedactedThinkingBlockParam)]
       end
     end
 

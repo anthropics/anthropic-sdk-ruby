@@ -7,8 +7,8 @@ module Anthropic
         class BetaMessageBatchErroredResult < Anthropic::Internal::Type::BaseModel
           # @!attribute error
           #
-          #   @return [Anthropic::Models::BetaErrorResponse]
-          required :error, -> { Anthropic::Models::BetaErrorResponse }
+          #   @return [Anthropic::BetaErrorResponse]
+          required :error, -> { Anthropic::BetaErrorResponse }
 
           # @!attribute type
           #
@@ -16,7 +16,7 @@ module Anthropic
           required :type, const: :errored
 
           # @!method initialize(error:, type: :errored)
-          #   @param error [Anthropic::Models::BetaErrorResponse]
+          #   @param error [Anthropic::BetaErrorResponse]
           #   @param type [Symbol, :errored]
         end
       end

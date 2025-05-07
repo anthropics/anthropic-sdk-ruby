@@ -8,13 +8,24 @@ module Anthropic
       module BetaToolUnion
         extend Anthropic::Internal::Type::Union
 
-        sig do
-          override
-            .returns(
-              [Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124]
+        Variants =
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaTool,
+              Anthropic::Beta::BetaToolComputerUse20241022,
+              Anthropic::Beta::BetaToolBash20241022,
+              Anthropic::Beta::BetaToolTextEditor20241022,
+              Anthropic::Beta::BetaToolComputerUse20250124,
+              Anthropic::Beta::BetaToolBash20250124,
+              Anthropic::Beta::BetaToolTextEditor20250124
             )
+          end
+
+        sig do
+          override.returns(T::Array[Anthropic::Beta::BetaToolUnion::Variants])
         end
-        def self.variants; end
+        def self.variants
+        end
       end
     end
   end

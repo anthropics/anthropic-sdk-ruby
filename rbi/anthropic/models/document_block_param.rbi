@@ -3,13 +3,15 @@
 module Anthropic
   module Models
     class DocumentBlockParam < Anthropic::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
       sig do
         returns(
           T.any(
-            Anthropic::Models::Base64PDFSource,
-            Anthropic::Models::PlainTextSource,
-            Anthropic::Models::ContentBlockSource,
-            Anthropic::Models::URLPDFSource
+            Anthropic::Base64PDFSource,
+            Anthropic::PlainTextSource,
+            Anthropic::ContentBlockSource,
+            Anthropic::URLPDFSource
           )
         )
       end
@@ -18,21 +20,20 @@ module Anthropic
       sig { returns(Symbol) }
       attr_accessor :type
 
-      sig { returns(T.nilable(Anthropic::Models::CacheControlEphemeral)) }
+      sig { returns(T.nilable(Anthropic::CacheControlEphemeral)) }
       attr_reader :cache_control
 
       sig do
         params(
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash))
-        )
-          .void
+          cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash)
+        ).void
       end
       attr_writer :cache_control
 
-      sig { returns(T.nilable(Anthropic::Models::CitationsConfigParam)) }
+      sig { returns(T.nilable(Anthropic::CitationsConfigParam)) }
       attr_reader :citations
 
-      sig { params(citations: T.any(Anthropic::Models::CitationsConfigParam, Anthropic::Internal::AnyHash)).void }
+      sig { params(citations: Anthropic::CitationsConfigParam::OrHash).void }
       attr_writer :citations
 
       sig { returns(T.nilable(String)) }
@@ -43,54 +44,71 @@ module Anthropic
 
       sig do
         params(
-          source: T.any(
-            Anthropic::Models::Base64PDFSource,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::PlainTextSource,
-            Anthropic::Models::ContentBlockSource,
-            Anthropic::Models::URLPDFSource
-          ),
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash)),
-          citations: T.any(Anthropic::Models::CitationsConfigParam, Anthropic::Internal::AnyHash),
+          source:
+            T.any(
+              Anthropic::Base64PDFSource::OrHash,
+              Anthropic::PlainTextSource::OrHash,
+              Anthropic::ContentBlockSource::OrHash,
+              Anthropic::URLPDFSource::OrHash
+            ),
+          cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
+          citations: Anthropic::CitationsConfigParam::OrHash,
           context: T.nilable(String),
           title: T.nilable(String),
           type: Symbol
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
-      def self.new(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document)
+      def self.new(
+        source:,
+        cache_control: nil,
+        citations: nil,
+        context: nil,
+        title: nil,
+        type: :document
+      )
       end
 
       sig do
-        override
-          .returns(
-            {
-              source: T.any(
-                Anthropic::Models::Base64PDFSource,
-                Anthropic::Models::PlainTextSource,
-                Anthropic::Models::ContentBlockSource,
-                Anthropic::Models::URLPDFSource
+        override.returns(
+          {
+            source:
+              T.any(
+                Anthropic::Base64PDFSource,
+                Anthropic::PlainTextSource,
+                Anthropic::ContentBlockSource,
+                Anthropic::URLPDFSource
               ),
-              type: Symbol,
-              cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
-              citations: Anthropic::Models::CitationsConfigParam,
-              context: T.nilable(String),
-              title: T.nilable(String)
-            }
-          )
+            type: Symbol,
+            cache_control: T.nilable(Anthropic::CacheControlEphemeral),
+            citations: Anthropic::CitationsConfigParam,
+            context: T.nilable(String),
+            title: T.nilable(String)
+          }
+        )
       end
-      def to_hash; end
+      def to_hash
+      end
 
       module Source
         extend Anthropic::Internal::Type::Union
 
-        sig do
-          override
-            .returns(
-              [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
+        Variants =
+          T.type_alias do
+            T.any(
+              Anthropic::Base64PDFSource,
+              Anthropic::PlainTextSource,
+              Anthropic::ContentBlockSource,
+              Anthropic::URLPDFSource
             )
+          end
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::DocumentBlockParam::Source::Variants]
+          )
         end
-        def self.variants; end
+        def self.variants
+        end
       end
     end
   end

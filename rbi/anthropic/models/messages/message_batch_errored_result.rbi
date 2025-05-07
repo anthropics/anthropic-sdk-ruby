@@ -6,23 +6,31 @@ module Anthropic
 
     module Messages
       class MessageBatchErroredResult < Anthropic::Internal::Type::BaseModel
-        sig { returns(Anthropic::Models::ErrorResponse) }
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
+        sig { returns(Anthropic::ErrorResponse) }
         attr_reader :error
 
-        sig { params(error: T.any(Anthropic::Models::ErrorResponse, Anthropic::Internal::AnyHash)).void }
+        sig { params(error: Anthropic::ErrorResponse::OrHash).void }
         attr_writer :error
 
         sig { returns(Symbol) }
         attr_accessor :type
 
         sig do
-          params(error: T.any(Anthropic::Models::ErrorResponse, Anthropic::Internal::AnyHash), type: Symbol)
-            .returns(T.attached_class)
+          params(error: Anthropic::ErrorResponse::OrHash, type: Symbol).returns(
+            T.attached_class
+          )
         end
-        def self.new(error:, type: :errored); end
+        def self.new(error:, type: :errored)
+        end
 
-        sig { override.returns({error: Anthropic::Models::ErrorResponse, type: Symbol}) }
-        def to_hash; end
+        sig do
+          override.returns({ error: Anthropic::ErrorResponse, type: Symbol })
+        end
+        def to_hash
+        end
       end
     end
   end

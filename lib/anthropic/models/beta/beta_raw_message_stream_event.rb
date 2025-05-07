@@ -8,20 +8,20 @@ module Anthropic
 
         discriminator :type
 
-        variant :message_start, -> { Anthropic::Models::Beta::BetaRawMessageStartEvent }
+        variant :message_start, -> { Anthropic::Beta::BetaRawMessageStartEvent }
 
-        variant :message_delta, -> { Anthropic::Models::Beta::BetaRawMessageDeltaEvent }
+        variant :message_delta, -> { Anthropic::Beta::BetaRawMessageDeltaEvent }
 
-        variant :message_stop, -> { Anthropic::Models::Beta::BetaRawMessageStopEvent }
+        variant :message_stop, -> { Anthropic::Beta::BetaRawMessageStopEvent }
 
-        variant :content_block_start, -> { Anthropic::Models::Beta::BetaRawContentBlockStartEvent }
+        variant :content_block_start, -> { Anthropic::Beta::BetaRawContentBlockStartEvent }
 
-        variant :content_block_delta, -> { Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent }
+        variant :content_block_delta, -> { Anthropic::Beta::BetaRawContentBlockDeltaEvent }
 
-        variant :content_block_stop, -> { Anthropic::Models::Beta::BetaRawContentBlockStopEvent }
+        variant :content_block_stop, -> { Anthropic::Beta::BetaRawContentBlockStopEvent }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::Beta::BetaRawMessageStartEvent, Anthropic::Models::Beta::BetaRawMessageDeltaEvent, Anthropic::Models::Beta::BetaRawMessageStopEvent, Anthropic::Models::Beta::BetaRawContentBlockStartEvent, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Models::Beta::BetaRawContentBlockStopEvent)]
+        #   @return [Array(Anthropic::Beta::BetaRawMessageStartEvent, Anthropic::Beta::BetaRawMessageDeltaEvent, Anthropic::Beta::BetaRawMessageStopEvent, Anthropic::Beta::BetaRawContentBlockStartEvent, Anthropic::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Beta::BetaRawContentBlockStopEvent)]
       end
     end
 

@@ -1,18 +1,18 @@
 module Anthropic
   module Models
     type content_block_param =
-      Anthropic::Models::TextBlockParam
-      | Anthropic::Models::ImageBlockParam
-      | Anthropic::Models::ToolUseBlockParam
-      | Anthropic::Models::ToolResultBlockParam
-      | Anthropic::Models::DocumentBlockParam
-      | Anthropic::Models::ThinkingBlockParam
-      | Anthropic::Models::RedactedThinkingBlockParam
+      Anthropic::TextBlockParam
+      | Anthropic::ImageBlockParam
+      | Anthropic::ToolUseBlockParam
+      | Anthropic::ToolResultBlockParam
+      | Anthropic::DocumentBlockParam
+      | Anthropic::ThinkingBlockParam
+      | Anthropic::RedactedThinkingBlockParam
 
     module ContentBlockParam
       extend Anthropic::Internal::Type::Union
 
-      def self?.variants: -> [Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam]
+      def self?.variants: -> ::Array[Anthropic::Models::content_block_param]
     end
   end
 end

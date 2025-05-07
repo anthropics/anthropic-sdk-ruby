@@ -5,8 +5,8 @@ module Anthropic
     class RawMessageStartEvent < Anthropic::Internal::Type::BaseModel
       # @!attribute message
       #
-      #   @return [Anthropic::Models::Message]
-      required :message, -> { Anthropic::Models::Message }
+      #   @return [Anthropic::Message]
+      required :message, -> { Anthropic::Message }
 
       # @!attribute type
       #
@@ -14,7 +14,7 @@ module Anthropic
       required :type, const: :message_start
 
       # @!method initialize(message:, type: :message_start)
-      #   @param message [Anthropic::Models::Message]
+      #   @param message [Anthropic::Message]
       #   @param type [Symbol, :message_start]
     end
   end

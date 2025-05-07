@@ -19,25 +19,24 @@ module Anthropic
           #
           # @overload create(requests:, betas: nil, request_options: {})
           #
-          # @param requests [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>] Body param: List of requests for prompt completion. Each is an individual reques
-          # ...
+          # @param requests [Array<Anthropic::Beta::Messages::BatchCreateParams::Request>] Body param: List of requests for prompt completion. Each is an individual reques
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Anthropic::Models::Beta::Messages::BetaMessageBatch]
+          # @return [Anthropic::Beta::Messages::BetaMessageBatch]
           #
           # @see Anthropic::Models::Beta::Messages::BatchCreateParams
           def create(params)
-            parsed, options = Anthropic::Models::Beta::Messages::BatchCreateParams.dump_request(params)
+            parsed, options = Anthropic::Beta::Messages::BatchCreateParams.dump_request(params)
             header_params = {betas: "anthropic-beta"}
             @client.request(
               method: :post,
               path: "v1/messages/batches?beta=true",
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*header_params.keys),
-              model: Anthropic::Models::Beta::Messages::BetaMessageBatch,
+              model: Anthropic::Beta::Messages::BetaMessageBatch,
               options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
             )
           end
@@ -53,20 +52,20 @@ module Anthropic
           #
           # @param message_batch_id [String] ID of the Message Batch.
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Anthropic::Models::Beta::Messages::BetaMessageBatch]
+          # @return [Anthropic::Beta::Messages::BetaMessageBatch]
           #
           # @see Anthropic::Models::Beta::Messages::BatchRetrieveParams
           def retrieve(message_batch_id, params = {})
-            parsed, options = Anthropic::Models::Beta::Messages::BatchRetrieveParams.dump_request(params)
+            parsed, options = Anthropic::Beta::Messages::BatchRetrieveParams.dump_request(params)
             @client.request(
               method: :get,
               path: ["v1/messages/batches/%1$s?beta=true", message_batch_id],
               headers: parsed.transform_keys(betas: "anthropic-beta"),
-              model: Anthropic::Models::Beta::Messages::BetaMessageBatch,
+              model: Anthropic::Beta::Messages::BetaMessageBatch,
               options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
             )
           end
@@ -83,22 +82,20 @@ module Anthropic
           # @overload list(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {})
           #
           # @param after_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
-          # ...
           #
           # @param before_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
-          # ...
           #
-          # @param limit [Integer] Query param: Number of items to return per page. ...
+          # @param limit [Integer] Query param: Number of items to return per page.
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Anthropic::Internal::Page<Anthropic::Models::Beta::Messages::BetaMessageBatch>]
+          # @return [Anthropic::Internal::Page<Anthropic::Beta::Messages::BetaMessageBatch>]
           #
           # @see Anthropic::Models::Beta::Messages::BatchListParams
           def list(params = {})
-            parsed, options = Anthropic::Models::Beta::Messages::BatchListParams.dump_request(params)
+            parsed, options = Anthropic::Beta::Messages::BatchListParams.dump_request(params)
             query_params = [:after_id, :before_id, :limit]
             @client.request(
               method: :get,
@@ -106,7 +103,7 @@ module Anthropic
               query: parsed.slice(*query_params),
               headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
               page: Anthropic::Internal::Page,
-              model: Anthropic::Models::Beta::Messages::BetaMessageBatch,
+              model: Anthropic::Beta::Messages::BetaMessageBatch,
               options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
             )
           end
@@ -123,20 +120,20 @@ module Anthropic
           #
           # @param message_batch_id [String] ID of the Message Batch.
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch]
+          # @return [Anthropic::Beta::Messages::BetaDeletedMessageBatch]
           #
           # @see Anthropic::Models::Beta::Messages::BatchDeleteParams
           def delete(message_batch_id, params = {})
-            parsed, options = Anthropic::Models::Beta::Messages::BatchDeleteParams.dump_request(params)
+            parsed, options = Anthropic::Beta::Messages::BatchDeleteParams.dump_request(params)
             @client.request(
               method: :delete,
               path: ["v1/messages/batches/%1$s?beta=true", message_batch_id],
               headers: parsed.transform_keys(betas: "anthropic-beta"),
-              model: Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch,
+              model: Anthropic::Beta::Messages::BetaDeletedMessageBatch,
               options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
             )
           end
@@ -158,20 +155,20 @@ module Anthropic
           #
           # @param message_batch_id [String] ID of the Message Batch.
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Anthropic::Models::Beta::Messages::BetaMessageBatch]
+          # @return [Anthropic::Beta::Messages::BetaMessageBatch]
           #
           # @see Anthropic::Models::Beta::Messages::BatchCancelParams
           def cancel(message_batch_id, params = {})
-            parsed, options = Anthropic::Models::Beta::Messages::BatchCancelParams.dump_request(params)
+            parsed, options = Anthropic::Beta::Messages::BatchCancelParams.dump_request(params)
             @client.request(
               method: :post,
               path: ["v1/messages/batches/%1$s/cancel?beta=true", message_batch_id],
               headers: parsed.transform_keys(betas: "anthropic-beta"),
-              model: Anthropic::Models::Beta::Messages::BetaMessageBatch,
+              model: Anthropic::Beta::Messages::BetaMessageBatch,
               options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
             )
           end
@@ -189,21 +186,21 @@ module Anthropic
           #
           # @param message_batch_id [String] ID of the Message Batch.
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Anthropic::Internal::JsonLStream<Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse>]
+          # @return [Anthropic::Internal::JsonLStream<Anthropic::Beta::Messages::BetaMessageBatchIndividualResponse>]
           #
           # @see Anthropic::Models::Beta::Messages::BatchResultsParams
           def results_streaming(message_batch_id, params = {})
-            parsed, options = Anthropic::Models::Beta::Messages::BatchResultsParams.dump_request(params)
+            parsed, options = Anthropic::Beta::Messages::BatchResultsParams.dump_request(params)
             @client.request(
               method: :get,
               path: ["v1/messages/batches/%1$s/results?beta=true", message_batch_id],
               headers: {"accept" => "application/x-jsonl", **parsed}.transform_keys(betas: "anthropic-beta"),
               stream: Anthropic::Internal::JsonLStream,
-              model: Anthropic::Models::Beta::Messages::BetaMessageBatchIndividualResponse,
+              model: Anthropic::Beta::Messages::BetaMessageBatchIndividualResponse,
               options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
             )
           end

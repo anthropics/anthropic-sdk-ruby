@@ -5,13 +5,22 @@ module Anthropic
     module RawContentBlockDelta
       extend Anthropic::Internal::Type::Union
 
-      sig do
-        override
-          .returns(
-            [Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta, Anthropic::Models::ThinkingDelta, Anthropic::Models::SignatureDelta]
+      Variants =
+        T.type_alias do
+          T.any(
+            Anthropic::TextDelta,
+            Anthropic::InputJSONDelta,
+            Anthropic::CitationsDelta,
+            Anthropic::ThinkingDelta,
+            Anthropic::SignatureDelta
           )
+        end
+
+      sig do
+        override.returns(T::Array[Anthropic::RawContentBlockDelta::Variants])
       end
-      def self.variants; end
+      def self.variants
+      end
     end
   end
 end

@@ -3,6 +3,8 @@
 module Anthropic
   module Models
     class SignatureDelta < Anthropic::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
       sig { returns(String) }
       attr_accessor :signature
 
@@ -10,10 +12,12 @@ module Anthropic
       attr_accessor :type
 
       sig { params(signature: String, type: Symbol).returns(T.attached_class) }
-      def self.new(signature:, type: :signature_delta); end
+      def self.new(signature:, type: :signature_delta)
+      end
 
-      sig { override.returns({signature: String, type: Symbol}) }
-      def to_hash; end
+      sig { override.returns({ signature: String, type: Symbol }) }
+      def to_hash
+      end
     end
   end
 end

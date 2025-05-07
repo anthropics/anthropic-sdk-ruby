@@ -5,14 +5,14 @@ module Anthropic
     module ToolUnion
       extend Anthropic::Internal::Type::Union
 
-      variant -> { Anthropic::Models::Tool }
+      variant -> { Anthropic::Tool }
 
-      variant -> { Anthropic::Models::ToolBash20250124 }
+      variant -> { Anthropic::ToolBash20250124 }
 
-      variant -> { Anthropic::Models::ToolTextEditor20250124 }
+      variant -> { Anthropic::ToolTextEditor20250124 }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124)]
+      #   @return [Array(Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124)]
     end
   end
 end

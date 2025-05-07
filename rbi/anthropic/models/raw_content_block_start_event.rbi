@@ -3,13 +3,15 @@
 module Anthropic
   module Models
     class RawContentBlockStartEvent < Anthropic::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
       sig do
         returns(
           T.any(
-            Anthropic::Models::TextBlock,
-            Anthropic::Models::ToolUseBlock,
-            Anthropic::Models::ThinkingBlock,
-            Anthropic::Models::RedactedThinkingBlock
+            Anthropic::TextBlock,
+            Anthropic::ToolUseBlock,
+            Anthropic::ThinkingBlock,
+            Anthropic::RedactedThinkingBlock
           )
         )
       end
@@ -23,47 +25,60 @@ module Anthropic
 
       sig do
         params(
-          content_block: T.any(
-            Anthropic::Models::TextBlock,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::ToolUseBlock,
-            Anthropic::Models::ThinkingBlock,
-            Anthropic::Models::RedactedThinkingBlock
-          ),
+          content_block:
+            T.any(
+              Anthropic::TextBlock::OrHash,
+              Anthropic::ToolUseBlock::OrHash,
+              Anthropic::ThinkingBlock::OrHash,
+              Anthropic::RedactedThinkingBlock::OrHash
+            ),
           index: Integer,
           type: Symbol
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
-      def self.new(content_block:, index:, type: :content_block_start); end
+      def self.new(content_block:, index:, type: :content_block_start)
+      end
 
       sig do
-        override
-          .returns(
-            {
-              content_block: T.any(
-                Anthropic::Models::TextBlock,
-                Anthropic::Models::ToolUseBlock,
-                Anthropic::Models::ThinkingBlock,
-                Anthropic::Models::RedactedThinkingBlock
+        override.returns(
+          {
+            content_block:
+              T.any(
+                Anthropic::TextBlock,
+                Anthropic::ToolUseBlock,
+                Anthropic::ThinkingBlock,
+                Anthropic::RedactedThinkingBlock
               ),
-              index: Integer,
-              type: Symbol
-            }
-          )
+            index: Integer,
+            type: Symbol
+          }
+        )
       end
-      def to_hash; end
+      def to_hash
+      end
 
       module ContentBlock
         extend Anthropic::Internal::Type::Union
 
-        sig do
-          override
-            .returns(
-              [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock]
+        Variants =
+          T.type_alias do
+            T.any(
+              Anthropic::TextBlock,
+              Anthropic::ToolUseBlock,
+              Anthropic::ThinkingBlock,
+              Anthropic::RedactedThinkingBlock
             )
+          end
+
+        sig do
+          override.returns(
+            T::Array[
+              Anthropic::RawContentBlockStartEvent::ContentBlock::Variants
+            ]
+          )
         end
-        def self.variants; end
+        def self.variants
+        end
       end
     end
   end

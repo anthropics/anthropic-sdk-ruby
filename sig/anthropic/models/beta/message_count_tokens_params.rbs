@@ -3,12 +3,12 @@ module Anthropic
     module Beta
       type message_count_tokens_params =
         {
-          messages: ::Array[Anthropic::Models::Beta::BetaMessageParam],
+          messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
           system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           tool_choice: Anthropic::Models::Beta::beta_tool_choice,
-          tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
+          tools: ::Array[Anthropic::Beta::MessageCountTokensParams::tool],
           betas: ::Array[Anthropic::Models::anthropic_beta]
         }
         & Anthropic::Internal::Type::request_parameters
@@ -17,7 +17,7 @@ module Anthropic
         extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
-        attr_accessor messages: ::Array[Anthropic::Models::Beta::BetaMessageParam]
+        attr_accessor messages: ::Array[Anthropic::Beta::BetaMessageParam]
 
         attr_accessor model: Anthropic::Models::model
 
@@ -39,11 +39,11 @@ module Anthropic
           Anthropic::Models::Beta::beta_tool_choice
         ) -> Anthropic::Models::Beta::beta_tool_choice
 
-        attr_reader tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]?
+        attr_reader tools: ::Array[Anthropic::Beta::MessageCountTokensParams::tool]?
 
         def tools=: (
-          ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]
-        ) -> ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]
+          ::Array[Anthropic::Beta::MessageCountTokensParams::tool]
+        ) -> ::Array[Anthropic::Beta::MessageCountTokensParams::tool]
 
         attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
@@ -52,42 +52,39 @@ module Anthropic
         ) -> ::Array[Anthropic::Models::anthropic_beta]
 
         def initialize: (
-          messages: ::Array[Anthropic::Models::Beta::BetaMessageParam],
+          messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
           ?system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           ?thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
-          ?tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
+          ?tools: ::Array[Anthropic::Beta::MessageCountTokensParams::tool],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> void
 
-        def to_hash: -> Anthropic::Models::Beta::message_count_tokens_params
-
-        type system_ =
-          String | ::Array[Anthropic::Models::Beta::BetaTextBlockParam]
+        type system_ = String | ::Array[Anthropic::Beta::BetaTextBlockParam]
 
         module System
           extend Anthropic::Internal::Type::Union
 
-          def self?.variants: -> [String, ::Array[Anthropic::Models::Beta::BetaTextBlockParam]]
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::MessageCountTokensParams::system_]
 
           BetaTextBlockParamArray: Anthropic::Internal::Type::Converter
         end
 
         type tool =
-          Anthropic::Models::Beta::BetaTool
-          | Anthropic::Models::Beta::BetaToolComputerUse20241022
-          | Anthropic::Models::Beta::BetaToolBash20241022
-          | Anthropic::Models::Beta::BetaToolTextEditor20241022
-          | Anthropic::Models::Beta::BetaToolComputerUse20250124
-          | Anthropic::Models::Beta::BetaToolBash20250124
-          | Anthropic::Models::Beta::BetaToolTextEditor20250124
+          Anthropic::Beta::BetaTool
+          | Anthropic::Beta::BetaToolComputerUse20241022
+          | Anthropic::Beta::BetaToolBash20241022
+          | Anthropic::Beta::BetaToolTextEditor20241022
+          | Anthropic::Beta::BetaToolComputerUse20250124
+          | Anthropic::Beta::BetaToolBash20250124
+          | Anthropic::Beta::BetaToolTextEditor20250124
 
         module Tool
           extend Anthropic::Internal::Type::Union
 
-          def self?.variants: -> [Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124]
+          def self?.variants: -> ::Array[Anthropic::Beta::MessageCountTokensParams::tool]
         end
       end
     end

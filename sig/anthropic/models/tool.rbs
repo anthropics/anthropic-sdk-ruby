@@ -2,31 +2,29 @@ module Anthropic
   module Models
     type tool =
       {
-        input_schema: Anthropic::Models::Tool::InputSchema,
+        input_schema: Anthropic::Tool::InputSchema,
         name: String,
-        cache_control: Anthropic::Models::CacheControlEphemeral?,
+        cache_control: Anthropic::CacheControlEphemeral?,
         description: String
       }
 
     class Tool < Anthropic::Internal::Type::BaseModel
-      attr_accessor input_schema: Anthropic::Models::Tool::InputSchema
+      attr_accessor input_schema: Anthropic::Tool::InputSchema
 
       attr_accessor name: String
 
-      attr_accessor cache_control: Anthropic::Models::CacheControlEphemeral?
+      attr_accessor cache_control: Anthropic::CacheControlEphemeral?
 
       attr_reader description: String?
 
       def description=: (String) -> String
 
       def initialize: (
-        input_schema: Anthropic::Models::Tool::InputSchema,
+        input_schema: Anthropic::Tool::InputSchema,
         name: String,
-        ?cache_control: Anthropic::Models::CacheControlEphemeral?,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
         ?description: String
       ) -> void
-
-      def to_hash: -> Anthropic::Models::tool
 
       type input_schema = { type: :object, properties: top? }
 
@@ -36,8 +34,6 @@ module Anthropic
         attr_accessor properties: top?
 
         def initialize: (?properties: top?, ?type: :object) -> void
-
-        def to_hash: -> Anthropic::Models::Tool::input_schema
       end
     end
   end

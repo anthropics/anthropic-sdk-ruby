@@ -8,8 +8,6 @@ module Anthropic
       attr_accessor type: :rate_limit_error
 
       def initialize: (message: String, ?type: :rate_limit_error) -> void
-
-      def to_hash: -> Anthropic::Models::rate_limit_error
     end
   end
 end

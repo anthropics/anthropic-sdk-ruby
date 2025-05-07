@@ -3,18 +3,20 @@
 module Anthropic
   module Models
     class BetaErrorResponse < Anthropic::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
       sig do
         returns(
           T.any(
-            Anthropic::Models::BetaInvalidRequestError,
-            Anthropic::Models::BetaAuthenticationError,
-            Anthropic::Models::BetaBillingError,
-            Anthropic::Models::BetaPermissionError,
-            Anthropic::Models::BetaNotFoundError,
-            Anthropic::Models::BetaRateLimitError,
-            Anthropic::Models::BetaGatewayTimeoutError,
-            Anthropic::Models::BetaAPIError,
-            Anthropic::Models::BetaOverloadedError
+            Anthropic::BetaInvalidRequestError,
+            Anthropic::BetaAuthenticationError,
+            Anthropic::BetaBillingError,
+            Anthropic::BetaPermissionError,
+            Anthropic::BetaNotFoundError,
+            Anthropic::BetaRateLimitError,
+            Anthropic::BetaGatewayTimeoutError,
+            Anthropic::BetaAPIError,
+            Anthropic::BetaOverloadedError
           )
         )
       end
@@ -25,44 +27,45 @@ module Anthropic
 
       sig do
         params(
-          error: T.any(
-            Anthropic::Models::BetaInvalidRequestError,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::BetaAuthenticationError,
-            Anthropic::Models::BetaBillingError,
-            Anthropic::Models::BetaPermissionError,
-            Anthropic::Models::BetaNotFoundError,
-            Anthropic::Models::BetaRateLimitError,
-            Anthropic::Models::BetaGatewayTimeoutError,
-            Anthropic::Models::BetaAPIError,
-            Anthropic::Models::BetaOverloadedError
-          ),
+          error:
+            T.any(
+              Anthropic::BetaInvalidRequestError::OrHash,
+              Anthropic::BetaAuthenticationError::OrHash,
+              Anthropic::BetaBillingError::OrHash,
+              Anthropic::BetaPermissionError::OrHash,
+              Anthropic::BetaNotFoundError::OrHash,
+              Anthropic::BetaRateLimitError::OrHash,
+              Anthropic::BetaGatewayTimeoutError::OrHash,
+              Anthropic::BetaAPIError::OrHash,
+              Anthropic::BetaOverloadedError::OrHash
+            ),
           type: Symbol
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
-      def self.new(error:, type: :error); end
+      def self.new(error:, type: :error)
+      end
 
       sig do
-        override
-          .returns(
-            {
-              error: T.any(
-                Anthropic::Models::BetaInvalidRequestError,
-                Anthropic::Models::BetaAuthenticationError,
-                Anthropic::Models::BetaBillingError,
-                Anthropic::Models::BetaPermissionError,
-                Anthropic::Models::BetaNotFoundError,
-                Anthropic::Models::BetaRateLimitError,
-                Anthropic::Models::BetaGatewayTimeoutError,
-                Anthropic::Models::BetaAPIError,
-                Anthropic::Models::BetaOverloadedError
+        override.returns(
+          {
+            error:
+              T.any(
+                Anthropic::BetaInvalidRequestError,
+                Anthropic::BetaAuthenticationError,
+                Anthropic::BetaBillingError,
+                Anthropic::BetaPermissionError,
+                Anthropic::BetaNotFoundError,
+                Anthropic::BetaRateLimitError,
+                Anthropic::BetaGatewayTimeoutError,
+                Anthropic::BetaAPIError,
+                Anthropic::BetaOverloadedError
               ),
-              type: Symbol
-            }
-          )
+            type: Symbol
+          }
+        )
       end
-      def to_hash; end
+      def to_hash
+      end
     end
   end
 end

@@ -6,6 +6,9 @@ module Anthropic
 
     module Beta
       class BetaMessage < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         # Unique object identifier.
         #
         # The format and length of IDs may change over time.
@@ -48,10 +51,10 @@ module Anthropic
           returns(
             T::Array[
               T.any(
-                Anthropic::Models::Beta::BetaTextBlock,
-                Anthropic::Models::Beta::BetaToolUseBlock,
-                Anthropic::Models::Beta::BetaThinkingBlock,
-                Anthropic::Models::Beta::BetaRedactedThinkingBlock
+                Anthropic::Beta::BetaTextBlock,
+                Anthropic::Beta::BetaToolUseBlock,
+                Anthropic::Beta::BetaThinkingBlock,
+                Anthropic::Beta::BetaRedactedThinkingBlock
               )
             ]
           )
@@ -61,7 +64,7 @@ module Anthropic
         # The model that will complete your prompt.\n\nSee
         # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
-        sig { returns(T.any(Anthropic::Models::Model::TaggedSymbol, String)) }
+        sig { returns(T.any(Anthropic::Model::TaggedSymbol, String)) }
         attr_accessor :model
 
         # Conversational role of the generated message.
@@ -81,7 +84,9 @@ module Anthropic
         #
         # In non-streaming mode this value is always non-null. In streaming mode, it is
         # null in the `message_start` event and non-null otherwise.
-        sig { returns(T.nilable(Anthropic::Models::Beta::BetaStopReason::TaggedSymbol)) }
+        sig do
+          returns(T.nilable(Anthropic::Beta::BetaStopReason::TaggedSymbol))
+        end
         attr_accessor :stop_reason
 
         # Which custom stop sequence was generated, if any.
@@ -112,32 +117,31 @@ module Anthropic
         #
         # Total input tokens in a request is the summation of `input_tokens`,
         # `cache_creation_input_tokens`, and `cache_read_input_tokens`.
-        sig { returns(Anthropic::Models::Beta::BetaUsage) }
+        sig { returns(Anthropic::Beta::BetaUsage) }
         attr_reader :usage
 
-        sig { params(usage: T.any(Anthropic::Models::Beta::BetaUsage, Anthropic::Internal::AnyHash)).void }
+        sig { params(usage: Anthropic::Beta::BetaUsage::OrHash).void }
         attr_writer :usage
 
         sig do
           params(
             id: String,
-            content: T::Array[
-              T.any(
-                Anthropic::Models::Beta::BetaTextBlock,
-                Anthropic::Internal::AnyHash,
-                Anthropic::Models::Beta::BetaToolUseBlock,
-                Anthropic::Models::Beta::BetaThinkingBlock,
-                Anthropic::Models::Beta::BetaRedactedThinkingBlock
-              )
-            ],
-            model: T.any(Anthropic::Models::Model::OrSymbol, String),
-            stop_reason: T.nilable(Anthropic::Models::Beta::BetaStopReason::OrSymbol),
+            content:
+              T::Array[
+                T.any(
+                  Anthropic::Beta::BetaTextBlock::OrHash,
+                  Anthropic::Beta::BetaToolUseBlock::OrHash,
+                  Anthropic::Beta::BetaThinkingBlock::OrHash,
+                  Anthropic::Beta::BetaRedactedThinkingBlock::OrHash
+                )
+              ],
+            model: T.any(Anthropic::Model::OrSymbol, String),
+            stop_reason: T.nilable(Anthropic::Beta::BetaStopReason::OrSymbol),
             stop_sequence: T.nilable(String),
-            usage: T.any(Anthropic::Models::Beta::BetaUsage, Anthropic::Internal::AnyHash),
+            usage: Anthropic::Beta::BetaUsage::OrHash,
             role: Symbol,
             type: Symbol
-          )
-            .returns(T.attached_class)
+          ).returns(T.attached_class)
         end
         def self.new(
           # Unique object identifier.
@@ -222,30 +226,34 @@ module Anthropic
           #
           # For Messages, this is always `"message"`.
           type: :message
-        ); end
+        )
+        end
+
         sig do
-          override
-            .returns(
-              {
-                id: String,
-                content: T::Array[
+          override.returns(
+            {
+              id: String,
+              content:
+                T::Array[
                   T.any(
-                    Anthropic::Models::Beta::BetaTextBlock,
-                    Anthropic::Models::Beta::BetaToolUseBlock,
-                    Anthropic::Models::Beta::BetaThinkingBlock,
-                    Anthropic::Models::Beta::BetaRedactedThinkingBlock
+                    Anthropic::Beta::BetaTextBlock,
+                    Anthropic::Beta::BetaToolUseBlock,
+                    Anthropic::Beta::BetaThinkingBlock,
+                    Anthropic::Beta::BetaRedactedThinkingBlock
                   )
                 ],
-                model: T.any(Anthropic::Models::Model::TaggedSymbol, String),
-                role: Symbol,
-                stop_reason: T.nilable(Anthropic::Models::Beta::BetaStopReason::TaggedSymbol),
-                stop_sequence: T.nilable(String),
-                type: Symbol,
-                usage: Anthropic::Models::Beta::BetaUsage
-              }
-            )
+              model: T.any(Anthropic::Model::TaggedSymbol, String),
+              role: Symbol,
+              stop_reason:
+                T.nilable(Anthropic::Beta::BetaStopReason::TaggedSymbol),
+              stop_sequence: T.nilable(String),
+              type: Symbol,
+              usage: Anthropic::Beta::BetaUsage
+            }
+          )
         end
-        def to_hash; end
+        def to_hash
+        end
       end
     end
   end

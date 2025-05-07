@@ -6,13 +6,16 @@ module Anthropic
 
     module Beta
       class BetaBase64PDFBlock < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         sig do
           returns(
             T.any(
-              Anthropic::Models::Beta::BetaBase64PDFSource,
-              Anthropic::Models::Beta::BetaPlainTextSource,
-              Anthropic::Models::Beta::BetaContentBlockSource,
-              Anthropic::Models::Beta::BetaURLPDFSource
+              Anthropic::Beta::BetaBase64PDFSource,
+              Anthropic::Beta::BetaPlainTextSource,
+              Anthropic::Beta::BetaContentBlockSource,
+              Anthropic::Beta::BetaURLPDFSource
             )
           )
         end
@@ -21,23 +24,24 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
-        sig { returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)) }
+        sig { returns(T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)) }
         attr_reader :cache_control
 
         sig do
           params(
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash))
-          )
-            .void
+            cache_control:
+              T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash)
+          ).void
         end
         attr_writer :cache_control
 
-        sig { returns(T.nilable(Anthropic::Models::Beta::BetaCitationsConfigParam)) }
+        sig { returns(T.nilable(Anthropic::Beta::BetaCitationsConfigParam)) }
         attr_reader :citations
 
         sig do
-          params(citations: T.any(Anthropic::Models::Beta::BetaCitationsConfigParam, Anthropic::Internal::AnyHash))
-            .void
+          params(
+            citations: Anthropic::Beta::BetaCitationsConfigParam::OrHash
+          ).void
         end
         attr_writer :citations
 
@@ -49,54 +53,73 @@ module Anthropic
 
         sig do
           params(
-            source: T.any(
-              Anthropic::Models::Beta::BetaBase64PDFSource,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::Beta::BetaPlainTextSource,
-              Anthropic::Models::Beta::BetaContentBlockSource,
-              Anthropic::Models::Beta::BetaURLPDFSource
-            ),
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash)),
-            citations: T.any(Anthropic::Models::Beta::BetaCitationsConfigParam, Anthropic::Internal::AnyHash),
+            source:
+              T.any(
+                Anthropic::Beta::BetaBase64PDFSource::OrHash,
+                Anthropic::Beta::BetaPlainTextSource::OrHash,
+                Anthropic::Beta::BetaContentBlockSource::OrHash,
+                Anthropic::Beta::BetaURLPDFSource::OrHash
+              ),
+            cache_control:
+              T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+            citations: Anthropic::Beta::BetaCitationsConfigParam::OrHash,
             context: T.nilable(String),
             title: T.nilable(String),
             type: Symbol
-          )
-            .returns(T.attached_class)
+          ).returns(T.attached_class)
         end
-        def self.new(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document)
+        def self.new(
+          source:,
+          cache_control: nil,
+          citations: nil,
+          context: nil,
+          title: nil,
+          type: :document
+        )
         end
 
         sig do
-          override
-            .returns(
-              {
-                source: T.any(
-                  Anthropic::Models::Beta::BetaBase64PDFSource,
-                  Anthropic::Models::Beta::BetaPlainTextSource,
-                  Anthropic::Models::Beta::BetaContentBlockSource,
-                  Anthropic::Models::Beta::BetaURLPDFSource
+          override.returns(
+            {
+              source:
+                T.any(
+                  Anthropic::Beta::BetaBase64PDFSource,
+                  Anthropic::Beta::BetaPlainTextSource,
+                  Anthropic::Beta::BetaContentBlockSource,
+                  Anthropic::Beta::BetaURLPDFSource
                 ),
-                type: Symbol,
-                cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
-                citations: Anthropic::Models::Beta::BetaCitationsConfigParam,
-                context: T.nilable(String),
-                title: T.nilable(String)
-              }
-            )
+              type: Symbol,
+              cache_control:
+                T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
+              citations: Anthropic::Beta::BetaCitationsConfigParam,
+              context: T.nilable(String),
+              title: T.nilable(String)
+            }
+          )
         end
-        def to_hash; end
+        def to_hash
+        end
 
         module Source
           extend Anthropic::Internal::Type::Union
 
-          sig do
-            override
-              .returns(
-                [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource]
+          Variants =
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::BetaBase64PDFSource,
+                Anthropic::Beta::BetaPlainTextSource,
+                Anthropic::Beta::BetaContentBlockSource,
+                Anthropic::Beta::BetaURLPDFSource
               )
+            end
+
+          sig do
+            override.returns(
+              T::Array[Anthropic::Beta::BetaBase64PDFBlock::Source::Variants]
+            )
           end
-          def self.variants; end
+          def self.variants
+          end
         end
       end
     end

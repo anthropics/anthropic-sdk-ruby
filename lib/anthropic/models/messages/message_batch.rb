@@ -54,8 +54,8 @@ module Anthropic
         # @!attribute processing_status
         #   Processing status of the Message Batch.
         #
-        #   @return [Symbol, Anthropic::Models::Messages::MessageBatch::ProcessingStatus]
-        required :processing_status, enum: -> { Anthropic::Models::Messages::MessageBatch::ProcessingStatus }
+        #   @return [Symbol, Anthropic::Messages::MessageBatch::ProcessingStatus]
+        required :processing_status, enum: -> { Anthropic::Messages::MessageBatch::ProcessingStatus }
 
         # @!attribute request_counts
         #   Tallies requests within the Message Batch, categorized by their status.
@@ -64,8 +64,8 @@ module Anthropic
         #   processing of the entire batch ends. The sum of all values always matches the
         #   total number of requests in the batch.
         #
-        #   @return [Anthropic::Models::Messages::MessageBatchRequestCounts]
-        required :request_counts, -> { Anthropic::Models::Messages::MessageBatchRequestCounts }
+        #   @return [Anthropic::Messages::MessageBatchRequestCounts]
+        required :request_counts, -> { Anthropic::Messages::MessageBatchRequestCounts }
 
         # @!attribute results_url
         #   URL to a `.jsonl` file containing the results of the Message Batch requests.
@@ -87,37 +87,31 @@ module Anthropic
 
         # @!method initialize(id:, archived_at:, cancel_initiated_at:, created_at:, ended_at:, expires_at:, processing_status:, request_counts:, results_url:, type: :message_batch)
         #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Messages::MessageBatch} for more details.
+        #   {Anthropic::Messages::MessageBatch} for more details.
         #
-        #   @param id [String] Unique object identifier. ...
+        #   @param id [String] Unique object identifier.
         #
         #   @param archived_at [Time, nil] RFC 3339 datetime string representing the time at which the Message Batch was ar
-        #   ...
         #
         #   @param cancel_initiated_at [Time, nil] RFC 3339 datetime string representing the time at which cancellation was initiat
-        #   ...
         #
         #   @param created_at [Time] RFC 3339 datetime string representing the time at which the Message Batch was cr
-        #   ...
         #
         #   @param ended_at [Time, nil] RFC 3339 datetime string representing the time at which processing for the Messa
-        #   ...
         #
         #   @param expires_at [Time] RFC 3339 datetime string representing the time at which the Message Batch will e
-        #   ...
         #
-        #   @param processing_status [Symbol, Anthropic::Models::Messages::MessageBatch::ProcessingStatus] Processing status of the Message Batch.
+        #   @param processing_status [Symbol, Anthropic::Messages::MessageBatch::ProcessingStatus] Processing status of the Message Batch.
         #
-        #   @param request_counts [Anthropic::Models::Messages::MessageBatchRequestCounts] Tallies requests within the Message Batch, categorized by their status. ...
+        #   @param request_counts [Anthropic::Messages::MessageBatchRequestCounts] Tallies requests within the Message Batch, categorized by their status.
         #
         #   @param results_url [String, nil] URL to a `.jsonl` file containing the results of the Message Batch requests. Spe
-        #   ...
         #
-        #   @param type [Symbol, :message_batch] Object type. ...
+        #   @param type [Symbol, :message_batch] Object type.
 
         # Processing status of the Message Batch.
         #
-        # @see Anthropic::Models::Messages::MessageBatch#processing_status
+        # @see Anthropic::Messages::MessageBatch#processing_status
         module ProcessingStatus
           extend Anthropic::Internal::Type::Enum
 

@@ -9,7 +9,7 @@ module Anthropic
         stop_reason: Anthropic::Models::stop_reason?,
         stop_sequence: String?,
         type: :message,
-        usage: Anthropic::Models::Usage
+        usage: Anthropic::Usage
       }
 
     class Message < Anthropic::Internal::Type::BaseModel
@@ -27,7 +27,7 @@ module Anthropic
 
       attr_accessor type: :message
 
-      attr_accessor usage: Anthropic::Models::Usage
+      attr_accessor usage: Anthropic::Usage
 
       def initialize: (
         id: String,
@@ -35,12 +35,10 @@ module Anthropic
         model: Anthropic::Models::model,
         stop_reason: Anthropic::Models::stop_reason?,
         stop_sequence: String?,
-        usage: Anthropic::Models::Usage,
+        usage: Anthropic::Usage,
         ?role: :assistant,
         ?type: :message
       ) -> void
-
-      def to_hash: -> Anthropic::Models::message
     end
   end
 end

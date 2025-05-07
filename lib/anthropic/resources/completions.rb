@@ -20,30 +20,29 @@ module Anthropic
       #
       # @overload create(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, request_options: {})
       #
-      # @param max_tokens_to_sample [Integer] The maximum number of tokens to generate before stopping. ...
+      # @param max_tokens_to_sample [Integer] The maximum number of tokens to generate before stopping.
       #
-      # @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
-      # ...
+      # @param model [Symbol, String, Anthropic::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
       #
-      # @param prompt [String] The prompt that you want Claude to complete. ...
+      # @param prompt [String] The prompt that you want Claude to complete.
       #
-      # @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
+      # @param metadata [Anthropic::Metadata] An object describing metadata about the request.
       #
-      # @param stop_sequences [Array<String>] Sequences that will cause the model to stop generating. ...
+      # @param stop_sequences [Array<String>] Sequences that will cause the model to stop generating.
       #
-      # @param temperature [Float] Amount of randomness injected into the response. ...
+      # @param temperature [Float] Amount of randomness injected into the response.
       #
-      # @param top_k [Integer] Only sample from the top K options for each subsequent token. ...
+      # @param top_k [Integer] Only sample from the top K options for each subsequent token.
       #
-      # @param top_p [Float] Use nucleus sampling. ...
+      # @param top_p [Float] Use nucleus sampling.
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Anthropic::Models::Completion]
+      # @return [Anthropic::Completion]
       #
       # @see Anthropic::Models::CompletionCreateParams
       def create(params)
-        parsed, options = Anthropic::Models::CompletionCreateParams.dump_request(params)
+        parsed, options = Anthropic::CompletionCreateParams.dump_request(params)
         if parsed[:stream]
           message = "Please use `#create_streaming` for the streaming use case."
           raise ArgumentError.new(message)
@@ -52,7 +51,7 @@ module Anthropic
           method: :post,
           path: "v1/complete",
           body: parsed,
-          model: Anthropic::Models::Completion,
+          model: Anthropic::Completion,
           options: {timeout: 600, **options}
         )
       end
@@ -73,30 +72,29 @@ module Anthropic
       #
       # @overload create_streaming(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, request_options: {})
       #
-      # @param max_tokens_to_sample [Integer] The maximum number of tokens to generate before stopping. ...
+      # @param max_tokens_to_sample [Integer] The maximum number of tokens to generate before stopping.
       #
-      # @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
-      # ...
+      # @param model [Symbol, String, Anthropic::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
       #
-      # @param prompt [String] The prompt that you want Claude to complete. ...
+      # @param prompt [String] The prompt that you want Claude to complete.
       #
-      # @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
+      # @param metadata [Anthropic::Metadata] An object describing metadata about the request.
       #
-      # @param stop_sequences [Array<String>] Sequences that will cause the model to stop generating. ...
+      # @param stop_sequences [Array<String>] Sequences that will cause the model to stop generating.
       #
-      # @param temperature [Float] Amount of randomness injected into the response. ...
+      # @param temperature [Float] Amount of randomness injected into the response.
       #
-      # @param top_k [Integer] Only sample from the top K options for each subsequent token. ...
+      # @param top_k [Integer] Only sample from the top K options for each subsequent token.
       #
-      # @param top_p [Float] Use nucleus sampling. ...
+      # @param top_p [Float] Use nucleus sampling.
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Anthropic::Internal::Stream<Anthropic::Models::Completion>]
+      # @return [Anthropic::Internal::Stream<Anthropic::Completion>]
       #
       # @see Anthropic::Models::CompletionCreateParams
       def create_streaming(params)
-        parsed, options = Anthropic::Models::CompletionCreateParams.dump_request(params)
+        parsed, options = Anthropic::CompletionCreateParams.dump_request(params)
         unless parsed.fetch(:stream, true)
           message = "Please use `#create` for the non-streaming use case."
           raise ArgumentError.new(message)
@@ -108,7 +106,7 @@ module Anthropic
           headers: {"accept" => "text/event-stream"},
           body: parsed,
           stream: Anthropic::Internal::Stream,
-          model: Anthropic::Models::Completion,
+          model: Anthropic::Completion,
           options: {timeout: 600, **options}
         )
       end

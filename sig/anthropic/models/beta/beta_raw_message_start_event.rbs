@@ -4,19 +4,17 @@ module Anthropic
 
     module Beta
       type beta_raw_message_start_event =
-        { message: Anthropic::Models::Beta::BetaMessage, type: :message_start }
+        { message: Anthropic::Beta::BetaMessage, type: :message_start }
 
       class BetaRawMessageStartEvent < Anthropic::Internal::Type::BaseModel
-        attr_accessor message: Anthropic::Models::Beta::BetaMessage
+        attr_accessor message: Anthropic::Beta::BetaMessage
 
         attr_accessor type: :message_start
 
         def initialize: (
-          message: Anthropic::Models::Beta::BetaMessage,
+          message: Anthropic::Beta::BetaMessage,
           ?type: :message_start
         ) -> void
-
-        def to_hash: -> Anthropic::Models::Beta::beta_raw_message_start_event
       end
     end
   end

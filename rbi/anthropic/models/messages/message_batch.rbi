@@ -6,6 +6,9 @@ module Anthropic
 
     module Messages
       class MessageBatch < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         # Unique object identifier.
         #
         # The format and length of IDs may change over time.
@@ -41,7 +44,11 @@ module Anthropic
         attr_accessor :expires_at
 
         # Processing status of the Message Batch.
-        sig { returns(Anthropic::Models::Messages::MessageBatch::ProcessingStatus::TaggedSymbol) }
+        sig do
+          returns(
+            Anthropic::Messages::MessageBatch::ProcessingStatus::TaggedSymbol
+          )
+        end
         attr_accessor :processing_status
 
         # Tallies requests within the Message Batch, categorized by their status.
@@ -49,14 +56,14 @@ module Anthropic
         # Requests start as `processing` and move to one of the other statuses only once
         # processing of the entire batch ends. The sum of all values always matches the
         # total number of requests in the batch.
-        sig { returns(Anthropic::Models::Messages::MessageBatchRequestCounts) }
+        sig { returns(Anthropic::Messages::MessageBatchRequestCounts) }
         attr_reader :request_counts
 
         sig do
           params(
-            request_counts: T.any(Anthropic::Models::Messages::MessageBatchRequestCounts, Anthropic::Internal::AnyHash)
-          )
-            .void
+            request_counts:
+              Anthropic::Messages::MessageBatchRequestCounts::OrHash
+          ).void
         end
         attr_writer :request_counts
 
@@ -82,12 +89,13 @@ module Anthropic
             created_at: Time,
             ended_at: T.nilable(Time),
             expires_at: Time,
-            processing_status: Anthropic::Models::Messages::MessageBatch::ProcessingStatus::OrSymbol,
-            request_counts: T.any(Anthropic::Models::Messages::MessageBatchRequestCounts, Anthropic::Internal::AnyHash),
+            processing_status:
+              Anthropic::Messages::MessageBatch::ProcessingStatus::OrSymbol,
+            request_counts:
+              Anthropic::Messages::MessageBatchRequestCounts::OrHash,
             results_url: T.nilable(String),
             type: Symbol
-          )
-            .returns(T.attached_class)
+          ).returns(T.attached_class)
         end
         def self.new(
           # Unique object identifier.
@@ -130,41 +138,64 @@ module Anthropic
           #
           # For Message Batches, this is always `"message_batch"`.
           type: :message_batch
-        ); end
-        sig do
-          override
-            .returns(
-              {
-                id: String,
-                archived_at: T.nilable(Time),
-                cancel_initiated_at: T.nilable(Time),
-                created_at: Time,
-                ended_at: T.nilable(Time),
-                expires_at: Time,
-                processing_status: Anthropic::Models::Messages::MessageBatch::ProcessingStatus::TaggedSymbol,
-                request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts,
-                results_url: T.nilable(String),
-                type: Symbol
-              }
-            )
+        )
         end
-        def to_hash; end
+
+        sig do
+          override.returns(
+            {
+              id: String,
+              archived_at: T.nilable(Time),
+              cancel_initiated_at: T.nilable(Time),
+              created_at: Time,
+              ended_at: T.nilable(Time),
+              expires_at: Time,
+              processing_status:
+                Anthropic::Messages::MessageBatch::ProcessingStatus::TaggedSymbol,
+              request_counts: Anthropic::Messages::MessageBatchRequestCounts,
+              results_url: T.nilable(String),
+              type: Symbol
+            }
+          )
+        end
+        def to_hash
+        end
 
         # Processing status of the Message Batch.
         module ProcessingStatus
           extend Anthropic::Internal::Type::Enum
 
           TaggedSymbol =
-            T.type_alias { T.all(Symbol, Anthropic::Models::Messages::MessageBatch::ProcessingStatus) }
+            T.type_alias do
+              T.all(Symbol, Anthropic::Messages::MessageBatch::ProcessingStatus)
+            end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
           IN_PROGRESS =
-            T.let(:in_progress, Anthropic::Models::Messages::MessageBatch::ProcessingStatus::TaggedSymbol)
-          CANCELING = T.let(:canceling, Anthropic::Models::Messages::MessageBatch::ProcessingStatus::TaggedSymbol)
-          ENDED = T.let(:ended, Anthropic::Models::Messages::MessageBatch::ProcessingStatus::TaggedSymbol)
+            T.let(
+              :in_progress,
+              Anthropic::Messages::MessageBatch::ProcessingStatus::TaggedSymbol
+            )
+          CANCELING =
+            T.let(
+              :canceling,
+              Anthropic::Messages::MessageBatch::ProcessingStatus::TaggedSymbol
+            )
+          ENDED =
+            T.let(
+              :ended,
+              Anthropic::Messages::MessageBatch::ProcessingStatus::TaggedSymbol
+            )
 
-          sig { override.returns(T::Array[Anthropic::Models::Messages::MessageBatch::ProcessingStatus::TaggedSymbol]) }
-          def self.values; end
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Messages::MessageBatch::ProcessingStatus::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
     end

@@ -7,26 +7,26 @@ module Anthropic
 
       discriminator :type
 
-      variant :invalid_request_error, -> { Anthropic::Models::BetaInvalidRequestError }
+      variant :invalid_request_error, -> { Anthropic::BetaInvalidRequestError }
 
-      variant :authentication_error, -> { Anthropic::Models::BetaAuthenticationError }
+      variant :authentication_error, -> { Anthropic::BetaAuthenticationError }
 
-      variant :billing_error, -> { Anthropic::Models::BetaBillingError }
+      variant :billing_error, -> { Anthropic::BetaBillingError }
 
-      variant :permission_error, -> { Anthropic::Models::BetaPermissionError }
+      variant :permission_error, -> { Anthropic::BetaPermissionError }
 
-      variant :not_found_error, -> { Anthropic::Models::BetaNotFoundError }
+      variant :not_found_error, -> { Anthropic::BetaNotFoundError }
 
-      variant :rate_limit_error, -> { Anthropic::Models::BetaRateLimitError }
+      variant :rate_limit_error, -> { Anthropic::BetaRateLimitError }
 
-      variant :timeout_error, -> { Anthropic::Models::BetaGatewayTimeoutError }
+      variant :timeout_error, -> { Anthropic::BetaGatewayTimeoutError }
 
-      variant :api_error, -> { Anthropic::Models::BetaAPIError }
+      variant :api_error, -> { Anthropic::BetaAPIError }
 
-      variant :overloaded_error, -> { Anthropic::Models::BetaOverloadedError }
+      variant :overloaded_error, -> { Anthropic::BetaOverloadedError }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::Models::BetaInvalidRequestError, Anthropic::Models::BetaAuthenticationError, Anthropic::Models::BetaBillingError, Anthropic::Models::BetaPermissionError, Anthropic::Models::BetaNotFoundError, Anthropic::Models::BetaRateLimitError, Anthropic::Models::BetaGatewayTimeoutError, Anthropic::Models::BetaAPIError, Anthropic::Models::BetaOverloadedError)]
+      #   @return [Array(Anthropic::BetaInvalidRequestError, Anthropic::BetaAuthenticationError, Anthropic::BetaBillingError, Anthropic::BetaPermissionError, Anthropic::BetaNotFoundError, Anthropic::BetaRateLimitError, Anthropic::BetaGatewayTimeoutError, Anthropic::BetaAPIError, Anthropic::BetaOverloadedError)]
     end
   end
 end

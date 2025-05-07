@@ -6,20 +6,23 @@ module Anthropic
 
     module Beta
       class BetaTextBlockParam < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         sig { returns(String) }
         attr_accessor :text
 
         sig { returns(Symbol) }
         attr_accessor :type
 
-        sig { returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)) }
+        sig { returns(T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)) }
         attr_reader :cache_control
 
         sig do
           params(
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash))
-          )
-            .void
+            cache_control:
+              T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash)
+          ).void
         end
         attr_writer :cache_control
 
@@ -28,9 +31,9 @@ module Anthropic
             T.nilable(
               T::Array[
                 T.any(
-                  Anthropic::Models::Beta::BetaCitationCharLocationParam,
-                  Anthropic::Models::Beta::BetaCitationPageLocationParam,
-                  Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
+                  Anthropic::Beta::BetaCitationCharLocationParam,
+                  Anthropic::Beta::BetaCitationPageLocationParam,
+                  Anthropic::Beta::BetaCitationContentBlockLocationParam
                 )
               ]
             )
@@ -41,43 +44,46 @@ module Anthropic
         sig do
           params(
             text: String,
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash)),
-            citations: T.nilable(
-              T::Array[
-                T.any(
-                  Anthropic::Models::Beta::BetaCitationCharLocationParam,
-                  Anthropic::Internal::AnyHash,
-                  Anthropic::Models::Beta::BetaCitationPageLocationParam,
-                  Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
-                )
-              ]
-            ),
+            cache_control:
+              T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+            citations:
+              T.nilable(
+                T::Array[
+                  T.any(
+                    Anthropic::Beta::BetaCitationCharLocationParam::OrHash,
+                    Anthropic::Beta::BetaCitationPageLocationParam::OrHash,
+                    Anthropic::Beta::BetaCitationContentBlockLocationParam::OrHash
+                  )
+                ]
+              ),
             type: Symbol
-          )
-            .returns(T.attached_class)
+          ).returns(T.attached_class)
         end
-        def self.new(text:, cache_control: nil, citations: nil, type: :text); end
+        def self.new(text:, cache_control: nil, citations: nil, type: :text)
+        end
 
         sig do
-          override
-            .returns(
-              {
-                text: String,
-                type: Symbol,
-                cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
-                citations: T.nilable(
+          override.returns(
+            {
+              text: String,
+              type: Symbol,
+              cache_control:
+                T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
+              citations:
+                T.nilable(
                   T::Array[
                     T.any(
-                      Anthropic::Models::Beta::BetaCitationCharLocationParam,
-                      Anthropic::Models::Beta::BetaCitationPageLocationParam,
-                      Anthropic::Models::Beta::BetaCitationContentBlockLocationParam
+                      Anthropic::Beta::BetaCitationCharLocationParam,
+                      Anthropic::Beta::BetaCitationPageLocationParam,
+                      Anthropic::Beta::BetaCitationContentBlockLocationParam
                     )
                   ]
                 )
-              }
-            )
+            }
+          )
         end
-        def to_hash; end
+        def to_hash
+        end
       end
     end
   end

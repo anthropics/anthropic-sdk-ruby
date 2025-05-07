@@ -7,7 +7,7 @@ module Anthropic
         {
           name: :bash,
           type: :bash_20241022,
-          cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
         }
 
       class BetaToolBash20241022 < Anthropic::Internal::Type::BaseModel
@@ -15,15 +15,13 @@ module Anthropic
 
         attr_accessor type: :bash_20241022
 
-        attr_accessor cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
         def initialize: (
-          ?cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?name: :bash,
           ?type: :bash_20241022
         ) -> void
-
-        def to_hash: -> Anthropic::Models::Beta::beta_tool_bash20241022
       end
     end
   end

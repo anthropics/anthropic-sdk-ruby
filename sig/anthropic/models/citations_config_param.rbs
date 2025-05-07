@@ -8,8 +8,6 @@ module Anthropic
       def enabled=: (bool) -> bool
 
       def initialize: (?enabled: bool) -> void
-
-      def to_hash: -> Anthropic::Models::citations_config_param
     end
   end
 end

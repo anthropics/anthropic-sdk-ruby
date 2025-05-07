@@ -18,8 +18,6 @@ module Anthropic
           thinking: String,
           ?type: :thinking
         ) -> void
-
-        def to_hash: -> Anthropic::Models::Beta::beta_thinking_block
       end
     end
   end

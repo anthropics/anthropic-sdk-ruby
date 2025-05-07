@@ -12,19 +12,19 @@ class Anthropic::Test::Resources::MessagesTest < Anthropic::Test::ResourceTest
       )
 
     assert_pattern do
-      response => Anthropic::Models::Message
+      response => Anthropic::Message
     end
 
     assert_pattern do
       response => {
         id: String,
-        content: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::ContentBlock]),
-        model: Anthropic::Models::Model,
+        content: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::ContentBlock]),
+        model: Anthropic::Model,
         role: Symbol,
-        stop_reason: Anthropic::Models::StopReason | nil,
+        stop_reason: Anthropic::StopReason | nil,
         stop_sequence: String | nil,
         type: Symbol,
-        usage: Anthropic::Models::Usage
+        usage: Anthropic::Usage
       }
     end
   end
@@ -37,7 +37,7 @@ class Anthropic::Test::Resources::MessagesTest < Anthropic::Test::ResourceTest
       )
 
     assert_pattern do
-      response => Anthropic::Models::MessageTokensCount
+      response => Anthropic::MessageTokensCount
     end
 
     assert_pattern do

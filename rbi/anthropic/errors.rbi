@@ -29,10 +29,17 @@ module Anthropic
           request: NilClass,
           response: NilClass,
           message: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
-      def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: nil); end
+      def self.new(
+        url:,
+        status: nil,
+        body: nil,
+        request: nil,
+        response: nil,
+        message: nil
+      )
+      end
     end
 
     class APIConnectionError < Anthropic::Errors::APIError
@@ -51,10 +58,16 @@ module Anthropic
           request: NilClass,
           response: NilClass,
           message: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
-      def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: "Connection error.")
+      def self.new(
+        url:,
+        status: nil,
+        body: nil,
+        request: nil,
+        response: nil,
+        message: "Connection error."
+      )
       end
     end
 
@@ -68,10 +81,16 @@ module Anthropic
           request: NilClass,
           response: NilClass,
           message: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
-      def self.new(url:, status: nil, body: nil, request: nil, response: nil, message: "Request timed out.")
+      def self.new(
+        url:,
+        status: nil,
+        body: nil,
+        request: nil,
+        response: nil,
+        message: "Request timed out."
+      )
       end
     end
 
@@ -85,10 +104,10 @@ module Anthropic
           request: NilClass,
           response: NilClass,
           message: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
-      def self.for(url:, status:, body:, request:, response:, message: nil); end
+      def self.for(url:, status:, body:, request:, response:, message: nil)
+      end
 
       sig { returns(Integer) }
       attr_accessor :status
@@ -102,10 +121,10 @@ module Anthropic
           request: NilClass,
           response: NilClass,
           message: T.nilable(String)
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
-      def self.new(url:, status:, body:, request:, response:, message: nil); end
+      def self.new(url:, status:, body:, request:, response:, message: nil)
+      end
     end
 
     class BadRequestError < Anthropic::Errors::APIStatusError
@@ -137,7 +156,7 @@ module Anthropic
     end
 
     class InternalServerError < Anthropic::Errors::APIStatusError
-      HTTP_STATUS = T.let(500.., T::Range[Integer])
+      HTTP_STATUS = T.let((500..), T::Range[Integer])
     end
   end
 end

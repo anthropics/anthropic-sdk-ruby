@@ -25,13 +25,13 @@ module Anthropic
 
       # @!method initialize(name:, disable_parallel_tool_use: nil, type: :tool)
       #   Some parameter documentations has been truncated, see
-      #   {Anthropic::Models::ToolChoiceTool} for more details.
+      #   {Anthropic::ToolChoiceTool} for more details.
       #
       #   The model will use the specified tool with `tool_choice.name`.
       #
       #   @param name [String] The name of the tool to use.
       #
-      #   @param disable_parallel_tool_use [Boolean] Whether to disable parallel tool use. ...
+      #   @param disable_parallel_tool_use [Boolean] Whether to disable parallel tool use.
       #
       #   @param type [Symbol, :tool]
     end

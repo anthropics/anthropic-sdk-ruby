@@ -5,8 +5,8 @@ module Anthropic
     class RawContentBlockDeltaEvent < Anthropic::Internal::Type::BaseModel
       # @!attribute delta
       #
-      #   @return [Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta, Anthropic::Models::ThinkingDelta, Anthropic::Models::SignatureDelta]
-      required :delta, union: -> { Anthropic::Models::RawContentBlockDelta }
+      #   @return [Anthropic::TextDelta, Anthropic::InputJSONDelta, Anthropic::CitationsDelta, Anthropic::ThinkingDelta, Anthropic::SignatureDelta]
+      required :delta, union: -> { Anthropic::RawContentBlockDelta }
 
       # @!attribute index
       #
@@ -19,7 +19,7 @@ module Anthropic
       required :type, const: :content_block_delta
 
       # @!method initialize(delta:, index:, type: :content_block_delta)
-      #   @param delta [Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta, Anthropic::Models::ThinkingDelta, Anthropic::Models::SignatureDelta]
+      #   @param delta [Anthropic::TextDelta, Anthropic::InputJSONDelta, Anthropic::CitationsDelta, Anthropic::ThinkingDelta, Anthropic::SignatureDelta]
       #   @param index [Integer]
       #   @param type [Symbol, :content_block_delta]
     end

@@ -16,9 +16,9 @@ module Anthropic
 
         # @!method initialize(user_id: nil)
         #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaMetadata} for more details.
+        #   {Anthropic::Beta::BetaMetadata} for more details.
         #
-        #   @param user_id [String, nil] An external identifier for the user who is associated with the request. ...
+        #   @param user_id [String, nil] An external identifier for the user who is associated with the request.
       end
     end
 

@@ -6,8 +6,8 @@ module Anthropic
       class BetaBase64PDFBlock < Anthropic::Internal::Type::BaseModel
         # @!attribute source
         #
-        #   @return [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource]
-        required :source, union: -> { Anthropic::Models::Beta::BetaBase64PDFBlock::Source }
+        #   @return [Anthropic::Beta::BetaBase64PDFSource, Anthropic::Beta::BetaPlainTextSource, Anthropic::Beta::BetaContentBlockSource, Anthropic::Beta::BetaURLPDFSource]
+        required :source, union: -> { Anthropic::Beta::BetaBase64PDFBlock::Source }
 
         # @!attribute type
         #
@@ -16,13 +16,13 @@ module Anthropic
 
         # @!attribute cache_control
         #
-        #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }, nil?: true
+        #   @return [Anthropic::Beta::BetaCacheControlEphemeral, nil]
+        optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!attribute citations
         #
-        #   @return [Anthropic::Models::Beta::BetaCitationsConfigParam, nil]
-        optional :citations, -> { Anthropic::Models::Beta::BetaCitationsConfigParam }
+        #   @return [Anthropic::Beta::BetaCitationsConfigParam, nil]
+        optional :citations, -> { Anthropic::Beta::BetaCitationsConfigParam }
 
         # @!attribute context
         #
@@ -35,29 +35,29 @@ module Anthropic
         optional :title, String, nil?: true
 
         # @!method initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document)
-        #   @param source [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource]
-        #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        #   @param citations [Anthropic::Models::Beta::BetaCitationsConfigParam]
+        #   @param source [Anthropic::Beta::BetaBase64PDFSource, Anthropic::Beta::BetaPlainTextSource, Anthropic::Beta::BetaContentBlockSource, Anthropic::Beta::BetaURLPDFSource]
+        #   @param cache_control [Anthropic::Beta::BetaCacheControlEphemeral, nil]
+        #   @param citations [Anthropic::Beta::BetaCitationsConfigParam]
         #   @param context [String, nil]
         #   @param title [String, nil]
         #   @param type [Symbol, :document]
 
-        # @see Anthropic::Models::Beta::BetaBase64PDFBlock#source
+        # @see Anthropic::Beta::BetaBase64PDFBlock#source
         module Source
           extend Anthropic::Internal::Type::Union
 
           discriminator :type
 
-          variant :base64, -> { Anthropic::Models::Beta::BetaBase64PDFSource }
+          variant :base64, -> { Anthropic::Beta::BetaBase64PDFSource }
 
-          variant :text, -> { Anthropic::Models::Beta::BetaPlainTextSource }
+          variant :text, -> { Anthropic::Beta::BetaPlainTextSource }
 
-          variant :content, -> { Anthropic::Models::Beta::BetaContentBlockSource }
+          variant :content, -> { Anthropic::Beta::BetaContentBlockSource }
 
-          variant :url, -> { Anthropic::Models::Beta::BetaURLPDFSource }
+          variant :url, -> { Anthropic::Beta::BetaURLPDFSource }
 
           # @!method self.variants
-          #   @return [Array(Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource)]
+          #   @return [Array(Anthropic::Beta::BetaBase64PDFSource, Anthropic::Beta::BetaPlainTextSource, Anthropic::Beta::BetaContentBlockSource, Anthropic::Beta::BetaURLPDFSource)]
         end
       end
     end
