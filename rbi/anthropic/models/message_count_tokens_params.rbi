@@ -6,6 +6,8 @@ module Anthropic
       extend Anthropic::Internal::Type::RequestParameters::Converter
       include Anthropic::Internal::Type::RequestParameters
 
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
       # Input messages.
       #
       # Our models are trained to operate on alternating `user` and `assistant`
@@ -92,13 +94,13 @@ module Anthropic
       # [system prompt](https://docs.anthropic.com/en/docs/system-prompts), you can use
       # the top-level `system` parameter — there is no `"system"` role for input
       # messages in the Messages API.
-      sig { returns(T::Array[Anthropic::Models::MessageParam]) }
+      sig { returns(T::Array[Anthropic::MessageParam]) }
       attr_accessor :messages
 
       # The model that will complete your prompt.\n\nSee
       # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       # details and options.
-      sig { returns(T.any(Anthropic::Models::Model::OrSymbol, String)) }
+      sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
       attr_accessor :model
 
       # System prompt.
@@ -106,14 +108,15 @@ module Anthropic
       # A system prompt is a way of providing context and instructions to Claude, such
       # as specifying a particular goal or role. See our
       # [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
-      sig { returns(T.nilable(T.any(String, T::Array[Anthropic::Models::TextBlockParam]))) }
+      sig do
+        returns(T.nilable(T.any(String, T::Array[Anthropic::TextBlockParam])))
+      end
       attr_reader :system_
 
       sig do
         params(
-          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::AnyHash)])
-        )
-          .void
+          system_: T.any(String, T::Array[Anthropic::TextBlockParam::OrHash])
+        ).void
       end
       attr_writer :system_
 
@@ -128,20 +131,24 @@ module Anthropic
       # for details.
       sig do
         returns(
-          T.nilable(T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled))
+          T.nilable(
+            T.any(
+              Anthropic::ThinkingConfigEnabled,
+              Anthropic::ThinkingConfigDisabled
+            )
+          )
         )
       end
       attr_reader :thinking
 
       sig do
         params(
-          thinking: T.any(
-            Anthropic::Models::ThinkingConfigEnabled,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::ThinkingConfigDisabled
-          )
-        )
-          .void
+          thinking:
+            T.any(
+              Anthropic::ThinkingConfigEnabled::OrHash,
+              Anthropic::ThinkingConfigDisabled::OrHash
+            )
+        ).void
       end
       attr_writer :thinking
 
@@ -151,10 +158,10 @@ module Anthropic
         returns(
           T.nilable(
             T.any(
-              Anthropic::Models::ToolChoiceAuto,
-              Anthropic::Models::ToolChoiceAny,
-              Anthropic::Models::ToolChoiceTool,
-              Anthropic::Models::ToolChoiceNone
+              Anthropic::ToolChoiceAuto,
+              Anthropic::ToolChoiceAny,
+              Anthropic::ToolChoiceTool,
+              Anthropic::ToolChoiceNone
             )
           )
         )
@@ -163,15 +170,14 @@ module Anthropic
 
       sig do
         params(
-          tool_choice: T.any(
-            Anthropic::Models::ToolChoiceAuto,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::ToolChoiceAny,
-            Anthropic::Models::ToolChoiceTool,
-            Anthropic::Models::ToolChoiceNone
-          )
-        )
-          .void
+          tool_choice:
+            T.any(
+              Anthropic::ToolChoiceAuto::OrHash,
+              Anthropic::ToolChoiceAny::OrHash,
+              Anthropic::ToolChoiceTool::OrHash,
+              Anthropic::ToolChoiceNone::OrHash
+            )
+        ).void
       end
       attr_writer :tool_choice
 
@@ -249,9 +255,9 @@ module Anthropic
           T.nilable(
             T::Array[
               T.any(
-                Anthropic::Models::Tool,
-                Anthropic::Models::ToolBash20250124,
-                Anthropic::Models::ToolTextEditor20250124
+                Anthropic::Tool,
+                Anthropic::ToolBash20250124,
+                Anthropic::ToolTextEditor20250124
               )
             ]
           )
@@ -261,47 +267,45 @@ module Anthropic
 
       sig do
         params(
-          tools: T::Array[
-            T.any(
-              Anthropic::Models::Tool,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::ToolBash20250124,
-              Anthropic::Models::ToolTextEditor20250124
-            )
-          ]
-        )
-          .void
+          tools:
+            T::Array[
+              T.any(
+                Anthropic::Tool::OrHash,
+                Anthropic::ToolBash20250124::OrHash,
+                Anthropic::ToolTextEditor20250124::OrHash
+              )
+            ]
+        ).void
       end
       attr_writer :tools
 
       sig do
         params(
-          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Internal::AnyHash)],
-          model: T.any(Anthropic::Models::Model::OrSymbol, String),
-          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::AnyHash)]),
-          thinking: T.any(
-            Anthropic::Models::ThinkingConfigEnabled,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::ThinkingConfigDisabled
-          ),
-          tool_choice: T.any(
-            Anthropic::Models::ToolChoiceAuto,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::ToolChoiceAny,
-            Anthropic::Models::ToolChoiceTool,
-            Anthropic::Models::ToolChoiceNone
-          ),
-          tools: T::Array[
+          messages: T::Array[Anthropic::MessageParam::OrHash],
+          model: T.any(Anthropic::Model::OrSymbol, String),
+          system_: T.any(String, T::Array[Anthropic::TextBlockParam::OrHash]),
+          thinking:
             T.any(
-              Anthropic::Models::Tool,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::ToolBash20250124,
-              Anthropic::Models::ToolTextEditor20250124
-            )
-          ],
-          request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash)
-        )
-          .returns(T.attached_class)
+              Anthropic::ThinkingConfigEnabled::OrHash,
+              Anthropic::ThinkingConfigDisabled::OrHash
+            ),
+          tool_choice:
+            T.any(
+              Anthropic::ToolChoiceAuto::OrHash,
+              Anthropic::ToolChoiceAny::OrHash,
+              Anthropic::ToolChoiceTool::OrHash,
+              Anthropic::ToolChoiceNone::OrHash
+            ),
+          tools:
+            T::Array[
+              T.any(
+                Anthropic::Tool::OrHash,
+                Anthropic::ToolBash20250124::OrHash,
+                Anthropic::ToolTextEditor20250124::OrHash
+              )
+            ],
+          request_options: Anthropic::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
       def self.new(
         # Input messages.
@@ -485,33 +489,41 @@ module Anthropic
         # See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
         tools: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       sig do
-        override
-          .returns(
-            {
-              messages: T::Array[Anthropic::Models::MessageParam],
-              model: T.any(Anthropic::Models::Model::OrSymbol, String),
-              system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
-              thinking: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled),
-              tool_choice: T.any(
-                Anthropic::Models::ToolChoiceAuto,
-                Anthropic::Models::ToolChoiceAny,
-                Anthropic::Models::ToolChoiceTool,
-                Anthropic::Models::ToolChoiceNone
+        override.returns(
+          {
+            messages: T::Array[Anthropic::MessageParam],
+            model: T.any(Anthropic::Model::OrSymbol, String),
+            system_: T.any(String, T::Array[Anthropic::TextBlockParam]),
+            thinking:
+              T.any(
+                Anthropic::ThinkingConfigEnabled,
+                Anthropic::ThinkingConfigDisabled
               ),
-              tools: T::Array[
+            tool_choice:
+              T.any(
+                Anthropic::ToolChoiceAuto,
+                Anthropic::ToolChoiceAny,
+                Anthropic::ToolChoiceTool,
+                Anthropic::ToolChoiceNone
+              ),
+            tools:
+              T::Array[
                 T.any(
-                  Anthropic::Models::Tool,
-                  Anthropic::Models::ToolBash20250124,
-                  Anthropic::Models::ToolTextEditor20250124
+                  Anthropic::Tool,
+                  Anthropic::ToolBash20250124,
+                  Anthropic::ToolTextEditor20250124
                 )
               ],
-              request_options: Anthropic::RequestOptions
-            }
-          )
+            request_options: Anthropic::RequestOptions
+          }
+        )
       end
-      def to_hash; end
+      def to_hash
+      end
 
       # System prompt.
       #
@@ -521,12 +533,20 @@ module Anthropic
       module System
         extend Anthropic::Internal::Type::Union
 
-        sig { override.returns([String, T::Array[Anthropic::Models::TextBlockParam]]) }
-        def self.variants; end
+        Variants =
+          T.type_alias { T.any(String, T::Array[Anthropic::TextBlockParam]) }
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::MessageCountTokensParams::System::Variants]
+          )
+        end
+        def self.variants
+        end
 
         TextBlockParamArray =
           T.let(
-            Anthropic::Internal::Type::ArrayOf[Anthropic::Models::TextBlockParam],
+            Anthropic::Internal::Type::ArrayOf[Anthropic::TextBlockParam],
             Anthropic::Internal::Type::Converter
           )
       end

@@ -5,13 +5,24 @@ module Anthropic
     module BetaError
       extend Anthropic::Internal::Type::Union
 
-      sig do
-        override
-          .returns(
-            [Anthropic::Models::BetaInvalidRequestError, Anthropic::Models::BetaAuthenticationError, Anthropic::Models::BetaBillingError, Anthropic::Models::BetaPermissionError, Anthropic::Models::BetaNotFoundError, Anthropic::Models::BetaRateLimitError, Anthropic::Models::BetaGatewayTimeoutError, Anthropic::Models::BetaAPIError, Anthropic::Models::BetaOverloadedError]
+      Variants =
+        T.type_alias do
+          T.any(
+            Anthropic::BetaInvalidRequestError,
+            Anthropic::BetaAuthenticationError,
+            Anthropic::BetaBillingError,
+            Anthropic::BetaPermissionError,
+            Anthropic::BetaNotFoundError,
+            Anthropic::BetaRateLimitError,
+            Anthropic::BetaGatewayTimeoutError,
+            Anthropic::BetaAPIError,
+            Anthropic::BetaOverloadedError
           )
+        end
+
+      sig { override.returns(T::Array[Anthropic::BetaError::Variants]) }
+      def self.variants
       end
-      def self.variants; end
     end
   end
 end

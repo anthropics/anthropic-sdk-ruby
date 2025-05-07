@@ -18,38 +18,37 @@ module Anthropic
       sig do
         params(
           max_tokens: Integer,
-          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Internal::AnyHash)],
-          model: T.any(Anthropic::Models::Model::OrSymbol, String),
-          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::AnyHash),
+          messages: T::Array[Anthropic::MessageParam::OrHash],
+          model: T.any(Anthropic::Model::OrSymbol, String),
+          metadata: Anthropic::Metadata::OrHash,
           stop_sequences: T::Array[String],
-          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::AnyHash)]),
+          system_: T.any(String, T::Array[Anthropic::TextBlockParam::OrHash]),
           temperature: Float,
-          thinking: T.any(
-            Anthropic::Models::ThinkingConfigEnabled,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::ThinkingConfigDisabled
-          ),
-          tool_choice: T.any(
-            Anthropic::Models::ToolChoiceAuto,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::ToolChoiceAny,
-            Anthropic::Models::ToolChoiceTool,
-            Anthropic::Models::ToolChoiceNone
-          ),
-          tools: T::Array[
+          thinking:
             T.any(
-              Anthropic::Models::Tool,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::ToolBash20250124,
-              Anthropic::Models::ToolTextEditor20250124
-            )
-          ],
+              Anthropic::ThinkingConfigEnabled::OrHash,
+              Anthropic::ThinkingConfigDisabled::OrHash
+            ),
+          tool_choice:
+            T.any(
+              Anthropic::ToolChoiceAuto::OrHash,
+              Anthropic::ToolChoiceAny::OrHash,
+              Anthropic::ToolChoiceTool::OrHash,
+              Anthropic::ToolChoiceNone::OrHash
+            ),
+          tools:
+            T::Array[
+              T.any(
+                Anthropic::Tool::OrHash,
+                Anthropic::ToolBash20250124::OrHash,
+                Anthropic::ToolTextEditor20250124::OrHash
+              )
+            ],
           top_k: Integer,
           top_p: Float,
           stream: T.noreturn,
-          request_options: Anthropic::RequestOpts
-        )
-          .returns(Anthropic::Models::Message)
+          request_options: Anthropic::RequestOptions::OrHash
+        ).returns(Anthropic::Message)
       end
       def create(
         # The maximum number of tokens to generate before stopping.
@@ -283,7 +282,9 @@ module Anthropic
         # for streaming and non-streaming use cases, respectively.
         stream: false,
         request_options: {}
-      ); end
+      )
+      end
+
       # See {Anthropic::Resources::Messages#create} for non-streaming counterpart.
       #
       # Send a structured list of input messages with text and/or image content, and the
@@ -296,49 +297,48 @@ module Anthropic
       sig do
         params(
           max_tokens: Integer,
-          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Internal::AnyHash)],
-          model: T.any(Anthropic::Models::Model::OrSymbol, String),
-          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::AnyHash),
+          messages: T::Array[Anthropic::MessageParam::OrHash],
+          model: T.any(Anthropic::Model::OrSymbol, String),
+          metadata: Anthropic::Metadata::OrHash,
           stop_sequences: T::Array[String],
-          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::AnyHash)]),
+          system_: T.any(String, T::Array[Anthropic::TextBlockParam::OrHash]),
           temperature: Float,
-          thinking: T.any(
-            Anthropic::Models::ThinkingConfigEnabled,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::ThinkingConfigDisabled
-          ),
-          tool_choice: T.any(
-            Anthropic::Models::ToolChoiceAuto,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::ToolChoiceAny,
-            Anthropic::Models::ToolChoiceTool,
-            Anthropic::Models::ToolChoiceNone
-          ),
-          tools: T::Array[
+          thinking:
             T.any(
-              Anthropic::Models::Tool,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::ToolBash20250124,
-              Anthropic::Models::ToolTextEditor20250124
-            )
-          ],
+              Anthropic::ThinkingConfigEnabled::OrHash,
+              Anthropic::ThinkingConfigDisabled::OrHash
+            ),
+          tool_choice:
+            T.any(
+              Anthropic::ToolChoiceAuto::OrHash,
+              Anthropic::ToolChoiceAny::OrHash,
+              Anthropic::ToolChoiceTool::OrHash,
+              Anthropic::ToolChoiceNone::OrHash
+            ),
+          tools:
+            T::Array[
+              T.any(
+                Anthropic::Tool::OrHash,
+                Anthropic::ToolBash20250124::OrHash,
+                Anthropic::ToolTextEditor20250124::OrHash
+              )
+            ],
           top_k: Integer,
           top_p: Float,
           stream: T.noreturn,
-          request_options: Anthropic::RequestOpts
+          request_options: Anthropic::RequestOptions::OrHash
+        ).returns(
+          Anthropic::Internal::Stream[
+            T.any(
+              Anthropic::RawMessageStartEvent,
+              Anthropic::RawMessageDeltaEvent,
+              Anthropic::RawMessageStopEvent,
+              Anthropic::RawContentBlockStartEvent,
+              Anthropic::RawContentBlockDeltaEvent,
+              Anthropic::RawContentBlockStopEvent
+            )
+          ]
         )
-          .returns(
-            Anthropic::Internal::Stream[
-              T.any(
-                Anthropic::Models::RawMessageStartEvent,
-                Anthropic::Models::RawMessageDeltaEvent,
-                Anthropic::Models::RawMessageStopEvent,
-                Anthropic::Models::RawContentBlockStartEvent,
-                Anthropic::Models::RawContentBlockDeltaEvent,
-                Anthropic::Models::RawContentBlockStopEvent
-              )
-            ]
-          )
       end
       def stream_raw(
         # The maximum number of tokens to generate before stopping.
@@ -572,7 +572,9 @@ module Anthropic
         # for streaming and non-streaming use cases, respectively.
         stream: true,
         request_options: {}
-      ); end
+      )
+      end
+
       # Count the number of tokens in a Message.
       #
       # The Token Count API can be used to count the number of tokens in a Message,
@@ -582,32 +584,31 @@ module Anthropic
       # [user guide](/en/docs/build-with-claude/token-counting)
       sig do
         params(
-          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Internal::AnyHash)],
-          model: T.any(Anthropic::Models::Model::OrSymbol, String),
-          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::AnyHash)]),
-          thinking: T.any(
-            Anthropic::Models::ThinkingConfigEnabled,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::ThinkingConfigDisabled
-          ),
-          tool_choice: T.any(
-            Anthropic::Models::ToolChoiceAuto,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::ToolChoiceAny,
-            Anthropic::Models::ToolChoiceTool,
-            Anthropic::Models::ToolChoiceNone
-          ),
-          tools: T::Array[
+          messages: T::Array[Anthropic::MessageParam::OrHash],
+          model: T.any(Anthropic::Model::OrSymbol, String),
+          system_: T.any(String, T::Array[Anthropic::TextBlockParam::OrHash]),
+          thinking:
             T.any(
-              Anthropic::Models::Tool,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::ToolBash20250124,
-              Anthropic::Models::ToolTextEditor20250124
-            )
-          ],
-          request_options: Anthropic::RequestOpts
-        )
-          .returns(Anthropic::Models::MessageTokensCount)
+              Anthropic::ThinkingConfigEnabled::OrHash,
+              Anthropic::ThinkingConfigDisabled::OrHash
+            ),
+          tool_choice:
+            T.any(
+              Anthropic::ToolChoiceAuto::OrHash,
+              Anthropic::ToolChoiceAny::OrHash,
+              Anthropic::ToolChoiceTool::OrHash,
+              Anthropic::ToolChoiceNone::OrHash
+            ),
+          tools:
+            T::Array[
+              T.any(
+                Anthropic::Tool::OrHash,
+                Anthropic::ToolBash20250124::OrHash,
+                Anthropic::ToolTextEditor20250124::OrHash
+              )
+            ],
+          request_options: Anthropic::RequestOptions::OrHash
+        ).returns(Anthropic::MessageTokensCount)
       end
       def count_tokens(
         # Input messages.
@@ -791,10 +792,13 @@ module Anthropic
         # See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
         tools: nil,
         request_options: {}
-      ); end
+      )
+      end
+
       # @api private
       sig { params(client: Anthropic::Client).returns(T.attached_class) }
-      def self.new(client:); end
+      def self.new(client:)
+      end
     end
   end
 end

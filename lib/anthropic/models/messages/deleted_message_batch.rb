@@ -21,11 +21,11 @@ module Anthropic
 
         # @!method initialize(id:, type: :message_batch_deleted)
         #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Messages::DeletedMessageBatch} for more details.
+        #   {Anthropic::Messages::DeletedMessageBatch} for more details.
         #
         #   @param id [String] ID of the Message Batch.
         #
-        #   @param type [Symbol, :message_batch_deleted] Deleted object type. ...
+        #   @param type [Symbol, :message_batch_deleted] Deleted object type.
       end
     end
   end

@@ -8,13 +8,23 @@ module Anthropic
       module BetaContentBlock
         extend Anthropic::Internal::Type::Union
 
-        sig do
-          override
-            .returns(
-              [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock]
+        Variants =
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaTextBlock,
+              Anthropic::Beta::BetaToolUseBlock,
+              Anthropic::Beta::BetaThinkingBlock,
+              Anthropic::Beta::BetaRedactedThinkingBlock
             )
+          end
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::Beta::BetaContentBlock::Variants]
+          )
         end
-        def self.variants; end
+        def self.variants
+        end
       end
     end
   end

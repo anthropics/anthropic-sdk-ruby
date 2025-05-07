@@ -8,18 +8,18 @@ module Anthropic
 
         discriminator :type
 
-        variant :text_delta, -> { Anthropic::Models::Beta::BetaTextDelta }
+        variant :text_delta, -> { Anthropic::Beta::BetaTextDelta }
 
-        variant :input_json_delta, -> { Anthropic::Models::Beta::BetaInputJSONDelta }
+        variant :input_json_delta, -> { Anthropic::Beta::BetaInputJSONDelta }
 
-        variant :citations_delta, -> { Anthropic::Models::Beta::BetaCitationsDelta }
+        variant :citations_delta, -> { Anthropic::Beta::BetaCitationsDelta }
 
-        variant :thinking_delta, -> { Anthropic::Models::Beta::BetaThinkingDelta }
+        variant :thinking_delta, -> { Anthropic::Beta::BetaThinkingDelta }
 
-        variant :signature_delta, -> { Anthropic::Models::Beta::BetaSignatureDelta }
+        variant :signature_delta, -> { Anthropic::Beta::BetaSignatureDelta }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta)]
+        #   @return [Array(Anthropic::Beta::BetaTextDelta, Anthropic::Beta::BetaInputJSONDelta, Anthropic::Beta::BetaCitationsDelta, Anthropic::Beta::BetaThinkingDelta, Anthropic::Beta::BetaSignatureDelta)]
       end
     end
 

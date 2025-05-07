@@ -6,13 +6,16 @@ module Anthropic
 
     module Beta
       class BetaRawContentBlockStartEvent < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         sig do
           returns(
             T.any(
-              Anthropic::Models::Beta::BetaTextBlock,
-              Anthropic::Models::Beta::BetaToolUseBlock,
-              Anthropic::Models::Beta::BetaThinkingBlock,
-              Anthropic::Models::Beta::BetaRedactedThinkingBlock
+              Anthropic::Beta::BetaTextBlock,
+              Anthropic::Beta::BetaToolUseBlock,
+              Anthropic::Beta::BetaThinkingBlock,
+              Anthropic::Beta::BetaRedactedThinkingBlock
             )
           )
         end
@@ -26,47 +29,60 @@ module Anthropic
 
         sig do
           params(
-            content_block: T.any(
-              Anthropic::Models::Beta::BetaTextBlock,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::Beta::BetaToolUseBlock,
-              Anthropic::Models::Beta::BetaThinkingBlock,
-              Anthropic::Models::Beta::BetaRedactedThinkingBlock
-            ),
+            content_block:
+              T.any(
+                Anthropic::Beta::BetaTextBlock::OrHash,
+                Anthropic::Beta::BetaToolUseBlock::OrHash,
+                Anthropic::Beta::BetaThinkingBlock::OrHash,
+                Anthropic::Beta::BetaRedactedThinkingBlock::OrHash
+              ),
             index: Integer,
             type: Symbol
-          )
-            .returns(T.attached_class)
+          ).returns(T.attached_class)
         end
-        def self.new(content_block:, index:, type: :content_block_start); end
+        def self.new(content_block:, index:, type: :content_block_start)
+        end
 
         sig do
-          override
-            .returns(
-              {
-                content_block: T.any(
-                  Anthropic::Models::Beta::BetaTextBlock,
-                  Anthropic::Models::Beta::BetaToolUseBlock,
-                  Anthropic::Models::Beta::BetaThinkingBlock,
-                  Anthropic::Models::Beta::BetaRedactedThinkingBlock
+          override.returns(
+            {
+              content_block:
+                T.any(
+                  Anthropic::Beta::BetaTextBlock,
+                  Anthropic::Beta::BetaToolUseBlock,
+                  Anthropic::Beta::BetaThinkingBlock,
+                  Anthropic::Beta::BetaRedactedThinkingBlock
                 ),
-                index: Integer,
-                type: Symbol
-              }
-            )
+              index: Integer,
+              type: Symbol
+            }
+          )
         end
-        def to_hash; end
+        def to_hash
+        end
 
         module ContentBlock
           extend Anthropic::Internal::Type::Union
 
-          sig do
-            override
-              .returns(
-                [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock]
+          Variants =
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::BetaTextBlock,
+                Anthropic::Beta::BetaToolUseBlock,
+                Anthropic::Beta::BetaThinkingBlock,
+                Anthropic::Beta::BetaRedactedThinkingBlock
               )
+            end
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaRawContentBlockStartEvent::ContentBlock::Variants
+              ]
+            )
           end
-          def self.variants; end
+          def self.variants
+          end
         end
       end
     end

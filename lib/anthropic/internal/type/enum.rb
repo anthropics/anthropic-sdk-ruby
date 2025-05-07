@@ -17,13 +17,13 @@ module Anthropic
       # values safely.
       #
       # @example
-      #   # `stop_reason` is a `Anthropic::Models::StopReason`
+      #   # `stop_reason` is a `Anthropic::StopReason`
       #   case stop_reason
-      #   when Anthropic::Models::StopReason::END_TURN
+      #   when Anthropic::StopReason::END_TURN
       #     # ...
-      #   when Anthropic::Models::StopReason::MAX_TOKENS
+      #   when Anthropic::StopReason::MAX_TOKENS
       #     # ...
-      #   when Anthropic::Models::StopReason::STOP_SEQUENCE
+      #   when Anthropic::StopReason::STOP_SEQUENCE
       #     # ...
       #   else
       #     puts(stop_reason)

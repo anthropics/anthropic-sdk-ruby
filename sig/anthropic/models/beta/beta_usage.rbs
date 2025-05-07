@@ -26,8 +26,6 @@ module Anthropic
           input_tokens: Integer,
           output_tokens: Integer
         ) -> void
-
-        def to_hash: -> Anthropic::Models::Beta::beta_usage
       end
     end
   end

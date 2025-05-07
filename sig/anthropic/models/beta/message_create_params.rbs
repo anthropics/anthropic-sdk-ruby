@@ -4,9 +4,9 @@ module Anthropic
       type message_create_params =
         {
           max_tokens: Integer,
-          messages: ::Array[Anthropic::Models::Beta::BetaMessageParam],
+          messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
-          metadata: Anthropic::Models::Beta::BetaMetadata,
+          metadata: Anthropic::Beta::BetaMetadata,
           stop_sequences: ::Array[String],
           system_: Anthropic::Models::Beta::MessageCreateParams::system_,
           temperature: Float,
@@ -25,15 +25,15 @@ module Anthropic
 
         attr_accessor max_tokens: Integer
 
-        attr_accessor messages: ::Array[Anthropic::Models::Beta::BetaMessageParam]
+        attr_accessor messages: ::Array[Anthropic::Beta::BetaMessageParam]
 
         attr_accessor model: Anthropic::Models::model
 
-        attr_reader metadata: Anthropic::Models::Beta::BetaMetadata?
+        attr_reader metadata: Anthropic::Beta::BetaMetadata?
 
         def metadata=: (
-          Anthropic::Models::Beta::BetaMetadata
-        ) -> Anthropic::Models::Beta::BetaMetadata
+          Anthropic::Beta::BetaMetadata
+        ) -> Anthropic::Beta::BetaMetadata
 
         attr_reader stop_sequences: ::Array[String]?
 
@@ -83,9 +83,9 @@ module Anthropic
 
         def initialize: (
           max_tokens: Integer,
-          messages: ::Array[Anthropic::Models::Beta::BetaMessageParam],
+          messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
-          ?metadata: Anthropic::Models::Beta::BetaMetadata,
+          ?metadata: Anthropic::Beta::BetaMetadata,
           ?stop_sequences: ::Array[String],
           ?system_: Anthropic::Models::Beta::MessageCreateParams::system_,
           ?temperature: Float,
@@ -98,15 +98,12 @@ module Anthropic
           ?request_options: Anthropic::request_opts
         ) -> void
 
-        def to_hash: -> Anthropic::Models::Beta::message_create_params
-
-        type system_ =
-          String | ::Array[Anthropic::Models::Beta::BetaTextBlockParam]
+        type system_ = String | ::Array[Anthropic::Beta::BetaTextBlockParam]
 
         module System
           extend Anthropic::Internal::Type::Union
 
-          def self?.variants: -> [String, ::Array[Anthropic::Models::Beta::BetaTextBlockParam]]
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::MessageCreateParams::system_]
 
           BetaTextBlockParamArray: Anthropic::Internal::Type::Converter
         end

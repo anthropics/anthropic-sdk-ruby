@@ -1,14 +1,14 @@
 module Anthropic
   module Models
     type text_citation_param =
-      Anthropic::Models::CitationCharLocationParam
-      | Anthropic::Models::CitationPageLocationParam
-      | Anthropic::Models::CitationContentBlockLocationParam
+      Anthropic::CitationCharLocationParam
+      | Anthropic::CitationPageLocationParam
+      | Anthropic::CitationContentBlockLocationParam
 
     module TextCitationParam
       extend Anthropic::Internal::Type::Union
 
-      def self?.variants: -> [Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam]
+      def self?.variants: -> ::Array[Anthropic::Models::text_citation_param]
     end
   end
 end

@@ -19,8 +19,6 @@ module Anthropic
         text: String,
         ?type: :text
       ) -> void
-
-      def to_hash: -> Anthropic::Models::text_block
     end
   end
 end

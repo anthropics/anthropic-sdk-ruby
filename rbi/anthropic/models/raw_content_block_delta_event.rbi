@@ -3,14 +3,16 @@
 module Anthropic
   module Models
     class RawContentBlockDeltaEvent < Anthropic::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
       sig do
         returns(
           T.any(
-            Anthropic::Models::TextDelta,
-            Anthropic::Models::InputJSONDelta,
-            Anthropic::Models::CitationsDelta,
-            Anthropic::Models::ThinkingDelta,
-            Anthropic::Models::SignatureDelta
+            Anthropic::TextDelta,
+            Anthropic::InputJSONDelta,
+            Anthropic::CitationsDelta,
+            Anthropic::ThinkingDelta,
+            Anthropic::SignatureDelta
           )
         )
       end
@@ -24,38 +26,39 @@ module Anthropic
 
       sig do
         params(
-          delta: T.any(
-            Anthropic::Models::TextDelta,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::InputJSONDelta,
-            Anthropic::Models::CitationsDelta,
-            Anthropic::Models::ThinkingDelta,
-            Anthropic::Models::SignatureDelta
-          ),
+          delta:
+            T.any(
+              Anthropic::TextDelta::OrHash,
+              Anthropic::InputJSONDelta::OrHash,
+              Anthropic::CitationsDelta::OrHash,
+              Anthropic::ThinkingDelta::OrHash,
+              Anthropic::SignatureDelta::OrHash
+            ),
           index: Integer,
           type: Symbol
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
-      def self.new(delta:, index:, type: :content_block_delta); end
+      def self.new(delta:, index:, type: :content_block_delta)
+      end
 
       sig do
-        override
-          .returns(
-            {
-              delta: T.any(
-                Anthropic::Models::TextDelta,
-                Anthropic::Models::InputJSONDelta,
-                Anthropic::Models::CitationsDelta,
-                Anthropic::Models::ThinkingDelta,
-                Anthropic::Models::SignatureDelta
+        override.returns(
+          {
+            delta:
+              T.any(
+                Anthropic::TextDelta,
+                Anthropic::InputJSONDelta,
+                Anthropic::CitationsDelta,
+                Anthropic::ThinkingDelta,
+                Anthropic::SignatureDelta
               ),
-              index: Integer,
-              type: Symbol
-            }
-          )
+            index: Integer,
+            type: Symbol
+          }
+        )
       end
-      def to_hash; end
+      def to_hash
+      end
     end
   end
 end

@@ -4,13 +4,13 @@ module Anthropic
 
     module Beta
       type beta_content_block_source_content =
-        Anthropic::Models::Beta::BetaTextBlockParam
-        | Anthropic::Models::Beta::BetaImageBlockParam
+        Anthropic::Beta::BetaTextBlockParam
+        | Anthropic::Beta::BetaImageBlockParam
 
       module BetaContentBlockSourceContent
         extend Anthropic::Internal::Type::Union
 
-        def self?.variants: -> [Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam]
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_content_block_source_content]
       end
     end
   end

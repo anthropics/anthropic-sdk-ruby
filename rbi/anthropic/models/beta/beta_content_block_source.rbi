@@ -6,11 +6,19 @@ module Anthropic
 
     module Beta
       class BetaContentBlockSource < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         sig do
           returns(
             T.any(
               String,
-              T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
+              T::Array[
+                T.any(
+                  Anthropic::Beta::BetaTextBlockParam,
+                  Anthropic::Beta::BetaImageBlockParam
+                )
+              ]
             )
           )
         end
@@ -21,50 +29,73 @@ module Anthropic
 
         sig do
           params(
-            content: T.any(
-              String,
-              T::Array[
-                T.any(
-                  Anthropic::Models::Beta::BetaTextBlockParam,
-                  Anthropic::Internal::AnyHash,
-                  Anthropic::Models::Beta::BetaImageBlockParam
-                )
-              ]
-            ),
+            content:
+              T.any(
+                String,
+                T::Array[
+                  T.any(
+                    Anthropic::Beta::BetaTextBlockParam::OrHash,
+                    Anthropic::Beta::BetaImageBlockParam::OrHash
+                  )
+                ]
+              ),
             type: Symbol
-          )
-            .returns(T.attached_class)
+          ).returns(T.attached_class)
         end
-        def self.new(content:, type: :content); end
+        def self.new(content:, type: :content)
+        end
 
         sig do
-          override
-            .returns(
-              {
-                content: T.any(
+          override.returns(
+            {
+              content:
+                T.any(
                   String,
-                  T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
+                  T::Array[
+                    T.any(
+                      Anthropic::Beta::BetaTextBlockParam,
+                      Anthropic::Beta::BetaImageBlockParam
+                    )
+                  ]
                 ),
-                type: Symbol
-              }
-            )
+              type: Symbol
+            }
+          )
         end
-        def to_hash; end
+        def to_hash
+        end
 
         module Content
           extend Anthropic::Internal::Type::Union
 
-          sig do
-            override
-              .returns(
-                [String, T::Array[T.any(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]]
+          Variants =
+            T.type_alias do
+              T.any(
+                String,
+                T::Array[
+                  T.any(
+                    Anthropic::Beta::BetaTextBlockParam,
+                    Anthropic::Beta::BetaImageBlockParam
+                  )
+                ]
               )
+            end
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaContentBlockSource::Content::Variants
+              ]
+            )
           end
-          def self.variants; end
+          def self.variants
+          end
 
           BetaContentBlockSourceContentArray =
             T.let(
-              Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlockSourceContent],
+              Anthropic::Internal::Type::ArrayOf[
+                union: Anthropic::Beta::BetaContentBlockSourceContent
+              ],
               Anthropic::Internal::Type::Converter
             )
         end

@@ -45,7 +45,8 @@ module Anthropic
 
   CitationContentBlockLocation = Anthropic::Models::CitationContentBlockLocation
 
-  CitationContentBlockLocationParam = Anthropic::Models::CitationContentBlockLocationParam
+  CitationContentBlockLocationParam =
+    Anthropic::Models::CitationContentBlockLocationParam
 
   CitationPageLocation = Anthropic::Models::CitationPageLocation
 

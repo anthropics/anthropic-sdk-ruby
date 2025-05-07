@@ -9,8 +9,6 @@ module Anthropic
         include Anthropic::Internal::Type::RequestParameters
 
         def initialize: (?request_options: Anthropic::request_opts) -> void
-
-        def to_hash: -> Anthropic::Models::Beta::model_retrieve_params
       end
     end
   end

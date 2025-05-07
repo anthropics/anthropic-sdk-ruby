@@ -8,8 +8,6 @@ module Anthropic
       attr_accessor type: :not_found_error
 
       def initialize: (message: String, ?type: :not_found_error) -> void
-
-      def to_hash: -> Anthropic::Models::not_found_error
     end
   end
 end

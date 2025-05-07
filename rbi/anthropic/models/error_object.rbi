@@ -5,13 +5,24 @@ module Anthropic
     module ErrorObject
       extend Anthropic::Internal::Type::Union
 
-      sig do
-        override
-          .returns(
-            [Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError, Anthropic::Models::RateLimitError, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError]
+      Variants =
+        T.type_alias do
+          T.any(
+            Anthropic::InvalidRequestError,
+            Anthropic::AuthenticationError,
+            Anthropic::BillingError,
+            Anthropic::PermissionError,
+            Anthropic::NotFoundError,
+            Anthropic::RateLimitError,
+            Anthropic::GatewayTimeoutError,
+            Anthropic::APIErrorObject,
+            Anthropic::OverloadedError
           )
+        end
+
+      sig { override.returns(T::Array[Anthropic::ErrorObject::Variants]) }
+      def self.variants
       end
-      def self.variants; end
     end
   end
 end

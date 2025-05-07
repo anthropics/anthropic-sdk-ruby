@@ -5,13 +5,19 @@ module Anthropic
     module ContentBlock
       extend Anthropic::Internal::Type::Union
 
-      sig do
-        override
-          .returns(
-            [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock]
+      Variants =
+        T.type_alias do
+          T.any(
+            Anthropic::TextBlock,
+            Anthropic::ToolUseBlock,
+            Anthropic::ThinkingBlock,
+            Anthropic::RedactedThinkingBlock
           )
+        end
+
+      sig { override.returns(T::Array[Anthropic::ContentBlock::Variants]) }
+      def self.variants
       end
-      def self.variants; end
     end
   end
 end

@@ -15,14 +15,14 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Models::Beta::BetaModelInfo]
+        # @return [Anthropic::Beta::BetaModelInfo]
         #
         # @see Anthropic::Models::Beta::ModelRetrieveParams
         def retrieve(model_id, params = {})
           @client.request(
             method: :get,
             path: ["v1/models/%1$s?beta=true", model_id],
-            model: Anthropic::Models::Beta::BetaModelInfo,
+            model: Anthropic::Beta::BetaModelInfo,
             options: params[:request_options]
           )
         end
@@ -38,26 +38,24 @@ module Anthropic
         # @overload list(after_id: nil, before_id: nil, limit: nil, request_options: {})
         #
         # @param after_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
-        # ...
         #
         # @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
-        # ...
         #
-        # @param limit [Integer] Number of items to return per page. ...
+        # @param limit [Integer] Number of items to return per page.
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Internal::Page<Anthropic::Models::Beta::BetaModelInfo>]
+        # @return [Anthropic::Internal::Page<Anthropic::Beta::BetaModelInfo>]
         #
         # @see Anthropic::Models::Beta::ModelListParams
         def list(params = {})
-          parsed, options = Anthropic::Models::Beta::ModelListParams.dump_request(params)
+          parsed, options = Anthropic::Beta::ModelListParams.dump_request(params)
           @client.request(
             method: :get,
             path: "v1/models?beta=true",
             query: parsed,
             page: Anthropic::Internal::Page,
-            model: Anthropic::Models::Beta::BetaModelInfo,
+            model: Anthropic::Beta::BetaModelInfo,
             options: options
           )
         end

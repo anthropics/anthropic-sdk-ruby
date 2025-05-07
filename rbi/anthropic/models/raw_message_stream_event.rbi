@@ -5,13 +5,23 @@ module Anthropic
     module RawMessageStreamEvent
       extend Anthropic::Internal::Type::Union
 
-      sig do
-        override
-          .returns(
-            [Anthropic::Models::RawMessageStartEvent, Anthropic::Models::RawMessageDeltaEvent, Anthropic::Models::RawMessageStopEvent, Anthropic::Models::RawContentBlockStartEvent, Anthropic::Models::RawContentBlockDeltaEvent, Anthropic::Models::RawContentBlockStopEvent]
+      Variants =
+        T.type_alias do
+          T.any(
+            Anthropic::RawMessageStartEvent,
+            Anthropic::RawMessageDeltaEvent,
+            Anthropic::RawMessageStopEvent,
+            Anthropic::RawContentBlockStartEvent,
+            Anthropic::RawContentBlockDeltaEvent,
+            Anthropic::RawContentBlockStopEvent
           )
+        end
+
+      sig do
+        override.returns(T::Array[Anthropic::RawMessageStreamEvent::Variants])
       end
-      def self.variants; end
+      def self.variants
+      end
     end
   end
 end

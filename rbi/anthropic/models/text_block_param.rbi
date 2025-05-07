@@ -3,20 +3,21 @@
 module Anthropic
   module Models
     class TextBlockParam < Anthropic::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
       sig { returns(String) }
       attr_accessor :text
 
       sig { returns(Symbol) }
       attr_accessor :type
 
-      sig { returns(T.nilable(Anthropic::Models::CacheControlEphemeral)) }
+      sig { returns(T.nilable(Anthropic::CacheControlEphemeral)) }
       attr_reader :cache_control
 
       sig do
         params(
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash))
-        )
-          .void
+          cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash)
+        ).void
       end
       attr_writer :cache_control
 
@@ -25,9 +26,9 @@ module Anthropic
           T.nilable(
             T::Array[
               T.any(
-                Anthropic::Models::CitationCharLocationParam,
-                Anthropic::Models::CitationPageLocationParam,
-                Anthropic::Models::CitationContentBlockLocationParam
+                Anthropic::CitationCharLocationParam,
+                Anthropic::CitationPageLocationParam,
+                Anthropic::CitationContentBlockLocationParam
               )
             ]
           )
@@ -38,43 +39,44 @@ module Anthropic
       sig do
         params(
           text: String,
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash)),
-          citations: T.nilable(
-            T::Array[
-              T.any(
-                Anthropic::Models::CitationCharLocationParam,
-                Anthropic::Internal::AnyHash,
-                Anthropic::Models::CitationPageLocationParam,
-                Anthropic::Models::CitationContentBlockLocationParam
-              )
-            ]
-          ),
+          cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
+          citations:
+            T.nilable(
+              T::Array[
+                T.any(
+                  Anthropic::CitationCharLocationParam::OrHash,
+                  Anthropic::CitationPageLocationParam::OrHash,
+                  Anthropic::CitationContentBlockLocationParam::OrHash
+                )
+              ]
+            ),
           type: Symbol
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
-      def self.new(text:, cache_control: nil, citations: nil, type: :text); end
+      def self.new(text:, cache_control: nil, citations: nil, type: :text)
+      end
 
       sig do
-        override
-          .returns(
-            {
-              text: String,
-              type: Symbol,
-              cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
-              citations: T.nilable(
+        override.returns(
+          {
+            text: String,
+            type: Symbol,
+            cache_control: T.nilable(Anthropic::CacheControlEphemeral),
+            citations:
+              T.nilable(
                 T::Array[
                   T.any(
-                    Anthropic::Models::CitationCharLocationParam,
-                    Anthropic::Models::CitationPageLocationParam,
-                    Anthropic::Models::CitationContentBlockLocationParam
+                    Anthropic::CitationCharLocationParam,
+                    Anthropic::CitationPageLocationParam,
+                    Anthropic::CitationContentBlockLocationParam
                   )
                 ]
               )
-            }
-          )
+          }
+        )
       end
-      def to_hash; end
+      def to_hash
+      end
     end
   end
 end

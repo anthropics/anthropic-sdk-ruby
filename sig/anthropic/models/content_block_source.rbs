@@ -1,22 +1,17 @@
 module Anthropic
   module Models
     type content_block_source =
-      {
-        content: Anthropic::Models::ContentBlockSource::content,
-        type: :content
-      }
+      { content: Anthropic::ContentBlockSource::content, type: :content }
 
     class ContentBlockSource < Anthropic::Internal::Type::BaseModel
-      attr_accessor content: Anthropic::Models::ContentBlockSource::content
+      attr_accessor content: Anthropic::ContentBlockSource::content
 
       attr_accessor type: :content
 
       def initialize: (
-        content: Anthropic::Models::ContentBlockSource::content,
+        content: Anthropic::ContentBlockSource::content,
         ?type: :content
       ) -> void
-
-      def to_hash: -> Anthropic::Models::content_block_source
 
       type content =
         String | ::Array[Anthropic::Models::content_block_source_content]
@@ -24,7 +19,7 @@ module Anthropic
       module Content
         extend Anthropic::Internal::Type::Union
 
-        def self?.variants: -> [String, ::Array[Anthropic::Models::content_block_source_content]]
+        def self?.variants: -> ::Array[Anthropic::ContentBlockSource::content]
 
         ContentBlockSourceContentArray: Anthropic::Internal::Type::Converter
       end

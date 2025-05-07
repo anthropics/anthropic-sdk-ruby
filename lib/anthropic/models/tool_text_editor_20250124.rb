@@ -18,16 +18,16 @@ module Anthropic
 
       # @!attribute cache_control
       #
-      #   @return [Anthropic::Models::CacheControlEphemeral, nil]
-      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
+      #   @return [Anthropic::CacheControlEphemeral, nil]
+      optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
       # @!method initialize(cache_control: nil, name: :str_replace_editor, type: :text_editor_20250124)
       #   Some parameter documentations has been truncated, see
-      #   {Anthropic::Models::ToolTextEditor20250124} for more details.
+      #   {Anthropic::ToolTextEditor20250124} for more details.
       #
-      #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
+      #   @param cache_control [Anthropic::CacheControlEphemeral, nil]
       #
-      #   @param name [Symbol, :str_replace_editor] Name of the tool. ...
+      #   @param name [Symbol, :str_replace_editor] Name of the tool.
       #
       #   @param type [Symbol, :text_editor_20250124]
     end

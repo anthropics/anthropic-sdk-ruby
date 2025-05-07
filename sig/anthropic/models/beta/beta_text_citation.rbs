@@ -4,14 +4,14 @@ module Anthropic
 
     module Beta
       type beta_text_citation =
-        Anthropic::Models::Beta::BetaCitationCharLocation
-        | Anthropic::Models::Beta::BetaCitationPageLocation
-        | Anthropic::Models::Beta::BetaCitationContentBlockLocation
+        Anthropic::Beta::BetaCitationCharLocation
+        | Anthropic::Beta::BetaCitationPageLocation
+        | Anthropic::Beta::BetaCitationContentBlockLocation
 
       module BetaTextCitation
         extend Anthropic::Internal::Type::Union
 
-        def self?.variants: -> [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation]
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_text_citation]
       end
     end
   end

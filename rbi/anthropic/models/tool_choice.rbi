@@ -7,13 +7,19 @@ module Anthropic
     module ToolChoice
       extend Anthropic::Internal::Type::Union
 
-      sig do
-        override
-          .returns(
-            [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
+      Variants =
+        T.type_alias do
+          T.any(
+            Anthropic::ToolChoiceAuto,
+            Anthropic::ToolChoiceAny,
+            Anthropic::ToolChoiceTool,
+            Anthropic::ToolChoiceNone
           )
+        end
+
+      sig { override.returns(T::Array[Anthropic::ToolChoice::Variants]) }
+      def self.variants
       end
-      def self.variants; end
     end
   end
 end

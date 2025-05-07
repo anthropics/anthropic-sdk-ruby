@@ -1,17 +1,18 @@
 # typed: strong
 
 module Anthropic
-  RequestOpts = T.type_alias { T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash) }
-
   # Specify HTTP behaviour to use for a specific request. These options supplement
   # or override those provided at the client level.
   #
   # When making a request, you can pass an actual {RequestOptions} instance, or
   # simply pass a Hash with symbol keys matching the attributes on this class.
   class RequestOptions < Anthropic::Internal::Type::BaseModel
+    OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
     # @api private
-    sig { params(opts: T.any(T.self_type, T::Hash[Symbol, T.anything])).void }
-    def self.validate!(opts); end
+    sig { params(opts: Anthropic::RequestOptions::OrHash).void }
+    def self.validate!(opts)
+    end
 
     # Idempotency key to send with request and all associated retries. Will only be
     # sent for write requests.
@@ -20,7 +21,11 @@ module Anthropic
 
     # Extra query params to send with the request. These are `.merge`’d into any
     # `query` given at the client level.
-    sig { returns(T.nilable(T::Hash[String, T.nilable(T.any(T::Array[String], String))])) }
+    sig do
+      returns(
+        T.nilable(T::Hash[String, T.nilable(T.any(T::Array[String], String))])
+      )
+    end
     attr_accessor :extra_query
 
     # Extra headers to send with the request. These are `.merged`’d into any
@@ -42,7 +47,10 @@ module Anthropic
     attr_accessor :timeout
 
     # Returns a new instance of RequestOptions.
-    sig { params(values: Anthropic::Internal::AnyHash).returns(T.attached_class) }
-    def self.new(values = {}); end
+    sig do
+      params(values: Anthropic::Internal::AnyHash).returns(T.attached_class)
+    end
+    def self.new(values = {})
+    end
   end
 end

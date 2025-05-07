@@ -7,6 +7,9 @@ module Anthropic
         extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         # ID of the object to use as a cursor for pagination. When provided, returns the
         # page of results immediately after this object.
         sig { returns(T.nilable(String)) }
@@ -37,9 +40,8 @@ module Anthropic
             after_id: String,
             before_id: String,
             limit: Integer,
-            request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash)
-          )
-            .returns(T.attached_class)
+            request_options: Anthropic::RequestOptions::OrHash
+          ).returns(T.attached_class)
         end
         def self.new(
           # ID of the object to use as a cursor for pagination. When provided, returns the
@@ -53,17 +55,21 @@ module Anthropic
           # Defaults to `20`. Ranges from `1` to `1000`.
           limit: nil,
           request_options: {}
-        ); end
-        sig do
-          override
-            .returns({
-                       after_id: String,
-                       before_id: String,
-                       limit: Integer,
-                       request_options: Anthropic::RequestOptions
-                     })
+        )
         end
-        def to_hash; end
+
+        sig do
+          override.returns(
+            {
+              after_id: String,
+              before_id: String,
+              limit: Integer,
+              request_options: Anthropic::RequestOptions
+            }
+          )
+        end
+        def to_hash
+        end
       end
     end
   end

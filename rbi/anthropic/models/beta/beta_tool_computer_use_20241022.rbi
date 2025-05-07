@@ -6,6 +6,9 @@ module Anthropic
 
     module Beta
       class BetaToolComputerUse20241022 < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         # The height of the display in pixels.
         sig { returns(Integer) }
         attr_accessor :display_height_px
@@ -23,14 +26,14 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
-        sig { returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)) }
+        sig { returns(T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)) }
         attr_reader :cache_control
 
         sig do
           params(
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash))
-          )
-            .void
+            cache_control:
+              T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash)
+          ).void
         end
         attr_writer :cache_control
 
@@ -42,12 +45,12 @@ module Anthropic
           params(
             display_height_px: Integer,
             display_width_px: Integer,
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash)),
+            cache_control:
+              T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             display_number: T.nilable(Integer),
             name: Symbol,
             type: Symbol
-          )
-            .returns(T.attached_class)
+          ).returns(T.attached_class)
         end
         def self.new(
           # The height of the display in pixels.
@@ -62,21 +65,24 @@ module Anthropic
           # This is how the tool will be called by the model and in tool_use blocks.
           name: :computer,
           type: :computer_20241022
-        ); end
-        sig do
-          override
-            .returns(
-              {
-                display_height_px: Integer,
-                display_width_px: Integer,
-                name: Symbol,
-                type: Symbol,
-                cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
-                display_number: T.nilable(Integer)
-              }
-            )
+        )
         end
-        def to_hash; end
+
+        sig do
+          override.returns(
+            {
+              display_height_px: Integer,
+              display_width_px: Integer,
+              name: Symbol,
+              type: Symbol,
+              cache_control:
+                T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
+              display_number: T.nilable(Integer)
+            }
+          )
+        end
+        def to_hash
+        end
       end
     end
   end

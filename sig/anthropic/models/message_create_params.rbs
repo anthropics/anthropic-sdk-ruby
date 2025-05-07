@@ -3,9 +3,9 @@ module Anthropic
     type message_create_params =
       {
         max_tokens: Integer,
-        messages: ::Array[Anthropic::Models::MessageParam],
+        messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
-        metadata: Anthropic::Models::Metadata,
+        metadata: Anthropic::Metadata,
         stop_sequences: ::Array[String],
         system_: Anthropic::Models::MessageCreateParams::system_,
         temperature: Float,
@@ -23,15 +23,13 @@ module Anthropic
 
       attr_accessor max_tokens: Integer
 
-      attr_accessor messages: ::Array[Anthropic::Models::MessageParam]
+      attr_accessor messages: ::Array[Anthropic::MessageParam]
 
       attr_accessor model: Anthropic::Models::model
 
-      attr_reader metadata: Anthropic::Models::Metadata?
+      attr_reader metadata: Anthropic::Metadata?
 
-      def metadata=: (
-        Anthropic::Models::Metadata
-      ) -> Anthropic::Models::Metadata
+      def metadata=: (Anthropic::Metadata) -> Anthropic::Metadata
 
       attr_reader stop_sequences: ::Array[String]?
 
@@ -75,9 +73,9 @@ module Anthropic
 
       def initialize: (
         max_tokens: Integer,
-        messages: ::Array[Anthropic::Models::MessageParam],
+        messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
-        ?metadata: Anthropic::Models::Metadata,
+        ?metadata: Anthropic::Metadata,
         ?stop_sequences: ::Array[String],
         ?system_: Anthropic::Models::MessageCreateParams::system_,
         ?temperature: Float,
@@ -89,14 +87,12 @@ module Anthropic
         ?request_options: Anthropic::request_opts
       ) -> void
 
-      def to_hash: -> Anthropic::Models::message_create_params
-
-      type system_ = String | ::Array[Anthropic::Models::TextBlockParam]
+      type system_ = String | ::Array[Anthropic::TextBlockParam]
 
       module System
         extend Anthropic::Internal::Type::Union
 
-        def self?.variants: -> [String, ::Array[Anthropic::Models::TextBlockParam]]
+        def self?.variants: -> ::Array[Anthropic::Models::MessageCreateParams::system_]
 
         TextBlockParamArray: Anthropic::Internal::Type::Converter
       end

@@ -6,19 +6,22 @@ module Anthropic
 
     module Beta
       class BetaMessageParam < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         sig do
           returns(
             T.any(
               String,
               T::Array[
                 T.any(
-                  Anthropic::Models::Beta::BetaTextBlockParam,
-                  Anthropic::Models::Beta::BetaImageBlockParam,
-                  Anthropic::Models::Beta::BetaToolUseBlockParam,
-                  Anthropic::Models::Beta::BetaToolResultBlockParam,
-                  Anthropic::Models::Beta::BetaBase64PDFBlock,
-                  Anthropic::Models::Beta::BetaThinkingBlockParam,
-                  Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
+                  Anthropic::Beta::BetaTextBlockParam,
+                  Anthropic::Beta::BetaImageBlockParam,
+                  Anthropic::Beta::BetaToolUseBlockParam,
+                  Anthropic::Beta::BetaToolResultBlockParam,
+                  Anthropic::Beta::BetaBase64PDFBlock,
+                  Anthropic::Beta::BetaThinkingBlockParam,
+                  Anthropic::Beta::BetaRedactedThinkingBlockParam
                 )
               ]
             )
@@ -26,83 +29,91 @@ module Anthropic
         end
         attr_accessor :content
 
-        sig { returns(Anthropic::Models::Beta::BetaMessageParam::Role::OrSymbol) }
+        sig { returns(Anthropic::Beta::BetaMessageParam::Role::OrSymbol) }
         attr_accessor :role
 
         sig do
           params(
-            content: T.any(
-              String,
-              T::Array[
-                T.any(
-                  Anthropic::Models::Beta::BetaTextBlockParam,
-                  Anthropic::Internal::AnyHash,
-                  Anthropic::Models::Beta::BetaImageBlockParam,
-                  Anthropic::Models::Beta::BetaToolUseBlockParam,
-                  Anthropic::Models::Beta::BetaToolResultBlockParam,
-                  Anthropic::Models::Beta::BetaBase64PDFBlock,
-                  Anthropic::Models::Beta::BetaThinkingBlockParam,
-                  Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
-                )
-              ]
-            ),
-            role: Anthropic::Models::Beta::BetaMessageParam::Role::OrSymbol
-          )
-            .returns(T.attached_class)
+            content:
+              T.any(
+                String,
+                T::Array[
+                  T.any(
+                    Anthropic::Beta::BetaTextBlockParam::OrHash,
+                    Anthropic::Beta::BetaImageBlockParam::OrHash,
+                    Anthropic::Beta::BetaToolUseBlockParam::OrHash,
+                    Anthropic::Beta::BetaToolResultBlockParam::OrHash,
+                    Anthropic::Beta::BetaBase64PDFBlock::OrHash,
+                    Anthropic::Beta::BetaThinkingBlockParam::OrHash,
+                    Anthropic::Beta::BetaRedactedThinkingBlockParam::OrHash
+                  )
+                ]
+              ),
+            role: Anthropic::Beta::BetaMessageParam::Role::OrSymbol
+          ).returns(T.attached_class)
         end
-        def self.new(content:, role:); end
+        def self.new(content:, role:)
+        end
 
         sig do
-          override
-            .returns(
-              {
-                content: T.any(
+          override.returns(
+            {
+              content:
+                T.any(
                   String,
                   T::Array[
                     T.any(
-                      Anthropic::Models::Beta::BetaTextBlockParam,
-                      Anthropic::Models::Beta::BetaImageBlockParam,
-                      Anthropic::Models::Beta::BetaToolUseBlockParam,
-                      Anthropic::Models::Beta::BetaToolResultBlockParam,
-                      Anthropic::Models::Beta::BetaBase64PDFBlock,
-                      Anthropic::Models::Beta::BetaThinkingBlockParam,
-                      Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
+                      Anthropic::Beta::BetaTextBlockParam,
+                      Anthropic::Beta::BetaImageBlockParam,
+                      Anthropic::Beta::BetaToolUseBlockParam,
+                      Anthropic::Beta::BetaToolResultBlockParam,
+                      Anthropic::Beta::BetaBase64PDFBlock,
+                      Anthropic::Beta::BetaThinkingBlockParam,
+                      Anthropic::Beta::BetaRedactedThinkingBlockParam
                     )
                   ]
                 ),
-                role: Anthropic::Models::Beta::BetaMessageParam::Role::OrSymbol
-              }
-            )
+              role: Anthropic::Beta::BetaMessageParam::Role::OrSymbol
+            }
+          )
         end
-        def to_hash; end
+        def to_hash
+        end
 
         module Content
           extend Anthropic::Internal::Type::Union
 
-          sig do
-            override
-              .returns(
-                [
-                  String,
-                  T::Array[
-                                    T.any(
-                                      Anthropic::Models::Beta::BetaTextBlockParam,
-                                      Anthropic::Models::Beta::BetaImageBlockParam,
-                                      Anthropic::Models::Beta::BetaToolUseBlockParam,
-                                      Anthropic::Models::Beta::BetaToolResultBlockParam,
-                                      Anthropic::Models::Beta::BetaBase64PDFBlock,
-                                      Anthropic::Models::Beta::BetaThinkingBlockParam,
-                                      Anthropic::Models::Beta::BetaRedactedThinkingBlockParam
-                                    )
-                                  ]
+          Variants =
+            T.type_alias do
+              T.any(
+                String,
+                T::Array[
+                  T.any(
+                    Anthropic::Beta::BetaTextBlockParam,
+                    Anthropic::Beta::BetaImageBlockParam,
+                    Anthropic::Beta::BetaToolUseBlockParam,
+                    Anthropic::Beta::BetaToolResultBlockParam,
+                    Anthropic::Beta::BetaBase64PDFBlock,
+                    Anthropic::Beta::BetaThinkingBlockParam,
+                    Anthropic::Beta::BetaRedactedThinkingBlockParam
+                  )
                 ]
               )
+            end
+
+          sig do
+            override.returns(
+              T::Array[Anthropic::Beta::BetaMessageParam::Content::Variants]
+            )
           end
-          def self.variants; end
+          def self.variants
+          end
 
           BetaContentBlockParamArray =
             T.let(
-              Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::Beta::BetaContentBlockParam],
+              Anthropic::Internal::Type::ArrayOf[
+                union: Anthropic::Beta::BetaContentBlockParam
+              ],
               Anthropic::Internal::Type::Converter
             )
         end
@@ -110,14 +121,27 @@ module Anthropic
         module Role
           extend Anthropic::Internal::Type::Enum
 
-          TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Beta::BetaMessageParam::Role) }
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::Beta::BetaMessageParam::Role)
+            end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-          USER = T.let(:user, Anthropic::Models::Beta::BetaMessageParam::Role::TaggedSymbol)
-          ASSISTANT = T.let(:assistant, Anthropic::Models::Beta::BetaMessageParam::Role::TaggedSymbol)
+          USER =
+            T.let(:user, Anthropic::Beta::BetaMessageParam::Role::TaggedSymbol)
+          ASSISTANT =
+            T.let(
+              :assistant,
+              Anthropic::Beta::BetaMessageParam::Role::TaggedSymbol
+            )
 
-          sig { override.returns(T::Array[Anthropic::Models::Beta::BetaMessageParam::Role::TaggedSymbol]) }
-          def self.values; end
+          sig do
+            override.returns(
+              T::Array[Anthropic::Beta::BetaMessageParam::Role::TaggedSymbol]
+            )
+          end
+          def self.values
+          end
         end
       end
     end

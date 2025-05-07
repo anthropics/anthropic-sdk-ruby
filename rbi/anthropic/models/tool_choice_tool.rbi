@@ -3,6 +3,8 @@
 module Anthropic
   module Models
     class ToolChoiceTool < Anthropic::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
       # The name of the tool to use.
       sig { returns(String) }
       attr_accessor :name
@@ -22,7 +24,11 @@ module Anthropic
 
       # The model will use the specified tool with `tool_choice.name`.
       sig do
-        params(name: String, disable_parallel_tool_use: T::Boolean, type: Symbol).returns(T.attached_class)
+        params(
+          name: String,
+          disable_parallel_tool_use: T::Boolean,
+          type: Symbol
+        ).returns(T.attached_class)
       end
       def self.new(
         # The name of the tool to use.
@@ -33,9 +39,16 @@ module Anthropic
         # use.
         disable_parallel_tool_use: nil,
         type: :tool
-      ); end
-      sig { override.returns({name: String, type: Symbol, disable_parallel_tool_use: T::Boolean}) }
-      def to_hash; end
+      )
+      end
+
+      sig do
+        override.returns(
+          { name: String, type: Symbol, disable_parallel_tool_use: T::Boolean }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

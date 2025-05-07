@@ -8,31 +8,31 @@ module Anthropic
     module Model
       extend Anthropic::Internal::Type::Union
 
-      variant const: -> { Anthropic::Models::Model::CLAUDE_3_7_SONNET_LATEST }
+      variant const: -> { Anthropic::Model::CLAUDE_3_7_SONNET_LATEST }
 
-      variant const: -> { Anthropic::Models::Model::CLAUDE_3_7_SONNET_20250219 }
+      variant const: -> { Anthropic::Model::CLAUDE_3_7_SONNET_20250219 }
 
-      variant const: -> { Anthropic::Models::Model::CLAUDE_3_5_HAIKU_LATEST }
+      variant const: -> { Anthropic::Model::CLAUDE_3_5_HAIKU_LATEST }
 
-      variant const: -> { Anthropic::Models::Model::CLAUDE_3_5_HAIKU_20241022 }
+      variant const: -> { Anthropic::Model::CLAUDE_3_5_HAIKU_20241022 }
 
-      variant const: -> { Anthropic::Models::Model::CLAUDE_3_5_SONNET_LATEST }
+      variant const: -> { Anthropic::Model::CLAUDE_3_5_SONNET_LATEST }
 
-      variant const: -> { Anthropic::Models::Model::CLAUDE_3_5_SONNET_20241022 }
+      variant const: -> { Anthropic::Model::CLAUDE_3_5_SONNET_20241022 }
 
-      variant const: -> { Anthropic::Models::Model::CLAUDE_3_5_SONNET_20240620 }
+      variant const: -> { Anthropic::Model::CLAUDE_3_5_SONNET_20240620 }
 
-      variant const: -> { Anthropic::Models::Model::CLAUDE_3_OPUS_LATEST }
+      variant const: -> { Anthropic::Model::CLAUDE_3_OPUS_LATEST }
 
-      variant const: -> { Anthropic::Models::Model::CLAUDE_3_OPUS_20240229 }
+      variant const: -> { Anthropic::Model::CLAUDE_3_OPUS_20240229 }
 
-      variant const: -> { Anthropic::Models::Model::CLAUDE_3_SONNET_20240229 }
+      variant const: -> { Anthropic::Model::CLAUDE_3_SONNET_20240229 }
 
-      variant const: -> { Anthropic::Models::Model::CLAUDE_3_HAIKU_20240307 }
+      variant const: -> { Anthropic::Model::CLAUDE_3_HAIKU_20240307 }
 
-      variant const: -> { Anthropic::Models::Model::CLAUDE_2_1 }
+      variant const: -> { Anthropic::Model::CLAUDE_2_1 }
 
-      variant const: -> { Anthropic::Models::Model::CLAUDE_2_0 }
+      variant const: -> { Anthropic::Model::CLAUDE_2_0 }
 
       variant String
 

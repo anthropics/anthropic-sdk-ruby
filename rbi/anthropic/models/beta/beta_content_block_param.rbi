@@ -8,13 +8,26 @@ module Anthropic
       module BetaContentBlockParam
         extend Anthropic::Internal::Type::Union
 
-        sig do
-          override
-            .returns(
-              [Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam]
+        Variants =
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaTextBlockParam,
+              Anthropic::Beta::BetaImageBlockParam,
+              Anthropic::Beta::BetaToolUseBlockParam,
+              Anthropic::Beta::BetaToolResultBlockParam,
+              Anthropic::Beta::BetaBase64PDFBlock,
+              Anthropic::Beta::BetaThinkingBlockParam,
+              Anthropic::Beta::BetaRedactedThinkingBlockParam
             )
+          end
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::Beta::BetaContentBlockParam::Variants]
+          )
         end
-        def self.variants; end
+        def self.variants
+        end
       end
     end
   end

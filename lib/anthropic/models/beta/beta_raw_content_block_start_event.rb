@@ -6,9 +6,8 @@ module Anthropic
       class BetaRawContentBlockStartEvent < Anthropic::Internal::Type::BaseModel
         # @!attribute content_block
         #
-        #   @return [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock]
-        required :content_block,
-                 union: -> { Anthropic::Models::Beta::BetaRawContentBlockStartEvent::ContentBlock }
+        #   @return [Anthropic::Beta::BetaTextBlock, Anthropic::Beta::BetaToolUseBlock, Anthropic::Beta::BetaThinkingBlock, Anthropic::Beta::BetaRedactedThinkingBlock]
+        required :content_block, union: -> { Anthropic::Beta::BetaRawContentBlockStartEvent::ContentBlock }
 
         # @!attribute index
         #
@@ -21,26 +20,26 @@ module Anthropic
         required :type, const: :content_block_start
 
         # @!method initialize(content_block:, index:, type: :content_block_start)
-        #   @param content_block [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock]
+        #   @param content_block [Anthropic::Beta::BetaTextBlock, Anthropic::Beta::BetaToolUseBlock, Anthropic::Beta::BetaThinkingBlock, Anthropic::Beta::BetaRedactedThinkingBlock]
         #   @param index [Integer]
         #   @param type [Symbol, :content_block_start]
 
-        # @see Anthropic::Models::Beta::BetaRawContentBlockStartEvent#content_block
+        # @see Anthropic::Beta::BetaRawContentBlockStartEvent#content_block
         module ContentBlock
           extend Anthropic::Internal::Type::Union
 
           discriminator :type
 
-          variant :text, -> { Anthropic::Models::Beta::BetaTextBlock }
+          variant :text, -> { Anthropic::Beta::BetaTextBlock }
 
-          variant :tool_use, -> { Anthropic::Models::Beta::BetaToolUseBlock }
+          variant :tool_use, -> { Anthropic::Beta::BetaToolUseBlock }
 
-          variant :thinking, -> { Anthropic::Models::Beta::BetaThinkingBlock }
+          variant :thinking, -> { Anthropic::Beta::BetaThinkingBlock }
 
-          variant :redacted_thinking, -> { Anthropic::Models::Beta::BetaRedactedThinkingBlock }
+          variant :redacted_thinking, -> { Anthropic::Beta::BetaRedactedThinkingBlock }
 
           # @!method self.variants
-          #   @return [Array(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock)]
+          #   @return [Array(Anthropic::Beta::BetaTextBlock, Anthropic::Beta::BetaToolUseBlock, Anthropic::Beta::BetaThinkingBlock, Anthropic::Beta::BetaRedactedThinkingBlock)]
         end
       end
     end

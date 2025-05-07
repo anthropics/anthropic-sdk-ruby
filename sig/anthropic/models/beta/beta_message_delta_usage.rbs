@@ -9,8 +9,6 @@ module Anthropic
         attr_accessor output_tokens: Integer
 
         def initialize: (output_tokens: Integer) -> void
-
-        def to_hash: -> Anthropic::Models::Beta::beta_message_delta_usage
       end
     end
   end

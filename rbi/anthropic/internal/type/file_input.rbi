@@ -16,10 +16,12 @@ module Anthropic
         abstract!
 
         sig { params(other: T.anything).returns(T::Boolean) }
-        def self.===(other); end
+        def self.===(other)
+        end
 
         sig { params(other: T.anything).returns(T::Boolean) }
-        def self.==(other); end
+        def self.==(other)
+        end
 
         class << self
           # @api private
@@ -31,7 +33,8 @@ module Anthropic
               )
               .returns(T.any(StringIO, T.anything))
           end
-          def coerce(value, state:); end
+          def coerce(value, state:)
+          end
 
           # @api private
           sig do
@@ -42,7 +45,8 @@ module Anthropic
               )
               .returns(T.any(Pathname, StringIO, IO, String, T.anything))
           end
-          def dump(value, state:); end
+          def dump(value, state:)
+          end
         end
       end
     end

@@ -3,27 +3,33 @@
 module Anthropic
   module Models
     class ToolResultBlockParam < Anthropic::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
       sig { returns(String) }
       attr_accessor :tool_use_id
 
       sig { returns(Symbol) }
       attr_accessor :type
 
-      sig { returns(T.nilable(Anthropic::Models::CacheControlEphemeral)) }
+      sig { returns(T.nilable(Anthropic::CacheControlEphemeral)) }
       attr_reader :cache_control
 
       sig do
         params(
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash))
-        )
-          .void
+          cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash)
+        ).void
       end
       attr_writer :cache_control
 
       sig do
         returns(
           T.nilable(
-            T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)])
+            T.any(
+              String,
+              T::Array[
+                T.any(Anthropic::TextBlockParam, Anthropic::ImageBlockParam)
+              ]
+            )
           )
         )
       end
@@ -31,12 +37,17 @@ module Anthropic
 
       sig do
         params(
-          content: T.any(
-            String,
-            T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::AnyHash, Anthropic::Models::ImageBlockParam)]
-          )
-        )
-          .void
+          content:
+            T.any(
+              String,
+              T::Array[
+                T.any(
+                  Anthropic::TextBlockParam::OrHash,
+                  Anthropic::ImageBlockParam::OrHash
+                )
+              ]
+            )
+        ).void
       end
       attr_writer :content
 
@@ -49,51 +60,95 @@ module Anthropic
       sig do
         params(
           tool_use_id: String,
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash)),
-          content: T.any(
-            String,
-            T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::AnyHash, Anthropic::Models::ImageBlockParam)]
-          ),
+          cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
+          content:
+            T.any(
+              String,
+              T::Array[
+                T.any(
+                  Anthropic::TextBlockParam::OrHash,
+                  Anthropic::ImageBlockParam::OrHash
+                )
+              ]
+            ),
           is_error: T::Boolean,
           type: Symbol
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
-      def self.new(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result); end
+      def self.new(
+        tool_use_id:,
+        cache_control: nil,
+        content: nil,
+        is_error: nil,
+        type: :tool_result
+      )
+      end
 
       sig do
-        override
-          .returns(
-            {
-              tool_use_id: String,
-              type: Symbol,
-              cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral),
-              content: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]),
-              is_error: T::Boolean
-            }
-          )
+        override.returns(
+          {
+            tool_use_id: String,
+            type: Symbol,
+            cache_control: T.nilable(Anthropic::CacheControlEphemeral),
+            content:
+              T.any(
+                String,
+                T::Array[
+                  T.any(Anthropic::TextBlockParam, Anthropic::ImageBlockParam)
+                ]
+              ),
+            is_error: T::Boolean
+          }
+        )
       end
-      def to_hash; end
+      def to_hash
+      end
 
       module Content
         extend Anthropic::Internal::Type::Union
 
+        Variants =
+          T.type_alias do
+            T.any(
+              String,
+              T::Array[
+                T.any(Anthropic::TextBlockParam, Anthropic::ImageBlockParam)
+              ]
+            )
+          end
+
         module Content
           extend Anthropic::Internal::Type::Union
 
-          sig { override.returns([Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam]) }
-          def self.variants; end
+          Variants =
+            T.type_alias do
+              T.any(Anthropic::TextBlockParam, Anthropic::ImageBlockParam)
+            end
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::ToolResultBlockParam::Content::Content::Variants
+              ]
+            )
+          end
+          def self.variants
+          end
         end
 
         sig do
-          override
-            .returns([String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]])
+          override.returns(
+            T::Array[Anthropic::ToolResultBlockParam::Content::Variants]
+          )
         end
-        def self.variants; end
+        def self.variants
+        end
 
         ContentArray =
           T.let(
-            Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::ToolResultBlockParam::Content::Content],
+            Anthropic::Internal::Type::ArrayOf[
+              union: Anthropic::ToolResultBlockParam::Content::Content
+            ],
             Anthropic::Internal::Type::Converter
           )
       end

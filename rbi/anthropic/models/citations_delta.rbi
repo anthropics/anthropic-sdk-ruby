@@ -3,12 +3,14 @@
 module Anthropic
   module Models
     class CitationsDelta < Anthropic::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
       sig do
         returns(
           T.any(
-            Anthropic::Models::CitationCharLocation,
-            Anthropic::Models::CitationPageLocation,
-            Anthropic::Models::CitationContentBlockLocation
+            Anthropic::CitationCharLocation,
+            Anthropic::CitationPageLocation,
+            Anthropic::CitationContentBlockLocation
           )
         )
       end
@@ -19,43 +21,53 @@ module Anthropic
 
       sig do
         params(
-          citation: T.any(
-            Anthropic::Models::CitationCharLocation,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::CitationPageLocation,
-            Anthropic::Models::CitationContentBlockLocation
-          ),
+          citation:
+            T.any(
+              Anthropic::CitationCharLocation::OrHash,
+              Anthropic::CitationPageLocation::OrHash,
+              Anthropic::CitationContentBlockLocation::OrHash
+            ),
           type: Symbol
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
-      def self.new(citation:, type: :citations_delta); end
+      def self.new(citation:, type: :citations_delta)
+      end
 
       sig do
-        override
-          .returns(
-            {
-              citation: T.any(
-                Anthropic::Models::CitationCharLocation,
-                Anthropic::Models::CitationPageLocation,
-                Anthropic::Models::CitationContentBlockLocation
+        override.returns(
+          {
+            citation:
+              T.any(
+                Anthropic::CitationCharLocation,
+                Anthropic::CitationPageLocation,
+                Anthropic::CitationContentBlockLocation
               ),
-              type: Symbol
-            }
-          )
+            type: Symbol
+          }
+        )
       end
-      def to_hash; end
+      def to_hash
+      end
 
       module Citation
         extend Anthropic::Internal::Type::Union
 
-        sig do
-          override
-            .returns(
-              [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation]
+        Variants =
+          T.type_alias do
+            T.any(
+              Anthropic::CitationCharLocation,
+              Anthropic::CitationPageLocation,
+              Anthropic::CitationContentBlockLocation
             )
+          end
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::CitationsDelta::Citation::Variants]
+          )
         end
-        def self.variants; end
+        def self.variants
+        end
       end
     end
   end

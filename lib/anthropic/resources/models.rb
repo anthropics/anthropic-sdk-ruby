@@ -14,14 +14,14 @@ module Anthropic
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Anthropic::Models::ModelInfo]
+      # @return [Anthropic::ModelInfo]
       #
       # @see Anthropic::Models::ModelRetrieveParams
       def retrieve(model_id, params = {})
         @client.request(
           method: :get,
           path: ["v1/models/%1$s", model_id],
-          model: Anthropic::Models::ModelInfo,
+          model: Anthropic::ModelInfo,
           options: params[:request_options]
         )
       end
@@ -37,26 +37,24 @@ module Anthropic
       # @overload list(after_id: nil, before_id: nil, limit: nil, request_options: {})
       #
       # @param after_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
-      # ...
       #
       # @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
-      # ...
       #
-      # @param limit [Integer] Number of items to return per page. ...
+      # @param limit [Integer] Number of items to return per page.
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Anthropic::Internal::Page<Anthropic::Models::ModelInfo>]
+      # @return [Anthropic::Internal::Page<Anthropic::ModelInfo>]
       #
       # @see Anthropic::Models::ModelListParams
       def list(params = {})
-        parsed, options = Anthropic::Models::ModelListParams.dump_request(params)
+        parsed, options = Anthropic::ModelListParams.dump_request(params)
         @client.request(
           method: :get,
           path: "v1/models",
           query: parsed,
           page: Anthropic::Internal::Page,
-          model: Anthropic::Models::ModelInfo,
+          model: Anthropic::ModelInfo,
           options: options
         )
       end

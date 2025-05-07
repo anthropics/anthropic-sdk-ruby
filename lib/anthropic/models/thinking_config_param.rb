@@ -16,12 +16,12 @@ module Anthropic
 
       discriminator :type
 
-      variant :enabled, -> { Anthropic::Models::ThinkingConfigEnabled }
+      variant :enabled, -> { Anthropic::ThinkingConfigEnabled }
 
-      variant :disabled, -> { Anthropic::Models::ThinkingConfigDisabled }
+      variant :disabled, -> { Anthropic::ThinkingConfigDisabled }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled)]
+      #   @return [Array(Anthropic::ThinkingConfigEnabled, Anthropic::ThinkingConfigDisabled)]
     end
   end
 end

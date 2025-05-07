@@ -16,13 +16,13 @@ module Anthropic
 
         # @!attribute cache_control
         #
-        #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }, nil?: true
+        #   @return [Anthropic::Beta::BetaCacheControlEphemeral, nil]
+        optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!attribute content
         #
-        #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>, nil]
-        optional :content, union: -> { Anthropic::Models::Beta::BetaToolResultBlockParam::Content }
+        #   @return [String, Array<Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam>, nil]
+        optional :content, union: -> { Anthropic::Beta::BetaToolResultBlockParam::Content }
 
         # @!attribute is_error
         #
@@ -31,38 +31,40 @@ module Anthropic
 
         # @!method initialize(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result)
         #   @param tool_use_id [String]
-        #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        #   @param content [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>]
+        #   @param cache_control [Anthropic::Beta::BetaCacheControlEphemeral, nil]
+        #   @param content [String, Array<Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam>]
         #   @param is_error [Boolean]
         #   @param type [Symbol, :tool_result]
 
-        # @see Anthropic::Models::Beta::BetaToolResultBlockParam#content
+        # @see Anthropic::Beta::BetaToolResultBlockParam#content
         module Content
           extend Anthropic::Internal::Type::Union
 
           variant String
 
-          variant -> { Anthropic::Models::Beta::BetaToolResultBlockParam::Content::ContentArray }
+          variant -> { Anthropic::Beta::BetaToolResultBlockParam::Content::ContentArray }
 
           module Content
             extend Anthropic::Internal::Type::Union
 
             discriminator :type
 
-            variant :text, -> { Anthropic::Models::Beta::BetaTextBlockParam }
+            variant :text, -> { Anthropic::Beta::BetaTextBlockParam }
 
-            variant :image, -> { Anthropic::Models::Beta::BetaImageBlockParam }
+            variant :image, -> { Anthropic::Beta::BetaImageBlockParam }
 
             # @!method self.variants
-            #   @return [Array(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
+            #   @return [Array(Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam)]
           end
 
           # @!method self.variants
-          #   @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>)]
+          #   @return [Array(String, Array<Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam>)]
 
           # @type [Anthropic::Internal::Type::Converter]
           ContentArray =
-            Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::Models::Beta::BetaToolResultBlockParam::Content::Content }]
+            Anthropic::Internal::Type::ArrayOf[union: -> {
+              Anthropic::Beta::BetaToolResultBlockParam::Content::Content
+            }]
         end
       end
     end

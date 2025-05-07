@@ -5,8 +5,8 @@ module Anthropic
     class CitationsDelta < Anthropic::Internal::Type::BaseModel
       # @!attribute citation
       #
-      #   @return [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation]
-      required :citation, union: -> { Anthropic::Models::CitationsDelta::Citation }
+      #   @return [Anthropic::CitationCharLocation, Anthropic::CitationPageLocation, Anthropic::CitationContentBlockLocation]
+      required :citation, union: -> { Anthropic::CitationsDelta::Citation }
 
       # @!attribute type
       #
@@ -14,23 +14,23 @@ module Anthropic
       required :type, const: :citations_delta
 
       # @!method initialize(citation:, type: :citations_delta)
-      #   @param citation [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation]
+      #   @param citation [Anthropic::CitationCharLocation, Anthropic::CitationPageLocation, Anthropic::CitationContentBlockLocation]
       #   @param type [Symbol, :citations_delta]
 
-      # @see Anthropic::Models::CitationsDelta#citation
+      # @see Anthropic::CitationsDelta#citation
       module Citation
         extend Anthropic::Internal::Type::Union
 
         discriminator :type
 
-        variant :char_location, -> { Anthropic::Models::CitationCharLocation }
+        variant :char_location, -> { Anthropic::CitationCharLocation }
 
-        variant :page_location, -> { Anthropic::Models::CitationPageLocation }
+        variant :page_location, -> { Anthropic::CitationPageLocation }
 
-        variant :content_block_location, -> { Anthropic::Models::CitationContentBlockLocation }
+        variant :content_block_location, -> { Anthropic::CitationContentBlockLocation }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation)]
+        #   @return [Array(Anthropic::CitationCharLocation, Anthropic::CitationPageLocation, Anthropic::CitationContentBlockLocation)]
       end
     end
   end

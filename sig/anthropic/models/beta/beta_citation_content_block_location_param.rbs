@@ -34,8 +34,6 @@ module Anthropic
           start_block_index: Integer,
           ?type: :content_block_location
         ) -> void
-
-        def to_hash: -> Anthropic::Models::Beta::beta_citation_content_block_location_param
       end
     end
   end

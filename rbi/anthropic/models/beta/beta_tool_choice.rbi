@@ -10,13 +10,21 @@ module Anthropic
       module BetaToolChoice
         extend Anthropic::Internal::Type::Union
 
-        sig do
-          override
-            .returns(
-              [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone]
+        Variants =
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaToolChoiceAuto,
+              Anthropic::Beta::BetaToolChoiceAny,
+              Anthropic::Beta::BetaToolChoiceTool,
+              Anthropic::Beta::BetaToolChoiceNone
             )
+          end
+
+        sig do
+          override.returns(T::Array[Anthropic::Beta::BetaToolChoice::Variants])
         end
-        def self.variants; end
+        def self.variants
+        end
       end
     end
   end

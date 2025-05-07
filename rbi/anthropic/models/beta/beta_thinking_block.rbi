@@ -6,6 +6,9 @@ module Anthropic
 
     module Beta
       class BetaThinkingBlock < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         sig { returns(String) }
         attr_accessor :signature
 
@@ -15,11 +18,21 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
-        sig { params(signature: String, thinking: String, type: Symbol).returns(T.attached_class) }
-        def self.new(signature:, thinking:, type: :thinking); end
+        sig do
+          params(signature: String, thinking: String, type: Symbol).returns(
+            T.attached_class
+          )
+        end
+        def self.new(signature:, thinking:, type: :thinking)
+        end
 
-        sig { override.returns({signature: String, thinking: String, type: Symbol}) }
-        def to_hash; end
+        sig do
+          override.returns(
+            { signature: String, thinking: String, type: Symbol }
+          )
+        end
+        def to_hash
+        end
       end
     end
   end

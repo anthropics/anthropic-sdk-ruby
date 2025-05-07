@@ -15,20 +15,20 @@ module Anthropic
 
       # @!attribute cache_control
       #
-      #   @return [Anthropic::Models::CacheControlEphemeral, nil]
-      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
+      #   @return [Anthropic::CacheControlEphemeral, nil]
+      optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
       # @!attribute citations
       #
-      #   @return [Array<Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam>, nil]
+      #   @return [Array<Anthropic::CitationCharLocationParam, Anthropic::CitationPageLocationParam, Anthropic::CitationContentBlockLocationParam>, nil]
       optional :citations,
-               -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::TextCitationParam] },
+               -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::TextCitationParam] },
                nil?: true
 
       # @!method initialize(text:, cache_control: nil, citations: nil, type: :text)
       #   @param text [String]
-      #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   @param citations [Array<Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam>, nil]
+      #   @param cache_control [Anthropic::CacheControlEphemeral, nil]
+      #   @param citations [Array<Anthropic::CitationCharLocationParam, Anthropic::CitationPageLocationParam, Anthropic::CitationContentBlockLocationParam>, nil]
       #   @param type [Symbol, :text]
     end
   end

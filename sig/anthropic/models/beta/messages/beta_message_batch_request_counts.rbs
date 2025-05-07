@@ -29,8 +29,6 @@ module Anthropic
             processing: Integer,
             succeeded: Integer
           ) -> void
-
-          def to_hash: -> Anthropic::Models::Beta::Messages::beta_message_batch_request_counts
         end
       end
     end

@@ -14,17 +14,19 @@ module Anthropic
         # [user guide](/en/docs/build-with-claude/batch-processing)
         sig do
           params(
-            requests: T::Array[T.any(Anthropic::Models::Messages::BatchCreateParams::Request, Anthropic::Internal::AnyHash)],
-            request_options: Anthropic::RequestOpts
-          )
-            .returns(Anthropic::Models::Messages::MessageBatch)
+            requests:
+              T::Array[Anthropic::Messages::BatchCreateParams::Request::OrHash],
+            request_options: Anthropic::RequestOptions::OrHash
+          ).returns(Anthropic::Messages::MessageBatch)
         end
         def create(
           # List of requests for prompt completion. Each is an individual request to create
           # a Message.
           requests:,
           request_options: {}
-        ); end
+        )
+        end
+
         # This endpoint is idempotent and can be used to poll for Message Batch
         # completion. To access the results of a Message Batch, make a request to the
         # `results_url` field in the response.
@@ -32,22 +34,32 @@ module Anthropic
         # Learn more about the Message Batches API in our
         # [user guide](/en/docs/build-with-claude/batch-processing)
         sig do
-          params(message_batch_id: String, request_options: Anthropic::RequestOpts)
-            .returns(Anthropic::Models::Messages::MessageBatch)
+          params(
+            message_batch_id: String,
+            request_options: Anthropic::RequestOptions::OrHash
+          ).returns(Anthropic::Messages::MessageBatch)
         end
         def retrieve(
           # ID of the Message Batch.
           message_batch_id,
           request_options: {}
-        ); end
+        )
+        end
+
         # List all Message Batches within a Workspace. Most recently created batches are
         # returned first.
         #
         # Learn more about the Message Batches API in our
         # [user guide](/en/docs/build-with-claude/batch-processing)
         sig do
-          params(after_id: String, before_id: String, limit: Integer, request_options: Anthropic::RequestOpts)
-            .returns(Anthropic::Internal::Page[Anthropic::Models::Messages::MessageBatch])
+          params(
+            after_id: String,
+            before_id: String,
+            limit: Integer,
+            request_options: Anthropic::RequestOptions::OrHash
+          ).returns(
+            Anthropic::Internal::Page[Anthropic::Messages::MessageBatch]
+          )
         end
         def list(
           # ID of the object to use as a cursor for pagination. When provided, returns the
@@ -61,7 +73,9 @@ module Anthropic
           # Defaults to `20`. Ranges from `1` to `1000`.
           limit: nil,
           request_options: {}
-        ); end
+        )
+        end
+
         # Delete a Message Batch.
         #
         # Message Batches can only be deleted once they've finished processing. If you'd
@@ -70,14 +84,18 @@ module Anthropic
         # Learn more about the Message Batches API in our
         # [user guide](/en/docs/build-with-claude/batch-processing)
         sig do
-          params(message_batch_id: String, request_options: Anthropic::RequestOpts)
-            .returns(Anthropic::Models::Messages::DeletedMessageBatch)
+          params(
+            message_batch_id: String,
+            request_options: Anthropic::RequestOptions::OrHash
+          ).returns(Anthropic::Messages::DeletedMessageBatch)
         end
         def delete(
           # ID of the Message Batch.
           message_batch_id,
           request_options: {}
-        ); end
+        )
+        end
+
         # Batches may be canceled any time before processing ends. Once cancellation is
         # initiated, the batch enters a `canceling` state, at which time the system may
         # complete any in-progress, non-interruptible requests before finalizing
@@ -91,14 +109,18 @@ module Anthropic
         # Learn more about the Message Batches API in our
         # [user guide](/en/docs/build-with-claude/batch-processing)
         sig do
-          params(message_batch_id: String, request_options: Anthropic::RequestOpts)
-            .returns(Anthropic::Models::Messages::MessageBatch)
+          params(
+            message_batch_id: String,
+            request_options: Anthropic::RequestOptions::OrHash
+          ).returns(Anthropic::Messages::MessageBatch)
         end
         def cancel(
           # ID of the Message Batch.
           message_batch_id,
           request_options: {}
-        ); end
+        )
+        end
+
         # Streams the results of a Message Batch as a `.jsonl` file.
         #
         # Each line in the file is a JSON object containing the result of a single request
@@ -108,17 +130,26 @@ module Anthropic
         # Learn more about the Message Batches API in our
         # [user guide](/en/docs/build-with-claude/batch-processing)
         sig do
-          params(message_batch_id: String, request_options: Anthropic::RequestOpts)
-            .returns(Anthropic::Internal::JsonLStream[Anthropic::Models::Messages::MessageBatchIndividualResponse])
+          params(
+            message_batch_id: String,
+            request_options: Anthropic::RequestOptions::OrHash
+          ).returns(
+            Anthropic::Internal::JsonLStream[
+              Anthropic::Messages::MessageBatchIndividualResponse
+            ]
+          )
         end
         def results_streaming(
           # ID of the Message Batch.
           message_batch_id,
           request_options: {}
-        ); end
+        )
+        end
+
         # @api private
         sig { params(client: Anthropic::Client).returns(T.attached_class) }
-        def self.new(client:); end
+        def self.new(client:)
+        end
       end
     end
   end

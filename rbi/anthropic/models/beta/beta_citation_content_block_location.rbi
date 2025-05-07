@@ -6,6 +6,9 @@ module Anthropic
 
     module Beta
       class BetaCitationContentBlockLocation < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         sig { returns(String) }
         attr_accessor :cited_text
 
@@ -32,8 +35,7 @@ module Anthropic
             end_block_index: Integer,
             start_block_index: Integer,
             type: Symbol
-          )
-            .returns(T.attached_class)
+          ).returns(T.attached_class)
         end
         def self.new(
           cited_text:,
@@ -42,21 +44,23 @@ module Anthropic
           end_block_index:,
           start_block_index:,
           type: :content_block_location
-        ); end
-        sig do
-          override
-            .returns(
-              {
-                cited_text: String,
-                document_index: Integer,
-                document_title: T.nilable(String),
-                end_block_index: Integer,
-                start_block_index: Integer,
-                type: Symbol
-              }
-            )
+        )
         end
-        def to_hash; end
+
+        sig do
+          override.returns(
+            {
+              cited_text: String,
+              document_index: Integer,
+              document_title: T.nilable(String),
+              end_block_index: Integer,
+              start_block_index: Integer,
+              type: Symbol
+            }
+          )
+        end
+        def to_hash
+        end
       end
     end
   end

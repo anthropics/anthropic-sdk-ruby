@@ -1,15 +1,15 @@
 module Anthropic
   module Models
     type content_block =
-      Anthropic::Models::TextBlock
-      | Anthropic::Models::ToolUseBlock
-      | Anthropic::Models::ThinkingBlock
-      | Anthropic::Models::RedactedThinkingBlock
+      Anthropic::TextBlock
+      | Anthropic::ToolUseBlock
+      | Anthropic::ThinkingBlock
+      | Anthropic::RedactedThinkingBlock
 
     module ContentBlock
       extend Anthropic::Internal::Type::Union
 
-      def self?.variants: -> [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock]
+      def self?.variants: -> ::Array[Anthropic::Models::content_block]
     end
   end
 end

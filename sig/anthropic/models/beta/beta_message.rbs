@@ -12,7 +12,7 @@ module Anthropic
           stop_reason: Anthropic::Models::Beta::beta_stop_reason?,
           stop_sequence: String?,
           type: :message,
-          usage: Anthropic::Models::Beta::BetaUsage
+          usage: Anthropic::Beta::BetaUsage
         }
 
       class BetaMessage < Anthropic::Internal::Type::BaseModel
@@ -30,7 +30,7 @@ module Anthropic
 
         attr_accessor type: :message
 
-        attr_accessor usage: Anthropic::Models::Beta::BetaUsage
+        attr_accessor usage: Anthropic::Beta::BetaUsage
 
         def initialize: (
           id: String,
@@ -38,12 +38,10 @@ module Anthropic
           model: Anthropic::Models::model,
           stop_reason: Anthropic::Models::Beta::beta_stop_reason?,
           stop_sequence: String?,
-          usage: Anthropic::Models::Beta::BetaUsage,
+          usage: Anthropic::Beta::BetaUsage,
           ?role: :assistant,
           ?type: :message
         ) -> void
-
-        def to_hash: -> Anthropic::Models::Beta::beta_message
       end
     end
   end

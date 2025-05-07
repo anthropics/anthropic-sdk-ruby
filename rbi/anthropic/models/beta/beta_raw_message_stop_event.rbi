@@ -6,14 +6,19 @@ module Anthropic
 
     module Beta
       class BetaRawMessageStopEvent < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         sig { returns(Symbol) }
         attr_accessor :type
 
         sig { params(type: Symbol).returns(T.attached_class) }
-        def self.new(type: :message_stop); end
+        def self.new(type: :message_stop)
+        end
 
-        sig { override.returns({type: Symbol}) }
-        def to_hash; end
+        sig { override.returns({ type: Symbol }) }
+        def to_hash
+        end
       end
     end
   end

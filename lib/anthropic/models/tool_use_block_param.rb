@@ -25,14 +25,14 @@ module Anthropic
 
       # @!attribute cache_control
       #
-      #   @return [Anthropic::Models::CacheControlEphemeral, nil]
-      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
+      #   @return [Anthropic::CacheControlEphemeral, nil]
+      optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
       # @!method initialize(id:, input:, name:, cache_control: nil, type: :tool_use)
       #   @param id [String]
       #   @param input [Object]
       #   @param name [String]
-      #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
+      #   @param cache_control [Anthropic::CacheControlEphemeral, nil]
       #   @param type [Symbol, :tool_use]
     end
   end
