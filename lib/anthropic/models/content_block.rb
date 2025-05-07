@@ -7,16 +7,16 @@ module Anthropic
 
       discriminator :type
 
-      variant :text, -> { Anthropic::Models::TextBlock }
+      variant :text, -> { Anthropic::TextBlock }
 
-      variant :tool_use, -> { Anthropic::Models::ToolUseBlock }
+      variant :tool_use, -> { Anthropic::ToolUseBlock }
 
-      variant :thinking, -> { Anthropic::Models::ThinkingBlock }
+      variant :thinking, -> { Anthropic::ThinkingBlock }
 
-      variant :redacted_thinking, -> { Anthropic::Models::RedactedThinkingBlock }
+      variant :redacted_thinking, -> { Anthropic::RedactedThinkingBlock }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock)]
+      #   @return [Array(Anthropic::TextBlock, Anthropic::ToolUseBlock, Anthropic::ThinkingBlock, Anthropic::RedactedThinkingBlock)]
     end
   end
 end

@@ -2,36 +2,34 @@ module Anthropic
   module Models
     type raw_content_block_start_event =
       {
-        content_block: Anthropic::Models::RawContentBlockStartEvent::content_block,
+        content_block: Anthropic::RawContentBlockStartEvent::content_block,
         index: Integer,
         type: :content_block_start
       }
 
     class RawContentBlockStartEvent < Anthropic::Internal::Type::BaseModel
-      attr_accessor content_block: Anthropic::Models::RawContentBlockStartEvent::content_block
+      attr_accessor content_block: Anthropic::RawContentBlockStartEvent::content_block
 
       attr_accessor index: Integer
 
       attr_accessor type: :content_block_start
 
       def initialize: (
-        content_block: Anthropic::Models::RawContentBlockStartEvent::content_block,
+        content_block: Anthropic::RawContentBlockStartEvent::content_block,
         index: Integer,
         ?type: :content_block_start
       ) -> void
 
-      def to_hash: -> Anthropic::Models::raw_content_block_start_event
-
       type content_block =
-        Anthropic::Models::TextBlock
-        | Anthropic::Models::ToolUseBlock
-        | Anthropic::Models::ThinkingBlock
-        | Anthropic::Models::RedactedThinkingBlock
+        Anthropic::TextBlock
+        | Anthropic::ToolUseBlock
+        | Anthropic::ThinkingBlock
+        | Anthropic::RedactedThinkingBlock
 
       module ContentBlock
         extend Anthropic::Internal::Type::Union
 
-        def self?.variants: -> [Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock]
+        def self?.variants: -> ::Array[Anthropic::RawContentBlockStartEvent::content_block]
       end
     end
   end

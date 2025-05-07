@@ -6,6 +6,9 @@ module Anthropic
 
     module Beta
       class BetaModelInfo < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         # Unique model identifier.
         sig { returns(String) }
         attr_accessor :id
@@ -26,7 +29,12 @@ module Anthropic
         attr_accessor :type
 
         sig do
-          params(id: String, created_at: Time, display_name: String, type: Symbol).returns(T.attached_class)
+          params(
+            id: String,
+            created_at: Time,
+            display_name: String,
+            type: Symbol
+          ).returns(T.attached_class)
         end
         def self.new(
           # Unique model identifier.
@@ -40,9 +48,16 @@ module Anthropic
           #
           # For Models, this is always `"model"`.
           type: :model
-        ); end
-        sig { override.returns({id: String, created_at: Time, display_name: String, type: Symbol}) }
-        def to_hash; end
+        )
+        end
+
+        sig do
+          override.returns(
+            { id: String, created_at: Time, display_name: String, type: Symbol }
+          )
+        end
+        def to_hash
+        end
       end
     end
   end

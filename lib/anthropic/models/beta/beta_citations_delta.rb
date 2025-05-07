@@ -6,8 +6,8 @@ module Anthropic
       class BetaCitationsDelta < Anthropic::Internal::Type::BaseModel
         # @!attribute citation
         #
-        #   @return [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation]
-        required :citation, union: -> { Anthropic::Models::Beta::BetaCitationsDelta::Citation }
+        #   @return [Anthropic::Beta::BetaCitationCharLocation, Anthropic::Beta::BetaCitationPageLocation, Anthropic::Beta::BetaCitationContentBlockLocation]
+        required :citation, union: -> { Anthropic::Beta::BetaCitationsDelta::Citation }
 
         # @!attribute type
         #
@@ -15,23 +15,23 @@ module Anthropic
         required :type, const: :citations_delta
 
         # @!method initialize(citation:, type: :citations_delta)
-        #   @param citation [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation]
+        #   @param citation [Anthropic::Beta::BetaCitationCharLocation, Anthropic::Beta::BetaCitationPageLocation, Anthropic::Beta::BetaCitationContentBlockLocation]
         #   @param type [Symbol, :citations_delta]
 
-        # @see Anthropic::Models::Beta::BetaCitationsDelta#citation
+        # @see Anthropic::Beta::BetaCitationsDelta#citation
         module Citation
           extend Anthropic::Internal::Type::Union
 
           discriminator :type
 
-          variant :char_location, -> { Anthropic::Models::Beta::BetaCitationCharLocation }
+          variant :char_location, -> { Anthropic::Beta::BetaCitationCharLocation }
 
-          variant :page_location, -> { Anthropic::Models::Beta::BetaCitationPageLocation }
+          variant :page_location, -> { Anthropic::Beta::BetaCitationPageLocation }
 
-          variant :content_block_location, -> { Anthropic::Models::Beta::BetaCitationContentBlockLocation }
+          variant :content_block_location, -> { Anthropic::Beta::BetaCitationContentBlockLocation }
 
           # @!method self.variants
-          #   @return [Array(Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation)]
+          #   @return [Array(Anthropic::Beta::BetaCitationCharLocation, Anthropic::Beta::BetaCitationPageLocation, Anthropic::Beta::BetaCitationContentBlockLocation)]
         end
       end
     end

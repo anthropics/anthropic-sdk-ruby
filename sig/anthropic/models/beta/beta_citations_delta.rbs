@@ -5,31 +5,29 @@ module Anthropic
     module Beta
       type beta_citations_delta =
         {
-          citation: Anthropic::Models::Beta::BetaCitationsDelta::citation,
+          citation: Anthropic::Beta::BetaCitationsDelta::citation,
           type: :citations_delta
         }
 
       class BetaCitationsDelta < Anthropic::Internal::Type::BaseModel
-        attr_accessor citation: Anthropic::Models::Beta::BetaCitationsDelta::citation
+        attr_accessor citation: Anthropic::Beta::BetaCitationsDelta::citation
 
         attr_accessor type: :citations_delta
 
         def initialize: (
-          citation: Anthropic::Models::Beta::BetaCitationsDelta::citation,
+          citation: Anthropic::Beta::BetaCitationsDelta::citation,
           ?type: :citations_delta
         ) -> void
 
-        def to_hash: -> Anthropic::Models::Beta::beta_citations_delta
-
         type citation =
-          Anthropic::Models::Beta::BetaCitationCharLocation
-          | Anthropic::Models::Beta::BetaCitationPageLocation
-          | Anthropic::Models::Beta::BetaCitationContentBlockLocation
+          Anthropic::Beta::BetaCitationCharLocation
+          | Anthropic::Beta::BetaCitationPageLocation
+          | Anthropic::Beta::BetaCitationContentBlockLocation
 
         module Citation
           extend Anthropic::Internal::Type::Union
 
-          def self?.variants: -> [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation]
+          def self?.variants: -> ::Array[Anthropic::Beta::BetaCitationsDelta::citation]
         end
       end
     end

@@ -8,47 +8,61 @@ module Anthropic
     module Model
       extend Anthropic::Internal::Type::Union
 
-      sig { override.returns([Anthropic::Models::Model::TaggedSymbol, String]) }
-      def self.variants; end
+      Variants = T.type_alias { T.any(Anthropic::Model::TaggedSymbol, String) }
 
-      TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Model) }
+      sig { override.returns(T::Array[Anthropic::Model::Variants]) }
+      def self.variants
+      end
+
+      TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Model) }
       OrSymbol = T.type_alias { T.any(Symbol, String) }
 
       # Our most intelligent model
-      CLAUDE_3_7_SONNET_LATEST = T.let(:"claude-3-7-sonnet-latest", Anthropic::Models::Model::TaggedSymbol)
+      CLAUDE_3_7_SONNET_LATEST =
+        T.let(:"claude-3-7-sonnet-latest", Anthropic::Model::TaggedSymbol)
 
       # Our most intelligent model
-      CLAUDE_3_7_SONNET_20250219 = T.let(:"claude-3-7-sonnet-20250219", Anthropic::Models::Model::TaggedSymbol)
+      CLAUDE_3_7_SONNET_20250219 =
+        T.let(:"claude-3-7-sonnet-20250219", Anthropic::Model::TaggedSymbol)
 
       # Fastest and most compact model for near-instant responsiveness
-      CLAUDE_3_5_HAIKU_LATEST = T.let(:"claude-3-5-haiku-latest", Anthropic::Models::Model::TaggedSymbol)
+      CLAUDE_3_5_HAIKU_LATEST =
+        T.let(:"claude-3-5-haiku-latest", Anthropic::Model::TaggedSymbol)
 
       # Our fastest model
-      CLAUDE_3_5_HAIKU_20241022 = T.let(:"claude-3-5-haiku-20241022", Anthropic::Models::Model::TaggedSymbol)
+      CLAUDE_3_5_HAIKU_20241022 =
+        T.let(:"claude-3-5-haiku-20241022", Anthropic::Model::TaggedSymbol)
 
       # Our previous most intelligent model
-      CLAUDE_3_5_SONNET_LATEST = T.let(:"claude-3-5-sonnet-latest", Anthropic::Models::Model::TaggedSymbol)
+      CLAUDE_3_5_SONNET_LATEST =
+        T.let(:"claude-3-5-sonnet-latest", Anthropic::Model::TaggedSymbol)
 
       # Our previous most intelligent model
-      CLAUDE_3_5_SONNET_20241022 = T.let(:"claude-3-5-sonnet-20241022", Anthropic::Models::Model::TaggedSymbol)
+      CLAUDE_3_5_SONNET_20241022 =
+        T.let(:"claude-3-5-sonnet-20241022", Anthropic::Model::TaggedSymbol)
 
-      CLAUDE_3_5_SONNET_20240620 = T.let(:"claude-3-5-sonnet-20240620", Anthropic::Models::Model::TaggedSymbol)
+      CLAUDE_3_5_SONNET_20240620 =
+        T.let(:"claude-3-5-sonnet-20240620", Anthropic::Model::TaggedSymbol)
 
       # Excels at writing and complex tasks
-      CLAUDE_3_OPUS_LATEST = T.let(:"claude-3-opus-latest", Anthropic::Models::Model::TaggedSymbol)
+      CLAUDE_3_OPUS_LATEST =
+        T.let(:"claude-3-opus-latest", Anthropic::Model::TaggedSymbol)
 
       # Excels at writing and complex tasks
-      CLAUDE_3_OPUS_20240229 = T.let(:"claude-3-opus-20240229", Anthropic::Models::Model::TaggedSymbol)
+      CLAUDE_3_OPUS_20240229 =
+        T.let(:"claude-3-opus-20240229", Anthropic::Model::TaggedSymbol)
 
       # Balance of speed and intelligence
-      CLAUDE_3_SONNET_20240229 = T.let(:"claude-3-sonnet-20240229", Anthropic::Models::Model::TaggedSymbol)
+      CLAUDE_3_SONNET_20240229 =
+        T.let(:"claude-3-sonnet-20240229", Anthropic::Model::TaggedSymbol)
 
       # Our previous most fast and cost-effective
-      CLAUDE_3_HAIKU_20240307 = T.let(:"claude-3-haiku-20240307", Anthropic::Models::Model::TaggedSymbol)
+      CLAUDE_3_HAIKU_20240307 =
+        T.let(:"claude-3-haiku-20240307", Anthropic::Model::TaggedSymbol)
 
-      CLAUDE_2_1 = T.let(:"claude-2.1", Anthropic::Models::Model::TaggedSymbol)
+      CLAUDE_2_1 = T.let(:"claude-2.1", Anthropic::Model::TaggedSymbol)
 
-      CLAUDE_2_0 = T.let(:"claude-2.0", Anthropic::Models::Model::TaggedSymbol)
+      CLAUDE_2_0 = T.let(:"claude-2.0", Anthropic::Model::TaggedSymbol)
     end
   end
 end

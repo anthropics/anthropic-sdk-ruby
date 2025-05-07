@@ -21,8 +21,6 @@ module Anthropic
           display_name: String,
           ?type: :model
         ) -> void
-
-        def to_hash: -> Anthropic::Models::Beta::beta_model_info
       end
     end
   end

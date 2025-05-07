@@ -15,8 +15,6 @@ module Anthropic
         ?media_type: :"application/pdf",
         ?type: :base64
       ) -> void
-
-      def to_hash: -> Anthropic::Models::base64_pdf_source
     end
   end
 end

@@ -31,8 +31,6 @@ module Anthropic
         start_page_number: Integer,
         ?type: :page_location
       ) -> void
-
-      def to_hash: -> Anthropic::Models::citation_page_location_param
     end
   end
 end

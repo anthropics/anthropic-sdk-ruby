@@ -5,23 +5,34 @@ module Anthropic
     module Beta
       module Messages
         class BetaMessageBatchErroredResult < Anthropic::Internal::Type::BaseModel
-          sig { returns(Anthropic::Models::BetaErrorResponse) }
+          OrHash =
+            T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
+          sig { returns(Anthropic::BetaErrorResponse) }
           attr_reader :error
 
-          sig { params(error: T.any(Anthropic::Models::BetaErrorResponse, Anthropic::Internal::AnyHash)).void }
+          sig { params(error: Anthropic::BetaErrorResponse::OrHash).void }
           attr_writer :error
 
           sig { returns(Symbol) }
           attr_accessor :type
 
           sig do
-            params(error: T.any(Anthropic::Models::BetaErrorResponse, Anthropic::Internal::AnyHash), type: Symbol)
-              .returns(T.attached_class)
+            params(
+              error: Anthropic::BetaErrorResponse::OrHash,
+              type: Symbol
+            ).returns(T.attached_class)
           end
-          def self.new(error:, type: :errored); end
+          def self.new(error:, type: :errored)
+          end
 
-          sig { override.returns({error: Anthropic::Models::BetaErrorResponse, type: Symbol}) }
-          def to_hash; end
+          sig do
+            override.returns(
+              { error: Anthropic::BetaErrorResponse, type: Symbol }
+            )
+          end
+          def to_hash
+          end
         end
       end
     end

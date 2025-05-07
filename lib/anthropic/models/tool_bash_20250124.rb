@@ -18,16 +18,16 @@ module Anthropic
 
       # @!attribute cache_control
       #
-      #   @return [Anthropic::Models::CacheControlEphemeral, nil]
-      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
+      #   @return [Anthropic::CacheControlEphemeral, nil]
+      optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
       # @!method initialize(cache_control: nil, name: :bash, type: :bash_20250124)
       #   Some parameter documentations has been truncated, see
-      #   {Anthropic::Models::ToolBash20250124} for more details.
+      #   {Anthropic::ToolBash20250124} for more details.
       #
-      #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
+      #   @param cache_control [Anthropic::CacheControlEphemeral, nil]
       #
-      #   @param name [Symbol, :bash] Name of the tool. ...
+      #   @param name [Symbol, :bash] Name of the tool.
       #
       #   @param type [Symbol, :bash_20250124]
     end

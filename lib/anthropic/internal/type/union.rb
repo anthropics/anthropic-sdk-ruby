@@ -6,13 +6,13 @@ module Anthropic
       # @api private
       #
       # @example
-      #   # `raw_message_stream_event` is a `Anthropic::Models::RawMessageStreamEvent`
+      #   # `raw_message_stream_event` is a `Anthropic::RawMessageStreamEvent`
       #   case raw_message_stream_event
-      #   when Anthropic::Models::RawMessageStartEvent
+      #   when Anthropic::RawMessageStartEvent
       #     puts(raw_message_stream_event.message)
-      #   when Anthropic::Models::RawMessageDeltaEvent
+      #   when Anthropic::RawMessageDeltaEvent
       #     puts(raw_message_stream_event.delta)
-      #   when Anthropic::Models::RawMessageStopEvent
+      #   when Anthropic::RawMessageStopEvent
       #     puts(raw_message_stream_event.type)
       #   else
       #     puts(raw_message_stream_event)

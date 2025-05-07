@@ -6,14 +6,16 @@ module Anthropic
 
     module Beta
       class BetaRawMessageDeltaEvent < Anthropic::Internal::Type::BaseModel
-        sig { returns(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta) }
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
+        sig { returns(Anthropic::Beta::BetaRawMessageDeltaEvent::Delta) }
         attr_reader :delta
 
         sig do
           params(
-            delta: T.any(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta, Anthropic::Internal::AnyHash)
-          )
-            .void
+            delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta::OrHash
+          ).void
         end
         attr_writer :delta
 
@@ -35,19 +37,20 @@ module Anthropic
         #
         # Total input tokens in a request is the summation of `input_tokens`,
         # `cache_creation_input_tokens`, and `cache_read_input_tokens`.
-        sig { returns(Anthropic::Models::Beta::BetaMessageDeltaUsage) }
+        sig { returns(Anthropic::Beta::BetaMessageDeltaUsage) }
         attr_reader :usage
 
-        sig { params(usage: T.any(Anthropic::Models::Beta::BetaMessageDeltaUsage, Anthropic::Internal::AnyHash)).void }
+        sig do
+          params(usage: Anthropic::Beta::BetaMessageDeltaUsage::OrHash).void
+        end
         attr_writer :usage
 
         sig do
           params(
-            delta: T.any(Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta, Anthropic::Internal::AnyHash),
-            usage: T.any(Anthropic::Models::Beta::BetaMessageDeltaUsage, Anthropic::Internal::AnyHash),
+            delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta::OrHash,
+            usage: Anthropic::Beta::BetaMessageDeltaUsage::OrHash,
             type: Symbol
-          )
-            .returns(T.attached_class)
+          ).returns(T.attached_class)
         end
         def self.new(
           delta:,
@@ -68,21 +71,28 @@ module Anthropic
           # `cache_creation_input_tokens`, and `cache_read_input_tokens`.
           usage:,
           type: :message_delta
-        ); end
-        sig do
-          override
-            .returns(
-              {
-                delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta,
-                type: Symbol,
-                usage: Anthropic::Models::Beta::BetaMessageDeltaUsage
-              }
-            )
+        )
         end
-        def to_hash; end
+
+        sig do
+          override.returns(
+            {
+              delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta,
+              type: Symbol,
+              usage: Anthropic::Beta::BetaMessageDeltaUsage
+            }
+          )
+        end
+        def to_hash
+        end
 
         class Delta < Anthropic::Internal::Type::BaseModel
-          sig { returns(T.nilable(Anthropic::Models::Beta::BetaStopReason::TaggedSymbol)) }
+          OrHash =
+            T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
+          sig do
+            returns(T.nilable(Anthropic::Beta::BetaStopReason::TaggedSymbol))
+          end
           attr_accessor :stop_reason
 
           sig { returns(T.nilable(String)) }
@@ -90,23 +100,24 @@ module Anthropic
 
           sig do
             params(
-              stop_reason: T.nilable(Anthropic::Models::Beta::BetaStopReason::OrSymbol),
+              stop_reason: T.nilable(Anthropic::Beta::BetaStopReason::OrSymbol),
               stop_sequence: T.nilable(String)
-            )
-              .returns(T.attached_class)
+            ).returns(T.attached_class)
           end
-          def self.new(stop_reason:, stop_sequence:); end
+          def self.new(stop_reason:, stop_sequence:)
+          end
 
           sig do
-            override
-              .returns(
-                {
-                  stop_reason: T.nilable(Anthropic::Models::Beta::BetaStopReason::TaggedSymbol),
-                  stop_sequence: T.nilable(String)
-                }
-              )
+            override.returns(
+              {
+                stop_reason:
+                  T.nilable(Anthropic::Beta::BetaStopReason::TaggedSymbol),
+                stop_sequence: T.nilable(String)
+              }
+            )
           end
-          def to_hash; end
+          def to_hash
+          end
         end
       end
     end

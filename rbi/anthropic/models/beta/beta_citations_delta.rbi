@@ -6,12 +6,15 @@ module Anthropic
 
     module Beta
       class BetaCitationsDelta < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         sig do
           returns(
             T.any(
-              Anthropic::Models::Beta::BetaCitationCharLocation,
-              Anthropic::Models::Beta::BetaCitationPageLocation,
-              Anthropic::Models::Beta::BetaCitationContentBlockLocation
+              Anthropic::Beta::BetaCitationCharLocation,
+              Anthropic::Beta::BetaCitationPageLocation,
+              Anthropic::Beta::BetaCitationContentBlockLocation
             )
           )
         end
@@ -22,43 +25,53 @@ module Anthropic
 
         sig do
           params(
-            citation: T.any(
-              Anthropic::Models::Beta::BetaCitationCharLocation,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::Beta::BetaCitationPageLocation,
-              Anthropic::Models::Beta::BetaCitationContentBlockLocation
-            ),
+            citation:
+              T.any(
+                Anthropic::Beta::BetaCitationCharLocation::OrHash,
+                Anthropic::Beta::BetaCitationPageLocation::OrHash,
+                Anthropic::Beta::BetaCitationContentBlockLocation::OrHash
+              ),
             type: Symbol
-          )
-            .returns(T.attached_class)
+          ).returns(T.attached_class)
         end
-        def self.new(citation:, type: :citations_delta); end
+        def self.new(citation:, type: :citations_delta)
+        end
 
         sig do
-          override
-            .returns(
-              {
-                citation: T.any(
-                  Anthropic::Models::Beta::BetaCitationCharLocation,
-                  Anthropic::Models::Beta::BetaCitationPageLocation,
-                  Anthropic::Models::Beta::BetaCitationContentBlockLocation
+          override.returns(
+            {
+              citation:
+                T.any(
+                  Anthropic::Beta::BetaCitationCharLocation,
+                  Anthropic::Beta::BetaCitationPageLocation,
+                  Anthropic::Beta::BetaCitationContentBlockLocation
                 ),
-                type: Symbol
-              }
-            )
+              type: Symbol
+            }
+          )
         end
-        def to_hash; end
+        def to_hash
+        end
 
         module Citation
           extend Anthropic::Internal::Type::Union
 
-          sig do
-            override
-              .returns(
-                [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation]
+          Variants =
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::BetaCitationCharLocation,
+                Anthropic::Beta::BetaCitationPageLocation,
+                Anthropic::Beta::BetaCitationContentBlockLocation
               )
+            end
+
+          sig do
+            override.returns(
+              T::Array[Anthropic::Beta::BetaCitationsDelta::Citation::Variants]
+            )
           end
-          def self.variants; end
+          def self.variants
+          end
         end
       end
     end

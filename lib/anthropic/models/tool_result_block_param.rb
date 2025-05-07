@@ -15,13 +15,13 @@ module Anthropic
 
       # @!attribute cache_control
       #
-      #   @return [Anthropic::Models::CacheControlEphemeral, nil]
-      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
+      #   @return [Anthropic::CacheControlEphemeral, nil]
+      optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
       # @!attribute content
       #
-      #   @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>, nil]
-      optional :content, union: -> { Anthropic::Models::ToolResultBlockParam::Content }
+      #   @return [String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam>, nil]
+      optional :content, union: -> { Anthropic::ToolResultBlockParam::Content }
 
       # @!attribute is_error
       #
@@ -30,38 +30,38 @@ module Anthropic
 
       # @!method initialize(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result)
       #   @param tool_use_id [String]
-      #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>]
+      #   @param cache_control [Anthropic::CacheControlEphemeral, nil]
+      #   @param content [String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam>]
       #   @param is_error [Boolean]
       #   @param type [Symbol, :tool_result]
 
-      # @see Anthropic::Models::ToolResultBlockParam#content
+      # @see Anthropic::ToolResultBlockParam#content
       module Content
         extend Anthropic::Internal::Type::Union
 
         variant String
 
-        variant -> { Anthropic::Models::ToolResultBlockParam::Content::ContentArray }
+        variant -> { Anthropic::ToolResultBlockParam::Content::ContentArray }
 
         module Content
           extend Anthropic::Internal::Type::Union
 
           discriminator :type
 
-          variant :text, -> { Anthropic::Models::TextBlockParam }
+          variant :text, -> { Anthropic::TextBlockParam }
 
-          variant :image, -> { Anthropic::Models::ImageBlockParam }
+          variant :image, -> { Anthropic::ImageBlockParam }
 
           # @!method self.variants
-          #   @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
+          #   @return [Array(Anthropic::TextBlockParam, Anthropic::ImageBlockParam)]
         end
 
         # @!method self.variants
-        #   @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>)]
+        #   @return [Array(String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam>)]
 
         # @type [Anthropic::Internal::Type::Converter]
         ContentArray =
-          Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::Models::ToolResultBlockParam::Content::Content }]
+          Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::ToolResultBlockParam::Content::Content }]
       end
     end
   end

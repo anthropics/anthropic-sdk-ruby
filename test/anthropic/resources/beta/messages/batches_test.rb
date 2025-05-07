@@ -19,7 +19,7 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Anthropic::Test:
       )
 
     assert_pattern do
-      response => Anthropic::Models::Beta::Messages::BetaMessageBatch
+      response => Anthropic::Beta::Messages::BetaMessageBatch
     end
 
     assert_pattern do
@@ -30,8 +30,8 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Anthropic::Test:
         created_at: Time,
         ended_at: Time | nil,
         expires_at: Time,
-        processing_status: Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus,
-        request_counts: Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts,
+        processing_status: Anthropic::Beta::Messages::BetaMessageBatch::ProcessingStatus,
+        request_counts: Anthropic::Beta::Messages::BetaMessageBatchRequestCounts,
         results_url: String | nil,
         type: Symbol
       }
@@ -42,7 +42,7 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Anthropic::Test:
     response = @anthropic.beta.messages.batches.retrieve("message_batch_id")
 
     assert_pattern do
-      response => Anthropic::Models::Beta::Messages::BetaMessageBatch
+      response => Anthropic::Beta::Messages::BetaMessageBatch
     end
 
     assert_pattern do
@@ -53,8 +53,8 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Anthropic::Test:
         created_at: Time,
         ended_at: Time | nil,
         expires_at: Time,
-        processing_status: Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus,
-        request_counts: Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts,
+        processing_status: Anthropic::Beta::Messages::BetaMessageBatch::ProcessingStatus,
+        request_counts: Anthropic::Beta::Messages::BetaMessageBatchRequestCounts,
         results_url: String | nil,
         type: Symbol
       }
@@ -72,7 +72,7 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Anthropic::Test:
     return if row.nil?
 
     assert_pattern do
-      row => Anthropic::Models::Beta::Messages::BetaMessageBatch
+      row => Anthropic::Beta::Messages::BetaMessageBatch
     end
 
     assert_pattern do
@@ -83,8 +83,8 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Anthropic::Test:
         created_at: Time,
         ended_at: Time | nil,
         expires_at: Time,
-        processing_status: Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus,
-        request_counts: Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts,
+        processing_status: Anthropic::Beta::Messages::BetaMessageBatch::ProcessingStatus,
+        request_counts: Anthropic::Beta::Messages::BetaMessageBatchRequestCounts,
         results_url: String | nil,
         type: Symbol
       }
@@ -95,7 +95,7 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Anthropic::Test:
     response = @anthropic.beta.messages.batches.delete("message_batch_id")
 
     assert_pattern do
-      response => Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch
+      response => Anthropic::Beta::Messages::BetaDeletedMessageBatch
     end
 
     assert_pattern do
@@ -110,7 +110,7 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Anthropic::Test:
     response = @anthropic.beta.messages.batches.cancel("message_batch_id")
 
     assert_pattern do
-      response => Anthropic::Models::Beta::Messages::BetaMessageBatch
+      response => Anthropic::Beta::Messages::BetaMessageBatch
     end
 
     assert_pattern do
@@ -121,8 +121,8 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Anthropic::Test:
         created_at: Time,
         ended_at: Time | nil,
         expires_at: Time,
-        processing_status: Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus,
-        request_counts: Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts,
+        processing_status: Anthropic::Beta::Messages::BetaMessageBatch::ProcessingStatus,
+        request_counts: Anthropic::Beta::Messages::BetaMessageBatchRequestCounts,
         results_url: String | nil,
         type: Symbol
       }

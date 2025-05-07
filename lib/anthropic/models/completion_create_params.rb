@@ -23,8 +23,8 @@ module Anthropic
       #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
       #
-      #   @return [Symbol, String, Anthropic::Models::Model]
-      required :model, union: -> { Anthropic::Models::Model }
+      #   @return [Symbol, String, Anthropic::Model]
+      required :model, union: -> { Anthropic::Model }
 
       # @!attribute prompt
       #   The prompt that you want Claude to complete.
@@ -47,8 +47,8 @@ module Anthropic
       # @!attribute metadata
       #   An object describing metadata about the request.
       #
-      #   @return [Anthropic::Models::Metadata, nil]
-      optional :metadata, -> { Anthropic::Models::Metadata }
+      #   @return [Anthropic::Metadata, nil]
+      optional :metadata, -> { Anthropic::Metadata }
 
       # @!attribute stop_sequences
       #   Sequences that will cause the model to stop generating.
@@ -103,22 +103,21 @@ module Anthropic
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::CompletionCreateParams} for more details.
       #
-      #   @param max_tokens_to_sample [Integer] The maximum number of tokens to generate before stopping. ...
+      #   @param max_tokens_to_sample [Integer] The maximum number of tokens to generate before stopping.
       #
-      #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
-      #   ...
+      #   @param model [Symbol, String, Anthropic::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
       #
-      #   @param prompt [String] The prompt that you want Claude to complete. ...
+      #   @param prompt [String] The prompt that you want Claude to complete.
       #
-      #   @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
+      #   @param metadata [Anthropic::Metadata] An object describing metadata about the request.
       #
-      #   @param stop_sequences [Array<String>] Sequences that will cause the model to stop generating. ...
+      #   @param stop_sequences [Array<String>] Sequences that will cause the model to stop generating.
       #
-      #   @param temperature [Float] Amount of randomness injected into the response. ...
+      #   @param temperature [Float] Amount of randomness injected into the response.
       #
-      #   @param top_k [Integer] Only sample from the top K options for each subsequent token. ...
+      #   @param top_k [Integer] Only sample from the top K options for each subsequent token.
       #
-      #   @param top_p [Float] Use nucleus sampling. ...
+      #   @param top_p [Float] Use nucleus sampling.
       #
       #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
     end

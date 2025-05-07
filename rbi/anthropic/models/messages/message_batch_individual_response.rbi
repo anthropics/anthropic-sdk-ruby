@@ -6,6 +6,9 @@ module Anthropic
 
     module Messages
       class MessageBatchIndividualResponse < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         # Developer-provided ID created for each request in a Message Batch. Useful for
         # matching results to requests, as results may be given out of request order.
         #
@@ -21,10 +24,10 @@ module Anthropic
         sig do
           returns(
             T.any(
-              Anthropic::Models::Messages::MessageBatchSucceededResult,
-              Anthropic::Models::Messages::MessageBatchErroredResult,
-              Anthropic::Models::Messages::MessageBatchCanceledResult,
-              Anthropic::Models::Messages::MessageBatchExpiredResult
+              Anthropic::Messages::MessageBatchSucceededResult,
+              Anthropic::Messages::MessageBatchErroredResult,
+              Anthropic::Messages::MessageBatchCanceledResult,
+              Anthropic::Messages::MessageBatchExpiredResult
             )
           )
         end
@@ -35,15 +38,14 @@ module Anthropic
         sig do
           params(
             custom_id: String,
-            result: T.any(
-              Anthropic::Models::Messages::MessageBatchSucceededResult,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::Messages::MessageBatchErroredResult,
-              Anthropic::Models::Messages::MessageBatchCanceledResult,
-              Anthropic::Models::Messages::MessageBatchExpiredResult
-            )
-          )
-            .returns(T.attached_class)
+            result:
+              T.any(
+                Anthropic::Messages::MessageBatchSucceededResult::OrHash,
+                Anthropic::Messages::MessageBatchErroredResult::OrHash,
+                Anthropic::Messages::MessageBatchCanceledResult::OrHash,
+                Anthropic::Messages::MessageBatchExpiredResult::OrHash
+              )
+          ).returns(T.attached_class)
         end
         def self.new(
           # Developer-provided ID created for each request in a Message Batch. Useful for
@@ -57,22 +59,25 @@ module Anthropic
           # processing failed, or the reason why processing was not attempted, such as
           # cancellation or expiration.
           result:
-        ); end
-        sig do
-          override
-            .returns(
-              {
-                custom_id: String,
-                result: T.any(
-                  Anthropic::Models::Messages::MessageBatchSucceededResult,
-                  Anthropic::Models::Messages::MessageBatchErroredResult,
-                  Anthropic::Models::Messages::MessageBatchCanceledResult,
-                  Anthropic::Models::Messages::MessageBatchExpiredResult
-                )
-              }
-            )
+        )
         end
-        def to_hash; end
+
+        sig do
+          override.returns(
+            {
+              custom_id: String,
+              result:
+                T.any(
+                  Anthropic::Messages::MessageBatchSucceededResult,
+                  Anthropic::Messages::MessageBatchErroredResult,
+                  Anthropic::Messages::MessageBatchCanceledResult,
+                  Anthropic::Messages::MessageBatchExpiredResult
+                )
+            }
+          )
+        end
+        def to_hash
+        end
       end
     end
   end

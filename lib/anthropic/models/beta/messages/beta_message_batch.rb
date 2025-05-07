@@ -55,9 +55,11 @@ module Anthropic
           # @!attribute processing_status
           #   Processing status of the Message Batch.
           #
-          #   @return [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus]
+          #   @return [Symbol, Anthropic::Beta::Messages::BetaMessageBatch::ProcessingStatus]
           required :processing_status,
-                   enum: -> { Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus }
+                   enum: -> {
+                     Anthropic::Beta::Messages::BetaMessageBatch::ProcessingStatus
+                   }
 
           # @!attribute request_counts
           #   Tallies requests within the Message Batch, categorized by their status.
@@ -66,8 +68,8 @@ module Anthropic
           #   processing of the entire batch ends. The sum of all values always matches the
           #   total number of requests in the batch.
           #
-          #   @return [Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts]
-          required :request_counts, -> { Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts }
+          #   @return [Anthropic::Beta::Messages::BetaMessageBatchRequestCounts]
+          required :request_counts, -> { Anthropic::Beta::Messages::BetaMessageBatchRequestCounts }
 
           # @!attribute results_url
           #   URL to a `.jsonl` file containing the results of the Message Batch requests.
@@ -89,37 +91,31 @@ module Anthropic
 
           # @!method initialize(id:, archived_at:, cancel_initiated_at:, created_at:, ended_at:, expires_at:, processing_status:, request_counts:, results_url:, type: :message_batch)
           #   Some parameter documentations has been truncated, see
-          #   {Anthropic::Models::Beta::Messages::BetaMessageBatch} for more details.
+          #   {Anthropic::Beta::Messages::BetaMessageBatch} for more details.
           #
-          #   @param id [String] Unique object identifier. ...
+          #   @param id [String] Unique object identifier.
           #
           #   @param archived_at [Time, nil] RFC 3339 datetime string representing the time at which the Message Batch was ar
-          #   ...
           #
           #   @param cancel_initiated_at [Time, nil] RFC 3339 datetime string representing the time at which cancellation was initiat
-          #   ...
           #
           #   @param created_at [Time] RFC 3339 datetime string representing the time at which the Message Batch was cr
-          #   ...
           #
           #   @param ended_at [Time, nil] RFC 3339 datetime string representing the time at which processing for the Messa
-          #   ...
           #
           #   @param expires_at [Time] RFC 3339 datetime string representing the time at which the Message Batch will e
-          #   ...
           #
-          #   @param processing_status [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus] Processing status of the Message Batch.
+          #   @param processing_status [Symbol, Anthropic::Beta::Messages::BetaMessageBatch::ProcessingStatus] Processing status of the Message Batch.
           #
-          #   @param request_counts [Anthropic::Models::Beta::Messages::BetaMessageBatchRequestCounts] Tallies requests within the Message Batch, categorized by their status. ...
+          #   @param request_counts [Anthropic::Beta::Messages::BetaMessageBatchRequestCounts] Tallies requests within the Message Batch, categorized by their status.
           #
           #   @param results_url [String, nil] URL to a `.jsonl` file containing the results of the Message Batch requests. Spe
-          #   ...
           #
-          #   @param type [Symbol, :message_batch] Object type. ...
+          #   @param type [Symbol, :message_batch] Object type.
 
           # Processing status of the Message Batch.
           #
-          # @see Anthropic::Models::Beta::Messages::BetaMessageBatch#processing_status
+          # @see Anthropic::Beta::Messages::BetaMessageBatch#processing_status
           module ProcessingStatus
             extend Anthropic::Internal::Type::Enum
 

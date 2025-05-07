@@ -6,10 +6,15 @@ module Anthropic
 
     module Beta
       class BetaBase64ImageSource < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         sig { returns(String) }
         attr_accessor :data
 
-        sig { returns(Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol) }
+        sig do
+          returns(Anthropic::Beta::BetaBase64ImageSource::MediaType::OrSymbol)
+        end
         attr_accessor :media_type
 
         sig { returns(Symbol) }
@@ -18,36 +23,66 @@ module Anthropic
         sig do
           params(
             data: String,
-            media_type: Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol,
+            media_type:
+              Anthropic::Beta::BetaBase64ImageSource::MediaType::OrSymbol,
             type: Symbol
-          )
-            .returns(T.attached_class)
+          ).returns(T.attached_class)
         end
-        def self.new(data:, media_type:, type: :base64); end
+        def self.new(data:, media_type:, type: :base64)
+        end
 
         sig do
-          override
-            .returns(
-              {data: String, media_type: Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::OrSymbol, type: Symbol}
-            )
+          override.returns(
+            {
+              data: String,
+              media_type:
+                Anthropic::Beta::BetaBase64ImageSource::MediaType::OrSymbol,
+              type: Symbol
+            }
+          )
         end
-        def to_hash; end
+        def to_hash
+        end
 
         module MediaType
           extend Anthropic::Internal::Type::Enum
 
-          TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Beta::BetaBase64ImageSource::MediaType) }
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::Beta::BetaBase64ImageSource::MediaType)
+            end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
           IMAGE_JPEG =
-            T.let(:"image/jpeg", Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol)
-          IMAGE_PNG = T.let(:"image/png", Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol)
-          IMAGE_GIF = T.let(:"image/gif", Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol)
+            T.let(
+              :"image/jpeg",
+              Anthropic::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol
+            )
+          IMAGE_PNG =
+            T.let(
+              :"image/png",
+              Anthropic::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol
+            )
+          IMAGE_GIF =
+            T.let(
+              :"image/gif",
+              Anthropic::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol
+            )
           IMAGE_WEBP =
-            T.let(:"image/webp", Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol)
+            T.let(
+              :"image/webp",
+              Anthropic::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol
+            )
 
-          sig { override.returns(T::Array[Anthropic::Models::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol]) }
-          def self.values; end
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaBase64ImageSource::MediaType::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
     end

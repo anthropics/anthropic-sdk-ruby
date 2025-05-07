@@ -2,25 +2,23 @@ module Anthropic
   module Models
     type raw_message_delta_event =
       {
-        delta: Anthropic::Models::RawMessageDeltaEvent::Delta,
+        delta: Anthropic::RawMessageDeltaEvent::Delta,
         type: :message_delta,
-        usage: Anthropic::Models::MessageDeltaUsage
+        usage: Anthropic::MessageDeltaUsage
       }
 
     class RawMessageDeltaEvent < Anthropic::Internal::Type::BaseModel
-      attr_accessor delta: Anthropic::Models::RawMessageDeltaEvent::Delta
+      attr_accessor delta: Anthropic::RawMessageDeltaEvent::Delta
 
       attr_accessor type: :message_delta
 
-      attr_accessor usage: Anthropic::Models::MessageDeltaUsage
+      attr_accessor usage: Anthropic::MessageDeltaUsage
 
       def initialize: (
-        delta: Anthropic::Models::RawMessageDeltaEvent::Delta,
-        usage: Anthropic::Models::MessageDeltaUsage,
+        delta: Anthropic::RawMessageDeltaEvent::Delta,
+        usage: Anthropic::MessageDeltaUsage,
         ?type: :message_delta
       ) -> void
-
-      def to_hash: -> Anthropic::Models::raw_message_delta_event
 
       type delta =
         { stop_reason: Anthropic::Models::stop_reason?, stop_sequence: String? }
@@ -34,8 +32,6 @@ module Anthropic
           stop_reason: Anthropic::Models::stop_reason?,
           stop_sequence: String?
         ) -> void
-
-        def to_hash: -> Anthropic::Models::RawMessageDeltaEvent::delta
       end
     end
   end

@@ -2,7 +2,7 @@ module Anthropic
   module Models
     type message_count_tokens_params =
       {
-        messages: ::Array[Anthropic::Models::MessageParam],
+        messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
         system_: Anthropic::Models::MessageCountTokensParams::system_,
         thinking: Anthropic::Models::thinking_config_param,
@@ -15,7 +15,7 @@ module Anthropic
       extend Anthropic::Internal::Type::RequestParameters::Converter
       include Anthropic::Internal::Type::RequestParameters
 
-      attr_accessor messages: ::Array[Anthropic::Models::MessageParam]
+      attr_accessor messages: ::Array[Anthropic::MessageParam]
 
       attr_accessor model: Anthropic::Models::model
 
@@ -44,7 +44,7 @@ module Anthropic
       ) -> ::Array[Anthropic::Models::message_count_tokens_tool]
 
       def initialize: (
-        messages: ::Array[Anthropic::Models::MessageParam],
+        messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
         ?system_: Anthropic::Models::MessageCountTokensParams::system_,
         ?thinking: Anthropic::Models::thinking_config_param,
@@ -53,14 +53,12 @@ module Anthropic
         ?request_options: Anthropic::request_opts
       ) -> void
 
-      def to_hash: -> Anthropic::Models::message_count_tokens_params
-
-      type system_ = String | ::Array[Anthropic::Models::TextBlockParam]
+      type system_ = String | ::Array[Anthropic::TextBlockParam]
 
       module System
         extend Anthropic::Internal::Type::Union
 
-        def self?.variants: -> [String, ::Array[Anthropic::Models::TextBlockParam]]
+        def self?.variants: -> ::Array[Anthropic::Models::MessageCountTokensParams::system_]
 
         TextBlockParamArray: Anthropic::Internal::Type::Converter
       end

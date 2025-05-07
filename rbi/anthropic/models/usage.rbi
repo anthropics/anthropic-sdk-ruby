@@ -3,6 +3,8 @@
 module Anthropic
   module Models
     class Usage < Anthropic::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
       # The number of input tokens used to create the cache entry.
       sig { returns(T.nilable(Integer)) }
       attr_accessor :cache_creation_input_tokens
@@ -25,8 +27,7 @@ module Anthropic
           cache_read_input_tokens: T.nilable(Integer),
           input_tokens: Integer,
           output_tokens: Integer
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         # The number of input tokens used to create the cache entry.
@@ -37,19 +38,21 @@ module Anthropic
         input_tokens:,
         # The number of output tokens which were used.
         output_tokens:
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              cache_creation_input_tokens: T.nilable(Integer),
-              cache_read_input_tokens: T.nilable(Integer),
-              input_tokens: Integer,
-              output_tokens: Integer
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            cache_creation_input_tokens: T.nilable(Integer),
+            cache_read_input_tokens: T.nilable(Integer),
+            input_tokens: Integer,
+            output_tokens: Integer
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

@@ -4,7 +4,7 @@ module Anthropic
       {
         text: String,
         type: :text,
-        cache_control: Anthropic::Models::CacheControlEphemeral?,
+        cache_control: Anthropic::CacheControlEphemeral?,
         citations: ::Array[Anthropic::Models::text_citation_param]?
       }
 
@@ -13,18 +13,16 @@ module Anthropic
 
       attr_accessor type: :text
 
-      attr_accessor cache_control: Anthropic::Models::CacheControlEphemeral?
+      attr_accessor cache_control: Anthropic::CacheControlEphemeral?
 
       attr_accessor citations: ::Array[Anthropic::Models::text_citation_param]?
 
       def initialize: (
         text: String,
-        ?cache_control: Anthropic::Models::CacheControlEphemeral?,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
         ?citations: ::Array[Anthropic::Models::text_citation_param]?,
         ?type: :text
       ) -> void
-
-      def to_hash: -> Anthropic::Models::text_block_param
     end
   end
 end

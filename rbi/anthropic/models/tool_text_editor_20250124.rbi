@@ -3,6 +3,8 @@
 module Anthropic
   module Models
     class ToolTextEditor20250124 < Anthropic::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
       # Name of the tool.
       #
       # This is how the tool will be called by the model and in tool_use blocks.
@@ -12,24 +14,22 @@ module Anthropic
       sig { returns(Symbol) }
       attr_accessor :type
 
-      sig { returns(T.nilable(Anthropic::Models::CacheControlEphemeral)) }
+      sig { returns(T.nilable(Anthropic::CacheControlEphemeral)) }
       attr_reader :cache_control
 
       sig do
         params(
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash))
-        )
-          .void
+          cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash)
+        ).void
       end
       attr_writer :cache_control
 
       sig do
         params(
-          cache_control: T.nilable(T.any(Anthropic::Models::CacheControlEphemeral, Anthropic::Internal::AnyHash)),
+          cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
           name: Symbol,
           type: Symbol
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         cache_control: nil,
@@ -38,12 +38,20 @@ module Anthropic
         # This is how the tool will be called by the model and in tool_use blocks.
         name: :str_replace_editor,
         type: :text_editor_20250124
-      ); end
-      sig do
-        override
-          .returns({name: Symbol, type: Symbol, cache_control: T.nilable(Anthropic::Models::CacheControlEphemeral)})
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            name: Symbol,
+            type: Symbol,
+            cache_control: T.nilable(Anthropic::CacheControlEphemeral)
+          }
+        )
+      end
+      def to_hash
+      end
     end
   end
 end

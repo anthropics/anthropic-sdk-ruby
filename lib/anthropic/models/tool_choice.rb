@@ -10,19 +10,19 @@ module Anthropic
       discriminator :type
 
       # The model will automatically decide whether to use tools.
-      variant :auto, -> { Anthropic::Models::ToolChoiceAuto }
+      variant :auto, -> { Anthropic::ToolChoiceAuto }
 
       # The model will use any available tools.
-      variant :any, -> { Anthropic::Models::ToolChoiceAny }
+      variant :any, -> { Anthropic::ToolChoiceAny }
 
       # The model will use the specified tool with `tool_choice.name`.
-      variant :tool, -> { Anthropic::Models::ToolChoiceTool }
+      variant :tool, -> { Anthropic::ToolChoiceTool }
 
       # The model will not be allowed to use tools.
-      variant :none, -> { Anthropic::Models::ToolChoiceNone }
+      variant :none, -> { Anthropic::ToolChoiceNone }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone)]
+      #   @return [Array(Anthropic::ToolChoiceAuto, Anthropic::ToolChoiceAny, Anthropic::ToolChoiceTool, Anthropic::ToolChoiceNone)]
     end
   end
 end

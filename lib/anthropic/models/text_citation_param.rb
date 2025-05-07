@@ -7,14 +7,14 @@ module Anthropic
 
       discriminator :type
 
-      variant :char_location, -> { Anthropic::Models::CitationCharLocationParam }
+      variant :char_location, -> { Anthropic::CitationCharLocationParam }
 
-      variant :page_location, -> { Anthropic::Models::CitationPageLocationParam }
+      variant :page_location, -> { Anthropic::CitationPageLocationParam }
 
-      variant :content_block_location, -> { Anthropic::Models::CitationContentBlockLocationParam }
+      variant :content_block_location, -> { Anthropic::CitationContentBlockLocationParam }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam)]
+      #   @return [Array(Anthropic::CitationCharLocationParam, Anthropic::CitationPageLocationParam, Anthropic::CitationContentBlockLocationParam)]
     end
   end
 end

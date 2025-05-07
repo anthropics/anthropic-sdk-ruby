@@ -7,36 +7,47 @@ module Anthropic
         extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         # List of requests for prompt completion. Each is an individual request to create
         # a Message.
-        sig { returns(T::Array[Anthropic::Models::Messages::BatchCreateParams::Request]) }
+        sig do
+          returns(T::Array[Anthropic::Messages::BatchCreateParams::Request])
+        end
         attr_accessor :requests
 
         sig do
           params(
-            requests: T::Array[T.any(Anthropic::Models::Messages::BatchCreateParams::Request, Anthropic::Internal::AnyHash)],
-            request_options: T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash)
-          )
-            .returns(T.attached_class)
+            requests:
+              T::Array[Anthropic::Messages::BatchCreateParams::Request::OrHash],
+            request_options: Anthropic::RequestOptions::OrHash
+          ).returns(T.attached_class)
         end
         def self.new(
           # List of requests for prompt completion. Each is an individual request to create
           # a Message.
           requests:,
           request_options: {}
-        ); end
-        sig do
-          override
-            .returns(
-              {
-                requests: T::Array[Anthropic::Models::Messages::BatchCreateParams::Request],
-                request_options: Anthropic::RequestOptions
-              }
-            )
+        )
         end
-        def to_hash; end
+
+        sig do
+          override.returns(
+            {
+              requests:
+                T::Array[Anthropic::Messages::BatchCreateParams::Request],
+              request_options: Anthropic::RequestOptions
+            }
+          )
+        end
+        def to_hash
+        end
 
         class Request < Anthropic::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
           # Developer-provided ID created for each request in a Message Batch. Useful for
           # matching results to requests, as results may be given out of request order.
           #
@@ -48,23 +59,25 @@ module Anthropic
           #
           # See the [Messages API reference](/en/api/messages) for full documentation on
           # available parameters.
-          sig { returns(Anthropic::Models::Messages::BatchCreateParams::Request::Params) }
+          sig do
+            returns(Anthropic::Messages::BatchCreateParams::Request::Params)
+          end
           attr_reader :params
 
           sig do
             params(
-              params: T.any(Anthropic::Models::Messages::BatchCreateParams::Request::Params, Anthropic::Internal::AnyHash)
-            )
-              .void
+              params:
+                Anthropic::Messages::BatchCreateParams::Request::Params::OrHash
+            ).void
           end
           attr_writer :params
 
           sig do
             params(
               custom_id: String,
-              params: T.any(Anthropic::Models::Messages::BatchCreateParams::Request::Params, Anthropic::Internal::AnyHash)
-            )
-              .returns(T.attached_class)
+              params:
+                Anthropic::Messages::BatchCreateParams::Request::Params::OrHash
+            ).returns(T.attached_class)
           end
           def self.new(
             # Developer-provided ID created for each request in a Message Batch. Useful for
@@ -77,14 +90,24 @@ module Anthropic
             # See the [Messages API reference](/en/api/messages) for full documentation on
             # available parameters.
             params:
-          ); end
-          sig do
-            override
-              .returns({custom_id: String, params: Anthropic::Models::Messages::BatchCreateParams::Request::Params})
+          )
           end
-          def to_hash; end
+
+          sig do
+            override.returns(
+              {
+                custom_id: String,
+                params: Anthropic::Messages::BatchCreateParams::Request::Params
+              }
+            )
+          end
+          def to_hash
+          end
 
           class Params < Anthropic::Internal::Type::BaseModel
+            OrHash =
+              T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
             # The maximum number of tokens to generate before stopping.
             #
             # Note that our models may stop _before_ reaching this maximum. This parameter
@@ -181,20 +204,20 @@ module Anthropic
             # [system prompt](https://docs.anthropic.com/en/docs/system-prompts), you can use
             # the top-level `system` parameter — there is no `"system"` role for input
             # messages in the Messages API.
-            sig { returns(T::Array[Anthropic::Models::MessageParam]) }
+            sig { returns(T::Array[Anthropic::MessageParam]) }
             attr_accessor :messages
 
             # The model that will complete your prompt.\n\nSee
             # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
             # details and options.
-            sig { returns(T.any(Anthropic::Models::Model::OrSymbol, String)) }
+            sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
             attr_accessor :model
 
             # An object describing metadata about the request.
-            sig { returns(T.nilable(Anthropic::Models::Metadata)) }
+            sig { returns(T.nilable(Anthropic::Metadata)) }
             attr_reader :metadata
 
-            sig { params(metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::AnyHash)).void }
+            sig { params(metadata: Anthropic::Metadata::OrHash).void }
             attr_writer :metadata
 
             # Custom text sequences that will cause the model to stop generating.
@@ -227,14 +250,18 @@ module Anthropic
             # A system prompt is a way of providing context and instructions to Claude, such
             # as specifying a particular goal or role. See our
             # [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
-            sig { returns(T.nilable(T.any(String, T::Array[Anthropic::Models::TextBlockParam]))) }
+            sig do
+              returns(
+                T.nilable(T.any(String, T::Array[Anthropic::TextBlockParam]))
+              )
+            end
             attr_reader :system_
 
             sig do
               params(
-                system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::AnyHash)])
-              )
-                .void
+                system_:
+                  T.any(String, T::Array[Anthropic::TextBlockParam::OrHash])
+              ).void
             end
             attr_writer :system_
 
@@ -263,20 +290,24 @@ module Anthropic
             # for details.
             sig do
               returns(
-                T.nilable(T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled))
+                T.nilable(
+                  T.any(
+                    Anthropic::ThinkingConfigEnabled,
+                    Anthropic::ThinkingConfigDisabled
+                  )
+                )
               )
             end
             attr_reader :thinking
 
             sig do
               params(
-                thinking: T.any(
-                  Anthropic::Models::ThinkingConfigEnabled,
-                  Anthropic::Internal::AnyHash,
-                  Anthropic::Models::ThinkingConfigDisabled
-                )
-              )
-                .void
+                thinking:
+                  T.any(
+                    Anthropic::ThinkingConfigEnabled::OrHash,
+                    Anthropic::ThinkingConfigDisabled::OrHash
+                  )
+              ).void
             end
             attr_writer :thinking
 
@@ -286,10 +317,10 @@ module Anthropic
               returns(
                 T.nilable(
                   T.any(
-                    Anthropic::Models::ToolChoiceAuto,
-                    Anthropic::Models::ToolChoiceAny,
-                    Anthropic::Models::ToolChoiceTool,
-                    Anthropic::Models::ToolChoiceNone
+                    Anthropic::ToolChoiceAuto,
+                    Anthropic::ToolChoiceAny,
+                    Anthropic::ToolChoiceTool,
+                    Anthropic::ToolChoiceNone
                   )
                 )
               )
@@ -298,15 +329,14 @@ module Anthropic
 
             sig do
               params(
-                tool_choice: T.any(
-                  Anthropic::Models::ToolChoiceAuto,
-                  Anthropic::Internal::AnyHash,
-                  Anthropic::Models::ToolChoiceAny,
-                  Anthropic::Models::ToolChoiceTool,
-                  Anthropic::Models::ToolChoiceNone
-                )
-              )
-                .void
+                tool_choice:
+                  T.any(
+                    Anthropic::ToolChoiceAuto::OrHash,
+                    Anthropic::ToolChoiceAny::OrHash,
+                    Anthropic::ToolChoiceTool::OrHash,
+                    Anthropic::ToolChoiceNone::OrHash
+                  )
+              ).void
             end
             attr_writer :tool_choice
 
@@ -384,9 +414,9 @@ module Anthropic
                 T.nilable(
                   T::Array[
                     T.any(
-                      Anthropic::Models::Tool,
-                      Anthropic::Models::ToolBash20250124,
-                      Anthropic::Models::ToolTextEditor20250124
+                      Anthropic::Tool,
+                      Anthropic::ToolBash20250124,
+                      Anthropic::ToolTextEditor20250124
                     )
                   ]
                 )
@@ -396,16 +426,15 @@ module Anthropic
 
             sig do
               params(
-                tools: T::Array[
-                  T.any(
-                    Anthropic::Models::Tool,
-                    Anthropic::Internal::AnyHash,
-                    Anthropic::Models::ToolBash20250124,
-                    Anthropic::Models::ToolTextEditor20250124
-                  )
-                ]
-              )
-                .void
+                tools:
+                  T::Array[
+                    T.any(
+                      Anthropic::Tool::OrHash,
+                      Anthropic::ToolBash20250124::OrHash,
+                      Anthropic::ToolTextEditor20250124::OrHash
+                    )
+                  ]
+              ).void
             end
             attr_writer :tools
 
@@ -444,37 +473,37 @@ module Anthropic
             sig do
               params(
                 max_tokens: Integer,
-                messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Internal::AnyHash)],
-                model: T.any(Anthropic::Models::Model::OrSymbol, String),
-                metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::AnyHash),
+                messages: T::Array[Anthropic::MessageParam::OrHash],
+                model: T.any(Anthropic::Model::OrSymbol, String),
+                metadata: Anthropic::Metadata::OrHash,
                 stop_sequences: T::Array[String],
                 stream: T::Boolean,
-                system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::AnyHash)]),
+                system_:
+                  T.any(String, T::Array[Anthropic::TextBlockParam::OrHash]),
                 temperature: Float,
-                thinking: T.any(
-                  Anthropic::Models::ThinkingConfigEnabled,
-                  Anthropic::Internal::AnyHash,
-                  Anthropic::Models::ThinkingConfigDisabled
-                ),
-                tool_choice: T.any(
-                  Anthropic::Models::ToolChoiceAuto,
-                  Anthropic::Internal::AnyHash,
-                  Anthropic::Models::ToolChoiceAny,
-                  Anthropic::Models::ToolChoiceTool,
-                  Anthropic::Models::ToolChoiceNone
-                ),
-                tools: T::Array[
+                thinking:
                   T.any(
-                    Anthropic::Models::Tool,
-                    Anthropic::Internal::AnyHash,
-                    Anthropic::Models::ToolBash20250124,
-                    Anthropic::Models::ToolTextEditor20250124
-                  )
-                ],
+                    Anthropic::ThinkingConfigEnabled::OrHash,
+                    Anthropic::ThinkingConfigDisabled::OrHash
+                  ),
+                tool_choice:
+                  T.any(
+                    Anthropic::ToolChoiceAuto::OrHash,
+                    Anthropic::ToolChoiceAny::OrHash,
+                    Anthropic::ToolChoiceTool::OrHash,
+                    Anthropic::ToolChoiceNone::OrHash
+                  ),
+                tools:
+                  T::Array[
+                    T.any(
+                      Anthropic::Tool::OrHash,
+                      Anthropic::ToolBash20250124::OrHash,
+                      Anthropic::ToolTextEditor20250124::OrHash
+                    )
+                  ],
                 top_k: Integer,
                 top_p: Float
-              )
-                .returns(T.attached_class)
+              ).returns(T.attached_class)
             end
             def self.new(
               # The maximum number of tokens to generate before stopping.
@@ -709,39 +738,47 @@ module Anthropic
               # Recommended for advanced use cases only. You usually only need to use
               # `temperature`.
               top_p: nil
-            ); end
+            )
+            end
+
             sig do
-              override
-                .returns(
-                  {
-                    max_tokens: Integer,
-                    messages: T::Array[Anthropic::Models::MessageParam],
-                    model: T.any(Anthropic::Models::Model::OrSymbol, String),
-                    metadata: Anthropic::Models::Metadata,
-                    stop_sequences: T::Array[String],
-                    stream: T::Boolean,
-                    system_: T.any(String, T::Array[Anthropic::Models::TextBlockParam]),
-                    temperature: Float,
-                    thinking: T.any(Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled),
-                    tool_choice: T.any(
-                      Anthropic::Models::ToolChoiceAuto,
-                      Anthropic::Models::ToolChoiceAny,
-                      Anthropic::Models::ToolChoiceTool,
-                      Anthropic::Models::ToolChoiceNone
+              override.returns(
+                {
+                  max_tokens: Integer,
+                  messages: T::Array[Anthropic::MessageParam],
+                  model: T.any(Anthropic::Model::OrSymbol, String),
+                  metadata: Anthropic::Metadata,
+                  stop_sequences: T::Array[String],
+                  stream: T::Boolean,
+                  system_: T.any(String, T::Array[Anthropic::TextBlockParam]),
+                  temperature: Float,
+                  thinking:
+                    T.any(
+                      Anthropic::ThinkingConfigEnabled,
+                      Anthropic::ThinkingConfigDisabled
                     ),
-                    tools: T::Array[
+                  tool_choice:
+                    T.any(
+                      Anthropic::ToolChoiceAuto,
+                      Anthropic::ToolChoiceAny,
+                      Anthropic::ToolChoiceTool,
+                      Anthropic::ToolChoiceNone
+                    ),
+                  tools:
+                    T::Array[
                       T.any(
-                        Anthropic::Models::Tool,
-                        Anthropic::Models::ToolBash20250124,
-                        Anthropic::Models::ToolTextEditor20250124
+                        Anthropic::Tool,
+                        Anthropic::ToolBash20250124,
+                        Anthropic::ToolTextEditor20250124
                       )
                     ],
-                    top_k: Integer,
-                    top_p: Float
-                  }
-                )
+                  top_k: Integer,
+                  top_p: Float
+                }
+              )
             end
-            def to_hash; end
+            def to_hash
+            end
 
             # System prompt.
             #
@@ -751,12 +788,24 @@ module Anthropic
             module System
               extend Anthropic::Internal::Type::Union
 
-              sig { override.returns([String, T::Array[Anthropic::Models::TextBlockParam]]) }
-              def self.variants; end
+              Variants =
+                T.type_alias do
+                  T.any(String, T::Array[Anthropic::TextBlockParam])
+                end
+
+              sig do
+                override.returns(
+                  T::Array[
+                    Anthropic::Messages::BatchCreateParams::Request::Params::System::Variants
+                  ]
+                )
+              end
+              def self.variants
+              end
 
               TextBlockParamArray =
                 T.let(
-                  Anthropic::Internal::Type::ArrayOf[Anthropic::Models::TextBlockParam],
+                  Anthropic::Internal::Type::ArrayOf[Anthropic::TextBlockParam],
                   Anthropic::Internal::Type::Converter
                 )
             end

@@ -8,11 +8,21 @@ module Anthropic
       module BetaContentBlockSourceContent
         extend Anthropic::Internal::Type::Union
 
+        Variants =
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaTextBlockParam,
+              Anthropic::Beta::BetaImageBlockParam
+            )
+          end
+
         sig do
-          override
-            .returns([Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam])
+          override.returns(
+            T::Array[Anthropic::Beta::BetaContentBlockSourceContent::Variants]
+          )
         end
-        def self.variants; end
+        def self.variants
+        end
       end
     end
   end

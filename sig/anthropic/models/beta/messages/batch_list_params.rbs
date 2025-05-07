@@ -40,8 +40,6 @@ module Anthropic
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> void
-
-          def to_hash: -> Anthropic::Models::Beta::Messages::batch_list_params
         end
       end
     end

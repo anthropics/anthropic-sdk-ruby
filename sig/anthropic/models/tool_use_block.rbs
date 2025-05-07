@@ -18,8 +18,6 @@ module Anthropic
         name: String,
         ?type: :tool_use
       ) -> void
-
-      def to_hash: -> Anthropic::Models::tool_use_block
     end
   end
 end

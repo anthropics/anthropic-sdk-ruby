@@ -3,10 +3,12 @@
 module Anthropic
   module Models
     class RawMessageDeltaEvent < Anthropic::Internal::Type::BaseModel
-      sig { returns(Anthropic::Models::RawMessageDeltaEvent::Delta) }
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
+      sig { returns(Anthropic::RawMessageDeltaEvent::Delta) }
       attr_reader :delta
 
-      sig { params(delta: T.any(Anthropic::Models::RawMessageDeltaEvent::Delta, Anthropic::Internal::AnyHash)).void }
+      sig { params(delta: Anthropic::RawMessageDeltaEvent::Delta::OrHash).void }
       attr_writer :delta
 
       sig { returns(Symbol) }
@@ -27,19 +29,18 @@ module Anthropic
       #
       # Total input tokens in a request is the summation of `input_tokens`,
       # `cache_creation_input_tokens`, and `cache_read_input_tokens`.
-      sig { returns(Anthropic::Models::MessageDeltaUsage) }
+      sig { returns(Anthropic::MessageDeltaUsage) }
       attr_reader :usage
 
-      sig { params(usage: T.any(Anthropic::Models::MessageDeltaUsage, Anthropic::Internal::AnyHash)).void }
+      sig { params(usage: Anthropic::MessageDeltaUsage::OrHash).void }
       attr_writer :usage
 
       sig do
         params(
-          delta: T.any(Anthropic::Models::RawMessageDeltaEvent::Delta, Anthropic::Internal::AnyHash),
-          usage: T.any(Anthropic::Models::MessageDeltaUsage, Anthropic::Internal::AnyHash),
+          delta: Anthropic::RawMessageDeltaEvent::Delta::OrHash,
+          usage: Anthropic::MessageDeltaUsage::OrHash,
           type: Symbol
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         delta:,
@@ -60,39 +61,50 @@ module Anthropic
         # `cache_creation_input_tokens`, and `cache_read_input_tokens`.
         usage:,
         type: :message_delta
-      ); end
-      sig do
-        override
-          .returns(
-            {
-              delta: Anthropic::Models::RawMessageDeltaEvent::Delta,
-              type: Symbol,
-              usage: Anthropic::Models::MessageDeltaUsage
-            }
-          )
+      )
       end
-      def to_hash; end
+
+      sig do
+        override.returns(
+          {
+            delta: Anthropic::RawMessageDeltaEvent::Delta,
+            type: Symbol,
+            usage: Anthropic::MessageDeltaUsage
+          }
+        )
+      end
+      def to_hash
+      end
 
       class Delta < Anthropic::Internal::Type::BaseModel
-        sig { returns(T.nilable(Anthropic::Models::StopReason::TaggedSymbol)) }
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
+        sig { returns(T.nilable(Anthropic::StopReason::TaggedSymbol)) }
         attr_accessor :stop_reason
 
         sig { returns(T.nilable(String)) }
         attr_accessor :stop_sequence
 
         sig do
-          params(stop_reason: T.nilable(Anthropic::Models::StopReason::OrSymbol), stop_sequence: T.nilable(String))
-            .returns(T.attached_class)
+          params(
+            stop_reason: T.nilable(Anthropic::StopReason::OrSymbol),
+            stop_sequence: T.nilable(String)
+          ).returns(T.attached_class)
         end
-        def self.new(stop_reason:, stop_sequence:); end
+        def self.new(stop_reason:, stop_sequence:)
+        end
 
         sig do
-          override
-            .returns(
-              {stop_reason: T.nilable(Anthropic::Models::StopReason::TaggedSymbol), stop_sequence: T.nilable(String)}
-            )
+          override.returns(
+            {
+              stop_reason: T.nilable(Anthropic::StopReason::TaggedSymbol),
+              stop_sequence: T.nilable(String)
+            }
+          )
         end
-        def to_hash; end
+        def to_hash
+        end
       end
     end
   end

@@ -9,21 +9,29 @@ module Anthropic
         # The Models API response can be used to determine information about a specific
         # model or resolve a model alias to a model ID.
         sig do
-          params(model_id: String, request_options: Anthropic::RequestOpts)
-            .returns(Anthropic::Models::Beta::BetaModelInfo)
+          params(
+            model_id: String,
+            request_options: Anthropic::RequestOptions::OrHash
+          ).returns(Anthropic::Beta::BetaModelInfo)
         end
         def retrieve(
           # Model identifier or alias.
           model_id,
           request_options: {}
-        ); end
+        )
+        end
+
         # List available models.
         #
         # The Models API response can be used to determine which models are available for
         # use in the API. More recently released models are listed first.
         sig do
-          params(after_id: String, before_id: String, limit: Integer, request_options: Anthropic::RequestOpts)
-            .returns(Anthropic::Internal::Page[Anthropic::Models::Beta::BetaModelInfo])
+          params(
+            after_id: String,
+            before_id: String,
+            limit: Integer,
+            request_options: Anthropic::RequestOptions::OrHash
+          ).returns(Anthropic::Internal::Page[Anthropic::Beta::BetaModelInfo])
         end
         def list(
           # ID of the object to use as a cursor for pagination. When provided, returns the
@@ -37,10 +45,13 @@ module Anthropic
           # Defaults to `20`. Ranges from `1` to `1000`.
           limit: nil,
           request_options: {}
-        ); end
+        )
+        end
+
         # @api private
         sig { params(client: Anthropic::Client).returns(T.attached_class) }
-        def self.new(client:); end
+        def self.new(client:)
+        end
       end
     end
   end

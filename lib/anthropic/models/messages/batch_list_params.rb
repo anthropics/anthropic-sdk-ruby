@@ -35,12 +35,10 @@ module Anthropic
         #   {Anthropic::Models::Messages::BatchListParams} for more details.
         #
         #   @param after_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
-        #   ...
         #
         #   @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
-        #   ...
         #
-        #   @param limit [Integer] Number of items to return per page. ...
+        #   @param limit [Integer] Number of items to return per page.
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
       end

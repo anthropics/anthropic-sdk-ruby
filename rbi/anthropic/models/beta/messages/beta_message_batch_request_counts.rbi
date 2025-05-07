@@ -5,6 +5,9 @@ module Anthropic
     module Beta
       module Messages
         class BetaMessageBatchRequestCounts < Anthropic::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
           # Number of requests in the Message Batch that have been canceled.
           #
           # This is zero until processing of the entire Message Batch has ended.
@@ -40,8 +43,7 @@ module Anthropic
               expired: Integer,
               processing: Integer,
               succeeded: Integer
-            )
-              .returns(T.attached_class)
+            ).returns(T.attached_class)
           end
           def self.new(
             # Number of requests in the Message Batch that have been canceled.
@@ -62,18 +64,22 @@ module Anthropic
             #
             # This is zero until processing of the entire Message Batch has ended.
             succeeded:
-          ); end
-          sig do
-            override
-              .returns({
-                         canceled: Integer,
-                         errored: Integer,
-                         expired: Integer,
-                         processing: Integer,
-                         succeeded: Integer
-                       })
+          )
           end
-          def to_hash; end
+
+          sig do
+            override.returns(
+              {
+                canceled: Integer,
+                errored: Integer,
+                expired: Integer,
+                processing: Integer,
+                succeeded: Integer
+              }
+            )
+          end
+          def to_hash
+          end
         end
       end
     end

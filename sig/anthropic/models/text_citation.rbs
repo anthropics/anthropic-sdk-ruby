@@ -1,14 +1,14 @@
 module Anthropic
   module Models
     type text_citation =
-      Anthropic::Models::CitationCharLocation
-      | Anthropic::Models::CitationPageLocation
-      | Anthropic::Models::CitationContentBlockLocation
+      Anthropic::CitationCharLocation
+      | Anthropic::CitationPageLocation
+      | Anthropic::CitationContentBlockLocation
 
     module TextCitation
       extend Anthropic::Internal::Type::Union
 
-      def self?.variants: -> [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation]
+      def self?.variants: -> ::Array[Anthropic::Models::text_citation]
     end
   end
 end

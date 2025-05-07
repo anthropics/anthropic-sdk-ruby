@@ -14,8 +14,19 @@ module Anthropic
     module ThinkingConfigParam
       extend Anthropic::Internal::Type::Union
 
-      sig { override.returns([Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]) }
-      def self.variants; end
+      Variants =
+        T.type_alias do
+          T.any(
+            Anthropic::ThinkingConfigEnabled,
+            Anthropic::ThinkingConfigDisabled
+          )
+        end
+
+      sig do
+        override.returns(T::Array[Anthropic::ThinkingConfigParam::Variants])
+      end
+      def self.variants
+      end
     end
   end
 end

@@ -1,12 +1,12 @@
 module Anthropic
   module Models
     type content_block_source_content =
-      Anthropic::Models::TextBlockParam | Anthropic::Models::ImageBlockParam
+      Anthropic::TextBlockParam | Anthropic::ImageBlockParam
 
     module ContentBlockSourceContent
       extend Anthropic::Internal::Type::Union
 
-      def self?.variants: -> [Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam]
+      def self?.variants: -> ::Array[Anthropic::Models::content_block_source_content]
     end
   end
 end

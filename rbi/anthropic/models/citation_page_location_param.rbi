@@ -3,6 +3,8 @@
 module Anthropic
   module Models
     class CitationPageLocationParam < Anthropic::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
       sig { returns(String) }
       attr_accessor :cited_text
 
@@ -29,8 +31,7 @@ module Anthropic
           end_page_number: Integer,
           start_page_number: Integer,
           type: Symbol
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         cited_text:,
@@ -43,19 +44,19 @@ module Anthropic
       end
 
       sig do
-        override
-          .returns(
-            {
-              cited_text: String,
-              document_index: Integer,
-              document_title: T.nilable(String),
-              end_page_number: Integer,
-              start_page_number: Integer,
-              type: Symbol
-            }
-          )
+        override.returns(
+          {
+            cited_text: String,
+            document_index: Integer,
+            document_title: T.nilable(String),
+            end_page_number: Integer,
+            start_page_number: Integer,
+            type: Symbol
+          }
+        )
       end
-      def to_hash; end
+      def to_hash
+      end
     end
   end
 end

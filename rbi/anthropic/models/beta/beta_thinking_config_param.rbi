@@ -17,13 +17,21 @@ module Anthropic
       module BetaThinkingConfigParam
         extend Anthropic::Internal::Type::Union
 
-        sig do
-          override
-            .returns(
-              [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled]
+        Variants =
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaThinkingConfigEnabled,
+              Anthropic::Beta::BetaThinkingConfigDisabled
             )
+          end
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::Beta::BetaThinkingConfigParam::Variants]
+          )
         end
-        def self.variants; end
+        def self.variants
+        end
       end
     end
   end

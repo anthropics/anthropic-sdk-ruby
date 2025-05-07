@@ -7,22 +7,22 @@ module Anthropic
 
       discriminator :type
 
-      variant :text, -> { Anthropic::Models::TextBlockParam }
+      variant :text, -> { Anthropic::TextBlockParam }
 
-      variant :image, -> { Anthropic::Models::ImageBlockParam }
+      variant :image, -> { Anthropic::ImageBlockParam }
 
-      variant :tool_use, -> { Anthropic::Models::ToolUseBlockParam }
+      variant :tool_use, -> { Anthropic::ToolUseBlockParam }
 
-      variant :tool_result, -> { Anthropic::Models::ToolResultBlockParam }
+      variant :tool_result, -> { Anthropic::ToolResultBlockParam }
 
-      variant :document, -> { Anthropic::Models::DocumentBlockParam }
+      variant :document, -> { Anthropic::DocumentBlockParam }
 
-      variant :thinking, -> { Anthropic::Models::ThinkingBlockParam }
+      variant :thinking, -> { Anthropic::ThinkingBlockParam }
 
-      variant :redacted_thinking, -> { Anthropic::Models::RedactedThinkingBlockParam }
+      variant :redacted_thinking, -> { Anthropic::RedactedThinkingBlockParam }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam)]
+      #   @return [Array(Anthropic::TextBlockParam, Anthropic::ImageBlockParam, Anthropic::ToolUseBlockParam, Anthropic::ToolResultBlockParam, Anthropic::DocumentBlockParam, Anthropic::ThinkingBlockParam, Anthropic::RedactedThinkingBlockParam)]
     end
   end
 end

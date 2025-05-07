@@ -6,35 +6,35 @@ module Anthropic
       class BetaMessageParam < Anthropic::Internal::Type::BaseModel
         # @!attribute content
         #
-        #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam>]
-        required :content, union: -> { Anthropic::Models::Beta::BetaMessageParam::Content }
+        #   @return [String, Array<Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam, Anthropic::Beta::BetaToolUseBlockParam, Anthropic::Beta::BetaToolResultBlockParam, Anthropic::Beta::BetaBase64PDFBlock, Anthropic::Beta::BetaThinkingBlockParam, Anthropic::Beta::BetaRedactedThinkingBlockParam>]
+        required :content, union: -> { Anthropic::Beta::BetaMessageParam::Content }
 
         # @!attribute role
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaMessageParam::Role]
-        required :role, enum: -> { Anthropic::Models::Beta::BetaMessageParam::Role }
+        #   @return [Symbol, Anthropic::Beta::BetaMessageParam::Role]
+        required :role, enum: -> { Anthropic::Beta::BetaMessageParam::Role }
 
         # @!method initialize(content:, role:)
-        #   @param content [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam>]
-        #   @param role [Symbol, Anthropic::Models::Beta::BetaMessageParam::Role]
+        #   @param content [String, Array<Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam, Anthropic::Beta::BetaToolUseBlockParam, Anthropic::Beta::BetaToolResultBlockParam, Anthropic::Beta::BetaBase64PDFBlock, Anthropic::Beta::BetaThinkingBlockParam, Anthropic::Beta::BetaRedactedThinkingBlockParam>]
+        #   @param role [Symbol, Anthropic::Beta::BetaMessageParam::Role]
 
-        # @see Anthropic::Models::Beta::BetaMessageParam#content
+        # @see Anthropic::Beta::BetaMessageParam#content
         module Content
           extend Anthropic::Internal::Type::Union
 
           variant String
 
-          variant -> { Anthropic::Models::Beta::BetaMessageParam::Content::BetaContentBlockParamArray }
+          variant -> { Anthropic::Beta::BetaMessageParam::Content::BetaContentBlockParamArray }
 
           # @!method self.variants
-          #   @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam>)]
+          #   @return [Array(String, Array<Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam, Anthropic::Beta::BetaToolUseBlockParam, Anthropic::Beta::BetaToolResultBlockParam, Anthropic::Beta::BetaBase64PDFBlock, Anthropic::Beta::BetaThinkingBlockParam, Anthropic::Beta::BetaRedactedThinkingBlockParam>)]
 
           # @type [Anthropic::Internal::Type::Converter]
           BetaContentBlockParamArray =
-            Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::Models::Beta::BetaContentBlockParam }]
+            Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::Beta::BetaContentBlockParam }]
         end
 
-        # @see Anthropic::Models::Beta::BetaMessageParam#role
+        # @see Anthropic::Beta::BetaMessageParam#role
         module Role
           extend Anthropic::Internal::Type::Enum
 

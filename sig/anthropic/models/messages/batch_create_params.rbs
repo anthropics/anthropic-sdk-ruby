@@ -2,51 +2,45 @@ module Anthropic
   module Models
     module Messages
       type batch_create_params =
-        {
-          requests: ::Array[Anthropic::Models::Messages::BatchCreateParams::Request]
-        }
+        { requests: ::Array[Anthropic::Messages::BatchCreateParams::Request] }
         & Anthropic::Internal::Type::request_parameters
 
       class BatchCreateParams < Anthropic::Internal::Type::BaseModel
         extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
-        attr_accessor requests: ::Array[Anthropic::Models::Messages::BatchCreateParams::Request]
+        attr_accessor requests: ::Array[Anthropic::Messages::BatchCreateParams::Request]
 
         def initialize: (
-          requests: ::Array[Anthropic::Models::Messages::BatchCreateParams::Request],
+          requests: ::Array[Anthropic::Messages::BatchCreateParams::Request],
           ?request_options: Anthropic::request_opts
         ) -> void
-
-        def to_hash: -> Anthropic::Models::Messages::batch_create_params
 
         type request =
           {
             custom_id: String,
-            params: Anthropic::Models::Messages::BatchCreateParams::Request::Params
+            params: Anthropic::Messages::BatchCreateParams::Request::Params
           }
 
         class Request < Anthropic::Internal::Type::BaseModel
           attr_accessor custom_id: String
 
-          attr_accessor params: Anthropic::Models::Messages::BatchCreateParams::Request::Params
+          attr_accessor params: Anthropic::Messages::BatchCreateParams::Request::Params
 
           def initialize: (
             custom_id: String,
-            params: Anthropic::Models::Messages::BatchCreateParams::Request::Params
+            params: Anthropic::Messages::BatchCreateParams::Request::Params
           ) -> void
-
-          def to_hash: -> Anthropic::Models::Messages::BatchCreateParams::request
 
           type params =
             {
               max_tokens: Integer,
-              messages: ::Array[Anthropic::Models::MessageParam],
+              messages: ::Array[Anthropic::MessageParam],
               model: Anthropic::Models::model,
-              metadata: Anthropic::Models::Metadata,
+              metadata: Anthropic::Metadata,
               stop_sequences: ::Array[String],
               stream: bool,
-              system_: Anthropic::Models::Messages::BatchCreateParams::Request::Params::system_,
+              system_: Anthropic::Messages::BatchCreateParams::Request::Params::system_,
               temperature: Float,
               thinking: Anthropic::Models::thinking_config_param,
               tool_choice: Anthropic::Models::tool_choice,
@@ -58,15 +52,13 @@ module Anthropic
           class Params < Anthropic::Internal::Type::BaseModel
             attr_accessor max_tokens: Integer
 
-            attr_accessor messages: ::Array[Anthropic::Models::MessageParam]
+            attr_accessor messages: ::Array[Anthropic::MessageParam]
 
             attr_accessor model: Anthropic::Models::model
 
-            attr_reader metadata: Anthropic::Models::Metadata?
+            attr_reader metadata: Anthropic::Metadata?
 
-            def metadata=: (
-              Anthropic::Models::Metadata
-            ) -> Anthropic::Models::Metadata
+            def metadata=: (Anthropic::Metadata) -> Anthropic::Metadata
 
             attr_reader stop_sequences: ::Array[String]?
 
@@ -76,11 +68,11 @@ module Anthropic
 
             def stream=: (bool) -> bool
 
-            attr_reader system_: Anthropic::Models::Messages::BatchCreateParams::Request::Params::system_?
+            attr_reader system_: Anthropic::Messages::BatchCreateParams::Request::Params::system_?
 
             def system_=: (
-              Anthropic::Models::Messages::BatchCreateParams::Request::Params::system_
-            ) -> Anthropic::Models::Messages::BatchCreateParams::Request::Params::system_
+              Anthropic::Messages::BatchCreateParams::Request::Params::system_
+            ) -> Anthropic::Messages::BatchCreateParams::Request::Params::system_
 
             attr_reader temperature: Float?
 
@@ -114,12 +106,12 @@ module Anthropic
 
             def initialize: (
               max_tokens: Integer,
-              messages: ::Array[Anthropic::Models::MessageParam],
+              messages: ::Array[Anthropic::MessageParam],
               model: Anthropic::Models::model,
-              ?metadata: Anthropic::Models::Metadata,
+              ?metadata: Anthropic::Metadata,
               ?stop_sequences: ::Array[String],
               ?stream: bool,
-              ?system_: Anthropic::Models::Messages::BatchCreateParams::Request::Params::system_,
+              ?system_: Anthropic::Messages::BatchCreateParams::Request::Params::system_,
               ?temperature: Float,
               ?thinking: Anthropic::Models::thinking_config_param,
               ?tool_choice: Anthropic::Models::tool_choice,
@@ -128,14 +120,12 @@ module Anthropic
               ?top_p: Float
             ) -> void
 
-            def to_hash: -> Anthropic::Models::Messages::BatchCreateParams::Request::params
-
-            type system_ = String | ::Array[Anthropic::Models::TextBlockParam]
+            type system_ = String | ::Array[Anthropic::TextBlockParam]
 
             module System
               extend Anthropic::Internal::Type::Union
 
-              def self?.variants: -> [String, ::Array[Anthropic::Models::TextBlockParam]]
+              def self?.variants: -> ::Array[Anthropic::Messages::BatchCreateParams::Request::Params::system_]
 
               TextBlockParamArray: Anthropic::Internal::Type::Converter
             end

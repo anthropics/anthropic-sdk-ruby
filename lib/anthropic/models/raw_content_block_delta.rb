@@ -7,18 +7,18 @@ module Anthropic
 
       discriminator :type
 
-      variant :text_delta, -> { Anthropic::Models::TextDelta }
+      variant :text_delta, -> { Anthropic::TextDelta }
 
-      variant :input_json_delta, -> { Anthropic::Models::InputJSONDelta }
+      variant :input_json_delta, -> { Anthropic::InputJSONDelta }
 
-      variant :citations_delta, -> { Anthropic::Models::CitationsDelta }
+      variant :citations_delta, -> { Anthropic::CitationsDelta }
 
-      variant :thinking_delta, -> { Anthropic::Models::ThinkingDelta }
+      variant :thinking_delta, -> { Anthropic::ThinkingDelta }
 
-      variant :signature_delta, -> { Anthropic::Models::SignatureDelta }
+      variant :signature_delta, -> { Anthropic::SignatureDelta }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta, Anthropic::Models::ThinkingDelta, Anthropic::Models::SignatureDelta)]
+      #   @return [Array(Anthropic::TextDelta, Anthropic::InputJSONDelta, Anthropic::CitationsDelta, Anthropic::ThinkingDelta, Anthropic::SignatureDelta)]
     end
   end
 end

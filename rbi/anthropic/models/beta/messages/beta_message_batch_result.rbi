@@ -12,13 +12,25 @@ module Anthropic
         module BetaMessageBatchResult
           extend Anthropic::Internal::Type::Union
 
-          sig do
-            override
-              .returns(
-                [Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult]
+          Variants =
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::Messages::BetaMessageBatchSucceededResult,
+                Anthropic::Beta::Messages::BetaMessageBatchErroredResult,
+                Anthropic::Beta::Messages::BetaMessageBatchCanceledResult,
+                Anthropic::Beta::Messages::BetaMessageBatchExpiredResult
               )
+            end
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::Messages::BetaMessageBatchResult::Variants
+              ]
+            )
           end
-          def self.variants; end
+          def self.variants
+          end
         end
       end
     end

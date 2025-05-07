@@ -6,8 +6,8 @@ module Anthropic
       class MessageBatchErroredResult < Anthropic::Internal::Type::BaseModel
         # @!attribute error
         #
-        #   @return [Anthropic::Models::ErrorResponse]
-        required :error, -> { Anthropic::Models::ErrorResponse }
+        #   @return [Anthropic::ErrorResponse]
+        required :error, -> { Anthropic::ErrorResponse }
 
         # @!attribute type
         #
@@ -15,7 +15,7 @@ module Anthropic
         required :type, const: :errored
 
         # @!method initialize(error:, type: :errored)
-        #   @param error [Anthropic::Models::ErrorResponse]
+        #   @param error [Anthropic::ErrorResponse]
         #   @param type [Symbol, :errored]
       end
     end

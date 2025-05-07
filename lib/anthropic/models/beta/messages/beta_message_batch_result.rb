@@ -14,16 +14,16 @@ module Anthropic
 
           discriminator :type
 
-          variant :succeeded, -> { Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult }
+          variant :succeeded, -> { Anthropic::Beta::Messages::BetaMessageBatchSucceededResult }
 
-          variant :errored, -> { Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult }
+          variant :errored, -> { Anthropic::Beta::Messages::BetaMessageBatchErroredResult }
 
-          variant :canceled, -> { Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult }
+          variant :canceled, -> { Anthropic::Beta::Messages::BetaMessageBatchCanceledResult }
 
-          variant :expired, -> { Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult }
+          variant :expired, -> { Anthropic::Beta::Messages::BetaMessageBatchExpiredResult }
 
           # @!method self.variants
-          #   @return [Array(Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult)]
+          #   @return [Array(Anthropic::Beta::Messages::BetaMessageBatchSucceededResult, Anthropic::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Beta::Messages::BetaMessageBatchExpiredResult)]
         end
       end
     end

@@ -4,15 +4,15 @@ module Anthropic
 
     module Beta
       type beta_content_block =
-        Anthropic::Models::Beta::BetaTextBlock
-        | Anthropic::Models::Beta::BetaToolUseBlock
-        | Anthropic::Models::Beta::BetaThinkingBlock
-        | Anthropic::Models::Beta::BetaRedactedThinkingBlock
+        Anthropic::Beta::BetaTextBlock
+        | Anthropic::Beta::BetaToolUseBlock
+        | Anthropic::Beta::BetaThinkingBlock
+        | Anthropic::Beta::BetaRedactedThinkingBlock
 
       module BetaContentBlock
         extend Anthropic::Internal::Type::Union
 
-        def self?.variants: -> [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock]
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_content_block]
       end
     end
   end

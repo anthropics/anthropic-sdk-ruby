@@ -5,13 +5,22 @@ module Anthropic
     module ContentBlockParam
       extend Anthropic::Internal::Type::Union
 
-      sig do
-        override
-          .returns(
-            [Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam]
+      Variants =
+        T.type_alias do
+          T.any(
+            Anthropic::TextBlockParam,
+            Anthropic::ImageBlockParam,
+            Anthropic::ToolUseBlockParam,
+            Anthropic::ToolResultBlockParam,
+            Anthropic::DocumentBlockParam,
+            Anthropic::ThinkingBlockParam,
+            Anthropic::RedactedThinkingBlockParam
           )
+        end
+
+      sig { override.returns(T::Array[Anthropic::ContentBlockParam::Variants]) }
+      def self.variants
       end
-      def self.variants; end
     end
   end
 end

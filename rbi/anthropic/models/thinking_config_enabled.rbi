@@ -3,6 +3,8 @@
 module Anthropic
   module Models
     class ThinkingConfigEnabled < Anthropic::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
       # Determines how many tokens Claude can use for its internal reasoning process.
       # Larger budgets can enable more thorough analysis for complex problems, improving
       # response quality.
@@ -18,7 +20,9 @@ module Anthropic
       sig { returns(Symbol) }
       attr_accessor :type
 
-      sig { params(budget_tokens: Integer, type: Symbol).returns(T.attached_class) }
+      sig do
+        params(budget_tokens: Integer, type: Symbol).returns(T.attached_class)
+      end
       def self.new(
         # Determines how many tokens Claude can use for its internal reasoning process.
         # Larger budgets can enable more thorough analysis for complex problems, improving
@@ -31,9 +35,12 @@ module Anthropic
         # for details.
         budget_tokens:,
         type: :enabled
-      ); end
-      sig { override.returns({budget_tokens: Integer, type: Symbol}) }
-      def to_hash; end
+      )
+      end
+
+      sig { override.returns({ budget_tokens: Integer, type: Symbol }) }
+      def to_hash
+      end
     end
   end
 end

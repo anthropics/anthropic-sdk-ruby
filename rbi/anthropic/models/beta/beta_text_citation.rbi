@@ -8,13 +8,22 @@ module Anthropic
       module BetaTextCitation
         extend Anthropic::Internal::Type::Union
 
-        sig do
-          override
-            .returns(
-              [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation]
+        Variants =
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaCitationCharLocation,
+              Anthropic::Beta::BetaCitationPageLocation,
+              Anthropic::Beta::BetaCitationContentBlockLocation
             )
+          end
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::Beta::BetaTextCitation::Variants]
+          )
         end
-        def self.variants; end
+        def self.variants
+        end
       end
     end
   end

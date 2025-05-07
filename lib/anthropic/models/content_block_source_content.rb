@@ -7,12 +7,12 @@ module Anthropic
 
       discriminator :type
 
-      variant :text, -> { Anthropic::Models::TextBlockParam }
+      variant :text, -> { Anthropic::TextBlockParam }
 
-      variant :image, -> { Anthropic::Models::ImageBlockParam }
+      variant :image, -> { Anthropic::ImageBlockParam }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
+      #   @return [Array(Anthropic::TextBlockParam, Anthropic::ImageBlockParam)]
     end
   end
 end

@@ -3,6 +3,8 @@
 module Anthropic
   module Models
     class TextBlock < Anthropic::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
       # Citations supporting the text block.
       #
       # The type of citation returned will depend on the type of document being cited.
@@ -13,9 +15,9 @@ module Anthropic
           T.nilable(
             T::Array[
               T.any(
-                Anthropic::Models::CitationCharLocation,
-                Anthropic::Models::CitationPageLocation,
-                Anthropic::Models::CitationContentBlockLocation
+                Anthropic::CitationCharLocation,
+                Anthropic::CitationPageLocation,
+                Anthropic::CitationContentBlockLocation
               )
             ]
           )
@@ -31,20 +33,19 @@ module Anthropic
 
       sig do
         params(
-          citations: T.nilable(
-            T::Array[
-              T.any(
-                Anthropic::Models::CitationCharLocation,
-                Anthropic::Internal::AnyHash,
-                Anthropic::Models::CitationPageLocation,
-                Anthropic::Models::CitationContentBlockLocation
-              )
-            ]
-          ),
+          citations:
+            T.nilable(
+              T::Array[
+                T.any(
+                  Anthropic::CitationCharLocation::OrHash,
+                  Anthropic::CitationPageLocation::OrHash,
+                  Anthropic::CitationContentBlockLocation::OrHash
+                )
+              ]
+            ),
           text: String,
           type: Symbol
-        )
-          .returns(T.attached_class)
+        ).returns(T.attached_class)
       end
       def self.new(
         # Citations supporting the text block.
@@ -55,26 +56,29 @@ module Anthropic
         citations:,
         text:,
         type: :text
-      ); end
+      )
+      end
+
       sig do
-        override
-          .returns(
-            {
-              citations: T.nilable(
+        override.returns(
+          {
+            citations:
+              T.nilable(
                 T::Array[
                   T.any(
-                    Anthropic::Models::CitationCharLocation,
-                    Anthropic::Models::CitationPageLocation,
-                    Anthropic::Models::CitationContentBlockLocation
+                    Anthropic::CitationCharLocation,
+                    Anthropic::CitationPageLocation,
+                    Anthropic::CitationContentBlockLocation
                   )
                 ]
               ),
-              text: String,
-              type: Symbol
-            }
-          )
+            text: String,
+            type: Symbol
+          }
+        )
       end
-      def to_hash; end
+      def to_hash
+      end
     end
   end
 end

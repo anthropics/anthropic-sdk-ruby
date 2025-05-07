@@ -8,12 +8,12 @@ module Anthropic
 
         discriminator :type
 
-        variant :text, -> { Anthropic::Models::Beta::BetaTextBlockParam }
+        variant :text, -> { Anthropic::Beta::BetaTextBlockParam }
 
-        variant :image, -> { Anthropic::Models::Beta::BetaImageBlockParam }
+        variant :image, -> { Anthropic::Beta::BetaImageBlockParam }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
+        #   @return [Array(Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam)]
       end
     end
 

@@ -5,13 +5,18 @@ module Anthropic
     module TextCitation
       extend Anthropic::Internal::Type::Union
 
-      sig do
-        override
-          .returns(
-            [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation]
+      Variants =
+        T.type_alias do
+          T.any(
+            Anthropic::CitationCharLocation,
+            Anthropic::CitationPageLocation,
+            Anthropic::CitationContentBlockLocation
           )
+        end
+
+      sig { override.returns(T::Array[Anthropic::TextCitation::Variants]) }
+      def self.variants
       end
-      def self.variants; end
     end
   end
 end

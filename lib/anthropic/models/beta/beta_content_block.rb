@@ -8,16 +8,16 @@ module Anthropic
 
         discriminator :type
 
-        variant :text, -> { Anthropic::Models::Beta::BetaTextBlock }
+        variant :text, -> { Anthropic::Beta::BetaTextBlock }
 
-        variant :tool_use, -> { Anthropic::Models::Beta::BetaToolUseBlock }
+        variant :tool_use, -> { Anthropic::Beta::BetaToolUseBlock }
 
-        variant :thinking, -> { Anthropic::Models::Beta::BetaThinkingBlock }
+        variant :thinking, -> { Anthropic::Beta::BetaThinkingBlock }
 
-        variant :redacted_thinking, -> { Anthropic::Models::Beta::BetaRedactedThinkingBlock }
+        variant :redacted_thinking, -> { Anthropic::Beta::BetaRedactedThinkingBlock }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock)]
+        #   @return [Array(Anthropic::Beta::BetaTextBlock, Anthropic::Beta::BetaToolUseBlock, Anthropic::Beta::BetaThinkingBlock, Anthropic::Beta::BetaRedactedThinkingBlock)]
       end
     end
 

@@ -6,16 +6,20 @@ module Anthropic
 
     module Beta
       class BetaTool < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
         # [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
         #
         # This defines the shape of the `input` that your tool accepts and that the model
         # will produce.
-        sig { returns(Anthropic::Models::Beta::BetaTool::InputSchema) }
+        sig { returns(Anthropic::Beta::BetaTool::InputSchema) }
         attr_reader :input_schema
 
         sig do
-          params(input_schema: T.any(Anthropic::Models::Beta::BetaTool::InputSchema, Anthropic::Internal::AnyHash))
-            .void
+          params(
+            input_schema: Anthropic::Beta::BetaTool::InputSchema::OrHash
+          ).void
         end
         attr_writer :input_schema
 
@@ -25,14 +29,14 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :name
 
-        sig { returns(T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral)) }
+        sig { returns(T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)) }
         attr_reader :cache_control
 
         sig do
           params(
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash))
-          )
-            .void
+            cache_control:
+              T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash)
+          ).void
         end
         attr_writer :cache_control
 
@@ -48,18 +52,18 @@ module Anthropic
         sig { params(description: String).void }
         attr_writer :description
 
-        sig { returns(T.nilable(Anthropic::Models::Beta::BetaTool::Type::OrSymbol)) }
+        sig { returns(T.nilable(Anthropic::Beta::BetaTool::Type::OrSymbol)) }
         attr_accessor :type
 
         sig do
           params(
-            input_schema: T.any(Anthropic::Models::Beta::BetaTool::InputSchema, Anthropic::Internal::AnyHash),
+            input_schema: Anthropic::Beta::BetaTool::InputSchema::OrHash,
             name: String,
-            cache_control: T.nilable(T.any(Anthropic::Models::Beta::BetaCacheControlEphemeral, Anthropic::Internal::AnyHash)),
+            cache_control:
+              T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             description: String,
-            type: T.nilable(Anthropic::Models::Beta::BetaTool::Type::OrSymbol)
-          )
-            .returns(T.attached_class)
+            type: T.nilable(Anthropic::Beta::BetaTool::Type::OrSymbol)
+          ).returns(T.attached_class)
         end
         def self.new(
           # [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
@@ -80,22 +84,28 @@ module Anthropic
           # aspects of the tool input JSON schema.
           description: nil,
           type: nil
-        ); end
-        sig do
-          override
-            .returns(
-              {
-                input_schema: Anthropic::Models::Beta::BetaTool::InputSchema,
-                name: String,
-                cache_control: T.nilable(Anthropic::Models::Beta::BetaCacheControlEphemeral),
-                description: String,
-                type: T.nilable(Anthropic::Models::Beta::BetaTool::Type::OrSymbol)
-              }
-            )
+        )
         end
-        def to_hash; end
+
+        sig do
+          override.returns(
+            {
+              input_schema: Anthropic::Beta::BetaTool::InputSchema,
+              name: String,
+              cache_control:
+                T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
+              description: String,
+              type: T.nilable(Anthropic::Beta::BetaTool::Type::OrSymbol)
+            }
+          )
+        end
+        def to_hash
+        end
 
         class InputSchema < Anthropic::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
           sig { returns(Symbol) }
           attr_accessor :type
 
@@ -106,23 +116,39 @@ module Anthropic
           #
           # This defines the shape of the `input` that your tool accepts and that the model
           # will produce.
-          sig { params(properties: T.nilable(T.anything), type: Symbol).returns(T.attached_class) }
-          def self.new(properties: nil, type: :object); end
+          sig do
+            params(properties: T.nilable(T.anything), type: Symbol).returns(
+              T.attached_class
+            )
+          end
+          def self.new(properties: nil, type: :object)
+          end
 
-          sig { override.returns({type: Symbol, properties: T.nilable(T.anything)}) }
-          def to_hash; end
+          sig do
+            override.returns(
+              { type: Symbol, properties: T.nilable(T.anything) }
+            )
+          end
+          def to_hash
+          end
         end
 
         module Type
           extend Anthropic::Internal::Type::Enum
 
-          TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Models::Beta::BetaTool::Type) }
+          TaggedSymbol =
+            T.type_alias { T.all(Symbol, Anthropic::Beta::BetaTool::Type) }
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-          CUSTOM = T.let(:custom, Anthropic::Models::Beta::BetaTool::Type::TaggedSymbol)
+          CUSTOM = T.let(:custom, Anthropic::Beta::BetaTool::Type::TaggedSymbol)
 
-          sig { override.returns(T::Array[Anthropic::Models::Beta::BetaTool::Type::TaggedSymbol]) }
-          def self.values; end
+          sig do
+            override.returns(
+              T::Array[Anthropic::Beta::BetaTool::Type::TaggedSymbol]
+            )
+          end
+          def self.values
+          end
         end
       end
     end
