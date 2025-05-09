@@ -4,6 +4,7 @@ module Anthropic
       Anthropic::CitationCharLocation
       | Anthropic::CitationPageLocation
       | Anthropic::CitationContentBlockLocation
+      | Anthropic::CitationsWebSearchResultLocation
 
     module TextCitation
       extend Anthropic::Internal::Type::Union

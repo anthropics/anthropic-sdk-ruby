@@ -2,13 +2,23 @@ module Anthropic
   module Models
     module Beta
       type model_retrieve_params =
-        {  } & Anthropic::Internal::Type::request_parameters
+        { betas: ::Array[Anthropic::Models::anthropic_beta] }
+        & Anthropic::Internal::Type::request_parameters
 
       class ModelRetrieveParams < Anthropic::Internal::Type::BaseModel
         extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
-        def initialize: (?request_options: Anthropic::request_opts) -> void
+        attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+        def betas=: (
+          ::Array[Anthropic::Models::anthropic_beta]
+        ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+        def initialize: (
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> void
       end
     end
   end

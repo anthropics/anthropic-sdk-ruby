@@ -8,7 +8,8 @@ module Anthropic
           cache_creation_input_tokens: Integer?,
           cache_read_input_tokens: Integer?,
           input_tokens: Integer,
-          output_tokens: Integer
+          output_tokens: Integer,
+          server_tool_use: Anthropic::Beta::BetaServerToolUsage?
         }
 
       class BetaUsage < Anthropic::Internal::Type::BaseModel
@@ -20,11 +21,14 @@ module Anthropic
 
         attr_accessor output_tokens: Integer
 
+        attr_accessor server_tool_use: Anthropic::Beta::BetaServerToolUsage?
+
         def initialize: (
           cache_creation_input_tokens: Integer?,
           cache_read_input_tokens: Integer?,
           input_tokens: Integer,
-          output_tokens: Integer
+          output_tokens: Integer,
+          server_tool_use: Anthropic::Beta::BetaServerToolUsage?
         ) -> void
       end
     end

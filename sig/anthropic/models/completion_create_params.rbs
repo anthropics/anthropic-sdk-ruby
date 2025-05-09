@@ -9,7 +9,8 @@ module Anthropic
         stop_sequences: ::Array[String],
         temperature: Float,
         top_k: Integer,
-        top_p: Float
+        top_p: Float,
+        betas: ::Array[Anthropic::Models::anthropic_beta]
       }
       & Anthropic::Internal::Type::request_parameters
 
@@ -43,6 +44,12 @@ module Anthropic
 
       def top_p=: (Float) -> Float
 
+      attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+      def betas=: (
+        ::Array[Anthropic::Models::anthropic_beta]
+      ) -> ::Array[Anthropic::Models::anthropic_beta]
+
       def initialize: (
         max_tokens_to_sample: Integer,
         model: Anthropic::Models::model,
@@ -52,6 +59,7 @@ module Anthropic
         ?temperature: Float,
         ?top_k: Integer,
         ?top_p: Float,
+        ?betas: ::Array[Anthropic::Models::anthropic_beta],
         ?request_options: Anthropic::request_opts
       ) -> void
     end

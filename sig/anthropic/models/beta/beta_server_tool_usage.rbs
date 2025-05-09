@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    class BetaServerToolUsage = Beta::BetaServerToolUsage
+
+    module Beta
+      type beta_server_tool_usage = { web_search_requests: Integer }
+
+      class BetaServerToolUsage < Anthropic::Internal::Type::BaseModel
+        attr_accessor web_search_requests: Integer
+
+        def initialize: (web_search_requests: Integer) -> void
+      end
+    end
+  end
+end

@@ -14,6 +14,10 @@ module Anthropic
 
         variant :tool_use, -> { Anthropic::Beta::BetaToolUseBlockParam }
 
+        variant :server_tool_use, -> { Anthropic::Beta::BetaServerToolUseBlockParam }
+
+        variant :web_search_tool_result, -> { Anthropic::Beta::BetaWebSearchToolResultBlockParam }
+
         variant :tool_result, -> { Anthropic::Beta::BetaToolResultBlockParam }
 
         variant :document, -> { Anthropic::Beta::BetaBase64PDFBlock }
@@ -23,7 +27,7 @@ module Anthropic
         variant :redacted_thinking, -> { Anthropic::Beta::BetaRedactedThinkingBlockParam }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam, Anthropic::Beta::BetaToolUseBlockParam, Anthropic::Beta::BetaToolResultBlockParam, Anthropic::Beta::BetaBase64PDFBlock, Anthropic::Beta::BetaThinkingBlockParam, Anthropic::Beta::BetaRedactedThinkingBlockParam)]
+        #   @return [Array(Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam, Anthropic::Beta::BetaToolUseBlockParam, Anthropic::Beta::BetaServerToolUseBlockParam, Anthropic::Beta::BetaWebSearchToolResultBlockParam, Anthropic::Beta::BetaToolResultBlockParam, Anthropic::Beta::BetaBase64PDFBlock, Anthropic::Beta::BetaThinkingBlockParam, Anthropic::Beta::BetaRedactedThinkingBlockParam)]
       end
     end
 

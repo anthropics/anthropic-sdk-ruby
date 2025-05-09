@@ -10,6 +10,8 @@ module Anthropic
           T.any(
             Anthropic::TextBlock,
             Anthropic::ToolUseBlock,
+            Anthropic::ServerToolUseBlock,
+            Anthropic::WebSearchToolResultBlock,
             Anthropic::ThinkingBlock,
             Anthropic::RedactedThinkingBlock
           )

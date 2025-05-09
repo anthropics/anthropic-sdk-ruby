@@ -1,0 +1,73 @@
+module Anthropic
+  module Models
+    class BetaWebSearchTool20250305 = Beta::BetaWebSearchTool20250305
+
+    module Beta
+      type beta_web_search_tool20250305 =
+        {
+          name: :web_search,
+          type: :web_search_20250305,
+          allowed_domains: ::Array[String]?,
+          blocked_domains: ::Array[String]?,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          max_uses: Integer?,
+          user_location: Anthropic::Beta::BetaWebSearchTool20250305::UserLocation?
+        }
+
+      class BetaWebSearchTool20250305 < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: :web_search
+
+        attr_accessor type: :web_search_20250305
+
+        attr_accessor allowed_domains: ::Array[String]?
+
+        attr_accessor blocked_domains: ::Array[String]?
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        attr_accessor max_uses: Integer?
+
+        attr_accessor user_location: Anthropic::Beta::BetaWebSearchTool20250305::UserLocation?
+
+        def initialize: (
+          ?allowed_domains: ::Array[String]?,
+          ?blocked_domains: ::Array[String]?,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?max_uses: Integer?,
+          ?user_location: Anthropic::Beta::BetaWebSearchTool20250305::UserLocation?,
+          ?name: :web_search,
+          ?type: :web_search_20250305
+        ) -> void
+
+        type user_location =
+          {
+            type: :approximate,
+            city: String?,
+            country: String?,
+            region: String?,
+            timezone: String?
+          }
+
+        class UserLocation < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :approximate
+
+          attr_accessor city: String?
+
+          attr_accessor country: String?
+
+          attr_accessor region: String?
+
+          attr_accessor timezone: String?
+
+          def initialize: (
+            ?city: String?,
+            ?country: String?,
+            ?region: String?,
+            ?timezone: String?,
+            ?type: :approximate
+          ) -> void
+        end
+      end
+    end
+  end
+end

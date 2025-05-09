@@ -30,7 +30,13 @@ module Anthropic
         #   @return [Integer, nil]
         optional :limit, Integer
 
-        # @!method initialize(after_id: nil, before_id: nil, limit: nil, request_options: {})
+        # @!attribute betas
+        #   Optional header to specify the beta version(s) you want to use.
+        #
+        #   @return [Array<String, Symbol, Anthropic::AnthropicBeta>, nil]
+        optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
+
+        # @!method initialize(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::ModelListParams} for more details.
         #
@@ -39,6 +45,8 @@ module Anthropic
         #   @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
         #
         #   @param limit [Integer] Number of items to return per page.
+        #
+        #   @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
       end

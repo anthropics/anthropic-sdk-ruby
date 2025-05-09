@@ -20,6 +20,9 @@ module Anthropic
           T.let(:stop_sequence, Anthropic::Beta::BetaStopReason::TaggedSymbol)
         TOOL_USE =
           T.let(:tool_use, Anthropic::Beta::BetaStopReason::TaggedSymbol)
+        PAUSE_TURN =
+          T.let(:pause_turn, Anthropic::Beta::BetaStopReason::TaggedSymbol)
+        REFUSAL = T.let(:refusal, Anthropic::Beta::BetaStopReason::TaggedSymbol)
 
         sig do
           override.returns(

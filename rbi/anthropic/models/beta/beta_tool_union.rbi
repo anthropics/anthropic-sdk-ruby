@@ -17,7 +17,8 @@ module Anthropic
               Anthropic::Beta::BetaToolTextEditor20241022,
               Anthropic::Beta::BetaToolComputerUse20250124,
               Anthropic::Beta::BetaToolBash20250124,
-              Anthropic::Beta::BetaToolTextEditor20250124
+              Anthropic::Beta::BetaToolTextEditor20250124,
+              Anthropic::Beta::BetaWebSearchTool20250305
             )
           end
 

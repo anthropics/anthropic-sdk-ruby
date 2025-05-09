@@ -21,7 +21,8 @@ module Anthropic
                 T.any(
                   Anthropic::Beta::BetaCitationCharLocation,
                   Anthropic::Beta::BetaCitationPageLocation,
-                  Anthropic::Beta::BetaCitationContentBlockLocation
+                  Anthropic::Beta::BetaCitationContentBlockLocation,
+                  Anthropic::Beta::BetaCitationsWebSearchResultLocation
                 )
               ]
             )
@@ -43,7 +44,8 @@ module Anthropic
                   T.any(
                     Anthropic::Beta::BetaCitationCharLocation::OrHash,
                     Anthropic::Beta::BetaCitationPageLocation::OrHash,
-                    Anthropic::Beta::BetaCitationContentBlockLocation::OrHash
+                    Anthropic::Beta::BetaCitationContentBlockLocation::OrHash,
+                    Anthropic::Beta::BetaCitationsWebSearchResultLocation::OrHash
                   )
                 ]
               ),
@@ -72,7 +74,8 @@ module Anthropic
                     T.any(
                       Anthropic::Beta::BetaCitationCharLocation,
                       Anthropic::Beta::BetaCitationPageLocation,
-                      Anthropic::Beta::BetaCitationContentBlockLocation
+                      Anthropic::Beta::BetaCitationContentBlockLocation,
+                      Anthropic::Beta::BetaCitationsWebSearchResultLocation
                     )
                   ]
                 ),

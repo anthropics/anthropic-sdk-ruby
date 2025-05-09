@@ -13,6 +13,10 @@ module Anthropic
 
       variant :tool_use, -> { Anthropic::ToolUseBlockParam }
 
+      variant :server_tool_use, -> { Anthropic::ServerToolUseBlockParam }
+
+      variant :web_search_tool_result, -> { Anthropic::WebSearchToolResultBlockParam }
+
       variant :tool_result, -> { Anthropic::ToolResultBlockParam }
 
       variant :document, -> { Anthropic::DocumentBlockParam }
@@ -22,7 +26,7 @@ module Anthropic
       variant :redacted_thinking, -> { Anthropic::RedactedThinkingBlockParam }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::TextBlockParam, Anthropic::ImageBlockParam, Anthropic::ToolUseBlockParam, Anthropic::ToolResultBlockParam, Anthropic::DocumentBlockParam, Anthropic::ThinkingBlockParam, Anthropic::RedactedThinkingBlockParam)]
+      #   @return [Array(Anthropic::TextBlockParam, Anthropic::ImageBlockParam, Anthropic::ToolUseBlockParam, Anthropic::ServerToolUseBlockParam, Anthropic::WebSearchToolResultBlockParam, Anthropic::ToolResultBlockParam, Anthropic::DocumentBlockParam, Anthropic::ThinkingBlockParam, Anthropic::RedactedThinkingBlockParam)]
     end
   end
 end

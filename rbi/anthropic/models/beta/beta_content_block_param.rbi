@@ -14,6 +14,8 @@ module Anthropic
               Anthropic::Beta::BetaTextBlockParam,
               Anthropic::Beta::BetaImageBlockParam,
               Anthropic::Beta::BetaToolUseBlockParam,
+              Anthropic::Beta::BetaServerToolUseBlockParam,
+              Anthropic::Beta::BetaWebSearchToolResultBlockParam,
               Anthropic::Beta::BetaToolResultBlockParam,
               Anthropic::Beta::BetaBase64PDFBlock,
               Anthropic::Beta::BetaThinkingBlockParam,

@@ -39,7 +39,7 @@ module Anthropic
       #
       # @param tool_choice [Anthropic::ToolChoiceAuto, Anthropic::ToolChoiceAny, Anthropic::ToolChoiceTool, Anthropic::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
       #
-      # @param tools [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124>] Definitions of tools that the model may use.
+      # @param tools [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124, Anthropic::WebSearchTool20250305>] Definitions of tools that the model may use.
       #
       # @param top_k [Integer] Only sample from the top K options for each subsequent token.
       #
@@ -102,7 +102,7 @@ module Anthropic
       #
       # @param tool_choice [Anthropic::ToolChoiceAuto, Anthropic::ToolChoiceAny, Anthropic::ToolChoiceTool, Anthropic::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
       #
-      # @param tools [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124>] Definitions of tools that the model may use.
+      # @param tools [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124, Anthropic::WebSearchTool20250305>] Definitions of tools that the model may use.
       #
       # @param top_k [Integer] Only sample from the top K options for each subsequent token.
       #
@@ -154,7 +154,7 @@ module Anthropic
       #
       # @param tool_choice [Anthropic::ToolChoiceAuto, Anthropic::ToolChoiceAny, Anthropic::ToolChoiceTool, Anthropic::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
       #
-      # @param tools [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124>] Definitions of tools that the model may use.
+      # @param tools [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124, Anthropic::WebSearchTool20250305>] Definitions of tools that the model may use.
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #

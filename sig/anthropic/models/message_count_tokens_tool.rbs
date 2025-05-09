@@ -4,6 +4,7 @@ module Anthropic
       Anthropic::Tool
       | Anthropic::ToolBash20250124
       | Anthropic::ToolTextEditor20250124
+      | Anthropic::WebSearchTool20250305
 
     module MessageCountTokensTool
       extend Anthropic::Internal::Type::Union

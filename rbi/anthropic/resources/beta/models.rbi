@@ -11,12 +11,15 @@ module Anthropic
         sig do
           params(
             model_id: String,
+            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaModelInfo)
         end
         def retrieve(
           # Model identifier or alias.
           model_id,
+          # Optional header to specify the beta version(s) you want to use.
+          betas: nil,
           request_options: {}
         )
         end
@@ -30,20 +33,23 @@ module Anthropic
             after_id: String,
             before_id: String,
             limit: Integer,
+            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Internal::Page[Anthropic::Beta::BetaModelInfo])
         end
         def list(
-          # ID of the object to use as a cursor for pagination. When provided, returns the
-          # page of results immediately after this object.
+          # Query param: ID of the object to use as a cursor for pagination. When provided,
+          # returns the page of results immediately after this object.
           after_id: nil,
-          # ID of the object to use as a cursor for pagination. When provided, returns the
-          # page of results immediately before this object.
+          # Query param: ID of the object to use as a cursor for pagination. When provided,
+          # returns the page of results immediately before this object.
           before_id: nil,
-          # Number of items to return per page.
+          # Query param: Number of items to return per page.
           #
           # Defaults to `20`. Ranges from `1` to `1000`.
           limit: nil,
+          # Header param: Optional header to specify the beta version(s) you want to use.
+          betas: nil,
           request_options: {}
         )
         end

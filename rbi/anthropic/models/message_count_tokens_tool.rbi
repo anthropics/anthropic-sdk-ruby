@@ -10,7 +10,8 @@ module Anthropic
           T.any(
             Anthropic::Tool,
             Anthropic::ToolBash20250124,
-            Anthropic::ToolTextEditor20250124
+            Anthropic::ToolTextEditor20250124,
+            Anthropic::WebSearchTool20250305
           )
         end
 

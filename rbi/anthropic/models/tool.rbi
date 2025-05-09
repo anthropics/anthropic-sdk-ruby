@@ -17,10 +17,11 @@ module Anthropic
 
       # Name of the tool.
       #
-      # This is how the tool will be called by the model and in tool_use blocks.
+      # This is how the tool will be called by the model and in `tool_use` blocks.
       sig { returns(String) }
       attr_accessor :name
 
+      # Create a cache control breakpoint at this content block.
       sig { returns(T.nilable(Anthropic::CacheControlEphemeral)) }
       attr_reader :cache_control
 
@@ -43,12 +44,16 @@ module Anthropic
       sig { params(description: String).void }
       attr_writer :description
 
+      sig { returns(T.nilable(Anthropic::Tool::Type::OrSymbol)) }
+      attr_accessor :type
+
       sig do
         params(
           input_schema: Anthropic::Tool::InputSchema::OrHash,
           name: String,
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
-          description: String
+          description: String,
+          type: T.nilable(Anthropic::Tool::Type::OrSymbol)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -59,8 +64,9 @@ module Anthropic
         input_schema:,
         # Name of the tool.
         #
-        # This is how the tool will be called by the model and in tool_use blocks.
+        # This is how the tool will be called by the model and in `tool_use` blocks.
         name:,
+        # Create a cache control breakpoint at this content block.
         cache_control: nil,
         # Description of what this tool does.
         #
@@ -68,7 +74,8 @@ module Anthropic
         # the model has about what the tool is and how to use it, the better it will
         # perform. You can use natural language descriptions to reinforce important
         # aspects of the tool input JSON schema.
-        description: nil
+        description: nil,
+        type: nil
       )
       end
 
@@ -78,7 +85,8 @@ module Anthropic
             input_schema: Anthropic::Tool::InputSchema,
             name: String,
             cache_control: T.nilable(Anthropic::CacheControlEphemeral),
-            description: String
+            description: String,
+            type: T.nilable(Anthropic::Tool::Type::OrSymbol)
           }
         )
       end
@@ -111,6 +119,19 @@ module Anthropic
           override.returns({ type: Symbol, properties: T.nilable(T.anything) })
         end
         def to_hash
+        end
+      end
+
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Tool::Type) }
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        CUSTOM = T.let(:custom, Anthropic::Tool::Type::TaggedSymbol)
+
+        sig { override.returns(T::Array[Anthropic::Tool::Type::TaggedSymbol]) }
+        def self.values
         end
       end
     end

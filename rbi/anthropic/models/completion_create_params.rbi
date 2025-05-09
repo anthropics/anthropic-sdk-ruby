@@ -97,6 +97,21 @@ module Anthropic
       sig { params(top_p: Float).void }
       attr_writer :top_p
 
+      # Optional header to specify the beta version(s) you want to use.
+      sig do
+        returns(
+          T.nilable(T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)])
+        )
+      end
+      attr_reader :betas
+
+      sig do
+        params(
+          betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
+        ).void
+      end
+      attr_writer :betas
+
       sig do
         params(
           max_tokens_to_sample: Integer,
@@ -107,6 +122,7 @@ module Anthropic
           temperature: Float,
           top_k: Integer,
           top_p: Float,
+          betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -169,6 +185,8 @@ module Anthropic
         # Recommended for advanced use cases only. You usually only need to use
         # `temperature`.
         top_p: nil,
+        # Optional header to specify the beta version(s) you want to use.
+        betas: nil,
         request_options: {}
       )
       end
@@ -184,6 +202,7 @@ module Anthropic
             temperature: Float,
             top_k: Integer,
             top_p: Float,
+            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions
           }
         )

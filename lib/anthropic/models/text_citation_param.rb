@@ -13,8 +13,10 @@ module Anthropic
 
       variant :content_block_location, -> { Anthropic::CitationContentBlockLocationParam }
 
+      variant :web_search_result_location, -> { Anthropic::CitationWebSearchResultLocationParam }
+
       # @!method self.variants
-      #   @return [Array(Anthropic::CitationCharLocationParam, Anthropic::CitationPageLocationParam, Anthropic::CitationContentBlockLocationParam)]
+      #   @return [Array(Anthropic::CitationCharLocationParam, Anthropic::CitationPageLocationParam, Anthropic::CitationContentBlockLocationParam, Anthropic::CitationWebSearchResultLocationParam)]
     end
   end
 end
