@@ -10,7 +10,8 @@ module Anthropic
           T.any(
             Anthropic::CitationCharLocation,
             Anthropic::CitationPageLocation,
-            Anthropic::CitationContentBlockLocation
+            Anthropic::CitationContentBlockLocation,
+            Anthropic::CitationsWebSearchResultLocation
           )
         )
       end
@@ -25,7 +26,8 @@ module Anthropic
             T.any(
               Anthropic::CitationCharLocation::OrHash,
               Anthropic::CitationPageLocation::OrHash,
-              Anthropic::CitationContentBlockLocation::OrHash
+              Anthropic::CitationContentBlockLocation::OrHash,
+              Anthropic::CitationsWebSearchResultLocation::OrHash
             ),
           type: Symbol
         ).returns(T.attached_class)
@@ -40,7 +42,8 @@ module Anthropic
               T.any(
                 Anthropic::CitationCharLocation,
                 Anthropic::CitationPageLocation,
-                Anthropic::CitationContentBlockLocation
+                Anthropic::CitationContentBlockLocation,
+                Anthropic::CitationsWebSearchResultLocation
               ),
             type: Symbol
           }
@@ -57,7 +60,8 @@ module Anthropic
             T.any(
               Anthropic::CitationCharLocation,
               Anthropic::CitationPageLocation,
-              Anthropic::CitationContentBlockLocation
+              Anthropic::CitationContentBlockLocation,
+              Anthropic::CitationsWebSearchResultLocation
             )
           end
 

@@ -11,6 +11,8 @@ module Anthropic
             Anthropic::TextBlockParam,
             Anthropic::ImageBlockParam,
             Anthropic::ToolUseBlockParam,
+            Anthropic::ServerToolUseBlockParam,
+            Anthropic::WebSearchToolResultBlockParam,
             Anthropic::ToolResultBlockParam,
             Anthropic::DocumentBlockParam,
             Anthropic::ThinkingBlockParam,

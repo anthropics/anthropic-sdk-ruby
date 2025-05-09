@@ -3,6 +3,8 @@ module Anthropic
     type content_block =
       Anthropic::TextBlock
       | Anthropic::ToolUseBlock
+      | Anthropic::ServerToolUseBlock
+      | Anthropic::WebSearchToolResultBlock
       | Anthropic::ThinkingBlock
       | Anthropic::RedactedThinkingBlock
 

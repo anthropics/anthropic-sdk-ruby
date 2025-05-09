@@ -7,13 +7,14 @@ module Anthropic
 
       # Name of the tool.
       #
-      # This is how the tool will be called by the model and in tool_use blocks.
+      # This is how the tool will be called by the model and in `tool_use` blocks.
       sig { returns(Symbol) }
       attr_accessor :name
 
       sig { returns(Symbol) }
       attr_accessor :type
 
+      # Create a cache control breakpoint at this content block.
       sig { returns(T.nilable(Anthropic::CacheControlEphemeral)) }
       attr_reader :cache_control
 
@@ -32,10 +33,11 @@ module Anthropic
         ).returns(T.attached_class)
       end
       def self.new(
+        # Create a cache control breakpoint at this content block.
         cache_control: nil,
         # Name of the tool.
         #
-        # This is how the tool will be called by the model and in tool_use blocks.
+        # This is how the tool will be called by the model and in `tool_use` blocks.
         name: :bash,
         type: :bash_20250124
       )

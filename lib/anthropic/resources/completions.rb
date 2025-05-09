@@ -18,23 +18,25 @@ module Anthropic
       # [migration guide](https://docs.anthropic.com/en/api/migrating-from-text-completions-to-messages)
       # for guidance in migrating from Text Completions to Messages.
       #
-      # @overload create(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, request_options: {})
+      # @overload create(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
       #
-      # @param max_tokens_to_sample [Integer] The maximum number of tokens to generate before stopping.
+      # @param max_tokens_to_sample [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
-      # @param model [Symbol, String, Anthropic::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      # @param model [Symbol, String, Anthropic::Model] Body param: The model that will complete your prompt.\n\nSee [models](https://do
       #
-      # @param prompt [String] The prompt that you want Claude to complete.
+      # @param prompt [String] Body param: The prompt that you want Claude to complete.
       #
-      # @param metadata [Anthropic::Metadata] An object describing metadata about the request.
+      # @param metadata [Anthropic::Metadata] Body param: An object describing metadata about the request.
       #
-      # @param stop_sequences [Array<String>] Sequences that will cause the model to stop generating.
+      # @param stop_sequences [Array<String>] Body param: Sequences that will cause the model to stop generating.
       #
-      # @param temperature [Float] Amount of randomness injected into the response.
+      # @param temperature [Float] Body param: Amount of randomness injected into the response.
       #
-      # @param top_k [Integer] Only sample from the top K options for each subsequent token.
+      # @param top_k [Integer] Body param: Only sample from the top K options for each subsequent token.
       #
-      # @param top_p [Float] Use nucleus sampling.
+      # @param top_p [Float] Body param: Use nucleus sampling.
+      #
+      # @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -47,10 +49,12 @@ module Anthropic
           message = "Please use `#create_streaming` for the streaming use case."
           raise ArgumentError.new(message)
         end
+        header_params = {betas: "anthropic-beta"}
         @client.request(
           method: :post,
           path: "v1/complete",
-          body: parsed,
+          headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+          body: parsed.except(*header_params.keys),
           model: Anthropic::Completion,
           options: {timeout: 600, **options}
         )
@@ -70,23 +74,25 @@ module Anthropic
       # [migration guide](https://docs.anthropic.com/en/api/migrating-from-text-completions-to-messages)
       # for guidance in migrating from Text Completions to Messages.
       #
-      # @overload create_streaming(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, request_options: {})
+      # @overload create_streaming(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
       #
-      # @param max_tokens_to_sample [Integer] The maximum number of tokens to generate before stopping.
+      # @param max_tokens_to_sample [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
-      # @param model [Symbol, String, Anthropic::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      # @param model [Symbol, String, Anthropic::Model] Body param: The model that will complete your prompt.\n\nSee [models](https://do
       #
-      # @param prompt [String] The prompt that you want Claude to complete.
+      # @param prompt [String] Body param: The prompt that you want Claude to complete.
       #
-      # @param metadata [Anthropic::Metadata] An object describing metadata about the request.
+      # @param metadata [Anthropic::Metadata] Body param: An object describing metadata about the request.
       #
-      # @param stop_sequences [Array<String>] Sequences that will cause the model to stop generating.
+      # @param stop_sequences [Array<String>] Body param: Sequences that will cause the model to stop generating.
       #
-      # @param temperature [Float] Amount of randomness injected into the response.
+      # @param temperature [Float] Body param: Amount of randomness injected into the response.
       #
-      # @param top_k [Integer] Only sample from the top K options for each subsequent token.
+      # @param top_k [Integer] Body param: Only sample from the top K options for each subsequent token.
       #
-      # @param top_p [Float] Use nucleus sampling.
+      # @param top_p [Float] Body param: Use nucleus sampling.
+      #
+      # @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -100,11 +106,15 @@ module Anthropic
           raise ArgumentError.new(message)
         end
         parsed.store(:stream, true)
+        header_params = {betas: "anthropic-beta"}
         @client.request(
           method: :post,
           path: "v1/complete",
-          headers: {"accept" => "text/event-stream"},
-          body: parsed,
+          headers: {
+            "accept" => "text/event-stream",
+            **parsed.slice(*header_params.keys)
+          }.transform_keys(header_params),
+          body: parsed.except(*header_params.keys),
           stream: Anthropic::Internal::Stream,
           model: Anthropic::Completion,
           options: {timeout: 600, **options}

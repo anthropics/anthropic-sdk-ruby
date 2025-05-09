@@ -10,7 +10,8 @@ module Anthropic
           T.any(
             Anthropic::CitationCharLocation,
             Anthropic::CitationPageLocation,
-            Anthropic::CitationContentBlockLocation
+            Anthropic::CitationContentBlockLocation,
+            Anthropic::CitationsWebSearchResultLocation
           )
         end
 

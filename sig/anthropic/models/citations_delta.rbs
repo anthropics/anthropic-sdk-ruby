@@ -17,6 +17,7 @@ module Anthropic
         Anthropic::CitationCharLocation
         | Anthropic::CitationPageLocation
         | Anthropic::CitationContentBlockLocation
+        | Anthropic::CitationsWebSearchResultLocation
 
       module Citation
         extend Anthropic::Internal::Type::Union

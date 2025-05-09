@@ -55,6 +55,10 @@ module Anthropic
 
   CitationsDelta = Anthropic::Models::CitationsDelta
 
+  CitationsWebSearchResultLocation = Anthropic::Models::CitationsWebSearchResultLocation
+
+  CitationWebSearchResultLocationParam = Anthropic::Models::CitationWebSearchResultLocationParam
+
   Completion = Anthropic::Models::Completion
 
   CompletionCreateParams = Anthropic::Models::CompletionCreateParams
@@ -137,6 +141,12 @@ module Anthropic
 
   RedactedThinkingBlockParam = Anthropic::Models::RedactedThinkingBlockParam
 
+  ServerToolUsage = Anthropic::Models::ServerToolUsage
+
+  ServerToolUseBlock = Anthropic::Models::ServerToolUseBlock
+
+  ServerToolUseBlockParam = Anthropic::Models::ServerToolUseBlockParam
+
   SignatureDelta = Anthropic::Models::SignatureDelta
 
   StopReason = Anthropic::Models::StopReason
@@ -192,4 +202,22 @@ module Anthropic
   URLPDFSource = Anthropic::Models::URLPDFSource
 
   Usage = Anthropic::Models::Usage
+
+  WebSearchResultBlock = Anthropic::Models::WebSearchResultBlock
+
+  WebSearchResultBlockParam = Anthropic::Models::WebSearchResultBlockParam
+
+  WebSearchTool20250305 = Anthropic::Models::WebSearchTool20250305
+
+  WebSearchToolRequestError = Anthropic::Models::WebSearchToolRequestError
+
+  WebSearchToolResultBlock = Anthropic::Models::WebSearchToolResultBlock
+
+  WebSearchToolResultBlockContent = Anthropic::Models::WebSearchToolResultBlockContent
+
+  WebSearchToolResultBlockParam = Anthropic::Models::WebSearchToolResultBlockParam
+
+  WebSearchToolResultBlockParamContent = Anthropic::Models::WebSearchToolResultBlockParamContent
+
+  WebSearchToolResultError = Anthropic::Models::WebSearchToolResultError
 end

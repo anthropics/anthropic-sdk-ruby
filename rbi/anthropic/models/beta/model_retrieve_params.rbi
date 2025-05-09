@@ -10,15 +10,45 @@ module Anthropic
         OrHash =
           T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
 
+        # Optional header to specify the beta version(s) you want to use.
         sig do
-          params(request_options: Anthropic::RequestOptions::OrHash).returns(
-            T.attached_class
+          returns(
+            T.nilable(
+              T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
+            )
           )
         end
-        def self.new(request_options: {})
+        attr_reader :betas
+
+        sig do
+          params(
+            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
+          ).void
+        end
+        attr_writer :betas
+
+        sig do
+          params(
+            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            request_options: Anthropic::RequestOptions::OrHash
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # Optional header to specify the beta version(s) you want to use.
+          betas: nil,
+          request_options: {}
+        )
         end
 
-        sig { override.returns({ request_options: Anthropic::RequestOptions }) }
+        sig do
+          override.returns(
+            {
+              betas:
+                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+              request_options: Anthropic::RequestOptions
+            }
+          )
+        end
         def to_hash
         end
       end

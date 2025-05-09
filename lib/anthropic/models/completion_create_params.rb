@@ -99,7 +99,13 @@ module Anthropic
       #   @return [Float, nil]
       optional :top_p, Float
 
-      # @!method initialize(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, request_options: {})
+      # @!attribute betas
+      #   Optional header to specify the beta version(s) you want to use.
+      #
+      #   @return [Array<String, Symbol, Anthropic::AnthropicBeta>, nil]
+      optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
+
+      # @!method initialize(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::CompletionCreateParams} for more details.
       #
@@ -118,6 +124,8 @@ module Anthropic
       #   @param top_k [Integer] Only sample from the top K options for each subsequent token.
       #
       #   @param top_p [Float] Use nucleus sampling.
+      #
+      #   @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
       #
       #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
     end

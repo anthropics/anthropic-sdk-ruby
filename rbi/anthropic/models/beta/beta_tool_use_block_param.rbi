@@ -21,6 +21,7 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
+        # Create a cache control breakpoint at this content block.
         sig { returns(T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)) }
         attr_reader :cache_control
 
@@ -42,7 +43,14 @@ module Anthropic
             type: Symbol
           ).returns(T.attached_class)
         end
-        def self.new(id:, input:, name:, cache_control: nil, type: :tool_use)
+        def self.new(
+          id:,
+          input:,
+          name:,
+          # Create a cache control breakpoint at this content block.
+          cache_control: nil,
+          type: :tool_use
+        )
         end
 
         sig do

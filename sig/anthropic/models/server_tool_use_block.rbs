@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    type server_tool_use_block =
+      { id: String, input: top, name: :web_search, type: :server_tool_use }
+
+    class ServerToolUseBlock < Anthropic::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor input: top
+
+      attr_accessor name: :web_search
+
+      attr_accessor type: :server_tool_use
+
+      def initialize: (
+        id: String,
+        input: top,
+        ?name: :web_search,
+        ?type: :server_tool_use
+      ) -> void
+    end
+  end
+end

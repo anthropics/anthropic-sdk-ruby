@@ -6,7 +6,7 @@ module Anthropic
       class BetaMessageParam < Anthropic::Internal::Type::BaseModel
         # @!attribute content
         #
-        #   @return [String, Array<Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam, Anthropic::Beta::BetaToolUseBlockParam, Anthropic::Beta::BetaToolResultBlockParam, Anthropic::Beta::BetaBase64PDFBlock, Anthropic::Beta::BetaThinkingBlockParam, Anthropic::Beta::BetaRedactedThinkingBlockParam>]
+        #   @return [String, Array<Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam, Anthropic::Beta::BetaToolUseBlockParam, Anthropic::Beta::BetaServerToolUseBlockParam, Anthropic::Beta::BetaWebSearchToolResultBlockParam, Anthropic::Beta::BetaToolResultBlockParam, Anthropic::Beta::BetaBase64PDFBlock, Anthropic::Beta::BetaThinkingBlockParam, Anthropic::Beta::BetaRedactedThinkingBlockParam>]
         required :content, union: -> { Anthropic::Beta::BetaMessageParam::Content }
 
         # @!attribute role
@@ -15,7 +15,7 @@ module Anthropic
         required :role, enum: -> { Anthropic::Beta::BetaMessageParam::Role }
 
         # @!method initialize(content:, role:)
-        #   @param content [String, Array<Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam, Anthropic::Beta::BetaToolUseBlockParam, Anthropic::Beta::BetaToolResultBlockParam, Anthropic::Beta::BetaBase64PDFBlock, Anthropic::Beta::BetaThinkingBlockParam, Anthropic::Beta::BetaRedactedThinkingBlockParam>]
+        #   @param content [String, Array<Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam, Anthropic::Beta::BetaToolUseBlockParam, Anthropic::Beta::BetaServerToolUseBlockParam, Anthropic::Beta::BetaWebSearchToolResultBlockParam, Anthropic::Beta::BetaToolResultBlockParam, Anthropic::Beta::BetaBase64PDFBlock, Anthropic::Beta::BetaThinkingBlockParam, Anthropic::Beta::BetaRedactedThinkingBlockParam>]
         #   @param role [Symbol, Anthropic::Beta::BetaMessageParam::Role]
 
         # @see Anthropic::Beta::BetaMessageParam#content
@@ -27,7 +27,7 @@ module Anthropic
           variant -> { Anthropic::Beta::BetaMessageParam::Content::BetaContentBlockParamArray }
 
           # @!method self.variants
-          #   @return [Array(String, Array<Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam, Anthropic::Beta::BetaToolUseBlockParam, Anthropic::Beta::BetaToolResultBlockParam, Anthropic::Beta::BetaBase64PDFBlock, Anthropic::Beta::BetaThinkingBlockParam, Anthropic::Beta::BetaRedactedThinkingBlockParam>)]
+          #   @return [Array(String, Array<Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam, Anthropic::Beta::BetaToolUseBlockParam, Anthropic::Beta::BetaServerToolUseBlockParam, Anthropic::Beta::BetaWebSearchToolResultBlockParam, Anthropic::Beta::BetaToolResultBlockParam, Anthropic::Beta::BetaBase64PDFBlock, Anthropic::Beta::BetaThinkingBlockParam, Anthropic::Beta::BetaRedactedThinkingBlockParam>)]
 
           # @type [Anthropic::Internal::Type::Converter]
           BetaContentBlockParamArray =

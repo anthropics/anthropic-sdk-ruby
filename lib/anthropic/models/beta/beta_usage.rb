@@ -28,7 +28,13 @@ module Anthropic
         #   @return [Integer]
         required :output_tokens, Integer
 
-        # @!method initialize(cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, output_tokens:)
+        # @!attribute server_tool_use
+        #   The number of server tool requests.
+        #
+        #   @return [Anthropic::Beta::BetaServerToolUsage, nil]
+        required :server_tool_use, -> { Anthropic::Beta::BetaServerToolUsage }, nil?: true
+
+        # @!method initialize(cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, output_tokens:, server_tool_use:)
         #   @param cache_creation_input_tokens [Integer, nil] The number of input tokens used to create the cache entry.
         #
         #   @param cache_read_input_tokens [Integer, nil] The number of input tokens read from the cache.
@@ -36,6 +42,8 @@ module Anthropic
         #   @param input_tokens [Integer] The number of input tokens which were used.
         #
         #   @param output_tokens [Integer] The number of output tokens which were used.
+        #
+        #   @param server_tool_use [Anthropic::Beta::BetaServerToolUsage, nil] The number of server tool requests.
       end
     end
 

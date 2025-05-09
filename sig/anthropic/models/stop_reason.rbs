@@ -1,6 +1,12 @@
 module Anthropic
   module Models
-    type stop_reason = :end_turn | :max_tokens | :stop_sequence | :tool_use
+    type stop_reason =
+      :end_turn
+      | :max_tokens
+      | :stop_sequence
+      | :tool_use
+      | :pause_turn
+      | :refusal
 
     module StopReason
       extend Anthropic::Internal::Type::Enum
@@ -9,6 +15,8 @@ module Anthropic
       MAX_TOKENS: :max_tokens
       STOP_SEQUENCE: :stop_sequence
       TOOL_USE: :tool_use
+      PAUSE_TURN: :pause_turn
+      REFUSAL: :refusal
 
       def self?.values: -> ::Array[Anthropic::Models::stop_reason]
     end

@@ -96,6 +96,8 @@ module Anthropic
         #   the top-level `system` parameter — there is no `"system"` role for input
         #   messages in the Messages API.
         #
+        #   There is a limit of 100000 messages in a single request.
+        #
         #   @return [Array<Anthropic::Beta::BetaMessageParam>]
         required :messages, -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaMessageParam] }
 
@@ -209,7 +211,7 @@ module Anthropic
         #
         #   See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
         #
-        #   @return [Array<Anthropic::Beta::BetaTool, Anthropic::Beta::BetaToolComputerUse20241022, Anthropic::Beta::BetaToolBash20241022, Anthropic::Beta::BetaToolTextEditor20241022, Anthropic::Beta::BetaToolComputerUse20250124, Anthropic::Beta::BetaToolBash20250124, Anthropic::Beta::BetaToolTextEditor20250124>, nil]
+        #   @return [Array<Anthropic::Beta::BetaTool, Anthropic::Beta::BetaToolComputerUse20241022, Anthropic::Beta::BetaToolBash20241022, Anthropic::Beta::BetaToolTextEditor20241022, Anthropic::Beta::BetaToolComputerUse20250124, Anthropic::Beta::BetaToolBash20250124, Anthropic::Beta::BetaToolTextEditor20250124, Anthropic::Beta::BetaWebSearchTool20250305>, nil]
         optional :tools,
                  -> {
                    Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::MessageCountTokensParams::Tool]
@@ -235,7 +237,7 @@ module Anthropic
         #
         #   @param tool_choice [Anthropic::Beta::BetaToolChoiceAuto, Anthropic::Beta::BetaToolChoiceAny, Anthropic::Beta::BetaToolChoiceTool, Anthropic::Beta::BetaToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
         #
-        #   @param tools [Array<Anthropic::Beta::BetaTool, Anthropic::Beta::BetaToolComputerUse20241022, Anthropic::Beta::BetaToolBash20241022, Anthropic::Beta::BetaToolTextEditor20241022, Anthropic::Beta::BetaToolComputerUse20250124, Anthropic::Beta::BetaToolBash20250124, Anthropic::Beta::BetaToolTextEditor20250124>] Definitions of tools that the model may use.
+        #   @param tools [Array<Anthropic::Beta::BetaTool, Anthropic::Beta::BetaToolComputerUse20241022, Anthropic::Beta::BetaToolBash20241022, Anthropic::Beta::BetaToolTextEditor20241022, Anthropic::Beta::BetaToolComputerUse20250124, Anthropic::Beta::BetaToolBash20250124, Anthropic::Beta::BetaToolTextEditor20250124, Anthropic::Beta::BetaWebSearchTool20250305>] Definitions of tools that the model may use.
         #
         #   @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
@@ -279,8 +281,10 @@ module Anthropic
 
           variant -> { Anthropic::Beta::BetaToolTextEditor20250124 }
 
+          variant -> { Anthropic::Beta::BetaWebSearchTool20250305 }
+
           # @!method self.variants
-          #   @return [Array(Anthropic::Beta::BetaTool, Anthropic::Beta::BetaToolComputerUse20241022, Anthropic::Beta::BetaToolBash20241022, Anthropic::Beta::BetaToolTextEditor20241022, Anthropic::Beta::BetaToolComputerUse20250124, Anthropic::Beta::BetaToolBash20250124, Anthropic::Beta::BetaToolTextEditor20250124)]
+          #   @return [Array(Anthropic::Beta::BetaTool, Anthropic::Beta::BetaToolComputerUse20241022, Anthropic::Beta::BetaToolBash20241022, Anthropic::Beta::BetaToolTextEditor20241022, Anthropic::Beta::BetaToolComputerUse20250124, Anthropic::Beta::BetaToolBash20250124, Anthropic::Beta::BetaToolTextEditor20250124, Anthropic::Beta::BetaWebSearchTool20250305)]
         end
       end
     end

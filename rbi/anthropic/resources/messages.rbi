@@ -41,7 +41,8 @@ module Anthropic
               T.any(
                 Anthropic::Tool::OrHash,
                 Anthropic::ToolBash20250124::OrHash,
-                Anthropic::ToolTextEditor20250124::OrHash
+                Anthropic::ToolTextEditor20250124::OrHash,
+                Anthropic::WebSearchTool20250305::OrHash
               )
             ],
           top_k: Integer,
@@ -145,6 +146,8 @@ module Anthropic
         # [system prompt](https://docs.anthropic.com/en/docs/system-prompts), you can use
         # the top-level `system` parameter — there is no `"system"` role for input
         # messages in the Messages API.
+        #
+        # There is a limit of 100000 messages in a single request.
         messages:,
         # The model that will complete your prompt.\n\nSee
         # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
@@ -320,7 +323,8 @@ module Anthropic
               T.any(
                 Anthropic::Tool::OrHash,
                 Anthropic::ToolBash20250124::OrHash,
-                Anthropic::ToolTextEditor20250124::OrHash
+                Anthropic::ToolTextEditor20250124::OrHash,
+                Anthropic::WebSearchTool20250305::OrHash
               )
             ],
           top_k: Integer,
@@ -435,6 +439,8 @@ module Anthropic
         # [system prompt](https://docs.anthropic.com/en/docs/system-prompts), you can use
         # the top-level `system` parameter — there is no `"system"` role for input
         # messages in the Messages API.
+        #
+        # There is a limit of 100000 messages in a single request.
         messages:,
         # The model that will complete your prompt.\n\nSee
         # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
@@ -604,7 +610,8 @@ module Anthropic
               T.any(
                 Anthropic::Tool::OrHash,
                 Anthropic::ToolBash20250124::OrHash,
-                Anthropic::ToolTextEditor20250124::OrHash
+                Anthropic::ToolTextEditor20250124::OrHash,
+                Anthropic::WebSearchTool20250305::OrHash
               )
             ],
           request_options: Anthropic::RequestOptions::OrHash
@@ -697,6 +704,8 @@ module Anthropic
         # [system prompt](https://docs.anthropic.com/en/docs/system-prompts), you can use
         # the top-level `system` parameter — there is no `"system"` role for input
         # messages in the Messages API.
+        #
+        # There is a limit of 100000 messages in a single request.
         messages:,
         # The model that will complete your prompt.\n\nSee
         # [models](https://docs.anthropic.com/en/docs/models-overview) for additional

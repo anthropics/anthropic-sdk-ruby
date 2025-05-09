@@ -11,12 +11,16 @@ module Anthropic
 
       variant :tool_use, -> { Anthropic::ToolUseBlock }
 
+      variant :server_tool_use, -> { Anthropic::ServerToolUseBlock }
+
+      variant :web_search_tool_result, -> { Anthropic::WebSearchToolResultBlock }
+
       variant :thinking, -> { Anthropic::ThinkingBlock }
 
       variant :redacted_thinking, -> { Anthropic::RedactedThinkingBlock }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::TextBlock, Anthropic::ToolUseBlock, Anthropic::ThinkingBlock, Anthropic::RedactedThinkingBlock)]
+      #   @return [Array(Anthropic::TextBlock, Anthropic::ToolUseBlock, Anthropic::ServerToolUseBlock, Anthropic::WebSearchToolResultBlock, Anthropic::ThinkingBlock, Anthropic::RedactedThinkingBlock)]
     end
   end
 end

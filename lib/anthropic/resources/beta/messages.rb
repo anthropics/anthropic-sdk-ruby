@@ -40,7 +40,7 @@ module Anthropic
         #
         # @param tool_choice [Anthropic::Beta::BetaToolChoiceAuto, Anthropic::Beta::BetaToolChoiceAny, Anthropic::Beta::BetaToolChoiceTool, Anthropic::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
         #
-        # @param tools [Array<Anthropic::Beta::BetaTool, Anthropic::Beta::BetaToolComputerUse20241022, Anthropic::Beta::BetaToolBash20241022, Anthropic::Beta::BetaToolTextEditor20241022, Anthropic::Beta::BetaToolComputerUse20250124, Anthropic::Beta::BetaToolBash20250124, Anthropic::Beta::BetaToolTextEditor20250124>] Body param: Definitions of tools that the model may use.
+        # @param tools [Array<Anthropic::Beta::BetaTool, Anthropic::Beta::BetaToolComputerUse20241022, Anthropic::Beta::BetaToolBash20241022, Anthropic::Beta::BetaToolTextEditor20241022, Anthropic::Beta::BetaToolComputerUse20250124, Anthropic::Beta::BetaToolBash20250124, Anthropic::Beta::BetaToolTextEditor20250124, Anthropic::Beta::BetaWebSearchTool20250305>] Body param: Definitions of tools that the model may use.
         #
         # @param top_k [Integer] Body param: Only sample from the top K options for each subsequent token.
         #
@@ -103,7 +103,7 @@ module Anthropic
         #
         # @param tool_choice [Anthropic::Beta::BetaToolChoiceAuto, Anthropic::Beta::BetaToolChoiceAny, Anthropic::Beta::BetaToolChoiceTool, Anthropic::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
         #
-        # @param tools [Array<Anthropic::Beta::BetaTool, Anthropic::Beta::BetaToolComputerUse20241022, Anthropic::Beta::BetaToolBash20241022, Anthropic::Beta::BetaToolTextEditor20241022, Anthropic::Beta::BetaToolComputerUse20250124, Anthropic::Beta::BetaToolBash20250124, Anthropic::Beta::BetaToolTextEditor20250124>] Body param: Definitions of tools that the model may use.
+        # @param tools [Array<Anthropic::Beta::BetaTool, Anthropic::Beta::BetaToolComputerUse20241022, Anthropic::Beta::BetaToolBash20241022, Anthropic::Beta::BetaToolTextEditor20241022, Anthropic::Beta::BetaToolComputerUse20250124, Anthropic::Beta::BetaToolBash20250124, Anthropic::Beta::BetaToolTextEditor20250124, Anthropic::Beta::BetaWebSearchTool20250305>] Body param: Definitions of tools that the model may use.
         #
         # @param top_k [Integer] Body param: Only sample from the top K options for each subsequent token.
         #
@@ -161,7 +161,7 @@ module Anthropic
         #
         # @param tool_choice [Anthropic::Beta::BetaToolChoiceAuto, Anthropic::Beta::BetaToolChoiceAny, Anthropic::Beta::BetaToolChoiceTool, Anthropic::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
         #
-        # @param tools [Array<Anthropic::Beta::BetaTool, Anthropic::Beta::BetaToolComputerUse20241022, Anthropic::Beta::BetaToolBash20241022, Anthropic::Beta::BetaToolTextEditor20241022, Anthropic::Beta::BetaToolComputerUse20250124, Anthropic::Beta::BetaToolBash20250124, Anthropic::Beta::BetaToolTextEditor20250124>] Body param: Definitions of tools that the model may use.
+        # @param tools [Array<Anthropic::Beta::BetaTool, Anthropic::Beta::BetaToolComputerUse20241022, Anthropic::Beta::BetaToolBash20241022, Anthropic::Beta::BetaToolTextEditor20241022, Anthropic::Beta::BetaToolComputerUse20250124, Anthropic::Beta::BetaToolBash20250124, Anthropic::Beta::BetaToolTextEditor20250124, Anthropic::Beta::BetaWebSearchTool20250305>] Body param: Definitions of tools that the model may use.
         #
         # @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #

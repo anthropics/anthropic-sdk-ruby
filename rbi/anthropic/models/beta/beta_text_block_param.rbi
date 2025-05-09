@@ -15,6 +15,7 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
+        # Create a cache control breakpoint at this content block.
         sig { returns(T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)) }
         attr_reader :cache_control
 
@@ -33,7 +34,8 @@ module Anthropic
                 T.any(
                   Anthropic::Beta::BetaCitationCharLocationParam,
                   Anthropic::Beta::BetaCitationPageLocationParam,
-                  Anthropic::Beta::BetaCitationContentBlockLocationParam
+                  Anthropic::Beta::BetaCitationContentBlockLocationParam,
+                  Anthropic::Beta::BetaCitationWebSearchResultLocationParam
                 )
               ]
             )
@@ -52,14 +54,21 @@ module Anthropic
                   T.any(
                     Anthropic::Beta::BetaCitationCharLocationParam::OrHash,
                     Anthropic::Beta::BetaCitationPageLocationParam::OrHash,
-                    Anthropic::Beta::BetaCitationContentBlockLocationParam::OrHash
+                    Anthropic::Beta::BetaCitationContentBlockLocationParam::OrHash,
+                    Anthropic::Beta::BetaCitationWebSearchResultLocationParam::OrHash
                   )
                 ]
               ),
             type: Symbol
           ).returns(T.attached_class)
         end
-        def self.new(text:, cache_control: nil, citations: nil, type: :text)
+        def self.new(
+          text:,
+          # Create a cache control breakpoint at this content block.
+          cache_control: nil,
+          citations: nil,
+          type: :text
+        )
         end
 
         sig do
@@ -75,7 +84,8 @@ module Anthropic
                     T.any(
                       Anthropic::Beta::BetaCitationCharLocationParam,
                       Anthropic::Beta::BetaCitationPageLocationParam,
-                      Anthropic::Beta::BetaCitationContentBlockLocationParam
+                      Anthropic::Beta::BetaCitationContentBlockLocationParam,
+                      Anthropic::Beta::BetaCitationWebSearchResultLocationParam
                     )
                   ]
                 )

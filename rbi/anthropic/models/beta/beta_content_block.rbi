@@ -13,6 +13,8 @@ module Anthropic
             T.any(
               Anthropic::Beta::BetaTextBlock,
               Anthropic::Beta::BetaToolUseBlock,
+              Anthropic::Beta::BetaServerToolUseBlock,
+              Anthropic::Beta::BetaWebSearchToolResultBlock,
               Anthropic::Beta::BetaThinkingBlock,
               Anthropic::Beta::BetaRedactedThinkingBlock
             )

@@ -5,7 +5,7 @@ module Anthropic
     class MessageParam < Anthropic::Internal::Type::BaseModel
       # @!attribute content
       #
-      #   @return [String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam, Anthropic::ToolUseBlockParam, Anthropic::ToolResultBlockParam, Anthropic::DocumentBlockParam, Anthropic::ThinkingBlockParam, Anthropic::RedactedThinkingBlockParam>]
+      #   @return [String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam, Anthropic::ToolUseBlockParam, Anthropic::ServerToolUseBlockParam, Anthropic::WebSearchToolResultBlockParam, Anthropic::ToolResultBlockParam, Anthropic::DocumentBlockParam, Anthropic::ThinkingBlockParam, Anthropic::RedactedThinkingBlockParam>]
       required :content, union: -> { Anthropic::MessageParam::Content }
 
       # @!attribute role
@@ -14,7 +14,7 @@ module Anthropic
       required :role, enum: -> { Anthropic::MessageParam::Role }
 
       # @!method initialize(content:, role:)
-      #   @param content [String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam, Anthropic::ToolUseBlockParam, Anthropic::ToolResultBlockParam, Anthropic::DocumentBlockParam, Anthropic::ThinkingBlockParam, Anthropic::RedactedThinkingBlockParam>]
+      #   @param content [String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam, Anthropic::ToolUseBlockParam, Anthropic::ServerToolUseBlockParam, Anthropic::WebSearchToolResultBlockParam, Anthropic::ToolResultBlockParam, Anthropic::DocumentBlockParam, Anthropic::ThinkingBlockParam, Anthropic::RedactedThinkingBlockParam>]
       #   @param role [Symbol, Anthropic::MessageParam::Role]
 
       # @see Anthropic::MessageParam#content
@@ -26,7 +26,7 @@ module Anthropic
         variant -> { Anthropic::MessageParam::Content::ContentBlockParamArray }
 
         # @!method self.variants
-        #   @return [Array(String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam, Anthropic::ToolUseBlockParam, Anthropic::ToolResultBlockParam, Anthropic::DocumentBlockParam, Anthropic::ThinkingBlockParam, Anthropic::RedactedThinkingBlockParam>)]
+        #   @return [Array(String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam, Anthropic::ToolUseBlockParam, Anthropic::ServerToolUseBlockParam, Anthropic::WebSearchToolResultBlockParam, Anthropic::ToolResultBlockParam, Anthropic::DocumentBlockParam, Anthropic::ThinkingBlockParam, Anthropic::RedactedThinkingBlockParam>)]
 
         # @type [Anthropic::Internal::Type::Converter]
         ContentBlockParamArray = Anthropic::Internal::Type::ArrayOf[union: -> {

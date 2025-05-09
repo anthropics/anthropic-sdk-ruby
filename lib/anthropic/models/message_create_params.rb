@@ -109,6 +109,8 @@ module Anthropic
       #   the top-level `system` parameter — there is no `"system"` role for input
       #   messages in the Messages API.
       #
+      #   There is a limit of 100000 messages in a single request.
+      #
       #   @return [Array<Anthropic::MessageParam>]
       required :messages, -> { Anthropic::Internal::Type::ArrayOf[Anthropic::MessageParam] }
 
@@ -255,7 +257,7 @@ module Anthropic
       #
       #   See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
       #
-      #   @return [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124>, nil]
+      #   @return [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124, Anthropic::WebSearchTool20250305>, nil]
       optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::ToolUnion] }
 
       # @!attribute top_k
@@ -306,7 +308,7 @@ module Anthropic
       #
       #   @param tool_choice [Anthropic::ToolChoiceAuto, Anthropic::ToolChoiceAny, Anthropic::ToolChoiceTool, Anthropic::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
       #
-      #   @param tools [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124>] Definitions of tools that the model may use.
+      #   @param tools [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124, Anthropic::WebSearchTool20250305>] Definitions of tools that the model may use.
       #
       #   @param top_k [Integer] Only sample from the top K options for each subsequent token.
       #

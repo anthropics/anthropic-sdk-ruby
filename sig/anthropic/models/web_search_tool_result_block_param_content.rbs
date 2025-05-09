@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    type web_search_tool_result_block_param_content =
+      ::Array[Anthropic::WebSearchResultBlockParam]
+      | Anthropic::WebSearchToolRequestError
+
+    module WebSearchToolResultBlockParamContent
+      extend Anthropic::Internal::Type::Union
+
+      def self?.variants: -> ::Array[Anthropic::Models::web_search_tool_result_block_param_content]
+
+      WebSearchResultBlockParamArray: Anthropic::Internal::Type::Converter
+    end
+  end
+end

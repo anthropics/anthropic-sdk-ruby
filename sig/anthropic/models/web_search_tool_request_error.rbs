@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    type web_search_tool_request_error =
+      {
+        error_code: Anthropic::WebSearchToolRequestError::error_code,
+        type: :web_search_tool_result_error
+      }
+
+    class WebSearchToolRequestError < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: Anthropic::WebSearchToolRequestError::error_code
+
+      attr_accessor type: :web_search_tool_result_error
+
+      def initialize: (
+        error_code: Anthropic::WebSearchToolRequestError::error_code,
+        ?type: :web_search_tool_result_error
+      ) -> void
+
+      type error_code =
+        :invalid_tool_input
+        | :unavailable
+        | :max_uses_exceeded
+        | :too_many_requests
+        | :query_too_long
+
+      module ErrorCode
+        extend Anthropic::Internal::Type::Enum
+
+        INVALID_TOOL_INPUT: :invalid_tool_input
+        UNAVAILABLE: :unavailable
+        MAX_USES_EXCEEDED: :max_uses_exceeded
+        TOO_MANY_REQUESTS: :too_many_requests
+        QUERY_TOO_LONG: :query_too_long
+
+        def self?.values: -> ::Array[Anthropic::WebSearchToolRequestError::error_code]
+      end
+    end
+  end
+end
