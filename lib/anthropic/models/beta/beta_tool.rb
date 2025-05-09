@@ -16,12 +16,13 @@ module Anthropic
         # @!attribute name
         #   Name of the tool.
         #
-        #   This is how the tool will be called by the model and in tool_use blocks.
+        #   This is how the tool will be called by the model and in `tool_use` blocks.
         #
         #   @return [String]
         required :name, String
 
         # @!attribute cache_control
+        #   Create a cache control breakpoint at this content block.
         #
         #   @return [Anthropic::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
@@ -50,7 +51,7 @@ module Anthropic
         #
         #   @param name [String] Name of the tool.
         #
-        #   @param cache_control [Anthropic::Beta::BetaCacheControlEphemeral, nil]
+        #   @param cache_control [Anthropic::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
         #   @param description [String] Description of what this tool does.
         #

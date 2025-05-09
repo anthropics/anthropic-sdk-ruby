@@ -14,6 +14,7 @@ module Anthropic
       required :type, const: :tool_result
 
       # @!attribute cache_control
+      #   Create a cache control breakpoint at this content block.
       #
       #   @return [Anthropic::CacheControlEphemeral, nil]
       optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
@@ -30,9 +31,13 @@ module Anthropic
 
       # @!method initialize(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result)
       #   @param tool_use_id [String]
-      #   @param cache_control [Anthropic::CacheControlEphemeral, nil]
+      #
+      #   @param cache_control [Anthropic::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+      #
       #   @param content [String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam>]
+      #
       #   @param is_error [Boolean]
+      #
       #   @param type [Symbol, :tool_result]
 
       # @see Anthropic::ToolResultBlockParam#content

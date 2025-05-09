@@ -3,12 +3,33 @@ module Anthropic
     class BetaMessageDeltaUsage = Beta::BetaMessageDeltaUsage
 
     module Beta
-      type beta_message_delta_usage = { output_tokens: Integer }
+      type beta_message_delta_usage =
+        {
+          cache_creation_input_tokens: Integer?,
+          cache_read_input_tokens: Integer?,
+          input_tokens: Integer?,
+          output_tokens: Integer,
+          server_tool_use: Anthropic::Beta::BetaServerToolUsage?
+        }
 
       class BetaMessageDeltaUsage < Anthropic::Internal::Type::BaseModel
+        attr_accessor cache_creation_input_tokens: Integer?
+
+        attr_accessor cache_read_input_tokens: Integer?
+
+        attr_accessor input_tokens: Integer?
+
         attr_accessor output_tokens: Integer
 
-        def initialize: (output_tokens: Integer) -> void
+        attr_accessor server_tool_use: Anthropic::Beta::BetaServerToolUsage?
+
+        def initialize: (
+          cache_creation_input_tokens: Integer?,
+          cache_read_input_tokens: Integer?,
+          input_tokens: Integer?,
+          output_tokens: Integer,
+          server_tool_use: Anthropic::Beta::BetaServerToolUsage?
+        ) -> void
       end
     end
   end

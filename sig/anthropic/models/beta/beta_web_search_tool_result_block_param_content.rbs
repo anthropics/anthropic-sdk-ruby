@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    module BetaWebSearchToolResultBlockParamContent = Beta::BetaWebSearchToolResultBlockParamContent
+
+    module Beta
+      type beta_web_search_tool_result_block_param_content =
+        ::Array[Anthropic::Beta::BetaWebSearchResultBlockParam]
+        | Anthropic::Beta::BetaWebSearchToolRequestError
+
+      module BetaWebSearchToolResultBlockParamContent
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_web_search_tool_result_block_param_content]
+
+        BetaWebSearchResultBlockParamArray: Anthropic::Internal::Type::Converter
+      end
+    end
+  end
+end

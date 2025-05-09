@@ -23,6 +23,7 @@ module Anthropic
           Anthropic::Beta::BetaCitationCharLocation
           | Anthropic::Beta::BetaCitationPageLocation
           | Anthropic::Beta::BetaCitationContentBlockLocation
+          | Anthropic::Beta::BetaCitationsWebSearchResultLocation
 
         module Citation
           extend Anthropic::Internal::Type::Union

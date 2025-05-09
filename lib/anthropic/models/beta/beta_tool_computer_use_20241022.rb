@@ -19,7 +19,7 @@ module Anthropic
         # @!attribute name
         #   Name of the tool.
         #
-        #   This is how the tool will be called by the model and in tool_use blocks.
+        #   This is how the tool will be called by the model and in `tool_use` blocks.
         #
         #   @return [Symbol, :computer]
         required :name, const: :computer
@@ -30,6 +30,7 @@ module Anthropic
         required :type, const: :computer_20241022
 
         # @!attribute cache_control
+        #   Create a cache control breakpoint at this content block.
         #
         #   @return [Anthropic::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
@@ -48,7 +49,7 @@ module Anthropic
         #
         #   @param display_width_px [Integer] The width of the display in pixels.
         #
-        #   @param cache_control [Anthropic::Beta::BetaCacheControlEphemeral, nil]
+        #   @param cache_control [Anthropic::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
         #   @param display_number [Integer, nil] The X11 display number (e.g. 0, 1) for the display.
         #

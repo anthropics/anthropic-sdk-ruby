@@ -15,12 +15,13 @@ module Anthropic
       # @!attribute name
       #   Name of the tool.
       #
-      #   This is how the tool will be called by the model and in tool_use blocks.
+      #   This is how the tool will be called by the model and in `tool_use` blocks.
       #
       #   @return [String]
       required :name, String
 
       # @!attribute cache_control
+      #   Create a cache control breakpoint at this content block.
       #
       #   @return [Anthropic::CacheControlEphemeral, nil]
       optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
@@ -36,7 +37,12 @@ module Anthropic
       #   @return [String, nil]
       optional :description, String
 
-      # @!method initialize(input_schema:, name:, cache_control: nil, description: nil)
+      # @!attribute type
+      #
+      #   @return [Symbol, Anthropic::Tool::Type, nil]
+      optional :type, enum: -> { Anthropic::Tool::Type }, nil?: true
+
+      # @!method initialize(input_schema:, name:, cache_control: nil, description: nil, type: nil)
       #   Some parameter documentations has been truncated, see {Anthropic::Tool} for more
       #   details.
       #
@@ -44,9 +50,11 @@ module Anthropic
       #
       #   @param name [String] Name of the tool.
       #
-      #   @param cache_control [Anthropic::CacheControlEphemeral, nil]
+      #   @param cache_control [Anthropic::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
       #
       #   @param description [String] Description of what this tool does.
+      #
+      #   @param type [Symbol, Anthropic::Tool::Type, nil]
 
       # @see Anthropic::Tool#input_schema
       class InputSchema < Anthropic::Internal::Type::BaseModel
@@ -68,6 +76,16 @@ module Anthropic
         #
         #   @param properties [Object, nil]
         #   @param type [Symbol, :object]
+      end
+
+      # @see Anthropic::Tool#type
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        CUSTOM = :custom
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
     end
   end

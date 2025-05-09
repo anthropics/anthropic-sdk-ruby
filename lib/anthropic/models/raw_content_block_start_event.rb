@@ -5,7 +5,7 @@ module Anthropic
     class RawContentBlockStartEvent < Anthropic::Internal::Type::BaseModel
       # @!attribute content_block
       #
-      #   @return [Anthropic::TextBlock, Anthropic::ToolUseBlock, Anthropic::ThinkingBlock, Anthropic::RedactedThinkingBlock]
+      #   @return [Anthropic::TextBlock, Anthropic::ToolUseBlock, Anthropic::ServerToolUseBlock, Anthropic::WebSearchToolResultBlock, Anthropic::ThinkingBlock, Anthropic::RedactedThinkingBlock]
       required :content_block, union: -> { Anthropic::RawContentBlockStartEvent::ContentBlock }
 
       # @!attribute index
@@ -19,7 +19,7 @@ module Anthropic
       required :type, const: :content_block_start
 
       # @!method initialize(content_block:, index:, type: :content_block_start)
-      #   @param content_block [Anthropic::TextBlock, Anthropic::ToolUseBlock, Anthropic::ThinkingBlock, Anthropic::RedactedThinkingBlock]
+      #   @param content_block [Anthropic::TextBlock, Anthropic::ToolUseBlock, Anthropic::ServerToolUseBlock, Anthropic::WebSearchToolResultBlock, Anthropic::ThinkingBlock, Anthropic::RedactedThinkingBlock]
       #   @param index [Integer]
       #   @param type [Symbol, :content_block_start]
 
@@ -33,12 +33,16 @@ module Anthropic
 
         variant :tool_use, -> { Anthropic::ToolUseBlock }
 
+        variant :server_tool_use, -> { Anthropic::ServerToolUseBlock }
+
+        variant :web_search_tool_result, -> { Anthropic::WebSearchToolResultBlock }
+
         variant :thinking, -> { Anthropic::ThinkingBlock }
 
         variant :redacted_thinking, -> { Anthropic::RedactedThinkingBlock }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::TextBlock, Anthropic::ToolUseBlock, Anthropic::ThinkingBlock, Anthropic::RedactedThinkingBlock)]
+        #   @return [Array(Anthropic::TextBlock, Anthropic::ToolUseBlock, Anthropic::ServerToolUseBlock, Anthropic::WebSearchToolResultBlock, Anthropic::ThinkingBlock, Anthropic::RedactedThinkingBlock)]
       end
     end
   end

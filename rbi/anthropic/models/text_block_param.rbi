@@ -11,6 +11,7 @@ module Anthropic
       sig { returns(Symbol) }
       attr_accessor :type
 
+      # Create a cache control breakpoint at this content block.
       sig { returns(T.nilable(Anthropic::CacheControlEphemeral)) }
       attr_reader :cache_control
 
@@ -28,7 +29,8 @@ module Anthropic
               T.any(
                 Anthropic::CitationCharLocationParam,
                 Anthropic::CitationPageLocationParam,
-                Anthropic::CitationContentBlockLocationParam
+                Anthropic::CitationContentBlockLocationParam,
+                Anthropic::CitationWebSearchResultLocationParam
               )
             ]
           )
@@ -46,14 +48,21 @@ module Anthropic
                 T.any(
                   Anthropic::CitationCharLocationParam::OrHash,
                   Anthropic::CitationPageLocationParam::OrHash,
-                  Anthropic::CitationContentBlockLocationParam::OrHash
+                  Anthropic::CitationContentBlockLocationParam::OrHash,
+                  Anthropic::CitationWebSearchResultLocationParam::OrHash
                 )
               ]
             ),
           type: Symbol
         ).returns(T.attached_class)
       end
-      def self.new(text:, cache_control: nil, citations: nil, type: :text)
+      def self.new(
+        text:,
+        # Create a cache control breakpoint at this content block.
+        cache_control: nil,
+        citations: nil,
+        type: :text
+      )
       end
 
       sig do
@@ -68,7 +77,8 @@ module Anthropic
                   T.any(
                     Anthropic::CitationCharLocationParam,
                     Anthropic::CitationPageLocationParam,
-                    Anthropic::CitationContentBlockLocationParam
+                    Anthropic::CitationContentBlockLocationParam,
+                    Anthropic::CitationWebSearchResultLocationParam
                   )
                 ]
               )

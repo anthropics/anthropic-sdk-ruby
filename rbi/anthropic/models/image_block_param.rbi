@@ -13,6 +13,7 @@ module Anthropic
       sig { returns(Symbol) }
       attr_accessor :type
 
+      # Create a cache control breakpoint at this content block.
       sig { returns(T.nilable(Anthropic::CacheControlEphemeral)) }
       attr_reader :cache_control
 
@@ -34,7 +35,12 @@ module Anthropic
           type: Symbol
         ).returns(T.attached_class)
       end
-      def self.new(source:, cache_control: nil, type: :image)
+      def self.new(
+        source:,
+        # Create a cache control breakpoint at this content block.
+        cache_control: nil,
+        type: :image
+      )
       end
 
       sig do

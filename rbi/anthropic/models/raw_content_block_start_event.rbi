@@ -10,6 +10,8 @@ module Anthropic
           T.any(
             Anthropic::TextBlock,
             Anthropic::ToolUseBlock,
+            Anthropic::ServerToolUseBlock,
+            Anthropic::WebSearchToolResultBlock,
             Anthropic::ThinkingBlock,
             Anthropic::RedactedThinkingBlock
           )
@@ -29,6 +31,8 @@ module Anthropic
             T.any(
               Anthropic::TextBlock::OrHash,
               Anthropic::ToolUseBlock::OrHash,
+              Anthropic::ServerToolUseBlock::OrHash,
+              Anthropic::WebSearchToolResultBlock::OrHash,
               Anthropic::ThinkingBlock::OrHash,
               Anthropic::RedactedThinkingBlock::OrHash
             ),
@@ -46,6 +50,8 @@ module Anthropic
               T.any(
                 Anthropic::TextBlock,
                 Anthropic::ToolUseBlock,
+                Anthropic::ServerToolUseBlock,
+                Anthropic::WebSearchToolResultBlock,
                 Anthropic::ThinkingBlock,
                 Anthropic::RedactedThinkingBlock
               ),
@@ -65,6 +71,8 @@ module Anthropic
             T.any(
               Anthropic::TextBlock,
               Anthropic::ToolUseBlock,
+              Anthropic::ServerToolUseBlock,
+              Anthropic::WebSearchToolResultBlock,
               Anthropic::ThinkingBlock,
               Anthropic::RedactedThinkingBlock
             )

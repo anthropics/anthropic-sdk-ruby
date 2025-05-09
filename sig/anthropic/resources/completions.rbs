@@ -10,6 +10,7 @@ module Anthropic
         ?temperature: Float,
         ?top_k: Integer,
         ?top_p: Float,
+        ?betas: ::Array[Anthropic::Models::anthropic_beta],
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::Completion
 
@@ -22,6 +23,7 @@ module Anthropic
         ?temperature: Float,
         ?top_k: Integer,
         ?top_p: Float,
+        ?betas: ::Array[Anthropic::Models::anthropic_beta],
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::Internal::Stream[Anthropic::Completion]
 

@@ -14,6 +14,7 @@ module Anthropic
       required :type, const: :document
 
       # @!attribute cache_control
+      #   Create a cache control breakpoint at this content block.
       #
       #   @return [Anthropic::CacheControlEphemeral, nil]
       optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
@@ -35,10 +36,15 @@ module Anthropic
 
       # @!method initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document)
       #   @param source [Anthropic::Base64PDFSource, Anthropic::PlainTextSource, Anthropic::ContentBlockSource, Anthropic::URLPDFSource]
-      #   @param cache_control [Anthropic::CacheControlEphemeral, nil]
+      #
+      #   @param cache_control [Anthropic::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+      #
       #   @param citations [Anthropic::CitationsConfigParam]
+      #
       #   @param context [String, nil]
+      #
       #   @param title [String, nil]
+      #
       #   @param type [Symbol, :document]
 
       # @see Anthropic::DocumentBlockParam#source

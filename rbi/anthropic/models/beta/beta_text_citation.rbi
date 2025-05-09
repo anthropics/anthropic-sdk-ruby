@@ -13,7 +13,8 @@ module Anthropic
             T.any(
               Anthropic::Beta::BetaCitationCharLocation,
               Anthropic::Beta::BetaCitationPageLocation,
-              Anthropic::Beta::BetaCitationContentBlockLocation
+              Anthropic::Beta::BetaCitationContentBlockLocation,
+              Anthropic::Beta::BetaCitationsWebSearchResultLocation
             )
           end
 

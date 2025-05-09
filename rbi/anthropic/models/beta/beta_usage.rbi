@@ -25,12 +25,26 @@ module Anthropic
         sig { returns(Integer) }
         attr_accessor :output_tokens
 
+        # The number of server tool requests.
+        sig { returns(T.nilable(Anthropic::Beta::BetaServerToolUsage)) }
+        attr_reader :server_tool_use
+
+        sig do
+          params(
+            server_tool_use:
+              T.nilable(Anthropic::Beta::BetaServerToolUsage::OrHash)
+          ).void
+        end
+        attr_writer :server_tool_use
+
         sig do
           params(
             cache_creation_input_tokens: T.nilable(Integer),
             cache_read_input_tokens: T.nilable(Integer),
             input_tokens: Integer,
-            output_tokens: Integer
+            output_tokens: Integer,
+            server_tool_use:
+              T.nilable(Anthropic::Beta::BetaServerToolUsage::OrHash)
           ).returns(T.attached_class)
         end
         def self.new(
@@ -41,7 +55,9 @@ module Anthropic
           # The number of input tokens which were used.
           input_tokens:,
           # The number of output tokens which were used.
-          output_tokens:
+          output_tokens:,
+          # The number of server tool requests.
+          server_tool_use:
         )
         end
 
@@ -51,7 +67,8 @@ module Anthropic
               cache_creation_input_tokens: T.nilable(Integer),
               cache_read_input_tokens: T.nilable(Integer),
               input_tokens: Integer,
-              output_tokens: Integer
+              output_tokens: Integer,
+              server_tool_use: T.nilable(Anthropic::Beta::BetaServerToolUsage)
             }
           )
         end

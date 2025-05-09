@@ -19,13 +19,14 @@ module Anthropic
 
         # Name of the tool.
         #
-        # This is how the tool will be called by the model and in tool_use blocks.
+        # This is how the tool will be called by the model and in `tool_use` blocks.
         sig { returns(Symbol) }
         attr_accessor :name
 
         sig { returns(Symbol) }
         attr_accessor :type
 
+        # Create a cache control breakpoint at this content block.
         sig { returns(T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)) }
         attr_reader :cache_control
 
@@ -57,12 +58,13 @@ module Anthropic
           display_height_px:,
           # The width of the display in pixels.
           display_width_px:,
+          # Create a cache control breakpoint at this content block.
           cache_control: nil,
           # The X11 display number (e.g. 0, 1) for the display.
           display_number: nil,
           # Name of the tool.
           #
-          # This is how the tool will be called by the model and in tool_use blocks.
+          # This is how the tool will be called by the model and in `tool_use` blocks.
           name: :computer,
           type: :computer_20241022
         )

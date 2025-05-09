@@ -12,6 +12,8 @@ module Anthropic
       MAX_TOKENS = T.let(:max_tokens, Anthropic::StopReason::TaggedSymbol)
       STOP_SEQUENCE = T.let(:stop_sequence, Anthropic::StopReason::TaggedSymbol)
       TOOL_USE = T.let(:tool_use, Anthropic::StopReason::TaggedSymbol)
+      PAUSE_TURN = T.let(:pause_turn, Anthropic::StopReason::TaggedSymbol)
+      REFUSAL = T.let(:refusal, Anthropic::StopReason::TaggedSymbol)
 
       sig { override.returns(T::Array[Anthropic::StopReason::TaggedSymbol]) }
       def self.values

@@ -53,6 +53,8 @@ module Anthropic
               T.any(
                 Anthropic::Beta::BetaTextBlock,
                 Anthropic::Beta::BetaToolUseBlock,
+                Anthropic::Beta::BetaServerToolUseBlock,
+                Anthropic::Beta::BetaWebSearchToolResultBlock,
                 Anthropic::Beta::BetaThinkingBlock,
                 Anthropic::Beta::BetaRedactedThinkingBlock
               )
@@ -131,6 +133,8 @@ module Anthropic
                 T.any(
                   Anthropic::Beta::BetaTextBlock::OrHash,
                   Anthropic::Beta::BetaToolUseBlock::OrHash,
+                  Anthropic::Beta::BetaServerToolUseBlock::OrHash,
+                  Anthropic::Beta::BetaWebSearchToolResultBlock::OrHash,
                   Anthropic::Beta::BetaThinkingBlock::OrHash,
                   Anthropic::Beta::BetaRedactedThinkingBlock::OrHash
                 )
@@ -238,6 +242,8 @@ module Anthropic
                   T.any(
                     Anthropic::Beta::BetaTextBlock,
                     Anthropic::Beta::BetaToolUseBlock,
+                    Anthropic::Beta::BetaServerToolUseBlock,
+                    Anthropic::Beta::BetaWebSearchToolResultBlock,
                     Anthropic::Beta::BetaThinkingBlock,
                     Anthropic::Beta::BetaRedactedThinkingBlock
                   )

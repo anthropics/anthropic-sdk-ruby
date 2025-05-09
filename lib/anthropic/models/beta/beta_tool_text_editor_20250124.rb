@@ -7,7 +7,7 @@ module Anthropic
         # @!attribute name
         #   Name of the tool.
         #
-        #   This is how the tool will be called by the model and in tool_use blocks.
+        #   This is how the tool will be called by the model and in `tool_use` blocks.
         #
         #   @return [Symbol, :str_replace_editor]
         required :name, const: :str_replace_editor
@@ -18,6 +18,7 @@ module Anthropic
         required :type, const: :text_editor_20250124
 
         # @!attribute cache_control
+        #   Create a cache control breakpoint at this content block.
         #
         #   @return [Anthropic::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
@@ -26,7 +27,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Beta::BetaToolTextEditor20250124} for more details.
         #
-        #   @param cache_control [Anthropic::Beta::BetaCacheControlEphemeral, nil]
+        #   @param cache_control [Anthropic::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
         #   @param name [Symbol, :str_replace_editor] Name of the tool.
         #

@@ -15,13 +15,16 @@ module Anthropic
         required :type, const: :image
 
         # @!attribute cache_control
+        #   Create a cache control breakpoint at this content block.
         #
         #   @return [Anthropic::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!method initialize(source:, cache_control: nil, type: :image)
         #   @param source [Anthropic::Beta::BetaBase64ImageSource, Anthropic::Beta::BetaURLImageSource]
-        #   @param cache_control [Anthropic::Beta::BetaCacheControlEphemeral, nil]
+        #
+        #   @param cache_control [Anthropic::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+        #
         #   @param type [Symbol, :image]
 
         # @see Anthropic::Beta::BetaImageBlockParam#source
