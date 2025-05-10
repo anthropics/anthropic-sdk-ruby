@@ -4,15 +4,17 @@ module Anthropic
       class Models
         def retrieve: (
           String model_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
-        ) -> Anthropic::Models::Beta::BetaModelInfo
+        ) -> Anthropic::Beta::BetaModelInfo
 
         def list: (
           ?after_id: String,
           ?before_id: String,
           ?limit: Integer,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
-        ) -> Anthropic::Internal::Page[Anthropic::Models::Beta::BetaModelInfo]
+        ) -> Anthropic::Internal::Page[Anthropic::Beta::BetaModelInfo]
 
         def initialize: (client: Anthropic::Client) -> void
       end

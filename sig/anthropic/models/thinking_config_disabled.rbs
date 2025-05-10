@@ -6,8 +6,6 @@ module Anthropic
       attr_accessor type: :disabled
 
       def initialize: (?type: :disabled) -> void
-
-      def to_hash: -> Anthropic::Models::thinking_config_disabled
     end
   end
 end

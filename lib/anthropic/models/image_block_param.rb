@@ -5,8 +5,8 @@ module Anthropic
     class ImageBlockParam < Anthropic::Internal::Type::BaseModel
       # @!attribute source
       #
-      #   @return [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]
-      required :source, union: -> { Anthropic::Models::ImageBlockParam::Source }
+      #   @return [Anthropic::Base64ImageSource, Anthropic::URLImageSource]
+      required :source, union: -> { Anthropic::ImageBlockParam::Source }
 
       # @!attribute type
       #
@@ -14,32 +14,30 @@ module Anthropic
       required :type, const: :image
 
       # @!attribute cache_control
+      #   Create a cache control breakpoint at this content block.
       #
-      #   @return [Anthropic::Models::CacheControlEphemeral, nil]
-      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
+      #   @return [Anthropic::CacheControlEphemeral, nil]
+      optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
-      # @!parse
-      #   # @param source [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]
-      #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   # @param type [Symbol, :image]
-      #   #
-      #   def initialize(source:, cache_control: nil, type: :image, **) = super
+      # @!method initialize(source:, cache_control: nil, type: :image)
+      #   @param source [Anthropic::Base64ImageSource, Anthropic::URLImageSource]
+      #
+      #   @param cache_control [Anthropic::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+      #
+      #   @param type [Symbol, :image]
 
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
-
-      # @see Anthropic::Models::ImageBlockParam#source
+      # @see Anthropic::ImageBlockParam#source
       module Source
         extend Anthropic::Internal::Type::Union
 
         discriminator :type
 
-        variant :base64, -> { Anthropic::Models::Base64ImageSource }
+        variant :base64, -> { Anthropic::Base64ImageSource }
 
-        variant :url, -> { Anthropic::Models::URLImageSource }
+        variant :url, -> { Anthropic::URLImageSource }
 
-        # @!parse
-        #   # @return [Array(Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource)]
-        #   def self.variants; end
+        # @!method self.variants
+        #   @return [Array(Anthropic::Base64ImageSource, Anthropic::URLImageSource)]
       end
     end
   end

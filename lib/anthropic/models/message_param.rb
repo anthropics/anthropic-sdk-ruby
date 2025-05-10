@@ -5,50 +5,44 @@ module Anthropic
     class MessageParam < Anthropic::Internal::Type::BaseModel
       # @!attribute content
       #
-      #   @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam>]
-      required :content, union: -> { Anthropic::Models::MessageParam::Content }
+      #   @return [String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam, Anthropic::ToolUseBlockParam, Anthropic::ServerToolUseBlockParam, Anthropic::WebSearchToolResultBlockParam, Anthropic::ToolResultBlockParam, Anthropic::DocumentBlockParam, Anthropic::ThinkingBlockParam, Anthropic::RedactedThinkingBlockParam>]
+      required :content, union: -> { Anthropic::MessageParam::Content }
 
       # @!attribute role
       #
-      #   @return [Symbol, Anthropic::Models::MessageParam::Role]
-      required :role, enum: -> { Anthropic::Models::MessageParam::Role }
+      #   @return [Symbol, Anthropic::MessageParam::Role]
+      required :role, enum: -> { Anthropic::MessageParam::Role }
 
-      # @!parse
-      #   # @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam>]
-      #   # @param role [Symbol, Anthropic::Models::MessageParam::Role]
-      #   #
-      #   def initialize(content:, role:, **) = super
+      # @!method initialize(content:, role:)
+      #   @param content [String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam, Anthropic::ToolUseBlockParam, Anthropic::ServerToolUseBlockParam, Anthropic::WebSearchToolResultBlockParam, Anthropic::ToolResultBlockParam, Anthropic::DocumentBlockParam, Anthropic::ThinkingBlockParam, Anthropic::RedactedThinkingBlockParam>]
+      #   @param role [Symbol, Anthropic::MessageParam::Role]
 
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
-
-      # @see Anthropic::Models::MessageParam#content
+      # @see Anthropic::MessageParam#content
       module Content
         extend Anthropic::Internal::Type::Union
 
         variant String
 
-        variant -> { Anthropic::Models::MessageParam::Content::ContentBlockParamArray }
+        variant -> { Anthropic::MessageParam::Content::ContentBlockParamArray }
 
-        # @!parse
-        #   # @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam>)]
-        #   def self.variants; end
+        # @!method self.variants
+        #   @return [Array(String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam, Anthropic::ToolUseBlockParam, Anthropic::ServerToolUseBlockParam, Anthropic::WebSearchToolResultBlockParam, Anthropic::ToolResultBlockParam, Anthropic::DocumentBlockParam, Anthropic::ThinkingBlockParam, Anthropic::RedactedThinkingBlockParam>)]
 
-        ContentBlockParamArray =
-          Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::Models::ContentBlockParam }]
+        # @type [Anthropic::Internal::Type::Converter]
+        ContentBlockParamArray = Anthropic::Internal::Type::ArrayOf[union: -> {
+          Anthropic::ContentBlockParam
+        }]
       end
 
-      # @see Anthropic::Models::MessageParam#role
+      # @see Anthropic::MessageParam#role
       module Role
         extend Anthropic::Internal::Type::Enum
 
         USER = :user
         ASSISTANT = :assistant
 
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   def self.values; end
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
     end
   end

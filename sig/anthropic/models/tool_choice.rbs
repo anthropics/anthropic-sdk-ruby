@@ -1,15 +1,15 @@
 module Anthropic
   module Models
     type tool_choice =
-      Anthropic::Models::ToolChoiceAuto
-      | Anthropic::Models::ToolChoiceAny
-      | Anthropic::Models::ToolChoiceTool
-      | Anthropic::Models::ToolChoiceNone
+      Anthropic::ToolChoiceAuto
+      | Anthropic::ToolChoiceAny
+      | Anthropic::ToolChoiceTool
+      | Anthropic::ToolChoiceNone
 
     module ToolChoice
       extend Anthropic::Internal::Type::Union
 
-      def self?.variants: -> [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
+      def self?.variants: -> ::Array[Anthropic::Models::tool_choice]
     end
   end
 end

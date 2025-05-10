@@ -4,15 +4,15 @@ module Anthropic
 
     module Messages
       type message_batch_result =
-        Anthropic::Models::Messages::MessageBatchSucceededResult
-        | Anthropic::Models::Messages::MessageBatchErroredResult
-        | Anthropic::Models::Messages::MessageBatchCanceledResult
-        | Anthropic::Models::Messages::MessageBatchExpiredResult
+        Anthropic::Messages::MessageBatchSucceededResult
+        | Anthropic::Messages::MessageBatchErroredResult
+        | Anthropic::Messages::MessageBatchCanceledResult
+        | Anthropic::Messages::MessageBatchExpiredResult
 
       module MessageBatchResult
         extend Anthropic::Internal::Type::Union
 
-        def self?.variants: -> [Anthropic::Models::Messages::MessageBatchSucceededResult, Anthropic::Models::Messages::MessageBatchErroredResult, Anthropic::Models::Messages::MessageBatchCanceledResult, Anthropic::Models::Messages::MessageBatchExpiredResult]
+        def self?.variants: -> ::Array[Anthropic::Models::Messages::message_batch_result]
       end
     end
   end

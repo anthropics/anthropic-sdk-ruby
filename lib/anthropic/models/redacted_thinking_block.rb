@@ -13,13 +13,9 @@ module Anthropic
       #   @return [Symbol, :redacted_thinking]
       required :type, const: :redacted_thinking
 
-      # @!parse
-      #   # @param data [String]
-      #   # @param type [Symbol, :redacted_thinking]
-      #   #
-      #   def initialize(data:, type: :redacted_thinking, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(data:, type: :redacted_thinking)
+      #   @param data [String]
+      #   @param type [Symbol, :redacted_thinking]
     end
   end
 end

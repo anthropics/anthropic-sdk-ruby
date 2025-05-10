@@ -11,12 +11,11 @@ module Anthropic
       #   @return [Integer]
       required :input_tokens, Integer
 
-      # @!parse
-      #   # @param input_tokens [Integer]
-      #   #
-      #   def initialize(input_tokens:, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(input_tokens:)
+      #   Some parameter documentations has been truncated, see
+      #   {Anthropic::MessageTokensCount} for more details.
+      #
+      #   @param input_tokens [Integer] The total number of tokens across the provided list of messages, system prompt,
     end
   end
 end

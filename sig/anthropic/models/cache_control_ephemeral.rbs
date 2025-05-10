@@ -6,8 +6,6 @@ module Anthropic
       attr_accessor type: :ephemeral
 
       def initialize: (?type: :ephemeral) -> void
-
-      def to_hash: -> Anthropic::Models::cache_control_ephemeral
     end
   end
 end

@@ -14,26 +14,26 @@ module Anthropic
       required :type, const: :text
 
       # @!attribute cache_control
+      #   Create a cache control breakpoint at this content block.
       #
-      #   @return [Anthropic::Models::CacheControlEphemeral, nil]
-      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
+      #   @return [Anthropic::CacheControlEphemeral, nil]
+      optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
       # @!attribute citations
       #
-      #   @return [Array<Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam>, nil]
+      #   @return [Array<Anthropic::CitationCharLocationParam, Anthropic::CitationPageLocationParam, Anthropic::CitationContentBlockLocationParam, Anthropic::CitationWebSearchResultLocationParam>, nil]
       optional :citations,
-               -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::TextCitationParam] },
+               -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::TextCitationParam] },
                nil?: true
 
-      # @!parse
-      #   # @param text [String]
-      #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   # @param citations [Array<Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam>, nil]
-      #   # @param type [Symbol, :text]
-      #   #
-      #   def initialize(text:, cache_control: nil, citations: nil, type: :text, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(text:, cache_control: nil, citations: nil, type: :text)
+      #   @param text [String]
+      #
+      #   @param cache_control [Anthropic::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+      #
+      #   @param citations [Array<Anthropic::CitationCharLocationParam, Anthropic::CitationPageLocationParam, Anthropic::CitationContentBlockLocationParam, Anthropic::CitationWebSearchResultLocationParam>, nil]
+      #
+      #   @param type [Symbol, :text]
     end
   end
 end

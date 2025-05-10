@@ -6,8 +6,7 @@ module Anthropic
     #
     # @see Anthropic::Resources::Messages#stream_raw
     class MessageCreateParams < Anthropic::Internal::Type::BaseModel
-      # @!parse
-      #   extend Anthropic::Internal::Type::RequestParameters::Converter
+      extend Anthropic::Internal::Type::RequestParameters::Converter
       include Anthropic::Internal::Type::RequestParameters
 
       # @!attribute max_tokens
@@ -110,28 +109,26 @@ module Anthropic
       #   the top-level `system` parameter — there is no `"system"` role for input
       #   messages in the Messages API.
       #
-      #   @return [Array<Anthropic::Models::MessageParam>]
-      required :messages, -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Models::MessageParam] }
+      #   There is a limit of 100000 messages in a single request.
+      #
+      #   @return [Array<Anthropic::MessageParam>]
+      required :messages, -> { Anthropic::Internal::Type::ArrayOf[Anthropic::MessageParam] }
 
       # @!attribute model
       #   The model that will complete your prompt.\n\nSee
       #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
       #
-      #   @return [Symbol, String, Anthropic::Models::Model]
-      required :model, union: -> { Anthropic::Models::Model }
+      #   @return [Symbol, String, Anthropic::Model]
+      required :model, union: -> { Anthropic::Model }
 
-      # @!attribute [r] metadata
+      # @!attribute metadata
       #   An object describing metadata about the request.
       #
-      #   @return [Anthropic::Models::Metadata, nil]
-      optional :metadata, -> { Anthropic::Models::Metadata }
+      #   @return [Anthropic::Metadata, nil]
+      optional :metadata, -> { Anthropic::Metadata }
 
-      # @!parse
-      #   # @return [Anthropic::Models::Metadata]
-      #   attr_writer :metadata
-
-      # @!attribute [r] stop_sequences
+      # @!attribute stop_sequences
       #   Custom text sequences that will cause the model to stop generating.
       #
       #   Our models will normally stop when they have naturally completed their turn,
@@ -145,25 +142,17 @@ module Anthropic
       #   @return [Array<String>, nil]
       optional :stop_sequences, Anthropic::Internal::Type::ArrayOf[String]
 
-      # @!parse
-      #   # @return [Array<String>]
-      #   attr_writer :stop_sequences
-
-      # @!attribute [r] system_
+      # @!attribute system_
       #   System prompt.
       #
       #   A system prompt is a way of providing context and instructions to Claude, such
       #   as specifying a particular goal or role. See our
       #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
       #
-      #   @return [String, Array<Anthropic::Models::TextBlockParam>, nil]
-      optional :system_, union: -> { Anthropic::Models::MessageCreateParams::System }, api_name: :system
+      #   @return [String, Array<Anthropic::TextBlockParam>, nil]
+      optional :system_, union: -> { Anthropic::MessageCreateParams::System }, api_name: :system
 
-      # @!parse
-      #   # @return [String, Array<Anthropic::Models::TextBlockParam>]
-      #   attr_writer :system_
-
-      # @!attribute [r] temperature
+      # @!attribute temperature
       #   Amount of randomness injected into the response.
       #
       #   Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
@@ -176,11 +165,7 @@ module Anthropic
       #   @return [Float, nil]
       optional :temperature, Float
 
-      # @!parse
-      #   # @return [Float]
-      #   attr_writer :temperature
-
-      # @!attribute [r] thinking
+      # @!attribute thinking
       #   Configuration for enabling Claude's extended thinking.
       #
       #   When enabled, responses include `thinking` content blocks showing Claude's
@@ -191,25 +176,17 @@ module Anthropic
       #   [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
       #   for details.
       #
-      #   @return [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, nil]
-      optional :thinking, union: -> { Anthropic::Models::ThinkingConfigParam }
+      #   @return [Anthropic::ThinkingConfigEnabled, Anthropic::ThinkingConfigDisabled, nil]
+      optional :thinking, union: -> { Anthropic::ThinkingConfigParam }
 
-      # @!parse
-      #   # @return [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]
-      #   attr_writer :thinking
-
-      # @!attribute [r] tool_choice
+      # @!attribute tool_choice
       #   How the model should use the provided tools. The model can use a specific tool,
       #   any available tool, decide by itself, or not use tools at all.
       #
-      #   @return [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone, nil]
-      optional :tool_choice, union: -> { Anthropic::Models::ToolChoice }
+      #   @return [Anthropic::ToolChoiceAuto, Anthropic::ToolChoiceAny, Anthropic::ToolChoiceTool, Anthropic::ToolChoiceNone, nil]
+      optional :tool_choice, union: -> { Anthropic::ToolChoice }
 
-      # @!parse
-      #   # @return [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
-      #   attr_writer :tool_choice
-
-      # @!attribute [r] tools
+      # @!attribute tools
       #   Definitions of tools that the model may use.
       #
       #   If you include `tools` in your API request, the model may return `tool_use`
@@ -280,14 +257,10 @@ module Anthropic
       #
       #   See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
       #
-      #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>, nil]
-      optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::ToolUnion] }
+      #   @return [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124, Anthropic::WebSearchTool20250305>, nil]
+      optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::ToolUnion] }
 
-      # @!parse
-      #   # @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>]
-      #   attr_writer :tools
-
-      # @!attribute [r] top_k
+      # @!attribute top_k
       #   Only sample from the top K options for each subsequent token.
       #
       #   Used to remove "long tail" low probability responses.
@@ -299,11 +272,7 @@ module Anthropic
       #   @return [Integer, nil]
       optional :top_k, Integer
 
-      # @!parse
-      #   # @return [Integer]
-      #   attr_writer :top_k
-
-      # @!attribute [r] top_p
+      # @!attribute top_p
       #   Use nucleus sampling.
       #
       #   In nucleus sampling, we compute the cumulative distribution over all the options
@@ -317,45 +286,35 @@ module Anthropic
       #   @return [Float, nil]
       optional :top_p, Float
 
-      # @!parse
-      #   # @return [Float]
-      #   attr_writer :top_p
-
-      # @!parse
-      #   # @param max_tokens [Integer]
-      #   # @param messages [Array<Anthropic::Models::MessageParam>]
-      #   # @param model [Symbol, String, Anthropic::Models::Model]
-      #   # @param metadata [Anthropic::Models::Metadata]
-      #   # @param stop_sequences [Array<String>]
-      #   # @param system_ [String, Array<Anthropic::Models::TextBlockParam>]
-      #   # @param temperature [Float]
-      #   # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled]
-      #   # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone]
-      #   # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124>]
-      #   # @param top_k [Integer]
-      #   # @param top_p [Float]
-      #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(
-      #     max_tokens:,
-      #     messages:,
-      #     model:,
-      #     metadata: nil,
-      #     stop_sequences: nil,
-      #     system_: nil,
-      #     temperature: nil,
-      #     thinking: nil,
-      #     tool_choice: nil,
-      #     tools: nil,
-      #     top_k: nil,
-      #     top_p: nil,
-      #     request_options: {},
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(max_tokens:, messages:, model:, metadata: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {Anthropic::Models::MessageCreateParams} for more details.
+      #
+      #   @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
+      #
+      #   @param messages [Array<Anthropic::MessageParam>] Input messages.
+      #
+      #   @param model [Symbol, String, Anthropic::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      #
+      #   @param metadata [Anthropic::Metadata] An object describing metadata about the request.
+      #
+      #   @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
+      #
+      #   @param system_ [String, Array<Anthropic::TextBlockParam>] System prompt.
+      #
+      #   @param temperature [Float] Amount of randomness injected into the response.
+      #
+      #   @param thinking [Anthropic::ThinkingConfigEnabled, Anthropic::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
+      #
+      #   @param tool_choice [Anthropic::ToolChoiceAuto, Anthropic::ToolChoiceAny, Anthropic::ToolChoiceTool, Anthropic::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
+      #
+      #   @param tools [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124, Anthropic::WebSearchTool20250305>] Definitions of tools that the model may use.
+      #
+      #   @param top_k [Integer] Only sample from the top K options for each subsequent token.
+      #
+      #   @param top_p [Float] Use nucleus sampling.
+      #
+      #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
       # System prompt.
       #
@@ -367,13 +326,13 @@ module Anthropic
 
         variant String
 
-        variant -> { Anthropic::Models::MessageCreateParams::System::TextBlockParamArray }
+        variant -> { Anthropic::MessageCreateParams::System::TextBlockParamArray }
 
-        # @!parse
-        #   # @return [Array(String, Array<Anthropic::Models::TextBlockParam>)]
-        #   def self.variants; end
+        # @!method self.variants
+        #   @return [Array(String, Array<Anthropic::TextBlockParam>)]
 
-        TextBlockParamArray = Anthropic::Internal::Type::ArrayOf[-> { Anthropic::Models::TextBlockParam }]
+        # @type [Anthropic::Internal::Type::Converter]
+        TextBlockParamArray = Anthropic::Internal::Type::ArrayOf[-> { Anthropic::TextBlockParam }]
       end
     end
   end

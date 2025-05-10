@@ -13,13 +13,9 @@ module Anthropic
       #   @return [Symbol, :permission_error]
       required :type, const: :permission_error
 
-      # @!parse
-      #   # @param message [String]
-      #   # @param type [Symbol, :permission_error]
-      #   #
-      #   def initialize(message:, type: :permission_error, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(message:, type: :permission_error)
+      #   @param message [String]
+      #   @param type [Symbol, :permission_error]
     end
   end
 end

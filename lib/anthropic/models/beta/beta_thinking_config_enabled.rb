@@ -23,13 +23,13 @@ module Anthropic
         #   @return [Symbol, :enabled]
         required :type, const: :enabled
 
-        # @!parse
-        #   # @param budget_tokens [Integer]
-        #   # @param type [Symbol, :enabled]
-        #   #
-        #   def initialize(budget_tokens:, type: :enabled, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(budget_tokens:, type: :enabled)
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Beta::BetaThinkingConfigEnabled} for more details.
+        #
+        #   @param budget_tokens [Integer] Determines how many tokens Claude can use for its internal reasoning process. La
+        #
+        #   @param type [Symbol, :enabled]
       end
     end
 

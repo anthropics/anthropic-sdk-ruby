@@ -43,10 +43,22 @@ module Anthropic
             value.string
           in Pathname | IO
             state[:can_retry] = false if value.is_a?(IO)
-            Anthropic::Internal::Util::SerializationAdapter.new(value)
+            Anthropic::FilePart.new(value)
+          in Anthropic::FilePart
+            state[:can_retry] = false if value.content.is_a?(IO)
+            value
           else
             value
           end
+        end
+
+        # @api private
+        #
+        # @param depth [Integer]
+        #
+        # @return [String]
+        def inspect(depth: 0)
+          super()
         end
 
         # rubocop:enable Lint/UnusedMethodArgument
@@ -238,6 +250,21 @@ module Anthropic
               target.dump(value, state: state)
             else
               Anthropic::Internal::Type::Unknown.dump(value, state: state)
+            end
+          end
+
+          # @api private
+          #
+          # @param target [Object]
+          # @param depth [Integer]
+          #
+          # @return [String]
+          def inspect(target, depth:)
+            case target
+            in Anthropic::Internal::Type::Converter
+              target.inspect(depth: depth.succ)
+            else
+              target.inspect
             end
           end
         end

@@ -17,13 +17,12 @@ module Anthropic
 
         discriminator :type
 
-        variant :enabled, -> { Anthropic::Models::Beta::BetaThinkingConfigEnabled }
+        variant :enabled, -> { Anthropic::Beta::BetaThinkingConfigEnabled }
 
-        variant :disabled, -> { Anthropic::Models::Beta::BetaThinkingConfigDisabled }
+        variant :disabled, -> { Anthropic::Beta::BetaThinkingConfigDisabled }
 
-        # @!parse
-        #   # @return [Array(Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled)]
-        #   def self.variants; end
+        # @!method self.variants
+        #   @return [Array(Anthropic::Beta::BetaThinkingConfigEnabled, Anthropic::Beta::BetaThinkingConfigDisabled)]
       end
     end
 

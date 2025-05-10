@@ -9,8 +9,6 @@ module Anthropic
         attr_accessor input_tokens: Integer
 
         def initialize: (input_tokens: Integer) -> void
-
-        def to_hash: -> Anthropic::Models::Beta::beta_message_tokens_count
       end
     end
   end

@@ -87,8 +87,9 @@ class Anthropic::Test::UtilDataHandlingTest < Minitest::Test
       Anthropic::Internal::Util.dig([], 1.0) => nil
 
       Anthropic::Internal::Util.dig(Object, 1) => nil
-      Anthropic::Internal::Util.dig([], 1.0, 2) => 2
       Anthropic::Internal::Util.dig([], 1.0) { 2 } => 2
+      Anthropic::Internal::Util.dig([], ->(_) { 2 }) => 2
+      Anthropic::Internal::Util.dig([1], -> { _1 in [1] }) => true
     end
   end
 end
@@ -157,6 +158,38 @@ class Anthropic::Test::UtilUriHandlingTest < Minitest::Test
   end
 end
 
+class Anthropic::Test::RegexMatchTest < Minitest::Test
+  def test_json_content
+    cases = {
+      "application/json" => true,
+      "application/jsonl" => false,
+      "application/vnd.github.v3+json" => true,
+      "application/vnd.api+json" => true
+    }
+    cases.each do |header, verdict|
+      assert_pattern do
+        Anthropic::Internal::Util::JSON_CONTENT.match?(header) => ^verdict
+      end
+    end
+  end
+
+  def test_jsonl_content
+    cases = {
+      "application/x-ndjson" => true,
+      "application/x-ldjson" => true,
+      "application/jsonl" => true,
+      "application/x-jsonl" => true,
+      "application/json" => false,
+      "application/vnd.api+json" => false
+    }
+    cases.each do |header, verdict|
+      assert_pattern do
+        Anthropic::Internal::Util::JSONL_CONTENT.match?(header) => ^verdict
+      end
+    end
+  end
+end
+
 class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
   class FakeCGI < CGI
     def initialize(headers, io)
@@ -184,8 +217,12 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
     file = Pathname(__FILE__)
     headers = {"content-type" => "multipart/form-data"}
     cases = {
+      "abc" => "abc",
       StringIO.new("abc") => "abc",
-      file => /^class Anthropic/
+      Anthropic::FilePart.new("abc") => "abc",
+      Anthropic::FilePart.new(StringIO.new("abc")) => "abc",
+      file => /^class Anthropic/,
+      Anthropic::FilePart.new(file) => /^class Anthropic/
     }
     cases.each do |body, val|
       encoded = Anthropic::Internal::Util.encode_content(headers, body)
@@ -203,7 +240,13 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
       {a: 2, b: nil} => {"a" => "2", "b" => "null"},
       {a: 2, b: [1, 2, 3]} => {"a" => "2", "b" => "1"},
       {strio: StringIO.new("a")} => {"strio" => "a"},
-      {pathname: Pathname(__FILE__)} => {"pathname" => -> { _1.read in /^class Anthropic/ }}
+      {strio: Anthropic::FilePart.new("a")} => {"strio" => "a"},
+      {pathname: Pathname(__FILE__)} => {"pathname" => -> { _1.read in /^class Anthropic/ }},
+      {pathname: Anthropic::FilePart.new(Pathname(__FILE__))} => {
+        "pathname" => -> {
+          _1.read in /^class Anthropic/
+        }
+      }
     }
     cases.each do |body, testcase|
       encoded = Anthropic::Internal::Util.encode_content(headers, body)
@@ -368,6 +411,24 @@ class Anthropic::Test::UtilFusedEnumTest < Minitest::Test
   end
 end
 
+class Anthropic::Test::UtilContentDecodingTest < Minitest::Test
+  def test_charset
+    cases = {
+      "application/json" => Encoding::BINARY,
+      "application/json; charset=utf-8" => Encoding::UTF_8,
+      "charset=uTf-8 application/json; " => Encoding::UTF_8,
+      "charset=UTF-8; application/json; " => Encoding::UTF_8,
+      "charset=ISO-8859-1 ;application/json; " => Encoding::ISO_8859_1,
+      "charset=EUC-KR ;application/json; " => Encoding::EUC_KR
+    }
+    text = String.new.force_encoding(Encoding::BINARY)
+    cases.each do |content_type, encoding|
+      Anthropic::Internal::Util.force_charset!(content_type, text: text)
+      assert_equal(encoding, text.encoding)
+    end
+  end
+end
+
 class Anthropic::Test::UtilSseTest < Minitest::Test
   def test_decode_lines
     cases = {
@@ -381,7 +442,9 @@ class Anthropic::Test::UtilSseTest < Minitest::Test
       %W[\na b\n\n] => %W[\n ab\n \n],
       %W[\na b] => %W[\n ab],
       %W[\u1F62E\u200D\u1F4A8] => %W[\u1F62E\u200D\u1F4A8],
-      %W[\u1F62E \u200D \u1F4A8] => %W[\u1F62E\u200D\u1F4A8]
+      %W[\u1F62E \u200D \u1F4A8] => %W[\u1F62E\u200D\u1F4A8],
+      ["\xf0\x9f".b, "\xa5\xba".b] => ["\xf0\x9f\xa5\xba".b],
+      ["\xf0".b, "\x9f".b, "\xa5".b, "\xba".b] => ["\xf0\x9f\xa5\xba".b]
     }
     eols = %W[\n \r \r\n]
     cases.each do |enum, expected|

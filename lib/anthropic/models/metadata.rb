@@ -13,12 +13,11 @@ module Anthropic
       #   @return [String, nil]
       optional :user_id, String, nil?: true
 
-      # @!parse
-      #   # @param user_id [String, nil]
-      #   #
-      #   def initialize(user_id: nil, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(user_id: nil)
+      #   Some parameter documentations has been truncated, see {Anthropic::Metadata} for
+      #   more details.
+      #
+      #   @param user_id [String, nil] An external identifier for the user who is associated with the request.
     end
   end
 end

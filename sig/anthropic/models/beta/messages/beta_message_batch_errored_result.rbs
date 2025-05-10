@@ -3,19 +3,17 @@ module Anthropic
     module Beta
       module Messages
         type beta_message_batch_errored_result =
-          { error: Anthropic::Models::BetaErrorResponse, type: :errored }
+          { error: Anthropic::BetaErrorResponse, type: :errored }
 
         class BetaMessageBatchErroredResult < Anthropic::Internal::Type::BaseModel
-          attr_accessor error: Anthropic::Models::BetaErrorResponse
+          attr_accessor error: Anthropic::BetaErrorResponse
 
           attr_accessor type: :errored
 
           def initialize: (
-            error: Anthropic::Models::BetaErrorResponse,
+            error: Anthropic::BetaErrorResponse,
             ?type: :errored
           ) -> void
-
-          def to_hash: -> Anthropic::Models::Beta::Messages::beta_message_batch_errored_result
         end
       end
     end

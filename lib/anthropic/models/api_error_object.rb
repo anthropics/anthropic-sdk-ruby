@@ -13,13 +13,9 @@ module Anthropic
       #   @return [Symbol, :api_error]
       required :type, const: :api_error
 
-      # @!parse
-      #   # @param message [String]
-      #   # @param type [Symbol, :api_error]
-      #   #
-      #   def initialize(message:, type: :api_error, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(message:, type: :api_error)
+      #   @param message [String]
+      #   @param type [Symbol, :api_error]
     end
   end
 end

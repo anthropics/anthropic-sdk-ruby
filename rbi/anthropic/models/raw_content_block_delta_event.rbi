@@ -1,0 +1,64 @@
+# typed: strong
+
+module Anthropic
+  module Models
+    class RawContentBlockDeltaEvent < Anthropic::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
+      sig do
+        returns(
+          T.any(
+            Anthropic::TextDelta,
+            Anthropic::InputJSONDelta,
+            Anthropic::CitationsDelta,
+            Anthropic::ThinkingDelta,
+            Anthropic::SignatureDelta
+          )
+        )
+      end
+      attr_accessor :delta
+
+      sig { returns(Integer) }
+      attr_accessor :index
+
+      sig { returns(Symbol) }
+      attr_accessor :type
+
+      sig do
+        params(
+          delta:
+            T.any(
+              Anthropic::TextDelta::OrHash,
+              Anthropic::InputJSONDelta::OrHash,
+              Anthropic::CitationsDelta::OrHash,
+              Anthropic::ThinkingDelta::OrHash,
+              Anthropic::SignatureDelta::OrHash
+            ),
+          index: Integer,
+          type: Symbol
+        ).returns(T.attached_class)
+      end
+      def self.new(delta:, index:, type: :content_block_delta)
+      end
+
+      sig do
+        override.returns(
+          {
+            delta:
+              T.any(
+                Anthropic::TextDelta,
+                Anthropic::InputJSONDelta,
+                Anthropic::CitationsDelta,
+                Anthropic::ThinkingDelta,
+                Anthropic::SignatureDelta
+              ),
+            index: Integer,
+            type: Symbol
+          }
+        )
+      end
+      def to_hash
+      end
+    end
+  end
+end

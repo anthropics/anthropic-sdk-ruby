@@ -17,8 +17,6 @@ module Anthropic
         ?disable_parallel_tool_use: bool,
         ?type: :tool
       ) -> void
-
-      def to_hash: -> Anthropic::Models::tool_choice_tool
     end
   end
 end

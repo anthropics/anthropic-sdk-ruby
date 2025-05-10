@@ -5,15 +5,16 @@ module Anthropic
     module MessageCountTokensTool
       extend Anthropic::Internal::Type::Union
 
-      variant -> { Anthropic::Models::Tool }
+      variant -> { Anthropic::Tool }
 
-      variant -> { Anthropic::Models::ToolBash20250124 }
+      variant -> { Anthropic::ToolBash20250124 }
 
-      variant -> { Anthropic::Models::ToolTextEditor20250124 }
+      variant -> { Anthropic::ToolTextEditor20250124 }
 
-      # @!parse
-      #   # @return [Array(Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124)]
-      #   def self.variants; end
+      variant -> { Anthropic::WebSearchTool20250305 }
+
+      # @!method self.variants
+      #   @return [Array(Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124, Anthropic::WebSearchTool20250305)]
     end
   end
 end

@@ -5,9 +5,9 @@ module Anthropic
 
       def create: (
         max_tokens: Integer,
-        messages: ::Array[Anthropic::Models::MessageParam],
+        messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
-        ?metadata: Anthropic::Models::Metadata,
+        ?metadata: Anthropic::Metadata,
         ?stop_sequences: ::Array[String],
         ?system_: Anthropic::Models::MessageCreateParams::system_,
         ?temperature: Float,
@@ -17,13 +17,13 @@ module Anthropic
         ?top_k: Integer,
         ?top_p: Float,
         ?request_options: Anthropic::request_opts
-      ) -> Anthropic::Models::Message
+      ) -> Anthropic::Message
 
       def stream_raw: (
         max_tokens: Integer,
-        messages: ::Array[Anthropic::Models::MessageParam],
+        messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
-        ?metadata: Anthropic::Models::Metadata,
+        ?metadata: Anthropic::Metadata,
         ?stop_sequences: ::Array[String],
         ?system_: Anthropic::Models::MessageCreateParams::system_,
         ?temperature: Float,
@@ -36,14 +36,14 @@ module Anthropic
       ) -> Anthropic::Internal::Stream[Anthropic::Models::raw_message_stream_event]
 
       def count_tokens: (
-        messages: ::Array[Anthropic::Models::MessageParam],
+        messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
         ?system_: Anthropic::Models::MessageCountTokensParams::system_,
         ?thinking: Anthropic::Models::thinking_config_param,
         ?tool_choice: Anthropic::Models::tool_choice,
         ?tools: ::Array[Anthropic::Models::message_count_tokens_tool],
         ?request_options: Anthropic::request_opts
-      ) -> Anthropic::Models::MessageTokensCount
+      ) -> Anthropic::MessageTokensCount
 
       def initialize: (client: Anthropic::Client) -> void
     end

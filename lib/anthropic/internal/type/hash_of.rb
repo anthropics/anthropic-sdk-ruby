@@ -13,6 +13,10 @@ module Anthropic
       class HashOf
         include Anthropic::Internal::Type::Converter
 
+        private_class_method :new
+
+        # @overload [](type_info, spec = {})
+        #
         # @param type_info [Hash{Symbol=>Object}, Proc, Anthropic::Internal::Type::Converter, Class]
         #
         # @param spec [Hash{Symbol=>Object}] .
@@ -24,8 +28,12 @@ module Anthropic
         #   @option spec [Proc] :union
         #
         #   @option spec [Boolean] :"nil?"
-        def self.[](type_info, spec = {}) = new(type_info, spec)
+        #
+        # @return [Anthropic::Internal::Type::HashOf]
+        def self.[](...) = new(...)
 
+        # @api public
+        #
         # @param other [Object]
         #
         # @return [Boolean]
@@ -46,6 +54,8 @@ module Anthropic
           end
         end
 
+        # @api public
+        #
         # @param other [Object]
         #
         # @return [Boolean]
@@ -54,6 +64,11 @@ module Anthropic
           other.is_a?(Anthropic::Internal::Type::HashOf) && other.nilable? == nilable? && other.item_type == item_type
           # rubocop:enable Layout/LineLength
         end
+
+        # @api public
+        #
+        # @return [Integer]
+        def hash = [self.class, item_type].hash
 
         # @api private
         #
@@ -140,7 +155,18 @@ module Anthropic
         #   @option spec [Boolean] :"nil?"
         def initialize(type_info, spec = {})
           @item_type_fn = Anthropic::Internal::Type::Converter.type_info(type_info || spec)
-          @nilable = spec[:nil?]
+          @nilable = spec.fetch(:nil?, false)
+        end
+
+        # @api private
+        #
+        # @param depth [Integer]
+        #
+        # @return [String]
+        def inspect(depth: 0)
+          items = Anthropic::Internal::Type::Converter.inspect(item_type, depth: depth.succ)
+
+          "#{self.class}[#{[items, nilable? ? 'nil' : nil].compact.join(' | ')}]"
         end
       end
     end

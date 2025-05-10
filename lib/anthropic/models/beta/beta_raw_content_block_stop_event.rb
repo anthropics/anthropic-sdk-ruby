@@ -14,13 +14,9 @@ module Anthropic
         #   @return [Symbol, :content_block_stop]
         required :type, const: :content_block_stop
 
-        # @!parse
-        #   # @param index [Integer]
-        #   # @param type [Symbol, :content_block_stop]
-        #   #
-        #   def initialize(index:, type: :content_block_stop, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(index:, type: :content_block_stop)
+        #   @param index [Integer]
+        #   @param type [Symbol, :content_block_stop]
       end
     end
 

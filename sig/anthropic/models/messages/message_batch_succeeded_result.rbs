@@ -4,19 +4,14 @@ module Anthropic
 
     module Messages
       type message_batch_succeeded_result =
-        { message: Anthropic::Models::Message, type: :succeeded }
+        { message: Anthropic::Message, type: :succeeded }
 
       class MessageBatchSucceededResult < Anthropic::Internal::Type::BaseModel
-        attr_accessor message: Anthropic::Models::Message
+        attr_accessor message: Anthropic::Message
 
         attr_accessor type: :succeeded
 
-        def initialize: (
-          message: Anthropic::Models::Message,
-          ?type: :succeeded
-        ) -> void
-
-        def to_hash: -> Anthropic::Models::Messages::message_batch_succeeded_result
+        def initialize: (message: Anthropic::Message, ?type: :succeeded) -> void
       end
     end
   end

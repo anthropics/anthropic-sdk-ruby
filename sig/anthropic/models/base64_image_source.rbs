@@ -3,24 +3,22 @@ module Anthropic
     type base64_image_source =
       {
         data: String,
-        media_type: Anthropic::Models::Base64ImageSource::media_type,
+        media_type: Anthropic::Base64ImageSource::media_type,
         type: :base64
       }
 
     class Base64ImageSource < Anthropic::Internal::Type::BaseModel
       attr_accessor data: String
 
-      attr_accessor media_type: Anthropic::Models::Base64ImageSource::media_type
+      attr_accessor media_type: Anthropic::Base64ImageSource::media_type
 
       attr_accessor type: :base64
 
       def initialize: (
         data: String,
-        media_type: Anthropic::Models::Base64ImageSource::media_type,
+        media_type: Anthropic::Base64ImageSource::media_type,
         ?type: :base64
       ) -> void
-
-      def to_hash: -> Anthropic::Models::base64_image_source
 
       type media_type =
         :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
@@ -33,7 +31,7 @@ module Anthropic
         IMAGE_GIF: :"image/gif"
         IMAGE_WEBP: :"image/webp"
 
-        def self?.values: -> ::Array[Anthropic::Models::Base64ImageSource::media_type]
+        def self?.values: -> ::Array[Anthropic::Base64ImageSource::media_type]
       end
     end
   end

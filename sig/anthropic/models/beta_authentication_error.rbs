@@ -9,8 +9,6 @@ module Anthropic
       attr_accessor type: :authentication_error
 
       def initialize: (message: String, ?type: :authentication_error) -> void
-
-      def to_hash: -> Anthropic::Models::beta_authentication_error
     end
   end
 end

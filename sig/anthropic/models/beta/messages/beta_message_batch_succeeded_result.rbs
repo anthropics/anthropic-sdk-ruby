@@ -3,19 +3,17 @@ module Anthropic
     module Beta
       module Messages
         type beta_message_batch_succeeded_result =
-          { message: Anthropic::Models::Beta::BetaMessage, type: :succeeded }
+          { message: Anthropic::Beta::BetaMessage, type: :succeeded }
 
         class BetaMessageBatchSucceededResult < Anthropic::Internal::Type::BaseModel
-          attr_accessor message: Anthropic::Models::Beta::BetaMessage
+          attr_accessor message: Anthropic::Beta::BetaMessage
 
           attr_accessor type: :succeeded
 
           def initialize: (
-            message: Anthropic::Models::Beta::BetaMessage,
+            message: Anthropic::Beta::BetaMessage,
             ?type: :succeeded
           ) -> void
-
-          def to_hash: -> Anthropic::Models::Beta::Messages::beta_message_batch_succeeded_result
         end
       end
     end

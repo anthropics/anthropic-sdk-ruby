@@ -10,12 +10,11 @@ module Anthropic
         MAX_TOKENS = :max_tokens
         STOP_SEQUENCE = :stop_sequence
         TOOL_USE = :tool_use
+        PAUSE_TURN = :pause_turn
+        REFUSAL = :refusal
 
-        finalize!
-
-        # @!parse
-        #   # @return [Array<Symbol>]
-        #   def self.values; end
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
     end
 

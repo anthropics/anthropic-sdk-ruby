@@ -13,11 +13,17 @@ module Anthropic
 
         # rubocop:disable Lint/UnusedMethodArgument
 
+        private_class_method :new
+
+        # @api public
+        #
         # @param other [Object]
         #
         # @return [Boolean]
         def self.===(other) = true
 
+        # @api public
+        #
         # @param other [Object]
         #
         # @return [Boolean]
@@ -42,17 +48,16 @@ module Anthropic
             value
           end
 
-          # @!parse
-          #   # @api private
-          #   #
-          #   # @param value [Object]
-          #   #
-          #   # @param state [Hash{Symbol=>Object}] .
-          #   #
-          #   #   @option state [Boolean] :can_retry
-          #   #
-          #   # @return [Object]
-          #   def dump(value, state:) = super
+          # @!method dump(value, state:)
+          #   @api private
+          #
+          #   @param value [Object]
+          #
+          #   @param state [Hash{Symbol=>Object}] .
+          #
+          #     @option state [Boolean] :can_retry
+          #
+          #   @return [Object]
         end
 
         # rubocop:enable Lint/UnusedMethodArgument

@@ -6,8 +6,7 @@ module Anthropic
     #
     # @see Anthropic::Resources::Completions#create_streaming
     class CompletionCreateParams < Anthropic::Internal::Type::BaseModel
-      # @!parse
-      #   extend Anthropic::Internal::Type::RequestParameters::Converter
+      extend Anthropic::Internal::Type::RequestParameters::Converter
       include Anthropic::Internal::Type::RequestParameters
 
       # @!attribute max_tokens_to_sample
@@ -24,8 +23,8 @@ module Anthropic
       #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
       #
-      #   @return [Symbol, String, Anthropic::Models::Model]
-      required :model, union: -> { Anthropic::Models::Model }
+      #   @return [Symbol, String, Anthropic::Model]
+      required :model, union: -> { Anthropic::Model }
 
       # @!attribute prompt
       #   The prompt that you want Claude to complete.
@@ -45,17 +44,13 @@ module Anthropic
       #   @return [String]
       required :prompt, String
 
-      # @!attribute [r] metadata
+      # @!attribute metadata
       #   An object describing metadata about the request.
       #
-      #   @return [Anthropic::Models::Metadata, nil]
-      optional :metadata, -> { Anthropic::Models::Metadata }
+      #   @return [Anthropic::Metadata, nil]
+      optional :metadata, -> { Anthropic::Metadata }
 
-      # @!parse
-      #   # @return [Anthropic::Models::Metadata]
-      #   attr_writer :metadata
-
-      # @!attribute [r] stop_sequences
+      # @!attribute stop_sequences
       #   Sequences that will cause the model to stop generating.
       #
       #   Our models stop on `"\n\nHuman:"`, and may include additional built-in stop
@@ -65,11 +60,7 @@ module Anthropic
       #   @return [Array<String>, nil]
       optional :stop_sequences, Anthropic::Internal::Type::ArrayOf[String]
 
-      # @!parse
-      #   # @return [Array<String>]
-      #   attr_writer :stop_sequences
-
-      # @!attribute [r] temperature
+      # @!attribute temperature
       #   Amount of randomness injected into the response.
       #
       #   Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
@@ -82,11 +73,7 @@ module Anthropic
       #   @return [Float, nil]
       optional :temperature, Float
 
-      # @!parse
-      #   # @return [Float]
-      #   attr_writer :temperature
-
-      # @!attribute [r] top_k
+      # @!attribute top_k
       #   Only sample from the top K options for each subsequent token.
       #
       #   Used to remove "long tail" low probability responses.
@@ -98,11 +85,7 @@ module Anthropic
       #   @return [Integer, nil]
       optional :top_k, Integer
 
-      # @!parse
-      #   # @return [Integer]
-      #   attr_writer :top_k
-
-      # @!attribute [r] top_p
+      # @!attribute top_p
       #   Use nucleus sampling.
       #
       #   In nucleus sampling, we compute the cumulative distribution over all the options
@@ -116,37 +99,35 @@ module Anthropic
       #   @return [Float, nil]
       optional :top_p, Float
 
-      # @!parse
-      #   # @return [Float]
-      #   attr_writer :top_p
+      # @!attribute betas
+      #   Optional header to specify the beta version(s) you want to use.
+      #
+      #   @return [Array<String, Symbol, Anthropic::AnthropicBeta>, nil]
+      optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-      # @!parse
-      #   # @param max_tokens_to_sample [Integer]
-      #   # @param model [Symbol, String, Anthropic::Models::Model]
-      #   # @param prompt [String]
-      #   # @param metadata [Anthropic::Models::Metadata]
-      #   # @param stop_sequences [Array<String>]
-      #   # @param temperature [Float]
-      #   # @param top_k [Integer]
-      #   # @param top_p [Float]
-      #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
-      #   #
-      #   def initialize(
-      #     max_tokens_to_sample:,
-      #     model:,
-      #     prompt:,
-      #     metadata: nil,
-      #     stop_sequences: nil,
-      #     temperature: nil,
-      #     top_k: nil,
-      #     top_p: nil,
-      #     request_options: {},
-      #     **
-      #   )
-      #     super
-      #   end
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {Anthropic::Models::CompletionCreateParams} for more details.
+      #
+      #   @param max_tokens_to_sample [Integer] The maximum number of tokens to generate before stopping.
+      #
+      #   @param model [Symbol, String, Anthropic::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      #
+      #   @param prompt [String] The prompt that you want Claude to complete.
+      #
+      #   @param metadata [Anthropic::Metadata] An object describing metadata about the request.
+      #
+      #   @param stop_sequences [Array<String>] Sequences that will cause the model to stop generating.
+      #
+      #   @param temperature [Float] Amount of randomness injected into the response.
+      #
+      #   @param top_k [Integer] Only sample from the top K options for each subsequent token.
+      #
+      #   @param top_p [Float] Use nucleus sampling.
+      #
+      #   @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+      #
+      #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
     end
   end
 end

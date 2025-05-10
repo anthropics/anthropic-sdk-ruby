@@ -13,13 +13,9 @@ module Anthropic
       #   @return [Symbol, :overloaded_error]
       required :type, const: :overloaded_error
 
-      # @!parse
-      #   # @param message [String]
-      #   # @param type [Symbol, :overloaded_error]
-      #   #
-      #   def initialize(message:, type: :overloaded_error, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(message:, type: :overloaded_error)
+      #   @param message [String]
+      #   @param type [Symbol, :overloaded_error]
     end
   end
 end

@@ -6,7 +6,7 @@ module Anthropic
         input: top,
         name: String,
         type: :tool_use,
-        cache_control: Anthropic::Models::CacheControlEphemeral?
+        cache_control: Anthropic::CacheControlEphemeral?
       }
 
     class ToolUseBlockParam < Anthropic::Internal::Type::BaseModel
@@ -18,17 +18,15 @@ module Anthropic
 
       attr_accessor type: :tool_use
 
-      attr_accessor cache_control: Anthropic::Models::CacheControlEphemeral?
+      attr_accessor cache_control: Anthropic::CacheControlEphemeral?
 
       def initialize: (
         id: String,
         input: top,
         name: String,
-        ?cache_control: Anthropic::Models::CacheControlEphemeral?,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
         ?type: :tool_use
       ) -> void
-
-      def to_hash: -> Anthropic::Models::tool_use_block_param
     end
   end
 end

@@ -5,8 +5,8 @@ module Anthropic
     class DocumentBlockParam < Anthropic::Internal::Type::BaseModel
       # @!attribute source
       #
-      #   @return [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
-      required :source, union: -> { Anthropic::Models::DocumentBlockParam::Source }
+      #   @return [Anthropic::Base64PDFSource, Anthropic::PlainTextSource, Anthropic::ContentBlockSource, Anthropic::URLPDFSource]
+      required :source, union: -> { Anthropic::DocumentBlockParam::Source }
 
       # @!attribute type
       #
@@ -14,18 +14,15 @@ module Anthropic
       required :type, const: :document
 
       # @!attribute cache_control
+      #   Create a cache control breakpoint at this content block.
       #
-      #   @return [Anthropic::Models::CacheControlEphemeral, nil]
-      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
+      #   @return [Anthropic::CacheControlEphemeral, nil]
+      optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
-      # @!attribute [r] citations
+      # @!attribute citations
       #
-      #   @return [Anthropic::Models::CitationsConfigParam, nil]
-      optional :citations, -> { Anthropic::Models::CitationsConfigParam }
-
-      # @!parse
-      #   # @return [Anthropic::Models::CitationsConfigParam]
-      #   attr_writer :citations
+      #   @return [Anthropic::CitationsConfigParam, nil]
+      optional :citations, -> { Anthropic::CitationsConfigParam }
 
       # @!attribute context
       #
@@ -37,35 +34,35 @@ module Anthropic
       #   @return [String, nil]
       optional :title, String, nil?: true
 
-      # @!parse
-      #   # @param source [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
-      #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   # @param citations [Anthropic::Models::CitationsConfigParam]
-      #   # @param context [String, nil]
-      #   # @param title [String, nil]
-      #   # @param type [Symbol, :document]
-      #   #
-      #   def initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document, **) = super
+      # @!method initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document)
+      #   @param source [Anthropic::Base64PDFSource, Anthropic::PlainTextSource, Anthropic::ContentBlockSource, Anthropic::URLPDFSource]
+      #
+      #   @param cache_control [Anthropic::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+      #
+      #   @param citations [Anthropic::CitationsConfigParam]
+      #
+      #   @param context [String, nil]
+      #
+      #   @param title [String, nil]
+      #
+      #   @param type [Symbol, :document]
 
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
-
-      # @see Anthropic::Models::DocumentBlockParam#source
+      # @see Anthropic::DocumentBlockParam#source
       module Source
         extend Anthropic::Internal::Type::Union
 
         discriminator :type
 
-        variant :base64, -> { Anthropic::Models::Base64PDFSource }
+        variant :base64, -> { Anthropic::Base64PDFSource }
 
-        variant :text, -> { Anthropic::Models::PlainTextSource }
+        variant :text, -> { Anthropic::PlainTextSource }
 
-        variant :content, -> { Anthropic::Models::ContentBlockSource }
+        variant :content, -> { Anthropic::ContentBlockSource }
 
-        variant :url, -> { Anthropic::Models::URLPDFSource }
+        variant :url, -> { Anthropic::URLPDFSource }
 
-        # @!parse
-        #   # @return [Array(Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource)]
-        #   def self.variants; end
+        # @!method self.variants
+        #   @return [Array(Anthropic::Base64PDFSource, Anthropic::PlainTextSource, Anthropic::ContentBlockSource, Anthropic::URLPDFSource)]
       end
     end
   end

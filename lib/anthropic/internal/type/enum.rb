@@ -17,13 +17,13 @@ module Anthropic
       # values safely.
       #
       # @example
-      #   # `stop_reason` is a `Anthropic::Models::StopReason`
+      #   # `stop_reason` is a `Anthropic::StopReason`
       #   case stop_reason
-      #   when Anthropic::Models::StopReason::END_TURN
+      #   when Anthropic::StopReason::END_TURN
       #     # ...
-      #   when Anthropic::Models::StopReason::MAX_TOKENS
+      #   when Anthropic::StopReason::MAX_TOKENS
       #     # ...
-      #   when Anthropic::Models::StopReason::STOP_SEQUENCE
+      #   when Anthropic::StopReason::STOP_SEQUENCE
       #     # ...
       #   else
       #     puts(stop_reason)
@@ -46,26 +46,30 @@ module Anthropic
         # All of the valid Symbol values for this enum.
         #
         # @return [Array<NilClass, Boolean, Integer, Float, Symbol>]
-        def values = (@values ||= constants.map { const_get(_1) })
+        def values = constants.map { const_get(_1) }
 
-        # @api private
+        # @api public
         #
-        # Guard against thread safety issues by instantiating `@values`.
-        private def finalize! = values
-
         # @param other [Object]
         #
         # @return [Boolean]
         def ===(other) = values.include?(other)
 
+        # @api public
+        #
         # @param other [Object]
         #
         # @return [Boolean]
         def ==(other)
-          # rubocop:disable Layout/LineLength
-          other.is_a?(Module) && other.singleton_class <= Anthropic::Internal::Type::Enum && other.values.to_set == values.to_set
-          # rubocop:enable Layout/LineLength
+          # rubocop:disable Style/CaseEquality
+          Anthropic::Internal::Type::Enum === other && other.values.to_set == values.to_set
+          # rubocop:enable Style/CaseEquality
         end
+
+        # @api public
+        #
+        # @return [Integer]
+        def hash = values.to_set.hash
 
         # @api private
         #
@@ -96,17 +100,32 @@ module Anthropic
           end
         end
 
-        # @!parse
-        #   # @api private
-        #   #
-        #   # @param value [Symbol, Object]
-        #   #
-        #   # @param state [Hash{Symbol=>Object}] .
-        #   #
-        #   #   @option state [Boolean] :can_retry
-        #   #
-        #   # @return [Symbol, Object]
-        #   def dump(value, state:) = super
+        # @!method dump(value, state:)
+        #   @api private
+        #
+        #   @param value [Symbol, Object]
+        #
+        #   @param state [Hash{Symbol=>Object}] .
+        #
+        #     @option state [Boolean] :can_retry
+        #
+        #   @return [Symbol, Object]
+
+        # @api private
+        #
+        # @param depth [Integer]
+        #
+        # @return [String]
+        def inspect(depth: 0)
+          if depth.positive?
+            return is_a?(Module) ? super() : self.class.name
+          end
+
+          members = values.map { Anthropic::Internal::Type::Converter.inspect(_1, depth: depth.succ) }
+          prefix = is_a?(Module) ? name : self.class.name
+
+          "#{prefix}[#{members.join(' | ')}]"
+        end
       end
     end
   end

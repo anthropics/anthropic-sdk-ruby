@@ -14,67 +14,59 @@ module Anthropic
       required :type, const: :tool_result
 
       # @!attribute cache_control
+      #   Create a cache control breakpoint at this content block.
       #
-      #   @return [Anthropic::Models::CacheControlEphemeral, nil]
-      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
+      #   @return [Anthropic::CacheControlEphemeral, nil]
+      optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
-      # @!attribute [r] content
+      # @!attribute content
       #
-      #   @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>, nil]
-      optional :content, union: -> { Anthropic::Models::ToolResultBlockParam::Content }
+      #   @return [String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam>, nil]
+      optional :content, union: -> { Anthropic::ToolResultBlockParam::Content }
 
-      # @!parse
-      #   # @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>]
-      #   attr_writer :content
-
-      # @!attribute [r] is_error
+      # @!attribute is_error
       #
       #   @return [Boolean, nil]
       optional :is_error, Anthropic::Internal::Type::Boolean
 
-      # @!parse
-      #   # @return [Boolean]
-      #   attr_writer :is_error
+      # @!method initialize(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result)
+      #   @param tool_use_id [String]
+      #
+      #   @param cache_control [Anthropic::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+      #
+      #   @param content [String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam>]
+      #
+      #   @param is_error [Boolean]
+      #
+      #   @param type [Symbol, :tool_result]
 
-      # @!parse
-      #   # @param tool_use_id [String]
-      #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   # @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>]
-      #   # @param is_error [Boolean]
-      #   # @param type [Symbol, :tool_result]
-      #   #
-      #   def initialize(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
-
-      # @see Anthropic::Models::ToolResultBlockParam#content
+      # @see Anthropic::ToolResultBlockParam#content
       module Content
         extend Anthropic::Internal::Type::Union
 
         variant String
 
-        variant -> { Anthropic::Models::ToolResultBlockParam::Content::ContentArray }
+        variant -> { Anthropic::ToolResultBlockParam::Content::ContentArray }
 
         module Content
           extend Anthropic::Internal::Type::Union
 
           discriminator :type
 
-          variant :text, -> { Anthropic::Models::TextBlockParam }
+          variant :text, -> { Anthropic::TextBlockParam }
 
-          variant :image, -> { Anthropic::Models::ImageBlockParam }
+          variant :image, -> { Anthropic::ImageBlockParam }
 
-          # @!parse
-          #   # @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
-          #   def self.variants; end
+          # @!method self.variants
+          #   @return [Array(Anthropic::TextBlockParam, Anthropic::ImageBlockParam)]
         end
 
-        # @!parse
-        #   # @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>)]
-        #   def self.variants; end
+        # @!method self.variants
+        #   @return [Array(String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam>)]
 
+        # @type [Anthropic::Internal::Type::Converter]
         ContentArray =
-          Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::Models::ToolResultBlockParam::Content::Content }]
+          Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::ToolResultBlockParam::Content::Content }]
       end
     end
   end

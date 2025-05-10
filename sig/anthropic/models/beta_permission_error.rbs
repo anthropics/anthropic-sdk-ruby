@@ -8,8 +8,6 @@ module Anthropic
       attr_accessor type: :permission_error
 
       def initialize: (message: String, ?type: :permission_error) -> void
-
-      def to_hash: -> Anthropic::Models::beta_permission_error
     end
   end
 end

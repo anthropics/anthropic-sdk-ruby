@@ -31,15 +31,17 @@ module Anthropic
       #   @return [Symbol, :model]
       required :type, const: :model
 
-      # @!parse
-      #   # @param id [String]
-      #   # @param created_at [Time]
-      #   # @param display_name [String]
-      #   # @param type [Symbol, :model]
-      #   #
-      #   def initialize(id:, created_at:, display_name:, type: :model, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(id:, created_at:, display_name:, type: :model)
+      #   Some parameter documentations has been truncated, see {Anthropic::ModelInfo} for
+      #   more details.
+      #
+      #   @param id [String] Unique model identifier.
+      #
+      #   @param created_at [Time] RFC 3339 datetime string representing the time at which the model was released.
+      #
+      #   @param display_name [String] A human-readable name for the model.
+      #
+      #   @param type [Symbol, :model] Object type.
     end
   end
 end

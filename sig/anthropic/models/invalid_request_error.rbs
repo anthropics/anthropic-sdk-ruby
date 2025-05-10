@@ -9,8 +9,6 @@ module Anthropic
       attr_accessor type: :invalid_request_error
 
       def initialize: (message: String, ?type: :invalid_request_error) -> void
-
-      def to_hash: -> Anthropic::Models::invalid_request_error
     end
   end
 end

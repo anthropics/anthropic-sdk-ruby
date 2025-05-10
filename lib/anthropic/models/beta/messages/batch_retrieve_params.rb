@@ -6,27 +6,19 @@ module Anthropic
       module Messages
         # @see Anthropic::Resources::Beta::Messages::Batches#retrieve
         class BatchRetrieveParams < Anthropic::Internal::Type::BaseModel
-          # @!parse
-          #   extend Anthropic::Internal::Type::RequestParameters::Converter
+          extend Anthropic::Internal::Type::RequestParameters::Converter
           include Anthropic::Internal::Type::RequestParameters
 
-          # @!attribute [r] betas
+          # @!attribute betas
           #   Optional header to specify the beta version(s) you want to use.
           #
-          #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
-          optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::AnthropicBeta] }
+          #   @return [Array<String, Symbol, Anthropic::AnthropicBeta>, nil]
+          optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-          # @!parse
-          #   # @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
-          #   attr_writer :betas
-
-          # @!parse
-          #   # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>]
-          #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
-          #   #
-          #   def initialize(betas: nil, request_options: {}, **) = super
-
-          # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+          # @!method initialize(betas: nil, request_options: {})
+          #   @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #
+          #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
         end
       end
     end

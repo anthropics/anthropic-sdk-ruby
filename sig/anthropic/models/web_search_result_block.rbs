@@ -1,0 +1,32 @@
+module Anthropic
+  module Models
+    type web_search_result_block =
+      {
+        encrypted_content: String,
+        page_age: String?,
+        title: String,
+        type: :web_search_result,
+        url: String
+      }
+
+    class WebSearchResultBlock < Anthropic::Internal::Type::BaseModel
+      attr_accessor encrypted_content: String
+
+      attr_accessor page_age: String?
+
+      attr_accessor title: String
+
+      attr_accessor type: :web_search_result
+
+      attr_accessor url: String
+
+      def initialize: (
+        encrypted_content: String,
+        page_age: String?,
+        title: String,
+        url: String,
+        ?type: :web_search_result
+      ) -> void
+    end
+  end
+end

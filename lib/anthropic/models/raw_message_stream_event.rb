@@ -7,21 +7,20 @@ module Anthropic
 
       discriminator :type
 
-      variant :message_start, -> { Anthropic::Models::RawMessageStartEvent }
+      variant :message_start, -> { Anthropic::RawMessageStartEvent }
 
-      variant :message_delta, -> { Anthropic::Models::RawMessageDeltaEvent }
+      variant :message_delta, -> { Anthropic::RawMessageDeltaEvent }
 
-      variant :message_stop, -> { Anthropic::Models::RawMessageStopEvent }
+      variant :message_stop, -> { Anthropic::RawMessageStopEvent }
 
-      variant :content_block_start, -> { Anthropic::Models::RawContentBlockStartEvent }
+      variant :content_block_start, -> { Anthropic::RawContentBlockStartEvent }
 
-      variant :content_block_delta, -> { Anthropic::Models::RawContentBlockDeltaEvent }
+      variant :content_block_delta, -> { Anthropic::RawContentBlockDeltaEvent }
 
-      variant :content_block_stop, -> { Anthropic::Models::RawContentBlockStopEvent }
+      variant :content_block_stop, -> { Anthropic::RawContentBlockStopEvent }
 
-      # @!parse
-      #   # @return [Array(Anthropic::Models::RawMessageStartEvent, Anthropic::Models::RawMessageDeltaEvent, Anthropic::Models::RawMessageStopEvent, Anthropic::Models::RawContentBlockStartEvent, Anthropic::Models::RawContentBlockDeltaEvent, Anthropic::Models::RawContentBlockStopEvent)]
-      #   def self.variants; end
+      # @!method self.variants
+      #   @return [Array(Anthropic::RawMessageStartEvent, Anthropic::RawMessageDeltaEvent, Anthropic::RawMessageStopEvent, Anthropic::RawContentBlockStartEvent, Anthropic::RawContentBlockDeltaEvent, Anthropic::RawContentBlockStopEvent)]
     end
   end
 end

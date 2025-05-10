@@ -6,7 +6,7 @@ module Anthropic
       # @!attribute name
       #   Name of the tool.
       #
-      #   This is how the tool will be called by the model and in tool_use blocks.
+      #   This is how the tool will be called by the model and in `tool_use` blocks.
       #
       #   @return [Symbol, :bash]
       required :name, const: :bash
@@ -17,18 +17,20 @@ module Anthropic
       required :type, const: :bash_20250124
 
       # @!attribute cache_control
+      #   Create a cache control breakpoint at this content block.
       #
-      #   @return [Anthropic::Models::CacheControlEphemeral, nil]
-      optional :cache_control, -> { Anthropic::Models::CacheControlEphemeral }, nil?: true
+      #   @return [Anthropic::CacheControlEphemeral, nil]
+      optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
-      # @!parse
-      #   # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil]
-      #   # @param name [Symbol, :bash]
-      #   # @param type [Symbol, :bash_20250124]
-      #   #
-      #   def initialize(cache_control: nil, name: :bash, type: :bash_20250124, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(cache_control: nil, name: :bash, type: :bash_20250124)
+      #   Some parameter documentations has been truncated, see
+      #   {Anthropic::ToolBash20250124} for more details.
+      #
+      #   @param cache_control [Anthropic::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+      #
+      #   @param name [Symbol, :bash] Name of the tool.
+      #
+      #   @param type [Symbol, :bash_20250124]
     end
   end
 end

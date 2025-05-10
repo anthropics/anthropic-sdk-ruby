@@ -1,0 +1,7 @@
+module Anthropic
+  class BedrockClient = Anthropic::Bedrock::Client
+
+  module Bedrock
+    class Client = Anthropic::Helpers::Bedrock::Client
+  end
+end

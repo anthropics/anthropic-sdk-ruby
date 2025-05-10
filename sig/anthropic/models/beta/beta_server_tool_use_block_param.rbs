@@ -1,0 +1,36 @@
+module Anthropic
+  module Models
+    class BetaServerToolUseBlockParam = Beta::BetaServerToolUseBlockParam
+
+    module Beta
+      type beta_server_tool_use_block_param =
+        {
+          id: String,
+          input: top,
+          name: :web_search,
+          type: :server_tool_use,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+
+      class BetaServerToolUseBlockParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor input: top
+
+        attr_accessor name: :web_search
+
+        attr_accessor type: :server_tool_use
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        def initialize: (
+          id: String,
+          input: top,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?name: :web_search,
+          ?type: :server_tool_use
+        ) -> void
+      end
+    end
+  end
+end

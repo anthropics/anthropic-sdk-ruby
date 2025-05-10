@@ -7,7 +7,7 @@ class Anthropic::Test::Resources::ModelsTest < Anthropic::Test::ResourceTest
     response = @anthropic.models.retrieve("model_id")
 
     assert_pattern do
-      response => Anthropic::Models::ModelInfo
+      response => Anthropic::ModelInfo
     end
 
     assert_pattern do
@@ -31,7 +31,7 @@ class Anthropic::Test::Resources::ModelsTest < Anthropic::Test::ResourceTest
     return if row.nil?
 
     assert_pattern do
-      row => Anthropic::Models::ModelInfo
+      row => Anthropic::ModelInfo
     end
 
     assert_pattern do

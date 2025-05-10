@@ -19,13 +19,13 @@ module Anthropic
         #   @return [Symbol, :message_batch_deleted]
         required :type, const: :message_batch_deleted
 
-        # @!parse
-        #   # @param id [String]
-        #   # @param type [Symbol, :message_batch_deleted]
-        #   #
-        #   def initialize(id:, type: :message_batch_deleted, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(id:, type: :message_batch_deleted)
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Messages::DeletedMessageBatch} for more details.
+        #
+        #   @param id [String] ID of the Message Batch.
+        #
+        #   @param type [Symbol, :message_batch_deleted] Deleted object type.
       end
     end
   end

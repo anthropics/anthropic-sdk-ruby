@@ -5,21 +5,17 @@ module Anthropic
     class ErrorResponse < Anthropic::Internal::Type::BaseModel
       # @!attribute error
       #
-      #   @return [Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError, Anthropic::Models::RateLimitError, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError]
-      required :error, union: -> { Anthropic::Models::ErrorObject }
+      #   @return [Anthropic::InvalidRequestError, Anthropic::AuthenticationError, Anthropic::BillingError, Anthropic::PermissionError, Anthropic::NotFoundError, Anthropic::RateLimitError, Anthropic::GatewayTimeoutError, Anthropic::APIErrorObject, Anthropic::OverloadedError]
+      required :error, union: -> { Anthropic::ErrorObject }
 
       # @!attribute type
       #
       #   @return [Symbol, :error]
       required :type, const: :error
 
-      # @!parse
-      #   # @param error [Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError, Anthropic::Models::RateLimitError, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError]
-      #   # @param type [Symbol, :error]
-      #   #
-      #   def initialize(error:, type: :error, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(error:, type: :error)
+      #   @param error [Anthropic::InvalidRequestError, Anthropic::AuthenticationError, Anthropic::BillingError, Anthropic::PermissionError, Anthropic::NotFoundError, Anthropic::RateLimitError, Anthropic::GatewayTimeoutError, Anthropic::APIErrorObject, Anthropic::OverloadedError]
+      #   @param type [Symbol, :error]
     end
   end
 end

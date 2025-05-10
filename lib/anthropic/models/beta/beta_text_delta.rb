@@ -14,13 +14,9 @@ module Anthropic
         #   @return [Symbol, :text_delta]
         required :type, const: :text_delta
 
-        # @!parse
-        #   # @param text [String]
-        #   # @param type [Symbol, :text_delta]
-        #   #
-        #   def initialize(text:, type: :text_delta, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(text:, type: :text_delta)
+        #   @param text [String]
+        #   @param type [Symbol, :text_delta]
       end
     end
 

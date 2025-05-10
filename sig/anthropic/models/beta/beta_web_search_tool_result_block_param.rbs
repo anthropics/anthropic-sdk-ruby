@@ -1,0 +1,32 @@
+module Anthropic
+  module Models
+    class BetaWebSearchToolResultBlockParam = Beta::BetaWebSearchToolResultBlockParam
+
+    module Beta
+      type beta_web_search_tool_result_block_param =
+        {
+          content: Anthropic::Models::Beta::beta_web_search_tool_result_block_param_content,
+          tool_use_id: String,
+          type: :web_search_tool_result,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+
+      class BetaWebSearchToolResultBlockParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: Anthropic::Models::Beta::beta_web_search_tool_result_block_param_content
+
+        attr_accessor tool_use_id: String
+
+        attr_accessor type: :web_search_tool_result
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        def initialize: (
+          content: Anthropic::Models::Beta::beta_web_search_tool_result_block_param_content,
+          tool_use_id: String,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?type: :web_search_tool_result
+        ) -> void
+      end
+    end
+  end
+end

@@ -93,7 +93,11 @@ module Anthropic
                 URI.join(url, response_headers["location"])
               rescue ArgumentError
                 message = "Server responded with status #{status} but no valid location header."
-                raise Anthropic::Errors::APIConnectionError.new(url: url, message: message)
+                raise Anthropic::Errors::APIConnectionError.new(
+                  url: url,
+                  response: response_headers,
+                  message: message
+                )
               end
 
             request = {**request, url: location}
@@ -101,7 +105,11 @@ module Anthropic
             case [url.scheme, location.scheme]
             in ["https", "http"]
               message = "Tried to redirect to a insecure URL"
-              raise Anthropic::Errors::APIConnectionError.new(url: url, message: message)
+              raise Anthropic::Errors::APIConnectionError.new(
+                url: url,
+                response: response_headers,
+                message: message
+              )
             else
               nil
             end
@@ -145,7 +153,7 @@ module Anthropic
 
         # @api private
         # @return [Anthropic::Internal::Transport::PooledNetRequester]
-        attr_accessor :requester
+        attr_reader :requester
 
         # @api private
         #
@@ -206,11 +214,11 @@ module Anthropic
         #
         #   @option req [Object, nil] :body
         #
-        #   @option req [Symbol, nil] :unwrap
+        #   @option req [Symbol, Integer, Array<Symbol, Integer>, Proc, nil] :unwrap
         #
-        #   @option req [Class, nil] :page
+        #   @option req [Class<Anthropic::Internal::Type::BasePage>, nil] :page
         #
-        #   @option req [Class, nil] :stream
+        #   @option req [Class<Anthropic::Internal::Type::BaseStream>, nil] :stream
         #
         #   @option req [Anthropic::Internal::Type::Converter, Class, nil] :model
         #
@@ -245,7 +253,7 @@ module Anthropic
 
           if @idempotency_header &&
              !headers.key?(@idempotency_header) &&
-             !Net::HTTP::IDEMPOTENT_METHODS_.include?(method.to_s.upcase)
+             (!Net::HTTP::IDEMPOTENT_METHODS_.include?(method.to_s.upcase) || opts.key?(:idempotency_key))
             headers[@idempotency_header] = opts.fetch(:idempotency_key) { generate_idempotency_key }
           end
 
@@ -253,7 +261,7 @@ module Anthropic
             headers["x-stainless-retry-count"] = "0"
           end
 
-          timeout = opts.fetch(:timeout, @timeout).to_f.clamp((0..))
+          timeout = opts.fetch(:timeout, @timeout).to_f.clamp(0..)
           unless headers.key?("x-stainless-timeout") || timeout.zero?
             headers["x-stainless-timeout"] = timeout.to_s
           end
@@ -350,7 +358,7 @@ module Anthropic
             self.class.reap_connection!(status, stream: stream)
 
             message = "Failed to complete the request within #{self.class::MAX_REDIRECTS} redirects."
-            raise Anthropic::Errors::APIConnectionError.new(url: url, message: message)
+            raise Anthropic::Errors::APIConnectionError.new(url: url, response: response, message: message)
           in 300..399
             self.class.reap_connection!(status, stream: stream)
 
@@ -407,11 +415,11 @@ module Anthropic
         #
         # @param body [Object, nil]
         #
-        # @param unwrap [Symbol, nil]
+        # @param unwrap [Symbol, Integer, Array<Symbol, Integer>, Proc, nil]
         #
-        # @param page [Class, nil]
+        # @param page [Class<Anthropic::Internal::Type::BasePage>, nil]
         #
-        # @param stream [Class, nil]
+        # @param stream [Class<Anthropic::Internal::Type::BaseStream>, nil]
         #
         # @param model [Anthropic::Internal::Type::Converter, Class, nil]
         #
@@ -450,9 +458,9 @@ module Anthropic
 
           decoded = Anthropic::Internal::Util.decode_content(response, stream: stream)
           case req
-          in { stream: Class => st }
+          in {stream: Class => st}
             st.new(model: model, url: url, status: status, response: response, stream: decoded)
-          in { page: Class => page }
+          in {page: Class => page}
             page.new(client: self, req: req, headers: response, page_data: decoded)
           else
             unwrapped = Anthropic::Internal::Util.dig(decoded, req[:unwrap])
@@ -460,6 +468,8 @@ module Anthropic
           end
         end
 
+        # @api private
+        #
         # @return [String]
         def inspect
           # rubocop:disable Layout/LineLength

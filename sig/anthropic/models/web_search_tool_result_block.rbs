@@ -1,0 +1,24 @@
+module Anthropic
+  module Models
+    type web_search_tool_result_block =
+      {
+        content: Anthropic::Models::web_search_tool_result_block_content,
+        tool_use_id: String,
+        type: :web_search_tool_result
+      }
+
+    class WebSearchToolResultBlock < Anthropic::Internal::Type::BaseModel
+      attr_accessor content: Anthropic::Models::web_search_tool_result_block_content
+
+      attr_accessor tool_use_id: String
+
+      attr_accessor type: :web_search_tool_result
+
+      def initialize: (
+        content: Anthropic::Models::web_search_tool_result_block_content,
+        tool_use_id: String,
+        ?type: :web_search_tool_result
+      ) -> void
+    end
+  end
+end

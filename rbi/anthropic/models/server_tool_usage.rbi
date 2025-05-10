@@ -1,0 +1,24 @@
+# typed: strong
+
+module Anthropic
+  module Models
+    class ServerToolUsage < Anthropic::Internal::Type::BaseModel
+      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+
+      # The number of web search tool requests.
+      sig { returns(Integer) }
+      attr_accessor :web_search_requests
+
+      sig { params(web_search_requests: Integer).returns(T.attached_class) }
+      def self.new(
+        # The number of web search tool requests.
+        web_search_requests:
+      )
+      end
+
+      sig { override.returns({ web_search_requests: Integer }) }
+      def to_hash
+      end
+    end
+  end
+end

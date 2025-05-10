@@ -5,36 +5,32 @@ module Anthropic
     class ContentBlockSource < Anthropic::Internal::Type::BaseModel
       # @!attribute content
       #
-      #   @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>]
-      required :content, union: -> { Anthropic::Models::ContentBlockSource::Content }
+      #   @return [String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam>]
+      required :content, union: -> { Anthropic::ContentBlockSource::Content }
 
       # @!attribute type
       #
       #   @return [Symbol, :content]
       required :type, const: :content
 
-      # @!parse
-      #   # @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>]
-      #   # @param type [Symbol, :content]
-      #   #
-      #   def initialize(content:, type: :content, **) = super
+      # @!method initialize(content:, type: :content)
+      #   @param content [String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam>]
+      #   @param type [Symbol, :content]
 
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
-
-      # @see Anthropic::Models::ContentBlockSource#content
+      # @see Anthropic::ContentBlockSource#content
       module Content
         extend Anthropic::Internal::Type::Union
 
         variant String
 
-        variant -> { Anthropic::Models::ContentBlockSource::Content::ContentBlockSourceContentArray }
+        variant -> { Anthropic::ContentBlockSource::Content::ContentBlockSourceContentArray }
 
-        # @!parse
-        #   # @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>)]
-        #   def self.variants; end
+        # @!method self.variants
+        #   @return [Array(String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam>)]
 
+        # @type [Anthropic::Internal::Type::Converter]
         ContentBlockSourceContentArray =
-          Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::Models::ContentBlockSourceContent }]
+          Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::ContentBlockSourceContent }]
       end
     end
   end

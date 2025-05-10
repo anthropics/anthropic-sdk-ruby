@@ -15,26 +15,26 @@ module Anthropic
         required :type, const: :text
 
         # @!attribute cache_control
+        #   Create a cache control breakpoint at this content block.
         #
-        #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        optional :cache_control, -> { Anthropic::Models::Beta::BetaCacheControlEphemeral }, nil?: true
+        #   @return [Anthropic::Beta::BetaCacheControlEphemeral, nil]
+        optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!attribute citations
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam>, nil]
+        #   @return [Array<Anthropic::Beta::BetaCitationCharLocationParam, Anthropic::Beta::BetaCitationPageLocationParam, Anthropic::Beta::BetaCitationContentBlockLocationParam, Anthropic::Beta::BetaCitationWebSearchResultLocationParam>, nil]
         optional :citations,
-                 -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::Beta::BetaTextCitationParam] },
+                 -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaTextCitationParam] },
                  nil?: true
 
-        # @!parse
-        #   # @param text [String]
-        #   # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
-        #   # @param citations [Array<Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam>, nil]
-        #   # @param type [Symbol, :text]
-        #   #
-        #   def initialize(text:, cache_control: nil, citations: nil, type: :text, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(text:, cache_control: nil, citations: nil, type: :text)
+        #   @param text [String]
+        #
+        #   @param cache_control [Anthropic::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+        #
+        #   @param citations [Array<Anthropic::Beta::BetaCitationCharLocationParam, Anthropic::Beta::BetaCitationPageLocationParam, Anthropic::Beta::BetaCitationContentBlockLocationParam, Anthropic::Beta::BetaCitationWebSearchResultLocationParam>, nil]
+        #
+        #   @param type [Symbol, :text]
       end
     end
 

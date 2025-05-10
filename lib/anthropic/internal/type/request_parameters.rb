@@ -5,16 +5,15 @@ module Anthropic
     module Type
       # @api private
       module RequestParameters
-        # @!parse
-        #   # Options to specify HTTP behaviour for this request.
-        #   # @return [Anthropic::RequestOptions, Hash{Symbol=>Object}]
-        #   attr_accessor :request_options
+        # @!attribute request_options
+        # Options to specify HTTP behaviour for this request.
+        #
+        #   @return [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
         # @param mod [Module]
         def self.included(mod)
-          return unless mod <= Anthropic::Internal::Type::BaseModel
+          raise ArgumentError.new(mod) unless mod <= Anthropic::Internal::Type::BaseModel
 
-          mod.extend(Anthropic::Internal::Type::RequestParameters::Converter)
           mod.optional(:request_options, Anthropic::RequestOptions)
         end
 
@@ -29,14 +28,8 @@ module Anthropic
             state = {can_retry: true}
             case (dumped = dump(params, state: state))
             in Hash
-              options = Anthropic::Internal::Util.coerce_hash(dumped[:request_options])
-              request_options =
-                case [options, state.fetch(:can_retry)]
-                in [Hash | nil, false]
-                  {**options.to_h, max_retries: 0}
-                else
-                  options
-                end
+              options = Anthropic::Internal::Util.coerce_hash!(dumped[:request_options]).to_h
+              request_options = state.fetch(:can_retry) ? options : {**options, max_retries: 0}
               [dumped.except(:request_options), request_options]
             else
               [dumped, nil]

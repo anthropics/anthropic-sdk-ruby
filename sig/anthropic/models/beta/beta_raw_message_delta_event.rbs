@@ -5,25 +5,23 @@ module Anthropic
     module Beta
       type beta_raw_message_delta_event =
         {
-          delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta,
+          delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta,
           type: :message_delta,
-          usage: Anthropic::Models::Beta::BetaMessageDeltaUsage
+          usage: Anthropic::Beta::BetaMessageDeltaUsage
         }
 
       class BetaRawMessageDeltaEvent < Anthropic::Internal::Type::BaseModel
-        attr_accessor delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta
+        attr_accessor delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta
 
         attr_accessor type: :message_delta
 
-        attr_accessor usage: Anthropic::Models::Beta::BetaMessageDeltaUsage
+        attr_accessor usage: Anthropic::Beta::BetaMessageDeltaUsage
 
         def initialize: (
-          delta: Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta,
-          usage: Anthropic::Models::Beta::BetaMessageDeltaUsage,
+          delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta,
+          usage: Anthropic::Beta::BetaMessageDeltaUsage,
           ?type: :message_delta
         ) -> void
-
-        def to_hash: -> Anthropic::Models::Beta::beta_raw_message_delta_event
 
         type delta =
           {
@@ -40,8 +38,6 @@ module Anthropic
             stop_reason: Anthropic::Models::Beta::beta_stop_reason?,
             stop_sequence: String?
           ) -> void
-
-          def to_hash: -> Anthropic::Models::Beta::BetaRawMessageDeltaEvent::delta
         end
       end
     end

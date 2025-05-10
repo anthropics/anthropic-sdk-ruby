@@ -6,8 +6,8 @@ module Anthropic
       class BetaRawContentBlockDeltaEvent < Anthropic::Internal::Type::BaseModel
         # @!attribute delta
         #
-        #   @return [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta]
-        required :delta, union: -> { Anthropic::Models::Beta::BetaRawContentBlockDelta }
+        #   @return [Anthropic::Beta::BetaTextDelta, Anthropic::Beta::BetaInputJSONDelta, Anthropic::Beta::BetaCitationsDelta, Anthropic::Beta::BetaThinkingDelta, Anthropic::Beta::BetaSignatureDelta]
+        required :delta, union: -> { Anthropic::Beta::BetaRawContentBlockDelta }
 
         # @!attribute index
         #
@@ -19,14 +19,10 @@ module Anthropic
         #   @return [Symbol, :content_block_delta]
         required :type, const: :content_block_delta
 
-        # @!parse
-        #   # @param delta [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta]
-        #   # @param index [Integer]
-        #   # @param type [Symbol, :content_block_delta]
-        #   #
-        #   def initialize(delta:, index:, type: :content_block_delta, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(delta:, index:, type: :content_block_delta)
+        #   @param delta [Anthropic::Beta::BetaTextDelta, Anthropic::Beta::BetaInputJSONDelta, Anthropic::Beta::BetaCitationsDelta, Anthropic::Beta::BetaThinkingDelta, Anthropic::Beta::BetaSignatureDelta]
+        #   @param index [Integer]
+        #   @param type [Symbol, :content_block_delta]
       end
     end
 

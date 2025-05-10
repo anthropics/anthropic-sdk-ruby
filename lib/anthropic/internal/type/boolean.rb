@@ -11,11 +11,17 @@ module Anthropic
       class Boolean
         extend Anthropic::Internal::Type::Converter
 
+        private_class_method :new
+
+        # @api public
+        #
         # @param other [Object]
         #
         # @return [Boolean]
         def self.===(other) = other == true || other == false
 
+        # @api public
+        #
         # @param other [Object]
         #
         # @return [Boolean]
@@ -40,17 +46,16 @@ module Anthropic
             value
           end
 
-          # @!parse
-          #   # @api private
-          #   #
-          #   # @param value [Boolean, Object]
-          #   #
-          #   # @param state [Hash{Symbol=>Object}] .
-          #   #
-          #   #   @option state [Boolean] :can_retry
-          #   #
-          #   # @return [Boolean, Object]
-          #   def dump(value, state:) = super
+          # @!method dump(value, state:)
+          #   @api private
+          #
+          #   @param value [Boolean, Object]
+          #
+          #   @param state [Hash{Symbol=>Object}] .
+          #
+          #     @option state [Boolean] :can_retry
+          #
+          #   @return [Boolean, Object]
         end
       end
     end

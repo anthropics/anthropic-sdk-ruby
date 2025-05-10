@@ -7,7 +7,7 @@ module Anthropic
         {
           text: String,
           type: :text,
-          cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?
         }
 
@@ -16,18 +16,16 @@ module Anthropic
 
         attr_accessor type: :text
 
-        attr_accessor cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
         attr_accessor citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?
 
         def initialize: (
           text: String,
-          ?cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?,
           ?type: :text
         ) -> void
-
-        def to_hash: -> Anthropic::Models::Beta::beta_text_block_param
       end
     end
   end

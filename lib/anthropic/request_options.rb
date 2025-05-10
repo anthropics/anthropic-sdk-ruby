@@ -65,11 +65,9 @@ module Anthropic
     #   @return [Float, nil]
     optional :timeout, Float
 
-    # @!parse
-    #   # Returns a new instance of RequestOptions.
-    #   #
-    #   # @param values [Hash{Symbol=>Object}]
-    #   #
-    #   def initialize(values = {}) = super
+    # @!method initialize(values = {})
+    #   Returns a new instance of RequestOptions.
+    #
+    #   @param values [Hash{Symbol=>Object}]
   end
 end

@@ -9,7 +9,7 @@ module Anthropic
           input: top,
           name: String,
           type: :tool_use,
-          cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
         }
 
       class BetaToolUseBlockParam < Anthropic::Internal::Type::BaseModel
@@ -21,17 +21,15 @@ module Anthropic
 
         attr_accessor type: :tool_use
 
-        attr_accessor cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
         def initialize: (
           id: String,
           input: top,
           name: String,
-          ?cache_control: Anthropic::Models::Beta::BetaCacheControlEphemeral?,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?type: :tool_use
         ) -> void
-
-        def to_hash: -> Anthropic::Models::Beta::beta_tool_use_block_param
       end
     end
   end

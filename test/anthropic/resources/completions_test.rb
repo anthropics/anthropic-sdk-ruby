@@ -12,14 +12,14 @@ class Anthropic::Test::Resources::CompletionsTest < Anthropic::Test::ResourceTes
       )
 
     assert_pattern do
-      response => Anthropic::Models::Completion
+      response => Anthropic::Completion
     end
 
     assert_pattern do
       response => {
         id: String,
         completion: String,
-        model: Anthropic::Models::Model,
+        model: Anthropic::Model,
         stop_reason: String | nil,
         type: Symbol
       }

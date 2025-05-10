@@ -4,17 +4,17 @@ module Anthropic
 
     module Beta
       type beta_raw_message_stream_event =
-        Anthropic::Models::Beta::BetaRawMessageStartEvent
-        | Anthropic::Models::Beta::BetaRawMessageDeltaEvent
-        | Anthropic::Models::Beta::BetaRawMessageStopEvent
-        | Anthropic::Models::Beta::BetaRawContentBlockStartEvent
-        | Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent
-        | Anthropic::Models::Beta::BetaRawContentBlockStopEvent
+        Anthropic::Beta::BetaRawMessageStartEvent
+        | Anthropic::Beta::BetaRawMessageDeltaEvent
+        | Anthropic::Beta::BetaRawMessageStopEvent
+        | Anthropic::Beta::BetaRawContentBlockStartEvent
+        | Anthropic::Beta::BetaRawContentBlockDeltaEvent
+        | Anthropic::Beta::BetaRawContentBlockStopEvent
 
       module BetaRawMessageStreamEvent
         extend Anthropic::Internal::Type::Union
 
-        def self?.variants: -> [Anthropic::Models::Beta::BetaRawMessageStartEvent, Anthropic::Models::Beta::BetaRawMessageDeltaEvent, Anthropic::Models::Beta::BetaRawMessageStopEvent, Anthropic::Models::Beta::BetaRawContentBlockStartEvent, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Models::Beta::BetaRawContentBlockStopEvent]
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_raw_message_stream_event]
       end
     end
   end

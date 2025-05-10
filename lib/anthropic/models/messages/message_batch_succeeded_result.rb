@@ -6,21 +6,17 @@ module Anthropic
       class MessageBatchSucceededResult < Anthropic::Internal::Type::BaseModel
         # @!attribute message
         #
-        #   @return [Anthropic::Models::Message]
-        required :message, -> { Anthropic::Models::Message }
+        #   @return [Anthropic::Message]
+        required :message, -> { Anthropic::Message }
 
         # @!attribute type
         #
         #   @return [Symbol, :succeeded]
         required :type, const: :succeeded
 
-        # @!parse
-        #   # @param message [Anthropic::Models::Message]
-        #   # @param type [Symbol, :succeeded]
-        #   #
-        #   def initialize(message:, type: :succeeded, **) = super
-
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(message:, type: :succeeded)
+        #   @param message [Anthropic::Message]
+        #   @param type [Symbol, :succeeded]
       end
     end
 

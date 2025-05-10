@@ -12,8 +12,6 @@ module Anthropic
         error: Anthropic::Models::beta_error,
         ?type: :error
       ) -> void
-
-      def to_hash: -> Anthropic::Models::beta_error_response
     end
   end
 end

@@ -5,16 +5,19 @@ module Anthropic
     module Beta
       # @see Anthropic::Resources::Beta::Models#retrieve
       class ModelRetrieveParams < Anthropic::Internal::Type::BaseModel
-        # @!parse
-        #   extend Anthropic::Internal::Type::RequestParameters::Converter
+        extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
-        # @!parse
-        #   # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
-        #   #
-        #   def initialize(request_options: {}, **) = super
+        # @!attribute betas
+        #   Optional header to specify the beta version(s) you want to use.
+        #
+        #   @return [Array<String, Symbol, Anthropic::AnthropicBeta>, nil]
+        optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+        # @!method initialize(betas: nil, request_options: {})
+        #   @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
       end
     end
   end

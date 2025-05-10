@@ -7,25 +7,24 @@ module Anthropic
 
       variant String
 
-      variant const: -> { Anthropic::Models::AnthropicBeta::MESSAGE_BATCHES_2024_09_24 }
+      variant const: -> { Anthropic::AnthropicBeta::MESSAGE_BATCHES_2024_09_24 }
 
-      variant const: -> { Anthropic::Models::AnthropicBeta::PROMPT_CACHING_2024_07_31 }
+      variant const: -> { Anthropic::AnthropicBeta::PROMPT_CACHING_2024_07_31 }
 
-      variant const: -> { Anthropic::Models::AnthropicBeta::COMPUTER_USE_2024_10_22 }
+      variant const: -> { Anthropic::AnthropicBeta::COMPUTER_USE_2024_10_22 }
 
-      variant const: -> { Anthropic::Models::AnthropicBeta::COMPUTER_USE_2025_01_24 }
+      variant const: -> { Anthropic::AnthropicBeta::COMPUTER_USE_2025_01_24 }
 
-      variant const: -> { Anthropic::Models::AnthropicBeta::PDFS_2024_09_25 }
+      variant const: -> { Anthropic::AnthropicBeta::PDFS_2024_09_25 }
 
-      variant const: -> { Anthropic::Models::AnthropicBeta::TOKEN_COUNTING_2024_11_01 }
+      variant const: -> { Anthropic::AnthropicBeta::TOKEN_COUNTING_2024_11_01 }
 
-      variant const: -> { Anthropic::Models::AnthropicBeta::TOKEN_EFFICIENT_TOOLS_2025_02_19 }
+      variant const: -> { Anthropic::AnthropicBeta::TOKEN_EFFICIENT_TOOLS_2025_02_19 }
 
-      variant const: -> { Anthropic::Models::AnthropicBeta::OUTPUT_128K_2025_02_19 }
+      variant const: -> { Anthropic::AnthropicBeta::OUTPUT_128K_2025_02_19 }
 
-      # @!parse
-      #   # @return [Array(String, Symbol)]
-      #   def self.variants; end
+      # @!method self.variants
+      #   @return [Array(String, Symbol)]
 
       # @!group
 

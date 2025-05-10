@@ -18,8 +18,6 @@ module Anthropic
         display_name: String,
         ?type: :model
       ) -> void
-
-      def to_hash: -> Anthropic::Models::model_info
     end
   end
 end

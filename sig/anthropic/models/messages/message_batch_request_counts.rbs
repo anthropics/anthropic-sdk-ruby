@@ -30,8 +30,6 @@ module Anthropic
           processing: Integer,
           succeeded: Integer
         ) -> void
-
-        def to_hash: -> Anthropic::Models::Messages::message_batch_request_counts
       end
     end
   end

@@ -4,7 +4,12 @@ module Anthropic
 
     module Beta
       type beta_stop_reason =
-        :end_turn | :max_tokens | :stop_sequence | :tool_use
+        :end_turn
+        | :max_tokens
+        | :stop_sequence
+        | :tool_use
+        | :pause_turn
+        | :refusal
 
       module BetaStopReason
         extend Anthropic::Internal::Type::Enum
@@ -13,6 +18,8 @@ module Anthropic
         MAX_TOKENS: :max_tokens
         STOP_SEQUENCE: :stop_sequence
         TOOL_USE: :tool_use
+        PAUSE_TURN: :pause_turn
+        REFUSAL: :refusal
 
         def self?.values: -> ::Array[Anthropic::Models::Beta::beta_stop_reason]
       end

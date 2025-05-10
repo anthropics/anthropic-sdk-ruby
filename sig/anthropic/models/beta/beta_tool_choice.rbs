@@ -4,15 +4,15 @@ module Anthropic
 
     module Beta
       type beta_tool_choice =
-        Anthropic::Models::Beta::BetaToolChoiceAuto
-        | Anthropic::Models::Beta::BetaToolChoiceAny
-        | Anthropic::Models::Beta::BetaToolChoiceTool
-        | Anthropic::Models::Beta::BetaToolChoiceNone
+        Anthropic::Beta::BetaToolChoiceAuto
+        | Anthropic::Beta::BetaToolChoiceAny
+        | Anthropic::Beta::BetaToolChoiceTool
+        | Anthropic::Beta::BetaToolChoiceNone
 
       module BetaToolChoice
         extend Anthropic::Internal::Type::Union
 
-        def self?.variants: -> [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone]
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_tool_choice]
       end
     end
   end

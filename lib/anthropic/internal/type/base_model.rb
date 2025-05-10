@@ -4,13 +4,6 @@ module Anthropic
   module Internal
     module Type
       # @abstract
-      #
-      # @example
-      #   # `api_error_object` is a `Anthropic::Models::APIErrorObject`
-      #   api_error_object => {
-      #     message: message,
-      #     type: type
-      #   }
       class BaseModel
         extend Anthropic::Internal::Type::Converter
 
@@ -62,7 +55,7 @@ module Anthropic
 
             setter = "#{name_sym}="
             api_name = info.fetch(:api_name, name_sym)
-            nilable = info[:nil?]
+            nilable = info.fetch(:nil?, false)
             const = if required && !nilable
               info.fetch(
                 :const,
@@ -97,11 +90,13 @@ module Anthropic
                   target, value, state: state
                 )
               end
-            rescue StandardError
+            rescue StandardError => e
               cls = self.class.name.split("::").last
-              # rubocop:disable Layout/LineLength
-              message = "Failed to parse #{cls}.#{__method__} from #{value.class} to #{target.inspect}. To get the unparsed API response, use #{cls}[:#{__method__}]."
-              # rubocop:enable Layout/LineLength
+              message = [
+                "Failed to parse #{cls}.#{__method__} from #{value.class} to #{target.inspect}.",
+                "To get the unparsed API response, use #{cls}[#{__method__.inspect}].",
+                "Cause: #{e.message}"
+              ].join(" ")
               raise Anthropic::Errors::ConversionError.new(message)
             end
           end
@@ -169,18 +164,32 @@ module Anthropic
             @mode = nil
           end
 
+          # @api public
+          #
           # @param other [Object]
           #
           # @return [Boolean]
           def ==(other)
             other.is_a?(Class) && other <= Anthropic::Internal::Type::BaseModel && other.fields == fields
           end
+
+          # @api public
+          #
+          # @return [Integer]
+          def hash = fields.hash
         end
 
+        # @api public
+        #
         # @param other [Object]
         #
         # @return [Boolean]
         def ==(other) = self.class == other.class && @data == other.to_h
+
+        # @api public
+        #
+        # @return [Integer]
+        def hash = [self.class, @data].hash
 
         class << self
           # @api private
@@ -295,6 +304,8 @@ module Anthropic
           end
         end
 
+        # @api public
+        #
         # Returns the raw value associated with the given key, if found. Otherwise, nil is
         # returned.
         #
@@ -313,6 +324,8 @@ module Anthropic
           @data[key]
         end
 
+        # @api public
+        #
         # Returns a Hash of the data underlying this object. O(1)
         #
         # Keys are Symbols and values are the raw values from the response. The return
@@ -342,11 +355,38 @@ module Anthropic
             .to_h
         end
 
+        class << self
+          # @api private
+          #
+          # @param model [Anthropic::Internal::Type::BaseModel]
+          #
+          # @return [Hash{Symbol=>Object}]
+          def walk(model)
+            walk = ->(x) do
+              case x
+              in Anthropic::Internal::Type::BaseModel
+                walk.call(x.to_h)
+              in Hash
+                x.transform_values(&walk)
+              in Array
+                x.map(&walk)
+              else
+                x
+              end
+            end
+            walk.call(model)
+          end
+        end
+
+        # @api public
+        #
         # @param a [Object]
         #
         # @return [String]
         def to_json(*a) = Anthropic::Internal::Type::Converter.dump(self.class, self).to_json(*a)
 
+        # @api public
+        #
         # @param a [Object]
         #
         # @return [String]
@@ -354,26 +394,41 @@ module Anthropic
 
         # Create a new instance of a model.
         #
-        # @param data [Hash{Symbol=>Object}, Anthropic::Internal::Type::BaseModel]
-        def initialize(data = {})
-          case Anthropic::Internal::Util.coerce_hash(data)
-          in Hash => coerced
-            @data = coerced
-          else
-            message = "Expected a #{Hash} or #{Anthropic::Internal::Type::BaseModel}, got #{data.inspect}"
-            raise ArgumentError.new(message)
+        # @param data [Hash{Symbol=>Object}, self]
+        def initialize(data = {}) = (@data = Anthropic::Internal::Util.coerce_hash!(data).to_h)
+
+        class << self
+          # @api private
+          #
+          # @param depth [Integer]
+          #
+          # @return [String]
+          def inspect(depth: 0)
+            return super() if depth.positive?
+
+            depth = depth.succ
+            deferred = fields.transform_values do |field|
+              type, required, nilable = field.fetch_values(:type, :required, :nilable)
+              inspected = [
+                Anthropic::Internal::Type::Converter.inspect(type, depth: depth),
+                !required || nilable ? "nil" : nil
+              ].compact.join(" | ")
+              -> { inspected }.tap { _1.define_singleton_method(:inspect) { call } }
+            end
+
+            "#{name}[#{deferred.inspect}]"
           end
         end
 
+        # @api public
+        #
         # @return [String]
-        def inspect
-          rows = self.class.known_fields.keys.map do
-            "#{_1}=#{@data.key?(_1) ? public_send(_1) : ''}"
-          rescue Anthropic::Errors::ConversionError
-            "#{_1}=#{@data.fetch(_1)}"
-          end
-          "#<#{self.class.name}:0x#{object_id.to_s(16)} #{rows.join(' ')}>"
-        end
+        def to_s = self.class.walk(@data).to_s
+
+        # @api private
+        #
+        # @return [String]
+        def inspect = "#<#{self.class}:0x#{object_id.to_s(16)} #{self}>"
       end
     end
   end

@@ -10,9 +10,11 @@ module Anthropic
       #   Citing a PDF results in `page_location`, plain text results in `char_location`,
       #   and content document results in `content_block_location`.
       #
-      #   @return [Array<Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation>, nil]
+      #   @return [Array<Anthropic::CitationCharLocation, Anthropic::CitationPageLocation, Anthropic::CitationContentBlockLocation, Anthropic::CitationsWebSearchResultLocation>, nil]
       required :citations,
-               -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Models::TextCitation] },
+               -> {
+                 Anthropic::Internal::Type::ArrayOf[union: Anthropic::TextCitation]
+               },
                nil?: true
 
       # @!attribute text
@@ -25,14 +27,15 @@ module Anthropic
       #   @return [Symbol, :text]
       required :type, const: :text
 
-      # @!parse
-      #   # @param citations [Array<Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation>, nil]
-      #   # @param text [String]
-      #   # @param type [Symbol, :text]
-      #   #
-      #   def initialize(citations:, text:, type: :text, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(citations:, text:, type: :text)
+      #   Some parameter documentations has been truncated, see {Anthropic::TextBlock} for
+      #   more details.
+      #
+      #   @param citations [Array<Anthropic::CitationCharLocation, Anthropic::CitationPageLocation, Anthropic::CitationContentBlockLocation, Anthropic::CitationsWebSearchResultLocation>, nil] Citations supporting the text block.
+      #
+      #   @param text [String]
+      #
+      #   @param type [Symbol, :text]
     end
   end
 end

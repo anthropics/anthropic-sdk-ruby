@@ -1,17 +1,17 @@
 module Anthropic
   module Models
     type raw_message_stream_event =
-      Anthropic::Models::RawMessageStartEvent
-      | Anthropic::Models::RawMessageDeltaEvent
-      | Anthropic::Models::RawMessageStopEvent
-      | Anthropic::Models::RawContentBlockStartEvent
-      | Anthropic::Models::RawContentBlockDeltaEvent
-      | Anthropic::Models::RawContentBlockStopEvent
+      Anthropic::RawMessageStartEvent
+      | Anthropic::RawMessageDeltaEvent
+      | Anthropic::RawMessageStopEvent
+      | Anthropic::RawContentBlockStartEvent
+      | Anthropic::RawContentBlockDeltaEvent
+      | Anthropic::RawContentBlockStopEvent
 
     module RawMessageStreamEvent
       extend Anthropic::Internal::Type::Union
 
-      def self?.variants: -> [Anthropic::Models::RawMessageStartEvent, Anthropic::Models::RawMessageDeltaEvent, Anthropic::Models::RawMessageStopEvent, Anthropic::Models::RawContentBlockStartEvent, Anthropic::Models::RawContentBlockDeltaEvent, Anthropic::Models::RawContentBlockStopEvent]
+      def self?.variants: -> ::Array[Anthropic::Models::raw_message_stream_event]
     end
   end
 end

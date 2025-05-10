@@ -8,15 +8,16 @@ module Anthropic
 
         discriminator :type
 
-        variant :char_location, -> { Anthropic::Models::Beta::BetaCitationCharLocation }
+        variant :char_location, -> { Anthropic::Beta::BetaCitationCharLocation }
 
-        variant :page_location, -> { Anthropic::Models::Beta::BetaCitationPageLocation }
+        variant :page_location, -> { Anthropic::Beta::BetaCitationPageLocation }
 
-        variant :content_block_location, -> { Anthropic::Models::Beta::BetaCitationContentBlockLocation }
+        variant :content_block_location, -> { Anthropic::Beta::BetaCitationContentBlockLocation }
 
-        # @!parse
-        #   # @return [Array(Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation)]
-        #   def self.variants; end
+        variant :web_search_result_location, -> { Anthropic::Beta::BetaCitationsWebSearchResultLocation }
+
+        # @!method self.variants
+        #   @return [Array(Anthropic::Beta::BetaCitationCharLocation, Anthropic::Beta::BetaCitationPageLocation, Anthropic::Beta::BetaCitationContentBlockLocation, Anthropic::Beta::BetaCitationsWebSearchResultLocation)]
       end
     end
 

@@ -6,13 +6,13 @@ module Anthropic
       # @api private
       #
       # @example
-      #   # `raw_message_stream_event` is a `Anthropic::Models::RawMessageStreamEvent`
+      #   # `raw_message_stream_event` is a `Anthropic::RawMessageStreamEvent`
       #   case raw_message_stream_event
-      #   when Anthropic::Models::RawMessageStartEvent
+      #   when Anthropic::RawMessageStartEvent
       #     puts(raw_message_stream_event.message)
-      #   when Anthropic::Models::RawMessageDeltaEvent
+      #   when Anthropic::RawMessageDeltaEvent
       #     puts(raw_message_stream_event.delta)
-      #   when Anthropic::Models::RawMessageStopEvent
+      #   when Anthropic::RawMessageStopEvent
       #     puts(raw_message_stream_event.type)
       #   else
       #     puts(raw_message_stream_event)
@@ -43,7 +43,7 @@ module Anthropic
         #
         # @return [Array<Array(Symbol, Object)>]
         protected def derefed_variants
-          @known_variants.map { |key, variant_fn| [key, variant_fn.call] }
+          known_variants.map { |key, variant_fn| [key, variant_fn.call] }
         end
 
         # All of the specified variants for this union.
@@ -112,6 +112,8 @@ module Anthropic
         # rubocop:disable Style/HashEachMethods
         # rubocop:disable Style/CaseEquality
 
+        # @api public
+        #
         # @param other [Object]
         #
         # @return [Boolean]
@@ -121,14 +123,19 @@ module Anthropic
           end
         end
 
+        # @api public
+        #
         # @param other [Object]
         #
         # @return [Boolean]
         def ==(other)
-          # rubocop:disable Layout/LineLength
-          other.is_a?(Module) && other.singleton_class <= Anthropic::Internal::Type::Union && other.derefed_variants == derefed_variants
-          # rubocop:enable Layout/LineLength
+          Anthropic::Internal::Type::Union === other && other.derefed_variants == derefed_variants
         end
+
+        # @api public
+        #
+        # @return [Integer]
+        def hash = variants.hash
 
         # @api private
         #
@@ -210,6 +217,22 @@ module Anthropic
 
         # rubocop:enable Style/CaseEquality
         # rubocop:enable Style/HashEachMethods
+
+        # @api private
+        #
+        # @param depth [Integer]
+        #
+        # @return [String]
+        def inspect(depth: 0)
+          if depth.positive?
+            return is_a?(Module) ? super() : self.class.name
+          end
+
+          members = variants.map { Anthropic::Internal::Type::Converter.inspect(_1, depth: depth.succ) }
+          prefix = is_a?(Module) ? name : self.class.name
+
+          "#{prefix}[#{members.join(' | ')}]"
+        end
       end
     end
   end

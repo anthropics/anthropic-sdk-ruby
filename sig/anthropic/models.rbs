@@ -1,0 +1,221 @@
+module Anthropic
+  module AnthropicBeta = Anthropic::Models::AnthropicBeta
+
+  class APIErrorObject = Anthropic::Models::APIErrorObject
+
+  class AuthenticationError = Anthropic::Models::AuthenticationError
+
+  class Base64ImageSource = Anthropic::Models::Base64ImageSource
+
+  class Base64PDFSource = Anthropic::Models::Base64PDFSource
+
+  module Beta = Anthropic::Models::Beta
+
+  class BetaAPIError = Anthropic::Models::BetaAPIError
+
+  class BetaAuthenticationError = Anthropic::Models::BetaAuthenticationError
+
+  class BetaBillingError = Anthropic::Models::BetaBillingError
+
+  module BetaError = Anthropic::Models::BetaError
+
+  class BetaErrorResponse = Anthropic::Models::BetaErrorResponse
+
+  class BetaGatewayTimeoutError = Anthropic::Models::BetaGatewayTimeoutError
+
+  class BetaInvalidRequestError = Anthropic::Models::BetaInvalidRequestError
+
+  class BetaNotFoundError = Anthropic::Models::BetaNotFoundError
+
+  class BetaOverloadedError = Anthropic::Models::BetaOverloadedError
+
+  class BetaPermissionError = Anthropic::Models::BetaPermissionError
+
+  class BetaRateLimitError = Anthropic::Models::BetaRateLimitError
+
+  class BillingError = Anthropic::Models::BillingError
+
+  class CacheControlEphemeral = Anthropic::Models::CacheControlEphemeral
+
+  class CitationCharLocation = Anthropic::Models::CitationCharLocation
+
+  class CitationCharLocationParam = Anthropic::Models::CitationCharLocationParam
+
+  class CitationContentBlockLocation = Anthropic::Models::CitationContentBlockLocation
+
+  class CitationContentBlockLocationParam = Anthropic::Models::CitationContentBlockLocationParam
+
+  class CitationPageLocation = Anthropic::Models::CitationPageLocation
+
+  class CitationPageLocationParam = Anthropic::Models::CitationPageLocationParam
+
+  class CitationsConfigParam = Anthropic::Models::CitationsConfigParam
+
+  class CitationsDelta = Anthropic::Models::CitationsDelta
+
+  class CitationsWebSearchResultLocation = Anthropic::Models::CitationsWebSearchResultLocation
+
+  class CitationWebSearchResultLocationParam = Anthropic::Models::CitationWebSearchResultLocationParam
+
+  class Completion = Anthropic::Models::Completion
+
+  class CompletionCreateParams = Anthropic::Models::CompletionCreateParams
+
+  module ContentBlock = Anthropic::Models::ContentBlock
+
+  module ContentBlockParam = Anthropic::Models::ContentBlockParam
+
+  class ContentBlockSource = Anthropic::Models::ContentBlockSource
+
+  module ContentBlockSourceContent = Anthropic::Models::ContentBlockSourceContent
+
+  class DocumentBlockParam = Anthropic::Models::DocumentBlockParam
+
+  module ErrorObject = Anthropic::Models::ErrorObject
+
+  class ErrorResponse = Anthropic::Models::ErrorResponse
+
+  class GatewayTimeoutError = Anthropic::Models::GatewayTimeoutError
+
+  class ImageBlockParam = Anthropic::Models::ImageBlockParam
+
+  class InputJSONDelta = Anthropic::Models::InputJSONDelta
+
+  class InvalidRequestError = Anthropic::Models::InvalidRequestError
+
+  class Message = Anthropic::Models::Message
+
+  class MessageCountTokensParams = Anthropic::Models::MessageCountTokensParams
+
+  module MessageCountTokensTool = Anthropic::Models::MessageCountTokensTool
+
+  class MessageCreateParams = Anthropic::Models::MessageCreateParams
+
+  class MessageDeltaUsage = Anthropic::Models::MessageDeltaUsage
+
+  class MessageParam = Anthropic::Models::MessageParam
+
+  module Messages = Anthropic::Models::Messages
+
+  class MessageTokensCount = Anthropic::Models::MessageTokensCount
+
+  class Metadata = Anthropic::Models::Metadata
+
+  module Model = Anthropic::Models::Model
+
+  class ModelInfo = Anthropic::Models::ModelInfo
+
+  class ModelListParams = Anthropic::Models::ModelListParams
+
+  class ModelRetrieveParams = Anthropic::Models::ModelRetrieveParams
+
+  class NotFoundError = Anthropic::Models::NotFoundError
+
+  class OverloadedError = Anthropic::Models::OverloadedError
+
+  class PermissionError = Anthropic::Models::PermissionError
+
+  class PlainTextSource = Anthropic::Models::PlainTextSource
+
+  class RateLimitError = Anthropic::Models::RateLimitError
+
+  module RawContentBlockDelta = Anthropic::Models::RawContentBlockDelta
+
+  class RawContentBlockDeltaEvent = Anthropic::Models::RawContentBlockDeltaEvent
+
+  class RawContentBlockStartEvent = Anthropic::Models::RawContentBlockStartEvent
+
+  class RawContentBlockStopEvent = Anthropic::Models::RawContentBlockStopEvent
+
+  class RawMessageDeltaEvent = Anthropic::Models::RawMessageDeltaEvent
+
+  class RawMessageStartEvent = Anthropic::Models::RawMessageStartEvent
+
+  class RawMessageStopEvent = Anthropic::Models::RawMessageStopEvent
+
+  module RawMessageStreamEvent = Anthropic::Models::RawMessageStreamEvent
+
+  class RedactedThinkingBlock = Anthropic::Models::RedactedThinkingBlock
+
+  class RedactedThinkingBlockParam = Anthropic::Models::RedactedThinkingBlockParam
+
+  class ServerToolUsage = Anthropic::Models::ServerToolUsage
+
+  class ServerToolUseBlock = Anthropic::Models::ServerToolUseBlock
+
+  class ServerToolUseBlockParam = Anthropic::Models::ServerToolUseBlockParam
+
+  class SignatureDelta = Anthropic::Models::SignatureDelta
+
+  module StopReason = Anthropic::Models::StopReason
+
+  class TextBlock = Anthropic::Models::TextBlock
+
+  class TextBlockParam = Anthropic::Models::TextBlockParam
+
+  module TextCitation = Anthropic::Models::TextCitation
+
+  module TextCitationParam = Anthropic::Models::TextCitationParam
+
+  class TextDelta = Anthropic::Models::TextDelta
+
+  class ThinkingBlock = Anthropic::Models::ThinkingBlock
+
+  class ThinkingBlockParam = Anthropic::Models::ThinkingBlockParam
+
+  class ThinkingConfigDisabled = Anthropic::Models::ThinkingConfigDisabled
+
+  class ThinkingConfigEnabled = Anthropic::Models::ThinkingConfigEnabled
+
+  module ThinkingConfigParam = Anthropic::Models::ThinkingConfigParam
+
+  class ThinkingDelta = Anthropic::Models::ThinkingDelta
+
+  class Tool = Anthropic::Models::Tool
+
+  class ToolBash20250124 = Anthropic::Models::ToolBash20250124
+
+  module ToolChoice = Anthropic::Models::ToolChoice
+
+  class ToolChoiceAny = Anthropic::Models::ToolChoiceAny
+
+  class ToolChoiceAuto = Anthropic::Models::ToolChoiceAuto
+
+  class ToolChoiceNone = Anthropic::Models::ToolChoiceNone
+
+  class ToolChoiceTool = Anthropic::Models::ToolChoiceTool
+
+  class ToolResultBlockParam = Anthropic::Models::ToolResultBlockParam
+
+  class ToolTextEditor20250124 = Anthropic::Models::ToolTextEditor20250124
+
+  module ToolUnion = Anthropic::Models::ToolUnion
+
+  class ToolUseBlock = Anthropic::Models::ToolUseBlock
+
+  class ToolUseBlockParam = Anthropic::Models::ToolUseBlockParam
+
+  class URLImageSource = Anthropic::Models::URLImageSource
+
+  class URLPDFSource = Anthropic::Models::URLPDFSource
+
+  class Usage = Anthropic::Models::Usage
+
+  class WebSearchResultBlock = Anthropic::Models::WebSearchResultBlock
+
+  class WebSearchResultBlockParam = Anthropic::Models::WebSearchResultBlockParam
+
+  class WebSearchTool20250305 = Anthropic::Models::WebSearchTool20250305
+
+  class WebSearchToolRequestError = Anthropic::Models::WebSearchToolRequestError
+
+  class WebSearchToolResultBlock = Anthropic::Models::WebSearchToolResultBlock
+
+  module WebSearchToolResultBlockContent = Anthropic::Models::WebSearchToolResultBlockContent
+
+  class WebSearchToolResultBlockParam = Anthropic::Models::WebSearchToolResultBlockParam
+
+  module WebSearchToolResultBlockParamContent = Anthropic::Models::WebSearchToolResultBlockParamContent
+
+  class WebSearchToolResultError = Anthropic::Models::WebSearchToolResultError
+end

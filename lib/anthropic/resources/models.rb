@@ -8,46 +8,61 @@ module Anthropic
       # The Models API response can be used to determine information about a specific
       # model or resolve a model alias to a model ID.
       #
-      # @overload retrieve(model_id, request_options: {})
+      # @overload retrieve(model_id, betas: nil, request_options: {})
       #
-      # @param model_id [String]
+      # @param model_id [String] Model identifier or alias.
+      #
+      # @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+      #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Anthropic::Models::ModelInfo]
+      # @return [Anthropic::ModelInfo]
       #
       # @see Anthropic::Models::ModelRetrieveParams
       def retrieve(model_id, params = {})
+        parsed, options = Anthropic::ModelRetrieveParams.dump_request(params)
         @client.request(
           method: :get,
           path: ["v1/models/%1$s", model_id],
-          model: Anthropic::Models::ModelInfo,
-          options: params[:request_options]
+          headers: parsed.transform_keys(betas: "anthropic-beta"),
+          model: Anthropic::ModelInfo,
+          options: options
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {Anthropic::Models::ModelListParams} for more details.
+      #
       # List available models.
       #
       # The Models API response can be used to determine which models are available for
       # use in the API. More recently released models are listed first.
       #
-      # @overload list(after_id: nil, before_id: nil, limit: nil, request_options: {})
+      # @overload list(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {})
       #
-      # @param after_id [String]
-      # @param before_id [String]
-      # @param limit [Integer]
+      # @param after_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
+      #
+      # @param before_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
+      #
+      # @param limit [Integer] Query param: Number of items to return per page.
+      #
+      # @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+      #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Anthropic::Internal::Page<Anthropic::Models::ModelInfo>]
+      # @return [Anthropic::Internal::Page<Anthropic::ModelInfo>]
       #
       # @see Anthropic::Models::ModelListParams
       def list(params = {})
-        parsed, options = Anthropic::Models::ModelListParams.dump_request(params)
+        parsed, options = Anthropic::ModelListParams.dump_request(params)
+        query_params = [:after_id, :before_id, :limit]
         @client.request(
           method: :get,
           path: "v1/models",
-          query: parsed,
+          query: parsed.slice(*query_params),
+          headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
           page: Anthropic::Internal::Page,
-          model: Anthropic::Models::ModelInfo,
+          model: Anthropic::ModelInfo,
           options: options
         )
       end

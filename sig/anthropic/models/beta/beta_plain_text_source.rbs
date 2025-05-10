@@ -18,8 +18,6 @@ module Anthropic
           ?media_type: :"text/plain",
           ?type: :text
         ) -> void
-
-        def to_hash: -> Anthropic::Models::Beta::beta_plain_text_source
       end
     end
   end

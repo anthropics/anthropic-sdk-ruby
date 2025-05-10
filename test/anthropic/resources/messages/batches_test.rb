@@ -19,7 +19,7 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Anthropic::Test::Resou
       )
 
     assert_pattern do
-      response => Anthropic::Models::Messages::MessageBatch
+      response => Anthropic::Messages::MessageBatch
     end
 
     assert_pattern do
@@ -30,8 +30,8 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Anthropic::Test::Resou
         created_at: Time,
         ended_at: Time | nil,
         expires_at: Time,
-        processing_status: Anthropic::Models::Messages::MessageBatch::ProcessingStatus,
-        request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts,
+        processing_status: Anthropic::Messages::MessageBatch::ProcessingStatus,
+        request_counts: Anthropic::Messages::MessageBatchRequestCounts,
         results_url: String | nil,
         type: Symbol
       }
@@ -42,7 +42,7 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Anthropic::Test::Resou
     response = @anthropic.messages.batches.retrieve("message_batch_id")
 
     assert_pattern do
-      response => Anthropic::Models::Messages::MessageBatch
+      response => Anthropic::Messages::MessageBatch
     end
 
     assert_pattern do
@@ -53,8 +53,8 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Anthropic::Test::Resou
         created_at: Time,
         ended_at: Time | nil,
         expires_at: Time,
-        processing_status: Anthropic::Models::Messages::MessageBatch::ProcessingStatus,
-        request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts,
+        processing_status: Anthropic::Messages::MessageBatch::ProcessingStatus,
+        request_counts: Anthropic::Messages::MessageBatchRequestCounts,
         results_url: String | nil,
         type: Symbol
       }
@@ -72,7 +72,7 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Anthropic::Test::Resou
     return if row.nil?
 
     assert_pattern do
-      row => Anthropic::Models::Messages::MessageBatch
+      row => Anthropic::Messages::MessageBatch
     end
 
     assert_pattern do
@@ -83,8 +83,8 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Anthropic::Test::Resou
         created_at: Time,
         ended_at: Time | nil,
         expires_at: Time,
-        processing_status: Anthropic::Models::Messages::MessageBatch::ProcessingStatus,
-        request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts,
+        processing_status: Anthropic::Messages::MessageBatch::ProcessingStatus,
+        request_counts: Anthropic::Messages::MessageBatchRequestCounts,
         results_url: String | nil,
         type: Symbol
       }
@@ -95,7 +95,7 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Anthropic::Test::Resou
     response = @anthropic.messages.batches.delete("message_batch_id")
 
     assert_pattern do
-      response => Anthropic::Models::Messages::DeletedMessageBatch
+      response => Anthropic::Messages::DeletedMessageBatch
     end
 
     assert_pattern do
@@ -110,7 +110,7 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Anthropic::Test::Resou
     response = @anthropic.messages.batches.cancel("message_batch_id")
 
     assert_pattern do
-      response => Anthropic::Models::Messages::MessageBatch
+      response => Anthropic::Messages::MessageBatch
     end
 
     assert_pattern do
@@ -121,8 +121,8 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Anthropic::Test::Resou
         created_at: Time,
         ended_at: Time | nil,
         expires_at: Time,
-        processing_status: Anthropic::Models::Messages::MessageBatch::ProcessingStatus,
-        request_counts: Anthropic::Models::Messages::MessageBatchRequestCounts,
+        processing_status: Anthropic::Messages::MessageBatch::ProcessingStatus,
+        request_counts: Anthropic::Messages::MessageBatchRequestCounts,
         results_url: String | nil,
         type: Symbol
       }

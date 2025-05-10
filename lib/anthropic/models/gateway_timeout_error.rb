@@ -13,13 +13,9 @@ module Anthropic
       #   @return [Symbol, :timeout_error]
       required :type, const: :timeout_error
 
-      # @!parse
-      #   # @param message [String]
-      #   # @param type [Symbol, :timeout_error]
-      #   #
-      #   def initialize(message:, type: :timeout_error, **) = super
-
-      # def initialize: (Hash | Anthropic::Internal::Type::BaseModel) -> void
+      # @!method initialize(message:, type: :timeout_error)
+      #   @param message [String]
+      #   @param type [Symbol, :timeout_error]
     end
   end
 end

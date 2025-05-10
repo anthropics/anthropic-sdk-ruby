@@ -8,23 +8,26 @@ module Anthropic
 
         discriminator :type
 
-        variant :text, -> { Anthropic::Models::Beta::BetaTextBlockParam }
+        variant :text, -> { Anthropic::Beta::BetaTextBlockParam }
 
-        variant :image, -> { Anthropic::Models::Beta::BetaImageBlockParam }
+        variant :image, -> { Anthropic::Beta::BetaImageBlockParam }
 
-        variant :tool_use, -> { Anthropic::Models::Beta::BetaToolUseBlockParam }
+        variant :tool_use, -> { Anthropic::Beta::BetaToolUseBlockParam }
 
-        variant :tool_result, -> { Anthropic::Models::Beta::BetaToolResultBlockParam }
+        variant :server_tool_use, -> { Anthropic::Beta::BetaServerToolUseBlockParam }
 
-        variant :document, -> { Anthropic::Models::Beta::BetaBase64PDFBlock }
+        variant :web_search_tool_result, -> { Anthropic::Beta::BetaWebSearchToolResultBlockParam }
 
-        variant :thinking, -> { Anthropic::Models::Beta::BetaThinkingBlockParam }
+        variant :tool_result, -> { Anthropic::Beta::BetaToolResultBlockParam }
 
-        variant :redacted_thinking, -> { Anthropic::Models::Beta::BetaRedactedThinkingBlockParam }
+        variant :document, -> { Anthropic::Beta::BetaBase64PDFBlock }
 
-        # @!parse
-        #   # @return [Array(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam)]
-        #   def self.variants; end
+        variant :thinking, -> { Anthropic::Beta::BetaThinkingBlockParam }
+
+        variant :redacted_thinking, -> { Anthropic::Beta::BetaRedactedThinkingBlockParam }
+
+        # @!method self.variants
+        #   @return [Array(Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam, Anthropic::Beta::BetaToolUseBlockParam, Anthropic::Beta::BetaServerToolUseBlockParam, Anthropic::Beta::BetaWebSearchToolResultBlockParam, Anthropic::Beta::BetaToolResultBlockParam, Anthropic::Beta::BetaBase64PDFBlock, Anthropic::Beta::BetaThinkingBlockParam, Anthropic::Beta::BetaRedactedThinkingBlockParam)]
       end
     end
 
