@@ -9,7 +9,7 @@ module Anthropic
           | ^-> Anthropic::Internal::Type::Converter::input
           | Anthropic::Internal::Type::Converter::input type_info,
           ?::Hash[Symbol, top] spec
-        ) -> instance
+        ) -> self
 
         def ===: (top other) -> bool
 

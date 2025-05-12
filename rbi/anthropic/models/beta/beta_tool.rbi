@@ -7,7 +7,9 @@ module Anthropic
     module Beta
       class BetaTool < Anthropic::Internal::Type::BaseModel
         OrHash =
-          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+          T.type_alias do
+            T.any(Anthropic::Beta::BetaTool, Anthropic::Internal::AnyHash)
+          end
 
         # [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
         #
@@ -106,7 +108,12 @@ module Anthropic
 
         class InputSchema < Anthropic::Internal::Type::BaseModel
           OrHash =
-            T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::BetaTool::InputSchema,
+                Anthropic::Internal::AnyHash
+              )
+            end
 
           sig { returns(Symbol) }
           attr_accessor :type

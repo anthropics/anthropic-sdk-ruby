@@ -3,7 +3,10 @@
 module Anthropic
   module Models
     class ServerToolUsage < Anthropic::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(Anthropic::ServerToolUsage, Anthropic::Internal::AnyHash)
+        end
 
       # The number of web search tool requests.
       sig { returns(Integer) }

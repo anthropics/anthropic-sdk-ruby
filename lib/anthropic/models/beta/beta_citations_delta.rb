@@ -34,6 +34,17 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Beta::BetaCitationCharLocation, Anthropic::Beta::BetaCitationPageLocation, Anthropic::Beta::BetaCitationContentBlockLocation, Anthropic::Beta::BetaCitationsWebSearchResultLocation)]
+
+          define_sorbet_constant!(:Variants) do
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::BetaCitationCharLocation,
+                Anthropic::Beta::BetaCitationPageLocation,
+                Anthropic::Beta::BetaCitationContentBlockLocation,
+                Anthropic::Beta::BetaCitationsWebSearchResultLocation
+              )
+            end
+          end
         end
       end
     end

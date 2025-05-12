@@ -7,7 +7,12 @@ module Anthropic
     module Messages
       class MessageBatchSucceededResult < Anthropic::Internal::Type::BaseModel
         OrHash =
-          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Anthropic::Messages::MessageBatchSucceededResult,
+              Anthropic::Internal::AnyHash
+            )
+          end
 
         sig { returns(Anthropic::Message) }
         attr_reader :message

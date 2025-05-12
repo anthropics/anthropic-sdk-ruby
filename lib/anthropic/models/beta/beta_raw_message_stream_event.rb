@@ -22,6 +22,19 @@ module Anthropic
 
         # @!method self.variants
         #   @return [Array(Anthropic::Beta::BetaRawMessageStartEvent, Anthropic::Beta::BetaRawMessageDeltaEvent, Anthropic::Beta::BetaRawMessageStopEvent, Anthropic::Beta::BetaRawContentBlockStartEvent, Anthropic::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Beta::BetaRawContentBlockStopEvent)]
+
+        define_sorbet_constant!(:Variants) do
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaRawMessageStartEvent,
+              Anthropic::Beta::BetaRawMessageDeltaEvent,
+              Anthropic::Beta::BetaRawMessageStopEvent,
+              Anthropic::Beta::BetaRawContentBlockStartEvent,
+              Anthropic::Beta::BetaRawContentBlockDeltaEvent,
+              Anthropic::Beta::BetaRawContentBlockStopEvent
+            )
+          end
+        end
       end
     end
 

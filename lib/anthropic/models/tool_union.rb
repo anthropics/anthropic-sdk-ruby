@@ -15,6 +15,17 @@ module Anthropic
 
       # @!method self.variants
       #   @return [Array(Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124, Anthropic::WebSearchTool20250305)]
+
+      define_sorbet_constant!(:Variants) do
+        T.type_alias do
+          T.any(
+            Anthropic::Tool,
+            Anthropic::ToolBash20250124,
+            Anthropic::ToolTextEditor20250124,
+            Anthropic::WebSearchTool20250305
+          )
+        end
+      end
     end
   end
 end

@@ -7,7 +7,12 @@ module Anthropic
     module Beta
       class BetaInputJSONDelta < Anthropic::Internal::Type::BaseModel
         OrHash =
-          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaInputJSONDelta,
+              Anthropic::Internal::AnyHash
+            )
+          end
 
         sig { returns(String) }
         attr_accessor :partial_json

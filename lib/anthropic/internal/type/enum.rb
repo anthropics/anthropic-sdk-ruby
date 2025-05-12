@@ -42,6 +42,7 @@ module Anthropic
       #   end
       module Enum
         include Anthropic::Internal::Type::Converter
+        include Anthropic::Internal::Util::SorbetRuntimeSupport
 
         # All of the valid Symbol values for this enum.
         #

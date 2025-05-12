@@ -2,6 +2,8 @@ module Anthropic
   module Internal
     module Type
       module Converter
+        extend Anthropic::Internal::Util::SorbetRuntimeSupport
+
         type input = Anthropic::Internal::Type::Converter | Class
 
         type coerce_state =

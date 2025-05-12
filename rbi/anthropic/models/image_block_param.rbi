@@ -3,7 +3,10 @@
 module Anthropic
   module Models
     class ImageBlockParam < Anthropic::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(Anthropic::ImageBlockParam, Anthropic::Internal::AnyHash)
+        end
 
       sig do
         returns(T.any(Anthropic::Base64ImageSource, Anthropic::URLImageSource))

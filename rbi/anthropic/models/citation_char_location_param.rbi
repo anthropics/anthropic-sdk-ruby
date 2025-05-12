@@ -3,7 +3,13 @@
 module Anthropic
   module Models
     class CitationCharLocationParam < Anthropic::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(
+            Anthropic::CitationCharLocationParam,
+            Anthropic::Internal::AnyHash
+          )
+        end
 
       sig { returns(String) }
       attr_accessor :cited_text

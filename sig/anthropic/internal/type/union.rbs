@@ -3,6 +3,7 @@ module Anthropic
     module Type
       module Union
         include Anthropic::Internal::Type::Converter
+        include Anthropic::Internal::Util::SorbetRuntimeSupport
 
         private def self.known_variants: -> ::Array[[Symbol?, (^-> Anthropic::Internal::Type::Converter::input)]]
 

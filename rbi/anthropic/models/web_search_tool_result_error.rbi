@@ -3,7 +3,13 @@
 module Anthropic
   module Models
     class WebSearchToolResultError < Anthropic::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(
+            Anthropic::WebSearchToolResultError,
+            Anthropic::Internal::AnyHash
+          )
+        end
 
       sig do
         returns(Anthropic::WebSearchToolResultError::ErrorCode::TaggedSymbol)

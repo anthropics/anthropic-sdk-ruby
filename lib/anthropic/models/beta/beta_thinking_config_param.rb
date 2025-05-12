@@ -23,6 +23,12 @@ module Anthropic
 
         # @!method self.variants
         #   @return [Array(Anthropic::Beta::BetaThinkingConfigEnabled, Anthropic::Beta::BetaThinkingConfigDisabled)]
+
+        define_sorbet_constant!(:Variants) do
+          T.type_alias do
+            T.any(Anthropic::Beta::BetaThinkingConfigEnabled, Anthropic::Beta::BetaThinkingConfigDisabled)
+          end
+        end
       end
     end
 

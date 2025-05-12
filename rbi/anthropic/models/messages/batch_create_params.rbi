@@ -8,7 +8,12 @@ module Anthropic
         include Anthropic::Internal::Type::RequestParameters
 
         OrHash =
-          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Anthropic::Messages::BatchCreateParams,
+              Anthropic::Internal::AnyHash
+            )
+          end
 
         # List of requests for prompt completion. Each is an individual request to create
         # a Message.
@@ -46,7 +51,12 @@ module Anthropic
 
         class Request < Anthropic::Internal::Type::BaseModel
           OrHash =
-            T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+            T.type_alias do
+              T.any(
+                Anthropic::Messages::BatchCreateParams::Request,
+                Anthropic::Internal::AnyHash
+              )
+            end
 
           # Developer-provided ID created for each request in a Message Batch. Useful for
           # matching results to requests, as results may be given out of request order.
@@ -106,7 +116,12 @@ module Anthropic
 
           class Params < Anthropic::Internal::Type::BaseModel
             OrHash =
-              T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+              T.type_alias do
+                T.any(
+                  Anthropic::Messages::BatchCreateParams::Request::Params,
+                  Anthropic::Internal::AnyHash
+                )
+              end
 
             # The maximum number of tokens to generate before stopping.
             #

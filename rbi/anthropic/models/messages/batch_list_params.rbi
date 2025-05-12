@@ -8,7 +8,12 @@ module Anthropic
         include Anthropic::Internal::Type::RequestParameters
 
         OrHash =
-          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Anthropic::Messages::BatchListParams,
+              Anthropic::Internal::AnyHash
+            )
+          end
 
         # ID of the object to use as a cursor for pagination. When provided, returns the
         # page of results immediately after this object.

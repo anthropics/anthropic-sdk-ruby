@@ -8,7 +8,12 @@ module Anthropic
         include Anthropic::Internal::Type::RequestParameters
 
         OrHash =
-          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::MessageCreateParams,
+              Anthropic::Internal::AnyHash
+            )
+          end
 
         # The maximum number of tokens to generate before stopping.
         #

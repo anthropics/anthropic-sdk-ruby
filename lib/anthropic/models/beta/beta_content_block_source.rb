@@ -29,6 +29,18 @@ module Anthropic
           # @!method self.variants
           #   @return [Array(String, Array<Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam>)]
 
+          define_sorbet_constant!(:Variants) do
+            T.type_alias do
+              T.any(
+                String,
+                T::Array[T.any(
+                  Anthropic::Beta::BetaTextBlockParam,
+                  Anthropic::Beta::BetaImageBlockParam
+                )]
+              )
+            end
+          end
+
           # @type [Anthropic::Internal::Type::Converter]
           BetaContentBlockSourceContentArray =
             Anthropic::Internal::Type::ArrayOf[union: -> { Anthropic::Beta::BetaContentBlockSourceContent }]

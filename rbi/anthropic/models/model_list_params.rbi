@@ -6,7 +6,10 @@ module Anthropic
       extend Anthropic::Internal::Type::RequestParameters::Converter
       include Anthropic::Internal::Type::RequestParameters
 
-      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(Anthropic::ModelListParams, Anthropic::Internal::AnyHash)
+        end
 
       # ID of the object to use as a cursor for pagination. When provided, returns the
       # page of results immediately after this object.

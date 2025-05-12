@@ -13,6 +13,15 @@ module Anthropic
         # @!method self.variants
         #   @return [Array(Anthropic::Beta::BetaWebSearchToolResultError, Array<Anthropic::Beta::BetaWebSearchResultBlock>)]
 
+        define_sorbet_constant!(:Variants) do
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaWebSearchToolResultError,
+              T::Array[Anthropic::Beta::BetaWebSearchResultBlock]
+            )
+          end
+        end
+
         # @type [Anthropic::Internal::Type::Converter]
         BetaWebSearchResultBlockArray =
           Anthropic::Internal::Type::ArrayOf[-> { Anthropic::Beta::BetaWebSearchResultBlock }]

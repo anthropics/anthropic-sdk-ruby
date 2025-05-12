@@ -22,6 +22,10 @@ module Anthropic
 
       # @!method self.variants
       #   @return [Array(Anthropic::ThinkingConfigEnabled, Anthropic::ThinkingConfigDisabled)]
+
+      define_sorbet_constant!(:Variants) do
+        T.type_alias { T.any(Anthropic::ThinkingConfigEnabled, Anthropic::ThinkingConfigDisabled) }
+      end
     end
   end
 end

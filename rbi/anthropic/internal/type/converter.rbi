@@ -5,6 +5,8 @@ module Anthropic
     module Type
       # @api private
       module Converter
+        extend Anthropic::Internal::Util::SorbetRuntimeSupport
+
         Input =
           T.type_alias do
             T.any(Anthropic::Internal::Type::Converter, T::Class[T.anything])
