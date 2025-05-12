@@ -104,7 +104,7 @@ module Anthropic
           request: NilClass,
           response: NilClass,
           message: T.nilable(String)
-        ).returns(T.self_type)
+        ).returns(T.attached_class)
       end
       def self.for(url:, status:, body:, request:, response:, message: nil)
       end
