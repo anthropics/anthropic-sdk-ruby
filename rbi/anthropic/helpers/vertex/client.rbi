@@ -21,14 +21,14 @@ module Anthropic
         # @api private
         sig do
           override
-            .params(req: Anthropic::Internal::Transport::BaseClient::RequestComponentsShape, opts: Anthropic::Internal::AnyHash)
-            .returns(Anthropic::Internal::Transport::BaseClient::RequestInputShape)
+            .params(req: Anthropic::Internal::Transport::BaseClient::RequestComponents, opts: Anthropic::Internal::AnyHash)
+            .returns(Anthropic::Internal::Transport::BaseClient::RequestInput)
         end
         private def build_request(req, opts); end
 
         sig do
-          params(request_components: Anthropic::Internal::Transport::BaseClient::RequestComponentsShape)
-            .returns(Anthropic::Internal::Transport::BaseClient::RequestComponentsShape)
+          params(request_components: Anthropic::Internal::Transport::BaseClient::RequestComponents)
+            .returns(Anthropic::Internal::Transport::BaseClient::RequestComponents)
         end
         private def fit_req_to_vertex_specs!(request_components) end
 
