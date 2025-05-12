@@ -99,7 +99,7 @@ module Anthropic
       # @param response [nil]
       # @param message [String, nil]
       #
-      # @return [Anthropic::Errors::APIStatusError]
+      # @return [self]
       def self.for(url:, status:, body:, request:, response:, message: nil)
         kwargs = {
           url: url,
