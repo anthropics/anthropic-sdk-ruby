@@ -340,6 +340,10 @@ module Anthropic
           # @!method self.variants
           #   @return [Array(String, Array<Anthropic::Beta::BetaTextBlockParam>)]
 
+          define_sorbet_constant!(:Variants) do
+            T.type_alias { T.any(String, T::Array[Anthropic::Beta::BetaTextBlockParam]) }
+          end
+
           # @type [Anthropic::Internal::Type::Converter]
           BetaTextBlockParamArray = Anthropic::Internal::Type::ArrayOf[-> {
             Anthropic::Beta::BetaTextBlockParam

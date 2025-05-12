@@ -8,7 +8,12 @@ module Anthropic
         include Anthropic::Internal::Type::RequestParameters
 
         OrHash =
-          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Anthropic::Messages::BatchRetrieveParams,
+              Anthropic::Internal::AnyHash
+            )
+          end
 
         sig do
           params(request_options: Anthropic::RequestOptions::OrHash).returns(

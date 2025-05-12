@@ -5,10 +5,11 @@ module Anthropic
     module Type
       class BaseModel
         extend Anthropic::Internal::Type::Converter
+        extend Anthropic::Internal::Util::SorbetRuntimeSupport
 
         abstract!
 
-        KnownFieldShape =
+        KnownField =
           T.type_alias do
             {
               mode: T.nilable(Symbol),
@@ -18,19 +19,29 @@ module Anthropic
           end
 
         OrHash =
-          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Anthropic::Internal::Type::BaseModel,
+              Anthropic::Internal::AnyHash
+            )
+          end
 
         class << self
           # @api private
           #
           # Assumes superclass fields are totally defined before fields are accessed /
           # defined on subclasses.
+          sig { params(child: T.self_type).void }
+          def inherited(child)
+          end
+
+          # @api private
           sig do
             returns(
               T::Hash[
                 Symbol,
                 T.all(
-                  Anthropic::Internal::Type::BaseModel::KnownFieldShape,
+                  Anthropic::Internal::Type::BaseModel::KnownField,
                   {
                     type_fn:
                       T.proc.returns(
@@ -50,7 +61,7 @@ module Anthropic
               T::Hash[
                 Symbol,
                 T.all(
-                  Anthropic::Internal::Type::BaseModel::KnownFieldShape,
+                  Anthropic::Internal::Type::BaseModel::KnownField,
                   { type: Anthropic::Internal::Type::Converter::Input }
                 )
               ]

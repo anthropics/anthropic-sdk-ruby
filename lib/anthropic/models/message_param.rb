@@ -28,6 +28,27 @@ module Anthropic
         # @!method self.variants
         #   @return [Array(String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam, Anthropic::ToolUseBlockParam, Anthropic::ServerToolUseBlockParam, Anthropic::WebSearchToolResultBlockParam, Anthropic::ToolResultBlockParam, Anthropic::DocumentBlockParam, Anthropic::ThinkingBlockParam, Anthropic::RedactedThinkingBlockParam>)]
 
+        define_sorbet_constant!(:Variants) do
+          T.type_alias do
+            T.any(
+              String,
+              T::Array[
+                T.any(
+                  Anthropic::TextBlockParam,
+                  Anthropic::ImageBlockParam,
+                  Anthropic::ToolUseBlockParam,
+                  Anthropic::ServerToolUseBlockParam,
+                  Anthropic::WebSearchToolResultBlockParam,
+                  Anthropic::ToolResultBlockParam,
+                  Anthropic::DocumentBlockParam,
+                  Anthropic::ThinkingBlockParam,
+                  Anthropic::RedactedThinkingBlockParam
+                )
+              ]
+            )
+          end
+        end
+
         # @type [Anthropic::Internal::Type::Converter]
         ContentBlockParamArray = Anthropic::Internal::Type::ArrayOf[union: -> {
           Anthropic::ContentBlockParam

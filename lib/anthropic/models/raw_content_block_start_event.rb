@@ -43,6 +43,19 @@ module Anthropic
 
         # @!method self.variants
         #   @return [Array(Anthropic::TextBlock, Anthropic::ToolUseBlock, Anthropic::ServerToolUseBlock, Anthropic::WebSearchToolResultBlock, Anthropic::ThinkingBlock, Anthropic::RedactedThinkingBlock)]
+
+        define_sorbet_constant!(:Variants) do
+          T.type_alias do
+            T.any(
+              Anthropic::TextBlock,
+              Anthropic::ToolUseBlock,
+              Anthropic::ServerToolUseBlock,
+              Anthropic::WebSearchToolResultBlock,
+              Anthropic::ThinkingBlock,
+              Anthropic::RedactedThinkingBlock
+            )
+          end
+        end
       end
     end
   end

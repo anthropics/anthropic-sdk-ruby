@@ -7,7 +7,12 @@ module Anthropic
     module Beta
       class BetaCitationsConfigParam < Anthropic::Internal::Type::BaseModel
         OrHash =
-          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaCitationsConfigParam,
+              Anthropic::Internal::AnyHash
+            )
+          end
 
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :enabled

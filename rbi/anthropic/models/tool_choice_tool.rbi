@@ -3,7 +3,10 @@
 module Anthropic
   module Models
     class ToolChoiceTool < Anthropic::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(Anthropic::ToolChoiceTool, Anthropic::Internal::AnyHash)
+        end
 
       # The name of the tool to use.
       sig { returns(String) }

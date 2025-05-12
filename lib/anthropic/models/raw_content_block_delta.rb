@@ -19,6 +19,18 @@ module Anthropic
 
       # @!method self.variants
       #   @return [Array(Anthropic::TextDelta, Anthropic::InputJSONDelta, Anthropic::CitationsDelta, Anthropic::ThinkingDelta, Anthropic::SignatureDelta)]
+
+      define_sorbet_constant!(:Variants) do
+        T.type_alias do
+          T.any(
+            Anthropic::TextDelta,
+            Anthropic::InputJSONDelta,
+            Anthropic::CitationsDelta,
+            Anthropic::ThinkingDelta,
+            Anthropic::SignatureDelta
+          )
+        end
+      end
     end
   end
 end

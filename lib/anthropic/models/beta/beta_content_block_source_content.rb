@@ -14,6 +14,10 @@ module Anthropic
 
         # @!method self.variants
         #   @return [Array(Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam)]
+
+        define_sorbet_constant!(:Variants) do
+          T.type_alias { T.any(Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam) }
+        end
       end
     end
 

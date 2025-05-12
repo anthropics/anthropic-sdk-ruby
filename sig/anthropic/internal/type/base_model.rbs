@@ -3,9 +3,12 @@ module Anthropic
     module Type
       class BaseModel
         extend Anthropic::Internal::Type::Converter
+        extend Anthropic::Internal::Util::SorbetRuntimeSupport
 
         type known_field =
           { mode: (:coerce | :dump)?, required: bool, nilable: bool }
+
+        def self.inherited: (self child) -> void
 
         def self.known_fields: -> ::Hash[Symbol, (Anthropic::Internal::Type::BaseModel::known_field
         & { type_fn: (^-> Anthropic::Internal::Type::Converter::input) })]
@@ -58,10 +61,10 @@ module Anthropic
         def self.coerce: (
           Anthropic::Internal::Type::BaseModel | ::Hash[top, top] | top value,
           state: Anthropic::Internal::Type::Converter::coerce_state
-        ) -> (instance | top)
+        ) -> (self | top)
 
         def self.dump: (
-          instance | top value,
+          self | top value,
           state: Anthropic::Internal::Type::Converter::dump_state
         ) -> (::Hash[top, top] | top)
 

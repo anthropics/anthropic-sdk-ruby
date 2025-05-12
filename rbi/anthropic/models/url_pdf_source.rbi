@@ -3,7 +3,10 @@
 module Anthropic
   module Models
     class URLPDFSource < Anthropic::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(Anthropic::URLPDFSource, Anthropic::Internal::AnyHash)
+        end
 
       sig { returns(Symbol) }
       attr_accessor :type

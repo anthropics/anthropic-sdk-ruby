@@ -7,7 +7,9 @@ module Anthropic
     module Beta
       class BetaTextBlock < Anthropic::Internal::Type::BaseModel
         OrHash =
-          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+          T.type_alias do
+            T.any(Anthropic::Beta::BetaTextBlock, Anthropic::Internal::AnyHash)
+          end
 
         # Citations supporting the text block.
         #

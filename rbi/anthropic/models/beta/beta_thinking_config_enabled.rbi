@@ -7,7 +7,12 @@ module Anthropic
     module Beta
       class BetaThinkingConfigEnabled < Anthropic::Internal::Type::BaseModel
         OrHash =
-          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaThinkingConfigEnabled,
+              Anthropic::Internal::AnyHash
+            )
+          end
 
         # Determines how many tokens Claude can use for its internal reasoning process.
         # Larger budgets can enable more thorough analysis for complex problems, improving

@@ -3,7 +3,10 @@
 module Anthropic
   module Models
     class RawMessageStartEvent < Anthropic::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(Anthropic::RawMessageStartEvent, Anthropic::Internal::AnyHash)
+        end
 
       sig { returns(Anthropic::Message) }
       attr_reader :message

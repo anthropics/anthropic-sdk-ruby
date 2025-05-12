@@ -39,6 +39,10 @@ module Anthropic
       # @!method self.variants
       #   @return [Array(Symbol, String)]
 
+      define_sorbet_constant!(:Variants) do
+        T.type_alias { T.any(Anthropic::Model::TaggedSymbol, String) }
+      end
+
       # @!group
 
       # Our most intelligent model

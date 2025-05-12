@@ -28,6 +28,22 @@ module Anthropic
 
         # @!method self.variants
         #   @return [Array(Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam, Anthropic::Beta::BetaToolUseBlockParam, Anthropic::Beta::BetaServerToolUseBlockParam, Anthropic::Beta::BetaWebSearchToolResultBlockParam, Anthropic::Beta::BetaToolResultBlockParam, Anthropic::Beta::BetaBase64PDFBlock, Anthropic::Beta::BetaThinkingBlockParam, Anthropic::Beta::BetaRedactedThinkingBlockParam)]
+
+        define_sorbet_constant!(:Variants) do
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaTextBlockParam,
+              Anthropic::Beta::BetaImageBlockParam,
+              Anthropic::Beta::BetaToolUseBlockParam,
+              Anthropic::Beta::BetaServerToolUseBlockParam,
+              Anthropic::Beta::BetaWebSearchToolResultBlockParam,
+              Anthropic::Beta::BetaToolResultBlockParam,
+              Anthropic::Beta::BetaBase64PDFBlock,
+              Anthropic::Beta::BetaThinkingBlockParam,
+              Anthropic::Beta::BetaRedactedThinkingBlockParam
+            )
+          end
+        end
       end
     end
 

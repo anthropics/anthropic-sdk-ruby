@@ -26,6 +26,10 @@ module Anthropic
       # @!method self.variants
       #   @return [Array(String, Symbol)]
 
+      define_sorbet_constant!(:Variants) do
+        T.type_alias { T.any(String, Anthropic::AnthropicBeta::TaggedSymbol) }
+      end
+
       # @!group
 
       MESSAGE_BATCHES_2024_09_24 = :"message-batches-2024-09-24"

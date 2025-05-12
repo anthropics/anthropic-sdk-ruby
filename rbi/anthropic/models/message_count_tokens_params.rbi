@@ -6,7 +6,13 @@ module Anthropic
       extend Anthropic::Internal::Type::RequestParameters::Converter
       include Anthropic::Internal::Type::RequestParameters
 
-      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(
+            Anthropic::MessageCountTokensParams,
+            Anthropic::Internal::AnyHash
+          )
+        end
 
       # Input messages.
       #

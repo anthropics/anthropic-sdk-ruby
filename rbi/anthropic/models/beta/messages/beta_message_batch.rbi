@@ -6,7 +6,12 @@ module Anthropic
       module Messages
         class BetaMessageBatch < Anthropic::Internal::Type::BaseModel
           OrHash =
-            T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::Messages::BetaMessageBatch,
+                Anthropic::Internal::AnyHash
+              )
+            end
 
           # Unique object identifier.
           #

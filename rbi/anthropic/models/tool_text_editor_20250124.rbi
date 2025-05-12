@@ -3,7 +3,10 @@
 module Anthropic
   module Models
     class ToolTextEditor20250124 < Anthropic::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(Anthropic::ToolTextEditor20250124, Anthropic::Internal::AnyHash)
+        end
 
       # Name of the tool.
       #

@@ -3,7 +3,13 @@
 module Anthropic
   module Models
     class RawContentBlockStopEvent < Anthropic::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(
+            Anthropic::RawContentBlockStopEvent,
+            Anthropic::Internal::AnyHash
+          )
+        end
 
       sig { returns(Integer) }
       attr_accessor :index
