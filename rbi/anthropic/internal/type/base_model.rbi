@@ -201,6 +201,18 @@ module Anthropic
           end
         end
 
+        class << self
+          # @api private
+          sig do
+            params(
+              model: Anthropic::Internal::Type::BaseModel,
+              convert: T::Boolean
+            ).returns(Anthropic::Internal::AnyHash)
+          end
+          def recursively_to_h(model, convert:)
+          end
+        end
+
         # Returns the raw value associated with the given key, if found. Otherwise, nil is
         # returned.
         #
@@ -235,23 +247,18 @@ module Anthropic
         def to_hash
         end
 
+        # In addition to the behaviour of `#to_h`, this method will recursively call
+        # `#to_h` on nested models.
+        sig { overridable.returns(Anthropic::Internal::AnyHash) }
+        def deep_to_h
+        end
+
         sig do
           params(keys: T.nilable(T::Array[Symbol])).returns(
             Anthropic::Internal::AnyHash
           )
         end
         def deconstruct_keys(keys)
-        end
-
-        class << self
-          # @api private
-          sig do
-            params(model: Anthropic::Internal::Type::BaseModel).returns(
-              Anthropic::Internal::AnyHash
-            )
-          end
-          def walk(model)
-          end
         end
 
         sig { params(a: T.anything).returns(String) }
