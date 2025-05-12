@@ -3,7 +3,10 @@
 module Anthropic
   module Models
     class WebSearchTool20250305 < Anthropic::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(Anthropic::WebSearchTool20250305, Anthropic::Internal::AnyHash)
+        end
 
       # Name of the tool.
       #
@@ -105,7 +108,12 @@ module Anthropic
 
       class UserLocation < Anthropic::Internal::Type::BaseModel
         OrHash =
-          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Anthropic::WebSearchTool20250305::UserLocation,
+              Anthropic::Internal::AnyHash
+            )
+          end
 
         sig { returns(Symbol) }
         attr_accessor :type

@@ -5,7 +5,9 @@ module Anthropic
     module Transport
       # @api private
       class PooledNetRequester
-        RequestShape =
+        extend Anthropic::Internal::Util::SorbetRuntimeSupport
+
+        Request =
           T.type_alias do
             {
               method: Symbol,
@@ -35,7 +37,7 @@ module Anthropic
           sig do
             params(
               request:
-                Anthropic::Internal::Transport::PooledNetRequester::RequestShape,
+                Anthropic::Internal::Transport::PooledNetRequester::Request,
               blk: T.proc.params(arg0: String).void
             ).returns([Net::HTTPGenericRequest, T.proc.void])
           end
@@ -57,8 +59,7 @@ module Anthropic
         # @api private
         sig do
           params(
-            request:
-              Anthropic::Internal::Transport::PooledNetRequester::RequestShape
+            request: Anthropic::Internal::Transport::PooledNetRequester::Request
           ).returns([Integer, Net::HTTPResponse, T::Enumerable[String]])
         end
         def execute(request)

@@ -29,7 +29,7 @@ module Anthropic
         #
         #   @option spec [Boolean] :"nil?"
         #
-        # @return [Anthropic::Internal::Type::HashOf]
+        # @return [self]
         def self.[](...) = new(...)
 
         # @api public

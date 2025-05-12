@@ -258,6 +258,10 @@ module Anthropic
           # @!method self.variants
           #   @return [Array(String, Array<Anthropic::Beta::BetaTextBlockParam>)]
 
+          define_sorbet_constant!(:Variants) do
+            T.type_alias { T.any(String, T::Array[Anthropic::Beta::BetaTextBlockParam]) }
+          end
+
           # @type [Anthropic::Internal::Type::Converter]
           BetaTextBlockParamArray = Anthropic::Internal::Type::ArrayOf[-> {
             Anthropic::Beta::BetaTextBlockParam
@@ -285,6 +289,21 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Beta::BetaTool, Anthropic::Beta::BetaToolComputerUse20241022, Anthropic::Beta::BetaToolBash20241022, Anthropic::Beta::BetaToolTextEditor20241022, Anthropic::Beta::BetaToolComputerUse20250124, Anthropic::Beta::BetaToolBash20250124, Anthropic::Beta::BetaToolTextEditor20250124, Anthropic::Beta::BetaWebSearchTool20250305)]
+
+          define_sorbet_constant!(:Variants) do
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::BetaTool,
+                Anthropic::Beta::BetaToolComputerUse20241022,
+                Anthropic::Beta::BetaToolBash20241022,
+                Anthropic::Beta::BetaToolTextEditor20241022,
+                Anthropic::Beta::BetaToolComputerUse20250124,
+                Anthropic::Beta::BetaToolBash20250124,
+                Anthropic::Beta::BetaToolTextEditor20250124,
+                Anthropic::Beta::BetaWebSearchTool20250305
+              )
+            end
+          end
         end
       end
     end

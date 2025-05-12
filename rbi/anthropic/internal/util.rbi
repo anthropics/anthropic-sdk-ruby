@@ -4,6 +4,8 @@ module Anthropic
   module Internal
     # @api private
     module Util
+      extend Anthropic::Internal::Util::SorbetRuntimeSupport
+
       # @api private
       sig { returns(Float) }
       def self.monotonic_secs
@@ -172,7 +174,7 @@ module Anthropic
         end
       end
 
-      ParsedUriShape =
+      ParsedUri =
         T.type_alias do
           {
             scheme: T.nilable(String),
@@ -187,7 +189,7 @@ module Anthropic
         # @api private
         sig do
           params(url: T.any(URI::Generic, String)).returns(
-            Anthropic::Internal::Util::ParsedUriShape
+            Anthropic::Internal::Util::ParsedUri
           )
         end
         def parse_uri(url)
@@ -195,7 +197,7 @@ module Anthropic
 
         # @api private
         sig do
-          params(parsed: Anthropic::Internal::Util::ParsedUriShape).returns(
+          params(parsed: Anthropic::Internal::Util::ParsedUri).returns(
             URI::Generic
           )
         end
@@ -205,8 +207,8 @@ module Anthropic
         # @api private
         sig do
           params(
-            lhs: Anthropic::Internal::Util::ParsedUriShape,
-            rhs: Anthropic::Internal::Util::ParsedUriShape
+            lhs: Anthropic::Internal::Util::ParsedUri,
+            rhs: Anthropic::Internal::Util::ParsedUri
           ).returns(URI::Generic)
         end
         def join_parsed_uri(lhs, rhs)
@@ -421,6 +423,27 @@ module Anthropic
           )
         end
         def decode_sse(lines)
+        end
+      end
+
+      # @api private
+      module SorbetRuntimeSupport
+        class MissingSorbetRuntimeError < ::RuntimeError
+        end
+
+        # @api private
+        sig { returns(T::Hash[Symbol, T.anything]) }
+        private def sorbet_runtime_constants
+        end
+
+        # @api private
+        sig { params(name: Symbol).void }
+        def const_missing(name)
+        end
+
+        # @api private
+        sig { params(name: Symbol, blk: T.proc.returns(T.anything)).void }
+        def define_sorbet_constant!(name, &blk)
         end
       end
     end

@@ -3,6 +3,7 @@ module Anthropic
     module Type
       module Enum
         include Anthropic::Internal::Type::Converter
+        include Anthropic::Internal::Util::SorbetRuntimeSupport
 
         def self.values: -> ::Array[(nil | bool | Integer | Float | Symbol)]
 

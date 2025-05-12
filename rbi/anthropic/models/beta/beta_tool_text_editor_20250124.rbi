@@ -7,7 +7,12 @@ module Anthropic
     module Beta
       class BetaToolTextEditor20250124 < Anthropic::Internal::Type::BaseModel
         OrHash =
-          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaToolTextEditor20250124,
+              Anthropic::Internal::AnyHash
+            )
+          end
 
         # Name of the tool.
         #

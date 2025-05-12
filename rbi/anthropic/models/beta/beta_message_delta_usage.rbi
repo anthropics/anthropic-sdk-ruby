@@ -7,7 +7,12 @@ module Anthropic
     module Beta
       class BetaMessageDeltaUsage < Anthropic::Internal::Type::BaseModel
         OrHash =
-          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaMessageDeltaUsage,
+              Anthropic::Internal::AnyHash
+            )
+          end
 
         # The cumulative number of input tokens used to create the cache entry.
         sig { returns(T.nilable(Integer)) }

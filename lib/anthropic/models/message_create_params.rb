@@ -331,6 +331,10 @@ module Anthropic
         # @!method self.variants
         #   @return [Array(String, Array<Anthropic::TextBlockParam>)]
 
+        define_sorbet_constant!(:Variants) do
+          T.type_alias { T.any(String, T::Array[Anthropic::TextBlockParam]) }
+        end
+
         # @type [Anthropic::Internal::Type::Converter]
         TextBlockParamArray = Anthropic::Internal::Type::ArrayOf[-> { Anthropic::TextBlockParam }]
       end

@@ -1,5 +1,7 @@
 module Anthropic
   module Internal
+    extend Anthropic::Internal::Util::SorbetRuntimeSupport
+
     OMIT: Object
   end
 end

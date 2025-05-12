@@ -23,6 +23,17 @@ module Anthropic
 
       # @!method self.variants
       #   @return [Array(Anthropic::ToolChoiceAuto, Anthropic::ToolChoiceAny, Anthropic::ToolChoiceTool, Anthropic::ToolChoiceNone)]
+
+      define_sorbet_constant!(:Variants) do
+        T.type_alias do
+          T.any(
+            Anthropic::ToolChoiceAuto,
+            Anthropic::ToolChoiceAny,
+            Anthropic::ToolChoiceTool,
+            Anthropic::ToolChoiceNone
+          )
+        end
+      end
     end
   end
 end

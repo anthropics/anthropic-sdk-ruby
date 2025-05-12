@@ -7,7 +7,12 @@ module Anthropic
     module Beta
       class BetaToolChoiceTool < Anthropic::Internal::Type::BaseModel
         OrHash =
-          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaToolChoiceTool,
+              Anthropic::Internal::AnyHash
+            )
+          end
 
         # The name of the tool to use.
         sig { returns(String) }

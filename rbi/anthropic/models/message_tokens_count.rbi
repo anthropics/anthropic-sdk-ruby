@@ -3,7 +3,10 @@
 module Anthropic
   module Models
     class MessageTokensCount < Anthropic::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(Anthropic::MessageTokensCount, Anthropic::Internal::AnyHash)
+        end
 
       # The total number of tokens across the provided list of messages, system prompt,
       # and tools.

@@ -39,6 +39,12 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Beta::BetaBase64ImageSource, Anthropic::Beta::BetaURLImageSource)]
+
+          define_sorbet_constant!(:Variants) do
+            T.type_alias do
+              T.any(Anthropic::Beta::BetaBase64ImageSource, Anthropic::Beta::BetaURLImageSource)
+            end
+          end
         end
       end
     end

@@ -29,8 +29,7 @@ module Anthropic
         sig do
           params(
             client: Anthropic::Internal::Transport::BaseClient,
-            req:
-              Anthropic::Internal::Transport::BaseClient::RequestComponentsShape,
+            req: Anthropic::Internal::Transport::BaseClient::RequestComponents,
             headers: T.any(T::Hash[String, String], Net::HTTPHeader),
             page_data: T.anything
           ).void

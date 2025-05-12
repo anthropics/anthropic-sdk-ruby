@@ -3,7 +3,10 @@
 module Anthropic
   module Models
     class URLImageSource < Anthropic::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(Anthropic::URLImageSource, Anthropic::Internal::AnyHash)
+        end
 
       sig { returns(Symbol) }
       attr_accessor :type

@@ -3,7 +3,13 @@
 module Anthropic
   module Models
     class WebSearchToolResultBlock < Anthropic::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(
+            Anthropic::WebSearchToolResultBlock,
+            Anthropic::Internal::AnyHash
+          )
+        end
 
       sig do
         returns(

@@ -3,7 +3,10 @@
 module Anthropic
   module Models
     class RawMessageDeltaEvent < Anthropic::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(Anthropic::RawMessageDeltaEvent, Anthropic::Internal::AnyHash)
+        end
 
       sig { returns(Anthropic::RawMessageDeltaEvent::Delta) }
       attr_reader :delta
@@ -78,7 +81,12 @@ module Anthropic
 
       class Delta < Anthropic::Internal::Type::BaseModel
         OrHash =
-          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+          T.type_alias do
+            T.any(
+              Anthropic::RawMessageDeltaEvent::Delta,
+              Anthropic::Internal::AnyHash
+            )
+          end
 
         sig { returns(T.nilable(Anthropic::StopReason::TaggedSymbol)) }
         attr_accessor :stop_reason

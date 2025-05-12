@@ -6,6 +6,7 @@ module Anthropic
       # @api private
       module Union
         include Anthropic::Internal::Type::Converter
+        include Anthropic::Internal::Util::SorbetRuntimeSupport
 
         # @api private
         #

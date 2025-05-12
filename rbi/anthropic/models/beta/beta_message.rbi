@@ -7,7 +7,9 @@ module Anthropic
     module Beta
       class BetaMessage < Anthropic::Internal::Type::BaseModel
         OrHash =
-          T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+          T.type_alias do
+            T.any(Anthropic::Beta::BetaMessage, Anthropic::Internal::AnyHash)
+          end
 
         # Unique object identifier.
         #

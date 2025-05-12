@@ -9,7 +9,12 @@ module Anthropic
           include Anthropic::Internal::Type::RequestParameters
 
           OrHash =
-            T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::Messages::BatchCancelParams,
+                Anthropic::Internal::AnyHash
+              )
+            end
 
           # Optional header to specify the beta version(s) you want to use.
           sig do

@@ -7,7 +7,10 @@ module Anthropic
   # When making a request, you can pass an actual {RequestOptions} instance, or
   # simply pass a Hash with symbol keys matching the attributes on this class.
   class RequestOptions < Anthropic::Internal::Type::BaseModel
-    OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+    OrHash =
+      T.type_alias do
+        T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash)
+      end
 
     # @api private
     sig { params(opts: Anthropic::RequestOptions::OrHash).void }

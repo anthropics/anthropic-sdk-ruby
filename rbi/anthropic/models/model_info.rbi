@@ -3,7 +3,10 @@
 module Anthropic
   module Models
     class ModelInfo < Anthropic::Internal::Type::BaseModel
-      OrHash = T.type_alias { T.any(T.self_type, Anthropic::Internal::AnyHash) }
+      OrHash =
+        T.type_alias do
+          T.any(Anthropic::ModelInfo, Anthropic::Internal::AnyHash)
+        end
 
       # Unique model identifier.
       sig { returns(String) }
