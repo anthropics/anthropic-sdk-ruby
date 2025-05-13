@@ -191,7 +191,7 @@ module Anthropic
           (client_options[:region] = aws_region) unless aws_region.nil?
 
           bedrock_client = Aws::BedrockRuntime::Client.new(client_options)
-          [bedrock_client.config.region, bedrock_client.config.credentials]
+          [bedrock_client.config.region, bedrock_client.config.credentials.credentials]
         end
 
         # @private
