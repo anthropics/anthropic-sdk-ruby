@@ -1,6 +1,6 @@
 # Anthropic Ruby API library
 
-The Anthropic Ruby library provides convenient access to the Anthropic REST API from any Ruby 3.2.0+ application.
+The Anthropic Ruby library provides convenient access to the Anthropic REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/anthropics/anthropic-sdk-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
 
 ## Documentation
 
@@ -26,6 +26,12 @@ gem "anthropic-sdk-beta", "~> 0.1.0.pre.beta.6"
 
 <!-- x-release-please-end -->
 
+## Feedback
+
+We're looking for as much feedback as possible while the SDK is in Beta. If you have recommendations, notice bugs, find things confusing, or anything else, create a github issue. Don't be shy -- we're very open to hearing any thoughts and musings you have!
+
+Feel free to make an issue for more substantial issues. For smaller issues or stream-of-thought, you can use the [pinned issue here](https://github.com/anthropics/anthropic-sdk-ruby/issues/85).
+
 ## Usage
 
 ```ruby
@@ -45,24 +51,20 @@ message = anthropic.messages.create(
 puts(message.content)
 ```
 
-### Feedback
+### Streaming
 
-We're looking for as much feedback as possible while the SDK is in Beta. If you have recommendations, notice bugs, find things confusing, or anything else, create a github issue. Don't be shy -- we're very open to hearing any thoughts and musings you have!
-
-Feel free to make an issue for more substantial issues. For smaller issues or stream-of-thought, you can use the [pinned issue here](https://github.com/anthropics/anthropic-sdk-ruby/issues/85).
-
-## Sorbet
-
-This library is written with [Sorbet type definitions](https://sorbet.org/docs/rbi). However, there is no runtime dependency on the `sorbet-runtime`.
-
-When using sorbet, it is recommended to use model classes as below. This provides stronger type checking and tooling integration.
+We provide support for streaming responses using Server-Sent Events (SSE).
 
 ```ruby
-anthropic.messages.create(
+stream = anthropic.messages.stream_raw(
   max_tokens: 1024,
-  messages: [Anthropic::MessageParam.new(role: "user", content: "Hello, Claude")],
+  messages: [{role: "user", content: "Hello, Claude"}],
   model: :"claude-3-7-sonnet-latest"
 )
+
+stream.each do |message|
+  puts(message.type)
+end
 ```
 
 ### Pagination
@@ -84,25 +86,18 @@ page.auto_paging_each do |batch|
 end
 ```
 
-### Streaming
-
-We provide support for streaming responses using Server-Sent Events (SSE).
+Alternatively, you can use the `#next_page?` and `#next_page` methods for more granular control working with pages.
 
 **coming soon**: `anthropic.messages.stream` will have [Python SDK](https://github.com/anthropics/anthropic-sdk-python?tab=readme-ov-file#streaming-helpers) style streaming response helpers.
 
 ```ruby
-stream = anthropic.messages.stream_raw(
-  max_tokens: 1024,
-  messages: [{role: "user", content: "Hello, Claude"}],
-  model: :"claude-3-7-sonnet-latest"
-)
-
-stream.each do |message|
-  puts(message.type)
+if page.next_page?
+  new_page = page.next_page
+  puts(new_page.data[0].id)
 end
 ```
 
-### Errors
+### Handling errors
 
 When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `Anthropic::Errors::APIError` will be thrown:
 
@@ -113,8 +108,14 @@ begin
     messages: [{role: "user", content: "Hello, Claude"}],
     model: :"claude-3-7-sonnet-latest"
   )
-rescue Anthropic::Errors::APIError => e
-  puts(e.status) # 400
+rescue Anthropic::Errors::APIConnectionError => e
+  puts("The server could not be reached")
+  puts(e.cause)  # an underlying Exception, likely raised within `net/http`
+rescue Anthropic::Errors::RateLimitError => e
+  puts("A 429 status code was received; we should back off a bit.")
+rescue Anthropic::Errors::APIStatusError => e
+  puts("Another non-200-range status code was received")
+  puts(e.status)
 end
 ```
 
@@ -159,11 +160,7 @@ anthropic.messages.create(
 
 ### Timeouts
 
-By default, requests will time out after 600 seconds.
-
-Timeouts are applied separately to the initial connection and the overall request time, so in some cases a request could wait 2\*timeout seconds before it fails.
-
-You can use the `timeout` option to configure or disable this:
+By default, requests will time out after 600 seconds. You can use the timeout option to configure or disable this:
 
 ```ruby
 # Configure the default for all requests:
@@ -180,33 +177,9 @@ anthropic.messages.create(
 )
 ```
 
-## Model DSL
+On timeout, `Anthropic::Errors::APITimeoutError` is raised.
 
-This library uses a simple DSL to represent request parameters and response shapes in `lib/anthropic/models`.
-
-With the right [editor plugins](https://shopify.github.io/ruby-lsp), you can ctrl-click on elements of the DSL to navigate around and explore the library.
-
-In all places where a `BaseModel` type is specified, vanilla Ruby `Hash` can also be used. For example, the following are interchangeable as arguments:
-
-```ruby
-# This has tooling readability, for auto-completion, static analysis, and goto definition with supported language services
-params = Anthropic::Models::MessageCreateParams.new(
-  max_tokens: 1024,
-  messages: [Anthropic::MessageParam.new(role: "user", content: "Hello, Claude")],
-  model: :"claude-3-7-sonnet-latest"
-)
-
-# This also works
-params = {
-  max_tokens: 1024,
-  messages: [{role: "user", content: "Hello, Claude"}],
-  model: :"claude-3-7-sonnet-latest"
-}
-```
-
-## Editor support
-
-A combination of [Shopify LSP](https://shopify.github.io/ruby-lsp) and [Solargraph](https://solargraph.org/) is recommended for non-[Sorbet](https://sorbet.org) users. The former is especially good at go to definition, while the latter has much better auto-completion support.
+Note that requests that time out are retried by default.
 
 ## AWS Bedrock
 
@@ -268,15 +241,49 @@ For more examples see [`examples/vertex`](examples/vertex).
 
 ## Advanced concepts
 
-### Making custom/undocumented requests
+### BaseModel
+
+All parameter and response objects inherit from `Anthropic::Internal::Type::BaseModel`, which provides several conveniences, including:
+
+1. All fields, including unknown ones, are accessible with `obj[:prop]` syntax, and can be destructured with `obj => {prop: prop}` or pattern-matching syntax.
+
+2. Structural equivalence for equality; if two API calls return the same values, comparing the responses with == will return true.
+
+3. Both instances and the classes themselves can be pretty-printed.
+
+4. Helpers such as `#to_h`, `#deep_to_h`, `#to_json`, and `#to_yaml`.
+
+### Making custom or undocumented requests
+
+#### Undocumented properties
+
+You can send undocumented parameters to any endpoint, and read undocumented response properties, like so:
+
+Note: the `extra_` parameters of the same name overrides the documented parameters.
+
+```ruby
+message =
+  anthropic.messages.create(
+    max_tokens: 1024,
+    messages: [{role: "user", content: "Hello, Claude"}],
+    model: :"claude-3-7-sonnet-latest",
+    request_options: {
+      extra_query: {my_query_parameter: value},
+      extra_body: {my_body_parameter: value},
+      extra_headers: {"my-header": value}
+    }
+  )
+
+puts(message[:my_undocumented_property])
+```
 
 #### Undocumented request params
 
-If you want to explicitly send an extra param, you can do so with the `extra_query`, `extra_body`, and `extra_headers` under the `request_options:` parameter when making a requests as seen in examples above.
+If you want to explicitly send an extra param, you can do so with the `extra_query`, `extra_body`, and `extra_headers` under the `request_options:` parameter when making a request as seen in examples above.
 
 #### Undocumented endpoints
 
-To make requests to undocumented endpoints, you can make requests using `client.request`. Options on the client will be respected (such as retries) when making this request.
+To make requests to undocumented endpoints while retaining the benefit of auth, retries, and so on, you can make requests using `client.request`, like so:
 
 ```ruby
 response = client.request(
@@ -284,46 +291,77 @@ response = client.request(
   path: '/undocumented/endpoint',
   query: {"dog": "woof"},
   headers: {"useful-header": "interesting-value"},
-  body: {"he": "llo"},
+  body: {"hello": "world"}
 )
 ```
 
 ### Concurrency & connection pooling
 
-The `Anthropic::Client` instances are thread-safe, and should be re-used across multiple threads. By default, each `Client` have their own HTTP connection pool, with a maximum number of connections equal to thread count.
+The `Anthropic::Client` instances are threadsafe, but only are fork-safe when there are no in-flight HTTP requests.
 
-When the maximum number of connections has been checked out from the connection pool, the `Client` will wait for an in use connection to become available. The queue time for this mechanism is accounted for by the per-request timeout.
+Each instance of `Anthropic::Client` has its own HTTP connection pool with a default size of 99. As such, we recommend instantiating the client once per application in most settings.
+
+When all available connections from the pool are checked out, requests wait for a new connection to become available, with queue time counting towards the request timeout.
 
 Unless otherwise specified, other classes in the SDK do not have locks protecting their underlying data structure.
 
-Currently, `Anthropic::Client` instances are only fork-safe if there are no in-flight HTTP requests.
+## Sorbet
 
-### Sorbet
+This library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitions, and has no dependency on sorbet-runtime.
 
-#### Enums
-
-Sorbet's typed enums require sub-classing of the [`T::Enum` class](https://sorbet.org/docs/tenum) from the `sorbet-runtime` gem.
-
-Since this library does not depend on `sorbet-runtime`, it uses a [`T.all` intersection type](https://sorbet.org/docs/intersection-types) with a ruby primitive type to construct a "tagged alias" instead.
+You can provide typesafe request parameters like so:
 
 ```ruby
-module Anthropic::StopReason
-  # This alias aids language service driven navigation.
-  TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::StopReason) }
-end
+anthropic.messages.create(
+  max_tokens: 1024,
+  messages: [Anthropic::MessageParam.new(role: "user", content: "Hello, Claude")],
+  model: :"claude-3-7-sonnet-latest"
+)
 ```
 
-#### Argument passing trick
-
-It is possible to pass a compatible model / parameter class to a method that expects keyword arguments by using the `**` splat operator.
+Or, equivalently:
 
 ```ruby
-params = Anthropic::Models::MessageCreateParams.new(
+# Hashes work, but are not typesafe:
+anthropic.messages.create(
+  max_tokens: 1024,
+  messages: [{role: "user", content: "Hello, Claude"}],
+  model: :"claude-3-7-sonnet-latest"
+)
+
+# You can also splat a full Params class:
+params = Anthropic::MessageCreateParams.new(
   max_tokens: 1024,
   messages: [Anthropic::MessageParam.new(role: "user", content: "Hello, Claude")],
   model: :"claude-3-7-sonnet-latest"
 )
 anthropic.messages.create(**params)
+```
+
+### Enums
+
+Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
+
+```ruby
+# :"image/jpeg"
+puts(Anthropic::Base64ImageSource::MediaType::IMAGE_JPEG)
+
+# Revealed type: `T.all(Anthropic::Base64ImageSource::MediaType, Symbol)`
+T.reveal_type(Anthropic::Base64ImageSource::MediaType::IMAGE_JPEG)
+```
+
+Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
+
+```ruby
+Anthropic::Base64ImageSource.new(
+  media_type: Anthropic::Base64ImageSource::MediaType::IMAGE_JPEG,
+  # …
+)
+
+Anthropic::Base64ImageSource.new(
+  media_type: :"image/jpeg",
+  # …
+)
 ```
 
 ## Versioning
