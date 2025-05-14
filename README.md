@@ -55,6 +55,8 @@ puts(message.content)
 
 We provide support for streaming responses using Server-Sent Events (SSE).
 
+**coming soon**: `anthropic.messages.stream` will have [Python SDK](https://github.com/anthropics/anthropic-sdk-python?tab=readme-ov-file#streaming-helpers) style streaming response helpers.
+
 ```ruby
 stream = anthropic.messages.stream_raw(
   max_tokens: 1024,
@@ -87,8 +89,6 @@ end
 ```
 
 Alternatively, you can use the `#next_page?` and `#next_page` methods for more granular control working with pages.
-
-**coming soon**: `anthropic.messages.stream` will have [Python SDK](https://github.com/anthropics/anthropic-sdk-python?tab=readme-ov-file#streaming-helpers) style streaming response helpers.
 
 ```ruby
 if page.next_page?
