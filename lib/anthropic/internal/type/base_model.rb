@@ -391,6 +391,13 @@ module Anthropic
         # @param keys [Array<Symbol>, nil]
         #
         # @return [Hash{Symbol=>Object}]
+        #
+        # @example
+        #   # `api_error_object` is a `Anthropic::APIErrorObject`
+        #   api_error_object => {
+        #     message: message,
+        #     type: type
+        #   }
         def deconstruct_keys(keys)
           (keys || self.class.known_fields.keys)
             .filter_map do |k|
