@@ -76,10 +76,10 @@ module Anthropic
       api_key: ENV["ANTHROPIC_API_KEY"],
       auth_token: ENV["ANTHROPIC_AUTH_TOKEN"],
       base_url: ENV["ANTHROPIC_BASE_URL"],
-      max_retries: Anthropic::Client::DEFAULT_MAX_RETRIES,
-      timeout: Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS,
-      initial_retry_delay: Anthropic::Client::DEFAULT_INITIAL_RETRY_DELAY,
-      max_retry_delay: Anthropic::Client::DEFAULT_MAX_RETRY_DELAY
+      max_retries: self.class::DEFAULT_MAX_RETRIES,
+      timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
+      initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
+      max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY
     )
       base_url ||= "https://api.anthropic.com"
 
