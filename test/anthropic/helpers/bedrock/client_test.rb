@@ -17,7 +17,7 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
         options: nil
       }
 
-    client = Anthropic::Bedrock::Client.new(
+    client = Anthropic::BedrockClient.new(
       aws_region: "us-east-1",
       aws_access_key: "test",
       aws_secret_key: "test"
@@ -29,7 +29,7 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
         method: :post,
         path: "model/us.anthropic.claude-3-5-haiku-20241022-v1%3A0/invoke",
         body: {
-          anthropic_version: Anthropic::Bedrock::Client::DEFAULT_VERSION,
+          anthropic_version: Anthropic::BedrockClient::DEFAULT_VERSION,
           max_tokens: 1024,
           messages: [{role: "user", content: "Hello, Claude"}]
         },
