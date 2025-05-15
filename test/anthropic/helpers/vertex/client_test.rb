@@ -20,7 +20,7 @@ class Anthropic::Test::VertexClientTest < Minitest::Test
 
     project = "stock-data-1111111"
     region = "us-east5"
-    client = Anthropic::Vertex::Client.new(region: region, project_id: project)
+    client = Anthropic::VertexClient.new(region: region, project_id: project)
     request_components = client.send(:fit_req_to_vertex_specs!, request_components)
 
     assert_equal(
@@ -28,7 +28,7 @@ class Anthropic::Test::VertexClientTest < Minitest::Test
         method: :post,
         path: "projects/#{project}/locations/#{region}/publishers/anthropic/models/#{model}:rawPredict",
         body: {
-          anthropic_version: Anthropic::Vertex::Client::DEFAULT_VERSION,
+          anthropic_version: Anthropic::VertexClient::DEFAULT_VERSION,
           max_tokens: 1024,
           messages: [{role: "user", content: "Hello, Claude"}]
         },
@@ -75,7 +75,7 @@ class Anthropic::Test::VertexClientTest < Minitest::Test
 
     project = "stock-data-1111111"
     region = "us-east5"
-    client = Anthropic::Vertex::Client.new(region: region, project_id: project)
+    client = Anthropic::VertexClient.new(region: region, project_id: project)
     request_components = client.send(:fit_req_to_vertex_specs!, request_components)
 
     assert_equal(
@@ -83,7 +83,7 @@ class Anthropic::Test::VertexClientTest < Minitest::Test
         method: :post,
         path: "projects/#{project}/locations/#{region}/publishers/anthropic/models/#{model}:rawPredict",
         body: {
-          anthropic_version: Anthropic::Vertex::Client::DEFAULT_VERSION,
+          anthropic_version: Anthropic::VertexClient::DEFAULT_VERSION,
           max_tokens: 1024,
           messages: [{role: "user", content: "Save a picture of a cat to my desktop."}],
           tools: tools
