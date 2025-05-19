@@ -15,7 +15,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "anthropic-sdk-beta", "~> 0.1.0.pre.beta.7"
+gem "anthropic-sdk-beta", "~> 0.1.0.pre.beta.8"
 ```
 
 <!-- x-release-please-end -->
