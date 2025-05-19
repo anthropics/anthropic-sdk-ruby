@@ -259,7 +259,9 @@ All parameter and response objects inherit from `Anthropic::Internal::Type::Base
 
 You can send undocumented parameters to any endpoint, and read undocumented response properties, like so:
 
-Note: the `extra_` parameters of the same name overrides the documented parameters.
+> [!WARNING]
+>
+> The `extra_` parameters of the same name overrides the documented parameters. For security reasons, ensure these methods are only used with trusted input data.
 
 ```ruby
 message =
