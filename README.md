@@ -21,7 +21,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "anthropic-sdk-beta", "~> 0.1.0.pre.beta.7"
+gem "anthropic-sdk-beta", "~> 0.1.0.pre.beta.8"
 ```
 
 <!-- x-release-please-end -->
@@ -259,7 +259,9 @@ All parameter and response objects inherit from `Anthropic::Internal::Type::Base
 
 You can send undocumented parameters to any endpoint, and read undocumented response properties, like so:
 
-Note: the `extra_` parameters of the same name overrides the documented parameters.
+> [!WARNING]
+>
+> The `extra_` parameters of the same name overrides the documented parameters. For security reasons, ensure these methods are only used with trusted input data.
 
 ```ruby
 message =

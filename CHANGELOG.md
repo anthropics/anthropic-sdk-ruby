@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.8 (2025-05-19)
+
+Full Changelog: [v0.1.0-beta.7...v0.1.0-beta.8](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.1.0-beta.7...v0.1.0-beta.8)
+
+### Chores
+
+* **internal:** version bump ([8d8501b](https://github.com/anthropics/anthropic-sdk-ruby/commit/8d8501bc3b2f24c3519574c3f04d72720c599f15))
+
 ## 0.1.0-beta.7 (2025-05-15)
 
 Full Changelog: [v0.1.0-beta.6...v0.1.0-beta.7](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.1.0-beta.6...v0.1.0-beta.7)
