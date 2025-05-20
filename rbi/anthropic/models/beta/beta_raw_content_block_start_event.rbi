@@ -16,14 +16,7 @@ module Anthropic
 
         sig do
           returns(
-            T.any(
-              Anthropic::Beta::BetaTextBlock,
-              Anthropic::Beta::BetaToolUseBlock,
-              Anthropic::Beta::BetaServerToolUseBlock,
-              Anthropic::Beta::BetaWebSearchToolResultBlock,
-              Anthropic::Beta::BetaThinkingBlock,
-              Anthropic::Beta::BetaRedactedThinkingBlock
-            )
+            Anthropic::Beta::BetaRawContentBlockStartEvent::ContentBlock::Variants
           )
         end
         attr_accessor :content_block
@@ -56,14 +49,7 @@ module Anthropic
           override.returns(
             {
               content_block:
-                T.any(
-                  Anthropic::Beta::BetaTextBlock,
-                  Anthropic::Beta::BetaToolUseBlock,
-                  Anthropic::Beta::BetaServerToolUseBlock,
-                  Anthropic::Beta::BetaWebSearchToolResultBlock,
-                  Anthropic::Beta::BetaThinkingBlock,
-                  Anthropic::Beta::BetaRedactedThinkingBlock
-                ),
+                Anthropic::Beta::BetaRawContentBlockStartEvent::ContentBlock::Variants,
               index: Integer,
               type: Symbol
             }

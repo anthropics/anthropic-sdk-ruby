@@ -12,16 +12,7 @@ module Anthropic
         end
 
       sig do
-        returns(
-          T.any(
-            Anthropic::TextBlock,
-            Anthropic::ToolUseBlock,
-            Anthropic::ServerToolUseBlock,
-            Anthropic::WebSearchToolResultBlock,
-            Anthropic::ThinkingBlock,
-            Anthropic::RedactedThinkingBlock
-          )
-        )
+        returns(Anthropic::RawContentBlockStartEvent::ContentBlock::Variants)
       end
       attr_accessor :content_block
 
@@ -53,14 +44,7 @@ module Anthropic
         override.returns(
           {
             content_block:
-              T.any(
-                Anthropic::TextBlock,
-                Anthropic::ToolUseBlock,
-                Anthropic::ServerToolUseBlock,
-                Anthropic::WebSearchToolResultBlock,
-                Anthropic::ThinkingBlock,
-                Anthropic::RedactedThinkingBlock
-              ),
+              Anthropic::RawContentBlockStartEvent::ContentBlock::Variants,
             index: Integer,
             type: Symbol
           }

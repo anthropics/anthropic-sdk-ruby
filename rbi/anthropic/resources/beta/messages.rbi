@@ -20,14 +20,10 @@ module Anthropic
           params(
             max_tokens: Integer,
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
-            model: T.any(Anthropic::Model::OrSymbol, String),
+            model: Anthropic::Model::Variants,
             metadata: Anthropic::Beta::BetaMetadata::OrHash,
             stop_sequences: T::Array[String],
-            system_:
-              T.any(
-                String,
-                T::Array[Anthropic::Beta::BetaTextBlockParam::OrHash]
-              ),
+            system_: Anthropic::Beta::MessageCreateParams::System::Variants,
             temperature: Float,
             thinking:
               T.any(
@@ -56,7 +52,7 @@ module Anthropic
               ],
             top_k: Integer,
             top_p: Float,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[Anthropic::AnthropicBeta::Variants],
             stream: T.noreturn,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaMessage)
@@ -313,14 +309,10 @@ module Anthropic
           params(
             max_tokens: Integer,
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
-            model: T.any(Anthropic::Model::OrSymbol, String),
+            model: Anthropic::Model::Variants,
             metadata: Anthropic::Beta::BetaMetadata::OrHash,
             stop_sequences: T::Array[String],
-            system_:
-              T.any(
-                String,
-                T::Array[Anthropic::Beta::BetaTextBlockParam::OrHash]
-              ),
+            system_: Anthropic::Beta::MessageCreateParams::System::Variants,
             temperature: Float,
             thinking:
               T.any(
@@ -349,19 +341,12 @@ module Anthropic
               ],
             top_k: Integer,
             top_p: Float,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[Anthropic::AnthropicBeta::Variants],
             stream: T.noreturn,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(
             Anthropic::Internal::Stream[
-              T.any(
-                Anthropic::Beta::BetaRawMessageStartEvent,
-                Anthropic::Beta::BetaRawMessageDeltaEvent,
-                Anthropic::Beta::BetaRawMessageStopEvent,
-                Anthropic::Beta::BetaRawContentBlockStartEvent,
-                Anthropic::Beta::BetaRawContentBlockDeltaEvent,
-                Anthropic::Beta::BetaRawContentBlockStopEvent
-              )
+              Anthropic::Beta::BetaRawMessageStreamEvent::Variants
             ]
           )
         end
@@ -614,12 +599,9 @@ module Anthropic
         sig do
           params(
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
-            model: T.any(Anthropic::Model::OrSymbol, String),
+            model: Anthropic::Model::Variants,
             system_:
-              T.any(
-                String,
-                T::Array[Anthropic::Beta::BetaTextBlockParam::OrHash]
-              ),
+              Anthropic::Beta::MessageCountTokensParams::System::Variants,
             thinking:
               T.any(
                 Anthropic::Beta::BetaThinkingConfigEnabled::OrHash,
@@ -645,7 +627,7 @@ module Anthropic
                   Anthropic::Beta::BetaWebSearchTool20250305::OrHash
                 )
               ],
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[Anthropic::AnthropicBeta::Variants],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaMessageTokensCount)
         end

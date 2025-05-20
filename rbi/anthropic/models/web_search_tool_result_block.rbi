@@ -11,14 +11,7 @@ module Anthropic
           )
         end
 
-      sig do
-        returns(
-          T.any(
-            Anthropic::WebSearchToolResultError,
-            T::Array[Anthropic::WebSearchResultBlock]
-          )
-        )
-      end
+      sig { returns(Anthropic::WebSearchToolResultBlockContent::Variants) }
       attr_accessor :content
 
       sig { returns(String) }
@@ -44,11 +37,7 @@ module Anthropic
       sig do
         override.returns(
           {
-            content:
-              T.any(
-                Anthropic::WebSearchToolResultError,
-                T::Array[Anthropic::WebSearchResultBlock]
-              ),
+            content: Anthropic::WebSearchToolResultBlockContent::Variants,
             tool_use_id: String,
             type: Symbol
           }

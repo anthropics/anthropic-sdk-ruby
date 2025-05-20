@@ -227,7 +227,7 @@ module Anthropic
             # The model that will complete your prompt.\n\nSee
             # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
             # details and options.
-            sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
+            sig { returns(Anthropic::Model::Variants) }
             attr_accessor :model
 
             # An object describing metadata about the request.
@@ -269,7 +269,9 @@ module Anthropic
             # [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
             sig do
               returns(
-                T.nilable(T.any(String, T::Array[Anthropic::TextBlockParam]))
+                T.nilable(
+                  Anthropic::Messages::BatchCreateParams::Request::Params::System::Variants
+                )
               )
             end
             attr_reader :system_
@@ -277,7 +279,7 @@ module Anthropic
             sig do
               params(
                 system_:
-                  T.any(String, T::Array[Anthropic::TextBlockParam::OrHash])
+                  Anthropic::Messages::BatchCreateParams::Request::Params::System::Variants
               ).void
             end
             attr_writer :system_
@@ -493,12 +495,12 @@ module Anthropic
               params(
                 max_tokens: Integer,
                 messages: T::Array[Anthropic::MessageParam::OrHash],
-                model: T.any(Anthropic::Model::OrSymbol, String),
+                model: Anthropic::Model::Variants,
                 metadata: Anthropic::Metadata::OrHash,
                 stop_sequences: T::Array[String],
                 stream: T::Boolean,
                 system_:
-                  T.any(String, T::Array[Anthropic::TextBlockParam::OrHash]),
+                  Anthropic::Messages::BatchCreateParams::Request::Params::System::Variants,
                 temperature: Float,
                 thinking:
                   T.any(
@@ -768,11 +770,12 @@ module Anthropic
                 {
                   max_tokens: Integer,
                   messages: T::Array[Anthropic::MessageParam],
-                  model: T.any(Anthropic::Model::OrSymbol, String),
+                  model: Anthropic::Model::Variants,
                   metadata: Anthropic::Metadata,
                   stop_sequences: T::Array[String],
                   stream: T::Boolean,
-                  system_: T.any(String, T::Array[Anthropic::TextBlockParam]),
+                  system_:
+                    Anthropic::Messages::BatchCreateParams::Request::Params::System::Variants,
                   temperature: Float,
                   thinking:
                     T.any(

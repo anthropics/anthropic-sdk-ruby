@@ -26,14 +26,7 @@ module Anthropic
           # processing failed, or the reason why processing was not attempted, such as
           # cancellation or expiration.
           sig do
-            returns(
-              T.any(
-                Anthropic::Beta::Messages::BetaMessageBatchSucceededResult,
-                Anthropic::Beta::Messages::BetaMessageBatchErroredResult,
-                Anthropic::Beta::Messages::BetaMessageBatchCanceledResult,
-                Anthropic::Beta::Messages::BetaMessageBatchExpiredResult
-              )
-            )
+            returns(Anthropic::Beta::Messages::BetaMessageBatchResult::Variants)
           end
           attr_accessor :result
 
@@ -71,12 +64,7 @@ module Anthropic
               {
                 custom_id: String,
                 result:
-                  T.any(
-                    Anthropic::Beta::Messages::BetaMessageBatchSucceededResult,
-                    Anthropic::Beta::Messages::BetaMessageBatchErroredResult,
-                    Anthropic::Beta::Messages::BetaMessageBatchCanceledResult,
-                    Anthropic::Beta::Messages::BetaMessageBatchExpiredResult
-                  )
+                  Anthropic::Beta::Messages::BetaMessageBatchResult::Variants
               }
             )
           end

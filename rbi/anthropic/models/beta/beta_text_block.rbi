@@ -18,16 +18,7 @@ module Anthropic
         # and content document results in `content_block_location`.
         sig do
           returns(
-            T.nilable(
-              T::Array[
-                T.any(
-                  Anthropic::Beta::BetaCitationCharLocation,
-                  Anthropic::Beta::BetaCitationPageLocation,
-                  Anthropic::Beta::BetaCitationContentBlockLocation,
-                  Anthropic::Beta::BetaCitationsWebSearchResultLocation
-                )
-              ]
-            )
+            T.nilable(T::Array[Anthropic::Beta::BetaTextCitation::Variants])
           )
         end
         attr_accessor :citations
@@ -72,14 +63,7 @@ module Anthropic
             {
               citations:
                 T.nilable(
-                  T::Array[
-                    T.any(
-                      Anthropic::Beta::BetaCitationCharLocation,
-                      Anthropic::Beta::BetaCitationPageLocation,
-                      Anthropic::Beta::BetaCitationContentBlockLocation,
-                      Anthropic::Beta::BetaCitationsWebSearchResultLocation
-                    )
-                  ]
+                  T::Array[Anthropic::Beta::BetaTextCitation::Variants]
                 ),
               text: String,
               type: Symbol

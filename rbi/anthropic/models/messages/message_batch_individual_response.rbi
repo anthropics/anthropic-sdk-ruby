@@ -26,16 +26,7 @@ module Anthropic
         # Contains a Message output if processing was successful, an error response if
         # processing failed, or the reason why processing was not attempted, such as
         # cancellation or expiration.
-        sig do
-          returns(
-            T.any(
-              Anthropic::Messages::MessageBatchSucceededResult,
-              Anthropic::Messages::MessageBatchErroredResult,
-              Anthropic::Messages::MessageBatchCanceledResult,
-              Anthropic::Messages::MessageBatchExpiredResult
-            )
-          )
-        end
+        sig { returns(Anthropic::Messages::MessageBatchResult::Variants) }
         attr_accessor :result
 
         # This is a single line in the response `.jsonl` file and does not represent the
@@ -71,13 +62,7 @@ module Anthropic
           override.returns(
             {
               custom_id: String,
-              result:
-                T.any(
-                  Anthropic::Messages::MessageBatchSucceededResult,
-                  Anthropic::Messages::MessageBatchErroredResult,
-                  Anthropic::Messages::MessageBatchCanceledResult,
-                  Anthropic::Messages::MessageBatchExpiredResult
-                )
+              result: Anthropic::Messages::MessageBatchResult::Variants
             }
           )
         end
