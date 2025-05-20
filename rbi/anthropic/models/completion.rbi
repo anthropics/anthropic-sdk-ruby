@@ -44,7 +44,7 @@ module Anthropic
         params(
           id: String,
           completion: String,
-          model: Anthropic::Model::Variants,
+          model: T.any(Anthropic::Model::OrSymbol, String),
           stop_reason: T.nilable(String),
           type: Symbol
         ).returns(T.attached_class)

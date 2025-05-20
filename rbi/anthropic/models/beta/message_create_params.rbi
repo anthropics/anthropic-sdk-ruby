@@ -119,7 +119,7 @@ module Anthropic
         # The model that will complete your prompt.\n\nSee
         # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
-        sig { returns(Anthropic::Model::Variants) }
+        sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
         attr_accessor :model
 
         # An object describing metadata about the request.
@@ -375,17 +375,27 @@ module Anthropic
         attr_writer :top_p
 
         # Optional header to specify the beta version(s) you want to use.
-        sig { returns(T.nilable(T::Array[Anthropic::AnthropicBeta::Variants])) }
+        sig do
+          returns(
+            T.nilable(
+              T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
+            )
+          )
+        end
         attr_reader :betas
 
-        sig { params(betas: T::Array[Anthropic::AnthropicBeta::Variants]).void }
+        sig do
+          params(
+            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
+          ).void
+        end
         attr_writer :betas
 
         sig do
           params(
             max_tokens: Integer,
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
-            model: Anthropic::Model::Variants,
+            model: T.any(Anthropic::Model::OrSymbol, String),
             metadata: Anthropic::Beta::BetaMetadata::OrHash,
             stop_sequences: T::Array[String],
             system_: Anthropic::Beta::MessageCreateParams::System::Variants,
@@ -417,7 +427,7 @@ module Anthropic
               ],
             top_k: Integer,
             top_p: Float,
-            betas: T::Array[Anthropic::AnthropicBeta::Variants],
+            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -662,7 +672,7 @@ module Anthropic
             {
               max_tokens: Integer,
               messages: T::Array[Anthropic::Beta::BetaMessageParam],
-              model: Anthropic::Model::Variants,
+              model: T.any(Anthropic::Model::OrSymbol, String),
               metadata: Anthropic::Beta::BetaMetadata,
               stop_sequences: T::Array[String],
               system_: Anthropic::Beta::MessageCreateParams::System::Variants,
@@ -694,7 +704,8 @@ module Anthropic
                 ],
               top_k: Integer,
               top_p: Float,
-              betas: T::Array[Anthropic::AnthropicBeta::Variants],
+              betas:
+                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               request_options: Anthropic::RequestOptions
             }
           )

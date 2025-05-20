@@ -25,6 +25,7 @@ class Anthropic::Test::SorbetRuntimeSupportTest < Minitest::Test
     err = Anthropic::Internal::Util::SorbetRuntimeSupport::MissingSorbetRuntimeError
 
     assert_raises(err) { Anthropic::Internal::AnyHash }
+    assert_raises(err) { Anthropic::Internal::FileInput }
     assert_raises(err) { Anthropic::Internal::Type::Converter::Input }
     assert_raises(err) { Anthropic::Internal::Type::Converter::CoerceState }
     assert_raises(err) { Anthropic::Internal::Type::Converter::DumpState }

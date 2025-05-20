@@ -121,7 +121,7 @@ module Anthropic
                 Anthropic::RedactedThinkingBlock::OrHash
               )
             ],
-          model: Anthropic::Model::Variants,
+          model: T.any(Anthropic::Model::OrSymbol, String),
           stop_reason: T.nilable(Anthropic::StopReason::OrSymbol),
           stop_sequence: T.nilable(String),
           usage: Anthropic::Usage::OrHash,

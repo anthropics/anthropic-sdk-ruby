@@ -17,14 +17,14 @@ module Anthropic
       sig do
         params(
           max_tokens_to_sample: Integer,
-          model: Anthropic::Model::Variants,
+          model: T.any(Anthropic::Model::OrSymbol, String),
           prompt: String,
           metadata: Anthropic::Metadata::OrHash,
           stop_sequences: T::Array[String],
           temperature: Float,
           top_k: Integer,
           top_p: Float,
-          betas: T::Array[Anthropic::AnthropicBeta::Variants],
+          betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
           stream: T.noreturn,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::Completion)
@@ -110,14 +110,14 @@ module Anthropic
       sig do
         params(
           max_tokens_to_sample: Integer,
-          model: Anthropic::Model::Variants,
+          model: T.any(Anthropic::Model::OrSymbol, String),
           prompt: String,
           metadata: Anthropic::Metadata::OrHash,
           stop_sequences: T::Array[String],
           temperature: Float,
           top_k: Integer,
           top_p: Float,
-          betas: T::Array[Anthropic::AnthropicBeta::Variants],
+          betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
           stream: T.noreturn,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::Internal::Stream[Anthropic::Completion])
