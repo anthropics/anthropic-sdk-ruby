@@ -108,7 +108,7 @@ module Anthropic
       # The model that will complete your prompt.\n\nSee
       # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       # details and options.
-      sig { returns(Anthropic::Model::Variants) }
+      sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
       attr_accessor :model
 
       # System prompt.
@@ -294,7 +294,7 @@ module Anthropic
       sig do
         params(
           messages: T::Array[Anthropic::MessageParam::OrHash],
-          model: Anthropic::Model::Variants,
+          model: T.any(Anthropic::Model::OrSymbol, String),
           system_: Anthropic::MessageCountTokensParams::System::Variants,
           thinking:
             T.any(
@@ -511,7 +511,7 @@ module Anthropic
         override.returns(
           {
             messages: T::Array[Anthropic::MessageParam],
-            model: Anthropic::Model::Variants,
+            model: T.any(Anthropic::Model::OrSymbol, String),
             system_: Anthropic::MessageCountTokensParams::System::Variants,
             thinking:
               T.any(

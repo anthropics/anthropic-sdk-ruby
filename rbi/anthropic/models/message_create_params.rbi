@@ -115,7 +115,7 @@ module Anthropic
       # The model that will complete your prompt.\n\nSee
       # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       # details and options.
-      sig { returns(Anthropic::Model::Variants) }
+      sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
       attr_accessor :model
 
       # An object describing metadata about the request.
@@ -362,7 +362,7 @@ module Anthropic
         params(
           max_tokens: Integer,
           messages: T::Array[Anthropic::MessageParam::OrHash],
-          model: Anthropic::Model::Variants,
+          model: T.any(Anthropic::Model::OrSymbol, String),
           metadata: Anthropic::Metadata::OrHash,
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
@@ -632,7 +632,7 @@ module Anthropic
           {
             max_tokens: Integer,
             messages: T::Array[Anthropic::MessageParam],
-            model: Anthropic::Model::Variants,
+            model: T.any(Anthropic::Model::OrSymbol, String),
             metadata: Anthropic::Metadata,
             stop_sequences: T::Array[String],
             system_: Anthropic::MessageCreateParams::System::Variants,

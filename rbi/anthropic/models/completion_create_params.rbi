@@ -21,7 +21,7 @@ module Anthropic
       # The model that will complete your prompt.\n\nSee
       # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       # details and options.
-      sig { returns(Anthropic::Model::Variants) }
+      sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
       attr_accessor :model
 
       # The prompt that you want Claude to complete.
@@ -101,23 +101,31 @@ module Anthropic
       attr_writer :top_p
 
       # Optional header to specify the beta version(s) you want to use.
-      sig { returns(T.nilable(T::Array[Anthropic::AnthropicBeta::Variants])) }
+      sig do
+        returns(
+          T.nilable(T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)])
+        )
+      end
       attr_reader :betas
 
-      sig { params(betas: T::Array[Anthropic::AnthropicBeta::Variants]).void }
+      sig do
+        params(
+          betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
+        ).void
+      end
       attr_writer :betas
 
       sig do
         params(
           max_tokens_to_sample: Integer,
-          model: Anthropic::Model::Variants,
+          model: T.any(Anthropic::Model::OrSymbol, String),
           prompt: String,
           metadata: Anthropic::Metadata::OrHash,
           stop_sequences: T::Array[String],
           temperature: Float,
           top_k: Integer,
           top_p: Float,
-          betas: T::Array[Anthropic::AnthropicBeta::Variants],
+          betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -190,14 +198,14 @@ module Anthropic
         override.returns(
           {
             max_tokens_to_sample: Integer,
-            model: Anthropic::Model::Variants,
+            model: T.any(Anthropic::Model::OrSymbol, String),
             prompt: String,
             metadata: Anthropic::Metadata,
             stop_sequences: T::Array[String],
             temperature: Float,
             top_k: Integer,
             top_p: Float,
-            betas: T::Array[Anthropic::AnthropicBeta::Variants],
+            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions
           }
         )

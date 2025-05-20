@@ -20,7 +20,7 @@ module Anthropic
           params(
             max_tokens: Integer,
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
-            model: Anthropic::Model::Variants,
+            model: T.any(Anthropic::Model::OrSymbol, String),
             metadata: Anthropic::Beta::BetaMetadata::OrHash,
             stop_sequences: T::Array[String],
             system_: Anthropic::Beta::MessageCreateParams::System::Variants,
@@ -52,7 +52,7 @@ module Anthropic
               ],
             top_k: Integer,
             top_p: Float,
-            betas: T::Array[Anthropic::AnthropicBeta::Variants],
+            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             stream: T.noreturn,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaMessage)
@@ -309,7 +309,7 @@ module Anthropic
           params(
             max_tokens: Integer,
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
-            model: Anthropic::Model::Variants,
+            model: T.any(Anthropic::Model::OrSymbol, String),
             metadata: Anthropic::Beta::BetaMetadata::OrHash,
             stop_sequences: T::Array[String],
             system_: Anthropic::Beta::MessageCreateParams::System::Variants,
@@ -341,7 +341,7 @@ module Anthropic
               ],
             top_k: Integer,
             top_p: Float,
-            betas: T::Array[Anthropic::AnthropicBeta::Variants],
+            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             stream: T.noreturn,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(
@@ -599,7 +599,7 @@ module Anthropic
         sig do
           params(
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
-            model: Anthropic::Model::Variants,
+            model: T.any(Anthropic::Model::OrSymbol, String),
             system_:
               Anthropic::Beta::MessageCountTokensParams::System::Variants,
             thinking:
@@ -627,7 +627,7 @@ module Anthropic
                   Anthropic::Beta::BetaWebSearchTool20250305::OrHash
                 )
               ],
-            betas: T::Array[Anthropic::AnthropicBeta::Variants],
+            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaMessageTokensCount)
         end
