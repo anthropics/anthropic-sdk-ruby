@@ -16,15 +16,25 @@ module Anthropic
           end
 
         # Optional header to specify the beta version(s) you want to use.
-        sig { returns(T.nilable(T::Array[Anthropic::AnthropicBeta::Variants])) }
+        sig do
+          returns(
+            T.nilable(
+              T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
+            )
+          )
+        end
         attr_reader :betas
 
-        sig { params(betas: T::Array[Anthropic::AnthropicBeta::Variants]).void }
+        sig do
+          params(
+            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
+          ).void
+        end
         attr_writer :betas
 
         sig do
           params(
-            betas: T::Array[Anthropic::AnthropicBeta::Variants],
+            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -38,7 +48,8 @@ module Anthropic
         sig do
           override.returns(
             {
-              betas: T::Array[Anthropic::AnthropicBeta::Variants],
+              betas:
+                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               request_options: Anthropic::RequestOptions
             }
           )

@@ -19,7 +19,7 @@ module Anthropic
         params(
           max_tokens: Integer,
           messages: T::Array[Anthropic::MessageParam::OrHash],
-          model: Anthropic::Model::Variants,
+          model: T.any(Anthropic::Model::OrSymbol, String),
           metadata: Anthropic::Metadata::OrHash,
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
@@ -301,7 +301,7 @@ module Anthropic
         params(
           max_tokens: Integer,
           messages: T::Array[Anthropic::MessageParam::OrHash],
-          model: Anthropic::Model::Variants,
+          model: T.any(Anthropic::Model::OrSymbol, String),
           metadata: Anthropic::Metadata::OrHash,
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
@@ -584,7 +584,7 @@ module Anthropic
       sig do
         params(
           messages: T::Array[Anthropic::MessageParam::OrHash],
-          model: Anthropic::Model::Variants,
+          model: T.any(Anthropic::Model::OrSymbol, String),
           system_: Anthropic::MessageCountTokensParams::System::Variants,
           thinking:
             T.any(
