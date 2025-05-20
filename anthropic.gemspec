@@ -3,12 +3,12 @@
 require_relative "lib/anthropic/version"
 
 Gem::Specification.new do |s|
-  s.name = "anthropic-sdk-beta"
+  s.name = "anthropic"
   s.version = Anthropic::VERSION
   s.summary = "Ruby library to access the Anthropic API"
   s.authors = ["Anthropic"]
   s.email = "support@anthropic.com"
-  s.homepage = "https://gemdocs.org/gems/anthropic-sdk-beta"
+  s.homepage = "https://gemdocs.org/gems/anthropic"
   s.metadata["homepage_uri"] = s.homepage
   s.metadata["source_code_uri"] = "https://github.com/anthropics/anthropic-sdk-ruby"
   s.metadata["rubygems_mfa_required"] = false.to_s

@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    anthropic-sdk-beta (0.1.0.pre.beta.8)
+    anthropic (0.1.0.pre.beta.8)
       connection_pool
 
 GEM
@@ -232,7 +232,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  anthropic-sdk-beta!
+  anthropic!
   async
   aws-sdk-bedrockruntime
   googleauth
