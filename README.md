@@ -10,8 +10,6 @@ The REST API documentation can be found on [docs.anthropic.com](https://docs.ant
 
 ## Installation
 
-ℹ️ The `anthropic-sdk-beta` gem name is temporary. [@alexrudall](https://github.com/alexrudall) will be transitioning the [anthropic gem name](https://github.com/alexrudall/anthropic) to this repository. Here's the timeline:
-
 - Early April, 2025: This library is released under the `anthropic-sdk-beta` gem name. We'll be gathering feedback from the community.
 
 - Late April/early May: Bump the version `1.0`, and transition the `anthropic` gem name to this repository.
@@ -28,7 +26,7 @@ gem "anthropic", "~> 0.1.0.pre.beta.8"
 
 ## Feedback
 
-We're looking for as much feedback as possible while the SDK is in Beta. If you have recommendations, notice bugs, find things confusing, or anything else, create a github issue. Don't be shy -- we're very open to hearing any thoughts and musings you have!
+If you have recommendations, notice bugs, find things confusing, or anything else, create a github issue. Don't be shy -- we're very open to hearing any thoughts and musings you have!
 
 Feel free to make an issue for more substantial issues. For smaller issues or stream-of-thought, you can use the [pinned issue here](https://github.com/anthropics/anthropic-sdk-ruby/issues/85).
 
