@@ -12,6 +12,7 @@ module Anthropic
       # Hash of items of a given type.
       class HashOf
         include Anthropic::Internal::Type::Converter
+        include Anthropic::Internal::Util::SorbetRuntimeSupport
 
         private_class_method :new
 
@@ -128,6 +129,13 @@ module Anthropic
           else
             super
           end
+        end
+
+        # @api private
+        #
+        # @return [Object]
+        def to_sorbet_type
+          T::Hash[Anthropic::Internal::Util::SorbetRuntimeSupport.to_sorbet_type(item_type)]
         end
 
         # @api private

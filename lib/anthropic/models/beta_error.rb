@@ -27,22 +27,6 @@ module Anthropic
 
       # @!method self.variants
       #   @return [Array(Anthropic::BetaInvalidRequestError, Anthropic::BetaAuthenticationError, Anthropic::BetaBillingError, Anthropic::BetaPermissionError, Anthropic::BetaNotFoundError, Anthropic::BetaRateLimitError, Anthropic::BetaGatewayTimeoutError, Anthropic::BetaAPIError, Anthropic::BetaOverloadedError)]
-
-      define_sorbet_constant!(:Variants) do
-        T.type_alias do
-          T.any(
-            Anthropic::BetaInvalidRequestError,
-            Anthropic::BetaAuthenticationError,
-            Anthropic::BetaBillingError,
-            Anthropic::BetaPermissionError,
-            Anthropic::BetaNotFoundError,
-            Anthropic::BetaRateLimitError,
-            Anthropic::BetaGatewayTimeoutError,
-            Anthropic::BetaAPIError,
-            Anthropic::BetaOverloadedError
-          )
-        end
-      end
     end
   end
 end
