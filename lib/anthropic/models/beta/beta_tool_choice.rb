@@ -24,17 +24,6 @@ module Anthropic
 
         # @!method self.variants
         #   @return [Array(Anthropic::Beta::BetaToolChoiceAuto, Anthropic::Beta::BetaToolChoiceAny, Anthropic::Beta::BetaToolChoiceTool, Anthropic::Beta::BetaToolChoiceNone)]
-
-        define_sorbet_constant!(:Variants) do
-          T.type_alias do
-            T.any(
-              Anthropic::Beta::BetaToolChoiceAuto,
-              Anthropic::Beta::BetaToolChoiceAny,
-              Anthropic::Beta::BetaToolChoiceTool,
-              Anthropic::Beta::BetaToolChoiceNone
-            )
-          end
-        end
       end
     end
 

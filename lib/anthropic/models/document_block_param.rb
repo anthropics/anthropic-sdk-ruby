@@ -63,17 +63,6 @@ module Anthropic
 
         # @!method self.variants
         #   @return [Array(Anthropic::Base64PDFSource, Anthropic::PlainTextSource, Anthropic::ContentBlockSource, Anthropic::URLPDFSource)]
-
-        define_sorbet_constant!(:Variants) do
-          T.type_alias do
-            T.any(
-              Anthropic::Base64PDFSource,
-              Anthropic::PlainTextSource,
-              Anthropic::ContentBlockSource,
-              Anthropic::URLPDFSource
-            )
-          end
-        end
       end
     end
   end

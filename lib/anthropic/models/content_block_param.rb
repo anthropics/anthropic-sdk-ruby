@@ -27,22 +27,6 @@ module Anthropic
 
       # @!method self.variants
       #   @return [Array(Anthropic::TextBlockParam, Anthropic::ImageBlockParam, Anthropic::ToolUseBlockParam, Anthropic::ServerToolUseBlockParam, Anthropic::WebSearchToolResultBlockParam, Anthropic::ToolResultBlockParam, Anthropic::DocumentBlockParam, Anthropic::ThinkingBlockParam, Anthropic::RedactedThinkingBlockParam)]
-
-      define_sorbet_constant!(:Variants) do
-        T.type_alias do
-          T.any(
-            Anthropic::TextBlockParam,
-            Anthropic::ImageBlockParam,
-            Anthropic::ToolUseBlockParam,
-            Anthropic::ServerToolUseBlockParam,
-            Anthropic::WebSearchToolResultBlockParam,
-            Anthropic::ToolResultBlockParam,
-            Anthropic::DocumentBlockParam,
-            Anthropic::ThinkingBlockParam,
-            Anthropic::RedactedThinkingBlockParam
-          )
-        end
-      end
     end
   end
 end

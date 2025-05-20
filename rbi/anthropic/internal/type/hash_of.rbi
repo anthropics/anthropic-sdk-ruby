@@ -8,6 +8,7 @@ module Anthropic
       # Hash of items of a given type.
       class HashOf
         include Anthropic::Internal::Type::Converter
+        include Anthropic::Internal::Util::SorbetRuntimeSupport
 
         abstract!
 
@@ -61,6 +62,11 @@ module Anthropic
             .returns(T.any(Anthropic::Internal::AnyHash, T.anything))
         end
         def dump(value, state:)
+        end
+
+        # @api private
+        sig { returns(T.anything) }
+        def to_sorbet_type
         end
 
         # @api private
