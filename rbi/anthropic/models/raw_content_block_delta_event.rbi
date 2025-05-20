@@ -11,17 +11,7 @@ module Anthropic
           )
         end
 
-      sig do
-        returns(
-          T.any(
-            Anthropic::TextDelta,
-            Anthropic::InputJSONDelta,
-            Anthropic::CitationsDelta,
-            Anthropic::ThinkingDelta,
-            Anthropic::SignatureDelta
-          )
-        )
-      end
+      sig { returns(Anthropic::RawContentBlockDelta::Variants) }
       attr_accessor :delta
 
       sig { returns(Integer) }
@@ -50,14 +40,7 @@ module Anthropic
       sig do
         override.returns(
           {
-            delta:
-              T.any(
-                Anthropic::TextDelta,
-                Anthropic::InputJSONDelta,
-                Anthropic::CitationsDelta,
-                Anthropic::ThinkingDelta,
-                Anthropic::SignatureDelta
-              ),
+            delta: Anthropic::RawContentBlockDelta::Variants,
             index: Integer,
             type: Symbol
           }

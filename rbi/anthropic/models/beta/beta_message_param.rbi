@@ -14,26 +14,7 @@ module Anthropic
             )
           end
 
-        sig do
-          returns(
-            T.any(
-              String,
-              T::Array[
-                T.any(
-                  Anthropic::Beta::BetaTextBlockParam,
-                  Anthropic::Beta::BetaImageBlockParam,
-                  Anthropic::Beta::BetaToolUseBlockParam,
-                  Anthropic::Beta::BetaServerToolUseBlockParam,
-                  Anthropic::Beta::BetaWebSearchToolResultBlockParam,
-                  Anthropic::Beta::BetaToolResultBlockParam,
-                  Anthropic::Beta::BetaBase64PDFBlock,
-                  Anthropic::Beta::BetaThinkingBlockParam,
-                  Anthropic::Beta::BetaRedactedThinkingBlockParam
-                )
-              ]
-            )
-          )
-        end
+        sig { returns(Anthropic::Beta::BetaMessageParam::Content::Variants) }
         attr_accessor :content
 
         sig { returns(Anthropic::Beta::BetaMessageParam::Role::OrSymbol) }
@@ -41,23 +22,7 @@ module Anthropic
 
         sig do
           params(
-            content:
-              T.any(
-                String,
-                T::Array[
-                  T.any(
-                    Anthropic::Beta::BetaTextBlockParam::OrHash,
-                    Anthropic::Beta::BetaImageBlockParam::OrHash,
-                    Anthropic::Beta::BetaToolUseBlockParam::OrHash,
-                    Anthropic::Beta::BetaServerToolUseBlockParam::OrHash,
-                    Anthropic::Beta::BetaWebSearchToolResultBlockParam::OrHash,
-                    Anthropic::Beta::BetaToolResultBlockParam::OrHash,
-                    Anthropic::Beta::BetaBase64PDFBlock::OrHash,
-                    Anthropic::Beta::BetaThinkingBlockParam::OrHash,
-                    Anthropic::Beta::BetaRedactedThinkingBlockParam::OrHash
-                  )
-                ]
-              ),
+            content: Anthropic::Beta::BetaMessageParam::Content::Variants,
             role: Anthropic::Beta::BetaMessageParam::Role::OrSymbol
           ).returns(T.attached_class)
         end
@@ -67,23 +32,7 @@ module Anthropic
         sig do
           override.returns(
             {
-              content:
-                T.any(
-                  String,
-                  T::Array[
-                    T.any(
-                      Anthropic::Beta::BetaTextBlockParam,
-                      Anthropic::Beta::BetaImageBlockParam,
-                      Anthropic::Beta::BetaToolUseBlockParam,
-                      Anthropic::Beta::BetaServerToolUseBlockParam,
-                      Anthropic::Beta::BetaWebSearchToolResultBlockParam,
-                      Anthropic::Beta::BetaToolResultBlockParam,
-                      Anthropic::Beta::BetaBase64PDFBlock,
-                      Anthropic::Beta::BetaThinkingBlockParam,
-                      Anthropic::Beta::BetaRedactedThinkingBlockParam
-                    )
-                  ]
-                ),
+              content: Anthropic::Beta::BetaMessageParam::Content::Variants,
               role: Anthropic::Beta::BetaMessageParam::Role::OrSymbol
             }
           )
@@ -98,19 +47,7 @@ module Anthropic
             T.type_alias do
               T.any(
                 String,
-                T::Array[
-                  T.any(
-                    Anthropic::Beta::BetaTextBlockParam,
-                    Anthropic::Beta::BetaImageBlockParam,
-                    Anthropic::Beta::BetaToolUseBlockParam,
-                    Anthropic::Beta::BetaServerToolUseBlockParam,
-                    Anthropic::Beta::BetaWebSearchToolResultBlockParam,
-                    Anthropic::Beta::BetaToolResultBlockParam,
-                    Anthropic::Beta::BetaBase64PDFBlock,
-                    Anthropic::Beta::BetaThinkingBlockParam,
-                    Anthropic::Beta::BetaRedactedThinkingBlockParam
-                  )
-                ]
+                T::Array[Anthropic::Beta::BetaContentBlockParam::Variants]
               )
             end
 

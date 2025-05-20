@@ -19,10 +19,10 @@ module Anthropic
         params(
           max_tokens: Integer,
           messages: T::Array[Anthropic::MessageParam::OrHash],
-          model: T.any(Anthropic::Model::OrSymbol, String),
+          model: Anthropic::Model::Variants,
           metadata: Anthropic::Metadata::OrHash,
           stop_sequences: T::Array[String],
-          system_: T.any(String, T::Array[Anthropic::TextBlockParam::OrHash]),
+          system_: Anthropic::MessageCreateParams::System::Variants,
           temperature: Float,
           thinking:
             T.any(
@@ -301,10 +301,10 @@ module Anthropic
         params(
           max_tokens: Integer,
           messages: T::Array[Anthropic::MessageParam::OrHash],
-          model: T.any(Anthropic::Model::OrSymbol, String),
+          model: Anthropic::Model::Variants,
           metadata: Anthropic::Metadata::OrHash,
           stop_sequences: T::Array[String],
-          system_: T.any(String, T::Array[Anthropic::TextBlockParam::OrHash]),
+          system_: Anthropic::MessageCreateParams::System::Variants,
           temperature: Float,
           thinking:
             T.any(
@@ -333,14 +333,7 @@ module Anthropic
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(
           Anthropic::Internal::Stream[
-            T.any(
-              Anthropic::RawMessageStartEvent,
-              Anthropic::RawMessageDeltaEvent,
-              Anthropic::RawMessageStopEvent,
-              Anthropic::RawContentBlockStartEvent,
-              Anthropic::RawContentBlockDeltaEvent,
-              Anthropic::RawContentBlockStopEvent
-            )
+            Anthropic::RawMessageStreamEvent::Variants
           ]
         )
       end
@@ -591,8 +584,8 @@ module Anthropic
       sig do
         params(
           messages: T::Array[Anthropic::MessageParam::OrHash],
-          model: T.any(Anthropic::Model::OrSymbol, String),
-          system_: T.any(String, T::Array[Anthropic::TextBlockParam::OrHash]),
+          model: Anthropic::Model::Variants,
+          system_: Anthropic::MessageCountTokensParams::System::Variants,
           thinking:
             T.any(
               Anthropic::ThinkingConfigEnabled::OrHash,

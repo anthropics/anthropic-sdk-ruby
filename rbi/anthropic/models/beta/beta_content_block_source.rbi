@@ -15,17 +15,7 @@ module Anthropic
           end
 
         sig do
-          returns(
-            T.any(
-              String,
-              T::Array[
-                T.any(
-                  Anthropic::Beta::BetaTextBlockParam,
-                  Anthropic::Beta::BetaImageBlockParam
-                )
-              ]
-            )
-          )
+          returns(Anthropic::Beta::BetaContentBlockSource::Content::Variants)
         end
         attr_accessor :content
 
@@ -34,16 +24,7 @@ module Anthropic
 
         sig do
           params(
-            content:
-              T.any(
-                String,
-                T::Array[
-                  T.any(
-                    Anthropic::Beta::BetaTextBlockParam::OrHash,
-                    Anthropic::Beta::BetaImageBlockParam::OrHash
-                  )
-                ]
-              ),
+            content: Anthropic::Beta::BetaContentBlockSource::Content::Variants,
             type: Symbol
           ).returns(T.attached_class)
         end
@@ -54,15 +35,7 @@ module Anthropic
           override.returns(
             {
               content:
-                T.any(
-                  String,
-                  T::Array[
-                    T.any(
-                      Anthropic::Beta::BetaTextBlockParam,
-                      Anthropic::Beta::BetaImageBlockParam
-                    )
-                  ]
-                ),
+                Anthropic::Beta::BetaContentBlockSource::Content::Variants,
               type: Symbol
             }
           )
@@ -78,10 +51,7 @@ module Anthropic
               T.any(
                 String,
                 T::Array[
-                  T.any(
-                    Anthropic::Beta::BetaTextBlockParam,
-                    Anthropic::Beta::BetaImageBlockParam
-                  )
+                  Anthropic::Beta::BetaContentBlockSourceContent::Variants
                 ]
               )
             end

@@ -14,16 +14,7 @@ module Anthropic
             )
           end
 
-        sig do
-          returns(
-            T.any(
-              Anthropic::Beta::BetaCitationCharLocation,
-              Anthropic::Beta::BetaCitationPageLocation,
-              Anthropic::Beta::BetaCitationContentBlockLocation,
-              Anthropic::Beta::BetaCitationsWebSearchResultLocation
-            )
-          )
-        end
+        sig { returns(Anthropic::Beta::BetaCitationsDelta::Citation::Variants) }
         attr_accessor :citation
 
         sig { returns(Symbol) }
@@ -47,13 +38,7 @@ module Anthropic
         sig do
           override.returns(
             {
-              citation:
-                T.any(
-                  Anthropic::Beta::BetaCitationCharLocation,
-                  Anthropic::Beta::BetaCitationPageLocation,
-                  Anthropic::Beta::BetaCitationContentBlockLocation,
-                  Anthropic::Beta::BetaCitationsWebSearchResultLocation
-                ),
+              citation: Anthropic::Beta::BetaCitationsDelta::Citation::Variants,
               type: Symbol
             }
           )

@@ -21,7 +21,7 @@ module Anthropic
       # The model that will complete your prompt.\n\nSee
       # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       # details and options.
-      sig { returns(T.any(Anthropic::Model::TaggedSymbol, String)) }
+      sig { returns(Anthropic::Model::Variants) }
       attr_accessor :model
 
       # The reason that we stopped.
@@ -44,7 +44,7 @@ module Anthropic
         params(
           id: String,
           completion: String,
-          model: T.any(Anthropic::Model::OrSymbol, String),
+          model: Anthropic::Model::Variants,
           stop_reason: T.nilable(String),
           type: Symbol
         ).returns(T.attached_class)
@@ -80,7 +80,7 @@ module Anthropic
           {
             id: String,
             completion: String,
-            model: T.any(Anthropic::Model::TaggedSymbol, String),
+            model: Anthropic::Model::Variants,
             stop_reason: T.nilable(String),
             type: Symbol
           }

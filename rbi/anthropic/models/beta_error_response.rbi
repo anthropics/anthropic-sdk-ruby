@@ -8,21 +8,7 @@ module Anthropic
           T.any(Anthropic::BetaErrorResponse, Anthropic::Internal::AnyHash)
         end
 
-      sig do
-        returns(
-          T.any(
-            Anthropic::BetaInvalidRequestError,
-            Anthropic::BetaAuthenticationError,
-            Anthropic::BetaBillingError,
-            Anthropic::BetaPermissionError,
-            Anthropic::BetaNotFoundError,
-            Anthropic::BetaRateLimitError,
-            Anthropic::BetaGatewayTimeoutError,
-            Anthropic::BetaAPIError,
-            Anthropic::BetaOverloadedError
-          )
-        )
-      end
+      sig { returns(Anthropic::BetaError::Variants) }
       attr_accessor :error
 
       sig { returns(Symbol) }
@@ -50,21 +36,7 @@ module Anthropic
 
       sig do
         override.returns(
-          {
-            error:
-              T.any(
-                Anthropic::BetaInvalidRequestError,
-                Anthropic::BetaAuthenticationError,
-                Anthropic::BetaBillingError,
-                Anthropic::BetaPermissionError,
-                Anthropic::BetaNotFoundError,
-                Anthropic::BetaRateLimitError,
-                Anthropic::BetaGatewayTimeoutError,
-                Anthropic::BetaAPIError,
-                Anthropic::BetaOverloadedError
-              ),
-            type: Symbol
-          }
+          { error: Anthropic::BetaError::Variants, type: Symbol }
         )
       end
       def to_hash

@@ -13,20 +13,7 @@ module Anthropic
       # The type of citation returned will depend on the type of document being cited.
       # Citing a PDF results in `page_location`, plain text results in `char_location`,
       # and content document results in `content_block_location`.
-      sig do
-        returns(
-          T.nilable(
-            T::Array[
-              T.any(
-                Anthropic::CitationCharLocation,
-                Anthropic::CitationPageLocation,
-                Anthropic::CitationContentBlockLocation,
-                Anthropic::CitationsWebSearchResultLocation
-              )
-            ]
-          )
-        )
-      end
+      sig { returns(T.nilable(T::Array[Anthropic::TextCitation::Variants])) }
       attr_accessor :citations
 
       sig { returns(String) }
@@ -67,17 +54,7 @@ module Anthropic
       sig do
         override.returns(
           {
-            citations:
-              T.nilable(
-                T::Array[
-                  T.any(
-                    Anthropic::CitationCharLocation,
-                    Anthropic::CitationPageLocation,
-                    Anthropic::CitationContentBlockLocation,
-                    Anthropic::CitationsWebSearchResultLocation
-                  )
-                ]
-              ),
+            citations: T.nilable(T::Array[Anthropic::TextCitation::Variants]),
             text: String,
             type: Symbol
           }
