@@ -59,20 +59,10 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::TextBlockParam, Anthropic::ImageBlockParam)]
-
-          define_sorbet_constant!(:Variants) do
-            T.type_alias { T.any(Anthropic::TextBlockParam, Anthropic::ImageBlockParam) }
-          end
         end
 
         # @!method self.variants
         #   @return [Array(String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam>)]
-
-        define_sorbet_constant!(:Variants) do
-          T.type_alias do
-            T.any(String, T::Array[T.any(Anthropic::TextBlockParam, Anthropic::ImageBlockParam)])
-          end
-        end
 
         # @type [Anthropic::Internal::Type::Converter]
         ContentArray =

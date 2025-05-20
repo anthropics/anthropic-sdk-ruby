@@ -8,6 +8,7 @@ module Anthropic
       # When we don't know what to expect for the value.
       class Unknown
         extend Anthropic::Internal::Type::Converter
+        extend Anthropic::Internal::Util::SorbetRuntimeSupport
 
         abstract!
 
@@ -42,6 +43,11 @@ module Anthropic
               .returns(T.anything)
           end
           def dump(value, state:)
+          end
+
+          # @api private
+          sig { returns(T.anything) }
+          def to_sorbet_type
           end
         end
       end

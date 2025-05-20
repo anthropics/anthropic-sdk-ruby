@@ -47,6 +47,11 @@ module Anthropic
           end
           def dump(value, state:)
           end
+
+          # @api private
+          sig { returns(T.anything) }
+          def to_sorbet_type
+          end
         end
       end
     end

@@ -10,6 +10,7 @@ module Anthropic
       # Ruby has no Boolean class; this is something for models to refer to.
       class Boolean
         extend Anthropic::Internal::Type::Converter
+        extend Anthropic::Internal::Util::SorbetRuntimeSupport
 
         private_class_method :new
 
@@ -56,6 +57,13 @@ module Anthropic
           #     @option state [Boolean] :can_retry
           #
           #   @return [Boolean, Object]
+
+          # @api private
+          #
+          # @return [Object]
+          def to_sorbet_type
+            T::Boolean
+          end
         end
       end
     end

@@ -23,17 +23,6 @@ module Anthropic
 
         # @!method self.variants
         #   @return [Array(Anthropic::Messages::MessageBatchSucceededResult, Anthropic::Messages::MessageBatchErroredResult, Anthropic::Messages::MessageBatchCanceledResult, Anthropic::Messages::MessageBatchExpiredResult)]
-
-        define_sorbet_constant!(:Variants) do
-          T.type_alias do
-            T.any(
-              Anthropic::Messages::MessageBatchSucceededResult,
-              Anthropic::Messages::MessageBatchErroredResult,
-              Anthropic::Messages::MessageBatchCanceledResult,
-              Anthropic::Messages::MessageBatchExpiredResult
-            )
-          end
-        end
       end
     end
 
