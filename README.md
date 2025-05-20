@@ -4,7 +4,7 @@ The Anthropic Ruby library provides convenient access to the Anthropic REST API 
 
 ## Documentation
 
-Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/anthropic-sdk-beta).
+Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/anthropic).
 
 The REST API documentation can be found on [docs.anthropic.com](https://docs.anthropic.com/claude/reference/).
 
@@ -15,7 +15,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "anthropic-sdk-beta", "~> 0.1.0.pre.beta.8"
+gem "anthropic", "~> 0.1.0.pre.beta.8"
 ```
 
 <!-- x-release-please-end -->
