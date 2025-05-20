@@ -108,7 +108,7 @@ module Anthropic
       # The model that will complete your prompt.\n\nSee
       # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       # details and options.
-      sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
+      sig { returns(Anthropic::Model::Variants) }
       attr_accessor :model
 
       # System prompt.
@@ -117,13 +117,15 @@ module Anthropic
       # as specifying a particular goal or role. See our
       # [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
       sig do
-        returns(T.nilable(T.any(String, T::Array[Anthropic::TextBlockParam])))
+        returns(
+          T.nilable(Anthropic::MessageCountTokensParams::System::Variants)
+        )
       end
       attr_reader :system_
 
       sig do
         params(
-          system_: T.any(String, T::Array[Anthropic::TextBlockParam::OrHash])
+          system_: Anthropic::MessageCountTokensParams::System::Variants
         ).void
       end
       attr_writer :system_
@@ -292,8 +294,8 @@ module Anthropic
       sig do
         params(
           messages: T::Array[Anthropic::MessageParam::OrHash],
-          model: T.any(Anthropic::Model::OrSymbol, String),
-          system_: T.any(String, T::Array[Anthropic::TextBlockParam::OrHash]),
+          model: Anthropic::Model::Variants,
+          system_: Anthropic::MessageCountTokensParams::System::Variants,
           thinking:
             T.any(
               Anthropic::ThinkingConfigEnabled::OrHash,
@@ -509,8 +511,8 @@ module Anthropic
         override.returns(
           {
             messages: T::Array[Anthropic::MessageParam],
-            model: T.any(Anthropic::Model::OrSymbol, String),
-            system_: T.any(String, T::Array[Anthropic::TextBlockParam]),
+            model: Anthropic::Model::Variants,
+            system_: Anthropic::MessageCountTokensParams::System::Variants,
             thinking:
               T.any(
                 Anthropic::ThinkingConfigEnabled,

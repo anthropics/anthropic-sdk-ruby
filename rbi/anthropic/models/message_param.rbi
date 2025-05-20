@@ -8,26 +8,7 @@ module Anthropic
           T.any(Anthropic::MessageParam, Anthropic::Internal::AnyHash)
         end
 
-      sig do
-        returns(
-          T.any(
-            String,
-            T::Array[
-              T.any(
-                Anthropic::TextBlockParam,
-                Anthropic::ImageBlockParam,
-                Anthropic::ToolUseBlockParam,
-                Anthropic::ServerToolUseBlockParam,
-                Anthropic::WebSearchToolResultBlockParam,
-                Anthropic::ToolResultBlockParam,
-                Anthropic::DocumentBlockParam,
-                Anthropic::ThinkingBlockParam,
-                Anthropic::RedactedThinkingBlockParam
-              )
-            ]
-          )
-        )
-      end
+      sig { returns(Anthropic::MessageParam::Content::Variants) }
       attr_accessor :content
 
       sig { returns(Anthropic::MessageParam::Role::OrSymbol) }
@@ -35,23 +16,7 @@ module Anthropic
 
       sig do
         params(
-          content:
-            T.any(
-              String,
-              T::Array[
-                T.any(
-                  Anthropic::TextBlockParam::OrHash,
-                  Anthropic::ImageBlockParam::OrHash,
-                  Anthropic::ToolUseBlockParam::OrHash,
-                  Anthropic::ServerToolUseBlockParam::OrHash,
-                  Anthropic::WebSearchToolResultBlockParam::OrHash,
-                  Anthropic::ToolResultBlockParam::OrHash,
-                  Anthropic::DocumentBlockParam::OrHash,
-                  Anthropic::ThinkingBlockParam::OrHash,
-                  Anthropic::RedactedThinkingBlockParam::OrHash
-                )
-              ]
-            ),
+          content: Anthropic::MessageParam::Content::Variants,
           role: Anthropic::MessageParam::Role::OrSymbol
         ).returns(T.attached_class)
       end
@@ -61,23 +26,7 @@ module Anthropic
       sig do
         override.returns(
           {
-            content:
-              T.any(
-                String,
-                T::Array[
-                  T.any(
-                    Anthropic::TextBlockParam,
-                    Anthropic::ImageBlockParam,
-                    Anthropic::ToolUseBlockParam,
-                    Anthropic::ServerToolUseBlockParam,
-                    Anthropic::WebSearchToolResultBlockParam,
-                    Anthropic::ToolResultBlockParam,
-                    Anthropic::DocumentBlockParam,
-                    Anthropic::ThinkingBlockParam,
-                    Anthropic::RedactedThinkingBlockParam
-                  )
-                ]
-              ),
+            content: Anthropic::MessageParam::Content::Variants,
             role: Anthropic::MessageParam::Role::OrSymbol
           }
         )
@@ -90,22 +39,7 @@ module Anthropic
 
         Variants =
           T.type_alias do
-            T.any(
-              String,
-              T::Array[
-                T.any(
-                  Anthropic::TextBlockParam,
-                  Anthropic::ImageBlockParam,
-                  Anthropic::ToolUseBlockParam,
-                  Anthropic::ServerToolUseBlockParam,
-                  Anthropic::WebSearchToolResultBlockParam,
-                  Anthropic::ToolResultBlockParam,
-                  Anthropic::DocumentBlockParam,
-                  Anthropic::ThinkingBlockParam,
-                  Anthropic::RedactedThinkingBlockParam
-                )
-              ]
-            )
+            T.any(String, T::Array[Anthropic::ContentBlockParam::Variants])
           end
 
         sig do

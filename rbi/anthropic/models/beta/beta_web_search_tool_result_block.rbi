@@ -16,10 +16,7 @@ module Anthropic
 
         sig do
           returns(
-            T.any(
-              Anthropic::Beta::BetaWebSearchToolResultError,
-              T::Array[Anthropic::Beta::BetaWebSearchResultBlock]
-            )
+            Anthropic::Beta::BetaWebSearchToolResultBlockContent::Variants
           )
         end
         attr_accessor :content
@@ -48,10 +45,7 @@ module Anthropic
           override.returns(
             {
               content:
-                T.any(
-                  Anthropic::Beta::BetaWebSearchToolResultError,
-                  T::Array[Anthropic::Beta::BetaWebSearchResultBlock]
-                ),
+                Anthropic::Beta::BetaWebSearchToolResultBlockContent::Variants,
               tool_use_id: String,
               type: Symbol
             }

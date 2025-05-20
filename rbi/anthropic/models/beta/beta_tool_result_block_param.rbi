@@ -35,15 +35,7 @@ module Anthropic
         sig do
           returns(
             T.nilable(
-              T.any(
-                String,
-                T::Array[
-                  T.any(
-                    Anthropic::Beta::BetaTextBlockParam,
-                    Anthropic::Beta::BetaImageBlockParam
-                  )
-                ]
-              )
+              Anthropic::Beta::BetaToolResultBlockParam::Content::Variants
             )
           )
         end
@@ -52,15 +44,7 @@ module Anthropic
         sig do
           params(
             content:
-              T.any(
-                String,
-                T::Array[
-                  T.any(
-                    Anthropic::Beta::BetaTextBlockParam::OrHash,
-                    Anthropic::Beta::BetaImageBlockParam::OrHash
-                  )
-                ]
-              )
+              Anthropic::Beta::BetaToolResultBlockParam::Content::Variants
           ).void
         end
         attr_writer :content
@@ -77,15 +61,7 @@ module Anthropic
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             content:
-              T.any(
-                String,
-                T::Array[
-                  T.any(
-                    Anthropic::Beta::BetaTextBlockParam::OrHash,
-                    Anthropic::Beta::BetaImageBlockParam::OrHash
-                  )
-                ]
-              ),
+              Anthropic::Beta::BetaToolResultBlockParam::Content::Variants,
             is_error: T::Boolean,
             type: Symbol
           ).returns(T.attached_class)
@@ -108,15 +84,7 @@ module Anthropic
               cache_control:
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
               content:
-                T.any(
-                  String,
-                  T::Array[
-                    T.any(
-                      Anthropic::Beta::BetaTextBlockParam,
-                      Anthropic::Beta::BetaImageBlockParam
-                    )
-                  ]
-                ),
+                Anthropic::Beta::BetaToolResultBlockParam::Content::Variants,
               is_error: T::Boolean
             }
           )
@@ -132,10 +100,7 @@ module Anthropic
               T.any(
                 String,
                 T::Array[
-                  T.any(
-                    Anthropic::Beta::BetaTextBlockParam,
-                    Anthropic::Beta::BetaImageBlockParam
-                  )
+                  Anthropic::Beta::BetaToolResultBlockParam::Content::Content::Variants
                 ]
               )
             end

@@ -8,16 +8,7 @@ module Anthropic
           T.any(Anthropic::CitationsDelta, Anthropic::Internal::AnyHash)
         end
 
-      sig do
-        returns(
-          T.any(
-            Anthropic::CitationCharLocation,
-            Anthropic::CitationPageLocation,
-            Anthropic::CitationContentBlockLocation,
-            Anthropic::CitationsWebSearchResultLocation
-          )
-        )
-      end
+      sig { returns(Anthropic::CitationsDelta::Citation::Variants) }
       attr_accessor :citation
 
       sig { returns(Symbol) }
@@ -41,13 +32,7 @@ module Anthropic
       sig do
         override.returns(
           {
-            citation:
-              T.any(
-                Anthropic::CitationCharLocation,
-                Anthropic::CitationPageLocation,
-                Anthropic::CitationContentBlockLocation,
-                Anthropic::CitationsWebSearchResultLocation
-              ),
+            citation: Anthropic::CitationsDelta::Citation::Variants,
             type: Symbol
           }
         )

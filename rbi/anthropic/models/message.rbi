@@ -44,26 +44,13 @@ module Anthropic
       # ```json
       # [{ "type": "text", "text": "B)" }]
       # ```
-      sig do
-        returns(
-          T::Array[
-            T.any(
-              Anthropic::TextBlock,
-              Anthropic::ToolUseBlock,
-              Anthropic::ServerToolUseBlock,
-              Anthropic::WebSearchToolResultBlock,
-              Anthropic::ThinkingBlock,
-              Anthropic::RedactedThinkingBlock
-            )
-          ]
-        )
-      end
+      sig { returns(T::Array[Anthropic::ContentBlock::Variants]) }
       attr_accessor :content
 
       # The model that will complete your prompt.\n\nSee
       # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       # details and options.
-      sig { returns(T.any(Anthropic::Model::TaggedSymbol, String)) }
+      sig { returns(Anthropic::Model::Variants) }
       attr_accessor :model
 
       # Conversational role of the generated message.
@@ -134,7 +121,7 @@ module Anthropic
                 Anthropic::RedactedThinkingBlock::OrHash
               )
             ],
-          model: T.any(Anthropic::Model::OrSymbol, String),
+          model: Anthropic::Model::Variants,
           stop_reason: T.nilable(Anthropic::StopReason::OrSymbol),
           stop_sequence: T.nilable(String),
           usage: Anthropic::Usage::OrHash,
@@ -232,18 +219,8 @@ module Anthropic
         override.returns(
           {
             id: String,
-            content:
-              T::Array[
-                T.any(
-                  Anthropic::TextBlock,
-                  Anthropic::ToolUseBlock,
-                  Anthropic::ServerToolUseBlock,
-                  Anthropic::WebSearchToolResultBlock,
-                  Anthropic::ThinkingBlock,
-                  Anthropic::RedactedThinkingBlock
-                )
-              ],
-            model: T.any(Anthropic::Model::TaggedSymbol, String),
+            content: T::Array[Anthropic::ContentBlock::Variants],
+            model: Anthropic::Model::Variants,
             role: Symbol,
             stop_reason: T.nilable(Anthropic::StopReason::TaggedSymbol),
             stop_sequence: T.nilable(String),

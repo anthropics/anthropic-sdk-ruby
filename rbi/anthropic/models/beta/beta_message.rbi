@@ -49,26 +49,13 @@ module Anthropic
         # ```json
         # [{ "type": "text", "text": "B)" }]
         # ```
-        sig do
-          returns(
-            T::Array[
-              T.any(
-                Anthropic::Beta::BetaTextBlock,
-                Anthropic::Beta::BetaToolUseBlock,
-                Anthropic::Beta::BetaServerToolUseBlock,
-                Anthropic::Beta::BetaWebSearchToolResultBlock,
-                Anthropic::Beta::BetaThinkingBlock,
-                Anthropic::Beta::BetaRedactedThinkingBlock
-              )
-            ]
-          )
-        end
+        sig { returns(T::Array[Anthropic::Beta::BetaContentBlock::Variants]) }
         attr_accessor :content
 
         # The model that will complete your prompt.\n\nSee
         # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
-        sig { returns(T.any(Anthropic::Model::TaggedSymbol, String)) }
+        sig { returns(Anthropic::Model::Variants) }
         attr_accessor :model
 
         # Conversational role of the generated message.
@@ -141,7 +128,7 @@ module Anthropic
                   Anthropic::Beta::BetaRedactedThinkingBlock::OrHash
                 )
               ],
-            model: T.any(Anthropic::Model::OrSymbol, String),
+            model: Anthropic::Model::Variants,
             stop_reason: T.nilable(Anthropic::Beta::BetaStopReason::OrSymbol),
             stop_sequence: T.nilable(String),
             usage: Anthropic::Beta::BetaUsage::OrHash,
@@ -239,18 +226,8 @@ module Anthropic
           override.returns(
             {
               id: String,
-              content:
-                T::Array[
-                  T.any(
-                    Anthropic::Beta::BetaTextBlock,
-                    Anthropic::Beta::BetaToolUseBlock,
-                    Anthropic::Beta::BetaServerToolUseBlock,
-                    Anthropic::Beta::BetaWebSearchToolResultBlock,
-                    Anthropic::Beta::BetaThinkingBlock,
-                    Anthropic::Beta::BetaRedactedThinkingBlock
-                  )
-                ],
-              model: T.any(Anthropic::Model::TaggedSymbol, String),
+              content: T::Array[Anthropic::Beta::BetaContentBlock::Variants],
+              model: Anthropic::Model::Variants,
               role: Symbol,
               stop_reason:
                 T.nilable(Anthropic::Beta::BetaStopReason::TaggedSymbol),

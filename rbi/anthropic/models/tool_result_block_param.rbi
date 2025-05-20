@@ -26,32 +26,12 @@ module Anthropic
       attr_writer :cache_control
 
       sig do
-        returns(
-          T.nilable(
-            T.any(
-              String,
-              T::Array[
-                T.any(Anthropic::TextBlockParam, Anthropic::ImageBlockParam)
-              ]
-            )
-          )
-        )
+        returns(T.nilable(Anthropic::ToolResultBlockParam::Content::Variants))
       end
       attr_reader :content
 
       sig do
-        params(
-          content:
-            T.any(
-              String,
-              T::Array[
-                T.any(
-                  Anthropic::TextBlockParam::OrHash,
-                  Anthropic::ImageBlockParam::OrHash
-                )
-              ]
-            )
-        ).void
+        params(content: Anthropic::ToolResultBlockParam::Content::Variants).void
       end
       attr_writer :content
 
@@ -65,16 +45,7 @@ module Anthropic
         params(
           tool_use_id: String,
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
-          content:
-            T.any(
-              String,
-              T::Array[
-                T.any(
-                  Anthropic::TextBlockParam::OrHash,
-                  Anthropic::ImageBlockParam::OrHash
-                )
-              ]
-            ),
+          content: Anthropic::ToolResultBlockParam::Content::Variants,
           is_error: T::Boolean,
           type: Symbol
         ).returns(T.attached_class)
@@ -95,13 +66,7 @@ module Anthropic
             tool_use_id: String,
             type: Symbol,
             cache_control: T.nilable(Anthropic::CacheControlEphemeral),
-            content:
-              T.any(
-                String,
-                T::Array[
-                  T.any(Anthropic::TextBlockParam, Anthropic::ImageBlockParam)
-                ]
-              ),
+            content: Anthropic::ToolResultBlockParam::Content::Variants,
             is_error: T::Boolean
           }
         )
@@ -117,7 +82,7 @@ module Anthropic
             T.any(
               String,
               T::Array[
-                T.any(Anthropic::TextBlockParam, Anthropic::ImageBlockParam)
+                Anthropic::ToolResultBlockParam::Content::Content::Variants
               ]
             )
           end

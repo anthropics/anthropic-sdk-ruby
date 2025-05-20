@@ -109,7 +109,7 @@ module Anthropic
         # The model that will complete your prompt.\n\nSee
         # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
-        sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
+        sig { returns(Anthropic::Model::Variants) }
         attr_accessor :model
 
         # System prompt.
@@ -120,7 +120,7 @@ module Anthropic
         sig do
           returns(
             T.nilable(
-              T.any(String, T::Array[Anthropic::Beta::BetaTextBlockParam])
+              Anthropic::Beta::MessageCountTokensParams::System::Variants
             )
           )
         end
@@ -128,11 +128,7 @@ module Anthropic
 
         sig do
           params(
-            system_:
-              T.any(
-                String,
-                T::Array[Anthropic::Beta::BetaTextBlockParam::OrHash]
-              )
+            system_: Anthropic::Beta::MessageCountTokensParams::System::Variants
           ).void
         end
         attr_writer :system_
@@ -307,31 +303,18 @@ module Anthropic
         attr_writer :tools
 
         # Optional header to specify the beta version(s) you want to use.
-        sig do
-          returns(
-            T.nilable(
-              T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
-            )
-          )
-        end
+        sig { returns(T.nilable(T::Array[Anthropic::AnthropicBeta::Variants])) }
         attr_reader :betas
 
-        sig do
-          params(
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
-          ).void
-        end
+        sig { params(betas: T::Array[Anthropic::AnthropicBeta::Variants]).void }
         attr_writer :betas
 
         sig do
           params(
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
-            model: T.any(Anthropic::Model::OrSymbol, String),
+            model: Anthropic::Model::Variants,
             system_:
-              T.any(
-                String,
-                T::Array[Anthropic::Beta::BetaTextBlockParam::OrHash]
-              ),
+              Anthropic::Beta::MessageCountTokensParams::System::Variants,
             thinking:
               T.any(
                 Anthropic::Beta::BetaThinkingConfigEnabled::OrHash,
@@ -357,7 +340,7 @@ module Anthropic
                   Anthropic::Beta::BetaWebSearchTool20250305::OrHash
                 )
               ],
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[Anthropic::AnthropicBeta::Variants],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -554,9 +537,9 @@ module Anthropic
           override.returns(
             {
               messages: T::Array[Anthropic::Beta::BetaMessageParam],
-              model: T.any(Anthropic::Model::OrSymbol, String),
+              model: Anthropic::Model::Variants,
               system_:
-                T.any(String, T::Array[Anthropic::Beta::BetaTextBlockParam]),
+                Anthropic::Beta::MessageCountTokensParams::System::Variants,
               thinking:
                 T.any(
                   Anthropic::Beta::BetaThinkingConfigEnabled,
@@ -582,8 +565,7 @@ module Anthropic
                     Anthropic::Beta::BetaWebSearchTool20250305
                   )
                 ],
-              betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+              betas: T::Array[Anthropic::AnthropicBeta::Variants],
               request_options: Anthropic::RequestOptions
             }
           )
