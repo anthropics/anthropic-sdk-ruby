@@ -43,7 +43,7 @@ If you’d like to use the repository from source, you can either install from g
 To install via git in your `Gemfile`:
 
 ```ruby
-gem "anthropic-sdk-beta", git: "https://www.github.com/anthropics/anthropic-sdk-ruby"
+gem "anthropic", git: "https://www.github.com/anthropics/anthropic-sdk-ruby"
 ```
 
 Alternatively, reference local copy of the repo:
@@ -53,7 +53,7 @@ $ git clone -- 'https://www.github.com/anthropics/anthropic-sdk-ruby' '<path-to-
 ```
 
 ```ruby
-gem "anthropic-sdk-beta", path: "<path-to-repo>"
+gem "anthropic", path: "<path-to-repo>"
 ```
 
 ## Running commands
