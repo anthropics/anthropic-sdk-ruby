@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.1.0-beta.9 (2025-05-21)
+
+Full Changelog: [v0.1.0-beta.8...v0.1.0-beta.9](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.1.0-beta.8...v0.1.0-beta.9)
+
+### Features
+
+* **api:** manual updates ([c68662a](https://github.com/anthropics/anthropic-sdk-ruby/commit/c68662a15bab31a97e332a3d667ec3b580276f7a))
+
+
+### Bug Fixes
+
+* correctly instantiate sorbet type aliases for enums and unions ([e79b78d](https://github.com/anthropics/anthropic-sdk-ruby/commit/e79b78def9c79c6602bdd05ae87022682255769d))
+
+
+### Chores
+
+* **internal:** version bump ([6d1c2e6](https://github.com/anthropics/anthropic-sdk-ruby/commit/6d1c2e6d8f50b1b4352af9cb27851f37127855ec))
+* refine Yard and Sorbet types and ensure linting is turned on for examples ([530daaf](https://github.com/anthropics/anthropic-sdk-ruby/commit/530daaf8161c18635324a839bc0ba7a8d74204d6))
+* remove beta message for GA release ([#613](https://github.com/anthropics/anthropic-sdk-ruby/issues/613)) ([e7cee11](https://github.com/anthropics/anthropic-sdk-ruby/commit/e7cee11d280381a5832917b984b1cf9598893eb7))
+* remove legacy bedrock example ([#609](https://github.com/anthropics/anthropic-sdk-ruby/issues/609)) ([256fa36](https://github.com/anthropics/anthropic-sdk-ruby/commit/256fa36937ef642db16d126ee908f9760844b418))
+* use sorbet union aliases where available ([a21753a](https://github.com/anthropics/anthropic-sdk-ruby/commit/a21753ab23550944f299c7deada3cbb03d12ad66))
+* whitespaces ([f622e39](https://github.com/anthropics/anthropic-sdk-ruby/commit/f622e39936d338caa833bff46786d72a1855624a))
+
+
+### Documentation
+
+* README updates for GA release ([#602](https://github.com/anthropics/anthropic-sdk-ruby/issues/602)) ([6cdf0c3](https://github.com/anthropics/anthropic-sdk-ruby/commit/6cdf0c335642b64dd13825f8b3367d6f70990b3e))
+
 ## 0.1.0-beta.8 (2025-05-19)
 
 Full Changelog: [v0.1.0-beta.7...v0.1.0-beta.8](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.1.0-beta.7...v0.1.0-beta.8)
