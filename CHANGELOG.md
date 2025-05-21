@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.0 (2025-05-21)
+
+Full Changelog: [v0.1.0-beta.9...v1.0.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.1.0-beta.9...v1.0.0)
+
+### Chores
+
+* force utf-8 locale via `RUBYOPT` when formatting ([55bfa9d](https://github.com/anthropics/anthropic-sdk-ruby/commit/55bfa9d146b9f983d20a01b180f968c0649d171b))
+* **internal:** version bump ([595b2c8](https://github.com/anthropics/anthropic-sdk-ruby/commit/595b2c8221b79acb4814384a32f3beea822e3a8d))
+
 ## 0.1.0-beta.9 (2025-05-21)
 
 Full Changelog: [v0.1.0-beta.8...v0.1.0-beta.9](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.1.0-beta.8...v0.1.0-beta.9)
