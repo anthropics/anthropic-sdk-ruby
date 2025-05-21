@@ -10,10 +10,6 @@ The REST API documentation can be found on [docs.anthropic.com](https://docs.ant
 
 ## Installation
 
-- Early April, 2025: This library is released under the `anthropic-sdk-beta` gem name. We'll be gathering feedback from the community.
-
-- Late April/early May: Bump the version `1.0`, and transition the `anthropic` gem name to this repository.
-
 To use this gem, install via Bundler by adding the following to your application's `Gemfile`:
 
 <!-- x-release-please-start-version -->
