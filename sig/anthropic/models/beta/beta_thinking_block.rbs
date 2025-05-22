@@ -18,6 +18,8 @@ module Anthropic
           thinking: String,
           ?type: :thinking
         ) -> void
+
+        def to_hash: -> { signature: String, thinking: String, type: :thinking }
       end
     end
   end

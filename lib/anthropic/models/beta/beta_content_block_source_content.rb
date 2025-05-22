@@ -13,7 +13,7 @@ module Anthropic
         variant :image, -> { Anthropic::Beta::BetaImageBlockParam }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam)]
+        #   @return [Array(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
       end
     end
 

@@ -26,6 +26,13 @@ module Anthropic
           ?citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?,
           ?type: :text
         ) -> void
+
+        def to_hash: -> {
+          text: String,
+          type: :text,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?
+        }
       end
     end
   end

@@ -16,7 +16,7 @@ module Anthropic
       variant :web_search_result_location, -> { Anthropic::CitationWebSearchResultLocationParam }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::CitationCharLocationParam, Anthropic::CitationPageLocationParam, Anthropic::CitationContentBlockLocationParam, Anthropic::CitationWebSearchResultLocationParam)]
+      #   @return [Array(Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam, Anthropic::Models::CitationWebSearchResultLocationParam)]
     end
   end
 end

@@ -9,6 +9,8 @@ module Anthropic
         attr_accessor type: :expired
 
         def initialize: (?type: :expired) -> void
+
+        def to_hash: -> { type: :expired }
       end
     end
   end

@@ -12,6 +12,8 @@ module Anthropic
         attr_accessor type: :succeeded
 
         def initialize: (message: Anthropic::Message, ?type: :succeeded) -> void
+
+        def to_hash: -> { message: Anthropic::Message, type: :succeeded }
       end
     end
   end

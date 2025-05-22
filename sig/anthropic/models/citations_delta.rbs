@@ -1,17 +1,25 @@
 module Anthropic
   module Models
     type citations_delta =
-      { citation: Anthropic::CitationsDelta::citation, type: :citations_delta }
+      {
+        citation: Anthropic::Models::CitationsDelta::citation,
+        type: :citations_delta
+      }
 
     class CitationsDelta < Anthropic::Internal::Type::BaseModel
-      attr_accessor citation: Anthropic::CitationsDelta::citation
+      attr_accessor citation: Anthropic::Models::CitationsDelta::citation
 
       attr_accessor type: :citations_delta
 
       def initialize: (
-        citation: Anthropic::CitationsDelta::citation,
+        citation: Anthropic::Models::CitationsDelta::citation,
         ?type: :citations_delta
       ) -> void
+
+      def to_hash: -> {
+        citation: Anthropic::Models::CitationsDelta::citation,
+        type: :citations_delta
+      }
 
       type citation =
         Anthropic::CitationCharLocation
@@ -22,7 +30,7 @@ module Anthropic
       module Citation
         extend Anthropic::Internal::Type::Union
 
-        def self?.variants: -> ::Array[Anthropic::CitationsDelta::citation]
+        def self?.variants: -> ::Array[Anthropic::Models::CitationsDelta::citation]
       end
     end
   end

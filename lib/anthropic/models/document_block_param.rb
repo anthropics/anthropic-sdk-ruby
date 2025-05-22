@@ -5,7 +5,7 @@ module Anthropic
     class DocumentBlockParam < Anthropic::Internal::Type::BaseModel
       # @!attribute source
       #
-      #   @return [Anthropic::Base64PDFSource, Anthropic::PlainTextSource, Anthropic::ContentBlockSource, Anthropic::URLPDFSource]
+      #   @return [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
       required :source, union: -> { Anthropic::DocumentBlockParam::Source }
 
       # @!attribute type
@@ -16,12 +16,12 @@ module Anthropic
       # @!attribute cache_control
       #   Create a cache control breakpoint at this content block.
       #
-      #   @return [Anthropic::CacheControlEphemeral, nil]
+      #   @return [Anthropic::Models::CacheControlEphemeral, nil]
       optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
       # @!attribute citations
       #
-      #   @return [Anthropic::CitationsConfigParam, nil]
+      #   @return [Anthropic::Models::CitationsConfigParam, nil]
       optional :citations, -> { Anthropic::CitationsConfigParam }
 
       # @!attribute context
@@ -35,11 +35,11 @@ module Anthropic
       optional :title, String, nil?: true
 
       # @!method initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document)
-      #   @param source [Anthropic::Base64PDFSource, Anthropic::PlainTextSource, Anthropic::ContentBlockSource, Anthropic::URLPDFSource]
+      #   @param source [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
       #
-      #   @param cache_control [Anthropic::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+      #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
       #
-      #   @param citations [Anthropic::CitationsConfigParam]
+      #   @param citations [Anthropic::Models::CitationsConfigParam]
       #
       #   @param context [String, nil]
       #
@@ -47,7 +47,7 @@ module Anthropic
       #
       #   @param type [Symbol, :document]
 
-      # @see Anthropic::DocumentBlockParam#source
+      # @see Anthropic::Models::DocumentBlockParam#source
       module Source
         extend Anthropic::Internal::Type::Union
 
@@ -62,7 +62,7 @@ module Anthropic
         variant :url, -> { Anthropic::URLPDFSource }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Base64PDFSource, Anthropic::PlainTextSource, Anthropic::ContentBlockSource, Anthropic::URLPDFSource)]
+        #   @return [Array(Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource)]
       end
     end
   end

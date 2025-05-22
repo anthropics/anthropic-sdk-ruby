@@ -6,7 +6,7 @@ module Anthropic
       class BetaBase64PDFBlock < Anthropic::Internal::Type::BaseModel
         # @!attribute source
         #
-        #   @return [Anthropic::Beta::BetaBase64PDFSource, Anthropic::Beta::BetaPlainTextSource, Anthropic::Beta::BetaContentBlockSource, Anthropic::Beta::BetaURLPDFSource]
+        #   @return [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource]
         required :source, union: -> { Anthropic::Beta::BetaBase64PDFBlock::Source }
 
         # @!attribute type
@@ -17,12 +17,12 @@ module Anthropic
         # @!attribute cache_control
         #   Create a cache control breakpoint at this content block.
         #
-        #   @return [Anthropic::Beta::BetaCacheControlEphemeral, nil]
+        #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!attribute citations
         #
-        #   @return [Anthropic::Beta::BetaCitationsConfigParam, nil]
+        #   @return [Anthropic::Models::Beta::BetaCitationsConfigParam, nil]
         optional :citations, -> { Anthropic::Beta::BetaCitationsConfigParam }
 
         # @!attribute context
@@ -36,11 +36,11 @@ module Anthropic
         optional :title, String, nil?: true
 
         # @!method initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document)
-        #   @param source [Anthropic::Beta::BetaBase64PDFSource, Anthropic::Beta::BetaPlainTextSource, Anthropic::Beta::BetaContentBlockSource, Anthropic::Beta::BetaURLPDFSource]
+        #   @param source [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource]
         #
-        #   @param cache_control [Anthropic::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+        #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
-        #   @param citations [Anthropic::Beta::BetaCitationsConfigParam]
+        #   @param citations [Anthropic::Models::Beta::BetaCitationsConfigParam]
         #
         #   @param context [String, nil]
         #
@@ -48,7 +48,7 @@ module Anthropic
         #
         #   @param type [Symbol, :document]
 
-        # @see Anthropic::Beta::BetaBase64PDFBlock#source
+        # @see Anthropic::Models::Beta::BetaBase64PDFBlock#source
         module Source
           extend Anthropic::Internal::Type::Union
 
@@ -63,7 +63,7 @@ module Anthropic
           variant :url, -> { Anthropic::Beta::BetaURLPDFSource }
 
           # @!method self.variants
-          #   @return [Array(Anthropic::Beta::BetaBase64PDFSource, Anthropic::Beta::BetaPlainTextSource, Anthropic::Beta::BetaContentBlockSource, Anthropic::Beta::BetaURLPDFSource)]
+          #   @return [Array(Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource)]
         end
       end
     end

@@ -34,7 +34,7 @@ module Anthropic
 
         # @!method initialize(id:, created_at:, display_name:, type: :model)
         #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Beta::BetaModelInfo} for more details.
+        #   {Anthropic::Models::Beta::BetaModelInfo} for more details.
         #
         #   @param id [String] Unique model identifier.
         #

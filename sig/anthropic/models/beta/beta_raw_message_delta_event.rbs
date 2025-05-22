@@ -23,6 +23,12 @@ module Anthropic
           ?type: :message_delta
         ) -> void
 
+        def to_hash: -> {
+          delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta,
+          type: :message_delta,
+          usage: Anthropic::Beta::BetaMessageDeltaUsage
+        }
+
         type delta =
           {
             stop_reason: Anthropic::Models::Beta::beta_stop_reason?,
@@ -38,6 +44,11 @@ module Anthropic
             stop_reason: Anthropic::Models::Beta::beta_stop_reason?,
             stop_sequence: String?
           ) -> void
+
+          def to_hash: -> {
+            stop_reason: Anthropic::Models::Beta::beta_stop_reason?,
+            stop_sequence: String?
+          }
         end
       end
     end

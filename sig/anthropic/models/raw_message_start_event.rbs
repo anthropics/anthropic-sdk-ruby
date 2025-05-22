@@ -12,6 +12,8 @@ module Anthropic
         message: Anthropic::Message,
         ?type: :message_start
       ) -> void
+
+      def to_hash: -> { message: Anthropic::Message, type: :message_start }
     end
   end
 end

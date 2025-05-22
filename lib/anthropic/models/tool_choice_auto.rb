@@ -19,7 +19,7 @@ module Anthropic
 
       # @!method initialize(disable_parallel_tool_use: nil, type: :auto)
       #   Some parameter documentations has been truncated, see
-      #   {Anthropic::ToolChoiceAuto} for more details.
+      #   {Anthropic::Models::ToolChoiceAuto} for more details.
       #
       #   The model will automatically decide whether to use tools.
       #

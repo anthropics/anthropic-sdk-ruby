@@ -27,6 +27,13 @@ module Anthropic
           ?limit: Integer,
           ?request_options: Anthropic::request_opts
         ) -> void
+
+        def to_hash: -> {
+          after_id: String,
+          before_id: String,
+          limit: Integer,
+          request_options: Anthropic::RequestOptions
+        }
       end
     end
   end

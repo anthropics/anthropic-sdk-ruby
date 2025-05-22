@@ -9,6 +9,8 @@ module Anthropic
         attr_accessor type: :message_batch_deleted
 
         def initialize: (id: String, ?type: :message_batch_deleted) -> void
+
+        def to_hash: -> { id: String, type: :message_batch_deleted }
       end
     end
   end

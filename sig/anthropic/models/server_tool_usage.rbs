@@ -6,6 +6,8 @@ module Anthropic
       attr_accessor web_search_requests: Integer
 
       def initialize: (web_search_requests: Integer) -> void
+
+      def to_hash: -> { web_search_requests: Integer }
     end
   end
 end

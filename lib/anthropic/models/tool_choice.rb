@@ -22,7 +22,7 @@ module Anthropic
       variant :none, -> { Anthropic::ToolChoiceNone }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::ToolChoiceAuto, Anthropic::ToolChoiceAny, Anthropic::ToolChoiceTool, Anthropic::ToolChoiceNone)]
+      #   @return [Array(Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone)]
     end
   end
 end

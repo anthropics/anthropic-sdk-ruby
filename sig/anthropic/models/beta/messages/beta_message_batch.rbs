@@ -10,7 +10,7 @@ module Anthropic
             created_at: Time,
             ended_at: Time?,
             expires_at: Time,
-            processing_status: Anthropic::Beta::Messages::BetaMessageBatch::processing_status,
+            processing_status: Anthropic::Models::Beta::Messages::BetaMessageBatch::processing_status,
             request_counts: Anthropic::Beta::Messages::BetaMessageBatchRequestCounts,
             results_url: String?,
             type: :message_batch
@@ -29,7 +29,7 @@ module Anthropic
 
           attr_accessor expires_at: Time
 
-          attr_accessor processing_status: Anthropic::Beta::Messages::BetaMessageBatch::processing_status
+          attr_accessor processing_status: Anthropic::Models::Beta::Messages::BetaMessageBatch::processing_status
 
           attr_accessor request_counts: Anthropic::Beta::Messages::BetaMessageBatchRequestCounts
 
@@ -44,11 +44,24 @@ module Anthropic
             created_at: Time,
             ended_at: Time?,
             expires_at: Time,
-            processing_status: Anthropic::Beta::Messages::BetaMessageBatch::processing_status,
+            processing_status: Anthropic::Models::Beta::Messages::BetaMessageBatch::processing_status,
             request_counts: Anthropic::Beta::Messages::BetaMessageBatchRequestCounts,
             results_url: String?,
             ?type: :message_batch
           ) -> void
+
+          def to_hash: -> {
+            id: String,
+            archived_at: Time?,
+            cancel_initiated_at: Time?,
+            created_at: Time,
+            ended_at: Time?,
+            expires_at: Time,
+            processing_status: Anthropic::Models::Beta::Messages::BetaMessageBatch::processing_status,
+            request_counts: Anthropic::Beta::Messages::BetaMessageBatchRequestCounts,
+            results_url: String?,
+            type: :message_batch
+          }
 
           type processing_status = :in_progress | :canceling | :ended
 
@@ -59,7 +72,7 @@ module Anthropic
             CANCELING: :canceling
             ENDED: :ended
 
-            def self?.values: -> ::Array[Anthropic::Beta::Messages::BetaMessageBatch::processing_status]
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Messages::BetaMessageBatch::processing_status]
           end
         end
       end

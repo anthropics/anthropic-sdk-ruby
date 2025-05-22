@@ -34,6 +34,15 @@ module Anthropic
           start_block_index: Integer,
           ?type: :content_block_location
         ) -> void
+
+        def to_hash: -> {
+          cited_text: String,
+          document_index: Integer,
+          document_title: String?,
+          end_block_index: Integer,
+          start_block_index: Integer,
+          type: :content_block_location
+        }
       end
     end
   end

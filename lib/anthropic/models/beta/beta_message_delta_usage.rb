@@ -31,7 +31,7 @@ module Anthropic
         # @!attribute server_tool_use
         #   The number of server tool requests.
         #
-        #   @return [Anthropic::Beta::BetaServerToolUsage, nil]
+        #   @return [Anthropic::Models::Beta::BetaServerToolUsage, nil]
         required :server_tool_use, -> { Anthropic::Beta::BetaServerToolUsage }, nil?: true
 
         # @!method initialize(cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, output_tokens:, server_tool_use:)
@@ -43,7 +43,7 @@ module Anthropic
         #
         #   @param output_tokens [Integer] The cumulative number of output tokens which were used.
         #
-        #   @param server_tool_use [Anthropic::Beta::BetaServerToolUsage, nil] The number of server tool requests.
+        #   @param server_tool_use [Anthropic::Models::Beta::BetaServerToolUsage, nil] The number of server tool requests.
       end
     end
 

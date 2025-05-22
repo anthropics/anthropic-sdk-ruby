@@ -7,10 +7,10 @@ module Anthropic
 
       variant -> { Anthropic::WebSearchToolResultError }
 
-      variant -> { Anthropic::WebSearchToolResultBlockContent::WebSearchResultBlockArray }
+      variant -> { Anthropic::Models::WebSearchToolResultBlockContent::WebSearchResultBlockArray }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::WebSearchToolResultError, Array<Anthropic::WebSearchResultBlock>)]
+      #   @return [Array(Anthropic::Models::WebSearchToolResultError, Array<Anthropic::Models::WebSearchResultBlock>)]
 
       # @type [Anthropic::Internal::Type::Converter]
       WebSearchResultBlockArray = Anthropic::Internal::Type::ArrayOf[-> { Anthropic::WebSearchResultBlock }]

@@ -42,6 +42,17 @@ module Anthropic
           ?role: :assistant,
           ?type: :message
         ) -> void
+
+        def to_hash: -> {
+          id: String,
+          content: ::Array[Anthropic::Models::Beta::beta_content_block],
+          model: Anthropic::Models::model,
+          role: :assistant,
+          stop_reason: Anthropic::Models::Beta::beta_stop_reason?,
+          stop_sequence: String?,
+          type: :message,
+          usage: Anthropic::Beta::BetaUsage
+        }
       end
     end
   end

@@ -20,6 +20,12 @@ module Anthropic
         ?type: :message_delta
       ) -> void
 
+      def to_hash: -> {
+        delta: Anthropic::RawMessageDeltaEvent::Delta,
+        type: :message_delta,
+        usage: Anthropic::MessageDeltaUsage
+      }
+
       type delta =
         { stop_reason: Anthropic::Models::stop_reason?, stop_sequence: String? }
 
@@ -32,6 +38,11 @@ module Anthropic
           stop_reason: Anthropic::Models::stop_reason?,
           stop_sequence: String?
         ) -> void
+
+        def to_hash: -> {
+          stop_reason: Anthropic::Models::stop_reason?,
+          stop_sequence: String?
+        }
       end
     end
   end

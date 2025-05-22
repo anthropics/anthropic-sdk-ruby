@@ -21,6 +21,13 @@ module Anthropic
           display_name: String,
           ?type: :model
         ) -> void
+
+        def to_hash: -> {
+          id: String,
+          created_at: Time,
+          display_name: String,
+          type: :model
+        }
       end
     end
   end

@@ -26,6 +26,13 @@ module Anthropic
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?type: :web_search_tool_result
         ) -> void
+
+        def to_hash: -> {
+          content: Anthropic::Models::Beta::beta_web_search_tool_result_block_param_content,
+          tool_use_id: String,
+          type: :web_search_tool_result,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
       end
     end
   end

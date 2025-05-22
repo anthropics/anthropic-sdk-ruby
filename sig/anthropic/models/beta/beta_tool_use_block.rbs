@@ -21,6 +21,13 @@ module Anthropic
           name: String,
           ?type: :tool_use
         ) -> void
+
+        def to_hash: -> {
+          id: String,
+          input: top,
+          name: String,
+          type: :tool_use
+        }
       end
     end
   end

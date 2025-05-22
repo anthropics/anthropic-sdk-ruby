@@ -18,6 +18,12 @@ module Anthropic
           ?media_type: :"application/pdf",
           ?type: :base64
         ) -> void
+
+        def to_hash: -> {
+          data: String,
+          media_type: :"application/pdf",
+          type: :base64
+        }
       end
     end
   end

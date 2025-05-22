@@ -18,7 +18,7 @@ module Anthropic
       variant :signature_delta, -> { Anthropic::SignatureDelta }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::TextDelta, Anthropic::InputJSONDelta, Anthropic::CitationsDelta, Anthropic::ThinkingDelta, Anthropic::SignatureDelta)]
+      #   @return [Array(Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta, Anthropic::Models::ThinkingDelta, Anthropic::Models::SignatureDelta)]
     end
   end
 end

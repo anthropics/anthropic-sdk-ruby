@@ -19,6 +19,12 @@ module Anthropic
         tool_use_id: String,
         ?type: :web_search_tool_result
       ) -> void
+
+      def to_hash: -> {
+        content: Anthropic::Models::web_search_tool_result_block_content,
+        tool_use_id: String,
+        type: :web_search_tool_result
+      }
     end
   end
 end

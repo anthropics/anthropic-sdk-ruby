@@ -2,7 +2,7 @@ module Anthropic
   module Models
     type document_block_param =
       {
-        source: Anthropic::DocumentBlockParam::source,
+        source: Anthropic::Models::DocumentBlockParam::source,
         type: :document,
         cache_control: Anthropic::CacheControlEphemeral?,
         citations: Anthropic::CitationsConfigParam,
@@ -11,7 +11,7 @@ module Anthropic
       }
 
     class DocumentBlockParam < Anthropic::Internal::Type::BaseModel
-      attr_accessor source: Anthropic::DocumentBlockParam::source
+      attr_accessor source: Anthropic::Models::DocumentBlockParam::source
 
       attr_accessor type: :document
 
@@ -28,13 +28,22 @@ module Anthropic
       attr_accessor title: String?
 
       def initialize: (
-        source: Anthropic::DocumentBlockParam::source,
+        source: Anthropic::Models::DocumentBlockParam::source,
         ?cache_control: Anthropic::CacheControlEphemeral?,
         ?citations: Anthropic::CitationsConfigParam,
         ?context: String?,
         ?title: String?,
         ?type: :document
       ) -> void
+
+      def to_hash: -> {
+        source: Anthropic::Models::DocumentBlockParam::source,
+        type: :document,
+        cache_control: Anthropic::CacheControlEphemeral?,
+        citations: Anthropic::CitationsConfigParam,
+        context: String?,
+        title: String?
+      }
 
       type source =
         Anthropic::Base64PDFSource
@@ -45,7 +54,7 @@ module Anthropic
       module Source
         extend Anthropic::Internal::Type::Union
 
-        def self?.variants: -> ::Array[Anthropic::DocumentBlockParam::source]
+        def self?.variants: -> ::Array[Anthropic::Models::DocumentBlockParam::source]
       end
     end
   end

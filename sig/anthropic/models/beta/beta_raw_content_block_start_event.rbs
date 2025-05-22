@@ -5,23 +5,29 @@ module Anthropic
     module Beta
       type beta_raw_content_block_start_event =
         {
-          content_block: Anthropic::Beta::BetaRawContentBlockStartEvent::content_block,
+          content_block: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::content_block,
           index: Integer,
           type: :content_block_start
         }
 
       class BetaRawContentBlockStartEvent < Anthropic::Internal::Type::BaseModel
-        attr_accessor content_block: Anthropic::Beta::BetaRawContentBlockStartEvent::content_block
+        attr_accessor content_block: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::content_block
 
         attr_accessor index: Integer
 
         attr_accessor type: :content_block_start
 
         def initialize: (
-          content_block: Anthropic::Beta::BetaRawContentBlockStartEvent::content_block,
+          content_block: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::content_block,
           index: Integer,
           ?type: :content_block_start
         ) -> void
+
+        def to_hash: -> {
+          content_block: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::content_block,
+          index: Integer,
+          type: :content_block_start
+        }
 
         type content_block =
           Anthropic::Beta::BetaTextBlock
@@ -34,7 +40,7 @@ module Anthropic
         module ContentBlock
           extend Anthropic::Internal::Type::Union
 
-          def self?.variants: -> ::Array[Anthropic::Beta::BetaRawContentBlockStartEvent::content_block]
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaRawContentBlockStartEvent::content_block]
         end
       end
     end

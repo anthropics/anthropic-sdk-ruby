@@ -20,14 +20,14 @@ module Anthropic
         # @!attribute cache_control
         #   Create a cache control breakpoint at this content block.
         #
-        #   @return [Anthropic::Beta::BetaCacheControlEphemeral, nil]
+        #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!method initialize(cache_control: nil, name: :bash, type: :bash_20250124)
         #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Beta::BetaToolBash20250124} for more details.
+        #   {Anthropic::Models::Beta::BetaToolBash20250124} for more details.
         #
-        #   @param cache_control [Anthropic::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+        #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
         #   @param name [Symbol, :bash] Name of the tool.
         #

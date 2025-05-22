@@ -21,7 +21,7 @@ module Anthropic
         variant :content_block_stop, -> { Anthropic::Beta::BetaRawContentBlockStopEvent }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Beta::BetaRawMessageStartEvent, Anthropic::Beta::BetaRawMessageDeltaEvent, Anthropic::Beta::BetaRawMessageStopEvent, Anthropic::Beta::BetaRawContentBlockStartEvent, Anthropic::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Beta::BetaRawContentBlockStopEvent)]
+        #   @return [Array(Anthropic::Models::Beta::BetaRawMessageStartEvent, Anthropic::Models::Beta::BetaRawMessageDeltaEvent, Anthropic::Models::Beta::BetaRawMessageStopEvent, Anthropic::Models::Beta::BetaRawContentBlockStartEvent, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Models::Beta::BetaRawContentBlockStopEvent)]
       end
     end
 

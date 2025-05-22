@@ -27,6 +27,12 @@ module Anthropic
             ?request_options: Anthropic::request_opts
           ) -> void
 
+          def to_hash: -> {
+            requests: ::Array[Anthropic::Beta::Messages::BatchCreateParams::Request],
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+
           type request =
             {
               custom_id: String,
@@ -43,6 +49,11 @@ module Anthropic
               params: Anthropic::Beta::Messages::BatchCreateParams::Request::Params
             ) -> void
 
+            def to_hash: -> {
+              custom_id: String,
+              params: Anthropic::Beta::Messages::BatchCreateParams::Request::Params
+            }
+
             type params =
               {
                 max_tokens: Integer,
@@ -51,7 +62,7 @@ module Anthropic
                 metadata: Anthropic::Beta::BetaMetadata,
                 stop_sequences: ::Array[String],
                 stream: bool,
-                system_: Anthropic::Beta::Messages::BatchCreateParams::Request::Params::system_,
+                system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
                 temperature: Float,
                 thinking: Anthropic::Models::Beta::beta_thinking_config_param,
                 tool_choice: Anthropic::Models::Beta::beta_tool_choice,
@@ -81,11 +92,11 @@ module Anthropic
 
               def stream=: (bool) -> bool
 
-              attr_reader system_: Anthropic::Beta::Messages::BatchCreateParams::Request::Params::system_?
+              attr_reader system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_?
 
               def system_=: (
-                Anthropic::Beta::Messages::BatchCreateParams::Request::Params::system_
-              ) -> Anthropic::Beta::Messages::BatchCreateParams::Request::Params::system_
+                Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_
+              ) -> Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_
 
               attr_reader temperature: Float?
 
@@ -124,7 +135,7 @@ module Anthropic
                 ?metadata: Anthropic::Beta::BetaMetadata,
                 ?stop_sequences: ::Array[String],
                 ?stream: bool,
-                ?system_: Anthropic::Beta::Messages::BatchCreateParams::Request::Params::system_,
+                ?system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
                 ?temperature: Float,
                 ?thinking: Anthropic::Models::Beta::beta_thinking_config_param,
                 ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
@@ -133,13 +144,29 @@ module Anthropic
                 ?top_p: Float
               ) -> void
 
+              def to_hash: -> {
+                max_tokens: Integer,
+                messages: ::Array[Anthropic::Beta::BetaMessageParam],
+                model: Anthropic::Models::model,
+                metadata: Anthropic::Beta::BetaMetadata,
+                stop_sequences: ::Array[String],
+                stream: bool,
+                system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
+                temperature: Float,
+                thinking: Anthropic::Models::Beta::beta_thinking_config_param,
+                tool_choice: Anthropic::Models::Beta::beta_tool_choice,
+                tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
+                top_k: Integer,
+                top_p: Float
+              }
+
               type system_ =
                 String | ::Array[Anthropic::Beta::BetaTextBlockParam]
 
               module System
                 extend Anthropic::Internal::Type::Union
 
-                def self?.variants: -> ::Array[Anthropic::Beta::Messages::BatchCreateParams::Request::Params::system_]
+                def self?.variants: -> ::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_]
 
                 BetaTextBlockParamArray: Anthropic::Internal::Type::Converter
               end

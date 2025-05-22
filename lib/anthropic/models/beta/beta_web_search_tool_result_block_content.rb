@@ -8,10 +8,10 @@ module Anthropic
 
         variant -> { Anthropic::Beta::BetaWebSearchToolResultError }
 
-        variant -> { Anthropic::Beta::BetaWebSearchToolResultBlockContent::BetaWebSearchResultBlockArray }
+        variant -> { Anthropic::Models::Beta::BetaWebSearchToolResultBlockContent::BetaWebSearchResultBlockArray }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Beta::BetaWebSearchToolResultError, Array<Anthropic::Beta::BetaWebSearchResultBlock>)]
+        #   @return [Array(Anthropic::Models::Beta::BetaWebSearchToolResultError, Array<Anthropic::Models::Beta::BetaWebSearchResultBlock>)]
 
         # @type [Anthropic::Internal::Type::Converter]
         BetaWebSearchResultBlockArray =

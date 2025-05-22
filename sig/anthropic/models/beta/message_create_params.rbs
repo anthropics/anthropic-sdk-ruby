@@ -98,6 +98,23 @@ module Anthropic
           ?request_options: Anthropic::request_opts
         ) -> void
 
+        def to_hash: -> {
+          max_tokens: Integer,
+          messages: ::Array[Anthropic::Beta::BetaMessageParam],
+          model: Anthropic::Models::model,
+          metadata: Anthropic::Beta::BetaMetadata,
+          stop_sequences: ::Array[String],
+          system_: Anthropic::Models::Beta::MessageCreateParams::system_,
+          temperature: Float,
+          thinking: Anthropic::Models::Beta::beta_thinking_config_param,
+          tool_choice: Anthropic::Models::Beta::beta_tool_choice,
+          tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
+          top_k: Integer,
+          top_p: Float,
+          betas: ::Array[Anthropic::Models::anthropic_beta],
+          request_options: Anthropic::RequestOptions
+        }
+
         type system_ = String | ::Array[Anthropic::Beta::BetaTextBlockParam]
 
         module System

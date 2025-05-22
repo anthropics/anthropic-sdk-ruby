@@ -10,7 +10,7 @@ module Anthropic
         #   This defines the shape of the `input` that your tool accepts and that the model
         #   will produce.
         #
-        #   @return [Anthropic::Beta::BetaTool::InputSchema]
+        #   @return [Anthropic::Models::Beta::BetaTool::InputSchema]
         required :input_schema, -> { Anthropic::Beta::BetaTool::InputSchema }
 
         # @!attribute name
@@ -24,7 +24,7 @@ module Anthropic
         # @!attribute cache_control
         #   Create a cache control breakpoint at this content block.
         #
-        #   @return [Anthropic::Beta::BetaCacheControlEphemeral, nil]
+        #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!attribute description
@@ -40,24 +40,24 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, Anthropic::Beta::BetaTool::Type, nil]
+        #   @return [Symbol, Anthropic::Models::Beta::BetaTool::Type, nil]
         optional :type, enum: -> { Anthropic::Beta::BetaTool::Type }, nil?: true
 
         # @!method initialize(input_schema:, name:, cache_control: nil, description: nil, type: nil)
         #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Beta::BetaTool} for more details.
+        #   {Anthropic::Models::Beta::BetaTool} for more details.
         #
-        #   @param input_schema [Anthropic::Beta::BetaTool::InputSchema] [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
+        #   @param input_schema [Anthropic::Models::Beta::BetaTool::InputSchema] [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
         #
         #   @param name [String] Name of the tool.
         #
-        #   @param cache_control [Anthropic::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+        #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
         #   @param description [String] Description of what this tool does.
         #
-        #   @param type [Symbol, Anthropic::Beta::BetaTool::Type, nil]
+        #   @param type [Symbol, Anthropic::Models::Beta::BetaTool::Type, nil]
 
-        # @see Anthropic::Beta::BetaTool#input_schema
+        # @see Anthropic::Models::Beta::BetaTool#input_schema
         class InputSchema < Anthropic::Internal::Type::BaseModel
           # @!attribute type
           #
@@ -79,7 +79,7 @@ module Anthropic
           #   @param type [Symbol, :object]
         end
 
-        # @see Anthropic::Beta::BetaTool#type
+        # @see Anthropic::Models::Beta::BetaTool#type
         module Type
           extend Anthropic::Internal::Type::Enum
 

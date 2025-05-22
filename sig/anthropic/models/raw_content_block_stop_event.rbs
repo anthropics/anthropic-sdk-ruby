@@ -9,6 +9,8 @@ module Anthropic
       attr_accessor type: :content_block_stop
 
       def initialize: (index: Integer, ?type: :content_block_stop) -> void
+
+      def to_hash: -> { index: Integer, type: :content_block_stop }
     end
   end
 end

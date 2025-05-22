@@ -5,28 +5,28 @@ module Anthropic
     class MessageParam < Anthropic::Internal::Type::BaseModel
       # @!attribute content
       #
-      #   @return [String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam, Anthropic::ToolUseBlockParam, Anthropic::ServerToolUseBlockParam, Anthropic::WebSearchToolResultBlockParam, Anthropic::ToolResultBlockParam, Anthropic::DocumentBlockParam, Anthropic::ThinkingBlockParam, Anthropic::RedactedThinkingBlockParam>]
+      #   @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ServerToolUseBlockParam, Anthropic::Models::WebSearchToolResultBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam>]
       required :content, union: -> { Anthropic::MessageParam::Content }
 
       # @!attribute role
       #
-      #   @return [Symbol, Anthropic::MessageParam::Role]
+      #   @return [Symbol, Anthropic::Models::MessageParam::Role]
       required :role, enum: -> { Anthropic::MessageParam::Role }
 
       # @!method initialize(content:, role:)
-      #   @param content [String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam, Anthropic::ToolUseBlockParam, Anthropic::ServerToolUseBlockParam, Anthropic::WebSearchToolResultBlockParam, Anthropic::ToolResultBlockParam, Anthropic::DocumentBlockParam, Anthropic::ThinkingBlockParam, Anthropic::RedactedThinkingBlockParam>]
-      #   @param role [Symbol, Anthropic::MessageParam::Role]
+      #   @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ServerToolUseBlockParam, Anthropic::Models::WebSearchToolResultBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam>]
+      #   @param role [Symbol, Anthropic::Models::MessageParam::Role]
 
-      # @see Anthropic::MessageParam#content
+      # @see Anthropic::Models::MessageParam#content
       module Content
         extend Anthropic::Internal::Type::Union
 
         variant String
 
-        variant -> { Anthropic::MessageParam::Content::ContentBlockParamArray }
+        variant -> { Anthropic::Models::MessageParam::Content::ContentBlockParamArray }
 
         # @!method self.variants
-        #   @return [Array(String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam, Anthropic::ToolUseBlockParam, Anthropic::ServerToolUseBlockParam, Anthropic::WebSearchToolResultBlockParam, Anthropic::ToolResultBlockParam, Anthropic::DocumentBlockParam, Anthropic::ThinkingBlockParam, Anthropic::RedactedThinkingBlockParam>)]
+        #   @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ServerToolUseBlockParam, Anthropic::Models::WebSearchToolResultBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam>)]
 
         # @type [Anthropic::Internal::Type::Converter]
         ContentBlockParamArray = Anthropic::Internal::Type::ArrayOf[union: -> {
@@ -34,7 +34,7 @@ module Anthropic
         }]
       end
 
-      # @see Anthropic::MessageParam#role
+      # @see Anthropic::Models::MessageParam#role
       module Role
         extend Anthropic::Internal::Type::Enum
 

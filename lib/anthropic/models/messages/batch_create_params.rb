@@ -12,7 +12,7 @@ module Anthropic
         #   List of requests for prompt completion. Each is an individual request to create
         #   a Message.
         #
-        #   @return [Array<Anthropic::Messages::BatchCreateParams::Request>]
+        #   @return [Array<Anthropic::Models::Messages::BatchCreateParams::Request>]
         required :requests,
                  -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Messages::BatchCreateParams::Request] }
 
@@ -20,7 +20,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Messages::BatchCreateParams} for more details.
         #
-        #   @param requests [Array<Anthropic::Messages::BatchCreateParams::Request>] List of requests for prompt completion. Each is an individual request to create
+        #   @param requests [Array<Anthropic::Models::Messages::BatchCreateParams::Request>] List of requests for prompt completion. Each is an individual request to create
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
@@ -40,18 +40,18 @@ module Anthropic
           #   See the [Messages API reference](/en/api/messages) for full documentation on
           #   available parameters.
           #
-          #   @return [Anthropic::Messages::BatchCreateParams::Request::Params]
+          #   @return [Anthropic::Models::Messages::BatchCreateParams::Request::Params]
           required :params, -> { Anthropic::Messages::BatchCreateParams::Request::Params }
 
           # @!method initialize(custom_id:, params:)
           #   Some parameter documentations has been truncated, see
-          #   {Anthropic::Messages::BatchCreateParams::Request} for more details.
+          #   {Anthropic::Models::Messages::BatchCreateParams::Request} for more details.
           #
           #   @param custom_id [String] Developer-provided ID created for each request in a Message Batch. Useful for ma
           #
-          #   @param params [Anthropic::Messages::BatchCreateParams::Request::Params] Messages API creation parameters for the individual request.
+          #   @param params [Anthropic::Models::Messages::BatchCreateParams::Request::Params] Messages API creation parameters for the individual request.
 
-          # @see Anthropic::Messages::BatchCreateParams::Request#params
+          # @see Anthropic::Models::Messages::BatchCreateParams::Request#params
           class Params < Anthropic::Internal::Type::BaseModel
             # @!attribute max_tokens
             #   The maximum number of tokens to generate before stopping.
@@ -155,7 +155,7 @@ module Anthropic
             #
             #   There is a limit of 100000 messages in a single request.
             #
-            #   @return [Array<Anthropic::MessageParam>]
+            #   @return [Array<Anthropic::Models::MessageParam>]
             required :messages, -> { Anthropic::Internal::Type::ArrayOf[Anthropic::MessageParam] }
 
             # @!attribute model
@@ -163,13 +163,13 @@ module Anthropic
             #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
             #   details and options.
             #
-            #   @return [Symbol, String, Anthropic::Model]
+            #   @return [Symbol, String, Anthropic::Models::Model]
             required :model, union: -> { Anthropic::Model }
 
             # @!attribute metadata
             #   An object describing metadata about the request.
             #
-            #   @return [Anthropic::Metadata, nil]
+            #   @return [Anthropic::Models::Metadata, nil]
             optional :metadata, -> { Anthropic::Metadata }
 
             # @!attribute stop_sequences
@@ -202,7 +202,7 @@ module Anthropic
             #   as specifying a particular goal or role. See our
             #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
             #
-            #   @return [String, Array<Anthropic::TextBlockParam>, nil]
+            #   @return [String, Array<Anthropic::Models::TextBlockParam>, nil]
             optional :system_,
                      union: -> { Anthropic::Messages::BatchCreateParams::Request::Params::System },
                      api_name: :system
@@ -231,14 +231,14 @@ module Anthropic
             #   [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
             #   for details.
             #
-            #   @return [Anthropic::ThinkingConfigEnabled, Anthropic::ThinkingConfigDisabled, nil]
+            #   @return [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, nil]
             optional :thinking, union: -> { Anthropic::ThinkingConfigParam }
 
             # @!attribute tool_choice
             #   How the model should use the provided tools. The model can use a specific tool,
             #   any available tool, decide by itself, or not use tools at all.
             #
-            #   @return [Anthropic::ToolChoiceAuto, Anthropic::ToolChoiceAny, Anthropic::ToolChoiceTool, Anthropic::ToolChoiceNone, nil]
+            #   @return [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone, nil]
             optional :tool_choice, union: -> { Anthropic::ToolChoice }
 
             # @!attribute tools
@@ -312,7 +312,7 @@ module Anthropic
             #
             #   See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
             #
-            #   @return [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124, Anthropic::WebSearchTool20250305>, nil]
+            #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::WebSearchTool20250305>, nil]
             optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::ToolUnion] }
 
             # @!attribute top_k
@@ -343,7 +343,8 @@ module Anthropic
 
             # @!method initialize(max_tokens:, messages:, model:, metadata: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
             #   Some parameter documentations has been truncated, see
-            #   {Anthropic::Messages::BatchCreateParams::Request::Params} for more details.
+            #   {Anthropic::Models::Messages::BatchCreateParams::Request::Params} for more
+            #   details.
             #
             #   Messages API creation parameters for the individual request.
             #
@@ -352,25 +353,25 @@ module Anthropic
             #
             #   @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
             #
-            #   @param messages [Array<Anthropic::MessageParam>] Input messages.
+            #   @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
             #
-            #   @param model [Symbol, String, Anthropic::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+            #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
             #
-            #   @param metadata [Anthropic::Metadata] An object describing metadata about the request.
+            #   @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
             #
             #   @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
             #
             #   @param stream [Boolean] Whether to incrementally stream the response using server-sent events.
             #
-            #   @param system_ [String, Array<Anthropic::TextBlockParam>] System prompt.
+            #   @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt.
             #
             #   @param temperature [Float] Amount of randomness injected into the response.
             #
-            #   @param thinking [Anthropic::ThinkingConfigEnabled, Anthropic::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
+            #   @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
             #
-            #   @param tool_choice [Anthropic::ToolChoiceAuto, Anthropic::ToolChoiceAny, Anthropic::ToolChoiceTool, Anthropic::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
+            #   @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
             #
-            #   @param tools [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124, Anthropic::WebSearchTool20250305>] Definitions of tools that the model may use.
+            #   @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::WebSearchTool20250305>] Definitions of tools that the model may use.
             #
             #   @param top_k [Integer] Only sample from the top K options for each subsequent token.
             #
@@ -382,18 +383,16 @@ module Anthropic
             # as specifying a particular goal or role. See our
             # [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
             #
-            # @see Anthropic::Messages::BatchCreateParams::Request::Params#system_
+            # @see Anthropic::Models::Messages::BatchCreateParams::Request::Params#system_
             module System
               extend Anthropic::Internal::Type::Union
 
               variant String
 
-              variant -> {
-                Anthropic::Messages::BatchCreateParams::Request::Params::System::TextBlockParamArray
-              }
+              variant -> { Anthropic::Models::Messages::BatchCreateParams::Request::Params::System::TextBlockParamArray }
 
               # @!method self.variants
-              #   @return [Array(String, Array<Anthropic::TextBlockParam>)]
+              #   @return [Array(String, Array<Anthropic::Models::TextBlockParam>)]
 
               # @type [Anthropic::Internal::Type::Converter]
               TextBlockParamArray = Anthropic::Internal::Type::ArrayOf[-> { Anthropic::TextBlockParam }]

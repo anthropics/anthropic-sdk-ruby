@@ -39,6 +39,16 @@ module Anthropic
           ?type: :web_search_20250305
         ) -> void
 
+        def to_hash: -> {
+          name: :web_search,
+          type: :web_search_20250305,
+          allowed_domains: ::Array[String]?,
+          blocked_domains: ::Array[String]?,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          max_uses: Integer?,
+          user_location: Anthropic::Beta::BetaWebSearchTool20250305::UserLocation?
+        }
+
         type user_location =
           {
             type: :approximate,
@@ -66,6 +76,14 @@ module Anthropic
             ?timezone: String?,
             ?type: :approximate
           ) -> void
+
+          def to_hash: -> {
+            type: :approximate,
+            city: String?,
+            country: String?,
+            region: String?,
+            timezone: String?
+          }
         end
       end
     end

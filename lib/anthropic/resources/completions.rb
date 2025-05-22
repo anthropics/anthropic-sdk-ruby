@@ -22,11 +22,11 @@ module Anthropic
       #
       # @param max_tokens_to_sample [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
-      # @param model [Symbol, String, Anthropic::Model] Body param: The model that will complete your prompt.\n\nSee [models](https://do
+      # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.\n\nSee [models](https://do
       #
       # @param prompt [String] Body param: The prompt that you want Claude to complete.
       #
-      # @param metadata [Anthropic::Metadata] Body param: An object describing metadata about the request.
+      # @param metadata [Anthropic::Models::Metadata] Body param: An object describing metadata about the request.
       #
       # @param stop_sequences [Array<String>] Body param: Sequences that will cause the model to stop generating.
       #
@@ -36,11 +36,11 @@ module Anthropic
       #
       # @param top_p [Float] Body param: Use nucleus sampling.
       #
-      # @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+      # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Anthropic::Completion]
+      # @return [Anthropic::Models::Completion]
       #
       # @see Anthropic::Models::CompletionCreateParams
       def create(params)
@@ -78,11 +78,11 @@ module Anthropic
       #
       # @param max_tokens_to_sample [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
-      # @param model [Symbol, String, Anthropic::Model] Body param: The model that will complete your prompt.\n\nSee [models](https://do
+      # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.\n\nSee [models](https://do
       #
       # @param prompt [String] Body param: The prompt that you want Claude to complete.
       #
-      # @param metadata [Anthropic::Metadata] Body param: An object describing metadata about the request.
+      # @param metadata [Anthropic::Models::Metadata] Body param: An object describing metadata about the request.
       #
       # @param stop_sequences [Array<String>] Body param: Sequences that will cause the model to stop generating.
       #
@@ -92,11 +92,11 @@ module Anthropic
       #
       # @param top_p [Float] Body param: Use nucleus sampling.
       #
-      # @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+      # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Anthropic::Internal::Stream<Anthropic::Completion>]
+      # @return [Anthropic::Internal::Stream<Anthropic::Models::Completion>]
       #
       # @see Anthropic::Models::CompletionCreateParams
       def create_streaming(params)

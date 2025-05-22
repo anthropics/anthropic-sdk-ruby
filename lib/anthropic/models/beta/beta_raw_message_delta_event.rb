@@ -6,7 +6,7 @@ module Anthropic
       class BetaRawMessageDeltaEvent < Anthropic::Internal::Type::BaseModel
         # @!attribute delta
         #
-        #   @return [Anthropic::Beta::BetaRawMessageDeltaEvent::Delta]
+        #   @return [Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta]
         required :delta, -> { Anthropic::Beta::BetaRawMessageDeltaEvent::Delta }
 
         # @!attribute type
@@ -31,24 +31,24 @@ module Anthropic
         #   Total input tokens in a request is the summation of `input_tokens`,
         #   `cache_creation_input_tokens`, and `cache_read_input_tokens`.
         #
-        #   @return [Anthropic::Beta::BetaMessageDeltaUsage]
+        #   @return [Anthropic::Models::Beta::BetaMessageDeltaUsage]
         required :usage, -> { Anthropic::Beta::BetaMessageDeltaUsage }
 
         # @!method initialize(delta:, usage:, type: :message_delta)
         #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Beta::BetaRawMessageDeltaEvent} for more details.
+        #   {Anthropic::Models::Beta::BetaRawMessageDeltaEvent} for more details.
         #
-        #   @param delta [Anthropic::Beta::BetaRawMessageDeltaEvent::Delta]
+        #   @param delta [Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta]
         #
-        #   @param usage [Anthropic::Beta::BetaMessageDeltaUsage] Billing and rate-limit usage.
+        #   @param usage [Anthropic::Models::Beta::BetaMessageDeltaUsage] Billing and rate-limit usage.
         #
         #   @param type [Symbol, :message_delta]
 
-        # @see Anthropic::Beta::BetaRawMessageDeltaEvent#delta
+        # @see Anthropic::Models::Beta::BetaRawMessageDeltaEvent#delta
         class Delta < Anthropic::Internal::Type::BaseModel
           # @!attribute stop_reason
           #
-          #   @return [Symbol, Anthropic::Beta::BetaStopReason, nil]
+          #   @return [Symbol, Anthropic::Models::Beta::BetaStopReason, nil]
           required :stop_reason, enum: -> { Anthropic::Beta::BetaStopReason }, nil?: true
 
           # @!attribute stop_sequence
@@ -57,7 +57,7 @@ module Anthropic
           required :stop_sequence, String, nil?: true
 
           # @!method initialize(stop_reason:, stop_sequence:)
-          #   @param stop_reason [Symbol, Anthropic::Beta::BetaStopReason, nil]
+          #   @param stop_reason [Symbol, Anthropic::Models::Beta::BetaStopReason, nil]
           #   @param stop_sequence [String, nil]
         end
       end
