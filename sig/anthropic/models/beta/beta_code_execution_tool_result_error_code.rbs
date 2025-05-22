@@ -1,0 +1,24 @@
+module Anthropic
+  module Models
+    module BetaCodeExecutionToolResultErrorCode = Beta::BetaCodeExecutionToolResultErrorCode
+
+    module Beta
+      type beta_code_execution_tool_result_error_code =
+        :invalid_tool_input
+        | :unavailable
+        | :too_many_requests
+        | :execution_time_exceeded
+
+      module BetaCodeExecutionToolResultErrorCode
+        extend Anthropic::Internal::Type::Enum
+
+        INVALID_TOOL_INPUT: :invalid_tool_input
+        UNAVAILABLE: :unavailable
+        TOO_MANY_REQUESTS: :too_many_requests
+        EXECUTION_TIME_EXCEEDED: :execution_time_exceeded
+
+        def self?.values: -> ::Array[Anthropic::Models::Beta::beta_code_execution_tool_result_error_code]
+      end
+    end
+  end
+end

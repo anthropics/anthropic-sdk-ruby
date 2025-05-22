@@ -1,0 +1,54 @@
+module Anthropic
+  module Models
+    module Beta
+      type file_metadata =
+        {
+          id: String,
+          created_at: Time,
+          filename: String,
+          mime_type: String,
+          size_bytes: Integer,
+          type: :file,
+          downloadable: bool
+        }
+
+      class FileMetadata < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor filename: String
+
+        attr_accessor mime_type: String
+
+        attr_accessor size_bytes: Integer
+
+        attr_accessor type: :file
+
+        attr_reader downloadable: bool?
+
+        def downloadable=: (bool) -> bool
+
+        def initialize: (
+          id: String,
+          created_at: Time,
+          filename: String,
+          mime_type: String,
+          size_bytes: Integer,
+          ?downloadable: bool,
+          ?type: :file
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          created_at: Time,
+          filename: String,
+          mime_type: String,
+          size_bytes: Integer,
+          type: :file,
+          downloadable: bool
+        }
+      end
+    end
+  end
+end

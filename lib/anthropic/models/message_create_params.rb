@@ -128,6 +128,16 @@ module Anthropic
       #   @return [Anthropic::Models::Metadata, nil]
       optional :metadata, -> { Anthropic::Metadata }
 
+      # @!attribute service_tier
+      #   Determines whether to use priority capacity (if available) or standard capacity
+      #   for this request.
+      #
+      #   Anthropic offers different levels of service for your API requests. See
+      #   [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
+      #
+      #   @return [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier, nil]
+      optional :service_tier, enum: -> { Anthropic::MessageCreateParams::ServiceTier }
+
       # @!attribute stop_sequences
       #   Custom text sequences that will cause the model to stop generating.
       #
@@ -286,7 +296,7 @@ module Anthropic
       #   @return [Float, nil]
       optional :top_p, Float
 
-      # @!method initialize(max_tokens:, messages:, model:, metadata: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      # @!method initialize(max_tokens:, messages:, model:, metadata: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::MessageCreateParams} for more details.
       #
@@ -297,6 +307,8 @@ module Anthropic
       #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
       #
       #   @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
+      #
+      #   @param service_tier [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
       #
       #   @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
       #
@@ -315,6 +327,21 @@ module Anthropic
       #   @param top_p [Float] Use nucleus sampling.
       #
       #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
+
+      # Determines whether to use priority capacity (if available) or standard capacity
+      # for this request.
+      #
+      # Anthropic offers different levels of service for your API requests. See
+      # [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
+      module ServiceTier
+        extend Anthropic::Internal::Type::Enum
+
+        AUTO = :auto
+        STANDARD_ONLY = :standard_only
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
 
       # System prompt.
       #

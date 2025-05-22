@@ -20,7 +20,9 @@ module Anthropic
         sig { returns(T.anything) }
         attr_accessor :input
 
-        sig { returns(Symbol) }
+        sig do
+          returns(Anthropic::Beta::BetaServerToolUseBlock::Name::TaggedSymbol)
+        end
         attr_accessor :name
 
         sig { returns(Symbol) }
@@ -30,19 +32,55 @@ module Anthropic
           params(
             id: String,
             input: T.anything,
-            name: Symbol,
+            name: Anthropic::Beta::BetaServerToolUseBlock::Name::OrSymbol,
             type: Symbol
           ).returns(T.attached_class)
         end
-        def self.new(id:, input:, name: :web_search, type: :server_tool_use)
+        def self.new(id:, input:, name:, type: :server_tool_use)
         end
 
         sig do
           override.returns(
-            { id: String, input: T.anything, name: Symbol, type: Symbol }
+            {
+              id: String,
+              input: T.anything,
+              name: Anthropic::Beta::BetaServerToolUseBlock::Name::TaggedSymbol,
+              type: Symbol
+            }
           )
         end
         def to_hash
+        end
+
+        module Name
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::Beta::BetaServerToolUseBlock::Name)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          WEB_SEARCH =
+            T.let(
+              :web_search,
+              Anthropic::Beta::BetaServerToolUseBlock::Name::TaggedSymbol
+            )
+          CODE_EXECUTION =
+            T.let(
+              :code_execution,
+              Anthropic::Beta::BetaServerToolUseBlock::Name::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaServerToolUseBlock::Name::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
     end

@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    class BetaMCPToolUseBlock = Beta::BetaMCPToolUseBlock
+
+    module Beta
+      type beta_mcp_tool_use_block =
+        {
+          id: String,
+          input: top,
+          name: String,
+          server_name: String,
+          type: :mcp_tool_use
+        }
+
+      class BetaMCPToolUseBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor input: top
+
+        attr_accessor name: String
+
+        attr_accessor server_name: String
+
+        attr_accessor type: :mcp_tool_use
+
+        def initialize: (
+          id: String,
+          input: top,
+          name: String,
+          server_name: String,
+          ?type: :mcp_tool_use
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          input: top,
+          name: String,
+          server_name: String,
+          type: :mcp_tool_use
+        }
+      end
+    end
+  end
+end

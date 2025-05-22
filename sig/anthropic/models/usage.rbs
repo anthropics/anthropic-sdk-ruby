@@ -6,7 +6,8 @@ module Anthropic
         cache_read_input_tokens: Integer?,
         input_tokens: Integer,
         output_tokens: Integer,
-        server_tool_use: Anthropic::ServerToolUsage?
+        server_tool_use: Anthropic::ServerToolUsage?,
+        service_tier: Anthropic::Models::Usage::service_tier?
       }
 
     class Usage < Anthropic::Internal::Type::BaseModel
@@ -20,12 +21,15 @@ module Anthropic
 
       attr_accessor server_tool_use: Anthropic::ServerToolUsage?
 
+      attr_accessor service_tier: Anthropic::Models::Usage::service_tier?
+
       def initialize: (
         cache_creation_input_tokens: Integer?,
         cache_read_input_tokens: Integer?,
         input_tokens: Integer,
         output_tokens: Integer,
-        server_tool_use: Anthropic::ServerToolUsage?
+        server_tool_use: Anthropic::ServerToolUsage?,
+        service_tier: Anthropic::Models::Usage::service_tier?
       ) -> void
 
       def to_hash: -> {
@@ -33,8 +37,21 @@ module Anthropic
         cache_read_input_tokens: Integer?,
         input_tokens: Integer,
         output_tokens: Integer,
-        server_tool_use: Anthropic::ServerToolUsage?
+        server_tool_use: Anthropic::ServerToolUsage?,
+        service_tier: Anthropic::Models::Usage::service_tier?
       }
+
+      type service_tier = :standard | :priority | :batch
+
+      module ServiceTier
+        extend Anthropic::Internal::Type::Enum
+
+        STANDARD: :standard
+        PRIORITY: :priority
+        BATCH: :batch
+
+        def self?.values: -> ::Array[Anthropic::Models::Usage::service_tier]
+      end
     end
   end
 end

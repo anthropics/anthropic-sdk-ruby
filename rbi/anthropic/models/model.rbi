@@ -17,11 +17,11 @@ module Anthropic
       TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Model) }
       OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-      # Our most intelligent model
+      # High-performance model with early extended thinking
       CLAUDE_3_7_SONNET_LATEST =
         T.let(:"claude-3-7-sonnet-latest", Anthropic::Model::TaggedSymbol)
 
-      # Our most intelligent model
+      # High-performance model with early extended thinking
       CLAUDE_3_7_SONNET_20250219 =
         T.let(:"claude-3-7-sonnet-20250219", Anthropic::Model::TaggedSymbol)
 
@@ -33,6 +33,18 @@ module Anthropic
       CLAUDE_3_5_HAIKU_20241022 =
         T.let(:"claude-3-5-haiku-20241022", Anthropic::Model::TaggedSymbol)
 
+      # High-performance model with extended thinking
+      CLAUDE_SONNET_4_20250514 =
+        T.let(:"claude-sonnet-4-20250514", Anthropic::Model::TaggedSymbol)
+
+      # High-performance model with extended thinking
+      CLAUDE_SONNET_4_0 =
+        T.let(:"claude-sonnet-4-0", Anthropic::Model::TaggedSymbol)
+
+      # High-performance model with extended thinking
+      CLAUDE_4_SONNET_20250514 =
+        T.let(:"claude-4-sonnet-20250514", Anthropic::Model::TaggedSymbol)
+
       # Our previous most intelligent model
       CLAUDE_3_5_SONNET_LATEST =
         T.let(:"claude-3-5-sonnet-latest", Anthropic::Model::TaggedSymbol)
@@ -43,6 +55,18 @@ module Anthropic
 
       CLAUDE_3_5_SONNET_20240620 =
         T.let(:"claude-3-5-sonnet-20240620", Anthropic::Model::TaggedSymbol)
+
+      # Our most capable model
+      CLAUDE_OPUS_4_0 =
+        T.let(:"claude-opus-4-0", Anthropic::Model::TaggedSymbol)
+
+      # Our most capable model
+      CLAUDE_OPUS_4_20250514 =
+        T.let(:"claude-opus-4-20250514", Anthropic::Model::TaggedSymbol)
+
+      # Our most capable model
+      CLAUDE_4_OPUS_20250514 =
+        T.let(:"claude-4-opus-20250514", Anthropic::Model::TaggedSymbol)
 
       # Excels at writing and complex tasks
       CLAUDE_3_OPUS_LATEST =

@@ -14,6 +14,7 @@ module Anthropic
             )
           end
 
+        # Response model for a file uploaded to the container.
         sig do
           returns(
             Anthropic::Beta::BetaRawContentBlockStartEvent::ContentBlock::Variants
@@ -35,6 +36,10 @@ module Anthropic
                 Anthropic::Beta::BetaToolUseBlock::OrHash,
                 Anthropic::Beta::BetaServerToolUseBlock::OrHash,
                 Anthropic::Beta::BetaWebSearchToolResultBlock::OrHash,
+                Anthropic::Beta::BetaCodeExecutionToolResultBlock::OrHash,
+                Anthropic::Beta::BetaMCPToolUseBlock::OrHash,
+                Anthropic::Beta::BetaMCPToolResultBlock::OrHash,
+                Anthropic::Beta::BetaContainerUploadBlock::OrHash,
                 Anthropic::Beta::BetaThinkingBlock::OrHash,
                 Anthropic::Beta::BetaRedactedThinkingBlock::OrHash
               ),
@@ -42,7 +47,12 @@ module Anthropic
             type: Symbol
           ).returns(T.attached_class)
         end
-        def self.new(content_block:, index:, type: :content_block_start)
+        def self.new(
+          # Response model for a file uploaded to the container.
+          content_block:,
+          index:,
+          type: :content_block_start
+        )
         end
 
         sig do
@@ -58,6 +68,7 @@ module Anthropic
         def to_hash
         end
 
+        # Response model for a file uploaded to the container.
         module ContentBlock
           extend Anthropic::Internal::Type::Union
 
@@ -68,6 +79,10 @@ module Anthropic
                 Anthropic::Beta::BetaToolUseBlock,
                 Anthropic::Beta::BetaServerToolUseBlock,
                 Anthropic::Beta::BetaWebSearchToolResultBlock,
+                Anthropic::Beta::BetaCodeExecutionToolResultBlock,
+                Anthropic::Beta::BetaMCPToolUseBlock,
+                Anthropic::Beta::BetaMCPToolResultBlock,
+                Anthropic::Beta::BetaContainerUploadBlock,
                 Anthropic::Beta::BetaThinkingBlock,
                 Anthropic::Beta::BetaRedactedThinkingBlock
               )

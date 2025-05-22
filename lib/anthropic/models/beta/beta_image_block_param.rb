@@ -6,7 +6,7 @@ module Anthropic
       class BetaImageBlockParam < Anthropic::Internal::Type::BaseModel
         # @!attribute source
         #
-        #   @return [Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource]
+        #   @return [Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource, Anthropic::Models::Beta::BetaFileImageSource]
         required :source, union: -> { Anthropic::Beta::BetaImageBlockParam::Source }
 
         # @!attribute type
@@ -21,7 +21,7 @@ module Anthropic
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!method initialize(source:, cache_control: nil, type: :image)
-        #   @param source [Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource]
+        #   @param source [Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource, Anthropic::Models::Beta::BetaFileImageSource]
         #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
@@ -37,8 +37,10 @@ module Anthropic
 
           variant :url, -> { Anthropic::Beta::BetaURLImageSource }
 
+          variant :file, -> { Anthropic::Beta::BetaFileImageSource }
+
           # @!method self.variants
-          #   @return [Array(Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource)]
+          #   @return [Array(Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource, Anthropic::Models::Beta::BetaFileImageSource)]
         end
       end
     end

@@ -122,12 +122,58 @@ module Anthropic
         sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
         attr_accessor :model
 
+        # Container identifier for reuse across requests.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :container
+
+        # MCP servers to be utilized in this request
+        sig do
+          returns(
+            T.nilable(
+              T::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition]
+            )
+          )
+        end
+        attr_reader :mcp_servers
+
+        sig do
+          params(
+            mcp_servers:
+              T::Array[
+                Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
+              ]
+          ).void
+        end
+        attr_writer :mcp_servers
+
         # An object describing metadata about the request.
         sig { returns(T.nilable(Anthropic::Beta::BetaMetadata)) }
         attr_reader :metadata
 
         sig { params(metadata: Anthropic::Beta::BetaMetadata::OrHash).void }
         attr_writer :metadata
+
+        # Determines whether to use priority capacity (if available) or standard capacity
+        # for this request.
+        #
+        # Anthropic offers different levels of service for your API requests. See
+        # [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
+        sig do
+          returns(
+            T.nilable(
+              Anthropic::Beta::MessageCreateParams::ServiceTier::OrSymbol
+            )
+          )
+        end
+        attr_reader :service_tier
+
+        sig do
+          params(
+            service_tier:
+              Anthropic::Beta::MessageCreateParams::ServiceTier::OrSymbol
+          ).void
+        end
+        attr_writer :service_tier
 
         # Custom text sequences that will cause the model to stop generating.
         #
@@ -319,7 +365,9 @@ module Anthropic
                   Anthropic::Beta::BetaToolComputerUse20250124,
                   Anthropic::Beta::BetaToolBash20250124,
                   Anthropic::Beta::BetaToolTextEditor20250124,
-                  Anthropic::Beta::BetaWebSearchTool20250305
+                  Anthropic::Beta::BetaToolTextEditor20250429,
+                  Anthropic::Beta::BetaWebSearchTool20250305,
+                  Anthropic::Beta::BetaCodeExecutionTool20250522
                 )
               ]
             )
@@ -339,7 +387,9 @@ module Anthropic
                   Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
                   Anthropic::Beta::BetaToolBash20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
-                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash
+                  Anthropic::Beta::BetaToolTextEditor20250429::OrHash,
+                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash,
+                  Anthropic::Beta::BetaCodeExecutionTool20250522::OrHash
                 )
               ]
           ).void
@@ -396,7 +446,14 @@ module Anthropic
             max_tokens: Integer,
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            container: T.nilable(String),
+            mcp_servers:
+              T::Array[
+                Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
+              ],
             metadata: Anthropic::Beta::BetaMetadata::OrHash,
+            service_tier:
+              Anthropic::Beta::MessageCreateParams::ServiceTier::OrSymbol,
             stop_sequences: T::Array[String],
             system_: Anthropic::Beta::MessageCreateParams::System::Variants,
             temperature: Float,
@@ -422,7 +479,9 @@ module Anthropic
                   Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
                   Anthropic::Beta::BetaToolBash20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
-                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash
+                  Anthropic::Beta::BetaToolTextEditor20250429::OrHash,
+                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash,
+                  Anthropic::Beta::BetaCodeExecutionTool20250522::OrHash
                 )
               ],
             top_k: Integer,
@@ -533,8 +592,18 @@ module Anthropic
           # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
+          # Container identifier for reuse across requests.
+          container: nil,
+          # MCP servers to be utilized in this request
+          mcp_servers: nil,
           # An object describing metadata about the request.
           metadata: nil,
+          # Determines whether to use priority capacity (if available) or standard capacity
+          # for this request.
+          #
+          # Anthropic offers different levels of service for your API requests. See
+          # [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
+          service_tier: nil,
           # Custom text sequences that will cause the model to stop generating.
           #
           # Our models will normally stop when they have naturally completed their turn,
@@ -673,7 +742,12 @@ module Anthropic
               max_tokens: Integer,
               messages: T::Array[Anthropic::Beta::BetaMessageParam],
               model: T.any(Anthropic::Model::OrSymbol, String),
+              container: T.nilable(String),
+              mcp_servers:
+                T::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
               metadata: Anthropic::Beta::BetaMetadata,
+              service_tier:
+                Anthropic::Beta::MessageCreateParams::ServiceTier::OrSymbol,
               stop_sequences: T::Array[String],
               system_: Anthropic::Beta::MessageCreateParams::System::Variants,
               temperature: Float,
@@ -699,7 +773,9 @@ module Anthropic
                     Anthropic::Beta::BetaToolComputerUse20250124,
                     Anthropic::Beta::BetaToolBash20250124,
                     Anthropic::Beta::BetaToolTextEditor20250124,
-                    Anthropic::Beta::BetaWebSearchTool20250305
+                    Anthropic::Beta::BetaToolTextEditor20250429,
+                    Anthropic::Beta::BetaWebSearchTool20250305,
+                    Anthropic::Beta::BetaCodeExecutionTool20250522
                   )
                 ],
               top_k: Integer,
@@ -711,6 +787,42 @@ module Anthropic
           )
         end
         def to_hash
+        end
+
+        # Determines whether to use priority capacity (if available) or standard capacity
+        # for this request.
+        #
+        # Anthropic offers different levels of service for your API requests. See
+        # [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
+        module ServiceTier
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::Beta::MessageCreateParams::ServiceTier)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          AUTO =
+            T.let(
+              :auto,
+              Anthropic::Beta::MessageCreateParams::ServiceTier::TaggedSymbol
+            )
+          STANDARD_ONLY =
+            T.let(
+              :standard_only,
+              Anthropic::Beta::MessageCreateParams::ServiceTier::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::MessageCreateParams::ServiceTier::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
 
         # System prompt.

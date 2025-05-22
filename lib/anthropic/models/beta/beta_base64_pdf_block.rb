@@ -6,7 +6,7 @@ module Anthropic
       class BetaBase64PDFBlock < Anthropic::Internal::Type::BaseModel
         # @!attribute source
         #
-        #   @return [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource]
+        #   @return [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource, Anthropic::Models::Beta::BetaFileDocumentSource]
         required :source, union: -> { Anthropic::Beta::BetaBase64PDFBlock::Source }
 
         # @!attribute type
@@ -36,7 +36,7 @@ module Anthropic
         optional :title, String, nil?: true
 
         # @!method initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document)
-        #   @param source [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource]
+        #   @param source [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource, Anthropic::Models::Beta::BetaFileDocumentSource]
         #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
@@ -62,8 +62,10 @@ module Anthropic
 
           variant :url, -> { Anthropic::Beta::BetaURLPDFSource }
 
+          variant :file, -> { Anthropic::Beta::BetaFileDocumentSource }
+
           # @!method self.variants
-          #   @return [Array(Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource)]
+          #   @return [Array(Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource, Anthropic::Models::Beta::BetaFileDocumentSource)]
         end
       end
     end

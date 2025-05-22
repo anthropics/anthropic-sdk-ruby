@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    class BetaCodeExecutionResultBlock = Beta::BetaCodeExecutionResultBlock
+
+    module Beta
+      type beta_code_execution_result_block =
+        {
+          content: ::Array[Anthropic::Beta::BetaCodeExecutionOutputBlock],
+          return_code: Integer,
+          stderr: String,
+          stdout: String,
+          type: :code_execution_result
+        }
+
+      class BetaCodeExecutionResultBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: ::Array[Anthropic::Beta::BetaCodeExecutionOutputBlock]
+
+        attr_accessor return_code: Integer
+
+        attr_accessor stderr: String
+
+        attr_accessor stdout: String
+
+        attr_accessor type: :code_execution_result
+
+        def initialize: (
+          content: ::Array[Anthropic::Beta::BetaCodeExecutionOutputBlock],
+          return_code: Integer,
+          stderr: String,
+          stdout: String,
+          ?type: :code_execution_result
+        ) -> void
+
+        def to_hash: -> {
+          content: ::Array[Anthropic::Beta::BetaCodeExecutionOutputBlock],
+          return_code: Integer,
+          stderr: String,
+          stdout: String,
+          type: :code_execution_result
+        }
+      end
+    end
+  end
+end

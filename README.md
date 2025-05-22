@@ -83,6 +83,28 @@ if page.next_page?
 end
 ```
 
+### File uploads
+
+Request parameters that correspond to file uploads can be passed as raw contents, a [`Pathname`](https://rubyapi.org/3.2/o/pathname) instance, [`StringIO`](https://rubyapi.org/3.2/o/stringio), or more.
+
+```ruby
+require "pathname"
+
+# Use `Pathname` to send the filename and/or avoid paging a large file into memory:
+file_metadata = anthropic.beta.files.upload(file: Pathname("/path/to/file"))
+
+# Alternatively, pass file contents or a `StringIO` directly:
+file_metadata = anthropic.beta.files.upload(file: File.read("/path/to/file"))
+
+# Or, to control the filename and/or content type:
+file = Anthropic::FilePart.new(File.read("/path/to/file"), filename: "/path/to/file", content_type: "…")
+file_metadata = anthropic.beta.files.upload(file: file)
+
+puts(file_metadata.id)
+```
+
+Note that you can also pass a raw `IO` descriptor, but this disables retries, as the library can't be sure if the descriptor is a file or pipe (which cannot be rewound).
+
 ### Handling errors
 
 When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `Anthropic::Errors::APIError` will be thrown:
@@ -271,23 +293,25 @@ anthropic.messages.create(**params)
 Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
 
 ```ruby
-# :"image/jpeg"
-puts(Anthropic::Base64ImageSource::MediaType::IMAGE_JPEG)
+# :auto
+puts(Anthropic::MessageCreateParams::ServiceTier::AUTO)
 
-# Revealed type: `T.all(Anthropic::Base64ImageSource::MediaType, Symbol)`
-T.reveal_type(Anthropic::Base64ImageSource::MediaType::IMAGE_JPEG)
+# Revealed type: `T.all(Anthropic::MessageCreateParams::ServiceTier, Symbol)`
+T.reveal_type(Anthropic::MessageCreateParams::ServiceTier::AUTO)
 ```
 
 Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
 
 ```ruby
-Anthropic::Base64ImageSource.new(
-  media_type: Anthropic::Base64ImageSource::MediaType::IMAGE_JPEG,
+# Using the enum constants preserves the tagged type information:
+anthropic.messages.create(
+  service_tier: Anthropic::MessageCreateParams::ServiceTier::AUTO,
   # …
 )
 
-Anthropic::Base64ImageSource.new(
-  media_type: :"image/jpeg",
+# Literal values are also permissible:
+anthropic.messages.create(
+  service_tier: :auto,
   # …
 )
 ```

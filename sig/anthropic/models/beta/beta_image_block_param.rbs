@@ -32,6 +32,7 @@ module Anthropic
         type source =
           Anthropic::Beta::BetaBase64ImageSource
           | Anthropic::Beta::BetaURLImageSource
+          | Anthropic::Beta::BetaFileImageSource
 
         module Source
           extend Anthropic::Internal::Type::Union

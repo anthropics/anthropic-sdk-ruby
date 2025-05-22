@@ -59,7 +59,10 @@ module Anthropic
                 max_tokens: Integer,
                 messages: ::Array[Anthropic::Beta::BetaMessageParam],
                 model: Anthropic::Models::model,
+                container: String?,
+                mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
                 metadata: Anthropic::Beta::BetaMetadata,
+                service_tier: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier,
                 stop_sequences: ::Array[String],
                 stream: bool,
                 system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
@@ -78,11 +81,25 @@ module Anthropic
 
               attr_accessor model: Anthropic::Models::model
 
+              attr_accessor container: String?
+
+              attr_reader mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition]?
+
+              def mcp_servers=: (
+                ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition]
+              ) -> ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition]
+
               attr_reader metadata: Anthropic::Beta::BetaMetadata?
 
               def metadata=: (
                 Anthropic::Beta::BetaMetadata
               ) -> Anthropic::Beta::BetaMetadata
+
+              attr_reader service_tier: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier?
+
+              def service_tier=: (
+                Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier
+              ) -> Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier
 
               attr_reader stop_sequences: ::Array[String]?
 
@@ -132,7 +149,10 @@ module Anthropic
                 max_tokens: Integer,
                 messages: ::Array[Anthropic::Beta::BetaMessageParam],
                 model: Anthropic::Models::model,
+                ?container: String?,
+                ?mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
                 ?metadata: Anthropic::Beta::BetaMetadata,
+                ?service_tier: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier,
                 ?stop_sequences: ::Array[String],
                 ?stream: bool,
                 ?system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
@@ -148,7 +168,10 @@ module Anthropic
                 max_tokens: Integer,
                 messages: ::Array[Anthropic::Beta::BetaMessageParam],
                 model: Anthropic::Models::model,
+                container: String?,
+                mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
                 metadata: Anthropic::Beta::BetaMetadata,
+                service_tier: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier,
                 stop_sequences: ::Array[String],
                 stream: bool,
                 system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
@@ -159,6 +182,17 @@ module Anthropic
                 top_k: Integer,
                 top_p: Float
               }
+
+              type service_tier = :auto | :standard_only
+
+              module ServiceTier
+                extend Anthropic::Internal::Type::Enum
+
+                AUTO: :auto
+                STANDARD_ONLY: :standard_only
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier]
+              end
 
               type system_ =
                 String | ::Array[Anthropic::Beta::BetaTextBlockParam]

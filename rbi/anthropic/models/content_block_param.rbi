@@ -2,17 +2,18 @@
 
 module Anthropic
   module Models
+    # Regular text content.
     module ContentBlockParam
       extend Anthropic::Internal::Type::Union
 
       Variants =
         T.type_alias do
           T.any(
+            Anthropic::ServerToolUseBlockParam,
+            Anthropic::WebSearchToolResultBlockParam,
             Anthropic::TextBlockParam,
             Anthropic::ImageBlockParam,
             Anthropic::ToolUseBlockParam,
-            Anthropic::ServerToolUseBlockParam,
-            Anthropic::WebSearchToolResultBlockParam,
             Anthropic::ToolResultBlockParam,
             Anthropic::DocumentBlockParam,
             Anthropic::ThinkingBlockParam,

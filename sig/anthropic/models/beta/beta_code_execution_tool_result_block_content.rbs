@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module BetaCodeExecutionToolResultBlockContent = Beta::BetaCodeExecutionToolResultBlockContent
+
+    module Beta
+      type beta_code_execution_tool_result_block_content =
+        Anthropic::Beta::BetaCodeExecutionToolResultError
+        | Anthropic::Beta::BetaCodeExecutionResultBlock
+
+      module BetaCodeExecutionToolResultBlockContent
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_code_execution_tool_result_block_content]
+      end
+    end
+  end
+end

@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    class BetaRequestMCPServerURLDefinition = Beta::BetaRequestMCPServerURLDefinition
+
+    module Beta
+      type beta_request_mcp_server_url_definition =
+        {
+          name: String,
+          type: :url,
+          url: String,
+          authorization_token: String?,
+          tool_configuration: Anthropic::Beta::BetaRequestMCPServerToolConfiguration?
+        }
+
+      class BetaRequestMCPServerURLDefinition < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: String
+
+        attr_accessor type: :url
+
+        attr_accessor url: String
+
+        attr_accessor authorization_token: String?
+
+        attr_accessor tool_configuration: Anthropic::Beta::BetaRequestMCPServerToolConfiguration?
+
+        def initialize: (
+          name: String,
+          url: String,
+          ?authorization_token: String?,
+          ?tool_configuration: Anthropic::Beta::BetaRequestMCPServerToolConfiguration?,
+          ?type: :url
+        ) -> void
+
+        def to_hash: -> {
+          name: String,
+          type: :url,
+          url: String,
+          authorization_token: String?,
+          tool_configuration: Anthropic::Beta::BetaRequestMCPServerToolConfiguration?
+        }
+      end
+    end
+  end
+end

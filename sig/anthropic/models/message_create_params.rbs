@@ -6,6 +6,7 @@ module Anthropic
         messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
         metadata: Anthropic::Metadata,
+        service_tier: Anthropic::Models::MessageCreateParams::service_tier,
         stop_sequences: ::Array[String],
         system_: Anthropic::Models::MessageCreateParams::system_,
         temperature: Float,
@@ -30,6 +31,12 @@ module Anthropic
       attr_reader metadata: Anthropic::Metadata?
 
       def metadata=: (Anthropic::Metadata) -> Anthropic::Metadata
+
+      attr_reader service_tier: Anthropic::Models::MessageCreateParams::service_tier?
+
+      def service_tier=: (
+        Anthropic::Models::MessageCreateParams::service_tier
+      ) -> Anthropic::Models::MessageCreateParams::service_tier
 
       attr_reader stop_sequences: ::Array[String]?
 
@@ -76,6 +83,7 @@ module Anthropic
         messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
         ?metadata: Anthropic::Metadata,
+        ?service_tier: Anthropic::Models::MessageCreateParams::service_tier,
         ?stop_sequences: ::Array[String],
         ?system_: Anthropic::Models::MessageCreateParams::system_,
         ?temperature: Float,
@@ -92,6 +100,7 @@ module Anthropic
         messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
         metadata: Anthropic::Metadata,
+        service_tier: Anthropic::Models::MessageCreateParams::service_tier,
         stop_sequences: ::Array[String],
         system_: Anthropic::Models::MessageCreateParams::system_,
         temperature: Float,
@@ -102,6 +111,17 @@ module Anthropic
         top_p: Float,
         request_options: Anthropic::RequestOptions
       }
+
+      type service_tier = :auto | :standard_only
+
+      module ServiceTier
+        extend Anthropic::Internal::Type::Enum
+
+        AUTO: :auto
+        STANDARD_ONLY: :standard_only
+
+        def self?.values: -> ::Array[Anthropic::Models::MessageCreateParams::service_tier]
+      end
 
       type system_ = String | ::Array[Anthropic::TextBlockParam]
 

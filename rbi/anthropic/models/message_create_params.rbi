@@ -125,6 +125,25 @@ module Anthropic
       sig { params(metadata: Anthropic::Metadata::OrHash).void }
       attr_writer :metadata
 
+      # Determines whether to use priority capacity (if available) or standard capacity
+      # for this request.
+      #
+      # Anthropic offers different levels of service for your API requests. See
+      # [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
+      sig do
+        returns(
+          T.nilable(Anthropic::MessageCreateParams::ServiceTier::OrSymbol)
+        )
+      end
+      attr_reader :service_tier
+
+      sig do
+        params(
+          service_tier: Anthropic::MessageCreateParams::ServiceTier::OrSymbol
+        ).void
+      end
+      attr_writer :service_tier
+
       # Custom text sequences that will cause the model to stop generating.
       #
       # Our models will normally stop when they have naturally completed their turn,
@@ -364,6 +383,7 @@ module Anthropic
           messages: T::Array[Anthropic::MessageParam::OrHash],
           model: T.any(Anthropic::Model::OrSymbol, String),
           metadata: Anthropic::Metadata::OrHash,
+          service_tier: Anthropic::MessageCreateParams::ServiceTier::OrSymbol,
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
           temperature: Float,
@@ -497,6 +517,12 @@ module Anthropic
         model:,
         # An object describing metadata about the request.
         metadata: nil,
+        # Determines whether to use priority capacity (if available) or standard capacity
+        # for this request.
+        #
+        # Anthropic offers different levels of service for your API requests. See
+        # [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
+        service_tier: nil,
         # Custom text sequences that will cause the model to stop generating.
         #
         # Our models will normally stop when they have naturally completed their turn,
@@ -634,6 +660,7 @@ module Anthropic
             messages: T::Array[Anthropic::MessageParam],
             model: T.any(Anthropic::Model::OrSymbol, String),
             metadata: Anthropic::Metadata,
+            service_tier: Anthropic::MessageCreateParams::ServiceTier::OrSymbol,
             stop_sequences: T::Array[String],
             system_: Anthropic::MessageCreateParams::System::Variants,
             temperature: Float,
@@ -665,6 +692,40 @@ module Anthropic
         )
       end
       def to_hash
+      end
+
+      # Determines whether to use priority capacity (if available) or standard capacity
+      # for this request.
+      #
+      # Anthropic offers different levels of service for your API requests. See
+      # [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
+      module ServiceTier
+        extend Anthropic::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias do
+            T.all(Symbol, Anthropic::MessageCreateParams::ServiceTier)
+          end
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        AUTO =
+          T.let(
+            :auto,
+            Anthropic::MessageCreateParams::ServiceTier::TaggedSymbol
+          )
+        STANDARD_ONLY =
+          T.let(
+            :standard_only,
+            Anthropic::MessageCreateParams::ServiceTier::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::MessageCreateParams::ServiceTier::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
       end
 
       # System prompt.

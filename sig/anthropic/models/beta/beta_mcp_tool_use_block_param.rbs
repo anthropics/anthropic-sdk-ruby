@@ -1,0 +1,49 @@
+module Anthropic
+  module Models
+    class BetaMCPToolUseBlockParam = Beta::BetaMCPToolUseBlockParam
+
+    module Beta
+      type beta_mcp_tool_use_block_param =
+        {
+          id: String,
+          input: top,
+          name: String,
+          server_name: String,
+          type: :mcp_tool_use,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+
+      class BetaMCPToolUseBlockParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor input: top
+
+        attr_accessor name: String
+
+        attr_accessor server_name: String
+
+        attr_accessor type: :mcp_tool_use
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        def initialize: (
+          id: String,
+          input: top,
+          name: String,
+          server_name: String,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?type: :mcp_tool_use
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          input: top,
+          name: String,
+          server_name: String,
+          type: :mcp_tool_use,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+      end
+    end
+  end
+end

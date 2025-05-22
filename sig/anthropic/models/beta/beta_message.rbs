@@ -6,6 +6,7 @@ module Anthropic
       type beta_message =
         {
           id: String,
+          container: Anthropic::Beta::BetaContainer?,
           content: ::Array[Anthropic::Models::Beta::beta_content_block],
           model: Anthropic::Models::model,
           role: :assistant,
@@ -17,6 +18,8 @@ module Anthropic
 
       class BetaMessage < Anthropic::Internal::Type::BaseModel
         attr_accessor id: String
+
+        attr_accessor container: Anthropic::Beta::BetaContainer?
 
         attr_accessor content: ::Array[Anthropic::Models::Beta::beta_content_block]
 
@@ -34,6 +37,7 @@ module Anthropic
 
         def initialize: (
           id: String,
+          container: Anthropic::Beta::BetaContainer?,
           content: ::Array[Anthropic::Models::Beta::beta_content_block],
           model: Anthropic::Models::model,
           stop_reason: Anthropic::Models::Beta::beta_stop_reason?,
@@ -45,6 +49,7 @@ module Anthropic
 
         def to_hash: -> {
           id: String,
+          container: Anthropic::Beta::BetaContainer?,
           content: ::Array[Anthropic::Models::Beta::beta_content_block],
           model: Anthropic::Models::model,
           role: :assistant,

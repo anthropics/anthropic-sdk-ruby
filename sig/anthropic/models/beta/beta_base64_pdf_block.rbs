@@ -53,6 +53,7 @@ module Anthropic
           | Anthropic::Beta::BetaPlainTextSource
           | Anthropic::Beta::BetaContentBlockSource
           | Anthropic::Beta::BetaURLPDFSource
+          | Anthropic::Beta::BetaFileDocumentSource
 
         module Source
           extend Anthropic::Internal::Type::Union
