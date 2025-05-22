@@ -5,7 +5,7 @@ module Anthropic
     class ContentBlockSource < Anthropic::Internal::Type::BaseModel
       # @!attribute content
       #
-      #   @return [String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam>]
+      #   @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>]
       required :content, union: -> { Anthropic::ContentBlockSource::Content }
 
       # @!attribute type
@@ -14,19 +14,19 @@ module Anthropic
       required :type, const: :content
 
       # @!method initialize(content:, type: :content)
-      #   @param content [String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam>]
+      #   @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>]
       #   @param type [Symbol, :content]
 
-      # @see Anthropic::ContentBlockSource#content
+      # @see Anthropic::Models::ContentBlockSource#content
       module Content
         extend Anthropic::Internal::Type::Union
 
         variant String
 
-        variant -> { Anthropic::ContentBlockSource::Content::ContentBlockSourceContentArray }
+        variant -> { Anthropic::Models::ContentBlockSource::Content::ContentBlockSourceContentArray }
 
         # @!method self.variants
-        #   @return [Array(String, Array<Anthropic::TextBlockParam, Anthropic::ImageBlockParam>)]
+        #   @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>)]
 
         # @type [Anthropic::Internal::Type::Converter]
         ContentBlockSourceContentArray =

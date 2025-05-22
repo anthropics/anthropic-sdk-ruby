@@ -23,7 +23,7 @@ module Anthropic
         variant :none, -> { Anthropic::Beta::BetaToolChoiceNone }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Beta::BetaToolChoiceAuto, Anthropic::Beta::BetaToolChoiceAny, Anthropic::Beta::BetaToolChoiceTool, Anthropic::Beta::BetaToolChoiceNone)]
+        #   @return [Array(Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone)]
       end
     end
 

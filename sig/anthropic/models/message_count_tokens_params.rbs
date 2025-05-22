@@ -53,6 +53,16 @@ module Anthropic
         ?request_options: Anthropic::request_opts
       ) -> void
 
+      def to_hash: -> {
+        messages: ::Array[Anthropic::MessageParam],
+        model: Anthropic::Models::model,
+        system_: Anthropic::Models::MessageCountTokensParams::system_,
+        thinking: Anthropic::Models::thinking_config_param,
+        tool_choice: Anthropic::Models::tool_choice,
+        tools: ::Array[Anthropic::Models::message_count_tokens_tool],
+        request_options: Anthropic::RequestOptions
+      }
+
       type system_ = String | ::Array[Anthropic::TextBlockParam]
 
       module System

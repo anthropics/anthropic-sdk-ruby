@@ -22,7 +22,7 @@ module Anthropic
         variant :disabled, -> { Anthropic::Beta::BetaThinkingConfigDisabled }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Beta::BetaThinkingConfigEnabled, Anthropic::Beta::BetaThinkingConfigDisabled)]
+        #   @return [Array(Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled)]
       end
     end
 

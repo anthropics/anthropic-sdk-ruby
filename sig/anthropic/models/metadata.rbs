@@ -6,6 +6,8 @@ module Anthropic
       attr_accessor user_id: String?
 
       def initialize: (?user_id: String?) -> void
+
+      def to_hash: -> { user_id: String? }
     end
   end
 end

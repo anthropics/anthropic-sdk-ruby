@@ -22,7 +22,7 @@ module Anthropic
 
           # @!method initialize(id:, type: :message_batch_deleted)
           #   Some parameter documentations has been truncated, see
-          #   {Anthropic::Beta::Messages::BetaDeletedMessageBatch} for more details.
+          #   {Anthropic::Models::Beta::Messages::BetaDeletedMessageBatch} for more details.
           #
           #   @param id [String] ID of the Message Batch.
           #

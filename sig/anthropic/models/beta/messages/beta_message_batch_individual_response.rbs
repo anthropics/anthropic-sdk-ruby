@@ -17,6 +17,11 @@ module Anthropic
             custom_id: String,
             result: Anthropic::Models::Beta::Messages::beta_message_batch_result
           ) -> void
+
+          def to_hash: -> {
+            custom_id: String,
+            result: Anthropic::Models::Beta::Messages::beta_message_batch_result
+          }
         end
       end
     end

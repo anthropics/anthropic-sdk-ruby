@@ -9,7 +9,7 @@ module Anthropic
       #   This defines the shape of the `input` that your tool accepts and that the model
       #   will produce.
       #
-      #   @return [Anthropic::Tool::InputSchema]
+      #   @return [Anthropic::Models::Tool::InputSchema]
       required :input_schema, -> { Anthropic::Tool::InputSchema }
 
       # @!attribute name
@@ -23,7 +23,7 @@ module Anthropic
       # @!attribute cache_control
       #   Create a cache control breakpoint at this content block.
       #
-      #   @return [Anthropic::CacheControlEphemeral, nil]
+      #   @return [Anthropic::Models::CacheControlEphemeral, nil]
       optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
       # @!attribute description
@@ -39,24 +39,24 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, Anthropic::Tool::Type, nil]
+      #   @return [Symbol, Anthropic::Models::Tool::Type, nil]
       optional :type, enum: -> { Anthropic::Tool::Type }, nil?: true
 
       # @!method initialize(input_schema:, name:, cache_control: nil, description: nil, type: nil)
-      #   Some parameter documentations has been truncated, see {Anthropic::Tool} for more
-      #   details.
+      #   Some parameter documentations has been truncated, see {Anthropic::Models::Tool}
+      #   for more details.
       #
-      #   @param input_schema [Anthropic::Tool::InputSchema] [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
+      #   @param input_schema [Anthropic::Models::Tool::InputSchema] [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
       #
       #   @param name [String] Name of the tool.
       #
-      #   @param cache_control [Anthropic::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+      #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
       #
       #   @param description [String] Description of what this tool does.
       #
-      #   @param type [Symbol, Anthropic::Tool::Type, nil]
+      #   @param type [Symbol, Anthropic::Models::Tool::Type, nil]
 
-      # @see Anthropic::Tool#input_schema
+      # @see Anthropic::Models::Tool#input_schema
       class InputSchema < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #
@@ -78,7 +78,7 @@ module Anthropic
         #   @param type [Symbol, :object]
       end
 
-      # @see Anthropic::Tool#type
+      # @see Anthropic::Models::Tool#type
       module Type
         extend Anthropic::Internal::Type::Enum
 

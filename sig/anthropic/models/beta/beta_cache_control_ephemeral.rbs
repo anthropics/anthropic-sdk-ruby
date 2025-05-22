@@ -9,6 +9,8 @@ module Anthropic
         attr_accessor type: :ephemeral
 
         def initialize: (?type: :ephemeral) -> void
+
+        def to_hash: -> { type: :ephemeral }
       end
     end
   end

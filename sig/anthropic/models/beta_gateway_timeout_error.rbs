@@ -8,6 +8,8 @@ module Anthropic
       attr_accessor type: :timeout_error
 
       def initialize: (message: String, ?type: :timeout_error) -> void
+
+      def to_hash: -> { message: String, type: :timeout_error }
     end
   end
 end

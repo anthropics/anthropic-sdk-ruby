@@ -8,7 +8,7 @@ module Anthropic
           system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           tool_choice: Anthropic::Models::Beta::beta_tool_choice,
-          tools: ::Array[Anthropic::Beta::MessageCountTokensParams::tool],
+          tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
           betas: ::Array[Anthropic::Models::anthropic_beta]
         }
         & Anthropic::Internal::Type::request_parameters
@@ -39,11 +39,11 @@ module Anthropic
           Anthropic::Models::Beta::beta_tool_choice
         ) -> Anthropic::Models::Beta::beta_tool_choice
 
-        attr_reader tools: ::Array[Anthropic::Beta::MessageCountTokensParams::tool]?
+        attr_reader tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]?
 
         def tools=: (
-          ::Array[Anthropic::Beta::MessageCountTokensParams::tool]
-        ) -> ::Array[Anthropic::Beta::MessageCountTokensParams::tool]
+          ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]
+        ) -> ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]
 
         attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
@@ -57,10 +57,21 @@ module Anthropic
           ?system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           ?thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
-          ?tools: ::Array[Anthropic::Beta::MessageCountTokensParams::tool],
+          ?tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> void
+
+        def to_hash: -> {
+          messages: ::Array[Anthropic::Beta::BetaMessageParam],
+          model: Anthropic::Models::model,
+          system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
+          thinking: Anthropic::Models::Beta::beta_thinking_config_param,
+          tool_choice: Anthropic::Models::Beta::beta_tool_choice,
+          tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
+          betas: ::Array[Anthropic::Models::anthropic_beta],
+          request_options: Anthropic::RequestOptions
+        }
 
         type system_ = String | ::Array[Anthropic::Beta::BetaTextBlockParam]
 
@@ -85,7 +96,7 @@ module Anthropic
         module Tool
           extend Anthropic::Internal::Type::Union
 
-          def self?.variants: -> ::Array[Anthropic::Beta::MessageCountTokensParams::tool]
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]
         end
       end
     end

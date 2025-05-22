@@ -30,6 +30,14 @@ module Anthropic
           output_tokens: Integer,
           server_tool_use: Anthropic::Beta::BetaServerToolUsage?
         ) -> void
+
+        def to_hash: -> {
+          cache_creation_input_tokens: Integer?,
+          cache_read_input_tokens: Integer?,
+          input_tokens: Integer?,
+          output_tokens: Integer,
+          server_tool_use: Anthropic::Beta::BetaServerToolUsage?
+        }
       end
     end
   end

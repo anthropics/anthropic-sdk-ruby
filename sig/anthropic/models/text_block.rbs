@@ -19,6 +19,12 @@ module Anthropic
         text: String,
         ?type: :text
       ) -> void
+
+      def to_hash: -> {
+        citations: ::Array[Anthropic::Models::text_citation]?,
+        text: String,
+        type: :text
+      }
     end
   end
 end

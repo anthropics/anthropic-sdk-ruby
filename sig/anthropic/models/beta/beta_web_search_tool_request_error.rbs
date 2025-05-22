@@ -5,19 +5,24 @@ module Anthropic
     module Beta
       type beta_web_search_tool_request_error =
         {
-          error_code: Anthropic::Beta::BetaWebSearchToolRequestError::error_code,
+          error_code: Anthropic::Models::Beta::BetaWebSearchToolRequestError::error_code,
           type: :web_search_tool_result_error
         }
 
       class BetaWebSearchToolRequestError < Anthropic::Internal::Type::BaseModel
-        attr_accessor error_code: Anthropic::Beta::BetaWebSearchToolRequestError::error_code
+        attr_accessor error_code: Anthropic::Models::Beta::BetaWebSearchToolRequestError::error_code
 
         attr_accessor type: :web_search_tool_result_error
 
         def initialize: (
-          error_code: Anthropic::Beta::BetaWebSearchToolRequestError::error_code,
+          error_code: Anthropic::Models::Beta::BetaWebSearchToolRequestError::error_code,
           ?type: :web_search_tool_result_error
         ) -> void
+
+        def to_hash: -> {
+          error_code: Anthropic::Models::Beta::BetaWebSearchToolRequestError::error_code,
+          type: :web_search_tool_result_error
+        }
 
         type error_code =
           :invalid_tool_input
@@ -35,7 +40,7 @@ module Anthropic
           TOO_MANY_REQUESTS: :too_many_requests
           QUERY_TOO_LONG: :query_too_long
 
-          def self?.values: -> ::Array[Anthropic::Beta::BetaWebSearchToolRequestError::error_code]
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaWebSearchToolRequestError::error_code]
         end
       end
     end

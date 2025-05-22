@@ -5,7 +5,7 @@ module Anthropic
     class CitationsDelta < Anthropic::Internal::Type::BaseModel
       # @!attribute citation
       #
-      #   @return [Anthropic::CitationCharLocation, Anthropic::CitationPageLocation, Anthropic::CitationContentBlockLocation, Anthropic::CitationsWebSearchResultLocation]
+      #   @return [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation, Anthropic::Models::CitationsWebSearchResultLocation]
       required :citation, union: -> { Anthropic::CitationsDelta::Citation }
 
       # @!attribute type
@@ -14,10 +14,10 @@ module Anthropic
       required :type, const: :citations_delta
 
       # @!method initialize(citation:, type: :citations_delta)
-      #   @param citation [Anthropic::CitationCharLocation, Anthropic::CitationPageLocation, Anthropic::CitationContentBlockLocation, Anthropic::CitationsWebSearchResultLocation]
+      #   @param citation [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation, Anthropic::Models::CitationsWebSearchResultLocation]
       #   @param type [Symbol, :citations_delta]
 
-      # @see Anthropic::CitationsDelta#citation
+      # @see Anthropic::Models::CitationsDelta#citation
       module Citation
         extend Anthropic::Internal::Type::Union
 
@@ -32,7 +32,7 @@ module Anthropic
         variant :web_search_result_location, -> { Anthropic::CitationsWebSearchResultLocation }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::CitationCharLocation, Anthropic::CitationPageLocation, Anthropic::CitationContentBlockLocation, Anthropic::CitationsWebSearchResultLocation)]
+        #   @return [Array(Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation, Anthropic::Models::CitationsWebSearchResultLocation)]
       end
     end
   end

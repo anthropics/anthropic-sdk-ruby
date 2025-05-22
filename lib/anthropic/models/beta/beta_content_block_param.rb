@@ -27,7 +27,7 @@ module Anthropic
         variant :redacted_thinking, -> { Anthropic::Beta::BetaRedactedThinkingBlockParam }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam, Anthropic::Beta::BetaToolUseBlockParam, Anthropic::Beta::BetaServerToolUseBlockParam, Anthropic::Beta::BetaWebSearchToolResultBlockParam, Anthropic::Beta::BetaToolResultBlockParam, Anthropic::Beta::BetaBase64PDFBlock, Anthropic::Beta::BetaThinkingBlockParam, Anthropic::Beta::BetaRedactedThinkingBlockParam)]
+        #   @return [Array(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaServerToolUseBlockParam, Anthropic::Models::Beta::BetaWebSearchToolResultBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam)]
       end
     end
 

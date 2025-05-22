@@ -21,7 +21,7 @@ module Anthropic
         variant :redacted_thinking, -> { Anthropic::Beta::BetaRedactedThinkingBlock }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Beta::BetaTextBlock, Anthropic::Beta::BetaToolUseBlock, Anthropic::Beta::BetaServerToolUseBlock, Anthropic::Beta::BetaWebSearchToolResultBlock, Anthropic::Beta::BetaThinkingBlock, Anthropic::Beta::BetaRedactedThinkingBlock)]
+        #   @return [Array(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaServerToolUseBlock, Anthropic::Models::Beta::BetaWebSearchToolResultBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock)]
       end
     end
 

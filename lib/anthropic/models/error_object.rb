@@ -26,7 +26,7 @@ module Anthropic
       variant :overloaded_error, -> { Anthropic::OverloadedError }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::InvalidRequestError, Anthropic::AuthenticationError, Anthropic::BillingError, Anthropic::PermissionError, Anthropic::NotFoundError, Anthropic::RateLimitError, Anthropic::GatewayTimeoutError, Anthropic::APIErrorObject, Anthropic::OverloadedError)]
+      #   @return [Array(Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError, Anthropic::Models::RateLimitError, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError)]
     end
   end
 end

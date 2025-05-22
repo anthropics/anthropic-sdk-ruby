@@ -27,7 +27,7 @@ module Anthropic
         # @!attribute cache_control
         #   Create a cache control breakpoint at this content block.
         #
-        #   @return [Anthropic::Beta::BetaCacheControlEphemeral, nil]
+        #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!method initialize(id:, input:, cache_control: nil, name: :web_search, type: :server_tool_use)
@@ -35,7 +35,7 @@ module Anthropic
         #
         #   @param input [Object]
         #
-        #   @param cache_control [Anthropic::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+        #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
         #   @param name [Symbol, :web_search]
         #

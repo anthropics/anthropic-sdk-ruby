@@ -5,7 +5,7 @@ module Anthropic
     class ImageBlockParam < Anthropic::Internal::Type::BaseModel
       # @!attribute source
       #
-      #   @return [Anthropic::Base64ImageSource, Anthropic::URLImageSource]
+      #   @return [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]
       required :source, union: -> { Anthropic::ImageBlockParam::Source }
 
       # @!attribute type
@@ -16,17 +16,17 @@ module Anthropic
       # @!attribute cache_control
       #   Create a cache control breakpoint at this content block.
       #
-      #   @return [Anthropic::CacheControlEphemeral, nil]
+      #   @return [Anthropic::Models::CacheControlEphemeral, nil]
       optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
       # @!method initialize(source:, cache_control: nil, type: :image)
-      #   @param source [Anthropic::Base64ImageSource, Anthropic::URLImageSource]
+      #   @param source [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]
       #
-      #   @param cache_control [Anthropic::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+      #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
       #
       #   @param type [Symbol, :image]
 
-      # @see Anthropic::ImageBlockParam#source
+      # @see Anthropic::Models::ImageBlockParam#source
       module Source
         extend Anthropic::Internal::Type::Union
 
@@ -37,7 +37,7 @@ module Anthropic
         variant :url, -> { Anthropic::URLImageSource }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Base64ImageSource, Anthropic::URLImageSource)]
+        #   @return [Array(Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource)]
       end
     end
   end

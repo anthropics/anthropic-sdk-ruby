@@ -97,7 +97,7 @@ module Anthropic
       #
       #   There is a limit of 100000 messages in a single request.
       #
-      #   @return [Array<Anthropic::MessageParam>]
+      #   @return [Array<Anthropic::Models::MessageParam>]
       required :messages, -> { Anthropic::Internal::Type::ArrayOf[Anthropic::MessageParam] }
 
       # @!attribute model
@@ -105,7 +105,7 @@ module Anthropic
       #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
       #
-      #   @return [Symbol, String, Anthropic::Model]
+      #   @return [Symbol, String, Anthropic::Models::Model]
       required :model, union: -> { Anthropic::Model }
 
       # @!attribute system_
@@ -115,7 +115,7 @@ module Anthropic
       #   as specifying a particular goal or role. See our
       #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
       #
-      #   @return [String, Array<Anthropic::TextBlockParam>, nil]
+      #   @return [String, Array<Anthropic::Models::TextBlockParam>, nil]
       optional :system_, union: -> { Anthropic::MessageCountTokensParams::System }, api_name: :system
 
       # @!attribute thinking
@@ -129,14 +129,14 @@ module Anthropic
       #   [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
       #   for details.
       #
-      #   @return [Anthropic::ThinkingConfigEnabled, Anthropic::ThinkingConfigDisabled, nil]
+      #   @return [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, nil]
       optional :thinking, union: -> { Anthropic::ThinkingConfigParam }
 
       # @!attribute tool_choice
       #   How the model should use the provided tools. The model can use a specific tool,
       #   any available tool, decide by itself, or not use tools at all.
       #
-      #   @return [Anthropic::ToolChoiceAuto, Anthropic::ToolChoiceAny, Anthropic::ToolChoiceTool, Anthropic::ToolChoiceNone, nil]
+      #   @return [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone, nil]
       optional :tool_choice, union: -> { Anthropic::ToolChoice }
 
       # @!attribute tools
@@ -210,24 +210,24 @@ module Anthropic
       #
       #   See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
       #
-      #   @return [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124, Anthropic::WebSearchTool20250305>, nil]
+      #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::WebSearchTool20250305>, nil]
       optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::MessageCountTokensTool] }
 
       # @!method initialize(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::MessageCountTokensParams} for more details.
       #
-      #   @param messages [Array<Anthropic::MessageParam>] Input messages.
+      #   @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
       #
-      #   @param model [Symbol, String, Anthropic::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
       #
-      #   @param system_ [String, Array<Anthropic::TextBlockParam>] System prompt.
+      #   @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt.
       #
-      #   @param thinking [Anthropic::ThinkingConfigEnabled, Anthropic::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
+      #   @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
       #
-      #   @param tool_choice [Anthropic::ToolChoiceAuto, Anthropic::ToolChoiceAny, Anthropic::ToolChoiceTool, Anthropic::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
+      #   @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
       #
-      #   @param tools [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124, Anthropic::WebSearchTool20250305>] Definitions of tools that the model may use.
+      #   @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::WebSearchTool20250305>] Definitions of tools that the model may use.
       #
       #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
@@ -241,10 +241,10 @@ module Anthropic
 
         variant String
 
-        variant -> { Anthropic::MessageCountTokensParams::System::TextBlockParamArray }
+        variant -> { Anthropic::Models::MessageCountTokensParams::System::TextBlockParamArray }
 
         # @!method self.variants
-        #   @return [Array(String, Array<Anthropic::TextBlockParam>)]
+        #   @return [Array(String, Array<Anthropic::Models::TextBlockParam>)]
 
         # @type [Anthropic::Internal::Type::Converter]
         TextBlockParamArray = Anthropic::Internal::Type::ArrayOf[-> { Anthropic::TextBlockParam }]

@@ -10,11 +10,11 @@ module Anthropic
       # @!attribute betas
       #   Optional header to specify the beta version(s) you want to use.
       #
-      #   @return [Array<String, Symbol, Anthropic::AnthropicBeta>, nil]
+      #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
       optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
       # @!method initialize(betas: nil, request_options: {})
-      #   @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+      #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
       #
       #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
     end

@@ -8,6 +8,8 @@ module Anthropic
       attr_accessor type: :api_error
 
       def initialize: (message: String, ?type: :api_error) -> void
+
+      def to_hash: -> { message: String, type: :api_error }
     end
   end
 end

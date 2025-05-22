@@ -18,6 +18,11 @@ module Anthropic
         ?betas: ::Array[Anthropic::Models::anthropic_beta],
         ?request_options: Anthropic::request_opts
       ) -> void
+
+      def to_hash: -> {
+        betas: ::Array[Anthropic::Models::anthropic_beta],
+        request_options: Anthropic::RequestOptions
+      }
     end
   end
 end

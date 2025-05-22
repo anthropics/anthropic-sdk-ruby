@@ -20,7 +20,7 @@ module Anthropic
       variant :redacted_thinking, -> { Anthropic::RedactedThinkingBlock }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::TextBlock, Anthropic::ToolUseBlock, Anthropic::ServerToolUseBlock, Anthropic::WebSearchToolResultBlock, Anthropic::ThinkingBlock, Anthropic::RedactedThinkingBlock)]
+      #   @return [Array(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ServerToolUseBlock, Anthropic::Models::WebSearchToolResultBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock)]
     end
   end
 end

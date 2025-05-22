@@ -44,7 +44,7 @@ module Anthropic
           ?system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           ?thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
-          ?tools: ::Array[Anthropic::Beta::MessageCountTokensParams::tool],
+          ?tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaMessageTokensCount

@@ -30,6 +30,14 @@ module Anthropic
           url: String,
           ?type: :web_search_result
         ) -> void
+
+        def to_hash: -> {
+          encrypted_content: String,
+          page_age: String?,
+          title: String,
+          type: :web_search_result,
+          url: String
+        }
       end
     end
   end

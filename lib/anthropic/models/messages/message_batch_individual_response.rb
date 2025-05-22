@@ -21,19 +21,19 @@ module Anthropic
         #   processing failed, or the reason why processing was not attempted, such as
         #   cancellation or expiration.
         #
-        #   @return [Anthropic::Messages::MessageBatchSucceededResult, Anthropic::Messages::MessageBatchErroredResult, Anthropic::Messages::MessageBatchCanceledResult, Anthropic::Messages::MessageBatchExpiredResult]
+        #   @return [Anthropic::Models::Messages::MessageBatchSucceededResult, Anthropic::Models::Messages::MessageBatchErroredResult, Anthropic::Models::Messages::MessageBatchCanceledResult, Anthropic::Models::Messages::MessageBatchExpiredResult]
         required :result, union: -> { Anthropic::Messages::MessageBatchResult }
 
         # @!method initialize(custom_id:, result:)
         #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Messages::MessageBatchIndividualResponse} for more details.
+        #   {Anthropic::Models::Messages::MessageBatchIndividualResponse} for more details.
         #
         #   This is a single line in the response `.jsonl` file and does not represent the
         #   response as a whole.
         #
         #   @param custom_id [String] Developer-provided ID created for each request in a Message Batch. Useful for ma
         #
-        #   @param result [Anthropic::Messages::MessageBatchSucceededResult, Anthropic::Messages::MessageBatchErroredResult, Anthropic::Messages::MessageBatchCanceledResult, Anthropic::Messages::MessageBatchExpiredResult] Processing result for this request.
+        #   @param result [Anthropic::Models::Messages::MessageBatchSucceededResult, Anthropic::Models::Messages::MessageBatchErroredResult, Anthropic::Models::Messages::MessageBatchCanceledResult, Anthropic::Models::Messages::MessageBatchExpiredResult] Processing result for this request.
       end
     end
 

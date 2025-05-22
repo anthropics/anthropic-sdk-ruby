@@ -8,6 +8,8 @@ module Anthropic
       attr_accessor type: :input_json_delta
 
       def initialize: (partial_json: String, ?type: :input_json_delta) -> void
+
+      def to_hash: -> { partial_json: String, type: :input_json_delta }
     end
   end
 end

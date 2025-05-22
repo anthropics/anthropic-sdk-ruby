@@ -5,7 +5,7 @@ module Anthropic
     class WebSearchToolResultError < Anthropic::Internal::Type::BaseModel
       # @!attribute error_code
       #
-      #   @return [Symbol, Anthropic::WebSearchToolResultError::ErrorCode]
+      #   @return [Symbol, Anthropic::Models::WebSearchToolResultError::ErrorCode]
       required :error_code, enum: -> { Anthropic::WebSearchToolResultError::ErrorCode }
 
       # @!attribute type
@@ -14,10 +14,10 @@ module Anthropic
       required :type, const: :web_search_tool_result_error
 
       # @!method initialize(error_code:, type: :web_search_tool_result_error)
-      #   @param error_code [Symbol, Anthropic::WebSearchToolResultError::ErrorCode]
+      #   @param error_code [Symbol, Anthropic::Models::WebSearchToolResultError::ErrorCode]
       #   @param type [Symbol, :web_search_tool_result_error]
 
-      # @see Anthropic::WebSearchToolResultError#error_code
+      # @see Anthropic::Models::WebSearchToolResultError#error_code
       module ErrorCode
         extend Anthropic::Internal::Type::Enum
 

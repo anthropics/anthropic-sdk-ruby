@@ -6,6 +6,8 @@ module Anthropic
       attr_accessor type: :message_stop
 
       def initialize: (?type: :message_stop) -> void
+
+      def to_hash: -> { type: :message_stop }
     end
   end
 end

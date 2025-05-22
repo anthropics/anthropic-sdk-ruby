@@ -6,7 +6,7 @@ module Anthropic
       class BetaCitationsDelta < Anthropic::Internal::Type::BaseModel
         # @!attribute citation
         #
-        #   @return [Anthropic::Beta::BetaCitationCharLocation, Anthropic::Beta::BetaCitationPageLocation, Anthropic::Beta::BetaCitationContentBlockLocation, Anthropic::Beta::BetaCitationsWebSearchResultLocation]
+        #   @return [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation, Anthropic::Models::Beta::BetaCitationsWebSearchResultLocation]
         required :citation, union: -> { Anthropic::Beta::BetaCitationsDelta::Citation }
 
         # @!attribute type
@@ -15,10 +15,10 @@ module Anthropic
         required :type, const: :citations_delta
 
         # @!method initialize(citation:, type: :citations_delta)
-        #   @param citation [Anthropic::Beta::BetaCitationCharLocation, Anthropic::Beta::BetaCitationPageLocation, Anthropic::Beta::BetaCitationContentBlockLocation, Anthropic::Beta::BetaCitationsWebSearchResultLocation]
+        #   @param citation [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation, Anthropic::Models::Beta::BetaCitationsWebSearchResultLocation]
         #   @param type [Symbol, :citations_delta]
 
-        # @see Anthropic::Beta::BetaCitationsDelta#citation
+        # @see Anthropic::Models::Beta::BetaCitationsDelta#citation
         module Citation
           extend Anthropic::Internal::Type::Union
 
@@ -33,7 +33,7 @@ module Anthropic
           variant :web_search_result_location, -> { Anthropic::Beta::BetaCitationsWebSearchResultLocation }
 
           # @!method self.variants
-          #   @return [Array(Anthropic::Beta::BetaCitationCharLocation, Anthropic::Beta::BetaCitationPageLocation, Anthropic::Beta::BetaCitationContentBlockLocation, Anthropic::Beta::BetaCitationsWebSearchResultLocation)]
+          #   @return [Array(Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation, Anthropic::Models::Beta::BetaCitationsWebSearchResultLocation)]
         end
       end
     end

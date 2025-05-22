@@ -19,6 +19,12 @@ module Anthropic
         index: Integer,
         ?type: :content_block_delta
       ) -> void
+
+      def to_hash: -> {
+        delta: Anthropic::Models::raw_content_block_delta,
+        index: Integer,
+        type: :content_block_delta
+      }
     end
   end
 end

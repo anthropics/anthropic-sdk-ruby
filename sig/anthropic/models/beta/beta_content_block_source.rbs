@@ -5,19 +5,24 @@ module Anthropic
     module Beta
       type beta_content_block_source =
         {
-          content: Anthropic::Beta::BetaContentBlockSource::content,
+          content: Anthropic::Models::Beta::BetaContentBlockSource::content,
           type: :content
         }
 
       class BetaContentBlockSource < Anthropic::Internal::Type::BaseModel
-        attr_accessor content: Anthropic::Beta::BetaContentBlockSource::content
+        attr_accessor content: Anthropic::Models::Beta::BetaContentBlockSource::content
 
         attr_accessor type: :content
 
         def initialize: (
-          content: Anthropic::Beta::BetaContentBlockSource::content,
+          content: Anthropic::Models::Beta::BetaContentBlockSource::content,
           ?type: :content
         ) -> void
+
+        def to_hash: -> {
+          content: Anthropic::Models::Beta::BetaContentBlockSource::content,
+          type: :content
+        }
 
         type content =
           String
@@ -26,7 +31,7 @@ module Anthropic
         module Content
           extend Anthropic::Internal::Type::Union
 
-          def self?.variants: -> ::Array[Anthropic::Beta::BetaContentBlockSource::content]
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaContentBlockSource::content]
 
           BetaContentBlockSourceContentArray: Anthropic::Internal::Type::Converter
         end

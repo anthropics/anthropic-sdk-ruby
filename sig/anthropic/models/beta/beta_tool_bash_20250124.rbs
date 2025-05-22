@@ -22,6 +22,12 @@ module Anthropic
           ?name: :bash,
           ?type: :bash_20250124
         ) -> void
+
+        def to_hash: -> {
+          name: :bash,
+          type: :bash_20250124,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
       end
     end
   end

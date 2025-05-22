@@ -2,26 +2,31 @@ module Anthropic
   module Models
     type message_param =
       {
-        content: Anthropic::MessageParam::content,
-        role: Anthropic::MessageParam::role
+        content: Anthropic::Models::MessageParam::content,
+        role: Anthropic::Models::MessageParam::role
       }
 
     class MessageParam < Anthropic::Internal::Type::BaseModel
-      attr_accessor content: Anthropic::MessageParam::content
+      attr_accessor content: Anthropic::Models::MessageParam::content
 
-      attr_accessor role: Anthropic::MessageParam::role
+      attr_accessor role: Anthropic::Models::MessageParam::role
 
       def initialize: (
-        content: Anthropic::MessageParam::content,
-        role: Anthropic::MessageParam::role
+        content: Anthropic::Models::MessageParam::content,
+        role: Anthropic::Models::MessageParam::role
       ) -> void
+
+      def to_hash: -> {
+        content: Anthropic::Models::MessageParam::content,
+        role: Anthropic::Models::MessageParam::role
+      }
 
       type content = String | ::Array[Anthropic::Models::content_block_param]
 
       module Content
         extend Anthropic::Internal::Type::Union
 
-        def self?.variants: -> ::Array[Anthropic::MessageParam::content]
+        def self?.variants: -> ::Array[Anthropic::Models::MessageParam::content]
 
         ContentBlockParamArray: Anthropic::Internal::Type::Converter
       end
@@ -34,7 +39,7 @@ module Anthropic
         USER: :user
         ASSISTANT: :assistant
 
-        def self?.values: -> ::Array[Anthropic::MessageParam::role]
+        def self?.values: -> ::Array[Anthropic::Models::MessageParam::role]
       end
     end
   end

@@ -13,7 +13,7 @@ module Anthropic
           #   List of requests for prompt completion. Each is an individual request to create
           #   a Message.
           #
-          #   @return [Array<Anthropic::Beta::Messages::BatchCreateParams::Request>]
+          #   @return [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>]
           required :requests,
                    -> {
                      Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::Messages::BatchCreateParams::Request]
@@ -22,16 +22,16 @@ module Anthropic
           # @!attribute betas
           #   Optional header to specify the beta version(s) you want to use.
           #
-          #   @return [Array<String, Symbol, Anthropic::AnthropicBeta>, nil]
+          #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
           # @!method initialize(requests:, betas: nil, request_options: {})
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Messages::BatchCreateParams} for more details.
           #
-          #   @param requests [Array<Anthropic::Beta::Messages::BatchCreateParams::Request>] List of requests for prompt completion. Each is an individual request to create
+          #   @param requests [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>] List of requests for prompt completion. Each is an individual request to create
           #
-          #   @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
@@ -51,18 +51,19 @@ module Anthropic
             #   See the [Messages API reference](/en/api/messages) for full documentation on
             #   available parameters.
             #
-            #   @return [Anthropic::Beta::Messages::BatchCreateParams::Request::Params]
+            #   @return [Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params]
             required :params, -> { Anthropic::Beta::Messages::BatchCreateParams::Request::Params }
 
             # @!method initialize(custom_id:, params:)
             #   Some parameter documentations has been truncated, see
-            #   {Anthropic::Beta::Messages::BatchCreateParams::Request} for more details.
+            #   {Anthropic::Models::Beta::Messages::BatchCreateParams::Request} for more
+            #   details.
             #
             #   @param custom_id [String] Developer-provided ID created for each request in a Message Batch. Useful for ma
             #
-            #   @param params [Anthropic::Beta::Messages::BatchCreateParams::Request::Params] Messages API creation parameters for the individual request.
+            #   @param params [Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params] Messages API creation parameters for the individual request.
 
-            # @see Anthropic::Beta::Messages::BatchCreateParams::Request#params
+            # @see Anthropic::Models::Beta::Messages::BatchCreateParams::Request#params
             class Params < Anthropic::Internal::Type::BaseModel
               # @!attribute max_tokens
               #   The maximum number of tokens to generate before stopping.
@@ -166,7 +167,7 @@ module Anthropic
               #
               #   There is a limit of 100000 messages in a single request.
               #
-              #   @return [Array<Anthropic::Beta::BetaMessageParam>]
+              #   @return [Array<Anthropic::Models::Beta::BetaMessageParam>]
               required :messages, -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaMessageParam] }
 
               # @!attribute model
@@ -174,13 +175,13 @@ module Anthropic
               #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
               #   details and options.
               #
-              #   @return [Symbol, String, Anthropic::Model]
+              #   @return [Symbol, String, Anthropic::Models::Model]
               required :model, union: -> { Anthropic::Model }
 
               # @!attribute metadata
               #   An object describing metadata about the request.
               #
-              #   @return [Anthropic::Beta::BetaMetadata, nil]
+              #   @return [Anthropic::Models::Beta::BetaMetadata, nil]
               optional :metadata, -> { Anthropic::Beta::BetaMetadata }
 
               # @!attribute stop_sequences
@@ -213,7 +214,7 @@ module Anthropic
               #   as specifying a particular goal or role. See our
               #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
               #
-              #   @return [String, Array<Anthropic::Beta::BetaTextBlockParam>, nil]
+              #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>, nil]
               optional :system_,
                        union: -> { Anthropic::Beta::Messages::BatchCreateParams::Request::Params::System },
                        api_name: :system
@@ -242,14 +243,14 @@ module Anthropic
               #   [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
               #   for details.
               #
-              #   @return [Anthropic::Beta::BetaThinkingConfigEnabled, Anthropic::Beta::BetaThinkingConfigDisabled, nil]
+              #   @return [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, nil]
               optional :thinking, union: -> { Anthropic::Beta::BetaThinkingConfigParam }
 
               # @!attribute tool_choice
               #   How the model should use the provided tools. The model can use a specific tool,
               #   any available tool, decide by itself, or not use tools at all.
               #
-              #   @return [Anthropic::Beta::BetaToolChoiceAuto, Anthropic::Beta::BetaToolChoiceAny, Anthropic::Beta::BetaToolChoiceTool, Anthropic::Beta::BetaToolChoiceNone, nil]
+              #   @return [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone, nil]
               optional :tool_choice, union: -> { Anthropic::Beta::BetaToolChoice }
 
               # @!attribute tools
@@ -323,7 +324,7 @@ module Anthropic
               #
               #   See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
               #
-              #   @return [Array<Anthropic::Beta::BetaTool, Anthropic::Beta::BetaToolComputerUse20241022, Anthropic::Beta::BetaToolBash20241022, Anthropic::Beta::BetaToolTextEditor20241022, Anthropic::Beta::BetaToolComputerUse20250124, Anthropic::Beta::BetaToolBash20250124, Anthropic::Beta::BetaToolTextEditor20250124, Anthropic::Beta::BetaWebSearchTool20250305>, nil]
+              #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaWebSearchTool20250305>, nil]
               optional :tools,
                        -> {
                          Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaToolUnion]
@@ -357,7 +358,7 @@ module Anthropic
 
               # @!method initialize(max_tokens:, messages:, model:, metadata: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
               #   Some parameter documentations has been truncated, see
-              #   {Anthropic::Beta::Messages::BatchCreateParams::Request::Params} for more
+              #   {Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params} for more
               #   details.
               #
               #   Messages API creation parameters for the individual request.
@@ -367,25 +368,25 @@ module Anthropic
               #
               #   @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
               #
-              #   @param messages [Array<Anthropic::Beta::BetaMessageParam>] Input messages.
+              #   @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Input messages.
               #
-              #   @param model [Symbol, String, Anthropic::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+              #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
               #
-              #   @param metadata [Anthropic::Beta::BetaMetadata] An object describing metadata about the request.
+              #   @param metadata [Anthropic::Models::Beta::BetaMetadata] An object describing metadata about the request.
               #
               #   @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
               #
               #   @param stream [Boolean] Whether to incrementally stream the response using server-sent events.
               #
-              #   @param system_ [String, Array<Anthropic::Beta::BetaTextBlockParam>] System prompt.
+              #   @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] System prompt.
               #
               #   @param temperature [Float] Amount of randomness injected into the response.
               #
-              #   @param thinking [Anthropic::Beta::BetaThinkingConfigEnabled, Anthropic::Beta::BetaThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
+              #   @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
               #
-              #   @param tool_choice [Anthropic::Beta::BetaToolChoiceAuto, Anthropic::Beta::BetaToolChoiceAny, Anthropic::Beta::BetaToolChoiceTool, Anthropic::Beta::BetaToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
+              #   @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
               #
-              #   @param tools [Array<Anthropic::Beta::BetaTool, Anthropic::Beta::BetaToolComputerUse20241022, Anthropic::Beta::BetaToolBash20241022, Anthropic::Beta::BetaToolTextEditor20241022, Anthropic::Beta::BetaToolComputerUse20250124, Anthropic::Beta::BetaToolBash20250124, Anthropic::Beta::BetaToolTextEditor20250124, Anthropic::Beta::BetaWebSearchTool20250305>] Definitions of tools that the model may use.
+              #   @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaWebSearchTool20250305>] Definitions of tools that the model may use.
               #
               #   @param top_k [Integer] Only sample from the top K options for each subsequent token.
               #
@@ -397,18 +398,16 @@ module Anthropic
               # as specifying a particular goal or role. See our
               # [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
               #
-              # @see Anthropic::Beta::Messages::BatchCreateParams::Request::Params#system_
+              # @see Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params#system_
               module System
                 extend Anthropic::Internal::Type::Union
 
                 variant String
 
-                variant -> {
-                  Anthropic::Beta::Messages::BatchCreateParams::Request::Params::System::BetaTextBlockParamArray
-                }
+                variant -> { Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::System::BetaTextBlockParamArray }
 
                 # @!method self.variants
-                #   @return [Array(String, Array<Anthropic::Beta::BetaTextBlockParam>)]
+                #   @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam>)]
 
                 # @type [Anthropic::Internal::Type::Converter]
                 BetaTextBlockParamArray = Anthropic::Internal::Type::ArrayOf[-> {

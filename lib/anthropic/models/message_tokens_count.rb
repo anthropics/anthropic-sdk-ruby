@@ -13,7 +13,7 @@ module Anthropic
 
       # @!method initialize(input_tokens:)
       #   Some parameter documentations has been truncated, see
-      #   {Anthropic::MessageTokensCount} for more details.
+      #   {Anthropic::Models::MessageTokensCount} for more details.
       #
       #   @param input_tokens [Integer] The total number of tokens across the provided list of messages, system prompt,
     end
