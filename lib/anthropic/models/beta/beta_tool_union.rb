@@ -20,10 +20,14 @@ module Anthropic
 
         variant -> { Anthropic::Beta::BetaToolTextEditor20250124 }
 
+        variant -> { Anthropic::Beta::BetaToolTextEditor20250429 }
+
         variant -> { Anthropic::Beta::BetaWebSearchTool20250305 }
 
+        variant -> { Anthropic::Beta::BetaCodeExecutionTool20250522 }
+
         # @!method self.variants
-        #   @return [Array(Anthropic::Beta::BetaTool, Anthropic::Beta::BetaToolComputerUse20241022, Anthropic::Beta::BetaToolBash20241022, Anthropic::Beta::BetaToolTextEditor20241022, Anthropic::Beta::BetaToolComputerUse20250124, Anthropic::Beta::BetaToolBash20250124, Anthropic::Beta::BetaToolTextEditor20250124, Anthropic::Beta::BetaWebSearchTool20250305)]
+        #   @return [Array(Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaToolTextEditor20250429, Anthropic::Models::Beta::BetaWebSearchTool20250305, Anthropic::Models::Beta::BetaCodeExecutionTool20250522)]
       end
     end
 

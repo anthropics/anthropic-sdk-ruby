@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    class BetaCodeExecutionToolResultErrorParam = Beta::BetaCodeExecutionToolResultErrorParam
+
+    module Beta
+      type beta_code_execution_tool_result_error_param =
+        {
+          error_code: Anthropic::Models::Beta::beta_code_execution_tool_result_error_code,
+          type: :code_execution_tool_result_error
+        }
+
+      class BetaCodeExecutionToolResultErrorParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: Anthropic::Models::Beta::beta_code_execution_tool_result_error_code
+
+        attr_accessor type: :code_execution_tool_result_error
+
+        def initialize: (
+          error_code: Anthropic::Models::Beta::beta_code_execution_tool_result_error_code,
+          ?type: :code_execution_tool_result_error
+        ) -> void
+
+        def to_hash: -> {
+          error_code: Anthropic::Models::Beta::beta_code_execution_tool_result_error_code,
+          type: :code_execution_tool_result_error
+        }
+      end
+    end
+  end
+end

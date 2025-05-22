@@ -23,7 +23,7 @@ module Anthropic
       #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
       #
-      #   @return [Symbol, String, Anthropic::Model]
+      #   @return [Symbol, String, Anthropic::Models::Model]
       required :model, union: -> { Anthropic::Model }
 
       # @!attribute prompt
@@ -47,7 +47,7 @@ module Anthropic
       # @!attribute metadata
       #   An object describing metadata about the request.
       #
-      #   @return [Anthropic::Metadata, nil]
+      #   @return [Anthropic::Models::Metadata, nil]
       optional :metadata, -> { Anthropic::Metadata }
 
       # @!attribute stop_sequences
@@ -102,7 +102,7 @@ module Anthropic
       # @!attribute betas
       #   Optional header to specify the beta version(s) you want to use.
       #
-      #   @return [Array<String, Symbol, Anthropic::AnthropicBeta>, nil]
+      #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
       optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
       # @!method initialize(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
@@ -111,11 +111,11 @@ module Anthropic
       #
       #   @param max_tokens_to_sample [Integer] The maximum number of tokens to generate before stopping.
       #
-      #   @param model [Symbol, String, Anthropic::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
       #
       #   @param prompt [String] The prompt that you want Claude to complete.
       #
-      #   @param metadata [Anthropic::Metadata] An object describing metadata about the request.
+      #   @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
       #
       #   @param stop_sequences [Array<String>] Sequences that will cause the model to stop generating.
       #
@@ -125,7 +125,7 @@ module Anthropic
       #
       #   @param top_p [Float] Use nucleus sampling.
       #
-      #   @param betas [Array<String, Symbol, Anthropic::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+      #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
       #
       #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
     end

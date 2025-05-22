@@ -100,6 +100,18 @@ module Anthropic
               )
             end
 
+          # Information about the container used in the request (for the code execution
+          # tool)
+          sig { returns(T.nilable(Anthropic::Beta::BetaContainer)) }
+          attr_reader :container
+
+          sig do
+            params(
+              container: T.nilable(Anthropic::Beta::BetaContainer::OrHash)
+            ).void
+          end
+          attr_writer :container
+
           sig do
             returns(T.nilable(Anthropic::Beta::BetaStopReason::TaggedSymbol))
           end
@@ -110,16 +122,24 @@ module Anthropic
 
           sig do
             params(
+              container: T.nilable(Anthropic::Beta::BetaContainer::OrHash),
               stop_reason: T.nilable(Anthropic::Beta::BetaStopReason::OrSymbol),
               stop_sequence: T.nilable(String)
             ).returns(T.attached_class)
           end
-          def self.new(stop_reason:, stop_sequence:)
+          def self.new(
+            # Information about the container used in the request (for the code execution
+            # tool)
+            container:,
+            stop_reason:,
+            stop_sequence:
+          )
           end
 
           sig do
             override.returns(
               {
+                container: T.nilable(Anthropic::Beta::BetaContainer),
                 stop_reason:
                   T.nilable(Anthropic::Beta::BetaStopReason::TaggedSymbol),
                 stop_sequence: T.nilable(String)

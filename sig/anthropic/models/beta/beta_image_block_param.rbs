@@ -5,32 +5,39 @@ module Anthropic
     module Beta
       type beta_image_block_param =
         {
-          source: Anthropic::Beta::BetaImageBlockParam::source,
+          source: Anthropic::Models::Beta::BetaImageBlockParam::source,
           type: :image,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
         }
 
       class BetaImageBlockParam < Anthropic::Internal::Type::BaseModel
-        attr_accessor source: Anthropic::Beta::BetaImageBlockParam::source
+        attr_accessor source: Anthropic::Models::Beta::BetaImageBlockParam::source
 
         attr_accessor type: :image
 
         attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
         def initialize: (
-          source: Anthropic::Beta::BetaImageBlockParam::source,
+          source: Anthropic::Models::Beta::BetaImageBlockParam::source,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?type: :image
         ) -> void
 
+        def to_hash: -> {
+          source: Anthropic::Models::Beta::BetaImageBlockParam::source,
+          type: :image,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+
         type source =
           Anthropic::Beta::BetaBase64ImageSource
           | Anthropic::Beta::BetaURLImageSource
+          | Anthropic::Beta::BetaFileImageSource
 
         module Source
           extend Anthropic::Internal::Type::Union
 
-          def self?.variants: -> ::Array[Anthropic::Beta::BetaImageBlockParam::source]
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaImageBlockParam::source]
         end
       end
     end

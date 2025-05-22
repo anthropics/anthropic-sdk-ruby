@@ -20,7 +20,8 @@ module Anthropic
               Anthropic::Beta::BetaBase64PDFSource,
               Anthropic::Beta::BetaPlainTextSource,
               Anthropic::Beta::BetaContentBlockSource,
-              Anthropic::Beta::BetaURLPDFSource
+              Anthropic::Beta::BetaURLPDFSource,
+              Anthropic::Beta::BetaFileDocumentSource
             )
           )
         end
@@ -64,7 +65,8 @@ module Anthropic
                 Anthropic::Beta::BetaBase64PDFSource::OrHash,
                 Anthropic::Beta::BetaPlainTextSource::OrHash,
                 Anthropic::Beta::BetaContentBlockSource::OrHash,
-                Anthropic::Beta::BetaURLPDFSource::OrHash
+                Anthropic::Beta::BetaURLPDFSource::OrHash,
+                Anthropic::Beta::BetaFileDocumentSource::OrHash
               ),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
@@ -93,7 +95,8 @@ module Anthropic
                   Anthropic::Beta::BetaBase64PDFSource,
                   Anthropic::Beta::BetaPlainTextSource,
                   Anthropic::Beta::BetaContentBlockSource,
-                  Anthropic::Beta::BetaURLPDFSource
+                  Anthropic::Beta::BetaURLPDFSource,
+                  Anthropic::Beta::BetaFileDocumentSource
                 ),
               type: Symbol,
               cache_control:
@@ -116,7 +119,8 @@ module Anthropic
                 Anthropic::Beta::BetaBase64PDFSource,
                 Anthropic::Beta::BetaPlainTextSource,
                 Anthropic::Beta::BetaContentBlockSource,
-                Anthropic::Beta::BetaURLPDFSource
+                Anthropic::Beta::BetaURLPDFSource,
+                Anthropic::Beta::BetaFileDocumentSource
               )
             end
 

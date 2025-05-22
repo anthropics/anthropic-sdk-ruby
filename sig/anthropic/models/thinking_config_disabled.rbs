@@ -6,6 +6,8 @@ module Anthropic
       attr_accessor type: :disabled
 
       def initialize: (?type: :disabled) -> void
+
+      def to_hash: -> { type: :disabled }
     end
   end
 end

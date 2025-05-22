@@ -26,7 +26,7 @@ module Anthropic
       # @!attribute cache_control
       #   Create a cache control breakpoint at this content block.
       #
-      #   @return [Anthropic::CacheControlEphemeral, nil]
+      #   @return [Anthropic::Models::CacheControlEphemeral, nil]
       optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
       # @!method initialize(id:, input:, name:, cache_control: nil, type: :tool_use)
@@ -36,7 +36,7 @@ module Anthropic
       #
       #   @param name [String]
       #
-      #   @param cache_control [Anthropic::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+      #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
       #
       #   @param type [Symbol, :tool_use]
     end

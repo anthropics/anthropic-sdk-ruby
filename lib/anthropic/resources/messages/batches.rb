@@ -18,11 +18,11 @@ module Anthropic
         #
         # @overload create(requests:, request_options: {})
         #
-        # @param requests [Array<Anthropic::Messages::BatchCreateParams::Request>] List of requests for prompt completion. Each is an individual request to create
+        # @param requests [Array<Anthropic::Models::Messages::BatchCreateParams::Request>] List of requests for prompt completion. Each is an individual request to create
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Messages::MessageBatch]
+        # @return [Anthropic::Models::Messages::MessageBatch]
         #
         # @see Anthropic::Models::Messages::BatchCreateParams
         def create(params)
@@ -49,7 +49,7 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Messages::MessageBatch]
+        # @return [Anthropic::Models::Messages::MessageBatch]
         #
         # @see Anthropic::Models::Messages::BatchRetrieveParams
         def retrieve(message_batch_id, params = {})
@@ -80,7 +80,7 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Internal::Page<Anthropic::Messages::MessageBatch>]
+        # @return [Anthropic::Internal::Page<Anthropic::Models::Messages::MessageBatch>]
         #
         # @see Anthropic::Models::Messages::BatchListParams
         def list(params = {})
@@ -109,7 +109,7 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Messages::DeletedMessageBatch]
+        # @return [Anthropic::Models::Messages::DeletedMessageBatch]
         #
         # @see Anthropic::Models::Messages::BatchDeleteParams
         def delete(message_batch_id, params = {})
@@ -140,7 +140,7 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Messages::MessageBatch]
+        # @return [Anthropic::Models::Messages::MessageBatch]
         #
         # @see Anthropic::Models::Messages::BatchCancelParams
         def cancel(message_batch_id, params = {})
@@ -167,7 +167,7 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Internal::JsonLStream<Anthropic::Messages::MessageBatchIndividualResponse>]
+        # @return [Anthropic::Internal::JsonLStream<Anthropic::Models::Messages::MessageBatchIndividualResponse>]
         #
         # @see Anthropic::Models::Messages::BatchResultsParams
         def results_streaming(message_batch_id, params = {})

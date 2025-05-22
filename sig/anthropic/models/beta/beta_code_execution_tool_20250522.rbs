@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaCodeExecutionTool20250522 = Beta::BetaCodeExecutionTool20250522
+
+    module Beta
+      type beta_code_execution_tool20250522 =
+        {
+          name: :code_execution,
+          type: :code_execution_20250522,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+
+      class BetaCodeExecutionTool20250522 < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: :code_execution
+
+        attr_accessor type: :code_execution_20250522
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        def initialize: (
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?name: :code_execution,
+          ?type: :code_execution_20250522
+        ) -> void
+
+        def to_hash: -> {
+          name: :code_execution,
+          type: :code_execution_20250522,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+      end
+    end
+  end
+end

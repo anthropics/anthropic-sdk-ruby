@@ -27,6 +27,14 @@ module Anthropic
         stop_reason: String?,
         ?type: :completion
       ) -> void
+
+      def to_hash: -> {
+        id: String,
+        completion: String,
+        model: Anthropic::Models::model,
+        stop_reason: String?,
+        type: :completion
+      }
     end
   end
 end

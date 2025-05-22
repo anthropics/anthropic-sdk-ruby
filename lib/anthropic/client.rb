@@ -15,6 +15,15 @@ module Anthropic
     # Default max retry delay in seconds.
     DEFAULT_MAX_RETRY_DELAY = 8.0
 
+    # Models that have specific non-streaming token limits
+    MODEL_NONSTREAMING_TOKENS = {
+      "claude-opus-4-20250514": 8_192,
+      "claude-opus-4-0": 8_192,
+      "claude-4-opus-20250514": 8_192,
+      "anthropic.claude-opus-4-20250514-v1:0": 8_192,
+      "claude-opus-4@20250514": 8_192
+    }.freeze
+
     # @return [String, nil]
     attr_reader :api_key
 
@@ -54,6 +63,27 @@ module Anthropic
       return {} if @auth_token.nil?
 
       {"authorization" => "Bearer #{@auth_token}"}
+    end
+
+    # Calculate the timeout for non-streaming requests based on token count
+    #
+    # @param max_tokens [Integer] The maximum number of tokens to generate
+    # @param max_nonstreaming_tokens [Integer, nil] The maximum tokens allowed for non-streaming
+    # @return [Float] The calculated timeout in seconds
+    # @raise [ArgumentError] If expected time exceeds default time or max_tokens exceeds max_nonstreaming_tokens
+    def calculate_nonstreaming_timeout(max_tokens, max_nonstreaming_tokens = nil)
+      maximum_time = 60 * 60 # 1 hour in seconds
+      default_time = 60 * 10 # 10 minutes in seconds
+
+      expected_time = maximum_time * max_tokens / 128_000.0
+      if expected_time > default_time || (max_nonstreaming_tokens && max_tokens > max_nonstreaming_tokens)
+        raise ArgumentError.new(
+          "Streaming is strongly recommended for operations that may take longer than 10 minutes. " \
+          "See https://github.com/anthropics/anthropic-sdk-ruby#long-requests for more details"
+        )
+      end
+
+      DEFAULT_TIMEOUT_IN_SECONDS
     end
 
     # Creates and returns a new client for interacting with the API.

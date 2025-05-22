@@ -18,7 +18,8 @@ module Anthropic
           returns(
             T.any(
               Anthropic::Beta::BetaBase64ImageSource,
-              Anthropic::Beta::BetaURLImageSource
+              Anthropic::Beta::BetaURLImageSource,
+              Anthropic::Beta::BetaFileImageSource
             )
           )
         end
@@ -44,7 +45,8 @@ module Anthropic
             source:
               T.any(
                 Anthropic::Beta::BetaBase64ImageSource::OrHash,
-                Anthropic::Beta::BetaURLImageSource::OrHash
+                Anthropic::Beta::BetaURLImageSource::OrHash,
+                Anthropic::Beta::BetaFileImageSource::OrHash
               ),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
@@ -65,7 +67,8 @@ module Anthropic
               source:
                 T.any(
                   Anthropic::Beta::BetaBase64ImageSource,
-                  Anthropic::Beta::BetaURLImageSource
+                  Anthropic::Beta::BetaURLImageSource,
+                  Anthropic::Beta::BetaFileImageSource
                 ),
               type: Symbol,
               cache_control:
@@ -83,7 +86,8 @@ module Anthropic
             T.type_alias do
               T.any(
                 Anthropic::Beta::BetaBase64ImageSource,
-                Anthropic::Beta::BetaURLImageSource
+                Anthropic::Beta::BetaURLImageSource,
+                Anthropic::Beta::BetaFileImageSource
               )
             end
 

@@ -27,6 +27,12 @@ module Anthropic
             ?request_options: Anthropic::request_opts
           ) -> void
 
+          def to_hash: -> {
+            requests: ::Array[Anthropic::Beta::Messages::BatchCreateParams::Request],
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+
           type request =
             {
               custom_id: String,
@@ -43,15 +49,23 @@ module Anthropic
               params: Anthropic::Beta::Messages::BatchCreateParams::Request::Params
             ) -> void
 
+            def to_hash: -> {
+              custom_id: String,
+              params: Anthropic::Beta::Messages::BatchCreateParams::Request::Params
+            }
+
             type params =
               {
                 max_tokens: Integer,
                 messages: ::Array[Anthropic::Beta::BetaMessageParam],
                 model: Anthropic::Models::model,
+                container: String?,
+                mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
                 metadata: Anthropic::Beta::BetaMetadata,
+                service_tier: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier,
                 stop_sequences: ::Array[String],
                 stream: bool,
-                system_: Anthropic::Beta::Messages::BatchCreateParams::Request::Params::system_,
+                system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
                 temperature: Float,
                 thinking: Anthropic::Models::Beta::beta_thinking_config_param,
                 tool_choice: Anthropic::Models::Beta::beta_tool_choice,
@@ -67,11 +81,25 @@ module Anthropic
 
               attr_accessor model: Anthropic::Models::model
 
+              attr_accessor container: String?
+
+              attr_reader mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition]?
+
+              def mcp_servers=: (
+                ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition]
+              ) -> ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition]
+
               attr_reader metadata: Anthropic::Beta::BetaMetadata?
 
               def metadata=: (
                 Anthropic::Beta::BetaMetadata
               ) -> Anthropic::Beta::BetaMetadata
+
+              attr_reader service_tier: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier?
+
+              def service_tier=: (
+                Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier
+              ) -> Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier
 
               attr_reader stop_sequences: ::Array[String]?
 
@@ -81,11 +109,11 @@ module Anthropic
 
               def stream=: (bool) -> bool
 
-              attr_reader system_: Anthropic::Beta::Messages::BatchCreateParams::Request::Params::system_?
+              attr_reader system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_?
 
               def system_=: (
-                Anthropic::Beta::Messages::BatchCreateParams::Request::Params::system_
-              ) -> Anthropic::Beta::Messages::BatchCreateParams::Request::Params::system_
+                Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_
+              ) -> Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_
 
               attr_reader temperature: Float?
 
@@ -121,10 +149,13 @@ module Anthropic
                 max_tokens: Integer,
                 messages: ::Array[Anthropic::Beta::BetaMessageParam],
                 model: Anthropic::Models::model,
+                ?container: String?,
+                ?mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
                 ?metadata: Anthropic::Beta::BetaMetadata,
+                ?service_tier: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier,
                 ?stop_sequences: ::Array[String],
                 ?stream: bool,
-                ?system_: Anthropic::Beta::Messages::BatchCreateParams::Request::Params::system_,
+                ?system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
                 ?temperature: Float,
                 ?thinking: Anthropic::Models::Beta::beta_thinking_config_param,
                 ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
@@ -133,13 +164,43 @@ module Anthropic
                 ?top_p: Float
               ) -> void
 
+              def to_hash: -> {
+                max_tokens: Integer,
+                messages: ::Array[Anthropic::Beta::BetaMessageParam],
+                model: Anthropic::Models::model,
+                container: String?,
+                mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
+                metadata: Anthropic::Beta::BetaMetadata,
+                service_tier: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier,
+                stop_sequences: ::Array[String],
+                stream: bool,
+                system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
+                temperature: Float,
+                thinking: Anthropic::Models::Beta::beta_thinking_config_param,
+                tool_choice: Anthropic::Models::Beta::beta_tool_choice,
+                tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
+                top_k: Integer,
+                top_p: Float
+              }
+
+              type service_tier = :auto | :standard_only
+
+              module ServiceTier
+                extend Anthropic::Internal::Type::Enum
+
+                AUTO: :auto
+                STANDARD_ONLY: :standard_only
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier]
+              end
+
               type system_ =
                 String | ::Array[Anthropic::Beta::BetaTextBlockParam]
 
               module System
                 extend Anthropic::Internal::Type::Union
 
-                def self?.variants: -> ::Array[Anthropic::Beta::Messages::BatchCreateParams::Request::Params::system_]
+                def self?.variants: -> ::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_]
 
                 BetaTextBlockParamArray: Anthropic::Internal::Type::Converter
               end

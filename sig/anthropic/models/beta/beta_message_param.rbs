@@ -5,19 +5,24 @@ module Anthropic
     module Beta
       type beta_message_param =
         {
-          content: Anthropic::Beta::BetaMessageParam::content,
-          role: Anthropic::Beta::BetaMessageParam::role
+          content: Anthropic::Models::Beta::BetaMessageParam::content,
+          role: Anthropic::Models::Beta::BetaMessageParam::role
         }
 
       class BetaMessageParam < Anthropic::Internal::Type::BaseModel
-        attr_accessor content: Anthropic::Beta::BetaMessageParam::content
+        attr_accessor content: Anthropic::Models::Beta::BetaMessageParam::content
 
-        attr_accessor role: Anthropic::Beta::BetaMessageParam::role
+        attr_accessor role: Anthropic::Models::Beta::BetaMessageParam::role
 
         def initialize: (
-          content: Anthropic::Beta::BetaMessageParam::content,
-          role: Anthropic::Beta::BetaMessageParam::role
+          content: Anthropic::Models::Beta::BetaMessageParam::content,
+          role: Anthropic::Models::Beta::BetaMessageParam::role
         ) -> void
+
+        def to_hash: -> {
+          content: Anthropic::Models::Beta::BetaMessageParam::content,
+          role: Anthropic::Models::Beta::BetaMessageParam::role
+        }
 
         type content =
           String | ::Array[Anthropic::Models::Beta::beta_content_block_param]
@@ -25,7 +30,7 @@ module Anthropic
         module Content
           extend Anthropic::Internal::Type::Union
 
-          def self?.variants: -> ::Array[Anthropic::Beta::BetaMessageParam::content]
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaMessageParam::content]
 
           BetaContentBlockParamArray: Anthropic::Internal::Type::Converter
         end
@@ -38,7 +43,7 @@ module Anthropic
           USER: :user
           ASSISTANT: :assistant
 
-          def self?.values: -> ::Array[Anthropic::Beta::BetaMessageParam::role]
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaMessageParam::role]
         end
       end
     end

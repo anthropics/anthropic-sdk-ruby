@@ -18,6 +18,8 @@ module Anthropic
           ?media_type: :"text/plain",
           ?type: :text
         ) -> void
+
+        def to_hash: -> { data: String, media_type: :"text/plain", type: :text }
       end
     end
   end

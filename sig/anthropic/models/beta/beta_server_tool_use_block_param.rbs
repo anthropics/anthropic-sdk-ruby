@@ -7,7 +7,7 @@ module Anthropic
         {
           id: String,
           input: top,
-          name: :web_search,
+          name: Anthropic::Models::Beta::BetaServerToolUseBlockParam::name_,
           type: :server_tool_use,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
         }
@@ -17,7 +17,7 @@ module Anthropic
 
         attr_accessor input: top
 
-        attr_accessor name: :web_search
+        attr_accessor name: Anthropic::Models::Beta::BetaServerToolUseBlockParam::name_
 
         attr_accessor type: :server_tool_use
 
@@ -26,10 +26,29 @@ module Anthropic
         def initialize: (
           id: String,
           input: top,
+          name: Anthropic::Models::Beta::BetaServerToolUseBlockParam::name_,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
-          ?name: :web_search,
           ?type: :server_tool_use
         ) -> void
+
+        def to_hash: -> {
+          id: String,
+          input: top,
+          name: Anthropic::Models::Beta::BetaServerToolUseBlockParam::name_,
+          type: :server_tool_use,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+
+        type name_ = :web_search | :code_execution
+
+        module Name
+          extend Anthropic::Internal::Type::Enum
+
+          WEB_SEARCH: :web_search
+          CODE_EXECUTION: :code_execution
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaServerToolUseBlockParam::name_]
+        end
       end
     end
   end

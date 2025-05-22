@@ -6,7 +6,7 @@ module Anthropic
       class BetaContentBlockSource < Anthropic::Internal::Type::BaseModel
         # @!attribute content
         #
-        #   @return [String, Array<Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam>]
+        #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>]
         required :content, union: -> { Anthropic::Beta::BetaContentBlockSource::Content }
 
         # @!attribute type
@@ -15,19 +15,19 @@ module Anthropic
         required :type, const: :content
 
         # @!method initialize(content:, type: :content)
-        #   @param content [String, Array<Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam>]
+        #   @param content [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>]
         #   @param type [Symbol, :content]
 
-        # @see Anthropic::Beta::BetaContentBlockSource#content
+        # @see Anthropic::Models::Beta::BetaContentBlockSource#content
         module Content
           extend Anthropic::Internal::Type::Union
 
           variant String
 
-          variant -> { Anthropic::Beta::BetaContentBlockSource::Content::BetaContentBlockSourceContentArray }
+          variant -> { Anthropic::Models::Beta::BetaContentBlockSource::Content::BetaContentBlockSourceContentArray }
 
           # @!method self.variants
-          #   @return [Array(String, Array<Anthropic::Beta::BetaTextBlockParam, Anthropic::Beta::BetaImageBlockParam>)]
+          #   @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>)]
 
           # @type [Anthropic::Internal::Type::Converter]
           BetaContentBlockSourceContentArray =

@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       type beta_base64_pdf_block =
         {
-          source: Anthropic::Beta::BetaBase64PDFBlock::source,
+          source: Anthropic::Models::Beta::BetaBase64PDFBlock::source,
           type: :document,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           citations: Anthropic::Beta::BetaCitationsConfigParam,
@@ -14,7 +14,7 @@ module Anthropic
         }
 
       class BetaBase64PDFBlock < Anthropic::Internal::Type::BaseModel
-        attr_accessor source: Anthropic::Beta::BetaBase64PDFBlock::source
+        attr_accessor source: Anthropic::Models::Beta::BetaBase64PDFBlock::source
 
         attr_accessor type: :document
 
@@ -31,7 +31,7 @@ module Anthropic
         attr_accessor title: String?
 
         def initialize: (
-          source: Anthropic::Beta::BetaBase64PDFBlock::source,
+          source: Anthropic::Models::Beta::BetaBase64PDFBlock::source,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?citations: Anthropic::Beta::BetaCitationsConfigParam,
           ?context: String?,
@@ -39,16 +39,26 @@ module Anthropic
           ?type: :document
         ) -> void
 
+        def to_hash: -> {
+          source: Anthropic::Models::Beta::BetaBase64PDFBlock::source,
+          type: :document,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          citations: Anthropic::Beta::BetaCitationsConfigParam,
+          context: String?,
+          title: String?
+        }
+
         type source =
           Anthropic::Beta::BetaBase64PDFSource
           | Anthropic::Beta::BetaPlainTextSource
           | Anthropic::Beta::BetaContentBlockSource
           | Anthropic::Beta::BetaURLPDFSource
+          | Anthropic::Beta::BetaFileDocumentSource
 
         module Source
           extend Anthropic::Internal::Type::Union
 
-          def self?.variants: -> ::Array[Anthropic::Beta::BetaBase64PDFBlock::source]
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaBase64PDFBlock::source]
         end
       end
     end

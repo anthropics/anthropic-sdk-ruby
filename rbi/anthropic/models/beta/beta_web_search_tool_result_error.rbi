@@ -16,7 +16,7 @@ module Anthropic
 
         sig do
           returns(
-            Anthropic::Beta::BetaWebSearchToolResultError::ErrorCode::TaggedSymbol
+            Anthropic::Beta::BetaWebSearchToolResultErrorCode::TaggedSymbol
           )
         end
         attr_accessor :error_code
@@ -27,7 +27,7 @@ module Anthropic
         sig do
           params(
             error_code:
-              Anthropic::Beta::BetaWebSearchToolResultError::ErrorCode::OrSymbol,
+              Anthropic::Beta::BetaWebSearchToolResultErrorCode::OrSymbol,
             type: Symbol
           ).returns(T.attached_class)
         end
@@ -38,61 +38,12 @@ module Anthropic
           override.returns(
             {
               error_code:
-                Anthropic::Beta::BetaWebSearchToolResultError::ErrorCode::TaggedSymbol,
+                Anthropic::Beta::BetaWebSearchToolResultErrorCode::TaggedSymbol,
               type: Symbol
             }
           )
         end
         def to_hash
-        end
-
-        module ErrorCode
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaWebSearchToolResultError::ErrorCode
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          INVALID_TOOL_INPUT =
-            T.let(
-              :invalid_tool_input,
-              Anthropic::Beta::BetaWebSearchToolResultError::ErrorCode::TaggedSymbol
-            )
-          UNAVAILABLE =
-            T.let(
-              :unavailable,
-              Anthropic::Beta::BetaWebSearchToolResultError::ErrorCode::TaggedSymbol
-            )
-          MAX_USES_EXCEEDED =
-            T.let(
-              :max_uses_exceeded,
-              Anthropic::Beta::BetaWebSearchToolResultError::ErrorCode::TaggedSymbol
-            )
-          TOO_MANY_REQUESTS =
-            T.let(
-              :too_many_requests,
-              Anthropic::Beta::BetaWebSearchToolResultError::ErrorCode::TaggedSymbol
-            )
-          QUERY_TOO_LONG =
-            T.let(
-              :query_too_long,
-              Anthropic::Beta::BetaWebSearchToolResultError::ErrorCode::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaWebSearchToolResultError::ErrorCode::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

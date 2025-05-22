@@ -112,6 +112,26 @@ module Anthropic
         sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
         attr_accessor :model
 
+        # MCP servers to be utilized in this request
+        sig do
+          returns(
+            T.nilable(
+              T::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition]
+            )
+          )
+        end
+        attr_reader :mcp_servers
+
+        sig do
+          params(
+            mcp_servers:
+              T::Array[
+                Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
+              ]
+          ).void
+        end
+        attr_writer :mcp_servers
+
         # System prompt.
         #
         # A system prompt is a way of providing context and instructions to Claude, such
@@ -275,7 +295,9 @@ module Anthropic
                   Anthropic::Beta::BetaToolComputerUse20250124,
                   Anthropic::Beta::BetaToolBash20250124,
                   Anthropic::Beta::BetaToolTextEditor20250124,
-                  Anthropic::Beta::BetaWebSearchTool20250305
+                  Anthropic::Beta::BetaToolTextEditor20250429,
+                  Anthropic::Beta::BetaWebSearchTool20250305,
+                  Anthropic::Beta::BetaCodeExecutionTool20250522
                 )
               ]
             )
@@ -295,7 +317,9 @@ module Anthropic
                   Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
                   Anthropic::Beta::BetaToolBash20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
-                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash
+                  Anthropic::Beta::BetaToolTextEditor20250429::OrHash,
+                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash,
+                  Anthropic::Beta::BetaCodeExecutionTool20250522::OrHash
                 )
               ]
           ).void
@@ -323,6 +347,10 @@ module Anthropic
           params(
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            mcp_servers:
+              T::Array[
+                Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
+              ],
             system_:
               Anthropic::Beta::MessageCountTokensParams::System::Variants,
             thinking:
@@ -347,7 +375,9 @@ module Anthropic
                   Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
                   Anthropic::Beta::BetaToolBash20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
-                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash
+                  Anthropic::Beta::BetaToolTextEditor20250429::OrHash,
+                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash,
+                  Anthropic::Beta::BetaCodeExecutionTool20250522::OrHash
                 )
               ],
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
@@ -448,6 +478,8 @@ module Anthropic
           # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
+          # MCP servers to be utilized in this request
+          mcp_servers: nil,
           # System prompt.
           #
           # A system prompt is a way of providing context and instructions to Claude, such
@@ -548,6 +580,8 @@ module Anthropic
             {
               messages: T::Array[Anthropic::Beta::BetaMessageParam],
               model: T.any(Anthropic::Model::OrSymbol, String),
+              mcp_servers:
+                T::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
               system_:
                 Anthropic::Beta::MessageCountTokensParams::System::Variants,
               thinking:
@@ -572,7 +606,9 @@ module Anthropic
                     Anthropic::Beta::BetaToolComputerUse20250124,
                     Anthropic::Beta::BetaToolBash20250124,
                     Anthropic::Beta::BetaToolTextEditor20250124,
-                    Anthropic::Beta::BetaWebSearchTool20250305
+                    Anthropic::Beta::BetaToolTextEditor20250429,
+                    Anthropic::Beta::BetaWebSearchTool20250305,
+                    Anthropic::Beta::BetaCodeExecutionTool20250522
                   )
                 ],
               betas:
@@ -629,7 +665,9 @@ module Anthropic
                 Anthropic::Beta::BetaToolComputerUse20250124,
                 Anthropic::Beta::BetaToolBash20250124,
                 Anthropic::Beta::BetaToolTextEditor20250124,
-                Anthropic::Beta::BetaWebSearchTool20250305
+                Anthropic::Beta::BetaToolTextEditor20250429,
+                Anthropic::Beta::BetaWebSearchTool20250305,
+                Anthropic::Beta::BetaCodeExecutionTool20250522
               )
             end
 

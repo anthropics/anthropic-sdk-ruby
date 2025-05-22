@@ -22,6 +22,12 @@ module Anthropic
           ?name: :str_replace_editor,
           ?type: :text_editor_20250124
         ) -> void
+
+        def to_hash: -> {
+          name: :str_replace_editor,
+          type: :text_editor_20250124,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
       end
     end
   end

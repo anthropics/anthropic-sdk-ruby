@@ -6,7 +6,7 @@ module Anthropic
       class MessageBatchSucceededResult < Anthropic::Internal::Type::BaseModel
         # @!attribute message
         #
-        #   @return [Anthropic::Message]
+        #   @return [Anthropic::Models::Message]
         required :message, -> { Anthropic::Message }
 
         # @!attribute type
@@ -15,7 +15,7 @@ module Anthropic
         required :type, const: :succeeded
 
         # @!method initialize(message:, type: :succeeded)
-        #   @param message [Anthropic::Message]
+        #   @param message [Anthropic::Models::Message]
         #   @param type [Symbol, :succeeded]
       end
     end

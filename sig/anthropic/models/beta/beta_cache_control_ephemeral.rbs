@@ -3,12 +3,41 @@ module Anthropic
     class BetaCacheControlEphemeral = Beta::BetaCacheControlEphemeral
 
     module Beta
-      type beta_cache_control_ephemeral = { type: :ephemeral }
+      type beta_cache_control_ephemeral =
+        {
+          type: :ephemeral,
+          ttl: Anthropic::Models::Beta::BetaCacheControlEphemeral::ttl
+        }
 
       class BetaCacheControlEphemeral < Anthropic::Internal::Type::BaseModel
         attr_accessor type: :ephemeral
 
-        def initialize: (?type: :ephemeral) -> void
+        attr_reader ttl: Anthropic::Models::Beta::BetaCacheControlEphemeral::ttl?
+
+        def ttl=: (
+          Anthropic::Models::Beta::BetaCacheControlEphemeral::ttl
+        ) -> Anthropic::Models::Beta::BetaCacheControlEphemeral::ttl
+
+        def initialize: (
+          ?ttl: Anthropic::Models::Beta::BetaCacheControlEphemeral::ttl,
+          ?type: :ephemeral
+        ) -> void
+
+        def to_hash: -> {
+          type: :ephemeral,
+          ttl: Anthropic::Models::Beta::BetaCacheControlEphemeral::ttl
+        }
+
+        type ttl = :"5m" | :"1h"
+
+        module TTL
+          extend Anthropic::Internal::Type::Enum
+
+          TTL_5M: :"5m"
+          TTL_1H: :"1h"
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaCacheControlEphemeral::ttl]
+        end
       end
     end
   end

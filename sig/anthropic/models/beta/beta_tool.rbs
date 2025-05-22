@@ -9,7 +9,7 @@ module Anthropic
           name: String,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           description: String,
-          type: Anthropic::Beta::BetaTool::type_?
+          type: Anthropic::Models::Beta::BetaTool::type_?
         }
 
       class BetaTool < Anthropic::Internal::Type::BaseModel
@@ -23,15 +23,23 @@ module Anthropic
 
         def description=: (String) -> String
 
-        attr_accessor type: Anthropic::Beta::BetaTool::type_?
+        attr_accessor type: Anthropic::Models::Beta::BetaTool::type_?
 
         def initialize: (
           input_schema: Anthropic::Beta::BetaTool::InputSchema,
           name: String,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?description: String,
-          ?type: Anthropic::Beta::BetaTool::type_?
+          ?type: Anthropic::Models::Beta::BetaTool::type_?
         ) -> void
+
+        def to_hash: -> {
+          input_schema: Anthropic::Beta::BetaTool::InputSchema,
+          name: String,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          description: String,
+          type: Anthropic::Models::Beta::BetaTool::type_?
+        }
 
         type input_schema = { type: :object, properties: top? }
 
@@ -41,6 +49,8 @@ module Anthropic
           attr_accessor properties: top?
 
           def initialize: (?properties: top?, ?type: :object) -> void
+
+          def to_hash: -> { type: :object, properties: top? }
         end
 
         type type_ = :custom
@@ -50,7 +60,7 @@ module Anthropic
 
           CUSTOM: :custom
 
-          def self?.values: -> ::Array[Anthropic::Beta::BetaTool::type_]
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaTool::type_]
         end
       end
     end

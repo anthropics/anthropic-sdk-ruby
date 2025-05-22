@@ -1,0 +1,49 @@
+module Anthropic
+  module Models
+    class BetaMCPToolResultBlock = Beta::BetaMCPToolResultBlock
+
+    module Beta
+      type beta_mcp_tool_result_block =
+        {
+          content: Anthropic::Models::Beta::BetaMCPToolResultBlock::content,
+          is_error: bool,
+          tool_use_id: String,
+          type: :mcp_tool_result
+        }
+
+      class BetaMCPToolResultBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: Anthropic::Models::Beta::BetaMCPToolResultBlock::content
+
+        attr_accessor is_error: bool
+
+        attr_accessor tool_use_id: String
+
+        attr_accessor type: :mcp_tool_result
+
+        def initialize: (
+          content: Anthropic::Models::Beta::BetaMCPToolResultBlock::content,
+          is_error: bool,
+          tool_use_id: String,
+          ?type: :mcp_tool_result
+        ) -> void
+
+        def to_hash: -> {
+          content: Anthropic::Models::Beta::BetaMCPToolResultBlock::content,
+          is_error: bool,
+          tool_use_id: String,
+          type: :mcp_tool_result
+        }
+
+        type content = String | ::Array[Anthropic::Beta::BetaTextBlock]
+
+        module Content
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaMCPToolResultBlock::content]
+
+          BetaTextBlockArray: Anthropic::Internal::Type::Converter
+        end
+      end
+    end
+  end
+end

@@ -8,6 +8,8 @@ module Anthropic
       attr_accessor url: String
 
       def initialize: (url: String, ?type: :url) -> void
+
+      def to_hash: -> { type: :url, url: String }
     end
   end
 end

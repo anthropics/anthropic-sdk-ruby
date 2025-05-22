@@ -21,6 +21,7 @@ module Anthropic
           messages: T::Array[Anthropic::MessageParam::OrHash],
           model: T.any(Anthropic::Model::OrSymbol, String),
           metadata: Anthropic::Metadata::OrHash,
+          service_tier: Anthropic::MessageCreateParams::ServiceTier::OrSymbol,
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
           temperature: Float,
@@ -155,6 +156,12 @@ module Anthropic
         model:,
         # An object describing metadata about the request.
         metadata: nil,
+        # Determines whether to use priority capacity (if available) or standard capacity
+        # for this request.
+        #
+        # Anthropic offers different levels of service for your API requests. See
+        # [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
+        service_tier: nil,
         # Custom text sequences that will cause the model to stop generating.
         #
         # Our models will normally stop when they have naturally completed their turn,
@@ -303,6 +310,7 @@ module Anthropic
           messages: T::Array[Anthropic::MessageParam::OrHash],
           model: T.any(Anthropic::Model::OrSymbol, String),
           metadata: Anthropic::Metadata::OrHash,
+          service_tier: Anthropic::MessageCreateParams::ServiceTier::OrSymbol,
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
           temperature: Float,
@@ -441,6 +449,12 @@ module Anthropic
         model:,
         # An object describing metadata about the request.
         metadata: nil,
+        # Determines whether to use priority capacity (if available) or standard capacity
+        # for this request.
+        #
+        # Anthropic offers different levels of service for your API requests. See
+        # [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
+        service_tier: nil,
         # Custom text sequences that will cause the model to stop generating.
         #
         # Our models will normally stop when they have naturally completed their turn,

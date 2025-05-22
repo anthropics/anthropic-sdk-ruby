@@ -6,7 +6,7 @@ module Anthropic
       class BetaRawMessageStartEvent < Anthropic::Internal::Type::BaseModel
         # @!attribute message
         #
-        #   @return [Anthropic::Beta::BetaMessage]
+        #   @return [Anthropic::Models::Beta::BetaMessage]
         required :message, -> { Anthropic::Beta::BetaMessage }
 
         # @!attribute type
@@ -15,7 +15,7 @@ module Anthropic
         required :type, const: :message_start
 
         # @!method initialize(message:, type: :message_start)
-        #   @param message [Anthropic::Beta::BetaMessage]
+        #   @param message [Anthropic::Models::Beta::BetaMessage]
         #   @param type [Symbol, :message_start]
       end
     end

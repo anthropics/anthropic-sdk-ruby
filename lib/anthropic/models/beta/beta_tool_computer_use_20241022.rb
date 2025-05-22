@@ -32,7 +32,7 @@ module Anthropic
         # @!attribute cache_control
         #   Create a cache control breakpoint at this content block.
         #
-        #   @return [Anthropic::Beta::BetaCacheControlEphemeral, nil]
+        #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!attribute display_number
@@ -43,13 +43,13 @@ module Anthropic
 
         # @!method initialize(display_height_px:, display_width_px:, cache_control: nil, display_number: nil, name: :computer, type: :computer_20241022)
         #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Beta::BetaToolComputerUse20241022} for more details.
+        #   {Anthropic::Models::Beta::BetaToolComputerUse20241022} for more details.
         #
         #   @param display_height_px [Integer] The height of the display in pixels.
         #
         #   @param display_width_px [Integer] The width of the display in pixels.
         #
-        #   @param cache_control [Anthropic::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+        #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
         #   @param display_number [Integer, nil] The X11 display number (e.g. 0, 1) for the display.
         #

@@ -8,7 +8,7 @@ module Anthropic
           tool_use_id: String,
           type: :tool_result,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
-          content: Anthropic::Beta::BetaToolResultBlockParam::content,
+          content: Anthropic::Models::Beta::BetaToolResultBlockParam::content,
           is_error: bool
         }
 
@@ -19,11 +19,11 @@ module Anthropic
 
         attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
-        attr_reader content: Anthropic::Beta::BetaToolResultBlockParam::content?
+        attr_reader content: Anthropic::Models::Beta::BetaToolResultBlockParam::content?
 
         def content=: (
-          Anthropic::Beta::BetaToolResultBlockParam::content
-        ) -> Anthropic::Beta::BetaToolResultBlockParam::content
+          Anthropic::Models::Beta::BetaToolResultBlockParam::content
+        ) -> Anthropic::Models::Beta::BetaToolResultBlockParam::content
 
         attr_reader is_error: bool?
 
@@ -32,14 +32,22 @@ module Anthropic
         def initialize: (
           tool_use_id: String,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
-          ?content: Anthropic::Beta::BetaToolResultBlockParam::content,
+          ?content: Anthropic::Models::Beta::BetaToolResultBlockParam::content,
           ?is_error: bool,
           ?type: :tool_result
         ) -> void
 
+        def to_hash: -> {
+          tool_use_id: String,
+          type: :tool_result,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          content: Anthropic::Models::Beta::BetaToolResultBlockParam::content,
+          is_error: bool
+        }
+
         type content =
           String
-          | ::Array[Anthropic::Beta::BetaToolResultBlockParam::Content::content]
+          | ::Array[Anthropic::Models::Beta::BetaToolResultBlockParam::Content::content]
 
         module Content
           extend Anthropic::Internal::Type::Union
@@ -51,10 +59,10 @@ module Anthropic
           module Content
             extend Anthropic::Internal::Type::Union
 
-            def self?.variants: -> ::Array[Anthropic::Beta::BetaToolResultBlockParam::Content::content]
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaToolResultBlockParam::Content::content]
           end
 
-          def self?.variants: -> ::Array[Anthropic::Beta::BetaToolResultBlockParam::content]
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaToolResultBlockParam::content]
 
           ContentArray: Anthropic::Internal::Type::Converter
         end

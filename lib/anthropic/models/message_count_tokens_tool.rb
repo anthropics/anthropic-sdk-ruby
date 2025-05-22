@@ -14,7 +14,7 @@ module Anthropic
       variant -> { Anthropic::WebSearchTool20250305 }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124, Anthropic::WebSearchTool20250305)]
+      #   @return [Array(Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::WebSearchTool20250305)]
     end
   end
 end

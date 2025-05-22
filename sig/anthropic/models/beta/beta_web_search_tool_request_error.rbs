@@ -5,38 +5,24 @@ module Anthropic
     module Beta
       type beta_web_search_tool_request_error =
         {
-          error_code: Anthropic::Beta::BetaWebSearchToolRequestError::error_code,
+          error_code: Anthropic::Models::Beta::beta_web_search_tool_result_error_code,
           type: :web_search_tool_result_error
         }
 
       class BetaWebSearchToolRequestError < Anthropic::Internal::Type::BaseModel
-        attr_accessor error_code: Anthropic::Beta::BetaWebSearchToolRequestError::error_code
+        attr_accessor error_code: Anthropic::Models::Beta::beta_web_search_tool_result_error_code
 
         attr_accessor type: :web_search_tool_result_error
 
         def initialize: (
-          error_code: Anthropic::Beta::BetaWebSearchToolRequestError::error_code,
+          error_code: Anthropic::Models::Beta::beta_web_search_tool_result_error_code,
           ?type: :web_search_tool_result_error
         ) -> void
 
-        type error_code =
-          :invalid_tool_input
-          | :unavailable
-          | :max_uses_exceeded
-          | :too_many_requests
-          | :query_too_long
-
-        module ErrorCode
-          extend Anthropic::Internal::Type::Enum
-
-          INVALID_TOOL_INPUT: :invalid_tool_input
-          UNAVAILABLE: :unavailable
-          MAX_USES_EXCEEDED: :max_uses_exceeded
-          TOO_MANY_REQUESTS: :too_many_requests
-          QUERY_TOO_LONG: :query_too_long
-
-          def self?.values: -> ::Array[Anthropic::Beta::BetaWebSearchToolRequestError::error_code]
-        end
+        def to_hash: -> {
+          error_code: Anthropic::Models::Beta::beta_web_search_tool_result_error_code,
+          type: :web_search_tool_result_error
+        }
       end
     end
   end

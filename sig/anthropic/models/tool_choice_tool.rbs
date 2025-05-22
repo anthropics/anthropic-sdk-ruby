@@ -17,6 +17,12 @@ module Anthropic
         ?disable_parallel_tool_use: bool,
         ?type: :tool
       ) -> void
+
+      def to_hash: -> {
+        name: String,
+        type: :tool,
+        disable_parallel_tool_use: bool
+      }
     end
   end
 end

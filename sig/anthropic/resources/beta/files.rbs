@@ -1,0 +1,41 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Files
+        def list: (
+          ?after_id: String,
+          ?before_id: String,
+          ?limit: Integer,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Internal::Page[Anthropic::Beta::FileMetadata]
+
+        def delete: (
+          String file_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::DeletedFile
+
+        def download: (
+          String file_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> StringIO
+
+        def retrieve_metadata: (
+          String file_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::FileMetadata
+
+        def upload: (
+          file: Anthropic::Internal::file_input,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::FileMetadata
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

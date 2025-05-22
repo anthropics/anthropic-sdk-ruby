@@ -8,6 +8,8 @@ module Anthropic
       attr_accessor type: :thinking_delta
 
       def initialize: (thinking: String, ?type: :thinking_delta) -> void
+
+      def to_hash: -> { thinking: String, type: :thinking_delta }
     end
   end
 end

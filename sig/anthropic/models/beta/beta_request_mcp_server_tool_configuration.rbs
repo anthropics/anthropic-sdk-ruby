@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    class BetaRequestMCPServerToolConfiguration = Beta::BetaRequestMCPServerToolConfiguration
+
+    module Beta
+      type beta_request_mcp_server_tool_configuration =
+        { allowed_tools: ::Array[String]?, enabled: bool? }
+
+      class BetaRequestMCPServerToolConfiguration < Anthropic::Internal::Type::BaseModel
+        attr_accessor allowed_tools: ::Array[String]?
+
+        attr_accessor enabled: bool?
+
+        def initialize: (
+          ?allowed_tools: ::Array[String]?,
+          ?enabled: bool?
+        ) -> void
+
+        def to_hash: -> { allowed_tools: ::Array[String]?, enabled: bool? }
+      end
+    end
+  end
+end

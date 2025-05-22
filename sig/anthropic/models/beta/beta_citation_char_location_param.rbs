@@ -34,6 +34,15 @@ module Anthropic
           start_char_index: Integer,
           ?type: :char_location
         ) -> void
+
+        def to_hash: -> {
+          cited_text: String,
+          document_index: Integer,
+          document_title: String?,
+          end_char_index: Integer,
+          start_char_index: Integer,
+          type: :char_location
+        }
       end
     end
   end

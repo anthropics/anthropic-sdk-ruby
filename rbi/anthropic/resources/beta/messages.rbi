@@ -21,7 +21,14 @@ module Anthropic
             max_tokens: Integer,
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            container: T.nilable(String),
+            mcp_servers:
+              T::Array[
+                Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
+              ],
             metadata: Anthropic::Beta::BetaMetadata::OrHash,
+            service_tier:
+              Anthropic::Beta::MessageCreateParams::ServiceTier::OrSymbol,
             stop_sequences: T::Array[String],
             system_: Anthropic::Beta::MessageCreateParams::System::Variants,
             temperature: Float,
@@ -47,7 +54,9 @@ module Anthropic
                   Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
                   Anthropic::Beta::BetaToolBash20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
-                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash
+                  Anthropic::Beta::BetaToolTextEditor20250429::OrHash,
+                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash,
+                  Anthropic::Beta::BetaCodeExecutionTool20250522::OrHash
                 )
               ],
             top_k: Integer,
@@ -159,8 +168,18 @@ module Anthropic
           # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
+          # Body param: Container identifier for reuse across requests.
+          container: nil,
+          # Body param: MCP servers to be utilized in this request
+          mcp_servers: nil,
           # Body param: An object describing metadata about the request.
           metadata: nil,
+          # Body param: Determines whether to use priority capacity (if available) or
+          # standard capacity for this request.
+          #
+          # Anthropic offers different levels of service for your API requests. See
+          # [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
+          service_tier: nil,
           # Body param: Custom text sequences that will cause the model to stop generating.
           #
           # Our models will normally stop when they have naturally completed their turn,
@@ -310,7 +329,14 @@ module Anthropic
             max_tokens: Integer,
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            container: T.nilable(String),
+            mcp_servers:
+              T::Array[
+                Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
+              ],
             metadata: Anthropic::Beta::BetaMetadata::OrHash,
+            service_tier:
+              Anthropic::Beta::MessageCreateParams::ServiceTier::OrSymbol,
             stop_sequences: T::Array[String],
             system_: Anthropic::Beta::MessageCreateParams::System::Variants,
             temperature: Float,
@@ -336,7 +362,9 @@ module Anthropic
                   Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
                   Anthropic::Beta::BetaToolBash20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
-                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash
+                  Anthropic::Beta::BetaToolTextEditor20250429::OrHash,
+                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash,
+                  Anthropic::Beta::BetaCodeExecutionTool20250522::OrHash
                 )
               ],
             top_k: Integer,
@@ -452,8 +480,18 @@ module Anthropic
           # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
+          # Body param: Container identifier for reuse across requests.
+          container: nil,
+          # Body param: MCP servers to be utilized in this request
+          mcp_servers: nil,
           # Body param: An object describing metadata about the request.
           metadata: nil,
+          # Body param: Determines whether to use priority capacity (if available) or
+          # standard capacity for this request.
+          #
+          # Anthropic offers different levels of service for your API requests. See
+          # [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
+          service_tier: nil,
           # Body param: Custom text sequences that will cause the model to stop generating.
           #
           # Our models will normally stop when they have naturally completed their turn,
@@ -600,6 +638,10 @@ module Anthropic
           params(
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            mcp_servers:
+              T::Array[
+                Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
+              ],
             system_:
               Anthropic::Beta::MessageCountTokensParams::System::Variants,
             thinking:
@@ -624,7 +666,9 @@ module Anthropic
                   Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
                   Anthropic::Beta::BetaToolBash20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
-                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash
+                  Anthropic::Beta::BetaToolTextEditor20250429::OrHash,
+                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash,
+                  Anthropic::Beta::BetaCodeExecutionTool20250522::OrHash
                 )
               ],
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
@@ -725,6 +769,8 @@ module Anthropic
           # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
+          # Body param: MCP servers to be utilized in this request
+          mcp_servers: nil,
           # Body param: System prompt.
           #
           # A system prompt is a way of providing context and instructions to Claude, such

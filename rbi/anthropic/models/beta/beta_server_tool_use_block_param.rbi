@@ -20,7 +20,9 @@ module Anthropic
         sig { returns(T.anything) }
         attr_accessor :input
 
-        sig { returns(Symbol) }
+        sig do
+          returns(Anthropic::Beta::BetaServerToolUseBlockParam::Name::OrSymbol)
+        end
         attr_accessor :name
 
         sig { returns(Symbol) }
@@ -42,18 +44,18 @@ module Anthropic
           params(
             id: String,
             input: T.anything,
+            name: Anthropic::Beta::BetaServerToolUseBlockParam::Name::OrSymbol,
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
-            name: Symbol,
             type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
           id:,
           input:,
+          name:,
           # Create a cache control breakpoint at this content block.
           cache_control: nil,
-          name: :web_search,
           type: :server_tool_use
         )
         end
@@ -63,7 +65,8 @@ module Anthropic
             {
               id: String,
               input: T.anything,
-              name: Symbol,
+              name:
+                Anthropic::Beta::BetaServerToolUseBlockParam::Name::OrSymbol,
               type: Symbol,
               cache_control:
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)
@@ -71,6 +74,37 @@ module Anthropic
           )
         end
         def to_hash
+        end
+
+        module Name
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::Beta::BetaServerToolUseBlockParam::Name)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          WEB_SEARCH =
+            T.let(
+              :web_search,
+              Anthropic::Beta::BetaServerToolUseBlockParam::Name::TaggedSymbol
+            )
+          CODE_EXECUTION =
+            T.let(
+              :code_execution,
+              Anthropic::Beta::BetaServerToolUseBlockParam::Name::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaServerToolUseBlockParam::Name::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
     end

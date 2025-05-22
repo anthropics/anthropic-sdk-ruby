@@ -49,6 +49,30 @@ module Anthropic
         )
       OUTPUT_128K_2025_02_19 =
         T.let(:"output-128k-2025-02-19", Anthropic::AnthropicBeta::TaggedSymbol)
+      FILES_API_2025_04_14 =
+        T.let(:"files-api-2025-04-14", Anthropic::AnthropicBeta::TaggedSymbol)
+      MCP_CLIENT_2025_04_04 =
+        T.let(:"mcp-client-2025-04-04", Anthropic::AnthropicBeta::TaggedSymbol)
+      DEV_FULL_THINKING_2025_05_14 =
+        T.let(
+          :"dev-full-thinking-2025-05-14",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
+      INTERLEAVED_THINKING_2025_05_14 =
+        T.let(
+          :"interleaved-thinking-2025-05-14",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
+      CODE_EXECUTION_2025_05_22 =
+        T.let(
+          :"code-execution-2025-05-22",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
+      EXTENDED_CACHE_TTL_2025_04_11 =
+        T.let(
+          :"extended-cache-ttl-2025-04-11",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
     end
   end
 end

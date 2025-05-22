@@ -19,27 +19,29 @@ module Anthropic
       #
       # Learn more about the Messages API in our [user guide](/en/docs/initial-setup)
       #
-      # @overload create(max_tokens:, messages:, model:, metadata: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      # @overload create(max_tokens:, messages:, model:, metadata: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
       #
       # @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
       #
-      # @param messages [Array<Anthropic::MessageParam>] Input messages.
+      # @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
       #
-      # @param model [Symbol, String, Anthropic::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      # @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
       #
-      # @param metadata [Anthropic::Metadata] An object describing metadata about the request.
+      # @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
+      #
+      # @param service_tier [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
       #
       # @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
       #
-      # @param system_ [String, Array<Anthropic::TextBlockParam>] System prompt.
+      # @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt.
       #
       # @param temperature [Float] Amount of randomness injected into the response.
       #
-      # @param thinking [Anthropic::ThinkingConfigEnabled, Anthropic::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
+      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
       #
-      # @param tool_choice [Anthropic::ToolChoiceAuto, Anthropic::ToolChoiceAny, Anthropic::ToolChoiceTool, Anthropic::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
+      # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
       #
-      # @param tools [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124, Anthropic::WebSearchTool20250305>] Definitions of tools that the model may use.
+      # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::WebSearchTool20250305>] Definitions of tools that the model may use.
       #
       # @param top_k [Integer] Only sample from the top K options for each subsequent token.
       #
@@ -47,7 +49,7 @@ module Anthropic
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Anthropic::Message]
+      # @return [Anthropic::Models::Message]
       #
       # @see Anthropic::Models::MessageCreateParams
       def create(params)
@@ -56,12 +58,25 @@ module Anthropic
           message = "Please use `#stream_raw` for the streaming use case."
           raise ArgumentError.new(message)
         end
+
+        if options.empty? && @client.timeout == Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS
+          model = parsed[:model].to_sym
+          max_tokens = parsed[:max_tokens].to_i
+          timeout = @client.calculate_nonstreaming_timeout(
+            max_tokens,
+            Anthropic::Client::MODEL_NONSTREAMING_TOKENS[model]
+          )
+          options = {timeout: timeout}
+        else
+          options = {timeout: 600, **options}
+        end
+
         @client.request(
           method: :post,
           path: "v1/messages",
           body: parsed,
           model: Anthropic::Message,
-          options: {timeout: 600, **options}
+          options: options
         )
       end
 
@@ -82,27 +97,29 @@ module Anthropic
       #
       # Learn more about the Messages API in our [user guide](/en/docs/initial-setup)
       #
-      # @overload stream_raw(max_tokens:, messages:, model:, metadata: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      # @overload stream_raw(max_tokens:, messages:, model:, metadata: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
       #
       # @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
       #
-      # @param messages [Array<Anthropic::MessageParam>] Input messages.
+      # @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
       #
-      # @param model [Symbol, String, Anthropic::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      # @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
       #
-      # @param metadata [Anthropic::Metadata] An object describing metadata about the request.
+      # @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
+      #
+      # @param service_tier [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
       #
       # @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
       #
-      # @param system_ [String, Array<Anthropic::TextBlockParam>] System prompt.
+      # @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt.
       #
       # @param temperature [Float] Amount of randomness injected into the response.
       #
-      # @param thinking [Anthropic::ThinkingConfigEnabled, Anthropic::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
+      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
       #
-      # @param tool_choice [Anthropic::ToolChoiceAuto, Anthropic::ToolChoiceAny, Anthropic::ToolChoiceTool, Anthropic::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
+      # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
       #
-      # @param tools [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124, Anthropic::WebSearchTool20250305>] Definitions of tools that the model may use.
+      # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::WebSearchTool20250305>] Definitions of tools that the model may use.
       #
       # @param top_k [Integer] Only sample from the top K options for each subsequent token.
       #
@@ -110,7 +127,7 @@ module Anthropic
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Anthropic::Internal::Stream<Anthropic::RawMessageStartEvent, Anthropic::RawMessageDeltaEvent, Anthropic::RawMessageStopEvent, Anthropic::RawContentBlockStartEvent, Anthropic::RawContentBlockDeltaEvent, Anthropic::RawContentBlockStopEvent>]
+      # @return [Anthropic::Internal::Stream<Anthropic::Models::RawMessageStartEvent, Anthropic::Models::RawMessageDeltaEvent, Anthropic::Models::RawMessageStopEvent, Anthropic::Models::RawContentBlockStartEvent, Anthropic::Models::RawContentBlockDeltaEvent, Anthropic::Models::RawContentBlockStopEvent>]
       #
       # @see Anthropic::Models::MessageCreateParams
       def stream_raw(params)
@@ -144,21 +161,21 @@ module Anthropic
       #
       # @overload count_tokens(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
       #
-      # @param messages [Array<Anthropic::MessageParam>] Input messages.
+      # @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
       #
-      # @param model [Symbol, String, Anthropic::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      # @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
       #
-      # @param system_ [String, Array<Anthropic::TextBlockParam>] System prompt.
+      # @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt.
       #
-      # @param thinking [Anthropic::ThinkingConfigEnabled, Anthropic::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
+      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
       #
-      # @param tool_choice [Anthropic::ToolChoiceAuto, Anthropic::ToolChoiceAny, Anthropic::ToolChoiceTool, Anthropic::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
+      # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
       #
-      # @param tools [Array<Anthropic::Tool, Anthropic::ToolBash20250124, Anthropic::ToolTextEditor20250124, Anthropic::WebSearchTool20250305>] Definitions of tools that the model may use.
+      # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::WebSearchTool20250305>] Definitions of tools that the model may use.
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Anthropic::MessageTokensCount]
+      # @return [Anthropic::Models::MessageTokensCount]
       #
       # @see Anthropic::Models::MessageCountTokensParams
       def count_tokens(params)

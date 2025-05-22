@@ -5,10 +5,11 @@ module Anthropic
         {
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
+          mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           tool_choice: Anthropic::Models::Beta::beta_tool_choice,
-          tools: ::Array[Anthropic::Beta::MessageCountTokensParams::tool],
+          tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
           betas: ::Array[Anthropic::Models::anthropic_beta]
         }
         & Anthropic::Internal::Type::request_parameters
@@ -20,6 +21,12 @@ module Anthropic
         attr_accessor messages: ::Array[Anthropic::Beta::BetaMessageParam]
 
         attr_accessor model: Anthropic::Models::model
+
+        attr_reader mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition]?
+
+        def mcp_servers=: (
+          ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition]
+        ) -> ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition]
 
         attr_reader system_: Anthropic::Models::Beta::MessageCountTokensParams::system_?
 
@@ -39,11 +46,11 @@ module Anthropic
           Anthropic::Models::Beta::beta_tool_choice
         ) -> Anthropic::Models::Beta::beta_tool_choice
 
-        attr_reader tools: ::Array[Anthropic::Beta::MessageCountTokensParams::tool]?
+        attr_reader tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]?
 
         def tools=: (
-          ::Array[Anthropic::Beta::MessageCountTokensParams::tool]
-        ) -> ::Array[Anthropic::Beta::MessageCountTokensParams::tool]
+          ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]
+        ) -> ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]
 
         attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
@@ -54,13 +61,26 @@ module Anthropic
         def initialize: (
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
+          ?mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           ?system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           ?thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
-          ?tools: ::Array[Anthropic::Beta::MessageCountTokensParams::tool],
+          ?tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> void
+
+        def to_hash: -> {
+          messages: ::Array[Anthropic::Beta::BetaMessageParam],
+          model: Anthropic::Models::model,
+          mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
+          system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
+          thinking: Anthropic::Models::Beta::beta_thinking_config_param,
+          tool_choice: Anthropic::Models::Beta::beta_tool_choice,
+          tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
+          betas: ::Array[Anthropic::Models::anthropic_beta],
+          request_options: Anthropic::RequestOptions
+        }
 
         type system_ = String | ::Array[Anthropic::Beta::BetaTextBlockParam]
 
@@ -80,12 +100,14 @@ module Anthropic
           | Anthropic::Beta::BetaToolComputerUse20250124
           | Anthropic::Beta::BetaToolBash20250124
           | Anthropic::Beta::BetaToolTextEditor20250124
+          | Anthropic::Beta::BetaToolTextEditor20250429
           | Anthropic::Beta::BetaWebSearchTool20250305
+          | Anthropic::Beta::BetaCodeExecutionTool20250522
 
         module Tool
           extend Anthropic::Internal::Type::Union
 
-          def self?.variants: -> ::Array[Anthropic::Beta::MessageCountTokensParams::tool]
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool]
         end
       end
     end

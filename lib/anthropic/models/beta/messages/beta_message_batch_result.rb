@@ -23,7 +23,7 @@ module Anthropic
           variant :expired, -> { Anthropic::Beta::Messages::BetaMessageBatchExpiredResult }
 
           # @!method self.variants
-          #   @return [Array(Anthropic::Beta::Messages::BetaMessageBatchSucceededResult, Anthropic::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Beta::Messages::BetaMessageBatchExpiredResult)]
+          #   @return [Array(Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult)]
         end
       end
     end

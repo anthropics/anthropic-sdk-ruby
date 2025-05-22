@@ -5,7 +5,7 @@ module Anthropic
     class RawMessageDeltaEvent < Anthropic::Internal::Type::BaseModel
       # @!attribute delta
       #
-      #   @return [Anthropic::RawMessageDeltaEvent::Delta]
+      #   @return [Anthropic::Models::RawMessageDeltaEvent::Delta]
       required :delta, -> { Anthropic::RawMessageDeltaEvent::Delta }
 
       # @!attribute type
@@ -30,24 +30,24 @@ module Anthropic
       #   Total input tokens in a request is the summation of `input_tokens`,
       #   `cache_creation_input_tokens`, and `cache_read_input_tokens`.
       #
-      #   @return [Anthropic::MessageDeltaUsage]
+      #   @return [Anthropic::Models::MessageDeltaUsage]
       required :usage, -> { Anthropic::MessageDeltaUsage }
 
       # @!method initialize(delta:, usage:, type: :message_delta)
       #   Some parameter documentations has been truncated, see
-      #   {Anthropic::RawMessageDeltaEvent} for more details.
+      #   {Anthropic::Models::RawMessageDeltaEvent} for more details.
       #
-      #   @param delta [Anthropic::RawMessageDeltaEvent::Delta]
+      #   @param delta [Anthropic::Models::RawMessageDeltaEvent::Delta]
       #
-      #   @param usage [Anthropic::MessageDeltaUsage] Billing and rate-limit usage.
+      #   @param usage [Anthropic::Models::MessageDeltaUsage] Billing and rate-limit usage.
       #
       #   @param type [Symbol, :message_delta]
 
-      # @see Anthropic::RawMessageDeltaEvent#delta
+      # @see Anthropic::Models::RawMessageDeltaEvent#delta
       class Delta < Anthropic::Internal::Type::BaseModel
         # @!attribute stop_reason
         #
-        #   @return [Symbol, Anthropic::StopReason, nil]
+        #   @return [Symbol, Anthropic::Models::StopReason, nil]
         required :stop_reason, enum: -> { Anthropic::StopReason }, nil?: true
 
         # @!attribute stop_sequence
@@ -56,7 +56,7 @@ module Anthropic
         required :stop_sequence, String, nil?: true
 
         # @!method initialize(stop_reason:, stop_sequence:)
-        #   @param stop_reason [Symbol, Anthropic::StopReason, nil]
+        #   @param stop_reason [Symbol, Anthropic::Models::StopReason, nil]
         #   @param stop_sequence [String, nil]
       end
     end

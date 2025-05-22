@@ -26,7 +26,7 @@ module Anthropic
 
         # @!method initialize(name:, disable_parallel_tool_use: nil, type: :tool)
         #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Beta::BetaToolChoiceTool} for more details.
+        #   {Anthropic::Models::Beta::BetaToolChoiceTool} for more details.
         #
         #   The model will use the specified tool with `tool_choice.name`.
         #

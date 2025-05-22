@@ -27,6 +27,14 @@ module Anthropic
         ?page_age: String?,
         ?type: :web_search_result
       ) -> void
+
+      def to_hash: -> {
+        encrypted_content: String,
+        title: String,
+        type: :web_search_result,
+        url: String,
+        page_age: String?
+      }
     end
   end
 end

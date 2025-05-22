@@ -14,6 +14,8 @@ module Anthropic
         def disable_parallel_tool_use=: (bool) -> bool
 
         def initialize: (?disable_parallel_tool_use: bool, ?type: :any) -> void
+
+        def to_hash: -> { type: :any, disable_parallel_tool_use: bool }
       end
     end
   end

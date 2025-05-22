@@ -20,7 +20,7 @@ module Anthropic
 
         # @!method initialize(disable_parallel_tool_use: nil, type: :any)
         #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Beta::BetaToolChoiceAny} for more details.
+        #   {Anthropic::Models::Beta::BetaToolChoiceAny} for more details.
         #
         #   The model will use any available tools.
         #

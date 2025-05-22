@@ -8,6 +8,8 @@ module Anthropic
       attr_accessor type: :overloaded_error
 
       def initialize: (message: String, ?type: :overloaded_error) -> void
+
+      def to_hash: -> { message: String, type: :overloaded_error }
     end
   end
 end

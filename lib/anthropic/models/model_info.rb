@@ -32,8 +32,8 @@ module Anthropic
       required :type, const: :model
 
       # @!method initialize(id:, created_at:, display_name:, type: :model)
-      #   Some parameter documentations has been truncated, see {Anthropic::ModelInfo} for
-      #   more details.
+      #   Some parameter documentations has been truncated, see
+      #   {Anthropic::Models::ModelInfo} for more details.
       #
       #   @param id [String] Unique model identifier.
       #

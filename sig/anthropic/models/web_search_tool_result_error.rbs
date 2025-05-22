@@ -2,19 +2,24 @@ module Anthropic
   module Models
     type web_search_tool_result_error =
       {
-        error_code: Anthropic::WebSearchToolResultError::error_code,
+        error_code: Anthropic::Models::WebSearchToolResultError::error_code,
         type: :web_search_tool_result_error
       }
 
     class WebSearchToolResultError < Anthropic::Internal::Type::BaseModel
-      attr_accessor error_code: Anthropic::WebSearchToolResultError::error_code
+      attr_accessor error_code: Anthropic::Models::WebSearchToolResultError::error_code
 
       attr_accessor type: :web_search_tool_result_error
 
       def initialize: (
-        error_code: Anthropic::WebSearchToolResultError::error_code,
+        error_code: Anthropic::Models::WebSearchToolResultError::error_code,
         ?type: :web_search_tool_result_error
       ) -> void
+
+      def to_hash: -> {
+        error_code: Anthropic::Models::WebSearchToolResultError::error_code,
+        type: :web_search_tool_result_error
+      }
 
       type error_code =
         :invalid_tool_input
@@ -32,7 +37,7 @@ module Anthropic
         TOO_MANY_REQUESTS: :too_many_requests
         QUERY_TOO_LONG: :query_too_long
 
-        def self?.values: -> ::Array[Anthropic::WebSearchToolResultError::error_code]
+        def self?.values: -> ::Array[Anthropic::Models::WebSearchToolResultError::error_code]
       end
     end
   end

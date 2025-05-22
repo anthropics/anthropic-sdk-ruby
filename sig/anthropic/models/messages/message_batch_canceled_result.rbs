@@ -9,6 +9,8 @@ module Anthropic
         attr_accessor type: :canceled
 
         def initialize: (?type: :canceled) -> void
+
+        def to_hash: -> { type: :canceled }
       end
     end
   end

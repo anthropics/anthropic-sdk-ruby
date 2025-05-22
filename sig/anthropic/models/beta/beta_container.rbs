@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    class BetaContainer = Beta::BetaContainer
+
+    module Beta
+      type beta_container = { id: String, expires_at: Time }
+
+      class BetaContainer < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor expires_at: Time
+
+        def initialize: (id: String, expires_at: Time) -> void
+
+        def to_hash: -> { id: String, expires_at: Time }
+      end
+    end
+  end
+end

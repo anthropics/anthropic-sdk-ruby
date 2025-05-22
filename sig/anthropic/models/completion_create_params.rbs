@@ -62,6 +62,19 @@ module Anthropic
         ?betas: ::Array[Anthropic::Models::anthropic_beta],
         ?request_options: Anthropic::request_opts
       ) -> void
+
+      def to_hash: -> {
+        max_tokens_to_sample: Integer,
+        model: Anthropic::Models::model,
+        prompt: String,
+        metadata: Anthropic::Metadata,
+        stop_sequences: ::Array[String],
+        temperature: Float,
+        top_k: Integer,
+        top_p: Float,
+        betas: ::Array[Anthropic::Models::anthropic_beta],
+        request_options: Anthropic::RequestOptions
+      }
     end
   end
 end

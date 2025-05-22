@@ -18,6 +18,13 @@ module Anthropic
         ?name: :web_search,
         ?type: :server_tool_use
       ) -> void
+
+      def to_hash: -> {
+        id: String,
+        input: top,
+        name: :web_search,
+        type: :server_tool_use
+      }
     end
   end
 end
