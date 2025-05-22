@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.1.0 (2025-05-22)
+
+Full Changelog: [v1.0.0...v1.1.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.0.0...v1.1.0)
+
+### Features
+
+* **api:** add claude 4 models, files API, code execution tool, MCP connector and more ([5dd465d](https://github.com/anthropics/anthropic-sdk-ruby/commit/5dd465dac56891b5f21e51e73edac15131d04453))
+
+
+### Chores
+
+* use fully qualified names for yard annotations and rbs aliases ([80332a0](https://github.com/anthropics/anthropic-sdk-ruby/commit/80332a019ae8bb49d839516256fc4314db7648b9))
+
 ## 1.0.0 (2025-05-21)
 
 Full Changelog: [v0.1.0-beta.9...v1.0.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v0.1.0-beta.9...v1.0.0)
