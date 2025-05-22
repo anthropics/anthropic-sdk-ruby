@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    class BetaFileImageSource = Beta::BetaFileImageSource
+
+    module Beta
+      type beta_file_image_source = { file_id: String, type: :file }
+
+      class BetaFileImageSource < Anthropic::Internal::Type::BaseModel
+        attr_accessor file_id: String
+
+        attr_accessor type: :file
+
+        def initialize: (file_id: String, ?type: :file) -> void
+
+        def to_hash: -> { file_id: String, type: :file }
+      end
+    end
+  end
+end

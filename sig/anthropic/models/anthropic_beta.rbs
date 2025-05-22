@@ -10,6 +10,12 @@ module Anthropic
       | :"token-counting-2024-11-01"
       | :"token-efficient-tools-2025-02-19"
       | :"output-128k-2025-02-19"
+      | :"files-api-2025-04-14"
+      | :"mcp-client-2025-04-04"
+      | :"dev-full-thinking-2025-05-14"
+      | :"interleaved-thinking-2025-05-14"
+      | :"code-execution-2025-05-22"
+      | :"extended-cache-ttl-2025-04-11"
 
     module AnthropicBeta
       extend Anthropic::Internal::Type::Union
@@ -24,6 +30,12 @@ module Anthropic
       TOKEN_COUNTING_2024_11_01: :"token-counting-2024-11-01"
       TOKEN_EFFICIENT_TOOLS_2025_02_19: :"token-efficient-tools-2025-02-19"
       OUTPUT_128K_2025_02_19: :"output-128k-2025-02-19"
+      FILES_API_2025_04_14: :"files-api-2025-04-14"
+      MCP_CLIENT_2025_04_04: :"mcp-client-2025-04-04"
+      DEV_FULL_THINKING_2025_05_14: :"dev-full-thinking-2025-05-14"
+      INTERLEAVED_THINKING_2025_05_14: :"interleaved-thinking-2025-05-14"
+      CODE_EXECUTION_2025_05_22: :"code-execution-2025-05-22"
+      EXTENDED_CACHE_TTL_2025_04_11: :"extended-cache-ttl-2025-04-11"
     end
   end
 end

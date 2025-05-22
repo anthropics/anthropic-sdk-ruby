@@ -1,0 +1,60 @@
+module Anthropic
+  module Models
+    class BetaRequestMCPToolResultBlockParam = Beta::BetaRequestMCPToolResultBlockParam
+
+    module Beta
+      type beta_request_mcp_tool_result_block_param =
+        {
+          tool_use_id: String,
+          type: :mcp_tool_result,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          content: Anthropic::Models::Beta::BetaRequestMCPToolResultBlockParam::content,
+          is_error: bool
+        }
+
+      class BetaRequestMCPToolResultBlockParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor tool_use_id: String
+
+        attr_accessor type: :mcp_tool_result
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        attr_reader content: Anthropic::Models::Beta::BetaRequestMCPToolResultBlockParam::content?
+
+        def content=: (
+          Anthropic::Models::Beta::BetaRequestMCPToolResultBlockParam::content
+        ) -> Anthropic::Models::Beta::BetaRequestMCPToolResultBlockParam::content
+
+        attr_reader is_error: bool?
+
+        def is_error=: (bool) -> bool
+
+        def initialize: (
+          tool_use_id: String,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?content: Anthropic::Models::Beta::BetaRequestMCPToolResultBlockParam::content,
+          ?is_error: bool,
+          ?type: :mcp_tool_result
+        ) -> void
+
+        def to_hash: -> {
+          tool_use_id: String,
+          type: :mcp_tool_result,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          content: Anthropic::Models::Beta::BetaRequestMCPToolResultBlockParam::content,
+          is_error: bool
+        }
+
+        type content = String | ::Array[Anthropic::Beta::BetaTextBlockParam]
+
+        module Content
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaRequestMCPToolResultBlockParam::content]
+
+          BetaTextBlockParamArray: Anthropic::Internal::Type::Converter
+        end
+      end
+    end
+  end
+end

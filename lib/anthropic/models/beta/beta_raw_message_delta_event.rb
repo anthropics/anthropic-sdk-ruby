@@ -46,6 +46,13 @@ module Anthropic
 
         # @see Anthropic::Models::Beta::BetaRawMessageDeltaEvent#delta
         class Delta < Anthropic::Internal::Type::BaseModel
+          # @!attribute container
+          #   Information about the container used in the request (for the code execution
+          #   tool)
+          #
+          #   @return [Anthropic::Models::Beta::BetaContainer, nil]
+          required :container, -> { Anthropic::Beta::BetaContainer }, nil?: true
+
           # @!attribute stop_reason
           #
           #   @return [Symbol, Anthropic::Models::Beta::BetaStopReason, nil]
@@ -56,8 +63,14 @@ module Anthropic
           #   @return [String, nil]
           required :stop_sequence, String, nil?: true
 
-          # @!method initialize(stop_reason:, stop_sequence:)
+          # @!method initialize(container:, stop_reason:, stop_sequence:)
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta} for more details.
+          #
+          #   @param container [Anthropic::Models::Beta::BetaContainer, nil] Information about the container used in the request (for the code execution tool
+          #
           #   @param stop_reason [Symbol, Anthropic::Models::Beta::BetaStopReason, nil]
+          #
           #   @param stop_sequence [String, nil]
         end
       end

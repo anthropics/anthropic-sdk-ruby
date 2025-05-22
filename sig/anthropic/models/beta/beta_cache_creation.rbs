@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    class BetaCacheCreation = Beta::BetaCacheCreation
+
+    module Beta
+      type beta_cache_creation =
+        {
+          :ephemeral_1h_input_tokens => Integer,
+          :ephemeral_5m_input_tokens => Integer
+        }
+
+      class BetaCacheCreation < Anthropic::Internal::Type::BaseModel
+        attr_accessor ephemeral_1h_input_tokens: Integer
+
+        attr_accessor ephemeral_5m_input_tokens: Integer
+
+        def initialize: (
+          ephemeral_1h_input_tokens: Integer,
+          ephemeral_5m_input_tokens: Integer
+        ) -> void
+
+        def to_hash: -> {
+          :ephemeral_1h_input_tokens => Integer,
+          :ephemeral_5m_input_tokens => Integer
+        }
+      end
+    end
+  end
+end

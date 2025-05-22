@@ -19,7 +19,7 @@ module Anthropic
       #
       # Learn more about the Messages API in our [user guide](/en/docs/initial-setup)
       #
-      # @overload create(max_tokens:, messages:, model:, metadata: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      # @overload create(max_tokens:, messages:, model:, metadata: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
       #
       # @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
       #
@@ -28,6 +28,8 @@ module Anthropic
       # @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
       #
       # @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
+      #
+      # @param service_tier [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
       #
       # @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
       #
@@ -56,12 +58,25 @@ module Anthropic
           message = "Please use `#stream_raw` for the streaming use case."
           raise ArgumentError.new(message)
         end
+
+        if options.empty? && @client.timeout == Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS
+          model = parsed[:model].to_sym
+          max_tokens = parsed[:max_tokens].to_i
+          timeout = @client.calculate_nonstreaming_timeout(
+            max_tokens,
+            Anthropic::Client::MODEL_NONSTREAMING_TOKENS[model]
+          )
+          options = {timeout: timeout}
+        else
+          options = {timeout: 600, **options}
+        end
+
         @client.request(
           method: :post,
           path: "v1/messages",
           body: parsed,
           model: Anthropic::Message,
-          options: {timeout: 600, **options}
+          options: options
         )
       end
 
@@ -82,7 +97,7 @@ module Anthropic
       #
       # Learn more about the Messages API in our [user guide](/en/docs/initial-setup)
       #
-      # @overload stream_raw(max_tokens:, messages:, model:, metadata: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      # @overload stream_raw(max_tokens:, messages:, model:, metadata: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
       #
       # @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
       #
@@ -91,6 +106,8 @@ module Anthropic
       # @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
       #
       # @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
+      #
+      # @param service_tier [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
       #
       # @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
       #

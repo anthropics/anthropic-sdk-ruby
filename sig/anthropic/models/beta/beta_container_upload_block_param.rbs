@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaContainerUploadBlockParam = Beta::BetaContainerUploadBlockParam
+
+    module Beta
+      type beta_container_upload_block_param =
+        {
+          file_id: String,
+          type: :container_upload,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+
+      class BetaContainerUploadBlockParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor file_id: String
+
+        attr_accessor type: :container_upload
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        def initialize: (
+          file_id: String,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?type: :container_upload
+        ) -> void
+
+        def to_hash: -> {
+          file_id: String,
+          type: :container_upload,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+      end
+    end
+  end
+end

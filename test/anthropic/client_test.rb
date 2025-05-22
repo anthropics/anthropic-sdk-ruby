@@ -356,4 +356,55 @@ class AnthropicTest < Minitest::Test
       headers.each { refute_empty(_1) }
     end
   end
+
+  def test_nonstreaming_timeout_calculation_normal
+    anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key")
+
+    # Should not raise an error for reasonable token counts
+    timeout = anthropic.calculate_nonstreaming_timeout(1024)
+    assert_equal(Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS, timeout)
+  end
+
+  def test_nonstreaming_timeout_calculation_raises_for_large_tokens
+    anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key")
+
+    # Should raise an error for very large token counts (> 128k)
+    assert_raises(ArgumentError) do
+      anthropic.calculate_nonstreaming_timeout(150_000)
+    end
+  end
+
+  def test_nonstreaming_timeout_calculation_with_model_limit
+    anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key")
+
+    # Should not raise error when max_tokens is below model's nonstreaming limit
+    timeout = anthropic.calculate_nonstreaming_timeout(4000, 8192)
+    assert_equal(Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS, timeout)
+
+    # Should raise error when max_tokens exceeds model's nonstreaming limit
+    assert_raises(ArgumentError) do
+      anthropic.calculate_nonstreaming_timeout(9000, 8192)
+    end
+  end
+
+  def test_nonstreaming_timeout_calculation_correctly_checks_model_limits
+    anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key")
+    model = :"claude-opus-4-20250514"
+    limit = Anthropic::Client::MODEL_NONSTREAMING_TOKENS[model]
+
+    # Make sure we can get the limit based on the model
+    assert_kind_of(Integer, limit, "Model limit should be an integer")
+    assert_operator(limit, :>, 0, "Model limit should be positive")
+
+    # Test that the method handles model limits correctly
+    assert_equal(
+      anthropic.calculate_nonstreaming_timeout(1000, limit),
+      Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS,
+      "Should return default timeout when tokens are within limit"
+    )
+
+    assert_raises(ArgumentError, "Should raise error when tokens exceed model limit") do
+      anthropic.calculate_nonstreaming_timeout(limit + 1000, limit)
+    end
+  end
 end

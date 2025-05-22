@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    module BetaWebSearchToolResultErrorCode = Beta::BetaWebSearchToolResultErrorCode
+
+    module Beta
+      type beta_web_search_tool_result_error_code =
+        :invalid_tool_input
+        | :unavailable
+        | :max_uses_exceeded
+        | :too_many_requests
+        | :query_too_long
+
+      module BetaWebSearchToolResultErrorCode
+        extend Anthropic::Internal::Type::Enum
+
+        INVALID_TOOL_INPUT: :invalid_tool_input
+        UNAVAILABLE: :unavailable
+        MAX_USES_EXCEEDED: :max_uses_exceeded
+        TOO_MANY_REQUESTS: :too_many_requests
+        QUERY_TOO_LONG: :query_too_long
+
+        def self?.values: -> ::Array[Anthropic::Models::Beta::beta_web_search_tool_result_error_code]
+      end
+    end
+  end
+end

@@ -16,8 +16,8 @@ module Anthropic
 
         # @!attribute name
         #
-        #   @return [Symbol, :web_search]
-        required :name, const: :web_search
+        #   @return [Symbol, Anthropic::Models::Beta::BetaServerToolUseBlockParam::Name]
+        required :name, enum: -> { Anthropic::Beta::BetaServerToolUseBlockParam::Name }
 
         # @!attribute type
         #
@@ -30,16 +30,27 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
-        # @!method initialize(id:, input:, cache_control: nil, name: :web_search, type: :server_tool_use)
+        # @!method initialize(id:, input:, name:, cache_control: nil, type: :server_tool_use)
         #   @param id [String]
         #
         #   @param input [Object]
         #
+        #   @param name [Symbol, Anthropic::Models::Beta::BetaServerToolUseBlockParam::Name]
+        #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
-        #   @param name [Symbol, :web_search]
-        #
         #   @param type [Symbol, :server_tool_use]
+
+        # @see Anthropic::Models::Beta::BetaServerToolUseBlockParam#name
+        module Name
+          extend Anthropic::Internal::Type::Enum
+
+          WEB_SEARCH = :web_search
+          CODE_EXECUTION = :code_execution
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
       end
     end
 

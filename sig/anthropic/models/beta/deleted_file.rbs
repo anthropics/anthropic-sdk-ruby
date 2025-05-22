@@ -1,0 +1,38 @@
+module Anthropic
+  module Models
+    module Beta
+      type deleted_file =
+        { id: String, type: Anthropic::Models::Beta::DeletedFile::type_ }
+
+      class DeletedFile < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_reader type: Anthropic::Models::Beta::DeletedFile::type_?
+
+        def type=: (
+          Anthropic::Models::Beta::DeletedFile::type_
+        ) -> Anthropic::Models::Beta::DeletedFile::type_
+
+        def initialize: (
+          id: String,
+          ?type: Anthropic::Models::Beta::DeletedFile::type_
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          type: Anthropic::Models::Beta::DeletedFile::type_
+        }
+
+        type type_ = :file_deleted
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          FILE_DELETED: :file_deleted
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::DeletedFile::type_]
+        end
+      end
+    end
+  end
+end

@@ -5,6 +5,7 @@ module Anthropic
         {
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
+          mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           tool_choice: Anthropic::Models::Beta::beta_tool_choice,
@@ -20,6 +21,12 @@ module Anthropic
         attr_accessor messages: ::Array[Anthropic::Beta::BetaMessageParam]
 
         attr_accessor model: Anthropic::Models::model
+
+        attr_reader mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition]?
+
+        def mcp_servers=: (
+          ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition]
+        ) -> ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition]
 
         attr_reader system_: Anthropic::Models::Beta::MessageCountTokensParams::system_?
 
@@ -54,6 +61,7 @@ module Anthropic
         def initialize: (
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
+          ?mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           ?system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           ?thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
@@ -65,6 +73,7 @@ module Anthropic
         def to_hash: -> {
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
+          mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           tool_choice: Anthropic::Models::Beta::beta_tool_choice,
@@ -91,7 +100,9 @@ module Anthropic
           | Anthropic::Beta::BetaToolComputerUse20250124
           | Anthropic::Beta::BetaToolBash20250124
           | Anthropic::Beta::BetaToolTextEditor20250124
+          | Anthropic::Beta::BetaToolTextEditor20250429
           | Anthropic::Beta::BetaWebSearchTool20250305
+          | Anthropic::Beta::BetaCodeExecutionTool20250522
 
         module Tool
           extend Anthropic::Internal::Type::Union

@@ -123,11 +123,34 @@ module Anthropic
         #   @return [Symbol, String, Anthropic::Models::Model]
         required :model, union: -> { Anthropic::Model }
 
+        # @!attribute container
+        #   Container identifier for reuse across requests.
+        #
+        #   @return [String, nil]
+        optional :container, String, nil?: true
+
+        # @!attribute mcp_servers
+        #   MCP servers to be utilized in this request
+        #
+        #   @return [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>, nil]
+        optional :mcp_servers,
+                 -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaRequestMCPServerURLDefinition] }
+
         # @!attribute metadata
         #   An object describing metadata about the request.
         #
         #   @return [Anthropic::Models::Beta::BetaMetadata, nil]
         optional :metadata, -> { Anthropic::Beta::BetaMetadata }
+
+        # @!attribute service_tier
+        #   Determines whether to use priority capacity (if available) or standard capacity
+        #   for this request.
+        #
+        #   Anthropic offers different levels of service for your API requests. See
+        #   [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
+        #
+        #   @return [Symbol, Anthropic::Models::Beta::MessageCreateParams::ServiceTier, nil]
+        optional :service_tier, enum: -> { Anthropic::Beta::MessageCreateParams::ServiceTier }
 
         # @!attribute stop_sequences
         #   Custom text sequences that will cause the model to stop generating.
@@ -258,7 +281,7 @@ module Anthropic
         #
         #   See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaWebSearchTool20250305>, nil]
+        #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaToolTextEditor20250429, Anthropic::Models::Beta::BetaWebSearchTool20250305, Anthropic::Models::Beta::BetaCodeExecutionTool20250522>, nil]
         optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaToolUnion] }
 
         # @!attribute top_k
@@ -293,7 +316,7 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(max_tokens:, messages:, model:, metadata: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
+        # @!method initialize(max_tokens:, messages:, model:, container: nil, mcp_servers: nil, metadata: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
@@ -303,7 +326,13 @@ module Anthropic
         #
         #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
         #
+        #   @param container [String, nil] Container identifier for reuse across requests.
+        #
+        #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>] MCP servers to be utilized in this request
+        #
         #   @param metadata [Anthropic::Models::Beta::BetaMetadata] An object describing metadata about the request.
+        #
+        #   @param service_tier [Symbol, Anthropic::Models::Beta::MessageCreateParams::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
         #
         #   @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
         #
@@ -315,7 +344,7 @@ module Anthropic
         #
         #   @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
         #
-        #   @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaWebSearchTool20250305>] Definitions of tools that the model may use.
+        #   @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaToolTextEditor20250429, Anthropic::Models::Beta::BetaWebSearchTool20250305, Anthropic::Models::Beta::BetaCodeExecutionTool20250522>] Definitions of tools that the model may use.
         #
         #   @param top_k [Integer] Only sample from the top K options for each subsequent token.
         #
@@ -324,6 +353,21 @@ module Anthropic
         #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
+
+        # Determines whether to use priority capacity (if available) or standard capacity
+        # for this request.
+        #
+        # Anthropic offers different levels of service for your API requests. See
+        # [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
+        module ServiceTier
+          extend Anthropic::Internal::Type::Enum
+
+          AUTO = :auto
+          STANDARD_ONLY = :standard_only
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
 
         # System prompt.
         #
