@@ -49,7 +49,7 @@ module Anthropic
           begin
             require("googleauth")
           rescue LoadError
-            raise <<~MSG
+            message = <<~MSG
 
               In order to access Anthropic models on Vertex you must require the `googleauth` gem.
               You can install it by adding the following to your Gemfile:
@@ -62,6 +62,8 @@ module Anthropic
 
                   gem install googleauth
             MSG
+
+            raise RuntimeError.new(message)
           end
 
           if region.to_s.empty?
@@ -185,7 +187,7 @@ module Anthropic
           ].include?(request_components[:path]) && request_components[:method] == :post
 
             unless body.is_a?(Hash)
-              raise Anthropic::Error, "Expected json data to be a hash for post /v1/messages"
+              raise ArgumentError.new("Expected json data to be a hash for post /v1/messages")
             end
 
             model = body.delete(:model)
