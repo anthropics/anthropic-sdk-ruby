@@ -62,7 +62,7 @@ module Anthropic
           begin
             require("aws-sdk-bedrockruntime")
           rescue LoadError
-            raise <<~MSG
+            message = <<~MSG
 
               In order to access Anthropic models on Bedrock you must require the `aws-sdk-bedrockruntime` gem.
               You can install it by adding the following to your Gemfile:
@@ -75,6 +75,8 @@ module Anthropic
 
                   gem install aws-sdk-bedrockruntime
             MSG
+
+            raise RuntimeError.new(message)
           end
 
           @aws_region, @aws_credentials = resolve_region_and_credentials(
