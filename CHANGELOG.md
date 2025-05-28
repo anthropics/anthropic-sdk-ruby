@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.1.1 (2025-05-28)
+
+Full Changelog: [v1.1.0...v1.1.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.1.0...v1.1.1)
+
+### Bug Fixes
+
+* prevent rubocop from mangling `===` to `is_a?` check ([303ad55](https://github.com/anthropics/anthropic-sdk-ruby/commit/303ad550c542c726b2ce8bc3d53e01108af634d5))
+* sorbet types for enums, and make tapioca detection ignore `tapioca dsl` ([fb289a1](https://github.com/anthropics/anthropic-sdk-ruby/commit/fb289a1be37379cea207b024e0fb4503ea174639))
+
+
+### Chores
+
+* add more examples ([e14665e](https://github.com/anthropics/anthropic-sdk-ruby/commit/e14665e4e236cce4a17de06507d1b855d1d153d2))
+* image example ([#621](https://github.com/anthropics/anthropic-sdk-ruby/issues/621)) ([9bdc648](https://github.com/anthropics/anthropic-sdk-ruby/commit/9bdc6487d77d856c87d658917f53faa6f12bc38f))
+* **internal:** fix release workflows ([fffb4b8](https://github.com/anthropics/anthropic-sdk-ruby/commit/fffb4b8eeff759ac98e9cfb5d778b014336e2956))
+* more examples ([#619](https://github.com/anthropics/anthropic-sdk-ruby/issues/619)) ([e14665e](https://github.com/anthropics/anthropic-sdk-ruby/commit/e14665e4e236cce4a17de06507d1b855d1d153d2))
+
 ## 1.1.0 (2025-05-22)
 
 Full Changelog: [v1.0.0...v1.1.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.0.0...v1.1.0)
