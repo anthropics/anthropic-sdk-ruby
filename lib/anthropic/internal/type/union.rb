@@ -220,11 +220,14 @@ module Anthropic
         #
         # @return [Object]
         def to_sorbet_type
-          case (v = variants)
+          types = variants.map { Anthropic::Internal::Util::SorbetRuntimeSupport.to_sorbet_type(_1) }.uniq
+          case types
           in []
             T.noreturn
+          in [type]
+            type
           else
-            T.any(*v.map { Anthropic::Internal::Util::SorbetRuntimeSupport.to_sorbet_type(_1) })
+            T.any(*types)
           end
         end
 
