@@ -49,10 +49,8 @@ puts(message.content)
 
 We provide support for streaming responses using Server-Sent Events (SSE).
 
-**coming soon**: `anthropic.messages.stream` will have [Python SDK](https://github.com/anthropics/anthropic-sdk-python?tab=readme-ov-file#streaming-helpers) style streaming response helpers.
-
 ```ruby
-stream = anthropic.messages.stream_raw(
+stream = anthropic.messages.stream(
   max_tokens: 1024,
   messages: [{role: "user", content: "Hello, Claude"}],
   model: :"claude-3-7-sonnet-latest"
@@ -62,6 +60,24 @@ stream.each do |message|
   puts(message.type)
 end
 ```
+
+### Streaming Helpers
+
+This library provides several conveniences for streaming messages, for example:
+
+```ruby
+stream = anthropic.messages.stream(
+  max_tokens: 1024,
+  messages: [{role: :user, content: "Say hello there!"}],
+  model: :"claude-3-7-sonnet-latest"
+)
+
+stream.text.each do |text|
+  print(text)
+end
+```
+
+Streaming with `anthropic.messages.stream(...)` exposes [various helpers for your convenience](helpers.md) including accumulation & SDK-specific events.
 
 ### Pagination
 

@@ -62,7 +62,7 @@ module Anthropic
         def create(params)
           parsed, options = Anthropic::Beta::MessageCreateParams.dump_request(params)
           if parsed[:stream]
-            message = "Please use `#stream_raw` for the streaming use case."
+            message = "Please use `#stream` for the streaming use case."
             raise ArgumentError.new(message)
           end
 
@@ -90,7 +90,7 @@ module Anthropic
         end
 
         def stream
-          raise NotImplementedError.new("higher level helpers are coming soon!")
+          Anthropic::Streaming::MessageStream.new(raw_stream: raw_stream)
         end
 
         # See {Anthropic::Resources::Beta::Messages#create} for non-streaming counterpart.
