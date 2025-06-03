@@ -6,7 +6,7 @@ module Anthropic
       # @return [Anthropic::Resources::Messages::Batches]
       attr_reader :batches
 
-      # See {Anthropic::Resources::Messages#stream_raw} for streaming counterpart.
+      # See {Anthropic::Resources::Messages#stream} for streaming counterpart.
       #
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::MessageCreateParams} for more details.
@@ -55,7 +55,7 @@ module Anthropic
       def create(params)
         parsed, options = Anthropic::MessageCreateParams.dump_request(params)
         if parsed[:stream]
-          message = "Please use `#stream_raw` for the streaming use case."
+          message = "Please use `#stream` for the streaming use case."
           raise ArgumentError.new(message)
         end
 
@@ -80,8 +80,69 @@ module Anthropic
         )
       end
 
-      def stream
-        raise NotImplementedError.new("higher level helpers are coming soon!")
+      # See {Anthropic::Resources::Messages#create} for non-streaming counterpart.
+      #
+      # Some parameter documentations has been truncated, see
+      # {Anthropic::Models::MessageCreateParams} for more details.
+      #
+      # Send a structured list of input messages with text and/or image content, and the
+      # model will generate the next message in the conversation with streaming.
+      #
+      # The Messages API can be used for either single queries or stateless multi-turn
+      # conversations.
+      #
+      # Learn more about the Messages API in our [user guide](/en/docs/initial-setup)
+      #
+      # @overload stream(max_tokens:, messages:, model:, metadata: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      #
+      # @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
+      #
+      # @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
+      #
+      # @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      #
+      # @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
+      #
+      # @param service_tier [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
+      #
+      # @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
+      #
+      # @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt.
+      #
+      # @param temperature [Float] Amount of randomness injected into the response.
+      #
+      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
+      #
+      # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
+      #
+      # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::WebSearchTool20250305>] Definitions of tools that the model may use.
+      #
+      # @param top_k [Integer] Only sample from the top K options for each subsequent token.
+      #
+      # @param top_p [Float] Use nucleus sampling.
+      #
+      # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [Anthropic::Streaming::MessageStream]
+      #
+      # @see Anthropic::Models::MessageCreateParams
+      def stream(params)
+        parsed, options = Anthropic::Models::MessageCreateParams.dump_request(params)
+        unless parsed.fetch(:stream, true)
+          message = "Please use `#create` for the non-streaming use case."
+          raise ArgumentError.new(message)
+        end
+        parsed.store(:stream, true)
+        raw_stream = @client.request(
+          method: :post,
+          path: "v1/messages",
+          headers: {"accept" => "text/event-stream"},
+          body: parsed,
+          stream: Anthropic::Internal::Stream,
+          model: Anthropic::Models::RawMessageStreamEvent,
+          options: options
+        )
+        Anthropic::Streaming::MessageStream.new(raw_stream: raw_stream)
       end
 
       # See {Anthropic::Resources::Messages#create} for non-streaming counterpart.
