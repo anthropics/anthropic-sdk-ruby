@@ -106,20 +106,31 @@ module Anthropic
         sig { returns(T.nilable(T.anything)) }
         attr_accessor :properties
 
+        sig { returns(T.nilable(T::Array[String])) }
+        attr_accessor :required
+
         # [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
         #
         # This defines the shape of the `input` that your tool accepts and that the model
         # will produce.
         sig do
-          params(properties: T.nilable(T.anything), type: Symbol).returns(
-            T.attached_class
-          )
+          params(
+            properties: T.nilable(T.anything),
+            required: T.nilable(T::Array[String]),
+            type: Symbol
+          ).returns(T.attached_class)
         end
-        def self.new(properties: nil, type: :object)
+        def self.new(properties: nil, required: nil, type: :object)
         end
 
         sig do
-          override.returns({ type: Symbol, properties: T.nilable(T.anything) })
+          override.returns(
+            {
+              type: Symbol,
+              properties: T.nilable(T.anything),
+              required: T.nilable(T::Array[String])
+            }
+          )
         end
         def to_hash
         end
