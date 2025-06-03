@@ -194,8 +194,6 @@ module Anthropic
 
   ToolTextEditor20250124 = Anthropic::Models::ToolTextEditor20250124
 
-  ToolTextEditor20250429 = Anthropic::Models::ToolTextEditor20250429
-
   ToolUnion = Anthropic::Models::ToolUnion
 
   ToolUseBlock = Anthropic::Models::ToolUseBlock
