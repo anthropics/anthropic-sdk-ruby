@@ -325,7 +325,7 @@ module Anthropic
             #
             #   See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
             #
-            #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::WebSearchTool20250305>, nil]
+            #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolUnion::TextEditor20250429, Anthropic::Models::WebSearchTool20250305>, nil]
             optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::ToolUnion] }
 
             # @!attribute top_k
@@ -386,7 +386,7 @@ module Anthropic
             #
             #   @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
             #
-            #   @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::WebSearchTool20250305>] Definitions of tools that the model may use.
+            #   @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolUnion::TextEditor20250429, Anthropic::Models::WebSearchTool20250305>] Definitions of tools that the model may use.
             #
             #   @param top_k [Integer] Only sample from the top K options for each subsequent token.
             #
