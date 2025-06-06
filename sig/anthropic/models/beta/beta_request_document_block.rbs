@@ -1,0 +1,66 @@
+module Anthropic
+  module Models
+    class BetaRequestDocumentBlock = Beta::BetaRequestDocumentBlock
+
+    module Beta
+      type beta_request_document_block =
+        {
+          source: Anthropic::Models::Beta::BetaRequestDocumentBlock::source,
+          type: :document,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          citations: Anthropic::Beta::BetaCitationsConfigParam,
+          context: String?,
+          title: String?
+        }
+
+      class BetaRequestDocumentBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor source: Anthropic::Models::Beta::BetaRequestDocumentBlock::source
+
+        attr_accessor type: :document
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        attr_reader citations: Anthropic::Beta::BetaCitationsConfigParam?
+
+        def citations=: (
+          Anthropic::Beta::BetaCitationsConfigParam
+        ) -> Anthropic::Beta::BetaCitationsConfigParam
+
+        attr_accessor context: String?
+
+        attr_accessor title: String?
+
+        def initialize: (
+          source: Anthropic::Models::Beta::BetaRequestDocumentBlock::source,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?citations: Anthropic::Beta::BetaCitationsConfigParam,
+          ?context: String?,
+          ?title: String?,
+          ?type: :document
+        ) -> void
+
+        def to_hash: -> {
+          source: Anthropic::Models::Beta::BetaRequestDocumentBlock::source,
+          type: :document,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          citations: Anthropic::Beta::BetaCitationsConfigParam,
+          context: String?,
+          title: String?
+        }
+
+        type source =
+          Anthropic::Beta::BetaBase64PDFSource
+          | Anthropic::Beta::BetaPlainTextSource
+          | Anthropic::Beta::BetaContentBlockSource
+          | Anthropic::Beta::BetaURLPDFSource
+          | Anthropic::Beta::BetaFileDocumentSource
+
+        module Source
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaRequestDocumentBlock::source]
+        end
+      end
+    end
+  end
+end
