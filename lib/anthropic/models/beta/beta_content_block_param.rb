@@ -32,7 +32,7 @@ module Anthropic
         variant :tool_result, -> { Anthropic::Beta::BetaToolResultBlockParam }
 
         # Document content, either specified directly as base64 data, as text, or as a reference via a URL.
-        variant :document, -> { Anthropic::Beta::BetaBase64PDFBlock }
+        variant :document, -> { Anthropic::Beta::BetaRequestDocumentBlock }
 
         # A block specifying internal thinking by the model.
         variant :thinking, -> { Anthropic::Beta::BetaThinkingBlockParam }
@@ -45,7 +45,7 @@ module Anthropic
         variant :container_upload, -> { Anthropic::Beta::BetaContainerUploadBlockParam }
 
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::Beta::BetaServerToolUseBlockParam, Anthropic::Models::Beta::BetaWebSearchToolResultBlockParam, Anthropic::Models::Beta::BetaCodeExecutionToolResultBlockParam, Anthropic::Models::Beta::BetaMCPToolUseBlockParam, Anthropic::Models::Beta::BetaRequestMCPToolResultBlockParam, Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaBase64PDFBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam, Anthropic::Models::Beta::BetaContainerUploadBlockParam)]
+        #   @return [Array(Anthropic::Models::Beta::BetaServerToolUseBlockParam, Anthropic::Models::Beta::BetaWebSearchToolResultBlockParam, Anthropic::Models::Beta::BetaCodeExecutionToolResultBlockParam, Anthropic::Models::Beta::BetaMCPToolUseBlockParam, Anthropic::Models::Beta::BetaRequestMCPToolResultBlockParam, Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaRequestDocumentBlock, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam, Anthropic::Models::Beta::BetaContainerUploadBlockParam)]
       end
     end
 

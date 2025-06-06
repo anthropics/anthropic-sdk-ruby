@@ -21,7 +21,7 @@ module Anthropic
               Anthropic::Beta::BetaImageBlockParam,
               Anthropic::Beta::BetaToolUseBlockParam,
               Anthropic::Beta::BetaToolResultBlockParam,
-              Anthropic::Beta::BetaBase64PDFBlock,
+              Anthropic::Beta::BetaRequestDocumentBlock,
               Anthropic::Beta::BetaThinkingBlockParam,
               Anthropic::Beta::BetaRedactedThinkingBlockParam,
               Anthropic::Beta::BetaContainerUploadBlockParam
