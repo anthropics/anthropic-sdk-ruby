@@ -23,6 +23,12 @@ module Anthropic
       #   @return [Symbol, :tool_use]
       required :type, const: :tool_use
 
+      # @api private
+      #
+      # Internal buffer for accumulating partial JSON during streaming.
+      # Used by streaming helpers to reconstruct complete JSON input from deltas.
+      optional :json_buf, String
+
       # @!method initialize(id:, input:, name:, type: :tool_use)
       #   @param id [String]
       #   @param input [Object]

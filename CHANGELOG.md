@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.2.0 (2025-06-07)
+
+Full Changelog: [v1.1.1...v1.2.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.1.1...v1.2.0)
+
+### Features
+
+* **client:** add support for new text_editor_20250429 tool ([9049af2](https://github.com/anthropics/anthropic-sdk-ruby/commit/9049af2f634f88d867104f2dc0ddc6396f5f8031))
+* streaming helpers ([#627](https://github.com/anthropics/anthropic-sdk-ruby/issues/627)) ([43fbbf8](https://github.com/anthropics/anthropic-sdk-ruby/commit/43fbbf8a39ac1d99920845ba19da43d7419a5e73))
+
+
+### Bug Fixes
+
+* `to_sorbet_type` should not return branded types ([2658903](https://github.com/anthropics/anthropic-sdk-ruby/commit/2658903f13178a133ca679f4b87615e9cddcd813))
+* **client:** deprecate BetaBase64PDFBlock in favor of BetaRequestDocumentBlock ([f75705b](https://github.com/anthropics/anthropic-sdk-ruby/commit/f75705bfb4af3160b2fa7208adfad10719cd17a7))
+* default content-type for text in multi-part formdata uploads should be text/plain ([0a91592](https://github.com/anthropics/anthropic-sdk-ruby/commit/0a915925fc93ca7ad191bab33dba8c72b6c48a2a))
+
+
+### Chores
+
+* **internal:** codegen related update ([8b12fd6](https://github.com/anthropics/anthropic-sdk-ruby/commit/8b12fd6e8ec1c06d3cbf7d20c63c6933538d0983))
+
 ## 1.1.1 (2025-05-28)
 
 Full Changelog: [v1.1.0...v1.1.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.1.0...v1.1.1)
