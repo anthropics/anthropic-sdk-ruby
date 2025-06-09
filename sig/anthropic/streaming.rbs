@@ -1,0 +1,3 @@
+module Anthropic
+  Streaming: singleton(Anthropic::Helpers::Streaming)
+end
