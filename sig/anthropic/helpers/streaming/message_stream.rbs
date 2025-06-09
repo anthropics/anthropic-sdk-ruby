@@ -1,0 +1,55 @@
+module Anthropic
+  module Helpers
+    module Streaming
+      type raw_message_event =
+        Anthropic::Models::raw_message_start_event
+        | Anthropic::Models::raw_message_delta_event
+        | Anthropic::Models::raw_message_stop_event
+        | Anthropic::Models::raw_content_block_start_event
+        | Anthropic::Models::raw_content_block_delta_event
+        | Anthropic::Models::raw_content_block_stop_event
+
+      type stream_event =
+        raw_message_event
+        | text_event
+        | citation_event
+        | thinking_event
+        | signature_event
+        | input_json_event
+        | message_stop_event
+        | content_block_stop_event
+
+      class MessageStream
+        include Anthropic::Internal::Type::BaseStream[raw_message_event, stream_event]
+
+        @raw_stream: Anthropic::Internal::Stream[raw_message_event]
+        @accumated_message_snapshot: Anthropic::Models::message?
+        @iterator: Enumerable[stream_event]?
+
+        def initialize: (raw_stream: Anthropic::Internal::Stream[raw_message_event]) -> void
+
+        def until_done: -> void
+
+        def text: -> Enumerator[String]
+
+        def accumulated_message: -> Anthropic::Models::message
+
+        def accumulated_text: -> String
+
+        private
+
+        def iterator: -> Enumerable[stream_event]
+
+        def accumulate_event: (
+          event: raw_message_event,
+          current_snapshot: Anthropic::Models::message?
+        ) -> Anthropic::Models::message
+
+        def build_events: (
+          event: raw_message_event,
+          message_snapshot: Anthropic::Models::message
+        ) -> ::Array[stream_event]
+      end
+    end
+  end
+end
