@@ -5,11 +5,20 @@ module Anthropic
     module Streaming
       # @api private
       #
+      # MessageStream provides a Ruby Enumerable interface over Server-Sent Events from
+      # the Anthropic API, yielding a mix of raw streaming events and higher-level typed
+      # events while maintaining accumulated message state throughout the stream lifecycle.
+      #
+      #
       # @generic Elem
       class MessageStream
         include Anthropic::Internal::Type::BaseStream
 
         # @api private
+        #
+        # Consumes raw stream events and yields a mix of raw and higher-level typed events while
+        # maintaining accumulated message state. This is what's called when you run `each` on the
+        # stream.
         #
         # @return [Enumerable<generic<Elem>>]
         private def iterator
@@ -19,8 +28,8 @@ module Anthropic
                 event: raw_event,
                 current_snapshot: @accumated_message_snapshot
               )
-              events_to_fire = build_events(event: raw_event, message_snapshot: @accumated_message_snapshot)
-              events_to_fire.each(&y)
+              events_to_yield = build_events(event: raw_event, message_snapshot: @accumated_message_snapshot)
+              events_to_yield.each(&y)
             end
           end
         end
@@ -29,10 +38,12 @@ module Anthropic
         #
         # Blocks until the stream has been consumed
         #
-        # return [void]
+        # @return [void]
         def until_done = each {} # rubocop:disable Lint/EmptyBlock
 
         # @api public
+        #
+        # Returns an enumerable of text deltas from the streaming response.
         #
         # @return [Enumerable<String>]
         def text
@@ -45,8 +56,9 @@ module Anthropic
           end
         end
 
-        # Waits until the stream has been read to completion and returns
-        # the accumulated `Message` object.
+        # @api public
+        #
+        # Returns the complete accumulated Message object after stream completion.
         #
         # @return [Anthropic::Models::Message]
         def accumulated_message
@@ -54,12 +66,12 @@ module Anthropic
           @accumated_message_snapshot
         end
 
-        # Returns all `text` content blocks concatenated together.
+        # @api public
         #
+        # Returns all text content blocks concatenated into a single string.
         # NOTE: Currently the API will only respond with a single content block.
         #
         # Will raise an error if no `text` content blocks were returned.
-        #
         # @return [String]
         def accumulated_text
           message = accumulated_message
@@ -79,10 +91,12 @@ module Anthropic
 
         # @api private
         #
-        # @param event [Anthropic::Streaming::RawMessageEvent]
-        # @param current_snapshot [Anthropic::Models::Message, nil]
+        # Builds up a complete Message object as streaming events arrive.
         #
-        # returns [Anthropic::Models::Message]
+        # @param event [Anthropic::Models::RawMessageStreamEvent] the raw streaming event to process
+        # @param current_snapshot [Anthropic::Models::Message, nil] current accumulated message state
+        #
+        # @return [Anthropic::Models::Message] updated message snapshot with event applied
         private def accumulate_event(event:, current_snapshot:)
           unless event in Anthropic::Models::RawMessageStreamEvent
             message = "Expected event to be a variant of RawMessageStreamEvent, got #{event.class}"
@@ -146,46 +160,57 @@ module Anthropic
           current_snapshot
         end
 
+        # @api private
+        #
+        # Determines which events to yield for a given raw streaming event.
+        #
+        # May transform events into higher-level types (TextEvent, InputJsonEvent),
+        # pass through raw events unchanged, or produce multiple events.
+        #
+        # @param event [Anthropic::Models::RawMessageStreamEvent] the raw event to process
+        # @param message_snapshot [Anthropic::Models::Message] current accumulated message state
+        #
+        # @return [Array<Object>] events to yield (mix of raw and typed events)
         private def build_events(event:, message_snapshot:)
-          events_to_fire = []
+          events_to_yield = []
 
           case event
           in Anthropic::Models::RawMessageStopEvent
-            events_to_fire << MessageStopEvent.new(
+            events_to_yield << MessageStopEvent.new(
               type: :message_stop,
               message: message_snapshot
             )
           in Anthropic::Models::RawContentBlockDeltaEvent
-            events_to_fire << event
+            events_to_yield << event
             content_block = message_snapshot.content[event.index]
 
             case (delta = event.delta)
             in Anthropic::Models::TextDelta if content_block.type == :text
-              events_to_fire << Anthropic::Streaming::TextEvent.new(
+              events_to_yield << Anthropic::Streaming::TextEvent.new(
                 type: :text,
                 text: delta.text,
                 snapshot: content_block.text
               )
             in Anthropic::Models::InputJSONDelta if content_block.type == :tool_use
-              events_to_fire << Anthropic::Streaming::InputJsonEvent.new(
+              events_to_yield << Anthropic::Streaming::InputJsonEvent.new(
                 type: :input_json,
                 partial_json: delta.partial_json,
                 snapshot: content_block.input
               )
             in Anthropic::Models::CitationsDelta if content_block.type == :text
-              events_to_fire << Anthropic::Streaming::CitationEvent.new(
+              events_to_yield << Anthropic::Streaming::CitationEvent.new(
                 type: :citation,
                 citation: delta.citation,
                 snapshot: content_block.citations || []
               )
             in Anthropic::Models::ThinkingDelta if content_block.type == :thinking
-              events_to_fire << Anthropic::Streaming::ThinkingEvent.new(
+              events_to_yield << Anthropic::Streaming::ThinkingEvent.new(
                 type: :thinking,
                 thinking: delta.thinking,
                 snapshot: content_block.thinking
               )
             in Anthropic::Models::SignatureDelta if content_block.type == :thinking
-              events_to_fire << Anthropic::Streaming::SignatureEvent.new(
+              events_to_yield << Anthropic::Streaming::SignatureEvent.new(
                 type: :signature,
                 signature: content_block.signature
               )
@@ -194,24 +219,27 @@ module Anthropic
           in Anthropic::Models::RawContentBlockStopEvent
             content_block = message_snapshot.content[event.index]
 
-            events_to_fire << ContentBlockStopEvent.new(
+            events_to_yield << ContentBlockStopEvent.new(
               type: :content_block_stop,
               index: event.index,
               content_block: content_block
             )
           else
-            events_to_fire << event
+            events_to_yield << event
           end
 
-          events_to_fire
+          events_to_yield
         end
 
         # @api private
         #
         # @param raw_stream [Anthropic::Internal::Type::BaseStream]
         def initialize(raw_stream:)
+          # The underlying Server-Sent Event stream from the Anthropic API.
           @raw_stream = raw_stream
+          # Accumulated message state that builds up as events are processed.
           @accumated_message_snapshot = nil
+          # Lazy enumerable that transforms raw events into consumable events.
           @iterator = iterator
         end
       end
