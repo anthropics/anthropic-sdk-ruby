@@ -21,6 +21,9 @@ module Anthropic
     # @return [String, nil]
     attr_reader :auth_token
 
+    # @return [Anthropic::Resources::Beta]
+    attr_reader :beta
+
     # @return [Anthropic::Resources::Completions]
     attr_reader :completions
 
@@ -29,9 +32,6 @@ module Anthropic
 
     # @return [Anthropic::Resources::Models]
     attr_reader :models
-
-    # @return [Anthropic::Resources::Beta]
-    attr_reader :beta
 
     # @api private
     #
@@ -99,10 +99,10 @@ module Anthropic
         headers: headers
       )
 
+      @beta = Anthropic::Resources::Beta.new(client: self)
       @completions = Anthropic::Resources::Completions.new(client: self)
       @messages = Anthropic::Resources::Messages.new(client: self)
       @models = Anthropic::Resources::Models.new(client: self)
-      @beta = Anthropic::Resources::Beta.new(client: self)
     end
   end
 end

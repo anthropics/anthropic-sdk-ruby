@@ -16,6 +16,9 @@ module Anthropic
     sig { returns(T.nilable(String)) }
     attr_reader :auth_token
 
+    sig { returns(Anthropic::Resources::Beta) }
+    attr_reader :beta
+
     sig { returns(Anthropic::Resources::Completions) }
     attr_reader :completions
 
@@ -24,9 +27,6 @@ module Anthropic
 
     sig { returns(Anthropic::Resources::Models) }
     attr_reader :models
-
-    sig { returns(Anthropic::Resources::Beta) }
-    attr_reader :beta
 
     # @api private
     sig { override.returns(T::Hash[String, String]) }
