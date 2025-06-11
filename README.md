@@ -32,7 +32,7 @@ anthropic = Anthropic::Client.new(
 
 message = anthropic.messages.create(
   max_tokens: 1024,
-  messages: [{content: "Hello, Claude", role: "user"}],
+  messages: [{role: "user", content: "Hello, Claude"}],
   model: :"claude-3-7-sonnet-latest"
 )
 
@@ -46,7 +46,7 @@ We provide support for streaming responses using Server-Sent Events (SSE).
 ```ruby
 stream = anthropic.messages.stream_raw(
   max_tokens: 1024,
-  messages: [{content: "Hello, Claude", role: "user"}],
+  messages: [{role: "user", content: "Hello, Claude"}],
   model: :"claude-3-7-sonnet-latest"
 )
 
@@ -113,7 +113,7 @@ When the library is unable to connect to the API, or if the API returns a non-su
 begin
   message = anthropic.messages.create(
     max_tokens: 1024,
-    messages: [{content: "Hello, Claude", role: "user"}],
+    messages: [{role: "user", content: "Hello, Claude"}],
     model: :"claude-3-7-sonnet-latest"
   )
 rescue Anthropic::Errors::APIConnectionError => e
@@ -160,7 +160,7 @@ anthropic = Anthropic::Client.new(
 # Or, configure per-request:
 anthropic.messages.create(
   max_tokens: 1024,
-  messages: [{content: "Hello, Claude", role: "user"}],
+  messages: [{role: "user", content: "Hello, Claude"}],
   model: :"claude-3-7-sonnet-latest",
   request_options: {max_retries: 5}
 )
@@ -179,7 +179,7 @@ anthropic = Anthropic::Client.new(
 # Or, configure per-request:
 anthropic.messages.create(
   max_tokens: 1024,
-  messages: [{content: "Hello, Claude", role: "user"}],
+  messages: [{role: "user", content: "Hello, Claude"}],
   model: :"claude-3-7-sonnet-latest",
   request_options: {timeout: 5}
 )
@@ -215,7 +215,7 @@ Note: the `extra_` parameters of the same name overrides the documented paramete
 message =
   anthropic.messages.create(
     max_tokens: 1024,
-    messages: [{content: "Hello, Claude", role: "user"}],
+    messages: [{role: "user", content: "Hello, Claude"}],
     model: :"claude-3-7-sonnet-latest",
     request_options: {
       extra_query: {my_query_parameter: value},
@@ -264,7 +264,7 @@ You can provide typesafe request parameters like so:
 ```ruby
 anthropic.messages.create(
   max_tokens: 1024,
-  messages: [Anthropic::MessageParam.new(content: "Hello, Claude", role: "user")],
+  messages: [Anthropic::MessageParam.new(role: "user", content: "Hello, Claude")],
   model: :"claude-3-7-sonnet-latest"
 )
 ```
@@ -275,14 +275,14 @@ Or, equivalently:
 # Hashes work, but are not typesafe:
 anthropic.messages.create(
   max_tokens: 1024,
-  messages: [{content: "Hello, Claude", role: "user"}],
+  messages: [{role: "user", content: "Hello, Claude"}],
   model: :"claude-3-7-sonnet-latest"
 )
 
 # You can also splat a full Params class:
 params = Anthropic::MessageCreateParams.new(
   max_tokens: 1024,
-  messages: [Anthropic::MessageParam.new(content: "Hello, Claude", role: "user")],
+  messages: [Anthropic::MessageParam.new(role: "user", content: "Hello, Claude")],
   model: :"claude-3-7-sonnet-latest"
 )
 anthropic.messages.create(**params)
@@ -294,23 +294,23 @@ Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::E
 
 ```ruby
 # :auto
-puts(Anthropic::Beta::MessageCreateParams::ServiceTier::AUTO)
+puts(Anthropic::MessageCreateParams::ServiceTier::AUTO)
 
-# Revealed type: `T.all(Anthropic::Beta::MessageCreateParams::ServiceTier, Symbol)`
-T.reveal_type(Anthropic::Beta::MessageCreateParams::ServiceTier::AUTO)
+# Revealed type: `T.all(Anthropic::MessageCreateParams::ServiceTier, Symbol)`
+T.reveal_type(Anthropic::MessageCreateParams::ServiceTier::AUTO)
 ```
 
 Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
 
 ```ruby
 # Using the enum constants preserves the tagged type information:
-anthropic.beta.messages.create(
-  service_tier: Anthropic::Beta::MessageCreateParams::ServiceTier::AUTO,
+anthropic.messages.create(
+  service_tier: Anthropic::MessageCreateParams::ServiceTier::AUTO,
   # …
 )
 
 # Literal values are also permissible:
-anthropic.beta.messages.create(
+anthropic.messages.create(
   service_tier: :auto,
   # …
 )
