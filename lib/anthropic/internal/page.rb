@@ -10,8 +10,8 @@ module Anthropic
     #   end
     #
     # @example
-    #   page.auto_paging_each do |file|
-    #     puts(file)
+    #   page.auto_paging_each do |batch|
+    #     puts(batch)
     #   end
     class Page
       include Anthropic::Internal::Type::BasePage
@@ -19,11 +19,11 @@ module Anthropic
       # @return [Array<generic<Elem>>, nil]
       attr_accessor :data
 
-      # @return [String, nil]
-      attr_accessor :first_id
-
       # @return [Boolean]
       attr_accessor :has_more
+
+      # @return [String, nil]
+      attr_accessor :first_id
 
       # @return [String, nil]
       attr_accessor :last_id
@@ -79,8 +79,8 @@ module Anthropic
           @data = data.map { Anthropic::Internal::Type::Converter.coerce(@model, _1) }
         else
         end
-        @first_id = page_data[:first_id]
         @has_more = page_data[:has_more]
+        @first_id = page_data[:first_id]
         @last_id = page_data[:last_id]
       end
 
@@ -91,7 +91,7 @@ module Anthropic
         # rubocop:disable Layout/LineLength
         model = Anthropic::Internal::Type::Converter.inspect(@model, depth: 1)
 
-        "#<#{self.class}[#{model}]:0x#{object_id.to_s(16)} first_id=#{first_id.inspect} has_more=#{has_more.inspect} last_id=#{last_id.inspect}>"
+        "#<#{self.class}[#{model}]:0x#{object_id.to_s(16)} has_more=#{has_more.inspect} first_id=#{first_id.inspect} last_id=#{last_id.inspect}>"
         # rubocop:enable Layout/LineLength
       end
     end

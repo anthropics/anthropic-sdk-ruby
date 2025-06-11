@@ -1,11 +1,11 @@
 module Anthropic
   module Resources
     class Beta
-      attr_reader files: Anthropic::Resources::Beta::Files
+      attr_reader models: Anthropic::Resources::Beta::Models
 
       attr_reader messages: Anthropic::Resources::Beta::Messages
 
-      attr_reader models: Anthropic::Resources::Beta::Models
+      attr_reader files: Anthropic::Resources::Beta::Files
 
       def initialize: (client: Anthropic::Client) -> void
     end
