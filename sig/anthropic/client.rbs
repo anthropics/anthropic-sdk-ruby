@@ -12,13 +12,13 @@ module Anthropic
 
     attr_reader auth_token: String?
 
-    attr_reader beta: Anthropic::Resources::Beta
-
     attr_reader completions: Anthropic::Resources::Completions
 
     attr_reader messages: Anthropic::Resources::Messages
 
     attr_reader models: Anthropic::Resources::Models
+
+    attr_reader beta: Anthropic::Resources::Beta
 
     private def auth_headers: -> ::Hash[String, String]
 

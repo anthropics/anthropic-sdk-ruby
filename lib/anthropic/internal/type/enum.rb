@@ -17,28 +17,28 @@ module Anthropic
       # values safely.
       #
       # @example
-      #   # `beta_code_execution_tool_result_error_code` is a `Anthropic::Beta::BetaCodeExecutionToolResultErrorCode`
-      #   case beta_code_execution_tool_result_error_code
-      #   when Anthropic::Beta::BetaCodeExecutionToolResultErrorCode::INVALID_TOOL_INPUT
+      #   # `stop_reason` is a `Anthropic::StopReason`
+      #   case stop_reason
+      #   when Anthropic::StopReason::END_TURN
       #     # ...
-      #   when Anthropic::Beta::BetaCodeExecutionToolResultErrorCode::UNAVAILABLE
+      #   when Anthropic::StopReason::MAX_TOKENS
       #     # ...
-      #   when Anthropic::Beta::BetaCodeExecutionToolResultErrorCode::TOO_MANY_REQUESTS
+      #   when Anthropic::StopReason::STOP_SEQUENCE
       #     # ...
       #   else
-      #     puts(beta_code_execution_tool_result_error_code)
+      #     puts(stop_reason)
       #   end
       #
       # @example
-      #   case beta_code_execution_tool_result_error_code
-      #   in :invalid_tool_input
+      #   case stop_reason
+      #   in :end_turn
       #     # ...
-      #   in :unavailable
+      #   in :max_tokens
       #     # ...
-      #   in :too_many_requests
+      #   in :stop_sequence
       #     # ...
       #   else
-      #     puts(beta_code_execution_tool_result_error_code)
+      #     puts(stop_reason)
       #   end
       module Enum
         include Anthropic::Internal::Type::Converter
