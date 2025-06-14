@@ -116,11 +116,14 @@ module Anthropic
         #
         # @return [Object]
         def to_sorbet_type
-          case values
+          types = values.map { Anthropic::Internal::Util::SorbetRuntimeSupport.to_sorbet_type(_1) }.uniq
+          case types
           in []
             T.noreturn
-          in [value, *_]
-            T.all(Anthropic::Internal::Util::SorbetRuntimeSupport.to_sorbet_type(value), self)
+          in [type]
+            type
+          else
+            T.any(*types)
           end
         end
 

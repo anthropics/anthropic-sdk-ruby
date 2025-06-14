@@ -2,8 +2,8 @@
 # frozen_string_literal: true
 # typed: strong
 
-require_relative "../lib/anthropic"
 require "base64"
+require_relative "../lib/anthropic"
 
 # gets API credentials from environment variable `ANTHROPIC_API_KEY`
 anthropic = Anthropic::Client.new

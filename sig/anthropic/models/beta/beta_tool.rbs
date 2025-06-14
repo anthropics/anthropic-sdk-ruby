@@ -41,16 +41,27 @@ module Anthropic
           type: Anthropic::Models::Beta::BetaTool::type_?
         }
 
-        type input_schema = { type: :object, properties: top? }
+        type input_schema =
+          { type: :object, properties: top?, required: ::Array[String]? }
 
         class InputSchema < Anthropic::Internal::Type::BaseModel
           attr_accessor type: :object
 
           attr_accessor properties: top?
 
-          def initialize: (?properties: top?, ?type: :object) -> void
+          attr_accessor required: ::Array[String]?
 
-          def to_hash: -> { type: :object, properties: top? }
+          def initialize: (
+            ?properties: top?,
+            ?required: ::Array[String]?,
+            ?type: :object
+          ) -> void
+
+          def to_hash: -> {
+            type: :object,
+            properties: top?,
+            required: ::Array[String]?
+          }
         end
 
         type type_ = :custom

@@ -7,7 +7,9 @@ require_relative "../lib/anthropic"
 # gets API credentials from environment variable `ANTHROPIC_API_KEY`
 anthropic = Anthropic::Client.new
 
-stream = anthropic.messages.stream_raw(
+# enable web search by providing the web_search tool. The model can use this
+# to search the internet for up-to-date information when needed.
+stream = anthropic.messages.stream(
   model: "claude-3-7-sonnet-20250219",
   max_tokens: 1024,
   messages: [{role: :user, content: "What's the weather in New York?"}],
