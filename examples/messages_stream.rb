@@ -10,7 +10,9 @@ anthropic = Anthropic::Client.new
 begin
   pp("----- basic streaming -----")
 
-  stream = anthropic.messages.stream_raw(
+  # create a streaming message request. This returns a MessageStream object
+  # that emits events as the response is generated.
+  stream = anthropic.messages.stream(
     max_tokens: 1024,
     messages: [{role: :user, content: "Say hello there!"}],
     model: :"claude-3-7-sonnet-latest"
@@ -31,17 +33,21 @@ begin
   stream.each do
     pp("this will never run")
   end
+
+  # after the stream is consumed, you can access the final accumulated text.
+  puts("\nResponse:\n---------")
+  pp(stream.accumulated_text)
 end
 
 begin
   pp("----- manual closing of stream -----")
 
-  stream = anthropic.messages.stream_raw(
+  stream = anthropic.messages.stream(
     max_tokens: 1024,
     messages: [{role: :user, content: "Say hello there!"}],
     model: :"claude-3-7-sonnet-latest"
   )
 
-  # `stream` need to be manually closed if it is not consumed
+  # important: `stream` needs to be manually closed if it is not consumed.
   stream.close
 end

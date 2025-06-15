@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.authors = ["Anthropic"]
   s.email = "support@anthropic.com"
   s.homepage = "https://gemdocs.org/gems/anthropic"
+  s.license  = "MIT"
   s.metadata["homepage_uri"] = s.homepage
   s.metadata["source_code_uri"] = "https://github.com/anthropics/anthropic-sdk-ruby"
   s.metadata["rubygems_mfa_required"] = false.to_s
