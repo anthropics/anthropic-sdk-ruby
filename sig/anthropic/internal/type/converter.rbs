@@ -8,8 +8,10 @@ module Anthropic
 
         type coerce_state =
           {
-            strictness: bool | :strong,
+            translate_names: bool,
+            strictness: bool,
             exactness: { yes: Integer, no: Integer, maybe: Integer },
+            error: Class,
             branched: Integer
           }
 
@@ -36,6 +38,10 @@ module Anthropic
           | ^-> Anthropic::Internal::Type::Converter::input
           | Anthropic::Internal::Type::Converter::input spec
         ) -> (^-> top)
+
+        def self.new_coerce_state: (
+          ?translate_names: bool
+        ) -> Anthropic::Internal::Type::Converter::coerce_state
 
         def self.coerce: (
           Anthropic::Internal::Type::Converter::input target,
