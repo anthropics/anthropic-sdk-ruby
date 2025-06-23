@@ -118,11 +118,7 @@ module Anthropic
             # Matches the Python SDK's approach of explicitly constructing Message objects.
             return Anthropic::Internal::Type::Converter.coerce(Anthropic::Models::Message, event.message)
           in Anthropic::Models::RawContentBlockStartEvent
-            current_snapshot.content = if current_snapshot.content.nil?
-              [event.content_block]
-            else
-              current_snapshot.content.dup + [event.content_block]
-            end
+            current_snapshot.content = (current_snapshot.content || []) + [event.content_block]
           in Anthropic::Models::RawContentBlockDeltaEvent
             content = current_snapshot.content[event.index]
 
@@ -144,12 +140,6 @@ module Anthropic
               content.signature = delta.signature
             else
             end
-
-            # The current_snapshot.content array can't be updated in place so we need to duplicate,
-            # merge, and replace.
-            all_content = current_snapshot.content.dup
-            all_content[event.index] = content
-            current_snapshot.content = all_content
           in Anthropic::Models::RawMessageDeltaEvent
             current_snapshot.stop_reason = event.delta.stop_reason
             current_snapshot.stop_sequence = event.delta.stop_sequence
