@@ -3,6 +3,8 @@
 require_relative "../../test_helper"
 
 class Anthropic::Test::VertexClientTest < Minitest::Test
+  i_suck_and_my_tests_are_order_dependent!
+
   def test_global_region_base_url
     client = Anthropic::VertexClient.new(region: "global", project_id: "test-project")
     assert_equal("https://aiplatform.googleapis.com/v1", client.base_url.to_s)
