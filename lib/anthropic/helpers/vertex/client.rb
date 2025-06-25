@@ -84,7 +84,7 @@ module Anthropic
 
           base_url ||= ENV.fetch(
             "ANTHROPIC_VERTEX_BASE_URL",
-            @region == "global" ? "https://aiplatform.googleapis.com/v1" : "https://#{@region}-aiplatform.googleapis.com/v1"
+            @region.to_s == "global" ? "https://aiplatform.googleapis.com/v1" : "https://#{@region}-aiplatform.googleapis.com/v1"
           )
 
           super(
