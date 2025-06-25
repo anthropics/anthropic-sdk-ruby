@@ -3,6 +3,38 @@
 require_relative "../../test_helper"
 
 class Anthropic::Test::VertexClientTest < Minitest::Test
+  def test_global_region_base_url
+    client = Anthropic::VertexClient.new(region: "global", project_id: "test-project")
+    assert_equal("https://aiplatform.googleapis.com/v1", client.base_url.to_s)
+  end
+
+  def test_regional_base_url
+    client = Anthropic::VertexClient.new(region: "us-central1", project_id: "test-project")
+    assert_equal("https://us-central1-aiplatform.googleapis.com/v1", client.base_url.to_s)
+
+    client = Anthropic::VertexClient.new(region: "europe-west1", project_id: "test-project")
+    assert_equal("https://europe-west1-aiplatform.googleapis.com/v1", client.base_url.to_s)
+
+    client = Anthropic::VertexClient.new(region: "asia-southeast1", project_id: "test-project")
+    assert_equal("https://asia-southeast1-aiplatform.googleapis.com/v1", client.base_url.to_s)
+  end
+
+  def test_env_var_base_url_override
+    original_env = ENV["ANTHROPIC_VERTEX_BASE_URL"]
+    ENV["ANTHROPIC_VERTEX_BASE_URL"] = "https://custom-endpoint.googleapis.com/v1"
+
+    begin
+      client = Anthropic::VertexClient.new(region: "global", project_id: "test-project")
+      assert_equal("https://custom-endpoint.googleapis.com/v1", client.base_url.to_s)
+    ensure
+      if original_env
+        ENV["ANTHROPIC_VERTEX_BASE_URL"] = original_env
+      else
+        ENV.delete("ANTHROPIC_VERTEX_BASE_URL")
+      end
+    end
+  end
+
   def test_fit_req_to_vertex_specs
     model = "claude-3-5-haiku@20241022"
     request_components =
