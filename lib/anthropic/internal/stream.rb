@@ -23,13 +23,15 @@ module Anthropic
             case msg
             in {event: "completion", data: String => data}
               decoded = JSON.parse(data, symbolize_names: true)
-              y << Anthropic::Internal::Type::Converter.coerce(@model, decoded)
+              unwrapped = Anthropic::Internal::Util.dig(decoded, @unwrap)
+              y << Anthropic::Internal::Type::Converter.coerce(@model, unwrapped)
             in {
               event: "message_start" | "message_delta" | "message_stop" | "content_block_start" | "content_block_delta" | "content_block_stop",
               data: String => data
             }
               decoded = JSON.parse(data, symbolize_names: true)
-              y << Anthropic::Internal::Type::Converter.coerce(@model, decoded)
+              unwrapped = Anthropic::Internal::Util.dig(decoded, @unwrap)
+              y << Anthropic::Internal::Type::Converter.coerce(@model, unwrapped)
             in {event: "ping"}
               next
             in {event: "error", data: String => data}
