@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.metadata["homepage_uri"] = s.homepage
   s.metadata["source_code_uri"] = "https://github.com/anthropics/anthropic-sdk-ruby"
   s.metadata["rubygems_mfa_required"] = false.to_s
-  s.required_ruby_version = ">= 3.2.0"
+  s.required_ruby_version = ">= 2.7.0"
 
   s.files = Dir[
     "lib/**/*.rb",
