@@ -96,9 +96,15 @@ module Anthropic
       CLAUDE_4_OPUS_20250514 = :"claude-4-opus-20250514"
 
       # Excels at writing and complex tasks
+      # @deprecated Will reach end-of-life on January 5th, 2026. Please migrate to a newer model.
+      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
+      # information.
       CLAUDE_3_OPUS_LATEST = :"claude-3-opus-latest"
 
       # Excels at writing and complex tasks
+      # @deprecated Will reach end-of-life on January 5th, 2026. Please migrate to a newer model.
+      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
+      # information.
       CLAUDE_3_OPUS_20240229 = :"claude-3-opus-20240229"
 
       # Balance of speed and intelligence
