@@ -15,7 +15,7 @@ begin
   stream = anthropic.messages.stream(
     max_tokens: 1024,
     messages: [{role: :user, content: "Say hello there!"}],
-    model: :"claude-3-7-sonnet-latest"
+    model: :"claude-sonnet-4-20250514"
   )
 
   # calling `#each` will always clean up the stream, even if an error is thrown inside the `#each` block.
@@ -45,7 +45,7 @@ begin
   stream = anthropic.messages.stream(
     max_tokens: 1024,
     messages: [{role: :user, content: "Say hello there!"}],
-    model: :"claude-3-7-sonnet-latest"
+    model: :"claude-sonnet-4-20250514"
   )
 
   # important: `stream` needs to be manually closed if it is not consumed.

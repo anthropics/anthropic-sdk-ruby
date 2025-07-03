@@ -10,7 +10,7 @@ anthropic = Anthropic::Client.new
 response = anthropic.messages.create(
   max_tokens: 1024,
   messages: [{role: :user, content: "hello"}],
-  model: :"claude-3-7-sonnet-latest"
+  model: :"claude-sonnet-4-20250514"
 )
 
 pp(response)
@@ -22,7 +22,7 @@ response = anthropic.messages.create(
     {role: response.role, content: response.content},
     {role: :user, content: "hello again"}
   ],
-  model: :"claude-3-7-sonnet-latest"
+  model: :"claude-sonnet-4-20250514"
 )
 
 pp(response)

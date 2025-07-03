@@ -13,7 +13,7 @@ pp("----- tools stream -----")
 # tool definitions follow JSON Schema format for input validation.
 stream = anthropic.messages.stream(
   max_tokens: 1024,
-  model: "claude-3-5-sonnet-latest",
+  model: "claude-sonnet-4-20250514",
   tools: [
     {
       name: "get_weather",
