@@ -112,7 +112,8 @@ module Anthropic
               T.type_alias do
                 T.any(
                   Anthropic::Beta::BetaTextBlockParam,
-                  Anthropic::Beta::BetaImageBlockParam
+                  Anthropic::Beta::BetaImageBlockParam,
+                  Anthropic::Beta::BetaSearchResultBlockParam
                 )
               end
 

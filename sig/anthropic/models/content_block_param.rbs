@@ -1,15 +1,15 @@
 module Anthropic
   module Models
     type content_block_param =
-      Anthropic::ServerToolUseBlockParam
-      | Anthropic::WebSearchToolResultBlockParam
-      | Anthropic::TextBlockParam
+      Anthropic::TextBlockParam
       | Anthropic::ImageBlockParam
-      | Anthropic::ToolUseBlockParam
-      | Anthropic::ToolResultBlockParam
       | Anthropic::DocumentBlockParam
       | Anthropic::ThinkingBlockParam
       | Anthropic::RedactedThinkingBlockParam
+      | Anthropic::ToolUseBlockParam
+      | Anthropic::ToolResultBlockParam
+      | Anthropic::ServerToolUseBlockParam
+      | Anthropic::WebSearchToolResultBlockParam
 
     module ContentBlockParam
       extend Anthropic::Internal::Type::Union

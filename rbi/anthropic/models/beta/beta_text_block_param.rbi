@@ -40,7 +40,8 @@ module Anthropic
                   Anthropic::Beta::BetaCitationCharLocationParam,
                   Anthropic::Beta::BetaCitationPageLocationParam,
                   Anthropic::Beta::BetaCitationContentBlockLocationParam,
-                  Anthropic::Beta::BetaCitationWebSearchResultLocationParam
+                  Anthropic::Beta::BetaCitationWebSearchResultLocationParam,
+                  Anthropic::Beta::BetaSearchResultLocationCitationParam
                 )
               ]
             )
@@ -60,7 +61,8 @@ module Anthropic
                     Anthropic::Beta::BetaCitationCharLocationParam::OrHash,
                     Anthropic::Beta::BetaCitationPageLocationParam::OrHash,
                     Anthropic::Beta::BetaCitationContentBlockLocationParam::OrHash,
-                    Anthropic::Beta::BetaCitationWebSearchResultLocationParam::OrHash
+                    Anthropic::Beta::BetaCitationWebSearchResultLocationParam::OrHash,
+                    Anthropic::Beta::BetaSearchResultLocationCitationParam::OrHash
                   )
                 ]
               ),
@@ -90,7 +92,8 @@ module Anthropic
                       Anthropic::Beta::BetaCitationCharLocationParam,
                       Anthropic::Beta::BetaCitationPageLocationParam,
                       Anthropic::Beta::BetaCitationContentBlockLocationParam,
-                      Anthropic::Beta::BetaCitationWebSearchResultLocationParam
+                      Anthropic::Beta::BetaCitationWebSearchResultLocationParam,
+                      Anthropic::Beta::BetaSearchResultLocationCitationParam
                     )
                   ]
                 )

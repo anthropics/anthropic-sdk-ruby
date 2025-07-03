@@ -9,11 +9,11 @@ module Anthropic
         T.type_alias do
           T.any(
             Anthropic::TextBlock,
+            Anthropic::ThinkingBlock,
+            Anthropic::RedactedThinkingBlock,
             Anthropic::ToolUseBlock,
             Anthropic::ServerToolUseBlock,
-            Anthropic::WebSearchToolResultBlock,
-            Anthropic::ThinkingBlock,
-            Anthropic::RedactedThinkingBlock
+            Anthropic::WebSearchToolResultBlock
           )
         end
 

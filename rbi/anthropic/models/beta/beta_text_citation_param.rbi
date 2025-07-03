@@ -14,7 +14,8 @@ module Anthropic
               Anthropic::Beta::BetaCitationCharLocationParam,
               Anthropic::Beta::BetaCitationPageLocationParam,
               Anthropic::Beta::BetaCitationContentBlockLocationParam,
-              Anthropic::Beta::BetaCitationWebSearchResultLocationParam
+              Anthropic::Beta::BetaCitationWebSearchResultLocationParam,
+              Anthropic::Beta::BetaSearchResultLocationCitationParam
             )
           end
 

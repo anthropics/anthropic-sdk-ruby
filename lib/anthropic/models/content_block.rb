@@ -9,18 +9,18 @@ module Anthropic
 
       variant :text, -> { Anthropic::TextBlock }
 
+      variant :thinking, -> { Anthropic::ThinkingBlock }
+
+      variant :redacted_thinking, -> { Anthropic::RedactedThinkingBlock }
+
       variant :tool_use, -> { Anthropic::ToolUseBlock }
 
       variant :server_tool_use, -> { Anthropic::ServerToolUseBlock }
 
       variant :web_search_tool_result, -> { Anthropic::WebSearchToolResultBlock }
 
-      variant :thinking, -> { Anthropic::ThinkingBlock }
-
-      variant :redacted_thinking, -> { Anthropic::RedactedThinkingBlock }
-
       # @!method self.variants
-      #   @return [Array(Anthropic::Models::TextBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ServerToolUseBlock, Anthropic::Models::WebSearchToolResultBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock)]
+      #   @return [Array(Anthropic::Models::TextBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ServerToolUseBlock, Anthropic::Models::WebSearchToolResultBlock)]
     end
   end
 end
