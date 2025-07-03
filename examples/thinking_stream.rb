@@ -20,7 +20,7 @@ stream = anthropic.messages.stream(
   max_tokens: 3200,
   thinking: {type: :enabled, budget_tokens: 1600},
   messages: [{role: :user, content: "Create a haiku about space."}],
-  model: :"claude-3-7-sonnet-latest"
+  model: :"claude-sonnet-4-20250514"
 )
 
 # use grep to filter only ThinkingEvent objects, and use lazy to do so in real time.

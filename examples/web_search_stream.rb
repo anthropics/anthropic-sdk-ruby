@@ -10,7 +10,7 @@ anthropic = Anthropic::Client.new
 # enable web search by providing the web_search tool. The model can use this
 # to search the internet for up-to-date information when needed.
 stream = anthropic.messages.stream(
-  model: "claude-3-7-sonnet-20250219",
+  model: "claude-sonnet-4-20250514",
   max_tokens: 1024,
   messages: [{role: :user, content: "What's the weather in New York?"}],
   tools: [

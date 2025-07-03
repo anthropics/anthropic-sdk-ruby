@@ -13,7 +13,7 @@ begin
   stream = anthropic.messages.stream(
     max_tokens: 1024,
     messages: [{role: :user, content: "Say hello there!"}],
-    model: :"claude-3-7-sonnet-latest"
+    model: :"claude-sonnet-4-20250514"
   )
 
   # the `stream` itself is an `https://rubyapi.org/3.1/o/enumerable`
@@ -40,7 +40,7 @@ begin
   stream = anthropic.messages.stream(
     max_tokens: 1024,
     messages: [{role: :user, content: "Say hello there!"}],
-    model: :"claude-3-7-sonnet-latest"
+    model: :"claude-sonnet-4-20250514"
   )
 
   stream_of_deltas =
@@ -76,7 +76,7 @@ begin
     max_tokens: 3200,
     thinking: {type: :enabled, budget_tokens: 1600},
     messages: [{role: :user, content: "Create a haiku about Anthropic."}],
-    model: :"claude-3-7-sonnet-latest"
+    model: :"claude-sonnet-4-20250514"
   )
   thinking = "not-started"
 
