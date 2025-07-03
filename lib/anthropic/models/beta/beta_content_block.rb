@@ -11,6 +11,10 @@ module Anthropic
 
         variant :text, -> { Anthropic::Beta::BetaTextBlock }
 
+        variant :thinking, -> { Anthropic::Beta::BetaThinkingBlock }
+
+        variant :redacted_thinking, -> { Anthropic::Beta::BetaRedactedThinkingBlock }
+
         variant :tool_use, -> { Anthropic::Beta::BetaToolUseBlock }
 
         variant :server_tool_use, -> { Anthropic::Beta::BetaServerToolUseBlock }
@@ -26,12 +30,8 @@ module Anthropic
         # Response model for a file uploaded to the container.
         variant :container_upload, -> { Anthropic::Beta::BetaContainerUploadBlock }
 
-        variant :thinking, -> { Anthropic::Beta::BetaThinkingBlock }
-
-        variant :redacted_thinking, -> { Anthropic::Beta::BetaRedactedThinkingBlock }
-
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaServerToolUseBlock, Anthropic::Models::Beta::BetaWebSearchToolResultBlock, Anthropic::Models::Beta::BetaCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaMCPToolUseBlock, Anthropic::Models::Beta::BetaMCPToolResultBlock, Anthropic::Models::Beta::BetaContainerUploadBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock)]
+        #   @return [Array(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaServerToolUseBlock, Anthropic::Models::Beta::BetaWebSearchToolResultBlock, Anthropic::Models::Beta::BetaCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaMCPToolUseBlock, Anthropic::Models::Beta::BetaMCPToolResultBlock, Anthropic::Models::Beta::BetaContainerUploadBlock)]
       end
     end
 

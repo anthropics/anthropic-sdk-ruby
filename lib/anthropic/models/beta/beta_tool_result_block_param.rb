@@ -22,7 +22,7 @@ module Anthropic
 
         # @!attribute content
         #
-        #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>, nil]
+        #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaSearchResultBlockParam>, nil]
         optional :content, union: -> { Anthropic::Beta::BetaToolResultBlockParam::Content }
 
         # @!attribute is_error
@@ -35,7 +35,7 @@ module Anthropic
         #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
-        #   @param content [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>]
+        #   @param content [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaSearchResultBlockParam>]
         #
         #   @param is_error [Boolean]
         #
@@ -58,12 +58,14 @@ module Anthropic
 
             variant :image, -> { Anthropic::Beta::BetaImageBlockParam }
 
+            variant :search_result, -> { Anthropic::Beta::BetaSearchResultBlockParam }
+
             # @!method self.variants
-            #   @return [Array(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
+            #   @return [Array(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaSearchResultBlockParam)]
           end
 
           # @!method self.variants
-          #   @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>)]
+          #   @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaSearchResultBlockParam>)]
 
           # @type [Anthropic::Internal::Type::Converter]
           ContentArray =

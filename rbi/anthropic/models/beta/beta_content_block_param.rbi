@@ -12,18 +12,19 @@ module Anthropic
         Variants =
           T.type_alias do
             T.any(
+              Anthropic::Beta::BetaTextBlockParam,
+              Anthropic::Beta::BetaImageBlockParam,
+              Anthropic::Beta::BetaRequestDocumentBlock,
+              Anthropic::Beta::BetaSearchResultBlockParam,
+              Anthropic::Beta::BetaThinkingBlockParam,
+              Anthropic::Beta::BetaRedactedThinkingBlockParam,
+              Anthropic::Beta::BetaToolUseBlockParam,
+              Anthropic::Beta::BetaToolResultBlockParam,
               Anthropic::Beta::BetaServerToolUseBlockParam,
               Anthropic::Beta::BetaWebSearchToolResultBlockParam,
               Anthropic::Beta::BetaCodeExecutionToolResultBlockParam,
               Anthropic::Beta::BetaMCPToolUseBlockParam,
               Anthropic::Beta::BetaRequestMCPToolResultBlockParam,
-              Anthropic::Beta::BetaTextBlockParam,
-              Anthropic::Beta::BetaImageBlockParam,
-              Anthropic::Beta::BetaToolUseBlockParam,
-              Anthropic::Beta::BetaToolResultBlockParam,
-              Anthropic::Beta::BetaRequestDocumentBlock,
-              Anthropic::Beta::BetaThinkingBlockParam,
-              Anthropic::Beta::BetaRedactedThinkingBlockParam,
               Anthropic::Beta::BetaContainerUploadBlockParam
             )
           end
