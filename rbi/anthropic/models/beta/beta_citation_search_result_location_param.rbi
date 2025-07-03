@@ -2,14 +2,15 @@
 
 module Anthropic
   module Models
-    BetaSearchResultLocationCitation = Beta::BetaSearchResultLocationCitation
+    BetaCitationSearchResultLocationParam =
+      Beta::BetaCitationSearchResultLocationParam
 
     module Beta
-      class BetaSearchResultLocationCitation < Anthropic::Internal::Type::BaseModel
+      class BetaCitationSearchResultLocationParam < Anthropic::Internal::Type::BaseModel
         OrHash =
           T.type_alias do
             T.any(
-              Anthropic::Beta::BetaSearchResultLocationCitation,
+              Anthropic::Beta::BetaCitationSearchResultLocationParam,
               Anthropic::Internal::AnyHash
             )
           end

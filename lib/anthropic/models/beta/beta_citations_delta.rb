@@ -6,7 +6,7 @@ module Anthropic
       class BetaCitationsDelta < Anthropic::Internal::Type::BaseModel
         # @!attribute citation
         #
-        #   @return [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation, Anthropic::Models::Beta::BetaCitationsWebSearchResultLocation, Anthropic::Models::Beta::BetaSearchResultLocationCitation]
+        #   @return [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation, Anthropic::Models::Beta::BetaCitationsWebSearchResultLocation, Anthropic::Models::Beta::BetaCitationSearchResultLocation]
         required :citation, union: -> { Anthropic::Beta::BetaCitationsDelta::Citation }
 
         # @!attribute type
@@ -15,7 +15,7 @@ module Anthropic
         required :type, const: :citations_delta
 
         # @!method initialize(citation:, type: :citations_delta)
-        #   @param citation [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation, Anthropic::Models::Beta::BetaCitationsWebSearchResultLocation, Anthropic::Models::Beta::BetaSearchResultLocationCitation]
+        #   @param citation [Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation, Anthropic::Models::Beta::BetaCitationsWebSearchResultLocation, Anthropic::Models::Beta::BetaCitationSearchResultLocation]
         #   @param type [Symbol, :citations_delta]
 
         # @see Anthropic::Models::Beta::BetaCitationsDelta#citation
@@ -32,10 +32,10 @@ module Anthropic
 
           variant :web_search_result_location, -> { Anthropic::Beta::BetaCitationsWebSearchResultLocation }
 
-          variant :search_result_location, -> { Anthropic::Beta::BetaSearchResultLocationCitation }
+          variant :search_result_location, -> { Anthropic::Beta::BetaCitationSearchResultLocation }
 
           # @!method self.variants
-          #   @return [Array(Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation, Anthropic::Models::Beta::BetaCitationsWebSearchResultLocation, Anthropic::Models::Beta::BetaSearchResultLocationCitation)]
+          #   @return [Array(Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation, Anthropic::Models::Beta::BetaCitationsWebSearchResultLocation, Anthropic::Models::Beta::BetaCitationSearchResultLocation)]
         end
       end
     end
