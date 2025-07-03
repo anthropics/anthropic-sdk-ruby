@@ -2,11 +2,11 @@ module Anthropic
   module Models
     type content_block =
       Anthropic::TextBlock
+      | Anthropic::ThinkingBlock
+      | Anthropic::RedactedThinkingBlock
       | Anthropic::ToolUseBlock
       | Anthropic::ServerToolUseBlock
       | Anthropic::WebSearchToolResultBlock
-      | Anthropic::ThinkingBlock
-      | Anthropic::RedactedThinkingBlock
 
     module ContentBlock
       extend Anthropic::Internal::Type::Union

@@ -55,6 +55,7 @@ module Anthropic
           type content =
             Anthropic::Beta::BetaTextBlockParam
             | Anthropic::Beta::BetaImageBlockParam
+            | Anthropic::Beta::BetaSearchResultBlockParam
 
           module Content
             extend Anthropic::Internal::Type::Union

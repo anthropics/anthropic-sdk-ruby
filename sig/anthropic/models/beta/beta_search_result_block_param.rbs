@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    class BetaSearchResultBlockParam = Beta::BetaSearchResultBlockParam
+
+    module Beta
+      type beta_search_result_block_param =
+        {
+          content: ::Array[Anthropic::Beta::BetaTextBlockParam],
+          source: String,
+          title: String,
+          type: :search_result,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          citations: Anthropic::Beta::BetaCitationsConfigParam
+        }
+
+      class BetaSearchResultBlockParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: ::Array[Anthropic::Beta::BetaTextBlockParam]
+
+        attr_accessor source: String
+
+        attr_accessor title: String
+
+        attr_accessor type: :search_result
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        attr_reader citations: Anthropic::Beta::BetaCitationsConfigParam?
+
+        def citations=: (
+          Anthropic::Beta::BetaCitationsConfigParam
+        ) -> Anthropic::Beta::BetaCitationsConfigParam
+
+        def initialize: (
+          content: ::Array[Anthropic::Beta::BetaTextBlockParam],
+          source: String,
+          title: String,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?citations: Anthropic::Beta::BetaCitationsConfigParam,
+          ?type: :search_result
+        ) -> void
+
+        def to_hash: -> {
+          content: ::Array[Anthropic::Beta::BetaTextBlockParam],
+          source: String,
+          title: String,
+          type: :search_result,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          citations: Anthropic::Beta::BetaCitationsConfigParam
+        }
+      end
+    end
+  end
+end

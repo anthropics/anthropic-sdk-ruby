@@ -27,7 +27,8 @@ module Anthropic
                 Anthropic::Beta::BetaCitationCharLocation::OrHash,
                 Anthropic::Beta::BetaCitationPageLocation::OrHash,
                 Anthropic::Beta::BetaCitationContentBlockLocation::OrHash,
-                Anthropic::Beta::BetaCitationsWebSearchResultLocation::OrHash
+                Anthropic::Beta::BetaCitationsWebSearchResultLocation::OrHash,
+                Anthropic::Beta::BetaSearchResultLocationCitation::OrHash
               ),
             type: Symbol
           ).returns(T.attached_class)
@@ -55,7 +56,8 @@ module Anthropic
                 Anthropic::Beta::BetaCitationCharLocation,
                 Anthropic::Beta::BetaCitationPageLocation,
                 Anthropic::Beta::BetaCitationContentBlockLocation,
-                Anthropic::Beta::BetaCitationsWebSearchResultLocation
+                Anthropic::Beta::BetaCitationsWebSearchResultLocation,
+                Anthropic::Beta::BetaSearchResultLocationCitation
               )
             end
 

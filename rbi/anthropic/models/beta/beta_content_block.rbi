@@ -13,15 +13,15 @@ module Anthropic
           T.type_alias do
             T.any(
               Anthropic::Beta::BetaTextBlock,
+              Anthropic::Beta::BetaThinkingBlock,
+              Anthropic::Beta::BetaRedactedThinkingBlock,
               Anthropic::Beta::BetaToolUseBlock,
               Anthropic::Beta::BetaServerToolUseBlock,
               Anthropic::Beta::BetaWebSearchToolResultBlock,
               Anthropic::Beta::BetaCodeExecutionToolResultBlock,
               Anthropic::Beta::BetaMCPToolUseBlock,
               Anthropic::Beta::BetaMCPToolResultBlock,
-              Anthropic::Beta::BetaContainerUploadBlock,
-              Anthropic::Beta::BetaThinkingBlock,
-              Anthropic::Beta::BetaRedactedThinkingBlock
+              Anthropic::Beta::BetaContainerUploadBlock
             )
           end
 

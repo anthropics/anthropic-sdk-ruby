@@ -33,15 +33,15 @@ module Anthropic
             content_block:
               T.any(
                 Anthropic::Beta::BetaTextBlock::OrHash,
+                Anthropic::Beta::BetaThinkingBlock::OrHash,
+                Anthropic::Beta::BetaRedactedThinkingBlock::OrHash,
                 Anthropic::Beta::BetaToolUseBlock::OrHash,
                 Anthropic::Beta::BetaServerToolUseBlock::OrHash,
                 Anthropic::Beta::BetaWebSearchToolResultBlock::OrHash,
                 Anthropic::Beta::BetaCodeExecutionToolResultBlock::OrHash,
                 Anthropic::Beta::BetaMCPToolUseBlock::OrHash,
                 Anthropic::Beta::BetaMCPToolResultBlock::OrHash,
-                Anthropic::Beta::BetaContainerUploadBlock::OrHash,
-                Anthropic::Beta::BetaThinkingBlock::OrHash,
-                Anthropic::Beta::BetaRedactedThinkingBlock::OrHash
+                Anthropic::Beta::BetaContainerUploadBlock::OrHash
               ),
             index: Integer,
             type: Symbol
@@ -76,15 +76,15 @@ module Anthropic
             T.type_alias do
               T.any(
                 Anthropic::Beta::BetaTextBlock,
+                Anthropic::Beta::BetaThinkingBlock,
+                Anthropic::Beta::BetaRedactedThinkingBlock,
                 Anthropic::Beta::BetaToolUseBlock,
                 Anthropic::Beta::BetaServerToolUseBlock,
                 Anthropic::Beta::BetaWebSearchToolResultBlock,
                 Anthropic::Beta::BetaCodeExecutionToolResultBlock,
                 Anthropic::Beta::BetaMCPToolUseBlock,
                 Anthropic::Beta::BetaMCPToolResultBlock,
-                Anthropic::Beta::BetaContainerUploadBlock,
-                Anthropic::Beta::BetaThinkingBlock,
-                Anthropic::Beta::BetaRedactedThinkingBlock
+                Anthropic::Beta::BetaContainerUploadBlock
               )
             end
 

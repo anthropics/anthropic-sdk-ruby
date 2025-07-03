@@ -9,15 +9,15 @@ module Anthropic
       Variants =
         T.type_alias do
           T.any(
-            Anthropic::ServerToolUseBlockParam,
-            Anthropic::WebSearchToolResultBlockParam,
             Anthropic::TextBlockParam,
             Anthropic::ImageBlockParam,
-            Anthropic::ToolUseBlockParam,
-            Anthropic::ToolResultBlockParam,
             Anthropic::DocumentBlockParam,
             Anthropic::ThinkingBlockParam,
-            Anthropic::RedactedThinkingBlockParam
+            Anthropic::RedactedThinkingBlockParam,
+            Anthropic::ToolUseBlockParam,
+            Anthropic::ToolResultBlockParam,
+            Anthropic::ServerToolUseBlockParam,
+            Anthropic::WebSearchToolResultBlockParam
           )
         end
 
