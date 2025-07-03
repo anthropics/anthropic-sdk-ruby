@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaSearchResultLocationCitationParam < Anthropic::Internal::Type::BaseModel
+      class BetaCitationSearchResultLocation < Anthropic::Internal::Type::BaseModel
         # @!attribute cited_text
         #
         #   @return [String]
@@ -50,6 +50,6 @@ module Anthropic
       end
     end
 
-    BetaSearchResultLocationCitationParam = Beta::BetaSearchResultLocationCitationParam
+    BetaCitationSearchResultLocation = Beta::BetaCitationSearchResultLocation
   end
 end

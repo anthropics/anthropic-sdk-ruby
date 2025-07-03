@@ -8,7 +8,7 @@ module Anthropic
         | Anthropic::Beta::BetaCitationPageLocationParam
         | Anthropic::Beta::BetaCitationContentBlockLocationParam
         | Anthropic::Beta::BetaCitationWebSearchResultLocationParam
-        | Anthropic::Beta::BetaSearchResultLocationCitationParam
+        | Anthropic::Beta::BetaCitationSearchResultLocationParam
 
       module BetaTextCitationParam
         extend Anthropic::Internal::Type::Union

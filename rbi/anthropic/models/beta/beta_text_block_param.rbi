@@ -41,7 +41,7 @@ module Anthropic
                   Anthropic::Beta::BetaCitationPageLocationParam,
                   Anthropic::Beta::BetaCitationContentBlockLocationParam,
                   Anthropic::Beta::BetaCitationWebSearchResultLocationParam,
-                  Anthropic::Beta::BetaSearchResultLocationCitationParam
+                  Anthropic::Beta::BetaCitationSearchResultLocationParam
                 )
               ]
             )
@@ -62,7 +62,7 @@ module Anthropic
                     Anthropic::Beta::BetaCitationPageLocationParam::OrHash,
                     Anthropic::Beta::BetaCitationContentBlockLocationParam::OrHash,
                     Anthropic::Beta::BetaCitationWebSearchResultLocationParam::OrHash,
-                    Anthropic::Beta::BetaSearchResultLocationCitationParam::OrHash
+                    Anthropic::Beta::BetaCitationSearchResultLocationParam::OrHash
                   )
                 ]
               ),
@@ -93,7 +93,7 @@ module Anthropic
                       Anthropic::Beta::BetaCitationPageLocationParam,
                       Anthropic::Beta::BetaCitationContentBlockLocationParam,
                       Anthropic::Beta::BetaCitationWebSearchResultLocationParam,
-                      Anthropic::Beta::BetaSearchResultLocationCitationParam
+                      Anthropic::Beta::BetaCitationSearchResultLocationParam
                     )
                   ]
                 )

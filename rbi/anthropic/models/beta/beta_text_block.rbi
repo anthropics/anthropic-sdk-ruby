@@ -39,7 +39,7 @@ module Anthropic
                     Anthropic::Beta::BetaCitationPageLocation::OrHash,
                     Anthropic::Beta::BetaCitationContentBlockLocation::OrHash,
                     Anthropic::Beta::BetaCitationsWebSearchResultLocation::OrHash,
-                    Anthropic::Beta::BetaSearchResultLocationCitation::OrHash
+                    Anthropic::Beta::BetaCitationSearchResultLocation::OrHash
                   )
                 ]
               ),
