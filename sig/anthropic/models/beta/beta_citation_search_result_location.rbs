@@ -1,9 +1,9 @@
 module Anthropic
   module Models
-    class BetaSearchResultLocationCitation = Beta::BetaSearchResultLocationCitation
+    class BetaCitationSearchResultLocation = Beta::BetaCitationSearchResultLocation
 
     module Beta
-      type beta_search_result_location_citation =
+      type beta_citation_search_result_location =
         {
           cited_text: String,
           end_block_index: Integer,
@@ -14,7 +14,7 @@ module Anthropic
           type: :search_result_location
         }
 
-      class BetaSearchResultLocationCitation < Anthropic::Internal::Type::BaseModel
+      class BetaCitationSearchResultLocation < Anthropic::Internal::Type::BaseModel
         attr_accessor cited_text: String
 
         attr_accessor end_block_index: Integer

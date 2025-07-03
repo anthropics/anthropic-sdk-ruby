@@ -11,7 +11,7 @@ module Anthropic
         #   Citing a PDF results in `page_location`, plain text results in `char_location`,
         #   and content document results in `content_block_location`.
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation, Anthropic::Models::Beta::BetaCitationsWebSearchResultLocation, Anthropic::Models::Beta::BetaSearchResultLocationCitation>, nil]
+        #   @return [Array<Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation, Anthropic::Models::Beta::BetaCitationsWebSearchResultLocation, Anthropic::Models::Beta::BetaCitationSearchResultLocation>, nil]
         required :citations,
                  -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaTextCitation] },
                  nil?: true
@@ -30,7 +30,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaTextBlock} for more details.
         #
-        #   @param citations [Array<Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation, Anthropic::Models::Beta::BetaCitationsWebSearchResultLocation, Anthropic::Models::Beta::BetaSearchResultLocationCitation>, nil] Citations supporting the text block.
+        #   @param citations [Array<Anthropic::Models::Beta::BetaCitationCharLocation, Anthropic::Models::Beta::BetaCitationPageLocation, Anthropic::Models::Beta::BetaCitationContentBlockLocation, Anthropic::Models::Beta::BetaCitationsWebSearchResultLocation, Anthropic::Models::Beta::BetaCitationSearchResultLocation>, nil] Citations supporting the text block.
         #
         #   @param text [String]
         #
