@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+echo "==> Detecting breaking changes"
+
+TEST_PATHS=(
+	test/anthropic/resources/shared_test.rb
+	test/anthropic/resources/completions_test.rb
+	test/anthropic/resources/messages_test.rb
+	test/anthropic/resources/messages/batches_test.rb
+	test/anthropic/resources/models_test.rb
+	test/anthropic/resources/beta_test.rb
+	test/anthropic/resources/beta/models_test.rb
+	test/anthropic/resources/beta/messages_test.rb
+	test/anthropic/resources/beta/messages/batches_test.rb
+	test/anthropic/resources/beta/files_test.rb
+	test/anthropic/client_test.rb
+)
+
+for PATHSPEC in "${TEST_PATHS[@]}"; do
+    # Try to check out previous versions of the test files
+    # with the current SDK.
+    git checkout "$1" -- "${PATHSPEC}" 2>/dev/null || true
+done
+
+# Instead of running the tests, use the linter to check if an
+# older test is no longer compatible with the latest SDK.
+./scripts/lint
