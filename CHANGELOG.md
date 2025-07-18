@@ -1,5 +1,50 @@
 # Changelog
 
+## 1.2.0 (2025-07-18)
+
+Full Changelog: [v1.1.1...v1.2.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.1.1...v1.2.0)
+
+### Features
+
+* **api:** add support for Search Result Content Blocks ([158a7ce](https://github.com/anthropics/anthropic-sdk-ruby/commit/158a7ced1013c3af956554caf41ee08ec5d1db3c))
+* **api:** api update ([cd22765](https://github.com/anthropics/anthropic-sdk-ruby/commit/cd2276536c7960a4f7276ceb9baba8ba5aec196e))
+* **api:** manual updates ([7f51b33](https://github.com/anthropics/anthropic-sdk-ruby/commit/7f51b336943422d230d8704583f42dc6f8a3ac62))
+* **client:** add breaking change detection to CI ([52e342f](https://github.com/anthropics/anthropic-sdk-ruby/commit/52e342fe8c8231ad6b6b6ff68ed522033cd503c7))
+* **client:** add support for new text_editor_20250429 tool ([9049af2](https://github.com/anthropics/anthropic-sdk-ruby/commit/9049af2f634f88d867104f2dc0ddc6396f5f8031))
+* streaming helpers ([#627](https://github.com/anthropics/anthropic-sdk-ruby/issues/627)) ([43fbbf8](https://github.com/anthropics/anthropic-sdk-ruby/commit/43fbbf8a39ac1d99920845ba19da43d7419a5e73))
+* **vertex:** support global region endpoint ([da8c452](https://github.com/anthropics/anthropic-sdk-ruby/commit/da8c452a22c56780f311f4f1ab3477a48ac46891))
+
+
+### Bug Fixes
+
+* `to_sorbet_type` should not return branded types ([2658903](https://github.com/anthropics/anthropic-sdk-ruby/commit/2658903f13178a133ca679f4b87615e9cddcd813))
+* **ci:** release-doctor — report correct token name ([e30183e](https://github.com/anthropics/anthropic-sdk-ruby/commit/e30183e5561070dfd3dfe041f48e76765975cb3b))
+* **client:** deprecate BetaBase64PDFBlock in favor of BetaRequestDocumentBlock ([f75705b](https://github.com/anthropics/anthropic-sdk-ruby/commit/f75705bfb4af3160b2fa7208adfad10719cd17a7))
+* default content-type for text in multi-part formdata uploads should be text/plain ([0a91592](https://github.com/anthropics/anthropic-sdk-ruby/commit/0a915925fc93ca7ad191bab33dba8c72b6c48a2a))
+* **internal:** fix: should publish to ruby gems when a release is created ([cc88c6c](https://github.com/anthropics/anthropic-sdk-ruby/commit/cc88c6c7c164c5bb1937e12cefb4d91f05fec157))
+* issue where we cannot mutate arrays on base model derivatives ([446c8be](https://github.com/anthropics/anthropic-sdk-ruby/commit/446c8be0eb77a29641d472ea36cbaf6f786f7e3a))
+
+
+### Chores
+
+* add `license` to the gemspec ([#101](https://github.com/anthropics/anthropic-sdk-ruby/issues/101)) ([af509a7](https://github.com/anthropics/anthropic-sdk-ruby/commit/af509a735c0e985e615f9279bc070dc090874df8))
+* add RBS types for helpers/streaming ([#631](https://github.com/anthropics/anthropic-sdk-ruby/issues/631)) ([0d7941d](https://github.com/anthropics/anthropic-sdk-ruby/commit/0d7941df6628b1500f7e7e8def88f613d7bcf2fa))
+* **api:** mark claude-3-opus-20240229 as deprecated ([1edd9bd](https://github.com/anthropics/anthropic-sdk-ruby/commit/1edd9bdf0bf508f5467daf92c4b1db11128d70ea))
+* **api:** update BetaCitationSearchResultLocation ([b294f7e](https://github.com/anthropics/anthropic-sdk-ruby/commit/b294f7e2bfd44d01504eeb7e30b37926ca7200e2))
+* **ci:** enable for pull requests ([31bbb43](https://github.com/anthropics/anthropic-sdk-ruby/commit/31bbb43d02cc56505ad5ec8d737801b73f9f5fd8))
+* **ci:** link to correct github repo ([37b5902](https://github.com/anthropics/anthropic-sdk-ruby/commit/37b59027a26268ad5bb20ee6530c7f0c630bc5b5))
+* **ci:** only run for pushes and fork pull requests ([8d3c942](https://github.com/anthropics/anthropic-sdk-ruby/commit/8d3c9425afe873a49e403c7a8a36f14642191a89))
+* **internal:** allow streams to also be unwrapped on a per-row basis ([a271d21](https://github.com/anthropics/anthropic-sdk-ruby/commit/a271d21d2f01a9f7c9c2d126b1f3d9b0611dd8cd))
+* **internal:** codegen related update ([8b12fd6](https://github.com/anthropics/anthropic-sdk-ruby/commit/8b12fd6e8ec1c06d3cbf7d20c63c6933538d0983))
+* remove workaround for updating arrays in place in streaming ([#643](https://github.com/anthropics/anthropic-sdk-ruby/issues/643)) ([e0a30b8](https://github.com/anthropics/anthropic-sdk-ruby/commit/e0a30b8128624566f673ac77f97c305953b11c63))
+
+
+### Documentation
+
+* model in examples ([18ba0b6](https://github.com/anthropics/anthropic-sdk-ruby/commit/18ba0b62bd8f87b84766265726090ca2265a64b7))
+* update documentation in MessageStream ([#630](https://github.com/anthropics/anthropic-sdk-ruby/issues/630)) ([4795c73](https://github.com/anthropics/anthropic-sdk-ruby/commit/4795c73f0628d2bc710f77bd0868be18c53ec31a))
+* update models and non-beta ([a4ea04e](https://github.com/anthropics/anthropic-sdk-ruby/commit/a4ea04eaf88e608612512d39d07051842beaf500))
+
 ## 1.1.1 (2025-05-28)
 
 Full Changelog: [v1.1.0...v1.1.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.1.0...v1.1.1)
