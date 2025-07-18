@@ -74,6 +74,7 @@ GEM
       logger
     faraday-net_http (3.4.0)
       net-http (>= 0.5.0)
+    ffi (1.17.2-arm64-darwin)
     ffi (1.17.2-x86_64-linux-gnu)
     fiber-annotation (0.2.0)
     fiber-local (1.1.0)
@@ -168,6 +169,7 @@ GEM
     sorbet (0.5.12067)
       sorbet-static (= 0.5.12067)
     sorbet-runtime (0.5.12067)
+    sorbet-static (0.5.12067-universal-darwin)
     sorbet-static (0.5.12067-x86_64-linux)
     sorbet-static-and-runtime (0.5.12067)
       sorbet (= 0.5.12067)
@@ -229,6 +231,7 @@ GEM
       yard
 
 PLATFORMS
+  arm64-darwin
   x86_64-linux
 
 DEPENDENCIES
