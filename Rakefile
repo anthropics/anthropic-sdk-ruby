@@ -45,9 +45,6 @@ multitask(:"lint:rubocop") do
   rubocop = %w[rubocop]
   rubocop += %w[--format github] if ENV.key?("CI")
 
-  # some lines cannot be shortened
-  rubocop += %w[--except Lint/RedundantCopDisableDirective,Layout/LineLength]
-
   lint = xargs + rubocop
   sh("#{find.shelljoin} | #{lint.shelljoin}")
 end
