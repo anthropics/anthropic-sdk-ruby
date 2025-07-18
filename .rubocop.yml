@@ -42,6 +42,10 @@ Layout/LineLength:
     - "Anthropic::Internal::Type::BaseModel$"
     - "^\\s*[A-Z0-9_]+ = :"
     - "Anthropic::(Models|Resources|Test)::"
+    - "projects/.*/locations/.*/publishers/anthropic/models/"
+    - "T::Class\\[Anthropic::Internal::Type::"
+    - "Anthropic::Internal::Type::ArrayOf\\["
+    - "\\.params\\(.*opts: Anthropic::Internal::AnyHash\\)"
   Max: 110
 
 Layout/MultilineArrayLineBreaks:
