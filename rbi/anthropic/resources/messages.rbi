@@ -314,38 +314,59 @@ module Anthropic
       sig do
         params(
           max_tokens: Integer,
-          messages: T::Array[T.any(Anthropic::Models::MessageParam, Anthropic::Internal::AnyHash)],
+          messages:
+            T::Array[
+              T.any(
+                Anthropic::Models::MessageParam,
+                Anthropic::Internal::AnyHash
+              )
+            ],
           model: T.any(Anthropic::Models::Model::OrSymbol, String),
-          metadata: T.any(Anthropic::Models::Metadata, Anthropic::Internal::AnyHash),
+          metadata:
+            T.any(Anthropic::Models::Metadata, Anthropic::Internal::AnyHash),
           stop_sequences: T::Array[String],
-          system_: T.any(String, T::Array[T.any(Anthropic::Models::TextBlockParam, Anthropic::Internal::AnyHash)]),
-          temperature: Float,
-          thinking: T.any(
-            Anthropic::Models::ThinkingConfigEnabled,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::ThinkingConfigDisabled
-          ),
-          tool_choice: T.any(
-            Anthropic::Models::ToolChoiceAuto,
-            Anthropic::Internal::AnyHash,
-            Anthropic::Models::ToolChoiceAny,
-            Anthropic::Models::ToolChoiceTool,
-            Anthropic::Models::ToolChoiceNone
-          ),
-          tools: T::Array[
+          system_:
             T.any(
-              Anthropic::Models::Tool,
+              String,
+              T::Array[
+                T.any(
+                  Anthropic::Models::TextBlockParam,
+                  Anthropic::Internal::AnyHash
+                )
+              ]
+            ),
+          temperature: Float,
+          thinking:
+            T.any(
+              Anthropic::Models::ThinkingConfigEnabled,
               Anthropic::Internal::AnyHash,
-              Anthropic::Models::ToolBash20250124,
-              Anthropic::Models::ToolTextEditor20250124
-            )
-          ],
+              Anthropic::Models::ThinkingConfigDisabled
+            ),
+          tool_choice:
+            T.any(
+              Anthropic::Models::ToolChoiceAuto,
+              Anthropic::Internal::AnyHash,
+              Anthropic::Models::ToolChoiceAny,
+              Anthropic::Models::ToolChoiceTool,
+              Anthropic::Models::ToolChoiceNone
+            ),
+          tools:
+            T::Array[
+              T.any(
+                Anthropic::Models::Tool,
+                Anthropic::Internal::AnyHash,
+                Anthropic::Models::ToolBash20250124,
+                Anthropic::Models::ToolTextEditor20250124
+              )
+            ],
           top_k: Integer,
           top_p: Float,
           stream: T.noreturn,
-          request_options: T.nilable(T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash))
-        )
-          .returns(Anthropic::Helpers::Streaming::MessageStream)
+          request_options:
+            T.nilable(
+              T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash)
+            )
+        ).returns(Anthropic::Helpers::Streaming::MessageStream)
       end
       def stream(
         # The maximum number of tokens to generate before stopping.
@@ -579,7 +600,8 @@ module Anthropic
         # for streaming and non-streaming use cases, respectively.
         stream: true,
         request_options: {}
-      ); end
+      )
+      end
       sig do
         params(
           max_tokens: Integer,

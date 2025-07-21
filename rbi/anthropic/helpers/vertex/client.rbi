@@ -21,16 +21,26 @@ module Anthropic
         # @api private
         sig do
           override
-            .params(req: Anthropic::Internal::Transport::BaseClient::RequestComponents, opts: Anthropic::Internal::AnyHash)
+            .params(
+              req:
+                Anthropic::Internal::Transport::BaseClient::RequestComponents,
+              opts: Anthropic::Internal::AnyHash
+            )
             .returns(Anthropic::Internal::Transport::BaseClient::RequestInput)
         end
-        private def build_request(req, opts); end
+        private def build_request(req, opts)
+        end
 
         sig do
-          params(request_components: Anthropic::Internal::Transport::BaseClient::RequestComponents)
-            .returns(Anthropic::Internal::Transport::BaseClient::RequestComponents)
+          params(
+            request_components:
+              Anthropic::Internal::Transport::BaseClient::RequestComponents
+          ).returns(
+            Anthropic::Internal::Transport::BaseClient::RequestComponents
+          )
         end
-        private def fit_req_to_vertex_specs!(request_components) end
+        private def fit_req_to_vertex_specs!(request_components)
+        end
 
         sig do
           params(
@@ -51,7 +61,8 @@ module Anthropic
           timeout: Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS,
           initial_retry_delay: Anthropic::Client::DEFAULT_INITIAL_RETRY_DELAY,
           max_retry_delay: Anthropic::Client::DEFAULT_MAX_RETRY_DELAY
-        ) end
+        )
+        end
       end
     end
   end

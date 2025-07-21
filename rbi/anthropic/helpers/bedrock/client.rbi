@@ -21,10 +21,15 @@ module Anthropic
         # @api private
         sig do
           override
-            .params(req: Anthropic::Internal::Transport::BaseClient::RequestComponents, opts: Anthropic::Internal::AnyHash)
+            .params(
+              req:
+                Anthropic::Internal::Transport::BaseClient::RequestComponents,
+              opts: Anthropic::Internal::AnyHash
+            )
             .returns(Anthropic::Internal::Transport::BaseClient::RequestInput)
         end
-        private def build_request(req, opts); end
+        private def build_request(req, opts)
+        end
 
         sig do
           params(
@@ -45,10 +50,15 @@ module Anthropic
         end
 
         sig do
-          params(request_components: Anthropic::Internal::Transport::BaseClient::RequestComponents)
-            .returns(Anthropic::Internal::Transport::BaseClient::RequestComponents)
+          params(
+            request_components:
+              Anthropic::Internal::Transport::BaseClient::RequestComponents
+          ).returns(
+            Anthropic::Internal::Transport::BaseClient::RequestComponents
+          )
         end
-        private def fit_req_to_bedrock_specs!(request_components) end
+        private def fit_req_to_bedrock_specs!(request_components)
+        end
 
         sig do
           params(
@@ -75,7 +85,8 @@ module Anthropic
           aws_secret_key: nil,
           aws_session_token: nil,
           aws_profile: nil
-        ) end
+        )
+        end
       end
     end
   end
