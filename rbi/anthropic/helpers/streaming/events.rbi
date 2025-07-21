@@ -61,7 +61,11 @@ module Anthropic
         sig { returns(Anthropic::Models::Message) }
         attr_accessor :message
 
-        sig { params(message: Anthropic::Models::Message, type: Symbol).returns(T.attached_class) }
+        sig do
+          params(message: Anthropic::Models::Message, type: Symbol).returns(
+            T.attached_class
+          )
+        end
         def self.new(message:, type: :message_stop)
         end
       end
@@ -76,7 +80,13 @@ module Anthropic
         sig { returns(Anthropic::Models::ContentBlock) }
         attr_accessor :content_block
 
-        sig { params(index: Integer, content_block: Anthropic::Models::ContentBlock, type: Symbol).returns(T.attached_class) }
+        sig do
+          params(
+            index: Integer,
+            content_block: Anthropic::Models::ContentBlock,
+            type: Symbol
+          ).returns(T.attached_class)
+        end
         def self.new(index:, content_block:, type: :content_block_stop)
         end
       end

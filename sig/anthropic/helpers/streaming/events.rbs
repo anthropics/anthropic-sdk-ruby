@@ -10,18 +10,15 @@ module Anthropic
 
         attr_accessor snapshot: String
 
-        def initialize: (
-          ?type: :text,
-          text: String,
-          snapshot: String
-        ) -> void
+        def initialize: (text: String, snapshot: String, ?type: :text) -> void
       end
 
-      type citation_event = {
-        type: :citation,
-        citation: Anthropic::Models::CitationsDelta::citation,
-        snapshot: ::Array[Anthropic::Models::CitationsDelta::citation]
-      }
+      type citation_event =
+        {
+          type: :citation,
+          citation: Anthropic::Models::CitationsDelta::citation,
+          snapshot: ::Array[Anthropic::Models::CitationsDelta::citation]
+        }
 
       class CitationEvent < Anthropic::Internal::Type::BaseModel
         attr_accessor type: :citation
@@ -31,13 +28,14 @@ module Anthropic
         attr_accessor snapshot: ::Array[Anthropic::Models::CitationsDelta::citation]
 
         def initialize: (
-          ?type: :citation,
           citation: Anthropic::Models::CitationsDelta::citation,
-          snapshot: ::Array[Anthropic::Models::CitationsDelta::citation]
+          snapshot: ::Array[Anthropic::Models::CitationsDelta::citation],
+          ?type: :citation
         ) -> void
       end
 
-      type thinking_event = { type: :thinking, thinking: String, snapshot: String }
+      type thinking_event =
+        { type: :thinking, thinking: String, snapshot: String }
 
       class ThinkingEvent < Anthropic::Internal::Type::BaseModel
         attr_accessor type: :thinking
@@ -47,9 +45,9 @@ module Anthropic
         attr_accessor snapshot: String
 
         def initialize: (
-          ?type: :thinking,
           thinking: String,
-          snapshot: String
+          snapshot: String,
+          ?type: :thinking
         ) -> void
       end
 
@@ -60,13 +58,11 @@ module Anthropic
 
         attr_accessor signature: String
 
-        def initialize: (
-          ?type: :signature,
-          signature: String
-        ) -> void
+        def initialize: (signature: String, ?type: :signature) -> void
       end
 
-      type input_json_event = { type: :input_json, partial_json: String, snapshot: untyped }
+      type input_json_event =
+        { type: :input_json, partial_json: String, snapshot: untyped }
 
       class InputJsonEvent < Anthropic::Internal::Type::BaseModel
         attr_accessor type: :input_json
@@ -76,13 +72,14 @@ module Anthropic
         attr_accessor snapshot: untyped
 
         def initialize: (
-          ?type: :input_json,
           partial_json: String,
-          snapshot: untyped
+          snapshot: untyped,
+          ?type: :input_json
         ) -> void
       end
 
-      type message_stop_event = { type: :message_stop, message: Anthropic::Models::message }
+      type message_stop_event =
+        { type: :message_stop, message: Anthropic::Models::message }
 
       class MessageStopEvent < Anthropic::Models::RawMessageStopEvent
         attr_accessor type: :message_stop
@@ -90,16 +87,17 @@ module Anthropic
         attr_accessor message: Anthropic::Models::message
 
         def initialize: (
-          ?type: :message_stop,
-          message: Anthropic::Models::message
+          message: Anthropic::Models::message,
+          ?type: :message_stop
         ) -> void
       end
 
-      type content_block_stop_event = {
-        type: :content_block_stop,
-        index: Integer,
-        content_block: Anthropic::Models::content_block
-      }
+      type content_block_stop_event =
+        {
+          type: :content_block_stop,
+          index: Integer,
+          content_block: Anthropic::Models::content_block
+        }
 
       class ContentBlockStopEvent < Anthropic::Models::RawContentBlockStopEvent
         attr_accessor type: :content_block_stop
@@ -109,9 +107,9 @@ module Anthropic
         attr_accessor content_block: Anthropic::Models::content_block
 
         def initialize: (
-          ?type: :content_block_stop,
           index: Integer,
-          content_block: Anthropic::Models::content_block
+          content_block: Anthropic::Models::content_block,
+          ?type: :content_block_stop
         ) -> void
       end
     end
