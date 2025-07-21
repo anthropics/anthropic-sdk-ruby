@@ -76,17 +76,9 @@ module Anthropic
       CLAUDE_3_OPUS_20240229 =
         T.let(:"claude-3-opus-20240229", Anthropic::Model::TaggedSymbol)
 
-      # Balance of speed and intelligence
-      CLAUDE_3_SONNET_20240229 =
-        T.let(:"claude-3-sonnet-20240229", Anthropic::Model::TaggedSymbol)
-
       # Our previous most fast and cost-effective
       CLAUDE_3_HAIKU_20240307 =
         T.let(:"claude-3-haiku-20240307", Anthropic::Model::TaggedSymbol)
-
-      CLAUDE_2_1 = T.let(:"claude-2.1", Anthropic::Model::TaggedSymbol)
-
-      CLAUDE_2_0 = T.let(:"claude-2.0", Anthropic::Model::TaggedSymbol)
     end
   end
 end

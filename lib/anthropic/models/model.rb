@@ -38,13 +38,7 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::Model::CLAUDE_3_OPUS_20240229 }
 
-      variant const: -> { Anthropic::Models::Model::CLAUDE_3_SONNET_20240229 }
-
       variant const: -> { Anthropic::Models::Model::CLAUDE_3_HAIKU_20240307 }
-
-      variant const: -> { Anthropic::Models::Model::CLAUDE_2_1 }
-
-      variant const: -> { Anthropic::Models::Model::CLAUDE_2_0 }
 
       variant String
 
@@ -107,24 +101,8 @@ module Anthropic
       # information.
       CLAUDE_3_OPUS_20240229 = :"claude-3-opus-20240229"
 
-      # Balance of speed and intelligence
-      # @deprecated Will reach end-of-life on July 21st, 2025. Please migrate to a newer model.
-      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
-      # information.
-      CLAUDE_3_SONNET_20240229 = :"claude-3-sonnet-20240229"
-
       # Our previous most fast and cost-effective
       CLAUDE_3_HAIKU_20240307 = :"claude-3-haiku-20240307"
-
-      # @deprecated Will reach end-of-life on July 21st, 2025. Please migrate to a newer model.
-      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
-      # information.
-      CLAUDE_2_1 = :"claude-2.1"
-
-      # @deprecated Will reach end-of-life on July 21st, 2025. Please migrate to a newer model.
-      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
-      # information.
-      CLAUDE_2_0 = :"claude-2.0"
 
       # @!endgroup
     end
