@@ -1,5 +1,6 @@
+#!/usr/bin/env ruby
 # frozen_string_literal: true
-# typed: strong
+# typed: false
 
 require_relative "../lib/anthropic"
 
@@ -31,11 +32,11 @@ message = client.messages.create(
   tools: tools
 )
 
-puts "Initial response: #{JSON.pretty_generate(message)}"
+puts "Initial response: ", message
 
 raise "Expected tool_use stop_reason" unless message.stop_reason == :tool_use
 
-tool = message.content.find { |c| c.type == :tool_use }
+tool = message.content.grep(Anthropic::Models::ToolUseBlock).first
 
 raise "Tool use not found" unless tool
 
@@ -61,5 +62,4 @@ response = client.messages.create(
   tools: tools
 )
 
-puts
-puts "Final response: #{JSON.pretty_generate(response)}"
+puts "Final response: ", response
