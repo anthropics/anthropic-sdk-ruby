@@ -48,7 +48,7 @@ module Anthropic
         end
 
         sig { returns(T::Enumerator[String]) }
-        def text()
+        def text
         end
 
         sig { returns(Anthropic::Models::Message) }
