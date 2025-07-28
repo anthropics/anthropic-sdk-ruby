@@ -1,5 +1,29 @@
 # Changelog
 
+## 1.3.0 (2025-07-28)
+
+Full Changelog: [v1.2.0...v1.3.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.2.0...v1.3.0)
+
+### Features
+
+* **api:** removed older deprecated models ([47de6c2](https://github.com/anthropics/anthropic-sdk-ruby/commit/47de6c2860fabd344374aed733df1bcb17988454))
+* **client:** add beta stream implementation and fine grained tool streaming example ([2856b81](https://github.com/anthropics/anthropic-sdk-ruby/commit/2856b8119b99e6487093df3f49216ecc8d1bd3e3))
+* **client:** add beta stream implementation and fine grained tool streaming example ([bc87fd4](https://github.com/anthropics/anthropic-sdk-ruby/commit/bc87fd4afd94a48301fec548a0e7b21f44a24a59))
+
+
+### Bug Fixes
+
+* **internal:** ensure sorbet test always runs serially ([0b39a19](https://github.com/anthropics/anthropic-sdk-ruby/commit/0b39a1908587597ca5836872333541307f24bdf2))
+* **internal:** ensure vertex client test ordering ([#667](https://github.com/anthropics/anthropic-sdk-ruby/issues/667)) ([d7439fa](https://github.com/anthropics/anthropic-sdk-ruby/commit/d7439fa58664d9a533cacca6a299b3dbbe43ec7f))
+
+
+### Chores
+
+* add basic tool use example ([#107](https://github.com/anthropics/anthropic-sdk-ruby/issues/107)) ([4452119](https://github.com/anthropics/anthropic-sdk-ruby/commit/445211929b09ff0be9406aad1b3f3604d8bf3794))
+* add Darwin to PLATFORMS in Gemfile.lock ([#104](https://github.com/anthropics/anthropic-sdk-ruby/issues/104)) ([aa5bcbe](https://github.com/anthropics/anthropic-sdk-ruby/commit/aa5bcbedc48cc9a49ba14050fa3ad934a6f95c99))
+* **internal:** run formatter ([87ce979](https://github.com/anthropics/anthropic-sdk-ruby/commit/87ce979a06108f980e8c867d43166fbeeff02ec3))
+* update contribute.md ([aa928a0](https://github.com/anthropics/anthropic-sdk-ruby/commit/aa928a09f08250c9e6e93b884761eb35a9d5b6b4))
+
 ## 1.2.0 (2025-07-18)
 
 Full Changelog: [v1.1.1...v1.2.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.1.1...v1.2.0)
