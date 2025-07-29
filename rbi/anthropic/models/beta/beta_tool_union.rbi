@@ -20,6 +20,7 @@ module Anthropic
               Anthropic::Beta::BetaToolTextEditor20241022,
               Anthropic::Beta::BetaToolTextEditor20250124,
               Anthropic::Beta::BetaToolTextEditor20250429,
+              Anthropic::Beta::BetaToolTextEditor20250728,
               Anthropic::Beta::BetaWebSearchTool20250305
             )
           end

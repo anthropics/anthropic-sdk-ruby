@@ -465,6 +465,7 @@ module Anthropic
                       Anthropic::ToolBash20250124,
                       Anthropic::ToolTextEditor20250124,
                       Anthropic::ToolUnion::TextEditor20250429,
+                      Anthropic::ToolTextEditor20250728,
                       Anthropic::WebSearchTool20250305
                     )
                   ]
@@ -482,6 +483,7 @@ module Anthropic
                       Anthropic::ToolBash20250124::OrHash,
                       Anthropic::ToolTextEditor20250124::OrHash,
                       Anthropic::ToolUnion::TextEditor20250429::OrHash,
+                      Anthropic::ToolTextEditor20250728::OrHash,
                       Anthropic::WebSearchTool20250305::OrHash
                     )
                   ]
@@ -553,6 +555,7 @@ module Anthropic
                       Anthropic::ToolBash20250124::OrHash,
                       Anthropic::ToolTextEditor20250124::OrHash,
                       Anthropic::ToolUnion::TextEditor20250429::OrHash,
+                      Anthropic::ToolTextEditor20250728::OrHash,
                       Anthropic::WebSearchTool20250305::OrHash
                     )
                   ],
@@ -843,6 +846,7 @@ module Anthropic
                         Anthropic::ToolBash20250124,
                         Anthropic::ToolTextEditor20250124,
                         Anthropic::ToolUnion::TextEditor20250429,
+                        Anthropic::ToolTextEditor20250728,
                         Anthropic::WebSearchTool20250305
                       )
                     ],

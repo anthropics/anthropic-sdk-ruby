@@ -13,6 +13,8 @@ module Anthropic
 
       variant -> { Anthropic::ToolUnion::TextEditor20250429 }
 
+      variant -> { Anthropic::ToolTextEditor20250728 }
+
       variant -> { Anthropic::WebSearchTool20250305 }
 
       class TextEditor20250429 < Anthropic::Internal::Type::BaseModel
@@ -47,7 +49,7 @@ module Anthropic
       end
 
       # @!method self.variants
-      #   @return [Array(Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolUnion::TextEditor20250429, Anthropic::Models::WebSearchTool20250305)]
+      #   @return [Array(Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolUnion::TextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305)]
     end
   end
 end

@@ -23,6 +23,11 @@ module Anthropic
       #   @return [Integer]
       required :end_block_index, Integer
 
+      # @!attribute file_id
+      #
+      #   @return [String, nil]
+      required :file_id, String, nil?: true
+
       # @!attribute start_block_index
       #
       #   @return [Integer]
@@ -33,11 +38,12 @@ module Anthropic
       #   @return [Symbol, :content_block_location]
       required :type, const: :content_block_location
 
-      # @!method initialize(cited_text:, document_index:, document_title:, end_block_index:, start_block_index:, type: :content_block_location)
+      # @!method initialize(cited_text:, document_index:, document_title:, end_block_index:, file_id:, start_block_index:, type: :content_block_location)
       #   @param cited_text [String]
       #   @param document_index [Integer]
       #   @param document_title [String, nil]
       #   @param end_block_index [Integer]
+      #   @param file_id [String, nil]
       #   @param start_block_index [Integer]
       #   @param type [Symbol, :content_block_location]
     end

@@ -26,6 +26,9 @@ module Anthropic
         sig { returns(Integer) }
         attr_accessor :end_char_index
 
+        sig { returns(T.nilable(String)) }
+        attr_accessor :file_id
+
         sig { returns(Integer) }
         attr_accessor :start_char_index
 
@@ -38,6 +41,7 @@ module Anthropic
             document_index: Integer,
             document_title: T.nilable(String),
             end_char_index: Integer,
+            file_id: T.nilable(String),
             start_char_index: Integer,
             type: Symbol
           ).returns(T.attached_class)
@@ -47,6 +51,7 @@ module Anthropic
           document_index:,
           document_title:,
           end_char_index:,
+          file_id:,
           start_char_index:,
           type: :char_location
         )
@@ -59,6 +64,7 @@ module Anthropic
               document_index: Integer,
               document_title: T.nilable(String),
               end_char_index: Integer,
+              file_id: T.nilable(String),
               start_char_index: Integer,
               type: Symbol
             }
