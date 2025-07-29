@@ -2,26 +2,14 @@
 
 module Anthropic
   module Models
-    module ToolUnion
-      extend Anthropic::Internal::Type::Union
+    BetaToolTextEditor20250728 = Beta::BetaToolTextEditor20250728
 
-      Variants =
-        T.type_alias do
-          T.any(
-            Anthropic::Tool,
-            Anthropic::ToolBash20250124,
-            Anthropic::ToolTextEditor20250124,
-            Anthropic::ToolUnion::TextEditor20250429,
-            Anthropic::ToolTextEditor20250728,
-            Anthropic::WebSearchTool20250305
-          )
-        end
-
-      class TextEditor20250429 < Anthropic::Internal::Type::BaseModel
+    module Beta
+      class BetaToolTextEditor20250728 < Anthropic::Internal::Type::BaseModel
         OrHash =
           T.type_alias do
             T.any(
-              Anthropic::ToolUnion::TextEditor20250429,
+              Anthropic::Beta::BetaToolTextEditor20250728,
               Anthropic::Internal::AnyHash
             )
           end
@@ -36,19 +24,27 @@ module Anthropic
         attr_accessor :type
 
         # Create a cache control breakpoint at this content block.
-        sig { returns(T.nilable(Anthropic::CacheControlEphemeral)) }
+        sig { returns(T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)) }
         attr_reader :cache_control
 
         sig do
           params(
-            cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash)
+            cache_control:
+              T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash)
           ).void
         end
         attr_writer :cache_control
 
+        # Maximum number of characters to display when viewing a file. If not specified,
+        # defaults to displaying the full file.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :max_characters
+
         sig do
           params(
-            cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
+            cache_control:
+              T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+            max_characters: T.nilable(Integer),
             name: Symbol,
             type: Symbol
           ).returns(T.attached_class)
@@ -56,11 +52,14 @@ module Anthropic
         def self.new(
           # Create a cache control breakpoint at this content block.
           cache_control: nil,
+          # Maximum number of characters to display when viewing a file. If not specified,
+          # defaults to displaying the full file.
+          max_characters: nil,
           # Name of the tool.
           #
           # This is how the tool will be called by the model and in `tool_use` blocks.
           name: :str_replace_based_edit_tool,
-          type: :text_editor_20250429
+          type: :text_editor_20250728
         )
         end
 
@@ -69,16 +68,14 @@ module Anthropic
             {
               name: Symbol,
               type: Symbol,
-              cache_control: T.nilable(Anthropic::CacheControlEphemeral)
+              cache_control:
+                T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
+              max_characters: T.nilable(Integer)
             }
           )
         end
         def to_hash
         end
-      end
-
-      sig { override.returns(T::Array[Anthropic::ToolUnion::Variants]) }
-      def self.variants
       end
     end
   end

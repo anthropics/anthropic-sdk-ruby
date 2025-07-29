@@ -9,6 +9,7 @@ module Anthropic
           document_index: Integer,
           document_title: String?,
           end_page_number: Integer,
+          file_id: String?,
           start_page_number: Integer,
           type: :page_location
         }
@@ -22,6 +23,8 @@ module Anthropic
 
         attr_accessor end_page_number: Integer
 
+        attr_accessor file_id: String?
+
         attr_accessor start_page_number: Integer
 
         attr_accessor type: :page_location
@@ -31,6 +34,7 @@ module Anthropic
           document_index: Integer,
           document_title: String?,
           end_page_number: Integer,
+          file_id: String?,
           start_page_number: Integer,
           ?type: :page_location
         ) -> void
@@ -40,6 +44,7 @@ module Anthropic
           document_index: Integer,
           document_title: String?,
           end_page_number: Integer,
+          file_id: String?,
           start_page_number: Integer,
           type: :page_location
         }

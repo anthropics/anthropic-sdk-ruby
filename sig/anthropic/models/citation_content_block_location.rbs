@@ -6,6 +6,7 @@ module Anthropic
         document_index: Integer,
         document_title: String?,
         end_block_index: Integer,
+        file_id: String?,
         start_block_index: Integer,
         type: :content_block_location
       }
@@ -19,6 +20,8 @@ module Anthropic
 
       attr_accessor end_block_index: Integer
 
+      attr_accessor file_id: String?
+
       attr_accessor start_block_index: Integer
 
       attr_accessor type: :content_block_location
@@ -28,6 +31,7 @@ module Anthropic
         document_index: Integer,
         document_title: String?,
         end_block_index: Integer,
+        file_id: String?,
         start_block_index: Integer,
         ?type: :content_block_location
       ) -> void
@@ -37,6 +41,7 @@ module Anthropic
         document_index: Integer,
         document_title: String?,
         end_block_index: Integer,
+        file_id: String?,
         start_block_index: Integer,
         type: :content_block_location
       }

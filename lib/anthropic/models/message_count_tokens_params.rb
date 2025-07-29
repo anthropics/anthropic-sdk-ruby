@@ -216,7 +216,7 @@ module Anthropic
       #
       #   See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
       #
-      #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::MessageCountTokensTool::TextEditor20250429, Anthropic::Models::WebSearchTool20250305>, nil]
+      #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::MessageCountTokensTool::TextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305>, nil]
       optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::MessageCountTokensTool] }
 
       # @!method initialize(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
@@ -233,7 +233,7 @@ module Anthropic
       #
       #   @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
       #
-      #   @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::MessageCountTokensTool::TextEditor20250429, Anthropic::Models::WebSearchTool20250305>] Definitions of tools that the model may use.
+      #   @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::MessageCountTokensTool::TextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305>] Definitions of tools that the model may use.
       #
       #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 

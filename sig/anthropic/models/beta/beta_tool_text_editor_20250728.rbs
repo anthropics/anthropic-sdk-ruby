@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaToolTextEditor20250728 = Beta::BetaToolTextEditor20250728
+
+    module Beta
+      type beta_tool_text_editor20250728 =
+        {
+          name: :str_replace_based_edit_tool,
+          type: :text_editor_20250728,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          max_characters: Integer?
+        }
+
+      class BetaToolTextEditor20250728 < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: :str_replace_based_edit_tool
+
+        attr_accessor type: :text_editor_20250728
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        attr_accessor max_characters: Integer?
+
+        def initialize: (
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?max_characters: Integer?,
+          ?name: :str_replace_based_edit_tool,
+          ?type: :text_editor_20250728
+        ) -> void
+
+        def to_hash: -> {
+          name: :str_replace_based_edit_tool,
+          type: :text_editor_20250728,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          max_characters: Integer?
+        }
+      end
+    end
+  end
+end

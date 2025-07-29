@@ -12,6 +12,7 @@ module Anthropic
             Anthropic::ToolBash20250124,
             Anthropic::ToolTextEditor20250124,
             Anthropic::MessageCountTokensTool::TextEditor20250429,
+            Anthropic::ToolTextEditor20250728,
             Anthropic::WebSearchTool20250305
           )
         end

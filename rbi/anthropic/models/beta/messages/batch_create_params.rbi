@@ -529,6 +529,7 @@ module Anthropic
                         Anthropic::Beta::BetaToolTextEditor20241022,
                         Anthropic::Beta::BetaToolTextEditor20250124,
                         Anthropic::Beta::BetaToolTextEditor20250429,
+                        Anthropic::Beta::BetaToolTextEditor20250728,
                         Anthropic::Beta::BetaWebSearchTool20250305
                       )
                     ]
@@ -551,6 +552,7 @@ module Anthropic
                         Anthropic::Beta::BetaToolTextEditor20241022::OrHash,
                         Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
                         Anthropic::Beta::BetaToolTextEditor20250429::OrHash,
+                        Anthropic::Beta::BetaToolTextEditor20250728::OrHash,
                         Anthropic::Beta::BetaWebSearchTool20250305::OrHash
                       )
                     ]
@@ -632,6 +634,7 @@ module Anthropic
                         Anthropic::Beta::BetaToolTextEditor20241022::OrHash,
                         Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
                         Anthropic::Beta::BetaToolTextEditor20250429::OrHash,
+                        Anthropic::Beta::BetaToolTextEditor20250728::OrHash,
                         Anthropic::Beta::BetaWebSearchTool20250305::OrHash
                       )
                     ],
@@ -936,6 +939,7 @@ module Anthropic
                           Anthropic::Beta::BetaToolTextEditor20241022,
                           Anthropic::Beta::BetaToolTextEditor20250124,
                           Anthropic::Beta::BetaToolTextEditor20250429,
+                          Anthropic::Beta::BetaToolTextEditor20250728,
                           Anthropic::Beta::BetaWebSearchTool20250305
                         )
                       ],
