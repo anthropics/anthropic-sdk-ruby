@@ -22,6 +22,11 @@ jobs:
           repo: ${{ github.event.repository.full_name }}
           stainless-api-key: ${{ secrets.STAINLESS_API_KEY }}
 
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: false
+
       - name: Publish to RubyGems.org
         if: ${{ steps.release.outputs.releases_created }}
         run: |
