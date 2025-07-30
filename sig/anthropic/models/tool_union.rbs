@@ -4,39 +4,12 @@ module Anthropic
       Anthropic::Tool
       | Anthropic::ToolBash20250124
       | Anthropic::ToolTextEditor20250124
-      | Anthropic::ToolUnion::TextEditor20250429
+      | Anthropic::ToolTextEditor20250429
       | Anthropic::ToolTextEditor20250728
       | Anthropic::WebSearchTool20250305
 
     module ToolUnion
       extend Anthropic::Internal::Type::Union
-
-      type text_editor20250429 =
-        {
-          name: :str_replace_based_edit_tool,
-          type: :text_editor_20250429,
-          cache_control: Anthropic::CacheControlEphemeral?
-        }
-
-      class TextEditor20250429 < Anthropic::Internal::Type::BaseModel
-        attr_accessor name: :str_replace_based_edit_tool
-
-        attr_accessor type: :text_editor_20250429
-
-        attr_accessor cache_control: Anthropic::CacheControlEphemeral?
-
-        def initialize: (
-          ?cache_control: Anthropic::CacheControlEphemeral?,
-          ?name: :str_replace_based_edit_tool,
-          ?type: :text_editor_20250429
-        ) -> void
-
-        def to_hash: -> {
-          name: :str_replace_based_edit_tool,
-          type: :text_editor_20250429,
-          cache_control: Anthropic::CacheControlEphemeral?
-        }
-      end
 
       def self?.variants: -> ::Array[Anthropic::Models::tool_union]
     end
