@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.4.0 (2025-08-05)
+
+Full Changelog: [v1.3.0...v1.4.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.3.0...v1.4.0)
+
+### Features
+
+* **api:** add claude-opus-4-1-20250805 ([2477a05](https://github.com/anthropics/anthropic-sdk-ruby/commit/2477a05b8b26b047df178264db7d0764ca954954))
+* **api:** adds support for text_editor_20250728 tool ([dff36db](https://github.com/anthropics/anthropic-sdk-ruby/commit/dff36db0eb8b7077ba311f3815eb0065422c2fd4))
+* update streaming error message to say 'required' not 'recommended' ([6272ddd](https://github.com/anthropics/anthropic-sdk-ruby/commit/6272ddd9cd3ae0110afee98159516c3232c65832))
+
+
+### Chores
+
+* **ci:** setup Ruby on release job ([#111](https://github.com/anthropics/anthropic-sdk-ruby/issues/111)) ([bb5d08f](https://github.com/anthropics/anthropic-sdk-ruby/commit/bb5d08f052b3e65f70d345c45ce59e3e8fe282f3))
+* **client:** add TextEditor_20250429 tool ([3b344dc](https://github.com/anthropics/anthropic-sdk-ruby/commit/3b344dcf2dc759a0a01a1061573115c7a6c8a449))
+* **internal:** increase visibility of internal helper method ([72fb96c](https://github.com/anthropics/anthropic-sdk-ruby/commit/72fb96cdcdb2a6436aaf6d908f010ae16c08bd33))
+
 ## 1.3.0 (2025-07-28)
 
 Full Changelog: [v1.2.0...v1.3.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.2.0...v1.3.0)
