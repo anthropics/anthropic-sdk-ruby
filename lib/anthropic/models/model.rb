@@ -34,6 +34,8 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::Model::CLAUDE_4_OPUS_20250514 }
 
+      variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_1_20250805 }
+
       variant const: -> { Anthropic::Models::Model::CLAUDE_3_OPUS_LATEST }
 
       variant const: -> { Anthropic::Models::Model::CLAUDE_3_OPUS_20240229 }
@@ -88,6 +90,9 @@ module Anthropic
 
       # Our most capable model
       CLAUDE_4_OPUS_20250514 = :"claude-4-opus-20250514"
+
+      # Our most capable model
+      CLAUDE_OPUS_4_1_20250805 = :"claude-opus-4-1-20250805"
 
       # Excels at writing and complex tasks
       # @deprecated Will reach end-of-life on January 5th, 2026. Please migrate to a newer model.
