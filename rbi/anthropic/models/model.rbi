@@ -68,6 +68,10 @@ module Anthropic
       CLAUDE_4_OPUS_20250514 =
         T.let(:"claude-4-opus-20250514", Anthropic::Model::TaggedSymbol)
 
+      # Our most capable model
+      CLAUDE_OPUS_4_1_20250805 =
+        T.let(:"claude-opus-4-1-20250805", Anthropic::Model::TaggedSymbol)
+
       # Excels at writing and complex tasks
       CLAUDE_3_OPUS_LATEST =
         T.let(:"claude-3-opus-latest", Anthropic::Model::TaggedSymbol)
