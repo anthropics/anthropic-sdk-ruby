@@ -343,6 +343,23 @@ module Anthropic
 
         # @api private
         #
+        # Very private API, do not use
+        #
+        # @param request [Hash{Symbol=>Object}] .
+        #
+        #   @option request [Symbol] :method
+        #
+        #   @option request [URI::Generic] :url
+        #
+        #   @option request [Hash{String=>String}] :headers
+        #
+        #   @option request [Object] :body
+        #
+        # @return [Hash{Symbol, Object}]
+        protected def transform_request(request) = request
+
+        # @api private
+        #
         # @param request [Hash{Symbol=>Object}] .
         #
         #   @option request [Symbol] :method
@@ -366,6 +383,7 @@ module Anthropic
         # @raise [Anthropic::Errors::APIError]
         # @return [Array(Integer, Net::HTTPResponse, Enumerable<String>)]
         def send_request(request, redirect_count:, retry_count:, send_retry_header:)
+          request = transform_request(request)
           url, headers, max_retries, timeout = request.fetch_values(:url, :headers, :max_retries, :timeout)
           input = {**request.except(:timeout), deadline: Anthropic::Internal::Util.monotonic_secs + timeout}
 
