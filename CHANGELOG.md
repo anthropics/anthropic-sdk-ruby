@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.4.1 (2025-08-07)
+
+Full Changelog: [v1.4.0...v1.4.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.4.0...v1.4.1)
+
+### Bug Fixes
+
+* aws bedrock should sign each request follow retries ([#672](https://github.com/anthropics/anthropic-sdk-ruby/issues/672)) ([df9f4e1](https://github.com/anthropics/anthropic-sdk-ruby/commit/df9f4e1aa7e7211dab3d36dd9093092d20649359))
+
 ## 1.4.0 (2025-08-05)
 
 Full Changelog: [v1.3.0...v1.4.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.3.0...v1.4.0)
