@@ -50,10 +50,10 @@ module Anthropic
         def initialize(
           aws_region: nil,
           base_url: nil,
-          max_retries: DEFAULT_MAX_RETRIES,
-          timeout: DEFAULT_TIMEOUT_IN_SECONDS,
-          initial_retry_delay: DEFAULT_INITIAL_RETRY_DELAY,
-          max_retry_delay: DEFAULT_MAX_RETRY_DELAY,
+          max_retries: self.class::DEFAULT_MAX_RETRIES,
+          timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
+          initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
+          max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY,
           aws_access_key: nil,
           aws_secret_key: nil,
           aws_session_token: nil,
@@ -113,56 +113,33 @@ module Anthropic
 
         # @api private
         #
-        # @param req [Hash{Symbol=>Object}] .
+        # Very private API, do not use
         #
-        #   @option req [Symbol] :method
+        # @param request [Hash{Symbol=>Object}] .
         #
-        #   @option req [String, Array<String>] :path
+        #   @option request [Symbol] :method
         #
-        #   @option req [Hash{String=>Array<String>, String, nil}, nil] :query
+        #   @option request [URI::Generic] :url
         #
-        #   @option req [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}, nil] :headers
+        #   @option request [Hash{String=>String}] :headers
         #
-        #   @option req [Object, nil] :body
+        #   @option request [Object] :body
         #
-        #   @option req [Symbol, Integer, Array<Symbol, Integer>, Proc, nil] :unwrap
-        #
-        #   @option req [Class<Anthropic::Internal::Type::BasePage>, nil] :page
-        #
-        #   @option req [Class<Anthropic::Internal::Type::BaseStream>, nil] :stream
-        #
-        #   @option req [Anthropic::Internal::Type::Converter, Class, nil] :model
-        #
-        # @param opts [Hash{Symbol=>Object}] .
-        #
-        #   @option opts [String, nil] :idempotency_key
-        #
-        #   @option opts [Hash{String=>Array<String>, String, nil}, nil] :extra_query
-        #
-        #   @option opts [Hash{String=>String, nil}, nil] :extra_headers
-        #
-        #   @option opts [Object, nil] :extra_body
-        #
-        #   @option opts [Integer, nil] :max_retries
-        #
-        #   @option opts [Float, nil] :timeout
-        #
-        # @return [Hash{Symbol=>Object}]
-        private def build_request(req, opts)
-          fit_req_to_bedrock_specs!(req)
+        # @return [Hash{Symbol, Object}]
+        protected def transform_request(request)
+          fit_req_to_bedrock_specs!(request)
+          sliced = super.slice(
+            :method,
+            :url,
+            :headers,
+            :body
+          ).transform_keys(method: :http_method)
+          body = StringIO.new(body.to_a.join) if (body = sliced.fetch(:body)).is_a?(Enumerator)
 
-          request_input = super
+          signed = @signer.sign_request({**sliced, body: body})
 
-          signed_request = @signer.sign_request(
-            http_method: request_input[:method],
-            url: request_input[:url],
-            headers: request_input[:headers],
-            body: request_input[:body]
-          )
-
-          request_input[:headers].merge!(signed_request.headers)
-
-          request_input
+          headers = Anthropic::Internal::Util.normalized_headers(request.fetch(:headers), signed.headers)
+          {**request, headers: headers}
         end
 
         # @param aws_region [String, nil]
