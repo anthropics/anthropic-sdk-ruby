@@ -92,7 +92,11 @@ module Anthropic
 
           Variants =
             T.type_alias do
-              T.any(Anthropic::TextBlockParam, Anthropic::ImageBlockParam)
+              T.any(
+                Anthropic::TextBlockParam,
+                Anthropic::ImageBlockParam,
+                Anthropic::SearchResultBlockParam
+              )
             end
 
           sig do

@@ -17,6 +17,9 @@ module Anthropic
       # Document content, either specified directly as base64 data, as text, or as a reference via a URL.
       variant :document, -> { Anthropic::DocumentBlockParam }
 
+      # A search result block containing source, title, and content from search operations.
+      variant :search_result, -> { Anthropic::SearchResultBlockParam }
+
       # A block specifying internal thinking by the model.
       variant :thinking, -> { Anthropic::ThinkingBlockParam }
 
@@ -34,7 +37,7 @@ module Anthropic
       variant :web_search_tool_result, -> { Anthropic::WebSearchToolResultBlockParam }
 
       # @!method self.variants
-      #   @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::ServerToolUseBlockParam, Anthropic::Models::WebSearchToolResultBlockParam)]
+      #   @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::ServerToolUseBlockParam, Anthropic::Models::WebSearchToolResultBlockParam)]
     end
   end
 end

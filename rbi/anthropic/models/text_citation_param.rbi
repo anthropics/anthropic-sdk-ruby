@@ -11,7 +11,8 @@ module Anthropic
             Anthropic::CitationCharLocationParam,
             Anthropic::CitationPageLocationParam,
             Anthropic::CitationContentBlockLocationParam,
-            Anthropic::CitationWebSearchResultLocationParam
+            Anthropic::CitationWebSearchResultLocationParam,
+            Anthropic::CitationSearchResultLocationParam
           )
         end
 
