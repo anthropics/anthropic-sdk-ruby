@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.5.0 (2025-08-08)
+
+Full Changelog: [v1.4.1...v1.5.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.4.1...v1.5.0)
+
+### Features
+
+* **api:** search result content blocks ([9a94866](https://github.com/anthropics/anthropic-sdk-ruby/commit/9a9486664e10ce0d02967ab1d5360357ffb72a66))
+
+
+### Bug Fixes
+
+* aws bedrock base url ([#673](https://github.com/anthropics/anthropic-sdk-ruby/issues/673)) ([b2996b9](https://github.com/anthropics/anthropic-sdk-ruby/commit/b2996b9349b047c53232ecd63823110ad90c71c3))
+
 ## 1.4.1 (2025-08-07)
 
 Full Changelog: [v1.4.0...v1.4.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.4.0...v1.4.1)
