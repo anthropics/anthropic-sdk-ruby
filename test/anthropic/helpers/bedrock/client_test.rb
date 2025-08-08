@@ -59,7 +59,10 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
   end
 
   def test_header_signing
-    stub_request(:post, "http://localhost/v1/messages").to_return_json(status: 500, body: {})
+    stub_request(:post, "http://localhost/model/claude-3-7-sonnet-latest/invoke").to_return_json(
+      status: 500,
+      body: {}
+    )
 
     anthropic =
       Anthropic::BedrockClient.new(
@@ -84,5 +87,31 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
     end
 
     assert_equal(2, acc.uniq.length)
+  end
+
+  def test_request_base_url
+    uri = "https://bedrock-runtime.ca-west-1.amazonaws.com/model/claude-3-7-sonnet-latest/invoke"
+    stub_request(:post, uri).to_return_json(
+      status: 200,
+      body: {}
+    )
+
+    anthropic =
+      Anthropic::BedrockClient.new(
+        aws_region: "ca-west-1",
+        aws_access_key: "my-aws-access",
+        aws_secret_key: "my-aws-secret"
+      )
+
+    message =
+      anthropic.messages.create(
+        max_tokens: 1024,
+        messages: [{content: "Hello, world", role: :user}],
+        model: :"claude-3-7-sonnet-latest"
+      )
+
+    assert_pattern do
+      message => Anthropic::Models::Message
+    end
   end
 end

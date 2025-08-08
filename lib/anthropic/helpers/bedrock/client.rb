@@ -113,6 +113,60 @@ module Anthropic
 
         # @api private
         #
+        # @param req [Hash{Symbol=>Object}] .
+        #
+        #   @option req [Symbol] :method
+        #
+        #   @option req [String, Array<String>] :path
+        #
+        #   @option req [Hash{String=>Array<String>, String, nil}, nil] :query
+        #
+        #   @option req [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}, nil] :headers
+        #
+        #   @option req [Object, nil] :body
+        #
+        #   @option req [Symbol, Integer, Array<Symbol, Integer>, Proc, nil] :unwrap
+        #
+        #   @option req [Class<Anthropic::Internal::Type::BasePage>, nil] :page
+        #
+        #   @option req [Class<Anthropic::Internal::Type::BaseStream>, nil] :stream
+        #
+        #   @option req [Anthropic::Internal::Type::Converter, Class, nil] :model
+        #
+        # @param opts [Hash{Symbol=>Object}] .
+        #
+        #   @option opts [String, nil] :idempotency_key
+        #
+        #   @option opts [Hash{String=>Array<String>, String, nil}, nil] :extra_query
+        #
+        #   @option opts [Hash{String=>String, nil}, nil] :extra_headers
+        #
+        #   @option opts [Object, nil] :extra_body
+        #
+        #   @option opts [Integer, nil] :max_retries
+        #
+        #   @option opts [Float, nil] :timeout
+        #
+        # @return [Hash{Symbol=>Object}]
+        private def build_request(req, opts)
+          fit_req_to_bedrock_specs!(req)
+
+          request_input = super
+
+          signed_request = @signer.sign_request(
+            http_method: request_input[:method],
+            url: request_input[:url],
+            headers: request_input[:headers],
+            body: request_input[:body]
+          )
+
+          request_input[:headers].merge!(signed_request.headers)
+
+          request_input
+        end
+
+        # @api private
+        #
         # Very private API, do not use
         #
         # @param request [Hash{Symbol=>Object}] .
@@ -126,8 +180,7 @@ module Anthropic
         #   @option request [Object] :body
         #
         # @return [Hash{Symbol, Object}]
-        protected def transform_request(request)
-          fit_req_to_bedrock_specs!(request)
+        private def transform_request(request)
           sliced = super.slice(
             :method,
             :url,
