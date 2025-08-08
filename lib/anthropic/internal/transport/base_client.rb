@@ -356,7 +356,7 @@ module Anthropic
         #   @option request [Object] :body
         #
         # @return [Hash{Symbol, Object}]
-        protected def transform_request(request) = request
+        private def transform_request(request) = request
 
         # @api private
         #
