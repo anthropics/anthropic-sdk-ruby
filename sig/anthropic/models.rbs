@@ -53,6 +53,10 @@ module Anthropic
 
   class CitationsDelta = Anthropic::Models::CitationsDelta
 
+  class CitationSearchResultLocationParam = Anthropic::Models::CitationSearchResultLocationParam
+
+  class CitationsSearchResultLocation = Anthropic::Models::CitationsSearchResultLocation
+
   class CitationsWebSearchResultLocation = Anthropic::Models::CitationsWebSearchResultLocation
 
   class CitationWebSearchResultLocationParam = Anthropic::Models::CitationWebSearchResultLocationParam
@@ -138,6 +142,8 @@ module Anthropic
   class RedactedThinkingBlock = Anthropic::Models::RedactedThinkingBlock
 
   class RedactedThinkingBlockParam = Anthropic::Models::RedactedThinkingBlockParam
+
+  class SearchResultBlockParam = Anthropic::Models::SearchResultBlockParam
 
   class ServerToolUsage = Anthropic::Models::ServerToolUsage
 

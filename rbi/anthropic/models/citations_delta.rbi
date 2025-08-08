@@ -21,7 +21,8 @@ module Anthropic
               Anthropic::CitationCharLocation::OrHash,
               Anthropic::CitationPageLocation::OrHash,
               Anthropic::CitationContentBlockLocation::OrHash,
-              Anthropic::CitationsWebSearchResultLocation::OrHash
+              Anthropic::CitationsWebSearchResultLocation::OrHash,
+              Anthropic::CitationsSearchResultLocation::OrHash
             ),
           type: Symbol
         ).returns(T.attached_class)
@@ -49,7 +50,8 @@ module Anthropic
               Anthropic::CitationCharLocation,
               Anthropic::CitationPageLocation,
               Anthropic::CitationContentBlockLocation,
-              Anthropic::CitationsWebSearchResultLocation
+              Anthropic::CitationsWebSearchResultLocation,
+              Anthropic::CitationsSearchResultLocation
             )
           end
 

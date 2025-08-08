@@ -10,7 +10,7 @@ module Anthropic
       #   Citing a PDF results in `page_location`, plain text results in `char_location`,
       #   and content document results in `content_block_location`.
       #
-      #   @return [Array<Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation, Anthropic::Models::CitationsWebSearchResultLocation>, nil]
+      #   @return [Array<Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation, Anthropic::Models::CitationsWebSearchResultLocation, Anthropic::Models::CitationsSearchResultLocation>, nil]
       required :citations,
                -> {
                  Anthropic::Internal::Type::ArrayOf[union: Anthropic::TextCitation]
@@ -31,7 +31,7 @@ module Anthropic
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::TextBlock} for more details.
       #
-      #   @param citations [Array<Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation, Anthropic::Models::CitationsWebSearchResultLocation>, nil] Citations supporting the text block.
+      #   @param citations [Array<Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation, Anthropic::Models::CitationsWebSearchResultLocation, Anthropic::Models::CitationsSearchResultLocation>, nil] Citations supporting the text block.
       #
       #   @param text [String]
       #

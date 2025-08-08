@@ -21,7 +21,7 @@ module Anthropic
 
       # @!attribute content
       #
-      #   @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>, nil]
+      #   @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::SearchResultBlockParam>, nil]
       optional :content, union: -> { Anthropic::ToolResultBlockParam::Content }
 
       # @!attribute is_error
@@ -34,7 +34,7 @@ module Anthropic
       #
       #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
       #
-      #   @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>]
+      #   @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::SearchResultBlockParam>]
       #
       #   @param is_error [Boolean]
       #
@@ -57,12 +57,14 @@ module Anthropic
 
           variant :image, -> { Anthropic::ImageBlockParam }
 
+          variant :search_result, -> { Anthropic::SearchResultBlockParam }
+
           # @!method self.variants
-          #   @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
+          #   @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::SearchResultBlockParam)]
         end
 
         # @!method self.variants
-        #   @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>)]
+        #   @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::SearchResultBlockParam>)]
 
         # @type [Anthropic::Internal::Type::Converter]
         ContentArray =

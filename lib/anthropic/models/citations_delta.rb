@@ -5,7 +5,7 @@ module Anthropic
     class CitationsDelta < Anthropic::Internal::Type::BaseModel
       # @!attribute citation
       #
-      #   @return [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation, Anthropic::Models::CitationsWebSearchResultLocation]
+      #   @return [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation, Anthropic::Models::CitationsWebSearchResultLocation, Anthropic::Models::CitationsSearchResultLocation]
       required :citation, union: -> { Anthropic::CitationsDelta::Citation }
 
       # @!attribute type
@@ -14,7 +14,7 @@ module Anthropic
       required :type, const: :citations_delta
 
       # @!method initialize(citation:, type: :citations_delta)
-      #   @param citation [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation, Anthropic::Models::CitationsWebSearchResultLocation]
+      #   @param citation [Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation, Anthropic::Models::CitationsWebSearchResultLocation, Anthropic::Models::CitationsSearchResultLocation]
       #   @param type [Symbol, :citations_delta]
 
       # @see Anthropic::Models::CitationsDelta#citation
@@ -31,8 +31,10 @@ module Anthropic
 
         variant :web_search_result_location, -> { Anthropic::CitationsWebSearchResultLocation }
 
+        variant :search_result_location, -> { Anthropic::CitationsSearchResultLocation }
+
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation, Anthropic::Models::CitationsWebSearchResultLocation)]
+        #   @return [Array(Anthropic::Models::CitationCharLocation, Anthropic::Models::CitationPageLocation, Anthropic::Models::CitationContentBlockLocation, Anthropic::Models::CitationsWebSearchResultLocation, Anthropic::Models::CitationsSearchResultLocation)]
       end
     end
   end

@@ -31,7 +31,8 @@ module Anthropic
                   Anthropic::CitationCharLocation::OrHash,
                   Anthropic::CitationPageLocation::OrHash,
                   Anthropic::CitationContentBlockLocation::OrHash,
-                  Anthropic::CitationsWebSearchResultLocation::OrHash
+                  Anthropic::CitationsWebSearchResultLocation::OrHash,
+                  Anthropic::CitationsSearchResultLocation::OrHash
                 )
               ]
             ),
