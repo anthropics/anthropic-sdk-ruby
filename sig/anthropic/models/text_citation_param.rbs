@@ -5,6 +5,7 @@ module Anthropic
       | Anthropic::CitationPageLocationParam
       | Anthropic::CitationContentBlockLocationParam
       | Anthropic::CitationWebSearchResultLocationParam
+      | Anthropic::CitationSearchResultLocationParam
 
     module TextCitationParam
       extend Anthropic::Internal::Type::Union

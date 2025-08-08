@@ -49,7 +49,10 @@ module Anthropic
       module Content
         extend Anthropic::Internal::Type::Union
 
-        type content = Anthropic::TextBlockParam | Anthropic::ImageBlockParam
+        type content =
+          Anthropic::TextBlockParam
+          | Anthropic::ImageBlockParam
+          | Anthropic::SearchResultBlockParam
 
         module Content
           extend Anthropic::Internal::Type::Union

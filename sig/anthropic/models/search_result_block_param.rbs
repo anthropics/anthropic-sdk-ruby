@@ -1,0 +1,49 @@
+module Anthropic
+  module Models
+    type search_result_block_param =
+      {
+        content: ::Array[Anthropic::TextBlockParam],
+        source: String,
+        title: String,
+        type: :search_result,
+        cache_control: Anthropic::CacheControlEphemeral?,
+        citations: Anthropic::CitationsConfigParam
+      }
+
+    class SearchResultBlockParam < Anthropic::Internal::Type::BaseModel
+      attr_accessor content: ::Array[Anthropic::TextBlockParam]
+
+      attr_accessor source: String
+
+      attr_accessor title: String
+
+      attr_accessor type: :search_result
+
+      attr_accessor cache_control: Anthropic::CacheControlEphemeral?
+
+      attr_reader citations: Anthropic::CitationsConfigParam?
+
+      def citations=: (
+        Anthropic::CitationsConfigParam
+      ) -> Anthropic::CitationsConfigParam
+
+      def initialize: (
+        content: ::Array[Anthropic::TextBlockParam],
+        source: String,
+        title: String,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
+        ?citations: Anthropic::CitationsConfigParam,
+        ?type: :search_result
+      ) -> void
+
+      def to_hash: -> {
+        content: ::Array[Anthropic::TextBlockParam],
+        source: String,
+        title: String,
+        type: :search_result,
+        cache_control: Anthropic::CacheControlEphemeral?,
+        citations: Anthropic::CitationsConfigParam
+      }
+    end
+  end
+end
