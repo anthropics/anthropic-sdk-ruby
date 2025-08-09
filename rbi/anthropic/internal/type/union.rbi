@@ -16,7 +16,8 @@ module Anthropic
             T::Array[
               [
                 T.nilable(Symbol),
-                T.proc.returns(Anthropic::Internal::Type::Converter::Input)
+                T.proc.returns(Anthropic::Internal::Type::Converter::Input),
+                Anthropic::Internal::AnyHash
               ]
             ]
           )
@@ -25,7 +26,13 @@ module Anthropic
         end
 
         # @api private
-        sig { returns(T::Array[[T.nilable(Symbol), T.anything]]) }
+        sig do
+          returns(
+            T::Array[
+              [T.nilable(Symbol), T.anything, Anthropic::Internal::AnyHash]
+            ]
+          )
+        end
         protected def derefed_variants
         end
 
