@@ -5,9 +5,9 @@ module Anthropic
         include Anthropic::Internal::Type::Converter
         include Anthropic::Internal::Util::SorbetRuntimeSupport
 
-        private def self.known_variants: -> ::Array[[Symbol?, (^-> Anthropic::Internal::Type::Converter::input)]]
+        private def self.known_variants: -> ::Array[[Symbol?, (^-> Anthropic::Internal::Type::Converter::input), ::Hash[Symbol, top]]]
 
-        def self.derefed_variants: -> ::Array[[Symbol?, top]]
+        def self.derefed_variants: -> ::Array[[Symbol?, top, ::Hash[Symbol, top]]]
 
         def self.variants: -> ::Array[top]
 

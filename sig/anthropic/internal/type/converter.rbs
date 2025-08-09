@@ -39,6 +39,23 @@ module Anthropic
           | Anthropic::Internal::Type::Converter::input spec
         ) -> (^-> top)
 
+        def self.meta_info: (
+          {
+            const: (nil | bool | Integer | Float | Symbol)?,
+            enum: ^-> Anthropic::Internal::Type::Converter::input?,
+            union: ^-> Anthropic::Internal::Type::Converter::input?
+          }
+          | ^-> Anthropic::Internal::Type::Converter::input
+          | Anthropic::Internal::Type::Converter::input type_info,
+          {
+            const: (nil | bool | Integer | Float | Symbol)?,
+            enum: ^-> Anthropic::Internal::Type::Converter::input?,
+            union: ^-> Anthropic::Internal::Type::Converter::input?
+          }
+          | ^-> Anthropic::Internal::Type::Converter::input
+          | Anthropic::Internal::Type::Converter::input spec
+        ) -> ::Hash[Symbol, top]
+
         def self.new_coerce_state: (
           ?translate_names: bool
         ) -> Anthropic::Internal::Type::Converter::coerce_state

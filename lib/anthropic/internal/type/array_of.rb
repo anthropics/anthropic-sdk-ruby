@@ -148,6 +148,7 @@ module Anthropic
         #   @option spec [Boolean] :"nil?"
         def initialize(type_info, spec = {})
           @item_type_fn = Anthropic::Internal::Type::Converter.type_info(type_info || spec)
+          @meta = Anthropic::Internal::Type::Converter.meta_info(type_info, spec)
           @nilable = spec.fetch(:nil?, false)
         end
 
