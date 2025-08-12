@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.6.0 (2025-08-12)
+
+Full Changelog: [v1.5.0...v1.6.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.5.0...v1.6.0)
+
+### Features
+
+* **betas:** add context-1m-2025-08-07 ([5bb5064](https://github.com/anthropics/anthropic-sdk-ruby/commit/5bb506416852bcd0c893c643831ec6e52a2cc79d))
+
+
+### Chores
+
+* collect metadata from type DSL ([69114b1](https://github.com/anthropics/anthropic-sdk-ruby/commit/69114b159e3710c467cbb7c55b8b7526cb5ea8e7))
+* **internal:** update comment in script ([c5bd3b1](https://github.com/anthropics/anthropic-sdk-ruby/commit/c5bd3b144ad399c114e644437820a8785e7399f0))
+* **internal:** update test skipping reason ([6d7c586](https://github.com/anthropics/anthropic-sdk-ruby/commit/6d7c58606a88e6a34b16f19006e44dbf17d657c0))
+* update @stainless-api/prism-cli to v5.15.0 ([356427c](https://github.com/anthropics/anthropic-sdk-ruby/commit/356427c4ec83d134dbcccdf27915eee65e5e8daa))
+
 ## 1.5.0 (2025-08-08)
 
 Full Changelog: [v1.4.1...v1.5.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.4.1...v1.5.0)
