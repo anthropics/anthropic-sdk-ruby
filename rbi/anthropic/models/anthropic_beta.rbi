@@ -73,6 +73,8 @@ module Anthropic
           :"extended-cache-ttl-2025-04-11",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      CONTEXT_1M_2025_08_07 =
+        T.let(:"context-1m-2025-08-07", Anthropic::AnthropicBeta::TaggedSymbol)
     end
   end
 end
