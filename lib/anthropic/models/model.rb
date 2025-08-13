@@ -78,8 +78,14 @@ module Anthropic
       CLAUDE_3_5_SONNET_LATEST = :"claude-3-5-sonnet-latest"
 
       # Our previous most intelligent model
+      # @deprecated Will reach end-of-life on October 22, 2025. Please migrate to a newer model.
+      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
+      # information.
       CLAUDE_3_5_SONNET_20241022 = :"claude-3-5-sonnet-20241022"
 
+      # @deprecated Will reach end-of-life on October 22, 2025. Please migrate to a newer model.
+      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
+      # information.
       CLAUDE_3_5_SONNET_20240620 = :"claude-3-5-sonnet-20240620"
 
       # Our most capable model
