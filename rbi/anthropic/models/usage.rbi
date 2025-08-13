@@ -6,6 +6,15 @@ module Anthropic
       OrHash =
         T.type_alias { T.any(Anthropic::Usage, Anthropic::Internal::AnyHash) }
 
+      # Breakdown of cached tokens by TTL
+      sig { returns(T.nilable(Anthropic::CacheCreation)) }
+      attr_reader :cache_creation
+
+      sig do
+        params(cache_creation: T.nilable(Anthropic::CacheCreation::OrHash)).void
+      end
+      attr_writer :cache_creation
+
       # The number of input tokens used to create the cache entry.
       sig { returns(T.nilable(Integer)) }
       attr_accessor :cache_creation_input_tokens
@@ -39,6 +48,7 @@ module Anthropic
 
       sig do
         params(
+          cache_creation: T.nilable(Anthropic::CacheCreation::OrHash),
           cache_creation_input_tokens: T.nilable(Integer),
           cache_read_input_tokens: T.nilable(Integer),
           input_tokens: Integer,
@@ -48,6 +58,8 @@ module Anthropic
         ).returns(T.attached_class)
       end
       def self.new(
+        # Breakdown of cached tokens by TTL
+        cache_creation:,
         # The number of input tokens used to create the cache entry.
         cache_creation_input_tokens:,
         # The number of input tokens read from the cache.
@@ -66,6 +78,7 @@ module Anthropic
       sig do
         override.returns(
           {
+            cache_creation: T.nilable(Anthropic::CacheCreation),
             cache_creation_input_tokens: T.nilable(Integer),
             cache_read_input_tokens: T.nilable(Integer),
             input_tokens: Integer,

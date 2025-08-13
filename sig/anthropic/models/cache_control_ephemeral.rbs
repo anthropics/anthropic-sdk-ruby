@@ -1,13 +1,37 @@
 module Anthropic
   module Models
-    type cache_control_ephemeral = { type: :ephemeral }
+    type cache_control_ephemeral =
+      { type: :ephemeral, ttl: Anthropic::Models::CacheControlEphemeral::ttl }
 
     class CacheControlEphemeral < Anthropic::Internal::Type::BaseModel
       attr_accessor type: :ephemeral
 
-      def initialize: (?type: :ephemeral) -> void
+      attr_reader ttl: Anthropic::Models::CacheControlEphemeral::ttl?
 
-      def to_hash: -> { type: :ephemeral }
+      def ttl=: (
+        Anthropic::Models::CacheControlEphemeral::ttl
+      ) -> Anthropic::Models::CacheControlEphemeral::ttl
+
+      def initialize: (
+        ?ttl: Anthropic::Models::CacheControlEphemeral::ttl,
+        ?type: :ephemeral
+      ) -> void
+
+      def to_hash: -> {
+        type: :ephemeral,
+        ttl: Anthropic::Models::CacheControlEphemeral::ttl
+      }
+
+      type ttl = :"5m" | :"1h"
+
+      module TTL
+        extend Anthropic::Internal::Type::Enum
+
+        TTL_5M: :"5m"
+        TTL_1H: :"1h"
+
+        def self?.values: -> ::Array[Anthropic::Models::CacheControlEphemeral::ttl]
+      end
     end
   end
 end
