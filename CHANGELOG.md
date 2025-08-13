@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.7.0 (2025-08-13)
+
+Full Changelog: [v1.6.0...v1.7.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.6.0...v1.7.0)
+
+### Features
+
+* **api:** makes 1 hour TTL Cache Control generally available ([c2dbf3b](https://github.com/anthropics/anthropic-sdk-ruby/commit/c2dbf3bcc3137b53db4d0a5779a014d4c59609bc))
+
+
+### Chores
+
+* deprecate older claude-3-5 sonnet models ([#679](https://github.com/anthropics/anthropic-sdk-ruby/issues/679)) ([4a3fb20](https://github.com/anthropics/anthropic-sdk-ruby/commit/4a3fb2042b20ca34346e2fa914c77713e664b922))
+
 ## 1.6.0 (2025-08-12)
 
 Full Changelog: [v1.5.0...v1.6.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.5.0...v1.6.0)
