@@ -2,6 +2,7 @@ module Anthropic
   module Models
     type usage =
       {
+        cache_creation: Anthropic::CacheCreation?,
         cache_creation_input_tokens: Integer?,
         cache_read_input_tokens: Integer?,
         input_tokens: Integer,
@@ -11,6 +12,8 @@ module Anthropic
       }
 
     class Usage < Anthropic::Internal::Type::BaseModel
+      attr_accessor cache_creation: Anthropic::CacheCreation?
+
       attr_accessor cache_creation_input_tokens: Integer?
 
       attr_accessor cache_read_input_tokens: Integer?
@@ -24,6 +27,7 @@ module Anthropic
       attr_accessor service_tier: Anthropic::Models::Usage::service_tier?
 
       def initialize: (
+        cache_creation: Anthropic::CacheCreation?,
         cache_creation_input_tokens: Integer?,
         cache_read_input_tokens: Integer?,
         input_tokens: Integer,
@@ -33,6 +37,7 @@ module Anthropic
       ) -> void
 
       def to_hash: -> {
+        cache_creation: Anthropic::CacheCreation?,
         cache_creation_input_tokens: Integer?,
         cache_read_input_tokens: Integer?,
         input_tokens: Integer,

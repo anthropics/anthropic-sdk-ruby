@@ -1,0 +1,25 @@
+module Anthropic
+  module Models
+    type cache_creation =
+      {
+        :ephemeral_1h_input_tokens => Integer,
+        :ephemeral_5m_input_tokens => Integer
+      }
+
+    class CacheCreation < Anthropic::Internal::Type::BaseModel
+      attr_accessor ephemeral_1h_input_tokens: Integer
+
+      attr_accessor ephemeral_5m_input_tokens: Integer
+
+      def initialize: (
+        ephemeral_1h_input_tokens: Integer,
+        ephemeral_5m_input_tokens: Integer
+      ) -> void
+
+      def to_hash: -> {
+        :ephemeral_1h_input_tokens => Integer,
+        :ephemeral_5m_input_tokens => Integer
+      }
+    end
+  end
+end

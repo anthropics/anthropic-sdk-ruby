@@ -3,6 +3,12 @@
 module Anthropic
   module Models
     class Usage < Anthropic::Internal::Type::BaseModel
+      # @!attribute cache_creation
+      #   Breakdown of cached tokens by TTL
+      #
+      #   @return [Anthropic::Models::CacheCreation, nil]
+      required :cache_creation, -> { Anthropic::CacheCreation }, nil?: true
+
       # @!attribute cache_creation_input_tokens
       #   The number of input tokens used to create the cache entry.
       #
@@ -39,7 +45,9 @@ module Anthropic
       #   @return [Symbol, Anthropic::Models::Usage::ServiceTier, nil]
       required :service_tier, enum: -> { Anthropic::Usage::ServiceTier }, nil?: true
 
-      # @!method initialize(cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, output_tokens:, server_tool_use:, service_tier:)
+      # @!method initialize(cache_creation:, cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, output_tokens:, server_tool_use:, service_tier:)
+      #   @param cache_creation [Anthropic::Models::CacheCreation, nil] Breakdown of cached tokens by TTL
+      #
       #   @param cache_creation_input_tokens [Integer, nil] The number of input tokens used to create the cache entry.
       #
       #   @param cache_read_input_tokens [Integer, nil] The number of input tokens read from the cache.

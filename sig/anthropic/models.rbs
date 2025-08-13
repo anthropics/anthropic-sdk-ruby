@@ -37,6 +37,8 @@ module Anthropic
 
   class CacheControlEphemeral = Anthropic::Models::CacheControlEphemeral
 
+  class CacheCreation = Anthropic::Models::CacheCreation
+
   class CitationCharLocation = Anthropic::Models::CitationCharLocation
 
   class CitationCharLocationParam = Anthropic::Models::CitationCharLocationParam
