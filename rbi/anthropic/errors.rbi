@@ -60,10 +60,20 @@ module Anthropic
 
     class APIConnectionError < Anthropic::Errors::APIError
       sig { void }
-      attr_accessor :status
+      def status
+      end
+
+      sig { params(_: NilClass).void }
+      def status=(_)
+      end
 
       sig { void }
-      attr_accessor :body
+      def body
+      end
+
+      sig { params(_: NilClass).void }
+      def body=(_)
+      end
 
       # @api private
       sig do
