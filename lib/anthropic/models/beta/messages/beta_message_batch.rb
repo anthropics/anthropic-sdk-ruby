@@ -56,10 +56,7 @@ module Anthropic
           #   Processing status of the Message Batch.
           #
           #   @return [Symbol, Anthropic::Models::Beta::Messages::BetaMessageBatch::ProcessingStatus]
-          required :processing_status,
-                   enum: -> {
-                     Anthropic::Beta::Messages::BetaMessageBatch::ProcessingStatus
-                   }
+          required :processing_status, enum: -> { Anthropic::Beta::Messages::BetaMessageBatch::ProcessingStatus }
 
           # @!attribute request_counts
           #   Tallies requests within the Message Batch, categorized by their status.
