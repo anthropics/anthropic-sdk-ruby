@@ -540,8 +540,7 @@ module Anthropic
               ),
               page: T.nilable(T::Class[Anthropic::Internal::Type::BasePage[Anthropic::Internal::Type::BaseModel]]),
               stream: T.nilable(
-                T::Class[Anthropic::Internal::Type::BaseStream[T.anything,
-                                                               Anthropic::Internal::Type::BaseModel]]
+                T::Class[Anthropic::Internal::Type::BaseStream[T.anything, Anthropic::Internal::Type::BaseModel]]
               ),
               model: T.nilable(Anthropic::Internal::Type::Converter::Input),
               options: T.nilable(Anthropic::RequestOptions::OrHash)

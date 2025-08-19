@@ -15,9 +15,7 @@ module Anthropic
           #
           #   @return [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>]
           required :requests,
-                   -> {
-                     Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::Messages::BatchCreateParams::Request]
-                   }
+                   -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::Messages::BatchCreateParams::Request] }
 
           # @!attribute betas
           #   Optional header to specify the beta version(s) you want to use.
@@ -189,9 +187,7 @@ module Anthropic
               #
               #   @return [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>, nil]
               optional :mcp_servers,
-                       -> {
-                         Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaRequestMCPServerURLDefinition]
-                       }
+                       -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaRequestMCPServerURLDefinition] }
 
               # @!attribute metadata
               #   An object describing metadata about the request.
@@ -357,10 +353,7 @@ module Anthropic
               #   See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
               #
               #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaCodeExecutionTool20250522, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaToolTextEditor20250429, Anthropic::Models::Beta::BetaToolTextEditor20250728, Anthropic::Models::Beta::BetaWebSearchTool20250305>, nil]
-              optional :tools,
-                       -> {
-                         Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaToolUnion]
-                       }
+              optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaToolUnion] }
 
               # @!attribute top_k
               #   Only sample from the top K options for each subsequent token.
