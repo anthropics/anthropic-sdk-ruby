@@ -1,38 +1,39 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
-# typed: strong
 
 require_relative "../lib/anthropic"
 
-# gets API credentials from environment variable `ANTHROPIC_API_KEY`
 anthropic = Anthropic::Client.new
-
-pp("----- tools stream -----")
 
 # when using tools, the model may decide to call them during the response.
 # tool definitions follow JSON Schema format for input validation.
+
+class GetWeather < Anthropic::BaseModel
+  required :location, String, doc: "The city and state, e.g. San Francisco, CA"
+  required :unit,
+           Anthropic::EnumOf[:celsius, :fahrenheit],
+           doc: "The unit of temperature, either 'celsius' or 'fahrenheit'",
+           nil?: true
+
+  doc "Get the current weather in a given location"
+end
+
+class GetTime < Anthropic::BaseModel
+  required :timezone, String, doc: "The IANA time zone name, e.g. America/Los_Angeles"
+
+  doc "Get the current time in a given time zone"
+end
+
 stream = anthropic.messages.stream(
   max_tokens: 1024,
   model: "claude-sonnet-4-20250514",
-  tools: [
+  tools: [GetWeather, GetTime],
+  messages: [
     {
-      name: "get_weather",
-      description: "Get the weather at a specific location",
-      input_schema: {
-        type: "object",
-        properties: {
-          location: {type: "string", description: "The city and state, e.g. San Francisco, CA"},
-          unit: {
-            type: "string",
-            enum: %w[celsius fahrenheit],
-            description: "Unit for the output"
-          }
-        },
-        required: ["location"]
-      }
+      role: "user",
+      content: "What is the weather like right now in New York? Also what time is it there?"
     }
-  ],
-  messages: [{role: "user", content: "What is the weather in SF?"}]
+  ]
 )
 
 stream.each do |event|
@@ -46,4 +47,17 @@ stream.each do |event|
   end
 end
 
-puts
+message = stream.accumulated_message
+
+# find and print parsed tool use blocks:
+tool_uses = message.content.select { _1.type == :tool_use }
+tool_uses.each do |tool_use|
+  puts(<<-FMT)
+  Tool: #{tool_use.name}
+  JSON input:
+  #{tool_use.input}
+  Parsed object:
+  FMT
+
+  pp tool_use.parsed
+end

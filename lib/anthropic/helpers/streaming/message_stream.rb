@@ -63,6 +63,7 @@ module Anthropic
         # @return [Anthropic::Models::Message]
         def accumulated_message
           until_done
+          parse_tool_uses!(@accumated_message_snapshot) if @tool_models.any?
           @accumated_message_snapshot
         end
 
@@ -223,12 +224,51 @@ module Anthropic
 
         # @api private
         #
+        # Parse tool use blocks in the message using the provided tool models.
+        #
+        # @param message [Anthropic::Models::Message] The message to parse
+        #
+        # @return [Anthropic::Models::Message] The message with parsed tool uses
+        private def parse_tool_uses!(message)
+          return message unless message&.content
+
+          message.content.each_with_index do |content, index|
+            next unless content.type == :tool_use
+
+            next unless (model = @tool_models[content.name])
+
+            parsed =
+              begin
+                parsed_input = content.input.is_a?(String) ? JSON.parse(content.input) : content.input
+
+                Anthropic::Internal::Type::Converter.coerce(model, parsed_input)
+              rescue StandardError => e
+                e
+              end
+
+            message.content[index] = Anthropic::Models::ToolUseBlock.new(
+              id: content.id,
+              input: content.input,
+              name: content.name,
+              type: content.type,
+              parsed: parsed
+            )
+          end
+
+          message
+        end
+
+        # @api private
+        #
         # @param raw_stream [Anthropic::Internal::Type::BaseStream]
-        def initialize(raw_stream:)
+        # @param tool_models [Hash{String=>Class}] Mapping of tool names to model classes
+        def initialize(raw_stream:, tool_models: {})
           # The underlying Server-Sent Event stream from the Anthropic API.
           @raw_stream = raw_stream
           # Accumulated message state that builds up as events are processed.
           @accumated_message_snapshot = nil
+          # Mapping of tool names to model classes for parsing.
+          @tool_models = tool_models
           # Lazy enumerable that transforms raw events into consumable events.
           @iterator = iterator
         end
