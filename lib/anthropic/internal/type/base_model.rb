@@ -52,7 +52,6 @@ module Anthropic
           #
           #   @option spec [Boolean] :"nil?"
           private def add_field(name_sym, required:, type_info:, spec:)
-            meta = Anthropic::Internal::Type::Converter.meta_info(type_info, spec)
             type_fn, info =
               case type_info
               in Proc | Anthropic::Internal::Type::Converter | Class
@@ -60,6 +59,7 @@ module Anthropic
               in Hash
                 [Anthropic::Internal::Type::Converter.type_info(type_info), type_info]
               end
+            meta = Anthropic::Internal::Type::Converter.meta_info(type_info, spec)
 
             setter = :"#{name_sym}="
             api_name = info.fetch(:api_name, name_sym)
