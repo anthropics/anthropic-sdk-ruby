@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.7.1 (2025-08-22)
+
+Full Changelog: [v1.7.0...v1.7.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.7.0...v1.7.1)
+
+### Bug Fixes
+
+* bump sorbet version and fix new type errors from the breaking change ([3c4f15d](https://github.com/anthropics/anthropic-sdk-ruby/commit/3c4f15d8f4115d6da6d8589856e7654162f91110))
+
 ## 1.7.0 (2025-08-13)
 
 Full Changelog: [v1.6.0...v1.7.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.6.0...v1.7.0)

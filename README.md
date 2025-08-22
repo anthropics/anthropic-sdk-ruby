@@ -15,7 +15,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "anthropic", "~> 1.7.0"
+gem "anthropic", "~> 1.7.1"
 ```
 
 <!-- x-release-please-end -->
