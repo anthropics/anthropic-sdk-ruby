@@ -15,31 +15,19 @@ puts
 
 puts "Creating stream with fine-grained tool streaming beta header..."
 
+class MakeFile < Anthropic::BaseModel
+  required :filename, String
+  required :lines_of_text, Anthropic::ArrayOf[String]
+
+  doc "Write text to a file"
+end
+
 # Using the official example: write a long poem to demonstrate
 # how fine-grained streaming affects array parameter chunking
 stream = anthropic.messages.stream(
   max_tokens: 1024,
   model: "claude-sonnet-4-20250514",
-  tools: [
-    {
-      name: "make_file",
-      description: "Write text to a file",
-      input_schema: {
-        type: "object",
-        properties: {
-          filename: {
-            type: "string",
-            description: "The filename to write text to"
-          },
-          lines_of_text: {
-            type: "array",
-            description: "An array of lines of text to write to the file"
-          }
-        },
-        required: %w[filename lines_of_text]
-      }
-    }
-  ],
+  tools: [MakeFile],
   messages: [
     {
       role: "user",

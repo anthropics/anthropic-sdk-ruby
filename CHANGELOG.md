@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.8.0 (2025-08-25)
+
+Full Changelog: [v1.7.0...v1.8.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.7.0...v1.8.0)
+
+### Features
+
+* input schemas ([#660](https://github.com/anthropics/anthropic-sdk-ruby/issues/660)) ([3e062c0](https://github.com/anthropics/anthropic-sdk-ruby/commit/3e062c03b0fc964877095a34cb69de9ba63dfa19))
+
+
+### Bug Fixes
+
+* bump sorbet version and fix new type errors from the breaking change ([3c4f15d](https://github.com/anthropics/anthropic-sdk-ruby/commit/3c4f15d8f4115d6da6d8589856e7654162f91110))
+
+
+### Chores
+
+* add json schema comment for rubocop.yml ([3fce402](https://github.com/anthropics/anthropic-sdk-ruby/commit/3fce4021da72749b127adacee9436327d4b03f60))
+
 ## 1.7.0 (2025-08-13)
 
 Full Changelog: [v1.6.0...v1.7.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.6.0...v1.7.0)

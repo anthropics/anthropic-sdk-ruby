@@ -29,6 +29,14 @@ module Anthropic
       # Used by streaming helpers to reconstruct complete JSON input from deltas.
       optional :json_buf, String
 
+      response_only do
+        # @api public
+        #
+        # Parsed input data coerced to the tool's input schema model.
+        # Only present when tools are defined using the InputSchema DSL.
+        optional :parsed, Anthropic::Internal::Type::Unknown
+      end
+
       # @!method initialize(id:, input:, name:, type: :tool_use)
       #   @param id [String]
       #   @param input [Object]

@@ -180,10 +180,7 @@ module Anthropic
             #   [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
             #
             #   @return [Symbol, Anthropic::Models::Messages::BatchCreateParams::Request::Params::ServiceTier, nil]
-            optional :service_tier,
-                     enum: -> {
-                       Anthropic::Messages::BatchCreateParams::Request::Params::ServiceTier
-                     }
+            optional :service_tier, enum: -> { Anthropic::Messages::BatchCreateParams::Request::Params::ServiceTier }
 
             # @!attribute stop_sequences
             #   Custom text sequences that will cause the model to stop generating.

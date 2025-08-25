@@ -1,0 +1,315 @@
+# frozen_string_literal: true
+
+require_relative "../test_helper"
+
+class Anthropic::Test::InputSchemaTest < Minitest::Test
+  def test_misuse
+    test_cases = [
+      Anthropic::Internal::Type::HashOf[String],
+      Date,
+      Anthropic::Helpers::InputSchema::ArrayOf[Time]
+    ]
+
+    test_cases.each do |input|
+      assert_raises(ArgumentError) do
+        Anthropic::Helpers::InputSchema::JsonSchemaConverter.to_json_schema(input)
+      end
+    end
+  end
+
+  A1 = Anthropic::Helpers::InputSchema::ArrayOf[String]
+
+  E1 = Anthropic::Helpers::InputSchema::EnumOf[:one]
+
+  class M1 < Anthropic::Helpers::InputSchema::BaseModel
+    required :a, String
+    required :b, Integer, nil?: true
+    required :c, E1, nil?: true
+  end
+
+  class M2 < Anthropic::Helpers::InputSchema::BaseModel
+    required :type, const: :m2, doc: "Model M2"
+  end
+
+  class M3 < Anthropic::Helpers::InputSchema::BaseModel
+    required :type, const: :m3, doc: "Model M3"
+  end
+
+  U1 = Anthropic::Helpers::InputSchema::UnionOf[Integer, A1]
+  U2 = Anthropic::Helpers::InputSchema::UnionOf[M2, M3]
+  U3 = Anthropic::Helpers::InputSchema::UnionOf[A1, A1]
+
+  def test_coerce
+    cases = {
+      [A1, [:one]] => [{yes: 2}, ["one"]],
+      [E1, "one"] => [{yes: 1}, :one],
+      [E1, 1] => [{no: 1}, 1],
+      [U1, ["one"]] => [{yes: 2}, ["one"]],
+      [U2, ["one"]] => [{no: 1}, ["one"]],
+      [U2, {type: :m3}] => [{yes: 2}, M3]
+    }
+    cases.each do |lhs, rhs|
+      target, input = lhs
+      exactness, expect = rhs
+      state = Anthropic::Internal::Type::Converter.new_coerce_state
+      assert_pattern do
+        coerced = Anthropic::Internal::Type::Converter.coerce(target, input, state: state)
+        coerced => ^expect
+        state.fetch(:exactness).filter { _2.nonzero? }.to_h => ^exactness
+      end
+    end
+  end
+
+  def test_to_schema
+    cases = {
+      NilClass => {type: "null"},
+      Integer => {type: "integer"},
+      Float => {type: "number"},
+      String => {type: "string"},
+      Symbol => {type: "string"},
+      A1 => {type: "array", items: {type: "string"}},
+      Anthropic::Helpers::InputSchema::ArrayOf[String, nil?: true, doc: "a1"] => {
+        type: "array",
+        items: {type: %w[string null], description: "a1"}
+      },
+      E1 => {type: "string", enum: ["one"]},
+      M1 => {
+        type: "object",
+        properties: {
+          a: {type: "string"},
+          b: {type: %w[integer null]},
+          c: {anyOf: [{type: "string", enum: %w[one]}, {type: "null"}]}
+        },
+        required: %w[a b c],
+        additionalProperties: false
+      },
+      U1 => {
+        anyOf: [
+          {type: "integer"},
+          {type: "array", items: {type: "string"}}
+        ]
+      },
+      U2 => {
+        anyOf: [
+          {
+            type: "object",
+            properties: {type: {const: "m2"}},
+            required: %w[type],
+            additionalProperties: false
+          },
+          {
+            type: "object",
+            properties: {type: {const: "m3"}},
+            required: %w[type],
+            additionalProperties: false
+          }
+        ]
+      }
+    }
+    cases.each do |input, expected|
+      assert_pattern do
+        schema = Anthropic::Helpers::InputSchema::JsonSchemaConverter.to_json_schema(input)
+        assert_equal(expected, schema)
+      end
+    end
+  end
+
+  class M4 < Anthropic::Helpers::InputSchema::BaseModel
+    required :a, E1
+    required :b, E1, nil?: true
+    required :c, Anthropic::Helpers::InputSchema::ArrayOf[E1, nil?: true, doc: "nested"], nil?: true
+  end
+
+  A2 = Anthropic::Helpers::InputSchema::ArrayOf[E1, nil?: true]
+
+  class M5 < Anthropic::Helpers::InputSchema::BaseModel
+    required :a, A2, nil?: true
+    required :b, A2, nil?: true
+  end
+
+  class M6 < Anthropic::Helpers::InputSchema::BaseModel
+    required :a, String
+    required :b, -> { M6 }
+  end
+
+  class M7 < Anthropic::Helpers::InputSchema::BaseModel
+    required :a, -> { M5 }
+    required :b, M5
+  end
+
+  class M8 < Anthropic::Helpers::InputSchema::BaseModel
+    required :a, -> { M5 }
+    required :b, M5, nil?: true
+  end
+
+  class M9 < Anthropic::Helpers::InputSchema::BaseModel
+    required :a, -> { M10 }
+    required :b, -> { M10 }
+  end
+
+  class M10 < Anthropic::Helpers::InputSchema::BaseModel
+    required :b, -> { M9 }
+  end
+
+  class M11 < Anthropic::Helpers::InputSchema::BaseModel
+    required :a, U3
+    required :b, A1
+    required :c, A1
+  end
+
+  def test_definition_reusing
+    cases = {
+      M6 => {
+        :$defs =>
+          {
+            "" =>
+                {
+                  type: "object",
+                  properties: {a: {type: "string"}, b: {:$ref => "#/$defs/"}},
+                  required: %w[a b],
+                  additionalProperties: false
+                }
+          },
+        :$ref => "#/$defs/"
+      },
+      M7 => {
+        :$defs => {
+          ".a" => {
+            type: "object",
+            properties: {
+              a: {anyOf: [{:$ref => "#/$defs/.a/.a/[]"}, {type: "null"}]},
+              b: {anyOf: [{:$ref => "#/$defs/.a/.a/[]"}, {type: "null"}]}
+            },
+            required: %w[a b],
+            additionalProperties: false
+          },
+          ".a/.a/[]" => {
+            type: "array",
+            items: {anyOf: [{type: "string", enum: ["one"]}, {type: "null"}]}
+          }
+        },
+        :type => "object",
+        :properties => {a: {:$ref => "#/$defs/.a"}, b: {:$ref => "#/$defs/.a"}},
+        :required => %w[a b],
+        :additionalProperties => false
+      },
+      M8 => {
+        :$defs =>
+          {
+            ".a" => {
+              type: "object",
+              properties: {
+                a: {anyOf: [{:$ref => "#/$defs/.a/.a/[]"}, {type: "null"}]},
+                b: {anyOf: [{:$ref => "#/$defs/.a/.a/[]"}, {type: "null"}]}
+              },
+              required: %w[a b],
+              additionalProperties: false
+            },
+            ".a/.a/[]" => {
+              type: "array",
+              items: {anyOf: [{type: "string", enum: ["one"]}, {type: "null"}]}
+            }
+          },
+        :type => "object",
+        :properties => {
+          a: {:$ref => "#/$defs/.a"},
+          b: {anyOf: [{:$ref => "#/$defs/.a"}, {type: "null"}]}
+        },
+        :required => %w[a b],
+        :additionalProperties => false
+      },
+      M10 => {
+        :$defs =>
+          {
+            "" => {
+              type: "object",
+              properties: {
+                b: {
+                  type: "object",
+                  properties: {a: {:$ref => "#/$defs/"}, b: {:$ref => "#/$defs/"}},
+                  required: %w[a b],
+                  additionalProperties: false
+                }
+              },
+              required: ["b"],
+              additionalProperties: false
+            }
+          },
+        :$ref => "#/$defs/"
+      },
+      U3 => {
+        :$defs => {"?.0/[]" => {type: "array", items: {type: "string"}}},
+        :anyOf => [{:$ref => "#/$defs/?.0/[]"}, {:$ref => "#/$defs/?.0/[]"}]
+      },
+      M11 => {
+        :$defs => {".a/?.0/[]" => {type: "array", items: {type: "string"}}},
+        :type => "object",
+        :properties => {
+          a: {anyOf: [{:$ref => "#/$defs/.a/?.0/[]"}, {:$ref => "#/$defs/.a/?.0/[]"}]},
+          b: {:$ref => "#/$defs/.a/?.0/[]"},
+          c: {:$ref => "#/$defs/.a/?.0/[]"}
+        },
+        :required => %w[a b c],
+        :additionalProperties => false
+      }
+    }
+
+    cases.each do |input, expected|
+      schema = Anthropic::Helpers::InputSchema::JsonSchemaConverter.to_json_schema(input)
+      assert_pattern do
+        assert_equal(expected, schema)
+      end
+    end
+  end
+
+  class M12 < Anthropic::Helpers::InputSchema::BaseModel
+    required :a, Anthropic::Helpers::InputSchema::ParsedJson
+  end
+
+  def test_parsed_json
+    assert_pattern do
+      M12.new(a: {dog: "woof"}) => {a: {dog: "woof"}}
+    end
+
+    err = JSON::ParserError.new("unexpected token at 'invalid json'")
+
+    m1 = M12.new(a: err)
+    assert_raises(Anthropic::Errors::ConversionError) do
+      m1.a
+    end
+
+    m2 = Anthropic::Internal::Type::Converter.coerce(M12, {a: err})
+    assert_raises(Anthropic::Errors::ConversionError) do
+      m2.a
+    end
+  end
+
+  class M13 < Anthropic::Helpers::InputSchema::BaseModel
+    optional :a, A1
+    optional :b, A1, doc: "dog"
+    required :c, String, max_length: 3
+  end
+
+  def test_decorations
+    cases = {
+      M13 => {
+        :$defs => {".a/[]" => {type: "array", items: {type: "string"}}},
+        :type => "object",
+        :properties => {
+          a: {:$ref => "#/$defs/.a/[]"},
+          b: {allOf: [{:$ref => "#/$defs/.a/[]"}, {description: "dog"}]},
+          c: {type: "string", maxLength: 3}
+        },
+        :required => ["c"],
+        :additionalProperties => false
+      }
+    }
+
+    cases.each do |input, expected|
+      schema = Anthropic::Helpers::InputSchema::JsonSchemaConverter.to_json_schema(input)
+      assert_pattern do
+        assert_equal(expected, schema)
+      end
+    end
+  end
+end
