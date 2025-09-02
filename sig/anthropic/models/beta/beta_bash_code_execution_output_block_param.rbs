@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    class BetaBashCodeExecutionOutputBlockParam = Beta::BetaBashCodeExecutionOutputBlockParam
+
+    module Beta
+      type beta_bash_code_execution_output_block_param =
+        { file_id: String, type: :bash_code_execution_output }
+
+      class BetaBashCodeExecutionOutputBlockParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor file_id: String
+
+        attr_accessor type: :bash_code_execution_output
+
+        def initialize: (
+          file_id: String,
+          ?type: :bash_code_execution_output
+        ) -> void
+
+        def to_hash: -> { file_id: String, type: :bash_code_execution_output }
+      end
+    end
+  end
+end

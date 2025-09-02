@@ -11,6 +11,9 @@ module Anthropic
       sig { returns(Anthropic::ErrorObject::Variants) }
       attr_accessor :error
 
+      sig { returns(T.nilable(String)) }
+      attr_accessor :request_id
+
       sig { returns(Symbol) }
       attr_accessor :type
 
@@ -28,15 +31,20 @@ module Anthropic
               Anthropic::APIErrorObject::OrHash,
               Anthropic::OverloadedError::OrHash
             ),
+          request_id: T.nilable(String),
           type: Symbol
         ).returns(T.attached_class)
       end
-      def self.new(error:, type: :error)
+      def self.new(error:, request_id:, type: :error)
       end
 
       sig do
         override.returns(
-          { error: Anthropic::ErrorObject::Variants, type: Symbol }
+          {
+            error: Anthropic::ErrorObject::Variants,
+            request_id: T.nilable(String),
+            type: Symbol
+          }
         )
       end
       def to_hash

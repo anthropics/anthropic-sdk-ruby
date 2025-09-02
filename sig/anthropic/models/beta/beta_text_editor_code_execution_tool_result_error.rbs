@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    class BetaTextEditorCodeExecutionToolResultError = Beta::BetaTextEditorCodeExecutionToolResultError
+
+    module Beta
+      type beta_text_editor_code_execution_tool_result_error =
+        {
+          error_code: Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultError::error_code,
+          error_message: String?,
+          type: :text_editor_code_execution_tool_result_error
+        }
+
+      class BetaTextEditorCodeExecutionToolResultError < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultError::error_code
+
+        attr_accessor error_message: String?
+
+        attr_accessor type: :text_editor_code_execution_tool_result_error
+
+        def initialize: (
+          error_code: Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultError::error_code,
+          error_message: String?,
+          ?type: :text_editor_code_execution_tool_result_error
+        ) -> void
+
+        def to_hash: -> {
+          error_code: Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultError::error_code,
+          error_message: String?,
+          type: :text_editor_code_execution_tool_result_error
+        }
+
+        type error_code =
+          :invalid_tool_input
+          | :unavailable
+          | :too_many_requests
+          | :execution_time_exceeded
+          | :file_not_found
+
+        module ErrorCode
+          extend Anthropic::Internal::Type::Enum
+
+          INVALID_TOOL_INPUT: :invalid_tool_input
+          UNAVAILABLE: :unavailable
+          TOO_MANY_REQUESTS: :too_many_requests
+          EXECUTION_TIME_EXCEEDED: :execution_time_exceeded
+          FILE_NOT_FOUND: :file_not_found
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultError::error_code]
+        end
+      end
+    end
+  end
+end

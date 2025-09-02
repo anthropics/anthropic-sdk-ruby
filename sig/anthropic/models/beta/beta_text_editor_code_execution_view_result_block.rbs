@@ -1,0 +1,61 @@
+module Anthropic
+  module Models
+    class BetaTextEditorCodeExecutionViewResultBlock = Beta::BetaTextEditorCodeExecutionViewResultBlock
+
+    module Beta
+      type beta_text_editor_code_execution_view_result_block =
+        {
+          content: String,
+          file_type: Anthropic::Models::Beta::BetaTextEditorCodeExecutionViewResultBlock::file_type,
+          num_lines: Integer?,
+          start_line: Integer?,
+          total_lines: Integer?,
+          type: :text_editor_code_execution_view_result
+        }
+
+      class BetaTextEditorCodeExecutionViewResultBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: String
+
+        attr_accessor file_type: Anthropic::Models::Beta::BetaTextEditorCodeExecutionViewResultBlock::file_type
+
+        attr_accessor num_lines: Integer?
+
+        attr_accessor start_line: Integer?
+
+        attr_accessor total_lines: Integer?
+
+        attr_accessor type: :text_editor_code_execution_view_result
+
+        def initialize: (
+          content: String,
+          file_type: Anthropic::Models::Beta::BetaTextEditorCodeExecutionViewResultBlock::file_type,
+          num_lines: Integer?,
+          start_line: Integer?,
+          total_lines: Integer?,
+          ?type: :text_editor_code_execution_view_result
+        ) -> void
+
+        def to_hash: -> {
+          content: String,
+          file_type: Anthropic::Models::Beta::BetaTextEditorCodeExecutionViewResultBlock::file_type,
+          num_lines: Integer?,
+          start_line: Integer?,
+          total_lines: Integer?,
+          type: :text_editor_code_execution_view_result
+        }
+
+        type file_type = :text | :image | :pdf
+
+        module FileType
+          extend Anthropic::Internal::Type::Enum
+
+          TEXT: :text
+          IMAGE: :image
+          PDF: :pdf
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaTextEditorCodeExecutionViewResultBlock::file_type]
+        end
+      end
+    end
+  end
+end

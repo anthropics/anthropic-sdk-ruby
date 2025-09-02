@@ -1,19 +1,30 @@
 module Anthropic
   module Models
     type beta_error_response =
-      { error: Anthropic::Models::beta_error, type: :error }
+      {
+        error: Anthropic::Models::beta_error,
+        request_id: String?,
+        type: :error
+      }
 
     class BetaErrorResponse < Anthropic::Internal::Type::BaseModel
       attr_accessor error: Anthropic::Models::beta_error
+
+      attr_accessor request_id: String?
 
       attr_accessor type: :error
 
       def initialize: (
         error: Anthropic::Models::beta_error,
+        request_id: String?,
         ?type: :error
       ) -> void
 
-      def to_hash: -> { error: Anthropic::Models::beta_error, type: :error }
+      def to_hash: -> {
+        error: Anthropic::Models::beta_error,
+        request_id: String?,
+        type: :error
+      }
     end
   end
 end

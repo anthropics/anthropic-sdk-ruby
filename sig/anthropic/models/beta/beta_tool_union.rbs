@@ -8,6 +8,7 @@ module Anthropic
         | Anthropic::Beta::BetaToolBash20241022
         | Anthropic::Beta::BetaToolBash20250124
         | Anthropic::Beta::BetaCodeExecutionTool20250522
+        | Anthropic::Beta::BetaCodeExecutionTool20250825
         | Anthropic::Beta::BetaToolComputerUse20241022
         | Anthropic::Beta::BetaToolComputerUse20250124
         | Anthropic::Beta::BetaToolTextEditor20241022

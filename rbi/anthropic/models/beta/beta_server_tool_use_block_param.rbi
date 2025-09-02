@@ -95,6 +95,16 @@ module Anthropic
               :code_execution,
               Anthropic::Beta::BetaServerToolUseBlockParam::Name::TaggedSymbol
             )
+          BASH_CODE_EXECUTION =
+            T.let(
+              :bash_code_execution,
+              Anthropic::Beta::BetaServerToolUseBlockParam::Name::TaggedSymbol
+            )
+          TEXT_EDITOR_CODE_EXECUTION =
+            T.let(
+              :text_editor_code_execution,
+              Anthropic::Beta::BetaServerToolUseBlockParam::Name::TaggedSymbol
+            )
 
           sig do
             override.returns(
