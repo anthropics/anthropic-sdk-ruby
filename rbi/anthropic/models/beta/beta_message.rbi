@@ -144,6 +144,8 @@ module Anthropic
                   Anthropic::Beta::BetaServerToolUseBlock::OrHash,
                   Anthropic::Beta::BetaWebSearchToolResultBlock::OrHash,
                   Anthropic::Beta::BetaCodeExecutionToolResultBlock::OrHash,
+                  Anthropic::Beta::BetaBashCodeExecutionToolResultBlock::OrHash,
+                  Anthropic::Beta::BetaTextEditorCodeExecutionToolResultBlock::OrHash,
                   Anthropic::Beta::BetaMCPToolUseBlock::OrHash,
                   Anthropic::Beta::BetaMCPToolResultBlock::OrHash,
                   Anthropic::Beta::BetaContainerUploadBlock::OrHash

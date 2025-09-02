@@ -1,0 +1,49 @@
+module Anthropic
+  module Models
+    class BetaBashCodeExecutionToolResultBlockParam = Beta::BetaBashCodeExecutionToolResultBlockParam
+
+    module Beta
+      type beta_bash_code_execution_tool_result_block_param =
+        {
+          content: Anthropic::Models::Beta::BetaBashCodeExecutionToolResultBlockParam::content,
+          tool_use_id: String,
+          type: :bash_code_execution_tool_result,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+
+      class BetaBashCodeExecutionToolResultBlockParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: Anthropic::Models::Beta::BetaBashCodeExecutionToolResultBlockParam::content
+
+        attr_accessor tool_use_id: String
+
+        attr_accessor type: :bash_code_execution_tool_result
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        def initialize: (
+          content: Anthropic::Models::Beta::BetaBashCodeExecutionToolResultBlockParam::content,
+          tool_use_id: String,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?type: :bash_code_execution_tool_result
+        ) -> void
+
+        def to_hash: -> {
+          content: Anthropic::Models::Beta::BetaBashCodeExecutionToolResultBlockParam::content,
+          tool_use_id: String,
+          type: :bash_code_execution_tool_result,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+
+        type content =
+          Anthropic::Beta::BetaBashCodeExecutionToolResultErrorParam
+          | Anthropic::Beta::BetaBashCodeExecutionResultBlockParam
+
+        module Content
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaBashCodeExecutionToolResultBlockParam::content]
+        end
+      end
+    end
+  end
+end

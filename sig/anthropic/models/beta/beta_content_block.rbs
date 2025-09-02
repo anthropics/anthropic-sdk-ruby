@@ -11,6 +11,8 @@ module Anthropic
         | Anthropic::Beta::BetaServerToolUseBlock
         | Anthropic::Beta::BetaWebSearchToolResultBlock
         | Anthropic::Beta::BetaCodeExecutionToolResultBlock
+        | Anthropic::Beta::BetaBashCodeExecutionToolResultBlock
+        | Anthropic::Beta::BetaTextEditorCodeExecutionToolResultBlock
         | Anthropic::Beta::BetaMCPToolUseBlock
         | Anthropic::Beta::BetaMCPToolResultBlock
         | Anthropic::Beta::BetaContainerUploadBlock

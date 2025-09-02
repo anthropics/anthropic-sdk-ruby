@@ -39,6 +39,8 @@ module Anthropic
                 Anthropic::Beta::BetaServerToolUseBlock::OrHash,
                 Anthropic::Beta::BetaWebSearchToolResultBlock::OrHash,
                 Anthropic::Beta::BetaCodeExecutionToolResultBlock::OrHash,
+                Anthropic::Beta::BetaBashCodeExecutionToolResultBlock::OrHash,
+                Anthropic::Beta::BetaTextEditorCodeExecutionToolResultBlock::OrHash,
                 Anthropic::Beta::BetaMCPToolUseBlock::OrHash,
                 Anthropic::Beta::BetaMCPToolResultBlock::OrHash,
                 Anthropic::Beta::BetaContainerUploadBlock::OrHash
@@ -82,6 +84,8 @@ module Anthropic
                 Anthropic::Beta::BetaServerToolUseBlock,
                 Anthropic::Beta::BetaWebSearchToolResultBlock,
                 Anthropic::Beta::BetaCodeExecutionToolResultBlock,
+                Anthropic::Beta::BetaBashCodeExecutionToolResultBlock,
+                Anthropic::Beta::BetaTextEditorCodeExecutionToolResultBlock,
                 Anthropic::Beta::BetaMCPToolUseBlock,
                 Anthropic::Beta::BetaMCPToolResultBlock,
                 Anthropic::Beta::BetaContainerUploadBlock

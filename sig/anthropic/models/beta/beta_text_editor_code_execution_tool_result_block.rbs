@@ -1,0 +1,46 @@
+module Anthropic
+  module Models
+    class BetaTextEditorCodeExecutionToolResultBlock = Beta::BetaTextEditorCodeExecutionToolResultBlock
+
+    module Beta
+      type beta_text_editor_code_execution_tool_result_block =
+        {
+          content: Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultBlock::content,
+          tool_use_id: String,
+          type: :text_editor_code_execution_tool_result
+        }
+
+      class BetaTextEditorCodeExecutionToolResultBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultBlock::content
+
+        attr_accessor tool_use_id: String
+
+        attr_accessor type: :text_editor_code_execution_tool_result
+
+        def initialize: (
+          content: Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultBlock::content,
+          tool_use_id: String,
+          ?type: :text_editor_code_execution_tool_result
+        ) -> void
+
+        def to_hash: -> {
+          content: Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultBlock::content,
+          tool_use_id: String,
+          type: :text_editor_code_execution_tool_result
+        }
+
+        type content =
+          Anthropic::Beta::BetaTextEditorCodeExecutionToolResultError
+          | Anthropic::Beta::BetaTextEditorCodeExecutionViewResultBlock
+          | Anthropic::Beta::BetaTextEditorCodeExecutionCreateResultBlock
+          | Anthropic::Beta::BetaTextEditorCodeExecutionStrReplaceResultBlock
+
+        module Content
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultBlock::content]
+        end
+      end
+    end
+  end
+end
