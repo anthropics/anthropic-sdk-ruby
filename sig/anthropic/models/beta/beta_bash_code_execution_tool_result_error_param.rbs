@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    class BetaBashCodeExecutionToolResultErrorParam = Beta::BetaBashCodeExecutionToolResultErrorParam
+
+    module Beta
+      type beta_bash_code_execution_tool_result_error_param =
+        {
+          error_code: Anthropic::Models::Beta::BetaBashCodeExecutionToolResultErrorParam::error_code,
+          type: :bash_code_execution_tool_result_error
+        }
+
+      class BetaBashCodeExecutionToolResultErrorParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: Anthropic::Models::Beta::BetaBashCodeExecutionToolResultErrorParam::error_code
+
+        attr_accessor type: :bash_code_execution_tool_result_error
+
+        def initialize: (
+          error_code: Anthropic::Models::Beta::BetaBashCodeExecutionToolResultErrorParam::error_code,
+          ?type: :bash_code_execution_tool_result_error
+        ) -> void
+
+        def to_hash: -> {
+          error_code: Anthropic::Models::Beta::BetaBashCodeExecutionToolResultErrorParam::error_code,
+          type: :bash_code_execution_tool_result_error
+        }
+
+        type error_code =
+          :invalid_tool_input
+          | :unavailable
+          | :too_many_requests
+          | :execution_time_exceeded
+          | :output_file_too_large
+
+        module ErrorCode
+          extend Anthropic::Internal::Type::Enum
+
+          INVALID_TOOL_INPUT: :invalid_tool_input
+          UNAVAILABLE: :unavailable
+          TOO_MANY_REQUESTS: :too_many_requests
+          EXECUTION_TIME_EXCEEDED: :execution_time_exceeded
+          OUTPUT_FILE_TOO_LARGE: :output_file_too_large
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaBashCodeExecutionToolResultErrorParam::error_code]
+        end
+      end
+    end
+  end
+end

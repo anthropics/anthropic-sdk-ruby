@@ -1,19 +1,30 @@
 module Anthropic
   module Models
     type error_response =
-      { error: Anthropic::Models::error_object, type: :error }
+      {
+        error: Anthropic::Models::error_object,
+        request_id: String?,
+        type: :error
+      }
 
     class ErrorResponse < Anthropic::Internal::Type::BaseModel
       attr_accessor error: Anthropic::Models::error_object
+
+      attr_accessor request_id: String?
 
       attr_accessor type: :error
 
       def initialize: (
         error: Anthropic::Models::error_object,
+        request_id: String?,
         ?type: :error
       ) -> void
 
-      def to_hash: -> { error: Anthropic::Models::error_object, type: :error }
+      def to_hash: -> {
+        error: Anthropic::Models::error_object,
+        request_id: String?,
+        type: :error
+      }
     end
   end
 end

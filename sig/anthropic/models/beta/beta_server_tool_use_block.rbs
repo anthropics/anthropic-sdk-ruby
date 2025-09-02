@@ -34,13 +34,19 @@ module Anthropic
           type: :server_tool_use
         }
 
-        type name_ = :web_search | :code_execution
+        type name_ =
+          :web_search
+          | :code_execution
+          | :bash_code_execution
+          | :text_editor_code_execution
 
         module Name
           extend Anthropic::Internal::Type::Enum
 
           WEB_SEARCH: :web_search
           CODE_EXECUTION: :code_execution
+          BASH_CODE_EXECUTION: :bash_code_execution
+          TEXT_EDITOR_CODE_EXECUTION: :text_editor_code_execution
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaServerToolUseBlock::name_]
         end

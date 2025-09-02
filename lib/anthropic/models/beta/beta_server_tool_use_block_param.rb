@@ -47,6 +47,8 @@ module Anthropic
 
           WEB_SEARCH = :web_search
           CODE_EXECUTION = :code_execution
+          BASH_CODE_EXECUTION = :bash_code_execution
+          TEXT_EDITOR_CODE_EXECUTION = :text_editor_code_execution
 
           # @!method self.values
           #   @return [Array<Symbol>]
