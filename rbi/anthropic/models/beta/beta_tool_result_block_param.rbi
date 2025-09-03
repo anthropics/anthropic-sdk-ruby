@@ -113,7 +113,8 @@ module Anthropic
                 T.any(
                   Anthropic::Beta::BetaTextBlockParam,
                   Anthropic::Beta::BetaImageBlockParam,
-                  Anthropic::Beta::BetaSearchResultBlockParam
+                  Anthropic::Beta::BetaSearchResultBlockParam,
+                  Anthropic::Beta::BetaRequestDocumentBlock
                 )
               end
 

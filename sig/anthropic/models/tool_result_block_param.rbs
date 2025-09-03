@@ -53,6 +53,7 @@ module Anthropic
           Anthropic::TextBlockParam
           | Anthropic::ImageBlockParam
           | Anthropic::SearchResultBlockParam
+          | Anthropic::DocumentBlockParam
 
         module Content
           extend Anthropic::Internal::Type::Union
