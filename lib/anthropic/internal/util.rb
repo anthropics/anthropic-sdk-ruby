@@ -566,7 +566,7 @@ module Anthropic
         #
         # @return [Array(String, Enumerable<String>)]
         private def encode_multipart_streaming(body)
-          boundary = SecureRandom.urlsafe_base64(60)
+          boundary = SecureRandom.urlsafe_base64(30)
 
           closing = []
           strio = writable_enum do |y|
