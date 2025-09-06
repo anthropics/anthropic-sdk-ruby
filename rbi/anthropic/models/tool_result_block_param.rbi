@@ -95,7 +95,8 @@ module Anthropic
               T.any(
                 Anthropic::TextBlockParam,
                 Anthropic::ImageBlockParam,
-                Anthropic::SearchResultBlockParam
+                Anthropic::SearchResultBlockParam,
+                Anthropic::DocumentBlockParam
               )
             end
 
