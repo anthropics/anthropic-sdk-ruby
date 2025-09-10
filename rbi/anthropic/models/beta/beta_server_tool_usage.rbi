@@ -14,18 +14,33 @@ module Anthropic
             )
           end
 
+        # The number of web fetch tool requests.
+        sig { returns(Integer) }
+        attr_accessor :web_fetch_requests
+
         # The number of web search tool requests.
         sig { returns(Integer) }
         attr_accessor :web_search_requests
 
-        sig { params(web_search_requests: Integer).returns(T.attached_class) }
+        sig do
+          params(
+            web_fetch_requests: Integer,
+            web_search_requests: Integer
+          ).returns(T.attached_class)
+        end
         def self.new(
+          # The number of web fetch tool requests.
+          web_fetch_requests:,
           # The number of web search tool requests.
           web_search_requests:
         )
         end
 
-        sig { override.returns({ web_search_requests: Integer }) }
+        sig do
+          override.returns(
+            { web_fetch_requests: Integer, web_search_requests: Integer }
+          )
+        end
         def to_hash
         end
       end

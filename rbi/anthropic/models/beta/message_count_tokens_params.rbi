@@ -282,7 +282,8 @@ module Anthropic
                   Anthropic::Beta::BetaToolTextEditor20250124,
                   Anthropic::Beta::BetaToolTextEditor20250429,
                   Anthropic::Beta::BetaToolTextEditor20250728,
-                  Anthropic::Beta::BetaWebSearchTool20250305
+                  Anthropic::Beta::BetaWebSearchTool20250305,
+                  Anthropic::Beta::BetaWebFetchTool20250910
                 )
               ]
             )
@@ -306,7 +307,8 @@ module Anthropic
                   Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250429::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250728::OrHash,
-                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash
+                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash,
+                  Anthropic::Beta::BetaWebFetchTool20250910::OrHash
                 )
               ]
           ).void
@@ -366,7 +368,8 @@ module Anthropic
                   Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250429::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250728::OrHash,
-                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash
+                  Anthropic::Beta::BetaWebSearchTool20250305::OrHash,
+                  Anthropic::Beta::BetaWebFetchTool20250910::OrHash
                 )
               ],
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
@@ -582,7 +585,8 @@ module Anthropic
                     Anthropic::Beta::BetaToolTextEditor20250124,
                     Anthropic::Beta::BetaToolTextEditor20250429,
                     Anthropic::Beta::BetaToolTextEditor20250728,
-                    Anthropic::Beta::BetaWebSearchTool20250305
+                    Anthropic::Beta::BetaWebSearchTool20250305,
+                    Anthropic::Beta::BetaWebFetchTool20250910
                   )
                 ],
               betas:
@@ -643,7 +647,8 @@ module Anthropic
                 Anthropic::Beta::BetaToolTextEditor20250124,
                 Anthropic::Beta::BetaToolTextEditor20250429,
                 Anthropic::Beta::BetaToolTextEditor20250728,
-                Anthropic::Beta::BetaWebSearchTool20250305
+                Anthropic::Beta::BetaWebSearchTool20250305,
+                Anthropic::Beta::BetaWebFetchTool20250910
               )
             end
 

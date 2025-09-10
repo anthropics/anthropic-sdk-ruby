@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaWebFetchBlock = Beta::BetaWebFetchBlock
+
+    module Beta
+      type beta_web_fetch_block =
+        {
+          content: Anthropic::Beta::BetaDocumentBlock,
+          retrieved_at: String?,
+          type: :web_fetch_result,
+          url: String
+        }
+
+      class BetaWebFetchBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: Anthropic::Beta::BetaDocumentBlock
+
+        attr_accessor retrieved_at: String?
+
+        attr_accessor type: :web_fetch_result
+
+        attr_accessor url: String
+
+        def initialize: (
+          content: Anthropic::Beta::BetaDocumentBlock,
+          retrieved_at: String?,
+          url: String,
+          ?type: :web_fetch_result
+        ) -> void
+
+        def to_hash: -> {
+          content: Anthropic::Beta::BetaDocumentBlock,
+          retrieved_at: String?,
+          type: :web_fetch_result,
+          url: String
+        }
+      end
+    end
+  end
+end

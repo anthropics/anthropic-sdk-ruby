@@ -22,7 +22,7 @@ module Anthropic
       # @!attribute citations
       #
       #   @return [Anthropic::Models::CitationsConfigParam, nil]
-      optional :citations, -> { Anthropic::CitationsConfigParam }
+      optional :citations, -> { Anthropic::CitationsConfigParam }, nil?: true
 
       # @!attribute context
       #
@@ -39,7 +39,7 @@ module Anthropic
       #
       #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
       #
-      #   @param citations [Anthropic::Models::CitationsConfigParam]
+      #   @param citations [Anthropic::Models::CitationsConfigParam, nil]
       #
       #   @param context [String, nil]
       #

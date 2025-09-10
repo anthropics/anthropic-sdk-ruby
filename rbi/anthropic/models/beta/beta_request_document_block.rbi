@@ -47,7 +47,8 @@ module Anthropic
 
         sig do
           params(
-            citations: Anthropic::Beta::BetaCitationsConfigParam::OrHash
+            citations:
+              T.nilable(Anthropic::Beta::BetaCitationsConfigParam::OrHash)
           ).void
         end
         attr_writer :citations
@@ -70,7 +71,8 @@ module Anthropic
               ),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
-            citations: Anthropic::Beta::BetaCitationsConfigParam::OrHash,
+            citations:
+              T.nilable(Anthropic::Beta::BetaCitationsConfigParam::OrHash),
             context: T.nilable(String),
             title: T.nilable(String),
             type: Symbol
@@ -101,7 +103,7 @@ module Anthropic
               type: Symbol,
               cache_control:
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
-              citations: Anthropic::Beta::BetaCitationsConfigParam,
+              citations: T.nilable(Anthropic::Beta::BetaCitationsConfigParam),
               context: T.nilable(String),
               title: T.nilable(String)
             }

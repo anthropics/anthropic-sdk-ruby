@@ -37,7 +37,11 @@ module Anthropic
       sig { returns(T.nilable(Anthropic::CitationsConfigParam)) }
       attr_reader :citations
 
-      sig { params(citations: Anthropic::CitationsConfigParam::OrHash).void }
+      sig do
+        params(
+          citations: T.nilable(Anthropic::CitationsConfigParam::OrHash)
+        ).void
+      end
       attr_writer :citations
 
       sig { returns(T.nilable(String)) }
@@ -56,7 +60,7 @@ module Anthropic
               Anthropic::URLPDFSource::OrHash
             ),
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
-          citations: Anthropic::CitationsConfigParam::OrHash,
+          citations: T.nilable(Anthropic::CitationsConfigParam::OrHash),
           context: T.nilable(String),
           title: T.nilable(String),
           type: Symbol
@@ -85,7 +89,7 @@ module Anthropic
               ),
             type: Symbol,
             cache_control: T.nilable(Anthropic::CacheControlEphemeral),
-            citations: Anthropic::CitationsConfigParam,
+            citations: T.nilable(Anthropic::CitationsConfigParam),
             context: T.nilable(String),
             title: T.nilable(String)
           }

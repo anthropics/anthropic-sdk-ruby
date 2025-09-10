@@ -46,6 +46,7 @@ module Anthropic
           extend Anthropic::Internal::Type::Enum
 
           WEB_SEARCH = :web_search
+          WEB_FETCH = :web_fetch
           CODE_EXECUTION = :code_execution
           BASH_CODE_EXECUTION = :bash_code_execution
           TEXT_EDITOR_CODE_EXECUTION = :text_editor_code_execution
