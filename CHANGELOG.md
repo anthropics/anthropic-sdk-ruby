@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.9.0 (2025-09-10)
+
+Full Changelog: [v1.8.0...v1.9.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.8.0...v1.9.0)
+
+### Features
+
+* **api:** adds support for Documents in tool results ([91e23c1](https://github.com/anthropics/anthropic-sdk-ruby/commit/91e23c14525ba91fa63eab1ab901c7d8782aa6b3))
+* **api:** adds support for web_fetch_20250910 tool ([631783d](https://github.com/anthropics/anthropic-sdk-ruby/commit/631783ddbbcc0aab95172b3dd4d6cbd29e0ec507))
+
+
+### Bug Fixes
+
+* unnecessarily long multipart boundary length ([#124](https://github.com/anthropics/anthropic-sdk-ruby/issues/124))  ([69aa4c8](https://github.com/anthropics/anthropic-sdk-ruby/commit/69aa4c8c918b3d401933efaba6440164c6eb6962))
+
 ## 1.8.0 (2025-09-02)
 
 Full Changelog: [v1.7.0...v1.8.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.7.0...v1.8.0)
