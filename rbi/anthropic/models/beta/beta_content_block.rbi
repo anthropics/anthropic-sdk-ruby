@@ -18,6 +18,7 @@ module Anthropic
               Anthropic::Beta::BetaToolUseBlock,
               Anthropic::Beta::BetaServerToolUseBlock,
               Anthropic::Beta::BetaWebSearchToolResultBlock,
+              Anthropic::Beta::BetaWebFetchToolResultBlock,
               Anthropic::Beta::BetaCodeExecutionToolResultBlock,
               Anthropic::Beta::BetaBashCodeExecutionToolResultBlock,
               Anthropic::Beta::BetaTextEditorCodeExecutionToolResultBlock,

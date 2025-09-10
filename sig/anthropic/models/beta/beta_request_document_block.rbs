@@ -8,7 +8,7 @@ module Anthropic
           source: Anthropic::Models::Beta::BetaRequestDocumentBlock::source,
           type: :document,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
-          citations: Anthropic::Beta::BetaCitationsConfigParam,
+          citations: Anthropic::Beta::BetaCitationsConfigParam?,
           context: String?,
           title: String?
         }
@@ -20,11 +20,7 @@ module Anthropic
 
         attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
-        attr_reader citations: Anthropic::Beta::BetaCitationsConfigParam?
-
-        def citations=: (
-          Anthropic::Beta::BetaCitationsConfigParam
-        ) -> Anthropic::Beta::BetaCitationsConfigParam
+        attr_accessor citations: Anthropic::Beta::BetaCitationsConfigParam?
 
         attr_accessor context: String?
 
@@ -33,7 +29,7 @@ module Anthropic
         def initialize: (
           source: Anthropic::Models::Beta::BetaRequestDocumentBlock::source,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
-          ?citations: Anthropic::Beta::BetaCitationsConfigParam,
+          ?citations: Anthropic::Beta::BetaCitationsConfigParam?,
           ?context: String?,
           ?title: String?,
           ?type: :document
@@ -43,7 +39,7 @@ module Anthropic
           source: Anthropic::Models::Beta::BetaRequestDocumentBlock::source,
           type: :document,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
-          citations: Anthropic::Beta::BetaCitationsConfigParam,
+          citations: Anthropic::Beta::BetaCitationsConfigParam?,
           context: String?,
           title: String?
         }

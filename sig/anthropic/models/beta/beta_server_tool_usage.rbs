@@ -3,14 +3,23 @@ module Anthropic
     class BetaServerToolUsage = Beta::BetaServerToolUsage
 
     module Beta
-      type beta_server_tool_usage = { web_search_requests: Integer }
+      type beta_server_tool_usage =
+        { web_fetch_requests: Integer, web_search_requests: Integer }
 
       class BetaServerToolUsage < Anthropic::Internal::Type::BaseModel
+        attr_accessor web_fetch_requests: Integer
+
         attr_accessor web_search_requests: Integer
 
-        def initialize: (web_search_requests: Integer) -> void
+        def initialize: (
+          web_fetch_requests: Integer,
+          web_search_requests: Integer
+        ) -> void
 
-        def to_hash: -> { web_search_requests: Integer }
+        def to_hash: -> {
+          web_fetch_requests: Integer,
+          web_search_requests: Integer
+        }
       end
     end
   end

@@ -22,6 +22,7 @@ module Anthropic
               Anthropic::Beta::BetaToolResultBlockParam,
               Anthropic::Beta::BetaServerToolUseBlockParam,
               Anthropic::Beta::BetaWebSearchToolResultBlockParam,
+              Anthropic::Beta::BetaWebFetchToolResultBlockParam,
               Anthropic::Beta::BetaCodeExecutionToolResultBlockParam,
               Anthropic::Beta::BetaBashCodeExecutionToolResultBlockParam,
               Anthropic::Beta::BetaTextEditorCodeExecutionToolResultBlockParam,

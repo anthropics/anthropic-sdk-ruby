@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaCitationConfig = Beta::BetaCitationConfig
+
+    module Beta
+      type beta_citation_config = { enabled: bool }
+
+      class BetaCitationConfig < Anthropic::Internal::Type::BaseModel
+        attr_accessor enabled: bool
+
+        def initialize: (enabled: bool) -> void
+
+        def to_hash: -> { enabled: bool }
+      end
+    end
+  end
+end
