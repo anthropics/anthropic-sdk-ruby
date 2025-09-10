@@ -5,7 +5,7 @@ module Anthropic
         source: Anthropic::Models::DocumentBlockParam::source,
         type: :document,
         cache_control: Anthropic::CacheControlEphemeral?,
-        citations: Anthropic::CitationsConfigParam,
+        citations: Anthropic::CitationsConfigParam?,
         context: String?,
         title: String?
       }
@@ -17,11 +17,7 @@ module Anthropic
 
       attr_accessor cache_control: Anthropic::CacheControlEphemeral?
 
-      attr_reader citations: Anthropic::CitationsConfigParam?
-
-      def citations=: (
-        Anthropic::CitationsConfigParam
-      ) -> Anthropic::CitationsConfigParam
+      attr_accessor citations: Anthropic::CitationsConfigParam?
 
       attr_accessor context: String?
 
@@ -30,7 +26,7 @@ module Anthropic
       def initialize: (
         source: Anthropic::Models::DocumentBlockParam::source,
         ?cache_control: Anthropic::CacheControlEphemeral?,
-        ?citations: Anthropic::CitationsConfigParam,
+        ?citations: Anthropic::CitationsConfigParam?,
         ?context: String?,
         ?title: String?,
         ?type: :document
@@ -40,7 +36,7 @@ module Anthropic
         source: Anthropic::Models::DocumentBlockParam::source,
         type: :document,
         cache_control: Anthropic::CacheControlEphemeral?,
-        citations: Anthropic::CitationsConfigParam,
+        citations: Anthropic::CitationsConfigParam?,
         context: String?,
         title: String?
       }

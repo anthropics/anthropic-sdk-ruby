@@ -1,0 +1,49 @@
+module Anthropic
+  module Models
+    class BetaDocumentBlock = Beta::BetaDocumentBlock
+
+    module Beta
+      type beta_document_block =
+        {
+          citations: Anthropic::Beta::BetaCitationConfig?,
+          source: Anthropic::Models::Beta::BetaDocumentBlock::source,
+          title: String?,
+          type: :document
+        }
+
+      class BetaDocumentBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor citations: Anthropic::Beta::BetaCitationConfig?
+
+        attr_accessor source: Anthropic::Models::Beta::BetaDocumentBlock::source
+
+        attr_accessor title: String?
+
+        attr_accessor type: :document
+
+        def initialize: (
+          citations: Anthropic::Beta::BetaCitationConfig?,
+          source: Anthropic::Models::Beta::BetaDocumentBlock::source,
+          title: String?,
+          ?type: :document
+        ) -> void
+
+        def to_hash: -> {
+          citations: Anthropic::Beta::BetaCitationConfig?,
+          source: Anthropic::Models::Beta::BetaDocumentBlock::source,
+          title: String?,
+          type: :document
+        }
+
+        type source =
+          Anthropic::Beta::BetaBase64PDFSource
+          | Anthropic::Beta::BetaPlainTextSource
+
+        module Source
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaDocumentBlock::source]
+        end
+      end
+    end
+  end
+end

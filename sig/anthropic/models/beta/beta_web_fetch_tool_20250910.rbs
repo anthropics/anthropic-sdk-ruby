@@ -1,0 +1,59 @@
+module Anthropic
+  module Models
+    class BetaWebFetchTool20250910 = Beta::BetaWebFetchTool20250910
+
+    module Beta
+      type beta_web_fetch_tool20250910 =
+        {
+          name: :web_fetch,
+          type: :web_fetch_20250910,
+          allowed_domains: ::Array[String]?,
+          blocked_domains: ::Array[String]?,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          citations: Anthropic::Beta::BetaCitationsConfigParam?,
+          max_content_tokens: Integer?,
+          max_uses: Integer?
+        }
+
+      class BetaWebFetchTool20250910 < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: :web_fetch
+
+        attr_accessor type: :web_fetch_20250910
+
+        attr_accessor allowed_domains: ::Array[String]?
+
+        attr_accessor blocked_domains: ::Array[String]?
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        attr_accessor citations: Anthropic::Beta::BetaCitationsConfigParam?
+
+        attr_accessor max_content_tokens: Integer?
+
+        attr_accessor max_uses: Integer?
+
+        def initialize: (
+          ?allowed_domains: ::Array[String]?,
+          ?blocked_domains: ::Array[String]?,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?citations: Anthropic::Beta::BetaCitationsConfigParam?,
+          ?max_content_tokens: Integer?,
+          ?max_uses: Integer?,
+          ?name: :web_fetch,
+          ?type: :web_fetch_20250910
+        ) -> void
+
+        def to_hash: -> {
+          name: :web_fetch,
+          type: :web_fetch_20250910,
+          allowed_domains: ::Array[String]?,
+          blocked_domains: ::Array[String]?,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          citations: Anthropic::Beta::BetaCitationsConfigParam?,
+          max_content_tokens: Integer?,
+          max_uses: Integer?
+        }
+      end
+    end
+  end
+end

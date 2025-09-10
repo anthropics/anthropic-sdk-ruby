@@ -90,6 +90,11 @@ module Anthropic
               :web_search,
               Anthropic::Beta::BetaServerToolUseBlockParam::Name::TaggedSymbol
             )
+          WEB_FETCH =
+            T.let(
+              :web_fetch,
+              Anthropic::Beta::BetaServerToolUseBlockParam::Name::TaggedSymbol
+            )
           CODE_EXECUTION =
             T.let(
               :code_execution,

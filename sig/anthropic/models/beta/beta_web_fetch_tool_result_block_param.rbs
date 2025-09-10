@@ -1,0 +1,49 @@
+module Anthropic
+  module Models
+    class BetaWebFetchToolResultBlockParam = Beta::BetaWebFetchToolResultBlockParam
+
+    module Beta
+      type beta_web_fetch_tool_result_block_param =
+        {
+          content: Anthropic::Models::Beta::BetaWebFetchToolResultBlockParam::content,
+          tool_use_id: String,
+          type: :web_fetch_tool_result,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+
+      class BetaWebFetchToolResultBlockParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: Anthropic::Models::Beta::BetaWebFetchToolResultBlockParam::content
+
+        attr_accessor tool_use_id: String
+
+        attr_accessor type: :web_fetch_tool_result
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        def initialize: (
+          content: Anthropic::Models::Beta::BetaWebFetchToolResultBlockParam::content,
+          tool_use_id: String,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?type: :web_fetch_tool_result
+        ) -> void
+
+        def to_hash: -> {
+          content: Anthropic::Models::Beta::BetaWebFetchToolResultBlockParam::content,
+          tool_use_id: String,
+          type: :web_fetch_tool_result,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+
+        type content =
+          Anthropic::Beta::BetaWebFetchToolResultErrorBlockParam
+          | Anthropic::Beta::BetaWebFetchBlockParam
+
+        module Content
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaWebFetchToolResultBlockParam::content]
+        end
+      end
+    end
+  end
+end

@@ -66,6 +66,11 @@ module Anthropic
               :web_search,
               Anthropic::Beta::BetaServerToolUseBlock::Name::TaggedSymbol
             )
+          WEB_FETCH =
+            T.let(
+              :web_fetch,
+              Anthropic::Beta::BetaServerToolUseBlock::Name::TaggedSymbol
+            )
           CODE_EXECUTION =
             T.let(
               :code_execution,
