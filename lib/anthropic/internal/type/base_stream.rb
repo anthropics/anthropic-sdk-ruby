@@ -58,6 +58,11 @@ module Anthropic
 
         alias_method :enum_for, :to_enum
 
+        # @api public
+        #
+        # @return [Net::HTTPResponse]
+        def response = @response
+
         # @api private
         #
         # @param model [Class, Anthropic::Internal::Type::Converter]
