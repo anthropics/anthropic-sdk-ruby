@@ -4,6 +4,8 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Anthropic::Test::ResourceTest
   def test_create_required_params
+    skip("prism validates based on the non-beta endpoint")
+
     response =
       @anthropic.beta.messages.batches.create(
         requests: [
