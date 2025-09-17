@@ -33,6 +33,9 @@ module Anthropic
       sig { returns(T.nilable(Integer)) }
       attr_accessor :status
 
+      sig { returns(T.nilable(T::Hash[String, String])) }
+      attr_accessor :headers
+
       sig { returns(T.nilable(T.anything)) }
       attr_accessor :body
 
@@ -41,6 +44,7 @@ module Anthropic
         params(
           url: URI::Generic,
           status: T.nilable(Integer),
+          headers: T.nilable(T::Hash[String, String]),
           body: T.nilable(Object),
           request: NilClass,
           response: NilClass,
@@ -50,6 +54,7 @@ module Anthropic
       def self.new(
         url:,
         status: nil,
+        headers: nil,
         body: nil,
         request: nil,
         response: nil,
@@ -70,6 +75,7 @@ module Anthropic
         params(
           url: URI::Generic,
           status: NilClass,
+          headers: T.nilable(T::Hash[String, String]),
           body: NilClass,
           request: NilClass,
           response: NilClass,
@@ -79,6 +85,7 @@ module Anthropic
       def self.new(
         url:,
         status: nil,
+        headers: nil,
         body: nil,
         request: nil,
         response: nil,
@@ -93,6 +100,7 @@ module Anthropic
         params(
           url: URI::Generic,
           status: NilClass,
+          headers: T.nilable(T::Hash[String, String]),
           body: NilClass,
           request: NilClass,
           response: NilClass,
@@ -102,6 +110,7 @@ module Anthropic
       def self.new(
         url:,
         status: nil,
+        headers: nil,
         body: nil,
         request: nil,
         response: nil,
@@ -116,13 +125,22 @@ module Anthropic
         params(
           url: URI::Generic,
           status: Integer,
+          headers: T.nilable(T::Hash[String, String]),
           body: T.nilable(Object),
           request: NilClass,
           response: NilClass,
           message: T.nilable(String)
         ).returns(T.attached_class)
       end
-      def self.for(url:, status:, body:, request:, response:, message: nil)
+      def self.for(
+        url:,
+        status:,
+        headers:,
+        body:,
+        request:,
+        response:,
+        message: nil
+      )
       end
 
       sig { returns(Integer) }
@@ -133,13 +151,22 @@ module Anthropic
         params(
           url: URI::Generic,
           status: Integer,
+          headers: T.nilable(T::Hash[String, String]),
           body: T.nilable(Object),
           request: NilClass,
           response: NilClass,
           message: T.nilable(String)
         ).returns(T.attached_class)
       end
-      def self.new(url:, status:, body:, request:, response:, message: nil)
+      def self.new(
+        url:,
+        status:,
+        headers:,
+        body:,
+        request:,
+        response:,
+        message: nil
+      )
       end
     end
 
