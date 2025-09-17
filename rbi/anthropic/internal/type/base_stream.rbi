@@ -27,6 +27,12 @@ module Anthropic
           end
         end
 
+        sig { returns(Integer) }
+        attr_reader :status
+
+        sig { returns(T::Hash[String, String]) }
+        attr_reader :headers
+
         sig { void }
         def close
         end
@@ -51,6 +57,7 @@ module Anthropic
               T.any(T::Class[T.anything], Anthropic::Internal::Type::Converter),
             url: URI::Generic,
             status: Integer,
+            headers: T::Hash[String, String],
             response: Net::HTTPResponse,
             unwrap:
               T.any(
@@ -62,7 +69,15 @@ module Anthropic
             stream: T::Enumerable[Message]
           ).void
         end
-        def initialize(model:, url:, status:, response:, unwrap:, stream:)
+        def initialize(
+          model:,
+          url:,
+          status:,
+          headers:,
+          response:,
+          unwrap:,
+          stream:
+        )
         end
 
         # @api private
