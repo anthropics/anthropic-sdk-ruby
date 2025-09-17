@@ -43,6 +43,7 @@ module Anthropic
               err = Anthropic::Errors::APIStatusError.for(
                 url: @url,
                 status: @status,
+                headers: @headers,
                 body: decoded,
                 request: nil,
                 response: @response

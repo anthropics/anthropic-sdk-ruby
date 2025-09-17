@@ -47,7 +47,7 @@ module Anthropic
           # @api private
           #
           # @param status [Integer]
-          # @param headers [Hash{String=>String}, Net::HTTPHeader]
+          # @param headers [Hash{String=>String}]
           #
           # @return [Boolean]
           def should_retry?(status, headers:)
@@ -85,7 +85,7 @@ module Anthropic
           #
           # @param status [Integer]
           #
-          # @param response_headers [Hash{String=>String}, Net::HTTPHeader]
+          # @param response_headers [Hash{String=>String}]
           #
           # @return [Hash{Symbol=>Object}]
           def follow_redirect(request, status:, response_headers:)
@@ -396,6 +396,7 @@ module Anthropic
           rescue Anthropic::Errors::APIConnectionError => e
             status = e
           end
+          headers = Anthropic::Internal::Util.normalized_headers(response&.each_header&.to_h)
 
           case status
           in ..299
@@ -408,7 +409,7 @@ module Anthropic
           in 300..399
             self.class.reap_connection!(status, stream: stream)
 
-            request = self.class.follow_redirect(request, status: status, response_headers: response)
+            request = self.class.follow_redirect(request, status: status, response_headers: headers)
             send_request(
               request,
               redirect_count: redirect_count + 1,
@@ -417,9 +418,9 @@ module Anthropic
             )
           in Anthropic::Errors::APIConnectionError if retry_count >= max_retries
             raise status
-          in (400..) if retry_count >= max_retries || !self.class.should_retry?(status, headers: response)
+          in (400..) if retry_count >= max_retries || !self.class.should_retry?(status, headers: headers)
             decoded = Kernel.then do
-              Anthropic::Internal::Util.decode_content(response, stream: stream, suppress_error: true)
+              Anthropic::Internal::Util.decode_content(headers, stream: stream, suppress_error: true)
             ensure
               self.class.reap_connection!(status, stream: stream)
             end
@@ -427,6 +428,7 @@ module Anthropic
             raise Anthropic::Errors::APIStatusError.for(
               url: url,
               status: status,
+              headers: headers,
               body: decoded,
               request: nil,
               response: response
@@ -503,19 +505,21 @@ module Anthropic
             send_retry_header: send_retry_header
           )
 
-          decoded = Anthropic::Internal::Util.decode_content(response, stream: stream)
+          headers = Anthropic::Internal::Util.normalized_headers(response.each_header.to_h)
+          decoded = Anthropic::Internal::Util.decode_content(headers, stream: stream)
           case req
           in {stream: Class => st}
             st.new(
               model: model,
               url: url,
               status: status,
+              headers: headers,
               response: response,
               unwrap: unwrap,
               stream: decoded
             )
           in {page: Class => page}
-            page.new(client: self, req: req, headers: response, page_data: decoded)
+            page.new(client: self, req: req, headers: headers, page_data: decoded)
           else
             unwrapped = Anthropic::Internal::Util.dig(decoded, unwrap)
             Anthropic::Internal::Type::Converter.coerce(model, unwrapped)
