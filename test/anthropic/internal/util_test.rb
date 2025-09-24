@@ -228,7 +228,7 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
       encoded = Anthropic::Internal::Util.encode_content(headers, body)
       cgi = FakeCGI.new(*encoded)
       assert_pattern do
-        cgi[""].read => ^val
+        cgi[""].read => val
       end
     end
   end
@@ -249,7 +249,7 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
       cgi = FakeCGI.new(*encoded)
       testcase.each do |key, val|
         assert_pattern do
-          cgi[key] => ^val
+          cgi[key] => val
         end
       end
     end

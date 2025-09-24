@@ -536,24 +536,21 @@ module Anthropic
         # @param val [Object]
         # @param closing [Array<Proc>]
         private def write_multipart_chunk(y, boundary:, key:, val:, closing:)
-          y << "--#{boundary}\r\n"
-          y << "Content-Disposition: form-data"
+          # name required by RFC7578
+          name = key.nil? ? "upload" : ERB::Util.url_encode(key.to_s)
 
-          unless key.nil?
-            name = ERB::Util.url_encode(key.to_s)
-            y << "; name=\"#{name}\""
-          end
-
-          case val
+          # filename required by Starlette (Anthropic)
+          filename = case val
           in Anthropic::FilePart unless val.filename.nil?
-            filename = ERB::Util.url_encode(val.filename)
-            y << "; filename=\"#{filename}\""
+            ERB::Util.url_encode(val.filename)
           in Pathname | IO
-            filename = ERB::Util.url_encode(::File.basename(val.to_path))
-            y << "; filename=\"#{filename}\""
+            ERB::Util.url_encode(::File.basename(val.to_path))
           else
+            name
           end
-          y << "\r\n"
+
+          y << "--#{boundary}\r\n"
+          y << "Content-Disposition: form-data; name=\"#{name}\"; filename=\"#{filename}\"\r\n"
 
           write_multipart_content(y, val: val, closing: closing)
         end
