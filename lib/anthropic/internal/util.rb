@@ -537,7 +537,7 @@ module Anthropic
         # @param closing [Array<Proc>]
         private def write_multipart_chunk(y, boundary:, key:, val:, closing:)
           # name required by RFC7578
-          name = key.nil? ? "upload" : ERB::Util.url_encode(key.to_s)
+          name = key.nil? ? "file" : ERB::Util.url_encode(key.to_s)
 
           # filename required by Starlette (Anthropic)
           filename = case val
