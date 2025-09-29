@@ -537,23 +537,26 @@ module Anthropic
         # @param closing [Array<Proc>]
         private def write_multipart_chunk(y, boundary:, key:, val:, closing:)
           y << "--#{boundary}\r\n"
-          y << "Content-Disposition: form-data"
+          y << "Content-Disposition: form-data;"
 
           unless key.nil?
             name = ERB::Util.url_encode(key.to_s)
             y << "; name=\"#{name}\""
           end
 
-          case val
-          in Anthropic::FilePart unless val.filename.nil?
-            filename = ERB::Util.url_encode(val.filename)
-            y << "; filename=\"#{filename}\""
-          in Pathname | IO
-            filename = ERB::Util.url_encode(::File.basename(val.to_path))
-            y << "; filename=\"#{filename}\""
-          else
-          end
-          y << "\r\n"
+          filename =
+            case val
+            in Anthropic::FilePart unless val.filename.nil?
+              ERB::Util.url_encode(val.filename)
+            in Pathname | IO
+              ERB::Util.url_encode(::File.basename(val.to_path))
+            else
+              # https://datatracker.ietf.org/doc/html/rfc7578#section-4.2
+              # while not required, a filename is recommended, and in practice many servers do expect this
+              "upload"
+            end
+
+          y << " filename=\"#{filename}\"\r\n"
 
           write_multipart_content(y, val: val, closing: closing)
         end
