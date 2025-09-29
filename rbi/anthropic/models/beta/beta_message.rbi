@@ -64,6 +64,20 @@ module Anthropic
         sig { returns(T::Array[Anthropic::Beta::BetaContentBlock::Variants]) }
         attr_accessor :content
 
+        # Information about context management operations applied during the request.
+        sig do
+          returns(T.nilable(Anthropic::Beta::BetaContextManagementResponse))
+        end
+        attr_reader :context_management
+
+        sig do
+          params(
+            context_management:
+              T.nilable(Anthropic::Beta::BetaContextManagementResponse::OrHash)
+          ).void
+        end
+        attr_writer :context_management
+
         # The model that will complete your prompt.\n\nSee
         # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
@@ -152,6 +166,8 @@ module Anthropic
                   Anthropic::Beta::BetaContainerUploadBlock::OrHash
                 )
               ],
+            context_management:
+              T.nilable(Anthropic::Beta::BetaContextManagementResponse::OrHash),
             model: T.any(Anthropic::Model::OrSymbol, String),
             stop_reason: T.nilable(Anthropic::Beta::BetaStopReason::OrSymbol),
             stop_sequence: T.nilable(String),
@@ -201,6 +217,8 @@ module Anthropic
           # [{ "type": "text", "text": "B)" }]
           # ```
           content:,
+          # Information about context management operations applied during the request.
+          context_management:,
           # The model that will complete your prompt.\n\nSee
           # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
@@ -259,6 +277,8 @@ module Anthropic
               id: String,
               container: T.nilable(Anthropic::Beta::BetaContainer),
               content: T::Array[Anthropic::Beta::BetaContentBlock::Variants],
+              context_management:
+                T.nilable(Anthropic::Beta::BetaContextManagementResponse),
               model: Anthropic::Model::Variants,
               role: Symbol,
               stop_reason:

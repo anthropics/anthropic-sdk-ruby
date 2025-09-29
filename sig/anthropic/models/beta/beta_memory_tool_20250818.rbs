@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaMemoryTool20250818 = Beta::BetaMemoryTool20250818
+
+    module Beta
+      type beta_memory_tool20250818 =
+        {
+          name: :memory,
+          type: :memory_20250818,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+
+      class BetaMemoryTool20250818 < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: :memory
+
+        attr_accessor type: :memory_20250818
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        def initialize: (
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?name: :memory,
+          ?type: :memory_20250818
+        ) -> void
+
+        def to_hash: -> {
+          name: :memory,
+          type: :memory_20250818,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+      end
+    end
+  end
+end

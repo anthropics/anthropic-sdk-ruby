@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    class BetaMemoryTool20250818CreateCommand = Beta::BetaMemoryTool20250818CreateCommand
+
+    module Beta
+      type beta_memory_tool20250818_create_command =
+        { command: :create, file_text: String, path: String }
+
+      class BetaMemoryTool20250818CreateCommand < Anthropic::Internal::Type::BaseModel
+        attr_accessor command: :create
+
+        attr_accessor file_text: String
+
+        attr_accessor path: String
+
+        def initialize: (
+          file_text: String,
+          path: String,
+          ?command: :create
+        ) -> void
+
+        def to_hash: -> { command: :create, file_text: String, path: String }
+      end
+    end
+  end
+end

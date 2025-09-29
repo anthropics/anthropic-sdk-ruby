@@ -22,6 +22,7 @@ class Anthropic::Test::Resources::Beta::MessagesTest < Anthropic::Test::Resource
         id: String,
         container: Anthropic::Beta::BetaContainer | nil,
         content: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaContentBlock]),
+        context_management: Anthropic::Beta::BetaContextManagementResponse | nil,
         model: Anthropic::Model,
         role: Symbol,
         stop_reason: Anthropic::Beta::BetaStopReason | nil,
@@ -47,6 +48,7 @@ class Anthropic::Test::Resources::Beta::MessagesTest < Anthropic::Test::Resource
 
     assert_pattern do
       response => {
+        context_management: Anthropic::Beta::BetaCountTokensContextManagementResponse | nil,
         input_tokens: Integer
       }
     end

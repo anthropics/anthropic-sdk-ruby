@@ -1,0 +1,24 @@
+module Anthropic
+  module Models
+    class BetaContextManagementResponse = Beta::BetaContextManagementResponse
+
+    module Beta
+      type beta_context_management_response =
+        {
+          applied_edits: ::Array[Anthropic::Beta::BetaClearToolUses20250919EditResponse]
+        }
+
+      class BetaContextManagementResponse < Anthropic::Internal::Type::BaseModel
+        attr_accessor applied_edits: ::Array[Anthropic::Beta::BetaClearToolUses20250919EditResponse]
+
+        def initialize: (
+          applied_edits: ::Array[Anthropic::Beta::BetaClearToolUses20250919EditResponse]
+        ) -> void
+
+        def to_hash: -> {
+          applied_edits: ::Array[Anthropic::Beta::BetaClearToolUses20250919EditResponse]
+        }
+      end
+    end
+  end
+end

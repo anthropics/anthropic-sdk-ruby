@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    class BetaMemoryTool20250818DeleteCommand = Beta::BetaMemoryTool20250818DeleteCommand
+
+    module Beta
+      type beta_memory_tool20250818_delete_command =
+        { command: :delete, path: String }
+
+      class BetaMemoryTool20250818DeleteCommand < Anthropic::Internal::Type::BaseModel
+        attr_accessor command: :delete
+
+        attr_accessor path: String
+
+        def initialize: (path: String, ?command: :delete) -> void
+
+        def to_hash: -> { command: :delete, path: String }
+      end
+    end
+  end
+end

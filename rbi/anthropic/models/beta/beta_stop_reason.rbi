@@ -23,6 +23,11 @@ module Anthropic
         PAUSE_TURN =
           T.let(:pause_turn, Anthropic::Beta::BetaStopReason::TaggedSymbol)
         REFUSAL = T.let(:refusal, Anthropic::Beta::BetaStopReason::TaggedSymbol)
+        MODEL_CONTEXT_WINDOW_EXCEEDED =
+          T.let(
+            :model_context_window_exceeded,
+            Anthropic::Beta::BetaStopReason::TaggedSymbol
+          )
 
         sig do
           override.returns(

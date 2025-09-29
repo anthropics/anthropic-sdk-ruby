@@ -45,6 +45,14 @@ module Anthropic
       CLAUDE_4_SONNET_20250514 =
         T.let(:"claude-4-sonnet-20250514", Anthropic::Model::TaggedSymbol)
 
+      # Our best model for real-world agents and coding
+      CLAUDE_SONNET_4_5 =
+        T.let(:"claude-sonnet-4-5", Anthropic::Model::TaggedSymbol)
+
+      # Our best model for real-world agents and coding
+      CLAUDE_SONNET_4_5_20250929 =
+        T.let(:"claude-sonnet-4-5-20250929", Anthropic::Model::TaggedSymbol)
+
       # Our previous most intelligent model
       CLAUDE_3_5_SONNET_LATEST =
         T.let(:"claude-3-5-sonnet-latest", Anthropic::Model::TaggedSymbol)
