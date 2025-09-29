@@ -75,6 +75,11 @@ module Anthropic
         )
       CONTEXT_1M_2025_08_07 =
         T.let(:"context-1m-2025-08-07", Anthropic::AnthropicBeta::TaggedSymbol)
+      CONTEXT_MANAGEMENT_2025_06_27 =
+        T.let(
+          :"context-management-2025-06-27",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
     end
   end
 end
