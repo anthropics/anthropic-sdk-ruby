@@ -566,6 +566,7 @@ module Anthropic
         #
         # @return [Array(String, Enumerable<String>)]
         private def encode_multipart_streaming(body)
+          # RFC 1521 Section 7.2.1 says we should have 70 char maximum for boundary length
           boundary = SecureRandom.urlsafe_base64(30)
 
           closing = []
