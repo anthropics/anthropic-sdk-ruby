@@ -1,5 +1,33 @@
 # Changelog
 
+## 1.10.0 (2025-09-29)
+
+Full Changelog: [v1.9.0...v1.10.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.9.0...v1.10.0)
+
+### Features
+
+* **api:** adds support for Claude Sonnet 4.5 and context management features ([3a3cad6](https://github.com/anthropics/anthropic-sdk-ruby/commit/3a3cad636f05c4e395e6078aa7b429c464ad66aa))
+* expose response headers for both streams and errors ([9bfbae1](https://github.com/anthropics/anthropic-sdk-ruby/commit/9bfbae1483ce10852f7d89f1a598ed41a3f057e5))
+
+
+### Bug Fixes
+
+* always send filename in content-disposition headers ([#126](https://github.com/anthropics/anthropic-sdk-ruby/issues/126)) ([0e665f3](https://github.com/anthropics/anthropic-sdk-ruby/commit/0e665f34f0d736a400e0ab8b82cad7ccaf0845b1))
+* **internal:** use null byte as file separator in the fast formatting script ([beae717](https://github.com/anthropics/anthropic-sdk-ruby/commit/beae717a7ce89349456e6a50b261c606ffce7759))
+* shorten multipart boundary sep to less than RFC specificed max length ([40226f9](https://github.com/anthropics/anthropic-sdk-ruby/commit/40226f94c36291e84b0aef86a9058080ba94640b))
+
+
+### Performance Improvements
+
+* faster code formatting ([47de8dd](https://github.com/anthropics/anthropic-sdk-ruby/commit/47de8dd9fc0f10dcd623cbe394d802c5e2dc00af))
+
+
+### Chores
+
+* allow fast-format to use bsd sed as well ([ea0324c](https://github.com/anthropics/anthropic-sdk-ruby/commit/ea0324c0f1aadfc870b0ddc6438728fed44b12f2))
+* do not install brew dependencies in ./scripts/bootstrap by default ([2091081](https://github.com/anthropics/anthropic-sdk-ruby/commit/209108181b9ab99ff224cf15910af674451ed477))
+* **internal:** fix tests ([59ce934](https://github.com/anthropics/anthropic-sdk-ruby/commit/59ce9348b0d17c9ecd8ccb83fd16c8aff743dc8b))
+
 ## 1.9.0 (2025-09-10)
 
 Full Changelog: [v1.8.0...v1.9.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.8.0...v1.9.0)
