@@ -18,6 +18,7 @@ module Anthropic
       | :"extended-cache-ttl-2025-04-11"
       | :"context-1m-2025-08-07"
       | :"context-management-2025-06-27"
+      | :"model-context-window-exceeded-2025-08-26"
 
     module AnthropicBeta
       extend Anthropic::Internal::Type::Union
@@ -40,6 +41,7 @@ module Anthropic
       EXTENDED_CACHE_TTL_2025_04_11: :"extended-cache-ttl-2025-04-11"
       CONTEXT_1M_2025_08_07: :"context-1m-2025-08-07"
       CONTEXT_MANAGEMENT_2025_06_27: :"context-management-2025-06-27"
+      MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26: :"model-context-window-exceeded-2025-08-26"
     end
   end
 end

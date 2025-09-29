@@ -80,6 +80,11 @@ module Anthropic
           :"context-management-2025-06-27",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26 =
+        T.let(
+          :"model-context-window-exceeded-2025-08-26",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
     end
   end
 end
