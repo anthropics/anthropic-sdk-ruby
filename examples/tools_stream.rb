@@ -26,7 +26,7 @@ end
 
 stream = anthropic.messages.stream(
   max_tokens: 1024,
-  model: "claude-sonnet-4-20250514",
+  model: "claude-sonnet-4-5-20250929",
   tools: [GetWeather, GetTime],
   messages: [
     {

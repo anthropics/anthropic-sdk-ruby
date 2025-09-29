@@ -32,7 +32,7 @@ message = anthropic.beta.messages.create(
       name: "bash"
     }
   ],
-  model: "us.anthropic.claude-sonnet-4-20250514-v2:0",
+  model: "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
   betas: ["computer-use-2024-10-22"]
 )
 

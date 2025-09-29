@@ -5,6 +5,7 @@ module Anthropic
         {
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
+          context_management: Anthropic::Beta::BetaContextManagementConfig?,
           mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           thinking: Anthropic::Models::Beta::beta_thinking_config_param,
@@ -21,6 +22,8 @@ module Anthropic
         attr_accessor messages: ::Array[Anthropic::Beta::BetaMessageParam]
 
         attr_accessor model: Anthropic::Models::model
+
+        attr_accessor context_management: Anthropic::Beta::BetaContextManagementConfig?
 
         attr_reader mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition]?
 
@@ -61,6 +64,7 @@ module Anthropic
         def initialize: (
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
+          ?context_management: Anthropic::Beta::BetaContextManagementConfig?,
           ?mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           ?system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           ?thinking: Anthropic::Models::Beta::beta_thinking_config_param,
@@ -73,6 +77,7 @@ module Anthropic
         def to_hash: -> {
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
+          context_management: Anthropic::Beta::BetaContextManagementConfig?,
           mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           thinking: Anthropic::Models::Beta::beta_thinking_config_param,
@@ -99,6 +104,7 @@ module Anthropic
           | Anthropic::Beta::BetaCodeExecutionTool20250522
           | Anthropic::Beta::BetaCodeExecutionTool20250825
           | Anthropic::Beta::BetaToolComputerUse20241022
+          | Anthropic::Beta::BetaMemoryTool20250818
           | Anthropic::Beta::BetaToolComputerUse20250124
           | Anthropic::Beta::BetaToolTextEditor20241022
           | Anthropic::Beta::BetaToolTextEditor20250124

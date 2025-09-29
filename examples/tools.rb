@@ -23,7 +23,7 @@ user_message = {
 }
 
 message = client.messages.create(
-  model: "claude-sonnet-4-20250514",
+  model: "claude-sonnet-4-5-20250929",
   max_tokens: 1024,
   messages: [user_message],
   tools: [GetWeather]
@@ -38,7 +38,7 @@ tool = message.content.grep(Anthropic::Models::ToolUseBlock).first
 raise "Tool use not found" unless tool
 
 response = client.messages.create(
-  model: "claude-sonnet-4-20250514",
+  model: "claude-sonnet-4-5-20250929",
   max_tokens: 1024,
   messages: [
     user_message,

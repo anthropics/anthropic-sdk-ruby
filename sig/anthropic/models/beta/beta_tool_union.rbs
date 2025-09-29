@@ -10,6 +10,7 @@ module Anthropic
         | Anthropic::Beta::BetaCodeExecutionTool20250522
         | Anthropic::Beta::BetaCodeExecutionTool20250825
         | Anthropic::Beta::BetaToolComputerUse20241022
+        | Anthropic::Beta::BetaMemoryTool20250818
         | Anthropic::Beta::BetaToolComputerUse20250124
         | Anthropic::Beta::BetaToolTextEditor20241022
         | Anthropic::Beta::BetaToolTextEditor20250124

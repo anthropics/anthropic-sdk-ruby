@@ -1,0 +1,77 @@
+module Anthropic
+  module Models
+    class BetaClearToolUses20250919Edit = Beta::BetaClearToolUses20250919Edit
+
+    module Beta
+      type beta_clear_tool_uses20250919_edit =
+        {
+          type: :clear_tool_uses_20250919,
+          clear_at_least: Anthropic::Beta::BetaInputTokensClearAtLeast?,
+          clear_tool_inputs: Anthropic::Models::Beta::BetaClearToolUses20250919Edit::clear_tool_inputs?,
+          exclude_tools: ::Array[String]?,
+          keep: Anthropic::Beta::BetaToolUsesKeep,
+          trigger: Anthropic::Models::Beta::BetaClearToolUses20250919Edit::trigger
+        }
+
+      class BetaClearToolUses20250919Edit < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :clear_tool_uses_20250919
+
+        attr_accessor clear_at_least: Anthropic::Beta::BetaInputTokensClearAtLeast?
+
+        attr_accessor clear_tool_inputs: Anthropic::Models::Beta::BetaClearToolUses20250919Edit::clear_tool_inputs?
+
+        attr_accessor exclude_tools: ::Array[String]?
+
+        attr_reader keep: Anthropic::Beta::BetaToolUsesKeep?
+
+        def keep=: (
+          Anthropic::Beta::BetaToolUsesKeep
+        ) -> Anthropic::Beta::BetaToolUsesKeep
+
+        attr_reader trigger: Anthropic::Models::Beta::BetaClearToolUses20250919Edit::trigger?
+
+        def trigger=: (
+          Anthropic::Models::Beta::BetaClearToolUses20250919Edit::trigger
+        ) -> Anthropic::Models::Beta::BetaClearToolUses20250919Edit::trigger
+
+        def initialize: (
+          ?clear_at_least: Anthropic::Beta::BetaInputTokensClearAtLeast?,
+          ?clear_tool_inputs: Anthropic::Models::Beta::BetaClearToolUses20250919Edit::clear_tool_inputs?,
+          ?exclude_tools: ::Array[String]?,
+          ?keep: Anthropic::Beta::BetaToolUsesKeep,
+          ?trigger: Anthropic::Models::Beta::BetaClearToolUses20250919Edit::trigger,
+          ?type: :clear_tool_uses_20250919
+        ) -> void
+
+        def to_hash: -> {
+          type: :clear_tool_uses_20250919,
+          clear_at_least: Anthropic::Beta::BetaInputTokensClearAtLeast?,
+          clear_tool_inputs: Anthropic::Models::Beta::BetaClearToolUses20250919Edit::clear_tool_inputs?,
+          exclude_tools: ::Array[String]?,
+          keep: Anthropic::Beta::BetaToolUsesKeep,
+          trigger: Anthropic::Models::Beta::BetaClearToolUses20250919Edit::trigger
+        }
+
+        type clear_tool_inputs = bool | ::Array[String]
+
+        module ClearToolInputs
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaClearToolUses20250919Edit::clear_tool_inputs]
+
+          StringArray: Anthropic::Internal::Type::Converter
+        end
+
+        type trigger =
+          Anthropic::Beta::BetaInputTokensTrigger
+          | Anthropic::Beta::BetaToolUsesTrigger
+
+        module Trigger
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaClearToolUses20250919Edit::trigger]
+        end
+      end
+    end
+  end
+end

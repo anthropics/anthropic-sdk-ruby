@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaMemoryTool20250818StrReplaceCommand = Beta::BetaMemoryTool20250818StrReplaceCommand
+
+    module Beta
+      type beta_memory_tool20250818_str_replace_command =
+        {
+          command: :str_replace,
+          new_str: String,
+          old_str: String,
+          path: String
+        }
+
+      class BetaMemoryTool20250818StrReplaceCommand < Anthropic::Internal::Type::BaseModel
+        attr_accessor command: :str_replace
+
+        attr_accessor new_str: String
+
+        attr_accessor old_str: String
+
+        attr_accessor path: String
+
+        def initialize: (
+          new_str: String,
+          old_str: String,
+          path: String,
+          ?command: :str_replace
+        ) -> void
+
+        def to_hash: -> {
+          command: :str_replace,
+          new_str: String,
+          old_str: String,
+          path: String
+        }
+      end
+    end
+  end
+end

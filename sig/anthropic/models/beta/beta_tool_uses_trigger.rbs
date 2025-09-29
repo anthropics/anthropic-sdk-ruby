@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    class BetaToolUsesTrigger = Beta::BetaToolUsesTrigger
+
+    module Beta
+      type beta_tool_uses_trigger = { type: :tool_uses, value: Integer }
+
+      class BetaToolUsesTrigger < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :tool_uses
+
+        attr_accessor value: Integer
+
+        def initialize: (value: Integer, ?type: :tool_uses) -> void
+
+        def to_hash: -> { type: :tool_uses, value: Integer }
+      end
+    end
+  end
+end

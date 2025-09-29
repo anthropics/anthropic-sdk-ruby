@@ -14,6 +14,20 @@ module Anthropic
             )
           end
 
+        # Information about context management operations applied during the request.
+        sig do
+          returns(T.nilable(Anthropic::Beta::BetaContextManagementResponse))
+        end
+        attr_reader :context_management
+
+        sig do
+          params(
+            context_management:
+              T.nilable(Anthropic::Beta::BetaContextManagementResponse::OrHash)
+          ).void
+        end
+        attr_writer :context_management
+
         sig { returns(Anthropic::Beta::BetaRawMessageDeltaEvent::Delta) }
         attr_reader :delta
 
@@ -52,12 +66,16 @@ module Anthropic
 
         sig do
           params(
+            context_management:
+              T.nilable(Anthropic::Beta::BetaContextManagementResponse::OrHash),
             delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta::OrHash,
             usage: Anthropic::Beta::BetaMessageDeltaUsage::OrHash,
             type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
+          # Information about context management operations applied during the request.
+          context_management:,
           delta:,
           # Billing and rate-limit usage.
           #
@@ -82,6 +100,8 @@ module Anthropic
         sig do
           override.returns(
             {
+              context_management:
+                T.nilable(Anthropic::Beta::BetaContextManagementResponse),
               delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta,
               type: Symbol,
               usage: Anthropic::Beta::BetaMessageDeltaUsage

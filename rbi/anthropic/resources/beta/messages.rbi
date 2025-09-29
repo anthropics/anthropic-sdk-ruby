@@ -22,6 +22,8 @@ module Anthropic
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
             model: T.any(Anthropic::Model::OrSymbol, String),
             container: T.nilable(String),
+            context_management:
+              T.nilable(Anthropic::Beta::BetaContextManagementConfig::OrHash),
             mcp_servers:
               T::Array[
                 Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
@@ -53,6 +55,7 @@ module Anthropic
                   Anthropic::Beta::BetaCodeExecutionTool20250522::OrHash,
                   Anthropic::Beta::BetaCodeExecutionTool20250825::OrHash,
                   Anthropic::Beta::BetaToolComputerUse20241022::OrHash,
+                  Anthropic::Beta::BetaMemoryTool20250818::OrHash,
                   Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20241022::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
@@ -150,6 +153,8 @@ module Anthropic
           model:,
           # Body param: Container identifier for reuse across requests.
           container: nil,
+          # Body param: Configuration for context management operations.
+          context_management: nil,
           # Body param: MCP servers to be utilized in this request
           mcp_servers: nil,
           # Body param: An object describing metadata about the request.
@@ -316,6 +321,8 @@ module Anthropic
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
             model: T.any(Anthropic::Model::OrSymbol, String),
             container: T.nilable(String),
+            context_management:
+              T.nilable(Anthropic::Beta::BetaContextManagementConfig::OrHash),
             mcp_servers:
               T::Array[
                 Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
@@ -347,6 +354,7 @@ module Anthropic
                   Anthropic::Beta::BetaCodeExecutionTool20250522::OrHash,
                   Anthropic::Beta::BetaCodeExecutionTool20250825::OrHash,
                   Anthropic::Beta::BetaToolComputerUse20241022::OrHash,
+                  Anthropic::Beta::BetaMemoryTool20250818::OrHash,
                   Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20241022::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
@@ -448,6 +456,8 @@ module Anthropic
           model:,
           # Body param: Container identifier for reuse across requests.
           container: nil,
+          # Body param: Configuration for context management operations.
+          context_management: nil,
           # Body param: MCP servers to be utilized in this request
           mcp_servers: nil,
           # Body param: An object describing metadata about the request.
@@ -610,6 +620,8 @@ module Anthropic
           params(
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            context_management:
+              T.nilable(Anthropic::Beta::BetaContextManagementConfig::OrHash),
             mcp_servers:
               T::Array[
                 Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
@@ -637,6 +649,7 @@ module Anthropic
                   Anthropic::Beta::BetaCodeExecutionTool20250522::OrHash,
                   Anthropic::Beta::BetaCodeExecutionTool20250825::OrHash,
                   Anthropic::Beta::BetaToolComputerUse20241022::OrHash,
+                  Anthropic::Beta::BetaMemoryTool20250818::OrHash,
                   Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20241022::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
@@ -721,6 +734,8 @@ module Anthropic
           # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
+          # Body param: Configuration for context management operations.
+          context_management: nil,
           # Body param: MCP servers to be utilized in this request
           mcp_servers: nil,
           # Body param: System prompt.

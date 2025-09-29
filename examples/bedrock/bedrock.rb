@@ -15,7 +15,7 @@ message = anthropic.messages.create(
       content: "Hello, Claude"
     }
   ],
-  model: "us.anthropic.claude-sonnet-4-20250514-v1:0"
+  model: "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
 )
 
 pp(message.content)

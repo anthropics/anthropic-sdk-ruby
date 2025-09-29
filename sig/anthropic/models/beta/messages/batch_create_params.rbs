@@ -60,6 +60,7 @@ module Anthropic
                 messages: ::Array[Anthropic::Beta::BetaMessageParam],
                 model: Anthropic::Models::model,
                 container: String?,
+                context_management: Anthropic::Beta::BetaContextManagementConfig?,
                 mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
                 metadata: Anthropic::Beta::BetaMetadata,
                 service_tier: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier,
@@ -82,6 +83,8 @@ module Anthropic
               attr_accessor model: Anthropic::Models::model
 
               attr_accessor container: String?
+
+              attr_accessor context_management: Anthropic::Beta::BetaContextManagementConfig?
 
               attr_reader mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition]?
 
@@ -150,6 +153,7 @@ module Anthropic
                 messages: ::Array[Anthropic::Beta::BetaMessageParam],
                 model: Anthropic::Models::model,
                 ?container: String?,
+                ?context_management: Anthropic::Beta::BetaContextManagementConfig?,
                 ?mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
                 ?metadata: Anthropic::Beta::BetaMetadata,
                 ?service_tier: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier,
@@ -169,6 +173,7 @@ module Anthropic
                 messages: ::Array[Anthropic::Beta::BetaMessageParam],
                 model: Anthropic::Models::model,
                 container: String?,
+                context_management: Anthropic::Beta::BetaContextManagementConfig?,
                 mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
                 metadata: Anthropic::Beta::BetaMetadata,
                 service_tier: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier,
