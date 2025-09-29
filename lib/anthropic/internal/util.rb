@@ -536,21 +536,27 @@ module Anthropic
         # @param val [Object]
         # @param closing [Array<Proc>]
         private def write_multipart_chunk(y, boundary:, key:, val:, closing:)
-          # name required by RFC7578
-          name = key.nil? ? "file" : ERB::Util.url_encode(key.to_s)
+          y << "--#{boundary}\r\n"
+          y << "Content-Disposition: form-data;"
 
-          # filename required by Starlette (Anthropic)
-          filename = case val
-          in Anthropic::FilePart unless val.filename.nil?
-            ERB::Util.url_encode(val.filename)
-          in Pathname | IO
-            ERB::Util.url_encode(::File.basename(val.to_path))
-          else
-            name
+          unless key.nil?
+            name = ERB::Util.url_encode(key.to_s)
+            y << "; name=\"#{name}\""
           end
 
-          y << "--#{boundary}\r\n"
-          y << "Content-Disposition: form-data; name=\"#{name}\"; filename=\"#{filename}\"\r\n"
+          filename =
+            case val
+            in Anthropic::FilePart unless val.filename.nil?
+              ERB::Util.url_encode(val.filename)
+            in Pathname | IO
+              ERB::Util.url_encode(::File.basename(val.to_path))
+            else
+              # https://datatracker.ietf.org/doc/html/rfc7578#section-4.2
+              # while not required, a filename is recommended, and in practice many servers do expect this
+              "upload"
+            end
+
+          y << " filename=\"#{filename}\"\r\n"
 
           write_multipart_content(y, val: val, closing: closing)
         end

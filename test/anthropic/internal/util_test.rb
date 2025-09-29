@@ -217,18 +217,21 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
     file = Pathname(__FILE__)
     headers = {"content-type" => "multipart/form-data"}
     cases = {
-      "abc" => "abc",
-      StringIO.new("abc") => "abc",
-      Anthropic::FilePart.new("abc") => "abc",
-      Anthropic::FilePart.new(StringIO.new("abc")) => "abc",
-      file => /^class Anthropic/,
-      Anthropic::FilePart.new(file) => /^class Anthropic/
+      "abc" => %w[upload abc],
+      StringIO.new("abc") => %w[upload abc],
+      Anthropic::FilePart.new("abc") => %w[upload abc],
+      Anthropic::FilePart.new(StringIO.new("abc")) => %w[upload abc],
+      file => [file.basename.to_path, /^class Anthropic/],
+      Anthropic::FilePart.new(file, filename: "d o g") => ["d%20o%20g", /^class Anthropic/]
     }
-    cases.each do |body, val|
+    cases.each do |body, testcase|
+      filename, val = testcase
       encoded = Anthropic::Internal::Util.encode_content(headers, body)
       cgi = FakeCGI.new(*encoded)
+      io = cgi[""]
       assert_pattern do
-        cgi["upload"].read => ^val
+        io.original_filename => ^filename
+        io.read => ^val
       end
     end
   end
@@ -249,9 +252,14 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
       cgi = FakeCGI.new(*encoded)
       testcase.each do |key, val|
         assert_pattern do
-          cgi_part = cgi[key]
-          cgi_part = cgi_part.read if cgi_part.kind_of?(StringIO)
-          cgi_part => ^val
+          parsed =
+            case (p = cgi[key])
+            in StringIO
+              p.read
+            else
+              p
+            end
+          parsed => ^val
         end
       end
     end
