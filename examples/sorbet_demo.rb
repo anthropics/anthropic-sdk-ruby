@@ -16,7 +16,7 @@ begin
     max_tokens: 1024,
     # Sorbet works best when using `Class` types instead of raw `Hash`es
     messages: [Anthropic::Models::MessageParam.new(role: :user, content: "hello")],
-    model: :"claude-sonnet-4-20250514"
+    model: :"claude-sonnet-4-5-20250929"
   )
 
   pp(message.content.first)
@@ -30,7 +30,7 @@ begin
     # Using a raw `Hash` where sorbet expects `Class`es still works
     #   but due to current limitations of the typechecker, the SDK cannot provide type safety when doing so.
     messages: [{role: :user, content: "hello"}],
-    model: :"claude-sonnet-4-20250514"
+    model: :"claude-sonnet-4-5-20250929"
   )
 
   # if you have sorbet LSP enabled, and uncomment the two lines below
@@ -48,7 +48,7 @@ begin
   params = Anthropic::Models::MessageCreateParams.new(
     max_tokens: 1024,
     messages: [Anthropic::Models::MessageParam.new(role: :user, content: "hello")],
-    model: :"claude-sonnet-4-20250514"
+    model: :"claude-sonnet-4-5-20250929"
   )
 
   # notice the `**` operator, it allows you to pass a parameter's class

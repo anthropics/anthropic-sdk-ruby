@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    class BetaMemoryTool20250818RenameCommand = Beta::BetaMemoryTool20250818RenameCommand
+
+    module Beta
+      type beta_memory_tool20250818_rename_command =
+        { command: :rename, new_path: String, old_path: String }
+
+      class BetaMemoryTool20250818RenameCommand < Anthropic::Internal::Type::BaseModel
+        attr_accessor command: :rename
+
+        attr_accessor new_path: String
+
+        attr_accessor old_path: String
+
+        def initialize: (
+          new_path: String,
+          old_path: String,
+          ?command: :rename
+        ) -> void
+
+        def to_hash: -> { command: :rename, new_path: String, old_path: String }
+      end
+    end
+  end
+end

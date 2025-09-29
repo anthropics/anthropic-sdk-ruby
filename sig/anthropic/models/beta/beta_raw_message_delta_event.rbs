@@ -5,12 +5,15 @@ module Anthropic
     module Beta
       type beta_raw_message_delta_event =
         {
+          context_management: Anthropic::Beta::BetaContextManagementResponse?,
           delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta,
           type: :message_delta,
           usage: Anthropic::Beta::BetaMessageDeltaUsage
         }
 
       class BetaRawMessageDeltaEvent < Anthropic::Internal::Type::BaseModel
+        attr_accessor context_management: Anthropic::Beta::BetaContextManagementResponse?
+
         attr_accessor delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta
 
         attr_accessor type: :message_delta
@@ -18,12 +21,14 @@ module Anthropic
         attr_accessor usage: Anthropic::Beta::BetaMessageDeltaUsage
 
         def initialize: (
+          context_management: Anthropic::Beta::BetaContextManagementResponse?,
           delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta,
           usage: Anthropic::Beta::BetaMessageDeltaUsage,
           ?type: :message_delta
         ) -> void
 
         def to_hash: -> {
+          context_management: Anthropic::Beta::BetaContextManagementResponse?,
           delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta,
           type: :message_delta,
           usage: Anthropic::Beta::BetaMessageDeltaUsage

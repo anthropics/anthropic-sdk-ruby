@@ -244,6 +244,22 @@ module Anthropic
               sig { returns(T.nilable(String)) }
               attr_accessor :container
 
+              # Configuration for context management operations.
+              sig do
+                returns(T.nilable(Anthropic::Beta::BetaContextManagementConfig))
+              end
+              attr_reader :context_management
+
+              sig do
+                params(
+                  context_management:
+                    T.nilable(
+                      Anthropic::Beta::BetaContextManagementConfig::OrHash
+                    )
+                ).void
+              end
+              attr_writer :context_management
+
               # MCP servers to be utilized in this request
               sig do
                 returns(
@@ -503,6 +519,7 @@ module Anthropic
                         Anthropic::Beta::BetaCodeExecutionTool20250522,
                         Anthropic::Beta::BetaCodeExecutionTool20250825,
                         Anthropic::Beta::BetaToolComputerUse20241022,
+                        Anthropic::Beta::BetaMemoryTool20250818,
                         Anthropic::Beta::BetaToolComputerUse20250124,
                         Anthropic::Beta::BetaToolTextEditor20241022,
                         Anthropic::Beta::BetaToolTextEditor20250124,
@@ -528,6 +545,7 @@ module Anthropic
                         Anthropic::Beta::BetaCodeExecutionTool20250522::OrHash,
                         Anthropic::Beta::BetaCodeExecutionTool20250825::OrHash,
                         Anthropic::Beta::BetaToolComputerUse20241022::OrHash,
+                        Anthropic::Beta::BetaMemoryTool20250818::OrHash,
                         Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
                         Anthropic::Beta::BetaToolTextEditor20241022::OrHash,
                         Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
@@ -579,6 +597,10 @@ module Anthropic
                   messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
                   model: T.any(Anthropic::Model::OrSymbol, String),
                   container: T.nilable(String),
+                  context_management:
+                    T.nilable(
+                      Anthropic::Beta::BetaContextManagementConfig::OrHash
+                    ),
                   mcp_servers:
                     T::Array[
                       Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
@@ -612,6 +634,7 @@ module Anthropic
                         Anthropic::Beta::BetaCodeExecutionTool20250522::OrHash,
                         Anthropic::Beta::BetaCodeExecutionTool20250825::OrHash,
                         Anthropic::Beta::BetaToolComputerUse20241022::OrHash,
+                        Anthropic::Beta::BetaMemoryTool20250818::OrHash,
                         Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
                         Anthropic::Beta::BetaToolTextEditor20241022::OrHash,
                         Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
@@ -706,6 +729,8 @@ module Anthropic
                 model:,
                 # Container identifier for reuse across requests.
                 container: nil,
+                # Configuration for context management operations.
+                context_management: nil,
                 # MCP servers to be utilized in this request
                 mcp_servers: nil,
                 # An object describing metadata about the request.
@@ -863,6 +888,8 @@ module Anthropic
                     messages: T::Array[Anthropic::Beta::BetaMessageParam],
                     model: T.any(Anthropic::Model::OrSymbol, String),
                     container: T.nilable(String),
+                    context_management:
+                      T.nilable(Anthropic::Beta::BetaContextManagementConfig),
                     mcp_servers:
                       T::Array[
                         Anthropic::Beta::BetaRequestMCPServerURLDefinition
@@ -896,6 +923,7 @@ module Anthropic
                           Anthropic::Beta::BetaCodeExecutionTool20250522,
                           Anthropic::Beta::BetaCodeExecutionTool20250825,
                           Anthropic::Beta::BetaToolComputerUse20241022,
+                          Anthropic::Beta::BetaMemoryTool20250818,
                           Anthropic::Beta::BetaToolComputerUse20250124,
                           Anthropic::Beta::BetaToolTextEditor20241022,
                           Anthropic::Beta::BetaToolTextEditor20250124,

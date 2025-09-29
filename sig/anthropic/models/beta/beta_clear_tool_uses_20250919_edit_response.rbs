@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaClearToolUses20250919EditResponse = Beta::BetaClearToolUses20250919EditResponse
+
+    module Beta
+      type beta_clear_tool_uses20250919_edit_response =
+        {
+          cleared_input_tokens: Integer,
+          cleared_tool_uses: Integer,
+          type: :clear_tool_uses_20250919
+        }
+
+      class BetaClearToolUses20250919EditResponse < Anthropic::Internal::Type::BaseModel
+        attr_accessor cleared_input_tokens: Integer
+
+        attr_accessor cleared_tool_uses: Integer
+
+        attr_accessor type: :clear_tool_uses_20250919
+
+        def initialize: (
+          cleared_input_tokens: Integer,
+          cleared_tool_uses: Integer,
+          ?type: :clear_tool_uses_20250919
+        ) -> void
+
+        def to_hash: -> {
+          cleared_input_tokens: Integer,
+          cleared_tool_uses: Integer,
+          type: :clear_tool_uses_20250919
+        }
+      end
+    end
+  end
+end

@@ -12,7 +12,7 @@ pp("----- text streaming -----")
 stream = anthropic.messages.stream(
   max_tokens: 1024,
   messages: [{role: :user, content: "Say hello there!"}],
-  model: :"claude-sonnet-4-20250514"
+  model: :"claude-sonnet-4-5-20250929"
 )
 
 # the .text method provides a convenient way to stream only text content.

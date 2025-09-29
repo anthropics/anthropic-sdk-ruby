@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    class BetaInputTokensClearAtLeast = Beta::BetaInputTokensClearAtLeast
+
+    module Beta
+      type beta_input_tokens_clear_at_least =
+        { type: :input_tokens, value: Integer }
+
+      class BetaInputTokensClearAtLeast < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :input_tokens
+
+        attr_accessor value: Integer
+
+        def initialize: (value: Integer, ?type: :input_tokens) -> void
+
+        def to_hash: -> { type: :input_tokens, value: Integer }
+      end
+    end
+  end
+end

@@ -39,7 +39,7 @@ anthropic = Anthropic::Client.new(
 message = anthropic.messages.create(
   max_tokens: 1024,
   messages: [{role: "user", content: "Hello, Claude"}],
-  model: :"claude-sonnet-4-20250514"
+  model: :"claude-sonnet-4-5-20250929"
 )
 
 puts(message.content)
@@ -53,7 +53,7 @@ We provide support for streaming responses using Server-Sent Events (SSE).
 stream = anthropic.messages.stream(
   max_tokens: 1024,
   messages: [{role: "user", content: "Hello, Claude"}],
-  model: :"claude-sonnet-4-20250514"
+  model: :"claude-sonnet-4-5-20250929"
 )
 
 stream.each do |message|
@@ -69,7 +69,7 @@ This library provides several conveniences for streaming messages, for example:
 stream = anthropic.messages.stream(
   max_tokens: 1024,
   messages: [{role: :user, content: "Say hello there!"}],
-  model: :"claude-sonnet-4-20250514"
+  model: :"claude-sonnet-4-5-20250929"
 )
 
 stream.text.each do |text|
@@ -138,7 +138,7 @@ begin
   message = anthropic.messages.create(
     max_tokens: 1024,
     messages: [{role: "user", content: "Hello, Claude"}],
-    model: :"claude-sonnet-4-20250514"
+    model: :"claude-sonnet-4-5-20250929"
   )
 rescue Anthropic::Errors::APIConnectionError => e
   puts("The server could not be reached")
@@ -185,7 +185,7 @@ anthropic = Anthropic::Client.new(
 anthropic.messages.create(
   max_tokens: 1024,
   messages: [{role: "user", content: "Hello, Claude"}],
-  model: :"claude-sonnet-4-20250514",
+  model: :"claude-sonnet-4-5-20250929",
   request_options: {max_retries: 5}
 )
 ```
@@ -204,7 +204,7 @@ anthropic = Anthropic::Client.new(
 anthropic.messages.create(
   max_tokens: 1024,
   messages: [{role: "user", content: "Hello, Claude"}],
-  model: :"claude-sonnet-4-20250514",
+  model: :"claude-sonnet-4-5-20250929",
   request_options: {timeout: 5}
 )
 ```
@@ -235,7 +235,7 @@ message = anthropic.messages.create(
       content: "Hello, Claude"
     }
   ],
-  model: "anthropic.claude-sonnet-4-20250514-v2:0"
+  model: "anthropic.claude-sonnet-4-5-20250929-v2:0"
 )
 
 puts(message)
@@ -300,7 +300,7 @@ message =
   anthropic.messages.create(
     max_tokens: 1024,
     messages: [{role: "user", content: "Hello, Claude"}],
-    model: :"claude-sonnet-4-20250514",
+    model: :"claude-sonnet-4-5-20250929",
     request_options: {
       extra_query: {my_query_parameter: value},
       extra_body: {my_body_parameter: value},
@@ -349,7 +349,7 @@ You can provide typesafe request parameters like so:
 anthropic.messages.create(
   max_tokens: 1024,
   messages: [Anthropic::MessageParam.new(role: "user", content: "Hello, Claude")],
-  model: :"claude-sonnet-4-20250514"
+  model: :"claude-sonnet-4-5-20250929"
 )
 ```
 
@@ -360,14 +360,14 @@ Or, equivalently:
 anthropic.messages.create(
   max_tokens: 1024,
   messages: [{role: "user", content: "Hello, Claude"}],
-  model: :"claude-sonnet-4-20250514"
+  model: :"claude-sonnet-4-5-20250929"
 )
 
 # You can also splat a full Params class:
 params = Anthropic::MessageCreateParams.new(
   max_tokens: 1024,
   messages: [Anthropic::MessageParam.new(role: "user", content: "Hello, Claude")],
-  model: :"claude-sonnet-4-20250514"
+  model: :"claude-sonnet-4-5-20250929"
 )
 anthropic.messages.create(**params)
 ```

@@ -1,0 +1,21 @@
+module Anthropic
+  module Models
+    module BetaMemoryTool20250818Command = Beta::BetaMemoryTool20250818Command
+
+    module Beta
+      type beta_memory_tool20250818_command =
+        Anthropic::Beta::BetaMemoryTool20250818ViewCommand
+        | Anthropic::Beta::BetaMemoryTool20250818CreateCommand
+        | Anthropic::Beta::BetaMemoryTool20250818StrReplaceCommand
+        | Anthropic::Beta::BetaMemoryTool20250818InsertCommand
+        | Anthropic::Beta::BetaMemoryTool20250818DeleteCommand
+        | Anthropic::Beta::BetaMemoryTool20250818RenameCommand
+
+      module BetaMemoryTool20250818Command
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_memory_tool20250818_command]
+      end
+    end
+  end
+end

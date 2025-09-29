@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    class BetaInputTokensTrigger = Beta::BetaInputTokensTrigger
+
+    module Beta
+      type beta_input_tokens_trigger = { type: :input_tokens, value: Integer }
+
+      class BetaInputTokensTrigger < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :input_tokens
+
+        attr_accessor value: Integer
+
+        def initialize: (value: Integer, ?type: :input_tokens) -> void
+
+        def to_hash: -> { type: :input_tokens, value: Integer }
+      end
+    end
+  end
+end
