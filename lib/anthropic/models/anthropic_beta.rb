@@ -37,6 +37,8 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::AnthropicBeta::CONTEXT_1M_2025_08_07 }
 
+      variant const: -> { Anthropic::Models::AnthropicBeta::CONTEXT_MANAGEMENT_2025_06_27 }
+
       # @!method self.variants
       #   @return [Array(String, Symbol)]
 
@@ -61,6 +63,7 @@ module Anthropic
       CODE_EXECUTION_2025_05_22 = :"code-execution-2025-05-22"
       EXTENDED_CACHE_TTL_2025_04_11 = :"extended-cache-ttl-2025-04-11"
       CONTEXT_1M_2025_08_07 = :"context-1m-2025-08-07"
+      CONTEXT_MANAGEMENT_2025_06_27 = :"context-management-2025-06-27"
 
       # @!endgroup
     end
