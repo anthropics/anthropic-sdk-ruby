@@ -86,7 +86,7 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
       assert_match(/^AWS4-HMAC-SHA256 Credential=my-aws-access/, auth)
     end
 
-    assert_equal(2, acc.uniq.length)
+    assert_equal(3, acc.uniq.length)
   end
 
   def test_request_base_url
