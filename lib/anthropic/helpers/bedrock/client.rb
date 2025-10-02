@@ -150,19 +150,10 @@ module Anthropic
         # @return [Hash{Symbol=>Object}]
         private def build_request(req, opts)
           fit_req_to_bedrock_specs!(req)
-
-          request_input = super
-
-          signed_request = @signer.sign_request(
-            http_method: request_input[:method],
-            url: request_input[:url],
-            headers: request_input[:headers],
-            body: request_input[:body]
-          )
-
-          request_input[:headers].merge!(signed_request.headers)
-
-          request_input
+          req = super
+          body = req.fetch(:body)
+          req[:body] = StringIO.new(body.to_a.join) if body.is_a?(Enumerator)
+          req
         end
 
         # @api private
@@ -181,17 +172,10 @@ module Anthropic
         #
         # @return [Hash{Symbol, Object}]
         private def transform_request(request)
-          sliced = super.slice(
-            :method,
-            :url,
-            :headers,
-            :body
-          ).transform_keys(method: :http_method)
-          body = StringIO.new(body.to_a.join) if (body = sliced.fetch(:body)).is_a?(Enumerator)
-
-          signed = @signer.sign_request({**sliced, body: body})
-
-          headers = Anthropic::Internal::Util.normalized_headers(request.fetch(:headers), signed.headers)
+          headers = request.fetch(:headers)
+          sliced = super.slice(:method, :url, :body).transform_keys(method: :http_method)
+          signed = @signer.sign_request({**sliced, headers: headers})
+          headers = Anthropic::Internal::Util.normalized_headers(headers, signed.headers)
           {**request, headers: headers}
         end
 
