@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.10.1 (2025-10-06)
+
+Full Changelog: [v1.10.0...v1.10.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.10.0...v1.10.1)
+
+### Bug Fixes
+
+* always send `filename=...` for multipart requests where a file is expected ([0ffb017](https://github.com/anthropics/anthropic-sdk-ruby/commit/0ffb017c542b98891c6fcee76d7e3f3cb7ae5f26))
+* bedrock signing issue with retried requests ([#719](https://github.com/anthropics/anthropic-sdk-ruby/issues/719)) ([69372ed](https://github.com/anthropics/anthropic-sdk-ruby/commit/69372edca8cca2529d04baafa58160890c7b95a4))
+* coroutine leaks from connection pool ([7b9fb31](https://github.com/anthropics/anthropic-sdk-ruby/commit/7b9fb31c9d7d5407dee7203263001ba1050750b4))
+
+
+### Chores
+
+* **client:** add context-management-2025-06-27 beta header ([067535d](https://github.com/anthropics/anthropic-sdk-ruby/commit/067535dbcc44cc244497faeca7943a435f09c49f))
+* **client:** add model-context-window-exceeded-2025-08-26 beta header ([b12c86f](https://github.com/anthropics/anthropic-sdk-ruby/commit/b12c86f80f45b6dee023c2bfc14895bf93348105))
+
 ## 1.10.0 (2025-09-29)
 
 Full Changelog: [v1.9.0...v1.10.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.9.0...v1.10.0)
