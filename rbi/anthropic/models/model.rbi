@@ -33,6 +33,14 @@ module Anthropic
       CLAUDE_3_5_HAIKU_20241022 =
         T.let(:"claude-3-5-haiku-20241022", Anthropic::Model::TaggedSymbol)
 
+      # Hybrid model, capable of near-instant responses and extended thinking
+      CLAUDE_HAIKU_4_5 =
+        T.let(:"claude-haiku-4-5", Anthropic::Model::TaggedSymbol)
+
+      # Hybrid model, capable of near-instant responses and extended thinking
+      CLAUDE_HAIKU_4_5_20251001 =
+        T.let(:"claude-haiku-4-5-20251001", Anthropic::Model::TaggedSymbol)
+
       # High-performance model with extended thinking
       CLAUDE_SONNET_4_20250514 =
         T.let(:"claude-sonnet-4-20250514", Anthropic::Model::TaggedSymbol)
