@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.11.0 (2025-10-15)
+
+Full Changelog: [v1.10.1...v1.11.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.10.1...v1.11.0)
+
+### Features
+
+* **api:** manual updates ([0088614](https://github.com/anthropics/anthropic-sdk-ruby/commit/008861485c50c3d17f54fa96b32b2ebe70f3dcbd))
+
+
+### Bug Fixes
+
+* absolutely qualified uris should always override the default ([cb93cb0](https://github.com/anthropics/anthropic-sdk-ruby/commit/cb93cb060fbb07b3312d25a25c9bbb2576ca67ca))
+* should not reuse buffers for `IO.copy_stream` interop ([3660d10](https://github.com/anthropics/anthropic-sdk-ruby/commit/3660d10b1a729306a1091126facbcf77e60dfc79))
+
+
+### Chores
+
+* ignore linter error for tests having large collections ([464c042](https://github.com/anthropics/anthropic-sdk-ruby/commit/464c042cd2b20e50718ff734037632ae47edb9ea))
+
 ## 1.10.1 (2025-10-06)
 
 Full Changelog: [v1.10.0...v1.10.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.10.0...v1.10.1)
