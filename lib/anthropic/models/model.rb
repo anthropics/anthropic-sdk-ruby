@@ -16,6 +16,10 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::Model::CLAUDE_3_5_HAIKU_20241022 }
 
+      variant const: -> { Anthropic::Models::Model::CLAUDE_HAIKU_4_5 }
+
+      variant const: -> { Anthropic::Models::Model::CLAUDE_HAIKU_4_5_20251001 }
+
       variant const: -> { Anthropic::Models::Model::CLAUDE_SONNET_4_20250514 }
 
       variant const: -> { Anthropic::Models::Model::CLAUDE_SONNET_4_0 }
@@ -68,6 +72,12 @@ module Anthropic
 
       # Our fastest model
       CLAUDE_3_5_HAIKU_20241022 = :"claude-3-5-haiku-20241022"
+
+      # Hybrid model, capable of near-instant responses and extended thinking
+      CLAUDE_HAIKU_4_5 = :"claude-haiku-4-5"
+
+      # Hybrid model, capable of near-instant responses and extended thinking
+      CLAUDE_HAIKU_4_5_20251001 = :"claude-haiku-4-5-20251001"
 
       # High-performance model with extended thinking
       CLAUDE_SONNET_4_20250514 = :"claude-sonnet-4-20250514"
