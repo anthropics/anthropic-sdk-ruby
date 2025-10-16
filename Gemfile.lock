@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    anthropic (1.11.0)
+    anthropic (1.12.0)
       connection_pool
 
 GEM

@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.12.0 (2025-10-16)
+
+Full Changelog: [v1.11.0...v1.12.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.11.0...v1.12.0)
+
+### Features
+
+* **api:** adding support for agent skills ([0e6b431](https://github.com/anthropics/anthropic-sdk-ruby/commit/0e6b431be2767a9674f80e3764955d8a5531cfec))
+
 ## 1.11.0 (2025-10-15)
 
 Full Changelog: [v1.10.1...v1.11.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.10.1...v1.11.0)
