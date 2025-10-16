@@ -6,9 +6,15 @@ module Anthropic
       module Beta
         module Messages
         end
+
+        module Skills
+        end
       end
 
       module Messages
+      end
+
+      module Skills
       end
     end
   end

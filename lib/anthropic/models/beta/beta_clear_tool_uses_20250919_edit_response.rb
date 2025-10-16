@@ -23,8 +23,6 @@ module Anthropic
         required :type, const: :clear_tool_uses_20250919
 
         # @!method initialize(cleared_input_tokens:, cleared_tool_uses:, type: :clear_tool_uses_20250919)
-        #   Results for clear_tool_uses_20250919 edit.
-        #
         #   @param cleared_input_tokens [Integer] Number of input tokens cleared by this edit.
         #
         #   @param cleared_tool_uses [Integer] Number of tool uses that were cleared.

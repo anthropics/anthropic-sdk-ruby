@@ -11,7 +11,7 @@ module Anthropic
       #   Must be ≥1024 and less than `max_tokens`.
       #
       #   See
-      #   [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
+      #   [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking)
       #   for details.
       #
       #   @return [Integer]

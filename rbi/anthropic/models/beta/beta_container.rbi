@@ -19,18 +19,38 @@ module Anthropic
         sig { returns(Time) }
         attr_accessor :expires_at
 
+        # Skills loaded in the container
+        sig { returns(T.nilable(T::Array[Anthropic::Beta::BetaSkill])) }
+        attr_accessor :skills
+
         # Information about the container used in the request (for the code execution
         # tool)
-        sig { params(id: String, expires_at: Time).returns(T.attached_class) }
+        sig do
+          params(
+            id: String,
+            expires_at: Time,
+            skills: T.nilable(T::Array[Anthropic::Beta::BetaSkill::OrHash])
+          ).returns(T.attached_class)
+        end
         def self.new(
           # Identifier for the container used in this request
           id:,
           # The time at which the container will expire.
-          expires_at:
+          expires_at:,
+          # Skills loaded in the container
+          skills:
         )
         end
 
-        sig { override.returns({ id: String, expires_at: Time }) }
+        sig do
+          override.returns(
+            {
+              id: String,
+              expires_at: Time,
+              skills: T.nilable(T::Array[Anthropic::Beta::BetaSkill])
+            }
+          )
+        end
         def to_hash
         end
       end

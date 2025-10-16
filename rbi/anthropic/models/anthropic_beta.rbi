@@ -85,6 +85,8 @@ module Anthropic
           :"model-context-window-exceeded-2025-08-26",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      SKILLS_2025_10_02 =
+        T.let(:"skills-2025-10-02", Anthropic::AnthropicBeta::TaggedSymbol)
     end
   end
 end

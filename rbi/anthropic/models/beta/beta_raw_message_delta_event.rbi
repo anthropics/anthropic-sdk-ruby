@@ -14,7 +14,7 @@ module Anthropic
             )
           end
 
-        # Information about context management operations applied during the request.
+        # Information about context management strategies applied during the request
         sig do
           returns(T.nilable(Anthropic::Beta::BetaContextManagementResponse))
         end
@@ -74,7 +74,7 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # Information about context management operations applied during the request.
+          # Information about context management strategies applied during the request
           context_management:,
           delta:,
           # Billing and rate-limit usage.

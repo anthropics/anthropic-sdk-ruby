@@ -3,16 +3,31 @@ module Anthropic
     class BetaContainer = Beta::BetaContainer
 
     module Beta
-      type beta_container = { id: String, expires_at: Time }
+      type beta_container =
+        {
+          id: String,
+          expires_at: Time,
+          skills: ::Array[Anthropic::Beta::BetaSkill]?
+        }
 
       class BetaContainer < Anthropic::Internal::Type::BaseModel
         attr_accessor id: String
 
         attr_accessor expires_at: Time
 
-        def initialize: (id: String, expires_at: Time) -> void
+        attr_accessor skills: ::Array[Anthropic::Beta::BetaSkill]?
 
-        def to_hash: -> { id: String, expires_at: Time }
+        def initialize: (
+          id: String,
+          expires_at: Time,
+          skills: ::Array[Anthropic::Beta::BetaSkill]?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          expires_at: Time,
+          skills: ::Array[Anthropic::Beta::BetaSkill]?
+        }
       end
     end
   end

@@ -1,0 +1,59 @@
+module Anthropic
+  module Models
+    module Beta
+      module Skills
+        type version_retrieve_response =
+          {
+            id: String,
+            created_at: String,
+            description: String,
+            directory: String,
+            name: String,
+            skill_id: String,
+            type: String,
+            version: String
+          }
+
+        class VersionRetrieveResponse < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor created_at: String
+
+          attr_accessor description: String
+
+          attr_accessor directory: String
+
+          attr_accessor name: String
+
+          attr_accessor skill_id: String
+
+          attr_accessor type: String
+
+          attr_accessor version: String
+
+          def initialize: (
+            id: String,
+            created_at: String,
+            description: String,
+            directory: String,
+            name: String,
+            skill_id: String,
+            type: String,
+            version: String
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            created_at: String,
+            description: String,
+            directory: String,
+            name: String,
+            skill_id: String,
+            type: String,
+            version: String
+          }
+        end
+      end
+    end
+  end
+end

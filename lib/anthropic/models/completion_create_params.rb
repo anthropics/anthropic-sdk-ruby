@@ -36,10 +36,9 @@ module Anthropic
       #   "\n\nHuman: {userQuestion}\n\nAssistant:"
       #   ```
       #
-      #   See [prompt validation](https://docs.anthropic.com/en/api/prompt-validation) and
-      #   our guide to
-      #   [prompt design](https://docs.anthropic.com/en/docs/intro-to-prompting) for more
-      #   details.
+      #   See [prompt validation](https://docs.claude.com/en/api/prompt-validation) and
+      #   our guide to [prompt design](https://docs.claude.com/en/docs/intro-to-prompting)
+      #   for more details.
       #
       #   @return [String]
       required :prompt, String

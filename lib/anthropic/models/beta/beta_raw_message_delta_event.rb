@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       class BetaRawMessageDeltaEvent < Anthropic::Internal::Type::BaseModel
         # @!attribute context_management
-        #   Information about context management operations applied during the request.
+        #   Information about context management strategies applied during the request
         #
         #   @return [Anthropic::Models::Beta::BetaContextManagementResponse, nil]
         required :context_management, -> { Anthropic::Beta::BetaContextManagementResponse }, nil?: true
@@ -44,7 +44,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaRawMessageDeltaEvent} for more details.
         #
-        #   @param context_management [Anthropic::Models::Beta::BetaContextManagementResponse, nil] Information about context management operations applied during the request.
+        #   @param context_management [Anthropic::Models::Beta::BetaContextManagementResponse, nil] Information about context management strategies applied during the request
         #
         #   @param delta [Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta]
         #
