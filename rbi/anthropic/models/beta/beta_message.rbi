@@ -64,7 +64,9 @@ module Anthropic
         sig { returns(T::Array[Anthropic::Beta::BetaContentBlock::Variants]) }
         attr_accessor :content
 
-        # Information about context management operations applied during the request.
+        # Context management response.
+        #
+        # Information about context management strategies applied during the request.
         sig do
           returns(T.nilable(Anthropic::Beta::BetaContextManagementResponse))
         end
@@ -217,7 +219,9 @@ module Anthropic
           # [{ "type": "text", "text": "B)" }]
           # ```
           content:,
-          # Information about context management operations applied during the request.
+          # Context management response.
+          #
+          # Information about context management strategies applied during the request.
           context_management:,
           # The model that will complete your prompt.\n\nSee
           # [models](https://docs.anthropic.com/en/docs/models-overview) for additional

@@ -12,6 +12,9 @@ module Anthropic
       # @return [Anthropic::Resources::Beta::Files]
       attr_reader :files
 
+      # @return [Anthropic::Resources::Beta::Skills]
+      attr_reader :skills
+
       # @api private
       #
       # @param client [Anthropic::Client]
@@ -20,6 +23,7 @@ module Anthropic
         @models = Anthropic::Resources::Beta::Models.new(client: client)
         @messages = Anthropic::Resources::Beta::Messages.new(client: client)
         @files = Anthropic::Resources::Beta::Files.new(client: client)
+        @skills = Anthropic::Resources::Beta::Skills.new(client: client)
       end
     end
   end

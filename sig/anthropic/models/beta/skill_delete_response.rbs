@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      type skill_delete_response = { id: String, type: String }
+
+      class SkillDeleteResponse < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor type: String
+
+        def initialize: (id: String, type: String) -> void
+
+        def to_hash: -> { id: String, type: String }
+      end
+    end
+  end
+end

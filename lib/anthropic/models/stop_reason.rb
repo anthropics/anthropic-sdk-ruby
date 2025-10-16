@@ -11,7 +11,6 @@ module Anthropic
       TOOL_USE = :tool_use
       PAUSE_TURN = :pause_turn
       REFUSAL = :refusal
-      MODEL_CONTEXT_WINDOW_EXCEEDED = :model_context_window_exceeded
 
       # @!method self.values
       #   @return [Array<Symbol>]

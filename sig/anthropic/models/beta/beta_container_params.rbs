@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    class BetaContainerParams = Beta::BetaContainerParams
+
+    module Beta
+      type beta_container_params =
+        { id: String?, skills: ::Array[Anthropic::Beta::BetaSkillParams]? }
+
+      class BetaContainerParams < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String?
+
+        attr_accessor skills: ::Array[Anthropic::Beta::BetaSkillParams]?
+
+        def initialize: (
+          ?id: String?,
+          ?skills: ::Array[Anthropic::Beta::BetaSkillParams]?
+        ) -> void
+
+        def to_hash: -> {
+          id: String?,
+          skills: ::Array[Anthropic::Beta::BetaSkillParams]?
+        }
+      end
+    end
+  end
+end

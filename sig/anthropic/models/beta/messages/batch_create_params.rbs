@@ -59,7 +59,7 @@ module Anthropic
                 max_tokens: Integer,
                 messages: ::Array[Anthropic::Beta::BetaMessageParam],
                 model: Anthropic::Models::model,
-                container: String?,
+                container: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::container?,
                 context_management: Anthropic::Beta::BetaContextManagementConfig?,
                 mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
                 metadata: Anthropic::Beta::BetaMetadata,
@@ -82,7 +82,7 @@ module Anthropic
 
               attr_accessor model: Anthropic::Models::model
 
-              attr_accessor container: String?
+              attr_accessor container: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::container?
 
               attr_accessor context_management: Anthropic::Beta::BetaContextManagementConfig?
 
@@ -152,7 +152,7 @@ module Anthropic
                 max_tokens: Integer,
                 messages: ::Array[Anthropic::Beta::BetaMessageParam],
                 model: Anthropic::Models::model,
-                ?container: String?,
+                ?container: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::container?,
                 ?context_management: Anthropic::Beta::BetaContextManagementConfig?,
                 ?mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
                 ?metadata: Anthropic::Beta::BetaMetadata,
@@ -172,7 +172,7 @@ module Anthropic
                 max_tokens: Integer,
                 messages: ::Array[Anthropic::Beta::BetaMessageParam],
                 model: Anthropic::Models::model,
-                container: String?,
+                container: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::container?,
                 context_management: Anthropic::Beta::BetaContextManagementConfig?,
                 mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
                 metadata: Anthropic::Beta::BetaMetadata,
@@ -187,6 +187,14 @@ module Anthropic
                 top_k: Integer,
                 top_p: Float
               }
+
+              type container = Anthropic::Beta::BetaContainerParams | String
+
+              module Container
+                extend Anthropic::Internal::Type::Union
+
+                def self?.variants: -> ::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::container]
+              end
 
               type service_tier = :auto | :standard_only
 

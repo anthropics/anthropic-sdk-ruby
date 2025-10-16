@@ -12,10 +12,10 @@ module Anthropic
       # [Legacy] Create a Text Completion.
       #
       # The Text Completions API is a legacy API. We recommend using the
-      # [Messages API](https://docs.anthropic.com/en/api/messages) going forward.
+      # [Messages API](https://docs.claude.com/en/api/messages) going forward.
       #
       # Future models and features will not be compatible with Text Completions. See our
-      # [migration guide](https://docs.anthropic.com/en/api/migrating-from-text-completions-to-messages)
+      # [migration guide](https://docs.claude.com/en/api/migrating-from-text-completions-to-messages)
       # for guidance in migrating from Text Completions to Messages.
       #
       # @overload create(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
@@ -68,10 +68,10 @@ module Anthropic
       # [Legacy] Create a Text Completion.
       #
       # The Text Completions API is a legacy API. We recommend using the
-      # [Messages API](https://docs.anthropic.com/en/api/messages) going forward.
+      # [Messages API](https://docs.claude.com/en/api/messages) going forward.
       #
       # Future models and features will not be compatible with Text Completions. See our
-      # [migration guide](https://docs.anthropic.com/en/api/migrating-from-text-completions-to-messages)
+      # [migration guide](https://docs.claude.com/en/api/migrating-from-text-completions-to-messages)
       # for guidance in migrating from Text Completions to Messages.
       #
       # @overload create_streaming(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})

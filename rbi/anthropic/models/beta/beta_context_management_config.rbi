@@ -30,7 +30,6 @@ module Anthropic
         end
         attr_writer :edits
 
-        # Configuration for context management operations.
         sig do
           params(
             edits:

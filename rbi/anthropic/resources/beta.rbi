@@ -12,6 +12,9 @@ module Anthropic
       sig { returns(Anthropic::Resources::Beta::Files) }
       attr_reader :files
 
+      sig { returns(Anthropic::Resources::Beta::Skills) }
+      attr_reader :skills
+
       # @api private
       sig { params(client: Anthropic::Client).returns(T.attached_class) }
       def self.new(client:)

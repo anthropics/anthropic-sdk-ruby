@@ -7,6 +7,8 @@ module Anthropic
 
       attr_reader files: Anthropic::Resources::Beta::Files
 
+      attr_reader skills: Anthropic::Resources::Beta::Skills
+
       def initialize: (client: Anthropic::Client) -> void
     end
   end
