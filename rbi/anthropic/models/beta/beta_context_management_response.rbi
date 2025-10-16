@@ -22,7 +22,6 @@ module Anthropic
         end
         attr_accessor :applied_edits
 
-        # Information about context management operations applied during the request.
         sig do
           params(
             applied_edits:

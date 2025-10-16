@@ -1,0 +1,52 @@
+module Anthropic
+  module Models
+    module Beta
+      type skill_list_response =
+        {
+          id: String,
+          created_at: String,
+          display_title: String?,
+          latest_version: String?,
+          source: String,
+          type: String,
+          updated_at: String
+        }
+
+      class SkillListResponse < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor created_at: String
+
+        attr_accessor display_title: String?
+
+        attr_accessor latest_version: String?
+
+        attr_accessor source: String
+
+        attr_accessor type: String
+
+        attr_accessor updated_at: String
+
+        def initialize: (
+          id: String,
+          created_at: String,
+          display_title: String?,
+          latest_version: String?,
+          source: String,
+          type: String,
+          updated_at: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          created_at: String,
+          display_title: String?,
+          latest_version: String?,
+          source: String,
+          type: String,
+          updated_at: String
+        }
+      end
+    end
+  end
+end

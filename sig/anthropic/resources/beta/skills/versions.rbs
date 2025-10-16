@@ -1,0 +1,40 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Skills
+        class Versions
+          def create: (
+            String skill_id,
+            ?files: ::Array[Anthropic::Internal::file_input]?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Models::Beta::Skills::VersionCreateResponse
+
+          def retrieve: (
+            String version,
+            skill_id: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Models::Beta::Skills::VersionRetrieveResponse
+
+          def list: (
+            String skill_id,
+            ?limit: Integer?,
+            ?page: String?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Models::Beta::Skills::VersionListResponse]
+
+          def delete: (
+            String version,
+            skill_id: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Models::Beta::Skills::VersionDeleteResponse
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

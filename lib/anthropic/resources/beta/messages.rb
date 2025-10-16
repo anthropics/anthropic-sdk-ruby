@@ -28,9 +28,9 @@ module Anthropic
         #
         # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.\n\nSee [models](https://do
         #
-        # @param container [String, nil] Body param: Container identifier for reuse across requests.
+        # @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Body param: Container identifier for reuse across requests.
         #
-        # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Configuration for context management operations.
+        # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Context management configuration.
         #
         # @param mcp_servers [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>] Body param: MCP servers to be utilized in this request
         #
@@ -99,9 +99,9 @@ module Anthropic
         #
         # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.\n\nSee [models](https://do
         #
-        # @param container [String, nil] Body param: Container identifier for reuse across requests.
+        # @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Body param: Container identifier for reuse across requests.
         #
-        # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Configuration for context management operations.
+        # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Context management configuration.
         #
         # @param mcp_servers [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>] Body param: MCP servers to be utilized in this request
         #
@@ -171,7 +171,7 @@ module Anthropic
         #
         # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.\n\nSee [models](https://do
         #
-        # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Configuration for context management operations.
+        # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Context management configuration.
         #
         # @param mcp_servers [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>] Body param: MCP servers to be utilized in this request
         #

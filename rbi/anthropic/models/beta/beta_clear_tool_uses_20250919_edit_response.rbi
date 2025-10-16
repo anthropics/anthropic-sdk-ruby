@@ -27,7 +27,6 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
-        # Results for clear_tool_uses_20250919 edit.
         sig do
           params(
             cleared_input_tokens: Integer,

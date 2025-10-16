@@ -17,7 +17,7 @@ module Anthropic
         #   only specifies the absolute maximum number of tokens to generate.
         #
         #   Different models have different maximum values for this parameter. See
-        #   [models](https://docs.anthropic.com/en/docs/models-overview) for details.
+        #   [models](https://docs.claude.com/en/docs/models-overview) for details.
         #
         #   @return [Integer]
         required :max_tokens, Integer
@@ -80,12 +80,12 @@ module Anthropic
         #   { "role": "user", "content": [{ "type": "text", "text": "Hello, Claude" }] }
         #   ```
         #
-        #   See [input examples](https://docs.anthropic.com/en/api/messages-examples).
+        #   See [input examples](https://docs.claude.com/en/api/messages-examples).
         #
         #   Note that if you want to include a
-        #   [system prompt](https://docs.anthropic.com/en/docs/system-prompts), you can use
-        #   the top-level `system` parameter — there is no `"system"` role for input
-        #   messages in the Messages API.
+        #   [system prompt](https://docs.claude.com/en/docs/system-prompts), you can use the
+        #   top-level `system` parameter — there is no `"system"` role for input messages in
+        #   the Messages API.
         #
         #   There is a limit of 100,000 messages in a single request.
         #
@@ -103,11 +103,14 @@ module Anthropic
         # @!attribute container
         #   Container identifier for reuse across requests.
         #
-        #   @return [String, nil]
-        optional :container, String, nil?: true
+        #   @return [Anthropic::Models::Beta::BetaContainerParams, String, nil]
+        optional :container, union: -> { Anthropic::Beta::MessageCreateParams::Container }, nil?: true
 
         # @!attribute context_management
-        #   Configuration for context management operations.
+        #   Context management configuration.
+        #
+        #   This allows you to control how Claude manages context across multiple requests,
+        #   such as whether to clear function results or not.
         #
         #   @return [Anthropic::Models::Beta::BetaContextManagementConfig, nil]
         optional :context_management, -> { Anthropic::Beta::BetaContextManagementConfig }, nil?: true
@@ -130,7 +133,7 @@ module Anthropic
         #   for this request.
         #
         #   Anthropic offers different levels of service for your API requests. See
-        #   [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
+        #   [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
         #
         #   @return [Symbol, Anthropic::Models::Beta::MessageCreateParams::ServiceTier, nil]
         optional :service_tier, enum: -> { Anthropic::Beta::MessageCreateParams::ServiceTier }
@@ -154,7 +157,7 @@ module Anthropic
         #
         #   A system prompt is a way of providing context and instructions to Claude, such
         #   as specifying a particular goal or role. See our
-        #   [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
+        #   [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
         #
         #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>, nil]
         optional :system_, union: -> { Anthropic::Beta::MessageCreateParams::System }, api_name: :system
@@ -180,7 +183,7 @@ module Anthropic
         #   tokens and counts towards your `max_tokens` limit.
         #
         #   See
-        #   [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
+        #   [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking)
         #   for details.
         #
         #   @return [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, nil]
@@ -203,9 +206,9 @@ module Anthropic
         #
         #   There are two types of tools: **client tools** and **server tools**. The
         #   behavior described below applies to client tools. For
-        #   [server tools](https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/overview#server-tools),
+        #   [server tools](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview#server-tools),
         #   see their individual documentation as each has its own behavior (e.g., the
-        #   [web search tool](https://docs.anthropic.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
+        #   [web search tool](https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool)).
         #
         #   Each tool definition includes:
         #
@@ -268,7 +271,7 @@ module Anthropic
         #   functions, or more generally whenever you want the model to produce a particular
         #   JSON structure of output.
         #
-        #   See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
+        #   See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
         #
         #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaCodeExecutionTool20250522, Anthropic::Models::Beta::BetaCodeExecutionTool20250825, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaMemoryTool20250818, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaToolTextEditor20250429, Anthropic::Models::Beta::BetaToolTextEditor20250728, Anthropic::Models::Beta::BetaWebSearchTool20250305, Anthropic::Models::Beta::BetaWebFetchTool20250910>, nil]
         optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaToolUnion] }
@@ -315,9 +318,9 @@ module Anthropic
         #
         #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
         #
-        #   @param container [String, nil] Container identifier for reuse across requests.
+        #   @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Container identifier for reuse across requests.
         #
-        #   @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Configuration for context management operations.
+        #   @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Context management configuration.
         #
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>] MCP servers to be utilized in this request
         #
@@ -345,11 +348,24 @@ module Anthropic
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
+        # Container identifier for reuse across requests.
+        module Container
+          extend Anthropic::Internal::Type::Union
+
+          # Container parameters with skills to be loaded.
+          variant -> { Anthropic::Beta::BetaContainerParams }
+
+          variant String
+
+          # @!method self.variants
+          #   @return [Array(Anthropic::Models::Beta::BetaContainerParams, String)]
+        end
+
         # Determines whether to use priority capacity (if available) or standard capacity
         # for this request.
         #
         # Anthropic offers different levels of service for your API requests. See
-        # [service-tiers](https://docs.anthropic.com/en/api/service-tiers) for details.
+        # [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
         module ServiceTier
           extend Anthropic::Internal::Type::Enum
 
@@ -364,7 +380,7 @@ module Anthropic
         #
         # A system prompt is a way of providing context and instructions to Claude, such
         # as specifying a particular goal or role. See our
-        # [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
+        # [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
         module System
           extend Anthropic::Internal::Type::Union
 
