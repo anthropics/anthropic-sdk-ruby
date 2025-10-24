@@ -59,14 +59,6 @@ module Anthropic
         def accumulated_text
         end
 
-        sig { returns(T::Hash[String, String]) }
-        def headers
-        end
-
-        sig { returns(Integer) }
-        def status
-        end
-
         sig do
           params(
             event: Anthropic::Streaming::RawMessageEvent,
