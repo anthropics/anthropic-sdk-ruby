@@ -51,3 +51,16 @@ begin
   # important: `stream` needs to be manually closed if it is not consumed.
   stream.close
 end
+
+begin
+  pp("----- getting the status and headers -----")
+
+  stream = anthropic.messages.stream(
+    max_tokens: 1024,
+    messages: [{role: :user, content: "Say hello there!"}],
+    model: :"claude-sonnet-4-5-20250929"
+  )
+
+  pp(stream.status)
+  pp(stream.headers)
+end

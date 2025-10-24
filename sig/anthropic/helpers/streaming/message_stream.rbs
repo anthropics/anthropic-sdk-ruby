@@ -38,10 +38,6 @@ module Anthropic
 
         def accumulated_text: -> String
 
-        def headers: -> Hash[String, String]
-
-        def status: -> Integer
-
         private
 
         def iterator: -> Enumerable[stream_event]
