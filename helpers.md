@@ -57,6 +57,14 @@ Blocks until the stream has been read to completion and returns the accumulated 
 
 Blocks until the stream has been read to completion and returns all `text` content blocks concatenated together.
 
+#### `.headers`
+
+Returns the HTTP response headers from the streaming request. Provides access to rate limit information, request IDs, and other metadata.
+
+#### `.status`
+
+Returns the HTTP status code from the streaming request.
+
 ### Events
 
 The events listed here are just the event types that the SDK extends, for a full list of the events returned by the API, see [these docs](https://docs.anthropic.com/en/api/messages-streaming#event-types).

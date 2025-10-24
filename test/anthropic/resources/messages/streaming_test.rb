@@ -222,6 +222,57 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
     assert_equal(42, citation.end_char_index)
   end
 
+  def test_stream_response_headers
+    stub_request(:post, "http://localhost/v1/messages")
+      .with(
+        headers: {
+          "Accept" => "text/event-stream",
+          "Content-Type" => "application/json"
+        }
+      )
+      .to_return(
+        status: 200,
+        headers: {
+          "Content-Type" => "text/event-stream",
+          "anthropic-ratelimit-requests-remaining" => "48",
+          "anthropic-ratelimit-tokens-remaining" => "48000",
+          "anthropic-ratelimit-input-tokens-remaining" => "39000",
+          "anthropic-ratelimit-output-tokens-remaining" => "9000",
+          "request-id" => "req_stream456"
+        },
+        body: basic_sse_response
+      )
+
+    stream = @client.messages.stream(**basic_params)
+
+    # Test that headers are accessible immediately (before consuming stream):
+    refute_nil(stream.headers)
+    assert_equal("48", stream.headers["anthropic-ratelimit-requests-remaining"])
+    assert_equal("48000", stream.headers["anthropic-ratelimit-tokens-remaining"])
+    assert_equal("39000", stream.headers["anthropic-ratelimit-input-tokens-remaining"])
+    assert_equal("9000", stream.headers["anthropic-ratelimit-output-tokens-remaining"])
+    assert_equal("req_stream456", stream.headers["request-id"])
+
+    # Verify headers remain accessible after consuming the stream:
+    stream.until_done
+    assert_equal("48", stream.headers["anthropic-ratelimit-requests-remaining"])
+    assert_equal("48000", stream.headers["anthropic-ratelimit-tokens-remaining"])
+    assert_equal("39000", stream.headers["anthropic-ratelimit-input-tokens-remaining"])
+    assert_equal("9000", stream.headers["anthropic-ratelimit-output-tokens-remaining"])
+    assert_equal("req_stream456", stream.headers["request-id"])
+  end
+
+  def test_stream_response_status
+    stub_streaming_response(basic_sse_response)
+
+    stream = @client.messages.stream(**basic_params)
+
+    assert_equal(200, stream.status)
+
+    stream.until_done
+    assert_equal(200, stream.status)
+  end
+
   def basic_sse_response
     <<~SSE
       event: message_start

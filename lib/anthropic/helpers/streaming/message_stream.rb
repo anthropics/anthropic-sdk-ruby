@@ -90,6 +90,20 @@ module Anthropic
           text_blocks.join
         end
 
+        # @api public
+        #
+        # Returns the HTTP response headers from the streaming request.
+        #
+        # @return [Hash{String=>String}] normalized HTTP headers
+        def headers = @raw_stream.headers
+
+        # @api public
+        #
+        # Returns the HTTP status code from the streaming request.
+        #
+        # @return [Integer] HTTP status code
+        def status = @raw_stream.status
+
         # @api private
         #
         # Builds up a complete Message object as streaming events arrive.
