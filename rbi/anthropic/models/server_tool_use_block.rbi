@@ -11,7 +11,7 @@ module Anthropic
       sig { returns(String) }
       attr_accessor :id
 
-      sig { returns(T.anything) }
+      sig { returns(T::Hash[Symbol, T.anything]) }
       attr_accessor :input
 
       sig { returns(Symbol) }
@@ -23,7 +23,7 @@ module Anthropic
       sig do
         params(
           id: String,
-          input: T.anything,
+          input: T::Hash[Symbol, T.anything],
           name: Symbol,
           type: Symbol
         ).returns(T.attached_class)
@@ -33,7 +33,12 @@ module Anthropic
 
       sig do
         override.returns(
-          { id: String, input: T.anything, name: Symbol, type: Symbol }
+          {
+            id: String,
+            input: T::Hash[Symbol, T.anything],
+            name: Symbol,
+            type: Symbol
+          }
         )
       end
       def to_hash

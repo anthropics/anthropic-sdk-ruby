@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    class BetaClearThinking20251015Edit = Beta::BetaClearThinking20251015Edit
+
+    module Beta
+      type beta_clear_thinking20251015_edit =
+        {
+          type: :clear_thinking_20251015,
+          keep: Anthropic::Models::Beta::BetaClearThinking20251015Edit::keep
+        }
+
+      class BetaClearThinking20251015Edit < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :clear_thinking_20251015
+
+        attr_reader keep: Anthropic::Models::Beta::BetaClearThinking20251015Edit::keep?
+
+        def keep=: (
+          Anthropic::Models::Beta::BetaClearThinking20251015Edit::keep
+        ) -> Anthropic::Models::Beta::BetaClearThinking20251015Edit::keep
+
+        def initialize: (
+          ?keep: Anthropic::Models::Beta::BetaClearThinking20251015Edit::keep,
+          ?type: :clear_thinking_20251015
+        ) -> void
+
+        def to_hash: -> {
+          type: :clear_thinking_20251015,
+          keep: Anthropic::Models::Beta::BetaClearThinking20251015Edit::keep
+        }
+
+        type keep =
+          Anthropic::Beta::BetaThinkingTurns
+          | Anthropic::Beta::BetaAllThinkingTurns
+          | :all
+
+        module Keep
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaClearThinking20251015Edit::keep]
+        end
+      end
+    end
+  end
+end

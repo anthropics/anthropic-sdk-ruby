@@ -7,11 +7,25 @@ module Anthropic
         # @!attribute edits
         #   List of context management edits to apply
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaClearToolUses20250919Edit>, nil]
-        optional :edits, -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaClearToolUses20250919Edit] }
+        #   @return [Array<Anthropic::Models::Beta::BetaClearToolUses20250919Edit, Anthropic::Models::Beta::BetaClearThinking20251015Edit>, nil]
+        optional :edits,
+                 -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaContextManagementConfig::Edit] }
 
         # @!method initialize(edits: nil)
-        #   @param edits [Array<Anthropic::Models::Beta::BetaClearToolUses20250919Edit>] List of context management edits to apply
+        #   @param edits [Array<Anthropic::Models::Beta::BetaClearToolUses20250919Edit, Anthropic::Models::Beta::BetaClearThinking20251015Edit>] List of context management edits to apply
+
+        module Edit
+          extend Anthropic::Internal::Type::Union
+
+          discriminator :type
+
+          variant :clear_tool_uses_20250919, -> { Anthropic::Beta::BetaClearToolUses20250919Edit }
+
+          variant :clear_thinking_20251015, -> { Anthropic::Beta::BetaClearThinking20251015Edit }
+
+          # @!method self.variants
+          #   @return [Array(Anthropic::Models::Beta::BetaClearToolUses20250919Edit, Anthropic::Models::Beta::BetaClearThinking20251015Edit)]
+        end
       end
     end
 

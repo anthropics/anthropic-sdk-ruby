@@ -17,7 +17,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
-        sig { returns(T.anything) }
+        sig { returns(T::Hash[Symbol, T.anything]) }
         attr_accessor :input
 
         # The name of the MCP tool
@@ -34,7 +34,7 @@ module Anthropic
         sig do
           params(
             id: String,
-            input: T.anything,
+            input: T::Hash[Symbol, T.anything],
             name: String,
             server_name: String,
             type: Symbol
@@ -55,7 +55,7 @@ module Anthropic
           override.returns(
             {
               id: String,
-              input: T.anything,
+              input: T::Hash[Symbol, T.anything],
               name: String,
               server_name: String,
               type: Symbol

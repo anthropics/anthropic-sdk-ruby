@@ -10,8 +10,8 @@ module Anthropic
 
       # @!attribute input
       #
-      #   @return [Object]
-      required :input, Anthropic::Internal::Type::Unknown
+      #   @return [Hash{Symbol=>Object}]
+      required :input, Anthropic::Internal::Type::HashOf[Anthropic::Internal::Type::Unknown]
 
       # @!attribute name
       #
@@ -25,7 +25,7 @@ module Anthropic
 
       # @!method initialize(id:, input:, name: :web_search, type: :server_tool_use)
       #   @param id [String]
-      #   @param input [Object]
+      #   @param input [Hash{Symbol=>Object}]
       #   @param name [Symbol, :web_search]
       #   @param type [Symbol, :server_tool_use]
     end

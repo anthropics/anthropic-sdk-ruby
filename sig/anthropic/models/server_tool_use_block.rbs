@@ -1,12 +1,17 @@
 module Anthropic
   module Models
     type server_tool_use_block =
-      { id: String, input: top, name: :web_search, type: :server_tool_use }
+      {
+        id: String,
+        input: ::Hash[Symbol, top],
+        name: :web_search,
+        type: :server_tool_use
+      }
 
     class ServerToolUseBlock < Anthropic::Internal::Type::BaseModel
       attr_accessor id: String
 
-      attr_accessor input: top
+      attr_accessor input: ::Hash[Symbol, top]
 
       attr_accessor name: :web_search
 
@@ -14,14 +19,14 @@ module Anthropic
 
       def initialize: (
         id: String,
-        input: top,
+        input: ::Hash[Symbol, top],
         ?name: :web_search,
         ?type: :server_tool_use
       ) -> void
 
       def to_hash: -> {
         id: String,
-        input: top,
+        input: ::Hash[Symbol, top],
         name: :web_search,
         type: :server_tool_use
       }
