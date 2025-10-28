@@ -1,12 +1,12 @@
 module Anthropic
   module Models
     type tool_use_block =
-      { id: String, input: top, name: String, type: :tool_use }
+      { id: String, input: ::Hash[Symbol, top], name: String, type: :tool_use }
 
     class ToolUseBlock < Anthropic::Internal::Type::BaseModel
       attr_accessor id: String
 
-      attr_accessor input: top
+      attr_accessor input: ::Hash[Symbol, top]
 
       attr_accessor name: String
 
@@ -14,12 +14,17 @@ module Anthropic
 
       def initialize: (
         id: String,
-        input: top,
+        input: ::Hash[Symbol, top],
         name: String,
         ?type: :tool_use
       ) -> void
 
-      def to_hash: -> { id: String, input: top, name: String, type: :tool_use }
+      def to_hash: -> {
+        id: String,
+        input: ::Hash[Symbol, top],
+        name: String,
+        type: :tool_use
+      }
     end
   end
 end

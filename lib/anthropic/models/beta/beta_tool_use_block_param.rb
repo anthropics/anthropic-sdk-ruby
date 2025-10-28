@@ -11,8 +11,8 @@ module Anthropic
 
         # @!attribute input
         #
-        #   @return [Object]
-        required :input, Anthropic::Internal::Type::Unknown
+        #   @return [Hash{Symbol=>Object}]
+        required :input, Anthropic::Internal::Type::HashOf[Anthropic::Internal::Type::Unknown]
 
         # @!attribute name
         #
@@ -33,7 +33,7 @@ module Anthropic
         # @!method initialize(id:, input:, name:, cache_control: nil, type: :tool_use)
         #   @param id [String]
         #
-        #   @param input [Object]
+        #   @param input [Hash{Symbol=>Object}]
         #
         #   @param name [String]
         #

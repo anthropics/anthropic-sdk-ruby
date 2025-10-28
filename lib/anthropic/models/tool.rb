@@ -65,8 +65,10 @@ module Anthropic
 
         # @!attribute properties
         #
-        #   @return [Object, nil]
-        optional :properties, Anthropic::Internal::Type::Unknown, nil?: true
+        #   @return [Hash{Symbol=>Object}, nil]
+        optional :properties,
+                 Anthropic::Internal::Type::HashOf[Anthropic::Internal::Type::Unknown],
+                 nil?: true
 
         # @!attribute required
         #
@@ -79,7 +81,7 @@ module Anthropic
         #   This defines the shape of the `input` that your tool accepts and that the model
         #   will produce.
         #
-        #   @param properties [Object, nil]
+        #   @param properties [Hash{Symbol=>Object}, nil]
         #   @param required [Array<String>, nil]
         #   @param type [Symbol, :object]
       end

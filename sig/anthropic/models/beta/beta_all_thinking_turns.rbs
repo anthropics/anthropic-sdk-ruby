@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaAllThinkingTurns = Beta::BetaAllThinkingTurns
+
+    module Beta
+      type beta_all_thinking_turns = { type: :all }
+
+      class BetaAllThinkingTurns < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :all
+
+        def initialize: (?type: :all) -> void
+
+        def to_hash: -> { type: :all }
+      end
+    end
+  end
+end

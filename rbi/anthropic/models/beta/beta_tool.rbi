@@ -118,7 +118,7 @@ module Anthropic
           sig { returns(Symbol) }
           attr_accessor :type
 
-          sig { returns(T.nilable(T.anything)) }
+          sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
           attr_accessor :properties
 
           sig { returns(T.nilable(T::Array[String])) }
@@ -130,7 +130,7 @@ module Anthropic
           # will produce.
           sig do
             params(
-              properties: T.nilable(T.anything),
+              properties: T.nilable(T::Hash[Symbol, T.anything]),
               required: T.nilable(T::Array[String]),
               type: Symbol
             ).returns(T.attached_class)
@@ -142,7 +142,7 @@ module Anthropic
             override.returns(
               {
                 type: Symbol,
-                properties: T.nilable(T.anything),
+                properties: T.nilable(T::Hash[Symbol, T.anything]),
                 required: T.nilable(T::Array[String])
               }
             )

@@ -4,22 +4,34 @@ module Anthropic
 
     module Beta
       type beta_context_management_config =
-        { edits: ::Array[Anthropic::Beta::BetaClearToolUses20250919Edit] }
+        {
+          edits: ::Array[Anthropic::Models::Beta::BetaContextManagementConfig::edit]
+        }
 
       class BetaContextManagementConfig < Anthropic::Internal::Type::BaseModel
-        attr_reader edits: ::Array[Anthropic::Beta::BetaClearToolUses20250919Edit]?
+        attr_reader edits: ::Array[Anthropic::Models::Beta::BetaContextManagementConfig::edit]?
 
         def edits=: (
-          ::Array[Anthropic::Beta::BetaClearToolUses20250919Edit]
-        ) -> ::Array[Anthropic::Beta::BetaClearToolUses20250919Edit]
+          ::Array[Anthropic::Models::Beta::BetaContextManagementConfig::edit]
+        ) -> ::Array[Anthropic::Models::Beta::BetaContextManagementConfig::edit]
 
         def initialize: (
-          ?edits: ::Array[Anthropic::Beta::BetaClearToolUses20250919Edit]
+          ?edits: ::Array[Anthropic::Models::Beta::BetaContextManagementConfig::edit]
         ) -> void
 
         def to_hash: -> {
-          edits: ::Array[Anthropic::Beta::BetaClearToolUses20250919Edit]
+          edits: ::Array[Anthropic::Models::Beta::BetaContextManagementConfig::edit]
         }
+
+        type edit =
+          Anthropic::Beta::BetaClearToolUses20250919Edit
+          | Anthropic::Beta::BetaClearThinking20251015Edit
+
+        module Edit
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaContextManagementConfig::edit]
+        end
       end
     end
   end

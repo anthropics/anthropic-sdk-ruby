@@ -5,19 +5,29 @@ module Anthropic
     module Beta
       type beta_context_management_response =
         {
-          applied_edits: ::Array[Anthropic::Beta::BetaClearToolUses20250919EditResponse]
+          applied_edits: ::Array[Anthropic::Models::Beta::BetaContextManagementResponse::applied_edit]
         }
 
       class BetaContextManagementResponse < Anthropic::Internal::Type::BaseModel
-        attr_accessor applied_edits: ::Array[Anthropic::Beta::BetaClearToolUses20250919EditResponse]
+        attr_accessor applied_edits: ::Array[Anthropic::Models::Beta::BetaContextManagementResponse::applied_edit]
 
         def initialize: (
-          applied_edits: ::Array[Anthropic::Beta::BetaClearToolUses20250919EditResponse]
+          applied_edits: ::Array[Anthropic::Models::Beta::BetaContextManagementResponse::applied_edit]
         ) -> void
 
         def to_hash: -> {
-          applied_edits: ::Array[Anthropic::Beta::BetaClearToolUses20250919EditResponse]
+          applied_edits: ::Array[Anthropic::Models::Beta::BetaContextManagementResponse::applied_edit]
         }
+
+        type applied_edit =
+          Anthropic::Beta::BetaClearToolUses20250919EditResponse
+          | Anthropic::Beta::BetaClearThinking20251015EditResponse
+
+        module AppliedEdit
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaContextManagementResponse::applied_edit]
+        end
       end
     end
   end
