@@ -61,17 +61,6 @@ module Anthropic
       CLAUDE_SONNET_4_5_20250929 =
         T.let(:"claude-sonnet-4-5-20250929", Anthropic::Model::TaggedSymbol)
 
-      # Our previous most intelligent model
-      CLAUDE_3_5_SONNET_LATEST =
-        T.let(:"claude-3-5-sonnet-latest", Anthropic::Model::TaggedSymbol)
-
-      # Our previous most intelligent model
-      CLAUDE_3_5_SONNET_20241022 =
-        T.let(:"claude-3-5-sonnet-20241022", Anthropic::Model::TaggedSymbol)
-
-      CLAUDE_3_5_SONNET_20240620 =
-        T.let(:"claude-3-5-sonnet-20240620", Anthropic::Model::TaggedSymbol)
-
       # Our most capable model
       CLAUDE_OPUS_4_0 =
         T.let(:"claude-opus-4-0", Anthropic::Model::TaggedSymbol)

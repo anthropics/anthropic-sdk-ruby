@@ -30,12 +30,6 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::Model::CLAUDE_SONNET_4_5_20250929 }
 
-      variant const: -> { Anthropic::Models::Model::CLAUDE_3_5_SONNET_LATEST }
-
-      variant const: -> { Anthropic::Models::Model::CLAUDE_3_5_SONNET_20241022 }
-
-      variant const: -> { Anthropic::Models::Model::CLAUDE_3_5_SONNET_20240620 }
-
       variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_0 }
 
       variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_20250514 }
@@ -62,9 +56,15 @@ module Anthropic
       # @!group
 
       # High-performance model with early extended thinking
+      # @deprecated Will reach end-of-life on February 19th, 2026. Please migrate to a newer model.
+      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
+      # information.
       CLAUDE_3_7_SONNET_LATEST = :"claude-3-7-sonnet-latest"
 
       # High-performance model with early extended thinking
+      # @deprecated Will reach end-of-life on February 19th, 2026. Please migrate to a newer model.
+      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
+      # information.
       CLAUDE_3_7_SONNET_20250219 = :"claude-3-7-sonnet-20250219"
 
       # Fastest and most compact model for near-instant responsiveness
@@ -93,14 +93,6 @@ module Anthropic
 
       # Our best model for real-world agents and coding
       CLAUDE_SONNET_4_5_20250929 = :"claude-sonnet-4-5-20250929"
-
-      # Our previous most intelligent model
-      CLAUDE_3_5_SONNET_LATEST = :"claude-3-5-sonnet-latest"
-
-      # Our previous most intelligent model
-      CLAUDE_3_5_SONNET_20241022 = :"claude-3-5-sonnet-20241022"
-
-      CLAUDE_3_5_SONNET_20240620 = :"claude-3-5-sonnet-20240620"
 
       # Our most capable model
       CLAUDE_OPUS_4_0 = :"claude-opus-4-0"
