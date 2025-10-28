@@ -39,24 +39,28 @@ module Anthropic
       }
 
       type input_schema =
-        { type: :object, properties: top?, required: ::Array[String]? }
+        {
+          type: :object,
+          properties: ::Hash[Symbol, top]?,
+          required: ::Array[String]?
+        }
 
       class InputSchema < Anthropic::Internal::Type::BaseModel
         attr_accessor type: :object
 
-        attr_accessor properties: top?
+        attr_accessor properties: ::Hash[Symbol, top]?
 
         attr_accessor required: ::Array[String]?
 
         def initialize: (
-          ?properties: top?,
+          ?properties: ::Hash[Symbol, top]?,
           ?required: ::Array[String]?,
           ?type: :object
         ) -> void
 
         def to_hash: -> {
           type: :object,
-          properties: top?,
+          properties: ::Hash[Symbol, top]?,
           required: ::Array[String]?
         }
       end

@@ -6,7 +6,7 @@ module Anthropic
       type beta_server_tool_use_block =
         {
           id: String,
-          input: top,
+          input: ::Hash[Symbol, top],
           name: Anthropic::Models::Beta::BetaServerToolUseBlock::name_,
           type: :server_tool_use
         }
@@ -14,7 +14,7 @@ module Anthropic
       class BetaServerToolUseBlock < Anthropic::Internal::Type::BaseModel
         attr_accessor id: String
 
-        attr_accessor input: top
+        attr_accessor input: ::Hash[Symbol, top]
 
         attr_accessor name: Anthropic::Models::Beta::BetaServerToolUseBlock::name_
 
@@ -22,14 +22,14 @@ module Anthropic
 
         def initialize: (
           id: String,
-          input: top,
+          input: ::Hash[Symbol, top],
           name: Anthropic::Models::Beta::BetaServerToolUseBlock::name_,
           ?type: :server_tool_use
         ) -> void
 
         def to_hash: -> {
           id: String,
-          input: top,
+          input: ::Hash[Symbol, top],
           name: Anthropic::Models::Beta::BetaServerToolUseBlock::name_,
           type: :server_tool_use
         }

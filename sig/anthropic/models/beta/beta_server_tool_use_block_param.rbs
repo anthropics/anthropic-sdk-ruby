@@ -6,7 +6,7 @@ module Anthropic
       type beta_server_tool_use_block_param =
         {
           id: String,
-          input: top,
+          input: ::Hash[Symbol, top],
           name: Anthropic::Models::Beta::BetaServerToolUseBlockParam::name_,
           type: :server_tool_use,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
@@ -15,7 +15,7 @@ module Anthropic
       class BetaServerToolUseBlockParam < Anthropic::Internal::Type::BaseModel
         attr_accessor id: String
 
-        attr_accessor input: top
+        attr_accessor input: ::Hash[Symbol, top]
 
         attr_accessor name: Anthropic::Models::Beta::BetaServerToolUseBlockParam::name_
 
@@ -25,7 +25,7 @@ module Anthropic
 
         def initialize: (
           id: String,
-          input: top,
+          input: ::Hash[Symbol, top],
           name: Anthropic::Models::Beta::BetaServerToolUseBlockParam::name_,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?type: :server_tool_use
@@ -33,7 +33,7 @@ module Anthropic
 
         def to_hash: -> {
           id: String,
-          input: top,
+          input: ::Hash[Symbol, top],
           name: Anthropic::Models::Beta::BetaServerToolUseBlockParam::name_,
           type: :server_tool_use,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?

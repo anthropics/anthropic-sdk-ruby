@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaClearThinking20251015EditResponse = Beta::BetaClearThinking20251015EditResponse
+
+    module Beta
+      type beta_clear_thinking20251015_edit_response =
+        {
+          cleared_input_tokens: Integer,
+          cleared_thinking_turns: Integer,
+          type: :clear_thinking_20251015
+        }
+
+      class BetaClearThinking20251015EditResponse < Anthropic::Internal::Type::BaseModel
+        attr_accessor cleared_input_tokens: Integer
+
+        attr_accessor cleared_thinking_turns: Integer
+
+        attr_accessor type: :clear_thinking_20251015
+
+        def initialize: (
+          cleared_input_tokens: Integer,
+          cleared_thinking_turns: Integer,
+          ?type: :clear_thinking_20251015
+        ) -> void
+
+        def to_hash: -> {
+          cleared_input_tokens: Integer,
+          cleared_thinking_turns: Integer,
+          type: :clear_thinking_20251015
+        }
+      end
+    end
+  end
+end

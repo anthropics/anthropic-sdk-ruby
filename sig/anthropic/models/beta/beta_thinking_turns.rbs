@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    class BetaThinkingTurns = Beta::BetaThinkingTurns
+
+    module Beta
+      type beta_thinking_turns = { type: :thinking_turns, value: Integer }
+
+      class BetaThinkingTurns < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :thinking_turns
+
+        attr_accessor value: Integer
+
+        def initialize: (value: Integer, ?type: :thinking_turns) -> void
+
+        def to_hash: -> { type: :thinking_turns, value: Integer }
+      end
+    end
+  end
+end

@@ -17,7 +17,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
-        sig { returns(T.anything) }
+        sig { returns(T::Hash[Symbol, T.anything]) }
         attr_accessor :input
 
         sig do
@@ -43,7 +43,7 @@ module Anthropic
         sig do
           params(
             id: String,
-            input: T.anything,
+            input: T::Hash[Symbol, T.anything],
             name: Anthropic::Beta::BetaServerToolUseBlockParam::Name::OrSymbol,
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
@@ -64,7 +64,7 @@ module Anthropic
           override.returns(
             {
               id: String,
-              input: T.anything,
+              input: T::Hash[Symbol, T.anything],
               name:
                 Anthropic::Beta::BetaServerToolUseBlockParam::Name::OrSymbol,
               type: Symbol,

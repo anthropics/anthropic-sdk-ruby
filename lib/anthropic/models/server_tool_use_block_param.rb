@@ -10,8 +10,8 @@ module Anthropic
 
       # @!attribute input
       #
-      #   @return [Object]
-      required :input, Anthropic::Internal::Type::Unknown
+      #   @return [Hash{Symbol=>Object}]
+      required :input, Anthropic::Internal::Type::HashOf[Anthropic::Internal::Type::Unknown]
 
       # @!attribute name
       #
@@ -32,7 +32,7 @@ module Anthropic
       # @!method initialize(id:, input:, cache_control: nil, name: :web_search, type: :server_tool_use)
       #   @param id [String]
       #
-      #   @param input [Object]
+      #   @param input [Hash{Symbol=>Object}]
       #
       #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
       #
