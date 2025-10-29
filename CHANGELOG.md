@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.13.0 (2025-10-29)
+
+Full Changelog: [v1.12.0...v1.13.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.12.0...v1.13.0)
+
+### Features
+
+* add headers and status method to MessageStream ([#727](https://github.com/anthropics/anthropic-sdk-ruby/issues/727)) ([71fe5d0](https://github.com/anthropics/anthropic-sdk-ruby/commit/71fe5d072d3ba174383b7469c94375273d454ed3))
+* **api:** add ability to clear thinking in context management ([c597009](https://github.com/anthropics/anthropic-sdk-ruby/commit/c5970096e8e35cc4cf04db328dd7a0f36f10de2a))
+* handle thread interrupts in the core HTTP client ([ed4243d](https://github.com/anthropics/anthropic-sdk-ruby/commit/ed4243de16f67db3aa1cf2a01e671a481a96074e))
+
+
+### Bug Fixes
+
+* **client:** remove duplicate model ([3652886](https://github.com/anthropics/anthropic-sdk-ruby/commit/36528863de526228434352fab00d28bdc365ade8))
+
+
+### Chores
+
+* **api:** mark older sonnet models as deprecated ([071c146](https://github.com/anthropics/anthropic-sdk-ruby/commit/071c14698878c7d4bccac73f91ea48d6ffcf8c55))
+* **internal:** refactor message stream header and status retrieval ([#731](https://github.com/anthropics/anthropic-sdk-ruby/issues/731)) ([f763a1d](https://github.com/anthropics/anthropic-sdk-ruby/commit/f763a1df50369391ec235890d24ef01181f493df))
+
 ## 1.12.0 (2025-10-16)
 
 Full Changelog: [v1.11.0...v1.12.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.11.0...v1.12.0)
