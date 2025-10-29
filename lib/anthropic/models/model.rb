@@ -94,10 +94,6 @@ module Anthropic
       # Our best model for real-world agents and coding
       CLAUDE_SONNET_4_5_20250929 = :"claude-sonnet-4-5-20250929"
 
-
-      # Our best model for real-world agents and coding
-      CLAUDE_SONNET_4_5_20250929 = :"claude-sonnet-4-5-20250929"
-
       # Our most capable model
       CLAUDE_OPUS_4_0 = :"claude-opus-4-0"
 
