@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.14.0 (2025-11-07)
+
+Full Changelog: [v1.13.0...v1.14.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.13.0...v1.14.0)
+
+### Features
+
+* run-tools implementation ([#714](https://github.com/anthropics/anthropic-sdk-ruby/issues/714)) ([5cf7298](https://github.com/anthropics/anthropic-sdk-ruby/commit/5cf72982d25f97052cb87270293434e16a330818))
+
+
+### Bug Fixes
+
+* better thread safety via early initializing SSL store during HTTP client creation ([3a9531c](https://github.com/anthropics/anthropic-sdk-ruby/commit/3a9531c5b46da4d77647b14a3e8b20e3713c6da3))
+
+
+### Chores
+
+* **client:** send user-agent header ([57b22be](https://github.com/anthropics/anthropic-sdk-ruby/commit/57b22bebbc1b5c1bf676103c997e0aabdc065838))
+* **internal:** codegen related update ([15188e3](https://github.com/anthropics/anthropic-sdk-ruby/commit/15188e3963c05e4594d449a0ef871f9ae6b41ed3))
+
 ## 1.13.0 (2025-10-29)
 
 Full Changelog: [v1.12.0...v1.13.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.12.0...v1.13.0)
