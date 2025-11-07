@@ -38,18 +38,32 @@ module Anthropic
             )
         end
 
-        class GetWeather < Anthropic::Helpers::InputSchema::BaseModel
+        class GetWeatherInput < Anthropic::Helpers::InputSchema::BaseModel
           doc "Get the weather in a location"
           required :location, String, "The location to get weather for"
-          optional :unit, Anthropic::Helpers::InputSchema::EnumOf["celsius", "fahrenheit"], "Temperature unit"
+          optional :unit,
+                   Anthropic::Helpers::InputSchema::EnumOf["celsius", "fahrenheit"],
+                   "Temperature unit"
         end
 
-        class Calculator < Anthropic::Helpers::InputSchema::BaseModel
+        class GetWeather < Anthropic::Helpers::Tools::BaseTool
+          input_schema GetWeatherInput
+
+          def call(input) = input
+        end
+
+        class CalculatorInput < Anthropic::Helpers::InputSchema::BaseModel
           doc "Perform calculations"
           required :operation,
                    Anthropic::Helpers::InputSchema::EnumOf["add", "subtract", "multiply", "divide"]
           required :a, Float
           required :b, Float
+        end
+
+        class Calculator < Anthropic::Helpers::Tools::BaseTool
+          input_schema CalculatorInput
+
+          def call(input) = input
         end
 
         def test_create_with_single_tool_model
@@ -62,7 +76,7 @@ module Anthropic
               {
                 type: "tool_use",
                 id: "tool_456",
-                name: "GetWeather",
+                name: "get_weather",
                 input: {location: "San Francisco", unit: "celsius"}
               }
             ],
@@ -75,13 +89,13 @@ module Anthropic
             model: "claude-3-opus-20240229",
             max_tokens: 100,
             messages: [{role: "user", content: "What's the weather?"}],
-            tools: [GetWeather]
+            tools: [GetWeather.new]
           )
 
           assert_equal("msg_123", message.id)
           tool_use = message.content.find { _1.type == :tool_use }
-          assert_equal("GetWeather", tool_use.name)
-          assert_instance_of(GetWeather, tool_use.parsed)
+          assert_equal("get_weather", tool_use.name)
+          assert_instance_of(GetWeatherInput, tool_use.parsed)
           assert_equal("San Francisco", tool_use.parsed.location)
           assert_equal(:celsius, tool_use.parsed.unit)
         end
@@ -95,13 +109,13 @@ module Anthropic
               {
                 type: "tool_use",
                 id: "tool_1",
-                name: "Calculator",
+                name: "calculator",
                 input: {operation: "add", a: 5.0, b: 3.0}
               },
               {
                 type: "tool_use",
                 id: "tool_2",
-                name: "GetWeather",
+                name: "get_weather",
                 input: {location: "NYC"}
               }
             ],
@@ -114,18 +128,18 @@ module Anthropic
             model: "claude-3-opus-20240229",
             max_tokens: 100,
             messages: [{role: "user", content: "Add 5+3 and check NYC weather"}],
-            tools: [Calculator, GetWeather]
+            tools: [Calculator.new, GetWeather.new]
           )
 
-          calc_tool = message.content.find { _1.name == "Calculator" }
-          weather_tool = message.content.find { _1.name == "GetWeather" }
+          calc_tool = message.content.find { _1.name == "calculator" }
+          weather_tool = message.content.find { _1.name == "get_weather" }
 
-          assert_instance_of(Calculator, calc_tool.parsed)
+          assert_instance_of(CalculatorInput, calc_tool.parsed)
           assert_equal(:add, calc_tool.parsed.operation)
           assert_equal(5.0, calc_tool.parsed.a)
           assert_equal(3.0, calc_tool.parsed.b)
 
-          assert_instance_of(GetWeather, weather_tool.parsed)
+          assert_instance_of(GetWeatherInput, weather_tool.parsed)
           assert_equal("NYC", weather_tool.parsed.location)
           assert_nil(weather_tool.parsed.unit)
         end
@@ -148,7 +162,7 @@ module Anthropic
               {
                 type: "tool_use",
                 id: "tool_1",
-                name: "GetWeather",
+                name: "get_weather",
                 input: {location: "London"}
               },
               {
@@ -167,13 +181,13 @@ module Anthropic
             model: "claude-3-opus-20240229",
             max_tokens: 100,
             messages: [{role: "user", content: "Test mixed tools"}],
-            tools: [GetWeather, raw_tool]
+            tools: [GetWeather.new, raw_tool]
           )
 
-          weather_tool = message.content.find { _1.name == "GetWeather" }
+          weather_tool = message.content.find { _1.name == "get_weather" }
           raw_tool_use = message.content.find { _1.name == "raw_tool" }
 
-          assert_instance_of(GetWeather, weather_tool.parsed)
+          assert_instance_of(GetWeatherInput, weather_tool.parsed)
           assert_equal("London", weather_tool.parsed.location)
 
           assert_nil(raw_tool_use.parsed)
@@ -202,7 +216,7 @@ module Anthropic
               {
                 type: "tool_use",
                 id: "tool_456",
-                name: "NestedModel",
+                name: "nested_model",
                 input: {
                   name: "John",
                   address: {street: "123 Main", city: "NYC", zip: "10001"},
@@ -242,7 +256,7 @@ module Anthropic
           tool_hash = {
             name: "weather_getter",
             description: "Custom weather tool",
-            input_schema: GetWeather
+            input_schema: GetWeatherInput
           }
 
           response_body = {
@@ -270,7 +284,7 @@ module Anthropic
           )
 
           tool_use = message.content.find { _1.type == :tool_use }
-          assert_instance_of(GetWeather, tool_use.parsed)
+          assert_instance_of(GetWeatherInput, tool_use.parsed)
           assert_equal("Paris", tool_use.parsed.location)
         end
       end

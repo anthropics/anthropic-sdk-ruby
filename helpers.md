@@ -20,6 +20,7 @@ puts
 The HTTP stream will be cancelled when the MessageStream's events are exhausted, or if you call break while consuming the stream. You can also close it prematurely by calling `stream.close`.
 
 See examples of streaming helpers in action in:
+
 - [`examples/messages_stream.rb`](examples/messages_stream.rb) - Basic streaming
 - [`examples/messages_stream_advanced.rb`](examples/messages_stream_advanced.rb) - Advanced streaming patterns
 - [`examples/thinking_stream.rb`](examples/thinking_stream.rb) - Thinking events streaming
@@ -165,3 +166,289 @@ when Anthropic::Streaming::ThinkingEvent
 when Anthropic::Streaming::SignatureEvent
     event.signature # Signature from a signature_delta event
 ```
+
+# Input Schema Helpers
+
+Input schemas define structured data classes for tools and structured outputs using `Anthropic::BaseModel`.
+
+## Basic Usage
+
+```ruby
+class GetWeatherInput < Anthropic::BaseModel
+  required :location, String, doc: "The city and state, e.g. San Francisco, CA"
+  optional :unit, Anthropic::EnumOf[:celsius, :fahrenheit], doc: "Temperature unit"
+end
+
+class GetWeather
+  doc "Get the current weather in a given location"
+
+  def call(input) = ...
+end
+```
+
+## Field Types
+
+- `required :name, Type` - Required field
+- `optional :name, Type, doc: "description"` - Optional field
+- `required :name, Type, doc: "description", nil?: true` - Required but nullable
+
+## Supported Types
+
+### Basic Types
+
+**`String`** - Text values with optional validation:
+
+```ruby
+required :name, String, doc: "User's full name"
+required :code, String, min_length: 3, doc: "Airport code (e.g., JFK)"
+```
+
+**`Integer`** - Whole numbers:
+
+```ruby
+required :age, Integer, doc: "Age in years"
+optional :max_stops, Integer, nil?: true
+```
+
+**`Float`** - Decimal numbers:
+
+```ruby
+required :price, Float, doc: "Price in USD"
+required :latitude, Float, doc: "GPS latitude"
+```
+
+**`Anthropic::Boolean`** - true/false values:
+
+```ruby
+optional :flexible_dates, Anthropic::Boolean
+optional :nonstop_only, Anthropic::Boolean, nil?: true
+```
+
+### Complex Types
+
+**`Anthropic::EnumOf[:option1, :option2]`** - Limited set of values:
+
+```ruby
+required :cabin, Anthropic::EnumOf[:economy, :premium, :business, :first]
+required :unit, Anthropic::EnumOf[:celsius, :fahrenheit], nil?: true
+```
+
+**`Anthropic::ArrayOf[Type]`** - Arrays of any supported type:
+
+```ruby
+required :passengers, Anthropic::ArrayOf[Passenger, nil?: true]
+optional :preferred_airlines, Anthropic::ArrayOf[String], nil?: true
+required :coordinates, Anthropic::ArrayOf[Float]
+```
+
+**`Anthropic::UnionOf[Type1, Type2]`** - Multiple possible types:
+
+```ruby
+required :origin, Anthropic::UnionOf[String, Airport]  # Either "JFK" or Airport object
+required :value, Anthropic::UnionOf[Integer, String]   # Either 42 or "42"
+```
+
+**Nested Models** - Other `Anthropic::BaseModel` subclasses:
+
+```ruby
+class Airport < Anthropic::BaseModel
+  required :code, String
+  required :name, String
+end
+
+class FlightSearch < Anthropic::BaseModel
+  required :origin, Airport           # Nested object
+  optional :alternate, Airport, nil?: true
+end
+```
+
+### Nullable Fields with `nil?: true`
+
+Add `nil?: true` to make any field accept `nil` values:
+
+```ruby
+class Passenger < Anthropic::BaseModel
+  required :name, String                                          # Cannot be nil
+  required :seat, Anthropic::EnumOf[:window, :aisle], nil?: true  # Can be nil
+  optional :bags, Integer, nil?: true                             # Optional AND nullable
+end
+```
+
+This works with `ArrayOf[...]` as well as `HashOf[...]`
+
+```ruby
+Anthropic::ArrayOf[String, nil?: true]
+```
+
+You can also use `Anthropic::UnionOf[..., NilClass]` to construct an arbitrary nilable type
+
+```ruby
+Anthropic::UnionOf[String, NilClass]
+```
+
+**Usage patterns:**
+
+- `required :field, Type` - Must be provided, cannot be nil
+- `required :field, Type, nil?: true` - Must be provided, but can be nil
+- `optional :field, Type` - May be omitted, cannot be nil if provided
+- `optional :field, Type, nil?: true` - May be omitted or be nil
+
+# Tool Use Helpers
+
+Tools let Claude call external functions. There are three approaches:
+
+## 1. Manual Tool Handling
+
+Handle tool calls yourself:
+
+```ruby
+message = client.messages.create(
+  model: "claude-sonnet-4-5-20250929",
+  max_tokens: 1024,
+  messages: [user_message],
+  tools: [GetWeather.new]
+)
+
+if message.stop_reason == :tool_use
+  tool = message.content.grep(Anthropic::Models::ToolUseBlock).first
+  # Execute your tool logic here
+  # Then send tool_result back to continue conversation
+end
+```
+
+## 2. Streaming Tools
+
+Get tool input as it streams:
+
+```ruby
+stream = client.messages.stream(
+  model: "claude-sonnet-4-5-20250929",
+  max_tokens: 1024,
+  tools: [GetWeather.new],
+  messages: [...]
+)
+
+stream.each do |event|
+  case event
+  in Anthropic::Streaming::InputJsonEvent
+    puts(event.partial_json) # Incremental JSON
+    puts(event.snapshot)     # Full JSON so far
+  else
+  end
+end
+
+# Get parsed tool calls
+tool_uses = stream.accumulated_message.content.grep(Anthropic::ToolUseBlock)
+```
+
+## 3. Auto-Looping Tool Runner (Beta)
+
+Automatically execute tools and continue conversation:
+
+```ruby
+class CalculatorInput < Anthropic::BaseModel
+  required :lhs, Float
+  required :rhs, Float
+  required :operator, Anthropic::InputSchema::EnumOf[:+, :-, :*, :/]
+end
+
+class Calculator < Anthropic::BaseTool
+  doc "i am a calculator and i am good at math"
+
+  # you must specify the input schema to the tool
+  input_schema CalculatorInput
+
+  # you can override `#parse` to pre-process the tool call arguments prior to `#call`
+  def parse(value) = value
+
+  def call(expr)
+    expr.lhs.public_send(expr.operator, expr.rhs)
+  end
+end
+
+tool = Calculator.new
+
+# Automatically handles tool execution loop
+client.beta.messages.tool_runner(
+  model: "claude-sonnet-4-5-20250929",
+  max_tokens: 1024,
+  messages: [{role: "user", content: "What's 15 * 7?"}],
+  tools: [tool]
+).each_message { puts _1.content }
+```
+
+### Tool Runner Methods
+
+#### `#each_message` - Process Messages as They Complete
+
+Process each message after Claude responds. Good for filtering content or triggering actions:
+
+```ruby
+runner.each_message do |message|
+  text_blocks = message.content.grep_v(Anthropic::Models::Beta::BetaToolUseBlock)
+  puts "Claude says: #{text_blocks.first&.text}" unless text_blocks.empty?
+end
+```
+
+#### `#each_streaming` - Get Real-time Streaming Updates
+
+See text and tool calls as they happen in real-time:
+
+```ruby
+runner.each_streaming do |stream|
+  stream.each { |event| print(event.text) if event.respond_to?(:text) }
+  puts "\nFinal: #{stream.accumulated_text}"
+end
+```
+
+#### `#next_message` - Manual Step-by-Step Control
+
+Get one message at a time for fine-grained control:
+
+```ruby
+loop do
+  message = runner.next_message
+  break if message.nil?
+  # Process message and decide whether to continue
+end
+```
+
+#### `#feed_messages` - Inject Messages Mid-Conversation
+
+Add your own messages to guide the conversation:
+
+```ruby
+runner.each_message do |message|
+  if message.content.any? { |block| block.text&.include?("let me") }
+    runner.feed_messages({role: :user, content: "Say 'allow me' instead"}, ...)
+  end
+end
+```
+
+#### `#params` - Inject Messages Mid-Conversation
+
+Get the current parameter of the runner. You can inspect `#params` to see what was the previous request parameter that resulted in the current response.
+
+And by modifying `#params`, you can customize the next request parameters as well.
+
+```ruby
+runner.each_message do |message|
+  puts runner.params
+
+  runner.params.update(max_tokens: 9999)
+end
+```
+
+#### `#run_until_finished` - Complete and Get All Messages
+
+Let the conversation finish, then process all messages at once:
+
+```ruby
+first_msg = runner.next_message
+runner.feed_messages({role: :user, content: "Be more confident"}) if needed
+all_messages = runner.run_until_finished
+```
+
+## Examples
+
+See example files: `examples/tools*.rb` and `examples/auto_looping*.rb`

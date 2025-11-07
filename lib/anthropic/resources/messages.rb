@@ -59,14 +59,12 @@ module Anthropic
           raise ArgumentError.new(message)
         end
 
-        tool_models = get_structured_output_models(parsed)
+        tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil)
 
-        unwrap = if tool_models.any?
-          ->(raw) { parse_structured_outputs!(raw, tool_models) }
-        end
+        unwrap = ->(raw) { Anthropic::Helpers::Messages.parse_input_schemas!(raw, tools:, models:) }
 
         if options.empty? && @client.timeout == Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS
-          model = parsed[:model].to_sym
+          model = parsed[:model]&.to_sym
           max_tokens = parsed[:max_tokens].to_i
           timeout = @client.calculate_nonstreaming_timeout(
             max_tokens,
@@ -86,6 +84,8 @@ module Anthropic
           options: options
         )
       end
+
+      alias_method :parse, :create
 
       # See {Anthropic::Resources::Messages#create} for non-streaming counterpart.
       #
@@ -141,7 +141,7 @@ module Anthropic
         end
         parsed.store(:stream, true)
 
-        tool_models = get_structured_output_models(parsed)
+        tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil)
 
         raw_stream = @client.request(
           method: :post,
@@ -152,10 +152,7 @@ module Anthropic
           model: Anthropic::Models::RawMessageStreamEvent,
           options: options
         )
-        Anthropic::Streaming::MessageStream.new(
-          raw_stream: raw_stream,
-          tool_models: tool_models
-        )
+        Anthropic::Streaming::MessageStream.new(raw_stream:, tools:, models:)
       end
 
       # See {Anthropic::Resources::Messages#create} for non-streaming counterpart.
@@ -269,77 +266,6 @@ module Anthropic
       def initialize(client:)
         @client = client
         @batches = Anthropic::Resources::Messages::Batches.new(client: client)
-      end
-
-      private
-
-      # Extract tool models from the request and convert them to JSON Schema
-      # Returns a hash mapping tool name to Ruby model.
-      def get_structured_output_models(parsed)
-        tool_models = {}
-
-        case parsed
-        in {tools: Array => tools}
-          mapped = tools.map do |tool|
-            case tool
-            # Direct tool class:
-            in Anthropic::Helpers::InputSchema::JsonSchemaConverter
-              name = tool.name.split("::").last
-              description = extract_class_description(tool)
-              tool_models.store(name, tool)
-              {
-                name: name,
-                description: description,
-                input_schema: tool.to_json_schema
-              }
-            # Tool with explicit name/description and BaseModel as input_schema:
-            in {name: String => name,
-                input_schema: Anthropic::Helpers::InputSchema::JsonSchemaConverter => model,
-                **rest}
-              tool_models.store(name, model)
-              rest.merge(
-                name: name,
-                input_schema: model.to_json_schema
-              )
-            else
-              # Any other format (pass through unchanged)
-              # This includes raw JSON schemas and any other tool definitions.
-              tool
-            end
-          end
-          tools.replace(mapped)
-        else
-        end
-
-        tool_models
-      end
-
-      # Extract class description from a BaseModel class
-      def extract_class_description(klass)
-        klass.respond_to?(:doc_string) ? klass.doc_string : nil
-      end
-
-      def parse_structured_outputs!(raw, tool_models)
-        return raw if tool_models.empty?
-
-        raw[:content]&.each do |content|
-          next unless content[:type] == "tool_use"
-
-          model = tool_models[content[:name]]
-          next unless model
-
-          begin
-            parsed_input = content[:input]
-
-            coerced = Anthropic::Internal::Type::Converter.coerce(model, parsed_input)
-
-            content.store(:parsed, coerced)
-          rescue StandardError => e
-            content.store(:parsed, {error: e.message})
-          end
-        end
-
-        raw
       end
     end
   end

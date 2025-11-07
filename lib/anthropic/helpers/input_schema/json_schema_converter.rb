@@ -51,7 +51,7 @@ module Anthropic
               {anyOf: [schema, {type: null}]}
             in {anyOf: schemas}
               null = {type: null}
-              schemas.any? { _1 == null || _1 == {type: ["null"]} } ? schema : {anyOf: [*schemas, null]}
+              schemas.any? { _1 == null || _1 == {type: [null]} } ? schema : {anyOf: [*schemas, null]}
             in {type: String => type}
               type == null ? schema : schema.update(type: [type, null])
             in {type: Array => types}
@@ -63,7 +63,12 @@ module Anthropic
           #
           # @param schema [Hash{Symbol=>Object}]
           def assoc_meta!(schema, meta:)
-            xformed = meta.transform_keys(Anthropic::Helpers::InputSchema::PROPERTY_MAPPING)
+            xformed = meta.transform_keys(doc: :description) do
+              _1.to_s.gsub(/_\w/, &:upcase).tr("_", "").to_sym
+            end
+            if schema.key?(:$ref) && !xformed.empty?
+              schema.merge!(Anthropic::Helpers::InputSchema::JsonSchemaConverter::NO_REF => true)
+            end
             schema.merge!(xformed)
           end
 
@@ -138,7 +143,8 @@ module Anthropic
             end
 
             xformed = reused_defs.transform_keys { _1.delete_prefix("#/$defs/") }
-            xformed.empty? ? schema : {"$defs": xformed}.update(schema)
+            unconformed = xformed.empty? ? schema : {"$defs": xformed}.update(schema)
+            unconformed.tap { Anthropic::Helpers::InputSchema::SupportedSchemas.transform_schema!(_1) }
           end
 
           # @api private

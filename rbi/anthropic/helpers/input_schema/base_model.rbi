@@ -12,8 +12,13 @@ module Anthropic
         extend Anthropic::Helpers::InputSchema::JsonSchemaConverter
 
         class << self
-          sig { params(doc: T.nilable(String)).void }
-          attr_writer :doc
+          # @api public
+          #
+          sig { params(description: String).returns(T.class_of(String)) }
+          def description(description)
+          end
+
+          alias_method :doc, :description
         end
       end
     end

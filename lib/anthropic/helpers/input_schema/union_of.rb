@@ -33,7 +33,9 @@ module Anthropic
             end
 
             schemas.each do |schema|
-              mergeable_keys.each_key { mergeable_keys[_1] += 1 if schema.keys == _1 }
+              mergeable_keys.each_key do
+                mergeable_keys[_1] += 1 if schema.keys == _1 && schema[_1].is_a?(Array)
+              end
             end
             mergeable = mergeable_keys.any? { _1.last == schemas.length }
             mergeable ? Anthropic::Internal::Util.deep_merge(*schemas, concat: true) : {anyOf: schemas}

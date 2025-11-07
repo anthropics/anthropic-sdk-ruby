@@ -29,7 +29,7 @@ module Anthropic
           super
         end
 
-        class GetWeather < Anthropic::Helpers::InputSchema::BaseModel
+        class GetWeatherInput < Anthropic::Helpers::InputSchema::BaseModel
           doc "Get the weather in a location"
           required :location, String
           optional :unit, Anthropic::Helpers::InputSchema::EnumOf["celsius", "fahrenheit"]
@@ -78,7 +78,7 @@ module Anthropic
             {
               type: "content_block_start",
               index: 1,
-              content_block: {type: "tool_use", id: "tool_456", name: "GetWeather", input: ""}
+              content_block: {type: "tool_use", id: "tool_456", name: "get_weather", input: ""}
             },
             {
               type: "content_block_delta",
@@ -113,7 +113,7 @@ module Anthropic
             model: "claude-3-opus-20240229",
             max_tokens: 100,
             messages: [{role: "user", content: "What's the weather?"}],
-            tools: [GetWeather]
+            tools: [GetWeatherInput]
           )
 
           stream.each do |event|
@@ -127,7 +127,7 @@ module Anthropic
 
           tool_use = message.content[1]
           assert_equal(:tool_use, tool_use.type)
-          assert_equal("GetWeather", tool_use.name)
+          assert_equal("get_weather", tool_use.name)
 
           # The parsed field would be populated in a real request
           # For this test, we're verifying the streaming API accepts BaseModel tools
@@ -148,7 +148,7 @@ module Anthropic
             {
               type: "content_block_start",
               index: 0,
-              content_block: {type: "tool_use", id: "tool_1", name: "Calculator", input: ""}
+              content_block: {type: "tool_use", id: "tool_1", name: "calculator", input: ""}
             },
             {
               type: "content_block_delta",
@@ -159,7 +159,7 @@ module Anthropic
             {
               type: "content_block_start",
               index: 1,
-              content_block: {type: "tool_use", id: "tool_2", name: "GetWeather", input: ""}
+              content_block: {type: "tool_use", id: "tool_2", name: "get_weather", input: ""}
             },
             {
               type: "content_block_delta",
@@ -184,7 +184,7 @@ module Anthropic
             model: "claude-3-opus-20240229",
             max_tokens: 100,
             messages: [{role: "user", content: "Add 5+3 and check NYC weather"}],
-            tools: [Calculator, GetWeather]
+            tools: [Calculator, GetWeatherInput]
           )
 
           stream.each do |event|
@@ -214,7 +214,7 @@ module Anthropic
             {
               type: "content_block_start",
               index: 0,
-              content_block: {type: "tool_use", id: "tool_456", name: "Calculator", input: ""}
+              content_block: {type: "tool_use", id: "tool_456", name: "calculator", input: ""}
             },
             {
               type: "content_block_delta",
@@ -278,7 +278,7 @@ module Anthropic
             {
               type: "content_block_start",
               index: 1,
-              content_block: {type: "tool_use", id: "tool_456", name: "Calculator", input: ""}
+              content_block: {type: "tool_use", id: "tool_456", name: "calculator", input: ""}
             },
             {
               type: "content_block_delta",
@@ -336,7 +336,7 @@ module Anthropic
             {
               type: "content_block_start",
               index: 0,
-              content_block: {type: "tool_use", id: "tool_456", name: "NestedModel", input: ""}
+              content_block: {type: "tool_use", id: "tool_456", name: "nested_model", input: ""}
             },
             {
               type: "content_block_delta",

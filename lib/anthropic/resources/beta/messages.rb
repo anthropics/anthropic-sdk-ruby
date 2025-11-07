@@ -7,6 +7,13 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::Messages::Batches]
         attr_reader :batches
 
+        # @param params [Anthropic::Models::Beta::MessageCreateParams]
+        #
+        # @return [Anthropic::Helpers::Tools::Runner]
+        def tool_runner(params)
+          Anthropic::Helpers::Tools::Runner.new(@client, params:)
+        end
+
         # See {Anthropic::Resources::Beta::Messages#stream_raw} for streaming counterpart.
         #
         # Some parameter documentations has been truncated, see
@@ -68,8 +75,12 @@ module Anthropic
             raise ArgumentError.new(message)
           end
 
+          tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil)
+
+          unwrap = ->(raw) { Anthropic::Helpers::Messages.parse_input_schemas!(raw, tools:, models:) }
+
           if options.empty? && @client.timeout == Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS
-            model = parsed[:model].to_sym
+            model = parsed[:model]&.to_sym
             max_tokens = parsed[:max_tokens].to_i
             timeout = @client.calculate_nonstreaming_timeout(
               max_tokens,
@@ -87,6 +98,7 @@ module Anthropic
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
             model: Anthropic::Beta::BetaMessage,
+            unwrap: unwrap,
             options: options
           )
         end
@@ -152,16 +164,22 @@ module Anthropic
             raise ArgumentError.new(message)
           end
           parsed.store(:stream, true)
+          tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil)
+
+          header_params = {betas: "anthropic-beta"}
           raw_stream = @client.request(
             method: :post,
             path: "v1/messages?beta=true",
-            headers: {"accept" => "text/event-stream"},
-            body: parsed,
+            headers: {
+              "accept" => "text/event-stream",
+              **parsed.slice(*header_params.keys)
+            }.transform_keys(header_params),
+            body: parsed.except(*header_params.keys),
             stream: Anthropic::Internal::Stream,
             model: Anthropic::Beta::BetaRawMessageStreamEvent,
-            options: options
+            options: {timeout: 600, **options}
           )
-          Anthropic::Streaming::MessageStream.new(raw_stream: raw_stream)
+          Anthropic::Streaming::MessageStream.new(raw_stream:, tools:, models:)
         end
 
         # See {Anthropic::Resources::Beta::Messages#create} for non-streaming counterpart.

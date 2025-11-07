@@ -20,6 +20,9 @@ module Anthropic
       sig { returns(Symbol) }
       attr_accessor :type
 
+      sig { returns(T.nilable(T.anything)) }
+      attr_accessor :parsed
+
       sig do
         params(
           id: String,

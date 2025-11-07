@@ -79,6 +79,36 @@ end
 
 Streaming with `anthropic.messages.stream(...)` exposes [various helpers for your convenience](helpers.md) including accumulation & SDK-specific events.
 
+### Input Schema & Tool Calling
+
+We have helper mechanisms to define structured data classes for tools and let Claude automatically execute them.
+
+Please refer to [helpers.md](helpers.md) for more detailed usage information.
+
+```ruby
+class CalculatorInput < Anthropic::BaseModel
+  required :lhs, Float
+  required :rhs, Float
+  required :operator, Anthropic::InputSchema::EnumOf[:+, :-, :*, :/]
+end
+
+class Calculator < Anthropic::BaseTool
+  input_schema CalculatorInput
+
+  def call(expr)
+    expr.lhs.public_send(expr.operator, expr.rhs)
+  end
+end
+
+# Automatically handles tool execution loop
+client.beta.messages.tool_runner(
+  model: "claude-sonnet-4-5-20250929",
+  max_tokens: 1024,
+  messages: [{role: "user", content: "What's 15 * 7?"}],
+  tools: [Calculator.new]
+).each_message { puts _1.content }
+```
+
 ### Pagination
 
 List methods in the Anthropic API are paginated.
