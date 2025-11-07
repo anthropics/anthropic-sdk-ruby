@@ -17,5 +17,10 @@ module Anthropic
       module Skills
       end
     end
+
+    module Helpers
+      module ToolRunner
+      end
+    end
   end
 end

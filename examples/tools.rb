@@ -7,7 +7,7 @@ require_relative "../lib/anthropic"
 # gets API credentials from environment variable `ANTHROPIC_API_KEY`
 client = Anthropic::Client.new
 
-class GetWeather < Anthropic::BaseModel
+class GetWeatherInput < Anthropic::BaseModel
   required :location, String, doc: "The city and state, e.g. San Francisco, CA"
   required :unit,
            Anthropic::EnumOf[:celsius, :fahrenheit],
@@ -26,7 +26,7 @@ message = client.messages.create(
   model: "claude-sonnet-4-5-20250929",
   max_tokens: 1024,
   messages: [user_message],
-  tools: [GetWeather]
+  tools: [GetWeatherInput]
 )
 
 puts "Initial response: ", message
@@ -58,7 +58,7 @@ response = client.messages.create(
       ]
     }
   ],
-  tools: [GetWeather]
+  tools: [GetWeatherInput]
 )
 
 puts "Final response: ", response

@@ -8,7 +8,7 @@ anthropic = Anthropic::Client.new
 # when using tools, the model may decide to call them during the response.
 # tool definitions follow JSON Schema format for input validation.
 
-class GetWeather < Anthropic::BaseModel
+class GetWeatherInput < Anthropic::BaseModel
   required :location, String, doc: "The city and state, e.g. San Francisco, CA"
   required :unit,
            Anthropic::EnumOf[:celsius, :fahrenheit],
@@ -27,7 +27,7 @@ end
 stream = anthropic.messages.stream(
   max_tokens: 1024,
   model: "claude-sonnet-4-5-20250929",
-  tools: [GetWeather, GetTime],
+  tools: [GetWeatherInput, GetTime],
   messages: [
     {
       role: "user",

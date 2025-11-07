@@ -6,7 +6,6 @@ require_relative "../lib/anthropic"
 class Airport < Anthropic::BaseModel
   required :code, String, min_length: 3, doc: "IATA airport code (e.g., JFK, LHR)"
   required :name, String, doc: "Full airport name"
-  optional :hub_for, Airport, doc: "Parent hub airport (recursive reference)"
 
   doc "Airport location with optional hub relationship"
 end
@@ -58,7 +57,7 @@ end
 # schema = FlightSearch.to_json_schema
 # puts JSON.pretty_generate(schema)
 
-puts "--------- input schema tool use ----------"
+puts "--------- structured output tool use ----------"
 begin
   # gets API credentials from environment variable `ANTHROPIC_API_KEY`
   anthropic = Anthropic::Client.new
@@ -76,7 +75,7 @@ begin
     ]
   )
 
-  tool_use = message.content.find { _1.type == :tool_use }
+  tool_use = message.content.grep(Anthropic::Models::ToolUseBlock).first
   if tool_use && tool_use.parsed
     puts(<<~FMT)
       Flight search tool use:

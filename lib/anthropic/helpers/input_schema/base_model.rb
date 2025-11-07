@@ -68,12 +68,15 @@ module Anthropic
             super(name_sym, type_info, spec)
           end
 
+          # @return [String]
           attr_reader :doc_string
 
+          # @api public
+          #
           # @param description [String]
-          def doc(description)
-            @doc_string = description
-          end
+          def description(description) = (@doc_string = description)
+
+          alias_method :doc, :description
 
           private def process_field_args(args)
             # Only accept hash format for descriptions.

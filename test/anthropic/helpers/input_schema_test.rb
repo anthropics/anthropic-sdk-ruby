@@ -38,6 +38,7 @@ class Anthropic::Test::InputSchemaTest < Minitest::Test
   U1 = Anthropic::Helpers::InputSchema::UnionOf[Integer, A1]
   U2 = Anthropic::Helpers::InputSchema::UnionOf[M2, M3]
   U3 = Anthropic::Helpers::InputSchema::UnionOf[A1, A1]
+  U4 = Anthropic::Helpers::InputSchema::UnionOf[A1, NilClass]
 
   def test_coerce
     cases = {
@@ -103,6 +104,12 @@ class Anthropic::Test::InputSchemaTest < Minitest::Test
             required: %w[type],
             additionalProperties: false
           }
+        ]
+      },
+      U4 => {
+        anyOf: [
+          {type: "array", items: {type: "string"}},
+          {type: "null"}
         ]
       }
     }
@@ -293,15 +300,76 @@ class Anthropic::Test::InputSchemaTest < Minitest::Test
   def test_decorations
     cases = {
       M13 => {
-        :$defs => {".a/[]" => {type: "array", items: {type: "string"}}},
-        :type => "object",
-        :properties => {
-          a: {:$ref => "#/$defs/.a/[]"},
-          b: {allOf: [{:$ref => "#/$defs/.a/[]"}, {description: "dog"}]},
-          c: {type: "string", maxLength: 3}
+        type: "object",
+        properties: {
+          a: {type: "array", items: {type: "string"}},
+          b: {description: "dog", type: "array", items: {type: "string"}},
+          c: {
+            type: "string",
+            description: "Please also conform to these set of constraints: maxLength=3"
+          }
         },
-        :required => ["c"],
-        :additionalProperties => false
+        required: ["c"],
+        additionalProperties: false
+      }
+    }
+
+    cases.each do |input, expected|
+      schema = Anthropic::Helpers::InputSchema::JsonSchemaConverter.to_json_schema(input)
+      assert_pattern do
+        assert_equal(expected, schema)
+      end
+    end
+  end
+
+  class M14 < Anthropic::Helpers::InputSchema::BaseModel
+    required :a, String, nil?: true, max_length: 99
+    optional :b, Integer, doc: "dog", minimum: 3
+    required :c, A1, min_items: 0
+    required :d, A1, min_items: 8
+    optional :e, A1, nil?: true, min_items: 9, description: "dog"
+    optional :f, Anthropic::InputSchema::ArrayOf[String, max_length: 2]
+  end
+
+  def test_conformity
+    cases = {
+      M14 => {
+        type: "object",
+        properties: {
+          a: {
+            type: %w[string null],
+            description: "Please also conform to these set of constraints: maxLength=99"
+          },
+          b: {
+            type: "integer",
+            description: "dog\nPlease also conform to these set of constraints: minimum=3"
+          },
+          c: {minItems: 0, type: "array", items: {type: "string"}},
+          d: {
+            type: "array",
+            items: {type: "string"},
+            description: "Please also conform to these set of constraints: minItems=8"
+          },
+          e: {
+            anyOf: [
+              {
+                description: "dog\nPlease also conform to these set of constraints: minItems=9",
+                type: "array",
+                items: {type: "string"}
+              },
+              {type: "null"}
+            ]
+          },
+          f: {
+            type: "array",
+            items: {
+              type: "string",
+              description: "Please also conform to these set of constraints: maxLength=2"
+            }
+          }
+        },
+        required: %w[a c d],
+        additionalProperties: false
       }
     }
 

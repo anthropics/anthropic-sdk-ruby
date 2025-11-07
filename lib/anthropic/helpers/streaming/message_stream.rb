@@ -60,10 +60,10 @@ module Anthropic
         #
         # Returns the complete accumulated Message object after stream completion.
         #
-        # @return [Anthropic::Models::Message]
+        # @return [Anthropic::Models::Message, Anthropic::Models::Beta::BetaMessage]
         def accumulated_message
           until_done
-          parse_tool_uses!(@accumated_message_snapshot) if @tool_models.any?
+          parse_tool_uses!(@accumated_message_snapshot)
           @accumated_message_snapshot
         end
 
@@ -76,18 +76,7 @@ module Anthropic
         # @return [String]
         def accumulated_text
           message = accumulated_message
-          text_blocks = []
-          message.content.each do |block|
-            if block.type == :text
-              text_blocks << block.text
-            end
-          end
-
-          if text_blocks.empty?
-            raise RuntimeError.new("Expected to have received at least 1 text block")
-          end
-
-          text_blocks.join
+          message.content.map { _1.type == :text ? _1.text : nil }.join
         end
 
         # @api private
@@ -99,7 +88,10 @@ module Anthropic
         #
         # @return [Anthropic::Models::Message] updated message snapshot with event applied
         private def accumulate_event(event:, current_snapshot:)
-          unless event in Anthropic::Models::RawMessageStreamEvent
+          case event
+          in Anthropic::Models::RawMessageStreamEvent | Anthropic::Models::BetaRawMessageStreamEvent
+            nil
+          else
             message = "Expected event to be a variant of RawMessageStreamEvent, got #{event.class}"
             raise ArgumentError.new(message)
           end
@@ -112,36 +104,37 @@ module Anthropic
           end
 
           case event
-          in Anthropic::Models::RawMessageStartEvent
-            # Use the converter to create a new, isolated copy of the message object.
+          in Anthropic::Models::RawMessageStartEvent # Use the converter to create a new, isolated copy of the message object.
             # This ensures proper type validation and prevents shared object references
             # that could lead to unintended mutations during streaming accumulation.
             # Matches the Python SDK's approach of explicitly constructing Message objects.
             return Anthropic::Internal::Type::Converter.coerce(Anthropic::Models::Message, event.message)
-          in Anthropic::Models::RawContentBlockStartEvent
+          in Anthropic::Models::BetaRawMessageStartEvent
+            return Anthropic::Internal::Type::Converter.coerce(Anthropic::Models::BetaMessage, event.message)
+          in Anthropic::Models::RawContentBlockStartEvent | Anthropic::Models::BetaRawContentBlockStartEvent
             current_snapshot.content = (current_snapshot.content || []) + [event.content_block]
-          in Anthropic::Models::RawContentBlockDeltaEvent
+          in Anthropic::Models::RawContentBlockDeltaEvent | Anthropic::Models::BetaRawContentBlockDeltaEvent
             content = current_snapshot.content[event.index]
 
             case (delta = event.delta)
-            in Anthropic::Models::TextDelta if content.type == :text
+            in Anthropic::Models::TextDelta | Anthropic::Models::BetaTextDelta if content.type == :text
               content.text += delta.text
-            in Anthropic::Models::InputJSONDelta if content.type == :tool_use
-              json_buf = content.json_buf.to_s
+            in Anthropic::Models::InputJSONDelta | Anthropic::Models::BetaInputJSONDelta if content.type == :tool_use
+              json_buf = content._json_buf.to_s
               json_buf += delta.partial_json
 
               content.input = json_buf
-              content.json_buf = json_buf
-            in Anthropic::Models::CitationsDelta if content.type == :text
+              content._json_buf = json_buf
+            in Anthropic::Models::CitationsDelta | Anthropic::Models::BetaCitationsDelta if content.type == :text
               content.citations ||= []
               content.citations << delta.citation
-            in Anthropic::Models::ThinkingDelta if content.type == :thinking
+            in Anthropic::Models::ThinkingDelta | Anthropic::Models::BetaThinkingDelta if content.type == :thinking
               content.thinking += delta.thinking
-            in Anthropic::Models::SignatureDelta if content.type == :thinking
+            in Anthropic::Models::SignatureDelta | Anthropic::Models::BetaSignatureDelta if content.type == :thinking
               content.signature = delta.signature
             else
             end
-          in Anthropic::Models::RawMessageDeltaEvent
+          in Anthropic::Models::RawMessageDeltaEvent | Anthropic::Models::BetaRawMessageDeltaEvent
             current_snapshot.stop_reason = event.delta.stop_reason
             current_snapshot.stop_sequence = event.delta.stop_sequence
             current_snapshot.usage.output_tokens = event.usage.output_tokens
@@ -166,51 +159,51 @@ module Anthropic
           events_to_yield = []
 
           case event
-          in Anthropic::Models::RawMessageStopEvent
+          in Anthropic::Models::RawMessageStopEvent | Anthropic::Models::BetaRawMessageStopEvent
             events_to_yield << MessageStopEvent.new(
               type: :message_stop,
               message: message_snapshot
             )
-          in Anthropic::Models::RawContentBlockDeltaEvent
+          in Anthropic::Models::RawContentBlockDeltaEvent | Anthropic::Models::BetaRawContentBlockDeltaEvent
             events_to_yield << event
             content_block = message_snapshot.content[event.index]
 
             case (delta = event.delta)
-            in Anthropic::Models::TextDelta if content_block.type == :text
+            in Anthropic::Models::TextDelta | Anthropic::Models::BetaTextDelta if content_block.type == :text
               events_to_yield << Anthropic::Streaming::TextEvent.new(
                 type: :text,
                 text: delta.text,
                 snapshot: content_block.text
               )
-            in Anthropic::Models::InputJSONDelta if content_block.type == :tool_use
+            in Anthropic::Models::InputJSONDelta | Anthropic::Models::BetaInputJSONDelta if content_block.type == :tool_use
               events_to_yield << Anthropic::Streaming::InputJsonEvent.new(
                 type: :input_json,
                 partial_json: delta.partial_json,
                 snapshot: content_block.input
               )
-            in Anthropic::Models::CitationsDelta if content_block.type == :text
+            in Anthropic::Models::CitationsDelta | Anthropic::Models::BetaCitationsDelta if content_block.type == :text
               events_to_yield << Anthropic::Streaming::CitationEvent.new(
                 type: :citation,
                 citation: delta.citation,
                 snapshot: content_block.citations || []
               )
-            in Anthropic::Models::ThinkingDelta if content_block.type == :thinking
+            in Anthropic::Models::ThinkingDelta | Anthropic::Models::BetaThinkingDelta if content_block.type == :thinking
               events_to_yield << Anthropic::Streaming::ThinkingEvent.new(
                 type: :thinking,
                 thinking: delta.thinking,
                 snapshot: content_block.thinking
               )
-            in Anthropic::Models::SignatureDelta if content_block.type == :thinking
+            in Anthropic::Models::SignatureDelta | Anthropic::Models::BetaSignatureDelta if content_block.type == :thinking
               events_to_yield << Anthropic::Streaming::SignatureEvent.new(
                 type: :signature,
                 signature: content_block.signature
               )
             else
             end
-          in Anthropic::Models::RawContentBlockStopEvent
+          in Anthropic::Models::RawContentBlockStopEvent | Anthropic::Models::BetaRawContentBlockStopEvent
             content_block = message_snapshot.content[event.index]
 
-            events_to_yield << ContentBlockStopEvent.new(
+            events_to_yield << Anthropic::Streaming::ContentBlockStopEvent.new(
               type: :content_block_stop,
               index: event.index,
               content_block: content_block
@@ -232,21 +225,33 @@ module Anthropic
         private def parse_tool_uses!(message)
           return message unless message&.content
 
+          # rubocop:disable Metrics/BlockLength
           message.content.each_with_index do |content, index|
             next unless content.type == :tool_use
 
-            next unless (model = @tool_models[content.name])
+            next unless (tool = @tools[content.name])
 
             parsed =
               begin
-                parsed_input = content.input.is_a?(String) ? JSON.parse(content.input) : content.input
+                parsed_input = if content.input.is_a?(String)
+                  JSON.parse(content.input, symbolize_names: true)
+                else
+                  content.input
+                end
 
-                Anthropic::Internal::Type::Converter.coerce(model, parsed_input)
+                Anthropic::Internal::Type::Converter.coerce(tool, parsed_input)
               rescue StandardError => e
                 e
               end
 
-            message.content[index] = Anthropic::Models::ToolUseBlock.new(
+            cls =
+              case content
+              in Anthropic::ContentBlock
+                Anthropic::Models::ToolUseBlock
+              else
+                Anthropic::Models::BetaToolUseBlock
+              end
+            message.content[index] = cls.new(
               id: content.id,
               input: content.input,
               name: content.name,
@@ -254,6 +259,7 @@ module Anthropic
               parsed: parsed
             )
           end
+          # rubocop:enable Metrics/BlockLength
 
           message
         end
@@ -261,14 +267,19 @@ module Anthropic
         # @api private
         #
         # @param raw_stream [Anthropic::Internal::Type::BaseStream]
-        # @param tool_models [Hash{String=>Class}] Mapping of tool names to model classes
-        def initialize(raw_stream:, tool_models: {})
+        #
+        # @param tools [Hash{String=>Class}] Mapping of tool names to model classes
+        #
+        # @param models [Hash{String=>Class}] Mapping of tool names to model classes
+        def initialize(raw_stream:, tools: {}, models: {})
           # The underlying Server-Sent Event stream from the Anthropic API.
           @raw_stream = raw_stream
           # Accumulated message state that builds up as events are processed.
           @accumated_message_snapshot = nil
           # Mapping of tool names to model classes for parsing.
-          @tool_models = tool_models
+          @tools = tools
+          # Mapping of tool names to model classes for parsing.
+          @models = models
           # Lazy enumerable that transforms raw events into consumable events.
           @iterator = iterator
           @status = raw_stream.status
