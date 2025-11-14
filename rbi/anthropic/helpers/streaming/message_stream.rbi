@@ -51,7 +51,14 @@ module Anthropic
         def text
         end
 
-        sig { returns(Anthropic::Models::Message) }
+        sig do
+          returns(
+            T.any(
+              Anthropic::Models::Message,
+              Anthropic::Models::Beta::BetaMessage
+            )
+          )
+        end
         def accumulated_message
         end
 

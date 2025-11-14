@@ -26,6 +26,10 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :text
 
+        # parsed value of `#text` when a JSON output schema object has been specified
+        sig { returns(T.nilable(T.anything)) }
+        attr_accessor :parsed
+
         sig { returns(Symbol) }
         attr_accessor :type
 

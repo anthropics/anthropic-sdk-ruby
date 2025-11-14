@@ -34,7 +34,8 @@ module Anthropic
 
         def text: -> Enumerator[String]
 
-        def accumulated_message: -> Anthropic::Models::message
+        def accumulated_message: -> (Anthropic::Models::message
+        | Anthropic::Models::Beta::BetaMessage)
 
         def accumulated_text: -> String
 

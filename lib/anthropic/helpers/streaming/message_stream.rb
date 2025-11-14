@@ -278,7 +278,6 @@ module Anthropic
           @accumated_message_snapshot = nil
           # Mapping of tool names to model classes for parsing.
           @tools = tools
-          # Mapping of tool names to model classes for parsing.
           @models = models
           # Lazy enumerable that transforms raw events into consumable events.
           @iterator = iterator

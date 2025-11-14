@@ -59,6 +59,18 @@ module Anthropic
         #   @return [Array<Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaServerToolUseBlock, Anthropic::Models::Beta::BetaWebSearchToolResultBlock, Anthropic::Models::Beta::BetaWebFetchToolResultBlock, Anthropic::Models::Beta::BetaCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaBashCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaMCPToolUseBlock, Anthropic::Models::Beta::BetaMCPToolResultBlock, Anthropic::Models::Beta::BetaContainerUploadBlock>]
         required :content, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaContentBlock] }
 
+        # parsed value of response when a JSON output schema object has been specified via :output_format
+        #
+        # @return [Object, nil]
+        def parsed_output
+          case content
+          in [*, {parsed:}]
+            parsed
+          else
+            nil
+          end
+        end
+
         # @!attribute context_management
         #   Context management response.
         #

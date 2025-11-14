@@ -12,7 +12,9 @@ module Anthropic
         class << self
           # @api public
           #
-          sig { returns(T.class_of(Anthropic::Helpers::InputSchema::BaseModel)) }
+          sig do
+            returns(T.class_of(Anthropic::Helpers::InputSchema::BaseModel))
+          end
           attr_reader :model
 
           sig { returns(T.class_of(String)) }
@@ -28,7 +30,11 @@ module Anthropic
 
           # @api public
           #
-          sig { params(model: T.class_of(Anthropic::Helpers::InputSchema::BaseModel)).returns(T.class_of(Anthropic::Helpers::InputSchema::BaseModel)) }
+          sig do
+            params(
+              model: T.class_of(Anthropic::Helpers::InputSchema::BaseModel)
+            ).returns(T.class_of(Anthropic::Helpers::InputSchema::BaseModel))
+          end
           def input_schema(model) = (@model = model)
         end
 
@@ -42,7 +48,11 @@ module Anthropic
 
         # @api public
         #
-        sig { params(parsed: Anthropic::Helpers::InputSchema::BaseModel).returns(T.anything) }
+        sig do
+          params(parsed: Anthropic::Helpers::InputSchema::BaseModel).returns(
+            T.anything
+          )
+        end
         def call(parsed)
         end
       end
