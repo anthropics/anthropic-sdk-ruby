@@ -20,18 +20,13 @@ module Anthropic
 
           case data
           in {tools: Array => tool_array}
-            # rubocop:disable Metrics/BlockLength
             mapped = tool_array.map do |tool|
               case tool
               # Direct tool class:
               in Anthropic::Helpers::InputSchema::JsonSchemaConverter
                 classname = tool.is_a?(Anthropic::Helpers::Tools::BaseTool) ? tool.class.name : tool.name
-                name = classname
-                       .split("::")
-                       .last
-                       .gsub(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
-                       .gsub(/([a-z\d])([A-Z])/, '\1_\2')
-                       .downcase
+                name = model_name(classname)
+
                 description =
                   case tool
                   in Anthropic::Helpers::Tools::BaseTool
@@ -59,9 +54,20 @@ module Anthropic
               end
             end
             tool_array.replace(mapped)
+          in {output_format: Anthropic::Helpers::InputSchema::JsonSchemaConverter => model}
+            name = model_name(model.name)
+            models.store(name, model)
+            schema = model.to_json_schema
+            Anthropic::Helpers::InputSchema::SupportedSchemas.transform_schema!(schema)
+            data.update(output_format: {type: :json_schema, schema: schema})
+          in {output_format: {schema: Anthropic::Helpers::StructuredOutput::JsonSchemaConverter => model} => output_format}
+            name = model_name(model.name)
+            models.store(name, model)
+            schema = model.to_json_schema
+            Anthropic::Helpers::InputSchema::SupportedSchemas.transform_schema!(schema)
+            output_format.update(type: :json_schema, schema:)
           else
           end
-          # rubocop:enable Metrics/BlockLength
 
           [tools, models]
         end
@@ -100,6 +106,20 @@ module Anthropic
           end
 
           raw
+        end
+
+        # @api private
+        #
+        # @param classname [String]
+        #
+        # @return [String]
+        private def model_name(classname)
+          classname
+            .split("::")
+            .last
+            .gsub(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
+            .gsub(/([a-z\d])([A-Z])/, '\1_\2')
+            .downcase
         end
       end
     end

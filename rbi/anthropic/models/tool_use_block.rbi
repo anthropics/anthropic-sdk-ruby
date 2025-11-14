@@ -14,14 +14,14 @@ module Anthropic
       sig { returns(T::Hash[Symbol, T.anything]) }
       attr_accessor :input
 
+      sig { returns(T.nilable(T.anything)) }
+      attr_accessor :parsed
+
       sig { returns(String) }
       attr_accessor :name
 
       sig { returns(Symbol) }
       attr_accessor :type
-
-      sig { returns(T.nilable(T.anything)) }
-      attr_accessor :parsed
 
       sig do
         params(

@@ -24,6 +24,8 @@ module Anthropic
 
         attr_accessor content: ::Array[Anthropic::Models::Beta::beta_content_block]
 
+        def output_format: -> top
+
         attr_accessor context_management: Anthropic::Beta::BetaContextManagementResponse?
 
         attr_accessor model: Anthropic::Models::model

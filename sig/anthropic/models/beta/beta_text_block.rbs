@@ -15,6 +15,8 @@ module Anthropic
 
         attr_accessor text: String
 
+        attr_accessor parsed: top
+
         attr_accessor type: :text
 
         def initialize: (
