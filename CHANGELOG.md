@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.15.0 (2025-11-14)
+
+Full Changelog: [v1.14.0...v1.15.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.14.0...v1.15.0)
+
+### Features
+
+* **api:** add support for structured outputs beta ([1a4ec00](https://github.com/anthropics/anthropic-sdk-ruby/commit/1a4ec00f3eb519f23fd29eb6a18b256aa2002c11))
+
 ## 1.14.0 (2025-11-07)
 
 Full Changelog: [v1.13.0...v1.14.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.13.0...v1.14.0)
