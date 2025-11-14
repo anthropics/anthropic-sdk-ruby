@@ -102,6 +102,12 @@ module Anthropic
         optional :mcp_servers,
                  -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaRequestMCPServerURLDefinition] }
 
+        # @!attribute output_format
+        #   A schema to specify Claude's output format in responses.
+        #
+        #   @return [Anthropic::Models::Beta::BetaJSONOutputFormat, nil]
+        optional :output_format, -> { Anthropic::Beta::BetaJSONOutputFormat }, nil?: true
+
         # @!attribute system_
         #   System prompt.
         #
@@ -220,7 +226,7 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(messages:, model:, context_management: nil, mcp_servers: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, request_options: {})
+        # @!method initialize(messages:, model:, context_management: nil, mcp_servers: nil, output_format: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::MessageCountTokensParams} for more details.
         #
@@ -231,6 +237,8 @@ module Anthropic
         #   @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Context management configuration.
         #
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>] MCP servers to be utilized in this request
+        #
+        #   @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil]
         #
         #   @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] System prompt.
         #

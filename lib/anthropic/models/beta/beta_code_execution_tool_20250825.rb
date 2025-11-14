@@ -23,11 +23,18 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
-        # @!method initialize(cache_control: nil, name: :code_execution, type: :code_execution_20250825)
+        # @!attribute strict
+        #
+        #   @return [Boolean, nil]
+        optional :strict, Anthropic::Internal::Type::Boolean
+
+        # @!method initialize(cache_control: nil, strict: nil, name: :code_execution, type: :code_execution_20250825)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaCodeExecutionTool20250825} for more details.
         #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+        #
+        #   @param strict [Boolean]
         #
         #   @param name [Symbol, :code_execution] Name of the tool.
         #

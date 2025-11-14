@@ -38,12 +38,17 @@ module Anthropic
         #   @return [String, nil]
         optional :description, String
 
+        # @!attribute strict
+        #
+        #   @return [Boolean, nil]
+        optional :strict, Anthropic::Internal::Type::Boolean
+
         # @!attribute type
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaTool::Type, nil]
         optional :type, enum: -> { Anthropic::Beta::BetaTool::Type }, nil?: true
 
-        # @!method initialize(input_schema:, name:, cache_control: nil, description: nil, type: nil)
+        # @!method initialize(input_schema:, name:, cache_control: nil, description: nil, strict: nil, type: nil)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaTool} for more details.
         #
@@ -54,6 +59,8 @@ module Anthropic
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
         #   @param description [String] Description of what this tool does.
+        #
+        #   @param strict [Boolean]
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaTool::Type, nil]
 

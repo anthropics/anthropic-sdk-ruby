@@ -9,6 +9,7 @@ module Anthropic
           name: String,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           description: String,
+          strict: bool,
           type: Anthropic::Models::Beta::BetaTool::type_?
         }
 
@@ -23,6 +24,10 @@ module Anthropic
 
         def description=: (String) -> String
 
+        attr_reader strict: bool?
+
+        def strict=: (bool) -> bool
+
         attr_accessor type: Anthropic::Models::Beta::BetaTool::type_?
 
         def initialize: (
@@ -30,6 +35,7 @@ module Anthropic
           name: String,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?description: String,
+          ?strict: bool,
           ?type: Anthropic::Models::Beta::BetaTool::type_?
         ) -> void
 
@@ -38,6 +44,7 @@ module Anthropic
           name: String,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           description: String,
+          strict: bool,
           type: Anthropic::Models::Beta::BetaTool::type_?
         }
 

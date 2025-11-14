@@ -65,6 +65,12 @@ module Anthropic
         sig { returns(T.nilable(Integer)) }
         attr_accessor :max_uses
 
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :strict
+
+        sig { params(strict: T::Boolean).void }
+        attr_writer :strict
+
         sig do
           params(
             allowed_domains: T.nilable(T::Array[String]),
@@ -75,6 +81,7 @@ module Anthropic
               T.nilable(Anthropic::Beta::BetaCitationsConfigParam::OrHash),
             max_content_tokens: T.nilable(Integer),
             max_uses: T.nilable(Integer),
+            strict: T::Boolean,
             name: Symbol,
             type: Symbol
           ).returns(T.attached_class)
@@ -94,6 +101,7 @@ module Anthropic
           max_content_tokens: nil,
           # Maximum number of times the tool can be used in the API request.
           max_uses: nil,
+          strict: nil,
           # Name of the tool.
           #
           # This is how the tool will be called by the model and in `tool_use` blocks.
@@ -113,7 +121,8 @@ module Anthropic
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
               citations: T.nilable(Anthropic::Beta::BetaCitationsConfigParam),
               max_content_tokens: T.nilable(Integer),
-              max_uses: T.nilable(Integer)
+              max_uses: T.nilable(Integer),
+              strict: T::Boolean
             }
           )
         end

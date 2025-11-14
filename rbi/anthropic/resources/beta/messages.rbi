@@ -311,7 +311,8 @@ module Anthropic
         # The Messages API can be used for either single queries or stateless multi-turn
         # conversations.
         #
-        # Learn more about the Messages API in our [user guide](/en/docs/initial-setup)
+        # Learn more about the Messages API in our
+        # [user guide](https://docs.claude.com/en/docs/initial-setup)
         sig do
           params(
             max_tokens: Integer,
@@ -328,6 +329,8 @@ module Anthropic
                 Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
               ],
             metadata: Anthropic::Beta::BetaMetadata::OrHash,
+            output_format:
+              T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash),
             service_tier:
               Anthropic::Beta::MessageCreateParams::ServiceTier::OrSymbol,
             stop_sequences: T::Array[String],
@@ -461,6 +464,8 @@ module Anthropic
           mcp_servers: nil,
           # Body param: An object describing metadata about the request.
           metadata: nil,
+          # Body param: A schema to specify Claude's output format in responses.
+          output_format: nil,
           # Body param: Determines whether to use priority capacity (if available) or
           # standard capacity for this request.
           #
@@ -616,7 +621,8 @@ module Anthropic
         # The Messages API can be used for either single queries or stateless multi-turn
         # conversations.
         #
-        # Learn more about the Messages API in our [user guide](/en/docs/initial-setup)
+        # Learn more about the Messages API in our
+        # [user guide](https://docs.claude.com/en/docs/initial-setup)
         sig do
           params(
             max_tokens: Integer,
@@ -633,6 +639,8 @@ module Anthropic
                 Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
               ],
             metadata: Anthropic::Beta::BetaMetadata::OrHash,
+            output_format:
+              T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash),
             service_tier:
               Anthropic::Beta::MessageCreateParams::ServiceTier::OrSymbol,
             stop_sequences: T::Array[String],
@@ -770,6 +778,8 @@ module Anthropic
           mcp_servers: nil,
           # Body param: An object describing metadata about the request.
           metadata: nil,
+          # Body param: A schema to specify Claude's output format in responses.
+          output_format: nil,
           # Body param: Determines whether to use priority capacity (if available) or
           # standard capacity for this request.
           #
@@ -923,7 +933,7 @@ module Anthropic
         # including tools, images, and documents, without creating it.
         #
         # Learn more about token counting in our
-        # [user guide](/en/docs/build-with-claude/token-counting)
+        # [user guide](https://docs.claude.com/en/docs/build-with-claude/token-counting)
         sig do
           params(
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
@@ -934,6 +944,8 @@ module Anthropic
               T::Array[
                 Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
               ],
+            output_format:
+              T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash),
             system_:
               Anthropic::Beta::MessageCountTokensParams::System::Variants,
             thinking:
@@ -1049,6 +1061,8 @@ module Anthropic
           context_management: nil,
           # Body param: MCP servers to be utilized in this request
           mcp_servers: nil,
+          # Body param: A schema to specify Claude's output format in responses.
+          output_format: nil,
           # Body param: System prompt.
           #
           # A system prompt is a way of providing context and instructions to Claude, such

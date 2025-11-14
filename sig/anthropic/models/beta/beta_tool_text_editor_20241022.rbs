@@ -7,7 +7,8 @@ module Anthropic
         {
           name: :str_replace_editor,
           type: :text_editor_20241022,
-          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          strict: bool
         }
 
       class BetaToolTextEditor20241022 < Anthropic::Internal::Type::BaseModel
@@ -17,8 +18,13 @@ module Anthropic
 
         attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
+        attr_reader strict: bool?
+
+        def strict=: (bool) -> bool
+
         def initialize: (
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?strict: bool,
           ?name: :str_replace_editor,
           ?type: :text_editor_20241022
         ) -> void
@@ -26,7 +32,8 @@ module Anthropic
         def to_hash: -> {
           name: :str_replace_editor,
           type: :text_editor_20241022,
-          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          strict: bool
         }
       end
     end

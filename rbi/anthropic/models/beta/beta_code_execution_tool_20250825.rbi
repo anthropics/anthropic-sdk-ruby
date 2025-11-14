@@ -35,10 +35,17 @@ module Anthropic
         end
         attr_writer :cache_control
 
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :strict
+
+        sig { params(strict: T::Boolean).void }
+        attr_writer :strict
+
         sig do
           params(
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+            strict: T::Boolean,
             name: Symbol,
             type: Symbol
           ).returns(T.attached_class)
@@ -46,6 +53,7 @@ module Anthropic
         def self.new(
           # Create a cache control breakpoint at this content block.
           cache_control: nil,
+          strict: nil,
           # Name of the tool.
           #
           # This is how the tool will be called by the model and in `tool_use` blocks.
@@ -60,7 +68,8 @@ module Anthropic
               name: Symbol,
               type: Symbol,
               cache_control:
-                T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)
+                T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
+              strict: T::Boolean
             }
           )
         end

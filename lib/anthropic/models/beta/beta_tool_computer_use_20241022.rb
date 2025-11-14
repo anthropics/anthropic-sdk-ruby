@@ -41,7 +41,12 @@ module Anthropic
         #   @return [Integer, nil]
         optional :display_number, Integer, nil?: true
 
-        # @!method initialize(display_height_px:, display_width_px:, cache_control: nil, display_number: nil, name: :computer, type: :computer_20241022)
+        # @!attribute strict
+        #
+        #   @return [Boolean, nil]
+        optional :strict, Anthropic::Internal::Type::Boolean
+
+        # @!method initialize(display_height_px:, display_width_px:, cache_control: nil, display_number: nil, strict: nil, name: :computer, type: :computer_20241022)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaToolComputerUse20241022} for more details.
         #
@@ -52,6 +57,8 @@ module Anthropic
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
         #   @param display_number [Integer, nil] The X11 display number (e.g. 0, 1) for the display.
+        #
+        #   @param strict [Boolean]
         #
         #   @param name [Symbol, :computer] Name of the tool.
         #

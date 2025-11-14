@@ -12,7 +12,8 @@ module Anthropic
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           citations: Anthropic::Beta::BetaCitationsConfigParam?,
           max_content_tokens: Integer?,
-          max_uses: Integer?
+          max_uses: Integer?,
+          strict: bool
         }
 
       class BetaWebFetchTool20250910 < Anthropic::Internal::Type::BaseModel
@@ -32,6 +33,10 @@ module Anthropic
 
         attr_accessor max_uses: Integer?
 
+        attr_reader strict: bool?
+
+        def strict=: (bool) -> bool
+
         def initialize: (
           ?allowed_domains: ::Array[String]?,
           ?blocked_domains: ::Array[String]?,
@@ -39,6 +44,7 @@ module Anthropic
           ?citations: Anthropic::Beta::BetaCitationsConfigParam?,
           ?max_content_tokens: Integer?,
           ?max_uses: Integer?,
+          ?strict: bool,
           ?name: :web_fetch,
           ?type: :web_fetch_20250910
         ) -> void
@@ -51,7 +57,8 @@ module Anthropic
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           citations: Anthropic::Beta::BetaCitationsConfigParam?,
           max_content_tokens: Integer?,
-          max_uses: Integer?
+          max_uses: Integer?,
+          strict: bool
         }
       end
     end
