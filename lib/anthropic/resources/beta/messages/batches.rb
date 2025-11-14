@@ -15,7 +15,7 @@ module Anthropic
           # can take up to 24 hours to complete.
           #
           # Learn more about the Message Batches API in our
-          # [user guide](/en/docs/build-with-claude/batch-processing)
+          # [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
           #
           # @overload create(requests:, betas: nil, request_options: {})
           #
@@ -46,7 +46,7 @@ module Anthropic
           # `results_url` field in the response.
           #
           # Learn more about the Message Batches API in our
-          # [user guide](/en/docs/build-with-claude/batch-processing)
+          # [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
           #
           # @overload retrieve(message_batch_id, betas: nil, request_options: {})
           #
@@ -77,7 +77,7 @@ module Anthropic
           # returned first.
           #
           # Learn more about the Message Batches API in our
-          # [user guide](/en/docs/build-with-claude/batch-processing)
+          # [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
           #
           # @overload list(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {})
           #
@@ -114,7 +114,7 @@ module Anthropic
           # like to delete an in-progress batch, you must first cancel it.
           #
           # Learn more about the Message Batches API in our
-          # [user guide](/en/docs/build-with-claude/batch-processing)
+          # [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
           #
           # @overload delete(message_batch_id, betas: nil, request_options: {})
           #
@@ -149,7 +149,7 @@ module Anthropic
           # non-interruptible.
           #
           # Learn more about the Message Batches API in our
-          # [user guide](/en/docs/build-with-claude/batch-processing)
+          # [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
           #
           # @overload cancel(message_batch_id, betas: nil, request_options: {})
           #
@@ -180,7 +180,7 @@ module Anthropic
           # requests. Use the `custom_id` field to match results to requests.
           #
           # Learn more about the Message Batches API in our
-          # [user guide](/en/docs/build-with-claude/batch-processing)
+          # [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
           #
           # @overload results_streaming(message_batch_id, betas: nil, request_options: {})
           #

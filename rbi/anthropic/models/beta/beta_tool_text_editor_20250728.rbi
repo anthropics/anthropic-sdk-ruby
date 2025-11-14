@@ -40,11 +40,18 @@ module Anthropic
         sig { returns(T.nilable(Integer)) }
         attr_accessor :max_characters
 
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :strict
+
+        sig { params(strict: T::Boolean).void }
+        attr_writer :strict
+
         sig do
           params(
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             max_characters: T.nilable(Integer),
+            strict: T::Boolean,
             name: Symbol,
             type: Symbol
           ).returns(T.attached_class)
@@ -55,6 +62,7 @@ module Anthropic
           # Maximum number of characters to display when viewing a file. If not specified,
           # defaults to displaying the full file.
           max_characters: nil,
+          strict: nil,
           # Name of the tool.
           #
           # This is how the tool will be called by the model and in `tool_use` blocks.
@@ -70,7 +78,8 @@ module Anthropic
               type: Symbol,
               cache_control:
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
-              max_characters: T.nilable(Integer)
+              max_characters: T.nilable(Integer),
+              strict: T::Boolean
             }
           )
         end

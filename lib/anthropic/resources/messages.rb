@@ -17,7 +17,8 @@ module Anthropic
       # The Messages API can be used for either single queries or stateless multi-turn
       # conversations.
       #
-      # Learn more about the Messages API in our [user guide](/en/docs/initial-setup)
+      # Learn more about the Messages API in our
+      # [user guide](https://docs.claude.com/en/docs/initial-setup)
       #
       # @overload create(max_tokens:, messages:, model:, metadata: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
       #
@@ -78,7 +79,8 @@ module Anthropic
       # The Messages API can be used for either single queries or stateless multi-turn
       # conversations.
       #
-      # Learn more about the Messages API in our [user guide](/en/docs/initial-setup)
+      # Learn more about the Messages API in our
+      # [user guide](https://docs.claude.com/en/docs/initial-setup)
       #
       # @overload stream_raw(max_tokens:, messages:, model:, metadata: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
       #
@@ -140,7 +142,7 @@ module Anthropic
       # including tools, images, and documents, without creating it.
       #
       # Learn more about token counting in our
-      # [user guide](/en/docs/build-with-claude/token-counting)
+      # [user guide](https://docs.claude.com/en/docs/build-with-claude/token-counting)
       #
       # @overload count_tokens(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
       #

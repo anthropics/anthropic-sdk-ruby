@@ -43,6 +43,11 @@ module Anthropic
         #   @return [Integer, nil]
         optional :max_uses, Integer, nil?: true
 
+        # @!attribute strict
+        #
+        #   @return [Boolean, nil]
+        optional :strict, Anthropic::Internal::Type::Boolean
+
         # @!attribute user_location
         #   Parameters for the user's location. Used to provide more relevant search
         #   results.
@@ -50,7 +55,7 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaWebSearchTool20250305::UserLocation, nil]
         optional :user_location, -> { Anthropic::Beta::BetaWebSearchTool20250305::UserLocation }, nil?: true
 
-        # @!method initialize(allowed_domains: nil, blocked_domains: nil, cache_control: nil, max_uses: nil, user_location: nil, name: :web_search, type: :web_search_20250305)
+        # @!method initialize(allowed_domains: nil, blocked_domains: nil, cache_control: nil, max_uses: nil, strict: nil, user_location: nil, name: :web_search, type: :web_search_20250305)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaWebSearchTool20250305} for more details.
         #
@@ -61,6 +66,8 @@ module Anthropic
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
         #   @param max_uses [Integer, nil] Maximum number of times the tool can be used in the API request.
+        #
+        #   @param strict [Boolean]
         #
         #   @param user_location [Anthropic::Models::Beta::BetaWebSearchTool20250305::UserLocation, nil] Parameters for the user's location. Used to provide more relevant search results
         #

@@ -55,7 +55,12 @@ module Anthropic
         #   @return [Integer, nil]
         optional :max_uses, Integer, nil?: true
 
-        # @!method initialize(allowed_domains: nil, blocked_domains: nil, cache_control: nil, citations: nil, max_content_tokens: nil, max_uses: nil, name: :web_fetch, type: :web_fetch_20250910)
+        # @!attribute strict
+        #
+        #   @return [Boolean, nil]
+        optional :strict, Anthropic::Internal::Type::Boolean
+
+        # @!method initialize(allowed_domains: nil, blocked_domains: nil, cache_control: nil, citations: nil, max_content_tokens: nil, max_uses: nil, strict: nil, name: :web_fetch, type: :web_fetch_20250910)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaWebFetchTool20250910} for more details.
         #
@@ -70,6 +75,8 @@ module Anthropic
         #   @param max_content_tokens [Integer, nil] Maximum number of tokens used by including web page text content in the context.
         #
         #   @param max_uses [Integer, nil] Maximum number of times the tool can be used in the API request.
+        #
+        #   @param strict [Boolean]
         #
         #   @param name [Symbol, :web_fetch] Name of the tool.
         #

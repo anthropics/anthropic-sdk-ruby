@@ -183,6 +183,12 @@ module Anthropic
               #   @return [Anthropic::Models::Beta::BetaMetadata, nil]
               optional :metadata, -> { Anthropic::Beta::BetaMetadata }
 
+              # @!attribute output_format
+              #   A schema to specify Claude's output format in responses.
+              #
+              #   @return [Anthropic::Models::Beta::BetaJSONOutputFormat, nil]
+              optional :output_format, -> { Anthropic::Beta::BetaJSONOutputFormat }, nil?: true
+
               # @!attribute service_tier
               #   Determines whether to use priority capacity (if available) or standard capacity
               #   for this request.
@@ -368,7 +374,7 @@ module Anthropic
               #   @return [Float, nil]
               optional :top_p, Float
 
-              # @!method initialize(max_tokens:, messages:, model:, container: nil, context_management: nil, mcp_servers: nil, metadata: nil, service_tier: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
+              # @!method initialize(max_tokens:, messages:, model:, container: nil, context_management: nil, mcp_servers: nil, metadata: nil, output_format: nil, service_tier: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
               #   Some parameter documentations has been truncated, see
               #   {Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params} for more
               #   details.
@@ -391,6 +397,8 @@ module Anthropic
               #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>] MCP servers to be utilized in this request
               #
               #   @param metadata [Anthropic::Models::Beta::BetaMetadata] An object describing metadata about the request.
+              #
+              #   @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil]
               #
               #   @param service_tier [Symbol, Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
               #

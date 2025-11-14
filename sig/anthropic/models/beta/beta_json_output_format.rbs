@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    class BetaJSONOutputFormat = Beta::BetaJSONOutputFormat
+
+    module Beta
+      type beta_json_output_format =
+        { schema: ::Hash[Symbol, top], type: :json_schema }
+
+      class BetaJSONOutputFormat < Anthropic::Internal::Type::BaseModel
+        attr_accessor schema: ::Hash[Symbol, top]
+
+        attr_accessor type: :json_schema
+
+        def initialize: (
+          schema: ::Hash[Symbol, top],
+          ?type: :json_schema
+        ) -> void
+
+        def to_hash: -> { schema: ::Hash[Symbol, top], type: :json_schema }
+      end
+    end
+  end
+end

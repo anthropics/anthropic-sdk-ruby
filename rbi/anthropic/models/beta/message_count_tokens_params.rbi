@@ -124,6 +124,18 @@ module Anthropic
         end
         attr_writer :mcp_servers
 
+        # A schema to specify Claude's output format in responses.
+        sig { returns(T.nilable(Anthropic::Beta::BetaJSONOutputFormat)) }
+        attr_reader :output_format
+
+        sig do
+          params(
+            output_format:
+              T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash)
+          ).void
+        end
+        attr_writer :output_format
+
         # System prompt.
         #
         # A system prompt is a way of providing context and instructions to Claude, such
@@ -359,6 +371,8 @@ module Anthropic
               T::Array[
                 Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
               ],
+            output_format:
+              T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash),
             system_:
               Anthropic::Beta::MessageCountTokensParams::System::Variants,
             thinking:
@@ -474,6 +488,8 @@ module Anthropic
           context_management: nil,
           # MCP servers to be utilized in this request
           mcp_servers: nil,
+          # A schema to specify Claude's output format in responses.
+          output_format: nil,
           # System prompt.
           #
           # A system prompt is a way of providing context and instructions to Claude, such
@@ -584,6 +600,7 @@ module Anthropic
                 T.nilable(Anthropic::Beta::BetaContextManagementConfig),
               mcp_servers:
                 T::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
+              output_format: T.nilable(Anthropic::Beta::BetaJSONOutputFormat),
               system_:
                 Anthropic::Beta::MessageCountTokensParams::System::Variants,
               thinking:
