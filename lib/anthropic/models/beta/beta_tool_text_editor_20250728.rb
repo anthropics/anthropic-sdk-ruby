@@ -30,13 +30,20 @@ module Anthropic
         #   @return [Integer, nil]
         optional :max_characters, Integer, nil?: true
 
-        # @!method initialize(cache_control: nil, max_characters: nil, name: :str_replace_based_edit_tool, type: :text_editor_20250728)
+        # @!attribute strict
+        #
+        #   @return [Boolean, nil]
+        optional :strict, Anthropic::Internal::Type::Boolean
+
+        # @!method initialize(cache_control: nil, max_characters: nil, strict: nil, name: :str_replace_based_edit_tool, type: :text_editor_20250728)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaToolTextEditor20250728} for more details.
         #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
         #   @param max_characters [Integer, nil] Maximum number of characters to display when viewing a file. If not specified, d
+        #
+        #   @param strict [Boolean]
         #
         #   @param name [Symbol, :str_replace_based_edit_tool] Name of the tool.
         #

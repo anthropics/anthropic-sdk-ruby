@@ -149,6 +149,18 @@ module Anthropic
         sig { params(metadata: Anthropic::Beta::BetaMetadata::OrHash).void }
         attr_writer :metadata
 
+        # A schema to specify Claude's output format in responses.
+        sig { returns(T.nilable(Anthropic::Beta::BetaJSONOutputFormat)) }
+        attr_reader :output_format
+
+        sig do
+          params(
+            output_format:
+              T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash)
+          ).void
+        end
+        attr_writer :output_format
+
         # Determines whether to use priority capacity (if available) or standard capacity
         # for this request.
         #
@@ -467,6 +479,8 @@ module Anthropic
                 Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
               ],
             metadata: Anthropic::Beta::BetaMetadata::OrHash,
+            output_format:
+              T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash),
             service_tier:
               Anthropic::Beta::MessageCreateParams::ServiceTier::OrSymbol,
             stop_sequences: T::Array[String],
@@ -599,6 +613,8 @@ module Anthropic
           mcp_servers: nil,
           # An object describing metadata about the request.
           metadata: nil,
+          # A schema to specify Claude's output format in responses.
+          output_format: nil,
           # Determines whether to use priority capacity (if available) or standard capacity
           # for this request.
           #
@@ -756,6 +772,7 @@ module Anthropic
               mcp_servers:
                 T::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
               metadata: Anthropic::Beta::BetaMetadata,
+              output_format: T.nilable(Anthropic::Beta::BetaJSONOutputFormat),
               service_tier:
                 Anthropic::Beta::MessageCreateParams::ServiceTier::OrSymbol,
               stop_sequences: T::Array[String],

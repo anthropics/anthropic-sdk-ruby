@@ -47,6 +47,12 @@ module Anthropic
         sig { returns(T.nilable(Integer)) }
         attr_accessor :display_number
 
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :strict
+
+        sig { params(strict: T::Boolean).void }
+        attr_writer :strict
+
         sig do
           params(
             display_height_px: Integer,
@@ -54,6 +60,7 @@ module Anthropic
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             display_number: T.nilable(Integer),
+            strict: T::Boolean,
             name: Symbol,
             type: Symbol
           ).returns(T.attached_class)
@@ -67,6 +74,7 @@ module Anthropic
           cache_control: nil,
           # The X11 display number (e.g. 0, 1) for the display.
           display_number: nil,
+          strict: nil,
           # Name of the tool.
           #
           # This is how the tool will be called by the model and in `tool_use` blocks.
@@ -84,7 +92,8 @@ module Anthropic
               type: Symbol,
               cache_control:
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
-              display_number: T.nilable(Integer)
+              display_number: T.nilable(Integer),
+              strict: T::Boolean
             }
           )
         end

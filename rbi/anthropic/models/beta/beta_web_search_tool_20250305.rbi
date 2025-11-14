@@ -49,6 +49,12 @@ module Anthropic
         sig { returns(T.nilable(Integer)) }
         attr_accessor :max_uses
 
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :strict
+
+        sig { params(strict: T::Boolean).void }
+        attr_writer :strict
+
         # Parameters for the user's location. Used to provide more relevant search
         # results.
         sig do
@@ -75,6 +81,7 @@ module Anthropic
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             max_uses: T.nilable(Integer),
+            strict: T::Boolean,
             user_location:
               T.nilable(
                 Anthropic::Beta::BetaWebSearchTool20250305::UserLocation::OrHash
@@ -94,6 +101,7 @@ module Anthropic
           cache_control: nil,
           # Maximum number of times the tool can be used in the API request.
           max_uses: nil,
+          strict: nil,
           # Parameters for the user's location. Used to provide more relevant search
           # results.
           user_location: nil,
@@ -115,6 +123,7 @@ module Anthropic
               cache_control:
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
               max_uses: T.nilable(Integer),
+              strict: T::Boolean,
               user_location:
                 T.nilable(
                   Anthropic::Beta::BetaWebSearchTool20250305::UserLocation

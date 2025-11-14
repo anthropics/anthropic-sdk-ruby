@@ -25,9 +25,10 @@ module Anthropic
         # The Messages API can be used for either single queries or stateless multi-turn
         # conversations.
         #
-        # Learn more about the Messages API in our [user guide](/en/docs/initial-setup)
+        # Learn more about the Messages API in our
+        # [user guide](https://docs.claude.com/en/docs/initial-setup)
         #
-        # @overload create(max_tokens:, messages:, model:, container: nil, context_management: nil, mcp_servers: nil, metadata: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
+        # @overload create(max_tokens:, messages:, model:, container: nil, context_management: nil, mcp_servers: nil, metadata: nil, output_format: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -42,6 +43,8 @@ module Anthropic
         # @param mcp_servers [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>] Body param: MCP servers to be utilized in this request
         #
         # @param metadata [Anthropic::Models::Beta::BetaMetadata] Body param: An object describing metadata about the request.
+        #
+        # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param:
         #
         # @param service_tier [Symbol, Anthropic::Models::Beta::MessageCreateParams::ServiceTier] Body param: Determines whether to use priority capacity (if available) or standa
         #
@@ -114,9 +117,10 @@ module Anthropic
         # The Messages API can be used for either single queries or stateless multi-turn
         # conversations.
         #
-        # Learn more about the Messages API in our [user guide](/en/docs/initial-setup)
+        # Learn more about the Messages API in our
+        # [user guide](https://docs.claude.com/en/docs/initial-setup)
         #
-        # @overload stream_raw(max_tokens:, messages:, model:, container: nil, context_management: nil, mcp_servers: nil, metadata: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
+        # @overload stream_raw(max_tokens:, messages:, model:, container: nil, context_management: nil, mcp_servers: nil, metadata: nil, output_format: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -131,6 +135,8 @@ module Anthropic
         # @param mcp_servers [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>] Body param: MCP servers to be utilized in this request
         #
         # @param metadata [Anthropic::Models::Beta::BetaMetadata] Body param: An object describing metadata about the request.
+        #
+        # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param:
         #
         # @param service_tier [Symbol, Anthropic::Models::Beta::MessageCreateParams::ServiceTier] Body param: Determines whether to use priority capacity (if available) or standa
         #
@@ -265,9 +271,9 @@ module Anthropic
         # including tools, images, and documents, without creating it.
         #
         # Learn more about token counting in our
-        # [user guide](/en/docs/build-with-claude/token-counting)
+        # [user guide](https://docs.claude.com/en/docs/build-with-claude/token-counting)
         #
-        # @overload count_tokens(messages:, model:, context_management: nil, mcp_servers: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, request_options: {})
+        # @overload count_tokens(messages:, model:, context_management: nil, mcp_servers: nil, output_format: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, request_options: {})
         #
         # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Body param: Input messages.
         #
@@ -276,6 +282,8 @@ module Anthropic
         # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Context management configuration.
         #
         # @param mcp_servers [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>] Body param: MCP servers to be utilized in this request
+        #
+        # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param:
         #
         # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] Body param: System prompt.
         #
