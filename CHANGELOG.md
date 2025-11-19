@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.15.2 (2025-11-19)
+
+Full Changelog: [v1.15.1...v1.15.2](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.15.1...v1.15.2)
+
+### Bug Fixes
+
+* **structured outputs:** use correct beta header ([0e92bf3](https://github.com/anthropics/anthropic-sdk-ruby/commit/0e92bf33ddaedf8b29adada9bfa44dab9b51f518))
+
 ## 1.15.1 (2025-11-14)
 
 Full Changelog: [v1.15.0...v1.15.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.15.0...v1.15.1)
