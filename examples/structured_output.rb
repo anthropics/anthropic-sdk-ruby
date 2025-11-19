@@ -17,8 +17,8 @@ class Output < Anthropic::BaseModel
 end
 
 message = anthropic.beta.messages.create(
-  model: "claude-sonnet-4-5-20250929-structured-outputs",
-  betas: ["structured-outputs-2025-09-17"],
+  model: "claude-sonnet-4-5",
+  betas: ["structured-outputs-2025-11-13"],
   max_tokens: 9999,
   messages: [
     {
