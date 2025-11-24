@@ -17,6 +17,12 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
+        # Tool invocation directly from the model.
+        sig do
+          returns(Anthropic::Beta::BetaServerToolUseBlock::Caller::Variants)
+        end
+        attr_accessor :caller_
+
         sig { returns(T::Hash[Symbol, T.anything]) }
         attr_accessor :input
 
@@ -31,18 +37,32 @@ module Anthropic
         sig do
           params(
             id: String,
+            caller_:
+              T.any(
+                Anthropic::Beta::BetaDirectCaller::OrHash,
+                Anthropic::Beta::BetaServerToolCaller::OrHash
+              ),
             input: T::Hash[Symbol, T.anything],
             name: Anthropic::Beta::BetaServerToolUseBlock::Name::OrSymbol,
             type: Symbol
           ).returns(T.attached_class)
         end
-        def self.new(id:, input:, name:, type: :server_tool_use)
+        def self.new(
+          id:,
+          # Tool invocation directly from the model.
+          caller_:,
+          input:,
+          name:,
+          type: :server_tool_use
+        )
         end
 
         sig do
           override.returns(
             {
               id: String,
+              caller_:
+                Anthropic::Beta::BetaServerToolUseBlock::Caller::Variants,
               input: T::Hash[Symbol, T.anything],
               name: Anthropic::Beta::BetaServerToolUseBlock::Name::TaggedSymbol,
               type: Symbol
@@ -50,6 +70,29 @@ module Anthropic
           )
         end
         def to_hash
+        end
+
+        # Tool invocation directly from the model.
+        module Caller
+          extend Anthropic::Internal::Type::Union
+
+          Variants =
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::BetaDirectCaller,
+                Anthropic::Beta::BetaServerToolCaller
+              )
+            end
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaServerToolUseBlock::Caller::Variants
+              ]
+            )
+          end
+          def self.variants
+          end
         end
 
         module Name
@@ -84,6 +127,16 @@ module Anthropic
           TEXT_EDITOR_CODE_EXECUTION =
             T.let(
               :text_editor_code_execution,
+              Anthropic::Beta::BetaServerToolUseBlock::Name::TaggedSymbol
+            )
+          TOOL_SEARCH_TOOL_REGEX =
+            T.let(
+              :tool_search_tool_regex,
+              Anthropic::Beta::BetaServerToolUseBlock::Name::TaggedSymbol
+            )
+          TOOL_SEARCH_TOOL_BM25 =
+            T.let(
+              :tool_search_tool_bm25,
               Anthropic::Beta::BetaServerToolUseBlock::Name::TaggedSymbol
             )
 

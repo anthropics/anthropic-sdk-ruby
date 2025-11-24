@@ -23,6 +23,27 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
+        sig do
+          returns(
+            T.nilable(
+              T::Array[
+                Anthropic::Beta::BetaWebFetchTool20250910::AllowedCaller::OrSymbol
+              ]
+            )
+          )
+        end
+        attr_reader :allowed_callers
+
+        sig do
+          params(
+            allowed_callers:
+              T::Array[
+                Anthropic::Beta::BetaWebFetchTool20250910::AllowedCaller::OrSymbol
+              ]
+          ).void
+        end
+        attr_writer :allowed_callers
+
         # List of domains to allow fetching from
         sig { returns(T.nilable(T::Array[String])) }
         attr_accessor :allowed_domains
@@ -56,6 +77,14 @@ module Anthropic
         end
         attr_writer :citations
 
+        # If true, tool will not be included in initial system prompt. Only loaded when
+        # returned via tool_reference from tool search.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :defer_loading
+
+        sig { params(defer_loading: T::Boolean).void }
+        attr_writer :defer_loading
+
         # Maximum number of tokens used by including web page text content in the context.
         # The limit is approximate and does not apply to binary content such as PDFs.
         sig { returns(T.nilable(Integer)) }
@@ -73,12 +102,17 @@ module Anthropic
 
         sig do
           params(
+            allowed_callers:
+              T::Array[
+                Anthropic::Beta::BetaWebFetchTool20250910::AllowedCaller::OrSymbol
+              ],
             allowed_domains: T.nilable(T::Array[String]),
             blocked_domains: T.nilable(T::Array[String]),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             citations:
               T.nilable(Anthropic::Beta::BetaCitationsConfigParam::OrHash),
+            defer_loading: T::Boolean,
             max_content_tokens: T.nilable(Integer),
             max_uses: T.nilable(Integer),
             strict: T::Boolean,
@@ -87,6 +121,7 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
+          allowed_callers: nil,
           # List of domains to allow fetching from
           allowed_domains: nil,
           # List of domains to block fetching from
@@ -96,6 +131,9 @@ module Anthropic
           # Citations configuration for fetched documents. Citations are disabled by
           # default.
           citations: nil,
+          # If true, tool will not be included in initial system prompt. Only loaded when
+          # returned via tool_reference from tool search.
+          defer_loading: nil,
           # Maximum number of tokens used by including web page text content in the context.
           # The limit is approximate and does not apply to binary content such as PDFs.
           max_content_tokens: nil,
@@ -115,11 +153,16 @@ module Anthropic
             {
               name: Symbol,
               type: Symbol,
+              allowed_callers:
+                T::Array[
+                  Anthropic::Beta::BetaWebFetchTool20250910::AllowedCaller::OrSymbol
+                ],
               allowed_domains: T.nilable(T::Array[String]),
               blocked_domains: T.nilable(T::Array[String]),
               cache_control:
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
               citations: T.nilable(Anthropic::Beta::BetaCitationsConfigParam),
+              defer_loading: T::Boolean,
               max_content_tokens: T.nilable(Integer),
               max_uses: T.nilable(Integer),
               strict: T::Boolean
@@ -127,6 +170,40 @@ module Anthropic
           )
         end
         def to_hash
+        end
+
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                Anthropic::Beta::BetaWebFetchTool20250910::AllowedCaller
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          DIRECT =
+            T.let(
+              :direct,
+              Anthropic::Beta::BetaWebFetchTool20250910::AllowedCaller::TaggedSymbol
+            )
+          CODE_EXECUTION_20250825 =
+            T.let(
+              :code_execution_20250825,
+              Anthropic::Beta::BetaWebFetchTool20250910::AllowedCaller::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaWebFetchTool20250910::AllowedCaller::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
     end

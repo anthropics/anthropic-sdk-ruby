@@ -33,6 +33,7 @@ module Anthropic
                 Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
               ],
             metadata: Anthropic::Beta::BetaMetadata::OrHash,
+            output_config: Anthropic::Beta::BetaOutputConfig::OrHash,
             output_format:
               T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash),
             service_tier:
@@ -64,11 +65,15 @@ module Anthropic
                   Anthropic::Beta::BetaMemoryTool20250818::OrHash,
                   Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20241022::OrHash,
+                  Anthropic::Beta::BetaToolComputerUse20251124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250429::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250728::OrHash,
                   Anthropic::Beta::BetaWebSearchTool20250305::OrHash,
-                  Anthropic::Beta::BetaWebFetchTool20250910::OrHash
+                  Anthropic::Beta::BetaWebFetchTool20250910::OrHash,
+                  Anthropic::Beta::BetaToolSearchToolBm25_20251119::OrHash,
+                  Anthropic::Beta::BetaToolSearchToolRegex20251119::OrHash,
+                  Anthropic::Beta::BetaMCPToolset::OrHash
                 )
               ],
             top_k: Integer,
@@ -168,6 +173,9 @@ module Anthropic
           mcp_servers: nil,
           # Body param: An object describing metadata about the request.
           metadata: nil,
+          # Body param: Configuration options for the model's output. Controls aspects like
+          # how much effort the model puts into its response.
+          output_config: nil,
           # Body param: A schema to specify Claude's output format in responses.
           output_format: nil,
           # Body param: Determines whether to use priority capacity (if available) or
@@ -343,6 +351,7 @@ module Anthropic
                 Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
               ],
             metadata: Anthropic::Beta::BetaMetadata::OrHash,
+            output_config: Anthropic::Beta::BetaOutputConfig::OrHash,
             output_format:
               T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash),
             service_tier:
@@ -374,11 +383,15 @@ module Anthropic
                   Anthropic::Beta::BetaMemoryTool20250818::OrHash,
                   Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20241022::OrHash,
+                  Anthropic::Beta::BetaToolComputerUse20251124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250429::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250728::OrHash,
                   Anthropic::Beta::BetaWebSearchTool20250305::OrHash,
-                  Anthropic::Beta::BetaWebFetchTool20250910::OrHash
+                  Anthropic::Beta::BetaWebFetchTool20250910::OrHash,
+                  Anthropic::Beta::BetaToolSearchToolBm25_20251119::OrHash,
+                  Anthropic::Beta::BetaToolSearchToolRegex20251119::OrHash,
+                  Anthropic::Beta::BetaMCPToolset::OrHash
                 )
               ],
             top_k: Integer,
@@ -482,6 +495,9 @@ module Anthropic
           mcp_servers: nil,
           # Body param: An object describing metadata about the request.
           metadata: nil,
+          # Body param: Configuration options for the model's output. Controls aspects like
+          # how much effort the model puts into its response.
+          output_config: nil,
           # Body param: A schema to specify Claude's output format in responses.
           output_format: nil,
           # Body param: Determines whether to use priority capacity (if available) or
@@ -648,6 +664,7 @@ module Anthropic
               T::Array[
                 Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
               ],
+            output_config: Anthropic::Beta::BetaOutputConfig::OrHash,
             output_format:
               T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash),
             system_:
@@ -676,11 +693,15 @@ module Anthropic
                   Anthropic::Beta::BetaMemoryTool20250818::OrHash,
                   Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20241022::OrHash,
+                  Anthropic::Beta::BetaToolComputerUse20251124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250429::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250728::OrHash,
                   Anthropic::Beta::BetaWebSearchTool20250305::OrHash,
-                  Anthropic::Beta::BetaWebFetchTool20250910::OrHash
+                  Anthropic::Beta::BetaWebFetchTool20250910::OrHash,
+                  Anthropic::Beta::BetaToolSearchToolBm25_20251119::OrHash,
+                  Anthropic::Beta::BetaToolSearchToolRegex20251119::OrHash,
+                  Anthropic::Beta::BetaMCPToolset::OrHash
                 )
               ],
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
@@ -765,6 +786,9 @@ module Anthropic
           context_management: nil,
           # Body param: MCP servers to be utilized in this request
           mcp_servers: nil,
+          # Body param: Configuration options for the model's output. Controls aspects like
+          # how much effort the model puts into its response.
+          output_config: nil,
           # Body param: A schema to specify Claude's output format in responses.
           output_format: nil,
           # Body param: System prompt.

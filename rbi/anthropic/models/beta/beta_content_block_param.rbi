@@ -26,6 +26,7 @@ module Anthropic
               Anthropic::Beta::BetaCodeExecutionToolResultBlockParam,
               Anthropic::Beta::BetaBashCodeExecutionToolResultBlockParam,
               Anthropic::Beta::BetaTextEditorCodeExecutionToolResultBlockParam,
+              Anthropic::Beta::BetaToolSearchToolResultBlockParam,
               Anthropic::Beta::BetaMCPToolUseBlockParam,
               Anthropic::Beta::BetaRequestMCPToolResultBlockParam,
               Anthropic::Beta::BetaContainerUploadBlockParam

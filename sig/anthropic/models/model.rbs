@@ -1,7 +1,9 @@
 module Anthropic
   module Models
     type model =
-      :"claude-3-7-sonnet-latest"
+      :"claude-opus-4-5-20251101"
+      | :"claude-opus-4-5"
+      | :"claude-3-7-sonnet-latest"
       | :"claude-3-7-sonnet-20250219"
       | :"claude-3-5-haiku-latest"
       | :"claude-3-5-haiku-20241022"
@@ -25,6 +27,12 @@ module Anthropic
       extend Anthropic::Internal::Type::Union
 
       def self?.variants: -> ::Array[Anthropic::Models::model]
+
+      # Premium model combining maximum intelligence with practical performance
+      CLAUDE_OPUS_4_5_20251101: :"claude-opus-4-5-20251101"
+
+      # Premium model combining maximum intelligence with practical performance
+      CLAUDE_OPUS_4_5: :"claude-opus-4-5"
 
       # High-performance model with early extended thinking
       CLAUDE_3_7_SONNET_LATEST: :"claude-3-7-sonnet-latest"

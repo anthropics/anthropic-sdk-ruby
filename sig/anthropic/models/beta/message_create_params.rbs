@@ -10,6 +10,7 @@ module Anthropic
           context_management: Anthropic::Beta::BetaContextManagementConfig?,
           mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           metadata: Anthropic::Beta::BetaMetadata,
+          output_config: Anthropic::Beta::BetaOutputConfig,
           output_format: Anthropic::Beta::BetaJSONOutputFormat?,
           service_tier: Anthropic::Models::Beta::MessageCreateParams::service_tier,
           stop_sequences: ::Array[String],
@@ -49,6 +50,12 @@ module Anthropic
         def metadata=: (
           Anthropic::Beta::BetaMetadata
         ) -> Anthropic::Beta::BetaMetadata
+
+        attr_reader output_config: Anthropic::Beta::BetaOutputConfig?
+
+        def output_config=: (
+          Anthropic::Beta::BetaOutputConfig
+        ) -> Anthropic::Beta::BetaOutputConfig
 
         attr_accessor output_format: Anthropic::Beta::BetaJSONOutputFormat?
 
@@ -112,6 +119,7 @@ module Anthropic
           ?context_management: Anthropic::Beta::BetaContextManagementConfig?,
           ?mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           ?metadata: Anthropic::Beta::BetaMetadata,
+          ?output_config: Anthropic::Beta::BetaOutputConfig,
           ?output_format: Anthropic::Beta::BetaJSONOutputFormat?,
           ?service_tier: Anthropic::Models::Beta::MessageCreateParams::service_tier,
           ?stop_sequences: ::Array[String],
@@ -134,6 +142,7 @@ module Anthropic
           context_management: Anthropic::Beta::BetaContextManagementConfig?,
           mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           metadata: Anthropic::Beta::BetaMetadata,
+          output_config: Anthropic::Beta::BetaOutputConfig,
           output_format: Anthropic::Beta::BetaJSONOutputFormat?,
           service_tier: Anthropic::Models::Beta::MessageCreateParams::service_tier,
           stop_sequences: ::Array[String],

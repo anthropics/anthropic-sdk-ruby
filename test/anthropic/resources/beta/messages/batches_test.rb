@@ -14,7 +14,7 @@ class Anthropic::Test::Resources::Beta::Messages::BatchesTest < Anthropic::Test:
             params: {
               max_tokens: 1024,
               messages: [{content: "Hello, world", role: :user}],
-              model: :"claude-3-7-sonnet-latest"
+              model: :"claude-opus-4-5-20251101"
             }
           }
         ]

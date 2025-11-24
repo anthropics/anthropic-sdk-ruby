@@ -1,0 +1,79 @@
+module Anthropic
+  module Models
+    class BetaToolSearchToolRegex20251119 = Beta::BetaToolSearchToolRegex20251119
+
+    module Beta
+      type beta_tool_search_tool_regex20251119 =
+        {
+          name: :tool_search_tool_regex,
+          type: Anthropic::Models::Beta::BetaToolSearchToolRegex20251119::type_,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaToolSearchToolRegex20251119::allowed_caller],
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          defer_loading: bool,
+          strict: bool
+        }
+
+      class BetaToolSearchToolRegex20251119 < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: :tool_search_tool_regex
+
+        attr_accessor type: Anthropic::Models::Beta::BetaToolSearchToolRegex20251119::type_
+
+        attr_reader allowed_callers: ::Array[Anthropic::Models::Beta::BetaToolSearchToolRegex20251119::allowed_caller]?
+
+        def allowed_callers=: (
+          ::Array[Anthropic::Models::Beta::BetaToolSearchToolRegex20251119::allowed_caller]
+        ) -> ::Array[Anthropic::Models::Beta::BetaToolSearchToolRegex20251119::allowed_caller]
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        attr_reader defer_loading: bool?
+
+        def defer_loading=: (bool) -> bool
+
+        attr_reader strict: bool?
+
+        def strict=: (bool) -> bool
+
+        def initialize: (
+          type: Anthropic::Models::Beta::BetaToolSearchToolRegex20251119::type_,
+          ?allowed_callers: ::Array[Anthropic::Models::Beta::BetaToolSearchToolRegex20251119::allowed_caller],
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?defer_loading: bool,
+          ?strict: bool,
+          ?name: :tool_search_tool_regex
+        ) -> void
+
+        def to_hash: -> {
+          name: :tool_search_tool_regex,
+          type: Anthropic::Models::Beta::BetaToolSearchToolRegex20251119::type_,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaToolSearchToolRegex20251119::allowed_caller],
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          defer_loading: bool,
+          strict: bool
+        }
+
+        type type_ = :tool_search_tool_regex_20251119 | :tool_search_tool_regex
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TOOL_SEARCH_TOOL_REGEX_20251119: :tool_search_tool_regex_20251119
+          TOOL_SEARCH_TOOL_REGEX: :tool_search_tool_regex
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaToolSearchToolRegex20251119::type_]
+        end
+
+        type allowed_caller = :direct | :code_execution_20250825
+
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          DIRECT: :direct
+          CODE_EXECUTION_20250825: :code_execution_20250825
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaToolSearchToolRegex20251119::allowed_caller]
+        end
+      end
+    end
+  end
+end

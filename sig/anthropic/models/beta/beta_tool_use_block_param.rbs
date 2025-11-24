@@ -9,7 +9,8 @@ module Anthropic
           input: ::Hash[Symbol, top],
           name: String,
           type: :tool_use,
-          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          caller_: Anthropic::Models::Beta::BetaToolUseBlockParam::caller_
         }
 
       class BetaToolUseBlockParam < Anthropic::Internal::Type::BaseModel
@@ -23,11 +24,18 @@ module Anthropic
 
         attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
+        attr_reader caller_: Anthropic::Models::Beta::BetaToolUseBlockParam::caller_?
+
+        def caller_=: (
+          Anthropic::Models::Beta::BetaToolUseBlockParam::caller_
+        ) -> Anthropic::Models::Beta::BetaToolUseBlockParam::caller_
+
         def initialize: (
           id: String,
           input: ::Hash[Symbol, top],
           name: String,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?caller_: Anthropic::Models::Beta::BetaToolUseBlockParam::caller_,
           ?type: :tool_use
         ) -> void
 
@@ -36,8 +44,19 @@ module Anthropic
           input: ::Hash[Symbol, top],
           name: String,
           type: :tool_use,
-          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          caller_: Anthropic::Models::Beta::BetaToolUseBlockParam::caller_
         }
+
+        type caller_ =
+          Anthropic::Beta::BetaDirectCaller
+          | Anthropic::Beta::BetaServerToolCaller
+
+        module Caller
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaToolUseBlockParam::caller_]
+        end
       end
     end
   end

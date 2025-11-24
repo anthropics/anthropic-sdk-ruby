@@ -1,0 +1,99 @@
+module Anthropic
+  module Models
+    class BetaToolComputerUse20251124 = Beta::BetaToolComputerUse20251124
+
+    module Beta
+      type beta_tool_computer_use20251124 =
+        {
+          display_height_px: Integer,
+          display_width_px: Integer,
+          name: :computer,
+          type: :computer_20251124,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaToolComputerUse20251124::allowed_caller],
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          defer_loading: bool,
+          display_number: Integer?,
+          enable_zoom: bool,
+          input_examples: ::Array[::Hash[Symbol, top]],
+          strict: bool
+        }
+
+      class BetaToolComputerUse20251124 < Anthropic::Internal::Type::BaseModel
+        attr_accessor display_height_px: Integer
+
+        attr_accessor display_width_px: Integer
+
+        attr_accessor name: :computer
+
+        attr_accessor type: :computer_20251124
+
+        attr_reader allowed_callers: ::Array[Anthropic::Models::Beta::BetaToolComputerUse20251124::allowed_caller]?
+
+        def allowed_callers=: (
+          ::Array[Anthropic::Models::Beta::BetaToolComputerUse20251124::allowed_caller]
+        ) -> ::Array[Anthropic::Models::Beta::BetaToolComputerUse20251124::allowed_caller]
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        attr_reader defer_loading: bool?
+
+        def defer_loading=: (bool) -> bool
+
+        attr_accessor display_number: Integer?
+
+        attr_reader enable_zoom: bool?
+
+        def enable_zoom=: (bool) -> bool
+
+        attr_reader input_examples: ::Array[::Hash[Symbol, top]]?
+
+        def input_examples=: (
+          ::Array[::Hash[Symbol, top]]
+        ) -> ::Array[::Hash[Symbol, top]]
+
+        attr_reader strict: bool?
+
+        def strict=: (bool) -> bool
+
+        def initialize: (
+          display_height_px: Integer,
+          display_width_px: Integer,
+          ?allowed_callers: ::Array[Anthropic::Models::Beta::BetaToolComputerUse20251124::allowed_caller],
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?defer_loading: bool,
+          ?display_number: Integer?,
+          ?enable_zoom: bool,
+          ?input_examples: ::Array[::Hash[Symbol, top]],
+          ?strict: bool,
+          ?name: :computer,
+          ?type: :computer_20251124
+        ) -> void
+
+        def to_hash: -> {
+          display_height_px: Integer,
+          display_width_px: Integer,
+          name: :computer,
+          type: :computer_20251124,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaToolComputerUse20251124::allowed_caller],
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          defer_loading: bool,
+          display_number: Integer?,
+          enable_zoom: bool,
+          input_examples: ::Array[::Hash[Symbol, top]],
+          strict: bool
+        }
+
+        type allowed_caller = :direct | :code_execution_20250825
+
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          DIRECT: :direct
+          CODE_EXECUTION_20250825: :code_execution_20250825
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaToolComputerUse20251124::allowed_caller]
+        end
+      end
+    end
+  end
+end

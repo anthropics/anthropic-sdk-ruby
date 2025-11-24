@@ -17,6 +17,12 @@ module Anthropic
         #   @return [Symbol, :web_fetch_20250910]
         required :type, const: :web_fetch_20250910
 
+        # @!attribute allowed_callers
+        #
+        #   @return [Array<Symbol, Anthropic::Models::Beta::BetaWebFetchTool20250910::AllowedCaller>, nil]
+        optional :allowed_callers,
+                 -> { Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Beta::BetaWebFetchTool20250910::AllowedCaller] }
+
         # @!attribute allowed_domains
         #   List of domains to allow fetching from
         #
@@ -42,6 +48,13 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaCitationsConfigParam, nil]
         optional :citations, -> { Anthropic::Beta::BetaCitationsConfigParam }, nil?: true
 
+        # @!attribute defer_loading
+        #   If true, tool will not be included in initial system prompt. Only loaded when
+        #   returned via tool_reference from tool search.
+        #
+        #   @return [Boolean, nil]
+        optional :defer_loading, Anthropic::Internal::Type::Boolean
+
         # @!attribute max_content_tokens
         #   Maximum number of tokens used by including web page text content in the context.
         #   The limit is approximate and does not apply to binary content such as PDFs.
@@ -60,9 +73,11 @@ module Anthropic
         #   @return [Boolean, nil]
         optional :strict, Anthropic::Internal::Type::Boolean
 
-        # @!method initialize(allowed_domains: nil, blocked_domains: nil, cache_control: nil, citations: nil, max_content_tokens: nil, max_uses: nil, strict: nil, name: :web_fetch, type: :web_fetch_20250910)
+        # @!method initialize(allowed_callers: nil, allowed_domains: nil, blocked_domains: nil, cache_control: nil, citations: nil, defer_loading: nil, max_content_tokens: nil, max_uses: nil, strict: nil, name: :web_fetch, type: :web_fetch_20250910)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaWebFetchTool20250910} for more details.
+        #
+        #   @param allowed_callers [Array<Symbol, Anthropic::Models::Beta::BetaWebFetchTool20250910::AllowedCaller>]
         #
         #   @param allowed_domains [Array<String>, nil] List of domains to allow fetching from
         #
@@ -71,6 +86,8 @@ module Anthropic
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
         #   @param citations [Anthropic::Models::Beta::BetaCitationsConfigParam, nil] Citations configuration for fetched documents. Citations are disabled by default
+        #
+        #   @param defer_loading [Boolean] If true, tool will not be included in initial system prompt. Only loaded when re
         #
         #   @param max_content_tokens [Integer, nil] Maximum number of tokens used by including web page text content in the context.
         #
@@ -81,6 +98,16 @@ module Anthropic
         #   @param name [Symbol, :web_fetch] Name of the tool.
         #
         #   @param type [Symbol, :web_fetch_20250910]
+
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          DIRECT = :direct
+          CODE_EXECUTION_20250825 = :code_execution_20250825
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
       end
     end
 
