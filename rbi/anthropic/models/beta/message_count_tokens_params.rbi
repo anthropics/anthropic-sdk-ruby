@@ -124,6 +124,16 @@ module Anthropic
         end
         attr_writer :mcp_servers
 
+        # Configuration options for the model's output. Controls aspects like how much
+        # effort the model puts into its response.
+        sig { returns(T.nilable(Anthropic::Beta::BetaOutputConfig)) }
+        attr_reader :output_config
+
+        sig do
+          params(output_config: Anthropic::Beta::BetaOutputConfig::OrHash).void
+        end
+        attr_writer :output_config
+
         # A schema to specify Claude's output format in responses.
         sig { returns(T.nilable(Anthropic::Beta::BetaJSONOutputFormat)) }
         attr_reader :output_format
@@ -307,11 +317,15 @@ module Anthropic
                   Anthropic::Beta::BetaMemoryTool20250818,
                   Anthropic::Beta::BetaToolComputerUse20250124,
                   Anthropic::Beta::BetaToolTextEditor20241022,
+                  Anthropic::Beta::BetaToolComputerUse20251124,
                   Anthropic::Beta::BetaToolTextEditor20250124,
                   Anthropic::Beta::BetaToolTextEditor20250429,
                   Anthropic::Beta::BetaToolTextEditor20250728,
                   Anthropic::Beta::BetaWebSearchTool20250305,
-                  Anthropic::Beta::BetaWebFetchTool20250910
+                  Anthropic::Beta::BetaWebFetchTool20250910,
+                  Anthropic::Beta::BetaToolSearchToolBm25_20251119,
+                  Anthropic::Beta::BetaToolSearchToolRegex20251119,
+                  Anthropic::Beta::BetaMCPToolset
                 )
               ]
             )
@@ -333,11 +347,15 @@ module Anthropic
                   Anthropic::Beta::BetaMemoryTool20250818::OrHash,
                   Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20241022::OrHash,
+                  Anthropic::Beta::BetaToolComputerUse20251124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250429::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250728::OrHash,
                   Anthropic::Beta::BetaWebSearchTool20250305::OrHash,
-                  Anthropic::Beta::BetaWebFetchTool20250910::OrHash
+                  Anthropic::Beta::BetaWebFetchTool20250910::OrHash,
+                  Anthropic::Beta::BetaToolSearchToolBm25_20251119::OrHash,
+                  Anthropic::Beta::BetaToolSearchToolRegex20251119::OrHash,
+                  Anthropic::Beta::BetaMCPToolset::OrHash
                 )
               ]
           ).void
@@ -371,6 +389,7 @@ module Anthropic
               T::Array[
                 Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
               ],
+            output_config: Anthropic::Beta::BetaOutputConfig::OrHash,
             output_format:
               T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash),
             system_:
@@ -399,11 +418,15 @@ module Anthropic
                   Anthropic::Beta::BetaMemoryTool20250818::OrHash,
                   Anthropic::Beta::BetaToolComputerUse20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20241022::OrHash,
+                  Anthropic::Beta::BetaToolComputerUse20251124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250124::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250429::OrHash,
                   Anthropic::Beta::BetaToolTextEditor20250728::OrHash,
                   Anthropic::Beta::BetaWebSearchTool20250305::OrHash,
-                  Anthropic::Beta::BetaWebFetchTool20250910::OrHash
+                  Anthropic::Beta::BetaWebFetchTool20250910::OrHash,
+                  Anthropic::Beta::BetaToolSearchToolBm25_20251119::OrHash,
+                  Anthropic::Beta::BetaToolSearchToolRegex20251119::OrHash,
+                  Anthropic::Beta::BetaMCPToolset::OrHash
                 )
               ],
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
@@ -488,6 +511,9 @@ module Anthropic
           context_management: nil,
           # MCP servers to be utilized in this request
           mcp_servers: nil,
+          # Configuration options for the model's output. Controls aspects like how much
+          # effort the model puts into its response.
+          output_config: nil,
           # A schema to specify Claude's output format in responses.
           output_format: nil,
           # System prompt.
@@ -600,6 +626,7 @@ module Anthropic
                 T.nilable(Anthropic::Beta::BetaContextManagementConfig),
               mcp_servers:
                 T::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
+              output_config: Anthropic::Beta::BetaOutputConfig,
               output_format: T.nilable(Anthropic::Beta::BetaJSONOutputFormat),
               system_:
                 Anthropic::Beta::MessageCountTokensParams::System::Variants,
@@ -627,11 +654,15 @@ module Anthropic
                     Anthropic::Beta::BetaMemoryTool20250818,
                     Anthropic::Beta::BetaToolComputerUse20250124,
                     Anthropic::Beta::BetaToolTextEditor20241022,
+                    Anthropic::Beta::BetaToolComputerUse20251124,
                     Anthropic::Beta::BetaToolTextEditor20250124,
                     Anthropic::Beta::BetaToolTextEditor20250429,
                     Anthropic::Beta::BetaToolTextEditor20250728,
                     Anthropic::Beta::BetaWebSearchTool20250305,
-                    Anthropic::Beta::BetaWebFetchTool20250910
+                    Anthropic::Beta::BetaWebFetchTool20250910,
+                    Anthropic::Beta::BetaToolSearchToolBm25_20251119,
+                    Anthropic::Beta::BetaToolSearchToolRegex20251119,
+                    Anthropic::Beta::BetaMCPToolset
                   )
                 ],
               betas:
@@ -675,6 +706,10 @@ module Anthropic
             )
         end
 
+        # Configuration for a group of tools from an MCP server.
+        #
+        # Allows configuring enabled status and defer_loading for all tools from an MCP
+        # server, with optional per-tool overrides.
         module Tool
           extend Anthropic::Internal::Type::Union
 
@@ -690,11 +725,15 @@ module Anthropic
                 Anthropic::Beta::BetaMemoryTool20250818,
                 Anthropic::Beta::BetaToolComputerUse20250124,
                 Anthropic::Beta::BetaToolTextEditor20241022,
+                Anthropic::Beta::BetaToolComputerUse20251124,
                 Anthropic::Beta::BetaToolTextEditor20250124,
                 Anthropic::Beta::BetaToolTextEditor20250429,
                 Anthropic::Beta::BetaToolTextEditor20250728,
                 Anthropic::Beta::BetaWebSearchTool20250305,
-                Anthropic::Beta::BetaWebFetchTool20250910
+                Anthropic::Beta::BetaWebFetchTool20250910,
+                Anthropic::Beta::BetaToolSearchToolBm25_20251119,
+                Anthropic::Beta::BetaToolSearchToolRegex20251119,
+                Anthropic::Beta::BetaMCPToolset
               )
             end
 

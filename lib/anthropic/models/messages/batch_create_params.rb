@@ -37,8 +37,8 @@ module Anthropic
           # @!attribute params
           #   Messages API creation parameters for the individual request.
           #
-          #   See the [Messages API reference](/en/api/messages) for full documentation on
-          #   available parameters.
+          #   See the [Messages API reference](https://docs.claude.com/en/api/messages) for
+          #   full documentation on available parameters.
           #
           #   @return [Anthropic::Models::Messages::BatchCreateParams::Request::Params]
           required :params, -> { Anthropic::Messages::BatchCreateParams::Request::Params }
@@ -340,8 +340,8 @@ module Anthropic
             #
             #   Messages API creation parameters for the individual request.
             #
-            #   See the [Messages API reference](/en/api/messages) for full documentation on
-            #   available parameters.
+            #   See the [Messages API reference](https://docs.claude.com/en/api/messages) for
+            #   full documentation on available parameters.
             #
             #   @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
             #

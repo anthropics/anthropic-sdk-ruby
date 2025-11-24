@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    class BetaToolReferenceBlock = Beta::BetaToolReferenceBlock
+
+    module Beta
+      type beta_tool_reference_block =
+        { tool_name: String, type: :tool_reference }
+
+      class BetaToolReferenceBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor tool_name: String
+
+        attr_accessor type: :tool_reference
+
+        def initialize: (tool_name: String, ?type: :tool_reference) -> void
+
+        def to_hash: -> { tool_name: String, type: :tool_reference }
+      end
+    end
+  end
+end

@@ -147,7 +147,7 @@ module Anthropic
         raw_stream = @client.request(
           method: :post,
           path: "v1/messages",
-          headers: {"accept" => "text/event-stream"},
+          headers: stream_headers("accept" => "text/event-stream"),
           body: parsed,
           stream: Anthropic::Internal::Stream,
           model: Anthropic::Models::RawMessageStreamEvent,
@@ -213,7 +213,7 @@ module Anthropic
         @client.request(
           method: :post,
           path: "v1/messages",
-          headers: {"accept" => "text/event-stream"},
+          headers: stream_headers("accept" => "text/event-stream"),
           body: parsed,
           stream: Anthropic::Internal::Stream,
           model: Anthropic::RawMessageStreamEvent,
@@ -260,6 +260,12 @@ module Anthropic
           model: Anthropic::MessageTokensCount,
           options: options
         )
+      end
+
+      private
+
+      def stream_headers(headers = {})
+        headers.merge("x-stainless-helper-method" => "stream")
       end
 
       # @api private

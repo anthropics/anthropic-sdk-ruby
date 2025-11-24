@@ -22,6 +22,7 @@ module Anthropic
               Anthropic::Beta::BetaCodeExecutionToolResultBlock,
               Anthropic::Beta::BetaBashCodeExecutionToolResultBlock,
               Anthropic::Beta::BetaTextEditorCodeExecutionToolResultBlock,
+              Anthropic::Beta::BetaToolSearchToolResultBlock,
               Anthropic::Beta::BetaMCPToolUseBlock,
               Anthropic::Beta::BetaMCPToolResultBlock,
               Anthropic::Beta::BetaContainerUploadBlock

@@ -105,6 +105,7 @@ module Anthropic
               )
             end
 
+          # Tool reference block that can be included in tool_result content.
           module Content
             extend Anthropic::Internal::Type::Union
 
@@ -114,7 +115,8 @@ module Anthropic
                   Anthropic::Beta::BetaTextBlockParam,
                   Anthropic::Beta::BetaImageBlockParam,
                   Anthropic::Beta::BetaSearchResultBlockParam,
-                  Anthropic::Beta::BetaRequestDocumentBlock
+                  Anthropic::Beta::BetaRequestDocumentBlock,
+                  Anthropic::Beta::BetaToolReferenceBlockParam
                 )
               end
 

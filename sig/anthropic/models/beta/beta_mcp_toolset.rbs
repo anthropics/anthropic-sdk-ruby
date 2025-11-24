@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    class BetaMCPToolset = Beta::BetaMCPToolset
+
+    module Beta
+      type beta_mcp_toolset =
+        {
+          mcp_server_name: String,
+          type: :mcp_toolset,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          configs: ::Hash[Symbol, Anthropic::Beta::BetaMCPToolConfig]?,
+          default_config: Anthropic::Beta::BetaMCPToolDefaultConfig
+        }
+
+      class BetaMCPToolset < Anthropic::Internal::Type::BaseModel
+        attr_accessor mcp_server_name: String
+
+        attr_accessor type: :mcp_toolset
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        attr_accessor configs: ::Hash[Symbol, Anthropic::Beta::BetaMCPToolConfig]?
+
+        attr_reader default_config: Anthropic::Beta::BetaMCPToolDefaultConfig?
+
+        def default_config=: (
+          Anthropic::Beta::BetaMCPToolDefaultConfig
+        ) -> Anthropic::Beta::BetaMCPToolDefaultConfig
+
+        def initialize: (
+          mcp_server_name: String,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?configs: ::Hash[Symbol, Anthropic::Beta::BetaMCPToolConfig]?,
+          ?default_config: Anthropic::Beta::BetaMCPToolDefaultConfig,
+          ?type: :mcp_toolset
+        ) -> void
+
+        def to_hash: -> {
+          mcp_server_name: String,
+          type: :mcp_toolset,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          configs: ::Hash[Symbol, Anthropic::Beta::BetaMCPToolConfig]?,
+          default_config: Anthropic::Beta::BetaMCPToolDefaultConfig
+        }
+      end
+    end
+  end
+end

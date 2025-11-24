@@ -31,6 +31,23 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :name
 
+        sig do
+          returns(
+            T.nilable(
+              T::Array[Anthropic::Beta::BetaTool::AllowedCaller::OrSymbol]
+            )
+          )
+        end
+        attr_reader :allowed_callers
+
+        sig do
+          params(
+            allowed_callers:
+              T::Array[Anthropic::Beta::BetaTool::AllowedCaller::OrSymbol]
+          ).void
+        end
+        attr_writer :allowed_callers
+
         # Create a cache control breakpoint at this content block.
         sig { returns(T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)) }
         attr_reader :cache_control
@@ -43,6 +60,14 @@ module Anthropic
         end
         attr_writer :cache_control
 
+        # If true, tool will not be included in initial system prompt. Only loaded when
+        # returned via tool_reference from tool search.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :defer_loading
+
+        sig { params(defer_loading: T::Boolean).void }
+        attr_writer :defer_loading
+
         # Description of what this tool does.
         #
         # Tool descriptions should be as detailed as possible. The more information that
@@ -54,6 +79,14 @@ module Anthropic
 
         sig { params(description: String).void }
         attr_writer :description
+
+        sig { returns(T.nilable(T::Array[T::Hash[Symbol, T.anything]])) }
+        attr_reader :input_examples
+
+        sig do
+          params(input_examples: T::Array[T::Hash[Symbol, T.anything]]).void
+        end
+        attr_writer :input_examples
 
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :strict
@@ -68,9 +101,13 @@ module Anthropic
           params(
             input_schema: Anthropic::Beta::BetaTool::InputSchema::OrHash,
             name: String,
+            allowed_callers:
+              T::Array[Anthropic::Beta::BetaTool::AllowedCaller::OrSymbol],
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+            defer_loading: T::Boolean,
             description: String,
+            input_examples: T::Array[T::Hash[Symbol, T.anything]],
             strict: T::Boolean,
             type: T.nilable(Anthropic::Beta::BetaTool::Type::OrSymbol)
           ).returns(T.attached_class)
@@ -85,8 +122,12 @@ module Anthropic
           #
           # This is how the tool will be called by the model and in `tool_use` blocks.
           name:,
+          allowed_callers: nil,
           # Create a cache control breakpoint at this content block.
           cache_control: nil,
+          # If true, tool will not be included in initial system prompt. Only loaded when
+          # returned via tool_reference from tool search.
+          defer_loading: nil,
           # Description of what this tool does.
           #
           # Tool descriptions should be as detailed as possible. The more information that
@@ -94,6 +135,7 @@ module Anthropic
           # perform. You can use natural language descriptions to reinforce important
           # aspects of the tool input JSON schema.
           description: nil,
+          input_examples: nil,
           strict: nil,
           type: nil
         )
@@ -104,9 +146,13 @@ module Anthropic
             {
               input_schema: Anthropic::Beta::BetaTool::InputSchema,
               name: String,
+              allowed_callers:
+                T::Array[Anthropic::Beta::BetaTool::AllowedCaller::OrSymbol],
               cache_control:
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
+              defer_loading: T::Boolean,
               description: String,
+              input_examples: T::Array[T::Hash[Symbol, T.anything]],
               strict: T::Boolean,
               type: T.nilable(Anthropic::Beta::BetaTool::Type::OrSymbol)
             }
@@ -157,6 +203,35 @@ module Anthropic
             )
           end
           def to_hash
+          end
+        end
+
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::Beta::BetaTool::AllowedCaller)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          DIRECT =
+            T.let(
+              :direct,
+              Anthropic::Beta::BetaTool::AllowedCaller::TaggedSymbol
+            )
+          CODE_EXECUTION_20250825 =
+            T.let(
+              :code_execution_20250825,
+              Anthropic::Beta::BetaTool::AllowedCaller::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[Anthropic::Beta::BetaTool::AllowedCaller::TaggedSymbol]
+            )
+          end
+          def self.values
           end
         end
 

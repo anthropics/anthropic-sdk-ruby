@@ -67,8 +67,8 @@ module Anthropic
 
           # Messages API creation parameters for the individual request.
           #
-          # See the [Messages API reference](/en/api/messages) for full documentation on
-          # available parameters.
+          # See the [Messages API reference](https://docs.claude.com/en/api/messages) for
+          # full documentation on available parameters.
           sig do
             returns(Anthropic::Messages::BatchCreateParams::Request::Params)
           end
@@ -97,8 +97,8 @@ module Anthropic
             custom_id:,
             # Messages API creation parameters for the individual request.
             #
-            # See the [Messages API reference](/en/api/messages) for full documentation on
-            # available parameters.
+            # See the [Messages API reference](https://docs.claude.com/en/api/messages) for
+            # full documentation on available parameters.
             params:
           )
           end
@@ -497,8 +497,8 @@ module Anthropic
 
             # Messages API creation parameters for the individual request.
             #
-            # See the [Messages API reference](/en/api/messages) for full documentation on
-            # available parameters.
+            # See the [Messages API reference](https://docs.claude.com/en/api/messages) for
+            # full documentation on available parameters.
             sig do
               params(
                 max_tokens: Integer,

@@ -6,6 +6,7 @@ module Anthropic
       type beta_server_tool_use_block =
         {
           id: String,
+          caller_: Anthropic::Models::Beta::BetaServerToolUseBlock::caller_,
           input: ::Hash[Symbol, top],
           name: Anthropic::Models::Beta::BetaServerToolUseBlock::name_,
           type: :server_tool_use
@@ -13,6 +14,8 @@ module Anthropic
 
       class BetaServerToolUseBlock < Anthropic::Internal::Type::BaseModel
         attr_accessor id: String
+
+        attr_accessor caller_: Anthropic::Models::Beta::BetaServerToolUseBlock::caller_
 
         attr_accessor input: ::Hash[Symbol, top]
 
@@ -22,6 +25,7 @@ module Anthropic
 
         def initialize: (
           id: String,
+          caller_: Anthropic::Models::Beta::BetaServerToolUseBlock::caller_,
           input: ::Hash[Symbol, top],
           name: Anthropic::Models::Beta::BetaServerToolUseBlock::name_,
           ?type: :server_tool_use
@@ -29,10 +33,21 @@ module Anthropic
 
         def to_hash: -> {
           id: String,
+          caller_: Anthropic::Models::Beta::BetaServerToolUseBlock::caller_,
           input: ::Hash[Symbol, top],
           name: Anthropic::Models::Beta::BetaServerToolUseBlock::name_,
           type: :server_tool_use
         }
+
+        type caller_ =
+          Anthropic::Beta::BetaDirectCaller
+          | Anthropic::Beta::BetaServerToolCaller
+
+        module Caller
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaServerToolUseBlock::caller_]
+        end
 
         type name_ =
           :web_search
@@ -40,6 +55,8 @@ module Anthropic
           | :code_execution
           | :bash_code_execution
           | :text_editor_code_execution
+          | :tool_search_tool_regex
+          | :tool_search_tool_bm25
 
         module Name
           extend Anthropic::Internal::Type::Enum
@@ -49,6 +66,8 @@ module Anthropic
           CODE_EXECUTION: :code_execution
           BASH_CODE_EXECUTION: :bash_code_execution
           TEXT_EDITOR_CODE_EXECUTION: :text_editor_code_execution
+          TOOL_SEARCH_TOOL_REGEX: :tool_search_tool_regex
+          TOOL_SEARCH_TOOL_BM25: :tool_search_tool_bm25
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaServerToolUseBlock::name_]
         end
