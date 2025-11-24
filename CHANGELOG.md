@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.16.0 (2025-11-24)
+
+Full Changelog: [v1.15.2...v1.16.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.15.2...v1.16.0)
+
+### Features
+
+* **api:** adds support for Claude Opus 4.5, Effort, Advance Tool Use Features, Autocompaction, and Computer Use v5 ([54d3512](https://github.com/anthropics/anthropic-sdk-ruby/commit/54d3512144cdcecaa44aa6f096cf7bc9b838528e))
+
+
+### Chores
+
+* explicitly require "base64" gem ([1224a32](https://github.com/anthropics/anthropic-sdk-ruby/commit/1224a32052d701ffe6c36b999e536a0893faf8e9))
+
 ## 1.15.2 (2025-11-19)
 
 Full Changelog: [v1.15.1...v1.15.2](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.15.1...v1.15.2)
