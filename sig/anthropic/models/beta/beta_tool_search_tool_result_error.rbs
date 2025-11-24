@@ -1,0 +1,51 @@
+module Anthropic
+  module Models
+    class BetaToolSearchToolResultError = Beta::BetaToolSearchToolResultError
+
+    module Beta
+      type beta_tool_search_tool_result_error =
+        {
+          error_code: Anthropic::Models::Beta::BetaToolSearchToolResultError::error_code,
+          error_message: String?,
+          type: :tool_search_tool_result_error
+        }
+
+      class BetaToolSearchToolResultError < Anthropic::Internal::Type::BaseModel
+        attr_accessor error_code: Anthropic::Models::Beta::BetaToolSearchToolResultError::error_code
+
+        attr_accessor error_message: String?
+
+        attr_accessor type: :tool_search_tool_result_error
+
+        def initialize: (
+          error_code: Anthropic::Models::Beta::BetaToolSearchToolResultError::error_code,
+          error_message: String?,
+          ?type: :tool_search_tool_result_error
+        ) -> void
+
+        def to_hash: -> {
+          error_code: Anthropic::Models::Beta::BetaToolSearchToolResultError::error_code,
+          error_message: String?,
+          type: :tool_search_tool_result_error
+        }
+
+        type error_code =
+          :invalid_tool_input
+          | :unavailable
+          | :too_many_requests
+          | :execution_time_exceeded
+
+        module ErrorCode
+          extend Anthropic::Internal::Type::Enum
+
+          INVALID_TOOL_INPUT: :invalid_tool_input
+          UNAVAILABLE: :unavailable
+          TOO_MANY_REQUESTS: :too_many_requests
+          EXECUTION_TIME_EXCEEDED: :execution_time_exceeded
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaToolSearchToolResultError::error_code]
+        end
+      end
+    end
+  end
+end

@@ -8,6 +8,10 @@ module Anthropic
     module Model
       extend Anthropic::Internal::Type::Union
 
+      variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_5_20251101 }
+
+      variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_5 }
+
       variant const: -> { Anthropic::Models::Model::CLAUDE_3_7_SONNET_LATEST }
 
       variant const: -> { Anthropic::Models::Model::CLAUDE_3_7_SONNET_20250219 }
@@ -54,6 +58,12 @@ module Anthropic
       end
 
       # @!group
+
+      # Premium model combining maximum intelligence with practical performance
+      CLAUDE_OPUS_4_5_20251101 = :"claude-opus-4-5-20251101"
+
+      # Premium model combining maximum intelligence with practical performance
+      CLAUDE_OPUS_4_5 = :"claude-opus-4-5"
 
       # High-performance model with early extended thinking
       # @deprecated Will reach end-of-life on February 19th, 2026. Please migrate to a newer model.

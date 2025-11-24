@@ -53,6 +53,8 @@ module Anthropic
         T.let(:"files-api-2025-04-14", Anthropic::AnthropicBeta::TaggedSymbol)
       MCP_CLIENT_2025_04_04 =
         T.let(:"mcp-client-2025-04-04", Anthropic::AnthropicBeta::TaggedSymbol)
+      MCP_CLIENT_2025_11_20 =
+        T.let(:"mcp-client-2025-11-20", Anthropic::AnthropicBeta::TaggedSymbol)
       DEV_FULL_THINKING_2025_05_14 =
         T.let(
           :"dev-full-thinking-2025-05-14",

@@ -7,10 +7,12 @@ module Anthropic
         {
           name: :web_fetch,
           type: :web_fetch_20250910,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaWebFetchTool20250910::allowed_caller],
           allowed_domains: ::Array[String]?,
           blocked_domains: ::Array[String]?,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           citations: Anthropic::Beta::BetaCitationsConfigParam?,
+          defer_loading: bool,
           max_content_tokens: Integer?,
           max_uses: Integer?,
           strict: bool
@@ -21,6 +23,12 @@ module Anthropic
 
         attr_accessor type: :web_fetch_20250910
 
+        attr_reader allowed_callers: ::Array[Anthropic::Models::Beta::BetaWebFetchTool20250910::allowed_caller]?
+
+        def allowed_callers=: (
+          ::Array[Anthropic::Models::Beta::BetaWebFetchTool20250910::allowed_caller]
+        ) -> ::Array[Anthropic::Models::Beta::BetaWebFetchTool20250910::allowed_caller]
+
         attr_accessor allowed_domains: ::Array[String]?
 
         attr_accessor blocked_domains: ::Array[String]?
@@ -28,6 +36,10 @@ module Anthropic
         attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
         attr_accessor citations: Anthropic::Beta::BetaCitationsConfigParam?
+
+        attr_reader defer_loading: bool?
+
+        def defer_loading=: (bool) -> bool
 
         attr_accessor max_content_tokens: Integer?
 
@@ -38,10 +50,12 @@ module Anthropic
         def strict=: (bool) -> bool
 
         def initialize: (
+          ?allowed_callers: ::Array[Anthropic::Models::Beta::BetaWebFetchTool20250910::allowed_caller],
           ?allowed_domains: ::Array[String]?,
           ?blocked_domains: ::Array[String]?,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?citations: Anthropic::Beta::BetaCitationsConfigParam?,
+          ?defer_loading: bool,
           ?max_content_tokens: Integer?,
           ?max_uses: Integer?,
           ?strict: bool,
@@ -52,14 +66,27 @@ module Anthropic
         def to_hash: -> {
           name: :web_fetch,
           type: :web_fetch_20250910,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaWebFetchTool20250910::allowed_caller],
           allowed_domains: ::Array[String]?,
           blocked_domains: ::Array[String]?,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           citations: Anthropic::Beta::BetaCitationsConfigParam?,
+          defer_loading: bool,
           max_content_tokens: Integer?,
           max_uses: Integer?,
           strict: bool
         }
+
+        type allowed_caller = :direct | :code_execution_20250825
+
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          DIRECT: :direct
+          CODE_EXECUTION_20250825: :code_execution_20250825
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaWebFetchTool20250910::allowed_caller]
+        end
       end
     end
   end

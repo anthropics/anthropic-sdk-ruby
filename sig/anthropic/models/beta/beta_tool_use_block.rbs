@@ -8,7 +8,8 @@ module Anthropic
           id: String,
           input: ::Hash[Symbol, top],
           name: String,
-          type: :tool_use
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::BetaToolUseBlock::caller_
         }
 
       class BetaToolUseBlock < Anthropic::Internal::Type::BaseModel
@@ -20,10 +21,17 @@ module Anthropic
 
         attr_accessor type: :tool_use
 
+        attr_reader caller_: Anthropic::Models::Beta::BetaToolUseBlock::caller_?
+
+        def caller_=: (
+          Anthropic::Models::Beta::BetaToolUseBlock::caller_
+        ) -> Anthropic::Models::Beta::BetaToolUseBlock::caller_
+
         def initialize: (
           id: String,
           input: ::Hash[Symbol, top],
           name: String,
+          ?caller_: Anthropic::Models::Beta::BetaToolUseBlock::caller_,
           ?type: :tool_use
         ) -> void
 
@@ -31,8 +39,19 @@ module Anthropic
           id: String,
           input: ::Hash[Symbol, top],
           name: String,
-          type: :tool_use
+          type: :tool_use,
+          caller_: Anthropic::Models::Beta::BetaToolUseBlock::caller_
         }
+
+        type caller_ =
+          Anthropic::Beta::BetaDirectCaller
+          | Anthropic::Beta::BetaServerToolCaller
+
+        module Caller
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaToolUseBlock::caller_]
+        end
       end
     end
   end

@@ -7,7 +7,10 @@ module Anthropic
         {
           name: :memory,
           type: :memory_20250818,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaMemoryTool20250818::allowed_caller],
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          defer_loading: bool,
+          input_examples: ::Array[::Hash[Symbol, top]],
           strict: bool
         }
 
@@ -16,14 +19,33 @@ module Anthropic
 
         attr_accessor type: :memory_20250818
 
+        attr_reader allowed_callers: ::Array[Anthropic::Models::Beta::BetaMemoryTool20250818::allowed_caller]?
+
+        def allowed_callers=: (
+          ::Array[Anthropic::Models::Beta::BetaMemoryTool20250818::allowed_caller]
+        ) -> ::Array[Anthropic::Models::Beta::BetaMemoryTool20250818::allowed_caller]
+
         attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        attr_reader defer_loading: bool?
+
+        def defer_loading=: (bool) -> bool
+
+        attr_reader input_examples: ::Array[::Hash[Symbol, top]]?
+
+        def input_examples=: (
+          ::Array[::Hash[Symbol, top]]
+        ) -> ::Array[::Hash[Symbol, top]]
 
         attr_reader strict: bool?
 
         def strict=: (bool) -> bool
 
         def initialize: (
+          ?allowed_callers: ::Array[Anthropic::Models::Beta::BetaMemoryTool20250818::allowed_caller],
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?defer_loading: bool,
+          ?input_examples: ::Array[::Hash[Symbol, top]],
           ?strict: bool,
           ?name: :memory,
           ?type: :memory_20250818
@@ -32,9 +54,23 @@ module Anthropic
         def to_hash: -> {
           name: :memory,
           type: :memory_20250818,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaMemoryTool20250818::allowed_caller],
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          defer_loading: bool,
+          input_examples: ::Array[::Hash[Symbol, top]],
           strict: bool
         }
+
+        type allowed_caller = :direct | :code_execution_20250825
+
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          DIRECT: :direct
+          CODE_EXECUTION_20250825: :code_execution_20250825
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaMemoryTool20250818::allowed_caller]
+        end
       end
     end
   end

@@ -46,8 +46,8 @@ module Anthropic
             # @!attribute params
             #   Messages API creation parameters for the individual request.
             #
-            #   See the [Messages API reference](/en/api/messages) for full documentation on
-            #   available parameters.
+            #   See the [Messages API reference](https://docs.claude.com/en/api/messages) for
+            #   full documentation on available parameters.
             #
             #   @return [Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params]
             required :params, -> { Anthropic::Beta::Messages::BatchCreateParams::Request::Params }
@@ -182,6 +182,13 @@ module Anthropic
               #
               #   @return [Anthropic::Models::Beta::BetaMetadata, nil]
               optional :metadata, -> { Anthropic::Beta::BetaMetadata }
+
+              # @!attribute output_config
+              #   Configuration options for the model's output. Controls aspects like how much
+              #   effort the model puts into its response.
+              #
+              #   @return [Anthropic::Models::Beta::BetaOutputConfig, nil]
+              optional :output_config, -> { Anthropic::Beta::BetaOutputConfig }
 
               # @!attribute output_format
               #   A schema to specify Claude's output format in responses.
@@ -345,7 +352,7 @@ module Anthropic
               #
               #   See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
               #
-              #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaCodeExecutionTool20250522, Anthropic::Models::Beta::BetaCodeExecutionTool20250825, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaMemoryTool20250818, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaToolTextEditor20250429, Anthropic::Models::Beta::BetaToolTextEditor20250728, Anthropic::Models::Beta::BetaWebSearchTool20250305, Anthropic::Models::Beta::BetaWebFetchTool20250910>, nil]
+              #   @return [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaCodeExecutionTool20250522, Anthropic::Models::Beta::BetaCodeExecutionTool20250825, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaMemoryTool20250818, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20251124, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaToolTextEditor20250429, Anthropic::Models::Beta::BetaToolTextEditor20250728, Anthropic::Models::Beta::BetaWebSearchTool20250305, Anthropic::Models::Beta::BetaWebFetchTool20250910, Anthropic::Models::Beta::BetaToolSearchToolBm25_20251119, Anthropic::Models::Beta::BetaToolSearchToolRegex20251119, Anthropic::Models::Beta::BetaMCPToolset>, nil]
               optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaToolUnion] }
 
               # @!attribute top_k
@@ -374,15 +381,15 @@ module Anthropic
               #   @return [Float, nil]
               optional :top_p, Float
 
-              # @!method initialize(max_tokens:, messages:, model:, container: nil, context_management: nil, mcp_servers: nil, metadata: nil, output_format: nil, service_tier: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
+              # @!method initialize(max_tokens:, messages:, model:, container: nil, context_management: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
               #   Some parameter documentations has been truncated, see
               #   {Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params} for more
               #   details.
               #
               #   Messages API creation parameters for the individual request.
               #
-              #   See the [Messages API reference](/en/api/messages) for full documentation on
-              #   available parameters.
+              #   See the [Messages API reference](https://docs.claude.com/en/api/messages) for
+              #   full documentation on available parameters.
               #
               #   @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
               #
@@ -397,6 +404,8 @@ module Anthropic
               #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>] MCP servers to be utilized in this request
               #
               #   @param metadata [Anthropic::Models::Beta::BetaMetadata] An object describing metadata about the request.
+              #
+              #   @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Configuration options for the model's output. Controls aspects like how much eff
               #
               #   @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil]
               #
@@ -414,7 +423,7 @@ module Anthropic
               #
               #   @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
               #
-              #   @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaCodeExecutionTool20250522, Anthropic::Models::Beta::BetaCodeExecutionTool20250825, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaMemoryTool20250818, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaToolTextEditor20250429, Anthropic::Models::Beta::BetaToolTextEditor20250728, Anthropic::Models::Beta::BetaWebSearchTool20250305, Anthropic::Models::Beta::BetaWebFetchTool20250910>] Definitions of tools that the model may use.
+              #   @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaCodeExecutionTool20250522, Anthropic::Models::Beta::BetaCodeExecutionTool20250825, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaMemoryTool20250818, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20251124, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaToolTextEditor20250429, Anthropic::Models::Beta::BetaToolTextEditor20250728, Anthropic::Models::Beta::BetaWebSearchTool20250305, Anthropic::Models::Beta::BetaWebFetchTool20250910, Anthropic::Models::Beta::BetaToolSearchToolBm25_20251119, Anthropic::Models::Beta::BetaToolSearchToolRegex20251119, Anthropic::Models::Beta::BetaMCPToolset>] Definitions of tools that the model may use.
               #
               #   @param top_k [Integer] Only sample from the top K options for each subsequent token.
               #

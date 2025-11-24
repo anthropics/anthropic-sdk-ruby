@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaOutputConfig = Beta::BetaOutputConfig
+
+    module Beta
+      type beta_output_config =
+        { effort: Anthropic::Models::Beta::BetaOutputConfig::effort? }
+
+      class BetaOutputConfig < Anthropic::Internal::Type::BaseModel
+        attr_accessor effort: Anthropic::Models::Beta::BetaOutputConfig::effort?
+
+        def initialize: (
+          ?effort: Anthropic::Models::Beta::BetaOutputConfig::effort?
+        ) -> void
+
+        def to_hash: -> {
+          effort: Anthropic::Models::Beta::BetaOutputConfig::effort?
+        }
+
+        type effort = :low | :medium | :high
+
+        module Effort
+          extend Anthropic::Internal::Type::Enum
+
+          LOW: :low
+          MEDIUM: :medium
+          HIGH: :high
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaOutputConfig::effort]
+        end
+      end
+    end
+  end
+end

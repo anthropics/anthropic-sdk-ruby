@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaDirectCaller = Beta::BetaDirectCaller
+
+    module Beta
+      type beta_direct_caller = { type: :direct }
+
+      class BetaDirectCaller < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :direct
+
+        def initialize: (?type: :direct) -> void
+
+        def to_hash: -> { type: :direct }
+      end
+    end
+  end
+end

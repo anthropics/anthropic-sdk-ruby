@@ -167,6 +167,7 @@ module Anthropic
                   Anthropic::Beta::BetaCodeExecutionToolResultBlock::OrHash,
                   Anthropic::Beta::BetaBashCodeExecutionToolResultBlock::OrHash,
                   Anthropic::Beta::BetaTextEditorCodeExecutionToolResultBlock::OrHash,
+                  Anthropic::Beta::BetaToolSearchToolResultBlock::OrHash,
                   Anthropic::Beta::BetaMCPToolUseBlock::OrHash,
                   Anthropic::Beta::BetaMCPToolResultBlock::OrHash,
                   Anthropic::Beta::BetaContainerUploadBlock::OrHash

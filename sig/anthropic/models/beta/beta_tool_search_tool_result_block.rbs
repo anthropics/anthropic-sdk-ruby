@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    class BetaToolSearchToolResultBlock = Beta::BetaToolSearchToolResultBlock
+
+    module Beta
+      type beta_tool_search_tool_result_block =
+        {
+          content: Anthropic::Models::Beta::BetaToolSearchToolResultBlock::content,
+          tool_use_id: String,
+          type: :tool_search_tool_result
+        }
+
+      class BetaToolSearchToolResultBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: Anthropic::Models::Beta::BetaToolSearchToolResultBlock::content
+
+        attr_accessor tool_use_id: String
+
+        attr_accessor type: :tool_search_tool_result
+
+        def initialize: (
+          content: Anthropic::Models::Beta::BetaToolSearchToolResultBlock::content,
+          tool_use_id: String,
+          ?type: :tool_search_tool_result
+        ) -> void
+
+        def to_hash: -> {
+          content: Anthropic::Models::Beta::BetaToolSearchToolResultBlock::content,
+          tool_use_id: String,
+          type: :tool_search_tool_result
+        }
+
+        type content =
+          Anthropic::Beta::BetaToolSearchToolResultError
+          | Anthropic::Beta::BetaToolSearchToolSearchResultBlock
+
+        module Content
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaToolSearchToolResultBlock::content]
+        end
+      end
+    end
+  end
+end

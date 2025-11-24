@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    class BetaMCPToolDefaultConfig = Beta::BetaMCPToolDefaultConfig
+
+    module Beta
+      type beta_mcp_tool_default_config = { defer_loading: bool, enabled: bool }
+
+      class BetaMCPToolDefaultConfig < Anthropic::Internal::Type::BaseModel
+        attr_reader defer_loading: bool?
+
+        def defer_loading=: (bool) -> bool
+
+        attr_reader enabled: bool?
+
+        def enabled=: (bool) -> bool
+
+        def initialize: (?defer_loading: bool, ?enabled: bool) -> void
+
+        def to_hash: -> { defer_loading: bool, enabled: bool }
+      end
+    end
+  end
+end

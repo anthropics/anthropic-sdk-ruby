@@ -21,11 +21,24 @@ module Anthropic
         #   @return [String]
         required :name, String
 
+        # @!attribute allowed_callers
+        #
+        #   @return [Array<Symbol, Anthropic::Models::Beta::BetaTool::AllowedCaller>, nil]
+        optional :allowed_callers,
+                 -> { Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Beta::BetaTool::AllowedCaller] }
+
         # @!attribute cache_control
         #   Create a cache control breakpoint at this content block.
         #
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
+
+        # @!attribute defer_loading
+        #   If true, tool will not be included in initial system prompt. Only loaded when
+        #   returned via tool_reference from tool search.
+        #
+        #   @return [Boolean, nil]
+        optional :defer_loading, Anthropic::Internal::Type::Boolean
 
         # @!attribute description
         #   Description of what this tool does.
@@ -38,6 +51,12 @@ module Anthropic
         #   @return [String, nil]
         optional :description, String
 
+        # @!attribute input_examples
+        #
+        #   @return [Array<Hash{Symbol=>Object}>, nil]
+        optional :input_examples,
+                 Anthropic::Internal::Type::ArrayOf[Anthropic::Internal::Type::HashOf[Anthropic::Internal::Type::Unknown]]
+
         # @!attribute strict
         #
         #   @return [Boolean, nil]
@@ -48,7 +67,7 @@ module Anthropic
         #   @return [Symbol, Anthropic::Models::Beta::BetaTool::Type, nil]
         optional :type, enum: -> { Anthropic::Beta::BetaTool::Type }, nil?: true
 
-        # @!method initialize(input_schema:, name:, cache_control: nil, description: nil, strict: nil, type: nil)
+        # @!method initialize(input_schema:, name:, allowed_callers: nil, cache_control: nil, defer_loading: nil, description: nil, input_examples: nil, strict: nil, type: nil)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaTool} for more details.
         #
@@ -56,9 +75,15 @@ module Anthropic
         #
         #   @param name [String] Name of the tool.
         #
+        #   @param allowed_callers [Array<Symbol, Anthropic::Models::Beta::BetaTool::AllowedCaller>]
+        #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
+        #   @param defer_loading [Boolean] If true, tool will not be included in initial system prompt. Only loaded when re
+        #
         #   @param description [String] Description of what this tool does.
+        #
+        #   @param input_examples [Array<Hash{Symbol=>Object}>]
         #
         #   @param strict [Boolean]
         #
@@ -92,6 +117,16 @@ module Anthropic
           #   @param properties [Hash{Symbol=>Object}, nil]
           #   @param required [Array<String>, nil]
           #   @param type [Symbol, :object]
+        end
+
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          DIRECT = :direct
+          CODE_EXECUTION_20250825 = :code_execution_20250825
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
         end
 
         # @see Anthropic::Models::Beta::BetaTool#type

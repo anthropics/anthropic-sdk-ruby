@@ -7,6 +7,7 @@ module Anthropic
           model: Anthropic::Models::model,
           context_management: Anthropic::Beta::BetaContextManagementConfig?,
           mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
+          output_config: Anthropic::Beta::BetaOutputConfig,
           output_format: Anthropic::Beta::BetaJSONOutputFormat?,
           system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           thinking: Anthropic::Models::Beta::beta_thinking_config_param,
@@ -31,6 +32,12 @@ module Anthropic
         def mcp_servers=: (
           ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition]
         ) -> ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition]
+
+        attr_reader output_config: Anthropic::Beta::BetaOutputConfig?
+
+        def output_config=: (
+          Anthropic::Beta::BetaOutputConfig
+        ) -> Anthropic::Beta::BetaOutputConfig
 
         attr_accessor output_format: Anthropic::Beta::BetaJSONOutputFormat?
 
@@ -69,6 +76,7 @@ module Anthropic
           model: Anthropic::Models::model,
           ?context_management: Anthropic::Beta::BetaContextManagementConfig?,
           ?mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
+          ?output_config: Anthropic::Beta::BetaOutputConfig,
           ?output_format: Anthropic::Beta::BetaJSONOutputFormat?,
           ?system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           ?thinking: Anthropic::Models::Beta::beta_thinking_config_param,
@@ -83,6 +91,7 @@ module Anthropic
           model: Anthropic::Models::model,
           context_management: Anthropic::Beta::BetaContextManagementConfig?,
           mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
+          output_config: Anthropic::Beta::BetaOutputConfig,
           output_format: Anthropic::Beta::BetaJSONOutputFormat?,
           system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           thinking: Anthropic::Models::Beta::beta_thinking_config_param,
@@ -112,11 +121,15 @@ module Anthropic
           | Anthropic::Beta::BetaMemoryTool20250818
           | Anthropic::Beta::BetaToolComputerUse20250124
           | Anthropic::Beta::BetaToolTextEditor20241022
+          | Anthropic::Beta::BetaToolComputerUse20251124
           | Anthropic::Beta::BetaToolTextEditor20250124
           | Anthropic::Beta::BetaToolTextEditor20250429
           | Anthropic::Beta::BetaToolTextEditor20250728
           | Anthropic::Beta::BetaWebSearchTool20250305
           | Anthropic::Beta::BetaWebFetchTool20250910
+          | Anthropic::Beta::BetaToolSearchToolBm25_20251119
+          | Anthropic::Beta::BetaToolSearchToolRegex20251119
+          | Anthropic::Beta::BetaMCPToolset
 
         module Tool
           extend Anthropic::Internal::Type::Union

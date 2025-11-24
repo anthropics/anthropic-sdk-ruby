@@ -38,6 +38,30 @@ module Anthropic
         end
         attr_writer :cache_control
 
+        # Tool invocation directly from the model.
+        sig do
+          returns(
+            T.nilable(
+              T.any(
+                Anthropic::Beta::BetaDirectCaller,
+                Anthropic::Beta::BetaServerToolCaller
+              )
+            )
+          )
+        end
+        attr_reader :caller_
+
+        sig do
+          params(
+            caller_:
+              T.any(
+                Anthropic::Beta::BetaDirectCaller::OrHash,
+                Anthropic::Beta::BetaServerToolCaller::OrHash
+              )
+          ).void
+        end
+        attr_writer :caller_
+
         sig do
           params(
             id: String,
@@ -45,6 +69,11 @@ module Anthropic
             name: String,
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+            caller_:
+              T.any(
+                Anthropic::Beta::BetaDirectCaller::OrHash,
+                Anthropic::Beta::BetaServerToolCaller::OrHash
+              ),
             type: Symbol
           ).returns(T.attached_class)
         end
@@ -54,6 +83,8 @@ module Anthropic
           name:,
           # Create a cache control breakpoint at this content block.
           cache_control: nil,
+          # Tool invocation directly from the model.
+          caller_: nil,
           type: :tool_use
         )
         end
@@ -66,11 +97,37 @@ module Anthropic
               name: String,
               type: Symbol,
               cache_control:
-                T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)
+                T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
+              caller_:
+                T.any(
+                  Anthropic::Beta::BetaDirectCaller,
+                  Anthropic::Beta::BetaServerToolCaller
+                )
             }
           )
         end
         def to_hash
+        end
+
+        # Tool invocation directly from the model.
+        module Caller
+          extend Anthropic::Internal::Type::Union
+
+          Variants =
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::BetaDirectCaller,
+                Anthropic::Beta::BetaServerToolCaller
+              )
+            end
+
+          sig do
+            override.returns(
+              T::Array[Anthropic::Beta::BetaToolUseBlockParam::Caller::Variants]
+            )
+          end
+          def self.variants
+          end
         end
       end
     end

@@ -57,6 +57,7 @@ module Anthropic
             | Anthropic::Beta::BetaImageBlockParam
             | Anthropic::Beta::BetaSearchResultBlockParam
             | Anthropic::Beta::BetaRequestDocumentBlock
+            | Anthropic::Beta::BetaToolReferenceBlockParam
 
           module Content
             extend Anthropic::Internal::Type::Union

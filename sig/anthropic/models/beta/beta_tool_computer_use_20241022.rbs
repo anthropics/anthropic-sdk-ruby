@@ -9,8 +9,11 @@ module Anthropic
           display_width_px: Integer,
           name: :computer,
           type: :computer_20241022,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaToolComputerUse20241022::allowed_caller],
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          defer_loading: bool,
           display_number: Integer?,
+          input_examples: ::Array[::Hash[Symbol, top]],
           strict: bool
         }
 
@@ -23,9 +26,25 @@ module Anthropic
 
         attr_accessor type: :computer_20241022
 
+        attr_reader allowed_callers: ::Array[Anthropic::Models::Beta::BetaToolComputerUse20241022::allowed_caller]?
+
+        def allowed_callers=: (
+          ::Array[Anthropic::Models::Beta::BetaToolComputerUse20241022::allowed_caller]
+        ) -> ::Array[Anthropic::Models::Beta::BetaToolComputerUse20241022::allowed_caller]
+
         attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
+        attr_reader defer_loading: bool?
+
+        def defer_loading=: (bool) -> bool
+
         attr_accessor display_number: Integer?
+
+        attr_reader input_examples: ::Array[::Hash[Symbol, top]]?
+
+        def input_examples=: (
+          ::Array[::Hash[Symbol, top]]
+        ) -> ::Array[::Hash[Symbol, top]]
 
         attr_reader strict: bool?
 
@@ -34,8 +53,11 @@ module Anthropic
         def initialize: (
           display_height_px: Integer,
           display_width_px: Integer,
+          ?allowed_callers: ::Array[Anthropic::Models::Beta::BetaToolComputerUse20241022::allowed_caller],
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?defer_loading: bool,
           ?display_number: Integer?,
+          ?input_examples: ::Array[::Hash[Symbol, top]],
           ?strict: bool,
           ?name: :computer,
           ?type: :computer_20241022
@@ -46,10 +68,24 @@ module Anthropic
           display_width_px: Integer,
           name: :computer,
           type: :computer_20241022,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaToolComputerUse20241022::allowed_caller],
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          defer_loading: bool,
           display_number: Integer?,
+          input_examples: ::Array[::Hash[Symbol, top]],
           strict: bool
         }
+
+        type allowed_caller = :direct | :code_execution_20250825
+
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          DIRECT: :direct
+          CODE_EXECUTION_20250825: :code_execution_20250825
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaToolComputerUse20241022::allowed_caller]
+        end
       end
     end
   end

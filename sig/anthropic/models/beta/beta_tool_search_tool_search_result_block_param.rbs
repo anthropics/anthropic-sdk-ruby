@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    class BetaToolSearchToolSearchResultBlockParam = Beta::BetaToolSearchToolSearchResultBlockParam
+
+    module Beta
+      type beta_tool_search_tool_search_result_block_param =
+        {
+          tool_references: ::Array[Anthropic::Beta::BetaToolReferenceBlockParam],
+          type: :tool_search_tool_search_result
+        }
+
+      class BetaToolSearchToolSearchResultBlockParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor tool_references: ::Array[Anthropic::Beta::BetaToolReferenceBlockParam]
+
+        attr_accessor type: :tool_search_tool_search_result
+
+        def initialize: (
+          tool_references: ::Array[Anthropic::Beta::BetaToolReferenceBlockParam],
+          ?type: :tool_search_tool_search_result
+        ) -> void
+
+        def to_hash: -> {
+          tool_references: ::Array[Anthropic::Beta::BetaToolReferenceBlockParam],
+          type: :tool_search_tool_search_result
+        }
+      end
+    end
+  end
+end

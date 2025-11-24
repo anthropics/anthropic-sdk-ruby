@@ -31,6 +31,27 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
+        sig do
+          returns(
+            T.nilable(
+              T::Array[
+                Anthropic::Beta::BetaToolComputerUse20250124::AllowedCaller::OrSymbol
+              ]
+            )
+          )
+        end
+        attr_reader :allowed_callers
+
+        sig do
+          params(
+            allowed_callers:
+              T::Array[
+                Anthropic::Beta::BetaToolComputerUse20250124::AllowedCaller::OrSymbol
+              ]
+          ).void
+        end
+        attr_writer :allowed_callers
+
         # Create a cache control breakpoint at this content block.
         sig { returns(T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)) }
         attr_reader :cache_control
@@ -43,9 +64,25 @@ module Anthropic
         end
         attr_writer :cache_control
 
+        # If true, tool will not be included in initial system prompt. Only loaded when
+        # returned via tool_reference from tool search.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :defer_loading
+
+        sig { params(defer_loading: T::Boolean).void }
+        attr_writer :defer_loading
+
         # The X11 display number (e.g. 0, 1) for the display.
         sig { returns(T.nilable(Integer)) }
         attr_accessor :display_number
+
+        sig { returns(T.nilable(T::Array[T::Hash[Symbol, T.anything]])) }
+        attr_reader :input_examples
+
+        sig do
+          params(input_examples: T::Array[T::Hash[Symbol, T.anything]]).void
+        end
+        attr_writer :input_examples
 
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :strict
@@ -57,9 +94,15 @@ module Anthropic
           params(
             display_height_px: Integer,
             display_width_px: Integer,
+            allowed_callers:
+              T::Array[
+                Anthropic::Beta::BetaToolComputerUse20250124::AllowedCaller::OrSymbol
+              ],
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+            defer_loading: T::Boolean,
             display_number: T.nilable(Integer),
+            input_examples: T::Array[T::Hash[Symbol, T.anything]],
             strict: T::Boolean,
             name: Symbol,
             type: Symbol
@@ -70,10 +113,15 @@ module Anthropic
           display_height_px:,
           # The width of the display in pixels.
           display_width_px:,
+          allowed_callers: nil,
           # Create a cache control breakpoint at this content block.
           cache_control: nil,
+          # If true, tool will not be included in initial system prompt. Only loaded when
+          # returned via tool_reference from tool search.
+          defer_loading: nil,
           # The X11 display number (e.g. 0, 1) for the display.
           display_number: nil,
+          input_examples: nil,
           strict: nil,
           # Name of the tool.
           #
@@ -90,14 +138,54 @@ module Anthropic
               display_width_px: Integer,
               name: Symbol,
               type: Symbol,
+              allowed_callers:
+                T::Array[
+                  Anthropic::Beta::BetaToolComputerUse20250124::AllowedCaller::OrSymbol
+                ],
               cache_control:
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
+              defer_loading: T::Boolean,
               display_number: T.nilable(Integer),
+              input_examples: T::Array[T::Hash[Symbol, T.anything]],
               strict: T::Boolean
             }
           )
         end
         def to_hash
+        end
+
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                Anthropic::Beta::BetaToolComputerUse20250124::AllowedCaller
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          DIRECT =
+            T.let(
+              :direct,
+              Anthropic::Beta::BetaToolComputerUse20250124::AllowedCaller::TaggedSymbol
+            )
+          CODE_EXECUTION_20250825 =
+            T.let(
+              :code_execution_20250825,
+              Anthropic::Beta::BetaToolComputerUse20250124::AllowedCaller::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaToolComputerUse20250124::AllowedCaller::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
     end
