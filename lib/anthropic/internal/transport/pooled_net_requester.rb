@@ -132,12 +132,14 @@ module Anthropic
 
           req = nil
           finished = false
+          current_conn = nil
 
           # rubocop:disable Metrics/BlockLength
           enum = Enumerator.new do |y|
             next if finished
 
             with_pool(url, deadline: deadline) do |conn|
+              current_conn = conn
               eof = false
               closing = nil
               ::Thread.handle_interrupt(Object => :never) do
@@ -167,6 +169,7 @@ module Anthropic
                   end
                 end
               ensure
+                current_conn = nil
                 begin
                   conn.finish if !eof && conn&.started?
                 ensure
@@ -184,7 +187,7 @@ module Anthropic
           _, response = enum.next
           body = Anthropic::Internal::Util.fused_enum(enum, external: true) do
             finished = true
-            loop { enum.next }
+            current_conn&.finish
           end
           [Integer(response.code), response, body]
         end
