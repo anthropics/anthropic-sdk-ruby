@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.16.1 (2025-12-16)
+
+Full Changelog: [v1.16.0...v1.16.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.16.0...v1.16.1)
+
+### Bug Fixes
+
+* calling `break` out of streams should be instantaneous ([517711f](https://github.com/anthropics/anthropic-sdk-ruby/commit/517711fd1c91fffa83c3bbdba50a0d1b6964adfc))
+
 ## 1.16.0 (2025-11-24)
 
 Full Changelog: [v1.15.2...v1.16.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.15.2...v1.16.0)
