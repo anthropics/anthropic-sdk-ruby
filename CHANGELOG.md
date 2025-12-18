@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.16.2 (2025-12-18)
+
+Full Changelog: [v1.16.1...v1.16.2](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.16.1...v1.16.2)
+
+### Bug Fixes
+
+* issue where json.parse errors when receiving HTTP 204 with nobody ([b453645](https://github.com/anthropics/anthropic-sdk-ruby/commit/b453645abf738e713303f53f904936a49942a86d))
+
 ## 1.16.1 (2025-12-16)
 
 Full Changelog: [v1.16.0...v1.16.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.16.0...v1.16.1)
