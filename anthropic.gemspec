@@ -25,5 +25,6 @@ Gem::Specification.new do |s|
     ".ignore"
   ]
   s.extra_rdoc_files = ["README.md"]
+  s.add_dependency "cgi"
   s.add_dependency "connection_pool"
 end
