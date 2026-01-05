@@ -60,7 +60,7 @@ module Anthropic
             schema = model.to_json_schema
             Anthropic::Helpers::InputSchema::SupportedSchemas.transform_schema!(schema)
             data.update(output_format: {type: :json_schema, schema: schema})
-          in {output_format: {schema: Anthropic::Helpers::StructuredOutput::JsonSchemaConverter => model} => output_format}
+          in {output_format: {schema: Anthropic::Helpers::InputSchema::JsonSchemaConverter => model} => output_format}
             name = model_name(model.name)
             models.store(name, model)
             schema = model.to_json_schema
