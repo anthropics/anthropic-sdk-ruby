@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.16.3 (2026-01-05)
+
+Full Changelog: [v1.16.2...v1.16.3](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.16.2...v1.16.3)
+
+### Bug Fixes
+
+* Use proper module name for structured output parsing ([#769](https://github.com/anthropics/anthropic-sdk-ruby/issues/769)) ([fdbe433](https://github.com/anthropics/anthropic-sdk-ruby/commit/fdbe433cbcbe5a8611410338f7e0d47a727575be))
+
+
+### Chores
+
+* **ci:** Add Claude Code GitHub Workflow ([#772](https://github.com/anthropics/anthropic-sdk-ruby/issues/772)) ([6ebfa59](https://github.com/anthropics/anthropic-sdk-ruby/commit/6ebfa59913de26aece1d946a0cfaad168cd5f632))
+
 ## 1.16.2 (2025-12-18)
 
 Full Changelog: [v1.16.1...v1.16.2](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.16.1...v1.16.2)
