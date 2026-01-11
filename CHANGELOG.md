@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.16.4 (2026-01-11)
+
+Full Changelog: [v1.16.3...v1.16.4](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.16.3...v1.16.4)
+
+### Chores
+
+* add cgi gem as explicit dependency ([b9ef072](https://github.com/anthropics/anthropic-sdk-ruby/commit/b9ef072be4d8ecd4f12e90403183b0ced5cb360f))
+* **internal:** use different example values for some enums ([13d8b68](https://github.com/anthropics/anthropic-sdk-ruby/commit/13d8b68d290c11497faed22e2eda1778187bf2ec))
+
 ## 1.16.3 (2026-01-05)
 
 Full Changelog: [v1.16.2...v1.16.3](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.16.2...v1.16.3)

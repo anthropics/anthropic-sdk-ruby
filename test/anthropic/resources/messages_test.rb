@@ -8,7 +8,7 @@ class Anthropic::Test::Resources::MessagesTest < Anthropic::Test::ResourceTest
       @anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-opus-4-5-20251101"
+        model: :"claude-sonnet-4-5-20250929"
       )
 
     assert_pattern do
