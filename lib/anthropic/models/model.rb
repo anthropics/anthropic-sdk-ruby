@@ -78,9 +78,15 @@ module Anthropic
       CLAUDE_3_7_SONNET_20250219 = :"claude-3-7-sonnet-20250219"
 
       # Fastest and most compact model for near-instant responsiveness
+      # @deprecated Will reach end-of-life on February 19th, 2026. Please migrate to a newer model.
+      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
+      # information.
       CLAUDE_3_5_HAIKU_LATEST = :"claude-3-5-haiku-latest"
 
       # Our fastest model
+      # @deprecated Will reach end-of-life on February 19th, 2026. Please migrate to a newer model.
+      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
+      # information.
       CLAUDE_3_5_HAIKU_20241022 = :"claude-3-5-haiku-20241022"
 
       # Hybrid model, capable of near-instant responses and extended thinking
