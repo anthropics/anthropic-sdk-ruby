@@ -26,6 +26,7 @@ module Anthropic
         MAX_USES_EXCEEDED = :max_uses_exceeded
         TOO_MANY_REQUESTS = :too_many_requests
         QUERY_TOO_LONG = :query_too_long
+        REQUEST_TOO_LARGE = :request_too_large
 
         # @!method self.values
         #   @return [Array<Symbol>]

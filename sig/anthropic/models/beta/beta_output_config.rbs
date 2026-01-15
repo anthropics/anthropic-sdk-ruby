@@ -4,17 +4,24 @@ module Anthropic
 
     module Beta
       type beta_output_config =
-        { effort: Anthropic::Models::Beta::BetaOutputConfig::effort? }
+        {
+          effort: Anthropic::Models::Beta::BetaOutputConfig::effort?,
+          format_: Anthropic::Beta::BetaJSONOutputFormat?
+        }
 
       class BetaOutputConfig < Anthropic::Internal::Type::BaseModel
         attr_accessor effort: Anthropic::Models::Beta::BetaOutputConfig::effort?
 
+        attr_accessor format_: Anthropic::Beta::BetaJSONOutputFormat?
+
         def initialize: (
-          ?effort: Anthropic::Models::Beta::BetaOutputConfig::effort?
+          ?effort: Anthropic::Models::Beta::BetaOutputConfig::effort?,
+          ?format_: Anthropic::Beta::BetaJSONOutputFormat?
         ) -> void
 
         def to_hash: -> {
-          effort: Anthropic::Models::Beta::BetaOutputConfig::effort?
+          effort: Anthropic::Models::Beta::BetaOutputConfig::effort?,
+          format_: Anthropic::Beta::BetaJSONOutputFormat?
         }
 
         type effort = :low | :medium | :high

@@ -49,7 +49,7 @@ module Anthropic
         #
         # @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Body param: Configuration options for the model's output. Controls aspects like
         #
-        # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param:
+        # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param: Deprecated: Use `output_config.format` instead. See [structured outp
         #
         # @param service_tier [Symbol, Anthropic::Models::Beta::MessageCreateParams::ServiceTier] Body param: Determines whether to use priority capacity (if available) or standa
         #
@@ -143,7 +143,7 @@ module Anthropic
         #
         # @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Body param: Configuration options for the model's output. Controls aspects like
         #
-        # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param:
+        # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param: Deprecated: Use `output_config.format` instead. See [structured outp
         #
         # @param service_tier [Symbol, Anthropic::Models::Beta::MessageCreateParams::ServiceTier] Body param: Determines whether to use priority capacity (if available) or standa
         #
@@ -298,7 +298,7 @@ module Anthropic
         #
         # @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Body param: Configuration options for the model's output. Controls aspects like
         #
-        # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param:
+        # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param: Deprecated: Use `output_config.format` instead. See [structured outp
         #
         # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] Body param: System prompt.
         #

@@ -9,12 +9,6 @@ module Anthropic
         #   @return [String]
         required :id, String
 
-        # @!attribute caller_
-        #   Tool invocation directly from the model.
-        #
-        #   @return [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller]
-        required :caller_, union: -> { Anthropic::Beta::BetaServerToolUseBlock::Caller }, api_name: :caller
-
         # @!attribute input
         #
         #   @return [Object]
@@ -30,16 +24,38 @@ module Anthropic
         #   @return [Symbol, :server_tool_use]
         required :type, const: :server_tool_use
 
-        # @!method initialize(id:, caller_:, input:, name:, type: :server_tool_use)
-        #   @param id [String]
+        # @!attribute caller_
+        #   Tool invocation directly from the model.
         #
-        #   @param caller_ [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller] Tool invocation directly from the model.
+        #   @return [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, nil]
+        optional :caller_, union: -> { Anthropic::Beta::BetaServerToolUseBlock::Caller }, api_name: :caller
+
+        # @!method initialize(id:, input:, name:, caller_: nil, type: :server_tool_use)
+        #   @param id [String]
         #
         #   @param input [Object]
         #
         #   @param name [Symbol, Anthropic::Models::Beta::BetaServerToolUseBlock::Name]
         #
+        #   @param caller_ [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller] Tool invocation directly from the model.
+        #
         #   @param type [Symbol, :server_tool_use]
+
+        # @see Anthropic::Models::Beta::BetaServerToolUseBlock#name
+        module Name
+          extend Anthropic::Internal::Type::Enum
+
+          WEB_SEARCH = :web_search
+          WEB_FETCH = :web_fetch
+          CODE_EXECUTION = :code_execution
+          BASH_CODE_EXECUTION = :bash_code_execution
+          TEXT_EDITOR_CODE_EXECUTION = :text_editor_code_execution
+          TOOL_SEARCH_TOOL_REGEX = :tool_search_tool_regex
+          TOOL_SEARCH_TOOL_BM25 = :tool_search_tool_bm25
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
 
         # Tool invocation directly from the model.
         #
@@ -57,22 +73,6 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller)]
-        end
-
-        # @see Anthropic::Models::Beta::BetaServerToolUseBlock#name
-        module Name
-          extend Anthropic::Internal::Type::Enum
-
-          WEB_SEARCH = :web_search
-          WEB_FETCH = :web_fetch
-          CODE_EXECUTION = :code_execution
-          BASH_CODE_EXECUTION = :bash_code_execution
-          TEXT_EDITOR_CODE_EXECUTION = :text_editor_code_execution
-          TOOL_SEARCH_TOOL_REGEX = :tool_search_tool_regex
-          TOOL_SEARCH_TOOL_BM25 = :tool_search_tool_bm25
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
         end
       end
     end
