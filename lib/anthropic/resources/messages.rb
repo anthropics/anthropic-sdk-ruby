@@ -210,6 +210,8 @@ module Anthropic
           raise ArgumentError.new(message)
         end
         parsed.store(:stream, true)
+        Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil)
+
         @client.request(
           method: :post,
           path: "v1/messages",
@@ -253,6 +255,7 @@ module Anthropic
       # @see Anthropic::Models::MessageCountTokensParams
       def count_tokens(params)
         parsed, options = Anthropic::MessageCountTokensParams.dump_request(params)
+        Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil)
         @client.request(
           method: :post,
           path: "v1/messages/count_tokens",

@@ -55,17 +55,21 @@ module Anthropic
             end
             tool_array.replace(mapped)
           in {output_format: Anthropic::Helpers::InputSchema::JsonSchemaConverter => model}
+            transform_output_format_to_output_config!(data, model:, models:)
+          # rubocop:disable Lint/DuplicateBranch
+          in {output_format: {schema: Anthropic::Helpers::InputSchema::JsonSchemaConverter => model}}
+            # This branch handles output_format: {schema: Model} vs output_format: Model above
+            transform_output_format_to_output_config!(data, model:, models:)
+          # rubocop:enable Lint/DuplicateBranch
+          in {output_config: {format: Anthropic::Helpers::InputSchema::JsonSchemaConverter => model}}
+            # New API: output_config.format with model class
             name = model_name(model.name)
             models.store(name, model)
             schema = model.to_json_schema
             Anthropic::Helpers::InputSchema::SupportedSchemas.transform_schema!(schema)
-            data.update(output_format: {type: :json_schema, schema: schema})
-          in {output_format: {schema: Anthropic::Helpers::InputSchema::JsonSchemaConverter => model} => output_format}
-            name = model_name(model.name)
-            models.store(name, model)
-            schema = model.to_json_schema
-            Anthropic::Helpers::InputSchema::SupportedSchemas.transform_schema!(schema)
-            output_format.update(type: :json_schema, schema:)
+            data.fetch(:output_config).store(:format, type: :json_schema, schema: schema)
+            # Auto-inject beta header
+            data[:betas] = data[:betas].to_a.dup.push("structured-outputs-2025-12-15").uniq
           else
           end
 
@@ -106,6 +110,41 @@ module Anthropic
           end
 
           raw
+        end
+
+        # @api private
+        #
+        # Transform deprecated output_format to output_config.format
+        #
+        # @param data [Hash{Symbol=>Object}]
+        # @param model [Class]
+        # @param models [Hash{String=>Class}]
+        private def transform_output_format_to_output_config!(data, model:, models:)
+          warn(
+            "[DEPRECATION] output_format is deprecated. Use output_config[:format] instead.",
+            category: :deprecated
+          )
+          # Error if output_config exists but is not a hash
+          if data.key?(:output_config) && !data[:output_config].is_a?(Hash)
+            raise ArgumentError,
+                  "output_config must be a Hash, got #{data[:output_config].class}"
+          end
+          # Error if both params are provided
+          if data&.dig(:output_config, :format)
+            raise ArgumentError,
+                  "Both output_format and output_config[:format] were provided. " \
+                  "Please use only output_config[:format] (output_format is deprecated)."
+          end
+          name = model_name(model.name)
+          models.store(name, model)
+          schema = model.to_json_schema
+          Anthropic::Helpers::InputSchema::SupportedSchemas.transform_schema!(schema)
+          output_config = data[:output_config].to_h
+          output_config.store(:format, type: :json_schema, schema: schema)
+          data.delete(:output_format)
+          data[:output_config] = output_config
+          # Auto-inject beta header
+          data[:betas] = data[:betas].to_a.dup.push("structured-outputs-2025-12-15").uniq
         end
 
         # @api private

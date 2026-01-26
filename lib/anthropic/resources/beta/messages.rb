@@ -254,6 +254,8 @@ module Anthropic
             raise ArgumentError.new(message)
           end
           parsed.store(:stream, true)
+          Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil)
+
           header_params = {betas: "anthropic-beta"}
           @client.request(
             method: :post,
@@ -267,12 +269,6 @@ module Anthropic
             model: Anthropic::Beta::BetaRawMessageStreamEvent,
             options: {timeout: 600, **options}
           )
-        end
-
-        private
-
-        def stream_headers(headers = {})
-          headers.merge("x-stainless-helper-method" => "stream")
         end
 
         # Some parameter documentations has been truncated, see
@@ -317,6 +313,8 @@ module Anthropic
         # @see Anthropic::Models::Beta::MessageCountTokensParams
         def count_tokens(params)
           parsed, options = Anthropic::Beta::MessageCountTokensParams.dump_request(params)
+          Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil)
+
           header_params = {betas: "anthropic-beta"}
           @client.request(
             method: :post,
@@ -326,6 +324,12 @@ module Anthropic
             model: Anthropic::Beta::BetaMessageTokensCount,
             options: options
           )
+        end
+
+        private
+
+        def stream_headers(headers = {})
+          headers.merge("x-stainless-helper-method" => "stream")
         end
 
         # @api private

@@ -18,7 +18,6 @@ end
 
 message = anthropic.beta.messages.create(
   model: "claude-sonnet-4-5",
-  betas: ["structured-outputs-2025-11-13"],
   max_tokens: 9999,
   messages: [
     {
@@ -26,7 +25,9 @@ message = anthropic.beta.messages.create(
       content: "give me some famous numbers"
     }
   ],
-  output_format: Output
+  # Note: The beta header "structured-outputs-2025-12-15" is automatically injected
+  # when using output_config with a model class
+  output_config: {format: Output}
 )
 
 begin
