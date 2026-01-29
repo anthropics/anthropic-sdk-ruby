@@ -5,7 +5,10 @@ module Anthropic
     module Beta
       class BetaOutputConfig < Anthropic::Internal::Type::BaseModel
         # @!attribute effort
-        #   All possible effort levels.
+        #   How much effort the model should put into its response. Higher effort levels may
+        #   result in more thorough analysis but take longer.
+        #
+        #   Valid values are `low`, `medium`, or `high`.
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaOutputConfig::Effort, nil]
         optional :effort, enum: -> { Anthropic::Beta::BetaOutputConfig::Effort }, nil?: true
@@ -21,11 +24,14 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaOutputConfig} for more details.
         #
-        #   @param effort [Symbol, Anthropic::Models::Beta::BetaOutputConfig::Effort, nil] All possible effort levels.
+        #   @param effort [Symbol, Anthropic::Models::Beta::BetaOutputConfig::Effort, nil] How much effort the model should put into its response. Higher effort levels may
         #
-        #   @param format_ [Anthropic::Models::Beta::BetaJSONOutputFormat, nil]
+        #   @param format_ [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] A schema to specify Claude's output format in responses. See [structured outputs
 
-        # All possible effort levels.
+        # How much effort the model should put into its response. Higher effort levels may
+        # result in more thorough analysis but take longer.
+        #
+        # Valid values are `low`, `medium`, or `high`.
         #
         # @see Anthropic::Models::Beta::BetaOutputConfig#effort
         module Effort

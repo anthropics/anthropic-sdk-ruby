@@ -103,8 +103,7 @@ module Anthropic
                  -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaRequestMCPServerURLDefinition] }
 
         # @!attribute output_config
-        #   Configuration options for the model's output. Controls aspects like output
-        #   format or how much effort the model puts into its response.
+        #   Configuration options for the model's output, such as the output format.
         #
         #   @return [Anthropic::Models::Beta::BetaOutputConfig, nil]
         optional :output_config, -> { Anthropic::Beta::BetaOutputConfig }
@@ -251,7 +250,7 @@ module Anthropic
         #
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>] MCP servers to be utilized in this request
         #
-        #   @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Configuration options for the model's output. Controls aspects like output forma
+        #   @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Configuration options for the model's output, such as the output format.
         #
         #   @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Deprecated: Use `output_config.format` instead. See [structured outputs](https:/
         #

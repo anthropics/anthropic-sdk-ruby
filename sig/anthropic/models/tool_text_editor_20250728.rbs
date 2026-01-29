@@ -5,7 +5,8 @@ module Anthropic
         name: :str_replace_based_edit_tool,
         type: :text_editor_20250728,
         cache_control: Anthropic::CacheControlEphemeral?,
-        max_characters: Integer?
+        max_characters: Integer?,
+        strict: bool
       }
 
     class ToolTextEditor20250728 < Anthropic::Internal::Type::BaseModel
@@ -17,9 +18,14 @@ module Anthropic
 
       attr_accessor max_characters: Integer?
 
+      attr_reader strict: bool?
+
+      def strict=: (bool) -> bool
+
       def initialize: (
         ?cache_control: Anthropic::CacheControlEphemeral?,
         ?max_characters: Integer?,
+        ?strict: bool,
         ?name: :str_replace_based_edit_tool,
         ?type: :text_editor_20250728
       ) -> void
@@ -28,7 +34,8 @@ module Anthropic
         name: :str_replace_based_edit_tool,
         type: :text_editor_20250728,
         cache_control: Anthropic::CacheControlEphemeral?,
-        max_characters: Integer?
+        max_characters: Integer?,
+        strict: bool
       }
     end
   end

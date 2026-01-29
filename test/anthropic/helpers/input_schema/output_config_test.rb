@@ -32,8 +32,9 @@ module Anthropic
           super
         end
 
-        def stub_message_request(response_body:, &block) # rubocop:disable Lint/UnusedMethodArgument
-          stub = stub_request(:post, "http://localhost/v1/messages")
+        def stub_message_request(response_body:, beta: false, &block) # rubocop:disable Lint/UnusedMethodArgument
+          url = beta ? "http://localhost/v1/messages?beta=true" : "http://localhost/v1/messages"
+          stub = stub_request(:post, url)
                  .to_return(
                    status: 200,
                    body: response_body.to_json,
@@ -80,8 +81,8 @@ module Anthropic
               assert(type_value == :json_schema || type_value == "json_schema")
               assert(body.dig(:output_config, :format, :schema).is_a?(Hash))
 
-              # Assert beta header is present
-              assert_includes(body[:betas], "structured-outputs-2025-12-15")
+              # output_config is GA, no beta header needed
+              refute(body.key?(:betas), "GA output_config should not auto-inject beta header")
 
               true
             end
@@ -174,14 +175,15 @@ module Anthropic
           assert_match(/String/, error.message)
         end
 
-        # Test beta header auto-injection with output_config
-        def test_auto_injects_beta_header_with_output_config
+        # Test that GA output_config does NOT auto-inject beta header
+        def test_no_beta_header_with_output_config
           response_body = standard_response_body
 
           stub = stub_message_request(response_body: response_body) do |s|
             s.with do |request|
               body = JSON.parse(request.body, symbolize_names: true)
-              assert_includes(body[:betas], "structured-outputs-2025-12-15")
+              # output_config is GA, should not auto-inject beta header
+              refute(body.key?(:betas), "GA output_config should not auto-inject beta header")
               true
             end
           end
@@ -200,15 +202,16 @@ module Anthropic
         def test_auto_injects_beta_header_with_output_format
           response_body = standard_response_body
 
-          stub = stub_message_request(response_body: response_body) do |s|
+          stub = stub_message_request(response_body: response_body, beta: true) do |s|
             s.with do |request|
-              body = JSON.parse(request.body, symbolize_names: true)
-              assert_includes(body[:betas], "structured-outputs-2025-12-15")
+              # betas is sent as Anthropic-Beta header, not in body
+              beta_header = request.headers["Anthropic-Beta"]
+              assert_includes(beta_header, "structured-outputs-2025-12-15")
               true
             end
           end
 
-          @client.messages.create(
+          @client.beta.messages.create(
             model: "claude-3-opus-20240229",
             max_tokens: 100,
             messages: [{role: "user", content: "Test"}],
@@ -222,17 +225,18 @@ module Anthropic
         def test_beta_header_deduplication
           response_body = standard_response_body
 
-          stub = stub_message_request(response_body: response_body) do |s|
+          stub = stub_message_request(response_body: response_body, beta: true) do |s|
             s.with do |request|
-              body = JSON.parse(request.body, symbolize_names: true)
+              # betas is sent as Anthropic-Beta header, not in body
+              beta_header = request.headers["Anthropic-Beta"]
               # Assert beta header appears only once
-              beta_count = body[:betas].count("structured-outputs-2025-12-15")
+              beta_count = beta_header.scan("structured-outputs-2025-12-15").count
               assert_equal(1, beta_count, "Beta header should appear exactly once")
               true
             end
           end
 
-          @client.messages.create(
+          @client.beta.messages.create(
             model: "claude-3-opus-20240229",
             max_tokens: 100,
             messages: [{role: "user", content: "Test"}],

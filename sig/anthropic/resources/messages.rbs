@@ -8,6 +8,7 @@ module Anthropic
         messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
         ?metadata: Anthropic::Metadata,
+        ?output_config: Anthropic::OutputConfig,
         ?service_tier: Anthropic::Models::MessageCreateParams::service_tier,
         ?stop_sequences: ::Array[String],
         ?system_: Anthropic::Models::MessageCreateParams::system_,
@@ -25,6 +26,7 @@ module Anthropic
         messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
         ?metadata: Anthropic::Metadata,
+        ?output_config: Anthropic::OutputConfig,
         ?service_tier: Anthropic::Models::MessageCreateParams::service_tier,
         ?stop_sequences: ::Array[String],
         ?system_: Anthropic::Models::MessageCreateParams::system_,
@@ -40,6 +42,7 @@ module Anthropic
       def count_tokens: (
         messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
+        ?output_config: Anthropic::OutputConfig,
         ?system_: Anthropic::Models::MessageCountTokensParams::system_,
         ?thinking: Anthropic::Models::thinking_config_param,
         ?tool_choice: Anthropic::Models::tool_choice,

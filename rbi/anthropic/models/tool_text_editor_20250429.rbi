@@ -28,9 +28,17 @@ module Anthropic
       end
       attr_writer :cache_control
 
+      # When true, guarantees schema validation on tool names and inputs
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :strict
+
+      sig { params(strict: T::Boolean).void }
+      attr_writer :strict
+
       sig do
         params(
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
+          strict: T::Boolean,
           name: Symbol,
           type: Symbol
         ).returns(T.attached_class)
@@ -38,6 +46,8 @@ module Anthropic
       def self.new(
         # Create a cache control breakpoint at this content block.
         cache_control: nil,
+        # When true, guarantees schema validation on tool names and inputs
+        strict: nil,
         # Name of the tool.
         #
         # This is how the tool will be called by the model and in `tool_use` blocks.
@@ -51,7 +61,8 @@ module Anthropic
           {
             name: Symbol,
             type: Symbol,
-            cache_control: T.nilable(Anthropic::CacheControlEphemeral)
+            cache_control: T.nilable(Anthropic::CacheControlEphemeral),
+            strict: T::Boolean
           }
         )
       end

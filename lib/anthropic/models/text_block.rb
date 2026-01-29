@@ -22,6 +22,14 @@ module Anthropic
       #   @return [String]
       required :text, String
 
+      response_only do
+        # @!attribute parsed
+        #   parsed value of `#text` when a JSON output schema object has been specified
+        #
+        #   @return [Object, nil]
+        optional :parsed, Anthropic::Helpers::InputSchema::ParsedJson
+      end
+
       # @!attribute type
       #
       #   @return [Symbol, :text]

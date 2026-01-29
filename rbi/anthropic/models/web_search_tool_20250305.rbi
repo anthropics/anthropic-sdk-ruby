@@ -42,6 +42,13 @@ module Anthropic
       sig { returns(T.nilable(Integer)) }
       attr_accessor :max_uses
 
+      # When true, guarantees schema validation on tool names and inputs
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :strict
+
+      sig { params(strict: T::Boolean).void }
+      attr_writer :strict
+
       # Parameters for the user's location. Used to provide more relevant search
       # results.
       sig { returns(T.nilable(Anthropic::WebSearchTool20250305::UserLocation)) }
@@ -61,6 +68,7 @@ module Anthropic
           blocked_domains: T.nilable(T::Array[String]),
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
           max_uses: T.nilable(Integer),
+          strict: T::Boolean,
           user_location:
             T.nilable(Anthropic::WebSearchTool20250305::UserLocation::OrHash),
           name: Symbol,
@@ -78,6 +86,8 @@ module Anthropic
         cache_control: nil,
         # Maximum number of times the tool can be used in the API request.
         max_uses: nil,
+        # When true, guarantees schema validation on tool names and inputs
+        strict: nil,
         # Parameters for the user's location. Used to provide more relevant search
         # results.
         user_location: nil,
@@ -98,6 +108,7 @@ module Anthropic
             blocked_domains: T.nilable(T::Array[String]),
             cache_control: T.nilable(Anthropic::CacheControlEphemeral),
             max_uses: T.nilable(Integer),
+            strict: T::Boolean,
             user_location:
               T.nilable(Anthropic::WebSearchTool20250305::UserLocation)
           }

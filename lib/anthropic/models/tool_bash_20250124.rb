@@ -22,11 +22,19 @@ module Anthropic
       #   @return [Anthropic::Models::CacheControlEphemeral, nil]
       optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
-      # @!method initialize(cache_control: nil, name: :bash, type: :bash_20250124)
+      # @!attribute strict
+      #   When true, guarantees schema validation on tool names and inputs
+      #
+      #   @return [Boolean, nil]
+      optional :strict, Anthropic::Internal::Type::Boolean
+
+      # @!method initialize(cache_control: nil, strict: nil, name: :bash, type: :bash_20250124)
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::ToolBash20250124} for more details.
       #
       #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+      #
+      #   @param strict [Boolean] When true, guarantees schema validation on tool names and inputs
       #
       #   @param name [Symbol, :bash] Name of the tool.
       #

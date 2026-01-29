@@ -61,6 +61,7 @@ module Anthropic
                  Anthropic::Internal::Type::ArrayOf[Anthropic::Internal::Type::HashOf[Anthropic::Internal::Type::Unknown]]
 
         # @!attribute strict
+        #   When true, guarantees schema validation on tool names and inputs
         #
         #   @return [Boolean, nil]
         optional :strict, Anthropic::Internal::Type::Boolean
@@ -83,7 +84,7 @@ module Anthropic
         #
         #   @param input_examples [Array<Hash{Symbol=>Object}>]
         #
-        #   @param strict [Boolean]
+        #   @param strict [Boolean] When true, guarantees schema validation on tool names and inputs
         #
         #   @param name [Symbol, :computer] Name of the tool.
         #

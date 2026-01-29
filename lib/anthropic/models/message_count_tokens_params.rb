@@ -85,6 +85,12 @@ module Anthropic
       #   @return [Symbol, String, Anthropic::Models::Model]
       required :model, union: -> { Anthropic::Model }
 
+      # @!attribute output_config
+      #   Configuration options for the model's output, such as the output format.
+      #
+      #   @return [Anthropic::Models::OutputConfig, nil]
+      optional :output_config, -> { Anthropic::OutputConfig }
+
       # @!attribute system_
       #   System prompt.
       #
@@ -196,13 +202,15 @@ module Anthropic
       #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305>, nil]
       optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::MessageCountTokensTool] }
 
-      # @!method initialize(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
+      # @!method initialize(messages:, model:, output_config: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::MessageCountTokensParams} for more details.
       #
       #   @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
       #
       #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      #
+      #   @param output_config [Anthropic::Models::OutputConfig] Configuration options for the model's output, such as the output format.
       #
       #   @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt.
       #

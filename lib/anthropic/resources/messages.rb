@@ -20,7 +20,7 @@ module Anthropic
       # Learn more about the Messages API in our
       # [user guide](https://docs.claude.com/en/docs/initial-setup)
       #
-      # @overload create(max_tokens:, messages:, model:, metadata: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      # @overload create(max_tokens:, messages:, model:, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
       #
       # @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
       #
@@ -29,6 +29,8 @@ module Anthropic
       # @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
       #
       # @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
+      #
+      # @param output_config [Anthropic::Models::OutputConfig] Configuration options for the model's output, such as the output format.
       #
       # @param service_tier [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
       #
@@ -101,7 +103,7 @@ module Anthropic
       #
       # Learn more about the Messages API in our [user guide](/en/docs/initial-setup)
       #
-      # @overload stream(max_tokens:, messages:, model:, metadata: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      # @overload stream(max_tokens:, messages:, model:, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
       #
       # @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
       #
@@ -110,6 +112,8 @@ module Anthropic
       # @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
       #
       # @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
+      #
+      # @param output_config [Anthropic::Models::OutputConfig] Configuration options for the model's output. Controls aspects like output format
       #
       # @param service_tier [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
       #
@@ -170,7 +174,7 @@ module Anthropic
       # Learn more about the Messages API in our
       # [user guide](https://docs.claude.com/en/docs/initial-setup)
       #
-      # @overload stream_raw(max_tokens:, messages:, model:, metadata: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      # @overload stream_raw(max_tokens:, messages:, model:, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
       #
       # @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
       #
@@ -179,6 +183,8 @@ module Anthropic
       # @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
       #
       # @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
+      #
+      # @param output_config [Anthropic::Models::OutputConfig] Configuration options for the model's output, such as the output format.
       #
       # @param service_tier [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
       #
@@ -234,11 +240,13 @@ module Anthropic
       # Learn more about token counting in our
       # [user guide](https://docs.claude.com/en/docs/build-with-claude/token-counting)
       #
-      # @overload count_tokens(messages:, model:, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
+      # @overload count_tokens(messages:, model:, output_config: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
       #
       # @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
       #
       # @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      #
+      # @param output_config [Anthropic::Models::OutputConfig] Configuration options for the model's output, such as the output format.
       #
       # @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt.
       #

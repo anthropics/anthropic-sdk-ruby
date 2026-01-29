@@ -89,6 +89,8 @@ module Anthropic
 
   class InvalidRequestError = Anthropic::Models::InvalidRequestError
 
+  class JSONOutputFormat = Anthropic::Models::JSONOutputFormat
+
   class Message = Anthropic::Models::Message
 
   class MessageCountTokensParams = Anthropic::Models::MessageCountTokensParams
@@ -116,6 +118,8 @@ module Anthropic
   class ModelRetrieveParams = Anthropic::Models::ModelRetrieveParams
 
   class NotFoundError = Anthropic::Models::NotFoundError
+
+  class OutputConfig = Anthropic::Models::OutputConfig
 
   class OverloadedError = Anthropic::Models::OverloadedError
 

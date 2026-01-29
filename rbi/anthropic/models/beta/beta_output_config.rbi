@@ -14,7 +14,10 @@ module Anthropic
             )
           end
 
-        # All possible effort levels.
+        # How much effort the model should put into its response. Higher effort levels may
+        # result in more thorough analysis but take longer.
+        #
+        # Valid values are `low`, `medium`, or `high`.
         sig do
           returns(
             T.nilable(Anthropic::Beta::BetaOutputConfig::Effort::OrSymbol)
@@ -42,7 +45,10 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # All possible effort levels.
+          # How much effort the model should put into its response. Higher effort levels may
+          # result in more thorough analysis but take longer.
+          #
+          # Valid values are `low`, `medium`, or `high`.
           effort: nil,
           # A schema to specify Claude's output format in responses. See
           # [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
@@ -62,7 +68,10 @@ module Anthropic
         def to_hash
         end
 
-        # All possible effort levels.
+        # How much effort the model should put into its response. Higher effort levels may
+        # result in more thorough analysis but take longer.
+        #
+        # Valid values are `low`, `medium`, or `high`.
         module Effort
           extend Anthropic::Internal::Type::Enum
 

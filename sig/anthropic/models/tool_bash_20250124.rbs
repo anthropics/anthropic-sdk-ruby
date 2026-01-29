@@ -4,7 +4,8 @@ module Anthropic
       {
         name: :bash,
         type: :bash_20250124,
-        cache_control: Anthropic::CacheControlEphemeral?
+        cache_control: Anthropic::CacheControlEphemeral?,
+        strict: bool
       }
 
     class ToolBash20250124 < Anthropic::Internal::Type::BaseModel
@@ -14,8 +15,13 @@ module Anthropic
 
       attr_accessor cache_control: Anthropic::CacheControlEphemeral?
 
+      attr_reader strict: bool?
+
+      def strict=: (bool) -> bool
+
       def initialize: (
         ?cache_control: Anthropic::CacheControlEphemeral?,
+        ?strict: bool,
         ?name: :bash,
         ?type: :bash_20250124
       ) -> void
@@ -23,7 +29,8 @@ module Anthropic
       def to_hash: -> {
         name: :bash,
         type: :bash_20250124,
-        cache_control: Anthropic::CacheControlEphemeral?
+        cache_control: Anthropic::CacheControlEphemeral?,
+        strict: bool
       }
     end
   end

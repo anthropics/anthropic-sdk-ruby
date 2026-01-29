@@ -109,6 +109,34 @@ client.beta.messages.tool_runner(
 ).each_message { puts _1.content }
 ```
 
+### Structured Outputs
+
+Constrain Claude's responses to follow a specific JSON schema using the `output_config` parameter:
+
+```ruby
+class FamousNumber < Anthropic::BaseModel
+  required :value, Float
+  optional :reason, String, doc: "why is this number mathematically significant?"
+end
+
+class Output < Anthropic::BaseModel
+  required :numbers, Anthropic::ArrayOf[FamousNumber], min_length: 3, max_length: 5
+end
+
+message = anthropic.messages.create(
+  model: "claude-sonnet-4-5-20250929",
+  max_tokens: 1024,
+  messages: [{role: "user", content: "give me some famous numbers"}],
+  output_config: {format: Output}
+)
+
+# Access the parsed response
+message.parsed_output
+# => #<Output numbers=[#<FamousNumber value=3.14159... reason="Pi is...">...]>
+```
+
+For streaming and more examples, see [helpers.md](helpers.md#structured-outputs).
+
 ### Pagination
 
 List methods in the Anthropic API are paginated.

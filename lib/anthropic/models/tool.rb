@@ -37,12 +37,18 @@ module Anthropic
       #   @return [String, nil]
       optional :description, String
 
+      # @!attribute strict
+      #   When true, guarantees schema validation on tool names and inputs
+      #
+      #   @return [Boolean, nil]
+      optional :strict, Anthropic::Internal::Type::Boolean
+
       # @!attribute type
       #
       #   @return [Symbol, Anthropic::Models::Tool::Type, nil]
       optional :type, enum: -> { Anthropic::Tool::Type }, nil?: true
 
-      # @!method initialize(input_schema:, name:, cache_control: nil, description: nil, type: nil)
+      # @!method initialize(input_schema:, name:, cache_control: nil, description: nil, strict: nil, type: nil)
       #   Some parameter documentations has been truncated, see {Anthropic::Models::Tool}
       #   for more details.
       #
@@ -53,6 +59,8 @@ module Anthropic
       #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
       #
       #   @param description [String] Description of what this tool does.
+      #
+      #   @param strict [Boolean] When true, guarantees schema validation on tool names and inputs
       #
       #   @param type [Symbol, Anthropic::Models::Tool::Type, nil]
 

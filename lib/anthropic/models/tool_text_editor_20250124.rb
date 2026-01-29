@@ -22,11 +22,19 @@ module Anthropic
       #   @return [Anthropic::Models::CacheControlEphemeral, nil]
       optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
-      # @!method initialize(cache_control: nil, name: :str_replace_editor, type: :text_editor_20250124)
+      # @!attribute strict
+      #   When true, guarantees schema validation on tool names and inputs
+      #
+      #   @return [Boolean, nil]
+      optional :strict, Anthropic::Internal::Type::Boolean
+
+      # @!method initialize(cache_control: nil, strict: nil, name: :str_replace_editor, type: :text_editor_20250124)
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::ToolTextEditor20250124} for more details.
       #
       #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+      #
+      #   @param strict [Boolean] When true, guarantees schema validation on tool names and inputs
       #
       #   @param name [Symbol, :str_replace_editor] Name of the tool.
       #

@@ -16,7 +16,7 @@ class Output < Anthropic::BaseModel
   required :numbers, Anthropic::ArrayOf[FamousNumber], min_length: 3, max_length: 5
 end
 
-message = anthropic.messages.create(
+stream = anthropic.messages.stream(
   model: "claude-sonnet-4-5-20250929",
   max_tokens: 9999,
   messages: [
@@ -29,15 +29,13 @@ message = anthropic.messages.create(
 )
 
 begin
-  puts("\n---- retrieving parsed structured json response via a short hand method: `#parsed_output` ----\n")
+  puts("---- streaming text deltas ----\n")
 
-  pp(message.parsed_output)
-end
+  stream.text.each do |text|
+    print(text)
+  end
 
-begin
-  puts("\n---- parsed structured json response without the short hand ----\n")
+  puts("\n\n---- retrieving parsed structured output from accumulated message ----\n")
 
-  parsed = message.content.first&.parsed
-
-  pp(parsed)
+  pp(stream.accumulated_message.parsed_output)
 end
