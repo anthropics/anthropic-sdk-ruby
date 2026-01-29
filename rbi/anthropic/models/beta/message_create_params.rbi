@@ -149,8 +149,7 @@ module Anthropic
         sig { params(metadata: Anthropic::Beta::BetaMetadata::OrHash).void }
         attr_writer :metadata
 
-        # Configuration options for the model's output. Controls aspects like output
-        # format or how much effort the model puts into its response.
+        # Configuration options for the model's output, such as the output format.
         sig { returns(T.nilable(Anthropic::Beta::BetaOutputConfig)) }
         attr_reader :output_config
 
@@ -640,8 +639,7 @@ module Anthropic
           mcp_servers: nil,
           # An object describing metadata about the request.
           metadata: nil,
-          # Configuration options for the model's output. Controls aspects like output
-          # format or how much effort the model puts into its response.
+          # Configuration options for the model's output, such as the output format.
           output_config: nil,
           # Deprecated: Use `output_config.format` instead. See
           # [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)

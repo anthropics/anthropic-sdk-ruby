@@ -37,7 +37,7 @@ module Anthropic
         #
         # @param metadata [Anthropic::Models::Beta::BetaMetadata] Body param: An object describing metadata about the request.
         #
-        # @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Body param: Configuration options for the model's output. Controls aspects like
+        # @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Body param: Configuration options for the model's output, such as the output for
         #
         # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param: Deprecated: Use `output_config.format` instead. See [structured outp
         #
@@ -113,7 +113,7 @@ module Anthropic
         #
         # @param metadata [Anthropic::Models::Beta::BetaMetadata] Body param: An object describing metadata about the request.
         #
-        # @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Body param: Configuration options for the model's output. Controls aspects like
+        # @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Body param: Configuration options for the model's output, such as the output for
         #
         # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param: Deprecated: Use `output_config.format` instead. See [structured outp
         #
@@ -185,7 +185,7 @@ module Anthropic
         #
         # @param mcp_servers [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>] Body param: MCP servers to be utilized in this request
         #
-        # @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Body param: Configuration options for the model's output. Controls aspects like
+        # @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Body param: Configuration options for the model's output, such as the output for
         #
         # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param: Deprecated: Use `output_config.format` instead. See [structured outp
         #

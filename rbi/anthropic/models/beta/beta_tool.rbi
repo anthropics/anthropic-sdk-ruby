@@ -88,6 +88,7 @@ module Anthropic
         end
         attr_writer :input_examples
 
+        # When true, guarantees schema validation on tool names and inputs
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :strict
 
@@ -136,6 +137,7 @@ module Anthropic
           # aspects of the tool input JSON schema.
           description: nil,
           input_examples: nil,
+          # When true, guarantees schema validation on tool names and inputs
           strict: nil,
           type: nil
         )

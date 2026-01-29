@@ -22,6 +22,7 @@ module Anthropic
           messages: T::Array[Anthropic::MessageParam::OrHash],
           model: T.any(Anthropic::Model::OrSymbol, String),
           metadata: Anthropic::Metadata::OrHash,
+          output_config: Anthropic::OutputConfig::OrHash,
           service_tier: Anthropic::MessageCreateParams::ServiceTier::OrSymbol,
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
@@ -136,6 +137,8 @@ module Anthropic
         model:,
         # An object describing metadata about the request.
         metadata: nil,
+        # Configuration options for the model's output, such as the output format.
+        output_config: nil,
         # Determines whether to use priority capacity (if available) or standard capacity
         # for this request.
         #
@@ -297,6 +300,7 @@ module Anthropic
           messages: T::Array[Anthropic::MessageParam::OrHash],
           model: T.any(Anthropic::Model::OrSymbol, String),
           metadata: Anthropic::Metadata::OrHash,
+          output_config: Anthropic::OutputConfig::OrHash,
           service_tier: Anthropic::MessageCreateParams::ServiceTier::OrSymbol,
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
@@ -415,6 +419,8 @@ module Anthropic
         model:,
         # An object describing metadata about the request.
         metadata: nil,
+        # Configuration options for the model's output, such as the output format.
+        output_config: nil,
         # Determines whether to use priority capacity (if available) or standard capacity
         # for this request.
         #
@@ -571,6 +577,7 @@ module Anthropic
         params(
           messages: T::Array[Anthropic::MessageParam::OrHash],
           model: T.any(Anthropic::Model::OrSymbol, String),
+          output_config: Anthropic::OutputConfig::OrHash,
           system_: Anthropic::MessageCountTokensParams::System::Variants,
           thinking:
             T.any(
@@ -669,6 +676,8 @@ module Anthropic
         # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         model:,
+        # Configuration options for the model's output, such as the output format.
+        output_config: nil,
         # System prompt.
         #
         # A system prompt is a way of providing context and instructions to Claude, such

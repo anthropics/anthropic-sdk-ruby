@@ -48,6 +48,7 @@ module Anthropic
               messages: ::Array[Anthropic::MessageParam],
               model: Anthropic::Models::model,
               metadata: Anthropic::Metadata,
+              output_config: Anthropic::OutputConfig,
               service_tier: Anthropic::Models::Messages::BatchCreateParams::Request::Params::service_tier,
               stop_sequences: ::Array[String],
               stream: bool,
@@ -70,6 +71,12 @@ module Anthropic
             attr_reader metadata: Anthropic::Metadata?
 
             def metadata=: (Anthropic::Metadata) -> Anthropic::Metadata
+
+            attr_reader output_config: Anthropic::OutputConfig?
+
+            def output_config=: (
+              Anthropic::OutputConfig
+            ) -> Anthropic::OutputConfig
 
             attr_reader service_tier: Anthropic::Models::Messages::BatchCreateParams::Request::Params::service_tier?
 
@@ -126,6 +133,7 @@ module Anthropic
               messages: ::Array[Anthropic::MessageParam],
               model: Anthropic::Models::model,
               ?metadata: Anthropic::Metadata,
+              ?output_config: Anthropic::OutputConfig,
               ?service_tier: Anthropic::Models::Messages::BatchCreateParams::Request::Params::service_tier,
               ?stop_sequences: ::Array[String],
               ?stream: bool,
@@ -143,6 +151,7 @@ module Anthropic
               messages: ::Array[Anthropic::MessageParam],
               model: Anthropic::Models::model,
               metadata: Anthropic::Metadata,
+              output_config: Anthropic::OutputConfig,
               service_tier: Anthropic::Models::Messages::BatchCreateParams::Request::Params::service_tier,
               stop_sequences: ::Array[String],
               stream: bool,

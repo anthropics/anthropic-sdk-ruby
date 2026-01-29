@@ -8,6 +8,7 @@ module Anthropic
         blocked_domains: ::Array[String]?,
         cache_control: Anthropic::CacheControlEphemeral?,
         max_uses: Integer?,
+        strict: bool,
         user_location: Anthropic::WebSearchTool20250305::UserLocation?
       }
 
@@ -24,6 +25,10 @@ module Anthropic
 
       attr_accessor max_uses: Integer?
 
+      attr_reader strict: bool?
+
+      def strict=: (bool) -> bool
+
       attr_accessor user_location: Anthropic::WebSearchTool20250305::UserLocation?
 
       def initialize: (
@@ -31,6 +36,7 @@ module Anthropic
         ?blocked_domains: ::Array[String]?,
         ?cache_control: Anthropic::CacheControlEphemeral?,
         ?max_uses: Integer?,
+        ?strict: bool,
         ?user_location: Anthropic::WebSearchTool20250305::UserLocation?,
         ?name: :web_search,
         ?type: :web_search_20250305
@@ -43,6 +49,7 @@ module Anthropic
         blocked_domains: ::Array[String]?,
         cache_control: Anthropic::CacheControlEphemeral?,
         max_uses: Integer?,
+        strict: bool,
         user_location: Anthropic::WebSearchTool20250305::UserLocation?
       }
 

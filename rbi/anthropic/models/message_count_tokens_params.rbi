@@ -88,6 +88,13 @@ module Anthropic
       sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
       attr_accessor :model
 
+      # Configuration options for the model's output, such as the output format.
+      sig { returns(T.nilable(Anthropic::OutputConfig)) }
+      attr_reader :output_config
+
+      sig { params(output_config: Anthropic::OutputConfig::OrHash).void }
+      attr_writer :output_config
+
       # System prompt.
       #
       # A system prompt is a way of providing context and instructions to Claude, such
@@ -282,6 +289,7 @@ module Anthropic
         params(
           messages: T::Array[Anthropic::MessageParam::OrHash],
           model: T.any(Anthropic::Model::OrSymbol, String),
+          output_config: Anthropic::OutputConfig::OrHash,
           system_: Anthropic::MessageCountTokensParams::System::Variants,
           thinking:
             T.any(
@@ -380,6 +388,8 @@ module Anthropic
         # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         model:,
+        # Configuration options for the model's output, such as the output format.
+        output_config: nil,
         # System prompt.
         #
         # A system prompt is a way of providing context and instructions to Claude, such
@@ -484,6 +494,7 @@ module Anthropic
           {
             messages: T::Array[Anthropic::MessageParam],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            output_config: Anthropic::OutputConfig,
             system_: Anthropic::MessageCountTokensParams::System::Variants,
             thinking:
               T.any(

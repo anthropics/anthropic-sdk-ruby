@@ -37,6 +37,7 @@ module Anthropic
         optional :defer_loading, Anthropic::Internal::Type::Boolean
 
         # @!attribute strict
+        #   When true, guarantees schema validation on tool names and inputs
         #
         #   @return [Boolean, nil]
         optional :strict, Anthropic::Internal::Type::Boolean
@@ -53,7 +54,7 @@ module Anthropic
         #
         #   @param defer_loading [Boolean] If true, tool will not be included in initial system prompt. Only loaded when re
         #
-        #   @param strict [Boolean]
+        #   @param strict [Boolean] When true, guarantees schema validation on tool names and inputs
         #
         #   @param name [Symbol, :tool_search_tool_regex] Name of the tool.
 

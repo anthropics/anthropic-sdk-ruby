@@ -124,8 +124,7 @@ module Anthropic
         end
         attr_writer :mcp_servers
 
-        # Configuration options for the model's output. Controls aspects like output
-        # format or how much effort the model puts into its response.
+        # Configuration options for the model's output, such as the output format.
         sig { returns(T.nilable(Anthropic::Beta::BetaOutputConfig)) }
         attr_reader :output_config
 
@@ -515,8 +514,7 @@ module Anthropic
           context_management: nil,
           # MCP servers to be utilized in this request
           mcp_servers: nil,
-          # Configuration options for the model's output. Controls aspects like output
-          # format or how much effort the model puts into its response.
+          # Configuration options for the model's output, such as the output format.
           output_config: nil,
           # Deprecated: Use `output_config.format` instead. See
           # [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)

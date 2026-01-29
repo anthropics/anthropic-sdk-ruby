@@ -78,6 +78,7 @@ module Anthropic
         sig { returns(T.nilable(Integer)) }
         attr_accessor :max_uses
 
+        # When true, guarantees schema validation on tool names and inputs
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :strict
 
@@ -139,6 +140,7 @@ module Anthropic
           defer_loading: nil,
           # Maximum number of times the tool can be used in the API request.
           max_uses: nil,
+          # When true, guarantees schema validation on tool names and inputs
           strict: nil,
           # Parameters for the user's location. Used to provide more relevant search
           # results.
