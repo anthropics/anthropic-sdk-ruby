@@ -471,10 +471,14 @@ module Anthropic
           mcp_servers: nil,
           # Body param: An object describing metadata about the request.
           metadata: nil,
-          # Body param: Configuration options for the model's output. Controls aspects like
-          # how much effort the model puts into its response.
+          # Body param: Configuration options for the model's output, such as the output
+          # format.
           output_config: nil,
-          # Body param: A schema to specify Claude's output format in responses.
+          # Body param: Deprecated: Use `output_config.format` instead. See
+          # [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+          #
+          # A schema to specify Claude's output format in responses. This parameter will be
+          # removed in a future release.
           output_format: nil,
           # Body param: Determines whether to use priority capacity (if available) or
           # standard capacity for this request.
@@ -793,10 +797,14 @@ module Anthropic
           mcp_servers: nil,
           # Body param: An object describing metadata about the request.
           metadata: nil,
-          # Body param: Configuration options for the model's output. Controls aspects like
-          # how much effort the model puts into its response.
+          # Body param: Configuration options for the model's output, such as the output
+          # format.
           output_config: nil,
-          # Body param: A schema to specify Claude's output format in responses.
+          # Body param: Deprecated: Use `output_config.format` instead. See
+          # [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+          #
+          # A schema to specify Claude's output format in responses. This parameter will be
+          # removed in a future release.
           output_format: nil,
           # Body param: Determines whether to use priority capacity (if available) or
           # standard capacity for this request.
@@ -1084,10 +1092,14 @@ module Anthropic
           context_management: nil,
           # Body param: MCP servers to be utilized in this request
           mcp_servers: nil,
-          # Body param: Configuration options for the model's output. Controls aspects like
-          # how much effort the model puts into its response.
+          # Body param: Configuration options for the model's output, such as the output
+          # format.
           output_config: nil,
-          # Body param: A schema to specify Claude's output format in responses.
+          # Body param: Deprecated: Use `output_config.format` instead. See
+          # [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+          #
+          # A schema to specify Claude's output format in responses. This parameter will be
+          # removed in a future release.
           output_format: nil,
           # Body param: System prompt.
           #

@@ -47,6 +47,11 @@ module Anthropic
       sig { returns(T::Array[Anthropic::ContentBlock::Variants]) }
       attr_accessor :content
 
+      # Parsed value of response when a JSON output schema object has been specified via :output_config
+      sig { returns(T.untyped) }
+      def parsed_output
+      end
+
       # The model that will complete your prompt.\n\nSee
       # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       # details and options.

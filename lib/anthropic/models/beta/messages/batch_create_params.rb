@@ -184,14 +184,19 @@ module Anthropic
               optional :metadata, -> { Anthropic::Beta::BetaMetadata }
 
               # @!attribute output_config
-              #   Configuration options for the model's output. Controls aspects like how much
-              #   effort the model puts into its response.
+              #   Configuration options for the model's output, such as the output format.
               #
               #   @return [Anthropic::Models::Beta::BetaOutputConfig, nil]
               optional :output_config, -> { Anthropic::Beta::BetaOutputConfig }
 
               # @!attribute output_format
-              #   A schema to specify Claude's output format in responses.
+              #   @deprecated
+              #
+              #   Deprecated: Use `output_config.format` instead. See
+              #   [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+              #
+              #   A schema to specify Claude's output format in responses. This parameter will be
+              #   removed in a future release.
               #
               #   @return [Anthropic::Models::Beta::BetaJSONOutputFormat, nil]
               optional :output_format, -> { Anthropic::Beta::BetaJSONOutputFormat }, nil?: true
@@ -405,9 +410,9 @@ module Anthropic
               #
               #   @param metadata [Anthropic::Models::Beta::BetaMetadata] An object describing metadata about the request.
               #
-              #   @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Configuration options for the model's output. Controls aspects like how much eff
+              #   @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Configuration options for the model's output, such as the output format.
               #
-              #   @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil]
+              #   @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Deprecated: Use `output_config.format` instead. See [structured outputs](https:/
               #
               #   @param service_tier [Symbol, Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
               #

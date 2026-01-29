@@ -214,6 +214,13 @@ module Anthropic
             sig { params(metadata: Anthropic::Metadata::OrHash).void }
             attr_writer :metadata
 
+            # Configuration options for the model's output, such as the output format.
+            sig { returns(T.nilable(Anthropic::OutputConfig)) }
+            attr_reader :output_config
+
+            sig { params(output_config: Anthropic::OutputConfig::OrHash).void }
+            attr_writer :output_config
+
             # Determines whether to use priority capacity (if available) or standard capacity
             # for this request.
             #
@@ -505,6 +512,7 @@ module Anthropic
                 messages: T::Array[Anthropic::MessageParam::OrHash],
                 model: T.any(Anthropic::Model::OrSymbol, String),
                 metadata: Anthropic::Metadata::OrHash,
+                output_config: Anthropic::OutputConfig::OrHash,
                 service_tier:
                   Anthropic::Messages::BatchCreateParams::Request::Params::ServiceTier::OrSymbol,
                 stop_sequences: T::Array[String],
@@ -620,6 +628,8 @@ module Anthropic
               model:,
               # An object describing metadata about the request.
               metadata: nil,
+              # Configuration options for the model's output, such as the output format.
+              output_config: nil,
               # Determines whether to use priority capacity (if available) or standard capacity
               # for this request.
               #
@@ -772,6 +782,7 @@ module Anthropic
                   messages: T::Array[Anthropic::MessageParam],
                   model: T.any(Anthropic::Model::OrSymbol, String),
                   metadata: Anthropic::Metadata,
+                  output_config: Anthropic::OutputConfig,
                   service_tier:
                     Anthropic::Messages::BatchCreateParams::Request::Params::ServiceTier::OrSymbol,
                   stop_sequences: T::Array[String],

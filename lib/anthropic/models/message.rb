@@ -51,6 +51,18 @@ module Anthropic
       #   @return [Array<Anthropic::Models::TextBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ServerToolUseBlock, Anthropic::Models::WebSearchToolResultBlock>]
       required :content, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::ContentBlock] }
 
+      # Parsed value of response when a JSON output schema object has been specified via :output_config
+      #
+      # @return [Object, nil]
+      def parsed_output
+        case content
+        in [*, {parsed:}]
+          parsed
+        else
+          nil
+        end
+      end
+
       # @!attribute model
       #   The model that will complete your prompt.\n\nSee
       #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional

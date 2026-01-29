@@ -72,6 +72,11 @@ module Anthropic
             :query_too_long,
             Anthropic::WebSearchToolRequestError::ErrorCode::TaggedSymbol
           )
+        REQUEST_TOO_LARGE =
+          T.let(
+            :request_too_large,
+            Anthropic::WebSearchToolRequestError::ErrorCode::TaggedSymbol
+          )
 
         sig do
           override.returns(

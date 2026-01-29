@@ -45,6 +45,13 @@ module Anthropic
       sig { params(description: String).void }
       attr_writer :description
 
+      # When true, guarantees schema validation on tool names and inputs
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :strict
+
+      sig { params(strict: T::Boolean).void }
+      attr_writer :strict
+
       sig { returns(T.nilable(Anthropic::Tool::Type::OrSymbol)) }
       attr_accessor :type
 
@@ -54,6 +61,7 @@ module Anthropic
           name: String,
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
           description: String,
+          strict: T::Boolean,
           type: T.nilable(Anthropic::Tool::Type::OrSymbol)
         ).returns(T.attached_class)
       end
@@ -76,6 +84,8 @@ module Anthropic
         # perform. You can use natural language descriptions to reinforce important
         # aspects of the tool input JSON schema.
         description: nil,
+        # When true, guarantees schema validation on tool names and inputs
+        strict: nil,
         type: nil
       )
       end
@@ -87,6 +97,7 @@ module Anthropic
             name: String,
             cache_control: T.nilable(Anthropic::CacheControlEphemeral),
             description: String,
+            strict: T::Boolean,
             type: T.nilable(Anthropic::Tool::Type::OrSymbol)
           }
         )

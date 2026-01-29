@@ -452,3 +452,98 @@ all_messages = runner.run_until_finished
 ## Examples
 
 See example files: `examples/tools*.rb` and `examples/auto_looping*.rb`
+
+# Structured Outputs
+
+Structured outputs allow you to constrain Claude's responses to follow a specific JSON schema, making it easier to extract structured data. Use the `output_config` parameter with a `BaseModel` class to define the expected output format.
+
+## Basic Usage
+
+```ruby
+class FamousNumber < Anthropic::BaseModel
+  required :value, Float
+  optional :reason, String, doc: "why is this number mathematically significant?"
+end
+
+class Output < Anthropic::BaseModel
+  doc "some famous numbers"
+
+  required :numbers, Anthropic::ArrayOf[FamousNumber], min_length: 3, max_length: 5
+end
+
+message = anthropic.messages.create(
+  model: "claude-sonnet-4-5-20250929",
+  max_tokens: 1024,
+  messages: [{role: "user", content: "give me some famous numbers"}],
+  output_config: {format: Output}
+)
+
+# Access the parsed output directly
+message.parsed_output
+# => #<Output numbers=[#<FamousNumber value=3.14159... reason="Pi is the ratio...">...]>
+```
+
+The `output_config` parameter accepts:
+- `{format: MyModel}` - Pass a `BaseModel` class directly
+- `{format: {type: :json_schema, schema: {...}}}` - Pass a raw JSON schema
+
+## Accessing Parsed Output
+
+When using `output_config`, the response is automatically parsed and validated against your model:
+
+### Using `#parsed_output`
+
+The `Message` object provides a convenience method:
+
+```ruby
+message.parsed_output  # Returns the parsed model instance or nil
+```
+
+### Using `TextBlock#parsed`
+
+You can also access the parsed content directly from the text block:
+
+```ruby
+text_block = message.content.first
+text_block.parsed  # Returns the parsed model instance
+```
+
+If parsing fails, `parsed` will contain `{error: "error message"}`.
+
+## Streaming Structured Outputs
+
+Structured outputs work with streaming. The parsed output is available after the stream completes:
+
+```ruby
+stream = anthropic.messages.stream(
+  model: "claude-sonnet-4-5-20250929",
+  max_tokens: 1024,
+  messages: [{role: "user", content: "give me some famous numbers"}],
+  output_config: {format: Output}
+)
+
+# Stream the raw text as it arrives
+stream.text.each { |text| print(text) }
+
+# Get the parsed output from the accumulated message
+stream.accumulated_message.parsed_output
+# => #<Output numbers=[...]>
+```
+
+## Token Counting
+
+The `count_tokens` method also supports `output_config`:
+
+```ruby
+result = anthropic.messages.count_tokens(
+  model: "claude-sonnet-4-5-20250929",
+  messages: [{role: "user", content: "give me some famous numbers"}],
+  output_config: {format: Output}
+)
+```
+
+## Examples
+
+See example files:
+- [`examples/structured_output.rb`](examples/structured_output.rb) - Basic structured output
+- [`examples/structured_output_stream.rb`](examples/structured_output_stream.rb) - Streaming structured output

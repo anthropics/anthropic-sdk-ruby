@@ -69,6 +69,7 @@ module Anthropic
         optional :max_uses, Integer, nil?: true
 
         # @!attribute strict
+        #   When true, guarantees schema validation on tool names and inputs
         #
         #   @return [Boolean, nil]
         optional :strict, Anthropic::Internal::Type::Boolean
@@ -93,7 +94,7 @@ module Anthropic
         #
         #   @param max_uses [Integer, nil] Maximum number of times the tool can be used in the API request.
         #
-        #   @param strict [Boolean]
+        #   @param strict [Boolean] When true, guarantees schema validation on tool names and inputs
         #
         #   @param name [Symbol, :web_fetch] Name of the tool.
         #

@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    type output_config = { format_: Anthropic::JSONOutputFormat? }
+
+    class OutputConfig < Anthropic::Internal::Type::BaseModel
+      attr_accessor format_: Anthropic::JSONOutputFormat?
+
+      def initialize: (?format_: Anthropic::JSONOutputFormat?) -> void
+
+      def to_hash: -> { format_: Anthropic::JSONOutputFormat? }
+    end
+  end
+end

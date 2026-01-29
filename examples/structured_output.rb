@@ -16,9 +16,8 @@ class Output < Anthropic::BaseModel
   required :numbers, Anthropic::ArrayOf[FamousNumber], min_length: 3, max_length: 5
 end
 
-message = anthropic.beta.messages.create(
-  model: "claude-sonnet-4-5",
-  betas: ["structured-outputs-2025-11-13"],
+message = anthropic.messages.create(
+  model: "claude-sonnet-4-5-20250929",
   max_tokens: 9999,
   messages: [
     {
@@ -26,7 +25,7 @@ message = anthropic.beta.messages.create(
       content: "give me some famous numbers"
     }
   ],
-  output_format: Output
+  output_config: {format: Output}
 )
 
 begin

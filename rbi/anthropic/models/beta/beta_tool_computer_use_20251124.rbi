@@ -91,6 +91,7 @@ module Anthropic
         end
         attr_writer :input_examples
 
+        # When true, guarantees schema validation on tool names and inputs
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :strict
 
@@ -132,6 +133,7 @@ module Anthropic
           # Whether to enable an action to take a zoomed-in screenshot of the screen.
           enable_zoom: nil,
           input_examples: nil,
+          # When true, guarantees schema validation on tool names and inputs
           strict: nil,
           # Name of the tool.
           #

@@ -47,9 +47,9 @@ module Anthropic
         #
         # @param metadata [Anthropic::Models::Beta::BetaMetadata] Body param: An object describing metadata about the request.
         #
-        # @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Body param: Configuration options for the model's output. Controls aspects like
+        # @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Body param: Configuration options for the model's output, such as the output for
         #
-        # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param:
+        # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param: Deprecated: Use `output_config.format` instead. See [structured outp
         #
         # @param service_tier [Symbol, Anthropic::Models::Beta::MessageCreateParams::ServiceTier] Body param: Determines whether to use priority capacity (if available) or standa
         #
@@ -83,7 +83,11 @@ module Anthropic
             raise ArgumentError.new(message)
           end
 
-          tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil)
+          tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(
+            parsed,
+            strict: nil,
+            is_beta: true
+          )
 
           unwrap = ->(raw) { Anthropic::Helpers::Messages.parse_input_schemas!(raw, tools:, models:) }
 
@@ -141,9 +145,9 @@ module Anthropic
         #
         # @param metadata [Anthropic::Models::Beta::BetaMetadata] Body param: An object describing metadata about the request.
         #
-        # @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Body param: Configuration options for the model's output. Controls aspects like
+        # @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Body param: Configuration options for the model's output, such as the output for
         #
-        # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param:
+        # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param: Deprecated: Use `output_config.format` instead. See [structured outp
         #
         # @param service_tier [Symbol, Anthropic::Models::Beta::MessageCreateParams::ServiceTier] Body param: Determines whether to use priority capacity (if available) or standa
         #
@@ -177,7 +181,11 @@ module Anthropic
             raise ArgumentError.new(message)
           end
           parsed.store(:stream, true)
-          tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil)
+          tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(
+            parsed,
+            strict: nil,
+            is_beta: true
+          )
 
           header_params = {betas: "anthropic-beta"}
           raw_stream = @client.request(
@@ -254,6 +262,8 @@ module Anthropic
             raise ArgumentError.new(message)
           end
           parsed.store(:stream, true)
+          Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil, is_beta: true)
+
           header_params = {betas: "anthropic-beta"}
           @client.request(
             method: :post,
@@ -267,12 +277,6 @@ module Anthropic
             model: Anthropic::Beta::BetaRawMessageStreamEvent,
             options: {timeout: 600, **options}
           )
-        end
-
-        private
-
-        def stream_headers(headers = {})
-          headers.merge("x-stainless-helper-method" => "stream")
         end
 
         # Some parameter documentations has been truncated, see
@@ -296,9 +300,9 @@ module Anthropic
         #
         # @param mcp_servers [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>] Body param: MCP servers to be utilized in this request
         #
-        # @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Body param: Configuration options for the model's output. Controls aspects like
+        # @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Body param: Configuration options for the model's output, such as the output for
         #
-        # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param:
+        # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param: Deprecated: Use `output_config.format` instead. See [structured outp
         #
         # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] Body param: System prompt.
         #
@@ -317,6 +321,8 @@ module Anthropic
         # @see Anthropic::Models::Beta::MessageCountTokensParams
         def count_tokens(params)
           parsed, options = Anthropic::Beta::MessageCountTokensParams.dump_request(params)
+          Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil, is_beta: true)
+
           header_params = {betas: "anthropic-beta"}
           @client.request(
             method: :post,
@@ -326,6 +332,12 @@ module Anthropic
             model: Anthropic::Beta::BetaMessageTokensCount,
             options: options
           )
+        end
+
+        private
+
+        def stream_headers(headers = {})
+          headers.merge("x-stainless-helper-method" => "stream")
         end
 
         # @api private

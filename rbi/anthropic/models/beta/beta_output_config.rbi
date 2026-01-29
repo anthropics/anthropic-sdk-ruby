@@ -14,7 +14,10 @@ module Anthropic
             )
           end
 
-        # All possible effort levels.
+        # How much effort the model should put into its response. Higher effort levels may
+        # result in more thorough analysis but take longer.
+        #
+        # Valid values are `low`, `medium`, or `high`.
         sig do
           returns(
             T.nilable(Anthropic::Beta::BetaOutputConfig::Effort::OrSymbol)
@@ -22,15 +25,34 @@ module Anthropic
         end
         attr_accessor :effort
 
+        # A schema to specify Claude's output format in responses. See
+        # [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+        sig { returns(T.nilable(Anthropic::Beta::BetaJSONOutputFormat)) }
+        attr_reader :format_
+
+        sig do
+          params(
+            format_: T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash)
+          ).void
+        end
+        attr_writer :format_
+
         sig do
           params(
             effort:
-              T.nilable(Anthropic::Beta::BetaOutputConfig::Effort::OrSymbol)
+              T.nilable(Anthropic::Beta::BetaOutputConfig::Effort::OrSymbol),
+            format_: T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash)
           ).returns(T.attached_class)
         end
         def self.new(
-          # All possible effort levels.
-          effort: nil
+          # How much effort the model should put into its response. Higher effort levels may
+          # result in more thorough analysis but take longer.
+          #
+          # Valid values are `low`, `medium`, or `high`.
+          effort: nil,
+          # A schema to specify Claude's output format in responses. See
+          # [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+          format_: nil
         )
         end
 
@@ -38,14 +60,18 @@ module Anthropic
           override.returns(
             {
               effort:
-                T.nilable(Anthropic::Beta::BetaOutputConfig::Effort::OrSymbol)
+                T.nilable(Anthropic::Beta::BetaOutputConfig::Effort::OrSymbol),
+              format_: T.nilable(Anthropic::Beta::BetaJSONOutputFormat)
             }
           )
         end
         def to_hash
         end
 
-        # All possible effort levels.
+        # How much effort the model should put into its response. Higher effort levels may
+        # result in more thorough analysis but take longer.
+        #
+        # Valid values are `low`, `medium`, or `high`.
         module Effort
           extend Anthropic::Internal::Type::Enum
 

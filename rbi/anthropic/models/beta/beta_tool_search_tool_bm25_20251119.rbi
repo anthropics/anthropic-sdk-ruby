@@ -68,6 +68,7 @@ module Anthropic
         sig { params(defer_loading: T::Boolean).void }
         attr_writer :defer_loading
 
+        # When true, guarantees schema validation on tool names and inputs
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :strict
 
@@ -97,6 +98,7 @@ module Anthropic
           # If true, tool will not be included in initial system prompt. Only loaded when
           # returned via tool_reference from tool search.
           defer_loading: nil,
+          # When true, guarantees schema validation on tool names and inputs
           strict: nil,
           # Name of the tool.
           #

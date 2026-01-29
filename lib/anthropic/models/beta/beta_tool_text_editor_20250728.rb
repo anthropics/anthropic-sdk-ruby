@@ -50,6 +50,7 @@ module Anthropic
         optional :max_characters, Integer, nil?: true
 
         # @!attribute strict
+        #   When true, guarantees schema validation on tool names and inputs
         #
         #   @return [Boolean, nil]
         optional :strict, Anthropic::Internal::Type::Boolean
@@ -68,7 +69,7 @@ module Anthropic
         #
         #   @param max_characters [Integer, nil] Maximum number of characters to display when viewing a file. If not specified, d
         #
-        #   @param strict [Boolean]
+        #   @param strict [Boolean] When true, guarantees schema validation on tool names and inputs
         #
         #   @param name [Symbol, :str_replace_based_edit_tool] Name of the tool.
         #

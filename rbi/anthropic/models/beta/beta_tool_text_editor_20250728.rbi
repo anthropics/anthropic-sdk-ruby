@@ -77,6 +77,7 @@ module Anthropic
         sig { returns(T.nilable(Integer)) }
         attr_accessor :max_characters
 
+        # When true, guarantees schema validation on tool names and inputs
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :strict
 
@@ -110,6 +111,7 @@ module Anthropic
           # Maximum number of characters to display when viewing a file. If not specified,
           # defaults to displaying the full file.
           max_characters: nil,
+          # When true, guarantees schema validation on tool names and inputs
           strict: nil,
           # Name of the tool.
           #
