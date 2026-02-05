@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.18.0 (2026-02-05)
+
+Full Changelog: [v1.17.0...v1.18.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.17.0...v1.18.0)
+
+### Features
+
+* **api:** manual updates ([53027e2](https://github.com/anthropics/anthropic-sdk-ruby/commit/53027e2d56db596ca8a42558d848ebd22075a854))
+
+
+### Bug Fixes
+
+* **client:** always add content-length to post body, even when empty ([359dcee](https://github.com/anthropics/anthropic-sdk-ruby/commit/359dcee68a26733fe1ee884a393aed88fd28b05b))
+
+
+### Chores
+
+* **ci:** remove claude-code-review workflow ([4d513ef](https://github.com/anthropics/anthropic-sdk-ruby/commit/4d513efcb8d074bd70efc4513bdcc5a0872e7171))
+* **docs:** remove www prefix ([306cdf9](https://github.com/anthropics/anthropic-sdk-ruby/commit/306cdf9962dba36b35a83eaaa7e5be166fc5a35f))
+
 ## 1.17.0 (2026-01-29)
 
 Full Changelog: [v1.16.3...v1.17.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.16.3...v1.17.0)
