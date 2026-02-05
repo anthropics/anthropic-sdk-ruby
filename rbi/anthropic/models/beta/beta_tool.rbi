@@ -80,6 +80,14 @@ module Anthropic
         sig { params(description: String).void }
         attr_writer :description
 
+        # Enable eager input streaming for this tool. When true, tool input parameters
+        # will be streamed incrementally as they are generated, and types will be inferred
+        # on-the-fly rather than buffering the full JSON output. When false, streaming is
+        # disabled for this tool even if the fine-grained-tool-streaming beta is active.
+        # When null (default), uses the default behavior based on beta headers.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_accessor :eager_input_streaming
+
         sig { returns(T.nilable(T::Array[T::Hash[Symbol, T.anything]])) }
         attr_reader :input_examples
 
@@ -108,6 +116,7 @@ module Anthropic
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             defer_loading: T::Boolean,
             description: String,
+            eager_input_streaming: T.nilable(T::Boolean),
             input_examples: T::Array[T::Hash[Symbol, T.anything]],
             strict: T::Boolean,
             type: T.nilable(Anthropic::Beta::BetaTool::Type::OrSymbol)
@@ -136,6 +145,12 @@ module Anthropic
           # perform. You can use natural language descriptions to reinforce important
           # aspects of the tool input JSON schema.
           description: nil,
+          # Enable eager input streaming for this tool. When true, tool input parameters
+          # will be streamed incrementally as they are generated, and types will be inferred
+          # on-the-fly rather than buffering the full JSON output. When false, streaming is
+          # disabled for this tool even if the fine-grained-tool-streaming beta is active.
+          # When null (default), uses the default behavior based on beta headers.
+          eager_input_streaming: nil,
           input_examples: nil,
           # When true, guarantees schema validation on tool names and inputs
           strict: nil,
@@ -154,6 +169,7 @@ module Anthropic
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
               defer_loading: T::Boolean,
               description: String,
+              eager_input_streaming: T.nilable(T::Boolean),
               input_examples: T::Array[T::Hash[Symbol, T.anything]],
               strict: T::Boolean,
               type: T.nilable(Anthropic::Beta::BetaTool::Type::OrSymbol)

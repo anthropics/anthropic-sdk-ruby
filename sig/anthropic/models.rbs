@@ -175,6 +175,8 @@ module Anthropic
 
   class ThinkingBlockParam = Anthropic::Models::ThinkingBlockParam
 
+  class ThinkingConfigAdaptive = Anthropic::Models::ThinkingConfigAdaptive
+
   class ThinkingConfigDisabled = Anthropic::Models::ThinkingConfigDisabled
 
   class ThinkingConfigEnabled = Anthropic::Models::ThinkingConfigEnabled

@@ -18,7 +18,8 @@ module Anthropic
         T.type_alias do
           T.any(
             Anthropic::ThinkingConfigEnabled,
-            Anthropic::ThinkingConfigDisabled
+            Anthropic::ThinkingConfigDisabled,
+            Anthropic::ThinkingConfigAdaptive
           )
         end
 

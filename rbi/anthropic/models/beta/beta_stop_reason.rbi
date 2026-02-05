@@ -22,6 +22,8 @@ module Anthropic
           T.let(:tool_use, Anthropic::Beta::BetaStopReason::TaggedSymbol)
         PAUSE_TURN =
           T.let(:pause_turn, Anthropic::Beta::BetaStopReason::TaggedSymbol)
+        COMPACTION =
+          T.let(:compaction, Anthropic::Beta::BetaStopReason::TaggedSymbol)
         REFUSAL = T.let(:refusal, Anthropic::Beta::BetaStopReason::TaggedSymbol)
         MODEL_CONTEXT_WINDOW_EXCEEDED =
           T.let(

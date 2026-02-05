@@ -15,7 +15,8 @@ module Anthropic
               Anthropic::Beta::BetaInputJSONDelta,
               Anthropic::Beta::BetaCitationsDelta,
               Anthropic::Beta::BetaThinkingDelta,
-              Anthropic::Beta::BetaSignatureDelta
+              Anthropic::Beta::BetaSignatureDelta,
+              Anthropic::Beta::BetaCompactionContentBlockDelta
             )
           end
 

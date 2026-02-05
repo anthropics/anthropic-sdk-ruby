@@ -112,7 +112,7 @@ module Anthropic
       #   [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking)
       #   for details.
       #
-      #   @return [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, nil]
+      #   @return [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigAdaptive, nil]
       optional :thinking, union: -> { Anthropic::ThinkingConfigParam }
 
       # @!attribute tool_choice
@@ -214,7 +214,7 @@ module Anthropic
       #
       #   @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt.
       #
-      #   @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
+      #   @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigAdaptive] Configuration for enabling Claude's extended thinking.
       #
       #   @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
       #

@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaCompactionBlockParam = Beta::BetaCompactionBlockParam
+
+    module Beta
+      type beta_compaction_block_param =
+        {
+          content: String?,
+          type: :compaction,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+
+      class BetaCompactionBlockParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: String?
+
+        attr_accessor type: :compaction
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        def initialize: (
+          content: String?,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?type: :compaction
+        ) -> void
+
+        def to_hash: -> {
+          content: String?,
+          type: :compaction,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+      end
+    end
+  end
+end

@@ -1,7 +1,8 @@
 module Anthropic
   module Models
     type model =
-      :"claude-opus-4-5-20251101"
+      :"claude-opus-4-6"
+      | :"claude-opus-4-5-20251101"
       | :"claude-opus-4-5"
       | :"claude-3-7-sonnet-latest"
       | :"claude-3-7-sonnet-20250219"
@@ -27,6 +28,9 @@ module Anthropic
       extend Anthropic::Internal::Type::Union
 
       def self?.variants: -> ::Array[Anthropic::Models::model]
+
+      # Most intelligent model for building agents and coding
+      CLAUDE_OPUS_4_6: :"claude-opus-4-6"
 
       # Premium model combining maximum intelligence with practical performance
       CLAUDE_OPUS_4_5_20251101: :"claude-opus-4-5-20251101"

@@ -326,6 +326,7 @@ module Anthropic
               ),
             context_management:
               T.nilable(Anthropic::Beta::BetaContextManagementConfig::OrHash),
+            inference_geo: T.nilable(String),
             mcp_servers:
               T::Array[
                 Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
@@ -342,7 +343,8 @@ module Anthropic
             thinking:
               T.any(
                 Anthropic::Beta::BetaThinkingConfigEnabled::OrHash,
-                Anthropic::Beta::BetaThinkingConfigDisabled::OrHash
+                Anthropic::Beta::BetaThinkingConfigDisabled::OrHash,
+                Anthropic::Beta::BetaThinkingConfigAdaptive::OrHash
               ),
             tool_choice:
               T.any(
@@ -467,6 +469,9 @@ module Anthropic
           # This allows you to control how Claude manages context across multiple requests,
           # such as whether to clear function results or not.
           context_management: nil,
+          # Body param: Specifies the geographic region for inference processing. If not
+          # specified, the workspace's `default_inference_geo` is used.
+          inference_geo: nil,
           # Body param: MCP servers to be utilized in this request
           mcp_servers: nil,
           # Body param: An object describing metadata about the request.
@@ -648,6 +653,7 @@ module Anthropic
               ),
             context_management:
               T.nilable(Anthropic::Beta::BetaContextManagementConfig::OrHash),
+            inference_geo: T.nilable(String),
             mcp_servers:
               T::Array[
                 Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
@@ -664,7 +670,8 @@ module Anthropic
             thinking:
               T.any(
                 Anthropic::Beta::BetaThinkingConfigEnabled::OrHash,
-                Anthropic::Beta::BetaThinkingConfigDisabled::OrHash
+                Anthropic::Beta::BetaThinkingConfigDisabled::OrHash,
+                Anthropic::Beta::BetaThinkingConfigAdaptive::OrHash
               ),
             tool_choice:
               T.any(
@@ -793,6 +800,9 @@ module Anthropic
           # This allows you to control how Claude manages context across multiple requests,
           # such as whether to clear function results or not.
           context_management: nil,
+          # Body param: Specifies the geographic region for inference processing. If not
+          # specified, the workspace's `default_inference_geo` is used.
+          inference_geo: nil,
           # Body param: MCP servers to be utilized in this request
           mcp_servers: nil,
           # Body param: An object describing metadata about the request.
@@ -978,7 +988,8 @@ module Anthropic
             thinking:
               T.any(
                 Anthropic::Beta::BetaThinkingConfigEnabled::OrHash,
-                Anthropic::Beta::BetaThinkingConfigDisabled::OrHash
+                Anthropic::Beta::BetaThinkingConfigDisabled::OrHash,
+                Anthropic::Beta::BetaThinkingConfigAdaptive::OrHash
               ),
             tool_choice:
               T.any(

@@ -184,7 +184,8 @@ module Anthropic
             T.nilable(
               T.any(
                 Anthropic::Beta::BetaThinkingConfigEnabled,
-                Anthropic::Beta::BetaThinkingConfigDisabled
+                Anthropic::Beta::BetaThinkingConfigDisabled,
+                Anthropic::Beta::BetaThinkingConfigAdaptive
               )
             )
           )
@@ -196,7 +197,8 @@ module Anthropic
             thinking:
               T.any(
                 Anthropic::Beta::BetaThinkingConfigEnabled::OrHash,
-                Anthropic::Beta::BetaThinkingConfigDisabled::OrHash
+                Anthropic::Beta::BetaThinkingConfigDisabled::OrHash,
+                Anthropic::Beta::BetaThinkingConfigAdaptive::OrHash
               )
           ).void
         end
@@ -400,7 +402,8 @@ module Anthropic
             thinking:
               T.any(
                 Anthropic::Beta::BetaThinkingConfigEnabled::OrHash,
-                Anthropic::Beta::BetaThinkingConfigDisabled::OrHash
+                Anthropic::Beta::BetaThinkingConfigDisabled::OrHash,
+                Anthropic::Beta::BetaThinkingConfigAdaptive::OrHash
               ),
             tool_choice:
               T.any(
@@ -639,7 +642,8 @@ module Anthropic
               thinking:
                 T.any(
                   Anthropic::Beta::BetaThinkingConfigEnabled,
-                  Anthropic::Beta::BetaThinkingConfigDisabled
+                  Anthropic::Beta::BetaThinkingConfigDisabled,
+                  Anthropic::Beta::BetaThinkingConfigAdaptive
                 ),
               tool_choice:
                 T.any(

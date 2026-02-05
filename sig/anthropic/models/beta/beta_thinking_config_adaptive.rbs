@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaThinkingConfigAdaptive = Beta::BetaThinkingConfigAdaptive
+
+    module Beta
+      type beta_thinking_config_adaptive = { type: :adaptive }
+
+      class BetaThinkingConfigAdaptive < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :adaptive
+
+        def initialize: (?type: :adaptive) -> void
+
+        def to_hash: -> { type: :adaptive }
+      end
+    end
+  end
+end

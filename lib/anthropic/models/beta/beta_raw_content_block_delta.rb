@@ -18,8 +18,10 @@ module Anthropic
 
         variant :signature_delta, -> { Anthropic::Beta::BetaSignatureDelta }
 
+        variant :compaction_delta, -> { Anthropic::Beta::BetaCompactionContentBlockDelta }
+
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta)]
+        #   @return [Array(Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta, Anthropic::Models::Beta::BetaCompactionContentBlockDelta)]
       end
     end
 

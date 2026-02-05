@@ -21,7 +21,8 @@ module Anthropic
           T.type_alias do
             T.any(
               Anthropic::Beta::BetaThinkingConfigEnabled,
-              Anthropic::Beta::BetaThinkingConfigDisabled
+              Anthropic::Beta::BetaThinkingConfigDisabled,
+              Anthropic::Beta::BetaThinkingConfigAdaptive
             )
           end
 

@@ -21,7 +21,8 @@ module Anthropic
               T::Array[
                 T.any(
                   Anthropic::Beta::BetaClearToolUses20250919Edit,
-                  Anthropic::Beta::BetaClearThinking20251015Edit
+                  Anthropic::Beta::BetaClearThinking20251015Edit,
+                  Anthropic::Beta::BetaCompact20260112Edit
                 )
               ]
             )
@@ -35,7 +36,8 @@ module Anthropic
               T::Array[
                 T.any(
                   Anthropic::Beta::BetaClearToolUses20250919Edit::OrHash,
-                  Anthropic::Beta::BetaClearThinking20251015Edit::OrHash
+                  Anthropic::Beta::BetaClearThinking20251015Edit::OrHash,
+                  Anthropic::Beta::BetaCompact20260112Edit::OrHash
                 )
               ]
           ).void
@@ -48,7 +50,8 @@ module Anthropic
               T::Array[
                 T.any(
                   Anthropic::Beta::BetaClearToolUses20250919Edit::OrHash,
-                  Anthropic::Beta::BetaClearThinking20251015Edit::OrHash
+                  Anthropic::Beta::BetaClearThinking20251015Edit::OrHash,
+                  Anthropic::Beta::BetaCompact20260112Edit::OrHash
                 )
               ]
           ).returns(T.attached_class)
@@ -66,7 +69,8 @@ module Anthropic
                 T::Array[
                   T.any(
                     Anthropic::Beta::BetaClearToolUses20250919Edit,
-                    Anthropic::Beta::BetaClearThinking20251015Edit
+                    Anthropic::Beta::BetaClearThinking20251015Edit,
+                    Anthropic::Beta::BetaCompact20260112Edit
                   )
                 ]
             }
@@ -75,6 +79,8 @@ module Anthropic
         def to_hash
         end
 
+        # Automatically compact older context when reaching the configured trigger
+        # threshold.
         module Edit
           extend Anthropic::Internal::Type::Union
 
@@ -82,7 +88,8 @@ module Anthropic
             T.type_alias do
               T.any(
                 Anthropic::Beta::BetaClearToolUses20250919Edit,
-                Anthropic::Beta::BetaClearThinking20251015Edit
+                Anthropic::Beta::BetaClearThinking20251015Edit,
+                Anthropic::Beta::BetaCompact20260112Edit
               )
             end
 

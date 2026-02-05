@@ -12,6 +12,7 @@ module Anthropic
         # @return [Anthropic::Helpers::Tools::Runner]
         def tool_runner(params)
           params = params.to_h
+          warn_thinking_enabled(params)
           max_iterations = params.delete(:max_iterations)
           compaction_control = params.delete(:compaction_control)
           Anthropic::Helpers::Tools::Runner.new(@client, params:, max_iterations:, compaction_control:)
@@ -31,7 +32,7 @@ module Anthropic
         # Learn more about the Messages API in our
         # [user guide](https://docs.claude.com/en/docs/initial-setup)
         #
-        # @overload create(max_tokens:, messages:, model:, container: nil, context_management: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
+        # @overload create(max_tokens:, messages:, model:, container: nil, context_management: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -42,6 +43,8 @@ module Anthropic
         # @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Body param: Container identifier for reuse across requests.
         #
         # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Context management configuration.
+        #
+        # @param inference_geo [String, nil] Body param: Specifies the geographic region for inference processing. If not spe
         #
         # @param mcp_servers [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>] Body param: MCP servers to be utilized in this request
         #
@@ -59,7 +62,7 @@ module Anthropic
         #
         # @param temperature [Float] Body param: Amount of randomness injected into the response.
         #
-        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled] Body param: Configuration for enabling Claude's extended thinking.
+        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
         #
         # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
         #
@@ -82,6 +85,8 @@ module Anthropic
             message = "Please use `#stream` for the streaming use case."
             raise ArgumentError.new(message)
           end
+
+          warn_thinking_enabled(parsed)
 
           tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(
             parsed,
@@ -129,7 +134,7 @@ module Anthropic
         # Learn more about the Messages API in our
         # [user guide](https://docs.claude.com/en/docs/initial-setup)
         #
-        # @overload stream_raw(max_tokens:, messages:, model:, container: nil, context_management: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
+        # @overload stream_raw(max_tokens:, messages:, model:, container: nil, context_management: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -140,6 +145,8 @@ module Anthropic
         # @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Body param: Container identifier for reuse across requests.
         #
         # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Context management configuration.
+        #
+        # @param inference_geo [String, nil] Body param: Specifies the geographic region for inference processing. If not spe
         #
         # @param mcp_servers [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>] Body param: MCP servers to be utilized in this request
         #
@@ -157,7 +164,7 @@ module Anthropic
         #
         # @param temperature [Float] Body param: Amount of randomness injected into the response.
         #
-        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled] Body param: Configuration for enabling Claude's extended thinking.
+        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
         #
         # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
         #
@@ -181,6 +188,9 @@ module Anthropic
             raise ArgumentError.new(message)
           end
           parsed.store(:stream, true)
+
+          warn_thinking_enabled(parsed)
+
           tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(
             parsed,
             strict: nil,
@@ -262,6 +272,9 @@ module Anthropic
             raise ArgumentError.new(message)
           end
           parsed.store(:stream, true)
+
+          warn_thinking_enabled(parsed)
+
           Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil, is_beta: true)
 
           header_params = {betas: "anthropic-beta"}
@@ -306,7 +319,7 @@ module Anthropic
         #
         # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] Body param: System prompt.
         #
-        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled] Body param: Configuration for enabling Claude's extended thinking.
+        # @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
         #
         # @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
         #
@@ -335,6 +348,18 @@ module Anthropic
         end
 
         private
+
+        def warn_thinking_enabled(parsed)
+          if Anthropic::Resources::Messages::MODELS_TO_WARN_WITH_THINKING_ENABLED.include?(parsed[:model]) &&
+             parsed[:thinking] &&
+             parsed[:thinking][:type] == "enabled"
+            warn(
+              "Using Claude with #{parsed[:model]} and 'thinking.type=enabled' is deprecated. " \
+              "Use thinking.type=adaptive instead which results in better model performance in " \
+              "our testing: https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking"
+            )
+          end
+        end
 
         def stream_headers(headers = {})
           headers.merge("x-stainless-helper-method" => "stream")

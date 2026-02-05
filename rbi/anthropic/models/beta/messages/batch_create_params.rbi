@@ -267,6 +267,11 @@ module Anthropic
               end
               attr_writer :context_management
 
+              # Specifies the geographic region for inference processing. If not specified, the
+              # workspace's `default_inference_geo` is used.
+              sig { returns(T.nilable(String)) }
+              attr_accessor :inference_geo
+
               # MCP servers to be utilized in this request
               sig do
                 returns(
@@ -419,7 +424,8 @@ module Anthropic
                   T.nilable(
                     T.any(
                       Anthropic::Beta::BetaThinkingConfigEnabled,
-                      Anthropic::Beta::BetaThinkingConfigDisabled
+                      Anthropic::Beta::BetaThinkingConfigDisabled,
+                      Anthropic::Beta::BetaThinkingConfigAdaptive
                     )
                   )
                 )
@@ -431,7 +437,8 @@ module Anthropic
                   thinking:
                     T.any(
                       Anthropic::Beta::BetaThinkingConfigEnabled::OrHash,
-                      Anthropic::Beta::BetaThinkingConfigDisabled::OrHash
+                      Anthropic::Beta::BetaThinkingConfigDisabled::OrHash,
+                      Anthropic::Beta::BetaThinkingConfigAdaptive::OrHash
                     )
                 ).void
               end
@@ -648,6 +655,7 @@ module Anthropic
                     T.nilable(
                       Anthropic::Beta::BetaContextManagementConfig::OrHash
                     ),
+                  inference_geo: T.nilable(String),
                   mcp_servers:
                     T::Array[
                       Anthropic::Beta::BetaRequestMCPServerURLDefinition::OrHash
@@ -666,7 +674,8 @@ module Anthropic
                   thinking:
                     T.any(
                       Anthropic::Beta::BetaThinkingConfigEnabled::OrHash,
-                      Anthropic::Beta::BetaThinkingConfigDisabled::OrHash
+                      Anthropic::Beta::BetaThinkingConfigDisabled::OrHash,
+                      Anthropic::Beta::BetaThinkingConfigAdaptive::OrHash
                     ),
                   tool_choice:
                     T.any(
@@ -788,6 +797,9 @@ module Anthropic
                 # This allows you to control how Claude manages context across multiple requests,
                 # such as whether to clear function results or not.
                 context_management: nil,
+                # Specifies the geographic region for inference processing. If not specified, the
+                # workspace's `default_inference_geo` is used.
+                inference_geo: nil,
                 # MCP servers to be utilized in this request
                 mcp_servers: nil,
                 # An object describing metadata about the request.
@@ -957,6 +969,7 @@ module Anthropic
                       ),
                     context_management:
                       T.nilable(Anthropic::Beta::BetaContextManagementConfig),
+                    inference_geo: T.nilable(String),
                     mcp_servers:
                       T::Array[
                         Anthropic::Beta::BetaRequestMCPServerURLDefinition
@@ -975,7 +988,8 @@ module Anthropic
                     thinking:
                       T.any(
                         Anthropic::Beta::BetaThinkingConfigEnabled,
-                        Anthropic::Beta::BetaThinkingConfigDisabled
+                        Anthropic::Beta::BetaThinkingConfigDisabled,
+                        Anthropic::Beta::BetaThinkingConfigAdaptive
                       ),
                     tool_choice:
                       T.any(
