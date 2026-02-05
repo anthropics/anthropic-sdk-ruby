@@ -132,12 +132,18 @@ module Anthropic
               content.thinking += delta.thinking
             in Anthropic::Models::SignatureDelta | Anthropic::Models::BetaSignatureDelta if content.type == :thinking
               content.signature = delta.signature
+            in Anthropic::Models::BetaCompactionContentBlockDelta if content.type == :compaction
+              content.content = delta.content
             else
             end
           in Anthropic::Models::RawMessageDeltaEvent | Anthropic::Models::BetaRawMessageDeltaEvent
             current_snapshot.stop_reason = event.delta.stop_reason
             current_snapshot.stop_sequence = event.delta.stop_sequence
             current_snapshot.usage.output_tokens = event.usage.output_tokens
+
+            if event.is_a?(Anthropic::Models::BetaRawMessageDeltaEvent) && !event.usage.iterations.nil?
+              current_snapshot.usage.iterations = event.usage.iterations
+            end
           else
           end
 
@@ -197,6 +203,11 @@ module Anthropic
               events_to_yield << Anthropic::Streaming::SignatureEvent.new(
                 type: :signature,
                 signature: content_block.signature
+              )
+            in Anthropic::Models::BetaCompactionContentBlockDelta if content_block.type == :compaction
+              events_to_yield << Anthropic::Streaming::CompactionEvent.new(
+                type: :compaction,
+                content: content_block.content
               )
             else
             end

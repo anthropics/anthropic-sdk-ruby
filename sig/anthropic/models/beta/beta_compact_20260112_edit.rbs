@@ -1,0 +1,41 @@
+module Anthropic
+  module Models
+    class BetaCompact20260112Edit = Beta::BetaCompact20260112Edit
+
+    module Beta
+      type beta_compact20260112_edit =
+        {
+          type: :compact_20260112,
+          instructions: String?,
+          pause_after_compaction: bool,
+          trigger: Anthropic::Beta::BetaInputTokensTrigger?
+        }
+
+      class BetaCompact20260112Edit < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :compact_20260112
+
+        attr_accessor instructions: String?
+
+        attr_reader pause_after_compaction: bool?
+
+        def pause_after_compaction=: (bool) -> bool
+
+        attr_accessor trigger: Anthropic::Beta::BetaInputTokensTrigger?
+
+        def initialize: (
+          ?instructions: String?,
+          ?pause_after_compaction: bool,
+          ?trigger: Anthropic::Beta::BetaInputTokensTrigger?,
+          ?type: :compact_20260112
+        ) -> void
+
+        def to_hash: -> {
+          type: :compact_20260112,
+          instructions: String?,
+          pause_after_compaction: bool,
+          trigger: Anthropic::Beta::BetaInputTokensTrigger?
+        }
+      end
+    end
+  end
+end

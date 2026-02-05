@@ -8,6 +8,8 @@ module Anthropic
     module Model
       extend Anthropic::Internal::Type::Union
 
+      variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_6 }
+
       variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_5_20251101 }
 
       variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_5 }
@@ -58,6 +60,9 @@ module Anthropic
       end
 
       # @!group
+
+      # Most intelligent model for building agents and coding
+      CLAUDE_OPUS_4_6 = :"claude-opus-4-6"
 
       # Premium model combining maximum intelligence with practical performance
       CLAUDE_OPUS_4_5_20251101 = :"claude-opus-4-5-20251101"

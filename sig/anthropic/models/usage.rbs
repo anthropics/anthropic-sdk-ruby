@@ -5,6 +5,7 @@ module Anthropic
         cache_creation: Anthropic::CacheCreation?,
         cache_creation_input_tokens: Integer?,
         cache_read_input_tokens: Integer?,
+        inference_geo: String?,
         input_tokens: Integer,
         output_tokens: Integer,
         server_tool_use: Anthropic::ServerToolUsage?,
@@ -18,6 +19,8 @@ module Anthropic
 
       attr_accessor cache_read_input_tokens: Integer?
 
+      attr_accessor inference_geo: String?
+
       attr_accessor input_tokens: Integer
 
       attr_accessor output_tokens: Integer
@@ -30,6 +33,7 @@ module Anthropic
         cache_creation: Anthropic::CacheCreation?,
         cache_creation_input_tokens: Integer?,
         cache_read_input_tokens: Integer?,
+        inference_geo: String?,
         input_tokens: Integer,
         output_tokens: Integer,
         server_tool_use: Anthropic::ServerToolUsage?,
@@ -40,6 +44,7 @@ module Anthropic
         cache_creation: Anthropic::CacheCreation?,
         cache_creation_input_tokens: Integer?,
         cache_read_input_tokens: Integer?,
+        inference_geo: String?,
         input_tokens: Integer,
         output_tokens: Integer,
         server_tool_use: Anthropic::ServerToolUsage?,

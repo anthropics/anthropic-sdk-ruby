@@ -31,7 +31,8 @@ module Anthropic
                 Anthropic::Beta::BetaInputJSONDelta::OrHash,
                 Anthropic::Beta::BetaCitationsDelta::OrHash,
                 Anthropic::Beta::BetaThinkingDelta::OrHash,
-                Anthropic::Beta::BetaSignatureDelta::OrHash
+                Anthropic::Beta::BetaSignatureDelta::OrHash,
+                Anthropic::Beta::BetaCompactionContentBlockDelta::OrHash
               ),
             index: Integer,
             type: Symbol

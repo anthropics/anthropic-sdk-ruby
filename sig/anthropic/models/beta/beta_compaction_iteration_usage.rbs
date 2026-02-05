@@ -1,0 +1,49 @@
+module Anthropic
+  module Models
+    class BetaCompactionIterationUsage = Beta::BetaCompactionIterationUsage
+
+    module Beta
+      type beta_compaction_iteration_usage =
+        {
+          cache_creation: Anthropic::Beta::BetaCacheCreation?,
+          cache_creation_input_tokens: Integer,
+          cache_read_input_tokens: Integer,
+          input_tokens: Integer,
+          output_tokens: Integer,
+          type: :compaction
+        }
+
+      class BetaCompactionIterationUsage < Anthropic::Internal::Type::BaseModel
+        attr_accessor cache_creation: Anthropic::Beta::BetaCacheCreation?
+
+        attr_accessor cache_creation_input_tokens: Integer
+
+        attr_accessor cache_read_input_tokens: Integer
+
+        attr_accessor input_tokens: Integer
+
+        attr_accessor output_tokens: Integer
+
+        attr_accessor type: :compaction
+
+        def initialize: (
+          cache_creation: Anthropic::Beta::BetaCacheCreation?,
+          cache_creation_input_tokens: Integer,
+          cache_read_input_tokens: Integer,
+          input_tokens: Integer,
+          output_tokens: Integer,
+          ?type: :compaction
+        ) -> void
+
+        def to_hash: -> {
+          cache_creation: Anthropic::Beta::BetaCacheCreation?,
+          cache_creation_input_tokens: Integer,
+          cache_read_input_tokens: Integer,
+          input_tokens: Integer,
+          output_tokens: Integer,
+          type: :compaction
+        }
+      end
+    end
+  end
+end

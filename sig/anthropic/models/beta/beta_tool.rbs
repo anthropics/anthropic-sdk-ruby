@@ -11,6 +11,7 @@ module Anthropic
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           defer_loading: bool,
           description: String,
+          eager_input_streaming: bool?,
           input_examples: ::Array[::Hash[Symbol, top]],
           strict: bool,
           type: Anthropic::Models::Beta::BetaTool::type_?
@@ -37,6 +38,8 @@ module Anthropic
 
         def description=: (String) -> String
 
+        attr_accessor eager_input_streaming: bool?
+
         attr_reader input_examples: ::Array[::Hash[Symbol, top]]?
 
         def input_examples=: (
@@ -56,6 +59,7 @@ module Anthropic
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?defer_loading: bool,
           ?description: String,
+          ?eager_input_streaming: bool?,
           ?input_examples: ::Array[::Hash[Symbol, top]],
           ?strict: bool,
           ?type: Anthropic::Models::Beta::BetaTool::type_?
@@ -68,6 +72,7 @@ module Anthropic
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           defer_loading: bool,
           description: String,
+          eager_input_streaming: bool?,
           input_examples: ::Array[::Hash[Symbol, top]],
           strict: bool,
           type: Anthropic::Models::Beta::BetaTool::type_?

@@ -12,7 +12,7 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Anthropic::Test::Resou
             params: {
               max_tokens: 1024,
               messages: [{content: "Hello, world", role: :user}],
-              model: :"claude-sonnet-4-5-20250929"
+              model: :"claude-opus-4-6"
             }
           }
         ]

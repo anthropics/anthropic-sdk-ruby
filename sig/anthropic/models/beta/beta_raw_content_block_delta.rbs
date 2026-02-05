@@ -9,6 +9,7 @@ module Anthropic
         | Anthropic::Beta::BetaCitationsDelta
         | Anthropic::Beta::BetaThinkingDelta
         | Anthropic::Beta::BetaSignatureDelta
+        | Anthropic::Beta::BetaCompactionContentBlockDelta
 
       module BetaRawContentBlockDelta
         extend Anthropic::Internal::Type::Union

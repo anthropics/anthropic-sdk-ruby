@@ -26,6 +26,7 @@ module Anthropic
         type edit =
           Anthropic::Beta::BetaClearToolUses20250919Edit
           | Anthropic::Beta::BetaClearThinking20251015Edit
+          | Anthropic::Beta::BetaCompact20260112Edit
 
         module Edit
           extend Anthropic::Internal::Type::Union

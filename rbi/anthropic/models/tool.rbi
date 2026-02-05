@@ -45,6 +45,14 @@ module Anthropic
       sig { params(description: String).void }
       attr_writer :description
 
+      # Enable eager input streaming for this tool. When true, tool input parameters
+      # will be streamed incrementally as they are generated, and types will be inferred
+      # on-the-fly rather than buffering the full JSON output. When false, streaming is
+      # disabled for this tool even if the fine-grained-tool-streaming beta is active.
+      # When null (default), uses the default behavior based on beta headers.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_accessor :eager_input_streaming
+
       # When true, guarantees schema validation on tool names and inputs
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :strict
@@ -61,6 +69,7 @@ module Anthropic
           name: String,
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
           description: String,
+          eager_input_streaming: T.nilable(T::Boolean),
           strict: T::Boolean,
           type: T.nilable(Anthropic::Tool::Type::OrSymbol)
         ).returns(T.attached_class)
@@ -84,6 +93,12 @@ module Anthropic
         # perform. You can use natural language descriptions to reinforce important
         # aspects of the tool input JSON schema.
         description: nil,
+        # Enable eager input streaming for this tool. When true, tool input parameters
+        # will be streamed incrementally as they are generated, and types will be inferred
+        # on-the-fly rather than buffering the full JSON output. When false, streaming is
+        # disabled for this tool even if the fine-grained-tool-streaming beta is active.
+        # When null (default), uses the default behavior based on beta headers.
+        eager_input_streaming: nil,
         # When true, guarantees schema validation on tool names and inputs
         strict: nil,
         type: nil
@@ -97,6 +112,7 @@ module Anthropic
             name: String,
             cache_control: T.nilable(Anthropic::CacheControlEphemeral),
             description: String,
+            eager_input_streaming: T.nilable(T::Boolean),
             strict: T::Boolean,
             type: T.nilable(Anthropic::Tool::Type::OrSymbol)
           }

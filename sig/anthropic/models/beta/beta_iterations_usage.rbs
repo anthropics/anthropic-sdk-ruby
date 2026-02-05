@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    BetaIterationsUsage: Anthropic::Internal::Type::Converter
+
+    module Beta
+      type beta_iterations_usage_item =
+        Anthropic::Beta::BetaMessageIterationUsage
+        | Anthropic::Beta::BetaCompactionIterationUsage
+
+      module BetaIterationsUsageItem
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_iterations_usage_item]
+      end
+
+      type beta_iterations_usage =
+        ::Array[Anthropic::Models::Beta::beta_iterations_usage_item]?
+
+      BetaIterationsUsage: Anthropic::Internal::Type::Converter
+    end
+  end
+end

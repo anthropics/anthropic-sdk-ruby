@@ -3,6 +3,8 @@
 module Anthropic
   module Resources
     class Messages
+      MODELS_TO_WARN_WITH_THINKING_ENABLED = ["claude-opus-4-6"].freeze
+
       # @return [Anthropic::Resources::Messages::Batches]
       attr_reader :batches
 
@@ -20,13 +22,15 @@ module Anthropic
       # Learn more about the Messages API in our
       # [user guide](https://docs.claude.com/en/docs/initial-setup)
       #
-      # @overload create(max_tokens:, messages:, model:, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      # @overload create(max_tokens:, messages:, model:, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
       #
       # @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
       #
       # @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
       #
       # @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      #
+      # @param inference_geo [String, nil] Specifies the geographic region for inference processing. If not specified, the
       #
       # @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
       #
@@ -40,7 +44,7 @@ module Anthropic
       #
       # @param temperature [Float] Amount of randomness injected into the response.
       #
-      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
+      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigAdaptive] Configuration for enabling Claude's extended thinking.
       #
       # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
       #
@@ -61,6 +65,8 @@ module Anthropic
           message = "Please use `#stream` for the streaming use case."
           raise ArgumentError.new(message)
         end
+
+        warn_thinking_enabled(parsed)
 
         tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil)
 
@@ -146,6 +152,8 @@ module Anthropic
         end
         parsed.store(:stream, true)
 
+        warn_thinking_enabled(parsed)
+
         tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil)
 
         raw_stream = @client.request(
@@ -174,13 +182,15 @@ module Anthropic
       # Learn more about the Messages API in our
       # [user guide](https://docs.claude.com/en/docs/initial-setup)
       #
-      # @overload stream_raw(max_tokens:, messages:, model:, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      # @overload stream_raw(max_tokens:, messages:, model:, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
       #
       # @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
       #
       # @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
       #
       # @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      #
+      # @param inference_geo [String, nil] Specifies the geographic region for inference processing. If not specified, the
       #
       # @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
       #
@@ -194,7 +204,7 @@ module Anthropic
       #
       # @param temperature [Float] Amount of randomness injected into the response.
       #
-      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
+      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigAdaptive] Configuration for enabling Claude's extended thinking.
       #
       # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
       #
@@ -250,7 +260,7 @@ module Anthropic
       #
       # @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt.
       #
-      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
+      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigAdaptive] Configuration for enabling Claude's extended thinking.
       #
       # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
       #
@@ -274,6 +284,18 @@ module Anthropic
       end
 
       private
+
+      def warn_thinking_enabled(parsed)
+        if MODELS_TO_WARN_WITH_THINKING_ENABLED.include?(parsed[:model]) &&
+           parsed[:thinking] &&
+           parsed[:thinking][:type] == "enabled"
+          warn(
+            "Using Claude with #{parsed[:model]} and 'thinking.type=enabled' is deprecated. " \
+            "Use thinking.type=adaptive instead which results in better model performance in " \
+            "our testing: https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking"
+          )
+        end
+      end
 
       def stream_headers(headers = {})
         headers.merge("x-stainless-helper-method" => "stream")

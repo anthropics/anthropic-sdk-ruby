@@ -1,7 +1,9 @@
 module Anthropic
   module Models
     type thinking_config_param =
-      Anthropic::ThinkingConfigEnabled | Anthropic::ThinkingConfigDisabled
+      Anthropic::ThinkingConfigEnabled
+      | Anthropic::ThinkingConfigDisabled
+      | Anthropic::ThinkingConfigAdaptive
 
     module ThinkingConfigParam
       extend Anthropic::Internal::Type::Union

@@ -76,6 +76,19 @@ module Anthropic
         required :signature, String
       end
 
+      class CompactionEvent < Anthropic::Internal::Type::BaseModel
+        # @!attribute type
+        #
+        #   @return [Symbol, :compaction]
+        required :type, const: :compaction
+
+        # @!attribute content
+        #   The compacted content summary.
+        #
+        #   @return [String, nil]
+        required :content, String, nil?: true
+      end
+
       class InputJsonEvent < Anthropic::Internal::Type::BaseModel
         # @!attribute type
         #

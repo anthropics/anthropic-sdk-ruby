@@ -29,7 +29,8 @@ module Anthropic
               Anthropic::Beta::BetaToolSearchToolResultBlockParam,
               Anthropic::Beta::BetaMCPToolUseBlockParam,
               Anthropic::Beta::BetaRequestMCPToolResultBlockParam,
-              Anthropic::Beta::BetaContainerUploadBlockParam
+              Anthropic::Beta::BetaContainerUploadBlockParam,
+              Anthropic::Beta::BetaCompactionBlockParam
             )
           end
 

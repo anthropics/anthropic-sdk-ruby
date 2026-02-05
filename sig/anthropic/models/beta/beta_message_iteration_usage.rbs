@@ -1,0 +1,49 @@
+module Anthropic
+  module Models
+    class BetaMessageIterationUsage = Beta::BetaMessageIterationUsage
+
+    module Beta
+      type beta_message_iteration_usage =
+        {
+          cache_creation: Anthropic::Beta::BetaCacheCreation?,
+          cache_creation_input_tokens: Integer,
+          cache_read_input_tokens: Integer,
+          input_tokens: Integer,
+          output_tokens: Integer,
+          type: :message
+        }
+
+      class BetaMessageIterationUsage < Anthropic::Internal::Type::BaseModel
+        attr_accessor cache_creation: Anthropic::Beta::BetaCacheCreation?
+
+        attr_accessor cache_creation_input_tokens: Integer
+
+        attr_accessor cache_read_input_tokens: Integer
+
+        attr_accessor input_tokens: Integer
+
+        attr_accessor output_tokens: Integer
+
+        attr_accessor type: :message
+
+        def initialize: (
+          cache_creation: Anthropic::Beta::BetaCacheCreation?,
+          cache_creation_input_tokens: Integer,
+          cache_read_input_tokens: Integer,
+          input_tokens: Integer,
+          output_tokens: Integer,
+          ?type: :message
+        ) -> void
+
+        def to_hash: -> {
+          cache_creation: Anthropic::Beta::BetaCacheCreation?,
+          cache_creation_input_tokens: Integer,
+          cache_read_input_tokens: Integer,
+          input_tokens: Integer,
+          output_tokens: Integer,
+          type: :message
+        }
+      end
+    end
+  end
+end

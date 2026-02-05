@@ -1,13 +1,38 @@
 module Anthropic
   module Models
-    type output_config = { format_: Anthropic::JSONOutputFormat? }
+    type output_config =
+      {
+        effort: Anthropic::Models::OutputConfig::effort?,
+        format_: Anthropic::JSONOutputFormat?
+      }
 
     class OutputConfig < Anthropic::Internal::Type::BaseModel
+      attr_accessor effort: Anthropic::Models::OutputConfig::effort?
+
       attr_accessor format_: Anthropic::JSONOutputFormat?
 
-      def initialize: (?format_: Anthropic::JSONOutputFormat?) -> void
+      def initialize: (
+        ?effort: Anthropic::Models::OutputConfig::effort?,
+        ?format_: Anthropic::JSONOutputFormat?
+      ) -> void
 
-      def to_hash: -> { format_: Anthropic::JSONOutputFormat? }
+      def to_hash: -> {
+        effort: Anthropic::Models::OutputConfig::effort?,
+        format_: Anthropic::JSONOutputFormat?
+      }
+
+      type effort = :low | :medium | :high | :max
+
+      module Effort
+        extend Anthropic::Internal::Type::Enum
+
+        LOW: :low
+        MEDIUM: :medium
+        HIGH: :high
+        MAX: :max
+
+        def self?.values: -> ::Array[Anthropic::Models::OutputConfig::effort]
+      end
     end
   end
 end

@@ -8,7 +8,9 @@ module Anthropic
           cache_creation: Anthropic::Beta::BetaCacheCreation?,
           cache_creation_input_tokens: Integer?,
           cache_read_input_tokens: Integer?,
+          inference_geo: String?,
           input_tokens: Integer,
+          iterations: Anthropic::Models::Beta::beta_iterations_usage?,
           output_tokens: Integer,
           server_tool_use: Anthropic::Beta::BetaServerToolUsage?,
           service_tier: Anthropic::Models::Beta::BetaUsage::service_tier?
@@ -21,7 +23,11 @@ module Anthropic
 
         attr_accessor cache_read_input_tokens: Integer?
 
+        attr_accessor inference_geo: String?
+
         attr_accessor input_tokens: Integer
+
+        attr_accessor iterations: Anthropic::Models::Beta::beta_iterations_usage?
 
         attr_accessor output_tokens: Integer
 
@@ -33,7 +39,9 @@ module Anthropic
           cache_creation: Anthropic::Beta::BetaCacheCreation?,
           cache_creation_input_tokens: Integer?,
           cache_read_input_tokens: Integer?,
+          inference_geo: String?,
           input_tokens: Integer,
+          iterations: Anthropic::Models::Beta::beta_iterations_usage?,
           output_tokens: Integer,
           server_tool_use: Anthropic::Beta::BetaServerToolUsage?,
           service_tier: Anthropic::Models::Beta::BetaUsage::service_tier?
@@ -43,7 +51,9 @@ module Anthropic
           cache_creation: Anthropic::Beta::BetaCacheCreation?,
           cache_creation_input_tokens: Integer?,
           cache_read_input_tokens: Integer?,
+          inference_geo: String?,
           input_tokens: Integer,
+          iterations: Anthropic::Models::Beta::beta_iterations_usage?,
           output_tokens: Integer,
           server_tool_use: Anthropic::Beta::BetaServerToolUsage?,
           service_tier: Anthropic::Models::Beta::BetaUsage::service_tier?
