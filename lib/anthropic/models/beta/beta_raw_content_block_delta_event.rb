@@ -6,7 +6,7 @@ module Anthropic
       class BetaRawContentBlockDeltaEvent < Anthropic::Internal::Type::BaseModel
         # @!attribute delta
         #
-        #   @return [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta]
+        #   @return [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta, Anthropic::Models::Beta::BetaCompactionContentBlockDelta]
         required :delta, union: -> { Anthropic::Beta::BetaRawContentBlockDelta }
 
         # @!attribute index
@@ -20,7 +20,7 @@ module Anthropic
         required :type, const: :content_block_delta
 
         # @!method initialize(delta:, index:, type: :content_block_delta)
-        #   @param delta [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta]
+        #   @param delta [Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta, Anthropic::Models::Beta::BetaCompactionContentBlockDelta]
         #   @param index [Integer]
         #   @param type [Symbol, :content_block_delta]
       end

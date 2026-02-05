@@ -207,6 +207,11 @@ module Anthropic
             sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
             attr_accessor :model
 
+            # Specifies the geographic region for inference processing. If not specified, the
+            # workspace's `default_inference_geo` is used.
+            sig { returns(T.nilable(String)) }
+            attr_accessor :inference_geo
+
             # An object describing metadata about the request.
             sig { returns(T.nilable(Anthropic::Metadata)) }
             attr_reader :metadata
@@ -317,7 +322,8 @@ module Anthropic
                 T.nilable(
                   T.any(
                     Anthropic::ThinkingConfigEnabled,
-                    Anthropic::ThinkingConfigDisabled
+                    Anthropic::ThinkingConfigDisabled,
+                    Anthropic::ThinkingConfigAdaptive
                   )
                 )
               )
@@ -329,7 +335,8 @@ module Anthropic
                 thinking:
                   T.any(
                     Anthropic::ThinkingConfigEnabled::OrHash,
-                    Anthropic::ThinkingConfigDisabled::OrHash
+                    Anthropic::ThinkingConfigDisabled::OrHash,
+                    Anthropic::ThinkingConfigAdaptive::OrHash
                   )
               ).void
             end
@@ -511,6 +518,7 @@ module Anthropic
                 max_tokens: Integer,
                 messages: T::Array[Anthropic::MessageParam::OrHash],
                 model: T.any(Anthropic::Model::OrSymbol, String),
+                inference_geo: T.nilable(String),
                 metadata: Anthropic::Metadata::OrHash,
                 output_config: Anthropic::OutputConfig::OrHash,
                 service_tier:
@@ -523,7 +531,8 @@ module Anthropic
                 thinking:
                   T.any(
                     Anthropic::ThinkingConfigEnabled::OrHash,
-                    Anthropic::ThinkingConfigDisabled::OrHash
+                    Anthropic::ThinkingConfigDisabled::OrHash,
+                    Anthropic::ThinkingConfigAdaptive::OrHash
                   ),
                 tool_choice:
                   T.any(
@@ -626,6 +635,9 @@ module Anthropic
               # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
               # details and options.
               model:,
+              # Specifies the geographic region for inference processing. If not specified, the
+              # workspace's `default_inference_geo` is used.
+              inference_geo: nil,
               # An object describing metadata about the request.
               metadata: nil,
               # Configuration options for the model's output, such as the output format.
@@ -781,6 +793,7 @@ module Anthropic
                   max_tokens: Integer,
                   messages: T::Array[Anthropic::MessageParam],
                   model: T.any(Anthropic::Model::OrSymbol, String),
+                  inference_geo: T.nilable(String),
                   metadata: Anthropic::Metadata,
                   output_config: Anthropic::OutputConfig,
                   service_tier:
@@ -793,7 +806,8 @@ module Anthropic
                   thinking:
                     T.any(
                       Anthropic::ThinkingConfigEnabled,
-                      Anthropic::ThinkingConfigDisabled
+                      Anthropic::ThinkingConfigDisabled,
+                      Anthropic::ThinkingConfigAdaptive
                     ),
                   tool_choice:
                     T.any(

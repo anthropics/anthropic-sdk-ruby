@@ -6,6 +6,7 @@ module Anthropic
         name: String,
         cache_control: Anthropic::CacheControlEphemeral?,
         description: String,
+        eager_input_streaming: bool?,
         strict: bool,
         type: Anthropic::Models::Tool::type_?
       }
@@ -21,6 +22,8 @@ module Anthropic
 
       def description=: (String) -> String
 
+      attr_accessor eager_input_streaming: bool?
+
       attr_reader strict: bool?
 
       def strict=: (bool) -> bool
@@ -32,6 +35,7 @@ module Anthropic
         name: String,
         ?cache_control: Anthropic::CacheControlEphemeral?,
         ?description: String,
+        ?eager_input_streaming: bool?,
         ?strict: bool,
         ?type: Anthropic::Models::Tool::type_?
       ) -> void
@@ -41,6 +45,7 @@ module Anthropic
         name: String,
         cache_control: Anthropic::CacheControlEphemeral?,
         description: String,
+        eager_input_streaming: bool?,
         strict: bool,
         type: Anthropic::Models::Tool::type_?
       }

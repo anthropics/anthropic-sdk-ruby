@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    type thinking_config_adaptive = { type: :adaptive }
+
+    class ThinkingConfigAdaptive < Anthropic::Internal::Type::BaseModel
+      attr_accessor type: :adaptive
+
+      def initialize: (?type: :adaptive) -> void
+
+      def to_hash: -> { type: :adaptive }
+    end
+  end
+end

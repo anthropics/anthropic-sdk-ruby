@@ -115,6 +115,13 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaContextManagementConfig, nil]
         optional :context_management, -> { Anthropic::Beta::BetaContextManagementConfig }, nil?: true
 
+        # @!attribute inference_geo
+        #   Specifies the geographic region for inference processing. If not specified, the
+        #   workspace's `default_inference_geo` is used.
+        #
+        #   @return [String, nil]
+        optional :inference_geo, String, nil?: true
+
         # @!attribute mcp_servers
         #   MCP servers to be utilized in this request
         #
@@ -204,7 +211,7 @@ module Anthropic
         #   [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking)
         #   for details.
         #
-        #   @return [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, nil]
+        #   @return [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive, nil]
         optional :thinking, union: -> { Anthropic::Beta::BetaThinkingConfigParam }
 
         # @!attribute tool_choice
@@ -326,7 +333,7 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(max_tokens:, messages:, model:, container: nil, context_management: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
+        # @!method initialize(max_tokens:, messages:, model:, container: nil, context_management: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
@@ -339,6 +346,8 @@ module Anthropic
         #   @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Container identifier for reuse across requests.
         #
         #   @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Context management configuration.
+        #
+        #   @param inference_geo [String, nil] Specifies the geographic region for inference processing. If not specified, the
         #
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaRequestMCPServerURLDefinition>] MCP servers to be utilized in this request
         #
@@ -356,7 +365,7 @@ module Anthropic
         #
         #   @param temperature [Float] Amount of randomness injected into the response.
         #
-        #   @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
+        #   @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Configuration for enabling Claude's extended thinking.
         #
         #   @param tool_choice [Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
         #

@@ -166,7 +166,8 @@ module Anthropic
                   Anthropic::Beta::BetaToolSearchToolResultBlock::OrHash,
                   Anthropic::Beta::BetaMCPToolUseBlock::OrHash,
                   Anthropic::Beta::BetaMCPToolResultBlock::OrHash,
-                  Anthropic::Beta::BetaContainerUploadBlock::OrHash
+                  Anthropic::Beta::BetaContainerUploadBlock::OrHash,
+                  Anthropic::Beta::BetaCompactionBlock::OrHash
                 )
               ],
             context_management:

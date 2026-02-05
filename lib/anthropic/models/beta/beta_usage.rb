@@ -22,11 +22,32 @@ module Anthropic
         #   @return [Integer, nil]
         required :cache_read_input_tokens, Integer, nil?: true
 
+        # @!attribute inference_geo
+        #   The geographic region where inference was performed for this request.
+        #
+        #   @return [String, nil]
+        required :inference_geo, String, nil?: true
+
         # @!attribute input_tokens
         #   The number of input tokens which were used.
         #
         #   @return [Integer]
         required :input_tokens, Integer
+
+        # @!attribute iterations
+        #   Per-iteration token usage breakdown.
+        #
+        #   Each entry represents one sampling iteration, with its own input/output token
+        #   counts and cache statistics. This allows you to:
+        #
+        #   - Determine which iterations exceeded long context thresholds (>=200k tokens)
+        #   - Calculate the true context window size from the last iteration
+        #   - Understand token accumulation across server-side tool use loops
+        #
+        #   @return [Array<Anthropic::Models::Beta::BetaMessageIterationUsage, Anthropic::Models::Beta::BetaCompactionIterationUsage>, nil]
+        required :iterations,
+                 -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaIterationsUsageItem] },
+                 nil?: true
 
         # @!attribute output_tokens
         #   The number of output tokens which were used.
@@ -46,14 +67,21 @@ module Anthropic
         #   @return [Symbol, Anthropic::Models::Beta::BetaUsage::ServiceTier, nil]
         required :service_tier, enum: -> { Anthropic::Beta::BetaUsage::ServiceTier }, nil?: true
 
-        # @!method initialize(cache_creation:, cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, output_tokens:, server_tool_use:, service_tier:)
+        # @!method initialize(cache_creation:, cache_creation_input_tokens:, cache_read_input_tokens:, inference_geo:, input_tokens:, iterations:, output_tokens:, server_tool_use:, service_tier:)
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaUsage} for more details.
+        #
         #   @param cache_creation [Anthropic::Models::Beta::BetaCacheCreation, nil] Breakdown of cached tokens by TTL
         #
         #   @param cache_creation_input_tokens [Integer, nil] The number of input tokens used to create the cache entry.
         #
         #   @param cache_read_input_tokens [Integer, nil] The number of input tokens read from the cache.
         #
+        #   @param inference_geo [String, nil] The geographic region where inference was performed for this request.
+        #
         #   @param input_tokens [Integer] The number of input tokens which were used.
+        #
+        #   @param iterations [Array<Anthropic::Models::Beta::BetaMessageIterationUsage, Anthropic::Models::Beta::BetaCompactionIterationUsage>, nil] Per-iteration token usage breakdown.
         #
         #   @param output_tokens [Integer] The number of output tokens which were used.
         #

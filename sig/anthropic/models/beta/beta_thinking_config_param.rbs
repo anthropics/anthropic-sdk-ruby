@@ -6,6 +6,7 @@ module Anthropic
       type beta_thinking_config_param =
         Anthropic::Beta::BetaThinkingConfigEnabled
         | Anthropic::Beta::BetaThinkingConfigDisabled
+        | Anthropic::Beta::BetaThinkingConfigAdaptive
 
       module BetaThinkingConfigParam
         extend Anthropic::Internal::Type::Union

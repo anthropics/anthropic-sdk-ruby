@@ -47,6 +47,7 @@ module Anthropic
               max_tokens: Integer,
               messages: ::Array[Anthropic::MessageParam],
               model: Anthropic::Models::model,
+              inference_geo: String?,
               metadata: Anthropic::Metadata,
               output_config: Anthropic::OutputConfig,
               service_tier: Anthropic::Models::Messages::BatchCreateParams::Request::Params::service_tier,
@@ -67,6 +68,8 @@ module Anthropic
             attr_accessor messages: ::Array[Anthropic::MessageParam]
 
             attr_accessor model: Anthropic::Models::model
+
+            attr_accessor inference_geo: String?
 
             attr_reader metadata: Anthropic::Metadata?
 
@@ -132,6 +135,7 @@ module Anthropic
               max_tokens: Integer,
               messages: ::Array[Anthropic::MessageParam],
               model: Anthropic::Models::model,
+              ?inference_geo: String?,
               ?metadata: Anthropic::Metadata,
               ?output_config: Anthropic::OutputConfig,
               ?service_tier: Anthropic::Models::Messages::BatchCreateParams::Request::Params::service_tier,
@@ -150,6 +154,7 @@ module Anthropic
               max_tokens: Integer,
               messages: ::Array[Anthropic::MessageParam],
               model: Anthropic::Models::model,
+              inference_geo: String?,
               metadata: Anthropic::Metadata,
               output_config: Anthropic::OutputConfig,
               service_tier: Anthropic::Models::Messages::BatchCreateParams::Request::Params::service_tier,

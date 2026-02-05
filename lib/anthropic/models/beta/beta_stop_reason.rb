@@ -11,6 +11,7 @@ module Anthropic
         STOP_SEQUENCE = :stop_sequence
         TOOL_USE = :tool_use
         PAUSE_TURN = :pause_turn
+        COMPACTION = :compaction
         REFUSAL = :refusal
         MODEL_CONTEXT_WINDOW_EXCEEDED = :model_context_window_exceeded
 

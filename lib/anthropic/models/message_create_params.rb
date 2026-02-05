@@ -99,6 +99,13 @@ module Anthropic
       #   @return [Symbol, String, Anthropic::Models::Model]
       required :model, union: -> { Anthropic::Model }
 
+      # @!attribute inference_geo
+      #   Specifies the geographic region for inference processing. If not specified, the
+      #   workspace's `default_inference_geo` is used.
+      #
+      #   @return [String, nil]
+      optional :inference_geo, String, nil?: true
+
       # @!attribute metadata
       #   An object describing metadata about the request.
       #
@@ -169,7 +176,7 @@ module Anthropic
       #   [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking)
       #   for details.
       #
-      #   @return [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, nil]
+      #   @return [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigAdaptive, nil]
       optional :thinking, union: -> { Anthropic::ThinkingConfigParam }
 
       # @!attribute tool_choice
@@ -285,7 +292,7 @@ module Anthropic
       #   @return [Float, nil]
       optional :top_p, Float
 
-      # @!method initialize(max_tokens:, messages:, model:, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      # @!method initialize(max_tokens:, messages:, model:, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::MessageCreateParams} for more details.
       #
@@ -294,6 +301,8 @@ module Anthropic
       #   @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
       #
       #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      #
+      #   @param inference_geo [String, nil] Specifies the geographic region for inference processing. If not specified, the
       #
       #   @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
       #
@@ -307,7 +316,7 @@ module Anthropic
       #
       #   @param temperature [Float] Amount of randomness injected into the response.
       #
-      #   @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
+      #   @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigAdaptive] Configuration for enabling Claude's extended thinking.
       #
       #   @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
       #

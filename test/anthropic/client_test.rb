@@ -36,7 +36,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-sonnet-4-5-20250929"
+        model: :"claude-opus-4-6"
       )
     end
 
@@ -53,7 +53,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-sonnet-4-5-20250929"
+        model: :"claude-opus-4-6"
       )
     end
 
@@ -69,7 +69,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-sonnet-4-5-20250929",
+        model: :"claude-opus-4-6",
         request_options: {max_retries: 3}
       )
     end
@@ -87,7 +87,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-sonnet-4-5-20250929",
+        model: :"claude-opus-4-6",
         request_options: {max_retries: 4}
       )
     end
@@ -109,7 +109,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-sonnet-4-5-20250929"
+        model: :"claude-opus-4-6"
       )
     end
 
@@ -132,7 +132,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-sonnet-4-5-20250929"
+        model: :"claude-opus-4-6"
       )
       Thread.current.thread_variable_set(:time_now, nil)
     end
@@ -155,7 +155,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-sonnet-4-5-20250929"
+        model: :"claude-opus-4-6"
       )
     end
 
@@ -172,7 +172,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-sonnet-4-5-20250929"
+        model: :"claude-opus-4-6"
       )
     end
 
@@ -190,7 +190,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-sonnet-4-5-20250929",
+        model: :"claude-opus-4-6",
         request_options: {extra_headers: {"x-stainless-retry-count" => nil}}
       )
     end
@@ -209,7 +209,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-sonnet-4-5-20250929",
+        model: :"claude-opus-4-6",
         request_options: {extra_headers: {"x-stainless-retry-count" => "42"}}
       )
     end
@@ -234,7 +234,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-sonnet-4-5-20250929",
+        model: :"claude-opus-4-6",
         request_options: {extra_headers: {}}
       )
     end
@@ -268,7 +268,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-sonnet-4-5-20250929",
+        model: :"claude-opus-4-6",
         request_options: {extra_headers: {}}
       )
     end
@@ -297,7 +297,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-sonnet-4-5-20250929",
+        model: :"claude-opus-4-6",
         request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
       )
     end
@@ -329,7 +329,7 @@ class AnthropicTest < Minitest::Test
       anthropic.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-sonnet-4-5-20250929",
+        model: :"claude-opus-4-6",
         request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
       )
     end
@@ -348,7 +348,7 @@ class AnthropicTest < Minitest::Test
     anthropic.messages.create(
       max_tokens: 1024,
       messages: [{content: "Hello, world", role: :user}],
-      model: :"claude-sonnet-4-5-20250929"
+      model: :"claude-opus-4-6"
     )
 
     assert_requested(:any, /./) do |req|

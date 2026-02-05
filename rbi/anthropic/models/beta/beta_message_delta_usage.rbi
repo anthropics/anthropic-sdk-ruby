@@ -26,6 +26,23 @@ module Anthropic
         sig { returns(T.nilable(Integer)) }
         attr_accessor :input_tokens
 
+        # Per-iteration token usage breakdown.
+        #
+        # Each entry represents one sampling iteration, with its own input/output token
+        # counts and cache statistics. This allows you to:
+        #
+        # - Determine which iterations exceeded long context thresholds (>=200k tokens)
+        # - Calculate the true context window size from the last iteration
+        # - Understand token accumulation across server-side tool use loops
+        sig do
+          returns(
+            T.nilable(
+              T::Array[Anthropic::Beta::BetaIterationsUsageItem::Variants]
+            )
+          )
+        end
+        attr_accessor :iterations
+
         # The cumulative number of output tokens which were used.
         sig { returns(Integer) }
         attr_accessor :output_tokens
@@ -47,6 +64,15 @@ module Anthropic
             cache_creation_input_tokens: T.nilable(Integer),
             cache_read_input_tokens: T.nilable(Integer),
             input_tokens: T.nilable(Integer),
+            iterations:
+              T.nilable(
+                T::Array[
+                  T.any(
+                    Anthropic::Beta::BetaMessageIterationUsage::OrHash,
+                    Anthropic::Beta::BetaCompactionIterationUsage::OrHash
+                  )
+                ]
+              ),
             output_tokens: Integer,
             server_tool_use:
               T.nilable(Anthropic::Beta::BetaServerToolUsage::OrHash)
@@ -59,6 +85,15 @@ module Anthropic
           cache_read_input_tokens:,
           # The cumulative number of input tokens which were used.
           input_tokens:,
+          # Per-iteration token usage breakdown.
+          #
+          # Each entry represents one sampling iteration, with its own input/output token
+          # counts and cache statistics. This allows you to:
+          #
+          # - Determine which iterations exceeded long context thresholds (>=200k tokens)
+          # - Calculate the true context window size from the last iteration
+          # - Understand token accumulation across server-side tool use loops
+          iterations:,
           # The cumulative number of output tokens which were used.
           output_tokens:,
           # The number of server tool requests.
@@ -72,6 +107,10 @@ module Anthropic
               cache_creation_input_tokens: T.nilable(Integer),
               cache_read_input_tokens: T.nilable(Integer),
               input_tokens: T.nilable(Integer),
+              iterations:
+                T.nilable(
+                  T::Array[Anthropic::Beta::BetaIterationsUsageItem::Variants]
+                ),
               output_tokens: Integer,
               server_tool_use: T.nilable(Anthropic::Beta::BetaServerToolUsage)
             }

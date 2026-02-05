@@ -24,7 +24,7 @@ module Anthropic
           format_: Anthropic::Beta::BetaJSONOutputFormat?
         }
 
-        type effort = :low | :medium | :high
+        type effort = :low | :medium | :high | :max
 
         module Effort
           extend Anthropic::Internal::Type::Enum
@@ -32,6 +32,7 @@ module Anthropic
           LOW: :low
           MEDIUM: :medium
           HIGH: :high
+          MAX: :max
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaOutputConfig::effort]
         end

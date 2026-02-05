@@ -51,6 +51,16 @@ module Anthropic
         #   @return [String, nil]
         optional :description, String
 
+        # @!attribute eager_input_streaming
+        #   Enable eager input streaming for this tool. When true, tool input parameters
+        #   will be streamed incrementally as they are generated, and types will be inferred
+        #   on-the-fly rather than buffering the full JSON output. When false, streaming is
+        #   disabled for this tool even if the fine-grained-tool-streaming beta is active.
+        #   When null (default), uses the default behavior based on beta headers.
+        #
+        #   @return [Boolean, nil]
+        optional :eager_input_streaming, Anthropic::Internal::Type::Boolean, nil?: true
+
         # @!attribute input_examples
         #
         #   @return [Array<Hash{Symbol=>Object}>, nil]
@@ -68,7 +78,7 @@ module Anthropic
         #   @return [Symbol, Anthropic::Models::Beta::BetaTool::Type, nil]
         optional :type, enum: -> { Anthropic::Beta::BetaTool::Type }, nil?: true
 
-        # @!method initialize(input_schema:, name:, allowed_callers: nil, cache_control: nil, defer_loading: nil, description: nil, input_examples: nil, strict: nil, type: nil)
+        # @!method initialize(input_schema:, name:, allowed_callers: nil, cache_control: nil, defer_loading: nil, description: nil, eager_input_streaming: nil, input_examples: nil, strict: nil, type: nil)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaTool} for more details.
         #
@@ -83,6 +93,8 @@ module Anthropic
         #   @param defer_loading [Boolean] If true, tool will not be included in initial system prompt. Only loaded when re
         #
         #   @param description [String] Description of what this tool does.
+        #
+        #   @param eager_input_streaming [Boolean, nil] Enable eager input streaming for this tool. When true, tool input parameters wil
         #
         #   @param input_examples [Array<Hash{Symbol=>Object}>]
         #

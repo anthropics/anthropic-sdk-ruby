@@ -7,13 +7,15 @@ module Anthropic
         # @!attribute edits
         #   List of context management edits to apply
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaClearToolUses20250919Edit, Anthropic::Models::Beta::BetaClearThinking20251015Edit>, nil]
+        #   @return [Array<Anthropic::Models::Beta::BetaClearToolUses20250919Edit, Anthropic::Models::Beta::BetaClearThinking20251015Edit, Anthropic::Models::Beta::BetaCompact20260112Edit>, nil]
         optional :edits,
                  -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaContextManagementConfig::Edit] }
 
         # @!method initialize(edits: nil)
-        #   @param edits [Array<Anthropic::Models::Beta::BetaClearToolUses20250919Edit, Anthropic::Models::Beta::BetaClearThinking20251015Edit>] List of context management edits to apply
+        #   @param edits [Array<Anthropic::Models::Beta::BetaClearToolUses20250919Edit, Anthropic::Models::Beta::BetaClearThinking20251015Edit, Anthropic::Models::Beta::BetaCompact20260112Edit>] List of context management edits to apply
 
+        # Automatically compact older context when reaching the configured trigger
+        # threshold.
         module Edit
           extend Anthropic::Internal::Type::Union
 
@@ -23,8 +25,11 @@ module Anthropic
 
           variant :clear_thinking_20251015, -> { Anthropic::Beta::BetaClearThinking20251015Edit }
 
+          # Automatically compact older context when reaching the configured trigger threshold.
+          variant :compact_20260112, -> { Anthropic::Beta::BetaCompact20260112Edit }
+
           # @!method self.variants
-          #   @return [Array(Anthropic::Models::Beta::BetaClearToolUses20250919Edit, Anthropic::Models::Beta::BetaClearThinking20251015Edit)]
+          #   @return [Array(Anthropic::Models::Beta::BetaClearToolUses20250919Edit, Anthropic::Models::Beta::BetaClearThinking20251015Edit, Anthropic::Models::Beta::BetaCompact20260112Edit)]
         end
       end
     end

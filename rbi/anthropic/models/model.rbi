@@ -17,6 +17,10 @@ module Anthropic
       TaggedSymbol = T.type_alias { T.all(Symbol, Anthropic::Model) }
       OrSymbol = T.type_alias { T.any(Symbol, String) }
 
+      # Most intelligent model for building agents and coding
+      CLAUDE_OPUS_4_6 =
+        T.let(:"claude-opus-4-6", Anthropic::Model::TaggedSymbol)
+
       # Premium model combining maximum intelligence with practical performance
       CLAUDE_OPUS_4_5_20251101 =
         T.let(:"claude-opus-4-5-20251101", Anthropic::Model::TaggedSymbol)

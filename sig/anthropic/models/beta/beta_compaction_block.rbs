@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    class BetaCompactionBlock = Beta::BetaCompactionBlock
+
+    module Beta
+      type beta_compaction_block = { content: String?, type: :compaction }
+
+      class BetaCompactionBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: String?
+
+        attr_accessor type: :compaction
+
+        def initialize: (content: String?, ?type: :compaction) -> void
+
+        def to_hash: -> { content: String?, type: :compaction }
+      end
+    end
+  end
+end

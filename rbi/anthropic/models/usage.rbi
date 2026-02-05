@@ -23,6 +23,10 @@ module Anthropic
       sig { returns(T.nilable(Integer)) }
       attr_accessor :cache_read_input_tokens
 
+      # The geographic region where inference was performed for this request.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :inference_geo
+
       # The number of input tokens which were used.
       sig { returns(Integer) }
       attr_accessor :input_tokens
@@ -51,6 +55,7 @@ module Anthropic
           cache_creation: T.nilable(Anthropic::CacheCreation::OrHash),
           cache_creation_input_tokens: T.nilable(Integer),
           cache_read_input_tokens: T.nilable(Integer),
+          inference_geo: T.nilable(String),
           input_tokens: Integer,
           output_tokens: Integer,
           server_tool_use: T.nilable(Anthropic::ServerToolUsage::OrHash),
@@ -64,6 +69,8 @@ module Anthropic
         cache_creation_input_tokens:,
         # The number of input tokens read from the cache.
         cache_read_input_tokens:,
+        # The geographic region where inference was performed for this request.
+        inference_geo:,
         # The number of input tokens which were used.
         input_tokens:,
         # The number of output tokens which were used.
@@ -81,6 +88,7 @@ module Anthropic
             cache_creation: T.nilable(Anthropic::CacheCreation),
             cache_creation_input_tokens: T.nilable(Integer),
             cache_read_input_tokens: T.nilable(Integer),
+            inference_geo: T.nilable(String),
             input_tokens: Integer,
             output_tokens: Integer,
             server_tool_use: T.nilable(Anthropic::ServerToolUsage),
