@@ -6,7 +6,7 @@ Full Changelog: [v1.17.0...v1.18.0](https://github.com/anthropics/anthropic-sdk-
 
 ### Features
 
-* **api:** manual updates ([53027e2](https://github.com/anthropics/anthropic-sdk-ruby/commit/53027e2d56db596ca8a42558d848ebd22075a854))
+* **api:** Release Claude Opus 4.6, adaptive thinking, and other features ([53027e2](https://github.com/anthropics/anthropic-sdk-ruby/commit/53027e2d56db596ca8a42558d848ebd22075a854))
 
 
 ### Bug Fixes
