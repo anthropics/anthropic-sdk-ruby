@@ -1,3 +1,7 @@
+## Contributing to documentation
+
+The documentation for this SDK lives at [docs.anthropic.com/en/api/sdks/ruby](https://docs.anthropic.com/en/api/sdks/ruby). To suggest changes, hover over any paragraph on the docs site and click the pencil icon that appears to the right. You can then collaborate with Claude on an edit that we'll review and publish.
+
 ## Setting up the environment
 
 This repository contains a `.ruby-version` file, which should work with either [rbenv](https://github.com/rbenv/rbenv) or [asdf](https://github.com/asdf-vm/asdf) with the [ruby plugin](https://github.com/asdf-vm/asdf-ruby).
