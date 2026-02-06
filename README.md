@@ -29,7 +29,7 @@ anthropic = Anthropic::Client.new(
 message = anthropic.messages.create(
   max_tokens: 1024,
   messages: [{role: "user", content: "Hello, Claude"}],
-  model: "claude-sonnet-4-5-20250929"
+  model: :"claude-opus-4-6"
 )
 
 puts(message.content)
