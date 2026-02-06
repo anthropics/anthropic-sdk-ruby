@@ -2,7 +2,7 @@
 
 [![Gem Version](https://img.shields.io/gem/v/anthropic.svg)](https://rubygems.org/gems/anthropic)
 
-The Anthropic Ruby library provides access to the [Anthropic API](https://docs.anthropic.com/en/api/) from Ruby applications.
+The Anthropic Ruby library provides access to the [Claude API](https://docs.anthropic.com/en/api/) from Ruby applications.
 
 ## Documentation
 
