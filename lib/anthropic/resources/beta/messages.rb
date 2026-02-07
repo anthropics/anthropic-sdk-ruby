@@ -32,7 +32,7 @@ module Anthropic
         # Learn more about the Messages API in our
         # [user guide](https://docs.claude.com/en/docs/initial-setup)
         #
-        # @overload create(max_tokens:, messages:, model:, container: nil, context_management: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
+        # @overload create(max_tokens:, messages:, model:, container: nil, context_management: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -55,6 +55,8 @@ module Anthropic
         # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param: Deprecated: Use `output_config.format` instead. See [structured outp
         #
         # @param service_tier [Symbol, Anthropic::Models::Beta::MessageCreateParams::ServiceTier] Body param: Determines whether to use priority capacity (if available) or standa
+        #
+        # @param speed [Symbol, Anthropic::Models::Beta::MessageCreateParams::Speed, nil] Body param: The inference speed mode for this request. `"fast"` enables high out
         #
         # @param stop_sequences [Array<String>] Body param: Custom text sequences that will cause the model to stop generating.
         #
@@ -134,7 +136,7 @@ module Anthropic
         # Learn more about the Messages API in our
         # [user guide](https://docs.claude.com/en/docs/initial-setup)
         #
-        # @overload stream_raw(max_tokens:, messages:, model:, container: nil, context_management: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
+        # @overload stream_raw(max_tokens:, messages:, model:, container: nil, context_management: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -157,6 +159,8 @@ module Anthropic
         # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param: Deprecated: Use `output_config.format` instead. See [structured outp
         #
         # @param service_tier [Symbol, Anthropic::Models::Beta::MessageCreateParams::ServiceTier] Body param: Determines whether to use priority capacity (if available) or standa
+        #
+        # @param speed [Symbol, Anthropic::Models::Beta::MessageCreateParams::Speed, nil] Body param: The inference speed mode for this request. `"fast"` enables high out
         #
         # @param stop_sequences [Array<String>] Body param: Custom text sequences that will cause the model to stop generating.
         #
@@ -303,7 +307,7 @@ module Anthropic
         # Learn more about token counting in our
         # [user guide](https://docs.claude.com/en/docs/build-with-claude/token-counting)
         #
-        # @overload count_tokens(messages:, model:, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, request_options: {})
+        # @overload count_tokens(messages:, model:, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, request_options: {})
         #
         # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Body param: Input messages.
         #
@@ -316,6 +320,8 @@ module Anthropic
         # @param output_config [Anthropic::Models::Beta::BetaOutputConfig] Body param: Configuration options for the model's output, such as the output for
         #
         # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param: Deprecated: Use `output_config.format` instead. See [structured outp
+        #
+        # @param speed [Symbol, Anthropic::Models::Beta::MessageCountTokensParams::Speed, nil] Body param: The inference speed mode for this request. `"fast"` enables high out
         #
         # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] Body param: System prompt.
         #

@@ -67,6 +67,7 @@ module Anthropic
                 output_config: Anthropic::Beta::BetaOutputConfig,
                 output_format: Anthropic::Beta::BetaJSONOutputFormat?,
                 service_tier: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier,
+                speed: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::speed?,
                 stop_sequences: ::Array[String],
                 stream: bool,
                 system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
@@ -116,6 +117,8 @@ module Anthropic
               def service_tier=: (
                 Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier
               ) -> Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier
+
+              attr_accessor speed: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::speed?
 
               attr_reader stop_sequences: ::Array[String]?
 
@@ -173,6 +176,7 @@ module Anthropic
                 ?output_config: Anthropic::Beta::BetaOutputConfig,
                 ?output_format: Anthropic::Beta::BetaJSONOutputFormat?,
                 ?service_tier: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier,
+                ?speed: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::speed?,
                 ?stop_sequences: ::Array[String],
                 ?stream: bool,
                 ?system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
@@ -196,6 +200,7 @@ module Anthropic
                 output_config: Anthropic::Beta::BetaOutputConfig,
                 output_format: Anthropic::Beta::BetaJSONOutputFormat?,
                 service_tier: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier,
+                speed: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::speed?,
                 stop_sequences: ::Array[String],
                 stream: bool,
                 system_: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::system_,
@@ -224,6 +229,17 @@ module Anthropic
                 STANDARD_ONLY: :standard_only
 
                 def self?.values: -> ::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::service_tier]
+              end
+
+              type speed = :standard | :fast
+
+              module Speed
+                extend Anthropic::Internal::Type::Enum
+
+                STANDARD: :standard
+                FAST: :fast
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::speed]
               end
 
               type system_ =

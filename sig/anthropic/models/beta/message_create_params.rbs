@@ -14,6 +14,7 @@ module Anthropic
           output_config: Anthropic::Beta::BetaOutputConfig,
           output_format: Anthropic::Beta::BetaJSONOutputFormat?,
           service_tier: Anthropic::Models::Beta::MessageCreateParams::service_tier,
+          speed: Anthropic::Models::Beta::MessageCreateParams::speed?,
           stop_sequences: ::Array[String],
           system_: Anthropic::Models::Beta::MessageCreateParams::system_,
           temperature: Float,
@@ -67,6 +68,8 @@ module Anthropic
         def service_tier=: (
           Anthropic::Models::Beta::MessageCreateParams::service_tier
         ) -> Anthropic::Models::Beta::MessageCreateParams::service_tier
+
+        attr_accessor speed: Anthropic::Models::Beta::MessageCreateParams::speed?
 
         attr_reader stop_sequences: ::Array[String]?
 
@@ -126,6 +129,7 @@ module Anthropic
           ?output_config: Anthropic::Beta::BetaOutputConfig,
           ?output_format: Anthropic::Beta::BetaJSONOutputFormat?,
           ?service_tier: Anthropic::Models::Beta::MessageCreateParams::service_tier,
+          ?speed: Anthropic::Models::Beta::MessageCreateParams::speed?,
           ?stop_sequences: ::Array[String],
           ?system_: Anthropic::Models::Beta::MessageCreateParams::system_,
           ?temperature: Float,
@@ -150,6 +154,7 @@ module Anthropic
           output_config: Anthropic::Beta::BetaOutputConfig,
           output_format: Anthropic::Beta::BetaJSONOutputFormat?,
           service_tier: Anthropic::Models::Beta::MessageCreateParams::service_tier,
+          speed: Anthropic::Models::Beta::MessageCreateParams::speed?,
           stop_sequences: ::Array[String],
           system_: Anthropic::Models::Beta::MessageCreateParams::system_,
           temperature: Float,
@@ -179,6 +184,17 @@ module Anthropic
           STANDARD_ONLY: :standard_only
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::MessageCreateParams::service_tier]
+        end
+
+        type speed = :standard | :fast
+
+        module Speed
+          extend Anthropic::Internal::Type::Enum
+
+          STANDARD: :standard
+          FAST: :fast
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::MessageCreateParams::speed]
         end
 
         type system_ = String | ::Array[Anthropic::Beta::BetaTextBlockParam]

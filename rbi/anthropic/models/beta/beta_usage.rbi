@@ -80,6 +80,12 @@ module Anthropic
         end
         attr_accessor :service_tier
 
+        # The inference speed mode used for this request.
+        sig do
+          returns(T.nilable(Anthropic::Beta::BetaUsage::Speed::TaggedSymbol))
+        end
+        attr_accessor :speed
+
         sig do
           params(
             cache_creation:
@@ -101,7 +107,8 @@ module Anthropic
             server_tool_use:
               T.nilable(Anthropic::Beta::BetaServerToolUsage::OrHash),
             service_tier:
-              T.nilable(Anthropic::Beta::BetaUsage::ServiceTier::OrSymbol)
+              T.nilable(Anthropic::Beta::BetaUsage::ServiceTier::OrSymbol),
+            speed: T.nilable(Anthropic::Beta::BetaUsage::Speed::OrSymbol)
           ).returns(T.attached_class)
         end
         def self.new(
@@ -129,7 +136,9 @@ module Anthropic
           # The number of server tool requests.
           server_tool_use:,
           # If the request used the priority, standard, or batch tier.
-          service_tier:
+          service_tier:,
+          # The inference speed mode used for this request.
+          speed:
         )
         end
 
@@ -148,7 +157,10 @@ module Anthropic
               output_tokens: Integer,
               server_tool_use: T.nilable(Anthropic::Beta::BetaServerToolUsage),
               service_tier:
-                T.nilable(Anthropic::Beta::BetaUsage::ServiceTier::TaggedSymbol)
+                T.nilable(
+                  Anthropic::Beta::BetaUsage::ServiceTier::TaggedSymbol
+                ),
+              speed: T.nilable(Anthropic::Beta::BetaUsage::Speed::TaggedSymbol)
             }
           )
         end
@@ -181,6 +193,27 @@ module Anthropic
           sig do
             override.returns(
               T::Array[Anthropic::Beta::BetaUsage::ServiceTier::TaggedSymbol]
+            )
+          end
+          def self.values
+          end
+        end
+
+        # The inference speed mode used for this request.
+        module Speed
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias { T.all(Symbol, Anthropic::Beta::BetaUsage::Speed) }
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          STANDARD =
+            T.let(:standard, Anthropic::Beta::BetaUsage::Speed::TaggedSymbol)
+          FAST = T.let(:fast, Anthropic::Beta::BetaUsage::Speed::TaggedSymbol)
+
+          sig do
+            override.returns(
+              T::Array[Anthropic::Beta::BetaUsage::Speed::TaggedSymbol]
             )
           end
           def self.values
