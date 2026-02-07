@@ -89,6 +89,8 @@ module Anthropic
         )
       SKILLS_2025_10_02 =
         T.let(:"skills-2025-10-02", Anthropic::AnthropicBeta::TaggedSymbol)
+      FAST_MODE_2026_02_01 =
+        T.let(:"fast-mode-2026-02-01", Anthropic::AnthropicBeta::TaggedSymbol)
     end
   end
 end

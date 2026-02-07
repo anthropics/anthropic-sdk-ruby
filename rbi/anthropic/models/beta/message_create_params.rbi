@@ -201,6 +201,15 @@ module Anthropic
         end
         attr_writer :service_tier
 
+        # The inference speed mode for this request. `"fast"` enables high
+        # output-tokens-per-second inference.
+        sig do
+          returns(
+            T.nilable(Anthropic::Beta::MessageCreateParams::Speed::OrSymbol)
+          )
+        end
+        attr_accessor :speed
+
         # Custom text sequences that will cause the model to stop generating.
         #
         # Our models will normally stop when they have naturally completed their turn,
@@ -513,6 +522,8 @@ module Anthropic
               T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash),
             service_tier:
               Anthropic::Beta::MessageCreateParams::ServiceTier::OrSymbol,
+            speed:
+              T.nilable(Anthropic::Beta::MessageCreateParams::Speed::OrSymbol),
             stop_sequences: T::Array[String],
             system_: Anthropic::Beta::MessageCreateParams::System::Variants,
             temperature: Float,
@@ -665,6 +676,9 @@ module Anthropic
           # Anthropic offers different levels of service for your API requests. See
           # [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
           service_tier: nil,
+          # The inference speed mode for this request. `"fast"` enables high
+          # output-tokens-per-second inference.
+          speed: nil,
           # Custom text sequences that will cause the model to stop generating.
           #
           # Our models will normally stop when they have naturally completed their turn,
@@ -821,6 +835,10 @@ module Anthropic
               output_format: T.nilable(Anthropic::Beta::BetaJSONOutputFormat),
               service_tier:
                 Anthropic::Beta::MessageCreateParams::ServiceTier::OrSymbol,
+              speed:
+                T.nilable(
+                  Anthropic::Beta::MessageCreateParams::Speed::OrSymbol
+                ),
               stop_sequences: T::Array[String],
               system_: Anthropic::Beta::MessageCreateParams::System::Variants,
               temperature: Float,
@@ -918,6 +936,39 @@ module Anthropic
             override.returns(
               T::Array[
                 Anthropic::Beta::MessageCreateParams::ServiceTier::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
+        # The inference speed mode for this request. `"fast"` enables high
+        # output-tokens-per-second inference.
+        module Speed
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::Beta::MessageCreateParams::Speed)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          STANDARD =
+            T.let(
+              :standard,
+              Anthropic::Beta::MessageCreateParams::Speed::TaggedSymbol
+            )
+          FAST =
+            T.let(
+              :fast,
+              Anthropic::Beta::MessageCreateParams::Speed::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::MessageCreateParams::Speed::TaggedSymbol
               ]
             )
           end

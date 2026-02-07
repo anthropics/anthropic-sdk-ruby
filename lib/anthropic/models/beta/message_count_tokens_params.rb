@@ -120,6 +120,13 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaJSONOutputFormat, nil]
         optional :output_format, -> { Anthropic::Beta::BetaJSONOutputFormat }, nil?: true
 
+        # @!attribute speed
+        #   The inference speed mode for this request. `"fast"` enables high
+        #   output-tokens-per-second inference.
+        #
+        #   @return [Symbol, Anthropic::Models::Beta::MessageCountTokensParams::Speed, nil]
+        optional :speed, enum: -> { Anthropic::Beta::MessageCountTokensParams::Speed }, nil?: true
+
         # @!attribute system_
         #   System prompt.
         #
@@ -238,7 +245,7 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(messages:, model:, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, request_options: {})
+        # @!method initialize(messages:, model:, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::MessageCountTokensParams} for more details.
         #
@@ -254,6 +261,8 @@ module Anthropic
         #
         #   @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Deprecated: Use `output_config.format` instead. See [structured outputs](https:/
         #
+        #   @param speed [Symbol, Anthropic::Models::Beta::MessageCountTokensParams::Speed, nil] The inference speed mode for this request. `"fast"` enables high output-tokens-p
+        #
         #   @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] System prompt.
         #
         #   @param thinking [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive] Configuration for enabling Claude's extended thinking.
@@ -265,6 +274,18 @@ module Anthropic
         #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
+
+        # The inference speed mode for this request. `"fast"` enables high
+        # output-tokens-per-second inference.
+        module Speed
+          extend Anthropic::Internal::Type::Enum
+
+          STANDARD = :standard
+          FAST = :fast
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
 
         # System prompt.
         #
