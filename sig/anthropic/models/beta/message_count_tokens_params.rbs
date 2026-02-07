@@ -9,6 +9,7 @@ module Anthropic
           mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           output_config: Anthropic::Beta::BetaOutputConfig,
           output_format: Anthropic::Beta::BetaJSONOutputFormat?,
+          speed: Anthropic::Models::Beta::MessageCountTokensParams::speed?,
           system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           tool_choice: Anthropic::Models::Beta::beta_tool_choice,
@@ -40,6 +41,8 @@ module Anthropic
         ) -> Anthropic::Beta::BetaOutputConfig
 
         attr_accessor output_format: Anthropic::Beta::BetaJSONOutputFormat?
+
+        attr_accessor speed: Anthropic::Models::Beta::MessageCountTokensParams::speed?
 
         attr_reader system_: Anthropic::Models::Beta::MessageCountTokensParams::system_?
 
@@ -78,6 +81,7 @@ module Anthropic
           ?mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           ?output_config: Anthropic::Beta::BetaOutputConfig,
           ?output_format: Anthropic::Beta::BetaJSONOutputFormat?,
+          ?speed: Anthropic::Models::Beta::MessageCountTokensParams::speed?,
           ?system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           ?thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
@@ -93,6 +97,7 @@ module Anthropic
           mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           output_config: Anthropic::Beta::BetaOutputConfig,
           output_format: Anthropic::Beta::BetaJSONOutputFormat?,
+          speed: Anthropic::Models::Beta::MessageCountTokensParams::speed?,
           system_: Anthropic::Models::Beta::MessageCountTokensParams::system_,
           thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           tool_choice: Anthropic::Models::Beta::beta_tool_choice,
@@ -100,6 +105,17 @@ module Anthropic
           betas: ::Array[Anthropic::Models::anthropic_beta],
           request_options: Anthropic::RequestOptions
         }
+
+        type speed = :standard | :fast
+
+        module Speed
+          extend Anthropic::Internal::Type::Enum
+
+          STANDARD: :standard
+          FAST: :fast
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::MessageCountTokensParams::speed]
+        end
 
         type system_ = String | ::Array[Anthropic::Beta::BetaTextBlockParam]
 

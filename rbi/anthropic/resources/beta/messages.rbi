@@ -337,6 +337,8 @@ module Anthropic
               T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash),
             service_tier:
               Anthropic::Beta::MessageCreateParams::ServiceTier::OrSymbol,
+            speed:
+              T.nilable(Anthropic::Beta::MessageCreateParams::Speed::OrSymbol),
             stop_sequences: T::Array[String],
             system_: Anthropic::Beta::MessageCreateParams::System::Variants,
             temperature: Float,
@@ -491,6 +493,9 @@ module Anthropic
           # Anthropic offers different levels of service for your API requests. See
           # [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
           service_tier: nil,
+          # Body param: The inference speed mode for this request. `"fast"` enables high
+          # output-tokens-per-second inference.
+          speed: nil,
           # Body param: Custom text sequences that will cause the model to stop generating.
           #
           # Our models will normally stop when they have naturally completed their turn,
@@ -664,6 +669,8 @@ module Anthropic
               T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash),
             service_tier:
               Anthropic::Beta::MessageCreateParams::ServiceTier::OrSymbol,
+            speed:
+              T.nilable(Anthropic::Beta::MessageCreateParams::Speed::OrSymbol),
             stop_sequences: T::Array[String],
             system_: Anthropic::Beta::MessageCreateParams::System::Variants,
             temperature: Float,
@@ -822,6 +829,9 @@ module Anthropic
           # Anthropic offers different levels of service for your API requests. See
           # [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
           service_tier: nil,
+          # Body param: The inference speed mode for this request. `"fast"` enables high
+          # output-tokens-per-second inference.
+          speed: nil,
           # Body param: Custom text sequences that will cause the model to stop generating.
           #
           # Our models will normally stop when they have naturally completed their turn,
@@ -983,6 +993,10 @@ module Anthropic
             output_config: Anthropic::Beta::BetaOutputConfig::OrHash,
             output_format:
               T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash),
+            speed:
+              T.nilable(
+                Anthropic::Beta::MessageCountTokensParams::Speed::OrSymbol
+              ),
             system_:
               Anthropic::Beta::MessageCountTokensParams::System::Variants,
             thinking:
@@ -1112,6 +1126,9 @@ module Anthropic
           # A schema to specify Claude's output format in responses. This parameter will be
           # removed in a future release.
           output_format: nil,
+          # Body param: The inference speed mode for this request. `"fast"` enables high
+          # output-tokens-per-second inference.
+          speed: nil,
           # Body param: System prompt.
           #
           # A system prompt is a way of providing context and instructions to Claude, such

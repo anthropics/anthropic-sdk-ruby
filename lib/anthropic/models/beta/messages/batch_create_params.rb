@@ -219,6 +219,15 @@ module Anthropic
               optional :service_tier,
                        enum: -> { Anthropic::Beta::Messages::BatchCreateParams::Request::Params::ServiceTier }
 
+              # @!attribute speed
+              #   The inference speed mode for this request. `"fast"` enables high
+              #   output-tokens-per-second inference.
+              #
+              #   @return [Symbol, Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::Speed, nil]
+              optional :speed,
+                       enum: -> { Anthropic::Beta::Messages::BatchCreateParams::Request::Params::Speed },
+                       nil?: true
+
               # @!attribute stop_sequences
               #   Custom text sequences that will cause the model to stop generating.
               #
@@ -393,7 +402,7 @@ module Anthropic
               #   @return [Float, nil]
               optional :top_p, Float
 
-              # @!method initialize(max_tokens:, messages:, model:, container: nil, context_management: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
+              # @!method initialize(max_tokens:, messages:, model:, container: nil, context_management: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
               #   Some parameter documentations has been truncated, see
               #   {Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params} for more
               #   details.
@@ -424,6 +433,8 @@ module Anthropic
               #   @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Deprecated: Use `output_config.format` instead. See [structured outputs](https:/
               #
               #   @param service_tier [Symbol, Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
+              #
+              #   @param speed [Symbol, Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::Speed, nil] The inference speed mode for this request. `"fast"` enables high output-tokens-p
               #
               #   @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
               #
@@ -470,6 +481,20 @@ module Anthropic
 
                 AUTO = :auto
                 STANDARD_ONLY = :standard_only
+
+                # @!method self.values
+                #   @return [Array<Symbol>]
+              end
+
+              # The inference speed mode for this request. `"fast"` enables high
+              # output-tokens-per-second inference.
+              #
+              # @see Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params#speed
+              module Speed
+                extend Anthropic::Internal::Type::Enum
+
+                STANDARD = :standard
+                FAST = :fast
 
                 # @!method self.values
                 #   @return [Array<Symbol>]

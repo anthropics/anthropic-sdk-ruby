@@ -13,7 +13,8 @@ module Anthropic
           iterations: Anthropic::Models::Beta::beta_iterations_usage?,
           output_tokens: Integer,
           server_tool_use: Anthropic::Beta::BetaServerToolUsage?,
-          service_tier: Anthropic::Models::Beta::BetaUsage::service_tier?
+          service_tier: Anthropic::Models::Beta::BetaUsage::service_tier?,
+          speed: Anthropic::Models::Beta::BetaUsage::speed?
         }
 
       class BetaUsage < Anthropic::Internal::Type::BaseModel
@@ -35,6 +36,8 @@ module Anthropic
 
         attr_accessor service_tier: Anthropic::Models::Beta::BetaUsage::service_tier?
 
+        attr_accessor speed: Anthropic::Models::Beta::BetaUsage::speed?
+
         def initialize: (
           cache_creation: Anthropic::Beta::BetaCacheCreation?,
           cache_creation_input_tokens: Integer?,
@@ -44,7 +47,8 @@ module Anthropic
           iterations: Anthropic::Models::Beta::beta_iterations_usage?,
           output_tokens: Integer,
           server_tool_use: Anthropic::Beta::BetaServerToolUsage?,
-          service_tier: Anthropic::Models::Beta::BetaUsage::service_tier?
+          service_tier: Anthropic::Models::Beta::BetaUsage::service_tier?,
+          speed: Anthropic::Models::Beta::BetaUsage::speed?
         ) -> void
 
         def to_hash: -> {
@@ -56,7 +60,8 @@ module Anthropic
           iterations: Anthropic::Models::Beta::beta_iterations_usage?,
           output_tokens: Integer,
           server_tool_use: Anthropic::Beta::BetaServerToolUsage?,
-          service_tier: Anthropic::Models::Beta::BetaUsage::service_tier?
+          service_tier: Anthropic::Models::Beta::BetaUsage::service_tier?,
+          speed: Anthropic::Models::Beta::BetaUsage::speed?
         }
 
         type service_tier = :standard | :priority | :batch
@@ -69,6 +74,17 @@ module Anthropic
           BATCH: :batch
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaUsage::service_tier]
+        end
+
+        type speed = :standard | :fast
+
+        module Speed
+          extend Anthropic::Internal::Type::Enum
+
+          STANDARD: :standard
+          FAST: :fast
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaUsage::speed]
         end
       end
     end
