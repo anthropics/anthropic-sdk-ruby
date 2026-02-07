@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.18.1 (2026-02-07)
+
+Full Changelog: [v1.18.0...v1.18.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.18.0...v1.18.1)
+
+### Bug Fixes
+
+* **client:** loosen json header parsing ([8597448](https://github.com/anthropics/anthropic-sdk-ruby/commit/8597448c96556a98d0c07ae78c3867dbc3b356ed))
+
 ## 1.18.0 (2026-02-05)
 
 Full Changelog: [v1.17.0...v1.18.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.17.0...v1.18.0)
