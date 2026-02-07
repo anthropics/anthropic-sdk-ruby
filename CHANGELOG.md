@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.19.0 (2026-02-07)
+
+Full Changelog: [v1.18.1...v1.19.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.18.1...v1.19.0)
+
+### Features
+
+* **api:** enabling fast-mode in claude-opus-4-6 ([c86a64f](https://github.com/anthropics/anthropic-sdk-ruby/commit/c86a64f3125256dcb0acf68512654803f2505b52))
+
 ## 1.18.1 (2026-02-07)
 
 Full Changelog: [v1.18.0...v1.18.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.18.0...v1.18.1)
