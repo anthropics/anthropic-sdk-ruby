@@ -134,13 +134,6 @@ module Anthropic
       #   @return [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier, nil]
       optional :service_tier, enum: -> { Anthropic::MessageCreateParams::ServiceTier }
 
-      # @!attribute speed
-      #   The inference speed mode for this request. `"fast"` enables high
-      #   output-tokens-per-second inference.
-      #
-      #   @return [Symbol, Anthropic::Models::MessageCreateParams::Speed, nil]
-      optional :speed, enum: -> { Anthropic::MessageCreateParams::Speed }, nil?: true
-
       # @!attribute stop_sequences
       #   Custom text sequences that will cause the model to stop generating.
       #
@@ -305,7 +298,7 @@ module Anthropic
       #   @return [Float, nil]
       optional :top_p, Float
 
-      # @!method initialize(max_tokens:, messages:, model:, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      # @!method initialize(max_tokens:, messages:, model:, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::MessageCreateParams} for more details.
       #
@@ -324,8 +317,6 @@ module Anthropic
       #   @param output_config [Anthropic::Models::OutputConfig] Configuration options for the model's output, such as the output format.
       #
       #   @param service_tier [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
-      #
-      #   @param speed [Symbol, Anthropic::Models::MessageCreateParams::Speed, nil] The inference speed mode for this request. `"fast"` enables high output-tokens-p
       #
       #   @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
       #
@@ -355,18 +346,6 @@ module Anthropic
 
         AUTO = :auto
         STANDARD_ONLY = :standard_only
-
-        # @!method self.values
-        #   @return [Array<Symbol>]
-      end
-
-      # The inference speed mode for this request. `"fast"` enables high
-      # output-tokens-per-second inference.
-      module Speed
-        extend Anthropic::Internal::Type::Enum
-
-        STANDARD = :standard
-        FAST = :fast
 
         # @!method self.values
         #   @return [Array<Symbol>]
