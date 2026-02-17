@@ -95,13 +95,6 @@ module Anthropic
       sig { params(output_config: Anthropic::OutputConfig::OrHash).void }
       attr_writer :output_config
 
-      # The inference speed mode for this request. `"fast"` enables high
-      # output-tokens-per-second inference.
-      sig do
-        returns(T.nilable(Anthropic::MessageCountTokensParams::Speed::OrSymbol))
-      end
-      attr_accessor :speed
-
       # System prompt.
       #
       # A system prompt is a way of providing context and instructions to Claude, such
@@ -317,8 +310,6 @@ module Anthropic
           messages: T::Array[Anthropic::MessageParam::OrHash],
           model: T.any(Anthropic::Model::OrSymbol, String),
           output_config: Anthropic::OutputConfig::OrHash,
-          speed:
-            T.nilable(Anthropic::MessageCountTokensParams::Speed::OrSymbol),
           system_: Anthropic::MessageCountTokensParams::System::Variants,
           thinking:
             T.any(
@@ -429,9 +420,6 @@ module Anthropic
         model:,
         # Configuration options for the model's output, such as the output format.
         output_config: nil,
-        # The inference speed mode for this request. `"fast"` enables high
-        # output-tokens-per-second inference.
-        speed: nil,
         # System prompt.
         #
         # A system prompt is a way of providing context and instructions to Claude, such
@@ -537,8 +525,6 @@ module Anthropic
             messages: T::Array[Anthropic::MessageParam],
             model: T.any(Anthropic::Model::OrSymbol, String),
             output_config: Anthropic::OutputConfig,
-            speed:
-              T.nilable(Anthropic::MessageCountTokensParams::Speed::OrSymbol),
             system_: Anthropic::MessageCountTokensParams::System::Variants,
             thinking:
               T.any(
@@ -578,34 +564,6 @@ module Anthropic
         )
       end
       def to_hash
-      end
-
-      # The inference speed mode for this request. `"fast"` enables high
-      # output-tokens-per-second inference.
-      module Speed
-        extend Anthropic::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, Anthropic::MessageCountTokensParams::Speed)
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        STANDARD =
-          T.let(
-            :standard,
-            Anthropic::MessageCountTokensParams::Speed::TaggedSymbol
-          )
-        FAST =
-          T.let(:fast, Anthropic::MessageCountTokensParams::Speed::TaggedSymbol)
-
-        sig do
-          override.returns(
-            T::Array[Anthropic::MessageCountTokensParams::Speed::TaggedSymbol]
-          )
-        end
-        def self.values
-        end
       end
 
       # System prompt.
