@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.20.0 (2026-02-17)
+
+Full Changelog: [v1.19.0...v1.20.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.19.0...v1.20.0)
+
+### Features
+
+* **api:** Releasing claude-sonnet-4-6 ([389bc47](https://github.com/anthropics/anthropic-sdk-ruby/commit/389bc4755468998ffed4841c9e1a054957224152))
+
+
+### Bug Fixes
+
+* **api:** fix spec errors ([85567d3](https://github.com/anthropics/anthropic-sdk-ruby/commit/85567d31b7520311f6607a7a0af682c513ad32e1))
+
 ## 1.19.0 (2026-02-07)
 
 Full Changelog: [v1.18.1...v1.19.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.18.1...v1.19.0)
