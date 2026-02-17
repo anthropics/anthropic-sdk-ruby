@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    type container = { id: String, expires_at: Time }
+
+    class Container < Anthropic::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor expires_at: Time
+
+      def initialize: (id: String, expires_at: Time) -> void
+
+      def to_hash: -> { id: String, expires_at: Time }
+    end
+  end
+end

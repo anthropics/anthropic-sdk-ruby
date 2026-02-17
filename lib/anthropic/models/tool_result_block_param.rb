@@ -21,7 +21,7 @@ module Anthropic
 
       # @!attribute content
       #
-      #   @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::DocumentBlockParam>, nil]
+      #   @return [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ToolReferenceBlockParam>, nil]
       optional :content, union: -> { Anthropic::ToolResultBlockParam::Content }
 
       # @!attribute is_error
@@ -34,7 +34,7 @@ module Anthropic
       #
       #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
       #
-      #   @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::DocumentBlockParam>]
+      #   @param content [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ToolReferenceBlockParam>]
       #
       #   @param is_error [Boolean]
       #
@@ -48,6 +48,7 @@ module Anthropic
 
         variant -> { Anthropic::Models::ToolResultBlockParam::Content::ContentArray }
 
+        # Tool reference block that can be included in tool_result content.
         module Content
           extend Anthropic::Internal::Type::Union
 
@@ -61,12 +62,15 @@ module Anthropic
 
           variant :document, -> { Anthropic::DocumentBlockParam }
 
+          # Tool reference block that can be included in tool_result content.
+          variant :tool_reference, -> { Anthropic::ToolReferenceBlockParam }
+
           # @!method self.variants
-          #   @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::DocumentBlockParam)]
+          #   @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ToolReferenceBlockParam)]
         end
 
         # @!method self.variants
-        #   @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::DocumentBlockParam>)]
+        #   @return [Array(String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ToolReferenceBlockParam>)]
 
         # @type [Anthropic::Internal::Type::Converter]
         ContentArray =

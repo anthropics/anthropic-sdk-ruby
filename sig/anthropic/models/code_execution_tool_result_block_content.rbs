@@ -1,0 +1,14 @@
+module Anthropic
+  module Models
+    type code_execution_tool_result_block_content =
+      Anthropic::CodeExecutionToolResultError
+      | Anthropic::CodeExecutionResultBlock
+      | Anthropic::EncryptedCodeExecutionResultBlock
+
+    module CodeExecutionToolResultBlockContent
+      extend Anthropic::Internal::Type::Union
+
+      def self?.variants: -> ::Array[Anthropic::Models::code_execution_tool_result_block_content]
+    end
+  end
+end

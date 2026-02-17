@@ -1,0 +1,45 @@
+module Anthropic
+  module Models
+    type tool_search_tool_result_block_param =
+      {
+        content: Anthropic::Models::ToolSearchToolResultBlockParam::content,
+        tool_use_id: String,
+        type: :tool_search_tool_result,
+        cache_control: Anthropic::CacheControlEphemeral?
+      }
+
+    class ToolSearchToolResultBlockParam < Anthropic::Internal::Type::BaseModel
+      attr_accessor content: Anthropic::Models::ToolSearchToolResultBlockParam::content
+
+      attr_accessor tool_use_id: String
+
+      attr_accessor type: :tool_search_tool_result
+
+      attr_accessor cache_control: Anthropic::CacheControlEphemeral?
+
+      def initialize: (
+        content: Anthropic::Models::ToolSearchToolResultBlockParam::content,
+        tool_use_id: String,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
+        ?type: :tool_search_tool_result
+      ) -> void
+
+      def to_hash: -> {
+        content: Anthropic::Models::ToolSearchToolResultBlockParam::content,
+        tool_use_id: String,
+        type: :tool_search_tool_result,
+        cache_control: Anthropic::CacheControlEphemeral?
+      }
+
+      type content =
+        Anthropic::ToolSearchToolResultErrorParam
+        | Anthropic::ToolSearchToolSearchResultBlockParam
+
+      module Content
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::ToolSearchToolResultBlockParam::content]
+      end
+    end
+  end
+end

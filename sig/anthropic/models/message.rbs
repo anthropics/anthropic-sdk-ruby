@@ -3,6 +3,7 @@ module Anthropic
     type message =
       {
         id: String,
+        container: Anthropic::Container?,
         content: ::Array[Anthropic::Models::content_block],
         model: Anthropic::Models::model,
         role: :assistant,
@@ -14,6 +15,8 @@ module Anthropic
 
     class Message < Anthropic::Internal::Type::BaseModel
       attr_accessor id: String
+
+      attr_accessor container: Anthropic::Container?
 
       attr_accessor content: ::Array[Anthropic::Models::content_block]
 
@@ -31,6 +34,7 @@ module Anthropic
 
       def initialize: (
         id: String,
+        container: Anthropic::Container?,
         content: ::Array[Anthropic::Models::content_block],
         model: Anthropic::Models::model,
         stop_reason: Anthropic::Models::stop_reason?,
@@ -42,6 +46,7 @@ module Anthropic
 
       def to_hash: -> {
         id: String,
+        container: Anthropic::Container?,
         content: ::Array[Anthropic::Models::content_block],
         model: Anthropic::Models::model,
         role: :assistant,

@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    type text_editor_code_execution_tool_result_error_code =
+      :invalid_tool_input
+      | :unavailable
+      | :too_many_requests
+      | :execution_time_exceeded
+      | :file_not_found
+
+    module TextEditorCodeExecutionToolResultErrorCode
+      extend Anthropic::Internal::Type::Enum
+
+      INVALID_TOOL_INPUT: :invalid_tool_input
+      UNAVAILABLE: :unavailable
+      TOO_MANY_REQUESTS: :too_many_requests
+      EXECUTION_TIME_EXCEEDED: :execution_time_exceeded
+      FILE_NOT_FOUND: :file_not_found
+
+      def self?.values: -> ::Array[Anthropic::Models::text_editor_code_execution_tool_result_error_code]
+    end
+  end
+end

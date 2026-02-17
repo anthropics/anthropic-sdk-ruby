@@ -1,0 +1,57 @@
+module Anthropic
+  module Models
+    type text_editor_code_execution_view_result_block_param =
+      {
+        content: String,
+        file_type: Anthropic::Models::TextEditorCodeExecutionViewResultBlockParam::file_type,
+        type: :text_editor_code_execution_view_result,
+        num_lines: Integer?,
+        start_line: Integer?,
+        total_lines: Integer?
+      }
+
+    class TextEditorCodeExecutionViewResultBlockParam < Anthropic::Internal::Type::BaseModel
+      attr_accessor content: String
+
+      attr_accessor file_type: Anthropic::Models::TextEditorCodeExecutionViewResultBlockParam::file_type
+
+      attr_accessor type: :text_editor_code_execution_view_result
+
+      attr_accessor num_lines: Integer?
+
+      attr_accessor start_line: Integer?
+
+      attr_accessor total_lines: Integer?
+
+      def initialize: (
+        content: String,
+        file_type: Anthropic::Models::TextEditorCodeExecutionViewResultBlockParam::file_type,
+        ?num_lines: Integer?,
+        ?start_line: Integer?,
+        ?total_lines: Integer?,
+        ?type: :text_editor_code_execution_view_result
+      ) -> void
+
+      def to_hash: -> {
+        content: String,
+        file_type: Anthropic::Models::TextEditorCodeExecutionViewResultBlockParam::file_type,
+        type: :text_editor_code_execution_view_result,
+        num_lines: Integer?,
+        start_line: Integer?,
+        total_lines: Integer?
+      }
+
+      type file_type = :text | :image | :pdf
+
+      module FileType
+        extend Anthropic::Internal::Type::Enum
+
+        TEXT: :text
+        IMAGE: :image
+        PDF: :pdf
+
+        def self?.values: -> ::Array[Anthropic::Models::TextEditorCodeExecutionViewResultBlockParam::file_type]
+      end
+    end
+  end
+end

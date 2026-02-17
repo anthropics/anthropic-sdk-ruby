@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    type bash_code_execution_tool_result_block =
+      {
+        content: Anthropic::Models::BashCodeExecutionToolResultBlock::content,
+        tool_use_id: String,
+        type: :bash_code_execution_tool_result
+      }
+
+    class BashCodeExecutionToolResultBlock < Anthropic::Internal::Type::BaseModel
+      attr_accessor content: Anthropic::Models::BashCodeExecutionToolResultBlock::content
+
+      attr_accessor tool_use_id: String
+
+      attr_accessor type: :bash_code_execution_tool_result
+
+      def initialize: (
+        content: Anthropic::Models::BashCodeExecutionToolResultBlock::content,
+        tool_use_id: String,
+        ?type: :bash_code_execution_tool_result
+      ) -> void
+
+      def to_hash: -> {
+        content: Anthropic::Models::BashCodeExecutionToolResultBlock::content,
+        tool_use_id: String,
+        type: :bash_code_execution_tool_result
+      }
+
+      type content =
+        Anthropic::BashCodeExecutionToolResultError
+        | Anthropic::BashCodeExecutionResultBlock
+
+      module Content
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::BashCodeExecutionToolResultBlock::content]
+      end
+    end
+  end
+end

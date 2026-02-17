@@ -8,7 +8,8 @@ module Anthropic
           content: Anthropic::Models::Beta::BetaWebFetchToolResultBlockParam::content,
           tool_use_id: String,
           type: :web_fetch_tool_result,
-          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          caller_: Anthropic::Models::Beta::BetaWebFetchToolResultBlockParam::caller_
         }
 
       class BetaWebFetchToolResultBlockParam < Anthropic::Internal::Type::BaseModel
@@ -20,10 +21,17 @@ module Anthropic
 
         attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
+        attr_reader caller_: Anthropic::Models::Beta::BetaWebFetchToolResultBlockParam::caller_?
+
+        def caller_=: (
+          Anthropic::Models::Beta::BetaWebFetchToolResultBlockParam::caller_
+        ) -> Anthropic::Models::Beta::BetaWebFetchToolResultBlockParam::caller_
+
         def initialize: (
           content: Anthropic::Models::Beta::BetaWebFetchToolResultBlockParam::content,
           tool_use_id: String,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?caller_: Anthropic::Models::Beta::BetaWebFetchToolResultBlockParam::caller_,
           ?type: :web_fetch_tool_result
         ) -> void
 
@@ -31,7 +39,8 @@ module Anthropic
           content: Anthropic::Models::Beta::BetaWebFetchToolResultBlockParam::content,
           tool_use_id: String,
           type: :web_fetch_tool_result,
-          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          caller_: Anthropic::Models::Beta::BetaWebFetchToolResultBlockParam::caller_
         }
 
         type content =
@@ -42,6 +51,17 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaWebFetchToolResultBlockParam::content]
+        end
+
+        type caller_ =
+          Anthropic::Beta::BetaDirectCaller
+          | Anthropic::Beta::BetaServerToolCaller
+          | Anthropic::Beta::BetaServerToolCaller20260120
+
+        module Caller
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaWebFetchToolResultBlockParam::caller_]
         end
       end
     end

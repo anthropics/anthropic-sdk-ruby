@@ -7,6 +7,12 @@ module Anthropic
       | Anthropic::ToolUseBlock
       | Anthropic::ServerToolUseBlock
       | Anthropic::WebSearchToolResultBlock
+      | Anthropic::WebFetchToolResultBlock
+      | Anthropic::CodeExecutionToolResultBlock
+      | Anthropic::BashCodeExecutionToolResultBlock
+      | Anthropic::TextEditorCodeExecutionToolResultBlock
+      | Anthropic::ToolSearchToolResultBlock
+      | Anthropic::ContainerUploadBlock
 
     module ContentBlock
       extend Anthropic::Internal::Type::Union

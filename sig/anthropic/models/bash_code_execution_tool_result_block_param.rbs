@@ -1,0 +1,45 @@
+module Anthropic
+  module Models
+    type bash_code_execution_tool_result_block_param =
+      {
+        content: Anthropic::Models::BashCodeExecutionToolResultBlockParam::content,
+        tool_use_id: String,
+        type: :bash_code_execution_tool_result,
+        cache_control: Anthropic::CacheControlEphemeral?
+      }
+
+    class BashCodeExecutionToolResultBlockParam < Anthropic::Internal::Type::BaseModel
+      attr_accessor content: Anthropic::Models::BashCodeExecutionToolResultBlockParam::content
+
+      attr_accessor tool_use_id: String
+
+      attr_accessor type: :bash_code_execution_tool_result
+
+      attr_accessor cache_control: Anthropic::CacheControlEphemeral?
+
+      def initialize: (
+        content: Anthropic::Models::BashCodeExecutionToolResultBlockParam::content,
+        tool_use_id: String,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
+        ?type: :bash_code_execution_tool_result
+      ) -> void
+
+      def to_hash: -> {
+        content: Anthropic::Models::BashCodeExecutionToolResultBlockParam::content,
+        tool_use_id: String,
+        type: :bash_code_execution_tool_result,
+        cache_control: Anthropic::CacheControlEphemeral?
+      }
+
+      type content =
+        Anthropic::BashCodeExecutionToolResultErrorParam
+        | Anthropic::BashCodeExecutionResultBlockParam
+
+      module Content
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::BashCodeExecutionToolResultBlockParam::content]
+      end
+    end
+  end
+end

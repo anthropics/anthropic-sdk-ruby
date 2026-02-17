@@ -1,0 +1,25 @@
+module Anthropic
+  module Models
+    type tool_search_tool_search_result_block =
+      {
+        tool_references: ::Array[Anthropic::ToolReferenceBlock],
+        type: :tool_search_tool_search_result
+      }
+
+    class ToolSearchToolSearchResultBlock < Anthropic::Internal::Type::BaseModel
+      attr_accessor tool_references: ::Array[Anthropic::ToolReferenceBlock]
+
+      attr_accessor type: :tool_search_tool_search_result
+
+      def initialize: (
+        tool_references: ::Array[Anthropic::ToolReferenceBlock],
+        ?type: :tool_search_tool_search_result
+      ) -> void
+
+      def to_hash: -> {
+        tool_references: ::Array[Anthropic::ToolReferenceBlock],
+        type: :tool_search_tool_search_result
+      }
+    end
+  end
+end

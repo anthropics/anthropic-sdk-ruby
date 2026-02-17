@@ -1,0 +1,64 @@
+module Anthropic
+  module Models
+    type code_execution_tool20250522 =
+      {
+        name: :code_execution,
+        type: :code_execution_20250522,
+        allowed_callers: ::Array[Anthropic::Models::CodeExecutionTool20250522::allowed_caller],
+        cache_control: Anthropic::CacheControlEphemeral?,
+        defer_loading: bool,
+        strict: bool
+      }
+
+    class CodeExecutionTool20250522 < Anthropic::Internal::Type::BaseModel
+      attr_accessor name: :code_execution
+
+      attr_accessor type: :code_execution_20250522
+
+      attr_reader allowed_callers: ::Array[Anthropic::Models::CodeExecutionTool20250522::allowed_caller]?
+
+      def allowed_callers=: (
+        ::Array[Anthropic::Models::CodeExecutionTool20250522::allowed_caller]
+      ) -> ::Array[Anthropic::Models::CodeExecutionTool20250522::allowed_caller]
+
+      attr_accessor cache_control: Anthropic::CacheControlEphemeral?
+
+      attr_reader defer_loading: bool?
+
+      def defer_loading=: (bool) -> bool
+
+      attr_reader strict: bool?
+
+      def strict=: (bool) -> bool
+
+      def initialize: (
+        ?allowed_callers: ::Array[Anthropic::Models::CodeExecutionTool20250522::allowed_caller],
+        ?cache_control: Anthropic::CacheControlEphemeral?,
+        ?defer_loading: bool,
+        ?strict: bool,
+        ?name: :code_execution,
+        ?type: :code_execution_20250522
+      ) -> void
+
+      def to_hash: -> {
+        name: :code_execution,
+        type: :code_execution_20250522,
+        allowed_callers: ::Array[Anthropic::Models::CodeExecutionTool20250522::allowed_caller],
+        cache_control: Anthropic::CacheControlEphemeral?,
+        defer_loading: bool,
+        strict: bool
+      }
+
+      type allowed_caller = :direct | :code_execution_20250825
+
+      module AllowedCaller
+        extend Anthropic::Internal::Type::Enum
+
+        DIRECT: :direct
+        CODE_EXECUTION_20250825: :code_execution_20250825
+
+        def self?.values: -> ::Array[Anthropic::Models::CodeExecutionTool20250522::allowed_caller]
+      end
+    end
+  end
+end

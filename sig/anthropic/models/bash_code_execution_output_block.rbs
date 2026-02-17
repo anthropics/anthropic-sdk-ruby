@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    type bash_code_execution_output_block =
+      { file_id: String, type: :bash_code_execution_output }
+
+    class BashCodeExecutionOutputBlock < Anthropic::Internal::Type::BaseModel
+      attr_accessor file_id: String
+
+      attr_accessor type: :bash_code_execution_output
+
+      def initialize: (
+        file_id: String,
+        ?type: :bash_code_execution_output
+      ) -> void
+
+      def to_hash: -> { file_id: String, type: :bash_code_execution_output }
+    end
+  end
+end

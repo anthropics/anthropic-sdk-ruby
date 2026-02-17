@@ -3,13 +3,287 @@ module Anthropic
     type tool_union =
       Anthropic::Tool
       | Anthropic::ToolBash20250124
+      | Anthropic::CodeExecutionTool20250522
+      | Anthropic::CodeExecutionTool20250825
+      | Anthropic::ToolUnion::CodeExecutionTool20260120
+      | Anthropic::MemoryTool20250818
       | Anthropic::ToolTextEditor20250124
       | Anthropic::ToolTextEditor20250429
       | Anthropic::ToolTextEditor20250728
       | Anthropic::WebSearchTool20250305
+      | Anthropic::WebFetchTool20250910
+      | Anthropic::ToolUnion::WebSearchTool20260209
+      | Anthropic::ToolUnion::WebFetchTool20260209
+      | Anthropic::ToolSearchToolBm25_20251119
+      | Anthropic::ToolSearchToolRegex20251119
 
     module ToolUnion
       extend Anthropic::Internal::Type::Union
+
+      type code_execution_tool20260120 =
+        {
+          name: :code_execution,
+          type: :code_execution_20260120,
+          allowed_callers: ::Array[Anthropic::Models::ToolUnion::CodeExecutionTool20260120::allowed_caller],
+          cache_control: Anthropic::CacheControlEphemeral?,
+          defer_loading: bool,
+          strict: bool
+        }
+
+      class CodeExecutionTool20260120 < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: :code_execution
+
+        attr_accessor type: :code_execution_20260120
+
+        attr_reader allowed_callers: ::Array[Anthropic::Models::ToolUnion::CodeExecutionTool20260120::allowed_caller]?
+
+        def allowed_callers=: (
+          ::Array[Anthropic::Models::ToolUnion::CodeExecutionTool20260120::allowed_caller]
+        ) -> ::Array[Anthropic::Models::ToolUnion::CodeExecutionTool20260120::allowed_caller]
+
+        attr_accessor cache_control: Anthropic::CacheControlEphemeral?
+
+        attr_reader defer_loading: bool?
+
+        def defer_loading=: (bool) -> bool
+
+        attr_reader strict: bool?
+
+        def strict=: (bool) -> bool
+
+        def initialize: (
+          ?allowed_callers: ::Array[Anthropic::Models::ToolUnion::CodeExecutionTool20260120::allowed_caller],
+          ?cache_control: Anthropic::CacheControlEphemeral?,
+          ?defer_loading: bool,
+          ?strict: bool,
+          ?name: :code_execution,
+          ?type: :code_execution_20260120
+        ) -> void
+
+        def to_hash: -> {
+          name: :code_execution,
+          type: :code_execution_20260120,
+          allowed_callers: ::Array[Anthropic::Models::ToolUnion::CodeExecutionTool20260120::allowed_caller],
+          cache_control: Anthropic::CacheControlEphemeral?,
+          defer_loading: bool,
+          strict: bool
+        }
+
+        type allowed_caller = :direct | :code_execution_20250825
+
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          DIRECT: :direct
+          CODE_EXECUTION_20250825: :code_execution_20250825
+
+          def self?.values: -> ::Array[Anthropic::Models::ToolUnion::CodeExecutionTool20260120::allowed_caller]
+        end
+      end
+
+      type web_search_tool20260209 =
+        {
+          name: :web_search,
+          type: :web_search_20260209,
+          allowed_callers: ::Array[Anthropic::Models::ToolUnion::WebSearchTool20260209::allowed_caller],
+          allowed_domains: ::Array[String]?,
+          blocked_domains: ::Array[String]?,
+          cache_control: Anthropic::CacheControlEphemeral?,
+          defer_loading: bool,
+          max_uses: Integer?,
+          strict: bool,
+          user_location: Anthropic::ToolUnion::WebSearchTool20260209::UserLocation?
+        }
+
+      class WebSearchTool20260209 < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: :web_search
+
+        attr_accessor type: :web_search_20260209
+
+        attr_reader allowed_callers: ::Array[Anthropic::Models::ToolUnion::WebSearchTool20260209::allowed_caller]?
+
+        def allowed_callers=: (
+          ::Array[Anthropic::Models::ToolUnion::WebSearchTool20260209::allowed_caller]
+        ) -> ::Array[Anthropic::Models::ToolUnion::WebSearchTool20260209::allowed_caller]
+
+        attr_accessor allowed_domains: ::Array[String]?
+
+        attr_accessor blocked_domains: ::Array[String]?
+
+        attr_accessor cache_control: Anthropic::CacheControlEphemeral?
+
+        attr_reader defer_loading: bool?
+
+        def defer_loading=: (bool) -> bool
+
+        attr_accessor max_uses: Integer?
+
+        attr_reader strict: bool?
+
+        def strict=: (bool) -> bool
+
+        attr_accessor user_location: Anthropic::ToolUnion::WebSearchTool20260209::UserLocation?
+
+        def initialize: (
+          ?allowed_callers: ::Array[Anthropic::Models::ToolUnion::WebSearchTool20260209::allowed_caller],
+          ?allowed_domains: ::Array[String]?,
+          ?blocked_domains: ::Array[String]?,
+          ?cache_control: Anthropic::CacheControlEphemeral?,
+          ?defer_loading: bool,
+          ?max_uses: Integer?,
+          ?strict: bool,
+          ?user_location: Anthropic::ToolUnion::WebSearchTool20260209::UserLocation?,
+          ?name: :web_search,
+          ?type: :web_search_20260209
+        ) -> void
+
+        def to_hash: -> {
+          name: :web_search,
+          type: :web_search_20260209,
+          allowed_callers: ::Array[Anthropic::Models::ToolUnion::WebSearchTool20260209::allowed_caller],
+          allowed_domains: ::Array[String]?,
+          blocked_domains: ::Array[String]?,
+          cache_control: Anthropic::CacheControlEphemeral?,
+          defer_loading: bool,
+          max_uses: Integer?,
+          strict: bool,
+          user_location: Anthropic::ToolUnion::WebSearchTool20260209::UserLocation?
+        }
+
+        type allowed_caller = :direct | :code_execution_20250825
+
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          DIRECT: :direct
+          CODE_EXECUTION_20250825: :code_execution_20250825
+
+          def self?.values: -> ::Array[Anthropic::Models::ToolUnion::WebSearchTool20260209::allowed_caller]
+        end
+
+        type user_location =
+          {
+            type: :approximate,
+            city: String?,
+            country: String?,
+            region: String?,
+            timezone: String?
+          }
+
+        class UserLocation < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :approximate
+
+          attr_accessor city: String?
+
+          attr_accessor country: String?
+
+          attr_accessor region: String?
+
+          attr_accessor timezone: String?
+
+          def initialize: (
+            ?city: String?,
+            ?country: String?,
+            ?region: String?,
+            ?timezone: String?,
+            ?type: :approximate
+          ) -> void
+
+          def to_hash: -> {
+            type: :approximate,
+            city: String?,
+            country: String?,
+            region: String?,
+            timezone: String?
+          }
+        end
+      end
+
+      type web_fetch_tool20260209 =
+        {
+          name: :web_fetch,
+          type: :web_fetch_20260209,
+          allowed_callers: ::Array[Anthropic::Models::ToolUnion::WebFetchTool20260209::allowed_caller],
+          allowed_domains: ::Array[String]?,
+          blocked_domains: ::Array[String]?,
+          cache_control: Anthropic::CacheControlEphemeral?,
+          citations: Anthropic::CitationsConfigParam?,
+          defer_loading: bool,
+          max_content_tokens: Integer?,
+          max_uses: Integer?,
+          strict: bool
+        }
+
+      class WebFetchTool20260209 < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: :web_fetch
+
+        attr_accessor type: :web_fetch_20260209
+
+        attr_reader allowed_callers: ::Array[Anthropic::Models::ToolUnion::WebFetchTool20260209::allowed_caller]?
+
+        def allowed_callers=: (
+          ::Array[Anthropic::Models::ToolUnion::WebFetchTool20260209::allowed_caller]
+        ) -> ::Array[Anthropic::Models::ToolUnion::WebFetchTool20260209::allowed_caller]
+
+        attr_accessor allowed_domains: ::Array[String]?
+
+        attr_accessor blocked_domains: ::Array[String]?
+
+        attr_accessor cache_control: Anthropic::CacheControlEphemeral?
+
+        attr_accessor citations: Anthropic::CitationsConfigParam?
+
+        attr_reader defer_loading: bool?
+
+        def defer_loading=: (bool) -> bool
+
+        attr_accessor max_content_tokens: Integer?
+
+        attr_accessor max_uses: Integer?
+
+        attr_reader strict: bool?
+
+        def strict=: (bool) -> bool
+
+        def initialize: (
+          ?allowed_callers: ::Array[Anthropic::Models::ToolUnion::WebFetchTool20260209::allowed_caller],
+          ?allowed_domains: ::Array[String]?,
+          ?blocked_domains: ::Array[String]?,
+          ?cache_control: Anthropic::CacheControlEphemeral?,
+          ?citations: Anthropic::CitationsConfigParam?,
+          ?defer_loading: bool,
+          ?max_content_tokens: Integer?,
+          ?max_uses: Integer?,
+          ?strict: bool,
+          ?name: :web_fetch,
+          ?type: :web_fetch_20260209
+        ) -> void
+
+        def to_hash: -> {
+          name: :web_fetch,
+          type: :web_fetch_20260209,
+          allowed_callers: ::Array[Anthropic::Models::ToolUnion::WebFetchTool20260209::allowed_caller],
+          allowed_domains: ::Array[String]?,
+          blocked_domains: ::Array[String]?,
+          cache_control: Anthropic::CacheControlEphemeral?,
+          citations: Anthropic::CitationsConfigParam?,
+          defer_loading: bool,
+          max_content_tokens: Integer?,
+          max_uses: Integer?,
+          strict: bool
+        }
+
+        type allowed_caller = :direct | :code_execution_20250825
+
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          DIRECT: :direct
+          CODE_EXECUTION_20250825: :code_execution_20250825
+
+          def self?.values: -> ::Array[Anthropic::Models::ToolUnion::WebFetchTool20260209::allowed_caller]
+        end
+      end
 
       def self?.variants: -> ::Array[Anthropic::Models::tool_union]
     end

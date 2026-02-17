@@ -7,7 +7,8 @@ module Anthropic
         {
           content: Anthropic::Models::Beta::beta_web_search_tool_result_block_content,
           tool_use_id: String,
-          type: :web_search_tool_result
+          type: :web_search_tool_result,
+          caller_: Anthropic::Models::Beta::BetaWebSearchToolResultBlock::caller_
         }
 
       class BetaWebSearchToolResultBlock < Anthropic::Internal::Type::BaseModel
@@ -17,17 +18,36 @@ module Anthropic
 
         attr_accessor type: :web_search_tool_result
 
+        attr_reader caller_: Anthropic::Models::Beta::BetaWebSearchToolResultBlock::caller_?
+
+        def caller_=: (
+          Anthropic::Models::Beta::BetaWebSearchToolResultBlock::caller_
+        ) -> Anthropic::Models::Beta::BetaWebSearchToolResultBlock::caller_
+
         def initialize: (
           content: Anthropic::Models::Beta::beta_web_search_tool_result_block_content,
           tool_use_id: String,
+          ?caller_: Anthropic::Models::Beta::BetaWebSearchToolResultBlock::caller_,
           ?type: :web_search_tool_result
         ) -> void
 
         def to_hash: -> {
           content: Anthropic::Models::Beta::beta_web_search_tool_result_block_content,
           tool_use_id: String,
-          type: :web_search_tool_result
+          type: :web_search_tool_result,
+          caller_: Anthropic::Models::Beta::BetaWebSearchToolResultBlock::caller_
         }
+
+        type caller_ =
+          Anthropic::Beta::BetaDirectCaller
+          | Anthropic::Beta::BetaServerToolCaller
+          | Anthropic::Beta::BetaServerToolCaller20260120
+
+        module Caller
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaWebSearchToolResultBlock::caller_]
+        end
       end
     end
   end

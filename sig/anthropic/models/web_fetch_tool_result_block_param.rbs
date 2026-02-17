@@ -1,0 +1,81 @@
+module Anthropic
+  module Models
+    type web_fetch_tool_result_block_param =
+      {
+        content: Anthropic::Models::WebFetchToolResultBlockParam::content,
+        tool_use_id: String,
+        type: :web_fetch_tool_result,
+        cache_control: Anthropic::CacheControlEphemeral?,
+        caller_: Anthropic::Models::WebFetchToolResultBlockParam::caller_
+      }
+
+    class WebFetchToolResultBlockParam < Anthropic::Internal::Type::BaseModel
+      attr_accessor content: Anthropic::Models::WebFetchToolResultBlockParam::content
+
+      attr_accessor tool_use_id: String
+
+      attr_accessor type: :web_fetch_tool_result
+
+      attr_accessor cache_control: Anthropic::CacheControlEphemeral?
+
+      attr_reader caller_: Anthropic::Models::WebFetchToolResultBlockParam::caller_?
+
+      def caller_=: (
+        Anthropic::Models::WebFetchToolResultBlockParam::caller_
+      ) -> Anthropic::Models::WebFetchToolResultBlockParam::caller_
+
+      def initialize: (
+        content: Anthropic::Models::WebFetchToolResultBlockParam::content,
+        tool_use_id: String,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
+        ?caller_: Anthropic::Models::WebFetchToolResultBlockParam::caller_,
+        ?type: :web_fetch_tool_result
+      ) -> void
+
+      def to_hash: -> {
+        content: Anthropic::Models::WebFetchToolResultBlockParam::content,
+        tool_use_id: String,
+        type: :web_fetch_tool_result,
+        cache_control: Anthropic::CacheControlEphemeral?,
+        caller_: Anthropic::Models::WebFetchToolResultBlockParam::caller_
+      }
+
+      type content =
+        Anthropic::WebFetchToolResultErrorBlockParam
+        | Anthropic::WebFetchBlockParam
+
+      module Content
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::WebFetchToolResultBlockParam::content]
+      end
+
+      type caller_ =
+        Anthropic::DirectCaller
+        | Anthropic::ServerToolCaller
+        | Anthropic::WebFetchToolResultBlockParam::Caller::CodeExecution20260120
+
+      module Caller
+        extend Anthropic::Internal::Type::Union
+
+        type code_execution20260120 =
+          { tool_id: String, type: :code_execution_20260120 }
+
+        class CodeExecution20260120 < Anthropic::Internal::Type::BaseModel
+          attr_accessor tool_id: String
+
+          attr_accessor type: :code_execution_20260120
+
+          def initialize: (
+            tool_id: String,
+            ?type: :code_execution_20260120
+          ) -> void
+
+          def to_hash: -> { tool_id: String, type: :code_execution_20260120 }
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::WebFetchToolResultBlockParam::caller_]
+      end
+    end
+  end
+end

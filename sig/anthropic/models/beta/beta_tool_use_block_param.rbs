@@ -51,6 +51,7 @@ module Anthropic
         type caller_ =
           Anthropic::Beta::BetaDirectCaller
           | Anthropic::Beta::BetaServerToolCaller
+          | Anthropic::Beta::BetaServerToolCaller20260120
 
         module Caller
           extend Anthropic::Internal::Type::Union

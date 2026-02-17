@@ -54,6 +54,7 @@ module Anthropic
           | Anthropic::ImageBlockParam
           | Anthropic::SearchResultBlockParam
           | Anthropic::DocumentBlockParam
+          | Anthropic::ToolReferenceBlockParam
 
         module Content
           extend Anthropic::Internal::Type::Union

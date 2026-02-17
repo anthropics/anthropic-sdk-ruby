@@ -95,6 +95,10 @@ module Anthropic
       sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
       attr_accessor :model
 
+      # Container identifier for reuse across requests.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :container
+
       # Specifies the geographic region for inference processing. If not specified, the
       # workspace's `default_inference_geo` is used.
       sig { returns(T.nilable(String)) }
@@ -132,6 +136,13 @@ module Anthropic
         ).void
       end
       attr_writer :service_tier
+
+      # The inference speed mode for this request. `"fast"` enables high
+      # output-tokens-per-second inference.
+      sig do
+        returns(T.nilable(Anthropic::MessageCreateParams::Speed::OrSymbol))
+      end
+      attr_accessor :speed
 
       # Custom text sequences that will cause the model to stop generating.
       #
@@ -322,10 +333,19 @@ module Anthropic
               T.any(
                 Anthropic::Tool,
                 Anthropic::ToolBash20250124,
+                Anthropic::CodeExecutionTool20250522,
+                Anthropic::CodeExecutionTool20250825,
+                Anthropic::ToolUnion::CodeExecutionTool20260120,
+                Anthropic::MemoryTool20250818,
                 Anthropic::ToolTextEditor20250124,
                 Anthropic::ToolTextEditor20250429,
                 Anthropic::ToolTextEditor20250728,
-                Anthropic::WebSearchTool20250305
+                Anthropic::WebSearchTool20250305,
+                Anthropic::WebFetchTool20250910,
+                Anthropic::ToolUnion::WebSearchTool20260209,
+                Anthropic::ToolUnion::WebFetchTool20260209,
+                Anthropic::ToolSearchToolBm25_20251119,
+                Anthropic::ToolSearchToolRegex20251119
               )
             ]
           )
@@ -340,10 +360,19 @@ module Anthropic
               T.any(
                 Anthropic::Tool::OrHash,
                 Anthropic::ToolBash20250124::OrHash,
+                Anthropic::CodeExecutionTool20250522::OrHash,
+                Anthropic::CodeExecutionTool20250825::OrHash,
+                Anthropic::ToolUnion::CodeExecutionTool20260120::OrHash,
+                Anthropic::MemoryTool20250818::OrHash,
                 Anthropic::ToolTextEditor20250124::OrHash,
                 Anthropic::ToolTextEditor20250429::OrHash,
                 Anthropic::ToolTextEditor20250728::OrHash,
-                Anthropic::WebSearchTool20250305::OrHash
+                Anthropic::WebSearchTool20250305::OrHash,
+                Anthropic::WebFetchTool20250910::OrHash,
+                Anthropic::ToolUnion::WebSearchTool20260209::OrHash,
+                Anthropic::ToolUnion::WebFetchTool20260209::OrHash,
+                Anthropic::ToolSearchToolBm25_20251119::OrHash,
+                Anthropic::ToolSearchToolRegex20251119::OrHash
               )
             ]
         ).void
@@ -383,10 +412,12 @@ module Anthropic
           max_tokens: Integer,
           messages: T::Array[Anthropic::MessageParam::OrHash],
           model: T.any(Anthropic::Model::OrSymbol, String),
+          container: T.nilable(String),
           inference_geo: T.nilable(String),
           metadata: Anthropic::Metadata::OrHash,
           output_config: Anthropic::OutputConfig::OrHash,
           service_tier: Anthropic::MessageCreateParams::ServiceTier::OrSymbol,
+          speed: T.nilable(Anthropic::MessageCreateParams::Speed::OrSymbol),
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
           temperature: Float,
@@ -408,10 +439,19 @@ module Anthropic
               T.any(
                 Anthropic::Tool::OrHash,
                 Anthropic::ToolBash20250124::OrHash,
+                Anthropic::CodeExecutionTool20250522::OrHash,
+                Anthropic::CodeExecutionTool20250825::OrHash,
+                Anthropic::ToolUnion::CodeExecutionTool20260120::OrHash,
+                Anthropic::MemoryTool20250818::OrHash,
                 Anthropic::ToolTextEditor20250124::OrHash,
                 Anthropic::ToolTextEditor20250429::OrHash,
                 Anthropic::ToolTextEditor20250728::OrHash,
-                Anthropic::WebSearchTool20250305::OrHash
+                Anthropic::WebSearchTool20250305::OrHash,
+                Anthropic::WebFetchTool20250910::OrHash,
+                Anthropic::ToolUnion::WebSearchTool20260209::OrHash,
+                Anthropic::ToolUnion::WebFetchTool20260209::OrHash,
+                Anthropic::ToolSearchToolBm25_20251119::OrHash,
+                Anthropic::ToolSearchToolRegex20251119::OrHash
               )
             ],
           top_k: Integer,
@@ -498,6 +538,8 @@ module Anthropic
         # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         model:,
+        # Container identifier for reuse across requests.
+        container: nil,
         # Specifies the geographic region for inference processing. If not specified, the
         # workspace's `default_inference_geo` is used.
         inference_geo: nil,
@@ -511,6 +553,9 @@ module Anthropic
         # Anthropic offers different levels of service for your API requests. See
         # [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
         service_tier: nil,
+        # The inference speed mode for this request. `"fast"` enables high
+        # output-tokens-per-second inference.
+        speed: nil,
         # Custom text sequences that will cause the model to stop generating.
         #
         # Our models will normally stop when they have naturally completed their turn,
@@ -653,10 +698,12 @@ module Anthropic
             max_tokens: Integer,
             messages: T::Array[Anthropic::MessageParam],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            container: T.nilable(String),
             inference_geo: T.nilable(String),
             metadata: Anthropic::Metadata,
             output_config: Anthropic::OutputConfig,
             service_tier: Anthropic::MessageCreateParams::ServiceTier::OrSymbol,
+            speed: T.nilable(Anthropic::MessageCreateParams::Speed::OrSymbol),
             stop_sequences: T::Array[String],
             system_: Anthropic::MessageCreateParams::System::Variants,
             temperature: Float,
@@ -678,10 +725,19 @@ module Anthropic
                 T.any(
                   Anthropic::Tool,
                   Anthropic::ToolBash20250124,
+                  Anthropic::CodeExecutionTool20250522,
+                  Anthropic::CodeExecutionTool20250825,
+                  Anthropic::ToolUnion::CodeExecutionTool20260120,
+                  Anthropic::MemoryTool20250818,
                   Anthropic::ToolTextEditor20250124,
                   Anthropic::ToolTextEditor20250429,
                   Anthropic::ToolTextEditor20250728,
-                  Anthropic::WebSearchTool20250305
+                  Anthropic::WebSearchTool20250305,
+                  Anthropic::WebFetchTool20250910,
+                  Anthropic::ToolUnion::WebSearchTool20260209,
+                  Anthropic::ToolUnion::WebFetchTool20260209,
+                  Anthropic::ToolSearchToolBm25_20251119,
+                  Anthropic::ToolSearchToolRegex20251119
                 )
               ],
             top_k: Integer,
@@ -721,6 +777,28 @@ module Anthropic
         sig do
           override.returns(
             T::Array[Anthropic::MessageCreateParams::ServiceTier::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
+      end
+
+      # The inference speed mode for this request. `"fast"` enables high
+      # output-tokens-per-second inference.
+      module Speed
+        extend Anthropic::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias { T.all(Symbol, Anthropic::MessageCreateParams::Speed) }
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        STANDARD =
+          T.let(:standard, Anthropic::MessageCreateParams::Speed::TaggedSymbol)
+        FAST = T.let(:fast, Anthropic::MessageCreateParams::Speed::TaggedSymbol)
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::MessageCreateParams::Speed::TaggedSymbol]
           )
         end
         def self.values

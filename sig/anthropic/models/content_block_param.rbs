@@ -11,6 +11,12 @@ module Anthropic
       | Anthropic::ToolResultBlockParam
       | Anthropic::ServerToolUseBlockParam
       | Anthropic::WebSearchToolResultBlockParam
+      | Anthropic::WebFetchToolResultBlockParam
+      | Anthropic::CodeExecutionToolResultBlockParam
+      | Anthropic::BashCodeExecutionToolResultBlockParam
+      | Anthropic::TextEditorCodeExecutionToolResultBlockParam
+      | Anthropic::ToolSearchToolResultBlockParam
+      | Anthropic::ContainerUploadBlockParam
 
     module ContentBlockParam
       extend Anthropic::Internal::Type::Union
