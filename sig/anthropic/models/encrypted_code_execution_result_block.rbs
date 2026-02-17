@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    type encrypted_code_execution_result_block =
+      {
+        content: ::Array[Anthropic::CodeExecutionOutputBlock],
+        encrypted_stdout: String,
+        return_code: Integer,
+        stderr: String,
+        type: :encrypted_code_execution_result
+      }
+
+    class EncryptedCodeExecutionResultBlock < Anthropic::Internal::Type::BaseModel
+      attr_accessor content: ::Array[Anthropic::CodeExecutionOutputBlock]
+
+      attr_accessor encrypted_stdout: String
+
+      attr_accessor return_code: Integer
+
+      attr_accessor stderr: String
+
+      attr_accessor type: :encrypted_code_execution_result
+
+      def initialize: (
+        content: ::Array[Anthropic::CodeExecutionOutputBlock],
+        encrypted_stdout: String,
+        return_code: Integer,
+        stderr: String,
+        ?type: :encrypted_code_execution_result
+      ) -> void
+
+      def to_hash: -> {
+        content: ::Array[Anthropic::CodeExecutionOutputBlock],
+        encrypted_stdout: String,
+        return_code: Integer,
+        stderr: String,
+        type: :encrypted_code_execution_result
+      }
+    end
+  end
+end

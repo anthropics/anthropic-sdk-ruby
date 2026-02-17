@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    type text_editor_code_execution_create_result_block_param =
+      { is_file_update: bool, type: :text_editor_code_execution_create_result }
+
+    class TextEditorCodeExecutionCreateResultBlockParam < Anthropic::Internal::Type::BaseModel
+      attr_accessor is_file_update: bool
+
+      attr_accessor type: :text_editor_code_execution_create_result
+
+      def initialize: (
+        is_file_update: bool,
+        ?type: :text_editor_code_execution_create_result
+      ) -> void
+
+      def to_hash: -> {
+        is_file_update: bool,
+        type: :text_editor_code_execution_create_result
+      }
+    end
+  end
+end

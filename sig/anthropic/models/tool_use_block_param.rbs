@@ -6,7 +6,8 @@ module Anthropic
         input: ::Hash[Symbol, top],
         name: String,
         type: :tool_use,
-        cache_control: Anthropic::CacheControlEphemeral?
+        cache_control: Anthropic::CacheControlEphemeral?,
+        caller_: Anthropic::Models::ToolUseBlockParam::caller_
       }
 
     class ToolUseBlockParam < Anthropic::Internal::Type::BaseModel
@@ -20,11 +21,18 @@ module Anthropic
 
       attr_accessor cache_control: Anthropic::CacheControlEphemeral?
 
+      attr_reader caller_: Anthropic::Models::ToolUseBlockParam::caller_?
+
+      def caller_=: (
+        Anthropic::Models::ToolUseBlockParam::caller_
+      ) -> Anthropic::Models::ToolUseBlockParam::caller_
+
       def initialize: (
         id: String,
         input: ::Hash[Symbol, top],
         name: String,
         ?cache_control: Anthropic::CacheControlEphemeral?,
+        ?caller_: Anthropic::Models::ToolUseBlockParam::caller_,
         ?type: :tool_use
       ) -> void
 
@@ -33,8 +41,36 @@ module Anthropic
         input: ::Hash[Symbol, top],
         name: String,
         type: :tool_use,
-        cache_control: Anthropic::CacheControlEphemeral?
+        cache_control: Anthropic::CacheControlEphemeral?,
+        caller_: Anthropic::Models::ToolUseBlockParam::caller_
       }
+
+      type caller_ =
+        Anthropic::DirectCaller
+        | Anthropic::ServerToolCaller
+        | Anthropic::ToolUseBlockParam::Caller::CodeExecution20260120
+
+      module Caller
+        extend Anthropic::Internal::Type::Union
+
+        type code_execution20260120 =
+          { tool_id: String, type: :code_execution_20260120 }
+
+        class CodeExecution20260120 < Anthropic::Internal::Type::BaseModel
+          attr_accessor tool_id: String
+
+          attr_accessor type: :code_execution_20260120
+
+          def initialize: (
+            tool_id: String,
+            ?type: :code_execution_20260120
+          ) -> void
+
+          def to_hash: -> { tool_id: String, type: :code_execution_20260120 }
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::ToolUseBlockParam::caller_]
+      end
     end
   end
 end

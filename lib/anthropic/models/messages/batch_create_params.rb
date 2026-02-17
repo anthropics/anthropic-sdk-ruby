@@ -143,6 +143,12 @@ module Anthropic
             #   @return [Symbol, String, Anthropic::Models::Model]
             required :model, union: -> { Anthropic::Model }
 
+            # @!attribute container
+            #   Container identifier for reuse across requests.
+            #
+            #   @return [String, nil]
+            optional :container, String, nil?: true
+
             # @!attribute inference_geo
             #   Specifies the geographic region for inference processing. If not specified, the
             #   workspace's `default_inference_geo` is used.
@@ -171,6 +177,17 @@ module Anthropic
             #
             #   @return [Symbol, Anthropic::Models::Messages::BatchCreateParams::Request::Params::ServiceTier, nil]
             optional :service_tier, enum: -> { Anthropic::Messages::BatchCreateParams::Request::Params::ServiceTier }
+
+            # @!attribute speed
+            #   The inference speed mode for this request. `"fast"` enables high
+            #   output-tokens-per-second inference.
+            #
+            #   @return [Symbol, Anthropic::Models::Messages::BatchCreateParams::Request::Params::Speed, nil]
+            optional :speed,
+                     enum: -> {
+                       Anthropic::Messages::BatchCreateParams::Request::Params::Speed
+                     },
+                     nil?: true
 
             # @!attribute stop_sequences
             #   Custom text sequences that will cause the model to stop generating.
@@ -317,7 +334,7 @@ module Anthropic
             #
             #   See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
             #
-            #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305>, nil]
+            #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::ToolUnion::CodeExecutionTool20260120, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::ToolUnion::WebSearchTool20260209, Anthropic::Models::ToolUnion::WebFetchTool20260209, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>, nil]
             optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::ToolUnion] }
 
             # @!attribute top_k
@@ -346,7 +363,7 @@ module Anthropic
             #   @return [Float, nil]
             optional :top_p, Float
 
-            # @!method initialize(max_tokens:, messages:, model:, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
+            # @!method initialize(max_tokens:, messages:, model:, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, speed: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
             #   Some parameter documentations has been truncated, see
             #   {Anthropic::Models::Messages::BatchCreateParams::Request::Params} for more
             #   details.
@@ -362,6 +379,8 @@ module Anthropic
             #
             #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
             #
+            #   @param container [String, nil] Container identifier for reuse across requests.
+            #
             #   @param inference_geo [String, nil] Specifies the geographic region for inference processing. If not specified, the
             #
             #   @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
@@ -369,6 +388,8 @@ module Anthropic
             #   @param output_config [Anthropic::Models::OutputConfig] Configuration options for the model's output, such as the output format.
             #
             #   @param service_tier [Symbol, Anthropic::Models::Messages::BatchCreateParams::Request::Params::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
+            #
+            #   @param speed [Symbol, Anthropic::Models::Messages::BatchCreateParams::Request::Params::Speed, nil] The inference speed mode for this request. `"fast"` enables high output-tokens-p
             #
             #   @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
             #
@@ -382,7 +403,7 @@ module Anthropic
             #
             #   @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
             #
-            #   @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305>] Definitions of tools that the model may use.
+            #   @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::ToolUnion::CodeExecutionTool20260120, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::ToolUnion::WebSearchTool20260209, Anthropic::Models::ToolUnion::WebFetchTool20260209, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>] Definitions of tools that the model may use.
             #
             #   @param top_k [Integer] Only sample from the top K options for each subsequent token.
             #
@@ -400,6 +421,20 @@ module Anthropic
 
               AUTO = :auto
               STANDARD_ONLY = :standard_only
+
+              # @!method self.values
+              #   @return [Array<Symbol>]
+            end
+
+            # The inference speed mode for this request. `"fast"` enables high
+            # output-tokens-per-second inference.
+            #
+            # @see Anthropic::Models::Messages::BatchCreateParams::Request::Params#speed
+            module Speed
+              extend Anthropic::Internal::Type::Enum
+
+              STANDARD = :standard
+              FAST = :fast
 
               # @!method self.values
               #   @return [Array<Symbol>]

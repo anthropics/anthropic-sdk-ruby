@@ -1,0 +1,35 @@
+module Anthropic
+  module Models
+    type code_execution_tool_result_block_param =
+      {
+        content: Anthropic::Models::code_execution_tool_result_block_param_content,
+        tool_use_id: String,
+        type: :code_execution_tool_result,
+        cache_control: Anthropic::CacheControlEphemeral?
+      }
+
+    class CodeExecutionToolResultBlockParam < Anthropic::Internal::Type::BaseModel
+      attr_accessor content: Anthropic::Models::code_execution_tool_result_block_param_content
+
+      attr_accessor tool_use_id: String
+
+      attr_accessor type: :code_execution_tool_result
+
+      attr_accessor cache_control: Anthropic::CacheControlEphemeral?
+
+      def initialize: (
+        content: Anthropic::Models::code_execution_tool_result_block_param_content,
+        tool_use_id: String,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
+        ?type: :code_execution_tool_result
+      ) -> void
+
+      def to_hash: -> {
+        content: Anthropic::Models::code_execution_tool_result_block_param_content,
+        tool_use_id: String,
+        type: :code_execution_tool_result,
+        cache_control: Anthropic::CacheControlEphemeral?
+      }
+    end
+  end
+end

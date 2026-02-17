@@ -1,0 +1,47 @@
+module Anthropic
+  module Models
+    type text_editor_code_execution_tool_result_block_param =
+      {
+        content: Anthropic::Models::TextEditorCodeExecutionToolResultBlockParam::content,
+        tool_use_id: String,
+        type: :text_editor_code_execution_tool_result,
+        cache_control: Anthropic::CacheControlEphemeral?
+      }
+
+    class TextEditorCodeExecutionToolResultBlockParam < Anthropic::Internal::Type::BaseModel
+      attr_accessor content: Anthropic::Models::TextEditorCodeExecutionToolResultBlockParam::content
+
+      attr_accessor tool_use_id: String
+
+      attr_accessor type: :text_editor_code_execution_tool_result
+
+      attr_accessor cache_control: Anthropic::CacheControlEphemeral?
+
+      def initialize: (
+        content: Anthropic::Models::TextEditorCodeExecutionToolResultBlockParam::content,
+        tool_use_id: String,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
+        ?type: :text_editor_code_execution_tool_result
+      ) -> void
+
+      def to_hash: -> {
+        content: Anthropic::Models::TextEditorCodeExecutionToolResultBlockParam::content,
+        tool_use_id: String,
+        type: :text_editor_code_execution_tool_result,
+        cache_control: Anthropic::CacheControlEphemeral?
+      }
+
+      type content =
+        Anthropic::TextEditorCodeExecutionToolResultErrorParam
+        | Anthropic::TextEditorCodeExecutionViewResultBlockParam
+        | Anthropic::TextEditorCodeExecutionCreateResultBlockParam
+        | Anthropic::TextEditorCodeExecutionStrReplaceResultBlockParam
+
+      module Content
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::TextEditorCodeExecutionToolResultBlockParam::content]
+      end
+    end
+  end
+end

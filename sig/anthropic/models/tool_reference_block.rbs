@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    type tool_reference_block = { tool_name: String, type: :tool_reference }
+
+    class ToolReferenceBlock < Anthropic::Internal::Type::BaseModel
+      attr_accessor tool_name: String
+
+      attr_accessor type: :tool_reference
+
+      def initialize: (tool_name: String, ?type: :tool_reference) -> void
+
+      def to_hash: -> { tool_name: String, type: :tool_reference }
+    end
+  end
+end

@@ -1,0 +1,88 @@
+module Anthropic
+  module Models
+    class BetaWebSearchTool20260209 = Beta::BetaWebSearchTool20260209
+
+    module Beta
+      type beta_web_search_tool20260209 =
+        {
+          name: :web_search,
+          type: :web_search_20260209,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaWebSearchTool20260209::allowed_caller],
+          allowed_domains: ::Array[String]?,
+          blocked_domains: ::Array[String]?,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          defer_loading: bool,
+          max_uses: Integer?,
+          strict: bool,
+          user_location: Anthropic::Beta::BetaUserLocation?
+        }
+
+      class BetaWebSearchTool20260209 < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: :web_search
+
+        attr_accessor type: :web_search_20260209
+
+        attr_reader allowed_callers: ::Array[Anthropic::Models::Beta::BetaWebSearchTool20260209::allowed_caller]?
+
+        def allowed_callers=: (
+          ::Array[Anthropic::Models::Beta::BetaWebSearchTool20260209::allowed_caller]
+        ) -> ::Array[Anthropic::Models::Beta::BetaWebSearchTool20260209::allowed_caller]
+
+        attr_accessor allowed_domains: ::Array[String]?
+
+        attr_accessor blocked_domains: ::Array[String]?
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        attr_reader defer_loading: bool?
+
+        def defer_loading=: (bool) -> bool
+
+        attr_accessor max_uses: Integer?
+
+        attr_reader strict: bool?
+
+        def strict=: (bool) -> bool
+
+        attr_accessor user_location: Anthropic::Beta::BetaUserLocation?
+
+        def initialize: (
+          ?allowed_callers: ::Array[Anthropic::Models::Beta::BetaWebSearchTool20260209::allowed_caller],
+          ?allowed_domains: ::Array[String]?,
+          ?blocked_domains: ::Array[String]?,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?defer_loading: bool,
+          ?max_uses: Integer?,
+          ?strict: bool,
+          ?user_location: Anthropic::Beta::BetaUserLocation?,
+          ?name: :web_search,
+          ?type: :web_search_20260209
+        ) -> void
+
+        def to_hash: -> {
+          name: :web_search,
+          type: :web_search_20260209,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaWebSearchTool20260209::allowed_caller],
+          allowed_domains: ::Array[String]?,
+          blocked_domains: ::Array[String]?,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          defer_loading: bool,
+          max_uses: Integer?,
+          strict: bool,
+          user_location: Anthropic::Beta::BetaUserLocation?
+        }
+
+        type allowed_caller = :direct | :code_execution_20250825
+
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          DIRECT: :direct
+          CODE_EXECUTION_20250825: :code_execution_20250825
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaWebSearchTool20260209::allowed_caller]
+        end
+      end
+    end
+  end
+end

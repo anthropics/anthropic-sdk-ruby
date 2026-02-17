@@ -5,10 +5,8 @@ module Anthropic
     BetaToolUnion = Beta::BetaToolUnion
 
     module Beta
-      # Configuration for a group of tools from an MCP server.
-      #
-      # Allows configuring enabled status and defer_loading for all tools from an MCP
-      # server, with optional per-tool overrides.
+      # Code execution tool with REPL state persistence (daemon mode + gVisor
+      # checkpoint).
       module BetaToolUnion
         extend Anthropic::Internal::Type::Union
 
@@ -20,6 +18,7 @@ module Anthropic
               Anthropic::Beta::BetaToolBash20250124,
               Anthropic::Beta::BetaCodeExecutionTool20250522,
               Anthropic::Beta::BetaCodeExecutionTool20250825,
+              Anthropic::Beta::BetaCodeExecutionTool20260120,
               Anthropic::Beta::BetaToolComputerUse20241022,
               Anthropic::Beta::BetaMemoryTool20250818,
               Anthropic::Beta::BetaToolComputerUse20250124,
@@ -30,6 +29,8 @@ module Anthropic
               Anthropic::Beta::BetaToolTextEditor20250728,
               Anthropic::Beta::BetaWebSearchTool20250305,
               Anthropic::Beta::BetaWebFetchTool20250910,
+              Anthropic::Beta::BetaWebSearchTool20260209,
+              Anthropic::Beta::BetaWebFetchTool20260209,
               Anthropic::Beta::BetaToolSearchToolBm25_20251119,
               Anthropic::Beta::BetaToolSearchToolRegex20251119,
               Anthropic::Beta::BetaMCPToolset

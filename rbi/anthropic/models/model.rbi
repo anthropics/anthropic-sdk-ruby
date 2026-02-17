@@ -21,6 +21,10 @@ module Anthropic
       CLAUDE_OPUS_4_6 =
         T.let(:"claude-opus-4-6", Anthropic::Model::TaggedSymbol)
 
+      # Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+      CLAUDE_SONNET_4_6 =
+        T.let(:"claude-sonnet-4-6", Anthropic::Model::TaggedSymbol)
+
       # Premium model combining maximum intelligence with practical performance
       CLAUDE_OPUS_4_5_20251101 =
         T.let(:"claude-opus-4-5-20251101", Anthropic::Model::TaggedSymbol)

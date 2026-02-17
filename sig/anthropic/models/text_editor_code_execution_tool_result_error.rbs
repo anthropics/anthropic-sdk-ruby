@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    type text_editor_code_execution_tool_result_error =
+      {
+        error_code: Anthropic::Models::text_editor_code_execution_tool_result_error_code,
+        error_message: String?,
+        type: :text_editor_code_execution_tool_result_error
+      }
+
+    class TextEditorCodeExecutionToolResultError < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: Anthropic::Models::text_editor_code_execution_tool_result_error_code
+
+      attr_accessor error_message: String?
+
+      attr_accessor type: :text_editor_code_execution_tool_result_error
+
+      def initialize: (
+        error_code: Anthropic::Models::text_editor_code_execution_tool_result_error_code,
+        error_message: String?,
+        ?type: :text_editor_code_execution_tool_result_error
+      ) -> void
+
+      def to_hash: -> {
+        error_code: Anthropic::Models::text_editor_code_execution_tool_result_error_code,
+        error_message: String?,
+        type: :text_editor_code_execution_tool_result_error
+      }
+    end
+  end
+end

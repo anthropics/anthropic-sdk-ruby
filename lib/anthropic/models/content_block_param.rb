@@ -36,8 +36,23 @@ module Anthropic
 
       variant :web_search_tool_result, -> { Anthropic::WebSearchToolResultBlockParam }
 
+      variant :web_fetch_tool_result, -> { Anthropic::WebFetchToolResultBlockParam }
+
+      variant :code_execution_tool_result, -> { Anthropic::CodeExecutionToolResultBlockParam }
+
+      variant :bash_code_execution_tool_result, -> { Anthropic::BashCodeExecutionToolResultBlockParam }
+
+      variant :text_editor_code_execution_tool_result,
+              -> { Anthropic::TextEditorCodeExecutionToolResultBlockParam }
+
+      variant :tool_search_tool_result, -> { Anthropic::ToolSearchToolResultBlockParam }
+
+      # A content block that represents a file to be uploaded to the container
+      # Files uploaded via this block will be available in the container's input directory.
+      variant :container_upload, -> { Anthropic::ContainerUploadBlockParam }
+
       # @!method self.variants
-      #   @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::ServerToolUseBlockParam, Anthropic::Models::WebSearchToolResultBlockParam)]
+      #   @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::ServerToolUseBlockParam, Anthropic::Models::WebSearchToolResultBlockParam, Anthropic::Models::WebFetchToolResultBlockParam, Anthropic::Models::CodeExecutionToolResultBlockParam, Anthropic::Models::BashCodeExecutionToolResultBlockParam, Anthropic::Models::TextEditorCodeExecutionToolResultBlockParam, Anthropic::Models::ToolSearchToolResultBlockParam, Anthropic::Models::ContainerUploadBlockParam)]
     end
   end
 end

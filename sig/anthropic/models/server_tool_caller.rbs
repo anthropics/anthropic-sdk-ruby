@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    type server_tool_caller =
+      { tool_id: String, type: :code_execution_20250825 }
+
+    class ServerToolCaller < Anthropic::Internal::Type::BaseModel
+      attr_accessor tool_id: String
+
+      attr_accessor type: :code_execution_20250825
+
+      def initialize: (tool_id: String, ?type: :code_execution_20250825) -> void
+
+      def to_hash: -> { tool_id: String, type: :code_execution_20250825 }
+    end
+  end
+end

@@ -8,7 +8,8 @@ module Anthropic
           content: Anthropic::Models::Beta::beta_web_search_tool_result_block_param_content,
           tool_use_id: String,
           type: :web_search_tool_result,
-          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          caller_: Anthropic::Models::Beta::BetaWebSearchToolResultBlockParam::caller_
         }
 
       class BetaWebSearchToolResultBlockParam < Anthropic::Internal::Type::BaseModel
@@ -20,10 +21,17 @@ module Anthropic
 
         attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
+        attr_reader caller_: Anthropic::Models::Beta::BetaWebSearchToolResultBlockParam::caller_?
+
+        def caller_=: (
+          Anthropic::Models::Beta::BetaWebSearchToolResultBlockParam::caller_
+        ) -> Anthropic::Models::Beta::BetaWebSearchToolResultBlockParam::caller_
+
         def initialize: (
           content: Anthropic::Models::Beta::beta_web_search_tool_result_block_param_content,
           tool_use_id: String,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?caller_: Anthropic::Models::Beta::BetaWebSearchToolResultBlockParam::caller_,
           ?type: :web_search_tool_result
         ) -> void
 
@@ -31,8 +39,20 @@ module Anthropic
           content: Anthropic::Models::Beta::beta_web_search_tool_result_block_param_content,
           tool_use_id: String,
           type: :web_search_tool_result,
-          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          caller_: Anthropic::Models::Beta::BetaWebSearchToolResultBlockParam::caller_
         }
+
+        type caller_ =
+          Anthropic::Beta::BetaDirectCaller
+          | Anthropic::Beta::BetaServerToolCaller
+          | Anthropic::Beta::BetaServerToolCaller20260120
+
+        module Caller
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaWebSearchToolResultBlockParam::caller_]
+        end
       end
     end
   end

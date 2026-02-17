@@ -18,7 +18,13 @@ module Anthropic
             Anthropic::ToolUseBlockParam,
             Anthropic::ToolResultBlockParam,
             Anthropic::ServerToolUseBlockParam,
-            Anthropic::WebSearchToolResultBlockParam
+            Anthropic::WebSearchToolResultBlockParam,
+            Anthropic::WebFetchToolResultBlockParam,
+            Anthropic::CodeExecutionToolResultBlockParam,
+            Anthropic::BashCodeExecutionToolResultBlockParam,
+            Anthropic::TextEditorCodeExecutionToolResultBlockParam,
+            Anthropic::ToolSearchToolResultBlockParam,
+            Anthropic::ContainerUploadBlockParam
           )
         end
 

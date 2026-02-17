@@ -91,6 +91,13 @@ module Anthropic
       #   @return [Anthropic::Models::OutputConfig, nil]
       optional :output_config, -> { Anthropic::OutputConfig }
 
+      # @!attribute speed
+      #   The inference speed mode for this request. `"fast"` enables high
+      #   output-tokens-per-second inference.
+      #
+      #   @return [Symbol, Anthropic::Models::MessageCountTokensParams::Speed, nil]
+      optional :speed, enum: -> { Anthropic::MessageCountTokensParams::Speed }, nil?: true
+
       # @!attribute system_
       #   System prompt.
       #
@@ -199,10 +206,10 @@ module Anthropic
       #
       #   See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
       #
-      #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305>, nil]
+      #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::MessageCountTokensTool::CodeExecutionTool20260120, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::MessageCountTokensTool::WebSearchTool20260209, Anthropic::Models::MessageCountTokensTool::WebFetchTool20260209, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>, nil]
       optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::MessageCountTokensTool] }
 
-      # @!method initialize(messages:, model:, output_config: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
+      # @!method initialize(messages:, model:, output_config: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::MessageCountTokensParams} for more details.
       #
@@ -212,15 +219,29 @@ module Anthropic
       #
       #   @param output_config [Anthropic::Models::OutputConfig] Configuration options for the model's output, such as the output format.
       #
+      #   @param speed [Symbol, Anthropic::Models::MessageCountTokensParams::Speed, nil] The inference speed mode for this request. `"fast"` enables high output-tokens-p
+      #
       #   @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt.
       #
       #   @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigAdaptive] Configuration for enabling Claude's extended thinking.
       #
       #   @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
       #
-      #   @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305>] Definitions of tools that the model may use.
+      #   @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::MessageCountTokensTool::CodeExecutionTool20260120, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::MessageCountTokensTool::WebSearchTool20260209, Anthropic::Models::MessageCountTokensTool::WebFetchTool20260209, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>] Definitions of tools that the model may use.
       #
       #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
+
+      # The inference speed mode for this request. `"fast"` enables high
+      # output-tokens-per-second inference.
+      module Speed
+        extend Anthropic::Internal::Type::Enum
+
+        STANDARD = :standard
+        FAST = :fast
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
 
       # System prompt.
       #

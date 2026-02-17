@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    type tool_search_tool_result_error_code =
+      :invalid_tool_input
+      | :unavailable
+      | :too_many_requests
+      | :execution_time_exceeded
+
+    module ToolSearchToolResultErrorCode
+      extend Anthropic::Internal::Type::Enum
+
+      INVALID_TOOL_INPUT: :invalid_tool_input
+      UNAVAILABLE: :unavailable
+      TOO_MANY_REQUESTS: :too_many_requests
+      EXECUTION_TIME_EXCEEDED: :execution_time_exceeded
+
+      def self?.values: -> ::Array[Anthropic::Models::tool_search_tool_result_error_code]
+    end
+  end
+end

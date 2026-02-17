@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    type tool_reference_block_param =
+      {
+        tool_name: String,
+        type: :tool_reference,
+        cache_control: Anthropic::CacheControlEphemeral?
+      }
+
+    class ToolReferenceBlockParam < Anthropic::Internal::Type::BaseModel
+      attr_accessor tool_name: String
+
+      attr_accessor type: :tool_reference
+
+      attr_accessor cache_control: Anthropic::CacheControlEphemeral?
+
+      def initialize: (
+        tool_name: String,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
+        ?type: :tool_reference
+      ) -> void
+
+      def to_hash: -> {
+        tool_name: String,
+        type: :tool_reference,
+        cache_control: Anthropic::CacheControlEphemeral?
+      }
+    end
+  end
+end

@@ -21,10 +21,12 @@ module Anthropic
           max_tokens: Integer,
           messages: T::Array[Anthropic::MessageParam::OrHash],
           model: T.any(Anthropic::Model::OrSymbol, String),
+          container: T.nilable(String),
           inference_geo: T.nilable(String),
           metadata: Anthropic::Metadata::OrHash,
           output_config: Anthropic::OutputConfig::OrHash,
           service_tier: Anthropic::MessageCreateParams::ServiceTier::OrSymbol,
+          speed: T.nilable(Anthropic::MessageCreateParams::Speed::OrSymbol),
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
           temperature: Float,
@@ -46,10 +48,19 @@ module Anthropic
               T.any(
                 Anthropic::Tool::OrHash,
                 Anthropic::ToolBash20250124::OrHash,
+                Anthropic::CodeExecutionTool20250522::OrHash,
+                Anthropic::CodeExecutionTool20250825::OrHash,
+                Anthropic::ToolUnion::CodeExecutionTool20260120::OrHash,
+                Anthropic::MemoryTool20250818::OrHash,
                 Anthropic::ToolTextEditor20250124::OrHash,
                 Anthropic::ToolTextEditor20250429::OrHash,
                 Anthropic::ToolTextEditor20250728::OrHash,
-                Anthropic::WebSearchTool20250305::OrHash
+                Anthropic::WebSearchTool20250305::OrHash,
+                Anthropic::WebFetchTool20250910::OrHash,
+                Anthropic::ToolUnion::WebSearchTool20260209::OrHash,
+                Anthropic::ToolUnion::WebFetchTool20260209::OrHash,
+                Anthropic::ToolSearchToolBm25_20251119::OrHash,
+                Anthropic::ToolSearchToolRegex20251119::OrHash
               )
             ],
           top_k: Integer,
@@ -137,6 +148,8 @@ module Anthropic
         # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         model:,
+        # Container identifier for reuse across requests.
+        container: nil,
         # Specifies the geographic region for inference processing. If not specified, the
         # workspace's `default_inference_geo` is used.
         inference_geo: nil,
@@ -150,6 +163,9 @@ module Anthropic
         # Anthropic offers different levels of service for your API requests. See
         # [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
         service_tier: nil,
+        # The inference speed mode for this request. `"fast"` enables high
+        # output-tokens-per-second inference.
+        speed: nil,
         # Custom text sequences that will cause the model to stop generating.
         #
         # Our models will normally stop when they have naturally completed their turn,
@@ -595,10 +611,12 @@ module Anthropic
           max_tokens: Integer,
           messages: T::Array[Anthropic::MessageParam::OrHash],
           model: T.any(Anthropic::Model::OrSymbol, String),
+          container: T.nilable(String),
           inference_geo: T.nilable(String),
           metadata: Anthropic::Metadata::OrHash,
           output_config: Anthropic::OutputConfig::OrHash,
           service_tier: Anthropic::MessageCreateParams::ServiceTier::OrSymbol,
+          speed: T.nilable(Anthropic::MessageCreateParams::Speed::OrSymbol),
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
           temperature: Float,
@@ -620,10 +638,19 @@ module Anthropic
               T.any(
                 Anthropic::Tool::OrHash,
                 Anthropic::ToolBash20250124::OrHash,
+                Anthropic::CodeExecutionTool20250522::OrHash,
+                Anthropic::CodeExecutionTool20250825::OrHash,
+                Anthropic::ToolUnion::CodeExecutionTool20260120::OrHash,
+                Anthropic::MemoryTool20250818::OrHash,
                 Anthropic::ToolTextEditor20250124::OrHash,
                 Anthropic::ToolTextEditor20250429::OrHash,
                 Anthropic::ToolTextEditor20250728::OrHash,
-                Anthropic::WebSearchTool20250305::OrHash
+                Anthropic::WebSearchTool20250305::OrHash,
+                Anthropic::WebFetchTool20250910::OrHash,
+                Anthropic::ToolUnion::WebSearchTool20260209::OrHash,
+                Anthropic::ToolUnion::WebFetchTool20260209::OrHash,
+                Anthropic::ToolSearchToolBm25_20251119::OrHash,
+                Anthropic::ToolSearchToolRegex20251119::OrHash
               )
             ],
           top_k: Integer,
@@ -715,6 +742,8 @@ module Anthropic
         # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         model:,
+        # Container identifier for reuse across requests.
+        container: nil,
         # Specifies the geographic region for inference processing. If not specified, the
         # workspace's `default_inference_geo` is used.
         inference_geo: nil,
@@ -728,6 +757,9 @@ module Anthropic
         # Anthropic offers different levels of service for your API requests. See
         # [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
         service_tier: nil,
+        # The inference speed mode for this request. `"fast"` enables high
+        # output-tokens-per-second inference.
+        speed: nil,
         # Custom text sequences that will cause the model to stop generating.
         #
         # Our models will normally stop when they have naturally completed their turn,
@@ -879,6 +911,8 @@ module Anthropic
           messages: T::Array[Anthropic::MessageParam::OrHash],
           model: T.any(Anthropic::Model::OrSymbol, String),
           output_config: Anthropic::OutputConfig::OrHash,
+          speed:
+            T.nilable(Anthropic::MessageCountTokensParams::Speed::OrSymbol),
           system_: Anthropic::MessageCountTokensParams::System::Variants,
           thinking:
             T.any(
@@ -898,10 +932,19 @@ module Anthropic
               T.any(
                 Anthropic::Tool::OrHash,
                 Anthropic::ToolBash20250124::OrHash,
+                Anthropic::CodeExecutionTool20250522::OrHash,
+                Anthropic::CodeExecutionTool20250825::OrHash,
+                Anthropic::MessageCountTokensTool::CodeExecutionTool20260120::OrHash,
+                Anthropic::MemoryTool20250818::OrHash,
                 Anthropic::ToolTextEditor20250124::OrHash,
                 Anthropic::ToolTextEditor20250429::OrHash,
                 Anthropic::ToolTextEditor20250728::OrHash,
-                Anthropic::WebSearchTool20250305::OrHash
+                Anthropic::WebSearchTool20250305::OrHash,
+                Anthropic::WebFetchTool20250910::OrHash,
+                Anthropic::MessageCountTokensTool::WebSearchTool20260209::OrHash,
+                Anthropic::MessageCountTokensTool::WebFetchTool20260209::OrHash,
+                Anthropic::ToolSearchToolBm25_20251119::OrHash,
+                Anthropic::ToolSearchToolRegex20251119::OrHash
               )
             ],
           request_options: Anthropic::RequestOptions::OrHash
@@ -980,6 +1023,9 @@ module Anthropic
         model:,
         # Configuration options for the model's output, such as the output format.
         output_config: nil,
+        # The inference speed mode for this request. `"fast"` enables high
+        # output-tokens-per-second inference.
+        speed: nil,
         # System prompt.
         #
         # A system prompt is a way of providing context and instructions to Claude, such

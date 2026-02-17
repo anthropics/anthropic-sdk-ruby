@@ -27,6 +27,28 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
+        # Tool invocation directly from the model.
+        sig do
+          returns(
+            T.nilable(
+              Anthropic::Beta::BetaWebFetchToolResultBlock::Caller::Variants
+            )
+          )
+        end
+        attr_reader :caller_
+
+        sig do
+          params(
+            caller_:
+              T.any(
+                Anthropic::Beta::BetaDirectCaller::OrHash,
+                Anthropic::Beta::BetaServerToolCaller::OrHash,
+                Anthropic::Beta::BetaServerToolCaller20260120::OrHash
+              )
+          ).void
+        end
+        attr_writer :caller_
+
         sig do
           params(
             content:
@@ -35,10 +57,22 @@ module Anthropic
                 Anthropic::Beta::BetaWebFetchBlock::OrHash
               ),
             tool_use_id: String,
+            caller_:
+              T.any(
+                Anthropic::Beta::BetaDirectCaller::OrHash,
+                Anthropic::Beta::BetaServerToolCaller::OrHash,
+                Anthropic::Beta::BetaServerToolCaller20260120::OrHash
+              ),
             type: Symbol
           ).returns(T.attached_class)
         end
-        def self.new(content:, tool_use_id:, type: :web_fetch_tool_result)
+        def self.new(
+          content:,
+          tool_use_id:,
+          # Tool invocation directly from the model.
+          caller_: nil,
+          type: :web_fetch_tool_result
+        )
         end
 
         sig do
@@ -47,7 +81,9 @@ module Anthropic
               content:
                 Anthropic::Beta::BetaWebFetchToolResultBlock::Content::Variants,
               tool_use_id: String,
-              type: Symbol
+              type: Symbol,
+              caller_:
+                Anthropic::Beta::BetaWebFetchToolResultBlock::Caller::Variants
             }
           )
         end
@@ -69,6 +105,30 @@ module Anthropic
             override.returns(
               T::Array[
                 Anthropic::Beta::BetaWebFetchToolResultBlock::Content::Variants
+              ]
+            )
+          end
+          def self.variants
+          end
+        end
+
+        # Tool invocation directly from the model.
+        module Caller
+          extend Anthropic::Internal::Type::Union
+
+          Variants =
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::BetaDirectCaller,
+                Anthropic::Beta::BetaServerToolCaller,
+                Anthropic::Beta::BetaServerToolCaller20260120
+              )
+            end
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaWebFetchToolResultBlock::Caller::Variants
               ]
             )
           end

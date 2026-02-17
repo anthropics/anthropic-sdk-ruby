@@ -22,6 +22,18 @@ module Anthropic
       sig { returns(String) }
       attr_accessor :name
 
+      sig do
+        returns(T.nilable(T::Array[Anthropic::Tool::AllowedCaller::OrSymbol]))
+      end
+      attr_reader :allowed_callers
+
+      sig do
+        params(
+          allowed_callers: T::Array[Anthropic::Tool::AllowedCaller::OrSymbol]
+        ).void
+      end
+      attr_writer :allowed_callers
+
       # Create a cache control breakpoint at this content block.
       sig { returns(T.nilable(Anthropic::CacheControlEphemeral)) }
       attr_reader :cache_control
@@ -32,6 +44,14 @@ module Anthropic
         ).void
       end
       attr_writer :cache_control
+
+      # If true, tool will not be included in initial system prompt. Only loaded when
+      # returned via tool_reference from tool search.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :defer_loading
+
+      sig { params(defer_loading: T::Boolean).void }
+      attr_writer :defer_loading
 
       # Description of what this tool does.
       #
@@ -53,6 +73,12 @@ module Anthropic
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :eager_input_streaming
 
+      sig { returns(T.nilable(T::Array[T::Hash[Symbol, T.anything]])) }
+      attr_reader :input_examples
+
+      sig { params(input_examples: T::Array[T::Hash[Symbol, T.anything]]).void }
+      attr_writer :input_examples
+
       # When true, guarantees schema validation on tool names and inputs
       sig { returns(T.nilable(T::Boolean)) }
       attr_reader :strict
@@ -67,9 +93,12 @@ module Anthropic
         params(
           input_schema: Anthropic::Tool::InputSchema::OrHash,
           name: String,
+          allowed_callers: T::Array[Anthropic::Tool::AllowedCaller::OrSymbol],
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
+          defer_loading: T::Boolean,
           description: String,
           eager_input_streaming: T.nilable(T::Boolean),
+          input_examples: T::Array[T::Hash[Symbol, T.anything]],
           strict: T::Boolean,
           type: T.nilable(Anthropic::Tool::Type::OrSymbol)
         ).returns(T.attached_class)
@@ -84,8 +113,12 @@ module Anthropic
         #
         # This is how the tool will be called by the model and in `tool_use` blocks.
         name:,
+        allowed_callers: nil,
         # Create a cache control breakpoint at this content block.
         cache_control: nil,
+        # If true, tool will not be included in initial system prompt. Only loaded when
+        # returned via tool_reference from tool search.
+        defer_loading: nil,
         # Description of what this tool does.
         #
         # Tool descriptions should be as detailed as possible. The more information that
@@ -99,6 +132,7 @@ module Anthropic
         # disabled for this tool even if the fine-grained-tool-streaming beta is active.
         # When null (default), uses the default behavior based on beta headers.
         eager_input_streaming: nil,
+        input_examples: nil,
         # When true, guarantees schema validation on tool names and inputs
         strict: nil,
         type: nil
@@ -110,9 +144,12 @@ module Anthropic
           {
             input_schema: Anthropic::Tool::InputSchema,
             name: String,
+            allowed_callers: T::Array[Anthropic::Tool::AllowedCaller::OrSymbol],
             cache_control: T.nilable(Anthropic::CacheControlEphemeral),
+            defer_loading: T::Boolean,
             description: String,
             eager_input_streaming: T.nilable(T::Boolean),
+            input_examples: T::Array[T::Hash[Symbol, T.anything]],
             strict: T::Boolean,
             type: T.nilable(Anthropic::Tool::Type::OrSymbol)
           }
@@ -160,6 +197,29 @@ module Anthropic
           )
         end
         def to_hash
+        end
+      end
+
+      module AllowedCaller
+        extend Anthropic::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias { T.all(Symbol, Anthropic::Tool::AllowedCaller) }
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        DIRECT = T.let(:direct, Anthropic::Tool::AllowedCaller::TaggedSymbol)
+        CODE_EXECUTION_20250825 =
+          T.let(
+            :code_execution_20250825,
+            Anthropic::Tool::AllowedCaller::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::Tool::AllowedCaller::TaggedSymbol]
+          )
+        end
+        def self.values
         end
       end
 

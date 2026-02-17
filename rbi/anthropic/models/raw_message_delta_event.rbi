@@ -88,6 +88,14 @@ module Anthropic
             )
           end
 
+        # Information about the container used in the request (for the code execution
+        # tool)
+        sig { returns(T.nilable(Anthropic::Container)) }
+        attr_reader :container
+
+        sig { params(container: T.nilable(Anthropic::Container::OrHash)).void }
+        attr_writer :container
+
         sig { returns(T.nilable(Anthropic::StopReason::TaggedSymbol)) }
         attr_accessor :stop_reason
 
@@ -96,16 +104,24 @@ module Anthropic
 
         sig do
           params(
+            container: T.nilable(Anthropic::Container::OrHash),
             stop_reason: T.nilable(Anthropic::StopReason::OrSymbol),
             stop_sequence: T.nilable(String)
           ).returns(T.attached_class)
         end
-        def self.new(stop_reason:, stop_sequence:)
+        def self.new(
+          # Information about the container used in the request (for the code execution
+          # tool)
+          container:,
+          stop_reason:,
+          stop_sequence:
+        )
         end
 
         sig do
           override.returns(
             {
+              container: T.nilable(Anthropic::Container),
               stop_reason: T.nilable(Anthropic::StopReason::TaggedSymbol),
               stop_sequence: T.nilable(String)
             }

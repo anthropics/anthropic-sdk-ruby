@@ -18,6 +18,7 @@ class Anthropic::Test::Resources::MessagesTest < Anthropic::Test::ResourceTest
     assert_pattern do
       response => {
         id: String,
+        container: Anthropic::Container | nil,
         content: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::ContentBlock]),
         model: Anthropic::Model,
         role: Symbol,

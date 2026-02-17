@@ -1,10 +1,18 @@
 module Anthropic
   module Models
     type tool_use_block =
-      { id: String, input: ::Hash[Symbol, top], name: String, type: :tool_use }
+      {
+        id: String,
+        caller_: Anthropic::Models::ToolUseBlock::caller_,
+        input: ::Hash[Symbol, top],
+        name: String,
+        type: :tool_use
+      }
 
     class ToolUseBlock < Anthropic::Internal::Type::BaseModel
       attr_accessor id: String
+
+      attr_accessor caller_: Anthropic::Models::ToolUseBlock::caller_
 
       attr_accessor input: ::Hash[Symbol, top]
 
@@ -14,6 +22,7 @@ module Anthropic
 
       def initialize: (
         id: String,
+        caller_: Anthropic::Models::ToolUseBlock::caller_,
         input: ::Hash[Symbol, top],
         name: String,
         ?type: :tool_use
@@ -21,10 +30,38 @@ module Anthropic
 
       def to_hash: -> {
         id: String,
+        caller_: Anthropic::Models::ToolUseBlock::caller_,
         input: ::Hash[Symbol, top],
         name: String,
         type: :tool_use
       }
+
+      type caller_ =
+        Anthropic::DirectCaller
+        | Anthropic::ServerToolCaller
+        | Anthropic::ToolUseBlock::Caller::CodeExecution20260120
+
+      module Caller
+        extend Anthropic::Internal::Type::Union
+
+        type code_execution20260120 =
+          { tool_id: String, type: :code_execution_20260120 }
+
+        class CodeExecution20260120 < Anthropic::Internal::Type::BaseModel
+          attr_accessor tool_id: String
+
+          attr_accessor type: :code_execution_20260120
+
+          def initialize: (
+            tool_id: String,
+            ?type: :code_execution_20260120
+          ) -> void
+
+          def to_hash: -> { tool_id: String, type: :code_execution_20260120 }
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::ToolUseBlock::caller_]
+      end
     end
   end
 end

@@ -11,6 +11,7 @@ module Anthropic
           )
         end
 
+      # Response model for a file uploaded to the container.
       sig do
         returns(Anthropic::RawContentBlockStartEvent::ContentBlock::Variants)
       end
@@ -31,13 +32,24 @@ module Anthropic
               Anthropic::RedactedThinkingBlock::OrHash,
               Anthropic::ToolUseBlock::OrHash,
               Anthropic::ServerToolUseBlock::OrHash,
-              Anthropic::WebSearchToolResultBlock::OrHash
+              Anthropic::WebSearchToolResultBlock::OrHash,
+              Anthropic::WebFetchToolResultBlock::OrHash,
+              Anthropic::CodeExecutionToolResultBlock::OrHash,
+              Anthropic::BashCodeExecutionToolResultBlock::OrHash,
+              Anthropic::TextEditorCodeExecutionToolResultBlock::OrHash,
+              Anthropic::ToolSearchToolResultBlock::OrHash,
+              Anthropic::ContainerUploadBlock::OrHash
             ),
           index: Integer,
           type: Symbol
         ).returns(T.attached_class)
       end
-      def self.new(content_block:, index:, type: :content_block_start)
+      def self.new(
+        # Response model for a file uploaded to the container.
+        content_block:,
+        index:,
+        type: :content_block_start
+      )
       end
 
       sig do
@@ -53,6 +65,7 @@ module Anthropic
       def to_hash
       end
 
+      # Response model for a file uploaded to the container.
       module ContentBlock
         extend Anthropic::Internal::Type::Union
 
@@ -64,7 +77,13 @@ module Anthropic
               Anthropic::RedactedThinkingBlock,
               Anthropic::ToolUseBlock,
               Anthropic::ServerToolUseBlock,
-              Anthropic::WebSearchToolResultBlock
+              Anthropic::WebSearchToolResultBlock,
+              Anthropic::WebFetchToolResultBlock,
+              Anthropic::CodeExecutionToolResultBlock,
+              Anthropic::BashCodeExecutionToolResultBlock,
+              Anthropic::TextEditorCodeExecutionToolResultBlock,
+              Anthropic::ToolSearchToolResultBlock,
+              Anthropic::ContainerUploadBlock
             )
           end
 

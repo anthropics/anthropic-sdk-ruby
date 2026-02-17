@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    type container_upload_block = { file_id: String, type: :container_upload }
+
+    class ContainerUploadBlock < Anthropic::Internal::Type::BaseModel
+      attr_accessor file_id: String
+
+      attr_accessor type: :container_upload
+
+      def initialize: (file_id: String, ?type: :container_upload) -> void
+
+      def to_hash: -> { file_id: String, type: :container_upload }
+    end
+  end
+end

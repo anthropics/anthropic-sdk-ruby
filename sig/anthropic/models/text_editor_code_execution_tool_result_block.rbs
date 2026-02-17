@@ -1,0 +1,42 @@
+module Anthropic
+  module Models
+    type text_editor_code_execution_tool_result_block =
+      {
+        content: Anthropic::Models::TextEditorCodeExecutionToolResultBlock::content,
+        tool_use_id: String,
+        type: :text_editor_code_execution_tool_result
+      }
+
+    class TextEditorCodeExecutionToolResultBlock < Anthropic::Internal::Type::BaseModel
+      attr_accessor content: Anthropic::Models::TextEditorCodeExecutionToolResultBlock::content
+
+      attr_accessor tool_use_id: String
+
+      attr_accessor type: :text_editor_code_execution_tool_result
+
+      def initialize: (
+        content: Anthropic::Models::TextEditorCodeExecutionToolResultBlock::content,
+        tool_use_id: String,
+        ?type: :text_editor_code_execution_tool_result
+      ) -> void
+
+      def to_hash: -> {
+        content: Anthropic::Models::TextEditorCodeExecutionToolResultBlock::content,
+        tool_use_id: String,
+        type: :text_editor_code_execution_tool_result
+      }
+
+      type content =
+        Anthropic::TextEditorCodeExecutionToolResultError
+        | Anthropic::TextEditorCodeExecutionViewResultBlock
+        | Anthropic::TextEditorCodeExecutionCreateResultBlock
+        | Anthropic::TextEditorCodeExecutionStrReplaceResultBlock
+
+      module Content
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::TextEditorCodeExecutionToolResultBlock::content]
+      end
+    end
+  end
+end
