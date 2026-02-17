@@ -26,7 +26,6 @@ module Anthropic
           metadata: Anthropic::Metadata::OrHash,
           output_config: Anthropic::OutputConfig::OrHash,
           service_tier: Anthropic::MessageCreateParams::ServiceTier::OrSymbol,
-          speed: T.nilable(Anthropic::MessageCreateParams::Speed::OrSymbol),
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
           temperature: Float,
@@ -163,9 +162,6 @@ module Anthropic
         # Anthropic offers different levels of service for your API requests. See
         # [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
         service_tier: nil,
-        # The inference speed mode for this request. `"fast"` enables high
-        # output-tokens-per-second inference.
-        speed: nil,
         # Custom text sequences that will cause the model to stop generating.
         #
         # Our models will normally stop when they have naturally completed their turn,
@@ -325,7 +321,6 @@ module Anthropic
           metadata: Anthropic::Metadata::OrHash,
           output_config: Anthropic::OutputConfig::OrHash,
           service_tier: Anthropic::MessageCreateParams::ServiceTier::OrSymbol,
-          speed: T.nilable(Anthropic::MessageCreateParams::Speed::OrSymbol),
           stop_sequences: T::Array[String],
           system_: Anthropic::MessageCreateParams::System::Variants,
           temperature: Float,
@@ -466,9 +461,6 @@ module Anthropic
         # Anthropic offers different levels of service for your API requests. See
         # [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
         service_tier: nil,
-        # The inference speed mode for this request. `"fast"` enables high
-        # output-tokens-per-second inference.
-        speed: nil,
         # Custom text sequences that will cause the model to stop generating.
         #
         # Our models will normally stop when they have naturally completed their turn,
@@ -620,8 +612,6 @@ module Anthropic
           messages: T::Array[Anthropic::MessageParam::OrHash],
           model: T.any(Anthropic::Model::OrSymbol, String),
           output_config: Anthropic::OutputConfig::OrHash,
-          speed:
-            T.nilable(Anthropic::MessageCountTokensParams::Speed::OrSymbol),
           system_: Anthropic::MessageCountTokensParams::System::Variants,
           thinking:
             T.any(
@@ -732,9 +722,6 @@ module Anthropic
         model:,
         # Configuration options for the model's output, such as the output format.
         output_config: nil,
-        # The inference speed mode for this request. `"fast"` enables high
-        # output-tokens-per-second inference.
-        speed: nil,
         # System prompt.
         #
         # A system prompt is a way of providing context and instructions to Claude, such

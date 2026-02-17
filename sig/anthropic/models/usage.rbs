@@ -9,8 +9,7 @@ module Anthropic
         input_tokens: Integer,
         output_tokens: Integer,
         server_tool_use: Anthropic::ServerToolUsage?,
-        service_tier: Anthropic::Models::Usage::service_tier?,
-        speed: Anthropic::Models::Usage::speed?
+        service_tier: Anthropic::Models::Usage::service_tier?
       }
 
     class Usage < Anthropic::Internal::Type::BaseModel
@@ -30,8 +29,6 @@ module Anthropic
 
       attr_accessor service_tier: Anthropic::Models::Usage::service_tier?
 
-      attr_accessor speed: Anthropic::Models::Usage::speed?
-
       def initialize: (
         cache_creation: Anthropic::CacheCreation?,
         cache_creation_input_tokens: Integer?,
@@ -40,8 +37,7 @@ module Anthropic
         input_tokens: Integer,
         output_tokens: Integer,
         server_tool_use: Anthropic::ServerToolUsage?,
-        service_tier: Anthropic::Models::Usage::service_tier?,
-        speed: Anthropic::Models::Usage::speed?
+        service_tier: Anthropic::Models::Usage::service_tier?
       ) -> void
 
       def to_hash: -> {
@@ -52,8 +48,7 @@ module Anthropic
         input_tokens: Integer,
         output_tokens: Integer,
         server_tool_use: Anthropic::ServerToolUsage?,
-        service_tier: Anthropic::Models::Usage::service_tier?,
-        speed: Anthropic::Models::Usage::speed?
+        service_tier: Anthropic::Models::Usage::service_tier?
       }
 
       type service_tier = :standard | :priority | :batch
@@ -66,17 +61,6 @@ module Anthropic
         BATCH: :batch
 
         def self?.values: -> ::Array[Anthropic::Models::Usage::service_tier]
-      end
-
-      type speed = :standard | :fast
-
-      module Speed
-        extend Anthropic::Internal::Type::Enum
-
-        STANDARD: :standard
-        FAST: :fast
-
-        def self?.values: -> ::Array[Anthropic::Models::Usage::speed]
       end
     end
   end

@@ -20,7 +20,7 @@ module Anthropic
       # Learn more about the Messages API in our
       # [user guide](https://docs.claude.com/en/docs/initial-setup)
       #
-      # @overload create(max_tokens:, messages:, model:, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      # @overload create(max_tokens:, messages:, model:, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
       #
       # @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
       #
@@ -37,8 +37,6 @@ module Anthropic
       # @param output_config [Anthropic::Models::OutputConfig] Configuration options for the model's output, such as the output format.
       #
       # @param service_tier [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
-      #
-      # @param speed [Symbol, Anthropic::Models::MessageCreateParams::Speed, nil] The inference speed mode for this request. `"fast"` enables high output-tokens-p
       #
       # @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
       #
@@ -90,7 +88,7 @@ module Anthropic
       # Learn more about the Messages API in our
       # [user guide](https://docs.claude.com/en/docs/initial-setup)
       #
-      # @overload stream_raw(max_tokens:, messages:, model:, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      # @overload stream_raw(max_tokens:, messages:, model:, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
       #
       # @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
       #
@@ -107,8 +105,6 @@ module Anthropic
       # @param output_config [Anthropic::Models::OutputConfig] Configuration options for the model's output, such as the output format.
       #
       # @param service_tier [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
-      #
-      # @param speed [Symbol, Anthropic::Models::MessageCreateParams::Speed, nil] The inference speed mode for this request. `"fast"` enables high output-tokens-p
       #
       # @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
       #
@@ -160,15 +156,13 @@ module Anthropic
       # Learn more about token counting in our
       # [user guide](https://docs.claude.com/en/docs/build-with-claude/token-counting)
       #
-      # @overload count_tokens(messages:, model:, output_config: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
+      # @overload count_tokens(messages:, model:, output_config: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
       #
       # @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
       #
       # @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
       #
       # @param output_config [Anthropic::Models::OutputConfig] Configuration options for the model's output, such as the output format.
-      #
-      # @param speed [Symbol, Anthropic::Models::MessageCountTokensParams::Speed, nil] The inference speed mode for this request. `"fast"` enables high output-tokens-p
       #
       # @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt.
       #
