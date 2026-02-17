@@ -15,11 +15,13 @@ module Anthropic
             )
           end
 
+        # Code execution result with encrypted stdout for PFC + web_search results.
         sig do
           returns(
             T.any(
               Anthropic::Beta::BetaCodeExecutionToolResultErrorParam,
-              Anthropic::Beta::BetaCodeExecutionResultBlockParam
+              Anthropic::Beta::BetaCodeExecutionResultBlockParam,
+              Anthropic::Beta::BetaEncryptedCodeExecutionResultBlockParam
             )
           )
         end
@@ -48,7 +50,8 @@ module Anthropic
             content:
               T.any(
                 Anthropic::Beta::BetaCodeExecutionToolResultErrorParam::OrHash,
-                Anthropic::Beta::BetaCodeExecutionResultBlockParam::OrHash
+                Anthropic::Beta::BetaCodeExecutionResultBlockParam::OrHash,
+                Anthropic::Beta::BetaEncryptedCodeExecutionResultBlockParam::OrHash
               ),
             tool_use_id: String,
             cache_control:
@@ -57,6 +60,7 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
+          # Code execution result with encrypted stdout for PFC + web_search results.
           content:,
           tool_use_id:,
           # Create a cache control breakpoint at this content block.
@@ -71,7 +75,8 @@ module Anthropic
               content:
                 T.any(
                   Anthropic::Beta::BetaCodeExecutionToolResultErrorParam,
-                  Anthropic::Beta::BetaCodeExecutionResultBlockParam
+                  Anthropic::Beta::BetaCodeExecutionResultBlockParam,
+                  Anthropic::Beta::BetaEncryptedCodeExecutionResultBlockParam
                 ),
               tool_use_id: String,
               type: Symbol,

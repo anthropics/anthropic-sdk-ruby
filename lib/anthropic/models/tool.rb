@@ -20,11 +20,23 @@ module Anthropic
       #   @return [String]
       required :name, String
 
+      # @!attribute allowed_callers
+      #
+      #   @return [Array<Symbol, Anthropic::Models::Tool::AllowedCaller>, nil]
+      optional :allowed_callers, -> { Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Tool::AllowedCaller] }
+
       # @!attribute cache_control
       #   Create a cache control breakpoint at this content block.
       #
       #   @return [Anthropic::Models::CacheControlEphemeral, nil]
       optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
+
+      # @!attribute defer_loading
+      #   If true, tool will not be included in initial system prompt. Only loaded when
+      #   returned via tool_reference from tool search.
+      #
+      #   @return [Boolean, nil]
+      optional :defer_loading, Anthropic::Internal::Type::Boolean
 
       # @!attribute description
       #   Description of what this tool does.
@@ -47,6 +59,12 @@ module Anthropic
       #   @return [Boolean, nil]
       optional :eager_input_streaming, Anthropic::Internal::Type::Boolean, nil?: true
 
+      # @!attribute input_examples
+      #
+      #   @return [Array<Hash{Symbol=>Object}>, nil]
+      optional :input_examples,
+               Anthropic::Internal::Type::ArrayOf[Anthropic::Internal::Type::HashOf[Anthropic::Internal::Type::Unknown]]
+
       # @!attribute strict
       #   When true, guarantees schema validation on tool names and inputs
       #
@@ -58,7 +76,7 @@ module Anthropic
       #   @return [Symbol, Anthropic::Models::Tool::Type, nil]
       optional :type, enum: -> { Anthropic::Tool::Type }, nil?: true
 
-      # @!method initialize(input_schema:, name:, cache_control: nil, description: nil, eager_input_streaming: nil, strict: nil, type: nil)
+      # @!method initialize(input_schema:, name:, allowed_callers: nil, cache_control: nil, defer_loading: nil, description: nil, eager_input_streaming: nil, input_examples: nil, strict: nil, type: nil)
       #   Some parameter documentations has been truncated, see {Anthropic::Models::Tool}
       #   for more details.
       #
@@ -66,11 +84,17 @@ module Anthropic
       #
       #   @param name [String] Name of the tool.
       #
+      #   @param allowed_callers [Array<Symbol, Anthropic::Models::Tool::AllowedCaller>]
+      #
       #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+      #
+      #   @param defer_loading [Boolean] If true, tool will not be included in initial system prompt. Only loaded when re
       #
       #   @param description [String] Description of what this tool does.
       #
       #   @param eager_input_streaming [Boolean, nil] Enable eager input streaming for this tool. When true, tool input parameters wil
+      #
+      #   @param input_examples [Array<Hash{Symbol=>Object}>]
       #
       #   @param strict [Boolean] When true, guarantees schema validation on tool names and inputs
       #
@@ -104,6 +128,16 @@ module Anthropic
         #   @param properties [Hash{Symbol=>Object}, nil]
         #   @param required [Array<String>, nil]
         #   @param type [Symbol, :object]
+      end
+
+      module AllowedCaller
+        extend Anthropic::Internal::Type::Enum
+
+        DIRECT = :direct
+        CODE_EXECUTION_20250825 = :code_execution_20250825
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
       end
 
       # @see Anthropic::Models::Tool#type

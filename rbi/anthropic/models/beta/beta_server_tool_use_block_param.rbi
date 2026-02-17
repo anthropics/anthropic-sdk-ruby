@@ -46,7 +46,8 @@ module Anthropic
             T.nilable(
               T.any(
                 Anthropic::Beta::BetaDirectCaller,
-                Anthropic::Beta::BetaServerToolCaller
+                Anthropic::Beta::BetaServerToolCaller,
+                Anthropic::Beta::BetaServerToolCaller20260120
               )
             )
           )
@@ -58,7 +59,8 @@ module Anthropic
             caller_:
               T.any(
                 Anthropic::Beta::BetaDirectCaller::OrHash,
-                Anthropic::Beta::BetaServerToolCaller::OrHash
+                Anthropic::Beta::BetaServerToolCaller::OrHash,
+                Anthropic::Beta::BetaServerToolCaller20260120::OrHash
               )
           ).void
         end
@@ -74,7 +76,8 @@ module Anthropic
             caller_:
               T.any(
                 Anthropic::Beta::BetaDirectCaller::OrHash,
-                Anthropic::Beta::BetaServerToolCaller::OrHash
+                Anthropic::Beta::BetaServerToolCaller::OrHash,
+                Anthropic::Beta::BetaServerToolCaller20260120::OrHash
               ),
             type: Symbol
           ).returns(T.attached_class)
@@ -104,7 +107,8 @@ module Anthropic
               caller_:
                 T.any(
                   Anthropic::Beta::BetaDirectCaller,
-                  Anthropic::Beta::BetaServerToolCaller
+                  Anthropic::Beta::BetaServerToolCaller,
+                  Anthropic::Beta::BetaServerToolCaller20260120
                 )
             }
           )
@@ -176,7 +180,8 @@ module Anthropic
             T.type_alias do
               T.any(
                 Anthropic::Beta::BetaDirectCaller,
-                Anthropic::Beta::BetaServerToolCaller
+                Anthropic::Beta::BetaServerToolCaller,
+                Anthropic::Beta::BetaServerToolCaller20260120
               )
             end
 

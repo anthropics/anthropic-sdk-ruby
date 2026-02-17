@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    type bash_code_execution_result_block =
+      {
+        content: ::Array[Anthropic::BashCodeExecutionOutputBlock],
+        return_code: Integer,
+        stderr: String,
+        stdout: String,
+        type: :bash_code_execution_result
+      }
+
+    class BashCodeExecutionResultBlock < Anthropic::Internal::Type::BaseModel
+      attr_accessor content: ::Array[Anthropic::BashCodeExecutionOutputBlock]
+
+      attr_accessor return_code: Integer
+
+      attr_accessor stderr: String
+
+      attr_accessor stdout: String
+
+      attr_accessor type: :bash_code_execution_result
+
+      def initialize: (
+        content: ::Array[Anthropic::BashCodeExecutionOutputBlock],
+        return_code: Integer,
+        stderr: String,
+        stdout: String,
+        ?type: :bash_code_execution_result
+      ) -> void
+
+      def to_hash: -> {
+        content: ::Array[Anthropic::BashCodeExecutionOutputBlock],
+        return_code: Integer,
+        stderr: String,
+        stdout: String,
+        type: :bash_code_execution_result
+      }
+    end
+  end
+end

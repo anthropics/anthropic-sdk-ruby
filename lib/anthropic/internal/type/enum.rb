@@ -17,28 +17,28 @@ module Anthropic
       # values safely.
       #
       # @example
-      #   # `stop_reason` is a `Anthropic::StopReason`
-      #   case stop_reason
-      #   when Anthropic::StopReason::END_TURN
+      #   # `bash_code_execution_tool_result_error_code` is a `Anthropic::BashCodeExecutionToolResultErrorCode`
+      #   case bash_code_execution_tool_result_error_code
+      #   when Anthropic::BashCodeExecutionToolResultErrorCode::INVALID_TOOL_INPUT
       #     # ...
-      #   when Anthropic::StopReason::MAX_TOKENS
+      #   when Anthropic::BashCodeExecutionToolResultErrorCode::UNAVAILABLE
       #     # ...
-      #   when Anthropic::StopReason::STOP_SEQUENCE
+      #   when Anthropic::BashCodeExecutionToolResultErrorCode::TOO_MANY_REQUESTS
       #     # ...
       #   else
-      #     puts(stop_reason)
+      #     puts(bash_code_execution_tool_result_error_code)
       #   end
       #
       # @example
-      #   case stop_reason
-      #   in :end_turn
+      #   case bash_code_execution_tool_result_error_code
+      #   in :invalid_tool_input
       #     # ...
-      #   in :max_tokens
+      #   in :unavailable
       #     # ...
-      #   in :stop_sequence
+      #   in :too_many_requests
       #     # ...
       #   else
-      #     puts(stop_reason)
+      #     puts(bash_code_execution_tool_result_error_code)
       #   end
       module Enum
         include Anthropic::Internal::Type::Converter

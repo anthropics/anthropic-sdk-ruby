@@ -6,6 +6,7 @@ module Anthropic
       type beta_code_execution_tool_result_block_content =
         Anthropic::Beta::BetaCodeExecutionToolResultError
         | Anthropic::Beta::BetaCodeExecutionResultBlock
+        | Anthropic::Beta::BetaEncryptedCodeExecutionResultBlock
 
       module BetaCodeExecutionToolResultBlockContent
         extend Anthropic::Internal::Type::Union

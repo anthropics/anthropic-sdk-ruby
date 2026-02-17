@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    type container_upload_block_param =
+      {
+        file_id: String,
+        type: :container_upload,
+        cache_control: Anthropic::CacheControlEphemeral?
+      }
+
+    class ContainerUploadBlockParam < Anthropic::Internal::Type::BaseModel
+      attr_accessor file_id: String
+
+      attr_accessor type: :container_upload
+
+      attr_accessor cache_control: Anthropic::CacheControlEphemeral?
+
+      def initialize: (
+        file_id: String,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
+        ?type: :container_upload
+      ) -> void
+
+      def to_hash: -> {
+        file_id: String,
+        type: :container_upload,
+        cache_control: Anthropic::CacheControlEphemeral?
+      }
+    end
+  end
+end

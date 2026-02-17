@@ -9,6 +9,24 @@ module Anthropic
 
   class Base64PDFSource = Anthropic::Models::Base64PDFSource
 
+  class BashCodeExecutionOutputBlock = Anthropic::Models::BashCodeExecutionOutputBlock
+
+  class BashCodeExecutionOutputBlockParam = Anthropic::Models::BashCodeExecutionOutputBlockParam
+
+  class BashCodeExecutionResultBlock = Anthropic::Models::BashCodeExecutionResultBlock
+
+  class BashCodeExecutionResultBlockParam = Anthropic::Models::BashCodeExecutionResultBlockParam
+
+  class BashCodeExecutionToolResultBlock = Anthropic::Models::BashCodeExecutionToolResultBlock
+
+  class BashCodeExecutionToolResultBlockParam = Anthropic::Models::BashCodeExecutionToolResultBlockParam
+
+  class BashCodeExecutionToolResultError = Anthropic::Models::BashCodeExecutionToolResultError
+
+  module BashCodeExecutionToolResultErrorCode = Anthropic::Models::BashCodeExecutionToolResultErrorCode
+
+  class BashCodeExecutionToolResultErrorParam = Anthropic::Models::BashCodeExecutionToolResultErrorParam
+
   module Beta = Anthropic::Models::Beta
 
   class BetaAPIError = Anthropic::Models::BetaAPIError
@@ -51,6 +69,8 @@ module Anthropic
 
   class CitationPageLocationParam = Anthropic::Models::CitationPageLocationParam
 
+  class CitationsConfig = Anthropic::Models::CitationsConfig
+
   class CitationsConfigParam = Anthropic::Models::CitationsConfigParam
 
   class CitationsDelta = Anthropic::Models::CitationsDelta
@@ -63,9 +83,41 @@ module Anthropic
 
   class CitationWebSearchResultLocationParam = Anthropic::Models::CitationWebSearchResultLocationParam
 
+  class CodeExecutionOutputBlock = Anthropic::Models::CodeExecutionOutputBlock
+
+  class CodeExecutionOutputBlockParam = Anthropic::Models::CodeExecutionOutputBlockParam
+
+  class CodeExecutionResultBlock = Anthropic::Models::CodeExecutionResultBlock
+
+  class CodeExecutionResultBlockParam = Anthropic::Models::CodeExecutionResultBlockParam
+
+  class CodeExecutionTool20250522 = Anthropic::Models::CodeExecutionTool20250522
+
+  class CodeExecutionTool20250825 = Anthropic::Models::CodeExecutionTool20250825
+
+  class CodeExecutionToolResultBlock = Anthropic::Models::CodeExecutionToolResultBlock
+
+  module CodeExecutionToolResultBlockContent = Anthropic::Models::CodeExecutionToolResultBlockContent
+
+  class CodeExecutionToolResultBlockParam = Anthropic::Models::CodeExecutionToolResultBlockParam
+
+  module CodeExecutionToolResultBlockParamContent = Anthropic::Models::CodeExecutionToolResultBlockParamContent
+
+  class CodeExecutionToolResultError = Anthropic::Models::CodeExecutionToolResultError
+
+  module CodeExecutionToolResultErrorCode = Anthropic::Models::CodeExecutionToolResultErrorCode
+
+  class CodeExecutionToolResultErrorParam = Anthropic::Models::CodeExecutionToolResultErrorParam
+
   class Completion = Anthropic::Models::Completion
 
   class CompletionCreateParams = Anthropic::Models::CompletionCreateParams
+
+  class Container = Anthropic::Models::Container
+
+  class ContainerUploadBlock = Anthropic::Models::ContainerUploadBlock
+
+  class ContainerUploadBlockParam = Anthropic::Models::ContainerUploadBlockParam
 
   module ContentBlock = Anthropic::Models::ContentBlock
 
@@ -75,7 +127,15 @@ module Anthropic
 
   module ContentBlockSourceContent = Anthropic::Models::ContentBlockSourceContent
 
+  class DirectCaller = Anthropic::Models::DirectCaller
+
+  class DocumentBlock = Anthropic::Models::DocumentBlock
+
   class DocumentBlockParam = Anthropic::Models::DocumentBlockParam
+
+  class EncryptedCodeExecutionResultBlock = Anthropic::Models::EncryptedCodeExecutionResultBlock
+
+  class EncryptedCodeExecutionResultBlockParam = Anthropic::Models::EncryptedCodeExecutionResultBlockParam
 
   module ErrorObject = Anthropic::Models::ErrorObject
 
@@ -90,6 +150,8 @@ module Anthropic
   class InvalidRequestError = Anthropic::Models::InvalidRequestError
 
   class JSONOutputFormat = Anthropic::Models::JSONOutputFormat
+
+  class MemoryTool20250818 = Anthropic::Models::MemoryTool20250818
 
   class Message = Anthropic::Models::Message
 
@@ -151,6 +213,8 @@ module Anthropic
 
   class SearchResultBlockParam = Anthropic::Models::SearchResultBlockParam
 
+  class ServerToolCaller = Anthropic::Models::ServerToolCaller
+
   class ServerToolUsage = Anthropic::Models::ServerToolUsage
 
   class ServerToolUseBlock = Anthropic::Models::ServerToolUseBlock
@@ -170,6 +234,28 @@ module Anthropic
   module TextCitationParam = Anthropic::Models::TextCitationParam
 
   class TextDelta = Anthropic::Models::TextDelta
+
+  class TextEditorCodeExecutionCreateResultBlock = Anthropic::Models::TextEditorCodeExecutionCreateResultBlock
+
+  class TextEditorCodeExecutionCreateResultBlockParam = Anthropic::Models::TextEditorCodeExecutionCreateResultBlockParam
+
+  class TextEditorCodeExecutionStrReplaceResultBlock = Anthropic::Models::TextEditorCodeExecutionStrReplaceResultBlock
+
+  class TextEditorCodeExecutionStrReplaceResultBlockParam = Anthropic::Models::TextEditorCodeExecutionStrReplaceResultBlockParam
+
+  class TextEditorCodeExecutionToolResultBlock = Anthropic::Models::TextEditorCodeExecutionToolResultBlock
+
+  class TextEditorCodeExecutionToolResultBlockParam = Anthropic::Models::TextEditorCodeExecutionToolResultBlockParam
+
+  class TextEditorCodeExecutionToolResultError = Anthropic::Models::TextEditorCodeExecutionToolResultError
+
+  module TextEditorCodeExecutionToolResultErrorCode = Anthropic::Models::TextEditorCodeExecutionToolResultErrorCode
+
+  class TextEditorCodeExecutionToolResultErrorParam = Anthropic::Models::TextEditorCodeExecutionToolResultErrorParam
+
+  class TextEditorCodeExecutionViewResultBlock = Anthropic::Models::TextEditorCodeExecutionViewResultBlock
+
+  class TextEditorCodeExecutionViewResultBlockParam = Anthropic::Models::TextEditorCodeExecutionViewResultBlockParam
 
   class ThinkingBlock = Anthropic::Models::ThinkingBlock
 
@@ -199,7 +285,29 @@ module Anthropic
 
   class ToolChoiceTool = Anthropic::Models::ToolChoiceTool
 
+  class ToolReferenceBlock = Anthropic::Models::ToolReferenceBlock
+
+  class ToolReferenceBlockParam = Anthropic::Models::ToolReferenceBlockParam
+
   class ToolResultBlockParam = Anthropic::Models::ToolResultBlockParam
+
+  class ToolSearchToolBm25_20251119 = Anthropic::Models::ToolSearchToolBm25_20251119
+
+  class ToolSearchToolRegex20251119 = Anthropic::Models::ToolSearchToolRegex20251119
+
+  class ToolSearchToolResultBlock = Anthropic::Models::ToolSearchToolResultBlock
+
+  class ToolSearchToolResultBlockParam = Anthropic::Models::ToolSearchToolResultBlockParam
+
+  class ToolSearchToolResultError = Anthropic::Models::ToolSearchToolResultError
+
+  module ToolSearchToolResultErrorCode = Anthropic::Models::ToolSearchToolResultErrorCode
+
+  class ToolSearchToolResultErrorParam = Anthropic::Models::ToolSearchToolResultErrorParam
+
+  class ToolSearchToolSearchResultBlock = Anthropic::Models::ToolSearchToolSearchResultBlock
+
+  class ToolSearchToolSearchResultBlockParam = Anthropic::Models::ToolSearchToolSearchResultBlockParam
 
   class ToolTextEditor20250124 = Anthropic::Models::ToolTextEditor20250124
 
@@ -218,6 +326,22 @@ module Anthropic
   class URLPDFSource = Anthropic::Models::URLPDFSource
 
   class Usage = Anthropic::Models::Usage
+
+  class WebFetchBlock = Anthropic::Models::WebFetchBlock
+
+  class WebFetchBlockParam = Anthropic::Models::WebFetchBlockParam
+
+  class WebFetchTool20250910 = Anthropic::Models::WebFetchTool20250910
+
+  class WebFetchToolResultBlock = Anthropic::Models::WebFetchToolResultBlock
+
+  class WebFetchToolResultBlockParam = Anthropic::Models::WebFetchToolResultBlockParam
+
+  class WebFetchToolResultErrorBlock = Anthropic::Models::WebFetchToolResultErrorBlock
+
+  class WebFetchToolResultErrorBlockParam = Anthropic::Models::WebFetchToolResultErrorBlockParam
+
+  module WebFetchToolResultErrorCode = Anthropic::Models::WebFetchToolResultErrorCode
 
   class WebSearchResultBlock = Anthropic::Models::WebSearchResultBlock
 

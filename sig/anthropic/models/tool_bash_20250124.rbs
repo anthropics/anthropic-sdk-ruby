@@ -4,7 +4,10 @@ module Anthropic
       {
         name: :bash,
         type: :bash_20250124,
+        allowed_callers: ::Array[Anthropic::Models::ToolBash20250124::allowed_caller],
         cache_control: Anthropic::CacheControlEphemeral?,
+        defer_loading: bool,
+        input_examples: ::Array[::Hash[Symbol, top]],
         strict: bool
       }
 
@@ -13,14 +16,33 @@ module Anthropic
 
       attr_accessor type: :bash_20250124
 
+      attr_reader allowed_callers: ::Array[Anthropic::Models::ToolBash20250124::allowed_caller]?
+
+      def allowed_callers=: (
+        ::Array[Anthropic::Models::ToolBash20250124::allowed_caller]
+      ) -> ::Array[Anthropic::Models::ToolBash20250124::allowed_caller]
+
       attr_accessor cache_control: Anthropic::CacheControlEphemeral?
+
+      attr_reader defer_loading: bool?
+
+      def defer_loading=: (bool) -> bool
+
+      attr_reader input_examples: ::Array[::Hash[Symbol, top]]?
+
+      def input_examples=: (
+        ::Array[::Hash[Symbol, top]]
+      ) -> ::Array[::Hash[Symbol, top]]
 
       attr_reader strict: bool?
 
       def strict=: (bool) -> bool
 
       def initialize: (
+        ?allowed_callers: ::Array[Anthropic::Models::ToolBash20250124::allowed_caller],
         ?cache_control: Anthropic::CacheControlEphemeral?,
+        ?defer_loading: bool,
+        ?input_examples: ::Array[::Hash[Symbol, top]],
         ?strict: bool,
         ?name: :bash,
         ?type: :bash_20250124
@@ -29,9 +51,23 @@ module Anthropic
       def to_hash: -> {
         name: :bash,
         type: :bash_20250124,
+        allowed_callers: ::Array[Anthropic::Models::ToolBash20250124::allowed_caller],
         cache_control: Anthropic::CacheControlEphemeral?,
+        defer_loading: bool,
+        input_examples: ::Array[::Hash[Symbol, top]],
         strict: bool
       }
+
+      type allowed_caller = :direct | :code_execution_20250825
+
+      module AllowedCaller
+        extend Anthropic::Internal::Type::Enum
+
+        DIRECT: :direct
+        CODE_EXECUTION_20250825: :code_execution_20250825
+
+        def self?.values: -> ::Array[Anthropic::Models::ToolBash20250124::allowed_caller]
+      end
     end
   end
 end

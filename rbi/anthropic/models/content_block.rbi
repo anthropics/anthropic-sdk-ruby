@@ -2,6 +2,7 @@
 
 module Anthropic
   module Models
+    # Response model for a file uploaded to the container.
     module ContentBlock
       extend Anthropic::Internal::Type::Union
 
@@ -13,7 +14,13 @@ module Anthropic
             Anthropic::RedactedThinkingBlock,
             Anthropic::ToolUseBlock,
             Anthropic::ServerToolUseBlock,
-            Anthropic::WebSearchToolResultBlock
+            Anthropic::WebSearchToolResultBlock,
+            Anthropic::WebFetchToolResultBlock,
+            Anthropic::CodeExecutionToolResultBlock,
+            Anthropic::BashCodeExecutionToolResultBlock,
+            Anthropic::TextEditorCodeExecutionToolResultBlock,
+            Anthropic::ToolSearchToolResultBlock,
+            Anthropic::ContainerUploadBlock
           )
         end
 

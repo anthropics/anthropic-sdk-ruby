@@ -1,0 +1,75 @@
+module Anthropic
+  module Models
+    type tool_search_tool_bm25_20251119 =
+      {
+        name: :tool_search_tool_bm25,
+        type: Anthropic::Models::ToolSearchToolBm25_20251119::type_,
+        allowed_callers: ::Array[Anthropic::Models::ToolSearchToolBm25_20251119::allowed_caller],
+        cache_control: Anthropic::CacheControlEphemeral?,
+        defer_loading: bool,
+        strict: bool
+      }
+
+    class ToolSearchToolBm25_20251119 < Anthropic::Internal::Type::BaseModel
+      attr_accessor name: :tool_search_tool_bm25
+
+      attr_accessor type: Anthropic::Models::ToolSearchToolBm25_20251119::type_
+
+      attr_reader allowed_callers: ::Array[Anthropic::Models::ToolSearchToolBm25_20251119::allowed_caller]?
+
+      def allowed_callers=: (
+        ::Array[Anthropic::Models::ToolSearchToolBm25_20251119::allowed_caller]
+      ) -> ::Array[Anthropic::Models::ToolSearchToolBm25_20251119::allowed_caller]
+
+      attr_accessor cache_control: Anthropic::CacheControlEphemeral?
+
+      attr_reader defer_loading: bool?
+
+      def defer_loading=: (bool) -> bool
+
+      attr_reader strict: bool?
+
+      def strict=: (bool) -> bool
+
+      def initialize: (
+        type: Anthropic::Models::ToolSearchToolBm25_20251119::type_,
+        ?allowed_callers: ::Array[Anthropic::Models::ToolSearchToolBm25_20251119::allowed_caller],
+        ?cache_control: Anthropic::CacheControlEphemeral?,
+        ?defer_loading: bool,
+        ?strict: bool,
+        ?name: :tool_search_tool_bm25
+      ) -> void
+
+      def to_hash: -> {
+        name: :tool_search_tool_bm25,
+        type: Anthropic::Models::ToolSearchToolBm25_20251119::type_,
+        allowed_callers: ::Array[Anthropic::Models::ToolSearchToolBm25_20251119::allowed_caller],
+        cache_control: Anthropic::CacheControlEphemeral?,
+        defer_loading: bool,
+        strict: bool
+      }
+
+      type type_ = :tool_search_tool_bm25_20251119 | :tool_search_tool_bm25
+
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        TOOL_SEARCH_TOOL_BM25_20251119: :tool_search_tool_bm25_20251119
+        TOOL_SEARCH_TOOL_BM25: :tool_search_tool_bm25
+
+        def self?.values: -> ::Array[Anthropic::Models::ToolSearchToolBm25_20251119::type_]
+      end
+
+      type allowed_caller = :direct | :code_execution_20250825
+
+      module AllowedCaller
+        extend Anthropic::Internal::Type::Enum
+
+        DIRECT: :direct
+        CODE_EXECUTION_20250825: :code_execution_20250825
+
+        def self?.values: -> ::Array[Anthropic::Models::ToolSearchToolBm25_20251119::allowed_caller]
+      end
+    end
+  end
+end

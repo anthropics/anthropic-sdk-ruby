@@ -1,0 +1,45 @@
+module Anthropic
+  module Models
+    type text_editor_code_execution_str_replace_result_block_param =
+      {
+        type: :text_editor_code_execution_str_replace_result,
+        lines: ::Array[String]?,
+        new_lines: Integer?,
+        new_start: Integer?,
+        old_lines: Integer?,
+        old_start: Integer?
+      }
+
+    class TextEditorCodeExecutionStrReplaceResultBlockParam < Anthropic::Internal::Type::BaseModel
+      attr_accessor type: :text_editor_code_execution_str_replace_result
+
+      attr_accessor lines: ::Array[String]?
+
+      attr_accessor new_lines: Integer?
+
+      attr_accessor new_start: Integer?
+
+      attr_accessor old_lines: Integer?
+
+      attr_accessor old_start: Integer?
+
+      def initialize: (
+        ?lines: ::Array[String]?,
+        ?new_lines: Integer?,
+        ?new_start: Integer?,
+        ?old_lines: Integer?,
+        ?old_start: Integer?,
+        ?type: :text_editor_code_execution_str_replace_result
+      ) -> void
+
+      def to_hash: -> {
+        type: :text_editor_code_execution_str_replace_result,
+        lines: ::Array[String]?,
+        new_lines: Integer?,
+        new_start: Integer?,
+        old_lines: Integer?,
+        old_start: Integer?
+      }
+    end
+  end
+end

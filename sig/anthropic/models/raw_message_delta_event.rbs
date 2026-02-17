@@ -27,19 +27,27 @@ module Anthropic
       }
 
       type delta =
-        { stop_reason: Anthropic::Models::stop_reason?, stop_sequence: String? }
+        {
+          container: Anthropic::Container?,
+          stop_reason: Anthropic::Models::stop_reason?,
+          stop_sequence: String?
+        }
 
       class Delta < Anthropic::Internal::Type::BaseModel
+        attr_accessor container: Anthropic::Container?
+
         attr_accessor stop_reason: Anthropic::Models::stop_reason?
 
         attr_accessor stop_sequence: String?
 
         def initialize: (
+          container: Anthropic::Container?,
           stop_reason: Anthropic::Models::stop_reason?,
           stop_sequence: String?
         ) -> void
 
         def to_hash: -> {
+          container: Anthropic::Container?,
           stop_reason: Anthropic::Models::stop_reason?,
           stop_sequence: String?
         }

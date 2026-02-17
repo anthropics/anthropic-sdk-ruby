@@ -10,6 +10,8 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_6 }
 
+      variant const: -> { Anthropic::Models::Model::CLAUDE_SONNET_4_6 }
+
       variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_5_20251101 }
 
       variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_5 }
@@ -63,6 +65,9 @@ module Anthropic
 
       # Most intelligent model for building agents and coding
       CLAUDE_OPUS_4_6 = :"claude-opus-4-6"
+
+      # Frontier intelligence at scale — built for coding, agents, and enterprise workflows
+      CLAUDE_SONNET_4_6 = :"claude-sonnet-4-6"
 
       # Premium model combining maximum intelligence with practical performance
       CLAUDE_OPUS_4_5_20251101 = :"claude-opus-4-5-20251101"

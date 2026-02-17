@@ -1,0 +1,35 @@
+module Anthropic
+  module Models
+    type web_fetch_block_param =
+      {
+        content: Anthropic::DocumentBlockParam,
+        type: :web_fetch_result,
+        url: String,
+        retrieved_at: String?
+      }
+
+    class WebFetchBlockParam < Anthropic::Internal::Type::BaseModel
+      attr_accessor content: Anthropic::DocumentBlockParam
+
+      attr_accessor type: :web_fetch_result
+
+      attr_accessor url: String
+
+      attr_accessor retrieved_at: String?
+
+      def initialize: (
+        content: Anthropic::DocumentBlockParam,
+        url: String,
+        ?retrieved_at: String?,
+        ?type: :web_fetch_result
+      ) -> void
+
+      def to_hash: -> {
+        content: Anthropic::DocumentBlockParam,
+        type: :web_fetch_result,
+        url: String,
+        retrieved_at: String?
+      }
+    end
+  end
+end

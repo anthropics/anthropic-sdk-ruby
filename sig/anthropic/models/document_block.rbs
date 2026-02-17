@@ -1,0 +1,43 @@
+module Anthropic
+  module Models
+    type document_block =
+      {
+        citations: Anthropic::CitationsConfig?,
+        source: Anthropic::Models::DocumentBlock::source,
+        title: String?,
+        type: :document
+      }
+
+    class DocumentBlock < Anthropic::Internal::Type::BaseModel
+      attr_accessor citations: Anthropic::CitationsConfig?
+
+      attr_accessor source: Anthropic::Models::DocumentBlock::source
+
+      attr_accessor title: String?
+
+      attr_accessor type: :document
+
+      def initialize: (
+        citations: Anthropic::CitationsConfig?,
+        source: Anthropic::Models::DocumentBlock::source,
+        title: String?,
+        ?type: :document
+      ) -> void
+
+      def to_hash: -> {
+        citations: Anthropic::CitationsConfig?,
+        source: Anthropic::Models::DocumentBlock::source,
+        title: String?,
+        type: :document
+      }
+
+      type source = Anthropic::Base64PDFSource | Anthropic::PlainTextSource
+
+      module Source
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::DocumentBlock::source]
+      end
+    end
+  end
+end

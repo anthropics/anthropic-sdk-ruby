@@ -42,6 +42,32 @@ module Anthropic
         end
         attr_writer :cache_control
 
+        # Tool invocation directly from the model.
+        sig do
+          returns(
+            T.nilable(
+              T.any(
+                Anthropic::Beta::BetaDirectCaller,
+                Anthropic::Beta::BetaServerToolCaller,
+                Anthropic::Beta::BetaServerToolCaller20260120
+              )
+            )
+          )
+        end
+        attr_reader :caller_
+
+        sig do
+          params(
+            caller_:
+              T.any(
+                Anthropic::Beta::BetaDirectCaller::OrHash,
+                Anthropic::Beta::BetaServerToolCaller::OrHash,
+                Anthropic::Beta::BetaServerToolCaller20260120::OrHash
+              )
+          ).void
+        end
+        attr_writer :caller_
+
         sig do
           params(
             content:
@@ -54,6 +80,12 @@ module Anthropic
             tool_use_id: String,
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+            caller_:
+              T.any(
+                Anthropic::Beta::BetaDirectCaller::OrHash,
+                Anthropic::Beta::BetaServerToolCaller::OrHash,
+                Anthropic::Beta::BetaServerToolCaller20260120::OrHash
+              ),
             type: Symbol
           ).returns(T.attached_class)
         end
@@ -62,6 +94,8 @@ module Anthropic
           tool_use_id:,
           # Create a cache control breakpoint at this content block.
           cache_control: nil,
+          # Tool invocation directly from the model.
+          caller_: nil,
           type: :web_search_tool_result
         )
         end
@@ -77,11 +111,41 @@ module Anthropic
               tool_use_id: String,
               type: Symbol,
               cache_control:
-                T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)
+                T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
+              caller_:
+                T.any(
+                  Anthropic::Beta::BetaDirectCaller,
+                  Anthropic::Beta::BetaServerToolCaller,
+                  Anthropic::Beta::BetaServerToolCaller20260120
+                )
             }
           )
         end
         def to_hash
+        end
+
+        # Tool invocation directly from the model.
+        module Caller
+          extend Anthropic::Internal::Type::Union
+
+          Variants =
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::BetaDirectCaller,
+                Anthropic::Beta::BetaServerToolCaller,
+                Anthropic::Beta::BetaServerToolCaller20260120
+              )
+            end
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaWebSearchToolResultBlockParam::Caller::Variants
+              ]
+            )
+          end
+          def self.variants
+          end
         end
       end
     end

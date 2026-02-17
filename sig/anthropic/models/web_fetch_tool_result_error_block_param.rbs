@@ -1,0 +1,25 @@
+module Anthropic
+  module Models
+    type web_fetch_tool_result_error_block_param =
+      {
+        error_code: Anthropic::Models::web_fetch_tool_result_error_code,
+        type: :web_fetch_tool_result_error
+      }
+
+    class WebFetchToolResultErrorBlockParam < Anthropic::Internal::Type::BaseModel
+      attr_accessor error_code: Anthropic::Models::web_fetch_tool_result_error_code
+
+      attr_accessor type: :web_fetch_tool_result_error
+
+      def initialize: (
+        error_code: Anthropic::Models::web_fetch_tool_result_error_code,
+        ?type: :web_fetch_tool_result_error
+      ) -> void
+
+      def to_hash: -> {
+        error_code: Anthropic::Models::web_fetch_tool_result_error_code,
+        type: :web_fetch_tool_result_error
+      }
+    end
+  end
+end

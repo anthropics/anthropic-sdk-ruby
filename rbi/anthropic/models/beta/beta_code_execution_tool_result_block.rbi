@@ -14,6 +14,7 @@ module Anthropic
             )
           end
 
+        # Code execution result with encrypted stdout for PFC + web_search results.
         sig do
           returns(
             Anthropic::Beta::BetaCodeExecutionToolResultBlockContent::Variants
@@ -32,13 +33,19 @@ module Anthropic
             content:
               T.any(
                 Anthropic::Beta::BetaCodeExecutionToolResultError::OrHash,
-                Anthropic::Beta::BetaCodeExecutionResultBlock::OrHash
+                Anthropic::Beta::BetaCodeExecutionResultBlock::OrHash,
+                Anthropic::Beta::BetaEncryptedCodeExecutionResultBlock::OrHash
               ),
             tool_use_id: String,
             type: Symbol
           ).returns(T.attached_class)
         end
-        def self.new(content:, tool_use_id:, type: :code_execution_tool_result)
+        def self.new(
+          # Code execution result with encrypted stdout for PFC + web_search results.
+          content:,
+          tool_use_id:,
+          type: :code_execution_tool_result
+        )
         end
 
         sig do
