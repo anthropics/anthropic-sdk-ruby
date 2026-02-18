@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.21.0 (2026-02-18)
+
+Full Changelog: [v1.20.0...v1.21.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.20.0...v1.21.0)
+
+### Features
+
+* **api:** manual updates ([3e6a003](https://github.com/anthropics/anthropic-sdk-ruby/commit/3e6a00343dd617f94eeeb27b25571dff3ce54b8b))
+
 ## 1.20.0 (2026-02-17)
 
 Full Changelog: [v1.19.0...v1.20.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.19.0...v1.20.0)
