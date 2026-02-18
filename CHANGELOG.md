@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.22.0 (2026-02-18)
+
+Full Changelog: [v1.21.0...v1.22.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.21.0...v1.22.0)
+
+### Features
+
+* **api:** fix shared UserLocation and error code types ([b1e9684](https://github.com/anthropics/anthropic-sdk-ruby/commit/b1e9684d4eb5e9af91798d8e22e28f003312ffe6))
+
 ## 1.21.0 (2026-02-18)
 
 Full Changelog: [v1.20.0...v1.21.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.20.0...v1.21.0)
