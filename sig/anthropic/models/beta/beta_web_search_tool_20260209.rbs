@@ -72,13 +72,15 @@ module Anthropic
           user_location: Anthropic::Beta::BetaUserLocation?
         }
 
-        type allowed_caller = :direct | :code_execution_20250825
+        type allowed_caller =
+          :direct | :code_execution_20250825 | :code_execution_20260120
 
         module AllowedCaller
           extend Anthropic::Internal::Type::Enum
 
           DIRECT: :direct
           CODE_EXECUTION_20250825: :code_execution_20250825
+          CODE_EXECUTION_20260120: :code_execution_20260120
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaWebSearchTool20260209::allowed_caller]
         end

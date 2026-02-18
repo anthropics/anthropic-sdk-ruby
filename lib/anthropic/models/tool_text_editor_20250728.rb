@@ -79,6 +79,7 @@ module Anthropic
 
         DIRECT = :direct
         CODE_EXECUTION_20250825 = :code_execution_20250825
+        CODE_EXECUTION_20260120 = :code_execution_20260120
 
         # @!method self.values
         #   @return [Array<Symbol>]
