@@ -331,6 +331,8 @@ module Anthropic
 
   class Usage = Anthropic::Models::Usage
 
+  class UserLocation = Anthropic::Models::UserLocation
+
   class WebFetchBlock = Anthropic::Models::WebFetchBlock
 
   class WebFetchBlockParam = Anthropic::Models::WebFetchBlockParam
@@ -368,4 +370,6 @@ module Anthropic
   module WebSearchToolResultBlockParamContent = Anthropic::Models::WebSearchToolResultBlockParamContent
 
   class WebSearchToolResultError = Anthropic::Models::WebSearchToolResultError
+
+  module WebSearchToolResultErrorCode = Anthropic::Models::WebSearchToolResultErrorCode
 end

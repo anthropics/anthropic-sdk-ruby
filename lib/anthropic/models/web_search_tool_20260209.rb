@@ -65,8 +65,8 @@ module Anthropic
       #   Parameters for the user's location. Used to provide more relevant search
       #   results.
       #
-      #   @return [Anthropic::Models::WebSearchTool20260209::UserLocation, nil]
-      optional :user_location, -> { Anthropic::WebSearchTool20260209::UserLocation }, nil?: true
+      #   @return [Anthropic::Models::UserLocation, nil]
+      optional :user_location, -> { Anthropic::UserLocation }, nil?: true
 
       # @!method initialize(allowed_callers: nil, allowed_domains: nil, blocked_domains: nil, cache_control: nil, defer_loading: nil, max_uses: nil, strict: nil, user_location: nil, name: :web_search, type: :web_search_20260209)
       #   Some parameter documentations has been truncated, see
@@ -86,7 +86,7 @@ module Anthropic
       #
       #   @param strict [Boolean] When true, guarantees schema validation on tool names and inputs
       #
-      #   @param user_location [Anthropic::Models::WebSearchTool20260209::UserLocation, nil] Parameters for the user's location. Used to provide more relevant search results
+      #   @param user_location [Anthropic::Models::UserLocation, nil] Parameters for the user's location. Used to provide more relevant search results
       #
       #   @param name [Symbol, :web_search] Name of the tool.
       #
@@ -101,57 +101,6 @@ module Anthropic
 
         # @!method self.values
         #   @return [Array<Symbol>]
-      end
-
-      # @see Anthropic::Models::WebSearchTool20260209#user_location
-      class UserLocation < Anthropic::Internal::Type::BaseModel
-        # @!attribute type
-        #
-        #   @return [Symbol, :approximate]
-        required :type, const: :approximate
-
-        # @!attribute city
-        #   The city of the user.
-        #
-        #   @return [String, nil]
-        optional :city, String, nil?: true
-
-        # @!attribute country
-        #   The two letter
-        #   [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the
-        #   user.
-        #
-        #   @return [String, nil]
-        optional :country, String, nil?: true
-
-        # @!attribute region
-        #   The region of the user.
-        #
-        #   @return [String, nil]
-        optional :region, String, nil?: true
-
-        # @!attribute timezone
-        #   The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-        #
-        #   @return [String, nil]
-        optional :timezone, String, nil?: true
-
-        # @!method initialize(city: nil, country: nil, region: nil, timezone: nil, type: :approximate)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::WebSearchTool20260209::UserLocation} for more details.
-        #
-        #   Parameters for the user's location. Used to provide more relevant search
-        #   results.
-        #
-        #   @param city [String, nil] The city of the user.
-        #
-        #   @param country [String, nil] The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha
-        #
-        #   @param region [String, nil] The region of the user.
-        #
-        #   @param timezone [String, nil] The [IANA timezone](https://nodatime.org/TimeZones) of the user.
-        #
-        #   @param type [Symbol, :approximate]
       end
     end
   end
