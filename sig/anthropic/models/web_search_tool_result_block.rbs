@@ -34,26 +34,10 @@ module Anthropic
       type caller_ =
         Anthropic::DirectCaller
         | Anthropic::ServerToolCaller
-        | Anthropic::WebSearchToolResultBlock::Caller::CodeExecution20260120
+        | Anthropic::ServerToolCaller20260120
 
       module Caller
         extend Anthropic::Internal::Type::Union
-
-        type code_execution20260120 =
-          { tool_id: String, type: :code_execution_20260120 }
-
-        class CodeExecution20260120 < Anthropic::Internal::Type::BaseModel
-          attr_accessor tool_id: String
-
-          attr_accessor type: :code_execution_20260120
-
-          def initialize: (
-            tool_id: String,
-            ?type: :code_execution_20260120
-          ) -> void
-
-          def to_hash: -> { tool_id: String, type: :code_execution_20260120 }
-        end
 
         def self?.variants: -> ::Array[Anthropic::Models::WebSearchToolResultBlock::caller_]
       end

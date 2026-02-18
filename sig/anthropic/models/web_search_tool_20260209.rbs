@@ -1,0 +1,123 @@
+module Anthropic
+  module Models
+    type web_search_tool20260209 =
+      {
+        name: :web_search,
+        type: :web_search_20260209,
+        allowed_callers: ::Array[Anthropic::Models::WebSearchTool20260209::allowed_caller],
+        allowed_domains: ::Array[String]?,
+        blocked_domains: ::Array[String]?,
+        cache_control: Anthropic::CacheControlEphemeral?,
+        defer_loading: bool,
+        max_uses: Integer?,
+        strict: bool,
+        user_location: Anthropic::WebSearchTool20260209::UserLocation?
+      }
+
+    class WebSearchTool20260209 < Anthropic::Internal::Type::BaseModel
+      attr_accessor name: :web_search
+
+      attr_accessor type: :web_search_20260209
+
+      attr_reader allowed_callers: ::Array[Anthropic::Models::WebSearchTool20260209::allowed_caller]?
+
+      def allowed_callers=: (
+        ::Array[Anthropic::Models::WebSearchTool20260209::allowed_caller]
+      ) -> ::Array[Anthropic::Models::WebSearchTool20260209::allowed_caller]
+
+      attr_accessor allowed_domains: ::Array[String]?
+
+      attr_accessor blocked_domains: ::Array[String]?
+
+      attr_accessor cache_control: Anthropic::CacheControlEphemeral?
+
+      attr_reader defer_loading: bool?
+
+      def defer_loading=: (bool) -> bool
+
+      attr_accessor max_uses: Integer?
+
+      attr_reader strict: bool?
+
+      def strict=: (bool) -> bool
+
+      attr_accessor user_location: Anthropic::WebSearchTool20260209::UserLocation?
+
+      def initialize: (
+        ?allowed_callers: ::Array[Anthropic::Models::WebSearchTool20260209::allowed_caller],
+        ?allowed_domains: ::Array[String]?,
+        ?blocked_domains: ::Array[String]?,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
+        ?defer_loading: bool,
+        ?max_uses: Integer?,
+        ?strict: bool,
+        ?user_location: Anthropic::WebSearchTool20260209::UserLocation?,
+        ?name: :web_search,
+        ?type: :web_search_20260209
+      ) -> void
+
+      def to_hash: -> {
+        name: :web_search,
+        type: :web_search_20260209,
+        allowed_callers: ::Array[Anthropic::Models::WebSearchTool20260209::allowed_caller],
+        allowed_domains: ::Array[String]?,
+        blocked_domains: ::Array[String]?,
+        cache_control: Anthropic::CacheControlEphemeral?,
+        defer_loading: bool,
+        max_uses: Integer?,
+        strict: bool,
+        user_location: Anthropic::WebSearchTool20260209::UserLocation?
+      }
+
+      type allowed_caller =
+        :direct | :code_execution_20250825 | :code_execution_20260120
+
+      module AllowedCaller
+        extend Anthropic::Internal::Type::Enum
+
+        DIRECT: :direct
+        CODE_EXECUTION_20250825: :code_execution_20250825
+        CODE_EXECUTION_20260120: :code_execution_20260120
+
+        def self?.values: -> ::Array[Anthropic::Models::WebSearchTool20260209::allowed_caller]
+      end
+
+      type user_location =
+        {
+          type: :approximate,
+          city: String?,
+          country: String?,
+          region: String?,
+          timezone: String?
+        }
+
+      class UserLocation < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :approximate
+
+        attr_accessor city: String?
+
+        attr_accessor country: String?
+
+        attr_accessor region: String?
+
+        attr_accessor timezone: String?
+
+        def initialize: (
+          ?city: String?,
+          ?country: String?,
+          ?region: String?,
+          ?timezone: String?,
+          ?type: :approximate
+        ) -> void
+
+        def to_hash: -> {
+          type: :approximate,
+          city: String?,
+          country: String?,
+          region: String?,
+          timezone: String?
+        }
+      end
+    end
+  end
+end

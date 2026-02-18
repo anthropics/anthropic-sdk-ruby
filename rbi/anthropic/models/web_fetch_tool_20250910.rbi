@@ -176,6 +176,11 @@ module Anthropic
             :code_execution_20250825,
             Anthropic::WebFetchTool20250910::AllowedCaller::TaggedSymbol
           )
+        CODE_EXECUTION_20260120 =
+          T.let(
+            :code_execution_20260120,
+            Anthropic::WebFetchTool20250910::AllowedCaller::TaggedSymbol
+          )
 
         sig do
           override.returns(

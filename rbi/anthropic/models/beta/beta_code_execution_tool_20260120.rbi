@@ -145,6 +145,11 @@ module Anthropic
               :code_execution_20250825,
               Anthropic::Beta::BetaCodeExecutionTool20260120::AllowedCaller::TaggedSymbol
             )
+          CODE_EXECUTION_20260120 =
+            T.let(
+              :code_execution_20260120,
+              Anthropic::Beta::BetaCodeExecutionTool20260120::AllowedCaller::TaggedSymbol
+            )
 
           sig do
             override.returns(
