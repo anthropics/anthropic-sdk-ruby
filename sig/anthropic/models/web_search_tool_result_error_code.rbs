@@ -1,0 +1,24 @@
+module Anthropic
+  module Models
+    type web_search_tool_result_error_code =
+      :invalid_tool_input
+      | :unavailable
+      | :max_uses_exceeded
+      | :too_many_requests
+      | :query_too_long
+      | :request_too_large
+
+    module WebSearchToolResultErrorCode
+      extend Anthropic::Internal::Type::Enum
+
+      INVALID_TOOL_INPUT: :invalid_tool_input
+      UNAVAILABLE: :unavailable
+      MAX_USES_EXCEEDED: :max_uses_exceeded
+      TOO_MANY_REQUESTS: :too_many_requests
+      QUERY_TOO_LONG: :query_too_long
+      REQUEST_TOO_LARGE: :request_too_large
+
+      def self?.values: -> ::Array[Anthropic::Models::web_search_tool_result_error_code]
+    end
+  end
+end

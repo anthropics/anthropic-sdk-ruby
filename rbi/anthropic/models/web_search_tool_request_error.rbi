@@ -11,7 +11,7 @@ module Anthropic
           )
         end
 
-      sig { returns(Anthropic::WebSearchToolRequestError::ErrorCode::OrSymbol) }
+      sig { returns(Anthropic::WebSearchToolResultErrorCode::OrSymbol) }
       attr_accessor :error_code
 
       sig { returns(Symbol) }
@@ -19,7 +19,7 @@ module Anthropic
 
       sig do
         params(
-          error_code: Anthropic::WebSearchToolRequestError::ErrorCode::OrSymbol,
+          error_code: Anthropic::WebSearchToolResultErrorCode::OrSymbol,
           type: Symbol
         ).returns(T.attached_class)
       end
@@ -29,64 +29,12 @@ module Anthropic
       sig do
         override.returns(
           {
-            error_code:
-              Anthropic::WebSearchToolRequestError::ErrorCode::OrSymbol,
+            error_code: Anthropic::WebSearchToolResultErrorCode::OrSymbol,
             type: Symbol
           }
         )
       end
       def to_hash
-      end
-
-      module ErrorCode
-        extend Anthropic::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, Anthropic::WebSearchToolRequestError::ErrorCode)
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        INVALID_TOOL_INPUT =
-          T.let(
-            :invalid_tool_input,
-            Anthropic::WebSearchToolRequestError::ErrorCode::TaggedSymbol
-          )
-        UNAVAILABLE =
-          T.let(
-            :unavailable,
-            Anthropic::WebSearchToolRequestError::ErrorCode::TaggedSymbol
-          )
-        MAX_USES_EXCEEDED =
-          T.let(
-            :max_uses_exceeded,
-            Anthropic::WebSearchToolRequestError::ErrorCode::TaggedSymbol
-          )
-        TOO_MANY_REQUESTS =
-          T.let(
-            :too_many_requests,
-            Anthropic::WebSearchToolRequestError::ErrorCode::TaggedSymbol
-          )
-        QUERY_TOO_LONG =
-          T.let(
-            :query_too_long,
-            Anthropic::WebSearchToolRequestError::ErrorCode::TaggedSymbol
-          )
-        REQUEST_TOO_LARGE =
-          T.let(
-            :request_too_large,
-            Anthropic::WebSearchToolRequestError::ErrorCode::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              Anthropic::WebSearchToolRequestError::ErrorCode::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
-        end
       end
     end
   end

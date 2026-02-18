@@ -11,7 +11,7 @@ module Anthropic
         defer_loading: bool,
         max_uses: Integer?,
         strict: bool,
-        user_location: Anthropic::WebSearchTool20260209::UserLocation?
+        user_location: Anthropic::UserLocation?
       }
 
     class WebSearchTool20260209 < Anthropic::Internal::Type::BaseModel
@@ -41,7 +41,7 @@ module Anthropic
 
       def strict=: (bool) -> bool
 
-      attr_accessor user_location: Anthropic::WebSearchTool20260209::UserLocation?
+      attr_accessor user_location: Anthropic::UserLocation?
 
       def initialize: (
         ?allowed_callers: ::Array[Anthropic::Models::WebSearchTool20260209::allowed_caller],
@@ -51,7 +51,7 @@ module Anthropic
         ?defer_loading: bool,
         ?max_uses: Integer?,
         ?strict: bool,
-        ?user_location: Anthropic::WebSearchTool20260209::UserLocation?,
+        ?user_location: Anthropic::UserLocation?,
         ?name: :web_search,
         ?type: :web_search_20260209
       ) -> void
@@ -66,7 +66,7 @@ module Anthropic
         defer_loading: bool,
         max_uses: Integer?,
         strict: bool,
-        user_location: Anthropic::WebSearchTool20260209::UserLocation?
+        user_location: Anthropic::UserLocation?
       }
 
       type allowed_caller =
@@ -80,43 +80,6 @@ module Anthropic
         CODE_EXECUTION_20260120: :code_execution_20260120
 
         def self?.values: -> ::Array[Anthropic::Models::WebSearchTool20260209::allowed_caller]
-      end
-
-      type user_location =
-        {
-          type: :approximate,
-          city: String?,
-          country: String?,
-          region: String?,
-          timezone: String?
-        }
-
-      class UserLocation < Anthropic::Internal::Type::BaseModel
-        attr_accessor type: :approximate
-
-        attr_accessor city: String?
-
-        attr_accessor country: String?
-
-        attr_accessor region: String?
-
-        attr_accessor timezone: String?
-
-        def initialize: (
-          ?city: String?,
-          ?country: String?,
-          ?region: String?,
-          ?timezone: String?,
-          ?type: :approximate
-        ) -> void
-
-        def to_hash: -> {
-          type: :approximate,
-          city: String?,
-          country: String?,
-          region: String?,
-          timezone: String?
-        }
       end
     end
   end
