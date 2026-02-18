@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    type user_location =
+      {
+        type: :approximate,
+        city: String?,
+        country: String?,
+        region: String?,
+        timezone: String?
+      }
+
+    class UserLocation < Anthropic::Internal::Type::BaseModel
+      attr_accessor type: :approximate
+
+      attr_accessor city: String?
+
+      attr_accessor country: String?
+
+      attr_accessor region: String?
+
+      attr_accessor timezone: String?
+
+      def initialize: (
+        ?city: String?,
+        ?country: String?,
+        ?region: String?,
+        ?timezone: String?,
+        ?type: :approximate
+      ) -> void
+
+      def to_hash: -> {
+        type: :approximate,
+        city: String?,
+        country: String?,
+        region: String?,
+        timezone: String?
+      }
+    end
+  end
+end
