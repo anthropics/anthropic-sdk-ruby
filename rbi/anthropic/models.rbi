@@ -111,6 +111,8 @@ module Anthropic
 
   CodeExecutionTool20250825 = Anthropic::Models::CodeExecutionTool20250825
 
+  CodeExecutionTool20260120 = Anthropic::Models::CodeExecutionTool20260120
+
   CodeExecutionToolResultBlock = Anthropic::Models::CodeExecutionToolResultBlock
 
   CodeExecutionToolResultBlockContent =
@@ -237,6 +239,8 @@ module Anthropic
   SearchResultBlockParam = Anthropic::Models::SearchResultBlockParam
 
   ServerToolCaller = Anthropic::Models::ServerToolCaller
+
+  ServerToolCaller20260120 = Anthropic::Models::ServerToolCaller20260120
 
   ServerToolUsage = Anthropic::Models::ServerToolUsage
 
@@ -372,6 +376,8 @@ module Anthropic
 
   WebFetchTool20250910 = Anthropic::Models::WebFetchTool20250910
 
+  WebFetchTool20260209 = Anthropic::Models::WebFetchTool20260209
+
   WebFetchToolResultBlock = Anthropic::Models::WebFetchToolResultBlock
 
   WebFetchToolResultBlockParam = Anthropic::Models::WebFetchToolResultBlockParam
@@ -388,6 +394,8 @@ module Anthropic
   WebSearchResultBlockParam = Anthropic::Models::WebSearchResultBlockParam
 
   WebSearchTool20250305 = Anthropic::Models::WebSearchTool20250305
+
+  WebSearchTool20260209 = Anthropic::Models::WebSearchTool20260209
 
   WebSearchToolRequestError = Anthropic::Models::WebSearchToolRequestError
 
