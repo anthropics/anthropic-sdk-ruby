@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.23.0 (2026-02-19)
+
+Full Changelog: [v1.22.0...v1.23.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.22.0...v1.23.0)
+
+### Features
+
+* **api:** Add top-level cache control (automatic caching) ([612806b](https://github.com/anthropics/anthropic-sdk-ruby/commit/612806bddee36afc3976fa6a4723b0c6df7e6012))
+* **api:** Deprecate haiku-3 ([66ac4a8](https://github.com/anthropics/anthropic-sdk-ruby/commit/66ac4a8ceca44fc2b4d3a68c1ce87c0c05bea5f5))
+
+
+### Chores
+
+* update mock server docs ([56f16bd](https://github.com/anthropics/anthropic-sdk-ruby/commit/56f16bd36802f804fb6a62735c330ebc22a11fe0))
+
 ## 1.22.0 (2026-02-18)
 
 Full Changelog: [v1.21.0...v1.22.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.21.0...v1.22.0)
