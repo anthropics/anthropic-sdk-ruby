@@ -5,6 +5,7 @@ module Anthropic
         {
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           context_management: Anthropic::Beta::BetaContextManagementConfig?,
           mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           output_config: Anthropic::Beta::BetaOutputConfig,
@@ -25,6 +26,8 @@ module Anthropic
         attr_accessor messages: ::Array[Anthropic::Beta::BetaMessageParam]
 
         attr_accessor model: Anthropic::Models::model
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
         attr_accessor context_management: Anthropic::Beta::BetaContextManagementConfig?
 
@@ -77,6 +80,7 @@ module Anthropic
         def initialize: (
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?context_management: Anthropic::Beta::BetaContextManagementConfig?,
           ?mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           ?output_config: Anthropic::Beta::BetaOutputConfig,
@@ -93,6 +97,7 @@ module Anthropic
         def to_hash: -> {
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           context_management: Anthropic::Beta::BetaContextManagementConfig?,
           mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           output_config: Anthropic::Beta::BetaOutputConfig,

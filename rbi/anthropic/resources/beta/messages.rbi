@@ -320,6 +320,8 @@ module Anthropic
             max_tokens: Integer,
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            cache_control:
+              T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             container:
               T.nilable(
                 T.any(Anthropic::Beta::BetaContainerParams::OrHash, String)
@@ -467,6 +469,9 @@ module Anthropic
           # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
+          # Body param: Top-level cache control automatically applies a cache_control marker
+          # to the last cacheable block in the request.
+          cache_control: nil,
           # Body param: Container identifier for reuse across requests.
           container: nil,
           # Body param: Context management configuration.
@@ -655,6 +660,8 @@ module Anthropic
             max_tokens: Integer,
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            cache_control:
+              T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             container:
               T.nilable(
                 T.any(Anthropic::Beta::BetaContainerParams::OrHash, String)
@@ -806,6 +813,9 @@ module Anthropic
           # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
+          # Body param: Top-level cache control automatically applies a cache_control marker
+          # to the last cacheable block in the request.
+          cache_control: nil,
           # Body param: Container identifier for reuse across requests.
           container: nil,
           # Body param: Context management configuration.
@@ -990,6 +1000,8 @@ module Anthropic
           params(
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            cache_control:
+              T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             context_management:
               T.nilable(Anthropic::Beta::BetaContextManagementConfig::OrHash),
             mcp_servers:
@@ -1119,6 +1131,9 @@ module Anthropic
           # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
+          # Body param: Top-level cache control automatically applies a cache_control marker
+          # to the last cacheable block in the request.
+          cache_control: nil,
           # Body param: Context management configuration.
           #
           # This allows you to control how Claude manages context across multiple requests,

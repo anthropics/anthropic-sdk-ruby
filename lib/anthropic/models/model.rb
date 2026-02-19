@@ -145,9 +145,6 @@ module Anthropic
       CLAUDE_3_OPUS_20240229 = :"claude-3-opus-20240229"
 
       # Our previous most fast and cost-effective
-      # @deprecated Will reach end-of-life on April 20th, 2026. Please migrate to a newer model.
-      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
-      # information.
       CLAUDE_3_HAIKU_20240307 = :"claude-3-haiku-20240307"
 
       # @!endgroup

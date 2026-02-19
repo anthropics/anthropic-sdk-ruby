@@ -240,6 +240,23 @@ module Anthropic
               sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
               attr_accessor :model
 
+              # Top-level cache control automatically applies a cache_control marker to the last
+              # cacheable block in the request.
+              sig do
+                returns(T.nilable(Anthropic::Beta::BetaCacheControlEphemeral))
+              end
+              attr_reader :cache_control
+
+              sig do
+                params(
+                  cache_control:
+                    T.nilable(
+                      Anthropic::Beta::BetaCacheControlEphemeral::OrHash
+                    )
+                ).void
+              end
+              attr_writer :cache_control
+
               # Container identifier for reuse across requests.
               sig do
                 returns(
@@ -661,6 +678,10 @@ module Anthropic
                   max_tokens: Integer,
                   messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
                   model: T.any(Anthropic::Model::OrSymbol, String),
+                  cache_control:
+                    T.nilable(
+                      Anthropic::Beta::BetaCacheControlEphemeral::OrHash
+                    ),
                   container:
                     T.nilable(
                       T.any(
@@ -814,6 +835,9 @@ module Anthropic
                 # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
                 # details and options.
                 model:,
+                # Top-level cache control automatically applies a cache_control marker to the last
+                # cacheable block in the request.
+                cache_control: nil,
                 # Container identifier for reuse across requests.
                 container: nil,
                 # Context management configuration.
@@ -990,6 +1014,8 @@ module Anthropic
                     max_tokens: Integer,
                     messages: T::Array[Anthropic::Beta::BetaMessageParam],
                     model: T.any(Anthropic::Model::OrSymbol, String),
+                    cache_control:
+                      T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
                     container:
                       T.nilable(
                         T.any(Anthropic::Beta::BetaContainerParams, String)

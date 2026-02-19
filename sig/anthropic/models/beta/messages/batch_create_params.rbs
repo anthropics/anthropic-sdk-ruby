@@ -59,6 +59,7 @@ module Anthropic
                 max_tokens: Integer,
                 messages: ::Array[Anthropic::Beta::BetaMessageParam],
                 model: Anthropic::Models::model,
+                cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
                 container: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::container?,
                 context_management: Anthropic::Beta::BetaContextManagementConfig?,
                 inference_geo: String?,
@@ -85,6 +86,8 @@ module Anthropic
               attr_accessor messages: ::Array[Anthropic::Beta::BetaMessageParam]
 
               attr_accessor model: Anthropic::Models::model
+
+              attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
               attr_accessor container: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::container?
 
@@ -168,6 +171,7 @@ module Anthropic
                 max_tokens: Integer,
                 messages: ::Array[Anthropic::Beta::BetaMessageParam],
                 model: Anthropic::Models::model,
+                ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
                 ?container: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::container?,
                 ?context_management: Anthropic::Beta::BetaContextManagementConfig?,
                 ?inference_geo: String?,
@@ -192,6 +196,7 @@ module Anthropic
                 max_tokens: Integer,
                 messages: ::Array[Anthropic::Beta::BetaMessageParam],
                 model: Anthropic::Models::model,
+                cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
                 container: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::container?,
                 context_management: Anthropic::Beta::BetaContextManagementConfig?,
                 inference_geo: String?,

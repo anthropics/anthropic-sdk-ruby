@@ -8,6 +8,7 @@ module Anthropic
           max_tokens: Integer,
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?container: Anthropic::Models::Beta::MessageCreateParams::container?,
           ?context_management: Anthropic::Beta::BetaContextManagementConfig?,
           ?inference_geo: String?,
@@ -33,6 +34,7 @@ module Anthropic
           max_tokens: Integer,
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?container: Anthropic::Models::Beta::MessageCreateParams::container?,
           ?context_management: Anthropic::Beta::BetaContextManagementConfig?,
           ?inference_geo: String?,
@@ -57,6 +59,7 @@ module Anthropic
         def count_tokens: (
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?context_management: Anthropic::Beta::BetaContextManagementConfig?,
           ?mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           ?output_config: Anthropic::Beta::BetaOutputConfig,
