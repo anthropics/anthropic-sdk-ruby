@@ -86,6 +86,13 @@ module Anthropic
         #   @return [Symbol, String, Anthropic::Models::Model]
         required :model, union: -> { Anthropic::Model }
 
+        # @!attribute cache_control
+        #   Top-level cache control automatically applies a cache_control marker to the last
+        #   cacheable block in the request.
+        #
+        #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
+        optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
+
         # @!attribute context_management
         #   Context management configuration.
         #
@@ -245,13 +252,15 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(messages:, model:, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, request_options: {})
+        # @!method initialize(messages:, model:, cache_control: nil, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::MessageCountTokensParams} for more details.
         #
         #   @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Input messages.
         #
         #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+        #
+        #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Top-level cache control automatically applies a cache_control marker to the last
         #
         #   @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Context management configuration.
         #

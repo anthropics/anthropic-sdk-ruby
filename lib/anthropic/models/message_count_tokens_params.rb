@@ -85,6 +85,13 @@ module Anthropic
       #   @return [Symbol, String, Anthropic::Models::Model]
       required :model, union: -> { Anthropic::Model }
 
+      # @!attribute cache_control
+      #   Top-level cache control automatically applies a cache_control marker to the last
+      #   cacheable block in the request.
+      #
+      #   @return [Anthropic::Models::CacheControlEphemeral, nil]
+      optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
+
       # @!attribute output_config
       #   Configuration options for the model's output, such as the output format.
       #
@@ -202,13 +209,15 @@ module Anthropic
       #   @return [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::CodeExecutionTool20260120, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::WebSearchTool20260209, Anthropic::Models::WebFetchTool20260209, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>, nil]
       optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::MessageCountTokensTool] }
 
-      # @!method initialize(messages:, model:, output_config: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
+      # @!method initialize(messages:, model:, cache_control: nil, output_config: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::MessageCountTokensParams} for more details.
       #
       #   @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
       #
       #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      #
+      #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Top-level cache control automatically applies a cache_control marker to the last
       #
       #   @param output_config [Anthropic::Models::OutputConfig] Configuration options for the model's output, such as the output format.
       #

@@ -4,6 +4,7 @@ module Anthropic
       {
         messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
+        cache_control: Anthropic::CacheControlEphemeral?,
         output_config: Anthropic::OutputConfig,
         system_: Anthropic::Models::MessageCountTokensParams::system_,
         thinking: Anthropic::Models::thinking_config_param,
@@ -19,6 +20,8 @@ module Anthropic
       attr_accessor messages: ::Array[Anthropic::MessageParam]
 
       attr_accessor model: Anthropic::Models::model
+
+      attr_accessor cache_control: Anthropic::CacheControlEphemeral?
 
       attr_reader output_config: Anthropic::OutputConfig?
 
@@ -51,6 +54,7 @@ module Anthropic
       def initialize: (
         messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
         ?output_config: Anthropic::OutputConfig,
         ?system_: Anthropic::Models::MessageCountTokensParams::system_,
         ?thinking: Anthropic::Models::thinking_config_param,
@@ -62,6 +66,7 @@ module Anthropic
       def to_hash: -> {
         messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
+        cache_control: Anthropic::CacheControlEphemeral?,
         output_config: Anthropic::OutputConfig,
         system_: Anthropic::Models::MessageCountTokensParams::system_,
         thinking: Anthropic::Models::thinking_config_param,

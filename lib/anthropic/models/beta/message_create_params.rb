@@ -100,6 +100,13 @@ module Anthropic
         #   @return [Symbol, String, Anthropic::Models::Model]
         required :model, union: -> { Anthropic::Model }
 
+        # @!attribute cache_control
+        #   Top-level cache control automatically applies a cache_control marker to the last
+        #   cacheable block in the request.
+        #
+        #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
+        optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
+
         # @!attribute container
         #   Container identifier for reuse across requests.
         #
@@ -340,7 +347,7 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(max_tokens:, messages:, model:, container: nil, context_management: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
+        # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
@@ -349,6 +356,8 @@ module Anthropic
         #   @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Input messages.
         #
         #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+        #
+        #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Top-level cache control automatically applies a cache_control marker to the last
         #
         #   @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Container identifier for reuse across requests.
         #

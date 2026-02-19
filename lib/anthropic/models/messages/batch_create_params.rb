@@ -143,6 +143,13 @@ module Anthropic
             #   @return [Symbol, String, Anthropic::Models::Model]
             required :model, union: -> { Anthropic::Model }
 
+            # @!attribute cache_control
+            #   Top-level cache control automatically applies a cache_control marker to the last
+            #   cacheable block in the request.
+            #
+            #   @return [Anthropic::Models::CacheControlEphemeral, nil]
+            optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
+
             # @!attribute container
             #   Container identifier for reuse across requests.
             #
@@ -352,7 +359,7 @@ module Anthropic
             #   @return [Float, nil]
             optional :top_p, Float
 
-            # @!method initialize(max_tokens:, messages:, model:, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
+            # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
             #   Some parameter documentations has been truncated, see
             #   {Anthropic::Models::Messages::BatchCreateParams::Request::Params} for more
             #   details.
@@ -367,6 +374,8 @@ module Anthropic
             #   @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
             #
             #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+            #
+            #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Top-level cache control automatically applies a cache_control marker to the last
             #
             #   @param container [String, nil] Container identifier for reuse across requests.
             #

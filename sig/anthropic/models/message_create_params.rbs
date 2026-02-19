@@ -5,6 +5,7 @@ module Anthropic
         max_tokens: Integer,
         messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
+        cache_control: Anthropic::CacheControlEphemeral?,
         container: String?,
         inference_geo: String?,
         metadata: Anthropic::Metadata,
@@ -30,6 +31,8 @@ module Anthropic
       attr_accessor messages: ::Array[Anthropic::MessageParam]
 
       attr_accessor model: Anthropic::Models::model
+
+      attr_accessor cache_control: Anthropic::CacheControlEphemeral?
 
       attr_accessor container: String?
 
@@ -93,6 +96,7 @@ module Anthropic
         max_tokens: Integer,
         messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
         ?container: String?,
         ?inference_geo: String?,
         ?metadata: Anthropic::Metadata,
@@ -113,6 +117,7 @@ module Anthropic
         max_tokens: Integer,
         messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
+        cache_control: Anthropic::CacheControlEphemeral?,
         container: String?,
         inference_geo: String?,
         metadata: Anthropic::Metadata,
