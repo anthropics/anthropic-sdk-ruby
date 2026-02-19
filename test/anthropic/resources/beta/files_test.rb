@@ -46,7 +46,7 @@ class Anthropic::Test::Resources::Beta::FilesTest < Anthropic::Test::ResourceTes
   end
 
   def test_download
-    skip("Prism doesn't support application/binary responses")
+    skip("Mock server doesn't support application/binary responses")
 
     response = @anthropic.beta.files.download("file_id")
 
