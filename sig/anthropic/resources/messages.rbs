@@ -7,6 +7,7 @@ module Anthropic
         max_tokens: Integer,
         messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
         ?container: String?,
         ?inference_geo: String?,
         ?metadata: Anthropic::Metadata,
@@ -27,6 +28,7 @@ module Anthropic
         max_tokens: Integer,
         messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
         ?container: String?,
         ?inference_geo: String?,
         ?metadata: Anthropic::Metadata,
@@ -46,6 +48,7 @@ module Anthropic
       def count_tokens: (
         messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
+        ?cache_control: Anthropic::CacheControlEphemeral?,
         ?output_config: Anthropic::OutputConfig,
         ?system_: Anthropic::Models::MessageCountTokensParams::system_,
         ?thinking: Anthropic::Models::thinking_config_param,

@@ -89,6 +89,19 @@ module Anthropic
         sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
         attr_accessor :model
 
+        # Top-level cache control automatically applies a cache_control marker to the last
+        # cacheable block in the request.
+        sig { returns(T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)) }
+        attr_reader :cache_control
+
+        sig do
+          params(
+            cache_control:
+              T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash)
+          ).void
+        end
+        attr_writer :cache_control
+
         # Context management configuration.
         #
         # This allows you to control how Claude manages context across multiple requests,
@@ -405,6 +418,8 @@ module Anthropic
           params(
             messages: T::Array[Anthropic::Beta::BetaMessageParam::OrHash],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            cache_control:
+              T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             context_management:
               T.nilable(Anthropic::Beta::BetaContextManagementConfig::OrHash),
             mcp_servers:
@@ -534,6 +549,9 @@ module Anthropic
           # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
+          # Top-level cache control automatically applies a cache_control marker to the last
+          # cacheable block in the request.
+          cache_control: nil,
           # Context management configuration.
           #
           # This allows you to control how Claude manages context across multiple requests,
@@ -658,6 +676,8 @@ module Anthropic
             {
               messages: T::Array[Anthropic::Beta::BetaMessageParam],
               model: T.any(Anthropic::Model::OrSymbol, String),
+              cache_control:
+                T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
               context_management:
                 T.nilable(Anthropic::Beta::BetaContextManagementConfig),
               mcp_servers:

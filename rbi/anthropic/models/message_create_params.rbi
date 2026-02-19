@@ -95,6 +95,18 @@ module Anthropic
       sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
       attr_accessor :model
 
+      # Top-level cache control automatically applies a cache_control marker to the last
+      # cacheable block in the request.
+      sig { returns(T.nilable(Anthropic::CacheControlEphemeral)) }
+      attr_reader :cache_control
+
+      sig do
+        params(
+          cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash)
+        ).void
+      end
+      attr_writer :cache_control
+
       # Container identifier for reuse across requests.
       sig { returns(T.nilable(String)) }
       attr_accessor :container
@@ -405,6 +417,7 @@ module Anthropic
           max_tokens: Integer,
           messages: T::Array[Anthropic::MessageParam::OrHash],
           model: T.any(Anthropic::Model::OrSymbol, String),
+          cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
           container: T.nilable(String),
           inference_geo: T.nilable(String),
           metadata: Anthropic::Metadata::OrHash,
@@ -530,6 +543,9 @@ module Anthropic
         # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         model:,
+        # Top-level cache control automatically applies a cache_control marker to the last
+        # cacheable block in the request.
+        cache_control: nil,
         # Container identifier for reuse across requests.
         container: nil,
         # Specifies the geographic region for inference processing. If not specified, the
@@ -687,6 +703,7 @@ module Anthropic
             max_tokens: Integer,
             messages: T::Array[Anthropic::MessageParam],
             model: T.any(Anthropic::Model::OrSymbol, String),
+            cache_control: T.nilable(Anthropic::CacheControlEphemeral),
             container: T.nilable(String),
             inference_geo: T.nilable(String),
             metadata: Anthropic::Metadata,
