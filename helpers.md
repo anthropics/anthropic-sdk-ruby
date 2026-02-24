@@ -68,7 +68,7 @@ Returns the HTTP status code from the streaming request.
 
 ### Events
 
-The events listed here are just the event types that the SDK extends, for a full list of the events returned by the API, see [these docs](https://docs.anthropic.com/en/api/messages-streaming#event-types).
+The events listed here are just the event types that the SDK extends, for a full list of the events returned by the API, see [these docs](https://platform.claude.com/docs/en/api/messages-streaming#event-types).
 
 ```ruby
 require "anthropic"
