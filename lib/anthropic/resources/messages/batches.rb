@@ -85,10 +85,11 @@ module Anthropic
         # @see Anthropic::Models::Messages::BatchListParams
         def list(params = {})
           parsed, options = Anthropic::Messages::BatchListParams.dump_request(params)
+          query = Anthropic::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :get,
             path: "v1/messages/batches",
-            query: parsed,
+            query: query,
             page: Anthropic::Internal::Page,
             model: Anthropic::Messages::MessageBatch,
             options: options
