@@ -54,12 +54,13 @@ module Anthropic
       #
       # @see Anthropic::Models::ModelListParams
       def list(params = {})
-        parsed, options = Anthropic::ModelListParams.dump_request(params)
         query_params = [:after_id, :before_id, :limit]
+        parsed, options = Anthropic::ModelListParams.dump_request(params)
+        query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
         @client.request(
           method: :get,
           path: "v1/models",
-          query: parsed.slice(*query_params),
+          query: query,
           headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
           page: Anthropic::Internal::Page,
           model: Anthropic::ModelInfo,
