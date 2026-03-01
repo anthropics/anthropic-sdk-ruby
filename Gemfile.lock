@@ -12,6 +12,7 @@ PATH
   remote: .
   specs:
     anthropic (1.23.0)
+      base64
       cgi
       connection_pool
 
