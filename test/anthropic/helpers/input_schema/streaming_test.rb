@@ -110,7 +110,7 @@ module Anthropic
           final_message = nil
 
           stream = @client.messages.stream(
-            model: "claude-3-opus-20240229",
+            model: "claude-opus-4-6",
             max_tokens: 100,
             messages: [{role: "user", content: "What's the weather?"}],
             tools: [GetWeatherInput]
@@ -181,7 +181,7 @@ module Anthropic
           final_message = nil
 
           stream = @client.messages.stream(
-            model: "claude-3-opus-20240229",
+            model: "claude-opus-4-6",
             max_tokens: 100,
             messages: [{role: "user", content: "Add 5+3 and check NYC weather"}],
             tools: [Calculator, GetWeatherInput]
@@ -239,7 +239,7 @@ module Anthropic
           final_message = nil
 
           stream = @client.messages.stream(
-            model: "claude-3-opus-20240229",
+            model: "claude-opus-4-6",
             max_tokens: 100,
             messages: [{role: "user", content: "Calculate"}],
             tools: [Calculator]
@@ -300,7 +300,7 @@ module Anthropic
           final_message = nil
 
           @client.messages.stream(
-            model: "claude-3-opus-20240229",
+            model: "claude-opus-4-6",
             max_tokens: 100,
             messages: [{role: "user", content: "Multiply 7*8"}],
             tools: [Calculator]
@@ -357,7 +357,7 @@ module Anthropic
           final_message = nil
 
           stream = @client.messages.stream(
-            model: "claude-3-opus-20240229",
+            model: "claude-opus-4-6",
             max_tokens: 100,
             messages: [{role: "user", content: "Test nested"}],
             tools: [NestedModel]

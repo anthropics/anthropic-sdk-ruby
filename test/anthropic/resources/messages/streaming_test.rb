@@ -45,7 +45,7 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
     {
       max_tokens: 1024,
       messages: [{content: "Hello", role: :user}],
-      model: :"claude-3-opus-20240229"
+      model: :"claude-opus-4-6"
     }
   end
 
@@ -83,7 +83,7 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
     assert_pattern do
       final_message => {
         id: "msg_4QpJur2dWWDjF6C758FbBw5vm12BaVipnK",
-        model: :"claude-3-opus-20240229",
+        model: :"claude-opus-4-6",
         role: :assistant,
         stop_reason: :end_turn,
         content: [{type: :text, text: "Hello there!"}]
@@ -126,7 +126,7 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
       max_tokens: 1024,
       thinking: {type: :enabled, budget_tokens: 512},
       messages: [{content: "Create a short haiku", role: :user}],
-      model: :"claude-3-opus-20240229"
+      model: :"claude-opus-4-6"
     }
   end
 
@@ -148,7 +148,7 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
     {
       max_tokens: 1024,
       messages: [{content: "What is the weather in SF?", role: :user}],
-      model: :"claude-3-opus-20240229",
+      model: :"claude-opus-4-6",
       tools: [
         {
           name: "get_weather",
@@ -201,7 +201,7 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
           role: :user
         }
       ],
-      model: :"claude-3-opus-20240229"
+      model: :"claude-opus-4-6"
     }
   end
 
@@ -276,7 +276,7 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
   def basic_sse_response
     <<~SSE
       event: message_start
-      data: {"type":"message_start","message":{"id":"msg_4QpJur2dWWDjF6C758FbBw5vm12BaVipnK","type":"message","role":"assistant","content":[],"model":"claude-3-opus-20240229","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":11,"output_tokens":1}}}
+      data: {"type":"message_start","message":{"id":"msg_4QpJur2dWWDjF6C758FbBw5vm12BaVipnK","type":"message","role":"assistant","content":[],"model":"claude-opus-4-6","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":11,"output_tokens":1}}}
 
       event: content_block_start
       data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}
@@ -308,7 +308,7 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
   def thinking_sse_response
     <<~SSE
       event: message_start
-      data: {"type":"message_start","message":{"id":"msg_thinking","type":"message","role":"assistant","content":[],"model":"claude-3-opus-20240229","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":10,"output_tokens":1}}}
+      data: {"type":"message_start","message":{"id":"msg_thinking","type":"message","role":"assistant","content":[],"model":"claude-opus-4-6","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":10,"output_tokens":1}}}
 
       event: content_block_start
       data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":""}}
@@ -346,7 +346,7 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
   def tools_sse_response
     <<~SSE
       event: message_start
-      data: {"type":"message_start","message":{"id":"msg_tools","type":"message","role":"assistant","content":[],"model":"claude-3-opus-20240229","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":15,"output_tokens":1}}}
+      data: {"type":"message_start","message":{"id":"msg_tools","type":"message","role":"assistant","content":[],"model":"claude-opus-4-6","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":15,"output_tokens":1}}}
 
       event: content_block_start
       data: {"type":"content_block_start","index":0,"content_block":{"type":"tool_use","id":"tool_use_1","name":"get_weather","input":{}}}
@@ -375,7 +375,7 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
   def citations_sse_response
     <<~SSE
       event: message_start
-      data: {"type":"message_start","message":{"id":"msg_citations","type":"message","role":"assistant","content":[],"model":"claude-3-opus-20240229","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":20,"output_tokens":1}}}
+      data: {"type":"message_start","message":{"id":"msg_citations","type":"message","role":"assistant","content":[],"model":"claude-opus-4-6","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":20,"output_tokens":1}}}
 
       event: content_block_start
       data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}

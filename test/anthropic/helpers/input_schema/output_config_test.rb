@@ -89,7 +89,7 @@ module Anthropic
           end
 
           message = @client.messages.create(
-            model: "claude-3-opus-20240229",
+            model: "claude-opus-4-6",
             max_tokens: 100,
             messages: [{role: "user", content: "Test"}],
             output_config: {format: OutputModel}
@@ -117,7 +117,7 @@ module Anthropic
 
           begin
             @client.messages.create(
-              model: "claude-3-opus-20240229",
+              model: "claude-opus-4-6",
               max_tokens: 100,
               messages: [{role: "user", content: "Test"}],
               output_format: OutputModel
@@ -147,7 +147,7 @@ module Anthropic
         def test_error_when_both_output_format_and_output_config_provided
           error = assert_raises(ArgumentError) do
             @client.messages.create(
-              model: "claude-3-opus-20240229",
+              model: "claude-opus-4-6",
               max_tokens: 100,
               messages: [{role: "user", content: "Test"}],
               output_format: OutputModel,
@@ -163,7 +163,7 @@ module Anthropic
         def test_error_when_output_config_is_not_hash
           error = assert_raises(ArgumentError) do
             @client.messages.create(
-              model: "claude-3-opus-20240229",
+              model: "claude-opus-4-6",
               max_tokens: 100,
               messages: [{role: "user", content: "Test"}],
               output_format: OutputModel,
@@ -189,7 +189,7 @@ module Anthropic
           end
 
           @client.messages.create(
-            model: "claude-3-opus-20240229",
+            model: "claude-opus-4-6",
             max_tokens: 100,
             messages: [{role: "user", content: "Test"}],
             output_config: {format: OutputModel}
@@ -212,7 +212,7 @@ module Anthropic
           end
 
           @client.beta.messages.create(
-            model: "claude-3-opus-20240229",
+            model: "claude-opus-4-6",
             max_tokens: 100,
             messages: [{role: "user", content: "Test"}],
             output_format: OutputModel
@@ -237,7 +237,7 @@ module Anthropic
           end
 
           @client.beta.messages.create(
-            model: "claude-3-opus-20240229",
+            model: "claude-opus-4-6",
             max_tokens: 100,
             messages: [{role: "user", content: "Test"}],
             output_config: {format: OutputModel},
@@ -264,7 +264,7 @@ module Anthropic
           end
 
           @client.messages.create(
-            model: "claude-3-opus-20240229",
+            model: "claude-opus-4-6",
             max_tokens: 100,
             messages: [{role: "user", content: "Test"}],
             output_format: {schema: OutputModel}
@@ -290,7 +290,7 @@ module Anthropic
           end
 
           @client.messages.create(
-            model: "claude-3-opus-20240229",
+            model: "claude-opus-4-6",
             max_tokens: 100,
             messages: [{role: "user", content: "Test"}],
             output_format: OutputModel
@@ -318,7 +318,7 @@ module Anthropic
           end
 
           @client.messages.create(
-            model: "claude-3-opus-20240229",
+            model: "claude-opus-4-6",
             max_tokens: 100,
             messages: [{role: "user", content: "Test"}],
             output_format: OutputModel,
