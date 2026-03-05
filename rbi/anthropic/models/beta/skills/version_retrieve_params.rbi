@@ -22,6 +22,12 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :skill_id
 
+          # Version identifier for the skill.
+          #
+          # Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+          sig { returns(String) }
+          attr_accessor :version
+
           # Optional header to specify the beta version(s) you want to use.
           sig do
             returns(
@@ -42,6 +48,7 @@ module Anthropic
           sig do
             params(
               skill_id: String,
+              version: String,
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               request_options: Anthropic::RequestOptions::OrHash
@@ -52,6 +59,10 @@ module Anthropic
             #
             # The format and length of IDs may change over time.
             skill_id:,
+            # Version identifier for the skill.
+            #
+            # Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+            version:,
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,
             request_options: {}
@@ -62,6 +73,7 @@ module Anthropic
             override.returns(
               {
                 skill_id: String,
+                version: String,
                 betas:
                   T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
                 request_options: Anthropic::RequestOptions

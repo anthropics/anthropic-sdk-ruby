@@ -9,6 +9,14 @@ module Anthropic
           extend Anthropic::Internal::Type::RequestParameters::Converter
           include Anthropic::Internal::Type::RequestParameters
 
+          # @!attribute skill_id
+          #   Unique identifier for the skill.
+          #
+          #   The format and length of IDs may change over time.
+          #
+          #   @return [String]
+          required :skill_id, String
+
           # @!attribute files
           #   Files to upload for the skill.
           #
@@ -26,9 +34,11 @@ module Anthropic
           #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-          # @!method initialize(files: nil, betas: nil, request_options: {})
+          # @!method initialize(skill_id:, files: nil, betas: nil, request_options: {})
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Skills::VersionCreateParams} for more details.
+          #
+          #   @param skill_id [String] Unique identifier for the skill.
           #
           #   @param files [Array<Pathname, StringIO, IO, String, Anthropic::FilePart>, nil] Files to upload for the skill.
           #

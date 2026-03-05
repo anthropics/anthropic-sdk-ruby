@@ -4,6 +4,7 @@ module Anthropic
       module Skills
         type version_list_params =
           {
+            skill_id: String,
             limit: Integer?,
             page: String?,
             betas: ::Array[Anthropic::Models::anthropic_beta]
@@ -13,6 +14,8 @@ module Anthropic
         class VersionListParams < Anthropic::Internal::Type::BaseModel
           extend Anthropic::Internal::Type::RequestParameters::Converter
           include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor skill_id: String
 
           attr_accessor limit: Integer?
 
@@ -25,6 +28,7 @@ module Anthropic
           ) -> ::Array[Anthropic::Models::anthropic_beta]
 
           def initialize: (
+            skill_id: String,
             ?limit: Integer?,
             ?page: String?,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
@@ -32,6 +36,7 @@ module Anthropic
           ) -> void
 
           def to_hash: -> {
+            skill_id: String,
             limit: Integer?,
             page: String?,
             betas: ::Array[Anthropic::Models::anthropic_beta],

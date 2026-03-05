@@ -16,6 +16,10 @@ module Anthropic
               )
             end
 
+          # ID of the Message Batch.
+          sig { returns(String) }
+          attr_accessor :message_batch_id
+
           # Optional header to specify the beta version(s) you want to use.
           sig do
             returns(
@@ -35,12 +39,15 @@ module Anthropic
 
           sig do
             params(
+              message_batch_id: String,
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(T.attached_class)
           end
           def self.new(
+            # ID of the Message Batch.
+            message_batch_id:,
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,
             request_options: {}
@@ -50,6 +57,7 @@ module Anthropic
           sig do
             override.returns(
               {
+                message_batch_id: String,
                 betas:
                   T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
                 request_options: Anthropic::RequestOptions
