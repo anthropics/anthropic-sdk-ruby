@@ -1,12 +1,14 @@
 module Anthropic
   module Models
     type model_retrieve_params =
-      { betas: ::Array[Anthropic::Models::anthropic_beta] }
+      { model_id: String, betas: ::Array[Anthropic::Models::anthropic_beta] }
       & Anthropic::Internal::Type::request_parameters
 
     class ModelRetrieveParams < Anthropic::Internal::Type::BaseModel
       extend Anthropic::Internal::Type::RequestParameters::Converter
       include Anthropic::Internal::Type::RequestParameters
+
+      attr_accessor model_id: String
 
       attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
@@ -15,11 +17,13 @@ module Anthropic
       ) -> ::Array[Anthropic::Models::anthropic_beta]
 
       def initialize: (
+        model_id: String,
         ?betas: ::Array[Anthropic::Models::anthropic_beta],
         ?request_options: Anthropic::request_opts
       ) -> void
 
       def to_hash: -> {
+        model_id: String,
         betas: ::Array[Anthropic::Models::anthropic_beta],
         request_options: Anthropic::RequestOptions
       }

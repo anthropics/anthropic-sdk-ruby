@@ -16,6 +16,12 @@ module Anthropic
               )
             end
 
+          # Unique identifier for the skill.
+          #
+          # The format and length of IDs may change over time.
+          sig { returns(String) }
+          attr_accessor :skill_id
+
           # Number of items to return per page.
           #
           # Defaults to `20`. Ranges from `1` to `1000`.
@@ -45,6 +51,7 @@ module Anthropic
 
           sig do
             params(
+              skill_id: String,
               limit: T.nilable(Integer),
               page: T.nilable(String),
               betas:
@@ -53,6 +60,10 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
+            # Unique identifier for the skill.
+            #
+            # The format and length of IDs may change over time.
+            skill_id:,
             # Number of items to return per page.
             #
             # Defaults to `20`. Ranges from `1` to `1000`.
@@ -68,6 +79,7 @@ module Anthropic
           sig do
             override.returns(
               {
+                skill_id: String,
                 limit: T.nilable(Integer),
                 page: T.nilable(String),
                 betas:
