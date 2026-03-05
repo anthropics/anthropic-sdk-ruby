@@ -5,6 +5,7 @@ module Anthropic
         type version_retrieve_params =
           {
             skill_id: String,
+            version: String,
             betas: ::Array[Anthropic::Models::anthropic_beta]
           }
           & Anthropic::Internal::Type::request_parameters
@@ -15,6 +16,8 @@ module Anthropic
 
           attr_accessor skill_id: String
 
+          attr_accessor version: String
+
           attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
           def betas=: (
@@ -23,12 +26,14 @@ module Anthropic
 
           def initialize: (
             skill_id: String,
+            version: String,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> void
 
           def to_hash: -> {
             skill_id: String,
+            version: String,
             betas: ::Array[Anthropic::Models::anthropic_beta],
             request_options: Anthropic::RequestOptions
           }

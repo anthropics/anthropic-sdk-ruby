@@ -15,15 +15,31 @@ module Anthropic
             )
           end
 
+        # ID of the Message Batch.
+        sig { returns(String) }
+        attr_accessor :message_batch_id
+
         sig do
-          params(request_options: Anthropic::RequestOptions::OrHash).returns(
-            T.attached_class
-          )
+          params(
+            message_batch_id: String,
+            request_options: Anthropic::RequestOptions::OrHash
+          ).returns(T.attached_class)
         end
-        def self.new(request_options: {})
+        def self.new(
+          # ID of the Message Batch.
+          message_batch_id:,
+          request_options: {}
+        )
         end
 
-        sig { override.returns({ request_options: Anthropic::RequestOptions }) }
+        sig do
+          override.returns(
+            {
+              message_batch_id: String,
+              request_options: Anthropic::RequestOptions
+            }
+          )
+        end
         def to_hash
         end
       end

@@ -15,6 +15,10 @@ module Anthropic
             )
           end
 
+        # ID of the File.
+        sig { returns(String) }
+        attr_accessor :file_id
+
         # Optional header to specify the beta version(s) you want to use.
         sig do
           returns(
@@ -34,11 +38,14 @@ module Anthropic
 
         sig do
           params(
+            file_id: String,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
+          # ID of the File.
+          file_id:,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}
@@ -48,6 +55,7 @@ module Anthropic
         sig do
           override.returns(
             {
+              file_id: String,
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               request_options: Anthropic::RequestOptions

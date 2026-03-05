@@ -9,6 +9,14 @@ module Anthropic
           extend Anthropic::Internal::Type::RequestParameters::Converter
           include Anthropic::Internal::Type::RequestParameters
 
+          # @!attribute skill_id
+          #   Unique identifier for the skill.
+          #
+          #   The format and length of IDs may change over time.
+          #
+          #   @return [String]
+          required :skill_id, String
+
           # @!attribute limit
           #   Number of items to return per page.
           #
@@ -29,9 +37,11 @@ module Anthropic
           #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-          # @!method initialize(limit: nil, page: nil, betas: nil, request_options: {})
+          # @!method initialize(skill_id:, limit: nil, page: nil, betas: nil, request_options: {})
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Skills::VersionListParams} for more details.
+          #
+          #   @param skill_id [String] Unique identifier for the skill.
           #
           #   @param limit [Integer, nil] Number of items to return per page.
           #

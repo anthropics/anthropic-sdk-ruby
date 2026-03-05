@@ -16,6 +16,12 @@ module Anthropic
               )
             end
 
+          # Unique identifier for the skill.
+          #
+          # The format and length of IDs may change over time.
+          sig { returns(String) }
+          attr_accessor :skill_id
+
           # Files to upload for the skill.
           #
           # All files must be in the same top-level directory and must include a SKILL.md
@@ -42,6 +48,7 @@ module Anthropic
 
           sig do
             params(
+              skill_id: String,
               files: T.nilable(T::Array[Anthropic::Internal::FileInput]),
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
@@ -49,6 +56,10 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
+            # Unique identifier for the skill.
+            #
+            # The format and length of IDs may change over time.
+            skill_id:,
             # Files to upload for the skill.
             #
             # All files must be in the same top-level directory and must include a SKILL.md
@@ -63,6 +74,7 @@ module Anthropic
           sig do
             override.returns(
               {
+                skill_id: String,
                 files: T.nilable(T::Array[Anthropic::Internal::FileInput]),
                 betas:
                   T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
