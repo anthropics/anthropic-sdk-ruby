@@ -74,7 +74,7 @@ class Anthropic::Test::Resources::Beta::FilesTest < Anthropic::Test::ResourceTes
   end
 
   def test_upload_required_params
-    response = @anthropic.beta.files.upload(file: Pathname(__FILE__))
+    response = @anthropic.beta.files.upload(file: StringIO.new("Example data"))
 
     assert_pattern do
       response => Anthropic::Beta::FileMetadata
