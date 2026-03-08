@@ -86,7 +86,7 @@ module Anthropic
           stub_message_request(response_body: response_body)
 
           message = @client.messages.create(
-            model: "claude-3-opus-20240229",
+            model: "claude-opus-4-6",
             max_tokens: 100,
             messages: [{role: "user", content: "What's the weather?"}],
             tools: [GetWeather.new]
@@ -125,7 +125,7 @@ module Anthropic
           stub_message_request(response_body: response_body)
 
           message = @client.messages.create(
-            model: "claude-3-opus-20240229",
+            model: "claude-opus-4-6",
             max_tokens: 100,
             messages: [{role: "user", content: "Add 5+3 and check NYC weather"}],
             tools: [Calculator.new, GetWeather.new]
@@ -178,7 +178,7 @@ module Anthropic
           stub_message_request(response_body: response_body)
 
           message = @client.messages.create(
-            model: "claude-3-opus-20240229",
+            model: "claude-opus-4-6",
             max_tokens: 100,
             messages: [{role: "user", content: "Test mixed tools"}],
             tools: [GetWeather.new, raw_tool]
@@ -232,7 +232,7 @@ module Anthropic
           stub_message_request(response_body: response_body)
 
           message = @client.messages.create(
-            model: "claude-3-opus-20240229",
+            model: "claude-opus-4-6",
             max_tokens: 100,
             messages: [{role: "user", content: "Test nested"}],
             tools: [NestedModel]
@@ -277,7 +277,7 @@ module Anthropic
           stub_message_request(response_body: response_body)
 
           message = @client.messages.create(
-            model: "claude-3-opus-20240229",
+            model: "claude-opus-4-6",
             max_tokens: 100,
             messages: [{role: "user", content: "Weather?"}],
             tools: [tool_hash]

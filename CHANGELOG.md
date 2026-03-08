@@ -1,5 +1,33 @@
 # Changelog
 
+## 1.24.0 (2026-03-08)
+
+Full Changelog: [v1.23.0...v1.24.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.23.0...v1.24.0)
+
+### Features
+
+* **api:** chore(config): clean up model enum list ([#31](https://github.com/anthropics/anthropic-sdk-ruby/issues/31)) ([8549634](https://github.com/anthropics/anthropic-sdk-ruby/commit/8549634385a81b071ac05f02c74a5d5d36ea98fa))
+* **tests:** update mock server ([2312be3](https://github.com/anthropics/anthropic-sdk-ruby/commit/2312be3b2f0f9846d70fa5ee7264463452349e21))
+
+
+### Bug Fixes
+
+* **client:** update model references from claude-3-opus-20240229 to claude-opus-4-6 ([#831](https://github.com/anthropics/anthropic-sdk-ruby/issues/831)) ([0c56fe4](https://github.com/anthropics/anthropic-sdk-ruby/commit/0c56fe4e7d279b9228613982f97c4836d7267a43))
+* properly mock time in ruby ci tests ([a56c1fe](https://github.com/anthropics/anthropic-sdk-ruby/commit/a56c1fe2bb14d1238855c41c791d69b44904f691))
+
+
+### Chores
+
+* **internal:** codegen related update ([0cf7f7e](https://github.com/anthropics/anthropic-sdk-ruby/commit/0cf7f7e485248290f54a83e907fb9623585c15f5))
+* **internal:** codegen related update ([a2218e5](https://github.com/anthropics/anthropic-sdk-ruby/commit/a2218e53a85e7544bedc8b55c8e5a9d4ef4dd35c))
+* **internal:** codegen related update ([b77acd4](https://github.com/anthropics/anthropic-sdk-ruby/commit/b77acd489387413cda40134f6a9463dfe850c71d))
+* **tests:** unskip tests that are now supported in steady ([9fe434d](https://github.com/anthropics/anthropic-sdk-ruby/commit/9fe434d6afdc979897754e5127c56f541bb6eb76))
+
+
+### Documentation
+
+* streamline README, centralize documentation at docs.anthropic.com ([396688b](https://github.com/anthropics/anthropic-sdk-ruby/commit/396688b823bf08690714c4f42160b4aa20d86880))
+
 ## 1.23.0 (2026-02-19)
 
 Full Changelog: [v1.22.0...v1.23.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.22.0...v1.23.0)

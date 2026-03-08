@@ -15,6 +15,12 @@ module Anthropic
             )
           end
 
+        # Unique identifier for the skill.
+        #
+        # The format and length of IDs may change over time.
+        sig { returns(String) }
+        attr_accessor :skill_id
+
         # Optional header to specify the beta version(s) you want to use.
         sig do
           returns(
@@ -34,11 +40,16 @@ module Anthropic
 
         sig do
           params(
+            skill_id: String,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
+          # Unique identifier for the skill.
+          #
+          # The format and length of IDs may change over time.
+          skill_id:,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}
@@ -48,6 +59,7 @@ module Anthropic
         sig do
           override.returns(
             {
+              skill_id: String,
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               request_options: Anthropic::RequestOptions

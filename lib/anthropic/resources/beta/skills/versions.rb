@@ -95,12 +95,13 @@ module Anthropic
           #
           # @see Anthropic::Models::Beta::Skills::VersionListParams
           def list(skill_id, params = {})
-            parsed, options = Anthropic::Beta::Skills::VersionListParams.dump_request(params)
             query_params = [:limit, :page]
+            parsed, options = Anthropic::Beta::Skills::VersionListParams.dump_request(params)
+            query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
               method: :get,
               path: ["v1/skills/%1$s/versions?beta=true", skill_id],
-              query: parsed.slice(*query_params),
+              query: query,
               headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
               page: Anthropic::Internal::PageCursor,
               model: Anthropic::Models::Beta::Skills::VersionListResponse,

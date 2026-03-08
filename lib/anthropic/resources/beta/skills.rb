@@ -91,12 +91,13 @@ module Anthropic
         #
         # @see Anthropic::Models::Beta::SkillListParams
         def list(params = {})
-          parsed, options = Anthropic::Beta::SkillListParams.dump_request(params)
           query_params = [:limit, :page, :source]
+          parsed, options = Anthropic::Beta::SkillListParams.dump_request(params)
+          query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
             method: :get,
             path: "v1/skills?beta=true",
-            query: parsed.slice(*query_params),
+            query: query,
             headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
             page: Anthropic::Internal::PageCursor,
             model: Anthropic::Models::Beta::SkillListResponse,

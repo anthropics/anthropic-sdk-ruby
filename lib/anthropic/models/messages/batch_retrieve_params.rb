@@ -8,7 +8,15 @@ module Anthropic
         extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
-        # @!method initialize(request_options: {})
+        # @!attribute message_batch_id
+        #   ID of the Message Batch.
+        #
+        #   @return [String]
+        required :message_batch_id, String
+
+        # @!method initialize(message_batch_id:, request_options: {})
+        #   @param message_batch_id [String] ID of the Message Batch.
+        #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
       end
     end
