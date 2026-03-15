@@ -4,8 +4,6 @@ require_relative "../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Skills::VersionsTest < Anthropic::Test::ResourceTest
   def test_create
-    skip("prism binary unsupported")
-
     response = @anthropic.beta.skills.versions.create("skill_id")
 
     assert_pattern do

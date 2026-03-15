@@ -1,3 +1,7 @@
+## Contributing to documentation
+
+The documentation for this SDK lives at [platform.claude.com/docs/en/api/sdks/ruby](https://platform.claude.com/docs/en/api/sdks/ruby). To suggest changes, open an issue.
+
 ## Setting up the environment
 
 This repository contains a `.ruby-version` file, which should work with either [rbenv](https://github.com/rbenv/rbenv) or [asdf](https://github.com/asdf-vm/asdf) with the [ruby plugin](https://github.com/asdf-vm/asdf-ruby).
@@ -66,7 +70,7 @@ $ bundle exec rake
 
 ## Running tests
 
-Most tests require you to [set up a mock server](https://github.com/stoplightio/prism) against the OpenAPI spec to run the tests.
+Most tests require you to [set up a mock server](https://github.com/dgellow/steady) against the OpenAPI spec to run the tests.
 
 ```sh
 $ ./scripts/mock

@@ -3,12 +3,17 @@ module Anthropic
     module Beta
       module Messages
         type batch_results_params =
-          { betas: ::Array[Anthropic::Models::anthropic_beta] }
+          {
+            message_batch_id: String,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
+          }
           & Anthropic::Internal::Type::request_parameters
 
         class BatchResultsParams < Anthropic::Internal::Type::BaseModel
           extend Anthropic::Internal::Type::RequestParameters::Converter
           include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor message_batch_id: String
 
           attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
@@ -17,11 +22,13 @@ module Anthropic
           ) -> ::Array[Anthropic::Models::anthropic_beta]
 
           def initialize: (
+            message_batch_id: String,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> void
 
           def to_hash: -> {
+            message_batch_id: String,
             betas: ::Array[Anthropic::Models::anthropic_beta],
             request_options: Anthropic::RequestOptions
           }

@@ -4,8 +4,6 @@ require_relative "../../test_helper"
 
 class Anthropic::Test::Resources::Beta::MessagesTest < Anthropic::Test::ResourceTest
   def test_create_required_params
-    skip("prism validates based on the non-beta endpoint")
-
     response =
       @anthropic.beta.messages.create(
         max_tokens: 1024,
@@ -34,8 +32,6 @@ class Anthropic::Test::Resources::Beta::MessagesTest < Anthropic::Test::Resource
   end
 
   def test_count_tokens_required_params
-    skip("prism validates based on the non-beta endpoint")
-
     response =
       @anthropic.beta.messages.count_tokens(
         messages: [{content: "string", role: :user}],

@@ -2,12 +2,14 @@ module Anthropic
   module Models
     module Beta
       type file_download_params =
-        { betas: ::Array[Anthropic::Models::anthropic_beta] }
+        { file_id: String, betas: ::Array[Anthropic::Models::anthropic_beta] }
         & Anthropic::Internal::Type::request_parameters
 
       class FileDownloadParams < Anthropic::Internal::Type::BaseModel
         extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
+
+        attr_accessor file_id: String
 
         attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
@@ -16,11 +18,13 @@ module Anthropic
         ) -> ::Array[Anthropic::Models::anthropic_beta]
 
         def initialize: (
+          file_id: String,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> void
 
         def to_hash: -> {
+          file_id: String,
           betas: ::Array[Anthropic::Models::anthropic_beta],
           request_options: Anthropic::RequestOptions
         }
