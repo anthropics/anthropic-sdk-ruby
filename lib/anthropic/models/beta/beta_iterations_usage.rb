@@ -7,11 +7,13 @@ module Anthropic
       module BetaIterationsUsageItem
         extend Anthropic::Internal::Type::Union
 
+        discriminator :type
+
         # Token usage for a sampling iteration.
-        variant -> { Anthropic::Beta::BetaMessageIterationUsage }
+        variant :message, -> { Anthropic::Beta::BetaMessageIterationUsage }
 
         # Token usage for a compaction iteration.
-        variant -> { Anthropic::Beta::BetaCompactionIterationUsage }
+        variant :compaction, -> { Anthropic::Beta::BetaCompactionIterationUsage }
 
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaMessageIterationUsage, Anthropic::Models::Beta::BetaCompactionIterationUsage)]

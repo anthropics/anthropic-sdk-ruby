@@ -1,0 +1,102 @@
+module Anthropic
+  module Models
+    class BetaWebFetchTool20260309 = Beta::BetaWebFetchTool20260309
+
+    module Beta
+      type beta_web_fetch_tool20260309 =
+        {
+          name: :web_fetch,
+          type: :web_fetch_20260309,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaWebFetchTool20260309::allowed_caller],
+          allowed_domains: ::Array[String]?,
+          blocked_domains: ::Array[String]?,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          citations: Anthropic::Beta::BetaCitationsConfigParam?,
+          defer_loading: bool,
+          max_content_tokens: Integer?,
+          max_uses: Integer?,
+          strict: bool,
+          use_cache: bool
+        }
+
+      class BetaWebFetchTool20260309 < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: :web_fetch
+
+        attr_accessor type: :web_fetch_20260309
+
+        attr_reader allowed_callers: ::Array[Anthropic::Models::Beta::BetaWebFetchTool20260309::allowed_caller]?
+
+        def allowed_callers=: (
+          ::Array[Anthropic::Models::Beta::BetaWebFetchTool20260309::allowed_caller]
+        ) -> ::Array[Anthropic::Models::Beta::BetaWebFetchTool20260309::allowed_caller]
+
+        attr_accessor allowed_domains: ::Array[String]?
+
+        attr_accessor blocked_domains: ::Array[String]?
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        attr_accessor citations: Anthropic::Beta::BetaCitationsConfigParam?
+
+        attr_reader defer_loading: bool?
+
+        def defer_loading=: (bool) -> bool
+
+        attr_accessor max_content_tokens: Integer?
+
+        attr_accessor max_uses: Integer?
+
+        attr_reader strict: bool?
+
+        def strict=: (bool) -> bool
+
+        attr_reader use_cache: bool?
+
+        def use_cache=: (bool) -> bool
+
+        def initialize: (
+          ?allowed_callers: ::Array[Anthropic::Models::Beta::BetaWebFetchTool20260309::allowed_caller],
+          ?allowed_domains: ::Array[String]?,
+          ?blocked_domains: ::Array[String]?,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?citations: Anthropic::Beta::BetaCitationsConfigParam?,
+          ?defer_loading: bool,
+          ?max_content_tokens: Integer?,
+          ?max_uses: Integer?,
+          ?strict: bool,
+          ?use_cache: bool,
+          ?name: :web_fetch,
+          ?type: :web_fetch_20260309
+        ) -> void
+
+        def to_hash: -> {
+          name: :web_fetch,
+          type: :web_fetch_20260309,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaWebFetchTool20260309::allowed_caller],
+          allowed_domains: ::Array[String]?,
+          blocked_domains: ::Array[String]?,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          citations: Anthropic::Beta::BetaCitationsConfigParam?,
+          defer_loading: bool,
+          max_content_tokens: Integer?,
+          max_uses: Integer?,
+          strict: bool,
+          use_cache: bool
+        }
+
+        type allowed_caller =
+          :direct | :code_execution_20250825 | :code_execution_20260120
+
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          DIRECT: :direct
+          CODE_EXECUTION_20250825: :code_execution_20250825
+          CODE_EXECUTION_20260120: :code_execution_20260120
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaWebFetchTool20260309::allowed_caller]
+        end
+      end
+    end
+  end
+end
