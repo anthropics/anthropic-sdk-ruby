@@ -59,6 +59,7 @@ module Anthropic
                 Anthropic::WebFetchTool20250910::OrHash,
                 Anthropic::WebSearchTool20260209::OrHash,
                 Anthropic::WebFetchTool20260209::OrHash,
+                Anthropic::WebFetchTool20260309::OrHash,
                 Anthropic::ToolSearchToolBm25_20251119::OrHash,
                 Anthropic::ToolSearchToolRegex20251119::OrHash
               )
@@ -358,6 +359,7 @@ module Anthropic
                 Anthropic::WebFetchTool20250910::OrHash,
                 Anthropic::WebSearchTool20260209::OrHash,
                 Anthropic::WebFetchTool20260209::OrHash,
+                Anthropic::WebFetchTool20260309::OrHash,
                 Anthropic::ToolSearchToolBm25_20251119::OrHash,
                 Anthropic::ToolSearchToolRegex20251119::OrHash
               )
@@ -651,6 +653,7 @@ module Anthropic
                 Anthropic::WebFetchTool20250910::OrHash,
                 Anthropic::WebSearchTool20260209::OrHash,
                 Anthropic::WebFetchTool20260209::OrHash,
+                Anthropic::WebFetchTool20260309::OrHash,
                 Anthropic::ToolSearchToolBm25_20251119::OrHash,
                 Anthropic::ToolSearchToolRegex20251119::OrHash
               )

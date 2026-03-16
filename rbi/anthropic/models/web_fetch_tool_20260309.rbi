@@ -2,10 +2,10 @@
 
 module Anthropic
   module Models
-    class WebFetchTool20260209 < Anthropic::Internal::Type::BaseModel
+    class WebFetchTool20260309 < Anthropic::Internal::Type::BaseModel
       OrHash =
         T.type_alias do
-          T.any(Anthropic::WebFetchTool20260209, Anthropic::Internal::AnyHash)
+          T.any(Anthropic::WebFetchTool20260309, Anthropic::Internal::AnyHash)
         end
 
       # Name of the tool.
@@ -20,7 +20,7 @@ module Anthropic
       sig do
         returns(
           T.nilable(
-            T::Array[Anthropic::WebFetchTool20260209::AllowedCaller::OrSymbol]
+            T::Array[Anthropic::WebFetchTool20260309::AllowedCaller::OrSymbol]
           )
         )
       end
@@ -29,7 +29,7 @@ module Anthropic
       sig do
         params(
           allowed_callers:
-            T::Array[Anthropic::WebFetchTool20260209::AllowedCaller::OrSymbol]
+            T::Array[Anthropic::WebFetchTool20260309::AllowedCaller::OrSymbol]
         ).void
       end
       attr_writer :allowed_callers
@@ -89,10 +89,20 @@ module Anthropic
       sig { params(strict: T::Boolean).void }
       attr_writer :strict
 
+      # Whether to use cached content. Set to false to bypass the cache and fetch fresh
+      # content. Only set to false when the user explicitly requests fresh content or
+      # when fetching rapidly-changing sources.
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :use_cache
+
+      sig { params(use_cache: T::Boolean).void }
+      attr_writer :use_cache
+
+      # Web fetch tool with use_cache parameter for bypassing cached content.
       sig do
         params(
           allowed_callers:
-            T::Array[Anthropic::WebFetchTool20260209::AllowedCaller::OrSymbol],
+            T::Array[Anthropic::WebFetchTool20260309::AllowedCaller::OrSymbol],
           allowed_domains: T.nilable(T::Array[String]),
           blocked_domains: T.nilable(T::Array[String]),
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
@@ -101,6 +111,7 @@ module Anthropic
           max_content_tokens: T.nilable(Integer),
           max_uses: T.nilable(Integer),
           strict: T::Boolean,
+          use_cache: T::Boolean,
           name: Symbol,
           type: Symbol
         ).returns(T.attached_class)
@@ -126,11 +137,15 @@ module Anthropic
         max_uses: nil,
         # When true, guarantees schema validation on tool names and inputs
         strict: nil,
+        # Whether to use cached content. Set to false to bypass the cache and fetch fresh
+        # content. Only set to false when the user explicitly requests fresh content or
+        # when fetching rapidly-changing sources.
+        use_cache: nil,
         # Name of the tool.
         #
         # This is how the tool will be called by the model and in `tool_use` blocks.
         name: :web_fetch,
-        type: :web_fetch_20260209
+        type: :web_fetch_20260309
       )
       end
 
@@ -141,7 +156,7 @@ module Anthropic
             type: Symbol,
             allowed_callers:
               T::Array[
-                Anthropic::WebFetchTool20260209::AllowedCaller::OrSymbol
+                Anthropic::WebFetchTool20260309::AllowedCaller::OrSymbol
               ],
             allowed_domains: T.nilable(T::Array[String]),
             blocked_domains: T.nilable(T::Array[String]),
@@ -150,7 +165,8 @@ module Anthropic
             defer_loading: T::Boolean,
             max_content_tokens: T.nilable(Integer),
             max_uses: T.nilable(Integer),
-            strict: T::Boolean
+            strict: T::Boolean,
+            use_cache: T::Boolean
           }
         )
       end
@@ -168,30 +184,30 @@ module Anthropic
 
         TaggedSymbol =
           T.type_alias do
-            T.all(Symbol, Anthropic::WebFetchTool20260209::AllowedCaller)
+            T.all(Symbol, Anthropic::WebFetchTool20260309::AllowedCaller)
           end
         OrSymbol = T.type_alias { T.any(Symbol, String) }
 
         DIRECT =
           T.let(
             :direct,
-            Anthropic::WebFetchTool20260209::AllowedCaller::TaggedSymbol
+            Anthropic::WebFetchTool20260309::AllowedCaller::TaggedSymbol
           )
         CODE_EXECUTION_20250825 =
           T.let(
             :code_execution_20250825,
-            Anthropic::WebFetchTool20260209::AllowedCaller::TaggedSymbol
+            Anthropic::WebFetchTool20260309::AllowedCaller::TaggedSymbol
           )
         CODE_EXECUTION_20260120 =
           T.let(
             :code_execution_20260120,
-            Anthropic::WebFetchTool20260209::AllowedCaller::TaggedSymbol
+            Anthropic::WebFetchTool20260309::AllowedCaller::TaggedSymbol
           )
 
         sig do
           override.returns(
             T::Array[
-              Anthropic::WebFetchTool20260209::AllowedCaller::TaggedSymbol
+              Anthropic::WebFetchTool20260309::AllowedCaller::TaggedSymbol
             ]
           )
         end

@@ -2,14 +2,14 @@
 
 module Anthropic
   module Models
-    BetaToolBash20241022 = Beta::BetaToolBash20241022
+    BetaWebFetchTool20260309 = Beta::BetaWebFetchTool20260309
 
     module Beta
-      class BetaToolBash20241022 < Anthropic::Internal::Type::BaseModel
+      class BetaWebFetchTool20260309 < Anthropic::Internal::Type::BaseModel
         OrHash =
           T.type_alias do
             T.any(
-              Anthropic::Beta::BetaToolBash20241022,
+              Anthropic::Beta::BetaWebFetchTool20260309,
               Anthropic::Internal::AnyHash
             )
           end
@@ -27,7 +27,7 @@ module Anthropic
           returns(
             T.nilable(
               T::Array[
-                Anthropic::Beta::BetaToolBash20241022::AllowedCaller::OrSymbol
+                Anthropic::Beta::BetaWebFetchTool20260309::AllowedCaller::OrSymbol
               ]
             )
           )
@@ -38,11 +38,19 @@ module Anthropic
           params(
             allowed_callers:
               T::Array[
-                Anthropic::Beta::BetaToolBash20241022::AllowedCaller::OrSymbol
+                Anthropic::Beta::BetaWebFetchTool20260309::AllowedCaller::OrSymbol
               ]
           ).void
         end
         attr_writer :allowed_callers
+
+        # List of domains to allow fetching from
+        sig { returns(T.nilable(T::Array[String])) }
+        attr_accessor :allowed_domains
+
+        # List of domains to block fetching from
+        sig { returns(T.nilable(T::Array[String])) }
+        attr_accessor :blocked_domains
 
         # Create a cache control breakpoint at this content block.
         sig { returns(T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)) }
@@ -56,6 +64,19 @@ module Anthropic
         end
         attr_writer :cache_control
 
+        # Citations configuration for fetched documents. Citations are disabled by
+        # default.
+        sig { returns(T.nilable(Anthropic::Beta::BetaCitationsConfigParam)) }
+        attr_reader :citations
+
+        sig do
+          params(
+            citations:
+              T.nilable(Anthropic::Beta::BetaCitationsConfigParam::OrHash)
+          ).void
+        end
+        attr_writer :citations
+
         # If true, tool will not be included in initial system prompt. Only loaded when
         # returned via tool_reference from tool search.
         sig { returns(T.nilable(T::Boolean)) }
@@ -64,13 +85,14 @@ module Anthropic
         sig { params(defer_loading: T::Boolean).void }
         attr_writer :defer_loading
 
-        sig { returns(T.nilable(T::Array[T::Hash[Symbol, T.anything]])) }
-        attr_reader :input_examples
+        # Maximum number of tokens used by including web page text content in the context.
+        # The limit is approximate and does not apply to binary content such as PDFs.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :max_content_tokens
 
-        sig do
-          params(input_examples: T::Array[T::Hash[Symbol, T.anything]]).void
-        end
-        attr_writer :input_examples
+        # Maximum number of times the tool can be used in the API request.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :max_uses
 
         # When true, guarantees schema validation on tool names and inputs
         sig { returns(T.nilable(T::Boolean)) }
@@ -79,36 +101,67 @@ module Anthropic
         sig { params(strict: T::Boolean).void }
         attr_writer :strict
 
+        # Whether to use cached content. Set to false to bypass the cache and fetch fresh
+        # content. Only set to false when the user explicitly requests fresh content or
+        # when fetching rapidly-changing sources.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :use_cache
+
+        sig { params(use_cache: T::Boolean).void }
+        attr_writer :use_cache
+
+        # Web fetch tool with use_cache parameter for bypassing cached content.
         sig do
           params(
             allowed_callers:
               T::Array[
-                Anthropic::Beta::BetaToolBash20241022::AllowedCaller::OrSymbol
+                Anthropic::Beta::BetaWebFetchTool20260309::AllowedCaller::OrSymbol
               ],
+            allowed_domains: T.nilable(T::Array[String]),
+            blocked_domains: T.nilable(T::Array[String]),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+            citations:
+              T.nilable(Anthropic::Beta::BetaCitationsConfigParam::OrHash),
             defer_loading: T::Boolean,
-            input_examples: T::Array[T::Hash[Symbol, T.anything]],
+            max_content_tokens: T.nilable(Integer),
+            max_uses: T.nilable(Integer),
             strict: T::Boolean,
+            use_cache: T::Boolean,
             name: Symbol,
             type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
           allowed_callers: nil,
+          # List of domains to allow fetching from
+          allowed_domains: nil,
+          # List of domains to block fetching from
+          blocked_domains: nil,
           # Create a cache control breakpoint at this content block.
           cache_control: nil,
+          # Citations configuration for fetched documents. Citations are disabled by
+          # default.
+          citations: nil,
           # If true, tool will not be included in initial system prompt. Only loaded when
           # returned via tool_reference from tool search.
           defer_loading: nil,
-          input_examples: nil,
+          # Maximum number of tokens used by including web page text content in the context.
+          # The limit is approximate and does not apply to binary content such as PDFs.
+          max_content_tokens: nil,
+          # Maximum number of times the tool can be used in the API request.
+          max_uses: nil,
           # When true, guarantees schema validation on tool names and inputs
           strict: nil,
+          # Whether to use cached content. Set to false to bypass the cache and fetch fresh
+          # content. Only set to false when the user explicitly requests fresh content or
+          # when fetching rapidly-changing sources.
+          use_cache: nil,
           # Name of the tool.
           #
           # This is how the tool will be called by the model and in `tool_use` blocks.
-          name: :bash,
-          type: :bash_20241022
+          name: :web_fetch,
+          type: :web_fetch_20260309
         )
         end
 
@@ -119,13 +172,18 @@ module Anthropic
               type: Symbol,
               allowed_callers:
                 T::Array[
-                  Anthropic::Beta::BetaToolBash20241022::AllowedCaller::OrSymbol
+                  Anthropic::Beta::BetaWebFetchTool20260309::AllowedCaller::OrSymbol
                 ],
+              allowed_domains: T.nilable(T::Array[String]),
+              blocked_domains: T.nilable(T::Array[String]),
               cache_control:
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
+              citations: T.nilable(Anthropic::Beta::BetaCitationsConfigParam),
               defer_loading: T::Boolean,
-              input_examples: T::Array[T::Hash[Symbol, T.anything]],
-              strict: T::Boolean
+              max_content_tokens: T.nilable(Integer),
+              max_uses: T.nilable(Integer),
+              strict: T::Boolean,
+              use_cache: T::Boolean
             }
           )
         end
@@ -145,7 +203,7 @@ module Anthropic
             T.type_alias do
               T.all(
                 Symbol,
-                Anthropic::Beta::BetaToolBash20241022::AllowedCaller
+                Anthropic::Beta::BetaWebFetchTool20260309::AllowedCaller
               )
             end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
@@ -153,23 +211,23 @@ module Anthropic
           DIRECT =
             T.let(
               :direct,
-              Anthropic::Beta::BetaToolBash20241022::AllowedCaller::TaggedSymbol
+              Anthropic::Beta::BetaWebFetchTool20260309::AllowedCaller::TaggedSymbol
             )
           CODE_EXECUTION_20250825 =
             T.let(
               :code_execution_20250825,
-              Anthropic::Beta::BetaToolBash20241022::AllowedCaller::TaggedSymbol
+              Anthropic::Beta::BetaWebFetchTool20260309::AllowedCaller::TaggedSymbol
             )
           CODE_EXECUTION_20260120 =
             T.let(
               :code_execution_20260120,
-              Anthropic::Beta::BetaToolBash20241022::AllowedCaller::TaggedSymbol
+              Anthropic::Beta::BetaWebFetchTool20260309::AllowedCaller::TaggedSymbol
             )
 
           sig do
             override.returns(
               T::Array[
-                Anthropic::Beta::BetaToolBash20241022::AllowedCaller::TaggedSymbol
+                Anthropic::Beta::BetaWebFetchTool20260309::AllowedCaller::TaggedSymbol
               ]
             )
           end

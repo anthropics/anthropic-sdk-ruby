@@ -380,6 +380,8 @@ module Anthropic
 
   WebFetchTool20260209 = Anthropic::Models::WebFetchTool20260209
 
+  WebFetchTool20260309 = Anthropic::Models::WebFetchTool20260309
+
   WebFetchToolResultBlock = Anthropic::Models::WebFetchToolResultBlock
 
   WebFetchToolResultBlockParam = Anthropic::Models::WebFetchToolResultBlockParam
