@@ -2,7 +2,7 @@
 
 module Anthropic
   module Models
-    class WebFetchTool20250910 < Anthropic::Internal::Type::BaseModel
+    class WebFetchTool20260309 < Anthropic::Internal::Type::BaseModel
       # @!attribute name
       #   Name of the tool.
       #
@@ -13,14 +13,14 @@ module Anthropic
 
       # @!attribute type
       #
-      #   @return [Symbol, :web_fetch_20250910]
-      required :type, const: :web_fetch_20250910
+      #   @return [Symbol, :web_fetch_20260309]
+      required :type, const: :web_fetch_20260309
 
       # @!attribute allowed_callers
       #
-      #   @return [Array<Symbol, Anthropic::Models::WebFetchTool20250910::AllowedCaller>, nil]
+      #   @return [Array<Symbol, Anthropic::Models::WebFetchTool20260309::AllowedCaller>, nil]
       optional :allowed_callers,
-               -> { Anthropic::Internal::Type::ArrayOf[enum: Anthropic::WebFetchTool20250910::AllowedCaller] }
+               -> { Anthropic::Internal::Type::ArrayOf[enum: Anthropic::WebFetchTool20260309::AllowedCaller] }
 
       # @!attribute allowed_domains
       #   List of domains to allow fetching from
@@ -73,11 +73,21 @@ module Anthropic
       #   @return [Boolean, nil]
       optional :strict, Anthropic::Internal::Type::Boolean
 
-      # @!method initialize(allowed_callers: nil, allowed_domains: nil, blocked_domains: nil, cache_control: nil, citations: nil, defer_loading: nil, max_content_tokens: nil, max_uses: nil, strict: nil, name: :web_fetch, type: :web_fetch_20250910)
-      #   Some parameter documentations has been truncated, see
-      #   {Anthropic::Models::WebFetchTool20250910} for more details.
+      # @!attribute use_cache
+      #   Whether to use cached content. Set to false to bypass the cache and fetch fresh
+      #   content. Only set to false when the user explicitly requests fresh content or
+      #   when fetching rapidly-changing sources.
       #
-      #   @param allowed_callers [Array<Symbol, Anthropic::Models::WebFetchTool20250910::AllowedCaller>]
+      #   @return [Boolean, nil]
+      optional :use_cache, Anthropic::Internal::Type::Boolean
+
+      # @!method initialize(allowed_callers: nil, allowed_domains: nil, blocked_domains: nil, cache_control: nil, citations: nil, defer_loading: nil, max_content_tokens: nil, max_uses: nil, strict: nil, use_cache: nil, name: :web_fetch, type: :web_fetch_20260309)
+      #   Some parameter documentations has been truncated, see
+      #   {Anthropic::Models::WebFetchTool20260309} for more details.
+      #
+      #   Web fetch tool with use_cache parameter for bypassing cached content.
+      #
+      #   @param allowed_callers [Array<Symbol, Anthropic::Models::WebFetchTool20260309::AllowedCaller>]
       #
       #   @param allowed_domains [Array<String>, nil] List of domains to allow fetching from
       #
@@ -95,9 +105,11 @@ module Anthropic
       #
       #   @param strict [Boolean] When true, guarantees schema validation on tool names and inputs
       #
+      #   @param use_cache [Boolean] Whether to use cached content. Set to false to bypass the cache and fetch fresh
+      #
       #   @param name [Symbol, :web_fetch] Name of the tool.
       #
-      #   @param type [Symbol, :web_fetch_20250910]
+      #   @param type [Symbol, :web_fetch_20260309]
 
       # Specifies who can invoke a tool.
       #

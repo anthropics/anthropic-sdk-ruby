@@ -1,13 +1,36 @@
 module Anthropic
   module Models
-    type thinking_config_adaptive = { type: :adaptive }
+    type thinking_config_adaptive =
+      {
+        type: :adaptive,
+        display_: Anthropic::Models::ThinkingConfigAdaptive::display_?
+      }
 
     class ThinkingConfigAdaptive < Anthropic::Internal::Type::BaseModel
       attr_accessor type: :adaptive
 
-      def initialize: (?type: :adaptive) -> void
+      attr_accessor display_: Anthropic::Models::ThinkingConfigAdaptive::display_?
 
-      def to_hash: -> { type: :adaptive }
+      def initialize: (
+        ?display_: Anthropic::Models::ThinkingConfigAdaptive::display_?,
+        ?type: :adaptive
+      ) -> void
+
+      def to_hash: -> {
+        type: :adaptive,
+        display_: Anthropic::Models::ThinkingConfigAdaptive::display_?
+      }
+
+      type display_ = :summarized | :omitted
+
+      module Display
+        extend Anthropic::Internal::Type::Enum
+
+        SUMMARIZED: :summarized
+        OMITTED: :omitted
+
+        def self?.values: -> ::Array[Anthropic::Models::ThinkingConfigAdaptive::display_]
+      end
     end
   end
 end

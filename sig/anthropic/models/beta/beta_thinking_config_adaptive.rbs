@@ -3,14 +3,37 @@ module Anthropic
     class BetaThinkingConfigAdaptive = Beta::BetaThinkingConfigAdaptive
 
     module Beta
-      type beta_thinking_config_adaptive = { type: :adaptive }
+      type beta_thinking_config_adaptive =
+        {
+          type: :adaptive,
+          display_: Anthropic::Models::Beta::BetaThinkingConfigAdaptive::display_?
+        }
 
       class BetaThinkingConfigAdaptive < Anthropic::Internal::Type::BaseModel
         attr_accessor type: :adaptive
 
-        def initialize: (?type: :adaptive) -> void
+        attr_accessor display_: Anthropic::Models::Beta::BetaThinkingConfigAdaptive::display_?
 
-        def to_hash: -> { type: :adaptive }
+        def initialize: (
+          ?display_: Anthropic::Models::Beta::BetaThinkingConfigAdaptive::display_?,
+          ?type: :adaptive
+        ) -> void
+
+        def to_hash: -> {
+          type: :adaptive,
+          display_: Anthropic::Models::Beta::BetaThinkingConfigAdaptive::display_?
+        }
+
+        type display_ = :summarized | :omitted
+
+        module Display
+          extend Anthropic::Internal::Type::Enum
+
+          SUMMARIZED: :summarized
+          OMITTED: :omitted
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaThinkingConfigAdaptive::display_]
+        end
       end
     end
   end
