@@ -17,28 +17,28 @@ module Anthropic
       # values safely.
       #
       # @example
-      #   # `bash_code_execution_tool_result_error_code` is a `Anthropic::BashCodeExecutionToolResultErrorCode`
-      #   case bash_code_execution_tool_result_error_code
-      #   when Anthropic::BashCodeExecutionToolResultErrorCode::INVALID_TOOL_INPUT
+      #   # `error_type` is a `Anthropic::ErrorType`
+      #   case error_type
+      #   when Anthropic::ErrorType::INVALID_REQUEST_ERROR
       #     # ...
-      #   when Anthropic::BashCodeExecutionToolResultErrorCode::UNAVAILABLE
+      #   when Anthropic::ErrorType::AUTHENTICATION_ERROR
       #     # ...
-      #   when Anthropic::BashCodeExecutionToolResultErrorCode::TOO_MANY_REQUESTS
+      #   when Anthropic::ErrorType::PERMISSION_ERROR
       #     # ...
       #   else
-      #     puts(bash_code_execution_tool_result_error_code)
+      #     puts(error_type)
       #   end
       #
       # @example
-      #   case bash_code_execution_tool_result_error_code
-      #   in :invalid_tool_input
+      #   case error_type
+      #   in :invalid_request_error
       #     # ...
-      #   in :unavailable
+      #   in :authentication_error
       #     # ...
-      #   in :too_many_requests
+      #   in :permission_error
       #     # ...
       #   else
-      #     puts(bash_code_execution_tool_result_error_code)
+      #     puts(error_type)
       #   end
       module Enum
         include Anthropic::Internal::Type::Converter
