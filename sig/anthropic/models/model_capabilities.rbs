@@ -1,0 +1,60 @@
+module Anthropic
+  module Models
+    type model_capabilities =
+      {
+        batch: Anthropic::CapabilitySupport,
+        citations: Anthropic::CapabilitySupport,
+        code_execution: Anthropic::CapabilitySupport,
+        context_management: Anthropic::ContextManagementCapability,
+        effort: Anthropic::EffortCapability,
+        image_input: Anthropic::CapabilitySupport,
+        pdf_input: Anthropic::CapabilitySupport,
+        structured_outputs: Anthropic::CapabilitySupport,
+        thinking: Anthropic::ThinkingCapability
+      }
+
+    class ModelCapabilities < Anthropic::Internal::Type::BaseModel
+      attr_accessor batch: Anthropic::CapabilitySupport
+
+      attr_accessor citations: Anthropic::CapabilitySupport
+
+      attr_accessor code_execution: Anthropic::CapabilitySupport
+
+      attr_accessor context_management: Anthropic::ContextManagementCapability
+
+      attr_accessor effort: Anthropic::EffortCapability
+
+      attr_accessor image_input: Anthropic::CapabilitySupport
+
+      attr_accessor pdf_input: Anthropic::CapabilitySupport
+
+      attr_accessor structured_outputs: Anthropic::CapabilitySupport
+
+      attr_accessor thinking: Anthropic::ThinkingCapability
+
+      def initialize: (
+        batch: Anthropic::CapabilitySupport,
+        citations: Anthropic::CapabilitySupport,
+        code_execution: Anthropic::CapabilitySupport,
+        context_management: Anthropic::ContextManagementCapability,
+        effort: Anthropic::EffortCapability,
+        image_input: Anthropic::CapabilitySupport,
+        pdf_input: Anthropic::CapabilitySupport,
+        structured_outputs: Anthropic::CapabilitySupport,
+        thinking: Anthropic::ThinkingCapability
+      ) -> void
+
+      def to_hash: -> {
+        batch: Anthropic::CapabilitySupport,
+        citations: Anthropic::CapabilitySupport,
+        code_execution: Anthropic::CapabilitySupport,
+        context_management: Anthropic::ContextManagementCapability,
+        effort: Anthropic::EffortCapability,
+        image_input: Anthropic::CapabilitySupport,
+        pdf_input: Anthropic::CapabilitySupport,
+        structured_outputs: Anthropic::CapabilitySupport,
+        thinking: Anthropic::ThinkingCapability
+      }
+    end
+  end
+end

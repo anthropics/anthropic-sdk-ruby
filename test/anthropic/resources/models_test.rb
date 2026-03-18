@@ -13,8 +13,11 @@ class Anthropic::Test::Resources::ModelsTest < Anthropic::Test::ResourceTest
     assert_pattern do
       response => {
         id: String,
+        capabilities: Anthropic::ModelCapabilities | nil,
         created_at: Time,
         display_name: String,
+        max_input_tokens: Integer | nil,
+        max_tokens: Integer | nil,
         type: Symbol
       }
     end
@@ -37,8 +40,11 @@ class Anthropic::Test::Resources::ModelsTest < Anthropic::Test::ResourceTest
     assert_pattern do
       row => {
         id: String,
+        capabilities: Anthropic::ModelCapabilities | nil,
         created_at: Time,
         display_name: String,
+        max_input_tokens: Integer | nil,
+        max_tokens: Integer | nil,
         type: Symbol
       }
     end
