@@ -1,0 +1,64 @@
+module Anthropic
+  module Models
+    class BetaModelCapabilities = Beta::BetaModelCapabilities
+
+    module Beta
+      type beta_model_capabilities =
+        {
+          batch: Anthropic::Beta::BetaCapabilitySupport,
+          citations: Anthropic::Beta::BetaCapabilitySupport,
+          code_execution: Anthropic::Beta::BetaCapabilitySupport,
+          context_management: Anthropic::Beta::BetaContextManagementCapability,
+          effort: Anthropic::Beta::BetaEffortCapability,
+          image_input: Anthropic::Beta::BetaCapabilitySupport,
+          pdf_input: Anthropic::Beta::BetaCapabilitySupport,
+          structured_outputs: Anthropic::Beta::BetaCapabilitySupport,
+          thinking: Anthropic::Beta::BetaThinkingCapability
+        }
+
+      class BetaModelCapabilities < Anthropic::Internal::Type::BaseModel
+        attr_accessor batch: Anthropic::Beta::BetaCapabilitySupport
+
+        attr_accessor citations: Anthropic::Beta::BetaCapabilitySupport
+
+        attr_accessor code_execution: Anthropic::Beta::BetaCapabilitySupport
+
+        attr_accessor context_management: Anthropic::Beta::BetaContextManagementCapability
+
+        attr_accessor effort: Anthropic::Beta::BetaEffortCapability
+
+        attr_accessor image_input: Anthropic::Beta::BetaCapabilitySupport
+
+        attr_accessor pdf_input: Anthropic::Beta::BetaCapabilitySupport
+
+        attr_accessor structured_outputs: Anthropic::Beta::BetaCapabilitySupport
+
+        attr_accessor thinking: Anthropic::Beta::BetaThinkingCapability
+
+        def initialize: (
+          batch: Anthropic::Beta::BetaCapabilitySupport,
+          citations: Anthropic::Beta::BetaCapabilitySupport,
+          code_execution: Anthropic::Beta::BetaCapabilitySupport,
+          context_management: Anthropic::Beta::BetaContextManagementCapability,
+          effort: Anthropic::Beta::BetaEffortCapability,
+          image_input: Anthropic::Beta::BetaCapabilitySupport,
+          pdf_input: Anthropic::Beta::BetaCapabilitySupport,
+          structured_outputs: Anthropic::Beta::BetaCapabilitySupport,
+          thinking: Anthropic::Beta::BetaThinkingCapability
+        ) -> void
+
+        def to_hash: -> {
+          batch: Anthropic::Beta::BetaCapabilitySupport,
+          citations: Anthropic::Beta::BetaCapabilitySupport,
+          code_execution: Anthropic::Beta::BetaCapabilitySupport,
+          context_management: Anthropic::Beta::BetaContextManagementCapability,
+          effort: Anthropic::Beta::BetaEffortCapability,
+          image_input: Anthropic::Beta::BetaCapabilitySupport,
+          pdf_input: Anthropic::Beta::BetaCapabilitySupport,
+          structured_outputs: Anthropic::Beta::BetaCapabilitySupport,
+          thinking: Anthropic::Beta::BetaThinkingCapability
+        }
+      end
+    end
+  end
+end

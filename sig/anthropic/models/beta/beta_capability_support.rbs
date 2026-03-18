@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaCapabilitySupport = Beta::BetaCapabilitySupport
+
+    module Beta
+      type beta_capability_support = { supported: bool }
+
+      class BetaCapabilitySupport < Anthropic::Internal::Type::BaseModel
+        attr_accessor supported: bool
+
+        def initialize: (supported: bool) -> void
+
+        def to_hash: -> { supported: bool }
+      end
+    end
+  end
+end

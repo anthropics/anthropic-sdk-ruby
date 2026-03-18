@@ -1,28 +1,48 @@
 module Anthropic
   module Models
     type model_info =
-      { id: String, created_at: Time, display_name: String, type: :model }
+      {
+        id: String,
+        capabilities: Anthropic::ModelCapabilities?,
+        created_at: Time,
+        display_name: String,
+        max_input_tokens: Integer?,
+        max_tokens: Integer?,
+        type: :model
+      }
 
     class ModelInfo < Anthropic::Internal::Type::BaseModel
       attr_accessor id: String
+
+      attr_accessor capabilities: Anthropic::ModelCapabilities?
 
       attr_accessor created_at: Time
 
       attr_accessor display_name: String
 
+      attr_accessor max_input_tokens: Integer?
+
+      attr_accessor max_tokens: Integer?
+
       attr_accessor type: :model
 
       def initialize: (
         id: String,
+        capabilities: Anthropic::ModelCapabilities?,
         created_at: Time,
         display_name: String,
+        max_input_tokens: Integer?,
+        max_tokens: Integer?,
         ?type: :model
       ) -> void
 
       def to_hash: -> {
         id: String,
+        capabilities: Anthropic::ModelCapabilities?,
         created_at: Time,
         display_name: String,
+        max_input_tokens: Integer?,
+        max_tokens: Integer?,
         type: :model
       }
     end

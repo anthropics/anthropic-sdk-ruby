@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    type thinking_capability =
+      { supported: bool, types: Anthropic::ThinkingTypes }
+
+    class ThinkingCapability < Anthropic::Internal::Type::BaseModel
+      attr_accessor supported: bool
+
+      attr_accessor types: Anthropic::ThinkingTypes
+
+      def initialize: (supported: bool, types: Anthropic::ThinkingTypes) -> void
+
+      def to_hash: -> { supported: bool, types: Anthropic::ThinkingTypes }
+    end
+  end
+end
