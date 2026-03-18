@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    type capability_support = { supported: bool }
+
+    class CapabilitySupport < Anthropic::Internal::Type::BaseModel
+      attr_accessor supported: bool
+
+      def initialize: (supported: bool) -> void
+
+      def to_hash: -> { supported: bool }
+    end
+  end
+end

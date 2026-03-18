@@ -1,0 +1,25 @@
+module Anthropic
+  module Models
+    type thinking_types =
+      {
+        adaptive: Anthropic::CapabilitySupport,
+        enabled: Anthropic::CapabilitySupport
+      }
+
+    class ThinkingTypes < Anthropic::Internal::Type::BaseModel
+      attr_accessor adaptive: Anthropic::CapabilitySupport
+
+      attr_accessor enabled: Anthropic::CapabilitySupport
+
+      def initialize: (
+        adaptive: Anthropic::CapabilitySupport,
+        enabled: Anthropic::CapabilitySupport
+      ) -> void
+
+      def to_hash: -> {
+        adaptive: Anthropic::CapabilitySupport,
+        enabled: Anthropic::CapabilitySupport
+      }
+    end
+  end
+end

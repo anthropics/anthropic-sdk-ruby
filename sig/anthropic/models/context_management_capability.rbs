@@ -1,0 +1,35 @@
+module Anthropic
+  module Models
+    type context_management_capability =
+      {
+        :clear_thinking_20251015 => Anthropic::CapabilitySupport?,
+        :clear_tool_uses_20250919 => Anthropic::CapabilitySupport?,
+        :compact_20260112 => Anthropic::CapabilitySupport?,
+        supported: bool
+      }
+
+    class ContextManagementCapability < Anthropic::Internal::Type::BaseModel
+      attr_accessor clear_thinking_20251015: Anthropic::CapabilitySupport?
+
+      attr_accessor clear_tool_uses_20250919: Anthropic::CapabilitySupport?
+
+      attr_accessor compact_20260112: Anthropic::CapabilitySupport?
+
+      attr_accessor supported: bool
+
+      def initialize: (
+        clear_thinking_20251015: Anthropic::CapabilitySupport?,
+        clear_tool_uses_20250919: Anthropic::CapabilitySupport?,
+        compact_20260112: Anthropic::CapabilitySupport?,
+        supported: bool
+      ) -> void
+
+      def to_hash: -> {
+        :clear_thinking_20251015 => Anthropic::CapabilitySupport?,
+        :clear_tool_uses_20250919 => Anthropic::CapabilitySupport?,
+        :compact_20260112 => Anthropic::CapabilitySupport?,
+        supported: bool
+      }
+    end
+  end
+end

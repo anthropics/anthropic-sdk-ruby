@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaContextManagementCapability = Beta::BetaContextManagementCapability
+
+    module Beta
+      type beta_context_management_capability =
+        {
+          :clear_thinking_20251015 => Anthropic::Beta::BetaCapabilitySupport?,
+          :clear_tool_uses_20250919 => Anthropic::Beta::BetaCapabilitySupport?,
+          :compact_20260112 => Anthropic::Beta::BetaCapabilitySupport?,
+          supported: bool
+        }
+
+      class BetaContextManagementCapability < Anthropic::Internal::Type::BaseModel
+        attr_accessor clear_thinking_20251015: Anthropic::Beta::BetaCapabilitySupport?
+
+        attr_accessor clear_tool_uses_20250919: Anthropic::Beta::BetaCapabilitySupport?
+
+        attr_accessor compact_20260112: Anthropic::Beta::BetaCapabilitySupport?
+
+        attr_accessor supported: bool
+
+        def initialize: (
+          clear_thinking_20251015: Anthropic::Beta::BetaCapabilitySupport?,
+          clear_tool_uses_20250919: Anthropic::Beta::BetaCapabilitySupport?,
+          compact_20260112: Anthropic::Beta::BetaCapabilitySupport?,
+          supported: bool
+        ) -> void
+
+        def to_hash: -> {
+          :clear_thinking_20251015 => Anthropic::Beta::BetaCapabilitySupport?,
+          :clear_tool_uses_20250919 => Anthropic::Beta::BetaCapabilitySupport?,
+          :compact_20260112 => Anthropic::Beta::BetaCapabilitySupport?,
+          supported: bool
+        }
+      end
+    end
+  end
+end

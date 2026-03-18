@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    class BetaThinkingCapability = Beta::BetaThinkingCapability
+
+    module Beta
+      type beta_thinking_capability =
+        { supported: bool, types: Anthropic::Beta::BetaThinkingTypes }
+
+      class BetaThinkingCapability < Anthropic::Internal::Type::BaseModel
+        attr_accessor supported: bool
+
+        attr_accessor types: Anthropic::Beta::BetaThinkingTypes
+
+        def initialize: (
+          supported: bool,
+          types: Anthropic::Beta::BetaThinkingTypes
+        ) -> void
+
+        def to_hash: -> {
+          supported: bool,
+          types: Anthropic::Beta::BetaThinkingTypes
+        }
+      end
+    end
+  end
+end

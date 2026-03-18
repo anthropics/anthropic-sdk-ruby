@@ -97,6 +97,8 @@ module Anthropic
 
   CacheCreation = Anthropic::Models::CacheCreation
 
+  CapabilitySupport = Anthropic::Models::CapabilitySupport
+
   CitationCharLocation = Anthropic::Models::CitationCharLocation
 
   CitationCharLocationParam = Anthropic::Models::CitationCharLocationParam
@@ -169,11 +171,15 @@ module Anthropic
 
   ContentBlockSourceContent = Anthropic::Models::ContentBlockSourceContent
 
+  ContextManagementCapability = Anthropic::Models::ContextManagementCapability
+
   DirectCaller = Anthropic::Models::DirectCaller
 
   DocumentBlock = Anthropic::Models::DocumentBlock
 
   DocumentBlockParam = Anthropic::Models::DocumentBlockParam
+
+  EffortCapability = Anthropic::Models::EffortCapability
 
   EncryptedCodeExecutionResultBlock = Anthropic::Models::EncryptedCodeExecutionResultBlock
 
@@ -216,6 +222,8 @@ module Anthropic
   Metadata = Anthropic::Models::Metadata
 
   Model = Anthropic::Models::Model
+
+  ModelCapabilities = Anthropic::Models::ModelCapabilities
 
   ModelInfo = Anthropic::Models::ModelInfo
 
@@ -314,6 +322,8 @@ module Anthropic
 
   ThinkingBlockParam = Anthropic::Models::ThinkingBlockParam
 
+  ThinkingCapability = Anthropic::Models::ThinkingCapability
+
   ThinkingConfigAdaptive = Anthropic::Models::ThinkingConfigAdaptive
 
   ThinkingConfigDisabled = Anthropic::Models::ThinkingConfigDisabled
@@ -323,6 +333,8 @@ module Anthropic
   ThinkingConfigParam = Anthropic::Models::ThinkingConfigParam
 
   ThinkingDelta = Anthropic::Models::ThinkingDelta
+
+  ThinkingTypes = Anthropic::Models::ThinkingTypes
 
   Tool = Anthropic::Models::Tool
 
