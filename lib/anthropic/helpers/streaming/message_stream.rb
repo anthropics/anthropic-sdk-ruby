@@ -70,7 +70,6 @@ module Anthropic
         # @api public
         #
         # Returns all text content blocks concatenated into a single string.
-        # NOTE: Currently the API will only respond with a single content block.
         #
         # Will raise an error if no `text` content blocks were returned.
         # @return [String]
