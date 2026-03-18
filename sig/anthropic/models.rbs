@@ -143,6 +143,8 @@ module Anthropic
 
   class ErrorResponse = Anthropic::Models::ErrorResponse
 
+  module ErrorType = Anthropic::Models::ErrorType
+
   class GatewayTimeoutError = Anthropic::Models::GatewayTimeoutError
 
   class ImageBlockParam = Anthropic::Models::ImageBlockParam
