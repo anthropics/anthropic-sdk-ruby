@@ -61,6 +61,8 @@ module Anthropic
     end
 
     class APIStatusError < Anthropic::Errors::APIError
+      attr_reader type: Anthropic::Models::error_type?
+
       def self.for: (
         url: URI::Generic,
         status: Integer,
@@ -78,7 +80,8 @@ module Anthropic
         body: Object?,
         request: nil,
         response: nil,
-        ?message: String?
+        ?message: String?,
+        ?type: Anthropic::Models::error_type?
       ) -> void
     end
 

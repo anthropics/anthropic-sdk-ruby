@@ -121,6 +121,9 @@ module Anthropic
     end
 
     class APIStatusError < Anthropic::Errors::APIError
+      # @return [Anthropic::ErrorType::TaggedSymbol, nil]
+      attr_reader :type
+
       # @api private
       #
       # @param url [URI::Generic]
@@ -133,6 +136,9 @@ module Anthropic
       #
       # @return [self]
       def self.for(url:, status:, headers:, body:, request:, response:, message: nil)
+        error_type = body.dig(:error, :type) if body.is_a?(Hash)
+        error_type = error_type.to_sym if error_type.is_a?(String)
+
         kwargs =
           {
             url: url,
@@ -141,7 +147,8 @@ module Anthropic
             body: body,
             request: request,
             response: response,
-            message: message
+            message: message,
+            type: error_type
           }
 
         case status
@@ -179,7 +186,9 @@ module Anthropic
       # @param request [nil]
       # @param response [nil]
       # @param message [String, nil]
-      def initialize(url:, status:, headers:, body:, request:, response:, message: nil)
+      # @param type [Anthropic::ErrorType::TaggedSymbol, nil]
+      def initialize(url:, status:, headers:, body:, request:, response:, message: nil, type: nil)
+        @type = type
         message ||= {url: url.to_s, status: status, body: body}
         super(
           url: url,

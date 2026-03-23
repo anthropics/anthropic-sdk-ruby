@@ -120,6 +120,9 @@ module Anthropic
     end
 
     class APIStatusError < Anthropic::Errors::APIError
+      sig { returns(T.nilable(Anthropic::ErrorType::TaggedSymbol)) }
+      attr_reader :type
+
       # @api private
       sig do
         params(
@@ -155,7 +158,8 @@ module Anthropic
           body: T.nilable(Object),
           request: NilClass,
           response: NilClass,
-          message: T.nilable(String)
+          message: T.nilable(String),
+          type: T.nilable(Anthropic::ErrorType::TaggedSymbol)
         ).returns(T.attached_class)
       end
       def self.new(
@@ -165,7 +169,8 @@ module Anthropic
         body:,
         request:,
         response:,
-        message: nil
+        message: nil,
+        type: nil
       )
       end
     end
