@@ -409,4 +409,43 @@ class AnthropicTest < Minitest::Test
       anthropic.calculate_nonstreaming_timeout(limit + 1000, limit)
     end
   end
+
+  def test_status_error_type_field
+    stub_request(:post, "http://localhost/v1/messages")
+      .to_return_json(
+        status: 400,
+        body: {type: "error", error: {type: "invalid_request_error", message: "Bad request"}}
+      )
+
+    anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key")
+
+    err = assert_raises(Anthropic::Errors::BadRequestError) do
+      anthropic.messages.create(
+        max_tokens: 1024,
+        messages: [{content: "Hello", role: :user}],
+        model: :"claude-opus-4-6"
+      )
+    end
+
+    assert_equal(:invalid_request_error, err.type)
+    assert_equal(400, err.status)
+  end
+
+  def test_status_error_type_field_nil_when_absent
+    stub_request(:post, "http://localhost/v1/messages")
+      .to_return_json(status: 500, body: {message: "Internal error"})
+
+    anthropic =
+      Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key", max_retries: 0)
+
+    err = assert_raises(Anthropic::Errors::InternalServerError) do
+      anthropic.messages.create(
+        max_tokens: 1024,
+        messages: [{content: "Hello", role: :user}],
+        model: :"claude-opus-4-6"
+      )
+    end
+
+    assert_nil(err.type)
+  end
 end

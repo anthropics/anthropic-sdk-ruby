@@ -397,4 +397,23 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
 
     SSE
   end
+
+  def test_streaming_error_event_has_type
+    sse_body = <<~SSE
+      event: message_start
+      data: {"type":"message_start","message":{"id":"msg_test","type":"message","role":"assistant","content":[],"model":"claude-opus-4-6","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":11,"output_tokens":1}}}
+
+      event: error
+      data: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+
+    SSE
+
+    stub_streaming_response(sse_body)
+
+    err = assert_raises(Anthropic::Errors::APIStatusError) do
+      @client.messages.stream(**basic_params).each { |event| assert(event) }
+    end
+
+    assert_equal(:overloaded_error, err.type)
+  end
 end
