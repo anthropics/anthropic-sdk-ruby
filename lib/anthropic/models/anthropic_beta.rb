@@ -47,6 +47,8 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::AnthropicBeta::FAST_MODE_2026_02_01 }
 
+      variant const: -> { Anthropic::Models::AnthropicBeta::OUTPUT_300K_2026_03_24 }
+
       # @!method self.variants
       #   @return [Array(String, Symbol)]
 
@@ -76,6 +78,7 @@ module Anthropic
       MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26 = :"model-context-window-exceeded-2025-08-26"
       SKILLS_2025_10_02 = :"skills-2025-10-02"
       FAST_MODE_2026_02_01 = :"fast-mode-2026-02-01"
+      OUTPUT_300K_2026_03_24 = :"output-300k-2026-03-24"
 
       # @!endgroup
     end
