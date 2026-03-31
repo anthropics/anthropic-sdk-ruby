@@ -89,6 +89,80 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
     assert_equal(3, acc.uniq.length)
   end
 
+  def test_api_key_auth
+    uri = "https://bedrock-runtime.us-east-1.amazonaws.com/model/claude-3-7-sonnet-latest/invoke"
+    stub_request(:post, uri).to_return_json(
+      status: 200,
+      body: {}
+    )
+
+    anthropic =
+      Anthropic::BedrockClient.new(
+        aws_region: "us-east-1",
+        api_key: "test-api-key"
+      )
+
+    message =
+      anthropic.messages.create(
+        max_tokens: 1024,
+        messages: [{content: "Hello, world", role: :user}],
+        model: :"claude-3-7-sonnet-latest"
+      )
+
+    assert_pattern do
+      message => Anthropic::Models::Message
+    end
+
+    assert_requested(:post, uri, times: 1) do |req|
+      assert_equal("Bearer test-api-key", req.headers.fetch("Authorization"))
+      assert_nil(req.headers["X-Api-Key"])
+    end
+  end
+
+  def test_api_key_from_env
+    original = ENV["AWS_BEARER_TOKEN_BEDROCK"]
+    begin
+      ENV["AWS_BEARER_TOKEN_BEDROCK"] = "env-api-key"
+      client = Anthropic::BedrockClient.new(aws_region: "us-east-1")
+      assert_equal("env-api-key", client.api_key)
+    ensure
+      if original.nil?
+        ENV.delete("AWS_BEARER_TOKEN_BEDROCK")
+      else
+        ENV["AWS_BEARER_TOKEN_BEDROCK"] = original
+      end
+    end
+  end
+
+  def test_api_key_mutual_exclusion
+    assert_raises(ArgumentError) do
+      Anthropic::BedrockClient.new(
+        aws_region: "us-east-1",
+        api_key: "test-api-key",
+        aws_access_key: "example-access-key"
+      )
+    end
+  end
+
+  def test_api_key_env_mutual_exclusion
+    original = ENV["AWS_BEARER_TOKEN_BEDROCK"]
+    begin
+      ENV["AWS_BEARER_TOKEN_BEDROCK"] = "env-api-key"
+      assert_raises(ArgumentError) do
+        Anthropic::BedrockClient.new(
+          aws_region: "us-east-1",
+          aws_access_key: "example-access-key"
+        )
+      end
+    ensure
+      if original.nil?
+        ENV.delete("AWS_BEARER_TOKEN_BEDROCK")
+      else
+        ENV["AWS_BEARER_TOKEN_BEDROCK"] = original
+      end
+    end
+  end
+
   def test_request_base_url
     uri = "https://bedrock-runtime.ca-west-1.amazonaws.com/model/claude-3-7-sonnet-latest/invoke"
     stub_request(:post, uri).to_return_json(

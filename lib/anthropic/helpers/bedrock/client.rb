@@ -21,6 +21,9 @@ module Anthropic
         # @return [Aws::Credentials]
         attr_reader :aws_credentials
 
+        # @return [String, nil]
+        def api_key = @auth_token
+
         # Creates and returns a new client for interacting with the AWS Bedrock API for Anthropic models.
         #
         # AWS credentials are resolved according to the AWS SDK's default resolution order, described at
@@ -36,6 +39,9 @@ module Anthropic
         # @param aws_session_token [String, nil] Optional AWS session token to use for authentication. Overrides profile and credential provider chain
         #
         # @param aws_profile [String, nil] Optional AWS profile to use for authentication. Overrides the credential provider chain
+        #
+        # @param api_key [String, nil] Optional API key for Bearer token authentication. Mutually exclusive with AWS
+        #   credentials. Falls back to the `AWS_BEARER_TOKEN_BEDROCK` environment variable if not provided.
         #
         # @param base_url [String, nil] Override the default base URL for the API, e.g., `"https://api.example.com/v2/"`
         #
@@ -57,41 +63,55 @@ module Anthropic
           aws_access_key: nil,
           aws_secret_key: nil,
           aws_session_token: nil,
-          aws_profile: nil
+          aws_profile: nil,
+          api_key: nil
         )
-          begin
-            require("aws-sdk-bedrockruntime")
-          rescue LoadError
-            message = <<~MSG
+          api_key ||= ENV["AWS_BEARER_TOKEN_BEDROCK"]
 
-              In order to access Anthropic models on Bedrock you must require the `aws-sdk-bedrockruntime` gem.
-              You can install it by adding the following to your Gemfile:
-
-                  gem "aws-sdk-bedrockruntime"
-
-              and then running `bundle install`.
-
-              Alternatively, if you are not using Bundler, simply run:
-
-                  gem install aws-sdk-bedrockruntime
-            MSG
-
-            raise RuntimeError.new(message)
+          has_aws_credentials = !aws_access_key.nil? || !aws_secret_key.nil? || !aws_session_token.nil? || !aws_profile.nil?
+          if !api_key.nil? && has_aws_credentials
+            raise ArgumentError.new(
+              "Cannot specify both `api_key` and AWS credentials (`aws_access_key`, `aws_secret_key`, `aws_session_token`, `aws_profile`)"
+            )
           end
 
-          @aws_region, @aws_credentials = resolve_region_and_credentials(
-            aws_region: aws_region,
-            aws_secret_key: aws_secret_key,
-            aws_access_key: aws_access_key,
-            aws_session_token: aws_session_token,
-            aws_profile: aws_profile
-          )
+          if api_key.nil?
+            begin
+              require("aws-sdk-bedrockruntime")
+            rescue LoadError
+              message = <<~MSG
 
-          @signer = Aws::Sigv4::Signer.new(
-            service: "bedrock",
-            region: @aws_region,
-            credentials: @aws_credentials
-          )
+                In order to access Anthropic models on Bedrock you must require the `aws-sdk-bedrockruntime` gem.
+                You can install it by adding the following to your Gemfile:
+
+                    gem "aws-sdk-bedrockruntime"
+
+                and then running `bundle install`.
+
+                Alternatively, if you are not using Bundler, simply run:
+
+                    gem install aws-sdk-bedrockruntime
+              MSG
+
+              raise RuntimeError.new(message)
+            end
+
+            @aws_region, @aws_credentials = resolve_region_and_credentials(
+              aws_region: aws_region,
+              aws_secret_key: aws_secret_key,
+              aws_access_key: aws_access_key,
+              aws_session_token: aws_session_token,
+              aws_profile: aws_profile
+            )
+
+            @signer = Aws::Sigv4::Signer.new(
+              service: "bedrock",
+              region: @aws_region,
+              credentials: @aws_credentials
+            )
+          else
+            @aws_region = aws_region
+          end
 
           base_url ||= ENV.fetch(
             "ANTHROPIC_BEDROCK_BASE_URL",
@@ -99,6 +119,8 @@ module Anthropic
           )
 
           super(
+            api_key: nil,
+            auth_token: api_key,
             base_url: base_url,
             timeout: timeout,
             max_retries: max_retries,
@@ -172,6 +194,8 @@ module Anthropic
         #
         # @return [Hash{Symbol, Object}]
         private def transform_request(request)
+          return request if @auth_token
+
           headers = request.fetch(:headers)
           sliced = super.slice(:method, :url, :body).transform_keys(method: :http_method)
           signed = @signer.sign_request({**sliced, headers: headers})
