@@ -1,5 +1,33 @@
 # Changelog
 
+## 1.26.0 (2026-03-31)
+
+Full Changelog: [v1.25.0...v1.26.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.25.0...v1.26.0)
+
+### Features
+
+* add .type field to APIStatusError for uniform error identification ([#847](https://github.com/anthropics/anthropic-sdk-ruby/issues/847)) ([4c57783](https://github.com/anthropics/anthropic-sdk-ruby/commit/4c577837697516dc339100fe52be915afe544102))
+
+
+### Bug Fixes
+
+* **internal:** correct multipart form field name encoding ([0fed236](https://github.com/anthropics/anthropic-sdk-ruby/commit/0fed236eabd481a034739c6f7abab75bc3a875c2))
+* variable name typo ([550b1ed](https://github.com/anthropics/anthropic-sdk-ruby/commit/550b1ed8af220d6749040c44f608b0b6b8910aaf))
+
+
+### Chores
+
+* **ci:** run builds on CI even if only spec metadata changed ([8faa86f](https://github.com/anthropics/anthropic-sdk-ruby/commit/8faa86f76c7fbc80082ac07768e14af831566f62))
+* **ci:** skip lint on metadata-only changes ([16064d4](https://github.com/anthropics/anthropic-sdk-ruby/commit/16064d40c434ba29c0943c6dd0402c0b58fcbb3d))
+* **ci:** support opting out of skipping builds on metadata-only commits ([e184024](https://github.com/anthropics/anthropic-sdk-ruby/commit/e18402452192c17170a6933ab0bb060a7e0ba073))
+* **internal:** update gitignore ([5f3d363](https://github.com/anthropics/anthropic-sdk-ruby/commit/5f3d363e741a966fa6ec3e04ed675eab27aedd77))
+* **tests:** bump steady to v0.19.4 ([4a17d4d](https://github.com/anthropics/anthropic-sdk-ruby/commit/4a17d4deff2d696f78c9c503f99dcbd9c7146153))
+* **tests:** bump steady to v0.19.5 ([a4bcfd7](https://github.com/anthropics/anthropic-sdk-ruby/commit/a4bcfd76f9384c02bfb074ed57de8aba2face020))
+* **tests:** bump steady to v0.19.6 ([e34f523](https://github.com/anthropics/anthropic-sdk-ruby/commit/e34f5236c9d2aa6fa78c7562af7f89aa70fe373b))
+* **tests:** bump steady to v0.19.7 ([577310d](https://github.com/anthropics/anthropic-sdk-ruby/commit/577310d77b14972f657d5946b661298cadbff31a))
+* **tests:** bump steady to v0.20.1 ([dcf51d2](https://github.com/anthropics/anthropic-sdk-ruby/commit/dcf51d293d46d719c0fe09b4410dcb5445adcabc))
+* **tests:** bump steady to v0.20.2 ([5c52306](https://github.com/anthropics/anthropic-sdk-ruby/commit/5c523068dadf801f50b1d39d53bbcce07a5d0722))
+
 ## 1.25.0 (2026-03-18)
 
 Full Changelog: [v1.24.0...v1.25.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.24.0...v1.25.0)
