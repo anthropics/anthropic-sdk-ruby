@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.27.0 (2026-04-01)
+
+Full Changelog: [v1.26.0...v1.27.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.26.0...v1.27.0)
+
+### Features
+
+* **api:** add structured stop_details to message responses ([5e636fd](https://github.com/anthropics/anthropic-sdk-ruby/commit/5e636fd9ce945bd52f92d99e21e6bb8b9c212238))
+* bedrock api key auth ([#880](https://github.com/anthropics/anthropic-sdk-ruby/issues/880)) ([93f9b87](https://github.com/anthropics/anthropic-sdk-ruby/commit/93f9b870184a3519270cacec10ceeaa85e9f548c))
+
+
+### Bug Fixes
+
+* align path encoding with RFC 3986 section 3.3 ([280f489](https://github.com/anthropics/anthropic-sdk-ruby/commit/280f4894bb96af3890cb142df1e6bd0fae53fbcd))
+
+
+### Chores
+
+* **internal:** client updates ([151043a](https://github.com/anthropics/anthropic-sdk-ruby/commit/151043a45a4f332fb176038799f499be358db44a))
+
 ## 1.26.0 (2026-03-31)
 
 Full Changelog: [v1.25.0...v1.26.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.25.0...v1.26.0)
