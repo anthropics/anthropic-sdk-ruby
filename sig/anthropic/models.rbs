@@ -223,6 +223,8 @@ module Anthropic
 
   class RedactedThinkingBlockParam = Anthropic::Models::RedactedThinkingBlockParam
 
+  class RefusalStopDetails = Anthropic::Models::RefusalStopDetails
+
   class SearchResultBlockParam = Anthropic::Models::SearchResultBlockParam
 
   class ServerToolCaller = Anthropic::Models::ServerToolCaller

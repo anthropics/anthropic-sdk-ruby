@@ -246,6 +246,8 @@ module Anthropic
 
   RedactedThinkingBlockParam = Anthropic::Models::RedactedThinkingBlockParam
 
+  RefusalStopDetails = Anthropic::Models::RefusalStopDetails
+
   SearchResultBlockParam = Anthropic::Models::SearchResultBlockParam
 
   ServerToolCaller = Anthropic::Models::ServerToolCaller

@@ -72,6 +72,17 @@ module Anthropic
       sig { returns(Symbol) }
       attr_accessor :role
 
+      # Structured information about a refusal.
+      sig { returns(T.nilable(Anthropic::RefusalStopDetails)) }
+      attr_reader :stop_details
+
+      sig do
+        params(
+          stop_details: T.nilable(Anthropic::RefusalStopDetails::OrHash)
+        ).void
+      end
+      attr_writer :stop_details
+
       # The reason that we stopped.
       #
       # This may be one the following values:
@@ -146,6 +157,7 @@ module Anthropic
               )
             ],
           model: T.any(Anthropic::Model::OrSymbol, String),
+          stop_details: T.nilable(Anthropic::RefusalStopDetails::OrHash),
           stop_reason: T.nilable(Anthropic::StopReason::OrSymbol),
           stop_sequence: T.nilable(String),
           usage: Anthropic::Usage::OrHash,
@@ -198,6 +210,8 @@ module Anthropic
         # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         model:,
+        # Structured information about a refusal.
+        stop_details:,
         # The reason that we stopped.
         #
         # This may be one the following values:
@@ -254,6 +268,7 @@ module Anthropic
             content: T::Array[Anthropic::ContentBlock::Variants],
             model: Anthropic::Model::Variants,
             role: Symbol,
+            stop_details: T.nilable(Anthropic::RefusalStopDetails),
             stop_reason: T.nilable(Anthropic::StopReason::TaggedSymbol),
             stop_sequence: T.nilable(String),
             type: Symbol,
