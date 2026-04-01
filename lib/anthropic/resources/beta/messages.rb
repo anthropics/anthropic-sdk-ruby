@@ -15,6 +15,14 @@ module Anthropic
           warn_thinking_enabled(params)
           max_iterations = params.delete(:max_iterations)
           compaction_control = params.delete(:compaction_control)
+          if compaction_control&.dig(:enabled) || compaction_control&.dig("enabled")
+            warn(
+              "[DEPRECATION] The 'compaction_control' parameter is deprecated and will be removed in a future version. " \
+              "Use server-side compaction instead by passing edits: [{ type: 'compact_20260112' }] in the params passed to `tool_runner()`. " \
+              "See https://platform.claude.com/docs/en/build-with-claude/compaction",
+              category: :deprecated
+            )
+          end
           Anthropic::Helpers::Tools::Runner.new(@client, params:, max_iterations:, compaction_control:)
         end
 
