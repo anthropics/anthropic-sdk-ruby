@@ -9,9 +9,12 @@ class Anthropic::Test::Helpers::ToolRunner::CompactionTest < Minitest::Test
   def before_all
     super
     WebMock.enable!
+    @original_deprecated_warning = Warning[:deprecated]
+    Warning[:deprecated] = false
   end
 
   def after_all
+    Warning[:deprecated] = @original_deprecated_warning
     WebMock.disable!
     super
   end
@@ -453,5 +456,35 @@ class Anthropic::Test::Helpers::ToolRunner::CompactionTest < Minitest::Test
     content = messages_before_summary.last["content"]
     tool_use_blocks = content.select { |block| block["type"] == "tool_use" }
     assert_equal(0, tool_use_blocks.length, "tool_use blocks should be filtered out")
+  end
+
+  def test_deprecation_warning_emitted
+    stub_responses(
+      text_response(id: "msg_1", text: "Done")
+    )
+
+    original_stderr = $stderr
+    captured_stderr = StringIO.new
+    $stderr = captured_stderr
+    Warning[:deprecated] = true
+
+    begin
+      @client.beta.messages.tool_runner(
+        max_tokens: 1024,
+        messages: [{content: "Test deprecation", role: :user}],
+        model: :"claude-sonnet-4-20250514",
+        tools: [@simple_tool],
+        compaction_control: {
+          enabled: true,
+          context_token_threshold: 500
+        }
+      ).each_message { |_msg| nil }
+    ensure
+      $stderr = original_stderr
+      Warning[:deprecated] = false
+    end
+
+    assert_match(/compaction_control.*deprecated/, captured_stderr.string)
+    assert_match(/compact_20260112/, captured_stderr.string)
   end
 end

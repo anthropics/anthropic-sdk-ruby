@@ -33,6 +33,10 @@ module Anthropic
       # Default token threshold for triggering compaction (100,000 tokens)
       DEFAULT_THRESHOLD = 100_000
 
+      # @deprecated Use server-side compaction instead by passing
+      #   edits: [{ type: 'compact_20260112' }] in the params passed to `tool_runner()`.
+      #   See https://platform.claude.com/docs/en/build-with-claude/compaction
+      #
       # Configuration for automatic conversation history compaction in tool runners.
       #
       # When the cumulative token count (input + output) across all messages exceeds
