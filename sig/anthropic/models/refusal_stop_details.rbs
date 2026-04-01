@@ -1,0 +1,41 @@
+module Anthropic
+  module Models
+    type refusal_stop_details =
+      {
+        category: Anthropic::Models::RefusalStopDetails::category?,
+        explanation: String?,
+        type: :refusal
+      }
+
+    class RefusalStopDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor category: Anthropic::Models::RefusalStopDetails::category?
+
+      attr_accessor explanation: String?
+
+      attr_accessor type: :refusal
+
+      def initialize: (
+        category: Anthropic::Models::RefusalStopDetails::category?,
+        explanation: String?,
+        ?type: :refusal
+      ) -> void
+
+      def to_hash: -> {
+        category: Anthropic::Models::RefusalStopDetails::category?,
+        explanation: String?,
+        type: :refusal
+      }
+
+      type category = :cyber | :bio
+
+      module Category
+        extend Anthropic::Internal::Type::Enum
+
+        CYBER: :cyber
+        BIO: :bio
+
+        def self?.values: -> ::Array[Anthropic::Models::RefusalStopDetails::category]
+      end
+    end
+  end
+end

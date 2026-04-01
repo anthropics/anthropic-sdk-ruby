@@ -132,6 +132,18 @@ module Anthropic
           end
           attr_writer :container
 
+          # Structured information about a refusal.
+          sig { returns(T.nilable(Anthropic::Beta::BetaRefusalStopDetails)) }
+          attr_reader :stop_details
+
+          sig do
+            params(
+              stop_details:
+                T.nilable(Anthropic::Beta::BetaRefusalStopDetails::OrHash)
+            ).void
+          end
+          attr_writer :stop_details
+
           sig do
             returns(T.nilable(Anthropic::Beta::BetaStopReason::TaggedSymbol))
           end
@@ -143,6 +155,8 @@ module Anthropic
           sig do
             params(
               container: T.nilable(Anthropic::Beta::BetaContainer::OrHash),
+              stop_details:
+                T.nilable(Anthropic::Beta::BetaRefusalStopDetails::OrHash),
               stop_reason: T.nilable(Anthropic::Beta::BetaStopReason::OrSymbol),
               stop_sequence: T.nilable(String)
             ).returns(T.attached_class)
@@ -151,6 +165,8 @@ module Anthropic
             # Information about the container used in the request (for the code execution
             # tool)
             container:,
+            # Structured information about a refusal.
+            stop_details:,
             stop_reason:,
             stop_sequence:
           )
@@ -160,6 +176,8 @@ module Anthropic
             override.returns(
               {
                 container: T.nilable(Anthropic::Beta::BetaContainer),
+                stop_details:
+                  T.nilable(Anthropic::Beta::BetaRefusalStopDetails),
                 stop_reason:
                   T.nilable(Anthropic::Beta::BetaStopReason::TaggedSymbol),
                 stop_sequence: T.nilable(String)

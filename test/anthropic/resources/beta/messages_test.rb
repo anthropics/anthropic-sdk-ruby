@@ -23,6 +23,7 @@ class Anthropic::Test::Resources::Beta::MessagesTest < Anthropic::Test::Resource
         context_management: Anthropic::Beta::BetaContextManagementResponse | nil,
         model: Anthropic::Model,
         role: Symbol,
+        stop_details: Anthropic::Beta::BetaRefusalStopDetails | nil,
         stop_reason: Anthropic::Beta::BetaStopReason | nil,
         stop_sequence: String | nil,
         type: Symbol,
