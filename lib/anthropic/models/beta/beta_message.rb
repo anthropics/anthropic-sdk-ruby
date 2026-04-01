@@ -83,6 +83,12 @@ module Anthropic
         #   @return [Symbol, :assistant]
         required :role, const: :assistant
 
+        # @!attribute stop_details
+        #   Structured information about a refusal.
+        #
+        #   @return [Anthropic::Models::Beta::BetaRefusalStopDetails, nil]
+        required :stop_details, -> { Anthropic::Beta::BetaRefusalStopDetails }, nil?: true
+
         # @!attribute stop_reason
         #   The reason that we stopped.
         #
@@ -140,7 +146,7 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaUsage]
         required :usage, -> { Anthropic::Beta::BetaUsage }
 
-        # @!method initialize(id:, container:, content:, context_management:, model:, stop_reason:, stop_sequence:, usage:, role: :assistant, type: :message)
+        # @!method initialize(id:, container:, content:, context_management:, model:, stop_details:, stop_reason:, stop_sequence:, usage:, role: :assistant, type: :message)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaMessage} for more details.
         #
@@ -153,6 +159,8 @@ module Anthropic
         #   @param context_management [Anthropic::Models::Beta::BetaContextManagementResponse, nil] Context management response.
         #
         #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+        #
+        #   @param stop_details [Anthropic::Models::Beta::BetaRefusalStopDetails, nil] Structured information about a refusal.
         #
         #   @param stop_reason [Symbol, Anthropic::Models::Beta::BetaStopReason, nil] The reason that we stopped.
         #

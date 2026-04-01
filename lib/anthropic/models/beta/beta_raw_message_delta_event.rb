@@ -61,6 +61,12 @@ module Anthropic
           #   @return [Anthropic::Models::Beta::BetaContainer, nil]
           required :container, -> { Anthropic::Beta::BetaContainer }, nil?: true
 
+          # @!attribute stop_details
+          #   Structured information about a refusal.
+          #
+          #   @return [Anthropic::Models::Beta::BetaRefusalStopDetails, nil]
+          required :stop_details, -> { Anthropic::Beta::BetaRefusalStopDetails }, nil?: true
+
           # @!attribute stop_reason
           #
           #   @return [Symbol, Anthropic::Models::Beta::BetaStopReason, nil]
@@ -71,11 +77,13 @@ module Anthropic
           #   @return [String, nil]
           required :stop_sequence, String, nil?: true
 
-          # @!method initialize(container:, stop_reason:, stop_sequence:)
+          # @!method initialize(container:, stop_details:, stop_reason:, stop_sequence:)
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta} for more details.
           #
           #   @param container [Anthropic::Models::Beta::BetaContainer, nil] Information about the container used in the request (for the code execution tool
+          #
+          #   @param stop_details [Anthropic::Models::Beta::BetaRefusalStopDetails, nil] Structured information about a refusal.
           #
           #   @param stop_reason [Symbol, Anthropic::Models::Beta::BetaStopReason, nil]
           #

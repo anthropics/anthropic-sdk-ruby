@@ -11,6 +11,7 @@ module Anthropic
           context_management: Anthropic::Beta::BetaContextManagementResponse?,
           model: Anthropic::Models::model,
           role: :assistant,
+          stop_details: Anthropic::Beta::BetaRefusalStopDetails?,
           stop_reason: Anthropic::Models::Beta::beta_stop_reason?,
           stop_sequence: String?,
           type: :message,
@@ -30,6 +31,8 @@ module Anthropic
 
         attr_accessor role: :assistant
 
+        attr_accessor stop_details: Anthropic::Beta::BetaRefusalStopDetails?
+
         attr_accessor stop_reason: Anthropic::Models::Beta::beta_stop_reason?
 
         attr_accessor stop_sequence: String?
@@ -44,6 +47,7 @@ module Anthropic
           content: ::Array[Anthropic::Models::Beta::beta_content_block],
           context_management: Anthropic::Beta::BetaContextManagementResponse?,
           model: Anthropic::Models::model,
+          stop_details: Anthropic::Beta::BetaRefusalStopDetails?,
           stop_reason: Anthropic::Models::Beta::beta_stop_reason?,
           stop_sequence: String?,
           usage: Anthropic::Beta::BetaUsage,
@@ -58,6 +62,7 @@ module Anthropic
           context_management: Anthropic::Beta::BetaContextManagementResponse?,
           model: Anthropic::Models::model,
           role: :assistant,
+          stop_details: Anthropic::Beta::BetaRefusalStopDetails?,
           stop_reason: Anthropic::Models::Beta::beta_stop_reason?,
           stop_sequence: String?,
           type: :message,

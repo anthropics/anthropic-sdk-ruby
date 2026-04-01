@@ -92,6 +92,18 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :role
 
+        # Structured information about a refusal.
+        sig { returns(T.nilable(Anthropic::Beta::BetaRefusalStopDetails)) }
+        attr_reader :stop_details
+
+        sig do
+          params(
+            stop_details:
+              T.nilable(Anthropic::Beta::BetaRefusalStopDetails::OrHash)
+          ).void
+        end
+        attr_writer :stop_details
+
         # The reason that we stopped.
         #
         # This may be one the following values:
@@ -173,6 +185,8 @@ module Anthropic
             context_management:
               T.nilable(Anthropic::Beta::BetaContextManagementResponse::OrHash),
             model: T.any(Anthropic::Model::OrSymbol, String),
+            stop_details:
+              T.nilable(Anthropic::Beta::BetaRefusalStopDetails::OrHash),
             stop_reason: T.nilable(Anthropic::Beta::BetaStopReason::OrSymbol),
             stop_sequence: T.nilable(String),
             usage: Anthropic::Beta::BetaUsage::OrHash,
@@ -229,6 +243,8 @@ module Anthropic
           # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
+          # Structured information about a refusal.
+          stop_details:,
           # The reason that we stopped.
           #
           # This may be one the following values:
@@ -287,6 +303,7 @@ module Anthropic
                 T.nilable(Anthropic::Beta::BetaContextManagementResponse),
               model: Anthropic::Model::Variants,
               role: Symbol,
+              stop_details: T.nilable(Anthropic::Beta::BetaRefusalStopDetails),
               stop_reason:
                 T.nilable(Anthropic::Beta::BetaStopReason::TaggedSymbol),
               stop_sequence: T.nilable(String),

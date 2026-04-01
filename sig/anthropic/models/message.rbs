@@ -7,6 +7,7 @@ module Anthropic
         content: ::Array[Anthropic::Models::content_block],
         model: Anthropic::Models::model,
         role: :assistant,
+        stop_details: Anthropic::RefusalStopDetails?,
         stop_reason: Anthropic::Models::stop_reason?,
         stop_sequence: String?,
         type: :message,
@@ -24,6 +25,8 @@ module Anthropic
 
       attr_accessor role: :assistant
 
+      attr_accessor stop_details: Anthropic::RefusalStopDetails?
+
       attr_accessor stop_reason: Anthropic::Models::stop_reason?
 
       attr_accessor stop_sequence: String?
@@ -37,6 +40,7 @@ module Anthropic
         container: Anthropic::Container?,
         content: ::Array[Anthropic::Models::content_block],
         model: Anthropic::Models::model,
+        stop_details: Anthropic::RefusalStopDetails?,
         stop_reason: Anthropic::Models::stop_reason?,
         stop_sequence: String?,
         usage: Anthropic::Usage,
@@ -50,6 +54,7 @@ module Anthropic
         content: ::Array[Anthropic::Models::content_block],
         model: Anthropic::Models::model,
         role: :assistant,
+        stop_details: Anthropic::RefusalStopDetails?,
         stop_reason: Anthropic::Models::stop_reason?,
         stop_sequence: String?,
         type: :message,
