@@ -12,6 +12,11 @@ class Anthropic::Test::VertexClientTest < Minitest::Test
     assert_equal("https://aiplatform.googleapis.com/v1", client.base_url.to_s)
   end
 
+  def test_us_region_base_url
+    client = Anthropic::VertexClient.new(region: "us", project_id: "test-project")
+    assert_equal("https://aiplatform.us.rep.googleapis.com/v1", client.base_url.to_s)
+  end
+
   def test_regional_base_url
     client = Anthropic::VertexClient.new(region: "us-central1", project_id: "test-project")
     assert_equal("https://us-central1-aiplatform.googleapis.com/v1", client.base_url.to_s)
