@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.28.0 (2026-04-03)
+
+Full Changelog: [v1.27.0...v1.28.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.27.0...v1.28.0)
+
+### Features
+
+* **vertex:** add support for US multi-region endpoint ([8b7426b](https://github.com/anthropics/anthropic-sdk-ruby/commit/8b7426b41652238c06e83ba03ec6caa87c41b5fd))
+
+
+### Chores
+
+* **client:** deprecate client-side compaction helpers ([f9dd745](https://github.com/anthropics/anthropic-sdk-ruby/commit/f9dd7457ecee0a7f6fb86dd5f2f13e742d7edb9b))
+
 ## 1.27.0 (2026-04-01)
 
 Full Changelog: [v1.26.0...v1.27.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.26.0...v1.27.0)
