@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.30.0 (2026-04-07)
+
+Full Changelog: [v1.29.0...v1.30.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.29.0...v1.30.0)
+
+### Features
+
+* **bedrock:** Create Bedrock Mantle client ([#874](https://github.com/anthropics/anthropic-sdk-ruby/issues/874)) ([627135f](https://github.com/anthropics/anthropic-sdk-ruby/commit/627135fbcf4fd02ed1370c3d209be7c23736f3d8))
+
 ## 1.29.0 (2026-04-07)
 
 Full Changelog: [v1.28.0...v1.29.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.28.0...v1.29.0)
