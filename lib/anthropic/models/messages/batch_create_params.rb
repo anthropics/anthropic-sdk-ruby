@@ -220,6 +220,10 @@ module Anthropic
                      api_name: :system
 
             # @!attribute temperature
+            #   @deprecated Deprecated. Models released after Claude Opus 4.6 do not support setting
+            #   temperature. A value of 1.0 of will be accepted for backwards compatibility, all
+            #   other values will be rejected with a 400 error.
+            #
             #   Amount of randomness injected into the response.
             #
             #   Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
@@ -334,6 +338,9 @@ module Anthropic
             optional :tools, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::ToolUnion] }
 
             # @!attribute top_k
+            #   @deprecated Deprecated. Models released after Claude Opus 4.6 do not accept top_k; any value
+            #   will be rejected with a 400 error.
+            #
             #   Only sample from the top K options for each subsequent token.
             #
             #   Used to remove "long tail" low probability responses.
@@ -346,6 +353,10 @@ module Anthropic
             optional :top_k, Integer
 
             # @!attribute top_p
+            #   @deprecated Deprecated. Models released after Claude Opus 4.6 do not support setting top_p.
+            #   A value >= 0.99 will be accepted for backwards compatibility, all other values
+            #   will be rejected with a 400 error.
+            #
             #   Use nucleus sampling.
             #
             #   In nucleus sampling, we compute the cumulative distribution over all the options

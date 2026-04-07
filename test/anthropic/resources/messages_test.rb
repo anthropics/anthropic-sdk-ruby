@@ -35,7 +35,7 @@ class Anthropic::Test::Resources::MessagesTest < Anthropic::Test::ResourceTest
     response =
       @anthropic.messages.count_tokens(
         messages: [{content: "string", role: :user}],
-        model: :"claude-opus-4-6"
+        model: :"claude-mythos-preview"
       )
 
     assert_pattern do
