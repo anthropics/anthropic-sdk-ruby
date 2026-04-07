@@ -32,14 +32,14 @@ module Anthropic
         aws_session_token:,
         aws_profile:,
         aws_region:,
-        workspace_id:,
         skip_auth:,
         base_url:,
         service_name:,
         env_api_key:,
-        env_workspace_id:,
         derive_base_url:,
+        workspace_id: nil,
         env_api_key_fallback: nil,
+        env_workspace_id: nil,
         env_workspace_id_fallback: nil
       )
         begin
@@ -101,17 +101,19 @@ module Anthropic
         end
 
         # Workspace ID: constructor > primary env > fallback env
-        resolved_workspace_id = workspace_id
-        if resolved_workspace_id.to_s.empty?
-          resolved_workspace_id = env_lookup(env_workspace_id, env_workspace_id_fallback)
-        end
-        @workspace_id = resolved_workspace_id.to_s.empty? ? nil : resolved_workspace_id.to_s
+        if env_workspace_id
+          resolved_workspace_id = workspace_id
+          if resolved_workspace_id.to_s.empty?
+            resolved_workspace_id = env_lookup(env_workspace_id, env_workspace_id_fallback)
+          end
+          @workspace_id = resolved_workspace_id.to_s.empty? ? nil : resolved_workspace_id.to_s
 
-        unless @skip_auth
-          if @workspace_id.nil?
-            # rubocop:disable Layout/LineLength
-            raise ArgumentError.new("No workspace ID found. Set the `workspace_id` argument or the `#{env_workspace_id}` environment variable.")
-            # rubocop:enable Layout/LineLength
+          unless @skip_auth
+            if @workspace_id.nil?
+              # rubocop:disable Layout/LineLength
+              raise ArgumentError.new("No workspace ID found. Set the `workspace_id` argument or the `#{env_workspace_id}` environment variable.")
+              # rubocop:enable Layout/LineLength
+            end
           end
         end
 
