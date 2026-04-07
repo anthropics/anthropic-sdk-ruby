@@ -8,6 +8,8 @@ module Anthropic
     module Model
       extend Anthropic::Internal::Type::Union
 
+      variant const: -> { Anthropic::Models::Model::CLAUDE_MYTHOS_PREVIEW }
+
       variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_6 }
 
       variant const: -> { Anthropic::Models::Model::CLAUDE_SONNET_4_6 }
@@ -49,7 +51,10 @@ module Anthropic
 
       # @!group
 
-      # Most intelligent model for building agents and coding
+      # New class of intelligence, strongest in coding and cybersecurity
+      CLAUDE_MYTHOS_PREVIEW = :"claude-mythos-preview"
+
+      # Frontier intelligence for long-running agents and coding
       CLAUDE_OPUS_4_6 = :"claude-opus-4-6"
 
       # Best combination of speed and intelligence
