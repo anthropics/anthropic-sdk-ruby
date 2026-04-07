@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.29.0 (2026-04-07)
+
+Full Changelog: [v1.28.0...v1.29.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.28.0...v1.29.0)
+
+### Features
+
+* **api:** Add support for claude-mythos-preview ([3f81797](https://github.com/anthropics/anthropic-sdk-ruby/commit/3f81797e418480fecb7034e7001690cddf97e1e3))
+
 ## 1.28.0 (2026-04-03)
 
 Full Changelog: [v1.27.0...v1.28.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.27.0...v1.28.0)
