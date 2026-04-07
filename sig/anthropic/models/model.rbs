@@ -1,7 +1,8 @@
 module Anthropic
   module Models
     type model =
-      :"claude-opus-4-6"
+      :"claude-mythos-preview"
+      | :"claude-opus-4-6"
       | :"claude-sonnet-4-6"
       | :"claude-haiku-4-5"
       | :"claude-haiku-4-5-20251001"
@@ -23,7 +24,10 @@ module Anthropic
 
       def self?.variants: -> ::Array[Anthropic::Models::model]
 
-      # Most intelligent model for building agents and coding
+      # New class of intelligence, strongest in coding and cybersecurity
+      CLAUDE_MYTHOS_PREVIEW: :"claude-mythos-preview"
+
+      # Frontier intelligence for long-running agents and coding
       CLAUDE_OPUS_4_6: :"claude-opus-4-6"
 
       # Best combination of speed and intelligence
