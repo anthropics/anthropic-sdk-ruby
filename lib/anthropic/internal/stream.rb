@@ -26,7 +26,7 @@ module Anthropic
               unwrapped = Anthropic::Internal::Util.dig(decoded, @unwrap)
               y << Anthropic::Internal::Type::Converter.coerce(@model, unwrapped)
             in {
-              event: "message_start" | "message_delta" | "message_stop" | "content_block_start" | "content_block_delta" | "content_block_stop",
+              event: "message_start" | "message_delta" | "message_stop" | "content_block_start" | "content_block_delta" | "content_block_stop" | "message",
               data: String => data
             }
               decoded = JSON.parse(data, symbolize_names: true)

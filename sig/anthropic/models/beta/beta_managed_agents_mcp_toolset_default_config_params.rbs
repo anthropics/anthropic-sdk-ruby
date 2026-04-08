@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsMCPToolsetDefaultConfigParams = Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams
+
+    module Beta
+      type beta_managed_agents_mcp_toolset_default_config_params =
+        {
+          enabled: bool?,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams::permission_policy?
+        }
+
+      class BetaManagedAgentsMCPToolsetDefaultConfigParams < Anthropic::Internal::Type::BaseModel
+        attr_accessor enabled: bool?
+
+        attr_accessor permission_policy: Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams::permission_policy?
+
+        def initialize: (
+          ?enabled: bool?,
+          ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams::permission_policy?
+        ) -> void
+
+        def to_hash: -> {
+          enabled: bool?,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams::permission_policy?
+        }
+
+        type permission_policy =
+          Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
+          | Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+
+        module PermissionPolicy
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams::permission_policy]
+        end
+      end
+    end
+  end
+end

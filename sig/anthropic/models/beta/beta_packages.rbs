@@ -1,0 +1,68 @@
+module Anthropic
+  module Models
+    class BetaPackages = Beta::BetaPackages
+
+    module Beta
+      type beta_packages =
+        {
+          apt: ::Array[String],
+          cargo: ::Array[String],
+          gem_: ::Array[String],
+          go: ::Array[String],
+          npm: ::Array[String],
+          pip: ::Array[String],
+          type: Anthropic::Models::Beta::BetaPackages::type_
+        }
+
+      class BetaPackages < Anthropic::Internal::Type::BaseModel
+        attr_accessor apt: ::Array[String]
+
+        attr_accessor cargo: ::Array[String]
+
+        attr_accessor gem_: ::Array[String]
+
+        attr_accessor go: ::Array[String]
+
+        attr_accessor npm: ::Array[String]
+
+        attr_accessor pip: ::Array[String]
+
+        attr_reader type: Anthropic::Models::Beta::BetaPackages::type_?
+
+        def type=: (
+          Anthropic::Models::Beta::BetaPackages::type_
+        ) -> Anthropic::Models::Beta::BetaPackages::type_
+
+        def initialize: (
+          apt: ::Array[String],
+          cargo: ::Array[String],
+          gem_: ::Array[String],
+          go: ::Array[String],
+          npm: ::Array[String],
+          pip: ::Array[String],
+          ?type: Anthropic::Models::Beta::BetaPackages::type_
+        ) -> void
+
+        def to_hash: -> {
+          apt: ::Array[String],
+          cargo: ::Array[String],
+          gem_: ::Array[String],
+          go: ::Array[String],
+          npm: ::Array[String],
+          pip: ::Array[String],
+          type: Anthropic::Models::Beta::BetaPackages::type_
+        }
+
+        type type_ = :packages
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          PACKAGES: :packages
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaPackages::type_]
+        end
+      end
+    end
+  end
+end

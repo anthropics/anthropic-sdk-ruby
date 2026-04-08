@@ -1,0 +1,74 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_github_repository_resource =
+          {
+            id: String,
+            created_at: Time,
+            mount_path: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::type_,
+            updated_at: Time,
+            url: String,
+            checkout: Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::checkout?
+          }
+
+        class BetaManagedAgentsGitHubRepositoryResource < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor created_at: Time
+
+          attr_accessor mount_path: String
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::type_
+
+          attr_accessor updated_at: Time
+
+          attr_accessor url: String
+
+          attr_accessor checkout: Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::checkout?
+
+          def initialize: (
+            id: String,
+            created_at: Time,
+            mount_path: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::type_,
+            updated_at: Time,
+            url: String,
+            ?checkout: Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::checkout?
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            created_at: Time,
+            mount_path: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::type_,
+            updated_at: Time,
+            url: String,
+            checkout: Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::checkout?
+          }
+
+          type type_ = :github_repository
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            GITHUB_REPOSITORY: :github_repository
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::type_]
+          end
+
+          type checkout =
+            Anthropic::Beta::BetaManagedAgentsBranchCheckout
+            | Anthropic::Beta::BetaManagedAgentsCommitCheckout
+
+          module Checkout
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::checkout]
+          end
+        end
+      end
+    end
+  end
+end

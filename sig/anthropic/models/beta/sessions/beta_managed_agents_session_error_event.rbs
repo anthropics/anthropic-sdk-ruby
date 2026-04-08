@@ -1,0 +1,64 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_session_error_event =
+          {
+            id: String,
+            error: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::type_
+          }
+
+        class BetaManagedAgentsSessionErrorEvent < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor error: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error
+
+          attr_accessor processed_at: Time
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::type_
+
+          def initialize: (
+            id: String,
+            error: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::type_
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            error: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::type_
+          }
+
+          type error =
+            Anthropic::Beta::Sessions::BetaManagedAgentsUnknownError
+            | Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError
+            | Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedError
+            | Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError
+            | Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError
+            | Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError
+            | Anthropic::Beta::Sessions::BetaManagedAgentsBillingError
+
+          module Error
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error]
+          end
+
+          type type_ = :"session.error"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            SESSION_ERROR: :"session.error"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::type_]
+          end
+        end
+      end
+    end
+  end
+end

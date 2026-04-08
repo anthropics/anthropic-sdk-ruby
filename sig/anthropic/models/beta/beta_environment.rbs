@@ -1,0 +1,64 @@
+module Anthropic
+  module Models
+    class BetaEnvironment = Beta::BetaEnvironment
+
+    module Beta
+      type beta_environment =
+        {
+          id: String,
+          archived_at: String?,
+          config: Anthropic::Beta::BetaCloudConfig,
+          created_at: String,
+          description: String,
+          metadata: ::Hash[Symbol, String],
+          name: String,
+          type: :environment,
+          updated_at: String
+        }
+
+      class BetaEnvironment < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor archived_at: String?
+
+        attr_accessor config: Anthropic::Beta::BetaCloudConfig
+
+        attr_accessor created_at: String
+
+        attr_accessor description: String
+
+        attr_accessor metadata: ::Hash[Symbol, String]
+
+        attr_accessor name: String
+
+        attr_accessor type: :environment
+
+        attr_accessor updated_at: String
+
+        def initialize: (
+          id: String,
+          archived_at: String?,
+          config: Anthropic::Beta::BetaCloudConfig,
+          created_at: String,
+          description: String,
+          metadata: ::Hash[Symbol, String],
+          name: String,
+          updated_at: String,
+          ?type: :environment
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          archived_at: String?,
+          config: Anthropic::Beta::BetaCloudConfig,
+          created_at: String,
+          description: String,
+          metadata: ::Hash[Symbol, String],
+          name: String,
+          type: :environment,
+          updated_at: String
+        }
+      end
+    end
+  end
+end

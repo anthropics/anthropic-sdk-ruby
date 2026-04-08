@@ -1,0 +1,70 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_user_tool_confirmation_event =
+          {
+            id: String,
+            result: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::result,
+            tool_use_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::type_,
+            deny_message: String?,
+            processed_at: Time?
+          }
+
+        class BetaManagedAgentsUserToolConfirmationEvent < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor result: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::result
+
+          attr_accessor tool_use_id: String
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::type_
+
+          attr_accessor deny_message: String?
+
+          attr_accessor processed_at: Time?
+
+          def initialize: (
+            id: String,
+            result: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::result,
+            tool_use_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::type_,
+            ?deny_message: String?,
+            ?processed_at: Time?
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            result: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::result,
+            tool_use_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::type_,
+            deny_message: String?,
+            processed_at: Time?
+          }
+
+          type result = :allow | :deny
+
+          module Result
+            extend Anthropic::Internal::Type::Enum
+
+            ALLOW: :allow
+            DENY: :deny
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::result]
+          end
+
+          type type_ = :"user.tool_confirmation"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            USER_TOOL_CONFIRMATION: :"user.tool_confirmation"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::type_]
+          end
+        end
+      end
+    end
+  end
+end

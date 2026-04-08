@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_session_retries_exhausted =
+          {
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted::type_
+          }
+
+        class BetaManagedAgentsSessionRetriesExhausted < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted::type_
+
+          def initialize: (
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted::type_
+          ) -> void
+
+          def to_hash: -> {
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted::type_
+          }
+
+          type type_ = :retries_exhausted
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            RETRIES_EXHAUSTED: :retries_exhausted
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted::type_]
+          end
+        end
+      end
+    end
+  end
+end

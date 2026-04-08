@@ -1,0 +1,88 @@
+module Anthropic
+  module Models
+    module Beta
+      type session_create_params =
+        {
+          agent: Anthropic::Models::Beta::SessionCreateParams::agent,
+          environment_id: String,
+          metadata: ::Hash[Symbol, String],
+          resources: ::Array[Anthropic::Models::Beta::SessionCreateParams::resource],
+          title: String?,
+          vault_ids: ::Array[String],
+          betas: ::Array[Anthropic::Models::anthropic_beta]
+        }
+        & Anthropic::Internal::Type::request_parameters
+
+      class SessionCreateParams < Anthropic::Internal::Type::BaseModel
+        extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
+
+        attr_accessor agent: Anthropic::Models::Beta::SessionCreateParams::agent
+
+        attr_accessor environment_id: String
+
+        attr_reader metadata: ::Hash[Symbol, String]?
+
+        def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+        attr_reader resources: ::Array[Anthropic::Models::Beta::SessionCreateParams::resource]?
+
+        def resources=: (
+          ::Array[Anthropic::Models::Beta::SessionCreateParams::resource]
+        ) -> ::Array[Anthropic::Models::Beta::SessionCreateParams::resource]
+
+        attr_accessor title: String?
+
+        attr_reader vault_ids: ::Array[String]?
+
+        def vault_ids=: (::Array[String]) -> ::Array[String]
+
+        attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+        def betas=: (
+          ::Array[Anthropic::Models::anthropic_beta]
+        ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+        def initialize: (
+          agent: Anthropic::Models::Beta::SessionCreateParams::agent,
+          environment_id: String,
+          ?metadata: ::Hash[Symbol, String],
+          ?resources: ::Array[Anthropic::Models::Beta::SessionCreateParams::resource],
+          ?title: String?,
+          ?vault_ids: ::Array[String],
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          agent: Anthropic::Models::Beta::SessionCreateParams::agent,
+          environment_id: String,
+          metadata: ::Hash[Symbol, String],
+          resources: ::Array[Anthropic::Models::Beta::SessionCreateParams::resource],
+          title: String?,
+          vault_ids: ::Array[String],
+          betas: ::Array[Anthropic::Models::anthropic_beta],
+          request_options: Anthropic::RequestOptions
+        }
+
+        type agent = String | Anthropic::Beta::BetaManagedAgentsAgentParams
+
+        module Agent
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::SessionCreateParams::agent]
+        end
+
+        type resource =
+          Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams
+          | Anthropic::Beta::BetaManagedAgentsFileResourceParams
+
+        module Resource
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::SessionCreateParams::resource]
+        end
+      end
+    end
+  end
+end

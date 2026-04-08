@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsModel = Beta::BetaManagedAgentsModel
+
+    module Beta
+      type beta_managed_agents_model =
+        :"claude-opus-4-6"
+        | :"claude-sonnet-4-6"
+        | :"claude-haiku-4-5"
+        | :"claude-haiku-4-5-20251001"
+        | :"claude-opus-4-5"
+        | :"claude-opus-4-5-20251101"
+        | :"claude-sonnet-4-5"
+        | :"claude-sonnet-4-5-20250929"
+        | String
+
+      module BetaManagedAgentsModel
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_model]
+
+        # Most intelligent model for building agents and coding
+        CLAUDE_OPUS_4_6: :"claude-opus-4-6"
+
+        # Best combination of speed and intelligence
+        CLAUDE_SONNET_4_6: :"claude-sonnet-4-6"
+
+        # Fastest model with near-frontier intelligence
+        CLAUDE_HAIKU_4_5: :"claude-haiku-4-5"
+
+        # Fastest model with near-frontier intelligence
+        CLAUDE_HAIKU_4_5_20251001: :"claude-haiku-4-5-20251001"
+
+        # Premium model combining maximum intelligence with practical performance
+        CLAUDE_OPUS_4_5: :"claude-opus-4-5"
+
+        # Premium model combining maximum intelligence with practical performance
+        CLAUDE_OPUS_4_5_20251101: :"claude-opus-4-5-20251101"
+
+        # High-performance model for agents and coding
+        CLAUDE_SONNET_4_5: :"claude-sonnet-4-5"
+
+        # High-performance model for agents and coding
+        CLAUDE_SONNET_4_5_20250929: :"claude-sonnet-4-5-20250929"
+      end
+    end
+  end
+end

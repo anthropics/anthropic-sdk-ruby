@@ -1,0 +1,60 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_user_tool_confirmation_event_params =
+          {
+            result: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::result,
+            tool_use_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::type_,
+            deny_message: String?
+          }
+
+        class BetaManagedAgentsUserToolConfirmationEventParams < Anthropic::Internal::Type::BaseModel
+          attr_accessor result: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::result
+
+          attr_accessor tool_use_id: String
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::type_
+
+          attr_accessor deny_message: String?
+
+          def initialize: (
+            result: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::result,
+            tool_use_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::type_,
+            ?deny_message: String?
+          ) -> void
+
+          def to_hash: -> {
+            result: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::result,
+            tool_use_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::type_,
+            deny_message: String?
+          }
+
+          type result = :allow | :deny
+
+          module Result
+            extend Anthropic::Internal::Type::Enum
+
+            ALLOW: :allow
+            DENY: :deny
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::result]
+          end
+
+          type type_ = :"user.tool_confirmation"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            USER_TOOL_CONFIRMATION: :"user.tool_confirmation"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::type_]
+          end
+        end
+      end
+    end
+  end
+end

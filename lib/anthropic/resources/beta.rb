@@ -9,6 +9,18 @@ module Anthropic
       # @return [Anthropic::Resources::Beta::Messages]
       attr_reader :messages
 
+      # @return [Anthropic::Resources::Beta::Agents]
+      attr_reader :agents
+
+      # @return [Anthropic::Resources::Beta::Environments]
+      attr_reader :environments
+
+      # @return [Anthropic::Resources::Beta::Sessions]
+      attr_reader :sessions
+
+      # @return [Anthropic::Resources::Beta::Vaults]
+      attr_reader :vaults
+
       # @return [Anthropic::Resources::Beta::Files]
       attr_reader :files
 
@@ -22,6 +34,10 @@ module Anthropic
         @client = client
         @models = Anthropic::Resources::Beta::Models.new(client: client)
         @messages = Anthropic::Resources::Beta::Messages.new(client: client)
+        @agents = Anthropic::Resources::Beta::Agents.new(client: client)
+        @environments = Anthropic::Resources::Beta::Environments.new(client: client)
+        @sessions = Anthropic::Resources::Beta::Sessions.new(client: client)
+        @vaults = Anthropic::Resources::Beta::Vaults.new(client: client)
         @files = Anthropic::Resources::Beta::Files.new(client: client)
         @skills = Anthropic::Resources::Beta::Skills.new(client: client)
       end

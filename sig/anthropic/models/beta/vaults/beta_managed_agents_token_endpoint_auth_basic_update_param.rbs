@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module Vaults
+        type beta_managed_agents_token_endpoint_auth_basic_update_param =
+          {
+            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam::type_,
+            client_secret: String?
+          }
+
+        class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam::type_
+
+          attr_accessor client_secret: String?
+
+          def initialize: (
+            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam::type_,
+            ?client_secret: String?
+          ) -> void
+
+          def to_hash: -> {
+            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam::type_,
+            client_secret: String?
+          }
+
+          type type_ = :client_secret_basic
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            CLIENT_SECRET_BASIC: :client_secret_basic
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam::type_]
+          end
+        end
+      end
+    end
+  end
+end

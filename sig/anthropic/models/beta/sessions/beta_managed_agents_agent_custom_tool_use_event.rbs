@@ -1,0 +1,54 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_agent_custom_tool_use_event =
+          {
+            id: String,
+            input: ::Hash[Symbol, top],
+            name: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::type_
+          }
+
+        class BetaManagedAgentsAgentCustomToolUseEvent < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor input: ::Hash[Symbol, top]
+
+          attr_accessor name: String
+
+          attr_accessor processed_at: Time
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::type_
+
+          def initialize: (
+            id: String,
+            input: ::Hash[Symbol, top],
+            name: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::type_
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            input: ::Hash[Symbol, top],
+            name: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::type_
+          }
+
+          type type_ = :"agent.custom_tool_use"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            AGENT_CUSTOM_TOOL_USE: :"agent.custom_tool_use"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::type_]
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsSkillParams = Beta::BetaManagedAgentsSkillParams
+
+    module Beta
+      type beta_managed_agents_skill_params =
+        Anthropic::Beta::BetaManagedAgentsAnthropicSkillParams
+        | Anthropic::Beta::BetaManagedAgentsCustomSkillParams
+
+      module BetaManagedAgentsSkillParams
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]
+      end
+    end
+  end
+end

@@ -1,0 +1,112 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsSession = Beta::BetaManagedAgentsSession
+
+    module Beta
+      type beta_managed_agents_session =
+        {
+          id: String,
+          agent: Anthropic::Beta::BetaManagedAgentsSessionAgent,
+          archived_at: Time?,
+          created_at: Time,
+          environment_id: String,
+          metadata: ::Hash[Symbol, String],
+          resources: ::Array[Anthropic::Models::Beta::Sessions::beta_managed_agents_session_resource],
+          stats: Anthropic::Beta::BetaManagedAgentsSessionStats,
+          status: Anthropic::Models::Beta::BetaManagedAgentsSession::status,
+          title: String?,
+          type: Anthropic::Models::Beta::BetaManagedAgentsSession::type_,
+          updated_at: Time,
+          usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
+          vault_ids: ::Array[String]
+        }
+
+      class BetaManagedAgentsSession < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor agent: Anthropic::Beta::BetaManagedAgentsSessionAgent
+
+        attr_accessor archived_at: Time?
+
+        attr_accessor created_at: Time
+
+        attr_accessor environment_id: String
+
+        attr_accessor metadata: ::Hash[Symbol, String]
+
+        attr_accessor resources: ::Array[Anthropic::Models::Beta::Sessions::beta_managed_agents_session_resource]
+
+        attr_accessor stats: Anthropic::Beta::BetaManagedAgentsSessionStats
+
+        attr_accessor status: Anthropic::Models::Beta::BetaManagedAgentsSession::status
+
+        attr_accessor title: String?
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsSession::type_
+
+        attr_accessor updated_at: Time
+
+        attr_accessor usage: Anthropic::Beta::BetaManagedAgentsSessionUsage
+
+        attr_accessor vault_ids: ::Array[String]
+
+        def initialize: (
+          id: String,
+          agent: Anthropic::Beta::BetaManagedAgentsSessionAgent,
+          archived_at: Time?,
+          created_at: Time,
+          environment_id: String,
+          metadata: ::Hash[Symbol, String],
+          resources: ::Array[Anthropic::Models::Beta::Sessions::beta_managed_agents_session_resource],
+          stats: Anthropic::Beta::BetaManagedAgentsSessionStats,
+          status: Anthropic::Models::Beta::BetaManagedAgentsSession::status,
+          title: String?,
+          type: Anthropic::Models::Beta::BetaManagedAgentsSession::type_,
+          updated_at: Time,
+          usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
+          vault_ids: ::Array[String]
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          agent: Anthropic::Beta::BetaManagedAgentsSessionAgent,
+          archived_at: Time?,
+          created_at: Time,
+          environment_id: String,
+          metadata: ::Hash[Symbol, String],
+          resources: ::Array[Anthropic::Models::Beta::Sessions::beta_managed_agents_session_resource],
+          stats: Anthropic::Beta::BetaManagedAgentsSessionStats,
+          status: Anthropic::Models::Beta::BetaManagedAgentsSession::status,
+          title: String?,
+          type: Anthropic::Models::Beta::BetaManagedAgentsSession::type_,
+          updated_at: Time,
+          usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
+          vault_ids: ::Array[String]
+        }
+
+        type status = :rescheduling | :running | :idle | :terminated
+
+        module Status
+          extend Anthropic::Internal::Type::Enum
+
+          RESCHEDULING: :rescheduling
+          RUNNING: :running
+          IDLE: :idle
+          TERMINATED: :terminated
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSession::status]
+        end
+
+        type type_ = :session
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          SESSION: :session
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSession::type_]
+        end
+      end
+    end
+  end
+end

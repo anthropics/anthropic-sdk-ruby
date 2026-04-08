@@ -1,0 +1,59 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_span_model_request_end_event =
+          {
+            id: String,
+            is_error: bool?,
+            model_request_start_id: String,
+            model_usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::type_
+          }
+
+        class BetaManagedAgentsSpanModelRequestEndEvent < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor is_error: bool?
+
+          attr_accessor model_request_start_id: String
+
+          attr_accessor model_usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage
+
+          attr_accessor processed_at: Time
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::type_
+
+          def initialize: (
+            id: String,
+            is_error: bool?,
+            model_request_start_id: String,
+            model_usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::type_
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            is_error: bool?,
+            model_request_start_id: String,
+            model_usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::type_
+          }
+
+          type type_ = :"span.model_request_end"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            SPAN_MODEL_REQUEST_END: :"span.model_request_end"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent::type_]
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaLimitedNetwork = Beta::BetaLimitedNetwork
+
+    module Beta
+      type beta_limited_network =
+        {
+          allow_mcp_servers: bool,
+          allow_package_managers: bool,
+          allowed_hosts: ::Array[String],
+          type: :limited
+        }
+
+      class BetaLimitedNetwork < Anthropic::Internal::Type::BaseModel
+        attr_accessor allow_mcp_servers: bool
+
+        attr_accessor allow_package_managers: bool
+
+        attr_accessor allowed_hosts: ::Array[String]
+
+        attr_accessor type: :limited
+
+        def initialize: (
+          allow_mcp_servers: bool,
+          allow_package_managers: bool,
+          allowed_hosts: ::Array[String],
+          ?type: :limited
+        ) -> void
+
+        def to_hash: -> {
+          allow_mcp_servers: bool,
+          allow_package_managers: bool,
+          allowed_hosts: ::Array[String],
+          type: :limited
+        }
+      end
+    end
+  end
+end

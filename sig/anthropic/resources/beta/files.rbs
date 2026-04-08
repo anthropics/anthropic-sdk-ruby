@@ -6,6 +6,7 @@ module Anthropic
           ?after_id: String,
           ?before_id: String,
           ?limit: Integer,
+          ?scope_id: String,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Internal::Page[Anthropic::Beta::FileMetadata]

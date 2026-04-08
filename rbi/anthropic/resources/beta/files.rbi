@@ -10,6 +10,7 @@ module Anthropic
             after_id: String,
             before_id: String,
             limit: Integer,
+            scope_id: String,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Internal::Page[Anthropic::Beta::FileMetadata])
@@ -25,6 +26,9 @@ module Anthropic
           #
           # Defaults to `20`. Ranges from `1` to `1000`.
           limit: nil,
+          # Query param: Filter by scope ID. Only returns files associated with the
+          # specified scope (e.g., a session ID).
+          scope_id: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}

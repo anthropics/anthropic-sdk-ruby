@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsAgentToolset20260401Params = Beta::BetaManagedAgentsAgentToolset20260401Params
+
+    module Beta
+      type beta_managed_agents_agent_toolset20260401_params =
+        {
+          type: Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params::type_,
+          configs: ::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams],
+          default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams?
+        }
+
+      class BetaManagedAgentsAgentToolset20260401Params < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params::type_
+
+        attr_reader configs: ::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams]?
+
+        def configs=: (
+          ::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams]
+        ) -> ::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams]
+
+        attr_accessor default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams?
+
+        def initialize: (
+          type: Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params::type_,
+          ?configs: ::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams],
+          ?default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams?
+        ) -> void
+
+        def to_hash: -> {
+          type: Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params::type_,
+          configs: ::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams],
+          default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams?
+        }
+
+        type type_ = :agent_toolset_20260401
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          AGENT_TOOLSET_20260401: :agent_toolset_20260401
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params::type_]
+        end
+      end
+    end
+  end
+end

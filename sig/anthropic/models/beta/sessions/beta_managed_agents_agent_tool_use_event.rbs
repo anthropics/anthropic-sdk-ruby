@@ -1,0 +1,75 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_agent_tool_use_event =
+          {
+            id: String,
+            input: ::Hash[Symbol, top],
+            name: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::type_,
+            evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::evaluated_permission
+          }
+
+        class BetaManagedAgentsAgentToolUseEvent < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor input: ::Hash[Symbol, top]
+
+          attr_accessor name: String
+
+          attr_accessor processed_at: Time
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::type_
+
+          attr_reader evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::evaluated_permission?
+
+          def evaluated_permission=: (
+            Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::evaluated_permission
+          ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::evaluated_permission
+
+          def initialize: (
+            id: String,
+            input: ::Hash[Symbol, top],
+            name: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::type_,
+            ?evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::evaluated_permission
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            input: ::Hash[Symbol, top],
+            name: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::type_,
+            evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::evaluated_permission
+          }
+
+          type type_ = :"agent.tool_use"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            AGENT_TOOL_USE: :"agent.tool_use"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::type_]
+          end
+
+          type evaluated_permission = :allow | :ask | :deny
+
+          module EvaluatedPermission
+            extend Anthropic::Internal::Type::Enum
+
+            ALLOW: :allow
+            ASK: :ask
+            DENY: :deny
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::evaluated_permission]
+          end
+        end
+      end
+    end
+  end
+end

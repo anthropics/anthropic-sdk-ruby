@@ -1,0 +1,54 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_plain_text_document_source =
+          {
+            data: String,
+            media_type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::media_type,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::type_
+          }
+
+        class BetaManagedAgentsPlainTextDocumentSource < Anthropic::Internal::Type::BaseModel
+          attr_accessor data: String
+
+          attr_accessor media_type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::media_type
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::type_
+
+          def initialize: (
+            data: String,
+            media_type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::media_type,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::type_
+          ) -> void
+
+          def to_hash: -> {
+            data: String,
+            media_type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::media_type,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::type_
+          }
+
+          type media_type = :"text/plain"
+
+          module MediaType
+            extend Anthropic::Internal::Type::Enum
+
+            TEXT_PLAIN: :"text/plain"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::media_type]
+          end
+
+          type type_ = :text
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TEXT: :text
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::type_]
+          end
+        end
+      end
+    end
+  end
+end

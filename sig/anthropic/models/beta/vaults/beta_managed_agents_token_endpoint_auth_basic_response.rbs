@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    module Beta
+      module Vaults
+        type beta_managed_agents_token_endpoint_auth_basic_response =
+          {
+            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicResponse::type_
+          }
+
+        class BetaManagedAgentsTokenEndpointAuthBasicResponse < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicResponse::type_
+
+          def initialize: (
+            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicResponse::type_
+          ) -> void
+
+          def to_hash: -> {
+            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicResponse::type_
+          }
+
+          type type_ = :client_secret_basic
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            CLIENT_SECRET_BASIC: :client_secret_basic
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicResponse::type_]
+          end
+        end
+      end
+    end
+  end
+end

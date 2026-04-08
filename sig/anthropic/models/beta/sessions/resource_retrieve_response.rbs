@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type resource_retrieve_response =
+          Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource
+          | Anthropic::Beta::Sessions::BetaManagedAgentsFileResource
+
+        module ResourceRetrieveResponse
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::resource_retrieve_response]
+        end
+      end
+    end
+  end
+end

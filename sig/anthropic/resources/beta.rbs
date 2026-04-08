@@ -5,6 +5,14 @@ module Anthropic
 
       attr_reader messages: Anthropic::Resources::Beta::Messages
 
+      attr_reader agents: Anthropic::Resources::Beta::Agents
+
+      attr_reader environments: Anthropic::Resources::Beta::Environments
+
+      attr_reader sessions: Anthropic::Resources::Beta::Sessions
+
+      attr_reader vaults: Anthropic::Resources::Beta::Vaults
+
       attr_reader files: Anthropic::Resources::Beta::Files
 
       attr_reader skills: Anthropic::Resources::Beta::Skills

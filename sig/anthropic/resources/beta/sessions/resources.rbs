@@ -1,0 +1,50 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Sessions
+        class Resources
+          def retrieve: (
+            String resource_id,
+            session_id: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Models::Beta::Sessions::resource_retrieve_response
+
+          def update: (
+            String resource_id,
+            session_id: String,
+            authorization_token: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Models::Beta::Sessions::resource_update_response
+
+          def list: (
+            String session_id,
+            ?limit: Integer,
+            ?page: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Models::Beta::Sessions::beta_managed_agents_session_resource]
+
+          def delete: (
+            String resource_id,
+            session_id: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Sessions::BetaManagedAgentsDeleteSessionResource
+
+          def add: (
+            String session_id,
+            file_id: String,
+            type: Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams::type_,
+            ?mount_path: String?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Sessions::BetaManagedAgentsFileResource
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

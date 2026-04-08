@@ -1,0 +1,50 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_image_block =
+          {
+            source: Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::source,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::type_
+          }
+
+        class BetaManagedAgentsImageBlock < Anthropic::Internal::Type::BaseModel
+          attr_accessor source: Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::source
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::type_
+
+          def initialize: (
+            source: Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::source,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::type_
+          ) -> void
+
+          def to_hash: -> {
+            source: Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::source,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::type_
+          }
+
+          type source =
+            Anthropic::Beta::Sessions::BetaManagedAgentsBase64ImageSource
+            | Anthropic::Beta::Sessions::BetaManagedAgentsURLImageSource
+            | Anthropic::Beta::Sessions::BetaManagedAgentsFileImageSource
+
+          module Source
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::source]
+          end
+
+          type type_ = :image
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            IMAGE: :image
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::type_]
+          end
+        end
+      end
+    end
+  end
+end

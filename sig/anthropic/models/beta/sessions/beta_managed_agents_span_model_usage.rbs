@@ -1,0 +1,55 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_span_model_usage =
+          {
+            cache_creation_input_tokens: Integer,
+            cache_read_input_tokens: Integer,
+            input_tokens: Integer,
+            output_tokens: Integer,
+            speed: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage::speed?
+          }
+
+        class BetaManagedAgentsSpanModelUsage < Anthropic::Internal::Type::BaseModel
+          attr_accessor cache_creation_input_tokens: Integer
+
+          attr_accessor cache_read_input_tokens: Integer
+
+          attr_accessor input_tokens: Integer
+
+          attr_accessor output_tokens: Integer
+
+          attr_accessor speed: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage::speed?
+
+          def initialize: (
+            cache_creation_input_tokens: Integer,
+            cache_read_input_tokens: Integer,
+            input_tokens: Integer,
+            output_tokens: Integer,
+            ?speed: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage::speed?
+          ) -> void
+
+          def to_hash: -> {
+            cache_creation_input_tokens: Integer,
+            cache_read_input_tokens: Integer,
+            input_tokens: Integer,
+            output_tokens: Integer,
+            speed: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage::speed?
+          }
+
+          type speed = :standard | :fast
+
+          module Speed
+            extend Anthropic::Internal::Type::Enum
+
+            STANDARD: :standard
+            FAST: :fast
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage::speed]
+          end
+        end
+      end
+    end
+  end
+end

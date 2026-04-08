@@ -5,8 +5,6 @@ module Anthropic
 
       attr_accessor data: ::Array[Elem]?
 
-      attr_accessor has_more: bool
-
       attr_accessor next_page_: String?
 
       def inspect: -> String

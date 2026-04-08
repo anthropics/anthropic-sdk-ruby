@@ -37,6 +37,14 @@ module Anthropic
         sig { params(limit: Integer).void }
         attr_writer :limit
 
+        # Filter by scope ID. Only returns files associated with the specified scope
+        # (e.g., a session ID).
+        sig { returns(T.nilable(String)) }
+        attr_reader :scope_id
+
+        sig { params(scope_id: String).void }
+        attr_writer :scope_id
+
         # Optional header to specify the beta version(s) you want to use.
         sig do
           returns(
@@ -59,6 +67,7 @@ module Anthropic
             after_id: String,
             before_id: String,
             limit: Integer,
+            scope_id: String,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
@@ -74,6 +83,9 @@ module Anthropic
           #
           # Defaults to `20`. Ranges from `1` to `1000`.
           limit: nil,
+          # Filter by scope ID. Only returns files associated with the specified scope
+          # (e.g., a session ID).
+          scope_id: nil,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}
@@ -86,6 +98,7 @@ module Anthropic
               after_id: String,
               before_id: String,
               limit: Integer,
+              scope_id: String,
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               request_options: Anthropic::RequestOptions

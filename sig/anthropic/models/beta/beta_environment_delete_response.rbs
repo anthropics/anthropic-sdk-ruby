@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    class BetaEnvironmentDeleteResponse = Beta::BetaEnvironmentDeleteResponse
+
+    module Beta
+      type beta_environment_delete_response =
+        { id: String, type: :environment_deleted }
+
+      class BetaEnvironmentDeleteResponse < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor type: :environment_deleted
+
+        def initialize: (id: String, ?type: :environment_deleted) -> void
+
+        def to_hash: -> { id: String, type: :environment_deleted }
+      end
+    end
+  end
+end

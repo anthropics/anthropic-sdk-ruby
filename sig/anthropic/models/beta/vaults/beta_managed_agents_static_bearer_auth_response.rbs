@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module Vaults
+        type beta_managed_agents_static_bearer_auth_response =
+          {
+            mcp_server_url: String,
+            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse::type_
+          }
+
+        class BetaManagedAgentsStaticBearerAuthResponse < Anthropic::Internal::Type::BaseModel
+          attr_accessor mcp_server_url: String
+
+          attr_accessor type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse::type_
+
+          def initialize: (
+            mcp_server_url: String,
+            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse::type_
+          ) -> void
+
+          def to_hash: -> {
+            mcp_server_url: String,
+            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse::type_
+          }
+
+          type type_ = :static_bearer
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            STATIC_BEARER: :static_bearer
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse::type_]
+          end
+        end
+      end
+    end
+  end
+end

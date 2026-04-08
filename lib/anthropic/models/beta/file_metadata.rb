@@ -51,7 +51,14 @@ module Anthropic
         #   @return [Boolean, nil]
         optional :downloadable, Anthropic::Internal::Type::Boolean
 
-        # @!method initialize(id:, created_at:, filename:, mime_type:, size_bytes:, downloadable: nil, type: :file)
+        # @!attribute scope
+        #   The scope of this file, indicating the context in which it was created (e.g., a
+        #   session).
+        #
+        #   @return [Anthropic::Models::Beta::BetaFileScope, nil]
+        optional :scope, -> { Anthropic::Beta::BetaFileScope }, nil?: true
+
+        # @!method initialize(id:, created_at:, filename:, mime_type:, size_bytes:, downloadable: nil, scope: nil, type: :file)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::FileMetadata} for more details.
         #
@@ -66,6 +73,8 @@ module Anthropic
         #   @param size_bytes [Integer] Size of the file in bytes.
         #
         #   @param downloadable [Boolean] Whether the file can be downloaded.
+        #
+        #   @param scope [Anthropic::Models::Beta::BetaFileScope, nil] The scope of this file, indicating the context in which it was created (e.g., a
         #
         #   @param type [Symbol, :file] Object type.
       end

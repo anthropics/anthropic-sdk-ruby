@@ -6,6 +6,7 @@ module Anthropic
           after_id: String,
           before_id: String,
           limit: Integer,
+          scope_id: String,
           betas: ::Array[Anthropic::Models::anthropic_beta]
         }
         & Anthropic::Internal::Type::request_parameters
@@ -26,6 +27,10 @@ module Anthropic
 
         def limit=: (Integer) -> Integer
 
+        attr_reader scope_id: String?
+
+        def scope_id=: (String) -> String
+
         attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
         def betas=: (
@@ -36,6 +41,7 @@ module Anthropic
           ?after_id: String,
           ?before_id: String,
           ?limit: Integer,
+          ?scope_id: String,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> void
@@ -44,6 +50,7 @@ module Anthropic
           after_id: String,
           before_id: String,
           limit: Integer,
+          scope_id: String,
           betas: ::Array[Anthropic::Models::anthropic_beta],
           request_options: Anthropic::RequestOptions
         }

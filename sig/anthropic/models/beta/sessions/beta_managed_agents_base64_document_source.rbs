@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_base64_document_source =
+          {
+            data: String,
+            media_type: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource::type_
+          }
+
+        class BetaManagedAgentsBase64DocumentSource < Anthropic::Internal::Type::BaseModel
+          attr_accessor data: String
+
+          attr_accessor media_type: String
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource::type_
+
+          def initialize: (
+            data: String,
+            media_type: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource::type_
+          ) -> void
+
+          def to_hash: -> {
+            data: String,
+            media_type: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource::type_
+          }
+
+          type type_ = :base64
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            BASE64: :base64
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource::type_]
+          end
+        end
+      end
+    end
+  end
+end
