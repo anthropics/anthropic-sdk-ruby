@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_user_interrupt_event_params =
+          {
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::type_
+          }
+
+        class BetaManagedAgentsUserInterruptEventParams < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::type_
+
+          def initialize: (
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::type_
+          ) -> void
+
+          def to_hash: -> {
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::type_
+          }
+
+          type type_ = :"user.interrupt"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            USER_INTERRUPT: :"user.interrupt"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::type_]
+          end
+        end
+      end
+    end
+  end
+end

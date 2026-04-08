@@ -1,0 +1,66 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Sessions
+        attr_reader events: Anthropic::Resources::Beta::Sessions::Events
+
+        attr_reader resources: Anthropic::Resources::Beta::Sessions::Resources
+
+        def create: (
+          agent: Anthropic::Models::Beta::SessionCreateParams::agent,
+          environment_id: String,
+          ?metadata: ::Hash[Symbol, String],
+          ?resources: ::Array[Anthropic::Models::Beta::SessionCreateParams::resource],
+          ?title: String?,
+          ?vault_ids: ::Array[String],
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsSession
+
+        def retrieve: (
+          String session_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsSession
+
+        def update: (
+          String session_id,
+          ?metadata: ::Hash[Symbol, String?]?,
+          ?title: String?,
+          ?vault_ids: ::Array[String],
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsSession
+
+        def list: (
+          ?agent_id: String,
+          ?agent_version: Integer,
+          ?created_at_gt: Time,
+          ?created_at_gte: Time,
+          ?created_at_lt: Time,
+          ?created_at_lte: Time,
+          ?include_archived: bool,
+          ?limit: Integer,
+          ?order: Anthropic::Models::Beta::SessionListParams::order,
+          ?page: String,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaManagedAgentsSession]
+
+        def delete: (
+          String session_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsDeletedSession
+
+        def archive: (
+          String session_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsSession
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

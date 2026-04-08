@@ -1,0 +1,52 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Vaults
+        attr_reader credentials: Anthropic::Resources::Beta::Vaults::Credentials
+
+        def create: (
+          display_name: String,
+          ?metadata: ::Hash[Symbol, String],
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsVault
+
+        def retrieve: (
+          String vault_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsVault
+
+        def update: (
+          String vault_id,
+          ?display_name: String?,
+          ?metadata: ::Hash[Symbol, String?]?,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsVault
+
+        def list: (
+          ?include_archived: bool,
+          ?limit: Integer,
+          ?page: String,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaManagedAgentsVault]
+
+        def delete: (
+          String vault_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsDeletedVault
+
+        def archive: (
+          String vault_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsVault
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

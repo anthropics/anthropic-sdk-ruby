@@ -1,0 +1,33 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsCacheCreationUsage = Beta::BetaManagedAgentsCacheCreationUsage
+
+    module Beta
+      type beta_managed_agents_cache_creation_usage =
+        {
+          :ephemeral_1h_input_tokens => Integer,
+          :ephemeral_5m_input_tokens => Integer
+        }
+
+      class BetaManagedAgentsCacheCreationUsage < Anthropic::Internal::Type::BaseModel
+        attr_reader ephemeral_1h_input_tokens: Integer?
+
+        def ephemeral_1h_input_tokens=: (Integer) -> Integer
+
+        attr_reader ephemeral_5m_input_tokens: Integer?
+
+        def ephemeral_5m_input_tokens=: (Integer) -> Integer
+
+        def initialize: (
+          ?ephemeral_1h_input_tokens: Integer,
+          ?ephemeral_5m_input_tokens: Integer
+        ) -> void
+
+        def to_hash: -> {
+          :ephemeral_1h_input_tokens => Integer,
+          :ephemeral_5m_input_tokens => Integer
+        }
+      end
+    end
+  end
+end

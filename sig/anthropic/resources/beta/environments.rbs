@@ -1,0 +1,54 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Environments
+        def create: (
+          name: String,
+          ?config: Anthropic::Beta::BetaCloudConfigParams?,
+          ?description: String?,
+          ?metadata: ::Hash[Symbol, String],
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaEnvironment
+
+        def retrieve: (
+          String environment_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaEnvironment
+
+        def update: (
+          String environment_id,
+          ?config: Anthropic::Beta::BetaCloudConfigParams?,
+          ?description: String?,
+          ?metadata: ::Hash[Symbol, String?],
+          ?name: String?,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaEnvironment
+
+        def list: (
+          ?include_archived: bool,
+          ?limit: Integer,
+          ?page: String?,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaEnvironment]
+
+        def delete: (
+          String environment_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaEnvironmentDeleteResponse
+
+        def archive: (
+          String environment_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaEnvironment
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

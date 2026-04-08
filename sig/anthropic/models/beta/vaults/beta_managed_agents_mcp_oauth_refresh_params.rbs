@@ -1,0 +1,60 @@
+module Anthropic
+  module Models
+    module Beta
+      module Vaults
+        type beta_managed_agents_mcpo_auth_refresh_params =
+          {
+            client_id: String,
+            refresh_token: String,
+            token_endpoint: String,
+            token_endpoint_auth: Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshParams::token_endpoint_auth,
+            resource: String?,
+            scope: String?
+          }
+
+        class BetaManagedAgentsMCPOAuthRefreshParams < Anthropic::Internal::Type::BaseModel
+          attr_accessor client_id: String
+
+          attr_accessor refresh_token: String
+
+          attr_accessor token_endpoint: String
+
+          attr_accessor token_endpoint_auth: Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshParams::token_endpoint_auth
+
+          attr_accessor resource: String?
+
+          attr_accessor scope: String?
+
+          def initialize: (
+            client_id: String,
+            refresh_token: String,
+            token_endpoint: String,
+            token_endpoint_auth: Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshParams::token_endpoint_auth,
+            ?resource: String?,
+            ?scope: String?
+          ) -> void
+
+          def to_hash: -> {
+            client_id: String,
+            refresh_token: String,
+            token_endpoint: String,
+            token_endpoint_auth: Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshParams::token_endpoint_auth,
+            resource: String?,
+            scope: String?
+          }
+
+          type token_endpoint_auth =
+            Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneParam
+            | Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicParam
+            | Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostParam
+
+          module TokenEndpointAuth
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshParams::token_endpoint_auth]
+          end
+        end
+      end
+    end
+  end
+end

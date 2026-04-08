@@ -1,0 +1,80 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_agent_mcp_tool_use_event =
+          {
+            id: String,
+            input: ::Hash[Symbol, top],
+            mcp_server_name: String,
+            name: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::type_,
+            evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission
+          }
+
+        class BetaManagedAgentsAgentMCPToolUseEvent < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor input: ::Hash[Symbol, top]
+
+          attr_accessor mcp_server_name: String
+
+          attr_accessor name: String
+
+          attr_accessor processed_at: Time
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::type_
+
+          attr_reader evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission?
+
+          def evaluated_permission=: (
+            Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission
+          ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission
+
+          def initialize: (
+            id: String,
+            input: ::Hash[Symbol, top],
+            mcp_server_name: String,
+            name: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::type_,
+            ?evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            input: ::Hash[Symbol, top],
+            mcp_server_name: String,
+            name: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::type_,
+            evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission
+          }
+
+          type type_ = :"agent.mcp_tool_use"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            AGENT_MCP_TOOL_USE: :"agent.mcp_tool_use"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::type_]
+          end
+
+          type evaluated_permission = :allow | :ask | :deny
+
+          module EvaluatedPermission
+            extend Anthropic::Internal::Type::Enum
+
+            ALLOW: :allow
+            ASK: :ask
+            DENY: :deny
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission]
+          end
+        end
+      end
+    end
+  end
+end

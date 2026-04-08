@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_session_deleted_event =
+          {
+            id: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent::type_
+          }
+
+        class BetaManagedAgentsSessionDeletedEvent < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor processed_at: Time
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent::type_
+
+          def initialize: (
+            id: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent::type_
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent::type_
+          }
+
+          type type_ = :"session.deleted"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            SESSION_DELETED: :"session.deleted"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent::type_]
+          end
+        end
+      end
+    end
+  end
+end

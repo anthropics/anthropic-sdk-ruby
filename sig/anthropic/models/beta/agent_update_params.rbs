@@ -1,0 +1,109 @@
+module Anthropic
+  module Models
+    module Beta
+      type agent_update_params =
+        {
+          agent_id: String,
+          version: Integer,
+          description: String?,
+          mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?,
+          metadata: ::Hash[Symbol, String?]?,
+          model: Anthropic::Models::Beta::AgentUpdateParams::model,
+          name: String,
+          skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]?,
+          system_: String?,
+          tools: ::Array[Anthropic::Models::Beta::AgentUpdateParams::tool]?,
+          betas: ::Array[Anthropic::Models::anthropic_beta]
+        }
+        & Anthropic::Internal::Type::request_parameters
+
+      class AgentUpdateParams < Anthropic::Internal::Type::BaseModel
+        extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
+
+        attr_accessor agent_id: String
+
+        attr_accessor version: Integer
+
+        attr_accessor description: String?
+
+        attr_accessor mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?
+
+        attr_accessor metadata: ::Hash[Symbol, String?]?
+
+        attr_reader model: Anthropic::Models::Beta::AgentUpdateParams::model?
+
+        def model=: (
+          Anthropic::Models::Beta::AgentUpdateParams::model
+        ) -> Anthropic::Models::Beta::AgentUpdateParams::model
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_accessor skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]?
+
+        attr_accessor system_: String?
+
+        attr_accessor tools: ::Array[Anthropic::Models::Beta::AgentUpdateParams::tool]?
+
+        attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+        def betas=: (
+          ::Array[Anthropic::Models::anthropic_beta]
+        ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+        def initialize: (
+          agent_id: String,
+          version: Integer,
+          ?description: String?,
+          ?mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?,
+          ?metadata: ::Hash[Symbol, String?]?,
+          ?model: Anthropic::Models::Beta::AgentUpdateParams::model,
+          ?name: String,
+          ?skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]?,
+          ?system_: String?,
+          ?tools: ::Array[Anthropic::Models::Beta::AgentUpdateParams::tool]?,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          agent_id: String,
+          version: Integer,
+          description: String?,
+          mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?,
+          metadata: ::Hash[Symbol, String?]?,
+          model: Anthropic::Models::Beta::AgentUpdateParams::model,
+          name: String,
+          skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]?,
+          system_: String?,
+          tools: ::Array[Anthropic::Models::Beta::AgentUpdateParams::tool]?,
+          betas: ::Array[Anthropic::Models::anthropic_beta],
+          request_options: Anthropic::RequestOptions
+        }
+
+        type model =
+          Anthropic::Models::Beta::beta_managed_agents_model
+          | Anthropic::Beta::BetaManagedAgentsModelConfigParams
+
+        module Model
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::AgentUpdateParams::model]
+        end
+
+        type tool =
+          Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params
+          | Anthropic::Beta::BetaManagedAgentsMCPToolsetParams
+          | Anthropic::Beta::BetaManagedAgentsCustomToolParams
+
+        module Tool
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::AgentUpdateParams::tool]
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,59 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_file_resource =
+          {
+            id: String,
+            created_at: Time,
+            file_id: String,
+            mount_path: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource::type_,
+            updated_at: Time
+          }
+
+        class BetaManagedAgentsFileResource < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor created_at: Time
+
+          attr_accessor file_id: String
+
+          attr_accessor mount_path: String
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource::type_
+
+          attr_accessor updated_at: Time
+
+          def initialize: (
+            id: String,
+            created_at: Time,
+            file_id: String,
+            mount_path: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource::type_,
+            updated_at: Time
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            created_at: Time,
+            file_id: String,
+            mount_path: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource::type_,
+            updated_at: Time
+          }
+
+          type type_ = :file
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            FILE: :file
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource::type_]
+          end
+        end
+      end
+    end
+  end
+end

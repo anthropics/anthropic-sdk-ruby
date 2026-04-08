@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsMCPServerURLDefinition = Beta::BetaManagedAgentsMCPServerURLDefinition
+
+    module Beta
+      type beta_managed_agents_mcp_server_url_definition =
+        {
+          name: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition::type_,
+          url: String
+        }
+
+      class BetaManagedAgentsMCPServerURLDefinition < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition::type_
+
+        attr_accessor url: String
+
+        def initialize: (
+          name: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition::type_,
+          url: String
+        ) -> void
+
+        def to_hash: -> {
+          name: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition::type_,
+          url: String
+        }
+
+        type type_ = :url
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          URL: :url
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition::type_]
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    class BetaFileScope = Beta::BetaFileScope
+
+    module Beta
+      type beta_file_scope = { id: String, type: :session }
+
+      class BetaFileScope < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor type: :session
+
+        def initialize: (id: String, ?type: :session) -> void
+
+        def to_hash: -> { id: String, type: :session }
+      end
+    end
+  end
+end

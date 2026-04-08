@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    module Beta
+      module Vaults
+        type beta_managed_agents_token_endpoint_auth_none_param =
+          {
+            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneParam::type_
+          }
+
+        class BetaManagedAgentsTokenEndpointAuthNoneParam < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneParam::type_
+
+          def initialize: (
+            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneParam::type_
+          ) -> void
+
+          def to_hash: -> {
+            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneParam::type_
+          }
+
+          type type_ = :none
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            NONE: :none
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneParam::type_]
+          end
+        end
+      end
+    end
+  end
+end

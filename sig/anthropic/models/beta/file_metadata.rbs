@@ -9,7 +9,8 @@ module Anthropic
           mime_type: String,
           size_bytes: Integer,
           type: :file,
-          downloadable: bool
+          downloadable: bool,
+          scope: Anthropic::Beta::BetaFileScope?
         }
 
       class FileMetadata < Anthropic::Internal::Type::BaseModel
@@ -29,6 +30,8 @@ module Anthropic
 
         def downloadable=: (bool) -> bool
 
+        attr_accessor scope: Anthropic::Beta::BetaFileScope?
+
         def initialize: (
           id: String,
           created_at: Time,
@@ -36,6 +39,7 @@ module Anthropic
           mime_type: String,
           size_bytes: Integer,
           ?downloadable: bool,
+          ?scope: Anthropic::Beta::BetaFileScope?,
           ?type: :file
         ) -> void
 
@@ -46,7 +50,8 @@ module Anthropic
           mime_type: String,
           size_bytes: Integer,
           type: :file,
-          downloadable: bool
+          downloadable: bool,
+          scope: Anthropic::Beta::BetaFileScope?
         }
       end
     end

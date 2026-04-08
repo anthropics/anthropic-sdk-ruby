@@ -30,13 +30,20 @@ module Anthropic
         #   @return [Integer, nil]
         optional :limit, Integer
 
+        # @!attribute scope_id
+        #   Filter by scope ID. Only returns files associated with the specified scope
+        #   (e.g., a session ID).
+        #
+        #   @return [String, nil]
+        optional :scope_id, String
+
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {})
+        # @!method initialize(after_id: nil, before_id: nil, limit: nil, scope_id: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::FileListParams} for more details.
         #
@@ -45,6 +52,8 @@ module Anthropic
         #   @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
         #
         #   @param limit [Integer] Number of items to return per page.
+        #
+        #   @param scope_id [String] Filter by scope ID. Only returns files associated with the specified scope (e.g.
         #
         #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #

@@ -1,0 +1,115 @@
+# typed: strong
+
+module Anthropic
+  module Models
+    BetaManagedAgentsModelConfig = Beta::BetaManagedAgentsModelConfig
+
+    module Beta
+      class BetaManagedAgentsModelConfig < Anthropic::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              Anthropic::Beta::BetaManagedAgentsModelConfig,
+              Anthropic::Internal::AnyHash
+            )
+          end
+
+        # The model that will power your agent.\n\nSee
+        # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+        # details and options.
+        sig { returns(Anthropic::Beta::BetaManagedAgentsModel::Variants) }
+        attr_accessor :id
+
+        # Inference speed mode. `fast` provides significantly faster output token
+        # generation at premium pricing. Not all models support `fast`; invalid
+        # combinations are rejected at create time.
+        sig do
+          returns(
+            T.nilable(
+              Anthropic::Beta::BetaManagedAgentsModelConfig::Speed::TaggedSymbol
+            )
+          )
+        end
+        attr_reader :speed
+
+        sig do
+          params(
+            speed:
+              Anthropic::Beta::BetaManagedAgentsModelConfig::Speed::OrSymbol
+          ).void
+        end
+        attr_writer :speed
+
+        # Model identifier and configuration.
+        sig do
+          params(
+            id:
+              T.any(Anthropic::Beta::BetaManagedAgentsModel::OrSymbol, String),
+            speed:
+              Anthropic::Beta::BetaManagedAgentsModelConfig::Speed::OrSymbol
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # The model that will power your agent.\n\nSee
+          # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+          # details and options.
+          id:,
+          # Inference speed mode. `fast` provides significantly faster output token
+          # generation at premium pricing. Not all models support `fast`; invalid
+          # combinations are rejected at create time.
+          speed: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              id: Anthropic::Beta::BetaManagedAgentsModel::Variants,
+              speed:
+                Anthropic::Beta::BetaManagedAgentsModelConfig::Speed::TaggedSymbol
+            }
+          )
+        end
+        def to_hash
+        end
+
+        # Inference speed mode. `fast` provides significantly faster output token
+        # generation at premium pricing. Not all models support `fast`; invalid
+        # combinations are rejected at create time.
+        module Speed
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                Anthropic::Beta::BetaManagedAgentsModelConfig::Speed
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          STANDARD =
+            T.let(
+              :standard,
+              Anthropic::Beta::BetaManagedAgentsModelConfig::Speed::TaggedSymbol
+            )
+          FAST =
+            T.let(
+              :fast,
+              Anthropic::Beta::BetaManagedAgentsModelConfig::Speed::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaManagedAgentsModelConfig::Speed::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+      end
+    end
+  end
+end

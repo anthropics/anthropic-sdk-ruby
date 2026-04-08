@@ -1,0 +1,62 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Agents
+        attr_reader versions: Anthropic::Resources::Beta::Agents::Versions
+
+        def create: (
+          model: Anthropic::Models::Beta::AgentCreateParams::model,
+          name: String,
+          ?description: String?,
+          ?mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
+          ?metadata: ::Hash[Symbol, String],
+          ?skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params],
+          ?system_: String?,
+          ?tools: ::Array[Anthropic::Models::Beta::AgentCreateParams::tool],
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsAgent
+
+        def retrieve: (
+          String agent_id,
+          ?version: Integer,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsAgent
+
+        def update: (
+          String agent_id,
+          version: Integer,
+          ?description: String?,
+          ?mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?,
+          ?metadata: ::Hash[Symbol, String?]?,
+          ?model: Anthropic::Models::Beta::AgentUpdateParams::model,
+          ?name: String,
+          ?skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]?,
+          ?system_: String?,
+          ?tools: ::Array[Anthropic::Models::Beta::AgentUpdateParams::tool]?,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsAgent
+
+        def list: (
+          ?created_at_gte: Time,
+          ?created_at_lte: Time,
+          ?include_archived: bool,
+          ?limit: Integer,
+          ?page: String,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaManagedAgentsAgent]
+
+        def archive: (
+          String agent_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsAgent
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

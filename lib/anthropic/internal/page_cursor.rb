@@ -10,8 +10,8 @@ module Anthropic
     #   end
     #
     # @example
-    #   page_cursor.auto_paging_each do |skill|
-    #     puts(skill)
+    #   page_cursor.auto_paging_each do |agent|
+    #     puts(agent)
     #   end
     class PageCursor
       include Anthropic::Internal::Type::BasePage
@@ -19,15 +19,12 @@ module Anthropic
       # @return [Array<generic<Elem>>, nil]
       attr_accessor :data
 
-      # @return [Boolean]
-      attr_accessor :has_more
-
       # @return [String, nil]
       attr_accessor :next_page_
 
       # @return [Boolean]
       def next_page?
-        has_more
+        !data.to_a.empty? && !next_page_.to_s.empty?
       end
 
       # @raise [Anthropic::HTTP::Error]
@@ -73,7 +70,6 @@ module Anthropic
           @data = data.map { Anthropic::Internal::Type::Converter.coerce(@model, _1) }
         else
         end
-        @has_more = page_data[:has_more]
         @next_page_ = page_data[:next_page]
       end
 
@@ -81,11 +77,9 @@ module Anthropic
       #
       # @return [String]
       def inspect
-        # rubocop:disable Layout/LineLength
         model = Anthropic::Internal::Type::Converter.inspect(@model, depth: 1)
 
-        "#<#{self.class}[#{model}]:0x#{object_id.to_s(16)} has_more=#{has_more.inspect} next_page_=#{next_page_.inspect}>"
-        # rubocop:enable Layout/LineLength
+        "#<#{self.class}[#{model}]:0x#{object_id.to_s(16)} next_page_=#{next_page_.inspect}>"
       end
     end
   end

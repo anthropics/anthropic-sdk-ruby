@@ -1,0 +1,74 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_user_custom_tool_result_event =
+          {
+            id: String,
+            custom_tool_use_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::type_,
+            content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::content],
+            is_error: bool?,
+            processed_at: Time?
+          }
+
+        class BetaManagedAgentsUserCustomToolResultEvent < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor custom_tool_use_id: String
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::type_
+
+          attr_reader content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::content]?
+
+          def content=: (
+            ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::content]
+          ) -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::content]
+
+          attr_accessor is_error: bool?
+
+          attr_accessor processed_at: Time?
+
+          def initialize: (
+            id: String,
+            custom_tool_use_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::type_,
+            ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::content],
+            ?is_error: bool?,
+            ?processed_at: Time?
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            custom_tool_use_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::type_,
+            content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::content],
+            is_error: bool?,
+            processed_at: Time?
+          }
+
+          type type_ = :"user.custom_tool_result"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            USER_CUSTOM_TOOL_RESULT: :"user.custom_tool_result"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::type_]
+          end
+
+          type content =
+            Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock
+            | Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock
+            | Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock
+
+          module Content
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::content]
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsModelConfigParams = Beta::BetaManagedAgentsModelConfigParams
+
+    module Beta
+      type beta_managed_agents_model_config_params =
+        {
+          id: Anthropic::Models::Beta::beta_managed_agents_model,
+          speed: Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::speed?
+        }
+
+      class BetaManagedAgentsModelConfigParams < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: Anthropic::Models::Beta::beta_managed_agents_model
+
+        attr_accessor speed: Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::speed?
+
+        def initialize: (
+          id: Anthropic::Models::Beta::beta_managed_agents_model,
+          ?speed: Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::speed?
+        ) -> void
+
+        def to_hash: -> {
+          id: Anthropic::Models::Beta::beta_managed_agents_model,
+          speed: Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::speed?
+        }
+
+        type speed = :standard | :fast
+
+        module Speed
+          extend Anthropic::Internal::Type::Enum
+
+          STANDARD: :standard
+          FAST: :fast
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::speed]
+        end
+      end
+    end
+  end
+end

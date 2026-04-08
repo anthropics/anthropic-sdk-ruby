@@ -1,0 +1,107 @@
+module Anthropic
+  module Models
+    module Beta
+      type agent_create_params =
+        {
+          model: Anthropic::Models::Beta::AgentCreateParams::model,
+          name: String,
+          description: String?,
+          mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
+          metadata: ::Hash[Symbol, String],
+          skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params],
+          system_: String?,
+          tools: ::Array[Anthropic::Models::Beta::AgentCreateParams::tool],
+          betas: ::Array[Anthropic::Models::anthropic_beta]
+        }
+        & Anthropic::Internal::Type::request_parameters
+
+      class AgentCreateParams < Anthropic::Internal::Type::BaseModel
+        extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
+
+        attr_accessor model: Anthropic::Models::Beta::AgentCreateParams::model
+
+        attr_accessor name: String
+
+        attr_accessor description: String?
+
+        attr_reader mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?
+
+        def mcp_servers=: (
+          ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]
+        ) -> ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]
+
+        attr_reader metadata: ::Hash[Symbol, String]?
+
+        def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+        attr_reader skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]?
+
+        def skills=: (
+          ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]
+        ) -> ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]
+
+        attr_accessor system_: String?
+
+        attr_reader tools: ::Array[Anthropic::Models::Beta::AgentCreateParams::tool]?
+
+        def tools=: (
+          ::Array[Anthropic::Models::Beta::AgentCreateParams::tool]
+        ) -> ::Array[Anthropic::Models::Beta::AgentCreateParams::tool]
+
+        attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+        def betas=: (
+          ::Array[Anthropic::Models::anthropic_beta]
+        ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+        def initialize: (
+          model: Anthropic::Models::Beta::AgentCreateParams::model,
+          name: String,
+          ?description: String?,
+          ?mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
+          ?metadata: ::Hash[Symbol, String],
+          ?skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params],
+          ?system_: String?,
+          ?tools: ::Array[Anthropic::Models::Beta::AgentCreateParams::tool],
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          model: Anthropic::Models::Beta::AgentCreateParams::model,
+          name: String,
+          description: String?,
+          mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
+          metadata: ::Hash[Symbol, String],
+          skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params],
+          system_: String?,
+          tools: ::Array[Anthropic::Models::Beta::AgentCreateParams::tool],
+          betas: ::Array[Anthropic::Models::anthropic_beta],
+          request_options: Anthropic::RequestOptions
+        }
+
+        type model =
+          Anthropic::Models::Beta::beta_managed_agents_model
+          | Anthropic::Beta::BetaManagedAgentsModelConfigParams
+
+        module Model
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::AgentCreateParams::model]
+        end
+
+        type tool =
+          Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params
+          | Anthropic::Beta::BetaManagedAgentsMCPToolsetParams
+          | Anthropic::Beta::BetaManagedAgentsCustomToolParams
+
+        module Tool
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::AgentCreateParams::tool]
+        end
+      end
+    end
+  end
+end

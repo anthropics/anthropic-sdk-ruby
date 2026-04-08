@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_send_session_events =
+          {
+            data: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSendSessionEvents::data]
+          }
+
+        class BetaManagedAgentsSendSessionEvents < Anthropic::Internal::Type::BaseModel
+          attr_reader data: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSendSessionEvents::data]?
+
+          def data=: (
+            ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSendSessionEvents::data]
+          ) -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSendSessionEvents::data]
+
+          def initialize: (
+            ?data: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSendSessionEvents::data]
+          ) -> void
+
+          def to_hash: -> {
+            data: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSendSessionEvents::data]
+          }
+
+          type data =
+            Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent
+            | Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent
+            | Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent
+            | Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent
+
+          module Data
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSendSessionEvents::data]
+          end
+        end
+      end
+    end
+  end
+end

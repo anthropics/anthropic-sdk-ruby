@@ -1,0 +1,60 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_mcp_connection_failed_error =
+          {
+            mcp_server_name: String,
+            message: String,
+            retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::retry_status,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::type_
+          }
+
+        class BetaManagedAgentsMCPConnectionFailedError < Anthropic::Internal::Type::BaseModel
+          attr_accessor mcp_server_name: String
+
+          attr_accessor message: String
+
+          attr_accessor retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::retry_status
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::type_
+
+          def initialize: (
+            mcp_server_name: String,
+            message: String,
+            retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::retry_status,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::type_
+          ) -> void
+
+          def to_hash: -> {
+            mcp_server_name: String,
+            message: String,
+            retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::retry_status,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::type_
+          }
+
+          type retry_status =
+            Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal
+
+          module RetryStatus
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::retry_status]
+          end
+
+          type type_ = :mcp_connection_failed_error
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            MCP_CONNECTION_FAILED_ERROR: :mcp_connection_failed_error
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::type_]
+          end
+        end
+      end
+    end
+  end
+end

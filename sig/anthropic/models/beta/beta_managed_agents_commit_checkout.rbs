@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsCommitCheckout = Beta::BetaManagedAgentsCommitCheckout
+
+    module Beta
+      type beta_managed_agents_commit_checkout =
+        {
+          sha: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsCommitCheckout::type_
+        }
+
+      class BetaManagedAgentsCommitCheckout < Anthropic::Internal::Type::BaseModel
+        attr_accessor sha: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsCommitCheckout::type_
+
+        def initialize: (
+          sha: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsCommitCheckout::type_
+        ) -> void
+
+        def to_hash: -> {
+          sha: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsCommitCheckout::type_
+        }
+
+        type type_ = :commit
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          COMMIT: :commit
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsCommitCheckout::type_]
+        end
+      end
+    end
+  end
+end

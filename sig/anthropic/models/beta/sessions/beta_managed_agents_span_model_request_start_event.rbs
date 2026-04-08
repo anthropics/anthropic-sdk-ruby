@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_span_model_request_start_event =
+          {
+            id: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent::type_
+          }
+
+        class BetaManagedAgentsSpanModelRequestStartEvent < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor processed_at: Time
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent::type_
+
+          def initialize: (
+            id: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent::type_
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent::type_
+          }
+
+          type type_ = :"span.model_request_start"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            SPAN_MODEL_REQUEST_START: :"span.model_request_start"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent::type_]
+          end
+        end
+      end
+    end
+  end
+end

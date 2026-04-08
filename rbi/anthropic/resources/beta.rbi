@@ -9,6 +9,18 @@ module Anthropic
       sig { returns(Anthropic::Resources::Beta::Messages) }
       attr_reader :messages
 
+      sig { returns(Anthropic::Resources::Beta::Agents) }
+      attr_reader :agents
+
+      sig { returns(Anthropic::Resources::Beta::Environments) }
+      attr_reader :environments
+
+      sig { returns(Anthropic::Resources::Beta::Sessions) }
+      attr_reader :sessions
+
+      sig { returns(Anthropic::Resources::Beta::Vaults) }
+      attr_reader :vaults
+
       sig { returns(Anthropic::Resources::Beta::Files) }
       attr_reader :files
 

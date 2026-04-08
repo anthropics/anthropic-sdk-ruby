@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsAgentToolset20260401 = Beta::BetaManagedAgentsAgentToolset20260401
+
+    module Beta
+      type beta_managed_agents_agent_toolset20260401 =
+        {
+          configs: ::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfig],
+          default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfig,
+          type: Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401::type_
+        }
+
+      class BetaManagedAgentsAgentToolset20260401 < Anthropic::Internal::Type::BaseModel
+        attr_accessor configs: ::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfig]
+
+        attr_accessor default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfig
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401::type_
+
+        def initialize: (
+          configs: ::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfig],
+          default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfig,
+          type: Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401::type_
+        ) -> void
+
+        def to_hash: -> {
+          configs: ::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfig],
+          default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfig,
+          type: Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401::type_
+        }
+
+        type type_ = :agent_toolset_20260401
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          AGENT_TOOLSET_20260401: :agent_toolset_20260401
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401::type_]
+        end
+      end
+    end
+  end
+end

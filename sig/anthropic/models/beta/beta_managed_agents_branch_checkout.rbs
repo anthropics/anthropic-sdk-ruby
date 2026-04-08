@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsBranchCheckout = Beta::BetaManagedAgentsBranchCheckout
+
+    module Beta
+      type beta_managed_agents_branch_checkout =
+        {
+          name: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsBranchCheckout::type_
+        }
+
+      class BetaManagedAgentsBranchCheckout < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsBranchCheckout::type_
+
+        def initialize: (
+          name: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsBranchCheckout::type_
+        ) -> void
+
+        def to_hash: -> {
+          name: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsBranchCheckout::type_
+        }
+
+        type type_ = :branch
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          BRANCH: :branch
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsBranchCheckout::type_]
+        end
+      end
+    end
+  end
+end
