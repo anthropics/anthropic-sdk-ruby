@@ -1,0 +1,55 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_unknown_error =
+          {
+            message: String,
+            retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError::retry_status,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError::type_
+          }
+
+        class BetaManagedAgentsUnknownError < Anthropic::Internal::Type::BaseModel
+          attr_accessor message: String
+
+          attr_accessor retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError::retry_status
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError::type_
+
+          def initialize: (
+            message: String,
+            retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError::retry_status,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError::type_
+          ) -> void
+
+          def to_hash: -> {
+            message: String,
+            retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError::retry_status,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError::type_
+          }
+
+          type retry_status =
+            Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal
+
+          module RetryStatus
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError::retry_status]
+          end
+
+          type type_ = :unknown_error
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            UNKNOWN_ERROR: :unknown_error
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError::type_]
+          end
+        end
+      end
+    end
+  end
+end

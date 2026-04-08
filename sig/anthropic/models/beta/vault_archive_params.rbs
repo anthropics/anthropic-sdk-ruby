@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    module Beta
+      type vault_archive_params =
+        { vault_id: String, betas: ::Array[Anthropic::Models::anthropic_beta] }
+        & Anthropic::Internal::Type::request_parameters
+
+      class VaultArchiveParams < Anthropic::Internal::Type::BaseModel
+        extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
+
+        attr_accessor vault_id: String
+
+        attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+        def betas=: (
+          ::Array[Anthropic::Models::anthropic_beta]
+        ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+        def initialize: (
+          vault_id: String,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          vault_id: String,
+          betas: ::Array[Anthropic::Models::anthropic_beta],
+          request_options: Anthropic::RequestOptions
+        }
+      end
+    end
+  end
+end

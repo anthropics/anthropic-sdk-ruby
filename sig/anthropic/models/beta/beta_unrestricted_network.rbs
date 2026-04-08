@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaUnrestrictedNetwork = Beta::BetaUnrestrictedNetwork
+
+    module Beta
+      type beta_unrestricted_network = { type: :unrestricted }
+
+      class BetaUnrestrictedNetwork < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :unrestricted
+
+        def initialize: (?type: :unrestricted) -> void
+
+        def to_hash: -> { type: :unrestricted }
+      end
+    end
+  end
+end

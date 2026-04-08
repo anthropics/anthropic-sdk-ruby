@@ -44,6 +44,16 @@ module Anthropic
         sig { params(downloadable: T::Boolean).void }
         attr_writer :downloadable
 
+        # The scope of this file, indicating the context in which it was created (e.g., a
+        # session).
+        sig { returns(T.nilable(Anthropic::Beta::BetaFileScope)) }
+        attr_reader :scope
+
+        sig do
+          params(scope: T.nilable(Anthropic::Beta::BetaFileScope::OrHash)).void
+        end
+        attr_writer :scope
+
         sig do
           params(
             id: String,
@@ -52,6 +62,7 @@ module Anthropic
             mime_type: String,
             size_bytes: Integer,
             downloadable: T::Boolean,
+            scope: T.nilable(Anthropic::Beta::BetaFileScope::OrHash),
             type: Symbol
           ).returns(T.attached_class)
         end
@@ -70,6 +81,9 @@ module Anthropic
           size_bytes:,
           # Whether the file can be downloaded.
           downloadable: nil,
+          # The scope of this file, indicating the context in which it was created (e.g., a
+          # session).
+          scope: nil,
           # Object type.
           #
           # For files, this is always `"file"`.
@@ -86,7 +100,8 @@ module Anthropic
               mime_type: String,
               size_bytes: Integer,
               type: Symbol,
-              downloadable: T::Boolean
+              downloadable: T::Boolean,
+              scope: T.nilable(Anthropic::Beta::BetaFileScope)
             }
           )
         end

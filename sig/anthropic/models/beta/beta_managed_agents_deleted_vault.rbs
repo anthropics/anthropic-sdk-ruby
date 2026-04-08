@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsDeletedVault = Beta::BetaManagedAgentsDeletedVault
+
+    module Beta
+      type beta_managed_agents_deleted_vault =
+        {
+          id: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeletedVault::type_
+        }
+
+      class BetaManagedAgentsDeletedVault < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsDeletedVault::type_
+
+        def initialize: (
+          id: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeletedVault::type_
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeletedVault::type_
+        }
+
+        type type_ = :vault_deleted
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          VAULT_DELETED: :vault_deleted
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsDeletedVault::type_]
+        end
+      end
+    end
+  end
+end

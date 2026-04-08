@@ -1,0 +1,69 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsAgentToolConfigParams = Beta::BetaManagedAgentsAgentToolConfigParams
+
+    module Beta
+      type beta_managed_agents_agent_tool_config_params =
+        {
+          name: Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::name_,
+          enabled: bool?,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::permission_policy?
+        }
+
+      class BetaManagedAgentsAgentToolConfigParams < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::name_
+
+        attr_accessor enabled: bool?
+
+        attr_accessor permission_policy: Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::permission_policy?
+
+        def initialize: (
+          name: Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::name_,
+          ?enabled: bool?,
+          ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::permission_policy?
+        ) -> void
+
+        def to_hash: -> {
+          name: Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::name_,
+          enabled: bool?,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::permission_policy?
+        }
+
+        type name_ =
+          :bash
+          | :edit
+          | :read
+          | :write
+          | :glob
+          | :grep
+          | :web_fetch
+          | :web_search
+
+        module Name
+          extend Anthropic::Internal::Type::Enum
+
+          BASH: :bash
+          EDIT: :edit
+          READ: :read
+          WRITE: :write
+          GLOB: :glob
+          GREP: :grep
+          WEB_FETCH: :web_fetch
+          WEB_SEARCH: :web_search
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::name_]
+        end
+
+        type permission_policy =
+          Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
+          | Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+
+        module PermissionPolicy
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::permission_policy]
+        end
+      end
+    end
+  end
+end

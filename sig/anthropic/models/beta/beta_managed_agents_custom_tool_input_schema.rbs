@@ -1,0 +1,50 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsCustomToolInputSchema = Beta::BetaManagedAgentsCustomToolInputSchema
+
+    module Beta
+      type beta_managed_agents_custom_tool_input_schema =
+        {
+          properties: ::Hash[Symbol, top]?,
+          required: ::Array[String],
+          type: Anthropic::Models::Beta::BetaManagedAgentsCustomToolInputSchema::type_
+        }
+
+      class BetaManagedAgentsCustomToolInputSchema < Anthropic::Internal::Type::BaseModel
+        attr_accessor properties: ::Hash[Symbol, top]?
+
+        attr_reader required: ::Array[String]?
+
+        def required=: (::Array[String]) -> ::Array[String]
+
+        attr_reader type: Anthropic::Models::Beta::BetaManagedAgentsCustomToolInputSchema::type_?
+
+        def type=: (
+          Anthropic::Models::Beta::BetaManagedAgentsCustomToolInputSchema::type_
+        ) -> Anthropic::Models::Beta::BetaManagedAgentsCustomToolInputSchema::type_
+
+        def initialize: (
+          ?properties: ::Hash[Symbol, top]?,
+          ?required: ::Array[String],
+          ?type: Anthropic::Models::Beta::BetaManagedAgentsCustomToolInputSchema::type_
+        ) -> void
+
+        def to_hash: -> {
+          properties: ::Hash[Symbol, top]?,
+          required: ::Array[String],
+          type: Anthropic::Models::Beta::BetaManagedAgentsCustomToolInputSchema::type_
+        }
+
+        type type_ = :object
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          OBJECT: :object
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsCustomToolInputSchema::type_]
+        end
+      end
+    end
+  end
+end

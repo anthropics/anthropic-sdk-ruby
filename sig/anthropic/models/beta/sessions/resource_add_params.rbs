@@ -1,0 +1,41 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type resource_add_params =
+          {
+            session_id: String,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class ResourceAddParams < Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          def session_id: -> String
+
+          def session_id=: (String _) -> String
+
+          def betas: -> ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta] _
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          def initialize: (
+            session_id: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            session_id: String,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

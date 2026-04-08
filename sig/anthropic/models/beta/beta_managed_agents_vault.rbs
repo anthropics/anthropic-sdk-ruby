@@ -1,0 +1,64 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsVault = Beta::BetaManagedAgentsVault
+
+    module Beta
+      type beta_managed_agents_vault =
+        {
+          id: String,
+          archived_at: Time?,
+          created_at: Time,
+          display_name: String,
+          metadata: ::Hash[Symbol, String],
+          type: Anthropic::Models::Beta::BetaManagedAgentsVault::type_,
+          updated_at: Time
+        }
+
+      class BetaManagedAgentsVault < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor archived_at: Time?
+
+        attr_accessor created_at: Time
+
+        attr_accessor display_name: String
+
+        attr_accessor metadata: ::Hash[Symbol, String]
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsVault::type_
+
+        attr_accessor updated_at: Time
+
+        def initialize: (
+          id: String,
+          archived_at: Time?,
+          created_at: Time,
+          display_name: String,
+          metadata: ::Hash[Symbol, String],
+          type: Anthropic::Models::Beta::BetaManagedAgentsVault::type_,
+          updated_at: Time
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          archived_at: Time?,
+          created_at: Time,
+          display_name: String,
+          metadata: ::Hash[Symbol, String],
+          type: Anthropic::Models::Beta::BetaManagedAgentsVault::type_,
+          updated_at: Time
+        }
+
+        type type_ = :vault
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          VAULT: :vault
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsVault::type_]
+        end
+      end
+    end
+  end
+end

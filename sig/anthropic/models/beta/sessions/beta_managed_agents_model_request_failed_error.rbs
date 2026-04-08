@@ -1,0 +1,55 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_model_request_failed_error =
+          {
+            message: String,
+            retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::retry_status,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::type_
+          }
+
+        class BetaManagedAgentsModelRequestFailedError < Anthropic::Internal::Type::BaseModel
+          attr_accessor message: String
+
+          attr_accessor retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::retry_status
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::type_
+
+          def initialize: (
+            message: String,
+            retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::retry_status,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::type_
+          ) -> void
+
+          def to_hash: -> {
+            message: String,
+            retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::retry_status,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::type_
+          }
+
+          type retry_status =
+            Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal
+
+          module RetryStatus
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::retry_status]
+          end
+
+          type type_ = :model_request_failed_error
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            MODEL_REQUEST_FAILED_ERROR: :model_request_failed_error
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::type_]
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,55 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_model_overloaded_error =
+          {
+            message: String,
+            retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::retry_status,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::type_
+          }
+
+        class BetaManagedAgentsModelOverloadedError < Anthropic::Internal::Type::BaseModel
+          attr_accessor message: String
+
+          attr_accessor retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::retry_status
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::type_
+
+          def initialize: (
+            message: String,
+            retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::retry_status,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::type_
+          ) -> void
+
+          def to_hash: -> {
+            message: String,
+            retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::retry_status,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::type_
+          }
+
+          type retry_status =
+            Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal
+
+          module RetryStatus
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::retry_status]
+          end
+
+          type type_ = :model_overloaded_error
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            MODEL_OVERLOADED_ERROR: :model_overloaded_error
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::type_]
+          end
+        end
+      end
+    end
+  end
+end

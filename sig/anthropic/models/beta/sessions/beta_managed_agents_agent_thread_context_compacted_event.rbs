@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_agent_thread_context_compacted_event =
+          {
+            id: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::type_
+          }
+
+        class BetaManagedAgentsAgentThreadContextCompactedEvent < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor processed_at: Time
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::type_
+
+          def initialize: (
+            id: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::type_
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::type_
+          }
+
+          type type_ = :"agent.thread_context_compacted"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            AGENT_THREAD_CONTEXT_COMPACTED: :"agent.thread_context_compacted"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent::type_]
+          end
+        end
+      end
+    end
+  end
+end

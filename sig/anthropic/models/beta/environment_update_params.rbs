@@ -1,0 +1,59 @@
+module Anthropic
+  module Models
+    module Beta
+      type environment_update_params =
+        {
+          environment_id: String,
+          config: Anthropic::Beta::BetaCloudConfigParams?,
+          description: String?,
+          metadata: ::Hash[Symbol, String?],
+          name: String?,
+          betas: ::Array[Anthropic::Models::anthropic_beta]
+        }
+        & Anthropic::Internal::Type::request_parameters
+
+      class EnvironmentUpdateParams < Anthropic::Internal::Type::BaseModel
+        extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
+
+        attr_accessor environment_id: String
+
+        attr_accessor config: Anthropic::Beta::BetaCloudConfigParams?
+
+        attr_accessor description: String?
+
+        attr_reader metadata: ::Hash[Symbol, String?]?
+
+        def metadata=: (::Hash[Symbol, String?]) -> ::Hash[Symbol, String?]
+
+        attr_accessor name: String?
+
+        attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+        def betas=: (
+          ::Array[Anthropic::Models::anthropic_beta]
+        ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+        def initialize: (
+          environment_id: String,
+          ?config: Anthropic::Beta::BetaCloudConfigParams?,
+          ?description: String?,
+          ?metadata: ::Hash[Symbol, String?],
+          ?name: String?,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          environment_id: String,
+          config: Anthropic::Beta::BetaCloudConfigParams?,
+          description: String?,
+          metadata: ::Hash[Symbol, String?],
+          name: String?,
+          betas: ::Array[Anthropic::Models::anthropic_beta],
+          request_options: Anthropic::RequestOptions
+        }
+      end
+    end
+  end
+end

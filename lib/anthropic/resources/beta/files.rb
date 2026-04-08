@@ -9,13 +9,15 @@ module Anthropic
         #
         # List Files
         #
-        # @overload list(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {})
+        # @overload list(after_id: nil, before_id: nil, limit: nil, scope_id: nil, betas: nil, request_options: {})
         #
         # @param after_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
         #
         # @param before_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
         #
         # @param limit [Integer] Query param: Number of items to return per page.
+        #
+        # @param scope_id [String] Query param: Filter by scope ID. Only returns files associated with the specifie
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
@@ -25,7 +27,7 @@ module Anthropic
         #
         # @see Anthropic::Models::Beta::FileListParams
         def list(params = {})
-          query_params = [:after_id, :before_id, :limit]
+          query_params = [:after_id, :before_id, :limit, :scope_id]
           parsed, options = Anthropic::Beta::FileListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(

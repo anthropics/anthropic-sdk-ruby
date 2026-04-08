@@ -1,0 +1,19 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Agents
+        class Versions
+          def list: (
+            String agent_id,
+            ?limit: Integer,
+            ?page: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaManagedAgentsAgent]
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

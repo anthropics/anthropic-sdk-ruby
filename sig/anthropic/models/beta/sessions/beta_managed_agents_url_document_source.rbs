@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_url_document_source =
+          {
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource::type_,
+            url: String
+          }
+
+        class BetaManagedAgentsURLDocumentSource < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource::type_
+
+          attr_accessor url: String
+
+          def initialize: (
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource::type_,
+            url: String
+          ) -> void
+
+          def to_hash: -> {
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource::type_,
+            url: String
+          }
+
+          type type_ = :url
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            URL: :url
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource::type_]
+          end
+        end
+      end
+    end
+  end
+end

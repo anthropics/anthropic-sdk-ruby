@@ -1,0 +1,74 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_agent_mcp_tool_result_event =
+          {
+            id: String,
+            mcp_tool_use_id: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::type_,
+            content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::content],
+            is_error: bool?
+          }
+
+        class BetaManagedAgentsAgentMCPToolResultEvent < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor mcp_tool_use_id: String
+
+          attr_accessor processed_at: Time
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::type_
+
+          attr_reader content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::content]?
+
+          def content=: (
+            ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::content]
+          ) -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::content]
+
+          attr_accessor is_error: bool?
+
+          def initialize: (
+            id: String,
+            mcp_tool_use_id: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::type_,
+            ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::content],
+            ?is_error: bool?
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            mcp_tool_use_id: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::type_,
+            content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::content],
+            is_error: bool?
+          }
+
+          type type_ = :"agent.mcp_tool_result"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            AGENT_MCP_TOOL_RESULT: :"agent.mcp_tool_result"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::type_]
+          end
+
+          type content =
+            Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock
+            | Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock
+            | Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock
+
+          module Content
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::content]
+          end
+        end
+      end
+    end
+  end
+end

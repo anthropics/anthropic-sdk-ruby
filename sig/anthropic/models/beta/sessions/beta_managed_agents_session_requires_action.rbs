@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_session_requires_action =
+          {
+            event_ids: ::Array[String],
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction::type_
+          }
+
+        class BetaManagedAgentsSessionRequiresAction < Anthropic::Internal::Type::BaseModel
+          attr_accessor event_ids: ::Array[String]
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction::type_
+
+          def initialize: (
+            event_ids: ::Array[String],
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction::type_
+          ) -> void
+
+          def to_hash: -> {
+            event_ids: ::Array[String],
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction::type_
+          }
+
+          type type_ = :requires_action
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            REQUIRES_ACTION: :requires_action
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction::type_]
+          end
+        end
+      end
+    end
+  end
+end

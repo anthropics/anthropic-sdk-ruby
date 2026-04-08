@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    module Beta
+      module Vaults
+        type beta_managed_agents_mcpo_auth_refresh_update_params =
+          {
+            refresh_token: String?,
+            scope: String?,
+            token_endpoint_auth: Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams::token_endpoint_auth
+          }
+
+        class BetaManagedAgentsMCPOAuthRefreshUpdateParams < Anthropic::Internal::Type::BaseModel
+          attr_accessor refresh_token: String?
+
+          attr_accessor scope: String?
+
+          attr_reader token_endpoint_auth: Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams::token_endpoint_auth?
+
+          def token_endpoint_auth=: (
+            Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams::token_endpoint_auth
+          ) -> Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams::token_endpoint_auth
+
+          def initialize: (
+            ?refresh_token: String?,
+            ?scope: String?,
+            ?token_endpoint_auth: Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams::token_endpoint_auth
+          ) -> void
+
+          def to_hash: -> {
+            refresh_token: String?,
+            scope: String?,
+            token_endpoint_auth: Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams::token_endpoint_auth
+          }
+
+          type token_endpoint_auth =
+            Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam
+            | Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam
+
+          module TokenEndpointAuth
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams::token_endpoint_auth]
+          end
+        end
+      end
+    end
+  end
+end

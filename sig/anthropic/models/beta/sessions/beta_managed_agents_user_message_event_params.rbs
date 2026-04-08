@@ -1,0 +1,50 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_user_message_event_params =
+          {
+            content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::content],
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::type_
+          }
+
+        class BetaManagedAgentsUserMessageEventParams < Anthropic::Internal::Type::BaseModel
+          attr_accessor content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::content]
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::type_
+
+          def initialize: (
+            content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::content],
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::type_
+          ) -> void
+
+          def to_hash: -> {
+            content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::content],
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::type_
+          }
+
+          type content =
+            Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock
+            | Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock
+            | Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock
+
+          module Content
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::content]
+          end
+
+          type type_ = :"user.message"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            USER_MESSAGE: :"user.message"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::type_]
+          end
+        end
+      end
+    end
+  end
+end

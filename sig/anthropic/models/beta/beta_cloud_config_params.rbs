@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    class BetaCloudConfigParams = Beta::BetaCloudConfigParams
+
+    module Beta
+      type beta_cloud_config_params =
+        {
+          type: :cloud,
+          networking: Anthropic::Models::Beta::BetaCloudConfigParams::networking?,
+          packages: Anthropic::Beta::BetaPackagesParams?
+        }
+
+      class BetaCloudConfigParams < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :cloud
+
+        attr_accessor networking: Anthropic::Models::Beta::BetaCloudConfigParams::networking?
+
+        attr_accessor packages: Anthropic::Beta::BetaPackagesParams?
+
+        def initialize: (
+          ?networking: Anthropic::Models::Beta::BetaCloudConfigParams::networking?,
+          ?packages: Anthropic::Beta::BetaPackagesParams?,
+          ?type: :cloud
+        ) -> void
+
+        def to_hash: -> {
+          type: :cloud,
+          networking: Anthropic::Models::Beta::BetaCloudConfigParams::networking?,
+          packages: Anthropic::Beta::BetaPackagesParams?
+        }
+
+        type networking =
+          Anthropic::Beta::BetaUnrestrictedNetwork
+          | Anthropic::Beta::BetaLimitedNetworkParams
+
+        module Networking
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaCloudConfigParams::networking]
+        end
+      end
+    end
+  end
+end

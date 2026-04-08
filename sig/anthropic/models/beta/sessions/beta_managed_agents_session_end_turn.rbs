@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_session_end_turn =
+          {
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn::type_
+          }
+
+        class BetaManagedAgentsSessionEndTurn < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn::type_
+
+          def initialize: (
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn::type_
+          ) -> void
+
+          def to_hash: -> {
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn::type_
+          }
+
+          type type_ = :end_turn
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            END_TURN: :end_turn
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn::type_]
+          end
+        end
+      end
+    end
+  end
+end

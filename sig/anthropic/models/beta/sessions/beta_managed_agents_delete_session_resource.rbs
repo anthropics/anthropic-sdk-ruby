@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_delete_session_resource =
+          {
+            id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsDeleteSessionResource::type_
+          }
+
+        class BetaManagedAgentsDeleteSessionResource < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsDeleteSessionResource::type_
+
+          def initialize: (
+            id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsDeleteSessionResource::type_
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsDeleteSessionResource::type_
+          }
+
+          type type_ = :session_resource_deleted
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            SESSION_RESOURCE_DELETED: :session_resource_deleted
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsDeleteSessionResource::type_]
+          end
+        end
+      end
+    end
+  end
+end

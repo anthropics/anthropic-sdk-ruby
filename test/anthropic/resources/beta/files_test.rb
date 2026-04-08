@@ -25,7 +25,8 @@ class Anthropic::Test::Resources::Beta::FilesTest < Anthropic::Test::ResourceTes
         mime_type: String,
         size_bytes: Integer,
         type: Symbol,
-        downloadable: Anthropic::Internal::Type::Boolean | nil
+        downloadable: Anthropic::Internal::Type::Boolean | nil,
+        scope: Anthropic::Beta::BetaFileScope | nil
       }
     end
   end
@@ -68,7 +69,8 @@ class Anthropic::Test::Resources::Beta::FilesTest < Anthropic::Test::ResourceTes
         mime_type: String,
         size_bytes: Integer,
         type: Symbol,
-        downloadable: Anthropic::Internal::Type::Boolean | nil
+        downloadable: Anthropic::Internal::Type::Boolean | nil,
+        scope: Anthropic::Beta::BetaFileScope | nil
       }
     end
   end
@@ -88,7 +90,8 @@ class Anthropic::Test::Resources::Beta::FilesTest < Anthropic::Test::ResourceTes
         mime_type: String,
         size_bytes: Integer,
         type: Symbol,
-        downloadable: Anthropic::Internal::Type::Boolean | nil
+        downloadable: Anthropic::Internal::Type::Boolean | nil,
+        scope: Anthropic::Beta::BetaFileScope | nil
       }
     end
   end
