@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.31.0 (2026-04-08)
+
+Full Changelog: [v1.30.0...v1.31.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.30.0...v1.31.0)
+
+### Features
+
+* **api:** add support for Claude Managed Agents ([29ea039](https://github.com/anthropics/anthropic-sdk-ruby/commit/29ea03965f33fb0ed07472f7f061c70357f2c8f5))
+
 ## 1.30.0 (2026-04-07)
 
 Full Changelog: [v1.29.0...v1.30.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.29.0...v1.30.0)
