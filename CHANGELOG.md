@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.32.0 (2026-04-09)
+
+Full Changelog: [v1.31.0...v1.32.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.31.0...v1.32.0)
+
+### Features
+
+* **api:** Add beta advisor tool ([f749344](https://github.com/anthropics/anthropic-sdk-ruby/commit/f749344e0f74c02b3e58d6fcd403313615bc98a3))
+
+
+### Bug Fixes
+
+* multipart encoding for file arrays ([e6aae8b](https://github.com/anthropics/anthropic-sdk-ruby/commit/e6aae8b5e223e0dd2f72590c0c654a4fa629dcb1))
+
 ## 1.31.0 (2026-04-08)
 
 Full Changelog: [v1.30.0...v1.31.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.30.0...v1.31.0)
