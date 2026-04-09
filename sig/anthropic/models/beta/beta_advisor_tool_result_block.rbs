@@ -1,0 +1,45 @@
+module Anthropic
+  module Models
+    class BetaAdvisorToolResultBlock = Beta::BetaAdvisorToolResultBlock
+
+    module Beta
+      type beta_advisor_tool_result_block =
+        {
+          content: Anthropic::Models::Beta::BetaAdvisorToolResultBlock::content,
+          tool_use_id: String,
+          type: :advisor_tool_result
+        }
+
+      class BetaAdvisorToolResultBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: Anthropic::Models::Beta::BetaAdvisorToolResultBlock::content
+
+        attr_accessor tool_use_id: String
+
+        attr_accessor type: :advisor_tool_result
+
+        def initialize: (
+          content: Anthropic::Models::Beta::BetaAdvisorToolResultBlock::content,
+          tool_use_id: String,
+          ?type: :advisor_tool_result
+        ) -> void
+
+        def to_hash: -> {
+          content: Anthropic::Models::Beta::BetaAdvisorToolResultBlock::content,
+          tool_use_id: String,
+          type: :advisor_tool_result
+        }
+
+        type content =
+          Anthropic::Beta::BetaAdvisorToolResultError
+          | Anthropic::Beta::BetaAdvisorResultBlock
+          | Anthropic::Beta::BetaAdvisorRedactedResultBlock
+
+        module Content
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaAdvisorToolResultBlock::content]
+        end
+      end
+    end
+  end
+end

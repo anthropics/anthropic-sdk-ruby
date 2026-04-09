@@ -14,7 +14,8 @@ module Anthropic
           T.type_alias do
             T.any(
               Anthropic::Beta::BetaMessageIterationUsage,
-              Anthropic::Beta::BetaCompactionIterationUsage
+              Anthropic::Beta::BetaCompactionIterationUsage,
+              Anthropic::Beta::BetaAdvisorMessageIterationUsage
             )
           end
 

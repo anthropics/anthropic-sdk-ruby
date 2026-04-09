@@ -95,6 +95,11 @@ module Anthropic
             end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
+          ADVISOR =
+            T.let(
+              :advisor,
+              Anthropic::Beta::BetaServerToolUseBlock::Name::TaggedSymbol
+            )
           WEB_SEARCH =
             T.let(
               :web_search,

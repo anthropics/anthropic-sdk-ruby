@@ -15,8 +15,11 @@ module Anthropic
         # Token usage for a compaction iteration.
         variant :compaction, -> { Anthropic::Beta::BetaCompactionIterationUsage }
 
+        # Token usage for an advisor sub-inference iteration.
+        variant :advisor_message, -> { Anthropic::Beta::BetaAdvisorMessageIterationUsage }
+
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::Beta::BetaMessageIterationUsage, Anthropic::Models::Beta::BetaCompactionIterationUsage)]
+        #   @return [Array(Anthropic::Models::Beta::BetaMessageIterationUsage, Anthropic::Models::Beta::BetaCompactionIterationUsage, Anthropic::Models::Beta::BetaAdvisorMessageIterationUsage)]
       end
 
       # @type [Anthropic::Internal::Type::Converter]

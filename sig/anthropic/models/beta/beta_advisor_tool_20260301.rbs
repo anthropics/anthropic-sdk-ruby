@@ -1,0 +1,85 @@
+module Anthropic
+  module Models
+    class BetaAdvisorTool20260301 = Beta::BetaAdvisorTool20260301
+
+    module Beta
+      type beta_advisor_tool20260301 =
+        {
+          model: Anthropic::Models::model,
+          name: :advisor,
+          type: :advisor_20260301,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaAdvisorTool20260301::allowed_caller],
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          caching: Anthropic::Beta::BetaCacheControlEphemeral?,
+          defer_loading: bool,
+          max_uses: Integer?,
+          strict: bool
+        }
+
+      class BetaAdvisorTool20260301 < Anthropic::Internal::Type::BaseModel
+        attr_accessor model: Anthropic::Models::model
+
+        attr_accessor name: :advisor
+
+        attr_accessor type: :advisor_20260301
+
+        attr_reader allowed_callers: ::Array[Anthropic::Models::Beta::BetaAdvisorTool20260301::allowed_caller]?
+
+        def allowed_callers=: (
+          ::Array[Anthropic::Models::Beta::BetaAdvisorTool20260301::allowed_caller]
+        ) -> ::Array[Anthropic::Models::Beta::BetaAdvisorTool20260301::allowed_caller]
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        attr_accessor caching: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        attr_reader defer_loading: bool?
+
+        def defer_loading=: (bool) -> bool
+
+        attr_accessor max_uses: Integer?
+
+        attr_reader strict: bool?
+
+        def strict=: (bool) -> bool
+
+        def initialize: (
+          model: Anthropic::Models::model,
+          ?allowed_callers: ::Array[Anthropic::Models::Beta::BetaAdvisorTool20260301::allowed_caller],
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?caching: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?defer_loading: bool,
+          ?max_uses: Integer?,
+          ?strict: bool,
+          ?name: :advisor,
+          ?type: :advisor_20260301
+        ) -> void
+
+        def to_hash: -> {
+          model: Anthropic::Models::model,
+          name: :advisor,
+          type: :advisor_20260301,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaAdvisorTool20260301::allowed_caller],
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          caching: Anthropic::Beta::BetaCacheControlEphemeral?,
+          defer_loading: bool,
+          max_uses: Integer?,
+          strict: bool
+        }
+
+        type allowed_caller =
+          :direct | :code_execution_20250825 | :code_execution_20260120
+
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          DIRECT: :direct
+          CODE_EXECUTION_20250825: :code_execution_20250825
+          CODE_EXECUTION_20260120: :code_execution_20260120
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaAdvisorTool20260301::allowed_caller]
+        end
+      end
+    end
+  end
+end

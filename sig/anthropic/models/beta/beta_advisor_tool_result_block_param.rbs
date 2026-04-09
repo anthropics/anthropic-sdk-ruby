@@ -1,0 +1,50 @@
+module Anthropic
+  module Models
+    class BetaAdvisorToolResultBlockParam = Beta::BetaAdvisorToolResultBlockParam
+
+    module Beta
+      type beta_advisor_tool_result_block_param =
+        {
+          content: Anthropic::Models::Beta::BetaAdvisorToolResultBlockParam::content,
+          tool_use_id: String,
+          type: :advisor_tool_result,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+
+      class BetaAdvisorToolResultBlockParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: Anthropic::Models::Beta::BetaAdvisorToolResultBlockParam::content
+
+        attr_accessor tool_use_id: String
+
+        attr_accessor type: :advisor_tool_result
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        def initialize: (
+          content: Anthropic::Models::Beta::BetaAdvisorToolResultBlockParam::content,
+          tool_use_id: String,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?type: :advisor_tool_result
+        ) -> void
+
+        def to_hash: -> {
+          content: Anthropic::Models::Beta::BetaAdvisorToolResultBlockParam::content,
+          tool_use_id: String,
+          type: :advisor_tool_result,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+
+        type content =
+          Anthropic::Beta::BetaAdvisorToolResultErrorParam
+          | Anthropic::Beta::BetaAdvisorResultBlockParam
+          | Anthropic::Beta::BetaAdvisorRedactedResultBlockParam
+
+        module Content
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaAdvisorToolResultBlockParam::content]
+        end
+      end
+    end
+  end
+end

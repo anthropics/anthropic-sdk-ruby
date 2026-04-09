@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    class BetaAdvisorRedactedResultBlockParam = Beta::BetaAdvisorRedactedResultBlockParam
+
+    module Beta
+      type beta_advisor_redacted_result_block_param =
+        { encrypted_content: String, type: :advisor_redacted_result }
+
+      class BetaAdvisorRedactedResultBlockParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor encrypted_content: String
+
+        attr_accessor type: :advisor_redacted_result
+
+        def initialize: (
+          encrypted_content: String,
+          ?type: :advisor_redacted_result
+        ) -> void
+
+        def to_hash: -> {
+          encrypted_content: String,
+          type: :advisor_redacted_result
+        }
+      end
+    end
+  end
+end
