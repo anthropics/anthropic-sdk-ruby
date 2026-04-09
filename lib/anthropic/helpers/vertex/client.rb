@@ -89,6 +89,8 @@ module Anthropic
               "https://aiplatform.googleapis.com/v1"
             when "us"
               "https://aiplatform.us.rep.googleapis.com/v1"
+            when "eu"
+              "https://aiplatform.eu.rep.googleapis.com/v1"
             else
               "https://#{@region}-aiplatform.googleapis.com/v1"
             end
