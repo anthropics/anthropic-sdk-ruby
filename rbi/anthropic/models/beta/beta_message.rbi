@@ -176,6 +176,7 @@ module Anthropic
                   Anthropic::Beta::BetaServerToolUseBlock::OrHash,
                   Anthropic::Beta::BetaWebSearchToolResultBlock::OrHash,
                   Anthropic::Beta::BetaWebFetchToolResultBlock::OrHash,
+                  Anthropic::Beta::BetaAdvisorToolResultBlock::OrHash,
                   Anthropic::Beta::BetaCodeExecutionToolResultBlock::OrHash,
                   Anthropic::Beta::BetaBashCodeExecutionToolResultBlock::OrHash,
                   Anthropic::Beta::BetaTextEditorCodeExecutionToolResultBlock::OrHash,

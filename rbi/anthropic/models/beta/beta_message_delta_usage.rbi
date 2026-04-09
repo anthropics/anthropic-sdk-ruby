@@ -69,7 +69,8 @@ module Anthropic
                 T::Array[
                   T.any(
                     Anthropic::Beta::BetaMessageIterationUsage::OrHash,
-                    Anthropic::Beta::BetaCompactionIterationUsage::OrHash
+                    Anthropic::Beta::BetaCompactionIterationUsage::OrHash,
+                    Anthropic::Beta::BetaAdvisorMessageIterationUsage::OrHash
                   )
                 ]
               ),

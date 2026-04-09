@@ -44,7 +44,7 @@ module Anthropic
         #   - Calculate the true context window size from the last iteration
         #   - Understand token accumulation across server-side tool use loops
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaMessageIterationUsage, Anthropic::Models::Beta::BetaCompactionIterationUsage>, nil]
+        #   @return [Array<Anthropic::Models::Beta::BetaMessageIterationUsage, Anthropic::Models::Beta::BetaCompactionIterationUsage, Anthropic::Models::Beta::BetaAdvisorMessageIterationUsage>, nil]
         required :iterations,
                  -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaIterationsUsageItem] },
                  nil?: true
@@ -87,7 +87,7 @@ module Anthropic
         #
         #   @param input_tokens [Integer] The number of input tokens which were used.
         #
-        #   @param iterations [Array<Anthropic::Models::Beta::BetaMessageIterationUsage, Anthropic::Models::Beta::BetaCompactionIterationUsage>, nil] Per-iteration token usage breakdown.
+        #   @param iterations [Array<Anthropic::Models::Beta::BetaMessageIterationUsage, Anthropic::Models::Beta::BetaCompactionIterationUsage, Anthropic::Models::Beta::BetaAdvisorMessageIterationUsage>, nil] Per-iteration token usage breakdown.
         #
         #   @param output_tokens [Integer] The number of output tokens which were used.
         #
