@@ -6,6 +6,7 @@ module Anthropic
       type beta_iterations_usage_item =
         Anthropic::Beta::BetaMessageIterationUsage
         | Anthropic::Beta::BetaCompactionIterationUsage
+        | Anthropic::Beta::BetaAdvisorMessageIterationUsage
 
       module BetaIterationsUsageItem
         extend Anthropic::Internal::Type::Union

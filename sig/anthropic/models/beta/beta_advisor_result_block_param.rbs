@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    class BetaAdvisorResultBlockParam = Beta::BetaAdvisorResultBlockParam
+
+    module Beta
+      type beta_advisor_result_block_param =
+        { text: String, type: :advisor_result }
+
+      class BetaAdvisorResultBlockParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor text: String
+
+        attr_accessor type: :advisor_result
+
+        def initialize: (text: String, ?type: :advisor_result) -> void
+
+        def to_hash: -> { text: String, type: :advisor_result }
+      end
+    end
+  end
+end

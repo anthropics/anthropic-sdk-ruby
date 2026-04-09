@@ -93,6 +93,11 @@ module Anthropic
         T.let(:"fast-mode-2026-02-01", Anthropic::AnthropicBeta::TaggedSymbol)
       OUTPUT_300K_2026_03_24 =
         T.let(:"output-300k-2026-03-24", Anthropic::AnthropicBeta::TaggedSymbol)
+      ADVISOR_TOOL_2026_03_01 =
+        T.let(
+          :"advisor-tool-2026-03-01",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
     end
   end
 end

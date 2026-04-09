@@ -45,6 +45,7 @@ module Anthropic
         module Name
           extend Anthropic::Internal::Type::Enum
 
+          ADVISOR = :advisor
           WEB_SEARCH = :web_search
           WEB_FETCH = :web_fetch
           CODE_EXECUTION = :code_execution

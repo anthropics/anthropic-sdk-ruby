@@ -81,6 +81,7 @@ module Anthropic
                   Anthropic::Beta::BetaWebSearchTool20260209::OrHash,
                   Anthropic::Beta::BetaWebFetchTool20260209::OrHash,
                   Anthropic::Beta::BetaWebFetchTool20260309::OrHash,
+                  Anthropic::Beta::BetaAdvisorTool20260301::OrHash,
                   Anthropic::Beta::BetaToolSearchToolBm25_20251119::OrHash,
                   Anthropic::Beta::BetaToolSearchToolRegex20251119::OrHash,
                   Anthropic::Beta::BetaMCPToolset::OrHash
@@ -422,6 +423,7 @@ module Anthropic
                   Anthropic::Beta::BetaWebSearchTool20260209::OrHash,
                   Anthropic::Beta::BetaWebFetchTool20260209::OrHash,
                   Anthropic::Beta::BetaWebFetchTool20260309::OrHash,
+                  Anthropic::Beta::BetaAdvisorTool20260301::OrHash,
                   Anthropic::Beta::BetaToolSearchToolBm25_20251119::OrHash,
                   Anthropic::Beta::BetaToolSearchToolRegex20251119::OrHash,
                   Anthropic::Beta::BetaMCPToolset::OrHash
@@ -756,6 +758,7 @@ module Anthropic
                   Anthropic::Beta::BetaWebSearchTool20260209::OrHash,
                   Anthropic::Beta::BetaWebFetchTool20260209::OrHash,
                   Anthropic::Beta::BetaWebFetchTool20260309::OrHash,
+                  Anthropic::Beta::BetaAdvisorTool20260301::OrHash,
                   Anthropic::Beta::BetaToolSearchToolBm25_20251119::OrHash,
                   Anthropic::Beta::BetaToolSearchToolRegex20251119::OrHash,
                   Anthropic::Beta::BetaMCPToolset::OrHash

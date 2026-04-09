@@ -44,7 +44,8 @@ module Anthropic
         }
 
         type name_ =
-          :web_search
+          :advisor
+          | :web_search
           | :web_fetch
           | :code_execution
           | :bash_code_execution
@@ -55,6 +56,7 @@ module Anthropic
         module Name
           extend Anthropic::Internal::Type::Enum
 
+          ADVISOR: :advisor
           WEB_SEARCH: :web_search
           WEB_FETCH: :web_fetch
           CODE_EXECUTION: :code_execution

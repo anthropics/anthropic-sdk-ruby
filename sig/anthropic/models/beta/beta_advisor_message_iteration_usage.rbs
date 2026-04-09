@@ -1,0 +1,54 @@
+module Anthropic
+  module Models
+    class BetaAdvisorMessageIterationUsage = Beta::BetaAdvisorMessageIterationUsage
+
+    module Beta
+      type beta_advisor_message_iteration_usage =
+        {
+          cache_creation: Anthropic::Beta::BetaCacheCreation?,
+          cache_creation_input_tokens: Integer,
+          cache_read_input_tokens: Integer,
+          input_tokens: Integer,
+          model: Anthropic::Models::model,
+          output_tokens: Integer,
+          type: :advisor_message
+        }
+
+      class BetaAdvisorMessageIterationUsage < Anthropic::Internal::Type::BaseModel
+        attr_accessor cache_creation: Anthropic::Beta::BetaCacheCreation?
+
+        attr_accessor cache_creation_input_tokens: Integer
+
+        attr_accessor cache_read_input_tokens: Integer
+
+        attr_accessor input_tokens: Integer
+
+        attr_accessor model: Anthropic::Models::model
+
+        attr_accessor output_tokens: Integer
+
+        attr_accessor type: :advisor_message
+
+        def initialize: (
+          cache_creation: Anthropic::Beta::BetaCacheCreation?,
+          cache_creation_input_tokens: Integer,
+          cache_read_input_tokens: Integer,
+          input_tokens: Integer,
+          model: Anthropic::Models::model,
+          output_tokens: Integer,
+          ?type: :advisor_message
+        ) -> void
+
+        def to_hash: -> {
+          cache_creation: Anthropic::Beta::BetaCacheCreation?,
+          cache_creation_input_tokens: Integer,
+          cache_read_input_tokens: Integer,
+          input_tokens: Integer,
+          model: Anthropic::Models::model,
+          output_tokens: Integer,
+          type: :advisor_message
+        }
+      end
+    end
+  end
+end
