@@ -34,7 +34,7 @@ class Anthropic::Test::Resources::MessagesTest < Anthropic::Test::ResourceTest
   def test_count_tokens_required_params
     response =
       @anthropic.messages.count_tokens(
-        messages: [{content: "string", role: :user}],
+        messages: [{content: [{text: "What is a quaternion?", type: :text}], role: :user}],
         model: :"claude-mythos-preview"
       )
 
