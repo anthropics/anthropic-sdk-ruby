@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.33.0 (2026-04-10)
+
+Full Changelog: [v1.32.0...v1.33.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.32.0...v1.33.0)
+
+### Features
+
+* vertex eu region ([#897](https://github.com/anthropics/anthropic-sdk-ruby/issues/897)) ([11191ce](https://github.com/anthropics/anthropic-sdk-ruby/commit/11191ced086daff14ee7b352ac075db8a2c565cc))
+
+
+### Documentation
+
+* improve examples ([8405e94](https://github.com/anthropics/anthropic-sdk-ruby/commit/8405e9439ed806224f03b196e772d5046a6bd379))
+
 ## 1.32.0 (2026-04-09)
 
 Full Changelog: [v1.31.0...v1.32.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.31.0...v1.32.0)
