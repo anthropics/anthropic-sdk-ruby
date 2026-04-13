@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.33.1 (2026-04-13)
+
+Full Changelog: [v1.33.0...v1.33.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.33.0...v1.33.1)
+
+### Bug Fixes
+
+* **streaming:** add missing events ([cf312ed](https://github.com/anthropics/anthropic-sdk-ruby/commit/cf312edbafca255394ba7d446827fcd28cbbdb77))
+
+
+### Documentation
+
+* update examples ([05d1ab6](https://github.com/anthropics/anthropic-sdk-ruby/commit/05d1ab635b860db6eaa4179f3be98fb052800acd))
+
 ## 1.33.0 (2026-04-10)
 
 Full Changelog: [v1.32.0...v1.33.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.32.0...v1.33.0)
