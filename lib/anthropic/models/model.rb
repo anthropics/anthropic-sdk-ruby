@@ -85,15 +85,27 @@ module Anthropic
       CLAUDE_OPUS_4_1_20250805 = :"claude-opus-4-1-20250805"
 
       # Powerful model for complex tasks
+      # @deprecated Will reach end-of-life on June 15th, 2026. Please migrate to a newer model.
+      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
+      # information.
       CLAUDE_OPUS_4_0 = :"claude-opus-4-0"
 
       # Powerful model for complex tasks
+      # @deprecated Will reach end-of-life on June 15th, 2026. Please migrate to a newer model.
+      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
+      # information.
       CLAUDE_OPUS_4_20250514 = :"claude-opus-4-20250514"
 
       # High-performance model with extended thinking
+      # @deprecated Will reach end-of-life on June 15th, 2026. Please migrate to a newer model.
+      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
+      # information.
       CLAUDE_SONNET_4_0 = :"claude-sonnet-4-0"
 
       # High-performance model with extended thinking
+      # @deprecated Will reach end-of-life on June 15th, 2026. Please migrate to a newer model.
+      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
+      # information.
       CLAUDE_SONNET_4_20250514 = :"claude-sonnet-4-20250514"
 
       # Fast and cost-effective model
