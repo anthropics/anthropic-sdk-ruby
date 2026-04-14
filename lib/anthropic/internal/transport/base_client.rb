@@ -528,7 +528,12 @@ module Anthropic
             page.new(client: self, req: req, headers: headers, page_data: decoded)
           else
             unwrapped = Anthropic::Internal::Util.dig(decoded, unwrap)
-            Anthropic::Internal::Type::Converter.coerce(model, unwrapped)
+            coerced = Anthropic::Internal::Type::Converter.coerce(model, unwrapped)
+            if coerced.respond_to?(:_status=)
+              coerced._status = status
+              coerced._headers = headers
+            end
+            coerced
           end
         end
 
