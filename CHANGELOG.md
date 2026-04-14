@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.34.0 (2026-04-14)
+
+Full Changelog: [v1.33.1...v1.34.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.33.1...v1.34.0)
+
+### Features
+
+* **api:** mark Sonnet and Opus 4 as deprecated ([287e6c4](https://github.com/anthropics/anthropic-sdk-ruby/commit/287e6c471b24ef580260224675dddd08218dcd68))
+* **bedrock:** use auth header for mantle client ([#894](https://github.com/anthropics/anthropic-sdk-ruby/issues/894)) ([2ac3bba](https://github.com/anthropics/anthropic-sdk-ruby/commit/2ac3bbaa1a20f7af1069aa1ff4bcc2b3ef7123c6))
+
 ## 1.33.1 (2026-04-13)
 
 Full Changelog: [v1.33.0...v1.33.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.33.0...v1.33.1)
