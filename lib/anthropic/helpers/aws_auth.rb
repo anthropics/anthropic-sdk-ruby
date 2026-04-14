@@ -40,8 +40,10 @@ module Anthropic
         workspace_id: nil,
         env_api_key_fallback: nil,
         env_workspace_id: nil,
-        env_workspace_id_fallback: nil
+        env_workspace_id_fallback: nil,
+        use_bearer_auth: false
       )
+        @use_bearer_auth = use_bearer_auth
         begin
           require("aws-sdk-core")
         rescue LoadError
@@ -132,12 +134,16 @@ module Anthropic
       end
 
       # Override the base client's auth_headers to prevent ANTHROPIC_API_KEY
-      # from leaking as an x-api-key header in SigV4 mode. The server rejects
-      # requests that contain both Authorization (SigV4) and x-api-key headers.
+      # from leaking as an x-api-key header in SigV4 mode, and to send the API
+      # key as an Authorization: Bearer header when use_bearer_auth is set.
       #
       # @return [Hash{String=>String}]
       private def auth_headers
         return {} if @use_sig_v4
+        if @use_bearer_auth
+          return {} if @api_key.nil?
+          return {"authorization" => "Bearer #{@api_key}"}
+        end
         super
       end
 

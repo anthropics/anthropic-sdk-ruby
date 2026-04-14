@@ -83,7 +83,8 @@ module Anthropic
             service_name: "bedrock-mantle",
             env_api_key: "AWS_BEARER_TOKEN_BEDROCK",
             env_api_key_fallback: "ANTHROPIC_AWS_API_KEY",
-            derive_base_url: ->(region) { "https://bedrock-mantle.#{region}.api.aws/anthropic" }
+            derive_base_url: ->(region) { "https://bedrock-mantle.#{region}.api.aws/anthropic" },
+            use_bearer_auth: true
           )
 
           super(
