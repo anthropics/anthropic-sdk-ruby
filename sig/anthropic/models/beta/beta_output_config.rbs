@@ -6,7 +6,8 @@ module Anthropic
       type beta_output_config =
         {
           effort: Anthropic::Models::Beta::BetaOutputConfig::effort?,
-          format_: Anthropic::Beta::BetaJSONOutputFormat?
+          format_: Anthropic::Beta::BetaJSONOutputFormat?,
+          task_budget: Anthropic::Beta::BetaTokenTaskBudget?
         }
 
       class BetaOutputConfig < Anthropic::Internal::Type::BaseModel
@@ -14,17 +15,21 @@ module Anthropic
 
         attr_accessor format_: Anthropic::Beta::BetaJSONOutputFormat?
 
+        attr_accessor task_budget: Anthropic::Beta::BetaTokenTaskBudget?
+
         def initialize: (
           ?effort: Anthropic::Models::Beta::BetaOutputConfig::effort?,
-          ?format_: Anthropic::Beta::BetaJSONOutputFormat?
+          ?format_: Anthropic::Beta::BetaJSONOutputFormat?,
+          ?task_budget: Anthropic::Beta::BetaTokenTaskBudget?
         ) -> void
 
         def to_hash: -> {
           effort: Anthropic::Models::Beta::BetaOutputConfig::effort?,
-          format_: Anthropic::Beta::BetaJSONOutputFormat?
+          format_: Anthropic::Beta::BetaJSONOutputFormat?,
+          task_budget: Anthropic::Beta::BetaTokenTaskBudget?
         }
 
-        type effort = :low | :medium | :high | :max
+        type effort = :low | :medium | :high | :xhigh | :max
 
         module Effort
           extend Anthropic::Internal::Type::Enum
@@ -32,6 +37,7 @@ module Anthropic
           LOW: :low
           MEDIUM: :medium
           HIGH: :high
+          XHIGH: :xhigh
           MAX: :max
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaOutputConfig::effort]

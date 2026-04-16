@@ -3,7 +3,7 @@
 module Anthropic
   module Resources
     class Messages
-      MODELS_TO_WARN_WITH_THINKING_ENABLED = ["claude-opus-4-6"].freeze
+      MODELS_TO_WARN_WITH_THINKING_ENABLED = ["claude-opus-4-6", "claude-mythos-preview"].freeze
 
       # @return [Anthropic::Resources::Messages::Batches]
       attr_reader :batches

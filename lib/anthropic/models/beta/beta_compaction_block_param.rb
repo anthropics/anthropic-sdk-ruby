@@ -21,7 +21,13 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
-        # @!method initialize(content:, cache_control: nil, type: :compaction)
+        # @!attribute encrypted_content
+        #   Opaque metadata from prior compaction, to be round-tripped verbatim
+        #
+        #   @return [String, nil]
+        optional :encrypted_content, String, nil?: true
+
+        # @!method initialize(content:, cache_control: nil, encrypted_content: nil, type: :compaction)
         #   A compaction block containing summary of previous context.
         #
         #   Users should round-trip these blocks from responses to subsequent requests to
@@ -33,6 +39,8 @@ module Anthropic
         #   @param content [String, nil] Summary of previously compacted content, or null if compaction failed
         #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+        #
+        #   @param encrypted_content [String, nil] Opaque metadata from prior compaction, to be round-tripped verbatim
         #
         #   @param type [Symbol, :compaction]
       end
