@@ -9,6 +9,8 @@ module Anthropic
       module BetaManagedAgentsModel
         extend Anthropic::Internal::Type::Union
 
+        variant const: -> { Anthropic::Models::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_4_7 }
+
         variant const: -> { Anthropic::Models::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_4_6 }
 
         variant const: -> { Anthropic::Models::Beta::BetaManagedAgentsModel::CLAUDE_SONNET_4_6 }
@@ -35,6 +37,9 @@ module Anthropic
         end
 
         # @!group
+
+        # Frontier intelligence for long-running agents and coding
+        CLAUDE_OPUS_4_7 = :"claude-opus-4-7"
 
         # Most intelligent model for building agents and coding
         CLAUDE_OPUS_4_6 = :"claude-opus-4-6"

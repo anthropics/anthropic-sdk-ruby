@@ -1,0 +1,66 @@
+module Anthropic
+  module Models
+    module Beta
+      type user_profile_list_params =
+        {
+          limit: Integer,
+          order: Anthropic::Models::Beta::UserProfileListParams::order,
+          page: String,
+          betas: ::Array[Anthropic::Models::anthropic_beta]
+        }
+        & Anthropic::Internal::Type::request_parameters
+
+      class UserProfileListParams < Anthropic::Internal::Type::BaseModel
+        extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
+
+        attr_reader limit: Integer?
+
+        def limit=: (Integer) -> Integer
+
+        attr_reader order: Anthropic::Models::Beta::UserProfileListParams::order?
+
+        def order=: (
+          Anthropic::Models::Beta::UserProfileListParams::order
+        ) -> Anthropic::Models::Beta::UserProfileListParams::order
+
+        attr_reader page: String?
+
+        def page=: (String) -> String
+
+        attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+        def betas=: (
+          ::Array[Anthropic::Models::anthropic_beta]
+        ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+        def initialize: (
+          ?limit: Integer,
+          ?order: Anthropic::Models::Beta::UserProfileListParams::order,
+          ?page: String,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          limit: Integer,
+          order: Anthropic::Models::Beta::UserProfileListParams::order,
+          page: String,
+          betas: ::Array[Anthropic::Models::anthropic_beta],
+          request_options: Anthropic::RequestOptions
+        }
+
+        type order = :asc | :desc
+
+        module Order
+          extend Anthropic::Internal::Type::Enum
+
+          ASC: :asc
+          DESC: :desc
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::UserProfileListParams::order]
+        end
+      end
+    end
+  end
+end

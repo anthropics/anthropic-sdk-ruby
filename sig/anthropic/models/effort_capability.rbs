@@ -6,7 +6,8 @@ module Anthropic
         low: Anthropic::CapabilitySupport,
         max: Anthropic::CapabilitySupport,
         medium: Anthropic::CapabilitySupport,
-        supported: bool
+        supported: bool,
+        xhigh: Anthropic::CapabilitySupport?
       }
 
     class EffortCapability < Anthropic::Internal::Type::BaseModel
@@ -20,12 +21,15 @@ module Anthropic
 
       attr_accessor supported: bool
 
+      attr_accessor xhigh: Anthropic::CapabilitySupport?
+
       def initialize: (
         high: Anthropic::CapabilitySupport,
         low: Anthropic::CapabilitySupport,
         max: Anthropic::CapabilitySupport,
         medium: Anthropic::CapabilitySupport,
-        supported: bool
+        supported: bool,
+        xhigh: Anthropic::CapabilitySupport?
       ) -> void
 
       def to_hash: -> {
@@ -33,7 +37,8 @@ module Anthropic
         low: Anthropic::CapabilitySupport,
         max: Anthropic::CapabilitySupport,
         medium: Anthropic::CapabilitySupport,
-        supported: bool
+        supported: bool,
+        xhigh: Anthropic::CapabilitySupport?
       }
     end
   end
