@@ -387,6 +387,7 @@ module Anthropic
               ],
             top_k: Integer,
             top_p: Float,
+            user_profile_id: T.nilable(String),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             stream: T.noreturn,
             request_options: Anthropic::RequestOptions::OrHash
@@ -638,6 +639,9 @@ module Anthropic
           # Recommended for advanced use cases only. You usually only need to use
           # `temperature`.
           top_p: nil,
+          # Body param: The user profile ID to attribute this request to. Use when acting on
+          # behalf of a party other than your organization.
+          user_profile_id: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           # There is no need to provide `stream:`. Instead, use `#stream_raw` or `#create`
@@ -729,6 +733,7 @@ module Anthropic
               ],
             top_k: Integer,
             top_p: Float,
+            user_profile_id: T.nilable(String),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             stream: T.noreturn,
             request_options: Anthropic::RequestOptions::OrHash
@@ -984,6 +989,9 @@ module Anthropic
           # Recommended for advanced use cases only. You usually only need to use
           # `temperature`.
           top_p: nil,
+          # Body param: The user profile ID to attribute this request to. Use when acting on
+          # behalf of a party other than your organization.
+          user_profile_id: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           # There is no need to provide `stream:`. Instead, use `#stream_raw` or `#create`

@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    class BetaTokenTaskBudget = Beta::BetaTokenTaskBudget
+
+    module Beta
+      type beta_token_task_budget =
+        { total: Integer, type: :tokens, remaining: Integer? }
+
+      class BetaTokenTaskBudget < Anthropic::Internal::Type::BaseModel
+        attr_accessor total: Integer
+
+        attr_accessor type: :tokens
+
+        attr_accessor remaining: Integer?
+
+        def initialize: (
+          total: Integer,
+          ?remaining: Integer?,
+          ?type: :tokens
+        ) -> void
+
+        def to_hash: -> { total: Integer, type: :tokens, remaining: Integer? }
+      end
+    end
+  end
+end

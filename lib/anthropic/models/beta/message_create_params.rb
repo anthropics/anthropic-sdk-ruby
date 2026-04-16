@@ -352,13 +352,20 @@ module Anthropic
         #   @return [Float, nil]
         optional :top_p, Float
 
+        # @!attribute user_profile_id
+        #   The user profile ID to attribute this request to. Use when acting on behalf of a
+        #   party other than your organization.
+        #
+        #   @return [String, nil]
+        optional :user_profile_id, String, nil?: true
+
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
+        # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
@@ -403,6 +410,8 @@ module Anthropic
         #   @param top_k [Integer] Only sample from the top K options for each subsequent token.
         #
         #   @param top_p [Float] Use nucleus sampling.
+        #
+        #   @param user_profile_id [String, nil] The user profile ID to attribute this request to. Use when acting on behalf of a
         #
         #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #

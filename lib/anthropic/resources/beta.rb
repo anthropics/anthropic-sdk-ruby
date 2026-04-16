@@ -27,6 +27,9 @@ module Anthropic
       # @return [Anthropic::Resources::Beta::Skills]
       attr_reader :skills
 
+      # @return [Anthropic::Resources::Beta::UserProfiles]
+      attr_reader :user_profiles
+
       # @api private
       #
       # @param client [Anthropic::Client]
@@ -40,6 +43,7 @@ module Anthropic
         @vaults = Anthropic::Resources::Beta::Vaults.new(client: client)
         @files = Anthropic::Resources::Beta::Files.new(client: client)
         @skills = Anthropic::Resources::Beta::Skills.new(client: client)
+        @user_profiles = Anthropic::Resources::Beta::UserProfiles.new(client: client)
       end
     end
   end
