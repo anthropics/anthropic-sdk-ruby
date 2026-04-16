@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.35.0 (2026-04-16)
+
+Full Changelog: [v1.34.0...v1.35.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.34.0...v1.35.0)
+
+### Features
+
+* **api:** add claude-opus-4-7, token budgets and user_profiles ([026649a](https://github.com/anthropics/anthropic-sdk-ruby/commit/026649ae9a26108258ef8de6532eb02e429e87d9))
+
+
+### Chores
+
+* **ci:** remove release-doctor workflow ([0947aca](https://github.com/anthropics/anthropic-sdk-ruby/commit/0947acaf0af66d9918f6a6faea03ab8f129932af))
+
 ## 1.34.0 (2026-04-14)
 
 Full Changelog: [v1.33.1...v1.34.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.33.1...v1.34.0)
