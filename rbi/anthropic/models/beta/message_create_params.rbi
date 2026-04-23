@@ -503,6 +503,11 @@ module Anthropic
         sig { params(top_p: Float).void }
         attr_writer :top_p
 
+        # The user profile ID to attribute this request to. Use when acting on behalf of a
+        # party other than your organization.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :user_profile_id
+
         # Optional header to specify the beta version(s) you want to use.
         sig do
           returns(
@@ -592,6 +597,7 @@ module Anthropic
               ],
             top_k: Integer,
             top_p: Float,
+            user_profile_id: T.nilable(String),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
@@ -838,6 +844,9 @@ module Anthropic
           #
           # Recommended for advanced use cases only.
           top_p: nil,
+          # The user profile ID to attribute this request to. Use when acting on behalf of a
+          # party other than your organization.
+          user_profile_id: nil,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}
@@ -914,6 +923,7 @@ module Anthropic
                 ],
               top_k: Integer,
               top_p: Float,
+              user_profile_id: T.nilable(String),
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               request_options: Anthropic::RequestOptions
