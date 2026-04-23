@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    anthropic (1.35.0)
+    anthropic (1.36.0)
       cgi
       connection_pool
 

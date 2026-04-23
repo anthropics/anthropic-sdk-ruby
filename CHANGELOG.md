@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.36.0 (2026-04-23)
+
+Full Changelog: [v1.35.0...v1.36.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.35.0...v1.36.0)
+
+### Features
+
+* **api:** CMA Memory public beta ([9fafd1a](https://github.com/anthropics/anthropic-sdk-ruby/commit/9fafd1abe16d0398c6e59be0717a9ef9cb014347))
+
+
+### Bug Fixes
+
+* **api:** fix errors in api spec ([074fa8d](https://github.com/anthropics/anthropic-sdk-ruby/commit/074fa8dac4cdebc8eababcac95ca4fe9dc7970d3))
+* **api:** restore missing features ([4496fac](https://github.com/anthropics/anthropic-sdk-ruby/commit/4496facb8130e48340a2c4107d3aaf412b5cf4eb))
+* avoid gzip buffering during streaming ([307c594](https://github.com/anthropics/anthropic-sdk-ruby/commit/307c5944e27dd3eab5aa3c6f6e7ed02ca5b7cece))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([e8f157e](https://github.com/anthropics/anthropic-sdk-ruby/commit/e8f157e44e664c036c0b81584eee8919d55eb6db))
+* **tests:** bump steady to v0.22.1 ([7f079ce](https://github.com/anthropics/anthropic-sdk-ruby/commit/7f079cee1a662245ce67c12b1b7790832dd931ad))
+
 ## 1.35.0 (2026-04-16)
 
 Full Changelog: [v1.34.0...v1.35.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.34.0...v1.35.0)
