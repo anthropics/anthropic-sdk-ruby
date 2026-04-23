@@ -17,21 +17,13 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaJSONOutputFormat, nil]
         optional :format_, -> { Anthropic::Beta::BetaJSONOutputFormat }, api_name: :format, nil?: true
 
-        # @!attribute task_budget
-        #   User-configurable total token budget across contexts.
-        #
-        #   @return [Anthropic::Models::Beta::BetaTokenTaskBudget, nil]
-        optional :task_budget, -> { Anthropic::Beta::BetaTokenTaskBudget }, nil?: true
-
-        # @!method initialize(effort: nil, format_: nil, task_budget: nil)
+        # @!method initialize(effort: nil, format_: nil)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaOutputConfig} for more details.
         #
         #   @param effort [Symbol, Anthropic::Models::Beta::BetaOutputConfig::Effort, nil] All possible effort levels.
         #
         #   @param format_ [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] A schema to specify Claude's output format in responses. See [structured outputs
-        #
-        #   @param task_budget [Anthropic::Models::Beta::BetaTokenTaskBudget, nil] User-configurable total token budget across contexts.
 
         # All possible effort levels.
         #
@@ -42,7 +34,6 @@ module Anthropic
           LOW = :low
           MEDIUM = :medium
           HIGH = :high
-          XHIGH = :xhigh
           MAX = :max
 
           # @!method self.values

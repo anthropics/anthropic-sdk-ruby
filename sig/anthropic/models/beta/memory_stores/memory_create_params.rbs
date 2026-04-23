@@ -1,0 +1,58 @@
+module Anthropic
+  module Models
+    module Beta
+      module MemoryStores
+        type memory_create_params =
+          {
+            memory_store_id: String,
+            content: String?,
+            path: String,
+            view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class MemoryCreateParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor memory_store_id: String
+
+          attr_accessor content: String?
+
+          attr_accessor path: String
+
+          attr_reader view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view?
+
+          def view=: (
+            Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view
+          ) -> Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view
+
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          def initialize: (
+            memory_store_id: String,
+            content: String?,
+            path: String,
+            ?view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            memory_store_id: String,
+            content: String?,
+            path: String,
+            view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,41 @@
+module Anthropic
+  module Models
+    module Beta
+      module MemoryStores
+        type beta_managed_agents_conflict_error =
+          {
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsConflictError::type_,
+            message: String
+          }
+
+        class BetaManagedAgentsConflictError < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsConflictError::type_
+
+          attr_reader message: String?
+
+          def message=: (String) -> String
+
+          def initialize: (
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsConflictError::type_,
+            ?message: String
+          ) -> void
+
+          def to_hash: -> {
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsConflictError::type_,
+            message: String
+          }
+
+          type type_ = :conflict_error
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            CONFLICT_ERROR: :conflict_error
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsConflictError::type_]
+          end
+        end
+      end
+    end
+  end
+end

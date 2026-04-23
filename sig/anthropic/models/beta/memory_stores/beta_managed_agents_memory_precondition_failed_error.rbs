@@ -1,0 +1,41 @@
+module Anthropic
+  module Models
+    module Beta
+      module MemoryStores
+        type beta_managed_agents_memory_precondition_failed_error =
+          {
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPreconditionFailedError::type_,
+            message: String
+          }
+
+        class BetaManagedAgentsMemoryPreconditionFailedError < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPreconditionFailedError::type_
+
+          attr_reader message: String?
+
+          def message=: (String) -> String
+
+          def initialize: (
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPreconditionFailedError::type_,
+            ?message: String
+          ) -> void
+
+          def to_hash: -> {
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPreconditionFailedError::type_,
+            message: String
+          }
+
+          type type_ = :memory_precondition_failed_error
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            MEMORY_PRECONDITION_FAILED_ERROR: :memory_precondition_failed_error
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPreconditionFailedError::type_]
+          end
+        end
+      end
+    end
+  end
+end

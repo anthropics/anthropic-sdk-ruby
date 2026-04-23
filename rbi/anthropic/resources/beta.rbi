@@ -21,14 +21,14 @@ module Anthropic
       sig { returns(Anthropic::Resources::Beta::Vaults) }
       attr_reader :vaults
 
+      sig { returns(Anthropic::Resources::Beta::MemoryStores) }
+      attr_reader :memory_stores
+
       sig { returns(Anthropic::Resources::Beta::Files) }
       attr_reader :files
 
       sig { returns(Anthropic::Resources::Beta::Skills) }
       attr_reader :skills
-
-      sig { returns(Anthropic::Resources::Beta::UserProfiles) }
-      attr_reader :user_profiles
 
       # @api private
       sig { params(client: Anthropic::Client).returns(T.attached_class) }

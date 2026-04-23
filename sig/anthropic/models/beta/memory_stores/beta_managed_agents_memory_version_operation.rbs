@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module MemoryStores
+        type beta_managed_agents_memory_version_operation =
+          :created | :modified | :deleted
+
+        module BetaManagedAgentsMemoryVersionOperation
+          extend Anthropic::Internal::Type::Enum
+
+          CREATED: :created
+          MODIFIED: :modified
+          DELETED: :deleted
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_version_operation]
+        end
+      end
+    end
+  end
+end

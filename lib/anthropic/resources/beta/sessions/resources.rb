@@ -17,7 +17,7 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource]
+          # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource]
           #
           # @see Anthropic::Models::Beta::Sessions::ResourceRetrieveParams
           def retrieve(resource_id, params)
@@ -52,7 +52,7 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource]
+          # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource]
           #
           # @see Anthropic::Models::Beta::Sessions::ResourceUpdateParams
           def update(resource_id, params)
@@ -89,7 +89,7 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource>]
+          # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource>]
           #
           # @see Anthropic::Models::Beta::Sessions::ResourceListParams
           def list(session_id, params = {})

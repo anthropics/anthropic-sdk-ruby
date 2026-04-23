@@ -17,37 +17,18 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :content
 
-        # Opaque metadata from prior compaction, to be round-tripped verbatim
-        sig { returns(T.nilable(String)) }
-        attr_accessor :encrypted_content
-
         sig { returns(Symbol) }
         attr_accessor :type
 
         sig do
-          params(
-            content: T.nilable(String),
-            encrypted_content: T.nilable(String),
-            type: Symbol
-          ).returns(T.attached_class)
-        end
-        def self.new(
-          content:,
-          # Opaque metadata from prior compaction, to be round-tripped verbatim
-          encrypted_content:,
-          type: :compaction_delta
-        )
-        end
-
-        sig do
-          override.returns(
-            {
-              content: T.nilable(String),
-              encrypted_content: T.nilable(String),
-              type: Symbol
-            }
+          params(content: T.nilable(String), type: Symbol).returns(
+            T.attached_class
           )
         end
+        def self.new(content:, type: :compaction_delta)
+        end
+
+        sig { override.returns({ content: T.nilable(String), type: Symbol }) }
         def to_hash
         end
       end

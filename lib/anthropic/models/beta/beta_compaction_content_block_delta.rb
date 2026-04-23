@@ -9,22 +9,13 @@ module Anthropic
         #   @return [String, nil]
         required :content, String, nil?: true
 
-        # @!attribute encrypted_content
-        #   Opaque metadata from prior compaction, to be round-tripped verbatim
-        #
-        #   @return [String, nil]
-        required :encrypted_content, String, nil?: true
-
         # @!attribute type
         #
         #   @return [Symbol, :compaction_delta]
         required :type, const: :compaction_delta
 
-        # @!method initialize(content:, encrypted_content:, type: :compaction_delta)
+        # @!method initialize(content:, type: :compaction_delta)
         #   @param content [String, nil]
-        #
-        #   @param encrypted_content [String, nil] Opaque metadata from prior compaction, to be round-tripped verbatim
-        #
         #   @param type [Symbol, :compaction_delta]
       end
     end
