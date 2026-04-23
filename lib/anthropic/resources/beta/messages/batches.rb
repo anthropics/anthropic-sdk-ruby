@@ -199,7 +199,13 @@ module Anthropic
             @client.request(
               method: :get,
               path: ["v1/messages/batches/%1$s/results?beta=true", message_batch_id],
-              headers: {"accept" => "application/x-jsonl", **parsed}.transform_keys(betas: "anthropic-beta"),
+              headers: {
+                "accept" => "application/x-jsonl",
+                "accept-encoding" => "identity",
+                **parsed
+              }.transform_keys(
+                betas: "anthropic-beta"
+              ),
               stream: Anthropic::Internal::JsonLStream,
               model: Anthropic::Beta::Messages::BetaMessageBatchIndividualResponse,
               options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}

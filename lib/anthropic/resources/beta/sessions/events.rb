@@ -88,7 +88,13 @@ module Anthropic
             @client.request(
               method: :get,
               path: ["v1/sessions/%1$s/events/stream?beta=true", session_id],
-              headers: {"accept" => "text/event-stream", **parsed}.transform_keys(betas: "anthropic-beta"),
+              headers: {
+                "accept" => "text/event-stream",
+                "accept-encoding" => "identity",
+                **parsed
+              }.transform_keys(
+                betas: "anthropic-beta"
+              ),
               stream: Anthropic::Internal::Stream,
               model: Anthropic::Beta::Sessions::BetaManagedAgentsStreamSessionEvents,
               options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
