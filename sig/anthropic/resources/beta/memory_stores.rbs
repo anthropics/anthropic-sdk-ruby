@@ -1,0 +1,58 @@
+module Anthropic
+  module Resources
+    class Beta
+      class MemoryStores
+        attr_reader memories: Anthropic::Resources::Beta::MemoryStores::Memories
+
+        attr_reader memory_versions: Anthropic::Resources::Beta::MemoryStores::MemoryVersions
+
+        def create: (
+          name: String,
+          ?description: String,
+          ?metadata: ::Hash[Symbol, String],
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsMemoryStore
+
+        def retrieve: (
+          String memory_store_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsMemoryStore
+
+        def update: (
+          String memory_store_id,
+          ?description: String?,
+          ?metadata: ::Hash[Symbol, String?]?,
+          ?name: String?,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsMemoryStore
+
+        def list: (
+          ?created_at_gte: Time,
+          ?created_at_lte: Time,
+          ?include_archived: bool,
+          ?limit: Integer,
+          ?page: String,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaManagedAgentsMemoryStore]
+
+        def delete: (
+          String memory_store_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsDeletedMemoryStore
+
+        def archive: (
+          String memory_store_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsMemoryStore
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

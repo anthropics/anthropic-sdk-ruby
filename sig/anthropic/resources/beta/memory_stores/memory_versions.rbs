@@ -1,0 +1,41 @@
+module Anthropic
+  module Resources
+    class Beta
+      class MemoryStores
+        class MemoryVersions
+          def retrieve: (
+            String memory_version_id,
+            memory_store_id: String,
+            ?view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion
+
+          def list: (
+            String memory_store_id,
+            ?api_key_id: String,
+            ?created_at_gte: Time,
+            ?created_at_lte: Time,
+            ?limit: Integer,
+            ?memory_id: String,
+            ?operation: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_version_operation,
+            ?page: String,
+            ?session_id: String,
+            ?view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion]
+
+          def redact: (
+            String memory_version_id,
+            memory_store_id: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

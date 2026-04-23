@@ -24,7 +24,8 @@ module Anthropic
               T::Array[
                 T.any(
                   Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsFileResourceParams::OrHash
+                  Anthropic::Beta::BetaManagedAgentsFileResourceParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceParam::OrHash
                 )
               ],
             title: T.nilable(String),

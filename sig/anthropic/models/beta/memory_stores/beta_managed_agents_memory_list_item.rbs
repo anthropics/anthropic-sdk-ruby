@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module MemoryStores
+        type beta_managed_agents_memory_list_item =
+          Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory
+          | Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix
+
+        module BetaManagedAgentsMemoryListItem
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_list_item]
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,60 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsMemoryStoreResourceParam = Beta::BetaManagedAgentsMemoryStoreResourceParam
+
+    module Beta
+      type beta_managed_agents_memory_store_resource_param =
+        {
+          memory_store_id: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::type_,
+          access: Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::access?,
+          instructions: String?
+        }
+
+      class BetaManagedAgentsMemoryStoreResourceParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor memory_store_id: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::type_
+
+        attr_accessor access: Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::access?
+
+        attr_accessor instructions: String?
+
+        def initialize: (
+          memory_store_id: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::type_,
+          ?access: Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::access?,
+          ?instructions: String?
+        ) -> void
+
+        def to_hash: -> {
+          memory_store_id: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::type_,
+          access: Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::access?,
+          instructions: String?
+        }
+
+        type type_ = :memory_store
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          MEMORY_STORE: :memory_store
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::type_]
+        end
+
+        type access = :read_write | :read_only
+
+        module Access
+          extend Anthropic::Internal::Type::Enum
+
+          READ_WRITE: :read_write
+          READ_ONLY: :read_only
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::access]
+        end
+      end
+    end
+  end
+end

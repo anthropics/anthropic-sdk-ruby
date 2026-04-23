@@ -10,6 +10,9 @@ module Anthropic
         module Agents
         end
 
+        module MemoryStores
+        end
+
         module Messages
         end
 
@@ -21,6 +24,9 @@ module Anthropic
 
         module Vaults
         end
+      end
+
+      module MemoryStores
       end
 
       module Messages

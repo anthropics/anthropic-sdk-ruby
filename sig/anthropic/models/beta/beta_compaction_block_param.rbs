@@ -7,8 +7,7 @@ module Anthropic
         {
           content: String?,
           type: :compaction,
-          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
-          encrypted_content: String?
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
         }
 
       class BetaCompactionBlockParam < Anthropic::Internal::Type::BaseModel
@@ -18,20 +17,16 @@ module Anthropic
 
         attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
-        attr_accessor encrypted_content: String?
-
         def initialize: (
           content: String?,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
-          ?encrypted_content: String?,
           ?type: :compaction
         ) -> void
 
         def to_hash: -> {
           content: String?,
           type: :compaction,
-          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
-          encrypted_content: String?
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
         }
       end
     end

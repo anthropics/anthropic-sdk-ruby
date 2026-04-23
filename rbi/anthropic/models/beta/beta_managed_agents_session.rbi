@@ -112,7 +112,8 @@ module Anthropic
               T::Array[
                 T.any(
                   Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsFileResource::OrHash
+                  Anthropic::Beta::Sessions::BetaManagedAgentsFileResource::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::OrHash
                 )
               ],
             stats: Anthropic::Beta::BetaManagedAgentsSessionStats::OrHash,

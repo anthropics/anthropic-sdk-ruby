@@ -9,8 +9,7 @@ module Anthropic
           low: Anthropic::Beta::BetaCapabilitySupport,
           max: Anthropic::Beta::BetaCapabilitySupport,
           medium: Anthropic::Beta::BetaCapabilitySupport,
-          supported: bool,
-          xhigh: Anthropic::Beta::BetaCapabilitySupport?
+          supported: bool
         }
 
       class BetaEffortCapability < Anthropic::Internal::Type::BaseModel
@@ -24,15 +23,12 @@ module Anthropic
 
         attr_accessor supported: bool
 
-        attr_accessor xhigh: Anthropic::Beta::BetaCapabilitySupport?
-
         def initialize: (
           high: Anthropic::Beta::BetaCapabilitySupport,
           low: Anthropic::Beta::BetaCapabilitySupport,
           max: Anthropic::Beta::BetaCapabilitySupport,
           medium: Anthropic::Beta::BetaCapabilitySupport,
-          supported: bool,
-          xhigh: Anthropic::Beta::BetaCapabilitySupport?
+          supported: bool
         ) -> void
 
         def to_hash: -> {
@@ -40,8 +36,7 @@ module Anthropic
           low: Anthropic::Beta::BetaCapabilitySupport,
           max: Anthropic::Beta::BetaCapabilitySupport,
           medium: Anthropic::Beta::BetaCapabilitySupport,
-          supported: bool,
-          xhigh: Anthropic::Beta::BetaCapabilitySupport?
+          supported: bool
         }
       end
     end

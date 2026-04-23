@@ -4,6 +4,7 @@ module Anthropic
   module Models
     module Beta
       module Sessions
+        # A memory store attached to an agent session.
         module BetaManagedAgentsSessionResource
           extend Anthropic::Internal::Type::Union
 
@@ -11,7 +12,8 @@ module Anthropic
             T.type_alias do
               T.any(
                 Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource,
-                Anthropic::Beta::Sessions::BetaManagedAgentsFileResource
+                Anthropic::Beta::Sessions::BetaManagedAgentsFileResource,
+                Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource
               )
             end
 

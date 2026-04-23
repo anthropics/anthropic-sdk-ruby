@@ -5,6 +5,7 @@ module Anthropic
         type resource_update_response =
           Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource
           | Anthropic::Beta::Sessions::BetaManagedAgentsFileResource
+          | Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource
 
         module ResourceUpdateResponse
           extend Anthropic::Internal::Type::Union

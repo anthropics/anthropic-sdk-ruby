@@ -1,0 +1,73 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsMemoryStore = Beta::BetaManagedAgentsMemoryStore
+
+    module Beta
+      type beta_managed_agents_memory_store =
+        {
+          id: String,
+          created_at: Time,
+          name: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsMemoryStore::type_,
+          updated_at: Time,
+          archived_at: Time?,
+          description: String,
+          metadata: ::Hash[Symbol, String]
+        }
+
+      class BetaManagedAgentsMemoryStore < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor name: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsMemoryStore::type_
+
+        attr_accessor updated_at: Time
+
+        attr_accessor archived_at: Time?
+
+        attr_reader description: String?
+
+        def description=: (String) -> String
+
+        attr_reader metadata: ::Hash[Symbol, String]?
+
+        def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+        def initialize: (
+          id: String,
+          created_at: Time,
+          name: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsMemoryStore::type_,
+          updated_at: Time,
+          ?archived_at: Time?,
+          ?description: String,
+          ?metadata: ::Hash[Symbol, String]
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          created_at: Time,
+          name: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsMemoryStore::type_,
+          updated_at: Time,
+          archived_at: Time?,
+          description: String,
+          metadata: ::Hash[Symbol, String]
+        }
+
+        type type_ = :memory_store
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          MEMORY_STORE: :memory_store
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMemoryStore::type_]
+        end
+      end
+    end
+  end
+end

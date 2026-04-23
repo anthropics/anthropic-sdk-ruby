@@ -26,7 +26,6 @@ module Anthropic
           ?tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
           ?top_k: Integer,
           ?top_p: Float,
-          ?user_profile_id: String?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaMessage
@@ -53,7 +52,6 @@ module Anthropic
           ?tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
           ?top_k: Integer,
           ?top_p: Float,
-          ?user_profile_id: String?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Internal::Stream[Anthropic::Models::Beta::beta_raw_message_stream_event]

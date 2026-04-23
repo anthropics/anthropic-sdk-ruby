@@ -1,0 +1,106 @@
+module Anthropic
+  module Models
+    module Beta
+      module MemoryStores
+        type memory_version_list_params =
+          {
+            memory_store_id: String,
+            api_key_id: String,
+            created_at_gte: Time,
+            created_at_lte: Time,
+            limit: Integer,
+            memory_id: String,
+            operation: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_version_operation,
+            page: String,
+            session_id: String,
+            view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class MemoryVersionListParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor memory_store_id: String
+
+          attr_reader api_key_id: String?
+
+          def api_key_id=: (String) -> String
+
+          attr_reader created_at_gte: Time?
+
+          def created_at_gte=: (Time) -> Time
+
+          attr_reader created_at_lte: Time?
+
+          def created_at_lte=: (Time) -> Time
+
+          attr_reader limit: Integer?
+
+          def limit=: (Integer) -> Integer
+
+          attr_reader memory_id: String?
+
+          def memory_id=: (String) -> String
+
+          attr_reader operation: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_version_operation?
+
+          def operation=: (
+            Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_version_operation
+          ) -> Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_version_operation
+
+          attr_reader page: String?
+
+          def page=: (String) -> String
+
+          attr_reader session_id: String?
+
+          def session_id=: (String) -> String
+
+          attr_reader view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view?
+
+          def view=: (
+            Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view
+          ) -> Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view
+
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          def initialize: (
+            memory_store_id: String,
+            ?api_key_id: String,
+            ?created_at_gte: Time,
+            ?created_at_lte: Time,
+            ?limit: Integer,
+            ?memory_id: String,
+            ?operation: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_version_operation,
+            ?page: String,
+            ?session_id: String,
+            ?view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            memory_store_id: String,
+            api_key_id: String,
+            created_at_gte: Time,
+            created_at_lte: Time,
+            limit: Integer,
+            memory_id: String,
+            operation: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_version_operation,
+            page: String,
+            session_id: String,
+            view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

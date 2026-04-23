@@ -13,11 +13,11 @@ module Anthropic
 
       attr_reader vaults: Anthropic::Resources::Beta::Vaults
 
+      attr_reader memory_stores: Anthropic::Resources::Beta::MemoryStores
+
       attr_reader files: Anthropic::Resources::Beta::Files
 
       attr_reader skills: Anthropic::Resources::Beta::Skills
-
-      attr_reader user_profiles: Anthropic::Resources::Beta::UserProfiles
 
       def initialize: (client: Anthropic::Client) -> void
     end

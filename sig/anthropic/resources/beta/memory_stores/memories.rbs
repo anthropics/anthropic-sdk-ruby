@@ -1,0 +1,60 @@
+module Anthropic
+  module Resources
+    class Beta
+      class MemoryStores
+        class Memories
+          def create: (
+            String memory_store_id,
+            content: String?,
+            path: String,
+            ?view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory
+
+          def retrieve: (
+            String memory_id,
+            memory_store_id: String,
+            ?view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory
+
+          def update: (
+            String memory_id,
+            memory_store_id: String,
+            ?view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
+            ?content: String?,
+            ?path: String?,
+            ?precondition: Anthropic::Beta::MemoryStores::BetaManagedAgentsPrecondition,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory
+
+          def list: (
+            String memory_store_id,
+            ?depth: Integer,
+            ?limit: Integer,
+            ?order: Anthropic::Models::Beta::MemoryStores::MemoryListParams::order,
+            ?order_by: String,
+            ?page: String,
+            ?path_prefix: String,
+            ?view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_list_item]
+
+          def delete: (
+            String memory_id,
+            memory_store_id: String,
+            ?expected_content_sha256: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsDeletedMemory
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsDeletedMemoryStore = Beta::BetaManagedAgentsDeletedMemoryStore
+
+    module Beta
+      type beta_managed_agents_deleted_memory_store =
+        {
+          id: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeletedMemoryStore::type_
+        }
+
+      class BetaManagedAgentsDeletedMemoryStore < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsDeletedMemoryStore::type_
+
+        def initialize: (
+          id: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeletedMemoryStore::type_
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeletedMemoryStore::type_
+        }
+
+        type type_ = :memory_store_deleted
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          MEMORY_STORE_DELETED: :memory_store_deleted
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsDeletedMemoryStore::type_]
+        end
+      end
+    end
+  end
+end

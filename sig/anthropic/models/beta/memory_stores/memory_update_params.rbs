@@ -1,0 +1,72 @@
+module Anthropic
+  module Models
+    module Beta
+      module MemoryStores
+        type memory_update_params =
+          {
+            memory_store_id: String,
+            memory_id: String,
+            view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
+            content: String?,
+            path: String?,
+            precondition: Anthropic::Beta::MemoryStores::BetaManagedAgentsPrecondition,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class MemoryUpdateParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor memory_store_id: String
+
+          attr_accessor memory_id: String
+
+          attr_reader view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view?
+
+          def view=: (
+            Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view
+          ) -> Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view
+
+          attr_accessor content: String?
+
+          attr_accessor path: String?
+
+          attr_reader precondition: Anthropic::Beta::MemoryStores::BetaManagedAgentsPrecondition?
+
+          def precondition=: (
+            Anthropic::Beta::MemoryStores::BetaManagedAgentsPrecondition
+          ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsPrecondition
+
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          def initialize: (
+            memory_store_id: String,
+            memory_id: String,
+            ?view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
+            ?content: String?,
+            ?path: String?,
+            ?precondition: Anthropic::Beta::MemoryStores::BetaManagedAgentsPrecondition,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            memory_store_id: String,
+            memory_id: String,
+            view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
+            content: String?,
+            path: String?,
+            precondition: Anthropic::Beta::MemoryStores::BetaManagedAgentsPrecondition,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

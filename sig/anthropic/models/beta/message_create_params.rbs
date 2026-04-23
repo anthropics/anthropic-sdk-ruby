@@ -24,7 +24,6 @@ module Anthropic
           tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
           top_k: Integer,
           top_p: Float,
-          user_profile_id: String?,
           betas: ::Array[Anthropic::Models::anthropic_beta]
         }
         & Anthropic::Internal::Type::request_parameters
@@ -115,8 +114,6 @@ module Anthropic
 
         def top_p=: (Float) -> Float
 
-        attr_accessor user_profile_id: String?
-
         attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
         def betas=: (
@@ -145,7 +142,6 @@ module Anthropic
           ?tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
           ?top_k: Integer,
           ?top_p: Float,
-          ?user_profile_id: String?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> void
@@ -172,7 +168,6 @@ module Anthropic
           tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
           top_k: Integer,
           top_p: Float,
-          user_profile_id: String?,
           betas: ::Array[Anthropic::Models::anthropic_beta],
           request_options: Anthropic::RequestOptions
         }

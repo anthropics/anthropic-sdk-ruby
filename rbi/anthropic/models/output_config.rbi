@@ -59,7 +59,6 @@ module Anthropic
         LOW = T.let(:low, Anthropic::OutputConfig::Effort::TaggedSymbol)
         MEDIUM = T.let(:medium, Anthropic::OutputConfig::Effort::TaggedSymbol)
         HIGH = T.let(:high, Anthropic::OutputConfig::Effort::TaggedSymbol)
-        XHIGH = T.let(:xhigh, Anthropic::OutputConfig::Effort::TaggedSymbol)
         MAX = T.let(:max, Anthropic::OutputConfig::Effort::TaggedSymbol)
 
         sig do

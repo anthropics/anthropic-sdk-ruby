@@ -50,17 +50,6 @@ module Anthropic
         sig { returns(T::Boolean) }
         attr_accessor :supported
 
-        # Indicates whether a capability is supported.
-        sig { returns(T.nilable(Anthropic::Beta::BetaCapabilitySupport)) }
-        attr_reader :xhigh
-
-        sig do
-          params(
-            xhigh: T.nilable(Anthropic::Beta::BetaCapabilitySupport::OrHash)
-          ).void
-        end
-        attr_writer :xhigh
-
         # Effort (reasoning_effort) capability details.
         sig do
           params(
@@ -68,8 +57,7 @@ module Anthropic
             low: Anthropic::Beta::BetaCapabilitySupport::OrHash,
             max: Anthropic::Beta::BetaCapabilitySupport::OrHash,
             medium: Anthropic::Beta::BetaCapabilitySupport::OrHash,
-            supported: T::Boolean,
-            xhigh: T.nilable(Anthropic::Beta::BetaCapabilitySupport::OrHash)
+            supported: T::Boolean
           ).returns(T.attached_class)
         end
         def self.new(
@@ -82,9 +70,7 @@ module Anthropic
           # Whether the model supports medium effort level.
           medium:,
           # Whether this capability is supported by the model.
-          supported:,
-          # Indicates whether a capability is supported.
-          xhigh:
+          supported:
         )
         end
 
@@ -95,8 +81,7 @@ module Anthropic
               low: Anthropic::Beta::BetaCapabilitySupport,
               max: Anthropic::Beta::BetaCapabilitySupport,
               medium: Anthropic::Beta::BetaCapabilitySupport,
-              supported: T::Boolean,
-              xhigh: T.nilable(Anthropic::Beta::BetaCapabilitySupport)
+              supported: T::Boolean
             }
           )
         end

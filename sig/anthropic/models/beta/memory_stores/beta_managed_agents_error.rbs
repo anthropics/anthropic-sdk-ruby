@@ -1,0 +1,27 @@
+module Anthropic
+  module Models
+    module Beta
+      module MemoryStores
+        type beta_managed_agents_error =
+          Anthropic::BetaInvalidRequestError
+          | Anthropic::BetaAuthenticationError
+          | Anthropic::BetaBillingError
+          | Anthropic::BetaPermissionError
+          | Anthropic::BetaNotFoundError
+          | Anthropic::BetaRateLimitError
+          | Anthropic::BetaGatewayTimeoutError
+          | Anthropic::BetaAPIError
+          | Anthropic::BetaOverloadedError
+          | Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPreconditionFailedError
+          | Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError
+          | Anthropic::Beta::MemoryStores::BetaManagedAgentsConflictError
+
+        module BetaManagedAgentsError
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::MemoryStores::beta_managed_agents_error]
+        end
+      end
+    end
+  end
+end

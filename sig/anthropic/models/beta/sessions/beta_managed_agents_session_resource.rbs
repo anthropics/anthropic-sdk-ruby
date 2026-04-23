@@ -5,6 +5,7 @@ module Anthropic
         type beta_managed_agents_session_resource =
           Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource
           | Anthropic::Beta::Sessions::BetaManagedAgentsFileResource
+          | Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource
 
         module BetaManagedAgentsSessionResource
           extend Anthropic::Internal::Type::Union
