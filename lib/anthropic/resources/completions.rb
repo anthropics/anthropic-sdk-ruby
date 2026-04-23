@@ -112,8 +112,11 @@ module Anthropic
           path: "v1/complete",
           headers: {
             "accept" => "text/event-stream",
+            "accept-encoding" => "identity",
             **parsed.slice(*header_params.keys)
-          }.transform_keys(header_params),
+          }.transform_keys(
+            header_params
+          ),
           body: parsed.except(*header_params.keys),
           stream: Anthropic::Internal::Stream,
           model: Anthropic::Completion,
