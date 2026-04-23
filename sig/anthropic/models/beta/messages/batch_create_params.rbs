@@ -77,7 +77,8 @@ module Anthropic
                 tool_choice: Anthropic::Models::Beta::beta_tool_choice,
                 tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
                 top_k: Integer,
-                top_p: Float
+                top_p: Float,
+                user_profile_id: String?
               }
 
             class Params < Anthropic::Internal::Type::BaseModel
@@ -167,6 +168,8 @@ module Anthropic
 
               def top_p=: (Float) -> Float
 
+              attr_accessor user_profile_id: String?
+
               def initialize: (
                 max_tokens: Integer,
                 messages: ::Array[Anthropic::Beta::BetaMessageParam],
@@ -189,7 +192,8 @@ module Anthropic
                 ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
                 ?tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
                 ?top_k: Integer,
-                ?top_p: Float
+                ?top_p: Float,
+                ?user_profile_id: String?
               ) -> void
 
               def to_hash: -> {
@@ -214,7 +218,8 @@ module Anthropic
                 tool_choice: Anthropic::Models::Beta::beta_tool_choice,
                 tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
                 top_k: Integer,
-                top_p: Float
+                top_p: Float,
+                user_profile_id: String?
               }
 
               type container = Anthropic::Beta::BetaContainerParams | String

@@ -1,0 +1,44 @@
+module Anthropic
+  module Resources
+    class Beta
+      class UserProfiles
+        def create: (
+          ?external_id: String?,
+          ?metadata: ::Hash[Symbol, String],
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaUserProfile
+
+        def retrieve: (
+          String user_profile_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaUserProfile
+
+        def update: (
+          String user_profile_id,
+          ?external_id: String?,
+          ?metadata: ::Hash[Symbol, String],
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaUserProfile
+
+        def list: (
+          ?limit: Integer,
+          ?order: Anthropic::Models::Beta::UserProfileListParams::order,
+          ?page: String,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaUserProfile]
+
+        def create_enrollment_url: (
+          String user_profile_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaUserProfileEnrollmentURL
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

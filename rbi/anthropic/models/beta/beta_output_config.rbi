@@ -34,11 +34,23 @@ module Anthropic
         end
         attr_writer :format_
 
+        # User-configurable total token budget across contexts.
+        sig { returns(T.nilable(Anthropic::Beta::BetaTokenTaskBudget)) }
+        attr_reader :task_budget
+
+        sig do
+          params(
+            task_budget: T.nilable(Anthropic::Beta::BetaTokenTaskBudget::OrHash)
+          ).void
+        end
+        attr_writer :task_budget
+
         sig do
           params(
             effort:
               T.nilable(Anthropic::Beta::BetaOutputConfig::Effort::OrSymbol),
-            format_: T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash)
+            format_: T.nilable(Anthropic::Beta::BetaJSONOutputFormat::OrHash),
+            task_budget: T.nilable(Anthropic::Beta::BetaTokenTaskBudget::OrHash)
           ).returns(T.attached_class)
         end
         def self.new(
@@ -46,7 +58,9 @@ module Anthropic
           effort: nil,
           # A schema to specify Claude's output format in responses. See
           # [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
-          format_: nil
+          format_: nil,
+          # User-configurable total token budget across contexts.
+          task_budget: nil
         )
         end
 
@@ -55,7 +69,8 @@ module Anthropic
             {
               effort:
                 T.nilable(Anthropic::Beta::BetaOutputConfig::Effort::OrSymbol),
-              format_: T.nilable(Anthropic::Beta::BetaJSONOutputFormat)
+              format_: T.nilable(Anthropic::Beta::BetaJSONOutputFormat),
+              task_budget: T.nilable(Anthropic::Beta::BetaTokenTaskBudget)
             }
           )
         end

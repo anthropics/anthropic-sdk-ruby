@@ -670,6 +670,11 @@ module Anthropic
               sig { params(top_p: Float).void }
               attr_writer :top_p
 
+              # The user profile ID to attribute this request to. Use when acting on behalf of a
+              # party other than your organization.
+              sig { returns(T.nilable(String)) }
+              attr_accessor :user_profile_id
+
               # Messages API creation parameters for the individual request.
               #
               # See the [Messages API reference](https://docs.claude.com/en/api/messages) for
@@ -756,7 +761,8 @@ module Anthropic
                       )
                     ],
                   top_k: Integer,
-                  top_p: Float
+                  top_p: Float,
+                  user_profile_id: T.nilable(String)
                 ).returns(T.attached_class)
               end
               def self.new(
@@ -1004,7 +1010,10 @@ module Anthropic
                 # reaches a particular probability specified by `top_p`.
                 #
                 # Recommended for advanced use cases only.
-                top_p: nil
+                top_p: nil,
+                # The user profile ID to attribute this request to. Use when acting on behalf of a
+                # party other than your organization.
+                user_profile_id: nil
               )
               end
 
@@ -1084,7 +1093,8 @@ module Anthropic
                         )
                       ],
                     top_k: Integer,
-                    top_p: Float
+                    top_p: Float,
+                    user_profile_id: T.nilable(String)
                   }
                 )
               end
