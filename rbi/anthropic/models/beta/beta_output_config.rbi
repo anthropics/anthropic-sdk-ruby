@@ -99,6 +99,11 @@ module Anthropic
               :high,
               Anthropic::Beta::BetaOutputConfig::Effort::TaggedSymbol
             )
+          XHIGH =
+            T.let(
+              :xhigh,
+              Anthropic::Beta::BetaOutputConfig::Effort::TaggedSymbol
+            )
           MAX =
             T.let(:max, Anthropic::Beta::BetaOutputConfig::Effort::TaggedSymbol)
 

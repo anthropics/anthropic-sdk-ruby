@@ -42,6 +42,7 @@ module Anthropic
           LOW = :low
           MEDIUM = :medium
           HIGH = :high
+          XHIGH = :xhigh
           MAX = :max
 
           # @!method self.values
