@@ -33,6 +33,10 @@ module Anthropic
         end
         attr_writer :cache_control
 
+        # Opaque metadata from prior compaction, to be round-tripped verbatim
+        sig { returns(T.nilable(String)) }
+        attr_accessor :encrypted_content
+
         # A compaction block containing summary of previous context.
         #
         # Users should round-trip these blocks from responses to subsequent requests to
@@ -45,6 +49,7 @@ module Anthropic
             content: T.nilable(String),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+            encrypted_content: T.nilable(String),
             type: Symbol
           ).returns(T.attached_class)
         end
@@ -53,6 +58,8 @@ module Anthropic
           content:,
           # Create a cache control breakpoint at this content block.
           cache_control: nil,
+          # Opaque metadata from prior compaction, to be round-tripped verbatim
+          encrypted_content: nil,
           type: :compaction
         )
         end
@@ -63,7 +70,8 @@ module Anthropic
               content: T.nilable(String),
               type: Symbol,
               cache_control:
-                T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)
+                T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
+              encrypted_content: T.nilable(String)
             }
           )
         end
