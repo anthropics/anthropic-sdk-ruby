@@ -1,0 +1,79 @@
+module Anthropic
+  module Models
+    module Beta
+      module MemoryStores
+        type beta_managed_agents_memory =
+          {
+            id: String,
+            :content_sha256 => String,
+            content_size_bytes: Integer,
+            created_at: Time,
+            memory_store_id: String,
+            memory_version_id: String,
+            path: String,
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory::type_,
+            updated_at: Time,
+            content: String?
+          }
+
+        class BetaManagedAgentsMemory < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor content_sha256: String
+
+          attr_accessor content_size_bytes: Integer
+
+          attr_accessor created_at: Time
+
+          attr_accessor memory_store_id: String
+
+          attr_accessor memory_version_id: String
+
+          attr_accessor path: String
+
+          attr_accessor type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory::type_
+
+          attr_accessor updated_at: Time
+
+          attr_accessor content: String?
+
+          def initialize: (
+            id: String,
+            content_sha256: String,
+            content_size_bytes: Integer,
+            created_at: Time,
+            memory_store_id: String,
+            memory_version_id: String,
+            path: String,
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory::type_,
+            updated_at: Time,
+            ?content: String?
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            :content_sha256 => String,
+            content_size_bytes: Integer,
+            created_at: Time,
+            memory_store_id: String,
+            memory_version_id: String,
+            path: String,
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory::type_,
+            updated_at: Time,
+            content: String?
+          }
+
+          type type_ = :memory
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            MEMORY: :memory
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory::type_]
+          end
+        end
+      end
+    end
+  end
+end

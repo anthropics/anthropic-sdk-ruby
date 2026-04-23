@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module MemoryStores
+        type beta_managed_agents_memory_view = :basic | :full
+
+        module BetaManagedAgentsMemoryView
+          extend Anthropic::Internal::Type::Enum
+
+          BASIC: :basic
+          FULL: :full
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view]
+        end
+      end
+    end
+  end
+end

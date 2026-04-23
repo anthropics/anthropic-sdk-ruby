@@ -1,0 +1,103 @@
+module Anthropic
+  module Models
+    module Beta
+      module MemoryStores
+        type memory_list_params =
+          {
+            memory_store_id: String,
+            depth: Integer,
+            limit: Integer,
+            order: Anthropic::Models::Beta::MemoryStores::MemoryListParams::order,
+            order_by: String,
+            page: String,
+            path_prefix: String,
+            view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class MemoryListParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor memory_store_id: String
+
+          attr_reader depth: Integer?
+
+          def depth=: (Integer) -> Integer
+
+          attr_reader limit: Integer?
+
+          def limit=: (Integer) -> Integer
+
+          attr_reader order: Anthropic::Models::Beta::MemoryStores::MemoryListParams::order?
+
+          def order=: (
+            Anthropic::Models::Beta::MemoryStores::MemoryListParams::order
+          ) -> Anthropic::Models::Beta::MemoryStores::MemoryListParams::order
+
+          attr_reader order_by: String?
+
+          def order_by=: (String) -> String
+
+          attr_reader page: String?
+
+          def page=: (String) -> String
+
+          attr_reader path_prefix: String?
+
+          def path_prefix=: (String) -> String
+
+          attr_reader view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view?
+
+          def view=: (
+            Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view
+          ) -> Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view
+
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          def initialize: (
+            memory_store_id: String,
+            ?depth: Integer,
+            ?limit: Integer,
+            ?order: Anthropic::Models::Beta::MemoryStores::MemoryListParams::order,
+            ?order_by: String,
+            ?page: String,
+            ?path_prefix: String,
+            ?view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            memory_store_id: String,
+            depth: Integer,
+            limit: Integer,
+            order: Anthropic::Models::Beta::MemoryStores::MemoryListParams::order,
+            order_by: String,
+            page: String,
+            path_prefix: String,
+            view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+
+          type order = :asc | :desc
+
+          module Order
+            extend Anthropic::Internal::Type::Enum
+
+            ASC: :asc
+            DESC: :desc
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::MemoryStores::MemoryListParams::order]
+          end
+        end
+      end
+    end
+  end
+end

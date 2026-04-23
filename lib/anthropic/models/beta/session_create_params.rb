@@ -31,7 +31,7 @@ module Anthropic
         # @!attribute resources
         #   Resources (e.g. repositories, files) to mount into the session's container.
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams, Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams>, nil]
+        #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams, Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam>, nil]
         optional :resources,
                  -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::SessionCreateParams::Resource] }
 
@@ -63,7 +63,7 @@ module Anthropic
         #
         #   @param metadata [Hash{Symbol=>String}] Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up
         #
-        #   @param resources [Array<Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams, Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams>] Resources (e.g. repositories, files) to mount into the session's container.
+        #   @param resources [Array<Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams, Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam>] Resources (e.g. repositories, files) to mount into the session's container.
         #
         #   @param title [String, nil] Human-readable session title.
         #
@@ -99,8 +99,11 @@ module Anthropic
           # Mount a file uploaded via the Files API into the session.
           variant :file, -> { Anthropic::Beta::BetaManagedAgentsFileResourceParams }
 
+          # Parameters for attaching a memory store to an agent session.
+          variant :memory_store, -> { Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceParam }
+
           # @!method self.variants
-          #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams, Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams)]
+          #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams, Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam)]
         end
       end
     end

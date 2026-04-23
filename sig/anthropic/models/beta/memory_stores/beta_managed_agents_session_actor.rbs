@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module MemoryStores
+        type beta_managed_agents_session_actor =
+          {
+            session_id: String,
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor::type_
+          }
+
+        class BetaManagedAgentsSessionActor < Anthropic::Internal::Type::BaseModel
+          attr_accessor session_id: String
+
+          attr_accessor type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor::type_
+
+          def initialize: (
+            session_id: String,
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor::type_
+          ) -> void
+
+          def to_hash: -> {
+            session_id: String,
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor::type_
+          }
+
+          type type_ = :session_actor
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            SESSION_ACTOR: :session_actor
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor::type_]
+          end
+        end
+      end
+    end
+  end
+end

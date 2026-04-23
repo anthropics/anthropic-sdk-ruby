@@ -1,0 +1,41 @@
+module Anthropic
+  module Models
+    module Beta
+      module MemoryStores
+        type beta_managed_agents_precondition =
+          {
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition::type_,
+            :content_sha256 => String
+          }
+
+        class BetaManagedAgentsPrecondition < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition::type_
+
+          attr_reader content_sha256: String?
+
+          def content_sha256=: (String) -> String
+
+          def initialize: (
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition::type_,
+            ?content_sha256: String
+          ) -> void
+
+          def to_hash: -> {
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition::type_,
+            :content_sha256 => String
+          }
+
+          type type_ = :content_sha256
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            CONTENT_SHA256: :content_sha256
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition::type_]
+          end
+        end
+      end
+    end
+  end
+end

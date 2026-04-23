@@ -20,6 +20,7 @@ class Anthropic::Test::Resources::Beta::Sessions::ResourcesTest < Anthropic::Tes
       case response
       in Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource
       in Anthropic::Beta::Sessions::BetaManagedAgentsFileResource
+      in Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource
       end
     end
 
@@ -35,6 +36,15 @@ class Anthropic::Test::Resources::Beta::Sessions::ResourcesTest < Anthropic::Tes
         checkout: Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::Checkout | nil
       }
       in {type: :file, id: String, created_at: Time, file_id: String, mount_path: String, updated_at: Time}
+      in {
+        type: :memory_store,
+        memory_store_id: String,
+        access: Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::Access | nil,
+        description: String | nil,
+        instructions: String | nil,
+        mount_path: String | nil,
+        name: String | nil
+      }
       end
     end
   end
@@ -57,6 +67,7 @@ class Anthropic::Test::Resources::Beta::Sessions::ResourcesTest < Anthropic::Tes
       case response
       in Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource
       in Anthropic::Beta::Sessions::BetaManagedAgentsFileResource
+      in Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource
       end
     end
 
@@ -72,6 +83,15 @@ class Anthropic::Test::Resources::Beta::Sessions::ResourcesTest < Anthropic::Tes
         checkout: Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::Checkout | nil
       }
       in {type: :file, id: String, created_at: Time, file_id: String, mount_path: String, updated_at: Time}
+      in {
+        type: :memory_store,
+        memory_store_id: String,
+        access: Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::Access | nil,
+        description: String | nil,
+        instructions: String | nil,
+        mount_path: String | nil,
+        name: String | nil
+      }
       end
     end
   end
@@ -96,6 +116,7 @@ class Anthropic::Test::Resources::Beta::Sessions::ResourcesTest < Anthropic::Tes
       case row
       in Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource
       in Anthropic::Beta::Sessions::BetaManagedAgentsFileResource
+      in Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource
       end
     end
 
@@ -111,6 +132,15 @@ class Anthropic::Test::Resources::Beta::Sessions::ResourcesTest < Anthropic::Tes
         checkout: Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::Checkout | nil
       }
       in {type: :file, id: String, created_at: Time, file_id: String, mount_path: String, updated_at: Time}
+      in {
+        type: :memory_store,
+        memory_store_id: String,
+        access: Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::Access | nil,
+        description: String | nil,
+        instructions: String | nil,
+        mount_path: String | nil,
+        name: String | nil
+      }
       end
     end
   end

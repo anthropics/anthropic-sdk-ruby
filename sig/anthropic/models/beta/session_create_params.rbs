@@ -76,6 +76,7 @@ module Anthropic
         type resource =
           Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams
           | Anthropic::Beta::BetaManagedAgentsFileResourceParams
+          | Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceParam
 
         module Resource
           extend Anthropic::Internal::Type::Union

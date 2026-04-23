@@ -1,0 +1,55 @@
+module Anthropic
+  module Models
+    module Beta
+      module MemoryStores
+        type beta_managed_agents_memory_path_conflict_error =
+          {
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError::type_,
+            conflicting_memory_id: String,
+            conflicting_path: String,
+            message: String
+          }
+
+        class BetaManagedAgentsMemoryPathConflictError < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError::type_
+
+          attr_reader conflicting_memory_id: String?
+
+          def conflicting_memory_id=: (String) -> String
+
+          attr_reader conflicting_path: String?
+
+          def conflicting_path=: (String) -> String
+
+          attr_reader message: String?
+
+          def message=: (String) -> String
+
+          def initialize: (
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError::type_,
+            ?conflicting_memory_id: String,
+            ?conflicting_path: String,
+            ?message: String
+          ) -> void
+
+          def to_hash: -> {
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError::type_,
+            conflicting_memory_id: String,
+            conflicting_path: String,
+            message: String
+          }
+
+          type type_ = :memory_path_conflict_error
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            MEMORY_PATH_CONFLICT_ERROR: :memory_path_conflict_error
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPathConflictError::type_]
+          end
+        end
+      end
+    end
+  end
+end

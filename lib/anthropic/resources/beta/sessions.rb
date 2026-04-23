@@ -23,7 +23,7 @@ module Anthropic
         #
         # @param metadata [Hash{Symbol=>String}] Body param: Arbitrary key-value metadata attached to the session. Maximum 16 pai
         #
-        # @param resources [Array<Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams, Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams>] Body param: Resources (e.g. repositories, files) to mount into the session's con
+        # @param resources [Array<Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams, Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam>] Body param: Resources (e.g. repositories, files) to mount into the session's con
         #
         # @param title [String, nil] Body param: Human-readable session title.
         #

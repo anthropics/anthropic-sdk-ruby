@@ -41,7 +41,8 @@ module Anthropic
               T::Array[
                 T.any(
                   Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams,
-                  Anthropic::Beta::BetaManagedAgentsFileResourceParams
+                  Anthropic::Beta::BetaManagedAgentsFileResourceParams,
+                  Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceParam
                 )
               ]
             )
@@ -55,7 +56,8 @@ module Anthropic
               T::Array[
                 T.any(
                   Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsFileResourceParams::OrHash
+                  Anthropic::Beta::BetaManagedAgentsFileResourceParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceParam::OrHash
                 )
               ]
           ).void
@@ -103,7 +105,8 @@ module Anthropic
               T::Array[
                 T.any(
                   Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsFileResourceParams::OrHash
+                  Anthropic::Beta::BetaManagedAgentsFileResourceParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceParam::OrHash
                 )
               ],
             title: T.nilable(String),
@@ -144,7 +147,8 @@ module Anthropic
                 T::Array[
                   T.any(
                     Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams,
-                    Anthropic::Beta::BetaManagedAgentsFileResourceParams
+                    Anthropic::Beta::BetaManagedAgentsFileResourceParams,
+                    Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceParam
                   )
                 ],
               title: T.nilable(String),
@@ -185,7 +189,8 @@ module Anthropic
             T.type_alias do
               T.any(
                 Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams,
-                Anthropic::Beta::BetaManagedAgentsFileResourceParams
+                Anthropic::Beta::BetaManagedAgentsFileResourceParams,
+                Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceParam
               )
             end
 

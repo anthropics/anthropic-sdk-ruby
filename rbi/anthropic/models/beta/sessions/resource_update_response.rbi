@@ -12,7 +12,8 @@ module Anthropic
             T.type_alias do
               T.any(
                 Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource,
-                Anthropic::Beta::Sessions::BetaManagedAgentsFileResource
+                Anthropic::Beta::Sessions::BetaManagedAgentsFileResource,
+                Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource
               )
             end
 

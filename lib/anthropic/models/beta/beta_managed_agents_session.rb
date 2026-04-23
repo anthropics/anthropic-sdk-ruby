@@ -41,7 +41,7 @@ module Anthropic
 
         # @!attribute resources
         #
-        #   @return [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource>]
+        #   @return [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource>]
         required :resources,
                  -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::Sessions::BetaManagedAgentsSessionResource] }
 
@@ -104,7 +104,7 @@ module Anthropic
         #
         #   @param metadata [Hash{Symbol=>String}]
         #
-        #   @param resources [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource>]
+        #   @param resources [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource>]
         #
         #   @param stats [Anthropic::Models::Beta::BetaManagedAgentsSessionStats] Timing statistics for a session.
         #

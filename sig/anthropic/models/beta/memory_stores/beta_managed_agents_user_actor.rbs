@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module MemoryStores
+        type beta_managed_agents_user_actor =
+          {
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor::type_,
+            user_id: String
+          }
+
+        class BetaManagedAgentsUserActor < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor::type_
+
+          attr_accessor user_id: String
+
+          def initialize: (
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor::type_,
+            user_id: String
+          ) -> void
+
+          def to_hash: -> {
+            type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor::type_,
+            user_id: String
+          }
+
+          type type_ = :user_actor
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            USER_ACTOR: :user_actor
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor::type_]
+          end
+        end
+      end
+    end
+  end
+end

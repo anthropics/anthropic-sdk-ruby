@@ -1,0 +1,77 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_memory_store_resource =
+          {
+            memory_store_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::type_,
+            access: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::access?,
+            description: String,
+            instructions: String?,
+            mount_path: String?,
+            name: String?
+          }
+
+        class BetaManagedAgentsMemoryStoreResource < Anthropic::Internal::Type::BaseModel
+          attr_accessor memory_store_id: String
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::type_
+
+          attr_accessor access: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::access?
+
+          attr_reader description: String?
+
+          def description=: (String) -> String
+
+          attr_accessor instructions: String?
+
+          attr_accessor mount_path: String?
+
+          attr_accessor name: String?
+
+          def initialize: (
+            memory_store_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::type_,
+            ?access: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::access?,
+            ?description: String,
+            ?instructions: String?,
+            ?mount_path: String?,
+            ?name: String?
+          ) -> void
+
+          def to_hash: -> {
+            memory_store_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::type_,
+            access: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::access?,
+            description: String,
+            instructions: String?,
+            mount_path: String?,
+            name: String?
+          }
+
+          type type_ = :memory_store
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            MEMORY_STORE: :memory_store
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::type_]
+          end
+
+          type access = :read_write | :read_only
+
+          module Access
+            extend Anthropic::Internal::Type::Enum
+
+            READ_WRITE: :read_write
+            READ_ONLY: :read_only
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::access]
+          end
+        end
+      end
+    end
+  end
+end

@@ -33,13 +33,7 @@ module Anthropic
       #   @return [Boolean]
       required :supported, Anthropic::Internal::Type::Boolean
 
-      # @!attribute xhigh
-      #   Indicates whether a capability is supported.
-      #
-      #   @return [Anthropic::Models::CapabilitySupport, nil]
-      required :xhigh, -> { Anthropic::CapabilitySupport }, nil?: true
-
-      # @!method initialize(high:, low:, max:, medium:, supported:, xhigh:)
+      # @!method initialize(high:, low:, max:, medium:, supported:)
       #   Effort (reasoning_effort) capability details.
       #
       #   @param high [Anthropic::Models::CapabilitySupport] Whether the model supports high effort level.
@@ -51,8 +45,6 @@ module Anthropic
       #   @param medium [Anthropic::Models::CapabilitySupport] Whether the model supports medium effort level.
       #
       #   @param supported [Boolean] Whether this capability is supported by the model.
-      #
-      #   @param xhigh [Anthropic::Models::CapabilitySupport, nil] Indicates whether a capability is supported.
     end
   end
 end
