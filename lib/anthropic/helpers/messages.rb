@@ -9,7 +9,7 @@ module Anthropic
         # Extract tool models from the request and convert them to JSON Schema
         # Returns a hash mapping tool name to Ruby model.
         #
-        # @param data [Hash{Sybmol=>Object}]
+        # @param data [Hash{Symbol=>Object}]
         #
         # @param strict [Boolean, nil]
         #
@@ -115,13 +115,13 @@ module Anthropic
 
         # @api private
         #
-        # @param raw [Hash{Sybmol=>Object}]
+        # @param raw [Hash{Symbol=>Object}]
         #
         # @param tools [Hash{String=>Class}]
         #
         # @param models [Hash{String=>Class}]
         #
-        # @return [Hash{Sybmol=>Object}]
+        # @return [Hash{Symbol=>Object}]
         def parse_input_schemas!(raw, tools:, models:)
           raw[:content]&.each do |content|
             case content
