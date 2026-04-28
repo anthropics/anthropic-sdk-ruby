@@ -5,7 +5,7 @@ module Anthropic
     class Beta
       class MemoryStores
         class Memories
-          # CreateMemory
+          # Create a memory
           sig do
             params(
               memory_store_id: String,
@@ -21,9 +21,13 @@ module Anthropic
           def create(
             # Path param: Path parameter memory_store_id
             memory_store_id,
-            # Body param
+            # Body param: UTF-8 text content for the new memory. Maximum 100 kB (102,400
+            # bytes). Required; pass `""` explicitly to create an empty memory.
             content:,
-            # Body param
+            # Body param: Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`.
+            # Must start with `/`, contain at least one non-empty segment, and be at most
+            # 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or
+            # format characters, and must be NFC-normalized. Paths are case-sensitive.
             path:,
             # Query param: Query parameter for view
             view: nil,
@@ -33,7 +37,7 @@ module Anthropic
           )
           end
 
-          # GetMemory
+          # Retrieve a memory
           sig do
             params(
               memory_id: String,
@@ -58,7 +62,7 @@ module Anthropic
           )
           end
 
-          # UpdateMemory
+          # Update a memory
           sig do
             params(
               memory_id: String,
@@ -81,11 +85,21 @@ module Anthropic
             memory_store_id:,
             # Query param: Query parameter for view
             view: nil,
-            # Body param
+            # Body param: New UTF-8 text content for the memory. Maximum 100 kB (102,400
+            # bytes). Omit to leave the content unchanged (e.g., for a rename-only update).
             content: nil,
-            # Body param
+            # Body param: New path for the memory (a rename). Must start with `/`, contain at
+            # least one non-empty segment, and be at most 1,024 bytes. Must not contain empty
+            # segments, `.` or `..` segments, control or format characters, and must be
+            # NFC-normalized. Paths are case-sensitive. The memory's `id` is preserved across
+            # renames. Omit to leave the path unchanged.
             path: nil,
-            # Body param
+            # Body param: Optimistic-concurrency precondition: the update applies only if the
+            # memory's stored `content_sha256` equals the supplied value. On mismatch, the
+            # request returns `memory_precondition_failed_error` (HTTP 409); re-read the
+            # memory and retry against the fresh state. If the precondition fails but the
+            # stored state already exactly matches the requested `content` and `path`, the
+            # server returns 200 instead of 409.
             precondition: nil,
             # Header param: Optional header to specify the beta version(s) you want to use.
             betas: nil,
@@ -93,7 +107,7 @@ module Anthropic
           )
           end
 
-          # ListMemories
+          # List memories
           sig do
             params(
               memory_store_id: String,
@@ -140,7 +154,7 @@ module Anthropic
           )
           end
 
-          # DeleteMemory
+          # Delete a memory
           sig do
             params(
               memory_id: String,

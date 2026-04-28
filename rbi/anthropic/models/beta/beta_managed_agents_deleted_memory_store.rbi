@@ -15,6 +15,8 @@ module Anthropic
             )
           end
 
+        # ID of the deleted memory store (a `memstore_...` identifier). The store and all
+        # its memories and versions are no longer retrievable.
         sig { returns(String) }
         attr_accessor :id
 
@@ -25,6 +27,7 @@ module Anthropic
         end
         attr_accessor :type
 
+        # Confirmation that a `memory_store` was deleted.
         sig do
           params(
             id: String,
@@ -32,7 +35,12 @@ module Anthropic
               Anthropic::Beta::BetaManagedAgentsDeletedMemoryStore::Type::OrSymbol
           ).returns(T.attached_class)
         end
-        def self.new(id:, type:)
+        def self.new(
+          # ID of the deleted memory store (a `memstore_...` identifier). The store and all
+          # its memories and versions are no longer retrievable.
+          id:,
+          type:
+        )
         end
 
         sig do

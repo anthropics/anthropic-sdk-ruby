@@ -13,6 +13,7 @@ module Anthropic
               )
             end
 
+          # ID of the deleted memory (a `mem_...` value).
           sig { returns(String) }
           attr_accessor :id
 
@@ -23,6 +24,11 @@ module Anthropic
           end
           attr_accessor :type
 
+          # Tombstone returned by
+          # [Delete a memory](/en/api/beta/memory_stores/memories/delete). The memory's
+          # version history persists and remains listable via
+          # [List memory versions](/en/api/beta/memory_stores/memory_versions/list) until
+          # the store itself is deleted.
           sig do
             params(
               id: String,
@@ -30,7 +36,11 @@ module Anthropic
                 Anthropic::Beta::MemoryStores::BetaManagedAgentsDeletedMemory::Type::OrSymbol
             ).returns(T.attached_class)
           end
-          def self.new(id:, type:)
+          def self.new(
+            # ID of the deleted memory (a `mem_...` value).
+            id:,
+            type:
+          )
           end
 
           sig do

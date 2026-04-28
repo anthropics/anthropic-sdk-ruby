@@ -115,6 +115,7 @@ module Anthropic
             created_at_lte: Time,
             include_archived: T::Boolean,
             limit: Integer,
+            memory_store_id: String,
             order: Anthropic::Beta::SessionListParams::Order::OrSymbol,
             page: String,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
@@ -143,6 +144,9 @@ module Anthropic
           include_archived: nil,
           # Query param: Maximum number of results to return.
           limit: nil,
+          # Query param: Filter sessions whose resources contain a memory_store with this
+          # memory store ID.
+          memory_store_id: nil,
           # Query param: Sort direction for results, ordered by created_at. Defaults to desc
           # (newest first).
           order: nil,

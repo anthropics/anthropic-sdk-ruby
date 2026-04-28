@@ -41,6 +41,7 @@ module Anthropic
           ?created_at_lte: Time,
           ?include_archived: bool,
           ?limit: Integer,
+          ?memory_store_id: String,
           ?order: Anthropic::Models::Beta::SessionListParams::order,
           ?page: String,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
