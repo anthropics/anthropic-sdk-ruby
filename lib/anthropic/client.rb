@@ -86,6 +86,17 @@ module Anthropic
       headers = {
         "anthropic-version" => "2023-06-01"
       }
+      custom_headers_env = ENV["ANTHROPIC_CUSTOM_HEADERS"]
+      unless custom_headers_env.nil?
+        parsed = {}
+        custom_headers_env.split("\n").each do |line|
+          colon = line.index(":")
+          unless colon.nil?
+            parsed[line[0...colon].strip] = line[(colon + 1)..].strip
+          end
+        end
+        headers = parsed.merge(headers)
+      end
 
       @api_key = api_key&.to_s
       @auth_token = auth_token&.to_s
