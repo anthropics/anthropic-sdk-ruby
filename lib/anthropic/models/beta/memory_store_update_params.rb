@@ -14,6 +14,8 @@ module Anthropic
         required :memory_store_id, String
 
         # @!attribute description
+        #   New description for the store, up to 1024 characters. Pass an empty string to
+        #   clear it.
         #
         #   @return [String, nil]
         optional :description, String, nil?: true
@@ -27,6 +29,9 @@ module Anthropic
         optional :metadata, Anthropic::Internal::Type::HashOf[String, nil?: true], nil?: true
 
         # @!attribute name
+        #   New human-readable name for the store. 1–255 characters; no control characters.
+        #   Renaming changes the slug used for the store's `mount_path` in sessions created
+        #   after the update.
         #
         #   @return [String, nil]
         optional :name, String, nil?: true
@@ -43,11 +48,11 @@ module Anthropic
         #
         #   @param memory_store_id [String]
         #
-        #   @param description [String, nil]
+        #   @param description [String, nil] New description for the store, up to 1024 characters. Pass an empty string to cl
         #
         #   @param metadata [Hash{Symbol=>String, nil}, nil] Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omi
         #
-        #   @param name [String, nil]
+        #   @param name [String, nil] New human-readable name for the store. 1–255 characters; no control characters.
         #
         #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #

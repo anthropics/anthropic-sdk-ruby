@@ -6,6 +6,8 @@ module Anthropic
       # @see Anthropic::Resources::Beta::MemoryStores#delete
       class BetaManagedAgentsDeletedMemoryStore < Anthropic::Internal::Type::BaseModel
         # @!attribute id
+        #   ID of the deleted memory store (a `memstore_...` identifier). The store and all
+        #   its memories and versions are no longer retrievable.
         #
         #   @return [String]
         required :id, String
@@ -16,7 +18,13 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsDeletedMemoryStore::Type }
 
         # @!method initialize(id:, type:)
-        #   @param id [String]
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaManagedAgentsDeletedMemoryStore} for more details.
+        #
+        #   Confirmation that a `memory_store` was deleted.
+        #
+        #   @param id [String] ID of the deleted memory store (a `memstore_...` identifier). The store and all
+        #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeletedMemoryStore::Type]
 
         # @see Anthropic::Models::Beta::BetaManagedAgentsDeletedMemoryStore#type

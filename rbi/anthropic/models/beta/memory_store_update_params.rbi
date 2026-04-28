@@ -18,6 +18,8 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :memory_store_id
 
+        # New description for the store, up to 1024 characters. Pass an empty string to
+        # clear it.
         sig { returns(T.nilable(String)) }
         attr_accessor :description
 
@@ -27,6 +29,9 @@ module Anthropic
         sig { returns(T.nilable(T::Hash[Symbol, T.nilable(String)])) }
         attr_accessor :metadata
 
+        # New human-readable name for the store. 1–255 characters; no control characters.
+        # Renaming changes the slug used for the store's `mount_path` in sessions created
+        # after the update.
         sig { returns(T.nilable(String)) }
         attr_accessor :name
 
@@ -59,11 +64,16 @@ module Anthropic
         end
         def self.new(
           memory_store_id:,
+          # New description for the store, up to 1024 characters. Pass an empty string to
+          # clear it.
           description: nil,
           # Metadata patch. Set a key to a string to upsert it, or to null to delete it.
           # Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars
           # each) with values up to 512 chars.
           metadata: nil,
+          # New human-readable name for the store. 1–255 characters; no control characters.
+          # Renaming changes the slug used for the store's `mount_path` in sessions created
+          # after the update.
           name: nil,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,

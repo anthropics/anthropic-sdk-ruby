@@ -53,7 +53,7 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :updated_at
 
-        # Unified Environment resource for both cloud and BYOC environments.
+        # Unified Environment resource for both cloud and self-hosted environments.
         sig do
           params(
             id: String,

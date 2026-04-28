@@ -60,7 +60,7 @@ module Anthropic
         required :updated_at, String
 
         # @!method initialize(id:, archived_at:, config:, created_at:, description:, metadata:, name:, updated_at:, type: :environment)
-        #   Unified Environment resource for both cloud and BYOC environments.
+        #   Unified Environment resource for both cloud and self-hosted environments.
         #
         #   @param id [String] Environment identifier (e.g., 'env\_...')
         #

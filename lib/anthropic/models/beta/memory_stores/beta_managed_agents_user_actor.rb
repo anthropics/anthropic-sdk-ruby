@@ -11,13 +11,17 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor::Type }
 
           # @!attribute user_id
+          #   ID of the user who performed the write (a `user_...` value).
           #
           #   @return [String]
           required :user_id, String
 
           # @!method initialize(type:, user_id:)
+          #   Attribution for a write made by a human user through the Anthropic Console.
+          #
           #   @param type [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor::Type]
-          #   @param user_id [String]
+          #
+          #   @param user_id [String] ID of the user who performed the write (a `user_...` value).
 
           # @see Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor#type
           module Type

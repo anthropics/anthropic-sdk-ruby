@@ -13,6 +13,8 @@ module Anthropic
               )
             end
 
+          # ID of the API key that performed the write. This identifies the key, not the
+          # secret.
           sig { returns(String) }
           attr_accessor :api_key_id
 
@@ -23,6 +25,8 @@ module Anthropic
           end
           attr_accessor :type
 
+          # Attribution for a write made directly via the public API (outside of any
+          # session).
           sig do
             params(
               api_key_id: String,
@@ -30,7 +34,12 @@ module Anthropic
                 Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor::Type::OrSymbol
             ).returns(T.attached_class)
           end
-          def self.new(api_key_id:, type:)
+          def self.new(
+            # ID of the API key that performed the write. This identifies the key, not the
+            # secret.
+            api_key_id:,
+            type:
+          )
           end
 
           sig do

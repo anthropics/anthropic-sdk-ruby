@@ -26,16 +26,29 @@ module Anthropic
           optional :view, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryView }
 
           # @!attribute content
+          #   New UTF-8 text content for the memory. Maximum 100 kB (102,400 bytes). Omit to
+          #   leave the content unchanged (e.g., for a rename-only update).
           #
           #   @return [String, nil]
           optional :content, String, nil?: true
 
           # @!attribute path
+          #   New path for the memory (a rename). Must start with `/`, contain at least one
+          #   non-empty segment, and be at most 1,024 bytes. Must not contain empty segments,
+          #   `.` or `..` segments, control or format characters, and must be NFC-normalized.
+          #   Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to
+          #   leave the path unchanged.
           #
           #   @return [String, nil]
           optional :path, String, nil?: true
 
           # @!attribute precondition
+          #   Optimistic-concurrency precondition: the update applies only if the memory's
+          #   stored `content_sha256` equals the supplied value. On mismatch, the request
+          #   returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and
+          #   retry against the fresh state. If the precondition fails but the stored state
+          #   already exactly matches the requested `content` and `path`, the server returns
+          #   200 instead of 409.
           #
           #   @return [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition, nil]
           optional :precondition, -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsPrecondition }
@@ -47,17 +60,20 @@ module Anthropic
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
           # @!method initialize(memory_store_id:, memory_id:, view: nil, content: nil, path: nil, precondition: nil, betas: nil, request_options: {})
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::MemoryStores::MemoryUpdateParams} for more details.
+          #
           #   @param memory_store_id [String]
           #
           #   @param memory_id [String]
           #
           #   @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query parameter for view
           #
-          #   @param content [String, nil]
+          #   @param content [String, nil] New UTF-8 text content for the memory. Maximum 100 kB (102,400 bytes). Omit to l
           #
-          #   @param path [String, nil]
+          #   @param path [String, nil] New path for the memory (a rename). Must start with `/`, contain at least one no
           #
-          #   @param precondition [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition]
+          #   @param precondition [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition] Optimistic-concurrency precondition: the update applies only if the memory's sto
           #
           #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #

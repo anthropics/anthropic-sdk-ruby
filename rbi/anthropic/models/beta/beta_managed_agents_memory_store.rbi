@@ -14,6 +14,9 @@ module Anthropic
             )
           end
 
+        # Unique identifier for the memory store (a `memstore_...` tagged ID). Use this
+        # when attaching the store to a session, or in the `{memory_store_id}` path
+        # parameter of subsequent calls.
         sig { returns(String) }
         attr_accessor :id
 
@@ -21,6 +24,8 @@ module Anthropic
         sig { returns(Time) }
         attr_accessor :created_at
 
+        # Human-readable name for the store. 1–255 characters. The store's mount-path slug
+        # under `/mnt/memory/` is derived from this name.
         sig { returns(String) }
         attr_accessor :name
 
@@ -39,18 +44,27 @@ module Anthropic
         sig { returns(T.nilable(Time)) }
         attr_accessor :archived_at
 
+        # Free-text description of what the store contains, up to 1024 characters.
+        # Included in the agent's system prompt when the store is attached, so word it to
+        # be useful to the agent. Empty string when unset.
         sig { returns(T.nilable(String)) }
         attr_reader :description
 
         sig { params(description: String).void }
         attr_writer :description
 
+        # Arbitrary key-value tags for your own bookkeeping (such as the end user a store
+        # belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters.
+        # Returned on retrieve/list but not filterable.
         sig { returns(T.nilable(T::Hash[Symbol, String])) }
         attr_reader :metadata
 
         sig { params(metadata: T::Hash[Symbol, String]).void }
         attr_writer :metadata
 
+        # A `memory_store`: a named container for agent memories, scoped to a workspace.
+        # Attach a store to a session via `resources[]` to mount it as a directory the
+        # agent can read and write.
         sig do
           params(
             id: String,
@@ -64,16 +78,27 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
+          # Unique identifier for the memory store (a `memstore_...` tagged ID). Use this
+          # when attaching the store to a session, or in the `{memory_store_id}` path
+          # parameter of subsequent calls.
           id:,
           # A timestamp in RFC 3339 format
           created_at:,
+          # Human-readable name for the store. 1–255 characters. The store's mount-path slug
+          # under `/mnt/memory/` is derived from this name.
           name:,
           type:,
           # A timestamp in RFC 3339 format
           updated_at:,
           # A timestamp in RFC 3339 format
           archived_at: nil,
+          # Free-text description of what the store contains, up to 1024 characters.
+          # Included in the agent's system prompt when the store is attached, so word it to
+          # be useful to the agent. Empty string when unset.
           description: nil,
+          # Arbitrary key-value tags for your own bookkeeping (such as the end user a store
+          # belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters.
+          # Returned on retrieve/list but not filterable.
           metadata: nil
         )
         end

@@ -4,6 +4,9 @@ module Anthropic
   module Models
     module Beta
       module MemoryStores
+        # One item in a [List memories](/en/api/beta/memory_stores/memories/list)
+        # response: either a `memory` object or, when `depth` is set, a `memory_prefix`
+        # rollup marker.
         module BetaManagedAgentsMemoryListItem
           extend Anthropic::Internal::Type::Union
 

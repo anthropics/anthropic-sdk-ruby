@@ -5,15 +5,18 @@ module Anthropic
     class Beta
       class MemoryStores
         class Memories
-          # CreateMemory
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::MemoryStores::MemoryCreateParams} for more details.
+          #
+          # Create a memory
           #
           # @overload create(memory_store_id, content:, path:, view: nil, betas: nil, request_options: {})
           #
           # @param memory_store_id [String] Path param: Path parameter memory_store_id
           #
-          # @param content [String, nil] Body param
+          # @param content [String, nil] Body param: UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes
           #
-          # @param path [String] Body param
+          # @param path [String] Body param: Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`.
           #
           # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Query parameter for view
           #
@@ -40,7 +43,7 @@ module Anthropic
             )
           end
 
-          # GetMemory
+          # Retrieve a memory
           #
           # @overload retrieve(memory_id, memory_store_id:, view: nil, betas: nil, request_options: {})
           #
@@ -75,7 +78,10 @@ module Anthropic
             )
           end
 
-          # UpdateMemory
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::MemoryStores::MemoryUpdateParams} for more details.
+          #
+          # Update a memory
           #
           # @overload update(memory_id, memory_store_id:, view: nil, content: nil, path: nil, precondition: nil, betas: nil, request_options: {})
           #
@@ -85,11 +91,11 @@ module Anthropic
           #
           # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Query parameter for view
           #
-          # @param content [String, nil] Body param
+          # @param content [String, nil] Body param: New UTF-8 text content for the memory. Maximum 100 kB (102,400 bytes
           #
-          # @param path [String, nil] Body param
+          # @param path [String, nil] Body param: New path for the memory (a rename). Must start with `/`, contain at
           #
-          # @param precondition [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition] Body param
+          # @param precondition [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsPrecondition] Body param: Optimistic-concurrency precondition: the update applies only if the
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
@@ -121,7 +127,7 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::MemoryStores::MemoryListParams} for more details.
           #
-          # ListMemories
+          # List memories
           #
           # @overload list(memory_store_id, depth: nil, limit: nil, order: nil, order_by: nil, page: nil, path_prefix: nil, view: nil, betas: nil, request_options: {})
           #
@@ -163,7 +169,7 @@ module Anthropic
             )
           end
 
-          # DeleteMemory
+          # Delete a memory
           #
           # @overload delete(memory_id, memory_store_id:, expected_content_sha256: nil, betas: nil, request_options: {})
           #
