@@ -19,9 +19,15 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :memory_store_id
 
+          # UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required;
+          # pass `""` explicitly to create an empty memory.
           sig { returns(T.nilable(String)) }
           attr_accessor :content
 
+          # Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start
+          # with `/`, contain at least one non-empty segment, and be at most 1,024 bytes.
+          # Must not contain empty segments, `.` or `..` segments, control or format
+          # characters, and must be NFC-normalized. Paths are case-sensitive.
           sig { returns(String) }
           attr_accessor :path
 
@@ -74,7 +80,13 @@ module Anthropic
           end
           def self.new(
             memory_store_id:,
+            # UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required;
+            # pass `""` explicitly to create an empty memory.
             content:,
+            # Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start
+            # with `/`, contain at least one non-empty segment, and be at most 1,024 bytes.
+            # Must not contain empty segments, `.` or `..` segments, control or format
+            # characters, and must be NFC-normalized. Paths are case-sensitive.
             path:,
             # Query parameter for view
             view: nil,

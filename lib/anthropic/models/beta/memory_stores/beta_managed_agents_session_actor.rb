@@ -6,6 +6,9 @@ module Anthropic
       module MemoryStores
         class BetaManagedAgentsSessionActor < Anthropic::Internal::Type::BaseModel
           # @!attribute session_id
+          #   ID of the session that performed the write (a `sesn_...` value). Look up the
+          #   session via [Retrieve a session](/en/api/sessions-retrieve) for further
+          #   provenance.
           #
           #   @return [String]
           required :session_id, String
@@ -16,7 +19,15 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsSessionActor::Type }
 
           # @!method initialize(session_id:, type:)
-          #   @param session_id [String]
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor} for more
+          #   details.
+          #
+          #   Attribution for a write made by an agent during a session, through the mounted
+          #   filesystem at `/mnt/memory/`.
+          #
+          #   @param session_id [String] ID of the session that performed the write (a `sesn_...` value). Look up the ses
+          #
           #   @param type [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor::Type]
 
           # @see Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor#type

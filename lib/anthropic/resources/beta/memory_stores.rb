@@ -10,15 +10,18 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::MemoryStores::MemoryVersions]
         attr_reader :memory_versions
 
-        # CreateMemoryStore
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::MemoryStoreCreateParams} for more details.
+        #
+        # Create a memory store
         #
         # @overload create(name:, description: nil, metadata: nil, betas: nil, request_options: {})
         #
-        # @param name [String] Body param
+        # @param name [String] Body param: Human-readable name for the store. Required; 1–255 characters; no co
         #
-        # @param description [String] Body param
+        # @param description [String] Body param: Free-text description of what the store contains, up to 1024 charact
         #
-        # @param metadata [Hash{Symbol=>String}] Body param
+        # @param metadata [Hash{Symbol=>String}] Body param: Arbitrary key-value tags for your own bookkeeping (such as the end u
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
@@ -40,7 +43,7 @@ module Anthropic
           )
         end
 
-        # GetMemoryStore
+        # Retrieve a memory store
         #
         # @overload retrieve(memory_store_id, betas: nil, request_options: {})
         #
@@ -67,17 +70,17 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MemoryStoreUpdateParams} for more details.
         #
-        # UpdateMemoryStore
+        # Update a memory store
         #
         # @overload update(memory_store_id, description: nil, metadata: nil, name: nil, betas: nil, request_options: {})
         #
         # @param memory_store_id [String] Path param: Path parameter memory_store_id
         #
-        # @param description [String, nil] Body param
+        # @param description [String, nil] Body param: New description for the store, up to 1024 characters. Pass an empty
         #
         # @param metadata [Hash{Symbol=>String, nil}, nil] Body param: Metadata patch. Set a key to a string to upsert it, or to null to de
         #
-        # @param name [String, nil] Body param
+        # @param name [String, nil] Body param: New human-readable name for the store. 1–255 characters; no control
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
@@ -99,19 +102,22 @@ module Anthropic
           )
         end
 
-        # ListMemoryStores
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::MemoryStoreListParams} for more details.
+        #
+        # List memory stores
         #
         # @overload list(created_at_gte: nil, created_at_lte: nil, include_archived: nil, limit: nil, page: nil, betas: nil, request_options: {})
         #
-        # @param created_at_gte [Time] Query param: Return stores created at or after this time (inclusive).
+        # @param created_at_gte [Time] Query param: Return only stores whose `created_at` is at or after this time (inc
         #
-        # @param created_at_lte [Time] Query param: Return stores created at or before this time (inclusive).
+        # @param created_at_lte [Time] Query param: Return only stores whose `created_at` is at or before this time (in
         #
-        # @param include_archived [Boolean] Query param: Query parameter for include_archived
+        # @param include_archived [Boolean] Query param: When `true`, archived stores are included in the results. Defaults
         #
-        # @param limit [Integer] Query param: Query parameter for limit
+        # @param limit [Integer] Query param: Maximum number of stores to return per page. Must be between 1 and
         #
-        # @param page [String] Query param: Query parameter for page
+        # @param page [String] Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page`
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
@@ -135,7 +141,7 @@ module Anthropic
           )
         end
 
-        # DeleteMemoryStore
+        # Delete a memory store
         #
         # @overload delete(memory_store_id, betas: nil, request_options: {})
         #
@@ -159,7 +165,7 @@ module Anthropic
           )
         end
 
-        # ArchiveMemoryStore
+        # Archive a memory store
         #
         # @overload archive(memory_store_id, betas: nil, request_options: {})
         #

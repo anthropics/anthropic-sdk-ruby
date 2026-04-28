@@ -15,35 +15,40 @@ module Anthropic
             )
           end
 
-        # Return stores created at or after this time (inclusive).
+        # Return only stores whose `created_at` is at or after this time (inclusive). Sent
+        # on the wire as `created_at[gte]`.
         sig { returns(T.nilable(Time)) }
         attr_reader :created_at_gte
 
         sig { params(created_at_gte: Time).void }
         attr_writer :created_at_gte
 
-        # Return stores created at or before this time (inclusive).
+        # Return only stores whose `created_at` is at or before this time (inclusive).
+        # Sent on the wire as `created_at[lte]`.
         sig { returns(T.nilable(Time)) }
         attr_reader :created_at_lte
 
         sig { params(created_at_lte: Time).void }
         attr_writer :created_at_lte
 
-        # Query parameter for include_archived
+        # When `true`, archived stores are included in the results. Defaults to `false`
+        # (archived stores are excluded).
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :include_archived
 
         sig { params(include_archived: T::Boolean).void }
         attr_writer :include_archived
 
-        # Query parameter for limit
+        # Maximum number of stores to return per page. Must be between 1 and 100. Defaults
+        # to 20 when omitted.
         sig { returns(T.nilable(Integer)) }
         attr_reader :limit
 
         sig { params(limit: Integer).void }
         attr_writer :limit
 
-        # Query parameter for page
+        # Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a
+        # previous response to fetch the next page; omit for the first page.
         sig { returns(T.nilable(String)) }
         attr_reader :page
 
@@ -79,15 +84,20 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # Return stores created at or after this time (inclusive).
+          # Return only stores whose `created_at` is at or after this time (inclusive). Sent
+          # on the wire as `created_at[gte]`.
           created_at_gte: nil,
-          # Return stores created at or before this time (inclusive).
+          # Return only stores whose `created_at` is at or before this time (inclusive).
+          # Sent on the wire as `created_at[lte]`.
           created_at_lte: nil,
-          # Query parameter for include_archived
+          # When `true`, archived stores are included in the results. Defaults to `false`
+          # (archived stores are excluded).
           include_archived: nil,
-          # Query parameter for limit
+          # Maximum number of stores to return per page. Must be between 1 and 100. Defaults
+          # to 20 when omitted.
           limit: nil,
-          # Query parameter for page
+          # Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a
+          # previous response to fetch the next page; omit for the first page.
           page: nil,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,

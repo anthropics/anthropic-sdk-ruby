@@ -9,31 +9,36 @@ module Anthropic
         include Anthropic::Internal::Type::RequestParameters
 
         # @!attribute created_at_gte
-        #   Return stores created at or after this time (inclusive).
+        #   Return only stores whose `created_at` is at or after this time (inclusive). Sent
+        #   on the wire as `created_at[gte]`.
         #
         #   @return [Time, nil]
         optional :created_at_gte, Time
 
         # @!attribute created_at_lte
-        #   Return stores created at or before this time (inclusive).
+        #   Return only stores whose `created_at` is at or before this time (inclusive).
+        #   Sent on the wire as `created_at[lte]`.
         #
         #   @return [Time, nil]
         optional :created_at_lte, Time
 
         # @!attribute include_archived
-        #   Query parameter for include_archived
+        #   When `true`, archived stores are included in the results. Defaults to `false`
+        #   (archived stores are excluded).
         #
         #   @return [Boolean, nil]
         optional :include_archived, Anthropic::Internal::Type::Boolean
 
         # @!attribute limit
-        #   Query parameter for limit
+        #   Maximum number of stores to return per page. Must be between 1 and 100. Defaults
+        #   to 20 when omitted.
         #
         #   @return [Integer, nil]
         optional :limit, Integer
 
         # @!attribute page
-        #   Query parameter for page
+        #   Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a
+        #   previous response to fetch the next page; omit for the first page.
         #
         #   @return [String, nil]
         optional :page, String
@@ -45,15 +50,18 @@ module Anthropic
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
         # @!method initialize(created_at_gte: nil, created_at_lte: nil, include_archived: nil, limit: nil, page: nil, betas: nil, request_options: {})
-        #   @param created_at_gte [Time] Return stores created at or after this time (inclusive).
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::MemoryStoreListParams} for more details.
         #
-        #   @param created_at_lte [Time] Return stores created at or before this time (inclusive).
+        #   @param created_at_gte [Time] Return only stores whose `created_at` is at or after this time (inclusive). Sent
         #
-        #   @param include_archived [Boolean] Query parameter for include_archived
+        #   @param created_at_lte [Time] Return only stores whose `created_at` is at or before this time (inclusive). Sen
         #
-        #   @param limit [Integer] Query parameter for limit
+        #   @param include_archived [Boolean] When `true`, archived stores are included in the results. Defaults to `false` (a
         #
-        #   @param page [String] Query parameter for page
+        #   @param limit [Integer] Maximum number of stores to return per page. Must be between 1 and 100. Defaults
+        #
+        #   @param page [String] Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a
         #
         #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #

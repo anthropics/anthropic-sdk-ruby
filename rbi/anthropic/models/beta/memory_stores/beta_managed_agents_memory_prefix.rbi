@@ -13,6 +13,9 @@ module Anthropic
               )
             end
 
+          # The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`).
+          # Pass this value as `path_prefix` on a subsequent list call to drill into the
+          # directory.
           sig { returns(String) }
           attr_accessor :path
 
@@ -23,6 +26,12 @@ module Anthropic
           end
           attr_accessor :type
 
+          # A rolled-up directory marker returned by
+          # [List memories](/en/api/beta/memory_stores/memories/list) when `depth` is set.
+          # Indicates that one or more memories exist deeper than the requested depth under
+          # this prefix. This is a list-time rollup, not a stored resource; it has no ID and
+          # no lifecycle. Each prefix counts toward the page `limit` and interleaves with
+          # `memory` items in path order.
           sig do
             params(
               path: String,
@@ -30,7 +39,13 @@ module Anthropic
                 Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix::Type::OrSymbol
             ).returns(T.attached_class)
           end
-          def self.new(path:, type:)
+          def self.new(
+            # The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`).
+            # Pass this value as `path_prefix` on a subsequent list call to drill into the
+            # directory.
+            path:,
+            type:
+          )
           end
 
           sig do

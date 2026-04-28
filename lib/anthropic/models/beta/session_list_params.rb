@@ -56,6 +56,13 @@ module Anthropic
         #   @return [Integer, nil]
         optional :limit, Integer
 
+        # @!attribute memory_store_id
+        #   Filter sessions whose resources contain a memory_store with this memory store
+        #   ID.
+        #
+        #   @return [String, nil]
+        optional :memory_store_id, String
+
         # @!attribute order
         #   Sort direction for results, ordered by created_at. Defaults to desc (newest
         #   first).
@@ -75,7 +82,7 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(agent_id: nil, agent_version: nil, created_at_gt: nil, created_at_gte: nil, created_at_lt: nil, created_at_lte: nil, include_archived: nil, limit: nil, order: nil, page: nil, betas: nil, request_options: {})
+        # @!method initialize(agent_id: nil, agent_version: nil, created_at_gt: nil, created_at_gte: nil, created_at_lt: nil, created_at_lte: nil, include_archived: nil, limit: nil, memory_store_id: nil, order: nil, page: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::SessionListParams} for more details.
         #
@@ -94,6 +101,8 @@ module Anthropic
         #   @param include_archived [Boolean] When true, includes archived sessions. Default: false (exclude archived).
         #
         #   @param limit [Integer] Maximum number of results to return.
+        #
+        #   @param memory_store_id [String] Filter sessions whose resources contain a memory_store with this memory store ID
         #
         #   @param order [Symbol, Anthropic::Models::Beta::SessionListParams::Order] Sort direction for results, ordered by created_at. Defaults to desc (newest firs
         #

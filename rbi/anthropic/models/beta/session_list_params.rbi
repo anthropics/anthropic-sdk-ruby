@@ -71,6 +71,14 @@ module Anthropic
         sig { params(limit: Integer).void }
         attr_writer :limit
 
+        # Filter sessions whose resources contain a memory_store with this memory store
+        # ID.
+        sig { returns(T.nilable(String)) }
+        attr_reader :memory_store_id
+
+        sig { params(memory_store_id: String).void }
+        attr_writer :memory_store_id
+
         # Sort direction for results, ordered by created_at. Defaults to desc (newest
         # first).
         sig do
@@ -121,6 +129,7 @@ module Anthropic
             created_at_lte: Time,
             include_archived: T::Boolean,
             limit: Integer,
+            memory_store_id: String,
             order: Anthropic::Beta::SessionListParams::Order::OrSymbol,
             page: String,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
@@ -144,6 +153,9 @@ module Anthropic
           include_archived: nil,
           # Maximum number of results to return.
           limit: nil,
+          # Filter sessions whose resources contain a memory_store with this memory store
+          # ID.
+          memory_store_id: nil,
           # Sort direction for results, ordered by created_at. Defaults to desc (newest
           # first).
           order: nil,
@@ -166,6 +178,7 @@ module Anthropic
               created_at_lte: Time,
               include_archived: T::Boolean,
               limit: Integer,
+              memory_store_id: String,
               order: Anthropic::Beta::SessionListParams::Order::OrSymbol,
               page: String,
               betas:

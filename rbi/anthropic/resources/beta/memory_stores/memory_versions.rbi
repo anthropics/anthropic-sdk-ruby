@@ -5,7 +5,7 @@ module Anthropic
     class Beta
       class MemoryStores
         class MemoryVersions
-          # GetMemoryVersion
+          # Retrieve a memory version
           sig do
             params(
               memory_version_id: String,
@@ -32,7 +32,7 @@ module Anthropic
           )
           end
 
-          # ListMemoryVersions
+          # List memory versions
           sig do
             params(
               memory_store_id: String,
@@ -83,7 +83,7 @@ module Anthropic
           )
           end
 
-          # RedactMemoryVersion
+          # Redact a memory version
           sig do
             params(
               memory_version_id: String,
