@@ -15,11 +15,17 @@ module Anthropic
           required :memory_store_id, String
 
           # @!attribute content
+          #   UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required;
+          #   pass `""` explicitly to create an empty memory.
           #
           #   @return [String, nil]
           required :content, String, nil?: true
 
           # @!attribute path
+          #   Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start
+          #   with `/`, contain at least one non-empty segment, and be at most 1,024 bytes.
+          #   Must not contain empty segments, `.` or `..` segments, control or format
+          #   characters, and must be NFC-normalized. Paths are case-sensitive.
           #
           #   @return [String]
           required :path, String
@@ -37,11 +43,14 @@ module Anthropic
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
           # @!method initialize(memory_store_id:, content:, path:, view: nil, betas: nil, request_options: {})
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::MemoryStores::MemoryCreateParams} for more details.
+          #
           #   @param memory_store_id [String]
           #
-          #   @param content [String, nil]
+          #   @param content [String, nil] UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required;
           #
-          #   @param path [String]
+          #   @param path [String] Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start
           #
           #   @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query parameter for view
           #

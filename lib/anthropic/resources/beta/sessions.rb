@@ -113,7 +113,7 @@ module Anthropic
         #
         # List Sessions
         #
-        # @overload list(agent_id: nil, agent_version: nil, created_at_gt: nil, created_at_gte: nil, created_at_lt: nil, created_at_lte: nil, include_archived: nil, limit: nil, order: nil, page: nil, betas: nil, request_options: {})
+        # @overload list(agent_id: nil, agent_version: nil, created_at_gt: nil, created_at_gte: nil, created_at_lt: nil, created_at_lte: nil, include_archived: nil, limit: nil, memory_store_id: nil, order: nil, page: nil, betas: nil, request_options: {})
         #
         # @param agent_id [String] Query param: Filter sessions created with this agent ID.
         #
@@ -130,6 +130,8 @@ module Anthropic
         # @param include_archived [Boolean] Query param: When true, includes archived sessions. Default: false (exclude arch
         #
         # @param limit [Integer] Query param: Maximum number of results to return.
+        #
+        # @param memory_store_id [String] Query param: Filter sessions whose resources contain a memory_store with this me
         #
         # @param order [Symbol, Anthropic::Models::Beta::SessionListParams::Order] Query param: Sort direction for results, ordered by created_at. Defaults to desc
         #
@@ -153,6 +155,7 @@ module Anthropic
               :created_at_lte,
               :include_archived,
               :limit,
+              :memory_store_id,
               :order,
               :page
             ]

@@ -13,6 +13,9 @@ module Anthropic
               )
             end
 
+          # ID of the session that performed the write (a `sesn_...` value). Look up the
+          # session via [Retrieve a session](/en/api/sessions-retrieve) for further
+          # provenance.
           sig { returns(String) }
           attr_accessor :session_id
 
@@ -23,6 +26,8 @@ module Anthropic
           end
           attr_accessor :type
 
+          # Attribution for a write made by an agent during a session, through the mounted
+          # filesystem at `/mnt/memory/`.
           sig do
             params(
               session_id: String,
@@ -30,7 +35,13 @@ module Anthropic
                 Anthropic::Beta::MemoryStores::BetaManagedAgentsSessionActor::Type::OrSymbol
             ).returns(T.attached_class)
           end
-          def self.new(session_id:, type:)
+          def self.new(
+            # ID of the session that performed the write (a `sesn_...` value). Look up the
+            # session via [Retrieve a session](/en/api/sessions-retrieve) for further
+            # provenance.
+            session_id:,
+            type:
+          )
           end
 
           sig do

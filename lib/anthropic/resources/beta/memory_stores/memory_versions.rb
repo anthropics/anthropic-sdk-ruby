@@ -5,7 +5,7 @@ module Anthropic
     class Beta
       class MemoryStores
         class MemoryVersions
-          # GetMemoryVersion
+          # Retrieve a memory version
           #
           # @overload retrieve(memory_version_id, memory_store_id:, view: nil, betas: nil, request_options: {})
           #
@@ -44,7 +44,7 @@ module Anthropic
             )
           end
 
-          # ListMemoryVersions
+          # List memory versions
           #
           # @overload list(memory_store_id, api_key_id: nil, created_at_gte: nil, created_at_lte: nil, limit: nil, memory_id: nil, operation: nil, page: nil, session_id: nil, view: nil, betas: nil, request_options: {})
           #
@@ -104,7 +104,7 @@ module Anthropic
             )
           end
 
-          # RedactMemoryVersion
+          # Redact a memory version
           #
           # @overload redact(memory_version_id, memory_store_id:, betas: nil, request_options: {})
           #

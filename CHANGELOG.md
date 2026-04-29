@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.37.0 (2026-04-29)
+
+Full Changelog: [v1.36.0...v1.37.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.36.0...v1.37.0)
+
+### Features
+
+* **api:** improve Managed Agents APIs ([34caf5b](https://github.com/anthropics/anthropic-sdk-ruby/commit/34caf5b0994bc818a7ee835832624853cc0a2abe))
+* support setting headers via env ([08e8b38](https://github.com/anthropics/anthropic-sdk-ruby/commit/08e8b382e8795ebb008daea6769550374952b301))
+
 ## 1.36.0 (2026-04-23)
 
 Full Changelog: [v1.35.0...v1.36.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.35.0...v1.36.0)
