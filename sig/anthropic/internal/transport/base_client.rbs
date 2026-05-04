@@ -29,7 +29,8 @@ module Anthropic
             headers: ::Hash[String, String],
             body: top,
             max_retries: Integer,
-            timeout: Float
+            timeout: Float,
+            user_header_keys: ::Array[String]
           }
 
         MAX_REDIRECTS: 20
@@ -100,6 +101,11 @@ module Anthropic
           ::Hash[String, String] headers,
           retry_count: Integer
         ) -> Float
+
+        def retry_request?: (
+          Integer status,
+          headers: ::Hash[String, String]
+        ) -> bool
 
         def send_request: (
           Anthropic::Internal::Transport::BaseClient::request_input request,

@@ -103,12 +103,14 @@ module Anthropic
 
         # Completions are not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported.
         def completions
-          raise NotImplementedError, "Completions are not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported."
+          raise NotImplementedError,
+                "Completions are not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported."
         end
 
         # Models listing is not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported.
         def models
-          raise NotImplementedError, "Models listing is not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported."
+          raise NotImplementedError,
+                "Models listing is not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported."
         end
 
         # @api private
@@ -128,15 +130,18 @@ module Anthropic
           end
 
           def models
-            raise NotImplementedError, "Beta models are not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported."
+            raise NotImplementedError,
+                  "Beta models are not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported."
           end
 
           def files
-            raise NotImplementedError, "Beta files are not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported."
+            raise NotImplementedError,
+                  "Beta files are not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported."
           end
 
           def skills
-            raise NotImplementedError, "Beta skills are not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported."
+            raise NotImplementedError,
+                  "Beta skills are not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported."
           end
         end
       end

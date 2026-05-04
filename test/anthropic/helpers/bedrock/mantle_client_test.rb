@@ -2,6 +2,7 @@
 
 require_relative "../../test_helper"
 require "aws-sdk-core"
+require "tmpdir"
 
 class Anthropic::Test::BedrockMantleClientTest < Minitest::Test
   extend Minitest::Serial
@@ -17,8 +18,17 @@ class Anthropic::Test::BedrockMantleClientTest < Minitest::Test
     super
   end
 
+  def setup
+    super
+    @original_anthropic_config_dir = ENV["ANTHROPIC_CONFIG_DIR"]
+    @isolated_config_dir = Dir.mktmpdir
+    ENV["ANTHROPIC_CONFIG_DIR"] = @isolated_config_dir
+  end
+
   def teardown
     WebMock.reset!
+    ENV["ANTHROPIC_CONFIG_DIR"] = @original_anthropic_config_dir
+    FileUtils.rm_rf(@isolated_config_dir) if @isolated_config_dir
     super
   end
 

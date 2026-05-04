@@ -124,7 +124,11 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
     ENV["ANTHROPIC_AWS_API_KEY"] = "sk-ant-from-env"
     mock_creds = Aws::Credentials.new("fake-access", "fake-secret")
     Aws::SharedCredentials.stub(:new, mock_creds) do
-      client = Anthropic::AWSClient.new(aws_profile: "my-profile", aws_region: "us-east-1", workspace_id: "ws-xxx")
+      client = Anthropic::AWSClient.new(
+        aws_profile: "my-profile",
+        aws_region: "us-east-1",
+        workspace_id: "ws-xxx"
+      )
       assert_equal(true, client.instance_variable_get(:@use_sig_v4))
     end
   ensure

@@ -54,8 +54,9 @@ module Anthropic
         end
 
         sig do
-          params(request: Anthropic::Internal::AnyHash)
-            .returns(Anthropic::Internal::AnyHash)
+          params(request: Anthropic::Internal::AnyHash).returns(
+            Anthropic::Internal::AnyHash
+          )
         end
         private def transform_request(request)
         end

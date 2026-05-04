@@ -16,6 +16,9 @@ module Anthropic
     sig { returns(T.nilable(String)) }
     attr_reader :auth_token
 
+    sig { returns(T.nilable(Anthropic::Credentials::TokenCache)) }
+    attr_reader :token_cache
+
     sig { returns(Anthropic::Resources::Completions) }
     attr_reader :completions
 
