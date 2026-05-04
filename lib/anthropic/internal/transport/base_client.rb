@@ -274,6 +274,10 @@ module Anthropic
 
           query = Anthropic::Internal::Util.deep_merge(req[:query].to_h, opts[:extra_query].to_h)
 
+          user_header_keys = Anthropic::Internal::Util
+                             .normalized_headers(req[:headers].to_h, opts[:extra_headers].to_h)
+                             .keys
+
           headers = Anthropic::Internal::Util.normalized_headers(
             @headers,
             auth_headers,
@@ -317,7 +321,8 @@ module Anthropic
             headers: headers,
             body: encoded,
             max_retries: opts.fetch(:max_retries, @max_retries),
-            timeout: timeout
+            timeout: timeout,
+            user_header_keys: user_header_keys
           }
         end
 
@@ -363,6 +368,16 @@ module Anthropic
         #
         # @return [Hash{Symbol, Object}]
         private def transform_request(request) = request
+
+        # @api private
+        #
+        # @param status [Integer]
+        # @param headers [Hash{String=>String}]
+        #
+        # @return [Boolean]
+        def retry_request?(status, headers:)
+          self.class.should_retry?(status, headers: headers)
+        end
 
         # @api private
         #
@@ -424,7 +439,7 @@ module Anthropic
             )
           in Anthropic::Errors::APIConnectionError if retry_count >= max_retries
             raise status
-          in (400..) if retry_count >= max_retries || !self.class.should_retry?(status, headers: headers)
+          in (400..) if retry_count >= max_retries || !retry_request?(status, headers: headers)
             decoded = Kernel.then do
               Anthropic::Internal::Util.decode_content(headers, stream: stream, suppress_error: true)
             ensure
@@ -444,6 +459,18 @@ module Anthropic
 
             delay = retry_delay(response || {}, retry_count: retry_count)
             sleep(delay)
+
+            # Refresh auth headers across retries: credential providers (e.g. OAuth
+            # token caches invalidated by a 401) may return a different token now
+            # than at initial build_request time. Skip keys the caller supplied so
+            # per-request overrides aren't clobbered.
+            user_keys = request.fetch(:user_header_keys, [])
+
+            auth_headers.each do |k, v|
+              k_norm = k.to_s.downcase
+              next if user_keys.include?(k_norm)
+              request.fetch(:headers)[k_norm] = v.to_s.strip
+            end
 
             send_request(
               request,
@@ -583,7 +610,8 @@ module Anthropic
               headers: T::Hash[String, String],
               body: T.anything,
               max_retries: Integer,
-              timeout: Float
+              timeout: Float,
+              user_header_keys: T::Array[String]
             }
           end
         end

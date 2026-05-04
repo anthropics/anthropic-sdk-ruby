@@ -1,6 +1,32 @@
 # frozen_string_literal: true
 
 module Anthropic
+  @warned_explicit_shadow = false
+  @warned_env_shadow = false
+
+  class << self
+    def warn_explicit_static_shadows_credentials(param)
+      return if @warned_explicit_shadow
+      @warned_explicit_shadow = true
+
+      warn(
+        "[anthropic-ruby] `#{param}:` was passed alongside `credentials:`; the static credential " \
+        "takes precedence and the credentials provider is silently disabled. " \
+        "Pass only one."
+      )
+    end
+
+    def warn_env_static_shadows_auto_discovery(env_var)
+      return if @warned_env_shadow
+      @warned_env_shadow = true
+
+      warn(
+        "[anthropic-ruby] #{env_var} is set and takes precedence over the SDK's profile / federation " \
+        "auto-discovery; unset #{env_var} to use the auto-discovered credential."
+      )
+    end
+  end
+
   class Client < Anthropic::Internal::Transport::BaseClient
     # Default max number of retries to attempt after a failed retryable request.
     DEFAULT_MAX_RETRIES = 2
@@ -33,6 +59,12 @@ module Anthropic
     # @return [String, nil]
     attr_reader :auth_token
 
+    # @return [Object, nil]
+    attr_reader :credentials
+
+    # @return [Anthropic::Credentials::TokenCache, nil]
+    attr_reader :token_cache
+
     # @return [Anthropic::Resources::Completions]
     attr_reader :completions
 
@@ -49,23 +81,19 @@ module Anthropic
     #
     # @return [Hash{String=>String}]
     private def auth_headers
-      {**api_key_auth, **bearer_auth}
-    end
+      headers = {}
 
-    # @api private
-    #
-    # @return [Hash{String=>String}]
-    private def api_key_auth
-      {"x-api-key" => @api_key}
-    end
+      if @api_key
+        headers["x-api-key"] = @api_key
+      elsif @auth_token
+        headers["authorization"] = "Bearer #{@auth_token}"
+      elsif @token_cache
+        token = @token_cache.get_token
+        headers["authorization"] = "Bearer #{token}"
+        headers["anthropic-beta"] = Anthropic::Credentials::OAUTH_API_BETA_HEADER
+      end
 
-    # @api private
-    #
-    # @return [Hash{String=>String}]
-    private def bearer_auth
-      return {} if @auth_token.nil?
-
-      {"authorization" => "Bearer #{@auth_token}"}
+      headers
     end
 
     # Calculate the timeout for non-streaming requests based on token count
@@ -91,12 +119,49 @@ module Anthropic
 
     # Creates and returns a new client for interacting with the API.
     #
-    # @param api_key [String, nil] Defaults to `ENV["ANTHROPIC_API_KEY"]`
+    # Credential precedence, matching the credential-resolution spec and
+    # the Workload Identity Federation user guide:
     #
-    # @param auth_token [String, nil] Defaults to `ENV["ANTHROPIC_AUTH_TOKEN"]`
+    # 1. Explicit constructor arguments — +api_key:+, +auth_token:+,
+    #    +credentials:+, +config:+. If the caller passed any of these,
+    #    the SDK uses it and does *not* read credential env vars.
+    # 2. +ANTHROPIC_API_KEY+ / +ANTHROPIC_AUTH_TOKEN+ env vars. Only
+    #    consulted when no explicit credential argument was passed.
+    # 3. +ANTHROPIC_PROFILE+ — explicit profile selection.
+    # 4. Direct env-var federation (+ANTHROPIC_IDENTITY_TOKEN[_FILE]+ +
+    #    +ANTHROPIC_FEDERATION_RULE_ID+ + +ANTHROPIC_ORGANIZATION_ID+).
+    # 5. Fallback active profile from disk (+active_config+ pointer or
+    #    the literal +default+).
+    #
+    # A static env credential (step 2) *shadows* steps 3–5, silently
+    # disabling profile / federation auto-discovery.
+    #
+    # Passing an explicit +api_key:+ or +auth_token:+ *argument*
+    # alongside an explicit +credentials:+ is supported: the
+    # static credential takes precedence at the request-header level and
+    # the credentials provider is silently disabled.
+    #
+    # @param api_key [String, nil] Defaults to +ENV["ANTHROPIC_API_KEY"]+ when
+    #   no explicit credential argument is passed.
+    #
+    # @param auth_token [String, nil] Defaults to +ENV["ANTHROPIC_AUTH_TOKEN"]+ when
+    #   no explicit credential argument is passed.
+    #
+    # @param credentials [#call, nil] Credential provider — any callable returning
+    #   +AccessToken.new(token:, expires_at:)+. The provider is wrapped in a
+    #   +TokenCache+ for thread-safe caching and proactive refresh (120s advisory /
+    #   30s mandatory before expiry). Common providers: +WorkloadIdentity+,
+    #   +CredentialsFile+, +StaticToken+, or a custom lambda.
+    #
+    # @param config [Hash, nil] In-memory configuration hash with the same shape
+    #   as +configs/<profile>.json+. Must include an +authentication+ object with
+    #   a +type+ field (+oidc_federation+ or +user_oauth+). Mutually exclusive
+    #   with +credentials:+. For +user_oauth+, must also include
+    #   +authentication.credentials_path+.
     #
     # @param base_url [String, nil] Override the default base URL for the API, e.g.,
-    # `"https://api.example.com/v2/"`. Defaults to `ENV["ANTHROPIC_BASE_URL"]`
+    #   +"https://api.example.com/v2/"+. Defaults to +ENV["ANTHROPIC_BASE_URL"]+,
+    #   then to the profile's +base_url+ if present, then to +https://api.anthropic.com+.
     #
     # @param max_retries [Integer] Max number of retries to attempt after a failed retryable request.
     #
@@ -106,15 +171,70 @@ module Anthropic
     #
     # @param max_retry_delay [Float]
     def initialize(
-      api_key: ENV["ANTHROPIC_API_KEY"],
-      auth_token: ENV["ANTHROPIC_AUTH_TOKEN"],
-      base_url: ENV["ANTHROPIC_BASE_URL"],
+      api_key: nil,
+      auth_token: nil,
+      credentials: nil,
+      config: nil,
+      base_url: nil,
       max_retries: self.class::DEFAULT_MAX_RETRIES,
       timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
       max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY
     )
+      if config && credentials
+        raise ArgumentError, "Pass at most one of `credentials:` or `config:`."
+      end
+
+      has_explicit_credential = api_key || auth_token || credentials || config
+
+      unless has_explicit_credential
+        api_key = ENV["ANTHROPIC_API_KEY"]
+        auth_token = ENV["ANTHROPIC_AUTH_TOKEN"]
+      end
+
+      @api_key = api_key&.to_s
+      @auth_token = auth_token&.to_s
+      @credentials = nil
+      @token_cache = nil
+
+      base_url_is_explicit = base_url && !base_url.empty?
+      base_url ||= ENV["ANTHROPIC_BASE_URL"]
+
+      credential_headers = {}
+
+      if config
+        in_memory = Anthropic::Credentials::InMemoryConfig.new(config)
+        @credentials = in_memory
+        credential_headers = in_memory.extra_headers
+        if !base_url_is_explicit && in_memory.resolved_base_url
+          base_url = in_memory.resolved_base_url
+        end
+      else
+        @credentials = credentials
+      end
+
+      if @credentials.nil? && @api_key.nil? && @auth_token.nil?
+        default_base_url = base_url || "https://api.anthropic.com"
+        result = Anthropic::Credentials.default_credentials(base_url: default_base_url)
+        if result
+          @credentials = result.provider
+          credential_headers = result.extra_headers
+          base_url = result.base_url if !base_url_is_explicit && result.base_url
+        end
+      end
+
+      warn_explicit_shadow(api_key: api_key, auth_token: auth_token, credentials: credentials || config)
+      warn_env_shadow(api_key: api_key, auth_token: auth_token)
+
+      if @credentials
+        @token_cache = Anthropic::Credentials::TokenCache.new(@credentials)
+      end
+
       base_url ||= "https://api.anthropic.com"
+
+      if @credentials.respond_to?(:bind_base_url)
+        @credentials.bind_base_url(base_url)
+      end
 
       headers = {
         "anthropic-version" => "2023-06-01"
@@ -130,9 +250,7 @@ module Anthropic
         end
         headers = parsed.merge(headers)
       end
-
-      @api_key = api_key&.to_s
-      @auth_token = auth_token&.to_s
+      headers = headers.merge(credential_headers)
 
       super(
         base_url: base_url,
@@ -147,6 +265,39 @@ module Anthropic
       @messages = Anthropic::Resources::Messages.new(client: self)
       @models = Anthropic::Resources::Models.new(client: self)
       @beta = Anthropic::Resources::Beta.new(client: self)
+    end
+
+    # @api private
+    #
+    # @param status [Integer]
+    # @param headers [Hash{String=>String}]
+    #
+    # @return [Boolean]
+    def retry_request?(status, headers:)
+      if status == 401 && @token_cache
+        @token_cache.invalidate
+        return true
+      end
+      super
+    end
+
+    private
+
+    def warn_explicit_shadow(api_key:, auth_token:, credentials:)
+      return if credentials.nil?
+
+      Anthropic.warn_explicit_static_shadows_credentials("api_key") if api_key
+      Anthropic.warn_explicit_static_shadows_credentials("auth_token") if auth_token
+    end
+
+    def warn_env_shadow(api_key:, auth_token:)
+      return unless Anthropic::Credentials.auto_discoverable_credentials?
+
+      if api_key && ENV["ANTHROPIC_API_KEY"]
+        Anthropic.warn_env_static_shadows_auto_discovery("ANTHROPIC_API_KEY")
+      end
+      return unless auth_token && ENV["ANTHROPIC_AUTH_TOKEN"]
+      Anthropic.warn_env_static_shadows_auto_discovery("ANTHROPIC_AUTH_TOKEN")
     end
   end
 end

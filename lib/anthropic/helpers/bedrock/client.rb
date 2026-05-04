@@ -53,7 +53,7 @@ module Anthropic
         #
         # @param max_retry_delay [Float] The maximum number of seconds to wait before retrying a request
         #
-        def initialize(
+        def initialize( # rubocop:disable Lint/MissingSuper
           aws_region: nil,
           base_url: nil,
           max_retries: self.class::DEFAULT_MAX_RETRIES,
@@ -118,14 +118,21 @@ module Anthropic
             "https://bedrock-runtime.#{@aws_region}.amazonaws.com"
           )
 
-          super(
-            api_key: nil,
-            auth_token: api_key,
+          @api_key = nil
+          @auth_token = @signer ? nil : api_key
+          @credentials = nil
+          @token_cache = nil
+
+          # Skip Anthropic::Client#initialize and bind BaseClient#initialize directly:
+          # the parent's initializer runs OIDC/credential-provider resolution that does
+          # not apply here.
+          Anthropic::Internal::Transport::BaseClient.instance_method(:initialize).bind(self).call(
             base_url: base_url,
             timeout: timeout,
             max_retries: max_retries,
             initial_retry_delay: initial_retry_delay,
             max_retry_delay: max_retry_delay,
+            headers: {"anthropic-version" => "2023-06-01"}
           )
 
           @messages = Anthropic::Resources::Messages.new(client: self)

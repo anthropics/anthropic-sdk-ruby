@@ -53,7 +53,7 @@ module Anthropic
         #
         # @param max_retry_delay [Float]
         #
-        def initialize(
+        def initialize( # rubocop:disable Lint/MissingSuper
           api_key: nil,
           aws_access_key: nil,
           aws_secret_access_key: nil,
@@ -84,14 +84,27 @@ module Anthropic
             derive_base_url: ->(region) { "https://aws-external-anthropic.#{region}.api.aws" }
           )
 
-          super(
-            api_key: effective_api_key,
+          @api_key = effective_api_key
+          @auth_token = nil
+          @credentials = nil
+          @token_cache = nil
+
+          # Skip Anthropic::Client#initialize and bind BaseClient#initialize directly:
+          # the parent's initializer runs OIDC/credential-provider resolution that does
+          # not apply here.
+          Anthropic::Internal::Transport::BaseClient.instance_method(:initialize).bind(self).call(
             base_url: resolved_base_url,
-            max_retries: max_retries,
             timeout: timeout,
+            max_retries: max_retries,
             initial_retry_delay: initial_retry_delay,
-            max_retry_delay: max_retry_delay
+            max_retry_delay: max_retry_delay,
+            headers: {"anthropic-version" => "2023-06-01"}
           )
+
+          @completions = Anthropic::Resources::Completions.new(client: self)
+          @messages = Anthropic::Resources::Messages.new(client: self)
+          @models = Anthropic::Resources::Models.new(client: self)
+          @beta = Anthropic::Resources::Beta.new(client: self)
         end
 
         # @api private

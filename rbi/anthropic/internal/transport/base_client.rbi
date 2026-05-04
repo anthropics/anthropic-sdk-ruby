@@ -219,6 +219,15 @@ module Anthropic
 
         # @api private
         sig do
+          params(status: Integer, headers: T::Hash[String, String]).returns(
+            T::Boolean
+          )
+        end
+        def retry_request?(status, headers:)
+        end
+
+        # @api private
+        sig do
           params(
             request: Anthropic::Internal::Transport::BaseClient::RequestInput,
             redirect_count: Integer,

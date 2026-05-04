@@ -233,5 +233,8 @@ module Anthropic
     class InternalServerError < Anthropic::Errors::APIStatusError
       HTTP_STATUS = (500..)
     end
+
+    class ConfigurationError < Anthropic::Errors::Error
+    end
   end
 end
