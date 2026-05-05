@@ -43,7 +43,7 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
 
   def test_sigv4_mode_via_aws_profile
     mock_creds = Aws::Credentials.new("fake-access", "fake-secret")
-    Aws::SharedCredentials.stub(:new, mock_creds) do
+    with_shared_config(sso_credentials: mock_creds) do
       client = Anthropic::AWSClient.new(
         aws_profile: "my-profile",
         aws_region: "us-east-1",
@@ -123,7 +123,7 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
   def test_explicit_aws_profile_suppresses_api_key_env
     ENV["ANTHROPIC_AWS_API_KEY"] = "sk-ant-from-env"
     mock_creds = Aws::Credentials.new("fake-access", "fake-secret")
-    Aws::SharedCredentials.stub(:new, mock_creds) do
+    with_shared_config(sso_credentials: mock_creds) do
       client = Anthropic::AWSClient.new(
         aws_profile: "my-profile",
         aws_region: "us-east-1",
@@ -442,5 +442,212 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
   def test_beta_resource_available
     client = Anthropic::AWSClient.new(api_key: "sk-ant-xxx", workspace_id: "ws-xxx", base_url: "http://localhost")
     assert_respond_to(client, :beta)
+  end
+
+  # ---------------------------------------------------------------------------
+  # Profile credential resolution tests
+  # ---------------------------------------------------------------------------
+
+  def test_profile_resolves_sso_credentials
+    sso_creds = Aws::Credentials.new("sso-access", "sso-secret")
+    with_shared_config(sso_credentials: sso_creds) do
+      client = Anthropic::AWSClient.new(
+        aws_profile: "sso-profile",
+        aws_region: "us-east-1",
+        workspace_id: "ws-xxx"
+      )
+      signer = client.instance_variable_get(:@signer)
+      resolved = signer.credentials_provider
+      assert_equal("sso-access", resolved.access_key_id)
+      assert_equal("sso-secret", resolved.secret_access_key)
+    end
+  end
+
+  def test_profile_resolves_assume_role_web_identity_credentials
+    web_id_creds = Aws::Credentials.new("webid-access", "webid-secret")
+    with_shared_config(web_identity_credentials: web_id_creds) do
+      client = Anthropic::AWSClient.new(
+        aws_profile: "webid-profile",
+        aws_region: "us-east-1",
+        workspace_id: "ws-xxx"
+      )
+      signer = client.instance_variable_get(:@signer)
+      resolved = signer.credentials_provider
+      assert_equal("webid-access", resolved.access_key_id)
+    end
+  end
+
+  def test_profile_resolves_assume_role_credentials
+    assume_creds = Aws::Credentials.new("assume-access", "assume-secret")
+    with_shared_config(assume_role_credentials: assume_creds) do
+      client = Anthropic::AWSClient.new(
+        aws_profile: "assume-profile",
+        aws_region: "us-east-1",
+        workspace_id: "ws-xxx"
+      )
+      signer = client.instance_variable_get(:@signer)
+      resolved = signer.credentials_provider
+      assert_equal("assume-access", resolved.access_key_id)
+    end
+  end
+
+  def test_profile_resolves_process_credentials
+    process_creds = Aws::Credentials.new("process-access", "process-secret")
+    with_shared_config(credential_process: "/usr/bin/get-creds") do
+      Aws::ProcessCredentials.stub(:new, process_creds) do
+        client = Anthropic::AWSClient.new(
+          aws_profile: "process-profile",
+          aws_region: "us-east-1",
+          workspace_id: "ws-xxx"
+        )
+        signer = client.instance_variable_get(:@signer)
+        resolved = signer.credentials_provider
+        assert_equal("process-access", resolved.access_key_id)
+      end
+    end
+  end
+
+  def test_profile_resolves_static_shared_credentials
+    static_creds = Aws::Credentials.new("static-access", "static-secret")
+    # config_enabled but no SSO/assume-role/process match → falls through to SharedCredentials
+    with_shared_config do
+      Aws::SharedCredentials.stub(:new, static_creds) do
+        client = Anthropic::AWSClient.new(
+          aws_profile: "static-profile",
+          aws_region: "us-east-1",
+          workspace_id: "ws-xxx"
+        )
+        signer = client.instance_variable_get(:@signer)
+        resolved = signer.credentials_provider
+        assert_equal("static-access", resolved.access_key_id)
+      end
+    end
+  end
+
+  def test_profile_resolution_priority_order
+    # web_identity should be tried before SSO
+    web_id_creds = Aws::Credentials.new("webid-access", "webid-secret")
+    sso_creds = Aws::Credentials.new("sso-access", "sso-secret")
+    with_shared_config(web_identity_credentials: web_id_creds, sso_credentials: sso_creds) do
+      client = Anthropic::AWSClient.new(
+        aws_profile: "multi-profile",
+        aws_region: "us-east-1",
+        workspace_id: "ws-xxx"
+      )
+      signer = client.instance_variable_get(:@signer)
+      resolved = signer.credentials_provider
+      assert_equal("webid-access", resolved.access_key_id)
+    end
+  end
+
+  def test_profile_sso_preferred_over_assume_role
+    sso_creds = Aws::Credentials.new("sso-access", "sso-secret")
+    assume_creds = Aws::Credentials.new("assume-access", "assume-secret")
+    with_shared_config(sso_credentials: sso_creds, assume_role_credentials: assume_creds) do
+      client = Anthropic::AWSClient.new(
+        aws_profile: "multi-profile",
+        aws_region: "us-east-1",
+        workspace_id: "ws-xxx"
+      )
+      signer = client.instance_variable_get(:@signer)
+      resolved = signer.credentials_provider
+      assert_equal("sso-access", resolved.access_key_id)
+    end
+  end
+
+  def test_profile_skips_config_when_disabled
+    static_creds = Aws::Credentials.new("static-access", "static-secret")
+    sso_creds = Aws::Credentials.new("sso-access", "sso-secret")
+    # config disabled → SSO is skipped, falls through to SharedCredentials
+    with_shared_config(config_enabled: false, sso_credentials: sso_creds) do
+      Aws::SharedCredentials.stub(:new, static_creds) do
+        client = Anthropic::AWSClient.new(
+          aws_profile: "some-profile",
+          aws_region: "us-east-1",
+          workspace_id: "ws-xxx"
+        )
+        signer = client.instance_variable_get(:@signer)
+        resolved = signer.credentials_provider
+        assert_equal("static-access", resolved.access_key_id)
+      end
+    end
+  end
+
+  def test_profile_raises_when_no_credentials_resolved
+    with_shared_config do
+      not_set_creds = Aws::Credentials.new(nil, nil)
+      Aws::SharedCredentials.stub(:new, not_set_creds) do
+        error = assert_raises(ArgumentError) do
+          Anthropic::AWSClient.new(
+            aws_profile: "missing-profile",
+            aws_region: "us-east-1",
+            workspace_id: "ws-xxx"
+          )
+        end
+        assert_includes(error.message, "missing-profile")
+        assert_includes(error.message, "aws sso login")
+      end
+    end
+  end
+
+  def test_profile_raises_clear_error_for_no_such_profile
+    with_shared_config(raise_no_such_profile: true) do
+      Aws::SharedCredentials.stub(:new, ->(_) { raise Aws::Errors::NoSuchProfileError.new("nope") }) do
+        error = assert_raises(ArgumentError) do
+          Anthropic::AWSClient.new(
+            aws_profile: "nonexistent",
+            aws_region: "us-east-1",
+            workspace_id: "ws-xxx"
+          )
+        end
+        assert_includes(error.message, "nonexistent")
+      end
+    end
+  end
+
+  private
+
+  # Builds a mock Aws.shared_config and stubs it for the duration of the block.
+  #
+  # @param config_enabled [Boolean] whether config file loading is enabled
+  # @param sso_credentials [Aws::Credentials, nil] credentials returned by sso_credentials_from_config
+  # @param web_identity_credentials [Aws::Credentials, nil] credentials returned by assume_role_web_identity_credentials_from_config
+  # @param assume_role_credentials [Aws::Credentials, nil] credentials returned by assume_role_credentials_from_config
+  # @param credential_process [String, nil] process command returned by credential_process
+  # @param raise_no_such_profile [Boolean] raise NoSuchProfileError from all config methods
+  def with_shared_config(
+    config_enabled: true,
+    sso_credentials: nil,
+    web_identity_credentials: nil,
+    assume_role_credentials: nil,
+    credential_process: nil,
+    raise_no_such_profile: false,
+    &block
+  )
+    mock_config = Object.new
+
+    mock_config.define_singleton_method(:config_enabled?) { config_enabled }
+
+    mock_config.define_singleton_method(:sso_credentials_from_config) do |**_|
+      raise Aws::Errors::NoSuchProfileError.new("no such profile") if raise_no_such_profile
+      sso_credentials
+    end
+
+    mock_config.define_singleton_method(:assume_role_web_identity_credentials_from_config) do |**_|
+      raise Aws::Errors::NoSuchProfileError.new("no such profile") if raise_no_such_profile
+      web_identity_credentials
+    end
+
+    mock_config.define_singleton_method(:assume_role_credentials_from_config) do |**_|
+      raise Aws::Errors::NoSuchProfileError.new("no such profile") if raise_no_such_profile
+      assume_role_credentials
+    end
+
+    mock_config.define_singleton_method(:credential_process) do |**_|
+      raise Aws::Errors::NoSuchProfileError.new("no such profile") if raise_no_such_profile
+      credential_process
+    end
+
+    Aws.stub(:shared_config, mock_config, &block)
   end
 end
