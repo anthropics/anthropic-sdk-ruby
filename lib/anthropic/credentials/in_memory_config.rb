@@ -103,6 +103,7 @@ module Anthropic
           federation_rule_id: federation_rule_id,
           organization_id: organization_id,
           service_account_id: auth[:service_account_id],
+          workspace_id: config[:workspace_id],
           scope: auth[:scope]
         )
 

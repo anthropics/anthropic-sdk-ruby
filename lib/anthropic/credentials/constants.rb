@@ -62,6 +62,9 @@ module Anthropic
     # Environment variable for service account ID.
     ENV_SERVICE_ACCOUNT_ID = "ANTHROPIC_SERVICE_ACCOUNT_ID"
 
+    # Environment variable for workspace ID.
+    ENV_WORKSPACE_ID = "ANTHROPIC_WORKSPACE_ID"
+
     # Environment variable for OAuth scope.
     ENV_SCOPE = "ANTHROPIC_SCOPE"
 

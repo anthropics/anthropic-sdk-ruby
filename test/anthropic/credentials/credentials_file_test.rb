@@ -41,6 +41,7 @@ class Anthropic::Credentials::CredentialsFileTest < Minitest::Test
       "test",
       {
         "organization_id" => "org-123",
+        "workspace_id" => "wrkspc_x",
         "authentication" => {
           "type" => "oidc_federation",
           "federation_rule_id" => "fdrl_01abc",
@@ -49,7 +50,9 @@ class Anthropic::Credentials::CredentialsFileTest < Minitest::Test
       }
     )
 
+    exchange_body = nil
     stub_request(:post, "https://api.anthropic.com/v1/oauth/token")
+      .with { |req| exchange_body = JSON.parse(req.body) }
       .to_return(
         status: 200,
         body: '{"access_token": "exchanged", "expires_in": 3600}',
@@ -60,6 +63,8 @@ class Anthropic::Credentials::CredentialsFileTest < Minitest::Test
     result = provider.call
 
     assert_equal("exchanged", result.token)
+    assert_equal("wrkspc_x", exchange_body["workspace_id"])
+    assert_equal({}, provider.extra_headers)
   end
 
   def test_env_vars_fill_missing_profile_fields
@@ -132,6 +137,84 @@ class Anthropic::Credentials::CredentialsFileTest < Minitest::Test
     headers = provider.extra_headers
 
     assert_equal("wrkspc_01abc", headers["anthropic-workspace-id"])
+  end
+
+  def test_env_fills_missing_workspace_id
+    write_config(
+      "test",
+      {
+        "authentication" => {
+          "type" => "oidc_federation",
+          "federation_rule_id" => "fdrl_01abc"
+        }
+      }
+    )
+    ENV["ANTHROPIC_ORGANIZATION_ID"] = "org-env"
+    ENV["ANTHROPIC_WORKSPACE_ID"] = "wrkspc_from_env"
+    ENV["ANTHROPIC_IDENTITY_TOKEN_FILE"] = token_file("jwt")
+
+    exchange_body = nil
+    stub_request(:post, "https://api.anthropic.com/v1/oauth/token")
+      .with { |req| exchange_body = JSON.parse(req.body) }
+      .to_return(
+        status: 200,
+        body: '{"access_token": "token", "expires_in": 3600}',
+        headers: {"Content-Type" => "application/json"}
+      )
+
+    provider = Anthropic::Credentials::CredentialsFile.new("test")
+    provider.call
+
+    assert_equal("wrkspc_from_env", exchange_body["workspace_id"])
+  end
+
+  def test_env_workspace_id_fills_user_oauth
+    # ANTHROPIC_WORKSPACE_ID fills workspace_id uniformly across profile types,
+    # not just federation. For user_oauth the filled value surfaces as the
+    # anthropic-workspace-id request header (federation routes it into the
+    # exchange body instead).
+    write_config(
+      "test",
+      {"authentication" => {"type" => "user_oauth"}}
+    )
+    write_credentials("test", {"access_token" => "token", "expires_at" => Time.now.to_i + 3600})
+    ENV["ANTHROPIC_WORKSPACE_ID"] = "wrkspc_env"
+
+    provider = Anthropic::Credentials::CredentialsFile.new("test")
+
+    assert_equal({"anthropic-workspace-id" => "wrkspc_env"}, provider.extra_headers)
+  end
+
+  def test_profile_workspace_id_wins_over_env
+    # ctor override > env var > profile is the global precedence model, but
+    # within the config layer the profile value beats the env var fill.
+    write_config(
+      "test",
+      {
+        "organization_id" => "org-profile",
+        "workspace_id" => "wrkspc_file",
+        "authentication" => {
+          "type" => "oidc_federation",
+          "federation_rule_id" => "fdrl_01abc",
+          "identity_token" => {"source" => "file", "path" => token_file("jwt")}
+        }
+      }
+    )
+    ENV["ANTHROPIC_WORKSPACE_ID"] = "wrkspc_env"
+
+    exchange_body = nil
+    stub_request(:post, "https://api.anthropic.com/v1/oauth/token")
+      .with { |req| exchange_body = JSON.parse(req.body) }
+      .to_return(
+        status: 200,
+        body: '{"access_token": "token", "expires_in": 3600}',
+        headers: {"Content-Type" => "application/json"}
+      )
+
+    provider = Anthropic::Credentials::CredentialsFile.new("test")
+    provider.call
+
+    assert_equal("wrkspc_file", exchange_body["workspace_id"])
   end
 
   def test_identity_token_from_env_source

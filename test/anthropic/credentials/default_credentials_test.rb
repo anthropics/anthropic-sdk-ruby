@@ -6,6 +6,12 @@ require "json"
 
 class Anthropic::Credentials::DefaultCredentialsTest < Minitest::Test
   extend Minitest::Serial
+  include WebMock::API
+
+  def before_all
+    super
+    WebMock.enable!
+  end
 
   def setup
     @original_env = ENV.to_h
@@ -30,9 +36,16 @@ class Anthropic::Credentials::DefaultCredentialsTest < Minitest::Test
     ENV["ANTHROPIC_IDENTITY_TOKEN_FILE"] = nil
     ENV["ANTHROPIC_IDENTITY_TOKEN"] = nil
     ENV["ANTHROPIC_SERVICE_ACCOUNT_ID"] = nil
+    ENV["ANTHROPIC_WORKSPACE_ID"] = nil
     ENV["ANTHROPIC_SCOPE"] = nil
     ENV.clear
     ENV.update(@original_env)
+    WebMock.reset!
+  end
+
+  def after_all
+    WebMock.disable!
+    super
   end
 
   def test_returns_nil_when_api_key_set
@@ -67,6 +80,46 @@ class Anthropic::Credentials::DefaultCredentialsTest < Minitest::Test
     result = Anthropic::Credentials.default_credentials
     assert_instance_of(Anthropic::Credentials::CredentialResult, result)
     assert_instance_of(Anthropic::Credentials::WorkloadIdentity, result.provider)
+  end
+
+  def test_federation_env_vars_pass_through_workspace_id
+    ENV["ANTHROPIC_IDENTITY_TOKEN"] = "literal-jwt"
+    ENV["ANTHROPIC_FEDERATION_RULE_ID"] = "fdrl_01abc"
+    ENV["ANTHROPIC_ORGANIZATION_ID"] = "org-uuid"
+    ENV["ANTHROPIC_WORKSPACE_ID"] = "wrkspc_01abc"
+
+    result = Anthropic::Credentials.default_credentials
+    assert_instance_of(Anthropic::Credentials::CredentialResult, result)
+    provider = result.provider
+    assert_instance_of(Anthropic::Credentials::WorkloadIdentity, provider)
+    assert_equal("wrkspc_01abc", provider.instance_variable_get(:@workspace_id))
+  end
+
+  def test_federation_env_workspace_id_empty_treated_unset
+    # ANTHROPIC_WORKSPACE_ID="" (a defaulted-but-empty CI variable) is treated
+    # as unset — never put "workspace_id" => "" on the wire.
+    ENV["ANTHROPIC_IDENTITY_TOKEN"] = "literal-jwt"
+    ENV["ANTHROPIC_FEDERATION_RULE_ID"] = "fdrl_01abc"
+    ENV["ANTHROPIC_ORGANIZATION_ID"] = "org-uuid"
+    ENV["ANTHROPIC_WORKSPACE_ID"] = ""
+
+    exchange_body = nil
+    stub_request(:post, "https://api.anthropic.com/v1/oauth/token")
+      .with { |req| exchange_body = JSON.parse(req.body) }
+      .to_return(
+        status: 200,
+        body: '{"access_token": "token", "expires_in": 3600}',
+        headers: {"Content-Type" => "application/json"}
+      )
+
+    result = Anthropic::Credentials.default_credentials
+    assert_instance_of(Anthropic::Credentials::CredentialResult, result)
+    provider = result.provider
+    assert_instance_of(Anthropic::Credentials::WorkloadIdentity, provider)
+    assert_nil(provider.instance_variable_get(:@workspace_id))
+
+    provider.call
+    refute_includes(exchange_body, "workspace_id")
   end
 
   def test_fallback_profile_used_when_config_dir_set_with_default_profile
