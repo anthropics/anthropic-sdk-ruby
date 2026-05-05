@@ -74,6 +74,9 @@ module Anthropic
         headers = {}
 
         auth_type = config[:authentication][:type]
+        # For federation profiles workspace_id is sent in the jwt-bearer
+        # exchange body, not as a request header (the minted token is already
+        # workspace-scoped, so the header would be ignored).
         if auth_type != AUTH_TYPE_OIDC_FEDERATION
           workspace_id = config[:workspace_id]
           headers["anthropic-workspace-id"] = workspace_id.to_s if workspace_id
@@ -193,6 +196,7 @@ module Anthropic
           federation_rule_id: federation_rule_id,
           organization_id: organization_id,
           service_account_id: auth[:service_account_id],
+          workspace_id: @config[:workspace_id],
           scope: auth[:scope]
         )
 
@@ -394,6 +398,7 @@ module Anthropic
       def fill_missing_from_env(config, auth)
         fill(config, :base_url, ENV_BASE_URL)
         fill(config, :organization_id, ENV_ORGANIZATION_ID)
+        fill(config, :workspace_id, ENV_WORKSPACE_ID)
 
         auth_type = auth[:type]
         if auth_type == AUTH_TYPE_OIDC_FEDERATION

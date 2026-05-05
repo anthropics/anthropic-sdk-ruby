@@ -53,6 +53,16 @@ module Anthropic
       # @param organization_id [String] the organization's raw UUID string
       # @param service_account_id [String, nil] optional service account ID to
       #   impersonate
+      # @param workspace_id [String, nil] Optional +wrkspc_*+ tagged ID, or the
+      #   literal +"default"+ to scope the token to the organization's default
+      #   workspace. When omitted the server picks the rule's sole enabled
+      #   workspace, else the org default if the rule covers it. Required when
+      #   the rule enables more than one non-default workspace, or to target a
+      #   specific workspace other than the one the server would pick. The
+      #   minted token is workspace-scoped: per-request workspace selection
+      #   (the +anthropic-workspace-id+ header) is not supported for federation
+      #   tokens — switching workspaces requires a new token exchange with a
+      #   different +workspace_id+.
       # @param scope [String, nil] optional OAuth scope (informational only for
       #   federation; the server derives the effective scope from the federation rule)
       def initialize(
@@ -60,12 +70,14 @@ module Anthropic
         federation_rule_id:,
         organization_id:,
         service_account_id: nil,
+        workspace_id: nil,
         scope: nil # rubocop:disable Lint/UnusedMethodArgument
       )
         @identity_token_provider = identity_token_provider
         @federation_rule_id = federation_rule_id
         @organization_id = organization_id
         @service_account_id = service_account_id
+        @workspace_id = workspace_id
         @bound_base_url = nil
       end
 
@@ -128,6 +140,7 @@ module Anthropic
           "organization_id" => @organization_id
         }
         body["service_account_id"] = @service_account_id if @service_account_id
+        body["workspace_id"] = @workspace_id if @workspace_id
 
         request = Net::HTTP::Post.new(uri.path)
         request["Content-Type"] = "application/json"
@@ -173,8 +186,23 @@ module Anthropic
           response.body&.slice(0, 256)
         end
 
+        message = "Token exchange failed (HTTP #{response.code}): #{body}"
+        # An ambiguous 401 is usually a federation-rule misconfiguration.
+        # Surface the fix in the error rather than making the user dig through docs.
+        if response.code.to_i == 401
+          hint_parts = ["Ensure your federation rule matches your identity token"]
+          if @workspace_id.nil?
+            hint_parts << "If your federation rule is scoped to multiple workspaces, set the " \
+                          "ANTHROPIC_WORKSPACE_ID environment variable, the 'workspace_id' " \
+                          "config key, or the workspace_id: keyword argument"
+          end
+          hint_parts << "View your authentication events in the Workload identity page of " \
+                        "Claude Console for more details"
+          message += " #{hint_parts.join('. ')}."
+        end
+
         raise WorkloadIdentityError.new(
-          "Token exchange failed (HTTP #{response.code}): #{body}",
+          message,
           status_code: response.code.to_i,
           body: body,
           request_id: request_id

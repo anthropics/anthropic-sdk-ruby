@@ -146,6 +146,10 @@ module Anthropic
           federation_rule_id: federation_rule_id,
           organization_id: organization_id,
           service_account_id: ENV[ENV_SERVICE_ACCOUNT_ID],
+          # Coerce empty string to nil so a defaulted-but-empty CI variable doesn't
+          # put "workspace_id" => "" on the wire — matches the blank-skip in
+          # ConfigProvider#fill.
+          workspace_id: ENV[ENV_WORKSPACE_ID].then { _1 unless _1.to_s.empty? },
           scope: ENV[ENV_SCOPE]
         )
         provider.bind_base_url(base_url)

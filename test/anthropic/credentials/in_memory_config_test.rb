@@ -98,6 +98,7 @@ class Anthropic::Credentials::InMemoryConfigTest < Minitest::Test
     token_provider = -> { "my-jwt-token" }
     config = {
       "organization_id" => "org-123",
+      "workspace_id" => "wrkspc_x",
       "authentication" => {
         "type" => "oidc_federation",
         "federation_rule_id" => "fdrl_01abc"
@@ -110,7 +111,8 @@ class Anthropic::Credentials::InMemoryConfigTest < Minitest::Test
           "grant_type" => "urn:ietf:params:oauth:grant-type:jwt-bearer",
           "assertion" => "my-jwt-token",
           "federation_rule_id" => "fdrl_01abc",
-          "organization_id" => "org-123"
+          "organization_id" => "org-123",
+          "workspace_id" => "wrkspc_x"
         )
       )
       .to_return(
@@ -126,6 +128,8 @@ class Anthropic::Credentials::InMemoryConfigTest < Minitest::Test
 
     assert_equal("access-token-123", token.token)
     refute_nil(token.expires_at)
+    # Federation profiles send workspace_id in the exchange body, not as a header.
+    assert_equal({}, imc.extra_headers)
   end
 
   def test_extra_headers_returns_workspace_id_for_non_federation

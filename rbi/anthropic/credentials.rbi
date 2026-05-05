@@ -23,6 +23,7 @@ module Anthropic
     ENV_FEDERATION_RULE_ID = T.let("ANTHROPIC_FEDERATION_RULE_ID", String)
     ENV_ORGANIZATION_ID = T.let("ANTHROPIC_ORGANIZATION_ID", String)
     ENV_SERVICE_ACCOUNT_ID = T.let("ANTHROPIC_SERVICE_ACCOUNT_ID", String)
+    ENV_WORKSPACE_ID = T.let("ANTHROPIC_WORKSPACE_ID", String)
     ENV_SCOPE = T.let("ANTHROPIC_SCOPE", String)
     AUTH_TYPE_OIDC_FEDERATION = T.let("oidc_federation", String)
     AUTH_TYPE_USER_OAUTH = T.let("user_oauth", String)
@@ -166,6 +167,7 @@ module Anthropic
           federation_rule_id: String,
           organization_id: String,
           service_account_id: T.nilable(String),
+          workspace_id: T.nilable(String),
           scope: T.nilable(String)
         ).void
       end
@@ -174,6 +176,7 @@ module Anthropic
         federation_rule_id:,
         organization_id:,
         service_account_id: nil,
+        workspace_id: nil,
         scope: nil
       )
       end
