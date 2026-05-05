@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.38.0 (2026-05-05)
+
+Full Changelog: [v1.37.0...v1.38.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.37.0...v1.38.0)
+
+### Features
+
+* **client:** allow targeting a workspace for OIDC federation token exchange ([85f4668](https://github.com/anthropics/anthropic-sdk-ruby/commit/85f46687b798714bed259e6b78e07bc4df114046))
+
 ## 1.37.0 (2026-05-04)
 
 Full Changelog: [v1.36.0...v1.37.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.36.0...v1.37.0)
