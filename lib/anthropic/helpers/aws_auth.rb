@@ -173,7 +173,7 @@ module Anthropic
       # @param aws_session_token [String, nil]
       # @param aws_profile [String, nil]
       #
-      # @return [Aws::Credentials, Aws::SharedCredentials, Aws::InstanceProfileCredentials]
+      # @return [Aws::Credentials, Aws::SharedCredentials, Aws::SSOCredentials, Aws::InstanceProfileCredentials]
       private def resolve_credentials(
         aws_access_key:,
         aws_secret_access_key:,
@@ -185,7 +185,7 @@ module Anthropic
         end
 
         if aws_profile
-          return Aws::SharedCredentials.new(profile_name: aws_profile)
+          return resolve_profile_credentials(aws_profile)
         end
 
         # Default credential chain: env vars → shared config file → instance profile
@@ -206,6 +206,55 @@ module Anthropic
 
         # Fall back to instance profile (EC2/ECS/Lambda metadata service)
         Aws::InstanceProfileCredentials.new
+      end
+
+      # Resolve credentials for a named AWS profile. Tries the same resolution
+      # order as Aws::CredentialProviderChain for explicit profiles: SSO,
+      # assume-role (including web identity), credential_process, and static
+      # shared credentials.
+      #
+      # Uses Aws.shared_config which is @api private in aws-sdk-core, but is
+      # the only path to load SSO/assume-role/process credentials from a profile
+      # name without re-parsing ~/.aws/config. This is the same approach the
+      # SDK's own CredentialProviderChain uses and has been stable across v3.
+      #
+      # @param aws_profile [String]
+      # @return [Aws::CredentialProvider]
+      # @raise [ArgumentError] if the profile resolves no usable credentials
+      private def resolve_profile_credentials(aws_profile)
+        sc = Aws.shared_config
+
+        # Same order as Aws::CredentialProviderChain for explicit profiles.
+        # The config-file resolvers are gated on config_enabled? since they
+        # read ~/.aws/config; static shared credentials read ~/.aws/credentials
+        # and are always attempted as the final fallback.
+        resolvers = []
+        if sc.config_enabled?
+          resolvers += [
+            -> { sc.assume_role_web_identity_credentials_from_config(profile: aws_profile) },
+            -> { sc.sso_credentials_from_config(profile: aws_profile) },
+            -> { sc.assume_role_credentials_from_config(profile: aws_profile) },
+            -> {
+              process_provider = sc.credential_process(profile: aws_profile)
+              Aws::ProcessCredentials.new([process_provider]) if process_provider
+            }
+          ]
+        end
+        resolvers << -> { Aws::SharedCredentials.new(profile_name: aws_profile) }
+
+        resolvers.each do |resolver|
+          creds = resolver.call
+          return creds if creds&.set?
+        rescue Aws::Errors::NoSuchProfileError
+          # fall through to next strategy
+          nil
+        end
+
+        raise ArgumentError.new(
+          "Could not resolve credentials for profile #{aws_profile.inspect}. " \
+          "If this is an SSO profile, " \
+          "run `aws sso login --profile #{aws_profile}` first."
+        )
       end
 
       # Returns the first non-empty value from the given env var names.
