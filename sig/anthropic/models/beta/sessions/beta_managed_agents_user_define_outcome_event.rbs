@@ -1,0 +1,74 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_user_define_outcome_event =
+          {
+            id: String,
+            description: String,
+            max_iterations: Integer?,
+            outcome_id: String,
+            processed_at: Time,
+            rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::rubric,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::type_
+          }
+
+        class BetaManagedAgentsUserDefineOutcomeEvent < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor description: String
+
+          attr_accessor max_iterations: Integer?
+
+          attr_accessor outcome_id: String
+
+          attr_accessor processed_at: Time
+
+          attr_accessor rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::rubric
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::type_
+
+          def initialize: (
+            id: String,
+            description: String,
+            max_iterations: Integer?,
+            outcome_id: String,
+            processed_at: Time,
+            rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::rubric,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::type_
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            description: String,
+            max_iterations: Integer?,
+            outcome_id: String,
+            processed_at: Time,
+            rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::rubric,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::type_
+          }
+
+          type rubric =
+            Anthropic::Beta::Sessions::BetaManagedAgentsFileRubric
+            | Anthropic::Beta::Sessions::BetaManagedAgentsTextRubric
+
+          module Rubric
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::rubric]
+          end
+
+          type type_ = :"user.define_outcome"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            USER_DEFINE_OUTCOME: :"user.define_outcome"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::type_]
+          end
+        end
+      end
+    end
+  end
+end

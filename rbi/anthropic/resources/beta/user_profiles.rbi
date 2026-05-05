@@ -9,6 +9,9 @@ module Anthropic
           params(
             external_id: T.nilable(String),
             metadata: T::Hash[Symbol, String],
+            name: T.nilable(String),
+            relationship:
+              Anthropic::Beta::UserProfileCreateParams::Relationship::OrSymbol,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaUserProfile)
@@ -21,6 +24,15 @@ module Anthropic
           # keys, with keys up to 64 characters and values up to 512 characters. Values must
           # be non-empty strings.
           metadata: nil,
+          # Body param: Display name of the entity this profile represents. Required when
+          # relationship is `resold` (the resold-to company's name); optional otherwise.
+          # Maximum 255 characters.
+          name: nil,
+          # Body param: How the entity behind a user profile relates to the platform that
+          # owns the API key. `external`: an individual end-user of the platform. `resold`:
+          # a company the platform resells Claude access to. `internal`: the platform's own
+          # usage.
+          relationship: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}
@@ -50,6 +62,11 @@ module Anthropic
             user_profile_id: String,
             external_id: T.nilable(String),
             metadata: T::Hash[Symbol, String],
+            name: T.nilable(String),
+            relationship:
+              T.nilable(
+                Anthropic::Beta::UserProfileUpdateParams::Relationship::OrSymbol
+              ),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaUserProfile)
@@ -65,6 +82,14 @@ module Anthropic
           # Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64
           # characters and values up to 512 characters.
           metadata: nil,
+          # Body param: If present, replaces the stored name. Omit to leave unchanged.
+          # Maximum 255 characters.
+          name: nil,
+          # Body param: How the entity behind a user profile relates to the platform that
+          # owns the API key. `external`: an individual end-user of the platform. `resold`:
+          # a company the platform resells Claude access to. `internal`: the platform's own
+          # usage.
+          relationship: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}

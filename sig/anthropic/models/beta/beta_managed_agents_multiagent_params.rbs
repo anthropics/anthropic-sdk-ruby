@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsMultiagentParams = Beta::BetaManagedAgentsMultiagentParams
+
+    module Beta
+      type beta_managed_agents_multiagent_params =
+        {
+          agents: ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_roster_entry_params],
+          type: Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams::type_
+        }
+
+      class BetaManagedAgentsMultiagentParams < Anthropic::Internal::Type::BaseModel
+        attr_accessor agents: ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_roster_entry_params]
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams::type_
+
+        def initialize: (
+          agents: ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_roster_entry_params],
+          type: Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams::type_
+        ) -> void
+
+        def to_hash: -> {
+          agents: ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_roster_entry_params],
+          type: Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams::type_
+        }
+
+        type type_ = :coordinator
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          COORDINATOR: :coordinator
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams::type_]
+        end
+      end
+    end
+  end
+end

@@ -208,6 +208,36 @@ module Anthropic
             )
           end
 
+          # Validate Credential
+          #
+          # @overload mcp_oauth_validate(credential_id, vault_id:, betas: nil, request_options: {})
+          #
+          # @param credential_id [String] Path param: Path parameter credential_id
+          #
+          # @param vault_id [String] Path param: Path parameter vault_id
+          #
+          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+          #
+          # @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredentialValidation]
+          #
+          # @see Anthropic::Models::Beta::Vaults::CredentialMCPOAuthValidateParams
+          def mcp_oauth_validate(credential_id, params)
+            parsed, options = Anthropic::Beta::Vaults::CredentialMCPOAuthValidateParams.dump_request(params)
+            vault_id =
+              parsed.delete(:vault_id) do
+                raise ArgumentError.new("missing required path argument #{_1}")
+              end
+            @client.request(
+              method: :post,
+              path: ["v1/vaults/%1$s/credentials/%2$s/mcp_oauth_validate?beta=true", vault_id, credential_id],
+              headers: parsed.transform_keys(betas: "anthropic-beta"),
+              model: Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidation,
+              options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
+            )
+          end
+
           # @api private
           #
           # @param client [Anthropic::Client]

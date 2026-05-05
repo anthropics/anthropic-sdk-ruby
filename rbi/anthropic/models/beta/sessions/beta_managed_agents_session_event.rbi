@@ -22,15 +22,26 @@ module Anthropic
                 Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent,
                 Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent,
                 Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent,
+                Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent,
+                Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent,
                 Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent,
                 Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent,
                 Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent,
                 Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusRunningEvent,
                 Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent,
                 Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent,
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent,
+                Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent,
+                Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent,
                 Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent,
                 Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent,
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent
+                Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent,
+                Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent,
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent,
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent,
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent,
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent,
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent
               )
             end
 

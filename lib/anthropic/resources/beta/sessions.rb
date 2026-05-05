@@ -10,6 +10,9 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::Sessions::Resources]
         attr_reader :resources
 
+        # @return [Anthropic::Resources::Beta::Sessions::Threads]
+        attr_reader :threads
+
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::SessionCreateParams} for more details.
         #
@@ -113,7 +116,7 @@ module Anthropic
         #
         # List Sessions
         #
-        # @overload list(agent_id: nil, agent_version: nil, created_at_gt: nil, created_at_gte: nil, created_at_lt: nil, created_at_lte: nil, include_archived: nil, limit: nil, memory_store_id: nil, order: nil, page: nil, betas: nil, request_options: {})
+        # @overload list(agent_id: nil, agent_version: nil, created_at_gt: nil, created_at_gte: nil, created_at_lt: nil, created_at_lte: nil, include_archived: nil, limit: nil, memory_store_id: nil, order: nil, page: nil, statuses: nil, betas: nil, request_options: {})
         #
         # @param agent_id [String] Query param: Filter sessions created with this agent ID.
         #
@@ -137,6 +140,8 @@ module Anthropic
         #
         # @param page [String] Query param: Opaque pagination cursor from a previous response's next_page.
         #
+        # @param statuses [Array<Symbol, Anthropic::Models::Beta::SessionListParams::Status>] Query param: Filter by session status. Repeat the parameter to match any of mult
+        #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
@@ -157,7 +162,8 @@ module Anthropic
               :limit,
               :memory_store_id,
               :order,
-              :page
+              :page,
+              :statuses
             ]
           parsed, options = Anthropic::Beta::SessionListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
@@ -232,6 +238,7 @@ module Anthropic
           @client = client
           @events = Anthropic::Resources::Beta::Sessions::Events.new(client: client)
           @resources = Anthropic::Resources::Beta::Sessions::Resources.new(client: client)
+          @threads = Anthropic::Resources::Beta::Sessions::Threads.new(client: client)
         end
       end
     end

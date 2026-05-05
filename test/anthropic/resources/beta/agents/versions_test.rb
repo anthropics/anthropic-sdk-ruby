@@ -28,6 +28,7 @@ class Anthropic::Test::Resources::Beta::Agents::VersionsTest < Anthropic::Test::
         mcp_servers: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition]),
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         model: Anthropic::Beta::BetaManagedAgentsModelConfig,
+        multiagent: Anthropic::Beta::BetaManagedAgentsMultiagent | nil,
         name: String,
         skills: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaManagedAgentsAgent::Skill]),
         system_: String | nil,

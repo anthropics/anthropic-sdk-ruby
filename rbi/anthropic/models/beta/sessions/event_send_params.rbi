@@ -27,7 +27,8 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEventParams,
                   Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams,
                   Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams
                 )
               ]
             )
@@ -60,7 +61,8 @@ module Anthropic
                     Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams::OrHash
+                    Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::OrHash
                   )
                 ],
               betas:
@@ -88,7 +90,8 @@ module Anthropic
                       Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEventParams,
                       Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams,
                       Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams,
-                      Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams
+                      Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams,
+                      Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams
                     )
                   ],
                 betas:

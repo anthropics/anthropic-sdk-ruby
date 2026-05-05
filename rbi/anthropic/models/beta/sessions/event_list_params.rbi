@@ -19,6 +19,34 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :session_id
 
+          # Return events created after this time (exclusive).
+          sig { returns(T.nilable(Time)) }
+          attr_reader :created_at_gt
+
+          sig { params(created_at_gt: Time).void }
+          attr_writer :created_at_gt
+
+          # Return events created at or after this time (inclusive).
+          sig { returns(T.nilable(Time)) }
+          attr_reader :created_at_gte
+
+          sig { params(created_at_gte: Time).void }
+          attr_writer :created_at_gte
+
+          # Return events created before this time (exclusive).
+          sig { returns(T.nilable(Time)) }
+          attr_reader :created_at_lt
+
+          sig { params(created_at_lt: Time).void }
+          attr_writer :created_at_lt
+
+          # Return events created at or before this time (inclusive).
+          sig { returns(T.nilable(Time)) }
+          attr_reader :created_at_lte
+
+          sig { params(created_at_lte: Time).void }
+          attr_writer :created_at_lte
+
           # Query parameter for limit
           sig { returns(T.nilable(Integer)) }
           attr_reader :limit
@@ -51,6 +79,14 @@ module Anthropic
           sig { params(page: String).void }
           attr_writer :page
 
+          # Filter by event type. Values match the `type` field on returned events (for
+          # example, `user.message` or `agent.tool_use`). Omit to return all event types.
+          sig { returns(T.nilable(T::Array[String])) }
+          attr_reader :types
+
+          sig { params(types: T::Array[String]).void }
+          attr_writer :types
+
           # Optional header to specify the beta version(s) you want to use.
           sig do
             returns(
@@ -71,10 +107,15 @@ module Anthropic
           sig do
             params(
               session_id: String,
+              created_at_gt: Time,
+              created_at_gte: Time,
+              created_at_lt: Time,
+              created_at_lte: Time,
               limit: Integer,
               order:
                 Anthropic::Beta::Sessions::EventListParams::Order::OrSymbol,
               page: String,
+              types: T::Array[String],
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               request_options: Anthropic::RequestOptions::OrHash
@@ -82,6 +123,14 @@ module Anthropic
           end
           def self.new(
             session_id:,
+            # Return events created after this time (exclusive).
+            created_at_gt: nil,
+            # Return events created at or after this time (inclusive).
+            created_at_gte: nil,
+            # Return events created before this time (exclusive).
+            created_at_lt: nil,
+            # Return events created at or before this time (inclusive).
+            created_at_lte: nil,
             # Query parameter for limit
             limit: nil,
             # Sort direction for results, ordered by created_at. Defaults to asc
@@ -89,6 +138,9 @@ module Anthropic
             order: nil,
             # Opaque pagination cursor from a previous response's next_page.
             page: nil,
+            # Filter by event type. Values match the `type` field on returned events (for
+            # example, `user.message` or `agent.tool_use`). Omit to return all event types.
+            types: nil,
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,
             request_options: {}
@@ -99,10 +151,15 @@ module Anthropic
             override.returns(
               {
                 session_id: String,
+                created_at_gt: Time,
+                created_at_gte: Time,
+                created_at_lt: Time,
+                created_at_lte: Time,
                 limit: Integer,
                 order:
                   Anthropic::Beta::Sessions::EventListParams::Order::OrSymbol,
                 page: String,
+                types: T::Array[String],
                 betas:
                   T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
                 request_options: Anthropic::RequestOptions

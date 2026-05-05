@@ -44,6 +44,13 @@ module Anthropic
         #   @return [Hash{Symbol=>String}, nil]
         optional :metadata, Anthropic::Internal::Type::HashOf[String]
 
+        # @!attribute multiagent
+        #   A coordinator topology: the session's primary thread orchestrates work by
+        #   spawning session threads, each running an agent drawn from the `agents` roster.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil]
+        optional :multiagent, -> { Anthropic::Beta::BetaManagedAgentsMultiagentParams }, nil?: true
+
         # @!attribute skills
         #   Skills available to the agent. Maximum 20.
         #
@@ -71,7 +78,7 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(model:, name:, description: nil, mcp_servers: nil, metadata: nil, skills: nil, system_: nil, tools: nil, betas: nil, request_options: {})
+        # @!method initialize(model:, name:, description: nil, mcp_servers: nil, metadata: nil, multiagent: nil, skills: nil, system_: nil, tools: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::AgentCreateParams} for more details.
         #
@@ -84,6 +91,8 @@ module Anthropic
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>] MCP servers this agent connects to. Maximum 20. Names must be unique within the
         #
         #   @param metadata [Hash{Symbol=>String}] Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up t
+        #
+        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] A coordinator topology: the session's primary thread orchestrates work by spawni
         #
         #   @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>] Skills available to the agent. Maximum 20.
         #

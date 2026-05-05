@@ -1,0 +1,54 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_span_outcome_evaluation_start_event =
+          {
+            id: String,
+            iteration: Integer,
+            outcome_id: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent::type_
+          }
+
+        class BetaManagedAgentsSpanOutcomeEvaluationStartEvent < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor iteration: Integer
+
+          attr_accessor outcome_id: String
+
+          attr_accessor processed_at: Time
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent::type_
+
+          def initialize: (
+            id: String,
+            iteration: Integer,
+            outcome_id: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent::type_
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            iteration: Integer,
+            outcome_id: String,
+            processed_at: Time,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent::type_
+          }
+
+          type type_ = :"span.outcome_evaluation_start"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            SPAN_OUTCOME_EVALUATION_START: :"span.outcome_evaluation_start"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent::type_]
+          end
+        end
+      end
+    end
+  end
+end

@@ -48,6 +48,12 @@ module Anthropic
           sig { returns(T.nilable(Time)) }
           attr_accessor :processed_at
 
+          # When set, the confirmation routes to this subagent's thread rather than the
+          # primary. Echo this from the `session_thread_id` on the `agent.tool_use` or
+          # `agent.mcp_tool_use` event that prompted the approval.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :session_thread_id
+
           # A tool confirmation event that approves or denies a pending tool execution.
           sig do
             params(
@@ -58,7 +64,8 @@ module Anthropic
               type:
                 Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::Type::OrSymbol,
               deny_message: T.nilable(String),
-              processed_at: T.nilable(Time)
+              processed_at: T.nilable(Time),
+              session_thread_id: T.nilable(String)
             ).returns(T.attached_class)
           end
           def self.new(
@@ -76,7 +83,11 @@ module Anthropic
             # result is 'deny'.
             deny_message: nil,
             # A timestamp in RFC 3339 format
-            processed_at: nil
+            processed_at: nil,
+            # When set, the confirmation routes to this subagent's thread rather than the
+            # primary. Echo this from the `session_thread_id` on the `agent.tool_use` or
+            # `agent.mcp_tool_use` event that prompted the approval.
+            session_thread_id: nil
           )
           end
 
@@ -90,7 +101,8 @@ module Anthropic
                 type:
                   Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::Type::TaggedSymbol,
                 deny_message: T.nilable(String),
-                processed_at: T.nilable(Time)
+                processed_at: T.nilable(Time),
+                session_thread_id: T.nilable(String)
               }
             )
           end

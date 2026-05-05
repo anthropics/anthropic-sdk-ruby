@@ -38,6 +38,27 @@ module Anthropic
         end
         attr_writer :model
 
+        # Resolved coordinator topology with full agent definitions for each roster
+        # member.
+        sig do
+          returns(
+            T.nilable(
+              Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator
+            )
+          )
+        end
+        attr_reader :multiagent
+
+        sig do
+          params(
+            multiagent:
+              T.nilable(
+                Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator::OrHash
+              )
+          ).void
+        end
+        attr_writer :multiagent
+
         sig { returns(String) }
         attr_accessor :name
 
@@ -83,6 +104,10 @@ module Anthropic
                 Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition::OrHash
               ],
             model: Anthropic::Beta::BetaManagedAgentsModelConfig::OrHash,
+            multiagent:
+              T.nilable(
+                Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator::OrHash
+              ),
             name: String,
             skills:
               T::Array[
@@ -111,6 +136,9 @@ module Anthropic
           mcp_servers:,
           # Model identifier and configuration.
           model:,
+          # Resolved coordinator topology with full agent definitions for each roster
+          # member.
+          multiagent:,
           name:,
           skills:,
           system_:,
@@ -130,6 +158,10 @@ module Anthropic
                   Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition
                 ],
               model: Anthropic::Beta::BetaManagedAgentsModelConfig,
+              multiagent:
+                T.nilable(
+                  Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator
+                ),
               name: String,
               skills:
                 T::Array[

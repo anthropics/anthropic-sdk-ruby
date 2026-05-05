@@ -44,6 +44,12 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsModelConfig]
         required :model, -> { Anthropic::Beta::BetaManagedAgentsModelConfig }
 
+        # @!attribute multiagent
+        #   Resolved coordinator topology with a concrete agent roster.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsMultiagent, nil]
+        required :multiagent, -> { Anthropic::Beta::BetaManagedAgentsMultiagent }, nil?: true
+
         # @!attribute name
         #
         #   @return [String]
@@ -84,7 +90,7 @@ module Anthropic
         #   @return [Integer]
         required :version, Integer
 
-        # @!method initialize(id:, archived_at:, created_at:, description:, mcp_servers:, metadata:, model:, name:, skills:, system_:, tools:, type:, updated_at:, version:)
+        # @!method initialize(id:, archived_at:, created_at:, description:, mcp_servers:, metadata:, model:, multiagent:, name:, skills:, system_:, tools:, type:, updated_at:, version:)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsAgent} for more details.
         #
@@ -103,6 +109,8 @@ module Anthropic
         #   @param metadata [Hash{Symbol=>String}]
         #
         #   @param model [Anthropic::Models::Beta::BetaManagedAgentsModelConfig] Model identifier and configuration.
+        #
+        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagent, nil] Resolved coordinator topology with a concrete agent roster.
         #
         #   @param name [String]
         #

@@ -17,6 +17,8 @@ module Anthropic
         end
 
         module Sessions
+          module Threads
+          end
         end
 
         module Skills
@@ -33,9 +35,14 @@ module Anthropic
       end
 
       module Sessions
+        module Threads
+        end
       end
 
       module Skills
+      end
+
+      module Threads
       end
 
       module Vaults

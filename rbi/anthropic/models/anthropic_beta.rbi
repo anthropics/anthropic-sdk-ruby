@@ -103,6 +103,11 @@ module Anthropic
           :"advisor-tool-2026-03-01",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      MANAGED_AGENTS_2026_04_01 =
+        T.let(
+          :"managed-agents-2026-04-01",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
     end
   end
 end

@@ -65,6 +65,11 @@ module Anthropic
           sig { returns(T.nilable(Time)) }
           attr_accessor :processed_at
 
+          # Routes this result to a subagent thread. Copy from the `agent.custom_tool_use`
+          # event's `session_thread_id`.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :session_thread_id
+
           # Event sent by the client providing the result of a custom tool execution.
           sig do
             params(
@@ -81,7 +86,8 @@ module Anthropic
                   )
                 ],
               is_error: T.nilable(T::Boolean),
-              processed_at: T.nilable(Time)
+              processed_at: T.nilable(Time),
+              session_thread_id: T.nilable(String)
             ).returns(T.attached_class)
           end
           def self.new(
@@ -98,7 +104,10 @@ module Anthropic
             # Whether the tool execution resulted in an error.
             is_error: nil,
             # A timestamp in RFC 3339 format
-            processed_at: nil
+            processed_at: nil,
+            # Routes this result to a subagent thread. Copy from the `agent.custom_tool_use`
+            # event's `session_thread_id`.
+            session_thread_id: nil
           )
           end
 
@@ -114,7 +123,8 @@ module Anthropic
                     Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::Content::Variants
                   ],
                 is_error: T.nilable(T::Boolean),
-                processed_at: T.nilable(Time)
+                processed_at: T.nilable(Time),
+                session_thread_id: T.nilable(String)
               }
             )
           end

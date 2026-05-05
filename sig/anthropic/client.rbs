@@ -12,6 +12,8 @@ module Anthropic
 
     attr_reader auth_token: String?
 
+    attr_reader webhook_key: String?
+
     attr_reader completions: Anthropic::Resources::Completions
 
     attr_reader messages: Anthropic::Resources::Messages
@@ -29,6 +31,7 @@ module Anthropic
     def initialize: (
       ?api_key: String?,
       ?auth_token: String?,
+      ?webhook_key: String?,
       ?base_url: String?,
       ?max_retries: Integer,
       ?timeout: Float,

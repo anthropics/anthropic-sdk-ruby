@@ -9,11 +9,15 @@ module Anthropic
         #
         # Create User Profile
         #
-        # @overload create(external_id: nil, metadata: nil, betas: nil, request_options: {})
+        # @overload create(external_id: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
         #
         # @param external_id [String, nil] Body param: Platform's own identifier for this user. Not enforced unique. Maximu
         #
         # @param metadata [Hash{Symbol=>String}] Body param: Free-form key-value data to attach to this user profile. Maximum 16
+        #
+        # @param name [String, nil] Body param: Display name of the entity this profile represents. Required when re
+        #
+        # @param relationship [Symbol, Anthropic::Models::Beta::UserProfileCreateParams::Relationship] Body param: How the entity behind a user profile relates to the platform that ow
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
@@ -64,13 +68,17 @@ module Anthropic
         #
         # Update User Profile
         #
-        # @overload update(user_profile_id, external_id: nil, metadata: nil, betas: nil, request_options: {})
+        # @overload update(user_profile_id, external_id: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
         #
         # @param user_profile_id [String] Path param: Path parameter user_profile_id
         #
         # @param external_id [String, nil] Body param: If present, replaces the stored external_id. Omit to leave unchanged
         #
         # @param metadata [Hash{Symbol=>String}] Body param: Key-value pairs to merge into the stored metadata. Keys provided ove
+        #
+        # @param name [String, nil] Body param: If present, replaces the stored name. Omit to leave unchanged. Maxim
+        #
+        # @param relationship [Symbol, Anthropic::Models::Beta::UserProfileUpdateParams::Relationship, nil] Body param: How the entity behind a user profile relates to the platform that ow
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #

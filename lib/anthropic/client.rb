@@ -21,6 +21,9 @@ module Anthropic
     # @return [String, nil]
     attr_reader :auth_token
 
+    # @return [String, nil]
+    attr_reader :webhook_key
+
     # @return [Anthropic::Resources::Completions]
     attr_reader :completions
 
@@ -62,6 +65,8 @@ module Anthropic
     #
     # @param auth_token [String, nil] Defaults to `ENV["ANTHROPIC_AUTH_TOKEN"]`
     #
+    # @param webhook_key [String, nil] Defaults to `ENV["ANTHROPIC_WEBHOOK_SIGNING_KEY"]`
+    #
     # @param base_url [String, nil] Override the default base URL for the API, e.g.,
     # `"https://api.example.com/v2/"`. Defaults to `ENV["ANTHROPIC_BASE_URL"]`
     #
@@ -75,6 +80,7 @@ module Anthropic
     def initialize(
       api_key: ENV["ANTHROPIC_API_KEY"],
       auth_token: ENV["ANTHROPIC_AUTH_TOKEN"],
+      webhook_key: ENV["ANTHROPIC_WEBHOOK_SIGNING_KEY"],
       base_url: ENV["ANTHROPIC_BASE_URL"],
       max_retries: self.class::DEFAULT_MAX_RETRIES,
       timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
@@ -100,6 +106,7 @@ module Anthropic
 
       @api_key = api_key&.to_s
       @auth_token = auth_token&.to_s
+      @webhook_key = webhook_key&.to_s
 
       super(
         base_url: base_url,

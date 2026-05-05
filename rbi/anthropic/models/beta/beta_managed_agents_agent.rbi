@@ -49,6 +49,18 @@ module Anthropic
         end
         attr_writer :model
 
+        # Resolved coordinator topology with a concrete agent roster.
+        sig { returns(T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagent)) }
+        attr_reader :multiagent
+
+        sig do
+          params(
+            multiagent:
+              T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagent::OrHash)
+          ).void
+        end
+        attr_writer :multiagent
+
         sig { returns(String) }
         attr_accessor :name
 
@@ -96,6 +108,8 @@ module Anthropic
               ],
             metadata: T::Hash[Symbol, String],
             model: Anthropic::Beta::BetaManagedAgentsModelConfig::OrHash,
+            multiagent:
+              T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagent::OrHash),
             name: String,
             skills:
               T::Array[
@@ -129,6 +143,8 @@ module Anthropic
           metadata:,
           # Model identifier and configuration.
           model:,
+          # Resolved coordinator topology with a concrete agent roster.
+          multiagent:,
           name:,
           skills:,
           system_:,
@@ -155,6 +171,8 @@ module Anthropic
                 ],
               metadata: T::Hash[Symbol, String],
               model: Anthropic::Beta::BetaManagedAgentsModelConfig,
+              multiagent:
+                T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagent),
               name: String,
               skills:
                 T::Array[

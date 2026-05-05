@@ -28,13 +28,20 @@ module Anthropic
           sig { returns(T.nilable(Time)) }
           attr_accessor :processed_at
 
+          # If absent, interrupts every non-archived thread in a multiagent session (or the
+          # primary alone in a single-agent session). If present, interrupts only the named
+          # thread.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :session_thread_id
+
           # An interrupt event that pauses agent execution and returns control to the user.
           sig do
             params(
               id: String,
               type:
                 Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::Type::OrSymbol,
-              processed_at: T.nilable(Time)
+              processed_at: T.nilable(Time),
+              session_thread_id: T.nilable(String)
             ).returns(T.attached_class)
           end
           def self.new(
@@ -42,7 +49,11 @@ module Anthropic
             id:,
             type:,
             # A timestamp in RFC 3339 format
-            processed_at: nil
+            processed_at: nil,
+            # If absent, interrupts every non-archived thread in a multiagent session (or the
+            # primary alone in a single-agent session). If present, interrupts only the named
+            # thread.
+            session_thread_id: nil
           )
           end
 
@@ -52,7 +63,8 @@ module Anthropic
                 id: String,
                 type:
                   Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::Type::TaggedSymbol,
-                processed_at: T.nilable(Time)
+                processed_at: T.nilable(Time),
+                session_thread_id: T.nilable(String)
               }
             )
           end

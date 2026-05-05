@@ -10,7 +10,8 @@ module Anthropic
             name: String,
             processed_at: Time,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::type_,
-            evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission
+            evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission,
+            session_thread_id: String?
           }
 
         class BetaManagedAgentsAgentMCPToolUseEvent < Anthropic::Internal::Type::BaseModel
@@ -32,6 +33,8 @@ module Anthropic
             Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission
           ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission
 
+          attr_accessor session_thread_id: String?
+
           def initialize: (
             id: String,
             input: ::Hash[Symbol, top],
@@ -39,7 +42,8 @@ module Anthropic
             name: String,
             processed_at: Time,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::type_,
-            ?evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission
+            ?evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission,
+            ?session_thread_id: String?
           ) -> void
 
           def to_hash: -> {
@@ -49,7 +53,8 @@ module Anthropic
             name: String,
             processed_at: Time,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::type_,
-            evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission
+            evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission,
+            session_thread_id: String?
           }
 
           type type_ = :"agent.mcp_tool_use"

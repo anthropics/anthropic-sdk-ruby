@@ -75,6 +75,23 @@ module Anthropic
         end
         attr_writer :model
 
+        # A coordinator topology: the session's primary thread orchestrates work by
+        # spawning session threads, each running an agent drawn from the `agents` roster.
+        sig do
+          returns(T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagentParams))
+        end
+        attr_reader :multiagent
+
+        sig do
+          params(
+            multiagent:
+              T.nilable(
+                Anthropic::Beta::BetaManagedAgentsMultiagentParams::OrHash
+              )
+          ).void
+        end
+        attr_writer :multiagent
+
         # Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
         sig { returns(T.nilable(String)) }
         attr_reader :name
@@ -156,6 +173,10 @@ module Anthropic
                 String,
                 Anthropic::Beta::BetaManagedAgentsModelConfigParams::OrHash
               ),
+            multiagent:
+              T.nilable(
+                Anthropic::Beta::BetaManagedAgentsMultiagentParams::OrHash
+              ),
             name: String,
             skills:
               T.nilable(
@@ -202,6 +223,9 @@ module Anthropic
           # e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration
           # control. Omit to preserve. Cannot be cleared.
           model: nil,
+          # A coordinator topology: the session's primary thread orchestrates work by
+          # spawning session threads, each running an agent drawn from the `agents` roster.
+          multiagent: nil,
           # Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
           name: nil,
           # Skills. Full replacement. Omit to preserve; send empty array or null to clear.
@@ -237,6 +261,8 @@ module Anthropic
                   String,
                   Anthropic::Beta::BetaManagedAgentsModelConfigParams
                 ),
+              multiagent:
+                T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagentParams),
               name: String,
               skills:
                 T.nilable(

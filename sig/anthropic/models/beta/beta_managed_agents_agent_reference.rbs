@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsAgentReference = Beta::BetaManagedAgentsAgentReference
+
+    module Beta
+      type beta_managed_agents_agent_reference =
+        {
+          id: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsAgentReference::type_,
+          version: Integer
+        }
+
+      class BetaManagedAgentsAgentReference < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsAgentReference::type_
+
+        attr_accessor version: Integer
+
+        def initialize: (
+          id: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsAgentReference::type_,
+          version: Integer
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsAgentReference::type_,
+          version: Integer
+        }
+
+        type type_ = :agent
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          AGENT: :agent
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgentReference::type_]
+        end
+      end
+    end
+  end
+end

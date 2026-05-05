@@ -33,7 +33,8 @@ module Anthropic
                     Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::OrHash
+                    Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::OrHash
                   )
                 ]
             ).void
@@ -49,7 +50,8 @@ module Anthropic
                     Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::OrHash
+                    Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::OrHash
                   )
                 ]
             ).returns(T.attached_class)
@@ -83,7 +85,8 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent,
                   Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent,
                   Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent
                 )
               end
 

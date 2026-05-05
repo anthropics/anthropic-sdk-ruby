@@ -39,6 +39,14 @@ module Anthropic
         #   @return [Hash{Symbol=>String}]
         required :metadata, Anthropic::Internal::Type::HashOf[String]
 
+        # @!attribute outcome_evaluations
+        #   Per-outcome evaluation state. One entry per define_outcome event sent to the
+        #   session.
+        #
+        #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsOutcomeEvaluationResource>]
+        required :outcome_evaluations,
+                 -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaManagedAgentsOutcomeEvaluationResource] }
+
         # @!attribute resources
         #
         #   @return [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource>]
@@ -86,7 +94,7 @@ module Anthropic
         #   @return [Array<String>]
         required :vault_ids, Anthropic::Internal::Type::ArrayOf[String]
 
-        # @!method initialize(id:, agent:, archived_at:, created_at:, environment_id:, metadata:, resources:, stats:, status:, title:, type:, updated_at:, usage:, vault_ids:)
+        # @!method initialize(id:, agent:, archived_at:, created_at:, environment_id:, metadata:, outcome_evaluations:, resources:, stats:, status:, title:, type:, updated_at:, usage:, vault_ids:)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsSession} for more details.
         #
@@ -103,6 +111,8 @@ module Anthropic
         #   @param environment_id [String]
         #
         #   @param metadata [Hash{Symbol=>String}]
+        #
+        #   @param outcome_evaluations [Array<Anthropic::Models::Beta::BetaManagedAgentsOutcomeEvaluationResource>] Per-outcome evaluation state. One entry per define_outcome event sent to the ses
         #
         #   @param resources [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource>]
         #

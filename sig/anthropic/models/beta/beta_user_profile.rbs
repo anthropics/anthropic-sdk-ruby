@@ -8,10 +8,12 @@ module Anthropic
           id: String,
           created_at: Time,
           metadata: ::Hash[Symbol, String],
+          relationship: Anthropic::Models::Beta::BetaUserProfile::relationship,
           trust_grants: ::Hash[Symbol, Anthropic::Beta::BetaUserProfileTrustGrant],
           type: Anthropic::Models::Beta::BetaUserProfile::type_,
           updated_at: Time,
-          external_id: String?
+          external_id: String?,
+          name: String?
         }
 
       class BetaUserProfile < Anthropic::Internal::Type::BaseModel
@@ -21,6 +23,8 @@ module Anthropic
 
         attr_accessor metadata: ::Hash[Symbol, String]
 
+        attr_accessor relationship: Anthropic::Models::Beta::BetaUserProfile::relationship
+
         attr_accessor trust_grants: ::Hash[Symbol, Anthropic::Beta::BetaUserProfileTrustGrant]
 
         attr_accessor type: Anthropic::Models::Beta::BetaUserProfile::type_
@@ -29,25 +33,43 @@ module Anthropic
 
         attr_accessor external_id: String?
 
+        attr_accessor name: String?
+
         def initialize: (
           id: String,
           created_at: Time,
           metadata: ::Hash[Symbol, String],
+          relationship: Anthropic::Models::Beta::BetaUserProfile::relationship,
           trust_grants: ::Hash[Symbol, Anthropic::Beta::BetaUserProfileTrustGrant],
           type: Anthropic::Models::Beta::BetaUserProfile::type_,
           updated_at: Time,
-          ?external_id: String?
+          ?external_id: String?,
+          ?name: String?
         ) -> void
 
         def to_hash: -> {
           id: String,
           created_at: Time,
           metadata: ::Hash[Symbol, String],
+          relationship: Anthropic::Models::Beta::BetaUserProfile::relationship,
           trust_grants: ::Hash[Symbol, Anthropic::Beta::BetaUserProfileTrustGrant],
           type: Anthropic::Models::Beta::BetaUserProfile::type_,
           updated_at: Time,
-          external_id: String?
+          external_id: String?,
+          name: String?
         }
+
+        type relationship = :external | :resold | :internal
+
+        module Relationship
+          extend Anthropic::Internal::Type::Enum
+
+          EXTERNAL: :external
+          RESOLD: :resold
+          INTERNAL: :internal
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaUserProfile::relationship]
+        end
 
         type type_ = :user_profile
 
