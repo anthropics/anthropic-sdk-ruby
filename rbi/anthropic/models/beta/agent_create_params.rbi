@@ -67,6 +67,23 @@ module Anthropic
         sig { params(metadata: T::Hash[Symbol, String]).void }
         attr_writer :metadata
 
+        # A coordinator topology: the session's primary thread orchestrates work by
+        # spawning session threads, each running an agent drawn from the `agents` roster.
+        sig do
+          returns(T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagentParams))
+        end
+        attr_reader :multiagent
+
+        sig do
+          params(
+            multiagent:
+              T.nilable(
+                Anthropic::Beta::BetaManagedAgentsMultiagentParams::OrHash
+              )
+          ).void
+        end
+        attr_writer :multiagent
+
         # Skills available to the agent. Maximum 20.
         sig do
           returns(
@@ -162,6 +179,10 @@ module Anthropic
                 Anthropic::Beta::BetaManagedAgentsURLMCPServerParams::OrHash
               ],
             metadata: T::Hash[Symbol, String],
+            multiagent:
+              T.nilable(
+                Anthropic::Beta::BetaManagedAgentsMultiagentParams::OrHash
+              ),
             skills:
               T::Array[
                 T.any(
@@ -198,6 +219,9 @@ module Anthropic
           # Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up
           # to 512 chars.
           metadata: nil,
+          # A coordinator topology: the session's primary thread orchestrates work by
+          # spawning session threads, each running an agent drawn from the `agents` roster.
+          multiagent: nil,
           # Skills available to the agent. Maximum 20.
           skills: nil,
           # System prompt for the agent. Up to 100,000 characters.
@@ -225,6 +249,8 @@ module Anthropic
               mcp_servers:
                 T::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
               metadata: T::Hash[Symbol, String],
+              multiagent:
+                T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagentParams),
               skills:
                 T::Array[
                   T.any(

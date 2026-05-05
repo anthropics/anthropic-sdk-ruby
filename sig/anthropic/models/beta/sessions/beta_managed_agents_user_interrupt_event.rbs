@@ -6,7 +6,8 @@ module Anthropic
           {
             id: String,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::type_,
-            processed_at: Time?
+            processed_at: Time?,
+            session_thread_id: String?
           }
 
         class BetaManagedAgentsUserInterruptEvent < Anthropic::Internal::Type::BaseModel
@@ -16,16 +17,20 @@ module Anthropic
 
           attr_accessor processed_at: Time?
 
+          attr_accessor session_thread_id: String?
+
           def initialize: (
             id: String,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::type_,
-            ?processed_at: Time?
+            ?processed_at: Time?,
+            ?session_thread_id: String?
           ) -> void
 
           def to_hash: -> {
             id: String,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent::type_,
-            processed_at: Time?
+            processed_at: Time?,
+            session_thread_id: String?
           }
 
           type type_ = :"user.interrupt"

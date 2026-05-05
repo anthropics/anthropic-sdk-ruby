@@ -30,6 +30,9 @@ module Anthropic
       sig { returns(Anthropic::Resources::Beta::Skills) }
       attr_reader :skills
 
+      sig { returns(Anthropic::Resources::Beta::Webhooks) }
+      attr_reader :webhooks
+
       sig { returns(Anthropic::Resources::Beta::UserProfiles) }
       attr_reader :user_profiles
 

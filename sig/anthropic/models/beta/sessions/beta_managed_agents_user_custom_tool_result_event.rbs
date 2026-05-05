@@ -9,7 +9,8 @@ module Anthropic
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::type_,
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::content],
             is_error: bool?,
-            processed_at: Time?
+            processed_at: Time?,
+            session_thread_id: String?
           }
 
         class BetaManagedAgentsUserCustomToolResultEvent < Anthropic::Internal::Type::BaseModel
@@ -29,13 +30,16 @@ module Anthropic
 
           attr_accessor processed_at: Time?
 
+          attr_accessor session_thread_id: String?
+
           def initialize: (
             id: String,
             custom_tool_use_id: String,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::type_,
             ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::content],
             ?is_error: bool?,
-            ?processed_at: Time?
+            ?processed_at: Time?,
+            ?session_thread_id: String?
           ) -> void
 
           def to_hash: -> {
@@ -44,7 +48,8 @@ module Anthropic
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::type_,
             content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::content],
             is_error: bool?,
-            processed_at: Time?
+            processed_at: Time?,
+            session_thread_id: String?
           }
 
           type type_ = :"user.custom_tool_result"

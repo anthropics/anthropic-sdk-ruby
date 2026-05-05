@@ -36,6 +36,12 @@ module Anthropic
           end
           attr_accessor :type
 
+          # When set, this event was cross-posted from a subagent's thread to surface its
+          # custom tool use on the primary thread's stream. Empty on the thread's own
+          # events. Echo this on a `user.custom_tool_result` event to route the result back.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :session_thread_id
+
           # Event emitted when the agent calls a custom tool. The session goes idle until
           # the client sends a `user.custom_tool_result` event with the result.
           sig do
@@ -45,7 +51,8 @@ module Anthropic
               name: String,
               processed_at: Time,
               type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::Type::OrSymbol
+                Anthropic::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::Type::OrSymbol,
+              session_thread_id: T.nilable(String)
             ).returns(T.attached_class)
           end
           def self.new(
@@ -57,7 +64,11 @@ module Anthropic
             name:,
             # A timestamp in RFC 3339 format
             processed_at:,
-            type:
+            type:,
+            # When set, this event was cross-posted from a subagent's thread to surface its
+            # custom tool use on the primary thread's stream. Empty on the thread's own
+            # events. Echo this on a `user.custom_tool_result` event to route the result back.
+            session_thread_id: nil
           )
           end
 
@@ -69,7 +80,8 @@ module Anthropic
                 name: String,
                 processed_at: Time,
                 type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::Type::TaggedSymbol
+                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::Type::TaggedSymbol,
+                session_thread_id: T.nilable(String)
               }
             )
           end

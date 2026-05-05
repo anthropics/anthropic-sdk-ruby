@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsMultiagentRosterEntryParams = Beta::BetaManagedAgentsMultiagentRosterEntryParams
+
+    module Beta
+      type beta_managed_agents_multiagent_roster_entry_params =
+        String
+        | Anthropic::Beta::BetaManagedAgentsAgentParams
+        | Anthropic::Beta::BetaManagedAgentsMultiagentSelfParams
+
+      module BetaManagedAgentsMultiagentRosterEntryParams
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_multiagent_roster_entry_params]
+      end
+    end
+  end
+end

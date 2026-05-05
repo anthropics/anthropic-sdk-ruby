@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_session_thread_stats =
+          {
+            active_seconds: Float,
+            duration_seconds: Float,
+            startup_seconds: Float
+          }
+
+        class BetaManagedAgentsSessionThreadStats < Anthropic::Internal::Type::BaseModel
+          attr_reader active_seconds: Float?
+
+          def active_seconds=: (Float) -> Float
+
+          attr_reader duration_seconds: Float?
+
+          def duration_seconds=: (Float) -> Float
+
+          attr_reader startup_seconds: Float?
+
+          def startup_seconds=: (Float) -> Float
+
+          def initialize: (
+            ?active_seconds: Float,
+            ?duration_seconds: Float,
+            ?startup_seconds: Float
+          ) -> void
+
+          def to_hash: -> {
+            active_seconds: Float,
+            duration_seconds: Float,
+            startup_seconds: Float
+          }
+        end
+      end
+    end
+  end
+end

@@ -47,7 +47,20 @@ module Anthropic
           optional :evaluated_permission,
                    enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::EvaluatedPermission }
 
-          # @!method initialize(id:, input:, mcp_server_name:, name:, processed_at:, type:, evaluated_permission: nil)
+          # @!attribute session_thread_id
+          #   When set, this event was cross-posted from a subagent's thread to surface its
+          #   permission request on the primary thread's stream. Empty on the thread's own
+          #   events. Echo this on a `user.tool_confirmation` event to route the approval
+          #   back.
+          #
+          #   @return [String, nil]
+          optional :session_thread_id, String, nil?: true
+
+          # @!method initialize(id:, input:, mcp_server_name:, name:, processed_at:, type:, evaluated_permission: nil, session_thread_id: nil)
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent} for
+          #   more details.
+          #
           #   Event emitted when the agent invokes a tool provided by an MCP server.
           #
           #   @param id [String] Unique identifier for this event.
@@ -63,6 +76,8 @@ module Anthropic
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::Type]
           #
           #   @param evaluated_permission [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::EvaluatedPermission] AgentEvaluatedPermission enum
+          #
+          #   @param session_thread_id [String, nil] When set, this event was cross-posted from a subagent's thread to surface its pe
 
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent#type
           module Type

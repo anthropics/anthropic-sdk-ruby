@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsSessionMultiagentCoordinator = Beta::BetaManagedAgentsSessionMultiagentCoordinator
+
+    module Beta
+      type beta_managed_agents_session_multiagent_coordinator =
+        {
+          agents: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent],
+          type: Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::type_
+        }
+
+      class BetaManagedAgentsSessionMultiagentCoordinator < Anthropic::Internal::Type::BaseModel
+        attr_accessor agents: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent]
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::type_
+
+        def initialize: (
+          agents: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent],
+          type: Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::type_
+        ) -> void
+
+        def to_hash: -> {
+          agents: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent],
+          type: Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::type_
+        }
+
+        type type_ = :coordinator
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          COORDINATOR: :coordinator
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::type_]
+        end
+      end
+    end
+  end
+end

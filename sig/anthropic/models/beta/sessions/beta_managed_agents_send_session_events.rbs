@@ -27,6 +27,7 @@ module Anthropic
             | Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent
             | Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent
             | Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent
+            | Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent
 
           module Data
             extend Anthropic::Internal::Type::Union

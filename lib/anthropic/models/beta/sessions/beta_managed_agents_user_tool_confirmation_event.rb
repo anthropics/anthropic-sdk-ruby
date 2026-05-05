@@ -45,7 +45,15 @@ module Anthropic
           #   @return [Time, nil]
           optional :processed_at, Time, nil?: true
 
-          # @!method initialize(id:, result:, tool_use_id:, type:, deny_message: nil, processed_at: nil)
+          # @!attribute session_thread_id
+          #   When set, the confirmation routes to this subagent's thread rather than the
+          #   primary. Echo this from the `session_thread_id` on the `agent.tool_use` or
+          #   `agent.mcp_tool_use` event that prompted the approval.
+          #
+          #   @return [String, nil]
+          optional :session_thread_id, String, nil?: true
+
+          # @!method initialize(id:, result:, tool_use_id:, type:, deny_message: nil, processed_at: nil, session_thread_id: nil)
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent}
           #   for more details.
@@ -63,6 +71,8 @@ module Anthropic
           #   @param deny_message [String, nil] Optional message providing context for a 'deny' decision. Only allowed when resu
           #
           #   @param processed_at [Time, nil] A timestamp in RFC 3339 format
+          #
+          #   @param session_thread_id [String, nil] When set, the confirmation routes to this subagent's thread rather than the prim
 
           # UserToolConfirmationResult enum
           #

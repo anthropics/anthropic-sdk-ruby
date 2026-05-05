@@ -170,6 +170,29 @@ module Anthropic
           )
           end
 
+          # Validate Credential
+          sig do
+            params(
+              credential_id: String,
+              vault_id: String,
+              betas:
+                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+              request_options: Anthropic::RequestOptions::OrHash
+            ).returns(
+              Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidation
+            )
+          end
+          def mcp_oauth_validate(
+            # Path param: Path parameter credential_id
+            credential_id,
+            # Path param: Path parameter vault_id
+            vault_id:,
+            # Header param: Optional header to specify the beta version(s) you want to use.
+            betas: nil,
+            request_options: {}
+          )
+          end
+
           # @api private
           sig { params(client: Anthropic::Client).returns(T.attached_class) }
           def self.new(client:)

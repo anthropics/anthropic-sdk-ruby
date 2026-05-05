@@ -32,15 +32,26 @@ class Anthropic::Test::Resources::Beta::Sessions::EventsTest < Anthropic::Test::
       in Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent
       in Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent
       in Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent
+      in Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent
+      in Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent
       in Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent
       in Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent
       in Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent
       in Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusRunningEvent
       in Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent
       in Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent
+      in Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent
+      in Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent
+      in Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent
       in Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent
       in Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent
+      in Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent
+      in Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent
       in Anthropic::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent
+      in Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent
+      in Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent
+      in Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent
+      in Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent
       end
     end
 
@@ -52,14 +63,15 @@ class Anthropic::Test::Resources::Beta::Sessions::EventsTest < Anthropic::Test::
         content: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent::Content]),
         processed_at: Time | nil
       }
-      in {type: :"user.interrupt", id: String, processed_at: Time | nil}
+      in {type: :"user.interrupt", id: String, processed_at: Time | nil, session_thread_id: String | nil}
       in {
         type: :"user.tool_confirmation",
         id: String,
         result: Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::Result,
         tool_use_id: String,
         deny_message: String | nil,
-        processed_at: Time | nil
+        processed_at: Time | nil,
+        session_thread_id: String | nil
       }
       in {
         type: :"user.custom_tool_result",
@@ -67,14 +79,16 @@ class Anthropic::Test::Resources::Beta::Sessions::EventsTest < Anthropic::Test::
         custom_tool_use_id: String,
         content: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::Content]) | nil,
         is_error: Anthropic::Internal::Type::Boolean | nil,
-        processed_at: Time | nil
+        processed_at: Time | nil,
+        session_thread_id: String | nil
       }
       in {
         type: :"agent.custom_tool_use",
         id: String,
         input: ^(Anthropic::Internal::Type::HashOf[Anthropic::Internal::Type::Unknown]),
         name: String,
-        processed_at: Time
+        processed_at: Time,
+        session_thread_id: String | nil
       }
       in {
         type: :"agent.message",
@@ -90,7 +104,8 @@ class Anthropic::Test::Resources::Beta::Sessions::EventsTest < Anthropic::Test::
         mcp_server_name: String,
         name: String,
         processed_at: Time,
-        evaluated_permission: Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::EvaluatedPermission | nil
+        evaluated_permission: Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::EvaluatedPermission | nil,
+        session_thread_id: String | nil
       }
       in {
         type: :"agent.mcp_tool_result",
@@ -106,7 +121,8 @@ class Anthropic::Test::Resources::Beta::Sessions::EventsTest < Anthropic::Test::
         input: ^(Anthropic::Internal::Type::HashOf[Anthropic::Internal::Type::Unknown]),
         name: String,
         processed_at: Time,
-        evaluated_permission: Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::EvaluatedPermission | nil
+        evaluated_permission: Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::EvaluatedPermission | nil,
+        session_thread_id: String | nil
       }
       in {
         type: :"agent.tool_result",
@@ -115,6 +131,22 @@ class Anthropic::Test::Resources::Beta::Sessions::EventsTest < Anthropic::Test::
         tool_use_id: String,
         content: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::Content]) | nil,
         is_error: Anthropic::Internal::Type::Boolean | nil
+      }
+      in {
+        type: :"agent.thread_message_received",
+        id: String,
+        content: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent::Content]),
+        from_session_thread_id: String,
+        processed_at: Time,
+        from_agent_name: String | nil
+      }
+      in {
+        type: :"agent.thread_message_sent",
+        id: String,
+        content: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::Content]),
+        processed_at: Time,
+        to_session_thread_id: String,
+        to_agent_name: String | nil
       }
       in {type: :"agent.thread_context_compacted", id: String, processed_at: Time}
       in {
@@ -132,6 +164,19 @@ class Anthropic::Test::Resources::Beta::Sessions::EventsTest < Anthropic::Test::
         stop_reason: Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::StopReason
       }
       in {type: :"session.status_terminated", id: String, processed_at: Time}
+      in {type: :"session.thread_created", id: String, agent_name: String, processed_at: Time, session_thread_id: String}
+      in {type: :"span.outcome_evaluation_start", id: String, iteration: Integer, outcome_id: String, processed_at: Time}
+      in {
+        type: :"span.outcome_evaluation_end",
+        id: String,
+        explanation: String,
+        iteration: Integer,
+        outcome_evaluation_start_id: String,
+        outcome_id: String,
+        processed_at: Time,
+        result: String,
+        usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage
+      }
       in {type: :"span.model_request_start", id: String, processed_at: Time}
       in {
         type: :"span.model_request_end",
@@ -141,7 +186,46 @@ class Anthropic::Test::Resources::Beta::Sessions::EventsTest < Anthropic::Test::
         model_usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage,
         processed_at: Time
       }
+      in {type: :"span.outcome_evaluation_ongoing", id: String, iteration: Integer, outcome_id: String, processed_at: Time}
+      in {
+        type: :"user.define_outcome",
+        id: String,
+        description: String,
+        max_iterations: Integer | nil,
+        outcome_id: String,
+        processed_at: Time,
+        rubric: Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::Rubric
+      }
       in {type: :"session.deleted", id: String, processed_at: Time}
+      in {
+        type: :"session.thread_status_running",
+        id: String,
+        agent_name: String,
+        processed_at: Time,
+        session_thread_id: String
+      }
+      in {
+        type: :"session.thread_status_idle",
+        id: String,
+        agent_name: String,
+        processed_at: Time,
+        session_thread_id: String,
+        stop_reason: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::StopReason
+      }
+      in {
+        type: :"session.thread_status_terminated",
+        id: String,
+        agent_name: String,
+        processed_at: Time,
+        session_thread_id: String
+      }
+      in {
+        type: :"session.thread_status_rescheduled",
+        id: String,
+        agent_name: String,
+        processed_at: Time,
+        session_thread_id: String
+      }
       end
     end
   end

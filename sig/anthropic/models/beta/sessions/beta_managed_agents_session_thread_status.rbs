@@ -1,0 +1,21 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_session_thread_status =
+          :running | :idle | :rescheduling | :terminated
+
+        module BetaManagedAgentsSessionThreadStatus
+          extend Anthropic::Internal::Type::Enum
+
+          RUNNING: :running
+          IDLE: :idle
+          RESCHEDULING: :rescheduling
+          TERMINATED: :terminated
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::beta_managed_agents_session_thread_status]
+        end
+      end
+    end
+  end
+end

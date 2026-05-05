@@ -5,6 +5,8 @@ module Anthropic
         def create: (
           ?external_id: String?,
           ?metadata: ::Hash[Symbol, String],
+          ?name: String?,
+          ?relationship: Anthropic::Models::Beta::UserProfileCreateParams::relationship,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaUserProfile
@@ -19,6 +21,8 @@ module Anthropic
           String user_profile_id,
           ?external_id: String?,
           ?metadata: ::Hash[Symbol, String],
+          ?name: String?,
+          ?relationship: Anthropic::Models::Beta::UserProfileUpdateParams::relationship?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaUserProfile

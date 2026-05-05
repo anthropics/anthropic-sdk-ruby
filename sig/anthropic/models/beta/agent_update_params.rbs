@@ -9,6 +9,7 @@ module Anthropic
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?,
           metadata: ::Hash[Symbol, String?]?,
           model: Anthropic::Models::Beta::AgentUpdateParams::model,
+          multiagent: Anthropic::Beta::BetaManagedAgentsMultiagentParams?,
           name: String,
           skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]?,
           system_: String?,
@@ -37,6 +38,8 @@ module Anthropic
           Anthropic::Models::Beta::AgentUpdateParams::model
         ) -> Anthropic::Models::Beta::AgentUpdateParams::model
 
+        attr_accessor multiagent: Anthropic::Beta::BetaManagedAgentsMultiagentParams?
+
         attr_reader name: String?
 
         def name=: (String) -> String
@@ -60,6 +63,7 @@ module Anthropic
           ?mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?,
           ?metadata: ::Hash[Symbol, String?]?,
           ?model: Anthropic::Models::Beta::AgentUpdateParams::model,
+          ?multiagent: Anthropic::Beta::BetaManagedAgentsMultiagentParams?,
           ?name: String,
           ?skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]?,
           ?system_: String?,
@@ -75,6 +79,7 @@ module Anthropic
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?,
           metadata: ::Hash[Symbol, String?]?,
           model: Anthropic::Models::Beta::AgentUpdateParams::model,
+          multiagent: Anthropic::Beta::BetaManagedAgentsMultiagentParams?,
           name: String,
           skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]?,
           system_: String?,

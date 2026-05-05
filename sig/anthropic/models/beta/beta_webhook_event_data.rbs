@@ -1,0 +1,37 @@
+module Anthropic
+  module Models
+    module BetaWebhookEventData = Beta::BetaWebhookEventData
+
+    module Beta
+      type beta_webhook_event_data =
+        Anthropic::Beta::BetaWebhookSessionCreatedEventData
+        | Anthropic::Beta::BetaWebhookSessionPendingEventData
+        | Anthropic::Beta::BetaWebhookSessionRunningEventData
+        | Anthropic::Beta::BetaWebhookSessionIdledEventData
+        | Anthropic::Beta::BetaWebhookSessionRequiresActionEventData
+        | Anthropic::Beta::BetaWebhookSessionArchivedEventData
+        | Anthropic::Beta::BetaWebhookSessionDeletedEventData
+        | Anthropic::Beta::BetaWebhookSessionStatusScheduledEventData
+        | Anthropic::Beta::BetaWebhookSessionStatusRunStartedEventData
+        | Anthropic::Beta::BetaWebhookSessionStatusIdledEventData
+        | Anthropic::Beta::BetaWebhookSessionStatusTerminatedEventData
+        | Anthropic::Beta::BetaWebhookSessionThreadCreatedEventData
+        | Anthropic::Beta::BetaWebhookSessionThreadIdledEventData
+        | Anthropic::Beta::BetaWebhookSessionThreadTerminatedEventData
+        | Anthropic::Beta::BetaWebhookSessionOutcomeEvaluationEndedEventData
+        | Anthropic::Beta::BetaWebhookVaultCreatedEventData
+        | Anthropic::Beta::BetaWebhookVaultArchivedEventData
+        | Anthropic::Beta::BetaWebhookVaultDeletedEventData
+        | Anthropic::Beta::BetaWebhookVaultCredentialCreatedEventData
+        | Anthropic::Beta::BetaWebhookVaultCredentialArchivedEventData
+        | Anthropic::Beta::BetaWebhookVaultCredentialDeletedEventData
+        | Anthropic::Beta::BetaWebhookVaultCredentialRefreshFailedEventData
+
+      module BetaWebhookEventData
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_webhook_event_data]
+      end
+    end
+  end
+end

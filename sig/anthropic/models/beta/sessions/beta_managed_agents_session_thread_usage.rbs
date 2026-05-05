@@ -1,0 +1,49 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_session_thread_usage =
+          {
+            cache_creation: Anthropic::Beta::BetaManagedAgentsCacheCreationUsage,
+            cache_read_input_tokens: Integer,
+            input_tokens: Integer,
+            output_tokens: Integer
+          }
+
+        class BetaManagedAgentsSessionThreadUsage < Anthropic::Internal::Type::BaseModel
+          attr_reader cache_creation: Anthropic::Beta::BetaManagedAgentsCacheCreationUsage?
+
+          def cache_creation=: (
+            Anthropic::Beta::BetaManagedAgentsCacheCreationUsage
+          ) -> Anthropic::Beta::BetaManagedAgentsCacheCreationUsage
+
+          attr_reader cache_read_input_tokens: Integer?
+
+          def cache_read_input_tokens=: (Integer) -> Integer
+
+          attr_reader input_tokens: Integer?
+
+          def input_tokens=: (Integer) -> Integer
+
+          attr_reader output_tokens: Integer?
+
+          def output_tokens=: (Integer) -> Integer
+
+          def initialize: (
+            ?cache_creation: Anthropic::Beta::BetaManagedAgentsCacheCreationUsage,
+            ?cache_read_input_tokens: Integer,
+            ?input_tokens: Integer,
+            ?output_tokens: Integer
+          ) -> void
+
+          def to_hash: -> {
+            cache_creation: Anthropic::Beta::BetaManagedAgentsCacheCreationUsage,
+            cache_read_input_tokens: Integer,
+            input_tokens: Integer,
+            output_tokens: Integer
+          }
+        end
+      end
+    end
+  end
+end

@@ -26,6 +26,17 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsModelConfig]
         required :model, -> { Anthropic::Beta::BetaManagedAgentsModelConfig }
 
+        # @!attribute multiagent
+        #   Resolved coordinator topology with full agent definitions for each roster
+        #   member.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator, nil]
+        required :multiagent,
+                 -> {
+                   Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator
+                 },
+                 nil?: true
+
         # @!attribute name
         #
         #   @return [String]
@@ -58,7 +69,10 @@ module Anthropic
         #   @return [Integer]
         required :version, Integer
 
-        # @!method initialize(id:, description:, mcp_servers:, model:, name:, skills:, system_:, tools:, type:, version:)
+        # @!method initialize(id:, description:, mcp_servers:, model:, multiagent:, name:, skills:, system_:, tools:, type:, version:)
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaManagedAgentsSessionAgent} for more details.
+        #
         #   Resolved `agent` definition for a `session`. Snapshot of the `agent` at
         #   `session` creation time.
         #
@@ -69,6 +83,8 @@ module Anthropic
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition>]
         #
         #   @param model [Anthropic::Models::Beta::BetaManagedAgentsModelConfig] Model identifier and configuration.
+        #
+        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator, nil] Resolved coordinator topology with full agent definitions for each roster member
         #
         #   @param name [String]
         #

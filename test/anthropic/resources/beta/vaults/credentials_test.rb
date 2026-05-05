@@ -160,4 +160,31 @@ class Anthropic::Test::Resources::Beta::Vaults::CredentialsTest < Anthropic::Tes
       }
     end
   end
+
+  def test_mcp_oauth_validate_required_params
+    skip("prism can't find endpoint with beta only tag")
+
+    response =
+      @anthropic.beta.vaults.credentials.mcp_oauth_validate(
+        "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+        vault_id: "vlt_011CZkZDLs7fYzm1hXNPeRjv"
+      )
+
+    assert_pattern do
+      response => Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidation
+    end
+
+    assert_pattern do
+      response => {
+        credential_id: String,
+        has_refresh_token: Anthropic::Internal::Type::Boolean,
+        mcp_probe: Anthropic::Beta::Vaults::BetaManagedAgentsMCPProbe | nil,
+        refresh: Anthropic::Beta::Vaults::BetaManagedAgentsRefreshObject | nil,
+        status: Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidationStatus,
+        type: Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidation::Type,
+        validated_at: Time,
+        vault_id: String
+      }
+    end
+  end
 end

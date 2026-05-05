@@ -1,0 +1,70 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_agent_thread_message_sent_event =
+          {
+            id: String,
+            content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::content],
+            processed_at: Time,
+            to_session_thread_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::type_,
+            to_agent_name: String?
+          }
+
+        class BetaManagedAgentsAgentThreadMessageSentEvent < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::content]
+
+          attr_accessor processed_at: Time
+
+          attr_accessor to_session_thread_id: String
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::type_
+
+          attr_accessor to_agent_name: String?
+
+          def initialize: (
+            id: String,
+            content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::content],
+            processed_at: Time,
+            to_session_thread_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::type_,
+            ?to_agent_name: String?
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::content],
+            processed_at: Time,
+            to_session_thread_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::type_,
+            to_agent_name: String?
+          }
+
+          type content =
+            Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock
+            | Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock
+            | Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock
+
+          module Content
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::content]
+          end
+
+          type type_ = :"agent.thread_message_sent"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            AGENT_THREAD_MESSAGE_SENT: :"agent.thread_message_sent"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::type_]
+          end
+        end
+      end
+    end
+  end
+end

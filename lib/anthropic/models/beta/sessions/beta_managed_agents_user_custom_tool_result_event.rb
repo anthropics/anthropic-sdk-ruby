@@ -44,7 +44,14 @@ module Anthropic
           #   @return [Time, nil]
           optional :processed_at, Time, nil?: true
 
-          # @!method initialize(id:, custom_tool_use_id:, type:, content: nil, is_error: nil, processed_at: nil)
+          # @!attribute session_thread_id
+          #   Routes this result to a subagent thread. Copy from the `agent.custom_tool_use`
+          #   event's `session_thread_id`.
+          #
+          #   @return [String, nil]
+          optional :session_thread_id, String, nil?: true
+
+          # @!method initialize(id:, custom_tool_use_id:, type:, content: nil, is_error: nil, processed_at: nil, session_thread_id: nil)
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent}
           #   for more details.
@@ -62,6 +69,8 @@ module Anthropic
           #   @param is_error [Boolean, nil] Whether the tool execution resulted in an error.
           #
           #   @param processed_at [Time, nil] A timestamp in RFC 3339 format
+          #
+          #   @param session_thread_id [String, nil] Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` e
 
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent#type
           module Type

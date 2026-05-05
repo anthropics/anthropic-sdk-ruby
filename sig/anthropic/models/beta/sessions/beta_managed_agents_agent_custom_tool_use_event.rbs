@@ -8,7 +8,8 @@ module Anthropic
             input: ::Hash[Symbol, top],
             name: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::type_
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::type_,
+            session_thread_id: String?
           }
 
         class BetaManagedAgentsAgentCustomToolUseEvent < Anthropic::Internal::Type::BaseModel
@@ -22,12 +23,15 @@ module Anthropic
 
           attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::type_
 
+          attr_accessor session_thread_id: String?
+
           def initialize: (
             id: String,
             input: ::Hash[Symbol, top],
             name: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::type_
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::type_,
+            ?session_thread_id: String?
           ) -> void
 
           def to_hash: -> {
@@ -35,7 +39,8 @@ module Anthropic
             input: ::Hash[Symbol, top],
             name: String,
             processed_at: Time,
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::type_
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent::type_,
+            session_thread_id: String?
           }
 
           type type_ = :"agent.custom_tool_use"

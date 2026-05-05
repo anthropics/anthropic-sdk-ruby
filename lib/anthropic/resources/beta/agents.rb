@@ -12,7 +12,7 @@ module Anthropic
         #
         # Create Agent
         #
-        # @overload create(model:, name:, description: nil, mcp_servers: nil, metadata: nil, skills: nil, system_: nil, tools: nil, betas: nil, request_options: {})
+        # @overload create(model:, name:, description: nil, mcp_servers: nil, metadata: nil, multiagent: nil, skills: nil, system_: nil, tools: nil, betas: nil, request_options: {})
         #
         # @param model [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams] Body param: Model identifier. Accepts the [model string](https://platform.claude
         #
@@ -23,6 +23,8 @@ module Anthropic
         # @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>] Body param: MCP servers this agent connects to. Maximum 20. Names must be unique
         #
         # @param metadata [Hash{Symbol=>String}] Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars,
+        #
+        # @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] Body param: A coordinator topology: the session's primary thread orchestrates wo
         #
         # @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>] Body param: Skills available to the agent. Maximum 20.
         #
@@ -87,7 +89,7 @@ module Anthropic
         #
         # Update Agent
         #
-        # @overload update(agent_id, version:, description: nil, mcp_servers: nil, metadata: nil, model: nil, name: nil, skills: nil, system_: nil, tools: nil, betas: nil, request_options: {})
+        # @overload update(agent_id, version:, description: nil, mcp_servers: nil, metadata: nil, model: nil, multiagent: nil, name: nil, skills: nil, system_: nil, tools: nil, betas: nil, request_options: {})
         #
         # @param agent_id [String] Path param: Path parameter agent_id
         #
@@ -100,6 +102,8 @@ module Anthropic
         # @param metadata [Hash{Symbol=>String, nil}, nil] Body param: Metadata patch. Set a key to a string to upsert it, or to null to de
         #
         # @param model [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams] Body param: Model identifier. Accepts the [model string](https://platform.claude
+        #
+        # @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] Body param: A coordinator topology: the session's primary thread orchestrates wo
         #
         # @param name [String] Body param: Human-readable name. 1-256 characters. Omit to preserve. Cannot be c
         #

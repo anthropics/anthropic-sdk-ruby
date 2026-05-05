@@ -1,0 +1,43 @@
+module Anthropic
+  module Models
+    module Beta
+      module Vaults
+        type beta_managed_agents_refresh_object =
+          {
+            http_response: Anthropic::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse?,
+            status: Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshObject::status
+          }
+
+        class BetaManagedAgentsRefreshObject < Anthropic::Internal::Type::BaseModel
+          attr_accessor http_response: Anthropic::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse?
+
+          attr_accessor status: Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshObject::status
+
+          def initialize: (
+            http_response: Anthropic::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse?,
+            status: Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshObject::status
+          ) -> void
+
+          def to_hash: -> {
+            http_response: Anthropic::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse?,
+            status: Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshObject::status
+          }
+
+          type status =
+            :succeeded | :failed | :connect_error | :no_refresh_token
+
+          module Status
+            extend Anthropic::Internal::Type::Enum
+
+            SUCCEEDED: :succeeded
+            FAILED: :failed
+            CONNECT_ERROR: :connect_error
+            NO_REFRESH_TOKEN: :no_refresh_token
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Vaults::BetaManagedAgentsRefreshObject::status]
+          end
+        end
+      end
+    end
+  end
+end

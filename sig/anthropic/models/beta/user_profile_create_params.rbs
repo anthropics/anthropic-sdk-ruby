@@ -5,6 +5,8 @@ module Anthropic
         {
           external_id: String?,
           metadata: ::Hash[Symbol, String],
+          name: String?,
+          relationship: Anthropic::Models::Beta::UserProfileCreateParams::relationship,
           betas: ::Array[Anthropic::Models::anthropic_beta]
         }
         & Anthropic::Internal::Type::request_parameters
@@ -19,6 +21,14 @@ module Anthropic
 
         def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
+        attr_accessor name: String?
+
+        attr_reader relationship: Anthropic::Models::Beta::UserProfileCreateParams::relationship?
+
+        def relationship=: (
+          Anthropic::Models::Beta::UserProfileCreateParams::relationship
+        ) -> Anthropic::Models::Beta::UserProfileCreateParams::relationship
+
         attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
         def betas=: (
@@ -28,6 +38,8 @@ module Anthropic
         def initialize: (
           ?external_id: String?,
           ?metadata: ::Hash[Symbol, String],
+          ?name: String?,
+          ?relationship: Anthropic::Models::Beta::UserProfileCreateParams::relationship,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> void
@@ -35,9 +47,23 @@ module Anthropic
         def to_hash: -> {
           external_id: String?,
           metadata: ::Hash[Symbol, String],
+          name: String?,
+          relationship: Anthropic::Models::Beta::UserProfileCreateParams::relationship,
           betas: ::Array[Anthropic::Models::anthropic_beta],
           request_options: Anthropic::RequestOptions
         }
+
+        type relationship = :external | :resold | :internal
+
+        module Relationship
+          extend Anthropic::Internal::Type::Enum
+
+          EXTERNAL: :external
+          RESOLD: :resold
+          INTERNAL: :internal
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::UserProfileCreateParams::relationship]
+        end
       end
     end
   end

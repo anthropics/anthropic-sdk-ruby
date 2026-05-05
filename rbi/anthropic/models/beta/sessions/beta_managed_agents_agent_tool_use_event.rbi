@@ -54,6 +54,13 @@ module Anthropic
           end
           attr_writer :evaluated_permission
 
+          # When set, this event was cross-posted from a subagent's thread to surface its
+          # permission request on the primary thread's stream. Empty on the thread's own
+          # events. Echo this on a `user.tool_confirmation` event to route the approval
+          # back.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :session_thread_id
+
           # Event emitted when the agent invokes a built-in agent tool.
           sig do
             params(
@@ -64,7 +71,8 @@ module Anthropic
               type:
                 Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::Type::OrSymbol,
               evaluated_permission:
-                Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::EvaluatedPermission::OrSymbol
+                Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::EvaluatedPermission::OrSymbol,
+              session_thread_id: T.nilable(String)
             ).returns(T.attached_class)
           end
           def self.new(
@@ -78,7 +86,12 @@ module Anthropic
             processed_at:,
             type:,
             # AgentEvaluatedPermission enum
-            evaluated_permission: nil
+            evaluated_permission: nil,
+            # When set, this event was cross-posted from a subagent's thread to surface its
+            # permission request on the primary thread's stream. Empty on the thread's own
+            # events. Echo this on a `user.tool_confirmation` event to route the approval
+            # back.
+            session_thread_id: nil
           )
           end
 
@@ -92,7 +105,8 @@ module Anthropic
                 type:
                   Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::Type::TaggedSymbol,
                 evaluated_permission:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::EvaluatedPermission::TaggedSymbol
+                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::EvaluatedPermission::TaggedSymbol,
+                session_thread_id: T.nilable(String)
               }
             )
           end

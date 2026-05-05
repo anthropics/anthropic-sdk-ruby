@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    module Beta
+      module Vaults
+        type beta_managed_agents_mcp_probe =
+          {
+            http_response: Anthropic::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse?,
+            method_: String
+          }
+
+        class BetaManagedAgentsMCPProbe < Anthropic::Internal::Type::BaseModel
+          attr_accessor http_response: Anthropic::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse?
+
+          attr_accessor method_: String
+
+          def initialize: (
+            http_response: Anthropic::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse?,
+            method_: String
+          ) -> void
+
+          def to_hash: -> {
+            http_response: Anthropic::Beta::Vaults::BetaManagedAgentsRefreshHTTPResponse?,
+            method_: String
+          }
+        end
+      end
+    end
+  end
+end

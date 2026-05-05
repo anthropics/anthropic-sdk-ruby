@@ -1,0 +1,15 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Webhooks
+        def unwrap: (
+          String payload,
+          headers: ::Hash[String, String],
+          ?key: String?
+        ) -> Anthropic::Beta::UnwrapWebhookEvent
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

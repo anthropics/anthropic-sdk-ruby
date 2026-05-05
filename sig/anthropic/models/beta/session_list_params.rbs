@@ -14,6 +14,7 @@ module Anthropic
           memory_store_id: String,
           order: Anthropic::Models::Beta::SessionListParams::order,
           page: String,
+          statuses: ::Array[Anthropic::Models::Beta::SessionListParams::status],
           betas: ::Array[Anthropic::Models::anthropic_beta]
         }
         & Anthropic::Internal::Type::request_parameters
@@ -68,6 +69,12 @@ module Anthropic
 
         def page=: (String) -> String
 
+        attr_reader statuses: ::Array[Anthropic::Models::Beta::SessionListParams::status]?
+
+        def statuses=: (
+          ::Array[Anthropic::Models::Beta::SessionListParams::status]
+        ) -> ::Array[Anthropic::Models::Beta::SessionListParams::status]
+
         attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
         def betas=: (
@@ -86,6 +93,7 @@ module Anthropic
           ?memory_store_id: String,
           ?order: Anthropic::Models::Beta::SessionListParams::order,
           ?page: String,
+          ?statuses: ::Array[Anthropic::Models::Beta::SessionListParams::status],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> void
@@ -102,6 +110,7 @@ module Anthropic
           memory_store_id: String,
           order: Anthropic::Models::Beta::SessionListParams::order,
           page: String,
+          statuses: ::Array[Anthropic::Models::Beta::SessionListParams::status],
           betas: ::Array[Anthropic::Models::anthropic_beta],
           request_options: Anthropic::RequestOptions
         }
@@ -115,6 +124,19 @@ module Anthropic
           DESC: :desc
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::SessionListParams::order]
+        end
+
+        type status = :rescheduling | :running | :idle | :terminated
+
+        module Status
+          extend Anthropic::Internal::Type::Enum
+
+          RESCHEDULING: :rescheduling
+          RUNNING: :running
+          IDLE: :idle
+          TERMINATED: :terminated
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::SessionListParams::status]
         end
       end
     end

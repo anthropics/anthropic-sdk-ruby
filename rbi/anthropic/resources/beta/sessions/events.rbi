@@ -9,10 +9,15 @@ module Anthropic
           sig do
             params(
               session_id: String,
+              created_at_gt: Time,
+              created_at_gte: Time,
+              created_at_lt: Time,
+              created_at_lte: Time,
               limit: Integer,
               order:
                 Anthropic::Beta::Sessions::EventListParams::Order::OrSymbol,
               page: String,
+              types: T::Array[String],
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               request_options: Anthropic::RequestOptions::OrHash
@@ -25,6 +30,14 @@ module Anthropic
           def list(
             # Path param: Path parameter session_id
             session_id,
+            # Query param: Return events created after this time (exclusive).
+            created_at_gt: nil,
+            # Query param: Return events created at or after this time (inclusive).
+            created_at_gte: nil,
+            # Query param: Return events created before this time (exclusive).
+            created_at_lt: nil,
+            # Query param: Return events created at or before this time (inclusive).
+            created_at_lte: nil,
             # Query param: Query parameter for limit
             limit: nil,
             # Query param: Sort direction for results, ordered by created_at. Defaults to asc
@@ -32,6 +45,10 @@ module Anthropic
             order: nil,
             # Query param: Opaque pagination cursor from a previous response's next_page.
             page: nil,
+            # Query param: Filter by event type. Values match the `type` field on returned
+            # events (for example, `user.message` or `agent.tool_use`). Omit to return all
+            # event types.
+            types: nil,
             # Header param: Optional header to specify the beta version(s) you want to use.
             betas: nil,
             request_options: {}
@@ -48,7 +65,8 @@ module Anthropic
                     Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams::OrHash
+                    Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::OrHash
                   )
                 ],
               betas:

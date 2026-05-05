@@ -102,6 +102,25 @@ module Anthropic
         sig { params(page: String).void }
         attr_writer :page
 
+        # Filter by session status. Repeat the parameter to match any of multiple
+        # statuses.
+        sig do
+          returns(
+            T.nilable(
+              T::Array[Anthropic::Beta::SessionListParams::Status::OrSymbol]
+            )
+          )
+        end
+        attr_reader :statuses
+
+        sig do
+          params(
+            statuses:
+              T::Array[Anthropic::Beta::SessionListParams::Status::OrSymbol]
+          ).void
+        end
+        attr_writer :statuses
+
         # Optional header to specify the beta version(s) you want to use.
         sig do
           returns(
@@ -132,6 +151,8 @@ module Anthropic
             memory_store_id: String,
             order: Anthropic::Beta::SessionListParams::Order::OrSymbol,
             page: String,
+            statuses:
+              T::Array[Anthropic::Beta::SessionListParams::Status::OrSymbol],
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
@@ -161,6 +182,9 @@ module Anthropic
           order: nil,
           # Opaque pagination cursor from a previous response's next_page.
           page: nil,
+          # Filter by session status. Repeat the parameter to match any of multiple
+          # statuses.
+          statuses: nil,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}
@@ -181,6 +205,8 @@ module Anthropic
               memory_store_id: String,
               order: Anthropic::Beta::SessionListParams::Order::OrSymbol,
               page: String,
+              statuses:
+                T::Array[Anthropic::Beta::SessionListParams::Status::OrSymbol],
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               request_options: Anthropic::RequestOptions
@@ -212,6 +238,46 @@ module Anthropic
           sig do
             override.returns(
               T::Array[Anthropic::Beta::SessionListParams::Order::TaggedSymbol]
+            )
+          end
+          def self.values
+          end
+        end
+
+        # SessionStatus enum
+        module Status
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::Beta::SessionListParams::Status)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          RESCHEDULING =
+            T.let(
+              :rescheduling,
+              Anthropic::Beta::SessionListParams::Status::TaggedSymbol
+            )
+          RUNNING =
+            T.let(
+              :running,
+              Anthropic::Beta::SessionListParams::Status::TaggedSymbol
+            )
+          IDLE =
+            T.let(
+              :idle,
+              Anthropic::Beta::SessionListParams::Status::TaggedSymbol
+            )
+          TERMINATED =
+            T.let(
+              :terminated,
+              Anthropic::Beta::SessionListParams::Status::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[Anthropic::Beta::SessionListParams::Status::TaggedSymbol]
             )
           end
           def self.values

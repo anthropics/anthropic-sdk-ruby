@@ -1,0 +1,37 @@
+module Anthropic
+  module Models
+    module Beta
+      type unwrap_webhook_event =
+        {
+          id: String,
+          created_at: Time,
+          data: Anthropic::Models::Beta::beta_webhook_event_data,
+          type: :event
+        }
+
+      class UnwrapWebhookEvent < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor data: Anthropic::Models::Beta::beta_webhook_event_data
+
+        attr_accessor type: :event
+
+        def initialize: (
+          id: String,
+          created_at: Time,
+          data: Anthropic::Models::Beta::beta_webhook_event_data,
+          ?type: :event
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          created_at: Time,
+          data: Anthropic::Models::Beta::beta_webhook_event_data,
+          type: :event
+        }
+      end
+    end
+  end
+end
