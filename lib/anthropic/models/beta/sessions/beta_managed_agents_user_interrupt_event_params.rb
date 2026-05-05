@@ -10,10 +10,24 @@ module Anthropic
           #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::Type]
           required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::Type }
 
-          # @!method initialize(type:)
+          # @!attribute session_thread_id
+          #   If absent, interrupts every non-archived thread in a multiagent session (or the
+          #   primary alone in a single-agent session). If present, interrupts only the named
+          #   thread.
+          #
+          #   @return [String, nil]
+          optional :session_thread_id, String, nil?: true
+
+          # @!method initialize(type:, session_thread_id: nil)
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams}
+          #   for more details.
+          #
           #   Parameters for sending an interrupt to pause the agent.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::Type]
+          #
+          #   @param session_thread_id [String, nil] If absent, interrupts every non-archived thread in a multiagent session (or the
 
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams#type
           module Type

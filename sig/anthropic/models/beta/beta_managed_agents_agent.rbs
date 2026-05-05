@@ -12,6 +12,7 @@ module Anthropic
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
           metadata: ::Hash[Symbol, String],
           model: Anthropic::Beta::BetaManagedAgentsModelConfig,
+          multiagent: Anthropic::Beta::BetaManagedAgentsMultiagent?,
           name: String,
           skills: ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgent::skill],
           system_: String?,
@@ -36,6 +37,8 @@ module Anthropic
 
         attr_accessor model: Anthropic::Beta::BetaManagedAgentsModelConfig
 
+        attr_accessor multiagent: Anthropic::Beta::BetaManagedAgentsMultiagent?
+
         attr_accessor name: String
 
         attr_accessor skills: ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgent::skill]
@@ -58,6 +61,7 @@ module Anthropic
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
           metadata: ::Hash[Symbol, String],
           model: Anthropic::Beta::BetaManagedAgentsModelConfig,
+          multiagent: Anthropic::Beta::BetaManagedAgentsMultiagent?,
           name: String,
           skills: ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgent::skill],
           system_: String?,
@@ -75,6 +79,7 @@ module Anthropic
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
           metadata: ::Hash[Symbol, String],
           model: Anthropic::Beta::BetaManagedAgentsModelConfig,
+          multiagent: Anthropic::Beta::BetaManagedAgentsMultiagent?,
           name: String,
           skills: ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgent::skill],
           system_: String?,

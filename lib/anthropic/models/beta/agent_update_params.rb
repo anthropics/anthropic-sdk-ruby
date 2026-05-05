@@ -56,6 +56,13 @@ module Anthropic
         #   @return [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, nil]
         optional :model, union: -> { Anthropic::Beta::AgentUpdateParams::Model }
 
+        # @!attribute multiagent
+        #   A coordinator topology: the session's primary thread orchestrates work by
+        #   spawning session threads, each running an agent drawn from the `agents` roster.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil]
+        optional :multiagent, -> { Anthropic::Beta::BetaManagedAgentsMultiagentParams }, nil?: true
+
         # @!attribute name
         #   Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
         #
@@ -96,7 +103,7 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(agent_id:, version:, description: nil, mcp_servers: nil, metadata: nil, model: nil, name: nil, skills: nil, system_: nil, tools: nil, betas: nil, request_options: {})
+        # @!method initialize(agent_id:, version:, description: nil, mcp_servers: nil, metadata: nil, model: nil, multiagent: nil, name: nil, skills: nil, system_: nil, tools: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::AgentUpdateParams} for more details.
         #
@@ -111,6 +118,8 @@ module Anthropic
         #   @param metadata [Hash{Symbol=>String, nil}, nil] Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omi
         #
         #   @param model [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams] Model identifier. Accepts the [model string](https://platform.claude.com/docs/en
+        #
+        #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] A coordinator topology: the session's primary thread orchestrates work by spawni
         #
         #   @param name [String] Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
         #

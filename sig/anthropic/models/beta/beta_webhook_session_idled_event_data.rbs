@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaWebhookSessionIdledEventData = Beta::BetaWebhookSessionIdledEventData
+
+    module Beta
+      type beta_webhook_session_idled_event_data =
+        {
+          id: String,
+          organization_id: String,
+          type: :"session.idled",
+          workspace_id: String
+        }
+
+      class BetaWebhookSessionIdledEventData < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor organization_id: String
+
+        attr_accessor type: :"session.idled"
+
+        attr_accessor workspace_id: String
+
+        def initialize: (
+          id: String,
+          organization_id: String,
+          workspace_id: String,
+          ?type: :"session.idled"
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          organization_id: String,
+          type: :"session.idled",
+          workspace_id: String
+        }
+      end
+    end
+  end
+end

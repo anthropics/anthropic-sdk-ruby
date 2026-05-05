@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaWebhookSessionPendingEventData = Beta::BetaWebhookSessionPendingEventData
+
+    module Beta
+      type beta_webhook_session_pending_event_data =
+        {
+          id: String,
+          organization_id: String,
+          type: :"session.pending",
+          workspace_id: String
+        }
+
+      class BetaWebhookSessionPendingEventData < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor organization_id: String
+
+        attr_accessor type: :"session.pending"
+
+        attr_accessor workspace_id: String
+
+        def initialize: (
+          id: String,
+          organization_id: String,
+          workspace_id: String,
+          ?type: :"session.pending"
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          organization_id: String,
+          type: :"session.pending",
+          workspace_id: String
+        }
+      end
+    end
+  end
+end

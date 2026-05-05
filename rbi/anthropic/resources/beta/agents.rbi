@@ -23,6 +23,10 @@ module Anthropic
                 Anthropic::Beta::BetaManagedAgentsURLMCPServerParams::OrHash
               ],
             metadata: T::Hash[Symbol, String],
+            multiagent:
+              T.nilable(
+                Anthropic::Beta::BetaManagedAgentsMultiagentParams::OrHash
+              ),
             skills:
               T::Array[
                 T.any(
@@ -59,6 +63,10 @@ module Anthropic
           # Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars,
           # values up to 512 chars.
           metadata: nil,
+          # Body param: A coordinator topology: the session's primary thread orchestrates
+          # work by spawning session threads, each running an agent drawn from the `agents`
+          # roster.
+          multiagent: nil,
           # Body param: Skills available to the agent. Maximum 20.
           skills: nil,
           # Body param: System prompt for the agent. Up to 100,000 characters.
@@ -112,6 +120,10 @@ module Anthropic
                 String,
                 Anthropic::Beta::BetaManagedAgentsModelConfigParams::OrHash
               ),
+            multiagent:
+              T.nilable(
+                Anthropic::Beta::BetaManagedAgentsMultiagentParams::OrHash
+              ),
             name: String,
             skills:
               T.nilable(
@@ -159,6 +171,10 @@ module Anthropic
           # e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration
           # control. Omit to preserve. Cannot be cleared.
           model: nil,
+          # Body param: A coordinator topology: the session's primary thread orchestrates
+          # work by spawning session threads, each running an agent drawn from the `agents`
+          # roster.
+          multiagent: nil,
           # Body param: Human-readable name. 1-256 characters. Omit to preserve. Cannot be
           # cleared.
           name: nil,

@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaWebhookVaultDeletedEventData = Beta::BetaWebhookVaultDeletedEventData
+
+    module Beta
+      type beta_webhook_vault_deleted_event_data =
+        {
+          id: String,
+          organization_id: String,
+          type: :"vault.deleted",
+          workspace_id: String
+        }
+
+      class BetaWebhookVaultDeletedEventData < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor organization_id: String
+
+        attr_accessor type: :"vault.deleted"
+
+        attr_accessor workspace_id: String
+
+        def initialize: (
+          id: String,
+          organization_id: String,
+          workspace_id: String,
+          ?type: :"vault.deleted"
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          organization_id: String,
+          type: :"vault.deleted",
+          workspace_id: String
+        }
+      end
+    end
+  end
+end

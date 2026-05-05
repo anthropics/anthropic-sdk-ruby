@@ -14,7 +14,8 @@ module Anthropic
                 Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEventParams,
                 Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams,
                 Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams,
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams
+                Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams,
+                Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams
               )
             end
 

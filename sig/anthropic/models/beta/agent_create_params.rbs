@@ -8,6 +8,7 @@ module Anthropic
           description: String?,
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
           metadata: ::Hash[Symbol, String],
+          multiagent: Anthropic::Beta::BetaManagedAgentsMultiagentParams?,
           skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params],
           system_: String?,
           tools: ::Array[Anthropic::Models::Beta::AgentCreateParams::tool],
@@ -35,6 +36,8 @@ module Anthropic
 
         def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
+        attr_accessor multiagent: Anthropic::Beta::BetaManagedAgentsMultiagentParams?
+
         attr_reader skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]?
 
         def skills=: (
@@ -61,6 +64,7 @@ module Anthropic
           ?description: String?,
           ?mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
           ?metadata: ::Hash[Symbol, String],
+          ?multiagent: Anthropic::Beta::BetaManagedAgentsMultiagentParams?,
           ?skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params],
           ?system_: String?,
           ?tools: ::Array[Anthropic::Models::Beta::AgentCreateParams::tool],
@@ -74,6 +78,7 @@ module Anthropic
           description: String?,
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
           metadata: ::Hash[Symbol, String],
+          multiagent: Anthropic::Beta::BetaManagedAgentsMultiagentParams?,
           skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params],
           system_: String?,
           tools: ::Array[Anthropic::Models::Beta::AgentCreateParams::tool],

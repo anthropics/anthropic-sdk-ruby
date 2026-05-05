@@ -23,13 +23,29 @@ module Anthropic
         #   @return [Hash{Symbol=>String}, nil]
         optional :metadata, Anthropic::Internal::Type::HashOf[String]
 
+        # @!attribute name
+        #   Display name of the entity this profile represents. Required when relationship
+        #   is `resold` (the resold-to company's name); optional otherwise. Maximum 255
+        #   characters.
+        #
+        #   @return [String, nil]
+        optional :name, String, nil?: true
+
+        # @!attribute relationship
+        #   How the entity behind a user profile relates to the platform that owns the API
+        #   key. `external`: an individual end-user of the platform. `resold`: a company the
+        #   platform resells Claude access to. `internal`: the platform's own usage.
+        #
+        #   @return [Symbol, Anthropic::Models::Beta::UserProfileCreateParams::Relationship, nil]
+        optional :relationship, enum: -> { Anthropic::Beta::UserProfileCreateParams::Relationship }
+
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(external_id: nil, metadata: nil, betas: nil, request_options: {})
+        # @!method initialize(external_id: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::UserProfileCreateParams} for more details.
         #
@@ -37,9 +53,27 @@ module Anthropic
         #
         #   @param metadata [Hash{Symbol=>String}] Free-form key-value data to attach to this user profile. Maximum 16 keys, with k
         #
+        #   @param name [String, nil] Display name of the entity this profile represents. Required when relationship i
+        #
+        #   @param relationship [Symbol, Anthropic::Models::Beta::UserProfileCreateParams::Relationship] How the entity behind a user profile relates to the platform that owns the API k
+        #
         #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
+
+        # How the entity behind a user profile relates to the platform that owns the API
+        # key. `external`: an individual end-user of the platform. `resold`: a company the
+        # platform resells Claude access to. `internal`: the platform's own usage.
+        module Relationship
+          extend Anthropic::Internal::Type::Enum
+
+          EXTERNAL = :external
+          RESOLD = :resold
+          INTERNAL = :internal
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
       end
     end
   end

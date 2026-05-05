@@ -1,0 +1,59 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_user_define_outcome_event_params =
+          {
+            description: String,
+            rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::rubric,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::type_,
+            max_iterations: Integer?
+          }
+
+        class BetaManagedAgentsUserDefineOutcomeEventParams < Anthropic::Internal::Type::BaseModel
+          attr_accessor description: String
+
+          attr_accessor rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::rubric
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::type_
+
+          attr_accessor max_iterations: Integer?
+
+          def initialize: (
+            description: String,
+            rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::rubric,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::type_,
+            ?max_iterations: Integer?
+          ) -> void
+
+          def to_hash: -> {
+            description: String,
+            rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::rubric,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::type_,
+            max_iterations: Integer?
+          }
+
+          type rubric =
+            Anthropic::Beta::Sessions::BetaManagedAgentsFileRubricParams
+            | Anthropic::Beta::Sessions::BetaManagedAgentsTextRubricParams
+
+          module Rubric
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::rubric]
+          end
+
+          type type_ = :"user.define_outcome"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            USER_DEFINE_OUTCOME: :"user.define_outcome"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::type_]
+          end
+        end
+      end
+    end
+  end
+end

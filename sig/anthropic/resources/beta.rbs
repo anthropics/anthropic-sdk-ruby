@@ -19,6 +19,8 @@ module Anthropic
 
       attr_reader skills: Anthropic::Resources::Beta::Skills
 
+      attr_reader webhooks: Anthropic::Resources::Beta::Webhooks
+
       attr_reader user_profiles: Anthropic::Resources::Beta::UserProfiles
 
       def initialize: (client: Anthropic::Client) -> void

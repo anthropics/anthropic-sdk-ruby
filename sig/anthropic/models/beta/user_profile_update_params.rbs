@@ -6,6 +6,8 @@ module Anthropic
           user_profile_id: String,
           external_id: String?,
           metadata: ::Hash[Symbol, String],
+          name: String?,
+          relationship: Anthropic::Models::Beta::UserProfileUpdateParams::relationship?,
           betas: ::Array[Anthropic::Models::anthropic_beta]
         }
         & Anthropic::Internal::Type::request_parameters
@@ -22,6 +24,10 @@ module Anthropic
 
         def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
 
+        attr_accessor name: String?
+
+        attr_accessor relationship: Anthropic::Models::Beta::UserProfileUpdateParams::relationship?
+
         attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
         def betas=: (
@@ -32,6 +38,8 @@ module Anthropic
           user_profile_id: String,
           ?external_id: String?,
           ?metadata: ::Hash[Symbol, String],
+          ?name: String?,
+          ?relationship: Anthropic::Models::Beta::UserProfileUpdateParams::relationship?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> void
@@ -40,9 +48,23 @@ module Anthropic
           user_profile_id: String,
           external_id: String?,
           metadata: ::Hash[Symbol, String],
+          name: String?,
+          relationship: Anthropic::Models::Beta::UserProfileUpdateParams::relationship?,
           betas: ::Array[Anthropic::Models::anthropic_beta],
           request_options: Anthropic::RequestOptions
         }
+
+        type relationship = :external | :resold | :internal
+
+        module Relationship
+          extend Anthropic::Internal::Type::Enum
+
+          EXTERNAL: :external
+          RESOLD: :resold
+          INTERNAL: :internal
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::UserProfileUpdateParams::relationship]
+        end
       end
     end
   end

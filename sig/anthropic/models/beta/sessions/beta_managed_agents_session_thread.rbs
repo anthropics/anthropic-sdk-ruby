@@ -1,0 +1,84 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_session_thread =
+          {
+            id: String,
+            agent: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent,
+            archived_at: Time?,
+            created_at: Time,
+            parent_thread_id: String?,
+            session_id: String,
+            stats: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStats?,
+            status: Anthropic::Models::Beta::Sessions::beta_managed_agents_session_thread_status,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::type_,
+            updated_at: Time,
+            usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage?
+          }
+
+        class BetaManagedAgentsSessionThread < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor agent: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent
+
+          attr_accessor archived_at: Time?
+
+          attr_accessor created_at: Time
+
+          attr_accessor parent_thread_id: String?
+
+          attr_accessor session_id: String
+
+          attr_accessor stats: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStats?
+
+          attr_accessor status: Anthropic::Models::Beta::Sessions::beta_managed_agents_session_thread_status
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::type_
+
+          attr_accessor updated_at: Time
+
+          attr_accessor usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage?
+
+          def initialize: (
+            id: String,
+            agent: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent,
+            archived_at: Time?,
+            created_at: Time,
+            parent_thread_id: String?,
+            session_id: String,
+            stats: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStats?,
+            status: Anthropic::Models::Beta::Sessions::beta_managed_agents_session_thread_status,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::type_,
+            updated_at: Time,
+            usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage?
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            agent: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent,
+            archived_at: Time?,
+            created_at: Time,
+            parent_thread_id: String?,
+            session_id: String,
+            stats: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStats?,
+            status: Anthropic::Models::Beta::Sessions::beta_managed_agents_session_thread_status,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::type_,
+            updated_at: Time,
+            usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage?
+          }
+
+          type type_ = :session_thread
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            SESSION_THREAD: :session_thread
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::type_]
+          end
+        end
+      end
+    end
+  end
+end

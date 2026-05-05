@@ -30,6 +30,9 @@ module Anthropic
       # @return [Anthropic::Resources::Beta::Skills]
       attr_reader :skills
 
+      # @return [Anthropic::Resources::Beta::Webhooks]
+      attr_reader :webhooks
+
       # @return [Anthropic::Resources::Beta::UserProfiles]
       attr_reader :user_profiles
 
@@ -47,6 +50,7 @@ module Anthropic
         @memory_stores = Anthropic::Resources::Beta::MemoryStores.new(client: client)
         @files = Anthropic::Resources::Beta::Files.new(client: client)
         @skills = Anthropic::Resources::Beta::Skills.new(client: client)
+        @webhooks = Anthropic::Resources::Beta::Webhooks.new(client: client)
         @user_profiles = Anthropic::Resources::Beta::UserProfiles.new(client: client)
       end
     end

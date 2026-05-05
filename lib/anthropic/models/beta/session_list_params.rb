@@ -76,13 +76,21 @@ module Anthropic
         #   @return [String, nil]
         optional :page, String
 
+        # @!attribute statuses
+        #   Filter by session status. Repeat the parameter to match any of multiple
+        #   statuses.
+        #
+        #   @return [Array<Symbol, Anthropic::Models::Beta::SessionListParams::Status>, nil]
+        optional :statuses,
+                 -> { Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Beta::SessionListParams::Status] }
+
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(agent_id: nil, agent_version: nil, created_at_gt: nil, created_at_gte: nil, created_at_lt: nil, created_at_lte: nil, include_archived: nil, limit: nil, memory_store_id: nil, order: nil, page: nil, betas: nil, request_options: {})
+        # @!method initialize(agent_id: nil, agent_version: nil, created_at_gt: nil, created_at_gte: nil, created_at_lt: nil, created_at_lte: nil, include_archived: nil, limit: nil, memory_store_id: nil, order: nil, page: nil, statuses: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::SessionListParams} for more details.
         #
@@ -108,6 +116,8 @@ module Anthropic
         #
         #   @param page [String] Opaque pagination cursor from a previous response's next_page.
         #
+        #   @param statuses [Array<Symbol, Anthropic::Models::Beta::SessionListParams::Status>] Filter by session status. Repeat the parameter to match any of multiple statuses
+        #
         #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
@@ -119,6 +129,19 @@ module Anthropic
 
           ASC = :asc
           DESC = :desc
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # SessionStatus enum
+        module Status
+          extend Anthropic::Internal::Type::Enum
+
+          RESCHEDULING = :rescheduling
+          RUNNING = :running
+          IDLE = :idle
+          TERMINATED = :terminated
 
           # @!method self.values
           #   @return [Array<Symbol>]

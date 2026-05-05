@@ -1,0 +1,100 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_session_thread_agent =
+          {
+            id: String,
+            description: String?,
+            mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
+            model: Anthropic::Beta::BetaManagedAgentsModelConfig,
+            name: String,
+            skills: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent::skill],
+            system_: String?,
+            tools: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent::tool],
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent::type_,
+            version: Integer
+          }
+
+        class BetaManagedAgentsSessionThreadAgent < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor description: String?
+
+          attr_accessor mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition]
+
+          attr_accessor model: Anthropic::Beta::BetaManagedAgentsModelConfig
+
+          attr_accessor name: String
+
+          attr_accessor skills: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent::skill]
+
+          attr_accessor system_: String?
+
+          attr_accessor tools: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent::tool]
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent::type_
+
+          attr_accessor version: Integer
+
+          def initialize: (
+            id: String,
+            description: String?,
+            mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
+            model: Anthropic::Beta::BetaManagedAgentsModelConfig,
+            name: String,
+            skills: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent::skill],
+            system_: String?,
+            tools: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent::tool],
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent::type_,
+            version: Integer
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            description: String?,
+            mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
+            model: Anthropic::Beta::BetaManagedAgentsModelConfig,
+            name: String,
+            skills: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent::skill],
+            system_: String?,
+            tools: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent::tool],
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent::type_,
+            version: Integer
+          }
+
+          type skill =
+            Anthropic::Beta::BetaManagedAgentsAnthropicSkill
+            | Anthropic::Beta::BetaManagedAgentsCustomSkill
+
+          module Skill
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent::skill]
+          end
+
+          type tool =
+            Anthropic::Beta::BetaManagedAgentsAgentToolset20260401
+            | Anthropic::Beta::BetaManagedAgentsMCPToolset
+            | Anthropic::Beta::BetaManagedAgentsCustomTool
+
+          module Tool
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent::tool]
+          end
+
+          type type_ = :agent
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            AGENT: :agent
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent::type_]
+          end
+        end
+      end
+    end
+  end
+end

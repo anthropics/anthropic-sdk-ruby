@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_text_rubric =
+          {
+            content: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubric::type_
+          }
+
+        class BetaManagedAgentsTextRubric < Anthropic::Internal::Type::BaseModel
+          attr_accessor content: String
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubric::type_
+
+          def initialize: (
+            content: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubric::type_
+          ) -> void
+
+          def to_hash: -> {
+            content: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubric::type_
+          }
+
+          type type_ = :text
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TEXT: :text
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubric::type_]
+          end
+        end
+      end
+    end
+  end
+end

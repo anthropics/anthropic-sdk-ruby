@@ -1,0 +1,35 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Sessions
+        class Threads
+          attr_reader events: Anthropic::Resources::Beta::Sessions::Threads::Events
+
+          def retrieve: (
+            String thread_id,
+            session_id: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread
+
+          def list: (
+            String session_id,
+            ?limit: Integer,
+            ?page: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread]
+
+          def archive: (
+            String thread_id,
+            session_id: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

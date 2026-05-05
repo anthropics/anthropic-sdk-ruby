@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaWebhookSessionStatusRunStartedEventData = Beta::BetaWebhookSessionStatusRunStartedEventData
+
+    module Beta
+      type beta_webhook_session_status_run_started_event_data =
+        {
+          id: String,
+          organization_id: String,
+          type: :"session.status_run_started",
+          workspace_id: String
+        }
+
+      class BetaWebhookSessionStatusRunStartedEventData < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor organization_id: String
+
+        attr_accessor type: :"session.status_run_started"
+
+        attr_accessor workspace_id: String
+
+        def initialize: (
+          id: String,
+          organization_id: String,
+          workspace_id: String,
+          ?type: :"session.status_run_started"
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          organization_id: String,
+          type: :"session.status_run_started",
+          workspace_id: String
+        }
+      end
+    end
+  end
+end

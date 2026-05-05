@@ -20,21 +20,35 @@ module Anthropic
           end
           attr_accessor :type
 
+          # If absent, interrupts every non-archived thread in a multiagent session (or the
+          # primary alone in a single-agent session). If present, interrupts only the named
+          # thread.
+          sig { returns(T.nilable(String)) }
+          attr_accessor :session_thread_id
+
           # Parameters for sending an interrupt to pause the agent.
           sig do
             params(
               type:
-                Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::Type::OrSymbol
+                Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::Type::OrSymbol,
+              session_thread_id: T.nilable(String)
             ).returns(T.attached_class)
           end
-          def self.new(type:)
+          def self.new(
+            type:,
+            # If absent, interrupts every non-archived thread in a multiagent session (or the
+            # primary alone in a single-agent session). If present, interrupts only the named
+            # thread.
+            session_thread_id: nil
+          )
           end
 
           sig do
             override.returns(
               {
                 type:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::Type::OrSymbol
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::Type::OrSymbol,
+                session_thread_id: T.nilable(String)
               }
             )
           end

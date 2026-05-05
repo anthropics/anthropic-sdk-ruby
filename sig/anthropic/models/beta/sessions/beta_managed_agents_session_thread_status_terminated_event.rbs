@@ -1,0 +1,54 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_session_thread_status_terminated_event =
+          {
+            id: String,
+            agent_name: String,
+            processed_at: Time,
+            session_thread_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent::type_
+          }
+
+        class BetaManagedAgentsSessionThreadStatusTerminatedEvent < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor agent_name: String
+
+          attr_accessor processed_at: Time
+
+          attr_accessor session_thread_id: String
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent::type_
+
+          def initialize: (
+            id: String,
+            agent_name: String,
+            processed_at: Time,
+            session_thread_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent::type_
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            agent_name: String,
+            processed_at: Time,
+            session_thread_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent::type_
+          }
+
+          type type_ = :"session.thread_status_terminated"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            SESSION_THREAD_STATUS_TERMINATED: :"session.thread_status_terminated"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent::type_]
+          end
+        end
+      end
+    end
+  end
+end

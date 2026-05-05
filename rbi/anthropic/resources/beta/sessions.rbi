@@ -10,6 +10,9 @@ module Anthropic
         sig { returns(Anthropic::Resources::Beta::Sessions::Resources) }
         attr_reader :resources
 
+        sig { returns(Anthropic::Resources::Beta::Sessions::Threads) }
+        attr_reader :threads
+
         # Create Session
         sig do
           params(
@@ -118,6 +121,8 @@ module Anthropic
             memory_store_id: String,
             order: Anthropic::Beta::SessionListParams::Order::OrSymbol,
             page: String,
+            statuses:
+              T::Array[Anthropic::Beta::SessionListParams::Status::OrSymbol],
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(
@@ -152,6 +157,9 @@ module Anthropic
           order: nil,
           # Query param: Opaque pagination cursor from a previous response's next_page.
           page: nil,
+          # Query param: Filter by session status. Repeat the parameter to match any of
+          # multiple statuses.
+          statuses: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}

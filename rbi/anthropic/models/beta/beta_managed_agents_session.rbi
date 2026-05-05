@@ -43,6 +43,17 @@ module Anthropic
         sig { returns(T::Hash[Symbol, String]) }
         attr_accessor :metadata
 
+        # Per-outcome evaluation state. One entry per define_outcome event sent to the
+        # session.
+        sig do
+          returns(
+            T::Array[
+              Anthropic::Beta::BetaManagedAgentsOutcomeEvaluationResource
+            ]
+          )
+        end
+        attr_accessor :outcome_evaluations
+
         sig do
           returns(
             T::Array[
@@ -108,6 +119,10 @@ module Anthropic
             created_at: Time,
             environment_id: String,
             metadata: T::Hash[Symbol, String],
+            outcome_evaluations:
+              T::Array[
+                Anthropic::Beta::BetaManagedAgentsOutcomeEvaluationResource::OrHash
+              ],
             resources:
               T::Array[
                 T.any(
@@ -136,6 +151,9 @@ module Anthropic
           created_at:,
           environment_id:,
           metadata:,
+          # Per-outcome evaluation state. One entry per define_outcome event sent to the
+          # session.
+          outcome_evaluations:,
           resources:,
           # Timing statistics for a session.
           stats:,
@@ -162,6 +180,10 @@ module Anthropic
               created_at: Time,
               environment_id: String,
               metadata: T::Hash[Symbol, String],
+              outcome_evaluations:
+                T::Array[
+                  Anthropic::Beta::BetaManagedAgentsOutcomeEvaluationResource
+                ],
               resources:
                 T::Array[
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionResource::Variants

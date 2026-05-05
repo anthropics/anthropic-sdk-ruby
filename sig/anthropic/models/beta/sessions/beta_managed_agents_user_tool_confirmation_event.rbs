@@ -9,7 +9,8 @@ module Anthropic
             tool_use_id: String,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::type_,
             deny_message: String?,
-            processed_at: Time?
+            processed_at: Time?,
+            session_thread_id: String?
           }
 
         class BetaManagedAgentsUserToolConfirmationEvent < Anthropic::Internal::Type::BaseModel
@@ -25,13 +26,16 @@ module Anthropic
 
           attr_accessor processed_at: Time?
 
+          attr_accessor session_thread_id: String?
+
           def initialize: (
             id: String,
             result: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::result,
             tool_use_id: String,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::type_,
             ?deny_message: String?,
-            ?processed_at: Time?
+            ?processed_at: Time?,
+            ?session_thread_id: String?
           ) -> void
 
           def to_hash: -> {
@@ -40,7 +44,8 @@ module Anthropic
             tool_use_id: String,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::type_,
             deny_message: String?,
-            processed_at: Time?
+            processed_at: Time?,
+            session_thread_id: String?
           }
 
           type result = :allow | :deny

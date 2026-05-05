@@ -4,18 +4,23 @@ module Anthropic
       module Sessions
         type beta_managed_agents_user_interrupt_event_params =
           {
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::type_
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::type_,
+            session_thread_id: String?
           }
 
         class BetaManagedAgentsUserInterruptEventParams < Anthropic::Internal::Type::BaseModel
           attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::type_
 
+          attr_accessor session_thread_id: String?
+
           def initialize: (
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::type_
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::type_,
+            ?session_thread_id: String?
           ) -> void
 
           def to_hash: -> {
-            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::type_
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::type_,
+            session_thread_id: String?
           }
 
           type type_ = :"user.interrupt"

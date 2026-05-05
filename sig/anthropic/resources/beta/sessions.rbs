@@ -6,6 +6,8 @@ module Anthropic
 
         attr_reader resources: Anthropic::Resources::Beta::Sessions::Resources
 
+        attr_reader threads: Anthropic::Resources::Beta::Sessions::Threads
+
         def create: (
           agent: Anthropic::Models::Beta::SessionCreateParams::agent,
           environment_id: String,
@@ -44,6 +46,7 @@ module Anthropic
           ?memory_store_id: String,
           ?order: Anthropic::Models::Beta::SessionListParams::order,
           ?page: String,
+          ?statuses: ::Array[Anthropic::Models::Beta::SessionListParams::status],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaManagedAgentsSession]

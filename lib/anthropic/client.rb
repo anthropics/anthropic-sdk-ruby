@@ -59,6 +59,9 @@ module Anthropic
     # @return [String, nil]
     attr_reader :auth_token
 
+    # @return [String, nil]
+    attr_reader :webhook_key
+
     # @return [Object, nil]
     attr_reader :credentials
 
@@ -159,6 +162,8 @@ module Anthropic
     #   with +credentials:+. For +user_oauth+, must also include
     #   +authentication.credentials_path+.
     #
+    # @param webhook_key [String, nil] Defaults to `ENV["ANTHROPIC_WEBHOOK_SIGNING_KEY"]`
+    #
     # @param base_url [String, nil] Override the default base URL for the API, e.g.,
     #   +"https://api.example.com/v2/"+. Defaults to +ENV["ANTHROPIC_BASE_URL"]+,
     #   then to the profile's +base_url+ if present, then to +https://api.anthropic.com+.
@@ -173,6 +178,7 @@ module Anthropic
     def initialize(
       api_key: nil,
       auth_token: nil,
+      webhook_key: ENV["ANTHROPIC_WEBHOOK_SIGNING_KEY"],
       credentials: nil,
       config: nil,
       base_url: nil,
@@ -251,6 +257,7 @@ module Anthropic
         headers = parsed.merge(headers)
       end
       headers = headers.merge(credential_headers)
+      @webhook_key = webhook_key&.to_s
 
       super(
         base_url: base_url,

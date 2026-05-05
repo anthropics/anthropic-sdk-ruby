@@ -1,0 +1,29 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Sessions
+        class Threads
+          class Events
+            def list: (
+              String thread_id,
+              session_id: String,
+              ?limit: Integer,
+              ?page: String,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Models::Beta::Sessions::beta_managed_agents_session_event]
+
+            def stream_events: (
+              String thread_id,
+              session_id: String,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::Stream[Anthropic::Models::Beta::Sessions::beta_managed_agents_stream_session_thread_events]
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

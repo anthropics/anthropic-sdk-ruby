@@ -5,9 +5,14 @@ module Anthropic
         type event_list_params =
           {
             session_id: String,
+            created_at_gt: Time,
+            created_at_gte: Time,
+            created_at_lt: Time,
+            created_at_lte: Time,
             limit: Integer,
             order: Anthropic::Models::Beta::Sessions::EventListParams::order,
             page: String,
+            types: ::Array[String],
             betas: ::Array[Anthropic::Models::anthropic_beta]
           }
           & Anthropic::Internal::Type::request_parameters
@@ -17,6 +22,22 @@ module Anthropic
           include Anthropic::Internal::Type::RequestParameters
 
           attr_accessor session_id: String
+
+          attr_reader created_at_gt: Time?
+
+          def created_at_gt=: (Time) -> Time
+
+          attr_reader created_at_gte: Time?
+
+          def created_at_gte=: (Time) -> Time
+
+          attr_reader created_at_lt: Time?
+
+          def created_at_lt=: (Time) -> Time
+
+          attr_reader created_at_lte: Time?
+
+          def created_at_lte=: (Time) -> Time
 
           attr_reader limit: Integer?
 
@@ -32,6 +53,10 @@ module Anthropic
 
           def page=: (String) -> String
 
+          attr_reader types: ::Array[String]?
+
+          def types=: (::Array[String]) -> ::Array[String]
+
           attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
           def betas=: (
@@ -40,18 +65,28 @@ module Anthropic
 
           def initialize: (
             session_id: String,
+            ?created_at_gt: Time,
+            ?created_at_gte: Time,
+            ?created_at_lt: Time,
+            ?created_at_lte: Time,
             ?limit: Integer,
             ?order: Anthropic::Models::Beta::Sessions::EventListParams::order,
             ?page: String,
+            ?types: ::Array[String],
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> void
 
           def to_hash: -> {
             session_id: String,
+            created_at_gt: Time,
+            created_at_gte: Time,
+            created_at_lt: Time,
+            created_at_lte: Time,
             limit: Integer,
             order: Anthropic::Models::Beta::Sessions::EventListParams::order,
             page: String,
+            types: ::Array[String],
             betas: ::Array[Anthropic::Models::anthropic_beta],
             request_options: Anthropic::RequestOptions
           }

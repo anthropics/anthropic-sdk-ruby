@@ -16,6 +16,9 @@ module Anthropic
     sig { returns(T.nilable(String)) }
     attr_reader :auth_token
 
+    sig { returns(T.nilable(String)) }
+    attr_reader :webhook_key
+
     sig { returns(T.nilable(Anthropic::Credentials::TokenCache)) }
     attr_reader :token_cache
 
@@ -51,6 +54,7 @@ module Anthropic
       params(
         api_key: T.nilable(String),
         auth_token: T.nilable(String),
+        webhook_key: T.nilable(String),
         base_url: T.nilable(String),
         max_retries: Integer,
         timeout: Float,
@@ -63,6 +67,8 @@ module Anthropic
       api_key: ENV["ANTHROPIC_API_KEY"],
       # Defaults to `ENV["ANTHROPIC_AUTH_TOKEN"]`
       auth_token: ENV["ANTHROPIC_AUTH_TOKEN"],
+      # Defaults to `ENV["ANTHROPIC_WEBHOOK_SIGNING_KEY"]`
+      webhook_key: ENV["ANTHROPIC_WEBHOOK_SIGNING_KEY"],
       # Override the default base URL for the API, e.g.,
       # `"https://api.example.com/v2/"`. Defaults to `ENV["ANTHROPIC_BASE_URL"]`
       base_url: ENV["ANTHROPIC_BASE_URL"],
