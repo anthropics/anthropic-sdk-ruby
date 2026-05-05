@@ -469,12 +469,30 @@ module Anthropic
         # @return [String]
         def to_yaml(*a) = Anthropic::Internal::Type::Converter.dump(self.class, self).to_yaml(*a)
 
+        # @api public
+        #
+        # Returns the HTTP response status code, if this object was returned from an API
+        # response.
+        #
+        # @return [Integer, nil]
+        attr_accessor :_status
+
+        # @api public
+        #
+        # Returns the HTTP response headers, if this object was returned from an API
+        # response.
+        #
+        # @return [Hash{String=>String}, nil]
+        attr_accessor :_headers
+
         # Create a new instance of a model.
         #
         # @param data [Hash{Symbol=>Object}, self]
         def initialize(data = {})
           @data = {}
           @coerced = {}
+          @_status = nil
+          @_headers = nil
           Anthropic::Internal::Util.coerce_hash!(data).each do
             if self.class.known_fields.key?(_1)
               public_send(:"#{_1}=", _2)
