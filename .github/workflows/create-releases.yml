@@ -23,7 +23,7 @@ jobs:
           stainless-api-key: ${{ secrets.STAINLESS_API_KEY }}
 
       - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@c4e5b1316158f92e3d49443a9d58b31d25ac0f8f # v1.306.0 (sha-pinned)
         with:
           bundler-cache: false
 
