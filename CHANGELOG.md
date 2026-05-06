@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.39.0 (2026-05-06)
+
+Full Changelog: [v1.38.0...v1.39.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.38.0...v1.39.0)
+
+### Features
+
+* **api:** add support for Managed Agents multiagents and outcomes, webhooks, vault validation ([21230ec](https://github.com/anthropics/anthropic-sdk-ruby/commit/21230ecd2fd7dac66600f984c7e34383cf122d7a))
+* **client:** add aws sso config resolution ([#887](https://github.com/anthropics/anthropic-sdk-ruby/issues/887)) ([4a0476a](https://github.com/anthropics/anthropic-sdk-ruby/commit/4a0476ada4e1549965971fce3272a7a9dee8faaa))
+
+
+### Bug Fixes
+
+* **api:** Adjust webhook configuration ([e587f17](https://github.com/anthropics/anthropic-sdk-ruby/commit/e587f17eae68e656586f73a9a880e4f9ab8b94fe))
+
 ## 1.38.0 (2026-05-05)
 
 Full Changelog: [v1.37.0...v1.38.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.37.0...v1.38.0)
