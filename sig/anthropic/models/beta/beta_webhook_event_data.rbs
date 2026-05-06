@@ -11,7 +11,7 @@ module Anthropic
         | Anthropic::Beta::BetaWebhookSessionRequiresActionEventData
         | Anthropic::Beta::BetaWebhookSessionArchivedEventData
         | Anthropic::Beta::BetaWebhookSessionDeletedEventData
-        | Anthropic::Beta::BetaWebhookSessionStatusScheduledEventData
+        | Anthropic::Beta::BetaWebhookSessionStatusRescheduledEventData
         | Anthropic::Beta::BetaWebhookSessionStatusRunStartedEventData
         | Anthropic::Beta::BetaWebhookSessionStatusIdledEventData
         | Anthropic::Beta::BetaWebhookSessionStatusTerminatedEventData

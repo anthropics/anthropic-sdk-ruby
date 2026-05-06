@@ -40,7 +40,7 @@ module Anthropic
                 Anthropic::Beta::BetaWebhookSessionRequiresActionEventData::OrHash,
                 Anthropic::Beta::BetaWebhookSessionArchivedEventData::OrHash,
                 Anthropic::Beta::BetaWebhookSessionDeletedEventData::OrHash,
-                Anthropic::Beta::BetaWebhookSessionStatusScheduledEventData::OrHash,
+                Anthropic::Beta::BetaWebhookSessionStatusRescheduledEventData::OrHash,
                 Anthropic::Beta::BetaWebhookSessionStatusRunStartedEventData::OrHash,
                 Anthropic::Beta::BetaWebhookSessionStatusIdledEventData::OrHash,
                 Anthropic::Beta::BetaWebhookSessionStatusTerminatedEventData::OrHash,
