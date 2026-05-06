@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaWebhookSessionStatusScheduledEventData < Anthropic::Internal::Type::BaseModel
+      class BetaWebhookSessionStatusRescheduledEventData < Anthropic::Internal::Type::BaseModel
         # @!attribute id
         #   ID of the resource that triggered the event.
         #
@@ -17,25 +17,25 @@ module Anthropic
 
         # @!attribute type
         #
-        #   @return [Symbol, :"session.status_scheduled"]
-        required :type, const: :"session.status_scheduled"
+        #   @return [Symbol, :"session.status_rescheduled"]
+        required :type, const: :"session.status_rescheduled"
 
         # @!attribute workspace_id
         #
         #   @return [String]
         required :workspace_id, String
 
-        # @!method initialize(id:, organization_id:, workspace_id:, type: :"session.status_scheduled")
+        # @!method initialize(id:, organization_id:, workspace_id:, type: :"session.status_rescheduled")
         #   @param id [String] ID of the resource that triggered the event.
         #
         #   @param organization_id [String]
         #
         #   @param workspace_id [String]
         #
-        #   @param type [Symbol, :"session.status_scheduled"]
+        #   @param type [Symbol, :"session.status_rescheduled"]
       end
     end
 
-    BetaWebhookSessionStatusScheduledEventData = Beta::BetaWebhookSessionStatusScheduledEventData
+    BetaWebhookSessionStatusRescheduledEventData = Beta::BetaWebhookSessionStatusRescheduledEventData
   end
 end

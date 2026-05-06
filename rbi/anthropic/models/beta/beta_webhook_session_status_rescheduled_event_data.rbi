@@ -2,15 +2,15 @@
 
 module Anthropic
   module Models
-    BetaWebhookSessionStatusScheduledEventData =
-      Beta::BetaWebhookSessionStatusScheduledEventData
+    BetaWebhookSessionStatusRescheduledEventData =
+      Beta::BetaWebhookSessionStatusRescheduledEventData
 
     module Beta
-      class BetaWebhookSessionStatusScheduledEventData < Anthropic::Internal::Type::BaseModel
+      class BetaWebhookSessionStatusRescheduledEventData < Anthropic::Internal::Type::BaseModel
         OrHash =
           T.type_alias do
             T.any(
-              Anthropic::Beta::BetaWebhookSessionStatusScheduledEventData,
+              Anthropic::Beta::BetaWebhookSessionStatusRescheduledEventData,
               Anthropic::Internal::AnyHash
             )
           end
@@ -41,7 +41,7 @@ module Anthropic
           id:,
           organization_id:,
           workspace_id:,
-          type: :"session.status_scheduled"
+          type: :"session.status_rescheduled"
         )
         end
 
