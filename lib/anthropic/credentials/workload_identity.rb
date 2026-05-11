@@ -158,7 +158,7 @@ module Anthropic
         data = JSON.parse(response.body, symbolize_names: true)
         token, expires_in =
           case data
-          in {access_token: String => token, expires_in: Integer | String => expires_in}
+          in {access_token: String => token, expires_in: (Integer | String) => expires_in}
             [token, expires_in.to_i]
           in {access_token: String => token}
             [token, 3600]
