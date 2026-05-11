@@ -301,6 +301,39 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
     end
   end
 
+  def test_sigv4_signs_multipart_enumerable_body
+    # Multipart bodies are produced as a lazy Enumerable by Util.encode_content.
+    # SigV4 signing must materialize them; otherwise Aws::Sigv4::Signer raises
+    # "TypeError: no implicit conversion of Enumerator into String", and even if
+    # it didn't, the consumed enumerator would replay empty over the wire.
+    stub_request(:post, "https://aws-external-anthropic.us-east-1.api.aws/v1/files?beta=true").to_return_json(
+      status: 500,
+      body: {}
+    )
+
+    client = Anthropic::AWSClient.new(
+      aws_access_key: "my-aws-access",
+      aws_secret_access_key: "my-aws-secret",
+      aws_region: "us-east-1",
+      workspace_id: "ws-test-123",
+      max_retries: 0
+    )
+
+    file = Anthropic::FilePart.new(StringIO.new("hello world"), filename: "hello.txt")
+    assert_raises(Anthropic::Errors::InternalServerError) do
+      client.beta.files.upload(file: file)
+    end
+
+    assert_requested(:any, /./, times: 1) do |req|
+      auth = req.headers.fetch("Authorization")
+      assert_match(/^AWS4-HMAC-SHA256 Credential=my-aws-access/, auth)
+      assert_match(%r{^multipart/form-data; boundary=}, req.headers.fetch("Content-Type"))
+      # Body must be the materialized multipart payload, not an empty/consumed stream.
+      assert_includes(req.body, "hello world")
+      assert_includes(req.body, "hello.txt")
+    end
+  end
+
   def test_api_key_mode_request_includes_x_api_key_header
     stub_request(:post, "http://localhost/v1/messages").to_return_json(
       status: 500,

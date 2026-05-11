@@ -159,7 +159,26 @@ module Anthropic
 
         return request unless @use_sig_v4
 
-        sliced = request.slice(:method, :url, :body).transform_keys(method: :http_method)
+        # `Aws::Sigv4::Signer#sign_request` only accepts `String` / `IO` / `nil`
+        # bodies. Multipart and JSONL requests carry a lazy `Enumerable` body
+        # (see `Util.encode_content`), which the signer rejects. Materialize it
+        # to a `String` and replace the request body so the signed payload is
+        # exactly the bytes that go over the wire (the lazy enumerator can only
+        # be consumed once).
+        body = request[:body]
+        body =
+          case body
+          when nil, String, IO, StringIO
+            body
+          when Enumerable
+            materialized = body.to_a.join
+            request = {**request, body: materialized}
+            materialized
+          else
+            body.to_s
+          end
+
+        sliced = {http_method: request.fetch(:method), url: request.fetch(:url), body: body}
         signed = @signer.sign_request({**sliced, headers: headers})
         headers = Anthropic::Internal::Util.normalized_headers(headers, signed.headers)
         headers.delete("connection")
