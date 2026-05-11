@@ -1371,3 +1371,4 @@ Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/anthropics/
 * extract some base client internals into utils ([3a2d596](https://github.com/anthropics/anthropic-sdk-ruby/commit/3a2d596e223eb8e9ea8244468963076e15e79db4))
 * private base client internals ([fefdaf2](https://github.com/anthropics/anthropic-sdk-ruby/commit/fefdaf26152537af76bc4fc97fa471bf16948e3d))
 * remove special testing only request header ([bacbf53](https://github.com/anthropics/anthropic-sdk-ruby/commit/bacbf534fc9d91cb9ebd52211d8a0dfe2fafbae8))
+
