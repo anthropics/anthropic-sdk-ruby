@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    anthropic (1.39.0)
+    anthropic (1.40.0)
       cgi
       connection_pool
       standardwebhooks
