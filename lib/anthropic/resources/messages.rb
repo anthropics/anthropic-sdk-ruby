@@ -163,7 +163,7 @@ module Anthropic
         raw_stream = @client.request(
           method: :post,
           path: "v1/messages",
-          headers: stream_headers("accept" => "text/event-stream"),
+          headers: stream_headers("accept" => "text/event-stream", "accept-encoding" => "identity"),
           body: parsed,
           stream: Anthropic::Internal::Stream,
           model: Anthropic::Models::RawMessageStreamEvent,
@@ -239,7 +239,7 @@ module Anthropic
         @client.request(
           method: :post,
           path: "v1/messages",
-          headers: stream_headers("accept" => "text/event-stream"),
+          headers: stream_headers("accept" => "text/event-stream", "accept-encoding" => "identity"),
           body: parsed,
           stream: Anthropic::Internal::Stream,
           model: Anthropic::RawMessageStreamEvent,
