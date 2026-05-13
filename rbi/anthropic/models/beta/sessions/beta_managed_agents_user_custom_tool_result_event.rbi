@@ -50,7 +50,8 @@ module Anthropic
                   T.any(
                     Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock::OrHash
+                    Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock::OrHash
                   )
                 ]
             ).void
@@ -82,7 +83,8 @@ module Anthropic
                   T.any(
                     Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock::OrHash
+                    Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock::OrHash
                   )
                 ],
               is_error: T.nilable(T::Boolean),
@@ -170,7 +172,8 @@ module Anthropic
                 T.any(
                   Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock,
                   Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock
+                  Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock
                 )
               end
 
