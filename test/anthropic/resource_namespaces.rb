@@ -52,6 +52,9 @@ module Anthropic
     module Helpers
       module ToolRunner
       end
+
+      module Tools
+      end
     end
   end
 end

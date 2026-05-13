@@ -35,8 +35,20 @@ module Anthropic
 
           case data
           in {tools: Array => tool_array}
+            # rubocop:disable Metrics/BlockLength
             mapped = tool_array.map do |tool|
               case tool
+              # BaseTool whose class declares an explicit `tool_name` (e.g. MCP-built tools):
+              in Anthropic::Helpers::Tools::BaseTool if tool.class.tool_name
+                name = tool.class.tool_name
+                description = tool.class.doc_string
+                tools.store(name, tool)
+                input_schema = Anthropic::Helpers::InputSchema::JsonSchemaConverter.to_json_schema(tool)
+                extras = tool.class.tool_extra_props || {}
+                result = {name:, input_schema:, **extras}
+                result[:description] = description if description
+                result[:strict] = strict if strict
+                result
               # Direct tool class:
               in Anthropic::Helpers::InputSchema::JsonSchemaConverter
                 classname = tool.is_a?(Anthropic::Helpers::Tools::BaseTool) ? tool.class.name : tool.name
@@ -68,6 +80,7 @@ module Anthropic
                 tool
               end
             end
+            # rubocop:enable Metrics/BlockLength
             tool_array.replace(mapped)
           # GA: output_config with BaseModel class as format
           in {output_config: {format: Anthropic::Helpers::InputSchema::JsonSchemaConverter => model} => output_config}

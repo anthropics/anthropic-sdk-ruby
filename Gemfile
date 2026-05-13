@@ -33,5 +33,8 @@ end
 
 group :development, :test, :optional do
   gem "aws-sdk-bedrockruntime"
+  gem "event_stream_parser"
+  gem "faraday"
   gem "googleauth"
+  gem "mcp"
 end

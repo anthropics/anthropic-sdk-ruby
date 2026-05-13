@@ -16,6 +16,24 @@ module Anthropic
           # @return [String]
           attr_reader :doc_string
 
+          # @api private
+          #
+          # When set, the runner uses this literal string as the API tool name instead of
+          # snake-casing the class name. Used by helpers (e.g. MCP) that build tools
+          # dynamically from an external definition.
+          #
+          # @return [String, nil]
+          attr_accessor :tool_name
+
+          # @api private
+          #
+          # Extra tool-definition properties merged into the API payload (e.g.
+          # `cache_control`, `defer_loading`, `allowed_callers`, `eager_input_streaming`,
+          # `input_examples`, `strict`).
+          #
+          # @return [Hash{Symbol=>Object}, nil]
+          attr_accessor :tool_extra_props
+
           # @api public
           #
           # @param description [String]
