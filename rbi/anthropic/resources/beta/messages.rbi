@@ -30,6 +30,8 @@ module Anthropic
               ),
             context_management:
               T.nilable(Anthropic::Beta::BetaContextManagementConfig::OrHash),
+            diagnostics:
+              T.nilable(Anthropic::Beta::BetaDiagnosticsParam::OrHash),
             inference_geo: T.nilable(String),
             mcp_servers:
               T::Array[
@@ -188,6 +190,9 @@ module Anthropic
           # This allows you to control how Claude manages context across multiple requests,
           # such as whether to clear function results or not.
           context_management: nil,
+          # Body param: Request-level diagnostics. Currently carries the previous response
+          # id for prompt-cache divergence reporting.
+          diagnostics: nil,
           # Body param: Specifies the geographic region for inference processing. If not
           # specified, the workspace's `default_inference_geo` is used.
           inference_geo: nil,
@@ -377,6 +382,8 @@ module Anthropic
               ),
             context_management:
               T.nilable(Anthropic::Beta::BetaContextManagementConfig::OrHash),
+            diagnostics:
+              T.nilable(Anthropic::Beta::BetaDiagnosticsParam::OrHash),
             inference_geo: T.nilable(String),
             mcp_servers:
               T::Array[
@@ -539,6 +546,9 @@ module Anthropic
           # This allows you to control how Claude manages context across multiple requests,
           # such as whether to clear function results or not.
           context_management: nil,
+          # Body param: Request-level diagnostics. Currently carries the previous response
+          # id for prompt-cache divergence reporting.
+          diagnostics: nil,
           # Body param: Specifies the geographic region for inference processing. If not
           # specified, the workspace's `default_inference_geo` is used.
           inference_geo: nil,

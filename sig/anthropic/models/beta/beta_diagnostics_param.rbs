@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaDiagnosticsParam = Beta::BetaDiagnosticsParam
+
+    module Beta
+      type beta_diagnostics_param = { previous_message_id: String? }
+
+      class BetaDiagnosticsParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor previous_message_id: String?
+
+        def initialize: (?previous_message_id: String?) -> void
+
+        def to_hash: -> { previous_message_id: String? }
+      end
+    end
+  end
+end

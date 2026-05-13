@@ -80,6 +80,18 @@ module Anthropic
         end
         attr_writer :context_management
 
+        # Response envelope for request-level diagnostics. Present (possibly null)
+        # whenever the caller supplied `diagnostics` on the request.
+        sig { returns(T.nilable(Anthropic::Beta::BetaDiagnostics)) }
+        attr_reader :diagnostics
+
+        sig do
+          params(
+            diagnostics: T.nilable(Anthropic::Beta::BetaDiagnostics::OrHash)
+          ).void
+        end
+        attr_writer :diagnostics
+
         # The model that will complete your prompt.\n\nSee
         # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
@@ -185,6 +197,7 @@ module Anthropic
               ],
             context_management:
               T.nilable(Anthropic::Beta::BetaContextManagementResponse::OrHash),
+            diagnostics: T.nilable(Anthropic::Beta::BetaDiagnostics::OrHash),
             model: T.any(Anthropic::Model::OrSymbol, String),
             stop_details:
               T.nilable(Anthropic::Beta::BetaRefusalStopDetails::OrHash),
@@ -240,6 +253,9 @@ module Anthropic
           #
           # Information about context management strategies applied during the request.
           context_management:,
+          # Response envelope for request-level diagnostics. Present (possibly null)
+          # whenever the caller supplied `diagnostics` on the request.
+          diagnostics:,
           # The model that will complete your prompt.\n\nSee
           # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
@@ -302,6 +318,7 @@ module Anthropic
               content: T::Array[Anthropic::Beta::BetaContentBlock::Variants],
               context_management:
                 T.nilable(Anthropic::Beta::BetaContextManagementResponse),
+              diagnostics: T.nilable(Anthropic::Beta::BetaDiagnostics),
               model: Anthropic::Model::Variants,
               role: Symbol,
               stop_details: T.nilable(Anthropic::Beta::BetaRefusalStopDetails),

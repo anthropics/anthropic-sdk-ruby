@@ -108,6 +108,11 @@ module Anthropic
           :"managed-agents-2026-04-01",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      CACHE_DIAGNOSIS_2026_04_07 =
+        T.let(
+          :"cache-diagnosis-2026-04-07",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
     end
   end
 end

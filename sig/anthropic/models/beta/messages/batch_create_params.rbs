@@ -62,6 +62,7 @@ module Anthropic
                 cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
                 container: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::container?,
                 context_management: Anthropic::Beta::BetaContextManagementConfig?,
+                diagnostics: Anthropic::Beta::BetaDiagnosticsParam?,
                 inference_geo: String?,
                 mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
                 metadata: Anthropic::Beta::BetaMetadata,
@@ -93,6 +94,8 @@ module Anthropic
               attr_accessor container: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::container?
 
               attr_accessor context_management: Anthropic::Beta::BetaContextManagementConfig?
+
+              attr_accessor diagnostics: Anthropic::Beta::BetaDiagnosticsParam?
 
               attr_accessor inference_geo: String?
 
@@ -177,6 +180,7 @@ module Anthropic
                 ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
                 ?container: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::container?,
                 ?context_management: Anthropic::Beta::BetaContextManagementConfig?,
+                ?diagnostics: Anthropic::Beta::BetaDiagnosticsParam?,
                 ?inference_geo: String?,
                 ?mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
                 ?metadata: Anthropic::Beta::BetaMetadata,
@@ -203,6 +207,7 @@ module Anthropic
                 cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
                 container: Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::container?,
                 context_management: Anthropic::Beta::BetaContextManagementConfig?,
+                diagnostics: Anthropic::Beta::BetaDiagnosticsParam?,
                 inference_geo: String?,
                 mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
                 metadata: Anthropic::Beta::BetaMetadata,

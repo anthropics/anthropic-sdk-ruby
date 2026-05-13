@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    class BetaCacheMissPreviousMessageNotFound = Beta::BetaCacheMissPreviousMessageNotFound
+
+    module Beta
+      type beta_cache_miss_previous_message_not_found =
+        { type: :previous_message_not_found }
+
+      class BetaCacheMissPreviousMessageNotFound < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :previous_message_not_found
+
+        def initialize: (?type: :previous_message_not_found) -> void
+
+        def to_hash: -> { type: :previous_message_not_found }
+      end
+    end
+  end
+end

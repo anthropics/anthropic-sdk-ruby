@@ -181,6 +181,13 @@ module Anthropic
               #   @return [Anthropic::Models::Beta::BetaContextManagementConfig, nil]
               optional :context_management, -> { Anthropic::Beta::BetaContextManagementConfig }, nil?: true
 
+              # @!attribute diagnostics
+              #   Request-level diagnostics. Currently carries the previous response id for
+              #   prompt-cache divergence reporting.
+              #
+              #   @return [Anthropic::Models::Beta::BetaDiagnosticsParam, nil]
+              optional :diagnostics, -> { Anthropic::Beta::BetaDiagnosticsParam }, nil?: true
+
               # @!attribute inference_geo
               #   Specifies the geographic region for inference processing. If not specified, the
               #   workspace's `default_inference_geo` is used.
@@ -428,7 +435,7 @@ module Anthropic
               #   @return [String, nil]
               optional :user_profile_id, String, nil?: true
 
-              # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil)
+              # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil)
               #   Some parameter documentations has been truncated, see
               #   {Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params} for more
               #   details.
@@ -449,6 +456,8 @@ module Anthropic
               #   @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Container identifier for reuse across requests.
               #
               #   @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Context management configuration.
+              #
+              #   @param diagnostics [Anthropic::Models::Beta::BetaDiagnosticsParam, nil] Request-level diagnostics. Currently carries the previous response
               #
               #   @param inference_geo [String, nil] Specifies the geographic region for inference processing. If not specified, the
               #
