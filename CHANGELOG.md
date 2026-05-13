@@ -1,5 +1,27 @@
 # Changelog
 
+## 1.41.0 (2026-05-13)
+
+Full Changelog: [v1.40.0...v1.41.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.40.0...v1.41.0)
+
+### Features
+
+* **api:** Add BetaManagedAgentsSearchResultBlock types ([1432542](https://github.com/anthropics/anthropic-sdk-ruby/commit/1432542b303269f23d35e5b6891518a32b5fa934))
+* **api:** Add support for cache diagnostics beta ([7ada493](https://github.com/anthropics/anthropic-sdk-ruby/commit/7ada4935e83b955b2f0b19e2940bc7dc3d336bc1))
+* **mcp:** add mcp helpers ([#934](https://github.com/anthropics/anthropic-sdk-ruby/issues/934)) ([de5b608](https://github.com/anthropics/anthropic-sdk-ruby/commit/de5b60875486a62534fb95ca13153819c601af92))
+
+
+### Bug Fixes
+
+* avoid gzip buffering during streaming on non-beta messages ([#936](https://github.com/anthropics/anthropic-sdk-ruby/issues/936)) ([8b7f779](https://github.com/anthropics/anthropic-sdk-ruby/commit/8b7f779bd9bdfc7693de679832531c32c215909a))
+* **client:** elide content type header on requests without body ([c58745a](https://github.com/anthropics/anthropic-sdk-ruby/commit/c58745aea5725531ba89aac2d64b3914232833c2))
+* handle syntax updates for ruby 4's PRISM parser ([#189](https://github.com/anthropics/anthropic-sdk-ruby/issues/189)) ([772dd65](https://github.com/anthropics/anthropic-sdk-ruby/commit/772dd65733bfd2869f846b6a9734776ed87ee7d6))
+
+
+### Chores
+
+* **api:** spec updates ([0e85c3f](https://github.com/anthropics/anthropic-sdk-ruby/commit/0e85c3f8064dd1951ef00c06ac9a709f7067eb70))
+
 ## 1.40.0 (2026-05-11)
 
 Full Changelog: [v1.39.0...v1.40.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.39.0...v1.40.0)
