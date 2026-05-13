@@ -1,0 +1,59 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_search_result_block =
+          {
+            citations: Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultCitations,
+            content: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultContent],
+            source: String,
+            title: String,
+            tool_use_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock::type_
+          }
+
+        class BetaManagedAgentsSearchResultBlock < Anthropic::Internal::Type::BaseModel
+          attr_accessor citations: Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultCitations
+
+          attr_accessor content: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultContent]
+
+          attr_accessor source: String
+
+          attr_accessor title: String
+
+          attr_accessor tool_use_id: String
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock::type_
+
+          def initialize: (
+            citations: Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultCitations,
+            content: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultContent],
+            source: String,
+            title: String,
+            tool_use_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock::type_
+          ) -> void
+
+          def to_hash: -> {
+            citations: Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultCitations,
+            content: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultContent],
+            source: String,
+            title: String,
+            tool_use_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock::type_
+          }
+
+          type type_ = :search_result
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            SEARCH_RESULT: :search_result
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock::type_]
+          end
+        end
+      end
+    end
+  end
+end

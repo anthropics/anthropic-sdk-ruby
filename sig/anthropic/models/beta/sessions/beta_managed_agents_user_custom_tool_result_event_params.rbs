@@ -51,6 +51,7 @@ module Anthropic
             Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock
             | Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock
             | Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock
+            | Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock
 
           module Content
             extend Anthropic::Internal::Type::Union

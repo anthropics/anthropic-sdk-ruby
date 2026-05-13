@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_search_result_content =
+          {
+            text: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultContent::type_
+          }
+
+        class BetaManagedAgentsSearchResultContent < Anthropic::Internal::Type::BaseModel
+          attr_accessor text: String
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultContent::type_
+
+          def initialize: (
+            text: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultContent::type_
+          ) -> void
+
+          def to_hash: -> {
+            text: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultContent::type_
+          }
+
+          type type_ = :text
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TEXT: :text
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultContent::type_]
+          end
+        end
+      end
+    end
+  end
+end

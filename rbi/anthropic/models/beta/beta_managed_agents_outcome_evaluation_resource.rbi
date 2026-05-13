@@ -37,9 +37,9 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :outcome_id
 
-        # Current evaluation state. 'pending' before the agent begins work; 'running'
-        # while producing or revising; 'evaluating' while the grader scores;
-        # 'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+        # Current evaluation state. `pending` before the agent begins work; `running`
+        # while producing or revising; `evaluating` while the grader scores;
+        # `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
         sig { returns(String) }
         attr_accessor :result
 
@@ -76,9 +76,9 @@ module Anthropic
           iteration:,
           # Server-generated outc\_ ID for this outcome.
           outcome_id:,
-          # Current evaluation state. 'pending' before the agent begins work; 'running'
-          # while producing or revising; 'evaluating' while the grader scores;
-          # 'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+          # Current evaluation state. `pending` before the agent begins work; `running`
+          # while producing or revising; `evaluating` while the grader scores;
+          # `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
           result:,
           type:
         )

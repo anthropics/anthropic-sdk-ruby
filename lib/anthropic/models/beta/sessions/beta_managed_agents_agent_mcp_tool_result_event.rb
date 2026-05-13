@@ -31,7 +31,7 @@ module Anthropic
           # @!attribute content
           #   The result content returned by the tool.
           #
-          #   @return [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock>, nil]
+          #   @return [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock>, nil]
           optional :content,
                    -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::Content] }
 
@@ -52,7 +52,7 @@ module Anthropic
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::Type]
           #
-          #   @param content [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock>] The result content returned by the tool.
+          #   @param content [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock>] The result content returned by the tool.
           #
           #   @param is_error [Boolean, nil] Whether the tool execution resulted in an error.
 
@@ -82,8 +82,11 @@ module Anthropic
             # Document content, either specified directly as base64 data, as text, or as a reference via a URL.
             variant :document, -> { Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock }
 
+            # A block containing a web search result.
+            variant :search_result, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock }
+
             # @!method self.variants
-            #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock)]
+            #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock)]
           end
         end
       end

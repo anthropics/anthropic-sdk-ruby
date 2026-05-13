@@ -37,9 +37,9 @@ module Anthropic
         required :outcome_id, String
 
         # @!attribute result
-        #   Current evaluation state. 'pending' before the agent begins work; 'running'
-        #   while producing or revising; 'evaluating' while the grader scores;
-        #   'satisfied'/'max_iterations_reached'/'failed'/'interrupted' are terminal.
+        #   Current evaluation state. `pending` before the agent begins work; `running`
+        #   while producing or revising; `evaluating` while the grader scores;
+        #   `satisfied`/`max_iterations_reached`/`failed`/`interrupted` are terminal.
         #
         #   @return [String]
         required :result, String
@@ -66,7 +66,7 @@ module Anthropic
         #
         #   @param outcome_id [String] Server-generated outc\_ ID for this outcome.
         #
-        #   @param result [String] Current evaluation state. 'pending' before the agent begins work; 'running' whil
+        #   @param result [String] Current evaluation state. `pending` before the agent begins work; `running` whil
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsOutcomeEvaluationResource::Type]
 
