@@ -47,10 +47,6 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :title
 
-          # The ID of the tool use that produced this search result.
-          sig { returns(String) }
-          attr_accessor :tool_use_id
-
           sig do
             returns(
               Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock::Type::OrSymbol
@@ -69,7 +65,6 @@ module Anthropic
                 ],
               source: String,
               title: String,
-              tool_use_id: String,
               type:
                 Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock::Type::OrSymbol
             ).returns(T.attached_class)
@@ -83,8 +78,6 @@ module Anthropic
             source:,
             # The title of the search result.
             title:,
-            # The ID of the tool use that produced this search result.
-            tool_use_id:,
             type:
           )
           end
@@ -100,7 +93,6 @@ module Anthropic
                   ],
                 source: String,
                 title: String,
-                tool_use_id: String,
                 type:
                   Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock::Type::OrSymbol
               }

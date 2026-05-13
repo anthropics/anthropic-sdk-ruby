@@ -30,18 +30,12 @@ module Anthropic
           #   @return [String]
           required :title, String
 
-          # @!attribute tool_use_id
-          #   The ID of the tool use that produced this search result.
-          #
-          #   @return [String]
-          required :tool_use_id, String
-
           # @!attribute type
           #
           #   @return [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock::Type]
           required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock::Type }
 
-          # @!method initialize(citations:, content:, source:, title:, tool_use_id:, type:)
+          # @!method initialize(citations:, content:, source:, title:, type:)
           #   A block containing a web search result.
           #
           #   @param citations [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultCitations] Citation settings for a search result.
@@ -51,8 +45,6 @@ module Anthropic
           #   @param source [String] The URL source of the search result.
           #
           #   @param title [String] The title of the search result.
-          #
-          #   @param tool_use_id [String] The ID of the tool use that produced this search result.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock::Type]
 
