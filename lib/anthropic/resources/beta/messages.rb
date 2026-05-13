@@ -40,7 +40,7 @@ module Anthropic
         # Learn more about the Messages API in our
         # [user guide](https://docs.claude.com/en/docs/initial-setup)
         #
-        # @overload create(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, betas: nil, request_options: {})
+        # @overload create(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, betas: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -53,6 +53,8 @@ module Anthropic
         # @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Body param: Container identifier for reuse across requests.
         #
         # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Context management configuration.
+        #
+        # @param diagnostics [Anthropic::Models::Beta::BetaDiagnosticsParam, nil] Body param: Request-level diagnostics. Currently carries the previous response
         #
         # @param inference_geo [String, nil] Body param: Specifies the geographic region for inference processing. If not spe
         #
@@ -148,7 +150,7 @@ module Anthropic
         # Learn more about the Messages API in our
         # [user guide](https://docs.claude.com/en/docs/initial-setup)
         #
-        # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, betas: nil, request_options: {})
+        # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, betas: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -161,6 +163,8 @@ module Anthropic
         # @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Body param: Container identifier for reuse across requests.
         #
         # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Context management configuration.
+        #
+        # @param diagnostics [Anthropic::Models::Beta::BetaDiagnosticsParam, nil] Body param: Request-level diagnostics. Currently carries the previous response
         #
         # @param inference_geo [String, nil] Body param: Specifies the geographic region for inference processing. If not spe
         #

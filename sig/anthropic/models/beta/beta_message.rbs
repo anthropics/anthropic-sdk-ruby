@@ -9,6 +9,7 @@ module Anthropic
           container: Anthropic::Beta::BetaContainer?,
           content: ::Array[Anthropic::Models::Beta::beta_content_block],
           context_management: Anthropic::Beta::BetaContextManagementResponse?,
+          diagnostics: Anthropic::Beta::BetaDiagnostics?,
           model: Anthropic::Models::model,
           role: :assistant,
           stop_details: Anthropic::Beta::BetaRefusalStopDetails?,
@@ -29,6 +30,8 @@ module Anthropic
 
         attr_accessor context_management: Anthropic::Beta::BetaContextManagementResponse?
 
+        attr_accessor diagnostics: Anthropic::Beta::BetaDiagnostics?
+
         attr_accessor model: Anthropic::Models::model
 
         attr_accessor role: :assistant
@@ -48,6 +51,7 @@ module Anthropic
           container: Anthropic::Beta::BetaContainer?,
           content: ::Array[Anthropic::Models::Beta::beta_content_block],
           context_management: Anthropic::Beta::BetaContextManagementResponse?,
+          diagnostics: Anthropic::Beta::BetaDiagnostics?,
           model: Anthropic::Models::model,
           stop_details: Anthropic::Beta::BetaRefusalStopDetails?,
           stop_reason: Anthropic::Models::Beta::beta_stop_reason?,
@@ -62,6 +66,7 @@ module Anthropic
           container: Anthropic::Beta::BetaContainer?,
           content: ::Array[Anthropic::Models::Beta::beta_content_block],
           context_management: Anthropic::Beta::BetaContextManagementResponse?,
+          diagnostics: Anthropic::Beta::BetaDiagnostics?,
           model: Anthropic::Models::model,
           role: :assistant,
           stop_details: Anthropic::Beta::BetaRefusalStopDetails?,

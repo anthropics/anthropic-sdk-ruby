@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    class BetaCacheMissSystemChanged = Beta::BetaCacheMissSystemChanged
+
+    module Beta
+      type beta_cache_miss_system_changed =
+        { cache_missed_input_tokens: Integer, type: :system_changed }
+
+      class BetaCacheMissSystemChanged < Anthropic::Internal::Type::BaseModel
+        attr_accessor cache_missed_input_tokens: Integer
+
+        attr_accessor type: :system_changed
+
+        def initialize: (
+          cache_missed_input_tokens: Integer,
+          ?type: :system_changed
+        ) -> void
+
+        def to_hash: -> {
+          cache_missed_input_tokens: Integer,
+          type: :system_changed
+        }
+      end
+    end
+  end
+end

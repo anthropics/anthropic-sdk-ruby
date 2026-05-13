@@ -21,6 +21,7 @@ class Anthropic::Test::Resources::Beta::MessagesTest < Anthropic::Test::Resource
         container: Anthropic::Beta::BetaContainer | nil,
         content: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaContentBlock]),
         context_management: Anthropic::Beta::BetaContextManagementResponse | nil,
+        diagnostics: Anthropic::Beta::BetaDiagnostics | nil,
         model: Anthropic::Model,
         role: Symbol,
         stop_details: Anthropic::Beta::BetaRefusalStopDetails | nil,

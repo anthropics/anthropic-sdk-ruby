@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaCacheMissUnavailable = Beta::BetaCacheMissUnavailable
+
+    module Beta
+      type beta_cache_miss_unavailable = { type: :unavailable }
+
+      class BetaCacheMissUnavailable < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :unavailable
+
+        def initialize: (?type: :unavailable) -> void
+
+        def to_hash: -> { type: :unavailable }
+      end
+    end
+  end
+end

@@ -1,0 +1,38 @@
+module Anthropic
+  module Models
+    class BetaDiagnostics = Beta::BetaDiagnostics
+
+    module Beta
+      type beta_diagnostics =
+        {
+          cache_miss_reason: Anthropic::Models::Beta::BetaDiagnostics::cache_miss_reason?
+        }
+
+      class BetaDiagnostics < Anthropic::Internal::Type::BaseModel
+        attr_accessor cache_miss_reason: Anthropic::Models::Beta::BetaDiagnostics::cache_miss_reason?
+
+        def initialize: (
+          cache_miss_reason: Anthropic::Models::Beta::BetaDiagnostics::cache_miss_reason?
+        ) -> void
+
+        def to_hash: -> {
+          cache_miss_reason: Anthropic::Models::Beta::BetaDiagnostics::cache_miss_reason?
+        }
+
+        type cache_miss_reason =
+          Anthropic::Beta::BetaCacheMissModelChanged
+          | Anthropic::Beta::BetaCacheMissSystemChanged
+          | Anthropic::Beta::BetaCacheMissToolsChanged
+          | Anthropic::Beta::BetaCacheMissMessagesChanged
+          | Anthropic::Beta::BetaCacheMissPreviousMessageNotFound
+          | Anthropic::Beta::BetaCacheMissUnavailable
+
+        module CacheMissReason
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaDiagnostics::cache_miss_reason]
+        end
+      end
+    end
+  end
+end
