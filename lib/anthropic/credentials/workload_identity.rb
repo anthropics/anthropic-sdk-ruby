@@ -156,9 +156,17 @@ module Anthropic
         end
 
         data = JSON.parse(response.body, symbolize_names: true)
+        # NOTE: kept as two separate `in` clauses (Integer / String) rather than
+        # `(Integer | String) => expires_in`. The alternative-pattern-with-capture
+        # form parses fine on Ruby 4 but is rejected by
+        # `RubyVM::InstructionSequence.compile_file` with
+        # `alternative pattern after variable capture (SyntaxError)`, which
+        # breaks bootsnap's iseq-precompile pass (i.e. every Rails boot).
         token, expires_in =
           case data
-          in {access_token: String => token, expires_in: (Integer | String) => expires_in}
+          in {access_token: String => token, expires_in: Integer => expires_in}
+            [token, expires_in.to_i]
+          in {access_token: String => token, expires_in: String => expires_in}
             [token, expires_in.to_i]
           in {access_token: String => token}
             [token, 3600]
