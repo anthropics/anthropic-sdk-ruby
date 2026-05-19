@@ -1,0 +1,41 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsAgentToolset20260401EditInput = Beta::BetaManagedAgentsAgentToolset20260401EditInput
+
+    module Beta
+      type beta_managed_agents_agent_toolset20260401_edit_input =
+        {
+          file_path: String,
+          new_string: String,
+          old_string: String,
+          replace_all: bool
+        }
+
+      class BetaManagedAgentsAgentToolset20260401EditInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor file_path: String
+
+        attr_accessor new_string: String
+
+        attr_accessor old_string: String
+
+        attr_reader replace_all: bool?
+
+        def replace_all=: (bool) -> bool
+
+        def initialize: (
+          file_path: String,
+          new_string: String,
+          old_string: String,
+          ?replace_all: bool
+        ) -> void
+
+        def to_hash: -> {
+          file_path: String,
+          new_string: String,
+          old_string: String,
+          replace_all: bool
+        }
+      end
+    end
+  end
+end

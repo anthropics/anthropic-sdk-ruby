@@ -1,0 +1,32 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsAgentToolset20260401BashInput = Beta::BetaManagedAgentsAgentToolset20260401BashInput
+
+    module Beta
+      type beta_managed_agents_agent_toolset20260401_bash_input =
+        { command: String, restart: bool, timeout_ms: Integer }
+
+      class BetaManagedAgentsAgentToolset20260401BashInput < Anthropic::Internal::Type::BaseModel
+        attr_reader command: String?
+
+        def command=: (String) -> String
+
+        attr_reader restart: bool?
+
+        def restart=: (bool) -> bool
+
+        attr_reader timeout_ms: Integer?
+
+        def timeout_ms=: (Integer) -> Integer
+
+        def initialize: (
+          ?command: String,
+          ?restart: bool,
+          ?timeout_ms: Integer
+        ) -> void
+
+        def to_hash: -> { command: String, restart: bool, timeout_ms: Integer }
+      end
+    end
+  end
+end

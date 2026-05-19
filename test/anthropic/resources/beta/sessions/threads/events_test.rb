@@ -55,7 +55,9 @@ class Anthropic::Test::Resources::Beta::Sessions::Threads::EventsTest < Anthropi
       in Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent
       in Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent
       in Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent
+      in Anthropic::Beta::BetaManagedAgentsUserToolResultEvent
       in Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent
+      in Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent
       end
     end
 
@@ -224,11 +226,28 @@ class Anthropic::Test::Resources::Beta::Sessions::Threads::EventsTest < Anthropi
         session_thread_id: String
       }
       in {
+        type: :"user.tool_result",
+        id: String,
+        tool_use_id: String,
+        content: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaManagedAgentsUserToolResultEvent::Content]) | nil,
+        is_error: Anthropic::Internal::Type::Boolean | nil,
+        processed_at: Time | nil,
+        session_thread_id: String | nil
+      }
+      in {
         type: :"session.thread_status_rescheduled",
         id: String,
         agent_name: String,
         processed_at: Time,
         session_thread_id: String
+      }
+      in {
+        type: :"session.updated",
+        id: String,
+        processed_at: Time,
+        agent: Anthropic::Beta::BetaManagedAgentsSessionAgent | nil,
+        metadata: ^(Anthropic::Internal::Type::HashOf[String]) | nil,
+        title: String | nil
       }
       end
     end

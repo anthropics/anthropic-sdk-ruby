@@ -142,6 +142,39 @@ module Anthropic
             )
           end
 
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Skills::VersionDownloadParams} for more details.
+          #
+          # Download a skill version's content as a zip archive.
+          #
+          # @overload download(version, skill_id:, betas: nil, request_options: {})
+          #
+          # @param version [String] Path param: Version identifier for the skill.
+          #
+          # @param skill_id [String] Path param: Unique identifier for the skill.
+          #
+          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
+          #
+          # @return [StringIO]
+          #
+          # @see Anthropic::Models::Beta::Skills::VersionDownloadParams
+          def download(version, params)
+            parsed, options = Anthropic::Beta::Skills::VersionDownloadParams.dump_request(params)
+            skill_id =
+              parsed.delete(:skill_id) do
+                raise ArgumentError.new("missing required path argument #{_1}")
+              end
+            @client.request(
+              method: :get,
+              path: ["v1/skills/%1$s/versions/%2$s/content?beta=true", skill_id, version],
+              headers: {"accept" => "application/binary", **parsed}.transform_keys(betas: "anthropic-beta"),
+              model: StringIO,
+              options: {extra_headers: {"anthropic-beta" => "skills-2025-10-02"}, **options}
+            )
+          end
+
           # @api private
           #
           # @param client [Anthropic::Client]

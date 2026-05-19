@@ -10,6 +10,9 @@ module Anthropic
         module Agents
         end
 
+        module Environments
+        end
+
         module MemoryStores
         end
 
@@ -26,6 +29,9 @@ module Anthropic
 
         module Vaults
         end
+      end
+
+      module Environments
       end
 
       module MemoryStores

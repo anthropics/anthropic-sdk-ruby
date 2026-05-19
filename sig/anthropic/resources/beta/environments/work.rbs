@@ -1,0 +1,73 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Environments
+        class Work
+          def retrieve: (
+            String work_id,
+            environment_id: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Environments::BetaSelfHostedWork
+
+          def update: (
+            String work_id,
+            environment_id: String,
+            metadata: ::Hash[Symbol, String?],
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Environments::BetaSelfHostedWork
+
+          def list: (
+            String environment_id,
+            ?limit: Integer,
+            ?page: String?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Environments::BetaSelfHostedWork]
+
+          def ack: (
+            String work_id,
+            environment_id: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Environments::BetaSelfHostedWork
+
+          def heartbeat: (
+            String work_id,
+            environment_id: String,
+            ?desired_ttl_seconds: Integer?,
+            ?expected_last_heartbeat: String?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Environments::BetaSelfHostedWorkHeartbeatResponse
+
+          def poll: (
+            String environment_id,
+            ?block_ms: Integer?,
+            ?reclaim_older_than_ms: Integer?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?anthropic_worker_id: String,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Environments::BetaSelfHostedWork?
+
+          def stats: (
+            String environment_id,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Environments::BetaSelfHostedWorkQueueStats
+
+          def stop: (
+            String work_id,
+            environment_id: String,
+            ?force: bool,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Environments::BetaSelfHostedWork
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

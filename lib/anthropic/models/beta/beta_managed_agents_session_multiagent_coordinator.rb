@@ -7,9 +7,9 @@ module Anthropic
         # @!attribute agents
         #   Full `agent` definitions the coordinator may spawn as session threads.
         #
-        #   @return [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent>]
+        #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent>]
         required :agents,
-                 -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent] }
+                 -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaManagedAgentsSessionThreadAgent] }
 
         # @!attribute type
         #
@@ -20,7 +20,7 @@ module Anthropic
         #   Resolved coordinator topology with full agent definitions for each roster
         #   member.
         #
-        #   @param agents [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent>] Full `agent` definitions the coordinator may spawn as session threads.
+        #   @param agents [Array<Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent>] Full `agent` definitions the coordinator may spawn as session threads.
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::Type]
 

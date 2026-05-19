@@ -87,4 +87,12 @@ class Anthropic::Test::Resources::Beta::Skills::VersionsTest < Anthropic::Test::
       }
     end
   end
+
+  def test_download_required_params
+    response = @anthropic.beta.skills.versions.download("version", skill_id: "skill_id")
+
+    assert_pattern do
+      response => StringIO
+    end
+  end
 end

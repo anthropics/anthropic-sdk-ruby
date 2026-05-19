@@ -17,8 +17,8 @@ module Anthropic
           #   at thread creation time. The multiagent roster is not repeated here; read it
           #   from `Session.agent`.
           #
-          #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent]
-          required :agent, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent }
+          #   @return [Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent]
+          required :agent, -> { Anthropic::Beta::BetaManagedAgentsSessionThreadAgent }
 
           # @!attribute archived_at
           #   A timestamp in RFC 3339 format
@@ -83,7 +83,7 @@ module Anthropic
           #
           #   @param id [String] Unique identifier for this thread.
           #
-          #   @param agent [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadAgent] Resolved `agent` definition for a single `session_thread`. Snapshot of the agent
+          #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent] Resolved `agent` definition for a single `session_thread`. Snapshot of the agent
           #
           #   @param archived_at [Time, nil] A timestamp in RFC 3339 format
           #

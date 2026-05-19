@@ -18,9 +18,7 @@ module Anthropic
         # Full `agent` definitions the coordinator may spawn as session threads.
         sig do
           returns(
-            T::Array[
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent
-            ]
+            T::Array[Anthropic::Beta::BetaManagedAgentsSessionThreadAgent]
           )
         end
         attr_accessor :agents
@@ -38,7 +36,7 @@ module Anthropic
           params(
             agents:
               T::Array[
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent::OrHash
+                Anthropic::Beta::BetaManagedAgentsSessionThreadAgent::OrHash
               ],
             type:
               Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator::Type::OrSymbol
@@ -55,9 +53,7 @@ module Anthropic
           override.returns(
             {
               agents:
-                T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent
-                ],
+                T::Array[Anthropic::Beta::BetaManagedAgentsSessionThreadAgent],
               type:
                 Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator::Type::TaggedSymbol
             }

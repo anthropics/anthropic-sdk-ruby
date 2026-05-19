@@ -18,6 +18,23 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :session_id
 
+        # Mid-session agent configuration update. Only `tools` and `mcp_servers` are
+        # updatable. Full replacement: the provided array becomes the new value. To
+        # preserve existing entries, GET the session, modify the array, and POST it back.
+        sig do
+          returns(
+            T.nilable(Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate)
+          )
+        end
+        attr_reader :agent
+
+        sig do
+          params(
+            agent: Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate::OrHash
+          ).void
+        end
+        attr_writer :agent
+
         # Metadata patch. Set a key to a string to upsert it, or to null to delete it.
         # Omit the field to preserve.
         sig { returns(T.nilable(T::Hash[Symbol, T.nilable(String)])) }
@@ -55,6 +72,7 @@ module Anthropic
         sig do
           params(
             session_id: String,
+            agent: Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate::OrHash,
             metadata: T.nilable(T::Hash[Symbol, T.nilable(String)]),
             title: T.nilable(String),
             vault_ids: T::Array[String],
@@ -64,6 +82,10 @@ module Anthropic
         end
         def self.new(
           session_id:,
+          # Mid-session agent configuration update. Only `tools` and `mcp_servers` are
+          # updatable. Full replacement: the provided array becomes the new value. To
+          # preserve existing entries, GET the session, modify the array, and POST it back.
+          agent: nil,
           # Metadata patch. Set a key to a string to upsert it, or to null to delete it.
           # Omit the field to preserve.
           metadata: nil,
@@ -82,6 +104,7 @@ module Anthropic
           override.returns(
             {
               session_id: String,
+              agent: Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate,
               metadata: T.nilable(T::Hash[Symbol, T.nilable(String)]),
               title: T.nilable(String),
               vault_ids: T::Array[String],

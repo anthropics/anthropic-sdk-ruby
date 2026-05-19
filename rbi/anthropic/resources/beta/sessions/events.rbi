@@ -66,7 +66,8 @@ module Anthropic
                     Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::OrHash
+                    Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams::OrHash
                   )
                 ],
               betas:

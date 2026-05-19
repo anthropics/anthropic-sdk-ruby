@@ -1,0 +1,80 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsUserToolResultEvent = Beta::BetaManagedAgentsUserToolResultEvent
+
+    module Beta
+      type beta_managed_agents_user_tool_result_event =
+        {
+          id: String,
+          tool_use_id: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent::type_,
+          content: ::Array[Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent::content],
+          is_error: bool?,
+          processed_at: Time?,
+          session_thread_id: String?
+        }
+
+      class BetaManagedAgentsUserToolResultEvent < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor tool_use_id: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent::type_
+
+        attr_reader content: ::Array[Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent::content]?
+
+        def content=: (
+          ::Array[Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent::content]
+        ) -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent::content]
+
+        attr_accessor is_error: bool?
+
+        attr_accessor processed_at: Time?
+
+        attr_accessor session_thread_id: String?
+
+        def initialize: (
+          id: String,
+          tool_use_id: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent::type_,
+          ?content: ::Array[Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent::content],
+          ?is_error: bool?,
+          ?processed_at: Time?,
+          ?session_thread_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          tool_use_id: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent::type_,
+          content: ::Array[Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent::content],
+          is_error: bool?,
+          processed_at: Time?,
+          session_thread_id: String?
+        }
+
+        type type_ = :"user.tool_result"
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          USER_TOOL_RESULT: :"user.tool_result"
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent::type_]
+        end
+
+        type content =
+          Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock
+          | Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock
+          | Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock
+          | Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock
+
+        module Content
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent::content]
+        end
+      end
+    end
+  end
+end

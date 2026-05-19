@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    module Beta
+      module Environments
+        type beta_self_hosted_work_list_response =
+          {
+            data: ::Array[Anthropic::Beta::Environments::BetaSelfHostedWork],
+            next_page: String?
+          }
+
+        class BetaSelfHostedWorkListResponse < Anthropic::Internal::Type::BaseModel
+          attr_accessor data: ::Array[Anthropic::Beta::Environments::BetaSelfHostedWork]
+
+          attr_accessor next_page: String?
+
+          def initialize: (
+            data: ::Array[Anthropic::Beta::Environments::BetaSelfHostedWork],
+            next_page: String?
+          ) -> void
+
+          def to_hash: -> {
+            data: ::Array[Anthropic::Beta::Environments::BetaSelfHostedWork],
+            next_page: String?
+          }
+        end
+      end
+    end
+  end
+end

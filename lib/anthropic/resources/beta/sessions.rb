@@ -81,9 +81,11 @@ module Anthropic
         #
         # Update Session
         #
-        # @overload update(session_id, metadata: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
+        # @overload update(session_id, agent: nil, metadata: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
         #
         # @param session_id [String] Path param: Path parameter session_id
+        #
+        # @param agent [Anthropic::Models::Beta::BetaManagedAgentsSessionAgentUpdate] Body param: Mid-session agent configuration update. Only `tools` and `mcp_server
         #
         # @param metadata [Hash{Symbol=>String, nil}, nil] Body param: Metadata patch. Set a key to a string to upsert it, or to null to de
         #

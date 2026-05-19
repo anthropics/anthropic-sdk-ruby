@@ -1,0 +1,54 @@
+module Anthropic
+  module Models
+    module Beta
+      module Environments
+        type work_heartbeat_params =
+          {
+            environment_id: String,
+            work_id: String,
+            desired_ttl_seconds: Integer?,
+            expected_last_heartbeat: String?,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class WorkHeartbeatParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor environment_id: String
+
+          attr_accessor work_id: String
+
+          attr_accessor desired_ttl_seconds: Integer?
+
+          attr_accessor expected_last_heartbeat: String?
+
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          def initialize: (
+            environment_id: String,
+            work_id: String,
+            ?desired_ttl_seconds: Integer?,
+            ?expected_last_heartbeat: String?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            environment_id: String,
+            work_id: String,
+            desired_ttl_seconds: Integer?,
+            expected_last_heartbeat: String?,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

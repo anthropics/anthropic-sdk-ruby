@@ -19,18 +19,18 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :name
 
-        # Request params for `cloud` environment configuration.
-        #
-        # Fields default to null; on update, omitted fields preserve the existing value.
-        sig { returns(T.nilable(Anthropic::Beta::BetaCloudConfigParams)) }
-        attr_reader :config
-
+        # Environment configuration
         sig do
-          params(
-            config: T.nilable(Anthropic::Beta::BetaCloudConfigParams::OrHash)
-          ).void
+          returns(
+            T.nilable(
+              T.any(
+                Anthropic::Beta::BetaCloudConfigParams,
+                Anthropic::Beta::BetaSelfHostedConfigParams
+              )
+            )
+          )
         end
-        attr_writer :config
+        attr_accessor :config
 
         # Optional description of the environment
         sig { returns(T.nilable(String)) }
@@ -42,6 +42,17 @@ module Anthropic
 
         sig { params(metadata: T::Hash[Symbol, String]).void }
         attr_writer :metadata
+
+        # The visibility scope for this environment. 'organization' makes the environment
+        # visible to all accounts. 'account' restricts visibility to the owning account
+        # only. Only applicable for self-hosted environments. If not specified, defaults
+        # based on organization type.
+        sig do
+          returns(
+            T.nilable(Anthropic::Beta::EnvironmentCreateParams::Scope::OrSymbol)
+          )
+        end
+        attr_accessor :scope
 
         # Optional header to specify the beta version(s) you want to use.
         sig do
@@ -63,9 +74,19 @@ module Anthropic
         sig do
           params(
             name: String,
-            config: T.nilable(Anthropic::Beta::BetaCloudConfigParams::OrHash),
+            config:
+              T.nilable(
+                T.any(
+                  Anthropic::Beta::BetaCloudConfigParams::OrHash,
+                  Anthropic::Beta::BetaSelfHostedConfigParams::OrHash
+                )
+              ),
             description: T.nilable(String),
             metadata: T::Hash[Symbol, String],
+            scope:
+              T.nilable(
+                Anthropic::Beta::EnvironmentCreateParams::Scope::OrSymbol
+              ),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
@@ -73,14 +94,17 @@ module Anthropic
         def self.new(
           # Human-readable name for the environment
           name:,
-          # Request params for `cloud` environment configuration.
-          #
-          # Fields default to null; on update, omitted fields preserve the existing value.
+          # Environment configuration
           config: nil,
           # Optional description of the environment
           description: nil,
           # User-provided metadata key-value pairs
           metadata: nil,
+          # The visibility scope for this environment. 'organization' makes the environment
+          # visible to all accounts. 'account' restricts visibility to the owning account
+          # only. Only applicable for self-hosted environments. If not specified, defaults
+          # based on organization type.
+          scope: nil,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}
@@ -91,9 +115,19 @@ module Anthropic
           override.returns(
             {
               name: String,
-              config: T.nilable(Anthropic::Beta::BetaCloudConfigParams),
+              config:
+                T.nilable(
+                  T.any(
+                    Anthropic::Beta::BetaCloudConfigParams,
+                    Anthropic::Beta::BetaSelfHostedConfigParams
+                  )
+                ),
               description: T.nilable(String),
               metadata: T::Hash[Symbol, String],
+              scope:
+                T.nilable(
+                  Anthropic::Beta::EnvironmentCreateParams::Scope::OrSymbol
+                ),
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               request_options: Anthropic::RequestOptions
@@ -101,6 +135,64 @@ module Anthropic
           )
         end
         def to_hash
+        end
+
+        # Environment configuration
+        module Config
+          extend Anthropic::Internal::Type::Union
+
+          Variants =
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::BetaCloudConfigParams,
+                Anthropic::Beta::BetaSelfHostedConfigParams
+              )
+            end
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::EnvironmentCreateParams::Config::Variants
+              ]
+            )
+          end
+          def self.variants
+          end
+        end
+
+        # The visibility scope for this environment. 'organization' makes the environment
+        # visible to all accounts. 'account' restricts visibility to the owning account
+        # only. Only applicable for self-hosted environments. If not specified, defaults
+        # based on organization type.
+        module Scope
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::Beta::EnvironmentCreateParams::Scope)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          ORGANIZATION =
+            T.let(
+              :organization,
+              Anthropic::Beta::EnvironmentCreateParams::Scope::TaggedSymbol
+            )
+          ACCOUNT =
+            T.let(
+              :account,
+              Anthropic::Beta::EnvironmentCreateParams::Scope::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::EnvironmentCreateParams::Scope::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
       end
     end

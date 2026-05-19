@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Environments
+        type beta_self_hosted_work_update_request =
+          { metadata: ::Hash[Symbol, String?] }
+
+        class BetaSelfHostedWorkUpdateRequest < Anthropic::Internal::Type::BaseModel
+          attr_accessor metadata: ::Hash[Symbol, String?]
+
+          def initialize: (metadata: ::Hash[Symbol, String?]) -> void
+
+          def to_hash: -> { metadata: ::Hash[Symbol, String?] }
+        end
+      end
+    end
+  end
+end

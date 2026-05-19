@@ -1,0 +1,65 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_user_tool_result_event_params =
+          {
+            tool_use_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams::type_,
+            content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams::content],
+            is_error: bool?
+          }
+
+        class BetaManagedAgentsUserToolResultEventParams < Anthropic::Internal::Type::BaseModel
+          attr_accessor tool_use_id: String
+
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams::type_
+
+          attr_reader content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams::content]?
+
+          def content=: (
+            ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams::content]
+          ) -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams::content]
+
+          attr_accessor is_error: bool?
+
+          def initialize: (
+            tool_use_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams::type_,
+            ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams::content],
+            ?is_error: bool?
+          ) -> void
+
+          def to_hash: -> {
+            tool_use_id: String,
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams::type_,
+            content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams::content],
+            is_error: bool?
+          }
+
+          type type_ = :"user.tool_result"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            USER_TOOL_RESULT: :"user.tool_result"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams::type_]
+          end
+
+          type content =
+            Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock
+            | Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock
+            | Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock
+            | Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock
+
+          module Content
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams::content]
+          end
+        end
+      end
+    end
+  end
+end

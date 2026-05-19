@@ -2,11 +2,14 @@ module Anthropic
   module Resources
     class Beta
       class Environments
+        attr_reader work: Anthropic::Resources::Beta::Environments::Work
+
         def create: (
           name: String,
-          ?config: Anthropic::Beta::BetaCloudConfigParams?,
+          ?config: Anthropic::Models::Beta::EnvironmentCreateParams::config?,
           ?description: String?,
           ?metadata: ::Hash[Symbol, String],
+          ?scope: Anthropic::Models::Beta::EnvironmentCreateParams::scope?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaEnvironment
@@ -19,10 +22,11 @@ module Anthropic
 
         def update: (
           String environment_id,
-          ?config: Anthropic::Beta::BetaCloudConfigParams?,
+          ?config: Anthropic::Models::Beta::EnvironmentUpdateParams::config?,
           ?description: String?,
           ?metadata: ::Hash[Symbol, String?],
           ?name: String?,
+          ?scope: Anthropic::Models::Beta::EnvironmentUpdateParams::scope?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaEnvironment

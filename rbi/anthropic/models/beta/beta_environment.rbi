@@ -22,12 +22,9 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :archived_at
 
-        # `cloud` environment configuration.
-        sig { returns(Anthropic::Beta::BetaCloudConfig) }
-        attr_reader :config
-
-        sig { params(config: Anthropic::Beta::BetaCloudConfig::OrHash).void }
-        attr_writer :config
+        # Environment configuration (either Anthropic Cloud or self-hosted)
+        sig { returns(Anthropic::Beta::BetaEnvironment::Config::Variants) }
+        attr_accessor :config
 
         # RFC 3339 timestamp when environment was created
         sig { returns(String) }
@@ -53,17 +50,36 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :updated_at
 
+        # The visibility scope for this environment. 'organization' means visible to all
+        # accounts. 'account' means visible only to the owning account.
+        sig do
+          returns(
+            T.nilable(Anthropic::Beta::BetaEnvironment::Scope::TaggedSymbol)
+          )
+        end
+        attr_reader :scope
+
+        sig do
+          params(scope: Anthropic::Beta::BetaEnvironment::Scope::OrSymbol).void
+        end
+        attr_writer :scope
+
         # Unified Environment resource for both cloud and self-hosted environments.
         sig do
           params(
             id: String,
             archived_at: T.nilable(String),
-            config: Anthropic::Beta::BetaCloudConfig::OrHash,
+            config:
+              T.any(
+                Anthropic::Beta::BetaCloudConfig::OrHash,
+                Anthropic::Beta::BetaSelfHostedConfig::OrHash
+              ),
             created_at: String,
             description: String,
             metadata: T::Hash[Symbol, String],
             name: String,
             updated_at: String,
+            scope: Anthropic::Beta::BetaEnvironment::Scope::OrSymbol,
             type: Symbol
           ).returns(T.attached_class)
         end
@@ -72,7 +88,7 @@ module Anthropic
           id:,
           # RFC 3339 timestamp when environment was archived, or null if not archived
           archived_at:,
-          # `cloud` environment configuration.
+          # Environment configuration (either Anthropic Cloud or self-hosted)
           config:,
           # RFC 3339 timestamp when environment was created
           created_at:,
@@ -84,6 +100,9 @@ module Anthropic
           name:,
           # RFC 3339 timestamp when environment was last updated
           updated_at:,
+          # The visibility scope for this environment. 'organization' means visible to all
+          # accounts. 'account' means visible only to the owning account.
+          scope: nil,
           # The type of object (always 'environment')
           type: :environment
         )
@@ -94,17 +113,70 @@ module Anthropic
             {
               id: String,
               archived_at: T.nilable(String),
-              config: Anthropic::Beta::BetaCloudConfig,
+              config: Anthropic::Beta::BetaEnvironment::Config::Variants,
               created_at: String,
               description: String,
               metadata: T::Hash[Symbol, String],
               name: String,
               type: Symbol,
-              updated_at: String
+              updated_at: String,
+              scope: Anthropic::Beta::BetaEnvironment::Scope::TaggedSymbol
             }
           )
         end
         def to_hash
+        end
+
+        # Environment configuration (either Anthropic Cloud or self-hosted)
+        module Config
+          extend Anthropic::Internal::Type::Union
+
+          Variants =
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::BetaCloudConfig,
+                Anthropic::Beta::BetaSelfHostedConfig
+              )
+            end
+
+          sig do
+            override.returns(
+              T::Array[Anthropic::Beta::BetaEnvironment::Config::Variants]
+            )
+          end
+          def self.variants
+          end
+        end
+
+        # The visibility scope for this environment. 'organization' means visible to all
+        # accounts. 'account' means visible only to the owning account.
+        module Scope
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::Beta::BetaEnvironment::Scope)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          ORGANIZATION =
+            T.let(
+              :organization,
+              Anthropic::Beta::BetaEnvironment::Scope::TaggedSymbol
+            )
+          ACCOUNT =
+            T.let(
+              :account,
+              Anthropic::Beta::BetaEnvironment::Scope::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[Anthropic::Beta::BetaEnvironment::Scope::TaggedSymbol]
+            )
+          end
+          def self.values
+          end
         end
       end
     end

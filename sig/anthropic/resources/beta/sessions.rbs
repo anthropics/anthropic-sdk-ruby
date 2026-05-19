@@ -27,6 +27,7 @@ module Anthropic
 
         def update: (
           String session_id,
+          ?agent: Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate,
           ?metadata: ::Hash[Symbol, String?]?,
           ?title: String?,
           ?vault_ids: ::Array[String],

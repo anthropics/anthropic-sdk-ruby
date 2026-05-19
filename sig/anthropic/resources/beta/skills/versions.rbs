@@ -32,6 +32,13 @@ module Anthropic
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Models::Beta::Skills::VersionDeleteResponse
 
+          def download: (
+            String version,
+            skill_id: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> StringIO
+
           def initialize: (client: Anthropic::Client) -> void
         end
       end

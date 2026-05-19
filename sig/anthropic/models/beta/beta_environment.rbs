@@ -7,13 +7,14 @@ module Anthropic
         {
           id: String,
           archived_at: String?,
-          config: Anthropic::Beta::BetaCloudConfig,
+          config: Anthropic::Models::Beta::BetaEnvironment::config,
           created_at: String,
           description: String,
           metadata: ::Hash[Symbol, String],
           name: String,
           type: :environment,
-          updated_at: String
+          updated_at: String,
+          scope: Anthropic::Models::Beta::BetaEnvironment::scope
         }
 
       class BetaEnvironment < Anthropic::Internal::Type::BaseModel
@@ -21,7 +22,7 @@ module Anthropic
 
         attr_accessor archived_at: String?
 
-        attr_accessor config: Anthropic::Beta::BetaCloudConfig
+        attr_accessor config: Anthropic::Models::Beta::BetaEnvironment::config
 
         attr_accessor created_at: String
 
@@ -35,29 +36,58 @@ module Anthropic
 
         attr_accessor updated_at: String
 
+        attr_reader scope: Anthropic::Models::Beta::BetaEnvironment::scope?
+
+        def scope=: (
+          Anthropic::Models::Beta::BetaEnvironment::scope
+        ) -> Anthropic::Models::Beta::BetaEnvironment::scope
+
         def initialize: (
           id: String,
           archived_at: String?,
-          config: Anthropic::Beta::BetaCloudConfig,
+          config: Anthropic::Models::Beta::BetaEnvironment::config,
           created_at: String,
           description: String,
           metadata: ::Hash[Symbol, String],
           name: String,
           updated_at: String,
+          ?scope: Anthropic::Models::Beta::BetaEnvironment::scope,
           ?type: :environment
         ) -> void
 
         def to_hash: -> {
           id: String,
           archived_at: String?,
-          config: Anthropic::Beta::BetaCloudConfig,
+          config: Anthropic::Models::Beta::BetaEnvironment::config,
           created_at: String,
           description: String,
           metadata: ::Hash[Symbol, String],
           name: String,
           type: :environment,
-          updated_at: String
+          updated_at: String,
+          scope: Anthropic::Models::Beta::BetaEnvironment::scope
         }
+
+        type config =
+          Anthropic::Beta::BetaCloudConfig
+          | Anthropic::Beta::BetaSelfHostedConfig
+
+        module Config
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaEnvironment::config]
+        end
+
+        type scope = :organization | :account
+
+        module Scope
+          extend Anthropic::Internal::Type::Enum
+
+          ORGANIZATION: :organization
+          ACCOUNT: :account
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaEnvironment::scope]
+        end
       end
     end
   end

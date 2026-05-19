@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsAgentToolset20260401WriteInput = Beta::BetaManagedAgentsAgentToolset20260401WriteInput
+
+    module Beta
+      type beta_managed_agents_agent_toolset20260401_write_input =
+        { content: String, file_path: String }
+
+      class BetaManagedAgentsAgentToolset20260401WriteInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: String
+
+        attr_accessor file_path: String
+
+        def initialize: (content: String, file_path: String) -> void
+
+        def to_hash: -> { content: String, file_path: String }
+      end
+    end
+  end
+end

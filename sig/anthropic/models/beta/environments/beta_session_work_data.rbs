@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    module Beta
+      module Environments
+        type beta_session_work_data = { id: String, type: :session }
+
+        class BetaSessionWorkData < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor type: :session
+
+          def initialize: (id: String, ?type: :session) -> void
+
+          def to_hash: -> { id: String, type: :session }
+        end
+      end
+    end
+  end
+end

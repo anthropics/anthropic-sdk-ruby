@@ -83,6 +83,7 @@ module Anthropic
         sig do
           params(
             session_id: String,
+            agent: Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate::OrHash,
             metadata: T.nilable(T::Hash[Symbol, T.nilable(String)]),
             title: T.nilable(String),
             vault_ids: T::Array[String],
@@ -93,6 +94,11 @@ module Anthropic
         def update(
           # Path param: Path parameter session_id
           session_id,
+          # Body param: Mid-session agent configuration update. Only `tools` and
+          # `mcp_servers` are updatable. Full replacement: the provided array becomes the
+          # new value. To preserve existing entries, GET the session, modify the array, and
+          # POST it back.
+          agent: nil,
           # Body param: Metadata patch. Set a key to a string to upsert it, or to null to
           # delete it. Omit the field to preserve.
           metadata: nil,

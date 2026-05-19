@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsAgentToolset20260401GlobInput = Beta::BetaManagedAgentsAgentToolset20260401GlobInput
+
+    module Beta
+      type beta_managed_agents_agent_toolset20260401_glob_input =
+        { pattern: String, path: String }
+
+      class BetaManagedAgentsAgentToolset20260401GlobInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor pattern: String
+
+        attr_reader path: String?
+
+        def path=: (String) -> String
+
+        def initialize: (pattern: String, ?path: String) -> void
+
+        def to_hash: -> { pattern: String, path: String }
+      end
+    end
+  end
+end

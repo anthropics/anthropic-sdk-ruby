@@ -20,17 +20,13 @@ module Anthropic
           # Resolved `agent` definition for a single `session_thread`. Snapshot of the agent
           # at thread creation time. The multiagent roster is not repeated here; read it
           # from `Session.agent`.
-          sig do
-            returns(
-              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent
-            )
-          end
+          sig { returns(Anthropic::Beta::BetaManagedAgentsSessionThreadAgent) }
           attr_reader :agent
 
           sig do
             params(
               agent:
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent::OrHash
+                Anthropic::Beta::BetaManagedAgentsSessionThreadAgent::OrHash
             ).void
           end
           attr_writer :agent
@@ -116,7 +112,7 @@ module Anthropic
             params(
               id: String,
               agent:
-                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent::OrHash,
+                Anthropic::Beta::BetaManagedAgentsSessionThreadAgent::OrHash,
               archived_at: T.nilable(Time),
               created_at: Time,
               parent_thread_id: T.nilable(String),
@@ -167,8 +163,7 @@ module Anthropic
             override.returns(
               {
                 id: String,
-                agent:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent,
+                agent: Anthropic::Beta::BetaManagedAgentsSessionThreadAgent,
                 archived_at: T.nilable(Time),
                 created_at: Time,
                 parent_thread_id: T.nilable(String),
