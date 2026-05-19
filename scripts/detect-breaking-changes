@@ -19,6 +19,7 @@ TEST_PATHS=(
 	test/anthropic/resources/beta/agents_test.rb
 	test/anthropic/resources/beta/agents/versions_test.rb
 	test/anthropic/resources/beta/environments_test.rb
+	test/anthropic/resources/beta/environments/work_test.rb
 	test/anthropic/resources/beta/sessions_test.rb
 	test/anthropic/resources/beta/sessions/events_test.rb
 	test/anthropic/resources/beta/sessions/resources_test.rb

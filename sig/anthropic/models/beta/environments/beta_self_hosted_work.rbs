@@ -1,0 +1,93 @@
+module Anthropic
+  module Models
+    module Beta
+      module Environments
+        type beta_self_hosted_work =
+          {
+            id: String,
+            acknowledged_at: String?,
+            created_at: String,
+            data: Anthropic::Beta::Environments::BetaSessionWorkData,
+            environment_id: String,
+            latest_heartbeat_at: String?,
+            metadata: ::Hash[Symbol, String],
+            started_at: String?,
+            state: Anthropic::Models::Beta::Environments::BetaSelfHostedWork::state,
+            stop_requested_at: String?,
+            stopped_at: String?,
+            type: :work
+          }
+
+        class BetaSelfHostedWork < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor acknowledged_at: String?
+
+          attr_accessor created_at: String
+
+          attr_accessor data: Anthropic::Beta::Environments::BetaSessionWorkData
+
+          attr_accessor environment_id: String
+
+          attr_accessor latest_heartbeat_at: String?
+
+          attr_accessor metadata: ::Hash[Symbol, String]
+
+          attr_accessor started_at: String?
+
+          attr_accessor state: Anthropic::Models::Beta::Environments::BetaSelfHostedWork::state
+
+          attr_accessor stop_requested_at: String?
+
+          attr_accessor stopped_at: String?
+
+          attr_accessor type: :work
+
+          def initialize: (
+            id: String,
+            acknowledged_at: String?,
+            created_at: String,
+            data: Anthropic::Beta::Environments::BetaSessionWorkData,
+            environment_id: String,
+            latest_heartbeat_at: String?,
+            metadata: ::Hash[Symbol, String],
+            started_at: String?,
+            state: Anthropic::Models::Beta::Environments::BetaSelfHostedWork::state,
+            stop_requested_at: String?,
+            stopped_at: String?,
+            ?type: :work
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            acknowledged_at: String?,
+            created_at: String,
+            data: Anthropic::Beta::Environments::BetaSessionWorkData,
+            environment_id: String,
+            latest_heartbeat_at: String?,
+            metadata: ::Hash[Symbol, String],
+            started_at: String?,
+            state: Anthropic::Models::Beta::Environments::BetaSelfHostedWork::state,
+            stop_requested_at: String?,
+            stopped_at: String?,
+            type: :work
+          }
+
+          type state = :queued | :starting | :active | :stopping | :stopped
+
+          module State
+            extend Anthropic::Internal::Type::Enum
+
+            QUEUED: :queued
+            STARTING: :starting
+            ACTIVE: :active
+            STOPPING: :stopping
+            STOPPED: :stopped
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Environments::BetaSelfHostedWork::state]
+          end
+        end
+      end
+    end
+  end
+end

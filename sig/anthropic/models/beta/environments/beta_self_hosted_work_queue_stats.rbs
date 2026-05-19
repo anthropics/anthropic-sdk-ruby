@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    module Beta
+      module Environments
+        type beta_self_hosted_work_queue_stats =
+          {
+            depth: Integer,
+            oldest_queued_at: String?,
+            pending: Integer,
+            type: :work_queue_stats,
+            workers_polling: Integer?
+          }
+
+        class BetaSelfHostedWorkQueueStats < Anthropic::Internal::Type::BaseModel
+          attr_accessor depth: Integer
+
+          attr_accessor oldest_queued_at: String?
+
+          attr_accessor pending: Integer
+
+          attr_accessor type: :work_queue_stats
+
+          attr_accessor workers_polling: Integer?
+
+          def initialize: (
+            depth: Integer,
+            oldest_queued_at: String?,
+            pending: Integer,
+            workers_polling: Integer?,
+            ?type: :work_queue_stats
+          ) -> void
+
+          def to_hash: -> {
+            depth: Integer,
+            oldest_queued_at: String?,
+            pending: Integer,
+            type: :work_queue_stats,
+            workers_polling: Integer?
+          }
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsAgentToolset20260401GrepInput = Beta::BetaManagedAgentsAgentToolset20260401GrepInput
+
+    module Beta
+      type beta_managed_agents_agent_toolset20260401_grep_input =
+        { pattern: String, path: String }
+
+      class BetaManagedAgentsAgentToolset20260401GrepInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor pattern: String
+
+        attr_reader path: String?
+
+        def path=: (String) -> String
+
+        def initialize: (pattern: String, ?path: String) -> void
+
+        def to_hash: -> { pattern: String, path: String }
+      end
+    end
+  end
+end

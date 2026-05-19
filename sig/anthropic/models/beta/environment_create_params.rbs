@@ -4,9 +4,10 @@ module Anthropic
       type environment_create_params =
         {
           name: String,
-          config: Anthropic::Beta::BetaCloudConfigParams?,
+          config: Anthropic::Models::Beta::EnvironmentCreateParams::config?,
           description: String?,
           metadata: ::Hash[Symbol, String],
+          scope: Anthropic::Models::Beta::EnvironmentCreateParams::scope?,
           betas: ::Array[Anthropic::Models::anthropic_beta]
         }
         & Anthropic::Internal::Type::request_parameters
@@ -17,13 +18,15 @@ module Anthropic
 
         attr_accessor name: String
 
-        attr_accessor config: Anthropic::Beta::BetaCloudConfigParams?
+        attr_accessor config: Anthropic::Models::Beta::EnvironmentCreateParams::config?
 
         attr_accessor description: String?
 
         attr_reader metadata: ::Hash[Symbol, String]?
 
         def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+        attr_accessor scope: Anthropic::Models::Beta::EnvironmentCreateParams::scope?
 
         attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
@@ -33,21 +36,44 @@ module Anthropic
 
         def initialize: (
           name: String,
-          ?config: Anthropic::Beta::BetaCloudConfigParams?,
+          ?config: Anthropic::Models::Beta::EnvironmentCreateParams::config?,
           ?description: String?,
           ?metadata: ::Hash[Symbol, String],
+          ?scope: Anthropic::Models::Beta::EnvironmentCreateParams::scope?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> void
 
         def to_hash: -> {
           name: String,
-          config: Anthropic::Beta::BetaCloudConfigParams?,
+          config: Anthropic::Models::Beta::EnvironmentCreateParams::config?,
           description: String?,
           metadata: ::Hash[Symbol, String],
+          scope: Anthropic::Models::Beta::EnvironmentCreateParams::scope?,
           betas: ::Array[Anthropic::Models::anthropic_beta],
           request_options: Anthropic::RequestOptions
         }
+
+        type config =
+          Anthropic::Beta::BetaCloudConfigParams
+          | Anthropic::Beta::BetaSelfHostedConfigParams
+
+        module Config
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::EnvironmentCreateParams::config]
+        end
+
+        type scope = :organization | :account
+
+        module Scope
+          extend Anthropic::Internal::Type::Enum
+
+          ORGANIZATION: :organization
+          ACCOUNT: :account
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::EnvironmentCreateParams::scope]
+        end
       end
     end
   end

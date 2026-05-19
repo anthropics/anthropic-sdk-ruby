@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    module Beta
+      module Environments
+        type work_stop_params =
+          {
+            environment_id: String,
+            work_id: String,
+            betas: ::Array[Anthropic::Models::anthropic_beta]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class WorkStopParams < Anthropic::Models::Beta::Environments::BetaSelfHostedWorkStopRequest
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          def environment_id: -> String
+
+          def environment_id=: (String _) -> String
+
+          def work_id: -> String
+
+          def work_id=: (String _) -> String
+
+          def betas: -> ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta] _
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          def initialize: (
+            environment_id: String,
+            work_id: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            environment_id: String,
+            work_id: String,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

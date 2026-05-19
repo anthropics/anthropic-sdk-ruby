@@ -5,7 +5,7 @@ module Anthropic
         type beta_managed_agents_session_thread =
           {
             id: String,
-            agent: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent,
+            agent: Anthropic::Beta::BetaManagedAgentsSessionThreadAgent,
             archived_at: Time?,
             created_at: Time,
             parent_thread_id: String?,
@@ -20,7 +20,7 @@ module Anthropic
         class BetaManagedAgentsSessionThread < Anthropic::Internal::Type::BaseModel
           attr_accessor id: String
 
-          attr_accessor agent: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent
+          attr_accessor agent: Anthropic::Beta::BetaManagedAgentsSessionThreadAgent
 
           attr_accessor archived_at: Time?
 
@@ -42,7 +42,7 @@ module Anthropic
 
           def initialize: (
             id: String,
-            agent: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent,
+            agent: Anthropic::Beta::BetaManagedAgentsSessionThreadAgent,
             archived_at: Time?,
             created_at: Time,
             parent_thread_id: String?,
@@ -56,7 +56,7 @@ module Anthropic
 
           def to_hash: -> {
             id: String,
-            agent: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent,
+            agent: Anthropic::Beta::BetaManagedAgentsSessionThreadAgent,
             archived_at: Time?,
             created_at: Time,
             parent_thread_id: String?,

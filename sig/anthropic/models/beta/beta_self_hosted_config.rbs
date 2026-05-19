@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaSelfHostedConfig = Beta::BetaSelfHostedConfig
+
+    module Beta
+      type beta_self_hosted_config = { type: :self_hosted }
+
+      class BetaSelfHostedConfig < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :self_hosted
+
+        def initialize: (?type: :self_hosted) -> void
+
+        def to_hash: -> { type: :self_hosted }
+      end
+    end
+  end
+end

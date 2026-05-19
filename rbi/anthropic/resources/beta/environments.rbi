@@ -4,13 +4,26 @@ module Anthropic
   module Resources
     class Beta
       class Environments
+        sig { returns(Anthropic::Resources::Beta::Environments::Work) }
+        attr_reader :work
+
         # Create a new environment with the specified configuration.
         sig do
           params(
             name: String,
-            config: T.nilable(Anthropic::Beta::BetaCloudConfigParams::OrHash),
+            config:
+              T.nilable(
+                T.any(
+                  Anthropic::Beta::BetaCloudConfigParams::OrHash,
+                  Anthropic::Beta::BetaSelfHostedConfigParams::OrHash
+                )
+              ),
             description: T.nilable(String),
             metadata: T::Hash[Symbol, String],
+            scope:
+              T.nilable(
+                Anthropic::Beta::EnvironmentCreateParams::Scope::OrSymbol
+              ),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaEnvironment)
@@ -18,14 +31,17 @@ module Anthropic
         def create(
           # Body param: Human-readable name for the environment
           name:,
-          # Body param: Request params for `cloud` environment configuration.
-          #
-          # Fields default to null; on update, omitted fields preserve the existing value.
+          # Body param: Environment configuration
           config: nil,
           # Body param: Optional description of the environment
           description: nil,
           # Body param: User-provided metadata key-value pairs
           metadata: nil,
+          # Body param: The visibility scope for this environment. 'organization' makes the
+          # environment visible to all accounts. 'account' restricts visibility to the
+          # owning account only. Only applicable for self-hosted environments. If not
+          # specified, defaults based on organization type.
+          scope: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}
@@ -52,10 +68,20 @@ module Anthropic
         sig do
           params(
             environment_id: String,
-            config: T.nilable(Anthropic::Beta::BetaCloudConfigParams::OrHash),
+            config:
+              T.nilable(
+                T.any(
+                  Anthropic::Beta::BetaCloudConfigParams::OrHash,
+                  Anthropic::Beta::BetaSelfHostedConfigParams::OrHash
+                )
+              ),
             description: T.nilable(String),
             metadata: T::Hash[Symbol, T.nilable(String)],
             name: T.nilable(String),
+            scope:
+              T.nilable(
+                Anthropic::Beta::EnvironmentUpdateParams::Scope::OrSymbol
+              ),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaEnvironment)
@@ -63,9 +89,7 @@ module Anthropic
         def update(
           # Path param
           environment_id,
-          # Body param: Request params for `cloud` environment configuration.
-          #
-          # Fields default to null; on update, omitted fields preserve the existing value.
+          # Body param: Updated environment configuration
           config: nil,
           # Body param: Updated description of the environment
           description: nil,
@@ -74,6 +98,10 @@ module Anthropic
           metadata: nil,
           # Body param: Updated name for the environment
           name: nil,
+          # Body param: The visibility scope for this environment. 'organization' makes the
+          # environment visible to all accounts. 'account' restricts visibility to the
+          # owning account only.
+          scope: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}

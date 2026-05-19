@@ -1,0 +1,25 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsAgentToolset20260401ReadInput = Beta::BetaManagedAgentsAgentToolset20260401ReadInput
+
+    module Beta
+      type beta_managed_agents_agent_toolset20260401_read_input =
+        { file_path: String, view_range: ::Array[Integer] }
+
+      class BetaManagedAgentsAgentToolset20260401ReadInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor file_path: String
+
+        attr_reader view_range: ::Array[Integer]?
+
+        def view_range=: (::Array[Integer]) -> ::Array[Integer]
+
+        def initialize: (
+          file_path: String,
+          ?view_range: ::Array[Integer]
+        ) -> void
+
+        def to_hash: -> { file_path: String, view_range: ::Array[Integer] }
+      end
+    end
+  end
+end

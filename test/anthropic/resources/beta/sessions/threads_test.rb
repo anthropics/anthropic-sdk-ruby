@@ -17,7 +17,7 @@ class Anthropic::Test::Resources::Beta::Sessions::ThreadsTest < Anthropic::Test:
     assert_pattern do
       response => {
         id: String,
-        agent: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent,
+        agent: Anthropic::Beta::BetaManagedAgentsSessionThreadAgent,
         archived_at: Time | nil,
         created_at: Time,
         parent_thread_id: String | nil,
@@ -50,7 +50,7 @@ class Anthropic::Test::Resources::Beta::Sessions::ThreadsTest < Anthropic::Test:
     assert_pattern do
       row => {
         id: String,
-        agent: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent,
+        agent: Anthropic::Beta::BetaManagedAgentsSessionThreadAgent,
         archived_at: Time | nil,
         created_at: Time,
         parent_thread_id: String | nil,
@@ -78,7 +78,7 @@ class Anthropic::Test::Resources::Beta::Sessions::ThreadsTest < Anthropic::Test:
     assert_pattern do
       response => {
         id: String,
-        agent: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadAgent,
+        agent: Anthropic::Beta::BetaManagedAgentsSessionThreadAgent,
         archived_at: Time | nil,
         created_at: Time,
         parent_thread_id: String | nil,

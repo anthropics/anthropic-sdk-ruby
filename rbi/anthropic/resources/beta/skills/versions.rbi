@@ -113,6 +113,31 @@ module Anthropic
           )
           end
 
+          # Download a skill version's content as a zip archive.
+          sig do
+            params(
+              version: String,
+              skill_id: String,
+              betas:
+                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+              request_options: Anthropic::RequestOptions::OrHash
+            ).returns(StringIO)
+          end
+          def download(
+            # Path param: Version identifier for the skill.
+            #
+            # Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+            version,
+            # Path param: Unique identifier for the skill.
+            #
+            # The format and length of IDs may change over time.
+            skill_id:,
+            # Header param: Optional header to specify the beta version(s) you want to use.
+            betas: nil,
+            request_options: {}
+          )
+          end
+
           # @api private
           sig { params(client: Anthropic::Client).returns(T.attached_class) }
           def self.new(client:)

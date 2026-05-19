@@ -14,10 +14,6 @@ module Anthropic
             )
           end
 
-        # Summary of previously compacted content, or null if compaction failed
-        sig { returns(T.nilable(String)) }
-        attr_accessor :content
-
         sig { returns(Symbol) }
         attr_accessor :type
 
@@ -33,6 +29,10 @@ module Anthropic
         end
         attr_writer :cache_control
 
+        # Summary of previously compacted content, or null if compaction failed
+        sig { returns(T.nilable(String)) }
+        attr_accessor :content
+
         # Opaque metadata from prior compaction, to be round-tripped verbatim
         sig { returns(T.nilable(String)) }
         attr_accessor :encrypted_content
@@ -46,18 +46,18 @@ module Anthropic
         # treats these as no-ops. Empty string content is not allowed.
         sig do
           params(
-            content: T.nilable(String),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+            content: T.nilable(String),
             encrypted_content: T.nilable(String),
             type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
-          # Summary of previously compacted content, or null if compaction failed
-          content:,
           # Create a cache control breakpoint at this content block.
           cache_control: nil,
+          # Summary of previously compacted content, or null if compaction failed
+          content: nil,
           # Opaque metadata from prior compaction, to be round-tripped verbatim
           encrypted_content: nil,
           type: :compaction
@@ -67,10 +67,10 @@ module Anthropic
         sig do
           override.returns(
             {
-              content: T.nilable(String),
               type: Symbol,
               cache_control:
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
+              content: T.nilable(String),
               encrypted_content: T.nilable(String)
             }
           )

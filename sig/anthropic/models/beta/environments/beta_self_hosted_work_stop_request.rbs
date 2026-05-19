@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    module Beta
+      module Environments
+        type beta_self_hosted_work_stop_request = { force: bool }
+
+        class BetaSelfHostedWorkStopRequest < Anthropic::Internal::Type::BaseModel
+          attr_reader force: bool?
+
+          def force=: (bool) -> bool
+
+          def initialize: (?force: bool) -> void
+
+          def to_hash: -> { force: bool }
+        end
+      end
+    end
+  end
+end

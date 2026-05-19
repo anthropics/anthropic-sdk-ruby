@@ -1,0 +1,56 @@
+module Anthropic
+  module Models
+    module Beta
+      module Environments
+        type work_poll_params =
+          {
+            environment_id: String,
+            block_ms: Integer?,
+            reclaim_older_than_ms: Integer?,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            anthropic_worker_id: String
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class WorkPollParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor environment_id: String
+
+          attr_accessor block_ms: Integer?
+
+          attr_accessor reclaim_older_than_ms: Integer?
+
+          attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+          def betas=: (
+            ::Array[Anthropic::Models::anthropic_beta]
+          ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+          attr_reader anthropic_worker_id: String?
+
+          def anthropic_worker_id=: (String) -> String
+
+          def initialize: (
+            environment_id: String,
+            ?block_ms: Integer?,
+            ?reclaim_older_than_ms: Integer?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?anthropic_worker_id: String,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            environment_id: String,
+            block_ms: Integer?,
+            reclaim_older_than_ms: Integer?,
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            anthropic_worker_id: String,
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

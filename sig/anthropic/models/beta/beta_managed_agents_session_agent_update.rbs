@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsSessionAgentUpdate = Beta::BetaManagedAgentsSessionAgentUpdate
+
+    module Beta
+      type beta_managed_agents_session_agent_update =
+        {
+          mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
+          tools: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionAgentUpdate::tool]
+        }
+
+      class BetaManagedAgentsSessionAgentUpdate < Anthropic::Internal::Type::BaseModel
+        attr_reader mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?
+
+        def mcp_servers=: (
+          ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]
+        ) -> ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]
+
+        attr_reader tools: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionAgentUpdate::tool]?
+
+        def tools=: (
+          ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionAgentUpdate::tool]
+        ) -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionAgentUpdate::tool]
+
+        def initialize: (
+          ?mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
+          ?tools: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionAgentUpdate::tool]
+        ) -> void
+
+        def to_hash: -> {
+          mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams],
+          tools: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionAgentUpdate::tool]
+        }
+
+        type tool =
+          Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params
+          | Anthropic::Beta::BetaManagedAgentsMCPToolsetParams
+          | Anthropic::Beta::BetaManagedAgentsCustomToolParams
+
+        module Tool
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionAgentUpdate::tool]
+        end
+      end
+    end
+  end
+end

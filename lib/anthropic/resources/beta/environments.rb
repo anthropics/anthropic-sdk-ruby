@@ -4,20 +4,25 @@ module Anthropic
   module Resources
     class Beta
       class Environments
+        # @return [Anthropic::Resources::Beta::Environments::Work]
+        attr_reader :work
+
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::EnvironmentCreateParams} for more details.
         #
         # Create a new environment with the specified configuration.
         #
-        # @overload create(name:, config: nil, description: nil, metadata: nil, betas: nil, request_options: {})
+        # @overload create(name:, config: nil, description: nil, metadata: nil, scope: nil, betas: nil, request_options: {})
         #
         # @param name [String] Body param: Human-readable name for the environment
         #
-        # @param config [Anthropic::Models::Beta::BetaCloudConfigParams, nil] Body param: Request params for `cloud` environment configuration.
+        # @param config [Anthropic::Models::Beta::BetaCloudConfigParams, Anthropic::Models::Beta::BetaSelfHostedConfigParams, nil] Body param: Environment configuration
         #
         # @param description [String, nil] Body param: Optional description of the environment
         #
         # @param metadata [Hash{Symbol=>String}] Body param: User-provided metadata key-value pairs
+        #
+        # @param scope [Symbol, Anthropic::Models::Beta::EnvironmentCreateParams::Scope, nil] Body param: The visibility scope for this environment. 'organization' makes the
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
@@ -68,17 +73,19 @@ module Anthropic
         #
         # Update an existing environment's configuration.
         #
-        # @overload update(environment_id, config: nil, description: nil, metadata: nil, name: nil, betas: nil, request_options: {})
+        # @overload update(environment_id, config: nil, description: nil, metadata: nil, name: nil, scope: nil, betas: nil, request_options: {})
         #
         # @param environment_id [String] Path param
         #
-        # @param config [Anthropic::Models::Beta::BetaCloudConfigParams, nil] Body param: Request params for `cloud` environment configuration.
+        # @param config [Anthropic::Models::Beta::BetaCloudConfigParams, Anthropic::Models::Beta::BetaSelfHostedConfigParams, nil] Body param: Updated environment configuration
         #
         # @param description [String, nil] Body param: Updated description of the environment
         #
         # @param metadata [Hash{Symbol=>String, nil}] Body param: User-provided metadata key-value pairs. Set a value to null or empty
         #
         # @param name [String, nil] Body param: Updated name for the environment
+        #
+        # @param scope [Symbol, Anthropic::Models::Beta::EnvironmentUpdateParams::Scope, nil] Body param: The visibility scope for this environment. 'organization' makes the
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
@@ -189,6 +196,7 @@ module Anthropic
         # @param client [Anthropic::Client]
         def initialize(client:)
           @client = client
+          @work = Anthropic::Resources::Beta::Environments::Work.new(client: client)
         end
       end
     end

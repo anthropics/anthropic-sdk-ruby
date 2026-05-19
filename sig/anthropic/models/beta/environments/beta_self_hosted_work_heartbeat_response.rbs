@@ -1,0 +1,58 @@
+module Anthropic
+  module Models
+    module Beta
+      module Environments
+        type beta_self_hosted_work_heartbeat_response =
+          {
+            last_heartbeat: String,
+            lease_extended: bool,
+            state: Anthropic::Models::Beta::Environments::BetaSelfHostedWorkHeartbeatResponse::state,
+            ttl_seconds: Integer,
+            type: :work_heartbeat
+          }
+
+        class BetaSelfHostedWorkHeartbeatResponse < Anthropic::Internal::Type::BaseModel
+          attr_accessor last_heartbeat: String
+
+          attr_accessor lease_extended: bool
+
+          attr_accessor state: Anthropic::Models::Beta::Environments::BetaSelfHostedWorkHeartbeatResponse::state
+
+          attr_accessor ttl_seconds: Integer
+
+          attr_accessor type: :work_heartbeat
+
+          def initialize: (
+            last_heartbeat: String,
+            lease_extended: bool,
+            state: Anthropic::Models::Beta::Environments::BetaSelfHostedWorkHeartbeatResponse::state,
+            ttl_seconds: Integer,
+            ?type: :work_heartbeat
+          ) -> void
+
+          def to_hash: -> {
+            last_heartbeat: String,
+            lease_extended: bool,
+            state: Anthropic::Models::Beta::Environments::BetaSelfHostedWorkHeartbeatResponse::state,
+            ttl_seconds: Integer,
+            type: :work_heartbeat
+          }
+
+          type state = :queued | :starting | :active | :stopping | :stopped
+
+          module State
+            extend Anthropic::Internal::Type::Enum
+
+            QUEUED: :queued
+            STARTING: :starting
+            ACTIVE: :active
+            STOPPING: :stopping
+            STOPPED: :stopped
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Environments::BetaSelfHostedWorkHeartbeatResponse::state]
+          end
+        end
+      end
+    end
+  end
+end

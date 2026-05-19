@@ -4,6 +4,7 @@ module Anthropic
       type session_update_params =
         {
           session_id: String,
+          agent: Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate,
           metadata: ::Hash[Symbol, String?]?,
           title: String?,
           vault_ids: ::Array[String],
@@ -16,6 +17,12 @@ module Anthropic
         include Anthropic::Internal::Type::RequestParameters
 
         attr_accessor session_id: String
+
+        attr_reader agent: Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate?
+
+        def agent=: (
+          Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate
+        ) -> Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate
 
         attr_accessor metadata: ::Hash[Symbol, String?]?
 
@@ -33,6 +40,7 @@ module Anthropic
 
         def initialize: (
           session_id: String,
+          ?agent: Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate,
           ?metadata: ::Hash[Symbol, String?]?,
           ?title: String?,
           ?vault_ids: ::Array[String],
@@ -42,6 +50,7 @@ module Anthropic
 
         def to_hash: -> {
           session_id: String,
+          agent: Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate,
           metadata: ::Hash[Symbol, String?]?,
           title: String?,
           vault_ids: ::Array[String],

@@ -13,6 +13,14 @@ module Anthropic
         #   @return [String]
         required :session_id, String
 
+        # @!attribute agent
+        #   Mid-session agent configuration update. Only `tools` and `mcp_servers` are
+        #   updatable. Full replacement: the provided array becomes the new value. To
+        #   preserve existing entries, GET the session, modify the array, and POST it back.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsSessionAgentUpdate, nil]
+        optional :agent, -> { Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate }
+
         # @!attribute metadata
         #   Metadata patch. Set a key to a string to upsert it, or to null to delete it.
         #   Omit the field to preserve.
@@ -39,11 +47,13 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(session_id:, metadata: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
+        # @!method initialize(session_id:, agent: nil, metadata: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::SessionUpdateParams} for more details.
         #
         #   @param session_id [String]
+        #
+        #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsSessionAgentUpdate] Mid-session agent configuration update. Only `tools` and `mcp_servers` are updat
         #
         #   @param metadata [Hash{Symbol=>String, nil}, nil] Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omi
         #

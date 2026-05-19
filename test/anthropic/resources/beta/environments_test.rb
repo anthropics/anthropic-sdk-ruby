@@ -14,13 +14,14 @@ class Anthropic::Test::Resources::Beta::EnvironmentsTest < Anthropic::Test::Reso
       response => {
         id: String,
         archived_at: String | nil,
-        config: Anthropic::Beta::BetaCloudConfig,
+        config: Anthropic::Beta::BetaEnvironment::Config,
         created_at: String,
         description: String,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String,
         type: Symbol,
-        updated_at: String
+        updated_at: String,
+        scope: Anthropic::Beta::BetaEnvironment::Scope | nil
       }
     end
   end
@@ -36,13 +37,14 @@ class Anthropic::Test::Resources::Beta::EnvironmentsTest < Anthropic::Test::Reso
       response => {
         id: String,
         archived_at: String | nil,
-        config: Anthropic::Beta::BetaCloudConfig,
+        config: Anthropic::Beta::BetaEnvironment::Config,
         created_at: String,
         description: String,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String,
         type: Symbol,
-        updated_at: String
+        updated_at: String,
+        scope: Anthropic::Beta::BetaEnvironment::Scope | nil
       }
     end
   end
@@ -58,13 +60,14 @@ class Anthropic::Test::Resources::Beta::EnvironmentsTest < Anthropic::Test::Reso
       response => {
         id: String,
         archived_at: String | nil,
-        config: Anthropic::Beta::BetaCloudConfig,
+        config: Anthropic::Beta::BetaEnvironment::Config,
         created_at: String,
         description: String,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String,
         type: Symbol,
-        updated_at: String
+        updated_at: String,
+        scope: Anthropic::Beta::BetaEnvironment::Scope | nil
       }
     end
   end
@@ -87,13 +90,14 @@ class Anthropic::Test::Resources::Beta::EnvironmentsTest < Anthropic::Test::Reso
       row => {
         id: String,
         archived_at: String | nil,
-        config: Anthropic::Beta::BetaCloudConfig,
+        config: Anthropic::Beta::BetaEnvironment::Config,
         created_at: String,
         description: String,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String,
         type: Symbol,
-        updated_at: String
+        updated_at: String,
+        scope: Anthropic::Beta::BetaEnvironment::Scope | nil
       }
     end
   end
@@ -124,13 +128,14 @@ class Anthropic::Test::Resources::Beta::EnvironmentsTest < Anthropic::Test::Reso
       response => {
         id: String,
         archived_at: String | nil,
-        config: Anthropic::Beta::BetaCloudConfig,
+        config: Anthropic::Beta::BetaEnvironment::Config,
         created_at: String,
         description: String,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
         name: String,
         type: Symbol,
-        updated_at: String
+        updated_at: String,
+        scope: Anthropic::Beta::BetaEnvironment::Scope | nil
       }
     end
   end
