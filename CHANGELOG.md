@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.42.0 (2026-05-19)
+
+Full Changelog: [v1.41.0...v1.42.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.41.0...v1.42.0)
+
+### Features
+
+* **client:** Add support for self-hosted sandboxes in CMA with sandbox helpers ([27813ed](https://github.com/anthropics/anthropic-sdk-ruby/commit/27813ed45134e075b0d1f180d00407c54c34dbe1))
+
 ## 1.41.0 (2026-05-13)
 
 Full Changelog: [v1.40.0...v1.41.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.40.0...v1.41.0)
