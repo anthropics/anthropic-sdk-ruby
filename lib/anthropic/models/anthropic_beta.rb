@@ -57,6 +57,8 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::AnthropicBeta::CACHE_DIAGNOSIS_2026_04_07 }
 
+      variant const: -> { Anthropic::Models::AnthropicBeta::THINKING_TOKEN_COUNT_2026_05_13 }
+
       # @!method self.variants
       #   @return [Array(String, Symbol)]
 
@@ -91,6 +93,7 @@ module Anthropic
       ADVISOR_TOOL_2026_03_01 = :"advisor-tool-2026-03-01"
       MANAGED_AGENTS_2026_04_01 = :"managed-agents-2026-04-01"
       CACHE_DIAGNOSIS_2026_04_07 = :"cache-diagnosis-2026-04-07"
+      THINKING_TOKEN_COUNT_2026_05_13 = :"thinking-token-count-2026-05-13"
 
       # @!endgroup
     end
