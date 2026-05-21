@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.43.0 (2026-05-21)
+
+Full Changelog: [v1.42.0...v1.43.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.42.0...v1.43.0)
+
+### Features
+
+* **api:** Add support for thinking-token-count beta for estimated tokens in thinking block deltas when streaming ([9cd8a67](https://github.com/anthropics/anthropic-sdk-ruby/commit/9cd8a67e5a4382a72c2e417de9be587be9237353))
+
 ## 1.42.0 (2026-05-19)
 
 Full Changelog: [v1.41.0...v1.42.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.41.0...v1.42.0)
