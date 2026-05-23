@@ -24,11 +24,11 @@ module Anthropic
         private def iterator
           @iterator ||= Anthropic::Internal::Util.chain_fused(@stream) do |y|
             @raw_stream.each do |raw_event|
-              @accumated_message_snapshot = accumulate_event(
+              @accumulated_message_snapshot = accumulate_event(
                 event: raw_event,
-                current_snapshot: @accumated_message_snapshot
+                current_snapshot: @accumulated_message_snapshot
               )
-              events_to_yield = build_events(event: raw_event, message_snapshot: @accumated_message_snapshot)
+              events_to_yield = build_events(event: raw_event, message_snapshot: @accumulated_message_snapshot)
               events_to_yield.each(&y)
             end
           end
@@ -63,8 +63,8 @@ module Anthropic
         # @return [Anthropic::Models::Message, Anthropic::Models::Beta::BetaMessage]
         def accumulated_message
           until_done
-          parse_content_blocks!(@accumated_message_snapshot)
-          @accumated_message_snapshot
+          parse_content_blocks!(@accumulated_message_snapshot)
+          @accumulated_message_snapshot
         end
 
         # @api public
@@ -311,7 +311,7 @@ module Anthropic
           # The underlying Server-Sent Event stream from the Anthropic API.
           @raw_stream = raw_stream
           # Accumulated message state that builds up as events are processed.
-          @accumated_message_snapshot = nil
+          @accumulated_message_snapshot = nil
           # Mapping of tool names to model classes for parsing.
           @tools = tools
           @models = models

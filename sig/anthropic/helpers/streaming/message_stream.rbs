@@ -23,7 +23,7 @@ module Anthropic
         include Anthropic::Internal::Type::BaseStream[raw_message_event, stream_event]
 
         @raw_stream: Anthropic::Internal::Stream[raw_message_event]
-        @accumated_message_snapshot: Anthropic::Models::message?
+        @accumulated_message_snapshot: Anthropic::Models::message?
         @iterator: Enumerable[stream_event]?
 
         def initialize: (
