@@ -245,7 +245,11 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
       fileinput => %w[upload abc],
       Anthropic::FilePart.new(StringIO.new("abc")) => ["", "abc"],
       file => [file.basename.to_path, /^class Anthropic/],
-      Anthropic::FilePart.new(file, filename: "d o g") => ["d%20o%20g", /^class Anthropic/]
+      # multipart filenames are quoted-strings: spaces stay literal (not %20)...
+      Anthropic::FilePart.new(file, filename: "d o g") => ["d o g", /^class Anthropic/],
+      # ...and an explicit path-qualified name survives intact (Skills API needs
+      # `<dir>/SKILL.md`); it is neither basenamed nor percent-encoded to `%2F`.
+      Anthropic::FilePart.new(file, filename: "my-skill/SKILL.md") => ["my-skill/SKILL.md", /^class Anthropic/]
     }
     cases.each do |body, testcase|
       filename, val = testcase
@@ -257,6 +261,21 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
         io.read => ^val
       end
     end
+  end
+
+  def test_multipart_filename_quoting
+    # A multipart `filename=` is an RFC 7578 / 6266 quoted-string: path-qualified
+    # names survive, `"` and `\` are backslash-escaped, and CR/LF are dropped so a
+    # crafted filename cannot inject extra multipart/MIME headers.
+    file = Anthropic::FilePart.new(StringIO.new("x"), filename: "a/b \"x\"\r\nEvil: 1.md")
+    _headers, stream = Anthropic::Internal::Util.encode_content(
+      {"content-type" => "multipart/form-data"},
+      {"f" => [file]}
+    )
+    body = stream.respond_to?(:read) ? stream.read : stream.to_a.join
+
+    assert_includes(body, %q(filename="a/b \"x\"Evil: 1.md"))
+    refute_includes(body, "\r\nEvil:")
   end
 
   def test_hash_encode

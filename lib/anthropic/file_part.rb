@@ -45,7 +45,10 @@ module Anthropic
       @filename =
         case [filename, (@content = content)]
         in [String | Pathname, _]
-          ::File.basename(filename)
+          # Preserve an explicit filename verbatim (e.g. a path-qualified
+          # `my-skill/SKILL.md`, which the Skills API requires). Only the
+          # auto-derived `nil` branches below are reduced to a basename.
+          filename.to_s
         in [nil, Pathname]
           content.basename.to_path
         in [nil, IO]

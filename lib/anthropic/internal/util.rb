@@ -590,10 +590,14 @@ module Anthropic
 
           case val
           in Anthropic::FilePart unless val.filename.nil?
-            filename = encode_path(val.filename)
+            # A multipart `filename=` is an RFC 7578 / 6266 quoted-string, not a
+            # URI path segment: escape `"` and `\` and drop CR/LF, but keep `/`
+            # and spaces literal so path-qualified names (e.g. `dir/SKILL.md`,
+            # required by the Skills API) survive instead of becoming `dir%2F...`.
+            filename = val.filename.to_s.gsub(/["\\]/) { "\\#{_1}" }.delete("\r\n")
             y << "; filename=\"#{filename}\""
           in Pathname | IO
-            filename = encode_path(::File.basename(val.to_path))
+            filename = ::File.basename(val.to_path).gsub(/["\\]/) { "\\#{_1}" }.delete("\r\n")
             y << "; filename=\"#{filename}\""
           else
           end
