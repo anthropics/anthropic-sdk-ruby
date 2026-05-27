@@ -27,7 +27,7 @@ module Anthropic
         #
         # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Body param: Input messages.
         #
-        # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.\n\nSee [models](https://do
+        # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
         #
         # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
         #
@@ -113,7 +113,7 @@ module Anthropic
         #
         # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Body param: Input messages.
         #
-        # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.\n\nSee [models](https://do
+        # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
         #
         # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
         #
@@ -202,7 +202,7 @@ module Anthropic
         #
         # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Body param: Input messages.
         #
-        # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.\n\nSee [models](https://do
+        # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
         #
         # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
         #

@@ -5,8 +5,9 @@ module Anthropic
     module Beta
       class BetaAdvisorTool20260301 < Anthropic::Internal::Type::BaseModel
         # @!attribute model
-        #   The model that will complete your prompt.\n\nSee
-        #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+        #   The model that will complete your prompt.
+        #
+        #   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #   details and options.
         #
         #   @return [Symbol, String, Anthropic::Models::Model]
@@ -68,7 +69,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaAdvisorTool20260301} for more details.
         #
-        #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+        #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
         #
         #   @param allowed_callers [Array<Symbol, Anthropic::Models::Beta::BetaAdvisorTool20260301::AllowedCaller>]
         #

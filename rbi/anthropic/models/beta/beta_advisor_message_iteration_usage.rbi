@@ -38,8 +38,9 @@ module Anthropic
         sig { returns(Integer) }
         attr_accessor :input_tokens
 
-        # The model that will complete your prompt.\n\nSee
-        # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+        # The model that will complete your prompt.
+        #
+        # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         sig { returns(Anthropic::Model::Variants) }
         attr_accessor :model
@@ -74,8 +75,9 @@ module Anthropic
           cache_read_input_tokens:,
           # The number of input tokens which were used.
           input_tokens:,
-          # The model that will complete your prompt.\n\nSee
-          # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+          # The model that will complete your prompt.
+          #
+          # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
           # The number of output tokens which were used.

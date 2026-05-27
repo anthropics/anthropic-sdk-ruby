@@ -5,8 +5,9 @@ module Anthropic
     module Beta
       class BetaManagedAgentsModelConfig < Anthropic::Internal::Type::BaseModel
         # @!attribute id
-        #   The model that will power your agent.\n\nSee
-        #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+        #   The model that will power your agent.
+        #
+        #   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #   details and options.
         #
         #   @return [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel]
@@ -26,7 +27,7 @@ module Anthropic
         #
         #   Model identifier and configuration.
         #
-        #   @param id [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] The model that will power your agent.\n\nSee [models](https://docs.anthropic.com
+        #   @param id [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] The model that will power your agent.
         #
         #   @param speed [Symbol, Anthropic::Models::Beta::BetaManagedAgentsModelConfig::Speed] Inference speed mode. `fast` provides significantly faster output token generati
 

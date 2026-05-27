@@ -78,8 +78,9 @@ module Anthropic
       required :messages, -> { Anthropic::Internal::Type::ArrayOf[Anthropic::MessageParam] }
 
       # @!attribute model
-      #   The model that will complete your prompt.\n\nSee
-      #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+      #   The model that will complete your prompt.
+      #
+      #   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
       #
       #   @return [Symbol, String, Anthropic::Models::Model]
@@ -215,7 +216,7 @@ module Anthropic
       #
       #   @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
       #
-      #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
       #
       #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Top-level cache control automatically applies a cache_control marker to the last
       #

@@ -19,8 +19,9 @@ module Anthropic
       required :max_tokens_to_sample, Integer
 
       # @!attribute model
-      #   The model that will complete your prompt.\n\nSee
-      #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+      #   The model that will complete your prompt.
+      #
+      #   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
       #
       #   @return [Symbol, String, Anthropic::Models::Model]
@@ -118,7 +119,7 @@ module Anthropic
       #
       #   @param max_tokens_to_sample [Integer] The maximum number of tokens to generate before stopping.
       #
-      #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
       #
       #   @param prompt [String] The prompt that you want Claude to complete.
       #

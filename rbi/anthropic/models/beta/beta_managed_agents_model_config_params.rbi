@@ -15,8 +15,9 @@ module Anthropic
             )
           end
 
-        # The model that will power your agent.\n\nSee
-        # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+        # The model that will power your agent.
+        #
+        # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         sig do
           returns(
@@ -49,8 +50,9 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # The model that will power your agent.\n\nSee
-          # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+          # The model that will power your agent.
+          #
+          # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           id:,
           # Inference speed mode. `fast` provides significantly faster output token

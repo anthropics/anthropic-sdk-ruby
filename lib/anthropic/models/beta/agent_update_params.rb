@@ -140,7 +140,9 @@ module Anthropic
         module Model
           extend Anthropic::Internal::Type::Union
 
-          # The model that will power your agent.\n\nSee [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+          # The model that will power your agent.
+          #
+          # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
           variant union: -> { Anthropic::Beta::BetaManagedAgentsModel }
 
           # An object that defines additional configuration control over model use

@@ -149,8 +149,9 @@ module Anthropic
         #
         # There is a limit of 100,000 messages in a single request.
         messages:,
-        # The model that will complete your prompt.\n\nSee
-        # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+        # The model that will complete your prompt.
+        #
+        # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         model:,
         # Top-level cache control automatically applies a cache_control marker to the last
@@ -454,8 +455,9 @@ module Anthropic
         #
         # There is a limit of 100,000 messages in a single request.
         messages:,
-        # The model that will complete your prompt.\n\nSee
-        # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+        # The model that will complete your prompt.
+        #
+        # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         model:,
         # Top-level cache control automatically applies a cache_control marker to the last
@@ -730,8 +732,9 @@ module Anthropic
         #
         # There is a limit of 100,000 messages in a single request.
         messages:,
-        # The model that will complete your prompt.\n\nSee
-        # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+        # The model that will complete your prompt.
+        #
+        # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         model:,
         # Top-level cache control automatically applies a cache_control marker to the last
