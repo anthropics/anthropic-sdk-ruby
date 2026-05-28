@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.44.0 (2026-05-28)
+
+Full Changelog: [v1.43.0...v1.44.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.43.0...v1.44.0)
+
+### Features
+
+* **api:** Add support for claude-opus-4-8, mid-conversation system blocks, and usage.output_tokens_details ([6e361e7](https://github.com/anthropics/anthropic-sdk-ruby/commit/6e361e7ef1fc3bcbcb2b5bfa2a08bccd6a68ba72))
+
+
+### Bug Fixes
+
+* **internal:** preserve path-qualified multipart filenames (SDK-40) ([#937](https://github.com/anthropics/anthropic-sdk-ruby/issues/937)) ([000e793](https://github.com/anthropics/anthropic-sdk-ruby/commit/000e793062309ee421111866f1bd56d0384277f3))
+
+
+### Documentation
+
+* replace literal newlines ([e698364](https://github.com/anthropics/anthropic-sdk-ruby/commit/e698364084ebde9398a3c8e4c969e5922e778658))
+
 ## 1.43.0 (2026-05-21)
 
 Full Changelog: [v1.42.0...v1.43.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.42.0...v1.43.0)
