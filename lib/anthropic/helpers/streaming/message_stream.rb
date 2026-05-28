@@ -140,7 +140,24 @@ module Anthropic
           in Anthropic::Models::RawMessageDeltaEvent | Anthropic::Models::BetaRawMessageDeltaEvent
             current_snapshot.stop_reason = event.delta.stop_reason
             current_snapshot.stop_sequence = event.delta.stop_sequence
+            current_snapshot.stop_details = event.delta.stop_details unless event.delta.stop_details.nil?
             current_snapshot.usage.output_tokens = event.usage.output_tokens
+
+            # The message_delta usage is authoritative for the final counts; carry every
+            # field the event reports (only when present, so we never clobber the
+            # message_start values with nils).
+            unless event.usage.input_tokens.nil?
+              current_snapshot.usage.input_tokens = event.usage.input_tokens
+            end
+            unless event.usage.cache_creation_input_tokens.nil?
+              current_snapshot.usage.cache_creation_input_tokens = event.usage.cache_creation_input_tokens
+            end
+            unless event.usage.cache_read_input_tokens.nil?
+              current_snapshot.usage.cache_read_input_tokens = event.usage.cache_read_input_tokens
+            end
+            unless event.usage.server_tool_use.nil?
+              current_snapshot.usage.server_tool_use = event.usage.server_tool_use
+            end
 
             if event.is_a?(Anthropic::Models::BetaRawMessageDeltaEvent) && !event.usage.iterations.nil?
               current_snapshot.usage.iterations = event.usage.iterations
