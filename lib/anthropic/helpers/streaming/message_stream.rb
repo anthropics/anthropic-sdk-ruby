@@ -134,6 +134,7 @@ module Anthropic
               content.signature = delta.signature
             in Anthropic::Models::BetaCompactionContentBlockDelta if content.type == :compaction
               content.content = delta.content
+              content.encrypted_content = delta.encrypted_content
             else
             end
           in Anthropic::Models::RawMessageDeltaEvent | Anthropic::Models::BetaRawMessageDeltaEvent
