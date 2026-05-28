@@ -67,6 +67,7 @@ module Anthropic
         USER = T.let(:user, Anthropic::MessageParam::Role::TaggedSymbol)
         ASSISTANT =
           T.let(:assistant, Anthropic::MessageParam::Role::TaggedSymbol)
+        SYSTEM = T.let(:system, Anthropic::MessageParam::Role::TaggedSymbol)
 
         sig do
           override.returns(

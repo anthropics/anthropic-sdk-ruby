@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaMidConversationSystemBlockParam = Beta::BetaMidConversationSystemBlockParam
+
+    module Beta
+      type beta_mid_conversation_system_block_param =
+        {
+          content: ::Array[Anthropic::Beta::BetaTextBlockParam],
+          type: :mid_conv_system,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+
+      class BetaMidConversationSystemBlockParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: ::Array[Anthropic::Beta::BetaTextBlockParam]
+
+        attr_accessor type: :mid_conv_system
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        def initialize: (
+          content: ::Array[Anthropic::Beta::BetaTextBlockParam],
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?type: :mid_conv_system
+        ) -> void
+
+        def to_hash: -> {
+          content: ::Array[Anthropic::Beta::BetaTextBlockParam],
+          type: :mid_conv_system,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+      end
+    end
+  end
+end

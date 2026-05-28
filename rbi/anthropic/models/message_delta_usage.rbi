@@ -24,6 +24,23 @@ module Anthropic
       sig { returns(Integer) }
       attr_accessor :output_tokens
 
+      # Breakdown of output tokens by category.
+      #
+      # `output_tokens` remains the inclusive, authoritative total used for billing.
+      # This object provides a read-only decomposition for observability — for example,
+      # how many of the billed output tokens were spent on internal reasoning that may
+      # have been summarized before being returned to you.
+      sig { returns(T.nilable(Anthropic::OutputTokensDetails)) }
+      attr_reader :output_tokens_details
+
+      sig do
+        params(
+          output_tokens_details:
+            T.nilable(Anthropic::OutputTokensDetails::OrHash)
+        ).void
+      end
+      attr_writer :output_tokens_details
+
       # The number of server tool requests.
       sig { returns(T.nilable(Anthropic::ServerToolUsage)) }
       attr_reader :server_tool_use
@@ -41,6 +58,8 @@ module Anthropic
           cache_read_input_tokens: T.nilable(Integer),
           input_tokens: T.nilable(Integer),
           output_tokens: Integer,
+          output_tokens_details:
+            T.nilable(Anthropic::OutputTokensDetails::OrHash),
           server_tool_use: T.nilable(Anthropic::ServerToolUsage::OrHash)
         ).returns(T.attached_class)
       end
@@ -53,6 +72,13 @@ module Anthropic
         input_tokens:,
         # The cumulative number of output tokens which were used.
         output_tokens:,
+        # Breakdown of output tokens by category.
+        #
+        # `output_tokens` remains the inclusive, authoritative total used for billing.
+        # This object provides a read-only decomposition for observability — for example,
+        # how many of the billed output tokens were spent on internal reasoning that may
+        # have been summarized before being returned to you.
+        output_tokens_details:,
         # The number of server tool requests.
         server_tool_use:
       )
@@ -65,6 +91,7 @@ module Anthropic
             cache_read_input_tokens: T.nilable(Integer),
             input_tokens: T.nilable(Integer),
             output_tokens: Integer,
+            output_tokens_details: T.nilable(Anthropic::OutputTokensDetails),
             server_tool_use: T.nilable(Anthropic::ServerToolUsage)
           }
         )

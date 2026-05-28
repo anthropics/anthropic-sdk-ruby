@@ -29,6 +29,11 @@ module Anthropic
             :url_not_allowed,
             Anthropic::Beta::BetaWebFetchToolResultErrorCode::TaggedSymbol
           )
+        URL_NOT_IN_PRIOR_CONTEXT =
+          T.let(
+            :url_not_in_prior_context,
+            Anthropic::Beta::BetaWebFetchToolResultErrorCode::TaggedSymbol
+          )
         URL_NOT_ACCESSIBLE =
           T.let(
             :url_not_accessible,

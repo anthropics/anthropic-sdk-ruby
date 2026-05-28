@@ -14,8 +14,14 @@ module Anthropic
         #   @return [Symbol, :advisor_result]
         required :type, const: :advisor_result
 
-        # @!method initialize(text:, type: :advisor_result)
+        # @!attribute stop_reason
+        #
+        #   @return [String, nil]
+        optional :stop_reason, String, nil?: true
+
+        # @!method initialize(text:, stop_reason: nil, type: :advisor_result)
         #   @param text [String]
+        #   @param stop_reason [String, nil]
         #   @param type [Symbol, :advisor_result]
       end
     end

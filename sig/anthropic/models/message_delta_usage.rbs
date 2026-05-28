@@ -6,6 +6,7 @@ module Anthropic
         cache_read_input_tokens: Integer?,
         input_tokens: Integer?,
         output_tokens: Integer,
+        output_tokens_details: Anthropic::OutputTokensDetails?,
         server_tool_use: Anthropic::ServerToolUsage?
       }
 
@@ -18,6 +19,8 @@ module Anthropic
 
       attr_accessor output_tokens: Integer
 
+      attr_accessor output_tokens_details: Anthropic::OutputTokensDetails?
+
       attr_accessor server_tool_use: Anthropic::ServerToolUsage?
 
       def initialize: (
@@ -25,6 +28,7 @@ module Anthropic
         cache_read_input_tokens: Integer?,
         input_tokens: Integer?,
         output_tokens: Integer,
+        output_tokens_details: Anthropic::OutputTokensDetails?,
         server_tool_use: Anthropic::ServerToolUsage?
       ) -> void
 
@@ -33,6 +37,7 @@ module Anthropic
         cache_read_input_tokens: Integer?,
         input_tokens: Integer?,
         output_tokens: Integer,
+        output_tokens_details: Anthropic::OutputTokensDetails?,
         server_tool_use: Anthropic::ServerToolUsage?
       }
     end

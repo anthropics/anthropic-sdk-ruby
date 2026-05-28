@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    type output_tokens_details = { thinking_tokens: Integer }
+
+    class OutputTokensDetails < Anthropic::Internal::Type::BaseModel
+      attr_accessor thinking_tokens: Integer
+
+      def initialize: (thinking_tokens: Integer) -> void
+
+      def to_hash: -> { thinking_tokens: Integer }
+    end
+  end
+end

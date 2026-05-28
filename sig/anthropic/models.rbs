@@ -181,6 +181,8 @@ module Anthropic
 
   class Metadata = Anthropic::Models::Metadata
 
+  class MidConversationSystemBlockParam = Anthropic::Models::MidConversationSystemBlockParam
+
   module Model = Anthropic::Models::Model
 
   class ModelCapabilities = Anthropic::Models::ModelCapabilities
@@ -194,6 +196,8 @@ module Anthropic
   class NotFoundError = Anthropic::Models::NotFoundError
 
   class OutputConfig = Anthropic::Models::OutputConfig
+
+  class OutputTokensDetails = Anthropic::Models::OutputTokensDetails
 
   class OverloadedError = Anthropic::Models::OverloadedError
 

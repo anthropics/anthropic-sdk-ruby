@@ -9,6 +9,7 @@ module Anthropic
         INVALID_TOOL_INPUT = :invalid_tool_input
         URL_TOO_LONG = :url_too_long
         URL_NOT_ALLOWED = :url_not_allowed
+        URL_NOT_IN_PRIOR_CONTEXT = :url_not_in_prior_context
         URL_NOT_ACCESSIBLE = :url_not_accessible
         UNSUPPORTED_CONTENT_TYPE = :unsupported_content_type
         TOO_MANY_REQUESTS = :too_many_requests

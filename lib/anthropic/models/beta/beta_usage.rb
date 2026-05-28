@@ -55,6 +55,17 @@ module Anthropic
         #   @return [Integer]
         required :output_tokens, Integer
 
+        # @!attribute output_tokens_details
+        #   Breakdown of output tokens by category.
+        #
+        #   `output_tokens` remains the inclusive, authoritative total used for billing.
+        #   This object provides a read-only decomposition for observability — for example,
+        #   how many of the billed output tokens were spent on internal reasoning that may
+        #   have been summarized before being returned to you.
+        #
+        #   @return [Anthropic::Models::Beta::BetaOutputTokensDetails, nil]
+        required :output_tokens_details, -> { Anthropic::Beta::BetaOutputTokensDetails }, nil?: true
+
         # @!attribute server_tool_use
         #   The number of server tool requests.
         #
@@ -73,7 +84,7 @@ module Anthropic
         #   @return [Symbol, Anthropic::Models::Beta::BetaUsage::Speed, nil]
         required :speed, enum: -> { Anthropic::Beta::BetaUsage::Speed }, nil?: true
 
-        # @!method initialize(cache_creation:, cache_creation_input_tokens:, cache_read_input_tokens:, inference_geo:, input_tokens:, iterations:, output_tokens:, server_tool_use:, service_tier:, speed:)
+        # @!method initialize(cache_creation:, cache_creation_input_tokens:, cache_read_input_tokens:, inference_geo:, input_tokens:, iterations:, output_tokens:, output_tokens_details:, server_tool_use:, service_tier:, speed:)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaUsage} for more details.
         #
@@ -90,6 +101,8 @@ module Anthropic
         #   @param iterations [Array<Anthropic::Models::Beta::BetaMessageIterationUsage, Anthropic::Models::Beta::BetaCompactionIterationUsage, Anthropic::Models::Beta::BetaAdvisorMessageIterationUsage>, nil] Per-iteration token usage breakdown.
         #
         #   @param output_tokens [Integer] The number of output tokens which were used.
+        #
+        #   @param output_tokens_details [Anthropic::Models::Beta::BetaOutputTokensDetails, nil] Breakdown of output tokens by category.
         #
         #   @param server_tool_use [Anthropic::Models::Beta::BetaServerToolUsage, nil] The number of server tool requests.
         #

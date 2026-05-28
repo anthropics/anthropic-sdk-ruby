@@ -8,6 +8,7 @@ module Anthropic
         inference_geo: String?,
         input_tokens: Integer,
         output_tokens: Integer,
+        output_tokens_details: Anthropic::OutputTokensDetails?,
         server_tool_use: Anthropic::ServerToolUsage?,
         service_tier: Anthropic::Models::Usage::service_tier?
       }
@@ -25,6 +26,8 @@ module Anthropic
 
       attr_accessor output_tokens: Integer
 
+      attr_accessor output_tokens_details: Anthropic::OutputTokensDetails?
+
       attr_accessor server_tool_use: Anthropic::ServerToolUsage?
 
       attr_accessor service_tier: Anthropic::Models::Usage::service_tier?
@@ -36,6 +39,7 @@ module Anthropic
         inference_geo: String?,
         input_tokens: Integer,
         output_tokens: Integer,
+        output_tokens_details: Anthropic::OutputTokensDetails?,
         server_tool_use: Anthropic::ServerToolUsage?,
         service_tier: Anthropic::Models::Usage::service_tier?
       ) -> void
@@ -47,6 +51,7 @@ module Anthropic
         inference_geo: String?,
         input_tokens: Integer,
         output_tokens: Integer,
+        output_tokens_details: Anthropic::OutputTokensDetails?,
         server_tool_use: Anthropic::ServerToolUsage?,
         service_tier: Anthropic::Models::Usage::service_tier?
       }
