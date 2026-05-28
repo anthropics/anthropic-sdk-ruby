@@ -35,8 +35,9 @@ module Anthropic
         # Note that our models may stop _before_ reaching this maximum. This parameter
         # only specifies the absolute maximum number of tokens to generate.
         max_tokens_to_sample:,
-        # Body param: The model that will complete your prompt.\n\nSee
-        # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+        # Body param: The model that will complete your prompt.
+        #
+        # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         model:,
         # Body param: The prompt that you want Claude to complete.
@@ -124,8 +125,9 @@ module Anthropic
         # Note that our models may stop _before_ reaching this maximum. This parameter
         # only specifies the absolute maximum number of tokens to generate.
         max_tokens_to_sample:,
-        # Body param: The model that will complete your prompt.\n\nSee
-        # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+        # Body param: The model that will complete your prompt.
+        #
+        # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         model:,
         # Body param: The prompt that you want Claude to complete.

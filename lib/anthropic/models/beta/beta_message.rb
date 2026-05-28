@@ -87,8 +87,9 @@ module Anthropic
         required :diagnostics, -> { Anthropic::Beta::BetaDiagnostics }, nil?: true
 
         # @!attribute model
-        #   The model that will complete your prompt.\n\nSee
-        #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+        #   The model that will complete your prompt.
+        #
+        #   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #   details and options.
         #
         #   @return [Symbol, String, Anthropic::Models::Model]
@@ -179,7 +180,7 @@ module Anthropic
         #
         #   @param diagnostics [Anthropic::Models::Beta::BetaDiagnostics, nil] Response envelope for request-level diagnostics. Present (possibly
         #
-        #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+        #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
         #
         #   @param stop_details [Anthropic::Models::Beta::BetaRefusalStopDetails, nil] Structured information about a refusal.
         #

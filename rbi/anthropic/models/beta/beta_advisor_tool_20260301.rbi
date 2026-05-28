@@ -14,8 +14,9 @@ module Anthropic
             )
           end
 
-        # The model that will complete your prompt.\n\nSee
-        # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+        # The model that will complete your prompt.
+        #
+        # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
         attr_accessor :model
@@ -114,8 +115,9 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # The model that will complete your prompt.\n\nSee
-          # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+          # The model that will complete your prompt.
+          #
+          # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
           allowed_callers: nil,

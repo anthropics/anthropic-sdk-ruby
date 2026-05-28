@@ -5,8 +5,9 @@ module Anthropic
     BetaManagedAgentsModel = Beta::BetaManagedAgentsModel
 
     module Beta
-      # The model that will power your agent.\n\nSee
-      # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+      # The model that will power your agent.
+      #
+      # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       # details and options.
       module BetaManagedAgentsModel
         extend Anthropic::Internal::Type::Union

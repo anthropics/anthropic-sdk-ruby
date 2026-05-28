@@ -29,8 +29,9 @@ module Anthropic
         required :input_tokens, Integer
 
         # @!attribute model
-        #   The model that will complete your prompt.\n\nSee
-        #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+        #   The model that will complete your prompt.
+        #
+        #   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #   details and options.
         #
         #   @return [Symbol, String, Anthropic::Models::Model]
@@ -62,7 +63,7 @@ module Anthropic
         #
         #   @param input_tokens [Integer] The number of input tokens which were used.
         #
-        #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+        #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
         #
         #   @param output_tokens [Integer] The number of output tokens which were used.
         #

@@ -474,8 +474,9 @@ module Anthropic
           #
           # There is a limit of 100,000 messages in a single request.
           messages:,
-          # Body param: The model that will complete your prompt.\n\nSee
-          # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+          # Body param: The model that will complete your prompt.
+          #
+          # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
           # Body param: Top-level cache control automatically applies a cache_control marker
@@ -830,8 +831,9 @@ module Anthropic
           #
           # There is a limit of 100,000 messages in a single request.
           messages:,
-          # Body param: The model that will complete your prompt.\n\nSee
-          # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+          # Body param: The model that will complete your prompt.
+          #
+          # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
           # Body param: Top-level cache control automatically applies a cache_control marker
@@ -1153,8 +1155,9 @@ module Anthropic
           #
           # There is a limit of 100,000 messages in a single request.
           messages:,
-          # Body param: The model that will complete your prompt.\n\nSee
-          # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+          # Body param: The model that will complete your prompt.
+          #
+          # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
           # Body param: Top-level cache control automatically applies a cache_control marker

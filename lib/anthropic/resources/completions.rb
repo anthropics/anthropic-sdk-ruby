@@ -22,7 +22,7 @@ module Anthropic
       #
       # @param max_tokens_to_sample [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
-      # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.\n\nSee [models](https://do
+      # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
       #
       # @param prompt [String] Body param: The prompt that you want Claude to complete.
       #
@@ -78,7 +78,7 @@ module Anthropic
       #
       # @param max_tokens_to_sample [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
-      # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.\n\nSee [models](https://do
+      # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
       #
       # @param prompt [String] Body param: The prompt that you want Claude to complete.
       #

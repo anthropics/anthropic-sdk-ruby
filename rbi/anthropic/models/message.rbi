@@ -60,8 +60,9 @@ module Anthropic
       def parsed_output
       end
 
-      # The model that will complete your prompt.\n\nSee
-      # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+      # The model that will complete your prompt.
+      #
+      # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       # details and options.
       sig { returns(Anthropic::Model::Variants) }
       attr_accessor :model
@@ -206,8 +207,9 @@ module Anthropic
         # [{ "type": "text", "text": "B)" }]
         # ```
         content:,
-        # The model that will complete your prompt.\n\nSee
-        # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+        # The model that will complete your prompt.
+        #
+        # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         model:,
         # Structured information about a refusal.

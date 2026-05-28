@@ -21,8 +21,9 @@ module Anthropic
       required :completion, String
 
       # @!attribute model
-      #   The model that will complete your prompt.\n\nSee
-      #   [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+      #   The model that will complete your prompt.
+      #
+      #   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       #   details and options.
       #
       #   @return [Symbol, String, Anthropic::Models::Model]
@@ -56,7 +57,7 @@ module Anthropic
       #
       #   @param completion [String] The resulting completion up to and excluding the stop sequences.
       #
-      #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
       #
       #   @param stop_reason [String, nil] The reason that we stopped.
       #

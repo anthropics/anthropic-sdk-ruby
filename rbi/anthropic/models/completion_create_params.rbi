@@ -18,8 +18,9 @@ module Anthropic
       sig { returns(Integer) }
       attr_accessor :max_tokens_to_sample
 
-      # The model that will complete your prompt.\n\nSee
-      # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+      # The model that will complete your prompt.
+      #
+      # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
       # details and options.
       sig { returns(T.any(Anthropic::Model::OrSymbol, String)) }
       attr_accessor :model
@@ -131,8 +132,9 @@ module Anthropic
         # Note that our models may stop _before_ reaching this maximum. This parameter
         # only specifies the absolute maximum number of tokens to generate.
         max_tokens_to_sample:,
-        # The model that will complete your prompt.\n\nSee
-        # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+        # The model that will complete your prompt.
+        #
+        # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         model:,
         # The prompt that you want Claude to complete.

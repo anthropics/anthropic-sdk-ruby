@@ -96,8 +96,9 @@ module Anthropic
         end
         attr_writer :diagnostics
 
-        # The model that will complete your prompt.\n\nSee
-        # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+        # The model that will complete your prompt.
+        #
+        # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         sig { returns(Anthropic::Model::Variants) }
         attr_accessor :model
@@ -260,8 +261,9 @@ module Anthropic
           # Response envelope for request-level diagnostics. Present (possibly null)
           # whenever the caller supplied `diagnostics` on the request.
           diagnostics:,
-          # The model that will complete your prompt.\n\nSee
-          # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+          # The model that will complete your prompt.
+          #
+          # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           model:,
           # Structured information about a refusal.
