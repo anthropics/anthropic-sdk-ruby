@@ -31,7 +31,8 @@ module Anthropic
               Anthropic::Beta::BetaMCPToolUseBlockParam,
               Anthropic::Beta::BetaRequestMCPToolResultBlockParam,
               Anthropic::Beta::BetaContainerUploadBlockParam,
-              Anthropic::Beta::BetaCompactionBlockParam
+              Anthropic::Beta::BetaCompactionBlockParam,
+              Anthropic::Beta::BetaMidConversationSystemBlockParam
             )
           end
 

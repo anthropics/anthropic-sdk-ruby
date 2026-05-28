@@ -15,8 +15,15 @@ module Anthropic
         #   @return [Symbol, :advisor_redacted_result]
         required :type, const: :advisor_redacted_result
 
-        # @!method initialize(encrypted_content:, type: :advisor_redacted_result)
+        # @!attribute stop_reason
+        #
+        #   @return [String, nil]
+        optional :stop_reason, String, nil?: true
+
+        # @!method initialize(encrypted_content:, stop_reason: nil, type: :advisor_redacted_result)
         #   @param encrypted_content [String] Opaque blob produced by a prior response; must be round-tripped verbatim.
+        #
+        #   @param stop_reason [String, nil]
         #
         #   @param type [Symbol, :advisor_redacted_result]
       end

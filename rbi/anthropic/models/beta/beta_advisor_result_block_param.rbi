@@ -20,11 +20,24 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
-        sig { params(text: String, type: Symbol).returns(T.attached_class) }
-        def self.new(text:, type: :advisor_result)
+        sig { returns(T.nilable(String)) }
+        attr_accessor :stop_reason
+
+        sig do
+          params(
+            text: String,
+            stop_reason: T.nilable(String),
+            type: Symbol
+          ).returns(T.attached_class)
+        end
+        def self.new(text:, stop_reason: nil, type: :advisor_result)
         end
 
-        sig { override.returns({ text: String, type: Symbol }) }
+        sig do
+          override.returns(
+            { text: String, type: Symbol, stop_reason: T.nilable(String) }
+          )
+        end
         def to_hash
         end
       end

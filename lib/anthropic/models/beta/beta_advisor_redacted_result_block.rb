@@ -11,16 +11,25 @@ module Anthropic
         #   @return [String]
         required :encrypted_content, String
 
+        # @!attribute stop_reason
+        #   The advisor sub-inference's stop reason (same values as the top-level message
+        #   `stop_reason`).
+        #
+        #   @return [String, nil]
+        required :stop_reason, String, nil?: true
+
         # @!attribute type
         #
         #   @return [Symbol, :advisor_redacted_result]
         required :type, const: :advisor_redacted_result
 
-        # @!method initialize(encrypted_content:, type: :advisor_redacted_result)
+        # @!method initialize(encrypted_content:, stop_reason:, type: :advisor_redacted_result)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaAdvisorRedactedResultBlock} for more details.
         #
         #   @param encrypted_content [String] Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect
+        #
+        #   @param stop_reason [String, nil] The advisor sub-inference's stop reason (same values as the top-level message `s
         #
         #   @param type [Symbol, :advisor_redacted_result]
       end

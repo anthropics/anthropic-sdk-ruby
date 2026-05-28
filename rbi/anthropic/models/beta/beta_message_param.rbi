@@ -84,6 +84,11 @@ module Anthropic
               :assistant,
               Anthropic::Beta::BetaMessageParam::Role::TaggedSymbol
             )
+          SYSTEM =
+            T.let(
+              :system,
+              Anthropic::Beta::BetaMessageParam::Role::TaggedSymbol
+            )
 
           sig do
             override.returns(

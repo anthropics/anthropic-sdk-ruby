@@ -10,6 +10,8 @@ module Anthropic
       module BetaManagedAgentsModel
         extend Anthropic::Internal::Type::Union
 
+        variant const: -> { Anthropic::Models::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_4_8 }
+
         variant const: -> { Anthropic::Models::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_4_7 }
 
         variant const: -> { Anthropic::Models::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_4_6 }
@@ -38,6 +40,9 @@ module Anthropic
         end
 
         # @!group
+
+        # Frontier intelligence for long-running agents and coding
+        CLAUDE_OPUS_4_8 = :"claude-opus-4-8"
 
         # Frontier intelligence for long-running agents and coding
         CLAUDE_OPUS_4_7 = :"claude-opus-4-7"

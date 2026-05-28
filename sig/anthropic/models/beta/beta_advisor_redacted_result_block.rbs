@@ -4,20 +4,28 @@ module Anthropic
 
     module Beta
       type beta_advisor_redacted_result_block =
-        { encrypted_content: String, type: :advisor_redacted_result }
+        {
+          encrypted_content: String,
+          stop_reason: String?,
+          type: :advisor_redacted_result
+        }
 
       class BetaAdvisorRedactedResultBlock < Anthropic::Internal::Type::BaseModel
         attr_accessor encrypted_content: String
+
+        attr_accessor stop_reason: String?
 
         attr_accessor type: :advisor_redacted_result
 
         def initialize: (
           encrypted_content: String,
+          stop_reason: String?,
           ?type: :advisor_redacted_result
         ) -> void
 
         def to_hash: -> {
           encrypted_content: String,
+          stop_reason: String?,
           type: :advisor_redacted_result
         }
       end

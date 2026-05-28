@@ -17,6 +17,7 @@ module Anthropic
       | Anthropic::TextEditorCodeExecutionToolResultBlockParam
       | Anthropic::ToolSearchToolResultBlockParam
       | Anthropic::ContainerUploadBlockParam
+      | Anthropic::MidConversationSystemBlockParam
 
     module ContentBlockParam
       extend Anthropic::Internal::Type::Union

@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaOutputTokensDetails = Beta::BetaOutputTokensDetails
+
+    module Beta
+      type beta_output_tokens_details = { thinking_tokens: Integer }
+
+      class BetaOutputTokensDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor thinking_tokens: Integer
+
+        def initialize: (thinking_tokens: Integer) -> void
+
+        def to_hash: -> { thinking_tokens: Integer }
+      end
+    end
+  end
+end

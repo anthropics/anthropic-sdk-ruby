@@ -35,13 +35,14 @@ module Anthropic
           BetaContentBlockParamArray: Anthropic::Internal::Type::Converter
         end
 
-        type role = :user | :assistant
+        type role = :user | :assistant | :system
 
         module Role
           extend Anthropic::Internal::Type::Enum
 
           USER: :user
           ASSISTANT: :assistant
+          SYSTEM: :system
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaMessageParam::role]
         end

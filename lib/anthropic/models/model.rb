@@ -9,6 +9,8 @@ module Anthropic
     module Model
       extend Anthropic::Internal::Type::Union
 
+      variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_8 }
+
       variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_7 }
 
       variant const: -> { Anthropic::Models::Model::CLAUDE_MYTHOS_PREVIEW }
@@ -53,6 +55,9 @@ module Anthropic
       end
 
       # @!group
+
+      # Frontier intelligence for long-running agents and coding
+      CLAUDE_OPUS_4_8 = :"claude-opus-4-8"
 
       # Frontier intelligence for long-running agents and coding
       CLAUDE_OPUS_4_7 = :"claude-opus-4-7"
