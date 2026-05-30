@@ -278,6 +278,26 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
     refute_includes(body, "\r\nEvil:")
   end
 
+  def test_multipart_document_content_type_inference
+    headers = {"content-type" => "multipart/form-data"}
+    cases = {
+      Anthropic::FilePart.new(StringIO.new("x"), filename: "document.pdf") => "application/pdf",
+      Anthropic::FilePart.new(StringIO.new("x"), filename: "document.txt") => "text/plain",
+      Anthropic::FilePart.new(
+        StringIO.new("x"),
+        filename: "document.pdf",
+        content_type: "application/custom"
+      ) => "application/custom"
+    }
+
+    cases.each do |file, content_type|
+      _headers, stream = Anthropic::Internal::Util.encode_content(headers, {file: file})
+      body = stream.respond_to?(:read) ? stream.read : stream.to_a.join
+
+      assert_includes(body, "Content-Type: #{content_type}\r\n\r\n")
+    end
+  end
+
   def test_hash_encode
     headers = {"content-type" => "multipart/form-data"}
     cases = {

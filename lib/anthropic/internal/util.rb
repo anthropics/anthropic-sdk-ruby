@@ -550,14 +550,16 @@ module Anthropic
               y,
               val: val.content,
               closing: closing,
-              content_type: val.content_type
+              content_type: val.content_type || infer_multipart_content_type(val.filename)
             )
           in Pathname
+            content_type ||= infer_multipart_content_type(val)
             y << format(content_line, content_type || "application/octet-stream")
             io = val.open(binmode: true)
             closing << io.method(:close)
             IO.copy_stream(io, y)
           in IO
+            content_type ||= infer_multipart_content_type(val.to_path)
             y << format(content_line, content_type || "application/octet-stream")
             IO.copy_stream(val, y)
           in StringIO
@@ -571,6 +573,20 @@ module Anthropic
             y << JSON.generate(val)
           end
           y << "\r\n"
+        end
+
+        # @api private
+        #
+        # @param filename [Pathname, String, nil]
+        #
+        # @return [String, nil]
+        private def infer_multipart_content_type(filename)
+          case ::File.extname(filename.to_s).downcase
+          when ".pdf"
+            "application/pdf"
+          when ".txt"
+            "text/plain"
+          end
         end
 
         # @api private
