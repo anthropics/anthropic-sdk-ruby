@@ -23,7 +23,7 @@ jobs:
       id-token: write
     runs-on: 'ubuntu-latest'
     if: |-
-      github.repository == 'github.com/anthropics/anthropic-sdk-ruby-private' &&
+      github.repository == 'anthropics/anthropic-sdk-ruby-private' &&
       (github.event_name == 'push' || github.event.pull_request.head.repo.fork)
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -36,7 +36,7 @@ jobs:
 
       - name: Get GitHub OIDC Token
         if: |-
-          github.repository == 'github.com/anthropics/anthropic-sdk-ruby-private' &&
+          github.repository == 'anthropics/anthropic-sdk-ruby-private' &&
           !startsWith(github.ref, 'refs/heads/stl/')
         id: github-oidc
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
@@ -45,7 +45,7 @@ jobs:
 
       - name: Build and upload gem artifacts
         if: |-
-          github.repository == 'github.com/anthropics/anthropic-sdk-ruby-private' &&
+          github.repository == 'anthropics/anthropic-sdk-ruby-private' &&
           !startsWith(github.ref, 'refs/heads/stl/')
         env:
           URL: https://pkg.stainless.com/s
