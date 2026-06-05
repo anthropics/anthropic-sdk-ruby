@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.45.0 (2026-06-05)
+
+Full Changelog: [v1.44.0...v1.45.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.44.0...v1.45.0)
+
+### Features
+
+* **api:** mark Claude Opus 4.1 as deprecated ([ccc292f](https://github.com/anthropics/anthropic-sdk-ruby/commit/ccc292f10ffb2c825f5b34c8372e7d6803ebc83d))
+
+
+### Bug Fixes
+
+* **streaming:** carry encrypted_content through beta compaction accumulator ([#938](https://github.com/anthropics/anthropic-sdk-ruby/issues/938)) ([6bd298f](https://github.com/anthropics/anthropic-sdk-ruby/commit/6bd298fa4421192fdc74ee99462d94ec01a514d3))
+* **streaming:** carry stop_details and full usage through message_delta ([#940](https://github.com/anthropics/anthropic-sdk-ruby/issues/940)) ([ef4d2ea](https://github.com/anthropics/anthropic-sdk-ruby/commit/ef4d2ea31c0e566d7ad387419ba7d6144bf06861))
+
+
+### Chores
+
+* **internal:** codegen related update ([296d6a4](https://github.com/anthropics/anthropic-sdk-ruby/commit/296d6a47ec96c36cf7a924bd74aa752d2d2ff125))
+* **internal:** fix artifact url ([a97bd1e](https://github.com/anthropics/anthropic-sdk-ruby/commit/a97bd1e6fa5094057d2967d1b0573eec6602e026))
+* **internal:** fix branch names ([16564d3](https://github.com/anthropics/anthropic-sdk-ruby/commit/16564d3806d4cb70000fe374c6ccf399e8903ba8))
+* **internal:** update staging repo ([3f6005b](https://github.com/anthropics/anthropic-sdk-ruby/commit/3f6005b00242d66f711c31a4e51973576745aaee))
+
+
+### Documentation
+
+* point security reports to Anthropic's HackerOne program ([#6](https://github.com/anthropics/anthropic-sdk-ruby/issues/6)) ([2d0f2af](https://github.com/anthropics/anthropic-sdk-ruby/commit/2d0f2af04956b58976aaf783b6ce24a4271c15ab))
+
 ## 1.44.0 (2026-05-28)
 
 Full Changelog: [v1.43.0...v1.44.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.43.0...v1.44.0)
