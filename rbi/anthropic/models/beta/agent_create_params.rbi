@@ -30,11 +30,11 @@ module Anthropic
         end
         attr_accessor :model
 
-        # Human-readable name for the agent. 1-256 characters.
+        # Human-readable name for the agent.
         sig { returns(String) }
         attr_accessor :name
 
-        # Description of what the agent does. Up to 2048 characters.
+        # Description of what the agent does.
         sig { returns(T.nilable(String)) }
         attr_accessor :description
 
@@ -84,7 +84,7 @@ module Anthropic
         end
         attr_writer :multiagent
 
-        # Skills available to the agent. Maximum 20.
+        # Skills available to the agent.
         sig do
           returns(
             T.nilable(
@@ -112,7 +112,7 @@ module Anthropic
         end
         attr_writer :skills
 
-        # System prompt for the agent. Up to 100,000 characters.
+        # System prompt for the agent.
         sig { returns(T.nilable(String)) }
         attr_accessor :system_
 
@@ -209,9 +209,9 @@ module Anthropic
           # e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration
           # control
           model:,
-          # Human-readable name for the agent. 1-256 characters.
+          # Human-readable name for the agent.
           name:,
-          # Description of what the agent does. Up to 2048 characters.
+          # Description of what the agent does.
           description: nil,
           # MCP servers this agent connects to. Maximum 20. Names must be unique within the
           # array.
@@ -222,9 +222,9 @@ module Anthropic
           # A coordinator topology: the session's primary thread orchestrates work by
           # spawning session threads, each running an agent drawn from the `agents` roster.
           multiagent: nil,
-          # Skills available to the agent. Maximum 20.
+          # Skills available to the agent.
           skills: nil,
-          # System prompt for the agent. Up to 100,000 characters.
+          # System prompt for the agent.
           system_: nil,
           # Tool configurations available to the agent. Maximum of 128 tools across all
           # toolsets allowed.

@@ -95,7 +95,7 @@ module Anthropic
         end
         attr_writer :order
 
-        # Opaque pagination cursor from a previous response's next_page.
+        # Opaque pagination cursor from a previous response.
         sig { returns(T.nilable(String)) }
         attr_reader :page
 
@@ -180,7 +180,7 @@ module Anthropic
           # Sort direction for results, ordered by created_at. Defaults to desc (newest
           # first).
           order: nil,
-          # Opaque pagination cursor from a previous response's next_page.
+          # Opaque pagination cursor from a previous response.
           page: nil,
           # Filter by session status. Repeat the parameter to match any of multiple
           # statuses.

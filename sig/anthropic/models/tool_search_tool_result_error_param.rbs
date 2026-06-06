@@ -3,7 +3,8 @@ module Anthropic
     type tool_search_tool_result_error_param =
       {
         error_code: Anthropic::Models::tool_search_tool_result_error_code,
-        type: :tool_search_tool_result_error
+        type: :tool_search_tool_result_error,
+        error_message: String?
       }
 
     class ToolSearchToolResultErrorParam < Anthropic::Internal::Type::BaseModel
@@ -11,14 +12,18 @@ module Anthropic
 
       attr_accessor type: :tool_search_tool_result_error
 
+      attr_accessor error_message: String?
+
       def initialize: (
         error_code: Anthropic::Models::tool_search_tool_result_error_code,
+        ?error_message: String?,
         ?type: :tool_search_tool_result_error
       ) -> void
 
       def to_hash: -> {
         error_code: Anthropic::Models::tool_search_tool_result_error_code,
-        type: :tool_search_tool_result_error
+        type: :tool_search_tool_result_error,
+        error_message: String?
       }
     end
   end

@@ -16,9 +16,9 @@ module Anthropic
         #
         # @param model [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams] Body param: Model identifier. Accepts the [model string](https://platform.claude
         #
-        # @param name [String] Body param: Human-readable name for the agent. 1-256 characters.
+        # @param name [String] Body param: Human-readable name for the agent.
         #
-        # @param description [String, nil] Body param: Description of what the agent does. Up to 2048 characters.
+        # @param description [String, nil] Body param: Description of what the agent does.
         #
         # @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>] Body param: MCP servers this agent connects to. Maximum 20. Names must be unique
         #
@@ -26,9 +26,9 @@ module Anthropic
         #
         # @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] Body param: A coordinator topology: the session's primary thread orchestrates wo
         #
-        # @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>] Body param: Skills available to the agent. Maximum 20.
+        # @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>] Body param: Skills available to the agent.
         #
-        # @param system_ [String, nil] Body param: System prompt for the agent. Up to 100,000 characters.
+        # @param system_ [String, nil] Body param: System prompt for the agent.
         #
         # @param tools [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams>] Body param: Tool configurations available to the agent. Maximum of 128 tools acr
         #
@@ -95,7 +95,7 @@ module Anthropic
         #
         # @param version [Integer] Body param: The agent's current version, used to prevent concurrent overwrites.
         #
-        # @param description [String, nil] Body param: Description. Up to 2048 characters. Omit to preserve; send empty str
+        # @param description [String, nil] Body param: Description. Omit to preserve; send empty string or null to clear.
         #
         # @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>, nil] Body param: MCP servers. Full replacement. Omit to preserve; send empty array or
         #
@@ -105,11 +105,11 @@ module Anthropic
         #
         # @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] Body param: A coordinator topology: the session's primary thread orchestrates wo
         #
-        # @param name [String] Body param: Human-readable name. 1-256 characters. Omit to preserve. Cannot be c
+        # @param name [String] Body param: Human-readable name. Must be non-empty. Omit to preserve. Cannot be
         #
         # @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>, nil] Body param: Skills. Full replacement. Omit to preserve; send empty array or null
         #
-        # @param system_ [String, nil] Body param: System prompt. Up to 100,000 characters. Omit to preserve; send empt
+        # @param system_ [String, nil] Body param: System prompt. Omit to preserve; send empty string or null to clear.
         #
         # @param tools [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams>, nil] Body param: Tool configurations available to the agent. Full replacement. Omit t
         #

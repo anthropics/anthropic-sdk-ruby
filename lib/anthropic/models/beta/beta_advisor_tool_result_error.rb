@@ -28,6 +28,7 @@ module Anthropic
           OVERLOADED = :overloaded
           UNAVAILABLE = :unavailable
           EXECUTION_TIME_EXCEEDED = :execution_time_exceeded
+          MODEL_NOT_FOUND = :model_not_found
 
           # @!method self.values
           #   @return [Array<Symbol>]

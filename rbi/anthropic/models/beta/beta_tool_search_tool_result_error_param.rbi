@@ -25,14 +25,22 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
+        sig { returns(T.nilable(String)) }
+        attr_accessor :error_message
+
         sig do
           params(
             error_code:
               Anthropic::Beta::BetaToolSearchToolResultErrorParam::ErrorCode::OrSymbol,
+            error_message: T.nilable(String),
             type: Symbol
           ).returns(T.attached_class)
         end
-        def self.new(error_code:, type: :tool_search_tool_result_error)
+        def self.new(
+          error_code:,
+          error_message: nil,
+          type: :tool_search_tool_result_error
+        )
         end
 
         sig do
@@ -40,7 +48,8 @@ module Anthropic
             {
               error_code:
                 Anthropic::Beta::BetaToolSearchToolResultErrorParam::ErrorCode::OrSymbol,
-              type: Symbol
+              type: Symbol,
+              error_message: T.nilable(String)
             }
           )
         end

@@ -85,6 +85,16 @@ module Anthropic
         sig { params(defer_loading: T::Boolean).void }
         attr_writer :defer_loading
 
+        # Bounds the advisor's total output (thinking + text) per call. When the advisor
+        # hits this cap, the returned advisor_result or advisor_redacted_result block
+        # carries stop_reason='max_tokens', and a truncation note is appended to the
+        # advice text the worker model sees (inside the encrypted blob in redacted mode).
+        # When set, the server also emits a remaining-tokens budget block in the advisor's
+        # prompt so the advisor self-shapes toward the cap. When omitted, the advisor
+        # model's default output cap applies and no budget block is emitted.
+        sig { returns(T.nilable(Integer)) }
+        attr_accessor :max_tokens
+
         # Maximum number of times the tool can be used in the API request.
         sig { returns(T.nilable(Integer)) }
         attr_accessor :max_uses
@@ -108,6 +118,7 @@ module Anthropic
             caching:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             defer_loading: T::Boolean,
+            max_tokens: T.nilable(Integer),
             max_uses: T.nilable(Integer),
             strict: T::Boolean,
             name: Symbol,
@@ -130,6 +141,14 @@ module Anthropic
           # If true, tool will not be included in initial system prompt. Only loaded when
           # returned via tool_reference from tool search.
           defer_loading: nil,
+          # Bounds the advisor's total output (thinking + text) per call. When the advisor
+          # hits this cap, the returned advisor_result or advisor_redacted_result block
+          # carries stop_reason='max_tokens', and a truncation note is appended to the
+          # advice text the worker model sees (inside the encrypted blob in redacted mode).
+          # When set, the server also emits a remaining-tokens budget block in the advisor's
+          # prompt so the advisor self-shapes toward the cap. When omitted, the advisor
+          # model's default output cap applies and no budget block is emitted.
+          max_tokens: nil,
           # Maximum number of times the tool can be used in the API request.
           max_uses: nil,
           # When true, guarantees schema validation on tool names and inputs
@@ -156,6 +175,7 @@ module Anthropic
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
               caching: T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
               defer_loading: T::Boolean,
+              max_tokens: T.nilable(Integer),
               max_uses: T.nilable(Integer),
               strict: T::Boolean
             }
