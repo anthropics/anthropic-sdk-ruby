@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.46.0 (2026-06-06)
+
+Full Changelog: [v1.45.0...v1.46.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.45.0...v1.46.0)
+
+### Features
+
+* **api:** small updates to Managed Agents types ([7edca7a](https://github.com/anthropics/anthropic-sdk-ruby/commit/7edca7a42f521b53085fef8360dcda9bad974748))
+
 ## 1.45.0 (2026-06-05)
 
 Full Changelog: [v1.44.0...v1.45.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.44.0...v1.45.0)
