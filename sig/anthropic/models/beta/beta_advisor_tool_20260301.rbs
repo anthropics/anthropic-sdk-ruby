@@ -12,6 +12,7 @@ module Anthropic
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           caching: Anthropic::Beta::BetaCacheControlEphemeral?,
           defer_loading: bool,
+          max_tokens: Integer?,
           max_uses: Integer?,
           strict: bool
         }
@@ -37,6 +38,8 @@ module Anthropic
 
         def defer_loading=: (bool) -> bool
 
+        attr_accessor max_tokens: Integer?
+
         attr_accessor max_uses: Integer?
 
         attr_reader strict: bool?
@@ -49,6 +52,7 @@ module Anthropic
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?caching: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?defer_loading: bool,
+          ?max_tokens: Integer?,
           ?max_uses: Integer?,
           ?strict: bool,
           ?name: :advisor,
@@ -63,6 +67,7 @@ module Anthropic
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           caching: Anthropic::Beta::BetaCacheControlEphemeral?,
           defer_loading: bool,
+          max_tokens: Integer?,
           max_uses: Integer?,
           strict: bool
         }

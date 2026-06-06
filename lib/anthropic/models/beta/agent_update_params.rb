@@ -22,8 +22,7 @@ module Anthropic
         required :version, Integer
 
         # @!attribute description
-        #   Description. Up to 2048 characters. Omit to preserve; send empty string or null
-        #   to clear.
+        #   Description. Omit to preserve; send empty string or null to clear.
         #
         #   @return [String, nil]
         optional :description, String, nil?: true
@@ -64,14 +63,13 @@ module Anthropic
         optional :multiagent, -> { Anthropic::Beta::BetaManagedAgentsMultiagentParams }, nil?: true
 
         # @!attribute name
-        #   Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
+        #   Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
         #
         #   @return [String, nil]
         optional :name, String
 
         # @!attribute skills
         #   Skills. Full replacement. Omit to preserve; send empty array or null to clear.
-        #   Maximum 20.
         #
         #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>, nil]
         optional :skills,
@@ -81,8 +79,7 @@ module Anthropic
                  nil?: true
 
         # @!attribute system_
-        #   System prompt. Up to 100,000 characters. Omit to preserve; send empty string or
-        #   null to clear.
+        #   System prompt. Omit to preserve; send empty string or null to clear.
         #
         #   @return [String, nil]
         optional :system_, String, api_name: :system, nil?: true
@@ -111,7 +108,7 @@ module Anthropic
         #
         #   @param version [Integer] The agent's current version, used to prevent concurrent overwrites. Obtain this
         #
-        #   @param description [String, nil] Description. Up to 2048 characters. Omit to preserve; send empty string or null
+        #   @param description [String, nil] Description. Omit to preserve; send empty string or null to clear.
         #
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>, nil] MCP servers. Full replacement. Omit to preserve; send empty array or null to cle
         #
@@ -121,11 +118,11 @@ module Anthropic
         #
         #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] A coordinator topology: the session's primary thread orchestrates work by spawni
         #
-        #   @param name [String] Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
+        #   @param name [String] Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
         #
-        #   @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>, nil] Skills. Full replacement. Omit to preserve; send empty array or null to clear. M
+        #   @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>, nil] Skills. Full replacement. Omit to preserve; send empty array or null to clear.
         #
-        #   @param system_ [String, nil] System prompt. Up to 100,000 characters. Omit to preserve; send empty string or
+        #   @param system_ [String, nil] System prompt. Omit to preserve; send empty string or null to clear.
         #
         #   @param tools [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams>, nil] Tool configurations available to the agent. Full replacement. Omit to preserve;
         #

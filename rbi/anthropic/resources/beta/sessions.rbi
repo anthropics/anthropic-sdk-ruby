@@ -161,7 +161,7 @@ module Anthropic
           # Query param: Sort direction for results, ordered by created_at. Defaults to desc
           # (newest first).
           order: nil,
-          # Query param: Opaque pagination cursor from a previous response's next_page.
+          # Query param: Opaque pagination cursor from a previous response.
           page: nil,
           # Query param: Filter by session status. Repeat the parameter to match any of
           # multiple statuses.

@@ -71,7 +71,7 @@ module Anthropic
         optional :order, enum: -> { Anthropic::Beta::SessionListParams::Order }
 
         # @!attribute page
-        #   Opaque pagination cursor from a previous response's next_page.
+        #   Opaque pagination cursor from a previous response.
         #
         #   @return [String, nil]
         optional :page, String
@@ -114,7 +114,7 @@ module Anthropic
         #
         #   @param order [Symbol, Anthropic::Models::Beta::SessionListParams::Order] Sort direction for results, ordered by created_at. Defaults to desc (newest firs
         #
-        #   @param page [String] Opaque pagination cursor from a previous response's next_page.
+        #   @param page [String] Opaque pagination cursor from a previous response.
         #
         #   @param statuses [Array<Symbol, Anthropic::Models::Beta::SessionListParams::Status>] Filter by session status. Repeat the parameter to match any of multiple statuses
         #

@@ -14,8 +14,14 @@ module Anthropic
         #   @return [Symbol, :tool_search_tool_result_error]
         required :type, const: :tool_search_tool_result_error
 
-        # @!method initialize(error_code:, type: :tool_search_tool_result_error)
+        # @!attribute error_message
+        #
+        #   @return [String, nil]
+        optional :error_message, String, nil?: true
+
+        # @!method initialize(error_code:, error_message: nil, type: :tool_search_tool_result_error)
         #   @param error_code [Symbol, Anthropic::Models::Beta::BetaToolSearchToolResultErrorParam::ErrorCode]
+        #   @param error_message [String, nil]
         #   @param type [Symbol, :tool_search_tool_result_error]
 
         # @see Anthropic::Models::Beta::BetaToolSearchToolResultErrorParam#error_code

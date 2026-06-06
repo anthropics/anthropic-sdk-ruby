@@ -88,6 +88,11 @@ module Anthropic
               :execution_time_exceeded,
               Anthropic::Beta::BetaAdvisorToolResultErrorParam::ErrorCode::TaggedSymbol
             )
+          MODEL_NOT_FOUND =
+            T.let(
+              :model_not_found,
+              Anthropic::Beta::BetaAdvisorToolResultErrorParam::ErrorCode::TaggedSymbol
+            )
 
           sig do
             override.returns(

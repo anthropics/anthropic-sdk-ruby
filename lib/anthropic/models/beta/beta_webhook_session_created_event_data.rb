@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       class BetaWebhookSessionCreatedEventData < Anthropic::Internal::Type::BaseModel
         # @!attribute id
-        #   ID of the resource that triggered the event.
+        #   ID of the session that triggered the event.
         #
         #   @return [String]
         required :id, String
@@ -26,7 +26,7 @@ module Anthropic
         required :workspace_id, String
 
         # @!method initialize(id:, organization_id:, workspace_id:, type: :"session.created")
-        #   @param id [String] ID of the resource that triggered the event.
+        #   @param id [String] ID of the session that triggered the event.
         #
         #   @param organization_id [String]
         #

@@ -18,13 +18,13 @@ module Anthropic
         required :model, union: -> { Anthropic::Beta::AgentCreateParams::Model }
 
         # @!attribute name
-        #   Human-readable name for the agent. 1-256 characters.
+        #   Human-readable name for the agent.
         #
         #   @return [String]
         required :name, String
 
         # @!attribute description
-        #   Description of what the agent does. Up to 2048 characters.
+        #   Description of what the agent does.
         #
         #   @return [String, nil]
         optional :description, String, nil?: true
@@ -52,14 +52,14 @@ module Anthropic
         optional :multiagent, -> { Anthropic::Beta::BetaManagedAgentsMultiagentParams }, nil?: true
 
         # @!attribute skills
-        #   Skills available to the agent. Maximum 20.
+        #   Skills available to the agent.
         #
         #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>, nil]
         optional :skills,
                  -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaManagedAgentsSkillParams] }
 
         # @!attribute system_
-        #   System prompt for the agent. Up to 100,000 characters.
+        #   System prompt for the agent.
         #
         #   @return [String, nil]
         optional :system_, String, api_name: :system, nil?: true
@@ -84,9 +84,9 @@ module Anthropic
         #
         #   @param model [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams] Model identifier. Accepts the [model string](https://platform.claude.com/docs/en
         #
-        #   @param name [String] Human-readable name for the agent. 1-256 characters.
+        #   @param name [String] Human-readable name for the agent.
         #
-        #   @param description [String, nil] Description of what the agent does. Up to 2048 characters.
+        #   @param description [String, nil] Description of what the agent does.
         #
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>] MCP servers this agent connects to. Maximum 20. Names must be unique within the
         #
@@ -94,9 +94,9 @@ module Anthropic
         #
         #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] A coordinator topology: the session's primary thread orchestrates work by spawni
         #
-        #   @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>] Skills available to the agent. Maximum 20.
+        #   @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>] Skills available to the agent.
         #
-        #   @param system_ [String, nil] System prompt for the agent. Up to 100,000 characters.
+        #   @param system_ [String, nil] System prompt for the agent.
         #
         #   @param tools [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams>] Tool configurations available to the agent. Maximum of 128 tools across all tool
         #

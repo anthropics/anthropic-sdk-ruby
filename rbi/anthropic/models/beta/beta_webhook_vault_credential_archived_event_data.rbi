@@ -15,7 +15,7 @@ module Anthropic
             )
           end
 
-        # ID of the resource that triggered the event.
+        # ID of the vault credential that triggered the event.
         sig { returns(String) }
         attr_accessor :id
 
@@ -42,7 +42,7 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # ID of the resource that triggered the event.
+          # ID of the vault credential that triggered the event.
           id:,
           organization_id:,
           # ID of the vault that owns this credential.

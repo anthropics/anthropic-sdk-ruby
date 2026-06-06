@@ -53,6 +53,18 @@ module Anthropic
         #   @return [Boolean, nil]
         optional :defer_loading, Anthropic::Internal::Type::Boolean
 
+        # @!attribute max_tokens
+        #   Bounds the advisor's total output (thinking + text) per call. When the advisor
+        #   hits this cap, the returned advisor_result or advisor_redacted_result block
+        #   carries stop_reason='max_tokens', and a truncation note is appended to the
+        #   advice text the worker model sees (inside the encrypted blob in redacted mode).
+        #   When set, the server also emits a remaining-tokens budget block in the advisor's
+        #   prompt so the advisor self-shapes toward the cap. When omitted, the advisor
+        #   model's default output cap applies and no budget block is emitted.
+        #
+        #   @return [Integer, nil]
+        optional :max_tokens, Integer, nil?: true
+
         # @!attribute max_uses
         #   Maximum number of times the tool can be used in the API request.
         #
@@ -65,7 +77,7 @@ module Anthropic
         #   @return [Boolean, nil]
         optional :strict, Anthropic::Internal::Type::Boolean
 
-        # @!method initialize(model:, allowed_callers: nil, cache_control: nil, caching: nil, defer_loading: nil, max_uses: nil, strict: nil, name: :advisor, type: :advisor_20260301)
+        # @!method initialize(model:, allowed_callers: nil, cache_control: nil, caching: nil, defer_loading: nil, max_tokens: nil, max_uses: nil, strict: nil, name: :advisor, type: :advisor_20260301)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaAdvisorTool20260301} for more details.
         #
@@ -78,6 +90,8 @@ module Anthropic
         #   @param caching [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Caching for the advisor's own prompt. When set, each advisor call writes a cache
         #
         #   @param defer_loading [Boolean] If true, tool will not be included in initial system prompt. Only loaded when re
+        #
+        #   @param max_tokens [Integer, nil] Bounds the advisor's total output (thinking + text) per call. When the advisor h
         #
         #   @param max_uses [Integer, nil] Maximum number of times the tool can be used in the API request.
         #

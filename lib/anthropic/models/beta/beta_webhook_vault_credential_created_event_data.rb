@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       class BetaWebhookVaultCredentialCreatedEventData < Anthropic::Internal::Type::BaseModel
         # @!attribute id
-        #   ID of the resource that triggered the event.
+        #   ID of the vault credential that triggered the event.
         #
         #   @return [String]
         required :id, String
@@ -32,7 +32,7 @@ module Anthropic
         required :workspace_id, String
 
         # @!method initialize(id:, organization_id:, vault_id:, workspace_id:, type: :"vault_credential.created")
-        #   @param id [String] ID of the resource that triggered the event.
+        #   @param id [String] ID of the vault credential that triggered the event.
         #
         #   @param organization_id [String]
         #

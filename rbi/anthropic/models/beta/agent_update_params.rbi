@@ -24,8 +24,7 @@ module Anthropic
         sig { returns(Integer) }
         attr_accessor :version
 
-        # Description. Up to 2048 characters. Omit to preserve; send empty string or null
-        # to clear.
+        # Description. Omit to preserve; send empty string or null to clear.
         sig { returns(T.nilable(String)) }
         attr_accessor :description
 
@@ -92,7 +91,7 @@ module Anthropic
         end
         attr_writer :multiagent
 
-        # Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
+        # Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
         sig { returns(T.nilable(String)) }
         attr_reader :name
 
@@ -100,7 +99,6 @@ module Anthropic
         attr_writer :name
 
         # Skills. Full replacement. Omit to preserve; send empty array or null to clear.
-        # Maximum 20.
         sig do
           returns(
             T.nilable(
@@ -115,8 +113,7 @@ module Anthropic
         end
         attr_accessor :skills
 
-        # System prompt. Up to 100,000 characters. Omit to preserve; send empty string or
-        # null to clear.
+        # System prompt. Omit to preserve; send empty string or null to clear.
         sig { returns(T.nilable(String)) }
         attr_accessor :system_
 
@@ -208,8 +205,7 @@ module Anthropic
           # value from a create or retrieve response. The request fails if this does not
           # match the server's current version.
           version:,
-          # Description. Up to 2048 characters. Omit to preserve; send empty string or null
-          # to clear.
+          # Description. Omit to preserve; send empty string or null to clear.
           description: nil,
           # MCP servers. Full replacement. Omit to preserve; send empty array or null to
           # clear. Names must be unique. Maximum 20.
@@ -226,13 +222,11 @@ module Anthropic
           # A coordinator topology: the session's primary thread orchestrates work by
           # spawning session threads, each running an agent drawn from the `agents` roster.
           multiagent: nil,
-          # Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
+          # Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
           name: nil,
           # Skills. Full replacement. Omit to preserve; send empty array or null to clear.
-          # Maximum 20.
           skills: nil,
-          # System prompt. Up to 100,000 characters. Omit to preserve; send empty string or
-          # null to clear.
+          # System prompt. Omit to preserve; send empty string or null to clear.
           system_: nil,
           # Tool configurations available to the agent. Full replacement. Omit to preserve;
           # send empty array or null to clear. Maximum of 128 tools across all toolsets

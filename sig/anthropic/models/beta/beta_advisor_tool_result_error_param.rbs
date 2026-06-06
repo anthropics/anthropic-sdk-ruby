@@ -31,6 +31,7 @@ module Anthropic
           | :overloaded
           | :unavailable
           | :execution_time_exceeded
+          | :model_not_found
 
         module ErrorCode
           extend Anthropic::Internal::Type::Enum
@@ -41,6 +42,7 @@ module Anthropic
           OVERLOADED: :overloaded
           UNAVAILABLE: :unavailable
           EXECUTION_TIME_EXCEEDED: :execution_time_exceeded
+          MODEL_NOT_FOUND: :model_not_found
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaAdvisorToolResultErrorParam::error_code]
         end

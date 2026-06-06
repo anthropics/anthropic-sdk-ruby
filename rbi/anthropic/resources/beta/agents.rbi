@@ -53,9 +53,9 @@ module Anthropic
           # e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration
           # control
           model:,
-          # Body param: Human-readable name for the agent. 1-256 characters.
+          # Body param: Human-readable name for the agent.
           name:,
-          # Body param: Description of what the agent does. Up to 2048 characters.
+          # Body param: Description of what the agent does.
           description: nil,
           # Body param: MCP servers this agent connects to. Maximum 20. Names must be unique
           # within the array.
@@ -67,9 +67,9 @@ module Anthropic
           # work by spawning session threads, each running an agent drawn from the `agents`
           # roster.
           multiagent: nil,
-          # Body param: Skills available to the agent. Maximum 20.
+          # Body param: Skills available to the agent.
           skills: nil,
-          # Body param: System prompt for the agent. Up to 100,000 characters.
+          # Body param: System prompt for the agent.
           system_: nil,
           # Body param: Tool configurations available to the agent. Maximum of 128 tools
           # across all toolsets allowed.
@@ -156,8 +156,7 @@ module Anthropic
           # Obtain this value from a create or retrieve response. The request fails if this
           # does not match the server's current version.
           version:,
-          # Body param: Description. Up to 2048 characters. Omit to preserve; send empty
-          # string or null to clear.
+          # Body param: Description. Omit to preserve; send empty string or null to clear.
           description: nil,
           # Body param: MCP servers. Full replacement. Omit to preserve; send empty array or
           # null to clear. Names must be unique. Maximum 20.
@@ -175,14 +174,13 @@ module Anthropic
           # work by spawning session threads, each running an agent drawn from the `agents`
           # roster.
           multiagent: nil,
-          # Body param: Human-readable name. 1-256 characters. Omit to preserve. Cannot be
+          # Body param: Human-readable name. Must be non-empty. Omit to preserve. Cannot be
           # cleared.
           name: nil,
           # Body param: Skills. Full replacement. Omit to preserve; send empty array or null
-          # to clear. Maximum 20.
+          # to clear.
           skills: nil,
-          # Body param: System prompt. Up to 100,000 characters. Omit to preserve; send
-          # empty string or null to clear.
+          # Body param: System prompt. Omit to preserve; send empty string or null to clear.
           system_: nil,
           # Body param: Tool configurations available to the agent. Full replacement. Omit
           # to preserve; send empty array or null to clear. Maximum of 128 tools across all

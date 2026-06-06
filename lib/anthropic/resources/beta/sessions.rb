@@ -140,7 +140,7 @@ module Anthropic
         #
         # @param order [Symbol, Anthropic::Models::Beta::SessionListParams::Order] Query param: Sort direction for results, ordered by created_at. Defaults to desc
         #
-        # @param page [String] Query param: Opaque pagination cursor from a previous response's next_page.
+        # @param page [String] Query param: Opaque pagination cursor from a previous response.
         #
         # @param statuses [Array<Symbol, Anthropic::Models::Beta::SessionListParams::Status>] Query param: Filter by session status. Repeat the parameter to match any of mult
         #
