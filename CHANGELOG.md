@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.48.0 (2026-06-09)
+
+Full Changelog: [v1.47.0...v1.48.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.47.0...v1.48.0)
+
+### Features
+
+* **api:** add support for Managed Agents deployments and environment variable credentials ([fcf62cf](https://github.com/anthropics/anthropic-sdk-ruby/commit/fcf62cfeb16456f8341b3ebb3c4fe06a2903b9e3))
+
 ## 1.47.0 (2026-06-09)
 
 Full Changelog: [v1.46.0...v1.47.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.46.0...v1.47.0)
