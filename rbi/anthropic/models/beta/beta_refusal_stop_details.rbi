@@ -198,6 +198,11 @@ module Anthropic
               :bio,
               Anthropic::Beta::BetaRefusalStopDetails::Category::TaggedSymbol
             )
+          FRONTIER_LLM =
+            T.let(
+              :frontier_llm,
+              Anthropic::Beta::BetaRefusalStopDetails::Category::TaggedSymbol
+            )
           REASONING_EXTRACTION =
             T.let(
               :reasoning_extraction,
