@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsTriggerType = Beta::BetaManagedAgentsTriggerType
+
+    module Beta
+      type beta_managed_agents_trigger_type = :schedule | :manual
+
+      module BetaManagedAgentsTriggerType
+        extend Anthropic::Internal::Type::Enum
+
+        SCHEDULE: :schedule
+        MANUAL: :manual
+
+        def self?.values: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_trigger_type]
+      end
+    end
+  end
+end

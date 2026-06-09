@@ -17,7 +17,7 @@ module Anthropic
           # @!attribute auth
           #   Authentication details for creating a credential.
           #
-          #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams]
+          #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams]
           required :auth, union: -> { Anthropic::Beta::Vaults::CredentialCreateParams::Auth }
 
           # @!attribute display_name
@@ -45,7 +45,7 @@ module Anthropic
           #
           #   @param vault_id [String]
           #
-          #   @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams] Authentication details for creating a credential.
+          #   @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams] Authentication details for creating a credential.
           #
           #   @param display_name [String, nil] Human-readable name for the credential. Up to 255 characters.
           #
@@ -67,8 +67,12 @@ module Anthropic
             # Parameters for creating a static bearer token credential.
             variant :static_bearer, -> { Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams }
 
+            # Parameters for creating an environment variable credential.
+            variant :environment_variable,
+                    -> { Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams }
+
             # @!method self.variants
-            #   @return [Array(Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams)]
+            #   @return [Array(Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams)]
           end
         end
       end

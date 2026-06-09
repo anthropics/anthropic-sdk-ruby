@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsDeploymentInitialEvent = Beta::BetaManagedAgentsDeploymentInitialEvent
+
+    module Beta
+      type beta_managed_agents_deployment_initial_event =
+        Anthropic::Beta::BetaManagedAgentsDeploymentUserMessageEvent
+        | Anthropic::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent
+        | Anthropic::Beta::BetaManagedAgentsDeploymentSystemMessageEvent
+
+      module BetaManagedAgentsDeploymentInitialEvent
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_initial_event]
+      end
+    end
+  end
+end

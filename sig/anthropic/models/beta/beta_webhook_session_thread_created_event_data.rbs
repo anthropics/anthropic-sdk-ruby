@@ -7,6 +7,7 @@ module Anthropic
         {
           id: String,
           organization_id: String,
+          session_thread_id: String,
           type: :"session.thread_created",
           workspace_id: String
         }
@@ -16,6 +17,8 @@ module Anthropic
 
         attr_accessor organization_id: String
 
+        attr_accessor session_thread_id: String
+
         attr_accessor type: :"session.thread_created"
 
         attr_accessor workspace_id: String
@@ -23,6 +26,7 @@ module Anthropic
         def initialize: (
           id: String,
           organization_id: String,
+          session_thread_id: String,
           workspace_id: String,
           ?type: :"session.thread_created"
         ) -> void
@@ -30,6 +34,7 @@ module Anthropic
         def to_hash: -> {
           id: String,
           organization_id: String,
+          session_thread_id: String,
           type: :"session.thread_created",
           workspace_id: String
         }

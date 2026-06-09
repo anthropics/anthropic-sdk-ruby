@@ -14,7 +14,7 @@ module Anthropic
           #
           # @param vault_id [String] Path param: Path parameter vault_id
           #
-          # @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams] Body param: Authentication details for creating a credential.
+          # @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams] Body param: Authentication details for creating a credential.
           #
           # @param display_name [String, nil] Body param: Human-readable name for the credential. Up to 255 characters.
           #
@@ -81,7 +81,7 @@ module Anthropic
           #
           # @param vault_id [String] Path param: Path parameter vault_id
           #
-          # @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams] Body param: Updated authentication details for a credential.
+          # @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams] Body param: Updated authentication details for a credential.
           #
           # @param display_name [String, nil] Body param: Updated human-readable name for the credential. 1-255 characters.
           #

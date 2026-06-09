@@ -9,6 +9,7 @@ module Anthropic
           | Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams
           | Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams
           | Anthropic::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams
+          | Anthropic::Beta::Sessions::BetaManagedAgentsSystemMessageEventParams
 
         module BetaManagedAgentsEventParams
           extend Anthropic::Internal::Type::Union

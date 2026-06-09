@@ -24,7 +24,8 @@ module Anthropic
             returns(
               T.any(
                 Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams,
-                Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams
+                Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams,
+                Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams
               )
             )
           end
@@ -65,7 +66,8 @@ module Anthropic
               auth:
                 T.any(
                   Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams::OrHash,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams::OrHash
+                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams::OrHash,
+                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::OrHash
                 ),
               display_name: T.nilable(String),
               metadata: T::Hash[Symbol, String],
@@ -96,7 +98,8 @@ module Anthropic
                 auth:
                   T.any(
                     Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams,
-                    Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams
+                    Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams,
+                    Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams
                   ),
                 display_name: T.nilable(String),
                 metadata: T::Hash[Symbol, String],
@@ -117,7 +120,8 @@ module Anthropic
               T.type_alias do
                 T.any(
                   Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams
+                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams,
+                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams
                 )
               end
 

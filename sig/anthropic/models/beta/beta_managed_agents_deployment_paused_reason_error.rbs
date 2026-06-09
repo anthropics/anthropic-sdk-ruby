@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsDeploymentPausedReasonError = Beta::BetaManagedAgentsDeploymentPausedReasonError
+
+    module Beta
+      type beta_managed_agents_deployment_paused_reason_error =
+        Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError
+        | Anthropic::Beta::BetaManagedAgentsAgentArchivedDeploymentPausedReasonError
+        | Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError
+        | Anthropic::Beta::BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError
+        | Anthropic::Beta::BetaManagedAgentsFileNotFoundDeploymentPausedReasonError
+        | Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError
+        | Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError
+        | Anthropic::Beta::BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError
+        | Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError
+        | Anthropic::Beta::BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError
+        | Anthropic::Beta::BetaManagedAgentsVaultArchivedDeploymentPausedReasonError
+        | Anthropic::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonError
+        | Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError
+        | Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError
+
+      module BetaManagedAgentsDeploymentPausedReasonError
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason_error]
+      end
+    end
+  end
+end

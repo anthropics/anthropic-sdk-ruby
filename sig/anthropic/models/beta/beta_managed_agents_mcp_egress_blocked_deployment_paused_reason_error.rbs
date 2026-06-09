@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError = Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError
+
+    module Beta
+      type beta_managed_agents_mcp_egress_blocked_deployment_paused_reason_error =
+        {
+          type: Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError::type_
+        }
+
+      class BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError::type_
+
+        def initialize: (
+          type: Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError::type_
+        ) -> void
+
+        def to_hash: -> {
+          type: Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError::type_
+        }
+
+        type type_ = :mcp_egress_blocked_error
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          MCP_EGRESS_BLOCKED_ERROR: :mcp_egress_blocked_error
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError::type_]
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsCronScheduleParams = Beta::BetaManagedAgentsCronScheduleParams
+
+    module Beta
+      type beta_managed_agents_cron_schedule_params =
+        {
+          expression: String,
+          timezone: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsCronScheduleParams::type_
+        }
+
+      class BetaManagedAgentsCronScheduleParams < Anthropic::Internal::Type::BaseModel
+        attr_accessor expression: String
+
+        attr_accessor timezone: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsCronScheduleParams::type_
+
+        def initialize: (
+          expression: String,
+          timezone: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsCronScheduleParams::type_
+        ) -> void
+
+        def to_hash: -> {
+          expression: String,
+          timezone: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsCronScheduleParams::type_
+        }
+
+        type type_ = :cron
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          CRON: :cron
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsCronScheduleParams::type_]
+        end
+      end
+    end
+  end
+end

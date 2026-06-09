@@ -50,7 +50,8 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsBillingError::OrHash
+                  Anthropic::Beta::Sessions::BetaManagedAgentsBillingError::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::OrHash
                 ),
               processed_at: Time,
               type:
@@ -100,7 +101,8 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError,
                   Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError,
                   Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsBillingError
+                  Anthropic::Beta::Sessions::BetaManagedAgentsBillingError,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError
                 )
               end
 

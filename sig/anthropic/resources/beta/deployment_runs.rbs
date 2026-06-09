@@ -1,0 +1,29 @@
+module Anthropic
+  module Resources
+    class Beta
+      class DeploymentRuns
+        def retrieve: (
+          String deployment_run_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaManagedAgentsDeploymentRun
+
+        def list: (
+          ?created_at_gt: Time,
+          ?created_at_gte: Time,
+          ?created_at_lt: Time,
+          ?created_at_lte: Time,
+          ?deployment_id: String,
+          ?has_error: bool,
+          ?limit: Integer,
+          ?page: String,
+          ?trigger_type: Anthropic::Models::Beta::beta_managed_agents_trigger_type,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaManagedAgentsDeploymentRun]
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

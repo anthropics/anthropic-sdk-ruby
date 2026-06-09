@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError = Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError
+
+    module Beta
+      type beta_managed_agents_self_hosted_resources_unsupported_run_error =
+        {
+          message: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError::type_
+        }
+
+      class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError < Anthropic::Internal::Type::BaseModel
+        attr_accessor message: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError::type_
+
+        def initialize: (
+          message: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError::type_
+        ) -> void
+
+        def to_hash: -> {
+          message: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError::type_
+        }
+
+        type type_ = :self_hosted_resources_unsupported_error
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          SELF_HOSTED_RESOURCES_UNSUPPORTED_ERROR: :self_hosted_resources_unsupported_error
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError::type_]
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsVaultNotFoundRunError = Beta::BetaManagedAgentsVaultNotFoundRunError
+
+    module Beta
+      type beta_managed_agents_vault_not_found_run_error =
+        {
+          message: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundRunError::type_
+        }
+
+      class BetaManagedAgentsVaultNotFoundRunError < Anthropic::Internal::Type::BaseModel
+        attr_accessor message: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundRunError::type_
+
+        def initialize: (
+          message: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundRunError::type_
+        ) -> void
+
+        def to_hash: -> {
+          message: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundRunError::type_
+        }
+
+        type type_ = :vault_not_found_error
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          VAULT_NOT_FOUND_ERROR: :vault_not_found_error
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundRunError::type_]
+        end
+      end
+    end
+  end
+end

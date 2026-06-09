@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsSkillNotFoundRunError = Beta::BetaManagedAgentsSkillNotFoundRunError
+
+    module Beta
+      type beta_managed_agents_skill_not_found_run_error =
+        {
+          message: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundRunError::type_
+        }
+
+      class BetaManagedAgentsSkillNotFoundRunError < Anthropic::Internal::Type::BaseModel
+        attr_accessor message: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundRunError::type_
+
+        def initialize: (
+          message: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundRunError::type_
+        ) -> void
+
+        def to_hash: -> {
+          message: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundRunError::type_
+        }
+
+        type type_ = :skill_not_found_error
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          SKILL_NOT_FOUND_ERROR: :skill_not_found_error
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundRunError::type_]
+        end
+      end
+    end
+  end
+end

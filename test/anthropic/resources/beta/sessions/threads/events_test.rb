@@ -58,6 +58,7 @@ class Anthropic::Test::Resources::Beta::Sessions::Threads::EventsTest < Anthropi
       in Anthropic::Beta::BetaManagedAgentsUserToolResultEvent
       in Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent
       in Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent
+      in Anthropic::Beta::BetaManagedAgentsSystemMessageEvent
       end
     end
 
@@ -248,6 +249,12 @@ class Anthropic::Test::Resources::Beta::Sessions::Threads::EventsTest < Anthropi
         agent: Anthropic::Beta::BetaManagedAgentsSessionAgent | nil,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]) | nil,
         title: String | nil
+      }
+      in {
+        type: :"system.message",
+        id: String,
+        content: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaManagedAgentsSystemContentBlock]),
+        processed_at: Time | nil
       }
       end
     end

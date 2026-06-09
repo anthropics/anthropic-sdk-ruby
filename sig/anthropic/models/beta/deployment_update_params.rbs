@@ -1,0 +1,113 @@
+module Anthropic
+  module Models
+    module Beta
+      type deployment_update_params =
+        {
+          deployment_id: String,
+          agent: Anthropic::Models::Beta::DeploymentUpdateParams::agent,
+          description: String?,
+          environment_id: String,
+          initial_events: ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_initial_event_params],
+          metadata: ::Hash[Symbol, String?]?,
+          name: String,
+          resources: ::Array[Anthropic::Models::Beta::DeploymentUpdateParams::resource]?,
+          schedule: Anthropic::Beta::BetaManagedAgentsScheduleParams?,
+          vault_ids: ::Array[String]?,
+          betas: ::Array[Anthropic::Models::anthropic_beta]
+        }
+        & Anthropic::Internal::Type::request_parameters
+
+      class DeploymentUpdateParams < Anthropic::Internal::Type::BaseModel
+        extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
+
+        attr_accessor deployment_id: String
+
+        attr_reader agent: Anthropic::Models::Beta::DeploymentUpdateParams::agent?
+
+        def agent=: (
+          Anthropic::Models::Beta::DeploymentUpdateParams::agent
+        ) -> Anthropic::Models::Beta::DeploymentUpdateParams::agent
+
+        attr_accessor description: String?
+
+        attr_reader environment_id: String?
+
+        def environment_id=: (String) -> String
+
+        attr_reader initial_events: ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_initial_event_params]?
+
+        def initial_events=: (
+          ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_initial_event_params]
+        ) -> ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_initial_event_params]
+
+        attr_accessor metadata: ::Hash[Symbol, String?]?
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_accessor resources: ::Array[Anthropic::Models::Beta::DeploymentUpdateParams::resource]?
+
+        attr_accessor schedule: Anthropic::Beta::BetaManagedAgentsScheduleParams?
+
+        attr_accessor vault_ids: ::Array[String]?
+
+        attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+        def betas=: (
+          ::Array[Anthropic::Models::anthropic_beta]
+        ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+        def initialize: (
+          deployment_id: String,
+          ?agent: Anthropic::Models::Beta::DeploymentUpdateParams::agent,
+          ?description: String?,
+          ?environment_id: String,
+          ?initial_events: ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_initial_event_params],
+          ?metadata: ::Hash[Symbol, String?]?,
+          ?name: String,
+          ?resources: ::Array[Anthropic::Models::Beta::DeploymentUpdateParams::resource]?,
+          ?schedule: Anthropic::Beta::BetaManagedAgentsScheduleParams?,
+          ?vault_ids: ::Array[String]?,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          deployment_id: String,
+          agent: Anthropic::Models::Beta::DeploymentUpdateParams::agent,
+          description: String?,
+          environment_id: String,
+          initial_events: ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_initial_event_params],
+          metadata: ::Hash[Symbol, String?]?,
+          name: String,
+          resources: ::Array[Anthropic::Models::Beta::DeploymentUpdateParams::resource]?,
+          schedule: Anthropic::Beta::BetaManagedAgentsScheduleParams?,
+          vault_ids: ::Array[String]?,
+          betas: ::Array[Anthropic::Models::anthropic_beta],
+          request_options: Anthropic::RequestOptions
+        }
+
+        type agent = String | Anthropic::Beta::BetaManagedAgentsAgentParams
+
+        module Agent
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::DeploymentUpdateParams::agent]
+        end
+
+        type resource =
+          Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams
+          | Anthropic::Beta::BetaManagedAgentsFileResourceParams
+          | Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceParam
+
+        module Resource
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::DeploymentUpdateParams::resource]
+        end
+      end
+    end
+  end
+end

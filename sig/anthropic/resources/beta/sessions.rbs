@@ -42,6 +42,7 @@ module Anthropic
           ?created_at_gte: Time,
           ?created_at_lt: Time,
           ?created_at_lte: Time,
+          ?deployment_id: String,
           ?include_archived: bool,
           ?limit: Integer,
           ?memory_store_id: String,

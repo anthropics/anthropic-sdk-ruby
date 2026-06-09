@@ -118,7 +118,7 @@ module Anthropic
         #
         # List Sessions
         #
-        # @overload list(agent_id: nil, agent_version: nil, created_at_gt: nil, created_at_gte: nil, created_at_lt: nil, created_at_lte: nil, include_archived: nil, limit: nil, memory_store_id: nil, order: nil, page: nil, statuses: nil, betas: nil, request_options: {})
+        # @overload list(agent_id: nil, agent_version: nil, created_at_gt: nil, created_at_gte: nil, created_at_lt: nil, created_at_lte: nil, deployment_id: nil, include_archived: nil, limit: nil, memory_store_id: nil, order: nil, page: nil, statuses: nil, betas: nil, request_options: {})
         #
         # @param agent_id [String] Query param: Filter sessions created with this agent ID.
         #
@@ -131,6 +131,8 @@ module Anthropic
         # @param created_at_lt [Time] Query param: Return sessions created before this time (exclusive).
         #
         # @param created_at_lte [Time] Query param: Return sessions created at or before this time (inclusive).
+        #
+        # @param deployment_id [String] Query param: Filter sessions created by this deployment ID.
         #
         # @param include_archived [Boolean] Query param: When true, includes archived sessions. Default: false (exclude arch
         #
@@ -160,6 +162,7 @@ module Anthropic
               :created_at_gte,
               :created_at_lt,
               :created_at_lte,
+              :deployment_id,
               :include_archived,
               :limit,
               :memory_store_id,

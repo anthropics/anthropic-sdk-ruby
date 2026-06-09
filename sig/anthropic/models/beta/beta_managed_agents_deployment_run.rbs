@@ -1,0 +1,93 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsDeploymentRun = Beta::BetaManagedAgentsDeploymentRun
+
+    module Beta
+      type beta_managed_agents_deployment_run =
+        {
+          id: String,
+          agent: Anthropic::Beta::BetaManagedAgentsAgentReference,
+          created_at: Time,
+          deployment_id: String,
+          error: Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::error?,
+          session_id: String?,
+          trigger_context: Anthropic::Models::Beta::beta_managed_agents_trigger_context,
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::type_
+        }
+
+      class BetaManagedAgentsDeploymentRun < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor agent: Anthropic::Beta::BetaManagedAgentsAgentReference
+
+        attr_accessor created_at: Time
+
+        attr_accessor deployment_id: String
+
+        attr_accessor error: Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::error?
+
+        attr_accessor session_id: String?
+
+        attr_accessor trigger_context: Anthropic::Models::Beta::beta_managed_agents_trigger_context
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::type_
+
+        def initialize: (
+          id: String,
+          agent: Anthropic::Beta::BetaManagedAgentsAgentReference,
+          created_at: Time,
+          deployment_id: String,
+          error: Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::error?,
+          session_id: String?,
+          trigger_context: Anthropic::Models::Beta::beta_managed_agents_trigger_context,
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::type_
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          agent: Anthropic::Beta::BetaManagedAgentsAgentReference,
+          created_at: Time,
+          deployment_id: String,
+          error: Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::error?,
+          session_id: String?,
+          trigger_context: Anthropic::Models::Beta::beta_managed_agents_trigger_context,
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::type_
+        }
+
+        type error =
+          Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedRunError
+          | Anthropic::Beta::BetaManagedAgentsAgentArchivedRunError
+          | Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundRunError
+          | Anthropic::Beta::BetaManagedAgentsVaultNotFoundRunError
+          | Anthropic::Beta::BetaManagedAgentsVaultArchivedRunError
+          | Anthropic::Beta::BetaManagedAgentsFileNotFoundRunError
+          | Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedRunError
+          | Anthropic::Beta::BetaManagedAgentsSkillNotFoundRunError
+          | Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundRunError
+          | Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedRunError
+          | Anthropic::Beta::BetaManagedAgentsOrganizationDisabledRunError
+          | Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunError
+          | Anthropic::Beta::BetaManagedAgentsSessionCreationRejectedRunError
+          | Anthropic::Beta::BetaManagedAgentsUnknownRunError
+          | Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError
+          | Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedRunError
+
+        module Error
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::error]
+        end
+
+        type type_ = :deployment_run
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          DEPLOYMENT_RUN: :deployment_run
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun::type_]
+        end
+      end
+    end
+  end
+end

@@ -30,7 +30,8 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
         type: Anthropic::Beta::BetaManagedAgentsSession::Type,
         updated_at: Time,
         usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
-        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String])
+        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
+        deployment_id: String | nil
       }
     end
   end
@@ -58,7 +59,8 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
         type: Anthropic::Beta::BetaManagedAgentsSession::Type,
         updated_at: Time,
         usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
-        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String])
+        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
+        deployment_id: String | nil
       }
     end
   end
@@ -86,7 +88,8 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
         type: Anthropic::Beta::BetaManagedAgentsSession::Type,
         updated_at: Time,
         usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
-        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String])
+        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
+        deployment_id: String | nil
       }
     end
   end
@@ -123,7 +126,8 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
         type: Anthropic::Beta::BetaManagedAgentsSession::Type,
         updated_at: Time,
         usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
-        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String])
+        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
+        deployment_id: String | nil
       }
     end
   end
@@ -166,7 +170,8 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
         type: Anthropic::Beta::BetaManagedAgentsSession::Type,
         updated_at: Time,
         usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
-        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String])
+        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
+        deployment_id: String | nil
       }
     end
   end

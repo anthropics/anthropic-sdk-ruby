@@ -22,6 +22,10 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :organization_id
 
+        # ID of the session thread this event refers to.
+        sig { returns(String) }
+        attr_accessor :session_thread_id
+
         sig { returns(Symbol) }
         attr_accessor :type
 
@@ -32,6 +36,7 @@ module Anthropic
           params(
             id: String,
             organization_id: String,
+            session_thread_id: String,
             workspace_id: String,
             type: Symbol
           ).returns(T.attached_class)
@@ -40,6 +45,8 @@ module Anthropic
           # ID of the session that triggered the event.
           id:,
           organization_id:,
+          # ID of the session thread this event refers to.
+          session_thread_id:,
           workspace_id:,
           type: :"session.thread_idled"
         )
@@ -50,6 +57,7 @@ module Anthropic
             {
               id: String,
               organization_id: String,
+              session_thread_id: String,
               type: Symbol,
               workspace_id: String
             }

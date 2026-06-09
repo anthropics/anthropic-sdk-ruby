@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsOrganizationDisabledRunError = Beta::BetaManagedAgentsOrganizationDisabledRunError
+
+    module Beta
+      type beta_managed_agents_organization_disabled_run_error =
+        {
+          message: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledRunError::type_
+        }
+
+      class BetaManagedAgentsOrganizationDisabledRunError < Anthropic::Internal::Type::BaseModel
+        attr_accessor message: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledRunError::type_
+
+        def initialize: (
+          message: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledRunError::type_
+        ) -> void
+
+        def to_hash: -> {
+          message: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledRunError::type_
+        }
+
+        type type_ = :organization_disabled_error
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          ORGANIZATION_DISABLED_ERROR: :organization_disabled_error
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledRunError::type_]
+        end
+      end
+    end
+  end
+end

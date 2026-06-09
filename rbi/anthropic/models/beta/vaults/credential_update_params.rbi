@@ -28,7 +28,8 @@ module Anthropic
               T.nilable(
                 T.any(
                   Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams
+                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams,
+                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams
                 )
               )
             )
@@ -40,7 +41,8 @@ module Anthropic
               auth:
                 T.any(
                   Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams::OrHash,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams::OrHash
+                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams::OrHash,
+                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::OrHash
                 )
             ).void
           end
@@ -79,7 +81,8 @@ module Anthropic
               auth:
                 T.any(
                   Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams::OrHash,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams::OrHash
+                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams::OrHash,
+                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::OrHash
                 ),
               display_name: T.nilable(String),
               metadata: T.nilable(T::Hash[Symbol, T.nilable(String)]),
@@ -112,7 +115,8 @@ module Anthropic
                 auth:
                   T.any(
                     Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams,
-                    Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams
+                    Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams,
+                    Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams
                   ),
                 display_name: T.nilable(String),
                 metadata: T.nilable(T::Hash[Symbol, T.nilable(String)]),
@@ -133,7 +137,8 @@ module Anthropic
               T.type_alias do
                 T.any(
                   Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams
+                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams,
+                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams
                 )
               end
 
