@@ -7,6 +7,7 @@ module Anthropic
         Anthropic::Beta::BetaMessageIterationUsage
         | Anthropic::Beta::BetaCompactionIterationUsage
         | Anthropic::Beta::BetaAdvisorMessageIterationUsage
+        | Anthropic::Beta::BetaFallbackMessageIterationUsage
 
       module BetaIterationsUsageItem
         extend Anthropic::Internal::Type::Union

@@ -7,6 +7,9 @@ module Anthropic
         {
           category: Anthropic::Models::Beta::BetaRefusalStopDetails::category?,
           explanation: String?,
+          fallback_credit_token: String?,
+          fallback_has_prefill_claim: bool?,
+          recommended_model: String?,
           type: :refusal
         }
 
@@ -15,27 +18,40 @@ module Anthropic
 
         attr_accessor explanation: String?
 
+        attr_accessor fallback_credit_token: String?
+
+        attr_accessor fallback_has_prefill_claim: bool?
+
+        attr_accessor recommended_model: String?
+
         attr_accessor type: :refusal
 
         def initialize: (
           category: Anthropic::Models::Beta::BetaRefusalStopDetails::category?,
           explanation: String?,
+          fallback_credit_token: String?,
+          fallback_has_prefill_claim: bool?,
+          recommended_model: String?,
           ?type: :refusal
         ) -> void
 
         def to_hash: -> {
           category: Anthropic::Models::Beta::BetaRefusalStopDetails::category?,
           explanation: String?,
+          fallback_credit_token: String?,
+          fallback_has_prefill_claim: bool?,
+          recommended_model: String?,
           type: :refusal
         }
 
-        type category = :cyber | :bio
+        type category = :cyber | :bio | :reasoning_extraction
 
         module Category
           extend Anthropic::Internal::Type::Enum
 
           CYBER: :cyber
           BIO: :bio
+          REASONING_EXTRACTION: :reasoning_extraction
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaRefusalStopDetails::category]
         end

@@ -47,6 +47,7 @@ module Anthropic
 
         CYBER = :cyber
         BIO = :bio
+        REASONING_EXTRACTION = :reasoning_extraction
 
         # @!method self.values
         #   @return [Array<Symbol>]

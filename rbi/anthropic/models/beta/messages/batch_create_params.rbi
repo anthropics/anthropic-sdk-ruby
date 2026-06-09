@@ -302,6 +302,36 @@ module Anthropic
               end
               attr_writer :diagnostics
 
+              # The `fallback_credit_token` from a prior refusal's `stop_details`.
+              #
+              # When a preceding request was refused and returned a `fallback_credit_token`,
+              # pass that code here on the retry to have the retry's cache-creation tokens for
+              # the prefix that was warm on the refused model billed at the cache-read rate.
+              # Must be redeemed by the same organization and workspace, with the same request
+              # body (optionally extended by one appended `assistant` message whose content is
+              # the partial text — with any trailing whitespace stripped from the final text
+              # block — and paired server-tool blocks streamed before the refusal; the
+              # appended-assistant form is not available for requests with `output_format` set
+              # or forced `tool_choice`), on an eligible fallback model, on the same platform,
+              # and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+              # mid-server-tool-loop whose partial content was continuable may only be redeemed
+              # with the appended-assistant form — if an exact-body retry is rejected with a 400
+              # saying the token must be redeemed by continuing the partial response, retry with
+              # the appended-assistant form instead.
+              #
+              # When the appended-assistant form is used on a model that otherwise disallows
+              # assistant-turn prefill, this token also authorizes that one prefill.
+              sig { returns(T.nilable(String)) }
+              attr_accessor :fallback_credit_token
+
+              # Opt-in server-side retry on one or more substitute models when the requested
+              # model declines for policy reasons. Tried in order: if the first entry also
+              # declines, the second is tried, and so on.
+              sig do
+                returns(T.nilable(T::Array[Anthropic::Beta::BetaFallbackParam]))
+              end
+              attr_accessor :fallbacks
+
               # Specifies the geographic region for inference processing. If not specified, the
               # workspace's `default_inference_geo` is used.
               sig { returns(T.nilable(String)) }
@@ -719,6 +749,11 @@ module Anthropic
                     ),
                   diagnostics:
                     T.nilable(Anthropic::Beta::BetaDiagnosticsParam::OrHash),
+                  fallback_credit_token: T.nilable(String),
+                  fallbacks:
+                    T.nilable(
+                      T::Array[Anthropic::Beta::BetaFallbackParam::OrHash]
+                    ),
                   inference_geo: T.nilable(String),
                   mcp_servers:
                     T::Array[
@@ -882,6 +917,30 @@ module Anthropic
                 # Request-level diagnostics. Currently carries the previous response id for
                 # prompt-cache divergence reporting.
                 diagnostics: nil,
+                # The `fallback_credit_token` from a prior refusal's `stop_details`.
+                #
+                # When a preceding request was refused and returned a `fallback_credit_token`,
+                # pass that code here on the retry to have the retry's cache-creation tokens for
+                # the prefix that was warm on the refused model billed at the cache-read rate.
+                # Must be redeemed by the same organization and workspace, with the same request
+                # body (optionally extended by one appended `assistant` message whose content is
+                # the partial text — with any trailing whitespace stripped from the final text
+                # block — and paired server-tool blocks streamed before the refusal; the
+                # appended-assistant form is not available for requests with `output_format` set
+                # or forced `tool_choice`), on an eligible fallback model, on the same platform,
+                # and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+                # mid-server-tool-loop whose partial content was continuable may only be redeemed
+                # with the appended-assistant form — if an exact-body retry is rejected with a 400
+                # saying the token must be redeemed by continuing the partial response, retry with
+                # the appended-assistant form instead.
+                #
+                # When the appended-assistant form is used on a model that otherwise disallows
+                # assistant-turn prefill, this token also authorizes that one prefill.
+                fallback_credit_token: nil,
+                # Opt-in server-side retry on one or more substitute models when the requested
+                # model declines for policy reasons. Tried in order: if the first entry also
+                # declines, the second is tried, and so on.
+                fallbacks: nil,
                 # Specifies the geographic region for inference processing. If not specified, the
                 # workspace's `default_inference_geo` is used.
                 inference_geo: nil,
@@ -1061,6 +1120,9 @@ module Anthropic
                       T.nilable(Anthropic::Beta::BetaContextManagementConfig),
                     diagnostics:
                       T.nilable(Anthropic::Beta::BetaDiagnosticsParam),
+                    fallback_credit_token: T.nilable(String),
+                    fallbacks:
+                      T.nilable(T::Array[Anthropic::Beta::BetaFallbackParam]),
                     inference_geo: T.nilable(String),
                     mcp_servers:
                       T::Array[

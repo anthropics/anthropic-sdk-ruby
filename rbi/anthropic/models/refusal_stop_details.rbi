@@ -79,6 +79,11 @@ module Anthropic
         CYBER =
           T.let(:cyber, Anthropic::RefusalStopDetails::Category::TaggedSymbol)
         BIO = T.let(:bio, Anthropic::RefusalStopDetails::Category::TaggedSymbol)
+        REASONING_EXTRACTION =
+          T.let(
+            :reasoning_extraction,
+            Anthropic::RefusalStopDetails::Category::TaggedSymbol
+          )
 
         sig do
           override.returns(

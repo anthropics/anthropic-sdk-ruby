@@ -193,7 +193,8 @@ module Anthropic
                   Anthropic::Beta::BetaMCPToolUseBlock::OrHash,
                   Anthropic::Beta::BetaMCPToolResultBlock::OrHash,
                   Anthropic::Beta::BetaContainerUploadBlock::OrHash,
-                  Anthropic::Beta::BetaCompactionBlock::OrHash
+                  Anthropic::Beta::BetaCompactionBlock::OrHash,
+                  Anthropic::Beta::BetaFallbackBlock::OrHash
                 )
               ],
             context_management:

@@ -15,6 +15,12 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :id
 
+        # Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An
+        # empty list means the `fallbacks` parameter is not supported for this model as
+        # primary.
+        sig { returns(T.nilable(T::Array[String])) }
+        attr_accessor :allowed_fallback_models
+
         # Model capability information.
         sig { returns(T.nilable(Anthropic::Beta::BetaModelCapabilities)) }
         attr_reader :capabilities
@@ -53,6 +59,7 @@ module Anthropic
         sig do
           params(
             id: String,
+            allowed_fallback_models: T.nilable(T::Array[String]),
             capabilities:
               T.nilable(Anthropic::Beta::BetaModelCapabilities::OrHash),
             created_at: Time,
@@ -65,6 +72,10 @@ module Anthropic
         def self.new(
           # Unique model identifier.
           id:,
+          # Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An
+          # empty list means the `fallbacks` parameter is not supported for this model as
+          # primary.
+          allowed_fallback_models:,
           # Model capability information.
           capabilities:,
           # RFC 3339 datetime string representing the time at which the model was released.
@@ -87,6 +98,7 @@ module Anthropic
           override.returns(
             {
               id: String,
+              allowed_fallback_models: T.nilable(T::Array[String]),
               capabilities: T.nilable(Anthropic::Beta::BetaModelCapabilities),
               created_at: Time,
               display_name: String,

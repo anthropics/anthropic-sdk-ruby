@@ -27,7 +27,8 @@ module Anthropic
               Anthropic::Beta::BetaMCPToolUseBlock,
               Anthropic::Beta::BetaMCPToolResultBlock,
               Anthropic::Beta::BetaContainerUploadBlock,
-              Anthropic::Beta::BetaCompactionBlock
+              Anthropic::Beta::BetaCompactionBlock,
+              Anthropic::Beta::BetaFallbackBlock
             )
           end
 

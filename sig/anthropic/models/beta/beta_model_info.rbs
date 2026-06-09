@@ -6,6 +6,7 @@ module Anthropic
       type beta_model_info =
         {
           id: String,
+          allowed_fallback_models: ::Array[String]?,
           capabilities: Anthropic::Beta::BetaModelCapabilities?,
           created_at: Time,
           display_name: String,
@@ -16,6 +17,8 @@ module Anthropic
 
       class BetaModelInfo < Anthropic::Internal::Type::BaseModel
         attr_accessor id: String
+
+        attr_accessor allowed_fallback_models: ::Array[String]?
 
         attr_accessor capabilities: Anthropic::Beta::BetaModelCapabilities?
 
@@ -31,6 +34,7 @@ module Anthropic
 
         def initialize: (
           id: String,
+          allowed_fallback_models: ::Array[String]?,
           capabilities: Anthropic::Beta::BetaModelCapabilities?,
           created_at: Time,
           display_name: String,
@@ -41,6 +45,7 @@ module Anthropic
 
         def to_hash: -> {
           id: String,
+          allowed_fallback_models: ::Array[String]?,
           capabilities: Anthropic::Beta::BetaModelCapabilities?,
           created_at: Time,
           display_name: String,

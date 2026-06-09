@@ -117,7 +117,8 @@ module Anthropic
                   T.any(
                     Anthropic::Beta::BetaMessageIterationUsage::OrHash,
                     Anthropic::Beta::BetaCompactionIterationUsage::OrHash,
-                    Anthropic::Beta::BetaAdvisorMessageIterationUsage::OrHash
+                    Anthropic::Beta::BetaAdvisorMessageIterationUsage::OrHash,
+                    Anthropic::Beta::BetaFallbackMessageIterationUsage::OrHash
                   )
                 ]
               ),
