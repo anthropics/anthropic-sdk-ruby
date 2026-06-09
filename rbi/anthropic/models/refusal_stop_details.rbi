@@ -79,6 +79,11 @@ module Anthropic
         CYBER =
           T.let(:cyber, Anthropic::RefusalStopDetails::Category::TaggedSymbol)
         BIO = T.let(:bio, Anthropic::RefusalStopDetails::Category::TaggedSymbol)
+        FRONTIER_LLM =
+          T.let(
+            :frontier_llm,
+            Anthropic::RefusalStopDetails::Category::TaggedSymbol
+          )
         REASONING_EXTRACTION =
           T.let(
             :reasoning_extraction,

@@ -47,6 +47,7 @@ module Anthropic
 
         CYBER = :cyber
         BIO = :bio
+        FRONTIER_LLM = :frontier_llm
         REASONING_EXTRACTION = :reasoning_extraction
 
         # @!method self.values
