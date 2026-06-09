@@ -21,7 +21,7 @@ module Anthropic
           # @!attribute auth
           #   Authentication details for a credential.
           #
-          #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse]
+          #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse]
           required :auth, union: -> { Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Auth }
 
           # @!attribute created_at
@@ -67,7 +67,7 @@ module Anthropic
           #
           #   @param archived_at [Time, nil] A timestamp in RFC 3339 format
           #
-          #   @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse] Authentication details for a credential.
+          #   @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse] Authentication details for a credential.
           #
           #   @param created_at [Time] A timestamp in RFC 3339 format
           #
@@ -95,8 +95,12 @@ module Anthropic
             # Static bearer token credential details for an MCP server.
             variant :static_bearer, -> { Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse }
 
+            # Environment variable credential details. The secret value is never returned.
+            variant :environment_variable,
+                    -> { Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse }
+
             # @!method self.variants
-            #   @return [Array(Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse)]
+            #   @return [Array(Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse)]
           end
 
           # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredential#type

@@ -15,6 +15,12 @@ module Anthropic
         #   @return [String]
         required :organization_id, String
 
+        # @!attribute session_thread_id
+        #   ID of the session thread this event refers to.
+        #
+        #   @return [String]
+        required :session_thread_id, String
+
         # @!attribute type
         #
         #   @return [Symbol, :"session.thread_idled"]
@@ -25,10 +31,12 @@ module Anthropic
         #   @return [String]
         required :workspace_id, String
 
-        # @!method initialize(id:, organization_id:, workspace_id:, type: :"session.thread_idled")
+        # @!method initialize(id:, organization_id:, session_thread_id:, workspace_id:, type: :"session.thread_idled")
         #   @param id [String] ID of the session that triggered the event.
         #
         #   @param organization_id [String]
+        #
+        #   @param session_thread_id [String] ID of the session thread this event refers to.
         #
         #   @param workspace_id [String]
         #

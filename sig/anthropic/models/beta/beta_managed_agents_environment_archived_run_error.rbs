@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsEnvironmentArchivedRunError = Beta::BetaManagedAgentsEnvironmentArchivedRunError
+
+    module Beta
+      type beta_managed_agents_environment_archived_run_error =
+        {
+          message: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsEnvironmentArchivedRunError::type_
+        }
+
+      class BetaManagedAgentsEnvironmentArchivedRunError < Anthropic::Internal::Type::BaseModel
+        attr_accessor message: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsEnvironmentArchivedRunError::type_
+
+        def initialize: (
+          message: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsEnvironmentArchivedRunError::type_
+        ) -> void
+
+        def to_hash: -> {
+          message: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsEnvironmentArchivedRunError::type_
+        }
+
+        type type_ = :environment_archived_error
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          ENVIRONMENT_ARCHIVED_ERROR: :environment_archived_error
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsEnvironmentArchivedRunError::type_]
+        end
+      end
+    end
+  end
+end

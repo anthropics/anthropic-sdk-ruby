@@ -43,7 +43,8 @@ module Anthropic
                 Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent,
                 Anthropic::Beta::BetaManagedAgentsUserToolResultEvent,
                 Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent,
-                Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent
+                Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent,
+                Anthropic::Beta::BetaManagedAgentsSystemMessageEvent
               )
             end
 

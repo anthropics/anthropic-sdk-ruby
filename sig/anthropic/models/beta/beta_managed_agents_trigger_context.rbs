@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsTriggerContext = Beta::BetaManagedAgentsTriggerContext
+
+    module Beta
+      type beta_managed_agents_trigger_context =
+        Anthropic::Beta::BetaManagedAgentsScheduleTriggerContext
+        | Anthropic::Beta::BetaManagedAgentsManualTriggerContext
+
+      module BetaManagedAgentsTriggerContext
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_trigger_context]
+      end
+    end
+  end
+end

@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsSessionResourceConfig = Beta::BetaManagedAgentsSessionResourceConfig
+
+    module Beta
+      type beta_managed_agents_session_resource_config =
+        Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig
+        | Anthropic::Beta::BetaManagedAgentsFileResourceConfig
+        | Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceConfig
+
+      module BetaManagedAgentsSessionResourceConfig
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_session_resource_config]
+      end
+    end
+  end
+end

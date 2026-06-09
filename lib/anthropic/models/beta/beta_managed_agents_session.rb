@@ -94,7 +94,14 @@ module Anthropic
         #   @return [Array<String>]
         required :vault_ids, Anthropic::Internal::Type::ArrayOf[String]
 
-        # @!method initialize(id:, agent:, archived_at:, created_at:, environment_id:, metadata:, outcome_evaluations:, resources:, stats:, status:, title:, type:, updated_at:, usage:, vault_ids:)
+        # @!attribute deployment_id
+        #   Deployment ID when the session was created from a deployment reference. Null
+        #   otherwise.
+        #
+        #   @return [String, nil]
+        optional :deployment_id, String, nil?: true
+
+        # @!method initialize(id:, agent:, archived_at:, created_at:, environment_id:, metadata:, outcome_evaluations:, resources:, stats:, status:, title:, type:, updated_at:, usage:, vault_ids:, deployment_id: nil)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsSession} for more details.
         #
@@ -129,6 +136,8 @@ module Anthropic
         #   @param usage [Anthropic::Models::Beta::BetaManagedAgentsSessionUsage] Cumulative token usage for a session across all turns.
         #
         #   @param vault_ids [Array<String>] Vault IDs attached to the session at creation. Empty when no vaults were supplie
+        #
+        #   @param deployment_id [String, nil] Deployment ID when the session was created from a deployment reference. Null oth
 
         # SessionStatus enum
         #

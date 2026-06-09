@@ -57,6 +57,13 @@ module Anthropic
         sig { params(created_at_lte: Time).void }
         attr_writer :created_at_lte
 
+        # Filter sessions created by this deployment ID.
+        sig { returns(T.nilable(String)) }
+        attr_reader :deployment_id
+
+        sig { params(deployment_id: String).void }
+        attr_writer :deployment_id
+
         # When true, includes archived sessions. Default: false (exclude archived).
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :include_archived
@@ -146,6 +153,7 @@ module Anthropic
             created_at_gte: Time,
             created_at_lt: Time,
             created_at_lte: Time,
+            deployment_id: String,
             include_archived: T::Boolean,
             limit: Integer,
             memory_store_id: String,
@@ -170,6 +178,8 @@ module Anthropic
           created_at_lt: nil,
           # Return sessions created at or before this time (inclusive).
           created_at_lte: nil,
+          # Filter sessions created by this deployment ID.
+          deployment_id: nil,
           # When true, includes archived sessions. Default: false (exclude archived).
           include_archived: nil,
           # Maximum number of results to return.
@@ -200,6 +210,7 @@ module Anthropic
               created_at_gte: Time,
               created_at_lt: Time,
               created_at_lte: Time,
+              deployment_id: String,
               include_archived: T::Boolean,
               limit: Integer,
               memory_store_id: String,

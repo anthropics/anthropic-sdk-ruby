@@ -18,6 +18,12 @@ module Anthropic
       # @return [Anthropic::Resources::Beta::Sessions]
       attr_reader :sessions
 
+      # @return [Anthropic::Resources::Beta::Deployments]
+      attr_reader :deployments
+
+      # @return [Anthropic::Resources::Beta::DeploymentRuns]
+      attr_reader :deployment_runs
+
       # @return [Anthropic::Resources::Beta::Vaults]
       attr_reader :vaults
 
@@ -46,6 +52,8 @@ module Anthropic
         @agents = Anthropic::Resources::Beta::Agents.new(client: client)
         @environments = Anthropic::Resources::Beta::Environments.new(client: client)
         @sessions = Anthropic::Resources::Beta::Sessions.new(client: client)
+        @deployments = Anthropic::Resources::Beta::Deployments.new(client: client)
+        @deployment_runs = Anthropic::Resources::Beta::DeploymentRuns.new(client: client)
         @vaults = Anthropic::Resources::Beta::Vaults.new(client: client)
         @memory_stores = Anthropic::Resources::Beta::MemoryStores.new(client: client)
         @files = Anthropic::Resources::Beta::Files.new(client: client)

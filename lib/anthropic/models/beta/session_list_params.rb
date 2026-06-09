@@ -44,6 +44,12 @@ module Anthropic
         #   @return [Time, nil]
         optional :created_at_lte, Time
 
+        # @!attribute deployment_id
+        #   Filter sessions created by this deployment ID.
+        #
+        #   @return [String, nil]
+        optional :deployment_id, String
+
         # @!attribute include_archived
         #   When true, includes archived sessions. Default: false (exclude archived).
         #
@@ -90,7 +96,7 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(agent_id: nil, agent_version: nil, created_at_gt: nil, created_at_gte: nil, created_at_lt: nil, created_at_lte: nil, include_archived: nil, limit: nil, memory_store_id: nil, order: nil, page: nil, statuses: nil, betas: nil, request_options: {})
+        # @!method initialize(agent_id: nil, agent_version: nil, created_at_gt: nil, created_at_gte: nil, created_at_lt: nil, created_at_lte: nil, deployment_id: nil, include_archived: nil, limit: nil, memory_store_id: nil, order: nil, page: nil, statuses: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::SessionListParams} for more details.
         #
@@ -105,6 +111,8 @@ module Anthropic
         #   @param created_at_lt [Time] Return sessions created before this time (exclusive).
         #
         #   @param created_at_lte [Time] Return sessions created at or before this time (inclusive).
+        #
+        #   @param deployment_id [String] Filter sessions created by this deployment ID.
         #
         #   @param include_archived [Boolean] When true, includes archived sessions. Default: false (exclude archived).
         #

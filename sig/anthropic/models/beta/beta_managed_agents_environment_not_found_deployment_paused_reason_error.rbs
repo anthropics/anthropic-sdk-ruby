@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError = Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError
+
+    module Beta
+      type beta_managed_agents_environment_not_found_deployment_paused_reason_error =
+        {
+          type: Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError::type_
+        }
+
+      class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError::type_
+
+        def initialize: (
+          type: Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError::type_
+        ) -> void
+
+        def to_hash: -> {
+          type: Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError::type_
+        }
+
+        type type_ = :environment_not_found_error
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          ENVIRONMENT_NOT_FOUND_ERROR: :environment_not_found_error
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError::type_]
+        end
+      end
+    end
+  end
+end

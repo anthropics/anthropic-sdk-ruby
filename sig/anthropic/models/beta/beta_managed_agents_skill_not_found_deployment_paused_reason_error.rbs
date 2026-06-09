@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError = Beta::BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError
+
+    module Beta
+      type beta_managed_agents_skill_not_found_deployment_paused_reason_error =
+        {
+          type: Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError::type_
+        }
+
+      class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError::type_
+
+        def initialize: (
+          type: Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError::type_
+        ) -> void
+
+        def to_hash: -> {
+          type: Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError::type_
+        }
+
+        type type_ = :skill_not_found_error
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          SKILL_NOT_FOUND_ERROR: :skill_not_found_error
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError::type_]
+        end
+      end
+    end
+  end
+end

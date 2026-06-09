@@ -22,7 +22,7 @@ module Anthropic
           # @!attribute auth
           #   Updated authentication details for a credential.
           #
-          #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams, nil]
+          #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams, nil]
           optional :auth, union: -> { Anthropic::Beta::Vaults::CredentialUpdateParams::Auth }
 
           # @!attribute display_name
@@ -52,7 +52,7 @@ module Anthropic
           #
           #   @param credential_id [String]
           #
-          #   @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams] Updated authentication details for a credential.
+          #   @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams] Updated authentication details for a credential.
           #
           #   @param display_name [String, nil] Updated human-readable name for the credential. 1-255 characters.
           #
@@ -74,8 +74,12 @@ module Anthropic
             # Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
             variant :static_bearer, -> { Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams }
 
+            # Parameters for updating an environment variable credential. `secret_name` is immutable.
+            variant :environment_variable,
+                    -> { Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams }
+
             # @!method self.variants
-            #   @return [Array(Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams)]
+            #   @return [Array(Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams)]
           end
         end
       end

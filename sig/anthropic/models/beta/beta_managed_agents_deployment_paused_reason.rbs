@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsDeploymentPausedReason = Beta::BetaManagedAgentsDeploymentPausedReason
+
+    module Beta
+      type beta_managed_agents_deployment_paused_reason =
+        Anthropic::Beta::BetaManagedAgentsManualDeploymentPausedReason
+        | Anthropic::Beta::BetaManagedAgentsErrorDeploymentPausedReason
+
+      module BetaManagedAgentsDeploymentPausedReason
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason]
+      end
+    end
+  end
+end

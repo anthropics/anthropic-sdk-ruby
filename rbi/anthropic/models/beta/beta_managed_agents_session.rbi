@@ -110,6 +110,11 @@ module Anthropic
         sig { returns(T::Array[String]) }
         attr_accessor :vault_ids
 
+        # Deployment ID when the session was created from a deployment reference. Null
+        # otherwise.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :deployment_id
+
         # A Managed Agents `session`.
         sig do
           params(
@@ -137,7 +142,8 @@ module Anthropic
             type: Anthropic::Beta::BetaManagedAgentsSession::Type::OrSymbol,
             updated_at: Time,
             usage: Anthropic::Beta::BetaManagedAgentsSessionUsage::OrHash,
-            vault_ids: T::Array[String]
+            vault_ids: T::Array[String],
+            deployment_id: T.nilable(String)
           ).returns(T.attached_class)
         end
         def self.new(
@@ -167,7 +173,10 @@ module Anthropic
           usage:,
           # Vault IDs attached to the session at creation. Empty when no vaults were
           # supplied.
-          vault_ids:
+          vault_ids:,
+          # Deployment ID when the session was created from a deployment reference. Null
+          # otherwise.
+          deployment_id: nil
         )
         end
 
@@ -196,7 +205,8 @@ module Anthropic
                 Anthropic::Beta::BetaManagedAgentsSession::Type::TaggedSymbol,
               updated_at: Time,
               usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
-              vault_ids: T::Array[String]
+              vault_ids: T::Array[String],
+              deployment_id: T.nilable(String)
             }
           )
         end

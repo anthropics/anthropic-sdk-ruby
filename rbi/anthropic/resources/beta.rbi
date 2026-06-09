@@ -18,6 +18,12 @@ module Anthropic
       sig { returns(Anthropic::Resources::Beta::Sessions) }
       attr_reader :sessions
 
+      sig { returns(Anthropic::Resources::Beta::Deployments) }
+      attr_reader :deployments
+
+      sig { returns(Anthropic::Resources::Beta::DeploymentRuns) }
+      attr_reader :deployment_runs
+
       sig { returns(Anthropic::Resources::Beta::Vaults) }
       attr_reader :vaults
 

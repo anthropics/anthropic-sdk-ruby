@@ -9,6 +9,7 @@ module Anthropic
           created_at_gte: Time,
           created_at_lt: Time,
           created_at_lte: Time,
+          deployment_id: String,
           include_archived: bool,
           limit: Integer,
           memory_store_id: String,
@@ -46,6 +47,10 @@ module Anthropic
         attr_reader created_at_lte: Time?
 
         def created_at_lte=: (Time) -> Time
+
+        attr_reader deployment_id: String?
+
+        def deployment_id=: (String) -> String
 
         attr_reader include_archived: bool?
 
@@ -88,6 +93,7 @@ module Anthropic
           ?created_at_gte: Time,
           ?created_at_lt: Time,
           ?created_at_lte: Time,
+          ?deployment_id: String,
           ?include_archived: bool,
           ?limit: Integer,
           ?memory_store_id: String,
@@ -105,6 +111,7 @@ module Anthropic
           created_at_gte: Time,
           created_at_lt: Time,
           created_at_lte: Time,
+          deployment_id: String,
           include_archived: bool,
           limit: Integer,
           memory_store_id: String,

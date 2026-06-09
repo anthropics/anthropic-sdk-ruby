@@ -12,7 +12,8 @@ module Anthropic
               auth:
                 T.any(
                   Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams::OrHash,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams::OrHash
+                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams::OrHash,
+                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::OrHash
                 ),
               display_name: T.nilable(String),
               metadata: T::Hash[Symbol, String],
@@ -66,7 +67,8 @@ module Anthropic
               auth:
                 T.any(
                   Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams::OrHash,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams::OrHash
+                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams::OrHash,
+                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::OrHash
                 ),
               display_name: T.nilable(String),
               metadata: T.nilable(T::Hash[Symbol, T.nilable(String)]),

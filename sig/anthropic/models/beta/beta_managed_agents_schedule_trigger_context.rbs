@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsScheduleTriggerContext = Beta::BetaManagedAgentsScheduleTriggerContext
+
+    module Beta
+      type beta_managed_agents_schedule_trigger_context =
+        {
+          scheduled_at: Time,
+          type: Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext::type_
+        }
+
+      class BetaManagedAgentsScheduleTriggerContext < Anthropic::Internal::Type::BaseModel
+        attr_accessor scheduled_at: Time
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext::type_
+
+        def initialize: (
+          scheduled_at: Time,
+          type: Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext::type_
+        ) -> void
+
+        def to_hash: -> {
+          scheduled_at: Time,
+          type: Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext::type_
+        }
+
+        type type_ = :schedule
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          SCHEDULE: :schedule
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext::type_]
+        end
+      end
+    end
+  end
+end

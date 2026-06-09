@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError = Beta::BetaManagedAgentsFileNotFoundDeploymentPausedReasonError
+
+    module Beta
+      type beta_managed_agents_file_not_found_deployment_paused_reason_error =
+        {
+          type: Anthropic::Models::Beta::BetaManagedAgentsFileNotFoundDeploymentPausedReasonError::type_
+        }
+
+      class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsFileNotFoundDeploymentPausedReasonError::type_
+
+        def initialize: (
+          type: Anthropic::Models::Beta::BetaManagedAgentsFileNotFoundDeploymentPausedReasonError::type_
+        ) -> void
+
+        def to_hash: -> {
+          type: Anthropic::Models::Beta::BetaManagedAgentsFileNotFoundDeploymentPausedReasonError::type_
+        }
+
+        type type_ = :file_not_found_error
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          FILE_NOT_FOUND_ERROR: :file_not_found_error
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsFileNotFoundDeploymentPausedReasonError::type_]
+        end
+      end
+    end
+  end
+end

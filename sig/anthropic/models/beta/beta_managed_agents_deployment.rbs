@@ -1,0 +1,109 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsDeployment = Beta::BetaManagedAgentsDeployment
+
+    module Beta
+      type beta_managed_agents_deployment =
+        {
+          id: String,
+          agent: Anthropic::Beta::BetaManagedAgentsAgentReference,
+          archived_at: Time?,
+          created_at: Time,
+          description: String?,
+          environment_id: String,
+          initial_events: ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_initial_event],
+          metadata: ::Hash[Symbol, String],
+          name: String,
+          paused_reason: Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason?,
+          resources: ::Array[Anthropic::Models::Beta::beta_managed_agents_session_resource_config],
+          schedule: Anthropic::Beta::BetaManagedAgentsSchedule?,
+          status: Anthropic::Models::Beta::beta_managed_agents_deployment_status,
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeployment::type_,
+          updated_at: Time,
+          vault_ids: ::Array[String]
+        }
+
+      class BetaManagedAgentsDeployment < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor agent: Anthropic::Beta::BetaManagedAgentsAgentReference
+
+        attr_accessor archived_at: Time?
+
+        attr_accessor created_at: Time
+
+        attr_accessor description: String?
+
+        attr_accessor environment_id: String
+
+        attr_accessor initial_events: ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_initial_event]
+
+        attr_accessor metadata: ::Hash[Symbol, String]
+
+        attr_accessor name: String
+
+        attr_accessor paused_reason: Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason?
+
+        attr_accessor resources: ::Array[Anthropic::Models::Beta::beta_managed_agents_session_resource_config]
+
+        attr_accessor schedule: Anthropic::Beta::BetaManagedAgentsSchedule?
+
+        attr_accessor status: Anthropic::Models::Beta::beta_managed_agents_deployment_status
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsDeployment::type_
+
+        attr_accessor updated_at: Time
+
+        attr_accessor vault_ids: ::Array[String]
+
+        def initialize: (
+          id: String,
+          agent: Anthropic::Beta::BetaManagedAgentsAgentReference,
+          archived_at: Time?,
+          created_at: Time,
+          description: String?,
+          environment_id: String,
+          initial_events: ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_initial_event],
+          metadata: ::Hash[Symbol, String],
+          name: String,
+          paused_reason: Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason?,
+          resources: ::Array[Anthropic::Models::Beta::beta_managed_agents_session_resource_config],
+          schedule: Anthropic::Beta::BetaManagedAgentsSchedule?,
+          status: Anthropic::Models::Beta::beta_managed_agents_deployment_status,
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeployment::type_,
+          updated_at: Time,
+          vault_ids: ::Array[String]
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          agent: Anthropic::Beta::BetaManagedAgentsAgentReference,
+          archived_at: Time?,
+          created_at: Time,
+          description: String?,
+          environment_id: String,
+          initial_events: ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_initial_event],
+          metadata: ::Hash[Symbol, String],
+          name: String,
+          paused_reason: Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason?,
+          resources: ::Array[Anthropic::Models::Beta::beta_managed_agents_session_resource_config],
+          schedule: Anthropic::Beta::BetaManagedAgentsSchedule?,
+          status: Anthropic::Models::Beta::beta_managed_agents_deployment_status,
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeployment::type_,
+          updated_at: Time,
+          vault_ids: ::Array[String]
+        }
+
+        type type_ = :deployment
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          DEPLOYMENT: :deployment
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsDeployment::type_]
+        end
+      end
+    end
+  end
+end

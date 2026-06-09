@@ -19,7 +19,8 @@ module Anthropic
           type: Anthropic::Models::Beta::BetaManagedAgentsSession::type_,
           updated_at: Time,
           usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
-          vault_ids: ::Array[String]
+          vault_ids: ::Array[String],
+          deployment_id: String?
         }
 
       class BetaManagedAgentsSession < Anthropic::Internal::Type::BaseModel
@@ -53,6 +54,8 @@ module Anthropic
 
         attr_accessor vault_ids: ::Array[String]
 
+        attr_accessor deployment_id: String?
+
         def initialize: (
           id: String,
           agent: Anthropic::Beta::BetaManagedAgentsSessionAgent,
@@ -68,7 +71,8 @@ module Anthropic
           type: Anthropic::Models::Beta::BetaManagedAgentsSession::type_,
           updated_at: Time,
           usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
-          vault_ids: ::Array[String]
+          vault_ids: ::Array[String],
+          ?deployment_id: String?
         ) -> void
 
         def to_hash: -> {
@@ -86,7 +90,8 @@ module Anthropic
           type: Anthropic::Models::Beta::BetaManagedAgentsSession::type_,
           updated_at: Time,
           usage: Anthropic::Beta::BetaManagedAgentsSessionUsage,
-          vault_ids: ::Array[String]
+          vault_ids: ::Array[String],
+          deployment_id: String?
         }
 
         type status = :rescheduling | :running | :idle | :terminated

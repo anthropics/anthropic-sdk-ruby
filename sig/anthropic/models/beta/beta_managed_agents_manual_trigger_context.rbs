@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsManualTriggerContext = Beta::BetaManagedAgentsManualTriggerContext
+
+    module Beta
+      type beta_managed_agents_manual_trigger_context =
+        {
+          type: Anthropic::Models::Beta::BetaManagedAgentsManualTriggerContext::type_
+        }
+
+      class BetaManagedAgentsManualTriggerContext < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsManualTriggerContext::type_
+
+        def initialize: (
+          type: Anthropic::Models::Beta::BetaManagedAgentsManualTriggerContext::type_
+        ) -> void
+
+        def to_hash: -> {
+          type: Anthropic::Models::Beta::BetaManagedAgentsManualTriggerContext::type_
+        }
+
+        type type_ = :manual
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          MANUAL: :manual
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsManualTriggerContext::type_]
+        end
+      end
+    end
+  end
+end

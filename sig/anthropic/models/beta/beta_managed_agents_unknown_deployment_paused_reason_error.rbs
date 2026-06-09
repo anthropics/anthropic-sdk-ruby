@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsUnknownDeploymentPausedReasonError = Beta::BetaManagedAgentsUnknownDeploymentPausedReasonError
+
+    module Beta
+      type beta_managed_agents_unknown_deployment_paused_reason_error =
+        {
+          type: Anthropic::Models::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonError::type_
+        }
+
+      class BetaManagedAgentsUnknownDeploymentPausedReasonError < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonError::type_
+
+        def initialize: (
+          type: Anthropic::Models::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonError::type_
+        ) -> void
+
+        def to_hash: -> {
+          type: Anthropic::Models::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonError::type_
+        }
+
+        type type_ = :unknown_error
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          UNKNOWN_ERROR: :unknown_error
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonError::type_]
+        end
+      end
+    end
+  end
+end

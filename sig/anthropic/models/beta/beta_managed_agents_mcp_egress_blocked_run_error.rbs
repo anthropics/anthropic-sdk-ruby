@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsMCPEgressBlockedRunError = Beta::BetaManagedAgentsMCPEgressBlockedRunError
+
+    module Beta
+      type beta_managed_agents_mcp_egress_blocked_run_error =
+        {
+          message: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedRunError::type_
+        }
+
+      class BetaManagedAgentsMCPEgressBlockedRunError < Anthropic::Internal::Type::BaseModel
+        attr_accessor message: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedRunError::type_
+
+        def initialize: (
+          message: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedRunError::type_
+        ) -> void
+
+        def to_hash: -> {
+          message: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedRunError::type_
+        }
+
+        type type_ = :mcp_egress_blocked_error
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          MCP_EGRESS_BLOCKED_ERROR: :mcp_egress_blocked_error
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedRunError::type_]
+        end
+      end
+    end
+  end
+end

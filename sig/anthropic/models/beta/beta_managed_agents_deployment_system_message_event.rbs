@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsDeploymentSystemMessageEvent = Beta::BetaManagedAgentsDeploymentSystemMessageEvent
+
+    module Beta
+      type beta_managed_agents_deployment_system_message_event =
+        {
+          content: ::Array[Anthropic::Beta::BetaManagedAgentsSystemContentBlock],
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentSystemMessageEvent::type_
+        }
+
+      class BetaManagedAgentsDeploymentSystemMessageEvent < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: ::Array[Anthropic::Beta::BetaManagedAgentsSystemContentBlock]
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentSystemMessageEvent::type_
+
+        def initialize: (
+          content: ::Array[Anthropic::Beta::BetaManagedAgentsSystemContentBlock],
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentSystemMessageEvent::type_
+        ) -> void
+
+        def to_hash: -> {
+          content: ::Array[Anthropic::Beta::BetaManagedAgentsSystemContentBlock],
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentSystemMessageEvent::type_
+        }
+
+        type type_ = :"system.message"
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          SYSTEM_MESSAGE: :"system.message"
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsDeploymentSystemMessageEvent::type_]
+        end
+      end
+    end
+  end
+end

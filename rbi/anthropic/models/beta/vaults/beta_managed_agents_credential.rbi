@@ -65,7 +65,8 @@ module Anthropic
               auth:
                 T.any(
                   Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse::OrHash,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse::OrHash
+                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse::OrHash,
+                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::OrHash
                 ),
               created_at: Time,
               metadata: T::Hash[Symbol, String],
@@ -125,7 +126,8 @@ module Anthropic
               T.type_alias do
                 T.any(
                   Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse,
-                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse
+                  Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse,
+                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse
                 )
               end
 

@@ -25,6 +25,8 @@ TEST_PATHS=(
 	test/anthropic/resources/beta/sessions/resources_test.rb
 	test/anthropic/resources/beta/sessions/threads_test.rb
 	test/anthropic/resources/beta/sessions/threads/events_test.rb
+	test/anthropic/resources/beta/deployments_test.rb
+	test/anthropic/resources/beta/deployment_runs_test.rb
 	test/anthropic/resources/beta/vaults_test.rb
 	test/anthropic/resources/beta/vaults/credentials_test.rb
 	test/anthropic/resources/beta/memory_stores_test.rb

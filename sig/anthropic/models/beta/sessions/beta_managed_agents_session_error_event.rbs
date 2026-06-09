@@ -41,6 +41,7 @@ module Anthropic
             | Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError
             | Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError
             | Anthropic::Beta::Sessions::BetaManagedAgentsBillingError
+            | Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError
 
           module Error
             extend Anthropic::Internal::Type::Union

@@ -122,6 +122,7 @@ module Anthropic
             created_at_gte: Time,
             created_at_lt: Time,
             created_at_lte: Time,
+            deployment_id: String,
             include_archived: T::Boolean,
             limit: Integer,
             memory_store_id: String,
@@ -150,6 +151,8 @@ module Anthropic
           created_at_lt: nil,
           # Query param: Return sessions created at or before this time (inclusive).
           created_at_lte: nil,
+          # Query param: Filter sessions created by this deployment ID.
+          deployment_id: nil,
           # Query param: When true, includes archived sessions. Default: false (exclude
           # archived).
           include_archived: nil,
