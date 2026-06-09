@@ -25,6 +25,7 @@ module Anthropic
         | Anthropic::Beta::BetaContainerUploadBlockParam
         | Anthropic::Beta::BetaCompactionBlockParam
         | Anthropic::Beta::BetaMidConversationSystemBlockParam
+        | Anthropic::Beta::BetaFallbackBlockParam
 
       module BetaContentBlockParam
         extend Anthropic::Internal::Type::Union

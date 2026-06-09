@@ -13,6 +13,7 @@ class Anthropic::Test::Resources::Beta::ModelsTest < Anthropic::Test::ResourceTe
     assert_pattern do
       response => {
         id: String,
+        allowed_fallback_models: ^(Anthropic::Internal::Type::ArrayOf[String]) | nil,
         capabilities: Anthropic::Beta::BetaModelCapabilities | nil,
         created_at: Time,
         display_name: String,
@@ -40,6 +41,7 @@ class Anthropic::Test::Resources::Beta::ModelsTest < Anthropic::Test::ResourceTe
     assert_pattern do
       row => {
         id: String,
+        allowed_fallback_models: ^(Anthropic::Internal::Type::ArrayOf[String]) | nil,
         capabilities: Anthropic::Beta::BetaModelCapabilities | nil,
         created_at: Time,
         display_name: String,

@@ -26,13 +26,14 @@ module Anthropic
         type: :refusal
       }
 
-      type category = :cyber | :bio
+      type category = :cyber | :bio | :reasoning_extraction
 
       module Category
         extend Anthropic::Internal::Type::Enum
 
         CYBER: :cyber
         BIO: :bio
+        REASONING_EXTRACTION: :reasoning_extraction
 
         def self?.values: -> ::Array[Anthropic::Models::RefusalStopDetails::category]
       end

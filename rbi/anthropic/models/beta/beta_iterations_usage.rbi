@@ -15,7 +15,8 @@ module Anthropic
             T.any(
               Anthropic::Beta::BetaMessageIterationUsage,
               Anthropic::Beta::BetaCompactionIterationUsage,
-              Anthropic::Beta::BetaAdvisorMessageIterationUsage
+              Anthropic::Beta::BetaAdvisorMessageIterationUsage,
+              Anthropic::Beta::BetaFallbackMessageIterationUsage
             )
           end
 

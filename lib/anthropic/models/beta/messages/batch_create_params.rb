@@ -189,6 +189,40 @@ module Anthropic
               #   @return [Anthropic::Models::Beta::BetaDiagnosticsParam, nil]
               optional :diagnostics, -> { Anthropic::Beta::BetaDiagnosticsParam }, nil?: true
 
+              # @!attribute fallback_credit_token
+              #   The `fallback_credit_token` from a prior refusal's `stop_details`.
+              #
+              #   When a preceding request was refused and returned a `fallback_credit_token`,
+              #   pass that code here on the retry to have the retry's cache-creation tokens for
+              #   the prefix that was warm on the refused model billed at the cache-read rate.
+              #   Must be redeemed by the same organization and workspace, with the same request
+              #   body (optionally extended by one appended `assistant` message whose content is
+              #   the partial text — with any trailing whitespace stripped from the final text
+              #   block — and paired server-tool blocks streamed before the refusal; the
+              #   appended-assistant form is not available for requests with `output_format` set
+              #   or forced `tool_choice`), on an eligible fallback model, on the same platform,
+              #   and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+              #   mid-server-tool-loop whose partial content was continuable may only be redeemed
+              #   with the appended-assistant form — if an exact-body retry is rejected with a 400
+              #   saying the token must be redeemed by continuing the partial response, retry with
+              #   the appended-assistant form instead.
+              #
+              #   When the appended-assistant form is used on a model that otherwise disallows
+              #   assistant-turn prefill, this token also authorizes that one prefill.
+              #
+              #   @return [String, nil]
+              optional :fallback_credit_token, String, nil?: true
+
+              # @!attribute fallbacks
+              #   Opt-in server-side retry on one or more substitute models when the requested
+              #   model declines for policy reasons. Tried in order: if the first entry also
+              #   declines, the second is tried, and so on.
+              #
+              #   @return [Array<Anthropic::Models::Beta::BetaFallbackParam>, nil]
+              optional :fallbacks,
+                       -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaFallbackParam] },
+                       nil?: true
+
               # @!attribute inference_geo
               #   Specifies the geographic region for inference processing. If not specified, the
               #   workspace's `default_inference_geo` is used.
@@ -436,7 +470,7 @@ module Anthropic
               #   @return [String, nil]
               optional :user_profile_id, String, nil?: true
 
-              # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil)
+              # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil)
               #   Some parameter documentations has been truncated, see
               #   {Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params} for more
               #   details.
@@ -459,6 +493,10 @@ module Anthropic
               #   @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Context management configuration.
               #
               #   @param diagnostics [Anthropic::Models::Beta::BetaDiagnosticsParam, nil] Request-level diagnostics. Currently carries the previous response
+              #
+              #   @param fallback_credit_token [String, nil] The `fallback_credit_token` from a prior refusal's `stop_details`.
+              #
+              #   @param fallbacks [Array<Anthropic::Models::Beta::BetaFallbackParam>, nil] Opt-in server-side retry on one or more substitute models when the requested mod
               #
               #   @param inference_geo [String, nil] Specifies the geographic region for inference processing. If not specified, the
               #

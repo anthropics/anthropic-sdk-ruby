@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    class BetaFallbackBlock = Beta::BetaFallbackBlock
+
+    module Beta
+      type beta_fallback_block =
+        {
+          from: Anthropic::Beta::BetaFallbackInfo,
+          to: Anthropic::Beta::BetaFallbackInfo,
+          type: :fallback
+        }
+
+      class BetaFallbackBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor from: Anthropic::Beta::BetaFallbackInfo
+
+        attr_accessor to: Anthropic::Beta::BetaFallbackInfo
+
+        attr_accessor type: :fallback
+
+        def initialize: (
+          from: Anthropic::Beta::BetaFallbackInfo,
+          to: Anthropic::Beta::BetaFallbackInfo,
+          ?type: :fallback
+        ) -> void
+
+        def to_hash: -> {
+          from: Anthropic::Beta::BetaFallbackInfo,
+          to: Anthropic::Beta::BetaFallbackInfo,
+          type: :fallback
+        }
+      end
+    end
+  end
+end

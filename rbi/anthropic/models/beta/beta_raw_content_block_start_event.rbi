@@ -47,7 +47,8 @@ module Anthropic
                 Anthropic::Beta::BetaMCPToolUseBlock::OrHash,
                 Anthropic::Beta::BetaMCPToolResultBlock::OrHash,
                 Anthropic::Beta::BetaContainerUploadBlock::OrHash,
-                Anthropic::Beta::BetaCompactionBlock::OrHash
+                Anthropic::Beta::BetaCompactionBlock::OrHash,
+                Anthropic::Beta::BetaFallbackBlock::OrHash
               ),
             index: Integer,
             type: Symbol
@@ -96,7 +97,8 @@ module Anthropic
                 Anthropic::Beta::BetaMCPToolUseBlock,
                 Anthropic::Beta::BetaMCPToolResultBlock,
                 Anthropic::Beta::BetaContainerUploadBlock,
-                Anthropic::Beta::BetaCompactionBlock
+                Anthropic::Beta::BetaCompactionBlock,
+                Anthropic::Beta::BetaFallbackBlock
               )
             end
 

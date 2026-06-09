@@ -11,6 +11,14 @@ module Anthropic
         #   @return [String]
         required :id, String
 
+        # @!attribute allowed_fallback_models
+        #   Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An
+        #   empty list means the `fallbacks` parameter is not supported for this model as
+        #   primary.
+        #
+        #   @return [Array<String>, nil]
+        required :allowed_fallback_models, Anthropic::Internal::Type::ArrayOf[String], nil?: true
+
         # @!attribute capabilities
         #   Model capability information.
         #
@@ -50,11 +58,13 @@ module Anthropic
         #   @return [Symbol, :model]
         required :type, const: :model
 
-        # @!method initialize(id:, capabilities:, created_at:, display_name:, max_input_tokens:, max_tokens:, type: :model)
+        # @!method initialize(id:, allowed_fallback_models:, capabilities:, created_at:, display_name:, max_input_tokens:, max_tokens:, type: :model)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaModelInfo} for more details.
         #
         #   @param id [String] Unique model identifier.
+        #
+        #   @param allowed_fallback_models [Array<String>, nil] Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An emp
         #
         #   @param capabilities [Anthropic::Models::Beta::BetaModelCapabilities, nil] Model capability information.
         #

@@ -75,6 +75,49 @@ class Anthropic::Test::Resources::Beta::Messages::StreamingTest < Minitest::Test
     assert_equal("Summary of the conversation so far.", content_block.content)
   end
 
+  def test_fallback_accumulated_message_model
+    stub_streaming_response(fallback_sse_response)
+
+    stream = @client.beta.messages.stream(**compaction_params)
+    message = stream.accumulated_message
+
+    assert_equal("claude-fallback-model-b", message.model.to_s)
+    assert_equal(2, message.content.length)
+    fallback_block = message.content[0]
+    assert_equal(:fallback, fallback_block.type)
+    assert_equal("claude-requested-model-a", fallback_block.from.model.to_s)
+    assert_equal("claude-fallback-model-b", fallback_block.to.model.to_s)
+  end
+
+  def fallback_sse_response
+    <<~SSE
+      event: message_start
+      data: {"type":"message_start","message":{"id":"msg_fallback","type":"message","role":"assistant","content":[],"model":"claude-requested-model-a","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":10,"output_tokens":1}}}
+
+      event: content_block_start
+      data: {"type":"content_block_start","index":0,"content_block":{"type":"fallback","from":{"model":"claude-requested-model-a"},"to":{"model":"claude-fallback-model-b"}}}
+
+      event: content_block_stop
+      data: {"type":"content_block_stop","index":0}
+
+      event: content_block_start
+      data: {"type":"content_block_start","index":1,"content_block":{"type":"text","text":"","citations":null}}
+
+      event: content_block_delta
+      data: {"type":"content_block_delta","index":1,"delta":{"type":"text_delta","text":"Hello from the fallback."}}
+
+      event: content_block_stop
+      data: {"type":"content_block_stop","index":1}
+
+      event: message_delta
+      data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null},"usage":{"output_tokens":15}}
+
+      event: message_stop
+      data: {"type":"message_stop"}
+
+    SSE
+  end
+
   def compaction_sse_response
     <<~SSE
       event: message_start

@@ -1,0 +1,66 @@
+module Anthropic
+  module Models
+    class BetaFallbackParam = Beta::BetaFallbackParam
+
+    module Beta
+      type beta_fallback_param =
+        {
+          model: Anthropic::Models::model,
+          max_tokens: Integer?,
+          output_config: Anthropic::Beta::BetaOutputConfig?,
+          speed: Anthropic::Models::Beta::BetaFallbackParam::speed?,
+          thinking: Anthropic::Models::Beta::BetaFallbackParam::thinking?
+        }
+
+      class BetaFallbackParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor model: Anthropic::Models::model
+
+        attr_accessor max_tokens: Integer?
+
+        attr_accessor output_config: Anthropic::Beta::BetaOutputConfig?
+
+        attr_accessor speed: Anthropic::Models::Beta::BetaFallbackParam::speed?
+
+        attr_accessor thinking: Anthropic::Models::Beta::BetaFallbackParam::thinking?
+
+        def initialize: (
+          model: Anthropic::Models::model,
+          ?max_tokens: Integer?,
+          ?output_config: Anthropic::Beta::BetaOutputConfig?,
+          ?speed: Anthropic::Models::Beta::BetaFallbackParam::speed?,
+          ?thinking: Anthropic::Models::Beta::BetaFallbackParam::thinking?
+        ) -> void
+
+        def to_hash: -> {
+          model: Anthropic::Models::model,
+          max_tokens: Integer?,
+          output_config: Anthropic::Beta::BetaOutputConfig?,
+          speed: Anthropic::Models::Beta::BetaFallbackParam::speed?,
+          thinking: Anthropic::Models::Beta::BetaFallbackParam::thinking?
+        }
+
+        type speed = :standard | :fast
+
+        module Speed
+          extend Anthropic::Internal::Type::Enum
+
+          STANDARD: :standard
+          FAST: :fast
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaFallbackParam::speed]
+        end
+
+        type thinking =
+          Anthropic::Beta::BetaThinkingConfigEnabled
+          | Anthropic::Beta::BetaThinkingConfigDisabled
+          | Anthropic::Beta::BetaThinkingConfigAdaptive
+
+        module Thinking
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaFallbackParam::thinking]
+        end
+      end
+    end
+  end
+end

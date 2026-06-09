@@ -46,6 +46,7 @@ module Anthropic
           | Anthropic::Beta::BetaMCPToolResultBlock
           | Anthropic::Beta::BetaContainerUploadBlock
           | Anthropic::Beta::BetaCompactionBlock
+          | Anthropic::Beta::BetaFallbackBlock
 
         module ContentBlock
           extend Anthropic::Internal::Type::Union

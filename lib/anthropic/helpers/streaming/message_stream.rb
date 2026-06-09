@@ -113,6 +113,10 @@ module Anthropic
             return Anthropic::Internal::Type::Converter.coerce(Anthropic::Models::BetaMessage, event.message)
           in Anthropic::Models::RawContentBlockStartEvent | Anthropic::Models::BetaRawContentBlockStartEvent
             current_snapshot.content = (current_snapshot.content || []) + [event.content_block]
+
+            # The final hop's fallback block names the model that served the response —
+            # keeps the snapshot consistent with the relabeled non-streaming message.
+            current_snapshot.model = event.content_block.to.model if event.content_block.type == :fallback
           in Anthropic::Models::RawContentBlockDeltaEvent | Anthropic::Models::BetaRawContentBlockDeltaEvent
             content = current_snapshot.content[event.index]
 

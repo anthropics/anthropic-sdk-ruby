@@ -9,6 +9,10 @@ module Anthropic
     module Model
       extend Anthropic::Internal::Type::Union
 
+      variant const: -> { Anthropic::Models::Model::CLAUDE_FABLE_5 }
+
+      variant const: -> { Anthropic::Models::Model::CLAUDE_MYTHOS_5 }
+
       variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_8 }
 
       variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_7 }
@@ -56,6 +60,12 @@ module Anthropic
 
       # @!group
 
+      # Next generation of intelligence for the hardest knowledge work and coding problems
+      CLAUDE_FABLE_5 = :"claude-fable-5"
+
+      # Most capable model for cybersecurity and biology research
+      CLAUDE_MYTHOS_5 = :"claude-mythos-5"
+
       # Frontier intelligence for long-running agents and coding
       CLAUDE_OPUS_4_8 = :"claude-opus-4-8"
 
@@ -63,6 +73,9 @@ module Anthropic
       CLAUDE_OPUS_4_7 = :"claude-opus-4-7"
 
       # New class of intelligence, strongest in coding and cybersecurity
+      # @deprecated Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5.
+      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
+      # information.
       CLAUDE_MYTHOS_PREVIEW = :"claude-mythos-preview"
 
       # Frontier intelligence for long-running agents and coding

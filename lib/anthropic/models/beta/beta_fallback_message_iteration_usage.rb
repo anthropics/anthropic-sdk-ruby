@@ -3,7 +3,7 @@
 module Anthropic
   module Models
     module Beta
-      class BetaMessageIterationUsage < Anthropic::Internal::Type::BaseModel
+      class BetaFallbackMessageIterationUsage < Anthropic::Internal::Type::BaseModel
         # @!attribute cache_creation
         #   Breakdown of cached tokens by TTL
         #
@@ -44,16 +44,21 @@ module Anthropic
         required :output_tokens, Integer
 
         # @!attribute type
-        #   Usage for a sampling iteration
+        #   Usage for the fallback-model attempt that served the response
         #
-        #   @return [Symbol, :message]
-        required :type, const: :message
+        #   @return [Symbol, :fallback_message]
+        required :type, const: :fallback_message
 
-        # @!method initialize(cache_creation:, cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, model:, output_tokens:, type: :message)
+        # @!method initialize(cache_creation:, cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, model:, output_tokens:, type: :fallback_message)
         #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaMessageIterationUsage} for more details.
+        #   {Anthropic::Models::Beta::BetaFallbackMessageIterationUsage} for more details.
         #
-        #   Token usage for a sampling iteration.
+        #   Token usage for the fallback-model attempt of a server-side fallback request.
+        #
+        #   Produced in place of a `message` entry for whichever hop served the response. A
+        #   declined hop produces the existing `message` entry. Whether a fallback model
+        #   served the response is signalled by the presence of this entry in
+        #   `usage.iterations`.
         #
         #   @param cache_creation [Anthropic::Models::Beta::BetaCacheCreation, nil] Breakdown of cached tokens by TTL
         #
@@ -67,10 +72,10 @@ module Anthropic
         #
         #   @param output_tokens [Integer] The number of output tokens which were used.
         #
-        #   @param type [Symbol, :message] Usage for a sampling iteration
+        #   @param type [Symbol, :fallback_message] Usage for the fallback-model attempt that served the response
       end
     end
 
-    BetaMessageIterationUsage = Beta::BetaMessageIterationUsage
+    BetaFallbackMessageIterationUsage = Beta::BetaFallbackMessageIterationUsage
   end
 end

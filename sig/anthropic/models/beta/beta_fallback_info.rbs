@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaFallbackInfo = Beta::BetaFallbackInfo
+
+    module Beta
+      type beta_fallback_info = { model: Anthropic::Models::model }
+
+      class BetaFallbackInfo < Anthropic::Internal::Type::BaseModel
+        attr_accessor model: Anthropic::Models::model
+
+        def initialize: (model: Anthropic::Models::model) -> void
+
+        def to_hash: -> { model: Anthropic::Models::model }
+      end
+    end
+  end
+end

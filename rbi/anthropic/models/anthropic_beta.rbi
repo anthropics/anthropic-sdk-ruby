@@ -118,6 +118,16 @@ module Anthropic
           :"thinking-token-count-2026-05-13",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      SERVER_SIDE_FALLBACK_2026_06_01 =
+        T.let(
+          :"server-side-fallback-2026-06-01",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
+      FALLBACK_CREDIT_2026_06_01 =
+        T.let(
+          :"fallback-credit-2026-06-01",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
     end
   end
 end

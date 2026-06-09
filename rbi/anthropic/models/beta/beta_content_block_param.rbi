@@ -32,7 +32,8 @@ module Anthropic
               Anthropic::Beta::BetaRequestMCPToolResultBlockParam,
               Anthropic::Beta::BetaContainerUploadBlockParam,
               Anthropic::Beta::BetaCompactionBlockParam,
-              Anthropic::Beta::BetaMidConversationSystemBlockParam
+              Anthropic::Beta::BetaMidConversationSystemBlockParam,
+              Anthropic::Beta::BetaFallbackBlockParam
             )
           end
 

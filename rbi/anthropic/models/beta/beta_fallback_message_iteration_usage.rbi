@@ -2,14 +2,14 @@
 
 module Anthropic
   module Models
-    BetaMessageIterationUsage = Beta::BetaMessageIterationUsage
+    BetaFallbackMessageIterationUsage = Beta::BetaFallbackMessageIterationUsage
 
     module Beta
-      class BetaMessageIterationUsage < Anthropic::Internal::Type::BaseModel
+      class BetaFallbackMessageIterationUsage < Anthropic::Internal::Type::BaseModel
         OrHash =
           T.type_alias do
             T.any(
-              Anthropic::Beta::BetaMessageIterationUsage,
+              Anthropic::Beta::BetaFallbackMessageIterationUsage,
               Anthropic::Internal::AnyHash
             )
           end
@@ -49,11 +49,16 @@ module Anthropic
         sig { returns(Integer) }
         attr_accessor :output_tokens
 
-        # Usage for a sampling iteration
+        # Usage for the fallback-model attempt that served the response
         sig { returns(Symbol) }
         attr_accessor :type
 
-        # Token usage for a sampling iteration.
+        # Token usage for the fallback-model attempt of a server-side fallback request.
+        #
+        # Produced in place of a `message` entry for whichever hop served the response. A
+        # declined hop produces the existing `message` entry. Whether a fallback model
+        # served the response is signalled by the presence of this entry in
+        # `usage.iterations`.
         sig do
           params(
             cache_creation:
@@ -82,8 +87,8 @@ module Anthropic
           model:,
           # The number of output tokens which were used.
           output_tokens:,
-          # Usage for a sampling iteration
-          type: :message
+          # Usage for the fallback-model attempt that served the response
+          type: :fallback_message
         )
         end
 

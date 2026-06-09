@@ -1,9 +1,9 @@
 module Anthropic
   module Models
-    class BetaMessageIterationUsage = Beta::BetaMessageIterationUsage
+    class BetaFallbackMessageIterationUsage = Beta::BetaFallbackMessageIterationUsage
 
     module Beta
-      type beta_message_iteration_usage =
+      type beta_fallback_message_iteration_usage =
         {
           cache_creation: Anthropic::Beta::BetaCacheCreation?,
           cache_creation_input_tokens: Integer,
@@ -11,10 +11,10 @@ module Anthropic
           input_tokens: Integer,
           model: Anthropic::Models::model,
           output_tokens: Integer,
-          type: :message
+          type: :fallback_message
         }
 
-      class BetaMessageIterationUsage < Anthropic::Internal::Type::BaseModel
+      class BetaFallbackMessageIterationUsage < Anthropic::Internal::Type::BaseModel
         attr_accessor cache_creation: Anthropic::Beta::BetaCacheCreation?
 
         attr_accessor cache_creation_input_tokens: Integer
@@ -27,7 +27,7 @@ module Anthropic
 
         attr_accessor output_tokens: Integer
 
-        attr_accessor type: :message
+        attr_accessor type: :fallback_message
 
         def initialize: (
           cache_creation: Anthropic::Beta::BetaCacheCreation?,
@@ -36,7 +36,7 @@ module Anthropic
           input_tokens: Integer,
           model: Anthropic::Models::model,
           output_tokens: Integer,
-          ?type: :message
+          ?type: :fallback_message
         ) -> void
 
         def to_hash: -> {
@@ -46,7 +46,7 @@ module Anthropic
           input_tokens: Integer,
           model: Anthropic::Models::model,
           output_tokens: Integer,
-          type: :message
+          type: :fallback_message
         }
       end
     end
