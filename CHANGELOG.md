@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.47.0 (2026-06-09)
+
+Full Changelog: [v1.46.0...v1.47.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.46.0...v1.47.0)
+
+### Features
+
+* **api:** add support for claude-mythos-5 and claude-fable-5, with support for server-side fallbacks on refusal ([41e21c3](https://github.com/anthropics/anthropic-sdk-ruby/commit/41e21c3a17ba4d5b930e50701ffc395844fb1dd9))
+* **client:** adds client-side fallbacks middleware for API providers that do not support server-side fallbacks ([41e21c3](https://github.com/anthropics/anthropic-sdk-ruby/commit/41e21c3a17ba4d5b930e50701ffc395844fb1dd9))
+
 ## 1.46.0 (2026-06-06)
 
 Full Changelog: [v1.45.0...v1.46.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.45.0...v1.46.0)
