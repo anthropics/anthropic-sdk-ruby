@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.48.1 (2026-06-09)
+
+Full Changelog: [v1.48.0...v1.48.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.48.0...v1.48.1)
+
+### Bug Fixes
+
+* **api:** add `frontier_llm` refusal category ([5fb7044](https://github.com/anthropics/anthropic-sdk-ruby/commit/5fb704475d5296d37065cec77a18867f2ccdee16))
+
 ## 1.48.0 (2026-06-09)
 
 Full Changelog: [v1.47.0...v1.48.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.47.0...v1.48.0)
