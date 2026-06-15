@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.48.2 (2026-06-15)
+
+Full Changelog: [v1.48.1...v1.48.2](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.48.1...v1.48.2)
+
+### Chores
+
+* **api:** remove retired models from API and SDKs ([c429fe1](https://github.com/anthropics/anthropic-sdk-ruby/commit/c429fe1911b96e2d93ab554387b7e47dc16b32dc))
+
 ## 1.48.1 (2026-06-09)
 
 Full Changelog: [v1.48.0...v1.48.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.48.0...v1.48.1)
