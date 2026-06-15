@@ -39,16 +39,6 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_1_20250805 }
 
-      variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_0 }
-
-      variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_20250514 }
-
-      variant const: -> { Anthropic::Models::Model::CLAUDE_SONNET_4_0 }
-
-      variant const: -> { Anthropic::Models::Model::CLAUDE_SONNET_4_20250514 }
-
-      variant const: -> { Anthropic::Models::Model::CLAUDE_3_HAIKU_20240307 }
-
       variant String
 
       # @!method self.variants
@@ -113,36 +103,6 @@ module Anthropic
       # https://docs.anthropic.com/en/docs/resources/model-deprecations for more
       # information.
       CLAUDE_OPUS_4_1_20250805 = :"claude-opus-4-1-20250805"
-
-      # Powerful model for complex tasks
-      # @deprecated Will reach end-of-life on June 15th, 2026. Please migrate to a newer model.
-      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
-      # information.
-      CLAUDE_OPUS_4_0 = :"claude-opus-4-0"
-
-      # Powerful model for complex tasks
-      # @deprecated Will reach end-of-life on June 15th, 2026. Please migrate to a newer model.
-      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
-      # information.
-      CLAUDE_OPUS_4_20250514 = :"claude-opus-4-20250514"
-
-      # High-performance model with extended thinking
-      # @deprecated Will reach end-of-life on June 15th, 2026. Please migrate to a newer model.
-      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
-      # information.
-      CLAUDE_SONNET_4_0 = :"claude-sonnet-4-0"
-
-      # High-performance model with extended thinking
-      # @deprecated Will reach end-of-life on June 15th, 2026. Please migrate to a newer model.
-      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
-      # information.
-      CLAUDE_SONNET_4_20250514 = :"claude-sonnet-4-20250514"
-
-      # Fast and cost-effective model
-      # @deprecated Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5.
-      # Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more
-      # information.
-      CLAUDE_3_HAIKU_20240307 = :"claude-3-haiku-20240307"
 
       # @!endgroup
     end
