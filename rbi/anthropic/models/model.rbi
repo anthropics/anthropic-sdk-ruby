@@ -76,26 +76,6 @@ module Anthropic
       # Exceptional model for specialized complex tasks
       CLAUDE_OPUS_4_1_20250805 =
         T.let(:"claude-opus-4-1-20250805", Anthropic::Model::TaggedSymbol)
-
-      # Powerful model for complex tasks
-      CLAUDE_OPUS_4_0 =
-        T.let(:"claude-opus-4-0", Anthropic::Model::TaggedSymbol)
-
-      # Powerful model for complex tasks
-      CLAUDE_OPUS_4_20250514 =
-        T.let(:"claude-opus-4-20250514", Anthropic::Model::TaggedSymbol)
-
-      # High-performance model with extended thinking
-      CLAUDE_SONNET_4_0 =
-        T.let(:"claude-sonnet-4-0", Anthropic::Model::TaggedSymbol)
-
-      # High-performance model with extended thinking
-      CLAUDE_SONNET_4_20250514 =
-        T.let(:"claude-sonnet-4-20250514", Anthropic::Model::TaggedSymbol)
-
-      # Fast and cost-effective model
-      CLAUDE_3_HAIKU_20240307 =
-        T.let(:"claude-3-haiku-20240307", Anthropic::Model::TaggedSymbol)
     end
   end
 end
