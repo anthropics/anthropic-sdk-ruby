@@ -74,6 +74,15 @@ module Anthropic
     #   @return [Array<#call>, #call, nil]
     optional :middleware, Anthropic::Internal::Type::Unknown
 
+    # @!attribute fallback_state
+    #   Shared {Anthropic::BetaFallbackState} for
+    #   {Anthropic::BetaRefusalFallbackMiddleware}. Requests that pass the same
+    #   instance start at the fallback the previous refusal pinned, so a
+    #   conversation stays on the model that accepted.
+    #
+    #   @return [Anthropic::BetaFallbackState, nil]
+    optional :fallback_state, Anthropic::Internal::Type::Unknown
+
     # @!method initialize(values = {})
     #   Returns a new instance of RequestOptions.
     #

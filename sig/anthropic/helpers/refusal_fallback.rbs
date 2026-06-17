@@ -1,0 +1,24 @@
+module Anthropic
+  class BetaFallbackState
+    attr_accessor index: Integer?
+  end
+
+  class BetaRefusalFallbackMiddleware
+    include Anthropic::Middleware
+
+    DEFAULT_BETAS: ::Array[String]
+
+    type fallback_entry =
+      Anthropic::Models::Beta::BetaFallbackParam | ::Hash[Symbol, top]
+
+    def initialize: (
+      ::Array[fallback_entry] fallbacks,
+      ?betas: ::Array[String]
+    ) -> void
+
+    def call: (
+      Anthropic::APIRequest request,
+      ^(Anthropic::APIRequest) -> Anthropic::APIResponse nxt
+    ) -> Anthropic::APIResponse
+  end
+end
