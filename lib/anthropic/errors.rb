@@ -8,6 +8,20 @@ module Anthropic
       #   @return [StandardError, nil]
     end
 
+    # Raise from a middleware to explicitly opt a middleware-origin failure
+    # into the SDK's retry loop. Retry classification walks `Exception#cause`,
+    # so a middleware may wrap with its own error class and still have the SDK
+    # retry as long as `RetryableError` is reachable via the cause chain.
+    #
+    # @example
+    #   begin
+    #     backend.call
+    #   rescue BackendUnavailable => e
+    #     raise Anthropic::Errors::RetryableError, cause: e
+    #   end
+    class RetryableError < Anthropic::Errors::Error
+    end
+
     class ConversionError < Anthropic::Errors::Error
       # @return [StandardError, nil]
       def cause = @cause.nil? ? super : @cause

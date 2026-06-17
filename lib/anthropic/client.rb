@@ -175,6 +175,10 @@ module Anthropic
     # @param initial_retry_delay [Float]
     #
     # @param max_retry_delay [Float]
+    #
+    # @param middleware [Array<#call>, #call, nil] Per-attempt HTTP around-middleware. Each
+    #   entry is a `#call(req, nxt) -> Anthropic::APIResponse` callable. See
+    #   {Anthropic::Middleware}.
     def initialize(
       api_key: nil,
       auth_token: nil,
@@ -185,7 +189,8 @@ module Anthropic
       max_retries: self.class::DEFAULT_MAX_RETRIES,
       timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
-      max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY
+      max_retry_delay: self.class::DEFAULT_MAX_RETRY_DELAY,
+      middleware: nil
     )
       if config && credentials
         raise ArgumentError, "Pass at most one of `credentials:` or `config:`."
@@ -265,7 +270,8 @@ module Anthropic
         max_retries: max_retries,
         initial_retry_delay: initial_retry_delay,
         max_retry_delay: max_retry_delay,
-        headers: headers
+        headers: headers,
+        middleware: middleware
       )
 
       @completions = Anthropic::Resources::Completions.new(client: self)

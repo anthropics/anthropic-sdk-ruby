@@ -31,6 +31,21 @@ module Anthropic
         private def build_request(req, opts)
         end
 
+        # @api private
+        sig { override.returns(Anthropic::Middleware::Entry) }
+        private def provider_middleware
+        end
+
+        # @api private
+        sig { params(req: Anthropic::APIRequest).returns(Anthropic::APIRequest) }
+        private def adapt_request(req)
+        end
+
+        # @api private
+        sig { params(req: Anthropic::APIRequest).returns(Anthropic::APIRequest) }
+        private def sign_request(req)
+        end
+
         sig do
           params(
             aws_region: T.nilable(String),
@@ -51,17 +66,6 @@ module Anthropic
 
         sig do
           params(
-            request_components:
-              Anthropic::Internal::Transport::BaseClient::RequestComponents
-          ).returns(
-            Anthropic::Internal::Transport::BaseClient::RequestComponents
-          )
-        end
-        private def fit_req_to_bedrock_specs!(request_components)
-        end
-
-        sig do
-          params(
             aws_region: T.nilable(String),
             base_url: T.nilable(String),
             max_retries: Integer,
@@ -71,7 +75,9 @@ module Anthropic
             aws_access_key: T.nilable(String),
             aws_secret_key: T.nilable(String),
             aws_session_token: T.nilable(String),
-            aws_profile: T.nilable(String)
+            aws_profile: T.nilable(String),
+            api_key: T.nilable(String),
+            middleware: T.nilable(Anthropic::Middleware::EntryOrArray)
           ).returns(T.attached_class)
         end
         def self.new(
@@ -84,7 +90,12 @@ module Anthropic
           aws_access_key: nil,
           aws_secret_key: nil,
           aws_session_token: nil,
-          aws_profile: nil
+          aws_profile: nil,
+          api_key: nil,
+          # Per-attempt HTTP around-middleware. Middleware sees the canonical
+          # Anthropic request shape; the Bedrock URL rewrite and SigV4 signing
+          # happen inside the continuation, per attempt.
+          middleware: nil
         )
         end
       end

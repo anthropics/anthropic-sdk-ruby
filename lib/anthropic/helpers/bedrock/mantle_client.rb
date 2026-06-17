@@ -114,9 +114,9 @@ module Anthropic
         end
 
         # @api private
-        private def transform_request(request)
-          aws_auth_transform_request(request)
-        end
+        #
+        # @return [#call]
+        private def provider_middleware = method(:aws_auth_provider)
 
         # Restricted Beta service that only exposes messages. Other beta resources
         # (models, files, skills) are not supported on Bedrock Mantle.

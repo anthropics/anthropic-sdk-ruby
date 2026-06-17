@@ -17,9 +17,21 @@ module Anthropic
           Anthropic::request_options opts
         ) -> Anthropic::Internal::Transport::BaseClient::request_input
 
-        private def fit_req_to_vertex_specs!: (
-          Anthropic::Internal::Transport::BaseClient::request_components request_components
-        ) -> Anthropic::Internal::Transport::BaseClient::request_components
+        private def provider_middleware: -> Anthropic::Middleware::entry
+
+        private def adapt_request: (
+          Anthropic::APIRequest req
+        ) -> Anthropic::APIRequest
+
+        private def apply_google_auth: (
+          Anthropic::APIRequest req
+        ) -> Anthropic::APIRequest
+
+        private def rewrite_path: (
+          URI::Generic url,
+          Regexp pattern,
+          String replacement
+        ) -> URI::Generic
 
         def initialize: (
           region: String?,
@@ -28,7 +40,8 @@ module Anthropic
           max_retries: Integer,
           timeout: Float,
           initial_retry_delay: Float,
-          max_retry_delay: Float
+          max_retry_delay: Float,
+          middleware: Anthropic::Middleware::entry_or_array?
         ) -> void
       end
     end

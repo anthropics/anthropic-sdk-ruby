@@ -71,7 +71,22 @@ module Anthropic
               headers: T::Hash[String, String],
               body: T.anything,
               max_retries: Integer,
-              timeout: Float
+              timeout: Float,
+              user_header_keys: T::Array[String],
+              cast_to: T.nilable(Anthropic::Internal::Type::Converter::Input),
+              stream: T.nilable(T::Class[T.anything]),
+              unwrap:
+                T.nilable(
+                  T.any(
+                    Symbol,
+                    Integer,
+                    T::Array[T.any(Symbol, Integer)],
+                    T.proc.params(arg0: T.anything).returns(T.anything)
+                  )
+                ),
+              options: T::Hash[Symbol, T.anything],
+              middleware: T::Array[Anthropic::Middleware::Entry],
+              metadata: T::Hash[Symbol, T.anything]
             }
           end
 
@@ -146,6 +161,9 @@ module Anthropic
         sig { returns(Anthropic::Internal::Transport::PooledNetRequester) }
         attr_reader :requester
 
+        sig { returns(T::Array[Anthropic::Middleware::Entry]) }
+        attr_reader :middleware
+
         # @api private
         sig do
           params(
@@ -165,7 +183,10 @@ module Anthropic
                   )
                 )
               ],
-            idempotency_header: T.nilable(String)
+            idempotency_header: T.nilable(String),
+            middleware: T.nilable(Anthropic::Middleware::EntryOrArray),
+            requester:
+              T.nilable(Anthropic::Internal::Transport::PooledNetRequester)
           ).returns(T.attached_class)
         end
         def self.new(
@@ -175,7 +196,9 @@ module Anthropic
           initial_retry_delay: 0.0,
           max_retry_delay: 0.0,
           headers: {},
-          idempotency_header: nil
+          idempotency_header: nil,
+          middleware: nil,
+          requester: nil
         )
         end
 
@@ -218,6 +241,11 @@ module Anthropic
         end
 
         # @api private
+        sig { overridable.returns(T.nilable(Anthropic::Middleware::Entry)) }
+        private def provider_middleware
+        end
+
+        # @api private
         sig do
           params(status: Integer, headers: T::Hash[String, String]).returns(
             T::Boolean
@@ -233,7 +261,14 @@ module Anthropic
             redirect_count: Integer,
             retry_count: Integer,
             send_retry_header: T::Boolean
-          ).returns([Integer, Net::HTTPResponse, T::Enumerable[String]])
+          ).returns(
+            [
+              Integer,
+              T.nilable(Net::HTTPResponse),
+              T::Hash[String, String],
+              T::Enumerable[String]
+            ]
+          )
         end
         def send_request(
           request,

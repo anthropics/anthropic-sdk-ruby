@@ -31,15 +31,30 @@ module Anthropic
         private def build_request(req, opts)
         end
 
+        # @api private
+        sig { override.returns(Anthropic::Middleware::Entry) }
+        private def provider_middleware
+        end
+
+        # @api private
+        sig { params(req: Anthropic::APIRequest).returns(Anthropic::APIRequest) }
+        private def adapt_request(req)
+        end
+
+        # @api private
+        sig { params(req: Anthropic::APIRequest).returns(Anthropic::APIRequest) }
+        private def apply_google_auth(req)
+        end
+
+        # @api private
         sig do
           params(
-            request_components:
-              Anthropic::Internal::Transport::BaseClient::RequestComponents
-          ).returns(
-            Anthropic::Internal::Transport::BaseClient::RequestComponents
-          )
+            url: URI::Generic,
+            pattern: Regexp,
+            replacement: String
+          ).returns(URI::Generic)
         end
-        private def fit_req_to_vertex_specs!(request_components)
+        private def rewrite_path(url, pattern, replacement)
         end
 
         sig do
@@ -50,7 +65,8 @@ module Anthropic
             max_retries: Integer,
             timeout: Float,
             initial_retry_delay: Float,
-            max_retry_delay: Float
+            max_retry_delay: Float,
+            middleware: T.nilable(Anthropic::Middleware::EntryOrArray)
           ).returns(T.attached_class)
         end
         def self.new(
@@ -60,7 +76,11 @@ module Anthropic
           max_retries: Anthropic::Client::DEFAULT_MAX_RETRIES,
           timeout: Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS,
           initial_retry_delay: Anthropic::Client::DEFAULT_INITIAL_RETRY_DELAY,
-          max_retry_delay: Anthropic::Client::DEFAULT_MAX_RETRY_DELAY
+          max_retry_delay: Anthropic::Client::DEFAULT_MAX_RETRY_DELAY,
+          # Per-attempt HTTP around-middleware. Middleware sees the canonical
+          # Anthropic request shape; the Vertex URL rewrite and OAuth header
+          # happen inside the continuation, per attempt.
+          middleware: nil
         )
         end
       end

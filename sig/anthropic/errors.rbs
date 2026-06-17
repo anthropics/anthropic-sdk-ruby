@@ -4,6 +4,9 @@ module Anthropic
       attr_accessor cause: StandardError?
     end
 
+    class RetryableError < Anthropic::Errors::Error
+    end
+
     class ConversionError < Anthropic::Errors::Error
       def cause: -> StandardError?
 

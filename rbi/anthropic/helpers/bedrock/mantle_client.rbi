@@ -53,12 +53,9 @@ module Anthropic
         def models
         end
 
-        sig do
-          params(request: Anthropic::Internal::AnyHash).returns(
-            Anthropic::Internal::AnyHash
-          )
-        end
-        private def transform_request(request)
+        # @api private
+        sig { override.returns(Anthropic::Middleware::Entry) }
+        private def provider_middleware
         end
       end
     end

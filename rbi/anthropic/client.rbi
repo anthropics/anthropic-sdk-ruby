@@ -59,7 +59,8 @@ module Anthropic
         max_retries: Integer,
         timeout: Float,
         initial_retry_delay: Float,
-        max_retry_delay: Float
+        max_retry_delay: Float,
+        middleware: T.nilable(Anthropic::Middleware::EntryOrArray)
       ).returns(T.attached_class)
     end
     def self.new(
@@ -76,7 +77,11 @@ module Anthropic
       max_retries: Anthropic::Client::DEFAULT_MAX_RETRIES,
       timeout: Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: Anthropic::Client::DEFAULT_INITIAL_RETRY_DELAY,
-      max_retry_delay: Anthropic::Client::DEFAULT_MAX_RETRY_DELAY
+      max_retry_delay: Anthropic::Client::DEFAULT_MAX_RETRY_DELAY,
+      # Per-attempt HTTP around-middleware. Each entry is a
+      # `#call(req, nxt) -> Anthropic::APIResponse` callable. See
+      # {Anthropic::Middleware}.
+      middleware: nil
     )
     end
   end

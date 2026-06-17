@@ -49,6 +49,11 @@ module Anthropic
     sig { returns(T.nilable(Float)) }
     attr_accessor :timeout
 
+    # Per-request HTTP around-middleware appended innermost. See
+    # {Anthropic::Middleware}.
+    sig { returns(T.nilable(Anthropic::Middleware::EntryOrArray)) }
+    attr_accessor :middleware
+
     # Returns a new instance of RequestOptions.
     sig do
       params(values: Anthropic::Internal::AnyHash).returns(T.attached_class)

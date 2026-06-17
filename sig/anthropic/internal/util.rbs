@@ -5,6 +5,8 @@ module Anthropic
 
       def self?.monotonic_secs: -> Float
 
+      def self?.deep_frozen_copy: (top obj) -> top
+
       def self?.walk_namespaces: (
         Module | Class ns
       ) -> Enumerable[(Module | Class)]

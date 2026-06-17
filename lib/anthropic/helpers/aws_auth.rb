@@ -147,42 +147,52 @@ module Anthropic
         super
       end
 
-      # Applies workspace-id header and SigV4 signing to the request.
-      # Call from the including class's `transform_request`.
+      # The AWS provider middleware entry: applies the workspace-id header and
+      # SigV4 signing per attempt. Return from the including class's
+      # `provider_middleware`. Pure — requests are reused across retry
+      # attempts, so the incoming `req` is never mutated.
       #
-      # @param request [Hash{Symbol=>Object}]
-      # @return [Hash{Symbol=>Object}]
-      private def aws_auth_transform_request(request)
-        headers = request.fetch(:headers)
+      # @param req [Anthropic::APIRequest]
+      # @param nxt [#call]
+      # @return [Anthropic::APIResponse]
+      private def aws_auth_provider(req, nxt)
+        if @workspace_id
+          req = req.with(headers: {**req.headers, "anthropic-workspace-id" => @workspace_id})
+        end
 
-        headers["anthropic-workspace-id"] = @workspace_id if @workspace_id
+        # `follow_redirect` stripped `authorization` for a cross-origin hop —
+        # don't re-sign and leak credentials to the new origin.
+        req = sign_aws_request(req) if @use_sig_v4 && !req.metadata[:cross_origin_redirect]
+        nxt.call(req)
+      end
 
-        return request unless @use_sig_v4
-
-        # `Aws::Sigv4::Signer#sign_request` only accepts `String` / `IO` / `nil`
-        # bodies. Multipart and JSONL requests carry a lazy `Enumerable` body
-        # (see `Util.encode_content`), which the signer rejects. Materialize it
-        # to a `String` and replace the request body so the signed payload is
-        # exactly the bytes that go over the wire (the lazy enumerator can only
-        # be consumed once).
-        body = request[:body]
+      # SigV4 signs over the body bytes, so the canonical body is encoded here
+      # and the signed bytes ride down to the transport. `Aws::Sigv4::Signer`
+      # only accepts `String` / `IO` / `nil` bodies, and multipart/JSONL
+      # encodings are lazy single-consumer enumerables — materialize those into
+      # a `StringIO`, which the terminal's encoding passes through untouched,
+      # so the signed payload is exactly the bytes that go over the wire.
+      #
+      # @param req [Anthropic::APIRequest]
+      # @return [Anthropic::APIRequest]
+      private def sign_aws_request(req)
+        headers, encoded = Anthropic::Internal::Util.encode_content(req.headers, req.body)
         body =
-          case body
-          when nil, String, IO, StringIO
-            body
-          when Enumerable
-            materialized = body.to_a.join
-            request = {**request, body: materialized}
-            materialized
+          case encoded
+          in nil | StringIO | IO
+            encoded
+          in String
+            StringIO.new(encoded)
+          in Enumerable
+            StringIO.new(encoded.to_a.join)
           else
-            body.to_s
+            StringIO.new(encoded.to_s)
           end
 
-        sliced = {http_method: request.fetch(:method), url: request.fetch(:url), body: body}
-        signed = @signer.sign_request({**sliced, headers: headers})
+        signed = @signer.sign_request(http_method: req.method, url: req.url, body: body, headers: headers)
         headers = Anthropic::Internal::Util.normalized_headers(headers, signed.headers)
         headers.delete("connection")
-        {**request, headers: headers}
+        req.with(headers: headers, body: body)
       end
 
       # Resolves AWS credentials from explicit args, profile, env vars, or default chain.

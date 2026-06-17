@@ -1,0 +1,117 @@
+module Anthropic
+  class APIRequest
+    MEMBERS: ::Array[Symbol]
+
+    attr_reader method: Symbol
+    attr_reader url: URI::Generic
+    attr_reader headers: ::Hash[String, String]
+    attr_reader body: top?
+    attr_reader stream: Class?
+    attr_reader cast_to: Anthropic::Internal::Type::Converter::input?
+    attr_reader unwrap: (Symbol
+    | Integer
+    | ::Array[(Symbol | Integer)]
+    | (^(top arg0) -> top))?
+    attr_reader options: ::Hash[Symbol, top]
+    attr_reader retry_count: Integer
+    attr_reader metadata: ::Hash[Symbol, top]
+
+    def streaming?: -> bool
+    def retry?: -> bool
+    def timeout: -> Float
+
+    def initialize: (
+      method: Symbol,
+      url: URI::Generic,
+      headers: ::Hash[String, String],
+      body: top?,
+      stream: Class?,
+      cast_to: Anthropic::Internal::Type::Converter::input?,
+      unwrap: (Symbol
+      | Integer
+      | ::Array[(Symbol | Integer)]
+      | (^(top arg0) -> top))?,
+      options: ::Hash[Symbol, top],
+      retry_count: Integer,
+      metadata: ::Hash[Symbol, top]
+    ) -> void
+
+    def with: (
+      ?method: Symbol,
+      ?url: URI::Generic,
+      ?headers: ::Hash[String, String],
+      ?body: top?,
+      ?stream: Class?,
+      ?cast_to: Anthropic::Internal::Type::Converter::input?,
+      ?unwrap: (Symbol
+      | Integer
+      | ::Array[(Symbol | Integer)]
+      | (^(top arg0) -> top))?,
+      ?options: ::Hash[Symbol, top],
+      ?retry_count: Integer,
+      ?metadata: ::Hash[Symbol, top]
+    ) -> self
+
+    def to_h: -> ::Hash[Symbol, top]
+  end
+
+  class APIResponse
+    class ConsumedBodyError < Anthropic::Errors::Error
+    end
+
+    attr_reader status: Integer
+    attr_reader headers: ::Hash[String, String]
+    attr_reader raw: top?
+    attr_reader request: Anthropic::APIRequest?
+
+    def self.wrap: (
+      Integer status,
+      top raw,
+      Enumerable[String] stream,
+      ?request: Anthropic::APIRequest?
+    ) -> instance
+
+    def initialize: (
+      status: Integer,
+      ?headers: ::Hash[String, String],
+      ?body: (Enumerable[String] | String)?,
+      ?raw: top?,
+      ?streaming: bool?,
+      ?request: Anthropic::APIRequest?
+    ) -> void
+
+    def body: -> Enumerable[String]
+    def streaming?: -> bool
+    def retryable?: -> bool
+    def buffer!: (?force: bool) -> self
+    def wrap_body: (
+      ?streaming: bool
+    ) {
+      (Enumerable[String]) -> Enumerable[String]
+    } -> Anthropic::APIResponse
+    def parse: -> top
+    def to_tuple: -> [Integer, top, ::Hash[String, String], Enumerable[String]]
+  end
+
+  module Middleware
+    type next_callable = ^(Anthropic::APIRequest) -> Anthropic::APIResponse
+    type callable =
+      ^(
+        Anthropic::APIRequest,
+        Anthropic::Middleware::next_callable
+      ) -> Anthropic::APIResponse
+    type entry = Anthropic::Middleware | Anthropic::Middleware::callable
+    type entry_or_array =
+      Anthropic::Middleware::entry | ::Array[Anthropic::Middleware::entry]
+
+    def call: (
+      Anthropic::APIRequest request,
+      Anthropic::Middleware::next_callable nxt
+    ) -> Anthropic::APIResponse
+
+    def self.build_chain: (
+      ::Array[top] list,
+      Anthropic::Middleware::next_callable terminal
+    ) -> Anthropic::Middleware::next_callable
+  end
+end

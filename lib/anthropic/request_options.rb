@@ -65,6 +65,15 @@ module Anthropic
     #   @return [Float, nil]
     optional :timeout, Float
 
+    # @!attribute middleware
+    #   Per-request HTTP around-middleware — a single `#call(req, nxt)` callable
+    #   or an array of them (see {Anthropic::Middleware}). Appended innermost,
+    #   below any client-level middleware, so client-level entries still wrap
+    #   every request this one fabricates or retries.
+    #
+    #   @return [Array<#call>, #call, nil]
+    optional :middleware, Anthropic::Internal::Type::Unknown
+
     # @!method initialize(values = {})
     #   Returns a new instance of RequestOptions.
     #

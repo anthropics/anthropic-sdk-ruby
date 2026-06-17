@@ -36,7 +36,8 @@ module Anthropic
       ?max_retries: Integer,
       ?timeout: Float,
       ?initial_retry_delay: Float,
-      ?max_retry_delay: Float
+      ?max_retry_delay: Float,
+      ?middleware: Anthropic::Middleware::entry_or_array?
     ) -> void
   end
 end

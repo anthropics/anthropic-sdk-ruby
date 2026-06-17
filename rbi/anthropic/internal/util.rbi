@@ -22,6 +22,11 @@ module Anthropic
 
       class << self
         # @api private
+        sig { params(obj: T.anything).returns(T.anything) }
+        def deep_frozen_copy(obj)
+        end
+
+        # @api private
         sig { returns(String) }
         def arch
         end

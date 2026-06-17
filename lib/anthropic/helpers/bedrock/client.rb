@@ -4,6 +4,8 @@ module Anthropic
   module Helpers
     module Bedrock
       class Client < Anthropic::Client
+        include Anthropic::Helpers::AWSAuth
+
         DEFAULT_VERSION = "bedrock-2023-05-31"
 
         # @return [Anthropic::Resources::Messages]
@@ -53,6 +55,11 @@ module Anthropic
         #
         # @param max_retry_delay [Float] The maximum number of seconds to wait before retrying a request
         #
+        # @param middleware [Array<#call>, #call, nil] Per-attempt HTTP around-middleware. See
+        #   {Anthropic::Middleware}. Middleware sees the canonical Anthropic request shape;
+        #   the Bedrock URL rewrite and SigV4 signing happen inside the continuation, per
+        #   attempt.
+        #
         def initialize( # rubocop:disable Lint/MissingSuper
           aws_region: nil,
           base_url: nil,
@@ -64,7 +71,8 @@ module Anthropic
           aws_secret_key: nil,
           aws_session_token: nil,
           aws_profile: nil,
-          api_key: nil
+          api_key: nil,
+          middleware: nil
         )
           api_key ||= ENV["AWS_BEARER_TOKEN_BEDROCK"]
 
@@ -122,6 +130,10 @@ module Anthropic
           @auth_token = @signer ? nil : api_key
           @credentials = nil
           @token_cache = nil
+          # For AWSAuth#auth_headers: suppress key headers in SigV4 mode; in
+          # API-key mode fall through to the base bearer-token handling.
+          @use_sig_v4 = !@signer.nil?
+          @use_bearer_auth = false
 
           # Skip Anthropic::Client#initialize and bind BaseClient#initialize directly:
           # the parent's initializer runs OIDC/credential-provider resolution that does
@@ -132,7 +144,8 @@ module Anthropic
             max_retries: max_retries,
             initial_retry_delay: initial_retry_delay,
             max_retry_delay: max_retry_delay,
-            headers: {"anthropic-version" => "2023-06-01"}
+            headers: {"anthropic-version" => "2023-06-01"},
+            middleware: middleware
           )
 
           @messages = Anthropic::Resources::Messages.new(client: self)
@@ -178,36 +191,27 @@ module Anthropic
         #
         # @return [Hash{Symbol=>Object}]
         private def build_request(req, opts)
-          fit_req_to_bedrock_specs!(req)
-          req = super
-          body = req.fetch(:body)
-          req[:body] = StringIO.new(body.to_a.join) if body.is_a?(Enumerator)
-          req
+          validate_bedrock_request!(req)
+          super
         end
 
         # @api private
         #
-        # Very private API, do not use
+        # The Bedrock provider middleware: rewrites the canonical request into
+        # Bedrock's shape and SigV4-signs it. Appended innermost on every
+        # dispatch (below user middleware) and runs per attempt, so each retry
+        # or middleware-re-issued leg is re-adapted and re-signed for its own
+        # model and URL.
         #
-        # @param request [Hash{Symbol=>Object}] .
-        #
-        #   @option request [Symbol] :method
-        #
-        #   @option request [URI::Generic] :url
-        #
-        #   @option request [Hash{String=>String}] :headers
-        #
-        #   @option request [Object] :body
-        #
-        # @return [Hash{Symbol, Object}]
-        private def transform_request(request)
-          return request if @auth_token
-
-          headers = request.fetch(:headers)
-          sliced = super.slice(:method, :url, :body).transform_keys(method: :http_method)
-          signed = @signer.sign_request({**sliced, headers: headers})
-          headers = Anthropic::Internal::Util.normalized_headers(headers, signed.headers)
-          {**request, headers: headers}
+        # @return [#call]
+        private def provider_middleware
+          lambda do |req, nxt|
+            req = adapt_request(req)
+            # `follow_redirect` stripped `authorization` for a cross-origin
+            # hop — don't re-sign and leak credentials to the new origin.
+            req = sign_aws_request(req) if @signer && !req.metadata[:cross_origin_redirect]
+            nxt.call(req)
+          end
         end
 
         # @param aws_region [String, nil]
@@ -243,35 +247,14 @@ module Anthropic
 
         # @private
         #
-        # Overrides request components for Bedrock-specific request-shape requirements.
+        # Fail fast at request-build time on routes Bedrock does not support.
         #
-        # @param request_components [Hash{Symbol=>Object}] .
-        #
-        #   @option request_components [Symbol] :method
-        #
-        #   @option request_components [String, Array<String>] :path
-        #
-        #   @option request_components [Hash{String=>Array<String>, String, nil}, nil] :query
-        #
-        #   @option request_components [Hash{String=>String, nil}, nil] :headers
-        #
-        #   @option request_components [Object, nil] :body
-        #
-        #   @option request_components [Symbol, nil] :unwrap
-        #
-        #   @option request_components [Class, nil] :page
-        #
-        #   @option request_components [Anthropic::Converter, Class, nil] :model
-        #
-        # @return [Hash{Symbol=>Object}]
-        #
-        private def fit_req_to_bedrock_specs!(request_components)
-          if (body = request_components[:body]).is_a?(Hash)
-            body[:anthropic_version] ||= DEFAULT_VERSION
-            body.transform_keys!("anthropic-beta": :anthropic_beta)
-          end
-
-          case request_components[:path]
+        # @param request_components [Hash{Symbol=>Object}]
+        # @return [void]
+        private def validate_bedrock_request!(request_components)
+          # Id-parameterized routes pass `path` as an Array whose first element
+          # is the format string (e.g. `["v1/messages/batches/%1$s", id]`).
+          case Array(request_components[:path]).first.to_s
           in %r{^v1/messages/batches}
             message = "The Batch API is not supported in Bedrock yet"
             raise NotImplementedError.new(message)
@@ -285,20 +268,45 @@ module Anthropic
             raise NotImplementedError.new(message)
           else
           end
+        end
 
-          if %w[
-            v1/complete
-            v1/messages
-            v1/messages?beta=true
-          ].include?(request_components[:path]) && request_components[:method] == :post && body.is_a?(Hash)
-            model = body.delete(:model)
-            model = URI.encode_www_form_component(model.to_s)
-            stream = body.delete(:stream) || false
-            request_components[:path] =
-              stream ? "model/#{model}/invoke-with-response-stream" : "model/#{model}/invoke"
-          end
+        # @api private
+        #
+        # Rewrites the canonical Anthropic request into Bedrock's shape — drops
+        # `:model`/`:stream` from the body and retargets the URL to
+        # `/model/{model}/invoke[-with-response-stream]`. Called from
+        # {#provider_middleware}, so user middleware sees the canonical
+        # request. Pure: the incoming request, its body, and its URI are never
+        # mutated (they are reused across retry attempts).
+        #
+        # @param req [Anthropic::APIRequest]
+        # @return [Anthropic::APIRequest]
+        private def adapt_request(req)
+          body = req.body
+          return req unless body.is_a?(Hash)
 
-          request_components
+          body = body.transform_keys("anthropic-beta": :anthropic_beta)
+          body[:anthropic_version] ||= DEFAULT_VERSION
+
+          path = req.url.path.to_s
+          query = req.url.query
+          messages_route =
+            (path.end_with?("/v1/messages") && (query.nil? || query == "beta=true")) ||
+            (path.end_with?("/v1/complete") && query.nil?)
+
+          return req.with(body: body) unless req.method == :post && messages_route
+
+          model = URI.encode_www_form_component(body.delete(:model).to_s)
+          stream = body.delete(:stream) || false
+
+          url = req.url.dup
+          url.path = path.sub(
+            %r{v1/(?:messages|complete)\z},
+            stream ? "model/#{model}/invoke-with-response-stream" : "model/#{model}/invoke"
+          )
+          url.query = nil
+
+          req.with(body: body, url: url)
         end
       end
     end

@@ -30,7 +30,16 @@ module Anthropic
             body: top,
             max_retries: Integer,
             timeout: Float,
-            user_header_keys: ::Array[String]
+            user_header_keys: ::Array[String],
+            cast_to: Anthropic::Internal::Type::Converter::input?,
+            stream: Class?,
+            unwrap: (Symbol
+            | Integer
+            | ::Array[(Symbol | Integer)]
+            | (^(top arg0) -> top))?,
+            options: ::Hash[Symbol, top],
+            middleware: ::Array[Anthropic::Middleware::entry],
+            metadata: ::Hash[Symbol, top]
           }
 
         MAX_REDIRECTS: 20
@@ -74,6 +83,8 @@ module Anthropic
         # @api private
         attr_reader requester: Anthropic::Internal::Transport::PooledNetRequester
 
+        attr_reader middleware: ::Array[Anthropic::Middleware::entry]
+
         def initialize: (
           base_url: String,
           ?timeout: Float,
@@ -83,7 +94,9 @@ module Anthropic
           ?headers: ::Hash[String, (String
           | Integer
           | ::Array[(String | Integer)?])?],
-          ?idempotency_header: String?
+          ?idempotency_header: String?,
+          ?middleware: Anthropic::Middleware::entry_or_array?,
+          ?requester: Anthropic::Internal::Transport::PooledNetRequester?
         ) -> void
 
         private def auth_headers: -> ::Hash[String, String]
@@ -102,6 +115,8 @@ module Anthropic
           retry_count: Integer
         ) -> Float
 
+        private def provider_middleware: -> Anthropic::Middleware::entry?
+
         def retry_request?: (
           Integer status,
           headers: ::Hash[String, String]
@@ -112,7 +127,7 @@ module Anthropic
           redirect_count: Integer,
           retry_count: Integer,
           send_retry_header: bool
-        ) -> [Integer, top, Enumerable[String]]
+        ) -> [Integer, top, ::Hash[String, String], Enumerable[String]]
 
         def request: (
           Symbol method,

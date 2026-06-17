@@ -29,6 +29,38 @@ module Anthropic
       class << self
         # @api private
         #
+        # Structurally copy and freeze `obj` (Hash/Array recursively; mutable
+        # `String` leaves dup-frozen; `URI::Generic` re-parsed with each
+        # component string frozen) so the result is fully de-aliased from the
+        # input and any in-place mutation raises `FrozenError`. Other leaves
+        # (Integer/Symbol — already frozen; typed models; IO) pass through, IO
+        # because it must stay live for streamed uploads.
+        #
+        # @param obj [Object]
+        # @return [Object]
+        def deep_frozen_copy(obj)
+          case obj
+          when Hash
+            obj.transform_values { deep_frozen_copy(_1) }.freeze
+          when Array
+            obj.map { deep_frozen_copy(_1) }.freeze
+          when String
+            obj.frozen? ? obj : obj.dup.freeze
+          when URI::Generic
+            # Re-parse de-aliases every component string; freezing each via its
+            # public reader (then the URI) makes `url.path << "x"` raise without
+            # reaching below `URI::Generic`'s public surface. Callers `dup` then
+            # reassign components, so a frozen URI is fine to derive from.
+            URI.parse(obj.to_s).tap do |u|
+              [u.scheme, u.userinfo, u.host, u.path, u.query, u.opaque, u.fragment].each { _1&.freeze }
+            end.freeze
+          else
+            obj
+          end
+        end
+
+        # @api private
+        #
         # @return [String]
         def arch
           case (arch = RbConfig::CONFIG["arch"])&.downcase
@@ -658,7 +690,11 @@ module Anthropic
             [headers, JSON.generate(body)]
           in [Anthropic::Internal::Util::JSONL_CONTENT, Enumerable] unless Anthropic::Internal::Type::FileInput === body
             [headers, body.lazy.map { JSON.generate(_1) }]
-          in [%r{^multipart/form-data}, Hash | Anthropic::Internal::Type::FileInput]
+          # A `boundary=` already in the content-type means the body was
+          # encoded upstream (e.g. SigV4 signing encodes-then-signs and the
+          # terminal calls this again) — fall through to the pass-through arms
+          # instead of re-wrapping the signed bytes with a second boundary.
+          in [%r{^multipart/form-data}, Hash | Anthropic::Internal::Type::FileInput] unless content_type.include?("boundary=")
             boundary, strio = encode_multipart_streaming(body)
             headers = {**headers, "content-type" => "#{content_type}; boundary=#{boundary}"}
             [headers, strio]

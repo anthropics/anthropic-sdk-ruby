@@ -21,9 +21,15 @@ module Anthropic
 
         private def signer: -> top
 
-        private def fit_req_to_bedrock_specs!: (
-          Anthropic::Internal::Transport::BaseClient::request_components request_components
-        ) -> Anthropic::Internal::Transport::BaseClient::request_components
+        private def provider_middleware: -> Anthropic::Middleware::entry
+
+        private def adapt_request: (
+          Anthropic::APIRequest req
+        ) -> Anthropic::APIRequest
+
+        private def sign_request: (
+          Anthropic::APIRequest req
+        ) -> Anthropic::APIRequest
 
         def initialize: (
           aws_region: String?,
@@ -35,7 +41,9 @@ module Anthropic
           aws_access_key: String?,
           aws_secret_key: String?,
           aws_session_token: String?,
-          aws_profile: String?
+          aws_profile: String?,
+          api_key: String?,
+          middleware: Anthropic::Middleware::entry_or_array?
         ) -> void
       end
     end

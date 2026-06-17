@@ -37,6 +37,11 @@ module Anthropic
         #
         # @param max_retry_delay [Float] The maximum number of seconds to wait before retrying a request
         #
+        # @param middleware [Array<#call>, #call, nil] Per-attempt HTTP around-middleware. See
+        #   {Anthropic::Middleware}. Middleware sees the canonical Anthropic request shape;
+        #   the Vertex URL rewrite and OAuth header happen inside the continuation, per
+        #   attempt.
+        #
         def initialize(
           region: ENV["CLOUD_ML_REGION"],
           project_id: ENV["ANTHROPIC_VERTEX_PROJECT_ID"],
@@ -44,7 +49,8 @@ module Anthropic
           max_retries: DEFAULT_MAX_RETRIES,
           timeout: DEFAULT_TIMEOUT_IN_SECONDS,
           initial_retry_delay: DEFAULT_INITIAL_RETRY_DELAY,
-          max_retry_delay: DEFAULT_MAX_RETRY_DELAY
+          max_retry_delay: DEFAULT_MAX_RETRY_DELAY,
+          middleware: nil
         )
           begin
             require("googleauth")
@@ -81,6 +87,7 @@ module Anthropic
             raise ArgumentError.new(message)
           end
           @project_id = project_id
+          @authorization = nil
 
           base_url ||= ENV.fetch(
             "ANTHROPIC_VERTEX_BASE_URL",
@@ -102,6 +109,7 @@ module Anthropic
             max_retries: max_retries,
             initial_retry_delay: initial_retry_delay,
             max_retry_delay: max_retry_delay,
+            middleware: middleware
           )
 
           @messages = Anthropic::Resources::Messages.new(client: self)
@@ -146,58 +154,81 @@ module Anthropic
         #
         # @return [Hash{Symbol=>Object}]
         private def build_request(req, opts)
-          fit_req_to_vertex_specs!(req)
-
-          request_input = super
-
-          headers = request_input.fetch(:headers)
-
-          unless headers.key?("authorization")
-            authorization = Google::Auth.get_application_default(["https://www.googleapis.com/auth/cloud-platform"])
-            request_input.store(:headers, authorization.apply(headers))
+          # Id-parameterized routes pass `path` as an Array whose first element
+          # is the format string (e.g. `["v1/messages/batches/%1$s", id]`).
+          path = Array(req[:path]).first.to_s
+          if path.start_with?("v1/messages/batches")
+            raise NotImplementedError.new("The Batch API is not supported in the Vertex client yet")
           end
 
-          request_input
+          super
         end
 
-        # @private
+        # @api private
         #
-        # Overrides request components for Vertex-specific request-shape requirements.
+        # The Vertex provider middleware: rewrites the canonical request into
+        # Vertex's shape and applies the Google OAuth `authorization` header.
+        # Appended innermost on every dispatch (below user middleware) and runs
+        # per attempt, so a middleware that re-issues the request gets a fresh
+        # token per leg, mirroring the Bedrock SigV4 placement.
         #
-        # @param request_components [Hash{Symbol=>Object}] .
+        # @return [#call]
+        private def provider_middleware
+          lambda do |req, nxt|
+            nxt.call(apply_google_auth(adapt_request(req)))
+          end
+        end
+
+        # @api private
         #
-        #   @option request_components [Symbol] :method
+        # @param req [Anthropic::APIRequest]
+        # @return [Anthropic::APIRequest]
+        private def apply_google_auth(req)
+          return req if req.headers.key?("authorization")
+          # `follow_redirect` stripped `authorization` for a cross-origin hop —
+          # don't re-add it and leak the bearer token to the new origin.
+          return req if req.metadata[:cross_origin_redirect]
+
+          # Memoized: the credentials object caches its token and self-refreshes
+          # on expiry, so each retry leg still gets a fresh-enough token without
+          # re-resolving ADC (a blocking metadata-server/token-endpoint
+          # round-trip) on every attempt.
+          authorization =
+            @authorization ||= Google::Auth.get_application_default(["https://www.googleapis.com/auth/cloud-platform"])
+          # `req.headers` may be the deep-frozen hash a middleware saw, and
+          # googleauth's `#apply` does `clone` (which preserves frozen) then
+          # `[]=` — so it must be handed a fresh, mutable copy.
+          req.with(headers: authorization.apply({**req.headers}))
+        end
+
+        # @api private
         #
-        #   @option request_components [String, Array<String>] :path
+        # Rewrites the canonical Anthropic request into Vertex's shape — drops
+        # `:model` from the body (keeping `:stream`) and retargets the URL to
+        # `projects/{project}/locations/{region}/publishers/anthropic/models/{model}:{rawPredict|streamRawPredict}`.
+        # Called from {#provider_middleware}, so user middleware sees the
+        # canonical request. Pure: the incoming request, its body, headers,
+        # and URI are never mutated (they are reused across retry attempts).
         #
-        #   @option request_components [Hash{String=>Array<String>, String, nil}, nil] :query
-        #
-        #   @option request_components [Hash{String=>String, nil}, nil] :headers
-        #
-        #   @option request_components [Object, nil] :body
-        #
-        #   @option request_components [Symbol, nil] :unwrap
-        #
-        #   @option request_components [Class, nil] :page
-        #
-        #   @option request_components [Anthropic::Converter, Class, nil] :model
-        #
-        # @return [Hash{Symbol=>Object}]
-        private def fit_req_to_vertex_specs!(request_components)
-          if (body = request_components[:body]).is_a?(Hash)
+        # @param req [Anthropic::APIRequest]
+        # @return [Anthropic::APIRequest]
+        private def adapt_request(req)
+          body = req.body
+          headers = req.headers
+          url = req.url
+          path = url.path.to_s
+          query_ok = url.query.nil? || url.query == "beta=true"
+
+          if body.is_a?(Hash)
+            body = body.dup
             body[:anthropic_version] ||= DEFAULT_VERSION
 
             if (anthropic_beta = body.delete(:"anthropic-beta"))
-              request_components[:headers] ||= {}
-              request_components[:headers]["anthropic-beta"] = anthropic_beta.join(",")
+              headers = headers.merge("anthropic-beta" => Array(anthropic_beta).join(","))
             end
           end
 
-          if %w[
-            v1/messages
-            v1/messages?beta=true
-          ].include?(request_components[:path]) && request_components[:method] == :post
-
+          if req.method == :post && query_ok && path.end_with?("/v1/messages")
             unless body.is_a?(Hash)
               raise ArgumentError.new("Expected json data to be a hash for post /v1/messages")
             end
@@ -205,26 +236,39 @@ module Anthropic
             model = body.delete(:model)
             specifier = body[:stream] ? "streamRawPredict" : "rawPredict"
 
-            request_components[:path] =
+            url = rewrite_path(
+              url,
+              %r{v1/messages\z},
               "projects/#{@project_id}/locations/#{region}/publishers/anthropic/models/#{model}:#{specifier}"
-
+            )
+          elsif req.method == :post && query_ok && path.end_with?("/v1/messages/count_tokens")
+            url = rewrite_path(
+              url,
+              %r{v1/messages/count_tokens\z},
+              "projects/#{@project_id}/locations/#{region}/publishers/anthropic/" \
+              "models/count-tokens:rawPredict"
+            )
           end
 
-          if %w[
-            v1/messages/count_tokens
-            v1/messages/count_tokens?beta=true
-          ].include?(request_components[:path]) &&
-             request_components[:method] == :post
-            request_components[:path] =
-              "projects/#{@project_id}/locations/#{region}/publishers/anthropic/models/count-tokens:rawPredict"
+          return req if body.equal?(req.body) && headers.equal?(req.headers) && url.equal?(req.url)
+          req.with(body: body, headers: headers, url: url)
+        end
 
-          end
-
-          if request_components[:path].start_with?("v1/messages/batches/")
-            raise AnthropicError("The Batch API is not supported in the Vertex client yet")
-          end
-
-          request_components
+        # @api private
+        #
+        # Retarget `url`'s path (replacing `pattern` with `replacement`) and drop
+        # its query, returning a fresh copy so the incoming request's URI is left
+        # untouched.
+        #
+        # @param url [URI::Generic]
+        # @param pattern [Regexp]
+        # @param replacement [String]
+        # @return [URI::Generic]
+        private def rewrite_path(url, pattern, replacement)
+          url = url.dup
+          url.path = url.path.to_s.sub(pattern, replacement)
+          url.query = nil
+          url
         end
       end
     end

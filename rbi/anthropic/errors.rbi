@@ -7,6 +7,11 @@ module Anthropic
       attr_accessor :cause
     end
 
+    # Raise from a middleware to opt a middleware-origin failure into the SDK's
+    # retry loop. Retry classification walks `Exception#cause`.
+    class RetryableError < Anthropic::Errors::Error
+    end
+
     class ConversionError < Anthropic::Errors::Error
       sig { returns(T.nilable(StandardError)) }
       def cause

@@ -9,7 +9,8 @@ module Anthropic
       extra_headers: ::Hash[String, String?]?,
       extra_body: top?,
       max_retries: Integer?,
-      timeout: Float?
+      timeout: Float?,
+      middleware: Anthropic::Middleware::entry_or_array?
     }
 
   class RequestOptions < Anthropic::Internal::Type::BaseModel
@@ -26,6 +27,8 @@ module Anthropic
     attr_accessor max_retries: Integer?
 
     attr_accessor timeout: Float?
+
+    attr_accessor middleware: Anthropic::Middleware::entry_or_array?
 
     def initialize: (
       ?Anthropic::request_options | ::Hash[Symbol, top] values
