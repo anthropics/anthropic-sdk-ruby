@@ -210,8 +210,32 @@ module Anthropic
             # `follow_redirect` stripped `authorization` for a cross-origin
             # hop — don't re-sign and leak credentials to the new origin.
             req = sign_aws_request(req) if @signer && !req.metadata[:cross_origin_redirect]
-            nxt.call(req)
+            res = nxt.call(req)
+            # `invoke-with-response-stream` returns AWS event-stream framing,
+            # not SSE — transcode so `Util.decode_sse` and the streaming
+            # helpers work unchanged.
+            res = adapt_stream_response(res) if EventStream::AWS_CONTENT_TYPE.match?(res.headers["content-type"].to_s)
+            res
           end
+        end
+
+        # @api private
+        #
+        # Rebuilds the response with the body transcoded from AWS event-stream
+        # framing to SSE bytes and the `content-type` rewritten so
+        # {Anthropic::Internal::Util.decode_content} dispatches to `decode_sse`.
+        #
+        # @param res [Anthropic::APIResponse]
+        # @return [Anthropic::APIResponse]
+        private def adapt_stream_response(res)
+          Anthropic::APIResponse.new(
+            status: res.status,
+            headers: res.headers.merge("content-type" => "text/event-stream"),
+            body: EventStream.to_sse(res.body),
+            raw: res.raw,
+            streaming: true,
+            request: res.request
+          )
         end
 
         # @param aws_region [String, nil]
