@@ -7,7 +7,6 @@ Full Changelog: [v1.48.2...v1.49.0](https://github.com/anthropics/anthropic-sdk-
 ### Features
 
 * **api:** add support for new code_execution_20260120 tool ([9e4d388](https://github.com/anthropics/anthropic-sdk-ruby/commit/9e4d388649bb020e66ebac13ae4ad90450a3f293))
-* client side refusal fallback support ([#32](https://github.com/anthropics/anthropic-sdk-ruby/issues/32)) ([cc9ae22](https://github.com/anthropics/anthropic-sdk-ruby/commit/cc9ae22aa90e413222ff8225a4f72654138a4913))
 * **client:** add HTTP middleware ([#30](https://github.com/anthropics/anthropic-sdk-ruby/issues/30)) ([e6c7245](https://github.com/anthropics/anthropic-sdk-ruby/commit/e6c7245b1539a08d7ec5ad103f0ee291c2bbcb52))
 
 
