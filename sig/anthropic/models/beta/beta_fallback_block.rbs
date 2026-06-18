@@ -7,6 +7,7 @@ module Anthropic
         {
           from: Anthropic::Beta::BetaFallbackInfo,
           to: Anthropic::Beta::BetaFallbackInfo,
+          trigger: Anthropic::Beta::BetaFallbackRefusalTrigger,
           type: :fallback
         }
 
@@ -15,17 +16,21 @@ module Anthropic
 
         attr_accessor to: Anthropic::Beta::BetaFallbackInfo
 
+        attr_accessor trigger: Anthropic::Beta::BetaFallbackRefusalTrigger
+
         attr_accessor type: :fallback
 
         def initialize: (
           from: Anthropic::Beta::BetaFallbackInfo,
           to: Anthropic::Beta::BetaFallbackInfo,
+          trigger: Anthropic::Beta::BetaFallbackRefusalTrigger,
           ?type: :fallback
         ) -> void
 
         def to_hash: -> {
           from: Anthropic::Beta::BetaFallbackInfo,
           to: Anthropic::Beta::BetaFallbackInfo,
+          trigger: Anthropic::Beta::BetaFallbackRefusalTrigger,
           type: :fallback
         }
       end

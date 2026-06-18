@@ -1,0 +1,42 @@
+module Anthropic
+  module Models
+    class BetaFallbackRefusalTrigger = Beta::BetaFallbackRefusalTrigger
+
+    module Beta
+      type beta_fallback_refusal_trigger =
+        {
+          category: Anthropic::Models::Beta::BetaFallbackRefusalTrigger::category?,
+          type: :refusal
+        }
+
+      class BetaFallbackRefusalTrigger < Anthropic::Internal::Type::BaseModel
+        attr_accessor category: Anthropic::Models::Beta::BetaFallbackRefusalTrigger::category?
+
+        attr_accessor type: :refusal
+
+        def initialize: (
+          category: Anthropic::Models::Beta::BetaFallbackRefusalTrigger::category?,
+          ?type: :refusal
+        ) -> void
+
+        def to_hash: -> {
+          category: Anthropic::Models::Beta::BetaFallbackRefusalTrigger::category?,
+          type: :refusal
+        }
+
+        type category = :cyber | :bio | :frontier_llm | :reasoning_extraction
+
+        module Category
+          extend Anthropic::Internal::Type::Enum
+
+          CYBER: :cyber
+          BIO: :bio
+          FRONTIER_LLM: :frontier_llm
+          REASONING_EXTRACTION: :reasoning_extraction
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaFallbackRefusalTrigger::category]
+        end
+      end
+    end
+  end
+end

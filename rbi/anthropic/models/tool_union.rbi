@@ -15,6 +15,7 @@ module Anthropic
             Anthropic::CodeExecutionTool20250522,
             Anthropic::CodeExecutionTool20250825,
             Anthropic::CodeExecutionTool20260120,
+            Anthropic::CodeExecutionTool20260521,
             Anthropic::MemoryTool20250818,
             Anthropic::ToolTextEditor20250124,
             Anthropic::ToolTextEditor20250429,

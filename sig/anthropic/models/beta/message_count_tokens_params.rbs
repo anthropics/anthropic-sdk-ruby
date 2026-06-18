@@ -139,6 +139,7 @@ module Anthropic
           | Anthropic::Beta::BetaCodeExecutionTool20250522
           | Anthropic::Beta::BetaCodeExecutionTool20250825
           | Anthropic::Beta::BetaCodeExecutionTool20260120
+          | Anthropic::Beta::BetaCodeExecutionTool20260521
           | Anthropic::Beta::BetaToolComputerUse20241022
           | Anthropic::Beta::BetaMemoryTool20250818
           | Anthropic::Beta::BetaToolComputerUse20250124
