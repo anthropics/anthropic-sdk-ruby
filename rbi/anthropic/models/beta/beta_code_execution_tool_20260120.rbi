@@ -128,7 +128,8 @@ module Anthropic
         # Values: direct: The model can call this tool directly. code_execution_20250825:
         # The tool can be called from the code execution environment (v1).
         # code_execution_20260120: The tool can be called from the code execution
-        # environment (v2 with persistence).
+        # environment (v2 with persistence). code_execution_20260521: The tool can be
+        # called from the code execution environment (v2 with persistence).
         module AllowedCaller
           extend Anthropic::Internal::Type::Enum
 
@@ -154,6 +155,11 @@ module Anthropic
           CODE_EXECUTION_20260120 =
             T.let(
               :code_execution_20260120,
+              Anthropic::Beta::BetaCodeExecutionTool20260120::AllowedCaller::TaggedSymbol
+            )
+          CODE_EXECUTION_20260521 =
+            T.let(
+              :code_execution_20260521,
               Anthropic::Beta::BetaCodeExecutionTool20260120::AllowedCaller::TaggedSymbol
             )
 

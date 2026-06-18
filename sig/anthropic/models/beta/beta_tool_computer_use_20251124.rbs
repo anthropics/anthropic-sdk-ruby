@@ -84,7 +84,10 @@ module Anthropic
         }
 
         type allowed_caller =
-          :direct | :code_execution_20250825 | :code_execution_20260120
+          :direct
+          | :code_execution_20250825
+          | :code_execution_20260120
+          | :code_execution_20260521
 
         module AllowedCaller
           extend Anthropic::Internal::Type::Enum
@@ -92,6 +95,7 @@ module Anthropic
           DIRECT: :direct
           CODE_EXECUTION_20250825: :code_execution_20250825
           CODE_EXECUTION_20260120: :code_execution_20260120
+          CODE_EXECUTION_20260521: :code_execution_20260521
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaToolComputerUse20251124::allowed_caller]
         end

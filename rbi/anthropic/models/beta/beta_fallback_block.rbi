@@ -32,16 +32,27 @@ module Anthropic
         sig { params(to: Anthropic::Beta::BetaFallbackInfo::OrHash).void }
         attr_writer :to
 
+        # What caused the `from` model to hand over at this hop.
+        sig { returns(Anthropic::Beta::BetaFallbackRefusalTrigger) }
+        attr_reader :trigger
+
+        sig do
+          params(
+            trigger: Anthropic::Beta::BetaFallbackRefusalTrigger::OrHash
+          ).void
+        end
+        attr_writer :trigger
+
         sig { returns(Symbol) }
         attr_accessor :type
 
         # Marks the point in `content` where one model's output gives way to the next.
         #
         # One block appears per hop where a preceding model actually ran this turn and
-        # declined. A turn routed directly by the sticky decision has no such boundary and
-        # carries no block — the signal for whether a fallback model served the response
-        # is the presence of a `fallback_message` entry in `usage.iterations`, not this
-        # block.
+        # declined. A turn where no preceding model ran and declined has no such boundary
+        # and carries no block — the signal for whether a fallback model served the
+        # response is the presence of a `fallback_message` entry in `usage.iterations`,
+        # not this block.
         #
         # The block is treated like a server-tool content block for streaming: it arrives
         # via the standard `content_block_start` / `content_block_stop` pair and carries
@@ -50,6 +61,7 @@ module Anthropic
           params(
             from: Anthropic::Beta::BetaFallbackInfo::OrHash,
             to: Anthropic::Beta::BetaFallbackInfo::OrHash,
+            trigger: Anthropic::Beta::BetaFallbackRefusalTrigger::OrHash,
             type: Symbol
           ).returns(T.attached_class)
         end
@@ -62,6 +74,8 @@ module Anthropic
           # The fallback model producing the content that follows this block. Its `model` is
           # always the canonical id.
           to:,
+          # What caused the `from` model to hand over at this hop.
+          trigger:,
           type: :fallback
         )
         end
@@ -71,6 +85,7 @@ module Anthropic
             {
               from: Anthropic::Beta::BetaFallbackInfo,
               to: Anthropic::Beta::BetaFallbackInfo,
+              trigger: Anthropic::Beta::BetaFallbackRefusalTrigger,
               type: Symbol
             }
           )

@@ -99,6 +99,8 @@ module Anthropic
 
   class CodeExecutionTool20260120 = Anthropic::Models::CodeExecutionTool20260120
 
+  class CodeExecutionTool20260521 = Anthropic::Models::CodeExecutionTool20260521
+
   class CodeExecutionToolResultBlock = Anthropic::Models::CodeExecutionToolResultBlock
 
   module CodeExecutionToolResultBlockContent = Anthropic::Models::CodeExecutionToolResultBlockContent

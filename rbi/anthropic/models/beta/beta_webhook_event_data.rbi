@@ -32,7 +32,8 @@ module Anthropic
               Anthropic::Beta::BetaWebhookVaultCredentialCreatedEventData,
               Anthropic::Beta::BetaWebhookVaultCredentialArchivedEventData,
               Anthropic::Beta::BetaWebhookVaultCredentialDeletedEventData,
-              Anthropic::Beta::BetaWebhookVaultCredentialRefreshFailedEventData
+              Anthropic::Beta::BetaWebhookVaultCredentialRefreshFailedEventData,
+              Anthropic::Beta::BetaWebhookSessionUpdatedEventData
             )
           end
 

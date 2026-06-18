@@ -54,7 +54,8 @@ module Anthropic
                 Anthropic::Beta::BetaWebhookVaultCredentialCreatedEventData::OrHash,
                 Anthropic::Beta::BetaWebhookVaultCredentialArchivedEventData::OrHash,
                 Anthropic::Beta::BetaWebhookVaultCredentialDeletedEventData::OrHash,
-                Anthropic::Beta::BetaWebhookVaultCredentialRefreshFailedEventData::OrHash
+                Anthropic::Beta::BetaWebhookVaultCredentialRefreshFailedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookSessionUpdatedEventData::OrHash
               ),
             type: Symbol
           ).returns(T.attached_class)

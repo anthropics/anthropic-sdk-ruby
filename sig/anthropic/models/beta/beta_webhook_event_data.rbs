@@ -26,6 +26,7 @@ module Anthropic
         | Anthropic::Beta::BetaWebhookVaultCredentialArchivedEventData
         | Anthropic::Beta::BetaWebhookVaultCredentialDeletedEventData
         | Anthropic::Beta::BetaWebhookVaultCredentialRefreshFailedEventData
+        | Anthropic::Beta::BetaWebhookSessionUpdatedEventData
 
       module BetaWebhookEventData
         extend Anthropic::Internal::Type::Union
