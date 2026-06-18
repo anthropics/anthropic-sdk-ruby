@@ -10,8 +10,7 @@ module Anthropic
       extra_body: top?,
       max_retries: Integer?,
       timeout: Float?,
-      middleware: Anthropic::Middleware::entry_or_array?,
-      fallback_state: Anthropic::BetaFallbackState?
+      middleware: Anthropic::Middleware::entry_or_array?
     }
 
   class RequestOptions < Anthropic::Internal::Type::BaseModel
@@ -30,8 +29,6 @@ module Anthropic
     attr_accessor timeout: Float?
 
     attr_accessor middleware: Anthropic::Middleware::entry_or_array?
-
-    attr_accessor fallback_state: Anthropic::BetaFallbackState?
 
     def initialize: (
       ?Anthropic::request_options | ::Hash[Symbol, top] values
