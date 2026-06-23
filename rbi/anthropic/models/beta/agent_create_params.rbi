@@ -39,7 +39,9 @@ module Anthropic
         attr_accessor :description
 
         # MCP servers this agent connects to. Maximum 20. Names must be unique within the
-        # array.
+        # array. Every server must be referenced by an `mcp_toolset` in `tools`;
+        # unreferenced servers are rejected. See the
+        # [MCP connector guide](https://platform.claude.com/docs/en/managed-agents/mcp-connector).
         sig do
           returns(
             T.nilable(
@@ -214,7 +216,9 @@ module Anthropic
           # Description of what the agent does.
           description: nil,
           # MCP servers this agent connects to. Maximum 20. Names must be unique within the
-          # array.
+          # array. Every server must be referenced by an `mcp_toolset` in `tools`;
+          # unreferenced servers are rejected. See the
+          # [MCP connector guide](https://platform.claude.com/docs/en/managed-agents/mcp-connector).
           mcp_servers: nil,
           # Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up
           # to 512 chars.

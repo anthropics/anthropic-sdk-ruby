@@ -4,6 +4,7 @@ module Anthropic
       class Batches
         def create: (
           requests: ::Array[Anthropic::Messages::BatchCreateParams::Request],
+          ?user_profile_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Messages::MessageBatch
 

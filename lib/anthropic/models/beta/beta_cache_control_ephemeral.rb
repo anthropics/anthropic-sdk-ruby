@@ -17,7 +17,9 @@ module Anthropic
         #   - `5m`: 5 minutes
         #   - `1h`: 1 hour
         #
-        #   Defaults to `5m`.
+        #   Defaults to `5m`. See
+        #   [prompt caching pricing](https://docs.claude.com/en/docs/build-with-claude/prompt-caching)
+        #   for details.
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaCacheControlEphemeral::TTL, nil]
         optional :ttl, enum: -> { Anthropic::Beta::BetaCacheControlEphemeral::TTL }
@@ -37,7 +39,9 @@ module Anthropic
         # - `5m`: 5 minutes
         # - `1h`: 1 hour
         #
-        # Defaults to `5m`.
+        # Defaults to `5m`. See
+        # [prompt caching pricing](https://docs.claude.com/en/docs/build-with-claude/prompt-caching)
+        # for details.
         #
         # @see Anthropic::Models::Beta::BetaCacheControlEphemeral#ttl
         module TTL

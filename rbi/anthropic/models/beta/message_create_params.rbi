@@ -551,11 +551,6 @@ module Anthropic
         sig { params(top_p: Float).void }
         attr_writer :top_p
 
-        # The user profile ID to attribute this request to. Use when acting on behalf of a
-        # party other than your organization.
-        sig { returns(T.nilable(String)) }
-        attr_accessor :user_profile_id
-
         # Optional header to specify the beta version(s) you want to use.
         sig do
           returns(
@@ -572,6 +567,14 @@ module Anthropic
           ).void
         end
         attr_writer :betas
+
+        # The user profile ID to attribute this request to. Use when acting on behalf of a
+        # party other than your organization. Requires the `user-profiles` beta header.
+        sig { returns(T.nilable(String)) }
+        attr_reader :user_profile_id
+
+        sig { params(user_profile_id: String).void }
+        attr_writer :user_profile_id
 
         sig do
           params(
@@ -651,8 +654,8 @@ module Anthropic
               ],
             top_k: Integer,
             top_p: Float,
-            user_profile_id: T.nilable(String),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            user_profile_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -930,11 +933,11 @@ module Anthropic
           #
           # Recommended for advanced use cases only.
           top_p: nil,
-          # The user profile ID to attribute this request to. Use when acting on behalf of a
-          # party other than your organization.
-          user_profile_id: nil,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
+          # The user profile ID to attribute this request to. Use when acting on behalf of a
+          # party other than your organization. Requires the `user-profiles` beta header.
+          user_profile_id: nil,
           request_options: {}
         )
         end
@@ -1014,9 +1017,9 @@ module Anthropic
                 ],
               top_k: Integer,
               top_p: Float,
-              user_profile_id: T.nilable(String),
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+              user_profile_id: String,
               request_options: Anthropic::RequestOptions
             }
           )

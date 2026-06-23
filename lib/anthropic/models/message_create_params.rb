@@ -318,7 +318,14 @@ module Anthropic
       #   @return [Float, nil]
       optional :top_p, Float
 
-      # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      # @!attribute user_profile_id
+      #   The user profile ID to attribute this request to. Use when acting on behalf of a
+      #   party other than your organization. Requires the `user-profiles` beta header.
+      #
+      #   @return [String, nil]
+      optional :user_profile_id, String
+
+      # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::MessageCreateParams} for more details.
       #
@@ -355,6 +362,8 @@ module Anthropic
       #   @param top_k [Integer] Only sample from the top K options for each subsequent token.
       #
       #   @param top_p [Float] Use nucleus sampling.
+      #
+      #   @param user_profile_id [String] The user profile ID to attribute this request to. Use when acting on behalf of a
       #
       #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 

@@ -5,7 +5,8 @@ module Anthropic
         type batch_create_params =
           {
             requests: ::Array[Anthropic::Beta::Messages::BatchCreateParams::Request],
-            betas: ::Array[Anthropic::Models::anthropic_beta]
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            user_profile_id: String
           }
           & Anthropic::Internal::Type::request_parameters
 
@@ -21,15 +22,21 @@ module Anthropic
             ::Array[Anthropic::Models::anthropic_beta]
           ) -> ::Array[Anthropic::Models::anthropic_beta]
 
+          attr_reader user_profile_id: String?
+
+          def user_profile_id=: (String) -> String
+
           def initialize: (
             requests: ::Array[Anthropic::Beta::Messages::BatchCreateParams::Request],
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?user_profile_id: String,
             ?request_options: Anthropic::request_opts
           ) -> void
 
           def to_hash: -> {
             requests: ::Array[Anthropic::Beta::Messages::BatchCreateParams::Request],
             betas: ::Array[Anthropic::Models::anthropic_beta],
+            user_profile_id: String,
             request_options: Anthropic::RequestOptions
           }
 
@@ -80,8 +87,7 @@ module Anthropic
                 tool_choice: Anthropic::Models::Beta::beta_tool_choice,
                 tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
                 top_k: Integer,
-                top_p: Float,
-                user_profile_id: String?
+                top_p: Float
               }
 
             class Params < Anthropic::Internal::Type::BaseModel
@@ -177,8 +183,6 @@ module Anthropic
 
               def top_p=: (Float) -> Float
 
-              attr_accessor user_profile_id: String?
-
               def initialize: (
                 max_tokens: Integer,
                 messages: ::Array[Anthropic::Beta::BetaMessageParam],
@@ -204,8 +208,7 @@ module Anthropic
                 ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
                 ?tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
                 ?top_k: Integer,
-                ?top_p: Float,
-                ?user_profile_id: String?
+                ?top_p: Float
               ) -> void
 
               def to_hash: -> {
@@ -233,8 +236,7 @@ module Anthropic
                 tool_choice: Anthropic::Models::Beta::beta_tool_choice,
                 tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
                 top_k: Integer,
-                top_p: Float,
-                user_profile_id: String?
+                top_p: Float
               }
 
               type container = Anthropic::Beta::BetaContainerParams | String

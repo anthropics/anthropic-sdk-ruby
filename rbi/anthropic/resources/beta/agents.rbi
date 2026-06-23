@@ -58,7 +58,9 @@ module Anthropic
           # Body param: Description of what the agent does.
           description: nil,
           # Body param: MCP servers this agent connects to. Maximum 20. Names must be unique
-          # within the array.
+          # within the array. Every server must be referenced by an `mcp_toolset` in
+          # `tools`; unreferenced servers are rejected. See the
+          # [MCP connector guide](https://platform.claude.com/docs/en/managed-agents/mcp-connector).
           mcp_servers: nil,
           # Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars,
           # values up to 512 chars.
@@ -159,7 +161,10 @@ module Anthropic
           # Body param: Description. Omit to preserve; send empty string or null to clear.
           description: nil,
           # Body param: MCP servers. Full replacement. Omit to preserve; send empty array or
-          # null to clear. Names must be unique. Maximum 20.
+          # `null` to clear. Names must be unique. Maximum 20. Every server must be
+          # referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced
+          # servers are rejected. See the
+          # [MCP connector guide](https://platform.claude.com/docs/en/managed-agents/mcp-connector).
           mcp_servers: nil,
           # Body param: Metadata patch. Set a key to a string to upsert it, or to null to
           # delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up

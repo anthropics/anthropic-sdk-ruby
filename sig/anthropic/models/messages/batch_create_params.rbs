@@ -2,7 +2,10 @@ module Anthropic
   module Models
     module Messages
       type batch_create_params =
-        { requests: ::Array[Anthropic::Messages::BatchCreateParams::Request] }
+        {
+          requests: ::Array[Anthropic::Messages::BatchCreateParams::Request],
+          user_profile_id: String
+        }
         & Anthropic::Internal::Type::request_parameters
 
       class BatchCreateParams < Anthropic::Internal::Type::BaseModel
@@ -11,13 +14,19 @@ module Anthropic
 
         attr_accessor requests: ::Array[Anthropic::Messages::BatchCreateParams::Request]
 
+        attr_reader user_profile_id: String?
+
+        def user_profile_id=: (String) -> String
+
         def initialize: (
           requests: ::Array[Anthropic::Messages::BatchCreateParams::Request],
+          ?user_profile_id: String,
           ?request_options: Anthropic::request_opts
         ) -> void
 
         def to_hash: -> {
           requests: ::Array[Anthropic::Messages::BatchCreateParams::Request],
+          user_profile_id: String,
           request_options: Anthropic::RequestOptions
         }
 

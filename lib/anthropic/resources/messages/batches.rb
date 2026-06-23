@@ -16,9 +16,11 @@ module Anthropic
         # Learn more about the Message Batches API in our
         # [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
         #
-        # @overload create(requests:, request_options: {})
+        # @overload create(requests:, user_profile_id: nil, request_options: {})
         #
-        # @param requests [Array<Anthropic::Models::Messages::BatchCreateParams::Request>] List of requests for prompt completion. Each is an individual request to create
+        # @param requests [Array<Anthropic::Models::Messages::BatchCreateParams::Request>] Body param: List of requests for prompt completion. Each is an individual reques
+        #
+        # @param user_profile_id [String] Header param: The user profile ID to attribute the requests in this batch to. Us
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -27,10 +29,12 @@ module Anthropic
         # @see Anthropic::Models::Messages::BatchCreateParams
         def create(params)
           parsed, options = Anthropic::Messages::BatchCreateParams.dump_request(params)
+          header_params = {user_profile_id: "anthropic-user-profile-id"}
           @client.request(
             method: :post,
             path: "v1/messages/batches",
-            body: parsed,
+            headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+            body: parsed.except(*header_params.keys),
             model: Anthropic::Messages::MessageBatch,
             options: options
           )

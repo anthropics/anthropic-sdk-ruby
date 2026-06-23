@@ -16,13 +16,20 @@ module Anthropic
           params(
             requests:
               T::Array[Anthropic::Messages::BatchCreateParams::Request::OrHash],
+            user_profile_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Messages::MessageBatch)
         end
         def create(
-          # List of requests for prompt completion. Each is an individual request to create
-          # a Message.
+          # Body param: List of requests for prompt completion. Each is an individual
+          # request to create a Message.
           requests:,
+          # Header param: The user profile ID to attribute the requests in this batch to.
+          # Use when acting on behalf of a party other than your organization. Requires the
+          # `user-profiles` beta header. Applies to every request in the batch; an
+          # individual request whose `user_profile_id` body field conflicts with this header
+          # is errored.
+          user_profile_id: nil,
           request_options: {}
         )
         end

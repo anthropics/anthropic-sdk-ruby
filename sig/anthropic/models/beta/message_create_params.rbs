@@ -27,8 +27,8 @@ module Anthropic
           tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
           top_k: Integer,
           top_p: Float,
-          user_profile_id: String?,
-          betas: ::Array[Anthropic::Models::anthropic_beta]
+          betas: ::Array[Anthropic::Models::anthropic_beta],
+          user_profile_id: String
         }
         & Anthropic::Internal::Type::request_parameters
 
@@ -124,13 +124,15 @@ module Anthropic
 
         def top_p=: (Float) -> Float
 
-        attr_accessor user_profile_id: String?
-
         attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
         def betas=: (
           ::Array[Anthropic::Models::anthropic_beta]
         ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+        attr_reader user_profile_id: String?
+
+        def user_profile_id=: (String) -> String
 
         def initialize: (
           max_tokens: Integer,
@@ -157,8 +159,8 @@ module Anthropic
           ?tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
           ?top_k: Integer,
           ?top_p: Float,
-          ?user_profile_id: String?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?user_profile_id: String,
           ?request_options: Anthropic::request_opts
         ) -> void
 
@@ -187,8 +189,8 @@ module Anthropic
           tools: ::Array[Anthropic::Models::Beta::beta_tool_union],
           top_k: Integer,
           top_p: Float,
-          user_profile_id: String?,
           betas: ::Array[Anthropic::Models::anthropic_beta],
+          user_profile_id: String,
           request_options: Anthropic::RequestOptions
         }
 
