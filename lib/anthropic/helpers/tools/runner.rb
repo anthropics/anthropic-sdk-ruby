@@ -25,7 +25,7 @@ module Anthropic
           message = nil
           unless finished?
             fold do
-              message = @client.beta.messages.create(with_helper_header(_1, "runner"))
+              message = @client.beta.messages.create(with_helper_header(_1, StainlessHelperHeader::BETA_TOOL_RUNNER))
               [true, message]
             end
           end
@@ -46,7 +46,7 @@ module Anthropic
           end
 
           fold do
-            message = @client.beta.messages.create(with_helper_header(_1, "runner"))
+            message = @client.beta.messages.create(with_helper_header(_1, StainlessHelperHeader::BETA_TOOL_RUNNER))
             blk.call(message)
             [false, message]
           end
@@ -59,7 +59,7 @@ module Anthropic
           end
 
           fold do
-            stream = @client.beta.messages.stream(with_helper_header(_1, "runner"))
+            stream = @client.beta.messages.stream(with_helper_header(_1, StainlessHelperHeader::BETA_TOOL_RUNNER))
             blk.call(stream)
             [false, stream.accumulated_message]
           ensure
@@ -260,8 +260,12 @@ module Anthropic
         private def with_helper_header(params, helper)
           options = params[:request_options] || {}
           headers = options[:extra_headers] || {}
+          merged = StainlessHelperHeader.merged_value(headers, helper)
 
-          {**params, request_options: {**options, extra_headers: {**headers, "x-stainless-helper" => helper}}}
+          {
+            **params,
+            request_options: {**options, extra_headers: {**headers, StainlessHelperHeader::HEADER => merged}}
+          }
         end
       end
     end
