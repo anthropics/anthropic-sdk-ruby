@@ -31,7 +31,9 @@ module Anthropic
 
         # @!attribute mcp_servers
         #   MCP servers this agent connects to. Maximum 20. Names must be unique within the
-        #   array.
+        #   array. Every server must be referenced by an `mcp_toolset` in `tools`;
+        #   unreferenced servers are rejected. See the
+        #   [MCP connector guide](https://platform.claude.com/docs/en/managed-agents/mcp-connector).
         #
         #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>, nil]
         optional :mcp_servers,

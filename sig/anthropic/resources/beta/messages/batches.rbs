@@ -6,6 +6,7 @@ module Anthropic
           def create: (
             requests: ::Array[Anthropic::Beta::Messages::BatchCreateParams::Request],
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?user_profile_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Messages::BetaMessageBatch
 

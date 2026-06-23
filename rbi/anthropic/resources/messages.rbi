@@ -67,12 +67,13 @@ module Anthropic
             ],
           top_k: Integer,
           top_p: Float,
+          user_profile_id: String,
           stream: T.noreturn,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::Message)
       end
       def create(
-        # The maximum number of tokens to generate before stopping.
+        # Body param: The maximum number of tokens to generate before stopping.
         #
         # Note that our models may stop _before_ reaching this maximum. This parameter
         # only specifies the absolute maximum number of tokens to generate.
@@ -84,7 +85,7 @@ module Anthropic
         # Different models have different maximum values for this parameter. See
         # [models](https://docs.claude.com/en/docs/models-overview) for details.
         max_tokens:,
-        # Input messages.
+        # Body param: Input messages.
         #
         # Our models are trained to operate on alternating `user` and `assistant`
         # conversational turns. When creating a new `Message`, you specify the prior
@@ -150,30 +151,31 @@ module Anthropic
         #
         # There is a limit of 100,000 messages in a single request.
         messages:,
-        # The model that will complete your prompt.
+        # Body param: The model that will complete your prompt.
         #
         # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         model:,
-        # Top-level cache control automatically applies a cache_control marker to the last
-        # cacheable block in the request.
+        # Body param: Top-level cache control automatically applies a cache_control marker
+        # to the last cacheable block in the request.
         cache_control: nil,
-        # Container identifier for reuse across requests.
+        # Body param: Container identifier for reuse across requests.
         container: nil,
-        # Specifies the geographic region for inference processing. If not specified, the
-        # workspace's `default_inference_geo` is used.
+        # Body param: Specifies the geographic region for inference processing. If not
+        # specified, the workspace's `default_inference_geo` is used.
         inference_geo: nil,
-        # An object describing metadata about the request.
+        # Body param: An object describing metadata about the request.
         metadata: nil,
-        # Configuration options for the model's output, such as the output format.
+        # Body param: Configuration options for the model's output, such as the output
+        # format.
         output_config: nil,
-        # Determines whether to use priority capacity (if available) or standard capacity
-        # for this request.
+        # Body param: Determines whether to use priority capacity (if available) or
+        # standard capacity for this request.
         #
         # Anthropic offers different levels of service for your API requests. See
         # [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
         service_tier: nil,
-        # Custom text sequences that will cause the model to stop generating.
+        # Body param: Custom text sequences that will cause the model to stop generating.
         #
         # Our models will normally stop when they have naturally completed their turn,
         # which will result in a response `stop_reason` of `"end_turn"`.
@@ -183,13 +185,13 @@ module Anthropic
         # the custom sequences, the response `stop_reason` value will be `"stop_sequence"`
         # and the response `stop_sequence` value will contain the matched stop sequence.
         stop_sequences: nil,
-        # System prompt.
+        # Body param: System prompt.
         #
         # A system prompt is a way of providing context and instructions to Claude, such
         # as specifying a particular goal or role. See our
         # [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
         system_: nil,
-        # Amount of randomness injected into the response.
+        # Body param: Amount of randomness injected into the response.
         #
         # Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
         # for analytical / multiple choice, and closer to `1.0` for creative and
@@ -198,7 +200,7 @@ module Anthropic
         # Note that even with `temperature` of `0.0`, the results will not be fully
         # deterministic.
         temperature: nil,
-        # Configuration for enabling Claude's extended thinking.
+        # Body param: Configuration for enabling Claude's extended thinking.
         #
         # When enabled, responses include `thinking` content blocks showing Claude's
         # thinking process before the final answer. Requires a minimum budget of 1,024
@@ -208,10 +210,10 @@ module Anthropic
         # [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking)
         # for details.
         thinking: nil,
-        # How the model should use the provided tools. The model can use a specific tool,
-        # any available tool, decide by itself, or not use tools at all.
+        # Body param: How the model should use the provided tools. The model can use a
+        # specific tool, any available tool, decide by itself, or not use tools at all.
         tool_choice: nil,
-        # Definitions of tools that the model may use.
+        # Body param: Definitions of tools that the model may use.
         #
         # If you include `tools` in your API request, the model may return `tool_use`
         # content blocks that represent the model's use of those tools. You can then run
@@ -287,14 +289,14 @@ module Anthropic
         #
         # See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
         tools: nil,
-        # Only sample from the top K options for each subsequent token.
+        # Body param: Only sample from the top K options for each subsequent token.
         #
         # Used to remove "long tail" low probability responses.
         # [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
         #
         # Recommended for advanced use cases only.
         top_k: nil,
-        # Use nucleus sampling.
+        # Body param: Use nucleus sampling.
         #
         # In nucleus sampling, we compute the cumulative distribution over all the options
         # for each subsequent token in decreasing probability order and cut it off once it
@@ -302,6 +304,10 @@ module Anthropic
         #
         # Recommended for advanced use cases only.
         top_p: nil,
+        # Header param: The user profile ID to attribute this request to. Use when acting
+        # on behalf of a party other than your organization. Requires the `user-profiles`
+        # beta header.
+        user_profile_id: nil,
         # There is no need to provide `stream:`. Instead, use `#stream_raw` or `#create`
         # for streaming and non-streaming use cases, respectively.
         stream: false,
@@ -661,6 +667,7 @@ module Anthropic
             ],
           top_k: Integer,
           top_p: Float,
+          user_profile_id: String,
           stream: T.noreturn,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(
@@ -670,7 +677,7 @@ module Anthropic
         )
       end
       def stream_raw(
-        # The maximum number of tokens to generate before stopping.
+        # Body param: The maximum number of tokens to generate before stopping.
         #
         # Note that our models may stop _before_ reaching this maximum. This parameter
         # only specifies the absolute maximum number of tokens to generate.
@@ -682,7 +689,7 @@ module Anthropic
         # Different models have different maximum values for this parameter. See
         # [models](https://docs.claude.com/en/docs/models-overview) for details.
         max_tokens:,
-        # Input messages.
+        # Body param: Input messages.
         #
         # Our models are trained to operate on alternating `user` and `assistant`
         # conversational turns. When creating a new `Message`, you specify the prior
@@ -748,30 +755,31 @@ module Anthropic
         #
         # There is a limit of 100,000 messages in a single request.
         messages:,
-        # The model that will complete your prompt.
+        # Body param: The model that will complete your prompt.
         #
         # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         model:,
-        # Top-level cache control automatically applies a cache_control marker to the last
-        # cacheable block in the request.
+        # Body param: Top-level cache control automatically applies a cache_control marker
+        # to the last cacheable block in the request.
         cache_control: nil,
-        # Container identifier for reuse across requests.
+        # Body param: Container identifier for reuse across requests.
         container: nil,
-        # Specifies the geographic region for inference processing. If not specified, the
-        # workspace's `default_inference_geo` is used.
+        # Body param: Specifies the geographic region for inference processing. If not
+        # specified, the workspace's `default_inference_geo` is used.
         inference_geo: nil,
-        # An object describing metadata about the request.
+        # Body param: An object describing metadata about the request.
         metadata: nil,
-        # Configuration options for the model's output, such as the output format.
+        # Body param: Configuration options for the model's output, such as the output
+        # format.
         output_config: nil,
-        # Determines whether to use priority capacity (if available) or standard capacity
-        # for this request.
+        # Body param: Determines whether to use priority capacity (if available) or
+        # standard capacity for this request.
         #
         # Anthropic offers different levels of service for your API requests. See
         # [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
         service_tier: nil,
-        # Custom text sequences that will cause the model to stop generating.
+        # Body param: Custom text sequences that will cause the model to stop generating.
         #
         # Our models will normally stop when they have naturally completed their turn,
         # which will result in a response `stop_reason` of `"end_turn"`.
@@ -781,13 +789,13 @@ module Anthropic
         # the custom sequences, the response `stop_reason` value will be `"stop_sequence"`
         # and the response `stop_sequence` value will contain the matched stop sequence.
         stop_sequences: nil,
-        # System prompt.
+        # Body param: System prompt.
         #
         # A system prompt is a way of providing context and instructions to Claude, such
         # as specifying a particular goal or role. See our
         # [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
         system_: nil,
-        # Amount of randomness injected into the response.
+        # Body param: Amount of randomness injected into the response.
         #
         # Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
         # for analytical / multiple choice, and closer to `1.0` for creative and
@@ -796,7 +804,7 @@ module Anthropic
         # Note that even with `temperature` of `0.0`, the results will not be fully
         # deterministic.
         temperature: nil,
-        # Configuration for enabling Claude's extended thinking.
+        # Body param: Configuration for enabling Claude's extended thinking.
         #
         # When enabled, responses include `thinking` content blocks showing Claude's
         # thinking process before the final answer. Requires a minimum budget of 1,024
@@ -806,10 +814,10 @@ module Anthropic
         # [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking)
         # for details.
         thinking: nil,
-        # How the model should use the provided tools. The model can use a specific tool,
-        # any available tool, decide by itself, or not use tools at all.
+        # Body param: How the model should use the provided tools. The model can use a
+        # specific tool, any available tool, decide by itself, or not use tools at all.
         tool_choice: nil,
-        # Definitions of tools that the model may use.
+        # Body param: Definitions of tools that the model may use.
         #
         # If you include `tools` in your API request, the model may return `tool_use`
         # content blocks that represent the model's use of those tools. You can then run
@@ -885,14 +893,14 @@ module Anthropic
         #
         # See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
         tools: nil,
-        # Only sample from the top K options for each subsequent token.
+        # Body param: Only sample from the top K options for each subsequent token.
         #
         # Used to remove "long tail" low probability responses.
         # [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
         #
         # Recommended for advanced use cases only.
         top_k: nil,
-        # Use nucleus sampling.
+        # Body param: Use nucleus sampling.
         #
         # In nucleus sampling, we compute the cumulative distribution over all the options
         # for each subsequent token in decreasing probability order and cut it off once it
@@ -900,6 +908,10 @@ module Anthropic
         #
         # Recommended for advanced use cases only.
         top_p: nil,
+        # Header param: The user profile ID to attribute this request to. Use when acting
+        # on behalf of a party other than your organization. Requires the `user-profiles`
+        # beta header.
+        user_profile_id: nil,
         # There is no need to provide `stream:`. Instead, use `#stream_raw` or `#create`
         # for streaming and non-streaming use cases, respectively.
         stream: true,

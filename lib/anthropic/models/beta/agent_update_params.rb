@@ -28,8 +28,11 @@ module Anthropic
         optional :description, String, nil?: true
 
         # @!attribute mcp_servers
-        #   MCP servers. Full replacement. Omit to preserve; send empty array or null to
-        #   clear. Names must be unique. Maximum 20.
+        #   MCP servers. Full replacement. Omit to preserve; send empty array or `null` to
+        #   clear. Names must be unique. Maximum 20. Every server must be referenced by an
+        #   `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are
+        #   rejected. See the
+        #   [MCP connector guide](https://platform.claude.com/docs/en/managed-agents/mcp-connector).
         #
         #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>, nil]
         optional :mcp_servers,
@@ -110,7 +113,7 @@ module Anthropic
         #
         #   @param description [String, nil] Description. Omit to preserve; send empty string or null to clear.
         #
-        #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>, nil] MCP servers. Full replacement. Omit to preserve; send empty array or null to cle
+        #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>, nil] MCP servers. Full replacement. Omit to preserve; send empty array or `null` to c
         #
         #   @param metadata [Hash{Symbol=>String, nil}, nil] Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omi
         #

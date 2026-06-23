@@ -21,6 +21,7 @@ module Anthropic
         ?tools: ::Array[Anthropic::Models::tool_union],
         ?top_k: Integer,
         ?top_p: Float,
+        ?user_profile_id: String,
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::Message
 
@@ -42,6 +43,7 @@ module Anthropic
         ?tools: ::Array[Anthropic::Models::tool_union],
         ?top_k: Integer,
         ?top_p: Float,
+        ?user_profile_id: String,
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::Internal::Stream[Anthropic::Models::raw_message_stream_event]
 

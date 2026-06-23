@@ -17,11 +17,13 @@ module Anthropic
           # Learn more about the Message Batches API in our
           # [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
           #
-          # @overload create(requests:, betas: nil, request_options: {})
+          # @overload create(requests:, betas: nil, user_profile_id: nil, request_options: {})
           #
           # @param requests [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>] Body param: List of requests for prompt completion. Each is an individual reques
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param user_profile_id [String] Header param: The user profile ID to attribute the requests in this batch to. Us
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -30,7 +32,7 @@ module Anthropic
           # @see Anthropic::Models::Beta::Messages::BatchCreateParams
           def create(params)
             parsed, options = Anthropic::Beta::Messages::BatchCreateParams.dump_request(params)
-            header_params = {betas: "anthropic-beta"}
+            header_params = {betas: "anthropic-beta", user_profile_id: "anthropic-user-profile-id"}
             @client.request(
               method: :post,
               path: "v1/messages/batches?beta=true",

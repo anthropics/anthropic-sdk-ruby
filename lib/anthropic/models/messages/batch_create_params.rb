@@ -16,11 +16,22 @@ module Anthropic
         required :requests,
                  -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Messages::BatchCreateParams::Request] }
 
-        # @!method initialize(requests:, request_options: {})
+        # @!attribute user_profile_id
+        #   The user profile ID to attribute the requests in this batch to. Use when acting
+        #   on behalf of a party other than your organization. Requires the `user-profiles`
+        #   beta header. Applies to every request in the batch; an individual request whose
+        #   `user_profile_id` body field conflicts with this header is errored.
+        #
+        #   @return [String, nil]
+        optional :user_profile_id, String
+
+        # @!method initialize(requests:, user_profile_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Messages::BatchCreateParams} for more details.
         #
         #   @param requests [Array<Anthropic::Models::Messages::BatchCreateParams::Request>] List of requests for prompt completion. Each is an individual request to create
+        #
+        #   @param user_profile_id [String] The user profile ID to attribute the requests in this batch to. Use when acting
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 

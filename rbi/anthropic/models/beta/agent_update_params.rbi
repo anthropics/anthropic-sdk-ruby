@@ -28,8 +28,11 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :description
 
-        # MCP servers. Full replacement. Omit to preserve; send empty array or null to
-        # clear. Names must be unique. Maximum 20.
+        # MCP servers. Full replacement. Omit to preserve; send empty array or `null` to
+        # clear. Names must be unique. Maximum 20. Every server must be referenced by an
+        # `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are
+        # rejected. See the
+        # [MCP connector guide](https://platform.claude.com/docs/en/managed-agents/mcp-connector).
         sig do
           returns(
             T.nilable(
@@ -207,8 +210,11 @@ module Anthropic
           version:,
           # Description. Omit to preserve; send empty string or null to clear.
           description: nil,
-          # MCP servers. Full replacement. Omit to preserve; send empty array or null to
-          # clear. Names must be unique. Maximum 20.
+          # MCP servers. Full replacement. Omit to preserve; send empty array or `null` to
+          # clear. Names must be unique. Maximum 20. Every server must be referenced by an
+          # `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are
+          # rejected. See the
+          # [MCP connector guide](https://platform.claude.com/docs/en/managed-agents/mcp-connector).
           mcp_servers: nil,
           # Metadata patch. Set a key to a string to upsert it, or to null to delete it.
           # Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars

@@ -42,6 +42,16 @@ module Anthropic
           end
           attr_writer :betas
 
+          # The user profile ID to attribute the requests in this batch to. Use when acting
+          # on behalf of a party other than your organization. Requires the `user-profiles`
+          # beta header. Applies to every request in the batch; an individual request whose
+          # `user_profile_id` body field conflicts with this header is errored.
+          sig { returns(T.nilable(String)) }
+          attr_reader :user_profile_id
+
+          sig { params(user_profile_id: String).void }
+          attr_writer :user_profile_id
+
           sig do
             params(
               requests:
@@ -50,6 +60,7 @@ module Anthropic
                 ],
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+              user_profile_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(T.attached_class)
           end
@@ -59,6 +70,11 @@ module Anthropic
             requests:,
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,
+            # The user profile ID to attribute the requests in this batch to. Use when acting
+            # on behalf of a party other than your organization. Requires the `user-profiles`
+            # beta header. Applies to every request in the batch; an individual request whose
+            # `user_profile_id` body field conflicts with this header is errored.
+            user_profile_id: nil,
             request_options: {}
           )
           end
@@ -72,6 +88,7 @@ module Anthropic
                   ],
                 betas:
                   T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                user_profile_id: String,
                 request_options: Anthropic::RequestOptions
               }
             )
@@ -720,11 +737,6 @@ module Anthropic
               sig { params(top_p: Float).void }
               attr_writer :top_p
 
-              # The user profile ID to attribute this request to. Use when acting on behalf of a
-              # party other than your organization.
-              sig { returns(T.nilable(String)) }
-              attr_accessor :user_profile_id
-
               # Messages API creation parameters for the individual request.
               #
               # See the [Messages API reference](https://docs.claude.com/en/api/messages) for
@@ -819,8 +831,7 @@ module Anthropic
                       )
                     ],
                   top_k: Integer,
-                  top_p: Float,
-                  user_profile_id: T.nilable(String)
+                  top_p: Float
                 ).returns(T.attached_class)
               end
               def self.new(
@@ -1100,10 +1111,7 @@ module Anthropic
                 # reaches a particular probability specified by `top_p`.
                 #
                 # Recommended for advanced use cases only.
-                top_p: nil,
-                # The user profile ID to attribute this request to. Use when acting on behalf of a
-                # party other than your organization.
-                user_profile_id: nil
+                top_p: nil
               )
               end
 
@@ -1189,8 +1197,7 @@ module Anthropic
                         )
                       ],
                     top_k: Integer,
-                    top_p: Float,
-                    user_profile_id: T.nilable(String)
+                    top_p: Float
                   }
                 )
               end

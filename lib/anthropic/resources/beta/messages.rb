@@ -40,7 +40,7 @@ module Anthropic
         # Learn more about the Messages API in our
         # [user guide](https://docs.claude.com/en/docs/initial-setup)
         #
-        # @overload create(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, betas: nil, request_options: {})
+        # @overload create(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -90,9 +90,9 @@ module Anthropic
         #
         # @param top_p [Float] Body param: Use nucleus sampling.
         #
-        # @param user_profile_id [String, nil] Body param: The user profile ID to attribute this request to. Use when acting on
-        #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        #
+        # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -128,7 +128,7 @@ module Anthropic
             options = {timeout: 600, **options}
           end
 
-          header_params = {betas: "anthropic-beta"}
+          header_params = {betas: "anthropic-beta", user_profile_id: "anthropic-user-profile-id"}
           @client.request(
             method: :post,
             path: "v1/messages?beta=true",
@@ -154,7 +154,7 @@ module Anthropic
         # Learn more about the Messages API in our
         # [user guide](https://docs.claude.com/en/docs/initial-setup)
         #
-        # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, betas: nil, request_options: {})
+        # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -204,9 +204,9 @@ module Anthropic
         #
         # @param top_p [Float] Body param: Use nucleus sampling.
         #
-        # @param user_profile_id [String, nil] Body param: The user profile ID to attribute this request to. Use when acting on
-        #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        #
+        # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -229,7 +229,7 @@ module Anthropic
             is_beta: true
           )
 
-          header_params = {betas: "anthropic-beta"}
+          header_params = {betas: "anthropic-beta", user_profile_id: "anthropic-user-profile-id"}
           raw_stream = @client.request(
             method: :post,
             path: "v1/messages?beta=true",
@@ -310,7 +310,7 @@ module Anthropic
 
           Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil, is_beta: true)
 
-          header_params = {betas: "anthropic-beta"}
+          header_params = {betas: "anthropic-beta", user_profile_id: "anthropic-user-profile-id"}
           @client.request(
             method: :post,
             path: "v1/messages?beta=true",

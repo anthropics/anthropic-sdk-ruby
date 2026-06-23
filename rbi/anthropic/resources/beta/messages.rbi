@@ -393,8 +393,8 @@ module Anthropic
               ],
             top_k: Integer,
             top_p: Float,
-            user_profile_id: T.nilable(String),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            user_profile_id: String,
             stream: T.noreturn,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaMessage)
@@ -674,11 +674,12 @@ module Anthropic
           #
           # Recommended for advanced use cases only.
           top_p: nil,
-          # Body param: The user profile ID to attribute this request to. Use when acting on
-          # behalf of a party other than your organization.
-          user_profile_id: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
+          # Header param: The user profile ID to attribute this request to. Use when acting
+          # on behalf of a party other than your organization. Requires the `user-profiles`
+          # beta header.
+          user_profile_id: nil,
           # There is no need to provide `stream:`. Instead, use `#stream_raw` or `#create`
           # for streaming and non-streaming use cases, respectively.
           stream: false,
@@ -774,8 +775,8 @@ module Anthropic
               ],
             top_k: Integer,
             top_p: Float,
-            user_profile_id: T.nilable(String),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            user_profile_id: String,
             stream: T.noreturn,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(
@@ -1059,11 +1060,12 @@ module Anthropic
           #
           # Recommended for advanced use cases only.
           top_p: nil,
-          # Body param: The user profile ID to attribute this request to. Use when acting on
-          # behalf of a party other than your organization.
-          user_profile_id: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
+          # Header param: The user profile ID to attribute this request to. Use when acting
+          # on behalf of a party other than your organization. Requires the `user-profiles`
+          # beta header.
+          user_profile_id: nil,
           # There is no need to provide `stream:`. Instead, use `#stream_raw` or `#create`
           # for streaming and non-streaming use cases, respectively.
           stream: true,
