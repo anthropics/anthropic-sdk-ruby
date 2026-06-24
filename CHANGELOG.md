@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.50.0 (2026-06-24)
+
+Full Changelog: [v1.49.0...v1.50.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.49.0...v1.50.0)
+
+### Features
+
+* **client:** add support for system.message streaming events ([2333173](https://github.com/anthropics/anthropic-sdk-ruby/commit/23331737588b1942dfda599a04ccb23109824f80))
+* **helpers:** single source for x-stainless-helper + tag the BetaToolRunner ([#36](https://github.com/anthropics/anthropic-sdk-ruby/issues/36)) ([95124e5](https://github.com/anthropics/anthropic-sdk-ruby/commit/95124e582c1f413b5dd05f4cc5dafecfe87b6666))
+
+
+### Chores
+
+* **api:** add support for new refusal category ([9b5050f](https://github.com/anthropics/anthropic-sdk-ruby/commit/9b5050f677532d60ee8b47e08c62b3e59aacdc7b))
+* **api:** add support for sending User Profile ID in request headers ([4a263e8](https://github.com/anthropics/anthropic-sdk-ruby/commit/4a263e8b43096c92533701eb4423c2abc21e3408))
+
 ## 1.49.0 (2026-06-18)
 
 Full Changelog: [v1.48.2...v1.49.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.48.2...v1.49.0)
