@@ -108,6 +108,7 @@ module Anthropic
           BIO = :bio
           FRONTIER_LLM = :frontier_llm
           REASONING_EXTRACTION = :reasoning_extraction
+          MILITARY_WEAPONS = :military_weapons
 
           # @!method self.values
           #   @return [Array<Symbol>]

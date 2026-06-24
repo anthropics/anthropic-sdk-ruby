@@ -202,6 +202,11 @@ module Anthropic
               :reasoning_extraction,
               Anthropic::Beta::BetaRefusalStopDetails::Category::TaggedSymbol
             )
+          MILITARY_WEAPONS =
+            T.let(
+              :military_weapons,
+              Anthropic::Beta::BetaRefusalStopDetails::Category::TaggedSymbol
+            )
 
           sig do
             override.returns(
