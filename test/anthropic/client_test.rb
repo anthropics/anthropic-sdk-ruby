@@ -219,6 +219,38 @@ class AnthropicTest < Minitest::Test
     assert_requested(:any, /./, headers: {"x-stainless-retry-count" => "42"}, times: 3)
   end
 
+  def test_beta_header_merges_endpoint_default_with_betas_param
+    stub_request(:get, "http://localhost/v1/files?beta=true")
+      .to_return_json(status: 200, body: {data: [], has_more: false})
+
+    anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key")
+
+    anthropic.beta.files.list(betas: ["managed-agents-2026-04-01"])
+
+    assert_requested(:get, "http://localhost/v1/files?beta=true") do |req|
+      sent = req.headers["Anthropic-Beta"].split(",").map(&:strip)
+      assert_includes(sent, "files-api-2025-04-14")
+      assert_includes(sent, "managed-agents-2026-04-01")
+    end
+  end
+
+  def test_beta_header_merges_endpoint_default_with_extra_headers
+    stub_request(:get, "http://localhost/v1/files?beta=true")
+      .to_return_json(status: 200, body: {data: [], has_more: false})
+
+    anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key")
+
+    anthropic.beta.files.list(
+      betas: ["files-api-2025-04-14"],
+      request_options: {extra_headers: {"anthropic-beta" => "some-other-beta"}}
+    )
+
+    assert_requested(:get, "http://localhost/v1/files?beta=true") do |req|
+      sent = req.headers["Anthropic-Beta"].split(",").map(&:strip)
+      assert_equal(%w[files-api-2025-04-14 some-other-beta], sent)
+    end
+  end
+
   def test_extra_headers_override_auth_survives_retry
     stub_request(:post, "http://localhost/v1/messages").to_return_json(status: 500, body: {})
 

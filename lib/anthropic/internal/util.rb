@@ -412,19 +412,28 @@ module Anthropic
       class << self
         # @api private
         #
+        # Later hashes take precedence on key collision, except `anthropic-beta`
+        # which is additive: values from every input are collected so endpoint
+        # defaults don't drop the caller's `betas:` or the client OAuth beta.
+        #
         # @param headers [Hash{String=>String, Integer, Array<String, Integer, nil>, nil}]
         #
         # @return [Hash{String=>String}]
         def normalized_headers(*headers)
-          {}.merge(*headers.compact).to_h do |key, val|
-            value =
-              case val
-              in Array
-                val.filter_map { _1&.to_s&.strip }.join(", ")
-              else
-                val&.to_s&.strip
-              end
-            [key.downcase, value]
+          merged = {}
+          headers.each do |hdrs|
+            hdrs.to_h.each do |key, val|
+              k = key.to_s.downcase
+              merged[k] = k == "anthropic-beta" && merged.key?(k) ? [*merged[k], *val] : val
+            end
+          end
+          merged.transform_values do |val|
+            case val
+            in Array
+              val.filter_map { _1&.to_s&.strip }.join(", ")
+            else
+              val&.to_s&.strip
+            end
           end
         end
       end

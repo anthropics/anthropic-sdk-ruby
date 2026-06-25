@@ -94,6 +94,51 @@ class Anthropic::Test::UtilDataHandlingTest < Minitest::Test
   end
 end
 
+class Anthropic::Test::UtilHeaderHandlingTest < Minitest::Test
+  def test_later_hash_overwrites
+    headers = Anthropic::Internal::Util.normalized_headers(
+      {"x-api-key" => "first", "content-type" => "application/json"},
+      {"x-api-key" => "second"}
+    )
+
+    assert_equal("second", headers["x-api-key"])
+    assert_equal("application/json", headers["content-type"])
+  end
+
+  def test_anthropic_beta_accumulates
+    headers = Anthropic::Internal::Util.normalized_headers(
+      {"anthropic-beta" => "oauth-2025-04-20"},
+      {"anthropic-beta" => ["managed-agents-2026-04-01"]},
+      {"anthropic-beta" => "files-api-2025-04-14"}
+    )
+
+    sent = headers["anthropic-beta"].split(",").map(&:strip)
+    assert_equal(%w[oauth-2025-04-20 managed-agents-2026-04-01 files-api-2025-04-14], sent)
+  end
+
+  def test_anthropic_beta_accumulates_case_insensitive
+    headers = Anthropic::Internal::Util.normalized_headers(
+      {"Anthropic-Beta" => "a"},
+      {"anthropic-beta" => "b"}
+    )
+
+    assert_equal("a, b", headers["anthropic-beta"])
+    refute(headers.key?("Anthropic-Beta"))
+  end
+
+  def test_array_values_comma_joined
+    headers = Anthropic::Internal::Util.normalized_headers({"x-foo" => %w[a b c]})
+
+    assert_equal("a, b, c", headers["x-foo"])
+  end
+
+  def test_nil_input_hashes_ignored
+    headers = Anthropic::Internal::Util.normalized_headers(nil, {"x-foo" => "bar"}, nil)
+
+    assert_equal({"x-foo" => "bar"}, headers)
+  end
+end
+
 class Anthropic::Test::UtilUriHandlingTest < Minitest::Test
   def test_parsing
     %w[
