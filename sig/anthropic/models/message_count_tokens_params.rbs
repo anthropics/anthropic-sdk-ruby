@@ -9,7 +9,8 @@ module Anthropic
         system_: Anthropic::Models::MessageCountTokensParams::system_,
         thinking: Anthropic::Models::thinking_config_param,
         tool_choice: Anthropic::Models::tool_choice,
-        tools: ::Array[Anthropic::Models::message_count_tokens_tool]
+        tools: ::Array[Anthropic::Models::message_count_tokens_tool],
+        user_profile_id: String
       }
       & Anthropic::Internal::Type::request_parameters
 
@@ -51,6 +52,10 @@ module Anthropic
         ::Array[Anthropic::Models::message_count_tokens_tool]
       ) -> ::Array[Anthropic::Models::message_count_tokens_tool]
 
+      attr_reader user_profile_id: String?
+
+      def user_profile_id=: (String) -> String
+
       def initialize: (
         messages: ::Array[Anthropic::MessageParam],
         model: Anthropic::Models::model,
@@ -60,6 +65,7 @@ module Anthropic
         ?thinking: Anthropic::Models::thinking_config_param,
         ?tool_choice: Anthropic::Models::tool_choice,
         ?tools: ::Array[Anthropic::Models::message_count_tokens_tool],
+        ?user_profile_id: String,
         ?request_options: Anthropic::request_opts
       ) -> void
 
@@ -72,6 +78,7 @@ module Anthropic
         thinking: Anthropic::Models::thinking_config_param,
         tool_choice: Anthropic::Models::tool_choice,
         tools: ::Array[Anthropic::Models::message_count_tokens_tool],
+        user_profile_id: String,
         request_options: Anthropic::RequestOptions
       }
 

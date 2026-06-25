@@ -322,6 +322,14 @@ module Anthropic
       end
       attr_writer :tools
 
+      # The user profile ID to attribute this request to. Use when acting on behalf of a
+      # party other than your organization. Requires the `user-profiles` beta header.
+      sig { returns(T.nilable(String)) }
+      attr_reader :user_profile_id
+
+      sig { params(user_profile_id: String).void }
+      attr_writer :user_profile_id
+
       sig do
         params(
           messages: T::Array[Anthropic::MessageParam::OrHash],
@@ -364,6 +372,7 @@ module Anthropic
                 Anthropic::ToolSearchToolRegex20251119::OrHash
               )
             ],
+          user_profile_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -539,6 +548,9 @@ module Anthropic
         #
         # See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
         tools: nil,
+        # The user profile ID to attribute this request to. Use when acting on behalf of a
+        # party other than your organization. Requires the `user-profiles` beta header.
+        user_profile_id: nil,
         request_options: {}
       )
       end
@@ -586,6 +598,7 @@ module Anthropic
                   Anthropic::ToolSearchToolRegex20251119
                 )
               ],
+            user_profile_id: String,
             request_options: Anthropic::RequestOptions
           }
         )

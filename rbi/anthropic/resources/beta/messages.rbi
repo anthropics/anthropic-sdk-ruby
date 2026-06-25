@@ -846,6 +846,7 @@ module Anthropic
                 )
               ],
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            user_profile_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaMessageTokensCount)
         end
@@ -1040,6 +1041,10 @@ module Anthropic
           tools: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
+          # Header param: The user profile ID to attribute this request to. Use when acting
+          # on behalf of a party other than your organization. Requires the `user-profiles`
+          # beta header.
+          user_profile_id: nil,
           request_options: {}
         )
         end

@@ -15,7 +15,8 @@ module Anthropic
           thinking: Anthropic::Models::Beta::beta_thinking_config_param,
           tool_choice: Anthropic::Models::Beta::beta_tool_choice,
           tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
-          betas: ::Array[Anthropic::Models::anthropic_beta]
+          betas: ::Array[Anthropic::Models::anthropic_beta],
+          user_profile_id: String
         }
         & Anthropic::Internal::Type::request_parameters
 
@@ -77,6 +78,10 @@ module Anthropic
           ::Array[Anthropic::Models::anthropic_beta]
         ) -> ::Array[Anthropic::Models::anthropic_beta]
 
+        attr_reader user_profile_id: String?
+
+        def user_profile_id=: (String) -> String
+
         def initialize: (
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
@@ -91,6 +96,7 @@ module Anthropic
           ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
           ?tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?user_profile_id: String,
           ?request_options: Anthropic::request_opts
         ) -> void
 
@@ -108,6 +114,7 @@ module Anthropic
           tool_choice: Anthropic::Models::Beta::beta_tool_choice,
           tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
           betas: ::Array[Anthropic::Models::anthropic_beta],
+          user_profile_id: String,
           request_options: Anthropic::RequestOptions
         }
 
