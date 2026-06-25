@@ -41,7 +41,7 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
   def test_retrieve
     skip("buildURL drops path-level query params (SDK-4349)")
 
-    response = @anthropic.beta.deployments.retrieve("deployment_id")
+    response = @anthropic.beta.deployments.retrieve("depl_011CZkZcDH3vPqd7xnEfwTai")
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsDeployment
@@ -70,7 +70,7 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
   end
 
   def test_update
-    response = @anthropic.beta.deployments.update("deployment_id")
+    response = @anthropic.beta.deployments.update("depl_011CZkZcDH3vPqd7xnEfwTai")
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsDeployment
@@ -137,7 +137,7 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
   end
 
   def test_archive
-    response = @anthropic.beta.deployments.archive("deployment_id")
+    response = @anthropic.beta.deployments.archive("depl_011CZkZcDH3vPqd7xnEfwTai")
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsDeployment
@@ -166,7 +166,7 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
   end
 
   def test_pause
-    response = @anthropic.beta.deployments.pause("deployment_id")
+    response = @anthropic.beta.deployments.pause("depl_011CZkZcDH3vPqd7xnEfwTai")
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsDeployment
@@ -195,7 +195,7 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
   end
 
   def test_run
-    response = @anthropic.beta.deployments.run("deployment_id")
+    response = @anthropic.beta.deployments.run("depl_011CZkZcDH3vPqd7xnEfwTai")
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsDeploymentRun
@@ -216,7 +216,7 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
   end
 
   def test_unpause
-    response = @anthropic.beta.deployments.unpause("deployment_id")
+    response = @anthropic.beta.deployments.unpause("depl_011CZkZcDH3vPqd7xnEfwTai")
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsDeployment
