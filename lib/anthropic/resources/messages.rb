@@ -274,23 +274,25 @@ module Anthropic
       # Learn more about token counting in our
       # [user guide](https://docs.claude.com/en/docs/build-with-claude/token-counting)
       #
-      # @overload count_tokens(messages:, model:, cache_control: nil, output_config: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, request_options: {})
+      # @overload count_tokens(messages:, model:, cache_control: nil, output_config: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, user_profile_id: nil, request_options: {})
       #
-      # @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
+      # @param messages [Array<Anthropic::Models::MessageParam>] Body param: Input messages.
       #
-      # @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
+      # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
       #
-      # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Top-level cache control automatically applies a cache_control marker to the last
+      # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
       #
-      # @param output_config [Anthropic::Models::OutputConfig] Configuration options for the model's output, such as the output format.
+      # @param output_config [Anthropic::Models::OutputConfig] Body param: Configuration options for the model's output, such as the output for
       #
-      # @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt.
+      # @param system_ [String, Array<Anthropic::Models::TextBlockParam>] Body param: System prompt.
       #
-      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigAdaptive] Configuration for enabling Claude's extended thinking.
+      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
       #
-      # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
+      # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
       #
-      # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::CodeExecutionTool20260120, Anthropic::Models::CodeExecutionTool20260521, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::WebSearchTool20260209, Anthropic::Models::WebFetchTool20260209, Anthropic::Models::WebFetchTool20260309, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>] Definitions of tools that the model may use.
+      # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::CodeExecutionTool20260120, Anthropic::Models::CodeExecutionTool20260521, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::WebSearchTool20260209, Anthropic::Models::WebFetchTool20260209, Anthropic::Models::WebFetchTool20260309, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>] Body param: Definitions of tools that the model may use.
+      #
+      # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -300,10 +302,12 @@ module Anthropic
       def count_tokens(params)
         parsed, options = Anthropic::MessageCountTokensParams.dump_request(params)
         Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil)
+        header_params = {user_profile_id: "anthropic-user-profile-id"}
         @client.request(
           method: :post,
           path: "v1/messages/count_tokens",
-          body: parsed,
+          headers: parsed.slice(*header_params.keys).transform_keys(header_params),
+          body: parsed.except(*header_params.keys),
           model: Anthropic::MessageTokensCount,
           options: options
         )

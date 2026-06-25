@@ -78,6 +78,7 @@ module Anthropic
           ?tool_choice: Anthropic::Models::Beta::beta_tool_choice,
           ?tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?user_profile_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaMessageTokensCount
 

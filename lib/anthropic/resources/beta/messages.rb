@@ -337,7 +337,7 @@ module Anthropic
         # Learn more about token counting in our
         # [user guide](https://docs.claude.com/en/docs/build-with-claude/token-counting)
         #
-        # @overload count_tokens(messages:, model:, cache_control: nil, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, request_options: {})
+        # @overload count_tokens(messages:, model:, cache_control: nil, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, request_options: {})
         #
         # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Body param: Input messages.
         #
@@ -365,6 +365,8 @@ module Anthropic
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
+        # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Beta::BetaMessageTokensCount]
@@ -374,7 +376,7 @@ module Anthropic
           parsed, options = Anthropic::Beta::MessageCountTokensParams.dump_request(params)
           Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil, is_beta: true)
 
-          header_params = {betas: "anthropic-beta"}
+          header_params = {betas: "anthropic-beta", user_profile_id: "anthropic-user-profile-id"}
           @client.request(
             method: :post,
             path: "v1/messages/count_tokens?beta=true",

@@ -968,11 +968,12 @@ module Anthropic
                 Anthropic::ToolSearchToolRegex20251119::OrHash
               )
             ],
+          user_profile_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::MessageTokensCount)
       end
       def count_tokens(
-        # Input messages.
+        # Body param: Input messages.
         #
         # Our models are trained to operate on alternating `user` and `assistant`
         # conversational turns. When creating a new `Message`, you specify the prior
@@ -1038,23 +1039,24 @@ module Anthropic
         #
         # There is a limit of 100,000 messages in a single request.
         messages:,
-        # The model that will complete your prompt.
+        # Body param: The model that will complete your prompt.
         #
         # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         model:,
-        # Top-level cache control automatically applies a cache_control marker to the last
-        # cacheable block in the request.
+        # Body param: Top-level cache control automatically applies a cache_control marker
+        # to the last cacheable block in the request.
         cache_control: nil,
-        # Configuration options for the model's output, such as the output format.
+        # Body param: Configuration options for the model's output, such as the output
+        # format.
         output_config: nil,
-        # System prompt.
+        # Body param: System prompt.
         #
         # A system prompt is a way of providing context and instructions to Claude, such
         # as specifying a particular goal or role. See our
         # [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
         system_: nil,
-        # Configuration for enabling Claude's extended thinking.
+        # Body param: Configuration for enabling Claude's extended thinking.
         #
         # When enabled, responses include `thinking` content blocks showing Claude's
         # thinking process before the final answer. Requires a minimum budget of 1,024
@@ -1064,10 +1066,10 @@ module Anthropic
         # [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking)
         # for details.
         thinking: nil,
-        # How the model should use the provided tools. The model can use a specific tool,
-        # any available tool, decide by itself, or not use tools at all.
+        # Body param: How the model should use the provided tools. The model can use a
+        # specific tool, any available tool, decide by itself, or not use tools at all.
         tool_choice: nil,
-        # Definitions of tools that the model may use.
+        # Body param: Definitions of tools that the model may use.
         #
         # If you include `tools` in your API request, the model may return `tool_use`
         # content blocks that represent the model's use of those tools. You can then run
@@ -1143,6 +1145,10 @@ module Anthropic
         #
         # See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
         tools: nil,
+        # Header param: The user profile ID to attribute this request to. Use when acting
+        # on behalf of a party other than your organization. Requires the `user-profiles`
+        # beta header.
+        user_profile_id: nil,
         request_options: {}
       )
       end

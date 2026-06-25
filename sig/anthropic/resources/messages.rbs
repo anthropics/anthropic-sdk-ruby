@@ -56,6 +56,7 @@ module Anthropic
         ?thinking: Anthropic::Models::thinking_config_param,
         ?tool_choice: Anthropic::Models::tool_choice,
         ?tools: ::Array[Anthropic::Models::message_count_tokens_tool],
+        ?user_profile_id: String,
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::MessageTokensCount
 
