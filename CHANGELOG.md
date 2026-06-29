@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.51.0 (2026-06-29)
+
+Full Changelog: [v1.50.0...v1.51.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.50.0...v1.51.0)
+
+### Features
+
+* **api:** add support for 20260318 web fetch and support tools ([bb82831](https://github.com/anthropics/anthropic-sdk-ruby/commit/bb828319b6d9b5965f45c1988c6a182c234abba7))
+
+
+### Bug Fixes
+
+* **client:** merge anthropic-beta header across sources instead of overwriting ([#60](https://github.com/anthropics/anthropic-sdk-ruby/issues/60)) ([fe31ce8](https://github.com/anthropics/anthropic-sdk-ruby/commit/fe31ce853146173fcd00872b1d6dc4db50bbe23c))
+
+
+### Chores
+
+* **api:** accept user profile ID's when counting tokens ([b5f48bb](https://github.com/anthropics/anthropic-sdk-ruby/commit/b5f48bb2236f17f0c8bca19b2722c78e40acc671))
+* **docs:** updates to descriptions and example values ([e8c63fe](https://github.com/anthropics/anthropic-sdk-ruby/commit/e8c63fee97b136259b6f193fbe856886266096a6))
+
 ## 1.50.0 (2026-06-24)
 
 Full Changelog: [v1.49.0...v1.50.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.49.0...v1.50.0)
