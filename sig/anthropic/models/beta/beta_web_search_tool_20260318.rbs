@@ -1,0 +1,114 @@
+module Anthropic
+  module Models
+    class BetaWebSearchTool20260318 = Beta::BetaWebSearchTool20260318
+
+    module Beta
+      type beta_web_search_tool20260318 =
+        {
+          name: :web_search,
+          type: :web_search_20260318,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaWebSearchTool20260318::allowed_caller],
+          allowed_domains: ::Array[String]?,
+          blocked_domains: ::Array[String]?,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          defer_loading: bool,
+          max_uses: Integer?,
+          response_inclusion: Anthropic::Models::Beta::BetaWebSearchTool20260318::response_inclusion,
+          strict: bool,
+          user_location: Anthropic::Beta::BetaUserLocation?
+        }
+
+      class BetaWebSearchTool20260318 < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: :web_search
+
+        attr_accessor type: :web_search_20260318
+
+        attr_reader allowed_callers: ::Array[Anthropic::Models::Beta::BetaWebSearchTool20260318::allowed_caller]?
+
+        def allowed_callers=: (
+          ::Array[Anthropic::Models::Beta::BetaWebSearchTool20260318::allowed_caller]
+        ) -> ::Array[Anthropic::Models::Beta::BetaWebSearchTool20260318::allowed_caller]
+
+        attr_accessor allowed_domains: ::Array[String]?
+
+        attr_accessor blocked_domains: ::Array[String]?
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        attr_reader defer_loading: bool?
+
+        def defer_loading=: (bool) -> bool
+
+        attr_accessor max_uses: Integer?
+
+        attr_reader response_inclusion: Anthropic::Models::Beta::BetaWebSearchTool20260318::response_inclusion?
+
+        def response_inclusion=: (
+          Anthropic::Models::Beta::BetaWebSearchTool20260318::response_inclusion
+        ) -> Anthropic::Models::Beta::BetaWebSearchTool20260318::response_inclusion
+
+        attr_reader strict: bool?
+
+        def strict=: (bool) -> bool
+
+        attr_accessor user_location: Anthropic::Beta::BetaUserLocation?
+
+        def initialize: (
+          ?allowed_callers: ::Array[Anthropic::Models::Beta::BetaWebSearchTool20260318::allowed_caller],
+          ?allowed_domains: ::Array[String]?,
+          ?blocked_domains: ::Array[String]?,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?defer_loading: bool,
+          ?max_uses: Integer?,
+          ?response_inclusion: Anthropic::Models::Beta::BetaWebSearchTool20260318::response_inclusion,
+          ?strict: bool,
+          ?user_location: Anthropic::Beta::BetaUserLocation?,
+          ?name: :web_search,
+          ?type: :web_search_20260318
+        ) -> void
+
+        def to_hash: -> {
+          name: :web_search,
+          type: :web_search_20260318,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaWebSearchTool20260318::allowed_caller],
+          allowed_domains: ::Array[String]?,
+          blocked_domains: ::Array[String]?,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          defer_loading: bool,
+          max_uses: Integer?,
+          response_inclusion: Anthropic::Models::Beta::BetaWebSearchTool20260318::response_inclusion,
+          strict: bool,
+          user_location: Anthropic::Beta::BetaUserLocation?
+        }
+
+        type allowed_caller =
+          :direct
+          | :code_execution_20250825
+          | :code_execution_20260120
+          | :code_execution_20260521
+
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          DIRECT: :direct
+          CODE_EXECUTION_20250825: :code_execution_20250825
+          CODE_EXECUTION_20260120: :code_execution_20260120
+          CODE_EXECUTION_20260521: :code_execution_20260521
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaWebSearchTool20260318::allowed_caller]
+        end
+
+        type response_inclusion = :full | :excluded
+
+        module ResponseInclusion
+          extend Anthropic::Internal::Type::Enum
+
+          FULL: :full
+          EXCLUDED: :excluded
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaWebSearchTool20260318::response_inclusion]
+        end
+      end
+    end
+  end
+end

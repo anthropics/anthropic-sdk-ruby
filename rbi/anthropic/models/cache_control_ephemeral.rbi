@@ -19,7 +19,7 @@ module Anthropic
       # - `1h`: 1 hour
       #
       # Defaults to `5m`. See
-      # [prompt caching pricing](https://docs.claude.com/en/docs/build-with-claude/prompt-caching)
+      # [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching)
       # for details.
       sig do
         returns(T.nilable(Anthropic::CacheControlEphemeral::TTL::OrSymbol))
@@ -44,7 +44,7 @@ module Anthropic
         # - `1h`: 1 hour
         #
         # Defaults to `5m`. See
-        # [prompt caching pricing](https://docs.claude.com/en/docs/build-with-claude/prompt-caching)
+        # [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching)
         # for details.
         ttl: nil,
         type: :ephemeral
@@ -67,7 +67,7 @@ module Anthropic
       # - `1h`: 1 hour
       #
       # Defaults to `5m`. See
-      # [prompt caching pricing](https://docs.claude.com/en/docs/build-with-claude/prompt-caching)
+      # [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching)
       # for details.
       module TTL
         extend Anthropic::Internal::Type::Enum

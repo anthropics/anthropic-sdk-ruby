@@ -25,6 +25,8 @@ module Anthropic
             Anthropic::WebSearchTool20260209,
             Anthropic::WebFetchTool20260209,
             Anthropic::WebFetchTool20260309,
+            Anthropic::WebSearchTool20260318,
+            Anthropic::WebFetchTool20260318,
             Anthropic::ToolSearchToolBm25_20251119,
             Anthropic::ToolSearchToolRegex20251119
           )

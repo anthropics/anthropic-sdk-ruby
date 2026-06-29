@@ -9,7 +9,7 @@ module Anthropic
     # tokens and counts towards your `max_tokens` limit.
     #
     # See
-    # [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking)
+    # [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking)
     # for details.
     module ThinkingConfigParam
       extend Anthropic::Internal::Type::Union

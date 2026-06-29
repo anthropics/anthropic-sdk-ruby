@@ -1,0 +1,167 @@
+# frozen_string_literal: true
+
+module Anthropic
+  module Models
+    module Beta
+      class BetaWebFetchTool20260318 < Anthropic::Internal::Type::BaseModel
+        # @!attribute name
+        #   Name of the tool.
+        #
+        #   This is how the tool will be called by the model and in `tool_use` blocks.
+        #
+        #   @return [Symbol, :web_fetch]
+        required :name, const: :web_fetch
+
+        # @!attribute type
+        #
+        #   @return [Symbol, :web_fetch_20260318]
+        required :type, const: :web_fetch_20260318
+
+        # @!attribute allowed_callers
+        #
+        #   @return [Array<Symbol, Anthropic::Models::Beta::BetaWebFetchTool20260318::AllowedCaller>, nil]
+        optional :allowed_callers,
+                 -> { Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Beta::BetaWebFetchTool20260318::AllowedCaller] }
+
+        # @!attribute allowed_domains
+        #   List of domains to allow fetching from
+        #
+        #   @return [Array<String>, nil]
+        optional :allowed_domains, Anthropic::Internal::Type::ArrayOf[String], nil?: true
+
+        # @!attribute blocked_domains
+        #   List of domains to block fetching from
+        #
+        #   @return [Array<String>, nil]
+        optional :blocked_domains, Anthropic::Internal::Type::ArrayOf[String], nil?: true
+
+        # @!attribute cache_control
+        #   Create a cache control breakpoint at this content block.
+        #
+        #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
+        optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
+
+        # @!attribute citations
+        #   Citations configuration for fetched documents. Citations are disabled by
+        #   default.
+        #
+        #   @return [Anthropic::Models::Beta::BetaCitationsConfigParam, nil]
+        optional :citations, -> { Anthropic::Beta::BetaCitationsConfigParam }, nil?: true
+
+        # @!attribute defer_loading
+        #   If true, tool will not be included in initial system prompt. Only loaded when
+        #   returned via tool_reference from tool search.
+        #
+        #   @return [Boolean, nil]
+        optional :defer_loading, Anthropic::Internal::Type::Boolean
+
+        # @!attribute max_content_tokens
+        #   Maximum number of tokens used by including web page text content in the context.
+        #   The limit is approximate and does not apply to binary content such as PDFs.
+        #
+        #   @return [Integer, nil]
+        optional :max_content_tokens, Integer, nil?: true
+
+        # @!attribute max_uses
+        #   Maximum number of times the tool can be used in the API request.
+        #
+        #   @return [Integer, nil]
+        optional :max_uses, Integer, nil?: true
+
+        # @!attribute response_inclusion
+        #   How this tool's result blocks appear in the API response when the result was
+        #   consumed by a completed code_execution call in the same turn. 'full' returns the
+        #   complete content (default). 'excluded' drops the nested server_tool_use and
+        #   result block pair entirely. Results from direct calls, or from code_execution
+        #   calls that paused before completing, are always returned in full so they can be
+        #   sent back on the next turn.
+        #
+        #   @return [Symbol, Anthropic::Models::Beta::BetaWebFetchTool20260318::ResponseInclusion, nil]
+        optional :response_inclusion, enum: -> { Anthropic::Beta::BetaWebFetchTool20260318::ResponseInclusion }
+
+        # @!attribute strict
+        #   When true, guarantees schema validation on tool names and inputs
+        #
+        #   @return [Boolean, nil]
+        optional :strict, Anthropic::Internal::Type::Boolean
+
+        # @!attribute use_cache
+        #   Whether to use cached content. Set to false to bypass the cache and fetch fresh
+        #   content. Only set to false when the user explicitly requests fresh content or
+        #   when fetching rapidly-changing sources.
+        #
+        #   @return [Boolean, nil]
+        optional :use_cache, Anthropic::Internal::Type::Boolean
+
+        # @!method initialize(allowed_callers: nil, allowed_domains: nil, blocked_domains: nil, cache_control: nil, citations: nil, defer_loading: nil, max_content_tokens: nil, max_uses: nil, response_inclusion: nil, strict: nil, use_cache: nil, name: :web_fetch, type: :web_fetch_20260318)
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaWebFetchTool20260318} for more details.
+        #
+        #   @param allowed_callers [Array<Symbol, Anthropic::Models::Beta::BetaWebFetchTool20260318::AllowedCaller>]
+        #
+        #   @param allowed_domains [Array<String>, nil] List of domains to allow fetching from
+        #
+        #   @param blocked_domains [Array<String>, nil] List of domains to block fetching from
+        #
+        #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+        #
+        #   @param citations [Anthropic::Models::Beta::BetaCitationsConfigParam, nil] Citations configuration for fetched documents. Citations are disabled by default
+        #
+        #   @param defer_loading [Boolean] If true, tool will not be included in initial system prompt. Only loaded when re
+        #
+        #   @param max_content_tokens [Integer, nil] Maximum number of tokens used by including web page text content in the context.
+        #
+        #   @param max_uses [Integer, nil] Maximum number of times the tool can be used in the API request.
+        #
+        #   @param response_inclusion [Symbol, Anthropic::Models::Beta::BetaWebFetchTool20260318::ResponseInclusion] How this tool's result blocks appear in the API response when the result was con
+        #
+        #   @param strict [Boolean] When true, guarantees schema validation on tool names and inputs
+        #
+        #   @param use_cache [Boolean] Whether to use cached content. Set to false to bypass the cache and fetch fresh
+        #
+        #   @param name [Symbol, :web_fetch] Name of the tool.
+        #
+        #   @param type [Symbol, :web_fetch_20260318]
+
+        # Specifies who can invoke a tool.
+        #
+        # Values: direct: The model can call this tool directly. code_execution_20250825:
+        # The tool can be called from the code execution environment (v1).
+        # code_execution_20260120: The tool can be called from the code execution
+        # environment (v2 with persistence). code_execution_20260521: The tool can be
+        # called from the code execution environment (v2 with persistence).
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          DIRECT = :direct
+          CODE_EXECUTION_20250825 = :code_execution_20250825
+          CODE_EXECUTION_20260120 = :code_execution_20260120
+          CODE_EXECUTION_20260521 = :code_execution_20260521
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # How this tool's result blocks appear in the API response when the result was
+        # consumed by a completed code_execution call in the same turn. 'full' returns the
+        # complete content (default). 'excluded' drops the nested server_tool_use and
+        # result block pair entirely. Results from direct calls, or from code_execution
+        # calls that paused before completing, are always returned in full so they can be
+        # sent back on the next turn.
+        #
+        # @see Anthropic::Models::Beta::BetaWebFetchTool20260318#response_inclusion
+        module ResponseInclusion
+          extend Anthropic::Internal::Type::Enum
+
+          FULL = :full
+          EXCLUDED = :excluded
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+      end
+    end
+
+    BetaWebFetchTool20260318 = Beta::BetaWebFetchTool20260318
+  end
+end

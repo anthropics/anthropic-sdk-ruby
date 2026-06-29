@@ -33,6 +33,8 @@ module Anthropic
               Anthropic::Beta::BetaWebSearchTool20260209,
               Anthropic::Beta::BetaWebFetchTool20260209,
               Anthropic::Beta::BetaWebFetchTool20260309,
+              Anthropic::Beta::BetaWebSearchTool20260318,
+              Anthropic::Beta::BetaWebFetchTool20260318,
               Anthropic::Beta::BetaAdvisorTool20260301,
               Anthropic::Beta::BetaToolSearchToolBm25_20251119,
               Anthropic::Beta::BetaToolSearchToolRegex20251119,

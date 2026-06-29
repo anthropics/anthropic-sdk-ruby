@@ -412,6 +412,8 @@ module Anthropic
 
   WebFetchTool20260309 = Anthropic::Models::WebFetchTool20260309
 
+  WebFetchTool20260318 = Anthropic::Models::WebFetchTool20260318
+
   WebFetchToolResultBlock = Anthropic::Models::WebFetchToolResultBlock
 
   WebFetchToolResultBlockParam = Anthropic::Models::WebFetchToolResultBlockParam
@@ -429,6 +431,8 @@ module Anthropic
   WebSearchTool20250305 = Anthropic::Models::WebSearchTool20250305
 
   WebSearchTool20260209 = Anthropic::Models::WebSearchTool20260209
+
+  WebSearchTool20260318 = Anthropic::Models::WebSearchTool20260318
 
   WebSearchToolRequestError = Anthropic::Models::WebSearchToolRequestError
 
