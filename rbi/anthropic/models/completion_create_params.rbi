@@ -34,8 +34,10 @@ module Anthropic
       # "\n\nHuman: {userQuestion}\n\nAssistant:"
       # ```
       #
-      # See [prompt validation](https://docs.claude.com/en/api/prompt-validation) and
-      # our guide to [prompt design](https://docs.claude.com/en/docs/intro-to-prompting)
+      # See
+      # [prompt validation](https://platform.claude.com/docs/en/build-with-claude/working-with-messages)
+      # and our guide to
+      # [prompt design](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview)
       # for more details.
       sig { returns(String) }
       attr_accessor :prompt
@@ -146,8 +148,10 @@ module Anthropic
         # "\n\nHuman: {userQuestion}\n\nAssistant:"
         # ```
         #
-        # See [prompt validation](https://docs.claude.com/en/api/prompt-validation) and
-        # our guide to [prompt design](https://docs.claude.com/en/docs/intro-to-prompting)
+        # See
+        # [prompt validation](https://platform.claude.com/docs/en/build-with-claude/working-with-messages)
+        # and our guide to
+        # [prompt design](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview)
         # for more details.
         prompt:,
         # An object describing metadata about the request.

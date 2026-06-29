@@ -12,7 +12,7 @@ module Anthropic
           # can take up to 24 hours to complete.
           #
           # Learn more about the Message Batches API in our
-          # [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+          # [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
           sig do
             params(
               requests:
@@ -46,7 +46,7 @@ module Anthropic
           # `results_url` field in the response.
           #
           # Learn more about the Message Batches API in our
-          # [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+          # [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
           sig do
             params(
               message_batch_id: String,
@@ -68,7 +68,7 @@ module Anthropic
           # returned first.
           #
           # Learn more about the Message Batches API in our
-          # [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+          # [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
           sig do
             params(
               after_id: String,
@@ -106,7 +106,7 @@ module Anthropic
           # like to delete an in-progress batch, you must first cancel it.
           #
           # Learn more about the Message Batches API in our
-          # [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+          # [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
           sig do
             params(
               message_batch_id: String,
@@ -135,7 +135,7 @@ module Anthropic
           # non-interruptible.
           #
           # Learn more about the Message Batches API in our
-          # [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+          # [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
           sig do
             params(
               message_batch_id: String,
@@ -160,7 +160,7 @@ module Anthropic
           # requests. Use the `custom_id` field to match results to requests.
           #
           # Learn more about the Message Batches API in our
-          # [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+          # [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
           sig do
             params(
               message_batch_id: String,
