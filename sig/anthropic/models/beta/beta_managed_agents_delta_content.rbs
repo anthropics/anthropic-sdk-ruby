@@ -1,0 +1,46 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsDeltaContent = Beta::BetaManagedAgentsDeltaContent
+
+    module Beta
+      type beta_managed_agents_delta_content =
+        {
+          content: Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock,
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeltaContent::type_,
+          index: Integer
+        }
+
+      class BetaManagedAgentsDeltaContent < Anthropic::Internal::Type::BaseModel
+        attr_accessor content: Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsDeltaContent::type_
+
+        attr_reader index: Integer?
+
+        def index=: (Integer) -> Integer
+
+        def initialize: (
+          content: Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock,
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeltaContent::type_,
+          ?index: Integer
+        ) -> void
+
+        def to_hash: -> {
+          content: Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock,
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeltaContent::type_,
+          index: Integer
+        }
+
+        type type_ = :content_delta
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          CONTENT_DELTA: :content_delta
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsDeltaContent::type_]
+        end
+      end
+    end
+  end
+end

@@ -33,7 +33,27 @@ module Anthropic
               Anthropic::Beta::BetaWebhookVaultCredentialArchivedEventData,
               Anthropic::Beta::BetaWebhookVaultCredentialDeletedEventData,
               Anthropic::Beta::BetaWebhookVaultCredentialRefreshFailedEventData,
-              Anthropic::Beta::BetaWebhookSessionUpdatedEventData
+              Anthropic::Beta::BetaWebhookSessionUpdatedEventData,
+              Anthropic::Beta::BetaWebhookAgentCreatedEventData,
+              Anthropic::Beta::BetaWebhookAgentArchivedEventData,
+              Anthropic::Beta::BetaWebhookAgentDeletedEventData,
+              Anthropic::Beta::BetaWebhookDeploymentPausedEventData,
+              Anthropic::Beta::BetaWebhookDeploymentRunFailedEventData,
+              Anthropic::Beta::BetaWebhookDeploymentCreatedEventData,
+              Anthropic::Beta::BetaWebhookDeploymentUpdatedEventData,
+              Anthropic::Beta::BetaWebhookDeploymentUnpausedEventData,
+              Anthropic::Beta::BetaWebhookAgentUpdatedEventData,
+              Anthropic::Beta::BetaWebhookDeploymentArchivedEventData,
+              Anthropic::Beta::BetaWebhookDeploymentRunStartedEventData,
+              Anthropic::Beta::BetaWebhookDeploymentDeletedEventData,
+              Anthropic::Beta::BetaWebhookDeploymentRunSucceededEventData,
+              Anthropic::Beta::BetaWebhookEnvironmentCreatedEventData,
+              Anthropic::Beta::BetaWebhookEnvironmentUpdatedEventData,
+              Anthropic::Beta::BetaWebhookEnvironmentArchivedEventData,
+              Anthropic::Beta::BetaWebhookEnvironmentDeletedEventData,
+              Anthropic::Beta::BetaWebhookMemoryStoreCreatedEventData,
+              Anthropic::Beta::BetaWebhookMemoryStoreArchivedEventData,
+              Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData
             )
           end
 

@@ -5,6 +5,7 @@ module Anthropic
         type beta_managed_agents_environment_variable_update_params =
           {
             type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::type_,
+            injection_location: Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams,
             networking: Anthropic::Models::Beta::Vaults::beta_managed_agents_credential_networking_params?,
             secret_value: String?
           }
@@ -12,18 +13,26 @@ module Anthropic
         class BetaManagedAgentsEnvironmentVariableUpdateParams < Anthropic::Internal::Type::BaseModel
           attr_accessor type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::type_
 
+          attr_reader injection_location: Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams?
+
+          def injection_location=: (
+            Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams
+          ) -> Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams
+
           attr_accessor networking: Anthropic::Models::Beta::Vaults::beta_managed_agents_credential_networking_params?
 
           attr_accessor secret_value: String?
 
           def initialize: (
             type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::type_,
+            ?injection_location: Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams,
             ?networking: Anthropic::Models::Beta::Vaults::beta_managed_agents_credential_networking_params?,
             ?secret_value: String?
           ) -> void
 
           def to_hash: -> {
             type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::type_,
+            injection_location: Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams,
             networking: Anthropic::Models::Beta::Vaults::beta_managed_agents_credential_networking_params?,
             secret_value: String?
           }

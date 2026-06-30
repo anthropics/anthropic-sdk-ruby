@@ -55,7 +55,27 @@ module Anthropic
                 Anthropic::Beta::BetaWebhookVaultCredentialArchivedEventData::OrHash,
                 Anthropic::Beta::BetaWebhookVaultCredentialDeletedEventData::OrHash,
                 Anthropic::Beta::BetaWebhookVaultCredentialRefreshFailedEventData::OrHash,
-                Anthropic::Beta::BetaWebhookSessionUpdatedEventData::OrHash
+                Anthropic::Beta::BetaWebhookSessionUpdatedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookAgentCreatedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookAgentArchivedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookAgentDeletedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookDeploymentPausedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookDeploymentRunFailedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookDeploymentCreatedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookDeploymentUpdatedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookDeploymentUnpausedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookAgentUpdatedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookDeploymentArchivedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookDeploymentRunStartedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookDeploymentDeletedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookDeploymentRunSucceededEventData::OrHash,
+                Anthropic::Beta::BetaWebhookEnvironmentCreatedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookEnvironmentUpdatedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookEnvironmentArchivedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookEnvironmentDeletedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookMemoryStoreCreatedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookMemoryStoreArchivedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData::OrHash
               ),
             type: Symbol
           ).returns(T.attached_class)

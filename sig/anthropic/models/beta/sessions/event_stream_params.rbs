@@ -5,6 +5,7 @@ module Anthropic
         type event_stream_params =
           {
             session_id: String,
+            event_deltas: ::Array[Anthropic::Models::Beta::beta_managed_agents_delta_type],
             betas: ::Array[Anthropic::Models::anthropic_beta]
           }
           & Anthropic::Internal::Type::request_parameters
@@ -15,6 +16,12 @@ module Anthropic
 
           attr_accessor session_id: String
 
+          attr_reader event_deltas: ::Array[Anthropic::Models::Beta::beta_managed_agents_delta_type]?
+
+          def event_deltas=: (
+            ::Array[Anthropic::Models::Beta::beta_managed_agents_delta_type]
+          ) -> ::Array[Anthropic::Models::Beta::beta_managed_agents_delta_type]
+
           attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
           def betas=: (
@@ -23,12 +30,14 @@ module Anthropic
 
           def initialize: (
             session_id: String,
+            ?event_deltas: ::Array[Anthropic::Models::Beta::beta_managed_agents_delta_type],
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> void
 
           def to_hash: -> {
             session_id: String,
+            event_deltas: ::Array[Anthropic::Models::Beta::beta_managed_agents_delta_type],
             betas: ::Array[Anthropic::Models::anthropic_beta],
             request_options: Anthropic::RequestOptions
           }

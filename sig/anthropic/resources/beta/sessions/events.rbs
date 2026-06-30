@@ -26,6 +26,7 @@ module Anthropic
 
           def stream_events: (
             String session_id,
+            ?event_deltas: ::Array[Anthropic::Models::Beta::beta_managed_agents_delta_type],
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Internal::Stream[Anthropic::Models::Beta::Sessions::beta_managed_agents_stream_session_events]

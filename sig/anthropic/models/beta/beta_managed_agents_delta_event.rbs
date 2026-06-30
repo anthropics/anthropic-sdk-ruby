@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsDeltaEvent = Beta::BetaManagedAgentsDeltaEvent
+
+    module Beta
+      type beta_managed_agents_delta_event =
+        {
+          delta: Anthropic::Beta::BetaManagedAgentsDeltaContent,
+          event_id: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent::type_
+        }
+
+      class BetaManagedAgentsDeltaEvent < Anthropic::Internal::Type::BaseModel
+        attr_accessor delta: Anthropic::Beta::BetaManagedAgentsDeltaContent
+
+        attr_accessor event_id: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent::type_
+
+        def initialize: (
+          delta: Anthropic::Beta::BetaManagedAgentsDeltaContent,
+          event_id: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent::type_
+        ) -> void
+
+        def to_hash: -> {
+          delta: Anthropic::Beta::BetaManagedAgentsDeltaContent,
+          event_id: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent::type_
+        }
+
+        type type_ = :event_delta
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          EVENT_DELTA: :event_delta
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent::type_]
+        end
+      end
+    end
+  end
+end

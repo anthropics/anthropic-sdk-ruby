@@ -11,6 +11,13 @@ module Anthropic
           required :type,
                    enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::Type }
 
+          # @!attribute injection_location
+          #   Updated injection location.
+          #
+          #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams, nil]
+          optional :injection_location,
+                   -> { Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams }
+
           # @!attribute networking
           #   Updated networking scope. Full replacement.
           #
@@ -25,11 +32,13 @@ module Anthropic
           #   @return [String, nil]
           optional :secret_value, String, nil?: true
 
-          # @!method initialize(type:, networking: nil, secret_value: nil)
+          # @!method initialize(type:, injection_location: nil, networking: nil, secret_value: nil)
           #   Parameters for updating an environment variable credential. `secret_name` is
           #   immutable.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::Type]
+          #
+          #   @param injection_location [Anthropic::Models::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams] Updated injection location.
           #
           #   @param networking [Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams, nil] Updated networking scope. Full replacement.
           #

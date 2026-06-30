@@ -19,7 +19,8 @@ module Anthropic
             agent:
               T.any(
                 String,
-                Anthropic::Beta::BetaManagedAgentsAgentParams::OrHash
+                Anthropic::Beta::BetaManagedAgentsAgentParams::OrHash,
+                Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::OrHash
               ),
             environment_id: String,
             metadata: T::Hash[Symbol, String],
@@ -133,7 +134,7 @@ module Anthropic
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(
-            Anthropic::Internal::PageCursor[
+            Anthropic::Internal::BidirectionalPageCursor[
               Anthropic::Beta::BetaManagedAgentsSession
             ]
           )

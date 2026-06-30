@@ -51,7 +51,7 @@ module Anthropic
           ?statuses: ::Array[Anthropic::Models::Beta::SessionListParams::status],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
-        ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaManagedAgentsSession]
+        ) -> Anthropic::Internal::BidirectionalPageCursor[Anthropic::Beta::BetaManagedAgentsSession]
 
         def delete: (
           String session_id,

@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsStartEvent = Beta::BetaManagedAgentsStartEvent
+
+    module Beta
+      type beta_managed_agents_start_event =
+        {
+          event: Anthropic::Models::Beta::beta_managed_agents_start_event_preview,
+          type: Anthropic::Models::Beta::BetaManagedAgentsStartEvent::type_
+        }
+
+      class BetaManagedAgentsStartEvent < Anthropic::Internal::Type::BaseModel
+        attr_accessor event: Anthropic::Models::Beta::beta_managed_agents_start_event_preview
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsStartEvent::type_
+
+        def initialize: (
+          event: Anthropic::Models::Beta::beta_managed_agents_start_event_preview,
+          type: Anthropic::Models::Beta::BetaManagedAgentsStartEvent::type_
+        ) -> void
+
+        def to_hash: -> {
+          event: Anthropic::Models::Beta::beta_managed_agents_start_event_preview,
+          type: Anthropic::Models::Beta::BetaManagedAgentsStartEvent::type_
+        }
+
+        type type_ = :event_start
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          EVENT_START: :event_start
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsStartEvent::type_]
+        end
+      end
+    end
+  end
+end

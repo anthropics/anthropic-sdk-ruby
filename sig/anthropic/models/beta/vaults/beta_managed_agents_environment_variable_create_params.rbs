@@ -7,7 +7,8 @@ module Anthropic
             networking: Anthropic::Models::Beta::Vaults::beta_managed_agents_credential_networking_params,
             secret_name: String,
             secret_value: String,
-            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::type_
+            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::type_,
+            injection_location: Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams
           }
 
         class BetaManagedAgentsEnvironmentVariableCreateParams < Anthropic::Internal::Type::BaseModel
@@ -19,18 +20,26 @@ module Anthropic
 
           attr_accessor type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::type_
 
+          attr_reader injection_location: Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams?
+
+          def injection_location=: (
+            Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams
+          ) -> Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams
+
           def initialize: (
             networking: Anthropic::Models::Beta::Vaults::beta_managed_agents_credential_networking_params,
             secret_name: String,
             secret_value: String,
-            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::type_
+            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::type_,
+            ?injection_location: Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams
           ) -> void
 
           def to_hash: -> {
             networking: Anthropic::Models::Beta::Vaults::beta_managed_agents_credential_networking_params,
             secret_name: String,
             secret_value: String,
-            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::type_
+            type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::type_,
+            injection_location: Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams
           }
 
           type type_ = :environment_variable

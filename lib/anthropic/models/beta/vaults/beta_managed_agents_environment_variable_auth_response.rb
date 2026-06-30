@@ -5,6 +5,12 @@ module Anthropic
     module Beta
       module Vaults
         class BetaManagedAgentsEnvironmentVariableAuthResponse < Anthropic::Internal::Type::BaseModel
+          # @!attribute injection_location
+          #   Where in the outbound request the secret value is substituted.
+          #
+          #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsInjectionLocationResponse]
+          required :injection_location, -> { Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationResponse }
+
           # @!attribute networking
           #   Outbound hosts the secret value is substituted on.
           #
@@ -24,8 +30,10 @@ module Anthropic
           required :type,
                    enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Type }
 
-          # @!method initialize(networking:, secret_name:, type:)
+          # @!method initialize(injection_location:, networking:, secret_name:, type:)
           #   Environment variable credential details. The secret value is never returned.
+          #
+          #   @param injection_location [Anthropic::Models::Beta::Vaults::BetaManagedAgentsInjectionLocationResponse] Where in the outbound request the secret value is substituted.
           #
           #   @param networking [Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingResponse] Outbound hosts the secret value is substituted on.
           #

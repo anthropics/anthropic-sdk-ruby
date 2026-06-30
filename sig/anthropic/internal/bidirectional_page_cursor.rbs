@@ -1,0 +1,15 @@
+module Anthropic
+  module Internal
+    class BidirectionalPageCursor[Elem]
+      include Anthropic::Internal::Type::BasePage[Elem]
+
+      attr_accessor data: ::Array[Elem]?
+
+      attr_accessor next_page_: String?
+
+      attr_accessor prev_page: String?
+
+      def inspect: -> String
+    end
+  end
+end
