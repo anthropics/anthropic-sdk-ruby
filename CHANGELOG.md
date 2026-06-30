@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.52.0 (2026-06-30)
+
+Full Changelog: [v1.51.0...v1.52.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.51.0...v1.52.0)
+
+### Features
+
+* **api:** add support for claude-sonnet-5 ([2d275bb](https://github.com/anthropics/anthropic-sdk-ruby/commit/2d275bb65db881384f4fb23891b5fb3dfb258590))
+
 ## 1.51.0 (2026-06-29)
 
 Full Changelog: [v1.50.0...v1.51.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.50.0...v1.51.0)
