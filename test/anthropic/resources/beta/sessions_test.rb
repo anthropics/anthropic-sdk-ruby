@@ -100,7 +100,7 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
     response = @anthropic.beta.sessions.list
 
     assert_pattern do
-      response => Anthropic::Internal::PageCursor
+      response => Anthropic::Internal::BidirectionalPageCursor
     end
 
     row = response.to_enum.first

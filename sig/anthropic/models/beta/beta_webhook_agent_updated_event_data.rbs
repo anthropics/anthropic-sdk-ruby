@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaWebhookAgentUpdatedEventData = Beta::BetaWebhookAgentUpdatedEventData
+
+    module Beta
+      type beta_webhook_agent_updated_event_data =
+        {
+          id: String,
+          organization_id: String,
+          type: :"agent.updated",
+          workspace_id: String
+        }
+
+      class BetaWebhookAgentUpdatedEventData < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor organization_id: String
+
+        attr_accessor type: :"agent.updated"
+
+        attr_accessor workspace_id: String
+
+        def initialize: (
+          id: String,
+          organization_id: String,
+          workspace_id: String,
+          ?type: :"agent.updated"
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          organization_id: String,
+          type: :"agent.updated",
+          workspace_id: String
+        }
+      end
+    end
+  end
+end

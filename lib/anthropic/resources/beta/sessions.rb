@@ -20,7 +20,7 @@ module Anthropic
         #
         # @overload create(agent:, environment_id:, metadata: nil, resources: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
         #
-        # @param agent [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams] Body param: Agent identifier. Accepts the `agent` ID string, which pins the late
+        # @param agent [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams] Body param: Agent identifier. Accepts the `agent` ID string, which pins the late
         #
         # @param environment_id [String] Body param: ID of the `environment` defining the container configuration for thi
         #
@@ -150,7 +150,7 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Beta::BetaManagedAgentsSession>]
+        # @return [Anthropic::Internal::BidirectionalPageCursor<Anthropic::Models::Beta::BetaManagedAgentsSession>]
         #
         # @see Anthropic::Models::Beta::SessionListParams
         def list(params = {})
@@ -182,7 +182,7 @@ module Anthropic
               created_at_lte: "created_at[lte]"
             ),
             headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
-            page: Anthropic::Internal::PageCursor,
+            page: Anthropic::Internal::BidirectionalPageCursor,
             model: Anthropic::Beta::BetaManagedAgentsSession,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
           )

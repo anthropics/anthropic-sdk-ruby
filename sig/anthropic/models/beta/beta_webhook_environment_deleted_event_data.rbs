@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaWebhookEnvironmentDeletedEventData = Beta::BetaWebhookEnvironmentDeletedEventData
+
+    module Beta
+      type beta_webhook_environment_deleted_event_data =
+        {
+          id: String,
+          organization_id: String,
+          type: Anthropic::Models::Beta::beta_webhook_environment_deleted_event_type,
+          workspace_id: String
+        }
+
+      class BetaWebhookEnvironmentDeletedEventData < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor organization_id: String
+
+        attr_accessor type: Anthropic::Models::Beta::beta_webhook_environment_deleted_event_type
+
+        attr_accessor workspace_id: String
+
+        def initialize: (
+          id: String,
+          organization_id: String,
+          type: Anthropic::Models::Beta::beta_webhook_environment_deleted_event_type,
+          workspace_id: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          organization_id: String,
+          type: Anthropic::Models::Beta::beta_webhook_environment_deleted_event_type,
+          workspace_id: String
+        }
+      end
+    end
+  end
+end

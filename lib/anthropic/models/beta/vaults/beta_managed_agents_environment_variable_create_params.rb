@@ -29,7 +29,13 @@ module Anthropic
           required :type,
                    enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::Type }
 
-          # @!method initialize(networking:, secret_name:, secret_value:, type:)
+          # @!attribute injection_location
+          #   Where in the outbound request the secret value may be substituted.
+          #
+          #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsInjectionLocationParams, nil]
+          optional :injection_location, -> { Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams }
+
+          # @!method initialize(networking:, secret_name:, secret_value:, type:, injection_location: nil)
           #   Parameters for creating an environment variable credential.
           #
           #   @param networking [Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams] Outbound hosts the secret value is substituted on.
@@ -39,6 +45,8 @@ module Anthropic
           #   @param secret_value [String] Secret value. Write-only; never returned in responses.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::Type]
+          #
+          #   @param injection_location [Anthropic::Models::Beta::Vaults::BetaManagedAgentsInjectionLocationParams] Where in the outbound request the secret value may be substituted.
 
           # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams#type
           module Type

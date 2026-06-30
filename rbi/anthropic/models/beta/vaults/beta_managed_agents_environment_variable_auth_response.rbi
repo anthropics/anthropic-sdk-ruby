@@ -13,6 +13,22 @@ module Anthropic
               )
             end
 
+          # Where in the outbound request the secret value is substituted.
+          sig do
+            returns(
+              Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationResponse
+            )
+          end
+          attr_reader :injection_location
+
+          sig do
+            params(
+              injection_location:
+                Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationResponse::OrHash
+            ).void
+          end
+          attr_writer :injection_location
+
           # Outbound hosts the secret value is substituted on.
           sig do
             returns(
@@ -35,6 +51,8 @@ module Anthropic
           # Environment variable credential details. The secret value is never returned.
           sig do
             params(
+              injection_location:
+                Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationResponse::OrHash,
               networking:
                 T.any(
                   Anthropic::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse::OrHash,
@@ -46,6 +64,8 @@ module Anthropic
             ).returns(T.attached_class)
           end
           def self.new(
+            # Where in the outbound request the secret value is substituted.
+            injection_location:,
             # Outbound hosts the secret value is substituted on.
             networking:,
             # Name of the environment variable.
@@ -57,6 +77,8 @@ module Anthropic
           sig do
             override.returns(
               {
+                injection_location:
+                  Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationResponse,
                 networking:
                   Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Networking::Variants,
                 secret_name: String,

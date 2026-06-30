@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsStartEventPreview = Beta::BetaManagedAgentsStartEventPreview
+
+    module Beta
+      type beta_managed_agents_start_event_preview =
+        Anthropic::Beta::BetaManagedAgentsAgentMessagePreview
+        | Anthropic::Beta::BetaManagedAgentsAgentThinkingPreview
+
+      module BetaManagedAgentsStartEventPreview
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_start_event_preview]
+      end
+    end
+  end
+end

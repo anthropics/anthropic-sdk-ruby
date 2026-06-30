@@ -39,6 +39,24 @@ module Anthropic
           end
           attr_accessor :type
 
+          # Where in the outbound request the secret value may be substituted.
+          sig do
+            returns(
+              T.nilable(
+                Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams
+              )
+            )
+          end
+          attr_reader :injection_location
+
+          sig do
+            params(
+              injection_location:
+                Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams::OrHash
+            ).void
+          end
+          attr_writer :injection_location
+
           # Parameters for creating an environment variable credential.
           sig do
             params(
@@ -50,7 +68,9 @@ module Anthropic
               secret_name: String,
               secret_value: String,
               type:
-                Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::Type::OrSymbol
+                Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::Type::OrSymbol,
+              injection_location:
+                Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams::OrHash
             ).returns(T.attached_class)
           end
           def self.new(
@@ -60,7 +80,9 @@ module Anthropic
             secret_name:,
             # Secret value. Write-only; never returned in responses.
             secret_value:,
-            type:
+            type:,
+            # Where in the outbound request the secret value may be substituted.
+            injection_location: nil
           )
           end
 
@@ -75,7 +97,9 @@ module Anthropic
                 secret_name: String,
                 secret_value: String,
                 type:
-                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::Type::OrSymbol
+                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams::Type::OrSymbol,
+                injection_location:
+                  Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams
               }
             )
           end

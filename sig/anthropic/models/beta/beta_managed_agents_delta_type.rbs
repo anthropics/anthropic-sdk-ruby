@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module BetaManagedAgentsDeltaType = Beta::BetaManagedAgentsDeltaType
+
+    module Beta
+      type beta_managed_agents_delta_type = :"agent.message" | :"agent.thinking"
+
+      module BetaManagedAgentsDeltaType
+        extend Anthropic::Internal::Type::Enum
+
+        AGENT_MESSAGE: :"agent.message"
+        AGENT_THINKING: :"agent.thinking"
+
+        def self?.values: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_delta_type]
+      end
+    end
+  end
+end

@@ -1,0 +1,24 @@
+module Anthropic
+  module Models
+    module Beta
+      module Vaults
+        type beta_managed_agents_injection_location_update_params =
+          { body: bool, header: bool }
+
+        class BetaManagedAgentsInjectionLocationUpdateParams < Anthropic::Internal::Type::BaseModel
+          attr_reader body: bool?
+
+          def body=: (bool) -> bool
+
+          attr_reader header: bool?
+
+          def header=: (bool) -> bool
+
+          def initialize: (?body: bool, ?header: bool) -> void
+
+          def to_hash: -> { body: bool, header: bool }
+        end
+      end
+    end
+  end
+end

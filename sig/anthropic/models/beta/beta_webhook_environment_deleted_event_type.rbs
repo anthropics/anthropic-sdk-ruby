@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module BetaWebhookEnvironmentDeletedEventType = Beta::BetaWebhookEnvironmentDeletedEventType
+
+    module Beta
+      type beta_webhook_environment_deleted_event_type = :"environment.deleted"
+
+      module BetaWebhookEnvironmentDeletedEventType
+        extend Anthropic::Internal::Type::Enum
+
+        ENVIRONMENT_DELETED: :"environment.deleted"
+
+        def self?.values: -> ::Array[Anthropic::Models::Beta::beta_webhook_environment_deleted_event_type]
+      end
+    end
+  end
+end

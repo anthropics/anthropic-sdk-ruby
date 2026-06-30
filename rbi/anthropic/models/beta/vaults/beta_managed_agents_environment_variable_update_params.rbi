@@ -20,6 +20,24 @@ module Anthropic
           end
           attr_accessor :type
 
+          # Updated injection location.
+          sig do
+            returns(
+              T.nilable(
+                Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams
+              )
+            )
+          end
+          attr_reader :injection_location
+
+          sig do
+            params(
+              injection_location:
+                Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams::OrHash
+            ).void
+          end
+          attr_writer :injection_location
+
           # Updated networking scope. Full replacement.
           sig do
             returns(
@@ -43,6 +61,8 @@ module Anthropic
             params(
               type:
                 Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::Type::OrSymbol,
+              injection_location:
+                Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams::OrHash,
               networking:
                 T.nilable(
                   T.any(
@@ -55,6 +75,8 @@ module Anthropic
           end
           def self.new(
             type:,
+            # Updated injection location.
+            injection_location: nil,
             # Updated networking scope. Full replacement.
             networking: nil,
             # Updated secret value.
@@ -67,6 +89,8 @@ module Anthropic
               {
                 type:
                   Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams::Type::OrSymbol,
+                injection_location:
+                  Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams,
                 networking:
                   T.nilable(
                     T.any(

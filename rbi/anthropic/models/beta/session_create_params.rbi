@@ -18,7 +18,13 @@ module Anthropic
         # Agent identifier. Accepts the `agent` ID string, which pins the latest version
         # for the session, or an `agent` object with both id and version specified.
         sig do
-          returns(T.any(String, Anthropic::Beta::BetaManagedAgentsAgentParams))
+          returns(
+            T.any(
+              String,
+              Anthropic::Beta::BetaManagedAgentsAgentParams,
+              Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams
+            )
+          )
         end
         attr_accessor :agent
 
@@ -97,7 +103,8 @@ module Anthropic
             agent:
               T.any(
                 String,
-                Anthropic::Beta::BetaManagedAgentsAgentParams::OrHash
+                Anthropic::Beta::BetaManagedAgentsAgentParams::OrHash,
+                Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::OrHash
               ),
             environment_id: String,
             metadata: T::Hash[Symbol, String],
@@ -140,7 +147,11 @@ module Anthropic
           override.returns(
             {
               agent:
-                T.any(String, Anthropic::Beta::BetaManagedAgentsAgentParams),
+                T.any(
+                  String,
+                  Anthropic::Beta::BetaManagedAgentsAgentParams,
+                  Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams
+                ),
               environment_id: String,
               metadata: T::Hash[Symbol, String],
               resources:
@@ -169,7 +180,11 @@ module Anthropic
 
           Variants =
             T.type_alias do
-              T.any(String, Anthropic::Beta::BetaManagedAgentsAgentParams)
+              T.any(
+                String,
+                Anthropic::Beta::BetaManagedAgentsAgentParams,
+                Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams
+              )
             end
 
           sig do
