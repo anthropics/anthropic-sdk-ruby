@@ -17,7 +17,7 @@ class Output < Anthropic::BaseModel
 end
 
 result = anthropic.messages.count_tokens(
-  model: "claude-sonnet-4-5-20250929",
+  model: "claude-sonnet-5",
   messages: [
     {
       role: "user",

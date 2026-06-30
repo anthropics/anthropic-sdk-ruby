@@ -1,7 +1,8 @@
 module Anthropic
   module Models
     type model =
-      :"claude-fable-5"
+      :"claude-sonnet-5"
+      | :"claude-fable-5"
       | :"claude-mythos-5"
       | :"claude-opus-4-8"
       | :"claude-opus-4-7"
@@ -22,6 +23,9 @@ module Anthropic
       extend Anthropic::Internal::Type::Union
 
       def self?.variants: -> ::Array[Anthropic::Models::model]
+
+      # High-performance model for coding and agents
+      CLAUDE_SONNET_5: :"claude-sonnet-5"
 
       # Next generation of intelligence for the hardest knowledge work and coding problems
       CLAUDE_FABLE_5: :"claude-fable-5"

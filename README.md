@@ -39,6 +39,7 @@ message = anthropic.messages.create(
 puts(message.content)
 ```
 
+
 ## Requirements
 
 Ruby 3.2.0+

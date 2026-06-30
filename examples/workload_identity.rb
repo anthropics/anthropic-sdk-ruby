@@ -169,7 +169,7 @@ end
 client = build_client
 
 response = client.messages.create(
-  model: "claude-sonnet-4-5-20250929",
+  model: "claude-sonnet-5",
   max_tokens: 1024,
   messages: [{role: "user", content: "Hello"}]
 )

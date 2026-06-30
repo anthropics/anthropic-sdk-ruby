@@ -31,6 +31,13 @@ module Anthropic
           end
         OrSymbol = T.type_alias { T.any(Symbol, String) }
 
+        # High-performance model for coding and agents
+        CLAUDE_SONNET_5 =
+          T.let(
+            :"claude-sonnet-5",
+            Anthropic::Beta::BetaManagedAgentsModel::TaggedSymbol
+          )
+
         # Next generation of intelligence for the hardest knowledge work and coding problems
         CLAUDE_FABLE_5 =
           T.let(

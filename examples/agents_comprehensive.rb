@@ -50,7 +50,7 @@ puts "Created skill: #{skill.id}"
 # Create v1 of the agent with the built-in toolset, an MCP server, and a custom tool
 agent_v1 = client.beta.agents.create(
   name: "comprehensive-example-agent",
-  model: "claude-sonnet-4-6",
+  model: "claude-sonnet-5",
   system_: "You are a helpful assistant.",
   mcp_servers: [{type: "url", name: MCP_SERVER_NAME, url: MCP_SERVER_URL}],
   tools: [

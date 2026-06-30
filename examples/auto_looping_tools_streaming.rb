@@ -42,7 +42,7 @@ pp(Calculator)
 puts "---- the runner will keep calling the tools given until there is no more tool calls required ----\n"
 
 client.beta.messages.tool_runner(
-  model: "claude-sonnet-4-5-20250929",
+  model: "claude-sonnet-5",
   max_tokens: 1024,
   messages: [
     {

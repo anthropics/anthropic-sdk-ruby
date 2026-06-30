@@ -14,7 +14,7 @@ client = Anthropic::Client.new
 
 begin
   stream = client.messages.stream(
-    model: :"claude-sonnet-4-5-20250929",
+    model: :"claude-sonnet-5",
     max_tokens: 1024,
     messages: [{role: :user, content: "Hello"}]
   )

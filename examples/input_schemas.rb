@@ -63,7 +63,7 @@ begin
   anthropic = Anthropic::Client.new
 
   message = anthropic.messages.create(
-    model: "claude-sonnet-4-5-20250929",
+    model: "claude-sonnet-5",
     max_tokens: 1024,
     tools: [FlightSearch],
     messages: [

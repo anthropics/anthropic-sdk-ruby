@@ -12,7 +12,7 @@ environment = client.beta.environments.create(name: "simple-example-environment"
 puts "Created environment: #{environment.id}"
 
 # Create an agent
-agent = client.beta.agents.create(name: "simple-example-agent", model: "claude-sonnet-4-6")
+agent = client.beta.agents.create(name: "simple-example-agent", model: "claude-sonnet-5")
 puts "Created agent: #{agent.id}"
 
 # Create a session pinned to the agent version
