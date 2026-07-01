@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.54.1 (2026-07-01)
+
+Full Changelog: [v1.54.0...v1.54.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.54.0...v1.54.1)
+
+### Chores
+
+* **api:** remove some nonfunctional types from the SDKs ([5373b7c](https://github.com/anthropics/anthropic-sdk-ruby/commit/5373b7c4d649eaa65ce3c282d31bef94018ec967))
+
 ## 1.54.0 (2026-07-01)
 
 Full Changelog: [v1.53.0...v1.54.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.53.0...v1.54.0)
