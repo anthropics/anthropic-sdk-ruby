@@ -54,6 +54,12 @@ module Anthropic
     sig { returns(T.nilable(Anthropic::Middleware::EntryOrArray)) }
     attr_accessor :middleware
 
+    # Shared {Anthropic::BetaFallbackState} for
+    # {Anthropic::BetaRefusalFallbackMiddleware}. Requests that pass the same
+    # instance start at the fallback the previous refusal pinned.
+    sig { returns(T.nilable(Anthropic::BetaFallbackState)) }
+    attr_accessor :fallback_state
+
     # Returns a new instance of RequestOptions.
     sig do
       params(values: Anthropic::Internal::AnyHash).returns(T.attached_class)

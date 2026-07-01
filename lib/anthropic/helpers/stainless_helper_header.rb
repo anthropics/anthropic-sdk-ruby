@@ -17,6 +17,7 @@ module Anthropic
       # telemetry consumers match on them, so renames lose history. New tags are
       # hyphenated lowercase.
       BETA_TOOL_RUNNER = "BetaToolRunner"
+      FALLBACK_REFUSAL_MIDDLEWARE = "fallback-refusal-middleware"
 
       class << self
         # The {HEADER} value to set after appending `value` to whatever is
