@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.54.0 (2026-07-01)
+
+Full Changelog: [v1.53.0...v1.54.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.53.0...v1.54.0)
+
+### Features
+
+* **client:** add client-side fallbacks middleware for API providers that do not support server-side fallbacks ([#35](https://github.com/anthropics/anthropic-sdk-ruby/issues/35)) ([880a6b9](https://github.com/anthropics/anthropic-sdk-ruby/commit/880a6b9ec0482540da338cc3afb6fdb82eca887f))
+
 ## 1.53.0 (2026-06-30)
 
 Full Changelog: [v1.52.0...v1.53.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.52.0...v1.53.0)
