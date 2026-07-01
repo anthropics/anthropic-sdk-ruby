@@ -46,14 +46,7 @@ module Anthropic
               Anthropic::Beta::BetaWebhookDeploymentArchivedEventData,
               Anthropic::Beta::BetaWebhookDeploymentRunStartedEventData,
               Anthropic::Beta::BetaWebhookDeploymentDeletedEventData,
-              Anthropic::Beta::BetaWebhookDeploymentRunSucceededEventData,
-              Anthropic::Beta::BetaWebhookEnvironmentCreatedEventData,
-              Anthropic::Beta::BetaWebhookEnvironmentUpdatedEventData,
-              Anthropic::Beta::BetaWebhookEnvironmentArchivedEventData,
-              Anthropic::Beta::BetaWebhookEnvironmentDeletedEventData,
-              Anthropic::Beta::BetaWebhookMemoryStoreCreatedEventData,
-              Anthropic::Beta::BetaWebhookMemoryStoreArchivedEventData,
-              Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData
+              Anthropic::Beta::BetaWebhookDeploymentRunSucceededEventData
             )
           end
 

@@ -15,13 +15,17 @@ module Anthropic
           required :memory_store_id, String
 
           # @!attribute depth
-          #   Query parameter for depth
+          #   `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1`
+          #   returns immediate children only; deeper entries roll up as `memory_prefix`
+          #   items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
           #
           #   @return [Integer, nil]
           optional :depth, Integer
 
           # @!attribute limit
-          #   Query parameter for limit
+          #   Maximum number of items to return per page. Must be between 1 and 100. Defaults
+          #   to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and
+          #   `memory_prefix` items count toward the limit.
           #
           #   @return [Integer, nil]
           optional :limit, Integer
@@ -39,21 +43,24 @@ module Anthropic
           optional :order_by, String
 
           # @!attribute page
-          #   Query parameter for page
+          #   Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a
+          #   previous response to fetch the next page; omit for the first page.
           #
           #   @return [String, nil]
           optional :page, String
 
           # @!attribute path_prefix
-          #   Optional path prefix filter (raw string-prefix match; include a trailing slash
-          #   for directory-scoped lists). This value appears in request URLs. Do not include
-          #   secrets or personally identifiable information.
+          #   Optional path prefix filter. Must end with `/` (segment-aligned), e.g.,
+          #   `/notes/`. This value appears in request URLs. Do not include secrets or
+          #   personally identifiable information.
           #
           #   @return [String, nil]
           optional :path_prefix, String
 
           # @!attribute view
-          #   Query parameter for view
+          #   Which projection of each `memory` to return. Defaults to `basic` (content
+          #   omitted). `full` populates `content` on each item and caps `limit` at 20; use
+          #   this as the bulk-read path for export and sync.
           #
           #   @return [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView, nil]
           optional :view, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryView }
@@ -70,19 +77,19 @@ module Anthropic
           #
           #   @param memory_store_id [String]
           #
-          #   @param depth [Integer] Query parameter for depth
+          #   @param depth [Integer] `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` re
           #
-          #   @param limit [Integer] Query parameter for limit
+          #   @param limit [Integer] Maximum number of items to return per page. Must be between 1 and 100. Defaults
           #
           #   @param order [Symbol, Anthropic::Models::Beta::MemoryStores::MemoryListParams::Order] Query parameter for order
           #
           #   @param order_by [String] Query parameter for order_by
           #
-          #   @param page [String] Query parameter for page
+          #   @param page [String] Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a
           #
-          #   @param path_prefix [String] Optional path prefix filter (raw string-prefix match; include a trailing slash f
+          #   @param path_prefix [String] Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/
           #
-          #   @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query parameter for view
+          #   @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Which projection of each `memory` to return. Defaults to `basic` (content omitte
           #
           #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #

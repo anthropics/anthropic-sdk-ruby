@@ -83,11 +83,6 @@ module Anthropic
             :reasoning_extraction,
             Anthropic::RefusalStopDetails::Category::TaggedSymbol
           )
-        MILITARY_WEAPONS =
-          T.let(
-            :military_weapons,
-            Anthropic::RefusalStopDetails::Category::TaggedSymbol
-          )
 
         sig do
           override.returns(

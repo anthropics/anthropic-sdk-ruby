@@ -49,11 +49,6 @@ module Anthropic
           sig { returns(T::Hash[Symbol, String]) }
           attr_accessor :metadata
 
-          # Credential payload used by the environment worker to execute this work item. May
-          # be populated when polling for work; null on all other retrieval paths.
-          sig { returns(T.nilable(String)) }
-          attr_accessor :secret
-
           # RFC 3339 timestamp when work execution started
           sig { returns(T.nilable(String)) }
           attr_accessor :started_at
@@ -92,7 +87,6 @@ module Anthropic
               environment_id: String,
               latest_heartbeat_at: T.nilable(String),
               metadata: T::Hash[Symbol, String],
-              secret: T.nilable(String),
               started_at: T.nilable(String),
               state:
                 Anthropic::Beta::Environments::BetaSelfHostedWork::State::OrSymbol,
@@ -117,9 +111,6 @@ module Anthropic
             latest_heartbeat_at:,
             # User-provided metadata key-value pairs associated with this work item
             metadata:,
-            # Credential payload used by the environment worker to execute this work item. May
-            # be populated when polling for work; null on all other retrieval paths.
-            secret:,
             # RFC 3339 timestamp when work execution started
             started_at:,
             # Current state of the work item
@@ -143,7 +134,6 @@ module Anthropic
                 environment_id: String,
                 latest_heartbeat_at: T.nilable(String),
                 metadata: T::Hash[Symbol, String],
-                secret: T.nilable(String),
                 started_at: T.nilable(String),
                 state:
                   Anthropic::Beta::Environments::BetaSelfHostedWork::State::TaggedSymbol,

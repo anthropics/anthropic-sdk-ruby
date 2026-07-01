@@ -3,8 +3,8 @@
 require_relative "../../test_helper"
 
 class Anthropic::Test::Resources::Beta::SkillsTest < Anthropic::Test::ResourceTest
-  def test_create
-    response = @anthropic.beta.skills.create
+  def test_create_required_params
+    response = @anthropic.beta.skills.create(files: [StringIO.new("Example data")])
 
     assert_pattern do
       response => Anthropic::Models::Beta::SkillCreateResponse

@@ -5,7 +5,7 @@ module Anthropic
         type version_create_params =
           {
             skill_id: String,
-            files: ::Array[Anthropic::Internal::file_input]?,
+            files: ::Array[Anthropic::Internal::file_input],
             betas: ::Array[Anthropic::Models::anthropic_beta]
           }
           & Anthropic::Internal::Type::request_parameters
@@ -16,7 +16,7 @@ module Anthropic
 
           attr_accessor skill_id: String
 
-          attr_accessor files: ::Array[Anthropic::Internal::file_input]?
+          attr_accessor files: ::Array[Anthropic::Internal::file_input]
 
           attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
@@ -26,14 +26,14 @@ module Anthropic
 
           def initialize: (
             skill_id: String,
-            ?files: ::Array[Anthropic::Internal::file_input]?,
+            files: ::Array[Anthropic::Internal::file_input],
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> void
 
           def to_hash: -> {
             skill_id: String,
-            files: ::Array[Anthropic::Internal::file_input]?,
+            files: ::Array[Anthropic::Internal::file_input],
             betas: ::Array[Anthropic::Models::anthropic_beta],
             request_options: Anthropic::RequestOptions
           }

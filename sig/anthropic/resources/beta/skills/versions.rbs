@@ -5,7 +5,7 @@ module Anthropic
         class Versions
           def create: (
             String skill_id,
-            ?files: ::Array[Anthropic::Internal::file_input]?,
+            files: ::Array[Anthropic::Internal::file_input],
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Models::Beta::Skills::VersionCreateResponse

@@ -8,6 +8,15 @@ module Anthropic
         extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
+        # @!attribute files
+        #   Files to upload for the skill.
+        #
+        #   All files must be in the same top-level directory and must include a SKILL.md
+        #   file at the root of that directory.
+        #
+        #   @return [Array<Pathname, StringIO, IO, String, Anthropic::FilePart>]
+        required :files, Anthropic::Internal::Type::ArrayOf[Anthropic::Internal::Type::FileInput]
+
         # @!attribute display_title
         #   Display title for the skill.
         #
@@ -17,28 +26,19 @@ module Anthropic
         #   @return [String, nil]
         optional :display_title, String, nil?: true
 
-        # @!attribute files
-        #   Files to upload for the skill.
-        #
-        #   All files must be in the same top-level directory and must include a SKILL.md
-        #   file at the root of that directory.
-        #
-        #   @return [Array<Pathname, StringIO, IO, String, Anthropic::FilePart>, nil]
-        optional :files, Anthropic::Internal::Type::ArrayOf[Anthropic::Internal::Type::FileInput], nil?: true
-
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(display_title: nil, files: nil, betas: nil, request_options: {})
+        # @!method initialize(files:, display_title: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::SkillCreateParams} for more details.
         #
-        #   @param display_title [String, nil] Display title for the skill.
+        #   @param files [Array<Pathname, StringIO, IO, String, Anthropic::FilePart>] Files to upload for the skill.
         #
-        #   @param files [Array<Pathname, StringIO, IO, String, Anthropic::FilePart>, nil] Files to upload for the skill.
+        #   @param display_title [String, nil] Display title for the skill.
         #
         #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
