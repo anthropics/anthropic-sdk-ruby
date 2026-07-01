@@ -26,7 +26,7 @@ module Anthropic
           #
           # All files must be in the same top-level directory and must include a SKILL.md
           # file at the root of that directory.
-          sig { returns(T.nilable(T::Array[Anthropic::Internal::FileInput])) }
+          sig { returns(T::Array[Anthropic::Internal::FileInput]) }
           attr_accessor :files
 
           # Optional header to specify the beta version(s) you want to use.
@@ -49,7 +49,7 @@ module Anthropic
           sig do
             params(
               skill_id: String,
-              files: T.nilable(T::Array[Anthropic::Internal::FileInput]),
+              files: T::Array[Anthropic::Internal::FileInput],
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               request_options: Anthropic::RequestOptions::OrHash
@@ -64,7 +64,7 @@ module Anthropic
             #
             # All files must be in the same top-level directory and must include a SKILL.md
             # file at the root of that directory.
-            files: nil,
+            files:,
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,
             request_options: {}
@@ -75,7 +75,7 @@ module Anthropic
             override.returns(
               {
                 skill_id: String,
-                files: T.nilable(T::Array[Anthropic::Internal::FileInput]),
+                files: T::Array[Anthropic::Internal::FileInput],
                 betas:
                   T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
                 request_options: Anthropic::RequestOptions

@@ -19,14 +19,18 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :memory_store_id
 
-          # Query parameter for depth
+          # `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1`
+          # returns immediate children only; deeper entries roll up as `memory_prefix`
+          # items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
           sig { returns(T.nilable(Integer)) }
           attr_reader :depth
 
           sig { params(depth: Integer).void }
           attr_writer :depth
 
-          # Query parameter for limit
+          # Maximum number of items to return per page. Must be between 1 and 100. Defaults
+          # to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and
+          # `memory_prefix` items count toward the limit.
           sig { returns(T.nilable(Integer)) }
           attr_reader :limit
 
@@ -58,23 +62,26 @@ module Anthropic
           sig { params(order_by: String).void }
           attr_writer :order_by
 
-          # Query parameter for page
+          # Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a
+          # previous response to fetch the next page; omit for the first page.
           sig { returns(T.nilable(String)) }
           attr_reader :page
 
           sig { params(page: String).void }
           attr_writer :page
 
-          # Optional path prefix filter (raw string-prefix match; include a trailing slash
-          # for directory-scoped lists). This value appears in request URLs. Do not include
-          # secrets or personally identifiable information.
+          # Optional path prefix filter. Must end with `/` (segment-aligned), e.g.,
+          # `/notes/`. This value appears in request URLs. Do not include secrets or
+          # personally identifiable information.
           sig { returns(T.nilable(String)) }
           attr_reader :path_prefix
 
           sig { params(path_prefix: String).void }
           attr_writer :path_prefix
 
-          # Query parameter for view
+          # Which projection of each `memory` to return. Defaults to `basic` (content
+          # omitted). `full` populates `content` on each item and caps `limit` at 20; use
+          # this as the bulk-read path for export and sync.
           sig do
             returns(
               T.nilable(
@@ -128,21 +135,28 @@ module Anthropic
           end
           def self.new(
             memory_store_id:,
-            # Query parameter for depth
+            # `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1`
+            # returns immediate children only; deeper entries roll up as `memory_prefix`
+            # items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
             depth: nil,
-            # Query parameter for limit
+            # Maximum number of items to return per page. Must be between 1 and 100. Defaults
+            # to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and
+            # `memory_prefix` items count toward the limit.
             limit: nil,
             # Query parameter for order
             order: nil,
             # Query parameter for order_by
             order_by: nil,
-            # Query parameter for page
+            # Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a
+            # previous response to fetch the next page; omit for the first page.
             page: nil,
-            # Optional path prefix filter (raw string-prefix match; include a trailing slash
-            # for directory-scoped lists). This value appears in request URLs. Do not include
-            # secrets or personally identifiable information.
+            # Optional path prefix filter. Must end with `/` (segment-aligned), e.g.,
+            # `/notes/`. This value appears in request URLs. Do not include secrets or
+            # personally identifiable information.
             path_prefix: nil,
-            # Query parameter for view
+            # Which projection of each `memory` to return. Defaults to `basic` (content
+            # omitted). `full` populates `content` on each item and caps `limit` at 20; use
+            # this as the bulk-read path for export and sync.
             view: nil,
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,

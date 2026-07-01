@@ -5,8 +5,8 @@ module Anthropic
         attr_reader versions: Anthropic::Resources::Beta::Skills::Versions
 
         def create: (
+          files: ::Array[Anthropic::Internal::file_input],
           ?display_title: String?,
-          ?files: ::Array[Anthropic::Internal::file_input]?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Models::Beta::SkillCreateResponse

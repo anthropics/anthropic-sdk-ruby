@@ -12,11 +12,11 @@ module Anthropic
         #
         # Create Skill
         #
-        # @overload create(display_title: nil, files: nil, betas: nil, request_options: {})
+        # @overload create(files:, display_title: nil, betas: nil, request_options: {})
+        #
+        # @param files [Array<Pathname, StringIO, IO, String, Anthropic::FilePart>] Body param: Files to upload for the skill.
         #
         # @param display_title [String, nil] Body param: Display title for the skill.
-        #
-        # @param files [Array<Pathname, StringIO, IO, String, Anthropic::FilePart>, nil] Body param: Files to upload for the skill.
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
@@ -25,7 +25,7 @@ module Anthropic
         # @return [Anthropic::Models::Beta::SkillCreateResponse]
         #
         # @see Anthropic::Models::Beta::SkillCreateParams
-        def create(params = {})
+        def create(params)
           parsed, options = Anthropic::Beta::SkillCreateParams.dump_request(params)
           header_params = {betas: "anthropic-beta"}
           @client.request(

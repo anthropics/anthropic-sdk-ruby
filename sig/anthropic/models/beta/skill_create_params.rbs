@@ -3,8 +3,8 @@ module Anthropic
     module Beta
       type skill_create_params =
         {
+          files: ::Array[Anthropic::Internal::file_input],
           display_title: String?,
-          files: ::Array[Anthropic::Internal::file_input]?,
           betas: ::Array[Anthropic::Models::anthropic_beta]
         }
         & Anthropic::Internal::Type::request_parameters
@@ -13,9 +13,9 @@ module Anthropic
         extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
-        attr_accessor display_title: String?
+        attr_accessor files: ::Array[Anthropic::Internal::file_input]
 
-        attr_accessor files: ::Array[Anthropic::Internal::file_input]?
+        attr_accessor display_title: String?
 
         attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
@@ -24,15 +24,15 @@ module Anthropic
         ) -> ::Array[Anthropic::Models::anthropic_beta]
 
         def initialize: (
+          files: ::Array[Anthropic::Internal::file_input],
           ?display_title: String?,
-          ?files: ::Array[Anthropic::Internal::file_input]?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> void
 
         def to_hash: -> {
+          files: ::Array[Anthropic::Internal::file_input],
           display_title: String?,
-          files: ::Array[Anthropic::Internal::file_input]?,
           betas: ::Array[Anthropic::Models::anthropic_beta],
           request_options: Anthropic::RequestOptions
         }

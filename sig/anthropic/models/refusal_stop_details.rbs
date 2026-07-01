@@ -26,12 +26,7 @@ module Anthropic
         type: :refusal
       }
 
-      type category =
-        :cyber
-        | :bio
-        | :frontier_llm
-        | :reasoning_extraction
-        | :military_weapons
+      type category = :cyber | :bio | :frontier_llm | :reasoning_extraction
 
       module Category
         extend Anthropic::Internal::Type::Enum
@@ -40,7 +35,6 @@ module Anthropic
         BIO: :bio
         FRONTIER_LLM: :frontier_llm
         REASONING_EXTRACTION: :reasoning_extraction
-        MILITARY_WEAPONS: :military_weapons
 
         def self?.values: -> ::Array[Anthropic::Models::RefusalStopDetails::category]
       end

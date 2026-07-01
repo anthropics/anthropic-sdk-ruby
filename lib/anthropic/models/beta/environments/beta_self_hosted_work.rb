@@ -49,13 +49,6 @@ module Anthropic
           #   @return [Hash{Symbol=>String}]
           required :metadata, Anthropic::Internal::Type::HashOf[String]
 
-          # @!attribute secret
-          #   Credential payload used by the environment worker to execute this work item. May
-          #   be populated when polling for work; null on all other retrieval paths.
-          #
-          #   @return [String, nil]
-          required :secret, String, nil?: true
-
           # @!attribute started_at
           #   RFC 3339 timestamp when work execution started
           #
@@ -86,7 +79,7 @@ module Anthropic
           #   @return [Symbol, :work]
           required :type, const: :work
 
-          # @!method initialize(id:, acknowledged_at:, created_at:, data:, environment_id:, latest_heartbeat_at:, metadata:, secret:, started_at:, state:, stop_requested_at:, stopped_at:, type: :work)
+          # @!method initialize(id:, acknowledged_at:, created_at:, data:, environment_id:, latest_heartbeat_at:, metadata:, started_at:, state:, stop_requested_at:, stopped_at:, type: :work)
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Environments::BetaSelfHostedWork} for more details.
           #
@@ -109,8 +102,6 @@ module Anthropic
           #   @param latest_heartbeat_at [String, nil] RFC 3339 timestamp of the most recent heartbeat
           #
           #   @param metadata [Hash{Symbol=>String}] User-provided metadata key-value pairs associated with this work item
-          #
-          #   @param secret [String, nil] Credential payload used by the environment worker to execute this work item. May
           #
           #   @param started_at [String, nil] RFC 3339 timestamp when work execution started
           #

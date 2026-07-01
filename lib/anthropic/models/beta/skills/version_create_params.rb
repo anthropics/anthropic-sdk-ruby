@@ -23,10 +23,8 @@ module Anthropic
           #   All files must be in the same top-level directory and must include a SKILL.md
           #   file at the root of that directory.
           #
-          #   @return [Array<Pathname, StringIO, IO, String, Anthropic::FilePart>, nil]
-          optional :files,
-                   Anthropic::Internal::Type::ArrayOf[Anthropic::Internal::Type::FileInput],
-                   nil?: true
+          #   @return [Array<Pathname, StringIO, IO, String, Anthropic::FilePart>]
+          required :files, Anthropic::Internal::Type::ArrayOf[Anthropic::Internal::Type::FileInput]
 
           # @!attribute betas
           #   Optional header to specify the beta version(s) you want to use.
@@ -34,13 +32,13 @@ module Anthropic
           #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-          # @!method initialize(skill_id:, files: nil, betas: nil, request_options: {})
+          # @!method initialize(skill_id:, files:, betas: nil, request_options: {})
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Skills::VersionCreateParams} for more details.
           #
           #   @param skill_id [String] Unique identifier for the skill.
           #
-          #   @param files [Array<Pathname, StringIO, IO, String, Anthropic::FilePart>, nil] Files to upload for the skill.
+          #   @param files [Array<Pathname, StringIO, IO, String, Anthropic::FilePart>] Files to upload for the skill.
           #
           #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #

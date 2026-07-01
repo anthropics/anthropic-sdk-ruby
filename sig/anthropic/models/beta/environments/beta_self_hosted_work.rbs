@@ -11,7 +11,6 @@ module Anthropic
             environment_id: String,
             latest_heartbeat_at: String?,
             metadata: ::Hash[Symbol, String],
-            secret: String?,
             started_at: String?,
             state: Anthropic::Models::Beta::Environments::BetaSelfHostedWork::state,
             stop_requested_at: String?,
@@ -34,8 +33,6 @@ module Anthropic
 
           attr_accessor metadata: ::Hash[Symbol, String]
 
-          attr_accessor secret: String?
-
           attr_accessor started_at: String?
 
           attr_accessor state: Anthropic::Models::Beta::Environments::BetaSelfHostedWork::state
@@ -54,7 +51,6 @@ module Anthropic
             environment_id: String,
             latest_heartbeat_at: String?,
             metadata: ::Hash[Symbol, String],
-            secret: String?,
             started_at: String?,
             state: Anthropic::Models::Beta::Environments::BetaSelfHostedWork::state,
             stop_requested_at: String?,
@@ -70,7 +66,6 @@ module Anthropic
             environment_id: String,
             latest_heartbeat_at: String?,
             metadata: ::Hash[Symbol, String],
-            secret: String?,
             started_at: String?,
             state: Anthropic::Models::Beta::Environments::BetaSelfHostedWork::state,
             stop_requested_at: String?,

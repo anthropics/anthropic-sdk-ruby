@@ -133,19 +133,19 @@ module Anthropic
           #
           # @param memory_store_id [String] Path param: Path parameter memory_store_id
           #
-          # @param depth [Integer] Query param: Query parameter for depth
+          # @param depth [Integer] Query param: `0` (or omitted) returns all descendants below `path_prefix` (recur
           #
-          # @param limit [Integer] Query param: Query parameter for limit
+          # @param limit [Integer] Query param: Maximum number of items to return per page. Must be between 1 and 1
           #
           # @param order [Symbol, Anthropic::Models::Beta::MemoryStores::MemoryListParams::Order] Query param: Query parameter for order
           #
           # @param order_by [String] Query param: Query parameter for order_by
           #
-          # @param page [String] Query param: Query parameter for page
+          # @param page [String] Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page`
           #
-          # @param path_prefix [String] Query param: Optional path prefix filter (raw string-prefix match; include a tra
+          # @param path_prefix [String] Query param: Optional path prefix filter. Must end with `/` (segment-aligned), e
           #
-          # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Query parameter for view
+          # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Which projection of each `memory` to return. Defaults to `basic` (c
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
