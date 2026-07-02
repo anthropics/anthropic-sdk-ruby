@@ -6,7 +6,7 @@ module Anthropic
       class BetaManagedAgentsCustomToolParams < Anthropic::Internal::Type::BaseModel
         # @!attribute description
         #   Description of what the tool does, shown to the agent to help it decide when to
-        #   use the tool. 1-1024 characters.
+        #   use the tool. 1-4096 characters.
         #
         #   @return [String]
         required :description, String
