@@ -40,7 +40,7 @@ module Anthropic
               query: query,
               headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
               model: Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion,
-              options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
+              options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
             )
           end
 
@@ -100,7 +100,7 @@ module Anthropic
               headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
               page: Anthropic::Internal::PageCursor,
               model: Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion,
-              options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
+              options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
             )
           end
 
@@ -134,7 +134,7 @@ module Anthropic
               ],
               headers: parsed.transform_keys(betas: "anthropic-beta"),
               model: Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion,
-              options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
+              options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
             )
           end
 

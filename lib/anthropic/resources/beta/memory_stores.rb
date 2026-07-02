@@ -39,7 +39,7 @@ module Anthropic
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
             model: Anthropic::Beta::BetaManagedAgentsMemoryStore,
-            options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
+            options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
           )
         end
 
@@ -63,7 +63,7 @@ module Anthropic
             path: ["v1/memory_stores/%1$s?beta=true", memory_store_id],
             headers: parsed.transform_keys(betas: "anthropic-beta"),
             model: Anthropic::Beta::BetaManagedAgentsMemoryStore,
-            options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
+            options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
           )
         end
 
@@ -98,7 +98,7 @@ module Anthropic
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
             model: Anthropic::Beta::BetaManagedAgentsMemoryStore,
-            options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
+            options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
           )
         end
 
@@ -137,7 +137,7 @@ module Anthropic
             headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
             page: Anthropic::Internal::PageCursor,
             model: Anthropic::Beta::BetaManagedAgentsMemoryStore,
-            options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
+            options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
           )
         end
 
@@ -161,7 +161,7 @@ module Anthropic
             path: ["v1/memory_stores/%1$s?beta=true", memory_store_id],
             headers: parsed.transform_keys(betas: "anthropic-beta"),
             model: Anthropic::Beta::BetaManagedAgentsDeletedMemoryStore,
-            options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
+            options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
           )
         end
 
@@ -185,7 +185,7 @@ module Anthropic
             path: ["v1/memory_stores/%1$s/archive?beta=true", memory_store_id],
             headers: parsed.transform_keys(betas: "anthropic-beta"),
             model: Anthropic::Beta::BetaManagedAgentsMemoryStore,
-            options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
+            options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
           )
         end
 

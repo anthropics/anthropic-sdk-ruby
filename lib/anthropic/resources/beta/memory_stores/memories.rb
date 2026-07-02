@@ -39,7 +39,7 @@ module Anthropic
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*query_params, *header_params.keys),
               model: Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory,
-              options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
+              options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
             )
           end
 
@@ -74,7 +74,7 @@ module Anthropic
               query: query,
               headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
               model: Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory,
-              options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
+              options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
             )
           end
 
@@ -120,7 +120,7 @@ module Anthropic
               headers: parsed.slice(*header_params.keys).transform_keys(header_params),
               body: parsed.except(*query_params, *header_params.keys),
               model: Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory,
-              options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
+              options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
             )
           end
 
@@ -129,17 +129,13 @@ module Anthropic
           #
           # List memories
           #
-          # @overload list(memory_store_id, depth: nil, limit: nil, order: nil, order_by: nil, page: nil, path_prefix: nil, view: nil, betas: nil, request_options: {})
+          # @overload list(memory_store_id, depth: nil, limit: nil, page: nil, path_prefix: nil, view: nil, betas: nil, request_options: {})
           #
           # @param memory_store_id [String] Path param: Path parameter memory_store_id
           #
           # @param depth [Integer] Query param: `0` (or omitted) returns all descendants below `path_prefix` (recur
           #
           # @param limit [Integer] Query param: Maximum number of items to return per page. Must be between 1 and 1
-          #
-          # @param order [Symbol, Anthropic::Models::Beta::MemoryStores::MemoryListParams::Order] Query param: Query parameter for order
-          #
-          # @param order_by [String] Query param: Query parameter for order_by
           #
           # @param page [String] Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page`
           #
@@ -155,7 +151,7 @@ module Anthropic
           #
           # @see Anthropic::Models::Beta::MemoryStores::MemoryListParams
           def list(memory_store_id, params = {})
-            query_params = [:depth, :limit, :order, :order_by, :page, :path_prefix, :view]
+            query_params = [:depth, :limit, :page, :path_prefix, :view]
             parsed, options = Anthropic::Beta::MemoryStores::MemoryListParams.dump_request(params)
             query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
             @client.request(
@@ -165,7 +161,7 @@ module Anthropic
               headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
               page: Anthropic::Internal::PageCursor,
               model: Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryListItem,
-              options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
+              options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
             )
           end
 
@@ -200,7 +196,7 @@ module Anthropic
               query: query,
               headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
               model: Anthropic::Beta::MemoryStores::BetaManagedAgentsDeletedMemory,
-              options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
+              options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
             )
           end
 
