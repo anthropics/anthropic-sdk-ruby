@@ -128,6 +128,11 @@ module Anthropic
           :"fallback-credit-2026-06-01",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      AGENT_MEMORY_2026_07_22 =
+        T.let(
+          :"agent-memory-2026-07-22",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
     end
   end
 end

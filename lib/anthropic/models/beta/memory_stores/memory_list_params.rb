@@ -30,18 +30,6 @@ module Anthropic
           #   @return [Integer, nil]
           optional :limit, Integer
 
-          # @!attribute order
-          #   Query parameter for order
-          #
-          #   @return [Symbol, Anthropic::Models::Beta::MemoryStores::MemoryListParams::Order, nil]
-          optional :order, enum: -> { Anthropic::Beta::MemoryStores::MemoryListParams::Order }
-
-          # @!attribute order_by
-          #   Query parameter for order_by
-          #
-          #   @return [String, nil]
-          optional :order_by, String
-
           # @!attribute page
           #   Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a
           #   previous response to fetch the next page; omit for the first page.
@@ -71,7 +59,7 @@ module Anthropic
           #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-          # @!method initialize(memory_store_id:, depth: nil, limit: nil, order: nil, order_by: nil, page: nil, path_prefix: nil, view: nil, betas: nil, request_options: {})
+          # @!method initialize(memory_store_id:, depth: nil, limit: nil, page: nil, path_prefix: nil, view: nil, betas: nil, request_options: {})
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::MemoryStores::MemoryListParams} for more details.
           #
@@ -80,10 +68,6 @@ module Anthropic
           #   @param depth [Integer] `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` re
           #
           #   @param limit [Integer] Maximum number of items to return per page. Must be between 1 and 100. Defaults
-          #
-          #   @param order [Symbol, Anthropic::Models::Beta::MemoryStores::MemoryListParams::Order] Query parameter for order
-          #
-          #   @param order_by [String] Query parameter for order_by
           #
           #   @param page [String] Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a
           #
@@ -94,17 +78,6 @@ module Anthropic
           #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
-
-          # Query parameter for order
-          module Order
-            extend Anthropic::Internal::Type::Enum
-
-            ASC = :asc
-            DESC = :desc
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
         end
       end
     end

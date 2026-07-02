@@ -37,31 +37,6 @@ module Anthropic
           sig { params(limit: Integer).void }
           attr_writer :limit
 
-          # Query parameter for order
-          sig do
-            returns(
-              T.nilable(
-                Anthropic::Beta::MemoryStores::MemoryListParams::Order::OrSymbol
-              )
-            )
-          end
-          attr_reader :order
-
-          sig do
-            params(
-              order:
-                Anthropic::Beta::MemoryStores::MemoryListParams::Order::OrSymbol
-            ).void
-          end
-          attr_writer :order
-
-          # Query parameter for order_by
-          sig { returns(T.nilable(String)) }
-          attr_reader :order_by
-
-          sig { params(order_by: String).void }
-          attr_writer :order_by
-
           # Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a
           # previous response to fetch the next page; omit for the first page.
           sig { returns(T.nilable(String)) }
@@ -121,9 +96,6 @@ module Anthropic
               memory_store_id: String,
               depth: Integer,
               limit: Integer,
-              order:
-                Anthropic::Beta::MemoryStores::MemoryListParams::Order::OrSymbol,
-              order_by: String,
               page: String,
               path_prefix: String,
               view:
@@ -143,10 +115,6 @@ module Anthropic
             # to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and
             # `memory_prefix` items count toward the limit.
             limit: nil,
-            # Query parameter for order
-            order: nil,
-            # Query parameter for order_by
-            order_by: nil,
             # Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a
             # previous response to fetch the next page; omit for the first page.
             page: nil,
@@ -170,9 +138,6 @@ module Anthropic
                 memory_store_id: String,
                 depth: Integer,
                 limit: Integer,
-                order:
-                  Anthropic::Beta::MemoryStores::MemoryListParams::Order::OrSymbol,
-                order_by: String,
                 page: String,
                 path_prefix: String,
                 view:
@@ -184,41 +149,6 @@ module Anthropic
             )
           end
           def to_hash
-          end
-
-          # Query parameter for order
-          module Order
-            extend Anthropic::Internal::Type::Enum
-
-            TaggedSymbol =
-              T.type_alias do
-                T.all(
-                  Symbol,
-                  Anthropic::Beta::MemoryStores::MemoryListParams::Order
-                )
-              end
-            OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-            ASC =
-              T.let(
-                :asc,
-                Anthropic::Beta::MemoryStores::MemoryListParams::Order::TaggedSymbol
-              )
-            DESC =
-              T.let(
-                :desc,
-                Anthropic::Beta::MemoryStores::MemoryListParams::Order::TaggedSymbol
-              )
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::MemoryStores::MemoryListParams::Order::TaggedSymbol
-                ]
-              )
-            end
-            def self.values
-            end
           end
         end
       end

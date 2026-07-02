@@ -113,9 +113,6 @@ module Anthropic
               memory_store_id: String,
               depth: Integer,
               limit: Integer,
-              order:
-                Anthropic::Beta::MemoryStores::MemoryListParams::Order::OrSymbol,
-              order_by: String,
               page: String,
               path_prefix: String,
               view:
@@ -141,10 +138,6 @@ module Anthropic
             # and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both
             # `memory` and `memory_prefix` items count toward the limit.
             limit: nil,
-            # Query param: Query parameter for order
-            order: nil,
-            # Query param: Query parameter for order_by
-            order_by: nil,
             # Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page`
             # value from a previous response to fetch the next page; omit for the first page.
             page: nil,

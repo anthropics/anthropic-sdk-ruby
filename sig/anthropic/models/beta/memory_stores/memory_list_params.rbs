@@ -7,8 +7,6 @@ module Anthropic
             memory_store_id: String,
             depth: Integer,
             limit: Integer,
-            order: Anthropic::Models::Beta::MemoryStores::MemoryListParams::order,
-            order_by: String,
             page: String,
             path_prefix: String,
             view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
@@ -29,16 +27,6 @@ module Anthropic
           attr_reader limit: Integer?
 
           def limit=: (Integer) -> Integer
-
-          attr_reader order: Anthropic::Models::Beta::MemoryStores::MemoryListParams::order?
-
-          def order=: (
-            Anthropic::Models::Beta::MemoryStores::MemoryListParams::order
-          ) -> Anthropic::Models::Beta::MemoryStores::MemoryListParams::order
-
-          attr_reader order_by: String?
-
-          def order_by=: (String) -> String
 
           attr_reader page: String?
 
@@ -64,8 +52,6 @@ module Anthropic
             memory_store_id: String,
             ?depth: Integer,
             ?limit: Integer,
-            ?order: Anthropic::Models::Beta::MemoryStores::MemoryListParams::order,
-            ?order_by: String,
             ?page: String,
             ?path_prefix: String,
             ?view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
@@ -77,25 +63,12 @@ module Anthropic
             memory_store_id: String,
             depth: Integer,
             limit: Integer,
-            order: Anthropic::Models::Beta::MemoryStores::MemoryListParams::order,
-            order_by: String,
             page: String,
             path_prefix: String,
             view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
             betas: ::Array[Anthropic::Models::anthropic_beta],
             request_options: Anthropic::RequestOptions
           }
-
-          type order = :asc | :desc
-
-          module Order
-            extend Anthropic::Internal::Type::Enum
-
-            ASC: :asc
-            DESC: :desc
-
-            def self?.values: -> ::Array[Anthropic::Models::Beta::MemoryStores::MemoryListParams::order]
-          end
         end
       end
     end
