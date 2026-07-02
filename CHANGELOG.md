@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.55.0 (2026-07-02)
+
+Full Changelog: [v1.54.1...v1.55.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.54.1...v1.55.0)
+
+### Features
+
+* **api:** add agent-memory-2026-07-22 beta header ([c3e9511](https://github.com/anthropics/anthropic-sdk-ruby/commit/c3e9511391e1976a580484e31d6dd2818afecc07))
+
 ## 1.54.1 (2026-07-01)
 
 Full Changelog: [v1.54.0...v1.54.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.54.0...v1.54.1)
