@@ -15,7 +15,7 @@ module Anthropic
           end
 
         # Description of what the tool does, shown to the agent to help it decide when to
-        # use the tool. 1-1024 characters.
+        # use the tool. 1-4096 characters.
         sig { returns(String) }
         attr_accessor :description
 
@@ -59,7 +59,7 @@ module Anthropic
         end
         def self.new(
           # Description of what the tool does, shown to the agent to help it decide when to
-          # use the tool. 1-1024 characters.
+          # use the tool. 1-4096 characters.
           description:,
           # JSON Schema for custom tool input parameters.
           input_schema:,
