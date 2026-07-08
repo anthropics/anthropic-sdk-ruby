@@ -141,6 +141,20 @@ module Anthropic
               content.encrypted_content = delta.encrypted_content
             else
             end
+          in Anthropic::Models::RawContentBlockStopEvent | Anthropic::Models::BetaRawContentBlockStopEvent
+            # The input_json_delta arm above buffers into `input` as a raw String so the
+            # streaming `input_json` events can expose the partial snapshot verbatim; the
+            # finished block must carry the decoded object, as in the non-streaming
+            # message and the other SDKs' accumulators.
+            case current_snapshot.content[event.index]
+            in {type: :tool_use, input: String => raw} => content
+              begin
+                content.input = decode_tool_use_input(raw)
+              rescue JSON::ParserError
+                # malformed complete input JSON from the server: leave the raw buffer
+              end
+            else
+            end
           in Anthropic::Models::RawMessageDeltaEvent | Anthropic::Models::BetaRawMessageDeltaEvent
             current_snapshot.stop_reason = event.delta.stop_reason
             current_snapshot.stop_sequence = event.delta.stop_sequence
@@ -250,6 +264,18 @@ module Anthropic
 
         # @api private
         #
+        # Decodes a tool_use block's buffered partial-JSON input. An empty buffer
+        # means a no-argument tool call, which the wire encodes as an empty object.
+        #
+        # @param raw [String]
+        #
+        # @return [Hash{Symbol=>Object}]
+        private def decode_tool_use_input(raw)
+          raw.empty? ? {} : JSON.parse(raw, symbolize_names: true)
+        end
+
+        # @api private
+        #
         # Parse tool use blocks and text blocks with structured output in the message.
         #
         # @param message [Anthropic::Models::Message] The message to parse
@@ -267,7 +293,7 @@ module Anthropic
               parsed =
                 begin
                   parsed_input = if content.input.is_a?(String)
-                    JSON.parse(content.input, symbolize_names: true)
+                    decode_tool_use_input(content.input)
                   else
                     content.input
                   end

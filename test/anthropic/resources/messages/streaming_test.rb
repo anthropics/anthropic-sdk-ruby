@@ -180,6 +180,95 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
     assert_equal("{\"location\":\"San Francisco\"\"}", json_events.last.snapshot)
   end
 
+  # Valid-JSON twin of tools_sse_response below, whose buffer is deliberately
+  # malformed to pin the verbatim mid-stream snapshot behavior.
+  def tool_input_sse_response
+    <<~SSE
+      event: message_start
+      data: {"type":"message_start","message":{"id":"msg_tool","type":"message","role":"assistant","content":[],"model":"claude-sonnet-4-5-20250929","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":10,"output_tokens":1}}}
+
+      event: content_block_start
+      data: {"type":"content_block_start","index":0,"content_block":{"type":"tool_use","id":"tool_use_1","name":"get_weather","input":{}}}
+
+      event: content_block_delta
+      data: {"type":"content_block_delta","index":0,"delta":{"type":"input_json_delta","partial_json":"{\\"location\\":"}}
+
+      event: content_block_delta
+      data: {"type":"content_block_delta","index":0,"delta":{"type":"input_json_delta","partial_json":"\\"San Francisco\\"}"}}
+
+      event: content_block_stop
+      data: {"type":"content_block_stop","index":0}
+
+      event: message_delta
+      data: {"type":"message_delta","delta":{"stop_reason":"tool_use","stop_sequence":null},"usage":{"output_tokens":10}}
+
+      event: message_stop
+      data: {"type":"message_stop"}
+
+    SSE
+  end
+
+  def test_accumulated_message_decodes_tool_use_input
+    stub_streaming_response(tool_input_sse_response)
+
+    stream = @client.messages.stream(**tools_params)
+
+    message = stream.accumulated_message
+
+    # The finished block carries the decoded object, like the non-streaming
+    # message — not the raw partial-JSON buffer the input_json events expose.
+    assert_pattern do
+      message => {
+        content: [{type: :tool_use, input: {location: "San Francisco"}}]
+      }
+    end
+  end
+
+  def empty_tool_input_sse_response
+    <<~SSE
+      event: message_start
+      data: {"type":"message_start","message":{"id":"msg_tool","type":"message","role":"assistant","content":[],"model":"claude-sonnet-4-5-20250929","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":10,"output_tokens":1}}}
+
+      event: content_block_start
+      data: {"type":"content_block_start","index":0,"content_block":{"type":"tool_use","id":"tool_use_1","name":"get_weather","input":{}}}
+
+      event: content_block_delta
+      data: {"type":"content_block_delta","index":0,"delta":{"type":"input_json_delta","partial_json":""}}
+
+      event: content_block_stop
+      data: {"type":"content_block_stop","index":0}
+
+      event: message_delta
+      data: {"type":"message_delta","delta":{"stop_reason":"tool_use","stop_sequence":null},"usage":{"output_tokens":10}}
+
+      event: message_stop
+      data: {"type":"message_stop"}
+
+    SSE
+  end
+
+  def test_accumulated_message_decodes_empty_tool_use_input_as_empty_object
+    stub_streaming_response(empty_tool_input_sse_response)
+
+    stream = @client.messages.stream(**tools_params)
+
+    message = stream.accumulated_message
+
+    assert_equal({}, message.content.first.input)
+  end
+
+  def test_accumulated_message_keeps_undecodable_tool_use_input_buffer
+    # tools_sse_response's deltas accumulate to malformed JSON (a stray quote);
+    # the raw buffer is kept rather than raising mid-stream.
+    stub_streaming_response(tools_sse_response)
+
+    stream = @client.messages.stream(**tools_params)
+
+    message = stream.accumulated_message
+
+    assert_equal("{\"location\":\"San Francisco\"\"}", message.content.first.input)
+  end
+
   def citations_params
     {
       max_tokens: 1024,

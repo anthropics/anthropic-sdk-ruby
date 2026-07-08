@@ -107,11 +107,13 @@ module Anthropic
         required :partial_json, String
 
         # @!attribute snapshot
-        #   The currently accumulated parsed object up to this point in the stream.
+        #   The raw accumulated partial-JSON string for the tool input up to this
+        #   point in the stream. Decoded into the finished block's `input` when the
+        #   content block stops.
         #
         #   Example:
         #   ```
-        #   {'location': 'San Francisco, CA'}
+        #   '{"location":"San Francisco'
         #   ```
         #
         #   @return [Object]
