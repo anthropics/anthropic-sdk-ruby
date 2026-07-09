@@ -1,0 +1,30 @@
+module Anthropic
+  module Helpers
+    module Sessions
+      class EventAccumulator
+        class AccumulationError < Anthropic::Errors::Error
+        end
+
+        attr_reader agent_messages: ::Hash[String, Anthropic::Beta::Sessions::BetaManagedAgentsAgentMessageEvent]
+
+        def initialize: -> void
+
+        def accumulate: (
+          Anthropic::Models::Beta::Sessions::beta_managed_agents_stream_session_events event
+        ) -> Anthropic::Models::Beta::Sessions::beta_managed_agents_stream_session_events
+
+        def wrap: (
+          ::Enumerable[Anthropic::Models::Beta::Sessions::beta_managed_agents_stream_session_events] enum
+        ) -> ::Enumerator[Anthropic::Models::Beta::Sessions::beta_managed_agents_stream_session_events, void]
+
+        def agent_message_text: (String event_id) -> String?
+
+        private
+
+        def on_event_start: (Anthropic::Beta::BetaManagedAgentsStartEvent event) -> void
+
+        def on_event_delta: (Anthropic::Beta::BetaManagedAgentsDeltaEvent event) -> void
+      end
+    end
+  end
+end
