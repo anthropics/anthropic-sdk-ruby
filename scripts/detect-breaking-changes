@@ -37,6 +37,7 @@ TEST_PATHS=(
 	test/anthropic/resources/beta/skills/versions_test.rb
 	test/anthropic/resources/beta/webhooks_test.rb
 	test/anthropic/resources/beta/user_profiles_test.rb
+	test/anthropic/resources/beta/dreams_test.rb
 	test/anthropic/client_test.rb
 )
 

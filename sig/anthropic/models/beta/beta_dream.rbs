@@ -1,0 +1,94 @@
+module Anthropic
+  module Models
+    class BetaDream = Beta::BetaDream
+
+    module Beta
+      type beta_dream =
+        {
+          id: String,
+          archived_at: Time?,
+          created_at: Time,
+          ended_at: Time?,
+          error: Anthropic::Beta::BetaDreamError?,
+          inputs: ::Array[Anthropic::Models::Beta::beta_dream_input],
+          instructions: String?,
+          model: Anthropic::Beta::BetaDreamModelConfig,
+          outputs: ::Array[Anthropic::Beta::BetaDreamOutput],
+          session_id: String?,
+          status: Anthropic::Models::Beta::beta_dream_status,
+          type: Anthropic::Models::Beta::BetaDream::type_,
+          usage: Anthropic::Beta::BetaDreamUsage
+        }
+
+      class BetaDream < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor archived_at: Time?
+
+        attr_accessor created_at: Time
+
+        attr_accessor ended_at: Time?
+
+        attr_accessor error: Anthropic::Beta::BetaDreamError?
+
+        attr_accessor inputs: ::Array[Anthropic::Models::Beta::beta_dream_input]
+
+        attr_accessor instructions: String?
+
+        attr_accessor model: Anthropic::Beta::BetaDreamModelConfig
+
+        attr_accessor outputs: ::Array[Anthropic::Beta::BetaDreamOutput]
+
+        attr_accessor session_id: String?
+
+        attr_accessor status: Anthropic::Models::Beta::beta_dream_status
+
+        attr_accessor type: Anthropic::Models::Beta::BetaDream::type_
+
+        attr_accessor usage: Anthropic::Beta::BetaDreamUsage
+
+        def initialize: (
+          id: String,
+          archived_at: Time?,
+          created_at: Time,
+          ended_at: Time?,
+          error: Anthropic::Beta::BetaDreamError?,
+          inputs: ::Array[Anthropic::Models::Beta::beta_dream_input],
+          instructions: String?,
+          model: Anthropic::Beta::BetaDreamModelConfig,
+          outputs: ::Array[Anthropic::Beta::BetaDreamOutput],
+          session_id: String?,
+          status: Anthropic::Models::Beta::beta_dream_status,
+          type: Anthropic::Models::Beta::BetaDream::type_,
+          usage: Anthropic::Beta::BetaDreamUsage
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          archived_at: Time?,
+          created_at: Time,
+          ended_at: Time?,
+          error: Anthropic::Beta::BetaDreamError?,
+          inputs: ::Array[Anthropic::Models::Beta::beta_dream_input],
+          instructions: String?,
+          model: Anthropic::Beta::BetaDreamModelConfig,
+          outputs: ::Array[Anthropic::Beta::BetaDreamOutput],
+          session_id: String?,
+          status: Anthropic::Models::Beta::beta_dream_status,
+          type: Anthropic::Models::Beta::BetaDream::type_,
+          usage: Anthropic::Beta::BetaDreamUsage
+        }
+
+        type type_ = :dream
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          DREAM: :dream
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaDream::type_]
+        end
+      end
+    end
+  end
+end

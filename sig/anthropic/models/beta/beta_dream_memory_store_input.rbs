@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaDreamMemoryStoreInput = Beta::BetaDreamMemoryStoreInput
+
+    module Beta
+      type beta_dream_memory_store_input =
+        {
+          memory_store_id: String,
+          type: Anthropic::Models::Beta::BetaDreamMemoryStoreInput::type_
+        }
+
+      class BetaDreamMemoryStoreInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor memory_store_id: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaDreamMemoryStoreInput::type_
+
+        def initialize: (
+          memory_store_id: String,
+          type: Anthropic::Models::Beta::BetaDreamMemoryStoreInput::type_
+        ) -> void
+
+        def to_hash: -> {
+          memory_store_id: String,
+          type: Anthropic::Models::Beta::BetaDreamMemoryStoreInput::type_
+        }
+
+        type type_ = :memory_store
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          MEMORY_STORE: :memory_store
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaDreamMemoryStoreInput::type_]
+        end
+      end
+    end
+  end
+end

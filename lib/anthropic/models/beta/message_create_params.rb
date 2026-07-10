@@ -220,8 +220,9 @@ module Anthropic
         optional :service_tier, enum: -> { Anthropic::Beta::MessageCreateParams::ServiceTier }
 
         # @!attribute speed
-        #   The inference speed mode for this request. `"fast"` enables high
-        #   output-tokens-per-second inference.
+        #   Inference speed mode. `fast` provides significantly faster output token
+        #   generation at premium pricing. Not all models support `fast`; invalid
+        #   combinations are rejected at create time.
         #
         #   @return [Symbol, Anthropic::Models::Beta::MessageCreateParams::Speed, nil]
         optional :speed, enum: -> { Anthropic::Beta::MessageCreateParams::Speed }, nil?: true
@@ -447,7 +448,7 @@ module Anthropic
         #
         #   @param service_tier [Symbol, Anthropic::Models::Beta::MessageCreateParams::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
         #
-        #   @param speed [Symbol, Anthropic::Models::Beta::MessageCreateParams::Speed, nil] The inference speed mode for this request. `"fast"` enables high output-tokens-p
+        #   @param speed [Symbol, Anthropic::Models::Beta::MessageCreateParams::Speed, nil] Inference speed mode. `fast` provides significantly faster output token generati
         #
         #   @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
         #
@@ -500,8 +501,9 @@ module Anthropic
           #   @return [Array<Symbol>]
         end
 
-        # The inference speed mode for this request. `"fast"` enables high
-        # output-tokens-per-second inference.
+        # Inference speed mode. `fast` provides significantly faster output token
+        # generation at premium pricing. Not all models support `fast`; invalid
+        # combinations are rejected at create time.
         module Speed
           extend Anthropic::Internal::Type::Enum
 

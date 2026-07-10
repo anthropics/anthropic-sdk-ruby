@@ -547,8 +547,9 @@ module Anthropic
           # [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for
           # details.
           service_tier: nil,
-          # Body param: The inference speed mode for this request. `"fast"` enables high
-          # output-tokens-per-second inference.
+          # Body param: Inference speed mode. `fast` provides significantly faster output
+          # token generation at premium pricing. Not all models support `fast`; invalid
+          # combinations are rejected at create time.
           speed: nil,
           # Body param: Custom text sequences that will cause the model to stop generating.
           #
@@ -940,8 +941,9 @@ module Anthropic
           # [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for
           # details.
           service_tier: nil,
-          # Body param: The inference speed mode for this request. `"fast"` enables high
-          # output-tokens-per-second inference.
+          # Body param: Inference speed mode. `fast` provides significantly faster output
+          # token generation at premium pricing. Not all models support `fast`; invalid
+          # combinations are rejected at create time.
           speed: nil,
           # Body param: Custom text sequences that will cause the model to stop generating.
           #
@@ -1256,8 +1258,9 @@ module Anthropic
           # A schema to specify Claude's output format in responses. This parameter will be
           # removed in a future release.
           output_format: nil,
-          # Body param: The inference speed mode for this request. `"fast"` enables high
-          # output-tokens-per-second inference.
+          # Body param: Inference speed mode. `fast` provides significantly faster output
+          # token generation at premium pricing. Not all models support `fast`; invalid
+          # combinations are rejected at create time.
           speed: nil,
           # Body param: System prompt.
           #

@@ -72,7 +72,7 @@ module Anthropic
         #
         # @param service_tier [Symbol, Anthropic::Models::Beta::MessageCreateParams::ServiceTier] Body param: Determines whether to use priority capacity (if available) or standa
         #
-        # @param speed [Symbol, Anthropic::Models::Beta::MessageCreateParams::Speed, nil] Body param: The inference speed mode for this request. `"fast"` enables high out
+        # @param speed [Symbol, Anthropic::Models::Beta::MessageCreateParams::Speed, nil] Body param: Inference speed mode. `fast` provides significantly faster output to
         #
         # @param stop_sequences [Array<String>] Body param: Custom text sequences that will cause the model to stop generating.
         #
@@ -186,7 +186,7 @@ module Anthropic
         #
         # @param service_tier [Symbol, Anthropic::Models::Beta::MessageCreateParams::ServiceTier] Body param: Determines whether to use priority capacity (if available) or standa
         #
-        # @param speed [Symbol, Anthropic::Models::Beta::MessageCreateParams::Speed, nil] Body param: The inference speed mode for this request. `"fast"` enables high out
+        # @param speed [Symbol, Anthropic::Models::Beta::MessageCreateParams::Speed, nil] Body param: Inference speed mode. `fast` provides significantly faster output to
         #
         # @param stop_sequences [Array<String>] Body param: Custom text sequences that will cause the model to stop generating.
         #
@@ -353,7 +353,7 @@ module Anthropic
         #
         # @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Body param: Deprecated: Use `output_config.format` instead. See [structured outp
         #
-        # @param speed [Symbol, Anthropic::Models::Beta::MessageCountTokensParams::Speed, nil] Body param: The inference speed mode for this request. `"fast"` enables high out
+        # @param speed [Symbol, Anthropic::Models::Beta::MessageCountTokensParams::Speed, nil] Body param: Inference speed mode. `fast` provides significantly faster output to
         #
         # @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] Body param: System prompt.
         #

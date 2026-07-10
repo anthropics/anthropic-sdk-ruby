@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaDreamSessionsInput = Beta::BetaDreamSessionsInput
+
+    module Beta
+      type beta_dream_sessions_input =
+        {
+          session_ids: ::Array[String],
+          type: Anthropic::Models::Beta::BetaDreamSessionsInput::type_
+        }
+
+      class BetaDreamSessionsInput < Anthropic::Internal::Type::BaseModel
+        attr_accessor session_ids: ::Array[String]
+
+        attr_accessor type: Anthropic::Models::Beta::BetaDreamSessionsInput::type_
+
+        def initialize: (
+          session_ids: ::Array[String],
+          type: Anthropic::Models::Beta::BetaDreamSessionsInput::type_
+        ) -> void
+
+        def to_hash: -> {
+          session_ids: ::Array[String],
+          type: Anthropic::Models::Beta::BetaDreamSessionsInput::type_
+        }
+
+        type type_ = :sessions
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          SESSIONS: :sessions
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaDreamSessionsInput::type_]
+        end
+      end
+    end
+  end
+end

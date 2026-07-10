@@ -79,7 +79,9 @@ module Anthropic
         required :service_tier, enum: -> { Anthropic::Beta::BetaUsage::ServiceTier }, nil?: true
 
         # @!attribute speed
-        #   The inference speed mode used for this request.
+        #   Inference speed mode. `fast` provides significantly faster output token
+        #   generation at premium pricing. Not all models support `fast`; invalid
+        #   combinations are rejected at create time.
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaUsage::Speed, nil]
         required :speed, enum: -> { Anthropic::Beta::BetaUsage::Speed }, nil?: true
@@ -108,7 +110,7 @@ module Anthropic
         #
         #   @param service_tier [Symbol, Anthropic::Models::Beta::BetaUsage::ServiceTier, nil] If the request used the priority, standard, or batch tier.
         #
-        #   @param speed [Symbol, Anthropic::Models::Beta::BetaUsage::Speed, nil] The inference speed mode used for this request.
+        #   @param speed [Symbol, Anthropic::Models::Beta::BetaUsage::Speed, nil] Inference speed mode. `fast` provides significantly faster output token generati
 
         # If the request used the priority, standard, or batch tier.
         #
@@ -124,7 +126,9 @@ module Anthropic
           #   @return [Array<Symbol>]
         end
 
-        # The inference speed mode used for this request.
+        # Inference speed mode. `fast` provides significantly faster output token
+        # generation at premium pricing. Not all models support `fast`; invalid
+        # combinations are rejected at create time.
         #
         # @see Anthropic::Models::Beta::BetaUsage#speed
         module Speed

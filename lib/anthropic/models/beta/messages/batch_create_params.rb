@@ -288,8 +288,9 @@ module Anthropic
                        enum: -> { Anthropic::Beta::Messages::BatchCreateParams::Request::Params::ServiceTier }
 
               # @!attribute speed
-              #   The inference speed mode for this request. `"fast"` enables high
-              #   output-tokens-per-second inference.
+              #   Inference speed mode. `fast` provides significantly faster output token
+              #   generation at premium pricing. Not all models support `fast`; invalid
+              #   combinations are rejected at create time.
               #
               #   @return [Symbol, Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::Speed, nil]
               optional :speed,
@@ -522,7 +523,7 @@ module Anthropic
               #
               #   @param service_tier [Symbol, Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
               #
-              #   @param speed [Symbol, Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::Speed, nil] The inference speed mode for this request. `"fast"` enables high output-tokens-p
+              #   @param speed [Symbol, Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params::Speed, nil] Inference speed mode. `fast` provides significantly faster output token generati
               #
               #   @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
               #
@@ -575,8 +576,9 @@ module Anthropic
                 #   @return [Array<Symbol>]
               end
 
-              # The inference speed mode for this request. `"fast"` enables high
-              # output-tokens-per-second inference.
+              # Inference speed mode. `fast` provides significantly faster output token
+              # generation at premium pricing. Not all models support `fast`; invalid
+              # combinations are rejected at create time.
               #
               # @see Anthropic::Models::Beta::Messages::BatchCreateParams::Request::Params#speed
               module Speed

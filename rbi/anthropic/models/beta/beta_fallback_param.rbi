@@ -34,6 +34,9 @@ module Anthropic
         end
         attr_writer :output_config
 
+        # Inference speed mode. `fast` provides significantly faster output token
+        # generation at premium pricing. Not all models support `fast`; invalid
+        # combinations are rejected at create time.
         sig do
           returns(
             T.nilable(Anthropic::Beta::BetaFallbackParam::Speed::OrSymbol)
@@ -85,6 +88,9 @@ module Anthropic
           model:,
           max_tokens: nil,
           output_config: nil,
+          # Inference speed mode. `fast` provides significantly faster output token
+          # generation at premium pricing. Not all models support `fast`; invalid
+          # combinations are rejected at create time.
           speed: nil,
           thinking: nil
         )
@@ -112,6 +118,9 @@ module Anthropic
         def to_hash
         end
 
+        # Inference speed mode. `fast` provides significantly faster output token
+        # generation at premium pricing. Not all models support `fast`; invalid
+        # combinations are rejected at create time.
         module Speed
           extend Anthropic::Internal::Type::Enum
 

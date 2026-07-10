@@ -42,6 +42,9 @@ module Anthropic
       # @return [Anthropic::Resources::Beta::UserProfiles]
       attr_reader :user_profiles
 
+      # @return [Anthropic::Resources::Beta::Dreams]
+      attr_reader :dreams
+
       # @api private
       #
       # @param client [Anthropic::Client]
@@ -60,6 +63,7 @@ module Anthropic
         @skills = Anthropic::Resources::Beta::Skills.new(client: client)
         @webhooks = Anthropic::Resources::Beta::Webhooks.new(client: client)
         @user_profiles = Anthropic::Resources::Beta::UserProfiles.new(client: client)
+        @dreams = Anthropic::Resources::Beta::Dreams.new(client: client)
       end
     end
   end
