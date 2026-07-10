@@ -113,6 +113,8 @@ module Anthropic
           :"cache-diagnosis-2026-04-07",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      DREAMING_2026_04_21 =
+        T.let(:"dreaming-2026-04-21", Anthropic::AnthropicBeta::TaggedSymbol)
       THINKING_TOKEN_COUNT_2026_05_13 =
         T.let(
           :"thinking-token-count-2026-05-13",

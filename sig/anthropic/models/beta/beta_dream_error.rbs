@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    class BetaDreamError = Beta::BetaDreamError
+
+    module Beta
+      type beta_dream_error = { message: String, type: String }
+
+      class BetaDreamError < Anthropic::Internal::Type::BaseModel
+        attr_accessor message: String
+
+        attr_accessor type: String
+
+        def initialize: (message: String, type: String) -> void
+
+        def to_hash: -> { message: String, type: String }
+      end
+    end
+  end
+end

@@ -263,8 +263,9 @@ module Anthropic
         end
         attr_writer :service_tier
 
-        # The inference speed mode for this request. `"fast"` enables high
-        # output-tokens-per-second inference.
+        # Inference speed mode. `fast` provides significantly faster output token
+        # generation at premium pricing. Not all models support `fast`; invalid
+        # combinations are rejected at create time.
         sig do
           returns(
             T.nilable(Anthropic::Beta::MessageCreateParams::Speed::OrSymbol)
@@ -815,8 +816,9 @@ module Anthropic
           # [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for
           # details.
           service_tier: nil,
-          # The inference speed mode for this request. `"fast"` enables high
-          # output-tokens-per-second inference.
+          # Inference speed mode. `fast` provides significantly faster output token
+          # generation at premium pricing. Not all models support `fast`; invalid
+          # combinations are rejected at create time.
           speed: nil,
           # Custom text sequences that will cause the model to stop generating.
           #
@@ -1100,8 +1102,9 @@ module Anthropic
           end
         end
 
-        # The inference speed mode for this request. `"fast"` enables high
-        # output-tokens-per-second inference.
+        # Inference speed mode. `fast` provides significantly faster output token
+        # generation at premium pricing. Not all models support `fast`; invalid
+        # combinations are rejected at create time.
         module Speed
           extend Anthropic::Internal::Type::Enum
 

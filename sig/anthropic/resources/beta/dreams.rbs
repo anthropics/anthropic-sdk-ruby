@@ -1,0 +1,46 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Dreams
+        def create: (
+          inputs: ::Array[Anthropic::Models::Beta::beta_dream_input],
+          model: Anthropic::Models::Beta::DreamCreateParams::model,
+          ?instructions: String?,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaDream
+
+        def retrieve: (
+          String dream_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaDream
+
+        def list: (
+          ?created_at_gt: Time,
+          ?created_at_lt: Time,
+          ?include_archived: bool,
+          ?limit: Integer,
+          ?page: String,
+          ?statuses: ::Array[Anthropic::Models::Beta::beta_dream_status],
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaDream]
+
+        def archive: (
+          String dream_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaDream
+
+        def cancel: (
+          String dream_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaDream
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

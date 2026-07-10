@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    module BetaDreamStatus = Beta::BetaDreamStatus
+
+    module Beta
+      type beta_dream_status =
+        :pending | :running | :completed | :failed | :canceled
+
+      module BetaDreamStatus
+        extend Anthropic::Internal::Type::Enum
+
+        PENDING: :pending
+        RUNNING: :running
+        COMPLETED: :completed
+        FAILED: :failed
+        CANCELED: :canceled
+
+        def self?.values: -> ::Array[Anthropic::Models::Beta::beta_dream_status]
+      end
+    end
+  end
+end

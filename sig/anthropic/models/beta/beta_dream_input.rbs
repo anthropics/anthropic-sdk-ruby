@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module BetaDreamInput = Beta::BetaDreamInput
+
+    module Beta
+      type beta_dream_input =
+        Anthropic::Beta::BetaDreamMemoryStoreInput
+        | Anthropic::Beta::BetaDreamSessionsInput
+
+      module BetaDreamInput
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_dream_input]
+      end
+    end
+  end
+end

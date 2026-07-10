@@ -1,0 +1,55 @@
+module Anthropic
+  module Models
+    module Beta
+      type dream_create_params =
+        {
+          inputs: ::Array[Anthropic::Models::Beta::beta_dream_input],
+          model: Anthropic::Models::Beta::DreamCreateParams::model,
+          instructions: String?,
+          betas: ::Array[Anthropic::Models::anthropic_beta]
+        }
+        & Anthropic::Internal::Type::request_parameters
+
+      class DreamCreateParams < Anthropic::Internal::Type::BaseModel
+        extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
+
+        attr_accessor inputs: ::Array[Anthropic::Models::Beta::beta_dream_input]
+
+        attr_accessor model: Anthropic::Models::Beta::DreamCreateParams::model
+
+        attr_accessor instructions: String?
+
+        attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+        def betas=: (
+          ::Array[Anthropic::Models::anthropic_beta]
+        ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+        def initialize: (
+          inputs: ::Array[Anthropic::Models::Beta::beta_dream_input],
+          model: Anthropic::Models::Beta::DreamCreateParams::model,
+          ?instructions: String?,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          inputs: ::Array[Anthropic::Models::Beta::beta_dream_input],
+          model: Anthropic::Models::Beta::DreamCreateParams::model,
+          instructions: String?,
+          betas: ::Array[Anthropic::Models::anthropic_beta],
+          request_options: Anthropic::RequestOptions
+        }
+
+        type model = String | Anthropic::Beta::BetaDreamModelConfigParam
+
+        module Model
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::DreamCreateParams::model]
+        end
+      end
+    end
+  end
+end

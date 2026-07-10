@@ -164,8 +164,9 @@ module Anthropic
         end
         attr_writer :output_format
 
-        # The inference speed mode for this request. `"fast"` enables high
-        # output-tokens-per-second inference.
+        # Inference speed mode. `fast` provides significantly faster output token
+        # generation at premium pricing. Not all models support `fast`; invalid
+        # combinations are rejected at create time.
         sig do
           returns(
             T.nilable(
@@ -597,8 +598,9 @@ module Anthropic
           # A schema to specify Claude's output format in responses. This parameter will be
           # removed in a future release.
           output_format: nil,
-          # The inference speed mode for this request. `"fast"` enables high
-          # output-tokens-per-second inference.
+          # Inference speed mode. `fast` provides significantly faster output token
+          # generation at premium pricing. Not all models support `fast`; invalid
+          # combinations are rejected at create time.
           speed: nil,
           # System prompt.
           #
@@ -779,8 +781,9 @@ module Anthropic
         def to_hash
         end
 
-        # The inference speed mode for this request. `"fast"` enables high
-        # output-tokens-per-second inference.
+        # Inference speed mode. `fast` provides significantly faster output token
+        # generation at premium pricing. Not all models support `fast`; invalid
+        # combinations are rejected at create time.
         module Speed
           extend Anthropic::Internal::Type::Enum
 

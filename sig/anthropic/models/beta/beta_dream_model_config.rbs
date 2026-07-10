@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    class BetaDreamModelConfig = Beta::BetaDreamModelConfig
+
+    module Beta
+      type beta_dream_model_config =
+        {
+          id: String,
+          speed: Anthropic::Models::Beta::BetaDreamModelConfig::speed
+        }
+
+      class BetaDreamModelConfig < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_reader speed: Anthropic::Models::Beta::BetaDreamModelConfig::speed?
+
+        def speed=: (
+          Anthropic::Models::Beta::BetaDreamModelConfig::speed
+        ) -> Anthropic::Models::Beta::BetaDreamModelConfig::speed
+
+        def initialize: (
+          id: String,
+          ?speed: Anthropic::Models::Beta::BetaDreamModelConfig::speed
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          speed: Anthropic::Models::Beta::BetaDreamModelConfig::speed
+        }
+
+        type speed = :standard | :fast
+
+        module Speed
+          extend Anthropic::Internal::Type::Enum
+
+          STANDARD: :standard
+          FAST: :fast
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaDreamModelConfig::speed]
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaDreamUsage = Beta::BetaDreamUsage
+
+    module Beta
+      type beta_dream_usage =
+        {
+          cache_creation_input_tokens: Integer,
+          cache_read_input_tokens: Integer,
+          input_tokens: Integer,
+          output_tokens: Integer
+        }
+
+      class BetaDreamUsage < Anthropic::Internal::Type::BaseModel
+        attr_accessor cache_creation_input_tokens: Integer
+
+        attr_accessor cache_read_input_tokens: Integer
+
+        attr_accessor input_tokens: Integer
+
+        attr_accessor output_tokens: Integer
+
+        def initialize: (
+          cache_creation_input_tokens: Integer,
+          cache_read_input_tokens: Integer,
+          input_tokens: Integer,
+          output_tokens: Integer
+        ) -> void
+
+        def to_hash: -> {
+          cache_creation_input_tokens: Integer,
+          cache_read_input_tokens: Integer,
+          input_tokens: Integer,
+          output_tokens: Integer
+        }
+      end
+    end
+  end
+end

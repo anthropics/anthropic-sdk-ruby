@@ -27,6 +27,8 @@ module Anthropic
 
       attr_reader user_profiles: Anthropic::Resources::Beta::UserProfiles
 
+      attr_reader dreams: Anthropic::Resources::Beta::Dreams
+
       def initialize: (client: Anthropic::Client) -> void
     end
   end

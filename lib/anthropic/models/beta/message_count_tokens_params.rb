@@ -130,8 +130,9 @@ module Anthropic
         optional :output_format, -> { Anthropic::Beta::BetaJSONOutputFormat }, nil?: true
 
         # @!attribute speed
-        #   The inference speed mode for this request. `"fast"` enables high
-        #   output-tokens-per-second inference.
+        #   Inference speed mode. `fast` provides significantly faster output token
+        #   generation at premium pricing. Not all models support `fast`; invalid
+        #   combinations are rejected at create time.
         #
         #   @return [Symbol, Anthropic::Models::Beta::MessageCountTokensParams::Speed, nil]
         optional :speed, enum: -> { Anthropic::Beta::MessageCountTokensParams::Speed }, nil?: true
@@ -281,7 +282,7 @@ module Anthropic
         #
         #   @param output_format [Anthropic::Models::Beta::BetaJSONOutputFormat, nil] Deprecated: Use `output_config.format` instead. See [structured outputs](https:/
         #
-        #   @param speed [Symbol, Anthropic::Models::Beta::MessageCountTokensParams::Speed, nil] The inference speed mode for this request. `"fast"` enables high output-tokens-p
+        #   @param speed [Symbol, Anthropic::Models::Beta::MessageCountTokensParams::Speed, nil] Inference speed mode. `fast` provides significantly faster output token generati
         #
         #   @param system_ [String, Array<Anthropic::Models::Beta::BetaTextBlockParam>] System prompt.
         #
@@ -297,8 +298,9 @@ module Anthropic
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
-        # The inference speed mode for this request. `"fast"` enables high
-        # output-tokens-per-second inference.
+        # Inference speed mode. `fast` provides significantly faster output token
+        # generation at premium pricing. Not all models support `fast`; invalid
+        # combinations are rejected at create time.
         module Speed
           extend Anthropic::Internal::Type::Enum
 

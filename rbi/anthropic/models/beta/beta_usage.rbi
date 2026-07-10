@@ -97,7 +97,9 @@ module Anthropic
         end
         attr_accessor :service_tier
 
-        # The inference speed mode used for this request.
+        # Inference speed mode. `fast` provides significantly faster output token
+        # generation at premium pricing. Not all models support `fast`; invalid
+        # combinations are rejected at create time.
         sig do
           returns(T.nilable(Anthropic::Beta::BetaUsage::Speed::TaggedSymbol))
         end
@@ -165,7 +167,9 @@ module Anthropic
           server_tool_use:,
           # If the request used the priority, standard, or batch tier.
           service_tier:,
-          # The inference speed mode used for this request.
+          # Inference speed mode. `fast` provides significantly faster output token
+          # generation at premium pricing. Not all models support `fast`; invalid
+          # combinations are rejected at create time.
           speed:
         )
         end
@@ -229,7 +233,9 @@ module Anthropic
           end
         end
 
-        # The inference speed mode used for this request.
+        # Inference speed mode. `fast` provides significantly faster output token
+        # generation at premium pricing. Not all models support `fast`; invalid
+        # combinations are rejected at create time.
         module Speed
           extend Anthropic::Internal::Type::Enum
 
