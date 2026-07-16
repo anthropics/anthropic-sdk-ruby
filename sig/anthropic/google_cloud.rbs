@@ -1,0 +1,5 @@
+module Anthropic
+  GoogleCloud: singleton(Anthropic::Helpers::GoogleCloud)
+
+  class GoogleCloudClient = Anthropic::Helpers::GoogleCloud::Client
+end

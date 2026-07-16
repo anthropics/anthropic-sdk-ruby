@@ -1,0 +1,52 @@
+module Anthropic
+  module Helpers
+    module GoogleCloud
+      class Client < Anthropic::Client
+        SCOPE: String
+
+        URL_TEMPLATE: String
+
+        attr_reader project: String?
+
+        attr_reader location: String?
+
+        attr_reader workspace_id: String?
+
+        attr_reader messages: Anthropic::Resources::Messages
+
+        attr_reader models: Anthropic::Resources::Models
+
+        attr_reader beta: Anthropic::Resources::Beta
+
+        def completions: -> bot
+
+        private def auth_headers: -> ::Hash[String, String]
+
+        private def provider_middleware: -> Anthropic::Middleware::entry
+
+        private def apply_auth: (
+          Anthropic::APIRequest req
+        ) -> Anthropic::APIRequest
+
+        private def derive_base_url: -> String
+
+        private def require_googleauth: -> void
+
+        def initialize: (
+          ?project: String?,
+          ?location: String?,
+          ?workspace_id: String?,
+          ?base_url: String?,
+          ?google_credentials: untyped,
+          ?token_provider: (^-> String)?,
+          ?skip_auth: bool,
+          ?max_retries: Integer,
+          ?timeout: Float,
+          ?initial_retry_delay: Float,
+          ?max_retry_delay: Float,
+          ?middleware: Anthropic::Middleware::entry_or_array?
+        ) -> void
+      end
+    end
+  end
+end
