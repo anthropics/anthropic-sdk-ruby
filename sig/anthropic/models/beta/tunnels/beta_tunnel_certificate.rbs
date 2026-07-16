@@ -1,0 +1,54 @@
+module Anthropic
+  module Models
+    module Beta
+      module Tunnels
+        type beta_tunnel_certificate =
+          {
+            id: String,
+            archived_at: Time?,
+            created_at: Time,
+            expires_at: Time?,
+            fingerprint: String,
+            tunnel_id: String,
+            type: :tunnel_certificate
+          }
+
+        class BetaTunnelCertificate < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor archived_at: Time?
+
+          attr_accessor created_at: Time
+
+          attr_accessor expires_at: Time?
+
+          attr_accessor fingerprint: String
+
+          attr_accessor tunnel_id: String
+
+          attr_accessor type: :tunnel_certificate
+
+          def initialize: (
+            id: String,
+            archived_at: Time?,
+            created_at: Time,
+            expires_at: Time?,
+            fingerprint: String,
+            tunnel_id: String,
+            ?type: :tunnel_certificate
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            archived_at: Time?,
+            created_at: Time,
+            expires_at: Time?,
+            fingerprint: String,
+            tunnel_id: String,
+            type: :tunnel_certificate
+          }
+        end
+      end
+    end
+  end
+end

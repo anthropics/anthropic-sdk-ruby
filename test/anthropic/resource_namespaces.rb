@@ -27,6 +27,9 @@ module Anthropic
         module Skills
         end
 
+        module Tunnels
+        end
+
         module Vaults
         end
       end
@@ -49,6 +52,9 @@ module Anthropic
       end
 
       module Threads
+      end
+
+      module Tunnels
       end
 
       module Vaults

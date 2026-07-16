@@ -1,0 +1,50 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Tunnels
+        attr_reader certificates: Anthropic::Resources::Beta::Tunnels::Certificates
+
+        def create: (
+          ?display_name: String?,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaTunnel
+
+        def retrieve: (
+          String tunnel_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaTunnel
+
+        def list: (
+          ?include_archived: bool,
+          ?limit: Integer,
+          ?page: String,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaTunnel]
+
+        def archive: (
+          String tunnel_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaTunnel
+
+        def reveal_token: (
+          String tunnel_id,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaTunnelToken
+
+        def rotate_token: (
+          String tunnel_id,
+          ?reason: String?,
+          ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaTunnelToken
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end
