@@ -1,0 +1,49 @@
+module Anthropic
+  module Models
+    class BetaTunnel = Beta::BetaTunnel
+
+    module Beta
+      type beta_tunnel =
+        {
+          id: String,
+          archived_at: Time?,
+          created_at: Time,
+          display_name: String?,
+          domain: String,
+          type: :tunnel
+        }
+
+      class BetaTunnel < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor archived_at: Time?
+
+        attr_accessor created_at: Time
+
+        attr_accessor display_name: String?
+
+        attr_accessor domain: String
+
+        attr_accessor type: :tunnel
+
+        def initialize: (
+          id: String,
+          archived_at: Time?,
+          created_at: Time,
+          display_name: String?,
+          domain: String,
+          ?type: :tunnel
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          archived_at: Time?,
+          created_at: Time,
+          display_name: String?,
+          domain: String,
+          type: :tunnel
+        }
+      end
+    end
+  end
+end

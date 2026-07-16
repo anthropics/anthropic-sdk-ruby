@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    class BetaTunnelToken = Beta::BetaTunnelToken
+
+    module Beta
+      type beta_tunnel_token =
+        { id: String, tunnel_token: String, type: :tunnel_token }
+
+      class BetaTunnelToken < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor tunnel_token: String
+
+        attr_accessor type: :tunnel_token
+
+        def initialize: (
+          id: String,
+          tunnel_token: String,
+          ?type: :tunnel_token
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          tunnel_token: String,
+          type: :tunnel_token
+        }
+      end
+    end
+  end
+end

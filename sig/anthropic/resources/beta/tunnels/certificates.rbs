@@ -1,0 +1,41 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Tunnels
+        class Certificates
+          def create: (
+            String tunnel_id,
+            ca_certificate_pem: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Tunnels::BetaTunnelCertificate
+
+          def retrieve: (
+            String certificate_id,
+            tunnel_id: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Tunnels::BetaTunnelCertificate
+
+          def list: (
+            String tunnel_id,
+            ?include_archived: bool,
+            ?limit: Integer,
+            ?page: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Tunnels::BetaTunnelCertificate]
+
+          def archive: (
+            String certificate_id,
+            tunnel_id: String,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Tunnels::BetaTunnelCertificate
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end
