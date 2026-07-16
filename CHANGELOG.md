@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.56.0 (2026-07-16)
+
+Full Changelog: [v1.55.0...v1.56.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.55.0...v1.56.0)
+
+### Features
+
+* **api:** add support for dreaming ([6277ed9](https://github.com/anthropics/anthropic-sdk-ruby/commit/6277ed90a84e5b0b6574de7301b5f95470627fcc))
+* **api:** add support for MCP Tunnels ([4ecd4ba](https://github.com/anthropics/anthropic-sdk-ruby/commit/4ecd4ba4ebda2a08eeac2635668753ef7ee968b5))
+* **helpers:** add session delta accumulator for agent.message previews ([#83](https://github.com/anthropics/anthropic-sdk-ruby/issues/83)) ([01616a4](https://github.com/anthropics/anthropic-sdk-ruby/commit/01616a41bdfe88e9397fad901e0198b6a7c02c7b))
+
+
+### Bug Fixes
+
+* **streaming:** decode tool_use input when the content block stops ([#109](https://github.com/anthropics/anthropic-sdk-ruby/issues/109)) ([800277b](https://github.com/anthropics/anthropic-sdk-ruby/commit/800277b6e9f46a50533e696d192a6d23eddc920d))
+
+
+### Chores
+
+* **docs:** small updates to field descriptions ([0d7bf61](https://github.com/anthropics/anthropic-sdk-ruby/commit/0d7bf611ef0a96aba1c3604476f48d6da7b5bc1d))
+* **docs:** updates to descriptions and examples ([ea6bfd7](https://github.com/anthropics/anthropic-sdk-ruby/commit/ea6bfd74e293c62f6ca919387dc60154af959bbd))
+
 ## 1.55.0 (2026-07-02)
 
 Full Changelog: [v1.54.1...v1.55.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.54.1...v1.55.0)
