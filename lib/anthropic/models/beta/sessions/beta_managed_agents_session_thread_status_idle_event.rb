@@ -72,7 +72,7 @@ module Anthropic
             # The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
             variant :requires_action, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionRequiresAction }
 
-            # The turn ended because repeated errors exhausted the automatic retry budget or the agent reached an internal execution limit.
+            # The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
             variant :retries_exhausted, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted }
 
             # @!method self.variants
