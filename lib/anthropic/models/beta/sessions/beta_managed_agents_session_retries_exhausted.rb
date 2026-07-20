@@ -11,8 +11,8 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted::Type }
 
           # @!method initialize(type:)
-          #   The turn ended because repeated errors exhausted the automatic retry budget or
-          #   the agent reached an internal execution limit.
+          #   The turn ended because repeated errors exhausted the retry budget or an error
+          #   escalated to `retry_status: 'exhausted'`.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted::Type]
 

@@ -20,8 +20,8 @@ module Anthropic
           end
           attr_accessor :type
 
-          # The turn ended because repeated errors exhausted the automatic retry budget or
-          # the agent reached an internal execution limit.
+          # The turn ended because repeated errors exhausted the retry budget or an error
+          # escalated to `retry_status: 'exhausted'`.
           sig do
             params(
               type:
