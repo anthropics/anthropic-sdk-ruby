@@ -116,6 +116,9 @@ module Anthropic
           # The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking).
           REASONING_EXTRACTION = :reasoning_extraction
 
+          # The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+          GENERAL_HARMS = :general_harms
+
           # @!method self.values
           #   @return [Array<Symbol>]
         end

@@ -91,6 +91,13 @@ module Anthropic
             Anthropic::RefusalStopDetails::Category::TaggedSymbol
           )
 
+        # The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+        GENERAL_HARMS =
+          T.let(
+            :general_harms,
+            Anthropic::RefusalStopDetails::Category::TaggedSymbol
+          )
+
         sig do
           override.returns(
             T::Array[Anthropic::RefusalStopDetails::Category::TaggedSymbol]
