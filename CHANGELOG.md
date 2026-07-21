@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.56.1 (2026-07-21)
+
+Full Changelog: [v1.56.0...v1.56.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.56.0...v1.56.1)
+
+### Bug Fixes
+
+* **internal:** encode Time query params as RFC 3339 ([#133](https://github.com/anthropics/anthropic-sdk-ruby/issues/133)) ([47d18e9](https://github.com/anthropics/anthropic-sdk-ruby/commit/47d18e91defcd8fba90ea98790c5e3981dfa607e))
+
+
+### Chores
+
+* **api:** add support for new refusal category ([318ae5f](https://github.com/anthropics/anthropic-sdk-ruby/commit/318ae5f9a349aa9e33c20b8032f808b133553532))
+* **client:** docs updates ([d2c06e7](https://github.com/anthropics/anthropic-sdk-ruby/commit/d2c06e73bec2832215bc2769143f61a68794a388))
+* **docs:** small updates ([fbc6e77](https://github.com/anthropics/anthropic-sdk-ruby/commit/fbc6e775736217cacf11429aca6212ffa0f13c8b))
+* **docs:** small updates ([32597cd](https://github.com/anthropics/anthropic-sdk-ruby/commit/32597cdf5094a3f8561c64fadb62c97c1eeb9e64))
+* **internal:** codegen related update ([2116b5a](https://github.com/anthropics/anthropic-sdk-ruby/commit/2116b5aeb4dc01bcdb8548826c61f6e2a350a6a0))
+
 ## 1.56.0 (2026-07-16)
 
 Full Changelog: [v1.55.0...v1.56.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.55.0...v1.56.0)
