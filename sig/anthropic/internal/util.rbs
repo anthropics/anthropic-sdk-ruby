@@ -122,6 +122,8 @@ module Anthropic
         top element
       ) -> nil
 
+      private def query_param_string: (top element) -> String
+
       def self?.write_multipart_content: (
         Enumerator::Yielder y,
         val: top,

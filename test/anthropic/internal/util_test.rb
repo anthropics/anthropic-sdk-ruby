@@ -139,6 +139,41 @@ class Anthropic::Test::UtilHeaderHandlingTest < Minitest::Test
   end
 end
 
+class Anthropic::Test::UtilQueryParamsTest < Minitest::Test
+  def test_time_encodes_as_rfc3339
+    encoded = Anthropic::Internal::Util.encode_query_params(
+      {starting_at: Time.utc(2026, 7, 19), ending_at: Time.utc(2026, 7, 20, 12, 30, 5)}
+    )
+
+    assert_equal(
+      {starting_at: "2026-07-19T00:00:00Z", ending_at: "2026-07-20T12:30:05Z"},
+      encoded
+    )
+  end
+
+  def test_time_array_encodes_as_rfc3339
+    encoded = Anthropic::Internal::Util.encode_query_params({at: [Time.utc(2026, 7, 19), "x"]})
+
+    assert_equal({"at[]" => ["2026-07-19T00:00:00Z", "x"]}, encoded)
+  end
+
+  def test_time_offset_is_preserved
+    encoded = Anthropic::Internal::Util.encode_query_params(
+      {starting_at: Time.new(2026, 7, 19, 9, 0, 0, "-07:00")}
+    )
+
+    assert_equal({starting_at: "2026-07-19T09:00:00-07:00"}, encoded)
+  end
+
+  def test_non_time_scalars_unchanged
+    encoded = Anthropic::Internal::Util.encode_query_params(
+      {limit: 20, page: "page_abc", flag: true, nested: {k: "v"}}
+    )
+
+    assert_equal({limit: "20", page: "page_abc", flag: "true", "nested[k]" => "v"}, encoded)
+  end
+end
+
 class Anthropic::Test::UtilUriHandlingTest < Minitest::Test
   def test_parsing
     %w[

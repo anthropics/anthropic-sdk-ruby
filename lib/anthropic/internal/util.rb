@@ -570,9 +570,24 @@ module Anthropic
               write_query_param_element!(collection, "#{key}[#{name}]", value)
             end
           in Array
-            collection["#{key}[]"] = element.map(&:to_s)
+            collection["#{key}[]"] = element.map { query_param_string(_1) }
           else
-            collection[key] = element.to_s
+            collection[key] = query_param_string(element)
+          end
+        end
+
+        # @api private
+        #
+        # @param element [Object]
+        #
+        # @return [String]
+        private def query_param_string(element)
+          case element
+          in Time
+            # `Time#to_s` is not a wire format — date-time params must encode as RFC 3339.
+            element.iso8601
+          else
+            element.to_s
           end
         end
 

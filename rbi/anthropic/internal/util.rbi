@@ -335,6 +335,11 @@ module Anthropic
         end
 
         # @api private
+        sig { params(element: T.anything).returns(String) }
+        private def query_param_string(element)
+        end
+
+        # @api private
         sig do
           params(
             y: Enumerator::Yielder,
