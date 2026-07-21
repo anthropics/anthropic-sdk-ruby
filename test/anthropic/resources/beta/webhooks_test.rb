@@ -9,7 +9,7 @@ class Anthropic::Test::Resources::Beta::WebhooksTest < Anthropic::Test::Resource
     webhook = StandardWebhooks::Webhook.new(key)
 
     data =
-      "{\"id\":\"wevt_011CZkZYZd9rLmz3ujAcsqEw\",\"created_at\":\"2026-03-15T10:00:00Z\",\"data\":{\"id\":\"sesn_011CZkZAtmR3yMPDzynEDxu7\",\"organization_id\":\"org_011CZkZZAe0sMna4vkBdtrfx\",\"type\":\"session.status_idled\",\"workspace_id\":\"wrkspc_011CZkZaBF1tNoB5wlCeusgy\"},\"type\":\"event\"}"
+      "{\"id\":\"whe_0f1e2d3c4b5a69788796a5b4c3d2e1f0\",\"created_at\":\"2026-03-15T10:00:00Z\",\"data\":{\"id\":\"sesn_011CZkZAtmR3yMPDzynEDxu7\",\"organization_id\":\"org_011CZkZZAe0sMna4vkBdtrfx\",\"type\":\"session.status_idled\",\"workspace_id\":\"wrkspc_011CZkZaBF1tNoB5wlCeusgy\"},\"type\":\"event\"}"
     message_id = "1"
     timestamp = Time.now.to_i.to_s
     signature = webhook.sign(message_id, timestamp, data)

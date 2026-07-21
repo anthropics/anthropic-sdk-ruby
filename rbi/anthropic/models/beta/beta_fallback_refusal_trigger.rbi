@@ -99,6 +99,13 @@ module Anthropic
               Anthropic::Beta::BetaFallbackRefusalTrigger::Category::TaggedSymbol
             )
 
+          # The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
+          GENERAL_HARMS =
+            T.let(
+              :general_harms,
+              Anthropic::Beta::BetaFallbackRefusalTrigger::Category::TaggedSymbol
+            )
+
           sig do
             override.returns(
               T::Array[
