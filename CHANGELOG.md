@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.57.0 (2026-07-22)
+
+Full Changelog: [v1.56.1...v1.57.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.56.1...v1.57.0)
+
+### Features
+
+* **api:** add support for Managed Agents model effort, initial session events, and threads delta streaming ([1aab784](https://github.com/anthropics/anthropic-sdk-ruby/commit/1aab784f0a935a727eb5e513ed3f59555017e31d))
+
 ## 1.56.1 (2026-07-21)
 
 Full Changelog: [v1.56.0...v1.56.1](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.56.0...v1.56.1)
