@@ -44,13 +44,19 @@ module Anthropic
               )
             end
 
+            # Some parameter documentations has been truncated, see
+            # {Anthropic::Models::Beta::Sessions::Threads::EventStreamParams} for more
+            # details.
+            #
             # Stream Session Thread Events
             #
-            # @overload stream_events(thread_id, session_id:, betas: nil, request_options: {})
+            # @overload stream_events(thread_id, session_id:, event_deltas: nil, betas: nil, request_options: {})
             #
             # @param thread_id [String] Path param: Path parameter thread_id
             #
             # @param session_id [String] Path param: Path parameter session_id
+            #
+            # @param event_deltas [Array<Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeltaType>] Query param: When set, this connection also receives streaming deltas (`event_st
             #
             # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
             #
@@ -60,7 +66,9 @@ module Anthropic
             #
             # @see Anthropic::Models::Beta::Sessions::Threads::EventStreamParams
             def stream_events(thread_id, params)
+              query_params = [:event_deltas]
               parsed, options = Anthropic::Beta::Sessions::Threads::EventStreamParams.dump_request(params)
+              query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
               session_id =
                 parsed.delete(:session_id) do
                   raise ArgumentError.new("missing required path argument #{_1}")
@@ -68,10 +76,11 @@ module Anthropic
               @client.request(
                 method: :get,
                 path: ["v1/sessions/%1$s/threads/%2$s/stream?beta=true", session_id, thread_id],
+                query: query,
                 headers: {
                   "accept" => "text/event-stream",
                   "accept-encoding" => "identity",
-                  **parsed
+                  **parsed.except(*query_params)
                 }.transform_keys(
                   betas: "anthropic-beta"
                 ),

@@ -27,7 +27,6 @@ module Anthropic
 
         def update: (
           String agent_id,
-          version: Integer,
           ?description: String?,
           ?mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?,
           ?metadata: ::Hash[Symbol, String?]?,
@@ -37,6 +36,7 @@ module Anthropic
           ?skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]?,
           ?system_: String?,
           ?tools: ::Array[Anthropic::Models::Beta::AgentUpdateParams::tool]?,
+          ?version: Integer,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsAgent

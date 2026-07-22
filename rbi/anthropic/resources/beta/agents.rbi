@@ -107,7 +107,6 @@ module Anthropic
         sig do
           params(
             agent_id: String,
-            version: Integer,
             description: T.nilable(String),
             mcp_servers:
               T.nilable(
@@ -147,6 +146,7 @@ module Anthropic
                   )
                 ]
               ),
+            version: Integer,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaManagedAgentsAgent)
@@ -154,10 +154,6 @@ module Anthropic
         def update(
           # Path param: Path parameter agent_id
           agent_id,
-          # Body param: The agent's current version, used to prevent concurrent overwrites.
-          # Obtain this value from a create or retrieve response. The request fails if this
-          # does not match the server's current version.
-          version:,
           # Body param: Description. Omit to preserve; send empty string or null to clear.
           description: nil,
           # Body param: MCP servers. Full replacement. Omit to preserve; send empty array or
@@ -191,6 +187,11 @@ module Anthropic
           # to preserve; send empty array or null to clear. Maximum of 128 tools across all
           # toolsets allowed.
           tools: nil,
+          # Body param: The agent's current version, used to prevent concurrent overwrites.
+          # Obtain this value from a create or retrieve response. Must be at least 1 if
+          # specified. When supplied, the request fails if it does not match the server's
+          # current version; omit to apply the update unconditionally.
+          version: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}

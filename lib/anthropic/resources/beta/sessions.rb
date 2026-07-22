@@ -18,11 +18,13 @@ module Anthropic
         #
         # Create Session
         #
-        # @overload create(agent:, environment_id:, metadata: nil, resources: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
+        # @overload create(agent:, environment_id:, initial_events: nil, metadata: nil, resources: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
         #
         # @param agent [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams] Body param: Agent identifier. Accepts the `agent` ID string, which pins the late
         #
         # @param environment_id [String] Body param: ID of the `environment` defining the container configuration for thi
+        #
+        # @param initial_events [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams>] Body param: Initial events to send to the `session` at creation, processed in or
         #
         # @param metadata [Hash{Symbol=>String}] Body param: Arbitrary key-value metadata attached to the session. Maximum 16 pai
         #

@@ -13,14 +13,6 @@ module Anthropic
         #   @return [String]
         required :agent_id, String
 
-        # @!attribute version
-        #   The agent's current version, used to prevent concurrent overwrites. Obtain this
-        #   value from a create or retrieve response. The request fails if this does not
-        #   match the server's current version.
-        #
-        #   @return [Integer]
-        required :version, Integer
-
         # @!attribute description
         #   Description. Omit to preserve; send empty string or null to clear.
         #
@@ -97,19 +89,26 @@ module Anthropic
                  -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::AgentUpdateParams::Tool] },
                  nil?: true
 
+        # @!attribute version
+        #   The agent's current version, used to prevent concurrent overwrites. Obtain this
+        #   value from a create or retrieve response. Must be at least 1 if specified. When
+        #   supplied, the request fails if it does not match the server's current version;
+        #   omit to apply the update unconditionally.
+        #
+        #   @return [Integer, nil]
+        optional :version, Integer
+
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(agent_id:, version:, description: nil, mcp_servers: nil, metadata: nil, model: nil, multiagent: nil, name: nil, skills: nil, system_: nil, tools: nil, betas: nil, request_options: {})
+        # @!method initialize(agent_id:, description: nil, mcp_servers: nil, metadata: nil, model: nil, multiagent: nil, name: nil, skills: nil, system_: nil, tools: nil, version: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::AgentUpdateParams} for more details.
         #
         #   @param agent_id [String]
-        #
-        #   @param version [Integer] The agent's current version, used to prevent concurrent overwrites. Obtain this
         #
         #   @param description [String, nil] Description. Omit to preserve; send empty string or null to clear.
         #
@@ -128,6 +127,8 @@ module Anthropic
         #   @param system_ [String, nil] System prompt. Omit to preserve; send empty string or null to clear.
         #
         #   @param tools [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams>, nil] Tool configurations available to the agent. Full replacement. Omit to preserve;
+        #
+        #   @param version [Integer] The agent's current version, used to prevent concurrent overwrites. Obtain this
         #
         #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #

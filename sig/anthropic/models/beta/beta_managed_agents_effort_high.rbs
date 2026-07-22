@@ -1,0 +1,32 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsEffortHigh = Beta::BetaManagedAgentsEffortHigh
+
+    module Beta
+      type beta_managed_agents_effort_high =
+        { type: Anthropic::Models::Beta::BetaManagedAgentsEffortHigh::type_ }
+
+      class BetaManagedAgentsEffortHigh < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsEffortHigh::type_
+
+        def initialize: (
+          type: Anthropic::Models::Beta::BetaManagedAgentsEffortHigh::type_
+        ) -> void
+
+        def to_hash: -> {
+          type: Anthropic::Models::Beta::BetaManagedAgentsEffortHigh::type_
+        }
+
+        type type_ = :high
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          HIGH: :high
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsEffortHigh::type_]
+        end
+      end
+    end
+  end
+end

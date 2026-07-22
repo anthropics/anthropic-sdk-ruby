@@ -61,8 +61,8 @@ class Anthropic::Test::Resources::Beta::AgentsTest < Anthropic::Test::ResourceTe
     end
   end
 
-  def test_update_required_params
-    response = @anthropic.beta.agents.update("agent_011CZkYpogX7uDKUyvBTophP", version: 1)
+  def test_update
+    response = @anthropic.beta.agents.update("agent_011CZkYpogX7uDKUyvBTophP")
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsAgent

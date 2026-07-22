@@ -21,6 +21,14 @@ module Anthropic
         #   @return [String]
         required :environment_id, String
 
+        # @!attribute initial_events
+        #   Initial events to send to the `session` at creation, processed in order.
+        #   Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
+        #
+        #   @return [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams>, nil]
+        optional :initial_events,
+                 -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::SessionCreateParams::InitialEvent] }
+
         # @!attribute metadata
         #   Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up
         #   to 64 chars, values up to 512 chars.
@@ -53,13 +61,15 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(agent:, environment_id:, metadata: nil, resources: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
+        # @!method initialize(agent:, environment_id:, initial_events: nil, metadata: nil, resources: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::SessionCreateParams} for more details.
         #
         #   @param agent [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams] Agent identifier. Accepts the `agent` ID string, which pins the latest version f
         #
         #   @param environment_id [String] ID of the `environment` defining the container configuration for this session.
+        #
+        #   @param initial_events [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams>] Initial events to send to the `session` at creation, processed in order. Support
         #
         #   @param metadata [Hash{Symbol=>String}] Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up
         #
@@ -88,6 +98,24 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams)]
+        end
+
+        # An event sent to the `session` immediately after it is created. Supports
+        # `user.message` and `user.define_outcome`.
+        module InitialEvent
+          extend Anthropic::Internal::Type::Union
+
+          discriminator :type
+
+          # Parameters for sending a user message to the session.
+          variant :"user.message", -> { Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEventParams }
+
+          # Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+          variant :"user.define_outcome",
+                  -> { Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams }
+
+          # @!method self.variants
+          #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams)]
         end
 
         # Union of resources that can be mounted into a session.

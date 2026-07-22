@@ -11,6 +11,7 @@ module Anthropic
         def create: (
           agent: Anthropic::Models::Beta::SessionCreateParams::agent,
           environment_id: String,
+          ?initial_events: ::Array[Anthropic::Models::Beta::SessionCreateParams::initial_event],
           ?metadata: ::Hash[Symbol, String],
           ?resources: ::Array[Anthropic::Models::Beta::SessionCreateParams::resource],
           ?title: String?,

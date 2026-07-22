@@ -112,7 +112,7 @@ class Anthropic::Test::Resources::Beta::EnvironmentsTest < Anthropic::Test::Reso
     assert_pattern do
       response => {
         id: String,
-        type: Symbol
+        type: Anthropic::Beta::BetaEnvironmentDeleteResponse::Type
       }
     end
   end

@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaWebhookMemoryStoreDeletedEventData = Beta::BetaWebhookMemoryStoreDeletedEventData
+
+    module Beta
+      type beta_webhook_memory_store_deleted_event_data =
+        {
+          id: String,
+          organization_id: String,
+          type: :"memory_store.deleted",
+          workspace_id: String
+        }
+
+      class BetaWebhookMemoryStoreDeletedEventData < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor organization_id: String
+
+        attr_accessor type: :"memory_store.deleted"
+
+        attr_accessor workspace_id: String
+
+        def initialize: (
+          id: String,
+          organization_id: String,
+          workspace_id: String,
+          ?type: :"memory_store.deleted"
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          organization_id: String,
+          type: :"memory_store.deleted",
+          workspace_id: String
+        }
+      end
+    end
+  end
+end
