@@ -89,11 +89,9 @@ module Anthropic
         #
         # Update Agent
         #
-        # @overload update(agent_id, version:, description: nil, mcp_servers: nil, metadata: nil, model: nil, multiagent: nil, name: nil, skills: nil, system_: nil, tools: nil, betas: nil, request_options: {})
+        # @overload update(agent_id, description: nil, mcp_servers: nil, metadata: nil, model: nil, multiagent: nil, name: nil, skills: nil, system_: nil, tools: nil, version: nil, betas: nil, request_options: {})
         #
         # @param agent_id [String] Path param: Path parameter agent_id
-        #
-        # @param version [Integer] Body param: The agent's current version, used to prevent concurrent overwrites.
         #
         # @param description [String, nil] Body param: Description. Omit to preserve; send empty string or null to clear.
         #
@@ -113,6 +111,8 @@ module Anthropic
         #
         # @param tools [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams>, nil] Body param: Tool configurations available to the agent. Full replacement. Omit t
         #
+        # @param version [Integer] Body param: The agent's current version, used to prevent concurrent overwrites.
+        #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
@@ -120,7 +120,7 @@ module Anthropic
         # @return [Anthropic::Models::Beta::BetaManagedAgentsAgent]
         #
         # @see Anthropic::Models::Beta::AgentUpdateParams
-        def update(agent_id, params)
+        def update(agent_id, params = {})
           parsed, options = Anthropic::Beta::AgentUpdateParams.dump_request(params)
           header_params = {betas: "anthropic-beta"}
           @client.request(

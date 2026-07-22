@@ -23,6 +23,13 @@ module Anthropic
                 Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::OrHash
               ),
             environment_id: String,
+            initial_events:
+              T::Array[
+                T.any(
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::OrHash
+                )
+              ],
             metadata: T::Hash[Symbol, String],
             resources:
               T::Array[
@@ -46,6 +53,10 @@ module Anthropic
           # Body param: ID of the `environment` defining the container configuration for
           # this session.
           environment_id:,
+          # Body param: Initial events to send to the `session` at creation, processed in
+          # order. Supports `user.message` and `user.define_outcome` events. Maximum 50
+          # events.
+          initial_events: nil,
           # Body param: Arbitrary key-value metadata attached to the session. Maximum 16
           # pairs, keys up to 64 chars, values up to 512 chars.
           metadata: nil,

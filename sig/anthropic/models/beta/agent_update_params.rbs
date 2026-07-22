@@ -4,7 +4,6 @@ module Anthropic
       type agent_update_params =
         {
           agent_id: String,
-          version: Integer,
           description: String?,
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?,
           metadata: ::Hash[Symbol, String?]?,
@@ -14,6 +13,7 @@ module Anthropic
           skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]?,
           system_: String?,
           tools: ::Array[Anthropic::Models::Beta::AgentUpdateParams::tool]?,
+          version: Integer,
           betas: ::Array[Anthropic::Models::anthropic_beta]
         }
         & Anthropic::Internal::Type::request_parameters
@@ -23,8 +23,6 @@ module Anthropic
         include Anthropic::Internal::Type::RequestParameters
 
         attr_accessor agent_id: String
-
-        attr_accessor version: Integer
 
         attr_accessor description: String?
 
@@ -50,6 +48,10 @@ module Anthropic
 
         attr_accessor tools: ::Array[Anthropic::Models::Beta::AgentUpdateParams::tool]?
 
+        attr_reader version: Integer?
+
+        def version=: (Integer) -> Integer
+
         attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
         def betas=: (
@@ -58,7 +60,6 @@ module Anthropic
 
         def initialize: (
           agent_id: String,
-          version: Integer,
           ?description: String?,
           ?mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?,
           ?metadata: ::Hash[Symbol, String?]?,
@@ -68,13 +69,13 @@ module Anthropic
           ?skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]?,
           ?system_: String?,
           ?tools: ::Array[Anthropic::Models::Beta::AgentUpdateParams::tool]?,
+          ?version: Integer,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> void
 
         def to_hash: -> {
           agent_id: String,
-          version: Integer,
           description: String?,
           mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams]?,
           metadata: ::Hash[Symbol, String?]?,
@@ -84,6 +85,7 @@ module Anthropic
           skills: ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]?,
           system_: String?,
           tools: ::Array[Anthropic::Models::Beta::AgentUpdateParams::tool]?,
+          version: Integer,
           betas: ::Array[Anthropic::Models::anthropic_beta],
           request_options: Anthropic::RequestOptions
         }

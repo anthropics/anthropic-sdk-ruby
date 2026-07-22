@@ -1,0 +1,32 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsEffortMedium = Beta::BetaManagedAgentsEffortMedium
+
+    module Beta
+      type beta_managed_agents_effort_medium =
+        { type: Anthropic::Models::Beta::BetaManagedAgentsEffortMedium::type_ }
+
+      class BetaManagedAgentsEffortMedium < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsEffortMedium::type_
+
+        def initialize: (
+          type: Anthropic::Models::Beta::BetaManagedAgentsEffortMedium::type_
+        ) -> void
+
+        def to_hash: -> {
+          type: Anthropic::Models::Beta::BetaManagedAgentsEffortMedium::type_
+        }
+
+        type type_ = :medium
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          MEDIUM: :medium
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsEffortMedium::type_]
+        end
+      end
+    end
+  end
+end

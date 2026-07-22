@@ -4,16 +4,35 @@ module Anthropic
 
     module Beta
       type beta_environment_delete_response =
-        { id: String, type: :environment_deleted }
+        {
+          id: String,
+          type: Anthropic::Models::Beta::BetaEnvironmentDeleteResponse::type_
+        }
 
       class BetaEnvironmentDeleteResponse < Anthropic::Internal::Type::BaseModel
         attr_accessor id: String
 
-        attr_accessor type: :environment_deleted
+        attr_accessor type: Anthropic::Models::Beta::BetaEnvironmentDeleteResponse::type_
 
-        def initialize: (id: String, ?type: :environment_deleted) -> void
+        def initialize: (
+          id: String,
+          type: Anthropic::Models::Beta::BetaEnvironmentDeleteResponse::type_
+        ) -> void
 
-        def to_hash: -> { id: String, type: :environment_deleted }
+        def to_hash: -> {
+          id: String,
+          type: Anthropic::Models::Beta::BetaEnvironmentDeleteResponse::type_
+        }
+
+        type type_ = :environment_deleted
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          ENVIRONMENT_DELETED: :environment_deleted
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaEnvironmentDeleteResponse::type_]
+        end
       end
     end
   end

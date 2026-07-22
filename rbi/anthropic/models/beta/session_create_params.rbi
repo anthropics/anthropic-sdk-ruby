@@ -32,6 +32,35 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :environment_id
 
+        # Initial events to send to the `session` at creation, processed in order.
+        # Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
+        sig do
+          returns(
+            T.nilable(
+              T::Array[
+                T.any(
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEventParams,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams
+                )
+              ]
+            )
+          )
+        end
+        attr_reader :initial_events
+
+        sig do
+          params(
+            initial_events:
+              T::Array[
+                T.any(
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::OrHash
+                )
+              ]
+          ).void
+        end
+        attr_writer :initial_events
+
         # Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up
         # to 64 chars, values up to 512 chars.
         sig { returns(T.nilable(T::Hash[Symbol, String])) }
@@ -107,6 +136,13 @@ module Anthropic
                 Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::OrHash
               ),
             environment_id: String,
+            initial_events:
+              T::Array[
+                T.any(
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::OrHash
+                )
+              ],
             metadata: T::Hash[Symbol, String],
             resources:
               T::Array[
@@ -128,6 +164,9 @@ module Anthropic
           agent:,
           # ID of the `environment` defining the container configuration for this session.
           environment_id:,
+          # Initial events to send to the `session` at creation, processed in order.
+          # Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
+          initial_events: nil,
           # Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up
           # to 64 chars, values up to 512 chars.
           metadata: nil,
@@ -153,6 +192,13 @@ module Anthropic
                   Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams
                 ),
               environment_id: String,
+              initial_events:
+                T::Array[
+                  T.any(
+                    Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEventParams,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams
+                  )
+                ],
               metadata: T::Hash[Symbol, String],
               resources:
                 T::Array[
@@ -190,6 +236,30 @@ module Anthropic
           sig do
             override.returns(
               T::Array[Anthropic::Beta::SessionCreateParams::Agent::Variants]
+            )
+          end
+          def self.variants
+          end
+        end
+
+        # An event sent to the `session` immediately after it is created. Supports
+        # `user.message` and `user.define_outcome`.
+        module InitialEvent
+          extend Anthropic::Internal::Type::Union
+
+          Variants =
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEventParams,
+                Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams
+              )
+            end
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::SessionCreateParams::InitialEvent::Variants
+              ]
             )
           end
           def self.variants

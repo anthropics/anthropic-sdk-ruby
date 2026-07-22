@@ -6,23 +6,57 @@ module Anthropic
       type beta_managed_agents_model_config_params =
         {
           id: Anthropic::Models::Beta::beta_managed_agents_model,
+          effort: Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::effort?,
           speed: Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::speed?
         }
 
       class BetaManagedAgentsModelConfigParams < Anthropic::Internal::Type::BaseModel
         attr_accessor id: Anthropic::Models::Beta::beta_managed_agents_model
 
+        attr_accessor effort: Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::effort?
+
         attr_accessor speed: Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::speed?
 
         def initialize: (
           id: Anthropic::Models::Beta::beta_managed_agents_model,
+          ?effort: Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::effort?,
           ?speed: Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::speed?
         ) -> void
 
         def to_hash: -> {
           id: Anthropic::Models::Beta::beta_managed_agents_model,
+          effort: Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::effort?,
           speed: Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::speed?
         }
+
+        type effort =
+          Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::Effort::beta_managed_agents_effort_level
+          | Anthropic::Beta::BetaManagedAgentsEffortLow
+          | Anthropic::Beta::BetaManagedAgentsEffortMedium
+          | Anthropic::Beta::BetaManagedAgentsEffortHigh
+          | Anthropic::Beta::BetaManagedAgentsEffortXhigh
+          | Anthropic::Beta::BetaManagedAgentsEffortMax
+
+        module Effort
+          extend Anthropic::Internal::Type::Union
+
+          type beta_managed_agents_effort_level =
+            :low | :medium | :high | :xhigh | :max
+
+          module BetaManagedAgentsEffortLevel
+            extend Anthropic::Internal::Type::Enum
+
+            LOW: :low
+            MEDIUM: :medium
+            HIGH: :high
+            XHIGH: :xhigh
+            MAX: :max
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::Effort::beta_managed_agents_effort_level]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::effort]
+        end
 
         type speed = :standard | :fast
 

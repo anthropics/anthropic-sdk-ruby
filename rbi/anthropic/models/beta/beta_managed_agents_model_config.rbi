@@ -21,6 +21,31 @@ module Anthropic
         sig { returns(Anthropic::Beta::BetaManagedAgentsModel::Variants) }
         attr_accessor :id
 
+        # How hard Claude works on each turn. Sets `output_config.effort` on every
+        # Messages call the session makes.
+        sig do
+          returns(
+            T.nilable(
+              Anthropic::Beta::BetaManagedAgentsModelConfig::Effort::Variants
+            )
+          )
+        end
+        attr_reader :effort
+
+        sig do
+          params(
+            effort:
+              T.any(
+                Anthropic::Beta::BetaManagedAgentsEffortLow::OrHash,
+                Anthropic::Beta::BetaManagedAgentsEffortMedium::OrHash,
+                Anthropic::Beta::BetaManagedAgentsEffortHigh::OrHash,
+                Anthropic::Beta::BetaManagedAgentsEffortXhigh::OrHash,
+                Anthropic::Beta::BetaManagedAgentsEffortMax::OrHash
+              )
+          ).void
+        end
+        attr_writer :effort
+
         # Inference speed mode. `fast` provides significantly faster output token
         # generation at premium pricing. Not all models support `fast`; invalid
         # combinations are rejected at create time.
@@ -46,6 +71,14 @@ module Anthropic
           params(
             id:
               T.any(Anthropic::Beta::BetaManagedAgentsModel::OrSymbol, String),
+            effort:
+              T.any(
+                Anthropic::Beta::BetaManagedAgentsEffortLow::OrHash,
+                Anthropic::Beta::BetaManagedAgentsEffortMedium::OrHash,
+                Anthropic::Beta::BetaManagedAgentsEffortHigh::OrHash,
+                Anthropic::Beta::BetaManagedAgentsEffortXhigh::OrHash,
+                Anthropic::Beta::BetaManagedAgentsEffortMax::OrHash
+              ),
             speed:
               Anthropic::Beta::BetaManagedAgentsModelConfig::Speed::OrSymbol
           ).returns(T.attached_class)
@@ -56,6 +89,9 @@ module Anthropic
           # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
           # details and options.
           id:,
+          # How hard Claude works on each turn. Sets `output_config.effort` on every
+          # Messages call the session makes.
+          effort: nil,
           # Inference speed mode. `fast` provides significantly faster output token
           # generation at premium pricing. Not all models support `fast`; invalid
           # combinations are rejected at create time.
@@ -67,12 +103,41 @@ module Anthropic
           override.returns(
             {
               id: Anthropic::Beta::BetaManagedAgentsModel::Variants,
+              effort:
+                Anthropic::Beta::BetaManagedAgentsModelConfig::Effort::Variants,
               speed:
                 Anthropic::Beta::BetaManagedAgentsModelConfig::Speed::TaggedSymbol
             }
           )
         end
         def to_hash
+        end
+
+        # How hard Claude works on each turn. Sets `output_config.effort` on every
+        # Messages call the session makes.
+        module Effort
+          extend Anthropic::Internal::Type::Union
+
+          Variants =
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::BetaManagedAgentsEffortLow,
+                Anthropic::Beta::BetaManagedAgentsEffortMedium,
+                Anthropic::Beta::BetaManagedAgentsEffortHigh,
+                Anthropic::Beta::BetaManagedAgentsEffortXhigh,
+                Anthropic::Beta::BetaManagedAgentsEffortMax
+              )
+            end
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaManagedAgentsModelConfig::Effort::Variants
+              ]
+            )
+          end
+          def self.variants
+          end
         end
 
         # Inference speed mode. `fast` provides significantly faster output token

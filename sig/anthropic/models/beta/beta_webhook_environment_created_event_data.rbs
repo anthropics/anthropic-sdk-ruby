@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaWebhookEnvironmentCreatedEventData = Beta::BetaWebhookEnvironmentCreatedEventData
+
+    module Beta
+      type beta_webhook_environment_created_event_data =
+        {
+          id: String,
+          organization_id: String,
+          type: :"environment.created",
+          workspace_id: String
+        }
+
+      class BetaWebhookEnvironmentCreatedEventData < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor organization_id: String
+
+        attr_accessor type: :"environment.created"
+
+        attr_accessor workspace_id: String
+
+        def initialize: (
+          id: String,
+          organization_id: String,
+          workspace_id: String,
+          ?type: :"environment.created"
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          organization_id: String,
+          type: :"environment.created",
+          workspace_id: String
+        }
+      end
+    end
+  end
+end
