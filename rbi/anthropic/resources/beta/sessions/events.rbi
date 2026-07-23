@@ -30,18 +30,22 @@ module Anthropic
           def list(
             # Path param: Path parameter session_id
             session_id,
-            # Query param: Return events created after this time (exclusive).
+            # Query param: Return events created after this time (exclusive). Compared against
+            # the event's `processed_at` value.
             created_at_gt: nil,
-            # Query param: Return events created at or after this time (inclusive).
+            # Query param: Return events created at or after this time (inclusive). Compared
+            # against the event's `processed_at` value.
             created_at_gte: nil,
-            # Query param: Return events created before this time (exclusive).
+            # Query param: Return events created before this time (exclusive). Compared
+            # against the event's `processed_at` value.
             created_at_lt: nil,
-            # Query param: Return events created at or before this time (inclusive).
+            # Query param: Return events created at or before this time (inclusive). Compared
+            # against the event's `processed_at` value.
             created_at_lte: nil,
             # Query param: Query parameter for limit
             limit: nil,
-            # Query param: Sort direction for results, ordered by created_at. Defaults to asc
-            # (chronological).
+            # Query param: Sort direction for results, ordered by the event's `processed_at`.
+            # Defaults to asc (chronological).
             order: nil,
             # Query param: Opaque pagination cursor from a previous response's next_page.
             page: nil,

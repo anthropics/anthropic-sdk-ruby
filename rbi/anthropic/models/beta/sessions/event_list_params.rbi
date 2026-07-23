@@ -19,28 +19,32 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :session_id
 
-          # Return events created after this time (exclusive).
+          # Return events created after this time (exclusive). Compared against the event's
+          # `processed_at` value.
           sig { returns(T.nilable(Time)) }
           attr_reader :created_at_gt
 
           sig { params(created_at_gt: Time).void }
           attr_writer :created_at_gt
 
-          # Return events created at or after this time (inclusive).
+          # Return events created at or after this time (inclusive). Compared against the
+          # event's `processed_at` value.
           sig { returns(T.nilable(Time)) }
           attr_reader :created_at_gte
 
           sig { params(created_at_gte: Time).void }
           attr_writer :created_at_gte
 
-          # Return events created before this time (exclusive).
+          # Return events created before this time (exclusive). Compared against the event's
+          # `processed_at` value.
           sig { returns(T.nilable(Time)) }
           attr_reader :created_at_lt
 
           sig { params(created_at_lt: Time).void }
           attr_writer :created_at_lt
 
-          # Return events created at or before this time (inclusive).
+          # Return events created at or before this time (inclusive). Compared against the
+          # event's `processed_at` value.
           sig { returns(T.nilable(Time)) }
           attr_reader :created_at_lte
 
@@ -54,8 +58,8 @@ module Anthropic
           sig { params(limit: Integer).void }
           attr_writer :limit
 
-          # Sort direction for results, ordered by created_at. Defaults to asc
-          # (chronological).
+          # Sort direction for results, ordered by the event's `processed_at`. Defaults to
+          # asc (chronological).
           sig do
             returns(
               T.nilable(
@@ -123,18 +127,22 @@ module Anthropic
           end
           def self.new(
             session_id:,
-            # Return events created after this time (exclusive).
+            # Return events created after this time (exclusive). Compared against the event's
+            # `processed_at` value.
             created_at_gt: nil,
-            # Return events created at or after this time (inclusive).
+            # Return events created at or after this time (inclusive). Compared against the
+            # event's `processed_at` value.
             created_at_gte: nil,
-            # Return events created before this time (exclusive).
+            # Return events created before this time (exclusive). Compared against the event's
+            # `processed_at` value.
             created_at_lt: nil,
-            # Return events created at or before this time (inclusive).
+            # Return events created at or before this time (inclusive). Compared against the
+            # event's `processed_at` value.
             created_at_lte: nil,
             # Query parameter for limit
             limit: nil,
-            # Sort direction for results, ordered by created_at. Defaults to asc
-            # (chronological).
+            # Sort direction for results, ordered by the event's `processed_at`. Defaults to
+            # asc (chronological).
             order: nil,
             # Opaque pagination cursor from a previous response's next_page.
             page: nil,
@@ -169,8 +177,8 @@ module Anthropic
           def to_hash
           end
 
-          # Sort direction for results, ordered by created_at. Defaults to asc
-          # (chronological).
+          # Sort direction for results, ordered by the event's `processed_at`. Defaults to
+          # asc (chronological).
           module Order
             extend Anthropic::Internal::Type::Enum
 
