@@ -15,25 +15,29 @@ module Anthropic
           required :session_id, String
 
           # @!attribute created_at_gt
-          #   Return events created after this time (exclusive).
+          #   Return events created after this time (exclusive). Compared against the event's
+          #   `processed_at` value.
           #
           #   @return [Time, nil]
           optional :created_at_gt, Time
 
           # @!attribute created_at_gte
-          #   Return events created at or after this time (inclusive).
+          #   Return events created at or after this time (inclusive). Compared against the
+          #   event's `processed_at` value.
           #
           #   @return [Time, nil]
           optional :created_at_gte, Time
 
           # @!attribute created_at_lt
-          #   Return events created before this time (exclusive).
+          #   Return events created before this time (exclusive). Compared against the event's
+          #   `processed_at` value.
           #
           #   @return [Time, nil]
           optional :created_at_lt, Time
 
           # @!attribute created_at_lte
-          #   Return events created at or before this time (inclusive).
+          #   Return events created at or before this time (inclusive). Compared against the
+          #   event's `processed_at` value.
           #
           #   @return [Time, nil]
           optional :created_at_lte, Time
@@ -45,8 +49,8 @@ module Anthropic
           optional :limit, Integer
 
           # @!attribute order
-          #   Sort direction for results, ordered by created_at. Defaults to asc
-          #   (chronological).
+          #   Sort direction for results, ordered by the event's `processed_at`. Defaults to
+          #   asc (chronological).
           #
           #   @return [Symbol, Anthropic::Models::Beta::Sessions::EventListParams::Order, nil]
           optional :order, enum: -> { Anthropic::Beta::Sessions::EventListParams::Order }
@@ -76,17 +80,17 @@ module Anthropic
           #
           #   @param session_id [String]
           #
-          #   @param created_at_gt [Time] Return events created after this time (exclusive).
+          #   @param created_at_gt [Time] Return events created after this time (exclusive). Compared against the event's
           #
-          #   @param created_at_gte [Time] Return events created at or after this time (inclusive).
+          #   @param created_at_gte [Time] Return events created at or after this time (inclusive). Compared against the ev
           #
-          #   @param created_at_lt [Time] Return events created before this time (exclusive).
+          #   @param created_at_lt [Time] Return events created before this time (exclusive). Compared against the event's
           #
-          #   @param created_at_lte [Time] Return events created at or before this time (inclusive).
+          #   @param created_at_lte [Time] Return events created at or before this time (inclusive). Compared against the e
           #
           #   @param limit [Integer] Query parameter for limit
           #
-          #   @param order [Symbol, Anthropic::Models::Beta::Sessions::EventListParams::Order] Sort direction for results, ordered by created_at. Defaults to asc (chronologica
+          #   @param order [Symbol, Anthropic::Models::Beta::Sessions::EventListParams::Order] Sort direction for results, ordered by the event's `processed_at`. Defaults to a
           #
           #   @param page [String] Opaque pagination cursor from a previous response's next_page.
           #
@@ -96,8 +100,8 @@ module Anthropic
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
-          # Sort direction for results, ordered by created_at. Defaults to asc
-          # (chronological).
+          # Sort direction for results, ordered by the event's `processed_at`. Defaults to
+          # asc (chronological).
           module Order
             extend Anthropic::Internal::Type::Enum
 

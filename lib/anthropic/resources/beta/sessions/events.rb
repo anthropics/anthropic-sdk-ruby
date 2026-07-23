@@ -14,17 +14,17 @@ module Anthropic
           #
           # @param session_id [String] Path param: Path parameter session_id
           #
-          # @param created_at_gt [Time] Query param: Return events created after this time (exclusive).
+          # @param created_at_gt [Time] Query param: Return events created after this time (exclusive). Compared against
           #
-          # @param created_at_gte [Time] Query param: Return events created at or after this time (inclusive).
+          # @param created_at_gte [Time] Query param: Return events created at or after this time (inclusive). Compared a
           #
-          # @param created_at_lt [Time] Query param: Return events created before this time (exclusive).
+          # @param created_at_lt [Time] Query param: Return events created before this time (exclusive). Compared agains
           #
-          # @param created_at_lte [Time] Query param: Return events created at or before this time (inclusive).
+          # @param created_at_lte [Time] Query param: Return events created at or before this time (inclusive). Compared
           #
           # @param limit [Integer] Query param: Query parameter for limit
           #
-          # @param order [Symbol, Anthropic::Models::Beta::Sessions::EventListParams::Order] Query param: Sort direction for results, ordered by created_at. Defaults to asc
+          # @param order [Symbol, Anthropic::Models::Beta::Sessions::EventListParams::Order] Query param: Sort direction for results, ordered by the event's `processed_at`.
           #
           # @param page [String] Query param: Opaque pagination cursor from a previous response's next_page.
           #

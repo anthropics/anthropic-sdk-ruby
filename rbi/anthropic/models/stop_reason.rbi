@@ -14,6 +14,11 @@ module Anthropic
       TOOL_USE = T.let(:tool_use, Anthropic::StopReason::TaggedSymbol)
       PAUSE_TURN = T.let(:pause_turn, Anthropic::StopReason::TaggedSymbol)
       REFUSAL = T.let(:refusal, Anthropic::StopReason::TaggedSymbol)
+      MODEL_CONTEXT_WINDOW_EXCEEDED =
+        T.let(
+          :model_context_window_exceeded,
+          Anthropic::StopReason::TaggedSymbol
+        )
 
       sig { override.returns(T::Array[Anthropic::StopReason::TaggedSymbol]) }
       def self.values

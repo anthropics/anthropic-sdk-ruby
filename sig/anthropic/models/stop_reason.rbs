@@ -7,6 +7,7 @@ module Anthropic
       | :tool_use
       | :pause_turn
       | :refusal
+      | :model_context_window_exceeded
 
     module StopReason
       extend Anthropic::Internal::Type::Enum
@@ -17,6 +18,7 @@ module Anthropic
       TOOL_USE: :tool_use
       PAUSE_TURN: :pause_turn
       REFUSAL: :refusal
+      MODEL_CONTEXT_WINDOW_EXCEEDED: :model_context_window_exceeded
 
       def self?.values: -> ::Array[Anthropic::Models::stop_reason]
     end
