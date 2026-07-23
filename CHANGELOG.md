@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.58.0 (2026-07-23)
+
+Full Changelog: [v1.57.0...v1.58.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.57.0...v1.58.0)
+
+### Features
+
+* **api:** add new stop reason 'model_context_window_exceeded' ([09a69dd](https://github.com/anthropics/anthropic-sdk-ruby/commit/09a69dd429905e10d3f18abe80a12f26082907b2))
+
 ## 1.57.0 (2026-07-22)
 
 Full Changelog: [v1.56.1...v1.57.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.56.1...v1.57.0)
