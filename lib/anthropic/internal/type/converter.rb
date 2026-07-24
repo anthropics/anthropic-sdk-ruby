@@ -53,6 +53,8 @@ module Anthropic
           in Anthropic::FilePart
             state[:can_retry] = false if value.content.is_a?(IO)
             value
+          in Time
+            value.iso8601
           else
             value
           end

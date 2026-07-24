@@ -94,7 +94,11 @@ class Anthropic::Test::PrimitiveModelTest < Minitest::Test
       [:a, :b] => :b,
       [:a, "a"] => "a",
       [String, StringIO.new("one")] => "one",
-      [String, Pathname(__FILE__)] => Anthropic::FilePart
+      [String, Pathname(__FILE__)] => Anthropic::FilePart,
+      [Time, Time.utc(2024, 1, 2, 3, 4, 5)] => "2024-01-02T03:04:05Z",
+      [Time, Time.new(2024, 1, 2, 3, 4, 5, "+07:00")] => "2024-01-02T03:04:05+07:00",
+      [Anthropic::Internal::Type::Unknown, {t: Time.utc(2024, 1, 2, 3, 4, 5)}] => {t: "2024-01-02T03:04:05Z"},
+      [Anthropic::Internal::Type::Unknown, [Time.utc(2024, 1, 2, 3, 4, 5)]] => ["2024-01-02T03:04:05Z"]
     }
 
     cases.each do
