@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.59.0 (2026-07-24)
+
+Full Changelog: [v1.58.0...v1.59.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.58.0...v1.59.0)
+
+### Features
+
+* **api:** add claude-opus-5 model ([56d4632](https://github.com/anthropics/anthropic-sdk-ruby/commit/56d46324125672b08af378289727211500c73ae0))
+* **api:** add tool addition/removal blocks and tool_change events ([56d4632](https://github.com/anthropics/anthropic-sdk-ruby/commit/56d46324125672b08af378289727211500c73ae0))
+* **api:** expand client-side fallback credit token types and add server-side fallbacks default option ([56d4632](https://github.com/anthropics/anthropic-sdk-ruby/commit/56d46324125672b08af378289727211500c73ae0))
+
+
+### Chores
+
+* **internal:** codegen related update ([4db7e95](https://github.com/anthropics/anthropic-sdk-ruby/commit/4db7e9578d2919891461cfca07303789a966d4d8))
+
 ## 1.58.0 (2026-07-23)
 
 Full Changelog: [v1.57.0...v1.58.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.57.0...v1.58.0)
