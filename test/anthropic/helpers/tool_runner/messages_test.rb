@@ -429,4 +429,215 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
       ]
     end
   end
+
+  def calculator_tool_use_response(id:, tool_id:)
+    tool_use_response(
+      id: id,
+      tool_use: {id: tool_id, name: "calculator", input: {lhs: 10.0, rhs: 5.0, operator: "+"}}
+    )
+  end
+
+  def tool_result_for(runner, tool_use_id)
+    blocks = runner.params[:messages].select { _1[:role] == :user }.flat_map { _1[:content] }
+    blocks.find { _1.is_a?(Hash) && _1[:tool_use_id] == tool_use_id }
+  end
+
+  def test_removed_tool_call_is_treated_as_unknown_tool
+    removal = {
+      role: :system,
+      content: [{type: :tool_removal, tool: {type: :tool_reference, name: "calculator"}}]
+    }
+
+    stub_responses(
+      calculator_tool_use_response(id: "msg_1", tool_id: "tool_1"),
+      text_response(id: "msg_2", text: "Cannot calculate right now"),
+      calculator_tool_use_response(id: "msg_3", tool_id: "tool_1"),
+      text_response(id: "msg_4", text: "Cannot calculate right now")
+    )
+
+    removed_runner = @client.beta.messages.tool_runner(
+      {**basic_params, messages: [*basic_params[:messages], removal]}
+    )
+    removed_runner.each_message { _1 }
+
+    assert_empty(@calculator.call_history)
+
+    # The same call against a runner where `calculator` was never declared at all.
+    undeclared_runner = @client.beta.messages.tool_runner({**basic_params, tools: [@stateful_counter]})
+    undeclared_runner.each_message { _1 }
+
+    removed_result = tool_result_for(removed_runner, "tool_1")
+    undeclared_result = tool_result_for(undeclared_runner, "tool_1")
+
+    assert_equal(true, removed_result[:is_error])
+    assert_equal(undeclared_result, removed_result)
+  end
+
+  def test_tool_addition_restores_removed_tool
+    messages = [
+      *basic_params[:messages],
+      {
+        role: :system,
+        content: [{type: :tool_removal, tool: {type: :tool_reference, name: "calculator"}}]
+      },
+      {role: :user, content: "Actually, keep the calculator available."},
+      {
+        role: :system,
+        content: [
+          Anthropic::Beta::BetaRequestToolAdditionBlock.new(
+            tool: {type: :tool_reference, name: "calculator"}
+          )
+        ]
+      }
+    ]
+
+    stub_responses(
+      calculator_tool_use_response(id: "msg_1", tool_id: "tool_1"),
+      text_response(id: "msg_2", text: "10 + 5 = 15")
+    )
+
+    runner = @client.beta.messages.tool_runner({**basic_params, messages:})
+    runner.each_message { _1 }
+
+    assert_equal([{lhs: 10.0, rhs: 5.0, operator: :+}], @calculator.call_history)
+    assert_pattern do
+      tool_result_for(runner, "tool_1") => {is_error: false, content: "15.0"}
+    end
+  end
+
+  def test_tool_removal_nested_in_mid_conv_system_block
+    removal = {
+      role: :system,
+      content: [
+        {
+          type: :mid_conv_system,
+          content: [
+            {type: :text, text: "The calculator is no longer available."},
+            {type: :tool_removal, tool: {type: :tool_reference, name: "calculator"}}
+          ]
+        }
+      ]
+    }
+
+    stub_responses(
+      calculator_tool_use_response(id: "msg_1", tool_id: "tool_1"),
+      text_response(id: "msg_2", text: "Cannot calculate right now")
+    )
+
+    runner = @client.beta.messages.tool_runner(
+      {**basic_params, messages: [*basic_params[:messages], removal]}
+    )
+    runner.each_message { _1 }
+
+    assert_empty(@calculator.call_history)
+    assert_not_found_result(tool_result_for(runner, "tool_1"))
+  end
+
+  def calculator_removal_message
+    {
+      role: :system,
+      content: [{type: :tool_removal, tool: {type: :tool_reference, name: "calculator"}}]
+    }
+  end
+
+  def calculator_addition_message
+    {
+      role: :system,
+      content: [{type: :tool_addition, tool: {type: :tool_reference, name: "calculator"}}]
+    }
+  end
+
+  def assert_not_found_result(result)
+    assert_pattern do
+      result => {is_error: true, content: /'calculator' not found/}
+    end
+  end
+
+  # `each_message` yields the response before that turn's tool dispatch, and an in-place
+  # append keeps the runner's messages array, so the removal applies to that same turn.
+  def test_in_place_appended_tool_removal_blocks_same_turn_dispatch
+    stub_responses(
+      calculator_tool_use_response(id: "msg_1", tool_id: "tool_1"),
+      calculator_tool_use_response(id: "msg_2", tool_id: "tool_2"),
+      text_response(id: "msg_3", text: "Cannot calculate right now")
+    )
+
+    runner = @client.beta.messages.tool_runner(basic_params)
+    runner.each_message do
+      runner.params[:messages] << calculator_removal_message if _1.id == "msg_2"
+    end
+
+    assert_equal([{lhs: 10.0, rhs: 5.0, operator: :+}], @calculator.call_history)
+    assert_pattern do
+      tool_result_for(runner, "tool_1") => {is_error: false, content: "15.0"}
+    end
+    assert_not_found_result(tool_result_for(runner, "tool_2"))
+  end
+
+  # `feed_messages` swaps in a new messages array, so the runner skips that turn's dispatch
+  # entirely and honors the removal from the following turn on.
+  def test_tool_removal_via_feed_messages_blocks_the_following_turn
+    stub_responses(
+      calculator_tool_use_response(id: "msg_1", tool_id: "tool_1"),
+      calculator_tool_use_response(id: "msg_2", tool_id: "tool_2"),
+      text_response(id: "msg_3", text: "Cannot calculate right now")
+    )
+
+    runner = @client.beta.messages.tool_runner(basic_params)
+    runner.each_message do
+      runner.feed_messages(calculator_removal_message) if _1.id == "msg_1"
+    end
+
+    assert_empty(@calculator.call_history)
+    assert_nil(tool_result_for(runner, "tool_1"))
+    assert_not_found_result(tool_result_for(runner, "tool_2"))
+  end
+
+  # Reassigning `params` wholesale behaves like `feed_messages`: the replaced array skips the
+  # current turn's dispatch and the removal governs the next one.
+  def test_tool_removal_via_params_replacement_blocks_the_following_turn
+    stub_responses(
+      calculator_tool_use_response(id: "msg_1", tool_id: "tool_1"),
+      calculator_tool_use_response(id: "msg_2", tool_id: "tool_2"),
+      text_response(id: "msg_3", text: "Cannot calculate right now")
+    )
+
+    runner = @client.beta.messages.tool_runner(basic_params)
+    runner.each_message do
+      next unless _1.id == "msg_1"
+
+      runner.params = {
+        **runner.params,
+        messages: [*runner.params[:messages], calculator_removal_message]
+      }
+    end
+
+    assert_empty(@calculator.call_history)
+    assert_nil(tool_result_for(runner, "tool_1"))
+    assert_not_found_result(tool_result_for(runner, "tool_2"))
+  end
+
+  def test_in_place_appended_tool_addition_re_enables_removed_tool
+    stub_responses(
+      calculator_tool_use_response(id: "msg_1", tool_id: "tool_1"),
+      calculator_tool_use_response(id: "msg_2", tool_id: "tool_2"),
+      text_response(id: "msg_3", text: "10 + 5 = 15")
+    )
+
+    runner = @client.beta.messages.tool_runner(basic_params)
+    runner.each_message do
+      case _1.id
+      when "msg_1"
+        runner.params[:messages] << calculator_removal_message
+      when "msg_2"
+        runner.params[:messages] << calculator_addition_message
+      end
+    end
+
+    assert_equal([{lhs: 10.0, rhs: 5.0, operator: :+}], @calculator.call_history)
+    assert_not_found_result(tool_result_for(runner, "tool_1"))
+    assert_pattern do
+      tool_result_for(runner, "tool_2") => {is_error: false, content: "15.0"}
+    end
+  end
 end

@@ -22,9 +22,11 @@ module Anthropic
   # chain.
   #
   # Non-streaming: when a response comes back with `stop_reason: "refusal"`,
-  # the request is retried with each entry of `fallbacks` merged over the
-  # original params — passing along the refusal's `fallback_credit_token` —
-  # until a model accepts or the chain is exhausted. A message served by a
+  # the request is retried with each entry of `fallbacks` applied as a patch
+  # against the original params (a set field overrides, an explicit `nil`
+  # unsets, an absent field keeps the original value) — passing along the
+  # refusal's `fallback_credit_token` — until a model accepts or the chain is
+  # exhausted. A message served by a
   # fallback carries a `fallback` content block prepended at each model
   # boundary; an exhausted chain surfaces the final refusal verbatim.
   #
@@ -39,8 +41,11 @@ module Anthropic
   # path: the credit token is redeemable only against the refused request's
   # body, so the other per-entry overrides would be rejected.
   #
-  # The fallback-credit beta the credit tokens require is sent by default on
-  # every request the middleware handles; the `betas:` option controls this.
+  # Credit tokens are sent in the object form with `mode: :best_effort`, so a
+  # failing redemption never rejects the retry — it proceeds at normal price
+  # and the outcome is reported on `usage.fallback_credit`. The fallback-credit
+  # beta this requires is sent by default on every request the middleware
+  # handles; the `betas:` option controls this.
   #
   # To keep later requests on the model that accepted, pass a
   # {BetaFallbackState} via the `fallback_state` request option; requests
@@ -57,17 +62,25 @@ module Anthropic
     include Anthropic::Middleware
 
     # Betas sent by default; override with the `betas:` option.
-    DEFAULT_BETAS = ["fallback-credit-2026-06-01"].freeze
+    DEFAULT_BETAS = ["fallback-credit-2026-07-01"].freeze
 
     # @param fallbacks [Array<Hash, Anthropic::Models::Beta::BetaFallbackParam>]
     #   the fallback chain, tried in order. Each entry must carry `model:`; on
     #   the non-streaming path the remaining keys (`max_tokens:`, `thinking:`,
-    #   …) are merged over the original request body for that hop.
+    #   …) patch the original request body for that hop — a value overrides
+    #   the param, an explicit `nil` unsets it, an absent key keeps the
+    #   original value.
     # @param betas [Array<String>] betas added to the `anthropic-beta` header
     #   of every `/v1/messages` request this middleware handles. Defaults to
-    #   `["fallback-credit-2026-06-01"]`; pass `[]` to send none.
+    #   `["fallback-credit-2026-07-01"]`; pass `[]` to send none.
     def initialize(fallbacks, betas: DEFAULT_BETAS)
-      @fallbacks = fallbacks.map { _1.respond_to?(:to_h) ? _1.to_h : _1 }.freeze
+      # Entry keys are symbolized because they patch the symbol-keyed request
+      # body; a String key would never match, so its override/unset would
+      # silently miss.
+      @fallbacks = fallbacks.map do |entry|
+        entry = entry.to_h if entry.respond_to?(:to_h)
+        entry.is_a?(Hash) ? entry.transform_keys(&:to_sym) : entry
+      end.freeze
       @betas = betas.freeze
       @warned_missing_state = false
     end
@@ -82,7 +95,7 @@ module Anthropic
         raise Anthropic::Errors::Error,
               "Sending the `fallbacks:` request param is not supported when using " \
               "`BetaRefusalFallbackMiddleware`. Either remove the middleware and send " \
-              "`fallbacks:` with the `server-side-fallback-2026-06-01` beta header to " \
+              "`fallbacks:` with the `server-side-fallback-2026-07-01` beta header to " \
               "let the API handle refusal fallbacks, or omit `fallbacks:` to let the " \
               "middleware handle them on the client side."
       end
@@ -122,7 +135,7 @@ module Anthropic
           # for the spliced hops.
           body.merge(model: @fallbacks.fetch(start_index).fetch(:model))
         else
-          body.merge(@fallbacks.fetch(start_index))
+          apply_fallback(body, @fallbacks.fetch(start_index))
         end
       res = nxt.call(req.with(body: initial_body))
       return res unless res.status < 300
@@ -137,6 +150,54 @@ module Anthropic
     end
 
     private
+
+    # Apply one fallback entry as a patch against the original request body:
+    # a key set to a value overrides that param, a key explicitly set to `nil`
+    # unsets it (the hop request omits the key rather than sending `null`),
+    # and an absent key leaves the original value. `output_config` patches
+    # one level deep — its subfields override/unset/keep individually against
+    # the original `output_config`. Entries always patch the original body,
+    # never an earlier hop's patched body, so overrides can't compound across
+    # hops.
+    #
+    # @param body [Hash{Symbol=>Object}]
+    # @param entry [Hash{Symbol=>Object}]
+    # @return [Hash{Symbol=>Object}]
+    def apply_fallback(body, entry)
+      patched = patch(body, entry)
+      override = entry[:output_config]
+      return patched if override.nil?
+
+      merged = patch(hash_of(body[:output_config]), hash_of(override))
+      merged.empty? ? patched.except(:output_config) : patched.merge(output_config: merged)
+    end
+
+    # @param base [Hash{Symbol=>Object}]
+    # @param overrides [Hash{Symbol=>Object}] a value sets the key, an
+    #   explicit `nil` deletes it, an absent key keeps `base`'s value
+    # @return [Hash{Symbol=>Object}]
+    def patch(base, overrides)
+      overrides.each_with_object(base.dup) do |(key, value), out|
+        value.nil? ? out.delete(key) : out[key] = value
+      end
+    end
+
+    # Normalize a nested config to a symbol-keyed hash of API field names,
+    # preserving keys that were explicitly set to `nil`. A typed model is
+    # dumped (raw `to_h` uses internal names, e.g. `format_` for `format`).
+    #
+    # @param value [Hash, Anthropic::Internal::Type::BaseModel, nil]
+    # @return [Hash{Symbol=>Object}]
+    def hash_of(value)
+      case value
+      when Anthropic::Internal::Type::BaseModel
+        Anthropic::Internal::Type::Converter.dump(value.class, value)
+      when Hash
+        value.transform_keys(&:to_sym)
+      else
+        {}
+      end
+    end
 
     # @return [Boolean] whether `req` is a `client.beta.messages` create call
     #   with a `Hash` body and a non-empty fallback chain.
@@ -189,6 +250,16 @@ module Anthropic
       body.merge(messages: messages)
     end
 
+    # The object form of `fallback_credit_token` with `best_effort` redemption:
+    # a token-layer failure serves the retry at normal price instead of
+    # rejecting it, so a stale or already-spent credit can't fail the fallback.
+    #
+    # @param token [String]
+    # @return [Hash{Symbol=>Object}] shape of {Anthropic::Models::Beta::BetaFallbackCreditTokenParam}
+    def credit_token_param(token)
+      {token: token, mode: Anthropic::Models::Beta::BetaFallbackCreditTokenParam::Mode::BEST_EFFORT}
+    end
+
     # --- non-streaming ------------------------------------------------------
 
     # @param req [Anthropic::APIRequest]
@@ -212,8 +283,8 @@ module Anthropic
 
         index += 1
         entry = @fallbacks.fetch(index)
-        hop_body = body.merge(entry)
-        hop_body = hop_body.merge(fallback_credit_token: token) if token
+        hop_body = apply_fallback(body, entry)
+        hop_body = hop_body.merge(fallback_credit_token: credit_token_param(token)) if token
 
         begin
           hop_res = nxt.call(req.with(body: hop_body))
@@ -381,7 +452,7 @@ module Anthropic
     def issue_hop(req, nxt, body, model, token, base, partial)
       continuation = base + partial
       2.times do |attempt|
-        hop_body = body.merge(model: model, fallback_credit_token: token)
+        hop_body = body.merge(model: model, fallback_credit_token: credit_token_param(token))
         unless continuation.empty?
           hop_body = hop_body.merge(
             messages: body.fetch(:messages) + [{role: :assistant, content: continuation}]

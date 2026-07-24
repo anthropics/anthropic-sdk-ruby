@@ -22,6 +22,12 @@ module Anthropic
         #   @return [Integer, nil]
         required :cache_read_input_tokens, Integer, nil?: true
 
+        # @!attribute fallback_credit
+        #   Outcome of the `fallback_credit_token` presented on this request.
+        #
+        #   @return [Anthropic::Models::Beta::BetaFallbackCreditUsage, nil]
+        required :fallback_credit, -> { Anthropic::Beta::BetaFallbackCreditUsage }, nil?: true
+
         # @!attribute inference_geo
         #   The geographic region where inference was performed for this request.
         #
@@ -86,7 +92,7 @@ module Anthropic
         #   @return [Symbol, Anthropic::Models::Beta::BetaUsage::Speed, nil]
         required :speed, enum: -> { Anthropic::Beta::BetaUsage::Speed }, nil?: true
 
-        # @!method initialize(cache_creation:, cache_creation_input_tokens:, cache_read_input_tokens:, inference_geo:, input_tokens:, iterations:, output_tokens:, output_tokens_details:, server_tool_use:, service_tier:, speed:)
+        # @!method initialize(cache_creation:, cache_creation_input_tokens:, cache_read_input_tokens:, fallback_credit:, inference_geo:, input_tokens:, iterations:, output_tokens:, output_tokens_details:, server_tool_use:, service_tier:, speed:)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaUsage} for more details.
         #
@@ -95,6 +101,8 @@ module Anthropic
         #   @param cache_creation_input_tokens [Integer, nil] The number of input tokens used to create the cache entry.
         #
         #   @param cache_read_input_tokens [Integer, nil] The number of input tokens read from the cache.
+        #
+        #   @param fallback_credit [Anthropic::Models::Beta::BetaFallbackCreditUsage, nil] Outcome of the `fallback_credit_token` presented on this request.
         #
         #   @param inference_geo [String, nil] The geographic region where inference was performed for this request.
         #

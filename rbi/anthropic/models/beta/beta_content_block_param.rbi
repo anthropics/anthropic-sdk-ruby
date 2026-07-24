@@ -33,6 +33,8 @@ module Anthropic
               Anthropic::Beta::BetaContainerUploadBlockParam,
               Anthropic::Beta::BetaCompactionBlockParam,
               Anthropic::Beta::BetaMidConversationSystemBlockParam,
+              Anthropic::Beta::BetaRequestToolAdditionBlock,
+              Anthropic::Beta::BetaRequestToolRemovalBlock,
               Anthropic::Beta::BetaFallbackBlockParam
             )
           end

@@ -40,7 +40,7 @@ module Anthropic
               case tool
               # BaseTool whose class declares an explicit `tool_name` (e.g. MCP-built tools):
               in Anthropic::Helpers::Tools::BaseTool if tool.class.tool_name
-                name = tool.class.tool_name
+                name = tool_api_name(tool)
                 description = tool.class.doc_string
                 tools.store(name, tool)
                 input_schema = Anthropic::Helpers::InputSchema::JsonSchemaConverter.to_json_schema(tool)
@@ -51,8 +51,8 @@ module Anthropic
                 result
               # Direct tool class:
               in Anthropic::Helpers::InputSchema::JsonSchemaConverter
-                classname = tool.is_a?(Anthropic::Helpers::Tools::BaseTool) ? tool.class.name : tool.name
-                name = model_name(classname)
+                name =
+                  tool.is_a?(Anthropic::Helpers::Tools::BaseTool) ? tool_api_name(tool) : model_name(tool.name)
 
                 description =
                   case tool
@@ -205,6 +205,15 @@ module Anthropic
         private def inject_structured_output_beta_header!(data)
           data[:betas] = data[:betas].to_a.dup.push("structured-outputs-2025-12-15").uniq
         end
+
+        # @api private
+        #
+        # The `name` a runnable tool is serialized under in `tools[]`.
+        #
+        # @param tool [Anthropic::Helpers::Tools::BaseTool]
+        #
+        # @return [String]
+        def tool_api_name(tool) = tool.class.tool_name || model_name(tool.class.name)
 
         # @api private
         #

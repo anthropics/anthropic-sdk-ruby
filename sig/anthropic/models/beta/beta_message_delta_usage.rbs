@@ -7,6 +7,7 @@ module Anthropic
         {
           cache_creation_input_tokens: Integer?,
           cache_read_input_tokens: Integer?,
+          fallback_credit: Anthropic::Beta::BetaFallbackCreditUsage?,
           input_tokens: Integer?,
           iterations: Anthropic::Models::Beta::beta_iterations_usage?,
           output_tokens: Integer,
@@ -18,6 +19,8 @@ module Anthropic
         attr_accessor cache_creation_input_tokens: Integer?
 
         attr_accessor cache_read_input_tokens: Integer?
+
+        attr_accessor fallback_credit: Anthropic::Beta::BetaFallbackCreditUsage?
 
         attr_accessor input_tokens: Integer?
 
@@ -32,6 +35,7 @@ module Anthropic
         def initialize: (
           cache_creation_input_tokens: Integer?,
           cache_read_input_tokens: Integer?,
+          fallback_credit: Anthropic::Beta::BetaFallbackCreditUsage?,
           input_tokens: Integer?,
           iterations: Anthropic::Models::Beta::beta_iterations_usage?,
           output_tokens: Integer,
@@ -42,6 +46,7 @@ module Anthropic
         def to_hash: -> {
           cache_creation_input_tokens: Integer?,
           cache_read_input_tokens: Integer?,
+          fallback_credit: Anthropic::Beta::BetaFallbackCreditUsage?,
           input_tokens: Integer?,
           iterations: Anthropic::Models::Beta::beta_iterations_usage?,
           output_tokens: Integer,

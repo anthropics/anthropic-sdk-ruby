@@ -92,6 +92,11 @@ module Anthropic
             next unless current_messages.equal?(messages)
             break if compacted
 
+            # A `tool_removal` block only hints the model, so a call to a withdrawn tool can still
+            # arrive; a name missing from this set routes down the same "not found" path as an
+            # undeclared tool.
+            available = available_tool_names(tools, messages)
+
             mapped =
               response
               .content
@@ -99,7 +104,8 @@ module Anthropic
               .grep(Anthropic::Beta::BetaToolUseBlock)
               .map do |tool_use|
                 resp = {type: :tool_result, tool_use_id: tool_use.id}
-                if (tool = tools.find { _1.class.model === tool_use.parsed })
+                if available.include?(tool_use.name) &&
+                   (tool = tools.find { _1.class.model === tool_use.parsed })
                   begin
                     raw = tool.call(tool_use.parsed)
                     is_error = false
@@ -140,6 +146,97 @@ module Anthropic
           end
           # rubocop:enable Style/CaseEquality
           # rubocop:enable Metrics/BlockLength
+        end
+
+        # @api private
+        #
+        # Replays `tool_removal` / `tool_addition` blocks from `role: :system` messages to
+        # find which tool names are still offered to the model. MCP references are
+        # server-executed and never dispatched here, so they are ignored.
+        #
+        # @param tools [Array<Anthropic::Helpers::Tools::BaseTool>]
+        #
+        # @param messages [Array<Anthropic::Beta::BetaMessageParam, Hash{Symbol=>Object}>]
+        #
+        # @return [Set<String>]
+        private def available_tool_names(tools, messages)
+          available = Set.new(tools.map { Anthropic::Helpers::Messages.tool_api_name(_1) })
+          messages.each do |message|
+            next unless read_field(message, :role)&.to_sym == :system
+
+            Array(read_field(message, :content)).each { apply_tool_change(_1, available) }
+          end
+          available
+        end
+
+        # @api private
+        #
+        # @param block [Anthropic::Beta::BetaContentBlockParam, Hash{Symbol=>Object}]
+        #
+        # @param available [Set<String>]
+        private def apply_tool_change(block, available)
+          case read_field(block, :type)&.to_sym
+          in :tool_removal | :tool_addition
+            apply_tool_delta(block, available)
+          in :mid_conv_system
+            # `mid_conv_system` content is limited by the API schema to text / tool_addition /
+            # tool_removal blocks, so exactly one level is walked; anything else inside is a no-op.
+            Array(read_field(block, :content)).each { apply_tool_delta(_1, available) }
+          else
+            nil # other and unknown block types leave the set untouched (forward compatibility)
+          end
+        end
+
+        # @api private
+        #
+        # @param block [Anthropic::Beta::BetaContentBlockParam, Hash{Symbol=>Object}]
+        #
+        # @param available [Set<String>]
+        private def apply_tool_delta(block, available)
+          case read_field(block, :type)&.to_sym
+          in :tool_removal
+            name = referenced_tool_name(read_field(block, :tool))
+            available.delete(name) unless name.nil?
+          in :tool_addition
+            name = referenced_tool_name(read_field(block, :tool))
+            available.add(name) unless name.nil?
+          else
+            nil # non tool_removal / tool_addition blocks leave the set untouched
+          end
+        end
+
+        # @api private
+        #
+        # @param ref [Anthropic::Beta::BetaToolChangeToolReference, Hash{Symbol=>Object}, nil]
+        #
+        # @return [String, nil]
+        private def referenced_tool_name(ref)
+          case read_field(ref, :type)&.to_sym
+          in :tool_reference
+            read_field(ref, :name).to_s
+          else
+            nil # `mcp_*` references run server-side; unknown types ignored (forward compatibility)
+          end
+        end
+
+        # @api private
+        #
+        # Reads a field off either a plain hash (symbol or string keys) or a typed model.
+        #
+        # @param obj [Object]
+        #
+        # @param key [Symbol]
+        #
+        # @return [Object, nil]
+        private def read_field(obj, key)
+          case obj
+          in Hash
+            obj.fetch(key) { obj[key.to_s] }
+          in Anthropic::Internal::Type::BaseModel
+            obj.public_send(key) if obj.respond_to?(key)
+          else
+            nil
+          end
         end
 
         # Check token usage and compact messages if threshold exceeded

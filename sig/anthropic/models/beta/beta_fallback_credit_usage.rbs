@@ -1,0 +1,32 @@
+module Anthropic
+  module Models
+    class BetaFallbackCreditUsage = Beta::BetaFallbackCreditUsage
+
+    module Beta
+      type beta_fallback_credit_usage =
+        { status: Anthropic::Models::Beta::BetaFallbackCreditUsage::status }
+
+      class BetaFallbackCreditUsage < Anthropic::Internal::Type::BaseModel
+        attr_accessor status: Anthropic::Models::Beta::BetaFallbackCreditUsage::status
+
+        def initialize: (
+          status: Anthropic::Models::Beta::BetaFallbackCreditUsage::status
+        ) -> void
+
+        def to_hash: -> {
+          status: Anthropic::Models::Beta::BetaFallbackCreditUsage::status
+        }
+
+        type status =
+          Anthropic::Beta::BetaFallbackCreditRedeemed
+          | Anthropic::Beta::BetaFallbackCreditNotApplied
+
+        module Status
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaFallbackCreditUsage::status]
+        end
+      end
+    end
+  end
+end

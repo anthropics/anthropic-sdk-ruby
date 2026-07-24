@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    class BetaToolChangeMCPToolReference = Beta::BetaToolChangeMCPToolReference
+
+    module Beta
+      type beta_tool_change_mcp_tool_reference =
+        { name: String, server_name: String, type: :mcp_tool_reference }
+
+      class BetaToolChangeMCPToolReference < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: String
+
+        attr_accessor server_name: String
+
+        attr_accessor type: :mcp_tool_reference
+
+        def initialize: (
+          name: String,
+          server_name: String,
+          ?type: :mcp_tool_reference
+        ) -> void
+
+        def to_hash: -> {
+          name: String,
+          server_name: String,
+          type: :mcp_tool_reference
+        }
+      end
+    end
+  end
+end

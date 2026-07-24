@@ -45,21 +45,28 @@ module Anthropic
             Anthropic::Beta::BetaManagedAgentsModel::TaggedSymbol
           )
 
-        # Frontier intelligence for long-running agents and coding
+        # Powerful intelligence for long-running agents and coding
+        CLAUDE_OPUS_5 =
+          T.let(
+            :"claude-opus-5",
+            Anthropic::Beta::BetaManagedAgentsModel::TaggedSymbol
+          )
+
+        # Powerful intelligence for long-running agents and coding
         CLAUDE_OPUS_4_8 =
           T.let(
             :"claude-opus-4-8",
             Anthropic::Beta::BetaManagedAgentsModel::TaggedSymbol
           )
 
-        # Frontier intelligence for long-running agents and coding
+        # Powerful intelligence for long-running agents and coding
         CLAUDE_OPUS_4_7 =
           T.let(
             :"claude-opus-4-7",
             Anthropic::Beta::BetaManagedAgentsModel::TaggedSymbol
           )
 
-        # Most intelligent model for building agents and coding
+        # Powerful intelligence for long-running agents and coding
         CLAUDE_OPUS_4_6 =
           T.let(
             :"claude-opus-4-6",
@@ -87,14 +94,14 @@ module Anthropic
             Anthropic::Beta::BetaManagedAgentsModel::TaggedSymbol
           )
 
-        # Premium model combining maximum intelligence with practical performance
+        # Powerful intelligence for long-running agents and coding
         CLAUDE_OPUS_4_5 =
           T.let(
             :"claude-opus-4-5",
             Anthropic::Beta::BetaManagedAgentsModel::TaggedSymbol
           )
 
-        # Premium model combining maximum intelligence with practical performance
+        # Powerful intelligence for long-running agents and coding
         CLAUDE_OPUS_4_5_20251101 =
           T.let(
             :"claude-opus-4-5-20251101",

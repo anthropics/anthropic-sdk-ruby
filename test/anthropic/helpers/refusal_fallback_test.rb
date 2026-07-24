@@ -95,7 +95,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     assert_equal("fallback-model", result.model)
     assert_equal(:end_turn, result.stop_reason)
     assert_equal(%w[primary-model fallback-model], @bodies.map { _1["model"] })
-    assert_equal("credit-token", @bodies[1]["fallback_credit_token"])
+    assert_equal({"token" => "credit-token", "mode" => "best_effort"}, @bodies[1]["fallback_credit_token"])
   end
 
   def test_pins_the_conversation_to_the_accepted_fallback_via_fallback_state
@@ -292,7 +292,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     result = client.beta.messages.create(**PARAMS, request_options: {fallback_state: state})
 
     assert_equal(%w[primary-model mid-model last-model], @bodies.map { _1["model"] })
-    assert_equal("tok", @bodies[2]["fallback_credit_token"])
+    assert_equal({"token" => "tok", "mode" => "best_effort"}, @bodies[2]["fallback_credit_token"])
     assert_equal("last-model", result.model)
     assert_equal(1, state.index)
     # Exactly one seam, primary -> last (the failed mid hop is skipped entirely).
@@ -348,6 +348,231 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     assert_equal(512, @bodies[1]["max_tokens"])
   end
 
+  def test_hop_entry_patches_the_original_params
+    stub_responses(refusal_body("primary-model"), message_body("fallback-model"))
+    client = make_client([{model: "fallback-model", max_tokens: 512, thinking: nil}])
+
+    client.beta.messages.create(
+      **PARAMS,
+      top_p: 0.5,
+      thinking: {type: :enabled, budget_tokens: 1024},
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    )
+
+    retried = @bodies[1]
+    # set → overrides
+    assert_equal(512, retried["max_tokens"])
+    # explicit nil → unsets (key absent, not sent as null)
+    refute(retried.key?("thinking"))
+    # absent → original value kept
+    assert_in_delta(0.5, retried["top_p"])
+  end
+
+  def test_string_keyed_entry_patches_like_a_symbol_keyed_entry
+    stub_responses(refusal_body("primary-model"), message_body("fallback-model"))
+    client = make_client([{"model" => "fallback-model", "max_tokens" => 512, "thinking" => nil}])
+
+    client.beta.messages.create(
+      **PARAMS,
+      top_p: 0.5,
+      thinking: {type: :enabled, budget_tokens: 1024},
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    )
+
+    retried = @bodies[1]
+    assert_equal("fallback-model", retried["model"])
+    assert_equal(512, retried["max_tokens"])
+    refute(retried.key?("thinking"))
+    assert_in_delta(0.5, retried["top_p"])
+  end
+
+  def test_typed_entry_with_explicit_nil_unsets_the_param
+    stub_responses(refusal_body("primary-model"), message_body("fallback-model"))
+    client = make_client([Anthropic::Beta::BetaFallbackParam.new(model: "fallback-model", thinking: nil)])
+
+    client.beta.messages.create(
+      **PARAMS,
+      thinking: {type: :enabled, budget_tokens: 1024},
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    )
+
+    refute(@bodies[1].key?("thinking"))
+  end
+
+  def test_each_hop_patches_the_original_params_not_the_previous_hop
+    stub_responses(
+      refusal_body("primary-model"),
+      refusal_body("mid-model"),
+      message_body("last-model")
+    )
+    client = make_client(
+      [{model: "mid-model", max_tokens: 512, thinking: nil}, {model: "last-model"}]
+    )
+
+    client.beta.messages.create(
+      **PARAMS,
+      thinking: {type: :enabled, budget_tokens: 1024},
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    )
+
+    hop1 = @bodies[1]
+    hop2 = @bodies[2]
+    assert_equal(512, hop1["max_tokens"])
+    refute(hop1.key?("thinking"))
+    # Hop 2 patches the original request: hop 1's override and unset don't leak.
+    assert_equal("last-model", hop2["model"])
+    assert_equal(1024, hop2["max_tokens"])
+    assert_equal({"type" => "enabled", "budget_tokens" => 1024}, hop2["thinking"])
+  end
+
+  # `output_config` patches one level deep: subfields override/unset/keep
+  # individually against the original `output_config`.
+
+  ORIGINAL_OUTPUT_CONFIG = {
+    effort: :low,
+    format: {type: :json_schema, schema: {type: "object"}}
+  }.freeze
+
+  def test_output_config_subfield_set_merges_with_existing_subfields
+    stub_responses(refusal_body("primary-model"), message_body("fallback-model"))
+    client = make_client([{model: "fallback-model", output_config: {effort: :high}}])
+
+    client.beta.messages.create(
+      **PARAMS,
+      output_config: ORIGINAL_OUTPUT_CONFIG,
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    )
+
+    oc = @bodies[1]["output_config"]
+    assert_equal("high", oc["effort"])
+    assert_equal({"type" => "json_schema", "schema" => {"type" => "object"}}, oc["format"])
+  end
+
+  def test_output_config_subfield_nil_unsets_only_that_subfield
+    stub_responses(refusal_body("primary-model"), message_body("fallback-model"))
+    client = make_client([{model: "fallback-model", output_config: {effort: nil}}])
+
+    client.beta.messages.create(
+      **PARAMS,
+      output_config: ORIGINAL_OUTPUT_CONFIG,
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    )
+
+    oc = @bodies[1]["output_config"]
+    refute(oc.key?("effort"))
+    assert_equal({"type" => "json_schema", "schema" => {"type" => "object"}}, oc["format"])
+  end
+
+  def test_output_config_explicit_nil_unsets_the_whole_config
+    stub_responses(refusal_body("primary-model"), message_body("fallback-model"))
+    client = make_client([{model: "fallback-model", output_config: nil}])
+
+    client.beta.messages.create(
+      **PARAMS,
+      output_config: ORIGINAL_OUTPUT_CONFIG,
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    )
+
+    refute(@bodies[1].key?("output_config"))
+  end
+
+  def test_absent_output_config_leaves_the_original
+    stub_responses(refusal_body("primary-model"), message_body("fallback-model"))
+    client = make_client([{model: "fallback-model", max_tokens: 512}])
+
+    client.beta.messages.create(
+      **PARAMS,
+      output_config: ORIGINAL_OUTPUT_CONFIG,
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    )
+
+    assert_equal(
+      {"effort" => "low", "format" => {"type" => "json_schema", "schema" => {"type" => "object"}}},
+      @bodies[1]["output_config"]
+    )
+  end
+
+  def test_output_config_subfields_are_created_when_the_original_has_none
+    stub_responses(refusal_body("primary-model"), message_body("fallback-model"))
+    client = make_client([{model: "fallback-model", output_config: {effort: :high, format: nil}}])
+
+    client.beta.messages.create(**PARAMS, request_options: {fallback_state: Anthropic::BetaFallbackState.new})
+
+    assert_equal({"effort" => "high"}, @bodies[1]["output_config"])
+  end
+
+  # An emptied `output_config` is dropped, never sent as `{}` — whether the
+  # hop unset every existing subfield or only patched nils onto an absent
+  # original. An `output_config` the hop doesn't touch stays as-is.
+
+  def test_output_config_all_nil_subfields_add_no_key_when_the_original_has_none
+    stub_responses(refusal_body("primary-model"), message_body("fallback-model"))
+    client = make_client([{model: "fallback-model", output_config: {effort: nil, format: nil}}])
+
+    client.beta.messages.create(**PARAMS, request_options: {fallback_state: Anthropic::BetaFallbackState.new})
+
+    refute(@bodies[1].key?("output_config"))
+  end
+
+  def test_untouched_empty_output_config_is_left_untouched
+    stub_responses(refusal_body("primary-model"), message_body("fallback-model"))
+    client = make_client([{model: "fallback-model", max_tokens: 512}])
+
+    client.beta.messages.create(
+      **PARAMS,
+      output_config: {},
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    )
+
+    assert_equal({}, @bodies[1]["output_config"])
+  end
+
+  def test_typed_output_config_uses_api_field_names_and_patches_subfields
+    stub_responses(refusal_body("primary-model"), message_body("fallback-model"))
+    typed = Anthropic::Beta::BetaFallbackParam.new(
+      model: "fallback-model",
+      output_config: Anthropic::Beta::BetaOutputConfig.new(effort: nil)
+    )
+    client = make_client([typed])
+
+    client.beta.messages.create(
+      **PARAMS,
+      output_config: ORIGINAL_OUTPUT_CONFIG,
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    )
+
+    oc = @bodies[1]["output_config"]
+    refute(oc.key?("effort"))
+    assert_equal({"type" => "json_schema", "schema" => {"type" => "object"}}, oc["format"])
+  end
+
+  def test_output_config_overrides_do_not_leak_across_hops
+    stub_responses(
+      refusal_body("primary-model"),
+      refusal_body("mid-model"),
+      message_body("last-model")
+    )
+    client = make_client(
+      [{model: "mid-model", output_config: {effort: nil, format: nil}}, {model: "last-model"}]
+    )
+
+    client.beta.messages.create(
+      **PARAMS,
+      output_config: ORIGINAL_OUTPUT_CONFIG,
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    )
+
+    hop1 = @bodies[1]
+    hop2 = @bodies[2]
+    # Hop 1 unset every subfield, so the whole (now-empty) config is omitted.
+    refute(hop1.key?("output_config"))
+    # Hop 2 patches the ORIGINAL: the full original config is back intact.
+    assert_equal(
+      {"effort" => "low", "format" => {"type" => "json_schema", "schema" => {"type" => "object"}}},
+      hop2["output_config"]
+    )
+  end
+
   # — beta header —
 
   def test_sends_the_fallback_credit_beta_on_original_and_fallback_requests
@@ -359,7 +584,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
 
     client.beta.messages.create(**PARAMS, request_options: {fallback_state: Anthropic::BetaFallbackState.new})
 
-    assert_equal(%w[fallback-credit-2026-06-01 fallback-credit-2026-06-01], @beta_headers)
+    assert_equal(%w[fallback-credit-2026-07-01 fallback-credit-2026-07-01], @beta_headers)
   end
 
   def test_betas_option_replaces_the_default
@@ -385,8 +610,8 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     stub_responses(message_body("primary-model"))
     client = make_client([{model: "fallback-model"}])
 
-    client.beta.messages.create(**PARAMS, betas: ["fallback-credit-2026-06-01"])
-    assert_equal(["fallback-credit-2026-06-01"], @beta_headers)
+    client.beta.messages.create(**PARAMS, betas: ["fallback-credit-2026-07-01"])
+    assert_equal(["fallback-credit-2026-07-01"], @beta_headers)
   end
 
   def test_appends_to_betas_already_on_the_request
@@ -394,7 +619,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     client = make_client([{model: "fallback-model"}])
 
     client.beta.messages.create(**PARAMS, betas: ["interleaved-thinking-2025-05-14"])
-    assert_equal(["interleaved-thinking-2025-05-14,fallback-credit-2026-06-01"], @beta_headers)
+    assert_equal(["interleaved-thinking-2025-05-14,fallback-credit-2026-07-01"], @beta_headers)
   end
 
   def test_tags_original_and_fallback_requests_with_the_helper_header
@@ -542,7 +767,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
 
     assert_equal(2, @bodies.length)
     assert_equal("fallback-model", @bodies[1]["model"])
-    assert_equal("tok-1", @bodies[1]["fallback_credit_token"])
+    assert_equal({"token" => "tok-1", "mode" => "best_effort"}, @bodies[1]["fallback_credit_token"])
     assert_equal(
       [{"role" => "assistant", "content" => [{"type" => "text", "text" => "partial "}]}],
       @bodies[1]["messages"].select { _1["role"] == "assistant" }
@@ -596,7 +821,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     ).to_a
 
     assert_equal(%w[primary-model mid-model last-model], @bodies.map { _1["model"] })
-    assert_equal("tok-2", @bodies[2]["fallback_credit_token"])
+    assert_equal({"token" => "tok-2", "mode" => "best_effort"}, @bodies[2]["fallback_credit_token"])
     seams = events.select { _1.type == :content_block_start && _1.content_block.type == :fallback }
     assert_equal(2, seams.length)
     delta = events.find { _1.type == :message_delta }
@@ -638,7 +863,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     events = client.beta.messages.stream_raw(**PARAMS, request_options: {fallback_state: state}).to_a
 
     assert_equal(%w[primary-model mid-model last-model], @bodies.map { _1["model"] })
-    assert_equal("tok", @bodies[2]["fallback_credit_token"])
+    assert_equal({"token" => "tok", "mode" => "best_effort"}, @bodies[2]["fallback_credit_token"])
     assert_equal(:end_turn, events.find { _1.type == :message_delta }.delta.stop_reason)
     assert_equal(1, state.index)
     # Exactly one seam, primary -> last (no phantom seam for the failed mid hop).

@@ -10,8 +10,8 @@ module Anthropic
           container: Anthropic::Models::Beta::MessageCreateParams::container?,
           context_management: Anthropic::Beta::BetaContextManagementConfig?,
           diagnostics: Anthropic::Beta::BetaDiagnosticsParam?,
-          fallback_credit_token: String?,
-          fallbacks: ::Array[Anthropic::Beta::BetaFallbackParam]?,
+          fallback_credit_token: Anthropic::Models::Beta::MessageCreateParams::fallback_credit_token?,
+          fallbacks: Anthropic::Models::Beta::beta_fallbacks_param?,
           inference_geo: String?,
           mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           metadata: Anthropic::Beta::BetaMetadata,
@@ -50,9 +50,9 @@ module Anthropic
 
         attr_accessor diagnostics: Anthropic::Beta::BetaDiagnosticsParam?
 
-        attr_accessor fallback_credit_token: String?
+        attr_accessor fallback_credit_token: Anthropic::Models::Beta::MessageCreateParams::fallback_credit_token?
 
-        attr_accessor fallbacks: ::Array[Anthropic::Beta::BetaFallbackParam]?
+        attr_accessor fallbacks: Anthropic::Models::Beta::beta_fallbacks_param?
 
         attr_accessor inference_geo: String?
 
@@ -142,8 +142,8 @@ module Anthropic
           ?container: Anthropic::Models::Beta::MessageCreateParams::container?,
           ?context_management: Anthropic::Beta::BetaContextManagementConfig?,
           ?diagnostics: Anthropic::Beta::BetaDiagnosticsParam?,
-          ?fallback_credit_token: String?,
-          ?fallbacks: ::Array[Anthropic::Beta::BetaFallbackParam]?,
+          ?fallback_credit_token: Anthropic::Models::Beta::MessageCreateParams::fallback_credit_token?,
+          ?fallbacks: Anthropic::Models::Beta::beta_fallbacks_param?,
           ?inference_geo: String?,
           ?mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           ?metadata: Anthropic::Beta::BetaMetadata,
@@ -172,8 +172,8 @@ module Anthropic
           container: Anthropic::Models::Beta::MessageCreateParams::container?,
           context_management: Anthropic::Beta::BetaContextManagementConfig?,
           diagnostics: Anthropic::Beta::BetaDiagnosticsParam?,
-          fallback_credit_token: String?,
-          fallbacks: ::Array[Anthropic::Beta::BetaFallbackParam]?,
+          fallback_credit_token: Anthropic::Models::Beta::MessageCreateParams::fallback_credit_token?,
+          fallbacks: Anthropic::Models::Beta::beta_fallbacks_param?,
           inference_geo: String?,
           mcp_servers: ::Array[Anthropic::Beta::BetaRequestMCPServerURLDefinition],
           metadata: Anthropic::Beta::BetaMetadata,
@@ -200,6 +200,15 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::MessageCreateParams::container]
+        end
+
+        type fallback_credit_token =
+          String | Anthropic::Beta::BetaFallbackCreditTokenParam
+
+        module FallbackCreditToken
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::MessageCreateParams::fallback_credit_token]
         end
 
         type service_tier = :auto | :standard_only

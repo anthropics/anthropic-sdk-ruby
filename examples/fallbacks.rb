@@ -13,7 +13,7 @@ served = client.beta.messages.create(
   max_tokens: 1024,
   messages: [{role: :user, content: "Some prompt that triggers a refusal"}],
   fallbacks: [{model: "claude-opus-4-8"}],
-  betas: ["server-side-fallback-2026-06-01"]
+  betas: ["server-side-fallback-2026-07-01"]
 )
 puts("server-side, served by: #{served.model}")
 
