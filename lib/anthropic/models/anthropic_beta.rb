@@ -63,7 +63,11 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::AnthropicBeta::SERVER_SIDE_FALLBACK_2026_06_01 }
 
+      variant const: -> { Anthropic::Models::AnthropicBeta::SERVER_SIDE_FALLBACK_2026_07_01 }
+
       variant const: -> { Anthropic::Models::AnthropicBeta::FALLBACK_CREDIT_2026_06_01 }
+
+      variant const: -> { Anthropic::Models::AnthropicBeta::FALLBACK_CREDIT_2026_07_01 }
 
       variant const: -> { Anthropic::Models::AnthropicBeta::AGENT_MEMORY_2026_07_22 }
 
@@ -104,7 +108,9 @@ module Anthropic
       DREAMING_2026_04_21 = :"dreaming-2026-04-21"
       THINKING_TOKEN_COUNT_2026_05_13 = :"thinking-token-count-2026-05-13"
       SERVER_SIDE_FALLBACK_2026_06_01 = :"server-side-fallback-2026-06-01"
+      SERVER_SIDE_FALLBACK_2026_07_01 = :"server-side-fallback-2026-07-01"
       FALLBACK_CREDIT_2026_06_01 = :"fallback-credit-2026-06-01"
+      FALLBACK_CREDIT_2026_07_01 = :"fallback-credit-2026-07-01"
       AGENT_MEMORY_2026_07_22 = :"agent-memory-2026-07-22"
 
       # @!endgroup

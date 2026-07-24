@@ -125,9 +125,19 @@ module Anthropic
           :"server-side-fallback-2026-06-01",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      SERVER_SIDE_FALLBACK_2026_07_01 =
+        T.let(
+          :"server-side-fallback-2026-07-01",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
       FALLBACK_CREDIT_2026_06_01 =
         T.let(
           :"fallback-credit-2026-06-01",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
+      FALLBACK_CREDIT_2026_07_01 =
+        T.let(
+          :"fallback-credit-2026-07-01",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
       AGENT_MEMORY_2026_07_22 =

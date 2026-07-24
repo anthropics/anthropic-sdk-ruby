@@ -22,6 +22,18 @@ module Anthropic
         sig { returns(T.nilable(Integer)) }
         attr_accessor :cache_read_input_tokens
 
+        # Outcome of the `fallback_credit_token` presented on this request.
+        sig { returns(T.nilable(Anthropic::Beta::BetaFallbackCreditUsage)) }
+        attr_reader :fallback_credit
+
+        sig do
+          params(
+            fallback_credit:
+              T.nilable(Anthropic::Beta::BetaFallbackCreditUsage::OrHash)
+          ).void
+        end
+        attr_writer :fallback_credit
+
         # The cumulative number of input tokens which were used.
         sig { returns(T.nilable(Integer)) }
         attr_accessor :input_tokens
@@ -80,6 +92,8 @@ module Anthropic
           params(
             cache_creation_input_tokens: T.nilable(Integer),
             cache_read_input_tokens: T.nilable(Integer),
+            fallback_credit:
+              T.nilable(Anthropic::Beta::BetaFallbackCreditUsage::OrHash),
             input_tokens: T.nilable(Integer),
             iterations:
               T.nilable(
@@ -104,6 +118,8 @@ module Anthropic
           cache_creation_input_tokens:,
           # The cumulative number of input tokens read from the cache.
           cache_read_input_tokens:,
+          # Outcome of the `fallback_credit_token` presented on this request.
+          fallback_credit:,
           # The cumulative number of input tokens which were used.
           input_tokens:,
           # Per-iteration token usage breakdown.
@@ -134,6 +150,8 @@ module Anthropic
             {
               cache_creation_input_tokens: T.nilable(Integer),
               cache_read_input_tokens: T.nilable(Integer),
+              fallback_credit:
+                T.nilable(Anthropic::Beta::BetaFallbackCreditUsage),
               input_tokens: T.nilable(Integer),
               iterations:
                 T.nilable(

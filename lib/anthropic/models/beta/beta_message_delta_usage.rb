@@ -16,6 +16,12 @@ module Anthropic
         #   @return [Integer, nil]
         required :cache_read_input_tokens, Integer, nil?: true
 
+        # @!attribute fallback_credit
+        #   Outcome of the `fallback_credit_token` presented on this request.
+        #
+        #   @return [Anthropic::Models::Beta::BetaFallbackCreditUsage, nil]
+        required :fallback_credit, -> { Anthropic::Beta::BetaFallbackCreditUsage }, nil?: true
+
         # @!attribute input_tokens
         #   The cumulative number of input tokens which were used.
         #
@@ -60,13 +66,15 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaServerToolUsage, nil]
         required :server_tool_use, -> { Anthropic::Beta::BetaServerToolUsage }, nil?: true
 
-        # @!method initialize(cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, iterations:, output_tokens:, output_tokens_details:, server_tool_use:)
+        # @!method initialize(cache_creation_input_tokens:, cache_read_input_tokens:, fallback_credit:, input_tokens:, iterations:, output_tokens:, output_tokens_details:, server_tool_use:)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaMessageDeltaUsage} for more details.
         #
         #   @param cache_creation_input_tokens [Integer, nil] The cumulative number of input tokens used to create the cache entry.
         #
         #   @param cache_read_input_tokens [Integer, nil] The cumulative number of input tokens read from the cache.
+        #
+        #   @param fallback_credit [Anthropic::Models::Beta::BetaFallbackCreditUsage, nil] Outcome of the `fallback_credit_token` presented on this request.
         #
         #   @param input_tokens [Integer, nil] The cumulative number of input tokens which were used.
         #

@@ -32,9 +32,20 @@ module Anthropic
               T.nilable(Anthropic::Beta::BetaContextManagementConfig::OrHash),
             diagnostics:
               T.nilable(Anthropic::Beta::BetaDiagnosticsParam::OrHash),
-            fallback_credit_token: T.nilable(String),
+            fallback_credit_token:
+              T.nilable(
+                T.any(
+                  String,
+                  Anthropic::Beta::BetaFallbackCreditTokenParam::OrHash
+                )
+              ),
             fallbacks:
-              T.nilable(T::Array[Anthropic::Beta::BetaFallbackParam::OrHash]),
+              T.nilable(
+                T.any(
+                  T::Array[Anthropic::Beta::BetaFallbackParam::OrHash],
+                  Symbol
+                )
+              ),
             inference_geo: T.nilable(String),
             mcp_servers:
               T::Array[
@@ -224,7 +235,8 @@ module Anthropic
           fallback_credit_token: nil,
           # Body param: Opt-in server-side retry on one or more substitute models when the
           # requested model declines for policy reasons. Tried in order: if the first entry
-          # also declines, the second is tried, and so on.
+          # also declines, the second is tried, and so on. The string "default" requests the
+          # requested model's server-defined default fallback configuration.
           fallbacks: nil,
           # Body param: Specifies the geographic region for inference processing. If not
           # specified, the workspace's `default_inference_geo` is used.
@@ -422,9 +434,20 @@ module Anthropic
               T.nilable(Anthropic::Beta::BetaContextManagementConfig::OrHash),
             diagnostics:
               T.nilable(Anthropic::Beta::BetaDiagnosticsParam::OrHash),
-            fallback_credit_token: T.nilable(String),
+            fallback_credit_token:
+              T.nilable(
+                T.any(
+                  String,
+                  Anthropic::Beta::BetaFallbackCreditTokenParam::OrHash
+                )
+              ),
             fallbacks:
-              T.nilable(T::Array[Anthropic::Beta::BetaFallbackParam::OrHash]),
+              T.nilable(
+                T.any(
+                  T::Array[Anthropic::Beta::BetaFallbackParam::OrHash],
+                  Symbol
+                )
+              ),
             inference_geo: T.nilable(String),
             mcp_servers:
               T::Array[
@@ -618,7 +641,8 @@ module Anthropic
           fallback_credit_token: nil,
           # Body param: Opt-in server-side retry on one or more substitute models when the
           # requested model declines for policy reasons. Tried in order: if the first entry
-          # also declines, the second is tried, and so on.
+          # also declines, the second is tried, and so on. The string "default" requests the
+          # requested model's server-defined default fallback configuration.
           fallbacks: nil,
           # Body param: Specifies the geographic region for inference processing. If not
           # specified, the workspace's `default_inference_geo` is used.

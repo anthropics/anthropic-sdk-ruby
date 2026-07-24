@@ -37,9 +37,9 @@ module Anthropic
         #
         # @param diagnostics [Anthropic::Models::Beta::BetaDiagnosticsParam, nil] Body param: Request-level diagnostics. Currently carries the previous response
         #
-        # @param fallback_credit_token [String, nil] Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
+        # @param fallback_credit_token [String, Anthropic::Models::Beta::BetaFallbackCreditTokenParam, nil] Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
         #
-        # @param fallbacks [Array<Anthropic::Models::Beta::BetaFallbackParam>, nil] Body param: Opt-in server-side retry on one or more substitute models when the r
+        # @param fallbacks [Array<Anthropic::Models::Beta::BetaFallbackParam>, Symbol, :default, nil] Body param: Opt-in server-side retry on one or more substitute models when the r
         #
         # @param inference_geo [String, nil] Body param: Specifies the geographic region for inference processing. If not spe
         #
@@ -127,9 +127,9 @@ module Anthropic
         #
         # @param diagnostics [Anthropic::Models::Beta::BetaDiagnosticsParam, nil] Body param: Request-level diagnostics. Currently carries the previous response
         #
-        # @param fallback_credit_token [String, nil] Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
+        # @param fallback_credit_token [String, Anthropic::Models::Beta::BetaFallbackCreditTokenParam, nil] Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
         #
-        # @param fallbacks [Array<Anthropic::Models::Beta::BetaFallbackParam>, nil] Body param: Opt-in server-side retry on one or more substitute models when the r
+        # @param fallbacks [Array<Anthropic::Models::Beta::BetaFallbackParam>, Symbol, :default, nil] Body param: Opt-in server-side retry on one or more substitute models when the r
         #
         # @param inference_geo [String, nil] Body param: Specifies the geographic region for inference processing. If not spe
         #

@@ -29,11 +29,14 @@ module Anthropic
       CLAUDE_MYTHOS_5 =
         T.let(:"claude-mythos-5", Anthropic::Model::TaggedSymbol)
 
-      # Frontier intelligence for long-running agents and coding
+      # Powerful intelligence for long-running agents and coding
+      CLAUDE_OPUS_5 = T.let(:"claude-opus-5", Anthropic::Model::TaggedSymbol)
+
+      # Powerful intelligence for long-running agents and coding
       CLAUDE_OPUS_4_8 =
         T.let(:"claude-opus-4-8", Anthropic::Model::TaggedSymbol)
 
-      # Frontier intelligence for long-running agents and coding
+      # Powerful intelligence for long-running agents and coding
       CLAUDE_OPUS_4_7 =
         T.let(:"claude-opus-4-7", Anthropic::Model::TaggedSymbol)
 
@@ -41,7 +44,7 @@ module Anthropic
       CLAUDE_MYTHOS_PREVIEW =
         T.let(:"claude-mythos-preview", Anthropic::Model::TaggedSymbol)
 
-      # Frontier intelligence for long-running agents and coding
+      # Powerful intelligence for long-running agents and coding
       CLAUDE_OPUS_4_6 =
         T.let(:"claude-opus-4-6", Anthropic::Model::TaggedSymbol)
 
@@ -57,11 +60,11 @@ module Anthropic
       CLAUDE_HAIKU_4_5_20251001 =
         T.let(:"claude-haiku-4-5-20251001", Anthropic::Model::TaggedSymbol)
 
-      # Premium model combining maximum intelligence with practical performance
+      # Powerful intelligence for long-running agents and coding
       CLAUDE_OPUS_4_5 =
         T.let(:"claude-opus-4-5", Anthropic::Model::TaggedSymbol)
 
-      # Premium model combining maximum intelligence with practical performance
+      # Powerful intelligence for long-running agents and coding
       CLAUDE_OPUS_4_5_20251101 =
         T.let(:"claude-opus-4-5-20251101", Anthropic::Model::TaggedSymbol)
 
@@ -73,11 +76,11 @@ module Anthropic
       CLAUDE_SONNET_4_5_20250929 =
         T.let(:"claude-sonnet-4-5-20250929", Anthropic::Model::TaggedSymbol)
 
-      # Exceptional model for specialized complex tasks
+      # Powerful intelligence for long-running agents and coding
       CLAUDE_OPUS_4_1 =
         T.let(:"claude-opus-4-1", Anthropic::Model::TaggedSymbol)
 
-      # Exceptional model for specialized complex tasks
+      # Powerful intelligence for long-running agents and coding
       CLAUDE_OPUS_4_1_20250805 =
         T.let(:"claude-opus-4-1-20250805", Anthropic::Model::TaggedSymbol)
     end

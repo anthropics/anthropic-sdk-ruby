@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaFallbackCreditRedeemed = Beta::BetaFallbackCreditRedeemed
+
+    module Beta
+      type beta_fallback_credit_redeemed = { type: :redeemed }
+
+      class BetaFallbackCreditRedeemed < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :redeemed
+
+        def initialize: (?type: :redeemed) -> void
+
+        def to_hash: -> { type: :redeemed }
+      end
+    end
+  end
+end
