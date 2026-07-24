@@ -164,6 +164,18 @@ class Anthropic::Test::UtilUriHandlingTest < Minitest::Test
       )
     end
   end
+
+  def test_encoding_time_query_params
+    cases = {
+      {"utc" => Time.utc(2024, 1, 2, 3, 4, 5)} => {"utc" => "2024-01-02T03:04:05Z"},
+      {"zoned" => Time.new(2024, 1, 2, 3, 4, 5, "+07:00")} => {"zoned" => "2024-01-02T03:04:05+07:00"},
+      {"nested" => {"time" => Time.utc(2024, 1, 2, 3, 4, 5)}} => {"nested[time]" => "2024-01-02T03:04:05Z"}
+    }
+
+    cases.each do |query, expected|
+      assert_equal(expected, Anthropic::Internal::Util.encode_query_params(query))
+    end
+  end
 end
 
 class Anthropic::Test::RegexMatchTest < Minitest::Test

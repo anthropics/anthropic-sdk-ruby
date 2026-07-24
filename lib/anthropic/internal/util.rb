@@ -529,7 +529,9 @@ module Anthropic
               write_query_param_element!(collection, "#{key}[#{name}]", value)
             end
           in Array
-            collection["#{key}[]"] = element.map(&:to_s)
+            collection["#{key}[]"] = element.map { _1.is_a?(Time) ? _1.iso8601 : _1.to_s }
+          in Time
+            collection[key] = element.iso8601
           else
             collection[key] = element.to_s
           end
