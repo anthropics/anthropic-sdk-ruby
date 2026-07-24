@@ -14,6 +14,8 @@ module Anthropic
 
         variant const: -> { Anthropic::Models::Beta::BetaManagedAgentsModel::CLAUDE_FABLE_5 }
 
+        variant const: -> { Anthropic::Models::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5 }
+
         variant const: -> { Anthropic::Models::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_4_8 }
 
         variant const: -> { Anthropic::Models::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_4_7 }
@@ -51,13 +53,16 @@ module Anthropic
         # Next generation of intelligence for the hardest knowledge work and coding problems
         CLAUDE_FABLE_5 = :"claude-fable-5"
 
-        # Frontier intelligence for long-running agents and coding
+        # Powerful intelligence for long-running agents and coding
+        CLAUDE_OPUS_5 = :"claude-opus-5"
+
+        # Powerful intelligence for long-running agents and coding
         CLAUDE_OPUS_4_8 = :"claude-opus-4-8"
 
-        # Frontier intelligence for long-running agents and coding
+        # Powerful intelligence for long-running agents and coding
         CLAUDE_OPUS_4_7 = :"claude-opus-4-7"
 
-        # Most intelligent model for building agents and coding
+        # Powerful intelligence for long-running agents and coding
         CLAUDE_OPUS_4_6 = :"claude-opus-4-6"
 
         # Best combination of speed and intelligence
@@ -69,10 +74,10 @@ module Anthropic
         # Fastest model with near-frontier intelligence
         CLAUDE_HAIKU_4_5_20251001 = :"claude-haiku-4-5-20251001"
 
-        # Premium model combining maximum intelligence with practical performance
+        # Powerful intelligence for long-running agents and coding
         CLAUDE_OPUS_4_5 = :"claude-opus-4-5"
 
-        # Premium model combining maximum intelligence with practical performance
+        # Powerful intelligence for long-running agents and coding
         CLAUDE_OPUS_4_5_20251101 = :"claude-opus-4-5-20251101"
 
         # High-performance model for agents and coding

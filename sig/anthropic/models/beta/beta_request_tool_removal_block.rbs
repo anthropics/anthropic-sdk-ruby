@@ -1,0 +1,45 @@
+module Anthropic
+  module Models
+    class BetaRequestToolRemovalBlock = Beta::BetaRequestToolRemovalBlock
+
+    module Beta
+      type beta_request_tool_removal_block =
+        {
+          tool: Anthropic::Models::Beta::BetaRequestToolRemovalBlock::tool,
+          type: :tool_removal,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+
+      class BetaRequestToolRemovalBlock < Anthropic::Internal::Type::BaseModel
+        attr_accessor tool: Anthropic::Models::Beta::BetaRequestToolRemovalBlock::tool
+
+        attr_accessor type: :tool_removal
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        def initialize: (
+          tool: Anthropic::Models::Beta::BetaRequestToolRemovalBlock::tool,
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?type: :tool_removal
+        ) -> void
+
+        def to_hash: -> {
+          tool: Anthropic::Models::Beta::BetaRequestToolRemovalBlock::tool,
+          type: :tool_removal,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+        }
+
+        type tool =
+          Anthropic::Beta::BetaToolChangeToolReference
+          | Anthropic::Beta::BetaToolChangeMCPToolReference
+          | Anthropic::Beta::BetaToolChangeMCPToolsetReference
+
+        module Tool
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaRequestToolRemovalBlock::tool]
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module BetaFallbacksParam = Beta::BetaFallbacksParam
+
+    module Beta
+      type beta_fallbacks_param =
+        ::Array[Anthropic::Beta::BetaFallbackParam] | :default
+
+      module BetaFallbacksParam
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_fallbacks_param]
+
+        BetaFallbackParamArray: Anthropic::Internal::Type::Converter
+      end
+    end
+  end
+end

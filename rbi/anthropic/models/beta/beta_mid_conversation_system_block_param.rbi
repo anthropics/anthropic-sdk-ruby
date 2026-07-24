@@ -16,7 +16,17 @@ module Anthropic
           end
 
         # System instruction text blocks.
-        sig { returns(T::Array[Anthropic::Beta::BetaTextBlockParam]) }
+        sig do
+          returns(
+            T::Array[
+              T.any(
+                Anthropic::Beta::BetaTextBlockParam,
+                Anthropic::Beta::BetaRequestToolAdditionBlock,
+                Anthropic::Beta::BetaRequestToolRemovalBlock
+              )
+            ]
+          )
+        end
         attr_accessor :content
 
         sig { returns(Symbol) }
@@ -41,7 +51,14 @@ module Anthropic
         # parameter.
         sig do
           params(
-            content: T::Array[Anthropic::Beta::BetaTextBlockParam::OrHash],
+            content:
+              T::Array[
+                T.any(
+                  Anthropic::Beta::BetaTextBlockParam::OrHash,
+                  Anthropic::Beta::BetaRequestToolAdditionBlock::OrHash,
+                  Anthropic::Beta::BetaRequestToolRemovalBlock::OrHash
+                )
+              ],
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             type: Symbol
@@ -59,7 +76,14 @@ module Anthropic
         sig do
           override.returns(
             {
-              content: T::Array[Anthropic::Beta::BetaTextBlockParam],
+              content:
+                T::Array[
+                  T.any(
+                    Anthropic::Beta::BetaTextBlockParam,
+                    Anthropic::Beta::BetaRequestToolAdditionBlock,
+                    Anthropic::Beta::BetaRequestToolRemovalBlock
+                  )
+                ],
               type: Symbol,
               cache_control:
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)
@@ -67,6 +91,33 @@ module Anthropic
           )
         end
         def to_hash
+        end
+
+        # Mid-conversation directive to surface a declared tool.
+        #
+        # `tool` references a tool (or MCP toolset) by name from the request's `tools`; it
+        # is offered to the model from this point in the conversation onward.
+        module Content
+          extend Anthropic::Internal::Type::Union
+
+          Variants =
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::BetaTextBlockParam,
+                Anthropic::Beta::BetaRequestToolAdditionBlock,
+                Anthropic::Beta::BetaRequestToolRemovalBlock
+              )
+            end
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaMidConversationSystemBlockParam::Content::Variants
+              ]
+            )
+          end
+          def self.variants
+          end
         end
       end
     end

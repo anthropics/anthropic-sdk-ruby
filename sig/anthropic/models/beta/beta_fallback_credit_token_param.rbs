@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    class BetaFallbackCreditTokenParam = Beta::BetaFallbackCreditTokenParam
+
+    module Beta
+      type beta_fallback_credit_token_param =
+        {
+          token: String,
+          mode: Anthropic::Models::Beta::BetaFallbackCreditTokenParam::mode
+        }
+
+      class BetaFallbackCreditTokenParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor token: String
+
+        attr_reader mode: Anthropic::Models::Beta::BetaFallbackCreditTokenParam::mode?
+
+        def mode=: (
+          Anthropic::Models::Beta::BetaFallbackCreditTokenParam::mode
+        ) -> Anthropic::Models::Beta::BetaFallbackCreditTokenParam::mode
+
+        def initialize: (
+          token: String,
+          ?mode: Anthropic::Models::Beta::BetaFallbackCreditTokenParam::mode
+        ) -> void
+
+        def to_hash: -> {
+          token: String,
+          mode: Anthropic::Models::Beta::BetaFallbackCreditTokenParam::mode
+        }
+
+        type mode = :strict | :best_effort
+
+        module Mode
+          extend Anthropic::Internal::Type::Enum
+
+          STRICT: :strict
+          BEST_EFFORT: :best_effort
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaFallbackCreditTokenParam::mode]
+        end
+      end
+    end
+  end
+end

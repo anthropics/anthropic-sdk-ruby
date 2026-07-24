@@ -177,8 +177,13 @@ module Anthropic
               current_snapshot.usage.server_tool_use = event.usage.server_tool_use
             end
 
-            if event.is_a?(Anthropic::Models::BetaRawMessageDeltaEvent) && !event.usage.iterations.nil?
-              current_snapshot.usage.iterations = event.usage.iterations
+            if event.is_a?(Anthropic::Models::BetaRawMessageDeltaEvent)
+              unless event.usage.iterations.nil?
+                current_snapshot.usage.iterations = event.usage.iterations
+              end
+              unless event.usage.fallback_credit.nil?
+                current_snapshot.usage.fallback_credit = event.usage.fallback_credit
+              end
             end
           else
           end

@@ -5,29 +5,40 @@ module Anthropic
     module Beta
       type beta_mid_conversation_system_block_param =
         {
-          content: ::Array[Anthropic::Beta::BetaTextBlockParam],
+          content: ::Array[Anthropic::Models::Beta::BetaMidConversationSystemBlockParam::content],
           type: :mid_conv_system,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
         }
 
       class BetaMidConversationSystemBlockParam < Anthropic::Internal::Type::BaseModel
-        attr_accessor content: ::Array[Anthropic::Beta::BetaTextBlockParam]
+        attr_accessor content: ::Array[Anthropic::Models::Beta::BetaMidConversationSystemBlockParam::content]
 
         attr_accessor type: :mid_conv_system
 
         attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
         def initialize: (
-          content: ::Array[Anthropic::Beta::BetaTextBlockParam],
+          content: ::Array[Anthropic::Models::Beta::BetaMidConversationSystemBlockParam::content],
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?type: :mid_conv_system
         ) -> void
 
         def to_hash: -> {
-          content: ::Array[Anthropic::Beta::BetaTextBlockParam],
+          content: ::Array[Anthropic::Models::Beta::BetaMidConversationSystemBlockParam::content],
           type: :mid_conv_system,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
         }
+
+        type content =
+          Anthropic::Beta::BetaTextBlockParam
+          | Anthropic::Beta::BetaRequestToolAdditionBlock
+          | Anthropic::Beta::BetaRequestToolRemovalBlock
+
+        module Content
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaMidConversationSystemBlockParam::content]
+        end
       end
     end
   end

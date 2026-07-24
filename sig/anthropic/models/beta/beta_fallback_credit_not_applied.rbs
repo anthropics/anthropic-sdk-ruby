@@ -1,0 +1,67 @@
+module Anthropic
+  module Models
+    class BetaFallbackCreditNotApplied = Beta::BetaFallbackCreditNotApplied
+
+    module Beta
+      type beta_fallback_credit_not_applied =
+        {
+          reason: Anthropic::Models::Beta::BetaFallbackCreditNotApplied::reason,
+          type: :not_applied,
+          remove_to_redeem: ::Array[String]?
+        }
+
+      class BetaFallbackCreditNotApplied < Anthropic::Internal::Type::BaseModel
+        attr_accessor reason: Anthropic::Models::Beta::BetaFallbackCreditNotApplied::reason
+
+        attr_accessor type: :not_applied
+
+        attr_accessor remove_to_redeem: ::Array[String]?
+
+        def initialize: (
+          reason: Anthropic::Models::Beta::BetaFallbackCreditNotApplied::reason,
+          ?remove_to_redeem: ::Array[String]?,
+          ?type: :not_applied
+        ) -> void
+
+        def to_hash: -> {
+          reason: Anthropic::Models::Beta::BetaFallbackCreditNotApplied::reason,
+          type: :not_applied,
+          remove_to_redeem: ::Array[String]?
+        }
+
+        type reason =
+          :body_mismatch
+          | :continuation_excluded
+          | :continuation_only
+          | :expired
+          | :invalid_target_model
+          | :not_enabled
+          | :reprice_unavailable
+          | :temporarily_unavailable
+          | :variant_fields_present
+          | :wrong_organization
+          | :wrong_platform
+          | :wrong_workspace
+
+        module Reason
+          extend Anthropic::Internal::Type::Enum
+
+          BODY_MISMATCH: :body_mismatch
+          CONTINUATION_EXCLUDED: :continuation_excluded
+          CONTINUATION_ONLY: :continuation_only
+          EXPIRED: :expired
+          INVALID_TARGET_MODEL: :invalid_target_model
+          NOT_ENABLED: :not_enabled
+          REPRICE_UNAVAILABLE: :reprice_unavailable
+          TEMPORARILY_UNAVAILABLE: :temporarily_unavailable
+          VARIANT_FIELDS_PRESENT: :variant_fields_present
+          WRONG_ORGANIZATION: :wrong_organization
+          WRONG_PLATFORM: :wrong_platform
+          WRONG_WORKSPACE: :wrong_workspace
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaFallbackCreditNotApplied::reason]
+        end
+      end
+    end
+  end
+end
