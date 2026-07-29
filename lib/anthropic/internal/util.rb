@@ -761,11 +761,22 @@ module Anthropic
         # @param headers [Hash{String=>String}]
         # @param stream [Enumerable<String>]
         # @param suppress_error [Boolean]
+        # @param accept [String, nil] the request's `accept` header, used as the
+        #   expected format when the response omits `content-type`
         #
         # @raise [JSON::ParserError]
         # @return [Object]
-        def decode_content(headers, stream:, suppress_error: false)
-          case (content_type = headers["content-type"])
+        def decode_content(headers, stream:, suppress_error: false, accept: nil)
+          # Some endpoints answer without a `content-type` at all — the batch
+          # results download labels its body with `content-disposition` only.
+          # `Regexp === nil` never matches, so keying purely off the response
+          # header drops those bodies into the raw `else` arm and hands back
+          # unparsed text. Fall back to the format the request asked for, which
+          # the SDK sets itself for every endpoint with a known body shape.
+          content_type = headers["content-type"]
+          content_type = accept if content_type.nil? || content_type.strip.empty?
+
+          case content_type
           in Anthropic::Internal::Util::JSON_CONTENT
             return nil if (json = stream.to_a.join).empty?
 

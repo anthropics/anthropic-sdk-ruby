@@ -691,7 +691,11 @@ module Anthropic
             send_retry_header: send_retry_header
           )
 
-          decoded = Anthropic::Internal::Util.decode_content(headers, stream: stream)
+          decoded = Anthropic::Internal::Util.decode_content(
+            headers,
+            stream: stream,
+            accept: request.fetch(:headers)["accept"]
+          )
           case req
           in {stream: Class => st}
             st.new(

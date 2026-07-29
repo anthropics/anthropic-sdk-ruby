@@ -153,7 +153,8 @@ module Anthropic
       def self?.decode_content: (
         ::Hash[String, String] headers,
         stream: Enumerable[String],
-        ?suppress_error: bool
+        ?suppress_error: bool,
+        ?accept: String?
       ) -> top
 
       def self?.fused_enum: (

@@ -615,6 +615,85 @@ class Anthropic::Test::UtilContentDecodingTest < Minitest::Test
       assert_equal(encoding, text.encoding)
     end
   end
+
+  # The batch results download answers with `content-disposition` and no
+  # `content-type`, so the decode falls back to what the request accepted.
+  def test_missing_content_type_falls_back_to_accept
+    decoded = Anthropic::Internal::Util.decode_content(
+      {"content-disposition" => "attachment; filename=results.jsonl"},
+      stream: ["{\"custom_id\":\"a\"}\n", "{\"custom_id\":\"b\"}\n"].each,
+      accept: "application/x-jsonl"
+    )
+
+    assert_equal([{custom_id: "a"}, {custom_id: "b"}], decoded.to_a)
+  end
+
+  def test_blank_content_type_falls_back_to_accept
+    decoded = Anthropic::Internal::Util.decode_content(
+      {"content-type" => "  "},
+      stream: ["{\"a\":1}"].each,
+      accept: "application/json"
+    )
+
+    assert_equal({a: 1}, decoded)
+  end
+
+  def test_response_content_type_wins_over_accept
+    decoded = Anthropic::Internal::Util.decode_content(
+      {"content-type" => "application/json"},
+      stream: ["{\"a\":1}"].each,
+      accept: "application/x-jsonl"
+    )
+
+    assert_equal({a: 1}, decoded)
+  end
+
+  def test_missing_content_type_without_accept_stays_raw
+    decoded = Anthropic::Internal::Util.decode_content({}, stream: ["{\"a\":1}"].each)
+
+    assert_instance_of(StringIO, decoded)
+    assert_equal("{\"a\":1}", decoded.string)
+  end
+
+  def test_unrecognized_accept_stays_raw
+    decoded = Anthropic::Internal::Util.decode_content(
+      {},
+      stream: ["not json"].each,
+      accept: "application/binary"
+    )
+
+    assert_instance_of(StringIO, decoded)
+    assert_equal("not json", decoded.string)
+  end
+end
+
+class Anthropic::Test::JsonLStreamTest < Minitest::Test
+  def test_coerces_lines_from_headerless_response
+    model = Anthropic::Messages::MessageBatchIndividualResponse
+    line = {
+      custom_id: "foo-1",
+      result: {type: "canceled"}
+    }
+    decoded = Anthropic::Internal::Util.decode_content(
+      {"content-disposition" => "attachment; filename=results.jsonl"},
+      stream: ["#{JSON.generate(line)}\n"].each,
+      accept: "application/x-jsonl"
+    )
+    stream = Anthropic::Internal::JsonLStream.new(
+      model: model,
+      url: URI("http://localhost/v1/messages/batches/msgbatch_abc/results"),
+      status: 200,
+      headers: {},
+      response: nil,
+      unwrap: nil,
+      stream: decoded
+    )
+
+    assert_pattern do
+      stream.to_a => [Anthropic::Messages::MessageBatchIndividualResponse => result]
+      result.custom_id => "foo-1"
+    end
+  end
 end
 
 class Anthropic::Test::UtilSseTest < Minitest::Test

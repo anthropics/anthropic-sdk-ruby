@@ -409,6 +409,22 @@ class AnthropicTest < Minitest::Test
     end
   end
 
+  def test_batch_results_without_content_type_use_request_accept
+    body = [
+      {custom_id: "batch-1", result: {type: "canceled"}},
+      {custom_id: "batch-2", result: {type: "canceled"}}
+    ].map { JSON.generate(_1) }.join("\n")
+    stub_request(:get, "http://localhost/v1/messages/batches/msgbatch_abc/results")
+      .with(headers: {"Accept" => "application/x-jsonl"})
+      .to_return(status: 200, headers: {"Content-Disposition" => "attachment"}, body: body)
+
+    anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key")
+    results = anthropic.messages.batches.results_streaming("msgbatch_abc").to_a
+
+    assert_equal(%w[batch-1 batch-2], results.map(&:custom_id))
+    assert(results.all? { _1.is_a?(Anthropic::Messages::MessageBatchIndividualResponse) })
+  end
+
   def test_nonstreaming_timeout_calculation_normal
     anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key")
 

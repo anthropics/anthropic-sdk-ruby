@@ -401,10 +401,11 @@ module Anthropic
           params(
             headers: T::Hash[String, String],
             stream: T::Enumerable[String],
-            suppress_error: T::Boolean
+            suppress_error: T::Boolean,
+            accept: T.nilable(String)
           ).returns(T.anything)
         end
-        def decode_content(headers, stream:, suppress_error: false)
+        def decode_content(headers, stream:, suppress_error: false, accept: nil)
         end
       end
 

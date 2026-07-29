@@ -321,7 +321,7 @@ module Anthropic
       return @parsed unless Anthropic::Internal::OMIT.equal?(@parsed)
 
       buffer!
-      decoded = Anthropic::Internal::Util.decode_content(@headers, stream: body.each)
+      decoded = Anthropic::Internal::Util.decode_content(@headers, stream: body.each, accept: accept_header)
       unwrapped = Anthropic::Internal::Util.dig(decoded, @request&.unwrap)
       cast_to = @request&.cast_to || Anthropic::Internal::Type::Unknown
       @parsed = Anthropic::Internal::Type::Converter.coerce(cast_to, unwrapped)
@@ -346,12 +346,19 @@ module Anthropic
 
     private
 
+    # The format the request asked for, which {Anthropic::Internal::Util.decode_content}
+    # falls back to when the response carries no `content-type`. `nil` for a
+    # fabricated response with no `request:`.
+    #
+    # @return [String, nil]
+    def accept_header = @request&.headers&.[]("accept")
+
     # A fresh typed stream over a buffered copy of the response body.
     #
     # @return [Anthropic::Internal::Type::BaseStream, Enumerable]
     def parse_stream
       buffer!(force: true)
-      decoded = Anthropic::Internal::Util.decode_content(@headers, stream: body.each)
+      decoded = Anthropic::Internal::Util.decode_content(@headers, stream: body.each, accept: accept_header)
       stream = @request&.stream
       return decoded unless stream
 
