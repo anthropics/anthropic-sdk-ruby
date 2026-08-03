@@ -163,11 +163,13 @@ module Anthropic
         #
         # @return [Object]
         def coerce(value, state:)
+          # read before the early return: the ensure block writes it back into the shared state
+          strictness = state.fetch(:strictness)
+
           if (target = resolve_variant(value))
             return Anthropic::Internal::Type::Converter.coerce(target, value, state: state)
           end
 
-          strictness = state.fetch(:strictness)
           exactness = state.fetch(:exactness)
 
           alternatives = []
