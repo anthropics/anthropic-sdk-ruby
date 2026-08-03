@@ -145,6 +145,11 @@ module Anthropic
           :"agent-memory-2026-07-22",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      MID_CONVERSATION_TOOL_CHANGES_2026_07_01 =
+        T.let(
+          :"mid-conversation-tool-changes-2026-07-01",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
     end
   end
 end

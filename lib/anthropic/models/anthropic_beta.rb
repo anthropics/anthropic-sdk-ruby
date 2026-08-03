@@ -71,6 +71,8 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::AnthropicBeta::AGENT_MEMORY_2026_07_22 }
 
+      variant const: -> { Anthropic::Models::AnthropicBeta::MID_CONVERSATION_TOOL_CHANGES_2026_07_01 }
+
       # @!method self.variants
       #   @return [Array(String, Symbol)]
 
@@ -112,6 +114,7 @@ module Anthropic
       FALLBACK_CREDIT_2026_06_01 = :"fallback-credit-2026-06-01"
       FALLBACK_CREDIT_2026_07_01 = :"fallback-credit-2026-07-01"
       AGENT_MEMORY_2026_07_22 = :"agent-memory-2026-07-22"
+      MID_CONVERSATION_TOOL_CHANGES_2026_07_01 = :"mid-conversation-tool-changes-2026-07-01"
 
       # @!endgroup
     end
