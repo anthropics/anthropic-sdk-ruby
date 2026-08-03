@@ -605,6 +605,14 @@ class Anthropic::Test::UnionTest < Minitest::Test
       end
     end
   end
+
+  def test_discriminated_coerce_preserves_strictness
+    state = Anthropic::Internal::Type::Converter.new_coerce_state
+    Anthropic::Internal::Type::Converter.coerce(U2, {type: :a}, state: state)
+    # the shared state feeds every later coercion in the same response, so the
+    # discriminator fast path must not clobber `:strictness`
+    assert_equal(true, state.fetch(:strictness))
+  end
 end
 
 class Anthropic::Test::BaseModelQoLTest < Minitest::Test
