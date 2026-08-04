@@ -18,6 +18,9 @@ module Anthropic
         required :estimated_tokens, Integer, nil?: true
 
         # @!attribute thinking
+        #   The incremental `thinking` text for this content block. Concatenate the
+        #   `thinking` values of successive `thinking_delta` events to assemble the block's
+        #   full `thinking` value.
         #
         #   @return [String]
         required :thinking, String
@@ -33,7 +36,7 @@ module Anthropic
         #
         #   @param estimated_tokens [Integer, nil] Per-frame increment of a coarse, running estimate of the tokens this thinking bl
         #
-        #   @param thinking [String]
+        #   @param thinking [String] The incremental `thinking` text for this content block. Concatenate the `thinkin
         #
         #   @param type [Symbol, :thinking_delta]
       end
