@@ -11,6 +11,8 @@ module Anthropic
           )
         end
 
+      # The `data` value of this redacted thinking block, exactly as returned by the API
+      # in a previous response. Opaque and encrypted; pass it back unchanged.
       sig { returns(String) }
       attr_accessor :data
 
@@ -18,7 +20,12 @@ module Anthropic
       attr_accessor :type
 
       sig { params(data: String, type: Symbol).returns(T.attached_class) }
-      def self.new(data:, type: :redacted_thinking)
+      def self.new(
+        # The `data` value of this redacted thinking block, exactly as returned by the API
+        # in a previous response. Opaque and encrypted; pass it back unchanged.
+        data:,
+        type: :redacted_thinking
+      )
       end
 
       sig { override.returns({ data: String, type: Symbol }) }

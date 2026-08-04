@@ -25,6 +25,9 @@ module Anthropic
         sig { returns(T.nilable(Integer)) }
         attr_accessor :estimated_tokens
 
+        # The incremental `thinking` text for this content block. Concatenate the
+        # `thinking` values of successive `thinking_delta` events to assemble the block's
+        # full `thinking` value.
         sig { returns(String) }
         attr_accessor :thinking
 
@@ -48,6 +51,9 @@ module Anthropic
           # so this is a deliberately lossy display hint, not a billable count;
           # `usage.output_tokens` remains authoritative.
           estimated_tokens:,
+          # The incremental `thinking` text for this content block. Concatenate the
+          # `thinking` values of successive `thinking_delta` events to assemble the block's
+          # full `thinking` value.
           thinking:,
           type: :thinking_delta
         )
