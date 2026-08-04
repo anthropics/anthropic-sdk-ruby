@@ -1,0 +1,59 @@
+name: Dependency versions
+on:
+  push:
+    branches:
+      - '**'
+      - '!integrated/**'
+      - '!stl-preview-head/**'
+      - '!stl-preview-base/**'
+      - '!generated'
+      - '!codegen/**'
+      - 'codegen/stl/**'
+  pull_request:
+    branches-ignore:
+      - 'stl-preview-head/**'
+      - 'stl-preview-base/**'
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+jobs:
+  test-dependency-versions:
+    timeout-minutes: 15
+    name: deps (${{ matrix.gem }} ${{ matrix.version }})
+    runs-on: 'ubuntu-latest'
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { gem: base64, version: "~> 0.2" }
+          - { gem: base64, version: "~> 0.3" }
+          - { gem: connection_pool, version: "~> 2.2.0" }
+          - { gem: connection_pool, version: "~> 2.5" }
+          - { gem: connection_pool, version: "~> 3.0" }
+          - { gem: cgi, version: "~> 0.3.6" }
+          - { gem: cgi, version: "~> 0.5" }
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@c4e5b1316158f92e3d49443a9d58b31d25ac0f8f # v1.306.0
+        with:
+          bundler-cache: false
+
+      # The lockfile is not authoritative here: pin the matrix gem via the
+      # Gemfile's env-driven override and re-resolve it.
+      - name: Resolve ${{ matrix.gem }} at ${{ matrix.version }}
+        env:
+          MATRIX_GEM: ${{ matrix.gem }}
+          MATRIX_VERSION: ${{ matrix.version }}
+        run: |-
+          gem_upper=$(echo "$MATRIX_GEM" | tr '[:lower:]' '[:upper:]')
+          echo "ANTHROPIC_TEST_${gem_upper}_VERSION=${MATRIX_VERSION}" >> "$GITHUB_ENV"
+          export "ANTHROPIC_TEST_${gem_upper}_VERSION=${MATRIX_VERSION}"
+          bundle lock --update "$MATRIX_GEM"
+          bundle install
+          bundle info "$MATRIX_GEM"
+
+      - name: Run tests
+        run: ./scripts/test
