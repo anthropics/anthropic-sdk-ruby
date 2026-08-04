@@ -8,6 +8,9 @@ module Anthropic
           T.any(Anthropic::ThinkingDelta, Anthropic::Internal::AnyHash)
         end
 
+      # The incremental `thinking` text for this content block. Concatenate the
+      # `thinking` values of successive `thinking_delta` events to assemble the block's
+      # full `thinking` value.
       sig { returns(String) }
       attr_accessor :thinking
 
@@ -15,7 +18,13 @@ module Anthropic
       attr_accessor :type
 
       sig { params(thinking: String, type: Symbol).returns(T.attached_class) }
-      def self.new(thinking:, type: :thinking_delta)
+      def self.new(
+        # The incremental `thinking` text for this content block. Concatenate the
+        # `thinking` values of successive `thinking_delta` events to assemble the block's
+        # full `thinking` value.
+        thinking:,
+        type: :thinking_delta
+      )
       end
 
       sig { override.returns({ thinking: String, type: Symbol }) }
