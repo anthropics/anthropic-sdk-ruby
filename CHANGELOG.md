@@ -1,5 +1,28 @@
 # Changelog
 
+## 1.60.0 (2026-08-06)
+
+Full Changelog: [v1.59.0...v1.60.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.59.0...v1.60.0)
+
+### Features
+
+* **api:** add `mid-conversation-tool-changes-2026-07-01` beta ([f52232a](https://github.com/anthropics/anthropic-sdk-ruby/commit/f52232a5ed81f9911d0481b41b2bbe44456c421b))
+
+
+### Bug Fixes
+
+* **client:** declare `base64` gemspec dependency so `require` works under Bundler on Ruby 3.4+ ([468dd7d](https://github.com/anthropics/anthropic-sdk-ruby/commit/468dd7d5fcd5ba973825968c5f6dd6529b586201))
+* **deps:** constrain gemspec runtime dependencies to their current major ([#141](https://github.com/anthropics/anthropic-sdk-ruby/issues/141)) ([b0e644c](https://github.com/anthropics/anthropic-sdk-ruby/commit/b0e644ceac00a7f9b43632345fa99c86717b7cca))
+* **internal:** preserve coerce state strictness in discriminated union fast path ([b30146f](https://github.com/anthropics/anthropic-sdk-ruby/commit/b30146f91e58ba71a751685ea3264ee757a7cc77))
+
+
+### Chores
+
+* **api:** remove retired Claude Opus 4.1 models ([b7b2043](https://github.com/anthropics/anthropic-sdk-ruby/commit/b7b2043b8bdf38271a6269771c1869b96fb66d82))
+* **deps:** bump 6 CVE-flagged dev/test gems to CVE-clean versions ([#146](https://github.com/anthropics/anthropic-sdk-ruby/issues/146)) ([ae3a617](https://github.com/anthropics/anthropic-sdk-ruby/commit/ae3a61750cede1c854e15047c411241b82ede8de))
+* **docs:** small updates to descriptions ([b8dc207](https://github.com/anthropics/anthropic-sdk-ruby/commit/b8dc207c909f48c7b276cef6da79e99404e1b6c7))
+* **docs:** updates to a few documentation strings ([b83066a](https://github.com/anthropics/anthropic-sdk-ruby/commit/b83066acd84f805bdf475883d1b3e3029f421103))
+
 ## 1.59.0 (2026-07-24)
 
 Full Changelog: [v1.58.0...v1.59.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.58.0...v1.59.0)
