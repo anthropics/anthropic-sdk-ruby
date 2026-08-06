@@ -75,14 +75,6 @@ module Anthropic
       # High-performance model for agents and coding
       CLAUDE_SONNET_4_5_20250929 =
         T.let(:"claude-sonnet-4-5-20250929", Anthropic::Model::TaggedSymbol)
-
-      # Powerful intelligence for long-running agents and coding
-      CLAUDE_OPUS_4_1 =
-        T.let(:"claude-opus-4-1", Anthropic::Model::TaggedSymbol)
-
-      # Powerful intelligence for long-running agents and coding
-      CLAUDE_OPUS_4_1_20250805 =
-        T.let(:"claude-opus-4-1-20250805", Anthropic::Model::TaggedSymbol)
     end
   end
 end

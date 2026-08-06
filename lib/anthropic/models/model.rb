@@ -39,10 +39,6 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::Model::CLAUDE_SONNET_4_5_20250929 }
 
-      variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_1 }
-
-      variant const: -> { Anthropic::Models::Model::CLAUDE_OPUS_4_1_20250805 }
-
       variant String
 
       # @!method self.variants
@@ -101,18 +97,6 @@ module Anthropic
 
       # High-performance model for agents and coding
       CLAUDE_SONNET_4_5_20250929 = :"claude-sonnet-4-5-20250929"
-
-      # Powerful intelligence for long-running agents and coding
-      # @deprecated Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit
-      # https://docs.anthropic.com/en/docs/resources/model-deprecations for more
-      # information.
-      CLAUDE_OPUS_4_1 = :"claude-opus-4-1"
-
-      # Powerful intelligence for long-running agents and coding
-      # @deprecated Will reach end-of-life on August 5, 2026. Please migrate to a newer model. Visit
-      # https://docs.anthropic.com/en/docs/resources/model-deprecations for more
-      # information.
-      CLAUDE_OPUS_4_1_20250805 = :"claude-opus-4-1-20250805"
 
       # @!endgroup
     end
