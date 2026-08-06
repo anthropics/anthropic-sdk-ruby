@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsAdvisor = Beta::BetaManagedAgentsAdvisor
+
+    module Beta
+      type beta_managed_agents_advisor =
+        {
+          model: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsAdvisor::type_
+        }
+
+      class BetaManagedAgentsAdvisor < Anthropic::Internal::Type::BaseModel
+        attr_accessor model: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsAdvisor::type_
+
+        def initialize: (
+          model: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsAdvisor::type_
+        ) -> void
+
+        def to_hash: -> {
+          model: String,
+          type: Anthropic::Models::Beta::BetaManagedAgentsAdvisor::type_
+        }
+
+        type type_ = :advisor
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          ADVISOR: :advisor
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAdvisor::type_]
+        end
+      end
+    end
+  end
+end

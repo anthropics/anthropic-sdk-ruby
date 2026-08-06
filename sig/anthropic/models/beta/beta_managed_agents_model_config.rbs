@@ -7,6 +7,7 @@ module Anthropic
         {
           id: Anthropic::Models::Beta::beta_managed_agents_model,
           effort: Anthropic::Models::Beta::BetaManagedAgentsModelConfig::effort,
+          inference_geo: String,
           speed: Anthropic::Models::Beta::BetaManagedAgentsModelConfig::speed
         }
 
@@ -19,6 +20,10 @@ module Anthropic
           Anthropic::Models::Beta::BetaManagedAgentsModelConfig::effort
         ) -> Anthropic::Models::Beta::BetaManagedAgentsModelConfig::effort
 
+        attr_reader inference_geo: String?
+
+        def inference_geo=: (String) -> String
+
         attr_reader speed: Anthropic::Models::Beta::BetaManagedAgentsModelConfig::speed?
 
         def speed=: (
@@ -28,12 +33,14 @@ module Anthropic
         def initialize: (
           id: Anthropic::Models::Beta::beta_managed_agents_model,
           ?effort: Anthropic::Models::Beta::BetaManagedAgentsModelConfig::effort,
+          ?inference_geo: String,
           ?speed: Anthropic::Models::Beta::BetaManagedAgentsModelConfig::speed
         ) -> void
 
         def to_hash: -> {
           id: Anthropic::Models::Beta::beta_managed_agents_model,
           effort: Anthropic::Models::Beta::BetaManagedAgentsModelConfig::effort,
+          inference_geo: String,
           speed: Anthropic::Models::Beta::BetaManagedAgentsModelConfig::speed
         }
 

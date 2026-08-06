@@ -9,7 +9,7 @@ module Anthropic
         #
         # Create Deployment
         #
-        # @overload create(agent:, environment_id:, initial_events:, name:, description: nil, metadata: nil, resources: nil, schedule: nil, vault_ids: nil, betas: nil, request_options: {})
+        # @overload create(agent:, environment_id:, initial_events:, name:, budget: nil, description: nil, metadata: nil, resources: nil, schedule: nil, vault_ids: nil, betas: nil, request_options: {})
         #
         # @param agent [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams] Body param: Agent to deploy. Accepts the `agent` ID string, which pins the lates
         #
@@ -18,6 +18,8 @@ module Anthropic
         # @param initial_events [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSystemMessageEventParams>] Body param: Events to send to each session immediately after creation. At least
         #
         # @param name [String] Body param: Human-readable name for the deployment.
+        #
+        # @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] Body param: A hard spend ceiling. The session stops issuing new model requests o
         #
         # @param description [String, nil] Body param: Description of what the deployment does.
         #
@@ -78,11 +80,13 @@ module Anthropic
         #
         # Update Deployment
         #
-        # @overload update(deployment_id, agent: nil, description: nil, environment_id: nil, initial_events: nil, metadata: nil, name: nil, resources: nil, schedule: nil, vault_ids: nil, betas: nil, request_options: {})
+        # @overload update(deployment_id, agent: nil, budget: nil, description: nil, environment_id: nil, initial_events: nil, metadata: nil, name: nil, resources: nil, schedule: nil, vault_ids: nil, betas: nil, request_options: {})
         #
         # @param deployment_id [String] Path param: Path parameter deployment_id
         #
         # @param agent [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams] Body param: Agent to deploy. Accepts the `agent` ID string, which re-pins to the
+        #
+        # @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] Body param: A hard spend ceiling. The session stops issuing new model requests o
         #
         # @param description [String, nil] Body param: Description. Omit to preserve; send empty string or null to clear.
         #

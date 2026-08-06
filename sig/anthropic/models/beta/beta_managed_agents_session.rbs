@@ -8,6 +8,7 @@ module Anthropic
           id: String,
           agent: Anthropic::Beta::BetaManagedAgentsSessionAgent,
           archived_at: Time?,
+          budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
           created_at: Time,
           environment_id: String,
           metadata: ::Hash[Symbol, String],
@@ -29,6 +30,8 @@ module Anthropic
         attr_accessor agent: Anthropic::Beta::BetaManagedAgentsSessionAgent
 
         attr_accessor archived_at: Time?
+
+        attr_accessor budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
 
         attr_accessor created_at: Time
 
@@ -60,6 +63,7 @@ module Anthropic
           id: String,
           agent: Anthropic::Beta::BetaManagedAgentsSessionAgent,
           archived_at: Time?,
+          budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
           created_at: Time,
           environment_id: String,
           metadata: ::Hash[Symbol, String],
@@ -79,6 +83,7 @@ module Anthropic
           id: String,
           agent: Anthropic::Beta::BetaManagedAgentsSessionAgent,
           archived_at: Time?,
+          budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
           created_at: Time,
           environment_id: String,
           metadata: ::Hash[Symbol, String],

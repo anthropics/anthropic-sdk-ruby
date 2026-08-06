@@ -75,7 +75,8 @@ module Anthropic
                 Anthropic::Beta::BetaWebhookEnvironmentDeletedEventData::OrHash,
                 Anthropic::Beta::BetaWebhookMemoryStoreCreatedEventData::OrHash,
                 Anthropic::Beta::BetaWebhookMemoryStoreArchivedEventData::OrHash,
-                Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData::OrHash
+                Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData::OrHash
               ),
             type: Symbol
           ).returns(T.attached_class)

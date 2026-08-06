@@ -13,12 +13,10 @@ module Anthropic
           required :id, String
 
           # @!attribute agent
-          #   Resolved `agent` definition for a single `session_thread`. Snapshot of the agent
-          #   at thread creation time. The multiagent roster is not repeated here; read it
-          #   from `Session.agent`.
+          #   A session-resolved multiagent roster entry.
           #
-          #   @return [Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent]
-          required :agent, -> { Anthropic::Beta::BetaManagedAgentsSessionThreadAgent }
+          #   @return [Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent, Anthropic::Models::Beta::BetaManagedAgentsAdvisor]
+          required :agent, union: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Agent }
 
           # @!attribute archived_at
           #   A timestamp in RFC 3339 format
@@ -74,16 +72,12 @@ module Anthropic
           required :usage, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage }, nil?: true
 
           # @!method initialize(id:, agent:, archived_at:, created_at:, parent_thread_id:, session_id:, stats:, status:, type:, updated_at:, usage:)
-          #   Some parameter documentations has been truncated, see
-          #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread} for more
-          #   details.
-          #
           #   An execution thread within a `session`. Each session has one primary thread plus
           #   zero or more child threads spawned by the coordinator.
           #
           #   @param id [String] Unique identifier for this thread.
           #
-          #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent] Resolved `agent` definition for a single `session_thread`. Snapshot of the agent
+          #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent, Anthropic::Models::Beta::BetaManagedAgentsAdvisor] A session-resolved multiagent roster entry.
           #
           #   @param archived_at [Time, nil] A timestamp in RFC 3339 format
           #
@@ -102,6 +96,24 @@ module Anthropic
           #   @param updated_at [Time] A timestamp in RFC 3339 format
           #
           #   @param usage [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadUsage, nil] Cumulative token usage for a session thread across all turns.
+
+          # A session-resolved multiagent roster entry.
+          #
+          # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread#agent
+          module Agent
+            extend Anthropic::Internal::Type::Union
+
+            discriminator :type
+
+            # Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
+            variant :agent, -> { Anthropic::Beta::BetaManagedAgentsSessionThreadAgent }
+
+            # Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+            variant :advisor, -> { Anthropic::Beta::BetaManagedAgentsAdvisor }
+
+            # @!method self.variants
+            #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent, Anthropic::Models::Beta::BetaManagedAgentsAdvisor)]
+          end
 
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread#type
           module Type

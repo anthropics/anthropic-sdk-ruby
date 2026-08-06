@@ -32,7 +32,7 @@ module Anthropic
           # @!attribute stop_reason
           #   The agent completed its turn naturally and is ready for the next user message.
           #
-          #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted]
+          #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached]
           required :stop_reason,
                    union: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::StopReason }
 
@@ -54,7 +54,7 @@ module Anthropic
           #
           #   @param session_thread_id [String] Public sthr\_ ID of the thread that went idle.
           #
-          #   @param stop_reason [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted] The agent completed its turn naturally and is ready for the next user message.
+          #   @param stop_reason [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached] The agent completed its turn naturally and is ready for the next user message.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::Type]
 
@@ -75,8 +75,11 @@ module Anthropic
             # The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
             variant :retries_exhausted, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted }
 
+            # The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
+            variant :budget_reached, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached }
+
             # @!method self.variants
-            #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted)]
+            #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached)]
           end
 
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent#type

@@ -33,7 +33,8 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
         status: Anthropic::Beta::BetaManagedAgentsDeploymentStatus,
         type: Anthropic::Beta::BetaManagedAgentsDeployment::Type,
         updated_at: Time,
-        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String])
+        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
+        budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit | nil
       }
     end
   end
@@ -64,7 +65,8 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
         status: Anthropic::Beta::BetaManagedAgentsDeploymentStatus,
         type: Anthropic::Beta::BetaManagedAgentsDeployment::Type,
         updated_at: Time,
-        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String])
+        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
+        budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit | nil
       }
     end
   end
@@ -93,7 +95,8 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
         status: Anthropic::Beta::BetaManagedAgentsDeploymentStatus,
         type: Anthropic::Beta::BetaManagedAgentsDeployment::Type,
         updated_at: Time,
-        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String])
+        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
+        budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit | nil
       }
     end
   end
@@ -131,7 +134,8 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
         status: Anthropic::Beta::BetaManagedAgentsDeploymentStatus,
         type: Anthropic::Beta::BetaManagedAgentsDeployment::Type,
         updated_at: Time,
-        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String])
+        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
+        budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit | nil
       }
     end
   end
@@ -160,7 +164,8 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
         status: Anthropic::Beta::BetaManagedAgentsDeploymentStatus,
         type: Anthropic::Beta::BetaManagedAgentsDeployment::Type,
         updated_at: Time,
-        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String])
+        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
+        budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit | nil
       }
     end
   end
@@ -189,7 +194,8 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
         status: Anthropic::Beta::BetaManagedAgentsDeploymentStatus,
         type: Anthropic::Beta::BetaManagedAgentsDeployment::Type,
         updated_at: Time,
-        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String])
+        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
+        budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit | nil
       }
     end
   end
@@ -239,7 +245,8 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
         status: Anthropic::Beta::BetaManagedAgentsDeploymentStatus,
         type: Anthropic::Beta::BetaManagedAgentsDeployment::Type,
         updated_at: Time,
-        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String])
+        vault_ids: ^(Anthropic::Internal::Type::ArrayOf[String]),
+        budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit | nil
       }
     end
   end

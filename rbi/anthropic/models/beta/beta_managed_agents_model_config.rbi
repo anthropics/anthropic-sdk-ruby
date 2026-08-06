@@ -46,6 +46,14 @@ module Anthropic
         end
         attr_writer :effort
 
+        # Geographic region for model inference. When unset, requests fall through to the
+        # workspace's default_inference_geo.
+        sig { returns(T.nilable(String)) }
+        attr_reader :inference_geo
+
+        sig { params(inference_geo: String).void }
+        attr_writer :inference_geo
+
         # Inference speed mode. `fast` provides significantly faster output token
         # generation at premium pricing. Not all models support `fast`; invalid
         # combinations are rejected at create time.
@@ -79,6 +87,7 @@ module Anthropic
                 Anthropic::Beta::BetaManagedAgentsEffortXhigh::OrHash,
                 Anthropic::Beta::BetaManagedAgentsEffortMax::OrHash
               ),
+            inference_geo: String,
             speed:
               Anthropic::Beta::BetaManagedAgentsModelConfig::Speed::OrSymbol
           ).returns(T.attached_class)
@@ -92,6 +101,9 @@ module Anthropic
           # How hard Claude works on each turn. Sets `output_config.effort` on every
           # Messages call the session makes.
           effort: nil,
+          # Geographic region for model inference. When unset, requests fall through to the
+          # workspace's default_inference_geo.
+          inference_geo: nil,
           # Inference speed mode. `fast` provides significantly faster output token
           # generation at premium pricing. Not all models support `fast`; invalid
           # combinations are rejected at create time.
@@ -105,6 +117,7 @@ module Anthropic
               id: Anthropic::Beta::BetaManagedAgentsModel::Variants,
               effort:
                 Anthropic::Beta::BetaManagedAgentsModelConfig::Effort::Variants,
+              inference_geo: String,
               speed:
                 Anthropic::Beta::BetaManagedAgentsModelConfig::Speed::TaggedSymbol
             }

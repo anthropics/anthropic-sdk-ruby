@@ -5,24 +5,34 @@ module Anthropic
     module Beta
       type beta_managed_agents_session_multiagent_coordinator =
         {
-          agents: ::Array[Anthropic::Beta::BetaManagedAgentsSessionThreadAgent],
+          agents: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::agent],
           type: Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::type_
         }
 
       class BetaManagedAgentsSessionMultiagentCoordinator < Anthropic::Internal::Type::BaseModel
-        attr_accessor agents: ::Array[Anthropic::Beta::BetaManagedAgentsSessionThreadAgent]
+        attr_accessor agents: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::agent]
 
         attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::type_
 
         def initialize: (
-          agents: ::Array[Anthropic::Beta::BetaManagedAgentsSessionThreadAgent],
+          agents: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::agent],
           type: Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::type_
         ) -> void
 
         def to_hash: -> {
-          agents: ::Array[Anthropic::Beta::BetaManagedAgentsSessionThreadAgent],
+          agents: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::agent],
           type: Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::type_
         }
+
+        type agent =
+          Anthropic::Beta::BetaManagedAgentsSessionThreadAgent
+          | Anthropic::Beta::BetaManagedAgentsAdvisor
+
+        module Agent
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::agent]
+        end
 
         type type_ = :coordinator
 

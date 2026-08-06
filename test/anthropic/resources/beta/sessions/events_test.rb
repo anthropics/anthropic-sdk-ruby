@@ -55,6 +55,7 @@ class Anthropic::Test::Resources::Beta::Sessions::EventsTest < Anthropic::Test::
       in Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent
       in Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent
       in Anthropic::Beta::BetaManagedAgentsSystemMessageEvent
+      in Anthropic::Beta::BetaManagedAgentsSessionUsageEvent
       end
     end
 
@@ -96,7 +97,7 @@ class Anthropic::Test::Resources::Beta::Sessions::EventsTest < Anthropic::Test::
       in {
         type: :"agent.message",
         id: String,
-        content: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock]),
+        content: ^(Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::Content]),
         processed_at: Time
       }
       in {type: :"agent.thinking", id: String, processed_at: Time}
@@ -243,6 +244,7 @@ class Anthropic::Test::Resources::Beta::Sessions::EventsTest < Anthropic::Test::
         id: String,
         processed_at: Time,
         agent: Anthropic::Beta::BetaManagedAgentsSessionAgent | nil,
+        budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit | nil,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]) | nil,
         title: String | nil
       }
@@ -251,6 +253,13 @@ class Anthropic::Test::Resources::Beta::Sessions::EventsTest < Anthropic::Test::
         id: String,
         content: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaManagedAgentsSystemContentBlock]),
         processed_at: Time | nil
+      }
+      in {
+        type: :"session.usage",
+        id: String,
+        processed_at: Time,
+        usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot,
+        budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit | nil
       }
       end
     end

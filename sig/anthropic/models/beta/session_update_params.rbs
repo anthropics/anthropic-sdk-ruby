@@ -5,6 +5,7 @@ module Anthropic
         {
           session_id: String,
           agent: Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate,
+          budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
           metadata: ::Hash[Symbol, String?]?,
           title: String?,
           vault_ids: ::Array[String],
@@ -24,6 +25,8 @@ module Anthropic
           Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate
         ) -> Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate
 
+        attr_accessor budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
+
         attr_accessor metadata: ::Hash[Symbol, String?]?
 
         attr_accessor title: String?
@@ -41,6 +44,7 @@ module Anthropic
         def initialize: (
           session_id: String,
           ?agent: Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate,
+          ?budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
           ?metadata: ::Hash[Symbol, String?]?,
           ?title: String?,
           ?vault_ids: ::Array[String],
@@ -51,6 +55,7 @@ module Anthropic
         def to_hash: -> {
           session_id: String,
           agent: Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate,
+          budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
           metadata: ::Hash[Symbol, String?]?,
           title: String?,
           vault_ids: ::Array[String],

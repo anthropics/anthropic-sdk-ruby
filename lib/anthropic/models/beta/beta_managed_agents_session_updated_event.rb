@@ -28,6 +28,13 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaManagedAgentsSessionAgent, nil]
         optional :agent, -> { Anthropic::Beta::BetaManagedAgentsSessionAgent }, nil?: true
 
+        # @!attribute budget
+        #   A hard spend ceiling. The session stops issuing new model requests once the
+        #   tracked list cost reaches `max_list_cost`.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil]
+        optional :budget, -> { Anthropic::Beta::BetaManagedAgentsBudgetLimit }, nil?: true
+
         # @!attribute metadata
         #   The session's full metadata bag after the update. Present when the update set
         #   non-empty metadata; absent when metadata was unchanged or cleared to empty.
@@ -41,7 +48,7 @@ module Anthropic
         #   @return [String, nil]
         optional :title, String, nil?: true
 
-        # @!method initialize(id:, processed_at:, type:, agent: nil, metadata: nil, title: nil)
+        # @!method initialize(id:, processed_at:, type:, agent: nil, budget: nil, metadata: nil, title: nil)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent} for more
         #   details.
@@ -57,6 +64,8 @@ module Anthropic
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent::Type]
         #
         #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsSessionAgent, nil] Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session
+        #
+        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] A hard spend ceiling. The session stops issuing new model requests once the trac
         #
         #   @param metadata [Hash{Symbol=>String}] The session's full metadata bag after the update. Present when the update set no
         #

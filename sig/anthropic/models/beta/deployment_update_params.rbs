@@ -5,6 +5,7 @@ module Anthropic
         {
           deployment_id: String,
           agent: Anthropic::Models::Beta::DeploymentUpdateParams::agent,
+          budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
           description: String?,
           environment_id: String,
           initial_events: ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_initial_event_params],
@@ -28,6 +29,8 @@ module Anthropic
         def agent=: (
           Anthropic::Models::Beta::DeploymentUpdateParams::agent
         ) -> Anthropic::Models::Beta::DeploymentUpdateParams::agent
+
+        attr_accessor budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
 
         attr_accessor description: String?
 
@@ -62,6 +65,7 @@ module Anthropic
         def initialize: (
           deployment_id: String,
           ?agent: Anthropic::Models::Beta::DeploymentUpdateParams::agent,
+          ?budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
           ?description: String?,
           ?environment_id: String,
           ?initial_events: ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_initial_event_params],
@@ -77,6 +81,7 @@ module Anthropic
         def to_hash: -> {
           deployment_id: String,
           agent: Anthropic::Models::Beta::DeploymentUpdateParams::agent,
+          budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
           description: String?,
           environment_id: String,
           initial_events: ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_initial_event_params],

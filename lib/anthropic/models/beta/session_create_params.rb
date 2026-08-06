@@ -21,6 +21,13 @@ module Anthropic
         #   @return [String]
         required :environment_id, String
 
+        # @!attribute budget
+        #   A hard spend ceiling. The session stops issuing new model requests once the
+        #   tracked list cost reaches `max_list_cost`.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil]
+        optional :budget, -> { Anthropic::Beta::BetaManagedAgentsBudgetLimit }
+
         # @!attribute initial_events
         #   Initial events to send to the `session` at creation, processed in order.
         #   Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
@@ -61,13 +68,15 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(agent:, environment_id:, initial_events: nil, metadata: nil, resources: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
+        # @!method initialize(agent:, environment_id:, budget: nil, initial_events: nil, metadata: nil, resources: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::SessionCreateParams} for more details.
         #
         #   @param agent [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams] Agent identifier. Accepts the `agent` ID string, which pins the latest version f
         #
         #   @param environment_id [String] ID of the `environment` defining the container configuration for this session.
+        #
+        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit] A hard spend ceiling. The session stops issuing new model requests once the trac
         #
         #   @param initial_events [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams>] Initial events to send to the `session` at creation, processed in order. Support
         #

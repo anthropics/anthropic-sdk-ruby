@@ -33,6 +33,21 @@ module Anthropic
         sig { returns(T.nilable(Time)) }
         attr_accessor :archived_at
 
+        # A hard spend ceiling. The session stops issuing new model requests once the
+        # tracked list cost reaches `max_list_cost`.
+        sig do
+          returns(T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit))
+        end
+        attr_reader :budget
+
+        sig do
+          params(
+            budget:
+              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash)
+          ).void
+        end
+        attr_writer :budget
+
         # A timestamp in RFC 3339 format
         sig { returns(Time) }
         attr_accessor :created_at
@@ -121,6 +136,8 @@ module Anthropic
             id: String,
             agent: Anthropic::Beta::BetaManagedAgentsSessionAgent::OrHash,
             archived_at: T.nilable(Time),
+            budget:
+              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash),
             created_at: Time,
             environment_id: String,
             metadata: T::Hash[Symbol, String],
@@ -153,6 +170,9 @@ module Anthropic
           agent:,
           # A timestamp in RFC 3339 format
           archived_at:,
+          # A hard spend ceiling. The session stops issuing new model requests once the
+          # tracked list cost reaches `max_list_cost`.
+          budget:,
           # A timestamp in RFC 3339 format
           created_at:,
           environment_id:,
@@ -186,6 +206,7 @@ module Anthropic
               id: String,
               agent: Anthropic::Beta::BetaManagedAgentsSessionAgent,
               archived_at: T.nilable(Time),
+              budget: T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit),
               created_at: Time,
               environment_id: String,
               metadata: T::Hash[Symbol, String],

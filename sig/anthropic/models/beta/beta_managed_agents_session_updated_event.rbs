@@ -9,6 +9,7 @@ module Anthropic
           processed_at: Time,
           type: Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent::type_,
           agent: Anthropic::Beta::BetaManagedAgentsSessionAgent?,
+          budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
           metadata: ::Hash[Symbol, String],
           title: String?
         }
@@ -22,6 +23,8 @@ module Anthropic
 
         attr_accessor agent: Anthropic::Beta::BetaManagedAgentsSessionAgent?
 
+        attr_accessor budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
+
         attr_reader metadata: ::Hash[Symbol, String]?
 
         def metadata=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
@@ -33,6 +36,7 @@ module Anthropic
           processed_at: Time,
           type: Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent::type_,
           ?agent: Anthropic::Beta::BetaManagedAgentsSessionAgent?,
+          ?budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
           ?metadata: ::Hash[Symbol, String],
           ?title: String?
         ) -> void
@@ -42,6 +46,7 @@ module Anthropic
           processed_at: Time,
           type: Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent::type_,
           agent: Anthropic::Beta::BetaManagedAgentsSessionAgent?,
+          budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
           metadata: ::Hash[Symbol, String],
           title: String?
         }

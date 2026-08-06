@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_session_budget_reached =
+          {
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached::type_
+          }
+
+        class BetaManagedAgentsSessionBudgetReached < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached::type_
+
+          def initialize: (
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached::type_
+          ) -> void
+
+          def to_hash: -> {
+            type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached::type_
+          }
+
+          type type_ = :budget_reached
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            BUDGET_REACHED: :budget_reached
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached::type_]
+          end
+        end
+      end
+    end
+  end
+end

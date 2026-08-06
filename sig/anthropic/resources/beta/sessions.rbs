@@ -11,6 +11,7 @@ module Anthropic
         def create: (
           agent: Anthropic::Models::Beta::SessionCreateParams::agent,
           environment_id: String,
+          ?budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit,
           ?initial_events: ::Array[Anthropic::Models::Beta::SessionCreateParams::initial_event],
           ?metadata: ::Hash[Symbol, String],
           ?resources: ::Array[Anthropic::Models::Beta::SessionCreateParams::resource],
@@ -29,6 +30,7 @@ module Anthropic
         def update: (
           String session_id,
           ?agent: Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate,
+          ?budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
           ?metadata: ::Hash[Symbol, String?]?,
           ?title: String?,
           ?vault_ids: ::Array[String],

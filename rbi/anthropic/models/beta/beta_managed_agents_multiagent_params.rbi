@@ -26,7 +26,8 @@ module Anthropic
               T.any(
                 String,
                 Anthropic::Beta::BetaManagedAgentsAgentParams,
-                Anthropic::Beta::BetaManagedAgentsMultiagentSelfParams
+                Anthropic::Beta::BetaManagedAgentsMultiagentSelfParams,
+                Anthropic::Beta::BetaManagedAgentsAdvisorParams
               )
             ]
           )
@@ -49,7 +50,8 @@ module Anthropic
                 T.any(
                   String,
                   Anthropic::Beta::BetaManagedAgentsAgentParams::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsMultiagentSelfParams::OrHash
+                  Anthropic::Beta::BetaManagedAgentsMultiagentSelfParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsAdvisorParams::OrHash
                 )
               ],
             type:
@@ -76,7 +78,8 @@ module Anthropic
                   T.any(
                     String,
                     Anthropic::Beta::BetaManagedAgentsAgentParams,
-                    Anthropic::Beta::BetaManagedAgentsMultiagentSelfParams
+                    Anthropic::Beta::BetaManagedAgentsMultiagentSelfParams,
+                    Anthropic::Beta::BetaManagedAgentsAdvisorParams
                   )
                 ],
               type:
