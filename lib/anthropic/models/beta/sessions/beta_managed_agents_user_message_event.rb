@@ -14,7 +14,7 @@ module Anthropic
           # @!attribute content
           #   Array of content blocks comprising the user message.
           #
-          #   @return [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock>]
+          #   @return [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock>]
           required :content,
                    -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent::Content] }
 
@@ -34,7 +34,7 @@ module Anthropic
           #
           #   @param id [String] Unique identifier for this event.
           #
-          #   @param content [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock>] Array of content blocks comprising the user message.
+          #   @param content [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock>] Array of content blocks comprising the user message.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEvent::Type]
           #
@@ -55,8 +55,11 @@ module Anthropic
             # Document content, either specified directly as base64 data, as text, or as a reference via a URL.
             variant :document, -> { Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock }
 
+            # Placeholder for content withheld by Anthropic model policy.
+            variant :redacted, -> { Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock }
+
             # @!method self.variants
-            #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock)]
+            #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock)]
           end
 
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEvent#type

@@ -23,6 +23,7 @@ module Anthropic
                 Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::OrHash
               ),
             environment_id: String,
+            budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash,
             initial_events:
               T::Array[
                 T.any(
@@ -53,6 +54,9 @@ module Anthropic
           # Body param: ID of the `environment` defining the container configuration for
           # this session.
           environment_id:,
+          # Body param: A hard spend ceiling. The session stops issuing new model requests
+          # once the tracked list cost reaches `max_list_cost`.
+          budget: nil,
           # Body param: Initial events to send to the `session` at creation, processed in
           # order. Supports `user.message` and `user.define_outcome` events. Maximum 50
           # events.
@@ -96,6 +100,8 @@ module Anthropic
           params(
             session_id: String,
             agent: Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate::OrHash,
+            budget:
+              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash),
             metadata: T.nilable(T::Hash[Symbol, T.nilable(String)]),
             title: T.nilable(String),
             vault_ids: T::Array[String],
@@ -111,6 +117,9 @@ module Anthropic
           # new value. To preserve existing entries, GET the session, modify the array, and
           # POST it back.
           agent: nil,
+          # Body param: A hard spend ceiling. The session stops issuing new model requests
+          # once the tracked list cost reaches `max_list_cost`.
+          budget: nil,
           # Body param: Metadata patch. Set a key to a string to upsert it, or to null to
           # delete it. Omit the field to preserve.
           metadata: nil,

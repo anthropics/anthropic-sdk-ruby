@@ -47,6 +47,21 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :name
 
+        # A hard spend ceiling. The session stops issuing new model requests once the
+        # tracked list cost reaches `max_list_cost`.
+        sig do
+          returns(T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit))
+        end
+        attr_reader :budget
+
+        sig do
+          params(
+            budget:
+              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash)
+          ).void
+        end
+        attr_writer :budget
+
         # Description of what the deployment does.
         sig { returns(T.nilable(String)) }
         attr_accessor :description
@@ -149,6 +164,8 @@ module Anthropic
                 )
               ],
             name: String,
+            budget:
+              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash),
             description: T.nilable(String),
             metadata: T::Hash[Symbol, String],
             resources:
@@ -181,6 +198,9 @@ module Anthropic
           initial_events:,
           # Human-readable name for the deployment.
           name:,
+          # A hard spend ceiling. The session stops issuing new model requests once the
+          # tracked list cost reaches `max_list_cost`.
+          budget: nil,
           # Description of what the deployment does.
           description: nil,
           # Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up
@@ -216,6 +236,7 @@ module Anthropic
                   )
                 ],
               name: String,
+              budget: T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit),
               description: T.nilable(String),
               metadata: T::Hash[Symbol, String],
               resources:

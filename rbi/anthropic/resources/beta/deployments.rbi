@@ -22,6 +22,8 @@ module Anthropic
                 )
               ],
             name: String,
+            budget:
+              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash),
             description: T.nilable(String),
             metadata: T::Hash[Symbol, String],
             resources:
@@ -54,6 +56,9 @@ module Anthropic
           initial_events:,
           # Body param: Human-readable name for the deployment.
           name:,
+          # Body param: A hard spend ceiling. The session stops issuing new model requests
+          # once the tracked list cost reaches `max_list_cost`.
+          budget: nil,
           # Body param: Description of what the deployment does.
           description: nil,
           # Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars,
@@ -100,6 +105,8 @@ module Anthropic
                 String,
                 Anthropic::Beta::BetaManagedAgentsAgentParams::OrHash
               ),
+            budget:
+              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash),
             description: T.nilable(String),
             environment_id: String,
             initial_events:
@@ -138,6 +145,9 @@ module Anthropic
           # latest version, or an `agent` object with both id and version specified. Omit to
           # preserve. Cannot be cleared.
           agent: nil,
+          # Body param: A hard spend ceiling. The session stops issuing new model requests
+          # once the tracked list cost reaches `max_list_cost`.
+          budget: nil,
           # Body param: Description. Omit to preserve; send empty string or null to clear.
           description: nil,
           # Body param: ID of the `environment` where sessions run. Omit to preserve. Cannot

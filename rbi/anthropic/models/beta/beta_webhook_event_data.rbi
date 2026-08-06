@@ -53,7 +53,8 @@ module Anthropic
               Anthropic::Beta::BetaWebhookEnvironmentDeletedEventData,
               Anthropic::Beta::BetaWebhookMemoryStoreCreatedEventData,
               Anthropic::Beta::BetaWebhookMemoryStoreArchivedEventData,
-              Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData
+              Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData,
+              Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData
             )
           end
 

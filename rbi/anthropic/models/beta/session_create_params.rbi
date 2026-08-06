@@ -32,6 +32,20 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :environment_id
 
+        # A hard spend ceiling. The session stops issuing new model requests once the
+        # tracked list cost reaches `max_list_cost`.
+        sig do
+          returns(T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit))
+        end
+        attr_reader :budget
+
+        sig do
+          params(
+            budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash
+          ).void
+        end
+        attr_writer :budget
+
         # Initial events to send to the `session` at creation, processed in order.
         # Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
         sig do
@@ -136,6 +150,7 @@ module Anthropic
                 Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::OrHash
               ),
             environment_id: String,
+            budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash,
             initial_events:
               T::Array[
                 T.any(
@@ -164,6 +179,9 @@ module Anthropic
           agent:,
           # ID of the `environment` defining the container configuration for this session.
           environment_id:,
+          # A hard spend ceiling. The session stops issuing new model requests once the
+          # tracked list cost reaches `max_list_cost`.
+          budget: nil,
           # Initial events to send to the `session` at creation, processed in order.
           # Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
           initial_events: nil,
@@ -192,6 +210,7 @@ module Anthropic
                   Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams
                 ),
               environment_id: String,
+              budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit,
               initial_events:
                 T::Array[
                   T.any(

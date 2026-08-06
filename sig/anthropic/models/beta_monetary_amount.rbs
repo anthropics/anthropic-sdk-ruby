@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    type beta_monetary_amount =
+      { amount: String, currency: Anthropic::Models::beta_currency }
+
+    class BetaMonetaryAmount < Anthropic::Internal::Type::BaseModel
+      attr_accessor amount: String
+
+      attr_accessor currency: Anthropic::Models::beta_currency
+
+      def initialize: (
+        amount: String,
+        currency: Anthropic::Models::beta_currency
+      ) -> void
+
+      def to_hash: -> {
+        amount: String,
+        currency: Anthropic::Models::beta_currency
+      }
+    end
+  end
+end

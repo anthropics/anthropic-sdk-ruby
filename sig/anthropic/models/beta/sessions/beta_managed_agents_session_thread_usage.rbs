@@ -4,13 +4,20 @@ module Anthropic
       module Sessions
         type beta_managed_agents_session_thread_usage =
           {
+            active_seconds: Float,
             cache_creation: Anthropic::Beta::BetaManagedAgentsCacheCreationUsage,
             cache_read_input_tokens: Integer,
             input_tokens: Integer,
-            output_tokens: Integer
+            list_cost: Anthropic::BetaMonetaryAmount?,
+            output_tokens: Integer,
+            server_tool_use: Anthropic::Beta::BetaManagedAgentsServerToolUsage?
           }
 
         class BetaManagedAgentsSessionThreadUsage < Anthropic::Internal::Type::BaseModel
+          attr_reader active_seconds: Float?
+
+          def active_seconds=: (Float) -> Float
+
           attr_reader cache_creation: Anthropic::Beta::BetaManagedAgentsCacheCreationUsage?
 
           def cache_creation=: (
@@ -25,22 +32,32 @@ module Anthropic
 
           def input_tokens=: (Integer) -> Integer
 
+          attr_accessor list_cost: Anthropic::BetaMonetaryAmount?
+
           attr_reader output_tokens: Integer?
 
           def output_tokens=: (Integer) -> Integer
 
+          attr_accessor server_tool_use: Anthropic::Beta::BetaManagedAgentsServerToolUsage?
+
           def initialize: (
+            ?active_seconds: Float,
             ?cache_creation: Anthropic::Beta::BetaManagedAgentsCacheCreationUsage,
             ?cache_read_input_tokens: Integer,
             ?input_tokens: Integer,
-            ?output_tokens: Integer
+            ?list_cost: Anthropic::BetaMonetaryAmount?,
+            ?output_tokens: Integer,
+            ?server_tool_use: Anthropic::Beta::BetaManagedAgentsServerToolUsage?
           ) -> void
 
           def to_hash: -> {
+            active_seconds: Float,
             cache_creation: Anthropic::Beta::BetaManagedAgentsCacheCreationUsage,
             cache_read_input_tokens: Integer,
             input_tokens: Integer,
-            output_tokens: Integer
+            list_cost: Anthropic::BetaMonetaryAmount?,
+            output_tokens: Integer,
+            server_tool_use: Anthropic::Beta::BetaManagedAgentsServerToolUsage?
           }
         end
       end

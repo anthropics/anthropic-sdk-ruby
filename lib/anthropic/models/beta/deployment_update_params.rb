@@ -21,6 +21,13 @@ module Anthropic
         #   @return [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams, nil]
         optional :agent, union: -> { Anthropic::Beta::DeploymentUpdateParams::Agent }
 
+        # @!attribute budget
+        #   A hard spend ceiling. The session stops issuing new model requests once the
+        #   tracked list cost reaches `max_list_cost`.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil]
+        optional :budget, -> { Anthropic::Beta::BetaManagedAgentsBudgetLimit }, nil?: true
+
         # @!attribute description
         #   Description. Omit to preserve; send empty string or null to clear.
         #
@@ -86,13 +93,15 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(deployment_id:, agent: nil, description: nil, environment_id: nil, initial_events: nil, metadata: nil, name: nil, resources: nil, schedule: nil, vault_ids: nil, betas: nil, request_options: {})
+        # @!method initialize(deployment_id:, agent: nil, budget: nil, description: nil, environment_id: nil, initial_events: nil, metadata: nil, name: nil, resources: nil, schedule: nil, vault_ids: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::DeploymentUpdateParams} for more details.
         #
         #   @param deployment_id [String]
         #
         #   @param agent [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams] Agent to deploy. Accepts the `agent` ID string, which re-pins to the latest vers
+        #
+        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] A hard spend ceiling. The session stops issuing new model requests once the trac
         #
         #   @param description [String, nil] Description. Omit to preserve; send empty string or null to clear.
         #

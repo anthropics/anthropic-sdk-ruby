@@ -17,19 +17,13 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :id
 
-          # Resolved `agent` definition for a single `session_thread`. Snapshot of the agent
-          # at thread creation time. The multiagent roster is not repeated here; read it
-          # from `Session.agent`.
-          sig { returns(Anthropic::Beta::BetaManagedAgentsSessionThreadAgent) }
-          attr_reader :agent
-
+          # A session-resolved multiagent roster entry.
           sig do
-            params(
-              agent:
-                Anthropic::Beta::BetaManagedAgentsSessionThreadAgent::OrHash
-            ).void
+            returns(
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Agent::Variants
+            )
           end
-          attr_writer :agent
+          attr_accessor :agent
 
           # A timestamp in RFC 3339 format
           sig { returns(T.nilable(Time)) }
@@ -112,7 +106,10 @@ module Anthropic
             params(
               id: String,
               agent:
-                Anthropic::Beta::BetaManagedAgentsSessionThreadAgent::OrHash,
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsSessionThreadAgent::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsAdvisor::OrHash
+                ),
               archived_at: T.nilable(Time),
               created_at: Time,
               parent_thread_id: T.nilable(String),
@@ -135,9 +132,7 @@ module Anthropic
           def self.new(
             # Unique identifier for this thread.
             id:,
-            # Resolved `agent` definition for a single `session_thread`. Snapshot of the agent
-            # at thread creation time. The multiagent roster is not repeated here; read it
-            # from `Session.agent`.
+            # A session-resolved multiagent roster entry.
             agent:,
             # A timestamp in RFC 3339 format
             archived_at:,
@@ -163,7 +158,8 @@ module Anthropic
             override.returns(
               {
                 id: String,
-                agent: Anthropic::Beta::BetaManagedAgentsSessionThreadAgent,
+                agent:
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Agent::Variants,
                 archived_at: T.nilable(Time),
                 created_at: Time,
                 parent_thread_id: T.nilable(String),
@@ -185,6 +181,29 @@ module Anthropic
             )
           end
           def to_hash
+          end
+
+          # A session-resolved multiagent roster entry.
+          module Agent
+            extend Anthropic::Internal::Type::Union
+
+            Variants =
+              T.type_alias do
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsSessionThreadAgent,
+                  Anthropic::Beta::BetaManagedAgentsAdvisor
+                )
+              end
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Agent::Variants
+                ]
+              )
+            end
+            def self.variants
+            end
           end
 
           module Type

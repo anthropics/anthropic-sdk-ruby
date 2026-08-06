@@ -1,0 +1,74 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_session_usage_snapshot =
+          {
+            active_seconds: Float,
+            cache_creation: Anthropic::Beta::BetaManagedAgentsCacheCreationUsage,
+            cache_read_input_tokens: Integer,
+            input_tokens: Integer,
+            list_cost: Anthropic::BetaMonetaryAmount,
+            output_tokens: Integer,
+            server_tool_use: Anthropic::Beta::BetaManagedAgentsServerToolUsage
+          }
+
+        class BetaManagedAgentsSessionUsageSnapshot < Anthropic::Internal::Type::BaseModel
+          attr_reader active_seconds: Float?
+
+          def active_seconds=: (Float) -> Float
+
+          attr_reader cache_creation: Anthropic::Beta::BetaManagedAgentsCacheCreationUsage?
+
+          def cache_creation=: (
+            Anthropic::Beta::BetaManagedAgentsCacheCreationUsage
+          ) -> Anthropic::Beta::BetaManagedAgentsCacheCreationUsage
+
+          attr_reader cache_read_input_tokens: Integer?
+
+          def cache_read_input_tokens=: (Integer) -> Integer
+
+          attr_reader input_tokens: Integer?
+
+          def input_tokens=: (Integer) -> Integer
+
+          attr_reader list_cost: Anthropic::BetaMonetaryAmount?
+
+          def list_cost=: (
+            Anthropic::BetaMonetaryAmount
+          ) -> Anthropic::BetaMonetaryAmount
+
+          attr_reader output_tokens: Integer?
+
+          def output_tokens=: (Integer) -> Integer
+
+          attr_reader server_tool_use: Anthropic::Beta::BetaManagedAgentsServerToolUsage?
+
+          def server_tool_use=: (
+            Anthropic::Beta::BetaManagedAgentsServerToolUsage
+          ) -> Anthropic::Beta::BetaManagedAgentsServerToolUsage
+
+          def initialize: (
+            ?active_seconds: Float,
+            ?cache_creation: Anthropic::Beta::BetaManagedAgentsCacheCreationUsage,
+            ?cache_read_input_tokens: Integer,
+            ?input_tokens: Integer,
+            ?list_cost: Anthropic::BetaMonetaryAmount,
+            ?output_tokens: Integer,
+            ?server_tool_use: Anthropic::Beta::BetaManagedAgentsServerToolUsage
+          ) -> void
+
+          def to_hash: -> {
+            active_seconds: Float,
+            cache_creation: Anthropic::Beta::BetaManagedAgentsCacheCreationUsage,
+            cache_read_input_tokens: Integer,
+            input_tokens: Integer,
+            list_cost: Anthropic::BetaMonetaryAmount,
+            output_tokens: Integer,
+            server_tool_use: Anthropic::Beta::BetaManagedAgentsServerToolUsage
+          }
+        end
+      end
+    end
+  end
+end

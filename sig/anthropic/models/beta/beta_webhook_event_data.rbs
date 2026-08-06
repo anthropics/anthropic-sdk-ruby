@@ -47,6 +47,7 @@ module Anthropic
         | Anthropic::Beta::BetaWebhookMemoryStoreCreatedEventData
         | Anthropic::Beta::BetaWebhookMemoryStoreArchivedEventData
         | Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData
+        | Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData
 
       module BetaWebhookEventData
         extend Anthropic::Internal::Type::Union
