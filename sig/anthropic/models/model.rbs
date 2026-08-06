@@ -16,8 +16,6 @@ module Anthropic
       | :"claude-opus-4-5-20251101"
       | :"claude-sonnet-4-5"
       | :"claude-sonnet-4-5-20250929"
-      | :"claude-opus-4-1"
-      | :"claude-opus-4-1-20250805"
       | String
 
     module Model
@@ -69,12 +67,6 @@ module Anthropic
 
       # High-performance model for agents and coding
       CLAUDE_SONNET_4_5_20250929: :"claude-sonnet-4-5-20250929"
-
-      # Powerful intelligence for long-running agents and coding
-      CLAUDE_OPUS_4_1: :"claude-opus-4-1"
-
-      # Powerful intelligence for long-running agents and coding
-      CLAUDE_OPUS_4_1_20250805: :"claude-opus-4-1-20250805"
     end
   end
 end
