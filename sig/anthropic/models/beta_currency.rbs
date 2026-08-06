@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    type beta_currency = :USD
+
+    module BetaCurrency
+      extend Anthropic::Internal::Type::Enum
+
+      USD: :USD
+
+      def self?.values: -> ::Array[Anthropic::Models::beta_currency]
+    end
+  end
+end

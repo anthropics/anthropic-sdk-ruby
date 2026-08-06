@@ -5,7 +5,7 @@ module Anthropic
         type beta_managed_agents_agent_message_event =
           {
             id: String,
-            content: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock],
+            content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::content],
             processed_at: Time,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::type_
           }
@@ -13,7 +13,7 @@ module Anthropic
         class BetaManagedAgentsAgentMessageEvent < Anthropic::Internal::Type::BaseModel
           attr_accessor id: String
 
-          attr_accessor content: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock]
+          attr_accessor content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::content]
 
           attr_accessor processed_at: Time
 
@@ -21,17 +21,27 @@ module Anthropic
 
           def initialize: (
             id: String,
-            content: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock],
+            content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::content],
             processed_at: Time,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::type_
           ) -> void
 
           def to_hash: -> {
             id: String,
-            content: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock],
+            content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::content],
             processed_at: Time,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::type_
           }
+
+          type content =
+            Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock
+            | Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock
+
+          module Content
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::content]
+          end
 
           type type_ = :"agent.message"
 

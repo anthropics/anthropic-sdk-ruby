@@ -67,7 +67,8 @@ module Anthropic
               Anthropic::Beta::BetaWebhookEnvironmentDeletedEventData,
               Anthropic::Beta::BetaWebhookMemoryStoreCreatedEventData,
               Anthropic::Beta::BetaWebhookMemoryStoreArchivedEventData,
-              Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData
+              Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData,
+              Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData
             )
           )
         end
@@ -125,7 +126,8 @@ module Anthropic
                 Anthropic::Beta::BetaWebhookEnvironmentDeletedEventData::OrHash,
                 Anthropic::Beta::BetaWebhookMemoryStoreCreatedEventData::OrHash,
                 Anthropic::Beta::BetaWebhookMemoryStoreArchivedEventData::OrHash,
-                Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData::OrHash
+                Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData::OrHash,
+                Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData::OrHash
               ),
             type: Symbol
           ).returns(T.attached_class)
@@ -190,7 +192,8 @@ module Anthropic
                   Anthropic::Beta::BetaWebhookEnvironmentDeletedEventData,
                   Anthropic::Beta::BetaWebhookMemoryStoreCreatedEventData,
                   Anthropic::Beta::BetaWebhookMemoryStoreArchivedEventData,
-                  Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData
+                  Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData,
+                  Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData
                 ),
               type: Symbol
             }

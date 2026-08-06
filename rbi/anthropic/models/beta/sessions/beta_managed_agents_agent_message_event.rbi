@@ -20,7 +20,9 @@ module Anthropic
           # Array of text blocks comprising the agent response.
           sig do
             returns(
-              T::Array[Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock]
+              T::Array[
+                Anthropic::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::Content::Variants
+              ]
             )
           end
           attr_accessor :content
@@ -42,7 +44,10 @@ module Anthropic
               id: String,
               content:
                 T::Array[
-                  Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock::OrHash
+                  T.any(
+                    Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock::OrHash
+                  )
                 ],
               processed_at: Time,
               type:
@@ -66,7 +71,7 @@ module Anthropic
                 id: String,
                 content:
                   T::Array[
-                    Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock
+                    Anthropic::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::Content::Variants
                   ],
                 processed_at: Time,
                 type:
@@ -75,6 +80,29 @@ module Anthropic
             )
           end
           def to_hash
+          end
+
+          # Content block in an agent message.
+          module Content
+            extend Anthropic::Internal::Type::Union
+
+            Variants =
+              T.type_alias do
+                T.any(
+                  Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock
+                )
+              end
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::Content::Variants
+                ]
+              )
+            end
+            def self.variants
+            end
           end
 
           module Type

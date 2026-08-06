@@ -45,7 +45,8 @@ module Anthropic
                 T.any(
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionEndTurn::OrHash,
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionRequiresAction::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted::OrHash
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached::OrHash
                 ),
               type:
                 Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::Type::OrSymbol
@@ -86,7 +87,8 @@ module Anthropic
                 T.any(
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionEndTurn,
                   Anthropic::Beta::Sessions::BetaManagedAgentsSessionRequiresAction,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached
                 )
               end
 

@@ -23,6 +23,13 @@ module Anthropic
         #   @return [Time, nil]
         required :archived_at, Time, nil?: true
 
+        # @!attribute budget
+        #   A hard spend ceiling. The session stops issuing new model requests once the
+        #   tracked list cost reaches `max_list_cost`.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil]
+        required :budget, -> { Anthropic::Beta::BetaManagedAgentsBudgetLimit }, nil?: true
+
         # @!attribute created_at
         #   A timestamp in RFC 3339 format
         #
@@ -101,7 +108,7 @@ module Anthropic
         #   @return [String, nil]
         optional :deployment_id, String, nil?: true
 
-        # @!method initialize(id:, agent:, archived_at:, created_at:, environment_id:, metadata:, outcome_evaluations:, resources:, stats:, status:, title:, type:, updated_at:, usage:, vault_ids:, deployment_id: nil)
+        # @!method initialize(id:, agent:, archived_at:, budget:, created_at:, environment_id:, metadata:, outcome_evaluations:, resources:, stats:, status:, title:, type:, updated_at:, usage:, vault_ids:, deployment_id: nil)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsSession} for more details.
         #
@@ -112,6 +119,8 @@ module Anthropic
         #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsSessionAgent] Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session
         #
         #   @param archived_at [Time, nil] A timestamp in RFC 3339 format
+        #
+        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] A hard spend ceiling. The session stops issuing new model requests once the trac
         #
         #   @param created_at [Time] A timestamp in RFC 3339 format
         #

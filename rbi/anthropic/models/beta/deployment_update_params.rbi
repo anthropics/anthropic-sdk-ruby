@@ -41,6 +41,21 @@ module Anthropic
         end
         attr_writer :agent
 
+        # A hard spend ceiling. The session stops issuing new model requests once the
+        # tracked list cost reaches `max_list_cost`.
+        sig do
+          returns(T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit))
+        end
+        attr_reader :budget
+
+        sig do
+          params(
+            budget:
+              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash)
+          ).void
+        end
+        attr_writer :budget
+
         # Description. Omit to preserve; send empty string or null to clear.
         sig { returns(T.nilable(String)) }
         attr_accessor :description
@@ -160,6 +175,8 @@ module Anthropic
                 String,
                 Anthropic::Beta::BetaManagedAgentsAgentParams::OrHash
               ),
+            budget:
+              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash),
             description: T.nilable(String),
             environment_id: String,
             initial_events:
@@ -197,6 +214,9 @@ module Anthropic
           # version, or an `agent` object with both id and version specified. Omit to
           # preserve. Cannot be cleared.
           agent: nil,
+          # A hard spend ceiling. The session stops issuing new model requests once the
+          # tracked list cost reaches `max_list_cost`.
+          budget: nil,
           # Description. Omit to preserve; send empty string or null to clear.
           description: nil,
           # ID of the `environment` where sessions run. Omit to preserve. Cannot be cleared.
@@ -231,6 +251,7 @@ module Anthropic
               deployment_id: String,
               agent:
                 T.any(String, Anthropic::Beta::BetaManagedAgentsAgentParams),
+              budget: T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit),
               description: T.nilable(String),
               environment_id: String,
               initial_events:

@@ -16,7 +16,8 @@ module Anthropic
             T.any(
               String,
               Anthropic::Beta::BetaManagedAgentsAgentParams,
-              Anthropic::Beta::BetaManagedAgentsMultiagentSelfParams
+              Anthropic::Beta::BetaManagedAgentsMultiagentSelfParams,
+              Anthropic::Beta::BetaManagedAgentsAdvisorParams
             )
           end
 

@@ -25,6 +25,14 @@ module Anthropic
                  },
                  nil?: true
 
+        # @!attribute inference_geo
+        #   Geographic region for model inference. When unset, requests fall through to the
+        #   workspace's default_inference_geo. On update, `model` is whole-object
+        #   replacement — omitting inference_geo clears it.
+        #
+        #   @return [String, nil]
+        optional :inference_geo, String, nil?: true
+
         # @!attribute speed
         #   Inference speed mode. `fast` provides significantly faster output token
         #   generation at premium pricing. Not all models support `fast`; invalid
@@ -33,7 +41,7 @@ module Anthropic
         #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::Speed, nil]
         optional :speed, enum: -> { Anthropic::Beta::BetaManagedAgentsModelConfigParams::Speed }, nil?: true
 
-        # @!method initialize(id:, effort: nil, speed: nil)
+        # @!method initialize(id:, effort: nil, inference_geo: nil, speed: nil)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams} for more details.
         #
@@ -42,6 +50,8 @@ module Anthropic
         #   @param id [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] The model that will power your agent.
         #
         #   @param effort [Symbol, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::Effort::BetaManagedAgentsEffortLevel, Anthropic::Models::Beta::BetaManagedAgentsEffortLow, Anthropic::Models::Beta::BetaManagedAgentsEffortMedium, Anthropic::Models::Beta::BetaManagedAgentsEffortHigh, Anthropic::Models::Beta::BetaManagedAgentsEffortXhigh, Anthropic::Models::Beta::BetaManagedAgentsEffortMax, nil] How hard Claude works on each inference call. Accepts a bare level string (`"hig
+        #
+        #   @param inference_geo [String, nil] Geographic region for model inference. When unset, requests fall through to the
         #
         #   @param speed [Symbol, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams::Speed, nil] Inference speed mode. `fast` provides significantly faster output token generati
 

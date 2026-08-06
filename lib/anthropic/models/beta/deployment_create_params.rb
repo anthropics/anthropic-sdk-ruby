@@ -37,6 +37,13 @@ module Anthropic
         #   @return [String]
         required :name, String
 
+        # @!attribute budget
+        #   A hard spend ceiling. The session stops issuing new model requests once the
+        #   tracked list cost reaches `max_list_cost`.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil]
+        optional :budget, -> { Anthropic::Beta::BetaManagedAgentsBudgetLimit }, nil?: true
+
         # @!attribute description
         #   Description of what the deployment does.
         #
@@ -78,7 +85,7 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(agent:, environment_id:, initial_events:, name:, description: nil, metadata: nil, resources: nil, schedule: nil, vault_ids: nil, betas: nil, request_options: {})
+        # @!method initialize(agent:, environment_id:, initial_events:, name:, budget: nil, description: nil, metadata: nil, resources: nil, schedule: nil, vault_ids: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::DeploymentCreateParams} for more details.
         #
@@ -89,6 +96,8 @@ module Anthropic
         #   @param initial_events [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSystemMessageEventParams>] Events to send to each session immediately after creation. At least 1, maximum 5
         #
         #   @param name [String] Human-readable name for the deployment.
+        #
+        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] A hard spend ceiling. The session stops issuing new model requests once the trac
         #
         #   @param description [String, nil] Description of what the deployment does.
         #

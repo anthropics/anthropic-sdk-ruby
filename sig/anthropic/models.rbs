@@ -35,6 +35,8 @@ module Anthropic
 
   class BetaBillingError = Anthropic::Models::BetaBillingError
 
+  module BetaCurrency = Anthropic::Models::BetaCurrency
+
   module BetaError = Anthropic::Models::BetaError
 
   class BetaErrorResponse = Anthropic::Models::BetaErrorResponse
@@ -42,6 +44,8 @@ module Anthropic
   class BetaGatewayTimeoutError = Anthropic::Models::BetaGatewayTimeoutError
 
   class BetaInvalidRequestError = Anthropic::Models::BetaInvalidRequestError
+
+  class BetaMonetaryAmount = Anthropic::Models::BetaMonetaryAmount
 
   class BetaNotFoundError = Anthropic::Models::BetaNotFoundError
 

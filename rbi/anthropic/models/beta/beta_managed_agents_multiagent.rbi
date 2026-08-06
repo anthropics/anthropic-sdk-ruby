@@ -17,7 +17,11 @@ module Anthropic
         # Agents the coordinator may spawn as session threads, each resolved to a specific
         # version.
         sig do
-          returns(T::Array[Anthropic::Beta::BetaManagedAgentsAgentReference])
+          returns(
+            T::Array[
+              Anthropic::Beta::BetaManagedAgentsMultiagent::Agent::Variants
+            ]
+          )
         end
         attr_accessor :agents
 
@@ -33,7 +37,10 @@ module Anthropic
           params(
             agents:
               T::Array[
-                Anthropic::Beta::BetaManagedAgentsAgentReference::OrHash
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsAgentReference::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsAdvisor::OrHash
+                )
               ],
             type: Anthropic::Beta::BetaManagedAgentsMultiagent::Type::OrSymbol
           ).returns(T.attached_class)
@@ -50,13 +57,38 @@ module Anthropic
           override.returns(
             {
               agents:
-                T::Array[Anthropic::Beta::BetaManagedAgentsAgentReference],
+                T::Array[
+                  Anthropic::Beta::BetaManagedAgentsMultiagent::Agent::Variants
+                ],
               type:
                 Anthropic::Beta::BetaManagedAgentsMultiagent::Type::TaggedSymbol
             }
           )
         end
         def to_hash
+        end
+
+        # A resolved multiagent roster entry.
+        module Agent
+          extend Anthropic::Internal::Type::Union
+
+          Variants =
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::BetaManagedAgentsAgentReference,
+                Anthropic::Beta::BetaManagedAgentsAdvisor
+              )
+            end
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaManagedAgentsMultiagent::Agent::Variants
+              ]
+            )
+          end
+          def self.variants
+          end
         end
 
         module Type

@@ -120,6 +120,21 @@ module Anthropic
         sig { returns(T::Array[String]) }
         attr_accessor :vault_ids
 
+        # A hard spend ceiling. The session stops issuing new model requests once the
+        # tracked list cost reaches `max_list_cost`.
+        sig do
+          returns(T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit))
+        end
+        attr_reader :budget
+
+        sig do
+          params(
+            budget:
+              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash)
+          ).void
+        end
+        attr_writer :budget
+
         # A deployment is a configured instance of an agent — it binds the agent to
         # everything needed to run it autonomously: an environment, credentials, initial
         # events, and an optional schedule.
@@ -162,7 +177,9 @@ module Anthropic
               Anthropic::Beta::BetaManagedAgentsDeploymentStatus::OrSymbol,
             type: Anthropic::Beta::BetaManagedAgentsDeployment::Type::OrSymbol,
             updated_at: Time,
-            vault_ids: T::Array[String]
+            vault_ids: T::Array[String],
+            budget:
+              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash)
           ).returns(T.attached_class)
         end
         def self.new(
@@ -198,7 +215,10 @@ module Anthropic
           updated_at:,
           # Vault IDs supplying stored credentials for sessions created from this
           # deployment.
-          vault_ids:
+          vault_ids:,
+          # A hard spend ceiling. The session stops issuing new model requests once the
+          # tracked list cost reaches `max_list_cost`.
+          budget: nil
         )
         end
 
@@ -231,7 +251,8 @@ module Anthropic
               type:
                 Anthropic::Beta::BetaManagedAgentsDeployment::Type::TaggedSymbol,
               updated_at: Time,
-              vault_ids: T::Array[String]
+              vault_ids: T::Array[String],
+              budget: T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit)
             }
           )
         end

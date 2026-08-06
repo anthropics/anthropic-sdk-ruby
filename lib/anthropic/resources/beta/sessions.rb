@@ -18,11 +18,13 @@ module Anthropic
         #
         # Create Session
         #
-        # @overload create(agent:, environment_id:, initial_events: nil, metadata: nil, resources: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
+        # @overload create(agent:, environment_id:, budget: nil, initial_events: nil, metadata: nil, resources: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
         #
         # @param agent [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams] Body param: Agent identifier. Accepts the `agent` ID string, which pins the late
         #
         # @param environment_id [String] Body param: ID of the `environment` defining the container configuration for thi
+        #
+        # @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit] Body param: A hard spend ceiling. The session stops issuing new model requests o
         #
         # @param initial_events [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams>] Body param: Initial events to send to the `session` at creation, processed in or
         #
@@ -83,11 +85,13 @@ module Anthropic
         #
         # Update Session
         #
-        # @overload update(session_id, agent: nil, metadata: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
+        # @overload update(session_id, agent: nil, budget: nil, metadata: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
         #
         # @param session_id [String] Path param: Path parameter session_id
         #
         # @param agent [Anthropic::Models::Beta::BetaManagedAgentsSessionAgentUpdate] Body param: Mid-session agent configuration update. Only `tools` and `mcp_server
+        #
+        # @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] Body param: A hard spend ceiling. The session stops issuing new model requests o
         #
         # @param metadata [Hash{Symbol=>String, nil}, nil] Body param: Metadata patch. Set a key to a string to upsert it, or to null to de
         #

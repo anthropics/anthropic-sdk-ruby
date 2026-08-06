@@ -5,7 +5,7 @@ module Anthropic
         type beta_managed_agents_session_thread =
           {
             id: String,
-            agent: Anthropic::Beta::BetaManagedAgentsSessionThreadAgent,
+            agent: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::agent,
             archived_at: Time?,
             created_at: Time,
             parent_thread_id: String?,
@@ -20,7 +20,7 @@ module Anthropic
         class BetaManagedAgentsSessionThread < Anthropic::Internal::Type::BaseModel
           attr_accessor id: String
 
-          attr_accessor agent: Anthropic::Beta::BetaManagedAgentsSessionThreadAgent
+          attr_accessor agent: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::agent
 
           attr_accessor archived_at: Time?
 
@@ -42,7 +42,7 @@ module Anthropic
 
           def initialize: (
             id: String,
-            agent: Anthropic::Beta::BetaManagedAgentsSessionThreadAgent,
+            agent: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::agent,
             archived_at: Time?,
             created_at: Time,
             parent_thread_id: String?,
@@ -56,7 +56,7 @@ module Anthropic
 
           def to_hash: -> {
             id: String,
-            agent: Anthropic::Beta::BetaManagedAgentsSessionThreadAgent,
+            agent: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::agent,
             archived_at: Time?,
             created_at: Time,
             parent_thread_id: String?,
@@ -67,6 +67,16 @@ module Anthropic
             updated_at: Time,
             usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadUsage?
           }
+
+          type agent =
+            Anthropic::Beta::BetaManagedAgentsSessionThreadAgent
+            | Anthropic::Beta::BetaManagedAgentsAdvisor
+
+          module Agent
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::agent]
+          end
 
           type type_ = :session_thread
 

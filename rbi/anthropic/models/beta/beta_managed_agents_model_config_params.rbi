@@ -45,6 +45,12 @@ module Anthropic
         end
         attr_accessor :effort
 
+        # Geographic region for model inference. When unset, requests fall through to the
+        # workspace's default_inference_geo. On update, `model` is whole-object
+        # replacement — omitting inference_geo clears it.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :inference_geo
+
         # Inference speed mode. `fast` provides significantly faster output token
         # generation at premium pricing. Not all models support `fast`; invalid
         # combinations are rejected at create time.
@@ -73,6 +79,7 @@ module Anthropic
                   Anthropic::Beta::BetaManagedAgentsEffortMax::OrHash
                 )
               ),
+            inference_geo: T.nilable(String),
             speed:
               T.nilable(
                 Anthropic::Beta::BetaManagedAgentsModelConfigParams::Speed::OrSymbol
@@ -89,6 +96,10 @@ module Anthropic
           # (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model
           # default; on update, omitting it leaves the stored value unchanged.
           effort: nil,
+          # Geographic region for model inference. When unset, requests fall through to the
+          # workspace's default_inference_geo. On update, `model` is whole-object
+          # replacement — omitting inference_geo clears it.
+          inference_geo: nil,
           # Inference speed mode. `fast` provides significantly faster output token
           # generation at premium pricing. Not all models support `fast`; invalid
           # combinations are rejected at create time.
@@ -115,6 +126,7 @@ module Anthropic
                     Anthropic::Beta::BetaManagedAgentsEffortMax
                   )
                 ),
+              inference_geo: T.nilable(String),
               speed:
                 T.nilable(
                   Anthropic::Beta::BetaManagedAgentsModelConfigParams::Speed::OrSymbol

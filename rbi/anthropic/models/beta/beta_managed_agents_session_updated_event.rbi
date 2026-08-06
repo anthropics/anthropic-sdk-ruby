@@ -45,6 +45,21 @@ module Anthropic
         end
         attr_writer :agent
 
+        # A hard spend ceiling. The session stops issuing new model requests once the
+        # tracked list cost reaches `max_list_cost`.
+        sig do
+          returns(T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit))
+        end
+        attr_reader :budget
+
+        sig do
+          params(
+            budget:
+              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash)
+          ).void
+        end
+        attr_writer :budget
+
         # The session's full metadata bag after the update. Present when the update set
         # non-empty metadata; absent when metadata was unchanged or cleared to empty.
         sig { returns(T.nilable(T::Hash[Symbol, String])) }
@@ -68,6 +83,8 @@ module Anthropic
               Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent::Type::OrSymbol,
             agent:
               T.nilable(Anthropic::Beta::BetaManagedAgentsSessionAgent::OrHash),
+            budget:
+              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash),
             metadata: T::Hash[Symbol, String],
             title: T.nilable(String)
           ).returns(T.attached_class)
@@ -81,6 +98,9 @@ module Anthropic
           # Resolved `agent` definition for a `session`. Snapshot of the `agent` at
           # `session` creation time.
           agent: nil,
+          # A hard spend ceiling. The session stops issuing new model requests once the
+          # tracked list cost reaches `max_list_cost`.
+          budget: nil,
           # The session's full metadata bag after the update. Present when the update set
           # non-empty metadata; absent when metadata was unchanged or cleared to empty.
           metadata: nil,
@@ -97,6 +117,7 @@ module Anthropic
               type:
                 Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent::Type::TaggedSymbol,
               agent: T.nilable(Anthropic::Beta::BetaManagedAgentsSessionAgent),
+              budget: T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit),
               metadata: T::Hash[Symbol, String],
               title: T.nilable(String)
             }

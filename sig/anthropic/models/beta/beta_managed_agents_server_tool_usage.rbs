@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsServerToolUsage = Beta::BetaManagedAgentsServerToolUsage
+
+    module Beta
+      type beta_managed_agents_server_tool_usage =
+        { web_fetch_requests: Integer, web_search_requests: Integer }
+
+      class BetaManagedAgentsServerToolUsage < Anthropic::Internal::Type::BaseModel
+        attr_reader web_fetch_requests: Integer?
+
+        def web_fetch_requests=: (Integer) -> Integer
+
+        attr_reader web_search_requests: Integer?
+
+        def web_search_requests=: (Integer) -> Integer
+
+        def initialize: (
+          ?web_fetch_requests: Integer,
+          ?web_search_requests: Integer
+        ) -> void
+
+        def to_hash: -> {
+          web_fetch_requests: Integer,
+          web_search_requests: Integer
+        }
+      end
+    end
+  end
+end

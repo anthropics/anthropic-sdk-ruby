@@ -106,7 +106,14 @@ module Anthropic
         #   @return [Array<String>]
         required :vault_ids, Anthropic::Internal::Type::ArrayOf[String]
 
-        # @!method initialize(id:, agent:, archived_at:, created_at:, description:, environment_id:, initial_events:, metadata:, name:, paused_reason:, resources:, schedule:, status:, type:, updated_at:, vault_ids:)
+        # @!attribute budget
+        #   A hard spend ceiling. The session stops issuing new model requests once the
+        #   tracked list cost reaches `max_list_cost`.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil]
+        optional :budget, -> { Anthropic::Beta::BetaManagedAgentsBudgetLimit }, nil?: true
+
+        # @!method initialize(id:, agent:, archived_at:, created_at:, description:, environment_id:, initial_events:, metadata:, name:, paused_reason:, resources:, schedule:, status:, type:, updated_at:, vault_ids:, budget: nil)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsDeployment} for more details.
         #
@@ -145,6 +152,8 @@ module Anthropic
         #   @param updated_at [Time] A timestamp in RFC 3339 format
         #
         #   @param vault_ids [Array<String>] Vault IDs supplying stored credentials for sessions created from this deployment
+        #
+        #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] A hard spend ceiling. The session stops issuing new model requests once the trac
 
         # @see Anthropic::Models::Beta::BetaManagedAgentsDeployment#type
         module Type

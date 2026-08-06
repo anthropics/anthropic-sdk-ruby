@@ -5,6 +5,7 @@ module Anthropic
         {
           agent: Anthropic::Models::Beta::SessionCreateParams::agent,
           environment_id: String,
+          budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit,
           initial_events: ::Array[Anthropic::Models::Beta::SessionCreateParams::initial_event],
           metadata: ::Hash[Symbol, String],
           resources: ::Array[Anthropic::Models::Beta::SessionCreateParams::resource],
@@ -21,6 +22,12 @@ module Anthropic
         attr_accessor agent: Anthropic::Models::Beta::SessionCreateParams::agent
 
         attr_accessor environment_id: String
+
+        attr_reader budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
+
+        def budget=: (
+          Anthropic::Beta::BetaManagedAgentsBudgetLimit
+        ) -> Anthropic::Beta::BetaManagedAgentsBudgetLimit
 
         attr_reader initial_events: ::Array[Anthropic::Models::Beta::SessionCreateParams::initial_event]?
 
@@ -53,6 +60,7 @@ module Anthropic
         def initialize: (
           agent: Anthropic::Models::Beta::SessionCreateParams::agent,
           environment_id: String,
+          ?budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit,
           ?initial_events: ::Array[Anthropic::Models::Beta::SessionCreateParams::initial_event],
           ?metadata: ::Hash[Symbol, String],
           ?resources: ::Array[Anthropic::Models::Beta::SessionCreateParams::resource],
@@ -65,6 +73,7 @@ module Anthropic
         def to_hash: -> {
           agent: Anthropic::Models::Beta::SessionCreateParams::agent,
           environment_id: String,
+          budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit,
           initial_events: ::Array[Anthropic::Models::Beta::SessionCreateParams::initial_event],
           metadata: ::Hash[Symbol, String],
           resources: ::Array[Anthropic::Models::Beta::SessionCreateParams::resource],

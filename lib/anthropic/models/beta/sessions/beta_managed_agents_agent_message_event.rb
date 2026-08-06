@@ -14,9 +14,9 @@ module Anthropic
           # @!attribute content
           #   Array of text blocks comprising the agent response.
           #
-          #   @return [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock>]
+          #   @return [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock>]
           required :content,
-                   -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock] }
+                   -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::Content] }
 
           # @!attribute processed_at
           #   A timestamp in RFC 3339 format
@@ -34,11 +34,27 @@ module Anthropic
           #
           #   @param id [String] Unique identifier for this event.
           #
-          #   @param content [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock>] Array of text blocks comprising the agent response.
+          #   @param content [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock>] Array of text blocks comprising the agent response.
           #
           #   @param processed_at [Time] A timestamp in RFC 3339 format
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::Type]
+
+          # Content block in an agent message.
+          module Content
+            extend Anthropic::Internal::Type::Union
+
+            discriminator :type
+
+            # Regular text content.
+            variant :text, -> { Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock }
+
+            # Placeholder for content withheld by Anthropic model policy.
+            variant :redacted, -> { Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock }
+
+            # @!method self.variants
+            #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock)]
+          end
 
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent#type
           module Type

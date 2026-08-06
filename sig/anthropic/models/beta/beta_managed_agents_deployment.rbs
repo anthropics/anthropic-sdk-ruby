@@ -20,7 +20,8 @@ module Anthropic
           status: Anthropic::Models::Beta::beta_managed_agents_deployment_status,
           type: Anthropic::Models::Beta::BetaManagedAgentsDeployment::type_,
           updated_at: Time,
-          vault_ids: ::Array[String]
+          vault_ids: ::Array[String],
+          budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
         }
 
       class BetaManagedAgentsDeployment < Anthropic::Internal::Type::BaseModel
@@ -56,6 +57,8 @@ module Anthropic
 
         attr_accessor vault_ids: ::Array[String]
 
+        attr_accessor budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
+
         def initialize: (
           id: String,
           agent: Anthropic::Beta::BetaManagedAgentsAgentReference,
@@ -72,7 +75,8 @@ module Anthropic
           status: Anthropic::Models::Beta::beta_managed_agents_deployment_status,
           type: Anthropic::Models::Beta::BetaManagedAgentsDeployment::type_,
           updated_at: Time,
-          vault_ids: ::Array[String]
+          vault_ids: ::Array[String],
+          ?budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
         ) -> void
 
         def to_hash: -> {
@@ -91,7 +95,8 @@ module Anthropic
           status: Anthropic::Models::Beta::beta_managed_agents_deployment_status,
           type: Anthropic::Models::Beta::BetaManagedAgentsDeployment::type_,
           updated_at: Time,
-          vault_ids: ::Array[String]
+          vault_ids: ::Array[String],
+          budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
         }
 
         type type_ = :deployment

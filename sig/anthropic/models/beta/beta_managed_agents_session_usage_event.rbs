@@ -1,0 +1,54 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsSessionUsageEvent = Beta::BetaManagedAgentsSessionUsageEvent
+
+    module Beta
+      type beta_managed_agents_session_usage_event =
+        {
+          id: String,
+          processed_at: Time,
+          type: Anthropic::Models::Beta::BetaManagedAgentsSessionUsageEvent::type_,
+          usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot,
+          budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
+        }
+
+      class BetaManagedAgentsSessionUsageEvent < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor processed_at: Time
+
+        attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsSessionUsageEvent::type_
+
+        attr_accessor usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot
+
+        attr_accessor budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
+
+        def initialize: (
+          id: String,
+          processed_at: Time,
+          type: Anthropic::Models::Beta::BetaManagedAgentsSessionUsageEvent::type_,
+          usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot,
+          ?budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          processed_at: Time,
+          type: Anthropic::Models::Beta::BetaManagedAgentsSessionUsageEvent::type_,
+          usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot,
+          budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
+        }
+
+        type type_ = :"session.usage"
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          SESSION_USAGE: :"session.usage"
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionUsageEvent::type_]
+        end
+      end
+    end
+  end
+end

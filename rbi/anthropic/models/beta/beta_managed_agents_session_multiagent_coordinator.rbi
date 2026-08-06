@@ -18,7 +18,9 @@ module Anthropic
         # Full `agent` definitions the coordinator may spawn as session threads.
         sig do
           returns(
-            T::Array[Anthropic::Beta::BetaManagedAgentsSessionThreadAgent]
+            T::Array[
+              Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator::Agent::Variants
+            ]
           )
         end
         attr_accessor :agents
@@ -36,7 +38,10 @@ module Anthropic
           params(
             agents:
               T::Array[
-                Anthropic::Beta::BetaManagedAgentsSessionThreadAgent::OrHash
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsSessionThreadAgent::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsAdvisor::OrHash
+                )
               ],
             type:
               Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator::Type::OrSymbol
@@ -53,13 +58,38 @@ module Anthropic
           override.returns(
             {
               agents:
-                T::Array[Anthropic::Beta::BetaManagedAgentsSessionThreadAgent],
+                T::Array[
+                  Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator::Agent::Variants
+                ],
               type:
                 Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator::Type::TaggedSymbol
             }
           )
         end
         def to_hash
+        end
+
+        # A session-resolved multiagent roster entry.
+        module Agent
+          extend Anthropic::Internal::Type::Union
+
+          Variants =
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::BetaManagedAgentsSessionThreadAgent,
+                Anthropic::Beta::BetaManagedAgentsAdvisor
+              )
+            end
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator::Agent::Variants
+              ]
+            )
+          end
+          def self.variants
+          end
         end
 
         module Type

@@ -57,7 +57,8 @@ module Anthropic
                   T.any(
                     Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock::OrHash,
                     Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock::OrHash,
-                    Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock::OrHash
+                    Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock::OrHash
                   )
                 ],
               from_session_thread_id: String,
@@ -111,7 +112,8 @@ module Anthropic
                 T.any(
                   Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock,
                   Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock
+                  Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock
                 )
               end
 

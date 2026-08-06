@@ -35,6 +35,21 @@ module Anthropic
         end
         attr_writer :agent
 
+        # A hard spend ceiling. The session stops issuing new model requests once the
+        # tracked list cost reaches `max_list_cost`.
+        sig do
+          returns(T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit))
+        end
+        attr_reader :budget
+
+        sig do
+          params(
+            budget:
+              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash)
+          ).void
+        end
+        attr_writer :budget
+
         # Metadata patch. Set a key to a string to upsert it, or to null to delete it.
         # Omit the field to preserve.
         sig { returns(T.nilable(T::Hash[Symbol, T.nilable(String)])) }
@@ -73,6 +88,8 @@ module Anthropic
           params(
             session_id: String,
             agent: Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate::OrHash,
+            budget:
+              T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash),
             metadata: T.nilable(T::Hash[Symbol, T.nilable(String)]),
             title: T.nilable(String),
             vault_ids: T::Array[String],
@@ -86,6 +103,9 @@ module Anthropic
           # updatable. Full replacement: the provided array becomes the new value. To
           # preserve existing entries, GET the session, modify the array, and POST it back.
           agent: nil,
+          # A hard spend ceiling. The session stops issuing new model requests once the
+          # tracked list cost reaches `max_list_cost`.
+          budget: nil,
           # Metadata patch. Set a key to a string to upsert it, or to null to delete it.
           # Omit the field to preserve.
           metadata: nil,
@@ -105,6 +125,7 @@ module Anthropic
             {
               session_id: String,
               agent: Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate,
+              budget: T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit),
               metadata: T.nilable(T::Hash[Symbol, T.nilable(String)]),
               title: T.nilable(String),
               vault_ids: T::Array[String],

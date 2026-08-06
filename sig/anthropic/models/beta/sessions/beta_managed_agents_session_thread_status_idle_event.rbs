@@ -47,6 +47,7 @@ module Anthropic
             Anthropic::Beta::Sessions::BetaManagedAgentsSessionEndTurn
             | Anthropic::Beta::Sessions::BetaManagedAgentsSessionRequiresAction
             | Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted
+            | Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached
 
           module StopReason
             extend Anthropic::Internal::Type::Union
