@@ -101,16 +101,16 @@ module Anthropic
           optional :redacted_by, union: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsActor }
 
           # @!method initialize(id:, created_at:, memory_id:, memory_store_id:, operation:, type:, content: nil, content_sha256: nil, content_size_bytes: nil, created_by: nil, path: nil, redacted_at: nil, redacted_by: nil)
-          #   Some parameter documentations has been truncated, see
-          #   {Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersion} for more
-          #   details.
-          #
           #   A `memory_version` object: one immutable, attributed row in a memory's
           #   append-only history. Every non-no-op mutation to a memory produces a new
           #   version. Versions belong to the store (not the individual memory) and persist
           #   after the memory is deleted. Retrieving a redacted version returns 200 with
           #   `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`;
           #   branch on `redacted_at`, not HTTP status.
+          #
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersion} for more
+          #   details.
           #
           #   @param id [String] Unique identifier for this version (a `memver_...` value).
           #

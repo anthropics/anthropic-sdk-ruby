@@ -63,6 +63,55 @@ module Anthropic
             extend Anthropic::Internal::Type::Union
 
             def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaToolResultBlockParam::Content::content]
+
+            def self.new:
+              (
+                type: :text | "text",
+                text: String,
+                ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+                ?citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?
+              ) -> Anthropic::Beta::BetaTextBlockParam
+              | (
+                type: :image | "image",
+                source: Anthropic::Models::Beta::BetaImageBlockParam::source,
+                ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+              ) -> Anthropic::Beta::BetaImageBlockParam
+              | (
+                type: :search_result | "search_result",
+                content: ::Array[Anthropic::Beta::BetaTextBlockParam],
+                source: String,
+                title: String,
+                ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+                ?citations: Anthropic::Beta::BetaCitationsConfigParam
+              ) -> Anthropic::Beta::BetaSearchResultBlockParam
+              | (
+                type: :document | "document",
+                source: Anthropic::Models::Beta::BetaRequestDocumentBlock::source,
+                ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+                ?citations: Anthropic::Beta::BetaCitationsConfigParam?,
+                ?context: String?,
+                ?title: String?
+              ) -> Anthropic::Beta::BetaRequestDocumentBlock
+              | (
+                type: :tool_reference | "tool_reference",
+                tool_name: String,
+                ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+              ) -> Anthropic::Beta::BetaToolReferenceBlockParam
+              | (
+                type: Symbol | String,
+                ?text: String,
+                ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+                ?citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?
+                | Anthropic::Beta::BetaCitationsConfigParam
+                | Anthropic::Beta::BetaCitationsConfigParam?,
+                ?source: Anthropic::Models::Beta::BetaImageBlockParam::source
+                | String
+                | Anthropic::Models::Beta::BetaRequestDocumentBlock::source,
+                ?content: ::Array[Anthropic::Beta::BetaTextBlockParam],
+                ?title: String | String?,
+                ?context: String?,
+                ?tool_name: String
+              ) -> Anthropic::Models::Beta::BetaToolResultBlockParam::Content::content
           end
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaToolResultBlockParam::content]

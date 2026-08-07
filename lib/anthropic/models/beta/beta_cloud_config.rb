@@ -47,6 +47,35 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaUnrestrictedNetwork, Anthropic::Models::Beta::BetaLimitedNetwork)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::BetaCloudConfig::Networking} for more details.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [Boolean] :allow_mcp_servers Permits outbound access to MCP server endpoints configured on the agent, beyond
+          #
+          #   @option args [Boolean] :allow_package_managers Permits outbound access to public package registries (PyPI, npm, etc.) beyond th
+          #
+          #   @option args [Array<String>] :allowed_hosts Specifies domains the container can reach.
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaUnrestrictedNetwork, Anthropic::Models::Beta::BetaLimitedNetwork]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :unrestricted
+              Anthropic::Beta::BetaUnrestrictedNetwork.new(**args)
+            when :limited
+              Anthropic::Beta::BetaLimitedNetwork.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
       end
     end

@@ -50,15 +50,15 @@ module Anthropic
         required :type, const: :fallback_message
 
         # @!method initialize(cache_creation:, cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, model:, output_tokens:, type: :fallback_message)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaFallbackMessageIterationUsage} for more details.
-        #
         #   Token usage for the fallback-model attempt of a server-side fallback request.
         #
         #   Produced in place of a `message` entry for whichever hop served the response. A
         #   declined hop produces the existing `message` entry. Whether a fallback model
         #   served the response is signalled by the presence of this entry in
         #   `usage.iterations`.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaFallbackMessageIterationUsage} for more details.
         #
         #   @param cache_creation [Anthropic::Models::Beta::BetaCacheCreation, nil] Breakdown of cached tokens by TTL
         #

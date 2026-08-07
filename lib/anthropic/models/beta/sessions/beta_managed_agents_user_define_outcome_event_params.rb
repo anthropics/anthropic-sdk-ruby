@@ -58,6 +58,34 @@ module Anthropic
 
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubricParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubricParams)]
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            #
+            # Some parameter documentations has been truncated, see
+            # {Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::Rubric}
+            # for more details.
+            #
+            # @param type [Symbol, String]
+            #
+            # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+            #
+            #   @option args [String] :file_id ID of the rubric file.
+            #
+            #   @option args [String] :content Rubric content. Plain text or markdown — the grader treats it as freeform text.
+            #
+            # @raise [ArgumentError]
+            # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubricParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubricParams]
+            def self.new(type:, **args)
+              case type.to_sym
+              when :file
+                Anthropic::Beta::Sessions::BetaManagedAgentsFileRubricParams.new(**args)
+              when :text
+                Anthropic::Beta::Sessions::BetaManagedAgentsTextRubricParams.new(**args)
+              else
+                raise ArgumentError, "unknown type: #{type}"
+              end
+            end
           end
 
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams#type

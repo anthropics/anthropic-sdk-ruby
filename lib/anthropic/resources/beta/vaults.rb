@@ -7,10 +7,10 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::Vaults::Credentials]
         attr_reader :credentials
 
+        # Create Vault
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::VaultCreateParams} for more details.
-        #
-        # Create Vault
         #
         # @overload create(display_name:, metadata: nil, betas: nil, request_options: {})
         #
@@ -62,10 +62,10 @@ module Anthropic
           )
         end
 
+        # Update Vault
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::VaultUpdateParams} for more details.
-        #
-        # Update Vault
         #
         # @overload update(vault_id, display_name: nil, metadata: nil, betas: nil, request_options: {})
         #
@@ -95,10 +95,10 @@ module Anthropic
           )
         end
 
+        # List Vaults
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::VaultListParams} for more details.
-        #
-        # List Vaults
         #
         # @overload list(include_archived: nil, limit: nil, page: nil, betas: nil, request_options: {})
         #

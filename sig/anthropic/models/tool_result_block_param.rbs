@@ -60,6 +60,55 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::ToolResultBlockParam::Content::content]
+
+          def self.new:
+            (
+              type: :text | "text",
+              text: String,
+              ?cache_control: Anthropic::CacheControlEphemeral?,
+              ?citations: ::Array[Anthropic::Models::text_citation_param]?
+            ) -> Anthropic::TextBlockParam
+            | (
+              type: :image | "image",
+              source: Anthropic::Models::ImageBlockParam::source,
+              ?cache_control: Anthropic::CacheControlEphemeral?
+            ) -> Anthropic::ImageBlockParam
+            | (
+              type: :search_result | "search_result",
+              content: ::Array[Anthropic::TextBlockParam],
+              source: String,
+              title: String,
+              ?cache_control: Anthropic::CacheControlEphemeral?,
+              ?citations: Anthropic::CitationsConfigParam
+            ) -> Anthropic::SearchResultBlockParam
+            | (
+              type: :document | "document",
+              source: Anthropic::Models::DocumentBlockParam::source,
+              ?cache_control: Anthropic::CacheControlEphemeral?,
+              ?citations: Anthropic::CitationsConfigParam?,
+              ?context: String?,
+              ?title: String?
+            ) -> Anthropic::DocumentBlockParam
+            | (
+              type: :tool_reference | "tool_reference",
+              tool_name: String,
+              ?cache_control: Anthropic::CacheControlEphemeral?
+            ) -> Anthropic::ToolReferenceBlockParam
+            | (
+              type: Symbol | String,
+              ?text: String,
+              ?cache_control: Anthropic::CacheControlEphemeral?,
+              ?citations: ::Array[Anthropic::Models::text_citation_param]?
+              | Anthropic::CitationsConfigParam
+              | Anthropic::CitationsConfigParam?,
+              ?source: Anthropic::Models::ImageBlockParam::source
+              | String
+              | Anthropic::Models::DocumentBlockParam::source,
+              ?content: ::Array[Anthropic::TextBlockParam],
+              ?title: String | String?,
+              ?context: String?,
+              ?tool_name: String
+            ) -> Anthropic::Models::ToolResultBlockParam::Content::content
         end
 
         def self?.variants: -> ::Array[Anthropic::Models::ToolResultBlockParam::content]

@@ -32,6 +32,17 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams::permission_policy]
+
+          def self.new:
+            (
+              type: :always_allow | "always_allow"
+            ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
+            | (
+              type: :always_ask | "always_ask"
+            ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+            | (
+              type: Symbol | String
+            ) -> Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams::permission_policy
         end
       end
     end

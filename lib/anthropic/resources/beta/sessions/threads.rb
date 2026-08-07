@@ -38,10 +38,10 @@ module Anthropic
             )
           end
 
+          # List Session Threads
+          #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Sessions::ThreadListParams} for more details.
-          #
-          # List Session Threads
           #
           # @overload list(session_id, limit: nil, page: nil, betas: nil, request_options: {})
           #

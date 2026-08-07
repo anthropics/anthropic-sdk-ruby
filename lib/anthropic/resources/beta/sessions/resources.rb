@@ -35,10 +35,10 @@ module Anthropic
             )
           end
 
+          # Update Session Resource
+          #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Sessions::ResourceUpdateParams} for more details.
-          #
-          # Update Session Resource
           #
           # @overload update(resource_id, session_id:, authorization_token:, betas: nil, request_options: {})
           #
@@ -72,10 +72,10 @@ module Anthropic
             )
           end
 
+          # List Session Resources
+          #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Sessions::ResourceListParams} for more details.
-          #
-          # List Session Resources
           #
           # @overload list(session_id, limit: nil, page: nil, betas: nil, request_options: {})
           #
@@ -137,10 +137,10 @@ module Anthropic
             )
           end
 
+          # Add Session Resource
+          #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Sessions::ResourceAddParams} for more details.
-          #
-          # Add Session Resource
           #
           # @overload add(session_id, file_id:, type:, mount_path: nil, betas: nil, request_options: {})
           #

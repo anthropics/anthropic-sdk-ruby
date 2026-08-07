@@ -62,6 +62,36 @@ module Anthropic
 
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached)]
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            #
+            # Some parameter documentations has been truncated, see
+            # {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::StopReason}
+            # for more details.
+            #
+            # @param type [Symbol, String]
+            #
+            # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+            #
+            #   @option args [Array<String>] :event_ids The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
+            #
+            # @raise [ArgumentError]
+            # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached]
+            def self.new(type:, **args)
+              case type.to_sym
+              when :end_turn
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionEndTurn.new(**args)
+              when :requires_action
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionRequiresAction.new(**args)
+              when :retries_exhausted
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted.new(**args)
+              when :budget_reached
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached.new(**args)
+              else
+                raise ArgumentError, "unknown type: #{type}"
+              end
+            end
           end
 
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent#type

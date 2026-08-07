@@ -51,6 +51,30 @@ module Anthropic
         extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> ::Array[Anthropic::Models::DocumentBlockParam::source]
+
+        def self.new:
+          (
+            type: :base64 | "base64",
+            data: String,
+            ?media_type: :"application/pdf"
+          ) -> Anthropic::Base64PDFSource
+          | (
+            type: :text | "text",
+            data: String,
+            ?media_type: :"text/plain"
+          ) -> Anthropic::PlainTextSource
+          | (
+            type: :content | "content",
+            content: Anthropic::Models::ContentBlockSource::content
+          ) -> Anthropic::ContentBlockSource
+          | (type: :url | "url", url: String) -> Anthropic::URLPDFSource
+          | (
+            type: Symbol | String,
+            ?data: String,
+            ?media_type: :"application/pdf" | :"text/plain",
+            ?content: Anthropic::Models::ContentBlockSource::content,
+            ?url: String
+          ) -> Anthropic::Models::DocumentBlockParam::source
       end
     end
   end

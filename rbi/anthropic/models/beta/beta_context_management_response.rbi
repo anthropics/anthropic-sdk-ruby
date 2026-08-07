@@ -74,6 +74,29 @@ module Anthropic
           end
           def self.variants
           end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              cleared_input_tokens: Integer,
+              cleared_tool_uses: Integer,
+              cleared_thinking_turns: Integer
+            ).returns(
+              Anthropic::Beta::BetaContextManagementResponse::AppliedEdit::Variants
+            )
+          end
+          def self.new(
+            type:,
+            # Number of input tokens cleared by this edit.
+            cleared_input_tokens:,
+            # Number of tool uses that were cleared.
+            cleared_tool_uses: nil,
+            # Number of thinking turns that were cleared.
+            cleared_thinking_turns: nil
+          )
+          end
         end
       end
     end

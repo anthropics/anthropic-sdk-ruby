@@ -66,6 +66,42 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource, Anthropic::Models::Beta::BetaFileDocumentSource)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [String] :data
+          #
+          #   @option args [Symbol, :"application/pdf", Symbol, :"text/plain"] :media_type
+          #
+          #   @option args [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam>] :content
+          #
+          #   @option args [String] :url
+          #
+          #   @option args [String] :file_id
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource, Anthropic::Models::Beta::BetaFileDocumentSource]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :base64
+              Anthropic::Beta::BetaBase64PDFSource.new(**args)
+            when :text
+              Anthropic::Beta::BetaPlainTextSource.new(**args)
+            when :content
+              Anthropic::Beta::BetaContentBlockSource.new(**args)
+            when :url
+              Anthropic::Beta::BetaURLPDFSource.new(**args)
+            when :file
+              Anthropic::Beta::BetaFileDocumentSource.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
       end
     end

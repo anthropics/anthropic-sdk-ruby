@@ -82,6 +82,33 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaCloudConfigParams, Anthropic::Models::Beta::BetaSelfHostedConfigParams)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::EnvironmentCreateParams::Config} for more details.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [Anthropic::Models::Beta::BetaUnrestrictedNetwork, Anthropic::Models::Beta::BetaLimitedNetworkParams, nil] :networking Network configuration policy. Omit on update to preserve the existing value.
+          #
+          #   @option args [Anthropic::Models::Beta::BetaPackagesParams, nil] :packages Specify packages (and optionally their versions) available in this environment.
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaCloudConfigParams, Anthropic::Models::Beta::BetaSelfHostedConfigParams]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :cloud
+              Anthropic::Beta::BetaCloudConfigParams.new(**args)
+            when :self_hosted
+              Anthropic::Beta::BetaSelfHostedConfigParams.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
 
         # The visibility scope for this environment. 'organization' makes the environment

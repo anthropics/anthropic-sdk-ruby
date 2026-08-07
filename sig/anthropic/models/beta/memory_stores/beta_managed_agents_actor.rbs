@@ -11,6 +11,26 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::MemoryStores::beta_managed_agents_actor]
+
+          def self.new:
+            (
+              type: :session_actor | "session_actor",
+              session_id: String
+            ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsSessionActor
+            | (
+              type: :api_actor | "api_actor",
+              api_key_id: String
+            ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor
+            | (
+              type: :user_actor | "user_actor",
+              user_id: String
+            ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor
+            | (
+              type: Symbol | String,
+              ?session_id: String,
+              ?api_key_id: String,
+              ?user_id: String
+            ) -> Anthropic::Models::Beta::MemoryStores::beta_managed_agents_actor
         end
       end
     end

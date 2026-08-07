@@ -14,10 +14,10 @@ module Anthropic
         required :model, union: -> { Anthropic::Model }
 
         # @!method initialize(model:)
+        #   Identifies one hop of a fallback transition.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaFallbackInfoParam} for more details.
-        #
-        #   Identifies one hop of a fallback transition.
         #
         #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
       end

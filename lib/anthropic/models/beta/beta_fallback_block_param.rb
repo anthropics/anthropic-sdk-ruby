@@ -29,9 +29,6 @@ module Anthropic
         optional :trigger, Anthropic::Internal::Type::Unknown
 
         # @!method initialize(from:, to:, trigger: nil, type: :fallback)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaFallbackBlockParam} for more details.
-        #
         #   A `fallback` block echoed back from a prior response.
         #
         #   Accepted in `messages[].content` and not rendered into the prompt; not validated
@@ -44,6 +41,9 @@ module Anthropic
         #   span the server cannot validate (the request is rejected), and moving it into
         #   the middle of a single run is likewise rejected; between non-thinking blocks the
         #   block's placement has no validation effect.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaFallbackBlockParam} for more details.
         #
         #   @param from [Anthropic::Models::Beta::BetaFallbackInfoParam] Identifies one hop of a fallback transition.
         #

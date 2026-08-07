@@ -27,6 +27,42 @@ module Anthropic
 
       # @!method self.variants
       #   @return [Array(Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError, Anthropic::Models::RateLimitError, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError)]
+
+      # Creates a new instance of the variant class whose `type` matches the given
+      # value, passing the remaining arguments to its constructor.
+      #
+      # @param type [Symbol, String]
+      #
+      # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+      #
+      #   @option args [String] :message
+      #
+      # @raise [ArgumentError]
+      # @return [Anthropic::Models::InvalidRequestError, Anthropic::Models::AuthenticationError, Anthropic::Models::BillingError, Anthropic::Models::PermissionError, Anthropic::Models::NotFoundError, Anthropic::Models::RateLimitError, Anthropic::Models::GatewayTimeoutError, Anthropic::Models::APIErrorObject, Anthropic::Models::OverloadedError]
+      def self.new(type:, **args)
+        case type.to_sym
+        when :invalid_request_error
+          Anthropic::InvalidRequestError.new(**args)
+        when :authentication_error
+          Anthropic::AuthenticationError.new(**args)
+        when :billing_error
+          Anthropic::BillingError.new(**args)
+        when :permission_error
+          Anthropic::PermissionError.new(**args)
+        when :not_found_error
+          Anthropic::NotFoundError.new(**args)
+        when :rate_limit_error
+          Anthropic::RateLimitError.new(**args)
+        when :timeout_error
+          Anthropic::GatewayTimeoutError.new(**args)
+        when :api_error
+          Anthropic::APIErrorObject.new(**args)
+        when :overloaded_error
+          Anthropic::OverloadedError.new(**args)
+        else
+          raise ArgumentError, "unknown type: #{type}"
+        end
+      end
     end
   end
 end

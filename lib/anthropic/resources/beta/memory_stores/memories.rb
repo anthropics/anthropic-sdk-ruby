@@ -5,10 +5,10 @@ module Anthropic
     class Beta
       class MemoryStores
         class Memories
+          # Create a memory
+          #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::MemoryStores::MemoryCreateParams} for more details.
-          #
-          # Create a memory
           #
           # @overload create(memory_store_id, content:, path:, view: nil, betas: nil, request_options: {})
           #
@@ -78,10 +78,10 @@ module Anthropic
             )
           end
 
+          # Update a memory
+          #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::MemoryStores::MemoryUpdateParams} for more details.
-          #
-          # Update a memory
           #
           # @overload update(memory_id, memory_store_id:, view: nil, content: nil, path: nil, precondition: nil, betas: nil, request_options: {})
           #
@@ -124,10 +124,10 @@ module Anthropic
             )
           end
 
+          # List memories
+          #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::MemoryStores::MemoryListParams} for more details.
-          #
-          # List memories
           #
           # @overload list(memory_store_id, depth: nil, limit: nil, page: nil, path_prefix: nil, view: nil, betas: nil, request_options: {})
           #

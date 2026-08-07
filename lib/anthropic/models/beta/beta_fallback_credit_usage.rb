@@ -16,10 +16,10 @@ module Anthropic
         required :status, union: -> { Anthropic::Beta::BetaFallbackCreditUsage::Status }
 
         # @!method initialize(status:)
+        #   Outcome of the `fallback_credit_token` presented on this request.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaFallbackCreditUsage} for more details.
-        #
-        #   Outcome of the `fallback_credit_token` presented on this request.
         #
         #   @param status [Anthropic::Models::Beta::BetaFallbackCreditRedeemed, Anthropic::Models::Beta::BetaFallbackCreditNotApplied] Whether the fallback-credit reprice was applied to this response's billing.
 
@@ -45,6 +45,33 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaFallbackCreditRedeemed, Anthropic::Models::Beta::BetaFallbackCreditNotApplied)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::BetaFallbackCreditUsage::Status} for more details.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [Symbol, Anthropic::Models::Beta::BetaFallbackCreditNotApplied::Reason] :reason Why the reprice was not applied.
+          #
+          #   @option args [Array<String>, nil] :remove_to_redeem Request fields to remove before retrying, so the retry can redeem this
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaFallbackCreditRedeemed, Anthropic::Models::Beta::BetaFallbackCreditNotApplied]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :redeemed
+              Anthropic::Beta::BetaFallbackCreditRedeemed.new(**args)
+            when :not_applied
+              Anthropic::Beta::BetaFallbackCreditNotApplied.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
       end
     end

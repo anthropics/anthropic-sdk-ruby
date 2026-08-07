@@ -25,11 +25,11 @@ module Anthropic
         required :result, union: -> { Anthropic::Messages::MessageBatchResult }
 
         # @!method initialize(custom_id:, result:)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Messages::MessageBatchIndividualResponse} for more details.
-        #
         #   This is a single line in the response `.jsonl` file and does not represent the
         #   response as a whole.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Messages::MessageBatchIndividualResponse} for more details.
         #
         #   @param custom_id [String] Developer-provided ID created for each request in a Message Batch. Useful for ma
         #

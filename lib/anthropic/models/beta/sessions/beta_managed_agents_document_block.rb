@@ -62,6 +62,38 @@ module Anthropic
 
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileDocumentSource)]
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            #
+            # @param type [Symbol, String]
+            #
+            # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+            #
+            #   @option args [String] :data Base64-encoded document data.
+            #
+            #   @option args [String, Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::MediaType] :media_type MIME type of the document (e.g., "application/pdf").
+            #
+            #   @option args [String] :url URL of the document to fetch.
+            #
+            #   @option args [String] :file_id ID of a previously uploaded file.
+            #
+            # @raise [ArgumentError]
+            # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileDocumentSource]
+            def self.new(type:, **args)
+              case type.to_sym
+              when :base64
+                Anthropic::Beta::Sessions::BetaManagedAgentsBase64DocumentSource.new(**args)
+              when :text
+                Anthropic::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource.new(**args)
+              when :url
+                Anthropic::Beta::Sessions::BetaManagedAgentsURLDocumentSource.new(**args)
+              when :file
+                Anthropic::Beta::Sessions::BetaManagedAgentsFileDocumentSource.new(**args)
+              else
+                raise ArgumentError, "unknown type: #{type}"
+              end
+            end
           end
 
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock#type

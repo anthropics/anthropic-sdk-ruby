@@ -31,10 +31,10 @@ module Anthropic
         required :type, const: :limited
 
         # @!method initialize(allow_mcp_servers:, allow_package_managers:, allowed_hosts:, type: :limited)
+        #   Limited network access.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaLimitedNetwork} for more details.
-        #
-        #   Limited network access.
         #
         #   @param allow_mcp_servers [Boolean] Permits outbound access to MCP server endpoints configured on the agent, beyond
         #

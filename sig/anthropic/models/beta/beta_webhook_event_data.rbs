@@ -53,6 +53,289 @@ module Anthropic
         extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_webhook_event_data]
+
+        def self.new:
+          (
+            type: :"session.created" | "session.created",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookSessionCreatedEventData
+          | (
+            type: :"session.pending" | "session.pending",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookSessionPendingEventData
+          | (
+            type: :"session.running" | "session.running",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookSessionRunningEventData
+          | (
+            type: :"session.idled" | "session.idled",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookSessionIdledEventData
+          | (
+            type: :"session.requires_action" | "session.requires_action",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookSessionRequiresActionEventData
+          | (
+            type: :"session.archived" | "session.archived",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookSessionArchivedEventData
+          | (
+            type: :"session.deleted" | "session.deleted",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookSessionDeletedEventData
+          | (
+            type: :"session.status_rescheduled" | "session.status_rescheduled",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookSessionStatusRescheduledEventData
+          | (
+            type: :"session.status_run_started" | "session.status_run_started",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookSessionStatusRunStartedEventData
+          | (
+            type: :"session.status_idled" | "session.status_idled",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookSessionStatusIdledEventData
+          | (
+            type: :"session.status_terminated" | "session.status_terminated",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookSessionStatusTerminatedEventData
+          | (
+            type: :"session.thread_created" | "session.thread_created",
+            id: String,
+            organization_id: String,
+            session_thread_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookSessionThreadCreatedEventData
+          | (
+            type: :"session.thread_idled" | "session.thread_idled",
+            id: String,
+            organization_id: String,
+            session_thread_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookSessionThreadIdledEventData
+          | (
+            type: :"session.thread_terminated" | "session.thread_terminated",
+            id: String,
+            organization_id: String,
+            session_thread_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookSessionThreadTerminatedEventData
+          | (
+            type: :"session.outcome_evaluation_ended"
+            | "session.outcome_evaluation_ended",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookSessionOutcomeEvaluationEndedEventData
+          | (
+            type: :"vault.created" | "vault.created",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookVaultCreatedEventData
+          | (
+            type: :"vault.archived" | "vault.archived",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookVaultArchivedEventData
+          | (
+            type: :"vault.deleted" | "vault.deleted",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookVaultDeletedEventData
+          | (
+            type: :"vault_credential.created" | "vault_credential.created",
+            id: String,
+            organization_id: String,
+            vault_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookVaultCredentialCreatedEventData
+          | (
+            type: :"vault_credential.archived" | "vault_credential.archived",
+            id: String,
+            organization_id: String,
+            vault_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookVaultCredentialArchivedEventData
+          | (
+            type: :"vault_credential.deleted" | "vault_credential.deleted",
+            id: String,
+            organization_id: String,
+            vault_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookVaultCredentialDeletedEventData
+          | (
+            type: :"vault_credential.refresh_failed"
+            | "vault_credential.refresh_failed",
+            id: String,
+            organization_id: String,
+            vault_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookVaultCredentialRefreshFailedEventData
+          | (
+            type: :"session.updated" | "session.updated",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookSessionUpdatedEventData
+          | (
+            type: :"agent.created" | "agent.created",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookAgentCreatedEventData
+          | (
+            type: :"agent.archived" | "agent.archived",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookAgentArchivedEventData
+          | (
+            type: :"agent.deleted" | "agent.deleted",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookAgentDeletedEventData
+          | (
+            type: :"deployment.paused" | "deployment.paused",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookDeploymentPausedEventData
+          | (
+            type: :"deployment_run.failed" | "deployment_run.failed",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookDeploymentRunFailedEventData
+          | (
+            type: :"deployment.created" | "deployment.created",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookDeploymentCreatedEventData
+          | (
+            type: :"deployment.updated" | "deployment.updated",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookDeploymentUpdatedEventData
+          | (
+            type: :"deployment.unpaused" | "deployment.unpaused",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookDeploymentUnpausedEventData
+          | (
+            type: :"agent.updated" | "agent.updated",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookAgentUpdatedEventData
+          | (
+            type: :"deployment.archived" | "deployment.archived",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookDeploymentArchivedEventData
+          | (
+            type: :"deployment_run.started" | "deployment_run.started",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookDeploymentRunStartedEventData
+          | (
+            type: :"deployment.deleted" | "deployment.deleted",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookDeploymentDeletedEventData
+          | (
+            type: :"deployment_run.succeeded" | "deployment_run.succeeded",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookDeploymentRunSucceededEventData
+          | (
+            type: :"environment.created" | "environment.created",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookEnvironmentCreatedEventData
+          | (
+            type: :"environment.updated" | "environment.updated",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookEnvironmentUpdatedEventData
+          | (
+            type: :"environment.archived" | "environment.archived",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookEnvironmentArchivedEventData
+          | (
+            type: :"environment.deleted" | "environment.deleted",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookEnvironmentDeletedEventData
+          | (
+            type: :"memory_store.created" | "memory_store.created",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookMemoryStoreCreatedEventData
+          | (
+            type: :"memory_store.archived" | "memory_store.archived",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookMemoryStoreArchivedEventData
+          | (
+            type: :"memory_store.deleted" | "memory_store.deleted",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData
+          | (
+            type: :"session.budget_reached" | "session.budget_reached",
+            id: String,
+            organization_id: String,
+            workspace_id: String
+          ) -> Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData
+          | (
+            type: Symbol | String,
+            id: String,
+            organization_id: String,
+            workspace_id: String,
+            ?session_thread_id: String,
+            ?vault_id: String
+          ) -> Anthropic::Models::Beta::beta_webhook_event_data
       end
     end
   end

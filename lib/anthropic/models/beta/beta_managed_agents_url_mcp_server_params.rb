@@ -23,10 +23,10 @@ module Anthropic
         required :url, String
 
         # @!method initialize(name:, type:, url:)
+        #   URL-based MCP server connection.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams} for more details.
-        #
-        #   URL-based MCP server connection.
         #
         #   @param name [String] Unique name for this server, referenced by mcp_toolset configurations. 1-255 cha
         #

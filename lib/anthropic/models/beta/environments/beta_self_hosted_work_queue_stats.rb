@@ -39,13 +39,13 @@ module Anthropic
           required :workers_polling, Integer, nil?: true
 
           # @!method initialize(depth:, oldest_queued_at:, pending:, workers_polling:, type: :work_queue_stats)
-          #   Some parameter documentations has been truncated, see
-          #   {Anthropic::Models::Beta::Environments::BetaSelfHostedWorkQueueStats} for more
-          #   details.
-          #
           #   Statistics about the work queue for an environment.
           #
           #   Uses Redis Stream consumer group metrics for O(1) queries.
+          #
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Environments::BetaSelfHostedWorkQueueStats} for more
+          #   details.
           #
           #   @param depth [Integer] Number of work items waiting to be picked up (lag from consumer group)
           #

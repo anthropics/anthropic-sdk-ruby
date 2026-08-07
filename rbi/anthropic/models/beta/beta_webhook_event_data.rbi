@@ -65,6 +65,31 @@ module Anthropic
         end
         def self.variants
         end
+
+        # Creates a new instance of the variant class whose `type` matches the given
+        # value, passing the remaining arguments to its constructor.
+        sig do
+          params(
+            type: T.any(Symbol, String),
+            id: String,
+            organization_id: String,
+            workspace_id: String,
+            session_thread_id: String,
+            vault_id: String
+          ).returns(Anthropic::Beta::BetaWebhookEventData::Variants)
+        end
+        def self.new(
+          type:,
+          # ID of the session that triggered the event.
+          id:,
+          organization_id:,
+          workspace_id:,
+          # ID of the session thread this event refers to.
+          session_thread_id: nil,
+          # ID of the vault that owns this credential.
+          vault_id: nil
+        )
+        end
       end
     end
   end

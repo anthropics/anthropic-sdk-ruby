@@ -52,6 +52,136 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaRawContentBlockStartEvent::content_block]
+
+          def self.new:
+            (
+              type: :text | "text",
+              citations: ::Array[Anthropic::Models::Beta::beta_text_citation]?,
+              text: String
+            ) -> Anthropic::Beta::BetaTextBlock
+            | (
+              type: :thinking | "thinking",
+              signature: String,
+              thinking: String
+            ) -> Anthropic::Beta::BetaThinkingBlock
+            | (
+              type: :redacted_thinking | "redacted_thinking",
+              data: String
+            ) -> Anthropic::Beta::BetaRedactedThinkingBlock
+            | (
+              type: :tool_use | "tool_use",
+              id: String,
+              input: ::Hash[Symbol, top],
+              name: String,
+              ?caller_: Anthropic::Models::Beta::BetaToolUseBlock::caller_
+            ) -> Anthropic::Beta::BetaToolUseBlock
+            | (
+              type: :server_tool_use | "server_tool_use",
+              id: String,
+              input: ::Hash[Symbol, top],
+              name: Anthropic::Models::Beta::BetaServerToolUseBlock::name_,
+              ?caller_: Anthropic::Models::Beta::BetaServerToolUseBlock::caller_
+            ) -> Anthropic::Beta::BetaServerToolUseBlock
+            | (
+              type: :web_search_tool_result | "web_search_tool_result",
+              content: Anthropic::Models::Beta::beta_web_search_tool_result_block_content,
+              tool_use_id: String,
+              ?caller_: Anthropic::Models::Beta::BetaWebSearchToolResultBlock::caller_
+            ) -> Anthropic::Beta::BetaWebSearchToolResultBlock
+            | (
+              type: :web_fetch_tool_result | "web_fetch_tool_result",
+              content: Anthropic::Models::Beta::BetaWebFetchToolResultBlock::content,
+              tool_use_id: String,
+              ?caller_: Anthropic::Models::Beta::BetaWebFetchToolResultBlock::caller_
+            ) -> Anthropic::Beta::BetaWebFetchToolResultBlock
+            | (
+              type: :advisor_tool_result | "advisor_tool_result",
+              content: Anthropic::Models::Beta::BetaAdvisorToolResultBlock::content,
+              tool_use_id: String
+            ) -> Anthropic::Beta::BetaAdvisorToolResultBlock
+            | (
+              type: :code_execution_tool_result | "code_execution_tool_result",
+              content: Anthropic::Models::Beta::beta_code_execution_tool_result_block_content,
+              tool_use_id: String
+            ) -> Anthropic::Beta::BetaCodeExecutionToolResultBlock
+            | (
+              type: :bash_code_execution_tool_result
+              | "bash_code_execution_tool_result",
+              content: Anthropic::Models::Beta::BetaBashCodeExecutionToolResultBlock::content,
+              tool_use_id: String
+            ) -> Anthropic::Beta::BetaBashCodeExecutionToolResultBlock
+            | (
+              type: :text_editor_code_execution_tool_result
+              | "text_editor_code_execution_tool_result",
+              content: Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultBlock::content,
+              tool_use_id: String
+            ) -> Anthropic::Beta::BetaTextEditorCodeExecutionToolResultBlock
+            | (
+              type: :tool_search_tool_result | "tool_search_tool_result",
+              content: Anthropic::Models::Beta::BetaToolSearchToolResultBlock::content,
+              tool_use_id: String
+            ) -> Anthropic::Beta::BetaToolSearchToolResultBlock
+            | (
+              type: :mcp_tool_use | "mcp_tool_use",
+              id: String,
+              input: ::Hash[Symbol, top],
+              name: String,
+              server_name: String
+            ) -> Anthropic::Beta::BetaMCPToolUseBlock
+            | (
+              type: :mcp_tool_result | "mcp_tool_result",
+              content: Anthropic::Models::Beta::BetaMCPToolResultBlock::content,
+              is_error: bool,
+              tool_use_id: String
+            ) -> Anthropic::Beta::BetaMCPToolResultBlock
+            | (
+              type: :container_upload | "container_upload",
+              file_id: String
+            ) -> Anthropic::Beta::BetaContainerUploadBlock
+            | (
+              type: :compaction | "compaction",
+              content: String?,
+              encrypted_content: String?
+            ) -> Anthropic::Beta::BetaCompactionBlock
+            | (
+              type: :fallback | "fallback",
+              from: Anthropic::Beta::BetaFallbackInfo,
+              to: Anthropic::Beta::BetaFallbackInfo,
+              trigger: Anthropic::Beta::BetaFallbackRefusalTrigger
+            ) -> Anthropic::Beta::BetaFallbackBlock
+            | (
+              type: Symbol | String,
+              ?citations: ::Array[Anthropic::Models::Beta::beta_text_citation]?,
+              ?text: String,
+              ?signature: String,
+              ?thinking: String,
+              ?data: String,
+              ?id: String,
+              ?input: ::Hash[Symbol, top],
+              ?name: String
+              | Anthropic::Models::Beta::BetaServerToolUseBlock::name_,
+              ?caller_: Anthropic::Models::Beta::BetaToolUseBlock::caller_
+              | Anthropic::Models::Beta::BetaServerToolUseBlock::caller_
+              | Anthropic::Models::Beta::BetaWebSearchToolResultBlock::caller_
+              | Anthropic::Models::Beta::BetaWebFetchToolResultBlock::caller_,
+              ?content: Anthropic::Models::Beta::beta_web_search_tool_result_block_content
+              | Anthropic::Models::Beta::BetaWebFetchToolResultBlock::content
+              | Anthropic::Models::Beta::BetaAdvisorToolResultBlock::content
+              | Anthropic::Models::Beta::beta_code_execution_tool_result_block_content
+              | Anthropic::Models::Beta::BetaBashCodeExecutionToolResultBlock::content
+              | Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultBlock::content
+              | Anthropic::Models::Beta::BetaToolSearchToolResultBlock::content
+              | Anthropic::Models::Beta::BetaMCPToolResultBlock::content
+              | String?,
+              ?tool_use_id: String,
+              ?server_name: String,
+              ?is_error: bool,
+              ?file_id: String,
+              ?encrypted_content: String?,
+              ?from: Anthropic::Beta::BetaFallbackInfo,
+              ?to: Anthropic::Beta::BetaFallbackInfo,
+              ?trigger: Anthropic::Beta::BetaFallbackRefusalTrigger
+            ) -> Anthropic::Models::Beta::BetaRawContentBlockStartEvent::content_block
         end
       end
     end

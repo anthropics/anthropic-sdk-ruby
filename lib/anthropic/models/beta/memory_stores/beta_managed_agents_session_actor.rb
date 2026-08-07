@@ -19,12 +19,12 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsSessionActor::Type }
 
           # @!method initialize(session_id:, type:)
+          #   Attribution for a write made by an agent during a session, through the mounted
+          #   filesystem at `/mnt/memory/`.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor} for more
           #   details.
-          #
-          #   Attribution for a write made by an agent during a session, through the mounted
-          #   filesystem at `/mnt/memory/`.
           #
           #   @param session_id [String] ID of the session that performed the write (a `sesn_...` value). Look up the ses
           #

@@ -43,6 +43,25 @@ module Anthropic
             extend Anthropic::Internal::Type::Union
 
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::stop_reason]
+
+            def self.new:
+              (
+                type: :end_turn | "end_turn"
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionEndTurn
+              | (
+                type: :requires_action | "requires_action",
+                event_ids: ::Array[String]
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionRequiresAction
+              | (
+                type: :retries_exhausted | "retries_exhausted"
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted
+              | (
+                type: :budget_reached | "budget_reached"
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached
+              | (
+                type: Symbol | String,
+                ?event_ids: ::Array[String]
+              ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::stop_reason
           end
 
           type type_ = :"session.status_idle"

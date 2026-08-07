@@ -20,11 +20,11 @@ module Anthropic
                    enum: -> { Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingResponse::Type }
 
           # @!method initialize(allowed_hosts:, type:)
+          #   The secret is substituted only on requests to the listed hosts.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingResponse}
           #   for more details.
-          #
-          #   The secret is substituted only on requests to the listed hosts.
           #
           #   @param allowed_hosts [Array<String>] Hostnames on which the secret will be substituted. An entry matches the request
           #

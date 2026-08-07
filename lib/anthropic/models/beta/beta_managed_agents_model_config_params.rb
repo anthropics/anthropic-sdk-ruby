@@ -42,10 +42,10 @@ module Anthropic
         optional :speed, enum: -> { Anthropic::Beta::BetaManagedAgentsModelConfigParams::Speed }, nil?: true
 
         # @!method initialize(id:, effort: nil, inference_geo: nil, speed: nil)
+        #   An object that defines additional configuration control over model use
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams} for more details.
-        #
-        #   An object that defines additional configuration control over model use
         #
         #   @param id [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] The model that will power your agent.
         #

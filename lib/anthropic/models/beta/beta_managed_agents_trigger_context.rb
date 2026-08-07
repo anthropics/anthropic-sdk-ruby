@@ -17,6 +17,28 @@ module Anthropic
 
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext, Anthropic::Models::Beta::BetaManagedAgentsManualTriggerContext)]
+
+        # Creates a new instance of the variant class whose `type` matches the given
+        # value, passing the remaining arguments to its constructor.
+        #
+        # @param type [Symbol, String]
+        #
+        # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+        #
+        #   @option args [Time] :scheduled_at A timestamp in RFC 3339 format
+        #
+        # @raise [ArgumentError]
+        # @return [Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext, Anthropic::Models::Beta::BetaManagedAgentsManualTriggerContext]
+        def self.new(type:, **args)
+          case type.to_sym
+          when :schedule
+            Anthropic::Beta::BetaManagedAgentsScheduleTriggerContext.new(**args)
+          when :manual
+            Anthropic::Beta::BetaManagedAgentsManualTriggerContext.new(**args)
+          else
+            raise ArgumentError, "unknown type: #{type}"
+          end
+        end
       end
     end
 

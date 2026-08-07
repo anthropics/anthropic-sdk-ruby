@@ -24,6 +24,34 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [Anthropic::Models::Beta::BetaMessage] :message
+          #
+          #   @option args [Anthropic::Models::BetaErrorResponse] :error
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :succeeded
+              Anthropic::Beta::Messages::BetaMessageBatchSucceededResult.new(**args)
+            when :errored
+              Anthropic::Beta::Messages::BetaMessageBatchErroredResult.new(**args)
+            when :canceled
+              Anthropic::Beta::Messages::BetaMessageBatchCanceledResult.new(**args)
+            when :expired
+              Anthropic::Beta::Messages::BetaMessageBatchExpiredResult.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
       end
     end

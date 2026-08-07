@@ -11,6 +11,33 @@ module Anthropic
       extend Anthropic::Internal::Type::Union
 
       def self?.variants: -> ::Array[Anthropic::Models::raw_content_block_delta]
+
+      def self.new:
+        (type: :text_delta | "text_delta", text: String) -> Anthropic::TextDelta
+        | (
+          type: :input_json_delta | "input_json_delta",
+          partial_json: String
+        ) -> Anthropic::InputJSONDelta
+        | (
+          type: :citations_delta | "citations_delta",
+          citation: Anthropic::Models::CitationsDelta::citation
+        ) -> Anthropic::CitationsDelta
+        | (
+          type: :thinking_delta | "thinking_delta",
+          thinking: String
+        ) -> Anthropic::ThinkingDelta
+        | (
+          type: :signature_delta | "signature_delta",
+          signature: String
+        ) -> Anthropic::SignatureDelta
+        | (
+          type: Symbol | String,
+          ?text: String,
+          ?partial_json: String,
+          ?citation: Anthropic::Models::CitationsDelta::citation,
+          ?thinking: String,
+          ?signature: String
+        ) -> Anthropic::Models::raw_content_block_delta
     end
   end
 end

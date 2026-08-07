@@ -90,6 +90,59 @@ module Anthropic
           end
           def self.variants
           end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              model:
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsModelConfig::OrHash,
+                  String
+                ),
+              id: String,
+              description: T.nilable(String),
+              mcp_servers:
+                T::Array[
+                  Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition::OrHash
+                ],
+              name: String,
+              skills:
+                T::Array[
+                  T.any(
+                    Anthropic::Beta::BetaManagedAgentsAnthropicSkill::OrHash,
+                    Anthropic::Beta::BetaManagedAgentsCustomSkill::OrHash
+                  )
+                ],
+              system_: T.nilable(String),
+              tools:
+                T::Array[
+                  T.any(
+                    Anthropic::Beta::BetaManagedAgentsAgentToolset20260401::OrHash,
+                    Anthropic::Beta::BetaManagedAgentsMCPToolset::OrHash,
+                    Anthropic::Beta::BetaManagedAgentsCustomTool::OrHash
+                  )
+                ],
+              version: Integer
+            ).returns(
+              Anthropic::Beta::BetaManagedAgentsSessionMultiagentCoordinator::Agent::Variants
+            )
+          end
+          def self.new(
+            type:,
+            # Model identifier and configuration.
+            model:,
+            id: nil,
+            description: nil,
+            mcp_servers: nil,
+            name: nil,
+            skills: nil,
+            system_: nil,
+            tools: nil,
+            version: nil
+          )
+          end
         end
 
         module Type

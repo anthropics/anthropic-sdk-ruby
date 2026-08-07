@@ -13,6 +13,27 @@ module Anthropic
         extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_tool_choice]
+
+        def self.new:
+          (
+            type: :auto | "auto",
+            ?disable_parallel_tool_use: bool
+          ) -> Anthropic::Beta::BetaToolChoiceAuto
+          | (
+            type: :any | "any",
+            ?disable_parallel_tool_use: bool
+          ) -> Anthropic::Beta::BetaToolChoiceAny
+          | (
+            type: :tool | "tool",
+            name: String,
+            ?disable_parallel_tool_use: bool
+          ) -> Anthropic::Beta::BetaToolChoiceTool
+          | (type: :none | "none") -> Anthropic::Beta::BetaToolChoiceNone
+          | (
+            type: Symbol | String,
+            ?disable_parallel_tool_use: bool,
+            ?name: String
+          ) -> Anthropic::Models::Beta::beta_tool_choice
       end
     end
   end

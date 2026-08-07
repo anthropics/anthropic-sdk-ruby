@@ -31,10 +31,10 @@ module Anthropic
         optional :remove_to_redeem, Anthropic::Internal::Type::ArrayOf[String], nil?: true
 
         # @!method initialize(reason:, remove_to_redeem: nil, type: :not_applied)
+        #   No reprice was applied; `reason` says why.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaFallbackCreditNotApplied} for more details.
-        #
-        #   No reprice was applied; `reason` says why.
         #
         #   @param reason [Symbol, Anthropic::Models::Beta::BetaFallbackCreditNotApplied::Reason] Why the reprice was not applied.
         #

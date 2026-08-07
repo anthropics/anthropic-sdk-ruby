@@ -5,10 +5,10 @@ module Anthropic
     class Beta
       class Vaults
         class Credentials
+          # Create Credential
+          #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Vaults::CredentialCreateParams} for more details.
-          #
-          # Create Credential
           #
           # @overload create(vault_id, auth:, display_name: nil, metadata: nil, betas: nil, request_options: {})
           #
@@ -70,10 +70,10 @@ module Anthropic
             )
           end
 
+          # Update Credential
+          #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Vaults::CredentialUpdateParams} for more details.
-          #
-          # Update Credential
           #
           # @overload update(credential_id, vault_id:, auth: nil, display_name: nil, metadata: nil, betas: nil, request_options: {})
           #
@@ -111,10 +111,10 @@ module Anthropic
             )
           end
 
+          # List Credentials
+          #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Vaults::CredentialListParams} for more details.
-          #
-          # List Credentials
           #
           # @overload list(vault_id, include_archived: nil, limit: nil, page: nil, betas: nil, request_options: {})
           #

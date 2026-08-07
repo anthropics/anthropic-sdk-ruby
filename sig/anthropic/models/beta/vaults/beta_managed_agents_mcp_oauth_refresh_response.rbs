@@ -47,6 +47,20 @@ module Anthropic
             extend Anthropic::Internal::Type::Union
 
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshResponse::token_endpoint_auth]
+
+            def self.new:
+              (
+                type: :none | "none"
+              ) -> Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneResponse
+              | (
+                type: :client_secret_basic | "client_secret_basic"
+              ) -> Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicResponse
+              | (
+                type: :client_secret_post | "client_secret_post"
+              ) -> Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostResponse
+              | (
+                type: Symbol | String
+              ) -> Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshResponse::token_endpoint_auth
           end
         end
       end

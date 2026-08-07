@@ -38,6 +38,44 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent, Anthropic::Models::Beta::BetaManagedAgentsAdvisor)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [String] :id
+          #
+          #   @option args [String, nil] :description
+          #
+          #   @option args [Array<Anthropic::Models::Beta::BetaManagedAgentsMCPServerURLDefinition>] :mcp_servers
+          #
+          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsModelConfig, String] :model Model identifier and configuration.
+          #
+          #   @option args [String] :name
+          #
+          #   @option args [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkill, Anthropic::Models::Beta::BetaManagedAgentsCustomSkill>] :skills
+          #
+          #   @option args [String, nil] :system_
+          #
+          #   @option args [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401, Anthropic::Models::Beta::BetaManagedAgentsMCPToolset, Anthropic::Models::Beta::BetaManagedAgentsCustomTool>] :tools
+          #
+          #   @option args [Integer] :version
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent, Anthropic::Models::Beta::BetaManagedAgentsAdvisor]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :agent
+              Anthropic::Beta::BetaManagedAgentsSessionThreadAgent.new(**args)
+            when :advisor
+              Anthropic::Beta::BetaManagedAgentsAdvisor.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
 
         # @see Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator#type

@@ -51,6 +51,28 @@ module Anthropic
 
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal)]
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            #
+            # @param type [Symbol, String]
+            #
+            # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+            #
+            # @raise [ArgumentError]
+            # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal]
+            def self.new(type:, **args)
+              case type.to_sym
+              when :retrying
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying.new(**args)
+              when :exhausted
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted.new(**args)
+              when :terminal
+                Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal.new(**args)
+              else
+                raise ArgumentError, "unknown type: #{type}"
+              end
+            end
           end
 
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError#type

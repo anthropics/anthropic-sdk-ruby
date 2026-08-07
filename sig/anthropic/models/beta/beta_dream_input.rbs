@@ -11,6 +11,21 @@ module Anthropic
         extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_dream_input]
+
+        def self.new:
+          (
+            type: :memory_store | "memory_store",
+            memory_store_id: String
+          ) -> Anthropic::Beta::BetaDreamMemoryStoreInput
+          | (
+            type: :sessions | "sessions",
+            session_ids: ::Array[String]
+          ) -> Anthropic::Beta::BetaDreamSessionsInput
+          | (
+            type: Symbol | String,
+            ?memory_store_id: String,
+            ?session_ids: ::Array[String]
+          ) -> Anthropic::Models::Beta::beta_dream_input
       end
     end
   end

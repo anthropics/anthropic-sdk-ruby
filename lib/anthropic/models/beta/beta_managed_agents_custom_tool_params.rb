@@ -30,13 +30,13 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsCustomToolParams::Type }
 
         # @!method initialize(description:, input_schema:, name:, type:)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams} for more details.
-        #
         #   A custom tool that is executed by the API client rather than the agent. When the
         #   agent calls this tool, an `agent.custom_tool_use` event is emitted and the
         #   session goes idle, waiting for the client to provide the result via a
         #   `user.custom_tool_result` event.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams} for more details.
         #
         #   @param description [String] Description of what the tool does, shown to the agent to help it decide when to
         #

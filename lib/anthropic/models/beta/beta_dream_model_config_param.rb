@@ -19,10 +19,10 @@ module Anthropic
         optional :speed, enum: -> { Anthropic::Beta::BetaDreamModelConfigParam::Speed }, nil?: true
 
         # @!method initialize(id:, speed: nil)
+        #   Model identifier and configuration applied to every pipeline stage.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaDreamModelConfigParam} for more details.
-        #
-        #   Model identifier and configuration applied to every pipeline stage.
         #
         #   @param id [String] Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
         #

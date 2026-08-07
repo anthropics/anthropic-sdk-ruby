@@ -4,10 +4,10 @@ module Anthropic
   module Resources
     class Beta
       class UserProfiles
+        # Create User Profile
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::UserProfileCreateParams} for more details.
-        #
-        # Create User Profile
         #
         # @overload create(external_id: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
         #
@@ -63,10 +63,10 @@ module Anthropic
           )
         end
 
+        # Update User Profile
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::UserProfileUpdateParams} for more details.
-        #
-        # Update User Profile
         #
         # @overload update(user_profile_id, external_id: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
         #

@@ -12,6 +12,27 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::Messages::beta_message_batch_result]
+
+          def self.new:
+            (
+              type: :succeeded | "succeeded",
+              message: Anthropic::Beta::BetaMessage
+            ) -> Anthropic::Beta::Messages::BetaMessageBatchSucceededResult
+            | (
+              type: :errored | "errored",
+              error: Anthropic::BetaErrorResponse
+            ) -> Anthropic::Beta::Messages::BetaMessageBatchErroredResult
+            | (
+              type: :canceled | "canceled"
+            ) -> Anthropic::Beta::Messages::BetaMessageBatchCanceledResult
+            | (
+              type: :expired | "expired"
+            ) -> Anthropic::Beta::Messages::BetaMessageBatchExpiredResult
+            | (
+              type: Symbol | String,
+              ?message: Anthropic::Beta::BetaMessage,
+              ?error: Anthropic::BetaErrorResponse
+            ) -> Anthropic::Models::Beta::Messages::beta_message_batch_result
         end
       end
     end

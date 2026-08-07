@@ -40,6 +40,20 @@ module Anthropic
             extend Anthropic::Internal::Type::Union
 
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams::token_endpoint_auth]
+
+            def self.new:
+              (
+                type: :client_secret_basic | "client_secret_basic",
+                ?client_secret: String?
+              ) -> Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam
+              | (
+                type: :client_secret_post | "client_secret_post",
+                ?client_secret: String?
+              ) -> Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam
+              | (
+                type: Symbol | String,
+                ?client_secret: String?
+              ) -> Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams::token_endpoint_auth
           end
         end
       end

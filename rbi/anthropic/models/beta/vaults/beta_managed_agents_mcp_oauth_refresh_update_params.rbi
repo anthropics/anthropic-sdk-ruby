@@ -104,6 +104,23 @@ module Anthropic
             end
             def self.variants
             end
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            sig do
+              params(
+                type: T.any(Symbol, String),
+                client_secret: T.nilable(String)
+              ).returns(
+                Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams::TokenEndpointAuth::Variants
+              )
+            end
+            def self.new(
+              type:,
+              # Updated OAuth client secret.
+              client_secret: nil
+            )
+            end
           end
         end
       end

@@ -124,6 +124,26 @@ module Anthropic
             end
             def self.variants
             end
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            sig do
+              params(
+                type: T.any(Symbol, String),
+                file_id: String,
+                content: String
+              ).returns(
+                Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::Rubric::Variants
+              )
+            end
+            def self.new(
+              type:,
+              # ID of the rubric file.
+              file_id: nil,
+              # Rubric content. Plain text or markdown — the grader treats it as freeform text.
+              content: nil
+            )
+            end
           end
 
           module Type

@@ -145,6 +145,48 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams, Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::DeploymentCreateParams::Resource} for more details.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [String] :authorization_token GitHub authorization token used to clone the repository.
+          #
+          #   @option args [String] :url Github URL of the repository
+          #
+          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsBranchCheckout, Anthropic::Models::Beta::BetaManagedAgentsCommitCheckout, nil] :checkout Branch or commit to check out. Defaults to the repository's default branch.
+          #
+          #   @option args [String, nil] :mount_path Mount path in the container. Defaults to `/workspace/<repo-name>`.
+          #
+          #   @option args [String] :file_id ID of a previously uploaded file.
+          #
+          #   @option args [String] :memory_store_id The memory store ID (memstore\_...). Must belong to the caller's organization
+          #   and
+          #
+          #   @option args [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::Access, nil] :access Access mode for an attached memory store.
+          #
+          #   @option args [String, nil] :instructions Per-attachment guidance for the agent on how to use this store. Rendered into th
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams, Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :github_repository
+              Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams.new(**args)
+            when :file
+              Anthropic::Beta::BetaManagedAgentsFileResourceParams.new(**args)
+            when :memory_store
+              Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceParam.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
       end
     end

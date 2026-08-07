@@ -87,14 +87,14 @@ module Anthropic
           required :type, const: :work
 
           # @!method initialize(id:, acknowledged_at:, created_at:, data:, environment_id:, latest_heartbeat_at:, metadata:, secret:, started_at:, state:, stop_requested_at:, stopped_at:, type: :work)
-          #   Some parameter documentations has been truncated, see
-          #   {Anthropic::Models::Beta::Environments::BetaSelfHostedWork} for more details.
-          #
           #   Work resource representing a unit of work in a self-hosted environment.
           #
           #   Work items are queued when sessions are created or when long-dormant sessions
           #   receive new messages. The environment worker polls for work to execute in a
           #   self-hosted sandbox.
+          #
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Environments::BetaSelfHostedWork} for more details.
           #
           #   @param id [String] Work identifier (e.g., 'work\_...')
           #

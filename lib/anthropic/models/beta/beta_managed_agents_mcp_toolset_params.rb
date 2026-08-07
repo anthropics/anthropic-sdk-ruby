@@ -32,10 +32,10 @@ module Anthropic
                  nil?: true
 
         # @!method initialize(mcp_server_name:, type:, configs: nil, default_config: nil)
+        #   Configuration for tools from an MCP server defined in `mcp_servers`.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams} for more details.
-        #
-        #   Configuration for tools from an MCP server defined in `mcp_servers`.
         #
         #   @param mcp_server_name [String] Name of the MCP server. Must match a server name from the mcp_servers array. 1-2
         #

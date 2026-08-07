@@ -45,6 +45,331 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::beta_managed_agents_stream_session_events]
+
+          def self.new:
+            (
+              type: :"user.message" | "user.message",
+              id: String,
+              content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEvent::content],
+              ?processed_at: Time?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent
+            | (
+              type: :"user.interrupt" | "user.interrupt",
+              id: String,
+              ?processed_at: Time?,
+              ?session_thread_id: String?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent
+            | (
+              type: :"user.tool_confirmation" | "user.tool_confirmation",
+              id: String,
+              result: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::result,
+              tool_use_id: String,
+              ?deny_message: String?,
+              ?processed_at: Time?,
+              ?session_thread_id: String?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent
+            | (
+              type: :"user.custom_tool_result" | "user.custom_tool_result",
+              id: String,
+              custom_tool_use_id: String,
+              ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::content],
+              ?is_error: bool?,
+              ?processed_at: Time?,
+              ?session_thread_id: String?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent
+            | (
+              type: :"agent.custom_tool_use" | "agent.custom_tool_use",
+              id: String,
+              input: ::Hash[Symbol, top],
+              name: String,
+              processed_at: Time,
+              ?session_thread_id: String?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent
+            | (
+              type: :"agent.message" | "agent.message",
+              id: String,
+              content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::content],
+              processed_at: Time
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsAgentMessageEvent
+            | (
+              type: :"agent.thinking" | "agent.thinking",
+              id: String,
+              processed_at: Time
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsAgentThinkingEvent
+            | (
+              type: :"agent.mcp_tool_use" | "agent.mcp_tool_use",
+              id: String,
+              input: ::Hash[Symbol, top],
+              mcp_server_name: String,
+              name: String,
+              processed_at: Time,
+              ?evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission,
+              ?session_thread_id: String?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent
+            | (
+              type: :"agent.mcp_tool_result" | "agent.mcp_tool_result",
+              id: String,
+              mcp_tool_use_id: String,
+              processed_at: Time,
+              ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::content],
+              ?is_error: bool?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent
+            | (
+              type: :"agent.tool_use" | "agent.tool_use",
+              id: String,
+              input: ::Hash[Symbol, top],
+              name: String,
+              processed_at: Time,
+              ?evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::evaluated_permission,
+              ?session_thread_id: String?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent
+            | (
+              type: :"agent.tool_result" | "agent.tool_result",
+              id: String,
+              processed_at: Time,
+              tool_use_id: String,
+              ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::content],
+              ?is_error: bool?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent
+            | (
+              type: :"agent.thread_message_received"
+              | "agent.thread_message_received",
+              id: String,
+              content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent::content],
+              from_session_thread_id: String,
+              processed_at: Time,
+              ?from_agent_name: String?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent
+            | (
+              type: :"agent.thread_message_sent" | "agent.thread_message_sent",
+              id: String,
+              content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::content],
+              processed_at: Time,
+              to_session_thread_id: String,
+              ?to_agent_name: String?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent
+            | (
+              type: :"agent.thread_context_compacted"
+              | "agent.thread_context_compacted",
+              id: String,
+              processed_at: Time
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent
+            | (
+              type: :"session.error" | "session.error",
+              id: String,
+              error: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error,
+              processed_at: Time
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent
+            | (
+              type: :"session.status_rescheduled"
+              | "session.status_rescheduled",
+              id: String,
+              processed_at: Time
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent
+            | (
+              type: :"session.status_running" | "session.status_running",
+              id: String,
+              processed_at: Time
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusRunningEvent
+            | (
+              type: :"session.status_idle" | "session.status_idle",
+              id: String,
+              processed_at: Time,
+              stop_reason: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::stop_reason
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent
+            | (
+              type: :"session.status_terminated" | "session.status_terminated",
+              id: String,
+              processed_at: Time
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent
+            | (
+              type: :"session.thread_created" | "session.thread_created",
+              id: String,
+              agent_name: String,
+              processed_at: Time,
+              session_thread_id: String
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent
+            | (
+              type: :"span.outcome_evaluation_start"
+              | "span.outcome_evaluation_start",
+              id: String,
+              iteration: Integer,
+              outcome_id: String,
+              processed_at: Time
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent
+            | (
+              type: :"span.outcome_evaluation_end"
+              | "span.outcome_evaluation_end",
+              id: String,
+              explanation: String,
+              iteration: Integer,
+              outcome_evaluation_start_id: String,
+              outcome_id: String,
+              processed_at: Time,
+              result: String,
+              usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent
+            | (
+              type: :"span.model_request_start" | "span.model_request_start",
+              id: String,
+              processed_at: Time
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent
+            | (
+              type: :"span.model_request_end" | "span.model_request_end",
+              id: String,
+              is_error: bool?,
+              model_request_start_id: String,
+              model_usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage,
+              processed_at: Time
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent
+            | (
+              type: :"span.outcome_evaluation_ongoing"
+              | "span.outcome_evaluation_ongoing",
+              id: String,
+              iteration: Integer,
+              outcome_id: String,
+              processed_at: Time
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent
+            | (
+              type: :"user.define_outcome" | "user.define_outcome",
+              id: String,
+              description: String,
+              max_iterations: Integer?,
+              outcome_id: String,
+              processed_at: Time,
+              rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::rubric
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent
+            | (
+              type: :"session.deleted" | "session.deleted",
+              id: String,
+              processed_at: Time
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent
+            | (
+              type: :"session.thread_status_running"
+              | "session.thread_status_running",
+              id: String,
+              agent_name: String,
+              processed_at: Time,
+              session_thread_id: String
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent
+            | (
+              type: :"session.thread_status_idle"
+              | "session.thread_status_idle",
+              id: String,
+              agent_name: String,
+              processed_at: Time,
+              session_thread_id: String,
+              stop_reason: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::stop_reason
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent
+            | (
+              type: :"session.thread_status_terminated"
+              | "session.thread_status_terminated",
+              id: String,
+              agent_name: String,
+              processed_at: Time,
+              session_thread_id: String
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent
+            | (
+              type: :"user.tool_result" | "user.tool_result",
+              id: String,
+              tool_use_id: String,
+              ?content: ::Array[Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent::content],
+              ?is_error: bool?,
+              ?processed_at: Time?,
+              ?session_thread_id: String?
+            ) -> Anthropic::Beta::BetaManagedAgentsUserToolResultEvent
+            | (
+              type: :"session.thread_status_rescheduled"
+              | "session.thread_status_rescheduled",
+              id: String,
+              agent_name: String,
+              processed_at: Time,
+              session_thread_id: String
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent
+            | (
+              type: :"session.updated" | "session.updated",
+              id: String,
+              processed_at: Time,
+              ?agent: Anthropic::Beta::BetaManagedAgentsSessionAgent?,
+              ?budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
+              ?metadata: ::Hash[Symbol, String],
+              ?title: String?
+            ) -> Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent
+            | (
+              type: :event_start | "event_start",
+              event: Anthropic::Models::Beta::beta_managed_agents_start_event_preview
+            ) -> Anthropic::Beta::BetaManagedAgentsStartEvent
+            | (
+              type: :event_delta | "event_delta",
+              delta: Anthropic::Beta::BetaManagedAgentsDeltaContent,
+              event_id: String
+            ) -> Anthropic::Beta::BetaManagedAgentsDeltaEvent
+            | (
+              type: :"system.message" | "system.message",
+              id: String,
+              content: ::Array[Anthropic::Beta::BetaManagedAgentsSystemContentBlock],
+              ?processed_at: Time?
+            ) -> Anthropic::Beta::BetaManagedAgentsSystemMessageEvent
+            | (
+              type: :"session.usage" | "session.usage",
+              id: String,
+              processed_at: Time,
+              usage: Anthropic::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot,
+              ?budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
+            ) -> Anthropic::Beta::BetaManagedAgentsSessionUsageEvent
+            | (
+              type: Symbol | String,
+              ?id: String,
+              ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEvent::content]
+              | ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::content]
+              | ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::content]
+              | ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent::content]
+              | ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::content]
+              | ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent::content]
+              | ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent::content]
+              | ::Array[Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent::content]
+              | ::Array[Anthropic::Beta::BetaManagedAgentsSystemContentBlock],
+              ?processed_at: Time? | Time,
+              ?session_thread_id: String? | String,
+              ?result: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::result
+              | String,
+              ?tool_use_id: String,
+              ?deny_message: String?,
+              ?custom_tool_use_id: String,
+              ?is_error: bool?,
+              ?input: ::Hash[Symbol, top],
+              ?name: String,
+              ?mcp_server_name: String,
+              ?evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission
+              | Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::evaluated_permission,
+              ?mcp_tool_use_id: String,
+              ?from_session_thread_id: String,
+              ?from_agent_name: String?,
+              ?to_session_thread_id: String,
+              ?to_agent_name: String?,
+              ?error: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error,
+              ?stop_reason: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::stop_reason
+              | Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::stop_reason,
+              ?agent_name: String,
+              ?iteration: Integer,
+              ?outcome_id: String,
+              ?explanation: String,
+              ?outcome_evaluation_start_id: String,
+              ?usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage
+              | Anthropic::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot,
+              ?model_request_start_id: String,
+              ?model_usage: Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage,
+              ?description: String,
+              ?max_iterations: Integer?,
+              ?rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::rubric,
+              ?agent: Anthropic::Beta::BetaManagedAgentsSessionAgent?,
+              ?budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?,
+              ?metadata: ::Hash[Symbol, String],
+              ?title: String?,
+              ?event: Anthropic::Models::Beta::beta_managed_agents_start_event_preview,
+              ?delta: Anthropic::Beta::BetaManagedAgentsDeltaContent,
+              ?event_id: String
+            ) -> Anthropic::Models::Beta::Sessions::beta_managed_agents_stream_session_events
         end
       end
     end

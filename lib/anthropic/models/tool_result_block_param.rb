@@ -67,6 +67,48 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ToolReferenceBlockParam)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [String] :text
+          #
+          #   @option args [Anthropic::Models::CacheControlEphemeral, nil] :cache_control Create a cache control breakpoint at this content block.
+          #
+          #   @option args [Array<Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam, Anthropic::Models::CitationWebSearchResultLocationParam, Anthropic::Models::CitationSearchResultLocationParam>, nil, Anthropic::Models::CitationsConfigParam, Anthropic::Models::CitationsConfigParam, nil] :citations
+          #
+          #   @option args [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource, String, Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource] :source
+          #
+          #   @option args [Array<Anthropic::Models::TextBlockParam>] :content
+          #
+          #   @option args [String, String, nil] :title
+          #
+          #   @option args [String, nil] :context
+          #
+          #   @option args [String] :tool_name
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ToolReferenceBlockParam]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :text
+              Anthropic::TextBlockParam.new(**args)
+            when :image
+              Anthropic::ImageBlockParam.new(**args)
+            when :search_result
+              Anthropic::SearchResultBlockParam.new(**args)
+            when :document
+              Anthropic::DocumentBlockParam.new(**args)
+            when :tool_reference
+              Anthropic::ToolReferenceBlockParam.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
 
         # @!method self.variants

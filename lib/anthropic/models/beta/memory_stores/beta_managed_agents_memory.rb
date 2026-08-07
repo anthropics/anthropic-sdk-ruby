@@ -78,16 +78,16 @@ module Anthropic
           optional :content, String, nil?: true
 
           # @!method initialize(id:, content_sha256:, content_size_bytes:, created_at:, memory_store_id:, memory_version_id:, path:, type:, updated_at:, content: nil)
-          #   Some parameter documentations has been truncated, see
-          #   {Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory} for more
-          #   details.
-          #
           #   A `memory` object: a single text document at a hierarchical path inside a memory
           #   store. The `content` field is populated when `view=full` and `null` when
           #   `view=basic`; the `content_size_bytes` and `content_sha256` fields are always
           #   populated so sync clients can diff without fetching content. Memories are
           #   addressed by their `mem_...` ID; the path is the create key and can be changed
           #   via update.
+          #
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemory} for more
+          #   details.
           #
           #   @param id [String] Unique identifier for this memory (a `mem_...` value). Stable across renames; us
           #

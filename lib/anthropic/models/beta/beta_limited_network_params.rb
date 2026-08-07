@@ -31,12 +31,12 @@ module Anthropic
         optional :allowed_hosts, Anthropic::Internal::Type::ArrayOf[String], nil?: true
 
         # @!method initialize(allow_mcp_servers: nil, allow_package_managers: nil, allowed_hosts: nil, type: :limited)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaLimitedNetworkParams} for more details.
-        #
         #   Limited network request params.
         #
         #   Fields default to null; on update, omitted fields preserve the existing value.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaLimitedNetworkParams} for more details.
         #
         #   @param allow_mcp_servers [Boolean, nil] Permits outbound access to MCP server endpoints configured on the agent, beyond
         #

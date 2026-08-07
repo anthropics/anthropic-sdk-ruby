@@ -73,6 +73,46 @@ module Anthropic
 
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams)]
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            #
+            # @param type [Symbol, String]
+            #
+            # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+            #
+            #   @option args [String] :access_token OAuth access token.
+            #
+            #   @option args [String] :mcp_server_url URL of the MCP server this credential authenticates against.
+            #
+            #   @option args [Time, nil] :expires_at A timestamp in RFC 3339 format
+            #
+            #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshParams, nil] :refresh OAuth refresh token parameters for creating a credential with refresh support.
+            #
+            #   @option args [String] :token Static bearer token value.
+            #
+            #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams] :networking Outbound hosts the secret value is substituted on.
+            #
+            #   @option args [String] :secret_name Name of the environment variable. Immutable after create.
+            #
+            #   @option args [String] :secret_value Secret value. Write-only; never returned in responses.
+            #
+            #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsInjectionLocationParams] :injection_location Where in the outbound request the secret value may be substituted.
+            #
+            # @raise [ArgumentError]
+            # @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams]
+            def self.new(type:, **args)
+              case type.to_sym
+              when :mcp_oauth
+                Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams.new(**args)
+              when :static_bearer
+                Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams.new(**args)
+              when :environment_variable
+                Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams.new(**args)
+              else
+                raise ArgumentError, "unknown type: #{type}"
+              end
+            end
           end
         end
       end

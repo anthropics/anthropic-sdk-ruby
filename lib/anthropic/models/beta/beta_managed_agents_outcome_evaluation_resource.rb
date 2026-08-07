@@ -50,11 +50,11 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsOutcomeEvaluationResource::Type }
 
         # @!method initialize(completed_at:, description:, explanation:, iteration:, outcome_id:, result:, type:)
+        #   Evaluation state for a single outcome defined via a define_outcome event.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsOutcomeEvaluationResource} for more
         #   details.
-        #
-        #   Evaluation state for a single outcome defined via a define_outcome event.
         #
         #   @param completed_at [Time, nil] A timestamp in RFC 3339 format
         #

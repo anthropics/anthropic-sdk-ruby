@@ -24,10 +24,10 @@ module Anthropic
       required :type, const: :refusal
 
       # @!method initialize(category:, explanation:, type: :refusal)
+      #   Structured information about a refusal.
+      #
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::RefusalStopDetails} for more details.
-      #
-      #   Structured information about a refusal.
       #
       #   @param category [Symbol, Anthropic::Models::RefusalStopDetails::Category, nil] The policy category that triggered a refusal.
       #

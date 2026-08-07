@@ -43,12 +43,12 @@ module Anthropic
           optional :session_thread_id, String, nil?: true
 
           # @!method initialize(id:, input:, name:, processed_at:, type:, session_thread_id: nil)
+          #   Event emitted when the agent calls a custom tool. The session goes idle until
+          #   the client sends a `user.custom_tool_result` event with the result.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent}
           #   for more details.
-          #
-          #   Event emitted when the agent calls a custom tool. The session goes idle until
-          #   the client sends a `user.custom_tool_result` event with the result.
           #
           #   @param id [String] Unique identifier for this event.
           #

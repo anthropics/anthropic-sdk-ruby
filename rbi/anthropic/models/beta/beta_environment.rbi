@@ -146,6 +146,28 @@ module Anthropic
           end
           def self.variants
           end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              networking:
+                T.any(
+                  Anthropic::Beta::BetaUnrestrictedNetwork::OrHash,
+                  Anthropic::Beta::BetaLimitedNetwork::OrHash
+                ),
+              packages: Anthropic::Beta::BetaPackages::OrHash
+            ).returns(Anthropic::Beta::BetaEnvironment::Config::Variants)
+          end
+          def self.new(
+            type:,
+            # Network configuration policy.
+            networking: nil,
+            # Package manager configuration.
+            packages: nil
+          )
+          end
         end
 
         # The visibility scope for this environment. 'organization' means visible to all

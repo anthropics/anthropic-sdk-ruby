@@ -10,6 +10,36 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_list_item]
+
+          def self.new:
+            (
+              type: :memory | "memory",
+              id: String,
+              content_sha256: String,
+              content_size_bytes: Integer,
+              created_at: Time,
+              memory_store_id: String,
+              memory_version_id: String,
+              path: String,
+              updated_at: Time,
+              ?content: String?
+            ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory
+            | (
+              type: :memory_prefix | "memory_prefix",
+              path: String
+            ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix
+            | (
+              type: Symbol | String,
+              path: String,
+              ?id: String,
+              ?content_sha256: String,
+              ?content_size_bytes: Integer,
+              ?created_at: Time,
+              ?memory_store_id: String,
+              ?memory_version_id: String,
+              ?updated_at: Time,
+              ?content: String?
+            ) -> Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_list_item
         end
       end
     end
