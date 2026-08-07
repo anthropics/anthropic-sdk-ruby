@@ -25,6 +25,38 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsActor} for more
+          # details.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [String] :session_id ID of the session that performed the write (a `sesn_...` value). Look up the ses
+          #
+          #   @option args [String] :api_key_id ID of the API key that performed the write. This identifies the key, not the sec
+          #
+          #   @option args [String] :user_id ID of the user who performed the write (a `user_...` value).
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :session_actor
+              Anthropic::Beta::MemoryStores::BetaManagedAgentsSessionActor.new(**args)
+            when :api_actor
+              Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor.new(**args)
+            when :user_actor
+              Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
       end
     end

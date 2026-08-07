@@ -15,11 +15,11 @@ module Anthropic
         optional :previous_message_id, String, nil?: true
 
         # @!method initialize(previous_message_id: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaDiagnosticsParam} for more details.
-        #
         #   Request-level diagnostics. Currently carries the previous response id for
         #   prompt-cache divergence reporting.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaDiagnosticsParam} for more details.
         #
         #   @param previous_message_id [String, nil] The `id` (`msg_...`) from this client's previous /v1/messages response. The serv
       end

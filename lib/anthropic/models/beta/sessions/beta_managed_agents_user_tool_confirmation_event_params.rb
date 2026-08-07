@@ -35,11 +35,11 @@ module Anthropic
           optional :deny_message, String, nil?: true
 
           # @!method initialize(result:, tool_use_id:, type:, deny_message: nil)
+          #   Parameters for confirming or denying a tool execution request.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams}
           #   for more details.
-          #
-          #   Parameters for confirming or denying a tool execution request.
           #
           #   @param result [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::Result] UserToolConfirmationResult enum
           #

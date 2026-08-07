@@ -37,14 +37,14 @@ module Anthropic
                    enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent::Type }
 
           # @!method initialize(id:, iteration:, outcome_id:, processed_at:, type:)
-          #   Some parameter documentations has been truncated, see
-          #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent}
-          #   for more details.
-          #
           #   Periodic heartbeat emitted while an outcome evaluation cycle is in progress.
           #   Distinguishes 'evaluation is actively running' from 'evaluation is stuck'
           #   between the corresponding `span.outcome_evaluation_start` and
           #   `span.outcome_evaluation_end` events.
+          #
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent}
+          #   for more details.
           #
           #   @param id [String] Unique identifier for this event.
           #

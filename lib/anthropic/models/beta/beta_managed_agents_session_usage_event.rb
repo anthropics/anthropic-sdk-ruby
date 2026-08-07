@@ -35,10 +35,10 @@ module Anthropic
         optional :budget, -> { Anthropic::Beta::BetaManagedAgentsBudgetLimit }, nil?: true
 
         # @!method initialize(id:, processed_at:, type:, usage:, budget: nil)
+        #   Periodic snapshot of the session's cumulative usage and tracked list cost.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsSessionUsageEvent} for more details.
-        #
-        #   Periodic snapshot of the session's cumulative usage and tracked list cost.
         #
         #   @param id [String] Unique identifier for this event.
         #

@@ -38,6 +38,26 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaRequestToolRemovalBlock::tool]
+
+          def self.new:
+            (
+              type: :tool_reference | "tool_reference",
+              name: String
+            ) -> Anthropic::Beta::BetaToolChangeToolReference
+            | (
+              type: :mcp_tool_reference | "mcp_tool_reference",
+              name: String,
+              server_name: String
+            ) -> Anthropic::Beta::BetaToolChangeMCPToolReference
+            | (
+              type: :mcp_toolset_reference | "mcp_toolset_reference",
+              server_name: String
+            ) -> Anthropic::Beta::BetaToolChangeMCPToolsetReference
+            | (
+              type: Symbol | String,
+              ?name: String,
+              ?server_name: String
+            ) -> Anthropic::Models::Beta::BetaRequestToolRemovalBlock::tool
         end
       end
     end

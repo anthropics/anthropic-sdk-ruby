@@ -28,10 +28,10 @@ module Anthropic
           )
         end
 
+        # List Deployment Runs
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::DeploymentRunListParams} for more details.
-        #
-        # List Deployment Runs
         #
         # @overload list(created_at_gt: nil, created_at_gte: nil, created_at_lt: nil, created_at_lte: nil, deployment_id: nil, has_error: nil, limit: nil, page: nil, trigger_type: nil, betas: nil, request_options: {})
         #

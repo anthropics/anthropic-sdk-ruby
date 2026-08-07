@@ -24,10 +24,10 @@ module Anthropic
         required :type, const: :tunnel_token
 
         # @!method initialize(id:, tunnel_token:, type: :tunnel_token)
+        #   A tunnel's connector token.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaTunnelToken} for more details.
-        #
-        #   A tunnel's connector token.
         #
         #   @param id [String] Stable identifier for the current token value. Changes when the token is rotated
         #

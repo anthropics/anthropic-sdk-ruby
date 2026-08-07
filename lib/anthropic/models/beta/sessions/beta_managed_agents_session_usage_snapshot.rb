@@ -50,11 +50,11 @@ module Anthropic
           optional :server_tool_use, -> { Anthropic::Beta::BetaManagedAgentsServerToolUsage }
 
           # @!method initialize(active_seconds: nil, cache_creation: nil, cache_read_input_tokens: nil, input_tokens: nil, list_cost: nil, output_tokens: nil, server_tool_use: nil)
+          #   Point-in-time snapshot of a session's cumulative usage.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot} for
           #   more details.
-          #
-          #   Point-in-time snapshot of a session's cumulative usage.
           #
           #   @param active_seconds [Float] Cumulative time in seconds during which the session had at least one thread in r
           #

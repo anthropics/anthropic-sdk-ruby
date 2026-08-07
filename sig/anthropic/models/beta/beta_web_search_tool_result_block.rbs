@@ -47,6 +47,21 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaWebSearchToolResultBlock::caller_]
+
+          def self.new:
+            (type: :direct | "direct") -> Anthropic::Beta::BetaDirectCaller
+            | (
+              type: :code_execution_20250825 | "code_execution_20250825",
+              tool_id: String
+            ) -> Anthropic::Beta::BetaServerToolCaller
+            | (
+              type: :code_execution_20260120 | "code_execution_20260120",
+              tool_id: String
+            ) -> Anthropic::Beta::BetaServerToolCaller20260120
+            | (
+              type: Symbol | String,
+              ?tool_id: String
+            ) -> Anthropic::Models::Beta::BetaWebSearchToolResultBlock::caller_
         end
       end
     end

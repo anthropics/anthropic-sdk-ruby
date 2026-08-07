@@ -24,11 +24,11 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsBase64ImageSource::Type }
 
           # @!method initialize(data:, media_type:, type:)
+          #   Base64-encoded image data.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64ImageSource} for more
           #   details.
-          #
-          #   Base64-encoded image data.
           #
           #   @param data [String] Base64-encoded image data.
           #

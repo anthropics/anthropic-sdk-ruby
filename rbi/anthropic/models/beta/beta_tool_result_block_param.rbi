@@ -129,6 +129,68 @@ module Anthropic
             end
             def self.variants
             end
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            sig do
+              params(
+                type: T.any(Symbol, String),
+                text: String,
+                cache_control:
+                  T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+                citations:
+                  T.any(
+                    T.nilable(
+                      T::Array[
+                        T.any(
+                          Anthropic::Beta::BetaCitationCharLocationParam::OrHash,
+                          Anthropic::Beta::BetaCitationPageLocationParam::OrHash,
+                          Anthropic::Beta::BetaCitationContentBlockLocationParam::OrHash,
+                          Anthropic::Beta::BetaCitationWebSearchResultLocationParam::OrHash,
+                          Anthropic::Beta::BetaCitationSearchResultLocationParam::OrHash
+                        )
+                      ]
+                    ),
+                    Anthropic::Beta::BetaCitationsConfigParam::OrHash,
+                    T.nilable(Anthropic::Beta::BetaCitationsConfigParam::OrHash)
+                  ),
+                source:
+                  T.any(
+                    T.any(
+                      Anthropic::Beta::BetaBase64ImageSource::OrHash,
+                      Anthropic::Beta::BetaURLImageSource::OrHash,
+                      Anthropic::Beta::BetaFileImageSource::OrHash
+                    ),
+                    String,
+                    T.any(
+                      Anthropic::Beta::BetaBase64PDFSource::OrHash,
+                      Anthropic::Beta::BetaPlainTextSource::OrHash,
+                      Anthropic::Beta::BetaContentBlockSource::OrHash,
+                      Anthropic::Beta::BetaURLPDFSource::OrHash,
+                      Anthropic::Beta::BetaFileDocumentSource::OrHash
+                    )
+                  ),
+                content: T::Array[Anthropic::Beta::BetaTextBlockParam::OrHash],
+                title: T.any(String, T.nilable(String)),
+                context: T.nilable(String),
+                tool_name: String
+              ).returns(
+                Anthropic::Beta::BetaToolResultBlockParam::Content::Content::Variants
+              )
+            end
+            def self.new(
+              type:,
+              text: nil,
+              # Create a cache control breakpoint at this content block.
+              cache_control: nil,
+              citations: nil,
+              source: nil,
+              content: nil,
+              title: nil,
+              context: nil,
+              tool_name: nil
+            )
+            end
           end
 
           sig do

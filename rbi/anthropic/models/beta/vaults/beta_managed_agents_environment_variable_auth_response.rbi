@@ -111,6 +111,25 @@ module Anthropic
             end
             def self.variants
             end
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            sig do
+              params(
+                type: T.any(Symbol, String),
+                allowed_hosts: T::Array[String]
+              ).returns(
+                Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Networking::Variants
+              )
+            end
+            def self.new(
+              type:,
+              # Hostnames on which the secret will be substituted. An entry matches the request
+              # host exactly; a `*.`-prefixed entry matches any subdomain of the named domain
+              # but not the domain itself.
+              allowed_hosts: nil
+            )
+            end
           end
 
           module Type

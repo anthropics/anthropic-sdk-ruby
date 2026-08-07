@@ -19,12 +19,12 @@ module Anthropic
         optional :path, String
 
         # @!method initialize(pattern:, path: nil)
+        #   Input payload for the `glob` tool. Returns paths matching a doublestar glob
+        #   pattern, newest first.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401GlobInput} for
         #   more details.
-        #
-        #   Input payload for the `glob` tool. Returns paths matching a doublestar glob
-        #   pattern, newest first.
         #
         #   @param pattern [String] Doublestar glob pattern (e.g. `**/*.go`). Absolute patterns
         #

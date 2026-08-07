@@ -11,6 +11,49 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::resource_retrieve_response]
+
+          def self.new:
+            (
+              type: :github_repository | "github_repository",
+              id: String,
+              created_at: Time,
+              mount_path: String,
+              updated_at: Time,
+              url: String,
+              ?checkout: Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::checkout?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource
+            | (
+              type: :file | "file",
+              id: String,
+              created_at: Time,
+              file_id: String,
+              mount_path: String,
+              updated_at: Time
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsFileResource
+            | (
+              type: :memory_store | "memory_store",
+              memory_store_id: String,
+              ?access: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::access?,
+              ?description: String,
+              ?instructions: String?,
+              ?mount_path: String?,
+              ?name: String?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource
+            | (
+              type: Symbol | String,
+              ?id: String,
+              ?created_at: Time,
+              ?mount_path: String | String?,
+              ?updated_at: Time,
+              ?url: String,
+              ?checkout: Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::checkout?,
+              ?file_id: String,
+              ?memory_store_id: String,
+              ?access: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource::access?,
+              ?description: String,
+              ?instructions: String?,
+              ?name: String?
+            ) -> Anthropic::Models::Beta::Sessions::resource_retrieve_response
         end
       end
     end

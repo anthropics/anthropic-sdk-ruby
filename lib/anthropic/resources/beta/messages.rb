@@ -9,9 +9,6 @@ module Anthropic
 
         # See {Anthropic::Resources::Beta::Messages#stream_raw} for streaming counterpart.
         #
-        # Some parameter documentations has been truncated, see
-        # {Anthropic::Models::Beta::MessageCreateParams} for more details.
-        #
         # Send a structured list of input messages with text and/or image content, and the
         # model will generate the next message in the conversation.
         #
@@ -20,6 +17,9 @@ module Anthropic
         #
         # Learn more about the Messages API in our
         # [user guide](https://platform.claude.com/docs/en/get-started)
+        #
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
         # @overload create(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, request_options: {})
         #
@@ -99,9 +99,6 @@ module Anthropic
 
         # See {Anthropic::Resources::Beta::Messages#create} for non-streaming counterpart.
         #
-        # Some parameter documentations has been truncated, see
-        # {Anthropic::Models::Beta::MessageCreateParams} for more details.
-        #
         # Send a structured list of input messages with text and/or image content, and the
         # model will generate the next message in the conversation.
         #
@@ -110,6 +107,9 @@ module Anthropic
         #
         # Learn more about the Messages API in our
         # [user guide](https://platform.claude.com/docs/en/get-started)
+        #
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
         # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, request_options: {})
         #
@@ -195,9 +195,6 @@ module Anthropic
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {Anthropic::Models::Beta::MessageCountTokensParams} for more details.
-        #
         # Count the number of tokens in a Message.
         #
         # The Token Count API can be used to count the number of tokens in a Message,
@@ -205,6 +202,9 @@ module Anthropic
         #
         # Learn more about token counting in our
         # [user guide](https://platform.claude.com/docs/en/build-with-claude/token-counting)
+        #
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::MessageCountTokensParams} for more details.
         #
         # @overload count_tokens(messages:, model:, cache_control: nil, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, request_options: {})
         #

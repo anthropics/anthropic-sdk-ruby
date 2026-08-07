@@ -190,6 +190,56 @@ module Anthropic
           end
           def self.variants
           end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              text: String,
+              source:
+                T.any(
+                  T.any(
+                    Anthropic::Beta::Sessions::BetaManagedAgentsBase64ImageSource::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsURLImageSource::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsFileImageSource::OrHash
+                  ),
+                  T.any(
+                    Anthropic::Beta::Sessions::BetaManagedAgentsBase64DocumentSource::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsURLDocumentSource::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsFileDocumentSource::OrHash
+                  ),
+                  String
+                ),
+              context: T.nilable(String),
+              title: T.any(T.nilable(String), String),
+              citations:
+                Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultCitations::OrHash,
+              content:
+                T::Array[
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultContent::OrHash
+                ]
+            ).returns(
+              Anthropic::Beta::BetaManagedAgentsUserToolResultEvent::Content::Variants
+            )
+          end
+          def self.new(
+            type:,
+            # The text content.
+            text: nil,
+            # Union type for image source variants.
+            source: nil,
+            # Additional context about the document for the model.
+            context: nil,
+            # The title of the document.
+            title: nil,
+            # Citation settings for a search result.
+            citations: nil,
+            # Array of text content blocks from the search result.
+            content: nil
+          )
+          end
         end
       end
     end

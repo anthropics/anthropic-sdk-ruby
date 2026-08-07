@@ -9,6 +9,24 @@ module Anthropic
       extend Anthropic::Internal::Type::Union
 
       def self?.variants: -> ::Array[Anthropic::Models::thinking_config_param]
+
+      def self.new:
+        (
+          type: :enabled | "enabled",
+          budget_tokens: Integer,
+          ?display_: Anthropic::Models::ThinkingConfigEnabled::display_?
+        ) -> Anthropic::ThinkingConfigEnabled
+        | (type: :disabled | "disabled") -> Anthropic::ThinkingConfigDisabled
+        | (
+          type: :adaptive | "adaptive",
+          ?display_: Anthropic::Models::ThinkingConfigAdaptive::display_?
+        ) -> Anthropic::ThinkingConfigAdaptive
+        | (
+          type: Symbol | String,
+          ?budget_tokens: Integer,
+          ?display_: Anthropic::Models::ThinkingConfigEnabled::display_?
+          | Anthropic::Models::ThinkingConfigAdaptive::display_?
+        ) -> Anthropic::Models::thinking_config_param
     end
   end
 end

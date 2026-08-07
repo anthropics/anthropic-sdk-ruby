@@ -12,6 +12,43 @@ module Anthropic
       extend Anthropic::Internal::Type::Union
 
       def self?.variants: -> ::Array[Anthropic::Models::raw_message_stream_event]
+
+      def self.new:
+        (
+          type: :message_start | "message_start",
+          message: Anthropic::Message
+        ) -> Anthropic::RawMessageStartEvent
+        | (
+          type: :message_delta | "message_delta",
+          delta: Anthropic::RawMessageDeltaEvent::Delta,
+          usage: Anthropic::MessageDeltaUsage
+        ) -> Anthropic::RawMessageDeltaEvent
+        | (
+          type: :message_stop | "message_stop"
+        ) -> Anthropic::RawMessageStopEvent
+        | (
+          type: :content_block_start | "content_block_start",
+          content_block: Anthropic::Models::RawContentBlockStartEvent::content_block,
+          index: Integer
+        ) -> Anthropic::RawContentBlockStartEvent
+        | (
+          type: :content_block_delta | "content_block_delta",
+          delta: Anthropic::Models::raw_content_block_delta,
+          index: Integer
+        ) -> Anthropic::RawContentBlockDeltaEvent
+        | (
+          type: :content_block_stop | "content_block_stop",
+          index: Integer
+        ) -> Anthropic::RawContentBlockStopEvent
+        | (
+          type: Symbol | String,
+          ?message: Anthropic::Message,
+          ?delta: Anthropic::RawMessageDeltaEvent::Delta
+          | Anthropic::Models::raw_content_block_delta,
+          ?usage: Anthropic::MessageDeltaUsage,
+          ?content_block: Anthropic::Models::RawContentBlockStartEvent::content_block,
+          ?index: Integer
+        ) -> Anthropic::Models::raw_message_stream_event
     end
   end
 end

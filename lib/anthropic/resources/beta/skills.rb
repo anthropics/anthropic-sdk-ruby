@@ -7,10 +7,10 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::Skills::Versions]
         attr_reader :versions
 
+        # Create Skill
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::SkillCreateParams} for more details.
-        #
-        # Create Skill
         #
         # @overload create(files:, display_title: nil, betas: nil, request_options: {})
         #
@@ -43,10 +43,10 @@ module Anthropic
           )
         end
 
+        # Get Skill
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::SkillRetrieveParams} for more details.
-        #
-        # Get Skill
         #
         # @overload retrieve(skill_id, betas: nil, request_options: {})
         #
@@ -70,10 +70,10 @@ module Anthropic
           )
         end
 
+        # List Skills
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::SkillListParams} for more details.
-        #
-        # List Skills
         #
         # @overload list(limit: nil, page: nil, source: nil, betas: nil, request_options: {})
         #
@@ -105,10 +105,10 @@ module Anthropic
           )
         end
 
+        # Delete Skill
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::SkillDeleteParams} for more details.
-        #
-        # Delete Skill
         #
         # @overload delete(skill_id, betas: nil, request_options: {})
         #

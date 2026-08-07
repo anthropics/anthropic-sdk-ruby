@@ -67,10 +67,10 @@ module Anthropic
         optional :scope, enum: -> { Anthropic::Beta::BetaEnvironment::Scope }
 
         # @!method initialize(id:, archived_at:, config:, created_at:, description:, metadata:, name:, updated_at:, scope: nil, type: :environment)
+        #   Unified Environment resource for both cloud and self-hosted environments.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaEnvironment} for more details.
-        #
-        #   Unified Environment resource for both cloud and self-hosted environments.
         #
         #   @param id [String] Environment identifier (e.g., 'env\_...')
         #
@@ -108,6 +108,30 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaCloudConfig, Anthropic::Models::Beta::BetaSelfHostedConfig)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [Anthropic::Models::Beta::BetaUnrestrictedNetwork, Anthropic::Models::Beta::BetaLimitedNetwork] :networking Network configuration policy.
+          #
+          #   @option args [Anthropic::Models::Beta::BetaPackages] :packages Package manager configuration.
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaCloudConfig, Anthropic::Models::Beta::BetaSelfHostedConfig]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :cloud
+              Anthropic::Beta::BetaCloudConfig.new(**args)
+            when :self_hosted
+              Anthropic::Beta::BetaSelfHostedConfig.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
 
         # The visibility scope for this environment. 'organization' means visible to all

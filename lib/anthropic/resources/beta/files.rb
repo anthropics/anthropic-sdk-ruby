@@ -4,10 +4,10 @@ module Anthropic
   module Resources
     class Beta
       class Files
+        # List Files
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::FileListParams} for more details.
-        #
-        # List Files
         #
         # @overload list(after_id: nil, before_id: nil, limit: nil, scope_id: nil, betas: nil, request_options: {})
         #

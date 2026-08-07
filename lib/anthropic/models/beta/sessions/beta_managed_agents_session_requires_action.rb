@@ -18,13 +18,13 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionRequiresAction::Type }
 
           # @!method initialize(event_ids:, type:)
-          #   Some parameter documentations has been truncated, see
-          #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction} for
-          #   more details.
-          #
           #   The agent is idle waiting on one or more blocking user-input events (tool
           #   confirmation, custom tool result, etc.). Resolving all of them transitions the
           #   session back to running.
+          #
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction} for
+          #   more details.
           #
           #   @param event_ids [Array<String>] The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
           #

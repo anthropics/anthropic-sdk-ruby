@@ -57,6 +57,40 @@ module Anthropic
             extend Anthropic::Internal::Type::Union
 
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams::content]
+
+            def self.new:
+              (
+                type: :text | "text",
+                text: String
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock
+              | (
+                type: :image | "image",
+                source: Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::source
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock
+              | (
+                type: :document | "document",
+                source: Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock::source,
+                ?context: String?,
+                ?title: String?
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock
+              | (
+                type: :search_result | "search_result",
+                citations: Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultCitations,
+                content: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultContent],
+                source: String,
+                title: String
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock
+              | (
+                type: Symbol | String,
+                ?text: String,
+                ?source: Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::source
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock::source
+                | String,
+                ?context: String?,
+                ?title: String? | String,
+                ?citations: Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultCitations,
+                ?content: ::Array[Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultContent]
+              ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams::content
           end
         end
       end

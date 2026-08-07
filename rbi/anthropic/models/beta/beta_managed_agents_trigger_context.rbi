@@ -24,6 +24,20 @@ module Anthropic
         end
         def self.variants
         end
+
+        # Creates a new instance of the variant class whose `type` matches the given
+        # value, passing the remaining arguments to its constructor.
+        sig do
+          params(type: T.any(Symbol, String), scheduled_at: Time).returns(
+            Anthropic::Beta::BetaManagedAgentsTriggerContext::Variants
+          )
+        end
+        def self.new(
+          type:,
+          # A timestamp in RFC 3339 format
+          scheduled_at: nil
+        )
+        end
       end
     end
   end

@@ -13,6 +13,52 @@ module Anthropic
         extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_iterations_usage_item]
+
+        def self.new:
+          (
+            type: :message | "message",
+            cache_creation: Anthropic::Beta::BetaCacheCreation?,
+            cache_creation_input_tokens: Integer,
+            cache_read_input_tokens: Integer,
+            input_tokens: Integer,
+            model: Anthropic::Models::model,
+            output_tokens: Integer
+          ) -> Anthropic::Beta::BetaMessageIterationUsage
+          | (
+            type: :compaction | "compaction",
+            cache_creation: Anthropic::Beta::BetaCacheCreation?,
+            cache_creation_input_tokens: Integer,
+            cache_read_input_tokens: Integer,
+            input_tokens: Integer,
+            output_tokens: Integer
+          ) -> Anthropic::Beta::BetaCompactionIterationUsage
+          | (
+            type: :advisor_message | "advisor_message",
+            cache_creation: Anthropic::Beta::BetaCacheCreation?,
+            cache_creation_input_tokens: Integer,
+            cache_read_input_tokens: Integer,
+            input_tokens: Integer,
+            model: Anthropic::Models::model,
+            output_tokens: Integer
+          ) -> Anthropic::Beta::BetaAdvisorMessageIterationUsage
+          | (
+            type: :fallback_message | "fallback_message",
+            cache_creation: Anthropic::Beta::BetaCacheCreation?,
+            cache_creation_input_tokens: Integer,
+            cache_read_input_tokens: Integer,
+            input_tokens: Integer,
+            model: Anthropic::Models::model,
+            output_tokens: Integer
+          ) -> Anthropic::Beta::BetaFallbackMessageIterationUsage
+          | (
+            type: Symbol | String,
+            cache_creation: Anthropic::Beta::BetaCacheCreation?,
+            cache_creation_input_tokens: Integer,
+            cache_read_input_tokens: Integer,
+            input_tokens: Integer,
+            output_tokens: Integer,
+            ?model: Anthropic::Models::model
+          ) -> Anthropic::Models::Beta::beta_iterations_usage_item
       end
 
       type beta_iterations_usage =

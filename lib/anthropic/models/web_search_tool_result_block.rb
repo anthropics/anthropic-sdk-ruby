@@ -51,6 +51,30 @@ module Anthropic
 
         # @!method self.variants
         #   @return [Array(Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120)]
+
+        # Creates a new instance of the variant class whose `type` matches the given
+        # value, passing the remaining arguments to its constructor.
+        #
+        # @param type [Symbol, String]
+        #
+        # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+        #
+        #   @option args [String] :tool_id
+        #
+        # @raise [ArgumentError]
+        # @return [Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120]
+        def self.new(type:, **args)
+          case type.to_sym
+          when :direct
+            Anthropic::DirectCaller.new(**args)
+          when :code_execution_20250825
+            Anthropic::ServerToolCaller.new(**args)
+          when :code_execution_20260120
+            Anthropic::ServerToolCaller20260120.new(**args)
+          else
+            raise ArgumentError, "unknown type: #{type}"
+          end
+        end
       end
     end
   end

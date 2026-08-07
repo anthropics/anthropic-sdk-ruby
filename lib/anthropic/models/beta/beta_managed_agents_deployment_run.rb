@@ -55,11 +55,11 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsDeploymentRun::Type }
 
         # @!method initialize(id:, agent:, created_at:, deployment_id:, error:, session_id:, trigger_context:, type:)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun} for more details.
-        #
         #   A persistent, append-only record of a single deployment execution. Records
         #   session creation success or failure — no session lifecycle tracking.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun} for more details.
         #
         #   @param id [String] Unique identifier for this run (`drun_...`).
         #
@@ -140,6 +140,56 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsEnvironmentArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsVaultArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsFileNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsSessionResourceNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsWorkspaceArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledRunError, Anthropic::Models::Beta::BetaManagedAgentsSessionRateLimitedRunError, Anthropic::Models::Beta::BetaManagedAgentsSessionCreationRejectedRunError, Anthropic::Models::Beta::BetaManagedAgentsUnknownRunError, Anthropic::Models::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError, Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedRunError)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [String] :message Human-readable error description.
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaManagedAgentsEnvironmentArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsVaultArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsFileNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsSessionResourceNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsWorkspaceArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledRunError, Anthropic::Models::Beta::BetaManagedAgentsSessionRateLimitedRunError, Anthropic::Models::Beta::BetaManagedAgentsSessionCreationRejectedRunError, Anthropic::Models::Beta::BetaManagedAgentsUnknownRunError, Anthropic::Models::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError, Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedRunError]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :environment_archived_error
+              Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedRunError.new(**args)
+            when :agent_archived_error
+              Anthropic::Beta::BetaManagedAgentsAgentArchivedRunError.new(**args)
+            when :environment_not_found_error
+              Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundRunError.new(**args)
+            when :vault_not_found_error
+              Anthropic::Beta::BetaManagedAgentsVaultNotFoundRunError.new(**args)
+            when :vault_archived_error
+              Anthropic::Beta::BetaManagedAgentsVaultArchivedRunError.new(**args)
+            when :file_not_found_error
+              Anthropic::Beta::BetaManagedAgentsFileNotFoundRunError.new(**args)
+            when :memory_store_archived_error
+              Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedRunError.new(**args)
+            when :skill_not_found_error
+              Anthropic::Beta::BetaManagedAgentsSkillNotFoundRunError.new(**args)
+            when :session_resource_not_found_error
+              Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundRunError.new(**args)
+            when :workspace_archived_error
+              Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedRunError.new(**args)
+            when :organization_disabled_error
+              Anthropic::Beta::BetaManagedAgentsOrganizationDisabledRunError.new(**args)
+            when :session_rate_limited_error
+              Anthropic::Beta::BetaManagedAgentsSessionRateLimitedRunError.new(**args)
+            when :session_creation_rejected_error
+              Anthropic::Beta::BetaManagedAgentsSessionCreationRejectedRunError.new(**args)
+            when :unknown_error
+              Anthropic::Beta::BetaManagedAgentsUnknownRunError.new(**args)
+            when :self_hosted_resources_unsupported_error
+              Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError.new(**args)
+            when :mcp_egress_blocked_error
+              Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedRunError.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
 
         # @see Anthropic::Models::Beta::BetaManagedAgentsDeploymentRun#type

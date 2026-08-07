@@ -94,6 +94,24 @@ module Anthropic
           end
           def self.variants
           end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              cache_missed_input_tokens: Integer
+            ).returns(
+              Anthropic::Beta::BetaDiagnostics::CacheMissReason::Variants
+            )
+          end
+          def self.new(
+            type:,
+            # Approximate number of input tokens that would have been read from cache had the
+            # prefix matched the previous request.
+            cache_missed_input_tokens: nil
+          )
+          end
         end
       end
     end

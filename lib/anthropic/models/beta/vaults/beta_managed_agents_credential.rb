@@ -101,6 +101,40 @@ module Anthropic
 
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse)]
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            #
+            # @param type [Symbol, String]
+            #
+            # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+            #
+            #   @option args [String] :mcp_server_url URL of the MCP server this credential authenticates against.
+            #
+            #   @option args [Time, nil] :expires_at A timestamp in RFC 3339 format
+            #
+            #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshResponse, nil] :refresh OAuth refresh token configuration returned in credential responses.
+            #
+            #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsInjectionLocationResponse] :injection_location Where in the outbound request the secret value is substituted.
+            #
+            #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingResponse] :networking Outbound hosts the secret value is substituted on.
+            #
+            #   @option args [String] :secret_name Name of the environment variable.
+            #
+            # @raise [ArgumentError]
+            # @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse]
+            def self.new(type:, **args)
+              case type.to_sym
+              when :mcp_oauth
+                Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse.new(**args)
+              when :static_bearer
+                Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse.new(**args)
+              when :environment_variable
+                Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse.new(**args)
+              else
+                raise ArgumentError, "unknown type: #{type}"
+              end
+            end
           end
 
           # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredential#type

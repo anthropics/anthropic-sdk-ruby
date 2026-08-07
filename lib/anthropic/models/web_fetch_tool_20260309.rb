@@ -82,10 +82,10 @@ module Anthropic
       optional :use_cache, Anthropic::Internal::Type::Boolean
 
       # @!method initialize(allowed_callers: nil, allowed_domains: nil, blocked_domains: nil, cache_control: nil, citations: nil, defer_loading: nil, max_content_tokens: nil, max_uses: nil, strict: nil, use_cache: nil, name: :web_fetch, type: :web_fetch_20260309)
+      #   Web fetch tool with use_cache parameter for bypassing cached content.
+      #
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::WebFetchTool20260309} for more details.
-      #
-      #   Web fetch tool with use_cache parameter for bypassing cached content.
       #
       #   @param allowed_callers [Array<Symbol, Anthropic::Models::WebFetchTool20260309::AllowedCaller>]
       #

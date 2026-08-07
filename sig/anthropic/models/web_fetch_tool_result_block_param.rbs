@@ -59,6 +59,21 @@ module Anthropic
         extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> ::Array[Anthropic::Models::WebFetchToolResultBlockParam::caller_]
+
+        def self.new:
+          (type: :direct | "direct") -> Anthropic::DirectCaller
+          | (
+            type: :code_execution_20250825 | "code_execution_20250825",
+            tool_id: String
+          ) -> Anthropic::ServerToolCaller
+          | (
+            type: :code_execution_20260120 | "code_execution_20260120",
+            tool_id: String
+          ) -> Anthropic::ServerToolCaller20260120
+          | (
+            type: Symbol | String,
+            ?tool_id: String
+          ) -> Anthropic::Models::WebFetchToolResultBlockParam::caller_
       end
     end
   end

@@ -27,11 +27,11 @@ module Anthropic
           optional :startup_seconds, Float
 
           # @!method initialize(active_seconds: nil, duration_seconds: nil, startup_seconds: nil)
+          #   Timing statistics for a session thread.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStats} for
           #   more details.
-          #
-          #   Timing statistics for a session thread.
           #
           #   @param active_seconds [Float] Cumulative time in seconds the thread spent actively running. Excludes idle time
           #

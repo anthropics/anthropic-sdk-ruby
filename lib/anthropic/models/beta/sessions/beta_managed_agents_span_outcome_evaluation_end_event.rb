@@ -68,14 +68,14 @@ module Anthropic
           required :usage, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelUsage }
 
           # @!method initialize(id:, explanation:, iteration:, outcome_evaluation_start_id:, outcome_id:, processed_at:, result:, type:, usage:)
-          #   Some parameter documentations has been truncated, see
-          #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent}
-          #   for more details.
-          #
           #   Emitted when an outcome evaluation cycle completes. Carries the verdict and
           #   aggregate token usage. A verdict of `needs_revision` means another evaluation
           #   cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted`
           #   are terminal — no further evaluation cycles follow.
+          #
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent}
+          #   for more details.
           #
           #   @param id [String] Unique identifier for this event.
           #

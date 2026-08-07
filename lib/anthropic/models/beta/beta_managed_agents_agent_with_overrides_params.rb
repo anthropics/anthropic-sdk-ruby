@@ -60,13 +60,13 @@ module Anthropic
         optional :version, Integer
 
         # @!method initialize(id:, type:, mcp_servers: nil, model: nil, skills: nil, system_: nil, tools: nil, version: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams} for more
-        #   details.
-        #
         #   Reference to an `agent` plus optional configuration overrides. Each provided
         #   field replaces the agent's value for the caller's use; the agent resource is
         #   unchanged.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams} for more
+        #   details.
         #
         #   @param id [String] The `agent` ID.
         #
@@ -130,6 +130,44 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams::Tool} for
+          # more details.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams>, Array<Anthropic::Models::Beta::BetaManagedAgentsMCPToolConfigParams>] :configs Per-tool configuration overrides.
+          #
+          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams, nil, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams, nil] :default_config Default configuration for all tools in a toolset.
+          #
+          #   @option args [String] :mcp_server_name Name of the MCP server. Must match a server name from the mcp_servers array. 1-2
+          #
+          #   @option args [String] :description Description of what the tool does, shown to the agent to help it decide when to
+          #
+          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsCustomToolInputSchema] :input_schema JSON Schema for custom tool input parameters.
+          #
+          #   @option args [String] :name Unique name for the tool. 1-128 characters; letters, digits, underscores, and hy
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :agent_toolset_20260401
+              Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params.new(**args)
+            when :mcp_toolset
+              Anthropic::Beta::BetaManagedAgentsMCPToolsetParams.new(**args)
+            when :custom
+              Anthropic::Beta::BetaManagedAgentsCustomToolParams.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
       end
     end

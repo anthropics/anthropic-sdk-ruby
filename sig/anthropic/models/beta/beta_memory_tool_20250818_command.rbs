@@ -15,6 +15,51 @@ module Anthropic
         extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_memory_tool20250818_command]
+
+        def self.new:
+          (
+            command: :view | "view",
+            path: String,
+            ?view_range: ::Array[Integer]
+          ) -> Anthropic::Beta::BetaMemoryTool20250818ViewCommand
+          | (
+            command: :create | "create",
+            file_text: String,
+            path: String
+          ) -> Anthropic::Beta::BetaMemoryTool20250818CreateCommand
+          | (
+            command: :str_replace | "str_replace",
+            new_str: String,
+            old_str: String,
+            path: String
+          ) -> Anthropic::Beta::BetaMemoryTool20250818StrReplaceCommand
+          | (
+            command: :insert | "insert",
+            insert_line: Integer,
+            insert_text: String,
+            path: String
+          ) -> Anthropic::Beta::BetaMemoryTool20250818InsertCommand
+          | (
+            command: :delete | "delete",
+            path: String
+          ) -> Anthropic::Beta::BetaMemoryTool20250818DeleteCommand
+          | (
+            command: :rename | "rename",
+            new_path: String,
+            old_path: String
+          ) -> Anthropic::Beta::BetaMemoryTool20250818RenameCommand
+          | (
+            command: Symbol | String,
+            ?path: String,
+            ?view_range: ::Array[Integer],
+            ?file_text: String,
+            ?new_str: String,
+            ?old_str: String,
+            ?insert_line: Integer,
+            ?insert_text: String,
+            ?new_path: String,
+            ?old_path: String
+          ) -> Anthropic::Models::Beta::beta_memory_tool20250818_command
       end
     end
   end

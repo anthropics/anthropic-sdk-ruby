@@ -15,6 +15,48 @@ module Anthropic
       extend Anthropic::Internal::Type::Union
 
       def self?.variants: -> ::Array[Anthropic::Models::error_object]
+
+      def self.new:
+        (
+          type: :invalid_request_error | "invalid_request_error",
+          message: String
+        ) -> Anthropic::InvalidRequestError
+        | (
+          type: :authentication_error | "authentication_error",
+          message: String
+        ) -> Anthropic::AuthenticationError
+        | (
+          type: :billing_error | "billing_error",
+          message: String
+        ) -> Anthropic::BillingError
+        | (
+          type: :permission_error | "permission_error",
+          message: String
+        ) -> Anthropic::PermissionError
+        | (
+          type: :not_found_error | "not_found_error",
+          message: String
+        ) -> Anthropic::NotFoundError
+        | (
+          type: :rate_limit_error | "rate_limit_error",
+          message: String
+        ) -> Anthropic::RateLimitError
+        | (
+          type: :timeout_error | "timeout_error",
+          message: String
+        ) -> Anthropic::GatewayTimeoutError
+        | (
+          type: :api_error | "api_error",
+          message: String
+        ) -> Anthropic::APIErrorObject
+        | (
+          type: :overloaded_error | "overloaded_error",
+          message: String
+        ) -> Anthropic::OverloadedError
+        | (
+          type: Symbol | String,
+          message: String
+        ) -> Anthropic::Models::error_object
     end
   end
 end

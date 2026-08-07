@@ -11,6 +11,19 @@ module Anthropic
         extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_trigger_context]
+
+        def self.new:
+          (
+            type: :schedule | "schedule",
+            scheduled_at: Time
+          ) -> Anthropic::Beta::BetaManagedAgentsScheduleTriggerContext
+          | (
+            type: :manual | "manual"
+          ) -> Anthropic::Beta::BetaManagedAgentsManualTriggerContext
+          | (
+            type: Symbol | String,
+            ?scheduled_at: Time
+          ) -> Anthropic::Models::Beta::beta_managed_agents_trigger_context
       end
     end
   end

@@ -13,6 +13,27 @@ module Anthropic
         extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> ::Array[Anthropic::Models::Messages::message_batch_result]
+
+        def self.new:
+          (
+            type: :succeeded | "succeeded",
+            message: Anthropic::Message
+          ) -> Anthropic::Messages::MessageBatchSucceededResult
+          | (
+            type: :errored | "errored",
+            error: Anthropic::ErrorResponse
+          ) -> Anthropic::Messages::MessageBatchErroredResult
+          | (
+            type: :canceled | "canceled"
+          ) -> Anthropic::Messages::MessageBatchCanceledResult
+          | (
+            type: :expired | "expired"
+          ) -> Anthropic::Messages::MessageBatchExpiredResult
+          | (
+            type: Symbol | String,
+            ?message: Anthropic::Message,
+            ?error: Anthropic::ErrorResponse
+          ) -> Anthropic::Models::Messages::message_batch_result
       end
     end
   end

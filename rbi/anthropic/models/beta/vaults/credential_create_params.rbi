@@ -134,6 +134,55 @@ module Anthropic
             end
             def self.variants
             end
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            sig do
+              params(
+                type: T.any(Symbol, String),
+                access_token: String,
+                mcp_server_url: String,
+                expires_at: T.nilable(Time),
+                refresh:
+                  T.nilable(
+                    Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshParams::OrHash
+                  ),
+                token: String,
+                networking:
+                  T.any(
+                    Anthropic::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams::OrHash,
+                    Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams::OrHash
+                  ),
+                secret_name: String,
+                secret_value: String,
+                injection_location:
+                  Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationParams::OrHash
+              ).returns(
+                Anthropic::Beta::Vaults::CredentialCreateParams::Auth::Variants
+              )
+            end
+            def self.new(
+              type:,
+              # OAuth access token.
+              access_token: nil,
+              # URL of the MCP server this credential authenticates against.
+              mcp_server_url: nil,
+              # A timestamp in RFC 3339 format
+              expires_at: nil,
+              # OAuth refresh token parameters for creating a credential with refresh support.
+              refresh: nil,
+              # Static bearer token value.
+              token: nil,
+              # Outbound hosts the secret value is substituted on.
+              networking: nil,
+              # Name of the environment variable. Immutable after create.
+              secret_name: nil,
+              # Secret value. Write-only; never returned in responses.
+              secret_value: nil,
+              # Where in the outbound request the secret value may be substituted.
+              injection_location: nil
+            )
+            end
           end
         end
       end

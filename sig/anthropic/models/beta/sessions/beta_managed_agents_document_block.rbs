@@ -43,6 +43,34 @@ module Anthropic
             extend Anthropic::Internal::Type::Union
 
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock::source]
+
+            def self.new:
+              (
+                type: :base64 | "base64",
+                data: String,
+                media_type: String
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsBase64DocumentSource
+              | (
+                type: :text | "text",
+                data: String,
+                media_type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::media_type
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource
+              | (
+                type: :url | "url",
+                url: String
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsURLDocumentSource
+              | (
+                type: :file | "file",
+                file_id: String
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsFileDocumentSource
+              | (
+                type: Symbol | String,
+                ?data: String,
+                ?media_type: String
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::media_type,
+                ?url: String,
+                ?file_id: String
+              ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock::source
           end
 
           type type_ = :document

@@ -23,6 +23,16 @@ module Anthropic
       sig { override.returns(T::Array[Anthropic::ErrorObject::Variants]) }
       def self.variants
       end
+
+      # Creates a new instance of the variant class whose `type` matches the given
+      # value, passing the remaining arguments to its constructor.
+      sig do
+        params(type: T.any(Symbol, String), message: String).returns(
+          Anthropic::ErrorObject::Variants
+        )
+      end
+      def self.new(type:, message:)
+      end
     end
   end
 end

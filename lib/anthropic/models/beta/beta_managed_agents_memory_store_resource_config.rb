@@ -32,11 +32,11 @@ module Anthropic
         optional :instructions, String, nil?: true
 
         # @!method initialize(memory_store_id:, type:, access: nil, instructions: nil)
+        #   A memory store attached to each session created from this deployment.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceConfig} for more
         #   details.
-        #
-        #   A memory store attached to each session created from this deployment.
         #
         #   @param memory_store_id [String] The memory store ID (memstore\_...). Must belong to the caller's organization
         #   and

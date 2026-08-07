@@ -80,6 +80,42 @@ module Anthropic
 
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams)]
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            #
+            # @param type [Symbol, String]
+            #
+            # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+            #
+            #   @option args [String, nil] :access_token Updated OAuth access token.
+            #
+            #   @option args [Time, nil] :expires_at A timestamp in RFC 3339 format
+            #
+            #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams, nil] :refresh Parameters for updating OAuth refresh token configuration.
+            #
+            #   @option args [String, nil] :token Updated static bearer token value.
+            #
+            #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams] :injection_location Updated injection location.
+            #
+            #   @option args [Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams, nil] :networking Updated networking scope. Full replacement.
+            #
+            #   @option args [String, nil] :secret_value Updated secret value.
+            #
+            # @raise [ArgumentError]
+            # @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams]
+            def self.new(type:, **args)
+              case type.to_sym
+              when :mcp_oauth
+                Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams.new(**args)
+              when :static_bearer
+                Anthropic::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams.new(**args)
+              when :environment_variable
+                Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams.new(**args)
+              else
+                raise ArgumentError, "unknown type: #{type}"
+              end
+            end
           end
         end
       end

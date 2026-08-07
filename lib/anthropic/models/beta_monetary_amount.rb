@@ -20,10 +20,10 @@ module Anthropic
       required :currency, enum: -> { Anthropic::BetaCurrency }
 
       # @!method initialize(amount:, currency:)
+      #   A monetary amount in a specific currency.
+      #
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::BetaMonetaryAmount} for more details.
-      #
-      #   A monetary amount in a specific currency.
       #
       #   @param amount [String] Amount in minor units of the currency, as an integer decimal string with no lead
       #

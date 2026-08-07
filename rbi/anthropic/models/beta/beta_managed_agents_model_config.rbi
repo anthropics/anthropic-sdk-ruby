@@ -151,6 +151,16 @@ module Anthropic
           end
           def self.variants
           end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(type: T.any(Symbol, String)).returns(
+              Anthropic::Beta::BetaManagedAgentsModelConfig::Effort::Variants
+            )
+          end
+          def self.new(type:)
+          end
         end
 
         # Inference speed mode. `fast` provides significantly faster output token

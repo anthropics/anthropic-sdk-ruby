@@ -27,12 +27,12 @@ module Anthropic
         optional :packages, -> { Anthropic::Beta::BetaPackagesParams }, nil?: true
 
         # @!method initialize(networking: nil, packages: nil, type: :cloud)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaCloudConfigParams} for more details.
-        #
         #   Request params for `cloud` environment configuration.
         #
         #   Fields default to null; on update, omitted fields preserve the existing value.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaCloudConfigParams} for more details.
         #
         #   @param networking [Anthropic::Models::Beta::BetaUnrestrictedNetwork, Anthropic::Models::Beta::BetaLimitedNetworkParams, nil] Network configuration policy. Omit on update to preserve the existing value.
         #
@@ -59,6 +59,35 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaUnrestrictedNetwork, Anthropic::Models::Beta::BetaLimitedNetworkParams)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::BetaCloudConfigParams::Networking} for more details.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [Boolean, nil] :allow_mcp_servers Permits outbound access to MCP server endpoints configured on the agent, beyond
+          #
+          #   @option args [Boolean, nil] :allow_package_managers Permits outbound access to public package registries (PyPI, npm, etc.) beyond th
+          #
+          #   @option args [Array<String>, nil] :allowed_hosts Specifies domains the container can reach.
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaUnrestrictedNetwork, Anthropic::Models::Beta::BetaLimitedNetworkParams]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :unrestricted
+              Anthropic::Beta::BetaUnrestrictedNetwork.new(**args)
+            when :limited
+              Anthropic::Beta::BetaLimitedNetworkParams.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
       end
     end

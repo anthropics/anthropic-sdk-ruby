@@ -19,11 +19,11 @@ module Anthropic
           optional :session_thread_id, String, nil?: true
 
           # @!method initialize(type:, session_thread_id: nil)
+          #   Parameters for sending an interrupt to pause the agent.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams}
           #   for more details.
-          #
-          #   Parameters for sending an interrupt to pause the agent.
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams::Type]
           #

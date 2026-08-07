@@ -11,6 +11,69 @@ module Anthropic
       extend Anthropic::Internal::Type::Union
 
       def self?.variants: -> ::Array[Anthropic::Models::text_citation]
+
+      def self.new:
+        (
+          type: :char_location | "char_location",
+          cited_text: String,
+          document_index: Integer,
+          document_title: String?,
+          end_char_index: Integer,
+          file_id: String?,
+          start_char_index: Integer
+        ) -> Anthropic::CitationCharLocation
+        | (
+          type: :page_location | "page_location",
+          cited_text: String,
+          document_index: Integer,
+          document_title: String?,
+          end_page_number: Integer,
+          file_id: String?,
+          start_page_number: Integer
+        ) -> Anthropic::CitationPageLocation
+        | (
+          type: :content_block_location | "content_block_location",
+          cited_text: String,
+          document_index: Integer,
+          document_title: String?,
+          end_block_index: Integer,
+          file_id: String?,
+          start_block_index: Integer
+        ) -> Anthropic::CitationContentBlockLocation
+        | (
+          type: :web_search_result_location | "web_search_result_location",
+          cited_text: String,
+          encrypted_index: String,
+          title: String?,
+          url: String
+        ) -> Anthropic::CitationsWebSearchResultLocation
+        | (
+          type: :search_result_location | "search_result_location",
+          cited_text: String,
+          end_block_index: Integer,
+          search_result_index: Integer,
+          source: String,
+          start_block_index: Integer,
+          title: String?
+        ) -> Anthropic::CitationsSearchResultLocation
+        | (
+          type: Symbol | String,
+          cited_text: String,
+          ?document_index: Integer,
+          ?document_title: String?,
+          ?end_char_index: Integer,
+          ?file_id: String?,
+          ?start_char_index: Integer,
+          ?end_page_number: Integer,
+          ?start_page_number: Integer,
+          ?end_block_index: Integer,
+          ?start_block_index: Integer,
+          ?encrypted_index: String,
+          ?title: String?,
+          ?url: String,
+          ?search_result_index: Integer,
+          ?source: String
+        ) -> Anthropic::Models::text_citation
     end
   end
 end

@@ -41,6 +41,19 @@ module Anthropic
             extend Anthropic::Internal::Type::Union
 
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::content]
+
+            def self.new:
+              (
+                type: :text | "text",
+                text: String
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock
+              | (
+                type: :redacted | "redacted"
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock
+              | (
+                type: Symbol | String,
+                ?text: String
+              ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::content
           end
 
           type type_ = :"agent.message"

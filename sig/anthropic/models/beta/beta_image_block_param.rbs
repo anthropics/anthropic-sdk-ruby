@@ -38,6 +38,28 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaImageBlockParam::source]
+
+          def self.new:
+            (
+              type: :base64 | "base64",
+              data: String,
+              media_type: Anthropic::Models::Beta::BetaBase64ImageSource::media_type
+            ) -> Anthropic::Beta::BetaBase64ImageSource
+            | (
+              type: :url | "url",
+              url: String
+            ) -> Anthropic::Beta::BetaURLImageSource
+            | (
+              type: :file | "file",
+              file_id: String
+            ) -> Anthropic::Beta::BetaFileImageSource
+            | (
+              type: Symbol | String,
+              ?data: String,
+              ?media_type: Anthropic::Models::Beta::BetaBase64ImageSource::media_type,
+              ?url: String,
+              ?file_id: String
+            ) -> Anthropic::Models::Beta::BetaImageBlockParam::source
         end
       end
     end

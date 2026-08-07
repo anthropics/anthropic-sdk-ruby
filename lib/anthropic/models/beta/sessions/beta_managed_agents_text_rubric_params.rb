@@ -18,11 +18,11 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsTextRubricParams::Type }
 
           # @!method initialize(content:, type:)
+          #   Rubric content provided inline as text.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubricParams} for more
           #   details.
-          #
-          #   Rubric content provided inline as text.
           #
           #   @param content [String] Rubric content. Plain text or markdown — the grader treats it as freeform text.
           #

@@ -41,6 +41,19 @@ module Anthropic
             extend Anthropic::Internal::Type::Union
 
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::networking]
+
+            def self.new:
+              (
+                type: :unrestricted | "unrestricted"
+              ) -> Anthropic::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse
+              | (
+                type: :limited | "limited",
+                allowed_hosts: ::Array[String]
+              ) -> Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingResponse
+              | (
+                type: Symbol | String,
+                ?allowed_hosts: ::Array[String]
+              ) -> Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::networking
           end
 
           type type_ = :environment_variable

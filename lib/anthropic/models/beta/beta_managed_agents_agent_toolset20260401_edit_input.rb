@@ -30,12 +30,12 @@ module Anthropic
         optional :replace_all, Anthropic::Internal::Type::Boolean
 
         # @!method initialize(file_path:, new_string:, old_string:, replace_all: nil)
+        #   Input payload for the `edit` tool. Performs a string replacement in the named
+        #   file; by default `old_string` must occur exactly once.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401EditInput} for
         #   more details.
-        #
-        #   Input payload for the `edit` tool. Performs a string replacement in the named
-        #   file; by default `old_string` must occur exactly once.
         #
         #   @param file_path [String] Path of the file to edit.
         #

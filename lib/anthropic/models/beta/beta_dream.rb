@@ -79,14 +79,14 @@ module Anthropic
         required :usage, -> { Anthropic::Beta::BetaDreamUsage }
 
         # @!method initialize(id:, archived_at:, created_at:, ended_at:, error:, inputs:, instructions:, model:, outputs:, session_id:, status:, type:, usage:)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaDream} for more details.
-        #
         #   An asynchronous memory-consolidation job that reads a memory store plus a set of
         #   session transcripts and writes consolidated memories into a new output memory
         #   store. The Dreams API is in research preview: the request and response shapes
         #   are volatile and may change without the deprecation period that applies to
         #   generally-available endpoints.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaDream} for more details.
         #
         #   @param id [String]
         #

@@ -60,12 +60,12 @@ module Anthropic
         optional :metadata, Anthropic::Internal::Type::HashOf[String]
 
         # @!method initialize(id:, created_at:, name:, type:, updated_at:, archived_at: nil, description: nil, metadata: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaManagedAgentsMemoryStore} for more details.
-        #
         #   A `memory_store`: a named container for agent memories, scoped to a workspace.
         #   Attach a store to a session via `resources[]` to mount it as a directory the
         #   agent can read and write.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaManagedAgentsMemoryStore} for more details.
         #
         #   @param id [String] Unique identifier for the memory store (a `memstore_...` tagged ID). Use this wh
         #

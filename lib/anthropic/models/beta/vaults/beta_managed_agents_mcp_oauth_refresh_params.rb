@@ -76,6 +76,30 @@ module Anthropic
 
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneParam, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicParam, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostParam)]
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            #
+            # @param type [Symbol, String]
+            #
+            # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+            #
+            #   @option args [String] :client_secret OAuth client secret.
+            #
+            # @raise [ArgumentError]
+            # @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneParam, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicParam, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostParam]
+            def self.new(type:, **args)
+              case type.to_sym
+              when :none
+                Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneParam.new(**args)
+              when :client_secret_basic
+                Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicParam.new(**args)
+              when :client_secret_post
+                Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostParam.new(**args)
+              else
+                raise ArgumentError, "unknown type: #{type}"
+              end
+            end
           end
         end
       end

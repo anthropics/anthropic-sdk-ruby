@@ -114,12 +114,12 @@ module Anthropic
         optional :budget, -> { Anthropic::Beta::BetaManagedAgentsBudgetLimit }, nil?: true
 
         # @!method initialize(id:, agent:, archived_at:, created_at:, description:, environment_id:, initial_events:, metadata:, name:, paused_reason:, resources:, schedule:, status:, type:, updated_at:, vault_ids:, budget: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaManagedAgentsDeployment} for more details.
-        #
         #   A deployment is a configured instance of an agent — it binds the agent to
         #   everything needed to run it autonomously: an environment, credentials, initial
         #   events, and an optional schedule.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaManagedAgentsDeployment} for more details.
         #
         #   @param id [String] Unique identifier for this deployment.
         #

@@ -81,10 +81,10 @@ module Anthropic
         required :type, const: :refusal
 
         # @!method initialize(category:, explanation:, fallback_credit_token:, fallback_has_prefill_claim:, recommended_model:, type: :refusal)
+        #   Structured information about a refusal.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaRefusalStopDetails} for more details.
-        #
-        #   Structured information about a refusal.
         #
         #   @param category [Symbol, Anthropic::Models::Beta::BetaRefusalStopDetails::Category, nil] The policy category that triggered a refusal.
         #

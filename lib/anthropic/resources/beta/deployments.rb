@@ -4,10 +4,10 @@ module Anthropic
   module Resources
     class Beta
       class Deployments
+        # Create Deployment
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::DeploymentCreateParams} for more details.
-        #
-        # Create Deployment
         #
         # @overload create(agent:, environment_id:, initial_events:, name:, budget: nil, description: nil, metadata: nil, resources: nil, schedule: nil, vault_ids: nil, betas: nil, request_options: {})
         #
@@ -75,10 +75,10 @@ module Anthropic
           )
         end
 
+        # Update Deployment
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::DeploymentUpdateParams} for more details.
-        #
-        # Update Deployment
         #
         # @overload update(deployment_id, agent: nil, budget: nil, description: nil, environment_id: nil, initial_events: nil, metadata: nil, name: nil, resources: nil, schedule: nil, vault_ids: nil, betas: nil, request_options: {})
         #
@@ -124,10 +124,10 @@ module Anthropic
           )
         end
 
+        # List Deployments
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::DeploymentListParams} for more details.
-        #
-        # List Deployments
         #
         # @overload list(agent_id: nil, created_at_gte: nil, created_at_lte: nil, include_archived: nil, limit: nil, page: nil, status: nil, betas: nil, request_options: {})
         #

@@ -50,10 +50,10 @@ module Anthropic
         required :type, const: :message
 
         # @!method initialize(cache_creation:, cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, model:, output_tokens:, type: :message)
+        #   Token usage for a sampling iteration.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaMessageIterationUsage} for more details.
-        #
-        #   Token usage for a sampling iteration.
         #
         #   @param cache_creation [Anthropic::Models::Beta::BetaCacheCreation, nil] Breakdown of cached tokens by TTL
         #

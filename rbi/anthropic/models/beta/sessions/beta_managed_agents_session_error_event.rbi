@@ -115,6 +115,40 @@ module Anthropic
             end
             def self.variants
             end
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            sig do
+              params(
+                type: T.any(Symbol, String),
+                message: String,
+                retry_status:
+                  T.any(
+                    Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal::OrHash
+                  ),
+                mcp_server_name: String,
+                credential_id: String,
+                vault_id: String
+              ).returns(
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Variants
+              )
+            end
+            def self.new(
+              type:,
+              # Human-readable error description.
+              message:,
+              # What the client should do next in response to this error.
+              retry_status:,
+              # Name of the MCP server that failed to connect.
+              mcp_server_name: nil,
+              # ID of the affected credential.
+              credential_id: nil,
+              # ID of the vault containing the affected credential.
+              vault_id: nil
+            )
+            end
           end
 
           module Type

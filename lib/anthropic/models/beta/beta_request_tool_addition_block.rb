@@ -24,13 +24,13 @@ module Anthropic
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!method initialize(tool:, cache_control: nil, type: :tool_addition)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaRequestToolAdditionBlock} for more details.
-        #
         #   Mid-conversation directive to surface a declared tool.
         #
         #   `tool` references a tool (or MCP toolset) by name from the request's `tools`; it
         #   is offered to the model from this point in the conversation onward.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaRequestToolAdditionBlock} for more details.
         #
         #   @param tool [Anthropic::Models::Beta::BetaToolChangeToolReference, Anthropic::Models::Beta::BetaToolChangeMCPToolReference, Anthropic::Models::Beta::BetaToolChangeMCPToolsetReference] Reference to a single tool the caller declared directly in
         #
@@ -63,6 +63,32 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaToolChangeToolReference, Anthropic::Models::Beta::BetaToolChangeMCPToolReference, Anthropic::Models::Beta::BetaToolChangeMCPToolsetReference)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [String] :name
+          #
+          #   @option args [String] :server_name
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaToolChangeToolReference, Anthropic::Models::Beta::BetaToolChangeMCPToolReference, Anthropic::Models::Beta::BetaToolChangeMCPToolsetReference]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :tool_reference
+              Anthropic::Beta::BetaToolChangeToolReference.new(**args)
+            when :mcp_tool_reference
+              Anthropic::Beta::BetaToolChangeMCPToolReference.new(**args)
+            when :mcp_toolset_reference
+              Anthropic::Beta::BetaToolChangeMCPToolsetReference.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
       end
     end

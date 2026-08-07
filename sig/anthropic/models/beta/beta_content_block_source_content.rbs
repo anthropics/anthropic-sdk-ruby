@@ -11,6 +11,26 @@ module Anthropic
         extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_content_block_source_content]
+
+        def self.new:
+          (
+            type: :text | "text",
+            text: String,
+            ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+            ?citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?
+          ) -> Anthropic::Beta::BetaTextBlockParam
+          | (
+            type: :image | "image",
+            source: Anthropic::Models::Beta::BetaImageBlockParam::source,
+            ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+          ) -> Anthropic::Beta::BetaImageBlockParam
+          | (
+            type: Symbol | String,
+            ?text: String,
+            ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+            ?citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?,
+            ?source: Anthropic::Models::Beta::BetaImageBlockParam::source
+          ) -> Anthropic::Models::Beta::beta_content_block_source_content
       end
     end
   end

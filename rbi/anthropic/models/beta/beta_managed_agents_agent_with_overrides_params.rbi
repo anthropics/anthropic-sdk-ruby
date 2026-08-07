@@ -319,6 +319,58 @@ module Anthropic
           end
           def self.variants
           end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              configs:
+                T.any(
+                  T::Array[
+                    Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams::OrHash
+                  ],
+                  T::Array[
+                    Anthropic::Beta::BetaManagedAgentsMCPToolConfigParams::OrHash
+                  ]
+                ),
+              default_config:
+                T.any(
+                  T.nilable(
+                    Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams::OrHash
+                  ),
+                  T.nilable(
+                    Anthropic::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams::OrHash
+                  )
+                ),
+              mcp_server_name: String,
+              description: String,
+              input_schema:
+                Anthropic::Beta::BetaManagedAgentsCustomToolInputSchema::OrHash,
+              name: String
+            ).returns(
+              Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::Tool::Variants
+            )
+          end
+          def self.new(
+            type:,
+            # Per-tool configuration overrides.
+            configs: nil,
+            # Default configuration for all tools in a toolset.
+            default_config: nil,
+            # Name of the MCP server. Must match a server name from the mcp_servers array.
+            # 1-255 characters.
+            mcp_server_name: nil,
+            # Description of what the tool does, shown to the agent to help it decide when to
+            # use the tool.
+            description: nil,
+            # JSON Schema for custom tool input parameters.
+            input_schema: nil,
+            # Unique name for the tool. 1-128 characters; letters, digits, underscores, and
+            # hyphens.
+            name: nil
+          )
+          end
         end
       end
     end

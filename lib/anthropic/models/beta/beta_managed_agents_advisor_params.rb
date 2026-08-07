@@ -17,12 +17,12 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsAdvisorParams::Type }
 
         # @!method initialize(model:, type:)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaManagedAgentsAdvisorParams} for more details.
-        #
         #   Platform advisor roster entry: a model the session's primary thread may consult
         #   mid-turn. At most one per roster; the entry occupies the roster name
         #   `anthropic.advisor`.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaManagedAgentsAdvisorParams} for more details.
         #
         #   @param model [String] A Claude model id. The model must be permitted as an advisor for this agent's mo
         #

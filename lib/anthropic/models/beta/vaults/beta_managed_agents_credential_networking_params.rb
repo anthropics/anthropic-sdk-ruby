@@ -21,6 +21,32 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredentialNetworkingParams}
+          # for more details.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [Array<String>] :allowed_hosts Hostnames on which the secret will be substituted. Each entry is a bare hostname
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :unrestricted
+              Anthropic::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams.new(**args)
+            when :limited
+              Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
       end
     end

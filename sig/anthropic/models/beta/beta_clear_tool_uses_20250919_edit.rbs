@@ -70,6 +70,20 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaClearToolUses20250919Edit::trigger]
+
+          def self.new:
+            (
+              type: :input_tokens | "input_tokens",
+              value: Integer
+            ) -> Anthropic::Beta::BetaInputTokensTrigger
+            | (
+              type: :tool_uses | "tool_uses",
+              value: Integer
+            ) -> Anthropic::Beta::BetaToolUsesTrigger
+            | (
+              type: Symbol | String,
+              value: Integer
+            ) -> Anthropic::Models::Beta::BetaClearToolUses20250919Edit::trigger
         end
       end
     end

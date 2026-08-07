@@ -37,6 +37,20 @@ module Anthropic
             extend Anthropic::Internal::Type::Union
 
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::retry_status]
+
+            def self.new:
+              (
+                type: :retrying | "retrying"
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying
+              | (
+                type: :exhausted | "exhausted"
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted
+              | (
+                type: :terminal | "terminal"
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal
+              | (
+                type: Symbol | String
+              ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::retry_status
           end
 
           type type_ = :model_request_failed_error

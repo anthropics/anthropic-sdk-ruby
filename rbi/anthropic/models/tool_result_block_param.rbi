@@ -111,6 +111,66 @@ module Anthropic
           end
           def self.variants
           end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              text: String,
+              cache_control:
+                T.nilable(Anthropic::CacheControlEphemeral::OrHash),
+              citations:
+                T.any(
+                  T.nilable(
+                    T::Array[
+                      T.any(
+                        Anthropic::CitationCharLocationParam::OrHash,
+                        Anthropic::CitationPageLocationParam::OrHash,
+                        Anthropic::CitationContentBlockLocationParam::OrHash,
+                        Anthropic::CitationWebSearchResultLocationParam::OrHash,
+                        Anthropic::CitationSearchResultLocationParam::OrHash
+                      )
+                    ]
+                  ),
+                  Anthropic::CitationsConfigParam::OrHash,
+                  T.nilable(Anthropic::CitationsConfigParam::OrHash)
+                ),
+              source:
+                T.any(
+                  T.any(
+                    Anthropic::Base64ImageSource::OrHash,
+                    Anthropic::URLImageSource::OrHash
+                  ),
+                  String,
+                  T.any(
+                    Anthropic::Base64PDFSource::OrHash,
+                    Anthropic::PlainTextSource::OrHash,
+                    Anthropic::ContentBlockSource::OrHash,
+                    Anthropic::URLPDFSource::OrHash
+                  )
+                ),
+              content: T::Array[Anthropic::TextBlockParam::OrHash],
+              title: T.any(String, T.nilable(String)),
+              context: T.nilable(String),
+              tool_name: String
+            ).returns(
+              Anthropic::ToolResultBlockParam::Content::Content::Variants
+            )
+          end
+          def self.new(
+            type:,
+            text: nil,
+            # Create a cache control breakpoint at this content block.
+            cache_control: nil,
+            citations: nil,
+            source: nil,
+            content: nil,
+            title: nil,
+            context: nil,
+            tool_name: nil
+          )
+          end
         end
 
         sig do

@@ -12,6 +12,26 @@ module Anthropic
         extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_thinking_config_param]
+
+        def self.new:
+          (
+            type: :enabled | "enabled",
+            budget_tokens: Integer,
+            ?display_: Anthropic::Models::Beta::BetaThinkingConfigEnabled::display_?
+          ) -> Anthropic::Beta::BetaThinkingConfigEnabled
+          | (
+            type: :disabled | "disabled"
+          ) -> Anthropic::Beta::BetaThinkingConfigDisabled
+          | (
+            type: :adaptive | "adaptive",
+            ?display_: Anthropic::Models::Beta::BetaThinkingConfigAdaptive::display_?
+          ) -> Anthropic::Beta::BetaThinkingConfigAdaptive
+          | (
+            type: Symbol | String,
+            ?budget_tokens: Integer,
+            ?display_: Anthropic::Models::Beta::BetaThinkingConfigEnabled::display_?
+            | Anthropic::Models::Beta::BetaThinkingConfigAdaptive::display_?
+          ) -> Anthropic::Models::Beta::beta_thinking_config_param
       end
     end
   end

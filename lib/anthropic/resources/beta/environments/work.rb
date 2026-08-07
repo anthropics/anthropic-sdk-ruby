@@ -40,15 +40,15 @@ module Anthropic
             )
           end
 
-          # Some parameter documentations has been truncated, see
-          # {Anthropic::Models::Beta::Environments::WorkUpdateParams} for more details.
-          #
           # Note: these endpoints are called automatically by the pre-built environment
           # worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted
           # sandbox environments. They are included here as a reference; you do not need to
           # invoke them directly.
           #
           # Update work item metadata with merge semantics.
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Environments::WorkUpdateParams} for more details.
           #
           # @overload update(work_id, environment_id:, metadata:, betas: nil, request_options: {})
           #
@@ -155,15 +155,15 @@ module Anthropic
             )
           end
 
-          # Some parameter documentations has been truncated, see
-          # {Anthropic::Models::Beta::Environments::WorkHeartbeatParams} for more details.
-          #
           # Note: these endpoints are called automatically by the pre-built environment
           # worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted
           # sandbox environments. They are included here as a reference; you do not need to
           # invoke them directly.
           #
           # Record a heartbeat for a work item to maintain the lease.
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Environments::WorkHeartbeatParams} for more details.
           #
           # @overload heartbeat(work_id, environment_id:, desired_ttl_seconds: nil, expected_last_heartbeat: nil, betas: nil, request_options: {})
           #
@@ -200,15 +200,15 @@ module Anthropic
             )
           end
 
-          # Some parameter documentations has been truncated, see
-          # {Anthropic::Models::Beta::Environments::WorkPollParams} for more details.
-          #
           # Note: these endpoints are called automatically by the pre-built environment
           # worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted
           # sandbox environments. They are included here as a reference; you do not need to
           # invoke them directly.
           #
           # Long poll for work items in the queue.
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Environments::WorkPollParams} for more details.
           #
           # @overload poll(environment_id, block_ms: nil, reclaim_older_than_ms: nil, betas: nil, anthropic_worker_id: nil, request_options: {})
           #

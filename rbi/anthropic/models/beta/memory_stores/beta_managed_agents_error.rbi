@@ -34,6 +34,26 @@ module Anthropic
           end
           def self.variants
           end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              message: String,
+              conflicting_memory_id: String,
+              conflicting_path: String
+            ).returns(
+              Anthropic::Beta::MemoryStores::BetaManagedAgentsError::Variants
+            )
+          end
+          def self.new(
+            type:,
+            message: nil,
+            conflicting_memory_id: nil,
+            conflicting_path: nil
+          )
+          end
         end
       end
     end

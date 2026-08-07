@@ -36,6 +36,60 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSystemMessageEventParams)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Sessions::BetaManagedAgentsEventParams} for more
+          # details.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock>, Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock>, Array<Anthropic::Models::Beta::BetaManagedAgentsSystemContentBlock>] :content Array of content blocks for the user message.
+          #
+          #   @option args [String, nil] :session_thread_id If absent, interrupts every non-archived thread in a multiagent session (or the
+          #
+          #   @option args [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::Result] :result UserToolConfirmationResult enum
+          #
+          #   @option args [String] :tool_use_id The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
+          #
+          #   @option args [String, nil] :deny_message Optional message providing context for a 'deny' decision. Only allowed when resu
+          #
+          #   @option args [String] :custom_tool_use_id The id of the `agent.custom_tool_use` event this result corresponds to, which ca
+          #
+          #   @option args [Boolean, nil] :is_error Whether the tool execution resulted in an error.
+          #
+          #   @option args [String] :description What the agent should produce. This is the task specification.
+          #
+          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubricParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubricParams] :rubric Rubric for grading the quality of an outcome.
+          #
+          #   @option args [Integer, nil] :max_iterations Eval→revision cycles before giving up. Default 3, max 20.
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSystemMessageEventParams]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :"user.message"
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEventParams.new(**args)
+            when :"user.interrupt"
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams.new(**args)
+            when :"user.tool_confirmation"
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams.new(**args)
+            when :"user.custom_tool_result"
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams.new(**args)
+            when :"user.define_outcome"
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams.new(**args)
+            when :"user.tool_result"
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams.new(**args)
+            when :"system.message"
+              Anthropic::Beta::Sessions::BetaManagedAgentsSystemMessageEventParams.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
       end
     end

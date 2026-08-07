@@ -5,9 +5,6 @@ module Anthropic
     class Beta
       class Messages
         class Batches
-          # Some parameter documentations has been truncated, see
-          # {Anthropic::Models::Beta::Messages::BatchCreateParams} for more details.
-          #
           # Send a batch of Message creation requests.
           #
           # The Message Batches API can be used to process multiple Messages API requests at
@@ -16,6 +13,9 @@ module Anthropic
           #
           # Learn more about the Message Batches API in our
           # [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Messages::BatchCreateParams} for more details.
           #
           # @overload create(requests:, betas: nil, user_profile_id: nil, request_options: {})
           #
@@ -72,14 +72,14 @@ module Anthropic
             )
           end
 
-          # Some parameter documentations has been truncated, see
-          # {Anthropic::Models::Beta::Messages::BatchListParams} for more details.
-          #
           # List all Message Batches within a Workspace. Most recently created batches are
           # returned first.
           #
           # Learn more about the Message Batches API in our
           # [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Messages::BatchListParams} for more details.
           #
           # @overload list(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {})
           #

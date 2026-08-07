@@ -43,12 +43,12 @@ module Anthropic
           optional :to_agent_name, String, nil?: true
 
           # @!method initialize(id:, content:, processed_at:, to_session_thread_id:, type:, to_agent_name: nil)
+          #   Observability event emitted to the sender's output stream when an agent-to-agent
+          #   message is sent.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent}
           #   for more details.
-          #
-          #   Observability event emitted to the sender's output stream when an agent-to-agent
-          #   message is sent.
           #
           #   @param id [String] Unique identifier for this event.
           #
@@ -82,6 +82,38 @@ module Anthropic
 
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock)]
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            #
+            # @param type [Symbol, String]
+            #
+            # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+            #
+            #   @option args [String] :text The text content.
+            #
+            #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64ImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileDocumentSource] :source Union type for image source variants.
+            #
+            #   @option args [String, nil] :context Additional context about the document for the model.
+            #
+            #   @option args [String, nil] :title The title of the document.
+            #
+            # @raise [ArgumentError]
+            # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock]
+            def self.new(type:, **args)
+              case type.to_sym
+              when :text
+                Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock.new(**args)
+              when :image
+                Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock.new(**args)
+              when :document
+                Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock.new(**args)
+              when :redacted
+                Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock.new(**args)
+              else
+                raise ArgumentError, "unknown type: #{type}"
+              end
+            end
           end
 
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent#type

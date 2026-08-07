@@ -83,6 +83,30 @@ module Anthropic
 
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsBranchCheckout, Anthropic::Models::Beta::BetaManagedAgentsCommitCheckout)]
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            #
+            # @param type [Symbol, String]
+            #
+            # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+            #
+            #   @option args [String] :name Branch name to check out.
+            #
+            #   @option args [String] :sha Full commit SHA to check out.
+            #
+            # @raise [ArgumentError]
+            # @return [Anthropic::Models::Beta::BetaManagedAgentsBranchCheckout, Anthropic::Models::Beta::BetaManagedAgentsCommitCheckout]
+            def self.new(type:, **args)
+              case type.to_sym
+              when :branch
+                Anthropic::Beta::BetaManagedAgentsBranchCheckout.new(**args)
+              when :commit
+                Anthropic::Beta::BetaManagedAgentsCommitCheckout.new(**args)
+              else
+                raise ArgumentError, "unknown type: #{type}"
+              end
+            end
           end
         end
       end

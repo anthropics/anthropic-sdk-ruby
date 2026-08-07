@@ -37,15 +37,15 @@ module Anthropic
         optional :thinking, union: -> { Anthropic::Beta::BetaFallbackParam::Thinking }, nil?: true
 
         # @!method initialize(model:, max_tokens: nil, output_config: nil, speed: nil, thinking: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaFallbackParam} for more details.
-        #
         #   One entry in the `fallbacks` chain on a `/v1/messages` request.
         #
         #   `model` is required. The override fields (`max_tokens`, `thinking`,
         #   `output_config`, and `speed`) set the corresponding parameter for this attempt
         #   only and are validated as if the request were made to `model`. Any other key is
         #   rejected at parse time.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaFallbackParam} for more details.
         #
         #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
         #
@@ -86,6 +86,35 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::BetaFallbackParam::Thinking} for more details.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [Integer] :budget_tokens Determines how many tokens Claude can use for its internal reasoning process. La
+          #
+          #   @option args [Symbol, Anthropic::Models::Beta::BetaThinkingConfigEnabled::Display, nil, Symbol, Anthropic::Models::Beta::BetaThinkingConfigAdaptive::Display, nil] :display_ Controls how thinking content appears in the response. When set to `summarized`,
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :enabled
+              Anthropic::Beta::BetaThinkingConfigEnabled.new(**args)
+            when :disabled
+              Anthropic::Beta::BetaThinkingConfigDisabled.new(**args)
+            when :adaptive
+              Anthropic::Beta::BetaThinkingConfigAdaptive.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
       end
     end

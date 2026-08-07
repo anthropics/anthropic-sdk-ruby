@@ -37,6 +37,23 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaCloudConfigParams::networking]
+
+          def self.new:
+            (
+              type: :unrestricted | "unrestricted"
+            ) -> Anthropic::Beta::BetaUnrestrictedNetwork
+            | (
+              type: :limited | "limited",
+              ?allow_mcp_servers: bool?,
+              ?allow_package_managers: bool?,
+              ?allowed_hosts: ::Array[String]?
+            ) -> Anthropic::Beta::BetaLimitedNetworkParams
+            | (
+              type: Symbol | String,
+              ?allow_mcp_servers: bool?,
+              ?allow_package_managers: bool?,
+              ?allowed_hosts: ::Array[String]?
+            ) -> Anthropic::Models::Beta::BetaCloudConfigParams::networking
         end
       end
     end

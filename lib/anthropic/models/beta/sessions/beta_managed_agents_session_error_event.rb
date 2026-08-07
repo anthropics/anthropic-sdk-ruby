@@ -31,11 +31,11 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Type }
 
           # @!method initialize(id:, error:, processed_at:, type:)
+          #   An error event indicating a problem occurred during session execution.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent} for more
           #   details.
-          #
-          #   An error event indicating a problem occurred during session execution.
           #
           #   @param id [String] Unique identifier for this event.
           #
@@ -86,6 +86,48 @@ module Anthropic
 
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError)]
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            #
+            # @param type [Symbol, String]
+            #
+            # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+            #
+            #   @option args [String] :message Human-readable error description.
+            #
+            #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal] :retry_status What the client should do next in response to this error.
+            #
+            #   @option args [String] :mcp_server_name Name of the MCP server that failed to connect.
+            #
+            #   @option args [String] :credential_id ID of the affected credential.
+            #
+            #   @option args [String] :vault_id ID of the vault containing the affected credential.
+            #
+            # @raise [ArgumentError]
+            # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError]
+            def self.new(type:, **args)
+              case type.to_sym
+              when :unknown_error
+                Anthropic::Beta::Sessions::BetaManagedAgentsUnknownError.new(**args)
+              when :model_overloaded_error
+                Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError.new(**args)
+              when :model_rate_limited_error
+                Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedError.new(**args)
+              when :model_request_failed_error
+                Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError.new(**args)
+              when :mcp_connection_failed_error
+                Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError.new(**args)
+              when :mcp_authentication_failed_error
+                Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError.new(**args)
+              when :billing_error
+                Anthropic::Beta::Sessions::BetaManagedAgentsBillingError.new(**args)
+              when :credential_host_unreachable_error
+                Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError.new(**args)
+              else
+                raise ArgumentError, "unknown type: #{type}"
+              end
+            end
           end
 
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent#type

@@ -31,6 +31,34 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaDiagnostics::cache_miss_reason]
+
+          def self.new:
+            (
+              type: :model_changed | "model_changed",
+              cache_missed_input_tokens: Integer
+            ) -> Anthropic::Beta::BetaCacheMissModelChanged
+            | (
+              type: :system_changed | "system_changed",
+              cache_missed_input_tokens: Integer
+            ) -> Anthropic::Beta::BetaCacheMissSystemChanged
+            | (
+              type: :tools_changed | "tools_changed",
+              cache_missed_input_tokens: Integer
+            ) -> Anthropic::Beta::BetaCacheMissToolsChanged
+            | (
+              type: :messages_changed | "messages_changed",
+              cache_missed_input_tokens: Integer
+            ) -> Anthropic::Beta::BetaCacheMissMessagesChanged
+            | (
+              type: :previous_message_not_found | "previous_message_not_found"
+            ) -> Anthropic::Beta::BetaCacheMissPreviousMessageNotFound
+            | (
+              type: :unavailable | "unavailable"
+            ) -> Anthropic::Beta::BetaCacheMissUnavailable
+            | (
+              type: Symbol | String,
+              ?cache_missed_input_tokens: Integer
+            ) -> Anthropic::Models::Beta::BetaDiagnostics::cache_miss_reason
         end
       end
     end

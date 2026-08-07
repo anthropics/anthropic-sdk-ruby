@@ -47,6 +47,71 @@ module Anthropic
             extend Anthropic::Internal::Type::Union
 
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error]
+
+            def self.new:
+              (
+                type: :unknown_error | "unknown_error",
+                message: String,
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsUnknownError
+              | (
+                type: :model_overloaded_error | "model_overloaded_error",
+                message: String,
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError
+              | (
+                type: :model_rate_limited_error | "model_rate_limited_error",
+                message: String,
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedError
+              | (
+                type: :model_request_failed_error
+                | "model_request_failed_error",
+                message: String,
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsModelRequestFailedError
+              | (
+                type: :mcp_connection_failed_error
+                | "mcp_connection_failed_error",
+                mcp_server_name: String,
+                message: String,
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError
+              | (
+                type: :mcp_authentication_failed_error
+                | "mcp_authentication_failed_error",
+                mcp_server_name: String,
+                message: String,
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError
+              | (
+                type: :billing_error | "billing_error",
+                message: String,
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError::retry_status
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsBillingError
+              | (
+                type: :credential_host_unreachable_error
+                | "credential_host_unreachable_error",
+                credential_id: String,
+                message: String,
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::retry_status,
+                vault_id: String
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError
+              | (
+                type: Symbol | String,
+                message: String,
+                retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError::retry_status
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError::retry_status,
+                ?mcp_server_name: String,
+                ?credential_id: String,
+                ?vault_id: String
+              ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error
           end
 
           type type_ = :"session.error"

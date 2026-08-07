@@ -7,10 +7,10 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::Agents::Versions]
         attr_reader :versions
 
+        # Create Agent
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::AgentCreateParams} for more details.
-        #
-        # Create Agent
         #
         # @overload create(model:, name:, description: nil, mcp_servers: nil, metadata: nil, multiagent: nil, skills: nil, system_: nil, tools: nil, betas: nil, request_options: {})
         #
@@ -52,10 +52,10 @@ module Anthropic
           )
         end
 
+        # Get Agent
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::AgentRetrieveParams} for more details.
-        #
-        # Get Agent
         #
         # @overload retrieve(agent_id, version: nil, betas: nil, request_options: {})
         #
@@ -84,10 +84,10 @@ module Anthropic
           )
         end
 
+        # Update Agent
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::AgentUpdateParams} for more details.
-        #
-        # Update Agent
         #
         # @overload update(agent_id, description: nil, mcp_servers: nil, metadata: nil, model: nil, multiagent: nil, name: nil, skills: nil, system_: nil, tools: nil, version: nil, betas: nil, request_options: {})
         #

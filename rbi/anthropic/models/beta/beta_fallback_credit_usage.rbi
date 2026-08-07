@@ -82,6 +82,36 @@ module Anthropic
           end
           def self.variants
           end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              reason:
+                Anthropic::Beta::BetaFallbackCreditNotApplied::Reason::OrSymbol,
+              remove_to_redeem: T.nilable(T::Array[String])
+            ).returns(
+              Anthropic::Beta::BetaFallbackCreditUsage::Status::Variants
+            )
+          end
+          def self.new(
+            type:,
+            # Why the reprice was not applied.
+            #
+            # A closed enum; additions to the redemption-check vocabulary arrive as deliberate
+            # schema updates.
+            reason: nil,
+            # Request fields to remove before retrying, so the retry can redeem this token.
+            #
+            # Present exactly when `reason` is `variant_fields_present` — never null, never an
+            # empty array; absent otherwise. Fields are named only from your own request, and
+            # only after the sealed variant hash matched. A served best-effort retry has
+            # already been billed at normal price; nothing redeems retroactively, but a
+            # corrected re-send inside the token's five-minute window can still redeem.
+            remove_to_redeem: nil
+          )
+          end
         end
       end
     end

@@ -17,6 +17,30 @@ module Anthropic
 
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaDreamMemoryStoreInput, Anthropic::Models::Beta::BetaDreamSessionsInput)]
+
+        # Creates a new instance of the variant class whose `type` matches the given
+        # value, passing the remaining arguments to its constructor.
+        #
+        # @param type [Symbol, String]
+        #
+        # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+        #
+        #   @option args [String] :memory_store_id
+        #
+        #   @option args [Array<String>] :session_ids
+        #
+        # @raise [ArgumentError]
+        # @return [Anthropic::Models::Beta::BetaDreamMemoryStoreInput, Anthropic::Models::Beta::BetaDreamSessionsInput]
+        def self.new(type:, **args)
+          case type.to_sym
+          when :memory_store
+            Anthropic::Beta::BetaDreamMemoryStoreInput.new(**args)
+          when :sessions
+            Anthropic::Beta::BetaDreamSessionsInput.new(**args)
+          else
+            raise ArgumentError, "unknown type: #{type}"
+          end
+        end
       end
     end
 

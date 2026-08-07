@@ -43,11 +43,11 @@ module Anthropic
         optional :strict, Anthropic::Internal::Type::Boolean
 
         # @!method initialize(allowed_callers: nil, cache_control: nil, defer_loading: nil, strict: nil, name: :code_execution, type: :code_execution_20260120)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaCodeExecutionTool20260120} for more details.
-        #
         #   Code execution tool with REPL state persistence (daemon mode + gVisor
         #   checkpoint).
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaCodeExecutionTool20260120} for more details.
         #
         #   @param allowed_callers [Array<Symbol, Anthropic::Models::Beta::BetaCodeExecutionTool20260120::AllowedCaller>]
         #

@@ -97,6 +97,30 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkill, Anthropic::Models::Beta::BetaManagedAgentsCustomSkill)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [String] :skill_id
+          #
+          #   @option args [String] :version
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkill, Anthropic::Models::Beta::BetaManagedAgentsCustomSkill]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :anthropic
+              Anthropic::Beta::BetaManagedAgentsAnthropicSkill.new(**args)
+            when :custom
+              Anthropic::Beta::BetaManagedAgentsCustomSkill.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
 
         # Union type for tool configurations returned in API responses.
@@ -114,6 +138,40 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401, Anthropic::Models::Beta::BetaManagedAgentsMCPToolset, Anthropic::Models::Beta::BetaManagedAgentsCustomTool)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfig>, Array<Anthropic::Models::Beta::BetaManagedAgentsMCPToolConfig>] :configs
+          #
+          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsAgentToolsetDefaultConfig, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetDefaultConfig] :default_config Resolved default configuration for agent tools.
+          #
+          #   @option args [String] :mcp_server_name
+          #
+          #   @option args [String] :description
+          #
+          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsCustomToolInputSchema] :input_schema JSON Schema for custom tool input parameters.
+          #
+          #   @option args [String] :name
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401, Anthropic::Models::Beta::BetaManagedAgentsMCPToolset, Anthropic::Models::Beta::BetaManagedAgentsCustomTool]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :agent_toolset_20260401
+              Anthropic::Beta::BetaManagedAgentsAgentToolset20260401.new(**args)
+            when :mcp_toolset
+              Anthropic::Beta::BetaManagedAgentsMCPToolset.new(**args)
+            when :custom
+              Anthropic::Beta::BetaManagedAgentsCustomTool.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
 
         # @see Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent#type
