@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.61.0 (2026-08-07)
+
+Full Changelog: [v1.60.0...v1.61.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.60.0...v1.61.0)
+
+### Features
+
+* **api:** add support for session budgets, advisor tool, pinned inference location and skills auto-loading from GitHub ([3d294f2](https://github.com/anthropics/anthropic-sdk-ruby/commit/3d294f276ed76868fd62159a72e3bbfeca69c0a9))
+
 ## 1.60.0 (2026-08-06)
 
 Full Changelog: [v1.59.0...v1.60.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.59.0...v1.60.0)
