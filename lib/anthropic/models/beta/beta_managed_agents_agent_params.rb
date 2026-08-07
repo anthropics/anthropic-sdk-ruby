@@ -23,11 +23,11 @@ module Anthropic
         optional :version, Integer
 
         # @!method initialize(id:, type:, version: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaManagedAgentsAgentParams} for more details.
-        #
         #   Specification for an Agent. Provide a specific `version` or use the short-form
         #   `agent="agent_id"` for the most recent version
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaManagedAgentsAgentParams} for more details.
         #
         #   @param id [String] The `agent` ID.
         #

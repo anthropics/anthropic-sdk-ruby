@@ -32,6 +32,23 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsMultiagentCoordinator::agent]
+
+          def self.new:
+            (
+              type: :agent | "agent",
+              id: String,
+              version: Integer
+            ) -> Anthropic::Beta::BetaManagedAgentsAgentReference
+            | (
+              type: :advisor | "advisor",
+              model: String
+            ) -> Anthropic::Beta::BetaManagedAgentsAdvisor
+            | (
+              type: Symbol | String,
+              ?id: String,
+              ?version: Integer,
+              ?model: String
+            ) -> Anthropic::Models::Beta::BetaManagedAgentsMultiagentCoordinator::agent
         end
 
         type type_ = :coordinator

@@ -22,12 +22,12 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsMultiagentCoordinatorParams::Type }
 
         # @!method initialize(agents:, type:)
+        #   A coordinator topology: the session's primary thread orchestrates work by
+        #   spawning session threads, each running an agent drawn from the `agents` roster.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsMultiagentCoordinatorParams} for more
         #   details.
-        #
-        #   A coordinator topology: the session's primary thread orchestrates work by
-        #   spawning session threads, each running an agent drawn from the `agents` roster.
         #
         #   @param agents [Array<String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsMultiagentSelfParams, Anthropic::Models::Beta::BetaManagedAgentsAdvisorParams>] Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is
         #

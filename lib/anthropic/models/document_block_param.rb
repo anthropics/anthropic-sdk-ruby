@@ -63,6 +63,38 @@ module Anthropic
 
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource)]
+
+        # Creates a new instance of the variant class whose `type` matches the given
+        # value, passing the remaining arguments to its constructor.
+        #
+        # @param type [Symbol, String]
+        #
+        # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+        #
+        #   @option args [String] :data
+        #
+        #   @option args [Symbol, :"application/pdf", Symbol, :"text/plain"] :media_type
+        #
+        #   @option args [String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam>] :content
+        #
+        #   @option args [String] :url
+        #
+        # @raise [ArgumentError]
+        # @return [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
+        def self.new(type:, **args)
+          case type.to_sym
+          when :base64
+            Anthropic::Base64PDFSource.new(**args)
+          when :text
+            Anthropic::PlainTextSource.new(**args)
+          when :content
+            Anthropic::ContentBlockSource.new(**args)
+          when :url
+            Anthropic::URLPDFSource.new(**args)
+          else
+            raise ArgumentError, "unknown type: #{type}"
+          end
+        end
       end
     end
   end

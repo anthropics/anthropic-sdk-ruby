@@ -44,11 +44,11 @@ module Anthropic
               )
             end
 
+            # Stream Session Thread Events
+            #
             # Some parameter documentations has been truncated, see
             # {Anthropic::Models::Beta::Sessions::Threads::EventStreamParams} for more
             # details.
-            #
-            # Stream Session Thread Events
             #
             # @overload stream_events(thread_id, session_id:, event_deltas: nil, betas: nil, request_options: {})
             #

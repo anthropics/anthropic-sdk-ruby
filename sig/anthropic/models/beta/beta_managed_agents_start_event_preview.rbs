@@ -11,6 +11,20 @@ module Anthropic
         extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_start_event_preview]
+
+        def self.new:
+          (
+            type: :"agent.message" | "agent.message",
+            id: String
+          ) -> Anthropic::Beta::BetaManagedAgentsAgentMessagePreview
+          | (
+            type: :"agent.thinking" | "agent.thinking",
+            id: String
+          ) -> Anthropic::Beta::BetaManagedAgentsAgentThinkingPreview
+          | (
+            type: Symbol | String,
+            id: String
+          ) -> Anthropic::Models::Beta::beta_managed_agents_start_event_preview
       end
     end
   end

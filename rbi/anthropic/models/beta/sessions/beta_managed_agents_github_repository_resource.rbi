@@ -146,6 +146,26 @@ module Anthropic
             end
             def self.variants
             end
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            sig do
+              params(
+                type: T.any(Symbol, String),
+                name: String,
+                sha: String
+              ).returns(
+                Anthropic::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource::Checkout::Variants
+              )
+            end
+            def self.new(
+              type:,
+              # Branch name to check out.
+              name: nil,
+              # Full commit SHA to check out.
+              sha: nil
+            )
+            end
           end
         end
       end

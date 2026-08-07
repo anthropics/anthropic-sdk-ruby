@@ -118,6 +118,49 @@ module Anthropic
           end
           def self.variants
           end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              text: String,
+              cache_control:
+                T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+              citations:
+                T.nilable(
+                  T::Array[
+                    T.any(
+                      Anthropic::Beta::BetaCitationCharLocationParam::OrHash,
+                      Anthropic::Beta::BetaCitationPageLocationParam::OrHash,
+                      Anthropic::Beta::BetaCitationContentBlockLocationParam::OrHash,
+                      Anthropic::Beta::BetaCitationWebSearchResultLocationParam::OrHash,
+                      Anthropic::Beta::BetaCitationSearchResultLocationParam::OrHash
+                    )
+                  ]
+                ),
+              tool:
+                T.any(
+                  Anthropic::Beta::BetaToolChangeToolReference::OrHash,
+                  Anthropic::Beta::BetaToolChangeMCPToolReference::OrHash,
+                  Anthropic::Beta::BetaToolChangeMCPToolsetReference::OrHash
+                )
+            ).returns(
+              Anthropic::Beta::BetaMidConversationSystemBlockParam::Content::Variants
+            )
+          end
+          def self.new(
+            type:,
+            text: nil,
+            # Create a cache control breakpoint at this content block.
+            cache_control: nil,
+            citations: nil,
+            # Reference to a single tool the caller declared directly in `tools[]`. Does not
+            # accept the composed `{server}_{name}` form the server assigns to MCP-resolved
+            # tools — use `mcp_tool_reference` or `mcp_toolset_reference` for those.
+            tool: nil
+          )
+          end
         end
       end
     end

@@ -202,6 +202,20 @@ module Anthropic
           end
           def self.variants
           end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              skill_id: String,
+              version: String
+            ).returns(
+              Anthropic::Beta::BetaManagedAgentsSessionAgent::Skill::Variants
+            )
+          end
+          def self.new(type:, skill_id:, version:)
+          end
         end
 
         # Union type for tool configurations returned in API responses.
@@ -225,6 +239,47 @@ module Anthropic
             )
           end
           def self.variants
+          end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              configs:
+                T.any(
+                  T::Array[
+                    Anthropic::Beta::BetaManagedAgentsAgentToolConfig::OrHash
+                  ],
+                  T::Array[
+                    Anthropic::Beta::BetaManagedAgentsMCPToolConfig::OrHash
+                  ]
+                ),
+              default_config:
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfig::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsMCPToolsetDefaultConfig::OrHash
+                ),
+              mcp_server_name: String,
+              description: String,
+              input_schema:
+                Anthropic::Beta::BetaManagedAgentsCustomToolInputSchema::OrHash,
+              name: String
+            ).returns(
+              Anthropic::Beta::BetaManagedAgentsSessionAgent::Tool::Variants
+            )
+          end
+          def self.new(
+            type:,
+            configs: nil,
+            # Resolved default configuration for agent tools.
+            default_config: nil,
+            mcp_server_name: nil,
+            description: nil,
+            # JSON Schema for custom tool input parameters.
+            input_schema: nil,
+            name: nil
+          )
           end
         end
 

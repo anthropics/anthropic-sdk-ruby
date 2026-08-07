@@ -58,6 +58,32 @@ module Anthropic
 
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingResponse)]
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            #
+            # Some parameter documentations has been truncated, see
+            # {Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Networking}
+            # for more details.
+            #
+            # @param type [Symbol, String]
+            #
+            # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+            #
+            #   @option args [Array<String>] :allowed_hosts Hostnames on which the secret will be substituted. An entry matches the request
+            #
+            # @raise [ArgumentError]
+            # @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingResponse]
+            def self.new(type:, **args)
+              case type.to_sym
+              when :unrestricted
+                Anthropic::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse.new(**args)
+              when :limited
+                Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingResponse.new(**args)
+              else
+                raise ArgumentError, "unknown type: #{type}"
+              end
+            end
           end
 
           # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse#type

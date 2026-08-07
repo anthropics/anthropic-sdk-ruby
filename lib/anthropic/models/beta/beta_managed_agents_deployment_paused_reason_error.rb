@@ -66,6 +66,50 @@ module Anthropic
 
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsFileNotFoundDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsVaultArchivedDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError)]
+
+        # Creates a new instance of the variant class whose `type` matches the given
+        # value, passing the remaining arguments to its constructor.
+        #
+        # @param type [Symbol, String]
+        #
+        # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+        #
+        # @raise [ArgumentError]
+        # @return [Anthropic::Models::Beta::BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsFileNotFoundDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsVaultArchivedDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError]
+        def self.new(type:, **args)
+          case type.to_sym
+          when :environment_archived_error
+            Anthropic::Beta::BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError.new(**args)
+          when :agent_archived_error
+            Anthropic::Beta::BetaManagedAgentsAgentArchivedDeploymentPausedReasonError.new(**args)
+          when :environment_not_found_error
+            Anthropic::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError.new(**args)
+          when :vault_not_found_error
+            Anthropic::Beta::BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError.new(**args)
+          when :file_not_found_error
+            Anthropic::Beta::BetaManagedAgentsFileNotFoundDeploymentPausedReasonError.new(**args)
+          when :session_resource_not_found_error
+            Anthropic::Beta::BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError.new(**args)
+          when :workspace_archived_error
+            Anthropic::Beta::BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError.new(**args)
+          when :organization_disabled_error
+            Anthropic::Beta::BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError.new(**args)
+          when :memory_store_archived_error
+            Anthropic::Beta::BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError.new(**args)
+          when :skill_not_found_error
+            Anthropic::Beta::BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError.new(**args)
+          when :vault_archived_error
+            Anthropic::Beta::BetaManagedAgentsVaultArchivedDeploymentPausedReasonError.new(**args)
+          when :unknown_error
+            Anthropic::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonError.new(**args)
+          when :self_hosted_resources_unsupported_error
+            Anthropic::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError.new(**args)
+          when :mcp_egress_blocked_error
+            Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError.new(**args)
+          else
+            raise ArgumentError, "unknown type: #{type}"
+          end
+        end
       end
     end
 

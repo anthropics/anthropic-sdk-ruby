@@ -283,6 +283,44 @@ module Anthropic
           end
           def self.variants
           end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              content:
+                T::Array[
+                  T.any(
+                    Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock::OrHash,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock::OrHash
+                  )
+                ],
+              description: String,
+              rubric:
+                T.any(
+                  Anthropic::Beta::Sessions::BetaManagedAgentsFileRubricParams::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsTextRubricParams::OrHash
+                ),
+              max_iterations: T.nilable(Integer)
+            ).returns(
+              Anthropic::Beta::SessionCreateParams::InitialEvent::Variants
+            )
+          end
+          def self.new(
+            type:,
+            # Array of content blocks for the user message.
+            content: nil,
+            # What the agent should produce. This is the task specification.
+            description: nil,
+            # Rubric for grading the quality of an outcome.
+            rubric: nil,
+            # Eval→revision cycles before giving up. Default 3, max 20.
+            max_iterations: nil
+          )
+          end
         end
 
         # Union of resources that can be mounted into a session.
@@ -304,6 +342,53 @@ module Anthropic
             )
           end
           def self.variants
+          end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              authorization_token: String,
+              url: String,
+              checkout:
+                T.nilable(
+                  T.any(
+                    Anthropic::Beta::BetaManagedAgentsBranchCheckout::OrHash,
+                    Anthropic::Beta::BetaManagedAgentsCommitCheckout::OrHash
+                  )
+                ),
+              mount_path: T.nilable(String),
+              file_id: String,
+              memory_store_id: String,
+              access:
+                T.nilable(
+                  Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceParam::Access::OrSymbol
+                ),
+              instructions: T.nilable(String)
+            ).returns(Anthropic::Beta::SessionCreateParams::Resource::Variants)
+          end
+          def self.new(
+            type:,
+            # GitHub authorization token used to clone the repository.
+            authorization_token: nil,
+            # Github URL of the repository
+            url: nil,
+            # Branch or commit to check out. Defaults to the repository's default branch.
+            checkout: nil,
+            # Mount path in the container. Defaults to `/workspace/<repo-name>`.
+            mount_path: nil,
+            # ID of a previously uploaded file.
+            file_id: nil,
+            # The memory store ID (memstore\_...). Must belong to the caller's organization
+            # and workspace.
+            memory_store_id: nil,
+            # Access mode for an attached memory store.
+            access: nil,
+            # Per-attachment guidance for the agent on how to use this store. Rendered into
+            # the memory section of the system prompt. Max 4096 chars.
+            instructions: nil
+          )
           end
         end
       end

@@ -55,6 +55,24 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsModelConfig::effort]
+
+          def self.new:
+            (type: :low | "low") -> Anthropic::Beta::BetaManagedAgentsEffortLow
+            | (
+              type: :medium | "medium"
+            ) -> Anthropic::Beta::BetaManagedAgentsEffortMedium
+            | (
+              type: :high | "high"
+            ) -> Anthropic::Beta::BetaManagedAgentsEffortHigh
+            | (
+              type: :xhigh | "xhigh"
+            ) -> Anthropic::Beta::BetaManagedAgentsEffortXhigh
+            | (
+              type: :max | "max"
+            ) -> Anthropic::Beta::BetaManagedAgentsEffortMax
+            | (
+              type: Symbol | String
+            ) -> Anthropic::Models::Beta::BetaManagedAgentsModelConfig::effort
         end
 
         type speed = :standard | :fast

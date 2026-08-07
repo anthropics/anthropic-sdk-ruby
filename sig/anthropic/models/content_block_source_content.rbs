@@ -7,6 +7,26 @@ module Anthropic
       extend Anthropic::Internal::Type::Union
 
       def self?.variants: -> ::Array[Anthropic::Models::content_block_source_content]
+
+      def self.new:
+        (
+          type: :text | "text",
+          text: String,
+          ?cache_control: Anthropic::CacheControlEphemeral?,
+          ?citations: ::Array[Anthropic::Models::text_citation_param]?
+        ) -> Anthropic::TextBlockParam
+        | (
+          type: :image | "image",
+          source: Anthropic::Models::ImageBlockParam::source,
+          ?cache_control: Anthropic::CacheControlEphemeral?
+        ) -> Anthropic::ImageBlockParam
+        | (
+          type: Symbol | String,
+          ?text: String,
+          ?cache_control: Anthropic::CacheControlEphemeral?,
+          ?citations: ::Array[Anthropic::Models::text_citation_param]?,
+          ?source: Anthropic::Models::ImageBlockParam::source
+        ) -> Anthropic::Models::content_block_source_content
     end
   end
 end

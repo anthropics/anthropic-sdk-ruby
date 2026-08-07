@@ -18,12 +18,12 @@ module Anthropic
         optional :view_range, Anthropic::Internal::Type::ArrayOf[Integer]
 
         # @!method initialize(file_path:, view_range: nil)
+        #   Input payload for the `read` tool. Reads file contents relative to the runner's
+        #   working directory (or absolute when the runner permits).
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401ReadInput} for
         #   more details.
-        #
-        #   Input payload for the `read` tool. Reads file contents relative to the runner's
-        #   working directory (or absolute when the runner permits).
         #
         #   @param file_path [String] Path of the file to read.
         #

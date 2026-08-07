@@ -32,6 +32,36 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::agent]
+
+          def self.new:
+            (
+              type: :agent | "agent",
+              id: String,
+              description: String?,
+              mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
+              model: Anthropic::Beta::BetaManagedAgentsModelConfig,
+              name: String,
+              skills: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::skill],
+              system_: String?,
+              tools: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::tool],
+              version: Integer
+            ) -> Anthropic::Beta::BetaManagedAgentsSessionThreadAgent
+            | (
+              type: :advisor | "advisor",
+              model: String
+            ) -> Anthropic::Beta::BetaManagedAgentsAdvisor
+            | (
+              type: Symbol | String,
+              model: Anthropic::Beta::BetaManagedAgentsModelConfig | String,
+              ?id: String,
+              ?description: String?,
+              ?mcp_servers: ::Array[Anthropic::Beta::BetaManagedAgentsMCPServerURLDefinition],
+              ?name: String,
+              ?skills: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::skill],
+              ?system_: String?,
+              ?tools: ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionThreadAgent::tool],
+              ?version: Integer
+            ) -> Anthropic::Models::Beta::BetaManagedAgentsSessionMultiagentCoordinator::agent
         end
 
         type type_ = :coordinator

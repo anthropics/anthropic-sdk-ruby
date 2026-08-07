@@ -19,15 +19,15 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsStartEvent::Type }
 
         # @!method initialize(event:, type:)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaManagedAgentsStartEvent} for more details.
-        #
         #   Opens a preview of a buffered event. Carries the previewed event's type and id
         #   only. Followed by zero or more event_delta events with the same event id,
         #   normally concluded by the buffered event carrying that id. If the producing
         #   model request ends without that event (an error or interrupt mid-stream), its
         #   terminal span.model_request_end closes the preview. Only sent on stream
         #   connections that opt in via event_deltas; never appears in event history.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaManagedAgentsStartEvent} for more details.
         #
         #   @param event [Anthropic::Models::Beta::BetaManagedAgentsAgentMessagePreview, Anthropic::Models::Beta::BetaManagedAgentsAgentThinkingPreview] The previewed event's type and id. The event type determines which delta types t
         #

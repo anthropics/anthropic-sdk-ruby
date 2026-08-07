@@ -98,6 +98,27 @@ module Anthropic
           end
           def self.variants
           end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              data: String,
+              media_type:
+                Anthropic::Beta::BetaBase64ImageSource::MediaType::OrSymbol,
+              url: String,
+              file_id: String
+            ).returns(Anthropic::Beta::BetaImageBlockParam::Source::Variants)
+          end
+          def self.new(
+            type:,
+            data: nil,
+            media_type: nil,
+            url: nil,
+            file_id: nil
+          )
+          end
         end
       end
     end

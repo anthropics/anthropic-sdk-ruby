@@ -5,10 +5,10 @@ module Anthropic
     class Beta
       class Skills
         class Versions
+          # Create Skill Version
+          #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Skills::VersionCreateParams} for more details.
-          #
-          # Create Skill Version
           #
           # @overload create(skill_id, files:, betas: nil, request_options: {})
           #
@@ -41,10 +41,10 @@ module Anthropic
             )
           end
 
+          # Get Skill Version
+          #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Skills::VersionRetrieveParams} for more details.
-          #
-          # Get Skill Version
           #
           # @overload retrieve(version, skill_id:, betas: nil, request_options: {})
           #
@@ -74,10 +74,10 @@ module Anthropic
             )
           end
 
+          # List Skill Versions
+          #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Skills::VersionListParams} for more details.
-          #
-          # List Skill Versions
           #
           # @overload list(skill_id, limit: nil, page: nil, betas: nil, request_options: {})
           #
@@ -109,10 +109,10 @@ module Anthropic
             )
           end
 
+          # Delete Skill Version
+          #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Skills::VersionDeleteParams} for more details.
-          #
-          # Delete Skill Version
           #
           # @overload delete(version, skill_id:, betas: nil, request_options: {})
           #
@@ -142,10 +142,10 @@ module Anthropic
             )
           end
 
+          # Download a skill version's content as a zip archive.
+          #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Skills::VersionDownloadParams} for more details.
-          #
-          # Download a skill version's content as a zip archive.
           #
           # @overload download(version, skill_id:, betas: nil, request_options: {})
           #

@@ -50,10 +50,10 @@ module Anthropic
         optional :server_tool_use, -> { Anthropic::Beta::BetaManagedAgentsServerToolUsage }, nil?: true
 
         # @!method initialize(active_seconds: nil, cache_creation: nil, cache_read_input_tokens: nil, input_tokens: nil, list_cost: nil, output_tokens: nil, server_tool_use: nil)
+        #   Cumulative token usage for a session across all turns.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsSessionUsage} for more details.
-        #
-        #   Cumulative token usage for a session across all turns.
         #
         #   @param active_seconds [Float] Cumulative time in seconds during which the session had at least one thread in r
         #

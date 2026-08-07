@@ -24,10 +24,10 @@ module Anthropic
         optional :remaining, Integer, nil?: true
 
         # @!method initialize(total:, remaining: nil, type: :tokens)
+        #   User-configurable total token budget across contexts.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaTokenTaskBudget} for more details.
-        #
-        #   User-configurable total token budget across contexts.
         #
         #   @param total [Integer] Total token budget across all contexts in the session.
         #

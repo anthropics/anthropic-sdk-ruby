@@ -11,6 +11,19 @@ module Anthropic
         extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason]
+
+        def self.new:
+          (
+            type: :manual | "manual"
+          ) -> Anthropic::Beta::BetaManagedAgentsManualDeploymentPausedReason
+          | (
+            type: :error | "error",
+            error: Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason_error
+          ) -> Anthropic::Beta::BetaManagedAgentsErrorDeploymentPausedReason
+          | (
+            type: Symbol | String,
+            ?error: Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason_error
+          ) -> Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason
       end
     end
   end

@@ -18,12 +18,12 @@ module Anthropic
         optional :path, String
 
         # @!method initialize(pattern:, path: nil)
+        #   Input payload for the `grep` tool. Searches file contents for a regular
+        #   expression, returning matching lines.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401GrepInput} for
         #   more details.
-        #
-        #   Input payload for the `grep` tool. Searches file contents for a regular
-        #   expression, returning matching lines.
         #
         #   @param pattern [String] Regular expression to search for.
         #

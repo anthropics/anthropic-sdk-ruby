@@ -391,15 +391,15 @@ module Anthropic
             optional :top_p, Float
 
             # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
-            #   Some parameter documentations has been truncated, see
-            #   {Anthropic::Models::Messages::BatchCreateParams::Request::Params} for more
-            #   details.
-            #
             #   Messages API creation parameters for the individual request.
             #
             #   See the
             #   [Messages API reference](https://platform.claude.com/docs/en/api/messages) for
             #   full documentation on available parameters.
+            #
+            #   Some parameter documentations has been truncated, see
+            #   {Anthropic::Models::Messages::BatchCreateParams::Request::Params} for more
+            #   details.
             #
             #   @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
             #

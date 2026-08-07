@@ -19,10 +19,10 @@ module Anthropic
         optional :duration_seconds, Float
 
         # @!method initialize(active_seconds: nil, duration_seconds: nil)
+        #   Timing statistics for a session.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsSessionStats} for more details.
-        #
-        #   Timing statistics for a session.
         #
         #   @param active_seconds [Float] Cumulative time in seconds the session spent in running status. Excludes idle ti
         #

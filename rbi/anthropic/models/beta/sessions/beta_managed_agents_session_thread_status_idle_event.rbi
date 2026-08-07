@@ -118,6 +118,24 @@ module Anthropic
             end
             def self.variants
             end
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            sig do
+              params(
+                type: T.any(Symbol, String),
+                event_ids: T::Array[String]
+              ).returns(
+                Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::StopReason::Variants
+              )
+            end
+            def self.new(
+              type:,
+              # The ids of events the agent is blocked on. Resolving fewer than all re-emits
+              # `session.status_idle` with the remainder.
+              event_ids: nil
+            )
+            end
           end
 
           module Type

@@ -76,6 +76,21 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaEnvironment::config]
+
+          def self.new:
+            (
+              type: :cloud | "cloud",
+              networking: Anthropic::Models::Beta::BetaCloudConfig::networking,
+              packages: Anthropic::Beta::BetaPackages
+            ) -> Anthropic::Beta::BetaCloudConfig
+            | (
+              type: :self_hosted | "self_hosted"
+            ) -> Anthropic::Beta::BetaSelfHostedConfig
+            | (
+              type: Symbol | String,
+              ?networking: Anthropic::Models::Beta::BetaCloudConfig::networking,
+              ?packages: Anthropic::Beta::BetaPackages
+            ) -> Anthropic::Models::Beta::BetaEnvironment::config
         end
 
         type scope = :organization | :account

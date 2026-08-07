@@ -25,15 +25,15 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsDeltaEvent::Type }
 
         # @!method initialize(delta:, event_id:, type:)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent} for more details.
-        #
         #   An incremental update to an event that is still being streamed. Deltas are
         #   best-effort and may stop early; when the buffered event with id == event_id is
         #   produced it carries the complete content. A model request that ends early (an
         #   error or interrupt) produces no buffered event — its terminal
         #   span.model_request_end closes the preview. Only sent on stream connections that
         #   opt in via event_deltas; never appears in event history.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent} for more details.
         #
         #   @param delta [Anthropic::Models::Beta::BetaManagedAgentsDeltaContent] One fragment of the previewed event. The delta type is named for the previewed e
         #

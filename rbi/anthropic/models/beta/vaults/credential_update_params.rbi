@@ -151,6 +151,51 @@ module Anthropic
             end
             def self.variants
             end
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            sig do
+              params(
+                type: T.any(Symbol, String),
+                access_token: T.nilable(String),
+                expires_at: T.nilable(Time),
+                refresh:
+                  T.nilable(
+                    Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams::OrHash
+                  ),
+                token: T.nilable(String),
+                injection_location:
+                  Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationUpdateParams::OrHash,
+                networking:
+                  T.nilable(
+                    T.any(
+                      Anthropic::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams::OrHash,
+                      Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams::OrHash
+                    )
+                  ),
+                secret_value: T.nilable(String)
+              ).returns(
+                Anthropic::Beta::Vaults::CredentialUpdateParams::Auth::Variants
+              )
+            end
+            def self.new(
+              type:,
+              # Updated OAuth access token.
+              access_token: nil,
+              # A timestamp in RFC 3339 format
+              expires_at: nil,
+              # Parameters for updating OAuth refresh token configuration.
+              refresh: nil,
+              # Updated static bearer token value.
+              token: nil,
+              # Updated injection location.
+              injection_location: nil,
+              # Updated networking scope. Full replacement.
+              networking: nil,
+              # Updated secret value.
+              secret_value: nil
+            )
+            end
           end
         end
       end

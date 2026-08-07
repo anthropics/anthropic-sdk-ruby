@@ -53,6 +53,33 @@ module Anthropic
             extend Anthropic::Internal::Type::Union
 
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent::content]
+
+            def self.new:
+              (
+                type: :text | "text",
+                text: String
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsTextBlock
+              | (
+                type: :image | "image",
+                source: Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::source
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsImageBlock
+              | (
+                type: :document | "document",
+                source: Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock::source,
+                ?context: String?,
+                ?title: String?
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock
+              | (
+                type: :redacted | "redacted"
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock
+              | (
+                type: Symbol | String,
+                ?text: String,
+                ?source: Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::source
+                | Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock::source,
+                ?context: String?,
+                ?title: String?
+              ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent::content
           end
 
           type type_ = :"agent.thread_message_received"

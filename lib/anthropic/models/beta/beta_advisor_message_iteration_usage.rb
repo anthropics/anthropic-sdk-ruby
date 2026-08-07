@@ -50,10 +50,10 @@ module Anthropic
         required :type, const: :advisor_message
 
         # @!method initialize(cache_creation:, cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, model:, output_tokens:, type: :advisor_message)
+        #   Token usage for an advisor sub-inference iteration.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaAdvisorMessageIterationUsage} for more details.
-        #
-        #   Token usage for an advisor sub-inference iteration.
         #
         #   @param cache_creation [Anthropic::Models::Beta::BetaCacheCreation, nil] Breakdown of cached tokens by TTL
         #

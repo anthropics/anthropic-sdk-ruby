@@ -58,10 +58,10 @@ module Anthropic
           )
         end
 
+        # List Dreams
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::DreamListParams} for more details.
-        #
-        # List Dreams
         #
         # @overload list(created_at_gt: nil, created_at_lt: nil, include_archived: nil, limit: nil, page: nil, statuses: nil, betas: nil, request_options: {})
         #

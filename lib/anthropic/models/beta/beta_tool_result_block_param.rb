@@ -68,6 +68,48 @@ module Anthropic
 
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaSearchResultBlockParam, Anthropic::Models::Beta::BetaRequestDocumentBlock, Anthropic::Models::Beta::BetaToolReferenceBlockParam)]
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            #
+            # @param type [Symbol, String]
+            #
+            # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+            #
+            #   @option args [String] :text
+            #
+            #   @option args [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] :cache_control Create a cache control breakpoint at this content block.
+            #
+            #   @option args [Array<Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam, Anthropic::Models::Beta::BetaCitationWebSearchResultLocationParam, Anthropic::Models::Beta::BetaCitationSearchResultLocationParam>, nil, Anthropic::Models::Beta::BetaCitationsConfigParam, Anthropic::Models::Beta::BetaCitationsConfigParam, nil] :citations
+            #
+            #   @option args [Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource, Anthropic::Models::Beta::BetaFileImageSource, String, Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource, Anthropic::Models::Beta::BetaFileDocumentSource] :source
+            #
+            #   @option args [Array<Anthropic::Models::Beta::BetaTextBlockParam>] :content
+            #
+            #   @option args [String, String, nil] :title
+            #
+            #   @option args [String, nil] :context
+            #
+            #   @option args [String] :tool_name
+            #
+            # @raise [ArgumentError]
+            # @return [Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaSearchResultBlockParam, Anthropic::Models::Beta::BetaRequestDocumentBlock, Anthropic::Models::Beta::BetaToolReferenceBlockParam]
+            def self.new(type:, **args)
+              case type.to_sym
+              when :text
+                Anthropic::Beta::BetaTextBlockParam.new(**args)
+              when :image
+                Anthropic::Beta::BetaImageBlockParam.new(**args)
+              when :search_result
+                Anthropic::Beta::BetaSearchResultBlockParam.new(**args)
+              when :document
+                Anthropic::Beta::BetaRequestDocumentBlock.new(**args)
+              when :tool_reference
+                Anthropic::Beta::BetaToolReferenceBlockParam.new(**args)
+              else
+                raise ArgumentError, "unknown type: #{type}"
+              end
+            end
           end
 
           # @!method self.variants

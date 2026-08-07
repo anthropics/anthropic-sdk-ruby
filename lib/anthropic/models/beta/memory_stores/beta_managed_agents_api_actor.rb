@@ -18,12 +18,12 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor::Type }
 
           # @!method initialize(api_key_id:, type:)
+          #   Attribution for a write made directly via the public API (outside of any
+          #   session).
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor} for more
           #   details.
-          #
-          #   Attribution for a write made directly via the public API (outside of any
-          #   session).
           #
           #   @param api_key_id [String] ID of the API key that performed the write. This identifies the key, not the sec
           #

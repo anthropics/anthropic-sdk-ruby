@@ -112,6 +112,36 @@ module Anthropic
             end
             def self.variants
             end
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            sig do
+              params(
+                type: T.any(Symbol, String),
+                data: String,
+                media_type:
+                  T.any(
+                    String,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::MediaType::OrSymbol
+                  ),
+                url: String,
+                file_id: String
+              ).returns(
+                Anthropic::Beta::Sessions::BetaManagedAgentsDocumentBlock::Source::Variants
+              )
+            end
+            def self.new(
+              type:,
+              # Base64-encoded document data.
+              data: nil,
+              # MIME type of the document (e.g., "application/pdf").
+              media_type: nil,
+              # URL of the document to fetch.
+              url: nil,
+              # ID of a previously uploaded file.
+              file_id: nil
+            )
+            end
           end
 
           module Type

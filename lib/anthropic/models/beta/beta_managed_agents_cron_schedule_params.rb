@@ -27,11 +27,11 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsCronScheduleParams::Type }
 
         # @!method initialize(expression:, timezone:, type:)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaManagedAgentsCronScheduleParams} for more details.
-        #
         #   5-field POSIX cron schedule. Literal wall-clock matching in the configured
         #   timezone.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaManagedAgentsCronScheduleParams} for more details.
         #
         #   @param expression [String] 5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g.,
         #

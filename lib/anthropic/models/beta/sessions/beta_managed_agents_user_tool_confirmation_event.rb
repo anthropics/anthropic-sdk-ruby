@@ -54,11 +54,11 @@ module Anthropic
           optional :session_thread_id, String, nil?: true
 
           # @!method initialize(id:, result:, tool_use_id:, type:, deny_message: nil, processed_at: nil, session_thread_id: nil)
+          #   A tool confirmation event that approves or denies a pending tool execution.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent}
           #   for more details.
-          #
-          #   A tool confirmation event that approves or denies a pending tool execution.
           #
           #   @param id [String] Unique identifier for this event.
           #

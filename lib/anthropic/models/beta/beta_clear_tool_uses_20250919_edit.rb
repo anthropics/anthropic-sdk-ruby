@@ -89,6 +89,28 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaInputTokensTrigger, Anthropic::Models::Beta::BetaToolUsesTrigger)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [Integer] :value
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaInputTokensTrigger, Anthropic::Models::Beta::BetaToolUsesTrigger]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :input_tokens
+              Anthropic::Beta::BetaInputTokensTrigger.new(**args)
+            when :tool_uses
+              Anthropic::Beta::BetaToolUsesTrigger.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
       end
     end

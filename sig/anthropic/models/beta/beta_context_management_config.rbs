@@ -32,6 +32,38 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaContextManagementConfig::edit]
+
+          def self.new:
+            (
+              type: :clear_tool_uses_20250919 | "clear_tool_uses_20250919",
+              ?clear_at_least: Anthropic::Beta::BetaInputTokensClearAtLeast?,
+              ?clear_tool_inputs: Anthropic::Models::Beta::BetaClearToolUses20250919Edit::clear_tool_inputs?,
+              ?exclude_tools: ::Array[String]?,
+              ?keep: Anthropic::Beta::BetaToolUsesKeep,
+              ?trigger: Anthropic::Models::Beta::BetaClearToolUses20250919Edit::trigger
+            ) -> Anthropic::Beta::BetaClearToolUses20250919Edit
+            | (
+              type: :clear_thinking_20251015 | "clear_thinking_20251015",
+              ?keep: Anthropic::Models::Beta::BetaClearThinking20251015Edit::keep
+            ) -> Anthropic::Beta::BetaClearThinking20251015Edit
+            | (
+              type: :compact_20260112 | "compact_20260112",
+              ?instructions: String?,
+              ?pause_after_compaction: bool,
+              ?trigger: Anthropic::Beta::BetaInputTokensTrigger?
+            ) -> Anthropic::Beta::BetaCompact20260112Edit
+            | (
+              type: Symbol | String,
+              ?clear_at_least: Anthropic::Beta::BetaInputTokensClearAtLeast?,
+              ?clear_tool_inputs: Anthropic::Models::Beta::BetaClearToolUses20250919Edit::clear_tool_inputs?,
+              ?exclude_tools: ::Array[String]?,
+              ?keep: Anthropic::Beta::BetaToolUsesKeep
+              | Anthropic::Models::Beta::BetaClearThinking20251015Edit::keep,
+              ?trigger: Anthropic::Models::Beta::BetaClearToolUses20250919Edit::trigger
+              | Anthropic::Beta::BetaInputTokensTrigger?,
+              ?instructions: String?,
+              ?pause_after_compaction: bool
+            ) -> Anthropic::Models::Beta::BetaContextManagementConfig::edit
         end
       end
     end

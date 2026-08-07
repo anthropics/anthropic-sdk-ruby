@@ -19,16 +19,16 @@ module Anthropic
           required :type, enum: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix::Type }
 
           # @!method initialize(path:, type:)
-          #   Some parameter documentations has been truncated, see
-          #   {Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix} for more
-          #   details.
-          #
           #   A rolled-up directory marker returned by
           #   [List memories](/en/api/beta/memory_stores/memories/list) when `depth` is set.
           #   Indicates that one or more memories exist deeper than the requested depth under
           #   this prefix. This is a list-time rollup, not a stored resource; it has no ID and
           #   no lifecycle. Each prefix counts toward the page `limit` and interleaves with
           #   `memory` items in path order.
+          #
+          #   Some parameter documentations has been truncated, see
+          #   {Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix} for more
+          #   details.
           #
           #   @param path [String] The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pas
           #

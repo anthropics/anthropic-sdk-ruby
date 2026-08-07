@@ -24,15 +24,15 @@ module Anthropic
         optional :mode, enum: -> { Anthropic::Beta::BetaFallbackCreditTokenParam::Mode }
 
         # @!method initialize(token:, mode: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaFallbackCreditTokenParam} for more details.
-        #
         #   Object form of `fallback_credit_token`: the token plus a redemption mode.
         #
         #   Requires `anthropic-beta: fallback-credit-2026-07-01`; without that header the
         #   field accepts the bare string only. The bare string and the mode-less object are
         #   equivalent (both select `strict`), so wrapping an existing token changes nothing
         #   by itself.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaFallbackCreditTokenParam} for more details.
         #
         #   @param token [String] The opaque `fallback_credit_token` from a prior refusal's `stop_details` — the s
         #

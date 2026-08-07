@@ -109,10 +109,10 @@ module Anthropic
         optional :deployment_id, String, nil?: true
 
         # @!method initialize(id:, agent:, archived_at:, budget:, created_at:, environment_id:, metadata:, outcome_evaluations:, resources:, stats:, status:, title:, type:, updated_at:, usage:, vault_ids:, deployment_id: nil)
+        #   A Managed Agents `session`.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsSession} for more details.
-        #
-        #   A Managed Agents `session`.
         #
         #   @param id [String]
         #

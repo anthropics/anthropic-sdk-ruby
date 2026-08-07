@@ -18,10 +18,10 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsDeletedMemoryStore::Type }
 
         # @!method initialize(id:, type:)
+        #   Confirmation that a `memory_store` was deleted.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsDeletedMemoryStore} for more details.
-        #
-        #   Confirmation that a `memory_store` was deleted.
         #
         #   @param id [String] ID of the deleted memory store (a `memstore_...` identifier). The store and all
         #

@@ -77,6 +77,23 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionAgent::skill]
+
+          def self.new:
+            (
+              type: :anthropic | "anthropic",
+              skill_id: String,
+              version: String
+            ) -> Anthropic::Beta::BetaManagedAgentsAnthropicSkill
+            | (
+              type: :custom | "custom",
+              skill_id: String,
+              version: String
+            ) -> Anthropic::Beta::BetaManagedAgentsCustomSkill
+            | (
+              type: Symbol | String,
+              skill_id: String,
+              version: String
+            ) -> Anthropic::Models::Beta::BetaManagedAgentsSessionAgent::skill
         end
 
         type tool =
@@ -88,6 +105,36 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSessionAgent::tool]
+
+          def self.new:
+            (
+              type: :agent_toolset_20260401 | "agent_toolset_20260401",
+              configs: ::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfig],
+              default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfig
+            ) -> Anthropic::Beta::BetaManagedAgentsAgentToolset20260401
+            | (
+              type: :mcp_toolset | "mcp_toolset",
+              configs: ::Array[Anthropic::Beta::BetaManagedAgentsMCPToolConfig],
+              default_config: Anthropic::Beta::BetaManagedAgentsMCPToolsetDefaultConfig,
+              mcp_server_name: String
+            ) -> Anthropic::Beta::BetaManagedAgentsMCPToolset
+            | (
+              type: :custom | "custom",
+              description: String,
+              input_schema: Anthropic::Beta::BetaManagedAgentsCustomToolInputSchema,
+              name: String
+            ) -> Anthropic::Beta::BetaManagedAgentsCustomTool
+            | (
+              type: Symbol | String,
+              ?configs: ::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfig]
+              | ::Array[Anthropic::Beta::BetaManagedAgentsMCPToolConfig],
+              ?default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfig
+              | Anthropic::Beta::BetaManagedAgentsMCPToolsetDefaultConfig,
+              ?mcp_server_name: String,
+              ?description: String,
+              ?input_schema: Anthropic::Beta::BetaManagedAgentsCustomToolInputSchema,
+              ?name: String
+            ) -> Anthropic::Models::Beta::BetaManagedAgentsSessionAgent::tool
         end
 
         type type_ = :agent

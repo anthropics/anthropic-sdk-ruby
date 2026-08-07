@@ -140,6 +140,46 @@ module Anthropic
             end
             def self.variants
             end
+
+            # Creates a new instance of the variant class whose `type` matches the given
+            # value, passing the remaining arguments to its constructor.
+            sig do
+              params(
+                type: T.any(Symbol, String),
+                mcp_server_url: String,
+                expires_at: T.nilable(Time),
+                refresh:
+                  T.nilable(
+                    Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshResponse::OrHash
+                  ),
+                injection_location:
+                  Anthropic::Beta::Vaults::BetaManagedAgentsInjectionLocationResponse::OrHash,
+                networking:
+                  T.any(
+                    Anthropic::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingResponse::OrHash,
+                    Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingResponse::OrHash
+                  ),
+                secret_name: String
+              ).returns(
+                Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Auth::Variants
+              )
+            end
+            def self.new(
+              type:,
+              # URL of the MCP server this credential authenticates against.
+              mcp_server_url: nil,
+              # A timestamp in RFC 3339 format
+              expires_at: nil,
+              # OAuth refresh token configuration returned in credential responses.
+              refresh: nil,
+              # Where in the outbound request the secret value is substituted.
+              injection_location: nil,
+              # Outbound hosts the secret value is substituted on.
+              networking: nil,
+              # Name of the environment variable.
+              secret_name: nil
+            )
+            end
           end
 
           module Type

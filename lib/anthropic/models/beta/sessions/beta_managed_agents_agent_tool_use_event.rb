@@ -51,11 +51,11 @@ module Anthropic
           optional :session_thread_id, String, nil?: true
 
           # @!method initialize(id:, input:, name:, processed_at:, type:, evaluated_permission: nil, session_thread_id: nil)
+          #   Event emitted when the agent invokes a built-in agent tool.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent} for more
           #   details.
-          #
-          #   Event emitted when the agent invokes a built-in agent tool.
           #
           #   @param id [String] Unique identifier for this event.
           #

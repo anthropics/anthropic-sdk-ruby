@@ -15,6 +15,45 @@ module Anthropic
         extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_raw_message_stream_event]
+
+        def self.new:
+          (
+            type: :message_start | "message_start",
+            message: Anthropic::Beta::BetaMessage
+          ) -> Anthropic::Beta::BetaRawMessageStartEvent
+          | (
+            type: :message_delta | "message_delta",
+            context_management: Anthropic::Beta::BetaContextManagementResponse?,
+            delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta,
+            usage: Anthropic::Beta::BetaMessageDeltaUsage
+          ) -> Anthropic::Beta::BetaRawMessageDeltaEvent
+          | (
+            type: :message_stop | "message_stop"
+          ) -> Anthropic::Beta::BetaRawMessageStopEvent
+          | (
+            type: :content_block_start | "content_block_start",
+            content_block: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::content_block,
+            index: Integer
+          ) -> Anthropic::Beta::BetaRawContentBlockStartEvent
+          | (
+            type: :content_block_delta | "content_block_delta",
+            delta: Anthropic::Models::Beta::beta_raw_content_block_delta,
+            index: Integer
+          ) -> Anthropic::Beta::BetaRawContentBlockDeltaEvent
+          | (
+            type: :content_block_stop | "content_block_stop",
+            index: Integer
+          ) -> Anthropic::Beta::BetaRawContentBlockStopEvent
+          | (
+            type: Symbol | String,
+            ?message: Anthropic::Beta::BetaMessage,
+            ?context_management: Anthropic::Beta::BetaContextManagementResponse?,
+            ?delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta
+            | Anthropic::Models::Beta::beta_raw_content_block_delta,
+            ?usage: Anthropic::Beta::BetaMessageDeltaUsage,
+            ?content_block: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::content_block,
+            ?index: Integer
+          ) -> Anthropic::Models::Beta::beta_raw_message_stream_event
       end
     end
   end

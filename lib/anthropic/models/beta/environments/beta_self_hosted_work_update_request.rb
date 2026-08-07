@@ -13,11 +13,11 @@ module Anthropic
           required :metadata, Anthropic::Internal::Type::HashOf[String, nil?: true]
 
           # @!method initialize(metadata:)
+          #   Request to update work item metadata.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Environments::BetaSelfHostedWorkUpdateRequest} for
           #   more details.
-          #
-          #   Request to update work item metadata.
           #
           #   @param metadata [Hash{Symbol=>String, nil}] Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omi
         end

@@ -40,11 +40,11 @@ module Anthropic
                    nil?: true
 
           # @!method initialize(cache_creation_input_tokens:, cache_read_input_tokens:, input_tokens:, output_tokens:, speed: nil)
+          #   Token usage for a single model request.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage} for more
           #   details.
-          #
-          #   Token usage for a single model request.
           #
           #   @param cache_creation_input_tokens [Integer] Tokens used to create prompt cache in this request.
           #

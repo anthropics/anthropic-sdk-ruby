@@ -109,6 +109,36 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::AgentUpdateParams::tool]
+
+          def self.new:
+            (
+              type: :agent_toolset_20260401 | "agent_toolset_20260401",
+              ?configs: ::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams],
+              ?default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams?
+            ) -> Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params
+            | (
+              type: :mcp_toolset | "mcp_toolset",
+              mcp_server_name: String,
+              ?configs: ::Array[Anthropic::Beta::BetaManagedAgentsMCPToolConfigParams],
+              ?default_config: Anthropic::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams?
+            ) -> Anthropic::Beta::BetaManagedAgentsMCPToolsetParams
+            | (
+              type: :custom | "custom",
+              description: String,
+              input_schema: Anthropic::Beta::BetaManagedAgentsCustomToolInputSchema,
+              name: String
+            ) -> Anthropic::Beta::BetaManagedAgentsCustomToolParams
+            | (
+              type: Symbol | String,
+              ?configs: ::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams]
+              | ::Array[Anthropic::Beta::BetaManagedAgentsMCPToolConfigParams],
+              ?default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams?
+              | Anthropic::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams?,
+              ?mcp_server_name: String,
+              ?description: String,
+              ?input_schema: Anthropic::Beta::BetaManagedAgentsCustomToolInputSchema,
+              ?name: String
+            ) -> Anthropic::Models::Beta::AgentUpdateParams::tool
         end
       end
     end

@@ -102,6 +102,37 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::DeploymentCreateParams::resource]
+
+          def self.new:
+            (
+              type: :github_repository | "github_repository",
+              authorization_token: String,
+              url: String,
+              ?checkout: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::checkout?,
+              ?mount_path: String?
+            ) -> Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams
+            | (
+              type: :file | "file",
+              file_id: String,
+              ?mount_path: String?
+            ) -> Anthropic::Beta::BetaManagedAgentsFileResourceParams
+            | (
+              type: :memory_store | "memory_store",
+              memory_store_id: String,
+              ?access: Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::access?,
+              ?instructions: String?
+            ) -> Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceParam
+            | (
+              type: Symbol | String,
+              ?authorization_token: String,
+              ?url: String,
+              ?checkout: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::checkout?,
+              ?mount_path: String?,
+              ?file_id: String,
+              ?memory_store_id: String,
+              ?access: Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::access?,
+              ?instructions: String?
+            ) -> Anthropic::Models::Beta::DeploymentCreateParams::resource
         end
       end
     end

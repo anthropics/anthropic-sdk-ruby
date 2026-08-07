@@ -49,13 +49,13 @@ module Anthropic
         optional :title, String, nil?: true
 
         # @!method initialize(id:, processed_at:, type:, agent: nil, budget: nil, metadata: nil, title: nil)
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent} for more
-        #   details.
-        #
         #   Emitted when an UpdateSession request changed at least one field. Carries only
         #   the fields that changed; absent fields were not part of the update. The new
         #   configuration applies from the next turn.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent} for more
+        #   details.
         #
         #   @param id [String] Unique identifier for this event.
         #

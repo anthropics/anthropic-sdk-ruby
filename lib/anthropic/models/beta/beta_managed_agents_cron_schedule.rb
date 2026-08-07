@@ -42,10 +42,10 @@ module Anthropic
         optional :upcoming_runs_at, Anthropic::Internal::Type::ArrayOf[Time]
 
         # @!method initialize(expression:, timezone:, type:, last_run_at: nil, upcoming_runs_at: nil)
+        #   5-field POSIX cron schedule with computed runtime timestamps.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsCronSchedule} for more details.
-        #
-        #   5-field POSIX cron schedule with computed runtime timestamps.
         #
         #   @param expression [String] 5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g.,
         #

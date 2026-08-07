@@ -5,9 +5,6 @@ module Anthropic
     class Beta
       class Tunnels
         class Certificates
-          # Some parameter documentations has been truncated, see
-          # {Anthropic::Models::Beta::Tunnels::CertificateCreateParams} for more details.
-          #
           # The Tunnels API is in research preview. It requires the
           # `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a
           # deprecation period. It supersedes the Admin API endpoints at
@@ -16,6 +13,9 @@ module Anthropic
           # Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's
           # server certificate against this CA when it terminates the inner TLS session. A
           # tunnel holds at most two non-archived certificates.
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Tunnels::CertificateCreateParams} for more details.
           #
           # @overload create(tunnel_id, ca_certificate_pem:, betas: nil, request_options: {})
           #
@@ -78,9 +78,6 @@ module Anthropic
             )
           end
 
-          # Some parameter documentations has been truncated, see
-          # {Anthropic::Models::Beta::Tunnels::CertificateListParams} for more details.
-          #
           # The Tunnels API is in research preview. It requires the
           # `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a
           # deprecation period. It supersedes the Admin API endpoints at
@@ -88,6 +85,9 @@ module Anthropic
           #
           # Lists the certificates registered on a tunnel. Archived certificates are
           # excluded unless include_archived is set.
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Tunnels::CertificateListParams} for more details.
           #
           # @overload list(tunnel_id, include_archived: nil, limit: nil, page: nil, betas: nil, request_options: {})
           #

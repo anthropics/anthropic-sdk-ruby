@@ -143,6 +143,176 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThinkingEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRunningEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent, Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent, Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent, Anthropic::Models::Beta::BetaManagedAgentsStartEvent, Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent, Anthropic::Models::Beta::BetaManagedAgentsSystemMessageEvent, Anthropic::Models::Beta::BetaManagedAgentsSessionUsageEvent)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Sessions::BetaManagedAgentsStreamSessionThreadEvents}
+          # for more details.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [String] :id Unique identifier for this event.
+          #
+          #   @option args [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock>, Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock>, Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock>, Array<Anthropic::Models::Beta::BetaManagedAgentsSystemContentBlock>] :content Array of content blocks comprising the user message.
+          #
+          #   @option args [Time, nil, Time] :processed_at A timestamp in RFC 3339 format
+          #
+          #   @option args [String, nil, String] :session_thread_id If absent, interrupts every non-archived thread in a multiagent session (or the
+          #
+          #   @option args [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent::Result, String] :result UserToolConfirmationResult enum
+          #
+          #   @option args [String] :tool_use_id The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
+          #
+          #   @option args [String, nil] :deny_message Optional message providing context for a 'deny' decision. Only allowed when resu
+          #
+          #   @option args [String] :custom_tool_use_id The id of the `agent.custom_tool_use` event this result corresponds to, which ca
+          #
+          #   @option args [Boolean, nil] :is_error Whether the tool execution resulted in an error.
+          #
+          #   @option args [Hash{Symbol=>Object}] :input Input parameters for the tool call.
+          #
+          #   @option args [String] :name Name of the custom tool being called.
+          #
+          #   @option args [String] :mcp_server_name Name of the MCP server providing the tool.
+          #
+          #   @option args [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::EvaluatedPermission, Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::EvaluatedPermission] :evaluated_permission AgentEvaluatedPermission enum
+          #
+          #   @option args [String] :mcp_tool_use_id The id of the `agent.mcp_tool_use` event this result corresponds to.
+          #
+          #   @option args [String] :from_session_thread_id Public `sthr_` ID of the thread that sent the message.
+          #
+          #   @option args [String, nil] :from_agent_name Name of the callable agent this message came from. Absent when received from the
+          #
+          #   @option args [String] :to_session_thread_id Public `sthr_` ID of the thread the message was sent to.
+          #
+          #   @option args [String, nil] :to_agent_name Name of the callable agent this message was sent to. Absent when sent to the pri
+          #
+          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError] :error An unknown or unexpected error occurred during session execution. A fallback var
+          #
+          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached] :stop_reason The agent completed its turn naturally and is ready for the next user message.
+          #
+          #   @option args [String] :agent_name Name of the callable agent the thread runs.
+          #
+          #   @option args [Integer] :iteration 0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation afte
+          #
+          #   @option args [String] :outcome_id The `outc_` ID of the outcome being evaluated.
+          #
+          #   @option args [String] :explanation Human-readable explanation of the verdict. For `needs_revision`, describes which
+          #
+          #   @option args [String] :outcome_evaluation_start_id The id of the corresponding `span.outcome_evaluation_start` event.
+          #
+          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionUsageSnapshot] :usage Token usage for a single model request.
+          #
+          #   @option args [String] :model_request_start_id The id of the corresponding `span.model_request_start` event.
+          #
+          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelUsage] :model_usage Token usage for a single model request.
+          #
+          #   @option args [String] :description What the agent should produce. Copied from the input event.
+          #
+          #   @option args [Integer, nil] :max_iterations Evaluate-then-revise cycles before giving up. Default 3, max 20.
+          #
+          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubric, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubric] :rubric Rubric for grading the quality of an outcome.
+          #
+          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsSessionAgent, nil] :agent Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session
+          #
+          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] :budget A hard spend ceiling. The session stops issuing new model requests once the trac
+          #
+          #   @option args [Hash{Symbol=>String}] :metadata The session's full metadata bag after the update. Present when the update set no
+          #
+          #   @option args [String, nil] :title The session's new title. Present only when the update changed it.
+          #
+          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsAgentMessagePreview, Anthropic::Models::Beta::BetaManagedAgentsAgentThinkingPreview] :event The previewed event's type and id. The event type determines which delta types t
+          #
+          #   @option args [Anthropic::Models::Beta::BetaManagedAgentsDeltaContent] :delta One fragment of the previewed event. The delta type is named for the previewed e
+          #
+          #   @option args [String] :event_id The id of the event being previewed. Matches event.id on the corresponding event
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThinkingEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusRunningEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent, Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent, Anthropic::Models::Beta::BetaManagedAgentsSessionUpdatedEvent, Anthropic::Models::Beta::BetaManagedAgentsStartEvent, Anthropic::Models::Beta::BetaManagedAgentsDeltaEvent, Anthropic::Models::Beta::BetaManagedAgentsSystemMessageEvent, Anthropic::Models::Beta::BetaManagedAgentsSessionUsageEvent]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :"user.message"
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEvent.new(**args)
+            when :"user.interrupt"
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEvent.new(**args)
+            when :"user.tool_confirmation"
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent.new(**args)
+            when :"user.custom_tool_result"
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent.new(**args)
+            when :"agent.custom_tool_use"
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent.new(**args)
+            when :"agent.message"
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentMessageEvent.new(**args)
+            when :"agent.thinking"
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentThinkingEvent.new(**args)
+            when :"agent.mcp_tool_use"
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent.new(**args)
+            when :"agent.mcp_tool_result"
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolResultEvent.new(**args)
+            when :"agent.tool_use"
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent.new(**args)
+            when :"agent.tool_result"
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent.new(**args)
+            when :"agent.thread_message_received"
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageReceivedEvent.new(**args)
+            when :"agent.thread_message_sent"
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadMessageSentEvent.new(**args)
+            when :"agent.thread_context_compacted"
+              Anthropic::Beta::Sessions::BetaManagedAgentsAgentThreadContextCompactedEvent.new(**args)
+            when :"session.error"
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent.new(**args)
+            when :"session.status_rescheduled"
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusRescheduledEvent.new(**args)
+            when :"session.status_running"
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusRunningEvent.new(**args)
+            when :"session.status_idle"
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent.new(**args)
+            when :"session.status_terminated"
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusTerminatedEvent.new(**args)
+            when :"session.thread_created"
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadCreatedEvent.new(**args)
+            when :"span.outcome_evaluation_start"
+              Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent.new(**args)
+            when :"span.outcome_evaluation_end"
+              Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationEndEvent.new(**args)
+            when :"span.model_request_start"
+              Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestStartEvent.new(**args)
+            when :"span.model_request_end"
+              Anthropic::Beta::Sessions::BetaManagedAgentsSpanModelRequestEndEvent.new(**args)
+            when :"span.outcome_evaluation_ongoing"
+              Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent.new(**args)
+            when :"user.define_outcome"
+              Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent.new(**args)
+            when :"session.deleted"
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionDeletedEvent.new(**args)
+            when :"session.thread_status_running"
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRunningEvent.new(**args)
+            when :"session.thread_status_idle"
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent.new(**args)
+            when :"session.thread_status_terminated"
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusTerminatedEvent.new(**args)
+            when :"user.tool_result"
+              Anthropic::Beta::BetaManagedAgentsUserToolResultEvent.new(**args)
+            when :"session.thread_status_rescheduled"
+              Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusRescheduledEvent.new(**args)
+            when :"session.updated"
+              Anthropic::Beta::BetaManagedAgentsSessionUpdatedEvent.new(**args)
+            when :event_start
+              Anthropic::Beta::BetaManagedAgentsStartEvent.new(**args)
+            when :event_delta
+              Anthropic::Beta::BetaManagedAgentsDeltaEvent.new(**args)
+            when :"system.message"
+              Anthropic::Beta::BetaManagedAgentsSystemMessageEvent.new(**args)
+            when :"session.usage"
+              Anthropic::Beta::BetaManagedAgentsSessionUsageEvent.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
       end
     end

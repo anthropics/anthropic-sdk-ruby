@@ -30,6 +30,32 @@ module Anthropic
           end
           def self.variants
           end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              session_id: String,
+              api_key_id: String,
+              user_id: String
+            ).returns(
+              Anthropic::Beta::MemoryStores::BetaManagedAgentsActor::Variants
+            )
+          end
+          def self.new(
+            type:,
+            # ID of the session that performed the write (a `sesn_...` value). Look up the
+            # session via [Retrieve a session](/en/api/sessions-retrieve) for further
+            # provenance.
+            session_id: nil,
+            # ID of the API key that performed the write. This identifies the key, not the
+            # secret.
+            api_key_id: nil,
+            # ID of the user who performed the write (a `user_...` value).
+            user_id: nil
+          )
+          end
         end
       end
     end

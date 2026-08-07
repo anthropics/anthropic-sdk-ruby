@@ -57,6 +57,21 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::checkout]
+
+          def self.new:
+            (
+              type: :branch | "branch",
+              name: String
+            ) -> Anthropic::Beta::BetaManagedAgentsBranchCheckout
+            | (
+              type: :commit | "commit",
+              sha: String
+            ) -> Anthropic::Beta::BetaManagedAgentsCommitCheckout
+            | (
+              type: Symbol | String,
+              ?name: String,
+              ?sha: String
+            ) -> Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::checkout
         end
       end
     end

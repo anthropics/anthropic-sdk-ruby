@@ -164,6 +164,36 @@ module Anthropic
           end
           def self.variants
           end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              networking:
+                T.nilable(
+                  T.any(
+                    Anthropic::Beta::BetaUnrestrictedNetwork::OrHash,
+                    Anthropic::Beta::BetaLimitedNetworkParams::OrHash
+                  )
+                ),
+              packages: T.nilable(Anthropic::Beta::BetaPackagesParams::OrHash)
+            ).returns(
+              Anthropic::Beta::EnvironmentUpdateParams::Config::Variants
+            )
+          end
+          def self.new(
+            type:,
+            # Network configuration policy. Omit on update to preserve the existing value.
+            networking: nil,
+            # Specify packages (and optionally their versions) available in this environment.
+            #
+            # When versioning, use the version semantics relevant for the package manager,
+            # e.g. for `pip` use `package==1.0.0`. You are responsible for validating the
+            # package and version exist. Unversioned installs the latest.
+            packages: nil
+          )
+          end
         end
 
         # The visibility scope for this environment. 'organization' makes the environment

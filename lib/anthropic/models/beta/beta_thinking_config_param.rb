@@ -25,6 +25,35 @@ module Anthropic
 
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive)]
+
+        # Creates a new instance of the variant class whose `type` matches the given
+        # value, passing the remaining arguments to its constructor.
+        #
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::BetaThinkingConfigParam} for more details.
+        #
+        # @param type [Symbol, String]
+        #
+        # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+        #
+        #   @option args [Integer] :budget_tokens Determines how many tokens Claude can use for its internal reasoning process. La
+        #
+        #   @option args [Symbol, Anthropic::Models::Beta::BetaThinkingConfigEnabled::Display, nil, Symbol, Anthropic::Models::Beta::BetaThinkingConfigAdaptive::Display, nil] :display_ Controls how thinking content appears in the response. When set to `summarized`,
+        #
+        # @raise [ArgumentError]
+        # @return [Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive]
+        def self.new(type:, **args)
+          case type.to_sym
+          when :enabled
+            Anthropic::Beta::BetaThinkingConfigEnabled.new(**args)
+          when :disabled
+            Anthropic::Beta::BetaThinkingConfigDisabled.new(**args)
+          when :adaptive
+            Anthropic::Beta::BetaThinkingConfigAdaptive.new(**args)
+          else
+            raise ArgumentError, "unknown type: #{type}"
+          end
+        end
       end
     end
 

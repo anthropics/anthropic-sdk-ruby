@@ -57,11 +57,11 @@ module Anthropic
           optional :session_thread_id, String, nil?: true
 
           # @!method initialize(id:, input:, mcp_server_name:, name:, processed_at:, type:, evaluated_permission: nil, session_thread_id: nil)
+          #   Event emitted when the agent invokes a tool provided by an MCP server.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent} for
           #   more details.
-          #
-          #   Event emitted when the agent invokes a tool provided by an MCP server.
           #
           #   @param id [String] Unique identifier for this event.
           #

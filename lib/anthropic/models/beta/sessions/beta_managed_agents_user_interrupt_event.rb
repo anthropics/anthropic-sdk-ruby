@@ -31,11 +31,11 @@ module Anthropic
           optional :session_thread_id, String, nil?: true
 
           # @!method initialize(id:, type:, processed_at: nil, session_thread_id: nil)
+          #   An interrupt event that pauses agent execution and returns control to the user.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent} for
           #   more details.
-          #
-          #   An interrupt event that pauses agent execution and returns control to the user.
           #
           #   @param id [String] Unique identifier for this event.
           #

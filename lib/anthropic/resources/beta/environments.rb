@@ -7,10 +7,10 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::Environments::Work]
         attr_reader :work
 
+        # Create a new environment with the specified configuration.
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::EnvironmentCreateParams} for more details.
-        #
-        # Create a new environment with the specified configuration.
         #
         # @overload create(name:, config: nil, description: nil, metadata: nil, scope: nil, betas: nil, request_options: {})
         #
@@ -68,10 +68,10 @@ module Anthropic
           )
         end
 
+        # Update an existing environment's configuration.
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::EnvironmentUpdateParams} for more details.
-        #
-        # Update an existing environment's configuration.
         #
         # @overload update(environment_id, config: nil, description: nil, metadata: nil, name: nil, scope: nil, betas: nil, request_options: {})
         #
@@ -107,10 +107,10 @@ module Anthropic
           )
         end
 
+        # List environments with pagination support.
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::EnvironmentListParams} for more details.
-        #
-        # List environments with pagination support.
         #
         # @overload list(include_archived: nil, limit: nil, page: nil, betas: nil, request_options: {})
         #

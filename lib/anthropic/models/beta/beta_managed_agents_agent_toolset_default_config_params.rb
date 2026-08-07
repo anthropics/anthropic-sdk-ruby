@@ -22,11 +22,11 @@ module Anthropic
                  nil?: true
 
         # @!method initialize(enabled: nil, permission_policy: nil)
+        #   Default configuration for all tools in a toolset.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams} for
         #   more details.
-        #
-        #   Default configuration for all tools in a toolset.
         #
         #   @param enabled [Boolean, nil] Whether tools are enabled and available to Claude by default. Defaults to true i
         #
@@ -48,6 +48,26 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :always_allow
+              Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy.new(**args)
+            when :always_ask
+              Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
       end
     end

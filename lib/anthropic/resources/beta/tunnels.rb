@@ -69,9 +69,6 @@ module Anthropic
           )
         end
 
-        # Some parameter documentations has been truncated, see
-        # {Anthropic::Models::Beta::TunnelListParams} for more details.
-        #
         # The Tunnels API is in research preview. It requires the
         # `anthropic-beta: mcp-tunnels-2026-06-22` header and may change without a
         # deprecation period. It supersedes the Admin API endpoints at
@@ -79,6 +76,9 @@ module Anthropic
         #
         # Lists tunnels. Results are ordered by creation time, newest first; archived
         # tunnels are excluded unless include_archived is set.
+        #
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::TunnelListParams} for more details.
         #
         # @overload list(include_archived: nil, limit: nil, page: nil, betas: nil, request_options: {})
         #

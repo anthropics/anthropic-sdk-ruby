@@ -15,6 +15,45 @@ module Anthropic
         extend Anthropic::Internal::Type::Union
 
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_raw_content_block_delta]
+
+        def self.new:
+          (
+            type: :text_delta | "text_delta",
+            text: String
+          ) -> Anthropic::Beta::BetaTextDelta
+          | (
+            type: :input_json_delta | "input_json_delta",
+            partial_json: String
+          ) -> Anthropic::Beta::BetaInputJSONDelta
+          | (
+            type: :citations_delta | "citations_delta",
+            citation: Anthropic::Models::Beta::BetaCitationsDelta::citation
+          ) -> Anthropic::Beta::BetaCitationsDelta
+          | (
+            type: :thinking_delta | "thinking_delta",
+            estimated_tokens: Integer?,
+            thinking: String
+          ) -> Anthropic::Beta::BetaThinkingDelta
+          | (
+            type: :signature_delta | "signature_delta",
+            signature: String
+          ) -> Anthropic::Beta::BetaSignatureDelta
+          | (
+            type: :compaction_delta | "compaction_delta",
+            content: String?,
+            encrypted_content: String?
+          ) -> Anthropic::Beta::BetaCompactionContentBlockDelta
+          | (
+            type: Symbol | String,
+            ?text: String,
+            ?partial_json: String,
+            ?citation: Anthropic::Models::Beta::BetaCitationsDelta::citation,
+            ?estimated_tokens: Integer?,
+            ?thinking: String,
+            ?signature: String,
+            ?content: String?,
+            ?encrypted_content: String?
+          ) -> Anthropic::Models::Beta::beta_raw_content_block_delta
       end
     end
   end

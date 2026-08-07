@@ -55,6 +55,38 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaRequestDocumentBlock::source]
+
+          def self.new:
+            (
+              type: :base64 | "base64",
+              data: String,
+              ?media_type: :"application/pdf"
+            ) -> Anthropic::Beta::BetaBase64PDFSource
+            | (
+              type: :text | "text",
+              data: String,
+              ?media_type: :"text/plain"
+            ) -> Anthropic::Beta::BetaPlainTextSource
+            | (
+              type: :content | "content",
+              content: Anthropic::Models::Beta::BetaContentBlockSource::content
+            ) -> Anthropic::Beta::BetaContentBlockSource
+            | (
+              type: :url | "url",
+              url: String
+            ) -> Anthropic::Beta::BetaURLPDFSource
+            | (
+              type: :file | "file",
+              file_id: String
+            ) -> Anthropic::Beta::BetaFileDocumentSource
+            | (
+              type: Symbol | String,
+              ?data: String,
+              ?media_type: :"application/pdf" | :"text/plain",
+              ?content: Anthropic::Models::Beta::BetaContentBlockSource::content,
+              ?url: String,
+              ?file_id: String
+            ) -> Anthropic::Models::Beta::BetaRequestDocumentBlock::source
         end
       end
     end

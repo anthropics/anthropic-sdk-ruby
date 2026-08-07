@@ -27,6 +27,24 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaContextManagementResponse::applied_edit]
+
+          def self.new:
+            (
+              type: :clear_tool_uses_20250919 | "clear_tool_uses_20250919",
+              cleared_input_tokens: Integer,
+              cleared_tool_uses: Integer
+            ) -> Anthropic::Beta::BetaClearToolUses20250919EditResponse
+            | (
+              type: :clear_thinking_20251015 | "clear_thinking_20251015",
+              cleared_input_tokens: Integer,
+              cleared_thinking_turns: Integer
+            ) -> Anthropic::Beta::BetaClearThinking20251015EditResponse
+            | (
+              type: Symbol | String,
+              cleared_input_tokens: Integer,
+              ?cleared_tool_uses: Integer,
+              ?cleared_thinking_turns: Integer
+            ) -> Anthropic::Models::Beta::BetaContextManagementResponse::applied_edit
         end
       end
     end

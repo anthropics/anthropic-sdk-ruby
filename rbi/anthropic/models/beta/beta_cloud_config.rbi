@@ -83,6 +83,29 @@ module Anthropic
           end
           def self.variants
           end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              allow_mcp_servers: T::Boolean,
+              allow_package_managers: T::Boolean,
+              allowed_hosts: T::Array[String]
+            ).returns(Anthropic::Beta::BetaCloudConfig::Networking::Variants)
+          end
+          def self.new(
+            type:,
+            # Permits outbound access to MCP server endpoints configured on the agent, beyond
+            # those listed in the `allowed_hosts` array.
+            allow_mcp_servers: nil,
+            # Permits outbound access to public package registries (PyPI, npm, etc.) beyond
+            # those listed in the `allowed_hosts` array.
+            allow_package_managers: nil,
+            # Specifies domains the container can reach.
+            allowed_hosts: nil
+          )
+          end
         end
       end
     end

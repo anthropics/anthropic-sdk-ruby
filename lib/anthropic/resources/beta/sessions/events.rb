@@ -5,10 +5,10 @@ module Anthropic
     class Beta
       class Sessions
         class Events
+          # List Events
+          #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Sessions::EventListParams} for more details.
-          #
-          # List Events
           #
           # @overload list(session_id, created_at_gt: nil, created_at_gte: nil, created_at_lt: nil, created_at_lte: nil, limit: nil, order: nil, page: nil, types: nil, betas: nil, request_options: {})
           #
@@ -95,10 +95,10 @@ module Anthropic
             )
           end
 
+          # Stream Events
+          #
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Sessions::EventStreamParams} for more details.
-          #
-          # Stream Events
           #
           # @overload stream_events(session_id, event_deltas: nil, betas: nil, request_options: {})
           #

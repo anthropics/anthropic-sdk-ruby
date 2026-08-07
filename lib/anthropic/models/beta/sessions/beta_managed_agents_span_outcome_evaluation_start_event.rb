@@ -37,11 +37,11 @@ module Anthropic
                    enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent::Type }
 
           # @!method initialize(id:, iteration:, outcome_id:, processed_at:, type:)
+          #   Emitted when an outcome evaluation cycle begins.
+          #
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSpanOutcomeEvaluationStartEvent}
           #   for more details.
-          #
-          #   Emitted when an outcome evaluation cycle begins.
           #
           #   @param id [String] Unique identifier for this event.
           #

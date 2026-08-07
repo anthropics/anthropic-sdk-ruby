@@ -10,10 +10,10 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::MemoryStores::MemoryVersions]
         attr_reader :memory_versions
 
+        # Create a memory store
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MemoryStoreCreateParams} for more details.
-        #
-        # Create a memory store
         #
         # @overload create(name:, description: nil, metadata: nil, betas: nil, request_options: {})
         #
@@ -67,10 +67,10 @@ module Anthropic
           )
         end
 
+        # Update a memory store
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MemoryStoreUpdateParams} for more details.
-        #
-        # Update a memory store
         #
         # @overload update(memory_store_id, description: nil, metadata: nil, name: nil, betas: nil, request_options: {})
         #
@@ -102,10 +102,10 @@ module Anthropic
           )
         end
 
+        # List memory stores
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MemoryStoreListParams} for more details.
-        #
-        # List memory stores
         #
         # @overload list(created_at_gte: nil, created_at_lte: nil, include_archived: nil, limit: nil, page: nil, betas: nil, request_options: {})
         #

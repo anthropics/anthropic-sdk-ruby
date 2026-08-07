@@ -6,9 +6,6 @@ module Anthropic
       # See {Anthropic::Resources::Completions#create_streaming} for streaming
       # counterpart.
       #
-      # Some parameter documentations has been truncated, see
-      # {Anthropic::Models::CompletionCreateParams} for more details.
-      #
       # [Legacy] Create a Text Completion.
       #
       # The Text Completions API is a legacy API. We recommend using the
@@ -17,6 +14,9 @@ module Anthropic
       # Future models and features will not be compatible with Text Completions. See our
       # [migration guide](https://platform.claude.com/docs/en/build-with-claude/working-with-messages)
       # for guidance in migrating from Text Completions to Messages.
+      #
+      # Some parameter documentations has been truncated, see
+      # {Anthropic::Models::CompletionCreateParams} for more details.
       #
       # @overload create(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
       #
@@ -62,9 +62,6 @@ module Anthropic
 
       # See {Anthropic::Resources::Completions#create} for non-streaming counterpart.
       #
-      # Some parameter documentations has been truncated, see
-      # {Anthropic::Models::CompletionCreateParams} for more details.
-      #
       # [Legacy] Create a Text Completion.
       #
       # The Text Completions API is a legacy API. We recommend using the
@@ -73,6 +70,9 @@ module Anthropic
       # Future models and features will not be compatible with Text Completions. See our
       # [migration guide](https://platform.claude.com/docs/en/build-with-claude/working-with-messages)
       # for guidance in migrating from Text Completions to Messages.
+      #
+      # Some parameter documentations has been truncated, see
+      # {Anthropic::Models::CompletionCreateParams} for more details.
       #
       # @overload create_streaming(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
       #

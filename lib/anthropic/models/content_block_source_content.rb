@@ -13,6 +13,34 @@ module Anthropic
 
       # @!method self.variants
       #   @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam)]
+
+      # Creates a new instance of the variant class whose `type` matches the given
+      # value, passing the remaining arguments to its constructor.
+      #
+      # @param type [Symbol, String]
+      #
+      # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+      #
+      #   @option args [String] :text
+      #
+      #   @option args [Anthropic::Models::CacheControlEphemeral, nil] :cache_control Create a cache control breakpoint at this content block.
+      #
+      #   @option args [Array<Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam, Anthropic::Models::CitationWebSearchResultLocationParam, Anthropic::Models::CitationSearchResultLocationParam>, nil] :citations
+      #
+      #   @option args [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource] :source
+      #
+      # @raise [ArgumentError]
+      # @return [Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam]
+      def self.new(type:, **args)
+        case type.to_sym
+        when :text
+          Anthropic::TextBlockParam.new(**args)
+        when :image
+          Anthropic::ImageBlockParam.new(**args)
+        else
+          raise ArgumentError, "unknown type: #{type}"
+        end
+      end
     end
   end
 end

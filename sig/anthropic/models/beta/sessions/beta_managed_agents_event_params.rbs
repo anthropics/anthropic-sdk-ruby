@@ -15,6 +15,60 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::beta_managed_agents_event_params]
+
+          def self.new:
+            (
+              type: :"user.message" | "user.message",
+              content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::content]
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEventParams
+            | (
+              type: :"user.interrupt" | "user.interrupt",
+              ?session_thread_id: String?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams
+            | (
+              type: :"user.tool_confirmation" | "user.tool_confirmation",
+              result: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::result,
+              tool_use_id: String,
+              ?deny_message: String?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams
+            | (
+              type: :"user.custom_tool_result" | "user.custom_tool_result",
+              custom_tool_use_id: String,
+              ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams::content],
+              ?is_error: bool?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams
+            | (
+              type: :"user.define_outcome" | "user.define_outcome",
+              description: String,
+              rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::rubric,
+              ?max_iterations: Integer?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams
+            | (
+              type: :"user.tool_result" | "user.tool_result",
+              tool_use_id: String,
+              ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams::content],
+              ?is_error: bool?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams
+            | (
+              type: :"system.message" | "system.message",
+              content: ::Array[Anthropic::Beta::BetaManagedAgentsSystemContentBlock]
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSystemMessageEventParams
+            | (
+              type: Symbol | String,
+              ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::content]
+              | ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams::content]
+              | ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams::content]
+              | ::Array[Anthropic::Beta::BetaManagedAgentsSystemContentBlock],
+              ?session_thread_id: String?,
+              ?result: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams::result,
+              ?tool_use_id: String,
+              ?deny_message: String?,
+              ?custom_tool_use_id: String,
+              ?is_error: bool?,
+              ?description: String,
+              ?rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::rubric,
+              ?max_iterations: Integer?
+            ) -> Anthropic::Models::Beta::Sessions::beta_managed_agents_event_params
         end
       end
     end

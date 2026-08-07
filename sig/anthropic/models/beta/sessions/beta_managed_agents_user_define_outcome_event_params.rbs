@@ -41,6 +41,21 @@ module Anthropic
             extend Anthropic::Internal::Type::Union
 
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::rubric]
+
+            def self.new:
+              (
+                type: :file | "file",
+                file_id: String
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsFileRubricParams
+              | (
+                type: :text | "text",
+                content: String
+              ) -> Anthropic::Beta::Sessions::BetaManagedAgentsTextRubricParams
+              | (
+                type: Symbol | String,
+                ?file_id: String,
+                ?content: String
+              ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::rubric
           end
 
           type type_ = :"user.define_outcome"

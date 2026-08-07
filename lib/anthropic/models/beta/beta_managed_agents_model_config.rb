@@ -36,10 +36,10 @@ module Anthropic
         optional :speed, enum: -> { Anthropic::Beta::BetaManagedAgentsModelConfig::Speed }
 
         # @!method initialize(id:, effort: nil, inference_geo: nil, speed: nil)
+        #   Model identifier and configuration.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsModelConfig} for more details.
-        #
-        #   Model identifier and configuration.
         #
         #   @param id [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] The model that will power your agent.
         #
@@ -75,6 +75,32 @@ module Anthropic
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsEffortLow, Anthropic::Models::Beta::BetaManagedAgentsEffortMedium, Anthropic::Models::Beta::BetaManagedAgentsEffortHigh, Anthropic::Models::Beta::BetaManagedAgentsEffortXhigh, Anthropic::Models::Beta::BetaManagedAgentsEffortMax)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaManagedAgentsEffortLow, Anthropic::Models::Beta::BetaManagedAgentsEffortMedium, Anthropic::Models::Beta::BetaManagedAgentsEffortHigh, Anthropic::Models::Beta::BetaManagedAgentsEffortXhigh, Anthropic::Models::Beta::BetaManagedAgentsEffortMax]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :low
+              Anthropic::Beta::BetaManagedAgentsEffortLow.new(**args)
+            when :medium
+              Anthropic::Beta::BetaManagedAgentsEffortMedium.new(**args)
+            when :high
+              Anthropic::Beta::BetaManagedAgentsEffortHigh.new(**args)
+            when :xhigh
+              Anthropic::Beta::BetaManagedAgentsEffortXhigh.new(**args)
+            when :max
+              Anthropic::Beta::BetaManagedAgentsEffortMax.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
 
         # Inference speed mode. `fast` provides significantly faster output token

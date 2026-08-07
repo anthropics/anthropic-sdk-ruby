@@ -102,6 +102,25 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::SessionCreateParams::initial_event]
+
+          def self.new:
+            (
+              type: :"user.message" | "user.message",
+              content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::content]
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsUserMessageEventParams
+            | (
+              type: :"user.define_outcome" | "user.define_outcome",
+              description: String,
+              rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::rubric,
+              ?max_iterations: Integer?
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams
+            | (
+              type: Symbol | String,
+              ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::content],
+              ?description: String,
+              ?rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::rubric,
+              ?max_iterations: Integer?
+            ) -> Anthropic::Models::Beta::SessionCreateParams::initial_event
         end
 
         type resource =
@@ -113,6 +132,37 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::SessionCreateParams::resource]
+
+          def self.new:
+            (
+              type: :github_repository | "github_repository",
+              authorization_token: String,
+              url: String,
+              ?checkout: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::checkout?,
+              ?mount_path: String?
+            ) -> Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams
+            | (
+              type: :file | "file",
+              file_id: String,
+              ?mount_path: String?
+            ) -> Anthropic::Beta::BetaManagedAgentsFileResourceParams
+            | (
+              type: :memory_store | "memory_store",
+              memory_store_id: String,
+              ?access: Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::access?,
+              ?instructions: String?
+            ) -> Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceParam
+            | (
+              type: Symbol | String,
+              ?authorization_token: String,
+              ?url: String,
+              ?checkout: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::checkout?,
+              ?mount_path: String?,
+              ?file_id: String,
+              ?memory_store_id: String,
+              ?access: Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam::access?,
+              ?instructions: String?
+            ) -> Anthropic::Models::Beta::SessionCreateParams::resource
         end
       end
     end

@@ -13,10 +13,10 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::Sessions::Threads]
         attr_reader :threads
 
+        # Create Session
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::SessionCreateParams} for more details.
-        #
-        # Create Session
         #
         # @overload create(agent:, environment_id:, budget: nil, initial_events: nil, metadata: nil, resources: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
         #
@@ -80,10 +80,10 @@ module Anthropic
           )
         end
 
+        # Update Session
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::SessionUpdateParams} for more details.
-        #
-        # Update Session
         #
         # @overload update(session_id, agent: nil, budget: nil, metadata: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
         #
@@ -119,10 +119,10 @@ module Anthropic
           )
         end
 
+        # List Sessions
+        #
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::SessionListParams} for more details.
-        #
-        # List Sessions
         #
         # @overload list(agent_id: nil, agent_version: nil, created_at_gt: nil, created_at_gte: nil, created_at_lt: nil, created_at_lte: nil, deployment_id: nil, include_archived: nil, limit: nil, memory_store_id: nil, order: nil, page: nil, statuses: nil, betas: nil, request_options: {})
         #

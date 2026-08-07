@@ -43,10 +43,10 @@ module Anthropic
         required :type, const: :tunnel
 
         # @!method initialize(id:, archived_at:, created_at:, display_name:, domain:, type: :tunnel)
+        #   An MCP tunnel.
+        #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaTunnel} for more details.
-        #
-        #   An MCP tunnel.
         #
         #   @param id [String] Unique identifier for the tunnel, prefixed with `tnl_`.
         #
