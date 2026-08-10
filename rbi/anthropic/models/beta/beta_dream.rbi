@@ -54,7 +54,7 @@ module Anthropic
         # The default destination: the job creates a new output memory store as a clone of
         # the memory_store input and writes the consolidated memories into it. The input
         # store is never mutated.
-        sig { returns(Anthropic::Beta::BetaDream::OutputBehavior::Variants) }
+        sig { returns(Anthropic::Beta::BetaOutputBehavior::Variants) }
         attr_accessor :output_behavior
 
         sig { returns(T::Array[Anthropic::Beta::BetaDreamOutput]) }
@@ -101,8 +101,8 @@ module Anthropic
             model: Anthropic::Beta::BetaDreamModelConfig::OrHash,
             output_behavior:
               T.any(
-                Anthropic::Beta::BetaDream::OutputBehavior::CreateNew::OrHash,
-                Anthropic::Beta::BetaDream::OutputBehavior::UpdateExisting::OrHash
+                Anthropic::Beta::BetaOutputBehaviorCreateNew::OrHash,
+                Anthropic::Beta::BetaOutputBehaviorUpdateExisting::OrHash
               ),
             outputs: T::Array[Anthropic::Beta::BetaDreamOutput::OrHash],
             session_id: T.nilable(String),
@@ -151,8 +151,7 @@ module Anthropic
               inputs: T::Array[Anthropic::Beta::BetaDreamInput::Variants],
               instructions: T.nilable(String),
               model: Anthropic::Beta::BetaDreamModelConfig,
-              output_behavior:
-                Anthropic::Beta::BetaDream::OutputBehavior::Variants,
+              output_behavior: Anthropic::Beta::BetaOutputBehavior::Variants,
               outputs: T::Array[Anthropic::Beta::BetaDreamOutput],
               session_id: T.nilable(String),
               status: Anthropic::Beta::BetaDreamStatus::TaggedSymbol,
@@ -162,95 +161,6 @@ module Anthropic
           )
         end
         def to_hash
-        end
-
-        # The default destination: the job creates a new output memory store as a clone of
-        # the memory_store input and writes the consolidated memories into it. The input
-        # store is never mutated.
-        module OutputBehavior
-          extend Anthropic::Internal::Type::Union
-
-          Variants =
-            T.type_alias do
-              T.any(
-                Anthropic::Beta::BetaDream::OutputBehavior::CreateNew,
-                Anthropic::Beta::BetaDream::OutputBehavior::UpdateExisting
-              )
-            end
-
-          class CreateNew < Anthropic::Internal::Type::BaseModel
-            OrHash =
-              T.type_alias do
-                T.any(
-                  Anthropic::Beta::BetaDream::OutputBehavior::CreateNew,
-                  Anthropic::Internal::AnyHash
-                )
-              end
-
-            sig { returns(Symbol) }
-            attr_accessor :type
-
-            # The default destination: the job creates a new output memory store as a clone of
-            # the memory_store input and writes the consolidated memories into it. The input
-            # store is never mutated.
-            sig { params(type: Symbol).returns(T.attached_class) }
-            def self.new(type: :create_new)
-            end
-
-            sig { override.returns({ type: Symbol }) }
-            def to_hash
-            end
-          end
-
-          class UpdateExisting < Anthropic::Internal::Type::BaseModel
-            OrHash =
-              T.type_alias do
-                T.any(
-                  Anthropic::Beta::BetaDream::OutputBehavior::UpdateExisting,
-                  Anthropic::Internal::AnyHash
-                )
-              end
-
-            sig { returns(String) }
-            attr_accessor :memory_store_id
-
-            sig { returns(Symbol) }
-            attr_accessor :type
-
-            # The job writes the consolidated memories into this existing memory store instead
-            # of creating one. In EAP the store must be the job's own memory_store input, so
-            # the job consolidates the store in place.
-            sig do
-              params(memory_store_id: String, type: Symbol).returns(
-                T.attached_class
-              )
-            end
-            def self.new(memory_store_id:, type: :update_existing)
-            end
-
-            sig { override.returns({ memory_store_id: String, type: Symbol }) }
-            def to_hash
-            end
-          end
-
-          sig do
-            override.returns(
-              T::Array[Anthropic::Beta::BetaDream::OutputBehavior::Variants]
-            )
-          end
-          def self.variants
-          end
-
-          # Creates a new instance of the variant class whose `type` matches the given
-          # value, passing the remaining arguments to its constructor.
-          sig do
-            params(
-              type: T.any(Symbol, String),
-              memory_store_id: String
-            ).returns(Anthropic::Beta::BetaDream::OutputBehavior::Variants)
-          end
-          def self.new(type:, memory_store_id: nil)
-          end
         end
 
         module Type
