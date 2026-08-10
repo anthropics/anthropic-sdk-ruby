@@ -1,0 +1,32 @@
+module Anthropic
+  module Models
+    class BetaOutputBehaviorCreateNew = Beta::BetaOutputBehaviorCreateNew
+
+    module Beta
+      type beta_output_behavior_create_new =
+        { type: Anthropic::Models::Beta::BetaOutputBehaviorCreateNew::type_ }
+
+      class BetaOutputBehaviorCreateNew < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: Anthropic::Models::Beta::BetaOutputBehaviorCreateNew::type_
+
+        def initialize: (
+          type: Anthropic::Models::Beta::BetaOutputBehaviorCreateNew::type_
+        ) -> void
+
+        def to_hash: -> {
+          type: Anthropic::Models::Beta::BetaOutputBehaviorCreateNew::type_
+        }
+
+        type type_ = :create_new
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          CREATE_NEW: :create_new
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaOutputBehaviorCreateNew::type_]
+        end
+      end
+    end
+  end
+end
