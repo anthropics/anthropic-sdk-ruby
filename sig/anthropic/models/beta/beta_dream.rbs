@@ -13,6 +13,7 @@ module Anthropic
           inputs: ::Array[Anthropic::Models::Beta::beta_dream_input],
           instructions: String?,
           model: Anthropic::Beta::BetaDreamModelConfig,
+          output_behavior: Anthropic::Models::Beta::BetaDream::output_behavior,
           outputs: ::Array[Anthropic::Beta::BetaDreamOutput],
           session_id: String?,
           status: Anthropic::Models::Beta::beta_dream_status,
@@ -37,6 +38,8 @@ module Anthropic
 
         attr_accessor model: Anthropic::Beta::BetaDreamModelConfig
 
+        attr_accessor output_behavior: Anthropic::Models::Beta::BetaDream::output_behavior
+
         attr_accessor outputs: ::Array[Anthropic::Beta::BetaDreamOutput]
 
         attr_accessor session_id: String?
@@ -56,6 +59,7 @@ module Anthropic
           inputs: ::Array[Anthropic::Models::Beta::beta_dream_input],
           instructions: String?,
           model: Anthropic::Beta::BetaDreamModelConfig,
+          output_behavior: Anthropic::Models::Beta::BetaDream::output_behavior,
           outputs: ::Array[Anthropic::Beta::BetaDreamOutput],
           session_id: String?,
           status: Anthropic::Models::Beta::beta_dream_status,
@@ -72,12 +76,62 @@ module Anthropic
           inputs: ::Array[Anthropic::Models::Beta::beta_dream_input],
           instructions: String?,
           model: Anthropic::Beta::BetaDreamModelConfig,
+          output_behavior: Anthropic::Models::Beta::BetaDream::output_behavior,
           outputs: ::Array[Anthropic::Beta::BetaDreamOutput],
           session_id: String?,
           status: Anthropic::Models::Beta::beta_dream_status,
           type: Anthropic::Models::Beta::BetaDream::type_,
           usage: Anthropic::Beta::BetaDreamUsage
         }
+
+        type output_behavior =
+          Anthropic::Beta::BetaDream::OutputBehavior::CreateNew
+          | Anthropic::Beta::BetaDream::OutputBehavior::UpdateExisting
+
+        module OutputBehavior
+          extend Anthropic::Internal::Type::Union
+
+          type create_new = { type: :create_new }
+
+          class CreateNew < Anthropic::Internal::Type::BaseModel
+            attr_accessor type: :create_new
+
+            def initialize: (?type: :create_new) -> void
+
+            def to_hash: -> { type: :create_new }
+          end
+
+          type update_existing =
+            { memory_store_id: String, type: :update_existing }
+
+          class UpdateExisting < Anthropic::Internal::Type::BaseModel
+            attr_accessor memory_store_id: String
+
+            attr_accessor type: :update_existing
+
+            def initialize: (
+              memory_store_id: String,
+              ?type: :update_existing
+            ) -> void
+
+            def to_hash: -> { memory_store_id: String, type: :update_existing }
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaDream::output_behavior]
+
+          def self.new:
+            (
+              type: :create_new | "create_new"
+            ) -> Anthropic::Beta::BetaDream::OutputBehavior::CreateNew
+            | (
+              type: :update_existing | "update_existing",
+              memory_store_id: String
+            ) -> Anthropic::Beta::BetaDream::OutputBehavior::UpdateExisting
+            | (
+              type: Symbol | String,
+              ?memory_store_id: String
+            ) -> Anthropic::Models::Beta::BetaDream::output_behavior
+        end
 
         type type_ = :dream
 
