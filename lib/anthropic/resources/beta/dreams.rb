@@ -17,7 +17,7 @@ module Anthropic
         #
         # @param instructions [String, nil] Body param
         #
-        # @param output_behavior [Anthropic::Models::Beta::DreamCreateParams::OutputBehavior::CreateNew, Anthropic::Models::Beta::DreamCreateParams::OutputBehavior::UpdateExisting] Body param: The default destination: the job creates a new output memory store a
+        # @param output_behavior [Anthropic::Models::Beta::BetaOutputBehaviorCreateNew, Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting] Body param: The default destination: the job creates a new output memory store a
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #

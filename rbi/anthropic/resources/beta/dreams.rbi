@@ -19,8 +19,8 @@ module Anthropic
             instructions: T.nilable(String),
             output_behavior:
               T.any(
-                Anthropic::Beta::DreamCreateParams::OutputBehavior::CreateNew::OrHash,
-                Anthropic::Beta::DreamCreateParams::OutputBehavior::UpdateExisting::OrHash
+                Anthropic::Beta::BetaOutputBehaviorCreateNew::OrHash,
+                Anthropic::Beta::BetaOutputBehaviorUpdateExisting::OrHash
               ),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash

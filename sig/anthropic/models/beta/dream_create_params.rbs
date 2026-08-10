@@ -6,7 +6,7 @@ module Anthropic
           inputs: ::Array[Anthropic::Models::Beta::beta_dream_input],
           model: Anthropic::Models::Beta::DreamCreateParams::model,
           instructions: String?,
-          output_behavior: Anthropic::Models::Beta::DreamCreateParams::output_behavior,
+          output_behavior: Anthropic::Models::Beta::beta_output_behavior,
           betas: ::Array[Anthropic::Models::anthropic_beta]
         }
         & Anthropic::Internal::Type::request_parameters
@@ -21,11 +21,11 @@ module Anthropic
 
         attr_accessor instructions: String?
 
-        attr_reader output_behavior: Anthropic::Models::Beta::DreamCreateParams::output_behavior?
+        attr_reader output_behavior: Anthropic::Models::Beta::beta_output_behavior?
 
         def output_behavior=: (
-          Anthropic::Models::Beta::DreamCreateParams::output_behavior
-        ) -> Anthropic::Models::Beta::DreamCreateParams::output_behavior
+          Anthropic::Models::Beta::beta_output_behavior
+        ) -> Anthropic::Models::Beta::beta_output_behavior
 
         attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
@@ -37,7 +37,7 @@ module Anthropic
           inputs: ::Array[Anthropic::Models::Beta::beta_dream_input],
           model: Anthropic::Models::Beta::DreamCreateParams::model,
           ?instructions: String?,
-          ?output_behavior: Anthropic::Models::Beta::DreamCreateParams::output_behavior,
+          ?output_behavior: Anthropic::Models::Beta::beta_output_behavior,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> void
@@ -46,7 +46,7 @@ module Anthropic
           inputs: ::Array[Anthropic::Models::Beta::beta_dream_input],
           model: Anthropic::Models::Beta::DreamCreateParams::model,
           instructions: String?,
-          output_behavior: Anthropic::Models::Beta::DreamCreateParams::output_behavior,
+          output_behavior: Anthropic::Models::Beta::beta_output_behavior,
           betas: ::Array[Anthropic::Models::anthropic_beta],
           request_options: Anthropic::RequestOptions
         }
@@ -57,55 +57,6 @@ module Anthropic
           extend Anthropic::Internal::Type::Union
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::DreamCreateParams::model]
-        end
-
-        type output_behavior =
-          Anthropic::Beta::DreamCreateParams::OutputBehavior::CreateNew
-          | Anthropic::Beta::DreamCreateParams::OutputBehavior::UpdateExisting
-
-        module OutputBehavior
-          extend Anthropic::Internal::Type::Union
-
-          type create_new = { type: :create_new }
-
-          class CreateNew < Anthropic::Internal::Type::BaseModel
-            attr_accessor type: :create_new
-
-            def initialize: (?type: :create_new) -> void
-
-            def to_hash: -> { type: :create_new }
-          end
-
-          type update_existing =
-            { memory_store_id: String, type: :update_existing }
-
-          class UpdateExisting < Anthropic::Internal::Type::BaseModel
-            attr_accessor memory_store_id: String
-
-            attr_accessor type: :update_existing
-
-            def initialize: (
-              memory_store_id: String,
-              ?type: :update_existing
-            ) -> void
-
-            def to_hash: -> { memory_store_id: String, type: :update_existing }
-          end
-
-          def self?.variants: -> ::Array[Anthropic::Models::Beta::DreamCreateParams::output_behavior]
-
-          def self.new:
-            (
-              type: :create_new | "create_new"
-            ) -> Anthropic::Beta::DreamCreateParams::OutputBehavior::CreateNew
-            | (
-              type: :update_existing | "update_existing",
-              memory_store_id: String
-            ) -> Anthropic::Beta::DreamCreateParams::OutputBehavior::UpdateExisting
-            | (
-              type: Symbol | String,
-              ?memory_store_id: String
-            ) -> Anthropic::Models::Beta::DreamCreateParams::output_behavior
         end
       end
     end
