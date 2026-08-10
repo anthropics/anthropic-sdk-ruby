@@ -15,7 +15,9 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaDreamMemoryStoreInput::Type }
 
         # @!method initialize(memory_store_id:, type:)
-        #   An input memory store the dream reads from. The dream never mutates this store.
+        #   An input memory store the dream reads from. The dream never mutates this store
+        #   unless it is also the destination: with output_behavior {type:
+        #   "update_existing"} the job consolidates this store in place.
         #
         #   @param memory_store_id [String]
         #   @param type [Symbol, Anthropic::Models::Beta::BetaDreamMemoryStoreInput::Type]

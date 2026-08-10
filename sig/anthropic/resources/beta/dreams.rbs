@@ -6,6 +6,7 @@ module Anthropic
           inputs: ::Array[Anthropic::Models::Beta::beta_dream_input],
           model: Anthropic::Models::Beta::DreamCreateParams::model,
           ?instructions: String?,
+          ?output_behavior: Anthropic::Models::Beta::DreamCreateParams::output_behavior,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaDream

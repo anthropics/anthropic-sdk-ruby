@@ -3,13 +3,15 @@
 module Anthropic
   module Models
     module Beta
-      # An input memory store the dream reads from. The dream never mutates this store.
+      # An input memory store the dream reads from. The dream never mutates this store
+      # unless it is also the destination: with output_behavior {type:
+      # "update_existing"} the job consolidates this store in place.
       module BetaDreamInput
         extend Anthropic::Internal::Type::Union
 
         discriminator :type
 
-        # An input memory store the dream reads from. The dream never mutates this store.
+        # An input memory store the dream reads from. The dream never mutates this store unless it is also the destination: with output_behavior {type: "update_existing"} the job consolidates this store in place.
         variant :memory_store, -> { Anthropic::Beta::BetaDreamMemoryStoreInput }
 
         # Input session transcripts the dream reads.

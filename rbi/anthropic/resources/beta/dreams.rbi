@@ -17,6 +17,11 @@ module Anthropic
             model:
               T.any(String, Anthropic::Beta::BetaDreamModelConfigParam::OrHash),
             instructions: T.nilable(String),
+            output_behavior:
+              T.any(
+                Anthropic::Beta::DreamCreateParams::OutputBehavior::CreateNew::OrHash,
+                Anthropic::Beta::DreamCreateParams::OutputBehavior::UpdateExisting::OrHash
+              ),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaDream)
@@ -28,6 +33,10 @@ module Anthropic
           model:,
           # Body param
           instructions: nil,
+          # Body param: The default destination: the job creates a new output memory store
+          # as a clone of the memory_store input and writes the consolidated memories into
+          # it. The input store is never mutated.
+          output_behavior: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}
