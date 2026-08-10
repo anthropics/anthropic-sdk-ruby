@@ -6,13 +6,18 @@ module Anthropic
       class Dreams
         # Create a Dream
         #
-        # @overload create(inputs:, model:, instructions: nil, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::DreamCreateParams} for more details.
+        #
+        # @overload create(inputs:, model:, instructions: nil, output_behavior: nil, betas: nil, request_options: {})
         #
         # @param inputs [Array<Anthropic::Models::Beta::BetaDreamMemoryStoreInput, Anthropic::Models::Beta::BetaDreamSessionsInput>] Body param
         #
         # @param model [String, Anthropic::Models::Beta::BetaDreamModelConfigParam] Body param: Model identifier and configuration applied to every pipeline stage.
         #
         # @param instructions [String, nil] Body param
+        #
+        # @param output_behavior [Anthropic::Models::Beta::DreamCreateParams::OutputBehavior::CreateNew, Anthropic::Models::Beta::DreamCreateParams::OutputBehavior::UpdateExisting] Body param: The default destination: the job creates a new output memory store a
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
