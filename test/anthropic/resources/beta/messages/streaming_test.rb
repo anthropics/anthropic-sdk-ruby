@@ -150,6 +150,45 @@ class Anthropic::Test::Resources::Beta::Messages::StreamingTest < Minitest::Test
     assert_equal("claude-fallback-model-b", fallback_block.to.model.to_s)
   end
 
+  def test_accumulated_message_carries_context_management_and_container
+    stub_streaming_response(context_management_sse_response)
+
+    stream = @client.beta.messages.stream(**compaction_params)
+    message = stream.accumulated_message
+
+    # context_management rides on the message_delta event itself, and the container
+    # only ever arrives on message_delta — neither is present on message_start.
+    assert_equal(1, message.context_management.applied_edits.length)
+    applied_edit = message.context_management.applied_edits.first
+    assert_equal(:clear_tool_uses_20250919, applied_edit.type)
+    assert_equal(150, applied_edit.cleared_input_tokens)
+    assert_equal("container_beta", message.container.id)
+    assert_equal(9, message.usage.output_tokens_details.thinking_tokens)
+  end
+
+  def context_management_sse_response
+    <<~SSE
+      event: message_start
+      data: {"type":"message_start","message":{"id":"msg_ctx","type":"message","role":"assistant","content":[],"model":"claude-sonnet-4-20250514","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":10,"output_tokens":1}}}
+
+      event: content_block_start
+      data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":"","citations":null}}
+
+      event: content_block_delta
+      data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"Hi."}}
+
+      event: content_block_stop
+      data: {"type":"content_block_stop","index":0}
+
+      event: message_delta
+      data: {"type":"message_delta","context_management":{"applied_edits":[{"type":"clear_tool_uses_20250919","cleared_input_tokens":150,"cleared_tool_uses":2}]},"delta":{"stop_reason":"end_turn","stop_sequence":null,"container":{"id":"container_beta","expires_at":"2025-01-01T00:00:00Z"}},"usage":{"output_tokens":15,"output_tokens_details":{"thinking_tokens":9}}}
+
+      event: message_stop
+      data: {"type":"message_stop"}
+
+    SSE
+  end
+
   def test_accumulated_message_carries_fallback_credit_usage
     stub_streaming_response(fallback_credit_sse_response)
 
