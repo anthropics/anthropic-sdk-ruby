@@ -210,8 +210,12 @@ module Anthropic
 
           # @api public
           #
+          # Must not resolve the lazy `type_fn`s: some runtimes (JRuby) call `Class#hash`
+          # from inside `Module#include`, before every referenced constant is loaded.
+          # Still consistent with `==`, since equal `fields` implies equal non-type entries.
+          #
           # @return [Integer]
-          def hash = fields.hash
+          def hash = known_fields.transform_values { |field| field.except(:type_fn) }.hash
         end
 
         # @api public

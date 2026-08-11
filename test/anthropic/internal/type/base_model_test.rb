@@ -704,6 +704,18 @@ class Anthropic::Test::BaseModelQoLTest < Minitest::Test
       end
     end
   end
+
+  def test_class_hash_does_not_resolve_lazy_types
+    # JRuby calls `Class#hash` from inside `Module#include`, mid-`require "anthropic"`,
+    # when the referenced constants may not exist yet.
+    parent = Class.new(Anthropic::Internal::Type::BaseModel) do
+      required :a, -> { raise NameError, "lazy type resolved too early" }
+    end
+    child = Class.new(parent) { include Anthropic::Internal::Type::RequestParameters }
+
+    assert_kind_of(Integer, child.hash)
+    assert_equal(parent.hash, Class.new(parent).hash)
+  end
 end
 
 class Anthropic::Test::MetaInfoTest < Minitest::Test
