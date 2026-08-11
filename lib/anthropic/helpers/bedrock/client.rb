@@ -60,7 +60,7 @@ module Anthropic
         #   the Bedrock URL rewrite and SigV4 signing happen inside the continuation, per
         #   attempt.
         #
-        def initialize( # rubocop:disable Lint/MissingSuper
+        def initialize(
           aws_region: nil,
           base_url: nil,
           max_retries: self.class::DEFAULT_MAX_RETRIES,
@@ -126,31 +126,44 @@ module Anthropic
             "https://bedrock-runtime.#{@aws_region}.amazonaws.com"
           )
 
-          @api_key = nil
-          @auth_token = @signer ? nil : api_key
-          @credentials = nil
-          @token_cache = nil
           # For AWSAuth#auth_headers: suppress key headers in SigV4 mode; in
           # API-key mode fall through to the base bearer-token handling.
           @use_sig_v4 = !@signer.nil?
           @use_bearer_auth = false
 
-          # Skip Anthropic::Client#initialize and bind BaseClient#initialize directly:
-          # the parent's initializer runs OIDC/credential-provider resolution that does
-          # not apply here.
-          Anthropic::Internal::Transport::BaseClient.instance_method(:initialize).bind(self).call(
+          # The Bedrock bearer rides the base client's `auth_token` slot;
+          # {#resolve_default_credentials?} keeps first-party credential
+          # auto-discovery out of the picture when it is absent.
+          super(
+            auth_token: @signer ? nil : api_key,
             base_url: base_url,
             timeout: timeout,
             max_retries: max_retries,
             initial_retry_delay: initial_retry_delay,
             max_retry_delay: max_retry_delay,
-            headers: {"anthropic-version" => "2023-06-01"},
             middleware: middleware
           )
+        end
 
-          @messages = Anthropic::Resources::Messages.new(client: self)
-          @completions = Anthropic::Resources::Completions.new(client: self)
-          @beta = Anthropic::Resources::Beta.new(client: self)
+        # @api private
+        #
+        # Auth is SigV4 or the Bedrock bearer only — never resolve ambient
+        # first-party credentials, which would fold the shared config store's
+        # headers and bearer into requests bound for a third-party endpoint.
+        #
+        # @return [Boolean]
+        private def resolve_default_credentials? = false
+
+        # The Models API is not available on Bedrock, so the resource the
+        # parent wires up would target routes the Bedrock host does not serve
+        # — keep it unavailable, matching the SDK's other Bedrock clients.
+        #
+        # @raise [NotImplementedError]
+        def models
+          # rubocop:disable Layout/LineLength
+          message = "Please instead use https://docs.anthropic.com/en/api/claude-on-amazon-bedrock#list-available-models to list available models on Bedrock."
+          # rubocop:enable Layout/LineLength
+          raise NotImplementedError.new(message)
         end
 
         # @api private

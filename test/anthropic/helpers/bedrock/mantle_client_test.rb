@@ -275,4 +275,29 @@ class Anthropic::Test::BedrockMantleClientTest < Minitest::Test
     client = Anthropic::BedrockMantleClient.new(api_key: "sk-ant-xxx", base_url: "http://localhost")
     assert_raises(NotImplementedError) { client.beta.skills }
   end
+
+  # First-party static env keys must never fold into a Mantle client, in any
+  # auth mode.
+  def test_skip_auth_ignores_first_party_env_keys
+    original = %w[ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN].to_h { [_1, ENV.fetch(_1, nil)] }
+    begin
+      ENV["ANTHROPIC_API_KEY"] = "env-api-key"
+      ENV["ANTHROPIC_AUTH_TOKEN"] = "env-auth-token"
+
+      stub_request(:post, "http://localhost/v1/messages").to_return_json({status: 200, body: {}})
+
+      client = Anthropic::BedrockMantleClient.new(skip_auth: true, base_url: "http://localhost")
+      assert_nil(client.credentials)
+      assert_nil(client.token_cache)
+      client.messages.create(max_tokens: 1024, messages: [{content: "hi", role: :user}], model: :m)
+
+      assert_requested(:post, "http://localhost/v1/messages", times: 1) do |req|
+        assert_nil(req.headers["Authorization"])
+        assert_nil(req.headers["X-Api-Key"])
+        true
+      end
+    ensure
+      original.each { |key, value| value.nil? ? ENV.delete(key) : ENV[key] = value }
+    end
+  end
 end
