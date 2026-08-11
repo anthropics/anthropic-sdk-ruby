@@ -53,6 +53,10 @@ module Anthropic
         def models
         end
 
+        sig { override.returns(T::Boolean) }
+        private def resolve_default_credentials?
+        end
+
         # @api private
         sig { override.returns(Anthropic::Middleware::Entry) }
         private def provider_middleware

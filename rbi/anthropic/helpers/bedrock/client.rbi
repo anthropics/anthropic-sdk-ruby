@@ -18,6 +18,14 @@ module Anthropic
         sig { returns(Anthropic::Resources::Beta) }
         attr_reader :beta
 
+        sig { override.returns(T::Boolean) }
+        private def resolve_default_credentials?
+        end
+
+        sig { returns(T.noreturn) }
+        def models
+        end
+
         # @api private
         sig do
           override

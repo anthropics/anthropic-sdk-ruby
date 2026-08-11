@@ -115,6 +115,16 @@ module Anthropic
 
         # @api private
         #
+        # Auth is SigV4 or the Bedrock bearer only (or skipped entirely) —
+        # never resolve ambient first-party credentials, which would fold the
+        # shared config store's headers and bearer into requests bound for a
+        # third-party endpoint.
+        #
+        # @return [Boolean]
+        private def resolve_default_credentials? = false
+
+        # @api private
+        #
         # @return [#call]
         private def provider_middleware = method(:aws_auth_provider)
 

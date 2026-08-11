@@ -523,4 +523,65 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
       message => Anthropic::Models::Message
     end
   end
+
+  # ANTHROPIC_CUSTOM_HEADERS applies to Bedrock clients like any other client.
+  def test_custom_headers_env_applies
+    original = ENV.fetch("ANTHROPIC_CUSTOM_HEADERS", nil)
+    ENV["ANTHROPIC_CUSTOM_HEADERS"] = "x-custom-test: from-env"
+
+    uri = "https://bedrock-runtime.us-east-1.amazonaws.com/model/m/invoke"
+    stub_request(:post, uri).to_return_json({status: 200, body: {}})
+
+    make_client.messages.create(max_tokens: 1024, messages: [{content: "hi", role: :user}], model: :m)
+
+    assert_requested(:post, uri, times: 1) do |req|
+      assert_equal("from-env", req.headers.transform_keys(&:downcase)["x-custom-test"])
+      true
+    end
+  ensure
+    original.nil? ? ENV.delete("ANTHROPIC_CUSTOM_HEADERS") : ENV["ANTHROPIC_CUSTOM_HEADERS"] = original
+  end
+
+  # The webhook signing key defaults from the env like the first-party client.
+  # It is used only to verify inbound webhook payloads; nothing goes on the wire.
+  def test_webhook_key_env_default
+    original = ENV.fetch("ANTHROPIC_WEBHOOK_SIGNING_KEY", nil)
+    ENV["ANTHROPIC_WEBHOOK_SIGNING_KEY"] = "whsec_fake_env_value"
+    assert_equal("whsec_fake_env_value", make_client.webhook_key)
+  ensure
+    original.nil? ? ENV.delete("ANTHROPIC_WEBHOOK_SIGNING_KEY") : ENV["ANTHROPIC_WEBHOOK_SIGNING_KEY"] = original
+  end
+
+  # The Models API is not available on Bedrock — the resource must stay
+  # unavailable rather than silently targeting routes the host does not serve.
+  def test_models_not_available
+    err = assert_raises(NotImplementedError) { make_client.models }
+    assert_match(/list-available-models/, err.message)
+  end
+
+  # First-party static env keys must never fold into a Bedrock client.
+  def test_does_not_fold_env_static_keys
+    original = %w[ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN].to_h { [_1, ENV.fetch(_1, nil)] }
+    begin
+      ENV["ANTHROPIC_API_KEY"] = "env-api-key"
+      ENV["ANTHROPIC_AUTH_TOKEN"] = "env-auth-token"
+
+      uri = "https://bedrock-runtime.us-east-1.amazonaws.com/model/m/invoke"
+      stub_request(:post, uri).to_return_json({status: 200, body: {}})
+
+      client = Anthropic::BedrockClient.new(aws_region: "us-east-1", aws_access_key: "ak", aws_secret_key: "sk")
+      assert_nil(client.credentials)
+      assert_nil(client.token_cache)
+      client.messages.create(max_tokens: 1024, messages: [{content: "hi", role: :user}], model: :m)
+
+      assert_requested(:post, uri, times: 1) do |req|
+        headers = req.headers.transform_keys(&:downcase)
+        refute(headers.key?("x-api-key"))
+        refute_equal("Bearer env-auth-token", headers["authorization"])
+        true
+      end
+    ensure
+      original.each { |key, value| value.nil? ? ENV.delete(key) : ENV[key] = value }
+    end
+  end
 end
