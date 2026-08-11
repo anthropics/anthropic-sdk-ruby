@@ -197,7 +197,7 @@ module Anthropic
 
       has_explicit_credential = api_key || auth_token || credentials || config
 
-      unless has_explicit_credential
+      if !has_explicit_credential && resolve_default_credentials?
         api_key = ENV["ANTHROPIC_API_KEY"]
         auth_token = ENV["ANTHROPIC_AUTH_TOKEN"]
       end
@@ -223,7 +223,7 @@ module Anthropic
         @credentials = credentials
       end
 
-      if @credentials.nil? && @api_key.nil? && @auth_token.nil?
+      if @credentials.nil? && @api_key.nil? && @auth_token.nil? && resolve_default_credentials?
         default_base_url = base_url || "https://api.anthropic.com"
         result = Anthropic::Credentials.default_credentials(base_url: default_base_url)
         if result
@@ -234,7 +234,7 @@ module Anthropic
       end
 
       warn_explicit_shadow(api_key: api_key, auth_token: auth_token, credentials: credentials || config)
-      warn_env_shadow(api_key: api_key, auth_token: auth_token)
+      warn_env_shadow(api_key: api_key, auth_token: auth_token) if resolve_default_credentials?
 
       if @credentials
         @token_cache = Anthropic::Credentials::TokenCache.new(@credentials)
@@ -294,6 +294,20 @@ module Anthropic
     end
 
     private
+
+    # @api private
+    #
+    # Whether to resolve credentials from the default chain (the static
+    # +ANTHROPIC_API_KEY+ / +ANTHROPIC_AUTH_TOKEN+ env vars and the shared
+    # config store / federation auto-discovery, precedence steps 2–5 above)
+    # when no explicit credential argument is passed. Called once from
+    # {#initialize}, so overrides must not depend on subclass instance state.
+    # Subclasses that bring their own auth scheme override this to +false+ so
+    # ambient first-party credentials are never resolved or folded into
+    # requests bound for another platform's endpoint.
+    #
+    # @return [Boolean]
+    def resolve_default_credentials? = true
 
     def warn_explicit_shadow(api_key:, auth_token:, credentials:)
       return if credentials.nil?

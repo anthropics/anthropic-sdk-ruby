@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require_relative "../../test_helper"
+require "tmpdir"
+require "json"
 
 class Anthropic::Test::VertexClientTest < Minitest::Test
   extend Minitest::Serial
@@ -435,5 +437,101 @@ class Anthropic::Test::VertexClientTest < Minitest::Test
     err = assert_raises(NotImplementedError) { client.messages.batches.retrieve("msgbatch_123") }
     assert_match(/Batch API is not supported/, err.message)
     assert_not_requested(:any, /./)
+  end
+
+  # Writes a fake 1p config store in the layout `Anthropic::Credentials`
+  # reads (an active `default` user_oauth profile with a workspace id and a
+  # live access token), points `ANTHROPIC_CONFIG_DIR` at it with the static
+  # credential env cleared so auto-discovery would find it, and yields.
+  def with_fake_config_store(dir)
+    FileUtils.mkdir_p(File.join(dir, "configs"))
+    FileUtils.mkdir_p(File.join(dir, "credentials"))
+    File.write(
+      File.join(dir, "configs", "default.json"),
+      JSON.generate({authentication: {type: "user_oauth"}, workspace_id: "wrkspc_fake_store_value"})
+    )
+    credentials_path = File.join(dir, "credentials", "default.json")
+    File.write(
+      credentials_path,
+      JSON.generate({access_token: "fake-store-token", expires_at: Time.now.to_i + 3600})
+    )
+    File.chmod(0o600, credentials_path)
+
+    env_keys = %w[ANTHROPIC_CONFIG_DIR ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN ANTHROPIC_PROFILE]
+    original = env_keys.to_h { [_1, ENV.fetch(_1, nil)] }
+    begin
+      original.each_key { ENV.delete(_1) }
+      ENV["ANTHROPIC_CONFIG_DIR"] = dir
+      yield
+    ensure
+      original.each { |key, value| value.nil? ? ENV.delete(key) : ENV[key] = value }
+    end
+  end
+
+  # The 1p config store (`~/.config/anthropic`, `ANTHROPIC_CONFIG_DIR`) must
+  # never leak into requests to a third-party platform: no store-derived
+  # `anthropic-workspace-id` header, no OAuth beta header, no store bearer.
+  def test_does_not_consult_1p_config_store
+    Dir.mktmpdir do |dir|
+      with_fake_config_store(dir) do
+        region = "us-east5"
+        project = "proj"
+        uri = "https://#{region}-aiplatform.googleapis.com/v1/projects/#{project}/locations/#{region}/" \
+              "publishers/anthropic/models/m:rawPredict"
+        stub_request(:post, uri).to_return_json({status: 200, body: {}})
+
+        client = Anthropic::VertexClient.new(region: region, project_id: project)
+        assert_nil(client.credentials)
+        assert_nil(client.token_cache)
+
+        client.messages.create(
+          max_tokens: 1024,
+          messages: [{content: "hi", role: :user}],
+          model: :m,
+          request_options: {extra_headers: {"authorization" => "Bearer static-access-token"}}
+        )
+
+        assert_requested(:post, uri, times: 1) do |req|
+          headers = req.headers.transform_keys(&:downcase)
+          refute(headers.key?("anthropic-workspace-id"))
+          assert_equal("Bearer static-access-token", headers["authorization"])
+          refute_equal(Anthropic::Credentials::OAUTH_API_BETA_HEADER, headers["anthropic-beta"])
+          true
+        end
+      end
+    end
+  end
+
+  # Ambient first-party env keys must not fold in either — platform clients
+  # accept no first-party credential, consistent with the Bedrock client.
+  def test_does_not_fold_env_static_keys
+    original = %w[ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN].to_h { [_1, ENV.fetch(_1, nil)] }
+    begin
+      ENV["ANTHROPIC_API_KEY"] = "env-api-key"
+      ENV["ANTHROPIC_AUTH_TOKEN"] = "env-auth-token"
+
+      region = "us-east5"
+      project = "proj"
+      uri = "https://#{region}-aiplatform.googleapis.com/v1/projects/#{project}/locations/#{region}/" \
+            "publishers/anthropic/models/m:rawPredict"
+      stub_request(:post, uri).to_return_json({status: 200, body: {}})
+
+      client = Anthropic::VertexClient.new(region: region, project_id: project)
+      client.messages.create(
+        max_tokens: 1024,
+        messages: [{content: "hi", role: :user}],
+        model: :m,
+        request_options: {extra_headers: {"authorization" => "Bearer static-access-token"}}
+      )
+
+      assert_requested(:post, uri, times: 1) do |req|
+        headers = req.headers.transform_keys(&:downcase)
+        refute(headers.key?("x-api-key"))
+        assert_equal("Bearer static-access-token", headers["authorization"])
+        true
+      end
+    ensure
+      original.each { |key, value| value.nil? ? ENV.delete(key) : ENV[key] = value }
+    end
   end
 end

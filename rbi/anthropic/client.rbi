@@ -49,6 +49,11 @@ module Anthropic
     private def bearer_auth
     end
 
+    # @api private
+    sig { returns(T::Boolean) }
+    private def resolve_default_credentials?
+    end
+
     # Creates and returns a new client for interacting with the API.
     sig do
       params(
