@@ -269,6 +269,71 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
     assert_equal("{\"location\":\"San Francisco\"\"}", message.content.first.input)
   end
 
+  # A server-tool turn: the server_tool_use input streams in as input_json_delta
+  # chunks like a client tool's, and its result block arrives whole (no deltas).
+  def server_tool_use_sse_response
+    <<~SSE
+      event: message_start
+      data: {"type":"message_start","message":{"id":"msg_srvtool","type":"message","role":"assistant","content":[],"model":"claude-sonnet-4-5-20250929","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":25,"output_tokens":1}}}
+
+      event: content_block_start
+      data: {"type":"content_block_start","index":0,"content_block":{"type":"server_tool_use","id":"srvtoolu_1","name":"web_search","input":{}}}
+
+      event: content_block_delta
+      data: {"type":"content_block_delta","index":0,"delta":{"type":"input_json_delta","partial_json":"{\\"query\\":"}}
+
+      event: content_block_delta
+      data: {"type":"content_block_delta","index":0,"delta":{"type":"input_json_delta","partial_json":" \\"Anthropic Claude\\"}"}}
+
+      event: content_block_stop
+      data: {"type":"content_block_stop","index":0}
+
+      event: content_block_start
+      data: {"type":"content_block_start","index":1,"content_block":{"type":"web_search_tool_result","tool_use_id":"srvtoolu_1","content":[{"type":"web_search_result","url":"https://example.com/claude","title":"Claude by Anthropic","encrypted_content":"EqgfCioIBBgCIiQ3YmU4Mjc2Zi1kNjJlLTQ=","page_age":"January 15, 2025"}]}}
+
+      event: content_block_stop
+      data: {"type":"content_block_stop","index":1}
+
+      event: message_delta
+      data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null},"usage":{"output_tokens":34}}
+
+      event: message_stop
+      data: {"type":"message_stop"}
+
+    SSE
+  end
+
+  def test_server_tool_use_streaming
+    stub_streaming_response(server_tool_use_sse_response)
+
+    json_events = []
+    stream = @client.messages.stream(**basic_params)
+
+    stream.each do |event|
+      json_events << event if event.type == :input_json
+    end
+
+    assert_equal(["{\"query\":", " \"Anthropic Claude\"}"], json_events.map(&:partial_json))
+    assert_equal("{\"query\": \"Anthropic Claude\"}", json_events.last.snapshot)
+  end
+
+  def test_accumulated_message_decodes_server_tool_use_input
+    stub_streaming_response(server_tool_use_sse_response)
+
+    message = @client.messages.stream(**basic_params).accumulated_message
+
+    # The streamed input must land on the server_tool_use block just as it does
+    # for tool_use, matching the non-streaming message.
+    assert_pattern do
+      message => {
+        content: [
+          {type: :server_tool_use, name: :web_search, input: {query: "Anthropic Claude"}},
+          {type: :web_search_tool_result, tool_use_id: "srvtoolu_1", content: [{url: "https://example.com/claude"}]}
+        ]
+      }
+    end
+  end
+
   def citations_params
     {
       max_tokens: 1024,

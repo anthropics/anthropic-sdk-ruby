@@ -110,6 +110,110 @@ class Anthropic::Test::Resources::Beta::Messages::StreamingTest < Minitest::Test
     end
   end
 
+  # A server-tool turn: the server_tool_use input streams in as input_json_delta
+  # chunks like a client tool's, and its result block arrives whole (no deltas).
+  def server_tool_use_sse_response
+    <<~SSE
+      event: message_start
+      data: {"type":"message_start","message":{"id":"msg_srvtool","type":"message","role":"assistant","content":[],"model":"claude-sonnet-4-20250514","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":25,"output_tokens":1}}}
+
+      event: content_block_start
+      data: {"type":"content_block_start","index":0,"content_block":{"type":"server_tool_use","id":"srvtoolu_1","name":"web_search","input":{}}}
+
+      event: content_block_delta
+      data: {"type":"content_block_delta","index":0,"delta":{"type":"input_json_delta","partial_json":"{\\"query\\":"}}
+
+      event: content_block_delta
+      data: {"type":"content_block_delta","index":0,"delta":{"type":"input_json_delta","partial_json":" \\"Anthropic Claude\\"}"}}
+
+      event: content_block_stop
+      data: {"type":"content_block_stop","index":0}
+
+      event: content_block_start
+      data: {"type":"content_block_start","index":1,"content_block":{"type":"web_search_tool_result","tool_use_id":"srvtoolu_1","content":[{"type":"web_search_result","url":"https://example.com/claude","title":"Claude by Anthropic","encrypted_content":"EqgfCioIBBgCIiQ3YmU4Mjc2Zi1kNjJlLTQ=","page_age":"January 15, 2025"}]}}
+
+      event: content_block_stop
+      data: {"type":"content_block_stop","index":1}
+
+      event: message_delta
+      data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null},"usage":{"output_tokens":34}}
+
+      event: message_stop
+      data: {"type":"message_stop"}
+
+    SSE
+  end
+
+  def test_accumulated_message_decodes_server_tool_use_input
+    stub_streaming_response(server_tool_use_sse_response)
+
+    message = @client.beta.messages.stream(**compaction_params).accumulated_message
+
+    # The streamed input must land on the server_tool_use block just as it does
+    # for tool_use, matching the non-streaming message.
+    assert_pattern do
+      message => {
+        content: [
+          {type: :server_tool_use, name: :web_search, input: {query: "Anthropic Claude"}},
+          {type: :web_search_tool_result, tool_use_id: "srvtoolu_1", content: [{url: "https://example.com/claude"}]}
+        ]
+      }
+    end
+  end
+
+  # An MCP connector turn: mcp_tool_use input also streams in as input_json_delta.
+  def mcp_tool_use_sse_response
+    <<~SSE
+      event: message_start
+      data: {"type":"message_start","message":{"id":"msg_mcptool","type":"message","role":"assistant","content":[],"model":"claude-sonnet-4-20250514","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":25,"output_tokens":1}}}
+
+      event: content_block_start
+      data: {"type":"content_block_start","index":0,"content_block":{"type":"mcp_tool_use","id":"mcptoolu_1","name":"echo","server_name":"example","input":{}}}
+
+      event: content_block_delta
+      data: {"type":"content_block_delta","index":0,"delta":{"type":"input_json_delta","partial_json":"{\\"text\\": "}}
+
+      event: content_block_delta
+      data: {"type":"content_block_delta","index":0,"delta":{"type":"input_json_delta","partial_json":"\\"hi\\"}"}}
+
+      event: content_block_stop
+      data: {"type":"content_block_stop","index":0}
+
+      event: content_block_start
+      data: {"type":"content_block_start","index":1,"content_block":{"type":"mcp_tool_result","tool_use_id":"mcptoolu_1","is_error":false,"content":[{"type":"text","text":"hi"}]}}
+
+      event: content_block_stop
+      data: {"type":"content_block_stop","index":1}
+
+      event: message_delta
+      data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null},"usage":{"output_tokens":20}}
+
+      event: message_stop
+      data: {"type":"message_stop"}
+
+    SSE
+  end
+
+  def test_accumulated_message_decodes_mcp_tool_use_input
+    stub_streaming_response(mcp_tool_use_sse_response)
+
+    json_events = []
+    stream = @client.beta.messages.stream(**compaction_params)
+    stream.each do |event|
+      json_events << event if event.type == :input_json
+    end
+
+    assert_equal("{\"text\": \"hi\"}", json_events.last.snapshot)
+    assert_pattern do
+      stream.accumulated_message => {
+        content: [
+          {type: :mcp_tool_use, name: "echo", server_name: "example", input: {text: "hi"}},
+          {type: :mcp_tool_result, tool_use_id: "mcptoolu_1", is_error: false}
+        ]
+      }
+    end
+  end
+
   def test_compaction_streaming
     stub_streaming_response(compaction_sse_response)
 

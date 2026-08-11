@@ -123,12 +123,14 @@ module Anthropic
             case (delta = event.delta)
             in Anthropic::Models::TextDelta | Anthropic::Models::BetaTextDelta if content.type == :text
               content.text += delta.text
-            in Anthropic::Models::InputJSONDelta | Anthropic::Models::BetaInputJSONDelta if content.type == :tool_use
-              json_buf = content._json_buf.to_s
+            in Anthropic::Models::InputJSONDelta | Anthropic::Models::BetaInputJSONDelta if tracks_tool_input?(content)
+              # `input` itself is the partial-JSON buffer mid-stream: it starts as the
+              # `{}` placeholder from content_block_start and holds the raw String once
+              # the first delta lands (server/MCP tool blocks have no `_json_buf`).
+              json_buf = content.input.is_a?(String) ? content.input : ""
               json_buf += delta.partial_json
 
               content.input = json_buf
-              content._json_buf = json_buf
             in Anthropic::Models::CitationsDelta | Anthropic::Models::BetaCitationsDelta if content.type == :text
               content.citations ||= []
               content.citations << delta.citation
@@ -147,7 +149,7 @@ module Anthropic
             # finished block must carry the decoded object, as in the non-streaming
             # message and the other SDKs' accumulators.
             case current_snapshot.content[event.index]
-            in {type: :tool_use, input: String => raw} => content
+            in {input: String => raw} => content if tracks_tool_input?(content)
               begin
                 content.input = decode_tool_use_input(raw)
               rescue JSON::ParserError
@@ -235,7 +237,7 @@ module Anthropic
                 text: delta.text,
                 snapshot: content_block.text
               )
-            in Anthropic::Models::InputJSONDelta | Anthropic::Models::BetaInputJSONDelta if content_block.type == :tool_use
+            in Anthropic::Models::InputJSONDelta | Anthropic::Models::BetaInputJSONDelta if tracks_tool_input?(content_block)
               events_to_yield << Anthropic::Streaming::InputJsonEvent.new(
                 type: :input_json,
                 partial_json: delta.partial_json,
@@ -282,7 +284,21 @@ module Anthropic
 
         # @api private
         #
-        # Decodes a tool_use block's buffered partial-JSON input. An empty buffer
+        # Content block types whose `input` streams in as input_json_delta events.
+        TOOL_INPUT_BLOCK_TYPES = [:tool_use, :server_tool_use, :mcp_tool_use].freeze
+
+        # @api private
+        #
+        # @param content_block [Object]
+        #
+        # @return [Boolean]
+        private def tracks_tool_input?(content_block)
+          TOOL_INPUT_BLOCK_TYPES.include?(content_block.type)
+        end
+
+        # @api private
+        #
+        # Decodes a tool-use block's buffered partial-JSON input. An empty buffer
         # means a no-argument tool call, which the wire encodes as an empty object.
         #
         # @param raw [String]
