@@ -487,6 +487,72 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
     SSE
   end
 
+  # message_start carries the set-once usage fields (service_tier, cache_creation) that
+  # message_delta never re-sends; the final message_delta carries the authoritative
+  # cumulative counters plus the container and the thinking-token breakdown.
+  def message_delta_fields_sse_response
+    <<~SSE
+      event: message_start
+      data: {"type":"message_start","message":{"id":"msg_delta_fields","type":"message","role":"assistant","content":[],"model":"claude-opus-4-6","stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":11,"output_tokens":1,"cache_creation_input_tokens":7,"cache_read_input_tokens":3,"cache_creation":{"ephemeral_5m_input_tokens":7,"ephemeral_1h_input_tokens":0},"service_tier":"standard"}}}
+
+      event: content_block_start
+      data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}
+
+      event: content_block_delta
+      data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"Done."}}
+
+      event: content_block_stop
+      data: {"type":"content_block_stop","index":0}
+
+      event: message_delta
+      data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null,"container":{"id":"container_123","expires_at":"2025-01-01T00:00:00Z"}},"usage":{"input_tokens":25,"output_tokens":40,"cache_creation_input_tokens":9,"cache_read_input_tokens":5,"server_tool_use":{"web_search_requests":2,"web_fetch_requests":1},"output_tokens_details":{"thinking_tokens":12}}}
+
+      event: message_stop
+      data: {"type":"message_stop"}
+
+    SSE
+  end
+
+  def test_accumulated_message_carries_message_delta_fields
+    stub_streaming_response(message_delta_fields_sse_response)
+
+    message = @client.messages.stream(**basic_params).accumulated_message
+
+    assert_equal("container_123", message.container.id)
+    assert_equal(12, message.usage.output_tokens_details.thinking_tokens)
+    assert_equal(2, message.usage.server_tool_use.web_search_requests)
+    assert_equal(25, message.usage.input_tokens)
+    assert_equal(40, message.usage.output_tokens)
+    assert_equal(9, message.usage.cache_creation_input_tokens)
+    assert_equal(5, message.usage.cache_read_input_tokens)
+    assert_equal(:end_turn, message.stop_reason)
+    assert_nil(message.stop_sequence)
+  end
+
+  def test_accumulated_message_keeps_message_start_usage_fields
+    stub_streaming_response(message_delta_fields_sse_response)
+
+    message = @client.messages.stream(**basic_params).accumulated_message
+
+    # Never re-sent on message_delta, so they must survive from message_start.
+    assert_equal(:standard, message.usage.service_tier)
+    assert_equal(7, message.usage.cache_creation.ephemeral_5m_input_tokens)
+  end
+
+  def test_accumulated_message_keeps_usage_omitted_by_message_delta
+    # basic_sse_response's message_delta reports only output_tokens.
+    stub_streaming_response(basic_sse_response)
+
+    message = @client.messages.stream(**basic_params).accumulated_message
+
+    assert_equal(6, message.usage.output_tokens)
+    assert_equal(11, message.usage.input_tokens)
+    assert_nil(message.container)
+    assert_nil(message.usage.output_tokens_details)
+    # The delta's null stop_sequence must leave the field readable, not poisoned.
+    assert_nil(message.stop_sequence)
+  end
+
   def test_streaming_error_event_has_type
     sse_body = <<~SSE
       event: message_start

@@ -156,9 +156,15 @@ module Anthropic
             else
             end
           in Anthropic::Models::RawMessageDeltaEvent | Anthropic::Models::BetaRawMessageDeltaEvent
-            current_snapshot.stop_reason = event.delta.stop_reason
-            current_snapshot.stop_sequence = event.delta.stop_sequence
+            # message_start already seeds the null placeholders for these, and the
+            # generated setters cannot take a nil, so skip the ones the event omits.
+            current_snapshot.stop_reason = event.delta.stop_reason unless event.delta.stop_reason.nil?
+            current_snapshot.stop_sequence = event.delta.stop_sequence unless event.delta.stop_sequence.nil?
             current_snapshot.stop_details = event.delta.stop_details unless event.delta.stop_details.nil?
+
+            # Only reported once a container actually ran, and never on message_start.
+            current_snapshot.container = event.delta.container unless event.delta.container.nil?
+
             current_snapshot.usage.output_tokens = event.usage.output_tokens
 
             # The message_delta usage is authoritative for the final counts; carry every
@@ -176,6 +182,9 @@ module Anthropic
             unless event.usage.server_tool_use.nil?
               current_snapshot.usage.server_tool_use = event.usage.server_tool_use
             end
+            unless event.usage.output_tokens_details.nil?
+              current_snapshot.usage.output_tokens_details = event.usage.output_tokens_details
+            end
 
             if event.is_a?(Anthropic::Models::BetaRawMessageDeltaEvent)
               unless event.usage.iterations.nil?
@@ -183,6 +192,10 @@ module Anthropic
               end
               unless event.usage.fallback_credit.nil?
                 current_snapshot.usage.fallback_credit = event.usage.fallback_credit
+              end
+              # Applied context-management edits ride on the event, not on `delta`.
+              unless event.context_management.nil?
+                current_snapshot.context_management = event.context_management
               end
             end
           else
