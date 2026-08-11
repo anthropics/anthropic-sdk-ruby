@@ -12,6 +12,8 @@ module Anthropic
 
         attr_reader beta: Anthropic::Resources::Beta
 
+        private def resolve_default_credentials?: -> bool
+
         private def build_request: (
           Anthropic::Internal::Transport::BaseClient::request_components req,
           Anthropic::request_options opts

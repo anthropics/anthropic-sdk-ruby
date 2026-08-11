@@ -19,6 +19,11 @@ module Anthropic
         attr_reader :beta
 
         # @api private
+        sig { override.returns(T::Boolean) }
+        private def resolve_default_credentials?
+        end
+
+        # @api private
         sig do
           override
             .params(

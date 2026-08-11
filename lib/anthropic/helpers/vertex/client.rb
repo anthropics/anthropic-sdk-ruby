@@ -118,6 +118,16 @@ module Anthropic
 
         # @api private
         #
+        # Auth is Google OAuth (or a per-request token) only — never resolve
+        # ambient first-party credentials, which would fold the shared config
+        # store's headers and bearer into requests bound for a third-party
+        # endpoint.
+        #
+        # @return [Boolean]
+        private def resolve_default_credentials? = false
+
+        # @api private
+        #
         # @param req [Hash{Symbol=>Object}] .
         #
         #   @option req [Symbol] :method
