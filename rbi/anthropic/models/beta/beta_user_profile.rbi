@@ -54,8 +54,8 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :external_id
 
-        # Display name of the entity this profile represents. For `resold` this is the
-        # resold-to company's name.
+        # Real-world name of the entity this profile represents (company or individual).
+        # For `resold` this is the resold-to company's name.
         sig { returns(T.nilable(String)) }
         attr_accessor :name
 
@@ -98,8 +98,8 @@ module Anthropic
           updated_at:,
           # Platform's own identifier for this user. Not enforced unique.
           external_id: nil,
-          # Display name of the entity this profile represents. For `resold` this is the
-          # resold-to company's name.
+          # Real-world name of the entity this profile represents (company or individual).
+          # For `resold` this is the resold-to company's name.
           name: nil
         )
         end
