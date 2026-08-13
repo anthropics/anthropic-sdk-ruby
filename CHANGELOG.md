@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.62.0 (2026-08-13)
+
+Full Changelog: [v1.61.0...v1.62.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.61.0...v1.62.0)
+
+### Features
+
+* **api:** add output_behavior to dream creation (create a new memory store or update the input store in place) ([836125f](https://github.com/anthropics/anthropic-sdk-ruby/commit/836125f10cee42677d814fa7bb85f693914c6af9))
+
+
+### Bug Fixes
+
+* **bedrock:** adopt the default-credentials hook in place of the direct base-client bind ([#145](https://github.com/anthropics/anthropic-sdk-ruby/issues/145)) ([e082f28](https://github.com/anthropics/anthropic-sdk-ruby/commit/e082f280846cd00bda4f89b9fb6ad50b4a4a5feb))
+* **client:** accumulate streamed input for server tool use blocks ([#162](https://github.com/anthropics/anthropic-sdk-ruby/issues/162)) ([75382d8](https://github.com/anthropics/anthropic-sdk-ruby/commit/75382d81ebb6b3bedad92749f26e4625d8203097))
+* **client:** add models ([055b440](https://github.com/anthropics/anthropic-sdk-ruby/commit/055b440aa315cf644b08ede51a19f448fab00cbf))
+* **internal:** don't resolve lazy field types when hashing a model class ([#155](https://github.com/anthropics/anthropic-sdk-ruby/issues/155)) ([0a2c06f](https://github.com/anthropics/anthropic-sdk-ruby/commit/0a2c06fcbdb345d751ae0850cac70177cb232d53))
+* **streaming:** apply all message_delta fields when accumulating streamed messages ([#160](https://github.com/anthropics/anthropic-sdk-ruby/issues/160)) ([e537ae2](https://github.com/anthropics/anthropic-sdk-ruby/commit/e537ae23ac5c5701b47812e9062db9c3bd9f29da))
+* **vertex:** don't resolve the shared config store during client init ([#142](https://github.com/anthropics/anthropic-sdk-ruby/issues/142)) ([4108bd4](https://github.com/anthropics/anthropic-sdk-ruby/commit/4108bd4aa3fd3517b51971fdd25f15351bd8f5be))
+
+
+### Documentation
+
+* **api:** clarify that user profile name is optional for resold profiles ([e68fd57](https://github.com/anthropics/anthropic-sdk-ruby/commit/e68fd57357fed4964666d84d011b38873abff02d))
+* **client:** move truncated-docs note below the description in YARD doc blocks ([3db8b94](https://github.com/anthropics/anthropic-sdk-ruby/commit/3db8b9489cd2adb207edbb0165ea11fbacc19db4))
+* fix Symbol typo in RDoc comments ([#163](https://github.com/anthropics/anthropic-sdk-ruby/issues/163)) ([1102732](https://github.com/anthropics/anthropic-sdk-ruby/commit/1102732847ffc02eef9d2c69e233f5e6f56787d8))
+
 ## 1.61.0 (2026-08-07)
 
 Full Changelog: [v1.60.0...v1.61.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.60.0...v1.61.0)

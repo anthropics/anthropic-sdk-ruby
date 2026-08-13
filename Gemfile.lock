@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    anthropic (1.61.0)
+    anthropic (1.62.0)
       base64 (~> 0.1)
       cgi (~> 0.1)
       connection_pool (>= 2, < 4)
