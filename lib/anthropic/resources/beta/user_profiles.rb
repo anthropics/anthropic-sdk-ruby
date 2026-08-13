@@ -15,7 +15,7 @@ module Anthropic
         #
         # @param metadata [Hash{Symbol=>String}] Body param: Free-form key-value data to attach to this user profile. Maximum 16
         #
-        # @param name [String, nil] Body param: Display name of the entity this profile represents. Required when re
+        # @param name [String, nil] Body param: Optional for all profiles. Real-world name of the entity this profil
         #
         # @param relationship [Symbol, Anthropic::Models::Beta::UserProfileCreateParams::Relationship] Body param: How the entity behind a user profile relates to the platform that ow
         #
