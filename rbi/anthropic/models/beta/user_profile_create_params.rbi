@@ -29,9 +29,9 @@ module Anthropic
         sig { params(metadata: T::Hash[Symbol, String]).void }
         attr_writer :metadata
 
-        # Display name of the entity this profile represents. Required when relationship
-        # is `resold` (the resold-to company's name); optional otherwise. Maximum 255
-        # characters.
+        # Optional for all profiles. Real-world name of the entity this profile represents
+        # (company or individual); for `resold` profiles, the resold-to company's name
+        # where known. Maximum 255 characters.
         sig { returns(T.nilable(String)) }
         attr_accessor :name
 
@@ -91,9 +91,9 @@ module Anthropic
           # keys up to 64 characters and values up to 512 characters. Values must be
           # non-empty strings.
           metadata: nil,
-          # Display name of the entity this profile represents. Required when relationship
-          # is `resold` (the resold-to company's name); optional otherwise. Maximum 255
-          # characters.
+          # Optional for all profiles. Real-world name of the entity this profile represents
+          # (company or individual); for `resold` profiles, the resold-to company's name
+          # where known. Maximum 255 characters.
           name: nil,
           # How the entity behind a user profile relates to the platform that owns the API
           # key. `external`: an individual end-user of the platform. `resold`: a company the

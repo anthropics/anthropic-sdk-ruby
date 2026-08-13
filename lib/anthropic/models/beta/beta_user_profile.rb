@@ -59,8 +59,8 @@ module Anthropic
         optional :external_id, String, nil?: true
 
         # @!attribute name
-        #   Display name of the entity this profile represents. For `resold` this is the
-        #   resold-to company's name.
+        #   Real-world name of the entity this profile represents (company or individual).
+        #   For `resold` this is the resold-to company's name.
         #
         #   @return [String, nil]
         optional :name, String, nil?: true
@@ -85,7 +85,7 @@ module Anthropic
         #
         #   @param external_id [String, nil] Platform's own identifier for this user. Not enforced unique.
         #
-        #   @param name [String, nil] Display name of the entity this profile represents. For `resold` this is the res
+        #   @param name [String, nil] Real-world name of the entity this profile represents (company or individual). F
 
         # How the entity behind a user profile relates to the platform that owns the API
         # key. `external`: an individual end-user of the platform. `resold`: a company the

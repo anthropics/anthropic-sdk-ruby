@@ -24,9 +24,9 @@ module Anthropic
         optional :metadata, Anthropic::Internal::Type::HashOf[String]
 
         # @!attribute name
-        #   Display name of the entity this profile represents. Required when relationship
-        #   is `resold` (the resold-to company's name); optional otherwise. Maximum 255
-        #   characters.
+        #   Optional for all profiles. Real-world name of the entity this profile represents
+        #   (company or individual); for `resold` profiles, the resold-to company's name
+        #   where known. Maximum 255 characters.
         #
         #   @return [String, nil]
         optional :name, String, nil?: true
@@ -53,7 +53,7 @@ module Anthropic
         #
         #   @param metadata [Hash{Symbol=>String}] Free-form key-value data to attach to this user profile. Maximum 16 keys, with k
         #
-        #   @param name [String, nil] Display name of the entity this profile represents. Required when relationship i
+        #   @param name [String, nil] Optional for all profiles. Real-world name of the entity this profile represents
         #
         #   @param relationship [Symbol, Anthropic::Models::Beta::UserProfileCreateParams::Relationship] How the entity behind a user profile relates to the platform that owns the API k
         #
