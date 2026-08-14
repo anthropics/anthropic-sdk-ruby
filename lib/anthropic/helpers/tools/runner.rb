@@ -92,6 +92,14 @@ module Anthropic
             next unless current_messages.equal?(messages)
             break if compacted
 
+            # Refusal-terminated turns are terminal: executing their tool_use blocks would fire
+            # side effects the model never confirmed, and the resulting tool_results could not be
+            # replayed coherently. Surface the refusal as the final message instead.
+            if response.stop_reason == :refusal
+              @finished = true
+              break
+            end
+
             # A `tool_removal` block only hints the model, so a call to a withdrawn tool can still
             # arrive; a name missing from this set routes down the same "not found" path as an
             # undeclared tool.
