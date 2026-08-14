@@ -311,6 +311,48 @@ class Anthropic::Test::Helpers::ToolRunner::StreamingTest < Minitest::Test
     assert_requested(:post, "http://localhost/v1/messages?beta=true", times: 1)
   end
 
+  def test_unknown_tool_use_is_replayed_verbatim
+    responses = [
+      stream_events(
+        id: "msg_1",
+        content: [
+          {type: "text", text: "Let me look that up."},
+          {type: "tool_use", id: "t1", name: "get_tides", input: {city: "Paris", days: 3}}
+        ]
+      ),
+      stream_events(id: "msg_2", content: [{type: "text", text: "No tide tool"}], stop_reason: "end_turn")
+    ]
+    bodies = []
+    stub_request(:post, "http://localhost/v1/messages?beta=true")
+      .to_return do |request|
+      bodies << JSON.parse(request.body, symbolize_names: true)
+      {status: 200, body: responses[bodies.length - 1], headers: {"content-type" => "text/event-stream"}}
+    end
+
+    @client.beta.messages.tool_runner(
+      max_tokens: 1024,
+      messages: [{content: "Tides?", role: :user}],
+      model: :"claude-3-7-sonnet-latest",
+      tools: [@calculator],
+      stream: true
+    ).each_streaming { consume_stream(_1) }
+
+    assert_empty(@calculator.call_history)
+    assert_equal(2, bodies.length)
+    assert_pattern do
+      bodies.last[:messages].last(2) => [
+        {
+          role: "assistant",
+          content: [
+            {type: "text", text: "Let me look that up."},
+            {type: "tool_use", id: "t1", name: "get_tides", input: {city: "Paris", days: 3}}
+          ]
+        },
+        {role: "user", content: [{type: "tool_result", tool_use_id: "t1", is_error: true, content: String}]}
+      ]
+    end
+  end
+
   def test_no_tools_single_response
     stub_streaming_responses(
       stream_events(

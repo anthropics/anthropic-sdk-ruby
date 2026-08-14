@@ -138,7 +138,10 @@ module Anthropic
             content = response.content.map do
               case _1
               in Anthropic::Beta::BetaToolUseBlock
-                raw = {**_1, input: _1.parsed}.except(:parsed)
+                # `parsed` is only set for calls to a declared tool; any other call (e.g. to an
+                # unregistered tool) must replay the `input` the API sent, never a null.
+                input = _1.parsed.nil? ? _1.input : _1.parsed
+                raw = {**_1, input:}.except(:parsed)
                 Anthropic::Internal::Type::Converter.dump(Anthropic::Beta::BetaToolUseBlock, raw)
               else
                 _1
