@@ -17,7 +17,6 @@ module Anthropic
       | Anthropic::TextEditorCodeExecutionToolResultBlockParam
       | Anthropic::ToolSearchToolResultBlockParam
       | Anthropic::ContainerUploadBlockParam
-      | Anthropic::MidConversationSystemBlockParam
 
     module ContentBlockParam
       extend Anthropic::Internal::Type::Union
@@ -129,11 +128,6 @@ module Anthropic
           file_id: String,
           ?cache_control: Anthropic::CacheControlEphemeral?
         ) -> Anthropic::ContainerUploadBlockParam
-        | (
-          type: :mid_conv_system | "mid_conv_system",
-          content: ::Array[Anthropic::TextBlockParam],
-          ?cache_control: Anthropic::CacheControlEphemeral?
-        ) -> Anthropic::MidConversationSystemBlockParam
         | (
           type: Symbol | String,
           ?text: String,

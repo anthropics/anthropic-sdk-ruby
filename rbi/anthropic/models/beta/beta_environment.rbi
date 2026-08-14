@@ -30,8 +30,8 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :created_at
 
-        # User-provided description for the environment
-        sig { returns(String) }
+        # User-provided description for the environment; null when unset
+        sig { returns(T.nilable(String)) }
         attr_accessor :description
 
         # User-provided metadata key-value pairs
@@ -75,7 +75,7 @@ module Anthropic
                 Anthropic::Beta::BetaSelfHostedConfig::OrHash
               ),
             created_at: String,
-            description: String,
+            description: T.nilable(String),
             metadata: T::Hash[Symbol, String],
             name: String,
             updated_at: String,
@@ -92,7 +92,7 @@ module Anthropic
           config:,
           # RFC 3339 timestamp when environment was created
           created_at:,
-          # User-provided description for the environment
+          # User-provided description for the environment; null when unset
           description:,
           # User-provided metadata key-value pairs
           metadata:,
@@ -115,7 +115,7 @@ module Anthropic
               archived_at: T.nilable(String),
               config: Anthropic::Beta::BetaEnvironment::Config::Variants,
               created_at: String,
-              description: String,
+              description: T.nilable(String),
               metadata: T::Hash[Symbol, String],
               name: String,
               type: Symbol,
