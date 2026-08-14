@@ -279,6 +279,38 @@ class Anthropic::Test::Helpers::ToolRunner::StreamingTest < Minitest::Test
     end
   end
 
+  def test_refusal_turn_with_tool_use_is_terminal
+    stub_streaming_responses(
+      stream_events(
+        id: "msg_1",
+        content: [
+          {type: "tool_use", id: "t1", name: "calculator", input: {lhs: 10.0, rhs: 5.0, operator: "+"}}
+        ],
+        stop_reason: "refusal"
+      ),
+      stream_events(id: "msg_2", content: [{type: "text", text: "unreachable"}], stop_reason: "end_turn")
+    )
+
+    accumulated_messages = []
+    runner = @client.beta.messages.tool_runner(
+      max_tokens: 1024,
+      messages: [{content: "Calculate", role: :user}],
+      model: :"claude-3-7-sonnet-latest",
+      tools: [@calculator],
+      stream: true
+    )
+    runner.each_streaming { accumulated_messages << consume_stream(_1) }
+
+    assert_pattern do
+      accumulated_messages => [
+        {id: "msg_1", stop_reason: :refusal, content: [Anthropic::Beta::BetaToolUseBlock]}
+      ]
+    end
+    assert_empty(@calculator.call_history)
+    assert(runner.finished?)
+    assert_requested(:post, "http://localhost/v1/messages?beta=true", times: 1)
+  end
+
   def test_no_tools_single_response
     stub_streaming_responses(
       stream_events(

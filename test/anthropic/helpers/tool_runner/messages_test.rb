@@ -343,6 +343,32 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
     end
   end
 
+  def test_refusal_turn_with_tool_use_is_terminal
+    stub_responses(
+      tool_use_response(
+        id: "msg_1",
+        text: "I can't help with that.",
+        tool_use: {id: "tool_1", name: "calculator", input: {lhs: 10.0, rhs: 5.0, operator: "+"}},
+        stop_reason: "refusal"
+      ),
+      text_response(id: "msg_2", text: "unreachable")
+    )
+
+    runner = @client.beta.messages.tool_runner(basic_params)
+    messages = []
+    runner.each_message { messages << _1 }
+
+    assert_pattern do
+      messages => [
+        {id: "msg_1", stop_reason: :refusal, content: [{type: :text}, Anthropic::Beta::BetaToolUseBlock]}
+      ]
+    end
+    assert_empty(@calculator.call_history)
+    assert(runner.finished?)
+    assert_nil(runner.next_message)
+    assert_requested(:post, "http://localhost/v1/messages?beta=true", times: 1)
+  end
+
   def test_multiple_tools_in_single_response
     params = {
       max_tokens: 1024,
