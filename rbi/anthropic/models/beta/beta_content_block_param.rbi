@@ -32,7 +32,6 @@ module Anthropic
               Anthropic::Beta::BetaRequestMCPToolResultBlockParam,
               Anthropic::Beta::BetaContainerUploadBlockParam,
               Anthropic::Beta::BetaCompactionBlockParam,
-              Anthropic::Beta::BetaMidConversationSystemBlockParam,
               Anthropic::Beta::BetaRequestToolAdditionBlock,
               Anthropic::Beta::BetaRequestToolRemovalBlock,
               Anthropic::Beta::BetaFallbackBlockParam
@@ -128,14 +127,7 @@ module Anthropic
                   Anthropic::Beta::BetaToolSearchToolSearchResultBlockParam::OrHash
                 ),
                 Anthropic::Beta::BetaRequestMCPToolResultBlockParam::Content::Variants,
-                T.nilable(String),
-                T::Array[
-                  T.any(
-                    Anthropic::Beta::BetaTextBlockParam::OrHash,
-                    Anthropic::Beta::BetaRequestToolAdditionBlock::OrHash,
-                    Anthropic::Beta::BetaRequestToolRemovalBlock::OrHash
-                  )
-                ]
+                T.nilable(String)
               ),
             signature: String,
             thinking: String,

@@ -47,7 +47,7 @@ module Anthropic
         end
         attr_writer :mcp_servers
 
-        # Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a
+        # Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a
         # `model_config` object. Omit to use the agent's model.
         sig do
           returns(
@@ -190,7 +190,7 @@ module Anthropic
           # Replacement MCP server list. Full replacement: the provided array becomes the
           # MCP servers. Send an empty array to clear; omit to preserve the agent's servers.
           mcp_servers: nil,
-          # Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a
+          # Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a
           # `model_config` object. Omit to use the agent's model.
           model: nil,
           # Replacement skill list. Full replacement: the provided array becomes the skills.
@@ -273,7 +273,7 @@ module Anthropic
           end
         end
 
-        # Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a
+        # Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a
         # `model_config` object. Omit to use the agent's model.
         module Model
           extend Anthropic::Internal::Type::Union

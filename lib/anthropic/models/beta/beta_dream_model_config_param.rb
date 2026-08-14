@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       class BetaDreamModelConfigParam < Anthropic::Internal::Type::BaseModel
         # @!attribute id
-        #   Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+        #   Model identifier, e.g. "claude-opus-5". 1-256 characters.
         #
         #   @return [String]
         required :id, String
@@ -24,7 +24,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaDreamModelConfigParam} for more details.
         #
-        #   @param id [String] Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+        #   @param id [String] Model identifier, e.g. "claude-opus-5". 1-256 characters.
         #
         #   @param speed [Symbol, Anthropic::Models::Beta::BetaDreamModelConfigParam::Speed, nil] Inference speed mode. `fast` provides significantly faster output token generati
 

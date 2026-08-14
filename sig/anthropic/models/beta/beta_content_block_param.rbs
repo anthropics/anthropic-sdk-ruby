@@ -24,7 +24,6 @@ module Anthropic
         | Anthropic::Beta::BetaRequestMCPToolResultBlockParam
         | Anthropic::Beta::BetaContainerUploadBlockParam
         | Anthropic::Beta::BetaCompactionBlockParam
-        | Anthropic::Beta::BetaMidConversationSystemBlockParam
         | Anthropic::Beta::BetaRequestToolAdditionBlock
         | Anthropic::Beta::BetaRequestToolRemovalBlock
         | Anthropic::Beta::BetaFallbackBlockParam
@@ -167,11 +166,6 @@ module Anthropic
             ?encrypted_content: String?
           ) -> Anthropic::Beta::BetaCompactionBlockParam
           | (
-            type: :mid_conv_system | "mid_conv_system",
-            content: ::Array[Anthropic::Models::Beta::BetaMidConversationSystemBlockParam::content],
-            ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
-          ) -> Anthropic::Beta::BetaMidConversationSystemBlockParam
-          | (
             type: :tool_addition | "tool_addition",
             tool: Anthropic::Models::Beta::BetaRequestToolAdditionBlock::tool,
             ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
@@ -209,8 +203,7 @@ module Anthropic
             | Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultBlockParam::content
             | Anthropic::Models::Beta::BetaToolSearchToolResultBlockParam::content
             | Anthropic::Models::Beta::BetaRequestMCPToolResultBlockParam::content
-            | String?
-            | ::Array[Anthropic::Models::Beta::BetaMidConversationSystemBlockParam::content],
+            | String?,
             ?signature: String,
             ?thinking: String,
             ?data: String,

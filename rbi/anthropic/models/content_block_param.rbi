@@ -24,8 +24,7 @@ module Anthropic
             Anthropic::BashCodeExecutionToolResultBlockParam,
             Anthropic::TextEditorCodeExecutionToolResultBlockParam,
             Anthropic::ToolSearchToolResultBlockParam,
-            Anthropic::ContainerUploadBlockParam,
-            Anthropic::MidConversationSystemBlockParam
+            Anthropic::ContainerUploadBlockParam
           )
         end
 
