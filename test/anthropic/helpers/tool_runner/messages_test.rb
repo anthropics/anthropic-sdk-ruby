@@ -456,6 +456,53 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
     end
   end
 
+  # Like `stub_responses`, but also records each request body the runner sends.
+  def stub_responses_capturing_bodies(*responses)
+    [].tap do |bodies|
+      stub_request(:post, "http://localhost/v1/messages?beta=true")
+        .to_return do |request|
+          bodies << JSON.parse(request.body, symbolize_names: true)
+          responses[bodies.length - 1]
+        end
+    end
+  end
+
+  def test_unknown_tool_use_is_replayed_verbatim
+    bodies = stub_responses_capturing_bodies(
+      tool_use_response(
+        id: "msg_1",
+        text: "Let me look that up.",
+        tool_use: {id: "tool_1", name: "get_tides", input: {city: "Paris", days: 3}}
+      ),
+      text_response(id: "msg_2", text: "I have no tide tool available")
+    )
+
+    @client.beta.messages.tool_runner(basic_params).each_message { _1 }
+
+    assert_empty(@calculator.call_history)
+    assert_equal(2, bodies.length)
+
+    first, follow_up = bodies
+    assert_pattern do
+      follow_up[:messages] => [
+        *sent,
+        {
+          role: "assistant",
+          content: [
+            {type: "text", text: "Let me look that up."},
+            {type: "tool_use", id: "tool_1", name: "get_tides", input: {city: "Paris", days: 3}}
+          ]
+        },
+        {
+          role: "user",
+          content: [{type: "tool_result", tool_use_id: "tool_1", is_error: true, content: String}]
+        }
+      ]
+      sent => ^(first[:messages])
+    end
+    assert_match(/'get_tides' not found/, follow_up.dig(:messages, -1, :content, 0, :content))
+  end
+
   def calculator_tool_use_response(id:, tool_id:)
     tool_use_response(
       id: id,
