@@ -9,7 +9,7 @@ module Anthropic
           archived_at: String?,
           config: Anthropic::Models::Beta::BetaEnvironment::config,
           created_at: String,
-          description: String,
+          description: String?,
           metadata: ::Hash[Symbol, String],
           name: String,
           type: :environment,
@@ -26,7 +26,7 @@ module Anthropic
 
         attr_accessor created_at: String
 
-        attr_accessor description: String
+        attr_accessor description: String?
 
         attr_accessor metadata: ::Hash[Symbol, String]
 
@@ -47,7 +47,7 @@ module Anthropic
           archived_at: String?,
           config: Anthropic::Models::Beta::BetaEnvironment::config,
           created_at: String,
-          description: String,
+          description: String?,
           metadata: ::Hash[Symbol, String],
           name: String,
           updated_at: String,
@@ -60,7 +60,7 @@ module Anthropic
           archived_at: String?,
           config: Anthropic::Models::Beta::BetaEnvironment::config,
           created_at: String,
-          description: String,
+          description: String?,
           metadata: ::Hash[Symbol, String],
           name: String,
           type: :environment,

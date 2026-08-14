@@ -187,24 +187,6 @@ module Anthropic
         # @param available [Set<String>]
         private def apply_tool_change(block, available)
           case read_field(block, :type)&.to_sym
-          in :tool_removal | :tool_addition
-            apply_tool_delta(block, available)
-          in :mid_conv_system
-            # `mid_conv_system` content is limited by the API schema to text / tool_addition /
-            # tool_removal blocks, so exactly one level is walked; anything else inside is a no-op.
-            Array(read_field(block, :content)).each { apply_tool_delta(_1, available) }
-          else
-            nil # other and unknown block types leave the set untouched (forward compatibility)
-          end
-        end
-
-        # @api private
-        #
-        # @param block [Anthropic::Beta::BetaContentBlockParam, Hash{Symbol=>Object}]
-        #
-        # @param available [Set<String>]
-        private def apply_tool_delta(block, available)
-          case read_field(block, :type)&.to_sym
           in :tool_removal
             name = referenced_tool_name(read_field(block, :tool))
             available.delete(name) unless name.nil?

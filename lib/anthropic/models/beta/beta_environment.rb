@@ -30,10 +30,10 @@ module Anthropic
         required :created_at, String
 
         # @!attribute description
-        #   User-provided description for the environment
+        #   User-provided description for the environment; null when unset
         #
-        #   @return [String]
-        required :description, String
+        #   @return [String, nil]
+        required :description, String, nil?: true
 
         # @!attribute metadata
         #   User-provided metadata key-value pairs
@@ -80,7 +80,7 @@ module Anthropic
         #
         #   @param created_at [String] RFC 3339 timestamp when environment was created
         #
-        #   @param description [String] User-provided description for the environment
+        #   @param description [String, nil] User-provided description for the environment; null when unset
         #
         #   @param metadata [Hash{Symbol=>String}] User-provided metadata key-value pairs
         #

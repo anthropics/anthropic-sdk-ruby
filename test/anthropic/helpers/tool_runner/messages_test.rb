@@ -578,34 +578,6 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
     end
   end
 
-  def test_tool_removal_nested_in_mid_conv_system_block
-    removal = {
-      role: :system,
-      content: [
-        {
-          type: :mid_conv_system,
-          content: [
-            {type: :text, text: "The calculator is no longer available."},
-            {type: :tool_removal, tool: {type: :tool_reference, name: "calculator"}}
-          ]
-        }
-      ]
-    }
-
-    stub_responses(
-      calculator_tool_use_response(id: "msg_1", tool_id: "tool_1"),
-      text_response(id: "msg_2", text: "Cannot calculate right now")
-    )
-
-    runner = @client.beta.messages.tool_runner(
-      {**basic_params, messages: [*basic_params[:messages], removal]}
-    )
-    runner.each_message { _1 }
-
-    assert_empty(@calculator.call_history)
-    assert_not_found_result(tool_result_for(runner, "tool_1"))
-  end
-
   def calculator_removal_message
     {
       role: :system,

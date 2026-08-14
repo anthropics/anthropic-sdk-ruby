@@ -14,7 +14,7 @@ module Anthropic
             )
           end
 
-        # Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+        # Model identifier, e.g. "claude-opus-5". 1-256 characters.
         sig { returns(String) }
         attr_accessor :id
 
@@ -41,7 +41,7 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
+          # Model identifier, e.g. "claude-opus-5". 1-256 characters.
           id:,
           # Inference speed mode. `fast` provides significantly faster output token
           # generation at premium pricing. Not all models support `fast`; invalid

@@ -24,7 +24,7 @@ module Anthropic
                  -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaManagedAgentsURLMCPServerParams] }
 
         # @!attribute model
-        #   Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a
+        #   Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a
         #   `model_config` object. Omit to use the agent's model.
         #
         #   @return [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, nil]
@@ -74,7 +74,7 @@ module Anthropic
         #
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>] Replacement MCP server list. Full replacement: the provided array becomes the MC
         #
-        #   @param model [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams] Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a `model
+        #   @param model [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams] Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_c
         #
         #   @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>] Replacement skill list. Full replacement: the provided array becomes the skills.
         #
@@ -94,7 +94,7 @@ module Anthropic
           #   @return [Array<Symbol>]
         end
 
-        # Replacement model. Accepts the model string, e.g. `claude-opus-4-6`, or a
+        # Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a
         # `model_config` object. Omit to use the agent's model.
         #
         # @see Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams#model

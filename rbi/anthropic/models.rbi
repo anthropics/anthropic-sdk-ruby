@@ -210,9 +210,6 @@ module Anthropic
 
   Metadata = Anthropic::Models::Metadata
 
-  MidConversationSystemBlockParam =
-    Anthropic::Models::MidConversationSystemBlockParam
-
   Model = Anthropic::Models::Model
 
   ModelCapabilities = Anthropic::Models::ModelCapabilities
