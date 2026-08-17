@@ -61,7 +61,7 @@ module Anthropic
             api_name, description, raw_schema = Mcp.send(:extract_tool_fields, mcp_tool)
             raise ArgumentError, "MCP tool is missing a `name`" if api_name.to_s.empty?
 
-            extras = {
+            options = {
               cache_control: cache_control,
               defer_loading: defer_loading,
               allowed_callers: allowed_callers,
@@ -75,7 +75,7 @@ module Anthropic
             klass = Class.new(self)
             klass.description(description) if description
             klass.tool_name = api_name
-            klass.tool_extra_props = extras
+            klass.tool_options(options)
             klass.mcp_input_schema = Mcp.send(:normalize_schema, raw_schema)
             klass.mcp_client = mcp_client
             klass.instance_variable_set(:@model, input_class)

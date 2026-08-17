@@ -18,6 +18,9 @@ class Calculator < Anthropic::BaseTool
   puts "-- specifying `#input_schema` is required --\n"
   input_schema CalculatorInput
 
+  puts "-- `#tool_options` declares any other tool definition property, e.g. strict tool use --\n"
+  tool_options strict: true
+
   def call(expr)
     puts(">>> calling #{self} with #{expr.inspect} <<<")
 

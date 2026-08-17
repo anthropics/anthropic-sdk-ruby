@@ -104,6 +104,50 @@ module Anthropic
           assert_requested(stub)
         end
 
+        class LookupInput < Anthropic::Helpers::InputSchema::BaseModel
+          required :query, String
+        end
+
+        class Lookup < Anthropic::Helpers::Tools::BaseTool
+          doc "Look something up"
+          input_schema LookupInput
+
+          def call(input) = input
+        end
+
+        # Tools and a structured output format are converted independently of each other.
+        def test_output_config_alongside_tools
+          [false, true].each do |beta|
+            stub = stub_message_request(response_body: standard_response_body, beta: beta) do |s|
+              s.with do |request|
+                body = JSON.parse(request.body, symbolize_names: true)
+                assert_pattern do
+                  body => {
+                    tools: [{name: "lookup", input_schema: {type: "object"}}],
+                    output_config: {format: {type: "json_schema", schema: {type: "object"}}}
+                  }
+                end
+                true
+              end
+            end
+
+            resource = beta ? @client.beta.messages : @client.messages
+            message = resource.create(
+              model: "claude-opus-4-6",
+              max_tokens: 100,
+              messages: [{role: "user", content: "Test"}],
+              tools: [Lookup.new],
+              output_config: {format: OutputModel}
+            )
+
+            parsed = message.content.first[:parsed]
+            assert_instance_of(OutputModel, parsed)
+            assert_equal("success", parsed.result)
+            assert_requested(stub)
+            WebMock.reset!
+          end
+        end
+
         # Test deprecation warning
         def test_output_format_shows_deprecation_warning
           response_body = standard_response_body

@@ -38,26 +38,27 @@ module Anthropic
             # rubocop:disable Metrics/BlockLength
             mapped = tool_array.map do |tool|
               case tool
-              # BaseTool whose class declares an explicit `tool_name` (e.g. MCP-built tools):
-              in Anthropic::Helpers::Tools::BaseTool if tool.class.tool_name
+              # Runnable tool instance (an `Anthropic::BaseTool` subclass, hand-written or helper-built):
+              in Anthropic::Helpers::Tools::BaseTool
                 name = tool_api_name(tool)
+                # Helper-built tools (e.g. MCP) declare an explicit `tool_name` and only send the
+                # description they were given; hand-written tools fall back to their name.
                 description = tool.class.doc_string
+                description ||= name unless tool.class.tool_name
                 tools.store(name, tool)
                 input_schema = Anthropic::Helpers::InputSchema::JsonSchemaConverter.to_json_schema(tool)
-                extras = tool.class.tool_extra_props || {}
-                result = {name:, input_schema:, **extras}
-                result[:description] = description if description
-                result[:strict] = strict if strict
-                result
-              # Direct tool class:
+                # On a clash the derived keys win, so nothing in `tool_options` can shadow them.
+                definition =
+                  {name:, description:, input_schema:}
+                  .merge(tool.class.tool_options) { |_key, derived, _option| derived }
+                  .compact
+                definition.tap { _1.update(strict:) if strict }
+              # Input schema class used directly as a tool:
               in Anthropic::Helpers::InputSchema::JsonSchemaConverter
-                name =
-                  tool.is_a?(Anthropic::Helpers::Tools::BaseTool) ? tool_api_name(tool) : model_name(tool.name)
+                name = model_name(tool.name)
 
                 description =
                   case tool
-                  in Anthropic::Helpers::Tools::BaseTool
-                    tool.class.doc_string || name
                   in Class if tool <= Anthropic::Helpers::InputSchema::BaseModel
                     tool.doc_string || name
                   else
@@ -82,6 +83,11 @@ module Anthropic
             end
             # rubocop:enable Metrics/BlockLength
             tool_array.replace(mapped)
+          else
+          end
+
+          # Matched separately from `tools:` so a request can carry both tools and a structured output format.
+          case data
           # GA: output_config with BaseModel class as format
           in {output_config: {format: Anthropic::Helpers::InputSchema::JsonSchemaConverter => model} => output_config}
             name = model_name(model.name)

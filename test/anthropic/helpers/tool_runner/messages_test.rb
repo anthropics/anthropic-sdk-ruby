@@ -170,6 +170,16 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
     end
   end
 
+  class StrictCalculator < Anthropic::BaseTool
+    doc "Performs basic arithmetic operations"
+
+    input_schema CalculatorInput
+
+    tool_options strict: true, cache_control: {type: :ephemeral}
+
+    def call(expr) = expr.lhs.public_send(expr.operator, expr.rhs)
+  end
+
   def basic_params
     {
       max_tokens: 1024,
@@ -177,6 +187,36 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
       model: :"claude-3-7-sonnet-latest",
       tools: [@calculator]
     }
+  end
+
+  def test_tool_options_are_sent_on_every_request
+    stub_responses(
+      tool_use_response(
+        id: "msg_1",
+        tool_use: {id: "tool_1", name: "strict_calculator", input: {lhs: 10.0, rhs: 5.0, operator: "+"}}
+      ),
+      text_response(id: "msg_2", text: "10 + 5 = 15")
+    )
+
+    runner = @client.beta.messages.tool_runner({**basic_params, tools: [StrictCalculator.new]})
+    runner.each_message { nil }
+
+    assert_requested(:post, "http://localhost/v1/messages?beta=true", times: 2) do |request|
+      assert_pattern do
+        JSON.parse(request.body, symbolize_names: true) => {
+          tools: [
+            {
+              name: "strict_calculator",
+              description: "Performs basic arithmetic operations",
+              input_schema: {type: "object"},
+              strict: true,
+              cache_control: {type: "ephemeral"}
+            }
+          ]
+        }
+      end
+    end
+    assert_pattern { tool_result_for(runner, "tool_1") => {is_error: false, content: "15.0"} }
   end
 
   def test_basic_each_message
