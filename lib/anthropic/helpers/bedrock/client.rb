@@ -121,10 +121,8 @@ module Anthropic
             @aws_region = aws_region
           end
 
-          base_url ||= ENV.fetch(
-            "ANTHROPIC_BEDROCK_BASE_URL",
-            "https://bedrock-runtime.#{@aws_region}.amazonaws.com"
-          )
+          base_url = ENV["ANTHROPIC_BEDROCK_BASE_URL"] if base_url.to_s.empty?
+          base_url = "https://bedrock-runtime.#{@aws_region}.amazonaws.com" if base_url.to_s.empty?
 
           # For AWSAuth#auth_headers: suppress key headers in SigV4 mode; in
           # API-key mode fall through to the base bearer-token handling.

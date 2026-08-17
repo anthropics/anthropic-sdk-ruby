@@ -131,6 +131,19 @@ class Anthropic::ClientCredentialsTest < Minitest::Test
     assert_equal("https://custom.anthropic.com", client.base_url.to_s)
   end
 
+  def test_subclass_without_default_credentials_never_falls_back_to_first_party_base_url
+    ENV["ANTHROPIC_BASE_URL"] = "http://wrong-host.example.com"
+    platform_client = Class.new(Anthropic::Client) do
+      private def resolve_default_credentials? = false
+    end
+
+    assert_raises(ArgumentError) { platform_client.new }
+    assert_raises(ArgumentError) { platform_client.new(base_url: "") }
+
+    client = platform_client.new(base_url: "http://localhost")
+    assert_equal("http://localhost", client.base_url.to_s)
+  end
+
   def test_credentials_provider_sends_oauth_api_beta_header
     provider = Anthropic::Credentials::StaticToken.new("my-oauth-token")
     client = Anthropic::Client.new(credentials: provider)

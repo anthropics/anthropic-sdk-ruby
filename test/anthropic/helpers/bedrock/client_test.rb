@@ -524,6 +524,16 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
     end
   end
 
+  def test_empty_base_url_derives_from_region
+    original = ENV.fetch("ANTHROPIC_BEDROCK_BASE_URL", nil)
+    ENV["ANTHROPIC_BEDROCK_BASE_URL"] = ""
+
+    assert_equal("https://bedrock-runtime.us-east-1.amazonaws.com", make_client.base_url.to_s)
+    assert_equal("https://bedrock-runtime.us-east-1.amazonaws.com", make_client(base_url: "").base_url.to_s)
+  ensure
+    original.nil? ? ENV.delete("ANTHROPIC_BEDROCK_BASE_URL") : ENV["ANTHROPIC_BEDROCK_BASE_URL"] = original
+  end
+
   # ANTHROPIC_CUSTOM_HEADERS applies to Bedrock clients like any other client.
   def test_custom_headers_env_applies
     original = ENV.fetch("ANTHROPIC_CUSTOM_HEADERS", nil)
