@@ -44,6 +44,7 @@ module Anthropic
         use_bearer_auth: false
       )
         @use_bearer_auth = use_bearer_auth
+        base_url = nil if base_url.to_s.empty?
         begin
           require("aws-sdk-core")
         rescue LoadError
@@ -119,12 +120,12 @@ module Anthropic
           end
         end
 
-        if base_url.nil? && !aws_region.to_s.empty?
+        if !base_url && !aws_region.to_s.empty?
           @aws_region ||= aws_region
           base_url = derive_base_url.call(aws_region)
         end
 
-        if base_url.nil?
+        unless base_url
           # rubocop:disable Layout/LineLength
           raise ArgumentError.new("No base_url was given and no aws_region is available to derive one. Set the `base_url` argument or provide an `aws_region`.")
           # rubocop:enable Layout/LineLength
@@ -146,6 +147,16 @@ module Anthropic
         end
         super
       end
+
+      # @api private
+      #
+      # AWS-authenticated clients never resolve ambient first-party
+      # credentials, which would fold the shared config store's headers and
+      # bearer into requests bound for a third-party endpoint.
+      #
+      # @return [Boolean]
+      # @see Anthropic::Client#resolve_default_credentials?
+      private def resolve_default_credentials? = false
 
       # The AWS provider middleware entry: applies the workspace-id header and
       # SigV4 signing per attempt. Return from the including class's

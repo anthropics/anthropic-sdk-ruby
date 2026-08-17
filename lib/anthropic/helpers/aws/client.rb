@@ -53,7 +53,7 @@ module Anthropic
         #
         # @param max_retry_delay [Float]
         #
-        def initialize( # rubocop:disable Lint/MissingSuper
+        def initialize(
           api_key: nil,
           aws_access_key: nil,
           aws_secret_access_key: nil,
@@ -84,27 +84,19 @@ module Anthropic
             derive_base_url: ->(region) { "https://aws-external-anthropic.#{region}.api.aws" }
           )
 
-          @api_key = effective_api_key
-          @auth_token = nil
-          @credentials = nil
-          @token_cache = nil
-
-          # Skip Anthropic::Client#initialize and bind BaseClient#initialize directly:
-          # the parent's initializer runs OIDC/credential-provider resolution that does
-          # not apply here.
-          Anthropic::Internal::Transport::BaseClient.instance_method(:initialize).bind(self).call(
+          # In API-key mode the gateway key rides the base client's `api_key`
+          # slot; {#resolve_default_credentials?} keeps first-party credential
+          # auto-discovery out of the picture when it is absent. The gateway
+          # serves the full first-party API, so every resource the parent wires
+          # up stays available.
+          super(
+            api_key: effective_api_key,
             base_url: resolved_base_url,
             timeout: timeout,
             max_retries: max_retries,
             initial_retry_delay: initial_retry_delay,
-            max_retry_delay: max_retry_delay,
-            headers: {"anthropic-version" => "2023-06-01"}
+            max_retry_delay: max_retry_delay
           )
-
-          @completions = Anthropic::Resources::Completions.new(client: self)
-          @messages = Anthropic::Resources::Messages.new(client: self)
-          @models = Anthropic::Resources::Models.new(client: self)
-          @beta = Anthropic::Resources::Beta.new(client: self)
         end
 
         # @api private

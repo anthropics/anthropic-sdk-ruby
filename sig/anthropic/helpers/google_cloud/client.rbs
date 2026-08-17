@@ -12,13 +12,9 @@ module Anthropic
 
         attr_reader workspace_id: String?
 
-        attr_reader messages: Anthropic::Resources::Messages
-
-        attr_reader models: Anthropic::Resources::Models
-
-        attr_reader beta: Anthropic::Resources::Beta
-
         def completions: -> bot
+
+        private def resolve_default_credentials?: -> bool
 
         private def auth_headers: -> ::Hash[String, String]
 

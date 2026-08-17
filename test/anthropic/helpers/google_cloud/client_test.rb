@@ -2,6 +2,8 @@
 
 require_relative "../../test_helper"
 require "googleauth"
+require "tmpdir"
+require "json"
 
 class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
   extend Minitest::Serial
@@ -18,6 +20,14 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
     ANTHROPIC_API_KEY
     ANTHROPIC_AUTH_TOKEN
     ANTHROPIC_BASE_URL
+    ANTHROPIC_CONFIG_DIR
+    ANTHROPIC_PROFILE
+    ANTHROPIC_FEDERATION_RULE_ID
+    ANTHROPIC_ORGANIZATION_ID
+    ANTHROPIC_IDENTITY_TOKEN
+    ANTHROPIC_IDENTITY_TOKEN_FILE
+    ANTHROPIC_CUSTOM_HEADERS
+    ANTHROPIC_WEBHOOK_SIGNING_KEY
   ].freeze
 
   def before_all
@@ -69,6 +79,35 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
   def derived_base_url(location: "us-central1", project: "test-proj", workspace_id: "ws-test")
     "https://claude.googleapis.com/v1alpha" \
       "/projects/#{project}/locations/#{location}/workspaces/#{workspace_id}/invoke"
+  end
+
+  # Writes a fake first-party config store in the layout `Anthropic::Credentials`
+  # reads (an active `default` user_oauth profile with a workspace id, a
+  # base_url, and a live access token) and points `ANTHROPIC_CONFIG_DIR` at it.
+  # `setup` has already cleared the static credential env, so auto-discovery
+  # would find it. Restored by `teardown` via ENV_KEYS.
+  def with_fake_config_store(dir)
+    FileUtils.mkdir_p(File.join(dir, "configs"))
+    FileUtils.mkdir_p(File.join(dir, "credentials"))
+    File.write(
+      File.join(dir, "configs", "default.json"),
+      JSON.generate(
+        {
+          authentication: {type: "user_oauth"},
+          workspace_id: "wrkspc_fake_store_value",
+          base_url: "https://store.example.com"
+        }
+      )
+    )
+    credentials_path = File.join(dir, "credentials", "default.json")
+    File.write(
+      credentials_path,
+      JSON.generate({access_token: "fake-store-token", expires_at: Time.now.to_i + 3600})
+    )
+    File.chmod(0o600, credentials_path)
+
+    ENV["ANTHROPIC_CONFIG_DIR"] = dir
+    yield
   end
 
   # ---------------------------------------------------------------------------
@@ -209,6 +248,18 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
     assert_equal(derived_base_url, client.base_url.to_s)
   end
 
+  def test_false_base_url_derived_not_first_party_env
+    ENV["ANTHROPIC_BASE_URL"] = "http://wrong-host.example.com"
+    client = make_client(base_url: false)
+    assert_equal(derived_base_url, client.base_url.to_s)
+  end
+
+  def test_empty_base_url_env_derived
+    ENV["ANTHROPIC_GOOGLE_CLOUD_BASE_URL"] = ""
+    client = make_client
+    assert_equal(derived_base_url, client.base_url.to_s)
+  end
+
   def test_missing_project_raises_when_deriving
     err = assert_raises(ArgumentError) do
       Anthropic::GoogleCloudClient.new(
@@ -313,6 +364,8 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
     client = make_client
     assert_nil(client.api_key)
     assert_nil(client.auth_token)
+    assert_nil(client.credentials)
+    assert_nil(client.token_cache)
     assert_equal(derived_base_url, client.base_url.to_s)
 
     assert_raises(Anthropic::Errors::InternalServerError) do
@@ -322,6 +375,68 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
     assert_requested(:any, /./, times: 3) do |req|
       assert_nil(req.headers["X-Api-Key"])
       assert_equal("Bearer gcp-token", req.headers["Authorization"])
+    end
+  end
+
+  # The first-party config store (`~/.config/anthropic`, `ANTHROPIC_CONFIG_DIR`)
+  # must never be consulted: no store bearer, no store-derived
+  # `anthropic-workspace-id`, no OAuth beta header, and no store `base_url`
+  # redirecting gateway traffic.
+  def test_does_not_consult_first_party_config_store
+    Dir.mktmpdir do |dir|
+      with_fake_config_store(dir) do
+        # Control: the fixture is live — the first-party client does pick it up.
+        control = Anthropic::Client.new
+        assert_kind_of(Anthropic::Credentials::CredentialsFile, control.credentials)
+        assert_equal("https://store.example.com", control.base_url.to_s)
+
+        stub_request(:post, "#{derived_base_url}/v1/messages").to_return_json(status: 200, body: {})
+
+        client = make_client
+        assert_nil(client.credentials)
+        assert_nil(client.token_cache)
+        assert_equal(derived_base_url, client.base_url.to_s)
+
+        client.messages.create(max_tokens: 1, messages: [{content: "hi", role: :user}], model: :m)
+
+        assert_requested(:post, "#{derived_base_url}/v1/messages", times: 1) do |req|
+          headers = req.headers.transform_keys(&:downcase)
+          assert_equal("Bearer gcp-token", headers["authorization"])
+          refute(headers.key?("x-api-key"))
+          refute(headers.key?("anthropic-workspace-id"))
+          true
+        end
+      end
+    end
+  end
+
+  # Same invariant with auth skipped — the mode where a leaked first-party
+  # credential would be the only thing on the wire.
+  def test_skip_auth_does_not_consult_first_party_config_store
+    Dir.mktmpdir do |dir|
+      with_fake_config_store(dir) do
+        stub_request(:post, "#{derived_base_url}/v1/messages").to_return_json(status: 200, body: {})
+
+        client = Anthropic::GoogleCloudClient.new(
+          project: "test-proj",
+          location: "us-central1",
+          workspace_id: "ws-test",
+          skip_auth: true
+        )
+        assert_nil(client.credentials)
+        assert_nil(client.token_cache)
+        assert_equal(derived_base_url, client.base_url.to_s)
+
+        client.messages.create(max_tokens: 1, messages: [{content: "hi", role: :user}], model: :m)
+
+        assert_requested(:post, "#{derived_base_url}/v1/messages", times: 1) do |req|
+          headers = req.headers.transform_keys(&:downcase)
+          refute(headers.key?("authorization"))
+          refute(headers.key?("x-api-key"))
+          refute(headers.key?("anthropic-workspace-id"))
+          true
+        end
+      end
     end
   end
 
@@ -411,6 +526,27 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
     end
   end
 
+  # ANTHROPIC_CUSTOM_HEADERS applies to gateway clients like any other client.
+  def test_custom_headers_env_applies
+    ENV["ANTHROPIC_CUSTOM_HEADERS"] = "x-custom-test: from-env"
+    stub_request(:post, "#{derived_base_url}/v1/messages").to_return_json(status: 200, body: {})
+
+    client = make_client
+    client.messages.create(max_tokens: 1, messages: [{content: "hi", role: :user}], model: :m)
+
+    assert_requested(:post, "#{derived_base_url}/v1/messages", times: 1) do |req|
+      assert_equal("from-env", req.headers.transform_keys(&:downcase)["x-custom-test"])
+      true
+    end
+  end
+
+  # The webhook signing key defaults from the env like the first-party client.
+  # It only verifies inbound webhook payloads; nothing goes on the wire.
+  def test_webhook_key_env_default
+    ENV["ANTHROPIC_WEBHOOK_SIGNING_KEY"] = "whsec_fake_env_value"
+    assert_equal("whsec_fake_env_value", make_client.webhook_key)
+  end
+
   # ---------------------------------------------------------------------------
   # Surface
   # ---------------------------------------------------------------------------
@@ -490,6 +626,24 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
 
     assert_requested(:post, "#{derived_base_url}/v1/messages") do |req|
       assert_equal("Bearer user-supplied", req.headers["Authorization"])
+    end
+  end
+
+  def test_custom_headers_env_authorization_takes_precedence_over_token_provider
+    ENV["ANTHROPIC_CUSTOM_HEADERS"] = "Authorization: Bearer foreign"
+    stub_request(:post, "#{derived_base_url}/v1/messages").to_return_json(status: 200, body: {})
+
+    provider_calls = 0
+    token_provider = lambda do
+      provider_calls += 1
+      "gcp-token"
+    end
+    client = make_client(token_provider: token_provider)
+    client.messages.create(max_tokens: 1, messages: [{content: "hi", role: :user}], model: :m)
+
+    assert_equal(0, provider_calls)
+    assert_requested(:post, "#{derived_base_url}/v1/messages") do |req|
+      assert_equal("Bearer foreign", req.headers["Authorization"])
     end
   end
 end

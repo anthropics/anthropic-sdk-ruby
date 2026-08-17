@@ -31,15 +31,6 @@ module Anthropic
         # @return [String, nil]
         attr_reader :workspace_id
 
-        # @return [Anthropic::Resources::Messages]
-        attr_reader :messages
-
-        # @return [Anthropic::Resources::Models]
-        attr_reader :models
-
-        # @return [Anthropic::Resources::Beta]
-        attr_reader :beta
-
         # Creates a new client for the Anthropic API on the Google Cloud gateway.
         #
         # Authentication uses Google credentials by precedence (unless
@@ -95,7 +86,7 @@ module Anthropic
         #   is applied per attempt, after user middleware.
         #
         # @raise [ArgumentError]
-        def initialize( # rubocop:disable Lint/MissingSuper
+        def initialize(
           project: ENV["ANTHROPIC_GOOGLE_CLOUD_PROJECT"] || ENV["GOOGLE_CLOUD_PROJECT"],
           location: ENV["ANTHROPIC_GOOGLE_CLOUD_LOCATION"] || "global",
           workspace_id: ENV["ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID"],
@@ -144,32 +135,30 @@ module Anthropic
           end
           @workspace_id = workspace_id
 
-          base_url = derive_base_url if base_url.nil?
+          base_url = nil if base_url.to_s.empty?
+          base_url ||= derive_base_url
 
-          # Never inherit first-party Anthropic credentials from the
-          # environment: clear the ivars `Anthropic::Client#auth_headers` reads,
-          # and bind `BaseClient#initialize` directly so the parent's
-          # credential-provider / `ANTHROPIC_BASE_URL` resolution is skipped
-          # entirely.
-          @api_key = nil
-          @auth_token = nil
-          @credentials = nil
-          @token_cache = nil
-
-          Anthropic::Internal::Transport::BaseClient.instance_method(:initialize).bind(self).call(
+          # No first-party credential is ever passed up, and
+          # {#resolve_default_credentials?} keeps the parent from discovering
+          # one; `base_url` is always resolved by this point, so the parent's
+          # `ANTHROPIC_BASE_URL` fallback never applies. The parent wires up
+          # every resource; {#completions} withholds the one the gateway does
+          # not serve.
+          super(
             base_url: base_url,
             timeout: timeout,
             max_retries: max_retries,
             initial_retry_delay: initial_retry_delay,
             max_retry_delay: max_retry_delay,
-            headers: {"anthropic-version" => "2023-06-01"},
             middleware: middleware
           )
-
-          @messages = Anthropic::Resources::Messages.new(client: self)
-          @models = Anthropic::Resources::Models.new(client: self)
-          @beta = Anthropic::Resources::Beta.new(client: self)
         end
+
+        # @api private
+        #
+        # @return [Boolean]
+        # @see Anthropic::Client#resolve_default_credentials?
+        private def resolve_default_credentials? = false
 
         # The deprecated text Completions endpoint is not supported on the
         # Google Cloud gateway.
