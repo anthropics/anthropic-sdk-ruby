@@ -79,7 +79,7 @@ module Anthropic
         #
         # @param config [Anthropic::Models::Beta::BetaCloudConfigParams, Anthropic::Models::Beta::BetaSelfHostedConfigParams, nil] Body param: Updated environment configuration
         #
-        # @param description [String, nil] Body param: Updated description of the environment
+        # @param description [String, nil] Body param: Updated description of the environment. Omit to preserve; null clear
         #
         # @param metadata [Hash{Symbol=>String, nil}] Body param: User-provided metadata key-value pairs. Set a value to null or empty
         #

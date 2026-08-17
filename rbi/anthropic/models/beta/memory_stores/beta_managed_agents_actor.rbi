@@ -17,7 +17,8 @@ module Anthropic
               T.any(
                 Anthropic::Beta::MemoryStores::BetaManagedAgentsSessionActor,
                 Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor,
-                Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor
+                Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor,
+                Anthropic::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor
               )
             end
 
@@ -38,7 +39,8 @@ module Anthropic
               type: T.any(Symbol, String),
               session_id: String,
               api_key_id: String,
-              user_id: String
+              user_id: String,
+              service_account_id: String
             ).returns(
               Anthropic::Beta::MemoryStores::BetaManagedAgentsActor::Variants
             )
@@ -53,7 +55,9 @@ module Anthropic
             # secret.
             api_key_id: nil,
             # ID of the user who performed the write (a `user_...` value).
-            user_id: nil
+            user_id: nil,
+            # ID of the service account that performed the write (a `svac_...` value).
+            service_account_id: nil
           )
           end
         end

@@ -44,6 +44,7 @@ module Anthropic
               operation:
                 Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersionOperation::OrSymbol,
               page: String,
+              service_account_id: String,
               session_id: String,
               view:
                 Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryView::OrSymbol,
@@ -73,6 +74,8 @@ module Anthropic
             operation: nil,
             # Query param: Query parameter for page
             page: nil,
+            # Query param: Query parameter for service_account_id
+            service_account_id: nil,
             # Query param: Query parameter for session_id
             session_id: nil,
             # Query param: Query parameter for view

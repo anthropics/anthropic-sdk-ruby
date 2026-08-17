@@ -84,7 +84,8 @@ module Anthropic
                 T.any(
                   Anthropic::Beta::MemoryStores::BetaManagedAgentsSessionActor::OrHash,
                   Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor::OrHash,
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor::OrHash
+                  Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor::OrHash,
+                  Anthropic::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor::OrHash
                 )
             ).void
           end
@@ -119,7 +120,8 @@ module Anthropic
                 T.any(
                   Anthropic::Beta::MemoryStores::BetaManagedAgentsSessionActor::OrHash,
                   Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor::OrHash,
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor::OrHash
+                  Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor::OrHash,
+                  Anthropic::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor::OrHash
                 )
             ).void
           end
@@ -148,7 +150,8 @@ module Anthropic
                 T.any(
                   Anthropic::Beta::MemoryStores::BetaManagedAgentsSessionActor::OrHash,
                   Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor::OrHash,
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor::OrHash
+                  Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor::OrHash,
+                  Anthropic::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor::OrHash
                 ),
               path: T.nilable(String),
               redacted_at: T.nilable(Time),
@@ -156,7 +159,8 @@ module Anthropic
                 T.any(
                   Anthropic::Beta::MemoryStores::BetaManagedAgentsSessionActor::OrHash,
                   Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor::OrHash,
-                  Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor::OrHash
+                  Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor::OrHash,
+                  Anthropic::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor::OrHash
                 )
             ).returns(T.attached_class)
           end
