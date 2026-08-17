@@ -21,6 +21,16 @@ module Anthropic
 
         # @api public
         #
+        # @return [String, nil]
+        def request_id = headers["request-id"]
+
+        # @api public
+        #
+        # @return [String, nil]
+        def workspace_id = headers["anthropic-workspace-id"]
+
+        # @api public
+        #
         # @return [void]
         def close = Anthropic::Internal::Util.close_fused!(@iterator)
 

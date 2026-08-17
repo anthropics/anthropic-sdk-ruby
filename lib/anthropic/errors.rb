@@ -60,6 +60,12 @@ module Anthropic
       # @return [Object, nil]
       attr_accessor :body
 
+      # @return [String, nil]
+      def request_id = headers&.[]("request-id")
+
+      # @return [String, nil]
+      def workspace_id = headers&.[]("anthropic-workspace-id")
+
       # @api private
       #
       # @param url [URI::Generic]
