@@ -56,6 +56,12 @@ module Anthropic
           #   @return [String, nil]
           optional :page, String
 
+          # @!attribute service_account_id
+          #   Query parameter for service_account_id
+          #
+          #   @return [String, nil]
+          optional :service_account_id, String
+
           # @!attribute session_id
           #   Query parameter for session_id
           #
@@ -74,7 +80,7 @@ module Anthropic
           #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-          # @!method initialize(memory_store_id:, api_key_id: nil, created_at_gte: nil, created_at_lte: nil, limit: nil, memory_id: nil, operation: nil, page: nil, session_id: nil, view: nil, betas: nil, request_options: {})
+          # @!method initialize(memory_store_id:, api_key_id: nil, created_at_gte: nil, created_at_lte: nil, limit: nil, memory_id: nil, operation: nil, page: nil, service_account_id: nil, session_id: nil, view: nil, betas: nil, request_options: {})
           #   @param memory_store_id [String]
           #
           #   @param api_key_id [String] Query parameter for api_key_id
@@ -90,6 +96,8 @@ module Anthropic
           #   @param operation [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersionOperation] Query parameter for operation
           #
           #   @param page [String] Query parameter for page
+          #
+          #   @param service_account_id [String] Query parameter for service_account_id
           #
           #   @param session_id [String] Query parameter for session_id
           #

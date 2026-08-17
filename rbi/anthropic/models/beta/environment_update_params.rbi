@@ -31,7 +31,8 @@ module Anthropic
         end
         attr_accessor :config
 
-        # Updated description of the environment
+        # Updated description of the environment. Omit to preserve; null clears to null;
+        # an empty string is stored as an empty string.
         sig { returns(T.nilable(String)) }
         attr_accessor :description
 
@@ -99,7 +100,8 @@ module Anthropic
           environment_id:,
           # Updated environment configuration
           config: nil,
-          # Updated description of the environment
+          # Updated description of the environment. Omit to preserve; null clears to null;
+          # an empty string is stored as an empty string.
           description: nil,
           # User-provided metadata key-value pairs. Set a value to null or empty string to
           # delete the key.

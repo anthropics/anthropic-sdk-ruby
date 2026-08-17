@@ -46,7 +46,7 @@ module Anthropic
 
           # List memory versions
           #
-          # @overload list(memory_store_id, api_key_id: nil, created_at_gte: nil, created_at_lte: nil, limit: nil, memory_id: nil, operation: nil, page: nil, session_id: nil, view: nil, betas: nil, request_options: {})
+          # @overload list(memory_store_id, api_key_id: nil, created_at_gte: nil, created_at_lte: nil, limit: nil, memory_id: nil, operation: nil, page: nil, service_account_id: nil, session_id: nil, view: nil, betas: nil, request_options: {})
           #
           # @param memory_store_id [String] Path param: Path parameter memory_store_id
           #
@@ -63,6 +63,8 @@ module Anthropic
           # @param operation [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersionOperation] Query param: Query parameter for operation
           #
           # @param page [String] Query param: Query parameter for page
+          #
+          # @param service_account_id [String] Query param: Query parameter for service_account_id
           #
           # @param session_id [String] Query param: Query parameter for session_id
           #
@@ -85,6 +87,7 @@ module Anthropic
                 :memory_id,
                 :operation,
                 :page,
+                :service_account_id,
                 :session_id,
                 :view
               ]

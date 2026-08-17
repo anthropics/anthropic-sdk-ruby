@@ -6,6 +6,7 @@ module Anthropic
           Anthropic::Beta::MemoryStores::BetaManagedAgentsSessionActor
           | Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor
           | Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor
+          | Anthropic::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor
 
         module BetaManagedAgentsActor
           extend Anthropic::Internal::Type::Union
@@ -26,10 +27,15 @@ module Anthropic
               user_id: String
             ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor
             | (
+              type: :service_account_actor | "service_account_actor",
+              service_account_id: String
+            ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor
+            | (
               type: Symbol | String,
               ?session_id: String,
               ?api_key_id: String,
-              ?user_id: String
+              ?user_id: String,
+              ?service_account_id: String
             ) -> Anthropic::Models::Beta::MemoryStores::beta_managed_agents_actor
         end
       end

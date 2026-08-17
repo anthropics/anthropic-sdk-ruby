@@ -603,6 +603,7 @@ require_relative "anthropic/models/beta/memory_stores/beta_managed_agents_memory
 require_relative "anthropic/models/beta/memory_stores/beta_managed_agents_memory_version_operation"
 require_relative "anthropic/models/beta/memory_stores/beta_managed_agents_memory_view"
 require_relative "anthropic/models/beta/memory_stores/beta_managed_agents_precondition"
+require_relative "anthropic/models/beta/memory_stores/beta_managed_agents_service_account_actor"
 require_relative "anthropic/models/beta/memory_stores/beta_managed_agents_session_actor"
 require_relative "anthropic/models/beta/memory_stores/beta_managed_agents_user_actor"
 require_relative "anthropic/models/beta/memory_stores/memory_create_params"

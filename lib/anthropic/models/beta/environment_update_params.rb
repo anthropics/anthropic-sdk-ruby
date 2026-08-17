@@ -20,7 +20,8 @@ module Anthropic
         optional :config, union: -> { Anthropic::Beta::EnvironmentUpdateParams::Config }, nil?: true
 
         # @!attribute description
-        #   Updated description of the environment
+        #   Updated description of the environment. Omit to preserve; null clears to null;
+        #   an empty string is stored as an empty string.
         #
         #   @return [String, nil]
         optional :description, String, nil?: true
@@ -60,7 +61,7 @@ module Anthropic
         #
         #   @param config [Anthropic::Models::Beta::BetaCloudConfigParams, Anthropic::Models::Beta::BetaSelfHostedConfigParams, nil] Updated environment configuration
         #
-        #   @param description [String, nil] Updated description of the environment
+        #   @param description [String, nil] Updated description of the environment. Omit to preserve; null clears to null; a
         #
         #   @param metadata [Hash{Symbol=>String, nil}] User-provided metadata key-value pairs. Set a value to null or empty string to d
         #

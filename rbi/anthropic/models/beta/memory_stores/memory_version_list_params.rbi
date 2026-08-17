@@ -79,6 +79,13 @@ module Anthropic
           sig { params(page: String).void }
           attr_writer :page
 
+          # Query parameter for service_account_id
+          sig { returns(T.nilable(String)) }
+          attr_reader :service_account_id
+
+          sig { params(service_account_id: String).void }
+          attr_writer :service_account_id
+
           # Query parameter for session_id
           sig { returns(T.nilable(String)) }
           attr_reader :session_id
@@ -132,6 +139,7 @@ module Anthropic
               operation:
                 Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersionOperation::OrSymbol,
               page: String,
+              service_account_id: String,
               session_id: String,
               view:
                 Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryView::OrSymbol,
@@ -156,6 +164,8 @@ module Anthropic
             operation: nil,
             # Query parameter for page
             page: nil,
+            # Query parameter for service_account_id
+            service_account_id: nil,
             # Query parameter for session_id
             session_id: nil,
             # Query parameter for view
@@ -178,6 +188,7 @@ module Anthropic
                 operation:
                   Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersionOperation::OrSymbol,
                 page: String,
+                service_account_id: String,
                 session_id: String,
                 view:
                   Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryView::OrSymbol,

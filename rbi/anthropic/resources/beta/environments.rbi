@@ -91,7 +91,8 @@ module Anthropic
           environment_id,
           # Body param: Updated environment configuration
           config: nil,
-          # Body param: Updated description of the environment
+          # Body param: Updated description of the environment. Omit to preserve; null
+          # clears to null; an empty string is stored as an empty string.
           description: nil,
           # Body param: User-provided metadata key-value pairs. Set a value to null or empty
           # string to delete the key.
