@@ -29,7 +29,7 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
     super
   end
 
-  def tool_use_response(id:, tool_use:, text: nil, stop_reason: "tool_use")
+  def tool_use_response(id:, tool_use:, text: nil, stop_reason: "tool_use", container: nil)
     tool_uses = if tool_use.is_a?(Array)
       tool_use.map { {type: "tool_use", **_1} }
     else
@@ -46,7 +46,8 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
       body: message_body(
         id: id,
         content: content,
-        stop_reason: stop_reason
+        stop_reason: stop_reason,
+        container: container
       ).to_json
     }
   end
@@ -63,7 +64,7 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
     }
   end
 
-  def message_body(id:, content:, stop_reason:, usage: nil)
+  def message_body(id:, content:, stop_reason:, usage: nil, container: nil)
     {
       id: id,
       type: "message",
@@ -71,7 +72,8 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
       model: "claude-3-7-sonnet-latest",
       content: content,
       stop_reason: stop_reason,
-      usage: usage || {input_tokens: 10, output_tokens: 20}
+      usage: usage || {input_tokens: 10, output_tokens: 20},
+      container: container
     }
   end
 
@@ -503,11 +505,65 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
     assert_match(/'get_tides' not found/, follow_up.dig(:messages, -1, :content, 0, :content))
   end
 
-  def calculator_tool_use_response(id:, tool_id:)
+  def calculator_tool_use_response(id:, tool_id:, container: nil)
     tool_use_response(
       id: id,
-      tool_use: {id: tool_id, name: "calculator", input: {lhs: 10.0, rhs: 5.0, operator: "+"}}
+      tool_use: {id: tool_id, name: "calculator", input: {lhs: 10.0, rhs: 5.0, operator: "+"}},
+      container: container
     )
+  end
+
+  SERVER_CONTAINER = {id: "cntr_server", expires_at: "2025-01-01T00:00:00Z"}.freeze
+
+  def container_hop_bodies(params, container: SERVER_CONTAINER)
+    bodies = stub_responses_capturing_bodies(
+      calculator_tool_use_response(id: "msg_1", tool_id: "tool_1", container: container),
+      text_response(id: "msg_2", text: "10 + 5 = 15")
+    )
+    @client.beta.messages.tool_runner(params).each_message { _1 }
+
+    assert_equal(2, bodies.length)
+    bodies
+  end
+
+  def test_server_assigned_container_is_forwarded
+    first, follow_up = container_hop_bodies(basic_params)
+
+    refute_operator(first, :key?, :container)
+    assert_equal("cntr_server", follow_up[:container])
+  end
+
+  def test_pinned_container_id_is_not_overridden
+    _first, follow_up = container_hop_bodies({**basic_params, container: "cntr_pinned"})
+
+    assert_equal("cntr_pinned", follow_up[:container])
+  end
+
+  def test_pinned_container_hash_without_id_adopts_the_server_id
+    skills = [{type: "anthropic", skill_id: "pptx", version: "latest"}]
+    _first, follow_up = container_hop_bodies({**basic_params, container: {skills: skills}})
+
+    assert_equal({id: "cntr_server", skills: skills}, follow_up[:container])
+  end
+
+  def test_pinned_container_params_without_id_adopts_the_server_id
+    pinned = Anthropic::Beta::BetaContainerParams.new(skills: [{type: :anthropic, skill_id: "pptx"}])
+    _first, follow_up = container_hop_bodies({**basic_params, container: pinned})
+
+    assert_equal({id: "cntr_server", skills: [{type: "anthropic", skill_id: "pptx"}]}, follow_up[:container])
+  end
+
+  def test_pinned_container_hash_with_id_is_not_overridden
+    pinned = {id: "cntr_pinned", skills: [{type: "anthropic", skill_id: "pptx"}]}
+    _first, follow_up = container_hop_bodies({**basic_params, container: pinned})
+
+    assert_equal(pinned, follow_up[:container])
+  end
+
+  def test_response_without_container_leaves_follow_up_without_one
+    _first, follow_up = container_hop_bodies(basic_params, container: nil)
+
+    refute_operator(follow_up, :key?, :container)
   end
 
   def tool_result_for(runner, tool_use_id)
