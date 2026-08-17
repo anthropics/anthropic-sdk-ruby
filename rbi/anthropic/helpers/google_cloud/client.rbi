@@ -15,17 +15,13 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_reader :workspace_id
 
-        sig { returns(Anthropic::Resources::Messages) }
-        attr_reader :messages
-
-        sig { returns(Anthropic::Resources::Models) }
-        attr_reader :models
-
-        sig { returns(Anthropic::Resources::Beta) }
-        attr_reader :beta
-
         sig { returns(T.noreturn) }
         def completions
+        end
+
+        # @api private
+        sig { override.returns(T::Boolean) }
+        private def resolve_default_credentials?
         end
 
         # @api private

@@ -12,8 +12,6 @@ module Anthropic
 
         attr_reader beta: Anthropic::Resources::Beta
 
-        private def resolve_default_credentials?: -> bool
-
         def models: -> bot
 
         private def build_request: (

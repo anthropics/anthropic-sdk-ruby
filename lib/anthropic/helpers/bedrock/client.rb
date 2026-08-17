@@ -145,15 +145,6 @@ module Anthropic
           )
         end
 
-        # @api private
-        #
-        # Auth is SigV4 or the Bedrock bearer only — never resolve ambient
-        # first-party credentials, which would fold the shared config store's
-        # headers and bearer into requests bound for a third-party endpoint.
-        #
-        # @return [Boolean]
-        private def resolve_default_credentials? = false
-
         # The Models API is not available on Bedrock, so the resource the
         # parent wires up would target routes the Bedrock host does not serve
         # — keep it unavailable, matching the SDK's other Bedrock clients.
