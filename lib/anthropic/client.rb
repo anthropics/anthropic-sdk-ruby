@@ -208,7 +208,7 @@ module Anthropic
       @token_cache = nil
 
       base_url_is_explicit = base_url && !base_url.empty?
-      base_url ||= ENV["ANTHROPIC_BASE_URL"]
+      base_url ||= ENV["ANTHROPIC_BASE_URL"] if resolve_default_credentials?
 
       credential_headers = {}
 
@@ -240,7 +240,14 @@ module Anthropic
         @token_cache = Anthropic::Credentials::TokenCache.new(@credentials)
       end
 
-      base_url ||= "https://api.anthropic.com"
+      if resolve_default_credentials?
+        base_url ||= "https://api.anthropic.com"
+      elsif base_url.to_s.empty?
+        raise ArgumentError.new(
+          "No base_url was resolved for #{self.class.name}; " \
+          "platform clients must supply their own endpoint."
+        )
+      end
 
       if @credentials.respond_to?(:bind_base_url)
         @credentials.bind_base_url(base_url)
@@ -304,7 +311,10 @@ module Anthropic
     # {#initialize}, so overrides must not depend on subclass instance state.
     # Subclasses that bring their own auth scheme override this to +false+ so
     # ambient first-party credentials are never resolved or folded into
-    # requests bound for another platform's endpoint.
+    # requests bound for another platform's endpoint. Returning +false+ also
+    # withholds the +ANTHROPIC_BASE_URL+ / +https://api.anthropic.com+
+    # base-URL fallback, so such a subclass must pass its own +base_url+ or
+    # {#initialize} raises +ArgumentError+.
     #
     # @return [Boolean]
     def resolve_default_credentials? = true

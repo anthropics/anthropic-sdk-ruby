@@ -83,6 +83,25 @@ class Anthropic::Test::VertexClientTest < Minitest::Test
     assert_equal("https://custom-endpoint.googleapis.com/v1", client.base_url.to_s)
   end
 
+  def test_empty_base_url_derives_from_region
+    original_env = ENV["ANTHROPIC_VERTEX_BASE_URL"]
+    ENV["ANTHROPIC_VERTEX_BASE_URL"] = ""
+
+    begin
+      client = Anthropic::VertexClient.new(region: "us-east5", project_id: "test-project")
+      assert_equal("https://us-east5-aiplatform.googleapis.com/v1", client.base_url.to_s)
+
+      client = Anthropic::VertexClient.new(region: "us-east5", project_id: "test-project", base_url: "")
+      assert_equal("https://us-east5-aiplatform.googleapis.com/v1", client.base_url.to_s)
+    ensure
+      if original_env
+        ENV["ANTHROPIC_VERTEX_BASE_URL"] = original_env
+      else
+        ENV.delete("ANTHROPIC_VERTEX_BASE_URL")
+      end
+    end
+  end
+
   def test_adapt_request_rewrites_messages_request
     model = "claude-3-5-haiku@20241022"
     body = {

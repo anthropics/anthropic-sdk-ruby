@@ -89,19 +89,20 @@ module Anthropic
           @project_id = project_id
           @authorization = nil
 
-          base_url ||= ENV.fetch(
-            "ANTHROPIC_VERTEX_BASE_URL",
-            case @region.to_s
-            when "global"
-              "https://aiplatform.googleapis.com/v1"
-            when "us"
-              "https://aiplatform.us.rep.googleapis.com/v1"
-            when "eu"
-              "https://aiplatform.eu.rep.googleapis.com/v1"
-            else
-              "https://#{@region}-aiplatform.googleapis.com/v1"
-            end
-          )
+          base_url = ENV["ANTHROPIC_VERTEX_BASE_URL"] if base_url.to_s.empty?
+          if base_url.to_s.empty?
+            base_url =
+              case @region.to_s
+              when "global"
+                "https://aiplatform.googleapis.com/v1"
+              when "us"
+                "https://aiplatform.us.rep.googleapis.com/v1"
+              when "eu"
+                "https://aiplatform.eu.rep.googleapis.com/v1"
+              else
+                "https://#{@region}-aiplatform.googleapis.com/v1"
+              end
+          end
 
           super(
             base_url: base_url,
