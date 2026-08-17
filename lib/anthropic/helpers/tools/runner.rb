@@ -150,6 +150,7 @@ module Anthropic
 
             messages << {role: :assistant, content:}
             messages << {role: :user, content: mapped}
+            adopt_container(response)
 
             @iteration_count += 1
 
@@ -157,6 +158,26 @@ module Anthropic
           end
           # rubocop:enable Style/CaseEquality
           # rubocop:enable Metrics/BlockLength
+        end
+
+        # @api private
+        #
+        # Container-bound server tools reject a follow-up that drops the container the previous
+        # turn ran in, so its id is forwarded unless the caller pinned one themselves.
+        #
+        # @param response [Anthropic::Models::BetaMessage]
+        private def adopt_container(response)
+          id = response.container&.id
+          return if id.nil? || id.empty?
+
+          case (pinned = params[:container])
+          in nil
+            params[:container] = id
+          in Hash | Anthropic::Beta::BetaContainerParams if read_field(pinned, :id).nil?
+            params[:container] = {**pinned, id:}
+          else
+            nil
+          end
         end
 
         # @api private

@@ -74,7 +74,7 @@ class Anthropic::Test::Helpers::ToolRunner::StreamingTest < Minitest::Test
     stream.accumulated_message
   end
 
-  def stream_events(id:, content:, stop_reason: "tool_use")
+  def stream_events(id:, content:, stop_reason: "tool_use", container: nil)
     events = [
       {
         type: "message_start",
@@ -108,7 +108,7 @@ class Anthropic::Test::Helpers::ToolRunner::StreamingTest < Minitest::Test
       events << {type: "content_block_stop", index: i}
     end
 
-    events << {type: "message_delta", delta: {stop_reason: stop_reason}, usage: {output_tokens: 20}}
+    events << {type: "message_delta", delta: {stop_reason:, container:}, usage: {output_tokens: 20}}
     events << {type: "message_stop"}
     sse_response(*events)
   end
@@ -351,6 +351,37 @@ class Anthropic::Test::Helpers::ToolRunner::StreamingTest < Minitest::Test
         {role: "user", content: [{type: "tool_result", tool_use_id: "t1", is_error: true, content: String}]}
       ]
     end
+  end
+
+  def test_server_assigned_container_is_forwarded
+    responses = [
+      stream_events(
+        id: "msg_1",
+        content: [
+          {type: "tool_use", id: "t1", name: "calculator", input: {lhs: 10.0, rhs: 5.0, operator: "+"}}
+        ],
+        container: {id: "cntr_server", expires_at: "2025-01-01T00:00:00Z"}
+      ),
+      stream_events(id: "msg_2", content: [{type: "text", text: "Result: 15"}], stop_reason: "end_turn")
+    ]
+    bodies = []
+    stub_request(:post, "http://localhost/v1/messages?beta=true")
+      .to_return do |request|
+      bodies << JSON.parse(request.body, symbolize_names: true)
+      {status: 200, body: responses[bodies.length - 1], headers: {"content-type" => "text/event-stream"}}
+    end
+
+    @client.beta.messages.tool_runner(
+      max_tokens: 1024,
+      messages: [{content: "What is 10 + 5?", role: :user}],
+      model: :"claude-3-7-sonnet-latest",
+      tools: [@calculator],
+      stream: true
+    ).each_streaming { consume_stream(_1) }
+
+    assert_equal(2, bodies.length)
+    refute_operator(bodies.first, :key?, :container)
+    assert_equal("cntr_server", bodies.last[:container])
   end
 
   def test_no_tools_single_response
