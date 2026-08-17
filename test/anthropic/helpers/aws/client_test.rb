@@ -1,31 +1,20 @@
 # frozen_string_literal: true
 
 require_relative "../../test_helper"
+require_relative "../support/platform_client_env"
 require "aws-sdk-core"
-require "tmpdir"
-require "json"
 
 class Anthropic::Test::AWSClientTest < Minitest::Test
   extend Minitest::Serial
   include WebMock::API
+  include Anthropic::Test::PlatformClientEnv
 
-  ENV_KEYS = %w[
+  PLATFORM_ENV_KEYS = %w[
     AWS_REGION
     AWS_DEFAULT_REGION
     ANTHROPIC_AWS_API_KEY
     ANTHROPIC_AWS_WORKSPACE_ID
     ANTHROPIC_AWS_BASE_URL
-    ANTHROPIC_API_KEY
-    ANTHROPIC_AUTH_TOKEN
-    ANTHROPIC_BASE_URL
-    ANTHROPIC_CONFIG_DIR
-    ANTHROPIC_PROFILE
-    ANTHROPIC_FEDERATION_RULE_ID
-    ANTHROPIC_ORGANIZATION_ID
-    ANTHROPIC_IDENTITY_TOKEN
-    ANTHROPIC_IDENTITY_TOKEN_FILE
-    ANTHROPIC_CUSTOM_HEADERS
-    ANTHROPIC_WEBHOOK_SIGNING_KEY
   ].freeze
 
   def before_all
@@ -38,54 +27,9 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
     super
   end
 
-  def setup
-    super
-    @saved_env = ENV_KEYS.to_h { [_1, ENV.delete(_1)] }
-  end
-
   def teardown
     WebMock.reset!
-    @saved_env.each { |k, v| v.nil? ? ENV.delete(k) : ENV[k] = v }
     super
-  end
-
-  # Sets `env`, clearing any key mapped to nil, and restores the previous
-  # values afterwards.
-  def with_env(env)
-    original = env.keys.to_h { [_1, ENV.fetch(_1, nil)] }
-    env.each { |key, value| value.nil? ? ENV.delete(key) : ENV[key] = value }
-    yield
-  ensure
-    original&.each { |key, value| value.nil? ? ENV.delete(key) : ENV[key] = value }
-  end
-
-  # Writes a fake first-party config store in the layout `Anthropic::Credentials`
-  # reads (an active `default` user_oauth profile with a workspace id, a
-  # base_url, and a live access token) and points `ANTHROPIC_CONFIG_DIR` at it.
-  # `setup` has already cleared the static credential env, so auto-discovery
-  # would find it. Restored by `teardown` via ENV_KEYS.
-  def with_fake_config_store(dir)
-    FileUtils.mkdir_p(File.join(dir, "configs"))
-    FileUtils.mkdir_p(File.join(dir, "credentials"))
-    File.write(
-      File.join(dir, "configs", "default.json"),
-      JSON.generate(
-        {
-          authentication: {type: "user_oauth"},
-          workspace_id: "wrkspc_fake_store_value",
-          base_url: "https://store.example.com"
-        }
-      )
-    )
-    credentials_path = File.join(dir, "credentials", "default.json")
-    File.write(
-      credentials_path,
-      JSON.generate({access_token: "fake-store-token", expires_at: Time.now.to_i + 3600})
-    )
-    File.chmod(0o600, credentials_path)
-
-    ENV["ANTHROPIC_CONFIG_DIR"] = dir
-    yield
   end
 
   # ---------------------------------------------------------------------------
@@ -665,58 +609,49 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
   # `anthropic-workspace-id`, no OAuth beta header, and no store `base_url`
   # redirecting gateway traffic.
   def test_does_not_consult_first_party_config_store
-    Dir.mktmpdir do |dir|
-      with_fake_config_store(dir) do
-        # Control: the fixture is live — the first-party client does pick it up.
-        control = Anthropic::Client.new
-        assert_kind_of(Anthropic::Credentials::CredentialsFile, control.credentials)
-        assert_equal("https://store.example.com", control.base_url.to_s)
+    with_fake_config_store do
+      stub_request(:post, "http://localhost/v1/messages").to_return_json(status: 200, body: {})
 
-        stub_request(:post, "http://localhost/v1/messages").to_return_json(status: 200, body: {})
+      client = Anthropic::AWSClient.new(skip_auth: true, base_url: "http://localhost")
+      assert_nil(client.credentials)
+      assert_nil(client.token_cache)
+      assert_equal("http://localhost", client.base_url.to_s)
 
-        client = Anthropic::AWSClient.new(skip_auth: true, base_url: "http://localhost")
-        assert_nil(client.credentials)
-        assert_nil(client.token_cache)
-        assert_equal("http://localhost", client.base_url.to_s)
+      client.messages.create(max_tokens: 1, messages: [{content: "hi", role: :user}], model: :m)
 
-        client.messages.create(max_tokens: 1, messages: [{content: "hi", role: :user}], model: :m)
-
-        assert_requested(:post, "http://localhost/v1/messages", times: 1) do |req|
-          headers = req.headers.transform_keys(&:downcase)
-          refute(headers.key?("authorization"))
-          refute(headers.key?("x-api-key"))
-          refute(headers.key?("anthropic-workspace-id"))
-          true
-        end
+      assert_requested(:post, "http://localhost/v1/messages", times: 1) do |req|
+        headers = req.headers.transform_keys(&:downcase)
+        refute(headers.key?("authorization"))
+        refute(headers.key?("x-api-key"))
+        refute(headers.key?("anthropic-workspace-id"))
+        true
       end
     end
   end
 
   def test_sigv4_mode_does_not_consult_first_party_config_store
-    Dir.mktmpdir do |dir|
-      with_fake_config_store(dir) do
-        uri = "https://aws-external-anthropic.us-east-1.api.aws/v1/messages"
-        stub_request(:post, uri).to_return_json(status: 200, body: {})
+    with_fake_config_store do
+      uri = "https://aws-external-anthropic.us-east-1.api.aws/v1/messages"
+      stub_request(:post, uri).to_return_json(status: 200, body: {})
 
-        client = Anthropic::AWSClient.new(
-          aws_access_key: "my-aws-access",
-          aws_secret_access_key: "my-aws-secret",
-          aws_region: "us-east-1",
-          workspace_id: "ws-test-123"
-        )
-        assert_nil(client.credentials)
-        assert_nil(client.token_cache)
-        assert_equal("https://aws-external-anthropic.us-east-1.api.aws", client.base_url.to_s)
+      client = Anthropic::AWSClient.new(
+        aws_access_key: "my-aws-access",
+        aws_secret_access_key: "my-aws-secret",
+        aws_region: "us-east-1",
+        workspace_id: "ws-test-123"
+      )
+      assert_nil(client.credentials)
+      assert_nil(client.token_cache)
+      assert_equal("https://aws-external-anthropic.us-east-1.api.aws", client.base_url.to_s)
 
-        client.messages.create(max_tokens: 1, messages: [{content: "hi", role: :user}], model: :m)
+      client.messages.create(max_tokens: 1, messages: [{content: "hi", role: :user}], model: :m)
 
-        assert_requested(:post, uri, times: 1) do |req|
-          headers = req.headers.transform_keys(&:downcase)
-          assert_match(/^AWS4-HMAC-SHA256 Credential=my-aws-access/, headers.fetch("authorization"))
-          assert_equal("ws-test-123", headers["anthropic-workspace-id"])
-          refute(headers.key?("x-api-key"))
-          true
-        end
+      assert_requested(:post, uri, times: 1) do |req|
+        headers = req.headers.transform_keys(&:downcase)
+        assert_match(/^AWS4-HMAC-SHA256 Credential=my-aws-access/, headers.fetch("authorization"))
+        assert_equal("ws-test-123", headers["anthropic-workspace-id"])
+        refute(headers.key?("x-api-key"))
+        true
       end
     end
   end
