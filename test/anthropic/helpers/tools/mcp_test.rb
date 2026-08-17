@@ -235,6 +235,7 @@ class Anthropic::Test::Helpers::Tools::McpTest < Minitest::Test
     assert_kind_of(Anthropic::Helpers::Tools::BaseTool, tool)
     assert_equal("weather", tool.class.tool_name)
     assert_equal("Get weather", tool.class.doc_string)
+    assert_match(/\A#<weather\[#<Class:0x\h+>\]:0x\h+>\z/, tool.inspect)
     converted = Anthropic::Helpers::InputSchema::JsonSchemaConverter.to_json_schema(tool)
     assert_equal(
       {type: "object", properties: {city: {type: "string"}}, required: ["city"]},
@@ -250,17 +251,44 @@ class Anthropic::Test::Helpers::Tools::McpTest < Minitest::Test
     assert_nil(schema[:required])
   end
 
-  def test_tool_extra_props_flow_into_definition
+  def test_tool_options_flow_into_definition
     mcp_tool = MCP::Client::Tool.new(name: "t", description: nil, input_schema: {"type" => "object"})
     tool = Anthropic::Mcp.tool(
       mcp_tool,
       FakeMcpClient.new,
       cache_control: {type: "ephemeral"},
-      defer_loading: true
+      defer_loading: true,
+      strict: true
     )
     assert_equal(
-      {cache_control: {type: "ephemeral"}, defer_loading: true},
-      tool.class.tool_extra_props
+      {cache_control: {type: "ephemeral"}, defer_loading: true, strict: true},
+      tool.class.tool_options
+    )
+
+    anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "test-key")
+    captured_request_body = nil
+    stub_anthropic_with_capture(
+      ->(req) { captured_request_body ||= JSON.parse(req.body) },
+      text_response(id: "msg_1", text: "Done")
+    )
+    anthropic.beta.messages.tool_runner(
+      max_tokens: 1024,
+      messages: [{role: :user, content: "go"}],
+      model: :"claude-sonnet-4-5",
+      tools: [tool]
+    ).each_message { _1 }
+
+    assert_equal(
+      [
+        {
+          "name" => "t",
+          "input_schema" => {"type" => "object", "properties" => nil, "required" => nil},
+          "cache_control" => {"type" => "ephemeral"},
+          "defer_loading" => true,
+          "strict" => true
+        }
+      ],
+      captured_request_body["tools"]
     )
   end
 

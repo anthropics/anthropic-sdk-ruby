@@ -36,6 +36,23 @@ module Anthropic
             ).returns(T.class_of(Anthropic::Helpers::InputSchema::BaseModel))
           end
           def input_schema(model) = (@model = model)
+
+          # @api public
+          #
+          # Declares additional properties for this tool's API definition, sent alongside the
+          # `name`, `description` and `input_schema` — e.g. `strict`, `cache_control`,
+          # `defer_loading`, `allowed_callers`, `eager_input_streaming` or `input_examples`.
+          #
+          # Options accumulate: each call merges into what was already declared, and a subclass
+          # starts from its superclass's options. Called without an argument, returns the declared
+          # options as a frozen hash.
+          sig do
+            params(options: T.nilable(T::Hash[Symbol, T.anything])).returns(
+              T::Hash[Symbol, T.anything]
+            )
+          end
+          def tool_options(options = nil)
+          end
         end
 
         # @api public

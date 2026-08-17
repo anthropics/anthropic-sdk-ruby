@@ -25,15 +25,6 @@ module Anthropic
           # @return [String, nil]
           attr_accessor :tool_name
 
-          # @api private
-          #
-          # Extra tool-definition properties merged into the API payload (e.g.
-          # `cache_control`, `defer_loading`, `allowed_callers`, `eager_input_streaming`,
-          # `input_examples`, `strict`).
-          #
-          # @return [Hash{Symbol=>Object}, nil]
-          attr_accessor :tool_extra_props
-
           # @api public
           #
           # @param description [String]
@@ -46,10 +37,78 @@ module Anthropic
           # @model [Class<Anthropic::Helpers::InputSchema::BaseModel>]
           def input_schema(model) = (@model = model)
 
+          # @api public
+          #
+          # Declares additional properties for this tool's API definition, sent alongside the
+          # `name`, `description` and `input_schema` — e.g. `strict`, `cache_control`,
+          # `defer_loading`, `allowed_callers`, `eager_input_streaming` or `input_examples`.
+          #
+          # Options accumulate: each call merges into what was already declared, and a subclass
+          # starts from its superclass's options. Called without an argument, returns the declared
+          # options as a frozen hash.
+          #
+          # @example
+          #   class GetWeather < Anthropic::BaseTool
+          #     doc "Get the current weather in a given location"
+          #     input_schema GetWeatherInput
+          #     tool_options strict: true, cache_control: {type: :ephemeral}
+          #   end
+          #
+          # @param options [Hash{Symbol=>Object}, nil]
+          #
+          # @return [Hash{Symbol=>Object}]
+          def tool_options(options = nil)
+            if options.nil?
+              return @tool_options if @tool_options
+
+              # Nothing declared on this class: read through to the superclass (`BaseTool` has none).
+              return superclass.respond_to?(:tool_options) ? superclass.tool_options : {}.freeze
+            end
+
+            options = Anthropic::Internal::Util.coerce_hash!(options).to_h.transform_keys(&:to_sym)
+            # These either have their own declaration or are derived from the class; letting them
+            # through would desync the definition sent to the API from how responses are parsed.
+            reserved = options.keys & [:name, :description, :input_schema]
+            unless reserved.empty?
+              message =
+                "#{reserved.map { "`#{_1}`" }.join(', ')} cannot be set through `tool_options`; " \
+                "use `doc` and `input_schema` instead (the tool name is derived from the class name)."
+              raise ArgumentError.new(message)
+            end
+
+            # Frozen so the stored declaration can't drift from what was validated above.
+            @tool_options = Anthropic::Internal::Util.deep_frozen_copy(tool_options.merge(options))
+          end
+
+          # @api private
+          #
+          # @deprecated Use {.tool_options}.
+          #
+          # @return [Hash{Symbol=>Object}]
+          def tool_extra_props = tool_options
+
+          # @api private
+          #
+          # @deprecated Use {.tool_options}.
+          #
+          # @param props [Hash{Symbol=>Object}, nil]
+          def tool_extra_props=(props)
+            warn(
+              "[DEPRECATION] `tool_extra_props=` is deprecated. Use `tool_options` instead.",
+              category: :deprecated
+            )
+            tool_options(props.to_h)
+          end
+
           # @api private
           #
           # @param depth [Integer]
-          def inspect(depth: 0) = "#{name}[#{model.inspect(depth:)}]"
+          def inspect(depth: 0)
+            # Only hand-written tools carry an input schema class here; helper-built tools (e.g. MCP)
+            # hold a plain class and an undeclared schema is nil, neither of which takes `depth:`.
+            schema = model.is_a?(Anthropic::Internal::Type::Converter) ? model.inspect(depth:) : model.inspect
+            "#{name || tool_name}[#{schema}]"
+          end
         end
 
         # @api private

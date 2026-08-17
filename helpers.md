@@ -183,8 +183,9 @@ class GetWeatherInput < Anthropic::BaseModel
   optional :unit, Anthropic::EnumOf[:celsius, :fahrenheit], doc: "Temperature unit"
 end
 
-class GetWeather
+class GetWeather < Anthropic::BaseTool
   doc "Get the current weather in a given location"
+  input_schema GetWeatherInput
 
   def call(input) = ...
 end
@@ -452,6 +453,41 @@ first_msg = runner.next_message
 runner.feed_messages({role: :user, content: "Be more confident"}) if needed
 all_messages = runner.run_until_finished
 ```
+
+## Tool Definition Options
+
+`doc` and `input_schema` declare a tool's `description` and `input_schema`, and its `name` is derived from the class name. Every other property of the [tool definition](https://platform.claude.com/docs/en/agents-and-tools/tool-use/implement-tool-use) — such as `strict`, `cache_control`, `defer_loading`, `allowed_callers`, `eager_input_streaming` or `input_examples` — is declared with `tool_options`. The options are sent whenever the tool is passed in `tools:`, whether to `create`, `stream` or the tool runner:
+
+```ruby
+class Calculator < Anthropic::BaseTool
+  doc "i am a calculator and i am good at math"
+  input_schema CalculatorInput
+
+  # guarantee schema-conformant tool calls, and put a prompt-caching breakpoint after this tool
+  tool_options strict: true, cache_control: {type: :ephemeral}
+
+  def call(expr)
+    expr.lhs.public_send(expr.operator, expr.rhs)
+  end
+end
+```
+
+Options accumulate — calling `tool_options` again merges into what was already declared, and a subclass starts from its superclass's options — so shared settings can live on a common base class:
+
+```ruby
+class StrictTool < Anthropic::BaseTool
+  tool_options strict: true
+end
+
+class Calculator < StrictTool
+  doc "i am a calculator and i am good at math"
+  input_schema CalculatorInput
+  tool_options cache_control: {type: :ephemeral} # sent with strict: true as well
+  # ...
+end
+```
+
+See [strict tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use) for what `strict: true` guarantees and the schema features it supports.
 
 ## Examples
 
