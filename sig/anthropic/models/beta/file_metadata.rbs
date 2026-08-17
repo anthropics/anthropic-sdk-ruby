@@ -10,6 +10,7 @@ module Anthropic
           size_bytes: Integer,
           type: :file,
           downloadable: bool,
+          expires_at: Time?,
           scope: Anthropic::Beta::BetaFileScope?
         }
 
@@ -30,6 +31,8 @@ module Anthropic
 
         def downloadable=: (bool) -> bool
 
+        attr_accessor expires_at: Time?
+
         attr_accessor scope: Anthropic::Beta::BetaFileScope?
 
         def initialize: (
@@ -39,6 +42,7 @@ module Anthropic
           mime_type: String,
           size_bytes: Integer,
           ?downloadable: bool,
+          ?expires_at: Time?,
           ?scope: Anthropic::Beta::BetaFileScope?,
           ?type: :file
         ) -> void
@@ -51,6 +55,7 @@ module Anthropic
           size_bytes: Integer,
           type: :file,
           downloadable: bool,
+          expires_at: Time?,
           scope: Anthropic::Beta::BetaFileScope?
         }
       end

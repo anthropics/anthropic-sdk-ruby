@@ -4,6 +4,7 @@ module Anthropic
       type file_upload_params =
         {
           file: Anthropic::Internal::file_input,
+          expires_in_seconds: Integer,
           betas: ::Array[Anthropic::Models::anthropic_beta]
         }
         & Anthropic::Internal::Type::request_parameters
@@ -14,6 +15,10 @@ module Anthropic
 
         attr_accessor file: Anthropic::Internal::file_input
 
+        attr_reader expires_in_seconds: Integer?
+
+        def expires_in_seconds=: (Integer) -> Integer
+
         attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
         def betas=: (
@@ -22,12 +27,14 @@ module Anthropic
 
         def initialize: (
           file: Anthropic::Internal::file_input,
+          ?expires_in_seconds: Integer,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> void
 
         def to_hash: -> {
           file: Anthropic::Internal::file_input,
+          expires_in_seconds: Integer,
           betas: ::Array[Anthropic::Models::anthropic_beta],
           request_options: Anthropic::RequestOptions
         }

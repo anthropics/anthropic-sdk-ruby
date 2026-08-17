@@ -74,7 +74,7 @@ module Anthropic
           #   responsible. Look up session provenance separately via the
           #   [Sessions API](/en/api/sessions-retrieve).
           #
-          #   @return [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, nil]
+          #   @return [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor, nil]
           optional :created_by, union: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsActor }
 
           # @!attribute path
@@ -97,7 +97,7 @@ module Anthropic
           #   responsible. Look up session provenance separately via the
           #   [Sessions API](/en/api/sessions-retrieve).
           #
-          #   @return [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, nil]
+          #   @return [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor, nil]
           optional :redacted_by, union: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsActor }
 
           # @!method initialize(id:, created_at:, memory_id:, memory_store_id:, operation:, type:, content: nil, content_sha256: nil, content_size_bytes: nil, created_by: nil, path: nil, redacted_at: nil, redacted_by: nil)
@@ -130,13 +130,13 @@ module Anthropic
           #
           #   @param content_size_bytes [Integer, nil] Size of `content` in bytes as of this version. `null` when `redacted_at` is set
           #
-          #   @param created_by [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor] Identifies who performed a write or redact operation. Captured at write time on
+          #   @param created_by [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor] Identifies who performed a write or redact operation. Captured at write time on
           #
           #   @param path [String, nil] The memory's path at the time of this write. `null` if and only if `redacted_at`
           #
           #   @param redacted_at [Time, nil] A timestamp in RFC 3339 format
           #
-          #   @param redacted_by [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor] Identifies who performed a write or redact operation. Captured at write time on
+          #   @param redacted_by [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor] Identifies who performed a write or redact operation. Captured at write time on
 
           # @see Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryVersion#type
           module Type

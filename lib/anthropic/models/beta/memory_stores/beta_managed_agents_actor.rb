@@ -23,8 +23,11 @@ module Anthropic
           # Attribution for a write made by a human user through the Anthropic Console.
           variant :user_actor, -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor }
 
+          # Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
+          variant :service_account_actor, -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor }
+
           # @!method self.variants
-          #   @return [Array(Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor)]
+          #   @return [Array(Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor)]
 
           # Creates a new instance of the variant class whose `type` matches the given
           # value, passing the remaining arguments to its constructor.
@@ -43,8 +46,10 @@ module Anthropic
           #
           #   @option args [String] :user_id ID of the user who performed the write (a `user_...` value).
           #
+          #   @option args [String] :service_account_id ID of the service account that performed the write (a `svac_...` value).
+          #
           # @raise [ArgumentError]
-          # @return [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor]
+          # @return [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor]
           def self.new(type:, **args)
             case type.to_sym
             when :session_actor
@@ -53,6 +58,8 @@ module Anthropic
               Anthropic::Beta::MemoryStores::BetaManagedAgentsAPIActor.new(**args)
             when :user_actor
               Anthropic::Beta::MemoryStores::BetaManagedAgentsUserActor.new(**args)
+            when :service_account_actor
+              Anthropic::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor.new(**args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end
