@@ -62,6 +62,10 @@ Blocks until the stream has been read to completion and returns all `text` conte
 
 Returns the HTTP response headers from the streaming request. Provides access to rate limit information, request IDs, and other metadata.
 
+#### `.request_id` / `.workspace_id`
+
+Returns the `request-id` / `anthropic-workspace-id` response header from the streaming request, or `nil` if absent.
+
 #### `.status`
 
 Returns the HTTP status code from the streaming request.

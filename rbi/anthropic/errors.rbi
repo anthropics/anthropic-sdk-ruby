@@ -44,6 +44,14 @@ module Anthropic
       sig { returns(T.nilable(T.anything)) }
       attr_accessor :body
 
+      sig { returns(T.nilable(String)) }
+      def request_id
+      end
+
+      sig { returns(T.nilable(String)) }
+      def workspace_id
+      end
+
       # @api private
       sig do
         params(

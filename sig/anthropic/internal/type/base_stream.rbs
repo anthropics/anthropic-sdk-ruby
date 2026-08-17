@@ -8,6 +8,10 @@ module Anthropic
 
         attr_reader headers: ::Hash[String, String]
 
+        def request_id: -> String?
+
+        def workspace_id: -> String?
+
         def close: -> void
 
         private def iterator: -> Enumerable[Elem]

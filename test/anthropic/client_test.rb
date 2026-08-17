@@ -498,4 +498,33 @@ class AnthropicTest < Minitest::Test
 
     assert_nil(err.type)
   end
+
+  def test_status_error_request_id_and_workspace_id
+    stub_request(:post, "http://localhost/v1/messages")
+      .to_return_json(
+        status: 400,
+        headers: {"Request-Id" => "req_123", "Anthropic-Workspace-Id" => "wrkspc_123"},
+        body: {type: "error", error: {type: "invalid_request_error", message: "Bad request"}}
+      )
+
+    anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key")
+
+    err = assert_raises(Anthropic::Errors::BadRequestError) do
+      anthropic.messages.create(
+        max_tokens: 1024,
+        messages: [{content: "Hello", role: :user}],
+        model: :"claude-opus-4-6"
+      )
+    end
+
+    assert_equal("req_123", err.request_id)
+    assert_equal("wrkspc_123", err.workspace_id)
+  end
+
+  def test_api_error_request_id_and_workspace_id_nil_without_headers
+    err = Anthropic::Errors::APIConnectionError.new(url: URI("http://localhost"))
+
+    assert_nil(err.request_id)
+    assert_nil(err.workspace_id)
+  end
 end

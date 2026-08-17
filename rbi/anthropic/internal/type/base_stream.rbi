@@ -18,6 +18,14 @@ module Anthropic
         sig { returns(T::Hash[String, String]) }
         attr_reader :headers
 
+        sig { returns(T.nilable(String)) }
+        def request_id
+        end
+
+        sig { returns(T.nilable(String)) }
+        def workspace_id
+        end
+
         sig { void }
         def close
         end

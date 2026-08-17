@@ -28,6 +28,10 @@ module Anthropic
 
       attr_accessor body: top?
 
+      def request_id: -> String?
+
+      def workspace_id: -> String?
+
       def initialize: (
         url: URI::Generic,
         ?status: Integer?,

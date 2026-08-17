@@ -427,6 +427,39 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
     assert_equal(200, stream.status)
   end
 
+  def test_stream_request_id_and_workspace_id
+    stub_request(:post, "http://localhost/v1/messages")
+      .to_return(
+        status: 200,
+        headers: {
+          "Content-Type" => "text/event-stream",
+          "Request-Id" => "req_123",
+          "Anthropic-Workspace-Id" => "wrkspc_123"
+        },
+        body: basic_sse_response
+      )
+
+    stream = @client.messages.stream(**basic_params)
+    assert_equal("req_123", stream.request_id)
+    assert_equal("wrkspc_123", stream.workspace_id)
+    stream.until_done
+
+    raw_stream = @client.messages.stream_raw(**basic_params)
+    assert_equal("req_123", raw_stream.request_id)
+    assert_equal("wrkspc_123", raw_stream.workspace_id)
+    raw_stream.close
+  end
+
+  def test_stream_request_id_and_workspace_id_nil_when_absent
+    stub_streaming_response(basic_sse_response)
+
+    stream = @client.messages.stream(**basic_params)
+
+    assert_nil(stream.request_id)
+    assert_nil(stream.workspace_id)
+    stream.until_done
+  end
+
   def basic_sse_response
     <<~SSE
       event: message_start
