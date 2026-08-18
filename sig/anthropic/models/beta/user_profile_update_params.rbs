@@ -4,6 +4,7 @@ module Anthropic
       type user_profile_update_params =
         {
           user_profile_id: String,
+          access_type: Anthropic::Models::Beta::UserProfileUpdateParams::access_type?,
           external_id: String?,
           metadata: ::Hash[Symbol, String],
           name: String?,
@@ -17,6 +18,8 @@ module Anthropic
         include Anthropic::Internal::Type::RequestParameters
 
         attr_accessor user_profile_id: String
+
+        attr_accessor access_type: Anthropic::Models::Beta::UserProfileUpdateParams::access_type?
 
         attr_accessor external_id: String?
 
@@ -36,6 +39,7 @@ module Anthropic
 
         def initialize: (
           user_profile_id: String,
+          ?access_type: Anthropic::Models::Beta::UserProfileUpdateParams::access_type?,
           ?external_id: String?,
           ?metadata: ::Hash[Symbol, String],
           ?name: String?,
@@ -46,6 +50,7 @@ module Anthropic
 
         def to_hash: -> {
           user_profile_id: String,
+          access_type: Anthropic::Models::Beta::UserProfileUpdateParams::access_type?,
           external_id: String?,
           metadata: ::Hash[Symbol, String],
           name: String?,
@@ -53,6 +58,17 @@ module Anthropic
           betas: ::Array[Anthropic::Models::anthropic_beta],
           request_options: Anthropic::RequestOptions
         }
+
+        type access_type = :application | :passthrough
+
+        module AccessType
+          extend Anthropic::Internal::Type::Enum
+
+          APPLICATION: :application
+          PASSTHROUGH: :passthrough
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::UserProfileUpdateParams::access_type]
+        end
 
         type relationship = :external | :resold | :internal
 

@@ -44,12 +44,6 @@ module Anthropic
         sig { params(downloadable: T::Boolean).void }
         attr_writer :downloadable
 
-        # RFC 3339 datetime string representing when the file will expire and become
-        # unavailable for download. Null if the file does not expire. For files uploaded
-        # with `expires_in_seconds`, this is the upload time plus that value.
-        sig { returns(T.nilable(Time)) }
-        attr_accessor :expires_at
-
         # The scope of this file, indicating the context in which it was created (e.g., a
         # session).
         sig { returns(T.nilable(Anthropic::Beta::BetaFileScope)) }
@@ -68,7 +62,6 @@ module Anthropic
             mime_type: String,
             size_bytes: Integer,
             downloadable: T::Boolean,
-            expires_at: T.nilable(Time),
             scope: T.nilable(Anthropic::Beta::BetaFileScope::OrHash),
             type: Symbol
           ).returns(T.attached_class)
@@ -88,10 +81,6 @@ module Anthropic
           size_bytes:,
           # Whether the file can be downloaded.
           downloadable: nil,
-          # RFC 3339 datetime string representing when the file will expire and become
-          # unavailable for download. Null if the file does not expire. For files uploaded
-          # with `expires_in_seconds`, this is the upload time plus that value.
-          expires_at: nil,
           # The scope of this file, indicating the context in which it was created (e.g., a
           # session).
           scope: nil,
@@ -112,7 +101,6 @@ module Anthropic
               size_bytes: Integer,
               type: Symbol,
               downloadable: T::Boolean,
-              expires_at: T.nilable(Time),
               scope: T.nilable(Anthropic::Beta::BetaFileScope)
             }
           )

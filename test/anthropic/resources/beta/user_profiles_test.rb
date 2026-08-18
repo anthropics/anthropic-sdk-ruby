@@ -15,12 +15,13 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
         id: String,
         created_at: Time,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
-        relationship: Anthropic::Beta::BetaUserProfile::Relationship,
         trust_grants: ^(Anthropic::Internal::Type::HashOf[Anthropic::Beta::BetaUserProfileTrustGrant]),
         type: Anthropic::Beta::BetaUserProfile::Type,
         updated_at: Time,
+        access_type: Anthropic::Beta::BetaUserProfile::AccessType | nil,
         external_id: String | nil,
-        name: String | nil
+        name: String | nil,
+        relationship: Anthropic::Beta::BetaUserProfile::Relationship | nil
       }
     end
   end
@@ -37,12 +38,13 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
         id: String,
         created_at: Time,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
-        relationship: Anthropic::Beta::BetaUserProfile::Relationship,
         trust_grants: ^(Anthropic::Internal::Type::HashOf[Anthropic::Beta::BetaUserProfileTrustGrant]),
         type: Anthropic::Beta::BetaUserProfile::Type,
         updated_at: Time,
+        access_type: Anthropic::Beta::BetaUserProfile::AccessType | nil,
         external_id: String | nil,
-        name: String | nil
+        name: String | nil,
+        relationship: Anthropic::Beta::BetaUserProfile::Relationship | nil
       }
     end
   end
@@ -59,12 +61,13 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
         id: String,
         created_at: Time,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
-        relationship: Anthropic::Beta::BetaUserProfile::Relationship,
         trust_grants: ^(Anthropic::Internal::Type::HashOf[Anthropic::Beta::BetaUserProfileTrustGrant]),
         type: Anthropic::Beta::BetaUserProfile::Type,
         updated_at: Time,
+        access_type: Anthropic::Beta::BetaUserProfile::AccessType | nil,
         external_id: String | nil,
-        name: String | nil
+        name: String | nil,
+        relationship: Anthropic::Beta::BetaUserProfile::Relationship | nil
       }
     end
   end
@@ -88,12 +91,13 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
         id: String,
         created_at: Time,
         metadata: ^(Anthropic::Internal::Type::HashOf[String]),
-        relationship: Anthropic::Beta::BetaUserProfile::Relationship,
         trust_grants: ^(Anthropic::Internal::Type::HashOf[Anthropic::Beta::BetaUserProfileTrustGrant]),
         type: Anthropic::Beta::BetaUserProfile::Type,
         updated_at: Time,
+        access_type: Anthropic::Beta::BetaUserProfile::AccessType | nil,
         external_id: String | nil,
-        name: String | nil
+        name: String | nil,
+        relationship: Anthropic::Beta::BetaUserProfile::Relationship | nil
       }
     end
   end

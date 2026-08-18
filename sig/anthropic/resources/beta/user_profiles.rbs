@@ -3,6 +3,7 @@ module Anthropic
     class Beta
       class UserProfiles
         def create: (
+          ?access_type: Anthropic::Models::Beta::UserProfileCreateParams::access_type,
           ?external_id: String?,
           ?metadata: ::Hash[Symbol, String],
           ?name: String?,
@@ -19,6 +20,7 @@ module Anthropic
 
         def update: (
           String user_profile_id,
+          ?access_type: Anthropic::Models::Beta::UserProfileUpdateParams::access_type?,
           ?external_id: String?,
           ?metadata: ::Hash[Symbol, String],
           ?name: String?,

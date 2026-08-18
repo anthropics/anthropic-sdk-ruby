@@ -18,6 +18,20 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :user_profile_id
 
+        # How the platform uses the API on behalf of the entity this profile represents.
+        # `application`: the platform sells a product that uses the API behind the scenes,
+        # and the profile represents an individual end-user of that product.
+        # `passthrough`: the platform resells raw inference, and the profile identifies
+        # the resold-to company.
+        sig do
+          returns(
+            T.nilable(
+              Anthropic::Beta::UserProfileUpdateParams::AccessType::OrSymbol
+            )
+          )
+        end
+        attr_accessor :access_type
+
         # If present, replaces the stored external_id. Omit to leave unchanged. Maximum
         # 255 characters.
         sig { returns(T.nilable(String)) }
@@ -70,6 +84,10 @@ module Anthropic
         sig do
           params(
             user_profile_id: String,
+            access_type:
+              T.nilable(
+                Anthropic::Beta::UserProfileUpdateParams::AccessType::OrSymbol
+              ),
             external_id: T.nilable(String),
             metadata: T::Hash[Symbol, String],
             name: T.nilable(String),
@@ -83,6 +101,12 @@ module Anthropic
         end
         def self.new(
           user_profile_id:,
+          # How the platform uses the API on behalf of the entity this profile represents.
+          # `application`: the platform sells a product that uses the API behind the scenes,
+          # and the profile represents an individual end-user of that product.
+          # `passthrough`: the platform resells raw inference, and the profile identifies
+          # the resold-to company.
+          access_type: nil,
           # If present, replaces the stored external_id. Omit to leave unchanged. Maximum
           # 255 characters.
           external_id: nil,
@@ -108,6 +132,10 @@ module Anthropic
           override.returns(
             {
               user_profile_id: String,
+              access_type:
+                T.nilable(
+                  Anthropic::Beta::UserProfileUpdateParams::AccessType::OrSymbol
+                ),
               external_id: T.nilable(String),
               metadata: T::Hash[Symbol, String],
               name: T.nilable(String),
@@ -122,6 +150,45 @@ module Anthropic
           )
         end
         def to_hash
+        end
+
+        # How the platform uses the API on behalf of the entity this profile represents.
+        # `application`: the platform sells a product that uses the API behind the scenes,
+        # and the profile represents an individual end-user of that product.
+        # `passthrough`: the platform resells raw inference, and the profile identifies
+        # the resold-to company.
+        module AccessType
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                Anthropic::Beta::UserProfileUpdateParams::AccessType
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          APPLICATION =
+            T.let(
+              :application,
+              Anthropic::Beta::UserProfileUpdateParams::AccessType::TaggedSymbol
+            )
+          PASSTHROUGH =
+            T.let(
+              :passthrough,
+              Anthropic::Beta::UserProfileUpdateParams::AccessType::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::UserProfileUpdateParams::AccessType::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
         end
 
         # How the entity behind a user profile relates to the platform that owns the API
