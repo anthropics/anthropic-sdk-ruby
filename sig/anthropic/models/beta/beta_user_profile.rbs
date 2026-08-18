@@ -8,12 +8,13 @@ module Anthropic
           id: String,
           created_at: Time,
           metadata: ::Hash[Symbol, String],
-          relationship: Anthropic::Models::Beta::BetaUserProfile::relationship,
           trust_grants: ::Hash[Symbol, Anthropic::Beta::BetaUserProfileTrustGrant],
           type: Anthropic::Models::Beta::BetaUserProfile::type_,
           updated_at: Time,
+          access_type: Anthropic::Models::Beta::BetaUserProfile::access_type,
           external_id: String?,
-          name: String?
+          name: String?,
+          relationship: Anthropic::Models::Beta::BetaUserProfile::relationship
         }
 
       class BetaUserProfile < Anthropic::Internal::Type::BaseModel
@@ -23,41 +24,74 @@ module Anthropic
 
         attr_accessor metadata: ::Hash[Symbol, String]
 
-        attr_accessor relationship: Anthropic::Models::Beta::BetaUserProfile::relationship
-
         attr_accessor trust_grants: ::Hash[Symbol, Anthropic::Beta::BetaUserProfileTrustGrant]
 
         attr_accessor type: Anthropic::Models::Beta::BetaUserProfile::type_
 
         attr_accessor updated_at: Time
 
+        attr_reader access_type: Anthropic::Models::Beta::BetaUserProfile::access_type?
+
+        def access_type=: (
+          Anthropic::Models::Beta::BetaUserProfile::access_type
+        ) -> Anthropic::Models::Beta::BetaUserProfile::access_type
+
         attr_accessor external_id: String?
 
         attr_accessor name: String?
+
+        attr_reader relationship: Anthropic::Models::Beta::BetaUserProfile::relationship?
+
+        def relationship=: (
+          Anthropic::Models::Beta::BetaUserProfile::relationship
+        ) -> Anthropic::Models::Beta::BetaUserProfile::relationship
 
         def initialize: (
           id: String,
           created_at: Time,
           metadata: ::Hash[Symbol, String],
-          relationship: Anthropic::Models::Beta::BetaUserProfile::relationship,
           trust_grants: ::Hash[Symbol, Anthropic::Beta::BetaUserProfileTrustGrant],
           type: Anthropic::Models::Beta::BetaUserProfile::type_,
           updated_at: Time,
+          ?access_type: Anthropic::Models::Beta::BetaUserProfile::access_type,
           ?external_id: String?,
-          ?name: String?
+          ?name: String?,
+          ?relationship: Anthropic::Models::Beta::BetaUserProfile::relationship
         ) -> void
 
         def to_hash: -> {
           id: String,
           created_at: Time,
           metadata: ::Hash[Symbol, String],
-          relationship: Anthropic::Models::Beta::BetaUserProfile::relationship,
           trust_grants: ::Hash[Symbol, Anthropic::Beta::BetaUserProfileTrustGrant],
           type: Anthropic::Models::Beta::BetaUserProfile::type_,
           updated_at: Time,
+          access_type: Anthropic::Models::Beta::BetaUserProfile::access_type,
           external_id: String?,
-          name: String?
+          name: String?,
+          relationship: Anthropic::Models::Beta::BetaUserProfile::relationship
         }
+
+        type type_ = :user_profile
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          USER_PROFILE: :user_profile
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaUserProfile::type_]
+        end
+
+        type access_type = :application | :passthrough
+
+        module AccessType
+          extend Anthropic::Internal::Type::Enum
+
+          APPLICATION: :application
+          PASSTHROUGH: :passthrough
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaUserProfile::access_type]
+        end
 
         type relationship = :external | :resold | :internal
 
@@ -69,16 +103,6 @@ module Anthropic
           INTERNAL: :internal
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaUserProfile::relationship]
-        end
-
-        type type_ = :user_profile
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          USER_PROFILE: :user_profile
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaUserProfile::type_]
         end
       end
     end

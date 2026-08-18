@@ -31,7 +31,6 @@ module Anthropic
 
         def upload: (
           file: Anthropic::Internal::file_input,
-          ?expires_in_seconds: Integer,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::FileMetadata

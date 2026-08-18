@@ -90,7 +90,6 @@ module Anthropic
         sig do
           params(
             file: Anthropic::Internal::FileInput,
-            expires_in_seconds: Integer,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::FileMetadata)
@@ -98,10 +97,6 @@ module Anthropic
         def upload(
           # Body param: The file to upload
           file:,
-          # Body param: Seconds from upload until the file expires and its bytes become
-          # permanently unavailable. Must be between 3600 (one hour) and 7776000 (ninety
-          # days).
-          expires_in_seconds: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}

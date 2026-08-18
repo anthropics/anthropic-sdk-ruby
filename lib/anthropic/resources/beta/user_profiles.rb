@@ -9,7 +9,9 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::UserProfileCreateParams} for more details.
         #
-        # @overload create(external_id: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
+        # @overload create(access_type: nil, external_id: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
+        #
+        # @param access_type [Symbol, Anthropic::Models::Beta::UserProfileCreateParams::AccessType] Body param: How the platform uses the API on behalf of the entity this profile r
         #
         # @param external_id [String, nil] Body param: Platform's own identifier for this user. Not enforced unique. Maximu
         #
@@ -35,7 +37,7 @@ module Anthropic
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
             model: Anthropic::Beta::BetaUserProfile,
-            options: {extra_headers: {"anthropic-beta" => "user-profiles-2026-03-24"}, **options}
+            options: {extra_headers: {"anthropic-beta" => "user-profiles-2026-08-18"}, **options}
           )
         end
 
@@ -59,7 +61,7 @@ module Anthropic
             path: ["v1/user_profiles/%1$s?beta=true", user_profile_id],
             headers: parsed.transform_keys(betas: "anthropic-beta"),
             model: Anthropic::Beta::BetaUserProfile,
-            options: {extra_headers: {"anthropic-beta" => "user-profiles-2026-03-24"}, **options}
+            options: {extra_headers: {"anthropic-beta" => "user-profiles-2026-08-18"}, **options}
           )
         end
 
@@ -68,9 +70,11 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::UserProfileUpdateParams} for more details.
         #
-        # @overload update(user_profile_id, external_id: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
+        # @overload update(user_profile_id, access_type: nil, external_id: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
         #
         # @param user_profile_id [String] Path param: Path parameter user_profile_id
+        #
+        # @param access_type [Symbol, Anthropic::Models::Beta::UserProfileUpdateParams::AccessType, nil] Body param: How the platform uses the API on behalf of the entity this profile r
         #
         # @param external_id [String, nil] Body param: If present, replaces the stored external_id. Omit to leave unchanged
         #
@@ -96,7 +100,7 @@ module Anthropic
             headers: parsed.slice(*header_params.keys).transform_keys(header_params),
             body: parsed.except(*header_params.keys),
             model: Anthropic::Beta::BetaUserProfile,
-            options: {extra_headers: {"anthropic-beta" => "user-profiles-2026-03-24"}, **options}
+            options: {extra_headers: {"anthropic-beta" => "user-profiles-2026-08-18"}, **options}
           )
         end
 
@@ -128,7 +132,7 @@ module Anthropic
             headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
             page: Anthropic::Internal::PageCursor,
             model: Anthropic::Beta::BetaUserProfile,
-            options: {extra_headers: {"anthropic-beta" => "user-profiles-2026-03-24"}, **options}
+            options: {extra_headers: {"anthropic-beta" => "user-profiles-2026-08-18"}, **options}
           )
         end
 
@@ -152,7 +156,7 @@ module Anthropic
             path: ["v1/user_profiles/%1$s/enrollment_url?beta=true", user_profile_id],
             headers: parsed.transform_keys(betas: "anthropic-beta"),
             model: Anthropic::Beta::BetaUserProfileEnrollmentURL,
-            options: {extra_headers: {"anthropic-beta" => "user-profiles-2026-03-24"}, **options}
+            options: {extra_headers: {"anthropic-beta" => "user-profiles-2026-08-18"}, **options}
           )
         end
 

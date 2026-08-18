@@ -98,6 +98,11 @@ module Anthropic
           :"user-profiles-2026-03-24",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      USER_PROFILES_2026_08_18 =
+        T.let(
+          :"user-profiles-2026-08-18",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
       ADVISOR_TOOL_2026_03_01 =
         T.let(
           :"advisor-tool-2026-03-01",
