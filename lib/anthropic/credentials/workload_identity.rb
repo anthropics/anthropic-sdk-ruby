@@ -156,17 +156,18 @@ module Anthropic
         end
 
         data = JSON.parse(response.body, symbolize_names: true)
-        # NOTE: kept as two separate `in` clauses (Integer / String) rather than
-        # `(Integer | String) => expires_in`. The alternative-pattern-with-capture
-        # form parses fine on Ruby 4 but is rejected by
-        # `RubyVM::InstructionSequence.compile_file` with
-        # `alternative pattern after variable capture (SyntaxError)`, which
-        # breaks bootsnap's iseq-precompile pass (i.e. every Rails boot).
         token, expires_in =
           case data
-          in {access_token: String => token, expires_in: Integer => expires_in}
-            [token, expires_in.to_i]
-          in {access_token: String => token, expires_in: String => expires_in}
+          # NOTE: `expires_in` is matched before `access_token` deliberately. On Ruby
+          # 4.0.1-4.0.3 built with Prism, `RubyVM::InstructionSequence.compile_file`
+          # falls back to the old parser (https://bugs.ruby-lang.org/issues/22023),
+          # which rejects an alternative pattern that follows a variable capture. Put
+          # `access_token: String => token` first and loading this file raises
+          # `alternative pattern after variable capture (SyntaxError)` under
+          # bootsnap's iseq precompile, i.e. on Rails boot. Fixed in Ruby 4.0.4 and
+          # worked around in bootsnap 1.24.2; this order keeps older combinations
+          # loadable.
+          in {expires_in: (Integer | String) => expires_in, access_token: String => token}
             [token, expires_in.to_i]
           in {access_token: String => token}
             [token, 3600]
