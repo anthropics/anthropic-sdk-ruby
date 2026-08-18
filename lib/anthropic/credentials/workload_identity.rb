@@ -163,10 +163,10 @@ module Anthropic
           # falls back to the old parser (https://bugs.ruby-lang.org/issues/22023),
           # which rejects an alternative pattern that follows a variable capture. Put
           # `access_token: String => token` first and loading this file raises
-          # `alternative pattern after variable capture (SyntaxError)` under
-          # bootsnap's iseq precompile, i.e. on Rails boot. Fixed in Ruby 4.0.4 and
-          # worked around in bootsnap 1.24.2; this order keeps older combinations
-          # loadable.
+          # `alternative pattern after variable capture (SyntaxError)` under bootsnap
+          # 1.24.0-1.24.1 -- they dropped the `rescue SyntaxError` fallback earlier
+          # versions had, and predate the 1.24.2 Prism workaround -- which breaks
+          # Rails boot. Fixed in Ruby 4.0.4.
           in {expires_in: (Integer | String) => expires_in, access_token: String => token}
             [token, expires_in.to_i]
           in {access_token: String => token}
