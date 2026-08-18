@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.63.0 (2026-08-18)
+
+Full Changelog: [v1.62.0...v1.63.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.62.0...v1.63.0)
+
+### Features
+
+* **api:** additions to files and memory stores ([f4baf57](https://github.com/anthropics/anthropic-sdk-ruby/commit/f4baf57eaf96b098ec63c895c84c701294583240))
+* **api:** updates to skill, files, and user profiles ([ba0844b](https://github.com/anthropics/anthropic-sdk-ruby/commit/ba0844b290a2036cba7c0a79e500497d48096c5f))
+* **tools:** add `tool_options` to `BaseTool` (strict, cache_control, …) ([#161](https://github.com/anthropics/anthropic-sdk-ruby/issues/161)) ([df278f9](https://github.com/anthropics/anthropic-sdk-ruby/commit/df278f9170ce5ff130433602b18470248dcfa3f4))
+
+
+### Bug Fixes
+
+* **api:** remove unsupported mid_conv_system content block ([687a6da](https://github.com/anthropics/anthropic-sdk-ruby/commit/687a6da56fe9cb85753f6a819d7978580bed61c9))
+* **aws,google_cloud:** adopt the default-credentials hook in the AWS and Google Cloud clients ([#170](https://github.com/anthropics/anthropic-sdk-ruby/issues/170)) ([169fea9](https://github.com/anthropics/anthropic-sdk-ruby/commit/169fea9f5ef8d0798bc0e795e0579eae367939e2))
+* **client:** never fall back to the first-party base URL when default credentials are disabled ([#193](https://github.com/anthropics/anthropic-sdk-ruby/issues/193)) ([b6e9f56](https://github.com/anthropics/anthropic-sdk-ruby/commit/b6e9f562c2872dc5f3ca3a4d6c4025e0e75397d1))
+* **tool-runner:** forward the server-assigned container on follow-up requests ([#189](https://github.com/anthropics/anthropic-sdk-ruby/issues/189)) ([891ac9b](https://github.com/anthropics/anthropic-sdk-ruby/commit/891ac9b8f12234bfe6938086937505e27175df46))
+* **tool-runner:** replay unknown tool_use input verbatim ([#173](https://github.com/anthropics/anthropic-sdk-ruby/issues/173)) ([566a881](https://github.com/anthropics/anthropic-sdk-ruby/commit/566a8817fbe8aad5a25b4111021e39d20451ef03))
+* **tool-runner:** stop on refusal instead of executing tools ([#174](https://github.com/anthropics/anthropic-sdk-ruby/issues/174)) ([4b8d2e4](https://github.com/anthropics/anthropic-sdk-ruby/commit/4b8d2e43265d31b55eb9a6f0d3241b62fa510b2d))
+
+
+### Chores
+
+* **internal:** remove leftover prism references ([5a416d3](https://github.com/anthropics/anthropic-sdk-ruby/commit/5a416d3f2c784d697a8f9fbc99f5620102ea0c84))
+
 ## 1.62.0 (2026-08-13)
 
 Full Changelog: [v1.61.0...v1.62.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.61.0...v1.62.0)
