@@ -115,14 +115,9 @@ module Anthropic
 
         # Upload File
         #
-        # Some parameter documentations has been truncated, see
-        # {Anthropic::Models::Beta::FileUploadParams} for more details.
-        #
-        # @overload upload(file:, expires_in_seconds: nil, betas: nil, request_options: {})
+        # @overload upload(file:, betas: nil, request_options: {})
         #
         # @param file [Pathname, StringIO, IO, String, Anthropic::FilePart] Body param: The file to upload
-        #
-        # @param expires_in_seconds [Integer] Body param: Seconds from upload until the file expires and its bytes become perm
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #

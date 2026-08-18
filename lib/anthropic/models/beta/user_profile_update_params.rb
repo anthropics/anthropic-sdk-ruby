@@ -13,6 +13,16 @@ module Anthropic
         #   @return [String]
         required :user_profile_id, String
 
+        # @!attribute access_type
+        #   How the platform uses the API on behalf of the entity this profile represents.
+        #   `application`: the platform sells a product that uses the API behind the scenes,
+        #   and the profile represents an individual end-user of that product.
+        #   `passthrough`: the platform resells raw inference, and the profile identifies
+        #   the resold-to company.
+        #
+        #   @return [Symbol, Anthropic::Models::Beta::UserProfileUpdateParams::AccessType, nil]
+        optional :access_type, enum: -> { Anthropic::Beta::UserProfileUpdateParams::AccessType }, nil?: true
+
         # @!attribute external_id
         #   If present, replaces the stored external_id. Omit to leave unchanged. Maximum
         #   255 characters.
@@ -54,11 +64,13 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(user_profile_id:, external_id: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
+        # @!method initialize(user_profile_id:, access_type: nil, external_id: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::UserProfileUpdateParams} for more details.
         #
         #   @param user_profile_id [String]
+        #
+        #   @param access_type [Symbol, Anthropic::Models::Beta::UserProfileUpdateParams::AccessType, nil] How the platform uses the API on behalf of the entity this profile represents. `
         #
         #   @param external_id [String, nil] If present, replaces the stored external_id. Omit to leave unchanged. Maximum 25
         #
@@ -71,6 +83,21 @@ module Anthropic
         #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
+
+        # How the platform uses the API on behalf of the entity this profile represents.
+        # `application`: the platform sells a product that uses the API behind the scenes,
+        # and the profile represents an individual end-user of that product.
+        # `passthrough`: the platform resells raw inference, and the profile identifies
+        # the resold-to company.
+        module AccessType
+          extend Anthropic::Internal::Type::Enum
+
+          APPLICATION = :application
+          PASSTHROUGH = :passthrough
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
 
         # How the entity behind a user profile relates to the platform that owns the API
         # key. `external`: an individual end-user of the platform. `resold`: a company the

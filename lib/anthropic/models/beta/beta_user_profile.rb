@@ -24,14 +24,6 @@ module Anthropic
         #   @return [Hash{Symbol=>String}]
         required :metadata, Anthropic::Internal::Type::HashOf[String]
 
-        # @!attribute relationship
-        #   How the entity behind a user profile relates to the platform that owns the API
-        #   key. `external`: an individual end-user of the platform. `resold`: a company the
-        #   platform resells Claude access to. `internal`: the platform's own usage.
-        #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaUserProfile::Relationship]
-        required :relationship, enum: -> { Anthropic::Beta::BetaUserProfile::Relationship }
-
         # @!attribute trust_grants
         #   Trust grants for this profile, keyed by grant name. Key omitted when no grant is
         #   active or in flight.
@@ -52,6 +44,16 @@ module Anthropic
         #   @return [Time]
         required :updated_at, Time
 
+        # @!attribute access_type
+        #   How the platform uses the API on behalf of the entity this profile represents.
+        #   `application`: the platform sells a product that uses the API behind the scenes,
+        #   and the profile represents an individual end-user of that product.
+        #   `passthrough`: the platform resells raw inference, and the profile identifies
+        #   the resold-to company.
+        #
+        #   @return [Symbol, Anthropic::Models::Beta::BetaUserProfile::AccessType, nil]
+        optional :access_type, enum: -> { Anthropic::Beta::BetaUserProfile::AccessType }
+
         # @!attribute external_id
         #   Platform's own identifier for this user. Not enforced unique.
         #
@@ -60,12 +62,21 @@ module Anthropic
 
         # @!attribute name
         #   Real-world name of the entity this profile represents (company or individual).
-        #   For `resold` this is the resold-to company's name.
+        #   For a resold-to company (`access_type` `passthrough`, or `relationship` `resold`
+        #   under the `user-profiles-2026-03-24` header) this is that company's name.
         #
         #   @return [String, nil]
         optional :name, String, nil?: true
 
-        # @!method initialize(id:, created_at:, metadata:, relationship:, trust_grants:, type:, updated_at:, external_id: nil, name: nil)
+        # @!attribute relationship
+        #   How the entity behind a user profile relates to the platform that owns the API
+        #   key. `external`: an individual end-user of the platform. `resold`: a company the
+        #   platform resells Claude access to. `internal`: the platform's own usage.
+        #
+        #   @return [Symbol, Anthropic::Models::Beta::BetaUserProfile::Relationship, nil]
+        optional :relationship, enum: -> { Anthropic::Beta::BetaUserProfile::Relationship }
+
+        # @!method initialize(id:, created_at:, metadata:, trust_grants:, type:, updated_at:, access_type: nil, external_id: nil, name: nil, relationship: nil)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaUserProfile} for more details.
         #
@@ -75,17 +86,48 @@ module Anthropic
         #
         #   @param metadata [Hash{Symbol=>String}] Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up t
         #
-        #   @param relationship [Symbol, Anthropic::Models::Beta::BetaUserProfile::Relationship] How the entity behind a user profile relates to the platform that owns the API k
-        #
         #   @param trust_grants [Hash{Symbol=>Anthropic::Models::Beta::BetaUserProfileTrustGrant}] Trust grants for this profile, keyed by grant name. Key omitted when no grant is
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaUserProfile::Type] Object type. Always `user_profile`.
         #
         #   @param updated_at [Time] A timestamp in RFC 3339 format
         #
+        #   @param access_type [Symbol, Anthropic::Models::Beta::BetaUserProfile::AccessType] How the platform uses the API on behalf of the entity this profile represents. `
+        #
         #   @param external_id [String, nil] Platform's own identifier for this user. Not enforced unique.
         #
         #   @param name [String, nil] Real-world name of the entity this profile represents (company or individual). F
+        #
+        #   @param relationship [Symbol, Anthropic::Models::Beta::BetaUserProfile::Relationship] How the entity behind a user profile relates to the platform that owns the API k
+
+        # Object type. Always `user_profile`.
+        #
+        # @see Anthropic::Models::Beta::BetaUserProfile#type
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          USER_PROFILE = :user_profile
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # How the platform uses the API on behalf of the entity this profile represents.
+        # `application`: the platform sells a product that uses the API behind the scenes,
+        # and the profile represents an individual end-user of that product.
+        # `passthrough`: the platform resells raw inference, and the profile identifies
+        # the resold-to company.
+        #
+        # @see Anthropic::Models::Beta::BetaUserProfile#access_type
+        module AccessType
+          extend Anthropic::Internal::Type::Enum
+
+          APPLICATION = :application
+          PASSTHROUGH = :passthrough
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
 
         # How the entity behind a user profile relates to the platform that owns the API
         # key. `external`: an individual end-user of the platform. `resold`: a company the
@@ -98,18 +140,6 @@ module Anthropic
           EXTERNAL = :external
           RESOLD = :resold
           INTERNAL = :internal
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
-
-        # Object type. Always `user_profile`.
-        #
-        # @see Anthropic::Models::Beta::BetaUserProfile#type
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          USER_PROFILE = :user_profile
 
           # @!method self.values
           #   @return [Array<Symbol>]
