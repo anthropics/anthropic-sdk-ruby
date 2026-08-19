@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    class BetaBrowserStateChangeTabOpened = Beta::BetaBrowserStateChangeTabOpened
+
+    module Beta
+      type beta_browser_state_change_tab_opened =
+        { tab_id: String, type: :tab_opened }
+
+      class BetaBrowserStateChangeTabOpened < Anthropic::Internal::Type::BaseModel
+        attr_accessor tab_id: String
+
+        attr_accessor type: :tab_opened
+
+        def initialize: (tab_id: String, ?type: :tab_opened) -> void
+
+        def to_hash: -> { tab_id: String, type: :tab_opened }
+      end
+    end
+  end
+end

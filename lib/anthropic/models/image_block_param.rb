@@ -5,7 +5,7 @@ module Anthropic
     class ImageBlockParam < Anthropic::Internal::Type::BaseModel
       # @!attribute source
       #
-      #   @return [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]
+      #   @return [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource, Anthropic::Models::FileImageSource]
       required :source, union: -> { Anthropic::ImageBlockParam::Source }
 
       # @!attribute type
@@ -19,10 +19,24 @@ module Anthropic
       #   @return [Anthropic::Models::CacheControlEphemeral, nil]
       optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
-      # @!method initialize(source:, cache_control: nil, type: :image)
-      #   @param source [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]
+      # @!attribute transformations
+      #   Configures the transformations the server applies to this image before the model
+      #   observes it. Each key names a condition the server transforms images for; its
+      #   value selects the transformation applied. Omitted keys keep their default
+      #   behavior, and an empty object is equivalent to omitting the field.
+      #
+      #   @return [Anthropic::Models::ImageTransformationsParam, nil]
+      optional :transformations, -> { Anthropic::ImageTransformationsParam }, nil?: true
+
+      # @!method initialize(source:, cache_control: nil, transformations: nil, type: :image)
+      #   Some parameter documentations has been truncated, see
+      #   {Anthropic::Models::ImageBlockParam} for more details.
+      #
+      #   @param source [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource, Anthropic::Models::FileImageSource]
       #
       #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+      #
+      #   @param transformations [Anthropic::Models::ImageTransformationsParam, nil] Configures the transformations the server applies to this image before the model
       #
       #   @param type [Symbol, :image]
 
@@ -36,8 +50,10 @@ module Anthropic
 
         variant :url, -> { Anthropic::URLImageSource }
 
+        variant :file, -> { Anthropic::FileImageSource }
+
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource)]
+        #   @return [Array(Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource, Anthropic::Models::FileImageSource)]
 
         # Creates a new instance of the variant class whose `type` matches the given
         # value, passing the remaining arguments to its constructor.
@@ -52,14 +68,18 @@ module Anthropic
         #
         #   @option args [String] :url
         #
+        #   @option args [String] :file_id
+        #
         # @raise [ArgumentError]
-        # @return [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource]
+        # @return [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource, Anthropic::Models::FileImageSource]
         def self.new(type:, **args)
           case type.to_sym
           when :base64
             Anthropic::Base64ImageSource.new(**args)
           when :url
             Anthropic::URLImageSource.new(**args)
+          when :file
+            Anthropic::FileImageSource.new(**args)
           else
             raise ArgumentError, "unknown type: #{type}"
           end

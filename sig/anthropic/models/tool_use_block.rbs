@@ -6,7 +6,8 @@ module Anthropic
         caller_: Anthropic::Models::ToolUseBlock::caller_,
         input: ::Hash[Symbol, top],
         name: String,
-        type: :tool_use
+        type: :tool_use,
+        toolset_name: String?
       }
 
     class ToolUseBlock < Anthropic::Internal::Type::BaseModel
@@ -20,11 +21,14 @@ module Anthropic
 
       attr_accessor type: :tool_use
 
+      attr_accessor toolset_name: String?
+
       def initialize: (
         id: String,
         caller_: Anthropic::Models::ToolUseBlock::caller_,
         input: ::Hash[Symbol, top],
         name: String,
+        ?toolset_name: String?,
         ?type: :tool_use
       ) -> void
 
@@ -33,7 +37,8 @@ module Anthropic
         caller_: Anthropic::Models::ToolUseBlock::caller_,
         input: ::Hash[Symbol, top],
         name: String,
-        type: :tool_use
+        type: :tool_use,
+        toolset_name: String?
       }
 
       type caller_ =

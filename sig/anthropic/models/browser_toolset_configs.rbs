@@ -1,0 +1,170 @@
+module Anthropic
+  module Models
+    type browser_toolset_configs =
+      {
+        close_tab: Anthropic::BrowserCloseTabConfig?,
+        double_click: Anthropic::BrowserDoubleClickConfig?,
+        file_upload: Anthropic::BrowserFileUploadConfig?,
+        find: Anthropic::BrowserFindConfig?,
+        form_input: Anthropic::BrowserFormInputConfig?,
+        get_page_text: Anthropic::BrowserGetPageTextConfig?,
+        hold_key: Anthropic::BrowserHoldKeyConfig?,
+        hover: Anthropic::BrowserHoverConfig?,
+        javascript_exec: Anthropic::BrowserJavascriptExecConfig?,
+        key: Anthropic::BrowserKeyConfig?,
+        left_click: Anthropic::BrowserLeftClickConfig?,
+        left_click_drag: Anthropic::BrowserLeftClickDragConfig?,
+        left_mouse_down: Anthropic::BrowserLeftMouseDownConfig?,
+        left_mouse_up: Anthropic::BrowserLeftMouseUpConfig?,
+        list_tabs: Anthropic::BrowserListTabsConfig?,
+        middle_click: Anthropic::BrowserMiddleClickConfig?,
+        mouse_move: Anthropic::BrowserMouseMoveConfig?,
+        navigate: Anthropic::BrowserNavigateConfig?,
+        new_tab: Anthropic::BrowserNewTabConfig?,
+        read_console: Anthropic::BrowserReadConsoleConfig?,
+        read_network: Anthropic::BrowserReadNetworkConfig?,
+        read_page: Anthropic::BrowserReadPageConfig?,
+        right_click: Anthropic::BrowserRightClickConfig?,
+        screenshot: Anthropic::BrowserScreenshotConfig?,
+        scroll: Anthropic::BrowserScrollConfig?,
+        scroll_to: Anthropic::BrowserScrollToConfig?,
+        switch_tab: Anthropic::BrowserSwitchTabConfig?,
+        triple_click: Anthropic::BrowserTripleClickConfig?,
+        type: Anthropic::BrowserTypeConfig?,
+        wait: Anthropic::BrowserWaitConfig?,
+        zoom: Anthropic::BrowserZoomConfig?
+      }
+
+    class BrowserToolsetConfigs < Anthropic::Internal::Type::BaseModel
+      attr_accessor close_tab: Anthropic::BrowserCloseTabConfig?
+
+      attr_accessor double_click: Anthropic::BrowserDoubleClickConfig?
+
+      attr_accessor file_upload: Anthropic::BrowserFileUploadConfig?
+
+      attr_accessor find: Anthropic::BrowserFindConfig?
+
+      attr_accessor form_input: Anthropic::BrowserFormInputConfig?
+
+      attr_accessor get_page_text: Anthropic::BrowserGetPageTextConfig?
+
+      attr_accessor hold_key: Anthropic::BrowserHoldKeyConfig?
+
+      attr_accessor hover: Anthropic::BrowserHoverConfig?
+
+      attr_accessor javascript_exec: Anthropic::BrowserJavascriptExecConfig?
+
+      attr_accessor key: Anthropic::BrowserKeyConfig?
+
+      attr_accessor left_click: Anthropic::BrowserLeftClickConfig?
+
+      attr_accessor left_click_drag: Anthropic::BrowserLeftClickDragConfig?
+
+      attr_accessor left_mouse_down: Anthropic::BrowserLeftMouseDownConfig?
+
+      attr_accessor left_mouse_up: Anthropic::BrowserLeftMouseUpConfig?
+
+      attr_accessor list_tabs: Anthropic::BrowserListTabsConfig?
+
+      attr_accessor middle_click: Anthropic::BrowserMiddleClickConfig?
+
+      attr_accessor mouse_move: Anthropic::BrowserMouseMoveConfig?
+
+      attr_accessor navigate: Anthropic::BrowserNavigateConfig?
+
+      attr_accessor new_tab: Anthropic::BrowserNewTabConfig?
+
+      attr_accessor read_console: Anthropic::BrowserReadConsoleConfig?
+
+      attr_accessor read_network: Anthropic::BrowserReadNetworkConfig?
+
+      attr_accessor read_page: Anthropic::BrowserReadPageConfig?
+
+      attr_accessor right_click: Anthropic::BrowserRightClickConfig?
+
+      attr_accessor screenshot: Anthropic::BrowserScreenshotConfig?
+
+      attr_accessor scroll: Anthropic::BrowserScrollConfig?
+
+      attr_accessor scroll_to: Anthropic::BrowserScrollToConfig?
+
+      attr_accessor switch_tab: Anthropic::BrowserSwitchTabConfig?
+
+      attr_accessor triple_click: Anthropic::BrowserTripleClickConfig?
+
+      attr_accessor type: Anthropic::BrowserTypeConfig?
+
+      attr_accessor wait: Anthropic::BrowserWaitConfig?
+
+      attr_accessor zoom: Anthropic::BrowserZoomConfig?
+
+      def initialize: (
+        ?close_tab: Anthropic::BrowserCloseTabConfig?,
+        ?double_click: Anthropic::BrowserDoubleClickConfig?,
+        ?file_upload: Anthropic::BrowserFileUploadConfig?,
+        ?find: Anthropic::BrowserFindConfig?,
+        ?form_input: Anthropic::BrowserFormInputConfig?,
+        ?get_page_text: Anthropic::BrowserGetPageTextConfig?,
+        ?hold_key: Anthropic::BrowserHoldKeyConfig?,
+        ?hover: Anthropic::BrowserHoverConfig?,
+        ?javascript_exec: Anthropic::BrowserJavascriptExecConfig?,
+        ?key: Anthropic::BrowserKeyConfig?,
+        ?left_click: Anthropic::BrowserLeftClickConfig?,
+        ?left_click_drag: Anthropic::BrowserLeftClickDragConfig?,
+        ?left_mouse_down: Anthropic::BrowserLeftMouseDownConfig?,
+        ?left_mouse_up: Anthropic::BrowserLeftMouseUpConfig?,
+        ?list_tabs: Anthropic::BrowserListTabsConfig?,
+        ?middle_click: Anthropic::BrowserMiddleClickConfig?,
+        ?mouse_move: Anthropic::BrowserMouseMoveConfig?,
+        ?navigate: Anthropic::BrowserNavigateConfig?,
+        ?new_tab: Anthropic::BrowserNewTabConfig?,
+        ?read_console: Anthropic::BrowserReadConsoleConfig?,
+        ?read_network: Anthropic::BrowserReadNetworkConfig?,
+        ?read_page: Anthropic::BrowserReadPageConfig?,
+        ?right_click: Anthropic::BrowserRightClickConfig?,
+        ?screenshot: Anthropic::BrowserScreenshotConfig?,
+        ?scroll: Anthropic::BrowserScrollConfig?,
+        ?scroll_to: Anthropic::BrowserScrollToConfig?,
+        ?switch_tab: Anthropic::BrowserSwitchTabConfig?,
+        ?triple_click: Anthropic::BrowserTripleClickConfig?,
+        ?type: Anthropic::BrowserTypeConfig?,
+        ?wait: Anthropic::BrowserWaitConfig?,
+        ?zoom: Anthropic::BrowserZoomConfig?
+      ) -> void
+
+      def to_hash: -> {
+        close_tab: Anthropic::BrowserCloseTabConfig?,
+        double_click: Anthropic::BrowserDoubleClickConfig?,
+        file_upload: Anthropic::BrowserFileUploadConfig?,
+        find: Anthropic::BrowserFindConfig?,
+        form_input: Anthropic::BrowserFormInputConfig?,
+        get_page_text: Anthropic::BrowserGetPageTextConfig?,
+        hold_key: Anthropic::BrowserHoldKeyConfig?,
+        hover: Anthropic::BrowserHoverConfig?,
+        javascript_exec: Anthropic::BrowserJavascriptExecConfig?,
+        key: Anthropic::BrowserKeyConfig?,
+        left_click: Anthropic::BrowserLeftClickConfig?,
+        left_click_drag: Anthropic::BrowserLeftClickDragConfig?,
+        left_mouse_down: Anthropic::BrowserLeftMouseDownConfig?,
+        left_mouse_up: Anthropic::BrowserLeftMouseUpConfig?,
+        list_tabs: Anthropic::BrowserListTabsConfig?,
+        middle_click: Anthropic::BrowserMiddleClickConfig?,
+        mouse_move: Anthropic::BrowserMouseMoveConfig?,
+        navigate: Anthropic::BrowserNavigateConfig?,
+        new_tab: Anthropic::BrowserNewTabConfig?,
+        read_console: Anthropic::BrowserReadConsoleConfig?,
+        read_network: Anthropic::BrowserReadNetworkConfig?,
+        read_page: Anthropic::BrowserReadPageConfig?,
+        right_click: Anthropic::BrowserRightClickConfig?,
+        screenshot: Anthropic::BrowserScreenshotConfig?,
+        scroll: Anthropic::BrowserScrollConfig?,
+        scroll_to: Anthropic::BrowserScrollToConfig?,
+        switch_tab: Anthropic::BrowserSwitchTabConfig?,
+        triple_click: Anthropic::BrowserTripleClickConfig?,
+        type: Anthropic::BrowserTypeConfig?,
+        wait: Anthropic::BrowserWaitConfig?,
+        zoom: Anthropic::BrowserZoomConfig?
+      }
+    end
+  end
+end

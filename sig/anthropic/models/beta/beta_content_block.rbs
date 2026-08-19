@@ -47,7 +47,8 @@ module Anthropic
             id: String,
             input: ::Hash[Symbol, top],
             name: String,
-            ?caller_: Anthropic::Models::Beta::BetaToolUseBlock::caller_
+            ?caller_: Anthropic::Models::Beta::BetaToolUseBlock::caller_,
+            ?toolset_name: String?
           ) -> Anthropic::Beta::BetaToolUseBlock
           | (
             type: :server_tool_use | "server_tool_use",
@@ -138,6 +139,7 @@ module Anthropic
             | Anthropic::Models::Beta::BetaServerToolUseBlock::caller_
             | Anthropic::Models::Beta::BetaWebSearchToolResultBlock::caller_
             | Anthropic::Models::Beta::BetaWebFetchToolResultBlock::caller_,
+            ?toolset_name: String?,
             ?content: Anthropic::Models::Beta::beta_web_search_tool_result_block_content
             | Anthropic::Models::Beta::BetaWebFetchToolResultBlock::content
             | Anthropic::Models::Beta::BetaAdvisorToolResultBlock::content

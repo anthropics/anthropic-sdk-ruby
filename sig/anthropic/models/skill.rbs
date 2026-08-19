@@ -1,0 +1,50 @@
+module Anthropic
+  module Models
+    type skill =
+      {
+        id: String,
+        created_at: Time,
+        display_name: String,
+        latest_version_id: String,
+        source: Anthropic::SkillSource,
+        type: :skill,
+        updated_at: Time
+      }
+
+    class Skill < Anthropic::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor display_name: String
+
+      attr_accessor latest_version_id: String
+
+      attr_accessor source: Anthropic::SkillSource
+
+      attr_accessor type: :skill
+
+      attr_accessor updated_at: Time
+
+      def initialize: (
+        id: String,
+        created_at: Time,
+        display_name: String,
+        latest_version_id: String,
+        source: Anthropic::SkillSource,
+        updated_at: Time,
+        ?type: :skill
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        created_at: Time,
+        display_name: String,
+        latest_version_id: String,
+        source: Anthropic::SkillSource,
+        type: :skill,
+        updated_at: Time
+      }
+    end
+  end
+end

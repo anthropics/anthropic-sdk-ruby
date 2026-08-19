@@ -1,0 +1,52 @@
+module Anthropic
+  module Models
+    module BetaBrowserStateChange = Beta::BetaBrowserStateChange
+
+    module Beta
+      type beta_browser_state_change =
+        Anthropic::Beta::BetaBrowserStateChangeTabOpened
+        | Anthropic::Beta::BetaBrowserStateChangeDownloadStarted
+        | Anthropic::Beta::BetaBrowserStateChangeDownloadCompleted
+        | Anthropic::Beta::BetaBrowserStateChangeDownloadFailed
+
+      module BetaBrowserStateChange
+        extend Anthropic::Internal::Type::Union
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_browser_state_change]
+
+        def self.new:
+          (
+            type: :tab_opened | "tab_opened",
+            tab_id: String
+          ) -> Anthropic::Beta::BetaBrowserStateChangeTabOpened
+          | (
+            type: :download_started | "download_started",
+            download_id: String,
+            url: String
+          ) -> Anthropic::Beta::BetaBrowserStateChangeDownloadStarted
+          | (
+            type: :download_completed | "download_completed",
+            download_id: String,
+            url: String,
+            ?path: String?,
+            ?size_bytes: Integer?
+          ) -> Anthropic::Beta::BetaBrowserStateChangeDownloadCompleted
+          | (
+            type: :download_failed | "download_failed",
+            download_id: String,
+            url: String,
+            ?error: String?
+          ) -> Anthropic::Beta::BetaBrowserStateChangeDownloadFailed
+          | (
+            type: Symbol | String,
+            ?tab_id: String,
+            ?download_id: String,
+            ?url: String,
+            ?path: String?,
+            ?size_bytes: Integer?,
+            ?error: String?
+          ) -> Anthropic::Models::Beta::beta_browser_state_change
+      end
+    end
+  end
+end

@@ -1,0 +1,100 @@
+module Anthropic
+  module Models
+    type computer_toolset_configs =
+      {
+        cursor_position: Anthropic::ComputerCursorPositionConfig?,
+        double_click: Anthropic::ComputerDoubleClickConfig?,
+        hold_key: Anthropic::ComputerHoldKeyConfig?,
+        key: Anthropic::ComputerKeyConfig?,
+        left_click: Anthropic::ComputerLeftClickConfig?,
+        left_click_drag: Anthropic::ComputerLeftClickDragConfig?,
+        left_mouse_down: Anthropic::ComputerLeftMouseDownConfig?,
+        left_mouse_up: Anthropic::ComputerLeftMouseUpConfig?,
+        middle_click: Anthropic::ComputerMiddleClickConfig?,
+        mouse_move: Anthropic::ComputerMouseMoveConfig?,
+        right_click: Anthropic::ComputerRightClickConfig?,
+        screenshot: Anthropic::ComputerScreenshotConfig?,
+        scroll: Anthropic::ComputerScrollConfig?,
+        triple_click: Anthropic::ComputerTripleClickConfig?,
+        type: Anthropic::ComputerTypeConfig?,
+        wait: Anthropic::ComputerWaitConfig?,
+        zoom: Anthropic::ComputerZoomConfig?
+      }
+
+    class ComputerToolsetConfigs < Anthropic::Internal::Type::BaseModel
+      attr_accessor cursor_position: Anthropic::ComputerCursorPositionConfig?
+
+      attr_accessor double_click: Anthropic::ComputerDoubleClickConfig?
+
+      attr_accessor hold_key: Anthropic::ComputerHoldKeyConfig?
+
+      attr_accessor key: Anthropic::ComputerKeyConfig?
+
+      attr_accessor left_click: Anthropic::ComputerLeftClickConfig?
+
+      attr_accessor left_click_drag: Anthropic::ComputerLeftClickDragConfig?
+
+      attr_accessor left_mouse_down: Anthropic::ComputerLeftMouseDownConfig?
+
+      attr_accessor left_mouse_up: Anthropic::ComputerLeftMouseUpConfig?
+
+      attr_accessor middle_click: Anthropic::ComputerMiddleClickConfig?
+
+      attr_accessor mouse_move: Anthropic::ComputerMouseMoveConfig?
+
+      attr_accessor right_click: Anthropic::ComputerRightClickConfig?
+
+      attr_accessor screenshot: Anthropic::ComputerScreenshotConfig?
+
+      attr_accessor scroll: Anthropic::ComputerScrollConfig?
+
+      attr_accessor triple_click: Anthropic::ComputerTripleClickConfig?
+
+      attr_accessor type: Anthropic::ComputerTypeConfig?
+
+      attr_accessor wait: Anthropic::ComputerWaitConfig?
+
+      attr_accessor zoom: Anthropic::ComputerZoomConfig?
+
+      def initialize: (
+        ?cursor_position: Anthropic::ComputerCursorPositionConfig?,
+        ?double_click: Anthropic::ComputerDoubleClickConfig?,
+        ?hold_key: Anthropic::ComputerHoldKeyConfig?,
+        ?key: Anthropic::ComputerKeyConfig?,
+        ?left_click: Anthropic::ComputerLeftClickConfig?,
+        ?left_click_drag: Anthropic::ComputerLeftClickDragConfig?,
+        ?left_mouse_down: Anthropic::ComputerLeftMouseDownConfig?,
+        ?left_mouse_up: Anthropic::ComputerLeftMouseUpConfig?,
+        ?middle_click: Anthropic::ComputerMiddleClickConfig?,
+        ?mouse_move: Anthropic::ComputerMouseMoveConfig?,
+        ?right_click: Anthropic::ComputerRightClickConfig?,
+        ?screenshot: Anthropic::ComputerScreenshotConfig?,
+        ?scroll: Anthropic::ComputerScrollConfig?,
+        ?triple_click: Anthropic::ComputerTripleClickConfig?,
+        ?type: Anthropic::ComputerTypeConfig?,
+        ?wait: Anthropic::ComputerWaitConfig?,
+        ?zoom: Anthropic::ComputerZoomConfig?
+      ) -> void
+
+      def to_hash: -> {
+        cursor_position: Anthropic::ComputerCursorPositionConfig?,
+        double_click: Anthropic::ComputerDoubleClickConfig?,
+        hold_key: Anthropic::ComputerHoldKeyConfig?,
+        key: Anthropic::ComputerKeyConfig?,
+        left_click: Anthropic::ComputerLeftClickConfig?,
+        left_click_drag: Anthropic::ComputerLeftClickDragConfig?,
+        left_mouse_down: Anthropic::ComputerLeftMouseDownConfig?,
+        left_mouse_up: Anthropic::ComputerLeftMouseUpConfig?,
+        middle_click: Anthropic::ComputerMiddleClickConfig?,
+        mouse_move: Anthropic::ComputerMouseMoveConfig?,
+        right_click: Anthropic::ComputerRightClickConfig?,
+        screenshot: Anthropic::ComputerScreenshotConfig?,
+        scroll: Anthropic::ComputerScrollConfig?,
+        triple_click: Anthropic::ComputerTripleClickConfig?,
+        type: Anthropic::ComputerTypeConfig?,
+        wait: Anthropic::ComputerWaitConfig?,
+        zoom: Anthropic::ComputerZoomConfig?
+      }
+    end
+  end
+end

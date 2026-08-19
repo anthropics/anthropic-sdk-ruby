@@ -22,14 +22,16 @@ module Anthropic
           | (
             type: :image | "image",
             source: Anthropic::Models::Beta::BetaImageBlockParam::source,
-            ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+            ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+            ?transformations: Anthropic::Beta::BetaImageTransformationsParam?
           ) -> Anthropic::Beta::BetaImageBlockParam
           | (
             type: Symbol | String,
             ?text: String,
             ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
             ?citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?,
-            ?source: Anthropic::Models::Beta::BetaImageBlockParam::source
+            ?source: Anthropic::Models::Beta::BetaImageBlockParam::source,
+            ?transformations: Anthropic::Beta::BetaImageTransformationsParam?
           ) -> Anthropic::Models::Beta::beta_content_block_source_content
       end
     end

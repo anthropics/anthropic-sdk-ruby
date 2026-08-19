@@ -146,6 +146,7 @@ module Anthropic
                   Anthropic::Beta::BetaServerToolCaller::OrHash,
                   Anthropic::Beta::BetaServerToolCaller20260120::OrHash
                 ),
+              toolset_name: T.nilable(String),
               content:
                 T.any(
                   T.any(
@@ -234,6 +235,8 @@ module Anthropic
             name: nil,
             # Tool invocation directly from the model.
             caller_: nil,
+            # For a toolset member tool_use, the toolset family.
+            toolset_name: nil,
             # Code execution result with encrypted stdout for PFC + web_search results.
             content: nil,
             tool_use_id: nil,

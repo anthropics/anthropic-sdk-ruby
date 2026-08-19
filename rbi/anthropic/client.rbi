@@ -28,6 +28,12 @@ module Anthropic
     sig { returns(Anthropic::Resources::Models) }
     attr_reader :models
 
+    sig { returns(Anthropic::Resources::Files) }
+    attr_reader :files
+
+    sig { returns(Anthropic::Resources::Skills) }
+    attr_reader :skills
+
     sig { returns(Anthropic::Resources::Beta) }
     attr_reader :beta
 

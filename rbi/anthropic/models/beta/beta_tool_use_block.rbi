@@ -46,6 +46,10 @@ module Anthropic
         end
         attr_writer :caller_
 
+        # For a toolset member tool_use, the toolset family.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :toolset_name
+
         sig do
           params(
             id: String,
@@ -57,6 +61,7 @@ module Anthropic
                 Anthropic::Beta::BetaServerToolCaller::OrHash,
                 Anthropic::Beta::BetaServerToolCaller20260120::OrHash
               ),
+            toolset_name: T.nilable(String),
             type: Symbol
           ).returns(T.attached_class)
         end
@@ -66,6 +71,8 @@ module Anthropic
           name:,
           # Tool invocation directly from the model.
           caller_: nil,
+          # For a toolset member tool_use, the toolset family.
+          toolset_name: nil,
           type: :tool_use
         )
         end
@@ -77,7 +84,8 @@ module Anthropic
               input: T::Hash[Symbol, T.anything],
               name: String,
               type: Symbol,
-              caller_: Anthropic::Beta::BetaToolUseBlock::Caller::Variants
+              caller_: Anthropic::Beta::BetaToolUseBlock::Caller::Variants,
+              toolset_name: T.nilable(String)
             }
           )
         end

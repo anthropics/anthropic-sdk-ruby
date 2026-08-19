@@ -90,6 +90,8 @@ module Anthropic
         #
         #   @option args [String, Symbol, Anthropic::Models::ServerToolUseBlock::Name] :name
         #
+        #   @option args [String, nil] :toolset_name For a toolset member tool_use, the toolset family.
+        #
         #   @option args [Anthropic::Models::WebSearchToolResultError, Array<Anthropic::Models::WebSearchResultBlock>, Anthropic::Models::WebFetchToolResultErrorBlock, Anthropic::Models::WebFetchBlock, Anthropic::Models::CodeExecutionToolResultError, Anthropic::Models::CodeExecutionResultBlock, Anthropic::Models::EncryptedCodeExecutionResultBlock, Anthropic::Models::BashCodeExecutionToolResultError, Anthropic::Models::BashCodeExecutionResultBlock, Anthropic::Models::TextEditorCodeExecutionToolResultError, Anthropic::Models::TextEditorCodeExecutionViewResultBlock, Anthropic::Models::TextEditorCodeExecutionCreateResultBlock, Anthropic::Models::TextEditorCodeExecutionStrReplaceResultBlock, Anthropic::Models::ToolSearchToolResultError, Anthropic::Models::ToolSearchToolSearchResultBlock] :content Code execution result with encrypted stdout for PFC + web_search results.
         #
         #   @option args [String] :tool_use_id

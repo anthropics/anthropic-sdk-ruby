@@ -1,0 +1,61 @@
+module Anthropic
+  module Models
+    class BetaFileMetadata = Beta::BetaFileMetadata
+
+    module Beta
+      type beta_file_metadata =
+        {
+          id: String,
+          created_at: Time,
+          filename: String,
+          mime_type: String,
+          size_bytes: Integer,
+          type: :file,
+          downloadable: bool,
+          scope: Anthropic::Beta::BetaFileScope?
+        }
+
+      class BetaFileMetadata < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor filename: String
+
+        attr_accessor mime_type: String
+
+        attr_accessor size_bytes: Integer
+
+        attr_accessor type: :file
+
+        attr_reader downloadable: bool?
+
+        def downloadable=: (bool) -> bool
+
+        attr_accessor scope: Anthropic::Beta::BetaFileScope?
+
+        def initialize: (
+          id: String,
+          created_at: Time,
+          filename: String,
+          mime_type: String,
+          size_bytes: Integer,
+          ?downloadable: bool,
+          ?scope: Anthropic::Beta::BetaFileScope?,
+          ?type: :file
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          created_at: Time,
+          filename: String,
+          mime_type: String,
+          size_bytes: Integer,
+          type: :file,
+          downloadable: bool,
+          scope: Anthropic::Beta::BetaFileScope?
+        }
+      end
+    end
+  end
+end

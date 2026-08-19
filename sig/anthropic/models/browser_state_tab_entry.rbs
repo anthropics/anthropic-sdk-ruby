@@ -1,0 +1,32 @@
+module Anthropic
+  module Models
+    type browser_state_tab_entry =
+      { tab_id: String, title: String, url: String, active: bool }
+
+    class BrowserStateTabEntry < Anthropic::Internal::Type::BaseModel
+      attr_accessor tab_id: String
+
+      attr_accessor title: String
+
+      attr_accessor url: String
+
+      attr_reader active: bool?
+
+      def active=: (bool) -> bool
+
+      def initialize: (
+        tab_id: String,
+        title: String,
+        url: String,
+        ?active: bool
+      ) -> void
+
+      def to_hash: -> {
+        tab_id: String,
+        title: String,
+        url: String,
+        active: bool
+      }
+    end
+  end
+end

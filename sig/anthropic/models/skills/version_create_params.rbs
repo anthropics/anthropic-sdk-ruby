@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    module Skills
+      type version_create_params =
+        { skill_id: String, files: ::Array[Anthropic::Internal::file_input] }
+        & Anthropic::Internal::Type::request_parameters
+
+      class VersionCreateParams < Anthropic::Internal::Type::BaseModel
+        extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
+
+        attr_accessor skill_id: String
+
+        attr_accessor files: ::Array[Anthropic::Internal::file_input]
+
+        def initialize: (
+          skill_id: String,
+          files: ::Array[Anthropic::Internal::file_input],
+          ?request_options: Anthropic::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          skill_id: String,
+          files: ::Array[Anthropic::Internal::file_input],
+          request_options: Anthropic::RequestOptions
+        }
+      end
+    end
+  end
+end

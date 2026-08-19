@@ -115,7 +115,7 @@ module Anthropic
       attr_writer :cache_control
 
       # Container identifier for reuse across requests.
-      sig { returns(T.nilable(String)) }
+      sig { returns(T.nilable(T.any(Anthropic::ContainerParams, String))) }
       attr_accessor :container
 
       # Specifies the geographic region for inference processing. If not specified, the
@@ -352,7 +352,9 @@ module Anthropic
                 Anthropic::CodeExecutionTool20250825,
                 Anthropic::CodeExecutionTool20260120,
                 Anthropic::CodeExecutionTool20260521,
+                Anthropic::BrowserToolset20260801,
                 Anthropic::MemoryTool20250818,
+                Anthropic::ComputerToolset20260801,
                 Anthropic::ToolTextEditor20250124,
                 Anthropic::ToolTextEditor20250429,
                 Anthropic::ToolTextEditor20250728,
@@ -383,7 +385,9 @@ module Anthropic
                 Anthropic::CodeExecutionTool20250825::OrHash,
                 Anthropic::CodeExecutionTool20260120::OrHash,
                 Anthropic::CodeExecutionTool20260521::OrHash,
+                Anthropic::BrowserToolset20260801::OrHash,
                 Anthropic::MemoryTool20250818::OrHash,
+                Anthropic::ComputerToolset20260801::OrHash,
                 Anthropic::ToolTextEditor20250124::OrHash,
                 Anthropic::ToolTextEditor20250429::OrHash,
                 Anthropic::ToolTextEditor20250728::OrHash,
@@ -441,7 +445,8 @@ module Anthropic
           messages: T::Array[Anthropic::MessageParam::OrHash],
           model: T.any(Anthropic::Model::OrSymbol, String),
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
-          container: T.nilable(String),
+          container:
+            T.nilable(T.any(Anthropic::ContainerParams::OrHash, String)),
           inference_geo: T.nilable(String),
           metadata: Anthropic::Metadata::OrHash,
           output_config: Anthropic::OutputConfig::OrHash,
@@ -471,7 +476,9 @@ module Anthropic
                 Anthropic::CodeExecutionTool20250825::OrHash,
                 Anthropic::CodeExecutionTool20260120::OrHash,
                 Anthropic::CodeExecutionTool20260521::OrHash,
+                Anthropic::BrowserToolset20260801::OrHash,
                 Anthropic::MemoryTool20250818::OrHash,
+                Anthropic::ComputerToolset20260801::OrHash,
                 Anthropic::ToolTextEditor20250124::OrHash,
                 Anthropic::ToolTextEditor20250429::OrHash,
                 Anthropic::ToolTextEditor20250728::OrHash,
@@ -742,7 +749,7 @@ module Anthropic
             messages: T::Array[Anthropic::MessageParam],
             model: T.any(Anthropic::Model::OrSymbol, String),
             cache_control: T.nilable(Anthropic::CacheControlEphemeral),
-            container: T.nilable(String),
+            container: T.nilable(T.any(Anthropic::ContainerParams, String)),
             inference_geo: T.nilable(String),
             metadata: Anthropic::Metadata,
             output_config: Anthropic::OutputConfig,
@@ -772,7 +779,9 @@ module Anthropic
                   Anthropic::CodeExecutionTool20250825,
                   Anthropic::CodeExecutionTool20260120,
                   Anthropic::CodeExecutionTool20260521,
+                  Anthropic::BrowserToolset20260801,
                   Anthropic::MemoryTool20250818,
+                  Anthropic::ComputerToolset20260801,
                   Anthropic::ToolTextEditor20250124,
                   Anthropic::ToolTextEditor20250429,
                   Anthropic::ToolTextEditor20250728,

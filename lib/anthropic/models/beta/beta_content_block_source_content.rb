@@ -18,6 +18,9 @@ module Anthropic
         # Creates a new instance of the variant class whose `type` matches the given
         # value, passing the remaining arguments to its constructor.
         #
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::BetaContentBlockSourceContent} for more details.
+        #
         # @param type [Symbol, String]
         #
         # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
@@ -29,6 +32,8 @@ module Anthropic
         #   @option args [Array<Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam, Anthropic::Models::Beta::BetaCitationWebSearchResultLocationParam, Anthropic::Models::Beta::BetaCitationSearchResultLocationParam>, nil] :citations
         #
         #   @option args [Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource, Anthropic::Models::Beta::BetaFileImageSource] :source
+        #
+        #   @option args [Anthropic::Models::Beta::BetaImageTransformationsParam, nil] :transformations Configures the transformations the server applies to this image before the model
         #
         # @raise [ArgumentError]
         # @return [Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam]

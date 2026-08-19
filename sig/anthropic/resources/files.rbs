@@ -1,0 +1,35 @@
+module Anthropic
+  module Resources
+    class Files
+      def list: (
+        ?ids: ::Array[String]?,
+        ?limit: Integer,
+        ?page: String?,
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::Internal::PageCursor[Anthropic::FileMetadata]
+
+      def delete: (
+        String file_id,
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::DeletedFile
+
+      def download: (
+        String file_id,
+        ?request_options: Anthropic::request_opts
+      ) -> StringIO
+
+      def retrieve_metadata: (
+        String file_id,
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::FileMetadata
+
+      def upload: (
+        file: Anthropic::Internal::file_input,
+        ?expires_in_seconds: Integer,
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::FileMetadata
+
+      def initialize: (client: Anthropic::Client) -> void
+    end
+  end
+end

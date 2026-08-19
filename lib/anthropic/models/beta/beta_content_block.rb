@@ -92,6 +92,8 @@ module Anthropic
         #
         #   @option args [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120] :caller_ Tool invocation directly from the model.
         #
+        #   @option args [String, nil] :toolset_name For a toolset member tool_use, the toolset family.
+        #
         #   @option args [Anthropic::Models::Beta::BetaWebSearchToolResultError, Array<Anthropic::Models::Beta::BetaWebSearchResultBlock>, Anthropic::Models::Beta::BetaWebFetchToolResultErrorBlock, Anthropic::Models::Beta::BetaWebFetchBlock, Anthropic::Models::Beta::BetaAdvisorToolResultError, Anthropic::Models::Beta::BetaAdvisorResultBlock, Anthropic::Models::Beta::BetaAdvisorRedactedResultBlock, Anthropic::Models::Beta::BetaCodeExecutionToolResultError, Anthropic::Models::Beta::BetaCodeExecutionResultBlock, Anthropic::Models::Beta::BetaEncryptedCodeExecutionResultBlock, Anthropic::Models::Beta::BetaBashCodeExecutionToolResultError, Anthropic::Models::Beta::BetaBashCodeExecutionResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultError, Anthropic::Models::Beta::BetaTextEditorCodeExecutionViewResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionCreateResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionStrReplaceResultBlock, Anthropic::Models::Beta::BetaToolSearchToolResultError, Anthropic::Models::Beta::BetaToolSearchToolSearchResultBlock, String, Array<Anthropic::Models::Beta::BetaTextBlock>, String, nil] :content Code execution result with encrypted stdout for PFC + web_search results.
         #
         #   @option args [String] :tool_use_id

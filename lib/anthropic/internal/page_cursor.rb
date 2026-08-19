@@ -10,8 +10,8 @@ module Anthropic
     #   end
     #
     # @example
-    #   page_cursor.auto_paging_each do |agent|
-    #     puts(agent)
+    #   page_cursor.auto_paging_each do |file|
+    #     puts(file)
     #   end
     class PageCursor
       include Anthropic::Internal::Type::BasePage

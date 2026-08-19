@@ -13,7 +13,9 @@ module Anthropic
             scope_id: String,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
-          ).returns(Anthropic::Internal::Page[Anthropic::Beta::FileMetadata])
+          ).returns(
+            Anthropic::Internal::Page[Anthropic::Beta::BetaFileMetadata]
+          )
         end
         def list(
           # Query param: ID of the object to use as a cursor for pagination. When provided,
@@ -41,7 +43,7 @@ module Anthropic
             file_id: String,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
-          ).returns(Anthropic::Beta::DeletedFile)
+          ).returns(Anthropic::Beta::BetaDeletedFile)
         end
         def delete(
           # ID of the File.
@@ -75,7 +77,7 @@ module Anthropic
             file_id: String,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
-          ).returns(Anthropic::Beta::FileMetadata)
+          ).returns(Anthropic::Beta::BetaFileMetadata)
         end
         def retrieve_metadata(
           # ID of the File.
@@ -92,7 +94,7 @@ module Anthropic
             file: Anthropic::Internal::FileInput,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
-          ).returns(Anthropic::Beta::FileMetadata)
+          ).returns(Anthropic::Beta::BetaFileMetadata)
         end
         def upload(
           # Body param: The file to upload

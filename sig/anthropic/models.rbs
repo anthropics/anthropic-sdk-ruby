@@ -57,6 +57,86 @@ module Anthropic
 
   class BillingError = Anthropic::Models::BillingError
 
+  class BrowserCloseTabConfig = Anthropic::Models::BrowserCloseTabConfig
+
+  class BrowserDoubleClickConfig = Anthropic::Models::BrowserDoubleClickConfig
+
+  class BrowserFileUploadConfig = Anthropic::Models::BrowserFileUploadConfig
+
+  class BrowserFindConfig = Anthropic::Models::BrowserFindConfig
+
+  class BrowserFormInputConfig = Anthropic::Models::BrowserFormInputConfig
+
+  class BrowserGetPageTextConfig = Anthropic::Models::BrowserGetPageTextConfig
+
+  class BrowserHoldKeyConfig = Anthropic::Models::BrowserHoldKeyConfig
+
+  class BrowserHoverConfig = Anthropic::Models::BrowserHoverConfig
+
+  class BrowserJavascriptExecConfig = Anthropic::Models::BrowserJavascriptExecConfig
+
+  class BrowserKeyConfig = Anthropic::Models::BrowserKeyConfig
+
+  class BrowserLeftClickConfig = Anthropic::Models::BrowserLeftClickConfig
+
+  class BrowserLeftClickDragConfig = Anthropic::Models::BrowserLeftClickDragConfig
+
+  class BrowserLeftMouseDownConfig = Anthropic::Models::BrowserLeftMouseDownConfig
+
+  class BrowserLeftMouseUpConfig = Anthropic::Models::BrowserLeftMouseUpConfig
+
+  class BrowserListTabsConfig = Anthropic::Models::BrowserListTabsConfig
+
+  class BrowserMiddleClickConfig = Anthropic::Models::BrowserMiddleClickConfig
+
+  class BrowserMouseMoveConfig = Anthropic::Models::BrowserMouseMoveConfig
+
+  class BrowserNavigateConfig = Anthropic::Models::BrowserNavigateConfig
+
+  class BrowserNewTabConfig = Anthropic::Models::BrowserNewTabConfig
+
+  class BrowserReadConsoleConfig = Anthropic::Models::BrowserReadConsoleConfig
+
+  class BrowserReadNetworkConfig = Anthropic::Models::BrowserReadNetworkConfig
+
+  class BrowserReadPageConfig = Anthropic::Models::BrowserReadPageConfig
+
+  class BrowserRightClickConfig = Anthropic::Models::BrowserRightClickConfig
+
+  class BrowserScreenshotConfig = Anthropic::Models::BrowserScreenshotConfig
+
+  class BrowserScrollConfig = Anthropic::Models::BrowserScrollConfig
+
+  class BrowserScrollToConfig = Anthropic::Models::BrowserScrollToConfig
+
+  class BrowserStateBlockParam = Anthropic::Models::BrowserStateBlockParam
+
+  module BrowserStateChange = Anthropic::Models::BrowserStateChange
+
+  class BrowserStateChangeDownloadCompleted = Anthropic::Models::BrowserStateChangeDownloadCompleted
+
+  class BrowserStateChangeDownloadFailed = Anthropic::Models::BrowserStateChangeDownloadFailed
+
+  class BrowserStateChangeDownloadStarted = Anthropic::Models::BrowserStateChangeDownloadStarted
+
+  class BrowserStateChangeTabOpened = Anthropic::Models::BrowserStateChangeTabOpened
+
+  class BrowserStateTabEntry = Anthropic::Models::BrowserStateTabEntry
+
+  class BrowserSwitchTabConfig = Anthropic::Models::BrowserSwitchTabConfig
+
+  class BrowserToolset20260801 = Anthropic::Models::BrowserToolset20260801
+
+  class BrowserToolsetConfigs = Anthropic::Models::BrowserToolsetConfigs
+
+  class BrowserTripleClickConfig = Anthropic::Models::BrowserTripleClickConfig
+
+  class BrowserTypeConfig = Anthropic::Models::BrowserTypeConfig
+
+  class BrowserWaitConfig = Anthropic::Models::BrowserWaitConfig
+
+  class BrowserZoomConfig = Anthropic::Models::BrowserZoomConfig
+
   class CacheControlEphemeral = Anthropic::Models::CacheControlEphemeral
 
   class CacheCreation = Anthropic::Models::CacheCreation
@@ -123,7 +203,49 @@ module Anthropic
 
   class CompletionCreateParams = Anthropic::Models::CompletionCreateParams
 
+  class ComputerCursorPositionConfig = Anthropic::Models::ComputerCursorPositionConfig
+
+  class ComputerDoubleClickConfig = Anthropic::Models::ComputerDoubleClickConfig
+
+  class ComputerHoldKeyConfig = Anthropic::Models::ComputerHoldKeyConfig
+
+  class ComputerKeyConfig = Anthropic::Models::ComputerKeyConfig
+
+  class ComputerLeftClickConfig = Anthropic::Models::ComputerLeftClickConfig
+
+  class ComputerLeftClickDragConfig = Anthropic::Models::ComputerLeftClickDragConfig
+
+  class ComputerLeftMouseDownConfig = Anthropic::Models::ComputerLeftMouseDownConfig
+
+  class ComputerLeftMouseUpConfig = Anthropic::Models::ComputerLeftMouseUpConfig
+
+  class ComputerMiddleClickConfig = Anthropic::Models::ComputerMiddleClickConfig
+
+  class ComputerMouseMoveConfig = Anthropic::Models::ComputerMouseMoveConfig
+
+  class ComputerRightClickConfig = Anthropic::Models::ComputerRightClickConfig
+
+  class ComputerScreenshotConfig = Anthropic::Models::ComputerScreenshotConfig
+
+  class ComputerScrollConfig = Anthropic::Models::ComputerScrollConfig
+
+  class ComputerToolset20260801 = Anthropic::Models::ComputerToolset20260801
+
+  class ComputerToolsetConfigs = Anthropic::Models::ComputerToolsetConfigs
+
+  class ComputerTripleClickConfig = Anthropic::Models::ComputerTripleClickConfig
+
+  class ComputerTypeConfig = Anthropic::Models::ComputerTypeConfig
+
+  class ComputerWaitConfig = Anthropic::Models::ComputerWaitConfig
+
+  class ComputerZoomConfig = Anthropic::Models::ComputerZoomConfig
+
   class Container = Anthropic::Models::Container
+
+  class ContainerParams = Anthropic::Models::ContainerParams
+
+  class ContainerSkill = Anthropic::Models::ContainerSkill
 
   class ContainerUploadBlock = Anthropic::Models::ContainerUploadBlock
 
@@ -138,6 +260,10 @@ module Anthropic
   module ContentBlockSourceContent = Anthropic::Models::ContentBlockSourceContent
 
   class ContextManagementCapability = Anthropic::Models::ContextManagementCapability
+
+  class DeletedFile = Anthropic::Models::DeletedFile
+
+  class DeletedSkill = Anthropic::Models::DeletedSkill
 
   class DirectCaller = Anthropic::Models::DirectCaller
 
@@ -157,9 +283,27 @@ module Anthropic
 
   module ErrorType = Anthropic::Models::ErrorType
 
+  class FileDeleteParams = Anthropic::Models::FileDeleteParams
+
+  class FileDocumentSource = Anthropic::Models::FileDocumentSource
+
+  class FileDownloadParams = Anthropic::Models::FileDownloadParams
+
+  class FileImageSource = Anthropic::Models::FileImageSource
+
+  class FileListParams = Anthropic::Models::FileListParams
+
+  class FileMetadata = Anthropic::Models::FileMetadata
+
+  class FileRetrieveMetadataParams = Anthropic::Models::FileRetrieveMetadataParams
+
+  class FileUploadParams = Anthropic::Models::FileUploadParams
+
   class GatewayTimeoutError = Anthropic::Models::GatewayTimeoutError
 
   class ImageBlockParam = Anthropic::Models::ImageBlockParam
+
+  class ImageTransformationsParam = Anthropic::Models::ImageTransformationsParam
 
   class InputJSONDelta = Anthropic::Models::InputJSONDelta
 
@@ -176,6 +320,8 @@ module Anthropic
   module MessageCountTokensTool = Anthropic::Models::MessageCountTokensTool
 
   class MessageCreateParams = Anthropic::Models::MessageCreateParams
+
+  module MessageCreateParamsContainer = Anthropic::Models::MessageCreateParamsContainer
 
   class MessageDeltaUsage = Anthropic::Models::MessageDeltaUsage
 
@@ -246,6 +392,22 @@ module Anthropic
   class ServerToolUseBlockParam = Anthropic::Models::ServerToolUseBlockParam
 
   class SignatureDelta = Anthropic::Models::SignatureDelta
+
+  class Skill = Anthropic::Models::Skill
+
+  class SkillCreateParams = Anthropic::Models::SkillCreateParams
+
+  class SkillDeleteParams = Anthropic::Models::SkillDeleteParams
+
+  class SkillListParams = Anthropic::Models::SkillListParams
+
+  class SkillParams = Anthropic::Models::SkillParams
+
+  class SkillRetrieveParams = Anthropic::Models::SkillRetrieveParams
+
+  module Skills = Anthropic::Models::Skills
+
+  class SkillSource = Anthropic::Models::SkillSource
 
   module StopReason = Anthropic::Models::StopReason
 

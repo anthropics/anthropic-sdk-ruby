@@ -40,6 +40,23 @@ module Anthropic
         end
         attr_writer :cache_control
 
+        # Configures the transformations the server applies to this image before the model
+        # observes it. Each key names a condition the server transforms images for; its
+        # value selects the transformation applied. Omitted keys keep their default
+        # behavior, and an empty object is equivalent to omitting the field.
+        sig do
+          returns(T.nilable(Anthropic::Beta::BetaImageTransformationsParam))
+        end
+        attr_reader :transformations
+
+        sig do
+          params(
+            transformations:
+              T.nilable(Anthropic::Beta::BetaImageTransformationsParam::OrHash)
+          ).void
+        end
+        attr_writer :transformations
+
         sig do
           params(
             source:
@@ -50,6 +67,8 @@ module Anthropic
               ),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+            transformations:
+              T.nilable(Anthropic::Beta::BetaImageTransformationsParam::OrHash),
             type: Symbol
           ).returns(T.attached_class)
         end
@@ -57,6 +76,11 @@ module Anthropic
           source:,
           # Create a cache control breakpoint at this content block.
           cache_control: nil,
+          # Configures the transformations the server applies to this image before the model
+          # observes it. Each key names a condition the server transforms images for; its
+          # value selects the transformation applied. Omitted keys keep their default
+          # behavior, and an empty object is equivalent to omitting the field.
+          transformations: nil,
           type: :image
         )
         end
@@ -72,7 +96,9 @@ module Anthropic
                 ),
               type: Symbol,
               cache_control:
-                T.nilable(Anthropic::Beta::BetaCacheControlEphemeral)
+                T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
+              transformations:
+                T.nilable(Anthropic::Beta::BetaImageTransformationsParam)
             }
           )
         end

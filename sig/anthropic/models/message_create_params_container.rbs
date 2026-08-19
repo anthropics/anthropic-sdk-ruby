@@ -1,0 +1,11 @@
+module Anthropic
+  module Models
+    type message_create_params_container = Anthropic::ContainerParams | String
+
+    module MessageCreateParamsContainer
+      extend Anthropic::Internal::Type::Union
+
+      def self?.variants: -> ::Array[Anthropic::Models::message_create_params_container]
+    end
+  end
+end

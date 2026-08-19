@@ -41,12 +41,17 @@ module Anthropic
       sig { params(is_error: T::Boolean).void }
       attr_writer :is_error
 
+      # For a toolset member tool_result, the toolset family of the paired tool_use.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :toolset_name
+
       sig do
         params(
           tool_use_id: String,
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
           content: Anthropic::ToolResultBlockParam::Content::Variants,
           is_error: T::Boolean,
+          toolset_name: T.nilable(String),
           type: Symbol
         ).returns(T.attached_class)
       end
@@ -56,6 +61,8 @@ module Anthropic
         cache_control: nil,
         content: nil,
         is_error: nil,
+        # For a toolset member tool_result, the toolset family of the paired tool_use.
+        toolset_name: nil,
         type: :tool_result
       )
       end
@@ -67,7 +74,8 @@ module Anthropic
             type: Symbol,
             cache_control: T.nilable(Anthropic::CacheControlEphemeral),
             content: Anthropic::ToolResultBlockParam::Content::Variants,
-            is_error: T::Boolean
+            is_error: T::Boolean,
+            toolset_name: T.nilable(String)
           }
         )
       end
@@ -98,7 +106,8 @@ module Anthropic
                 Anthropic::ImageBlockParam,
                 Anthropic::SearchResultBlockParam,
                 Anthropic::DocumentBlockParam,
-                Anthropic::ToolReferenceBlockParam
+                Anthropic::ToolReferenceBlockParam,
+                Anthropic::BrowserStateBlockParam
               )
             end
 
@@ -140,20 +149,36 @@ module Anthropic
                 T.any(
                   T.any(
                     Anthropic::Base64ImageSource::OrHash,
-                    Anthropic::URLImageSource::OrHash
+                    Anthropic::URLImageSource::OrHash,
+                    Anthropic::FileImageSource::OrHash
                   ),
                   String,
                   T.any(
                     Anthropic::Base64PDFSource::OrHash,
                     Anthropic::PlainTextSource::OrHash,
                     Anthropic::ContentBlockSource::OrHash,
-                    Anthropic::URLPDFSource::OrHash
+                    Anthropic::URLPDFSource::OrHash,
+                    Anthropic::FileDocumentSource::OrHash
                   )
                 ),
+              transformations:
+                T.nilable(Anthropic::ImageTransformationsParam::OrHash),
               content: T::Array[Anthropic::TextBlockParam::OrHash],
               title: T.any(String, T.nilable(String)),
               context: T.nilable(String),
-              tool_name: String
+              tool_name: String,
+              tabs: T::Array[Anthropic::BrowserStateTabEntry::OrHash],
+              state_changes:
+                T.nilable(
+                  T::Array[
+                    T.any(
+                      Anthropic::BrowserStateChangeTabOpened::OrHash,
+                      Anthropic::BrowserStateChangeDownloadStarted::OrHash,
+                      Anthropic::BrowserStateChangeDownloadCompleted::OrHash,
+                      Anthropic::BrowserStateChangeDownloadFailed::OrHash
+                    )
+                  ]
+                )
             ).returns(
               Anthropic::ToolResultBlockParam::Content::Content::Variants
             )
@@ -165,10 +190,21 @@ module Anthropic
             cache_control: nil,
             citations: nil,
             source: nil,
+            # Configures the transformations the server applies to this image before the model
+            # observes it. Each key names a condition the server transforms images for; its
+            # value selects the transformation applied. Omitted keys keep their default
+            # behavior, and an empty object is equivalent to omitting the field.
+            transformations: nil,
             content: nil,
             title: nil,
             context: nil,
-            tool_name: nil
+            tool_name: nil,
+            # All tabs open in the browser after this call — the full inventory, not a delta.
+            # May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+            tabs: nil,
+            # Tabs opened and download state changes during this call. "Nothing to report" is
+            # expressed by omitting the field, never by an empty list.
+            state_changes: nil
           )
           end
         end

@@ -1,15 +1,30 @@
 module Anthropic
   module Models
-    type container = { id: String, expires_at: Time }
+    type container =
+      {
+        id: String,
+        expires_at: Time,
+        skills: ::Array[Anthropic::ContainerSkill]?
+      }
 
     class Container < Anthropic::Internal::Type::BaseModel
       attr_accessor id: String
 
       attr_accessor expires_at: Time
 
-      def initialize: (id: String, expires_at: Time) -> void
+      attr_accessor skills: ::Array[Anthropic::ContainerSkill]?
 
-      def to_hash: -> { id: String, expires_at: Time }
+      def initialize: (
+        id: String,
+        expires_at: Time,
+        skills: ::Array[Anthropic::ContainerSkill]?
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        expires_at: Time,
+        skills: ::Array[Anthropic::ContainerSkill]?
+      }
     end
   end
 end

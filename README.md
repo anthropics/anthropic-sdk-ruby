@@ -91,14 +91,14 @@ Request parameters that correspond to file uploads can be passed as raw contents
 require "pathname"
 
 # Use `Pathname` to send the filename and/or avoid paging a large file into memory:
-file_metadata = anthropic.beta.files.upload(file: Pathname("/path/to/file"))
+file_metadata = anthropic.files.upload(file: Pathname("/path/to/file"))
 
 # Alternatively, pass file contents or a `StringIO` directly:
-file_metadata = anthropic.beta.files.upload(file: File.read("/path/to/file"))
+file_metadata = anthropic.files.upload(file: File.read("/path/to/file"))
 
 # Or, to control the filename and/or content type:
 file = Anthropic::FilePart.new(File.read("/path/to/file"), filename: "/path/to/file", content_type: "…")
-file_metadata = anthropic.beta.files.upload(file: file)
+file_metadata = anthropic.files.upload(file: file)
 
 puts(file_metadata.id)
 ```

@@ -29,7 +29,13 @@ module Anthropic
       #   @return [Symbol, :tool_use]
       required :type, const: :tool_use
 
-      # @!method initialize(id:, caller_:, input:, name:, type: :tool_use)
+      # @!attribute toolset_name
+      #   For a toolset member tool_use, the toolset family.
+      #
+      #   @return [String, nil]
+      optional :toolset_name, String, nil?: true
+
+      # @!method initialize(id:, caller_:, input:, name:, toolset_name: nil, type: :tool_use)
       #   @param id [String]
       #
       #   @param caller_ [Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120] Tool invocation directly from the model.
@@ -37,6 +43,8 @@ module Anthropic
       #   @param input [Hash{Symbol=>Object}]
       #
       #   @param name [String]
+      #
+      #   @param toolset_name [String, nil] For a toolset member tool_use, the toolset family.
       #
       #   @param type [Symbol, :tool_use]
 

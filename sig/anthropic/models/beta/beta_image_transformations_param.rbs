@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaImageTransformationsParam = Beta::BetaImageTransformationsParam
+
+    module Beta
+      type beta_image_transformations_param =
+        {
+          oversized_image: Anthropic::Models::Beta::BetaImageTransformationsParam::oversized_image
+        }
+
+      class BetaImageTransformationsParam < Anthropic::Internal::Type::BaseModel
+        attr_reader oversized_image: Anthropic::Models::Beta::BetaImageTransformationsParam::oversized_image?
+
+        def oversized_image=: (
+          Anthropic::Models::Beta::BetaImageTransformationsParam::oversized_image
+        ) -> Anthropic::Models::Beta::BetaImageTransformationsParam::oversized_image
+
+        def initialize: (
+          ?oversized_image: Anthropic::Models::Beta::BetaImageTransformationsParam::oversized_image
+        ) -> void
+
+        def to_hash: -> {
+          oversized_image: Anthropic::Models::Beta::BetaImageTransformationsParam::oversized_image
+        }
+
+        type oversized_image = :downsize | :error
+
+        module OversizedImage
+          extend Anthropic::Internal::Type::Enum
+
+          DOWNSIZE: :downsize
+          ERROR: :error
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaImageTransformationsParam::oversized_image]
+        end
+      end
+    end
+  end
+end
