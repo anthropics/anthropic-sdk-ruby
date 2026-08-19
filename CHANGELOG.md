@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.64.0 (2026-08-19)
+
+Full Changelog: [v1.63.0...v1.64.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.63.0...v1.64.0)
+
+### Features
+
+* **api:** Files and Skills APIs are now GA; add computer use and browser use toolsets ([6878cd5](https://github.com/anthropics/anthropic-sdk-ruby/commit/6878cd5099c99f5dc8e600ec71a40b9194d384d7))
+
 ## 1.63.0 (2026-08-18)
 
 Full Changelog: [v1.62.0...v1.63.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.62.0...v1.63.0)
