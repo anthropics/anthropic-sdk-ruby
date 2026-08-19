@@ -1,0 +1,74 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsGrepToolConfigParams = Beta::BetaManagedAgentsGrepToolConfigParams
+
+    module Beta
+      type beta_managed_agents_grep_tool_config_params =
+        {
+          name: :grep,
+          enabled: bool?,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams::permission_policy?,
+          type: Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams::type_
+        }
+
+      class BetaManagedAgentsGrepToolConfigParams < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: :grep
+
+        attr_accessor enabled: bool?
+
+        attr_accessor permission_policy: Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams::permission_policy?
+
+        attr_reader type: Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams::type_?
+
+        def type=: (
+          Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams::type_
+        ) -> Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams::type_
+
+        def initialize: (
+          ?enabled: bool?,
+          ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams::permission_policy?,
+          ?type: Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams::type_,
+          ?name: :grep
+        ) -> void
+
+        def to_hash: -> {
+          name: :grep,
+          enabled: bool?,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams::permission_policy?,
+          type: Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams::type_
+        }
+
+        type permission_policy =
+          Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
+          | Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+
+        module PermissionPolicy
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams::permission_policy]
+
+          def self.new:
+            (
+              type: :always_allow | "always_allow"
+            ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
+            | (
+              type: :always_ask | "always_ask"
+            ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+            | (
+              type: Symbol | String
+            ) -> Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams::permission_policy
+        end
+
+        type type_ = :grep
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          GREP: :grep
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams::type_]
+        end
+      end
+    end
+  end
+end

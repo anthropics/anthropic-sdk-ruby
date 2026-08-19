@@ -254,7 +254,16 @@ module Anthropic
               configs:
                 T.any(
                   T::Array[
-                    Anthropic::Beta::BetaManagedAgentsAgentToolConfig::OrHash
+                    T.any(
+                      Anthropic::Beta::BetaManagedAgentsBashToolConfig::OrHash,
+                      Anthropic::Beta::BetaManagedAgentsEditToolConfig::OrHash,
+                      Anthropic::Beta::BetaManagedAgentsReadToolConfig::OrHash,
+                      Anthropic::Beta::BetaManagedAgentsWriteToolConfig::OrHash,
+                      Anthropic::Beta::BetaManagedAgentsGlobToolConfig::OrHash,
+                      Anthropic::Beta::BetaManagedAgentsGrepToolConfig::OrHash,
+                      Anthropic::Beta::BetaManagedAgentsWebFetchToolConfig::OrHash,
+                      Anthropic::Beta::BetaManagedAgentsWebSearchToolConfig::OrHash
+                    )
                   ],
                   T::Array[
                     Anthropic::Beta::BetaManagedAgentsMCPToolConfig::OrHash

@@ -6,9 +6,9 @@ module Anthropic
       class BetaManagedAgentsAgentToolset20260401 < Anthropic::Internal::Type::BaseModel
         # @!attribute configs
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfig>]
+        #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsBashToolConfig, Anthropic::Models::Beta::BetaManagedAgentsEditToolConfig, Anthropic::Models::Beta::BetaManagedAgentsReadToolConfig, Anthropic::Models::Beta::BetaManagedAgentsWriteToolConfig, Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfig, Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfig, Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfig, Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfig>]
         required :configs,
-                 -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaManagedAgentsAgentToolConfig] }
+                 -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaManagedAgentsAgentToolConfig] }
 
         # @!attribute default_config
         #   Resolved default configuration for agent tools.
@@ -22,7 +22,7 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsAgentToolset20260401::Type }
 
         # @!method initialize(configs:, default_config:, type:)
-        #   @param configs [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfig>]
+        #   @param configs [Array<Anthropic::Models::Beta::BetaManagedAgentsBashToolConfig, Anthropic::Models::Beta::BetaManagedAgentsEditToolConfig, Anthropic::Models::Beta::BetaManagedAgentsReadToolConfig, Anthropic::Models::Beta::BetaManagedAgentsWriteToolConfig, Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfig, Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfig, Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfig, Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfig>]
         #
         #   @param default_config [Anthropic::Models::Beta::BetaManagedAgentsAgentToolsetDefaultConfig] Resolved default configuration for agent tools.
         #

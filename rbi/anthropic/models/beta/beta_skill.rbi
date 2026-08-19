@@ -19,7 +19,7 @@ module Anthropic
         sig { returns(Anthropic::Beta::BetaSkill::Type::TaggedSymbol) }
         attr_accessor :type
 
-        # Skill version or 'latest' for most recent version
+        # The resolved version: a skill version ID for custom skills.
         sig { returns(String) }
         attr_accessor :version
 
@@ -36,7 +36,7 @@ module Anthropic
           skill_id:,
           # Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
           type:,
-          # Skill version or 'latest' for most recent version
+          # The resolved version: a skill version ID for custom skills.
           version:
         )
         end

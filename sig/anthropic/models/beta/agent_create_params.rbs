@@ -109,7 +109,7 @@ module Anthropic
           def self.new:
             (
               type: :agent_toolset_20260401 | "agent_toolset_20260401",
-              ?configs: ::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams],
+              ?configs: ::Array[Anthropic::Models::Beta::beta_managed_agents_agent_tool_config_params],
               ?default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams?
             ) -> Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params
             | (
@@ -126,7 +126,7 @@ module Anthropic
             ) -> Anthropic::Beta::BetaManagedAgentsCustomToolParams
             | (
               type: Symbol | String,
-              ?configs: ::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams]
+              ?configs: ::Array[Anthropic::Models::Beta::beta_managed_agents_agent_tool_config_params]
               | ::Array[Anthropic::Beta::BetaManagedAgentsMCPToolConfigParams],
               ?default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams?
               | Anthropic::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams?,

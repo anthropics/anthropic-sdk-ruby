@@ -181,7 +181,7 @@ module Anthropic
           #
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
           #
-          #   @option args [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams>, Array<Anthropic::Models::Beta::BetaManagedAgentsMCPToolConfigParams>] :configs Per-tool configuration overrides.
+          #   @option args [Array<Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsWriteToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams>, Array<Anthropic::Models::Beta::BetaManagedAgentsMCPToolConfigParams>] :configs Per-tool configuration overrides.
           #
           #   @option args [Anthropic::Models::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams, nil, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetDefaultConfigParams, nil] :default_config Default configuration for all tools in a toolset.
           #

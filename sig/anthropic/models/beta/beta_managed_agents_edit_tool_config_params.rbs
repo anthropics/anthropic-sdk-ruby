@@ -1,0 +1,74 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsEditToolConfigParams = Beta::BetaManagedAgentsEditToolConfigParams
+
+    module Beta
+      type beta_managed_agents_edit_tool_config_params =
+        {
+          name: :edit,
+          enabled: bool?,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams::permission_policy?,
+          type: Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams::type_
+        }
+
+      class BetaManagedAgentsEditToolConfigParams < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: :edit
+
+        attr_accessor enabled: bool?
+
+        attr_accessor permission_policy: Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams::permission_policy?
+
+        attr_reader type: Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams::type_?
+
+        def type=: (
+          Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams::type_
+        ) -> Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams::type_
+
+        def initialize: (
+          ?enabled: bool?,
+          ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams::permission_policy?,
+          ?type: Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams::type_,
+          ?name: :edit
+        ) -> void
+
+        def to_hash: -> {
+          name: :edit,
+          enabled: bool?,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams::permission_policy?,
+          type: Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams::type_
+        }
+
+        type permission_policy =
+          Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
+          | Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+
+        module PermissionPolicy
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams::permission_policy]
+
+          def self.new:
+            (
+              type: :always_allow | "always_allow"
+            ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
+            | (
+              type: :always_ask | "always_ask"
+            ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+            | (
+              type: Symbol | String
+            ) -> Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams::permission_policy
+        end
+
+        type type_ = :edit
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          EDIT: :edit
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams::type_]
+        end
+      end
+    end
+  end
+end

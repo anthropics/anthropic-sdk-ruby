@@ -189,7 +189,7 @@ module Anthropic
           #
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
           #
-          #   @option args [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfig>, Array<Anthropic::Models::Beta::BetaManagedAgentsMCPToolConfig>] :configs
+          #   @option args [Array<Anthropic::Models::Beta::BetaManagedAgentsBashToolConfig, Anthropic::Models::Beta::BetaManagedAgentsEditToolConfig, Anthropic::Models::Beta::BetaManagedAgentsReadToolConfig, Anthropic::Models::Beta::BetaManagedAgentsWriteToolConfig, Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfig, Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfig, Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfig, Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfig>, Array<Anthropic::Models::Beta::BetaManagedAgentsMCPToolConfig>] :configs
           #
           #   @option args [Anthropic::Models::Beta::BetaManagedAgentsAgentToolsetDefaultConfig, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetDefaultConfig] :default_config Resolved default configuration for agent tools.
           #

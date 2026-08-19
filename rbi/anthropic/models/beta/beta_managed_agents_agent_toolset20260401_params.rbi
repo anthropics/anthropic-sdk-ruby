@@ -26,7 +26,18 @@ module Anthropic
         sig do
           returns(
             T.nilable(
-              T::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams]
+              T::Array[
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsBashToolConfigParams,
+                  Anthropic::Beta::BetaManagedAgentsEditToolConfigParams,
+                  Anthropic::Beta::BetaManagedAgentsReadToolConfigParams,
+                  Anthropic::Beta::BetaManagedAgentsWriteToolConfigParams,
+                  Anthropic::Beta::BetaManagedAgentsGlobToolConfigParams,
+                  Anthropic::Beta::BetaManagedAgentsGrepToolConfigParams,
+                  Anthropic::Beta::BetaManagedAgentsWebFetchToolConfigParams,
+                  Anthropic::Beta::BetaManagedAgentsWebSearchToolConfigParams
+                )
+              ]
             )
           )
         end
@@ -36,7 +47,16 @@ module Anthropic
           params(
             configs:
               T::Array[
-                Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams::OrHash
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsBashToolConfigParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsEditToolConfigParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsReadToolConfigParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsWriteToolConfigParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsGlobToolConfigParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsGrepToolConfigParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsWebFetchToolConfigParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsWebSearchToolConfigParams::OrHash
+                )
               ]
           ).void
         end
@@ -70,7 +90,16 @@ module Anthropic
               Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params::Type::OrSymbol,
             configs:
               T::Array[
-                Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams::OrHash
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsBashToolConfigParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsEditToolConfigParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsReadToolConfigParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsWriteToolConfigParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsGlobToolConfigParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsGrepToolConfigParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsWebFetchToolConfigParams::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsWebSearchToolConfigParams::OrHash
+                )
               ],
             default_config:
               T.nilable(
@@ -94,7 +123,16 @@ module Anthropic
                 Anthropic::Beta::BetaManagedAgentsAgentToolset20260401Params::Type::OrSymbol,
               configs:
                 T::Array[
-                  Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams
+                  T.any(
+                    Anthropic::Beta::BetaManagedAgentsBashToolConfigParams,
+                    Anthropic::Beta::BetaManagedAgentsEditToolConfigParams,
+                    Anthropic::Beta::BetaManagedAgentsReadToolConfigParams,
+                    Anthropic::Beta::BetaManagedAgentsWriteToolConfigParams,
+                    Anthropic::Beta::BetaManagedAgentsGlobToolConfigParams,
+                    Anthropic::Beta::BetaManagedAgentsGrepToolConfigParams,
+                    Anthropic::Beta::BetaManagedAgentsWebFetchToolConfigParams,
+                    Anthropic::Beta::BetaManagedAgentsWebSearchToolConfigParams
+                  )
                 ],
               default_config:
                 T.nilable(

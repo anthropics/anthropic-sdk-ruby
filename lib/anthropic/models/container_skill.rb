@@ -16,7 +16,7 @@ module Anthropic
       required :type, enum: -> { Anthropic::ContainerSkill::Type }
 
       # @!attribute version
-      #   Skill version or 'latest' for most recent version
+      #   The resolved version: a skill version ID for custom skills.
       #
       #   @return [String]
       required :version, String
@@ -28,7 +28,7 @@ module Anthropic
       #
       #   @param type [Symbol, Anthropic::Models::ContainerSkill::Type] Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
       #
-      #   @param version [String] Skill version or 'latest' for most recent version
+      #   @param version [String] The resolved version: a skill version ID for custom skills.
 
       # Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
       #

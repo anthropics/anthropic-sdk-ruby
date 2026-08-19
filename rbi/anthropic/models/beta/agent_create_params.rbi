@@ -333,7 +333,16 @@ module Anthropic
               configs:
                 T.any(
                   T::Array[
-                    Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams::OrHash
+                    T.any(
+                      Anthropic::Beta::BetaManagedAgentsBashToolConfigParams::OrHash,
+                      Anthropic::Beta::BetaManagedAgentsEditToolConfigParams::OrHash,
+                      Anthropic::Beta::BetaManagedAgentsReadToolConfigParams::OrHash,
+                      Anthropic::Beta::BetaManagedAgentsWriteToolConfigParams::OrHash,
+                      Anthropic::Beta::BetaManagedAgentsGlobToolConfigParams::OrHash,
+                      Anthropic::Beta::BetaManagedAgentsGrepToolConfigParams::OrHash,
+                      Anthropic::Beta::BetaManagedAgentsWebFetchToolConfigParams::OrHash,
+                      Anthropic::Beta::BetaManagedAgentsWebSearchToolConfigParams::OrHash
+                    )
                   ],
                   T::Array[
                     Anthropic::Beta::BetaManagedAgentsMCPToolConfigParams::OrHash
