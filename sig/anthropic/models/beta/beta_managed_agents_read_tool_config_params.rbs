@@ -1,0 +1,74 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsReadToolConfigParams = Beta::BetaManagedAgentsReadToolConfigParams
+
+    module Beta
+      type beta_managed_agents_read_tool_config_params =
+        {
+          name: :read,
+          enabled: bool?,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams::permission_policy?,
+          type: Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams::type_
+        }
+
+      class BetaManagedAgentsReadToolConfigParams < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: :read
+
+        attr_accessor enabled: bool?
+
+        attr_accessor permission_policy: Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams::permission_policy?
+
+        attr_reader type: Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams::type_?
+
+        def type=: (
+          Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams::type_
+        ) -> Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams::type_
+
+        def initialize: (
+          ?enabled: bool?,
+          ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams::permission_policy?,
+          ?type: Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams::type_,
+          ?name: :read
+        ) -> void
+
+        def to_hash: -> {
+          name: :read,
+          enabled: bool?,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams::permission_policy?,
+          type: Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams::type_
+        }
+
+        type permission_policy =
+          Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
+          | Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+
+        module PermissionPolicy
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams::permission_policy]
+
+          def self.new:
+            (
+              type: :always_allow | "always_allow"
+            ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
+            | (
+              type: :always_ask | "always_ask"
+            ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+            | (
+              type: Symbol | String
+            ) -> Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams::permission_policy
+        end
+
+        type type_ = :read
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          READ: :read
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams::type_]
+        end
+      end
+    end
+  end
+end

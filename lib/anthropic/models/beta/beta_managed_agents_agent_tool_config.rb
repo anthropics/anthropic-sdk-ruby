@@ -3,88 +3,82 @@
 module Anthropic
   module Models
     module Beta
-      class BetaManagedAgentsAgentToolConfig < Anthropic::Internal::Type::BaseModel
-        # @!attribute enabled
+      # Configuration for a specific agent tool.
+      module BetaManagedAgentsAgentToolConfig
+        extend Anthropic::Internal::Type::Union
+
+        discriminator :type
+
+        # Configuration for the bash tool.
+        variant :bash, -> { Anthropic::Beta::BetaManagedAgentsBashToolConfig }
+
+        # Configuration for the edit tool.
+        variant :edit, -> { Anthropic::Beta::BetaManagedAgentsEditToolConfig }
+
+        # Configuration for the read tool.
+        variant :read, -> { Anthropic::Beta::BetaManagedAgentsReadToolConfig }
+
+        # Configuration for the write tool.
+        variant :write, -> { Anthropic::Beta::BetaManagedAgentsWriteToolConfig }
+
+        # Configuration for the glob tool.
+        variant :glob, -> { Anthropic::Beta::BetaManagedAgentsGlobToolConfig }
+
+        # Configuration for the grep tool.
+        variant :grep, -> { Anthropic::Beta::BetaManagedAgentsGrepToolConfig }
+
+        # Configuration for the web_fetch tool.
+        variant :web_fetch, -> { Anthropic::Beta::BetaManagedAgentsWebFetchToolConfig }
+
+        # Configuration for the web_search tool.
+        variant :web_search, -> { Anthropic::Beta::BetaManagedAgentsWebSearchToolConfig }
+
+        # @!method self.variants
+        #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsBashToolConfig, Anthropic::Models::Beta::BetaManagedAgentsEditToolConfig, Anthropic::Models::Beta::BetaManagedAgentsReadToolConfig, Anthropic::Models::Beta::BetaManagedAgentsWriteToolConfig, Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfig, Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfig, Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfig, Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfig)]
+
+        # Creates a new instance of the variant class whose `type` matches the given
+        # value, passing the remaining arguments to its constructor.
         #
-        #   @return [Boolean]
-        required :enabled, Anthropic::Internal::Type::Boolean
-
-        # @!attribute name
-        #   Built-in agent tool identifier.
+        # @param type [Symbol, String]
         #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfig::Name]
-        required :name, enum: -> { Anthropic::Beta::BetaManagedAgentsAgentToolConfig::Name }
-
-        # @!attribute permission_policy
-        #   Permission policy for tool execution.
+        # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
         #
-        #   @return [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy]
-        required :permission_policy,
-                 union: -> { Anthropic::Beta::BetaManagedAgentsAgentToolConfig::PermissionPolicy }
-
-        # @!method initialize(enabled:, name:, permission_policy:)
-        #   Configuration for a specific agent tool.
+        #   @option args [Boolean] :enabled
         #
-        #   @param enabled [Boolean]
+        #   @option args [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy] :permission_policy Permission policy for tool execution.
         #
-        #   @param name [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfig::Name] Built-in agent tool identifier.
+        #   @option args [Symbol, :bash, Symbol, :edit, Symbol, :read, Symbol, :write, Symbol, :glob, Symbol, :grep, Symbol, :web_fetch, Symbol, :web_search] :name
         #
-        #   @param permission_policy [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy] Permission policy for tool execution.
-
-        # Built-in agent tool identifier.
+        #   @option args [Array<String>] :allowed_domains
         #
-        # @see Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfig#name
-        module Name
-          extend Anthropic::Internal::Type::Enum
-
-          BASH = :bash
-          EDIT = :edit
-          READ = :read
-          WRITE = :write
-          GLOB = :glob
-          GREP = :grep
-          WEB_FETCH = :web_fetch
-          WEB_SEARCH = :web_search
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
-
-        # Permission policy for tool execution.
+        #   @option args [Array<String>] :blocked_domains
         #
-        # @see Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfig#permission_policy
-        module PermissionPolicy
-          extend Anthropic::Internal::Type::Union
-
-          discriminator :type
-
-          # Tool calls are automatically approved without user confirmation.
-          variant :always_allow, -> { Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy }
-
-          # Tool calls require user confirmation before execution.
-          variant :always_ask, -> { Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy }
-
-          # @!method self.variants
-          #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy)]
-
-          # Creates a new instance of the variant class whose `type` matches the given
-          # value, passing the remaining arguments to its constructor.
-          #
-          # @param type [Symbol, String]
-          #
-          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
-          #
-          # @raise [ArgumentError]
-          # @return [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy]
-          def self.new(type:, **args)
-            case type.to_sym
-            when :always_allow
-              Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy.new(**args)
-            when :always_ask
-              Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy.new(**args)
-            else
-              raise ArgumentError, "unknown type: #{type}"
-            end
+        #   @option args [Integer, nil] :max_content_tokens
+        #
+        #   @option args [Anthropic::Models::Beta::BetaManagedAgentsUserLocation, nil] :user_location Approximate user location for search result localization.
+        #
+        # @raise [ArgumentError]
+        # @return [Anthropic::Models::Beta::BetaManagedAgentsBashToolConfig, Anthropic::Models::Beta::BetaManagedAgentsEditToolConfig, Anthropic::Models::Beta::BetaManagedAgentsReadToolConfig, Anthropic::Models::Beta::BetaManagedAgentsWriteToolConfig, Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfig, Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfig, Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfig, Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfig]
+        def self.new(type:, **args)
+          case type.to_sym
+          when :bash
+            Anthropic::Beta::BetaManagedAgentsBashToolConfig.new(**args)
+          when :edit
+            Anthropic::Beta::BetaManagedAgentsEditToolConfig.new(**args)
+          when :read
+            Anthropic::Beta::BetaManagedAgentsReadToolConfig.new(**args)
+          when :write
+            Anthropic::Beta::BetaManagedAgentsWriteToolConfig.new(**args)
+          when :glob
+            Anthropic::Beta::BetaManagedAgentsGlobToolConfig.new(**args)
+          when :grep
+            Anthropic::Beta::BetaManagedAgentsGrepToolConfig.new(**args)
+          when :web_fetch
+            Anthropic::Beta::BetaManagedAgentsWebFetchToolConfig.new(**args)
+          when :web_search
+            Anthropic::Beta::BetaManagedAgentsWebSearchToolConfig.new(**args)
+          else
+            raise ArgumentError, "unknown type: #{type}"
           end
         end
       end

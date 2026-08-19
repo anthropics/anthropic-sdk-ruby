@@ -1,0 +1,79 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsWebFetchToolConfig = Beta::BetaManagedAgentsWebFetchToolConfig
+
+    module Beta
+      type beta_managed_agents_web_fetch_tool_config =
+        {
+          enabled: bool,
+          name: :web_fetch,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfig::permission_policy,
+          type: :web_fetch,
+          allowed_domains: ::Array[String],
+          blocked_domains: ::Array[String],
+          max_content_tokens: Integer?
+        }
+
+      class BetaManagedAgentsWebFetchToolConfig < Anthropic::Internal::Type::BaseModel
+        attr_accessor enabled: bool
+
+        attr_accessor name: :web_fetch
+
+        attr_accessor permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfig::permission_policy
+
+        attr_accessor type: :web_fetch
+
+        attr_reader allowed_domains: ::Array[String]?
+
+        def allowed_domains=: (::Array[String]) -> ::Array[String]
+
+        attr_reader blocked_domains: ::Array[String]?
+
+        def blocked_domains=: (::Array[String]) -> ::Array[String]
+
+        attr_accessor max_content_tokens: Integer?
+
+        def initialize: (
+          enabled: bool,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfig::permission_policy,
+          ?allowed_domains: ::Array[String],
+          ?blocked_domains: ::Array[String],
+          ?max_content_tokens: Integer?,
+          ?name: :web_fetch,
+          ?type: :web_fetch
+        ) -> void
+
+        def to_hash: -> {
+          enabled: bool,
+          name: :web_fetch,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfig::permission_policy,
+          type: :web_fetch,
+          allowed_domains: ::Array[String],
+          blocked_domains: ::Array[String],
+          max_content_tokens: Integer?
+        }
+
+        type permission_policy =
+          Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
+          | Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+
+        module PermissionPolicy
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfig::permission_policy]
+
+          def self.new:
+            (
+              type: :always_allow | "always_allow"
+            ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
+            | (
+              type: :always_ask | "always_ask"
+            ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+            | (
+              type: Symbol | String
+            ) -> Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfig::permission_policy
+        end
+      end
+    end
+  end
+end

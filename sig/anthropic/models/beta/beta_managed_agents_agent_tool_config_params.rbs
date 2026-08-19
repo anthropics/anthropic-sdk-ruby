@@ -1,79 +1,102 @@
 module Anthropic
   module Models
-    class BetaManagedAgentsAgentToolConfigParams = Beta::BetaManagedAgentsAgentToolConfigParams
+    module BetaManagedAgentsAgentToolConfigParams = Beta::BetaManagedAgentsAgentToolConfigParams
 
     module Beta
       type beta_managed_agents_agent_tool_config_params =
-        {
-          name: Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::name_,
-          enabled: bool?,
-          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::permission_policy?
-        }
+        Anthropic::Beta::BetaManagedAgentsBashToolConfigParams
+        | Anthropic::Beta::BetaManagedAgentsEditToolConfigParams
+        | Anthropic::Beta::BetaManagedAgentsReadToolConfigParams
+        | Anthropic::Beta::BetaManagedAgentsWriteToolConfigParams
+        | Anthropic::Beta::BetaManagedAgentsGlobToolConfigParams
+        | Anthropic::Beta::BetaManagedAgentsGrepToolConfigParams
+        | Anthropic::Beta::BetaManagedAgentsWebFetchToolConfigParams
+        | Anthropic::Beta::BetaManagedAgentsWebSearchToolConfigParams
 
-      class BetaManagedAgentsAgentToolConfigParams < Anthropic::Internal::Type::BaseModel
-        attr_accessor name: Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::name_
+      module BetaManagedAgentsAgentToolConfigParams
+        extend Anthropic::Internal::Type::Union
 
-        attr_accessor enabled: bool?
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_agent_tool_config_params]
 
-        attr_accessor permission_policy: Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::permission_policy?
-
-        def initialize: (
-          name: Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::name_,
-          ?enabled: bool?,
-          ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::permission_policy?
-        ) -> void
-
-        def to_hash: -> {
-          name: Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::name_,
-          enabled: bool?,
-          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::permission_policy?
-        }
-
-        type name_ =
-          :bash
-          | :edit
-          | :read
-          | :write
-          | :glob
-          | :grep
-          | :web_fetch
-          | :web_search
-
-        module Name
-          extend Anthropic::Internal::Type::Enum
-
-          BASH: :bash
-          EDIT: :edit
-          READ: :read
-          WRITE: :write
-          GLOB: :glob
-          GREP: :grep
-          WEB_FETCH: :web_fetch
-          WEB_SEARCH: :web_search
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::name_]
-        end
-
-        type permission_policy =
-          Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
-          | Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
-
-        module PermissionPolicy
-          extend Anthropic::Internal::Type::Union
-
-          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::permission_policy]
-
-          def self.new:
-            (
-              type: :always_allow | "always_allow"
-            ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
-            | (
-              type: :always_ask | "always_ask"
-            ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
-            | (
-              type: Symbol | String
-            ) -> Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::permission_policy
-        end
+        def self.new:
+          (
+            type: :bash | "bash",
+            ?enabled: bool?,
+            ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams::permission_policy?,
+            ?name: :bash
+          ) -> Anthropic::Beta::BetaManagedAgentsBashToolConfigParams
+          | (
+            type: :edit | "edit",
+            ?enabled: bool?,
+            ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams::permission_policy?,
+            ?name: :edit
+          ) -> Anthropic::Beta::BetaManagedAgentsEditToolConfigParams
+          | (
+            type: :read | "read",
+            ?enabled: bool?,
+            ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams::permission_policy?,
+            ?name: :read
+          ) -> Anthropic::Beta::BetaManagedAgentsReadToolConfigParams
+          | (
+            type: :write | "write",
+            ?enabled: bool?,
+            ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWriteToolConfigParams::permission_policy?,
+            ?name: :write
+          ) -> Anthropic::Beta::BetaManagedAgentsWriteToolConfigParams
+          | (
+            type: :glob | "glob",
+            ?enabled: bool?,
+            ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams::permission_policy?,
+            ?name: :glob
+          ) -> Anthropic::Beta::BetaManagedAgentsGlobToolConfigParams
+          | (
+            type: :grep | "grep",
+            ?enabled: bool?,
+            ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams::permission_policy?,
+            ?name: :grep
+          ) -> Anthropic::Beta::BetaManagedAgentsGrepToolConfigParams
+          | (
+            type: :web_fetch | "web_fetch",
+            ?allowed_domains: ::Array[String],
+            ?blocked_domains: ::Array[String],
+            ?enabled: bool?,
+            ?max_content_tokens: Integer?,
+            ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams::permission_policy?,
+            ?name: :web_fetch
+          ) -> Anthropic::Beta::BetaManagedAgentsWebFetchToolConfigParams
+          | (
+            type: :web_search | "web_search",
+            ?allowed_domains: ::Array[String],
+            ?blocked_domains: ::Array[String],
+            ?enabled: bool?,
+            ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams::permission_policy?,
+            ?user_location: Anthropic::Beta::BetaManagedAgentsUserLocation?,
+            ?name: :web_search
+          ) -> Anthropic::Beta::BetaManagedAgentsWebSearchToolConfigParams
+          | (
+            type: Symbol | String,
+            name: :bash
+            | :edit
+            | :read
+            | :write
+            | :glob
+            | :grep
+            | :web_fetch
+            | :web_search,
+            ?enabled: bool?,
+            ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams::permission_policy?
+            | Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams::permission_policy?
+            | Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams::permission_policy?
+            | Anthropic::Models::Beta::BetaManagedAgentsWriteToolConfigParams::permission_policy?
+            | Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams::permission_policy?
+            | Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams::permission_policy?
+            | Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams::permission_policy?
+            | Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams::permission_policy?,
+            ?allowed_domains: ::Array[String],
+            ?blocked_domains: ::Array[String],
+            ?max_content_tokens: Integer?,
+            ?user_location: Anthropic::Beta::BetaManagedAgentsUserLocation?
+          ) -> Anthropic::Models::Beta::beta_managed_agents_agent_tool_config_params
       end
     end
   end

@@ -1,0 +1,74 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsBashToolConfigParams = Beta::BetaManagedAgentsBashToolConfigParams
+
+    module Beta
+      type beta_managed_agents_bash_tool_config_params =
+        {
+          name: :bash,
+          enabled: bool?,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams::permission_policy?,
+          type: Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams::type_
+        }
+
+      class BetaManagedAgentsBashToolConfigParams < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: :bash
+
+        attr_accessor enabled: bool?
+
+        attr_accessor permission_policy: Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams::permission_policy?
+
+        attr_reader type: Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams::type_?
+
+        def type=: (
+          Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams::type_
+        ) -> Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams::type_
+
+        def initialize: (
+          ?enabled: bool?,
+          ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams::permission_policy?,
+          ?type: Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams::type_,
+          ?name: :bash
+        ) -> void
+
+        def to_hash: -> {
+          name: :bash,
+          enabled: bool?,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams::permission_policy?,
+          type: Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams::type_
+        }
+
+        type permission_policy =
+          Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
+          | Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+
+        module PermissionPolicy
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams::permission_policy]
+
+          def self.new:
+            (
+              type: :always_allow | "always_allow"
+            ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
+            | (
+              type: :always_ask | "always_ask"
+            ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+            | (
+              type: Symbol | String
+            ) -> Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams::permission_policy
+        end
+
+        type type_ = :bash
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          BASH: :bash
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams::type_]
+        end
+      end
+    end
+  end
+end

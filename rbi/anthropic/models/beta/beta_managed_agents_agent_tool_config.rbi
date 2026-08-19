@@ -5,166 +5,65 @@ module Anthropic
     BetaManagedAgentsAgentToolConfig = Beta::BetaManagedAgentsAgentToolConfig
 
     module Beta
-      class BetaManagedAgentsAgentToolConfig < Anthropic::Internal::Type::BaseModel
-        OrHash =
+      # Configuration for a specific agent tool.
+      module BetaManagedAgentsAgentToolConfig
+        extend Anthropic::Internal::Type::Union
+
+        Variants =
           T.type_alias do
             T.any(
-              Anthropic::Beta::BetaManagedAgentsAgentToolConfig,
-              Anthropic::Internal::AnyHash
+              Anthropic::Beta::BetaManagedAgentsBashToolConfig,
+              Anthropic::Beta::BetaManagedAgentsEditToolConfig,
+              Anthropic::Beta::BetaManagedAgentsReadToolConfig,
+              Anthropic::Beta::BetaManagedAgentsWriteToolConfig,
+              Anthropic::Beta::BetaManagedAgentsGlobToolConfig,
+              Anthropic::Beta::BetaManagedAgentsGrepToolConfig,
+              Anthropic::Beta::BetaManagedAgentsWebFetchToolConfig,
+              Anthropic::Beta::BetaManagedAgentsWebSearchToolConfig
             )
           end
 
-        sig { returns(T::Boolean) }
-        attr_accessor :enabled
-
-        # Built-in agent tool identifier.
         sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsAgentToolConfig::Name::TaggedSymbol
+          override.returns(
+            T::Array[
+              Anthropic::Beta::BetaManagedAgentsAgentToolConfig::Variants
+            ]
           )
         end
-        attr_accessor :name
-
-        # Permission policy for tool execution.
-        sig do
-          returns(
-            Anthropic::Beta::BetaManagedAgentsAgentToolConfig::PermissionPolicy::Variants
-          )
+        def self.variants
         end
-        attr_accessor :permission_policy
 
-        # Configuration for a specific agent tool.
+        # Creates a new instance of the variant class whose `type` matches the given
+        # value, passing the remaining arguments to its constructor.
         sig do
           params(
+            type: T.any(Symbol, String),
             enabled: T::Boolean,
-            name:
-              Anthropic::Beta::BetaManagedAgentsAgentToolConfig::Name::OrSymbol,
             permission_policy:
               T.any(
                 Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy::OrHash,
                 Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy::OrHash
-              )
-          ).returns(T.attached_class)
+              ),
+            name: Symbol,
+            allowed_domains: T::Array[String],
+            blocked_domains: T::Array[String],
+            max_content_tokens: T.nilable(Integer),
+            user_location:
+              T.nilable(Anthropic::Beta::BetaManagedAgentsUserLocation::OrHash)
+          ).returns(Anthropic::Beta::BetaManagedAgentsAgentToolConfig::Variants)
         end
         def self.new(
+          type:,
           enabled:,
-          # Built-in agent tool identifier.
-          name:,
           # Permission policy for tool execution.
-          permission_policy:
+          permission_policy:,
+          name:,
+          allowed_domains: nil,
+          blocked_domains: nil,
+          max_content_tokens: nil,
+          # Approximate user location for search result localization.
+          user_location: nil
         )
-        end
-
-        sig do
-          override.returns(
-            {
-              enabled: T::Boolean,
-              name:
-                Anthropic::Beta::BetaManagedAgentsAgentToolConfig::Name::TaggedSymbol,
-              permission_policy:
-                Anthropic::Beta::BetaManagedAgentsAgentToolConfig::PermissionPolicy::Variants
-            }
-          )
-        end
-        def to_hash
-        end
-
-        # Built-in agent tool identifier.
-        module Name
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::BetaManagedAgentsAgentToolConfig::Name
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          BASH =
-            T.let(
-              :bash,
-              Anthropic::Beta::BetaManagedAgentsAgentToolConfig::Name::TaggedSymbol
-            )
-          EDIT =
-            T.let(
-              :edit,
-              Anthropic::Beta::BetaManagedAgentsAgentToolConfig::Name::TaggedSymbol
-            )
-          READ =
-            T.let(
-              :read,
-              Anthropic::Beta::BetaManagedAgentsAgentToolConfig::Name::TaggedSymbol
-            )
-          WRITE =
-            T.let(
-              :write,
-              Anthropic::Beta::BetaManagedAgentsAgentToolConfig::Name::TaggedSymbol
-            )
-          GLOB =
-            T.let(
-              :glob,
-              Anthropic::Beta::BetaManagedAgentsAgentToolConfig::Name::TaggedSymbol
-            )
-          GREP =
-            T.let(
-              :grep,
-              Anthropic::Beta::BetaManagedAgentsAgentToolConfig::Name::TaggedSymbol
-            )
-          WEB_FETCH =
-            T.let(
-              :web_fetch,
-              Anthropic::Beta::BetaManagedAgentsAgentToolConfig::Name::TaggedSymbol
-            )
-          WEB_SEARCH =
-            T.let(
-              :web_search,
-              Anthropic::Beta::BetaManagedAgentsAgentToolConfig::Name::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsAgentToolConfig::Name::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
-        end
-
-        # Permission policy for tool execution.
-        module PermissionPolicy
-          extend Anthropic::Internal::Type::Union
-
-          Variants =
-            T.type_alias do
-              T.any(
-                Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy,
-                Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
-              )
-            end
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaManagedAgentsAgentToolConfig::PermissionPolicy::Variants
-              ]
-            )
-          end
-          def self.variants
-          end
-
-          # Creates a new instance of the variant class whose `type` matches the given
-          # value, passing the remaining arguments to its constructor.
-          sig do
-            params(type: T.any(Symbol, String)).returns(
-              Anthropic::Beta::BetaManagedAgentsAgentToolConfig::PermissionPolicy::Variants
-            )
-          end
-          def self.new(type:)
-          end
         end
       end
     end
