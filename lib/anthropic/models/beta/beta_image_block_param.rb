@@ -20,10 +20,24 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
-        # @!method initialize(source:, cache_control: nil, type: :image)
+        # @!attribute transformations
+        #   Configures the transformations the server applies to this image before the model
+        #   observes it. Each key names a condition the server transforms images for; its
+        #   value selects the transformation applied. Omitted keys keep their default
+        #   behavior, and an empty object is equivalent to omitting the field.
+        #
+        #   @return [Anthropic::Models::Beta::BetaImageTransformationsParam, nil]
+        optional :transformations, -> { Anthropic::Beta::BetaImageTransformationsParam }, nil?: true
+
+        # @!method initialize(source:, cache_control: nil, transformations: nil, type: :image)
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaImageBlockParam} for more details.
+        #
         #   @param source [Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource, Anthropic::Models::Beta::BetaFileImageSource]
         #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
+        #
+        #   @param transformations [Anthropic::Models::Beta::BetaImageTransformationsParam, nil] Configures the transformations the server applies to this image before the model
         #
         #   @param type [Symbol, :image]
 

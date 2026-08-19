@@ -7,7 +7,8 @@ module Anthropic
         {
           source: Anthropic::Models::Beta::BetaImageBlockParam::source,
           type: :image,
-          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          transformations: Anthropic::Beta::BetaImageTransformationsParam?
         }
 
       class BetaImageBlockParam < Anthropic::Internal::Type::BaseModel
@@ -17,16 +18,20 @@ module Anthropic
 
         attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
 
+        attr_accessor transformations: Anthropic::Beta::BetaImageTransformationsParam?
+
         def initialize: (
           source: Anthropic::Models::Beta::BetaImageBlockParam::source,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?transformations: Anthropic::Beta::BetaImageTransformationsParam?,
           ?type: :image
         ) -> void
 
         def to_hash: -> {
           source: Anthropic::Models::Beta::BetaImageBlockParam::source,
           type: :image,
-          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          transformations: Anthropic::Beta::BetaImageTransformationsParam?
         }
 
         type source =

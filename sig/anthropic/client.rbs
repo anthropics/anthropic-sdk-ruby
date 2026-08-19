@@ -20,6 +20,10 @@ module Anthropic
 
     attr_reader models: Anthropic::Resources::Models
 
+    attr_reader files: Anthropic::Resources::Files
+
+    attr_reader skills: Anthropic::Resources::Skills
+
     attr_reader beta: Anthropic::Resources::Beta
 
     private def auth_headers: -> ::Hash[String, String]

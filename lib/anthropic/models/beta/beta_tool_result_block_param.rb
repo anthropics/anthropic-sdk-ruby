@@ -22,7 +22,7 @@ module Anthropic
 
         # @!attribute content
         #
-        #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaSearchResultBlockParam, Anthropic::Models::Beta::BetaRequestDocumentBlock, Anthropic::Models::Beta::BetaToolReferenceBlockParam>, nil]
+        #   @return [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaSearchResultBlockParam, Anthropic::Models::Beta::BetaRequestDocumentBlock, Anthropic::Models::Beta::BetaToolReferenceBlockParam, Anthropic::Models::Beta::BetaBrowserStateBlockParam>, nil]
         optional :content, union: -> { Anthropic::Beta::BetaToolResultBlockParam::Content }
 
         # @!attribute is_error
@@ -30,14 +30,22 @@ module Anthropic
         #   @return [Boolean, nil]
         optional :is_error, Anthropic::Internal::Type::Boolean
 
-        # @!method initialize(tool_use_id:, cache_control: nil, content: nil, is_error: nil, type: :tool_result)
+        # @!attribute toolset_name
+        #   For a toolset member tool_result, the toolset family of the paired tool_use.
+        #
+        #   @return [String, nil]
+        optional :toolset_name, String, nil?: true
+
+        # @!method initialize(tool_use_id:, cache_control: nil, content: nil, is_error: nil, toolset_name: nil, type: :tool_result)
         #   @param tool_use_id [String]
         #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
-        #   @param content [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaSearchResultBlockParam, Anthropic::Models::Beta::BetaRequestDocumentBlock, Anthropic::Models::Beta::BetaToolReferenceBlockParam>]
+        #   @param content [String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaSearchResultBlockParam, Anthropic::Models::Beta::BetaRequestDocumentBlock, Anthropic::Models::Beta::BetaToolReferenceBlockParam, Anthropic::Models::Beta::BetaBrowserStateBlockParam>]
         #
         #   @param is_error [Boolean]
+        #
+        #   @param toolset_name [String, nil] For a toolset member tool_result, the toolset family of the paired tool_use.
         #
         #   @param type [Symbol, :tool_result]
 
@@ -66,11 +74,24 @@ module Anthropic
             # Tool reference block that can be included in tool_result content.
             variant :tool_reference, -> { Anthropic::Beta::BetaToolReferenceBlockParam }
 
+            # The caller's browser state after a browser toolset member call —
+            # the full inventory of open tabs, which tab is active, and any side
+            # effects (tabs opened, download state changes) the call produced.
+            #
+            # At most one per `tool_result`, only on a non-error result answering a
+            # browser toolset member `tool_use`. The server renders the
+            # model-visible text from it; the model never sees the raw fields.
+            variant :browser_state, -> { Anthropic::Beta::BetaBrowserStateBlockParam }
+
             # @!method self.variants
-            #   @return [Array(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaSearchResultBlockParam, Anthropic::Models::Beta::BetaRequestDocumentBlock, Anthropic::Models::Beta::BetaToolReferenceBlockParam)]
+            #   @return [Array(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaSearchResultBlockParam, Anthropic::Models::Beta::BetaRequestDocumentBlock, Anthropic::Models::Beta::BetaToolReferenceBlockParam, Anthropic::Models::Beta::BetaBrowserStateBlockParam)]
 
             # Creates a new instance of the variant class whose `type` matches the given
             # value, passing the remaining arguments to its constructor.
+            #
+            # Some parameter documentations has been truncated, see
+            # {Anthropic::Models::Beta::BetaToolResultBlockParam::Content::Content} for more
+            # details.
             #
             # @param type [Symbol, String]
             #
@@ -84,6 +105,8 @@ module Anthropic
             #
             #   @option args [Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource, Anthropic::Models::Beta::BetaFileImageSource, String, Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource, Anthropic::Models::Beta::BetaContentBlockSource, Anthropic::Models::Beta::BetaURLPDFSource, Anthropic::Models::Beta::BetaFileDocumentSource] :source
             #
+            #   @option args [Anthropic::Models::Beta::BetaImageTransformationsParam, nil] :transformations Configures the transformations the server applies to this image before the model
+            #
             #   @option args [Array<Anthropic::Models::Beta::BetaTextBlockParam>] :content
             #
             #   @option args [String, String, nil] :title
@@ -92,8 +115,12 @@ module Anthropic
             #
             #   @option args [String] :tool_name
             #
+            #   @option args [Array<Anthropic::Models::Beta::BetaBrowserStateTabEntry>] :tabs All tabs open in the browser after this call — the full inventory, not a delta.
+            #
+            #   @option args [Array<Anthropic::Models::Beta::BetaBrowserStateChangeTabOpened, Anthropic::Models::Beta::BetaBrowserStateChangeDownloadStarted, Anthropic::Models::Beta::BetaBrowserStateChangeDownloadCompleted, Anthropic::Models::Beta::BetaBrowserStateChangeDownloadFailed>, nil] :state_changes Tabs opened and download state changes during this call. "Nothing to report" is
+            #
             # @raise [ArgumentError]
-            # @return [Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaSearchResultBlockParam, Anthropic::Models::Beta::BetaRequestDocumentBlock, Anthropic::Models::Beta::BetaToolReferenceBlockParam]
+            # @return [Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaSearchResultBlockParam, Anthropic::Models::Beta::BetaRequestDocumentBlock, Anthropic::Models::Beta::BetaToolReferenceBlockParam, Anthropic::Models::Beta::BetaBrowserStateBlockParam]
             def self.new(type:, **args)
               case type.to_sym
               when :text
@@ -106,6 +133,8 @@ module Anthropic
                 Anthropic::Beta::BetaRequestDocumentBlock.new(**args)
               when :tool_reference
                 Anthropic::Beta::BetaToolReferenceBlockParam.new(**args)
+              when :browser_state
+                Anthropic::Beta::BetaBrowserStateBlockParam.new(**args)
               else
                 raise ArgumentError, "unknown type: #{type}"
               end
@@ -113,7 +142,7 @@ module Anthropic
           end
 
           # @!method self.variants
-          #   @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaSearchResultBlockParam, Anthropic::Models::Beta::BetaRequestDocumentBlock, Anthropic::Models::Beta::BetaToolReferenceBlockParam>)]
+          #   @return [Array(String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaSearchResultBlockParam, Anthropic::Models::Beta::BetaRequestDocumentBlock, Anthropic::Models::Beta::BetaToolReferenceBlockParam, Anthropic::Models::Beta::BetaBrowserStateBlockParam>)]
 
           # @type [Anthropic::Internal::Type::Converter]
           ContentArray =

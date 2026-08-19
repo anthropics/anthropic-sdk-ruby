@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    class BetaBrowserStateBlockParam = Beta::BetaBrowserStateBlockParam
+
+    module Beta
+      type beta_browser_state_block_param =
+        {
+          tabs: ::Array[Anthropic::Beta::BetaBrowserStateTabEntry],
+          type: :browser_state,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          state_changes: ::Array[Anthropic::Models::Beta::beta_browser_state_change]?
+        }
+
+      class BetaBrowserStateBlockParam < Anthropic::Internal::Type::BaseModel
+        attr_accessor tabs: ::Array[Anthropic::Beta::BetaBrowserStateTabEntry]
+
+        attr_accessor type: :browser_state
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        attr_accessor state_changes: ::Array[Anthropic::Models::Beta::beta_browser_state_change]?
+
+        def initialize: (
+          tabs: ::Array[Anthropic::Beta::BetaBrowserStateTabEntry],
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?state_changes: ::Array[Anthropic::Models::Beta::beta_browser_state_change]?,
+          ?type: :browser_state
+        ) -> void
+
+        def to_hash: -> {
+          tabs: ::Array[Anthropic::Beta::BetaBrowserStateTabEntry],
+          type: :browser_state,
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          state_changes: ::Array[Anthropic::Models::Beta::beta_browser_state_change]?
+        }
+      end
+    end
+  end
+end

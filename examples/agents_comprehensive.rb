@@ -39,8 +39,8 @@ puts "Created credential: #{credential.id}"
 
 # Upload a custom skill
 skill_md_path = Pathname.new(__dir__) / "greeting-SKILL.md"
-skill = client.beta.skills.create(
-  display_title: "comprehensive-greeting-#{(Time.now.to_f * 1000).to_i}",
+skill = client.skills.create(
+  display_name: "comprehensive-greeting-#{(Time.now.to_f * 1000).to_i}",
   files: [
     Anthropic::FilePart.new(skill_md_path, filename: "greeting/SKILL.md", content_type: "text/markdown")
   ]

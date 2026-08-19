@@ -1,0 +1,48 @@
+module Anthropic
+  module Models
+    type browser_state_change =
+      Anthropic::BrowserStateChangeTabOpened
+      | Anthropic::BrowserStateChangeDownloadStarted
+      | Anthropic::BrowserStateChangeDownloadCompleted
+      | Anthropic::BrowserStateChangeDownloadFailed
+
+    module BrowserStateChange
+      extend Anthropic::Internal::Type::Union
+
+      def self?.variants: -> ::Array[Anthropic::Models::browser_state_change]
+
+      def self.new:
+        (
+          type: :tab_opened | "tab_opened",
+          tab_id: String
+        ) -> Anthropic::BrowserStateChangeTabOpened
+        | (
+          type: :download_started | "download_started",
+          download_id: String,
+          url: String
+        ) -> Anthropic::BrowserStateChangeDownloadStarted
+        | (
+          type: :download_completed | "download_completed",
+          download_id: String,
+          url: String,
+          ?path: String?,
+          ?size_bytes: Integer?
+        ) -> Anthropic::BrowserStateChangeDownloadCompleted
+        | (
+          type: :download_failed | "download_failed",
+          download_id: String,
+          url: String,
+          ?error: String?
+        ) -> Anthropic::BrowserStateChangeDownloadFailed
+        | (
+          type: Symbol | String,
+          ?tab_id: String,
+          ?download_id: String,
+          ?url: String,
+          ?path: String?,
+          ?size_bytes: Integer?,
+          ?error: String?
+        ) -> Anthropic::Models::browser_state_change
+    end
+  end
+end

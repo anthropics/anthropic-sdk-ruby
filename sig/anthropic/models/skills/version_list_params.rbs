@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    module Skills
+      type version_list_params =
+        { skill_id: String, limit: Integer?, page: String? }
+        & Anthropic::Internal::Type::request_parameters
+
+      class VersionListParams < Anthropic::Internal::Type::BaseModel
+        extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
+
+        attr_accessor skill_id: String
+
+        attr_accessor limit: Integer?
+
+        attr_accessor page: String?
+
+        def initialize: (
+          skill_id: String,
+          ?limit: Integer?,
+          ?page: String?,
+          ?request_options: Anthropic::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          skill_id: String,
+          limit: Integer?,
+          page: String?,
+          request_options: Anthropic::RequestOptions
+        }
+      end
+    end
+  end
+end

@@ -1,0 +1,60 @@
+module Anthropic
+  module Models
+    class BetaBrowserToolset20260801 = Beta::BetaBrowserToolset20260801
+
+    module Beta
+      type beta_browser_toolset20260801 =
+        {
+          type: :browser_toolset_20260801,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaBrowserToolset20260801::allowed_caller],
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          configs: Anthropic::Beta::BetaBrowserToolsetConfigs?
+        }
+
+      class BetaBrowserToolset20260801 < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :browser_toolset_20260801
+
+        attr_reader allowed_callers: ::Array[Anthropic::Models::Beta::BetaBrowserToolset20260801::allowed_caller]?
+
+        def allowed_callers=: (
+          ::Array[Anthropic::Models::Beta::BetaBrowserToolset20260801::allowed_caller]
+        ) -> ::Array[Anthropic::Models::Beta::BetaBrowserToolset20260801::allowed_caller]
+
+        attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        attr_accessor configs: Anthropic::Beta::BetaBrowserToolsetConfigs?
+
+        def initialize: (
+          ?allowed_callers: ::Array[Anthropic::Models::Beta::BetaBrowserToolset20260801::allowed_caller],
+          ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?configs: Anthropic::Beta::BetaBrowserToolsetConfigs?,
+          ?type: :browser_toolset_20260801
+        ) -> void
+
+        def to_hash: -> {
+          type: :browser_toolset_20260801,
+          allowed_callers: ::Array[Anthropic::Models::Beta::BetaBrowserToolset20260801::allowed_caller],
+          cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          configs: Anthropic::Beta::BetaBrowserToolsetConfigs?
+        }
+
+        type allowed_caller =
+          :direct
+          | :code_execution_20250825
+          | :code_execution_20260120
+          | :code_execution_20260521
+
+        module AllowedCaller
+          extend Anthropic::Internal::Type::Enum
+
+          DIRECT: :direct
+          CODE_EXECUTION_20250825: :code_execution_20250825
+          CODE_EXECUTION_20260120: :code_execution_20260120
+          CODE_EXECUTION_20260521: :code_execution_20260521
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaBrowserToolset20260801::allowed_caller]
+        end
+      end
+    end
+  end
+end

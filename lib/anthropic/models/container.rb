@@ -15,13 +15,21 @@ module Anthropic
       #   @return [Time]
       required :expires_at, Time
 
-      # @!method initialize(id:, expires_at:)
+      # @!attribute skills
+      #   Skills loaded in the container
+      #
+      #   @return [Array<Anthropic::Models::ContainerSkill>, nil]
+      required :skills, -> { Anthropic::Internal::Type::ArrayOf[Anthropic::ContainerSkill] }, nil?: true
+
+      # @!method initialize(id:, expires_at:, skills:)
       #   Information about the container used in the request (for the code execution
       #   tool)
       #
       #   @param id [String] Identifier for the container used in this request
       #
       #   @param expires_at [Time] The time at which the container will expire.
+      #
+      #   @param skills [Array<Anthropic::Models::ContainerSkill>, nil] Skills loaded in the container
     end
   end
 end

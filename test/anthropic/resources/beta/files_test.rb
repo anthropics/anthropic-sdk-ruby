@@ -14,7 +14,7 @@ class Anthropic::Test::Resources::Beta::FilesTest < Anthropic::Test::ResourceTes
     return if row.nil?
 
     assert_pattern do
-      row => Anthropic::Beta::FileMetadata
+      row => Anthropic::Beta::BetaFileMetadata
     end
 
     assert_pattern do
@@ -35,13 +35,13 @@ class Anthropic::Test::Resources::Beta::FilesTest < Anthropic::Test::ResourceTes
     response = @anthropic.beta.files.delete("file_id")
 
     assert_pattern do
-      response => Anthropic::Beta::DeletedFile
+      response => Anthropic::Beta::BetaDeletedFile
     end
 
     assert_pattern do
       response => {
         id: String,
-        type: Anthropic::Beta::DeletedFile::Type | nil
+        type: Anthropic::Beta::BetaDeletedFile::Type | nil
       }
     end
   end
@@ -58,7 +58,7 @@ class Anthropic::Test::Resources::Beta::FilesTest < Anthropic::Test::ResourceTes
     response = @anthropic.beta.files.retrieve_metadata("file_id")
 
     assert_pattern do
-      response => Anthropic::Beta::FileMetadata
+      response => Anthropic::Beta::BetaFileMetadata
     end
 
     assert_pattern do
@@ -79,7 +79,7 @@ class Anthropic::Test::Resources::Beta::FilesTest < Anthropic::Test::ResourceTes
     response = @anthropic.beta.files.upload(file: StringIO.new("Example data"))
 
     assert_pattern do
-      response => Anthropic::Beta::FileMetadata
+      response => Anthropic::Beta::BetaFileMetadata
     end
 
     assert_pattern do

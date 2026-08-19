@@ -506,6 +506,16 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
     assert_kind_of(Anthropic::Resources::Beta, client.beta)
   end
 
+  def test_files_resource_available
+    client = Anthropic::AWSClient.new(api_key: "sk-ant-xxx", workspace_id: "ws-xxx", base_url: "http://localhost")
+    assert_kind_of(Anthropic::Resources::Files, client.files)
+  end
+
+  def test_skills_resource_available
+    client = Anthropic::AWSClient.new(api_key: "sk-ant-xxx", workspace_id: "ws-xxx", base_url: "http://localhost")
+    assert_kind_of(Anthropic::Resources::Skills, client.skills)
+  end
+
   # The gateway serves the full first-party API, so — unlike the Bedrock and
   # Google Cloud clients — nothing the parent wires up is withheld here.
   def test_completions_resource_available

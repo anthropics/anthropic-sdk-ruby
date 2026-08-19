@@ -127,6 +127,14 @@ module Anthropic
         # @return [Boolean]
         private def resolve_default_credentials? = false
 
+        def files
+          raise NotImplementedError, "Files are not supported on Vertex."
+        end
+
+        def skills
+          raise NotImplementedError, "Skills are not supported on Vertex."
+        end
+
         # @api private
         #
         # @param req [Hash{Symbol=>Object}] .

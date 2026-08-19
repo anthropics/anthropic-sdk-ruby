@@ -1,0 +1,174 @@
+module Anthropic
+  module Models
+    class BetaBrowserToolsetConfigs = Beta::BetaBrowserToolsetConfigs
+
+    module Beta
+      type beta_browser_toolset_configs =
+        {
+          close_tab: Anthropic::Beta::BetaBrowserCloseTabConfig?,
+          double_click: Anthropic::Beta::BetaBrowserDoubleClickConfig?,
+          file_upload: Anthropic::Beta::BetaBrowserFileUploadConfig?,
+          find: Anthropic::Beta::BetaBrowserFindConfig?,
+          form_input: Anthropic::Beta::BetaBrowserFormInputConfig?,
+          get_page_text: Anthropic::Beta::BetaBrowserGetPageTextConfig?,
+          hold_key: Anthropic::Beta::BetaBrowserHoldKeyConfig?,
+          hover: Anthropic::Beta::BetaBrowserHoverConfig?,
+          javascript_exec: Anthropic::Beta::BetaBrowserJavascriptExecConfig?,
+          key: Anthropic::Beta::BetaBrowserKeyConfig?,
+          left_click: Anthropic::Beta::BetaBrowserLeftClickConfig?,
+          left_click_drag: Anthropic::Beta::BetaBrowserLeftClickDragConfig?,
+          left_mouse_down: Anthropic::Beta::BetaBrowserLeftMouseDownConfig?,
+          left_mouse_up: Anthropic::Beta::BetaBrowserLeftMouseUpConfig?,
+          list_tabs: Anthropic::Beta::BetaBrowserListTabsConfig?,
+          middle_click: Anthropic::Beta::BetaBrowserMiddleClickConfig?,
+          mouse_move: Anthropic::Beta::BetaBrowserMouseMoveConfig?,
+          navigate: Anthropic::Beta::BetaBrowserNavigateConfig?,
+          new_tab: Anthropic::Beta::BetaBrowserNewTabConfig?,
+          read_console: Anthropic::Beta::BetaBrowserReadConsoleConfig?,
+          read_network: Anthropic::Beta::BetaBrowserReadNetworkConfig?,
+          read_page: Anthropic::Beta::BetaBrowserReadPageConfig?,
+          right_click: Anthropic::Beta::BetaBrowserRightClickConfig?,
+          screenshot: Anthropic::Beta::BetaBrowserScreenshotConfig?,
+          scroll: Anthropic::Beta::BetaBrowserScrollConfig?,
+          scroll_to: Anthropic::Beta::BetaBrowserScrollToConfig?,
+          switch_tab: Anthropic::Beta::BetaBrowserSwitchTabConfig?,
+          triple_click: Anthropic::Beta::BetaBrowserTripleClickConfig?,
+          type: Anthropic::Beta::BetaBrowserTypeConfig?,
+          wait: Anthropic::Beta::BetaBrowserWaitConfig?,
+          zoom: Anthropic::Beta::BetaBrowserZoomConfig?
+        }
+
+      class BetaBrowserToolsetConfigs < Anthropic::Internal::Type::BaseModel
+        attr_accessor close_tab: Anthropic::Beta::BetaBrowserCloseTabConfig?
+
+        attr_accessor double_click: Anthropic::Beta::BetaBrowserDoubleClickConfig?
+
+        attr_accessor file_upload: Anthropic::Beta::BetaBrowserFileUploadConfig?
+
+        attr_accessor find: Anthropic::Beta::BetaBrowserFindConfig?
+
+        attr_accessor form_input: Anthropic::Beta::BetaBrowserFormInputConfig?
+
+        attr_accessor get_page_text: Anthropic::Beta::BetaBrowserGetPageTextConfig?
+
+        attr_accessor hold_key: Anthropic::Beta::BetaBrowserHoldKeyConfig?
+
+        attr_accessor hover: Anthropic::Beta::BetaBrowserHoverConfig?
+
+        attr_accessor javascript_exec: Anthropic::Beta::BetaBrowserJavascriptExecConfig?
+
+        attr_accessor key: Anthropic::Beta::BetaBrowserKeyConfig?
+
+        attr_accessor left_click: Anthropic::Beta::BetaBrowserLeftClickConfig?
+
+        attr_accessor left_click_drag: Anthropic::Beta::BetaBrowserLeftClickDragConfig?
+
+        attr_accessor left_mouse_down: Anthropic::Beta::BetaBrowserLeftMouseDownConfig?
+
+        attr_accessor left_mouse_up: Anthropic::Beta::BetaBrowserLeftMouseUpConfig?
+
+        attr_accessor list_tabs: Anthropic::Beta::BetaBrowserListTabsConfig?
+
+        attr_accessor middle_click: Anthropic::Beta::BetaBrowserMiddleClickConfig?
+
+        attr_accessor mouse_move: Anthropic::Beta::BetaBrowserMouseMoveConfig?
+
+        attr_accessor navigate: Anthropic::Beta::BetaBrowserNavigateConfig?
+
+        attr_accessor new_tab: Anthropic::Beta::BetaBrowserNewTabConfig?
+
+        attr_accessor read_console: Anthropic::Beta::BetaBrowserReadConsoleConfig?
+
+        attr_accessor read_network: Anthropic::Beta::BetaBrowserReadNetworkConfig?
+
+        attr_accessor read_page: Anthropic::Beta::BetaBrowserReadPageConfig?
+
+        attr_accessor right_click: Anthropic::Beta::BetaBrowserRightClickConfig?
+
+        attr_accessor screenshot: Anthropic::Beta::BetaBrowserScreenshotConfig?
+
+        attr_accessor scroll: Anthropic::Beta::BetaBrowserScrollConfig?
+
+        attr_accessor scroll_to: Anthropic::Beta::BetaBrowserScrollToConfig?
+
+        attr_accessor switch_tab: Anthropic::Beta::BetaBrowserSwitchTabConfig?
+
+        attr_accessor triple_click: Anthropic::Beta::BetaBrowserTripleClickConfig?
+
+        attr_accessor type: Anthropic::Beta::BetaBrowserTypeConfig?
+
+        attr_accessor wait: Anthropic::Beta::BetaBrowserWaitConfig?
+
+        attr_accessor zoom: Anthropic::Beta::BetaBrowserZoomConfig?
+
+        def initialize: (
+          ?close_tab: Anthropic::Beta::BetaBrowserCloseTabConfig?,
+          ?double_click: Anthropic::Beta::BetaBrowserDoubleClickConfig?,
+          ?file_upload: Anthropic::Beta::BetaBrowserFileUploadConfig?,
+          ?find: Anthropic::Beta::BetaBrowserFindConfig?,
+          ?form_input: Anthropic::Beta::BetaBrowserFormInputConfig?,
+          ?get_page_text: Anthropic::Beta::BetaBrowserGetPageTextConfig?,
+          ?hold_key: Anthropic::Beta::BetaBrowserHoldKeyConfig?,
+          ?hover: Anthropic::Beta::BetaBrowserHoverConfig?,
+          ?javascript_exec: Anthropic::Beta::BetaBrowserJavascriptExecConfig?,
+          ?key: Anthropic::Beta::BetaBrowserKeyConfig?,
+          ?left_click: Anthropic::Beta::BetaBrowserLeftClickConfig?,
+          ?left_click_drag: Anthropic::Beta::BetaBrowserLeftClickDragConfig?,
+          ?left_mouse_down: Anthropic::Beta::BetaBrowserLeftMouseDownConfig?,
+          ?left_mouse_up: Anthropic::Beta::BetaBrowserLeftMouseUpConfig?,
+          ?list_tabs: Anthropic::Beta::BetaBrowserListTabsConfig?,
+          ?middle_click: Anthropic::Beta::BetaBrowserMiddleClickConfig?,
+          ?mouse_move: Anthropic::Beta::BetaBrowserMouseMoveConfig?,
+          ?navigate: Anthropic::Beta::BetaBrowserNavigateConfig?,
+          ?new_tab: Anthropic::Beta::BetaBrowserNewTabConfig?,
+          ?read_console: Anthropic::Beta::BetaBrowserReadConsoleConfig?,
+          ?read_network: Anthropic::Beta::BetaBrowserReadNetworkConfig?,
+          ?read_page: Anthropic::Beta::BetaBrowserReadPageConfig?,
+          ?right_click: Anthropic::Beta::BetaBrowserRightClickConfig?,
+          ?screenshot: Anthropic::Beta::BetaBrowserScreenshotConfig?,
+          ?scroll: Anthropic::Beta::BetaBrowserScrollConfig?,
+          ?scroll_to: Anthropic::Beta::BetaBrowserScrollToConfig?,
+          ?switch_tab: Anthropic::Beta::BetaBrowserSwitchTabConfig?,
+          ?triple_click: Anthropic::Beta::BetaBrowserTripleClickConfig?,
+          ?type: Anthropic::Beta::BetaBrowserTypeConfig?,
+          ?wait: Anthropic::Beta::BetaBrowserWaitConfig?,
+          ?zoom: Anthropic::Beta::BetaBrowserZoomConfig?
+        ) -> void
+
+        def to_hash: -> {
+          close_tab: Anthropic::Beta::BetaBrowserCloseTabConfig?,
+          double_click: Anthropic::Beta::BetaBrowserDoubleClickConfig?,
+          file_upload: Anthropic::Beta::BetaBrowserFileUploadConfig?,
+          find: Anthropic::Beta::BetaBrowserFindConfig?,
+          form_input: Anthropic::Beta::BetaBrowserFormInputConfig?,
+          get_page_text: Anthropic::Beta::BetaBrowserGetPageTextConfig?,
+          hold_key: Anthropic::Beta::BetaBrowserHoldKeyConfig?,
+          hover: Anthropic::Beta::BetaBrowserHoverConfig?,
+          javascript_exec: Anthropic::Beta::BetaBrowserJavascriptExecConfig?,
+          key: Anthropic::Beta::BetaBrowserKeyConfig?,
+          left_click: Anthropic::Beta::BetaBrowserLeftClickConfig?,
+          left_click_drag: Anthropic::Beta::BetaBrowserLeftClickDragConfig?,
+          left_mouse_down: Anthropic::Beta::BetaBrowserLeftMouseDownConfig?,
+          left_mouse_up: Anthropic::Beta::BetaBrowserLeftMouseUpConfig?,
+          list_tabs: Anthropic::Beta::BetaBrowserListTabsConfig?,
+          middle_click: Anthropic::Beta::BetaBrowserMiddleClickConfig?,
+          mouse_move: Anthropic::Beta::BetaBrowserMouseMoveConfig?,
+          navigate: Anthropic::Beta::BetaBrowserNavigateConfig?,
+          new_tab: Anthropic::Beta::BetaBrowserNewTabConfig?,
+          read_console: Anthropic::Beta::BetaBrowserReadConsoleConfig?,
+          read_network: Anthropic::Beta::BetaBrowserReadNetworkConfig?,
+          read_page: Anthropic::Beta::BetaBrowserReadPageConfig?,
+          right_click: Anthropic::Beta::BetaBrowserRightClickConfig?,
+          screenshot: Anthropic::Beta::BetaBrowserScreenshotConfig?,
+          scroll: Anthropic::Beta::BetaBrowserScrollConfig?,
+          scroll_to: Anthropic::Beta::BetaBrowserScrollToConfig?,
+          switch_tab: Anthropic::Beta::BetaBrowserSwitchTabConfig?,
+          triple_click: Anthropic::Beta::BetaBrowserTripleClickConfig?,
+          type: Anthropic::Beta::BetaBrowserTypeConfig?,
+          wait: Anthropic::Beta::BetaBrowserWaitConfig?,
+          zoom: Anthropic::Beta::BetaBrowserZoomConfig?
+        }
+      end
+    end
+  end
+end

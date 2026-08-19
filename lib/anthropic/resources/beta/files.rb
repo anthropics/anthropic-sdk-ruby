@@ -23,7 +23,7 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Internal::Page<Anthropic::Models::Beta::FileMetadata>]
+        # @return [Anthropic::Internal::Page<Anthropic::Models::Beta::BetaFileMetadata>]
         #
         # @see Anthropic::Models::Beta::FileListParams
         def list(params = {})
@@ -36,7 +36,7 @@ module Anthropic
             query: query,
             headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
             page: Anthropic::Internal::Page,
-            model: Anthropic::Beta::FileMetadata,
+            model: Anthropic::Beta::BetaFileMetadata,
             options: {extra_headers: {"anthropic-beta" => "files-api-2025-04-14"}, **options}
           )
         end
@@ -51,7 +51,7 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Models::Beta::DeletedFile]
+        # @return [Anthropic::Models::Beta::BetaDeletedFile]
         #
         # @see Anthropic::Models::Beta::FileDeleteParams
         def delete(file_id, params = {})
@@ -60,7 +60,7 @@ module Anthropic
             method: :delete,
             path: ["v1/files/%1$s?beta=true", file_id],
             headers: parsed.transform_keys(betas: "anthropic-beta"),
-            model: Anthropic::Beta::DeletedFile,
+            model: Anthropic::Beta::BetaDeletedFile,
             options: {extra_headers: {"anthropic-beta" => "files-api-2025-04-14"}, **options}
           )
         end
@@ -99,7 +99,7 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Models::Beta::FileMetadata]
+        # @return [Anthropic::Models::Beta::BetaFileMetadata]
         #
         # @see Anthropic::Models::Beta::FileRetrieveMetadataParams
         def retrieve_metadata(file_id, params = {})
@@ -108,7 +108,7 @@ module Anthropic
             method: :get,
             path: ["v1/files/%1$s?beta=true", file_id],
             headers: parsed.transform_keys(betas: "anthropic-beta"),
-            model: Anthropic::Beta::FileMetadata,
+            model: Anthropic::Beta::BetaFileMetadata,
             options: {extra_headers: {"anthropic-beta" => "files-api-2025-04-14"}, **options}
           )
         end
@@ -123,7 +123,7 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Models::Beta::FileMetadata]
+        # @return [Anthropic::Models::Beta::BetaFileMetadata]
         #
         # @see Anthropic::Models::Beta::FileUploadParams
         def upload(params)
@@ -139,7 +139,7 @@ module Anthropic
               header_params
             ),
             body: parsed.except(*header_params.keys),
-            model: Anthropic::Beta::FileMetadata,
+            model: Anthropic::Beta::BetaFileMetadata,
             options: {extra_headers: {"anthropic-beta" => "files-api-2025-04-14"}, **options}
           )
         end

@@ -30,6 +30,12 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120, nil]
         optional :caller_, union: -> { Anthropic::Beta::BetaToolUseBlock::Caller }, api_name: :caller
 
+        # @!attribute toolset_name
+        #   For a toolset member tool_use, the toolset family.
+        #
+        #   @return [String, nil]
+        optional :toolset_name, String, nil?: true
+
         response_only do
           # @api public
           #
@@ -44,7 +50,7 @@ module Anthropic
           optional :_json_buf, String
         end
 
-        # @!method initialize(id:, input:, name:, caller_: nil, type: :tool_use)
+        # @!method initialize(id:, input:, name:, caller_: nil, toolset_name: nil, type: :tool_use)
         #   @param id [String]
         #
         #   @param input [Object]
@@ -52,6 +58,8 @@ module Anthropic
         #   @param name [String]
         #
         #   @param caller_ [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120] Tool invocation directly from the model.
+        #
+        #   @param toolset_name [String, nil] For a toolset member tool_use, the toolset family.
         #
         #   @param type [Symbol, :tool_use]
 

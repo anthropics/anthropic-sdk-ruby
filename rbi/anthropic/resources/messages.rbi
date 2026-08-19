@@ -22,7 +22,8 @@ module Anthropic
           messages: T::Array[Anthropic::MessageParam::OrHash],
           model: T.any(Anthropic::Model::OrSymbol, String),
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
-          container: T.nilable(String),
+          container:
+            T.nilable(T.any(Anthropic::ContainerParams::OrHash, String)),
           inference_geo: T.nilable(String),
           metadata: Anthropic::Metadata::OrHash,
           output_config: Anthropic::OutputConfig::OrHash,
@@ -52,7 +53,9 @@ module Anthropic
                 Anthropic::CodeExecutionTool20250825::OrHash,
                 Anthropic::CodeExecutionTool20260120::OrHash,
                 Anthropic::CodeExecutionTool20260521::OrHash,
+                Anthropic::BrowserToolset20260801::OrHash,
                 Anthropic::MemoryTool20250818::OrHash,
+                Anthropic::ComputerToolset20260801::OrHash,
                 Anthropic::ToolTextEditor20250124::OrHash,
                 Anthropic::ToolTextEditor20250429::OrHash,
                 Anthropic::ToolTextEditor20250728::OrHash,
@@ -335,70 +338,79 @@ module Anthropic
       sig do
         params(
           max_tokens: Integer,
-          messages:
-            T::Array[
-              T.any(
-                Anthropic::Models::MessageParam,
-                Anthropic::Internal::AnyHash
-              )
-            ],
-          model: T.any(Anthropic::Models::Model::OrSymbol, String),
-          metadata:
-            T.any(Anthropic::Models::Metadata, Anthropic::Internal::AnyHash),
+          messages: T::Array[Anthropic::MessageParam::OrHash],
+          model: T.any(Anthropic::Model::OrSymbol, String),
+          cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
+          container:
+            T.nilable(T.any(Anthropic::ContainerParams::OrHash, String)),
+          inference_geo: T.nilable(String),
+          metadata: Anthropic::Metadata::OrHash,
+          output_config: Anthropic::OutputConfig::OrHash,
+          service_tier: Anthropic::MessageCreateParams::ServiceTier::OrSymbol,
           stop_sequences: T::Array[String],
-          system_:
-            T.any(
-              String,
-              T::Array[
-                T.any(
-                  Anthropic::Models::TextBlockParam,
-                  Anthropic::Internal::AnyHash
-                )
-              ]
-            ),
+          system_: Anthropic::MessageCreateParams::System::Variants,
           temperature: Float,
           thinking:
             T.any(
-              Anthropic::Models::ThinkingConfigEnabled,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::ThinkingConfigDisabled
+              Anthropic::ThinkingConfigEnabled::OrHash,
+              Anthropic::ThinkingConfigDisabled::OrHash,
+              Anthropic::ThinkingConfigAdaptive::OrHash
             ),
           tool_choice:
             T.any(
-              Anthropic::Models::ToolChoiceAuto,
-              Anthropic::Internal::AnyHash,
-              Anthropic::Models::ToolChoiceAny,
-              Anthropic::Models::ToolChoiceTool,
-              Anthropic::Models::ToolChoiceNone
+              Anthropic::ToolChoiceAuto::OrHash,
+              Anthropic::ToolChoiceAny::OrHash,
+              Anthropic::ToolChoiceTool::OrHash,
+              Anthropic::ToolChoiceNone::OrHash
             ),
           tools:
             T::Array[
               T.any(
-                Anthropic::Models::Tool,
-                Anthropic::Internal::AnyHash,
-                Anthropic::Models::ToolBash20250124,
-                Anthropic::Models::ToolTextEditor20250124
+                Anthropic::Tool::OrHash,
+                Anthropic::ToolBash20250124::OrHash,
+                Anthropic::CodeExecutionTool20250522::OrHash,
+                Anthropic::CodeExecutionTool20250825::OrHash,
+                Anthropic::CodeExecutionTool20260120::OrHash,
+                Anthropic::CodeExecutionTool20260521::OrHash,
+                Anthropic::BrowserToolset20260801::OrHash,
+                Anthropic::MemoryTool20250818::OrHash,
+                Anthropic::ComputerToolset20260801::OrHash,
+                Anthropic::ToolTextEditor20250124::OrHash,
+                Anthropic::ToolTextEditor20250429::OrHash,
+                Anthropic::ToolTextEditor20250728::OrHash,
+                Anthropic::WebSearchTool20250305::OrHash,
+                Anthropic::WebFetchTool20250910::OrHash,
+                Anthropic::WebSearchTool20260209::OrHash,
+                Anthropic::WebFetchTool20260209::OrHash,
+                Anthropic::WebFetchTool20260309::OrHash,
+                Anthropic::WebSearchTool20260318::OrHash,
+                Anthropic::WebFetchTool20260318::OrHash,
+                Anthropic::ToolSearchToolBm25_20251119::OrHash,
+                Anthropic::ToolSearchToolRegex20251119::OrHash
               )
             ],
           top_k: Integer,
           top_p: Float,
+          user_profile_id: String,
           stream: T.noreturn,
-          request_options:
-            T.nilable(
-              T.any(Anthropic::RequestOptions, Anthropic::Internal::AnyHash)
-            )
+          request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::Helpers::Streaming::MessageStream)
       end
       def stream(
-        # The maximum number of tokens to generate before stopping.
+        # Body param: The maximum number of tokens to generate before stopping.
         #
         # Note that our models may stop _before_ reaching this maximum. This parameter
         # only specifies the absolute maximum number of tokens to generate.
         #
+        # Set to `0` to populate the
+        # [prompt cache](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#pre-warming-the-cache)
+        # without generating a response.
+        #
         # Different models have different maximum values for this parameter. See
-        # [models](https://docs.anthropic.com/en/docs/models-overview) for details.
+        # [models](https://platform.claude.com/docs/en/about-claude/models/overview) for
+        # details.
         max_tokens:,
-        # Input messages.
+        # Body param: Input messages.
         #
         # Our models are trained to operate on alternating `user` and `assistant`
         # conversational turns. When creating a new `Message`, you specify the prior
@@ -455,43 +467,42 @@ module Anthropic
         # { "role": "user", "content": [{ "type": "text", "text": "Hello, Claude" }] }
         # ```
         #
-        # Starting with Claude 3 models, you can also send image content blocks:
-        #
-        # ```json
-        # {
-        #   "role": "user",
-        #   "content": [
-        #     {
-        #       "type": "image",
-        #       "source": {
-        #         "type": "base64",
-        #         "media_type": "image/jpeg",
-        #         "data": "/9j/4AAQSkZJRg..."
-        #       }
-        #     },
-        #     { "type": "text", "text": "What is in this image?" }
-        #   ]
-        # }
-        # ```
-        #
-        # We currently support the `base64` source type for images, and the `image/jpeg`,
-        # `image/png`, `image/gif`, and `image/webp` media types.
-        #
-        # See [examples](https://docs.anthropic.com/en/api/messages-examples#vision) for
-        # more input examples.
+        # See
+        # [input examples](https://platform.claude.com/docs/en/build-with-claude/working-with-messages).
         #
         # Note that if you want to include a
-        # [system prompt](https://docs.anthropic.com/en/docs/system-prompts), you can use
-        # the top-level `system` parameter — there is no `"system"` role for input
-        # messages in the Messages API.
+        # [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
+        # you can use the top-level `system` parameter — there is no `"system"` role for
+        # input messages in the Messages API.
+        #
+        # There is a limit of 100,000 messages in a single request.
         messages:,
-        # The model that will complete your prompt.\n\nSee
-        # [models](https://docs.anthropic.com/en/docs/models-overview) for additional
+        # Body param: The model that will complete your prompt.
+        #
+        # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
         model:,
-        # An object describing metadata about the request.
+        # Body param: Top-level cache control automatically applies a cache_control marker
+        # to the last cacheable block in the request.
+        cache_control: nil,
+        # Body param: Container identifier for reuse across requests.
+        container: nil,
+        # Body param: Specifies the geographic region for inference processing. If not
+        # specified, the workspace's `default_inference_geo` is used.
+        inference_geo: nil,
+        # Body param: An object describing metadata about the request.
         metadata: nil,
-        # Custom text sequences that will cause the model to stop generating.
+        # Body param: Configuration options for the model's output, such as the output
+        # format.
+        output_config: nil,
+        # Body param: Determines whether to use priority capacity (if available) or
+        # standard capacity for this request.
+        #
+        # Anthropic offers different levels of service for your API requests. See
+        # [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for
+        # details.
+        service_tier: nil,
+        # Body param: Custom text sequences that will cause the model to stop generating.
         #
         # Our models will normally stop when they have naturally completed their turn,
         # which will result in a response `stop_reason` of `"end_turn"`.
@@ -501,13 +512,13 @@ module Anthropic
         # the custom sequences, the response `stop_reason` value will be `"stop_sequence"`
         # and the response `stop_sequence` value will contain the matched stop sequence.
         stop_sequences: nil,
-        # System prompt.
+        # Body param: System prompt.
         #
         # A system prompt is a way of providing context and instructions to Claude, such
         # as specifying a particular goal or role. See our
-        # [guide to system prompts](https://docs.anthropic.com/en/docs/system-prompts).
+        # [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
         system_: nil,
-        # Amount of randomness injected into the response.
+        # Body param: Amount of randomness injected into the response.
         #
         # Defaults to `1.0`. Ranges from `0.0` to `1.0`. Use `temperature` closer to `0.0`
         # for analytical / multiple choice, and closer to `1.0` for creative and
@@ -516,25 +527,31 @@ module Anthropic
         # Note that even with `temperature` of `0.0`, the results will not be fully
         # deterministic.
         temperature: nil,
-        # Configuration for enabling Claude's extended thinking.
+        # Body param: Configuration for enabling Claude's extended thinking.
         #
         # When enabled, responses include `thinking` content blocks showing Claude's
         # thinking process before the final answer. Requires a minimum budget of 1,024
         # tokens and counts towards your `max_tokens` limit.
         #
         # See
-        # [extended thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking)
+        # [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking)
         # for details.
         thinking: nil,
-        # How the model should use the provided tools. The model can use a specific tool,
-        # any available tool, decide by itself, or not use tools at all.
+        # Body param: How the model should use the provided tools. The model can use a
+        # specific tool, any available tool, decide by itself, or not use tools at all.
         tool_choice: nil,
-        # Definitions of tools that the model may use.
+        # Body param: Definitions of tools that the model may use.
         #
         # If you include `tools` in your API request, the model may return `tool_use`
         # content blocks that represent the model's use of those tools. You can then run
         # those tools using the tool input generated by the model and then optionally
         # return results back to the model using `tool_result` content blocks.
+        #
+        # There are two types of tools: **client tools** and **server tools**. The
+        # behavior described below applies to client tools. For
+        # [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools),
+        # see their individual documentation as each has its own behavior (e.g., the
+        # [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)).
         #
         # Each tool definition includes:
         #
@@ -597,26 +614,29 @@ module Anthropic
         # functions, or more generally whenever you want the model to produce a particular
         # JSON structure of output.
         #
-        # See our [guide](https://docs.anthropic.com/en/docs/tool-use) for more details.
+        # See our
+        # [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)
+        # for more details.
         tools: nil,
-        # Only sample from the top K options for each subsequent token.
+        # Body param: Only sample from the top K options for each subsequent token.
         #
         # Used to remove "long tail" low probability responses.
         # [Learn more technical details here](https://towardsdatascience.com/how-to-sample-from-language-models-682bceb97277).
         #
-        # Recommended for advanced use cases only. You usually only need to use
-        # `temperature`.
+        # Recommended for advanced use cases only.
         top_k: nil,
-        # Use nucleus sampling.
+        # Body param: Use nucleus sampling.
         #
         # In nucleus sampling, we compute the cumulative distribution over all the options
         # for each subsequent token in decreasing probability order and cut it off once it
-        # reaches a particular probability specified by `top_p`. You should either alter
-        # `temperature` or `top_p`, but not both.
+        # reaches a particular probability specified by `top_p`.
         #
-        # Recommended for advanced use cases only. You usually only need to use
-        # `temperature`.
+        # Recommended for advanced use cases only.
         top_p: nil,
+        # Header param: The user profile ID to attribute this request to. Use when acting
+        # on behalf of a party other than your organization. Requires the `user-profiles`
+        # beta header.
+        user_profile_id: nil,
         # There is no need to provide `stream:`. Instead, use `#stream_raw` or `#create`
         # for streaming and non-streaming use cases, respectively.
         stream: true,
@@ -629,7 +649,8 @@ module Anthropic
           messages: T::Array[Anthropic::MessageParam::OrHash],
           model: T.any(Anthropic::Model::OrSymbol, String),
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
-          container: T.nilable(String),
+          container:
+            T.nilable(T.any(Anthropic::ContainerParams::OrHash, String)),
           inference_geo: T.nilable(String),
           metadata: Anthropic::Metadata::OrHash,
           output_config: Anthropic::OutputConfig::OrHash,
@@ -659,7 +680,9 @@ module Anthropic
                 Anthropic::CodeExecutionTool20250825::OrHash,
                 Anthropic::CodeExecutionTool20260120::OrHash,
                 Anthropic::CodeExecutionTool20260521::OrHash,
+                Anthropic::BrowserToolset20260801::OrHash,
                 Anthropic::MemoryTool20250818::OrHash,
+                Anthropic::ComputerToolset20260801::OrHash,
                 Anthropic::ToolTextEditor20250124::OrHash,
                 Anthropic::ToolTextEditor20250429::OrHash,
                 Anthropic::ToolTextEditor20250728::OrHash,
@@ -969,7 +992,9 @@ module Anthropic
                 Anthropic::CodeExecutionTool20250825::OrHash,
                 Anthropic::CodeExecutionTool20260120::OrHash,
                 Anthropic::CodeExecutionTool20260521::OrHash,
+                Anthropic::BrowserToolset20260801::OrHash,
                 Anthropic::MemoryTool20250818::OrHash,
+                Anthropic::ComputerToolset20260801::OrHash,
                 Anthropic::ToolTextEditor20250124::OrHash,
                 Anthropic::ToolTextEditor20250429::OrHash,
                 Anthropic::ToolTextEditor20250728::OrHash,

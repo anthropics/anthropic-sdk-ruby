@@ -28,7 +28,7 @@ agent = client.beta.agents.create(
 puts "Created agent: #{agent.id}"
 
 # Upload a file
-file = client.beta.files.upload(file: Pathname.new(__dir__) / "data.csv")
+file = client.files.upload(file: Pathname.new(__dir__) / "data.csv")
 puts "Uploaded file: #{file.id}"
 
 # Create a session with the file mounted as a resource

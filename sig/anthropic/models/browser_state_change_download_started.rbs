@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    type browser_state_change_download_started =
+      { download_id: String, type: :download_started, url: String }
+
+    class BrowserStateChangeDownloadStarted < Anthropic::Internal::Type::BaseModel
+      attr_accessor download_id: String
+
+      attr_accessor type: :download_started
+
+      attr_accessor url: String
+
+      def initialize: (
+        download_id: String,
+        url: String,
+        ?type: :download_started
+      ) -> void
+
+      def to_hash: -> {
+        download_id: String,
+        type: :download_started,
+        url: String
+      }
+    end
+  end
+end

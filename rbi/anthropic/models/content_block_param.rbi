@@ -59,16 +59,20 @@ module Anthropic
             T.any(
               T.any(
                 Anthropic::Base64ImageSource::OrHash,
-                Anthropic::URLImageSource::OrHash
+                Anthropic::URLImageSource::OrHash,
+                Anthropic::FileImageSource::OrHash
               ),
               T.any(
                 Anthropic::Base64PDFSource::OrHash,
                 Anthropic::PlainTextSource::OrHash,
                 Anthropic::ContentBlockSource::OrHash,
-                Anthropic::URLPDFSource::OrHash
+                Anthropic::URLPDFSource::OrHash,
+                Anthropic::FileDocumentSource::OrHash
               ),
               String
             ),
+          transformations:
+            T.nilable(Anthropic::ImageTransformationsParam::OrHash),
           context: T.nilable(String),
           title: T.any(T.nilable(String), String),
           content:
@@ -116,6 +120,7 @@ module Anthropic
               Anthropic::ServerToolCaller::OrHash,
               Anthropic::ServerToolCaller20260120::OrHash
             ),
+          toolset_name: T.nilable(String),
           tool_use_id: String,
           is_error: T::Boolean,
           file_id: String
@@ -128,6 +133,11 @@ module Anthropic
         cache_control: nil,
         citations: nil,
         source: nil,
+        # Configures the transformations the server applies to this image before the model
+        # observes it. Each key names a condition the server transforms images for; its
+        # value selects the transformation applied. Omitted keys keep their default
+        # behavior, and an empty object is equivalent to omitting the field.
+        transformations: nil,
         context: nil,
         title: nil,
         # Code execution result with encrypted stdout for PFC + web_search results.
@@ -148,6 +158,8 @@ module Anthropic
         name: nil,
         # Tool invocation directly from the model.
         caller_: nil,
+        # For a toolset member tool_use, the toolset family this member belongs to.
+        toolset_name: nil,
         tool_use_id: nil,
         is_error: nil,
         file_id: nil

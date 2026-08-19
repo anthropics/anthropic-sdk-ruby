@@ -70,13 +70,15 @@ module Anthropic
       #
       #   @option args [Array<Anthropic::Models::CitationCharLocationParam, Anthropic::Models::CitationPageLocationParam, Anthropic::Models::CitationContentBlockLocationParam, Anthropic::Models::CitationWebSearchResultLocationParam, Anthropic::Models::CitationSearchResultLocationParam>, nil, Anthropic::Models::CitationsConfigParam, nil, Anthropic::Models::CitationsConfigParam] :citations
       #
-      #   @option args [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource, Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource, String] :source
+      #   @option args [Anthropic::Models::Base64ImageSource, Anthropic::Models::URLImageSource, Anthropic::Models::FileImageSource, Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource, Anthropic::Models::FileDocumentSource, String] :source
+      #
+      #   @option args [Anthropic::Models::ImageTransformationsParam, nil] :transformations Configures the transformations the server applies to this image before the model
       #
       #   @option args [String, nil] :context
       #
       #   @option args [String, nil, String] :title
       #
-      #   @option args [Array<Anthropic::Models::TextBlockParam>, String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ToolReferenceBlockParam>, Array<Anthropic::Models::WebSearchResultBlockParam>, Anthropic::Models::WebSearchToolRequestError, Anthropic::Models::WebFetchToolResultErrorBlockParam, Anthropic::Models::WebFetchBlockParam, Anthropic::Models::CodeExecutionToolResultErrorParam, Anthropic::Models::CodeExecutionResultBlockParam, Anthropic::Models::EncryptedCodeExecutionResultBlockParam, Anthropic::Models::BashCodeExecutionToolResultErrorParam, Anthropic::Models::BashCodeExecutionResultBlockParam, Anthropic::Models::TextEditorCodeExecutionToolResultErrorParam, Anthropic::Models::TextEditorCodeExecutionViewResultBlockParam, Anthropic::Models::TextEditorCodeExecutionCreateResultBlockParam, Anthropic::Models::TextEditorCodeExecutionStrReplaceResultBlockParam, Anthropic::Models::ToolSearchToolResultErrorParam, Anthropic::Models::ToolSearchToolSearchResultBlockParam] :content Code execution result with encrypted stdout for PFC + web_search results.
+      #   @option args [Array<Anthropic::Models::TextBlockParam>, String, Array<Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ToolReferenceBlockParam, Anthropic::Models::BrowserStateBlockParam>, Array<Anthropic::Models::WebSearchResultBlockParam>, Anthropic::Models::WebSearchToolRequestError, Anthropic::Models::WebFetchToolResultErrorBlockParam, Anthropic::Models::WebFetchBlockParam, Anthropic::Models::CodeExecutionToolResultErrorParam, Anthropic::Models::CodeExecutionResultBlockParam, Anthropic::Models::EncryptedCodeExecutionResultBlockParam, Anthropic::Models::BashCodeExecutionToolResultErrorParam, Anthropic::Models::BashCodeExecutionResultBlockParam, Anthropic::Models::TextEditorCodeExecutionToolResultErrorParam, Anthropic::Models::TextEditorCodeExecutionViewResultBlockParam, Anthropic::Models::TextEditorCodeExecutionCreateResultBlockParam, Anthropic::Models::TextEditorCodeExecutionStrReplaceResultBlockParam, Anthropic::Models::ToolSearchToolResultErrorParam, Anthropic::Models::ToolSearchToolSearchResultBlockParam] :content Code execution result with encrypted stdout for PFC + web_search results.
       #
       #   @option args [String] :signature The `signature` value of this thinking block, exactly as returned by the API in
       #
@@ -91,6 +93,8 @@ module Anthropic
       #   @option args [String, Symbol, Anthropic::Models::ServerToolUseBlockParam::Name] :name
       #
       #   @option args [Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120] :caller_ Tool invocation directly from the model.
+      #
+      #   @option args [String, nil] :toolset_name For a toolset member tool_use, the toolset family this member belongs to.
       #
       #   @option args [String] :tool_use_id
       #

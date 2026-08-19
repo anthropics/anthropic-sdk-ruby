@@ -18,14 +18,16 @@ module Anthropic
         | (
           type: :image | "image",
           source: Anthropic::Models::ImageBlockParam::source,
-          ?cache_control: Anthropic::CacheControlEphemeral?
+          ?cache_control: Anthropic::CacheControlEphemeral?,
+          ?transformations: Anthropic::ImageTransformationsParam?
         ) -> Anthropic::ImageBlockParam
         | (
           type: Symbol | String,
           ?text: String,
           ?cache_control: Anthropic::CacheControlEphemeral?,
           ?citations: ::Array[Anthropic::Models::text_citation_param]?,
-          ?source: Anthropic::Models::ImageBlockParam::source
+          ?source: Anthropic::Models::ImageBlockParam::source,
+          ?transformations: Anthropic::ImageTransformationsParam?
         ) -> Anthropic::Models::content_block_source_content
     end
   end

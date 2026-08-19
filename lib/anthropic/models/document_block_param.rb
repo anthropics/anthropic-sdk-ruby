@@ -5,7 +5,7 @@ module Anthropic
     class DocumentBlockParam < Anthropic::Internal::Type::BaseModel
       # @!attribute source
       #
-      #   @return [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
+      #   @return [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource, Anthropic::Models::FileDocumentSource]
       required :source, union: -> { Anthropic::DocumentBlockParam::Source }
 
       # @!attribute type
@@ -35,7 +35,7 @@ module Anthropic
       optional :title, String, nil?: true
 
       # @!method initialize(source:, cache_control: nil, citations: nil, context: nil, title: nil, type: :document)
-      #   @param source [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
+      #   @param source [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource, Anthropic::Models::FileDocumentSource]
       #
       #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
       #
@@ -61,8 +61,10 @@ module Anthropic
 
         variant :url, -> { Anthropic::URLPDFSource }
 
+        variant :file, -> { Anthropic::FileDocumentSource }
+
         # @!method self.variants
-        #   @return [Array(Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource)]
+        #   @return [Array(Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource, Anthropic::Models::FileDocumentSource)]
 
         # Creates a new instance of the variant class whose `type` matches the given
         # value, passing the remaining arguments to its constructor.
@@ -79,8 +81,10 @@ module Anthropic
         #
         #   @option args [String] :url
         #
+        #   @option args [String] :file_id
+        #
         # @raise [ArgumentError]
-        # @return [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource]
+        # @return [Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource, Anthropic::Models::FileDocumentSource]
         def self.new(type:, **args)
           case type.to_sym
           when :base64
@@ -91,6 +95,8 @@ module Anthropic
             Anthropic::ContentBlockSource.new(**args)
           when :url
             Anthropic::URLPDFSource.new(**args)
+          when :file
+            Anthropic::FileDocumentSource.new(**args)
           else
             raise ArgumentError, "unknown type: #{type}"
           end

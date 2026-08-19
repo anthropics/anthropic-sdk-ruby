@@ -55,6 +55,10 @@ module Anthropic
         sig { params(is_error: T::Boolean).void }
         attr_writer :is_error
 
+        # For a toolset member tool_result, the toolset family of the paired tool_use.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :toolset_name
+
         sig do
           params(
             tool_use_id: String,
@@ -63,6 +67,7 @@ module Anthropic
             content:
               Anthropic::Beta::BetaToolResultBlockParam::Content::Variants,
             is_error: T::Boolean,
+            toolset_name: T.nilable(String),
             type: Symbol
           ).returns(T.attached_class)
         end
@@ -72,6 +77,8 @@ module Anthropic
           cache_control: nil,
           content: nil,
           is_error: nil,
+          # For a toolset member tool_result, the toolset family of the paired tool_use.
+          toolset_name: nil,
           type: :tool_result
         )
         end
@@ -85,7 +92,8 @@ module Anthropic
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
               content:
                 Anthropic::Beta::BetaToolResultBlockParam::Content::Variants,
-              is_error: T::Boolean
+              is_error: T::Boolean,
+              toolset_name: T.nilable(String)
             }
           )
         end
@@ -116,7 +124,8 @@ module Anthropic
                   Anthropic::Beta::BetaImageBlockParam,
                   Anthropic::Beta::BetaSearchResultBlockParam,
                   Anthropic::Beta::BetaRequestDocumentBlock,
-                  Anthropic::Beta::BetaToolReferenceBlockParam
+                  Anthropic::Beta::BetaToolReferenceBlockParam,
+                  Anthropic::Beta::BetaBrowserStateBlockParam
                 )
               end
 
@@ -170,10 +179,27 @@ module Anthropic
                       Anthropic::Beta::BetaFileDocumentSource::OrHash
                     )
                   ),
+                transformations:
+                  T.nilable(
+                    Anthropic::Beta::BetaImageTransformationsParam::OrHash
+                  ),
                 content: T::Array[Anthropic::Beta::BetaTextBlockParam::OrHash],
                 title: T.any(String, T.nilable(String)),
                 context: T.nilable(String),
-                tool_name: String
+                tool_name: String,
+                tabs:
+                  T::Array[Anthropic::Beta::BetaBrowserStateTabEntry::OrHash],
+                state_changes:
+                  T.nilable(
+                    T::Array[
+                      T.any(
+                        Anthropic::Beta::BetaBrowserStateChangeTabOpened::OrHash,
+                        Anthropic::Beta::BetaBrowserStateChangeDownloadStarted::OrHash,
+                        Anthropic::Beta::BetaBrowserStateChangeDownloadCompleted::OrHash,
+                        Anthropic::Beta::BetaBrowserStateChangeDownloadFailed::OrHash
+                      )
+                    ]
+                  )
               ).returns(
                 Anthropic::Beta::BetaToolResultBlockParam::Content::Content::Variants
               )
@@ -185,10 +211,21 @@ module Anthropic
               cache_control: nil,
               citations: nil,
               source: nil,
+              # Configures the transformations the server applies to this image before the model
+              # observes it. Each key names a condition the server transforms images for; its
+              # value selects the transformation applied. Omitted keys keep their default
+              # behavior, and an empty object is equivalent to omitting the field.
+              transformations: nil,
               content: nil,
               title: nil,
               context: nil,
-              tool_name: nil
+              tool_name: nil,
+              # All tabs open in the browser after this call — the full inventory, not a delta.
+              # May be empty. Whenever non-empty, exactly one entry carries `active: true`.
+              tabs: nil,
+              # Tabs opened and download state changes during this call. "Nothing to report" is
+              # expressed by omitting the field, never by an empty list.
+              state_changes: nil
             )
             end
           end

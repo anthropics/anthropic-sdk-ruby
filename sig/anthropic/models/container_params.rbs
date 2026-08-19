@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    type container_params =
+      { id: String?, skills: ::Array[Anthropic::SkillParams]? }
+
+    class ContainerParams < Anthropic::Internal::Type::BaseModel
+      attr_accessor id: String?
+
+      attr_accessor skills: ::Array[Anthropic::SkillParams]?
+
+      def initialize: (
+        ?id: String?,
+        ?skills: ::Array[Anthropic::SkillParams]?
+      ) -> void
+
+      def to_hash: -> { id: String?, skills: ::Array[Anthropic::SkillParams]? }
+    end
+  end
+end

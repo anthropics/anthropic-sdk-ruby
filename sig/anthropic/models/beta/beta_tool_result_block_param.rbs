@@ -9,7 +9,8 @@ module Anthropic
           type: :tool_result,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           content: Anthropic::Models::Beta::BetaToolResultBlockParam::content,
-          is_error: bool
+          is_error: bool,
+          toolset_name: String?
         }
 
       class BetaToolResultBlockParam < Anthropic::Internal::Type::BaseModel
@@ -29,11 +30,14 @@ module Anthropic
 
         def is_error=: (bool) -> bool
 
+        attr_accessor toolset_name: String?
+
         def initialize: (
           tool_use_id: String,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?content: Anthropic::Models::Beta::BetaToolResultBlockParam::content,
           ?is_error: bool,
+          ?toolset_name: String?,
           ?type: :tool_result
         ) -> void
 
@@ -42,7 +46,8 @@ module Anthropic
           type: :tool_result,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           content: Anthropic::Models::Beta::BetaToolResultBlockParam::content,
-          is_error: bool
+          is_error: bool,
+          toolset_name: String?
         }
 
         type content =
@@ -58,6 +63,7 @@ module Anthropic
             | Anthropic::Beta::BetaSearchResultBlockParam
             | Anthropic::Beta::BetaRequestDocumentBlock
             | Anthropic::Beta::BetaToolReferenceBlockParam
+            | Anthropic::Beta::BetaBrowserStateBlockParam
 
           module Content
             extend Anthropic::Internal::Type::Union
@@ -74,7 +80,8 @@ module Anthropic
               | (
                 type: :image | "image",
                 source: Anthropic::Models::Beta::BetaImageBlockParam::source,
-                ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+                ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+                ?transformations: Anthropic::Beta::BetaImageTransformationsParam?
               ) -> Anthropic::Beta::BetaImageBlockParam
               | (
                 type: :search_result | "search_result",
@@ -98,6 +105,12 @@ module Anthropic
                 ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
               ) -> Anthropic::Beta::BetaToolReferenceBlockParam
               | (
+                type: :browser_state | "browser_state",
+                tabs: ::Array[Anthropic::Beta::BetaBrowserStateTabEntry],
+                ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+                ?state_changes: ::Array[Anthropic::Models::Beta::beta_browser_state_change]?
+              ) -> Anthropic::Beta::BetaBrowserStateBlockParam
+              | (
                 type: Symbol | String,
                 ?text: String,
                 ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
@@ -107,10 +120,13 @@ module Anthropic
                 ?source: Anthropic::Models::Beta::BetaImageBlockParam::source
                 | String
                 | Anthropic::Models::Beta::BetaRequestDocumentBlock::source,
+                ?transformations: Anthropic::Beta::BetaImageTransformationsParam?,
                 ?content: ::Array[Anthropic::Beta::BetaTextBlockParam],
                 ?title: String | String?,
                 ?context: String?,
-                ?tool_name: String
+                ?tool_name: String,
+                ?tabs: ::Array[Anthropic::Beta::BetaBrowserStateTabEntry],
+                ?state_changes: ::Array[Anthropic::Models::Beta::beta_browser_state_change]?
               ) -> Anthropic::Models::Beta::BetaToolResultBlockParam::Content::content
           end
 

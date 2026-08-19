@@ -14,7 +14,8 @@ module Anthropic
             Anthropic::Base64PDFSource,
             Anthropic::PlainTextSource,
             Anthropic::ContentBlockSource,
-            Anthropic::URLPDFSource
+            Anthropic::URLPDFSource,
+            Anthropic::FileDocumentSource
           )
         )
       end
@@ -57,7 +58,8 @@ module Anthropic
               Anthropic::Base64PDFSource::OrHash,
               Anthropic::PlainTextSource::OrHash,
               Anthropic::ContentBlockSource::OrHash,
-              Anthropic::URLPDFSource::OrHash
+              Anthropic::URLPDFSource::OrHash,
+              Anthropic::FileDocumentSource::OrHash
             ),
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
           citations: T.nilable(Anthropic::CitationsConfigParam::OrHash),
@@ -85,7 +87,8 @@ module Anthropic
                 Anthropic::Base64PDFSource,
                 Anthropic::PlainTextSource,
                 Anthropic::ContentBlockSource,
-                Anthropic::URLPDFSource
+                Anthropic::URLPDFSource,
+                Anthropic::FileDocumentSource
               ),
             type: Symbol,
             cache_control: T.nilable(Anthropic::CacheControlEphemeral),
@@ -107,7 +110,8 @@ module Anthropic
               Anthropic::Base64PDFSource,
               Anthropic::PlainTextSource,
               Anthropic::ContentBlockSource,
-              Anthropic::URLPDFSource
+              Anthropic::URLPDFSource,
+              Anthropic::FileDocumentSource
             )
           end
 
@@ -127,10 +131,18 @@ module Anthropic
             data: String,
             media_type: Symbol,
             content: Anthropic::ContentBlockSource::Content::Variants,
-            url: String
+            url: String,
+            file_id: String
           ).returns(Anthropic::DocumentBlockParam::Source::Variants)
         end
-        def self.new(type:, data: nil, media_type: nil, content: nil, url: nil)
+        def self.new(
+          type:,
+          data: nil,
+          media_type: nil,
+          content: nil,
+          url: nil,
+          file_id: nil
+        )
         end
       end
     end

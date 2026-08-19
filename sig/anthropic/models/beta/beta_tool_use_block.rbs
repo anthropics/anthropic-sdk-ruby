@@ -9,7 +9,8 @@ module Anthropic
           input: ::Hash[Symbol, top],
           name: String,
           type: :tool_use,
-          caller_: Anthropic::Models::Beta::BetaToolUseBlock::caller_
+          caller_: Anthropic::Models::Beta::BetaToolUseBlock::caller_,
+          toolset_name: String?
         }
 
       class BetaToolUseBlock < Anthropic::Internal::Type::BaseModel
@@ -27,11 +28,14 @@ module Anthropic
           Anthropic::Models::Beta::BetaToolUseBlock::caller_
         ) -> Anthropic::Models::Beta::BetaToolUseBlock::caller_
 
+        attr_accessor toolset_name: String?
+
         def initialize: (
           id: String,
           input: ::Hash[Symbol, top],
           name: String,
           ?caller_: Anthropic::Models::Beta::BetaToolUseBlock::caller_,
+          ?toolset_name: String?,
           ?type: :tool_use
         ) -> void
 
@@ -40,7 +44,8 @@ module Anthropic
           input: ::Hash[Symbol, top],
           name: String,
           type: :tool_use,
-          caller_: Anthropic::Models::Beta::BetaToolUseBlock::caller_
+          caller_: Anthropic::Models::Beta::BetaToolUseBlock::caller_,
+          toolset_name: String?
         }
 
         type caller_ =

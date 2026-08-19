@@ -10,7 +10,8 @@ module Anthropic
           name: String,
           type: :tool_use,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
-          caller_: Anthropic::Models::Beta::BetaToolUseBlockParam::caller_
+          caller_: Anthropic::Models::Beta::BetaToolUseBlockParam::caller_,
+          toolset_name: String?
         }
 
       class BetaToolUseBlockParam < Anthropic::Internal::Type::BaseModel
@@ -30,12 +31,15 @@ module Anthropic
           Anthropic::Models::Beta::BetaToolUseBlockParam::caller_
         ) -> Anthropic::Models::Beta::BetaToolUseBlockParam::caller_
 
+        attr_accessor toolset_name: String?
+
         def initialize: (
           id: String,
           input: ::Hash[Symbol, top],
           name: String,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
           ?caller_: Anthropic::Models::Beta::BetaToolUseBlockParam::caller_,
+          ?toolset_name: String?,
           ?type: :tool_use
         ) -> void
 
@@ -45,7 +49,8 @@ module Anthropic
           name: String,
           type: :tool_use,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
-          caller_: Anthropic::Models::Beta::BetaToolUseBlockParam::caller_
+          caller_: Anthropic::Models::Beta::BetaToolUseBlockParam::caller_,
+          toolset_name: String?
         }
 
         type caller_ =

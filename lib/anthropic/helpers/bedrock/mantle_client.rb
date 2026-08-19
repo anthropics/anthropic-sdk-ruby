@@ -113,6 +113,18 @@ module Anthropic
                 "Models listing is not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported."
         end
 
+        # Files are not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported.
+        def files
+          raise NotImplementedError,
+                "Files are not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported."
+        end
+
+        # Skills are not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported.
+        def skills
+          raise NotImplementedError,
+                "Skills are not supported on Bedrock Mantle. Only Messages (/v1/messages) is supported."
+        end
+
         # @api private
         #
         # @return [#call]
