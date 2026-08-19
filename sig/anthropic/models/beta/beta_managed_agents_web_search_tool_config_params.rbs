@@ -1,0 +1,93 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsWebSearchToolConfigParams = Beta::BetaManagedAgentsWebSearchToolConfigParams
+
+    module Beta
+      type beta_managed_agents_web_search_tool_config_params =
+        {
+          name: :web_search,
+          allowed_domains: ::Array[String],
+          blocked_domains: ::Array[String],
+          enabled: bool?,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams::permission_policy?,
+          type: Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams::type_,
+          user_location: Anthropic::Beta::BetaManagedAgentsUserLocation?
+        }
+
+      class BetaManagedAgentsWebSearchToolConfigParams < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: :web_search
+
+        attr_reader allowed_domains: ::Array[String]?
+
+        def allowed_domains=: (::Array[String]) -> ::Array[String]
+
+        attr_reader blocked_domains: ::Array[String]?
+
+        def blocked_domains=: (::Array[String]) -> ::Array[String]
+
+        attr_accessor enabled: bool?
+
+        attr_accessor permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams::permission_policy?
+
+        attr_reader type: Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams::type_?
+
+        def type=: (
+          Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams::type_
+        ) -> Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams::type_
+
+        attr_accessor user_location: Anthropic::Beta::BetaManagedAgentsUserLocation?
+
+        def initialize: (
+          ?allowed_domains: ::Array[String],
+          ?blocked_domains: ::Array[String],
+          ?enabled: bool?,
+          ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams::permission_policy?,
+          ?type: Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams::type_,
+          ?user_location: Anthropic::Beta::BetaManagedAgentsUserLocation?,
+          ?name: :web_search
+        ) -> void
+
+        def to_hash: -> {
+          name: :web_search,
+          allowed_domains: ::Array[String],
+          blocked_domains: ::Array[String],
+          enabled: bool?,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams::permission_policy?,
+          type: Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams::type_,
+          user_location: Anthropic::Beta::BetaManagedAgentsUserLocation?
+        }
+
+        type permission_policy =
+          Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
+          | Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+
+        module PermissionPolicy
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams::permission_policy]
+
+          def self.new:
+            (
+              type: :always_allow | "always_allow"
+            ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
+            | (
+              type: :always_ask | "always_ask"
+            ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+            | (
+              type: Symbol | String
+            ) -> Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams::permission_policy
+        end
+
+        type type_ = :web_search
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          WEB_SEARCH: :web_search
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams::type_]
+        end
+      end
+    end
+  end
+end

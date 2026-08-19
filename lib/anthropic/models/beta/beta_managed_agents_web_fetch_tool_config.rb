@@ -1,0 +1,103 @@
+# frozen_string_literal: true
+
+module Anthropic
+  module Models
+    module Beta
+      class BetaManagedAgentsWebFetchToolConfig < Anthropic::Internal::Type::BaseModel
+        # @!attribute enabled
+        #
+        #   @return [Boolean]
+        required :enabled, Anthropic::Internal::Type::Boolean
+
+        # @!attribute name
+        #
+        #   @return [Symbol, :web_fetch]
+        required :name, const: :web_fetch
+
+        # @!attribute permission_policy
+        #   Permission policy for tool execution.
+        #
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy]
+        required :permission_policy,
+                 union: -> { Anthropic::Beta::BetaManagedAgentsWebFetchToolConfig::PermissionPolicy }
+
+        # @!attribute type
+        #
+        #   @return [Symbol, :web_fetch]
+        required :type, const: :web_fetch
+
+        # @!attribute allowed_domains
+        #
+        #   @return [Array<String>, nil]
+        optional :allowed_domains, Anthropic::Internal::Type::ArrayOf[String]
+
+        # @!attribute blocked_domains
+        #
+        #   @return [Array<String>, nil]
+        optional :blocked_domains, Anthropic::Internal::Type::ArrayOf[String]
+
+        # @!attribute max_content_tokens
+        #
+        #   @return [Integer, nil]
+        optional :max_content_tokens, Integer, nil?: true
+
+        # @!method initialize(enabled:, permission_policy:, allowed_domains: nil, blocked_domains: nil, max_content_tokens: nil, name: :web_fetch, type: :web_fetch)
+        #   Configuration for the web_fetch tool.
+        #
+        #   @param enabled [Boolean]
+        #
+        #   @param permission_policy [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy] Permission policy for tool execution.
+        #
+        #   @param allowed_domains [Array<String>]
+        #
+        #   @param blocked_domains [Array<String>]
+        #
+        #   @param max_content_tokens [Integer, nil]
+        #
+        #   @param name [Symbol, :web_fetch]
+        #
+        #   @param type [Symbol, :web_fetch]
+
+        # Permission policy for tool execution.
+        #
+        # @see Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfig#permission_policy
+        module PermissionPolicy
+          extend Anthropic::Internal::Type::Union
+
+          discriminator :type
+
+          # Tool calls are automatically approved without user confirmation.
+          variant :always_allow, -> { Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy }
+
+          # Tool calls require user confirmation before execution.
+          variant :always_ask, -> { Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy }
+
+          # @!method self.variants
+          #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :always_allow
+              Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy.new(**args)
+            when :always_ask
+              Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
+        end
+      end
+    end
+
+    BetaManagedAgentsWebFetchToolConfig = Beta::BetaManagedAgentsWebFetchToolConfig
+  end
+end

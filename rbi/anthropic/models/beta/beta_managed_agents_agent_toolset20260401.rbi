@@ -16,7 +16,11 @@ module Anthropic
           end
 
         sig do
-          returns(T::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfig])
+          returns(
+            T::Array[
+              Anthropic::Beta::BetaManagedAgentsAgentToolConfig::Variants
+            ]
+          )
         end
         attr_accessor :configs
 
@@ -45,7 +49,16 @@ module Anthropic
           params(
             configs:
               T::Array[
-                Anthropic::Beta::BetaManagedAgentsAgentToolConfig::OrHash
+                T.any(
+                  Anthropic::Beta::BetaManagedAgentsBashToolConfig::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsEditToolConfig::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsReadToolConfig::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsWriteToolConfig::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsGlobToolConfig::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsGrepToolConfig::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsWebFetchToolConfig::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsWebSearchToolConfig::OrHash
+                )
               ],
             default_config:
               Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfig::OrHash,
@@ -65,7 +78,9 @@ module Anthropic
           override.returns(
             {
               configs:
-                T::Array[Anthropic::Beta::BetaManagedAgentsAgentToolConfig],
+                T::Array[
+                  Anthropic::Beta::BetaManagedAgentsAgentToolConfig::Variants
+                ],
               default_config:
                 Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfig,
               type:

@@ -1,0 +1,74 @@
+module Anthropic
+  module Models
+    class BetaManagedAgentsGlobToolConfigParams = Beta::BetaManagedAgentsGlobToolConfigParams
+
+    module Beta
+      type beta_managed_agents_glob_tool_config_params =
+        {
+          name: :glob,
+          enabled: bool?,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams::permission_policy?,
+          type: Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams::type_
+        }
+
+      class BetaManagedAgentsGlobToolConfigParams < Anthropic::Internal::Type::BaseModel
+        attr_accessor name: :glob
+
+        attr_accessor enabled: bool?
+
+        attr_accessor permission_policy: Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams::permission_policy?
+
+        attr_reader type: Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams::type_?
+
+        def type=: (
+          Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams::type_
+        ) -> Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams::type_
+
+        def initialize: (
+          ?enabled: bool?,
+          ?permission_policy: Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams::permission_policy?,
+          ?type: Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams::type_,
+          ?name: :glob
+        ) -> void
+
+        def to_hash: -> {
+          name: :glob,
+          enabled: bool?,
+          permission_policy: Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams::permission_policy?,
+          type: Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams::type_
+        }
+
+        type permission_policy =
+          Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
+          | Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+
+        module PermissionPolicy
+          extend Anthropic::Internal::Type::Union
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams::permission_policy]
+
+          def self.new:
+            (
+              type: :always_allow | "always_allow"
+            ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
+            | (
+              type: :always_ask | "always_ask"
+            ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+            | (
+              type: Symbol | String
+            ) -> Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams::permission_policy
+        end
+
+        type type_ = :glob
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          GLOB: :glob
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams::type_]
+        end
+      end
+    end
+  end
+end
