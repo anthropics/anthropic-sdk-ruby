@@ -1,0 +1,104 @@
+module Anthropic
+  module Models
+    class BetaComputerToolsetConfigs = Beta::BetaComputerToolsetConfigs
+
+    module Beta
+      type beta_computer_toolset_configs =
+        {
+          cursor_position: Anthropic::Beta::BetaComputerCursorPositionConfig?,
+          double_click: Anthropic::Beta::BetaComputerDoubleClickConfig?,
+          hold_key: Anthropic::Beta::BetaComputerHoldKeyConfig?,
+          key: Anthropic::Beta::BetaComputerKeyConfig?,
+          left_click: Anthropic::Beta::BetaComputerLeftClickConfig?,
+          left_click_drag: Anthropic::Beta::BetaComputerLeftClickDragConfig?,
+          left_mouse_down: Anthropic::Beta::BetaComputerLeftMouseDownConfig?,
+          left_mouse_up: Anthropic::Beta::BetaComputerLeftMouseUpConfig?,
+          middle_click: Anthropic::Beta::BetaComputerMiddleClickConfig?,
+          mouse_move: Anthropic::Beta::BetaComputerMouseMoveConfig?,
+          right_click: Anthropic::Beta::BetaComputerRightClickConfig?,
+          screenshot: Anthropic::Beta::BetaComputerScreenshotConfig?,
+          scroll: Anthropic::Beta::BetaComputerScrollConfig?,
+          triple_click: Anthropic::Beta::BetaComputerTripleClickConfig?,
+          type: Anthropic::Beta::BetaComputerTypeConfig?,
+          wait: Anthropic::Beta::BetaComputerWaitConfig?,
+          zoom: Anthropic::Beta::BetaComputerZoomConfig?
+        }
+
+      class BetaComputerToolsetConfigs < Anthropic::Internal::Type::BaseModel
+        attr_accessor cursor_position: Anthropic::Beta::BetaComputerCursorPositionConfig?
+
+        attr_accessor double_click: Anthropic::Beta::BetaComputerDoubleClickConfig?
+
+        attr_accessor hold_key: Anthropic::Beta::BetaComputerHoldKeyConfig?
+
+        attr_accessor key: Anthropic::Beta::BetaComputerKeyConfig?
+
+        attr_accessor left_click: Anthropic::Beta::BetaComputerLeftClickConfig?
+
+        attr_accessor left_click_drag: Anthropic::Beta::BetaComputerLeftClickDragConfig?
+
+        attr_accessor left_mouse_down: Anthropic::Beta::BetaComputerLeftMouseDownConfig?
+
+        attr_accessor left_mouse_up: Anthropic::Beta::BetaComputerLeftMouseUpConfig?
+
+        attr_accessor middle_click: Anthropic::Beta::BetaComputerMiddleClickConfig?
+
+        attr_accessor mouse_move: Anthropic::Beta::BetaComputerMouseMoveConfig?
+
+        attr_accessor right_click: Anthropic::Beta::BetaComputerRightClickConfig?
+
+        attr_accessor screenshot: Anthropic::Beta::BetaComputerScreenshotConfig?
+
+        attr_accessor scroll: Anthropic::Beta::BetaComputerScrollConfig?
+
+        attr_accessor triple_click: Anthropic::Beta::BetaComputerTripleClickConfig?
+
+        attr_accessor type: Anthropic::Beta::BetaComputerTypeConfig?
+
+        attr_accessor wait: Anthropic::Beta::BetaComputerWaitConfig?
+
+        attr_accessor zoom: Anthropic::Beta::BetaComputerZoomConfig?
+
+        def initialize: (
+          ?cursor_position: Anthropic::Beta::BetaComputerCursorPositionConfig?,
+          ?double_click: Anthropic::Beta::BetaComputerDoubleClickConfig?,
+          ?hold_key: Anthropic::Beta::BetaComputerHoldKeyConfig?,
+          ?key: Anthropic::Beta::BetaComputerKeyConfig?,
+          ?left_click: Anthropic::Beta::BetaComputerLeftClickConfig?,
+          ?left_click_drag: Anthropic::Beta::BetaComputerLeftClickDragConfig?,
+          ?left_mouse_down: Anthropic::Beta::BetaComputerLeftMouseDownConfig?,
+          ?left_mouse_up: Anthropic::Beta::BetaComputerLeftMouseUpConfig?,
+          ?middle_click: Anthropic::Beta::BetaComputerMiddleClickConfig?,
+          ?mouse_move: Anthropic::Beta::BetaComputerMouseMoveConfig?,
+          ?right_click: Anthropic::Beta::BetaComputerRightClickConfig?,
+          ?screenshot: Anthropic::Beta::BetaComputerScreenshotConfig?,
+          ?scroll: Anthropic::Beta::BetaComputerScrollConfig?,
+          ?triple_click: Anthropic::Beta::BetaComputerTripleClickConfig?,
+          ?type: Anthropic::Beta::BetaComputerTypeConfig?,
+          ?wait: Anthropic::Beta::BetaComputerWaitConfig?,
+          ?zoom: Anthropic::Beta::BetaComputerZoomConfig?
+        ) -> void
+
+        def to_hash: -> {
+          cursor_position: Anthropic::Beta::BetaComputerCursorPositionConfig?,
+          double_click: Anthropic::Beta::BetaComputerDoubleClickConfig?,
+          hold_key: Anthropic::Beta::BetaComputerHoldKeyConfig?,
+          key: Anthropic::Beta::BetaComputerKeyConfig?,
+          left_click: Anthropic::Beta::BetaComputerLeftClickConfig?,
+          left_click_drag: Anthropic::Beta::BetaComputerLeftClickDragConfig?,
+          left_mouse_down: Anthropic::Beta::BetaComputerLeftMouseDownConfig?,
+          left_mouse_up: Anthropic::Beta::BetaComputerLeftMouseUpConfig?,
+          middle_click: Anthropic::Beta::BetaComputerMiddleClickConfig?,
+          mouse_move: Anthropic::Beta::BetaComputerMouseMoveConfig?,
+          right_click: Anthropic::Beta::BetaComputerRightClickConfig?,
+          screenshot: Anthropic::Beta::BetaComputerScreenshotConfig?,
+          scroll: Anthropic::Beta::BetaComputerScrollConfig?,
+          triple_click: Anthropic::Beta::BetaComputerTripleClickConfig?,
+          type: Anthropic::Beta::BetaComputerTypeConfig?,
+          wait: Anthropic::Beta::BetaComputerWaitConfig?,
+          zoom: Anthropic::Beta::BetaComputerZoomConfig?
+        }
+      end
+    end
+  end
+end

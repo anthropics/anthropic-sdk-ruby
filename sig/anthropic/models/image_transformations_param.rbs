@@ -1,0 +1,35 @@
+module Anthropic
+  module Models
+    type image_transformations_param =
+      {
+        oversized_image: Anthropic::Models::ImageTransformationsParam::oversized_image
+      }
+
+    class ImageTransformationsParam < Anthropic::Internal::Type::BaseModel
+      attr_reader oversized_image: Anthropic::Models::ImageTransformationsParam::oversized_image?
+
+      def oversized_image=: (
+        Anthropic::Models::ImageTransformationsParam::oversized_image
+      ) -> Anthropic::Models::ImageTransformationsParam::oversized_image
+
+      def initialize: (
+        ?oversized_image: Anthropic::Models::ImageTransformationsParam::oversized_image
+      ) -> void
+
+      def to_hash: -> {
+        oversized_image: Anthropic::Models::ImageTransformationsParam::oversized_image
+      }
+
+      type oversized_image = :downsize | :error
+
+      module OversizedImage
+        extend Anthropic::Internal::Type::Enum
+
+        DOWNSIZE: :downsize
+        ERROR: :error
+
+        def self?.values: -> ::Array[Anthropic::Models::ImageTransformationsParam::oversized_image]
+      end
+    end
+  end
+end

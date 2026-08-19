@@ -32,7 +32,7 @@ module Anthropic
       #
       # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
       #
-      # @param container [String, nil] Body param: Container identifier for reuse across requests.
+      # @param container [Anthropic::Models::ContainerParams, String, nil] Body param: Container identifier for reuse across requests.
       #
       # @param inference_geo [String, nil] Body param: Specifies the geographic region for inference processing. If not spe
       #
@@ -52,7 +52,7 @@ module Anthropic
       #
       # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
       #
-      # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::CodeExecutionTool20260120, Anthropic::Models::CodeExecutionTool20260521, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::WebSearchTool20260209, Anthropic::Models::WebFetchTool20260209, Anthropic::Models::WebFetchTool20260309, Anthropic::Models::WebSearchTool20260318, Anthropic::Models::WebFetchTool20260318, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>] Body param: Definitions of tools that the model may use.
+      # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::CodeExecutionTool20260120, Anthropic::Models::CodeExecutionTool20260521, Anthropic::Models::BrowserToolset20260801, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ComputerToolset20260801, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::WebSearchTool20260209, Anthropic::Models::WebFetchTool20260209, Anthropic::Models::WebFetchTool20260309, Anthropic::Models::WebSearchTool20260318, Anthropic::Models::WebFetchTool20260318, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>] Body param: Definitions of tools that the model may use.
       #
       # @param top_k [Integer] Body param: Only sample from the top K options for each subsequent token.
       #
@@ -106,46 +106,55 @@ module Anthropic
 
       # See {Anthropic::Resources::Messages#create} for non-streaming counterpart.
       #
-      # Some parameter documentations has been truncated, see
-      # {Anthropic::Models::MessageCreateParams} for more details.
-      #
       # Send a structured list of input messages with text and/or image content, and the
-      # model will generate the next message in the conversation with streaming.
+      # model will generate the next message in the conversation.
       #
       # The Messages API can be used for either single queries or stateless multi-turn
       # conversations.
       #
-      # Learn more about the Messages API in our [user guide](/en/docs/initial-setup)
+      # Learn more about the Messages API in our
+      # [user guide](https://platform.claude.com/docs/en/get-started)
       #
-      # @overload stream(max_tokens:, messages:, model:, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, request_options: {})
+      # Some parameter documentations has been truncated, see
+      # {Anthropic::Models::MessageCreateParams} for more details.
       #
-      # @param max_tokens [Integer] The maximum number of tokens to generate before stopping.
+      # @overload stream(max_tokens:, messages:, model:, cache_control: nil, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, request_options: {})
       #
-      # @param messages [Array<Anthropic::Models::MessageParam>] Input messages.
+      # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
-      # @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.\n\nSee [models](https://docs.anthropic
+      # @param messages [Array<Anthropic::Models::MessageParam>] Body param: Input messages.
       #
-      # @param metadata [Anthropic::Models::Metadata] An object describing metadata about the request.
+      # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
       #
-      # @param output_config [Anthropic::Models::OutputConfig] Configuration options for the model's output. Controls aspects like output format
+      # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
       #
-      # @param service_tier [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier] Determines whether to use priority capacity (if available) or standard capacity
+      # @param container [Anthropic::Models::ContainerParams, String, nil] Body param: Container identifier for reuse across requests.
       #
-      # @param stop_sequences [Array<String>] Custom text sequences that will cause the model to stop generating.
+      # @param inference_geo [String, nil] Body param: Specifies the geographic region for inference processing. If not spe
       #
-      # @param system_ [String, Array<Anthropic::Models::TextBlockParam>] System prompt.
+      # @param metadata [Anthropic::Models::Metadata] Body param: An object describing metadata about the request.
       #
-      # @param temperature [Float] Amount of randomness injected into the response.
+      # @param output_config [Anthropic::Models::OutputConfig] Body param: Configuration options for the model's output, such as the output for
       #
-      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled] Configuration for enabling Claude's extended thinking.
+      # @param service_tier [Symbol, Anthropic::Models::MessageCreateParams::ServiceTier] Body param: Determines whether to use priority capacity (if available) or standa
       #
-      # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] How the model should use the provided tools. The model can use a specific tool,
+      # @param stop_sequences [Array<String>] Body param: Custom text sequences that will cause the model to stop generating.
       #
-      # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::WebSearchTool20250305>] Definitions of tools that the model may use.
+      # @param system_ [String, Array<Anthropic::Models::TextBlockParam>] Body param: System prompt.
       #
-      # @param top_k [Integer] Only sample from the top K options for each subsequent token.
+      # @param temperature [Float] Body param: Amount of randomness injected into the response.
       #
-      # @param top_p [Float] Use nucleus sampling.
+      # @param thinking [Anthropic::Models::ThinkingConfigEnabled, Anthropic::Models::ThinkingConfigDisabled, Anthropic::Models::ThinkingConfigAdaptive] Body param: Configuration for enabling Claude's extended thinking.
+      #
+      # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
+      #
+      # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::CodeExecutionTool20260120, Anthropic::Models::CodeExecutionTool20260521, Anthropic::Models::BrowserToolset20260801, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ComputerToolset20260801, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::WebSearchTool20260209, Anthropic::Models::WebFetchTool20260209, Anthropic::Models::WebFetchTool20260309, Anthropic::Models::WebSearchTool20260318, Anthropic::Models::WebFetchTool20260318, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>] Body param: Definitions of tools that the model may use.
+      #
+      # @param top_k [Integer] Body param: Only sample from the top K options for each subsequent token.
+      #
+      # @param top_p [Float] Body param: Use nucleus sampling.
+      #
+      # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -205,7 +214,7 @@ module Anthropic
       #
       # @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
       #
-      # @param container [String, nil] Body param: Container identifier for reuse across requests.
+      # @param container [Anthropic::Models::ContainerParams, String, nil] Body param: Container identifier for reuse across requests.
       #
       # @param inference_geo [String, nil] Body param: Specifies the geographic region for inference processing. If not spe
       #
@@ -225,7 +234,7 @@ module Anthropic
       #
       # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
       #
-      # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::CodeExecutionTool20260120, Anthropic::Models::CodeExecutionTool20260521, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::WebSearchTool20260209, Anthropic::Models::WebFetchTool20260209, Anthropic::Models::WebFetchTool20260309, Anthropic::Models::WebSearchTool20260318, Anthropic::Models::WebFetchTool20260318, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>] Body param: Definitions of tools that the model may use.
+      # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::CodeExecutionTool20260120, Anthropic::Models::CodeExecutionTool20260521, Anthropic::Models::BrowserToolset20260801, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ComputerToolset20260801, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::WebSearchTool20260209, Anthropic::Models::WebFetchTool20260209, Anthropic::Models::WebFetchTool20260309, Anthropic::Models::WebSearchTool20260318, Anthropic::Models::WebFetchTool20260318, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>] Body param: Definitions of tools that the model may use.
       #
       # @param top_k [Integer] Body param: Only sample from the top K options for each subsequent token.
       #
@@ -290,7 +299,7 @@ module Anthropic
       #
       # @param tool_choice [Anthropic::Models::ToolChoiceAuto, Anthropic::Models::ToolChoiceAny, Anthropic::Models::ToolChoiceTool, Anthropic::Models::ToolChoiceNone] Body param: How the model should use the provided tools. The model can use a spe
       #
-      # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::CodeExecutionTool20260120, Anthropic::Models::CodeExecutionTool20260521, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::WebSearchTool20260209, Anthropic::Models::WebFetchTool20260209, Anthropic::Models::WebFetchTool20260309, Anthropic::Models::WebSearchTool20260318, Anthropic::Models::WebFetchTool20260318, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>] Body param: Definitions of tools that the model may use.
+      # @param tools [Array<Anthropic::Models::Tool, Anthropic::Models::ToolBash20250124, Anthropic::Models::CodeExecutionTool20250522, Anthropic::Models::CodeExecutionTool20250825, Anthropic::Models::CodeExecutionTool20260120, Anthropic::Models::CodeExecutionTool20260521, Anthropic::Models::BrowserToolset20260801, Anthropic::Models::MemoryTool20250818, Anthropic::Models::ComputerToolset20260801, Anthropic::Models::ToolTextEditor20250124, Anthropic::Models::ToolTextEditor20250429, Anthropic::Models::ToolTextEditor20250728, Anthropic::Models::WebSearchTool20250305, Anthropic::Models::WebFetchTool20250910, Anthropic::Models::WebSearchTool20260209, Anthropic::Models::WebFetchTool20260209, Anthropic::Models::WebFetchTool20260309, Anthropic::Models::WebSearchTool20260318, Anthropic::Models::WebFetchTool20260318, Anthropic::Models::ToolSearchToolBm25_20251119, Anthropic::Models::ToolSearchToolRegex20251119>] Body param: Definitions of tools that the model may use.
       #
       # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
       #

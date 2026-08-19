@@ -9,13 +9,13 @@ module Anthropic
           ?scope_id: String,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
-        ) -> Anthropic::Internal::Page[Anthropic::Beta::FileMetadata]
+        ) -> Anthropic::Internal::Page[Anthropic::Beta::BetaFileMetadata]
 
         def delete: (
           String file_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
-        ) -> Anthropic::Beta::DeletedFile
+        ) -> Anthropic::Beta::BetaDeletedFile
 
         def download: (
           String file_id,
@@ -27,13 +27,13 @@ module Anthropic
           String file_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
-        ) -> Anthropic::Beta::FileMetadata
+        ) -> Anthropic::Beta::BetaFileMetadata
 
         def upload: (
           file: Anthropic::Internal::file_input,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
-        ) -> Anthropic::Beta::FileMetadata
+        ) -> Anthropic::Beta::BetaFileMetadata
 
         def initialize: (client: Anthropic::Client) -> void
       end

@@ -1,0 +1,26 @@
+module Anthropic
+  module Models
+    type skill_source = { type: Anthropic::Models::SkillSource::type_ }
+
+    class SkillSource < Anthropic::Internal::Type::BaseModel
+      attr_accessor type: Anthropic::Models::SkillSource::type_
+
+      def initialize: (type: Anthropic::Models::SkillSource::type_) -> void
+
+      def to_hash: -> { type: Anthropic::Models::SkillSource::type_ }
+
+      type type_ = :custom | :anthropic | :anthropic_example | :plugin
+
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        CUSTOM: :custom
+        ANTHROPIC: :anthropic
+        ANTHROPIC_EXAMPLE: :anthropic_example
+        PLUGIN: :plugin
+
+        def self?.values: -> ::Array[Anthropic::Models::SkillSource::type_]
+      end
+    end
+  end
+end

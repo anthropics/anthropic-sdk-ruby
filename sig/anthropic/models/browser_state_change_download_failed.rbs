@@ -1,0 +1,35 @@
+module Anthropic
+  module Models
+    type browser_state_change_download_failed =
+      {
+        download_id: String,
+        type: :download_failed,
+        url: String,
+        error: String?
+      }
+
+    class BrowserStateChangeDownloadFailed < Anthropic::Internal::Type::BaseModel
+      attr_accessor download_id: String
+
+      attr_accessor type: :download_failed
+
+      attr_accessor url: String
+
+      attr_accessor error: String?
+
+      def initialize: (
+        download_id: String,
+        url: String,
+        ?error: String?,
+        ?type: :download_failed
+      ) -> void
+
+      def to_hash: -> {
+        download_id: String,
+        type: :download_failed,
+        url: String,
+        error: String?
+      }
+    end
+  end
+end

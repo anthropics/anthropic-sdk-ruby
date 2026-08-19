@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    class BetaBrowserStateChangeDownloadCompleted = Beta::BetaBrowserStateChangeDownloadCompleted
+
+    module Beta
+      type beta_browser_state_change_download_completed =
+        {
+          download_id: String,
+          type: :download_completed,
+          url: String,
+          path: String?,
+          size_bytes: Integer?
+        }
+
+      class BetaBrowserStateChangeDownloadCompleted < Anthropic::Internal::Type::BaseModel
+        attr_accessor download_id: String
+
+        attr_accessor type: :download_completed
+
+        attr_accessor url: String
+
+        attr_accessor path: String?
+
+        attr_accessor size_bytes: Integer?
+
+        def initialize: (
+          download_id: String,
+          url: String,
+          ?path: String?,
+          ?size_bytes: Integer?,
+          ?type: :download_completed
+        ) -> void
+
+        def to_hash: -> {
+          download_id: String,
+          type: :download_completed,
+          url: String,
+          path: String?,
+          size_bytes: Integer?
+        }
+      end
+    end
+  end
+end

@@ -27,6 +27,10 @@ module Anthropic
       sig { returns(Symbol) }
       attr_accessor :type
 
+      # For a toolset member tool_use, the toolset family.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :toolset_name
+
       sig do
         params(
           id: String,
@@ -38,6 +42,7 @@ module Anthropic
             ),
           input: T::Hash[Symbol, T.anything],
           name: String,
+          toolset_name: T.nilable(String),
           type: Symbol
         ).returns(T.attached_class)
       end
@@ -47,6 +52,8 @@ module Anthropic
         caller_:,
         input:,
         name:,
+        # For a toolset member tool_use, the toolset family.
+        toolset_name: nil,
         type: :tool_use
       )
       end
@@ -58,7 +65,8 @@ module Anthropic
             caller_: Anthropic::ToolUseBlock::Caller::Variants,
             input: T::Hash[Symbol, T.anything],
             name: String,
-            type: Symbol
+            type: Symbol,
+            toolset_name: T.nilable(String)
           }
         )
       end

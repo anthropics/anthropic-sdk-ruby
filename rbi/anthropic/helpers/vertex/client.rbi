@@ -23,6 +23,14 @@ module Anthropic
         private def resolve_default_credentials?
         end
 
+        sig { returns(T.noreturn) }
+        def files
+        end
+
+        sig { returns(T.noreturn) }
+        def skills
+        end
+
         # @api private
         sig do
           override

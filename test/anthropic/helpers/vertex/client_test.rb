@@ -444,6 +444,16 @@ class Anthropic::Test::VertexClientTest < Minitest::Test
     assert_not_requested(:any, /./)
   end
 
+  def test_files_raises_not_implemented
+    client = Anthropic::VertexClient.new(region: "us-east5", project_id: "proj")
+    assert_raises(NotImplementedError) { client.files }
+  end
+
+  def test_skills_raises_not_implemented
+    client = Anthropic::VertexClient.new(region: "us-east5", project_id: "proj")
+    assert_raises(NotImplementedError) { client.skills }
+  end
+
   # The 1p config store (`~/.config/anthropic`, `ANTHROPIC_CONFIG_DIR`) must
   # never leak into requests to a third-party platform: no store-derived
   # `anthropic-workspace-id` header, no OAuth beta header, no store bearer.

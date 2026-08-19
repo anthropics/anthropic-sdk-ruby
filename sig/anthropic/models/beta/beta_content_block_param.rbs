@@ -43,7 +43,8 @@ module Anthropic
           | (
             type: :image | "image",
             source: Anthropic::Models::Beta::BetaImageBlockParam::source,
-            ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+            ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+            ?transformations: Anthropic::Beta::BetaImageTransformationsParam?
           ) -> Anthropic::Beta::BetaImageBlockParam
           | (
             type: :document | "document",
@@ -76,14 +77,16 @@ module Anthropic
             input: ::Hash[Symbol, top],
             name: String,
             ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
-            ?caller_: Anthropic::Models::Beta::BetaToolUseBlockParam::caller_
+            ?caller_: Anthropic::Models::Beta::BetaToolUseBlockParam::caller_,
+            ?toolset_name: String?
           ) -> Anthropic::Beta::BetaToolUseBlockParam
           | (
             type: :tool_result | "tool_result",
             tool_use_id: String,
             ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
             ?content: Anthropic::Models::Beta::BetaToolResultBlockParam::content,
-            ?is_error: bool
+            ?is_error: bool,
+            ?toolset_name: String?
           ) -> Anthropic::Beta::BetaToolResultBlockParam
           | (
             type: :server_tool_use | "server_tool_use",
@@ -191,6 +194,7 @@ module Anthropic
             ?source: Anthropic::Models::Beta::BetaImageBlockParam::source
             | Anthropic::Models::Beta::BetaRequestDocumentBlock::source
             | String,
+            ?transformations: Anthropic::Beta::BetaImageTransformationsParam?,
             ?context: String?,
             ?title: String? | String,
             ?content: ::Array[Anthropic::Beta::BetaTextBlockParam]
@@ -215,6 +219,7 @@ module Anthropic
             | Anthropic::Models::Beta::BetaServerToolUseBlockParam::caller_
             | Anthropic::Models::Beta::BetaWebSearchToolResultBlockParam::caller_
             | Anthropic::Models::Beta::BetaWebFetchToolResultBlockParam::caller_,
+            ?toolset_name: String?,
             ?tool_use_id: String,
             ?is_error: bool,
             ?server_name: String,

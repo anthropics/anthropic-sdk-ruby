@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    type file_delete_params =
+      { file_id: String } & Anthropic::Internal::Type::request_parameters
+
+    class FileDeleteParams < Anthropic::Internal::Type::BaseModel
+      extend Anthropic::Internal::Type::RequestParameters::Converter
+      include Anthropic::Internal::Type::RequestParameters
+
+      attr_accessor file_id: String
+
+      def initialize: (
+        file_id: String,
+        ?request_options: Anthropic::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        file_id: String,
+        request_options: Anthropic::RequestOptions
+      }
+    end
+  end
+end

@@ -261,6 +261,16 @@ class Anthropic::Test::BedrockMantleClientTest < Minitest::Test
     assert_raises(NotImplementedError) { client.models }
   end
 
+  def test_files_raises_not_implemented
+    client = Anthropic::BedrockMantleClient.new(api_key: "sk-ant-xxx", base_url: "http://localhost")
+    assert_raises(NotImplementedError) { client.files }
+  end
+
+  def test_skills_raises_not_implemented
+    client = Anthropic::BedrockMantleClient.new(api_key: "sk-ant-xxx", base_url: "http://localhost")
+    assert_raises(NotImplementedError) { client.skills }
+  end
+
   def test_beta_models_raises_not_implemented
     client = Anthropic::BedrockMantleClient.new(api_key: "sk-ant-xxx", base_url: "http://localhost")
     assert_raises(NotImplementedError) { client.beta.models }

@@ -12,6 +12,9 @@ TEST_PATHS=(
 	test/anthropic/resources/messages_test.rb
 	test/anthropic/resources/messages/batches_test.rb
 	test/anthropic/resources/models_test.rb
+	test/anthropic/resources/files_test.rb
+	test/anthropic/resources/skills_test.rb
+	test/anthropic/resources/skills/versions_test.rb
 	test/anthropic/resources/beta_test.rb
 	test/anthropic/resources/beta/models_test.rb
 	test/anthropic/resources/beta/messages_test.rb

@@ -6,7 +6,8 @@ module Anthropic
         type: :tool_result,
         cache_control: Anthropic::CacheControlEphemeral?,
         content: Anthropic::Models::ToolResultBlockParam::content,
-        is_error: bool
+        is_error: bool,
+        toolset_name: String?
       }
 
     class ToolResultBlockParam < Anthropic::Internal::Type::BaseModel
@@ -26,11 +27,14 @@ module Anthropic
 
       def is_error=: (bool) -> bool
 
+      attr_accessor toolset_name: String?
+
       def initialize: (
         tool_use_id: String,
         ?cache_control: Anthropic::CacheControlEphemeral?,
         ?content: Anthropic::Models::ToolResultBlockParam::content,
         ?is_error: bool,
+        ?toolset_name: String?,
         ?type: :tool_result
       ) -> void
 
@@ -39,7 +43,8 @@ module Anthropic
         type: :tool_result,
         cache_control: Anthropic::CacheControlEphemeral?,
         content: Anthropic::Models::ToolResultBlockParam::content,
-        is_error: bool
+        is_error: bool,
+        toolset_name: String?
       }
 
       type content =
@@ -55,6 +60,7 @@ module Anthropic
           | Anthropic::SearchResultBlockParam
           | Anthropic::DocumentBlockParam
           | Anthropic::ToolReferenceBlockParam
+          | Anthropic::BrowserStateBlockParam
 
         module Content
           extend Anthropic::Internal::Type::Union
@@ -71,7 +77,8 @@ module Anthropic
             | (
               type: :image | "image",
               source: Anthropic::Models::ImageBlockParam::source,
-              ?cache_control: Anthropic::CacheControlEphemeral?
+              ?cache_control: Anthropic::CacheControlEphemeral?,
+              ?transformations: Anthropic::ImageTransformationsParam?
             ) -> Anthropic::ImageBlockParam
             | (
               type: :search_result | "search_result",
@@ -95,6 +102,12 @@ module Anthropic
               ?cache_control: Anthropic::CacheControlEphemeral?
             ) -> Anthropic::ToolReferenceBlockParam
             | (
+              type: :browser_state | "browser_state",
+              tabs: ::Array[Anthropic::BrowserStateTabEntry],
+              ?cache_control: Anthropic::CacheControlEphemeral?,
+              ?state_changes: ::Array[Anthropic::Models::browser_state_change]?
+            ) -> Anthropic::BrowserStateBlockParam
+            | (
               type: Symbol | String,
               ?text: String,
               ?cache_control: Anthropic::CacheControlEphemeral?,
@@ -104,10 +117,13 @@ module Anthropic
               ?source: Anthropic::Models::ImageBlockParam::source
               | String
               | Anthropic::Models::DocumentBlockParam::source,
+              ?transformations: Anthropic::ImageTransformationsParam?,
               ?content: ::Array[Anthropic::TextBlockParam],
               ?title: String | String?,
               ?context: String?,
-              ?tool_name: String
+              ?tool_name: String,
+              ?tabs: ::Array[Anthropic::BrowserStateTabEntry],
+              ?state_changes: ::Array[Anthropic::Models::browser_state_change]?
             ) -> Anthropic::Models::ToolResultBlockParam::Content::content
         end
 

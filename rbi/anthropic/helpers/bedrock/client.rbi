@@ -22,6 +22,14 @@ module Anthropic
         def models
         end
 
+        sig { returns(T.noreturn) }
+        def files
+        end
+
+        sig { returns(T.noreturn) }
+        def skills
+        end
+
         # @api private
         sig do
           override

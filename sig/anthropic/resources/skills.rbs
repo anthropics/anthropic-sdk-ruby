@@ -1,0 +1,32 @@
+module Anthropic
+  module Resources
+    class Skills
+      attr_reader versions: Anthropic::Resources::Skills::Versions
+
+      def create: (
+        files: ::Array[Anthropic::Internal::file_input],
+        ?display_name: String?,
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::Skill
+
+      def retrieve: (
+        String skill_id,
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::Skill
+
+      def list: (
+        ?limit: Integer,
+        ?page: String?,
+        ?source: String?,
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::Internal::PageCursor[Anthropic::Skill]
+
+      def delete: (
+        String skill_id,
+        ?request_options: Anthropic::request_opts
+      ) -> Anthropic::DeletedSkill
+
+      def initialize: (client: Anthropic::Client) -> void
+    end
+  end
+end

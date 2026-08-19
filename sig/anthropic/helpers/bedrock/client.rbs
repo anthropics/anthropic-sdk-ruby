@@ -14,6 +14,10 @@ module Anthropic
 
         def models: -> bot
 
+        def files: -> bot
+
+        def skills: -> bot
+
         private def build_request: (
           Anthropic::Internal::Transport::BaseClient::request_components req,
           Anthropic::request_options opts

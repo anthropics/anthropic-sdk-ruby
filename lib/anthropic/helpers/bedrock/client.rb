@@ -155,6 +155,14 @@ module Anthropic
           raise NotImplementedError.new(message)
         end
 
+        def files
+          raise NotImplementedError, "Files are not supported on Bedrock."
+        end
+
+        def skills
+          raise NotImplementedError, "Skills are not supported on Bedrock."
+        end
+
         # @api private
         #
         # @param req [Hash{Symbol=>Object}] .

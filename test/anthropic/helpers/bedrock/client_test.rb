@@ -569,6 +569,14 @@ class Anthropic::Test::BedrockClientTest < Minitest::Test
     assert_match(/list-available-models/, err.message)
   end
 
+  def test_files_raises_not_implemented
+    assert_raises(NotImplementedError) { make_client.files }
+  end
+
+  def test_skills_raises_not_implemented
+    assert_raises(NotImplementedError) { make_client.skills }
+  end
+
   # First-party static env keys must never fold into a Bedrock client.
   def test_does_not_fold_env_static_keys
     original = %w[ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN].to_h { [_1, ENV.fetch(_1, nil)] }

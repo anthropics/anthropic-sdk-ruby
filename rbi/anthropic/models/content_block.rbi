@@ -58,6 +58,7 @@ module Anthropic
             ),
           input: T::Hash[Symbol, T.anything],
           name: T.any(String, Anthropic::ServerToolUseBlock::Name::OrSymbol),
+          toolset_name: T.nilable(String),
           content:
             T.any(
               T.any(
@@ -130,6 +131,8 @@ module Anthropic
         caller_: nil,
         input: nil,
         name: nil,
+        # For a toolset member tool_use, the toolset family.
+        toolset_name: nil,
         # Code execution result with encrypted stdout for PFC + web_search results.
         content: nil,
         tool_use_id: nil,

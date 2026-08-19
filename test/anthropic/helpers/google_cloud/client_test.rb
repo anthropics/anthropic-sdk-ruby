@@ -508,6 +508,14 @@ class Anthropic::Test::GoogleCloudClientTest < Minitest::Test
     assert_kind_of(Anthropic::Resources::Beta, make_client.beta)
   end
 
+  def test_files_resource_available
+    assert_kind_of(Anthropic::Resources::Files, make_client.files)
+  end
+
+  def test_skills_resource_available
+    assert_kind_of(Anthropic::Resources::Skills, make_client.skills)
+  end
+
   def test_completions_raises
     err = assert_raises(NotImplementedError) { make_client.completions }
     assert_match(/Completions/, err.message)

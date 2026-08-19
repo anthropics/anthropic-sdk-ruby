@@ -36,7 +36,13 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120, nil]
         optional :caller_, union: -> { Anthropic::Beta::BetaToolUseBlockParam::Caller }, api_name: :caller
 
-        # @!method initialize(id:, input:, name:, cache_control: nil, caller_: nil, type: :tool_use)
+        # @!attribute toolset_name
+        #   For a toolset member tool_use, the toolset family this member belongs to.
+        #
+        #   @return [String, nil]
+        optional :toolset_name, String, nil?: true
+
+        # @!method initialize(id:, input:, name:, cache_control: nil, caller_: nil, toolset_name: nil, type: :tool_use)
         #   @param id [String]
         #
         #   @param input [Hash{Symbol=>Object}]
@@ -46,6 +52,8 @@ module Anthropic
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
         #   @param caller_ [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120] Tool invocation directly from the model.
+        #
+        #   @param toolset_name [String, nil] For a toolset member tool_use, the toolset family this member belongs to.
         #
         #   @param type [Symbol, :tool_use]
 

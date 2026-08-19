@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    class BetaBrowserReadNetworkConfig = Beta::BetaBrowserReadNetworkConfig
+
+    module Beta
+      type beta_browser_read_network_config =
+        { defer_loading: bool?, enabled: bool? }
+
+      class BetaBrowserReadNetworkConfig < Anthropic::Internal::Type::BaseModel
+        attr_accessor defer_loading: bool?
+
+        attr_accessor enabled: bool?
+
+        def initialize: (?defer_loading: bool?, ?enabled: bool?) -> void
+
+        def to_hash: -> { defer_loading: bool?, enabled: bool? }
+      end
+    end
+  end
+end

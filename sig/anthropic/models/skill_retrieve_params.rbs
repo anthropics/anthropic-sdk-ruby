@@ -1,0 +1,23 @@
+module Anthropic
+  module Models
+    type skill_retrieve_params =
+      { skill_id: String } & Anthropic::Internal::Type::request_parameters
+
+    class SkillRetrieveParams < Anthropic::Internal::Type::BaseModel
+      extend Anthropic::Internal::Type::RequestParameters::Converter
+      include Anthropic::Internal::Type::RequestParameters
+
+      attr_accessor skill_id: String
+
+      def initialize: (
+        skill_id: String,
+        ?request_options: Anthropic::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        skill_id: String,
+        request_options: Anthropic::RequestOptions
+      }
+    end
+  end
+end

@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    class BetaBrowserHoldKeyConfig = Beta::BetaBrowserHoldKeyConfig
+
+    module Beta
+      type beta_browser_hold_key_config =
+        { defer_loading: bool?, enabled: bool? }
+
+      class BetaBrowserHoldKeyConfig < Anthropic::Internal::Type::BaseModel
+        attr_accessor defer_loading: bool?
+
+        attr_accessor enabled: bool?
+
+        def initialize: (?defer_loading: bool?, ?enabled: bool?) -> void
+
+        def to_hash: -> { defer_loading: bool?, enabled: bool? }
+      end
+    end
+  end
+end

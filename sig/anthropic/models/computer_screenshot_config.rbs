@@ -1,0 +1,15 @@
+module Anthropic
+  module Models
+    type computer_screenshot_config = { defer_loading: bool?, enabled: bool? }
+
+    class ComputerScreenshotConfig < Anthropic::Internal::Type::BaseModel
+      attr_accessor defer_loading: bool?
+
+      attr_accessor enabled: bool?
+
+      def initialize: (?defer_loading: bool?, ?enabled: bool?) -> void
+
+      def to_hash: -> { defer_loading: bool?, enabled: bool? }
+    end
+  end
+end

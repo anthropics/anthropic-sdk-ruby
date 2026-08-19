@@ -46,6 +46,7 @@ module Anthropic
         | Anthropic::PlainTextSource
         | Anthropic::ContentBlockSource
         | Anthropic::URLPDFSource
+        | Anthropic::FileDocumentSource
 
       module Source
         extend Anthropic::Internal::Type::Union
@@ -69,11 +70,16 @@ module Anthropic
           ) -> Anthropic::ContentBlockSource
           | (type: :url | "url", url: String) -> Anthropic::URLPDFSource
           | (
+            type: :file | "file",
+            file_id: String
+          ) -> Anthropic::FileDocumentSource
+          | (
             type: Symbol | String,
             ?data: String,
             ?media_type: :"application/pdf" | :"text/plain",
             ?content: Anthropic::Models::ContentBlockSource::content,
-            ?url: String
+            ?url: String,
+            ?file_id: String
           ) -> Anthropic::Models::DocumentBlockParam::source
       end
     end

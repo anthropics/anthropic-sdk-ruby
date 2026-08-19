@@ -40,8 +40,11 @@ module Anthropic
           source:
             T.any(
               Anthropic::Base64ImageSource::OrHash,
-              Anthropic::URLImageSource::OrHash
-            )
+              Anthropic::URLImageSource::OrHash,
+              Anthropic::FileImageSource::OrHash
+            ),
+          transformations:
+            T.nilable(Anthropic::ImageTransformationsParam::OrHash)
         ).returns(Anthropic::ContentBlockSourceContent::Variants)
       end
       def self.new(
@@ -50,7 +53,12 @@ module Anthropic
         # Create a cache control breakpoint at this content block.
         cache_control: nil,
         citations: nil,
-        source: nil
+        source: nil,
+        # Configures the transformations the server applies to this image before the model
+        # observes it. Each key names a condition the server transforms images for; its
+        # value selects the transformation applied. Omitted keys keep their default
+        # behavior, and an empty object is equivalent to omitting the field.
+        transformations: nil
       )
       end
     end
