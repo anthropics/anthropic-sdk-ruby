@@ -324,7 +324,7 @@ Full Changelog: [v1.43.0...v1.44.0](https://github.com/anthropics/anthropic-sdk-
 
 ### Bug Fixes
 
-* **internal:** preserve path-qualified multipart filenames (SDK-40) ([#937](https://github.com/anthropics/anthropic-sdk-ruby/issues/937)) ([000e793](https://github.com/anthropics/anthropic-sdk-ruby/commit/000e793062309ee421111866f1bd56d0384277f3))
+* **internal:** preserve path-qualified multipart filenames ([#937](https://github.com/anthropics/anthropic-sdk-ruby/issues/937)) ([000e793](https://github.com/anthropics/anthropic-sdk-ruby/commit/000e793062309ee421111866f1bd56d0384277f3))
 
 
 ### Documentation
