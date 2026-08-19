@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.65.0 (2026-08-19)
+
+Full Changelog: [v1.64.0...v1.65.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.64.0...v1.65.0)
+
+### Features
+
+* **api:** managed agents web search config and self hosted sandbox memory ([c7a8dac](https://github.com/anthropics/anthropic-sdk-ruby/commit/c7a8dac314c1b05ef5e01d632f4d0a8c0b467e38))
+
 ## 1.64.0 (2026-08-19)
 
 Full Changelog: [v1.63.0...v1.64.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.63.0...v1.64.0)
