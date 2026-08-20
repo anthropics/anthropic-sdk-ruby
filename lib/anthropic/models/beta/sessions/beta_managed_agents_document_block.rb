@@ -60,6 +60,18 @@ module Anthropic
             # Document referenced by file ID.
             variant :file, -> { Anthropic::Beta::Sessions::BetaManagedAgentsFileDocumentSource }
 
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              BASE64 = :base64
+              TEXT = :text
+              URL = :url
+              FILE = :file
+
+              # @!method self.values
+              #   @return [Array<Symbol>]
+            end
+
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64DocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLDocumentSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileDocumentSource)]
 

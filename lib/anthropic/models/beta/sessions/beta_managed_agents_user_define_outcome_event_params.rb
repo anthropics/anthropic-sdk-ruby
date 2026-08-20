@@ -56,6 +56,16 @@ module Anthropic
             # Rubric content provided inline as text.
             variant :text, -> { Anthropic::Beta::Sessions::BetaManagedAgentsTextRubricParams }
 
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              FILE = :file
+              TEXT = :text
+
+              # @!method self.values
+              #   @return [Array<Symbol>]
+            end
+
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileRubricParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextRubricParams)]
 

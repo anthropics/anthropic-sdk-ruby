@@ -10,6 +10,17 @@ module Anthropic
       module BetaDreamInput
         extend Anthropic::Internal::Type::Union
 
+        type type_ = :memory_store | :sessions
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          MEMORY_STORE: :memory_store
+          SESSIONS: :sessions
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaDreamInput::type_]
+        end
+
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_dream_input]
 
         def self.new:

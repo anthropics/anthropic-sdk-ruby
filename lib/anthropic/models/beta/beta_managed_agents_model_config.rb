@@ -73,6 +73,19 @@ module Anthropic
           # Maximum effort. Favors reasoning depth over latency.
           variant :max, -> { Anthropic::Beta::BetaManagedAgentsEffortMax }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            LOW = :low
+            MEDIUM = :medium
+            HIGH = :high
+            XHIGH = :xhigh
+            MAX = :max
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsEffortLow, Anthropic::Models::Beta::BetaManagedAgentsEffortMedium, Anthropic::Models::Beta::BetaManagedAgentsEffortHigh, Anthropic::Models::Beta::BetaManagedAgentsEffortXhigh, Anthropic::Models::Beta::BetaManagedAgentsEffortMax)]
 

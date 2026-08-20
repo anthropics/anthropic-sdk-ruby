@@ -24,6 +24,62 @@ module Anthropic
           )
         end
 
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias { T.all(Symbol, Anthropic::ContentBlock::Type) }
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        TEXT = T.let(:text, Anthropic::ContentBlock::Type::TaggedSymbol)
+        THINKING = T.let(:thinking, Anthropic::ContentBlock::Type::TaggedSymbol)
+        REDACTED_THINKING =
+          T.let(:redacted_thinking, Anthropic::ContentBlock::Type::TaggedSymbol)
+        TOOL_USE = T.let(:tool_use, Anthropic::ContentBlock::Type::TaggedSymbol)
+        SERVER_TOOL_USE =
+          T.let(:server_tool_use, Anthropic::ContentBlock::Type::TaggedSymbol)
+        WEB_SEARCH_TOOL_RESULT =
+          T.let(
+            :web_search_tool_result,
+            Anthropic::ContentBlock::Type::TaggedSymbol
+          )
+        WEB_FETCH_TOOL_RESULT =
+          T.let(
+            :web_fetch_tool_result,
+            Anthropic::ContentBlock::Type::TaggedSymbol
+          )
+        CODE_EXECUTION_TOOL_RESULT =
+          T.let(
+            :code_execution_tool_result,
+            Anthropic::ContentBlock::Type::TaggedSymbol
+          )
+        BASH_CODE_EXECUTION_TOOL_RESULT =
+          T.let(
+            :bash_code_execution_tool_result,
+            Anthropic::ContentBlock::Type::TaggedSymbol
+          )
+        TEXT_EDITOR_CODE_EXECUTION_TOOL_RESULT =
+          T.let(
+            :text_editor_code_execution_tool_result,
+            Anthropic::ContentBlock::Type::TaggedSymbol
+          )
+        TOOL_SEARCH_TOOL_RESULT =
+          T.let(
+            :tool_search_tool_result,
+            Anthropic::ContentBlock::Type::TaggedSymbol
+          )
+        CONTAINER_UPLOAD =
+          T.let(:container_upload, Anthropic::ContentBlock::Type::TaggedSymbol)
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::ContentBlock::Type::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
+      end
+
       sig { override.returns(T::Array[Anthropic::ContentBlock::Variants]) }
       def self.variants
       end

@@ -72,6 +72,16 @@ module Anthropic
           # Tool calls require user confirmation before execution.
           variant :always_ask, -> { Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            ALWAYS_ALLOW = :always_allow
+            ALWAYS_ASK = :always_ask
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy)]
 

@@ -61,6 +61,17 @@ module Anthropic
           # Reference to every tool in the named MCP server's toolset.
           variant :mcp_toolset_reference, -> { Anthropic::Beta::BetaToolChangeMCPToolsetReference }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TOOL_REFERENCE = :tool_reference
+            MCP_TOOL_REFERENCE = :mcp_tool_reference
+            MCP_TOOLSET_REFERENCE = :mcp_toolset_reference
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaToolChangeToolReference, Anthropic::Models::Beta::BetaToolChangeMCPToolReference, Anthropic::Models::Beta::BetaToolChangeMCPToolsetReference)]
 

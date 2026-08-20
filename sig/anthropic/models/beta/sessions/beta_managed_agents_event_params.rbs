@@ -14,6 +14,29 @@ module Anthropic
         module BetaManagedAgentsEventParams
           extend Anthropic::Internal::Type::Union
 
+          type type_ =
+            :"user.message"
+            | :"user.interrupt"
+            | :"user.tool_confirmation"
+            | :"user.custom_tool_result"
+            | :"user.define_outcome"
+            | :"user.tool_result"
+            | :"system.message"
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            USER_MESSAGE: :"user.message"
+            USER_INTERRUPT: :"user.interrupt"
+            USER_TOOL_CONFIRMATION: :"user.tool_confirmation"
+            USER_CUSTOM_TOOL_RESULT: :"user.custom_tool_result"
+            USER_DEFINE_OUTCOME: :"user.define_outcome"
+            USER_TOOL_RESULT: :"user.tool_result"
+            SYSTEM_MESSAGE: :"system.message"
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsEventParams::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::beta_managed_agents_event_params]
 
           def self.new:

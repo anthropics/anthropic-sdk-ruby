@@ -16,6 +16,48 @@ module Anthropic
           )
         end
 
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias { T.all(Symbol, Anthropic::TextCitationParam::Type) }
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        CHAR_LOCATION =
+          T.let(
+            :char_location,
+            Anthropic::TextCitationParam::Type::TaggedSymbol
+          )
+        PAGE_LOCATION =
+          T.let(
+            :page_location,
+            Anthropic::TextCitationParam::Type::TaggedSymbol
+          )
+        CONTENT_BLOCK_LOCATION =
+          T.let(
+            :content_block_location,
+            Anthropic::TextCitationParam::Type::TaggedSymbol
+          )
+        WEB_SEARCH_RESULT_LOCATION =
+          T.let(
+            :web_search_result_location,
+            Anthropic::TextCitationParam::Type::TaggedSymbol
+          )
+        SEARCH_RESULT_LOCATION =
+          T.let(
+            :search_result_location,
+            Anthropic::TextCitationParam::Type::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::TextCitationParam::Type::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
+      end
+
       sig { override.returns(T::Array[Anthropic::TextCitationParam::Variants]) }
       def self.variants
       end

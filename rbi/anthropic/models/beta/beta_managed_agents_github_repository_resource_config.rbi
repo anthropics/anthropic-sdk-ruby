@@ -126,6 +126,40 @@ module Anthropic
               )
             end
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig::Checkout::Type
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            BRANCH =
+              T.let(
+                :branch,
+                Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig::Checkout::Type::TaggedSymbol
+              )
+            COMMIT =
+              T.let(
+                :commit,
+                Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig::Checkout::Type::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig::Checkout::Type::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
           sig do
             override.returns(
               T::Array[

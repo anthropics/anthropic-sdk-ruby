@@ -82,6 +82,20 @@ module Anthropic
           # model-visible text from it; the model never sees the raw fields.
           variant :browser_state, -> { Anthropic::BrowserStateBlockParam }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TEXT = :text
+            IMAGE = :image
+            SEARCH_RESULT = :search_result
+            DOCUMENT = :document
+            TOOL_REFERENCE = :tool_reference
+            BROWSER_STATE = :browser_state
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::ToolReferenceBlockParam, Anthropic::Models::BrowserStateBlockParam)]
 

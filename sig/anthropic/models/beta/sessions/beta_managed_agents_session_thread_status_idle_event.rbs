@@ -52,6 +52,23 @@ module Anthropic
           module StopReason
             extend Anthropic::Internal::Type::Union
 
+            type type_ =
+              :end_turn
+              | :requires_action
+              | :retries_exhausted
+              | :budget_reached
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              END_TURN: :end_turn
+              REQUIRES_ACTION: :requires_action
+              RETRIES_EXHAUSTED: :retries_exhausted
+              BUDGET_REACHED: :budget_reached
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::StopReason::type_]
+            end
+
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::stop_reason]
 
             def self.new:

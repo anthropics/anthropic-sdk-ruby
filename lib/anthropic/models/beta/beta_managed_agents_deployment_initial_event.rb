@@ -19,6 +19,17 @@ module Anthropic
         # Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
         variant :"system.message", -> { Anthropic::Beta::BetaManagedAgentsDeploymentSystemMessageEvent }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          USER_MESSAGE = :"user.message"
+          USER_DEFINE_OUTCOME = :"user.define_outcome"
+          SYSTEM_MESSAGE = :"system.message"
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsDeploymentUserMessageEvent, Anthropic::Models::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent, Anthropic::Models::Beta::BetaManagedAgentsDeploymentSystemMessageEvent)]
 

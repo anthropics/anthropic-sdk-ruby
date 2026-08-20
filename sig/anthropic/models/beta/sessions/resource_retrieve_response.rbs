@@ -10,6 +10,18 @@ module Anthropic
         module ResourceRetrieveResponse
           extend Anthropic::Internal::Type::Union
 
+          type type_ = :github_repository | :file | :memory_store
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            GITHUB_REPOSITORY: :github_repository
+            FILE: :file
+            MEMORY_STORE: :memory_store
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::ResourceRetrieveResponse::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::resource_retrieve_response]
 
           def self.new:

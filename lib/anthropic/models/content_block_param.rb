@@ -51,6 +51,30 @@ module Anthropic
       # Files uploaded via this block will be available in the container's input directory.
       variant :container_upload, -> { Anthropic::ContainerUploadBlockParam }
 
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        TEXT = :text
+        IMAGE = :image
+        DOCUMENT = :document
+        SEARCH_RESULT = :search_result
+        THINKING = :thinking
+        REDACTED_THINKING = :redacted_thinking
+        TOOL_USE = :tool_use
+        TOOL_RESULT = :tool_result
+        SERVER_TOOL_USE = :server_tool_use
+        WEB_SEARCH_TOOL_RESULT = :web_search_tool_result
+        WEB_FETCH_TOOL_RESULT = :web_fetch_tool_result
+        CODE_EXECUTION_TOOL_RESULT = :code_execution_tool_result
+        BASH_CODE_EXECUTION_TOOL_RESULT = :bash_code_execution_tool_result
+        TEXT_EDITOR_CODE_EXECUTION_TOOL_RESULT = :text_editor_code_execution_tool_result
+        TOOL_SEARCH_TOOL_RESULT = :tool_search_tool_result
+        CONTAINER_UPLOAD = :container_upload
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+
       # @!method self.variants
       #   @return [Array(Anthropic::Models::TextBlockParam, Anthropic::Models::ImageBlockParam, Anthropic::Models::DocumentBlockParam, Anthropic::Models::SearchResultBlockParam, Anthropic::Models::ThinkingBlockParam, Anthropic::Models::RedactedThinkingBlockParam, Anthropic::Models::ToolUseBlockParam, Anthropic::Models::ToolResultBlockParam, Anthropic::Models::ServerToolUseBlockParam, Anthropic::Models::WebSearchToolResultBlockParam, Anthropic::Models::WebFetchToolResultBlockParam, Anthropic::Models::CodeExecutionToolResultBlockParam, Anthropic::Models::BashCodeExecutionToolResultBlockParam, Anthropic::Models::TextEditorCodeExecutionToolResultBlockParam, Anthropic::Models::ToolSearchToolResultBlockParam, Anthropic::Models::ContainerUploadBlockParam)]
 

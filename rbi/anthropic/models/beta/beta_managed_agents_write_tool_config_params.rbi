@@ -114,6 +114,40 @@ module Anthropic
               )
             end
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::BetaManagedAgentsWriteToolConfigParams::PermissionPolicy::Type
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            ALWAYS_ALLOW =
+              T.let(
+                :always_allow,
+                Anthropic::Beta::BetaManagedAgentsWriteToolConfigParams::PermissionPolicy::Type::TaggedSymbol
+              )
+            ALWAYS_ASK =
+              T.let(
+                :always_ask,
+                Anthropic::Beta::BetaManagedAgentsWriteToolConfigParams::PermissionPolicy::Type::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::BetaManagedAgentsWriteToolConfigParams::PermissionPolicy::Type::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
           sig do
             override.returns(
               T::Array[

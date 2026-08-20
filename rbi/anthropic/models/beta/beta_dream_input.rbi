@@ -19,6 +19,35 @@ module Anthropic
             )
           end
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::Beta::BetaDreamInput::Type)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          MEMORY_STORE =
+            T.let(
+              :memory_store,
+              Anthropic::Beta::BetaDreamInput::Type::TaggedSymbol
+            )
+          SESSIONS =
+            T.let(
+              :sessions,
+              Anthropic::Beta::BetaDreamInput::Type::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[Anthropic::Beta::BetaDreamInput::Type::TaggedSymbol]
+            )
+          end
+          def self.values
+          end
+        end
+
         sig do
           override.returns(T::Array[Anthropic::Beta::BetaDreamInput::Variants])
         end

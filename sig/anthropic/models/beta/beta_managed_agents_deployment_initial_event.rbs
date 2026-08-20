@@ -11,6 +11,19 @@ module Anthropic
       module BetaManagedAgentsDeploymentInitialEvent
         extend Anthropic::Internal::Type::Union
 
+        type type_ =
+          :"user.message" | :"user.define_outcome" | :"system.message"
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          USER_MESSAGE: :"user.message"
+          USER_DEFINE_OUTCOME: :"user.define_outcome"
+          SYSTEM_MESSAGE: :"system.message"
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsDeploymentInitialEvent::type_]
+        end
+
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_initial_event]
 
         def self.new:

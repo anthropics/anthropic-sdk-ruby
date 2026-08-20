@@ -40,6 +40,17 @@ module Anthropic
           module Networking
             extend Anthropic::Internal::Type::Union
 
+            type type_ = :unrestricted | :limited
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              UNRESTRICTED: :unrestricted
+              LIMITED: :limited
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Networking::type_]
+            end
+
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::networking]
 
             def self.new:

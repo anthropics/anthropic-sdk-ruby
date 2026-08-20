@@ -10,6 +10,17 @@ module Anthropic
       module BetaManagedAgentsSkillParams
         extend Anthropic::Internal::Type::Union
 
+        type type_ = :anthropic | :custom
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          ANTHROPIC: :anthropic
+          CUSTOM: :custom
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSkillParams::type_]
+        end
+
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_skill_params]
 
         def self.new:

@@ -42,6 +42,19 @@ module Anthropic
           module Source
             extend Anthropic::Internal::Type::Union
 
+            type type_ = :base64 | :text | :url | :file
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              BASE64: :base64
+              TEXT: :text
+              URL: :url
+              FILE: :file
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock::Source::type_]
+            end
+
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock::source]
 
             def self.new:

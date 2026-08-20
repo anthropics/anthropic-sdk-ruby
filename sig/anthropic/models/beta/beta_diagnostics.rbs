@@ -30,6 +30,27 @@ module Anthropic
         module CacheMissReason
           extend Anthropic::Internal::Type::Union
 
+          type type_ =
+            :model_changed
+            | :system_changed
+            | :tools_changed
+            | :messages_changed
+            | :previous_message_not_found
+            | :unavailable
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            MODEL_CHANGED: :model_changed
+            SYSTEM_CHANGED: :system_changed
+            TOOLS_CHANGED: :tools_changed
+            MESSAGES_CHANGED: :messages_changed
+            PREVIOUS_MESSAGE_NOT_FOUND: :previous_message_not_found
+            UNAVAILABLE: :unavailable
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaDiagnostics::CacheMissReason::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaDiagnostics::cache_miss_reason]
 
           def self.new:

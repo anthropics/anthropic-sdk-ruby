@@ -12,6 +12,19 @@ module Anthropic
       module BetaToolChoice
         extend Anthropic::Internal::Type::Union
 
+        type type_ = :auto | :any | :tool | :none
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          AUTO: :auto
+          ANY: :any
+          TOOL: :tool
+          NONE: :none
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaToolChoice::type_]
+        end
+
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_tool_choice]
 
         def self.new:

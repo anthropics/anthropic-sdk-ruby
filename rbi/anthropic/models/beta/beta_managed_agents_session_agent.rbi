@@ -193,6 +193,40 @@ module Anthropic
               )
             end
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::BetaManagedAgentsSessionAgent::Skill::Type
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            ANTHROPIC =
+              T.let(
+                :anthropic,
+                Anthropic::Beta::BetaManagedAgentsSessionAgent::Skill::Type::TaggedSymbol
+              )
+            CUSTOM =
+              T.let(
+                :custom,
+                Anthropic::Beta::BetaManagedAgentsSessionAgent::Skill::Type::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::BetaManagedAgentsSessionAgent::Skill::Type::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
           sig do
             override.returns(
               T::Array[
@@ -230,6 +264,45 @@ module Anthropic
                 Anthropic::Beta::BetaManagedAgentsCustomTool
               )
             end
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::BetaManagedAgentsSessionAgent::Tool::Type
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            AGENT_TOOLSET_20260401 =
+              T.let(
+                :agent_toolset_20260401,
+                Anthropic::Beta::BetaManagedAgentsSessionAgent::Tool::Type::TaggedSymbol
+              )
+            MCP_TOOLSET =
+              T.let(
+                :mcp_toolset,
+                Anthropic::Beta::BetaManagedAgentsSessionAgent::Tool::Type::TaggedSymbol
+              )
+            CUSTOM =
+              T.let(
+                :custom,
+                Anthropic::Beta::BetaManagedAgentsSessionAgent::Tool::Type::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::BetaManagedAgentsSessionAgent::Tool::Type::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
 
           sig do
             override.returns(

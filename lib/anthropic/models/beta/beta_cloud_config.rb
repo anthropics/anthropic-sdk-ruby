@@ -45,6 +45,16 @@ module Anthropic
           # Limited network access.
           variant :limited, -> { Anthropic::Beta::BetaLimitedNetwork }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            UNRESTRICTED = :unrestricted
+            LIMITED = :limited
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaUnrestrictedNetwork, Anthropic::Models::Beta::BetaLimitedNetwork)]
 

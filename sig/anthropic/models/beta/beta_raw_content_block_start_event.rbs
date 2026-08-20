@@ -51,6 +51,49 @@ module Anthropic
         module ContentBlock
           extend Anthropic::Internal::Type::Union
 
+          type type_ =
+            :text
+            | :thinking
+            | :redacted_thinking
+            | :tool_use
+            | :server_tool_use
+            | :web_search_tool_result
+            | :web_fetch_tool_result
+            | :advisor_tool_result
+            | :code_execution_tool_result
+            | :bash_code_execution_tool_result
+            | :text_editor_code_execution_tool_result
+            | :tool_search_tool_result
+            | :mcp_tool_use
+            | :mcp_tool_result
+            | :container_upload
+            | :compaction
+            | :fallback
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TEXT: :text
+            THINKING: :thinking
+            REDACTED_THINKING: :redacted_thinking
+            TOOL_USE: :tool_use
+            SERVER_TOOL_USE: :server_tool_use
+            WEB_SEARCH_TOOL_RESULT: :web_search_tool_result
+            WEB_FETCH_TOOL_RESULT: :web_fetch_tool_result
+            ADVISOR_TOOL_RESULT: :advisor_tool_result
+            CODE_EXECUTION_TOOL_RESULT: :code_execution_tool_result
+            BASH_CODE_EXECUTION_TOOL_RESULT: :bash_code_execution_tool_result
+            TEXT_EDITOR_CODE_EXECUTION_TOOL_RESULT: :text_editor_code_execution_tool_result
+            TOOL_SEARCH_TOOL_RESULT: :tool_search_tool_result
+            MCP_TOOL_USE: :mcp_tool_use
+            MCP_TOOL_RESULT: :mcp_tool_result
+            CONTAINER_UPLOAD: :container_upload
+            COMPACTION: :compaction
+            FALLBACK: :fallback
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaRawContentBlockStartEvent::ContentBlock::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaRawContentBlockStartEvent::content_block]
 
           def self.new:

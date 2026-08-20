@@ -93,6 +93,45 @@ module Anthropic
               )
             end
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::BetaContextManagementConfig::Edit::Type
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            CLEAR_TOOL_USES_20250919 =
+              T.let(
+                :clear_tool_uses_20250919,
+                Anthropic::Beta::BetaContextManagementConfig::Edit::Type::TaggedSymbol
+              )
+            CLEAR_THINKING_20251015 =
+              T.let(
+                :clear_thinking_20251015,
+                Anthropic::Beta::BetaContextManagementConfig::Edit::Type::TaggedSymbol
+              )
+            COMPACT_20260112 =
+              T.let(
+                :compact_20260112,
+                Anthropic::Beta::BetaContextManagementConfig::Edit::Type::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::BetaContextManagementConfig::Edit::Type::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
           sig do
             override.returns(
               T::Array[

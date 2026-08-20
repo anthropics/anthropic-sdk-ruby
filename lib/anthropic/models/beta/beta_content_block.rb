@@ -61,6 +61,31 @@ module Anthropic
         # pair and carries no deltas.
         variant :fallback, -> { Anthropic::Beta::BetaFallbackBlock }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TEXT = :text
+          THINKING = :thinking
+          REDACTED_THINKING = :redacted_thinking
+          TOOL_USE = :tool_use
+          SERVER_TOOL_USE = :server_tool_use
+          WEB_SEARCH_TOOL_RESULT = :web_search_tool_result
+          WEB_FETCH_TOOL_RESULT = :web_fetch_tool_result
+          ADVISOR_TOOL_RESULT = :advisor_tool_result
+          CODE_EXECUTION_TOOL_RESULT = :code_execution_tool_result
+          BASH_CODE_EXECUTION_TOOL_RESULT = :bash_code_execution_tool_result
+          TEXT_EDITOR_CODE_EXECUTION_TOOL_RESULT = :text_editor_code_execution_tool_result
+          TOOL_SEARCH_TOOL_RESULT = :tool_search_tool_result
+          MCP_TOOL_USE = :mcp_tool_use
+          MCP_TOOL_RESULT = :mcp_tool_result
+          CONTAINER_UPLOAD = :container_upload
+          COMPACTION = :compaction
+          FALLBACK = :fallback
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaServerToolUseBlock, Anthropic::Models::Beta::BetaWebSearchToolResultBlock, Anthropic::Models::Beta::BetaWebFetchToolResultBlock, Anthropic::Models::Beta::BetaAdvisorToolResultBlock, Anthropic::Models::Beta::BetaCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaBashCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaToolSearchToolResultBlock, Anthropic::Models::Beta::BetaMCPToolUseBlock, Anthropic::Models::Beta::BetaMCPToolResultBlock, Anthropic::Models::Beta::BetaContainerUploadBlock, Anthropic::Models::Beta::BetaCompactionBlock, Anthropic::Models::Beta::BetaFallbackBlock)]
 

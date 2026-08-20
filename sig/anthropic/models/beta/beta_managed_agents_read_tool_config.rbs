@@ -41,6 +41,17 @@ module Anthropic
         module PermissionPolicy
           extend Anthropic::Internal::Type::Union
 
+          type type_ = :always_allow | :always_ask
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            ALWAYS_ALLOW: :always_allow
+            ALWAYS_ASK: :always_ask
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsReadToolConfig::PermissionPolicy::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsReadToolConfig::permission_policy]
 
           def self.new:

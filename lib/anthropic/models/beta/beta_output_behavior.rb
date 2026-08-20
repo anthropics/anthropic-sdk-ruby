@@ -17,6 +17,16 @@ module Anthropic
         # The job writes the consolidated memories into this existing memory store instead of creating one. In EAP the store must be the job's own memory_store input, so the job consolidates the store in place.
         variant :update_existing, -> { Anthropic::Beta::BetaOutputBehaviorUpdateExisting }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          CREATE_NEW = :create_new
+          UPDATE_EXISTING = :update_existing
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaOutputBehaviorCreateNew, Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting)]
 

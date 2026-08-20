@@ -54,6 +54,20 @@ module Anthropic
         module Effort
           extend Anthropic::Internal::Type::Union
 
+          type type_ = :low | :medium | :high | :xhigh | :max
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            LOW: :low
+            MEDIUM: :medium
+            HIGH: :high
+            XHIGH: :xhigh
+            MAX: :max
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsModelConfig::Effort::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsModelConfig::effort]
 
           def self.new:

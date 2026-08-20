@@ -22,6 +22,50 @@ module Anthropic
               )
             end
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::Messages::BetaMessageBatchResult::Type
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            SUCCEEDED =
+              T.let(
+                :succeeded,
+                Anthropic::Beta::Messages::BetaMessageBatchResult::Type::TaggedSymbol
+              )
+            ERRORED =
+              T.let(
+                :errored,
+                Anthropic::Beta::Messages::BetaMessageBatchResult::Type::TaggedSymbol
+              )
+            CANCELED =
+              T.let(
+                :canceled,
+                Anthropic::Beta::Messages::BetaMessageBatchResult::Type::TaggedSymbol
+              )
+            EXPIRED =
+              T.let(
+                :expired,
+                Anthropic::Beta::Messages::BetaMessageBatchResult::Type::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::Messages::BetaMessageBatchResult::Type::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
           sig do
             override.returns(
               T::Array[

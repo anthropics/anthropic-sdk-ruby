@@ -58,6 +58,18 @@ module Anthropic
         module Thinking
           extend Anthropic::Internal::Type::Union
 
+          type type_ = :enabled | :disabled | :adaptive
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            ENABLED: :enabled
+            DISABLED: :disabled
+            ADAPTIVE: :adaptive
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaFallbackParam::Thinking::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaFallbackParam::thinking]
 
           def self.new:

@@ -47,6 +47,21 @@ module Anthropic
             # A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
             variant :"system.message", -> { Anthropic::Beta::BetaManagedAgentsSystemMessageEvent }
 
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              USER_MESSAGE = :"user.message"
+              USER_INTERRUPT = :"user.interrupt"
+              USER_TOOL_CONFIRMATION = :"user.tool_confirmation"
+              USER_CUSTOM_TOOL_RESULT = :"user.custom_tool_result"
+              USER_DEFINE_OUTCOME = :"user.define_outcome"
+              USER_TOOL_RESULT = :"user.tool_result"
+              SYSTEM_MESSAGE = :"system.message"
+
+              # @!method self.values
+              #   @return [Array<Symbol>]
+            end
+
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent, Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent, Anthropic::Models::Beta::BetaManagedAgentsSystemMessageEvent)]
 

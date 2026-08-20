@@ -104,6 +104,45 @@ module Anthropic
               )
             end
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::BetaRequestToolRemovalBlock::Tool::Type
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            TOOL_REFERENCE =
+              T.let(
+                :tool_reference,
+                Anthropic::Beta::BetaRequestToolRemovalBlock::Tool::Type::TaggedSymbol
+              )
+            MCP_TOOL_REFERENCE =
+              T.let(
+                :mcp_tool_reference,
+                Anthropic::Beta::BetaRequestToolRemovalBlock::Tool::Type::TaggedSymbol
+              )
+            MCP_TOOLSET_REFERENCE =
+              T.let(
+                :mcp_toolset_reference,
+                Anthropic::Beta::BetaRequestToolRemovalBlock::Tool::Type::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::BetaRequestToolRemovalBlock::Tool::Type::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
           sig do
             override.returns(
               T::Array[

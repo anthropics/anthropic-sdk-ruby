@@ -19,6 +19,39 @@ module Anthropic
         module BetaManagedAgentsError
           extend Anthropic::Internal::Type::Union
 
+          type type_ =
+            :invalid_request_error
+            | :authentication_error
+            | :billing_error
+            | :permission_error
+            | :not_found_error
+            | :rate_limit_error
+            | :timeout_error
+            | :api_error
+            | :overloaded_error
+            | :memory_precondition_failed_error
+            | :memory_path_conflict_error
+            | :conflict_error
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            INVALID_REQUEST_ERROR: :invalid_request_error
+            AUTHENTICATION_ERROR: :authentication_error
+            BILLING_ERROR: :billing_error
+            PERMISSION_ERROR: :permission_error
+            NOT_FOUND_ERROR: :not_found_error
+            RATE_LIMIT_ERROR: :rate_limit_error
+            TIMEOUT_ERROR: :timeout_error
+            API_ERROR: :api_error
+            OVERLOADED_ERROR: :overloaded_error
+            MEMORY_PRECONDITION_FAILED_ERROR: :memory_precondition_failed_error
+            MEMORY_PATH_CONFLICT_ERROR: :memory_path_conflict_error
+            CONFLICT_ERROR: :conflict_error
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsError::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::MemoryStores::beta_managed_agents_error]
 
           def self.new:

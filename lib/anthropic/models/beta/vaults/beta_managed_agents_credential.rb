@@ -99,6 +99,17 @@ module Anthropic
             variant :environment_variable,
                     -> { Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse }
 
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              MCP_OAUTH = :mcp_oauth
+              STATIC_BEARER = :static_bearer
+              ENVIRONMENT_VARIABLE = :environment_variable
+
+              # @!method self.values
+              #   @return [Array<Symbol>]
+            end
+
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerAuthResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse)]
 

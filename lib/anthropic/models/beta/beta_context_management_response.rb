@@ -23,6 +23,16 @@ module Anthropic
 
           variant :clear_thinking_20251015, -> { Anthropic::Beta::BetaClearThinking20251015EditResponse }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            CLEAR_TOOL_USES_20250919 = :clear_tool_uses_20250919
+            CLEAR_THINKING_20251015 = :clear_thinking_20251015
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaClearToolUses20250919EditResponse, Anthropic::Models::Beta::BetaClearThinking20251015EditResponse)]
 
