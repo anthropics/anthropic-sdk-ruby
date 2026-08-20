@@ -106,6 +106,16 @@ module Anthropic
           # Configuration for self-hosted environments.
           variant :self_hosted, -> { Anthropic::Beta::BetaSelfHostedConfig }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            CLOUD = :cloud
+            SELF_HOSTED = :self_hosted
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaCloudConfig, Anthropic::Models::Beta::BetaSelfHostedConfig)]
 

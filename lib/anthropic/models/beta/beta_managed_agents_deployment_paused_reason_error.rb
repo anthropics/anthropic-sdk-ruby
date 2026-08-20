@@ -64,6 +64,28 @@ module Anthropic
         variant :mcp_egress_blocked_error,
                 -> { Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          ENVIRONMENT_ARCHIVED_ERROR = :environment_archived_error
+          AGENT_ARCHIVED_ERROR = :agent_archived_error
+          ENVIRONMENT_NOT_FOUND_ERROR = :environment_not_found_error
+          VAULT_NOT_FOUND_ERROR = :vault_not_found_error
+          FILE_NOT_FOUND_ERROR = :file_not_found_error
+          SESSION_RESOURCE_NOT_FOUND_ERROR = :session_resource_not_found_error
+          WORKSPACE_ARCHIVED_ERROR = :workspace_archived_error
+          ORGANIZATION_DISABLED_ERROR = :organization_disabled_error
+          MEMORY_STORE_ARCHIVED_ERROR = :memory_store_archived_error
+          SKILL_NOT_FOUND_ERROR = :skill_not_found_error
+          VAULT_ARCHIVED_ERROR = :vault_archived_error
+          UNKNOWN_ERROR = :unknown_error
+          SELF_HOSTED_RESOURCES_UNSUPPORTED_ERROR = :self_hosted_resources_unsupported_error
+          MCP_EGRESS_BLOCKED_ERROR = :mcp_egress_blocked_error
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsFileNotFoundDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsVaultArchivedDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsUnknownDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError, Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError)]
 

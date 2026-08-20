@@ -84,6 +84,17 @@ module Anthropic
 
           variant :adaptive, -> { Anthropic::Beta::BetaThinkingConfigAdaptive }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            ENABLED = :enabled
+            DISABLED = :disabled
+            ADAPTIVE = :adaptive
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaThinkingConfigEnabled, Anthropic::Models::Beta::BetaThinkingConfigDisabled, Anthropic::Models::Beta::BetaThinkingConfigAdaptive)]
 

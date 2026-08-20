@@ -16,6 +16,40 @@ module Anthropic
             )
           end
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                Anthropic::Beta::BetaContentBlockSourceContent::Type
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          TEXT =
+            T.let(
+              :text,
+              Anthropic::Beta::BetaContentBlockSourceContent::Type::TaggedSymbol
+            )
+          IMAGE =
+            T.let(
+              :image,
+              Anthropic::Beta::BetaContentBlockSourceContent::Type::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaContentBlockSourceContent::Type::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
         sig do
           override.returns(
             T::Array[Anthropic::Beta::BetaContentBlockSourceContent::Variants]

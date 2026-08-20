@@ -9,6 +9,19 @@ module Anthropic
     module ToolChoice
       extend Anthropic::Internal::Type::Union
 
+      type type_ = :auto | :any | :tool | :none
+
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        AUTO: :auto
+        ANY: :any
+        TOOL: :tool
+        NONE: :none
+
+        def self?.values: -> ::Array[Anthropic::Models::ToolChoice::type_]
+      end
+
       def self?.variants: -> ::Array[Anthropic::Models::tool_choice]
 
       def self.new:

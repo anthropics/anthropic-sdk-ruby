@@ -46,6 +46,31 @@ module Anthropic
           module Error
             extend Anthropic::Internal::Type::Union
 
+            type type_ =
+              :unknown_error
+              | :model_overloaded_error
+              | :model_rate_limited_error
+              | :model_request_failed_error
+              | :mcp_connection_failed_error
+              | :mcp_authentication_failed_error
+              | :billing_error
+              | :credential_host_unreachable_error
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              UNKNOWN_ERROR: :unknown_error
+              MODEL_OVERLOADED_ERROR: :model_overloaded_error
+              MODEL_RATE_LIMITED_ERROR: :model_rate_limited_error
+              MODEL_REQUEST_FAILED_ERROR: :model_request_failed_error
+              MCP_CONNECTION_FAILED_ERROR: :mcp_connection_failed_error
+              MCP_AUTHENTICATION_FAILED_ERROR: :mcp_authentication_failed_error
+              BILLING_ERROR: :billing_error
+              CREDENTIAL_HOST_UNREACHABLE_ERROR: :credential_host_unreachable_error
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::type_]
+            end
+
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::error]
 
             def self.new:

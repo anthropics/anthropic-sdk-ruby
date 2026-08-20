@@ -35,6 +35,18 @@ module Anthropic
         # A file download that failed — or was cancelled — during this call.
         variant :download_failed, -> { Anthropic::Beta::BetaBrowserStateChangeDownloadFailed }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TAB_OPENED = :tab_opened
+          DOWNLOAD_STARTED = :download_started
+          DOWNLOAD_COMPLETED = :download_completed
+          DOWNLOAD_FAILED = :download_failed
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaBrowserStateChangeTabOpened, Anthropic::Models::Beta::BetaBrowserStateChangeDownloadStarted, Anthropic::Models::Beta::BetaBrowserStateChangeDownloadCompleted, Anthropic::Models::Beta::BetaBrowserStateChangeDownloadFailed)]
 

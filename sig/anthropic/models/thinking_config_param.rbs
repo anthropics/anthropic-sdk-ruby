@@ -8,6 +8,18 @@ module Anthropic
     module ThinkingConfigParam
       extend Anthropic::Internal::Type::Union
 
+      type type_ = :enabled | :disabled | :adaptive
+
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        ENABLED: :enabled
+        DISABLED: :disabled
+        ADAPTIVE: :adaptive
+
+        def self?.values: -> ::Array[Anthropic::Models::ThinkingConfigParam::type_]
+      end
+
       def self?.variants: -> ::Array[Anthropic::Models::thinking_config_param]
 
       def self.new:

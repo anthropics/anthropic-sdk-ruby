@@ -15,6 +15,16 @@ module Anthropic
         # A user-created custom skill.
         variant :custom, -> { Anthropic::Beta::BetaManagedAgentsCustomSkillParams }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          ANTHROPIC = :anthropic
+          CUSTOM = :custom
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams)]
 

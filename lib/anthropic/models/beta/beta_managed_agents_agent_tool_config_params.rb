@@ -33,6 +33,22 @@ module Anthropic
         # Configuration override for the web_search tool.
         variant :web_search, -> { Anthropic::Beta::BetaManagedAgentsWebSearchToolConfigParams }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          BASH = :bash
+          EDIT = :edit
+          READ = :read
+          WRITE = :write
+          GLOB = :glob
+          GREP = :grep
+          WEB_FETCH = :web_fetch
+          WEB_SEARCH = :web_search
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsBashToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsEditToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsReadToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsWriteToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsGlobToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsWebFetchToolConfigParams, Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfigParams)]
 

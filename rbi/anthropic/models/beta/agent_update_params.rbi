@@ -335,6 +335,42 @@ module Anthropic
               )
             end
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(Symbol, Anthropic::Beta::AgentUpdateParams::Tool::Type)
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            AGENT_TOOLSET_20260401 =
+              T.let(
+                :agent_toolset_20260401,
+                Anthropic::Beta::AgentUpdateParams::Tool::Type::TaggedSymbol
+              )
+            MCP_TOOLSET =
+              T.let(
+                :mcp_toolset,
+                Anthropic::Beta::AgentUpdateParams::Tool::Type::TaggedSymbol
+              )
+            CUSTOM =
+              T.let(
+                :custom,
+                Anthropic::Beta::AgentUpdateParams::Tool::Type::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::AgentUpdateParams::Tool::Type::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
           sig do
             override.returns(
               T::Array[Anthropic::Beta::AgentUpdateParams::Tool::Variants]

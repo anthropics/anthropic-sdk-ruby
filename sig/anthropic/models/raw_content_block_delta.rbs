@@ -10,6 +10,25 @@ module Anthropic
     module RawContentBlockDelta
       extend Anthropic::Internal::Type::Union
 
+      type type_ =
+        :text_delta
+        | :input_json_delta
+        | :citations_delta
+        | :thinking_delta
+        | :signature_delta
+
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        TEXT_DELTA: :text_delta
+        INPUT_JSON_DELTA: :input_json_delta
+        CITATIONS_DELTA: :citations_delta
+        THINKING_DELTA: :thinking_delta
+        SIGNATURE_DELTA: :signature_delta
+
+        def self?.values: -> ::Array[Anthropic::Models::RawContentBlockDelta::type_]
+      end
+
       def self?.variants: -> ::Array[Anthropic::Models::raw_content_block_delta]
 
       def self.new:

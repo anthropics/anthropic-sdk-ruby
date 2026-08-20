@@ -20,6 +20,20 @@ module Anthropic
 
         variant :rename, -> { Anthropic::Beta::BetaMemoryTool20250818RenameCommand }
 
+        module Command
+          extend Anthropic::Internal::Type::Enum
+
+          VIEW = :view
+          CREATE = :create
+          STR_REPLACE = :str_replace
+          INSERT = :insert
+          DELETE = :delete
+          RENAME = :rename
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaMemoryTool20250818ViewCommand, Anthropic::Models::Beta::BetaMemoryTool20250818CreateCommand, Anthropic::Models::Beta::BetaMemoryTool20250818StrReplaceCommand, Anthropic::Models::Beta::BetaMemoryTool20250818InsertCommand, Anthropic::Models::Beta::BetaMemoryTool20250818DeleteCommand, Anthropic::Models::Beta::BetaMemoryTool20250818RenameCommand)]
 

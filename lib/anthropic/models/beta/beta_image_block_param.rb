@@ -53,6 +53,17 @@ module Anthropic
 
           variant :file, -> { Anthropic::Beta::BetaFileImageSource }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            BASE64 = :base64
+            URL = :url
+            FILE = :file
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaBase64ImageSource, Anthropic::Models::Beta::BetaURLImageSource, Anthropic::Models::Beta::BetaFileImageSource)]
 

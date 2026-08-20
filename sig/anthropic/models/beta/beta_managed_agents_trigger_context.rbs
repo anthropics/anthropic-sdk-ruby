@@ -10,6 +10,17 @@ module Anthropic
       module BetaManagedAgentsTriggerContext
         extend Anthropic::Internal::Type::Union
 
+        type type_ = :schedule | :manual
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          SCHEDULE: :schedule
+          MANUAL: :manual
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsTriggerContext::type_]
+        end
+
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_trigger_context]
 
         def self.new:

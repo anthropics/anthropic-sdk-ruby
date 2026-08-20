@@ -87,6 +87,16 @@ module Anthropic
 
           variant :tool_uses, -> { Anthropic::Beta::BetaToolUsesTrigger }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            INPUT_TOKENS = :input_tokens
+            TOOL_USES = :tool_uses
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaInputTokensTrigger, Anthropic::Models::Beta::BetaToolUsesTrigger)]
 

@@ -61,6 +61,17 @@ module Anthropic
         module Config
           extend Anthropic::Internal::Type::Union
 
+          type type_ = :cloud | :self_hosted
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            CLOUD: :cloud
+            SELF_HOSTED: :self_hosted
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::EnvironmentCreateParams::Config::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::EnvironmentCreateParams::config]
 
           def self.new:

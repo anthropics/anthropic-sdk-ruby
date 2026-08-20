@@ -22,6 +22,18 @@ module Anthropic
 
           variant :expired, -> { Anthropic::Beta::Messages::BetaMessageBatchExpiredResult }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            SUCCEEDED = :succeeded
+            ERRORED = :errored
+            CANCELED = :canceled
+            EXPIRED = :expired
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::Messages::BetaMessageBatchSucceededResult, Anthropic::Models::Beta::Messages::BetaMessageBatchErroredResult, Anthropic::Models::Beta::Messages::BetaMessageBatchCanceledResult, Anthropic::Models::Beta::Messages::BetaMessageBatchExpiredResult)]
 

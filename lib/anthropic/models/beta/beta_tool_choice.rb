@@ -22,6 +22,18 @@ module Anthropic
         # The model will not be allowed to use tools.
         variant :none, -> { Anthropic::Beta::BetaToolChoiceNone }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          AUTO = :auto
+          ANY = :any
+          TOOL = :tool
+          NONE = :none
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaToolChoiceAuto, Anthropic::Models::Beta::BetaToolChoiceAny, Anthropic::Models::Beta::BetaToolChoiceTool, Anthropic::Models::Beta::BetaToolChoiceNone)]
 

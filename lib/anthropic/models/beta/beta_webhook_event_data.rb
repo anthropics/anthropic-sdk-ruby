@@ -99,6 +99,58 @@ module Anthropic
 
         variant :"session.budget_reached", -> { Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          SESSION_CREATED = :"session.created"
+          SESSION_PENDING = :"session.pending"
+          SESSION_RUNNING = :"session.running"
+          SESSION_IDLED = :"session.idled"
+          SESSION_REQUIRES_ACTION = :"session.requires_action"
+          SESSION_ARCHIVED = :"session.archived"
+          SESSION_DELETED = :"session.deleted"
+          SESSION_STATUS_RESCHEDULED = :"session.status_rescheduled"
+          SESSION_STATUS_RUN_STARTED = :"session.status_run_started"
+          SESSION_STATUS_IDLED = :"session.status_idled"
+          SESSION_STATUS_TERMINATED = :"session.status_terminated"
+          SESSION_THREAD_CREATED = :"session.thread_created"
+          SESSION_THREAD_IDLED = :"session.thread_idled"
+          SESSION_THREAD_TERMINATED = :"session.thread_terminated"
+          SESSION_OUTCOME_EVALUATION_ENDED = :"session.outcome_evaluation_ended"
+          VAULT_CREATED = :"vault.created"
+          VAULT_ARCHIVED = :"vault.archived"
+          VAULT_DELETED = :"vault.deleted"
+          VAULT_CREDENTIAL_CREATED = :"vault_credential.created"
+          VAULT_CREDENTIAL_ARCHIVED = :"vault_credential.archived"
+          VAULT_CREDENTIAL_DELETED = :"vault_credential.deleted"
+          VAULT_CREDENTIAL_REFRESH_FAILED = :"vault_credential.refresh_failed"
+          SESSION_UPDATED = :"session.updated"
+          AGENT_CREATED = :"agent.created"
+          AGENT_ARCHIVED = :"agent.archived"
+          AGENT_DELETED = :"agent.deleted"
+          DEPLOYMENT_PAUSED = :"deployment.paused"
+          DEPLOYMENT_RUN_FAILED = :"deployment_run.failed"
+          DEPLOYMENT_CREATED = :"deployment.created"
+          DEPLOYMENT_UPDATED = :"deployment.updated"
+          DEPLOYMENT_UNPAUSED = :"deployment.unpaused"
+          AGENT_UPDATED = :"agent.updated"
+          DEPLOYMENT_ARCHIVED = :"deployment.archived"
+          DEPLOYMENT_RUN_STARTED = :"deployment_run.started"
+          DEPLOYMENT_DELETED = :"deployment.deleted"
+          DEPLOYMENT_RUN_SUCCEEDED = :"deployment_run.succeeded"
+          ENVIRONMENT_CREATED = :"environment.created"
+          ENVIRONMENT_UPDATED = :"environment.updated"
+          ENVIRONMENT_ARCHIVED = :"environment.archived"
+          ENVIRONMENT_DELETED = :"environment.deleted"
+          MEMORY_STORE_CREATED = :"memory_store.created"
+          MEMORY_STORE_ARCHIVED = :"memory_store.archived"
+          MEMORY_STORE_DELETED = :"memory_store.deleted"
+          SESSION_BUDGET_REACHED = :"session.budget_reached"
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaWebhookSessionCreatedEventData, Anthropic::Models::Beta::BetaWebhookSessionPendingEventData, Anthropic::Models::Beta::BetaWebhookSessionRunningEventData, Anthropic::Models::Beta::BetaWebhookSessionIdledEventData, Anthropic::Models::Beta::BetaWebhookSessionRequiresActionEventData, Anthropic::Models::Beta::BetaWebhookSessionArchivedEventData, Anthropic::Models::Beta::BetaWebhookSessionDeletedEventData, Anthropic::Models::Beta::BetaWebhookSessionStatusRescheduledEventData, Anthropic::Models::Beta::BetaWebhookSessionStatusRunStartedEventData, Anthropic::Models::Beta::BetaWebhookSessionStatusIdledEventData, Anthropic::Models::Beta::BetaWebhookSessionStatusTerminatedEventData, Anthropic::Models::Beta::BetaWebhookSessionThreadCreatedEventData, Anthropic::Models::Beta::BetaWebhookSessionThreadIdledEventData, Anthropic::Models::Beta::BetaWebhookSessionThreadTerminatedEventData, Anthropic::Models::Beta::BetaWebhookSessionOutcomeEvaluationEndedEventData, Anthropic::Models::Beta::BetaWebhookVaultCreatedEventData, Anthropic::Models::Beta::BetaWebhookVaultArchivedEventData, Anthropic::Models::Beta::BetaWebhookVaultDeletedEventData, Anthropic::Models::Beta::BetaWebhookVaultCredentialCreatedEventData, Anthropic::Models::Beta::BetaWebhookVaultCredentialArchivedEventData, Anthropic::Models::Beta::BetaWebhookVaultCredentialDeletedEventData, Anthropic::Models::Beta::BetaWebhookVaultCredentialRefreshFailedEventData, Anthropic::Models::Beta::BetaWebhookSessionUpdatedEventData, Anthropic::Models::Beta::BetaWebhookAgentCreatedEventData, Anthropic::Models::Beta::BetaWebhookAgentArchivedEventData, Anthropic::Models::Beta::BetaWebhookAgentDeletedEventData, Anthropic::Models::Beta::BetaWebhookDeploymentPausedEventData, Anthropic::Models::Beta::BetaWebhookDeploymentRunFailedEventData, Anthropic::Models::Beta::BetaWebhookDeploymentCreatedEventData, Anthropic::Models::Beta::BetaWebhookDeploymentUpdatedEventData, Anthropic::Models::Beta::BetaWebhookDeploymentUnpausedEventData, Anthropic::Models::Beta::BetaWebhookAgentUpdatedEventData, Anthropic::Models::Beta::BetaWebhookDeploymentArchivedEventData, Anthropic::Models::Beta::BetaWebhookDeploymentRunStartedEventData, Anthropic::Models::Beta::BetaWebhookDeploymentDeletedEventData, Anthropic::Models::Beta::BetaWebhookDeploymentRunSucceededEventData, Anthropic::Models::Beta::BetaWebhookEnvironmentCreatedEventData, Anthropic::Models::Beta::BetaWebhookEnvironmentUpdatedEventData, Anthropic::Models::Beta::BetaWebhookEnvironmentArchivedEventData, Anthropic::Models::Beta::BetaWebhookEnvironmentDeletedEventData, Anthropic::Models::Beta::BetaWebhookMemoryStoreCreatedEventData, Anthropic::Models::Beta::BetaWebhookMemoryStoreArchivedEventData, Anthropic::Models::Beta::BetaWebhookMemoryStoreDeletedEventData, Anthropic::Models::Beta::BetaWebhookSessionBudgetReachedEventData)]
 

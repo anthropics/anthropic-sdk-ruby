@@ -73,6 +73,40 @@ module Anthropic
               )
             end
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::BetaFallbackCreditUsage::Status::Type
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            REDEEMED =
+              T.let(
+                :redeemed,
+                Anthropic::Beta::BetaFallbackCreditUsage::Status::Type::TaggedSymbol
+              )
+            NOT_APPLIED =
+              T.let(
+                :not_applied,
+                Anthropic::Beta::BetaFallbackCreditUsage::Status::Type::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::BetaFallbackCreditUsage::Status::Type::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
           sig do
             override.returns(
               T::Array[

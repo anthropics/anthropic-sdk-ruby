@@ -40,6 +40,17 @@ module Anthropic
           module Rubric
             extend Anthropic::Internal::Type::Union
 
+            type type_ = :file | :text
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              FILE: :file
+              TEXT: :text
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::Rubric::type_]
+            end
+
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::rubric]
 
             def self.new:

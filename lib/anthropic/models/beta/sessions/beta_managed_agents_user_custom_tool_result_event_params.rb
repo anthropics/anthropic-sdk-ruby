@@ -77,6 +77,18 @@ module Anthropic
             # A block containing a web search result.
             variant :search_result, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock }
 
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              TEXT = :text
+              IMAGE = :image
+              DOCUMENT = :document
+              SEARCH_RESULT = :search_result
+
+              # @!method self.values
+              #   @return [Array<Symbol>]
+            end
+
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSearchResultBlock)]
 

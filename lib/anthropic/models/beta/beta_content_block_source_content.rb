@@ -12,6 +12,16 @@ module Anthropic
 
         variant :image, -> { Anthropic::Beta::BetaImageBlockParam }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TEXT = :text
+          IMAGE = :image
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam)]
 

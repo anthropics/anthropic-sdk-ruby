@@ -26,6 +26,18 @@ module Anthropic
           # Attribution for a write made by a workload authenticated as a service account, for example via Workload Identity Federation.
           variant :service_account_actor, -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            SESSION_ACTOR = :session_actor
+            API_ACTOR = :api_actor
+            USER_ACTOR = :user_actor
+            SERVICE_ACCOUNT_ACTOR = :service_account_actor
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor)]
 

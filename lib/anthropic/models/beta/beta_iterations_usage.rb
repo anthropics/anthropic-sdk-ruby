@@ -26,6 +26,18 @@ module Anthropic
         # entry in `usage.iterations`.
         variant :fallback_message, -> { Anthropic::Beta::BetaFallbackMessageIterationUsage }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          MESSAGE = :message
+          COMPACTION = :compaction
+          ADVISOR_MESSAGE = :advisor_message
+          FALLBACK_MESSAGE = :fallback_message
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaMessageIterationUsage, Anthropic::Models::Beta::BetaCompactionIterationUsage, Anthropic::Models::Beta::BetaAdvisorMessageIterationUsage, Anthropic::Models::Beta::BetaFallbackMessageIterationUsage)]
 

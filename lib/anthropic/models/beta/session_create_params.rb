@@ -123,6 +123,16 @@ module Anthropic
           variant :"user.define_outcome",
                   -> { Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            USER_MESSAGE = :"user.message"
+            USER_DEFINE_OUTCOME = :"user.define_outcome"
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams)]
 
@@ -169,6 +179,17 @@ module Anthropic
 
           # Parameters for attaching a memory store to an agent session.
           variant :memory_store, -> { Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceParam }
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            GITHUB_REPOSITORY = :github_repository
+            FILE = :file
+            MEMORY_STORE = :memory_store
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams, Anthropic::Models::Beta::BetaManagedAgentsFileResourceParams, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceParam)]

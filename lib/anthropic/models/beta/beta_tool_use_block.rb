@@ -65,6 +65,17 @@ module Anthropic
 
           variant :code_execution_20260120, -> { Anthropic::Beta::BetaServerToolCaller20260120 }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            DIRECT = :direct
+            CODE_EXECUTION_20250825 = :code_execution_20250825
+            CODE_EXECUTION_20260120 = :code_execution_20260120
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120)]
 

@@ -75,6 +75,17 @@ module Anthropic
           module Agent
             extend Anthropic::Internal::Type::Union
 
+            type type_ = :agent | :advisor
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              AGENT: :agent
+              ADVISOR: :advisor
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::Agent::type_]
+            end
+
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThread::agent]
 
             def self.new:

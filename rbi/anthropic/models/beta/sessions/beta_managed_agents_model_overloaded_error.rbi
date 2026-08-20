@@ -83,6 +83,45 @@ module Anthropic
                 )
               end
 
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              TaggedSymbol =
+                T.type_alias do
+                  T.all(
+                    Symbol,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError::RetryStatus::Type
+                  )
+                end
+              OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+              RETRYING =
+                T.let(
+                  :retrying,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError::RetryStatus::Type::TaggedSymbol
+                )
+              EXHAUSTED =
+                T.let(
+                  :exhausted,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError::RetryStatus::Type::TaggedSymbol
+                )
+              TERMINAL =
+                T.let(
+                  :terminal,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError::RetryStatus::Type::TaggedSymbol
+                )
+
+              sig do
+                override.returns(
+                  T::Array[
+                    Anthropic::Beta::Sessions::BetaManagedAgentsModelOverloadedError::RetryStatus::Type::TaggedSymbol
+                  ]
+                )
+              end
+              def self.values
+              end
+            end
+
             sig do
               override.returns(
                 T::Array[

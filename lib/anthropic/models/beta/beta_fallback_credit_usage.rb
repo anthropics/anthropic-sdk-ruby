@@ -43,6 +43,16 @@ module Anthropic
           # No reprice was applied; ``reason`` says why.
           variant :not_applied, -> { Anthropic::Beta::BetaFallbackCreditNotApplied }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            REDEEMED = :redeemed
+            NOT_APPLIED = :not_applied
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaFallbackCreditRedeemed, Anthropic::Models::Beta::BetaFallbackCreditNotApplied)]
 

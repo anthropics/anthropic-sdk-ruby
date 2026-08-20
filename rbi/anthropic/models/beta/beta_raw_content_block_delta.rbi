@@ -20,6 +20,57 @@ module Anthropic
             )
           end
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::Beta::BetaRawContentBlockDelta::Type)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          TEXT_DELTA =
+            T.let(
+              :text_delta,
+              Anthropic::Beta::BetaRawContentBlockDelta::Type::TaggedSymbol
+            )
+          INPUT_JSON_DELTA =
+            T.let(
+              :input_json_delta,
+              Anthropic::Beta::BetaRawContentBlockDelta::Type::TaggedSymbol
+            )
+          CITATIONS_DELTA =
+            T.let(
+              :citations_delta,
+              Anthropic::Beta::BetaRawContentBlockDelta::Type::TaggedSymbol
+            )
+          THINKING_DELTA =
+            T.let(
+              :thinking_delta,
+              Anthropic::Beta::BetaRawContentBlockDelta::Type::TaggedSymbol
+            )
+          SIGNATURE_DELTA =
+            T.let(
+              :signature_delta,
+              Anthropic::Beta::BetaRawContentBlockDelta::Type::TaggedSymbol
+            )
+          COMPACTION_DELTA =
+            T.let(
+              :compaction_delta,
+              Anthropic::Beta::BetaRawContentBlockDelta::Type::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaRawContentBlockDelta::Type::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
         sig do
           override.returns(
             T::Array[Anthropic::Beta::BetaRawContentBlockDelta::Variants]

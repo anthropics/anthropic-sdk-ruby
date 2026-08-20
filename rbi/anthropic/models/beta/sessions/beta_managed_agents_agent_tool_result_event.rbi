@@ -161,6 +161,50 @@ module Anthropic
                 )
               end
 
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              TaggedSymbol =
+                T.type_alias do
+                  T.all(
+                    Symbol,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::Content::Type
+                  )
+                end
+              OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+              TEXT =
+                T.let(
+                  :text,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::Content::Type::TaggedSymbol
+                )
+              IMAGE =
+                T.let(
+                  :image,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::Content::Type::TaggedSymbol
+                )
+              DOCUMENT =
+                T.let(
+                  :document,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::Content::Type::TaggedSymbol
+                )
+              SEARCH_RESULT =
+                T.let(
+                  :search_result,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::Content::Type::TaggedSymbol
+                )
+
+              sig do
+                override.returns(
+                  T::Array[
+                    Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolResultEvent::Content::Type::TaggedSymbol
+                  ]
+                )
+              end
+              def self.values
+              end
+            end
+
             sig do
               override.returns(
                 T::Array[

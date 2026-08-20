@@ -71,6 +71,19 @@ module Anthropic
           module Content
             extend Anthropic::Internal::Type::Union
 
+            type type_ = :text | :image | :document | :search_result
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              TEXT: :text
+              IMAGE: :image
+              DOCUMENT: :document
+              SEARCH_RESULT: :search_result
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::Content::type_]
+            end
+
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::content]
 
             def self.new:

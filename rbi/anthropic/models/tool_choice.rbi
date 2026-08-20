@@ -17,6 +17,25 @@ module Anthropic
           )
         end
 
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias { T.all(Symbol, Anthropic::ToolChoice::Type) }
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        AUTO = T.let(:auto, Anthropic::ToolChoice::Type::TaggedSymbol)
+        ANY = T.let(:any, Anthropic::ToolChoice::Type::TaggedSymbol)
+        TOOL = T.let(:tool, Anthropic::ToolChoice::Type::TaggedSymbol)
+        NONE = T.let(:none, Anthropic::ToolChoice::Type::TaggedSymbol)
+
+        sig do
+          override.returns(T::Array[Anthropic::ToolChoice::Type::TaggedSymbol])
+        end
+        def self.values
+        end
+      end
+
       sig { override.returns(T::Array[Anthropic::ToolChoice::Variants]) }
       def self.variants
       end

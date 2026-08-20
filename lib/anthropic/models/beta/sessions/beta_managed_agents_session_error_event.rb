@@ -84,6 +84,22 @@ module Anthropic
             variant :credential_host_unreachable_error,
                     -> { Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError }
 
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              UNKNOWN_ERROR = :unknown_error
+              MODEL_OVERLOADED_ERROR = :model_overloaded_error
+              MODEL_RATE_LIMITED_ERROR = :model_rate_limited_error
+              MODEL_REQUEST_FAILED_ERROR = :model_request_failed_error
+              MCP_CONNECTION_FAILED_ERROR = :mcp_connection_failed_error
+              MCP_AUTHENTICATION_FAILED_ERROR = :mcp_authentication_failed_error
+              BILLING_ERROR = :billing_error
+              CREDENTIAL_HOST_UNREACHABLE_ERROR = :credential_host_unreachable_error
+
+              # @!method self.values
+              #   @return [Array<Symbol>]
+            end
+
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError)]
 
