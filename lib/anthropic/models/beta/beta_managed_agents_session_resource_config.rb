@@ -18,6 +18,17 @@ module Anthropic
         # A memory store attached to each session created from this deployment.
         variant :memory_store, -> { Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceConfig }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          GITHUB_REPOSITORY = :github_repository
+          FILE = :file
+          MEMORY_STORE = :memory_store
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig, Anthropic::Models::Beta::BetaManagedAgentsFileResourceConfig, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreResourceConfig)]
 

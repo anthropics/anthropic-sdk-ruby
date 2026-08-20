@@ -108,6 +108,18 @@ module Anthropic
         module Tool
           extend Anthropic::Internal::Type::Union
 
+          type type_ = :agent_toolset_20260401 | :mcp_toolset | :custom
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            AGENT_TOOLSET_20260401: :agent_toolset_20260401
+            MCP_TOOLSET: :mcp_toolset
+            CUSTOM: :custom
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::AgentUpdateParams::Tool::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::AgentUpdateParams::tool]
 
           def self.new:

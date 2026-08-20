@@ -24,6 +24,70 @@ module Anthropic
             )
           end
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams::Type
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          BASH =
+            T.let(
+              :bash,
+              Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams::Type::TaggedSymbol
+            )
+          EDIT =
+            T.let(
+              :edit,
+              Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams::Type::TaggedSymbol
+            )
+          READ =
+            T.let(
+              :read,
+              Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams::Type::TaggedSymbol
+            )
+          WRITE =
+            T.let(
+              :write,
+              Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams::Type::TaggedSymbol
+            )
+          GLOB =
+            T.let(
+              :glob,
+              Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams::Type::TaggedSymbol
+            )
+          GREP =
+            T.let(
+              :grep,
+              Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams::Type::TaggedSymbol
+            )
+          WEB_FETCH =
+            T.let(
+              :web_fetch,
+              Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams::Type::TaggedSymbol
+            )
+          WEB_SEARCH =
+            T.let(
+              :web_search,
+              Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams::Type::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams::Type::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
         sig do
           override.returns(
             T::Array[

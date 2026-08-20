@@ -24,6 +24,17 @@ module Anthropic
         module Status
           extend Anthropic::Internal::Type::Union
 
+          type type_ = :redeemed | :not_applied
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            REDEEMED: :redeemed
+            NOT_APPLIED: :not_applied
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaFallbackCreditUsage::Status::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaFallbackCreditUsage::status]
 
           def self.new:

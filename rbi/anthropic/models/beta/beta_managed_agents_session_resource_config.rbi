@@ -19,6 +19,45 @@ module Anthropic
             )
           end
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                Anthropic::Beta::BetaManagedAgentsSessionResourceConfig::Type
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          GITHUB_REPOSITORY =
+            T.let(
+              :github_repository,
+              Anthropic::Beta::BetaManagedAgentsSessionResourceConfig::Type::TaggedSymbol
+            )
+          FILE =
+            T.let(
+              :file,
+              Anthropic::Beta::BetaManagedAgentsSessionResourceConfig::Type::TaggedSymbol
+            )
+          MEMORY_STORE =
+            T.let(
+              :memory_store,
+              Anthropic::Beta::BetaManagedAgentsSessionResourceConfig::Type::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaManagedAgentsSessionResourceConfig::Type::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
         sig do
           override.returns(
             T::Array[

@@ -42,6 +42,18 @@ module Anthropic
             # Placeholder for content withheld by Anthropic model policy.
             variant :redacted, -> { Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock }
 
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              TEXT = :text
+              IMAGE = :image
+              DOCUMENT = :document
+              REDACTED = :redacted
+
+              # @!method self.values
+              #   @return [Array<Symbol>]
+            end
+
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsTextBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRedactedBlock)]
 

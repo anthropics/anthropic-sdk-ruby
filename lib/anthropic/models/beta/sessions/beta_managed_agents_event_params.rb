@@ -34,6 +34,21 @@ module Anthropic
           # Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
           variant :"system.message", -> { Anthropic::Beta::Sessions::BetaManagedAgentsSystemMessageEventParams }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            USER_MESSAGE = :"user.message"
+            USER_INTERRUPT = :"user.interrupt"
+            USER_TOOL_CONFIRMATION = :"user.tool_confirmation"
+            USER_CUSTOM_TOOL_RESULT = :"user.custom_tool_result"
+            USER_DEFINE_OUTCOME = :"user.define_outcome"
+            USER_TOOL_RESULT = :"user.tool_result"
+            SYSTEM_MESSAGE = :"system.message"
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserInterruptEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolConfirmationEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSystemMessageEventParams)]
 

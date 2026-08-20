@@ -14,6 +14,22 @@ module Anthropic
       module BetaMemoryTool20250818Command
         extend Anthropic::Internal::Type::Union
 
+        type command =
+          :view | :create | :str_replace | :insert | :delete | :rename
+
+        module Command
+          extend Anthropic::Internal::Type::Enum
+
+          VIEW: :view
+          CREATE: :create
+          STR_REPLACE: :str_replace
+          INSERT: :insert
+          DELETE: :delete
+          RENAME: :rename
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaMemoryTool20250818Command::command]
+        end
+
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_memory_tool20250818_command]
 
         def self.new:

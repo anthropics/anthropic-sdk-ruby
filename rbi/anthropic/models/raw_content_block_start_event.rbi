@@ -87,6 +87,90 @@ module Anthropic
             )
           end
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                Anthropic::RawContentBlockStartEvent::ContentBlock::Type
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          TEXT =
+            T.let(
+              :text,
+              Anthropic::RawContentBlockStartEvent::ContentBlock::Type::TaggedSymbol
+            )
+          THINKING =
+            T.let(
+              :thinking,
+              Anthropic::RawContentBlockStartEvent::ContentBlock::Type::TaggedSymbol
+            )
+          REDACTED_THINKING =
+            T.let(
+              :redacted_thinking,
+              Anthropic::RawContentBlockStartEvent::ContentBlock::Type::TaggedSymbol
+            )
+          TOOL_USE =
+            T.let(
+              :tool_use,
+              Anthropic::RawContentBlockStartEvent::ContentBlock::Type::TaggedSymbol
+            )
+          SERVER_TOOL_USE =
+            T.let(
+              :server_tool_use,
+              Anthropic::RawContentBlockStartEvent::ContentBlock::Type::TaggedSymbol
+            )
+          WEB_SEARCH_TOOL_RESULT =
+            T.let(
+              :web_search_tool_result,
+              Anthropic::RawContentBlockStartEvent::ContentBlock::Type::TaggedSymbol
+            )
+          WEB_FETCH_TOOL_RESULT =
+            T.let(
+              :web_fetch_tool_result,
+              Anthropic::RawContentBlockStartEvent::ContentBlock::Type::TaggedSymbol
+            )
+          CODE_EXECUTION_TOOL_RESULT =
+            T.let(
+              :code_execution_tool_result,
+              Anthropic::RawContentBlockStartEvent::ContentBlock::Type::TaggedSymbol
+            )
+          BASH_CODE_EXECUTION_TOOL_RESULT =
+            T.let(
+              :bash_code_execution_tool_result,
+              Anthropic::RawContentBlockStartEvent::ContentBlock::Type::TaggedSymbol
+            )
+          TEXT_EDITOR_CODE_EXECUTION_TOOL_RESULT =
+            T.let(
+              :text_editor_code_execution_tool_result,
+              Anthropic::RawContentBlockStartEvent::ContentBlock::Type::TaggedSymbol
+            )
+          TOOL_SEARCH_TOOL_RESULT =
+            T.let(
+              :tool_search_tool_result,
+              Anthropic::RawContentBlockStartEvent::ContentBlock::Type::TaggedSymbol
+            )
+          CONTAINER_UPLOAD =
+            T.let(
+              :container_upload,
+              Anthropic::RawContentBlockStartEvent::ContentBlock::Type::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::RawContentBlockStartEvent::ContentBlock::Type::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
         sig do
           override.returns(
             T::Array[

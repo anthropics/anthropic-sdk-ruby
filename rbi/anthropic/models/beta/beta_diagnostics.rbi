@@ -85,6 +85,60 @@ module Anthropic
               )
             end
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::BetaDiagnostics::CacheMissReason::Type
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            MODEL_CHANGED =
+              T.let(
+                :model_changed,
+                Anthropic::Beta::BetaDiagnostics::CacheMissReason::Type::TaggedSymbol
+              )
+            SYSTEM_CHANGED =
+              T.let(
+                :system_changed,
+                Anthropic::Beta::BetaDiagnostics::CacheMissReason::Type::TaggedSymbol
+              )
+            TOOLS_CHANGED =
+              T.let(
+                :tools_changed,
+                Anthropic::Beta::BetaDiagnostics::CacheMissReason::Type::TaggedSymbol
+              )
+            MESSAGES_CHANGED =
+              T.let(
+                :messages_changed,
+                Anthropic::Beta::BetaDiagnostics::CacheMissReason::Type::TaggedSymbol
+              )
+            PREVIOUS_MESSAGE_NOT_FOUND =
+              T.let(
+                :previous_message_not_found,
+                Anthropic::Beta::BetaDiagnostics::CacheMissReason::Type::TaggedSymbol
+              )
+            UNAVAILABLE =
+              T.let(
+                :unavailable,
+                Anthropic::Beta::BetaDiagnostics::CacheMissReason::Type::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::BetaDiagnostics::CacheMissReason::Type::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
           sig do
             override.returns(
               T::Array[

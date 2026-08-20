@@ -96,6 +96,17 @@ module Anthropic
         module Skill
           extend Anthropic::Internal::Type::Union
 
+          type type_ = :anthropic | :custom
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            ANTHROPIC: :anthropic
+            CUSTOM: :custom
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgent::Skill::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgent::skill]
 
           def self.new:
@@ -123,6 +134,18 @@ module Anthropic
 
         module Tool
           extend Anthropic::Internal::Type::Union
+
+          type type_ = :agent_toolset_20260401 | :mcp_toolset | :custom
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            AGENT_TOOLSET_20260401: :agent_toolset_20260401
+            MCP_TOOLSET: :mcp_toolset
+            CUSTOM: :custom
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgent::Tool::type_]
+          end
 
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgent::tool]
 

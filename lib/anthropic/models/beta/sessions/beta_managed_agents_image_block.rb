@@ -40,6 +40,17 @@ module Anthropic
             # Image referenced by file ID.
             variant :file, -> { Anthropic::Beta::Sessions::BetaManagedAgentsFileImageSource }
 
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              BASE64 = :base64
+              URL = :url
+              FILE = :file
+
+              # @!method self.values
+              #   @return [Array<Symbol>]
+            end
+
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsBase64ImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsURLImageSource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileImageSource)]
 

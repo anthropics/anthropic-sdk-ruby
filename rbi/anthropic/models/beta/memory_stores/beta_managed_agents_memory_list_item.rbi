@@ -18,6 +18,40 @@ module Anthropic
               )
             end
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryListItem::Type
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            MEMORY =
+              T.let(
+                :memory,
+                Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryListItem::Type::TaggedSymbol
+              )
+            MEMORY_PREFIX =
+              T.let(
+                :memory_prefix,
+                Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryListItem::Type::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryListItem::Type::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
           sig do
             override.returns(
               T::Array[

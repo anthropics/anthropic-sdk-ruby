@@ -12,6 +12,23 @@ module Anthropic
       module BetaBrowserStateChange
         extend Anthropic::Internal::Type::Union
 
+        type type_ =
+          :tab_opened
+          | :download_started
+          | :download_completed
+          | :download_failed
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TAB_OPENED: :tab_opened
+          DOWNLOAD_STARTED: :download_started
+          DOWNLOAD_COMPLETED: :download_completed
+          DOWNLOAD_FAILED: :download_failed
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaBrowserStateChange::type_]
+        end
+
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_browser_state_change]
 
         def self.new:

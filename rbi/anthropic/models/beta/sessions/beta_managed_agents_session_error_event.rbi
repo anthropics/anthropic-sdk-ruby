@@ -106,6 +106,70 @@ module Anthropic
                 )
               end
 
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              TaggedSymbol =
+                T.type_alias do
+                  T.all(
+                    Symbol,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type
+                  )
+                end
+              OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+              UNKNOWN_ERROR =
+                T.let(
+                  :unknown_error,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type::TaggedSymbol
+                )
+              MODEL_OVERLOADED_ERROR =
+                T.let(
+                  :model_overloaded_error,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type::TaggedSymbol
+                )
+              MODEL_RATE_LIMITED_ERROR =
+                T.let(
+                  :model_rate_limited_error,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type::TaggedSymbol
+                )
+              MODEL_REQUEST_FAILED_ERROR =
+                T.let(
+                  :model_request_failed_error,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type::TaggedSymbol
+                )
+              MCP_CONNECTION_FAILED_ERROR =
+                T.let(
+                  :mcp_connection_failed_error,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type::TaggedSymbol
+                )
+              MCP_AUTHENTICATION_FAILED_ERROR =
+                T.let(
+                  :mcp_authentication_failed_error,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type::TaggedSymbol
+                )
+              BILLING_ERROR =
+                T.let(
+                  :billing_error,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type::TaggedSymbol
+                )
+              CREDENTIAL_HOST_UNREACHABLE_ERROR =
+                T.let(
+                  :credential_host_unreachable_error,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type::TaggedSymbol
+                )
+
+              sig do
+                override.returns(
+                  T::Array[
+                    Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Type::TaggedSymbol
+                  ]
+                )
+              end
+              def self.values
+              end
+            end
+
             sig do
               override.returns(
                 T::Array[

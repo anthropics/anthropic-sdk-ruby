@@ -34,6 +34,25 @@ module Anthropic
         module Citation
           extend Anthropic::Internal::Type::Union
 
+          type type_ =
+            :char_location
+            | :page_location
+            | :content_block_location
+            | :web_search_result_location
+            | :search_result_location
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            CHAR_LOCATION: :char_location
+            PAGE_LOCATION: :page_location
+            CONTENT_BLOCK_LOCATION: :content_block_location
+            WEB_SEARCH_RESULT_LOCATION: :web_search_result_location
+            SEARCH_RESULT_LOCATION: :search_result_location
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaCitationsDelta::Citation::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaCitationsDelta::citation]
 
           def self.new:

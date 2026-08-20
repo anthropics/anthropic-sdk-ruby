@@ -21,6 +21,40 @@ module Anthropic
           )
         end
 
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias { T.all(Symbol, Anthropic::BrowserStateChange::Type) }
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        TAB_OPENED =
+          T.let(:tab_opened, Anthropic::BrowserStateChange::Type::TaggedSymbol)
+        DOWNLOAD_STARTED =
+          T.let(
+            :download_started,
+            Anthropic::BrowserStateChange::Type::TaggedSymbol
+          )
+        DOWNLOAD_COMPLETED =
+          T.let(
+            :download_completed,
+            Anthropic::BrowserStateChange::Type::TaggedSymbol
+          )
+        DOWNLOAD_FAILED =
+          T.let(
+            :download_failed,
+            Anthropic::BrowserStateChange::Type::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::BrowserStateChange::Type::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
+      end
+
       sig do
         override.returns(T::Array[Anthropic::BrowserStateChange::Variants])
       end

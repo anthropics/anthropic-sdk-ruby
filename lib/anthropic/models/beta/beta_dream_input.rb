@@ -17,6 +17,16 @@ module Anthropic
         # Input session transcripts the dream reads.
         variant :sessions, -> { Anthropic::Beta::BetaDreamSessionsInput }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          MEMORY_STORE = :memory_store
+          SESSIONS = :sessions
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaDreamMemoryStoreInput, Anthropic::Models::Beta::BetaDreamSessionsInput)]
 

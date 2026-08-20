@@ -58,6 +58,247 @@ module Anthropic
             )
           end
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::Beta::BetaWebhookEventData::Type)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          SESSION_CREATED =
+            T.let(
+              :"session.created",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          SESSION_PENDING =
+            T.let(
+              :"session.pending",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          SESSION_RUNNING =
+            T.let(
+              :"session.running",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          SESSION_IDLED =
+            T.let(
+              :"session.idled",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          SESSION_REQUIRES_ACTION =
+            T.let(
+              :"session.requires_action",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          SESSION_ARCHIVED =
+            T.let(
+              :"session.archived",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          SESSION_DELETED =
+            T.let(
+              :"session.deleted",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          SESSION_STATUS_RESCHEDULED =
+            T.let(
+              :"session.status_rescheduled",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          SESSION_STATUS_RUN_STARTED =
+            T.let(
+              :"session.status_run_started",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          SESSION_STATUS_IDLED =
+            T.let(
+              :"session.status_idled",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          SESSION_STATUS_TERMINATED =
+            T.let(
+              :"session.status_terminated",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          SESSION_THREAD_CREATED =
+            T.let(
+              :"session.thread_created",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          SESSION_THREAD_IDLED =
+            T.let(
+              :"session.thread_idled",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          SESSION_THREAD_TERMINATED =
+            T.let(
+              :"session.thread_terminated",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          SESSION_OUTCOME_EVALUATION_ENDED =
+            T.let(
+              :"session.outcome_evaluation_ended",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          VAULT_CREATED =
+            T.let(
+              :"vault.created",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          VAULT_ARCHIVED =
+            T.let(
+              :"vault.archived",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          VAULT_DELETED =
+            T.let(
+              :"vault.deleted",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          VAULT_CREDENTIAL_CREATED =
+            T.let(
+              :"vault_credential.created",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          VAULT_CREDENTIAL_ARCHIVED =
+            T.let(
+              :"vault_credential.archived",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          VAULT_CREDENTIAL_DELETED =
+            T.let(
+              :"vault_credential.deleted",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          VAULT_CREDENTIAL_REFRESH_FAILED =
+            T.let(
+              :"vault_credential.refresh_failed",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          SESSION_UPDATED =
+            T.let(
+              :"session.updated",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          AGENT_CREATED =
+            T.let(
+              :"agent.created",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          AGENT_ARCHIVED =
+            T.let(
+              :"agent.archived",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          AGENT_DELETED =
+            T.let(
+              :"agent.deleted",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          DEPLOYMENT_PAUSED =
+            T.let(
+              :"deployment.paused",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          DEPLOYMENT_RUN_FAILED =
+            T.let(
+              :"deployment_run.failed",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          DEPLOYMENT_CREATED =
+            T.let(
+              :"deployment.created",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          DEPLOYMENT_UPDATED =
+            T.let(
+              :"deployment.updated",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          DEPLOYMENT_UNPAUSED =
+            T.let(
+              :"deployment.unpaused",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          AGENT_UPDATED =
+            T.let(
+              :"agent.updated",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          DEPLOYMENT_ARCHIVED =
+            T.let(
+              :"deployment.archived",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          DEPLOYMENT_RUN_STARTED =
+            T.let(
+              :"deployment_run.started",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          DEPLOYMENT_DELETED =
+            T.let(
+              :"deployment.deleted",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          DEPLOYMENT_RUN_SUCCEEDED =
+            T.let(
+              :"deployment_run.succeeded",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          ENVIRONMENT_CREATED =
+            T.let(
+              :"environment.created",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          ENVIRONMENT_UPDATED =
+            T.let(
+              :"environment.updated",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          ENVIRONMENT_ARCHIVED =
+            T.let(
+              :"environment.archived",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          ENVIRONMENT_DELETED =
+            T.let(
+              :"environment.deleted",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          MEMORY_STORE_CREATED =
+            T.let(
+              :"memory_store.created",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          MEMORY_STORE_ARCHIVED =
+            T.let(
+              :"memory_store.archived",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          MEMORY_STORE_DELETED =
+            T.let(
+              :"memory_store.deleted",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+          SESSION_BUDGET_REACHED =
+            T.let(
+              :"session.budget_reached",
+              Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaWebhookEventData::Type::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
         sig do
           override.returns(
             T::Array[Anthropic::Beta::BetaWebhookEventData::Variants]

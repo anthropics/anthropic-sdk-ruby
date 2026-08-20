@@ -14,6 +14,27 @@ module Anthropic
       module BetaRawContentBlockDelta
         extend Anthropic::Internal::Type::Union
 
+        type type_ =
+          :text_delta
+          | :input_json_delta
+          | :citations_delta
+          | :thinking_delta
+          | :signature_delta
+          | :compaction_delta
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TEXT_DELTA: :text_delta
+          INPUT_JSON_DELTA: :input_json_delta
+          CITATIONS_DELTA: :citations_delta
+          THINKING_DELTA: :thinking_delta
+          SIGNATURE_DELTA: :signature_delta
+          COMPACTION_DELTA: :compaction_delta
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaRawContentBlockDelta::type_]
+        end
+
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_raw_content_block_delta]
 
         def self.new:

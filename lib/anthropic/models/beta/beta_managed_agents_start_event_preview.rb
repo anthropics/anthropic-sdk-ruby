@@ -12,6 +12,16 @@ module Anthropic
 
         variant :"agent.thinking", -> { Anthropic::Beta::BetaManagedAgentsAgentThinkingPreview }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          AGENT_MESSAGE = :"agent.message"
+          AGENT_THINKING = :"agent.thinking"
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAgentMessagePreview, Anthropic::Models::Beta::BetaManagedAgentsAgentThinkingPreview)]
 

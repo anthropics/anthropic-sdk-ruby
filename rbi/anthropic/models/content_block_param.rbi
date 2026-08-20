@@ -28,6 +28,83 @@ module Anthropic
           )
         end
 
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias { T.all(Symbol, Anthropic::ContentBlockParam::Type) }
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        TEXT = T.let(:text, Anthropic::ContentBlockParam::Type::TaggedSymbol)
+        IMAGE = T.let(:image, Anthropic::ContentBlockParam::Type::TaggedSymbol)
+        DOCUMENT =
+          T.let(:document, Anthropic::ContentBlockParam::Type::TaggedSymbol)
+        SEARCH_RESULT =
+          T.let(
+            :search_result,
+            Anthropic::ContentBlockParam::Type::TaggedSymbol
+          )
+        THINKING =
+          T.let(:thinking, Anthropic::ContentBlockParam::Type::TaggedSymbol)
+        REDACTED_THINKING =
+          T.let(
+            :redacted_thinking,
+            Anthropic::ContentBlockParam::Type::TaggedSymbol
+          )
+        TOOL_USE =
+          T.let(:tool_use, Anthropic::ContentBlockParam::Type::TaggedSymbol)
+        TOOL_RESULT =
+          T.let(:tool_result, Anthropic::ContentBlockParam::Type::TaggedSymbol)
+        SERVER_TOOL_USE =
+          T.let(
+            :server_tool_use,
+            Anthropic::ContentBlockParam::Type::TaggedSymbol
+          )
+        WEB_SEARCH_TOOL_RESULT =
+          T.let(
+            :web_search_tool_result,
+            Anthropic::ContentBlockParam::Type::TaggedSymbol
+          )
+        WEB_FETCH_TOOL_RESULT =
+          T.let(
+            :web_fetch_tool_result,
+            Anthropic::ContentBlockParam::Type::TaggedSymbol
+          )
+        CODE_EXECUTION_TOOL_RESULT =
+          T.let(
+            :code_execution_tool_result,
+            Anthropic::ContentBlockParam::Type::TaggedSymbol
+          )
+        BASH_CODE_EXECUTION_TOOL_RESULT =
+          T.let(
+            :bash_code_execution_tool_result,
+            Anthropic::ContentBlockParam::Type::TaggedSymbol
+          )
+        TEXT_EDITOR_CODE_EXECUTION_TOOL_RESULT =
+          T.let(
+            :text_editor_code_execution_tool_result,
+            Anthropic::ContentBlockParam::Type::TaggedSymbol
+          )
+        TOOL_SEARCH_TOOL_RESULT =
+          T.let(
+            :tool_search_tool_result,
+            Anthropic::ContentBlockParam::Type::TaggedSymbol
+          )
+        CONTAINER_UPLOAD =
+          T.let(
+            :container_upload,
+            Anthropic::ContentBlockParam::Type::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::ContentBlockParam::Type::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
+      end
+
       sig { override.returns(T::Array[Anthropic::ContentBlockParam::Variants]) }
       def self.variants
       end

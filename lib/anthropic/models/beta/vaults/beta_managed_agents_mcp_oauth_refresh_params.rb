@@ -74,6 +74,17 @@ module Anthropic
             # Token endpoint uses POST body authentication with client credentials.
             variant :client_secret_post, -> { Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostParam }
 
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              NONE = :none
+              CLIENT_SECRET_BASIC = :client_secret_basic
+              CLIENT_SECRET_POST = :client_secret_post
+
+              # @!method self.values
+              #   @return [Array<Symbol>]
+            end
+
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneParam, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicParam, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostParam)]
 

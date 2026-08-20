@@ -20,6 +20,60 @@ module Anthropic
             )
           end
 
+        module Command
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                Anthropic::Beta::BetaMemoryTool20250818Command::Command
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          VIEW =
+            T.let(
+              :view,
+              Anthropic::Beta::BetaMemoryTool20250818Command::Command::TaggedSymbol
+            )
+          CREATE =
+            T.let(
+              :create,
+              Anthropic::Beta::BetaMemoryTool20250818Command::Command::TaggedSymbol
+            )
+          STR_REPLACE =
+            T.let(
+              :str_replace,
+              Anthropic::Beta::BetaMemoryTool20250818Command::Command::TaggedSymbol
+            )
+          INSERT =
+            T.let(
+              :insert,
+              Anthropic::Beta::BetaMemoryTool20250818Command::Command::TaggedSymbol
+            )
+          DELETE =
+            T.let(
+              :delete,
+              Anthropic::Beta::BetaMemoryTool20250818Command::Command::TaggedSymbol
+            )
+          RENAME =
+            T.let(
+              :rename,
+              Anthropic::Beta::BetaMemoryTool20250818Command::Command::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaMemoryTool20250818Command::Command::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
         sig do
           override.returns(
             T::Array[Anthropic::Beta::BetaMemoryTool20250818Command::Variants]

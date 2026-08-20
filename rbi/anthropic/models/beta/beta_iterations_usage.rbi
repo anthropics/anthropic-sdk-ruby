@@ -20,6 +20,47 @@ module Anthropic
             )
           end
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::Beta::BetaIterationsUsageItem::Type)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          MESSAGE =
+            T.let(
+              :message,
+              Anthropic::Beta::BetaIterationsUsageItem::Type::TaggedSymbol
+            )
+          COMPACTION =
+            T.let(
+              :compaction,
+              Anthropic::Beta::BetaIterationsUsageItem::Type::TaggedSymbol
+            )
+          ADVISOR_MESSAGE =
+            T.let(
+              :advisor_message,
+              Anthropic::Beta::BetaIterationsUsageItem::Type::TaggedSymbol
+            )
+          FALLBACK_MESSAGE =
+            T.let(
+              :fallback_message,
+              Anthropic::Beta::BetaIterationsUsageItem::Type::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaIterationsUsageItem::Type::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
         sig do
           override.returns(
             T::Array[Anthropic::Beta::BetaIterationsUsageItem::Variants]

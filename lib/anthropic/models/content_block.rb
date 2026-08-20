@@ -33,6 +33,26 @@ module Anthropic
       # Response model for a file uploaded to the container.
       variant :container_upload, -> { Anthropic::ContainerUploadBlock }
 
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        TEXT = :text
+        THINKING = :thinking
+        REDACTED_THINKING = :redacted_thinking
+        TOOL_USE = :tool_use
+        SERVER_TOOL_USE = :server_tool_use
+        WEB_SEARCH_TOOL_RESULT = :web_search_tool_result
+        WEB_FETCH_TOOL_RESULT = :web_fetch_tool_result
+        CODE_EXECUTION_TOOL_RESULT = :code_execution_tool_result
+        BASH_CODE_EXECUTION_TOOL_RESULT = :bash_code_execution_tool_result
+        TEXT_EDITOR_CODE_EXECUTION_TOOL_RESULT = :text_editor_code_execution_tool_result
+        TOOL_SEARCH_TOOL_RESULT = :tool_search_tool_result
+        CONTAINER_UPLOAD = :container_upload
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+
       # @!method self.variants
       #   @return [Array(Anthropic::Models::TextBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ServerToolUseBlock, Anthropic::Models::WebSearchToolResultBlock, Anthropic::Models::WebFetchToolResultBlock, Anthropic::Models::CodeExecutionToolResultBlock, Anthropic::Models::BashCodeExecutionToolResultBlock, Anthropic::Models::TextEditorCodeExecutionToolResultBlock, Anthropic::Models::ToolSearchToolResultBlock, Anthropic::Models::ContainerUploadBlock)]
 

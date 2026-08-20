@@ -58,6 +58,19 @@ module Anthropic
       module Caller
         extend Anthropic::Internal::Type::Union
 
+        type type_ =
+          :direct | :code_execution_20250825 | :code_execution_20260120
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          DIRECT: :direct
+          CODE_EXECUTION_20250825: :code_execution_20250825
+          CODE_EXECUTION_20260120: :code_execution_20260120
+
+          def self?.values: -> ::Array[Anthropic::Models::ToolUseBlockParam::Caller::type_]
+        end
+
         def self?.variants: -> ::Array[Anthropic::Models::ToolUseBlockParam::caller_]
 
         def self.new:

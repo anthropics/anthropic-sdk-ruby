@@ -37,6 +37,19 @@ module Anthropic
         module Tool
           extend Anthropic::Internal::Type::Union
 
+          type type_ =
+            :tool_reference | :mcp_tool_reference | :mcp_toolset_reference
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TOOL_REFERENCE: :tool_reference
+            MCP_TOOL_REFERENCE: :mcp_tool_reference
+            MCP_TOOLSET_REFERENCE: :mcp_toolset_reference
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaRequestToolRemovalBlock::Tool::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaRequestToolRemovalBlock::tool]
 
           def self.new:

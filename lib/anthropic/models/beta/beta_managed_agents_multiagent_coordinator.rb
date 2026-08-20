@@ -40,6 +40,16 @@ module Anthropic
           # Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
           variant :advisor, -> { Anthropic::Beta::BetaManagedAgentsAdvisor }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            AGENT = :agent
+            ADVISOR = :advisor
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAgentReference, Anthropic::Models::Beta::BetaManagedAgentsAdvisor)]
 

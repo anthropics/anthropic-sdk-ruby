@@ -49,6 +49,20 @@ module Anthropic
 
           variant :unavailable, -> { Anthropic::Beta::BetaCacheMissUnavailable }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            MODEL_CHANGED = :model_changed
+            SYSTEM_CHANGED = :system_changed
+            TOOLS_CHANGED = :tools_changed
+            MESSAGES_CHANGED = :messages_changed
+            PREVIOUS_MESSAGE_NOT_FOUND = :previous_message_not_found
+            UNAVAILABLE = :unavailable
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaCacheMissModelChanged, Anthropic::Models::Beta::BetaCacheMissSystemChanged, Anthropic::Models::Beta::BetaCacheMissToolsChanged, Anthropic::Models::Beta::BetaCacheMissMessagesChanged, Anthropic::Models::Beta::BetaCacheMissPreviousMessageNotFound, Anthropic::Models::Beta::BetaCacheMissUnavailable)]
 

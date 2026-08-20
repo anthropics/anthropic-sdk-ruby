@@ -19,6 +19,16 @@ module Anthropic
           # Substitute the secret only on requests to the listed hosts.
           variant :limited, -> { Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            UNRESTRICTED = :unrestricted
+            LIMITED = :limited
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::Vaults::BetaManagedAgentsUnrestrictedCredentialNetworkingParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingParams)]
 

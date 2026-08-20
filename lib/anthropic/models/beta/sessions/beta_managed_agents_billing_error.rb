@@ -51,6 +51,17 @@ module Anthropic
             # The session encountered a terminal error and will transition to `terminated` state.
             variant :terminal, -> { Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal }
 
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              RETRYING = :retrying
+              EXHAUSTED = :exhausted
+              TERMINAL = :terminal
+
+              # @!method self.values
+              #   @return [Array<Symbol>]
+            end
+
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusRetrying, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal)]
 

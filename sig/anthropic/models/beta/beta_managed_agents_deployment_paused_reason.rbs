@@ -10,6 +10,17 @@ module Anthropic
       module BetaManagedAgentsDeploymentPausedReason
         extend Anthropic::Internal::Type::Union
 
+        type type_ = :manual | :error
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          MANUAL: :manual
+          ERROR: :error
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsDeploymentPausedReason::type_]
+        end
+
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason]
 
         def self.new:

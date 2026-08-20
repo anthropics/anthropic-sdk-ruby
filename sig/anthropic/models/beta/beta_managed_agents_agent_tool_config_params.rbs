@@ -16,6 +16,31 @@ module Anthropic
       module BetaManagedAgentsAgentToolConfigParams
         extend Anthropic::Internal::Type::Union
 
+        type type_ =
+          :bash
+          | :edit
+          | :read
+          | :write
+          | :glob
+          | :grep
+          | :web_fetch
+          | :web_search
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          BASH: :bash
+          EDIT: :edit
+          READ: :read
+          WRITE: :write
+          GLOB: :glob
+          GREP: :grep
+          WEB_FETCH: :web_fetch
+          WEB_SEARCH: :web_search
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::type_]
+        end
+
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_agent_tool_config_params]
 
         def self.new:

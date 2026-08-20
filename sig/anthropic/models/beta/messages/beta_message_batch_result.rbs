@@ -11,6 +11,19 @@ module Anthropic
         module BetaMessageBatchResult
           extend Anthropic::Internal::Type::Union
 
+          type type_ = :succeeded | :errored | :canceled | :expired
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            SUCCEEDED: :succeeded
+            ERRORED: :errored
+            CANCELED: :canceled
+            EXPIRED: :expired
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Messages::BetaMessageBatchResult::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::Messages::beta_message_batch_result]
 
           def self.new:

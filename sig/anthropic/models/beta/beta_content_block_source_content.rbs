@@ -10,6 +10,17 @@ module Anthropic
       module BetaContentBlockSourceContent
         extend Anthropic::Internal::Type::Union
 
+        type type_ = :text | :image
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TEXT: :text
+          IMAGE: :image
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaContentBlockSourceContent::type_]
+        end
+
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_content_block_source_content]
 
         def self.new:

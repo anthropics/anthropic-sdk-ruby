@@ -80,6 +80,16 @@ module Anthropic
           # Request params for `self_hosted` environment configuration.
           variant :self_hosted, -> { Anthropic::Beta::BetaSelfHostedConfigParams }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            CLOUD = :cloud
+            SELF_HOSTED = :self_hosted
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaCloudConfigParams, Anthropic::Models::Beta::BetaSelfHostedConfigParams)]
 

@@ -142,6 +142,55 @@ module Anthropic
               )
             end
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::BetaManagedAgentsModelConfig::Effort::Type
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            LOW =
+              T.let(
+                :low,
+                Anthropic::Beta::BetaManagedAgentsModelConfig::Effort::Type::TaggedSymbol
+              )
+            MEDIUM =
+              T.let(
+                :medium,
+                Anthropic::Beta::BetaManagedAgentsModelConfig::Effort::Type::TaggedSymbol
+              )
+            HIGH =
+              T.let(
+                :high,
+                Anthropic::Beta::BetaManagedAgentsModelConfig::Effort::Type::TaggedSymbol
+              )
+            XHIGH =
+              T.let(
+                :xhigh,
+                Anthropic::Beta::BetaManagedAgentsModelConfig::Effort::Type::TaggedSymbol
+              )
+            MAX =
+              T.let(
+                :max,
+                Anthropic::Beta::BetaManagedAgentsModelConfig::Effort::Type::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::BetaManagedAgentsModelConfig::Effort::Type::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
           sig do
             override.returns(
               T::Array[

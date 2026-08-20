@@ -19,6 +19,17 @@ module Anthropic
           # A memory store attached to an agent session.
           variant :memory_store, -> { Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            GITHUB_REPOSITORY = :github_repository
+            FILE = :file
+            MEMORY_STORE = :memory_store
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource)]
 

@@ -69,6 +69,17 @@ module Anthropic
         module Trigger
           extend Anthropic::Internal::Type::Union
 
+          type type_ = :input_tokens | :tool_uses
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            INPUT_TOKENS: :input_tokens
+            TOOL_USES: :tool_uses
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaClearToolUses20250919Edit::Trigger::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaClearToolUses20250919Edit::trigger]
 
           def self.new:

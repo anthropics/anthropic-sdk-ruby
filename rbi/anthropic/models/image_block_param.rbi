@@ -105,6 +105,34 @@ module Anthropic
             )
           end
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::ImageBlockParam::Source::Type)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          BASE64 =
+            T.let(
+              :base64,
+              Anthropic::ImageBlockParam::Source::Type::TaggedSymbol
+            )
+          URL =
+            T.let(:url, Anthropic::ImageBlockParam::Source::Type::TaggedSymbol)
+          FILE =
+            T.let(:file, Anthropic::ImageBlockParam::Source::Type::TaggedSymbol)
+
+          sig do
+            override.returns(
+              T::Array[Anthropic::ImageBlockParam::Source::Type::TaggedSymbol]
+            )
+          end
+          def self.values
+          end
+        end
+
         sig do
           override.returns(
             T::Array[Anthropic::ImageBlockParam::Source::Variants]

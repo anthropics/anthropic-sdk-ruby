@@ -157,6 +157,40 @@ module Anthropic
               )
             end
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::EnvironmentUpdateParams::Config::Type
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            CLOUD =
+              T.let(
+                :cloud,
+                Anthropic::Beta::EnvironmentUpdateParams::Config::Type::TaggedSymbol
+              )
+            SELF_HOSTED =
+              T.let(
+                :self_hosted,
+                Anthropic::Beta::EnvironmentUpdateParams::Config::Type::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::EnvironmentUpdateParams::Config::Type::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
           sig do
             override.returns(
               T::Array[
