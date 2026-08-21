@@ -63,6 +63,16 @@ module Anthropic
 
           variant :commit, -> { Anthropic::Beta::BetaManagedAgentsCommitCheckout }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            BRANCH = :branch
+            COMMIT = :commit
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsBranchCheckout, Anthropic::Models::Beta::BetaManagedAgentsCommitCheckout)]
 

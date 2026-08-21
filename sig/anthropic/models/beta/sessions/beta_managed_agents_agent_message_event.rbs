@@ -40,6 +40,17 @@ module Anthropic
           module Content
             extend Anthropic::Internal::Type::Union
 
+            type type_ = :text | :redacted
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              TEXT: :text
+              REDACTED: :redacted
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::Content::type_]
+            end
+
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::content]
 
             def self.new:

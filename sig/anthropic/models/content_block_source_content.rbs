@@ -6,6 +6,17 @@ module Anthropic
     module ContentBlockSourceContent
       extend Anthropic::Internal::Type::Union
 
+      type type_ = :text | :image
+
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        TEXT: :text
+        IMAGE: :image
+
+        def self?.values: -> ::Array[Anthropic::Models::ContentBlockSourceContent::type_]
+      end
+
       def self?.variants: -> ::Array[Anthropic::Models::content_block_source_content]
 
       def self.new:

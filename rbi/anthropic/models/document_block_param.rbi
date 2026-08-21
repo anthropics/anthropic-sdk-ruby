@@ -115,6 +115,52 @@ module Anthropic
             )
           end
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::DocumentBlockParam::Source::Type)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          BASE64 =
+            T.let(
+              :base64,
+              Anthropic::DocumentBlockParam::Source::Type::TaggedSymbol
+            )
+          TEXT =
+            T.let(
+              :text,
+              Anthropic::DocumentBlockParam::Source::Type::TaggedSymbol
+            )
+          CONTENT =
+            T.let(
+              :content,
+              Anthropic::DocumentBlockParam::Source::Type::TaggedSymbol
+            )
+          URL =
+            T.let(
+              :url,
+              Anthropic::DocumentBlockParam::Source::Type::TaggedSymbol
+            )
+          FILE =
+            T.let(
+              :file,
+              Anthropic::DocumentBlockParam::Source::Type::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::DocumentBlockParam::Source::Type::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
         sig do
           override.returns(
             T::Array[Anthropic::DocumentBlockParam::Source::Variants]

@@ -17,6 +17,53 @@ module Anthropic
           )
         end
 
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        TaggedSymbol =
+          T.type_alias { T.all(Symbol, Anthropic::RawMessageStreamEvent::Type) }
+        OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+        MESSAGE_START =
+          T.let(
+            :message_start,
+            Anthropic::RawMessageStreamEvent::Type::TaggedSymbol
+          )
+        MESSAGE_DELTA =
+          T.let(
+            :message_delta,
+            Anthropic::RawMessageStreamEvent::Type::TaggedSymbol
+          )
+        MESSAGE_STOP =
+          T.let(
+            :message_stop,
+            Anthropic::RawMessageStreamEvent::Type::TaggedSymbol
+          )
+        CONTENT_BLOCK_START =
+          T.let(
+            :content_block_start,
+            Anthropic::RawMessageStreamEvent::Type::TaggedSymbol
+          )
+        CONTENT_BLOCK_DELTA =
+          T.let(
+            :content_block_delta,
+            Anthropic::RawMessageStreamEvent::Type::TaggedSymbol
+          )
+        CONTENT_BLOCK_STOP =
+          T.let(
+            :content_block_stop,
+            Anthropic::RawMessageStreamEvent::Type::TaggedSymbol
+          )
+
+        sig do
+          override.returns(
+            T::Array[Anthropic::RawMessageStreamEvent::Type::TaggedSymbol]
+          )
+        end
+        def self.values
+        end
+      end
+
       sig do
         override.returns(T::Array[Anthropic::RawMessageStreamEvent::Variants])
       end

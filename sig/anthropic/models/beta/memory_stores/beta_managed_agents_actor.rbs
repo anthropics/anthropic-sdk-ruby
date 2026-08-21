@@ -11,6 +11,20 @@ module Anthropic
         module BetaManagedAgentsActor
           extend Anthropic::Internal::Type::Union
 
+          type type_ =
+            :session_actor | :api_actor | :user_actor | :service_account_actor
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            SESSION_ACTOR: :session_actor
+            API_ACTOR: :api_actor
+            USER_ACTOR: :user_actor
+            SERVICE_ACCOUNT_ACTOR: :service_account_actor
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsActor::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::MemoryStores::beta_managed_agents_actor]
 
           def self.new:

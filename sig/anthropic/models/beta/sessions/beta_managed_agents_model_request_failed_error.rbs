@@ -36,6 +36,18 @@ module Anthropic
           module RetryStatus
             extend Anthropic::Internal::Type::Union
 
+            type type_ = :retrying | :exhausted | :terminal
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              RETRYING: :retrying
+              EXHAUSTED: :exhausted
+              TERMINAL: :terminal
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::RetryStatus::type_]
+            end
+
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError::retry_status]
 
             def self.new:

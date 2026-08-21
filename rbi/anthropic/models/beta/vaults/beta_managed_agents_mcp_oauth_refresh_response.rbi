@@ -94,6 +94,45 @@ module Anthropic
                 )
               end
 
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              TaggedSymbol =
+                T.type_alias do
+                  T.all(
+                    Symbol,
+                    Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshResponse::TokenEndpointAuth::Type
+                  )
+                end
+              OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+              NONE =
+                T.let(
+                  :none,
+                  Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshResponse::TokenEndpointAuth::Type::TaggedSymbol
+                )
+              CLIENT_SECRET_BASIC =
+                T.let(
+                  :client_secret_basic,
+                  Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshResponse::TokenEndpointAuth::Type::TaggedSymbol
+                )
+              CLIENT_SECRET_POST =
+                T.let(
+                  :client_secret_post,
+                  Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshResponse::TokenEndpointAuth::Type::TaggedSymbol
+                )
+
+              sig do
+                override.returns(
+                  T::Array[
+                    Anthropic::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshResponse::TokenEndpointAuth::Type::TaggedSymbol
+                  ]
+                )
+              end
+              def self.values
+              end
+            end
+
             sig do
               override.returns(
                 T::Array[

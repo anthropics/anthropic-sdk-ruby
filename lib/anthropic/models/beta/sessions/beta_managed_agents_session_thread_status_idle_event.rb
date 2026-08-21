@@ -78,6 +78,18 @@ module Anthropic
             # The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
             variant :budget_reached, -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached }
 
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              END_TURN = :end_turn
+              REQUIRES_ACTION = :requires_action
+              RETRIES_EXHAUSTED = :retries_exhausted
+              BUDGET_REACHED = :budget_reached
+
+              # @!method self.values
+              #   @return [Array<Symbol>]
+            end
+
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached)]
 

@@ -22,6 +22,43 @@ module Anthropic
       module BetaManagedAgentsDeploymentPausedReasonError
         extend Anthropic::Internal::Type::Union
 
+        type type_ =
+          :environment_archived_error
+          | :agent_archived_error
+          | :environment_not_found_error
+          | :vault_not_found_error
+          | :file_not_found_error
+          | :session_resource_not_found_error
+          | :workspace_archived_error
+          | :organization_disabled_error
+          | :memory_store_archived_error
+          | :skill_not_found_error
+          | :vault_archived_error
+          | :unknown_error
+          | :self_hosted_resources_unsupported_error
+          | :mcp_egress_blocked_error
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          ENVIRONMENT_ARCHIVED_ERROR: :environment_archived_error
+          AGENT_ARCHIVED_ERROR: :agent_archived_error
+          ENVIRONMENT_NOT_FOUND_ERROR: :environment_not_found_error
+          VAULT_NOT_FOUND_ERROR: :vault_not_found_error
+          FILE_NOT_FOUND_ERROR: :file_not_found_error
+          SESSION_RESOURCE_NOT_FOUND_ERROR: :session_resource_not_found_error
+          WORKSPACE_ARCHIVED_ERROR: :workspace_archived_error
+          ORGANIZATION_DISABLED_ERROR: :organization_disabled_error
+          MEMORY_STORE_ARCHIVED_ERROR: :memory_store_archived_error
+          SKILL_NOT_FOUND_ERROR: :skill_not_found_error
+          VAULT_ARCHIVED_ERROR: :vault_archived_error
+          UNKNOWN_ERROR: :unknown_error
+          SELF_HOSTED_RESOURCES_UNSUPPORTED_ERROR: :self_hosted_resources_unsupported_error
+          MCP_EGRESS_BLOCKED_ERROR: :mcp_egress_blocked_error
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsDeploymentPausedReasonError::type_]
+        end
+
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason_error]
 
         def self.new:

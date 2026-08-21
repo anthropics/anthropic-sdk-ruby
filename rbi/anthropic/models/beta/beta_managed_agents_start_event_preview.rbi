@@ -17,6 +17,40 @@ module Anthropic
             )
           end
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(
+                Symbol,
+                Anthropic::Beta::BetaManagedAgentsStartEventPreview::Type
+              )
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          AGENT_MESSAGE =
+            T.let(
+              :"agent.message",
+              Anthropic::Beta::BetaManagedAgentsStartEventPreview::Type::TaggedSymbol
+            )
+          AGENT_THINKING =
+            T.let(
+              :"agent.thinking",
+              Anthropic::Beta::BetaManagedAgentsStartEventPreview::Type::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaManagedAgentsStartEventPreview::Type::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
         sig do
           override.returns(
             T::Array[

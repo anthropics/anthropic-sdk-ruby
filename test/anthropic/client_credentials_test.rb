@@ -13,6 +13,7 @@ class Anthropic::ClientCredentialsTest < Minitest::Test
     @original_env = ENV.to_h
     @tmpdir = Dir.mktmpdir
     ENV["ANTHROPIC_CONFIG_DIR"] = @tmpdir
+    ENV.delete("ANTHROPIC_BASE_URL")
     FileUtils.mkdir_p(File.join(@tmpdir, "configs"))
     FileUtils.mkdir_p(File.join(@tmpdir, "credentials"))
     WebMock.enable!
@@ -131,6 +132,49 @@ class Anthropic::ClientCredentialsTest < Minitest::Test
     assert_equal("https://custom.anthropic.com", client.base_url.to_s)
   end
 
+  def test_profile_base_url_used_when_no_explicit_or_env_base_url
+    write_user_oauth_profile(base_url: "https://profile.example.com")
+
+    client = Anthropic::Client.new
+
+    assert_equal("https://profile.example.com", client.base_url.to_s)
+  end
+
+  def test_env_base_url_takes_precedence_over_profile_base_url
+    write_user_oauth_profile(base_url: "https://profile.example.com")
+    ENV["ANTHROPIC_BASE_URL"] = "https://env.example.com"
+
+    client = Anthropic::Client.new
+
+    assert_equal("https://env.example.com", client.base_url.to_s)
+    assert_instance_of(Anthropic::Credentials::CredentialsFile, client.credentials)
+  end
+
+  def test_explicit_base_url_takes_precedence_over_env_and_profile
+    write_user_oauth_profile(base_url: "https://profile.example.com")
+    ENV["ANTHROPIC_BASE_URL"] = "https://env.example.com"
+
+    client = Anthropic::Client.new(base_url: "https://explicit.example.com")
+
+    assert_equal("https://explicit.example.com", client.base_url.to_s)
+  end
+
+  def test_env_base_url_takes_precedence_over_config_base_url
+    ENV["ANTHROPIC_BASE_URL"] = "https://env.example.com"
+    config = {
+      "organization_id" => "org-123",
+      "base_url" => "https://custom.anthropic.com",
+      "authentication" => {
+        "type" => "oidc_federation",
+        "federation_rule_id" => "rule-456"
+      }
+    }
+
+    client = Anthropic::Client.new(config: config)
+
+    assert_equal("https://env.example.com", client.base_url.to_s)
+  end
+
   def test_subclass_without_default_credentials_never_falls_back_to_first_party_base_url
     ENV["ANTHROPIC_BASE_URL"] = "http://wrong-host.example.com"
     platform_client = Class.new(Anthropic::Client) do
@@ -224,5 +268,19 @@ class Anthropic::ClientCredentialsTest < Minitest::Test
     assert_requested(:post, "http://localhost/v1/messages", times: 1)
   ensure
     Thread.current.thread_variable_set(:mock_sleep, nil)
+  end
+
+  private
+
+  def write_user_oauth_profile(base_url:)
+    %w[ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN ANTHROPIC_PROFILE].each { ENV.delete(_1) }
+    File.write(
+      File.join(@tmpdir, "configs", "default.json"),
+      JSON.generate({"base_url" => base_url, "authentication" => {"type" => "user_oauth"}})
+    )
+    creds_path = File.join(@tmpdir, "credentials", "default.json")
+    creds = {"access_token" => "profile-token", "expires_at" => Time.now.to_i + 3600}
+    File.write(creds_path, JSON.generate(creds))
+    File.chmod(0o600, creds_path)
   end
 end

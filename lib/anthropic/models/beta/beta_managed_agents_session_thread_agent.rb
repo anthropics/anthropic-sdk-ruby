@@ -95,6 +95,16 @@ module Anthropic
           # A resolved user-created custom skill.
           variant :custom, -> { Anthropic::Beta::BetaManagedAgentsCustomSkill }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            ANTHROPIC = :anthropic
+            CUSTOM = :custom
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkill, Anthropic::Models::Beta::BetaManagedAgentsCustomSkill)]
 
@@ -135,6 +145,17 @@ module Anthropic
 
           # A custom tool as returned in API responses.
           variant :custom, -> { Anthropic::Beta::BetaManagedAgentsCustomTool }
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            AGENT_TOOLSET_20260401 = :agent_toolset_20260401
+            MCP_TOOLSET = :mcp_toolset
+            CUSTOM = :custom
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
 
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401, Anthropic::Models::Beta::BetaManagedAgentsMCPToolset, Anthropic::Models::Beta::BetaManagedAgentsCustomTool)]

@@ -17,6 +17,19 @@ module Anthropic
 
       variant :signature_delta, -> { Anthropic::SignatureDelta }
 
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        TEXT_DELTA = :text_delta
+        INPUT_JSON_DELTA = :input_json_delta
+        CITATIONS_DELTA = :citations_delta
+        THINKING_DELTA = :thinking_delta
+        SIGNATURE_DELTA = :signature_delta
+
+        # @!method self.values
+        #   @return [Array<Symbol>]
+      end
+
       # @!method self.variants
       #   @return [Array(Anthropic::Models::TextDelta, Anthropic::Models::InputJSONDelta, Anthropic::Models::CitationsDelta, Anthropic::Models::ThinkingDelta, Anthropic::Models::SignatureDelta)]
 

@@ -162,6 +162,45 @@ module Anthropic
               )
             end
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::BetaFallbackParam::Thinking::Type
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            ENABLED =
+              T.let(
+                :enabled,
+                Anthropic::Beta::BetaFallbackParam::Thinking::Type::TaggedSymbol
+              )
+            DISABLED =
+              T.let(
+                :disabled,
+                Anthropic::Beta::BetaFallbackParam::Thinking::Type::TaggedSymbol
+              )
+            ADAPTIVE =
+              T.let(
+                :adaptive,
+                Anthropic::Beta::BetaFallbackParam::Thinking::Type::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::BetaFallbackParam::Thinking::Type::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
           sig do
             override.returns(
               T::Array[Anthropic::Beta::BetaFallbackParam::Thinking::Variants]

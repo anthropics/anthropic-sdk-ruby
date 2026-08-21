@@ -111,6 +111,60 @@ module Anthropic
               )
             end
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::ToolResultBlockParam::Content::Content::Type
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            TEXT =
+              T.let(
+                :text,
+                Anthropic::ToolResultBlockParam::Content::Content::Type::TaggedSymbol
+              )
+            IMAGE =
+              T.let(
+                :image,
+                Anthropic::ToolResultBlockParam::Content::Content::Type::TaggedSymbol
+              )
+            SEARCH_RESULT =
+              T.let(
+                :search_result,
+                Anthropic::ToolResultBlockParam::Content::Content::Type::TaggedSymbol
+              )
+            DOCUMENT =
+              T.let(
+                :document,
+                Anthropic::ToolResultBlockParam::Content::Content::Type::TaggedSymbol
+              )
+            TOOL_REFERENCE =
+              T.let(
+                :tool_reference,
+                Anthropic::ToolResultBlockParam::Content::Content::Type::TaggedSymbol
+              )
+            BROWSER_STATE =
+              T.let(
+                :browser_state,
+                Anthropic::ToolResultBlockParam::Content::Content::Type::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::ToolResultBlockParam::Content::Content::Type::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
           sig do
             override.returns(
               T::Array[

@@ -51,6 +51,17 @@ module Anthropic
         module Checkout
           extend Anthropic::Internal::Type::Union
 
+          type type_ = :branch | :commit
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            BRANCH: :branch
+            COMMIT: :commit
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig::Checkout::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig::checkout]
 
           def self.new:

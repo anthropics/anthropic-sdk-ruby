@@ -20,6 +20,20 @@ module Anthropic
 
         variant :compaction_delta, -> { Anthropic::Beta::BetaCompactionContentBlockDelta }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TEXT_DELTA = :text_delta
+          INPUT_JSON_DELTA = :input_json_delta
+          CITATIONS_DELTA = :citations_delta
+          THINKING_DELTA = :thinking_delta
+          SIGNATURE_DELTA = :signature_delta
+          COMPACTION_DELTA = :compaction_delta
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaTextDelta, Anthropic::Models::Beta::BetaInputJSONDelta, Anthropic::Models::Beta::BetaCitationsDelta, Anthropic::Models::Beta::BetaThinkingDelta, Anthropic::Models::Beta::BetaSignatureDelta, Anthropic::Models::Beta::BetaCompactionContentBlockDelta)]
 

@@ -15,6 +15,16 @@ module Anthropic
         # A scheduled fire recorded a failed run whose error auto-pauses the deployment.
         variant :error, -> { Anthropic::Beta::BetaManagedAgentsErrorDeploymentPausedReason }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          MANUAL = :manual
+          ERROR = :error
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsManualDeploymentPausedReason, Anthropic::Models::Beta::BetaManagedAgentsErrorDeploymentPausedReason)]
 

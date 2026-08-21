@@ -28,6 +28,17 @@ module Anthropic
           # Automatically compact older context when reaching the configured trigger threshold.
           variant :compact_20260112, -> { Anthropic::Beta::BetaCompact20260112Edit }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            CLEAR_TOOL_USES_20250919 = :clear_tool_uses_20250919
+            CLEAR_THINKING_20251015 = :clear_thinking_20251015
+            COMPACT_20260112 = :compact_20260112
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaClearToolUses20250919Edit, Anthropic::Models::Beta::BetaClearThinking20251015Edit, Anthropic::Models::Beta::BetaCompact20260112Edit)]
 

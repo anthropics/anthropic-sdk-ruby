@@ -131,6 +131,45 @@ module Anthropic
                 )
               end
 
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              TaggedSymbol =
+                T.type_alias do
+                  T.all(
+                    Symbol,
+                    Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Auth::Type
+                  )
+                end
+              OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+              MCP_OAUTH =
+                T.let(
+                  :mcp_oauth,
+                  Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Auth::Type::TaggedSymbol
+                )
+              STATIC_BEARER =
+                T.let(
+                  :static_bearer,
+                  Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Auth::Type::TaggedSymbol
+                )
+              ENVIRONMENT_VARIABLE =
+                T.let(
+                  :environment_variable,
+                  Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Auth::Type::TaggedSymbol
+                )
+
+              sig do
+                override.returns(
+                  T::Array[
+                    Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Auth::Type::TaggedSymbol
+                  ]
+                )
+              end
+              def self.values
+              end
+            end
+
             sig do
               override.returns(
                 T::Array[

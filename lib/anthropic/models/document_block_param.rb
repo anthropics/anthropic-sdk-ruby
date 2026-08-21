@@ -63,6 +63,19 @@ module Anthropic
 
         variant :file, -> { Anthropic::FileDocumentSource }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          BASE64 = :base64
+          TEXT = :text
+          CONTENT = :content
+          URL = :url
+          FILE = :file
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Base64PDFSource, Anthropic::Models::PlainTextSource, Anthropic::Models::ContentBlockSource, Anthropic::Models::URLPDFSource, Anthropic::Models::FileDocumentSource)]
 

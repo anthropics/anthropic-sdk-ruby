@@ -46,6 +46,18 @@ module Anthropic
           module TokenEndpointAuth
             extend Anthropic::Internal::Type::Union
 
+            type type_ = :none | :client_secret_basic | :client_secret_post
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              NONE: :none
+              CLIENT_SECRET_BASIC: :client_secret_basic
+              CLIENT_SECRET_POST: :client_secret_post
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshResponse::TokenEndpointAuth::type_]
+            end
+
             def self?.variants: -> ::Array[Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshResponse::token_endpoint_auth]
 
             def self.new:

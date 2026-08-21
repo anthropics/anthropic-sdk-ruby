@@ -32,6 +32,107 @@ module Anthropic
             )
           end
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::Beta::BetaContentBlock::Type)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          TEXT =
+            T.let(:text, Anthropic::Beta::BetaContentBlock::Type::TaggedSymbol)
+          THINKING =
+            T.let(
+              :thinking,
+              Anthropic::Beta::BetaContentBlock::Type::TaggedSymbol
+            )
+          REDACTED_THINKING =
+            T.let(
+              :redacted_thinking,
+              Anthropic::Beta::BetaContentBlock::Type::TaggedSymbol
+            )
+          TOOL_USE =
+            T.let(
+              :tool_use,
+              Anthropic::Beta::BetaContentBlock::Type::TaggedSymbol
+            )
+          SERVER_TOOL_USE =
+            T.let(
+              :server_tool_use,
+              Anthropic::Beta::BetaContentBlock::Type::TaggedSymbol
+            )
+          WEB_SEARCH_TOOL_RESULT =
+            T.let(
+              :web_search_tool_result,
+              Anthropic::Beta::BetaContentBlock::Type::TaggedSymbol
+            )
+          WEB_FETCH_TOOL_RESULT =
+            T.let(
+              :web_fetch_tool_result,
+              Anthropic::Beta::BetaContentBlock::Type::TaggedSymbol
+            )
+          ADVISOR_TOOL_RESULT =
+            T.let(
+              :advisor_tool_result,
+              Anthropic::Beta::BetaContentBlock::Type::TaggedSymbol
+            )
+          CODE_EXECUTION_TOOL_RESULT =
+            T.let(
+              :code_execution_tool_result,
+              Anthropic::Beta::BetaContentBlock::Type::TaggedSymbol
+            )
+          BASH_CODE_EXECUTION_TOOL_RESULT =
+            T.let(
+              :bash_code_execution_tool_result,
+              Anthropic::Beta::BetaContentBlock::Type::TaggedSymbol
+            )
+          TEXT_EDITOR_CODE_EXECUTION_TOOL_RESULT =
+            T.let(
+              :text_editor_code_execution_tool_result,
+              Anthropic::Beta::BetaContentBlock::Type::TaggedSymbol
+            )
+          TOOL_SEARCH_TOOL_RESULT =
+            T.let(
+              :tool_search_tool_result,
+              Anthropic::Beta::BetaContentBlock::Type::TaggedSymbol
+            )
+          MCP_TOOL_USE =
+            T.let(
+              :mcp_tool_use,
+              Anthropic::Beta::BetaContentBlock::Type::TaggedSymbol
+            )
+          MCP_TOOL_RESULT =
+            T.let(
+              :mcp_tool_result,
+              Anthropic::Beta::BetaContentBlock::Type::TaggedSymbol
+            )
+          CONTAINER_UPLOAD =
+            T.let(
+              :container_upload,
+              Anthropic::Beta::BetaContentBlock::Type::TaggedSymbol
+            )
+          COMPACTION =
+            T.let(
+              :compaction,
+              Anthropic::Beta::BetaContentBlock::Type::TaggedSymbol
+            )
+          FALLBACK =
+            T.let(
+              :fallback,
+              Anthropic::Beta::BetaContentBlock::Type::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[Anthropic::Beta::BetaContentBlock::Type::TaggedSymbol]
+            )
+          end
+          def self.values
+          end
+        end
+
         sig do
           override.returns(
             T::Array[Anthropic::Beta::BetaContentBlock::Variants]

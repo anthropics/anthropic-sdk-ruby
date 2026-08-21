@@ -12,6 +12,19 @@ module Anthropic
       module MessageBatchResult
         extend Anthropic::Internal::Type::Union
 
+        type type_ = :succeeded | :errored | :canceled | :expired
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          SUCCEEDED: :succeeded
+          ERRORED: :errored
+          CANCELED: :canceled
+          EXPIRED: :expired
+
+          def self?.values: -> ::Array[Anthropic::Models::Messages::MessageBatchResult::type_]
+        end
+
         def self?.variants: -> ::Array[Anthropic::Models::Messages::message_batch_result]
 
         def self.new:

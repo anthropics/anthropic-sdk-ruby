@@ -31,6 +31,21 @@ module Anthropic
         module Edit
           extend Anthropic::Internal::Type::Union
 
+          type type_ =
+            :clear_tool_uses_20250919
+            | :clear_thinking_20251015
+            | :compact_20260112
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            CLEAR_TOOL_USES_20250919: :clear_tool_uses_20250919
+            CLEAR_THINKING_20251015: :clear_thinking_20251015
+            COMPACT_20260112: :compact_20260112
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaContextManagementConfig::Edit::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaContextManagementConfig::edit]
 
           def self.new:

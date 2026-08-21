@@ -110,6 +110,18 @@ module Anthropic
         module Resource
           extend Anthropic::Internal::Type::Union
 
+          type type_ = :github_repository | :file | :memory_store
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            GITHUB_REPOSITORY: :github_repository
+            FILE: :file
+            MEMORY_STORE: :memory_store
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::DeploymentUpdateParams::Resource::type_]
+          end
+
           def self?.variants: -> ::Array[Anthropic::Models::Beta::DeploymentUpdateParams::resource]
 
           def self.new:

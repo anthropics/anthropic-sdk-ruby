@@ -68,6 +68,17 @@ module Anthropic
             variant :client_secret_post,
                     -> { Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostResponse }
 
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              NONE = :none
+              CLIENT_SECRET_BASIC = :client_secret_basic
+              CLIENT_SECRET_POST = :client_secret_post
+
+              # @!method self.values
+              #   @return [Array<Symbol>]
+            end
+
             # @!method self.variants
             #   @return [Array(Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostResponse)]
 

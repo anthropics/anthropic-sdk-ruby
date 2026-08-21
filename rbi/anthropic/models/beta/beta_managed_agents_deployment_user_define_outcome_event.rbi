@@ -90,6 +90,40 @@ module Anthropic
               )
             end
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent::Rubric::Type
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            FILE =
+              T.let(
+                :file,
+                Anthropic::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent::Rubric::Type::TaggedSymbol
+              )
+            TEXT =
+              T.let(
+                :text,
+                Anthropic::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent::Rubric::Type::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent::Rubric::Type::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
           sig do
             override.returns(
               T::Array[

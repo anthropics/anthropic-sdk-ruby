@@ -97,6 +97,37 @@ module Anthropic
         # no validation effect.
         variant :fallback, -> { Anthropic::Beta::BetaFallbackBlockParam }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TEXT = :text
+          IMAGE = :image
+          DOCUMENT = :document
+          SEARCH_RESULT = :search_result
+          THINKING = :thinking
+          REDACTED_THINKING = :redacted_thinking
+          TOOL_USE = :tool_use
+          TOOL_RESULT = :tool_result
+          SERVER_TOOL_USE = :server_tool_use
+          WEB_SEARCH_TOOL_RESULT = :web_search_tool_result
+          WEB_FETCH_TOOL_RESULT = :web_fetch_tool_result
+          ADVISOR_TOOL_RESULT = :advisor_tool_result
+          CODE_EXECUTION_TOOL_RESULT = :code_execution_tool_result
+          BASH_CODE_EXECUTION_TOOL_RESULT = :bash_code_execution_tool_result
+          TEXT_EDITOR_CODE_EXECUTION_TOOL_RESULT = :text_editor_code_execution_tool_result
+          TOOL_SEARCH_TOOL_RESULT = :tool_search_tool_result
+          MCP_TOOL_USE = :mcp_tool_use
+          MCP_TOOL_RESULT = :mcp_tool_result
+          CONTAINER_UPLOAD = :container_upload
+          COMPACTION = :compaction
+          TOOL_ADDITION = :tool_addition
+          TOOL_REMOVAL = :tool_removal
+          FALLBACK = :fallback
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaRequestDocumentBlock, Anthropic::Models::Beta::BetaSearchResultBlockParam, Anthropic::Models::Beta::BetaThinkingBlockParam, Anthropic::Models::Beta::BetaRedactedThinkingBlockParam, Anthropic::Models::Beta::BetaToolUseBlockParam, Anthropic::Models::Beta::BetaToolResultBlockParam, Anthropic::Models::Beta::BetaServerToolUseBlockParam, Anthropic::Models::Beta::BetaWebSearchToolResultBlockParam, Anthropic::Models::Beta::BetaWebFetchToolResultBlockParam, Anthropic::Models::Beta::BetaAdvisorToolResultBlockParam, Anthropic::Models::Beta::BetaCodeExecutionToolResultBlockParam, Anthropic::Models::Beta::BetaBashCodeExecutionToolResultBlockParam, Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultBlockParam, Anthropic::Models::Beta::BetaToolSearchToolResultBlockParam, Anthropic::Models::Beta::BetaMCPToolUseBlockParam, Anthropic::Models::Beta::BetaRequestMCPToolResultBlockParam, Anthropic::Models::Beta::BetaContainerUploadBlockParam, Anthropic::Models::Beta::BetaCompactionBlockParam, Anthropic::Models::Beta::BetaRequestToolAdditionBlock, Anthropic::Models::Beta::BetaRequestToolRemovalBlock, Anthropic::Models::Beta::BetaFallbackBlockParam)]
 

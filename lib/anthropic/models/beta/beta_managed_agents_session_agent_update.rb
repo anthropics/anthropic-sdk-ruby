@@ -47,6 +47,17 @@ module Anthropic
           # A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
           variant :custom, -> { Anthropic::Beta::BetaManagedAgentsCustomToolParams }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            AGENT_TOOLSET_20260401 = :agent_toolset_20260401
+            MCP_TOOLSET = :mcp_toolset
+            CUSTOM = :custom
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams)]
 

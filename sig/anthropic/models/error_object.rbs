@@ -14,6 +14,33 @@ module Anthropic
     module ErrorObject
       extend Anthropic::Internal::Type::Union
 
+      type type_ =
+        :invalid_request_error
+        | :authentication_error
+        | :billing_error
+        | :permission_error
+        | :not_found_error
+        | :rate_limit_error
+        | :timeout_error
+        | :api_error
+        | :overloaded_error
+
+      module Type
+        extend Anthropic::Internal::Type::Enum
+
+        INVALID_REQUEST_ERROR: :invalid_request_error
+        AUTHENTICATION_ERROR: :authentication_error
+        BILLING_ERROR: :billing_error
+        PERMISSION_ERROR: :permission_error
+        NOT_FOUND_ERROR: :not_found_error
+        RATE_LIMIT_ERROR: :rate_limit_error
+        TIMEOUT_ERROR: :timeout_error
+        API_ERROR: :api_error
+        OVERLOADED_ERROR: :overloaded_error
+
+        def self?.values: -> ::Array[Anthropic::Models::ErrorObject::type_]
+      end
+
       def self?.variants: -> ::Array[Anthropic::Models::error_object]
 
       def self.new:

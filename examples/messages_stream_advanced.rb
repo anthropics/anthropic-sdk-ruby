@@ -73,9 +73,15 @@ begin
   pp("----- handling different event types using case/when -----")
 
   stream = anthropic.messages.stream(
-    max_tokens: 3200,
-    thinking: {type: :enabled, budget_tokens: 1600},
-    messages: [{role: :user, content: "Create a haiku about Anthropic."}],
+    max_tokens: 16_000,
+    thinking: {type: :adaptive, display_: :summarized},
+    output_config: {effort: :high},
+    messages: [
+      {
+        role: :user,
+        content: "Create a haiku about Anthropic. Think carefully about syllable counts before answering."
+      }
+    ],
     model: :"claude-sonnet-5"
   )
   thinking = "not-started"

@@ -12,6 +12,20 @@ module Anthropic
       module BetaIterationsUsageItem
         extend Anthropic::Internal::Type::Union
 
+        type type_ =
+          :message | :compaction | :advisor_message | :fallback_message
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          MESSAGE: :message
+          COMPACTION: :compaction
+          ADVISOR_MESSAGE: :advisor_message
+          FALLBACK_MESSAGE: :fallback_message
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaIterationsUsageItem::type_]
+        end
+
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_iterations_usage_item]
 
         def self.new:

@@ -38,6 +38,142 @@ module Anthropic
             )
           end
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::Beta::BetaContentBlockParam::Type)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          TEXT =
+            T.let(
+              :text,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          IMAGE =
+            T.let(
+              :image,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          DOCUMENT =
+            T.let(
+              :document,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          SEARCH_RESULT =
+            T.let(
+              :search_result,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          THINKING =
+            T.let(
+              :thinking,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          REDACTED_THINKING =
+            T.let(
+              :redacted_thinking,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          TOOL_USE =
+            T.let(
+              :tool_use,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          TOOL_RESULT =
+            T.let(
+              :tool_result,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          SERVER_TOOL_USE =
+            T.let(
+              :server_tool_use,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          WEB_SEARCH_TOOL_RESULT =
+            T.let(
+              :web_search_tool_result,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          WEB_FETCH_TOOL_RESULT =
+            T.let(
+              :web_fetch_tool_result,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          ADVISOR_TOOL_RESULT =
+            T.let(
+              :advisor_tool_result,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          CODE_EXECUTION_TOOL_RESULT =
+            T.let(
+              :code_execution_tool_result,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          BASH_CODE_EXECUTION_TOOL_RESULT =
+            T.let(
+              :bash_code_execution_tool_result,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          TEXT_EDITOR_CODE_EXECUTION_TOOL_RESULT =
+            T.let(
+              :text_editor_code_execution_tool_result,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          TOOL_SEARCH_TOOL_RESULT =
+            T.let(
+              :tool_search_tool_result,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          MCP_TOOL_USE =
+            T.let(
+              :mcp_tool_use,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          MCP_TOOL_RESULT =
+            T.let(
+              :mcp_tool_result,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          CONTAINER_UPLOAD =
+            T.let(
+              :container_upload,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          COMPACTION =
+            T.let(
+              :compaction,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          TOOL_ADDITION =
+            T.let(
+              :tool_addition,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          TOOL_REMOVAL =
+            T.let(
+              :tool_removal,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+          FALLBACK =
+            T.let(
+              :fallback,
+              Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaContentBlockParam::Type::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
         sig do
           override.returns(
             T::Array[Anthropic::Beta::BetaContentBlockParam::Variants]

@@ -109,6 +109,50 @@ module Anthropic
                 )
               end
 
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              TaggedSymbol =
+                T.type_alias do
+                  T.all(
+                    Symbol,
+                    Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::StopReason::Type
+                  )
+                end
+              OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+              END_TURN =
+                T.let(
+                  :end_turn,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::StopReason::Type::TaggedSymbol
+                )
+              REQUIRES_ACTION =
+                T.let(
+                  :requires_action,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::StopReason::Type::TaggedSymbol
+                )
+              RETRIES_EXHAUSTED =
+                T.let(
+                  :retries_exhausted,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::StopReason::Type::TaggedSymbol
+                )
+              BUDGET_REACHED =
+                T.let(
+                  :budget_reached,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::StopReason::Type::TaggedSymbol
+                )
+
+              sig do
+                override.returns(
+                  T::Array[
+                    Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::StopReason::Type::TaggedSymbol
+                  ]
+                )
+              end
+              def self.values
+              end
+            end
+
             sig do
               override.returns(
                 T::Array[

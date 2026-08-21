@@ -55,6 +55,50 @@ module Anthropic
             )
           end
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::CitationsDelta::Citation::Type)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          CHAR_LOCATION =
+            T.let(
+              :char_location,
+              Anthropic::CitationsDelta::Citation::Type::TaggedSymbol
+            )
+          PAGE_LOCATION =
+            T.let(
+              :page_location,
+              Anthropic::CitationsDelta::Citation::Type::TaggedSymbol
+            )
+          CONTENT_BLOCK_LOCATION =
+            T.let(
+              :content_block_location,
+              Anthropic::CitationsDelta::Citation::Type::TaggedSymbol
+            )
+          WEB_SEARCH_RESULT_LOCATION =
+            T.let(
+              :web_search_result_location,
+              Anthropic::CitationsDelta::Citation::Type::TaggedSymbol
+            )
+          SEARCH_RESULT_LOCATION =
+            T.let(
+              :search_result_location,
+              Anthropic::CitationsDelta::Citation::Type::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[Anthropic::CitationsDelta::Citation::Type::TaggedSymbol]
+            )
+          end
+          def self.values
+          end
+        end
+
         sig do
           override.returns(
             T::Array[Anthropic::CitationsDelta::Citation::Variants]

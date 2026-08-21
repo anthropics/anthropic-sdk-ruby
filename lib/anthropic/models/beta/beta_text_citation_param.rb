@@ -18,6 +18,19 @@ module Anthropic
 
         variant :search_result_location, -> { Anthropic::Beta::BetaCitationSearchResultLocationParam }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          CHAR_LOCATION = :char_location
+          PAGE_LOCATION = :page_location
+          CONTENT_BLOCK_LOCATION = :content_block_location
+          WEB_SEARCH_RESULT_LOCATION = :web_search_result_location
+          SEARCH_RESULT_LOCATION = :search_result_location
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaCitationCharLocationParam, Anthropic::Models::Beta::BetaCitationPageLocationParam, Anthropic::Models::Beta::BetaCitationContentBlockLocationParam, Anthropic::Models::Beta::BetaCitationWebSearchResultLocationParam, Anthropic::Models::Beta::BetaCitationSearchResultLocationParam)]
 

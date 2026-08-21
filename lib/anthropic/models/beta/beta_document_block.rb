@@ -45,6 +45,16 @@ module Anthropic
 
           variant :text, -> { Anthropic::Beta::BetaPlainTextSource }
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            BASE64 = :base64
+            TEXT = :text
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
           # @!method self.variants
           #   @return [Array(Anthropic::Models::Beta::BetaBase64PDFSource, Anthropic::Models::Beta::BetaPlainTextSource)]
 

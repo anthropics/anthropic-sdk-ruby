@@ -15,6 +15,16 @@ module Anthropic
         # The run was started manually by creating a session directly against the deployment.
         variant :manual, -> { Anthropic::Beta::BetaManagedAgentsManualTriggerContext }
 
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          SCHEDULE = :schedule
+          MANUAL = :manual
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
         # @!method self.variants
         #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext, Anthropic::Models::Beta::BetaManagedAgentsManualTriggerContext)]
 

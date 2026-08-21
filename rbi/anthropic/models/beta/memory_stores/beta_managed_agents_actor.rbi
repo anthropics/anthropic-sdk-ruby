@@ -22,6 +22,50 @@ module Anthropic
               )
             end
 
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::MemoryStores::BetaManagedAgentsActor::Type
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            SESSION_ACTOR =
+              T.let(
+                :session_actor,
+                Anthropic::Beta::MemoryStores::BetaManagedAgentsActor::Type::TaggedSymbol
+              )
+            API_ACTOR =
+              T.let(
+                :api_actor,
+                Anthropic::Beta::MemoryStores::BetaManagedAgentsActor::Type::TaggedSymbol
+              )
+            USER_ACTOR =
+              T.let(
+                :user_actor,
+                Anthropic::Beta::MemoryStores::BetaManagedAgentsActor::Type::TaggedSymbol
+              )
+            SERVICE_ACCOUNT_ACTOR =
+              T.let(
+                :service_account_actor,
+                Anthropic::Beta::MemoryStores::BetaManagedAgentsActor::Type::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::MemoryStores::BetaManagedAgentsActor::Type::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
           sig do
             override.returns(
               T::Array[

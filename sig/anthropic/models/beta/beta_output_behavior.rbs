@@ -10,6 +10,17 @@ module Anthropic
       module BetaOutputBehavior
         extend Anthropic::Internal::Type::Union
 
+        type type_ = :create_new | :update_existing
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          CREATE_NEW: :create_new
+          UPDATE_EXISTING: :update_existing
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaOutputBehavior::type_]
+        end
+
         def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_output_behavior]
 
         def self.new:
