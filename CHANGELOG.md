@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.66.0 (2026-08-21)
+
+Full Changelog: [v1.65.0...v1.66.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.65.0...v1.66.0)
+
+### Features
+
+* **api:** add discriminator enums to discriminated union modules ([4dc36fc](https://github.com/anthropics/anthropic-sdk-ruby/commit/4dc36fc60278b38875d7406f9ed74cece9be84e0))
+
+
+### Bug Fixes
+
+* **client:** let ANTHROPIC_BASE_URL override profile base_url ([#211](https://github.com/anthropics/anthropic-sdk-ruby/issues/211)) ([b7e64eb](https://github.com/anthropics/anthropic-sdk-ruby/commit/b7e64eb8e908190fd4a70ddab9318d45d168478b))
+
+
+### Documentation
+
+* **examples:** use adaptive thinking in thinking examples ([d03824d](https://github.com/anthropics/anthropic-sdk-ruby/commit/d03824dd23c05d13817c85bf978e039f249e30a9))
+
 ## 1.65.0 (2026-08-19)
 
 Full Changelog: [v1.64.0...v1.65.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.64.0...v1.65.0)
