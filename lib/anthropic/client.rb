@@ -213,8 +213,9 @@ module Anthropic
       @credentials = nil
       @token_cache = nil
 
-      base_url_is_explicit = base_url && !base_url.empty?
       base_url ||= ENV["ANTHROPIC_BASE_URL"] if resolve_default_credentials?
+      # `ANTHROPIC_BASE_URL` counts as explicit: it outranks a profile/config `base_url`.
+      base_url_is_explicit = base_url && !base_url.empty?
 
       credential_headers = {}
 
