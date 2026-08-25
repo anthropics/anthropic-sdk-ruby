@@ -24,13 +24,14 @@ module Anthropic
           display_: Anthropic::Models::Beta::BetaThinkingConfigAdaptive::display_?
         }
 
-        type display_ = :summarized | :omitted
+        type display_ = :summarized | :omitted | :updates
 
         module Display
           extend Anthropic::Internal::Type::Enum
 
           SUMMARIZED: :summarized
           OMITTED: :omitted
+          UPDATES: :updates
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaThinkingConfigAdaptive::display_]
         end

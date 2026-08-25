@@ -110,6 +110,11 @@ module Anthropic
               :omitted,
               Anthropic::Beta::BetaThinkingConfigEnabled::Display::TaggedSymbol
             )
+          UPDATES =
+            T.let(
+              :updates,
+              Anthropic::Beta::BetaThinkingConfigEnabled::Display::TaggedSymbol
+            )
 
           sig do
             override.returns(
