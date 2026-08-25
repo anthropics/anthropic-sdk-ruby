@@ -41,7 +41,7 @@ module Anthropic
           # ID of the `memory_version` representing this memory's current content (a
           # `memver_...` value). This is the authoritative head pointer; `memory_version`
           # objects do not carry an `is_latest` flag, so compare against this field instead.
-          # Enumerate the full history via
+          # Enumerate the history via
           # [List memory versions](/en/api/beta/memory_stores/memory_versions/list).
           sig { returns(String) }
           attr_accessor :memory_version_id
@@ -108,7 +108,7 @@ module Anthropic
             # ID of the `memory_version` representing this memory's current content (a
             # `memver_...` value). This is the authoritative head pointer; `memory_version`
             # objects do not carry an `is_latest` flag, so compare against this field instead.
-            # Enumerate the full history via
+            # Enumerate the history via
             # [List memory versions](/en/api/beta/memory_stores/memory_versions/list).
             memory_version_id:,
             # Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`.

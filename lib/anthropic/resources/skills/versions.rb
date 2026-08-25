@@ -39,7 +39,7 @@ module Anthropic
         #
         # @overload retrieve(version, skill_id:, request_options: {})
         #
-        # @param version [String] Identifies the skill version: a version ID, or — where the endpoint accepts it —
+        # @param version [String] Identifies the skill version: a version ID, or the literal `latest` for the skil
         #
         # @param skill_id [String] Unique identifier for the skill.
         #
@@ -100,7 +100,7 @@ module Anthropic
         #
         # @overload delete(version, skill_id:, request_options: {})
         #
-        # @param version [String] Identifies the skill version: a version ID, or — where the endpoint accepts it —
+        # @param version [String] Identifies the skill version by its version ID.
         #
         # @param skill_id [String] Unique identifier for the skill.
         #
