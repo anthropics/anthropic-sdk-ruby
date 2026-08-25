@@ -6,6 +6,28 @@ module Anthropic
       # @api private
       #
       class Runner
+        # Every stop reason falls in exactly one bucket, so a newly generated one has to be
+        # classified here before the runner can decide what its turn means.
+        #
+        # The model asked for client tools: their results go back and the loop continues.
+        RUN_TOOLS_STOP_REASONS = Set[:tool_use].freeze
+        # Unfinished turns: sent back unchanged, tool calls unrun, so the server continues them.
+        RESUME_STOP_REASONS = Set[
+          :pause_turn,
+          :compaction # pause_after_compaction hands the turn back before the model answers
+        ].freeze
+        # Terminal turns end the run as its final message. Their tool_use blocks never run:
+        # executing a call the model did not finish (e.g. cut off by max_tokens) or refused
+        # would fire side effects it never confirmed.
+        STOP_STOP_REASONS = Set[
+          :end_turn,
+          :stop_sequence,
+          :max_tokens,
+          :model_context_window_exceeded,
+          :refusal
+        ].freeze
+        private_constant :RUN_TOOLS_STOP_REASONS, :RESUME_STOP_REASONS, :STOP_STOP_REASONS
+
         # @return [Anthropic::Models::Beta::MessageCreateParams]
         attr_accessor :params
 
@@ -92,13 +114,15 @@ module Anthropic
             next unless current_messages.equal?(messages)
             break if compacted
 
-            # Refusal-terminated turns are terminal: executing their tool_use blocks would fire
-            # side effects the model never confirmed, and the resulting tool_results could not be
-            # replayed coherently. Surface the refusal as the final message instead.
-            if response.stop_reason == :refusal
+            next_step = determine_next_step_from_stop_reason(response.stop_reason)
+
+            if next_step == :stop
               @finished = true
               break
             end
+
+            tool_uses =
+              next_step == :run_tools ? response.content.grep(Anthropic::Beta::BetaToolUseBlock) : []
 
             # A `tool_removal` block only hints the model, so a call to a withdrawn tool can still
             # arrive; a name missing from this set routes down the same "not found" path as an
@@ -106,11 +130,7 @@ module Anthropic
             available = available_tool_names(tools, messages)
 
             mapped =
-              response
-              .content
-              .lazy
-              .grep(Anthropic::Beta::BetaToolUseBlock)
-              .map do |tool_use|
+              tool_uses.map do |tool_use|
                 resp = {type: :tool_result, tool_use_id: tool_use.id}
                 if available.include?(tool_use.name) &&
                    (tool = tools.find { _1.class.model === tool_use.parsed })
@@ -128,9 +148,8 @@ module Anthropic
                 content = raw.is_a?(Array) ? raw : raw.to_s
                 {**resp, content:, is_error:}
               end
-              .to_a
 
-            if mapped.empty?
+            if mapped.empty? && next_step == :run_tools
               @finished = true
               break
             end
@@ -149,7 +168,7 @@ module Anthropic
             end
 
             messages << {role: :assistant, content:}
-            messages << {role: :user, content: mapped}
+            messages << {role: :user, content: mapped} unless mapped.empty?
             adopt_container(response)
 
             @iteration_count += 1
@@ -158,6 +177,22 @@ module Anthropic
           end
           # rubocop:enable Style/CaseEquality
           # rubocop:enable Metrics/BlockLength
+        end
+
+        # @api private
+        #
+        # A stop reason this SDK version does not know yet ends the run like the terminal ones
+        # instead of raising, since the enum is forward-compatible.
+        #
+        # @param stop_reason [Symbol, String, nil]
+        #
+        # @return [Symbol] :run_tools, :resume or :stop
+        private def determine_next_step_from_stop_reason(stop_reason)
+          case stop_reason
+          when RUN_TOOLS_STOP_REASONS then :run_tools
+          when RESUME_STOP_REASONS then :resume
+          else :stop # STOP_STOP_REASONS and unknown values
+          end
         end
 
         # @api private

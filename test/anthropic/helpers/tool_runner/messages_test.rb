@@ -411,6 +411,159 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
     assert_requested(:post, "http://localhost/v1/messages?beta=true", times: 1)
   end
 
+  def pause_turn_response(id:)
+    {
+      status: 200,
+      headers: {"Content-Type" => "application/json"},
+      body: message_body(
+        id: id,
+        content: [
+          {type: "text", text: "Let me look that up."},
+          {type: "server_tool_use", id: "srvtoolu_1", name: "web_search", input: {query: "weather in SF"}}
+        ],
+        stop_reason: "pause_turn"
+      ).to_json
+    }
+  end
+
+  def test_pause_turn_sends_the_paused_turn_back
+    request_bodies = stub_responses_capturing_bodies(
+      pause_turn_response(id: "msg_1"),
+      text_response(id: "msg_2", text: "It is sunny in SF")
+    )
+
+    messages = collect_messages(basic_params)
+
+    assert_pattern do
+      messages => [
+        {id: "msg_1", stop_reason: :pause_turn},
+        {id: "msg_2", stop_reason: :end_turn}
+      ]
+    end
+    assert_equal(2, request_bodies.length)
+    assert_pattern do
+      request_bodies.last[:messages] => [
+        {role: "user", content: "Calculate 10 + 5"},
+        {
+          role: "assistant",
+          content: [
+            {type: "text", text: "Let me look that up."},
+            {type: "server_tool_use", id: "srvtoolu_1", name: "web_search", input: {query: "weather in SF"}}
+          ]
+        }
+      ]
+    end
+  end
+
+  def test_pause_turn_stops_at_max_iterations
+    request_bodies =
+      stub_responses_capturing_bodies(*Array.new(5) { pause_turn_response(id: "msg_#{_1 + 1}") })
+
+    messages = collect_messages({**basic_params, max_iterations: 3})
+
+    assert_equal(3, request_bodies.length)
+    assert_pattern do
+      messages.last => {id: "msg_3", stop_reason: :pause_turn}
+    end
+  end
+
+  def compaction_response(id:)
+    {
+      status: 200,
+      headers: {"Content-Type" => "application/json"},
+      body: message_body(
+        id: id,
+        content: [{type: "compaction", content: "Summary of the conversation so far."}],
+        stop_reason: "compaction"
+      ).to_json
+    }
+  end
+
+  def test_compaction_sends_the_compacted_turn_back
+    request_bodies = stub_responses_capturing_bodies(
+      compaction_response(id: "msg_1"),
+      text_response(id: "msg_2", text: "10 + 5 = 15")
+    )
+
+    messages = collect_messages(basic_params)
+
+    assert_pattern do
+      messages => [
+        {id: "msg_1", stop_reason: :compaction, content: [Anthropic::Beta::BetaCompactionBlock]},
+        {id: "msg_2", stop_reason: :end_turn}
+      ]
+    end
+    assert_equal(2, request_bodies.length)
+    assert_pattern do
+      request_bodies.last[:messages] => [
+        {role: "user", content: "Calculate 10 + 5"},
+        {
+          role: "assistant",
+          content: [{type: "compaction", content: "Summary of the conversation so far."}]
+        }
+      ]
+    end
+    assert_empty(@calculator.call_history)
+  end
+
+  def test_max_tokens_turn_with_tool_use_is_terminal
+    stub_responses(
+      tool_use_response(
+        id: "msg_1",
+        text: "Let me calculate th",
+        tool_use: {id: "tool_1", name: "calculator", input: {lhs: 10.0, rhs: 5.0, operator: "+"}},
+        stop_reason: "max_tokens"
+      ),
+      text_response(id: "msg_2", text: "unreachable")
+    )
+
+    runner = @client.beta.messages.tool_runner(basic_params)
+    messages = []
+    runner.each_message { messages << _1 }
+
+    assert_pattern do
+      messages => [
+        {id: "msg_1", stop_reason: :max_tokens, content: [{type: :text}, Anthropic::Beta::BetaToolUseBlock]}
+      ]
+    end
+    assert_empty(@calculator.call_history)
+    assert(runner.finished?)
+    assert_nil(runner.next_message)
+    assert_requested(:post, "http://localhost/v1/messages?beta=true", times: 1)
+  end
+
+  def test_every_stop_reason_is_classified_exactly_once
+    runner = Anthropic::Helpers::Tools::Runner
+    buckets =
+      [:RUN_TOOLS_STOP_REASONS, :RESUME_STOP_REASONS, :STOP_STOP_REASONS].map { runner.const_get(_1) }
+    stop_reasons = Anthropic::Beta::BetaStopReason.values
+
+    stop_reasons.each do |reason|
+      owners = buckets.count { _1.include?(reason) }
+      assert_equal(1, owners, "stop reason #{reason.inspect} must be classified in exactly one bucket")
+    end
+    assert_equal(stop_reasons.to_set, buckets.reduce(:|), "buckets list a stop reason the API no longer has")
+
+    expected = {
+      tool_use: :run_tools,
+      pause_turn: :resume,
+      compaction: :resume,
+      end_turn: :stop,
+      stop_sequence: :stop,
+      max_tokens: :stop,
+      model_context_window_exceeded: :stop,
+      refusal: :stop
+    }
+    assert_equal(stop_reasons.to_set, expected.keys.to_set, "every stop reason needs an expected step")
+
+    classify = ->(reason) { runner.allocate.send(:determine_next_step_from_stop_reason, reason) }
+    expected.each do |reason, next_step|
+      assert_equal(next_step, classify.call(reason), "stop reason #{reason.inspect}")
+    end
+    assert_equal(:stop, classify.call(:some_future_stop_reason))
+    assert_equal(:stop, classify.call(nil))
+  end
+
   def test_multiple_tools_in_single_response
     params = {
       max_tokens: 1024,
