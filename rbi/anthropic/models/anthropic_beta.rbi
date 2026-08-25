@@ -174,6 +174,11 @@ module Anthropic
           :"task-budgets-2026-03-13",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      THINKING_DISPLAY_UPDATES_2026_08_18 =
+        T.let(
+          :"thinking-display-updates-2026-08-18",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
     end
   end
 end

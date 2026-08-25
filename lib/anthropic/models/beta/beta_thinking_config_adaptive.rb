@@ -40,6 +40,7 @@ module Anthropic
 
           SUMMARIZED = :summarized
           OMITTED = :omitted
+          UPDATES = :updates
 
           # @!method self.values
           #   @return [Array<Symbol>]
