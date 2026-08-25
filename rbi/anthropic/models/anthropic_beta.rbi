@@ -155,6 +155,25 @@ module Anthropic
           :"mid-conversation-tool-changes-2026-07-01",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      COMPACT_2026_01_12 =
+        T.let(:"compact-2026-01-12", Anthropic::AnthropicBeta::TaggedSymbol)
+      COMPUTER_USE_2025_11_24 =
+        T.let(
+          :"computer-use-2025-11-24",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
+      MCP_TUNNELS_2026_06_22 =
+        T.let(:"mcp-tunnels-2026-06-22", Anthropic::AnthropicBeta::TaggedSymbol)
+      STRUCTURED_OUTPUTS_2025_11_13 =
+        T.let(
+          :"structured-outputs-2025-11-13",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
+      TASK_BUDGETS_2026_03_13 =
+        T.let(
+          :"task-budgets-2026-03-13",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
     end
   end
 end

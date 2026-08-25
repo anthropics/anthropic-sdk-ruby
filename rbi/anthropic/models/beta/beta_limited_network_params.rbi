@@ -24,7 +24,8 @@ module Anthropic
         attr_accessor :allow_mcp_servers
 
         # Permits outbound access to public package registries (PyPI, npm, etc.) beyond
-        # those listed in the `allowed_hosts` array. Defaults to `false`.
+        # those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must
+        # be `true` when `packages` are specified.
         sig { returns(T.nilable(T::Boolean)) }
         attr_accessor :allow_package_managers
 
@@ -48,7 +49,8 @@ module Anthropic
           # those listed in the `allowed_hosts` array. Defaults to `false`.
           allow_mcp_servers: nil,
           # Permits outbound access to public package registries (PyPI, npm, etc.) beyond
-          # those listed in the `allowed_hosts` array. Defaults to `false`.
+          # those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must
+          # be `true` when `packages` are specified.
           allow_package_managers: nil,
           # Specifies domains the container can reach.
           allowed_hosts: nil,

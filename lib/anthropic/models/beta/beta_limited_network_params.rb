@@ -19,7 +19,8 @@ module Anthropic
 
         # @!attribute allow_package_managers
         #   Permits outbound access to public package registries (PyPI, npm, etc.) beyond
-        #   those listed in the `allowed_hosts` array. Defaults to `false`.
+        #   those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must
+        #   be `true` when `packages` are specified.
         #
         #   @return [Boolean, nil]
         optional :allow_package_managers, Anthropic::Internal::Type::Boolean, nil?: true
