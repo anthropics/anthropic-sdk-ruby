@@ -23,6 +23,9 @@ module Anthropic
         #   e.g. for `pip` use `package==1.0.0`. You are responsible for validating the
         #   package and version exist. Unversioned installs the latest.
         #
+        #   Under `limited` networking, requires `networking.allow_package_managers` to be
+        #   `true`.
+        #
         #   @return [Anthropic::Models::Beta::BetaPackagesParams, nil]
         optional :packages, -> { Anthropic::Beta::BetaPackagesParams }, nil?: true
 
