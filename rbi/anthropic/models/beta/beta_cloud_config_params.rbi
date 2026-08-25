@@ -36,6 +36,9 @@ module Anthropic
         # When versioning, use the version semantics relevant for the package manager,
         # e.g. for `pip` use `package==1.0.0`. You are responsible for validating the
         # package and version exist. Unversioned installs the latest.
+        #
+        # Under `limited` networking, requires `networking.allow_package_managers` to be
+        # `true`.
         sig { returns(T.nilable(Anthropic::Beta::BetaPackagesParams)) }
         attr_reader :packages
 
@@ -70,6 +73,9 @@ module Anthropic
           # When versioning, use the version semantics relevant for the package manager,
           # e.g. for `pip` use `package==1.0.0`. You are responsible for validating the
           # package and version exist. Unversioned installs the latest.
+          #
+          # Under `limited` networking, requires `networking.allow_package_managers` to be
+          # `true`.
           packages: nil,
           # Environment type
           type: :cloud
@@ -168,7 +174,8 @@ module Anthropic
             # those listed in the `allowed_hosts` array. Defaults to `false`.
             allow_mcp_servers: nil,
             # Permits outbound access to public package registries (PyPI, npm, etc.) beyond
-            # those listed in the `allowed_hosts` array. Defaults to `false`.
+            # those listed in the `allowed_hosts` array. Defaults to `false` on creation. Must
+            # be `true` when `packages` are specified.
             allow_package_managers: nil,
             # Specifies domains the container can reach.
             allowed_hosts: nil
