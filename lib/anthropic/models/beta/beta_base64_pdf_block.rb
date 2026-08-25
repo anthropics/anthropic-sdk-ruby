@@ -3,6 +3,7 @@
 module Anthropic
   module Models
     module Beta
+      # @deprecated BetaRequestDocumentBlock should be used insated
       BetaBase64PDFBlock = Anthropic::Models::Beta::BetaRequestDocumentBlock
     end
 
