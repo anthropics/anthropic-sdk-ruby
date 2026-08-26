@@ -48,6 +48,9 @@ module Anthropic
       sig { returns(Anthropic::Resources::Beta::Tunnels) }
       attr_reader :tunnels
 
+      sig { returns(Anthropic::Resources::Beta::Organization) }
+      attr_reader :organization
+
       # @api private
       sig { params(client: Anthropic::Client).returns(T.attached_class) }
       def self.new(client:)

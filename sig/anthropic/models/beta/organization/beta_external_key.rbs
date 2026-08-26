@@ -1,0 +1,143 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_external_key =
+          {
+            id: String,
+            attachment: Anthropic::Models::Beta::Organization::BetaExternalKey::attachment,
+            created_at: Time,
+            display_name: String?,
+            geo: String,
+            provider_config: Anthropic::Models::Beta::Organization::BetaExternalKey::provider_config,
+            type: :external_key,
+            updated_at: Time
+          }
+
+        class BetaExternalKey < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor attachment: Anthropic::Models::Beta::Organization::BetaExternalKey::attachment
+
+          attr_accessor created_at: Time
+
+          attr_accessor display_name: String?
+
+          attr_accessor geo: String
+
+          attr_accessor provider_config: Anthropic::Models::Beta::Organization::BetaExternalKey::provider_config
+
+          attr_accessor type: :external_key
+
+          attr_accessor updated_at: Time
+
+          def initialize: (
+            id: String,
+            attachment: Anthropic::Models::Beta::Organization::BetaExternalKey::attachment,
+            created_at: Time,
+            display_name: String?,
+            geo: String,
+            provider_config: Anthropic::Models::Beta::Organization::BetaExternalKey::provider_config,
+            updated_at: Time,
+            ?type: :external_key
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            attachment: Anthropic::Models::Beta::Organization::BetaExternalKey::attachment,
+            created_at: Time,
+            display_name: String?,
+            geo: String,
+            provider_config: Anthropic::Models::Beta::Organization::BetaExternalKey::provider_config,
+            type: :external_key,
+            updated_at: Time
+          }
+
+          type attachment =
+            Anthropic::Beta::Organization::BetaExternalKeyAttachedAttachment
+            | Anthropic::Beta::Organization::BetaExternalKeyUnattachedAttachment
+
+          module Attachment
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :attached | :unattached
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              ATTACHED: :attached
+              UNATTACHED: :unattached
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaExternalKey::Attachment::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::BetaExternalKey::attachment]
+
+            def self.new:
+              (
+                type: :attached | "attached"
+              ) -> Anthropic::Beta::Organization::BetaExternalKeyAttachedAttachment
+              | (
+                type: :unattached | "unattached"
+              ) -> Anthropic::Beta::Organization::BetaExternalKeyUnattachedAttachment
+              | (
+                type: Symbol | String
+              ) -> Anthropic::Models::Beta::Organization::BetaExternalKey::attachment
+          end
+
+          type provider_config =
+            Anthropic::Beta::Organization::BetaAWSExternalKeyConfig
+            | Anthropic::Beta::Organization::BetaGCPExternalKeyConfig
+            | Anthropic::Beta::Organization::BetaAzureExternalKeyConfig
+
+          module ProviderConfig
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :aws | :gcp | :azure
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              AWS: :aws
+              GCP: :gcp
+              AZURE: :azure
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaExternalKey::ProviderConfig::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::BetaExternalKey::provider_config]
+
+            def self.new:
+              (
+                type: :aws | "aws",
+                kms_arn: String,
+                ?region: String?,
+                ?role_arn: String?
+              ) -> Anthropic::Beta::Organization::BetaAWSExternalKeyConfig
+              | (
+                type: :gcp | "gcp",
+                key_name: String
+              ) -> Anthropic::Beta::Organization::BetaGCPExternalKeyConfig
+              | (
+                type: :azure | "azure",
+                key_name: String,
+                tenant_id: String,
+                vault_uri: String,
+                ?client_id: String?
+              ) -> Anthropic::Beta::Organization::BetaAzureExternalKeyConfig
+              | (
+                type: Symbol | String,
+                ?kms_arn: String,
+                ?region: String?,
+                ?role_arn: String?,
+                ?key_name: String,
+                ?tenant_id: String,
+                ?vault_uri: String,
+                ?client_id: String?
+              ) -> Anthropic::Models::Beta::Organization::BetaExternalKey::provider_config
+          end
+        end
+      end
+    end
+  end
+end

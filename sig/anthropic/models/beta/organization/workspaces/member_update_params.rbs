@@ -1,0 +1,42 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Workspaces
+          type member_update_params =
+            {
+              workspace_id: String,
+              user_id: String,
+              workspace_role: Anthropic::Models::Beta::Organization::beta_workspace_role
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class MemberUpdateParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor workspace_id: String
+
+            attr_accessor user_id: String
+
+            attr_accessor workspace_role: Anthropic::Models::Beta::Organization::beta_workspace_role
+
+            def initialize: (
+              workspace_id: String,
+              user_id: String,
+              workspace_role: Anthropic::Models::Beta::Organization::beta_workspace_role,
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              workspace_id: String,
+              user_id: String,
+              workspace_role: Anthropic::Models::Beta::Organization::beta_workspace_role,
+              request_options: Anthropic::RequestOptions
+            }
+          end
+        end
+      end
+    end
+  end
+end

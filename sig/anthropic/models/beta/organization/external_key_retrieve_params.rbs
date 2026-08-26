@@ -1,0 +1,28 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type external_key_retrieve_params =
+          { external_key_id: String }
+          & Anthropic::Internal::Type::request_parameters
+
+        class ExternalKeyRetrieveParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor external_key_id: String
+
+          def initialize: (
+            external_key_id: String,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            external_key_id: String,
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

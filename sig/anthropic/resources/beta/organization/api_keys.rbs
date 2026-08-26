@@ -1,0 +1,33 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class APIKeys
+          def retrieve: (
+            String api_key_id,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaAPIKey
+
+          def update: (
+            String api_key_id,
+            ?name: String?,
+            ?status: Anthropic::Models::Beta::Organization::APIKeyUpdateParams::status?,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaAPIKey
+
+          def list: (
+            ?after_id: String,
+            ?before_id: String,
+            ?created_by_user_id: String?,
+            ?limit: Integer,
+            ?status: Anthropic::Models::Beta::Organization::APIKeyListParams::status?,
+            ?workspace_id: String?,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::Page[Anthropic::Beta::Organization::BetaAPIKey]
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

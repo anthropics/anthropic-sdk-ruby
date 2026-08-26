@@ -1,0 +1,32 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Federation
+          type beta_jwks_discovery =
+            { type: :discovery, ca_cert_pem: String?, discovery_base: String? }
+
+          class BetaJWKSDiscovery < Anthropic::Internal::Type::BaseModel
+            attr_accessor type: :discovery
+
+            attr_accessor ca_cert_pem: String?
+
+            attr_accessor discovery_base: String?
+
+            def initialize: (
+              ?ca_cert_pem: String?,
+              ?discovery_base: String?,
+              ?type: :discovery
+            ) -> void
+
+            def to_hash: -> {
+              type: :discovery,
+              ca_cert_pem: String?,
+              discovery_base: String?
+            }
+          end
+        end
+      end
+    end
+  end
+end

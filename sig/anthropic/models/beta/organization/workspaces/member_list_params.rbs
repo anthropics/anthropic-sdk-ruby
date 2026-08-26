@@ -1,0 +1,53 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Workspaces
+          type member_list_params =
+            {
+              workspace_id: String,
+              after_id: String,
+              before_id: String,
+              limit: Integer
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class MemberListParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor workspace_id: String
+
+            attr_reader after_id: String?
+
+            def after_id=: (String) -> String
+
+            attr_reader before_id: String?
+
+            def before_id=: (String) -> String
+
+            attr_reader limit: Integer?
+
+            def limit=: (Integer) -> Integer
+
+            def initialize: (
+              workspace_id: String,
+              ?after_id: String,
+              ?before_id: String,
+              ?limit: Integer,
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              workspace_id: String,
+              after_id: String,
+              before_id: String,
+              limit: Integer,
+              request_options: Anthropic::RequestOptions
+            }
+          end
+        end
+      end
+    end
+  end
+end

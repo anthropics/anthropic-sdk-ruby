@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      type organization_retrieve_params =
+        {  } & Anthropic::Internal::Type::request_parameters
+
+      class OrganizationRetrieveParams < Anthropic::Internal::Type::BaseModel
+        extend Anthropic::Internal::Type::RequestParameters::Converter
+        include Anthropic::Internal::Type::RequestParameters
+
+        def initialize: (?request_options: Anthropic::request_opts) -> void
+
+        def to_hash: -> { request_options: Anthropic::RequestOptions }
+      end
+    end
+  end
+end

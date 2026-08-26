@@ -1,0 +1,32 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Federation
+          type beta_jwks_explicit_url =
+            { type: :explicit_url, url: String, ca_cert_pem: String? }
+
+          class BetaJWKSExplicitURL < Anthropic::Internal::Type::BaseModel
+            attr_accessor type: :explicit_url
+
+            attr_accessor url: String
+
+            attr_accessor ca_cert_pem: String?
+
+            def initialize: (
+              url: String,
+              ?ca_cert_pem: String?,
+              ?type: :explicit_url
+            ) -> void
+
+            def to_hash: -> {
+              type: :explicit_url,
+              url: String,
+              ca_cert_pem: String?
+            }
+          end
+        end
+      end
+    end
+  end
+end

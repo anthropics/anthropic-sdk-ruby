@@ -19,6 +19,19 @@ module Anthropic
         module Messages
         end
 
+        module Organization
+          module Federation
+            module Rules
+            end
+          end
+
+          module ServiceAccounts
+          end
+
+          module Workspaces
+          end
+        end
+
         module Sessions
           module Threads
           end
@@ -37,10 +50,34 @@ module Anthropic
       module Environments
       end
 
+      module Federation
+        module Rules
+        end
+      end
+
       module MemoryStores
       end
 
       module Messages
+      end
+
+      module Organization
+        module Federation
+          module Rules
+          end
+        end
+
+        module ServiceAccounts
+        end
+
+        module Workspaces
+        end
+      end
+
+      module Rules
+      end
+
+      module ServiceAccounts
       end
 
       module Sessions
@@ -58,6 +95,9 @@ module Anthropic
       end
 
       module Vaults
+      end
+
+      module Workspaces
       end
     end
 

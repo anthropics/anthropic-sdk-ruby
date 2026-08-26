@@ -1,0 +1,65 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_organization_rate_limit =
+          {
+            id: String,
+            group_type: Anthropic::Models::Beta::Organization::BetaOrganizationRateLimit::group_type,
+            limits: ::Array[Anthropic::Beta::Organization::BetaOrganizationRateLimitValue],
+            models: ::Array[String]?,
+            type: :rate_limit
+          }
+
+        class BetaOrganizationRateLimit < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor group_type: Anthropic::Models::Beta::Organization::BetaOrganizationRateLimit::group_type
+
+          attr_accessor limits: ::Array[Anthropic::Beta::Organization::BetaOrganizationRateLimitValue]
+
+          attr_accessor models: ::Array[String]?
+
+          attr_accessor type: :rate_limit
+
+          def initialize: (
+            id: String,
+            group_type: Anthropic::Models::Beta::Organization::BetaOrganizationRateLimit::group_type,
+            limits: ::Array[Anthropic::Beta::Organization::BetaOrganizationRateLimitValue],
+            models: ::Array[String]?,
+            ?type: :rate_limit
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            group_type: Anthropic::Models::Beta::Organization::BetaOrganizationRateLimit::group_type,
+            limits: ::Array[Anthropic::Beta::Organization::BetaOrganizationRateLimitValue],
+            models: ::Array[String]?,
+            type: :rate_limit
+          }
+
+          type group_type =
+            :batch
+            | :files
+            | :model_group
+            | :skills
+            | :token_count
+            | :web_search
+
+          module GroupType
+            extend Anthropic::Internal::Type::Enum
+
+            BATCH: :batch
+            FILES: :files
+            MODEL_GROUP: :model_group
+            SKILLS: :skills
+            TOKEN_COUNT: :token_count
+            WEB_SEARCH: :web_search
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaOrganizationRateLimit::group_type]
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,111 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Federation
+          type issuer_create_params =
+            {
+              issuer_url: String,
+              name: String,
+              check_jti: bool?,
+              jwks: Anthropic::Models::Beta::Organization::Federation::IssuerCreateParams::jwks,
+              max_jwt_lifetime_seconds: Integer?,
+              betas: ::Array[Anthropic::Models::anthropic_beta]
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class IssuerCreateParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor issuer_url: String
+
+            attr_accessor name: String
+
+            attr_accessor check_jti: bool?
+
+            attr_reader jwks: Anthropic::Models::Beta::Organization::Federation::IssuerCreateParams::jwks?
+
+            def jwks=: (
+              Anthropic::Models::Beta::Organization::Federation::IssuerCreateParams::jwks
+            ) -> Anthropic::Models::Beta::Organization::Federation::IssuerCreateParams::jwks
+
+            attr_accessor max_jwt_lifetime_seconds: Integer?
+
+            attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
+
+            def betas=: (
+              ::Array[Anthropic::Models::anthropic_beta]
+            ) -> ::Array[Anthropic::Models::anthropic_beta]
+
+            def initialize: (
+              issuer_url: String,
+              name: String,
+              ?check_jti: bool?,
+              ?jwks: Anthropic::Models::Beta::Organization::Federation::IssuerCreateParams::jwks,
+              ?max_jwt_lifetime_seconds: Integer?,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              issuer_url: String,
+              name: String,
+              check_jti: bool?,
+              jwks: Anthropic::Models::Beta::Organization::Federation::IssuerCreateParams::jwks,
+              max_jwt_lifetime_seconds: Integer?,
+              betas: ::Array[Anthropic::Models::anthropic_beta],
+              request_options: Anthropic::RequestOptions
+            }
+
+            type jwks =
+              Anthropic::Beta::Organization::Federation::BetaJWKSDiscovery
+              | Anthropic::Beta::Organization::Federation::BetaJWKSExplicitURL
+              | Anthropic::Beta::Organization::Federation::BetaJWKSInline
+
+            module JWKS
+              extend Anthropic::Internal::Type::Union
+
+              type type_ = :discovery | :explicit_url | :inline
+
+              module Type
+                extend Anthropic::Internal::Type::Enum
+
+                DISCOVERY: :discovery
+                EXPLICIT_URL: :explicit_url
+                INLINE: :inline
+
+                def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Federation::IssuerCreateParams::JWKS::type_]
+              end
+
+              def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::Federation::IssuerCreateParams::jwks]
+
+              def self.new:
+                (
+                  type: :discovery | "discovery",
+                  ?ca_cert_pem: String?,
+                  ?discovery_base: String?
+                ) -> Anthropic::Beta::Organization::Federation::BetaJWKSDiscovery
+                | (
+                  type: :explicit_url | "explicit_url",
+                  url: String,
+                  ?ca_cert_pem: String?
+                ) -> Anthropic::Beta::Organization::Federation::BetaJWKSExplicitURL
+                | (
+                  type: :inline | "inline",
+                  keys: ::Array[::Hash[Symbol, top]]
+                ) -> Anthropic::Beta::Organization::Federation::BetaJWKSInline
+                | (
+                  type: Symbol | String,
+                  ?ca_cert_pem: String?,
+                  ?discovery_base: String?,
+                  ?url: String,
+                  ?keys: ::Array[::Hash[Symbol, top]]
+                ) -> Anthropic::Models::Beta::Organization::Federation::IssuerCreateParams::jwks
+            end
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,32 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Workspaces
+          type beta_workspace_rate_limit_value =
+            { org_limit: Integer?, type: String, value: Integer }
+
+          class BetaWorkspaceRateLimitValue < Anthropic::Internal::Type::BaseModel
+            attr_accessor org_limit: Integer?
+
+            attr_accessor type: String
+
+            attr_accessor value: Integer
+
+            def initialize: (
+              org_limit: Integer?,
+              type: String,
+              value: Integer
+            ) -> void
+
+            def to_hash: -> {
+              org_limit: Integer?,
+              type: String,
+              value: Integer
+            }
+          end
+        end
+      end
+    end
+  end
+end

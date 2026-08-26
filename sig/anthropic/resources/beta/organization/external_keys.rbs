@@ -1,0 +1,47 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class ExternalKeys
+          def create: (
+            provider_config: Anthropic::Models::Beta::Organization::ExternalKeyCreateParams::provider_config,
+            ?display_name: String?,
+            ?geo: Anthropic::Models::Beta::Organization::ExternalKeyCreateParams::geo,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaExternalKey
+
+          def retrieve: (
+            String external_key_id,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaExternalKey
+
+          def update: (
+            String external_key_id,
+            ?display_name: String?,
+            ?geo: Anthropic::Models::Beta::Organization::ExternalKeyUpdateParams::geo?,
+            ?provider_config: Anthropic::Models::Beta::Organization::ExternalKeyUpdateParams::provider_config?,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaExternalKey
+
+          def list: (
+            ?limit: Integer,
+            ?page: String?,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::BetaExternalKey]
+
+          def delete: (
+            String external_key_id,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Models::Beta::Organization::ExternalKeyDeleteResponse
+
+          def validate: (
+            String external_key_id,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Models::Beta::Organization::ExternalKeyValidateResponse
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

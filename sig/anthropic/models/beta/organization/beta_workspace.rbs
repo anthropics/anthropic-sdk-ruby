@@ -1,0 +1,69 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_workspace =
+          {
+            id: String,
+            archived_at: Time?,
+            compartment_id: String,
+            created_at: Time,
+            data_residency: Anthropic::Beta::Organization::BetaDataResidency,
+            display_color: String,
+            external_key_id: String?,
+            name: String,
+            tags: ::Hash[Symbol, String],
+            type: :workspace
+          }
+
+        class BetaWorkspace < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor archived_at: Time?
+
+          attr_accessor compartment_id: String
+
+          attr_accessor created_at: Time
+
+          attr_accessor data_residency: Anthropic::Beta::Organization::BetaDataResidency
+
+          attr_accessor display_color: String
+
+          attr_accessor external_key_id: String?
+
+          attr_accessor name: String
+
+          attr_accessor tags: ::Hash[Symbol, String]
+
+          attr_accessor type: :workspace
+
+          def initialize: (
+            id: String,
+            archived_at: Time?,
+            compartment_id: String,
+            created_at: Time,
+            data_residency: Anthropic::Beta::Organization::BetaDataResidency,
+            display_color: String,
+            external_key_id: String?,
+            name: String,
+            tags: ::Hash[Symbol, String],
+            ?type: :workspace
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            archived_at: Time?,
+            compartment_id: String,
+            created_at: Time,
+            data_residency: Anthropic::Beta::Organization::BetaDataResidency,
+            display_color: String,
+            external_key_id: String?,
+            name: String,
+            tags: ::Hash[Symbol, String],
+            type: :workspace
+          }
+        end
+      end
+    end
+  end
+end

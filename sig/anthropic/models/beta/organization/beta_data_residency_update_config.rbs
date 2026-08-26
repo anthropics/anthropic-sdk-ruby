@@ -1,0 +1,52 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_data_residency_update_config =
+          {
+            allowed_inference_geos: Anthropic::Models::Beta::Organization::BetaDataResidencyUpdateConfig::allowed_inference_geos?,
+            default_inference_geo: Anthropic::Models::Beta::Organization::BetaDataResidencyUpdateConfig::default_inference_geo?
+          }
+
+        class BetaDataResidencyUpdateConfig < Anthropic::Internal::Type::BaseModel
+          attr_accessor allowed_inference_geos: Anthropic::Models::Beta::Organization::BetaDataResidencyUpdateConfig::allowed_inference_geos?
+
+          attr_accessor default_inference_geo: Anthropic::Models::Beta::Organization::BetaDataResidencyUpdateConfig::default_inference_geo?
+
+          def initialize: (
+            ?allowed_inference_geos: Anthropic::Models::Beta::Organization::BetaDataResidencyUpdateConfig::allowed_inference_geos?,
+            ?default_inference_geo: Anthropic::Models::Beta::Organization::BetaDataResidencyUpdateConfig::default_inference_geo?
+          ) -> void
+
+          def to_hash: -> {
+            allowed_inference_geos: Anthropic::Models::Beta::Organization::BetaDataResidencyUpdateConfig::allowed_inference_geos?,
+            default_inference_geo: Anthropic::Models::Beta::Organization::BetaDataResidencyUpdateConfig::default_inference_geo?
+          }
+
+          type allowed_inference_geos =
+            ::Array[Anthropic::Models::Beta::Organization::beta_allowed_inference_geo]
+            | :unrestricted
+
+          module AllowedInferenceGeos
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::BetaDataResidencyUpdateConfig::allowed_inference_geos]
+
+            BetaAllowedInferenceGeoArray: Anthropic::Internal::Type::Converter
+          end
+
+          type default_inference_geo = :global | :us
+
+          module DefaultInferenceGeo
+            extend Anthropic::Internal::Type::Enum
+
+            GLOBAL: :global
+            US: :us
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaDataResidencyUpdateConfig::default_inference_geo]
+          end
+        end
+      end
+    end
+  end
+end

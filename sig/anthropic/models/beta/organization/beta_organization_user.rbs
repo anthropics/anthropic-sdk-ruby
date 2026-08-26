@@ -1,0 +1,49 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_organization_user =
+          {
+            id: String,
+            added_at: Time,
+            email: String,
+            name: String,
+            role: Anthropic::Models::Beta::beta_organization_role,
+            type: :user
+          }
+
+        class BetaOrganizationUser < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor added_at: Time
+
+          attr_accessor email: String
+
+          attr_accessor name: String
+
+          attr_accessor role: Anthropic::Models::Beta::beta_organization_role
+
+          attr_accessor type: :user
+
+          def initialize: (
+            id: String,
+            added_at: Time,
+            email: String,
+            name: String,
+            role: Anthropic::Models::Beta::beta_organization_role,
+            ?type: :user
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            added_at: Time,
+            email: String,
+            name: String,
+            role: Anthropic::Models::Beta::beta_organization_role,
+            type: :user
+          }
+        end
+      end
+    end
+  end
+end

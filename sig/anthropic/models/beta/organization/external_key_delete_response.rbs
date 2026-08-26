@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type external_key_delete_response =
+          { id: String, type: :external_key_deleted }
+
+        class ExternalKeyDeleteResponse < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor type: :external_key_deleted
+
+          def initialize: (id: String, ?type: :external_key_deleted) -> void
+
+          def to_hash: -> { id: String, type: :external_key_deleted }
+        end
+      end
+    end
+  end
+end

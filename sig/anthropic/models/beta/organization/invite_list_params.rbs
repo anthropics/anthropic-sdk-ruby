@@ -1,0 +1,81 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type invite_list_params =
+          {
+            after_id: String,
+            before_id: String,
+            email: String,
+            limit: Integer,
+            roles: ::Array[String],
+            statuses: ::Array[Anthropic::Models::Beta::Organization::InviteListParams::status]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class InviteListParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_reader after_id: String?
+
+          def after_id=: (String) -> String
+
+          attr_reader before_id: String?
+
+          def before_id=: (String) -> String
+
+          attr_reader email: String?
+
+          def email=: (String) -> String
+
+          attr_reader limit: Integer?
+
+          def limit=: (Integer) -> Integer
+
+          attr_reader roles: ::Array[String]?
+
+          def roles=: (::Array[String]) -> ::Array[String]
+
+          attr_reader statuses: ::Array[Anthropic::Models::Beta::Organization::InviteListParams::status]?
+
+          def statuses=: (
+            ::Array[Anthropic::Models::Beta::Organization::InviteListParams::status]
+          ) -> ::Array[Anthropic::Models::Beta::Organization::InviteListParams::status]
+
+          def initialize: (
+            ?after_id: String,
+            ?before_id: String,
+            ?email: String,
+            ?limit: Integer,
+            ?roles: ::Array[String],
+            ?statuses: ::Array[Anthropic::Models::Beta::Organization::InviteListParams::status],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            after_id: String,
+            before_id: String,
+            email: String,
+            limit: Integer,
+            roles: ::Array[String],
+            statuses: ::Array[Anthropic::Models::Beta::Organization::InviteListParams::status],
+            request_options: Anthropic::RequestOptions
+          }
+
+          type status = :accepted | :expired | :pending
+
+          module Status
+            extend Anthropic::Internal::Type::Enum
+
+            ACCEPTED: :accepted
+            EXPIRED: :expired
+            PENDING: :pending
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::InviteListParams::status]
+          end
+        end
+      end
+    end
+  end
+end

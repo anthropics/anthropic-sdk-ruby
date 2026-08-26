@@ -179,6 +179,11 @@ module Anthropic
           :"thinking-display-updates-2026-08-18",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      CE_USER_MANAGEMENT_2026_07_13 =
+        T.let(
+          :"ce-user-management-2026-07-13",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
     end
   end
 end

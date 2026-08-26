@@ -1,0 +1,66 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type rate_limit_list_params =
+          {
+            group_type: Anthropic::Models::Beta::Organization::RateLimitListParams::group_type?,
+            limit: Integer?,
+            model: String?,
+            page: String?
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class RateLimitListParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor group_type: Anthropic::Models::Beta::Organization::RateLimitListParams::group_type?
+
+          attr_accessor limit: Integer?
+
+          attr_accessor model: String?
+
+          attr_accessor page: String?
+
+          def initialize: (
+            ?group_type: Anthropic::Models::Beta::Organization::RateLimitListParams::group_type?,
+            ?limit: Integer?,
+            ?model: String?,
+            ?page: String?,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            group_type: Anthropic::Models::Beta::Organization::RateLimitListParams::group_type?,
+            limit: Integer?,
+            model: String?,
+            page: String?,
+            request_options: Anthropic::RequestOptions
+          }
+
+          type group_type =
+            :batch
+            | :files
+            | :model_group
+            | :skills
+            | :token_count
+            | :web_search
+
+          module GroupType
+            extend Anthropic::Internal::Type::Enum
+
+            BATCH: :batch
+            FILES: :files
+            MODEL_GROUP: :model_group
+            SKILLS: :skills
+            TOKEN_COUNT: :token_count
+            WEB_SEARCH: :web_search
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::RateLimitListParams::group_type]
+          end
+        end
+      end
+    end
+  end
+end
