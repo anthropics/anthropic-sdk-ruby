@@ -17,7 +17,8 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :id
 
-          # A session-resolved multiagent roster entry.
+          # The resolved agent a session thread runs: a saved-agent snapshot, the platform
+          # advisor entry, or an inline-defined (ephemeral) agent snapshot.
           sig do
             returns(
               Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread::Agent::Variants
@@ -132,7 +133,8 @@ module Anthropic
           def self.new(
             # Unique identifier for this thread.
             id:,
-            # A session-resolved multiagent roster entry.
+            # The resolved agent a session thread runs: a saved-agent snapshot, the platform
+            # advisor entry, or an inline-defined (ephemeral) agent snapshot.
             agent:,
             # A timestamp in RFC 3339 format
             archived_at:,
@@ -183,7 +185,8 @@ module Anthropic
           def to_hash
           end
 
-          # A session-resolved multiagent roster entry.
+          # The resolved agent a session thread runs: a saved-agent snapshot, the platform
+          # advisor entry, or an inline-defined (ephemeral) agent snapshot.
           module Agent
             extend Anthropic::Internal::Type::Union
 
