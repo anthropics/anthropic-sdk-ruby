@@ -1,5 +1,36 @@
 # Changelog
 
+## 1.66.0 (2026-08-26)
+
+Full Changelog: [v1.65.0...v1.66.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.65.0...v1.66.0)
+
+### Features
+
+* **api:** add `updates` thinking display mode (beta) ([c63a752](https://github.com/anthropics/anthropic-sdk-ruby/commit/c63a7526f9bf1e82f7c81a99ac9aace6dc49a1c5))
+* **api:** add discriminator enums to discriminated union modules ([4dc36fc](https://github.com/anthropics/anthropic-sdk-ruby/commit/4dc36fc60278b38875d7406f9ed74cece9be84e0))
+* **api:** add missing anthropic-beta values ([1783179](https://github.com/anthropics/anthropic-sdk-ruby/commit/1783179f94168d049ae6e7e6084c4f0a159000df))
+* **api:** add support for Organization API endpoints ([1e697c1](https://github.com/anthropics/anthropic-sdk-ruby/commit/1e697c1a14c8054294620e122264394021839ed5))
+
+
+### Bug Fixes
+
+* **client:** let ANTHROPIC_BASE_URL override profile base_url ([#211](https://github.com/anthropics/anthropic-sdk-ruby/issues/211)) ([b7e64eb](https://github.com/anthropics/anthropic-sdk-ruby/commit/b7e64eb8e908190fd4a70ddab9318d45d168478b))
+* **tools:** keep the tool runner going on pause_turn ([#159](https://github.com/anthropics/anthropic-sdk-ruby/issues/159)) ([b330183](https://github.com/anthropics/anthropic-sdk-ruby/commit/b330183663300983df0fcfc22f5f97d9c3f6d43e))
+
+
+### Chores
+
+* **docs:** clarify skill version `latest` support and memory version retention ([749bc53](https://github.com/anthropics/anthropic-sdk-ruby/commit/749bc53f60a60d3aa3742237aaad031afe25a2e4))
+* **internal:** cancel superseded CI runs ([7000bba](https://github.com/anthropics/anthropic-sdk-ruby/commit/7000bba83dc4cbb5cdc7133ac2db1db340012664))
+* **internal:** codegen related update ([3580ebf](https://github.com/anthropics/anthropic-sdk-ruby/commit/3580ebf2e26bdf7362088a09a0ed095aee5425f9))
+
+
+### Documentation
+
+* **api:** clarify session thread agent and usage.iterations compaction descriptions (beta) ([55daef7](https://github.com/anthropics/anthropic-sdk-ruby/commit/55daef73ec02d8efbf133c789e243c1adf781924))
+* **client:** add missing deprecation message ([331c37e](https://github.com/anthropics/anthropic-sdk-ruby/commit/331c37e66f4826ff09a937b0ee71edc8bfefdccb))
+* **examples:** use adaptive thinking in thinking examples ([d03824d](https://github.com/anthropics/anthropic-sdk-ruby/commit/d03824dd23c05d13817c85bf978e039f249e30a9))
+
 ## 1.65.0 (2026-08-19)
 
 Full Changelog: [v1.64.0...v1.65.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.64.0...v1.65.0)
