@@ -1,0 +1,50 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type user_update_params =
+          {
+            user_id: String,
+            role: Anthropic::Models::Beta::Organization::UserUpdateParams::role
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class UserUpdateParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor user_id: String
+
+          attr_accessor role: Anthropic::Models::Beta::Organization::UserUpdateParams::role
+
+          def initialize: (
+            user_id: String,
+            role: Anthropic::Models::Beta::Organization::UserUpdateParams::role,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            user_id: String,
+            role: Anthropic::Models::Beta::Organization::UserUpdateParams::role,
+            request_options: Anthropic::RequestOptions
+          }
+
+          type role =
+            :billing | :claude_code_user | :developer | :managed | :user
+
+          module Role
+            extend Anthropic::Internal::Type::Enum
+
+            BILLING: :billing
+            CLAUDE_CODE_USER: :claude_code_user
+            DEVELOPER: :developer
+            MANAGED: :managed
+            USER: :user
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::UserUpdateParams::role]
+          end
+        end
+      end
+    end
+  end
+end

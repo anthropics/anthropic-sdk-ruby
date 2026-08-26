@@ -1,0 +1,21 @@
+module Anthropic
+  module Models
+    class BetaOrganization = Beta::BetaOrganization
+
+    module Beta
+      type beta_organization = { id: String, name: String, type: :organization }
+
+      class BetaOrganization < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor name: String
+
+        attr_accessor type: :organization
+
+        def initialize: (id: String, name: String, ?type: :organization) -> void
+
+        def to_hash: -> { id: String, name: String, type: :organization }
+      end
+    end
+  end
+end

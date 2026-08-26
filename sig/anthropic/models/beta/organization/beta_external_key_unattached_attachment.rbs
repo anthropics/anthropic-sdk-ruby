@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_external_key_unattached_attachment = { type: :unattached }
+
+        class BetaExternalKeyUnattachedAttachment < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :unattached
+
+          def initialize: (?type: :unattached) -> void
+
+          def to_hash: -> { type: :unattached }
+        end
+      end
+    end
+  end
+end

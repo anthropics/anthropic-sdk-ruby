@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_api_key_workspace_scope =
+          { type: :workspace, workspace_id: String }
+
+        class BetaAPIKeyWorkspaceScope < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :workspace
+
+          attr_accessor workspace_id: String
+
+          def initialize: (workspace_id: String, ?type: :workspace) -> void
+
+          def to_hash: -> { type: :workspace, workspace_id: String }
+        end
+      end
+    end
+  end
+end

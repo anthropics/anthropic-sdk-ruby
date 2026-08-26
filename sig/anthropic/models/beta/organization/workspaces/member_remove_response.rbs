@@ -1,0 +1,36 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Workspaces
+          type member_remove_response =
+            {
+              type: :workspace_member_deleted,
+              user_id: String,
+              workspace_id: String
+            }
+
+          class MemberRemoveResponse < Anthropic::Internal::Type::BaseModel
+            attr_accessor type: :workspace_member_deleted
+
+            attr_accessor user_id: String
+
+            attr_accessor workspace_id: String
+
+            def initialize: (
+              user_id: String,
+              workspace_id: String,
+              ?type: :workspace_member_deleted
+            ) -> void
+
+            def to_hash: -> {
+              type: :workspace_member_deleted,
+              user_id: String,
+              workspace_id: String
+            }
+          end
+        end
+      end
+    end
+  end
+end

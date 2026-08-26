@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_api_key_user_actor = { type: :user_actor, user_id: String }
+
+        class BetaAPIKeyUserActor < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :user_actor
+
+          attr_accessor user_id: String
+
+          def initialize: (user_id: String, ?type: :user_actor) -> void
+
+          def to_hash: -> { type: :user_actor, user_id: String }
+        end
+      end
+    end
+  end
+end

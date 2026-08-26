@@ -1,0 +1,51 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Federation
+          type beta_federation_rule_workspace =
+            {
+              created_at: Time,
+              created_by_actor_id: String?,
+              federation_rule_id: String,
+              type: :federation_rule_workspace,
+              workspace_id: String,
+              workspace_name: String?
+            }
+
+          class BetaFederationRuleWorkspace < Anthropic::Internal::Type::BaseModel
+            attr_accessor created_at: Time
+
+            attr_accessor created_by_actor_id: String?
+
+            attr_accessor federation_rule_id: String
+
+            attr_accessor type: :federation_rule_workspace
+
+            attr_accessor workspace_id: String
+
+            attr_accessor workspace_name: String?
+
+            def initialize: (
+              created_at: Time,
+              created_by_actor_id: String?,
+              federation_rule_id: String,
+              workspace_id: String,
+              workspace_name: String?,
+              ?type: :federation_rule_workspace
+            ) -> void
+
+            def to_hash: -> {
+              created_at: Time,
+              created_by_actor_id: String?,
+              federation_rule_id: String,
+              type: :federation_rule_workspace,
+              workspace_id: String,
+              workspace_name: String?
+            }
+          end
+        end
+      end
+    end
+  end
+end

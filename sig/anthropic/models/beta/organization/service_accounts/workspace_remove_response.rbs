@@ -1,0 +1,36 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module ServiceAccounts
+          type workspace_remove_response =
+            {
+              service_account_id: String,
+              type: :service_account_workspace_member_deleted,
+              workspace_id: String
+            }
+
+          class WorkspaceRemoveResponse < Anthropic::Internal::Type::BaseModel
+            attr_accessor service_account_id: String
+
+            attr_accessor type: :service_account_workspace_member_deleted
+
+            attr_accessor workspace_id: String
+
+            def initialize: (
+              service_account_id: String,
+              workspace_id: String,
+              ?type: :service_account_workspace_member_deleted
+            ) -> void
+
+            def to_hash: -> {
+              service_account_id: String,
+              type: :service_account_workspace_member_deleted,
+              workspace_id: String
+            }
+          end
+        end
+      end
+    end
+  end
+end

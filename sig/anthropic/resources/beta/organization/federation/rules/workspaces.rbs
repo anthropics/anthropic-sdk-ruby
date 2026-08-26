@@ -1,0 +1,37 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Federation
+          class Rules
+            class Workspaces
+              def list: (
+                String federation_rule_id,
+                ?limit: Integer,
+                ?page: String?,
+                ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                ?request_options: Anthropic::request_opts
+              ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::Federation::BetaFederationRuleWorkspace]
+
+              def add: (
+                String federation_rule_id,
+                workspace_id: String,
+                ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                ?request_options: Anthropic::request_opts
+              ) -> Anthropic::Beta::Organization::Federation::BetaFederationRuleWorkspace
+
+              def remove: (
+                String workspace_id,
+                federation_rule_id: String,
+                ?betas: ::Array[Anthropic::Models::anthropic_beta],
+                ?request_options: Anthropic::request_opts
+              ) -> Anthropic::Models::Beta::Organization::Federation::Rules::WorkspaceRemoveResponse
+
+              def initialize: (client: Anthropic::Client) -> void
+            end
+          end
+        end
+      end
+    end
+  end
+end

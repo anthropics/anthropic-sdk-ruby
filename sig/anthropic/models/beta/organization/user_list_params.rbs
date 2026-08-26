@@ -1,0 +1,60 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type user_list_params =
+          {
+            after_id: String,
+            before_id: String,
+            email: String,
+            limit: Integer,
+            roles: ::Array[String]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class UserListParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_reader after_id: String?
+
+          def after_id=: (String) -> String
+
+          attr_reader before_id: String?
+
+          def before_id=: (String) -> String
+
+          attr_reader email: String?
+
+          def email=: (String) -> String
+
+          attr_reader limit: Integer?
+
+          def limit=: (Integer) -> Integer
+
+          attr_reader roles: ::Array[String]?
+
+          def roles=: (::Array[String]) -> ::Array[String]
+
+          def initialize: (
+            ?after_id: String,
+            ?before_id: String,
+            ?email: String,
+            ?limit: Integer,
+            ?roles: ::Array[String],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            after_id: String,
+            before_id: String,
+            email: String,
+            limit: Integer,
+            roles: ::Array[String],
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

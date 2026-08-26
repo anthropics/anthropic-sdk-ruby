@@ -1,0 +1,29 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        attr_reader api_keys: Anthropic::Resources::Beta::Organization::APIKeys
+
+        attr_reader external_keys: Anthropic::Resources::Beta::Organization::ExternalKeys
+
+        attr_reader federation: Anthropic::Resources::Beta::Organization::Federation
+
+        attr_reader invites: Anthropic::Resources::Beta::Organization::Invites
+
+        attr_reader service_accounts: Anthropic::Resources::Beta::Organization::ServiceAccounts
+
+        attr_reader users: Anthropic::Resources::Beta::Organization::Users
+
+        attr_reader workspaces: Anthropic::Resources::Beta::Organization::Workspaces
+
+        attr_reader rate_limits: Anthropic::Resources::Beta::Organization::RateLimits
+
+        def retrieve: (
+          ?request_options: Anthropic::request_opts
+        ) -> Anthropic::Beta::BetaOrganization
+
+        def initialize: (client: Anthropic::Client) -> void
+      end
+    end
+  end
+end

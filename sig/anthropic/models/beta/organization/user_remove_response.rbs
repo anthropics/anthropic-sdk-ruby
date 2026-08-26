@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type user_remove_response = { id: String, type: :user_deleted }
+
+        class UserRemoveResponse < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor type: :user_deleted
+
+          def initialize: (id: String, ?type: :user_deleted) -> void
+
+          def to_hash: -> { id: String, type: :user_deleted }
+        end
+      end
+    end
+  end
+end

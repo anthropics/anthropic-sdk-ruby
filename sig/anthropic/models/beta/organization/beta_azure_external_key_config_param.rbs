@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_azure_external_key_config_param =
+          {
+            key_name: String,
+            tenant_id: String,
+            type: :azure,
+            vault_uri: String,
+            client_id: String?
+          }
+
+        class BetaAzureExternalKeyConfigParam < Anthropic::Internal::Type::BaseModel
+          attr_accessor key_name: String
+
+          attr_accessor tenant_id: String
+
+          attr_accessor type: :azure
+
+          attr_accessor vault_uri: String
+
+          attr_accessor client_id: String?
+
+          def initialize: (
+            key_name: String,
+            tenant_id: String,
+            vault_uri: String,
+            ?client_id: String?,
+            ?type: :azure
+          ) -> void
+
+          def to_hash: -> {
+            key_name: String,
+            tenant_id: String,
+            type: :azure,
+            vault_uri: String,
+            client_id: String?
+          }
+        end
+      end
+    end
+  end
+end

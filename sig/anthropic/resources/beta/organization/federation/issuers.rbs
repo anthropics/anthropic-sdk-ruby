@@ -1,0 +1,55 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Federation
+          class Issuers
+            def create: (
+              issuer_url: String,
+              name: String,
+              ?check_jti: bool?,
+              ?jwks: Anthropic::Models::Beta::Organization::Federation::IssuerCreateParams::jwks,
+              ?max_jwt_lifetime_seconds: Integer?,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::Federation::BetaFederationIssuer
+
+            def retrieve: (
+              String federation_issuer_id,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::Federation::BetaFederationIssuer
+
+            def update: (
+              String federation_issuer_id,
+              ?check_jti: bool?,
+              ?issuer_url: String?,
+              ?jwks: Anthropic::Models::Beta::Organization::Federation::IssuerUpdateParams::jwks?,
+              ?jwks_polling_disabled: bool?,
+              ?max_jwt_lifetime_seconds: Integer?,
+              ?name: String?,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::Federation::BetaFederationIssuer
+
+            def list: (
+              ?include_archived: bool,
+              ?limit: Integer,
+              ?page: String?,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::Federation::BetaFederationIssuer]
+
+            def archive: (
+              String federation_issuer_id,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::Federation::BetaFederationIssuer
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,57 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type invite_create_params =
+          {
+            email: String,
+            role: Anthropic::Models::Beta::Organization::InviteCreateParams::role,
+            rbac_group_ids: ::Array[String]
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class InviteCreateParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor email: String
+
+          attr_accessor role: Anthropic::Models::Beta::Organization::InviteCreateParams::role
+
+          attr_reader rbac_group_ids: ::Array[String]?
+
+          def rbac_group_ids=: (::Array[String]) -> ::Array[String]
+
+          def initialize: (
+            email: String,
+            role: Anthropic::Models::Beta::Organization::InviteCreateParams::role,
+            ?rbac_group_ids: ::Array[String],
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            email: String,
+            role: Anthropic::Models::Beta::Organization::InviteCreateParams::role,
+            rbac_group_ids: ::Array[String],
+            request_options: Anthropic::RequestOptions
+          }
+
+          type role =
+            :billing | :claude_code_user | :developer | :managed | :user
+
+          module Role
+            extend Anthropic::Internal::Type::Enum
+
+            BILLING: :billing
+            CLAUDE_CODE_USER: :claude_code_user
+            DEVELOPER: :developer
+            MANAGED: :managed
+            USER: :user
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::InviteCreateParams::role]
+          end
+        end
+      end
+    end
+  end
+end

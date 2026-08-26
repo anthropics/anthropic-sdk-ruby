@@ -1,0 +1,77 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_organization_invite =
+          {
+            id: String,
+            accepted_at: Time?,
+            email: String,
+            expires_at: Time,
+            invited_at: Time,
+            rbac_group_ids: ::Array[String],
+            role: Anthropic::Models::Beta::beta_organization_role,
+            status: Anthropic::Models::Beta::Organization::BetaOrganizationInvite::status,
+            type: :invite
+          }
+
+        class BetaOrganizationInvite < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor accepted_at: Time?
+
+          attr_accessor email: String
+
+          attr_accessor expires_at: Time
+
+          attr_accessor invited_at: Time
+
+          attr_accessor rbac_group_ids: ::Array[String]
+
+          attr_accessor role: Anthropic::Models::Beta::beta_organization_role
+
+          attr_accessor status: Anthropic::Models::Beta::Organization::BetaOrganizationInvite::status
+
+          attr_accessor type: :invite
+
+          def initialize: (
+            id: String,
+            accepted_at: Time?,
+            email: String,
+            expires_at: Time,
+            invited_at: Time,
+            rbac_group_ids: ::Array[String],
+            role: Anthropic::Models::Beta::beta_organization_role,
+            status: Anthropic::Models::Beta::Organization::BetaOrganizationInvite::status,
+            ?type: :invite
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            accepted_at: Time?,
+            email: String,
+            expires_at: Time,
+            invited_at: Time,
+            rbac_group_ids: ::Array[String],
+            role: Anthropic::Models::Beta::beta_organization_role,
+            status: Anthropic::Models::Beta::Organization::BetaOrganizationInvite::status,
+            type: :invite
+          }
+
+          type status = :accepted | :deleted | :expired | :pending
+
+          module Status
+            extend Anthropic::Internal::Type::Enum
+
+            ACCEPTED: :accepted
+            DELETED: :deleted
+            EXPIRED: :expired
+            PENDING: :pending
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaOrganizationInvite::status]
+          end
+        end
+      end
+    end
+  end
+end

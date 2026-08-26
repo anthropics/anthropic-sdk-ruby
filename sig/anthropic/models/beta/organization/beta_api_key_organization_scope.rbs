@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_api_key_organization_scope = { type: :organization }
+
+        class BetaAPIKeyOrganizationScope < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :organization
+
+          def initialize: (?type: :organization) -> void
+
+          def to_hash: -> { type: :organization }
+        end
+      end
+    end
+  end
+end

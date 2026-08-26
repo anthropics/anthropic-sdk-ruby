@@ -31,6 +31,8 @@ module Anthropic
 
       attr_reader tunnels: Anthropic::Resources::Beta::Tunnels
 
+      attr_reader organization: Anthropic::Resources::Beta::Organization
+
       def initialize: (client: Anthropic::Client) -> void
     end
   end

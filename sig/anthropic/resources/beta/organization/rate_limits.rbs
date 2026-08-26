@@ -1,0 +1,19 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class RateLimits
+          def list: (
+            ?group_type: Anthropic::Models::Beta::Organization::RateLimitListParams::group_type?,
+            ?limit: Integer?,
+            ?model: String?,
+            ?page: String?,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::BetaOrganizationRateLimit]
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

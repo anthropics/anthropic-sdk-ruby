@@ -1,0 +1,40 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_api_key_created_by =
+          {
+            id: String,
+            type: Anthropic::Models::Beta::Organization::BetaAPIKeyCreatedBy::type_
+          }
+
+        class BetaAPIKeyCreatedBy < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor type: Anthropic::Models::Beta::Organization::BetaAPIKeyCreatedBy::type_
+
+          def initialize: (
+            id: String,
+            type: Anthropic::Models::Beta::Organization::BetaAPIKeyCreatedBy::type_
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            type: Anthropic::Models::Beta::Organization::BetaAPIKeyCreatedBy::type_
+          }
+
+          type type_ = :service_account | :user
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            SERVICE_ACCOUNT: :service_account
+            USER: :user
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaAPIKeyCreatedBy::type_]
+          end
+        end
+      end
+    end
+  end
+end
