@@ -2,11 +2,15 @@ module Anthropic
   module Resources
     class Beta
       class Webhooks
+        def parse_unverified: (
+          String payload
+        ) -> Anthropic::Beta::BetaWebhookEvent
+
         def unwrap: (
           String payload,
           headers: ::Hash[String, String],
           ?key: String?
-        ) -> Anthropic::Beta::UnwrapWebhookEvent
+        ) -> Anthropic::Beta::BetaWebhookEvent
 
         def initialize: (client: Anthropic::Client) -> void
       end
