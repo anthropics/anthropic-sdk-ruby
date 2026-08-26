@@ -22,56 +22,7 @@ module Anthropic
         sig { returns(Time) }
         attr_accessor :created_at
 
-        sig do
-          returns(
-            T.any(
-              Anthropic::Beta::BetaWebhookSessionCreatedEventData,
-              Anthropic::Beta::BetaWebhookSessionPendingEventData,
-              Anthropic::Beta::BetaWebhookSessionRunningEventData,
-              Anthropic::Beta::BetaWebhookSessionIdledEventData,
-              Anthropic::Beta::BetaWebhookSessionRequiresActionEventData,
-              Anthropic::Beta::BetaWebhookSessionArchivedEventData,
-              Anthropic::Beta::BetaWebhookSessionDeletedEventData,
-              Anthropic::Beta::BetaWebhookSessionStatusRescheduledEventData,
-              Anthropic::Beta::BetaWebhookSessionStatusRunStartedEventData,
-              Anthropic::Beta::BetaWebhookSessionStatusIdledEventData,
-              Anthropic::Beta::BetaWebhookSessionStatusTerminatedEventData,
-              Anthropic::Beta::BetaWebhookSessionThreadCreatedEventData,
-              Anthropic::Beta::BetaWebhookSessionThreadIdledEventData,
-              Anthropic::Beta::BetaWebhookSessionThreadTerminatedEventData,
-              Anthropic::Beta::BetaWebhookSessionOutcomeEvaluationEndedEventData,
-              Anthropic::Beta::BetaWebhookVaultCreatedEventData,
-              Anthropic::Beta::BetaWebhookVaultArchivedEventData,
-              Anthropic::Beta::BetaWebhookVaultDeletedEventData,
-              Anthropic::Beta::BetaWebhookVaultCredentialCreatedEventData,
-              Anthropic::Beta::BetaWebhookVaultCredentialArchivedEventData,
-              Anthropic::Beta::BetaWebhookVaultCredentialDeletedEventData,
-              Anthropic::Beta::BetaWebhookVaultCredentialRefreshFailedEventData,
-              Anthropic::Beta::BetaWebhookSessionUpdatedEventData,
-              Anthropic::Beta::BetaWebhookAgentCreatedEventData,
-              Anthropic::Beta::BetaWebhookAgentArchivedEventData,
-              Anthropic::Beta::BetaWebhookAgentDeletedEventData,
-              Anthropic::Beta::BetaWebhookDeploymentPausedEventData,
-              Anthropic::Beta::BetaWebhookDeploymentRunFailedEventData,
-              Anthropic::Beta::BetaWebhookDeploymentCreatedEventData,
-              Anthropic::Beta::BetaWebhookDeploymentUpdatedEventData,
-              Anthropic::Beta::BetaWebhookDeploymentUnpausedEventData,
-              Anthropic::Beta::BetaWebhookAgentUpdatedEventData,
-              Anthropic::Beta::BetaWebhookDeploymentArchivedEventData,
-              Anthropic::Beta::BetaWebhookDeploymentRunStartedEventData,
-              Anthropic::Beta::BetaWebhookDeploymentDeletedEventData,
-              Anthropic::Beta::BetaWebhookDeploymentRunSucceededEventData,
-              Anthropic::Beta::BetaWebhookEnvironmentCreatedEventData,
-              Anthropic::Beta::BetaWebhookEnvironmentUpdatedEventData,
-              Anthropic::Beta::BetaWebhookEnvironmentArchivedEventData,
-              Anthropic::Beta::BetaWebhookEnvironmentDeletedEventData,
-              Anthropic::Beta::BetaWebhookMemoryStoreCreatedEventData,
-              Anthropic::Beta::BetaWebhookMemoryStoreArchivedEventData,
-              Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData,
-              Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData
-            )
-          )
-        end
+        sig { returns(Anthropic::Beta::BetaWebhookEventData::Variants) }
         attr_accessor :data
 
         # Object type. Always `event` for webhook payloads.
@@ -148,53 +99,7 @@ module Anthropic
             {
               id: String,
               created_at: Time,
-              data:
-                T.any(
-                  Anthropic::Beta::BetaWebhookSessionCreatedEventData,
-                  Anthropic::Beta::BetaWebhookSessionPendingEventData,
-                  Anthropic::Beta::BetaWebhookSessionRunningEventData,
-                  Anthropic::Beta::BetaWebhookSessionIdledEventData,
-                  Anthropic::Beta::BetaWebhookSessionRequiresActionEventData,
-                  Anthropic::Beta::BetaWebhookSessionArchivedEventData,
-                  Anthropic::Beta::BetaWebhookSessionDeletedEventData,
-                  Anthropic::Beta::BetaWebhookSessionStatusRescheduledEventData,
-                  Anthropic::Beta::BetaWebhookSessionStatusRunStartedEventData,
-                  Anthropic::Beta::BetaWebhookSessionStatusIdledEventData,
-                  Anthropic::Beta::BetaWebhookSessionStatusTerminatedEventData,
-                  Anthropic::Beta::BetaWebhookSessionThreadCreatedEventData,
-                  Anthropic::Beta::BetaWebhookSessionThreadIdledEventData,
-                  Anthropic::Beta::BetaWebhookSessionThreadTerminatedEventData,
-                  Anthropic::Beta::BetaWebhookSessionOutcomeEvaluationEndedEventData,
-                  Anthropic::Beta::BetaWebhookVaultCreatedEventData,
-                  Anthropic::Beta::BetaWebhookVaultArchivedEventData,
-                  Anthropic::Beta::BetaWebhookVaultDeletedEventData,
-                  Anthropic::Beta::BetaWebhookVaultCredentialCreatedEventData,
-                  Anthropic::Beta::BetaWebhookVaultCredentialArchivedEventData,
-                  Anthropic::Beta::BetaWebhookVaultCredentialDeletedEventData,
-                  Anthropic::Beta::BetaWebhookVaultCredentialRefreshFailedEventData,
-                  Anthropic::Beta::BetaWebhookSessionUpdatedEventData,
-                  Anthropic::Beta::BetaWebhookAgentCreatedEventData,
-                  Anthropic::Beta::BetaWebhookAgentArchivedEventData,
-                  Anthropic::Beta::BetaWebhookAgentDeletedEventData,
-                  Anthropic::Beta::BetaWebhookDeploymentPausedEventData,
-                  Anthropic::Beta::BetaWebhookDeploymentRunFailedEventData,
-                  Anthropic::Beta::BetaWebhookDeploymentCreatedEventData,
-                  Anthropic::Beta::BetaWebhookDeploymentUpdatedEventData,
-                  Anthropic::Beta::BetaWebhookDeploymentUnpausedEventData,
-                  Anthropic::Beta::BetaWebhookAgentUpdatedEventData,
-                  Anthropic::Beta::BetaWebhookDeploymentArchivedEventData,
-                  Anthropic::Beta::BetaWebhookDeploymentRunStartedEventData,
-                  Anthropic::Beta::BetaWebhookDeploymentDeletedEventData,
-                  Anthropic::Beta::BetaWebhookDeploymentRunSucceededEventData,
-                  Anthropic::Beta::BetaWebhookEnvironmentCreatedEventData,
-                  Anthropic::Beta::BetaWebhookEnvironmentUpdatedEventData,
-                  Anthropic::Beta::BetaWebhookEnvironmentArchivedEventData,
-                  Anthropic::Beta::BetaWebhookEnvironmentDeletedEventData,
-                  Anthropic::Beta::BetaWebhookMemoryStoreCreatedEventData,
-                  Anthropic::Beta::BetaWebhookMemoryStoreArchivedEventData,
-                  Anthropic::Beta::BetaWebhookMemoryStoreDeletedEventData,
-                  Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData
-                ),
+              data: Anthropic::Beta::BetaWebhookEventData::Variants,
               type: Symbol
             }
           )
