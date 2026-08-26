@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_allowed_inference_geo = :global | :us
+
+        module BetaAllowedInferenceGeo
+          extend Anthropic::Internal::Type::Enum
+
+          GLOBAL: :global
+          US: :us
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::beta_allowed_inference_geo]
+        end
+      end
+    end
+  end
+end

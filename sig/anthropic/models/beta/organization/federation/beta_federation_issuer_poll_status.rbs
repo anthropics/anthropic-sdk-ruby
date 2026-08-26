@@ -1,0 +1,36 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Federation
+          type beta_federation_issuer_poll_status =
+            {
+              consecutive_failures: Integer,
+              last_fetched_at: Time?,
+              next_poll_at: Time?
+            }
+
+          class BetaFederationIssuerPollStatus < Anthropic::Internal::Type::BaseModel
+            attr_accessor consecutive_failures: Integer
+
+            attr_accessor last_fetched_at: Time?
+
+            attr_accessor next_poll_at: Time?
+
+            def initialize: (
+              consecutive_failures: Integer,
+              last_fetched_at: Time?,
+              next_poll_at: Time?
+            ) -> void
+
+            def to_hash: -> {
+              consecutive_failures: Integer,
+              last_fetched_at: Time?,
+              next_poll_at: Time?
+            }
+          end
+        end
+      end
+    end
+  end
+end

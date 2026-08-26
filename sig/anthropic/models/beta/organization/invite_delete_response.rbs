@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type invite_delete_response = { id: String, type: :invite_deleted }
+
+        class InviteDeleteResponse < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor type: :invite_deleted
+
+          def initialize: (id: String, ?type: :invite_deleted) -> void
+
+          def to_hash: -> { id: String, type: :invite_deleted }
+        end
+      end
+    end
+  end
+end

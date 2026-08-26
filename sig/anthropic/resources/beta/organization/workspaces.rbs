@@ -1,0 +1,55 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Workspaces
+          attr_reader rate_limits: Anthropic::Resources::Beta::Organization::Workspaces::RateLimits
+
+          attr_reader members: Anthropic::Resources::Beta::Organization::Workspaces::Members
+
+          attr_reader service_accounts: Anthropic::Resources::Beta::Organization::Workspaces::ServiceAccounts
+
+          def create: (
+            name: String,
+            ?data_residency: Anthropic::Beta::Organization::BetaDataResidencyCreateConfig?,
+            ?display_color: String?,
+            ?external_key_id: String?,
+            ?tags: ::Hash[Symbol, String]?,
+            ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaWorkspace
+
+          def retrieve: (
+            String workspace_id,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaWorkspace
+
+          def update: (
+            String workspace_id,
+            ?data_residency: Anthropic::Beta::Organization::BetaDataResidencyUpdateConfig?,
+            ?display_color: String,
+            ?external_key_id: String,
+            ?name: String,
+            ?tags: ::Hash[Symbol, String?]?,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaWorkspace
+
+          def list: (
+            ?after_id: String,
+            ?before_id: String,
+            ?include_archived: bool,
+            ?limit: Integer,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::Page[Anthropic::Beta::Organization::BetaWorkspace]
+
+          def archive: (
+            String workspace_id,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaWorkspace
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

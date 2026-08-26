@@ -1,0 +1,157 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_api_key =
+          {
+            id: String,
+            created_at: Time,
+            created_by: Anthropic::Beta::Organization::BetaAPIKeyCreatedBy?,
+            expires_at: Time?,
+            name: String,
+            partial_key_hint: String?,
+            principal: Anthropic::Models::Beta::Organization::BetaAPIKey::principal?,
+            scope: Anthropic::Models::Beta::Organization::BetaAPIKey::scope,
+            status: Anthropic::Models::Beta::Organization::BetaAPIKey::status,
+            type: :api_key,
+            workspace_id: String?
+          }
+
+        class BetaAPIKey < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor created_at: Time
+
+          attr_accessor created_by: Anthropic::Beta::Organization::BetaAPIKeyCreatedBy?
+
+          attr_accessor expires_at: Time?
+
+          attr_accessor name: String
+
+          attr_accessor partial_key_hint: String?
+
+          attr_accessor principal: Anthropic::Models::Beta::Organization::BetaAPIKey::principal?
+
+          attr_accessor scope: Anthropic::Models::Beta::Organization::BetaAPIKey::scope
+
+          attr_accessor status: Anthropic::Models::Beta::Organization::BetaAPIKey::status
+
+          attr_accessor type: :api_key
+
+          attr_accessor workspace_id: String?
+
+          def initialize: (
+            id: String,
+            created_at: Time,
+            created_by: Anthropic::Beta::Organization::BetaAPIKeyCreatedBy?,
+            expires_at: Time?,
+            name: String,
+            partial_key_hint: String?,
+            principal: Anthropic::Models::Beta::Organization::BetaAPIKey::principal?,
+            scope: Anthropic::Models::Beta::Organization::BetaAPIKey::scope,
+            status: Anthropic::Models::Beta::Organization::BetaAPIKey::status,
+            workspace_id: String?,
+            ?type: :api_key
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            created_at: Time,
+            created_by: Anthropic::Beta::Organization::BetaAPIKeyCreatedBy?,
+            expires_at: Time?,
+            name: String,
+            partial_key_hint: String?,
+            principal: Anthropic::Models::Beta::Organization::BetaAPIKey::principal?,
+            scope: Anthropic::Models::Beta::Organization::BetaAPIKey::scope,
+            status: Anthropic::Models::Beta::Organization::BetaAPIKey::status,
+            type: :api_key,
+            workspace_id: String?
+          }
+
+          type principal =
+            Anthropic::Beta::Organization::BetaAPIKeyUserActor
+            | Anthropic::Beta::Organization::BetaAPIKeyServiceAccountActor
+
+          module Principal
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :user_actor | :service_account_actor
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              USER_ACTOR: :user_actor
+              SERVICE_ACCOUNT_ACTOR: :service_account_actor
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaAPIKey::Principal::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::BetaAPIKey::principal]
+
+            def self.new:
+              (
+                type: :user_actor | "user_actor",
+                user_id: String
+              ) -> Anthropic::Beta::Organization::BetaAPIKeyUserActor
+              | (
+                type: :service_account_actor | "service_account_actor",
+                service_account_id: String
+              ) -> Anthropic::Beta::Organization::BetaAPIKeyServiceAccountActor
+              | (
+                type: Symbol | String,
+                ?user_id: String,
+                ?service_account_id: String
+              ) -> Anthropic::Models::Beta::Organization::BetaAPIKey::principal
+          end
+
+          type scope =
+            Anthropic::Beta::Organization::BetaAPIKeyOrganizationScope
+            | Anthropic::Beta::Organization::BetaAPIKeyWorkspaceScope
+
+          module Scope
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :organization | :workspace
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              ORGANIZATION: :organization
+              WORKSPACE: :workspace
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaAPIKey::Scope::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::BetaAPIKey::scope]
+
+            def self.new:
+              (
+                type: :organization | "organization"
+              ) -> Anthropic::Beta::Organization::BetaAPIKeyOrganizationScope
+              | (
+                type: :workspace | "workspace",
+                workspace_id: String
+              ) -> Anthropic::Beta::Organization::BetaAPIKeyWorkspaceScope
+              | (
+                type: Symbol | String,
+                ?workspace_id: String
+              ) -> Anthropic::Models::Beta::Organization::BetaAPIKey::scope
+          end
+
+          type status = :active | :archived | :expired | :inactive
+
+          module Status
+            extend Anthropic::Internal::Type::Enum
+
+            ACTIVE: :active
+            ARCHIVED: :archived
+            EXPIRED: :expired
+            INACTIVE: :inactive
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaAPIKey::status]
+          end
+        end
+      end
+    end
+  end
+end

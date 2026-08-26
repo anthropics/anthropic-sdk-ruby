@@ -1,0 +1,38 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Invites
+          def create: (
+            email: String,
+            role: Anthropic::Models::Beta::Organization::InviteCreateParams::role,
+            ?rbac_group_ids: ::Array[String],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaOrganizationInvite
+
+          def retrieve: (
+            String invite_id,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaOrganizationInvite
+
+          def list: (
+            ?after_id: String,
+            ?before_id: String,
+            ?email: String,
+            ?limit: Integer,
+            ?roles: ::Array[String],
+            ?statuses: ::Array[Anthropic::Models::Beta::Organization::InviteListParams::status],
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Internal::Page[Anthropic::Beta::Organization::BetaOrganizationInvite]
+
+          def delete: (
+            String invite_id,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Models::Beta::Organization::InviteDeleteResponse
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

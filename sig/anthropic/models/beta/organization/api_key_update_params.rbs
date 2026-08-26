@@ -1,0 +1,52 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type api_key_update_params =
+          {
+            api_key_id: String,
+            name: String?,
+            status: Anthropic::Models::Beta::Organization::APIKeyUpdateParams::status?
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class APIKeyUpdateParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor api_key_id: String
+
+          attr_accessor name: String?
+
+          attr_accessor status: Anthropic::Models::Beta::Organization::APIKeyUpdateParams::status?
+
+          def initialize: (
+            api_key_id: String,
+            ?name: String?,
+            ?status: Anthropic::Models::Beta::Organization::APIKeyUpdateParams::status?,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            api_key_id: String,
+            name: String?,
+            status: Anthropic::Models::Beta::Organization::APIKeyUpdateParams::status?,
+            request_options: Anthropic::RequestOptions
+          }
+
+          type status = :active | :archived | :inactive
+
+          module Status
+            extend Anthropic::Internal::Type::Enum
+
+            ACTIVE: :active
+            ARCHIVED: :archived
+            INACTIVE: :inactive
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::APIKeyUpdateParams::status]
+          end
+        end
+      end
+    end
+  end
+end

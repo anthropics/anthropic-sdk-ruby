@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_workspace_member =
+          {
+            type: :workspace_member,
+            user_id: String,
+            workspace_id: String,
+            workspace_role: Anthropic::Models::Beta::Organization::beta_workspace_role
+          }
+
+        class BetaWorkspaceMember < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :workspace_member
+
+          attr_accessor user_id: String
+
+          attr_accessor workspace_id: String
+
+          attr_accessor workspace_role: Anthropic::Models::Beta::Organization::beta_workspace_role
+
+          def initialize: (
+            user_id: String,
+            workspace_id: String,
+            workspace_role: Anthropic::Models::Beta::Organization::beta_workspace_role,
+            ?type: :workspace_member
+          ) -> void
+
+          def to_hash: -> {
+            type: :workspace_member,
+            user_id: String,
+            workspace_id: String,
+            workspace_role: Anthropic::Models::Beta::Organization::beta_workspace_role
+          }
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,15 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Federation
+          attr_reader issuers: Anthropic::Resources::Beta::Organization::Federation::Issuers
+
+          attr_reader rules: Anthropic::Resources::Beta::Organization::Federation::Rules
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

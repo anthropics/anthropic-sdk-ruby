@@ -1,0 +1,41 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Federation
+          type beta_federation_rule_match =
+            {
+              audience: String?,
+              claims: ::Hash[Symbol, String]?,
+              condition: String?,
+              subject_prefix: String?
+            }
+
+          class BetaFederationRuleMatch < Anthropic::Internal::Type::BaseModel
+            attr_accessor audience: String?
+
+            attr_accessor claims: ::Hash[Symbol, String]?
+
+            attr_accessor condition: String?
+
+            attr_accessor subject_prefix: String?
+
+            def initialize: (
+              ?audience: String?,
+              ?claims: ::Hash[Symbol, String]?,
+              ?condition: String?,
+              ?subject_prefix: String?
+            ) -> void
+
+            def to_hash: -> {
+              audience: String?,
+              claims: ::Hash[Symbol, String]?,
+              condition: String?,
+              subject_prefix: String?
+            }
+          end
+        end
+      end
+    end
+  end
+end

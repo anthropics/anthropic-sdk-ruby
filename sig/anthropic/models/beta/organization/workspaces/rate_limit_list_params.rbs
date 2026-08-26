@@ -1,0 +1,68 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Workspaces
+          type rate_limit_list_params =
+            {
+              workspace_id: String,
+              group_type: Anthropic::Models::Beta::Organization::Workspaces::RateLimitListParams::group_type?,
+              limit: Integer?,
+              page: String?
+            }
+            & Anthropic::Internal::Type::request_parameters
+
+          class RateLimitListParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor workspace_id: String
+
+            attr_accessor group_type: Anthropic::Models::Beta::Organization::Workspaces::RateLimitListParams::group_type?
+
+            attr_accessor limit: Integer?
+
+            attr_accessor page: String?
+
+            def initialize: (
+              workspace_id: String,
+              ?group_type: Anthropic::Models::Beta::Organization::Workspaces::RateLimitListParams::group_type?,
+              ?limit: Integer?,
+              ?page: String?,
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              workspace_id: String,
+              group_type: Anthropic::Models::Beta::Organization::Workspaces::RateLimitListParams::group_type?,
+              limit: Integer?,
+              page: String?,
+              request_options: Anthropic::RequestOptions
+            }
+
+            type group_type =
+              :batch
+              | :files
+              | :model_group
+              | :skills
+              | :token_count
+              | :web_search
+
+            module GroupType
+              extend Anthropic::Internal::Type::Enum
+
+              BATCH: :batch
+              FILES: :files
+              MODEL_GROUP: :model_group
+              SKILLS: :skills
+              TOKEN_COUNT: :token_count
+              WEB_SEARCH: :web_search
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::Workspaces::RateLimitListParams::group_type]
+            end
+          end
+        end
+      end
+    end
+  end
+end

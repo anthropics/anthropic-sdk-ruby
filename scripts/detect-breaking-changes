@@ -43,6 +43,22 @@ TEST_PATHS=(
 	test/anthropic/resources/beta/dreams_test.rb
 	test/anthropic/resources/beta/tunnels_test.rb
 	test/anthropic/resources/beta/tunnels/certificates_test.rb
+	test/anthropic/resources/beta/organization_test.rb
+	test/anthropic/resources/beta/organization/api_keys_test.rb
+	test/anthropic/resources/beta/organization/external_keys_test.rb
+	test/anthropic/resources/beta/organization/federation_test.rb
+	test/anthropic/resources/beta/organization/federation/issuers_test.rb
+	test/anthropic/resources/beta/organization/federation/rules_test.rb
+	test/anthropic/resources/beta/organization/federation/rules/workspaces_test.rb
+	test/anthropic/resources/beta/organization/invites_test.rb
+	test/anthropic/resources/beta/organization/service_accounts_test.rb
+	test/anthropic/resources/beta/organization/service_accounts/workspaces_test.rb
+	test/anthropic/resources/beta/organization/users_test.rb
+	test/anthropic/resources/beta/organization/workspaces_test.rb
+	test/anthropic/resources/beta/organization/workspaces/rate_limits_test.rb
+	test/anthropic/resources/beta/organization/workspaces/members_test.rb
+	test/anthropic/resources/beta/organization/workspaces/service_accounts_test.rb
+	test/anthropic/resources/beta/organization/rate_limits_test.rb
 	test/anthropic/client_test.rb
 )
 

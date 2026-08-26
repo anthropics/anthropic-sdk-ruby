@@ -1,0 +1,34 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Workspaces
+          type member_retrieve_params =
+            { workspace_id: String, user_id: String }
+            & Anthropic::Internal::Type::request_parameters
+
+          class MemberRetrieveParams < Anthropic::Internal::Type::BaseModel
+            extend Anthropic::Internal::Type::RequestParameters::Converter
+            include Anthropic::Internal::Type::RequestParameters
+
+            attr_accessor workspace_id: String
+
+            attr_accessor user_id: String
+
+            def initialize: (
+              workspace_id: String,
+              user_id: String,
+              ?request_options: Anthropic::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              workspace_id: String,
+              user_id: String,
+              request_options: Anthropic::RequestOptions
+            }
+          end
+        end
+      end
+    end
+  end
+end

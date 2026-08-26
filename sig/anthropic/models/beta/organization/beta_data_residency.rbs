@@ -1,0 +1,44 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_data_residency =
+          {
+            allowed_inference_geos: Anthropic::Models::Beta::Organization::BetaDataResidency::allowed_inference_geos,
+            default_inference_geo: String,
+            workspace_geo: String
+          }
+
+        class BetaDataResidency < Anthropic::Internal::Type::BaseModel
+          attr_accessor allowed_inference_geos: Anthropic::Models::Beta::Organization::BetaDataResidency::allowed_inference_geos
+
+          attr_accessor default_inference_geo: String
+
+          attr_accessor workspace_geo: String
+
+          def initialize: (
+            allowed_inference_geos: Anthropic::Models::Beta::Organization::BetaDataResidency::allowed_inference_geos,
+            default_inference_geo: String,
+            workspace_geo: String
+          ) -> void
+
+          def to_hash: -> {
+            allowed_inference_geos: Anthropic::Models::Beta::Organization::BetaDataResidency::allowed_inference_geos,
+            default_inference_geo: String,
+            workspace_geo: String
+          }
+
+          type allowed_inference_geos = ::Array[String] | :unrestricted
+
+          module AllowedInferenceGeos
+            extend Anthropic::Internal::Type::Union
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::BetaDataResidency::allowed_inference_geos]
+
+            StringArray: Anthropic::Internal::Type::Converter
+          end
+        end
+      end
+    end
+  end
+end

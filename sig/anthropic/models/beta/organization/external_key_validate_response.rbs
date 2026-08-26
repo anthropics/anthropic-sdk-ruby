@@ -1,0 +1,45 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type external_key_validate_response =
+          {
+            error: String?,
+            status: Anthropic::Models::Beta::Organization::ExternalKeyValidateResponse::status,
+            type: :external_key_validation
+          }
+
+        class ExternalKeyValidateResponse < Anthropic::Internal::Type::BaseModel
+          attr_accessor error: String?
+
+          attr_accessor status: Anthropic::Models::Beta::Organization::ExternalKeyValidateResponse::status
+
+          attr_accessor type: :external_key_validation
+
+          def initialize: (
+            error: String?,
+            status: Anthropic::Models::Beta::Organization::ExternalKeyValidateResponse::status,
+            ?type: :external_key_validation
+          ) -> void
+
+          def to_hash: -> {
+            error: String?,
+            status: Anthropic::Models::Beta::Organization::ExternalKeyValidateResponse::status,
+            type: :external_key_validation
+          }
+
+          type status = :failure | :success
+
+          module Status
+            extend Anthropic::Internal::Type::Enum
+
+            FAILURE: :failure
+            SUCCESS: :success
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::ExternalKeyValidateResponse::status]
+          end
+        end
+      end
+    end
+  end
+end

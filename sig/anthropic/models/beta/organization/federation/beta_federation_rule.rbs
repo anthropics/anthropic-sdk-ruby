@@ -1,0 +1,121 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        module Federation
+          type beta_federation_rule =
+            {
+              id: String,
+              applies_to_all_workspaces: bool,
+              archived_at: Time?,
+              archived_by_actor_id: String?,
+              attributes: ::Hash[Symbol, String]?,
+              created_at: Time,
+              created_by_actor_id: String?,
+              description: String?,
+              issuer_id: String,
+              issuer_name: String?,
+              match: Anthropic::Beta::Organization::Federation::BetaFederationRuleMatch,
+              name: String,
+              oauth_scope: String,
+              target: Anthropic::Beta::Organization::Federation::BetaServiceAccountTarget,
+              token_lifetime_seconds: Integer,
+              type: :federation_rule,
+              updated_at: Time,
+              updated_by_actor_id: String?,
+              workspace_id: String?,
+              workspace_ids: ::Array[String]
+            }
+
+          class BetaFederationRule < Anthropic::Internal::Type::BaseModel
+            attr_accessor id: String
+
+            attr_accessor applies_to_all_workspaces: bool
+
+            attr_accessor archived_at: Time?
+
+            attr_accessor archived_by_actor_id: String?
+
+            attr_accessor attributes: ::Hash[Symbol, String]?
+
+            attr_accessor created_at: Time
+
+            attr_accessor created_by_actor_id: String?
+
+            attr_accessor description: String?
+
+            attr_accessor issuer_id: String
+
+            attr_accessor issuer_name: String?
+
+            attr_accessor match: Anthropic::Beta::Organization::Federation::BetaFederationRuleMatch
+
+            attr_accessor name: String
+
+            attr_accessor oauth_scope: String
+
+            attr_accessor target: Anthropic::Beta::Organization::Federation::BetaServiceAccountTarget
+
+            attr_accessor token_lifetime_seconds: Integer
+
+            attr_accessor type: :federation_rule
+
+            attr_accessor updated_at: Time
+
+            attr_accessor updated_by_actor_id: String?
+
+            attr_accessor workspace_id: String?
+
+            attr_accessor workspace_ids: ::Array[String]
+
+            def initialize: (
+              id: String,
+              applies_to_all_workspaces: bool,
+              archived_at: Time?,
+              archived_by_actor_id: String?,
+              attributes: ::Hash[Symbol, String]?,
+              created_at: Time,
+              created_by_actor_id: String?,
+              description: String?,
+              issuer_id: String,
+              issuer_name: String?,
+              match: Anthropic::Beta::Organization::Federation::BetaFederationRuleMatch,
+              name: String,
+              oauth_scope: String,
+              target: Anthropic::Beta::Organization::Federation::BetaServiceAccountTarget,
+              token_lifetime_seconds: Integer,
+              updated_at: Time,
+              updated_by_actor_id: String?,
+              workspace_id: String?,
+              workspace_ids: ::Array[String],
+              ?type: :federation_rule
+            ) -> void
+
+            def to_hash: -> {
+              id: String,
+              applies_to_all_workspaces: bool,
+              archived_at: Time?,
+              archived_by_actor_id: String?,
+              attributes: ::Hash[Symbol, String]?,
+              created_at: Time,
+              created_by_actor_id: String?,
+              description: String?,
+              issuer_id: String,
+              issuer_name: String?,
+              match: Anthropic::Beta::Organization::Federation::BetaFederationRuleMatch,
+              name: String,
+              oauth_scope: String,
+              target: Anthropic::Beta::Organization::Federation::BetaServiceAccountTarget,
+              token_lifetime_seconds: Integer,
+              type: :federation_rule,
+              updated_at: Time,
+              updated_by_actor_id: String?,
+              workspace_id: String?,
+              workspace_ids: ::Array[String]
+            }
+          end
+        end
+      end
+    end
+  end
+end

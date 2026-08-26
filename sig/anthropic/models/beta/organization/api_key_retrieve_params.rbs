@@ -1,0 +1,27 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type api_key_retrieve_params =
+          { api_key_id: String } & Anthropic::Internal::Type::request_parameters
+
+        class APIKeyRetrieveParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor api_key_id: String
+
+          def initialize: (
+            api_key_id: String,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            api_key_id: String,
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

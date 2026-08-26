@@ -1,0 +1,36 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class ServiceAccounts
+          class Workspaces
+            def list: (
+              String service_account_id,
+              ?limit: Integer,
+              ?page: String?,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::BetaServiceAccountWorkspaceMember]
+
+            def add: (
+              String service_account_id,
+              workspace_id: String,
+              workspace_role: Anthropic::Models::Beta::Organization::beta_no_billing_workspace_role,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::BetaServiceAccountWorkspaceMember
+
+            def remove: (
+              String workspace_id,
+              service_account_id: String,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Models::Beta::Organization::ServiceAccounts::WorkspaceRemoveResponse
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

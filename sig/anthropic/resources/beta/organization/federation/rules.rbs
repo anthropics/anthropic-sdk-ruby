@@ -1,0 +1,66 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class Federation
+          class Rules
+            attr_reader workspaces: Anthropic::Resources::Beta::Organization::Federation::Rules::Workspaces
+
+            def create: (
+              issuer_id: String,
+              match: Anthropic::Beta::Organization::Federation::BetaFederationRuleMatch,
+              name: String,
+              oauth_scope: String,
+              target: Anthropic::Beta::Organization::Federation::BetaServiceAccountTarget,
+              ?applies_to_all_workspaces: bool,
+              ?attributes: ::Hash[Symbol, String]?,
+              ?description: String?,
+              ?token_lifetime_seconds: Integer,
+              ?workspace_id: String?,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::Federation::BetaFederationRule
+
+            def retrieve: (
+              String federation_rule_id,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::Federation::BetaFederationRule
+
+            def update: (
+              String federation_rule_id,
+              ?applies_to_all_workspaces: bool?,
+              ?attributes: ::Hash[Symbol, String]?,
+              ?description: String?,
+              ?match: Anthropic::Beta::Organization::Federation::BetaFederationRuleMatch?,
+              ?name: String?,
+              ?oauth_scope: String?,
+              ?target: Anthropic::Beta::Organization::Federation::BetaServiceAccountTarget?,
+              ?token_lifetime_seconds: Integer?,
+              ?workspace_id: String?,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::Federation::BetaFederationRule
+
+            def list: (
+              ?include_archived: bool,
+              ?issuer_id: String?,
+              ?limit: Integer,
+              ?page: String?,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Organization::Federation::BetaFederationRule]
+
+            def archive: (
+              String federation_rule_id,
+              ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?request_options: Anthropic::request_opts
+            ) -> Anthropic::Beta::Organization::Federation::BetaFederationRule
+
+            def initialize: (client: Anthropic::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

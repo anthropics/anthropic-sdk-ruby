@@ -1,0 +1,107 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type external_key_update_params =
+          {
+            external_key_id: String,
+            display_name: String?,
+            geo: Anthropic::Models::Beta::Organization::ExternalKeyUpdateParams::geo?,
+            provider_config: Anthropic::Models::Beta::Organization::ExternalKeyUpdateParams::provider_config?
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class ExternalKeyUpdateParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor external_key_id: String
+
+          attr_accessor display_name: String?
+
+          attr_accessor geo: Anthropic::Models::Beta::Organization::ExternalKeyUpdateParams::geo?
+
+          attr_accessor provider_config: Anthropic::Models::Beta::Organization::ExternalKeyUpdateParams::provider_config?
+
+          def initialize: (
+            external_key_id: String,
+            ?display_name: String?,
+            ?geo: Anthropic::Models::Beta::Organization::ExternalKeyUpdateParams::geo?,
+            ?provider_config: Anthropic::Models::Beta::Organization::ExternalKeyUpdateParams::provider_config?,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            external_key_id: String,
+            display_name: String?,
+            geo: Anthropic::Models::Beta::Organization::ExternalKeyUpdateParams::geo?,
+            provider_config: Anthropic::Models::Beta::Organization::ExternalKeyUpdateParams::provider_config?,
+            request_options: Anthropic::RequestOptions
+          }
+
+          type geo = :us
+
+          module Geo
+            extend Anthropic::Internal::Type::Enum
+
+            US: :us
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::ExternalKeyUpdateParams::geo]
+          end
+
+          type provider_config =
+            Anthropic::Beta::Organization::BetaAWSExternalKeyConfig
+            | Anthropic::Beta::Organization::BetaGCPExternalKeyConfig
+            | Anthropic::Beta::Organization::BetaAzureExternalKeyConfigParam
+
+          module ProviderConfig
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :aws | :gcp | :azure
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              AWS: :aws
+              GCP: :gcp
+              AZURE: :azure
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::ExternalKeyUpdateParams::ProviderConfig::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::ExternalKeyUpdateParams::provider_config]
+
+            def self.new:
+              (
+                type: :aws | "aws",
+                kms_arn: String,
+                ?region: String?,
+                ?role_arn: String?
+              ) -> Anthropic::Beta::Organization::BetaAWSExternalKeyConfig
+              | (
+                type: :gcp | "gcp",
+                key_name: String
+              ) -> Anthropic::Beta::Organization::BetaGCPExternalKeyConfig
+              | (
+                type: :azure | "azure",
+                key_name: String,
+                tenant_id: String,
+                vault_uri: String,
+                ?client_id: String?
+              ) -> Anthropic::Beta::Organization::BetaAzureExternalKeyConfigParam
+              | (
+                type: Symbol | String,
+                ?kms_arn: String,
+                ?region: String?,
+                ?role_arn: String?,
+                ?key_name: String,
+                ?tenant_id: String,
+                ?vault_uri: String,
+                ?client_id: String?
+              ) -> Anthropic::Models::Beta::Organization::ExternalKeyUpdateParams::provider_config
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,61 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type workspace_update_params =
+          {
+            workspace_id: String,
+            data_residency: Anthropic::Beta::Organization::BetaDataResidencyUpdateConfig?,
+            display_color: String,
+            external_key_id: String,
+            name: String,
+            tags: ::Hash[Symbol, String?]?
+          }
+          & Anthropic::Internal::Type::request_parameters
+
+        class WorkspaceUpdateParams < Anthropic::Internal::Type::BaseModel
+          extend Anthropic::Internal::Type::RequestParameters::Converter
+          include Anthropic::Internal::Type::RequestParameters
+
+          attr_accessor workspace_id: String
+
+          attr_accessor data_residency: Anthropic::Beta::Organization::BetaDataResidencyUpdateConfig?
+
+          attr_reader display_color: String?
+
+          def display_color=: (String) -> String
+
+          attr_reader external_key_id: String?
+
+          def external_key_id=: (String) -> String
+
+          attr_reader name: String?
+
+          def name=: (String) -> String
+
+          attr_accessor tags: ::Hash[Symbol, String?]?
+
+          def initialize: (
+            workspace_id: String,
+            ?data_residency: Anthropic::Beta::Organization::BetaDataResidencyUpdateConfig?,
+            ?display_color: String,
+            ?external_key_id: String,
+            ?name: String,
+            ?tags: ::Hash[Symbol, String?]?,
+            ?request_options: Anthropic::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            workspace_id: String,
+            data_residency: Anthropic::Beta::Organization::BetaDataResidencyUpdateConfig?,
+            display_color: String,
+            external_key_id: String,
+            name: String,
+            tags: ::Hash[Symbol, String?]?,
+            request_options: Anthropic::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end
