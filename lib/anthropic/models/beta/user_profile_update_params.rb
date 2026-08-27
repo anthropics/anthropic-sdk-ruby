@@ -30,6 +30,12 @@ module Anthropic
         #   @return [String, nil]
         optional :external_id, String, nil?: true
 
+        # @!attribute external_user_onboarded_at
+        #   A timestamp in RFC 3339 format
+        #
+        #   @return [Time, nil]
+        optional :external_user_onboarded_at, Time
+
         # @!attribute metadata
         #   Key-value pairs to merge into the stored metadata. Keys provided overwrite
         #   existing values. To remove a key, set its value to an empty string. Keys not
@@ -64,7 +70,7 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(user_profile_id:, access_type: nil, external_id: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
+        # @!method initialize(user_profile_id:, access_type: nil, external_id: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::UserProfileUpdateParams} for more details.
         #
@@ -73,6 +79,8 @@ module Anthropic
         #   @param access_type [Symbol, Anthropic::Models::Beta::UserProfileUpdateParams::AccessType, nil] How the platform uses the API on behalf of the entity this profile represents. `
         #
         #   @param external_id [String, nil] If present, replaces the stored external_id. Omit to leave unchanged. Maximum 25
+        #
+        #   @param external_user_onboarded_at [Time] A timestamp in RFC 3339 format
         #
         #   @param metadata [Hash{Symbol=>String}] Key-value pairs to merge into the stored metadata. Keys provided overwrite exist
         #

@@ -25,6 +25,12 @@ module Anthropic
         #   @return [String, nil]
         optional :external_id, String, nil?: true
 
+        # @!attribute external_user_onboarded_at
+        #   A timestamp in RFC 3339 format
+        #
+        #   @return [Time, nil]
+        optional :external_user_onboarded_at, Time
+
         # @!attribute metadata
         #   Free-form key-value data to attach to this user profile. Maximum 16 keys, with
         #   keys up to 64 characters and values up to 512 characters. Values must be
@@ -56,13 +62,15 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(access_type: nil, external_id: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
+        # @!method initialize(access_type: nil, external_id: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::UserProfileCreateParams} for more details.
         #
         #   @param access_type [Symbol, Anthropic::Models::Beta::UserProfileCreateParams::AccessType] How the platform uses the API on behalf of the entity this profile represents. `
         #
         #   @param external_id [String, nil] Platform's own identifier for this user. Not enforced unique. Maximum 255 charac
+        #
+        #   @param external_user_onboarded_at [Time] A timestamp in RFC 3339 format
         #
         #   @param metadata [Hash{Symbol=>String}] Free-form key-value data to attach to this user profile. Maximum 16 keys, with k
         #

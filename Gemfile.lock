@@ -1,13 +1,3 @@
-GIT
-  remote: https://github.com/ruby-syntax-tree/syntax_tree-rbs.git
-  revision: f94bc3060682ffbd126e4d5086ffedc89073d626
-  branch: main
-  specs:
-    syntax_tree-rbs (1.0.0)
-      prettier_print
-      rbs
-      syntax_tree (>= 2.0.1)
-
 PATH
   remote: .
   specs:
@@ -61,7 +51,7 @@ GEM
     benchmark (0.5.0)
     bigdecimal (3.3.1)
     cgi (0.5.1)
-    concurrent-ruby (1.3.5)
+    concurrent-ruby (1.3.7)
     connection_pool (2.5.4)
     console (1.34.2)
       fiber-annotation
@@ -215,8 +205,12 @@ GEM
       terminal-table (>= 2, < 5)
       uri (>= 0.12.0)
     strscan (3.1.5)
-    syntax_tree (6.3.0)
-      prettier_print (>= 1.2.0)
+    syntax_tree (4.3.0)
+      prettier_print (>= 1.0.2)
+    syntax_tree-rbs (1.0.0)
+      prettier_print
+      rbs
+      syntax_tree (>= 2.0.1)
     tapioca (0.16.11)
       benchmark
       bundler (>= 2.2.25)
@@ -261,6 +255,7 @@ DEPENDENCIES
   anthropic!
   async
   aws-sdk-bedrockruntime
+  concurrent-ruby (>= 1.3.7)
   event_stream_parser
   faraday
   googleauth
@@ -276,12 +271,12 @@ DEPENDENCIES
   rubocop
   sorbet
   steep
-  syntax_tree
-  syntax_tree-rbs!
+  syntax_tree (< 5)
+  syntax_tree-rbs
   tapioca
   webmock
   webrick
-  yard
+  yard (>= 0.9.44)
 
 BUNDLED WITH
-   2.4.1
+   2.6.9

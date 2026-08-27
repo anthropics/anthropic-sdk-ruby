@@ -7,7 +7,7 @@ class Anthropic::Test::Resources::CompletionsTest < Anthropic::Test::ResourceTes
     response =
       @anthropic.completions.create(
         max_tokens_to_sample: 256,
-        model: :"claude-sonnet-5",
+        model: Anthropic::Model::CLAUDE_SONNET_5,
         prompt: "\n\nHuman: Hello, world!\n\nAssistant:"
       )
 

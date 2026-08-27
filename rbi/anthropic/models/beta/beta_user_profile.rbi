@@ -67,6 +67,10 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :external_id
 
+        # A timestamp in RFC 3339 format
+        sig { returns(T.nilable(Time)) }
+        attr_accessor :external_user_onboarded_at
+
         # Real-world name of the entity this profile represents (company or individual).
         # For a resold-to company (`access_type` `passthrough`, or `relationship` `resold`
         # under the `user-profiles-2026-03-24` header) this is that company's name.
@@ -107,6 +111,7 @@ module Anthropic
             updated_at: Time,
             access_type: Anthropic::Beta::BetaUserProfile::AccessType::OrSymbol,
             external_id: T.nilable(String),
+            external_user_onboarded_at: T.nilable(Time),
             name: T.nilable(String),
             relationship:
               Anthropic::Beta::BetaUserProfile::Relationship::OrSymbol
@@ -135,6 +140,8 @@ module Anthropic
           access_type: nil,
           # Platform's own identifier for this user. Not enforced unique.
           external_id: nil,
+          # A timestamp in RFC 3339 format
+          external_user_onboarded_at: nil,
           # Real-world name of the entity this profile represents (company or individual).
           # For a resold-to company (`access_type` `passthrough`, or `relationship` `resold`
           # under the `user-profiles-2026-03-24` header) this is that company's name.
@@ -159,6 +166,7 @@ module Anthropic
               access_type:
                 Anthropic::Beta::BetaUserProfile::AccessType::TaggedSymbol,
               external_id: T.nilable(String),
+              external_user_onboarded_at: T.nilable(Time),
               name: T.nilable(String),
               relationship:
                 Anthropic::Beta::BetaUserProfile::Relationship::TaggedSymbol

@@ -5,6 +5,7 @@ module Anthropic
         def create: (
           ?access_type: Anthropic::Models::Beta::UserProfileCreateParams::access_type,
           ?external_id: String?,
+          ?external_user_onboarded_at: Time,
           ?metadata: ::Hash[Symbol, String],
           ?name: String?,
           ?relationship: Anthropic::Models::Beta::UserProfileCreateParams::relationship,
@@ -22,6 +23,7 @@ module Anthropic
           String user_profile_id,
           ?access_type: Anthropic::Models::Beta::UserProfileUpdateParams::access_type?,
           ?external_id: String?,
+          ?external_user_onboarded_at: Time,
           ?metadata: ::Hash[Symbol, String],
           ?name: String?,
           ?relationship: Anthropic::Models::Beta::UserProfileUpdateParams::relationship?,

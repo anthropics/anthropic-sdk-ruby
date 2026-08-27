@@ -12,13 +12,18 @@ gemspec
 end
 
 group :development do
+  # transitive (via steep -> activesupport); floored for GHSA-h8w8-99g7-qmvj
+  # and two sibling advisories fixed in 1.3.7
+  gem "concurrent-ruby", ">= 1.3.7"
   gem "rake"
   gem "rbs"
   gem "rubocop"
   gem "sorbet"
   gem "steep"
-  gem "syntax_tree"
-  gem "syntax_tree-rbs", github: "ruby-syntax-tree/syntax_tree-rbs", branch: "main"
+  # syntax_tree >= 5 passes a third `options:` argument to formatter plugins,
+  # which the newest released syntax_tree-rbs (1.0.0) does not accept.
+  gem "syntax_tree", "< 5"
+  gem "syntax_tree-rbs"
   gem "tapioca"
 end
 
@@ -35,7 +40,8 @@ end
 group :development, :docs do
   gem "redcarpet"
   gem "webrick"
-  gem "yard"
+  # floored for GHSA-pxcc-8665-phx8 (static cache path traversal), fixed in 0.9.44
+  gem "yard", ">= 0.9.44"
 end
 
 group :development, :test, :optional do

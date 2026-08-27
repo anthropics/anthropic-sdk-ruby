@@ -42,6 +42,13 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :external_id
 
+        # A timestamp in RFC 3339 format
+        sig { returns(T.nilable(Time)) }
+        attr_reader :external_user_onboarded_at
+
+        sig { params(external_user_onboarded_at: Time).void }
+        attr_writer :external_user_onboarded_at
+
         # Free-form key-value data to attach to this user profile. Maximum 16 keys, with
         # keys up to 64 characters and values up to 512 characters. Values must be
         # non-empty strings.
@@ -100,6 +107,7 @@ module Anthropic
             access_type:
               Anthropic::Beta::UserProfileCreateParams::AccessType::OrSymbol,
             external_id: T.nilable(String),
+            external_user_onboarded_at: Time,
             metadata: T::Hash[Symbol, String],
             name: T.nilable(String),
             relationship:
@@ -118,6 +126,8 @@ module Anthropic
           # Platform's own identifier for this user. Not enforced unique. Maximum 255
           # characters.
           external_id: nil,
+          # A timestamp in RFC 3339 format
+          external_user_onboarded_at: nil,
           # Free-form key-value data to attach to this user profile. Maximum 16 keys, with
           # keys up to 64 characters and values up to 512 characters. Values must be
           # non-empty strings.
@@ -143,6 +153,7 @@ module Anthropic
               access_type:
                 Anthropic::Beta::UserProfileCreateParams::AccessType::OrSymbol,
               external_id: T.nilable(String),
+              external_user_onboarded_at: Time,
               metadata: T::Hash[Symbol, String],
               name: T.nilable(String),
               relationship:

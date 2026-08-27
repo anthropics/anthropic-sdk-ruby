@@ -60,6 +60,12 @@ module Anthropic
         #   @return [String, nil]
         optional :external_id, String, nil?: true
 
+        # @!attribute external_user_onboarded_at
+        #   A timestamp in RFC 3339 format
+        #
+        #   @return [Time, nil]
+        optional :external_user_onboarded_at, Time, nil?: true
+
         # @!attribute name
         #   Real-world name of the entity this profile represents (company or individual).
         #   For a resold-to company (`access_type` `passthrough`, or `relationship` `resold`
@@ -76,7 +82,7 @@ module Anthropic
         #   @return [Symbol, Anthropic::Models::Beta::BetaUserProfile::Relationship, nil]
         optional :relationship, enum: -> { Anthropic::Beta::BetaUserProfile::Relationship }
 
-        # @!method initialize(id:, created_at:, metadata:, trust_grants:, type:, updated_at:, access_type: nil, external_id: nil, name: nil, relationship: nil)
+        # @!method initialize(id:, created_at:, metadata:, trust_grants:, type:, updated_at:, access_type: nil, external_id: nil, external_user_onboarded_at: nil, name: nil, relationship: nil)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaUserProfile} for more details.
         #
@@ -95,6 +101,8 @@ module Anthropic
         #   @param access_type [Symbol, Anthropic::Models::Beta::BetaUserProfile::AccessType] How the platform uses the API on behalf of the entity this profile represents. `
         #
         #   @param external_id [String, nil] Platform's own identifier for this user. Not enforced unique.
+        #
+        #   @param external_user_onboarded_at [Time, nil] A timestamp in RFC 3339 format
         #
         #   @param name [String, nil] Real-world name of the entity this profile represents (company or individual). F
         #

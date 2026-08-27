@@ -13,6 +13,7 @@ module Anthropic
           updated_at: Time,
           access_type: Anthropic::Models::Beta::BetaUserProfile::access_type,
           external_id: String?,
+          external_user_onboarded_at: Time?,
           name: String?,
           relationship: Anthropic::Models::Beta::BetaUserProfile::relationship
         }
@@ -38,6 +39,8 @@ module Anthropic
 
         attr_accessor external_id: String?
 
+        attr_accessor external_user_onboarded_at: Time?
+
         attr_accessor name: String?
 
         attr_reader relationship: Anthropic::Models::Beta::BetaUserProfile::relationship?
@@ -55,6 +58,7 @@ module Anthropic
           updated_at: Time,
           ?access_type: Anthropic::Models::Beta::BetaUserProfile::access_type,
           ?external_id: String?,
+          ?external_user_onboarded_at: Time?,
           ?name: String?,
           ?relationship: Anthropic::Models::Beta::BetaUserProfile::relationship
         ) -> void
@@ -68,6 +72,7 @@ module Anthropic
           updated_at: Time,
           access_type: Anthropic::Models::Beta::BetaUserProfile::access_type,
           external_id: String?,
+          external_user_onboarded_at: Time?,
           name: String?,
           relationship: Anthropic::Models::Beta::BetaUserProfile::relationship
         }

@@ -6,6 +6,7 @@ module Anthropic
           user_profile_id: String,
           access_type: Anthropic::Models::Beta::UserProfileUpdateParams::access_type?,
           external_id: String?,
+          external_user_onboarded_at: Time,
           metadata: ::Hash[Symbol, String],
           name: String?,
           relationship: Anthropic::Models::Beta::UserProfileUpdateParams::relationship?,
@@ -22,6 +23,10 @@ module Anthropic
         attr_accessor access_type: Anthropic::Models::Beta::UserProfileUpdateParams::access_type?
 
         attr_accessor external_id: String?
+
+        attr_reader external_user_onboarded_at: Time?
+
+        def external_user_onboarded_at=: (Time) -> Time
 
         attr_reader metadata: ::Hash[Symbol, String]?
 
@@ -41,6 +46,7 @@ module Anthropic
           user_profile_id: String,
           ?access_type: Anthropic::Models::Beta::UserProfileUpdateParams::access_type?,
           ?external_id: String?,
+          ?external_user_onboarded_at: Time,
           ?metadata: ::Hash[Symbol, String],
           ?name: String?,
           ?relationship: Anthropic::Models::Beta::UserProfileUpdateParams::relationship?,
@@ -52,6 +58,7 @@ module Anthropic
           user_profile_id: String,
           access_type: Anthropic::Models::Beta::UserProfileUpdateParams::access_type?,
           external_id: String?,
+          external_user_onboarded_at: Time,
           metadata: ::Hash[Symbol, String],
           name: String?,
           relationship: Anthropic::Models::Beta::UserProfileUpdateParams::relationship?,
