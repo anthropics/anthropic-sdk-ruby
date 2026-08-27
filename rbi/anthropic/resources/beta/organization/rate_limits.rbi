@@ -11,9 +11,8 @@ module Anthropic
           # API-surface category such as the Files API or Message Batches) and contains the
           # set of limiter values that apply to it.
           #
-          # This endpoint currently returns every matching entry in a single page regardless
-          # of `limit`; follow `next_page` so that clients keep working when pagination is
-          # enabled.
+          # When `limit` is omitted, every matching entry is returned in a single page; when
+          # `limit` truncates the result, follow `next_page` to fetch the remaining entries.
           sig do
             params(
               group_type:
@@ -35,8 +34,8 @@ module Anthropic
             group_type: nil,
             # Maximum number of items to return per page. Ranges from `1` to `1000`.
             #
-            # Accepted for request-shape compatibility and currently ignored: every entry is
-            # returned in a single page.
+            # When omitted, every remaining entry is returned in a single page and `next_page`
+            # is `null`.
             limit: nil,
             # Filter to the single entry containing this model. Accepts full model names and
             # aliases. Returns 404 if the model is not found or has no rate limits for this

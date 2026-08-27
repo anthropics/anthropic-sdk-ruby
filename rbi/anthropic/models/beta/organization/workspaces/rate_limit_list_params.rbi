@@ -33,8 +33,8 @@ module Anthropic
 
             # Maximum number of items to return per page. Ranges from `1` to `1000`.
             #
-            # Accepted for request-shape compatibility and currently ignored: every entry is
-            # returned in a single page.
+            # When omitted, every remaining entry is returned in a single page and `next_page`
+            # is `null`.
             sig { returns(T.nilable(Integer)) }
             attr_accessor :limit
 
@@ -61,8 +61,8 @@ module Anthropic
               group_type: nil,
               # Maximum number of items to return per page. Ranges from `1` to `1000`.
               #
-              # Accepted for request-shape compatibility and currently ignored: every entry is
-              # returned in a single page.
+              # When omitted, every remaining entry is returned in a single page and `next_page`
+              # is `null`.
               limit: nil,
               # Opaque cursor from a previous response's `next_page`.
               page: nil,
