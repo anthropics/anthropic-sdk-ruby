@@ -1,0 +1,45 @@
+module Anthropic
+  module Models
+    class BetaContainerSkill = Beta::BetaContainerSkill
+
+    module Beta
+      type beta_container_skill =
+        {
+          skill_id: String,
+          type: Anthropic::Models::Beta::BetaContainerSkill::type_,
+          version: String
+        }
+
+      class BetaContainerSkill < Anthropic::Internal::Type::BaseModel
+        attr_accessor skill_id: String
+
+        attr_accessor type: Anthropic::Models::Beta::BetaContainerSkill::type_
+
+        attr_accessor version: String
+
+        def initialize: (
+          skill_id: String,
+          type: Anthropic::Models::Beta::BetaContainerSkill::type_,
+          version: String
+        ) -> void
+
+        def to_hash: -> {
+          skill_id: String,
+          type: Anthropic::Models::Beta::BetaContainerSkill::type_,
+          version: String
+        }
+
+        type type_ = :anthropic | :custom
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          ANTHROPIC: :anthropic
+          CUSTOM: :custom
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaContainerSkill::type_]
+        end
+      end
+    end
+  end
+end

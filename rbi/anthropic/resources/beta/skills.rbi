@@ -11,10 +11,10 @@ module Anthropic
         sig do
           params(
             files: T::Array[Anthropic::Internal::FileInput],
-            display_title: T.nilable(String),
+            display_name: T.nilable(String),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
-          ).returns(Anthropic::Models::Beta::SkillCreateResponse)
+          ).returns(Anthropic::Beta::BetaSkill)
         end
         def create(
           # Body param: Files to upload for the skill.
@@ -22,11 +22,10 @@ module Anthropic
           # All files must be in the same top-level directory and must include a SKILL.md
           # file at the root of that directory.
           files:,
-          # Body param: Display title for the skill.
-          #
-          # This is a human-readable label that is not included in the prompt sent to the
-          # model.
-          display_title: nil,
+          # Body param: Human-readable, single-line label for the Skill. Maximum 255
+          # characters. Always set: derived from the SKILL.md frontmatter `name` when
+          # omitted at creation. Not unique.
+          display_name: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}
@@ -39,7 +38,7 @@ module Anthropic
             skill_id: String,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
-          ).returns(Anthropic::Models::Beta::SkillRetrieveResponse)
+          ).returns(Anthropic::Beta::BetaSkill)
         end
         def retrieve(
           # Unique identifier for the skill.
@@ -60,16 +59,12 @@ module Anthropic
             source: T.nilable(String),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
-          ).returns(
-            Anthropic::Internal::PageCursor[
-              Anthropic::Models::Beta::SkillListResponse
-            ]
-          )
+          ).returns(Anthropic::Internal::PageCursor[Anthropic::Beta::BetaSkill])
         end
         def list(
           # Query param: Number of results to return per page.
           #
-          # Maximum value is 100. Defaults to 20.
+          # Ranges from `1` to `1000`. Defaults to `20`.
           limit: nil,
           # Query param: Pagination token for fetching a specific page of results.
           #
@@ -95,7 +90,7 @@ module Anthropic
             skill_id: String,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
-          ).returns(Anthropic::Models::Beta::SkillDeleteResponse)
+          ).returns(Anthropic::Beta::BetaDeletedSkill)
         end
         def delete(
           # Unique identifier for the skill.

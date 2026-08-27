@@ -20,7 +20,9 @@ module Anthropic
         attr_accessor :expires_at
 
         # Skills loaded in the container
-        sig { returns(T.nilable(T::Array[Anthropic::Beta::BetaSkill])) }
+        sig do
+          returns(T.nilable(T::Array[Anthropic::Beta::BetaContainerSkill]))
+        end
         attr_accessor :skills
 
         # Information about the container used in the request (for the code execution
@@ -29,7 +31,8 @@ module Anthropic
           params(
             id: String,
             expires_at: Time,
-            skills: T.nilable(T::Array[Anthropic::Beta::BetaSkill::OrHash])
+            skills:
+              T.nilable(T::Array[Anthropic::Beta::BetaContainerSkill::OrHash])
           ).returns(T.attached_class)
         end
         def self.new(
@@ -47,7 +50,7 @@ module Anthropic
             {
               id: String,
               expires_at: Time,
-              skills: T.nilable(T::Array[Anthropic::Beta::BetaSkill])
+              skills: T.nilable(T::Array[Anthropic::Beta::BetaContainerSkill])
             }
           )
         end

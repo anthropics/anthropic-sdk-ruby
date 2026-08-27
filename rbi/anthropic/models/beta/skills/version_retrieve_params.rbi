@@ -22,9 +22,11 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :skill_id
 
-          # Version identifier for the skill.
+          # Identifies the skill version: a version ID, or the literal `latest` for the
+          # skill's most recent version.
           #
-          # Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+          # Requests carrying the `skills-2025-10-02` beta header address versions by their
+          # Unix epoch timestamp instead (e.g., "1759178010641129").
           sig { returns(String) }
           attr_accessor :version
 
@@ -59,9 +61,11 @@ module Anthropic
             #
             # The format and length of IDs may change over time.
             skill_id:,
-            # Version identifier for the skill.
+            # Identifies the skill version: a version ID, or the literal `latest` for the
+            # skill's most recent version.
             #
-            # Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+            # Requests carrying the `skills-2025-10-02` beta header address versions by their
+            # Unix epoch timestamp instead (e.g., "1759178010641129").
             version:,
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,

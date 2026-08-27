@@ -11,68 +11,108 @@ module Anthropic
             T.any(Anthropic::Beta::BetaSkill, Anthropic::Internal::AnyHash)
           end
 
-        # Skill ID
+        # Unique identifier for the skill.
+        #
+        # The format and length of IDs may change over time.
         sig { returns(String) }
-        attr_accessor :skill_id
+        attr_accessor :id
 
-        # Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-        sig { returns(Anthropic::Beta::BetaSkill::Type::TaggedSymbol) }
+        # ISO 8601 timestamp of when the skill was created.
+        sig { returns(Time) }
+        attr_accessor :created_at
+
+        # Human-readable, single-line label for the Skill. Maximum 255 characters. Always
+        # set: derived from the SKILL.md frontmatter `name` when omitted at creation. Not
+        # unique.
+        sig { returns(String) }
+        attr_accessor :display_name
+
+        # ID of the newest Skill Version — what `latest` references resolve to. Always
+        # set: a Skill holds at least one version.
+        sig { returns(String) }
+        attr_accessor :latest_version_id
+
+        # Where the Skill comes from.
+        #
+        # Possible values:
+        #
+        # - `"custom"`: authored by the platform user; private to their workspace
+        # - `"anthropic"`: published by Anthropic; shared and read-only
+        # - `"anthropic_example"`: Anthropic-published sample Skill
+        # - `"plugin"`: resolved from an installed plugin
+        sig { returns(Anthropic::Beta::BetaSkillSource) }
+        attr_reader :source
+
+        sig { params(source: Anthropic::Beta::BetaSkillSource::OrHash).void }
+        attr_writer :source
+
+        # Object type.
+        #
+        # For Skills, this is always `"skill"`.
+        sig { returns(Symbol) }
         attr_accessor :type
 
-        # The resolved version: a skill version ID for custom skills.
-        sig { returns(String) }
-        attr_accessor :version
+        # ISO 8601 timestamp of when the skill was last updated.
+        sig { returns(Time) }
+        attr_accessor :updated_at
 
-        # A skill that was loaded in a container (response model).
         sig do
           params(
-            skill_id: String,
-            type: Anthropic::Beta::BetaSkill::Type::OrSymbol,
-            version: String
+            id: String,
+            created_at: Time,
+            display_name: String,
+            latest_version_id: String,
+            source: Anthropic::Beta::BetaSkillSource::OrHash,
+            updated_at: Time,
+            type: Symbol
           ).returns(T.attached_class)
         end
         def self.new(
-          # Skill ID
-          skill_id:,
-          # Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-          type:,
-          # The resolved version: a skill version ID for custom skills.
-          version:
+          # Unique identifier for the skill.
+          #
+          # The format and length of IDs may change over time.
+          id:,
+          # ISO 8601 timestamp of when the skill was created.
+          created_at:,
+          # Human-readable, single-line label for the Skill. Maximum 255 characters. Always
+          # set: derived from the SKILL.md frontmatter `name` when omitted at creation. Not
+          # unique.
+          display_name:,
+          # ID of the newest Skill Version — what `latest` references resolve to. Always
+          # set: a Skill holds at least one version.
+          latest_version_id:,
+          # Where the Skill comes from.
+          #
+          # Possible values:
+          #
+          # - `"custom"`: authored by the platform user; private to their workspace
+          # - `"anthropic"`: published by Anthropic; shared and read-only
+          # - `"anthropic_example"`: Anthropic-published sample Skill
+          # - `"plugin"`: resolved from an installed plugin
+          source:,
+          # ISO 8601 timestamp of when the skill was last updated.
+          updated_at:,
+          # Object type.
+          #
+          # For Skills, this is always `"skill"`.
+          type: :skill
         )
         end
 
         sig do
           override.returns(
             {
-              skill_id: String,
-              type: Anthropic::Beta::BetaSkill::Type::TaggedSymbol,
-              version: String
+              id: String,
+              created_at: Time,
+              display_name: String,
+              latest_version_id: String,
+              source: Anthropic::Beta::BetaSkillSource,
+              type: Symbol,
+              updated_at: Time
             }
           )
         end
         def to_hash
-        end
-
-        # Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias { T.all(Symbol, Anthropic::Beta::BetaSkill::Type) }
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          ANTHROPIC =
-            T.let(:anthropic, Anthropic::Beta::BetaSkill::Type::TaggedSymbol)
-          CUSTOM =
-            T.let(:custom, Anthropic::Beta::BetaSkill::Type::TaggedSymbol)
-
-          sig do
-            override.returns(
-              T::Array[Anthropic::Beta::BetaSkill::Type::TaggedSymbol]
-            )
-          end
-          def self.values
-          end
         end
       end
     end

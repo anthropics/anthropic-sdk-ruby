@@ -7,18 +7,18 @@ class Anthropic::Test::Resources::Beta::SkillsTest < Anthropic::Test::ResourceTe
     response = @anthropic.beta.skills.create(files: [StringIO.new("Example data")])
 
     assert_pattern do
-      response => Anthropic::Models::Beta::SkillCreateResponse
+      response => Anthropic::Beta::BetaSkill
     end
 
     assert_pattern do
       response => {
         id: String,
-        created_at: String,
-        display_title: String | nil,
-        latest_version: String | nil,
-        source: String,
-        type: String,
-        updated_at: String
+        created_at: Time,
+        display_name: String,
+        latest_version_id: String,
+        source: Anthropic::Beta::BetaSkillSource,
+        type: Symbol,
+        updated_at: Time
       }
     end
   end
@@ -27,18 +27,18 @@ class Anthropic::Test::Resources::Beta::SkillsTest < Anthropic::Test::ResourceTe
     response = @anthropic.beta.skills.retrieve("skill_id")
 
     assert_pattern do
-      response => Anthropic::Models::Beta::SkillRetrieveResponse
+      response => Anthropic::Beta::BetaSkill
     end
 
     assert_pattern do
       response => {
         id: String,
-        created_at: String,
-        display_title: String | nil,
-        latest_version: String | nil,
-        source: String,
-        type: String,
-        updated_at: String
+        created_at: Time,
+        display_name: String,
+        latest_version_id: String,
+        source: Anthropic::Beta::BetaSkillSource,
+        type: Symbol,
+        updated_at: Time
       }
     end
   end
@@ -54,18 +54,18 @@ class Anthropic::Test::Resources::Beta::SkillsTest < Anthropic::Test::ResourceTe
     return if row.nil?
 
     assert_pattern do
-      row => Anthropic::Models::Beta::SkillListResponse
+      row => Anthropic::Beta::BetaSkill
     end
 
     assert_pattern do
       row => {
         id: String,
-        created_at: String,
-        display_title: String | nil,
-        latest_version: String | nil,
-        source: String,
-        type: String,
-        updated_at: String
+        created_at: Time,
+        display_name: String,
+        latest_version_id: String,
+        source: Anthropic::Beta::BetaSkillSource,
+        type: Symbol,
+        updated_at: Time
       }
     end
   end
@@ -74,13 +74,13 @@ class Anthropic::Test::Resources::Beta::SkillsTest < Anthropic::Test::ResourceTe
     response = @anthropic.beta.skills.delete("skill_id")
 
     assert_pattern do
-      response => Anthropic::Models::Beta::SkillDeleteResponse
+      response => Anthropic::Beta::BetaDeletedSkill
     end
 
     assert_pattern do
       response => {
         id: String,
-        type: String
+        type: Symbol
       }
     end
   end

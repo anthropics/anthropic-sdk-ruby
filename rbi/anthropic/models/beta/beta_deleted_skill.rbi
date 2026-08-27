@@ -2,12 +2,14 @@
 
 module Anthropic
   module Models
+    BetaDeletedSkill = Beta::BetaDeletedSkill
+
     module Beta
-      class SkillDeleteResponse < Anthropic::Internal::Type::BaseModel
+      class BetaDeletedSkill < Anthropic::Internal::Type::BaseModel
         OrHash =
           T.type_alias do
             T.any(
-              Anthropic::Models::Beta::SkillDeleteResponse,
+              Anthropic::Beta::BetaDeletedSkill,
               Anthropic::Internal::AnyHash
             )
           end
@@ -21,10 +23,10 @@ module Anthropic
         # Deleted object type.
         #
         # For Skills, this is always `"skill_deleted"`.
-        sig { returns(String) }
+        sig { returns(Symbol) }
         attr_accessor :type
 
-        sig { params(id: String, type: String).returns(T.attached_class) }
+        sig { params(id: String, type: Symbol).returns(T.attached_class) }
         def self.new(
           # Unique identifier for the skill.
           #
@@ -33,11 +35,11 @@ module Anthropic
           # Deleted object type.
           #
           # For Skills, this is always `"skill_deleted"`.
-          type:
+          type: :skill_deleted
         )
         end
 
-        sig { override.returns({ id: String, type: String }) }
+        sig { override.returns({ id: String, type: Symbol }) }
         def to_hash
         end
       end

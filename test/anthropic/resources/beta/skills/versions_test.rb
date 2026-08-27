@@ -7,19 +7,17 @@ class Anthropic::Test::Resources::Beta::Skills::VersionsTest < Anthropic::Test::
     response = @anthropic.beta.skills.versions.create("skill_id", files: [StringIO.new("Example data")])
 
     assert_pattern do
-      response => Anthropic::Models::Beta::Skills::VersionCreateResponse
+      response => Anthropic::Beta::Skills::BetaSkillVersion
     end
 
     assert_pattern do
       response => {
         id: String,
-        created_at: String,
+        created_at: Time,
         description: String,
-        directory: String,
         name: String,
         skill_id: String,
-        type: String,
-        version: String
+        type: Symbol
       }
     end
   end
@@ -28,19 +26,17 @@ class Anthropic::Test::Resources::Beta::Skills::VersionsTest < Anthropic::Test::
     response = @anthropic.beta.skills.versions.retrieve("version", skill_id: "skill_id")
 
     assert_pattern do
-      response => Anthropic::Models::Beta::Skills::VersionRetrieveResponse
+      response => Anthropic::Beta::Skills::BetaSkillVersion
     end
 
     assert_pattern do
       response => {
         id: String,
-        created_at: String,
+        created_at: Time,
         description: String,
-        directory: String,
         name: String,
         skill_id: String,
-        type: String,
-        version: String
+        type: Symbol
       }
     end
   end
@@ -56,19 +52,17 @@ class Anthropic::Test::Resources::Beta::Skills::VersionsTest < Anthropic::Test::
     return if row.nil?
 
     assert_pattern do
-      row => Anthropic::Models::Beta::Skills::VersionListResponse
+      row => Anthropic::Beta::Skills::BetaSkillVersion
     end
 
     assert_pattern do
       row => {
         id: String,
-        created_at: String,
+        created_at: Time,
         description: String,
-        directory: String,
         name: String,
         skill_id: String,
-        type: String,
-        version: String
+        type: Symbol
       }
     end
   end
@@ -77,13 +71,13 @@ class Anthropic::Test::Resources::Beta::Skills::VersionsTest < Anthropic::Test::
     response = @anthropic.beta.skills.versions.delete("version", skill_id: "skill_id")
 
     assert_pattern do
-      response => Anthropic::Models::Beta::Skills::VersionDeleteResponse
+      response => Anthropic::Beta::Skills::BetaDeletedSkillVersion
     end
 
     assert_pattern do
       response => {
         id: String,
-        type: String
+        type: Symbol
       }
     end
   end

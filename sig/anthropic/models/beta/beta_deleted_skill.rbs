@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    class BetaDeletedSkill = Beta::BetaDeletedSkill
+
+    module Beta
+      type beta_deleted_skill = { id: String, type: :skill_deleted }
+
+      class BetaDeletedSkill < Anthropic::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor type: :skill_deleted
+
+        def initialize: (id: String, ?type: :skill_deleted) -> void
+
+        def to_hash: -> { id: String, type: :skill_deleted }
+      end
+    end
+  end
+end
