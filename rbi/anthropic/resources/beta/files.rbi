@@ -7,27 +7,30 @@ module Anthropic
         # List Files
         sig do
           params(
-            after_id: String,
-            before_id: String,
+            ids: T.nilable(T::Array[String]),
             limit: Integer,
+            page: T.nilable(String),
             scope_id: String,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(
-            Anthropic::Internal::Page[Anthropic::Beta::BetaFileMetadata]
+            Anthropic::Internal::PageCursor[Anthropic::Beta::BetaFileMetadata]
           )
         end
         def list(
-          # Query param: ID of the object to use as a cursor for pagination. When provided,
-          # returns the page of results immediately after this object.
-          after_id: nil,
-          # Query param: ID of the object to use as a cursor for pagination. When provided,
-          # returns the page of results immediately before this object.
-          before_id: nil,
+          # Query param: Restrict the result set to Files whose `id` is in this list. At
+          # most 100 entries (after de-duplication). Mutually exclusive with `page` and
+          # `limit`. When supplied, the response is always a single page (`next_page` is
+          # null). IDs that do not resolve to a visible File — including deleted Files — are
+          # silently omitted.
+          ids: nil,
           # Query param: Number of items to return per page.
           #
           # Defaults to `20`. Ranges from `1` to `1000`.
           limit: nil,
+          # Query param: Opaque page cursor returned in a prior list response's `next_page`.
+          # Prefixed `page_`.
+          page: nil,
           # Query param: Filter by scope ID. Only returns files associated with the
           # specified scope (e.g., a session ID).
           scope_id: nil,
@@ -92,6 +95,7 @@ module Anthropic
         sig do
           params(
             file: Anthropic::Internal::FileInput,
+            expires_in_seconds: Integer,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaFileMetadata)
@@ -99,6 +103,10 @@ module Anthropic
         def upload(
           # Body param: The file to upload
           file:,
+          # Body param: Seconds from upload until the file expires and its bytes become
+          # permanently unavailable. Must be between 3600 (one hour) and 7776000 (ninety
+          # days).
+          expires_in_seconds: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}

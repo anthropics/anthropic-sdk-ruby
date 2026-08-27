@@ -6,16 +6,16 @@ module Anthropic
 
         def create: (
           files: ::Array[Anthropic::Internal::file_input],
-          ?display_title: String?,
+          ?display_name: String?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
-        ) -> Anthropic::Models::Beta::SkillCreateResponse
+        ) -> Anthropic::Beta::BetaSkill
 
         def retrieve: (
           String skill_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
-        ) -> Anthropic::Models::Beta::SkillRetrieveResponse
+        ) -> Anthropic::Beta::BetaSkill
 
         def list: (
           ?limit: Integer,
@@ -23,13 +23,13 @@ module Anthropic
           ?source: String?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
-        ) -> Anthropic::Internal::PageCursor[Anthropic::Models::Beta::SkillListResponse]
+        ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaSkill]
 
         def delete: (
           String skill_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
-        ) -> Anthropic::Models::Beta::SkillDeleteResponse
+        ) -> Anthropic::Beta::BetaDeletedSkill
 
         def initialize: (client: Anthropic::Client) -> void
       end

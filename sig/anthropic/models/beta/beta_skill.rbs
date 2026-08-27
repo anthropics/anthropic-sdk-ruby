@@ -5,40 +5,49 @@ module Anthropic
     module Beta
       type beta_skill =
         {
-          skill_id: String,
-          type: Anthropic::Models::Beta::BetaSkill::type_,
-          version: String
+          id: String,
+          created_at: Time,
+          display_name: String,
+          latest_version_id: String,
+          source: Anthropic::Beta::BetaSkillSource,
+          type: :skill,
+          updated_at: Time
         }
 
       class BetaSkill < Anthropic::Internal::Type::BaseModel
-        attr_accessor skill_id: String
+        attr_accessor id: String
 
-        attr_accessor type: Anthropic::Models::Beta::BetaSkill::type_
+        attr_accessor created_at: Time
 
-        attr_accessor version: String
+        attr_accessor display_name: String
+
+        attr_accessor latest_version_id: String
+
+        attr_accessor source: Anthropic::Beta::BetaSkillSource
+
+        attr_accessor type: :skill
+
+        attr_accessor updated_at: Time
 
         def initialize: (
-          skill_id: String,
-          type: Anthropic::Models::Beta::BetaSkill::type_,
-          version: String
+          id: String,
+          created_at: Time,
+          display_name: String,
+          latest_version_id: String,
+          source: Anthropic::Beta::BetaSkillSource,
+          updated_at: Time,
+          ?type: :skill
         ) -> void
 
         def to_hash: -> {
-          skill_id: String,
-          type: Anthropic::Models::Beta::BetaSkill::type_,
-          version: String
+          id: String,
+          created_at: Time,
+          display_name: String,
+          latest_version_id: String,
+          source: Anthropic::Beta::BetaSkillSource,
+          type: :skill,
+          updated_at: Time
         }
-
-        type type_ = :anthropic | :custom
-
-        module Type
-          extend Anthropic::Internal::Type::Enum
-
-          ANTHROPIC: :anthropic
-          CUSTOM: :custom
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaSkill::type_]
-        end
       end
     end
   end

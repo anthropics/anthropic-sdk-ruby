@@ -13,7 +13,7 @@ module Anthropic
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               request_options: Anthropic::RequestOptions::OrHash
-            ).returns(Anthropic::Models::Beta::Skills::VersionCreateResponse)
+            ).returns(Anthropic::Beta::Skills::BetaSkillVersion)
           end
           def create(
             # Path param: Unique identifier for the skill.
@@ -39,12 +39,14 @@ module Anthropic
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               request_options: Anthropic::RequestOptions::OrHash
-            ).returns(Anthropic::Models::Beta::Skills::VersionRetrieveResponse)
+            ).returns(Anthropic::Beta::Skills::BetaSkillVersion)
           end
           def retrieve(
-            # Path param: Version identifier for the skill.
+            # Path param: Identifies the skill version: a version ID, or the literal `latest`
+            # for the skill's most recent version.
             #
-            # Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+            # Requests carrying the `skills-2025-10-02` beta header address versions by their
+            # Unix epoch timestamp instead (e.g., "1759178010641129").
             version,
             # Path param: Unique identifier for the skill.
             #
@@ -67,7 +69,7 @@ module Anthropic
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(
               Anthropic::Internal::PageCursor[
-                Anthropic::Models::Beta::Skills::VersionListResponse
+                Anthropic::Beta::Skills::BetaSkillVersion
               ]
             )
           end
@@ -76,9 +78,9 @@ module Anthropic
             #
             # The format and length of IDs may change over time.
             skill_id,
-            # Query param: Number of items to return per page.
+            # Query param: Number of results to return per page.
             #
-            # Defaults to `20`. Ranges from `1` to `1000`.
+            # Ranges from `1` to `1000`. Defaults to `20`.
             limit: nil,
             # Query param: Optionally set to the `next_page` token from the previous response.
             page: nil,
@@ -96,12 +98,13 @@ module Anthropic
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               request_options: Anthropic::RequestOptions::OrHash
-            ).returns(Anthropic::Models::Beta::Skills::VersionDeleteResponse)
+            ).returns(Anthropic::Beta::Skills::BetaDeletedSkillVersion)
           end
           def delete(
-            # Path param: Version identifier for the skill.
+            # Path param: Identifies the skill version by its version ID.
             #
-            # Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+            # Requests carrying the `skills-2025-10-02` beta header address versions by their
+            # Unix epoch timestamp instead (e.g., "1759178010641129").
             version,
             # Path param: Unique identifier for the skill.
             #
@@ -124,9 +127,10 @@ module Anthropic
             ).returns(StringIO)
           end
           def download(
-            # Path param: Version identifier for the skill.
+            # Path param: Identifies the skill version by its version ID.
             #
-            # Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+            # Requests carrying the `skills-2025-10-02` beta header address versions by their
+            # Unix epoch timestamp instead (e.g., "1759178010641129").
             version,
             # Path param: Unique identifier for the skill.
             #

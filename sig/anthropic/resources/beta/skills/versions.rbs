@@ -8,14 +8,14 @@ module Anthropic
             files: ::Array[Anthropic::Internal::file_input],
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
-          ) -> Anthropic::Models::Beta::Skills::VersionCreateResponse
+          ) -> Anthropic::Beta::Skills::BetaSkillVersion
 
           def retrieve: (
             String version,
             skill_id: String,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
-          ) -> Anthropic::Models::Beta::Skills::VersionRetrieveResponse
+          ) -> Anthropic::Beta::Skills::BetaSkillVersion
 
           def list: (
             String skill_id,
@@ -23,14 +23,14 @@ module Anthropic
             ?page: String?,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
-          ) -> Anthropic::Internal::PageCursor[Anthropic::Models::Beta::Skills::VersionListResponse]
+          ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Skills::BetaSkillVersion]
 
           def delete: (
             String version,
             skill_id: String,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?request_options: Anthropic::request_opts
-          ) -> Anthropic::Models::Beta::Skills::VersionDeleteResponse
+          ) -> Anthropic::Beta::Skills::BetaDeletedSkillVersion
 
           def download: (
             String version,

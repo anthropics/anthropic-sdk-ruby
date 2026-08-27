@@ -17,7 +17,7 @@ module Anthropic
 
         # Number of results to return per page.
         #
-        # Maximum value is 100. Defaults to 20.
+        # Ranges from `1` to `1000`. Defaults to `20`.
         sig { returns(T.nilable(Integer)) }
         attr_reader :limit
 
@@ -69,7 +69,7 @@ module Anthropic
         def self.new(
           # Number of results to return per page.
           #
-          # Maximum value is 100. Defaults to 20.
+          # Ranges from `1` to `1000`. Defaults to `20`.
           limit: nil,
           # Pagination token for fetching a specific page of results.
           #

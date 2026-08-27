@@ -22,12 +22,11 @@ module Anthropic
         sig { returns(T::Array[Anthropic::Internal::FileInput]) }
         attr_accessor :files
 
-        # Display title for the skill.
-        #
-        # This is a human-readable label that is not included in the prompt sent to the
-        # model.
+        # Human-readable, single-line label for the Skill. Maximum 255 characters. Always
+        # set: derived from the SKILL.md frontmatter `name` when omitted at creation. Not
+        # unique.
         sig { returns(T.nilable(String)) }
-        attr_accessor :display_title
+        attr_accessor :display_name
 
         # Optional header to specify the beta version(s) you want to use.
         sig do
@@ -49,7 +48,7 @@ module Anthropic
         sig do
           params(
             files: T::Array[Anthropic::Internal::FileInput],
-            display_title: T.nilable(String),
+            display_name: T.nilable(String),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
@@ -60,11 +59,10 @@ module Anthropic
           # All files must be in the same top-level directory and must include a SKILL.md
           # file at the root of that directory.
           files:,
-          # Display title for the skill.
-          #
-          # This is a human-readable label that is not included in the prompt sent to the
-          # model.
-          display_title: nil,
+          # Human-readable, single-line label for the Skill. Maximum 255 characters. Always
+          # set: derived from the SKILL.md frontmatter `name` when omitted at creation. Not
+          # unique.
+          display_name: nil,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}
@@ -75,7 +73,7 @@ module Anthropic
           override.returns(
             {
               files: T::Array[Anthropic::Internal::FileInput],
-              display_title: T.nilable(String),
+              display_name: T.nilable(String),
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               request_options: Anthropic::RequestOptions

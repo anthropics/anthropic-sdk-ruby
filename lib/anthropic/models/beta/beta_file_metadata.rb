@@ -51,6 +51,14 @@ module Anthropic
         #   @return [Boolean, nil]
         optional :downloadable, Anthropic::Internal::Type::Boolean
 
+        # @!attribute expires_at
+        #   RFC 3339 datetime string representing when the file will expire and become
+        #   unavailable for download. Null if the file does not expire. For files uploaded
+        #   with `expires_in_seconds`, this is the upload time plus that value.
+        #
+        #   @return [Time, nil]
+        optional :expires_at, Time, nil?: true
+
         # @!attribute scope
         #   The scope of this file, indicating the context in which it was created (e.g., a
         #   session).
@@ -58,7 +66,7 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaFileScope, nil]
         optional :scope, -> { Anthropic::Beta::BetaFileScope }, nil?: true
 
-        # @!method initialize(id:, created_at:, filename:, mime_type:, size_bytes:, downloadable: nil, scope: nil, type: :file)
+        # @!method initialize(id:, created_at:, filename:, mime_type:, size_bytes:, downloadable: nil, expires_at: nil, scope: nil, type: :file)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaFileMetadata} for more details.
         #
@@ -73,6 +81,8 @@ module Anthropic
         #   @param size_bytes [Integer] Size of the file in bytes.
         #
         #   @param downloadable [Boolean] Whether the file can be downloaded.
+        #
+        #   @param expires_at [Time, nil] RFC 3339 datetime string representing when the file will expire and become unava
         #
         #   @param scope [Anthropic::Models::Beta::BetaFileScope, nil] The scope of this file, indicating the context in which it was created (e.g., a
         #

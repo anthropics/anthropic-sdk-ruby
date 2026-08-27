@@ -12,17 +12,17 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::SkillCreateParams} for more details.
         #
-        # @overload create(files:, display_title: nil, betas: nil, request_options: {})
+        # @overload create(files:, display_name: nil, betas: nil, request_options: {})
         #
         # @param files [Array<Pathname, StringIO, IO, String, Anthropic::FilePart>] Body param: Files to upload for the skill.
         #
-        # @param display_title [String, nil] Body param: Display title for the skill.
+        # @param display_name [String, nil] Body param: Human-readable, single-line label for the Skill. Maximum 255 charact
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Models::Beta::SkillCreateResponse]
+        # @return [Anthropic::Models::Beta::BetaSkill]
         #
         # @see Anthropic::Models::Beta::SkillCreateParams
         def create(params)
@@ -38,8 +38,8 @@ module Anthropic
               header_params
             ),
             body: parsed.except(*header_params.keys),
-            model: Anthropic::Models::Beta::SkillCreateResponse,
-            options: {extra_headers: {"anthropic-beta" => "skills-2025-10-02"}, **options}
+            model: Anthropic::Beta::BetaSkill,
+            options: options
           )
         end
 
@@ -56,7 +56,7 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Models::Beta::SkillRetrieveResponse]
+        # @return [Anthropic::Models::Beta::BetaSkill]
         #
         # @see Anthropic::Models::Beta::SkillRetrieveParams
         def retrieve(skill_id, params = {})
@@ -65,8 +65,8 @@ module Anthropic
             method: :get,
             path: ["v1/skills/%1$s?beta=true", skill_id],
             headers: parsed.transform_keys(betas: "anthropic-beta"),
-            model: Anthropic::Models::Beta::SkillRetrieveResponse,
-            options: {extra_headers: {"anthropic-beta" => "skills-2025-10-02"}, **options}
+            model: Anthropic::Beta::BetaSkill,
+            options: options
           )
         end
 
@@ -87,7 +87,7 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Beta::SkillListResponse>]
+        # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Beta::BetaSkill>]
         #
         # @see Anthropic::Models::Beta::SkillListParams
         def list(params = {})
@@ -100,8 +100,8 @@ module Anthropic
             query: query,
             headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
             page: Anthropic::Internal::PageCursor,
-            model: Anthropic::Models::Beta::SkillListResponse,
-            options: {extra_headers: {"anthropic-beta" => "skills-2025-10-02"}, **options}
+            model: Anthropic::Beta::BetaSkill,
+            options: options
           )
         end
 
@@ -118,7 +118,7 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Models::Beta::SkillDeleteResponse]
+        # @return [Anthropic::Models::Beta::BetaDeletedSkill]
         #
         # @see Anthropic::Models::Beta::SkillDeleteParams
         def delete(skill_id, params = {})
@@ -127,8 +127,8 @@ module Anthropic
             method: :delete,
             path: ["v1/skills/%1$s?beta=true", skill_id],
             headers: parsed.transform_keys(betas: "anthropic-beta"),
-            model: Anthropic::Models::Beta::SkillDeleteResponse,
-            options: {extra_headers: {"anthropic-beta" => "skills-2025-10-02"}, **options}
+            model: Anthropic::Beta::BetaDeletedSkill,
+            options: options
           )
         end
 

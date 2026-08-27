@@ -9,13 +9,13 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::FileListParams} for more details.
         #
-        # @overload list(after_id: nil, before_id: nil, limit: nil, scope_id: nil, betas: nil, request_options: {})
+        # @overload list(ids: nil, limit: nil, page: nil, scope_id: nil, betas: nil, request_options: {})
         #
-        # @param after_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
-        #
-        # @param before_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
+        # @param ids [Array<String>, nil] Query param: Restrict the result set to Files whose `id` is in this list. At mos
         #
         # @param limit [Integer] Query param: Number of items to return per page.
+        #
+        # @param page [String, nil] Query param: Opaque page cursor returned in a prior list response's `next_page`.
         #
         # @param scope_id [String] Query param: Filter by scope ID. Only returns files associated with the specifie
         #
@@ -23,11 +23,11 @@ module Anthropic
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
-        # @return [Anthropic::Internal::Page<Anthropic::Models::Beta::BetaFileMetadata>]
+        # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Beta::BetaFileMetadata>]
         #
         # @see Anthropic::Models::Beta::FileListParams
         def list(params = {})
-          query_params = [:after_id, :before_id, :limit, :scope_id]
+          query_params = [:ids, :limit, :page, :scope_id]
           parsed, options = Anthropic::Beta::FileListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
@@ -35,9 +35,9 @@ module Anthropic
             path: "v1/files?beta=true",
             query: query,
             headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
-            page: Anthropic::Internal::Page,
+            page: Anthropic::Internal::PageCursor,
             model: Anthropic::Beta::BetaFileMetadata,
-            options: {extra_headers: {"anthropic-beta" => "files-api-2025-04-14"}, **options}
+            options: options
           )
         end
 
@@ -61,7 +61,7 @@ module Anthropic
             path: ["v1/files/%1$s?beta=true", file_id],
             headers: parsed.transform_keys(betas: "anthropic-beta"),
             model: Anthropic::Beta::BetaDeletedFile,
-            options: {extra_headers: {"anthropic-beta" => "files-api-2025-04-14"}, **options}
+            options: options
           )
         end
 
@@ -85,7 +85,7 @@ module Anthropic
             path: ["v1/files/%1$s/content?beta=true", file_id],
             headers: {"accept" => "application/binary", **parsed}.transform_keys(betas: "anthropic-beta"),
             model: StringIO,
-            options: {extra_headers: {"anthropic-beta" => "files-api-2025-04-14"}, **options}
+            options: options
           )
         end
 
@@ -109,15 +109,20 @@ module Anthropic
             path: ["v1/files/%1$s?beta=true", file_id],
             headers: parsed.transform_keys(betas: "anthropic-beta"),
             model: Anthropic::Beta::BetaFileMetadata,
-            options: {extra_headers: {"anthropic-beta" => "files-api-2025-04-14"}, **options}
+            options: options
           )
         end
 
         # Upload File
         #
-        # @overload upload(file:, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::FileUploadParams} for more details.
+        #
+        # @overload upload(file:, expires_in_seconds: nil, betas: nil, request_options: {})
         #
         # @param file [Pathname, StringIO, IO, String, Anthropic::FilePart] Body param: The file to upload
+        #
+        # @param expires_in_seconds [Integer] Body param: Seconds from upload until the file expires and its bytes become perm
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
@@ -140,7 +145,7 @@ module Anthropic
             ),
             body: parsed.except(*header_params.keys),
             model: Anthropic::Beta::BetaFileMetadata,
-            options: {extra_headers: {"anthropic-beta" => "files-api-2025-04-14"}, **options}
+            options: options
           )
         end
 

@@ -19,8 +19,10 @@ module Anthropic
         # @!attribute skills
         #   Skills loaded in the container
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaSkill>, nil]
-        required :skills, -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaSkill] }, nil?: true
+        #   @return [Array<Anthropic::Models::Beta::BetaContainerSkill>, nil]
+        required :skills,
+                 -> { Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaContainerSkill] },
+                 nil?: true
 
         # @!method initialize(id:, expires_at:, skills:)
         #   Information about the container used in the request (for the code execution
@@ -30,7 +32,7 @@ module Anthropic
         #
         #   @param expires_at [Time] The time at which the container will expire.
         #
-        #   @param skills [Array<Anthropic::Models::Beta::BetaSkill>, nil] Skills loaded in the container
+        #   @param skills [Array<Anthropic::Models::Beta::BetaContainerSkill>, nil] Skills loaded in the container
       end
     end
 

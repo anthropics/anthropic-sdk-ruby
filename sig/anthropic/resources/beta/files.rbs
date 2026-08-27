@@ -3,13 +3,13 @@ module Anthropic
     class Beta
       class Files
         def list: (
-          ?after_id: String,
-          ?before_id: String,
+          ?ids: ::Array[String]?,
           ?limit: Integer,
+          ?page: String?,
           ?scope_id: String,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
-        ) -> Anthropic::Internal::Page[Anthropic::Beta::BetaFileMetadata]
+        ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaFileMetadata]
 
         def delete: (
           String file_id,
@@ -31,6 +31,7 @@ module Anthropic
 
         def upload: (
           file: Anthropic::Internal::file_input,
+          ?expires_in_seconds: Integer,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaFileMetadata

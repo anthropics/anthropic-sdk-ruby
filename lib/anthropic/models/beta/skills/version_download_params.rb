@@ -18,9 +18,10 @@ module Anthropic
           required :skill_id, String
 
           # @!attribute version
-          #   Version identifier for the skill.
+          #   Identifies the skill version by its version ID.
           #
-          #   Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
+          #   Requests carrying the `skills-2025-10-02` beta header address versions by their
+          #   Unix epoch timestamp instead (e.g., "1759178010641129").
           #
           #   @return [String]
           required :version, String
@@ -37,7 +38,7 @@ module Anthropic
           #
           #   @param skill_id [String] Unique identifier for the skill.
           #
-          #   @param version [String] Version identifier for the skill.
+          #   @param version [String] Identifies the skill version by its version ID.
           #
           #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #

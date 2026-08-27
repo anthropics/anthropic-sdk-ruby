@@ -18,9 +18,9 @@ module Anthropic
           required :skill_id, String
 
           # @!attribute limit
-          #   Number of items to return per page.
+          #   Number of results to return per page.
           #
-          #   Defaults to `20`. Ranges from `1` to `1000`.
+          #   Ranges from `1` to `1000`. Defaults to `20`.
           #
           #   @return [Integer, nil]
           optional :limit, Integer, nil?: true
@@ -43,7 +43,7 @@ module Anthropic
           #
           #   @param skill_id [String] Unique identifier for the skill.
           #
-          #   @param limit [Integer, nil] Number of items to return per page.
+          #   @param limit [Integer, nil] Number of results to return per page.
           #
           #   @param page [String, nil] Optionally set to the `next_page` token from the previous response.
           #
