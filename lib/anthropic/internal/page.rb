@@ -30,7 +30,9 @@ module Anthropic
 
       # @return [Boolean]
       def next_page?
-        has_more
+        return false if has_more == false
+
+        !data.to_a.empty? && (@req.dig(:query, :before_id) ? !first_id.to_s.empty? : !last_id.to_s.empty?)
       end
 
       # @raise [Anthropic::HTTP::Error]
@@ -41,10 +43,8 @@ module Anthropic
           raise RuntimeError.new(message)
         end
 
-        req = Anthropic::Internal::Util.deep_merge(
-          @req,
-          {query: first_id.nil? ? {after_id: last_id} : {before_id: first_id}}
-        )
+        query = @req.dig(:query, :before_id) ? {before_id: first_id} : {after_id: last_id}
+        req = Anthropic::Internal::Util.deep_merge(@req, {query: query})
         @client.request(req)
       end
 
