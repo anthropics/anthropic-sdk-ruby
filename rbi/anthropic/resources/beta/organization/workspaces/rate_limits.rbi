@@ -12,9 +12,8 @@ module Anthropic
             # Groups without overrides inherit the organization limits and are not listed; use
             # `GET /v1/organizations/rate_limits` to see those.
             #
-            # This endpoint currently returns every matching entry in a single page regardless
-            # of `limit`; follow `next_page` so that clients keep working when pagination is
-            # enabled.
+            # When `limit` is omitted, every matching entry is returned in a single page; when
+            # `limit` truncates the result, follow `next_page` to fetch the remaining entries.
             sig do
               params(
                 workspace_id: String,
@@ -38,8 +37,8 @@ module Anthropic
               group_type: nil,
               # Maximum number of items to return per page. Ranges from `1` to `1000`.
               #
-              # Accepted for request-shape compatibility and currently ignored: every entry is
-              # returned in a single page.
+              # When omitted, every remaining entry is returned in a single page and `next_page`
+              # is `null`.
               limit: nil,
               # Opaque cursor from a previous response's `next_page`.
               page: nil,
