@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.67.0 (2026-08-27)
+
+Full Changelog: [v1.66.0...v1.67.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.66.0...v1.67.0)
+
+### Features
+
+* **api:** beta files/skills namespaces use GA shapes; drop dated beta header pins ([8c60f7a](https://github.com/anthropics/anthropic-sdk-ruby/commit/8c60f7ab13ee7a1c6fc1423a7a2b63d469048589))
+
+
+### Bug Fixes
+
+* **client:** follow the request direction and honor has_more when paginating ([8e5690f](https://github.com/anthropics/anthropic-sdk-ruby/commit/8e5690f643a523b4f2821105fd58cb176e5b2031))
+* **webhooks:** require headers to be passed to `unwrap()` ([8b88482](https://github.com/anthropics/anthropic-sdk-ruby/commit/8b8848270ef0f6231a23a06c6df68d3c2014dc49))
+
+
+### Documentation
+
+* **api:** clarify pagination on the organization rate-limit list endpoints ([fd6a5ad](https://github.com/anthropics/anthropic-sdk-ruby/commit/fd6a5adaa8867bf902e043fb47d8babd313a1a61))
+
 ## 1.66.0 (2026-08-26)
 
 Full Changelog: [v1.65.0...v1.66.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.65.0...v1.66.0)
