@@ -17,14 +17,13 @@ module Anthropic
         #   @return [Array<Pathname, StringIO, IO, String, Anthropic::FilePart>]
         required :files, Anthropic::Internal::Type::ArrayOf[Anthropic::Internal::Type::FileInput]
 
-        # @!attribute display_title
-        #   Display title for the skill.
-        #
-        #   This is a human-readable label that is not included in the prompt sent to the
-        #   model.
+        # @!attribute display_name
+        #   Human-readable, single-line label for the Skill. Maximum 255 characters. Always
+        #   set: derived from the SKILL.md frontmatter `name` when omitted at creation. Not
+        #   unique.
         #
         #   @return [String, nil]
-        optional :display_title, String, nil?: true
+        optional :display_name, String, nil?: true
 
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
@@ -32,13 +31,13 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(files:, display_title: nil, betas: nil, request_options: {})
+        # @!method initialize(files:, display_name: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::SkillCreateParams} for more details.
         #
         #   @param files [Array<Pathname, StringIO, IO, String, Anthropic::FilePart>] Files to upload for the skill.
         #
-        #   @param display_title [String, nil] Display title for the skill.
+        #   @param display_name [String, nil] Human-readable, single-line label for the Skill. Maximum 255 characters.
         #
         #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #

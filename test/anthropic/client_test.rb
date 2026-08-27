@@ -220,17 +220,17 @@ class AnthropicTest < Minitest::Test
   end
 
   def test_beta_header_merges_endpoint_default_with_betas_param
-    stub_request(:get, "http://localhost/v1/files?beta=true")
-      .to_return_json(status: 200, body: {data: [], has_more: false})
+    stub_request(:get, "http://localhost/v1/vaults?beta=true")
+      .to_return_json(status: 200, body: {data: [], next_page: nil})
 
     anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key")
 
-    anthropic.beta.files.list(betas: ["managed-agents-2026-04-01"])
+    anthropic.beta.vaults.list(betas: ["agent-memory-2026-07-22"])
 
-    assert_requested(:get, "http://localhost/v1/files?beta=true") do |req|
+    assert_requested(:get, "http://localhost/v1/vaults?beta=true") do |req|
       sent = req.headers["Anthropic-Beta"].split(",").map(&:strip)
-      assert_includes(sent, "files-api-2025-04-14")
       assert_includes(sent, "managed-agents-2026-04-01")
+      assert_includes(sent, "agent-memory-2026-07-22")
     end
   end
 

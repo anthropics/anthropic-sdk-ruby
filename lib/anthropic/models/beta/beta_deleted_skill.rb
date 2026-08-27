@@ -4,7 +4,7 @@ module Anthropic
   module Models
     module Beta
       # @see Anthropic::Resources::Beta::Skills#delete
-      class SkillDeleteResponse < Anthropic::Internal::Type::BaseModel
+      class BetaDeletedSkill < Anthropic::Internal::Type::BaseModel
         # @!attribute id
         #   Unique identifier for the skill.
         #
@@ -18,17 +18,19 @@ module Anthropic
         #
         #   For Skills, this is always `"skill_deleted"`.
         #
-        #   @return [String]
-        required :type, String
+        #   @return [Symbol, :skill_deleted]
+        required :type, const: :skill_deleted
 
-        # @!method initialize(id:, type:)
+        # @!method initialize(id:, type: :skill_deleted)
         #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::SkillDeleteResponse} for more details.
+        #   {Anthropic::Models::Beta::BetaDeletedSkill} for more details.
         #
         #   @param id [String] Unique identifier for the skill.
         #
-        #   @param type [String] Deleted object type.
+        #   @param type [Symbol, :skill_deleted] Deleted object type.
       end
     end
+
+    BetaDeletedSkill = Beta::BetaDeletedSkill
   end
 end

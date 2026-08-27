@@ -7,7 +7,7 @@ class Anthropic::Test::Resources::Beta::FilesTest < Anthropic::Test::ResourceTes
     response = @anthropic.beta.files.list
 
     assert_pattern do
-      response => Anthropic::Internal::Page
+      response => Anthropic::Internal::PageCursor
     end
 
     row = response.to_enum.first
@@ -26,6 +26,7 @@ class Anthropic::Test::Resources::Beta::FilesTest < Anthropic::Test::ResourceTes
         size_bytes: Integer,
         type: Symbol,
         downloadable: Anthropic::Internal::Type::Boolean | nil,
+        expires_at: Time | nil,
         scope: Anthropic::Beta::BetaFileScope | nil
       }
     end
@@ -70,6 +71,7 @@ class Anthropic::Test::Resources::Beta::FilesTest < Anthropic::Test::ResourceTes
         size_bytes: Integer,
         type: Symbol,
         downloadable: Anthropic::Internal::Type::Boolean | nil,
+        expires_at: Time | nil,
         scope: Anthropic::Beta::BetaFileScope | nil
       }
     end
@@ -91,6 +93,7 @@ class Anthropic::Test::Resources::Beta::FilesTest < Anthropic::Test::ResourceTes
         size_bytes: Integer,
         type: Symbol,
         downloadable: Anthropic::Internal::Type::Boolean | nil,
+        expires_at: Time | nil,
         scope: Anthropic::Beta::BetaFileScope | nil
       }
     end

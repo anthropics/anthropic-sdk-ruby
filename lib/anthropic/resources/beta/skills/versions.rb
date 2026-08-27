@@ -20,7 +20,7 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Anthropic::Models::Beta::Skills::VersionCreateResponse]
+          # @return [Anthropic::Models::Beta::Skills::BetaSkillVersion]
           #
           # @see Anthropic::Models::Beta::Skills::VersionCreateParams
           def create(skill_id, params)
@@ -36,8 +36,8 @@ module Anthropic
                 header_params
               ),
               body: parsed.except(*header_params.keys),
-              model: Anthropic::Models::Beta::Skills::VersionCreateResponse,
-              options: {extra_headers: {"anthropic-beta" => "skills-2025-10-02"}, **options}
+              model: Anthropic::Beta::Skills::BetaSkillVersion,
+              options: options
             )
           end
 
@@ -48,7 +48,7 @@ module Anthropic
           #
           # @overload retrieve(version, skill_id:, betas: nil, request_options: {})
           #
-          # @param version [String] Path param: Version identifier for the skill.
+          # @param version [String] Path param: Identifies the skill version: a version ID, or the literal `latest`
           #
           # @param skill_id [String] Path param: Unique identifier for the skill.
           #
@@ -56,7 +56,7 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Anthropic::Models::Beta::Skills::VersionRetrieveResponse]
+          # @return [Anthropic::Models::Beta::Skills::BetaSkillVersion]
           #
           # @see Anthropic::Models::Beta::Skills::VersionRetrieveParams
           def retrieve(version, params)
@@ -69,8 +69,8 @@ module Anthropic
               method: :get,
               path: ["v1/skills/%1$s/versions/%2$s?beta=true", skill_id, version],
               headers: parsed.transform_keys(betas: "anthropic-beta"),
-              model: Anthropic::Models::Beta::Skills::VersionRetrieveResponse,
-              options: {extra_headers: {"anthropic-beta" => "skills-2025-10-02"}, **options}
+              model: Anthropic::Beta::Skills::BetaSkillVersion,
+              options: options
             )
           end
 
@@ -83,7 +83,7 @@ module Anthropic
           #
           # @param skill_id [String] Path param: Unique identifier for the skill.
           #
-          # @param limit [Integer, nil] Query param: Number of items to return per page.
+          # @param limit [Integer, nil] Query param: Number of results to return per page.
           #
           # @param page [String, nil] Query param: Optionally set to the `next_page` token from the previous response.
           #
@@ -91,7 +91,7 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Beta::Skills::VersionListResponse>]
+          # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Beta::Skills::BetaSkillVersion>]
           #
           # @see Anthropic::Models::Beta::Skills::VersionListParams
           def list(skill_id, params = {})
@@ -104,8 +104,8 @@ module Anthropic
               query: query,
               headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
               page: Anthropic::Internal::PageCursor,
-              model: Anthropic::Models::Beta::Skills::VersionListResponse,
-              options: {extra_headers: {"anthropic-beta" => "skills-2025-10-02"}, **options}
+              model: Anthropic::Beta::Skills::BetaSkillVersion,
+              options: options
             )
           end
 
@@ -116,7 +116,7 @@ module Anthropic
           #
           # @overload delete(version, skill_id:, betas: nil, request_options: {})
           #
-          # @param version [String] Path param: Version identifier for the skill.
+          # @param version [String] Path param: Identifies the skill version by its version ID.
           #
           # @param skill_id [String] Path param: Unique identifier for the skill.
           #
@@ -124,7 +124,7 @@ module Anthropic
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
-          # @return [Anthropic::Models::Beta::Skills::VersionDeleteResponse]
+          # @return [Anthropic::Models::Beta::Skills::BetaDeletedSkillVersion]
           #
           # @see Anthropic::Models::Beta::Skills::VersionDeleteParams
           def delete(version, params)
@@ -137,8 +137,8 @@ module Anthropic
               method: :delete,
               path: ["v1/skills/%1$s/versions/%2$s?beta=true", skill_id, version],
               headers: parsed.transform_keys(betas: "anthropic-beta"),
-              model: Anthropic::Models::Beta::Skills::VersionDeleteResponse,
-              options: {extra_headers: {"anthropic-beta" => "skills-2025-10-02"}, **options}
+              model: Anthropic::Beta::Skills::BetaDeletedSkillVersion,
+              options: options
             )
           end
 
@@ -149,7 +149,7 @@ module Anthropic
           #
           # @overload download(version, skill_id:, betas: nil, request_options: {})
           #
-          # @param version [String] Path param: Version identifier for the skill.
+          # @param version [String] Path param: Identifies the skill version by its version ID.
           #
           # @param skill_id [String] Path param: Unique identifier for the skill.
           #
@@ -171,7 +171,7 @@ module Anthropic
               path: ["v1/skills/%1$s/versions/%2$s/content?beta=true", skill_id, version],
               headers: {"accept" => "application/binary", **parsed}.transform_keys(betas: "anthropic-beta"),
               model: StringIO,
-              options: {extra_headers: {"anthropic-beta" => "skills-2025-10-02"}, **options}
+              options: options
             )
           end
 

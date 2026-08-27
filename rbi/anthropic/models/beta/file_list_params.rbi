@@ -12,21 +12,13 @@ module Anthropic
             T.any(Anthropic::Beta::FileListParams, Anthropic::Internal::AnyHash)
           end
 
-        # ID of the object to use as a cursor for pagination. When provided, returns the
-        # page of results immediately after this object.
-        sig { returns(T.nilable(String)) }
-        attr_reader :after_id
-
-        sig { params(after_id: String).void }
-        attr_writer :after_id
-
-        # ID of the object to use as a cursor for pagination. When provided, returns the
-        # page of results immediately before this object.
-        sig { returns(T.nilable(String)) }
-        attr_reader :before_id
-
-        sig { params(before_id: String).void }
-        attr_writer :before_id
+        # Restrict the result set to Files whose `id` is in this list. At most 100 entries
+        # (after de-duplication). Mutually exclusive with `page` and `limit`. When
+        # supplied, the response is always a single page (`next_page` is null). IDs that
+        # do not resolve to a visible File — including deleted Files — are silently
+        # omitted.
+        sig { returns(T.nilable(T::Array[String])) }
+        attr_accessor :ids
 
         # Number of items to return per page.
         #
@@ -36,6 +28,11 @@ module Anthropic
 
         sig { params(limit: Integer).void }
         attr_writer :limit
+
+        # Opaque page cursor returned in a prior list response's `next_page`. Prefixed
+        # `page_`.
+        sig { returns(T.nilable(String)) }
+        attr_accessor :page
 
         # Filter by scope ID. Only returns files associated with the specified scope
         # (e.g., a session ID).
@@ -64,25 +61,28 @@ module Anthropic
 
         sig do
           params(
-            after_id: String,
-            before_id: String,
+            ids: T.nilable(T::Array[String]),
             limit: Integer,
+            page: T.nilable(String),
             scope_id: String,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
-          # ID of the object to use as a cursor for pagination. When provided, returns the
-          # page of results immediately after this object.
-          after_id: nil,
-          # ID of the object to use as a cursor for pagination. When provided, returns the
-          # page of results immediately before this object.
-          before_id: nil,
+          # Restrict the result set to Files whose `id` is in this list. At most 100 entries
+          # (after de-duplication). Mutually exclusive with `page` and `limit`. When
+          # supplied, the response is always a single page (`next_page` is null). IDs that
+          # do not resolve to a visible File — including deleted Files — are silently
+          # omitted.
+          ids: nil,
           # Number of items to return per page.
           #
           # Defaults to `20`. Ranges from `1` to `1000`.
           limit: nil,
+          # Opaque page cursor returned in a prior list response's `next_page`. Prefixed
+          # `page_`.
+          page: nil,
           # Filter by scope ID. Only returns files associated with the specified scope
           # (e.g., a session ID).
           scope_id: nil,
@@ -95,9 +95,9 @@ module Anthropic
         sig do
           override.returns(
             {
-              after_id: String,
-              before_id: String,
+              ids: T.nilable(T::Array[String]),
               limit: Integer,
+              page: T.nilable(String),
               scope_id: String,
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],

@@ -1,0 +1,35 @@
+module Anthropic
+  module Models
+    class BetaSkillSource = Beta::BetaSkillSource
+
+    module Beta
+      type beta_skill_source =
+        { type: Anthropic::Models::Beta::BetaSkillSource::type_ }
+
+      class BetaSkillSource < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: Anthropic::Models::Beta::BetaSkillSource::type_
+
+        def initialize: (
+          type: Anthropic::Models::Beta::BetaSkillSource::type_
+        ) -> void
+
+        def to_hash: -> {
+          type: Anthropic::Models::Beta::BetaSkillSource::type_
+        }
+
+        type type_ = :custom | :anthropic | :anthropic_example | :plugin
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          CUSTOM: :custom
+          ANTHROPIC: :anthropic
+          ANTHROPIC_EXAMPLE: :anthropic_example
+          PLUGIN: :plugin
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaSkillSource::type_]
+        end
+      end
+    end
+  end
+end

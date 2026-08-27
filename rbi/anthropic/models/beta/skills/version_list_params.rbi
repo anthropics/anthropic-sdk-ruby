@@ -22,9 +22,9 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :skill_id
 
-          # Number of items to return per page.
+          # Number of results to return per page.
           #
-          # Defaults to `20`. Ranges from `1` to `1000`.
+          # Ranges from `1` to `1000`. Defaults to `20`.
           sig { returns(T.nilable(Integer)) }
           attr_accessor :limit
 
@@ -64,9 +64,9 @@ module Anthropic
             #
             # The format and length of IDs may change over time.
             skill_id:,
-            # Number of items to return per page.
+            # Number of results to return per page.
             #
-            # Defaults to `20`. Ranges from `1` to `1000`.
+            # Ranges from `1` to `1000`. Defaults to `20`.
             limit: nil,
             # Optionally set to the `next_page` token from the previous response.
             page: nil,

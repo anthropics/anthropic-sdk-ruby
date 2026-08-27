@@ -8,19 +8,15 @@ module Anthropic
         extend Anthropic::Internal::Type::RequestParameters::Converter
         include Anthropic::Internal::Type::RequestParameters
 
-        # @!attribute after_id
-        #   ID of the object to use as a cursor for pagination. When provided, returns the
-        #   page of results immediately after this object.
+        # @!attribute ids
+        #   Restrict the result set to Files whose `id` is in this list. At most 100 entries
+        #   (after de-duplication). Mutually exclusive with `page` and `limit`. When
+        #   supplied, the response is always a single page (`next_page` is null). IDs that
+        #   do not resolve to a visible File — including deleted Files — are silently
+        #   omitted.
         #
-        #   @return [String, nil]
-        optional :after_id, String
-
-        # @!attribute before_id
-        #   ID of the object to use as a cursor for pagination. When provided, returns the
-        #   page of results immediately before this object.
-        #
-        #   @return [String, nil]
-        optional :before_id, String
+        #   @return [Array<String>, nil]
+        optional :ids, Anthropic::Internal::Type::ArrayOf[String], nil?: true
 
         # @!attribute limit
         #   Number of items to return per page.
@@ -29,6 +25,13 @@ module Anthropic
         #
         #   @return [Integer, nil]
         optional :limit, Integer
+
+        # @!attribute page
+        #   Opaque page cursor returned in a prior list response's `next_page`. Prefixed
+        #   `page_`.
+        #
+        #   @return [String, nil]
+        optional :page, String, nil?: true
 
         # @!attribute scope_id
         #   Filter by scope ID. Only returns files associated with the specified scope
@@ -43,15 +46,15 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(after_id: nil, before_id: nil, limit: nil, scope_id: nil, betas: nil, request_options: {})
+        # @!method initialize(ids: nil, limit: nil, page: nil, scope_id: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::FileListParams} for more details.
         #
-        #   @param after_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
-        #
-        #   @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
+        #   @param ids [Array<String>, nil] Restrict the result set to Files whose `id` is in this list. At most 100 entries
         #
         #   @param limit [Integer] Number of items to return per page.
+        #
+        #   @param page [String, nil] Opaque page cursor returned in a prior list response's `next_page`. Prefixed `pa
         #
         #   @param scope_id [String] Filter by scope ID. Only returns files associated with the specified scope (e.g.
         #

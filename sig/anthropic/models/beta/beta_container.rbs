@@ -7,7 +7,7 @@ module Anthropic
         {
           id: String,
           expires_at: Time,
-          skills: ::Array[Anthropic::Beta::BetaSkill]?
+          skills: ::Array[Anthropic::Beta::BetaContainerSkill]?
         }
 
       class BetaContainer < Anthropic::Internal::Type::BaseModel
@@ -15,18 +15,18 @@ module Anthropic
 
         attr_accessor expires_at: Time
 
-        attr_accessor skills: ::Array[Anthropic::Beta::BetaSkill]?
+        attr_accessor skills: ::Array[Anthropic::Beta::BetaContainerSkill]?
 
         def initialize: (
           id: String,
           expires_at: Time,
-          skills: ::Array[Anthropic::Beta::BetaSkill]?
+          skills: ::Array[Anthropic::Beta::BetaContainerSkill]?
         ) -> void
 
         def to_hash: -> {
           id: String,
           expires_at: Time,
-          skills: ::Array[Anthropic::Beta::BetaSkill]?
+          skills: ::Array[Anthropic::Beta::BetaContainerSkill]?
         }
       end
     end
