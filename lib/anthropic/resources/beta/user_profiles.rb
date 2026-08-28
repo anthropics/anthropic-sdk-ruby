@@ -9,7 +9,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::UserProfileCreateParams} for more details.
         #
-        # @overload create(access_type: nil, external_id: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
+        # @overload create(access_type: nil, external_id: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, betas: nil, request_options: {})
         #
         # @param access_type [Symbol, Anthropic::Models::Beta::UserProfileCreateParams::AccessType] Body param: How the platform uses the API on behalf of the entity this profile r
         #
@@ -20,8 +20,6 @@ module Anthropic
         # @param metadata [Hash{Symbol=>String}] Body param: Free-form key-value data to attach to this user profile. Maximum 16
         #
         # @param name [String, nil] Body param: Optional for all profiles. Real-world name of the entity this profil
-        #
-        # @param relationship [Symbol, Anthropic::Models::Beta::UserProfileCreateParams::Relationship] Body param: How the entity behind a user profile relates to the platform that ow
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
@@ -72,7 +70,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::UserProfileUpdateParams} for more details.
         #
-        # @overload update(user_profile_id, access_type: nil, external_id: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
+        # @overload update(user_profile_id, access_type: nil, external_id: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, betas: nil, request_options: {})
         #
         # @param user_profile_id [String] Path param: Path parameter user_profile_id
         #
@@ -85,8 +83,6 @@ module Anthropic
         # @param metadata [Hash{Symbol=>String}] Body param: Key-value pairs to merge into the stored metadata. Keys provided ove
         #
         # @param name [String, nil] Body param: If present, replaces the stored name. Omit to leave unchanged. Maxim
-        #
-        # @param relationship [Symbol, Anthropic::Models::Beta::UserProfileUpdateParams::Relationship, nil] Body param: How the entity behind a user profile relates to the platform that ow
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #

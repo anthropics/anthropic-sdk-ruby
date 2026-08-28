@@ -14,8 +14,7 @@ module Anthropic
           access_type: Anthropic::Models::Beta::BetaUserProfile::access_type,
           external_id: String?,
           external_user_onboarded_at: Time?,
-          name: String?,
-          relationship: Anthropic::Models::Beta::BetaUserProfile::relationship
+          name: String?
         }
 
       class BetaUserProfile < Anthropic::Internal::Type::BaseModel
@@ -43,12 +42,6 @@ module Anthropic
 
         attr_accessor name: String?
 
-        attr_reader relationship: Anthropic::Models::Beta::BetaUserProfile::relationship?
-
-        def relationship=: (
-          Anthropic::Models::Beta::BetaUserProfile::relationship
-        ) -> Anthropic::Models::Beta::BetaUserProfile::relationship
-
         def initialize: (
           id: String,
           created_at: Time,
@@ -59,8 +52,7 @@ module Anthropic
           ?access_type: Anthropic::Models::Beta::BetaUserProfile::access_type,
           ?external_id: String?,
           ?external_user_onboarded_at: Time?,
-          ?name: String?,
-          ?relationship: Anthropic::Models::Beta::BetaUserProfile::relationship
+          ?name: String?
         ) -> void
 
         def to_hash: -> {
@@ -73,8 +65,7 @@ module Anthropic
           access_type: Anthropic::Models::Beta::BetaUserProfile::access_type,
           external_id: String?,
           external_user_onboarded_at: Time?,
-          name: String?,
-          relationship: Anthropic::Models::Beta::BetaUserProfile::relationship
+          name: String?
         }
 
         type type_ = :user_profile
@@ -96,18 +87,6 @@ module Anthropic
           PASSTHROUGH: :passthrough
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaUserProfile::access_type]
-        end
-
-        type relationship = :external | :resold | :internal
-
-        module Relationship
-          extend Anthropic::Internal::Type::Enum
-
-          EXTERNAL: :external
-          RESOLD: :resold
-          INTERNAL: :internal
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaUserProfile::relationship]
         end
       end
     end

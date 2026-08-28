@@ -13,8 +13,6 @@ module Anthropic
             external_user_onboarded_at: Time,
             metadata: T::Hash[Symbol, String],
             name: T.nilable(String),
-            relationship:
-              Anthropic::Beta::UserProfileCreateParams::Relationship::OrSymbol,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaUserProfile)
@@ -36,15 +34,10 @@ module Anthropic
           # be non-empty strings.
           metadata: nil,
           # Body param: Optional for all profiles. Real-world name of the entity this
-          # profile represents (company or individual); for a resold-to company
-          # (`relationship` `resold` / `access_type` `passthrough`), that company's name
-          # where known. Maximum 255 characters.
+          # profile represents (company or individual); for a company the platform resells
+          # Claude access to (`access_type` `passthrough`), that company's name where known.
+          # Maximum 255 characters.
           name: nil,
-          # Body param: How the entity behind a user profile relates to the platform that
-          # owns the API key. `external`: an individual end-user of the platform. `resold`:
-          # a company the platform resells Claude access to. `internal`: the platform's own
-          # usage.
-          relationship: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}
@@ -80,10 +73,6 @@ module Anthropic
             external_user_onboarded_at: Time,
             metadata: T::Hash[Symbol, String],
             name: T.nilable(String),
-            relationship:
-              T.nilable(
-                Anthropic::Beta::UserProfileUpdateParams::Relationship::OrSymbol
-              ),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaUserProfile)
@@ -110,11 +99,6 @@ module Anthropic
           # Body param: If present, replaces the stored name. Omit to leave unchanged.
           # Maximum 255 characters.
           name: nil,
-          # Body param: How the entity behind a user profile relates to the platform that
-          # owns the API key. `external`: an individual end-user of the platform. `resold`:
-          # a company the platform resells Claude access to. `internal`: the platform's own
-          # usage.
-          relationship: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}

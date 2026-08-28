@@ -9,7 +9,6 @@ module Anthropic
           external_user_onboarded_at: Time,
           metadata: ::Hash[Symbol, String],
           name: String?,
-          relationship: Anthropic::Models::Beta::UserProfileUpdateParams::relationship?,
           betas: ::Array[Anthropic::Models::anthropic_beta]
         }
         & Anthropic::Internal::Type::request_parameters
@@ -34,8 +33,6 @@ module Anthropic
 
         attr_accessor name: String?
 
-        attr_accessor relationship: Anthropic::Models::Beta::UserProfileUpdateParams::relationship?
-
         attr_reader betas: ::Array[Anthropic::Models::anthropic_beta]?
 
         def betas=: (
@@ -49,7 +46,6 @@ module Anthropic
           ?external_user_onboarded_at: Time,
           ?metadata: ::Hash[Symbol, String],
           ?name: String?,
-          ?relationship: Anthropic::Models::Beta::UserProfileUpdateParams::relationship?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> void
@@ -61,7 +57,6 @@ module Anthropic
           external_user_onboarded_at: Time,
           metadata: ::Hash[Symbol, String],
           name: String?,
-          relationship: Anthropic::Models::Beta::UserProfileUpdateParams::relationship?,
           betas: ::Array[Anthropic::Models::anthropic_beta],
           request_options: Anthropic::RequestOptions
         }
@@ -75,18 +70,6 @@ module Anthropic
           PASSTHROUGH: :passthrough
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::UserProfileUpdateParams::access_type]
-        end
-
-        type relationship = :external | :resold | :internal
-
-        module Relationship
-          extend Anthropic::Internal::Type::Enum
-
-          EXTERNAL: :external
-          RESOLD: :resold
-          INTERNAL: :internal
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::UserProfileUpdateParams::relationship]
         end
       end
     end

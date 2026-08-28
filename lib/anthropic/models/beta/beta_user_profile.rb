@@ -68,21 +68,13 @@ module Anthropic
 
         # @!attribute name
         #   Real-world name of the entity this profile represents (company or individual).
-        #   For a resold-to company (`access_type` `passthrough`, or `relationship` `resold`
-        #   under the `user-profiles-2026-03-24` header) this is that company's name.
+        #   For a company the platform resells Claude access to (`access_type`
+        #   `passthrough`) this is that company's name.
         #
         #   @return [String, nil]
         optional :name, String, nil?: true
 
-        # @!attribute relationship
-        #   How the entity behind a user profile relates to the platform that owns the API
-        #   key. `external`: an individual end-user of the platform. `resold`: a company the
-        #   platform resells Claude access to. `internal`: the platform's own usage.
-        #
-        #   @return [Symbol, Anthropic::Models::Beta::BetaUserProfile::Relationship, nil]
-        optional :relationship, enum: -> { Anthropic::Beta::BetaUserProfile::Relationship }
-
-        # @!method initialize(id:, created_at:, metadata:, trust_grants:, type:, updated_at:, access_type: nil, external_id: nil, external_user_onboarded_at: nil, name: nil, relationship: nil)
+        # @!method initialize(id:, created_at:, metadata:, trust_grants:, type:, updated_at:, access_type: nil, external_id: nil, external_user_onboarded_at: nil, name: nil)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaUserProfile} for more details.
         #
@@ -105,8 +97,6 @@ module Anthropic
         #   @param external_user_onboarded_at [Time, nil] A timestamp in RFC 3339 format
         #
         #   @param name [String, nil] Real-world name of the entity this profile represents (company or individual). F
-        #
-        #   @param relationship [Symbol, Anthropic::Models::Beta::BetaUserProfile::Relationship] How the entity behind a user profile relates to the platform that owns the API k
 
         # Object type. Always `user_profile`.
         #
@@ -132,22 +122,6 @@ module Anthropic
 
           APPLICATION = :application
           PASSTHROUGH = :passthrough
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
-
-        # How the entity behind a user profile relates to the platform that owns the API
-        # key. `external`: an individual end-user of the platform. `resold`: a company the
-        # platform resells Claude access to. `internal`: the platform's own usage.
-        #
-        # @see Anthropic::Models::Beta::BetaUserProfile#relationship
-        module Relationship
-          extend Anthropic::Internal::Type::Enum
-
-          EXTERNAL = :external
-          RESOLD = :resold
-          INTERNAL = :internal
 
           # @!method self.values
           #   @return [Array<Symbol>]
