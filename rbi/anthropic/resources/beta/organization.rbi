@@ -30,6 +30,11 @@ module Anthropic
         sig { returns(Anthropic::Resources::Beta::Organization::RateLimits) }
         attr_reader :rate_limits
 
+        sig do
+          returns(Anthropic::Resources::Beta::Organization::ComplianceSettings)
+        end
+        attr_reader :compliance_settings
+
         # Retrieve information about the organization associated with the authenticated
         # API key.
         sig do

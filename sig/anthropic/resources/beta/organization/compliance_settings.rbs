@@ -1,0 +1,20 @@
+module Anthropic
+  module Resources
+    class Beta
+      class Organization
+        class ComplianceSettings
+          def retrieve: (
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaComplianceSettings
+
+          def update: (
+            state: Anthropic::Models::Beta::Organization::ComplianceSettingUpdateParams::state,
+            ?request_options: Anthropic::request_opts
+          ) -> Anthropic::Beta::Organization::BetaComplianceSettings
+
+          def initialize: (client: Anthropic::Client) -> void
+        end
+      end
+    end
+  end
+end

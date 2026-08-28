@@ -18,6 +18,8 @@ module Anthropic
 
         attr_reader rate_limits: Anthropic::Resources::Beta::Organization::RateLimits
 
+        attr_reader compliance_settings: Anthropic::Resources::Beta::Organization::ComplianceSettings
+
         def retrieve: (
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaOrganization

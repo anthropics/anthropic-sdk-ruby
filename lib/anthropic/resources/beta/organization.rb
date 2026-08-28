@@ -28,6 +28,9 @@ module Anthropic
         # @return [Anthropic::Resources::Beta::Organization::RateLimits]
         attr_reader :rate_limits
 
+        # @return [Anthropic::Resources::Beta::Organization::ComplianceSettings]
+        attr_reader :compliance_settings
+
         # Retrieve information about the organization associated with the authenticated
         # API key.
         #
@@ -60,6 +63,7 @@ module Anthropic
           @users = Anthropic::Resources::Beta::Organization::Users.new(client: client)
           @workspaces = Anthropic::Resources::Beta::Organization::Workspaces.new(client: client)
           @rate_limits = Anthropic::Resources::Beta::Organization::RateLimits.new(client: client)
+          @compliance_settings = Anthropic::Resources::Beta::Organization::ComplianceSettings.new(client: client)
         end
       end
     end
