@@ -5,6 +5,7 @@ module Anthropic
         {
           limit: Integer,
           order: Anthropic::Models::Beta::UserProfileListParams::order,
+          order_by: Anthropic::Models::Beta::UserProfileListParams::order_by,
           page: String,
           betas: ::Array[Anthropic::Models::anthropic_beta]
         }
@@ -24,6 +25,12 @@ module Anthropic
           Anthropic::Models::Beta::UserProfileListParams::order
         ) -> Anthropic::Models::Beta::UserProfileListParams::order
 
+        attr_reader order_by: Anthropic::Models::Beta::UserProfileListParams::order_by?
+
+        def order_by=: (
+          Anthropic::Models::Beta::UserProfileListParams::order_by
+        ) -> Anthropic::Models::Beta::UserProfileListParams::order_by
+
         attr_reader page: String?
 
         def page=: (String) -> String
@@ -37,6 +44,7 @@ module Anthropic
         def initialize: (
           ?limit: Integer,
           ?order: Anthropic::Models::Beta::UserProfileListParams::order,
+          ?order_by: Anthropic::Models::Beta::UserProfileListParams::order_by,
           ?page: String,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
@@ -45,6 +53,7 @@ module Anthropic
         def to_hash: -> {
           limit: Integer,
           order: Anthropic::Models::Beta::UserProfileListParams::order,
+          order_by: Anthropic::Models::Beta::UserProfileListParams::order_by,
           page: String,
           betas: ::Array[Anthropic::Models::anthropic_beta],
           request_options: Anthropic::RequestOptions
@@ -59,6 +68,17 @@ module Anthropic
           DESC: :desc
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::UserProfileListParams::order]
+        end
+
+        type order_by = :created_at | :name
+
+        module OrderBy
+          extend Anthropic::Internal::Type::Enum
+
+          CREATED_AT: :created_at
+          NAME: :name
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::UserProfileListParams::order_by]
         end
       end
     end

@@ -110,6 +110,7 @@ module Anthropic
           params(
             limit: Integer,
             order: Anthropic::Beta::UserProfileListParams::Order::OrSymbol,
+            order_by: Anthropic::Beta::UserProfileListParams::OrderBy::OrSymbol,
             page: String,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
@@ -122,6 +123,8 @@ module Anthropic
           limit: nil,
           # Query param: Query parameter for order
           order: nil,
+          # Query param: Query parameter for order_by
+          order_by: nil,
           # Query param: Query parameter for page
           page: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.

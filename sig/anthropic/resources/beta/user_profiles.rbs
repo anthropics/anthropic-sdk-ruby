@@ -32,6 +32,7 @@ module Anthropic
         def list: (
           ?limit: Integer,
           ?order: Anthropic::Models::Beta::UserProfileListParams::order,
+          ?order_by: Anthropic::Models::Beta::UserProfileListParams::order_by,
           ?page: String,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts

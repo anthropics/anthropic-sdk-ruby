@@ -37,6 +37,21 @@ module Anthropic
         end
         attr_writer :order
 
+        # Query parameter for order_by
+        sig do
+          returns(
+            T.nilable(Anthropic::Beta::UserProfileListParams::OrderBy::OrSymbol)
+          )
+        end
+        attr_reader :order_by
+
+        sig do
+          params(
+            order_by: Anthropic::Beta::UserProfileListParams::OrderBy::OrSymbol
+          ).void
+        end
+        attr_writer :order_by
+
         # Query parameter for page
         sig { returns(T.nilable(String)) }
         attr_reader :page
@@ -65,6 +80,7 @@ module Anthropic
           params(
             limit: Integer,
             order: Anthropic::Beta::UserProfileListParams::Order::OrSymbol,
+            order_by: Anthropic::Beta::UserProfileListParams::OrderBy::OrSymbol,
             page: String,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
@@ -75,6 +91,8 @@ module Anthropic
           limit: nil,
           # Query parameter for order
           order: nil,
+          # Query parameter for order_by
+          order_by: nil,
           # Query parameter for page
           page: nil,
           # Optional header to specify the beta version(s) you want to use.
@@ -88,6 +106,8 @@ module Anthropic
             {
               limit: Integer,
               order: Anthropic::Beta::UserProfileListParams::Order::OrSymbol,
+              order_by:
+                Anthropic::Beta::UserProfileListParams::OrderBy::OrSymbol,
               page: String,
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
@@ -123,6 +143,38 @@ module Anthropic
             override.returns(
               T::Array[
                 Anthropic::Beta::UserProfileListParams::Order::TaggedSymbol
+              ]
+            )
+          end
+          def self.values
+          end
+        end
+
+        # Query parameter for order_by
+        module OrderBy
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::Beta::UserProfileListParams::OrderBy)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          CREATED_AT =
+            T.let(
+              :created_at,
+              Anthropic::Beta::UserProfileListParams::OrderBy::TaggedSymbol
+            )
+          NAME =
+            T.let(
+              :name,
+              Anthropic::Beta::UserProfileListParams::OrderBy::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::UserProfileListParams::OrderBy::TaggedSymbol
               ]
             )
           end

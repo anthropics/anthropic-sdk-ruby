@@ -106,11 +106,13 @@ module Anthropic
 
         # List User Profiles
         #
-        # @overload list(limit: nil, order: nil, page: nil, betas: nil, request_options: {})
+        # @overload list(limit: nil, order: nil, order_by: nil, page: nil, betas: nil, request_options: {})
         #
         # @param limit [Integer] Query param: Query parameter for limit
         #
         # @param order [Symbol, Anthropic::Models::Beta::UserProfileListParams::Order] Query param: Query parameter for order
+        #
+        # @param order_by [Symbol, Anthropic::Models::Beta::UserProfileListParams::OrderBy] Query param: Query parameter for order_by
         #
         # @param page [String] Query param: Query parameter for page
         #
@@ -122,7 +124,7 @@ module Anthropic
         #
         # @see Anthropic::Models::Beta::UserProfileListParams
         def list(params = {})
-          query_params = [:limit, :order, :page]
+          query_params = [:limit, :order, :order_by, :page]
           parsed, options = Anthropic::Beta::UserProfileListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(

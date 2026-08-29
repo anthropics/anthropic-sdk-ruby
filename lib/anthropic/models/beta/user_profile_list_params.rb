@@ -20,6 +20,12 @@ module Anthropic
         #   @return [Symbol, Anthropic::Models::Beta::UserProfileListParams::Order, nil]
         optional :order, enum: -> { Anthropic::Beta::UserProfileListParams::Order }
 
+        # @!attribute order_by
+        #   Query parameter for order_by
+        #
+        #   @return [Symbol, Anthropic::Models::Beta::UserProfileListParams::OrderBy, nil]
+        optional :order_by, enum: -> { Anthropic::Beta::UserProfileListParams::OrderBy }
+
         # @!attribute page
         #   Query parameter for page
         #
@@ -32,10 +38,12 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(limit: nil, order: nil, page: nil, betas: nil, request_options: {})
+        # @!method initialize(limit: nil, order: nil, order_by: nil, page: nil, betas: nil, request_options: {})
         #   @param limit [Integer] Query parameter for limit
         #
         #   @param order [Symbol, Anthropic::Models::Beta::UserProfileListParams::Order] Query parameter for order
+        #
+        #   @param order_by [Symbol, Anthropic::Models::Beta::UserProfileListParams::OrderBy] Query parameter for order_by
         #
         #   @param page [String] Query parameter for page
         #
@@ -49,6 +57,17 @@ module Anthropic
 
           ASC = :asc
           DESC = :desc
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
+
+        # Query parameter for order_by
+        module OrderBy
+          extend Anthropic::Internal::Type::Enum
+
+          CREATED_AT = :created_at
+          NAME = :name
 
           # @!method self.values
           #   @return [Array<Symbol>]
