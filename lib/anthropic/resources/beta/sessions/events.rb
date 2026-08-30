@@ -26,7 +26,7 @@ module Anthropic
           #
           # @param order [Symbol, Anthropic::Models::Beta::Sessions::EventListParams::Order] Query param: Sort direction for results, ordered by the event's `processed_at`.
           #
-          # @param page [String] Query param: Opaque pagination cursor from a previous response's next_page.
+          # @param page [String] Query param: Opaque pagination cursor from a previous response's `next_page`.
           #
           # @param types [Array<String>] Query param: Filter by event type. Values match the `type` field on returned eve
           #

@@ -52,15 +52,15 @@ module Anthropic
           # Query param: Return runs created at or before this time (inclusive).
           created_at_lte: nil,
           # Query param: Filter to a specific deployment. Omit to list across all
-          # deployments in the workspace. Filtering by a non-existent deployment_id returns
-          # 200 with empty data.
+          # deployments in the workspace. Filtering by a non-existent `deployment_id`
+          # returns 200 with empty data.
           deployment_id: nil,
-          # Query param: Filter: true for runs with non-null error, false for runs with
-          # non-null session_id. Omit for all.
+          # Query param: Filter: true for runs with non-null `error`, false for runs with
+          # non-null `session_id`. Omit for all.
           has_error: nil,
           # Query param: Maximum results per page. Default 20, maximum 1000.
           limit: nil,
-          # Query param: Opaque pagination cursor. Pass next_page from the previous
+          # Query param: Opaque pagination cursor. Pass `next_page` from the previous
           # response. Invalid or expired cursors return 400.
           page: nil,
           # Query param: Filter runs by what triggered them. Omit to return all runs.

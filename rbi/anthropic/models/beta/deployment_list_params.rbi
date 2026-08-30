@@ -57,8 +57,8 @@ module Anthropic
         sig { params(page: String).void }
         attr_writer :page
 
-        # Filter by status: active or paused. Omit for both. To include archived
-        # deployments, use include_archived instead; the two cannot be combined.
+        # Filter by status: `active` or `paused`. Omit for both. To include archived
+        # deployments, use `include_archived` instead; the two cannot be combined.
         sig do
           returns(
             T.nilable(
@@ -119,8 +119,8 @@ module Anthropic
           limit: nil,
           # Opaque pagination cursor.
           page: nil,
-          # Filter by status: active or paused. Omit for both. To include archived
-          # deployments, use include_archived instead; the two cannot be combined.
+          # Filter by status: `active` or `paused`. Omit for both. To include archived
+          # deployments, use `include_archived` instead; the two cannot be combined.
           status: nil,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,

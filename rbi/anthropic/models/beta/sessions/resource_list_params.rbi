@@ -27,7 +27,7 @@ module Anthropic
           sig { params(limit: Integer).void }
           attr_writer :limit
 
-          # Opaque cursor from a previous response's next_page field.
+          # Opaque cursor from a previous response's `next_page` field.
           sig { returns(T.nilable(String)) }
           attr_reader :page
 
@@ -66,7 +66,7 @@ module Anthropic
             # Maximum number of resources to return per page (max 1000). If omitted, returns
             # all resources.
             limit: nil,
-            # Opaque cursor from a previous response's next_page field.
+            # Opaque cursor from a previous response's `next_page` field.
             page: nil,
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,

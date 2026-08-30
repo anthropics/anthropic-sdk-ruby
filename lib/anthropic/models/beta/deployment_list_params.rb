@@ -45,8 +45,8 @@ module Anthropic
         optional :page, String
 
         # @!attribute status
-        #   Filter by status: active or paused. Omit for both. To include archived
-        #   deployments, use include_archived instead; the two cannot be combined.
+        #   Filter by status: `active` or `paused`. Omit for both. To include archived
+        #   deployments, use `include_archived` instead; the two cannot be combined.
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeploymentStatus, nil]
         optional :status, enum: -> { Anthropic::Beta::BetaManagedAgentsDeploymentStatus }
@@ -73,7 +73,7 @@ module Anthropic
         #
         #   @param page [String] Opaque pagination cursor.
         #
-        #   @param status [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeploymentStatus] Filter by status: active or paused. Omit for both. To include archived deploymen
+        #   @param status [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeploymentStatus] Filter by status: `active` or `paused`. Omit for both. To include archived deplo
         #
         #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #

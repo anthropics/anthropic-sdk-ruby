@@ -44,7 +44,7 @@ module Anthropic
         attr_writer :created_at_lte
 
         # Filter to a specific deployment. Omit to list across all deployments in the
-        # workspace. Filtering by a non-existent deployment_id returns 200 with empty
+        # workspace. Filtering by a non-existent `deployment_id` returns 200 with empty
         # data.
         sig { returns(T.nilable(String)) }
         attr_reader :deployment_id
@@ -52,8 +52,8 @@ module Anthropic
         sig { params(deployment_id: String).void }
         attr_writer :deployment_id
 
-        # Filter: true for runs with non-null error, false for runs with non-null
-        # session_id. Omit for all.
+        # Filter: true for runs with non-null `error`, false for runs with non-null
+        # `session_id`. Omit for all.
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :has_error
 
@@ -67,8 +67,8 @@ module Anthropic
         sig { params(limit: Integer).void }
         attr_writer :limit
 
-        # Opaque pagination cursor. Pass next_page from the previous response. Invalid or
-        # expired cursors return 400.
+        # Opaque pagination cursor. Pass `next_page` from the previous response. Invalid
+        # or expired cursors return 400.
         sig { returns(T.nilable(String)) }
         attr_reader :page
 
@@ -134,16 +134,16 @@ module Anthropic
           # Return runs created at or before this time (inclusive).
           created_at_lte: nil,
           # Filter to a specific deployment. Omit to list across all deployments in the
-          # workspace. Filtering by a non-existent deployment_id returns 200 with empty
+          # workspace. Filtering by a non-existent `deployment_id` returns 200 with empty
           # data.
           deployment_id: nil,
-          # Filter: true for runs with non-null error, false for runs with non-null
-          # session_id. Omit for all.
+          # Filter: true for runs with non-null `error`, false for runs with non-null
+          # `session_id`. Omit for all.
           has_error: nil,
           # Maximum results per page. Default 20, maximum 1000.
           limit: nil,
-          # Opaque pagination cursor. Pass next_page from the previous response. Invalid or
-          # expired cursors return 400.
+          # Opaque pagination cursor. Pass `next_page` from the previous response. Invalid
+          # or expired cursors return 400.
           page: nil,
           # Filter runs by what triggered them. Omit to return all runs.
           trigger_type: nil,

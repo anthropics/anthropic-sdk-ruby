@@ -83,7 +83,7 @@ module Anthropic
           #
           # @param limit [Integer] Query param: Maximum number of resources to return per page (max 1000). If omitt
           #
-          # @param page [String] Query param: Opaque cursor from a previous response's next_page field.
+          # @param page [String] Query param: Opaque cursor from a previous response's `next_page` field.
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #

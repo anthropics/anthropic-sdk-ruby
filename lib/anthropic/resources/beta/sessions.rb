@@ -128,7 +128,7 @@ module Anthropic
         #
         # @param agent_id [String] Query param: Filter sessions created with this agent ID.
         #
-        # @param agent_version [Integer] Query param: Filter by agent version. Only applies when agent_id is also set.
+        # @param agent_version [Integer] Query param: Filter by agent version. Only applies when `agent_id` is also set.
         #
         # @param created_at_gt [Time] Query param: Return sessions created after this time (exclusive).
         #
@@ -144,9 +144,9 @@ module Anthropic
         #
         # @param limit [Integer] Query param: Maximum number of results to return.
         #
-        # @param memory_store_id [String] Query param: Filter sessions whose resources contain a memory_store with this me
+        # @param memory_store_id [String] Query param: Filter sessions whose resources contain a `memory_store` with this
         #
-        # @param order [Symbol, Anthropic::Models::Beta::SessionListParams::Order] Query param: Sort direction for results, ordered by created_at. Defaults to desc
+        # @param order [Symbol, Anthropic::Models::Beta::SessionListParams::Order] Query param: Sort direction for results, ordered by `created_at`. Defaults to `d
         #
         # @param page [String] Query param: Opaque pagination cursor from a previous response.
         #

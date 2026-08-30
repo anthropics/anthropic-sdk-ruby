@@ -211,8 +211,9 @@ module Anthropic
           limit: nil,
           # Query param: Opaque pagination cursor.
           page: nil,
-          # Query param: Filter by status: active or paused. Omit for both. To include
-          # archived deployments, use include_archived instead; the two cannot be combined.
+          # Query param: Filter by status: `active` or `paused`. Omit for both. To include
+          # archived deployments, use `include_archived` instead; the two cannot be
+          # combined.
           status: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,

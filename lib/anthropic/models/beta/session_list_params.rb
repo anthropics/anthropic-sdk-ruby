@@ -15,7 +15,7 @@ module Anthropic
         optional :agent_id, String
 
         # @!attribute agent_version
-        #   Filter by agent version. Only applies when agent_id is also set.
+        #   Filter by agent version. Only applies when `agent_id` is also set.
         #
         #   @return [Integer, nil]
         optional :agent_version, Integer
@@ -63,14 +63,14 @@ module Anthropic
         optional :limit, Integer
 
         # @!attribute memory_store_id
-        #   Filter sessions whose resources contain a memory_store with this memory store
+        #   Filter sessions whose resources contain a `memory_store` with this memory store
         #   ID.
         #
         #   @return [String, nil]
         optional :memory_store_id, String
 
         # @!attribute order
-        #   Sort direction for results, ordered by created_at. Defaults to desc (newest
+        #   Sort direction for results, ordered by `created_at`. Defaults to `desc` (newest
         #   first).
         #
         #   @return [Symbol, Anthropic::Models::Beta::SessionListParams::Order, nil]
@@ -102,7 +102,7 @@ module Anthropic
         #
         #   @param agent_id [String] Filter sessions created with this agent ID.
         #
-        #   @param agent_version [Integer] Filter by agent version. Only applies when agent_id is also set.
+        #   @param agent_version [Integer] Filter by agent version. Only applies when `agent_id` is also set.
         #
         #   @param created_at_gt [Time] Return sessions created after this time (exclusive).
         #
@@ -118,9 +118,9 @@ module Anthropic
         #
         #   @param limit [Integer] Maximum number of results to return.
         #
-        #   @param memory_store_id [String] Filter sessions whose resources contain a memory_store with this memory store ID
+        #   @param memory_store_id [String] Filter sessions whose resources contain a `memory_store` with this memory store
         #
-        #   @param order [Symbol, Anthropic::Models::Beta::SessionListParams::Order] Sort direction for results, ordered by created_at. Defaults to desc (newest firs
+        #   @param order [Symbol, Anthropic::Models::Beta::SessionListParams::Order] Sort direction for results, ordered by `created_at`. Defaults to `desc` (newest
         #
         #   @param page [String] Opaque pagination cursor from a previous response.
         #
@@ -130,7 +130,7 @@ module Anthropic
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
-        # Sort direction for results, ordered by created_at. Defaults to desc (newest
+        # Sort direction for results, ordered by `created_at`. Defaults to `desc` (newest
         # first).
         module Order
           extend Anthropic::Internal::Type::Enum

@@ -14,7 +14,7 @@ module Anthropic
             )
           end
 
-        # Cumulative time in seconds the session spent in running status. Excludes idle
+        # Cumulative time in seconds the session spent in `running` status. Excludes idle
         # time.
         sig { returns(T.nilable(Float)) }
         attr_reader :active_seconds
@@ -37,7 +37,7 @@ module Anthropic
           )
         end
         def self.new(
-          # Cumulative time in seconds the session spent in running status. Excludes idle
+          # Cumulative time in seconds the session spent in `running` status. Excludes idle
           # time.
           active_seconds: nil,
           # Elapsed time since session creation in seconds. For terminated sessions, frozen

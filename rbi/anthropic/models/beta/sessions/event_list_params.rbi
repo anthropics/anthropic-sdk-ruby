@@ -59,7 +59,7 @@ module Anthropic
           attr_writer :limit
 
           # Sort direction for results, ordered by the event's `processed_at`. Defaults to
-          # asc (chronological).
+          # `asc` (chronological).
           sig do
             returns(
               T.nilable(
@@ -76,7 +76,7 @@ module Anthropic
           end
           attr_writer :order
 
-          # Opaque pagination cursor from a previous response's next_page.
+          # Opaque pagination cursor from a previous response's `next_page`.
           sig { returns(T.nilable(String)) }
           attr_reader :page
 
@@ -142,9 +142,9 @@ module Anthropic
             # Query parameter for limit
             limit: nil,
             # Sort direction for results, ordered by the event's `processed_at`. Defaults to
-            # asc (chronological).
+            # `asc` (chronological).
             order: nil,
-            # Opaque pagination cursor from a previous response's next_page.
+            # Opaque pagination cursor from a previous response's `next_page`.
             page: nil,
             # Filter by event type. Values match the `type` field on returned events (for
             # example, `user.message` or `agent.tool_use`). Omit to return all event types.
@@ -178,7 +178,7 @@ module Anthropic
           end
 
           # Sort direction for results, ordered by the event's `processed_at`. Defaults to
-          # asc (chronological).
+          # `asc` (chronological).
           module Order
             extend Anthropic::Internal::Type::Enum
 

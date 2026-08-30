@@ -17,9 +17,9 @@ module Anthropic
         required :description, String
 
         # @!attribute explanation
-        #   Grader's verdict text from the most recent evaluation. For satisfied, explains
-        #   why criteria are met; for needs_revision (intermediate), what's missing; for
-        #   failed, why unrecoverable.
+        #   Grader's verdict text from the most recent evaluation. For `satisfied`, explains
+        #   why criteria are met; for `needs_revision` (intermediate), what's missing; for
+        #   `failed`, why unrecoverable.
         #
         #   @return [String, nil]
         required :explanation, String, nil?: true
@@ -50,7 +50,7 @@ module Anthropic
         required :type, enum: -> { Anthropic::Beta::BetaManagedAgentsOutcomeEvaluationResource::Type }
 
         # @!method initialize(completed_at:, description:, explanation:, iteration:, outcome_id:, result:, type:)
-        #   Evaluation state for a single outcome defined via a define_outcome event.
+        #   Evaluation state for a single outcome defined via a `define_outcome` event.
         #
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsOutcomeEvaluationResource} for more
@@ -60,7 +60,7 @@ module Anthropic
         #
         #   @param description [String] What the agent should produce.
         #
-        #   @param explanation [String, nil] Grader's verdict text from the most recent evaluation. For satisfied, explains w
+        #   @param explanation [String, nil] Grader's verdict text from the most recent evaluation. For `satisfied`, explains
         #
         #   @param iteration [Integer] 0-indexed revision cycle the outcome is currently on.
         #

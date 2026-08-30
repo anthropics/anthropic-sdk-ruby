@@ -21,7 +21,7 @@ module Anthropic
           optional :limit, Integer
 
           # @!attribute page
-          #   Opaque pagination cursor from a previous response's next_page. Forward-only.
+          #   Opaque pagination cursor from a previous response's `next_page`. Forward-only.
           #
           #   @return [String, nil]
           optional :page, String
@@ -37,7 +37,7 @@ module Anthropic
           #
           #   @param limit [Integer] Maximum results per page. Defaults to 1000.
           #
-          #   @param page [String] Opaque pagination cursor from a previous response's next_page. Forward-only.
+          #   @param page [String] Opaque pagination cursor from a previous response's `next_page`. Forward-only.
           #
           #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
