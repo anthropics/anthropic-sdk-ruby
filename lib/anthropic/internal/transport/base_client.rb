@@ -598,6 +598,7 @@ module Anthropic
             ensure
               self.class.reap_connection!(status, stream: stream)
             end
+            decoded = decoded.string if decoded.is_a?(StringIO)
 
             raise Anthropic::Errors::APIStatusError.for(
               url: adapted_url,
