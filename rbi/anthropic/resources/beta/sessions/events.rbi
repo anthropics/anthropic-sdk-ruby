@@ -45,9 +45,9 @@ module Anthropic
             # Query param: Query parameter for limit
             limit: nil,
             # Query param: Sort direction for results, ordered by the event's `processed_at`.
-            # Defaults to asc (chronological).
+            # Defaults to `asc` (chronological).
             order: nil,
-            # Query param: Opaque pagination cursor from a previous response's next_page.
+            # Query param: Opaque pagination cursor from a previous response's `next_page`.
             page: nil,
             # Query param: Filter by event type. Values match the `type` field on returned
             # events (for example, `user.message` or `agent.tool_use`). Omit to return all

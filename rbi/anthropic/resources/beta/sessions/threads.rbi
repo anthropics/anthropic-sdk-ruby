@@ -49,7 +49,7 @@ module Anthropic
             session_id,
             # Query param: Maximum results per page. Defaults to 1000.
             limit: nil,
-            # Query param: Opaque pagination cursor from a previous response's next_page.
+            # Query param: Opaque pagination cursor from a previous response's `next_page`.
             # Forward-only.
             page: nil,
             # Header param: Optional header to specify the beta version(s) you want to use.

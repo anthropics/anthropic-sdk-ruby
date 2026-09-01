@@ -26,7 +26,7 @@ module Anthropic
           sig { params(limit: Integer).void }
           attr_writer :limit
 
-          # Opaque pagination cursor from a previous response's next_page. Forward-only.
+          # Opaque pagination cursor from a previous response's `next_page`. Forward-only.
           sig { returns(T.nilable(String)) }
           attr_reader :page
 
@@ -64,7 +64,7 @@ module Anthropic
             session_id:,
             # Maximum results per page. Defaults to 1000.
             limit: nil,
-            # Opaque pagination cursor from a previous response's next_page. Forward-only.
+            # Opaque pagination cursor from a previous response's `next_page`. Forward-only.
             page: nil,
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,

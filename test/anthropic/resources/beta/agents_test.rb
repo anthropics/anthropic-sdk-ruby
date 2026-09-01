@@ -4,7 +4,11 @@ require_relative "../../test_helper"
 
 class Anthropic::Test::Resources::Beta::AgentsTest < Anthropic::Test::ResourceTest
   def test_create_required_params
-    response = @anthropic.beta.agents.create(model: :"claude-opus-5", name: "My First Agent")
+    response =
+      @anthropic.beta.agents.create(
+        model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5,
+        name: "My First Agent"
+      )
 
     assert_pattern do
       response => Anthropic::Beta::BetaManagedAgentsAgent

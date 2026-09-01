@@ -42,6 +42,13 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :external_id
 
+        # A timestamp in RFC 3339 format
+        sig { returns(T.nilable(Time)) }
+        attr_reader :external_user_onboarded_at
+
+        sig { params(external_user_onboarded_at: Time).void }
+        attr_writer :external_user_onboarded_at
+
         # Free-form key-value data to attach to this user profile. Maximum 16 keys, with
         # keys up to 64 characters and values up to 512 characters. Values must be
         # non-empty strings.
@@ -52,31 +59,11 @@ module Anthropic
         attr_writer :metadata
 
         # Optional for all profiles. Real-world name of the entity this profile represents
-        # (company or individual); for a resold-to company (`relationship` `resold` /
-        # `access_type` `passthrough`), that company's name where known. Maximum 255
+        # (company or individual); for a company the platform resells Claude access to
+        # (`access_type` `passthrough`), that company's name where known. Maximum 255
         # characters.
         sig { returns(T.nilable(String)) }
         attr_accessor :name
-
-        # How the entity behind a user profile relates to the platform that owns the API
-        # key. `external`: an individual end-user of the platform. `resold`: a company the
-        # platform resells Claude access to. `internal`: the platform's own usage.
-        sig do
-          returns(
-            T.nilable(
-              Anthropic::Beta::UserProfileCreateParams::Relationship::OrSymbol
-            )
-          )
-        end
-        attr_reader :relationship
-
-        sig do
-          params(
-            relationship:
-              Anthropic::Beta::UserProfileCreateParams::Relationship::OrSymbol
-          ).void
-        end
-        attr_writer :relationship
 
         # Optional header to specify the beta version(s) you want to use.
         sig do
@@ -100,10 +87,9 @@ module Anthropic
             access_type:
               Anthropic::Beta::UserProfileCreateParams::AccessType::OrSymbol,
             external_id: T.nilable(String),
+            external_user_onboarded_at: Time,
             metadata: T::Hash[Symbol, String],
             name: T.nilable(String),
-            relationship:
-              Anthropic::Beta::UserProfileCreateParams::Relationship::OrSymbol,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
@@ -118,19 +104,17 @@ module Anthropic
           # Platform's own identifier for this user. Not enforced unique. Maximum 255
           # characters.
           external_id: nil,
+          # A timestamp in RFC 3339 format
+          external_user_onboarded_at: nil,
           # Free-form key-value data to attach to this user profile. Maximum 16 keys, with
           # keys up to 64 characters and values up to 512 characters. Values must be
           # non-empty strings.
           metadata: nil,
           # Optional for all profiles. Real-world name of the entity this profile represents
-          # (company or individual); for a resold-to company (`relationship` `resold` /
-          # `access_type` `passthrough`), that company's name where known. Maximum 255
+          # (company or individual); for a company the platform resells Claude access to
+          # (`access_type` `passthrough`), that company's name where known. Maximum 255
           # characters.
           name: nil,
-          # How the entity behind a user profile relates to the platform that owns the API
-          # key. `external`: an individual end-user of the platform. `resold`: a company the
-          # platform resells Claude access to. `internal`: the platform's own usage.
-          relationship: nil,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
           request_options: {}
@@ -143,10 +127,9 @@ module Anthropic
               access_type:
                 Anthropic::Beta::UserProfileCreateParams::AccessType::OrSymbol,
               external_id: T.nilable(String),
+              external_user_onboarded_at: Time,
               metadata: T::Hash[Symbol, String],
               name: T.nilable(String),
-              relationship:
-                Anthropic::Beta::UserProfileCreateParams::Relationship::OrSymbol,
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               request_options: Anthropic::RequestOptions
@@ -188,48 +171,6 @@ module Anthropic
             override.returns(
               T::Array[
                 Anthropic::Beta::UserProfileCreateParams::AccessType::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
-        end
-
-        # How the entity behind a user profile relates to the platform that owns the API
-        # key. `external`: an individual end-user of the platform. `resold`: a company the
-        # platform resells Claude access to. `internal`: the platform's own usage.
-        module Relationship
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                Anthropic::Beta::UserProfileCreateParams::Relationship
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          EXTERNAL =
-            T.let(
-              :external,
-              Anthropic::Beta::UserProfileCreateParams::Relationship::TaggedSymbol
-            )
-          RESOLD =
-            T.let(
-              :resold,
-              Anthropic::Beta::UserProfileCreateParams::Relationship::TaggedSymbol
-            )
-          INTERNAL =
-            T.let(
-              :internal,
-              Anthropic::Beta::UserProfileCreateParams::Relationship::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::UserProfileCreateParams::Relationship::TaggedSymbol
               ]
             )
           end

@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_compliance_settings_state_enabled_param = { type: :enabled }
+
+        class BetaComplianceSettingsStateEnabledParam < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :enabled
+
+          def initialize: (?type: :enabled) -> void
+
+          def to_hash: -> { type: :enabled }
+        end
+      end
+    end
+  end
+end

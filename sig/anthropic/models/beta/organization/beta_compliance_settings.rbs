@@ -1,0 +1,61 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_compliance_settings =
+          {
+            state: Anthropic::Models::Beta::Organization::BetaComplianceSettings::state,
+            type: :compliance_settings
+          }
+
+        class BetaComplianceSettings < Anthropic::Internal::Type::BaseModel
+          attr_accessor state: Anthropic::Models::Beta::Organization::BetaComplianceSettings::state
+
+          attr_accessor type: :compliance_settings
+
+          def initialize: (
+            state: Anthropic::Models::Beta::Organization::BetaComplianceSettings::state,
+            ?type: :compliance_settings
+          ) -> void
+
+          def to_hash: -> {
+            state: Anthropic::Models::Beta::Organization::BetaComplianceSettings::state,
+            type: :compliance_settings
+          }
+
+          type state =
+            Anthropic::Beta::Organization::BetaComplianceSettingsStateEnabled
+            | Anthropic::Beta::Organization::BetaComplianceSettingsStateDisabled
+
+          module State
+            extend Anthropic::Internal::Type::Union
+
+            type type_ = :enabled | :disabled
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              ENABLED: :enabled
+              DISABLED: :disabled
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaComplianceSettings::State::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::BetaComplianceSettings::state]
+
+            def self.new:
+              (
+                type: :enabled | "enabled"
+              ) -> Anthropic::Beta::Organization::BetaComplianceSettingsStateEnabled
+              | (
+                type: :disabled | "disabled"
+              ) -> Anthropic::Beta::Organization::BetaComplianceSettingsStateDisabled
+              | (
+                type: Symbol | String
+              ) -> Anthropic::Models::Beta::Organization::BetaComplianceSettings::state
+          end
+        end
+      end
+    end
+  end
+end

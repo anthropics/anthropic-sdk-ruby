@@ -22,7 +22,7 @@ module Anthropic
         sig { params(agent_id: String).void }
         attr_writer :agent_id
 
-        # Filter by agent version. Only applies when agent_id is also set.
+        # Filter by agent version. Only applies when `agent_id` is also set.
         sig { returns(T.nilable(Integer)) }
         attr_reader :agent_version
 
@@ -78,7 +78,7 @@ module Anthropic
         sig { params(limit: Integer).void }
         attr_writer :limit
 
-        # Filter sessions whose resources contain a memory_store with this memory store
+        # Filter sessions whose resources contain a `memory_store` with this memory store
         # ID.
         sig { returns(T.nilable(String)) }
         attr_reader :memory_store_id
@@ -86,7 +86,7 @@ module Anthropic
         sig { params(memory_store_id: String).void }
         attr_writer :memory_store_id
 
-        # Sort direction for results, ordered by created_at. Defaults to desc (newest
+        # Sort direction for results, ordered by `created_at`. Defaults to `desc` (newest
         # first).
         sig do
           returns(
@@ -168,7 +168,7 @@ module Anthropic
         def self.new(
           # Filter sessions created with this agent ID.
           agent_id: nil,
-          # Filter by agent version. Only applies when agent_id is also set.
+          # Filter by agent version. Only applies when `agent_id` is also set.
           agent_version: nil,
           # Return sessions created after this time (exclusive).
           created_at_gt: nil,
@@ -184,10 +184,10 @@ module Anthropic
           include_archived: nil,
           # Maximum number of results to return.
           limit: nil,
-          # Filter sessions whose resources contain a memory_store with this memory store
+          # Filter sessions whose resources contain a `memory_store` with this memory store
           # ID.
           memory_store_id: nil,
-          # Sort direction for results, ordered by created_at. Defaults to desc (newest
+          # Sort direction for results, ordered by `created_at`. Defaults to `desc` (newest
           # first).
           order: nil,
           # Opaque pagination cursor from a previous response.
@@ -227,7 +227,7 @@ module Anthropic
         def to_hash
         end
 
-        # Sort direction for results, ordered by created_at. Defaults to desc (newest
+        # Sort direction for results, ordered by `created_at`. Defaults to `desc` (newest
         # first).
         module Order
           extend Anthropic::Internal::Type::Enum

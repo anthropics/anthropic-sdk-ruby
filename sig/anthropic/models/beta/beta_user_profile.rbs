@@ -13,8 +13,8 @@ module Anthropic
           updated_at: Time,
           access_type: Anthropic::Models::Beta::BetaUserProfile::access_type,
           external_id: String?,
-          name: String?,
-          relationship: Anthropic::Models::Beta::BetaUserProfile::relationship
+          external_user_onboarded_at: Time?,
+          name: String?
         }
 
       class BetaUserProfile < Anthropic::Internal::Type::BaseModel
@@ -38,13 +38,9 @@ module Anthropic
 
         attr_accessor external_id: String?
 
+        attr_accessor external_user_onboarded_at: Time?
+
         attr_accessor name: String?
-
-        attr_reader relationship: Anthropic::Models::Beta::BetaUserProfile::relationship?
-
-        def relationship=: (
-          Anthropic::Models::Beta::BetaUserProfile::relationship
-        ) -> Anthropic::Models::Beta::BetaUserProfile::relationship
 
         def initialize: (
           id: String,
@@ -55,8 +51,8 @@ module Anthropic
           updated_at: Time,
           ?access_type: Anthropic::Models::Beta::BetaUserProfile::access_type,
           ?external_id: String?,
-          ?name: String?,
-          ?relationship: Anthropic::Models::Beta::BetaUserProfile::relationship
+          ?external_user_onboarded_at: Time?,
+          ?name: String?
         ) -> void
 
         def to_hash: -> {
@@ -68,8 +64,8 @@ module Anthropic
           updated_at: Time,
           access_type: Anthropic::Models::Beta::BetaUserProfile::access_type,
           external_id: String?,
-          name: String?,
-          relationship: Anthropic::Models::Beta::BetaUserProfile::relationship
+          external_user_onboarded_at: Time?,
+          name: String?
         }
 
         type type_ = :user_profile
@@ -91,18 +87,6 @@ module Anthropic
           PASSTHROUGH: :passthrough
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaUserProfile::access_type]
-        end
-
-        type relationship = :external | :resold | :internal
-
-        module Relationship
-          extend Anthropic::Internal::Type::Enum
-
-          EXTERNAL: :external
-          RESOLD: :resold
-          INTERNAL: :internal
-
-          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaUserProfile::relationship]
         end
       end
     end

@@ -104,10 +104,10 @@ module Anthropic
           end
 
           case event
-          in Anthropic::Models::RawMessageStartEvent # Use the converter to create a new, isolated copy of the message object.
-            # This ensures proper type validation and prevents shared object references
-            # that could lead to unintended mutations during streaming accumulation.
-            # Matches the Python SDK's approach of explicitly constructing Message objects.
+          in Anthropic::Models::RawMessageStartEvent
+            # `coerce` returns `event.message` itself when it is already a Message (as does the
+            # first-event return above), so the snapshot *is* the message_start event's message
+            # and the branches below mutate it in place rather than an isolated copy.
             return Anthropic::Internal::Type::Converter.coerce(Anthropic::Models::Message, event.message)
           in Anthropic::Models::BetaRawMessageStartEvent
             return Anthropic::Internal::Type::Converter.coerce(Anthropic::Models::BetaMessage, event.message)
@@ -198,6 +198,11 @@ module Anthropic
               # Applied context-management edits ride on the event, not on `delta`.
               unless event.context_management.nil?
                 current_snapshot.context_management = event.context_management
+              end
+              # A mid-stream model fallback re-reports input transformations on the
+              # event; when absent the list from `message_start` stands.
+              unless event.input_transformations.nil?
+                current_snapshot.input_transformations = event.input_transformations
               end
             end
           else

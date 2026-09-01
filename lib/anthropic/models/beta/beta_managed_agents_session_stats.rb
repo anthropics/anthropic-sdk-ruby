@@ -5,7 +5,7 @@ module Anthropic
     module Beta
       class BetaManagedAgentsSessionStats < Anthropic::Internal::Type::BaseModel
         # @!attribute active_seconds
-        #   Cumulative time in seconds the session spent in running status. Excludes idle
+        #   Cumulative time in seconds the session spent in `running` status. Excludes idle
         #   time.
         #
         #   @return [Float, nil]
@@ -24,7 +24,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaManagedAgentsSessionStats} for more details.
         #
-        #   @param active_seconds [Float] Cumulative time in seconds the session spent in running status. Excludes idle ti
+        #   @param active_seconds [Float] Cumulative time in seconds the session spent in `running` status. Excludes idle
         #
         #   @param duration_seconds [Float] Elapsed time since session creation in seconds. For terminated sessions, frozen
       end

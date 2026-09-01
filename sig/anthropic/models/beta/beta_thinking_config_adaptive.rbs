@@ -6,21 +6,26 @@ module Anthropic
       type beta_thinking_config_adaptive =
         {
           type: :adaptive,
+          block_binding: Anthropic::Beta::BetaThinkingBlockBinding?,
           display_: Anthropic::Models::Beta::BetaThinkingConfigAdaptive::display_?
         }
 
       class BetaThinkingConfigAdaptive < Anthropic::Internal::Type::BaseModel
         attr_accessor type: :adaptive
 
+        attr_accessor block_binding: Anthropic::Beta::BetaThinkingBlockBinding?
+
         attr_accessor display_: Anthropic::Models::Beta::BetaThinkingConfigAdaptive::display_?
 
         def initialize: (
+          ?block_binding: Anthropic::Beta::BetaThinkingBlockBinding?,
           ?display_: Anthropic::Models::Beta::BetaThinkingConfigAdaptive::display_?,
           ?type: :adaptive
         ) -> void
 
         def to_hash: -> {
           type: :adaptive,
+          block_binding: Anthropic::Beta::BetaThinkingBlockBinding?,
           display_: Anthropic::Models::Beta::BetaThinkingConfigAdaptive::display_?
         }
 

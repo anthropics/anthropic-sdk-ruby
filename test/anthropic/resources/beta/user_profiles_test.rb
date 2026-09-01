@@ -20,8 +20,8 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
         updated_at: Time,
         access_type: Anthropic::Beta::BetaUserProfile::AccessType | nil,
         external_id: String | nil,
-        name: String | nil,
-        relationship: Anthropic::Beta::BetaUserProfile::Relationship | nil
+        external_user_onboarded_at: Time | nil,
+        name: String | nil
       }
     end
   end
@@ -43,8 +43,8 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
         updated_at: Time,
         access_type: Anthropic::Beta::BetaUserProfile::AccessType | nil,
         external_id: String | nil,
-        name: String | nil,
-        relationship: Anthropic::Beta::BetaUserProfile::Relationship | nil
+        external_user_onboarded_at: Time | nil,
+        name: String | nil
       }
     end
   end
@@ -66,8 +66,8 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
         updated_at: Time,
         access_type: Anthropic::Beta::BetaUserProfile::AccessType | nil,
         external_id: String | nil,
-        name: String | nil,
-        relationship: Anthropic::Beta::BetaUserProfile::Relationship | nil
+        external_user_onboarded_at: Time | nil,
+        name: String | nil
       }
     end
   end
@@ -96,8 +96,8 @@ class Anthropic::Test::Resources::Beta::UserProfilesTest < Anthropic::Test::Reso
         updated_at: Time,
         access_type: Anthropic::Beta::BetaUserProfile::AccessType | nil,
         external_id: String | nil,
-        name: String | nil,
-        relationship: Anthropic::Beta::BetaUserProfile::Relationship | nil
+        external_user_onboarded_at: Time | nil,
+        name: String | nil
       }
     end
   end

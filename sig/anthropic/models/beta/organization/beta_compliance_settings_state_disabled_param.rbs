@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_compliance_settings_state_disabled_param = { type: :disabled }
+
+        class BetaComplianceSettingsStateDisabledParam < Anthropic::Internal::Type::BaseModel
+          attr_accessor type: :disabled
+
+          def initialize: (?type: :disabled) -> void
+
+          def to_hash: -> { type: :disabled }
+        end
+      end
+    end
+  end
+end

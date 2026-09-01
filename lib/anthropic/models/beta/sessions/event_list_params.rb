@@ -50,13 +50,13 @@ module Anthropic
 
           # @!attribute order
           #   Sort direction for results, ordered by the event's `processed_at`. Defaults to
-          #   asc (chronological).
+          #   `asc` (chronological).
           #
           #   @return [Symbol, Anthropic::Models::Beta::Sessions::EventListParams::Order, nil]
           optional :order, enum: -> { Anthropic::Beta::Sessions::EventListParams::Order }
 
           # @!attribute page
-          #   Opaque pagination cursor from a previous response's next_page.
+          #   Opaque pagination cursor from a previous response's `next_page`.
           #
           #   @return [String, nil]
           optional :page, String
@@ -90,9 +90,9 @@ module Anthropic
           #
           #   @param limit [Integer] Query parameter for limit
           #
-          #   @param order [Symbol, Anthropic::Models::Beta::Sessions::EventListParams::Order] Sort direction for results, ordered by the event's `processed_at`. Defaults to a
+          #   @param order [Symbol, Anthropic::Models::Beta::Sessions::EventListParams::Order] Sort direction for results, ordered by the event's `processed_at`. Defaults to `
           #
-          #   @param page [String] Opaque pagination cursor from a previous response's next_page.
+          #   @param page [String] Opaque pagination cursor from a previous response's `next_page`.
           #
           #   @param types [Array<String>] Filter by event type. Values match the `type` field on returned events (for exam
           #
@@ -101,7 +101,7 @@ module Anthropic
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 
           # Sort direction for results, ordered by the event's `processed_at`. Defaults to
-          # asc (chronological).
+          # `asc` (chronological).
           module Order
             extend Anthropic::Internal::Type::Enum
 

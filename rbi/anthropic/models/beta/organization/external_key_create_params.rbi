@@ -174,12 +174,15 @@ module Anthropic
             end
             def self.new(
               type:,
-              # Full ARN of the AWS KMS key.
+              # Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a
+              # single-Region key in your organization's own AWS account; cross-account keys,
+              # multi-Region keys, and alias ARNs are rejected.
               kms_arn: nil,
               # AWS region. Derived from `kms_arn` if omitted.
               region: nil,
-              # IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed
-              # intermediate role; this field is ignored.
+              # IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own
+              # intermediate role (or, on Claude Platform on AWS, with credentials AWS issues
+              # for the Workspace); this field is ignored.
               role_arn: nil,
               # Full resource name of the Cloud KMS key.
               key_name: nil,

@@ -22,7 +22,7 @@ module Anthropic
           optional :limit, Integer
 
           # @!attribute page
-          #   Opaque cursor from a previous response's next_page field.
+          #   Opaque cursor from a previous response's `next_page` field.
           #
           #   @return [String, nil]
           optional :page, String
@@ -41,7 +41,7 @@ module Anthropic
           #
           #   @param limit [Integer] Maximum number of resources to return per page (max 1000). If omitted, returns a
           #
-          #   @param page [String] Opaque cursor from a previous response's next_page field.
+          #   @param page [String] Opaque cursor from a previous response's `next_page` field.
           #
           #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #

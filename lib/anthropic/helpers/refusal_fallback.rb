@@ -231,8 +231,9 @@ module Anthropic
 
     # Remove `fallback` blocks replayed in history. They only parse under the
     # server-side fallback beta, which this middleware never sends, so a
-    # request replaying them would 400. An assistant turn left empty is dropped
-    # whole.
+    # request replaying them would 400. A turn emptied by the stripping is
+    # dropped whole; a message that was already empty (e.g. a directive-only
+    # `role: :system` message carrying just `output_config`) is left as is.
     #
     # @param body [Hash{Symbol=>Object}]
     # @return [Hash{Symbol=>Object}]
@@ -244,6 +245,7 @@ module Anthropic
           type = b.is_a?(Hash) ? (b[:type] || b["type"]) : b.type
           type.to_s == "fallback"
         end
+        next msg if filtered.length == content.length
         next nil if filtered.empty?
         msg.merge(content: filtered)
       end
@@ -375,6 +377,10 @@ module Anthropic
       from_model = a[:model] || ""
       last_usage = a.dig(:refused, :usage)
       refusal_details = a.dig(:refused, :stop_details)
+      # `input_transformations` from the last refused fallback's `message_start`; none for the
+      # primary, whose message_start was emitted.
+      refusal_transformations = nil
+      has_refusal_transformations = false
 
       iterations = [iteration_usage("message", a[:model] || "", a.dig(:refused, :usage))]
 
@@ -387,20 +393,19 @@ module Anthropic
         if failed
           next if has_next
           stop_details = refusal_details.merge("recommended_model" => model)
-          y << emit(
-            "message_delta",
-            {
-              type: "message_delta",
-              context_management: nil,
-              delta: {
-                stop_reason: "refusal",
-                stop_sequence: nil,
-                container: nil,
-                stop_details: stop_details
-              },
-              usage: last_usage || {}
-            }
-          )
+          payload = {
+            type: "message_delta",
+            context_management: nil,
+            delta: {
+              stop_reason: "refusal",
+              stop_sequence: nil,
+              container: nil,
+              stop_details: stop_details
+            },
+            usage: last_usage || {}
+          }
+          payload[:input_transformations] = refusal_transformations if has_refusal_transformations
+          y << emit("message_delta", payload)
           y << emit("message_stop", {type: "message_stop"})
           return
         end
@@ -435,6 +440,8 @@ module Anthropic
 
         token = b.dig(:refused, :token)
         refusal_details = b.dig(:refused, :stop_details)
+        refusal_transformations = b.dig(:refused, :input_transformations)
+        has_refusal_transformations = b.dig(:refused, :has_input_transformations) == true
         base = sent
         partial = b.dig(:refused, :has_prefill_claim) ? to_prefill_blocks(b[:blocks]) : []
         iterations << iteration_usage("message", model, b.dig(:refused, :usage))
@@ -499,6 +506,8 @@ module Anthropic
       tracker = BlockTracker.new(index_base)
       model = nil
       start_usage = nil
+      start_transformations = nil
+      has_start_transformations = false
       accepted = true
 
       lines = Anthropic::Internal::Util.decode_lines(upstream)
@@ -510,6 +519,10 @@ module Anthropic
         when "message_start"
           model = p.dig("message", "model")
           start_usage = p.dig("message", "usage")
+          if p["message"]&.key?("input_transformations")
+            has_start_transformations = true
+            start_transformations = p.dig("message", "input_transformations")
+          end
           next if splice
         when "content_block_start"
           tracker.start(p)
@@ -534,7 +547,12 @@ module Anthropic
                   token: details["fallback_credit_token"],
                   has_prefill_claim: details["fallback_has_prefill_claim"] == true,
                   usage: usage,
-                  stop_details: details
+                  stop_details: details,
+                  # The `input_transformations` from a spliced fallback hop's suppressed
+                  # `message_start` event. Retained so the field can be forwarded onto the refusal
+                  # `message_delta` event emitted if the chain degrades.
+                  input_transformations: start_transformations,
+                  has_input_transformations: !splice.nil? && has_start_transformations
                 },
                 model: model,
                 blocks: tracker.content_blocks,
@@ -547,6 +565,11 @@ module Anthropic
             iter_type = refused ? "message" : "fallback_message"
             usage["iterations"] = splice[:iterations] + [iteration_usage(iter_type, splice[:model], usage)]
             p["usage"] = usage
+            # The spliced fallback's `message_start` was not re-emitted, so copy its
+            # `input_transformations` onto this message_delta, as a server-side fallback does.
+            if has_start_transformations && !p.key?("input_transformations")
+              p["input_transformations"] = start_transformations
+            end
             y << emit("message_delta", p)
             next
           end

@@ -9,17 +9,17 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::UserProfileCreateParams} for more details.
         #
-        # @overload create(access_type: nil, external_id: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
+        # @overload create(access_type: nil, external_id: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, betas: nil, request_options: {})
         #
         # @param access_type [Symbol, Anthropic::Models::Beta::UserProfileCreateParams::AccessType] Body param: How the platform uses the API on behalf of the entity this profile r
         #
         # @param external_id [String, nil] Body param: Platform's own identifier for this user. Not enforced unique. Maximu
         #
+        # @param external_user_onboarded_at [Time] Body param: A timestamp in RFC 3339 format
+        #
         # @param metadata [Hash{Symbol=>String}] Body param: Free-form key-value data to attach to this user profile. Maximum 16
         #
         # @param name [String, nil] Body param: Optional for all profiles. Real-world name of the entity this profil
-        #
-        # @param relationship [Symbol, Anthropic::Models::Beta::UserProfileCreateParams::Relationship] Body param: How the entity behind a user profile relates to the platform that ow
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
@@ -70,7 +70,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::UserProfileUpdateParams} for more details.
         #
-        # @overload update(user_profile_id, access_type: nil, external_id: nil, metadata: nil, name: nil, relationship: nil, betas: nil, request_options: {})
+        # @overload update(user_profile_id, access_type: nil, external_id: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, betas: nil, request_options: {})
         #
         # @param user_profile_id [String] Path param: Path parameter user_profile_id
         #
@@ -78,11 +78,11 @@ module Anthropic
         #
         # @param external_id [String, nil] Body param: If present, replaces the stored external_id. Omit to leave unchanged
         #
+        # @param external_user_onboarded_at [Time] Body param: A timestamp in RFC 3339 format
+        #
         # @param metadata [Hash{Symbol=>String}] Body param: Key-value pairs to merge into the stored metadata. Keys provided ove
         #
         # @param name [String, nil] Body param: If present, replaces the stored name. Omit to leave unchanged. Maxim
-        #
-        # @param relationship [Symbol, Anthropic::Models::Beta::UserProfileUpdateParams::Relationship, nil] Body param: How the entity behind a user profile relates to the platform that ow
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
@@ -106,11 +106,13 @@ module Anthropic
 
         # List User Profiles
         #
-        # @overload list(limit: nil, order: nil, page: nil, betas: nil, request_options: {})
+        # @overload list(limit: nil, order: nil, order_by: nil, page: nil, betas: nil, request_options: {})
         #
         # @param limit [Integer] Query param: Query parameter for limit
         #
         # @param order [Symbol, Anthropic::Models::Beta::UserProfileListParams::Order] Query param: Query parameter for order
+        #
+        # @param order_by [Symbol, Anthropic::Models::Beta::UserProfileListParams::OrderBy] Query param: Query parameter for order_by
         #
         # @param page [String] Query param: Query parameter for page
         #
@@ -122,7 +124,7 @@ module Anthropic
         #
         # @see Anthropic::Models::Beta::UserProfileListParams
         def list(params = {})
-          query_params = [:limit, :order, :page]
+          query_params = [:limit, :order, :order_by, :page]
           parsed, options = Anthropic::Beta::UserProfileListParams.dump_request(params)
           query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(

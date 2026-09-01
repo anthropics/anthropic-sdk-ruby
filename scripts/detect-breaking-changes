@@ -59,6 +59,7 @@ TEST_PATHS=(
 	test/anthropic/resources/beta/organization/workspaces/members_test.rb
 	test/anthropic/resources/beta/organization/workspaces/service_accounts_test.rb
 	test/anthropic/resources/beta/organization/rate_limits_test.rb
+	test/anthropic/resources/beta/organization/compliance_settings_test.rb
 	test/anthropic/client_test.rb
 )
 

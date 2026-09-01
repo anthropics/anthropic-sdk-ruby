@@ -49,7 +49,7 @@ module Anthropic
           #
           # @param limit [Integer] Query param: Maximum results per page. Defaults to 1000.
           #
-          # @param page [String] Query param: Opaque pagination cursor from a previous response's next_page. Forw
+          # @param page [String] Query param: Opaque pagination cursor from a previous response's `next_page`. Fo
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #

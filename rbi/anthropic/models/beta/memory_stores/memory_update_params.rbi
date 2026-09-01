@@ -47,9 +47,10 @@ module Anthropic
 
           # New path for the memory (a rename). Must start with `/`, contain at least one
           # non-empty segment, and be at most 1,024 bytes. Must not contain empty segments,
-          # `.` or `..` segments, control or format characters, and must be NFC-normalized.
-          # Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to
-          # leave the path unchanged.
+          # `.` or `..` segments, control or format characters, or the Unicode line and
+          # paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are
+          # case-sensitive. The memory's `id` is preserved across renames. Omit to leave the
+          # path unchanged.
           sig { returns(T.nilable(String)) }
           attr_accessor :path
 
@@ -118,9 +119,10 @@ module Anthropic
             content: nil,
             # New path for the memory (a rename). Must start with `/`, contain at least one
             # non-empty segment, and be at most 1,024 bytes. Must not contain empty segments,
-            # `.` or `..` segments, control or format characters, and must be NFC-normalized.
-            # Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to
-            # leave the path unchanged.
+            # `.` or `..` segments, control or format characters, or the Unicode line and
+            # paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are
+            # case-sensitive. The memory's `id` is preserved across renames. Omit to leave the
+            # path unchanged.
             path: nil,
             # Optimistic-concurrency precondition: the update applies only if the memory's
             # stored `content_sha256` equals the supplied value. On mismatch, the request

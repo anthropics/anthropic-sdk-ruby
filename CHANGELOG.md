@@ -1,5 +1,46 @@
 # Changelog
 
+## 1.68.0 (2026-09-01)
+
+Full Changelog: [v1.67.0...v1.68.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.67.0...v1.68.0)
+
+### Features
+
+* **api:** add external_user_onboarded_at to user profiles ([c3d7807](https://github.com/anthropics/anthropic-sdk-ruby/commit/c3d78070359ab01391ec7c2e394ca88ab132f5e1))
+* **api:** add support for claude-fable-5-1 and claude-mythos-5-1 ([de42ce6](https://github.com/anthropics/anthropic-sdk-ruby/commit/de42ce6930c2b9ebd28e4f02c4c67182f9468f83))
+* **api:** add support for organization compliance settings in the Admin API ([3e7aedf](https://github.com/anthropics/anthropic-sdk-ruby/commit/3e7aedf3650f7b866a4c2c84bf886bb89181fbfc))
+* **api:** support pagination on organization rate limit list endpoints ([c3d7807](https://github.com/anthropics/anthropic-sdk-ruby/commit/c3d78070359ab01391ec7c2e394ca88ab132f5e1))
+* **user_profiles:** sort the user profile list by name with order_by=name ([4a84a93](https://github.com/anthropics/anthropic-sdk-ruby/commit/4a84a934d9c94b28fa4dc95e91288eda5c11e0b9))
+
+
+### Bug Fixes
+
+* **api:** mark the beta header required on Admin API Tunnel operations ([9fa2c88](https://github.com/anthropics/anthropic-sdk-ruby/commit/9fa2c887f939ef20e227160fa09b1bbae0f8e099))
+* **api:** remove unsupported allowed_callers from the toolset entries ([cda00aa](https://github.com/anthropics/anthropic-sdk-ruby/commit/cda00aad4543f76eb94d5f92412d0f96cfff0046))
+* **client:** resolve custom request paths against the base URL correctly ([032ea6d](https://github.com/anthropics/anthropic-sdk-ruby/commit/032ea6d34c0b60036f2607ce5ed4c933db2c3a85))
+* **client:** send the file's base name when wrapping an opened file in FilePart ([a768bac](https://github.com/anthropics/anthropic-sdk-ruby/commit/a768bacfa2d6a9c57dee2103d5c96d79d6501e52))
+
+
+### Chores
+
+* **api:** remove unreleased thinking prefix_mismatched_behavior param ([8712e2b](https://github.com/anthropics/anthropic-sdk-ruby/commit/8712e2b22fc4bcdbda9ff9b7fb27d75fabfa8997))
+* **api:** remove user profile relationship in favor of access_type ([8712e2b](https://github.com/anthropics/anthropic-sdk-ruby/commit/8712e2b22fc4bcdbda9ff9b7fb27d75fabfa8997))
+* **ci:** keep the build + gem artifact upload job under stlc ([2aa054d](https://github.com/anthropics/anthropic-sdk-ruby/commit/2aa054daeb9027e8d5d5818050b4ce238c65e2fa))
+* **docs:** clarify disallowed characters in memory paths ([a3be29e](https://github.com/anthropics/anthropic-sdk-ruby/commit/a3be29e12d8492bbcf93f0a9f7b6e16c01136418))
+* **internal:** add browser-stubbed internal/node module and lint rule for Node built-in imports ([c3d7807](https://github.com/anthropics/anthropic-sdk-ruby/commit/c3d78070359ab01391ec7c2e394ca88ab132f5e1))
+* **internal:** add CLAUDE.md contributor notes ([#172](https://github.com/anthropics/anthropic-sdk-ruby/issues/172)) ([eb09f00](https://github.com/anthropics/anthropic-sdk-ruby/commit/eb09f009e76d0da3cef56ee0c9d58d0caee7b3e4))
+* **internal:** pin JAVA_HOME for detekt-rules tests and relax UnusedPrivateProperty for tests/examples ([c3d7807](https://github.com/anthropics/anthropic-sdk-ruby/commit/c3d78070359ab01391ec7c2e394ca88ab132f5e1))
+* **internal:** read the request id shown in Terraform error diagnostics from the response header ([c3d7807](https://github.com/anthropics/anthropic-sdk-ruby/commit/c3d78070359ab01391ec7c2e394ca88ab132f5e1))
+* **internal:** remove discriminator support from PropertyInfo ([3e7aedf](https://github.com/anthropics/anthropic-sdk-ruby/commit/3e7aedf3650f7b866a4c2c84bf886bb89181fbfc))
+* **internal:** remove duplicated platforms from Gemfile.lock ([06b06d3](https://github.com/anthropics/anthropic-sdk-ruby/commit/06b06d3082923adce2ee5617426096e0ef7e1a2b))
+
+
+### Documentation
+
+* **api:** backtick identifiers in managed-agents API descriptions ([49e29df](https://github.com/anthropics/anthropic-sdk-ruby/commit/49e29df7b9f0cecd1f5b3f93a1b3e24ff7824952))
+* **api:** describe external_key_id and compartment_id behavior on Claude Platform on AWS ([88498ab](https://github.com/anthropics/anthropic-sdk-ruby/commit/88498ab6dd2d08f9f79d1dcb59bfa312de303a81))
+* **changelog:** detail the beta files/skills GA-shape change ([#231](https://github.com/anthropics/anthropic-sdk-ruby/issues/231)) ([ce58f9f](https://github.com/anthropics/anthropic-sdk-ruby/commit/ce58f9fab8eb1ebe7e42151b62a0a55bf8bbeda5))
+
 ## 1.67.0 (2026-08-27)
 
 Full Changelog: [v1.66.0...v1.67.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.66.0...v1.67.0)

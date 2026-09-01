@@ -167,7 +167,31 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaUsage]
         required :usage, -> { Anthropic::Beta::BetaUsage }
 
-        # @!method initialize(id:, container:, content:, context_management:, diagnostics:, model:, stop_details:, stop_reason:, stop_sequence:, usage:, role: :assistant, type: :message)
+        # @!attribute input_transformations
+        #   Changes the API made to the request's input before showing it to the model: one
+        #   entry per change, in request order. Today the only entry type is
+        #   `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text` block
+        #   from the request's `messages` that was removed from the prompt instead of being
+        #   shown to the model because it failed a binding check. More entry types may be
+        #   added over time; ignore types you do not recognize.
+        #
+        #   Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+        #   every such response from a model that supports extended thinking, as `[]` when
+        #   nothing was changed; without the beta, blocks are removed all the same but
+        #   nothing is reported. Removed blocks contribute nothing to `usage.input_tokens`.
+        #   When streaming, the array is final in `message_start`; the final `message_delta`
+        #   event carries it only when a server-side model fallback happened mid-stream, in
+        #   which case it holds the serving model's entries and replaces the one in
+        #   `message_start`.
+        #
+        #   @return [Array<Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation>, nil]
+        optional :input_transformations,
+                 -> {
+                   Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaThinkingDroppedInputTransformation]
+                 },
+                 nil?: true
+
+        # @!method initialize(id:, container:, content:, context_management:, diagnostics:, model:, stop_details:, stop_reason:, stop_sequence:, usage:, input_transformations: nil, role: :assistant, type: :message)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaMessage} for more details.
         #
@@ -190,6 +214,8 @@ module Anthropic
         #   @param stop_sequence [String, nil] Which custom stop sequence was generated, if any.
         #
         #   @param usage [Anthropic::Models::Beta::BetaUsage] Billing and rate-limit usage.
+        #
+        #   @param input_transformations [Array<Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation>, nil] Changes the API made to the request's input before showing it to the model:
         #
         #   @param role [Symbol, :assistant] Conversational role of the generated message.
         #

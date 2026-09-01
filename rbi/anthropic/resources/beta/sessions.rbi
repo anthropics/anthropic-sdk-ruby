@@ -162,7 +162,7 @@ module Anthropic
         def list(
           # Query param: Filter sessions created with this agent ID.
           agent_id: nil,
-          # Query param: Filter by agent version. Only applies when agent_id is also set.
+          # Query param: Filter by agent version. Only applies when `agent_id` is also set.
           agent_version: nil,
           # Query param: Return sessions created after this time (exclusive).
           created_at_gt: nil,
@@ -179,11 +179,11 @@ module Anthropic
           include_archived: nil,
           # Query param: Maximum number of results to return.
           limit: nil,
-          # Query param: Filter sessions whose resources contain a memory_store with this
+          # Query param: Filter sessions whose resources contain a `memory_store` with this
           # memory store ID.
           memory_store_id: nil,
-          # Query param: Sort direction for results, ordered by created_at. Defaults to desc
-          # (newest first).
+          # Query param: Sort direction for results, ordered by `created_at`. Defaults to
+          # `desc` (newest first).
           order: nil,
           # Query param: Opaque pagination cursor from a previous response.
           page: nil,

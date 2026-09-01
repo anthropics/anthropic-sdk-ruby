@@ -58,7 +58,7 @@ module Anthropic
         sig { returns(T::Hash[Symbol, String]) }
         attr_accessor :metadata
 
-        # Per-outcome evaluation state. One entry per define_outcome event sent to the
+        # Per-outcome evaluation state. One entry per `define_outcome` event sent to the
         # session.
         sig do
           returns(
@@ -177,7 +177,7 @@ module Anthropic
           created_at:,
           environment_id:,
           metadata:,
-          # Per-outcome evaluation state. One entry per define_outcome event sent to the
+          # Per-outcome evaluation state. One entry per `define_outcome` event sent to the
           # session.
           outcome_evaluations:,
           resources:,

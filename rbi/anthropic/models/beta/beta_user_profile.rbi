@@ -67,31 +67,15 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :external_id
 
+        # A timestamp in RFC 3339 format
+        sig { returns(T.nilable(Time)) }
+        attr_accessor :external_user_onboarded_at
+
         # Real-world name of the entity this profile represents (company or individual).
-        # For a resold-to company (`access_type` `passthrough`, or `relationship` `resold`
-        # under the `user-profiles-2026-03-24` header) this is that company's name.
+        # For a company the platform resells Claude access to (`access_type`
+        # `passthrough`) this is that company's name.
         sig { returns(T.nilable(String)) }
         attr_accessor :name
-
-        # How the entity behind a user profile relates to the platform that owns the API
-        # key. `external`: an individual end-user of the platform. `resold`: a company the
-        # platform resells Claude access to. `internal`: the platform's own usage.
-        sig do
-          returns(
-            T.nilable(
-              Anthropic::Beta::BetaUserProfile::Relationship::TaggedSymbol
-            )
-          )
-        end
-        attr_reader :relationship
-
-        sig do
-          params(
-            relationship:
-              Anthropic::Beta::BetaUserProfile::Relationship::OrSymbol
-          ).void
-        end
-        attr_writer :relationship
 
         sig do
           params(
@@ -107,9 +91,8 @@ module Anthropic
             updated_at: Time,
             access_type: Anthropic::Beta::BetaUserProfile::AccessType::OrSymbol,
             external_id: T.nilable(String),
-            name: T.nilable(String),
-            relationship:
-              Anthropic::Beta::BetaUserProfile::Relationship::OrSymbol
+            external_user_onboarded_at: T.nilable(Time),
+            name: T.nilable(String)
           ).returns(T.attached_class)
         end
         def self.new(
@@ -135,14 +118,12 @@ module Anthropic
           access_type: nil,
           # Platform's own identifier for this user. Not enforced unique.
           external_id: nil,
+          # A timestamp in RFC 3339 format
+          external_user_onboarded_at: nil,
           # Real-world name of the entity this profile represents (company or individual).
-          # For a resold-to company (`access_type` `passthrough`, or `relationship` `resold`
-          # under the `user-profiles-2026-03-24` header) this is that company's name.
-          name: nil,
-          # How the entity behind a user profile relates to the platform that owns the API
-          # key. `external`: an individual end-user of the platform. `resold`: a company the
-          # platform resells Claude access to. `internal`: the platform's own usage.
-          relationship: nil
+          # For a company the platform resells Claude access to (`access_type`
+          # `passthrough`) this is that company's name.
+          name: nil
         )
         end
 
@@ -159,9 +140,8 @@ module Anthropic
               access_type:
                 Anthropic::Beta::BetaUserProfile::AccessType::TaggedSymbol,
               external_id: T.nilable(String),
-              name: T.nilable(String),
-              relationship:
-                Anthropic::Beta::BetaUserProfile::Relationship::TaggedSymbol
+              external_user_onboarded_at: T.nilable(Time),
+              name: T.nilable(String)
             }
           )
         end
@@ -222,45 +202,6 @@ module Anthropic
             override.returns(
               T::Array[
                 Anthropic::Beta::BetaUserProfile::AccessType::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
-          end
-        end
-
-        # How the entity behind a user profile relates to the platform that owns the API
-        # key. `external`: an individual end-user of the platform. `resold`: a company the
-        # platform resells Claude access to. `internal`: the platform's own usage.
-        module Relationship
-          extend Anthropic::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Anthropic::Beta::BetaUserProfile::Relationship)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          EXTERNAL =
-            T.let(
-              :external,
-              Anthropic::Beta::BetaUserProfile::Relationship::TaggedSymbol
-            )
-          RESOLD =
-            T.let(
-              :resold,
-              Anthropic::Beta::BetaUserProfile::Relationship::TaggedSymbol
-            )
-          INTERNAL =
-            T.let(
-              :internal,
-              Anthropic::Beta::BetaUserProfile::Relationship::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                Anthropic::Beta::BetaUserProfile::Relationship::TaggedSymbol
               ]
             )
           end

@@ -37,8 +37,8 @@ module Anthropic
         required :error, union: -> { Anthropic::Beta::BetaManagedAgentsDeploymentRun::Error }, nil?: true
 
         # @!attribute session_id
-        #   Populated on success. Null on creation failure. Exactly one of session_id or
-        #   error is non-null.
+        #   Populated on success. Null on creation failure. Exactly one of `session_id` or
+        #   `error` is non-null.
         #
         #   @return [String, nil]
         required :session_id, String, nil?: true
@@ -71,7 +71,7 @@ module Anthropic
         #
         #   @param error [Anthropic::Models::Beta::BetaManagedAgentsEnvironmentArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsAgentArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsEnvironmentNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsVaultNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsVaultArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsFileNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsMemoryStoreArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsSkillNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsSessionResourceNotFoundRunError, Anthropic::Models::Beta::BetaManagedAgentsWorkspaceArchivedRunError, Anthropic::Models::Beta::BetaManagedAgentsOrganizationDisabledRunError, Anthropic::Models::Beta::BetaManagedAgentsSessionRateLimitedRunError, Anthropic::Models::Beta::BetaManagedAgentsSessionCreationRejectedRunError, Anthropic::Models::Beta::BetaManagedAgentsUnknownRunError, Anthropic::Models::Beta::BetaManagedAgentsSelfHostedResourcesUnsupportedRunError, Anthropic::Models::Beta::BetaManagedAgentsMCPEgressBlockedRunError, nil] Why the run failed to create a session. The type identifies the failure; message
         #
-        #   @param session_id [String, nil] Populated on success. Null on creation failure. Exactly one of session_id or err
+        #   @param session_id [String, nil] Populated on success. Null on creation failure. Exactly one of `session_id` or `
         #
         #   @param trigger_context [Anthropic::Models::Beta::BetaManagedAgentsScheduleTriggerContext, Anthropic::Models::Beta::BetaManagedAgentsManualTriggerContext] Describes what triggered a deployment run, with trigger-specific metadata.
         #

@@ -23,9 +23,9 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :description
 
-        # Grader's verdict text from the most recent evaluation. For satisfied, explains
-        # why criteria are met; for needs_revision (intermediate), what's missing; for
-        # failed, why unrecoverable.
+        # Grader's verdict text from the most recent evaluation. For `satisfied`, explains
+        # why criteria are met; for `needs_revision` (intermediate), what's missing; for
+        # `failed`, why unrecoverable.
         sig { returns(T.nilable(String)) }
         attr_accessor :explanation
 
@@ -50,7 +50,7 @@ module Anthropic
         end
         attr_accessor :type
 
-        # Evaluation state for a single outcome defined via a define_outcome event.
+        # Evaluation state for a single outcome defined via a `define_outcome` event.
         sig do
           params(
             completed_at: T.nilable(Time),
@@ -68,9 +68,9 @@ module Anthropic
           completed_at:,
           # What the agent should produce.
           description:,
-          # Grader's verdict text from the most recent evaluation. For satisfied, explains
-          # why criteria are met; for needs_revision (intermediate), what's missing; for
-          # failed, why unrecoverable.
+          # Grader's verdict text from the most recent evaluation. For `satisfied`, explains
+          # why criteria are met; for `needs_revision` (intermediate), what's missing; for
+          # `failed`, why unrecoverable.
           explanation:,
           # 0-indexed revision cycle the outcome is currently on.
           iteration:,

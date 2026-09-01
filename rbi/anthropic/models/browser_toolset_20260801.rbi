@@ -11,23 +11,6 @@ module Anthropic
       sig { returns(Symbol) }
       attr_accessor :type
 
-      sig do
-        returns(
-          T.nilable(
-            T::Array[Anthropic::BrowserToolset20260801::AllowedCaller::OrSymbol]
-          )
-        )
-      end
-      attr_reader :allowed_callers
-
-      sig do
-        params(
-          allowed_callers:
-            T::Array[Anthropic::BrowserToolset20260801::AllowedCaller::OrSymbol]
-        ).void
-      end
-      attr_writer :allowed_callers
-
       # Create a cache control breakpoint at this content block.
       sig { returns(T.nilable(Anthropic::CacheControlEphemeral)) }
       attr_reader :cache_control
@@ -59,17 +42,12 @@ module Anthropic
       # disabled via `configs` removed from its schema.
       sig do
         params(
-          allowed_callers:
-            T::Array[
-              Anthropic::BrowserToolset20260801::AllowedCaller::OrSymbol
-            ],
           cache_control: T.nilable(Anthropic::CacheControlEphemeral::OrHash),
           configs: T.nilable(Anthropic::BrowserToolsetConfigs::OrHash),
           type: Symbol
         ).returns(T.attached_class)
       end
       def self.new(
-        allowed_callers: nil,
         # Create a cache control breakpoint at this content block.
         cache_control: nil,
         # Per-member configuration for `browser_toolset_20260801`: one optional field per
@@ -86,64 +64,12 @@ module Anthropic
         override.returns(
           {
             type: Symbol,
-            allowed_callers:
-              T::Array[
-                Anthropic::BrowserToolset20260801::AllowedCaller::OrSymbol
-              ],
             cache_control: T.nilable(Anthropic::CacheControlEphemeral),
             configs: T.nilable(Anthropic::BrowserToolsetConfigs)
           }
         )
       end
       def to_hash
-      end
-
-      # Specifies who can invoke a tool.
-      #
-      # Values: direct: The model can call this tool directly. code_execution_20250825:
-      # The tool can be called from the code execution environment (v1).
-      # code_execution_20260120: The tool can be called from the code execution
-      # environment (v2 with persistence). code_execution_20260521: The tool can be
-      # called from the code execution environment (v2 with persistence).
-      module AllowedCaller
-        extend Anthropic::Internal::Type::Enum
-
-        TaggedSymbol =
-          T.type_alias do
-            T.all(Symbol, Anthropic::BrowserToolset20260801::AllowedCaller)
-          end
-        OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-        DIRECT =
-          T.let(
-            :direct,
-            Anthropic::BrowserToolset20260801::AllowedCaller::TaggedSymbol
-          )
-        CODE_EXECUTION_20250825 =
-          T.let(
-            :code_execution_20250825,
-            Anthropic::BrowserToolset20260801::AllowedCaller::TaggedSymbol
-          )
-        CODE_EXECUTION_20260120 =
-          T.let(
-            :code_execution_20260120,
-            Anthropic::BrowserToolset20260801::AllowedCaller::TaggedSymbol
-          )
-        CODE_EXECUTION_20260521 =
-          T.let(
-            :code_execution_20260521,
-            Anthropic::BrowserToolset20260801::AllowedCaller::TaggedSymbol
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              Anthropic::BrowserToolset20260801::AllowedCaller::TaggedSymbol
-            ]
-          )
-        end
-        def self.values
-        end
       end
     end
   end

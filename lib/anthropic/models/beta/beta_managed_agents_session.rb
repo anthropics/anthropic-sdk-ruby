@@ -47,7 +47,7 @@ module Anthropic
         required :metadata, Anthropic::Internal::Type::HashOf[String]
 
         # @!attribute outcome_evaluations
-        #   Per-outcome evaluation state. One entry per define_outcome event sent to the
+        #   Per-outcome evaluation state. One entry per `define_outcome` event sent to the
         #   session.
         #
         #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsOutcomeEvaluationResource>]
@@ -128,7 +128,7 @@ module Anthropic
         #
         #   @param metadata [Hash{Symbol=>String}]
         #
-        #   @param outcome_evaluations [Array<Anthropic::Models::Beta::BetaManagedAgentsOutcomeEvaluationResource>] Per-outcome evaluation state. One entry per define_outcome event sent to the ses
+        #   @param outcome_evaluations [Array<Anthropic::Models::Beta::BetaManagedAgentsOutcomeEvaluationResource>] Per-outcome evaluation state. One entry per `define_outcome` event sent to the s
         #
         #   @param resources [Array<Anthropic::Models::Beta::Sessions::BetaManagedAgentsGitHubRepositoryResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsFileResource, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMemoryStoreResource>]
         #

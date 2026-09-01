@@ -293,6 +293,134 @@ class Anthropic::Test::Resources::Beta::Messages::StreamingTest < Minitest::Test
     SSE
   end
 
+  def test_accumulated_message_replaces_input_transformations_from_message_delta
+    stub_streaming_response(input_transformations_delta_sse_response)
+
+    stream = @client.beta.messages.stream(**compaction_params)
+    message = stream.accumulated_message
+
+    # The list on message_delta (a mid-stream fallback) replaces the one from message_start.
+    assert_equal(1, message.input_transformations.length)
+    transformation = message.input_transformations.first
+    assert_equal(:thinking_dropped, transformation.type)
+    assert_equal("messages.1.content.0", transformation.path)
+    assert_equal(:model_binding_mismatch, transformation.reason)
+  end
+
+  def test_accumulated_message_keeps_input_transformations_when_message_delta_omits_them
+    stub_streaming_response(input_transformations_start_only_sse_response)
+
+    stream = @client.beta.messages.stream(**compaction_params)
+    message = stream.accumulated_message
+
+    assert_equal(1, message.input_transformations.length)
+    assert_equal(:prefix_binding_mismatch, message.input_transformations.first.reason)
+  end
+
+  def test_accumulated_message_clears_input_transformations_on_empty_message_delta_list
+    stub_streaming_response(input_transformations_empty_delta_sse_response)
+
+    stream = @client.beta.messages.stream(**compaction_params)
+    message = stream.accumulated_message
+
+    # An empty list on message_delta still replaces the non-empty one from message_start.
+    assert_empty(message.input_transformations)
+  end
+
+  def test_message_delta_fields_are_all_handled_by_accumulate_event
+    # tripwire: handle a new field in MessageStream#accumulate_event, then list it here
+    assert_equal(
+      [:context_management, :delta, :input_transformations, :type, :usage],
+      Anthropic::Models::Beta::BetaRawMessageDeltaEvent.known_fields.keys.sort
+    )
+    assert_equal(
+      [:container, :stop_details, :stop_reason, :stop_sequence],
+      Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta.known_fields.keys.sort
+    )
+    assert_equal(
+      [
+        :cache_creation_input_tokens,
+        :cache_read_input_tokens,
+        :fallback_credit,
+        :input_tokens,
+        :iterations,
+        :output_tokens,
+        :output_tokens_details,
+        :server_tool_use
+      ],
+      Anthropic::Models::Beta::BetaMessageDeltaUsage.known_fields.keys.sort
+    )
+  end
+
+  def input_transformations_delta_sse_response
+    <<~SSE
+      event: message_start
+      data: {"type":"message_start","message":{"id":"msg_transform_delta","type":"message","role":"assistant","content":[],"model":"claude-sonnet-4-20250514","stop_reason":null,"stop_sequence":null,"input_transformations":[{"type":"thinking_dropped","path":"messages.1.content.0","reason":"prefix_binding_mismatch"}],"usage":{"input_tokens":10,"output_tokens":1}}}
+
+      event: content_block_start
+      data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":"","citations":null}}
+
+      event: content_block_delta
+      data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"Hi."}}
+
+      event: content_block_stop
+      data: {"type":"content_block_stop","index":0}
+
+      event: message_delta
+      data: {"type":"message_delta","input_transformations":[{"type":"thinking_dropped","path":"messages.1.content.0","reason":"model_binding_mismatch"}],"delta":{"stop_reason":"end_turn","stop_sequence":null},"usage":{"output_tokens":15}}
+
+      event: message_stop
+      data: {"type":"message_stop"}
+
+    SSE
+  end
+
+  def input_transformations_start_only_sse_response
+    <<~SSE
+      event: message_start
+      data: {"type":"message_start","message":{"id":"msg_transform_start","type":"message","role":"assistant","content":[],"model":"claude-sonnet-4-20250514","stop_reason":null,"stop_sequence":null,"input_transformations":[{"type":"thinking_dropped","path":"messages.1.content.0","reason":"prefix_binding_mismatch"}],"usage":{"input_tokens":10,"output_tokens":1}}}
+
+      event: content_block_start
+      data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":"","citations":null}}
+
+      event: content_block_delta
+      data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"Hi."}}
+
+      event: content_block_stop
+      data: {"type":"content_block_stop","index":0}
+
+      event: message_delta
+      data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null},"usage":{"output_tokens":15}}
+
+      event: message_stop
+      data: {"type":"message_stop"}
+
+    SSE
+  end
+
+  def input_transformations_empty_delta_sse_response
+    <<~SSE
+      event: message_start
+      data: {"type":"message_start","message":{"id":"msg_transform_empty","type":"message","role":"assistant","content":[],"model":"claude-sonnet-4-20250514","stop_reason":null,"stop_sequence":null,"input_transformations":[{"type":"thinking_dropped","path":"messages.1.content.0","reason":"prefix_binding_mismatch"}],"usage":{"input_tokens":10,"output_tokens":1}}}
+
+      event: content_block_start
+      data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":"","citations":null}}
+
+      event: content_block_delta
+      data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"Hi."}}
+
+      event: content_block_stop
+      data: {"type":"content_block_stop","index":0}
+
+      event: message_delta
+      data: {"type":"message_delta","input_transformations":[],"delta":{"stop_reason":"end_turn","stop_sequence":null},"usage":{"output_tokens":15}}
+
+      event: message_stop
+      data: {"type":"message_stop"}
+
+    SSE
+  end
+
   def test_accumulated_message_carries_fallback_credit_usage
     stub_streaming_response(fallback_credit_sse_response)
 

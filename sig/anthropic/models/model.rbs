@@ -1,7 +1,9 @@
 module Anthropic
   module Models
     type model =
-      :"claude-sonnet-5"
+      :"claude-fable-5-1"
+      | :"claude-mythos-5-1"
+      | :"claude-sonnet-5"
       | :"claude-fable-5"
       | :"claude-mythos-5"
       | :"claude-opus-5"
@@ -22,6 +24,12 @@ module Anthropic
       extend Anthropic::Internal::Type::Union
 
       def self?.variants: -> ::Array[Anthropic::Models::model]
+
+      # Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
+      CLAUDE_FABLE_5_1: :"claude-fable-5-1"
+
+      # Our most capable model for cybersecurity and biology research, available through trusted access programs
+      CLAUDE_MYTHOS_5_1: :"claude-mythos-5-1"
 
       # High-performance model for coding and agents
       CLAUDE_SONNET_5: :"claude-sonnet-5"

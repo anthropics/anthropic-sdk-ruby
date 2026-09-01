@@ -52,7 +52,7 @@ module Anthropic
         in [nil, Pathname]
           content.basename.to_path
         in [nil, IO]
-          content.to_path
+          ::File.basename(content.to_path)
         else
           filename
         end

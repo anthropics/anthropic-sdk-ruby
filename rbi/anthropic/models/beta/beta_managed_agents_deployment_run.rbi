@@ -48,8 +48,8 @@ module Anthropic
         end
         attr_accessor :error
 
-        # Populated on success. Null on creation failure. Exactly one of session_id or
-        # error is non-null.
+        # Populated on success. Null on creation failure. Exactly one of `session_id` or
+        # `error` is non-null.
         sig { returns(T.nilable(String)) }
         attr_accessor :session_id
 
@@ -117,8 +117,8 @@ module Anthropic
           # Why the run failed to create a session. The type identifies the failure; message
           # is human-readable detail.
           error:,
-          # Populated on success. Null on creation failure. Exactly one of session_id or
-          # error is non-null.
+          # Populated on success. Null on creation failure. Exactly one of `session_id` or
+          # `error` is non-null.
           session_id:,
           # Describes what triggered a deployment run, with trigger-specific metadata.
           trigger_context:,

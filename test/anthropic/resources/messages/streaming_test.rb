@@ -651,6 +651,31 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
     assert_nil(message.stop_sequence)
   end
 
+  def test_message_delta_fields_are_all_handled_by_accumulate_event
+    # tripwire: handle a new field in MessageStream#accumulate_event, then list it here.
+    # Beta-only fields are gated on BetaRawMessageDeltaEvent there, so a field graduating
+    # from beta needs its own non-beta branch before it is listed below.
+    assert_equal(
+      [:delta, :type, :usage],
+      Anthropic::Models::RawMessageDeltaEvent.known_fields.keys.sort
+    )
+    assert_equal(
+      [:container, :stop_details, :stop_reason, :stop_sequence],
+      Anthropic::Models::RawMessageDeltaEvent::Delta.known_fields.keys.sort
+    )
+    assert_equal(
+      [
+        :cache_creation_input_tokens,
+        :cache_read_input_tokens,
+        :input_tokens,
+        :output_tokens,
+        :output_tokens_details,
+        :server_tool_use
+      ],
+      Anthropic::Models::MessageDeltaUsage.known_fields.keys.sort
+    )
+  end
+
   def test_streaming_error_event_has_type
     sse_body = <<~SSE
       event: message_start

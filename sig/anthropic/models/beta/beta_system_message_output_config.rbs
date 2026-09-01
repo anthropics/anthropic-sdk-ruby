@@ -1,0 +1,38 @@
+module Anthropic
+  module Models
+    class BetaSystemMessageOutputConfig = Beta::BetaSystemMessageOutputConfig
+
+    module Beta
+      type beta_system_message_output_config =
+        {
+          effort: Anthropic::Models::Beta::BetaSystemMessageOutputConfig::effort?
+        }
+
+      class BetaSystemMessageOutputConfig < Anthropic::Internal::Type::BaseModel
+        attr_accessor effort: Anthropic::Models::Beta::BetaSystemMessageOutputConfig::effort?
+
+        def initialize: (
+          ?effort: Anthropic::Models::Beta::BetaSystemMessageOutputConfig::effort?
+        ) -> void
+
+        def to_hash: -> {
+          effort: Anthropic::Models::Beta::BetaSystemMessageOutputConfig::effort?
+        }
+
+        type effort = :low | :medium | :high | :xhigh | :max
+
+        module Effort
+          extend Anthropic::Internal::Type::Enum
+
+          LOW: :low
+          MEDIUM: :medium
+          HIGH: :high
+          XHIGH: :xhigh
+          MAX: :max
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaSystemMessageOutputConfig::effort]
+        end
+      end
+    end
+  end
+end

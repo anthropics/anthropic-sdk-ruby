@@ -1,0 +1,51 @@
+module Anthropic
+  module Models
+    class BetaThinkingDroppedInputTransformation = Beta::BetaThinkingDroppedInputTransformation
+
+    module Beta
+      type beta_thinking_dropped_input_transformation =
+        {
+          path: String,
+          reason: Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation::reason,
+          type: :thinking_dropped
+        }
+
+      class BetaThinkingDroppedInputTransformation < Anthropic::Internal::Type::BaseModel
+        attr_accessor path: String
+
+        attr_accessor reason: Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation::reason
+
+        attr_accessor type: :thinking_dropped
+
+        def initialize: (
+          path: String,
+          reason: Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation::reason,
+          ?type: :thinking_dropped
+        ) -> void
+
+        def to_hash: -> {
+          path: String,
+          reason: Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation::reason,
+          type: :thinking_dropped
+        }
+
+        type reason =
+          :model_binding_mismatch
+          | :prefix_binding_mismatch
+          | :organization_binding_mismatch
+          | :end_user_binding_mismatch
+
+        module Reason
+          extend Anthropic::Internal::Type::Enum
+
+          MODEL_BINDING_MISMATCH: :model_binding_mismatch
+          PREFIX_BINDING_MISMATCH: :prefix_binding_mismatch
+          ORGANIZATION_BINDING_MISMATCH: :organization_binding_mismatch
+          END_USER_BINDING_MISMATCH: :end_user_binding_mismatch
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation::reason]
+        end
+      end
+    end
+  end
+end

@@ -94,11 +94,11 @@ module Anthropic
             #
             # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
             #
-            #   @option args [String] :kms_arn Full ARN of the AWS KMS key.
+            #   @option args [String] :kms_arn Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-
             #
             #   @option args [String, nil] :region AWS region. Derived from `kms_arn` if omitted.
             #
-            #   @option args [String, nil] :role_arn IAM role ARN. Deprecated — Anthropic reaches the KMS key via a managed intermedi
+            #   @option args [String, nil] :role_arn IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own interme
             #
             #   @option args [String] :key_name Full resource name of the Cloud KMS key.
             #

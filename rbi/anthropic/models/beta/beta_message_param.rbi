@@ -20,20 +20,75 @@ module Anthropic
         sig { returns(Anthropic::Beta::BetaMessageParam::Role::OrSymbol) }
         attr_accessor :role
 
+        # How long this system message's text stays in front of the model. `"never"` (the
+        # default) renders it on every request that includes it. `"next_user_message"`
+        # renders it only for the user turn it follows: once a later `role: "user"`
+        # message exists in `messages` the message stays in the array (send it unchanged)
+        # but is no longer shown to the model. Only permitted on `role: "system"`
+        # messages.
+        sig do
+          returns(
+            T.nilable(Anthropic::Beta::BetaMessageParam::ClearAt::OrSymbol)
+          )
+        end
+        attr_accessor :clear_at
+
+        # Per-message output configuration on a role:"system" input message.
+        #
+        # Fields here apply per-turn; `format` remains top-level only. An empty `{}` is
+        # accepted on a message that carries content; a message with neither content nor
+        # output_config fields is rejected.
+        sig do
+          returns(T.nilable(Anthropic::Beta::BetaSystemMessageOutputConfig))
+        end
+        attr_reader :output_config
+
+        sig do
+          params(
+            output_config:
+              T.nilable(Anthropic::Beta::BetaSystemMessageOutputConfig::OrHash)
+          ).void
+        end
+        attr_writer :output_config
+
         sig do
           params(
             content: Anthropic::Beta::BetaMessageParam::Content::Variants,
-            role: Anthropic::Beta::BetaMessageParam::Role::OrSymbol
+            role: Anthropic::Beta::BetaMessageParam::Role::OrSymbol,
+            clear_at:
+              T.nilable(Anthropic::Beta::BetaMessageParam::ClearAt::OrSymbol),
+            output_config:
+              T.nilable(Anthropic::Beta::BetaSystemMessageOutputConfig::OrHash)
           ).returns(T.attached_class)
         end
-        def self.new(content:, role:)
+        def self.new(
+          content:,
+          role:,
+          # How long this system message's text stays in front of the model. `"never"` (the
+          # default) renders it on every request that includes it. `"next_user_message"`
+          # renders it only for the user turn it follows: once a later `role: "user"`
+          # message exists in `messages` the message stays in the array (send it unchanged)
+          # but is no longer shown to the model. Only permitted on `role: "system"`
+          # messages.
+          clear_at: nil,
+          # Per-message output configuration on a role:"system" input message.
+          #
+          # Fields here apply per-turn; `format` remains top-level only. An empty `{}` is
+          # accepted on a message that carries content; a message with neither content nor
+          # output_config fields is rejected.
+          output_config: nil
+        )
         end
 
         sig do
           override.returns(
             {
               content: Anthropic::Beta::BetaMessageParam::Content::Variants,
-              role: Anthropic::Beta::BetaMessageParam::Role::OrSymbol
+              role: Anthropic::Beta::BetaMessageParam::Role::OrSymbol,
+              clear_at:
+                T.nilable(Anthropic::Beta::BetaMessageParam::ClearAt::OrSymbol),
+              output_config:
+                T.nilable(Anthropic::Beta::BetaSystemMessageOutputConfig)
             }
           )
         end
@@ -93,6 +148,41 @@ module Anthropic
           sig do
             override.returns(
               T::Array[Anthropic::Beta::BetaMessageParam::Role::TaggedSymbol]
+            )
+          end
+          def self.values
+          end
+        end
+
+        # How long this system message's text stays in front of the model. `"never"` (the
+        # default) renders it on every request that includes it. `"next_user_message"`
+        # renders it only for the user turn it follows: once a later `role: "user"`
+        # message exists in `messages` the message stays in the array (send it unchanged)
+        # but is no longer shown to the model. Only permitted on `role: "system"`
+        # messages.
+        module ClearAt
+          extend Anthropic::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Anthropic::Beta::BetaMessageParam::ClearAt)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          NEXT_USER_MESSAGE =
+            T.let(
+              :next_user_message,
+              Anthropic::Beta::BetaMessageParam::ClearAt::TaggedSymbol
+            )
+          NEVER =
+            T.let(
+              :never,
+              Anthropic::Beta::BetaMessageParam::ClearAt::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[Anthropic::Beta::BetaMessageParam::ClearAt::TaggedSymbol]
             )
           end
           def self.values

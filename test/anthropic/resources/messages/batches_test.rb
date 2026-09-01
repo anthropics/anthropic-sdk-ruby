@@ -9,11 +9,7 @@ class Anthropic::Test::Resources::Messages::BatchesTest < Anthropic::Test::Resou
         requests: [
           {
             custom_id: "my-custom-id-1",
-            params: {
-              max_tokens: 1024,
-              messages: [{content: "Hello, world", role: :user}],
-              model: :"claude-opus-5"
-            }
+            params: {max_tokens: 1024, messages: [{content: "Hello, world", role: :user}], model: Anthropic::Model::CLAUDE_OPUS_5}
           }
         ]
       )

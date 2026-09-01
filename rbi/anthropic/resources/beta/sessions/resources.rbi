@@ -76,7 +76,7 @@ module Anthropic
             # Query param: Maximum number of resources to return per page (max 1000). If
             # omitted, returns all resources.
             limit: nil,
-            # Query param: Opaque cursor from a previous response's next_page field.
+            # Query param: Opaque cursor from a previous response's `next_page` field.
             page: nil,
             # Header param: Optional header to specify the beta version(s) you want to use.
             betas: nil,

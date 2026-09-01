@@ -5,9 +5,9 @@ module Anthropic
         def create: (
           ?access_type: Anthropic::Models::Beta::UserProfileCreateParams::access_type,
           ?external_id: String?,
+          ?external_user_onboarded_at: Time,
           ?metadata: ::Hash[Symbol, String],
           ?name: String?,
-          ?relationship: Anthropic::Models::Beta::UserProfileCreateParams::relationship,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaUserProfile
@@ -22,9 +22,9 @@ module Anthropic
           String user_profile_id,
           ?access_type: Anthropic::Models::Beta::UserProfileUpdateParams::access_type?,
           ?external_id: String?,
+          ?external_user_onboarded_at: Time,
           ?metadata: ::Hash[Symbol, String],
           ?name: String?,
-          ?relationship: Anthropic::Models::Beta::UserProfileUpdateParams::relationship?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaUserProfile
@@ -32,6 +32,7 @@ module Anthropic
         def list: (
           ?limit: Integer,
           ?order: Anthropic::Models::Beta::UserProfileListParams::order,
+          ?order_by: Anthropic::Models::Beta::UserProfileListParams::order_by,
           ?page: String,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?request_options: Anthropic::request_opts

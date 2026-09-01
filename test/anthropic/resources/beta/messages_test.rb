@@ -8,7 +8,7 @@ class Anthropic::Test::Resources::Beta::MessagesTest < Anthropic::Test::Resource
       @anthropic.beta.messages.create(
         max_tokens: 1024,
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-opus-5"
+        model: Anthropic::Model::CLAUDE_OPUS_5
       )
 
     assert_pattern do
@@ -28,7 +28,8 @@ class Anthropic::Test::Resources::Beta::MessagesTest < Anthropic::Test::Resource
         stop_reason: Anthropic::Beta::BetaStopReason | nil,
         stop_sequence: String | nil,
         type: Symbol,
-        usage: Anthropic::Beta::BetaUsage
+        usage: Anthropic::Beta::BetaUsage,
+        input_transformations: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaThinkingDroppedInputTransformation]) | nil
       }
     end
   end
@@ -37,7 +38,7 @@ class Anthropic::Test::Resources::Beta::MessagesTest < Anthropic::Test::Resource
     response =
       @anthropic.beta.messages.count_tokens(
         messages: [{content: "Hello, world", role: :user}],
-        model: :"claude-opus-5"
+        model: Anthropic::Model::CLAUDE_OPUS_5
       )
 
     assert_pattern do

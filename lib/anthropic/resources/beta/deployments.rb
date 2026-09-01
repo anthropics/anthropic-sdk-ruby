@@ -143,7 +143,7 @@ module Anthropic
         #
         # @param page [String] Query param: Opaque pagination cursor.
         #
-        # @param status [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeploymentStatus] Query param: Filter by status: active or paused. Omit for both. To include archi
+        # @param status [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeploymentStatus] Query param: Filter by status: `active` or `paused`. Omit for both. To include a
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #

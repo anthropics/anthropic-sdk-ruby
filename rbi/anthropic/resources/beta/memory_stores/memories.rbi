@@ -27,7 +27,8 @@ module Anthropic
             # Body param: Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`.
             # Must start with `/`, contain at least one non-empty segment, and be at most
             # 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or
-            # format characters, and must be NFC-normalized. Paths are case-sensitive.
+            # format characters, or the Unicode line and paragraph separators (U+2028,
+            # U+2029), and must be NFC-normalized. Paths are case-sensitive.
             path:,
             # Query param: Query parameter for view
             view: nil,
@@ -90,9 +91,10 @@ module Anthropic
             content: nil,
             # Body param: New path for the memory (a rename). Must start with `/`, contain at
             # least one non-empty segment, and be at most 1,024 bytes. Must not contain empty
-            # segments, `.` or `..` segments, control or format characters, and must be
-            # NFC-normalized. Paths are case-sensitive. The memory's `id` is preserved across
-            # renames. Omit to leave the path unchanged.
+            # segments, `.` or `..` segments, control or format characters, or the Unicode
+            # line and paragraph separators (U+2028, U+2029), and must be NFC-normalized.
+            # Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to
+            # leave the path unchanged.
             path: nil,
             # Body param: Optimistic-concurrency precondition: the update applies only if the
             # memory's stored `content_sha256` equals the supplied value. On mismatch, the

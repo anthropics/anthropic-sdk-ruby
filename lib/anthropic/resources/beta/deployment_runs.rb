@@ -45,11 +45,11 @@ module Anthropic
         #
         # @param deployment_id [String] Query param: Filter to a specific deployment. Omit to list across all deployment
         #
-        # @param has_error [Boolean] Query param: Filter: true for runs with non-null error, false for runs with non-
+        # @param has_error [Boolean] Query param: Filter: true for runs with non-null `error`, false for runs with no
         #
         # @param limit [Integer] Query param: Maximum results per page. Default 20, maximum 1000.
         #
-        # @param page [String] Query param: Opaque pagination cursor. Pass next_page from the previous response
+        # @param page [String] Query param: Opaque pagination cursor. Pass `next_page` from the previous respon
         #
         # @param trigger_type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsTriggerType] Query param: Filter runs by what triggered them. Omit to return all runs.
         #

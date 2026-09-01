@@ -9,12 +9,6 @@ module Anthropic
         #   @return [Symbol, :browser_toolset_20260801]
         required :type, const: :browser_toolset_20260801
 
-        # @!attribute allowed_callers
-        #
-        #   @return [Array<Symbol, Anthropic::Models::Beta::BetaBrowserToolset20260801::AllowedCaller>, nil]
-        optional :allowed_callers,
-                 -> { Anthropic::Internal::Type::ArrayOf[enum: Anthropic::Beta::BetaBrowserToolset20260801::AllowedCaller] }
-
         # @!attribute cache_control
         #   Create a cache control breakpoint at this content block.
         #
@@ -31,7 +25,7 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaBrowserToolsetConfigs, nil]
         optional :configs, -> { Anthropic::Beta::BetaBrowserToolsetConfigs }, nil?: true
 
-        # @!method initialize(allowed_callers: nil, cache_control: nil, configs: nil, type: :browser_toolset_20260801)
+        # @!method initialize(cache_control: nil, configs: nil, type: :browser_toolset_20260801)
         #   The browser toolset: a single `tools[]` entry (carrying no `name`) that declares
         #   the browser tool family. The model is served the family's tool with any members
         #   disabled via `configs` removed from its schema.
@@ -39,32 +33,11 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaBrowserToolset20260801} for more details.
         #
-        #   @param allowed_callers [Array<Symbol, Anthropic::Models::Beta::BetaBrowserToolset20260801::AllowedCaller>]
-        #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
         #   @param configs [Anthropic::Models::Beta::BetaBrowserToolsetConfigs, nil] Per-member configuration for `browser_toolset_20260801`: one
         #
         #   @param type [Symbol, :browser_toolset_20260801]
-
-        # Specifies who can invoke a tool.
-        #
-        # Values: direct: The model can call this tool directly. code_execution_20250825:
-        # The tool can be called from the code execution environment (v1).
-        # code_execution_20260120: The tool can be called from the code execution
-        # environment (v2 with persistence). code_execution_20260521: The tool can be
-        # called from the code execution environment (v2 with persistence).
-        module AllowedCaller
-          extend Anthropic::Internal::Type::Enum
-
-          DIRECT = :direct
-          CODE_EXECUTION_20250825 = :code_execution_20250825
-          CODE_EXECUTION_20260120 = :code_execution_20260120
-          CODE_EXECUTION_20260521 = :code_execution_20260521
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
-        end
       end
     end
 

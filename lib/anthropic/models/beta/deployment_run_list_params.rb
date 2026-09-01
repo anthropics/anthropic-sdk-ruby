@@ -34,15 +34,15 @@ module Anthropic
 
         # @!attribute deployment_id
         #   Filter to a specific deployment. Omit to list across all deployments in the
-        #   workspace. Filtering by a non-existent deployment_id returns 200 with empty
+        #   workspace. Filtering by a non-existent `deployment_id` returns 200 with empty
         #   data.
         #
         #   @return [String, nil]
         optional :deployment_id, String
 
         # @!attribute has_error
-        #   Filter: true for runs with non-null error, false for runs with non-null
-        #   session_id. Omit for all.
+        #   Filter: true for runs with non-null `error`, false for runs with non-null
+        #   `session_id`. Omit for all.
         #
         #   @return [Boolean, nil]
         optional :has_error, Anthropic::Internal::Type::Boolean
@@ -54,8 +54,8 @@ module Anthropic
         optional :limit, Integer
 
         # @!attribute page
-        #   Opaque pagination cursor. Pass next_page from the previous response. Invalid or
-        #   expired cursors return 400.
+        #   Opaque pagination cursor. Pass `next_page` from the previous response. Invalid
+        #   or expired cursors return 400.
         #
         #   @return [String, nil]
         optional :page, String
@@ -86,12 +86,11 @@ module Anthropic
         #
         #   @param deployment_id [String] Filter to a specific deployment. Omit to list across all deployments in the work
         #
-        #   @param has_error [Boolean] Filter: true for runs with non-null error, false for runs with non-null
-        #   session\_
+        #   @param has_error [Boolean] Filter: true for runs with non-null `error`, false for runs with non-null `sessi
         #
         #   @param limit [Integer] Maximum results per page. Default 20, maximum 1000.
         #
-        #   @param page [String] Opaque pagination cursor. Pass next_page from the previous response. Invalid or
+        #   @param page [String] Opaque pagination cursor. Pass `next_page` from the previous response. Invalid o
         #
         #   @param trigger_type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsTriggerType] Filter runs by what triggered them. Omit to return all runs.
         #
