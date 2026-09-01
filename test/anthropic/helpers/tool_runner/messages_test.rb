@@ -827,6 +827,38 @@ class Anthropic::Test::Helpers::ToolRunner::MessagesTest < Minitest::Test
     end
   end
 
+  # A directive-only `role: :system` message carries `content: []`; the typed form must be
+  # walked like the hash form rather than raising when its content is read.
+  def test_typed_system_message_with_empty_content_is_tolerated
+    bodies = []
+    stub_request(:post, "http://localhost/v1/messages?beta=true")
+      .with { bodies << JSON.parse(_1.body) }
+      .to_return(
+        calculator_tool_use_response(id: "msg_1", tool_id: "tool_1"),
+        text_response(id: "msg_2", text: "10 + 5 = 15")
+      )
+
+    messages = [
+      Anthropic::Beta::BetaMessageParam.new(role: :system, content: [], output_config: {effort: :high}),
+      {role: :system, content: [], output_config: {effort: :low}},
+      *basic_params[:messages]
+    ]
+    runner = @client.beta.messages.tool_runner({**basic_params, messages:})
+    runner.each_message { _1 }
+
+    assert_equal([{lhs: 10.0, rhs: 5.0, operator: :+}], @calculator.call_history)
+    assert_pattern do
+      tool_result_for(runner, "tool_1") => {is_error: false, content: "15.0"}
+    end
+    assert_equal(
+      [
+        {"role" => "system", "content" => [], "output_config" => {"effort" => "high"}},
+        {"role" => "system", "content" => [], "output_config" => {"effort" => "low"}}
+      ],
+      bodies[0]["messages"].first(2)
+    )
+  end
+
   def calculator_removal_message
     {
       role: :system,

@@ -40,7 +40,31 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaMessageDeltaUsage]
         required :usage, -> { Anthropic::Beta::BetaMessageDeltaUsage }
 
-        # @!method initialize(context_management:, delta:, usage:, type: :message_delta)
+        # @!attribute input_transformations
+        #   Changes the API made to the request's input before showing it to the model: one
+        #   entry per change, in request order. Today the only entry type is
+        #   `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text` block
+        #   from the request's `messages` that was removed from the prompt instead of being
+        #   shown to the model because it failed a binding check. More entry types may be
+        #   added over time; ignore types you do not recognize.
+        #
+        #   Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+        #   every such response from a model that supports extended thinking, as `[]` when
+        #   nothing was changed; without the beta, blocks are removed all the same but
+        #   nothing is reported. Removed blocks contribute nothing to `usage.input_tokens`.
+        #   When streaming, the array is final in `message_start`; the final `message_delta`
+        #   event carries it only when a server-side model fallback happened mid-stream, in
+        #   which case it holds the serving model's entries and replaces the one in
+        #   `message_start`.
+        #
+        #   @return [Array<Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation>, nil]
+        optional :input_transformations,
+                 -> {
+                   Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaThinkingDroppedInputTransformation]
+                 },
+                 nil?: true
+
+        # @!method initialize(context_management:, delta:, usage:, input_transformations: nil, type: :message_delta)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaRawMessageDeltaEvent} for more details.
         #
@@ -49,6 +73,8 @@ module Anthropic
         #   @param delta [Anthropic::Models::Beta::BetaRawMessageDeltaEvent::Delta]
         #
         #   @param usage [Anthropic::Models::Beta::BetaMessageDeltaUsage] Billing and rate-limit usage.
+        #
+        #   @param input_transformations [Array<Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation>, nil] Changes the API made to the request's input before showing it to the model:
         #
         #   @param type [Symbol, :message_delta]
 

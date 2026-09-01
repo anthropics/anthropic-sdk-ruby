@@ -7,6 +7,7 @@ module Anthropic
         {
           budget_tokens: Integer,
           type: :enabled,
+          block_binding: Anthropic::Beta::BetaThinkingBlockBinding?,
           display_: Anthropic::Models::Beta::BetaThinkingConfigEnabled::display_?
         }
 
@@ -15,10 +16,13 @@ module Anthropic
 
         attr_accessor type: :enabled
 
+        attr_accessor block_binding: Anthropic::Beta::BetaThinkingBlockBinding?
+
         attr_accessor display_: Anthropic::Models::Beta::BetaThinkingConfigEnabled::display_?
 
         def initialize: (
           budget_tokens: Integer,
+          ?block_binding: Anthropic::Beta::BetaThinkingBlockBinding?,
           ?display_: Anthropic::Models::Beta::BetaThinkingConfigEnabled::display_?,
           ?type: :enabled
         ) -> void
@@ -26,6 +30,7 @@ module Anthropic
         def to_hash: -> {
           budget_tokens: Integer,
           type: :enabled,
+          block_binding: Anthropic::Beta::BetaThinkingBlockBinding?,
           display_: Anthropic::Models::Beta::BetaThinkingConfigEnabled::display_?
         }
 

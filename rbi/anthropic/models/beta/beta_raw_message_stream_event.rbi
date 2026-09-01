@@ -100,6 +100,12 @@ module Anthropic
                 )
               ),
             usage: Anthropic::Beta::BetaMessageDeltaUsage::OrHash,
+            input_transformations:
+              T.nilable(
+                T::Array[
+                  Anthropic::Beta::BetaThinkingDroppedInputTransformation::OrHash
+                ]
+              ),
             content_block:
               T.any(
                 Anthropic::Beta::BetaTextBlock::OrHash,
@@ -145,6 +151,22 @@ module Anthropic
           # Total input tokens in a request is the summation of `input_tokens`,
           # `cache_creation_input_tokens`, and `cache_read_input_tokens`.
           usage: nil,
+          # Changes the API made to the request's input before showing it to the model: one
+          # entry per change, in request order. Today the only entry type is
+          # `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text` block
+          # from the request's `messages` that was removed from the prompt instead of being
+          # shown to the model because it failed a binding check. More entry types may be
+          # added over time; ignore types you do not recognize.
+          #
+          # Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
+          # every such response from a model that supports extended thinking, as `[]` when
+          # nothing was changed; without the beta, blocks are removed all the same but
+          # nothing is reported. Removed blocks contribute nothing to `usage.input_tokens`.
+          # When streaming, the array is final in `message_start`; the final `message_delta`
+          # event carries it only when a server-side model fallback happened mid-stream, in
+          # which case it holds the serving model's entries and replaces the one in
+          # `message_start`.
+          input_transformations: nil,
           # Response model for a file uploaded to the container.
           content_block: nil,
           index: nil

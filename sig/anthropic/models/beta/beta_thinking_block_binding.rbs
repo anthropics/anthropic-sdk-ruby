@@ -1,0 +1,24 @@
+module Anthropic
+  module Models
+    class BetaThinkingBlockBinding = Beta::BetaThinkingBlockBinding
+
+    module Beta
+      type beta_thinking_block_binding =
+        {
+          prefix_mismatch_behavior: Anthropic::Models::Beta::beta_thinking_prefix_mismatch_behavior?
+        }
+
+      class BetaThinkingBlockBinding < Anthropic::Internal::Type::BaseModel
+        attr_accessor prefix_mismatch_behavior: Anthropic::Models::Beta::beta_thinking_prefix_mismatch_behavior?
+
+        def initialize: (
+          ?prefix_mismatch_behavior: Anthropic::Models::Beta::beta_thinking_prefix_mismatch_behavior?
+        ) -> void
+
+        def to_hash: -> {
+          prefix_mismatch_behavior: Anthropic::Models::Beta::beta_thinking_prefix_mismatch_behavior?
+        }
+      end
+    end
+  end
+end

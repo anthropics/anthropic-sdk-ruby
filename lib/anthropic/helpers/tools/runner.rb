@@ -272,6 +272,10 @@ module Anthropic
         #
         # Reads a field off either a plain hash (symbol or string keys) or a typed model.
         #
+        # A typed reader that cannot coerce its stored value (e.g. `BetaMessageParam#content`
+        # on a directive-only message with `content: []`) falls back to the raw value, so the
+        # typed form is walked exactly like the equivalent hash.
+        #
         # @param obj [Object]
         #
         # @param key [Symbol]
@@ -282,7 +286,11 @@ module Anthropic
           in Hash
             obj.fetch(key) { obj[key.to_s] }
           in Anthropic::Internal::Type::BaseModel
-            obj.public_send(key) if obj.respond_to?(key)
+            begin
+              obj.public_send(key) if obj.respond_to?(key)
+            rescue Anthropic::Errors::ConversionError
+              obj[key]
+            end
           else
             nil
           end

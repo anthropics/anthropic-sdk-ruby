@@ -46,7 +46,8 @@ module Anthropic
             type: :message_delta | "message_delta",
             context_management: Anthropic::Beta::BetaContextManagementResponse?,
             delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta,
-            usage: Anthropic::Beta::BetaMessageDeltaUsage
+            usage: Anthropic::Beta::BetaMessageDeltaUsage,
+            ?input_transformations: ::Array[Anthropic::Beta::BetaThinkingDroppedInputTransformation]?
           ) -> Anthropic::Beta::BetaRawMessageDeltaEvent
           | (
             type: :message_stop | "message_stop"
@@ -72,6 +73,7 @@ module Anthropic
             ?delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta
             | Anthropic::Models::Beta::beta_raw_content_block_delta,
             ?usage: Anthropic::Beta::BetaMessageDeltaUsage,
+            ?input_transformations: ::Array[Anthropic::Beta::BetaThinkingDroppedInputTransformation]?,
             ?content_block: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::content_block,
             ?index: Integer
           ) -> Anthropic::Models::Beta::beta_raw_message_stream_event

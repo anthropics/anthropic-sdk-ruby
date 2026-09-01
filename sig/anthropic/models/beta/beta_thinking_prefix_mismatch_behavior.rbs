@@ -1,0 +1,18 @@
+module Anthropic
+  module Models
+    module BetaThinkingPrefixMismatchBehavior = Beta::BetaThinkingPrefixMismatchBehavior
+
+    module Beta
+      type beta_thinking_prefix_mismatch_behavior = :error | :drop_block
+
+      module BetaThinkingPrefixMismatchBehavior
+        extend Anthropic::Internal::Type::Enum
+
+        ERROR: :error
+        DROP_BLOCK: :drop_block
+
+        def self?.values: -> ::Array[Anthropic::Models::Beta::beta_thinking_prefix_mismatch_behavior]
+      end
+    end
+  end
+end

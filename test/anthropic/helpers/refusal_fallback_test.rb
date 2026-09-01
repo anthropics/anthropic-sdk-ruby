@@ -266,6 +266,29 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     assert_equal("again", sent[2]["content"])
   end
 
+  def test_stripping_keeps_messages_that_were_already_empty
+    stub_responses(message_body("primary-model"))
+    client = make_client([{model: "fallback-model"}])
+
+    client.beta.messages.create(
+      **PARAMS,
+      messages: [
+        {role: :system, content: [], output_config: {effort: :high}},
+        {role: :user, content: "hi"},
+        {role: :assistant, content: [{type: :fallback, from: {model: "a"}, to: {model: "b"}}]},
+        Anthropic::Beta::BetaMessageParam.new(role: :system, content: [], output_config: {effort: :low}),
+        {role: :user, content: "again"}
+      ]
+    )
+
+    sent = @bodies[0]["messages"]
+    assert_equal(4, sent.length)
+    assert_equal({"role" => "system", "content" => [], "output_config" => {"effort" => "high"}}, sent[0])
+    assert_equal("hi", sent[1]["content"])
+    assert_equal({"role" => "system", "content" => [], "output_config" => {"effort" => "low"}}, sent[2])
+    assert_equal("again", sent[3]["content"])
+  end
+
   def test_skips_a_failed_hop_and_continues
     json = {"content-type" => "application/json"}
     stub_request(:post, "http://localhost/v1/messages?beta=true")
@@ -651,7 +674,7 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     "event: #{type}\ndata: #{JSON.generate(data)}\n\n"
   end
 
-  def refusal_stream(model, token:, partial_text: nil, has_prefill_claim: false)
+  def refusal_stream(model, token:, partial_text: nil, has_prefill_claim: false, start_overrides: {})
     out = +""
     out << sse_event(
       "message_start",
@@ -660,7 +683,8 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
         message: message_body(
           model,
           stop_reason: nil,
-          usage: {input_tokens: 5, output_tokens: 0}
+          usage: {input_tokens: 5, output_tokens: 0},
+          **start_overrides
         )
       }
     )
@@ -701,11 +725,11 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     out << sse_event("message_stop", {type: "message_stop"})
   end
 
-  def accept_stream(model, text:)
+  def accept_stream(model, text:, start_overrides: {}, delta_overrides: {})
     out = +""
     out << sse_event(
       "message_start",
-      {type: "message_start", message: message_body(model, stop_reason: nil)}
+      {type: "message_start", message: message_body(model, stop_reason: nil, **start_overrides)}
     )
     out << sse_event(
       "content_block_start",
@@ -726,7 +750,8 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
           container: nil,
           stop_details: nil
         },
-        usage: {input_tokens: 7, output_tokens: 9}
+        usage: {input_tokens: 7, output_tokens: 9},
+        **delta_overrides
       }
     )
     out << sse_event("message_stop", {type: "message_stop"})
@@ -789,6 +814,100 @@ class AnthropicBetaRefusalFallbackMiddlewareTest < Minitest::Test
     iters = delta.usage.iterations
     assert_equal([:message, :fallback_message], iters.map(&:type))
     assert_equal(%w[primary-model fallback-model], iters.map(&:model))
+    # the spliced fallback's message_start (not re-emitted) had no `input_transformations`, so the
+    # emitted message_delta gains none
+    refute(delta.to_h.key?(:input_transformations))
+  end
+
+  INPUT_TRANSFORMATIONS = [
+    {type: "thinking_dropped", path: "messages.1.content.0", reason: "model_binding_mismatch"}
+  ].freeze
+
+  def test_streaming_forwards_the_spliced_hop_input_transformations_on_the_terminal_delta
+    stub_streams(
+      refusal_stream("primary-model", token: "tok-1"),
+      accept_stream(
+        "fallback-model",
+        text: "rest",
+        start_overrides: {input_transformations: INPUT_TRANSFORMATIONS}
+      )
+    )
+    client = make_client([{model: "fallback-model"}])
+
+    events = client.beta.messages.stream_raw(
+      **PARAMS,
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    ).to_a
+
+    delta = events.find { _1.type == :message_delta }
+    assert_equal(1, delta.input_transformations.length)
+    dropped = delta.input_transformations.first
+    assert_equal(:thinking_dropped, dropped.type)
+    assert_equal("messages.1.content.0", dropped.path)
+    assert_equal(:model_binding_mismatch, dropped.reason)
+  end
+
+  def test_streaming_keeps_input_transformations_already_on_the_spliced_terminal_delta
+    stub_streams(
+      refusal_stream("primary-model", token: "tok-1"),
+      accept_stream(
+        "fallback-model",
+        text: "rest",
+        start_overrides: {input_transformations: INPUT_TRANSFORMATIONS},
+        delta_overrides: {input_transformations: []}
+      )
+    )
+    client = make_client([{model: "fallback-model"}])
+
+    events = client.beta.messages.stream_raw(
+      **PARAMS,
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    ).to_a
+
+    delta = events.find { _1.type == :message_delta }
+    assert_equal([], delta.input_transformations)
+  end
+
+  def test_streaming_forwards_a_refused_spliced_hop_input_transformations_when_the_chain_degrades
+    stub_request(:post, "http://localhost/v1/messages?beta=true")
+      .with do |req|
+      @bodies << JSON.parse(req.body)
+      true
+    end
+      .to_return(
+        {
+          status: 200,
+          headers: {"content-type" => "text/event-stream"},
+          body: refusal_stream("primary-model", token: "tok-1")
+        },
+        {
+          status: 200,
+          headers: {"content-type" => "text/event-stream"},
+          # Spliced (message_start not re-emitted): contributes a block, then refuses with a fresh token.
+          body: refusal_stream(
+            "mid-model",
+            token: "tok-2",
+            partial_text: "partial",
+            start_overrides: {input_transformations: INPUT_TRANSFORMATIONS}
+          )
+        },
+        {status: 503, headers: {"content-type" => "application/json"}, body: '{"error":"overloaded"}'}
+      )
+    client = make_client([{model: "mid-model"}, {model: "last-model"}])
+
+    events = client.beta.messages.stream_raw(
+      **PARAMS,
+      request_options: {fallback_state: Anthropic::BetaFallbackState.new}
+    ).to_a
+
+    assert_equal(%w[primary-model mid-model last-model], @bodies.map { _1["model"] })
+    delta = events.find { _1.type == :message_delta }
+    assert_equal(:refusal, delta.delta.stop_reason)
+    assert_equal("last-model", delta.delta.stop_details.recommended_model)
+    # mid-model's message_start (not re-emitted) carried the list; it is copied onto the emitted
+    # refusal message_delta.
+    assert_equal(1, delta.input_transformations.length)
+    assert_equal("messages.1.content.0", delta.input_transformations.first.path)
   end
 
   def test_streaming_omits_prefill_when_refusal_grants_no_claim

@@ -13,7 +13,11 @@ module Anthropic
         def finished?
         end
 
-        sig { params(messages: Anthropic::Models::Beta::BetaMessageParam).void }
+        sig do
+          params(
+            messages: Anthropic::Models::Beta::BetaMessageParam::OrHash
+          ).void
+        end
         def feed_messages(*messages)
         end
 

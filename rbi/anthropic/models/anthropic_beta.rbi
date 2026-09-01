@@ -184,6 +184,21 @@ module Anthropic
           :"ce-user-management-2026-07-13",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01 =
+        T.let(
+          :"mid-conversation-output-config-2026-07-01",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
+      THINKING_BINDING_CONTROLS_2026_08_01 =
+        T.let(
+          :"thinking-binding-controls-2026-08-01",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
+      MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21 =
+        T.let(
+          :"mid-conversation-system-clear-at-2026-08-21",
+          Anthropic::AnthropicBeta::TaggedSymbol
+        )
     end
   end
 end

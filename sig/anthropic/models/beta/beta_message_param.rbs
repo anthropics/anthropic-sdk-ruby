@@ -6,7 +6,9 @@ module Anthropic
       type beta_message_param =
         {
           content: Anthropic::Models::Beta::BetaMessageParam::content,
-          role: Anthropic::Models::Beta::BetaMessageParam::role
+          role: Anthropic::Models::Beta::BetaMessageParam::role,
+          clear_at: Anthropic::Models::Beta::BetaMessageParam::clear_at?,
+          output_config: Anthropic::Beta::BetaSystemMessageOutputConfig?
         }
 
       class BetaMessageParam < Anthropic::Internal::Type::BaseModel
@@ -14,14 +16,22 @@ module Anthropic
 
         attr_accessor role: Anthropic::Models::Beta::BetaMessageParam::role
 
+        attr_accessor clear_at: Anthropic::Models::Beta::BetaMessageParam::clear_at?
+
+        attr_accessor output_config: Anthropic::Beta::BetaSystemMessageOutputConfig?
+
         def initialize: (
           content: Anthropic::Models::Beta::BetaMessageParam::content,
-          role: Anthropic::Models::Beta::BetaMessageParam::role
+          role: Anthropic::Models::Beta::BetaMessageParam::role,
+          ?clear_at: Anthropic::Models::Beta::BetaMessageParam::clear_at?,
+          ?output_config: Anthropic::Beta::BetaSystemMessageOutputConfig?
         ) -> void
 
         def to_hash: -> {
           content: Anthropic::Models::Beta::BetaMessageParam::content,
-          role: Anthropic::Models::Beta::BetaMessageParam::role
+          role: Anthropic::Models::Beta::BetaMessageParam::role,
+          clear_at: Anthropic::Models::Beta::BetaMessageParam::clear_at?,
+          output_config: Anthropic::Beta::BetaSystemMessageOutputConfig?
         }
 
         type content =
@@ -45,6 +55,17 @@ module Anthropic
           SYSTEM: :system
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaMessageParam::role]
+        end
+
+        type clear_at = :next_user_message | :never
+
+        module ClearAt
+          extend Anthropic::Internal::Type::Enum
+
+          NEXT_USER_MESSAGE: :next_user_message
+          NEVER: :never
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaMessageParam::clear_at]
         end
       end
     end

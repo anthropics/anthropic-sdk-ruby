@@ -28,7 +28,8 @@ class Anthropic::Test::Resources::Beta::MessagesTest < Anthropic::Test::Resource
         stop_reason: Anthropic::Beta::BetaStopReason | nil,
         stop_sequence: String | nil,
         type: Symbol,
-        usage: Anthropic::Beta::BetaUsage
+        usage: Anthropic::Beta::BetaUsage,
+        input_transformations: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaThinkingDroppedInputTransformation]) | nil
       }
     end
   end

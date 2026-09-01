@@ -29,6 +29,7 @@ module Anthropic
           (
             type: :enabled | "enabled",
             budget_tokens: Integer,
+            ?block_binding: Anthropic::Beta::BetaThinkingBlockBinding?,
             ?display_: Anthropic::Models::Beta::BetaThinkingConfigEnabled::display_?
           ) -> Anthropic::Beta::BetaThinkingConfigEnabled
           | (
@@ -36,11 +37,13 @@ module Anthropic
           ) -> Anthropic::Beta::BetaThinkingConfigDisabled
           | (
             type: :adaptive | "adaptive",
+            ?block_binding: Anthropic::Beta::BetaThinkingBlockBinding?,
             ?display_: Anthropic::Models::Beta::BetaThinkingConfigAdaptive::display_?
           ) -> Anthropic::Beta::BetaThinkingConfigAdaptive
           | (
             type: Symbol | String,
             ?budget_tokens: Integer,
+            ?block_binding: Anthropic::Beta::BetaThinkingBlockBinding?,
             ?display_: Anthropic::Models::Beta::BetaThinkingConfigEnabled::display_?
             | Anthropic::Models::Beta::BetaThinkingConfigAdaptive::display_?
           ) -> Anthropic::Models::Beta::beta_thinking_config_param

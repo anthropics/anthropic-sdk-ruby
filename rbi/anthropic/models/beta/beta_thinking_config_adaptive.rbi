@@ -17,6 +17,20 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
+        # Controls for block binding: what happens when a thinking block this request
+        # sends back fails the conversation check. Every field is optional; an empty
+        # object means every default.
+        sig { returns(T.nilable(Anthropic::Beta::BetaThinkingBlockBinding)) }
+        attr_reader :block_binding
+
+        sig do
+          params(
+            block_binding:
+              T.nilable(Anthropic::Beta::BetaThinkingBlockBinding::OrHash)
+          ).void
+        end
+        attr_writer :block_binding
+
         # Controls how thinking content appears in the response. When set to `summarized`,
         # thinking is returned normally. When set to `omitted`, thinking content is
         # redacted but a signature is returned for multi-turn continuity. Defaults to
@@ -32,6 +46,8 @@ module Anthropic
 
         sig do
           params(
+            block_binding:
+              T.nilable(Anthropic::Beta::BetaThinkingBlockBinding::OrHash),
             display_:
               T.nilable(
                 Anthropic::Beta::BetaThinkingConfigAdaptive::Display::OrSymbol
@@ -40,6 +56,10 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
+          # Controls for block binding: what happens when a thinking block this request
+          # sends back fails the conversation check. Every field is optional; an empty
+          # object means every default.
+          block_binding: nil,
           # Controls how thinking content appears in the response. When set to `summarized`,
           # thinking is returned normally. When set to `omitted`, thinking content is
           # redacted but a signature is returned for multi-turn continuity. Defaults to
@@ -53,6 +73,8 @@ module Anthropic
           override.returns(
             {
               type: Symbol,
+              block_binding:
+                T.nilable(Anthropic::Beta::BetaThinkingBlockBinding),
               display_:
                 T.nilable(
                   Anthropic::Beta::BetaThinkingConfigAdaptive::Display::OrSymbol

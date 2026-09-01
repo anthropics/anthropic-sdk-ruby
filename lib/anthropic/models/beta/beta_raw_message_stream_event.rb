@@ -55,6 +55,8 @@ module Anthropic
         #
         #   @option args [Anthropic::Models::Beta::BetaMessageDeltaUsage] :usage Billing and rate-limit usage.
         #
+        #   @option args [Array<Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation>, nil] :input_transformations Changes the API made to the request's input before showing it to the model:
+        #
         #   @option args [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaServerToolUseBlock, Anthropic::Models::Beta::BetaWebSearchToolResultBlock, Anthropic::Models::Beta::BetaWebFetchToolResultBlock, Anthropic::Models::Beta::BetaAdvisorToolResultBlock, Anthropic::Models::Beta::BetaCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaBashCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaToolSearchToolResultBlock, Anthropic::Models::Beta::BetaMCPToolUseBlock, Anthropic::Models::Beta::BetaMCPToolResultBlock, Anthropic::Models::Beta::BetaContainerUploadBlock, Anthropic::Models::Beta::BetaCompactionBlock, Anthropic::Models::Beta::BetaFallbackBlock] :content_block Response model for a file uploaded to the container.
         #
         #   @option args [Integer] :index
