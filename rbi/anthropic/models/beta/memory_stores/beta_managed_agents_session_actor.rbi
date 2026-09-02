@@ -14,7 +14,7 @@ module Anthropic
             end
 
           # ID of the session that performed the write (a `sesn_...` value). Look up the
-          # session via [Retrieve a session](/en/api/sessions-retrieve) for further
+          # session via [Retrieve a session](/en/api/beta/sessions/retrieve) for further
           # provenance.
           sig { returns(String) }
           attr_accessor :session_id
@@ -37,7 +37,7 @@ module Anthropic
           end
           def self.new(
             # ID of the session that performed the write (a `sesn_...` value). Look up the
-            # session via [Retrieve a session](/en/api/sessions-retrieve) for further
+            # session via [Retrieve a session](/en/api/beta/sessions/retrieve) for further
             # provenance.
             session_id:,
             type:

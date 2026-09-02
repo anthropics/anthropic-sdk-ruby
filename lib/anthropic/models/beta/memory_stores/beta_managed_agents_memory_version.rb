@@ -73,7 +73,7 @@ module Anthropic
           #   the `memory_version` row. The API key that created a session is not recorded on
           #   agent writes; attribution answers who made the write, not who is ultimately
           #   responsible. Look up session provenance separately via the
-          #   [Sessions API](/en/api/sessions-retrieve).
+          #   [Sessions API](/en/api/beta/sessions/retrieve).
           #
           #   @return [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor, nil]
           optional :created_by, union: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsActor }
@@ -96,7 +96,7 @@ module Anthropic
           #   the `memory_version` row. The API key that created a session is not recorded on
           #   agent writes; attribution answers who made the write, not who is ultimately
           #   responsible. Look up session provenance separately via the
-          #   [Sessions API](/en/api/sessions-retrieve).
+          #   [Sessions API](/en/api/beta/sessions/retrieve).
           #
           #   @return [Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsSessionActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsAPIActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsUserActor, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor, nil]
           optional :redacted_by, union: -> { Anthropic::Beta::MemoryStores::BetaManagedAgentsActor }
