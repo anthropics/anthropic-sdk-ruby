@@ -38,7 +38,12 @@ module Anthropic
           #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-          # @!method initialize(vault_id:, include_archived: nil, limit: nil, page: nil, betas: nil, request_options: {})
+          # @!attribute workspace_id
+          #
+          #   @return [String, nil]
+          optional :workspace_id, String
+
+          # @!method initialize(vault_id:, include_archived: nil, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
           #   @param vault_id [String]
           #
           #   @param include_archived [Boolean] Whether to include archived credentials in the results.
@@ -48,6 +53,8 @@ module Anthropic
           #   @param page [String] Opaque pagination token from a previous `list_credentials` response.
           #
           #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #
+          #   @param workspace_id [String]
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
         end

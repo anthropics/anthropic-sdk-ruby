@@ -18,7 +18,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::SessionCreateParams} for more details.
         #
-        # @overload create(agent:, environment_id:, budget: nil, initial_events: nil, metadata: nil, resources: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
+        # @overload create(agent:, environment_id:, budget: nil, initial_events: nil, metadata: nil, resources: nil, title: nil, vault_ids: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param agent [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams] Body param: Agent identifier. Accepts the `agent` ID string, which pins the late
         #
@@ -38,6 +38,8 @@ module Anthropic
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Beta::BetaManagedAgentsSession]
@@ -45,7 +47,7 @@ module Anthropic
         # @see Anthropic::Models::Beta::SessionCreateParams
         def create(params)
           parsed, options = Anthropic::Beta::SessionCreateParams.dump_request(params)
-          header_params = {betas: "anthropic-beta"}
+          header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
             method: :post,
             path: "v1/sessions?beta=true",
@@ -58,11 +60,16 @@ module Anthropic
 
         # Get Session
         #
-        # @overload retrieve(session_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::SessionRetrieveParams} for more details.
+        #
+        # @overload retrieve(session_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param session_id [String] Path parameter session_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -74,7 +81,7 @@ module Anthropic
           @client.request(
             method: :get,
             path: ["v1/sessions/%1$s?beta=true", session_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsSession,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
           )
@@ -85,7 +92,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::SessionUpdateParams} for more details.
         #
-        # @overload update(session_id, agent: nil, budget: nil, metadata: nil, title: nil, vault_ids: nil, betas: nil, request_options: {})
+        # @overload update(session_id, agent: nil, budget: nil, metadata: nil, title: nil, vault_ids: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param session_id [String] Path param: Path parameter session_id
         #
@@ -101,6 +108,8 @@ module Anthropic
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Beta::BetaManagedAgentsSession]
@@ -108,7 +117,7 @@ module Anthropic
         # @see Anthropic::Models::Beta::SessionUpdateParams
         def update(session_id, params = {})
           parsed, options = Anthropic::Beta::SessionUpdateParams.dump_request(params)
-          header_params = {betas: "anthropic-beta"}
+          header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
             method: :post,
             path: ["v1/sessions/%1$s?beta=true", session_id],
@@ -124,7 +133,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::SessionListParams} for more details.
         #
-        # @overload list(agent_id: nil, agent_version: nil, created_at_gt: nil, created_at_gte: nil, created_at_lt: nil, created_at_lte: nil, deployment_id: nil, include_archived: nil, limit: nil, memory_store_id: nil, order: nil, page: nil, statuses: nil, betas: nil, request_options: {})
+        # @overload list(agent_id: nil, agent_version: nil, created_at_gt: nil, created_at_gte: nil, created_at_lt: nil, created_at_lte: nil, deployment_id: nil, include_archived: nil, limit: nil, memory_store_id: nil, order: nil, page: nil, statuses: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param agent_id [String] Query param: Filter sessions created with this agent ID.
         #
@@ -153,6 +162,8 @@ module Anthropic
         # @param statuses [Array<Symbol, Anthropic::Models::Beta::SessionListParams::Status>] Query param: Filter by session status. Repeat the parameter to match any of mult
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -187,7 +198,10 @@ module Anthropic
               created_at_lt: "created_at[lt]",
               created_at_lte: "created_at[lte]"
             ),
-            headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
+            headers: parsed.except(*query_params).transform_keys(
+              betas: "anthropic-beta",
+              workspace_id: "anthropic-workspace-id"
+            ),
             page: Anthropic::Internal::BidirectionalPageCursor,
             model: Anthropic::Beta::BetaManagedAgentsSession,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
@@ -196,11 +210,16 @@ module Anthropic
 
         # Delete Session
         #
-        # @overload delete(session_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::SessionDeleteParams} for more details.
+        #
+        # @overload delete(session_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param session_id [String] Path parameter session_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -212,7 +231,7 @@ module Anthropic
           @client.request(
             method: :delete,
             path: ["v1/sessions/%1$s?beta=true", session_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsDeletedSession,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
           )
@@ -220,11 +239,16 @@ module Anthropic
 
         # Archive Session
         #
-        # @overload archive(session_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::SessionArchiveParams} for more details.
+        #
+        # @overload archive(session_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param session_id [String] Path parameter session_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -236,7 +260,7 @@ module Anthropic
           @client.request(
             method: :post,
             path: ["v1/sessions/%1$s/archive?beta=true", session_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsSession,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
           )

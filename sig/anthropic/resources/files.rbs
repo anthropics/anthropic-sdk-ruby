@@ -5,27 +5,32 @@ module Anthropic
         ?ids: ::Array[String]?,
         ?limit: Integer,
         ?page: String?,
+        ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::Internal::PageCursor[Anthropic::FileMetadata]
 
       def delete: (
         String file_id,
+        ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::DeletedFile
 
       def download: (
         String file_id,
+        ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> StringIO
 
       def retrieve_metadata: (
         String file_id,
+        ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::FileMetadata
 
       def upload: (
         file: Anthropic::Internal::file_input,
         ?expires_in_seconds: Integer,
+        ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::FileMetadata
 

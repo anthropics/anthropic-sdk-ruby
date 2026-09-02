@@ -7,12 +7,14 @@ module Anthropic
             requests: ::Array[Anthropic::Beta::Messages::BatchCreateParams::Request],
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
             ?user_profile_id: String,
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Messages::BetaMessageBatch
 
           def retrieve: (
             String message_batch_id,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Messages::BetaMessageBatch
 
@@ -21,24 +23,28 @@ module Anthropic
             ?before_id: String,
             ?limit: Integer,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Internal::Page[Anthropic::Beta::Messages::BetaMessageBatch]
 
           def delete: (
             String message_batch_id,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Messages::BetaDeletedMessageBatch
 
           def cancel: (
             String message_batch_id,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Messages::BetaMessageBatch
 
           def results_streaming: (
             String message_batch_id,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Internal::JsonLStream[Anthropic::Beta::Messages::BetaMessageBatchIndividualResponse]
 

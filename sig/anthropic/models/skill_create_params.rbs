@@ -1,7 +1,11 @@
 module Anthropic
   module Models
     type skill_create_params =
-      { files: ::Array[Anthropic::Internal::file_input], display_name: String? }
+      {
+        files: ::Array[Anthropic::Internal::file_input],
+        display_name: String?,
+        workspace_id: String
+      }
       & Anthropic::Internal::Type::request_parameters
 
     class SkillCreateParams < Anthropic::Internal::Type::BaseModel
@@ -12,15 +16,21 @@ module Anthropic
 
       attr_accessor display_name: String?
 
+      attr_reader workspace_id: String?
+
+      def workspace_id=: (String) -> String
+
       def initialize: (
         files: ::Array[Anthropic::Internal::file_input],
         ?display_name: String?,
+        ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> void
 
       def to_hash: -> {
         files: ::Array[Anthropic::Internal::file_input],
         display_name: String?,
+        workspace_id: String,
         request_options: Anthropic::RequestOptions
       }
     end

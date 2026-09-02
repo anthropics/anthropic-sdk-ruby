@@ -1,7 +1,8 @@
 module Anthropic
   module Models
     type file_retrieve_metadata_params =
-      { file_id: String } & Anthropic::Internal::Type::request_parameters
+      { file_id: String, workspace_id: String }
+      & Anthropic::Internal::Type::request_parameters
 
     class FileRetrieveMetadataParams < Anthropic::Internal::Type::BaseModel
       extend Anthropic::Internal::Type::RequestParameters::Converter
@@ -9,13 +10,19 @@ module Anthropic
 
       attr_accessor file_id: String
 
+      attr_reader workspace_id: String?
+
+      def workspace_id=: (String) -> String
+
       def initialize: (
         file_id: String,
+        ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> void
 
       def to_hash: -> {
         file_id: String,
+        workspace_id: String,
         request_options: Anthropic::RequestOptions
       }
     end

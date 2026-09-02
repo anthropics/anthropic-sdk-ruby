@@ -32,7 +32,12 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(include_archived: nil, limit: nil, page: nil, betas: nil, request_options: {})
+        # @!attribute workspace_id
+        #
+        #   @return [String, nil]
+        optional :workspace_id, String
+
+        # @!method initialize(include_archived: nil, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
         #   @param include_archived [Boolean] Whether to include archived tunnels in the results. Defaults to false.
         #
         #   @param limit [Integer] Maximum number of tunnels to return per page. Defaults to 20, maximum 1000.
@@ -40,6 +45,8 @@ module Anthropic
         #   @param page [String] Opaque pagination cursor from a previous `list_tunnels` response.
         #
         #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        #   @param workspace_id [String]
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
       end

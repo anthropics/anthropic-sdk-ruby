@@ -10,13 +10,15 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Skills::VersionCreateParams} for more details.
           #
-          # @overload create(skill_id, files:, betas: nil, request_options: {})
+          # @overload create(skill_id, files:, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param skill_id [String] Path param: Unique identifier for the skill.
           #
           # @param files [Array<Pathname, StringIO, IO, String, Anthropic::FilePart>] Body param: Files to upload for the skill.
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -25,7 +27,7 @@ module Anthropic
           # @see Anthropic::Models::Beta::Skills::VersionCreateParams
           def create(skill_id, params)
             parsed, options = Anthropic::Beta::Skills::VersionCreateParams.dump_request(params)
-            header_params = {betas: "anthropic-beta"}
+            header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
             @client.request(
               method: :post,
               path: ["v1/skills/%1$s/versions?beta=true", skill_id],
@@ -46,13 +48,15 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Skills::VersionRetrieveParams} for more details.
           #
-          # @overload retrieve(version, skill_id:, betas: nil, request_options: {})
+          # @overload retrieve(version, skill_id:, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param version [String] Path param: Identifies the skill version: a version ID, or the literal `latest`
           #
           # @param skill_id [String] Path param: Unique identifier for the skill.
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -68,7 +72,7 @@ module Anthropic
             @client.request(
               method: :get,
               path: ["v1/skills/%1$s/versions/%2$s?beta=true", skill_id, version],
-              headers: parsed.transform_keys(betas: "anthropic-beta"),
+              headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Skills::BetaSkillVersion,
               options: options
             )
@@ -79,7 +83,7 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Skills::VersionListParams} for more details.
           #
-          # @overload list(skill_id, limit: nil, page: nil, betas: nil, request_options: {})
+          # @overload list(skill_id, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param skill_id [String] Path param: Unique identifier for the skill.
           #
@@ -88,6 +92,8 @@ module Anthropic
           # @param page [String, nil] Query param: Optionally set to the `next_page` token from the previous response.
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -102,7 +108,10 @@ module Anthropic
               method: :get,
               path: ["v1/skills/%1$s/versions?beta=true", skill_id],
               query: query,
-              headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
+              headers: parsed.except(*query_params).transform_keys(
+                betas: "anthropic-beta",
+                workspace_id: "anthropic-workspace-id"
+              ),
               page: Anthropic::Internal::PageCursor,
               model: Anthropic::Beta::Skills::BetaSkillVersion,
               options: options
@@ -114,13 +123,15 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Skills::VersionDeleteParams} for more details.
           #
-          # @overload delete(version, skill_id:, betas: nil, request_options: {})
+          # @overload delete(version, skill_id:, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param version [String] Path param: Identifies the skill version by its version ID.
           #
           # @param skill_id [String] Path param: Unique identifier for the skill.
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -136,7 +147,7 @@ module Anthropic
             @client.request(
               method: :delete,
               path: ["v1/skills/%1$s/versions/%2$s?beta=true", skill_id, version],
-              headers: parsed.transform_keys(betas: "anthropic-beta"),
+              headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Skills::BetaDeletedSkillVersion,
               options: options
             )
@@ -147,13 +158,15 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Skills::VersionDownloadParams} for more details.
           #
-          # @overload download(version, skill_id:, betas: nil, request_options: {})
+          # @overload download(version, skill_id:, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param version [String] Path param: Identifies the skill version by its version ID.
           #
           # @param skill_id [String] Path param: Unique identifier for the skill.
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -169,7 +182,10 @@ module Anthropic
             @client.request(
               method: :get,
               path: ["v1/skills/%1$s/versions/%2$s/content?beta=true", skill_id, version],
-              headers: {"accept" => "application/binary", **parsed}.transform_keys(betas: "anthropic-beta"),
+              headers: {"accept" => "application/binary", **parsed}.transform_keys(
+                betas: "anthropic-beta",
+                workspace_id: "anthropic-workspace-id"
+              ),
               model: StringIO,
               options: options
             )

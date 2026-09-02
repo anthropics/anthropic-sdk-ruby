@@ -7,6 +7,7 @@ module Anthropic
             String skill_id,
             files: ::Array[Anthropic::Internal::file_input],
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Skills::BetaSkillVersion
 
@@ -14,6 +15,7 @@ module Anthropic
             String version,
             skill_id: String,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Skills::BetaSkillVersion
 
@@ -22,6 +24,7 @@ module Anthropic
             ?limit: Integer?,
             ?page: String?,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Skills::BetaSkillVersion]
 
@@ -29,6 +32,7 @@ module Anthropic
             String version,
             skill_id: String,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Skills::BetaDeletedSkillVersion
 
@@ -36,6 +40,7 @@ module Anthropic
             String version,
             skill_id: String,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> StringIO
 

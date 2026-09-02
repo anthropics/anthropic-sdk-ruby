@@ -44,7 +44,12 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(created_at_gte: nil, created_at_lte: nil, include_archived: nil, limit: nil, page: nil, betas: nil, request_options: {})
+        # @!attribute workspace_id
+        #
+        #   @return [String, nil]
+        optional :workspace_id, String
+
+        # @!method initialize(created_at_gte: nil, created_at_lte: nil, include_archived: nil, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
         #   @param created_at_gte [Time] Return agents created at or after this time (inclusive).
         #
         #   @param created_at_lte [Time] Return agents created at or before this time (inclusive).
@@ -56,6 +61,8 @@ module Anthropic
         #   @param page [String] Opaque pagination cursor from a previous response.
         #
         #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        #   @param workspace_id [String]
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
       end

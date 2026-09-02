@@ -13,7 +13,8 @@ module Anthropic
           resources: ::Array[Anthropic::Models::Beta::DeploymentCreateParams::resource],
           schedule: Anthropic::Beta::BetaManagedAgentsScheduleParams?,
           vault_ids: ::Array[String],
-          betas: ::Array[Anthropic::Models::anthropic_beta]
+          betas: ::Array[Anthropic::Models::anthropic_beta],
+          workspace_id: String
         }
         & Anthropic::Internal::Type::request_parameters
 
@@ -55,6 +56,10 @@ module Anthropic
           ::Array[Anthropic::Models::anthropic_beta]
         ) -> ::Array[Anthropic::Models::anthropic_beta]
 
+        attr_reader workspace_id: String?
+
+        def workspace_id=: (String) -> String
+
         def initialize: (
           agent: Anthropic::Models::Beta::DeploymentCreateParams::agent,
           environment_id: String,
@@ -67,6 +72,7 @@ module Anthropic
           ?schedule: Anthropic::Beta::BetaManagedAgentsScheduleParams?,
           ?vault_ids: ::Array[String],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> void
 
@@ -82,6 +88,7 @@ module Anthropic
           schedule: Anthropic::Beta::BetaManagedAgentsScheduleParams?,
           vault_ids: ::Array[String],
           betas: ::Array[Anthropic::Models::anthropic_beta],
+          workspace_id: String,
           request_options: Anthropic::RequestOptions
         }
 

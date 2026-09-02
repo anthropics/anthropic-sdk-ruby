@@ -25,10 +25,17 @@ module Anthropic
       sig { params(expires_in_seconds: Integer).void }
       attr_writer :expires_in_seconds
 
+      sig { returns(T.nilable(String)) }
+      attr_reader :workspace_id
+
+      sig { params(workspace_id: String).void }
+      attr_writer :workspace_id
+
       sig do
         params(
           file: Anthropic::Internal::FileInput,
           expires_in_seconds: Integer,
+          workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -40,6 +47,7 @@ module Anthropic
         # Seconds from upload until the file expires and its bytes become permanently
         # unavailable. Must be between 3600 (one hour) and 7776000 (ninety days).
         expires_in_seconds: nil,
+        workspace_id: nil,
         request_options: {}
       )
       end
@@ -49,6 +57,7 @@ module Anthropic
           {
             file: Anthropic::Internal::FileInput,
             expires_in_seconds: Integer,
+            workspace_id: String,
             request_options: Anthropic::RequestOptions
           }
         )

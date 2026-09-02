@@ -9,7 +9,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::FileListParams} for more details.
         #
-        # @overload list(ids: nil, limit: nil, page: nil, scope_id: nil, betas: nil, request_options: {})
+        # @overload list(ids: nil, limit: nil, page: nil, scope_id: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param ids [Array<String>, nil] Query param: Restrict the result set to Files whose `id` is in this list. At mos
         #
@@ -20,6 +20,8 @@ module Anthropic
         # @param scope_id [String] Query param: Filter by scope ID. Only returns files associated with the specifie
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -34,7 +36,10 @@ module Anthropic
             method: :get,
             path: "v1/files?beta=true",
             query: query,
-            headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
+            headers: parsed.except(*query_params).transform_keys(
+              betas: "anthropic-beta",
+              workspace_id: "anthropic-workspace-id"
+            ),
             page: Anthropic::Internal::PageCursor,
             model: Anthropic::Beta::BetaFileMetadata,
             options: options
@@ -43,11 +48,16 @@ module Anthropic
 
         # Delete File
         #
-        # @overload delete(file_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::FileDeleteParams} for more details.
+        #
+        # @overload delete(file_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param file_id [String] ID of the File.
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -59,7 +69,7 @@ module Anthropic
           @client.request(
             method: :delete,
             path: ["v1/files/%1$s?beta=true", file_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaDeletedFile,
             options: options
           )
@@ -67,11 +77,16 @@ module Anthropic
 
         # Download File
         #
-        # @overload download(file_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::FileDownloadParams} for more details.
+        #
+        # @overload download(file_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param file_id [String] ID of the File.
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -83,7 +98,10 @@ module Anthropic
           @client.request(
             method: :get,
             path: ["v1/files/%1$s/content?beta=true", file_id],
-            headers: {"accept" => "application/binary", **parsed}.transform_keys(betas: "anthropic-beta"),
+            headers: {"accept" => "application/binary", **parsed}.transform_keys(
+              betas: "anthropic-beta",
+              workspace_id: "anthropic-workspace-id"
+            ),
             model: StringIO,
             options: options
           )
@@ -91,11 +109,16 @@ module Anthropic
 
         # Get File Metadata
         #
-        # @overload retrieve_metadata(file_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::FileRetrieveMetadataParams} for more details.
+        #
+        # @overload retrieve_metadata(file_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param file_id [String] ID of the File.
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -107,7 +130,7 @@ module Anthropic
           @client.request(
             method: :get,
             path: ["v1/files/%1$s?beta=true", file_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaFileMetadata,
             options: options
           )
@@ -118,13 +141,15 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::FileUploadParams} for more details.
         #
-        # @overload upload(file:, expires_in_seconds: nil, betas: nil, request_options: {})
+        # @overload upload(file:, expires_in_seconds: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param file [Pathname, StringIO, IO, String, Anthropic::FilePart] Body param: The file to upload. Only the final path component of the part's `fil
         #
         # @param expires_in_seconds [Integer] Body param: Seconds from upload until the file expires and its bytes become perm
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -133,7 +158,7 @@ module Anthropic
         # @see Anthropic::Models::Beta::FileUploadParams
         def upload(params)
           parsed, options = Anthropic::Beta::FileUploadParams.dump_request(params)
-          header_params = {betas: "anthropic-beta"}
+          header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
             method: :post,
             path: "v1/files?beta=true",

@@ -104,7 +104,12 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(agent_id:, description: nil, mcp_servers: nil, metadata: nil, model: nil, multiagent: nil, name: nil, skills: nil, system_: nil, tools: nil, version: nil, betas: nil, request_options: {})
+        # @!attribute workspace_id
+        #
+        #   @return [String, nil]
+        optional :workspace_id, String
+
+        # @!method initialize(agent_id:, description: nil, mcp_servers: nil, metadata: nil, model: nil, multiagent: nil, name: nil, skills: nil, system_: nil, tools: nil, version: nil, betas: nil, workspace_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::AgentUpdateParams} for more details.
         #
@@ -131,6 +136,8 @@ module Anthropic
         #   @param version [Integer] The agent's current version, used to prevent concurrent overwrites. Obtain this
         #
         #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        #   @param workspace_id [String]
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 

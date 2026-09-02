@@ -29,7 +29,12 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(file:, expires_in_seconds: nil, betas: nil, request_options: {})
+        # @!attribute workspace_id
+        #
+        #   @return [String, nil]
+        optional :workspace_id, String
+
+        # @!method initialize(file:, expires_in_seconds: nil, betas: nil, workspace_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::FileUploadParams} for more details.
         #
@@ -38,6 +43,8 @@ module Anthropic
         #   @param expires_in_seconds [Integer] Seconds from upload until the file expires and its bytes become permanently unav
         #
         #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        #   @param workspace_id [String]
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
       end

@@ -1,7 +1,11 @@
 module Anthropic
   module Models
     type file_upload_params =
-      { file: Anthropic::Internal::file_input, expires_in_seconds: Integer }
+      {
+        file: Anthropic::Internal::file_input,
+        expires_in_seconds: Integer,
+        workspace_id: String
+      }
       & Anthropic::Internal::Type::request_parameters
 
     class FileUploadParams < Anthropic::Internal::Type::BaseModel
@@ -14,15 +18,21 @@ module Anthropic
 
       def expires_in_seconds=: (Integer) -> Integer
 
+      attr_reader workspace_id: String?
+
+      def workspace_id=: (String) -> String
+
       def initialize: (
         file: Anthropic::Internal::file_input,
         ?expires_in_seconds: Integer,
+        ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> void
 
       def to_hash: -> {
         file: Anthropic::Internal::file_input,
         expires_in_seconds: Integer,
+        workspace_id: String,
         request_options: Anthropic::RequestOptions
       }
     end

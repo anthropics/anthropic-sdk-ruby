@@ -18,7 +18,7 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::CompletionCreateParams} for more details.
       #
-      # @overload create(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
+      # @overload create(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, betas: nil, workspace_id: nil, request_options: {})
       #
       # @param max_tokens_to_sample [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
@@ -38,6 +38,8 @@ module Anthropic
       #
       # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
       #
+      # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+      #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Anthropic::Models::Completion]
@@ -49,7 +51,7 @@ module Anthropic
           message = "Please use `#create_streaming` for the streaming use case."
           raise ArgumentError.new(message)
         end
-        header_params = {betas: "anthropic-beta"}
+        header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
         @client.request(
           method: :post,
           path: "v1/complete",
@@ -74,7 +76,7 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::CompletionCreateParams} for more details.
       #
-      # @overload create_streaming(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, betas: nil, request_options: {})
+      # @overload create_streaming(max_tokens_to_sample:, model:, prompt:, metadata: nil, stop_sequences: nil, temperature: nil, top_k: nil, top_p: nil, betas: nil, workspace_id: nil, request_options: {})
       #
       # @param max_tokens_to_sample [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
@@ -94,6 +96,8 @@ module Anthropic
       #
       # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
       #
+      # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+      #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Anthropic::Internal::Stream<Anthropic::Models::Completion>]
@@ -106,7 +110,7 @@ module Anthropic
           raise ArgumentError.new(message)
         end
         parsed.store(:stream, true)
-        header_params = {betas: "anthropic-beta"}
+        header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
         @client.request(
           method: :post,
           path: "v1/complete",

@@ -31,7 +31,12 @@ module Anthropic
           #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-          # @!method initialize(memory_store_id:, memory_id:, expected_content_sha256: nil, betas: nil, request_options: {})
+          # @!attribute workspace_id
+          #
+          #   @return [String, nil]
+          optional :workspace_id, String
+
+          # @!method initialize(memory_store_id:, memory_id:, expected_content_sha256: nil, betas: nil, workspace_id: nil, request_options: {})
           #   @param memory_store_id [String]
           #
           #   @param memory_id [String]
@@ -39,6 +44,8 @@ module Anthropic
           #   @param expected_content_sha256 [String] Query parameter for expected_content_sha256
           #
           #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #
+          #   @param workspace_id [String]
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
         end

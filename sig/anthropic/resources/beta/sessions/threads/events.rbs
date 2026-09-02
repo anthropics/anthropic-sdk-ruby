@@ -10,6 +10,7 @@ module Anthropic
               ?limit: Integer,
               ?page: String,
               ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?workspace_id: String,
               ?request_options: Anthropic::request_opts
             ) -> Anthropic::Internal::PageCursor[Anthropic::Models::Beta::Sessions::beta_managed_agents_session_event]
 
@@ -18,6 +19,7 @@ module Anthropic
               session_id: String,
               ?event_deltas: ::Array[Anthropic::Models::Beta::beta_managed_agents_delta_type],
               ?betas: ::Array[Anthropic::Models::anthropic_beta],
+              ?workspace_id: String,
               ?request_options: Anthropic::request_opts
             ) -> Anthropic::Internal::Stream[Anthropic::Models::Beta::Sessions::beta_managed_agents_stream_session_thread_events]
 

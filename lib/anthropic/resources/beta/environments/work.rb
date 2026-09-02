@@ -12,13 +12,18 @@ module Anthropic
           #
           # Retrieve detailed information about a specific work item.
           #
-          # @overload retrieve(work_id, environment_id:, betas: nil, request_options: {})
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Environments::WorkRetrieveParams} for more details.
+          #
+          # @overload retrieve(work_id, environment_id:, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param work_id [String] Path param
           #
           # @param environment_id [String] Path param
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -34,7 +39,7 @@ module Anthropic
             @client.request(
               method: :get,
               path: ["v1/environments/%1$s/work/%2$s?beta=true", environment_id, work_id],
-              headers: parsed.transform_keys(betas: "anthropic-beta"),
+              headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Environments::BetaSelfHostedWork,
               options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
             )
@@ -50,7 +55,7 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Environments::WorkUpdateParams} for more details.
           #
-          # @overload update(work_id, environment_id:, metadata:, betas: nil, request_options: {})
+          # @overload update(work_id, environment_id:, metadata:, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param work_id [String] Path param
           #
@@ -59,6 +64,8 @@ module Anthropic
           # @param metadata [Hash{Symbol=>String, nil}] Body param: Metadata patch. Set a key to a string to upsert it, or to null to de
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -71,7 +78,7 @@ module Anthropic
               parsed.delete(:environment_id) do
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
-            header_params = {betas: "anthropic-beta"}
+            header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
             @client.request(
               method: :post,
               path: ["v1/environments/%1$s/work/%2$s?beta=true", environment_id, work_id],
@@ -246,11 +253,16 @@ module Anthropic
 
           # Get statistics about the work queue for an environment.
           #
-          # @overload stats(environment_id, betas: nil, request_options: {})
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Environments::WorkStatsParams} for more details.
+          #
+          # @overload stats(environment_id, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param environment_id [String]
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -262,7 +274,7 @@ module Anthropic
             @client.request(
               method: :get,
               path: ["v1/environments/%1$s/work/stats?beta=true", environment_id],
-              headers: parsed.transform_keys(betas: "anthropic-beta"),
+              headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Environments::BetaSelfHostedWorkQueueStats,
               options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
             )
@@ -275,7 +287,10 @@ module Anthropic
           #
           # Stop a work item, initiating graceful or forced shutdown.
           #
-          # @overload stop(work_id, environment_id:, force: nil, betas: nil, request_options: {})
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Environments::WorkStopParams} for more details.
+          #
+          # @overload stop(work_id, environment_id:, force: nil, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param work_id [String] Path param
           #
@@ -284,6 +299,8 @@ module Anthropic
           # @param force [Boolean] Body param: If true, immediately stop work without graceful shutdown
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -296,7 +313,7 @@ module Anthropic
               parsed.delete(:environment_id) do
                 raise ArgumentError.new("missing required path argument #{_1}")
               end
-            header_params = {betas: "anthropic-beta"}
+            header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
             @client.request(
               method: :post,
               path: ["v1/environments/%1$s/work/%2$s/stop?beta=true", environment_id, work_id],

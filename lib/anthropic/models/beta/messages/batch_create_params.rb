@@ -32,7 +32,12 @@ module Anthropic
           #   @return [String, nil]
           optional :user_profile_id, String
 
-          # @!method initialize(requests:, betas: nil, user_profile_id: nil, request_options: {})
+          # @!attribute workspace_id
+          #
+          #   @return [String, nil]
+          optional :workspace_id, String
+
+          # @!method initialize(requests:, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Messages::BatchCreateParams} for more details.
           #
@@ -41,6 +46,8 @@ module Anthropic
           #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           #   @param user_profile_id [String] The user profile ID to attribute the requests in this batch to. Use when acting
+          #
+          #   @param workspace_id [String]
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 

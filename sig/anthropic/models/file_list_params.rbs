@@ -1,7 +1,12 @@
 module Anthropic
   module Models
     type file_list_params =
-      { ids: ::Array[String]?, limit: Integer, page: String? }
+      {
+        ids: ::Array[String]?,
+        limit: Integer,
+        page: String?,
+        workspace_id: String
+      }
       & Anthropic::Internal::Type::request_parameters
 
     class FileListParams < Anthropic::Internal::Type::BaseModel
@@ -16,10 +21,15 @@ module Anthropic
 
       attr_accessor page: String?
 
+      attr_reader workspace_id: String?
+
+      def workspace_id=: (String) -> String
+
       def initialize: (
         ?ids: ::Array[String]?,
         ?limit: Integer,
         ?page: String?,
+        ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> void
 
@@ -27,6 +37,7 @@ module Anthropic
         ids: ::Array[String]?,
         limit: Integer,
         page: String?,
+        workspace_id: String,
         request_options: Anthropic::RequestOptions
       }
     end

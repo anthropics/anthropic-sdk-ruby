@@ -15,7 +15,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MemoryStoreCreateParams} for more details.
         #
-        # @overload create(name:, description: nil, metadata: nil, betas: nil, request_options: {})
+        # @overload create(name:, description: nil, metadata: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param name [String] Body param: Human-readable name for the store. Required; 1–255 characters; no co
         #
@@ -25,6 +25,8 @@ module Anthropic
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Beta::BetaManagedAgentsMemoryStore]
@@ -32,7 +34,7 @@ module Anthropic
         # @see Anthropic::Models::Beta::MemoryStoreCreateParams
         def create(params)
           parsed, options = Anthropic::Beta::MemoryStoreCreateParams.dump_request(params)
-          header_params = {betas: "anthropic-beta"}
+          header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
             method: :post,
             path: "v1/memory_stores?beta=true",
@@ -45,11 +47,16 @@ module Anthropic
 
         # Retrieve a memory store
         #
-        # @overload retrieve(memory_store_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::MemoryStoreRetrieveParams} for more details.
+        #
+        # @overload retrieve(memory_store_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param memory_store_id [String] Path parameter memory_store_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -61,7 +68,7 @@ module Anthropic
           @client.request(
             method: :get,
             path: ["v1/memory_stores/%1$s?beta=true", memory_store_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsMemoryStore,
             options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
           )
@@ -72,7 +79,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MemoryStoreUpdateParams} for more details.
         #
-        # @overload update(memory_store_id, description: nil, metadata: nil, name: nil, betas: nil, request_options: {})
+        # @overload update(memory_store_id, description: nil, metadata: nil, name: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param memory_store_id [String] Path param: Path parameter memory_store_id
         #
@@ -84,6 +91,8 @@ module Anthropic
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Beta::BetaManagedAgentsMemoryStore]
@@ -91,7 +100,7 @@ module Anthropic
         # @see Anthropic::Models::Beta::MemoryStoreUpdateParams
         def update(memory_store_id, params = {})
           parsed, options = Anthropic::Beta::MemoryStoreUpdateParams.dump_request(params)
-          header_params = {betas: "anthropic-beta"}
+          header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
             method: :post,
             path: ["v1/memory_stores/%1$s?beta=true", memory_store_id],
@@ -107,7 +116,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MemoryStoreListParams} for more details.
         #
-        # @overload list(created_at_gte: nil, created_at_lte: nil, include_archived: nil, limit: nil, page: nil, betas: nil, request_options: {})
+        # @overload list(created_at_gte: nil, created_at_lte: nil, include_archived: nil, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param created_at_gte [Time] Query param: Return only stores whose `created_at` is at or after this time (inc
         #
@@ -120,6 +129,8 @@ module Anthropic
         # @param page [String] Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page`
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -134,7 +145,10 @@ module Anthropic
             method: :get,
             path: "v1/memory_stores?beta=true",
             query: query.transform_keys(created_at_gte: "created_at[gte]", created_at_lte: "created_at[lte]"),
-            headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
+            headers: parsed.except(*query_params).transform_keys(
+              betas: "anthropic-beta",
+              workspace_id: "anthropic-workspace-id"
+            ),
             page: Anthropic::Internal::PageCursor,
             model: Anthropic::Beta::BetaManagedAgentsMemoryStore,
             options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
@@ -143,11 +157,16 @@ module Anthropic
 
         # Delete a memory store
         #
-        # @overload delete(memory_store_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::MemoryStoreDeleteParams} for more details.
+        #
+        # @overload delete(memory_store_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param memory_store_id [String] Path parameter memory_store_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -159,7 +178,7 @@ module Anthropic
           @client.request(
             method: :delete,
             path: ["v1/memory_stores/%1$s?beta=true", memory_store_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsDeletedMemoryStore,
             options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
           )
@@ -167,11 +186,16 @@ module Anthropic
 
         # Archive a memory store
         #
-        # @overload archive(memory_store_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::MemoryStoreArchiveParams} for more details.
+        #
+        # @overload archive(memory_store_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param memory_store_id [String] Path parameter memory_store_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -183,7 +207,7 @@ module Anthropic
           @client.request(
             method: :post,
             path: ["v1/memory_stores/%1$s/archive?beta=true", memory_store_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsMemoryStore,
             options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
           )

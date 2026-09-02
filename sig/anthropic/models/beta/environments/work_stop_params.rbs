@@ -6,7 +6,8 @@ module Anthropic
           {
             environment_id: String,
             work_id: String,
-            betas: ::Array[Anthropic::Models::anthropic_beta]
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            workspace_id: String
           }
           & Anthropic::Internal::Type::request_parameters
 
@@ -28,10 +29,15 @@ module Anthropic
             ::Array[Anthropic::Models::anthropic_beta] _
           ) -> ::Array[Anthropic::Models::anthropic_beta]
 
+          def workspace_id: -> String?
+
+          def workspace_id=: (String _) -> String
+
           def initialize: (
             environment_id: String,
             work_id: String,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> void
 
@@ -39,6 +45,7 @@ module Anthropic
             environment_id: String,
             work_id: String,
             betas: ::Array[Anthropic::Models::anthropic_beta],
+            workspace_id: String,
             request_options: Anthropic::RequestOptions
           }
         end

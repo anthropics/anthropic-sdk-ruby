@@ -9,23 +9,31 @@ module Anthropic
           ids: T.nilable(T::Array[String]),
           limit: Integer,
           page: T.nilable(String),
+          workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::Internal::PageCursor[Anthropic::FileMetadata])
       end
       def list(
-        # Restrict the result set to Files whose `id` is in this list. At most 100 entries
-        # (after de-duplication). Mutually exclusive with `page` and `limit`. When
-        # supplied, the response is always a single page (`next_page` is null). IDs that
-        # do not resolve to a visible File — including deleted Files — are silently
-        # omitted.
+        # Query param: Restrict the result set to Files whose `id` is in this list. At
+        # most 100 entries (after de-duplication). Mutually exclusive with `page` and
+        # `limit`. When supplied, the response is always a single page (`next_page` is
+        # null). IDs that do not resolve to a visible File — including deleted Files — are
+        # silently omitted.
         ids: nil,
-        # Number of items to return per page.
+        # Query param: Number of items to return per page.
         #
         # Defaults to `20`. Ranges from `1` to `1000`.
         limit: nil,
-        # Opaque page cursor returned in a prior list response's `next_page`. Prefixed
-        # `page_`.
+        # Query param: Opaque page cursor returned in a prior list response's `next_page`.
+        # Prefixed `page_`.
         page: nil,
+        # Header param: Optional header to select the Workspace for this request. The
+        # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+        #
+        # Only needed for credentials that can act on more than one Workspace. A
+        # credential that belongs to a specific Workspace may omit it; if sent, it must
+        # match that Workspace.
+        workspace_id: nil,
         request_options: {}
       )
       end
@@ -34,12 +42,20 @@ module Anthropic
       sig do
         params(
           file_id: String,
+          workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::DeletedFile)
       end
       def delete(
         # ID of the File.
         file_id,
+        # Optional header to select the Workspace for this request. The value is a
+        # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+        #
+        # Only needed for credentials that can act on more than one Workspace. A
+        # credential that belongs to a specific Workspace may omit it; if sent, it must
+        # match that Workspace.
+        workspace_id: nil,
         request_options: {}
       )
       end
@@ -48,12 +64,20 @@ module Anthropic
       sig do
         params(
           file_id: String,
+          workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(StringIO)
       end
       def download(
         # ID of the File.
         file_id,
+        # Optional header to select the Workspace for this request. The value is a
+        # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+        #
+        # Only needed for credentials that can act on more than one Workspace. A
+        # credential that belongs to a specific Workspace may omit it; if sent, it must
+        # match that Workspace.
+        workspace_id: nil,
         request_options: {}
       )
       end
@@ -62,12 +86,20 @@ module Anthropic
       sig do
         params(
           file_id: String,
+          workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::FileMetadata)
       end
       def retrieve_metadata(
         # ID of the File.
         file_id,
+        # Optional header to select the Workspace for this request. The value is a
+        # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+        #
+        # Only needed for credentials that can act on more than one Workspace. A
+        # credential that belongs to a specific Workspace may omit it; if sent, it must
+        # match that Workspace.
+        workspace_id: nil,
         request_options: {}
       )
       end
@@ -77,17 +109,26 @@ module Anthropic
         params(
           file: Anthropic::Internal::FileInput,
           expires_in_seconds: Integer,
+          workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::FileMetadata)
       end
       def upload(
-        # The file to upload. Only the final path component of the part's `filename` is
-        # kept; an absent or empty `filename` is replaced with `unnamed` plus the
-        # extension for the file's stored `mime_type`, when known.
+        # Body param: The file to upload. Only the final path component of the part's
+        # `filename` is kept; an absent or empty `filename` is replaced with `unnamed`
+        # plus the extension for the file's stored `mime_type`, when known.
         file:,
-        # Seconds from upload until the file expires and its bytes become permanently
-        # unavailable. Must be between 3600 (one hour) and 7776000 (ninety days).
+        # Body param: Seconds from upload until the file expires and its bytes become
+        # permanently unavailable. Must be between 3600 (one hour) and 7776000 (ninety
+        # days).
         expires_in_seconds: nil,
+        # Header param: Optional header to select the Workspace for this request. The
+        # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+        #
+        # Only needed for credentials that can act on more than one Workspace. A
+        # credential that belongs to a specific Workspace may omit it; if sent, it must
+        # match that Workspace.
+        workspace_id: nil,
         request_options: {}
       )
       end

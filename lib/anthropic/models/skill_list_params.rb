@@ -35,7 +35,12 @@ module Anthropic
       #   @return [String, nil]
       optional :source, String, nil?: true
 
-      # @!method initialize(limit: nil, page: nil, source: nil, request_options: {})
+      # @!attribute workspace_id
+      #
+      #   @return [String, nil]
+      optional :workspace_id, String
+
+      # @!method initialize(limit: nil, page: nil, source: nil, workspace_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::SkillListParams} for more details.
       #
@@ -44,6 +49,8 @@ module Anthropic
       #   @param page [String, nil] Pagination token for fetching a specific page of results.
       #
       #   @param source [String, nil] Filter skills by source.
+      #
+      #   @param workspace_id [String]
       #
       #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
     end

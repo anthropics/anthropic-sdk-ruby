@@ -8,24 +8,28 @@ module Anthropic
           ?page: String?,
           ?scope_id: String,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaFileMetadata]
 
         def delete: (
           String file_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaDeletedFile
 
         def download: (
           String file_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> StringIO
 
         def retrieve_metadata: (
           String file_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaFileMetadata
 
@@ -33,6 +37,7 @@ module Anthropic
           file: Anthropic::Internal::file_input,
           ?expires_in_seconds: Integer,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaFileMetadata
 

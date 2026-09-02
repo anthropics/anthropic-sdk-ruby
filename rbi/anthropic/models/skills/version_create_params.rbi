@@ -28,10 +28,17 @@ module Anthropic
         sig { returns(T::Array[Anthropic::Internal::FileInput]) }
         attr_accessor :files
 
+        sig { returns(T.nilable(String)) }
+        attr_reader :workspace_id
+
+        sig { params(workspace_id: String).void }
+        attr_writer :workspace_id
+
         sig do
           params(
             skill_id: String,
             files: T::Array[Anthropic::Internal::FileInput],
+            workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -45,6 +52,7 @@ module Anthropic
           # All files must be in the same top-level directory and must include a SKILL.md
           # file at the root of that directory.
           files:,
+          workspace_id: nil,
           request_options: {}
         )
         end
@@ -54,6 +62,7 @@ module Anthropic
             {
               skill_id: String,
               files: T::Array[Anthropic::Internal::FileInput],
+              workspace_id: String,
               request_options: Anthropic::RequestOptions
             }
           )

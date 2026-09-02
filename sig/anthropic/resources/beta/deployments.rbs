@@ -14,12 +14,14 @@ module Anthropic
           ?schedule: Anthropic::Beta::BetaManagedAgentsScheduleParams?,
           ?vault_ids: ::Array[String],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsDeployment
 
         def retrieve: (
           String deployment_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsDeployment
 
@@ -36,6 +38,7 @@ module Anthropic
           ?schedule: Anthropic::Beta::BetaManagedAgentsScheduleParams?,
           ?vault_ids: ::Array[String]?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsDeployment
 
@@ -48,30 +51,35 @@ module Anthropic
           ?page: String,
           ?status: Anthropic::Models::Beta::beta_managed_agents_deployment_status,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaManagedAgentsDeployment]
 
         def archive: (
           String deployment_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsDeployment
 
         def pause: (
           String deployment_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsDeployment
 
         def run: (
           String deployment_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsDeploymentRun
 
         def unpause: (
           String deployment_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsDeployment
 

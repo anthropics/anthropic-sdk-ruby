@@ -11,6 +11,7 @@ module Anthropic
         ?top_k: Integer,
         ?top_p: Float,
         ?betas: ::Array[Anthropic::Models::anthropic_beta],
+        ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::Completion
 
@@ -24,6 +25,7 @@ module Anthropic
         ?top_k: Integer,
         ?top_p: Float,
         ?betas: ::Array[Anthropic::Models::anthropic_beta],
+        ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::Internal::Stream[Anthropic::Completion]
 

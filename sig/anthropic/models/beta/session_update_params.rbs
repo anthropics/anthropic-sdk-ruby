@@ -9,7 +9,8 @@ module Anthropic
           metadata: ::Hash[Symbol, String?]?,
           title: String?,
           vault_ids: ::Array[String],
-          betas: ::Array[Anthropic::Models::anthropic_beta]
+          betas: ::Array[Anthropic::Models::anthropic_beta],
+          workspace_id: String
         }
         & Anthropic::Internal::Type::request_parameters
 
@@ -41,6 +42,10 @@ module Anthropic
           ::Array[Anthropic::Models::anthropic_beta]
         ) -> ::Array[Anthropic::Models::anthropic_beta]
 
+        attr_reader workspace_id: String?
+
+        def workspace_id=: (String) -> String
+
         def initialize: (
           session_id: String,
           ?agent: Anthropic::Beta::BetaManagedAgentsSessionAgentUpdate,
@@ -49,6 +54,7 @@ module Anthropic
           ?title: String?,
           ?vault_ids: ::Array[String],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> void
 
@@ -60,6 +66,7 @@ module Anthropic
           title: String?,
           vault_ids: ::Array[String],
           betas: ::Array[Anthropic::Models::anthropic_beta],
+          workspace_id: String,
           request_options: Anthropic::RequestOptions
         }
       end

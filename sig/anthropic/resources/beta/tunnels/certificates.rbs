@@ -7,6 +7,7 @@ module Anthropic
             String tunnel_id,
             ca_certificate_pem: String,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Tunnels::BetaTunnelCertificate
 
@@ -14,6 +15,7 @@ module Anthropic
             String certificate_id,
             tunnel_id: String,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Tunnels::BetaTunnelCertificate
 
@@ -23,6 +25,7 @@ module Anthropic
             ?limit: Integer,
             ?page: String,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Tunnels::BetaTunnelCertificate]
 
@@ -30,6 +33,7 @@ module Anthropic
             String certificate_id,
             tunnel_id: String,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Tunnels::BetaTunnelCertificate
 

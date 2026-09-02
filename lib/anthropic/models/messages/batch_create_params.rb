@@ -25,13 +25,20 @@ module Anthropic
         #   @return [String, nil]
         optional :user_profile_id, String
 
-        # @!method initialize(requests:, user_profile_id: nil, request_options: {})
+        # @!attribute workspace_id
+        #
+        #   @return [String, nil]
+        optional :workspace_id, String
+
+        # @!method initialize(requests:, user_profile_id: nil, workspace_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Messages::BatchCreateParams} for more details.
         #
         #   @param requests [Array<Anthropic::Models::Messages::BatchCreateParams::Request>] List of requests for prompt completion. Each is an individual request to create
         #
         #   @param user_profile_id [String] The user profile ID to attribute the requests in this batch to. Use when acting
+        #
+        #   @param workspace_id [String]
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 

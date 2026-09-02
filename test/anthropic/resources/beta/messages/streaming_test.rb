@@ -214,6 +214,18 @@ class Anthropic::Test::Resources::Beta::Messages::StreamingTest < Minitest::Test
     end
   end
 
+  def test_stream_sends_workspace_id_as_header
+    stub_streaming_response(compaction_sse_response)
+
+    @client.beta.messages.stream(**compaction_params, workspace_id: "wrkspc_req").until_done
+
+    assert_requested(:post, "http://localhost/v1/messages?beta=true") do |req|
+      assert_equal("wrkspc_req", req.headers["Anthropic-Workspace-Id"])
+      refute(JSON.parse(req.body).key?("workspace_id"))
+      true
+    end
+  end
+
   def test_compaction_streaming
     stub_streaming_response(compaction_sse_response)
 

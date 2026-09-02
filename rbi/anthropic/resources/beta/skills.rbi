@@ -13,6 +13,7 @@ module Anthropic
             files: T::Array[Anthropic::Internal::FileInput],
             display_name: T.nilable(String),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaSkill)
         end
@@ -28,6 +29,13 @@ module Anthropic
           display_name: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
+          # Header param: Optional header to select the Workspace for this request. The
+          # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+          #
+          # Only needed for credentials that can act on more than one Workspace. A
+          # credential that belongs to a specific Workspace may omit it; if sent, it must
+          # match that Workspace.
+          workspace_id: nil,
           request_options: {}
         )
         end
@@ -37,6 +45,7 @@ module Anthropic
           params(
             skill_id: String,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaSkill)
         end
@@ -47,6 +56,13 @@ module Anthropic
           skill_id,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
+          # Optional header to select the Workspace for this request. The value is a
+          # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+          #
+          # Only needed for credentials that can act on more than one Workspace. A
+          # credential that belongs to a specific Workspace may omit it; if sent, it must
+          # match that Workspace.
+          workspace_id: nil,
           request_options: {}
         )
         end
@@ -58,6 +74,7 @@ module Anthropic
             page: T.nilable(String),
             source: T.nilable(String),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Internal::PageCursor[Anthropic::Beta::BetaSkill])
         end
@@ -80,6 +97,13 @@ module Anthropic
           source: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
+          # Header param: Optional header to select the Workspace for this request. The
+          # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+          #
+          # Only needed for credentials that can act on more than one Workspace. A
+          # credential that belongs to a specific Workspace may omit it; if sent, it must
+          # match that Workspace.
+          workspace_id: nil,
           request_options: {}
         )
         end
@@ -89,6 +113,7 @@ module Anthropic
           params(
             skill_id: String,
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaDeletedSkill)
         end
@@ -99,6 +124,13 @@ module Anthropic
           skill_id,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
+          # Optional header to select the Workspace for this request. The value is a
+          # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+          #
+          # Only needed for credentials that can act on more than one Workspace. A
+          # credential that belongs to a specific Workspace may omit it; if sent, it must
+          # match that Workspace.
+          workspace_id: nil,
           request_options: {}
         )
         end

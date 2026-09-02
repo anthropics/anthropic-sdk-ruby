@@ -24,10 +24,17 @@ module Anthropic
       sig { returns(T.nilable(String)) }
       attr_accessor :display_name
 
+      sig { returns(T.nilable(String)) }
+      attr_reader :workspace_id
+
+      sig { params(workspace_id: String).void }
+      attr_writer :workspace_id
+
       sig do
         params(
           files: T::Array[Anthropic::Internal::FileInput],
           display_name: T.nilable(String),
+          workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -41,6 +48,7 @@ module Anthropic
         # set: derived from the SKILL.md frontmatter `name` when omitted at creation. Not
         # unique.
         display_name: nil,
+        workspace_id: nil,
         request_options: {}
       )
       end
@@ -50,6 +58,7 @@ module Anthropic
           {
             files: T::Array[Anthropic::Internal::FileInput],
             display_name: T.nilable(String),
+            workspace_id: String,
             request_options: Anthropic::RequestOptions
           }
         )

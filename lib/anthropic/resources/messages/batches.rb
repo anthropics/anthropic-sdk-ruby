@@ -16,11 +16,13 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Messages::BatchCreateParams} for more details.
         #
-        # @overload create(requests:, user_profile_id: nil, request_options: {})
+        # @overload create(requests:, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param requests [Array<Anthropic::Models::Messages::BatchCreateParams::Request>] Body param: List of requests for prompt completion. Each is an individual reques
         #
         # @param user_profile_id [String] Header param: The user profile ID to attribute the requests in this batch to. Us
+        #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -29,7 +31,10 @@ module Anthropic
         # @see Anthropic::Models::Messages::BatchCreateParams
         def create(params)
           parsed, options = Anthropic::Messages::BatchCreateParams.dump_request(params)
-          header_params = {user_profile_id: "anthropic-user-profile-id"}
+          header_params = {
+            user_profile_id: "anthropic-user-profile-id",
+            workspace_id: "anthropic-workspace-id"
+          }
           @client.request(
             method: :post,
             path: "v1/messages/batches",
@@ -47,9 +52,14 @@ module Anthropic
         # Learn more about the Message Batches API in our
         # [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
         #
-        # @overload retrieve(message_batch_id, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Messages::BatchRetrieveParams} for more details.
+        #
+        # @overload retrieve(message_batch_id, workspace_id: nil, request_options: {})
         #
         # @param message_batch_id [String] ID of the Message Batch.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -57,11 +67,13 @@ module Anthropic
         #
         # @see Anthropic::Models::Messages::BatchRetrieveParams
         def retrieve(message_batch_id, params = {})
+          parsed, options = Anthropic::Messages::BatchRetrieveParams.dump_request(params)
           @client.request(
             method: :get,
             path: ["v1/messages/batches/%1$s", message_batch_id],
+            headers: parsed.transform_keys(workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Messages::MessageBatch,
-            options: params[:request_options]
+            options: options
           )
         end
 
@@ -74,13 +86,15 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Messages::BatchListParams} for more details.
         #
-        # @overload list(after_id: nil, before_id: nil, limit: nil, request_options: {})
+        # @overload list(after_id: nil, before_id: nil, limit: nil, workspace_id: nil, request_options: {})
         #
-        # @param after_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
+        # @param after_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
         #
-        # @param before_id [String] ID of the object to use as a cursor for pagination. When provided, returns the p
+        # @param before_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
         #
-        # @param limit [Integer] Number of items to return per page.
+        # @param limit [Integer] Query param: Number of items to return per page.
+        #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -88,12 +102,14 @@ module Anthropic
         #
         # @see Anthropic::Models::Messages::BatchListParams
         def list(params = {})
+          query_params = [:after_id, :before_id, :limit]
           parsed, options = Anthropic::Messages::BatchListParams.dump_request(params)
-          query = Anthropic::Internal::Util.encode_query_params(parsed)
+          query = Anthropic::Internal::Util.encode_query_params(parsed.slice(*query_params))
           @client.request(
             method: :get,
             path: "v1/messages/batches",
             query: query,
+            headers: parsed.except(*query_params).transform_keys(workspace_id: "anthropic-workspace-id"),
             page: Anthropic::Internal::Page,
             model: Anthropic::Messages::MessageBatch,
             options: options
@@ -108,9 +124,14 @@ module Anthropic
         # Learn more about the Message Batches API in our
         # [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
         #
-        # @overload delete(message_batch_id, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Messages::BatchDeleteParams} for more details.
+        #
+        # @overload delete(message_batch_id, workspace_id: nil, request_options: {})
         #
         # @param message_batch_id [String] ID of the Message Batch.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -118,11 +139,13 @@ module Anthropic
         #
         # @see Anthropic::Models::Messages::BatchDeleteParams
         def delete(message_batch_id, params = {})
+          parsed, options = Anthropic::Messages::BatchDeleteParams.dump_request(params)
           @client.request(
             method: :delete,
             path: ["v1/messages/batches/%1$s", message_batch_id],
+            headers: parsed.transform_keys(workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Messages::DeletedMessageBatch,
-            options: params[:request_options]
+            options: options
           )
         end
 
@@ -139,9 +162,14 @@ module Anthropic
         # Learn more about the Message Batches API in our
         # [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
         #
-        # @overload cancel(message_batch_id, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Messages::BatchCancelParams} for more details.
+        #
+        # @overload cancel(message_batch_id, workspace_id: nil, request_options: {})
         #
         # @param message_batch_id [String] ID of the Message Batch.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -149,11 +177,13 @@ module Anthropic
         #
         # @see Anthropic::Models::Messages::BatchCancelParams
         def cancel(message_batch_id, params = {})
+          parsed, options = Anthropic::Messages::BatchCancelParams.dump_request(params)
           @client.request(
             method: :post,
             path: ["v1/messages/batches/%1$s/cancel", message_batch_id],
+            headers: parsed.transform_keys(workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Messages::MessageBatch,
-            options: params[:request_options]
+            options: options
           )
         end
 
@@ -166,9 +196,14 @@ module Anthropic
         # Learn more about the Message Batches API in our
         # [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
         #
-        # @overload results_streaming(message_batch_id, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Messages::BatchResultsParams} for more details.
+        #
+        # @overload results_streaming(message_batch_id, workspace_id: nil, request_options: {})
         #
         # @param message_batch_id [String] ID of the Message Batch.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -176,13 +211,20 @@ module Anthropic
         #
         # @see Anthropic::Models::Messages::BatchResultsParams
         def results_streaming(message_batch_id, params = {})
+          parsed, options = Anthropic::Messages::BatchResultsParams.dump_request(params)
           @client.request(
             method: :get,
             path: ["v1/messages/batches/%1$s/results", message_batch_id],
-            headers: {"accept" => "application/x-jsonl", "accept-encoding" => "identity"},
+            headers: {
+              "accept" => "application/x-jsonl",
+              "accept-encoding" => "identity",
+              **parsed
+            }.transform_keys(
+              workspace_id: "anthropic-workspace-id"
+            ),
             stream: Anthropic::Internal::JsonLStream,
             model: Anthropic::Messages::MessageBatchIndividualResponse,
-            options: params[:request_options]
+            options: options
           )
         end
 

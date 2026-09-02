@@ -8,11 +8,16 @@ module Anthropic
       # The Models API response can be used to determine information about a specific
       # model or resolve a model alias to a model ID.
       #
-      # @overload retrieve(model_id, betas: nil, request_options: {})
+      # Some parameter documentations has been truncated, see
+      # {Anthropic::Models::ModelRetrieveParams} for more details.
+      #
+      # @overload retrieve(model_id, betas: nil, workspace_id: nil, request_options: {})
       #
       # @param model_id [String] Model identifier or alias.
       #
       # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+      #
+      # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -24,7 +29,7 @@ module Anthropic
         @client.request(
           method: :get,
           path: ["v1/models/%1$s", model_id],
-          headers: parsed.transform_keys(betas: "anthropic-beta"),
+          headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
           model: Anthropic::ModelInfo,
           options: options
         )
@@ -38,7 +43,7 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::ModelListParams} for more details.
       #
-      # @overload list(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {})
+      # @overload list(after_id: nil, before_id: nil, limit: nil, betas: nil, workspace_id: nil, request_options: {})
       #
       # @param after_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
       #
@@ -47,6 +52,8 @@ module Anthropic
       # @param limit [Integer] Query param: Number of items to return per page.
       #
       # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+      #
+      # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -61,7 +68,10 @@ module Anthropic
           method: :get,
           path: "v1/models",
           query: query,
-          headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
+          headers: parsed.except(*query_params).transform_keys(
+            betas: "anthropic-beta",
+            workspace_id: "anthropic-workspace-id"
+          ),
           page: Anthropic::Internal::Page,
           model: Anthropic::ModelInfo,
           options: options

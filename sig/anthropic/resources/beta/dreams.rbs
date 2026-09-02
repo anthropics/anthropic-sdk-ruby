@@ -8,12 +8,14 @@ module Anthropic
           ?instructions: String?,
           ?output_behavior: Anthropic::Models::Beta::beta_output_behavior,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaDream
 
         def retrieve: (
           String dream_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaDream
 
@@ -25,18 +27,21 @@ module Anthropic
           ?page: String,
           ?statuses: ::Array[Anthropic::Models::Beta::beta_dream_status],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaDream]
 
         def archive: (
           String dream_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaDream
 
         def cancel: (
           String dream_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaDream
 

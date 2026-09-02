@@ -2,7 +2,12 @@ module Anthropic
   module Models
     module Skills
       type version_list_params =
-        { skill_id: String, limit: Integer?, page: String? }
+        {
+          skill_id: String,
+          limit: Integer?,
+          page: String?,
+          workspace_id: String
+        }
         & Anthropic::Internal::Type::request_parameters
 
       class VersionListParams < Anthropic::Internal::Type::BaseModel
@@ -15,10 +20,15 @@ module Anthropic
 
         attr_accessor page: String?
 
+        attr_reader workspace_id: String?
+
+        def workspace_id=: (String) -> String
+
         def initialize: (
           skill_id: String,
           ?limit: Integer?,
           ?page: String?,
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> void
 
@@ -26,6 +36,7 @@ module Anthropic
           skill_id: String,
           limit: Integer?,
           page: String?,
+          workspace_id: String,
           request_options: Anthropic::RequestOptions
         }
       end

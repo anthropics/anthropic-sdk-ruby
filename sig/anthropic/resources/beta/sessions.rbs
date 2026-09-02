@@ -18,12 +18,14 @@ module Anthropic
           ?title: String?,
           ?vault_ids: ::Array[String],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsSession
 
         def retrieve: (
           String session_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsSession
 
@@ -35,6 +37,7 @@ module Anthropic
           ?title: String?,
           ?vault_ids: ::Array[String],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsSession
 
@@ -53,18 +56,21 @@ module Anthropic
           ?page: String,
           ?statuses: ::Array[Anthropic::Models::Beta::SessionListParams::status],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Internal::BidirectionalPageCursor[Anthropic::Beta::BetaManagedAgentsSession]
 
         def delete: (
           String session_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsDeletedSession
 
         def archive: (
           String session_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsSession
 

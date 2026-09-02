@@ -13,8 +13,15 @@ module Anthropic
       #   @return [String]
       required :file_id, String
 
-      # @!method initialize(file_id:, request_options: {})
+      # @!attribute workspace_id
+      #
+      #   @return [String, nil]
+      optional :workspace_id, String
+
+      # @!method initialize(file_id:, workspace_id: nil, request_options: {})
       #   @param file_id [String] ID of the File.
+      #
+      #   @param workspace_id [String]
       #
       #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
     end

@@ -39,7 +39,12 @@ module Anthropic
           #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-          # @!method initialize(vault_id:, auth:, display_name: nil, metadata: nil, betas: nil, request_options: {})
+          # @!attribute workspace_id
+          #
+          #   @return [String, nil]
+          optional :workspace_id, String
+
+          # @!method initialize(vault_id:, auth:, display_name: nil, metadata: nil, betas: nil, workspace_id: nil, request_options: {})
           #   Some parameter documentations has been truncated, see
           #   {Anthropic::Models::Beta::Vaults::CredentialCreateParams} for more details.
           #
@@ -52,6 +57,8 @@ module Anthropic
           #   @param metadata [Hash{Symbol=>String}] Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys
           #
           #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #
+          #   @param workspace_id [String]
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 

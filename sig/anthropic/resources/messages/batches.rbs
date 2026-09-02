@@ -5,11 +5,13 @@ module Anthropic
         def create: (
           requests: ::Array[Anthropic::Messages::BatchCreateParams::Request],
           ?user_profile_id: String,
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Messages::MessageBatch
 
         def retrieve: (
           String message_batch_id,
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Messages::MessageBatch
 
@@ -17,21 +19,25 @@ module Anthropic
           ?after_id: String,
           ?before_id: String,
           ?limit: Integer,
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Internal::Page[Anthropic::Messages::MessageBatch]
 
         def delete: (
           String message_batch_id,
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Messages::DeletedMessageBatch
 
         def cancel: (
           String message_batch_id,
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Messages::MessageBatch
 
         def results_streaming: (
           String message_batch_id,
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Internal::JsonLStream[Anthropic::Messages::MessageBatchIndividualResponse]
 

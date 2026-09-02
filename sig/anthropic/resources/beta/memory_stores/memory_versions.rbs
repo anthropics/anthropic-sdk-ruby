@@ -8,6 +8,7 @@ module Anthropic
             memory_store_id: String,
             ?view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion
 
@@ -24,6 +25,7 @@ module Anthropic
             ?session_id: String,
             ?view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion]
 
@@ -31,6 +33,7 @@ module Anthropic
             String memory_version_id,
             memory_store_id: String,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion
 

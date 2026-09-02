@@ -9,6 +9,7 @@ module Anthropic
             String thread_id,
             session_id: String,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread
 
@@ -17,6 +18,7 @@ module Anthropic
             ?limit: Integer,
             ?page: String,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread]
 
@@ -24,6 +26,7 @@ module Anthropic
             String thread_id,
             session_id: String,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread
 

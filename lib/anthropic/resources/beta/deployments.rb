@@ -9,7 +9,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::DeploymentCreateParams} for more details.
         #
-        # @overload create(agent:, environment_id:, initial_events:, name:, budget: nil, description: nil, metadata: nil, resources: nil, schedule: nil, vault_ids: nil, betas: nil, request_options: {})
+        # @overload create(agent:, environment_id:, initial_events:, name:, budget: nil, description: nil, metadata: nil, resources: nil, schedule: nil, vault_ids: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param agent [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams] Body param: Agent to deploy. Accepts the `agent` ID string, which pins the lates
         #
@@ -33,6 +33,8 @@ module Anthropic
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Beta::BetaManagedAgentsDeployment]
@@ -40,7 +42,7 @@ module Anthropic
         # @see Anthropic::Models::Beta::DeploymentCreateParams
         def create(params)
           parsed, options = Anthropic::Beta::DeploymentCreateParams.dump_request(params)
-          header_params = {betas: "anthropic-beta"}
+          header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
             method: :post,
             path: "v1/deployments?beta=true",
@@ -53,11 +55,16 @@ module Anthropic
 
         # Get Deployment
         #
-        # @overload retrieve(deployment_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::DeploymentRetrieveParams} for more details.
+        #
+        # @overload retrieve(deployment_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param deployment_id [String] Path parameter deployment_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -69,7 +76,7 @@ module Anthropic
           @client.request(
             method: :get,
             path: ["v1/deployments/%1$s?beta=true", deployment_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsDeployment,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
           )
@@ -80,7 +87,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::DeploymentUpdateParams} for more details.
         #
-        # @overload update(deployment_id, agent: nil, budget: nil, description: nil, environment_id: nil, initial_events: nil, metadata: nil, name: nil, resources: nil, schedule: nil, vault_ids: nil, betas: nil, request_options: {})
+        # @overload update(deployment_id, agent: nil, budget: nil, description: nil, environment_id: nil, initial_events: nil, metadata: nil, name: nil, resources: nil, schedule: nil, vault_ids: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param deployment_id [String] Path param: Path parameter deployment_id
         #
@@ -106,6 +113,8 @@ module Anthropic
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Beta::BetaManagedAgentsDeployment]
@@ -113,7 +122,7 @@ module Anthropic
         # @see Anthropic::Models::Beta::DeploymentUpdateParams
         def update(deployment_id, params = {})
           parsed, options = Anthropic::Beta::DeploymentUpdateParams.dump_request(params)
-          header_params = {betas: "anthropic-beta"}
+          header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
             method: :post,
             path: ["v1/deployments/%1$s?beta=true", deployment_id],
@@ -129,7 +138,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::DeploymentListParams} for more details.
         #
-        # @overload list(agent_id: nil, created_at_gte: nil, created_at_lte: nil, include_archived: nil, limit: nil, page: nil, status: nil, betas: nil, request_options: {})
+        # @overload list(agent_id: nil, created_at_gte: nil, created_at_lte: nil, include_archived: nil, limit: nil, page: nil, status: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param agent_id [String] Query param: Filter by agent ID.
         #
@@ -146,6 +155,8 @@ module Anthropic
         # @param status [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeploymentStatus] Query param: Filter by status: `active` or `paused`. Omit for both. To include a
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -168,7 +179,10 @@ module Anthropic
             method: :get,
             path: "v1/deployments?beta=true",
             query: query.transform_keys(created_at_gte: "created_at[gte]", created_at_lte: "created_at[lte]"),
-            headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
+            headers: parsed.except(*query_params).transform_keys(
+              betas: "anthropic-beta",
+              workspace_id: "anthropic-workspace-id"
+            ),
             page: Anthropic::Internal::PageCursor,
             model: Anthropic::Beta::BetaManagedAgentsDeployment,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
@@ -177,11 +191,16 @@ module Anthropic
 
         # Archive Deployment
         #
-        # @overload archive(deployment_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::DeploymentArchiveParams} for more details.
+        #
+        # @overload archive(deployment_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param deployment_id [String] Path parameter deployment_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -193,7 +212,7 @@ module Anthropic
           @client.request(
             method: :post,
             path: ["v1/deployments/%1$s/archive?beta=true", deployment_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsDeployment,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
           )
@@ -201,11 +220,16 @@ module Anthropic
 
         # Pause Deployment
         #
-        # @overload pause(deployment_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::DeploymentPauseParams} for more details.
+        #
+        # @overload pause(deployment_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param deployment_id [String] Path parameter deployment_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -217,7 +241,7 @@ module Anthropic
           @client.request(
             method: :post,
             path: ["v1/deployments/%1$s/pause?beta=true", deployment_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsDeployment,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
           )
@@ -225,11 +249,16 @@ module Anthropic
 
         # Run Deployment Now
         #
-        # @overload run(deployment_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::DeploymentRunParams} for more details.
+        #
+        # @overload run(deployment_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param deployment_id [String] Path parameter deployment_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -241,7 +270,7 @@ module Anthropic
           @client.request(
             method: :post,
             path: ["v1/deployments/%1$s/run?beta=true", deployment_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsDeploymentRun,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
           )
@@ -249,11 +278,16 @@ module Anthropic
 
         # Unpause Deployment
         #
-        # @overload unpause(deployment_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::DeploymentUnpauseParams} for more details.
+        #
+        # @overload unpause(deployment_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param deployment_id [String] Path parameter deployment_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -265,7 +299,7 @@ module Anthropic
           @client.request(
             method: :post,
             path: ["v1/deployments/%1$s/unpause?beta=true", deployment_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsDeployment,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
           )

@@ -7,7 +7,10 @@ module Anthropic
         class Versions
           # List Agent Versions
           #
-          # @overload list(agent_id, limit: nil, page: nil, betas: nil, request_options: {})
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Agents::VersionListParams} for more details.
+          #
+          # @overload list(agent_id, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param agent_id [String] Path param: Path parameter agent_id
           #
@@ -16,6 +19,8 @@ module Anthropic
           # @param page [String] Query param: Opaque pagination cursor.
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -30,7 +35,10 @@ module Anthropic
               method: :get,
               path: ["v1/agents/%1$s/versions?beta=true", agent_id],
               query: query,
-              headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
+              headers: parsed.except(*query_params).transform_keys(
+                betas: "anthropic-beta",
+                workspace_id: "anthropic-workspace-id"
+              ),
               page: Anthropic::Internal::PageCursor,
               model: Anthropic::Beta::BetaManagedAgentsAgent,
               options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}

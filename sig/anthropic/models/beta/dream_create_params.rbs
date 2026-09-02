@@ -7,7 +7,8 @@ module Anthropic
           model: Anthropic::Models::Beta::DreamCreateParams::model,
           instructions: String?,
           output_behavior: Anthropic::Models::Beta::beta_output_behavior,
-          betas: ::Array[Anthropic::Models::anthropic_beta]
+          betas: ::Array[Anthropic::Models::anthropic_beta],
+          workspace_id: String
         }
         & Anthropic::Internal::Type::request_parameters
 
@@ -33,12 +34,17 @@ module Anthropic
           ::Array[Anthropic::Models::anthropic_beta]
         ) -> ::Array[Anthropic::Models::anthropic_beta]
 
+        attr_reader workspace_id: String?
+
+        def workspace_id=: (String) -> String
+
         def initialize: (
           inputs: ::Array[Anthropic::Models::Beta::beta_dream_input],
           model: Anthropic::Models::Beta::DreamCreateParams::model,
           ?instructions: String?,
           ?output_behavior: Anthropic::Models::Beta::beta_output_behavior,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> void
 
@@ -48,6 +54,7 @@ module Anthropic
           instructions: String?,
           output_behavior: Anthropic::Models::Beta::beta_output_behavior,
           betas: ::Array[Anthropic::Models::anthropic_beta],
+          workspace_id: String,
           request_options: Anthropic::RequestOptions
         }
 

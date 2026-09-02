@@ -8,7 +8,10 @@ module Anthropic
           class Events
             # List Session Thread Events
             #
-            # @overload list(thread_id, session_id:, limit: nil, page: nil, betas: nil, request_options: {})
+            # Some parameter documentations has been truncated, see
+            # {Anthropic::Models::Beta::Sessions::Threads::EventListParams} for more details.
+            #
+            # @overload list(thread_id, session_id:, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
             #
             # @param thread_id [String] Path param: Path parameter thread_id
             #
@@ -19,6 +22,8 @@ module Anthropic
             # @param page [String] Query param: Query parameter for page
             #
             # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+            #
+            # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
@@ -37,7 +42,10 @@ module Anthropic
                 method: :get,
                 path: ["v1/sessions/%1$s/threads/%2$s/events?beta=true", session_id, thread_id],
                 query: query,
-                headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
+                headers: parsed.except(*query_params).transform_keys(
+                  betas: "anthropic-beta",
+                  workspace_id: "anthropic-workspace-id"
+                ),
                 page: Anthropic::Internal::PageCursor,
                 model: Anthropic::Beta::Sessions::BetaManagedAgentsSessionEvent,
                 options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
@@ -50,7 +58,7 @@ module Anthropic
             # {Anthropic::Models::Beta::Sessions::Threads::EventStreamParams} for more
             # details.
             #
-            # @overload stream_events(thread_id, session_id:, event_deltas: nil, betas: nil, request_options: {})
+            # @overload stream_events(thread_id, session_id:, event_deltas: nil, betas: nil, workspace_id: nil, request_options: {})
             #
             # @param thread_id [String] Path param: Path parameter thread_id
             #
@@ -59,6 +67,8 @@ module Anthropic
             # @param event_deltas [Array<Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeltaType>] Query param: When set, this connection also receives streaming deltas (`event_st
             #
             # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+            #
+            # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
@@ -77,12 +87,9 @@ module Anthropic
                 method: :get,
                 path: ["v1/sessions/%1$s/threads/%2$s/stream?beta=true", session_id, thread_id],
                 query: query,
-                headers: {
-                  "accept" => "text/event-stream",
-                  "accept-encoding" => "identity",
-                  **parsed.except(*query_params)
-                }.transform_keys(
-                  betas: "anthropic-beta"
+                headers: {"accept" => "text/event-stream", "accept-encoding" => "identity", **parsed.except(*query_params)}.transform_keys(
+                  betas: "anthropic-beta",
+                  workspace_id: "anthropic-workspace-id"
                 ),
                 stream: Anthropic::Internal::Stream,
                 model: Anthropic::Beta::Sessions::BetaManagedAgentsStreamSessionThreadEvents,
