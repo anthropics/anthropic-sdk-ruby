@@ -16,7 +16,7 @@ module Anthropic
           # Whether the Compliance API is enabled for this organization.
           sig do
             returns(
-              Anthropic::Beta::Organization::BetaComplianceSettings::State::Variants
+              Anthropic::Beta::Organization::BetaComplianceSettingsState::Variants
             )
           end
           attr_accessor :state
@@ -45,79 +45,12 @@ module Anthropic
             override.returns(
               {
                 state:
-                  Anthropic::Beta::Organization::BetaComplianceSettings::State::Variants,
+                  Anthropic::Beta::Organization::BetaComplianceSettingsState::Variants,
                 type: Symbol
               }
             )
           end
           def to_hash
-          end
-
-          # Whether the Compliance API is enabled for this organization.
-          module State
-            extend Anthropic::Internal::Type::Union
-
-            Variants =
-              T.type_alias do
-                T.any(
-                  Anthropic::Beta::Organization::BetaComplianceSettingsStateEnabled,
-                  Anthropic::Beta::Organization::BetaComplianceSettingsStateDisabled
-                )
-              end
-
-            module Type
-              extend Anthropic::Internal::Type::Enum
-
-              TaggedSymbol =
-                T.type_alias do
-                  T.all(
-                    Symbol,
-                    Anthropic::Beta::Organization::BetaComplianceSettings::State::Type
-                  )
-                end
-              OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-              ENABLED =
-                T.let(
-                  :enabled,
-                  Anthropic::Beta::Organization::BetaComplianceSettings::State::Type::TaggedSymbol
-                )
-              DISABLED =
-                T.let(
-                  :disabled,
-                  Anthropic::Beta::Organization::BetaComplianceSettings::State::Type::TaggedSymbol
-                )
-
-              sig do
-                override.returns(
-                  T::Array[
-                    Anthropic::Beta::Organization::BetaComplianceSettings::State::Type::TaggedSymbol
-                  ]
-                )
-              end
-              def self.values
-              end
-            end
-
-            sig do
-              override.returns(
-                T::Array[
-                  Anthropic::Beta::Organization::BetaComplianceSettings::State::Variants
-                ]
-              )
-            end
-            def self.variants
-            end
-
-            # Creates a new instance of the variant class whose `type` matches the given
-            # value, passing the remaining arguments to its constructor.
-            sig do
-              params(type: T.any(Symbol, String)).returns(
-                Anthropic::Beta::Organization::BetaComplianceSettings::State::Variants
-              )
-            end
-            def self.new(type:)
-            end
           end
         end
       end

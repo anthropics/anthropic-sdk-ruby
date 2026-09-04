@@ -8,7 +8,7 @@ module Anthropic
           ) -> Anthropic::Beta::Organization::BetaComplianceSettings
 
           def update: (
-            state: Anthropic::Models::Beta::Organization::ComplianceSettingUpdateParams::state,
+            state: Anthropic::Models::Beta::Organization::beta_compliance_settings_state_param,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Organization::BetaComplianceSettings
 

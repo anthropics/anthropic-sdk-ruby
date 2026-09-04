@@ -4,7 +4,7 @@ module Anthropic
       module Organization
         type compliance_setting_update_params =
           {
-            state: Anthropic::Models::Beta::Organization::ComplianceSettingUpdateParams::state
+            state: Anthropic::Models::Beta::Organization::beta_compliance_settings_state_param
           }
           & Anthropic::Internal::Type::request_parameters
 
@@ -12,49 +12,17 @@ module Anthropic
           extend Anthropic::Internal::Type::RequestParameters::Converter
           include Anthropic::Internal::Type::RequestParameters
 
-          attr_accessor state: Anthropic::Models::Beta::Organization::ComplianceSettingUpdateParams::state
+          attr_accessor state: Anthropic::Models::Beta::Organization::beta_compliance_settings_state_param
 
           def initialize: (
-            state: Anthropic::Models::Beta::Organization::ComplianceSettingUpdateParams::state,
+            state: Anthropic::Models::Beta::Organization::beta_compliance_settings_state_param,
             ?request_options: Anthropic::request_opts
           ) -> void
 
           def to_hash: -> {
-            state: Anthropic::Models::Beta::Organization::ComplianceSettingUpdateParams::state,
+            state: Anthropic::Models::Beta::Organization::beta_compliance_settings_state_param,
             request_options: Anthropic::RequestOptions
           }
-
-          type state =
-            Anthropic::Beta::Organization::BetaComplianceSettingsStateEnabledParam
-            | Anthropic::Beta::Organization::BetaComplianceSettingsStateDisabledParam
-
-          module State
-            extend Anthropic::Internal::Type::Union
-
-            type type_ = :enabled | :disabled
-
-            module Type
-              extend Anthropic::Internal::Type::Enum
-
-              ENABLED: :enabled
-              DISABLED: :disabled
-
-              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::ComplianceSettingUpdateParams::State::type_]
-            end
-
-            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::ComplianceSettingUpdateParams::state]
-
-            def self.new:
-              (
-                type: :enabled | "enabled"
-              ) -> Anthropic::Beta::Organization::BetaComplianceSettingsStateEnabledParam
-              | (
-                type: :disabled | "disabled"
-              ) -> Anthropic::Beta::Organization::BetaComplianceSettingsStateDisabledParam
-              | (
-                type: Symbol | String
-              ) -> Anthropic::Models::Beta::Organization::ComplianceSettingUpdateParams::state
-          end
         end
       end
     end
