@@ -414,7 +414,7 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
     end
   end
 
-  def test_workspace_id_header_not_overridable_by_extra_headers
+  def test_extra_headers_workspace_id_overrides_client_workspace_id_across_retries
     stub_request(:post, "http://localhost/v1/messages").to_return_json(
       status: 500,
       body: {}
@@ -422,7 +422,7 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
 
     client = Anthropic::AWSClient.new(
       api_key: "sk-ant-test",
-      workspace_id: "ws-real",
+      workspace_id: "ws-client",
       base_url: "http://localhost"
     )
 
@@ -431,12 +431,29 @@ class Anthropic::Test::AWSClientTest < Minitest::Test
         max_tokens: 1024,
         messages: [{content: "Hello", role: :user}],
         model: :"claude-sonnet-4-20250514",
-        request_options: {extra_headers: {"anthropic-workspace-id" => "ws-attacker"}}
+        request_options: {extra_headers: {"anthropic-workspace-id" => "ws-request"}}
       )
     end
 
     assert_requested(:any, /./, times: 3) do |req|
-      assert_equal("ws-real", req.headers.fetch("Anthropic-Workspace-Id"))
+      assert_equal("ws-request", req.headers.fetch("Anthropic-Workspace-Id"))
+    end
+  end
+
+  def test_per_request_workspace_id_overrides_client_workspace_id
+    stub_request(:post, "http://localhost/v1/messages").to_return_json(status: 200, body: {})
+
+    client = Anthropic::AWSClient.new(api_key: "sk-ant-test", workspace_id: "ws-client", base_url: "http://localhost")
+
+    client.messages.create(
+      max_tokens: 1024,
+      messages: [{content: "Hello", role: :user}],
+      model: :"claude-sonnet-4-20250514",
+      workspace_id: "ws-request"
+    )
+
+    assert_requested(:post, "http://localhost/v1/messages") do |req|
+      assert_equal("ws-request", req.headers.fetch("Anthropic-Workspace-Id"))
     end
   end
 

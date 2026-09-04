@@ -7,6 +7,7 @@ module Anthropic
             String work_id,
             environment_id: String,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Environments::BetaSelfHostedWork
 
@@ -15,6 +16,7 @@ module Anthropic
             environment_id: String,
             metadata: ::Hash[Symbol, String?],
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Environments::BetaSelfHostedWork
 
@@ -54,6 +56,7 @@ module Anthropic
           def stats: (
             String environment_id,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Environments::BetaSelfHostedWorkQueueStats
 
@@ -62,6 +65,7 @@ module Anthropic
             environment_id: String,
             ?force: bool,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> Anthropic::Beta::Environments::BetaSelfHostedWork
 

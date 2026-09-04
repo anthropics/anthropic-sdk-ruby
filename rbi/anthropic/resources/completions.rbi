@@ -25,6 +25,7 @@ module Anthropic
           top_k: Integer,
           top_p: Float,
           betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+          workspace_id: String,
           stream: T.noreturn,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::Completion)
@@ -89,6 +90,13 @@ module Anthropic
         top_p: nil,
         # Header param: Optional header to specify the beta version(s) you want to use.
         betas: nil,
+        # Header param: Optional header to select the Workspace for this request. The
+        # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+        #
+        # Only needed for credentials that can act on more than one Workspace. A
+        # credential that belongs to a specific Workspace may omit it; if sent, it must
+        # match that Workspace.
+        workspace_id: nil,
         # There is no need to provide `stream:`. Instead, use `#create_streaming` or
         # `#create` for streaming and non-streaming use cases, respectively.
         stream: false,
@@ -117,6 +125,7 @@ module Anthropic
           top_k: Integer,
           top_p: Float,
           betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+          workspace_id: String,
           stream: T.noreturn,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::Internal::Stream[Anthropic::Completion])
@@ -181,6 +190,13 @@ module Anthropic
         top_p: nil,
         # Header param: Optional header to specify the beta version(s) you want to use.
         betas: nil,
+        # Header param: Optional header to select the Workspace for this request. The
+        # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+        #
+        # Only needed for credentials that can act on more than one Workspace. A
+        # credential that belongs to a specific Workspace may omit it; if sent, it must
+        # match that Workspace.
+        workspace_id: nil,
         # There is no need to provide `stream:`. Instead, use `#create_streaming` or
         # `#create` for streaming and non-streaming use cases, respectively.
         stream: true,

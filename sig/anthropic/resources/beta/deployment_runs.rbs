@@ -5,6 +5,7 @@ module Anthropic
         def retrieve: (
           String deployment_run_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsDeploymentRun
 
@@ -19,6 +20,7 @@ module Anthropic
           ?page: String,
           ?trigger_type: Anthropic::Models::Beta::beta_managed_agents_trigger_type,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaManagedAgentsDeploymentRun]
 

@@ -11,19 +11,27 @@ module Anthropic
         params(
           files: T::Array[Anthropic::Internal::FileInput],
           display_name: T.nilable(String),
+          workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::Skill)
       end
       def create(
-        # Files to upload for the skill.
+        # Body param: Files to upload for the skill.
         #
         # All files must be in the same top-level directory and must include a SKILL.md
         # file at the root of that directory.
         files:,
-        # Human-readable, single-line label for the Skill. Maximum 255 characters. Always
-        # set: derived from the SKILL.md frontmatter `name` when omitted at creation. Not
-        # unique.
+        # Body param: Human-readable, single-line label for the Skill. Maximum 255
+        # characters. Always set: derived from the SKILL.md frontmatter `name` when
+        # omitted at creation. Not unique.
         display_name: nil,
+        # Header param: Optional header to select the Workspace for this request. The
+        # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+        #
+        # Only needed for credentials that can act on more than one Workspace. A
+        # credential that belongs to a specific Workspace may omit it; if sent, it must
+        # match that Workspace.
+        workspace_id: nil,
         request_options: {}
       )
       end
@@ -32,6 +40,7 @@ module Anthropic
       sig do
         params(
           skill_id: String,
+          workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::Skill)
       end
@@ -40,6 +49,13 @@ module Anthropic
         #
         # The format and length of IDs may change over time.
         skill_id,
+        # Optional header to select the Workspace for this request. The value is a
+        # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+        #
+        # Only needed for credentials that can act on more than one Workspace. A
+        # credential that belongs to a specific Workspace may omit it; if sent, it must
+        # match that Workspace.
+        workspace_id: nil,
         request_options: {}
       )
       end
@@ -50,26 +66,34 @@ module Anthropic
           limit: Integer,
           page: T.nilable(String),
           source: T.nilable(String),
+          workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::Internal::PageCursor[Anthropic::Skill])
       end
       def list(
-        # Number of results to return per page.
+        # Query param: Number of results to return per page.
         #
         # Ranges from `1` to `1000`. Defaults to `20`.
         limit: nil,
-        # Pagination token for fetching a specific page of results.
+        # Query param: Pagination token for fetching a specific page of results.
         #
         # Pass the value from a previous response's `next_page` field to get the next page
         # of results.
         page: nil,
-        # Filter skills by source.
+        # Query param: Filter skills by source.
         #
         # If provided, only skills from the specified source will be returned:
         #
         # - `"custom"`: only return user-created skills
         # - `"anthropic"`: only return Anthropic-created skills
         source: nil,
+        # Header param: Optional header to select the Workspace for this request. The
+        # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+        #
+        # Only needed for credentials that can act on more than one Workspace. A
+        # credential that belongs to a specific Workspace may omit it; if sent, it must
+        # match that Workspace.
+        workspace_id: nil,
         request_options: {}
       )
       end
@@ -78,6 +102,7 @@ module Anthropic
       sig do
         params(
           skill_id: String,
+          workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::DeletedSkill)
       end
@@ -86,6 +111,13 @@ module Anthropic
         #
         # The format and length of IDs may change over time.
         skill_id,
+        # Optional header to select the Workspace for this request. The value is a
+        # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+        #
+        # Only needed for credentials that can act on more than one Workspace. A
+        # credential that belongs to a specific Workspace may omit it; if sent, it must
+        # match that Workspace.
+        workspace_id: nil,
         request_options: {}
       )
       end

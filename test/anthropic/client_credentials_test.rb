@@ -188,6 +188,39 @@ class Anthropic::ClientCredentialsTest < Minitest::Test
     assert_equal("http://localhost", client.base_url.to_s)
   end
 
+  def test_config_workspace_id_sent_as_header
+    client = Anthropic::Client.new(config: user_oauth_config("workspace_id" => "wrkspc_cfg"))
+    stub_request(:post, "https://api.anthropic.com/v1/messages")
+      .to_return_json(status: 200, body: {content: []})
+
+    client.messages.create(
+      max_tokens: 1024,
+      messages: [{content: "Hello", role: :user}],
+      model: :"claude-3-opus"
+    )
+
+    assert_requested(:post, "https://api.anthropic.com/v1/messages") do |req|
+      assert_equal("wrkspc_cfg", req.headers["Anthropic-Workspace-Id"])
+    end
+  end
+
+  def test_per_request_workspace_id_overrides_config_workspace_id
+    client = Anthropic::Client.new(config: user_oauth_config("workspace_id" => "wrkspc_cfg"))
+    stub_request(:post, "https://api.anthropic.com/v1/messages")
+      .to_return_json(status: 200, body: {content: []})
+
+    client.messages.create(
+      max_tokens: 1024,
+      messages: [{content: "Hello", role: :user}],
+      model: :"claude-3-opus",
+      workspace_id: "wrkspc_req"
+    )
+
+    assert_requested(:post, "https://api.anthropic.com/v1/messages") do |req|
+      assert_equal("wrkspc_req", req.headers["Anthropic-Workspace-Id"])
+    end
+  end
+
   def test_credentials_provider_sends_oauth_api_beta_header
     provider = Anthropic::Credentials::StaticToken.new("my-oauth-token")
     client = Anthropic::Client.new(credentials: provider)
@@ -282,5 +315,13 @@ class Anthropic::ClientCredentialsTest < Minitest::Test
     creds = {"access_token" => "profile-token", "expires_at" => Time.now.to_i + 3600}
     File.write(creds_path, JSON.generate(creds))
     File.chmod(0o600, creds_path)
+  end
+
+  def user_oauth_config(overrides = {})
+    creds_path = File.join(@tmpdir, "credentials", "test.json")
+    creds = {"access_token" => "oauth-token", "expires_at" => Time.now.to_i + 3600}
+    File.write(creds_path, JSON.generate(creds))
+    File.chmod(0o600, creds_path)
+    {"authentication" => {"type" => "user_oauth", "credentials_path" => creds_path}, **overrides}
   end
 end

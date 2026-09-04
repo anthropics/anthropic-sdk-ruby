@@ -17,23 +17,23 @@ message = anthropic.beta.messages.create(
   ],
   tools: [
     {
-      type: "computer_20250124",
+      type: "computer_20251124",
       name: "computer",
       display_width_px: 1024,
       display_height_px: 768,
       display_number: 1
     },
     {
-      type: "text_editor_20250124",
-      name: "str_replace_editor"
+      type: "text_editor_20250728",
+      name: "str_replace_based_edit_tool"
     },
     {
       type: "bash_20250124",
       name: "bash"
     }
   ],
-  model: "claude-sonnet-4@20250514",
-  betas: ["computer-use-2025-01-24"]
+  model: "claude-sonnet-5",
+  betas: ["computer-use-2025-11-24"]
 )
 
 puts(message.content)

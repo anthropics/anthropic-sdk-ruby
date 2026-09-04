@@ -16,11 +16,16 @@ module Anthropic
         # it is not idempotent. The new tunnel rejects MCP traffic until at least one CA
         # certificate is added.
         #
-        # @overload create(display_name: nil, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::TunnelCreateParams} for more details.
+        #
+        # @overload create(display_name: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param display_name [String, nil] Body param: Optional human-readable name for the tunnel (1-255 characters).
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -29,7 +34,7 @@ module Anthropic
         # @see Anthropic::Models::Beta::TunnelCreateParams
         def create(params = {})
           parsed, options = Anthropic::Beta::TunnelCreateParams.dump_request(params)
-          header_params = {betas: "anthropic-beta"}
+          header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
             method: :post,
             path: "v1/tunnels?beta=true",
@@ -47,11 +52,16 @@ module Anthropic
         #
         # Fetches a tunnel by ID.
         #
-        # @overload retrieve(tunnel_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::TunnelRetrieveParams} for more details.
+        #
+        # @overload retrieve(tunnel_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param tunnel_id [String] Path parameter tunnel_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -63,7 +73,7 @@ module Anthropic
           @client.request(
             method: :get,
             path: ["v1/tunnels/%1$s?beta=true", tunnel_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaTunnel,
             options: {extra_headers: {"anthropic-beta" => "mcp-tunnels-2026-06-22"}, **options}
           )
@@ -80,7 +90,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::TunnelListParams} for more details.
         #
-        # @overload list(include_archived: nil, limit: nil, page: nil, betas: nil, request_options: {})
+        # @overload list(include_archived: nil, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param include_archived [Boolean] Query param: Whether to include archived tunnels in the results. Defaults to fal
         #
@@ -89,6 +99,8 @@ module Anthropic
         # @param page [String] Query param: Opaque pagination cursor from a previous `list_tunnels` response.
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -103,7 +115,10 @@ module Anthropic
             method: :get,
             path: "v1/tunnels?beta=true",
             query: query,
-            headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
+            headers: parsed.except(*query_params).transform_keys(
+              betas: "anthropic-beta",
+              workspace_id: "anthropic-workspace-id"
+            ),
             page: Anthropic::Internal::PageCursor,
             model: Anthropic::Beta::BetaTunnel,
             options: {extra_headers: {"anthropic-beta" => "mcp-tunnels-2026-06-22"}, **options}
@@ -120,11 +135,16 @@ module Anthropic
         # re-allocated, and the tunnel token is invalidated. Retrying against an
         # already-archived tunnel returns the existing record unchanged.
         #
-        # @overload archive(tunnel_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::TunnelArchiveParams} for more details.
+        #
+        # @overload archive(tunnel_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param tunnel_id [String] Path parameter tunnel_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -136,7 +156,7 @@ module Anthropic
           @client.request(
             method: :post,
             path: ["v1/tunnels/%1$s/archive?beta=true", tunnel_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaTunnel,
             options: {extra_headers: {"anthropic-beta" => "mcp-tunnels-2026-06-22"}, **options}
           )
@@ -152,11 +172,16 @@ module Anthropic
         # token is rotated. Exposed as POST so the token does not appear in intermediary
         # access logs.
         #
-        # @overload reveal_token(tunnel_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::TunnelRevealTokenParams} for more details.
+        #
+        # @overload reveal_token(tunnel_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param tunnel_id [String] Path parameter tunnel_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -168,7 +193,7 @@ module Anthropic
           @client.request(
             method: :post,
             path: ["v1/tunnels/%1$s/reveal_token?beta=true", tunnel_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaTunnelToken,
             options: {extra_headers: {"anthropic-beta" => "mcp-tunnels-2026-06-22"}, **options}
           )
@@ -183,13 +208,18 @@ module Anthropic
         # new connections and returns a fresh value; established connections are not
         # severed. A connector restarted after rotation must use the new value.
         #
-        # @overload rotate_token(tunnel_id, reason: nil, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::TunnelRotateTokenParams} for more details.
+        #
+        # @overload rotate_token(tunnel_id, reason: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param tunnel_id [String] Path param: Path parameter tunnel_id
         #
         # @param reason [String, nil] Body param: Optional free-text reason for the rotation, recorded for audit.
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -198,7 +228,7 @@ module Anthropic
         # @see Anthropic::Models::Beta::TunnelRotateTokenParams
         def rotate_token(tunnel_id, params = {})
           parsed, options = Anthropic::Beta::TunnelRotateTokenParams.dump_request(params)
-          header_params = {betas: "anthropic-beta"}
+          header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
             method: :post,
             path: ["v1/tunnels/%1$s/rotate_token?beta=true", tunnel_id],

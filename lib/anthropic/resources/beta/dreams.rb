@@ -9,7 +9,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::DreamCreateParams} for more details.
         #
-        # @overload create(inputs:, model:, instructions: nil, output_behavior: nil, betas: nil, request_options: {})
+        # @overload create(inputs:, model:, instructions: nil, output_behavior: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param inputs [Array<Anthropic::Models::Beta::BetaDreamMemoryStoreInput, Anthropic::Models::Beta::BetaDreamSessionsInput>] Body param
         #
@@ -21,6 +21,8 @@ module Anthropic
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Beta::BetaDream]
@@ -28,7 +30,7 @@ module Anthropic
         # @see Anthropic::Models::Beta::DreamCreateParams
         def create(params)
           parsed, options = Anthropic::Beta::DreamCreateParams.dump_request(params)
-          header_params = {betas: "anthropic-beta"}
+          header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
             method: :post,
             path: "v1/dreams?beta=true",
@@ -41,11 +43,16 @@ module Anthropic
 
         # Get a Dream
         #
-        # @overload retrieve(dream_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::DreamRetrieveParams} for more details.
+        #
+        # @overload retrieve(dream_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param dream_id [String] Path parameter dream_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -57,7 +64,7 @@ module Anthropic
           @client.request(
             method: :get,
             path: ["v1/dreams/%1$s?beta=true", dream_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaDream,
             options: {extra_headers: {"anthropic-beta" => "dreaming-2026-04-21"}, **options}
           )
@@ -68,7 +75,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::DreamListParams} for more details.
         #
-        # @overload list(created_at_gt: nil, created_at_lt: nil, include_archived: nil, limit: nil, page: nil, statuses: nil, betas: nil, request_options: {})
+        # @overload list(created_at_gt: nil, created_at_lt: nil, include_archived: nil, limit: nil, page: nil, statuses: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param created_at_gt [Time] Query param: Return dreams with `created_at` strictly after this timestamp (excl
         #
@@ -84,6 +91,8 @@ module Anthropic
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Internal::PageCursor<Anthropic::Models::Beta::BetaDream>]
@@ -97,7 +106,10 @@ module Anthropic
             method: :get,
             path: "v1/dreams?beta=true",
             query: query.transform_keys(created_at_gt: "created_at[gt]", created_at_lt: "created_at[lt]"),
-            headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
+            headers: parsed.except(*query_params).transform_keys(
+              betas: "anthropic-beta",
+              workspace_id: "anthropic-workspace-id"
+            ),
             page: Anthropic::Internal::PageCursor,
             model: Anthropic::Beta::BetaDream,
             options: {extra_headers: {"anthropic-beta" => "dreaming-2026-04-21"}, **options}
@@ -106,11 +118,16 @@ module Anthropic
 
         # Archive a Dream
         #
-        # @overload archive(dream_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::DreamArchiveParams} for more details.
+        #
+        # @overload archive(dream_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param dream_id [String] Path parameter dream_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -122,7 +139,7 @@ module Anthropic
           @client.request(
             method: :post,
             path: ["v1/dreams/%1$s/archive?beta=true", dream_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaDream,
             options: {extra_headers: {"anthropic-beta" => "dreaming-2026-04-21"}, **options}
           )
@@ -130,11 +147,16 @@ module Anthropic
 
         # Cancel a Dream
         #
-        # @overload cancel(dream_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::DreamCancelParams} for more details.
+        #
+        # @overload cancel(dream_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param dream_id [String] Path parameter dream_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -146,7 +168,7 @@ module Anthropic
           @client.request(
             method: :post,
             path: ["v1/dreams/%1$s/cancel?beta=true", dream_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaDream,
             options: {extra_headers: {"anthropic-beta" => "dreaming-2026-04-21"}, **options}
           )

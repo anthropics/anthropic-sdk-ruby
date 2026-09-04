@@ -2,7 +2,7 @@ module Anthropic
   module Models
     module Messages
       type batch_retrieve_params =
-        { message_batch_id: String }
+        { message_batch_id: String, workspace_id: String }
         & Anthropic::Internal::Type::request_parameters
 
       class BatchRetrieveParams < Anthropic::Internal::Type::BaseModel
@@ -11,13 +11,19 @@ module Anthropic
 
         attr_accessor message_batch_id: String
 
+        attr_reader workspace_id: String?
+
+        def workspace_id=: (String) -> String
+
         def initialize: (
           message_batch_id: String,
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> void
 
         def to_hash: -> {
           message_batch_id: String,
+          workspace_id: String,
           request_options: Anthropic::RequestOptions
         }
       end

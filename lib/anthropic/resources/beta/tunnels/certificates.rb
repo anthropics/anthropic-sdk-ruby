@@ -17,13 +17,15 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Tunnels::CertificateCreateParams} for more details.
           #
-          # @overload create(tunnel_id, ca_certificate_pem:, betas: nil, request_options: {})
+          # @overload create(tunnel_id, ca_certificate_pem:, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param tunnel_id [String] Path param: Path parameter tunnel_id
           #
           # @param ca_certificate_pem [String] Body param: PEM-encoded X.509 CA certificate. Must contain exactly one certifica
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -32,7 +34,7 @@ module Anthropic
           # @see Anthropic::Models::Beta::Tunnels::CertificateCreateParams
           def create(tunnel_id, params)
             parsed, options = Anthropic::Beta::Tunnels::CertificateCreateParams.dump_request(params)
-            header_params = {betas: "anthropic-beta"}
+            header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
             @client.request(
               method: :post,
               path: ["v1/tunnels/%1$s/certificates?beta=true", tunnel_id],
@@ -50,13 +52,18 @@ module Anthropic
           #
           # Fetches a tunnel certificate by ID.
           #
-          # @overload retrieve(certificate_id, tunnel_id:, betas: nil, request_options: {})
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Tunnels::CertificateRetrieveParams} for more details.
+          #
+          # @overload retrieve(certificate_id, tunnel_id:, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param certificate_id [String] Path param: Path parameter certificate_id
           #
           # @param tunnel_id [String] Path param: Path parameter tunnel_id
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -72,7 +79,7 @@ module Anthropic
             @client.request(
               method: :get,
               path: ["v1/tunnels/%1$s/certificates/%2$s?beta=true", tunnel_id, certificate_id],
-              headers: parsed.transform_keys(betas: "anthropic-beta"),
+              headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Tunnels::BetaTunnelCertificate,
               options: {extra_headers: {"anthropic-beta" => "mcp-tunnels-2026-06-22"}, **options}
             )
@@ -89,7 +96,7 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Tunnels::CertificateListParams} for more details.
           #
-          # @overload list(tunnel_id, include_archived: nil, limit: nil, page: nil, betas: nil, request_options: {})
+          # @overload list(tunnel_id, include_archived: nil, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param tunnel_id [String] Path param: Path parameter tunnel_id
           #
@@ -100,6 +107,8 @@ module Anthropic
           # @param page [String] Query param: Opaque pagination cursor from a previous `list_tunnel_certificates`
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -114,7 +123,10 @@ module Anthropic
               method: :get,
               path: ["v1/tunnels/%1$s/certificates?beta=true", tunnel_id],
               query: query,
-              headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
+              headers: parsed.except(*query_params).transform_keys(
+                betas: "anthropic-beta",
+                workspace_id: "anthropic-workspace-id"
+              ),
               page: Anthropic::Internal::PageCursor,
               model: Anthropic::Beta::Tunnels::BetaTunnelCertificate,
               options: {extra_headers: {"anthropic-beta" => "mcp-tunnels-2026-06-22"}, **options}
@@ -131,13 +143,18 @@ module Anthropic
           # certificate is permitted; the tunnel rejects MCP traffic until a new certificate
           # is added.
           #
-          # @overload archive(certificate_id, tunnel_id:, betas: nil, request_options: {})
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Tunnels::CertificateArchiveParams} for more details.
+          #
+          # @overload archive(certificate_id, tunnel_id:, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param certificate_id [String] Path param: Path parameter certificate_id
           #
           # @param tunnel_id [String] Path param: Path parameter tunnel_id
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -153,7 +170,7 @@ module Anthropic
             @client.request(
               method: :post,
               path: ["v1/tunnels/%1$s/certificates/%2$s/archive?beta=true", tunnel_id, certificate_id],
-              headers: parsed.transform_keys(betas: "anthropic-beta"),
+              headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Tunnels::BetaTunnelCertificate,
               options: {extra_headers: {"anthropic-beta" => "mcp-tunnels-2026-06-22"}, **options}
             )

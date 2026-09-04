@@ -40,7 +40,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
-        # @overload create(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, request_options: {})
+        # @overload create(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -93,6 +93,8 @@ module Anthropic
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
+        #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -128,7 +130,12 @@ module Anthropic
             options = {timeout: 600, **options}
           end
 
-          header_params = {betas: "anthropic-beta", user_profile_id: "anthropic-user-profile-id"}
+          header_params =
+            {
+              betas: "anthropic-beta",
+              user_profile_id: "anthropic-user-profile-id",
+              workspace_id: "anthropic-workspace-id"
+            }
           @client.request(
             method: :post,
             path: "v1/messages?beta=true",
@@ -154,7 +161,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
-        # @overload stream(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, request_options: {})
+        # @overload stream(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -208,6 +215,8 @@ module Anthropic
         #
         # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
         #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Streaming::MessageStream]
@@ -229,7 +238,12 @@ module Anthropic
             is_beta: true
           )
 
-          header_params = {betas: "anthropic-beta", user_profile_id: "anthropic-user-profile-id"}
+          header_params =
+            {
+              betas: "anthropic-beta",
+              user_profile_id: "anthropic-user-profile-id",
+              workspace_id: "anthropic-workspace-id"
+            }
           raw_stream = @client.request(
             method: :post,
             path: "v1/messages?beta=true",
@@ -260,7 +274,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
-        # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, request_options: {})
+        # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -314,6 +328,8 @@ module Anthropic
         #
         # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
         #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Internal::Stream<Anthropic::Models::Beta::BetaRawMessageStartEvent, Anthropic::Models::Beta::BetaRawMessageDeltaEvent, Anthropic::Models::Beta::BetaRawMessageStopEvent, Anthropic::Models::Beta::BetaRawContentBlockStartEvent, Anthropic::Models::Beta::BetaRawContentBlockDeltaEvent, Anthropic::Models::Beta::BetaRawContentBlockStopEvent>]
@@ -331,7 +347,12 @@ module Anthropic
 
           Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil, is_beta: true)
 
-          header_params = {betas: "anthropic-beta", user_profile_id: "anthropic-user-profile-id"}
+          header_params =
+            {
+              betas: "anthropic-beta",
+              user_profile_id: "anthropic-user-profile-id",
+              workspace_id: "anthropic-workspace-id"
+            }
           @client.request(
             method: :post,
             path: "v1/messages?beta=true",
@@ -358,7 +379,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCountTokensParams} for more details.
         #
-        # @overload count_tokens(messages:, model:, cache_control: nil, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, request_options: {})
+        # @overload count_tokens(messages:, model:, cache_control: nil, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Body param: Input messages.
         #
@@ -388,6 +409,8 @@ module Anthropic
         #
         # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
         #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Beta::BetaMessageTokensCount]
@@ -397,7 +420,12 @@ module Anthropic
           parsed, options = Anthropic::Beta::MessageCountTokensParams.dump_request(params)
           Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil, is_beta: true)
 
-          header_params = {betas: "anthropic-beta", user_profile_id: "anthropic-user-profile-id"}
+          header_params =
+            {
+              betas: "anthropic-beta",
+              user_profile_id: "anthropic-user-profile-id",
+              workspace_id: "anthropic-workspace-id"
+            }
           @client.request(
             method: :post,
             path: "v1/messages/count_tokens?beta=true",

@@ -24,13 +24,20 @@ module Anthropic
       #   @return [String, nil]
       optional :display_name, String, nil?: true
 
-      # @!method initialize(files:, display_name: nil, request_options: {})
+      # @!attribute workspace_id
+      #
+      #   @return [String, nil]
+      optional :workspace_id, String
+
+      # @!method initialize(files:, display_name: nil, workspace_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::SkillCreateParams} for more details.
       #
       #   @param files [Array<Pathname, StringIO, IO, String, Anthropic::FilePart>] Files to upload for the skill.
       #
       #   @param display_name [String, nil] Human-readable, single-line label for the Skill. Maximum 255 characters.
+      #
+      #   @param workspace_id [String]
       #
       #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
     end

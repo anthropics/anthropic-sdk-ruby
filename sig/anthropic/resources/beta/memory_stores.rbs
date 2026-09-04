@@ -11,12 +11,14 @@ module Anthropic
           ?description: String,
           ?metadata: ::Hash[Symbol, String],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsMemoryStore
 
         def retrieve: (
           String memory_store_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsMemoryStore
 
@@ -26,6 +28,7 @@ module Anthropic
           ?metadata: ::Hash[Symbol, String?]?,
           ?name: String?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsMemoryStore
 
@@ -36,18 +39,21 @@ module Anthropic
           ?limit: Integer,
           ?page: String,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaManagedAgentsMemoryStore]
 
         def delete: (
           String memory_store_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsDeletedMemoryStore
 
         def archive: (
           String memory_store_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsMemoryStore
 

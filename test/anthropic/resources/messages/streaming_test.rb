@@ -416,6 +416,29 @@ class Anthropic::Test::Resources::Messages::StreamingTest < Minitest::Test
     assert_equal("req_stream456", stream.headers["request-id"])
   end
 
+  def test_stream_sends_workspace_id_as_header
+    stub_streaming_response(basic_sse_response)
+
+    @client.messages.stream(**basic_params, workspace_id: "wrkspc_req").until_done
+
+    assert_requested(:post, "http://localhost/v1/messages") do |req|
+      assert_equal("wrkspc_req", req.headers["Anthropic-Workspace-Id"])
+      refute(JSON.parse(req.body).key?("workspace_id"))
+      true
+    end
+  end
+
+  def test_stream_omits_workspace_id_header_when_unset
+    stub_streaming_response(basic_sse_response)
+
+    @client.messages.stream(**basic_params).until_done
+
+    assert_requested(:post, "http://localhost/v1/messages") do |req|
+      refute(req.headers.transform_keys(&:downcase).key?("anthropic-workspace-id"))
+      true
+    end
+  end
+
   def test_stream_response_status
     stub_streaming_response(basic_sse_response)
 

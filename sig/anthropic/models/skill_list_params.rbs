@@ -1,7 +1,7 @@
 module Anthropic
   module Models
     type skill_list_params =
-      { limit: Integer, page: String?, source: String? }
+      { limit: Integer, page: String?, source: String?, workspace_id: String }
       & Anthropic::Internal::Type::request_parameters
 
     class SkillListParams < Anthropic::Internal::Type::BaseModel
@@ -16,10 +16,15 @@ module Anthropic
 
       attr_accessor source: String?
 
+      attr_reader workspace_id: String?
+
+      def workspace_id=: (String) -> String
+
       def initialize: (
         ?limit: Integer,
         ?page: String?,
         ?source: String?,
+        ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> void
 
@@ -27,6 +32,7 @@ module Anthropic
         limit: Integer,
         page: String?,
         source: String?,
+        workspace_id: String,
         request_options: Anthropic::RequestOptions
       }
     end

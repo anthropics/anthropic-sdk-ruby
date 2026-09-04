@@ -330,7 +330,12 @@ module Anthropic
       #   @return [String, nil]
       optional :user_profile_id, String
 
-      # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, request_options: {})
+      # @!attribute workspace_id
+      #
+      #   @return [String, nil]
+      optional :workspace_id, String
+
+      # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::MessageCreateParams} for more details.
       #
@@ -369,6 +374,8 @@ module Anthropic
       #   @param top_p [Float] Use nucleus sampling.
       #
       #   @param user_profile_id [String] The user profile ID to attribute this request to. Use when acting on behalf of a
+      #
+      #   @param workspace_id [String]
       #
       #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 

@@ -71,6 +71,12 @@ module Anthropic
         end
         attr_writer :betas
 
+        sig { returns(T.nilable(String)) }
+        attr_reader :workspace_id
+
+        sig { params(workspace_id: String).void }
+        attr_writer :workspace_id
+
         sig do
           params(
             name: String,
@@ -88,6 +94,7 @@ module Anthropic
                 Anthropic::Beta::EnvironmentCreateParams::Scope::OrSymbol
               ),
             betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -107,6 +114,7 @@ module Anthropic
           scope: nil,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
+          workspace_id: nil,
           request_options: {}
         )
         end
@@ -130,6 +138,7 @@ module Anthropic
                 ),
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+              workspace_id: String,
               request_options: Anthropic::RequestOptions
             }
           )

@@ -73,6 +73,7 @@ module Anthropic
           top_k: Integer,
           top_p: Float,
           user_profile_id: String,
+          workspace_id: String,
           stream: T.noreturn,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::Message)
@@ -318,6 +319,13 @@ module Anthropic
         # on behalf of a party other than your organization. Requires the `user-profiles`
         # beta header.
         user_profile_id: nil,
+        # Header param: Optional header to select the Workspace for this request. The
+        # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+        #
+        # Only needed for credentials that can act on more than one Workspace. A
+        # credential that belongs to a specific Workspace may omit it; if sent, it must
+        # match that Workspace.
+        workspace_id: nil,
         # There is no need to provide `stream:`. Instead, use `#stream_raw` or `#create`
         # for streaming and non-streaming use cases, respectively.
         stream: false,
@@ -392,6 +400,7 @@ module Anthropic
           top_k: Integer,
           top_p: Float,
           user_profile_id: String,
+          workspace_id: String,
           stream: T.noreturn,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::Helpers::Streaming::MessageStream)
@@ -637,6 +646,13 @@ module Anthropic
         # on behalf of a party other than your organization. Requires the `user-profiles`
         # beta header.
         user_profile_id: nil,
+        # Header param: Optional header to select the Workspace for this request. The
+        # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+        #
+        # Only needed for credentials that can act on more than one Workspace. A
+        # credential that belongs to a specific Workspace may omit it; if sent, it must
+        # match that Workspace.
+        workspace_id: nil,
         # There is no need to provide `stream:`. Instead, use `#stream_raw` or `#create`
         # for streaming and non-streaming use cases, respectively.
         stream: true,
@@ -700,6 +716,7 @@ module Anthropic
           top_k: Integer,
           top_p: Float,
           user_profile_id: String,
+          workspace_id: String,
           stream: T.noreturn,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(
@@ -949,6 +966,13 @@ module Anthropic
         # on behalf of a party other than your organization. Requires the `user-profiles`
         # beta header.
         user_profile_id: nil,
+        # Header param: Optional header to select the Workspace for this request. The
+        # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+        #
+        # Only needed for credentials that can act on more than one Workspace. A
+        # credential that belongs to a specific Workspace may omit it; if sent, it must
+        # match that Workspace.
+        workspace_id: nil,
         # There is no need to provide `stream:`. Instead, use `#stream_raw` or `#create`
         # for streaming and non-streaming use cases, respectively.
         stream: true,
@@ -1010,6 +1034,7 @@ module Anthropic
               )
             ],
           user_profile_id: String,
+          workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::MessageTokensCount)
       end
@@ -1193,6 +1218,13 @@ module Anthropic
         # on behalf of a party other than your organization. Requires the `user-profiles`
         # beta header.
         user_profile_id: nil,
+        # Header param: Optional header to select the Workspace for this request. The
+        # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+        #
+        # Only needed for credentials that can act on more than one Workspace. A
+        # credential that belongs to a specific Workspace may omit it; if sent, it must
+        # match that Workspace.
+        workspace_id: nil,
         request_options: {}
       )
       end

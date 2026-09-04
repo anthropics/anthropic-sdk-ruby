@@ -12,13 +12,15 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::VaultCreateParams} for more details.
         #
-        # @overload create(display_name:, metadata: nil, betas: nil, request_options: {})
+        # @overload create(display_name:, metadata: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param display_name [String] Body param: Human-readable name for the vault. 1-255 characters.
         #
         # @param metadata [Hash{Symbol=>String}] Body param: Arbitrary key-value metadata to attach to the vault. Maximum 16 pair
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -27,7 +29,7 @@ module Anthropic
         # @see Anthropic::Models::Beta::VaultCreateParams
         def create(params)
           parsed, options = Anthropic::Beta::VaultCreateParams.dump_request(params)
-          header_params = {betas: "anthropic-beta"}
+          header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
             method: :post,
             path: "v1/vaults?beta=true",
@@ -40,11 +42,16 @@ module Anthropic
 
         # Get Vault
         #
-        # @overload retrieve(vault_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::VaultRetrieveParams} for more details.
+        #
+        # @overload retrieve(vault_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param vault_id [String] Path parameter vault_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -56,7 +63,7 @@ module Anthropic
           @client.request(
             method: :get,
             path: ["v1/vaults/%1$s?beta=true", vault_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsVault,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
           )
@@ -67,7 +74,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::VaultUpdateParams} for more details.
         #
-        # @overload update(vault_id, display_name: nil, metadata: nil, betas: nil, request_options: {})
+        # @overload update(vault_id, display_name: nil, metadata: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param vault_id [String] Path param: Path parameter vault_id
         #
@@ -77,6 +84,8 @@ module Anthropic
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Beta::BetaManagedAgentsVault]
@@ -84,7 +93,7 @@ module Anthropic
         # @see Anthropic::Models::Beta::VaultUpdateParams
         def update(vault_id, params = {})
           parsed, options = Anthropic::Beta::VaultUpdateParams.dump_request(params)
-          header_params = {betas: "anthropic-beta"}
+          header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
             method: :post,
             path: ["v1/vaults/%1$s?beta=true", vault_id],
@@ -100,7 +109,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::VaultListParams} for more details.
         #
-        # @overload list(include_archived: nil, limit: nil, page: nil, betas: nil, request_options: {})
+        # @overload list(include_archived: nil, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param include_archived [Boolean] Query param: Whether to include archived vaults in the results.
         #
@@ -109,6 +118,8 @@ module Anthropic
         # @param page [String] Query param: Opaque pagination token from a previous `list_vaults` response.
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -123,7 +134,10 @@ module Anthropic
             method: :get,
             path: "v1/vaults?beta=true",
             query: query,
-            headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
+            headers: parsed.except(*query_params).transform_keys(
+              betas: "anthropic-beta",
+              workspace_id: "anthropic-workspace-id"
+            ),
             page: Anthropic::Internal::PageCursor,
             model: Anthropic::Beta::BetaManagedAgentsVault,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
@@ -132,11 +146,16 @@ module Anthropic
 
         # Delete Vault
         #
-        # @overload delete(vault_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::VaultDeleteParams} for more details.
+        #
+        # @overload delete(vault_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param vault_id [String] Path parameter vault_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -148,7 +167,7 @@ module Anthropic
           @client.request(
             method: :delete,
             path: ["v1/vaults/%1$s?beta=true", vault_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsDeletedVault,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
           )
@@ -156,11 +175,16 @@ module Anthropic
 
         # Archive Vault
         #
-        # @overload archive(vault_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::VaultArchiveParams} for more details.
+        #
+        # @overload archive(vault_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param vault_id [String] Path parameter vault_id
         #
         # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -172,7 +196,7 @@ module Anthropic
           @client.request(
             method: :post,
             path: ["v1/vaults/%1$s/archive?beta=true", vault_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaManagedAgentsVault,
             options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
           )

@@ -64,7 +64,7 @@ class Anthropic::Test::Resources::Beta::VaultsTest < Anthropic::Test::ResourceTe
   end
 
   def test_list
-    skip("buildURL drops path-level query params (SDK-4349)")
+    skip("buildURL drops path-level query params")
 
     response = @anthropic.beta.vaults.list
 

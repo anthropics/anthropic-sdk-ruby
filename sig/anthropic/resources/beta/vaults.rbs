@@ -8,12 +8,14 @@ module Anthropic
           display_name: String,
           ?metadata: ::Hash[Symbol, String],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsVault
 
         def retrieve: (
           String vault_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsVault
 
@@ -22,6 +24,7 @@ module Anthropic
           ?display_name: String?,
           ?metadata: ::Hash[Symbol, String?]?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsVault
 
@@ -30,18 +33,21 @@ module Anthropic
           ?limit: Integer,
           ?page: String,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaManagedAgentsVault]
 
         def delete: (
           String vault_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsDeletedVault
 
         def archive: (
           String vault_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsVault
 

@@ -25,13 +25,20 @@ module Anthropic
         #   @return [String]
         required :version, String
 
-        # @!method initialize(skill_id:, version:, request_options: {})
+        # @!attribute workspace_id
+        #
+        #   @return [String, nil]
+        optional :workspace_id, String
+
+        # @!method initialize(skill_id:, version:, workspace_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Skills::VersionDeleteParams} for more details.
         #
         #   @param skill_id [String] Unique identifier for the skill.
         #
         #   @param version [String] Identifies the skill version by its version ID.
+        #
+        #   @param workspace_id [String]
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
       end

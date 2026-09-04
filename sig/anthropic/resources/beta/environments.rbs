@@ -11,12 +11,14 @@ module Anthropic
           ?metadata: ::Hash[Symbol, String],
           ?scope: Anthropic::Models::Beta::EnvironmentCreateParams::scope?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaEnvironment
 
         def retrieve: (
           String environment_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaEnvironment
 
@@ -28,6 +30,7 @@ module Anthropic
           ?name: String?,
           ?scope: Anthropic::Models::Beta::EnvironmentUpdateParams::scope?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaEnvironment
 
@@ -36,18 +39,21 @@ module Anthropic
           ?limit: Integer,
           ?page: String?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaEnvironment]
 
         def delete: (
           String environment_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaEnvironmentDeleteResponse
 
         def archive: (
           String environment_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaEnvironment
 

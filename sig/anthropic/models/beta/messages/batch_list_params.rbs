@@ -7,7 +7,8 @@ module Anthropic
             after_id: String,
             before_id: String,
             limit: Integer,
-            betas: ::Array[Anthropic::Models::anthropic_beta]
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            workspace_id: String
           }
           & Anthropic::Internal::Type::request_parameters
 
@@ -33,11 +34,16 @@ module Anthropic
             ::Array[Anthropic::Models::anthropic_beta]
           ) -> ::Array[Anthropic::Models::anthropic_beta]
 
+          attr_reader workspace_id: String?
+
+          def workspace_id=: (String) -> String
+
           def initialize: (
             ?after_id: String,
             ?before_id: String,
             ?limit: Integer,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> void
 
@@ -46,6 +52,7 @@ module Anthropic
             before_id: String,
             limit: Integer,
             betas: ::Array[Anthropic::Models::anthropic_beta],
+            workspace_id: String,
             request_options: Anthropic::RequestOptions
           }
         end

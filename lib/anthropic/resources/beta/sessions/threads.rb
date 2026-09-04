@@ -10,13 +10,18 @@ module Anthropic
 
           # Get Session Thread
           #
-          # @overload retrieve(thread_id, session_id:, betas: nil, request_options: {})
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Sessions::ThreadRetrieveParams} for more details.
+          #
+          # @overload retrieve(thread_id, session_id:, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param thread_id [String] Path param: Path parameter thread_id
           #
           # @param session_id [String] Path param: Path parameter session_id
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -32,7 +37,7 @@ module Anthropic
             @client.request(
               method: :get,
               path: ["v1/sessions/%1$s/threads/%2$s?beta=true", session_id, thread_id],
-              headers: parsed.transform_keys(betas: "anthropic-beta"),
+              headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread,
               options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
             )
@@ -43,7 +48,7 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Sessions::ThreadListParams} for more details.
           #
-          # @overload list(session_id, limit: nil, page: nil, betas: nil, request_options: {})
+          # @overload list(session_id, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param session_id [String] Path param: Path parameter session_id
           #
@@ -52,6 +57,8 @@ module Anthropic
           # @param page [String] Query param: Opaque pagination cursor from a previous response's `next_page`. Fo
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -66,7 +73,10 @@ module Anthropic
               method: :get,
               path: ["v1/sessions/%1$s/threads?beta=true", session_id],
               query: query,
-              headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
+              headers: parsed.except(*query_params).transform_keys(
+                betas: "anthropic-beta",
+                workspace_id: "anthropic-workspace-id"
+              ),
               page: Anthropic::Internal::PageCursor,
               model: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread,
               options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
@@ -75,13 +85,18 @@ module Anthropic
 
           # Archive Session Thread
           #
-          # @overload archive(thread_id, session_id:, betas: nil, request_options: {})
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Sessions::ThreadArchiveParams} for more details.
+          #
+          # @overload archive(thread_id, session_id:, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param thread_id [String] Path param: Path parameter thread_id
           #
           # @param session_id [String] Path param: Path parameter session_id
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -97,7 +112,7 @@ module Anthropic
             @client.request(
               method: :post,
               path: ["v1/sessions/%1$s/threads/%2$s/archive?beta=true", session_id, thread_id],
-              headers: parsed.transform_keys(betas: "anthropic-beta"),
+              headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Sessions::BetaManagedAgentsSessionThread,
               options: {extra_headers: {"anthropic-beta" => "managed-agents-2026-04-01"}, **options}
             )

@@ -219,6 +219,29 @@ class AnthropicTest < Minitest::Test
     assert_requested(:any, /./, headers: {"x-stainless-retry-count" => "42"}, times: 3)
   end
 
+  def test_non_json_error_body
+    ["length limit exceeded", ""].each do |body|
+      stub_request(:post, "http://localhost/v1/messages").to_return(
+        status: 413,
+        headers: {"content-type" => "text/plain"},
+        body: body
+      )
+
+      anthropic = Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key")
+
+      e = assert_raises(Anthropic::Errors::APIStatusError) do
+        anthropic.messages.create(
+          max_tokens: 1024,
+          messages: [{content: "Hello, world", role: :user}],
+          model: Anthropic::Model::CLAUDE_OPUS_5
+        )
+      end
+      assert_equal(413, e.status)
+      assert_equal(body, e.body)
+      assert_includes(e.message, body.inspect)
+    end
+  end
+
   def test_beta_header_merges_endpoint_default_with_betas_param
     stub_request(:get, "http://localhost/v1/vaults?beta=true")
       .to_return_json(status: 200, body: {data: [], next_page: nil})

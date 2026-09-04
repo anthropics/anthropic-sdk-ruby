@@ -14,8 +14,15 @@ module Anthropic
         #   @return [String]
         required :message_batch_id, String
 
-        # @!method initialize(message_batch_id:, request_options: {})
+        # @!attribute workspace_id
+        #
+        #   @return [String, nil]
+        optional :workspace_id, String
+
+        # @!method initialize(message_batch_id:, workspace_id: nil, request_options: {})
         #   @param message_batch_id [String] ID of the Message Batch.
+        #
+        #   @param workspace_id [String]
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
       end

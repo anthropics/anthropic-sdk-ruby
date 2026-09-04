@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 # typed: false
 
+require "logger"
 require_relative "../lib/anthropic"
 
 # A middleware is any `#call(req, nxt) -> Anthropic::APIResponse` callable.

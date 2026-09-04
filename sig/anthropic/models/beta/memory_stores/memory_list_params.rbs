@@ -10,7 +10,8 @@ module Anthropic
             page: String,
             path_prefix: String,
             view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
-            betas: ::Array[Anthropic::Models::anthropic_beta]
+            betas: ::Array[Anthropic::Models::anthropic_beta],
+            workspace_id: String
           }
           & Anthropic::Internal::Type::request_parameters
 
@@ -48,6 +49,10 @@ module Anthropic
             ::Array[Anthropic::Models::anthropic_beta]
           ) -> ::Array[Anthropic::Models::anthropic_beta]
 
+          attr_reader workspace_id: String?
+
+          def workspace_id=: (String) -> String
+
           def initialize: (
             memory_store_id: String,
             ?depth: Integer,
@@ -56,6 +61,7 @@ module Anthropic
             ?path_prefix: String,
             ?view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
             ?betas: ::Array[Anthropic::Models::anthropic_beta],
+            ?workspace_id: String,
             ?request_options: Anthropic::request_opts
           ) -> void
 
@@ -67,6 +73,7 @@ module Anthropic
             path_prefix: String,
             view: Anthropic::Models::Beta::MemoryStores::beta_managed_agents_memory_view,
             betas: ::Array[Anthropic::Models::anthropic_beta],
+            workspace_id: String,
             request_options: Anthropic::RequestOptions
           }
         end

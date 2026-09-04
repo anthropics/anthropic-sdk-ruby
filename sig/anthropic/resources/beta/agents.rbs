@@ -15,6 +15,7 @@ module Anthropic
           ?system_: String?,
           ?tools: ::Array[Anthropic::Models::Beta::AgentCreateParams::tool],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsAgent
 
@@ -22,6 +23,7 @@ module Anthropic
           String agent_id,
           ?version: Integer,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsAgent
 
@@ -38,6 +40,7 @@ module Anthropic
           ?tools: ::Array[Anthropic::Models::Beta::AgentUpdateParams::tool]?,
           ?version: Integer,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsAgent
 
@@ -48,12 +51,14 @@ module Anthropic
           ?limit: Integer,
           ?page: String,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaManagedAgentsAgent]
 
         def archive: (
           String agent_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaManagedAgentsAgent
 

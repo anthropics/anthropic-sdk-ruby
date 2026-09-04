@@ -28,10 +28,17 @@ module Anthropic
         sig { returns(String) }
         attr_accessor :version
 
+        sig { returns(T.nilable(String)) }
+        attr_reader :workspace_id
+
+        sig { params(workspace_id: String).void }
+        attr_writer :workspace_id
+
         sig do
           params(
             skill_id: String,
             version: String,
+            workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -45,6 +52,7 @@ module Anthropic
           # Requests carrying the `skills-2025-10-02` beta header address versions by their
           # Unix epoch timestamp instead (e.g., "1759178010641129").
           version:,
+          workspace_id: nil,
           request_options: {}
         )
         end
@@ -54,6 +62,7 @@ module Anthropic
             {
               skill_id: String,
               version: String,
+              workspace_id: String,
               request_options: Anthropic::RequestOptions
             }
           )

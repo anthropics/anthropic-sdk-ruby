@@ -31,6 +31,7 @@ module Anthropic
           ?top_p: Float,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?user_profile_id: String,
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaMessage
 
@@ -61,6 +62,7 @@ module Anthropic
           ?top_p: Float,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?user_profile_id: String,
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Helpers::Streaming::MessageStream
 
@@ -91,6 +93,7 @@ module Anthropic
           ?top_p: Float,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?user_profile_id: String,
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Internal::Stream[Anthropic::Models::Beta::beta_raw_message_stream_event]
 
@@ -109,6 +112,7 @@ module Anthropic
           ?tools: ::Array[Anthropic::Models::Beta::MessageCountTokensParams::tool],
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?user_profile_id: String,
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaMessageTokensCount
 

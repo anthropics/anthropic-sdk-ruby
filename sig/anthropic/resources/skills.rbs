@@ -6,11 +6,13 @@ module Anthropic
       def create: (
         files: ::Array[Anthropic::Internal::file_input],
         ?display_name: String?,
+        ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::Skill
 
       def retrieve: (
         String skill_id,
+        ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::Skill
 
@@ -18,11 +20,13 @@ module Anthropic
         ?limit: Integer,
         ?page: String?,
         ?source: String?,
+        ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::Internal::PageCursor[Anthropic::Skill]
 
       def delete: (
         String skill_id,
+        ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::DeletedSkill
 

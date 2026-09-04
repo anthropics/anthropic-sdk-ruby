@@ -8,7 +8,7 @@ module Anthropic
         # the `memory_version` row. The API key that created a session is not recorded on
         # agent writes; attribution answers who made the write, not who is ultimately
         # responsible. Look up session provenance separately via the
-        # [Sessions API](/en/api/sessions-retrieve).
+        # [Sessions API](/en/api/beta/sessions/retrieve).
         module BetaManagedAgentsActor
           extend Anthropic::Internal::Type::Union
 
@@ -92,7 +92,7 @@ module Anthropic
           def self.new(
             type:,
             # ID of the session that performed the write (a `sesn_...` value). Look up the
-            # session via [Retrieve a session](/en/api/sessions-retrieve) for further
+            # session via [Retrieve a session](/en/api/beta/sessions/retrieve) for further
             # provenance.
             session_id: nil,
             # ID of the API key that performed the write. This identifies the key, not the

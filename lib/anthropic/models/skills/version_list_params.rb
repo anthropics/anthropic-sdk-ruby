@@ -30,7 +30,12 @@ module Anthropic
         #   @return [String, nil]
         optional :page, String, nil?: true
 
-        # @!method initialize(skill_id:, limit: nil, page: nil, request_options: {})
+        # @!attribute workspace_id
+        #
+        #   @return [String, nil]
+        optional :workspace_id, String
+
+        # @!method initialize(skill_id:, limit: nil, page: nil, workspace_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Skills::VersionListParams} for more details.
         #
@@ -39,6 +44,8 @@ module Anthropic
         #   @param limit [Integer, nil] Number of results to return per page.
         #
         #   @param page [String, nil] Optionally set to the `next_page` token from the previous response.
+        #
+        #   @param workspace_id [String]
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
       end

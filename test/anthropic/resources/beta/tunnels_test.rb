@@ -23,7 +23,7 @@ class Anthropic::Test::Resources::Beta::TunnelsTest < Anthropic::Test::ResourceT
   end
 
   def test_retrieve
-    skip("buildURL drops path-level query params (SDK-4349)")
+    skip("buildURL drops path-level query params")
 
     response = @anthropic.beta.tunnels.retrieve("tunnel_id")
 
@@ -44,7 +44,7 @@ class Anthropic::Test::Resources::Beta::TunnelsTest < Anthropic::Test::ResourceT
   end
 
   def test_list
-    skip("buildURL drops path-level query params (SDK-4349)")
+    skip("buildURL drops path-level query params")
 
     response = @anthropic.beta.tunnels.list
 

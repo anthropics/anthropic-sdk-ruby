@@ -7,7 +7,7 @@ module Anthropic
         class BetaManagedAgentsSessionActor < Anthropic::Internal::Type::BaseModel
           # @!attribute session_id
           #   ID of the session that performed the write (a `sesn_...` value). Look up the
-          #   session via [Retrieve a session](/en/api/sessions-retrieve) for further
+          #   session via [Retrieve a session](/en/api/beta/sessions/retrieve) for further
           #   provenance.
           #
           #   @return [String]

@@ -4,6 +4,7 @@ module Anthropic
       def retrieve: (
         String model_id,
         ?betas: ::Array[Anthropic::Models::anthropic_beta],
+        ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::ModelInfo
 
@@ -12,6 +13,7 @@ module Anthropic
         ?before_id: String,
         ?limit: Integer,
         ?betas: ::Array[Anthropic::Models::anthropic_beta],
+        ?workspace_id: String,
         ?request_options: Anthropic::request_opts
       ) -> Anthropic::Internal::Page[Anthropic::ModelInfo]
 

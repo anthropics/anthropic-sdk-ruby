@@ -22,7 +22,7 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::MessageCreateParams} for more details.
       #
-      # @overload create(max_tokens:, messages:, model:, cache_control: nil, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, request_options: {})
+      # @overload create(max_tokens:, messages:, model:, cache_control: nil, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
       #
       # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
@@ -59,6 +59,8 @@ module Anthropic
       # @param top_p [Float] Body param: Use nucleus sampling.
       #
       # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
+      #
+      # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
       #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -90,7 +92,7 @@ module Anthropic
           options = {timeout: 600, **options}
         end
 
-        header_params = {user_profile_id: "anthropic-user-profile-id"}
+        header_params = {user_profile_id: "anthropic-user-profile-id", workspace_id: "anthropic-workspace-id"}
         @client.request(
           method: :post,
           path: "v1/messages",
@@ -118,7 +120,7 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::MessageCreateParams} for more details.
       #
-      # @overload stream(max_tokens:, messages:, model:, cache_control: nil, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, request_options: {})
+      # @overload stream(max_tokens:, messages:, model:, cache_control: nil, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
       #
       # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
@@ -156,6 +158,8 @@ module Anthropic
       #
       # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
       #
+      # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+      #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Anthropic::Streaming::MessageStream]
@@ -173,7 +177,7 @@ module Anthropic
 
         tools, models = Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil)
 
-        header_params = {user_profile_id: "anthropic-user-profile-id"}
+        header_params = {user_profile_id: "anthropic-user-profile-id", workspace_id: "anthropic-workspace-id"}
         raw_stream = @client.request(
           method: :post,
           path: "v1/messages",
@@ -204,7 +208,7 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::MessageCreateParams} for more details.
       #
-      # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, request_options: {})
+      # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, container: nil, inference_geo: nil, metadata: nil, output_config: nil, service_tier: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
       #
       # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
       #
@@ -242,6 +246,8 @@ module Anthropic
       #
       # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
       #
+      # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+      #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Anthropic::Internal::Stream<Anthropic::Models::RawMessageStartEvent, Anthropic::Models::RawMessageDeltaEvent, Anthropic::Models::RawMessageStopEvent, Anthropic::Models::RawContentBlockStartEvent, Anthropic::Models::RawContentBlockDeltaEvent, Anthropic::Models::RawContentBlockStopEvent>]
@@ -256,7 +262,7 @@ module Anthropic
         parsed.store(:stream, true)
         Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil)
 
-        header_params = {user_profile_id: "anthropic-user-profile-id"}
+        header_params = {user_profile_id: "anthropic-user-profile-id", workspace_id: "anthropic-workspace-id"}
         @client.request(
           method: :post,
           path: "v1/messages",
@@ -283,7 +289,7 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::MessageCountTokensParams} for more details.
       #
-      # @overload count_tokens(messages:, model:, cache_control: nil, output_config: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, user_profile_id: nil, request_options: {})
+      # @overload count_tokens(messages:, model:, cache_control: nil, output_config: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
       #
       # @param messages [Array<Anthropic::Models::MessageParam>] Body param: Input messages.
       #
@@ -303,6 +309,8 @@ module Anthropic
       #
       # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
       #
+      # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+      #
       # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [Anthropic::Models::MessageTokensCount]
@@ -311,7 +319,7 @@ module Anthropic
       def count_tokens(params)
         parsed, options = Anthropic::MessageCountTokensParams.dump_request(params)
         Anthropic::Helpers::Messages.distill_input_schema_models!(parsed, strict: nil)
-        header_params = {user_profile_id: "anthropic-user-profile-id"}
+        header_params = {user_profile_id: "anthropic-user-profile-id", workspace_id: "anthropic-workspace-id"}
         @client.request(
           method: :post,
           path: "v1/messages/count_tokens",

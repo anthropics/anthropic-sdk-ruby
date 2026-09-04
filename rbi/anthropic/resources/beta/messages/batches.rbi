@@ -22,6 +22,7 @@ module Anthropic
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               user_profile_id: String,
+              workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Messages::BetaMessageBatch)
           end
@@ -37,6 +38,13 @@ module Anthropic
             # individual request whose `user_profile_id` body field conflicts with this header
             # is errored.
             user_profile_id: nil,
+            # Header param: Optional header to select the Workspace for this request. The
+            # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+            #
+            # Only needed for credentials that can act on more than one Workspace. A
+            # credential that belongs to a specific Workspace may omit it; if sent, it must
+            # match that Workspace.
+            workspace_id: nil,
             request_options: {}
           )
           end
@@ -52,6 +60,7 @@ module Anthropic
               message_batch_id: String,
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+              workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Messages::BetaMessageBatch)
           end
@@ -60,6 +69,13 @@ module Anthropic
             message_batch_id,
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,
+            # Optional header to select the Workspace for this request. The value is a
+            # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+            #
+            # Only needed for credentials that can act on more than one Workspace. A
+            # credential that belongs to a specific Workspace may omit it; if sent, it must
+            # match that Workspace.
+            workspace_id: nil,
             request_options: {}
           )
           end
@@ -76,6 +92,7 @@ module Anthropic
               limit: Integer,
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+              workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(
               Anthropic::Internal::Page[
@@ -96,6 +113,13 @@ module Anthropic
             limit: nil,
             # Header param: Optional header to specify the beta version(s) you want to use.
             betas: nil,
+            # Header param: Optional header to select the Workspace for this request. The
+            # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+            #
+            # Only needed for credentials that can act on more than one Workspace. A
+            # credential that belongs to a specific Workspace may omit it; if sent, it must
+            # match that Workspace.
+            workspace_id: nil,
             request_options: {}
           )
           end
@@ -112,6 +136,7 @@ module Anthropic
               message_batch_id: String,
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+              workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Messages::BetaDeletedMessageBatch)
           end
@@ -120,6 +145,13 @@ module Anthropic
             message_batch_id,
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,
+            # Optional header to select the Workspace for this request. The value is a
+            # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+            #
+            # Only needed for credentials that can act on more than one Workspace. A
+            # credential that belongs to a specific Workspace may omit it; if sent, it must
+            # match that Workspace.
+            workspace_id: nil,
             request_options: {}
           )
           end
@@ -141,6 +173,7 @@ module Anthropic
               message_batch_id: String,
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+              workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Messages::BetaMessageBatch)
           end
@@ -149,6 +182,13 @@ module Anthropic
             message_batch_id,
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,
+            # Optional header to select the Workspace for this request. The value is a
+            # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+            #
+            # Only needed for credentials that can act on more than one Workspace. A
+            # credential that belongs to a specific Workspace may omit it; if sent, it must
+            # match that Workspace.
+            workspace_id: nil,
             request_options: {}
           )
           end
@@ -166,6 +206,7 @@ module Anthropic
               message_batch_id: String,
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+              workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(
               Anthropic::Internal::JsonLStream[
@@ -178,6 +219,13 @@ module Anthropic
             message_batch_id,
             # Optional header to specify the beta version(s) you want to use.
             betas: nil,
+            # Optional header to select the Workspace for this request. The value is a
+            # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+            #
+            # Only needed for credentials that can act on more than one Workspace. A
+            # credential that belongs to a specific Workspace may omit it; if sent, it must
+            # match that Workspace.
+            workspace_id: nil,
             request_options: {}
           )
           end

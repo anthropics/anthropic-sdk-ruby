@@ -36,11 +36,18 @@ module Anthropic
       sig { returns(T.nilable(String)) }
       attr_accessor :source
 
+      sig { returns(T.nilable(String)) }
+      attr_reader :workspace_id
+
+      sig { params(workspace_id: String).void }
+      attr_writer :workspace_id
+
       sig do
         params(
           limit: Integer,
           page: T.nilable(String),
           source: T.nilable(String),
+          workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -61,6 +68,7 @@ module Anthropic
         # - `"custom"`: only return user-created skills
         # - `"anthropic"`: only return Anthropic-created skills
         source: nil,
+        workspace_id: nil,
         request_options: {}
       )
       end
@@ -71,6 +79,7 @@ module Anthropic
             limit: Integer,
             page: T.nilable(String),
             source: T.nilable(String),
+            workspace_id: String,
             request_options: Anthropic::RequestOptions
           }
         )

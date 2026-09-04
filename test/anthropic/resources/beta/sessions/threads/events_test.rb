@@ -4,7 +4,7 @@ require_relative "../../../../test_helper"
 
 class Anthropic::Test::Resources::Beta::Sessions::Threads::EventsTest < Anthropic::Test::ResourceTest
   def test_list_required_params
-    skip("buildURL drops path-level query params (SDK-4349)")
+    skip("buildURL drops path-level query params")
 
     response =
       @anthropic.beta.sessions.threads.events.list(

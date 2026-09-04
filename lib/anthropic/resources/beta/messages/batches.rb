@@ -17,13 +17,15 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Messages::BatchCreateParams} for more details.
           #
-          # @overload create(requests:, betas: nil, user_profile_id: nil, request_options: {})
+          # @overload create(requests:, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
           #
           # @param requests [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>] Body param: List of requests for prompt completion. Each is an individual reques
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param user_profile_id [String] Header param: The user profile ID to attribute the requests in this batch to. Us
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -32,7 +34,12 @@ module Anthropic
           # @see Anthropic::Models::Beta::Messages::BatchCreateParams
           def create(params)
             parsed, options = Anthropic::Beta::Messages::BatchCreateParams.dump_request(params)
-            header_params = {betas: "anthropic-beta", user_profile_id: "anthropic-user-profile-id"}
+            header_params =
+              {
+                betas: "anthropic-beta",
+                user_profile_id: "anthropic-user-profile-id",
+                workspace_id: "anthropic-workspace-id"
+              }
             @client.request(
               method: :post,
               path: "v1/messages/batches?beta=true",
@@ -50,11 +57,16 @@ module Anthropic
           # Learn more about the Message Batches API in our
           # [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
           #
-          # @overload retrieve(message_batch_id, betas: nil, request_options: {})
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Messages::BatchRetrieveParams} for more details.
+          #
+          # @overload retrieve(message_batch_id, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param message_batch_id [String] ID of the Message Batch.
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -66,7 +78,7 @@ module Anthropic
             @client.request(
               method: :get,
               path: ["v1/messages/batches/%1$s?beta=true", message_batch_id],
-              headers: parsed.transform_keys(betas: "anthropic-beta"),
+              headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Messages::BetaMessageBatch,
               options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
             )
@@ -81,7 +93,7 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::Messages::BatchListParams} for more details.
           #
-          # @overload list(after_id: nil, before_id: nil, limit: nil, betas: nil, request_options: {})
+          # @overload list(after_id: nil, before_id: nil, limit: nil, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param after_id [String] Query param: ID of the object to use as a cursor for pagination. When provided,
           #
@@ -90,6 +102,8 @@ module Anthropic
           # @param limit [Integer] Query param: Number of items to return per page.
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -104,7 +118,10 @@ module Anthropic
               method: :get,
               path: "v1/messages/batches?beta=true",
               query: query,
-              headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
+              headers: parsed.except(*query_params).transform_keys(
+                betas: "anthropic-beta",
+                workspace_id: "anthropic-workspace-id"
+              ),
               page: Anthropic::Internal::Page,
               model: Anthropic::Beta::Messages::BetaMessageBatch,
               options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
@@ -119,11 +136,16 @@ module Anthropic
           # Learn more about the Message Batches API in our
           # [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
           #
-          # @overload delete(message_batch_id, betas: nil, request_options: {})
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Messages::BatchDeleteParams} for more details.
+          #
+          # @overload delete(message_batch_id, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param message_batch_id [String] ID of the Message Batch.
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -135,7 +157,7 @@ module Anthropic
             @client.request(
               method: :delete,
               path: ["v1/messages/batches/%1$s?beta=true", message_batch_id],
-              headers: parsed.transform_keys(betas: "anthropic-beta"),
+              headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Messages::BetaDeletedMessageBatch,
               options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
             )
@@ -154,11 +176,16 @@ module Anthropic
           # Learn more about the Message Batches API in our
           # [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
           #
-          # @overload cancel(message_batch_id, betas: nil, request_options: {})
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Messages::BatchCancelParams} for more details.
+          #
+          # @overload cancel(message_batch_id, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param message_batch_id [String] ID of the Message Batch.
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -170,7 +197,7 @@ module Anthropic
             @client.request(
               method: :post,
               path: ["v1/messages/batches/%1$s/cancel?beta=true", message_batch_id],
-              headers: parsed.transform_keys(betas: "anthropic-beta"),
+              headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::Messages::BetaMessageBatch,
               options: {extra_headers: {"anthropic-beta" => "message-batches-2024-09-24"}, **options}
             )
@@ -185,11 +212,16 @@ module Anthropic
           # Learn more about the Message Batches API in our
           # [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
           #
-          # @overload results_streaming(message_batch_id, betas: nil, request_options: {})
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::Messages::BatchResultsParams} for more details.
+          #
+          # @overload results_streaming(message_batch_id, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param message_batch_id [String] ID of the Message Batch.
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -201,12 +233,9 @@ module Anthropic
             @client.request(
               method: :get,
               path: ["v1/messages/batches/%1$s/results?beta=true", message_batch_id],
-              headers: {
-                "accept" => "application/x-jsonl",
-                "accept-encoding" => "identity",
-                **parsed
-              }.transform_keys(
-                betas: "anthropic-beta"
+              headers: {"accept" => "application/x-jsonl", "accept-encoding" => "identity", **parsed}.transform_keys(
+                betas: "anthropic-beta",
+                workspace_id: "anthropic-workspace-id"
               ),
               stream: Anthropic::Internal::JsonLStream,
               model: Anthropic::Beta::Messages::BetaMessageBatchIndividualResponse,

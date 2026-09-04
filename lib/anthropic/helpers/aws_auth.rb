@@ -158,16 +158,17 @@ module Anthropic
       # @see Anthropic::Client#resolve_default_credentials?
       private def resolve_default_credentials? = false
 
-      # The AWS provider middleware entry: applies the workspace-id header and
-      # SigV4 signing per attempt. Return from the including class's
-      # `provider_middleware`. Pure — requests are reused across retry
-      # attempts, so the incoming `req` is never mutated.
+      # The AWS provider middleware entry: stamps the client workspace-id header
+      # unless the request already carries one, then SigV4-signs per attempt.
+      # Return from the including class's `provider_middleware`. Pure —
+      # requests are reused across retry attempts, so the incoming `req` is
+      # never mutated.
       #
       # @param req [Anthropic::APIRequest]
       # @param nxt [#call]
       # @return [Anthropic::APIResponse]
       private def aws_auth_provider(req, nxt)
-        if @workspace_id
+        if @workspace_id && req.headers.keys.none? { _1.to_s.casecmp?("anthropic-workspace-id") }
           req = req.with(headers: {**req.headers, "anthropic-workspace-id" => @workspace_id})
         end
 

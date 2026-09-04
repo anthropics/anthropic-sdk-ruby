@@ -17,6 +17,7 @@ module Anthropic
             requests:
               T::Array[Anthropic::Messages::BatchCreateParams::Request::OrHash],
             user_profile_id: String,
+            workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Messages::MessageBatch)
         end
@@ -30,6 +31,13 @@ module Anthropic
           # individual request whose `user_profile_id` body field conflicts with this header
           # is errored.
           user_profile_id: nil,
+          # Header param: Optional header to select the Workspace for this request. The
+          # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+          #
+          # Only needed for credentials that can act on more than one Workspace. A
+          # credential that belongs to a specific Workspace may omit it; if sent, it must
+          # match that Workspace.
+          workspace_id: nil,
           request_options: {}
         )
         end
@@ -43,12 +51,20 @@ module Anthropic
         sig do
           params(
             message_batch_id: String,
+            workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Messages::MessageBatch)
         end
         def retrieve(
           # ID of the Message Batch.
           message_batch_id,
+          # Optional header to select the Workspace for this request. The value is a
+          # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+          #
+          # Only needed for credentials that can act on more than one Workspace. A
+          # credential that belongs to a specific Workspace may omit it; if sent, it must
+          # match that Workspace.
+          workspace_id: nil,
           request_options: {}
         )
         end
@@ -63,22 +79,30 @@ module Anthropic
             after_id: String,
             before_id: String,
             limit: Integer,
+            workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(
             Anthropic::Internal::Page[Anthropic::Messages::MessageBatch]
           )
         end
         def list(
-          # ID of the object to use as a cursor for pagination. When provided, returns the
-          # page of results immediately after this object.
+          # Query param: ID of the object to use as a cursor for pagination. When provided,
+          # returns the page of results immediately after this object.
           after_id: nil,
-          # ID of the object to use as a cursor for pagination. When provided, returns the
-          # page of results immediately before this object.
+          # Query param: ID of the object to use as a cursor for pagination. When provided,
+          # returns the page of results immediately before this object.
           before_id: nil,
-          # Number of items to return per page.
+          # Query param: Number of items to return per page.
           #
           # Defaults to `20`. Ranges from `1` to `1000`.
           limit: nil,
+          # Header param: Optional header to select the Workspace for this request. The
+          # value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+          #
+          # Only needed for credentials that can act on more than one Workspace. A
+          # credential that belongs to a specific Workspace may omit it; if sent, it must
+          # match that Workspace.
+          workspace_id: nil,
           request_options: {}
         )
         end
@@ -93,12 +117,20 @@ module Anthropic
         sig do
           params(
             message_batch_id: String,
+            workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Messages::DeletedMessageBatch)
         end
         def delete(
           # ID of the Message Batch.
           message_batch_id,
+          # Optional header to select the Workspace for this request. The value is a
+          # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+          #
+          # Only needed for credentials that can act on more than one Workspace. A
+          # credential that belongs to a specific Workspace may omit it; if sent, it must
+          # match that Workspace.
+          workspace_id: nil,
           request_options: {}
         )
         end
@@ -118,12 +150,20 @@ module Anthropic
         sig do
           params(
             message_batch_id: String,
+            workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Messages::MessageBatch)
         end
         def cancel(
           # ID of the Message Batch.
           message_batch_id,
+          # Optional header to select the Workspace for this request. The value is a
+          # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+          #
+          # Only needed for credentials that can act on more than one Workspace. A
+          # credential that belongs to a specific Workspace may omit it; if sent, it must
+          # match that Workspace.
+          workspace_id: nil,
           request_options: {}
         )
         end
@@ -139,6 +179,7 @@ module Anthropic
         sig do
           params(
             message_batch_id: String,
+            workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(
             Anthropic::Internal::JsonLStream[
@@ -149,6 +190,13 @@ module Anthropic
         def results_streaming(
           # ID of the Message Batch.
           message_batch_id,
+          # Optional header to select the Workspace for this request. The value is a
+          # Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+          #
+          # Only needed for credentials that can act on more than one Workspace. A
+          # credential that belongs to a specific Workspace may omit it; if sent, it must
+          # match that Workspace.
+          workspace_id: nil,
           request_options: {}
         )
         end

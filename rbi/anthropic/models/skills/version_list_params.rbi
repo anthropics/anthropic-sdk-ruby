@@ -31,11 +31,18 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :page
 
+        sig { returns(T.nilable(String)) }
+        attr_reader :workspace_id
+
+        sig { params(workspace_id: String).void }
+        attr_writer :workspace_id
+
         sig do
           params(
             skill_id: String,
             limit: T.nilable(Integer),
             page: T.nilable(String),
+            workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
@@ -50,6 +57,7 @@ module Anthropic
           limit: nil,
           # Optionally set to the `next_page` token from the previous response.
           page: nil,
+          workspace_id: nil,
           request_options: {}
         )
         end
@@ -60,6 +68,7 @@ module Anthropic
               skill_id: String,
               limit: T.nilable(Integer),
               page: T.nilable(String),
+              workspace_id: String,
               request_options: Anthropic::RequestOptions
             }
           )

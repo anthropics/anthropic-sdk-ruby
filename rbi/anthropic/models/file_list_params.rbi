@@ -33,11 +33,18 @@ module Anthropic
       sig { returns(T.nilable(String)) }
       attr_accessor :page
 
+      sig { returns(T.nilable(String)) }
+      attr_reader :workspace_id
+
+      sig { params(workspace_id: String).void }
+      attr_writer :workspace_id
+
       sig do
         params(
           ids: T.nilable(T::Array[String]),
           limit: Integer,
           page: T.nilable(String),
+          workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -55,6 +62,7 @@ module Anthropic
         # Opaque page cursor returned in a prior list response's `next_page`. Prefixed
         # `page_`.
         page: nil,
+        workspace_id: nil,
         request_options: {}
       )
       end
@@ -65,6 +73,7 @@ module Anthropic
             ids: T.nilable(T::Array[String]),
             limit: Integer,
             page: T.nilable(String),
+            workspace_id: String,
             request_options: Anthropic::RequestOptions
           }
         )

@@ -128,7 +128,7 @@ module Anthropic
             {
               type: "content_block_delta",
               index: 0,
-              delta: {type: "text_delta", text: '{"name":"Bob","address":{"street":"456 Oak","city":"LA"}}'}
+              delta: {type: "text_delta", text: '{"name":"Bob","address":{"street":"456 Elm","city":"LA"}}'}
             },
             {type: "content_block_stop", index: 0},
             {

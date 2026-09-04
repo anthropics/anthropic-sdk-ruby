@@ -15,11 +15,18 @@ module Anthropic
       #   @return [String]
       required :skill_id, String
 
-      # @!method initialize(skill_id:, request_options: {})
+      # @!attribute workspace_id
+      #
+      #   @return [String, nil]
+      optional :workspace_id, String
+
+      # @!method initialize(skill_id:, workspace_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {Anthropic::Models::SkillRetrieveParams} for more details.
       #
       #   @param skill_id [String] Unique identifier for the skill.
+      #
+      #   @param workspace_id [String]
       #
       #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
     end

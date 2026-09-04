@@ -2,7 +2,11 @@ module Anthropic
   module Models
     module Beta
       type dream_retrieve_params =
-        { dream_id: String, betas: ::Array[Anthropic::Models::anthropic_beta] }
+        {
+          dream_id: String,
+          betas: ::Array[Anthropic::Models::anthropic_beta],
+          workspace_id: String
+        }
         & Anthropic::Internal::Type::request_parameters
 
       class DreamRetrieveParams < Anthropic::Internal::Type::BaseModel
@@ -17,15 +21,21 @@ module Anthropic
           ::Array[Anthropic::Models::anthropic_beta]
         ) -> ::Array[Anthropic::Models::anthropic_beta]
 
+        attr_reader workspace_id: String?
+
+        def workspace_id=: (String) -> String
+
         def initialize: (
           dream_id: String,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> void
 
         def to_hash: -> {
           dream_id: String,
           betas: ::Array[Anthropic::Models::anthropic_beta],
+          workspace_id: String,
           request_options: Anthropic::RequestOptions
         }
       end

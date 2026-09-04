@@ -69,7 +69,7 @@ module Anthropic
           # the `memory_version` row. The API key that created a session is not recorded on
           # agent writes; attribution answers who made the write, not who is ultimately
           # responsible. Look up session provenance separately via the
-          # [Sessions API](/en/api/sessions-retrieve).
+          # [Sessions API](/en/api/beta/sessions/retrieve).
           sig do
             returns(
               T.nilable(
@@ -105,7 +105,7 @@ module Anthropic
           # the `memory_version` row. The API key that created a session is not recorded on
           # agent writes; attribution answers who made the write, not who is ultimately
           # responsible. Look up session provenance separately via the
-          # [Sessions API](/en/api/sessions-retrieve).
+          # [Sessions API](/en/api/beta/sessions/retrieve).
           sig do
             returns(
               T.nilable(
@@ -198,7 +198,7 @@ module Anthropic
             # the `memory_version` row. The API key that created a session is not recorded on
             # agent writes; attribution answers who made the write, not who is ultimately
             # responsible. Look up session provenance separately via the
-            # [Sessions API](/en/api/sessions-retrieve).
+            # [Sessions API](/en/api/beta/sessions/retrieve).
             created_by: nil,
             # The memory's path at the time of this write. `null` if and only if `redacted_at`
             # is set.
@@ -209,7 +209,7 @@ module Anthropic
             # the `memory_version` row. The API key that created a session is not recorded on
             # agent writes; attribution answers who made the write, not who is ultimately
             # responsible. Look up session provenance separately via the
-            # [Sessions API](/en/api/sessions-retrieve).
+            # [Sessions API](/en/api/beta/sessions/retrieve).
             redacted_by: nil
           )
           end

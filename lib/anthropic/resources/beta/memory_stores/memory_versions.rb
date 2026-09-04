@@ -7,7 +7,11 @@ module Anthropic
         class MemoryVersions
           # Retrieve a memory version
           #
-          # @overload retrieve(memory_version_id, memory_store_id:, view: nil, betas: nil, request_options: {})
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::MemoryStores::MemoryVersionRetrieveParams} for more
+          # details.
+          #
+          # @overload retrieve(memory_version_id, memory_store_id:, view: nil, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param memory_version_id [String] Path param: Path parameter memory_version_id
           #
@@ -16,6 +20,8 @@ module Anthropic
           # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Query parameter for view
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -38,7 +44,10 @@ module Anthropic
                 memory_version_id
               ],
               query: query,
-              headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
+              headers: parsed.except(*query_params).transform_keys(
+                betas: "anthropic-beta",
+                workspace_id: "anthropic-workspace-id"
+              ),
               model: Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion,
               options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
             )
@@ -46,7 +55,11 @@ module Anthropic
 
           # List memory versions
           #
-          # @overload list(memory_store_id, api_key_id: nil, created_at_gte: nil, created_at_lte: nil, limit: nil, memory_id: nil, operation: nil, page: nil, service_account_id: nil, session_id: nil, view: nil, betas: nil, request_options: {})
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::MemoryStores::MemoryVersionListParams} for more
+          # details.
+          #
+          # @overload list(memory_store_id, api_key_id: nil, created_at_gte: nil, created_at_lte: nil, limit: nil, memory_id: nil, operation: nil, page: nil, service_account_id: nil, session_id: nil, view: nil, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param memory_store_id [String] Path param: Path parameter memory_store_id
           #
@@ -71,6 +84,8 @@ module Anthropic
           # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Query parameter for view
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -100,7 +115,10 @@ module Anthropic
                 created_at_gte: "created_at[gte]",
                 created_at_lte: "created_at[lte]"
               ),
-              headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
+              headers: parsed.except(*query_params).transform_keys(
+                betas: "anthropic-beta",
+                workspace_id: "anthropic-workspace-id"
+              ),
               page: Anthropic::Internal::PageCursor,
               model: Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion,
               options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
@@ -109,13 +127,19 @@ module Anthropic
 
           # Redact a memory version
           #
-          # @overload redact(memory_version_id, memory_store_id:, betas: nil, request_options: {})
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::MemoryStores::MemoryVersionRedactParams} for more
+          # details.
+          #
+          # @overload redact(memory_version_id, memory_store_id:, betas: nil, workspace_id: nil, request_options: {})
           #
           # @param memory_version_id [String] Path param: Path parameter memory_version_id
           #
           # @param memory_store_id [String] Path param: Path parameter memory_store_id
           #
           # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          #
+          # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -135,7 +159,7 @@ module Anthropic
                 memory_store_id,
                 memory_version_id
               ],
-              headers: parsed.transform_keys(betas: "anthropic-beta"),
+              headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
               model: Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryVersion,
               options: {extra_headers: {"anthropic-beta" => "agent-memory-2026-07-22"}, **options}
             )

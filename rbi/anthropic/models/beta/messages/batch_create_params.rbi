@@ -52,6 +52,12 @@ module Anthropic
           sig { params(user_profile_id: String).void }
           attr_writer :user_profile_id
 
+          sig { returns(T.nilable(String)) }
+          attr_reader :workspace_id
+
+          sig { params(workspace_id: String).void }
+          attr_writer :workspace_id
+
           sig do
             params(
               requests:
@@ -61,6 +67,7 @@ module Anthropic
               betas:
                 T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
               user_profile_id: String,
+              workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(T.attached_class)
           end
@@ -75,6 +82,7 @@ module Anthropic
             # beta header. Applies to every request in the batch; an individual request whose
             # `user_profile_id` body field conflicts with this header is errored.
             user_profile_id: nil,
+            workspace_id: nil,
             request_options: {}
           )
           end
@@ -89,6 +97,7 @@ module Anthropic
                 betas:
                   T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
                 user_profile_id: String,
+                workspace_id: String,
                 request_options: Anthropic::RequestOptions
               }
             )

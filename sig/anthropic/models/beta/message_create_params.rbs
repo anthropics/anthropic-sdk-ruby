@@ -28,7 +28,8 @@ module Anthropic
           top_k: Integer,
           top_p: Float,
           betas: ::Array[Anthropic::Models::anthropic_beta],
-          user_profile_id: String
+          user_profile_id: String,
+          workspace_id: String
         }
         & Anthropic::Internal::Type::request_parameters
 
@@ -134,6 +135,10 @@ module Anthropic
 
         def user_profile_id=: (String) -> String
 
+        attr_reader workspace_id: String?
+
+        def workspace_id=: (String) -> String
+
         def initialize: (
           max_tokens: Integer,
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
@@ -161,6 +166,7 @@ module Anthropic
           ?top_p: Float,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
           ?user_profile_id: String,
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> void
 
@@ -191,6 +197,7 @@ module Anthropic
           top_p: Float,
           betas: ::Array[Anthropic::Models::anthropic_beta],
           user_profile_id: String,
+          workspace_id: String,
           request_options: Anthropic::RequestOptions
         }
 
