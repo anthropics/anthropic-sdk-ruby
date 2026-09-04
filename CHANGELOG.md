@@ -1,5 +1,48 @@
 # Changelog
 
+## 1.69.0 (2026-09-04)
+
+Full Changelog: [v1.68.0...v1.69.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.68.0...v1.69.0)
+
+### Features
+
+* **api:** add Claude Tag category and user breakdowns to usage reports ([cc15700](https://github.com/anthropics/anthropic-sdk-ruby/commit/cc1570048782b77cdb93cf3317aeb0a12ddb4fc5))
+* **api:** add workspace_id request option for multi-workspace credentials ([c95705a](https://github.com/anthropics/anthropic-sdk-ruby/commit/c95705a68ae97bde8af8bacd87d4a3d8efb40720))
+* **api:** raise Managed Agents vault refresh token limit to 8192 chars ([569c276](https://github.com/anthropics/anthropic-sdk-ruby/commit/569c276861ebe4fd6bdf533bf52d3a506c7a47a4))
+* **client:** keep vault credential secrets out of Terraform state with write-only arguments ([0469660](https://github.com/anthropics/anthropic-sdk-ruby/commit/04696601b8d58d965489bf7fa2217a2953c9711e))
+
+
+### Bug Fixes
+
+* **api:** remove response text block maxLength constraint ([be7488c](https://github.com/anthropics/anthropic-sdk-ruby/commit/be7488c31744d2aeb0b2b2a6f7154c1ef38a92f9))
+* **client:** include non-JSON error response bodies in API errors ([64a98a3](https://github.com/anthropics/anthropic-sdk-ruby/commit/64a98a37277ad0416420032a34f5f5932da7b90d))
+* **client:** raise a clear error when an httpx object is passed instead of an httpx2 one ([ce5e74a](https://github.com/anthropics/anthropic-sdk-ruby/commit/ce5e74a77250c8bb721e6d2c69f2d5214ca1ebe6))
+
+
+### Performance Improvements
+
+* resolve C# names faster ([02c5599](https://github.com/anthropics/anthropic-sdk-ruby/commit/02c5599d316cd253e27a69780f336adc676c7e4c))
+
+
+### Chores
+
+* **api:** accept anthropic-version on Claude Enterprise admin endpoints ([aa174d8](https://github.com/anthropics/anthropic-sdk-ruby/commit/aa174d849ecf2a78ca0f2d84875dc11c4da76323))
+* **api:** declare specific error statuses instead of a generic 4XX response ([c75216f](https://github.com/anthropics/anthropic-sdk-ruby/commit/c75216fea1737a1df86a488c3f9e21a967763e61))
+* **api:** update authentication parameters on spend limit create and delete ([037c03e](https://github.com/anthropics/anthropic-sdk-ruby/commit/037c03ee363b9d8df53103cea86a05ae384148f9))
+* **docs:** fix broken session link in memory version descriptions ([06a19e8](https://github.com/anthropics/anthropic-sdk-ruby/commit/06a19e86fe25ece7715dbfcd710b9013a54133b4))
+* **examples:** refresh platform model IDs ([#223](https://github.com/anthropics/anthropic-sdk-ruby/issues/223)) ([c9f7210](https://github.com/anthropics/anthropic-sdk-ruby/commit/c9f721068cc19136fc3d5a39573d45309d99a839))
+* **internal:** fix spec repo README link and drop its mock script ([0469660](https://github.com/anthropics/anthropic-sdk-ruby/commit/04696601b8d58d965489bf7fa2217a2953c9711e))
+* **internal:** read formatter versions from one place ([c95705a](https://github.com/anthropics/anthropic-sdk-ruby/commit/c95705a68ae97bde8af8bacd87d4a3d8efb40720))
+* **internal:** update CODEOWNERS ([92d7e40](https://github.com/anthropics/anthropic-sdk-ruby/commit/92d7e40ca4d5663ad3f9d45d4ceaf6d8824c6eda))
+* **internal:** update CODEOWNERS ([0469660](https://github.com/anthropics/anthropic-sdk-ruby/commit/04696601b8d58d965489bf7fa2217a2953c9711e))
+* **tests:** reword the skip reason on the path-level query param tests ([de9aa69](https://github.com/anthropics/anthropic-sdk-ruby/commit/de9aa691c618c8cafe70e75705429f593d762af1))
+* **tests:** structured output streaming test ([#238](https://github.com/anthropics/anthropic-sdk-ruby/issues/238)) ([739619f](https://github.com/anthropics/anthropic-sdk-ruby/commit/739619f6e228e44b9793cb06384c7adf108b4fad))
+
+
+### Documentation
+
+* **api:** add HTTP reference for the remaining Admin API endpoints ([ce5e74a](https://github.com/anthropics/anthropic-sdk-ruby/commit/ce5e74a77250c8bb721e6d2c69f2d5214ca1ebe6))
+
 ## 1.68.0 (2026-09-01)
 
 Full Changelog: [v1.67.0...v1.68.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.67.0...v1.68.0)
