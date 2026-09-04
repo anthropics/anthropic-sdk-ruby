@@ -40,7 +40,7 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
   end
 
   def test_retrieve
-    skip("buildURL drops path-level query params (SDK-4349)")
+    skip("buildURL drops path-level query params")
 
     response = @anthropic.beta.deployments.retrieve("depl_011CZkZcDH3vPqd7xnEfwTai")
 
@@ -102,7 +102,7 @@ class Anthropic::Test::Resources::Beta::DeploymentsTest < Anthropic::Test::Resou
   end
 
   def test_list
-    skip("buildURL drops path-level query params (SDK-4349)")
+    skip("buildURL drops path-level query params")
 
     response = @anthropic.beta.deployments.list
 

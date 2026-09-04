@@ -98,7 +98,7 @@ class Anthropic::Test::Resources::Beta::SessionsTest < Anthropic::Test::Resource
   end
 
   def test_list
-    skip("buildURL drops path-level query params (SDK-4349)")
+    skip("buildURL drops path-level query params")
 
     response = @anthropic.beta.sessions.list
 
