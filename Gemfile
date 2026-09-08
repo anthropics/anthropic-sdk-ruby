@@ -6,7 +6,7 @@ gemspec
 
 # CI-only override to exercise the SDK against specific versions of its
 # runtime dependencies (see .github/workflows/dependency-versions.yml).
-%w[base64 cgi connection_pool standardwebhooks].each do |name|
+%w[base64 connection_pool standardwebhooks].each do |name|
   version = ENV.fetch("ANTHROPIC_TEST_#{name.upcase}_VERSION", nil)
   gem name, version if version
 end

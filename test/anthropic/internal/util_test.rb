@@ -175,6 +175,21 @@ class Anthropic::Test::UtilQueryParamsTest < Minitest::Test
 end
 
 class Anthropic::Test::UtilUriHandlingTest < Minitest::Test
+  def test_decode_query
+    cases = {
+      nil => {},
+      "" => {},
+      "a=1" => {"a" => ["1"]},
+      "a=1&a=2&b=3" => {"a" => %w[1 2], "b" => ["3"]},
+      "e=" => {"e" => [""]},
+      "q=hello+world" => {"q" => ["hello world"]},
+      "q=a%2Fb" => {"q" => ["a/b"]}
+    }
+    cases.each do |query, expected|
+      assert_equal(expected, Anthropic::Internal::Util.decode_query(query))
+    end
+  end
+
   def test_parsing
     %w[
       http://example.com
@@ -293,25 +308,55 @@ class Anthropic::Test::RegexMatchTest < Minitest::Test
 end
 
 class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
-  class FakeCGI < CGI
-    def initialize(headers, io)
-      encoded = io.to_a
-      @ctype = headers["content-type"]
-      # rubocop:disable Lint/EmptyBlock
-      @io = Anthropic::Internal::Util::ReadIOAdapter.new(encoded.to_enum) {}
-      # rubocop:enable Lint/EmptyBlock
-      @c_len = encoded.join.bytesize.to_s
-      super()
+  # Minimal multipart reader so these tests do not depend on the `cgi` gem.
+  class ParsedMultipart
+    Part = Struct.new(:name, :filename, :body) do
+      def original_filename = filename.to_s
+      alias_method :read, :body
     end
 
-    def stdinput = @io
+    def initialize(headers, io)
+      @parts = parse(headers.fetch("content-type"), io.to_a.join)
+    end
 
-    def env_table
-      {
-        "REQUEST_METHOD" => "POST",
-        "CONTENT_TYPE" => @ctype,
-        "CONTENT_LENGTH" => @c_len
-      }
+    def [](key)
+      key = key.to_s
+      part = @parts.find { _1.name == key }
+      return unless part
+
+      if !part.filename.nil? || key.empty?
+        part
+      else
+        part.body
+      end
+    end
+
+    private
+
+    def parse(content_type, body)
+      boundary = content_type[/\bboundary=(.+)\z/, 1]
+      chunks = body.split("--#{boundary}")
+      chunks.shift
+      chunks.pop if chunks.last&.start_with?("--")
+
+      chunks.filter_map do |chunk|
+        next if chunk.empty?
+
+        raw = chunk.delete_prefix("\r\n")
+        head, content = raw.split("\r\n\r\n", 2)
+        disposition = head.to_s[/^Content-Disposition:\s*(.*)$/i, 1].to_s
+        Part.new(
+          quoted_attr(disposition, "name") || "",
+          quoted_attr(disposition, "filename"),
+          content.to_s.delete_suffix("\r\n")
+        )
+      end
+    end
+
+    def quoted_attr(disposition, attr)
+      return unless (m = /(?:\A|;)\s*#{Regexp.escape(attr)}="((?:\\.|[^"])*)"/.match(disposition))
+
+      m[1].gsub(/\\(.)/, '\1')
     end
   end
 
@@ -341,13 +386,16 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
       Anthropic::FilePart.new(file, filename: "d o g") => ["d o g", /^class Anthropic/],
       # ...and an explicit path-qualified name survives intact (Skills API needs
       # `<dir>/SKILL.md`); it is neither basenamed nor percent-encoded to `%2F`.
-      Anthropic::FilePart.new(file, filename: "my-skill/SKILL.md") => ["my-skill/SKILL.md", /^class Anthropic/]
+      Anthropic::FilePart.new(
+        file,
+        filename: "my-skill/SKILL.md"
+      ) => ["my-skill/SKILL.md", /^class Anthropic/]
     }
     cases.each do |body, testcase|
       filename, val = testcase
       encoded = Anthropic::Internal::Util.encode_content(headers, body)
-      cgi = FakeCGI.new(*encoded)
-      io = cgi[""]
+      form = ParsedMultipart.new(*encoded)
+      io = form[""]
       assert_pattern do
         io.original_filename => ^filename
         io.read => ^val
@@ -383,11 +431,11 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
     }
     cases.each do |body, testcase|
       encoded = Anthropic::Internal::Util.encode_content(headers, body)
-      cgi = FakeCGI.new(*encoded)
+      form = ParsedMultipart.new(*encoded)
       testcase.each do |key, val|
         assert_pattern do
           parsed =
-            case (p = cgi[key])
+            case (p = form[key])
             in StringIO
               p.read
             else
