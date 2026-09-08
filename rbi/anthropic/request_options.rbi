@@ -17,11 +17,6 @@ module Anthropic
     def self.validate!(opts)
     end
 
-    # Idempotency key to send with request and all associated retries. Will only be
-    # sent for write requests.
-    sig { returns(T.nilable(String)) }
-    attr_accessor :idempotency_key
-
     # Extra query params to send with the request. These are `.merge`’d into any
     # `query` given at the client level.
     sig do

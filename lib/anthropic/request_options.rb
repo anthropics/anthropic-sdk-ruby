@@ -25,13 +25,6 @@ module Anthropic
       end
     end
 
-    # @!attribute idempotency_key
-    #   Idempotency key to send with request and all associated retries. Will only be
-    #   sent for write requests.
-    #
-    #   @return [String, nil]
-    optional :idempotency_key, String
-
     # @!attribute extra_query
     #   Extra query params to send with the request. These are `.merge`’d into any
     #   `query` given at the client level.
