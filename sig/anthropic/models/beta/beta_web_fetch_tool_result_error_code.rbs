@@ -13,6 +13,7 @@ module Anthropic
         | :too_many_requests
         | :max_uses_exceeded
         | :unavailable
+        | :content_too_large
 
       module BetaWebFetchToolResultErrorCode
         extend Anthropic::Internal::Type::Enum
@@ -26,6 +27,7 @@ module Anthropic
         TOO_MANY_REQUESTS: :too_many_requests
         MAX_USES_EXCEEDED: :max_uses_exceeded
         UNAVAILABLE: :unavailable
+        CONTENT_TOO_LARGE: :content_too_large
 
         def self?.values: -> ::Array[Anthropic::Models::Beta::beta_web_fetch_tool_result_error_code]
       end
