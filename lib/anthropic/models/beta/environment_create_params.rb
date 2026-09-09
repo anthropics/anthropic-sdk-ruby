@@ -35,8 +35,8 @@ module Anthropic
         # @!attribute scope
         #   The visibility scope for this environment. 'organization' makes the environment
         #   visible to all accounts. 'account' restricts visibility to the owning account
-        #   only. Only applicable for self-hosted environments. If not specified, defaults
-        #   based on organization type.
+        #   only. API organizations support only 'organization'; 'account' is rejected. If
+        #   not specified, defaults based on organization type.
         #
         #   @return [Symbol, Anthropic::Models::Beta::EnvironmentCreateParams::Scope, nil]
         optional :scope, enum: -> { Anthropic::Beta::EnvironmentCreateParams::Scope }, nil?: true
@@ -130,8 +130,8 @@ module Anthropic
 
         # The visibility scope for this environment. 'organization' makes the environment
         # visible to all accounts. 'account' restricts visibility to the owning account
-        # only. Only applicable for self-hosted environments. If not specified, defaults
-        # based on organization type.
+        # only. API organizations support only 'organization'; 'account' is rejected. If
+        # not specified, defaults based on organization type.
         module Scope
           extend Anthropic::Internal::Type::Enum
 
