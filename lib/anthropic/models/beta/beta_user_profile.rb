@@ -55,10 +55,20 @@ module Anthropic
         optional :access_type, enum: -> { Anthropic::Beta::BetaUserProfile::AccessType }
 
         # @!attribute external_id
-        #   Platform's own identifier for this user. Not enforced unique.
+        #   Platform's own identifier for this user. Not enforced unique. Present under the
+        #   `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under
+        #   `user-profiles-2026-09-04` the value is `external_user_details.reference_id`.
         #
         #   @return [String, nil]
         optional :external_id, String, nil?: true
+
+        # @!attribute external_user_details
+        #   Details about the entity this profile represents, as the platform states them.
+        #   Anthropic does not verify them. Every field is present, `null` until the
+        #   platform supplies a value.
+        #
+        #   @return [Anthropic::Models::Beta::BetaUserProfileExternalUserDetails, nil]
+        optional :external_user_details, -> { Anthropic::Beta::BetaUserProfileExternalUserDetails }
 
         # @!attribute external_user_onboarded_at
         #   A timestamp in RFC 3339 format
@@ -74,7 +84,7 @@ module Anthropic
         #   @return [String, nil]
         optional :name, String, nil?: true
 
-        # @!method initialize(id:, created_at:, metadata:, trust_grants:, type:, updated_at:, access_type: nil, external_id: nil, external_user_onboarded_at: nil, name: nil)
+        # @!method initialize(id:, created_at:, metadata:, trust_grants:, type:, updated_at:, access_type: nil, external_id: nil, external_user_details: nil, external_user_onboarded_at: nil, name: nil)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaUserProfile} for more details.
         #
@@ -92,7 +102,9 @@ module Anthropic
         #
         #   @param access_type [Symbol, Anthropic::Models::Beta::BetaUserProfile::AccessType] How the platform uses the API on behalf of the entity this profile represents. `
         #
-        #   @param external_id [String, nil] Platform's own identifier for this user. Not enforced unique.
+        #   @param external_id [String, nil] Platform's own identifier for this user. Not enforced unique. Present under the
+        #
+        #   @param external_user_details [Anthropic::Models::Beta::BetaUserProfileExternalUserDetails] Details about the entity this profile represents, as the platform states them. A
         #
         #   @param external_user_onboarded_at [Time, nil] A timestamp in RFC 3339 format
         #

@@ -20,10 +20,20 @@ module Anthropic
 
         # @!attribute external_id
         #   Platform's own identifier for this user. Not enforced unique. Maximum 255
-        #   characters.
+        #   characters. Accepted under the `user-profiles-2026-03-24` and
+        #   `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` send
+        #   `external_user_details.reference_id` instead.
         #
         #   @return [String, nil]
         optional :external_id, String, nil?: true
+
+        # @!attribute external_user_details
+        #   Details about the entity this profile represents, as the platform states them.
+        #   Every field is optional. Accepted under the `user-profiles-2026-09-04` beta
+        #   header only.
+        #
+        #   @return [Anthropic::Models::Beta::BetaUserProfileExternalUserDetailsParams, nil]
+        optional :external_user_details, -> { Anthropic::Beta::BetaUserProfileExternalUserDetailsParams }
 
         # @!attribute external_user_onboarded_at
         #   A timestamp in RFC 3339 format
@@ -54,13 +64,15 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(access_type: nil, external_id: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, betas: nil, request_options: {})
+        # @!method initialize(access_type: nil, external_id: nil, external_user_details: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::UserProfileCreateParams} for more details.
         #
         #   @param access_type [Symbol, Anthropic::Models::Beta::UserProfileCreateParams::AccessType] How the platform uses the API on behalf of the entity this profile represents. `
         #
         #   @param external_id [String, nil] Platform's own identifier for this user. Not enforced unique. Maximum 255 charac
+        #
+        #   @param external_user_details [Anthropic::Models::Beta::BetaUserProfileExternalUserDetailsParams] Details about the entity this profile represents, as the platform states them. E
         #
         #   @param external_user_onboarded_at [Time] A timestamp in RFC 3339 format
         #

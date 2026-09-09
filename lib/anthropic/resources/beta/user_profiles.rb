@@ -9,11 +9,13 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::UserProfileCreateParams} for more details.
         #
-        # @overload create(access_type: nil, external_id: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, betas: nil, request_options: {})
+        # @overload create(access_type: nil, external_id: nil, external_user_details: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, betas: nil, request_options: {})
         #
         # @param access_type [Symbol, Anthropic::Models::Beta::UserProfileCreateParams::AccessType] Body param: How the platform uses the API on behalf of the entity this profile r
         #
         # @param external_id [String, nil] Body param: Platform's own identifier for this user. Not enforced unique. Maximu
+        #
+        # @param external_user_details [Anthropic::Models::Beta::BetaUserProfileExternalUserDetailsParams] Body param: Details about the entity this profile represents, as the platform st
         #
         # @param external_user_onboarded_at [Time] Body param: A timestamp in RFC 3339 format
         #
@@ -70,13 +72,15 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::UserProfileUpdateParams} for more details.
         #
-        # @overload update(user_profile_id, access_type: nil, external_id: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, betas: nil, request_options: {})
+        # @overload update(user_profile_id, access_type: nil, external_id: nil, external_user_details: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, betas: nil, request_options: {})
         #
         # @param user_profile_id [String] Path param: Path parameter user_profile_id
         #
         # @param access_type [Symbol, Anthropic::Models::Beta::UserProfileUpdateParams::AccessType, nil] Body param: How the platform uses the API on behalf of the entity this profile r
         #
         # @param external_id [String, nil] Body param: If present, replaces the stored external_id. Omit to leave unchanged
+        #
+        # @param external_user_details [Anthropic::Models::Beta::BetaUserProfileExternalUserDetailsParams] Body param: Details about the entity this profile represents, as the platform st
         #
         # @param external_user_onboarded_at [Time] Body param: A timestamp in RFC 3339 format
         #

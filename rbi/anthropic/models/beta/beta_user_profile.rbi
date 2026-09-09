@@ -63,9 +63,29 @@ module Anthropic
         end
         attr_writer :access_type
 
-        # Platform's own identifier for this user. Not enforced unique.
+        # Platform's own identifier for this user. Not enforced unique. Present under the
+        # `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under
+        # `user-profiles-2026-09-04` the value is `external_user_details.reference_id`.
         sig { returns(T.nilable(String)) }
         attr_accessor :external_id
+
+        # Details about the entity this profile represents, as the platform states them.
+        # Anthropic does not verify them. Every field is present, `null` until the
+        # platform supplies a value.
+        sig do
+          returns(
+            T.nilable(Anthropic::Beta::BetaUserProfileExternalUserDetails)
+          )
+        end
+        attr_reader :external_user_details
+
+        sig do
+          params(
+            external_user_details:
+              Anthropic::Beta::BetaUserProfileExternalUserDetails::OrHash
+          ).void
+        end
+        attr_writer :external_user_details
 
         # A timestamp in RFC 3339 format
         sig { returns(T.nilable(Time)) }
@@ -91,6 +111,8 @@ module Anthropic
             updated_at: Time,
             access_type: Anthropic::Beta::BetaUserProfile::AccessType::OrSymbol,
             external_id: T.nilable(String),
+            external_user_details:
+              Anthropic::Beta::BetaUserProfileExternalUserDetails::OrHash,
             external_user_onboarded_at: T.nilable(Time),
             name: T.nilable(String)
           ).returns(T.attached_class)
@@ -116,8 +138,14 @@ module Anthropic
           # `passthrough`: the platform resells raw inference, and the profile identifies
           # the resold-to company.
           access_type: nil,
-          # Platform's own identifier for this user. Not enforced unique.
+          # Platform's own identifier for this user. Not enforced unique. Present under the
+          # `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under
+          # `user-profiles-2026-09-04` the value is `external_user_details.reference_id`.
           external_id: nil,
+          # Details about the entity this profile represents, as the platform states them.
+          # Anthropic does not verify them. Every field is present, `null` until the
+          # platform supplies a value.
+          external_user_details: nil,
           # A timestamp in RFC 3339 format
           external_user_onboarded_at: nil,
           # Real-world name of the entity this profile represents (company or individual).
@@ -140,6 +168,8 @@ module Anthropic
               access_type:
                 Anthropic::Beta::BetaUserProfile::AccessType::TaggedSymbol,
               external_id: T.nilable(String),
+              external_user_details:
+                Anthropic::Beta::BetaUserProfileExternalUserDetails,
               external_user_onboarded_at: T.nilable(Time),
               name: T.nilable(String)
             }
