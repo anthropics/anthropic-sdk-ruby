@@ -17,6 +17,10 @@ module Anthropic
     def self.validate!(opts)
     end
 
+    # Deprecated: this option has no effect and will be removed in a future major version.
+    sig { returns(T.nilable(String)) }
+    attr_accessor :idempotency_key
+
     # Extra query params to send with the request. These are `.merge`’d into any
     # `query` given at the client level.
     sig do

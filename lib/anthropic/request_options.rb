@@ -25,6 +25,12 @@ module Anthropic
       end
     end
 
+    # @!attribute idempotency_key
+    #   Deprecated: this option has no effect and will be removed in a future major version.
+    #
+    #   @return [String, nil]
+    optional :idempotency_key, String
+
     # @!attribute extra_query
     #   Extra query params to send with the request. These are `.merge`’d into any
     #   `query` given at the client level.
