@@ -106,7 +106,8 @@ module Anthropic
             permission_policy:
               T.any(
                 Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy::OrHash,
-                Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy::OrHash
+                Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy::OrHash,
+                Anthropic::Beta::BetaManagedAgentsAutoPolicy::OrHash
               ),
             name: Symbol,
             allowed_domains: T::Array[String],

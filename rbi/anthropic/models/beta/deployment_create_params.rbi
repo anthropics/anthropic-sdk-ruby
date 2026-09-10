@@ -355,8 +355,8 @@ module Anthropic
           sig do
             params(
               type: T.any(Symbol, String),
-              authorization_token: String,
               url: String,
+              authorization_token: String,
               checkout:
                 T.nilable(
                   T.any(
@@ -378,10 +378,11 @@ module Anthropic
           end
           def self.new(
             type:,
-            # GitHub authorization token used to clone the repository.
-            authorization_token: nil,
             # Github URL of the repository
             url: nil,
+            # GitHub authorization token used to clone the repository. Required for private
+            # repositories; optional for public ones.
+            authorization_token: nil,
             # Branch or commit to check out. Defaults to the repository's default branch.
             checkout: nil,
             # Mount path in the container. Defaults to `/workspace/<repo-name>`.

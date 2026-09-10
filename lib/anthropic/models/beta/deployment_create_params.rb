@@ -174,9 +174,9 @@ module Anthropic
           #
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
           #
-          #   @option args [String] :authorization_token GitHub authorization token used to clone the repository.
-          #
           #   @option args [String] :url Github URL of the repository
+          #
+          #   @option args [String] :authorization_token GitHub authorization token used to clone the repository. Required for private re
           #
           #   @option args [Anthropic::Models::Beta::BetaManagedAgentsBranchCheckout, Anthropic::Models::Beta::BetaManagedAgentsCommitCheckout, nil] :checkout Branch or commit to check out. Defaults to the repository's default branch.
           #

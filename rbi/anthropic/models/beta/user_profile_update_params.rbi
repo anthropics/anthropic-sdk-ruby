@@ -33,9 +33,30 @@ module Anthropic
         attr_accessor :access_type
 
         # If present, replaces the stored external_id. Omit to leave unchanged. Maximum
-        # 255 characters.
+        # 255 characters. Accepted under the `user-profiles-2026-03-24` and
+        # `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` send
+        # `external_user_details.reference_id` instead.
         sig { returns(T.nilable(String)) }
         attr_accessor :external_id
+
+        # Details about the entity this profile represents, as the platform states them.
+        # Each field sent replaces the stored value; omit a field to leave it unchanged.
+        # Once set, a value cannot be cleared and `null` is rejected. Accepted under the
+        # `user-profiles-2026-09-04` beta header only.
+        sig do
+          returns(
+            T.nilable(Anthropic::Beta::BetaUserProfileExternalUserDetailsParams)
+          )
+        end
+        attr_reader :external_user_details
+
+        sig do
+          params(
+            external_user_details:
+              Anthropic::Beta::BetaUserProfileExternalUserDetailsParams::OrHash
+          ).void
+        end
+        attr_writer :external_user_details
 
         # A timestamp in RFC 3339 format
         sig { returns(T.nilable(Time)) }
@@ -84,6 +105,8 @@ module Anthropic
                 Anthropic::Beta::UserProfileUpdateParams::AccessType::OrSymbol
               ),
             external_id: T.nilable(String),
+            external_user_details:
+              Anthropic::Beta::BetaUserProfileExternalUserDetailsParams::OrHash,
             external_user_onboarded_at: Time,
             metadata: T::Hash[Symbol, String],
             name: T.nilable(String),
@@ -100,8 +123,15 @@ module Anthropic
           # the resold-to company.
           access_type: nil,
           # If present, replaces the stored external_id. Omit to leave unchanged. Maximum
-          # 255 characters.
+          # 255 characters. Accepted under the `user-profiles-2026-03-24` and
+          # `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` send
+          # `external_user_details.reference_id` instead.
           external_id: nil,
+          # Details about the entity this profile represents, as the platform states them.
+          # Each field sent replaces the stored value; omit a field to leave it unchanged.
+          # Once set, a value cannot be cleared and `null` is rejected. Accepted under the
+          # `user-profiles-2026-09-04` beta header only.
+          external_user_details: nil,
           # A timestamp in RFC 3339 format
           external_user_onboarded_at: nil,
           # Key-value pairs to merge into the stored metadata. Keys provided overwrite
@@ -127,6 +157,8 @@ module Anthropic
                   Anthropic::Beta::UserProfileUpdateParams::AccessType::OrSymbol
                 ),
               external_id: T.nilable(String),
+              external_user_details:
+                Anthropic::Beta::BetaUserProfileExternalUserDetailsParams,
               external_user_onboarded_at: Time,
               metadata: T::Hash[Symbol, String],
               name: T.nilable(String),

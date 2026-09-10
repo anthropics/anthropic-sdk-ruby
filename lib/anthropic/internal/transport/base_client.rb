@@ -269,8 +269,6 @@ module Anthropic
         #
         # @param opts [Hash{Symbol=>Object}] .
         #
-        #   @option opts [String, nil] :idempotency_key
-        #
         #   @option opts [Hash{String=>Array<String>, String, nil}, nil] :extra_query
         #
         #   @option opts [Hash{String=>String, nil}, nil] :extra_headers
@@ -659,8 +657,6 @@ module Anthropic
         # @param model [Anthropic::Internal::Type::Converter, Class, nil]
         #
         # @param options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil] .
-        #
-        #   @option options [String, nil] :idempotency_key
         #
         #   @option options [Hash{String=>Array<String>, String, nil}, nil] :extra_query
         #

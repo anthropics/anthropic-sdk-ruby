@@ -1,0 +1,79 @@
+module Anthropic
+  module Models
+    class BetaUserProfileExternalUserDetails = Beta::BetaUserProfileExternalUserDetails
+
+    module Beta
+      type beta_user_profile_external_user_details =
+        {
+          account_status: Anthropic::Models::Beta::BetaUserProfileExternalUserDetails::account_status?,
+          country: String?,
+          email_hash: String?,
+          entity_type: Anthropic::Models::Beta::BetaUserProfileExternalUserDetails::entity_type?,
+          name_hash: String?,
+          onboarded_at: Time?,
+          reference_id: String?
+        }
+
+      class BetaUserProfileExternalUserDetails < Anthropic::Internal::Type::BaseModel
+        attr_accessor account_status: Anthropic::Models::Beta::BetaUserProfileExternalUserDetails::account_status?
+
+        attr_accessor country: String?
+
+        attr_accessor email_hash: String?
+
+        attr_accessor entity_type: Anthropic::Models::Beta::BetaUserProfileExternalUserDetails::entity_type?
+
+        attr_accessor name_hash: String?
+
+        attr_accessor onboarded_at: Time?
+
+        attr_accessor reference_id: String?
+
+        def initialize: (
+          account_status: Anthropic::Models::Beta::BetaUserProfileExternalUserDetails::account_status?,
+          country: String?,
+          email_hash: String?,
+          entity_type: Anthropic::Models::Beta::BetaUserProfileExternalUserDetails::entity_type?,
+          name_hash: String?,
+          onboarded_at: Time?,
+          reference_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          account_status: Anthropic::Models::Beta::BetaUserProfileExternalUserDetails::account_status?,
+          country: String?,
+          email_hash: String?,
+          entity_type: Anthropic::Models::Beta::BetaUserProfileExternalUserDetails::entity_type?,
+          name_hash: String?,
+          onboarded_at: Time?,
+          reference_id: String?
+        }
+
+        type account_status = :active | :suspended | :blocked
+
+        module AccountStatus
+          extend Anthropic::Internal::Type::Enum
+
+          ACTIVE: :active
+          SUSPENDED: :suspended
+          BLOCKED: :blocked
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaUserProfileExternalUserDetails::account_status]
+        end
+
+        type entity_type = :individual | :business | :non_profit | :government
+
+        module EntityType
+          extend Anthropic::Internal::Type::Enum
+
+          INDIVIDUAL: :individual
+          BUSINESS: :business
+          NON_PROFIT: :non_profit
+          GOVERNMENT: :government
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaUserProfileExternalUserDetails::entity_type]
+        end
+      end
+    end
+  end
+end

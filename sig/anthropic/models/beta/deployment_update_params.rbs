@@ -134,8 +134,8 @@ module Anthropic
           def self.new:
             (
               type: :github_repository | "github_repository",
-              authorization_token: String,
               url: String,
+              ?authorization_token: String,
               ?checkout: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::checkout?,
               ?mount_path: String?
             ) -> Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams
@@ -152,8 +152,8 @@ module Anthropic
             ) -> Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceParam
             | (
               type: Symbol | String,
-              ?authorization_token: String,
               ?url: String,
+              ?authorization_token: String,
               ?checkout: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::checkout?,
               ?mount_path: String?,
               ?file_id: String,

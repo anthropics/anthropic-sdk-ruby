@@ -12,7 +12,7 @@ class Anthropic::Test::Resources::Beta::Organization::ComplianceSettingsTest < A
 
     assert_pattern do
       response => {
-        state: Anthropic::Beta::Organization::BetaComplianceSettings::State,
+        state: Anthropic::Beta::Organization::BetaComplianceSettingsState,
         type: Symbol
       }
     end
@@ -27,7 +27,7 @@ class Anthropic::Test::Resources::Beta::Organization::ComplianceSettingsTest < A
 
     assert_pattern do
       response => {
-        state: Anthropic::Beta::Organization::BetaComplianceSettings::State,
+        state: Anthropic::Beta::Organization::BetaComplianceSettingsState,
         type: Symbol
       }
     end

@@ -15,10 +15,6 @@ module Anthropic
             )
           end
 
-        # GitHub authorization token used to clone the repository.
-        sig { returns(String) }
-        attr_accessor :authorization_token
-
         sig do
           returns(
             Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::Type::OrSymbol
@@ -29,6 +25,14 @@ module Anthropic
         # Github URL of the repository
         sig { returns(String) }
         attr_accessor :url
+
+        # GitHub authorization token used to clone the repository. Required for private
+        # repositories; optional for public ones.
+        sig { returns(T.nilable(String)) }
+        attr_reader :authorization_token
+
+        sig { params(authorization_token: String).void }
+        attr_writer :authorization_token
 
         # Branch or commit to check out. Defaults to the repository's default branch.
         sig do
@@ -50,10 +54,10 @@ module Anthropic
         # Mount a GitHub repository into the session's container.
         sig do
           params(
-            authorization_token: String,
             type:
               Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::Type::OrSymbol,
             url: String,
+            authorization_token: String,
             checkout:
               T.nilable(
                 T.any(
@@ -65,11 +69,12 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # GitHub authorization token used to clone the repository.
-          authorization_token:,
           type:,
           # Github URL of the repository
           url:,
+          # GitHub authorization token used to clone the repository. Required for private
+          # repositories; optional for public ones.
+          authorization_token: nil,
           # Branch or commit to check out. Defaults to the repository's default branch.
           checkout: nil,
           # Mount path in the container. Defaults to `/workspace/<repo-name>`.
@@ -80,10 +85,10 @@ module Anthropic
         sig do
           override.returns(
             {
-              authorization_token: String,
               type:
                 Anthropic::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::Type::OrSymbol,
               url: String,
+              authorization_token: String,
               checkout:
                 T.nilable(
                   T.any(

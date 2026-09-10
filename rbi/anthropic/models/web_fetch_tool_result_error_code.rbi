@@ -54,6 +54,11 @@ module Anthropic
           :unavailable,
           Anthropic::WebFetchToolResultErrorCode::TaggedSymbol
         )
+      CONTENT_TOO_LARGE =
+        T.let(
+          :content_too_large,
+          Anthropic::WebFetchToolResultErrorCode::TaggedSymbol
+        )
 
       sig do
         override.returns(

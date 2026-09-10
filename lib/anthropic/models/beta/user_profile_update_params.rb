@@ -25,10 +25,21 @@ module Anthropic
 
         # @!attribute external_id
         #   If present, replaces the stored external_id. Omit to leave unchanged. Maximum
-        #   255 characters.
+        #   255 characters. Accepted under the `user-profiles-2026-03-24` and
+        #   `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` send
+        #   `external_user_details.reference_id` instead.
         #
         #   @return [String, nil]
         optional :external_id, String, nil?: true
+
+        # @!attribute external_user_details
+        #   Details about the entity this profile represents, as the platform states them.
+        #   Each field sent replaces the stored value; omit a field to leave it unchanged.
+        #   Once set, a value cannot be cleared and `null` is rejected. Accepted under the
+        #   `user-profiles-2026-09-04` beta header only.
+        #
+        #   @return [Anthropic::Models::Beta::BetaUserProfileExternalUserDetailsParams, nil]
+        optional :external_user_details, -> { Anthropic::Beta::BetaUserProfileExternalUserDetailsParams }
 
         # @!attribute external_user_onboarded_at
         #   A timestamp in RFC 3339 format
@@ -58,7 +69,7 @@ module Anthropic
         #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(user_profile_id:, access_type: nil, external_id: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, betas: nil, request_options: {})
+        # @!method initialize(user_profile_id:, access_type: nil, external_id: nil, external_user_details: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, betas: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::UserProfileUpdateParams} for more details.
         #
@@ -67,6 +78,8 @@ module Anthropic
         #   @param access_type [Symbol, Anthropic::Models::Beta::UserProfileUpdateParams::AccessType, nil] How the platform uses the API on behalf of the entity this profile represents. `
         #
         #   @param external_id [String, nil] If present, replaces the stored external_id. Omit to leave unchanged. Maximum 25
+        #
+        #   @param external_user_details [Anthropic::Models::Beta::BetaUserProfileExternalUserDetailsParams] Details about the entity this profile represents, as the platform states them. E
         #
         #   @param external_user_onboarded_at [Time] A timestamp in RFC 3339 format
         #

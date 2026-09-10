@@ -38,9 +38,29 @@ module Anthropic
         attr_writer :access_type
 
         # Platform's own identifier for this user. Not enforced unique. Maximum 255
-        # characters.
+        # characters. Accepted under the `user-profiles-2026-03-24` and
+        # `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` send
+        # `external_user_details.reference_id` instead.
         sig { returns(T.nilable(String)) }
         attr_accessor :external_id
+
+        # Details about the entity this profile represents, as the platform states them.
+        # Every field is optional. Accepted under the `user-profiles-2026-09-04` beta
+        # header only.
+        sig do
+          returns(
+            T.nilable(Anthropic::Beta::BetaUserProfileExternalUserDetailsParams)
+          )
+        end
+        attr_reader :external_user_details
+
+        sig do
+          params(
+            external_user_details:
+              Anthropic::Beta::BetaUserProfileExternalUserDetailsParams::OrHash
+          ).void
+        end
+        attr_writer :external_user_details
 
         # A timestamp in RFC 3339 format
         sig { returns(T.nilable(Time)) }
@@ -87,6 +107,8 @@ module Anthropic
             access_type:
               Anthropic::Beta::UserProfileCreateParams::AccessType::OrSymbol,
             external_id: T.nilable(String),
+            external_user_details:
+              Anthropic::Beta::BetaUserProfileExternalUserDetailsParams::OrHash,
             external_user_onboarded_at: Time,
             metadata: T::Hash[Symbol, String],
             name: T.nilable(String),
@@ -102,8 +124,14 @@ module Anthropic
           # the resold-to company.
           access_type: nil,
           # Platform's own identifier for this user. Not enforced unique. Maximum 255
-          # characters.
+          # characters. Accepted under the `user-profiles-2026-03-24` and
+          # `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` send
+          # `external_user_details.reference_id` instead.
           external_id: nil,
+          # Details about the entity this profile represents, as the platform states them.
+          # Every field is optional. Accepted under the `user-profiles-2026-09-04` beta
+          # header only.
+          external_user_details: nil,
           # A timestamp in RFC 3339 format
           external_user_onboarded_at: nil,
           # Free-form key-value data to attach to this user profile. Maximum 16 keys, with
@@ -127,6 +155,8 @@ module Anthropic
               access_type:
                 Anthropic::Beta::UserProfileCreateParams::AccessType::OrSymbol,
               external_id: T.nilable(String),
+              external_user_details:
+                Anthropic::Beta::BetaUserProfileExternalUserDetailsParams,
               external_user_onboarded_at: Time,
               metadata: T::Hash[Symbol, String],
               name: T.nilable(String),

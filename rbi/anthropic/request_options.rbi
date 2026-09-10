@@ -17,8 +17,7 @@ module Anthropic
     def self.validate!(opts)
     end
 
-    # Idempotency key to send with request and all associated retries. Will only be
-    # sent for write requests.
+    # Deprecated: this option has no effect and will be removed in a future major version.
     sig { returns(T.nilable(String)) }
     attr_accessor :idempotency_key
 

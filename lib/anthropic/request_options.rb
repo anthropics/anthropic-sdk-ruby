@@ -26,8 +26,7 @@ module Anthropic
     end
 
     # @!attribute idempotency_key
-    #   Idempotency key to send with request and all associated retries. Will only be
-    #   sent for write requests.
+    #   Deprecated: this option has no effect and will be removed in a future major version.
     #
     #   @return [String, nil]
     optional :idempotency_key, String

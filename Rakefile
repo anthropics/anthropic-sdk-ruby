@@ -68,7 +68,9 @@ desc("Format `*.rb`")
 multitask(:"format:rb") do
   # while `syntax_tree` is much faster than `rubocop`, `rubocop` is the only formatter with full syntax support
   files = filtered["rb", %w[./lib ./test ./examples]]
-  fmt = xargs + %w[rubocop --fail-level F --autocorrect --format simple --]
+  # `--no-parallel`: `xargs` already runs several `rubocop` processes at once and each applies its corrections itself
+  # either way, so letting every one also fork a worker per CPU mainly makes peak memory grow with the core count
+  fmt = xargs + %w[rubocop --fail-level F --autocorrect --no-parallel --format simple --]
   sh("#{files.shelljoin} | #{norm_lines} | #{fmt.shelljoin}")
 end
 

@@ -15,6 +15,7 @@ module Anthropic
         TOO_MANY_REQUESTS = :too_many_requests
         MAX_USES_EXCEEDED = :max_uses_exceeded
         UNAVAILABLE = :unavailable
+        CONTENT_TOO_LARGE = :content_too_large
 
         # @!method self.values
         #   @return [Array<Symbol>]

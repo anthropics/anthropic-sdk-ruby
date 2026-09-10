@@ -1,0 +1,39 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_compliance_settings_state =
+          Anthropic::Beta::Organization::BetaComplianceSettingsStateEnabled
+          | Anthropic::Beta::Organization::BetaComplianceSettingsStateDisabled
+
+        module BetaComplianceSettingsState
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :enabled | :disabled
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            ENABLED: :enabled
+            DISABLED: :disabled
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaComplianceSettingsState::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::beta_compliance_settings_state]
+
+          def self.new:
+            (
+              type: :enabled | "enabled"
+            ) -> Anthropic::Beta::Organization::BetaComplianceSettingsStateEnabled
+            | (
+              type: :disabled | "disabled"
+            ) -> Anthropic::Beta::Organization::BetaComplianceSettingsStateDisabled
+            | (
+              type: Symbol | String
+            ) -> Anthropic::Models::Beta::Organization::beta_compliance_settings_state
+        end
+      end
+    end
+  end
+end

@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.70.0 (2026-09-10)
+
+Full Changelog: [v1.69.0...v1.70.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.69.0...v1.70.0)
+
+### Features
+
+* **api:** add auto mode tool permissions for Managed Agents ([701e04e](https://github.com/anthropics/anthropic-sdk-ruby/commit/701e04e901f83c69c16adb2e8a01a6131fa3cbae))
+* **api:** add content_too_large web_fetch tool error code ([549aa74](https://github.com/anthropics/anthropic-sdk-ruby/commit/549aa748e91d951a73fadd9df5292ed6552538b8))
+* **api:** add the user-profiles-2026-09-04 beta value and external_user_details to user profiles ([2fe372b](https://github.com/anthropics/anthropic-sdk-ruby/commit/2fe372b7c6595a1ab05729c03fb702aaa745285e))
+* **api:** support mounting public GitHub repositories without an authorization_token in Managed Agents sessions ([b139c7f](https://github.com/anthropics/anthropic-sdk-ruby/commit/b139c7fd4483c76fd6d4abcee38f8bdc6b840923))
+
+
+### Chores
+
+* **client:** clean up the unused idempotency request option ([ba199a6](https://github.com/anthropics/anthropic-sdk-ruby/commit/ba199a6ff19ef8accb0abccc021eca12a65ebb30))
+* **client:** keep the idempotency_key request option as a deprecated no-op ([#240](https://github.com/anthropics/anthropic-sdk-ruby/issues/240)) ([3d4ef46](https://github.com/anthropics/anthropic-sdk-ruby/commit/3d4ef46e2ce17cb5f56a522f928ccae526fce341))
+* **docs:** correct the environment scope field description ([26d3ca3](https://github.com/anthropics/anthropic-sdk-ruby/commit/26d3ca3d191d2beba46571c3eb979016b257ee6e))
+* **internal:** restore package version ([485111e](https://github.com/anthropics/anthropic-sdk-ruby/commit/485111e6bb59301dd53f7cfd55ec2d3c0add6509))
+* **internal:** run rubocop without per-CPU workers when formatting ([4ab6095](https://github.com/anthropics/anthropic-sdk-ruby/commit/4ab6095c81f5d1e53da4cbe799295fd094c4cdc2))
+* **internal:** stop stamping the package version into generated files ([d485203](https://github.com/anthropics/anthropic-sdk-ruby/commit/d4852032656ee4f3cf623274bbd55fe8b3b95514))
+
 ## 1.69.0 (2026-09-04)
 
 Full Changelog: [v1.68.0...v1.69.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.68.0...v1.69.0)

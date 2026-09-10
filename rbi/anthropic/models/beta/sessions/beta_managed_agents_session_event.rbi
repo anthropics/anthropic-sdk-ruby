@@ -311,6 +311,12 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::EvaluatedPermission::OrSymbol,
                   Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::EvaluatedPermission::OrSymbol
                 ),
+              evaluation:
+                T.any(
+                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAllow::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAsk::OrHash,
+                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAuto::OrHash
+                ),
               mcp_tool_use_id: String,
               from_session_thread_id: String,
               from_agent_name: T.nilable(String),
@@ -405,6 +411,10 @@ module Anthropic
             mcp_server_name: nil,
             # AgentEvaluatedPermission enum
             evaluated_permission: nil,
+            # Names the resolved permission_policy that produced evaluated_permission, and
+            # under auto carries the judgement. Open union: clients must tolerate unknown
+            # variants.
+            evaluation: nil,
             # The id of the `agent.mcp_tool_use` event this result corresponds to.
             mcp_tool_use_id: nil,
             # Public `sthr_` ID of the thread that sent the message.
