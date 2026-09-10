@@ -61,7 +61,7 @@ module Anthropic
         #
         #   @option args [Boolean] :enabled
         #
-        #   @option args [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy] :permission_policy Permission policy for tool execution.
+        #   @option args [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy, Anthropic::Models::Beta::BetaManagedAgentsAutoPolicy] :permission_policy Permission policy for tool execution.
         #
         #   @option args [Symbol, :bash, Symbol, :edit, Symbol, :read, Symbol, :write, Symbol, :glob, Symbol, :grep, Symbol, :web_fetch, Symbol, :web_search] :name
         #

@@ -50,7 +50,8 @@ module Anthropic
             T.nilable(
               T.any(
                 Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy,
-                Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+                Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy,
+                Anthropic::Beta::BetaManagedAgentsAutoPolicy
               )
             )
           )
@@ -98,7 +99,8 @@ module Anthropic
               T.nilable(
                 T.any(
                   Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy::OrHash
+                  Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy::OrHash,
+                  Anthropic::Beta::BetaManagedAgentsAutoPolicy::OrHash
                 )
               ),
             type:
@@ -143,7 +145,8 @@ module Anthropic
                 T.nilable(
                   T.any(
                     Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy,
-                    Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+                    Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy,
+                    Anthropic::Beta::BetaManagedAgentsAutoPolicy
                   )
                 ),
               type:
@@ -164,7 +167,8 @@ module Anthropic
             T.type_alias do
               T.any(
                 Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy,
-                Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
+                Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy,
+                Anthropic::Beta::BetaManagedAgentsAutoPolicy
               )
             end
 
@@ -188,6 +192,11 @@ module Anthropic
             ALWAYS_ASK =
               T.let(
                 :always_ask,
+                Anthropic::Beta::BetaManagedAgentsWebSearchToolConfigParams::PermissionPolicy::Type::TaggedSymbol
+              )
+            AUTO =
+              T.let(
+                :auto,
                 Anthropic::Beta::BetaManagedAgentsWebSearchToolConfigParams::PermissionPolicy::Type::TaggedSymbol
               )
 

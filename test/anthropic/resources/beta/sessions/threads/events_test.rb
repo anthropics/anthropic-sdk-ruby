@@ -113,6 +113,7 @@ class Anthropic::Test::Resources::Beta::Sessions::Threads::EventsTest < Anthropi
         name: String,
         processed_at: Time,
         evaluated_permission: Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::EvaluatedPermission | nil,
+        evaluation: Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluation | nil,
         session_thread_id: String | nil
       }
       in {
@@ -130,6 +131,7 @@ class Anthropic::Test::Resources::Beta::Sessions::Threads::EventsTest < Anthropi
         name: String,
         processed_at: Time,
         evaluated_permission: Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::EvaluatedPermission | nil,
+        evaluation: Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluation | nil,
         session_thread_id: String | nil
       }
       in {

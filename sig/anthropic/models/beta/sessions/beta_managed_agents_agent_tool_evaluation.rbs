@@ -1,0 +1,46 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_agent_tool_evaluation =
+          Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAllow
+          | Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAsk
+          | Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAuto
+
+        module BetaManagedAgentsAgentToolEvaluation
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :always_allow | :always_ask | :auto
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            ALWAYS_ALLOW: :always_allow
+            ALWAYS_ASK: :always_ask
+            AUTO: :auto
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluation::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_tool_evaluation]
+
+          def self.new:
+            (
+              type: :always_allow | "always_allow"
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAllow
+            | (
+              type: :always_ask | "always_ask"
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAsk
+            | (
+              type: :auto | "auto",
+              evaluated_permission: Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_auto_evaluated_permission
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAuto
+            | (
+              type: Symbol | String,
+              ?evaluated_permission: Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_auto_evaluated_permission
+            ) -> Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_tool_evaluation
+        end
+      end
+    end
+  end
+end

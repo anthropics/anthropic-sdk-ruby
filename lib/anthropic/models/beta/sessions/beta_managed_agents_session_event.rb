@@ -220,6 +220,8 @@ module Anthropic
           #
           #   @option args [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::EvaluatedPermission, Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::EvaluatedPermission] :evaluated_permission AgentEvaluatedPermission enum
           #
+          #   @option args [Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAllow, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAsk, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAuto] :evaluation Names the resolved permission_policy that produced evaluated_permission, and und
+          #
           #   @option args [String] :mcp_tool_use_id The id of the `agent.mcp_tool_use` event this result corresponds to.
           #
           #   @option args [String] :from_session_thread_id Public `sthr_` ID of the thread that sent the message.
