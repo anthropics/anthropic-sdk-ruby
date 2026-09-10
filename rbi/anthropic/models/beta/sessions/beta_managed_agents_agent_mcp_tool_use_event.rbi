@@ -58,30 +58,6 @@ module Anthropic
           end
           attr_writer :evaluated_permission
 
-          # Names the resolved permission_policy that produced evaluated_permission, and
-          # under auto carries the judgement. Open union: clients must tolerate unknown
-          # variants.
-          sig do
-            returns(
-              T.nilable(
-                Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluation::Variants
-              )
-            )
-          end
-          attr_reader :evaluation
-
-          sig do
-            params(
-              evaluation:
-                T.any(
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAllow::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAsk::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAuto::OrHash
-                )
-            ).void
-          end
-          attr_writer :evaluation
-
           # When set, this event was cross-posted from a subagent's thread to surface its
           # permission request on the primary thread's stream. Empty on the thread's own
           # events. Echo this on a `user.tool_confirmation` event to route the approval
@@ -101,12 +77,6 @@ module Anthropic
                 Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::Type::OrSymbol,
               evaluated_permission:
                 Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::EvaluatedPermission::OrSymbol,
-              evaluation:
-                T.any(
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAllow::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAsk::OrHash,
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAuto::OrHash
-                ),
               session_thread_id: T.nilable(String)
             ).returns(T.attached_class)
           end
@@ -124,10 +94,6 @@ module Anthropic
             type:,
             # AgentEvaluatedPermission enum
             evaluated_permission: nil,
-            # Names the resolved permission_policy that produced evaluated_permission, and
-            # under auto carries the judgement. Open union: clients must tolerate unknown
-            # variants.
-            evaluation: nil,
             # When set, this event was cross-posted from a subagent's thread to surface its
             # permission request on the primary thread's stream. Empty on the thread's own
             # events. Echo this on a `user.tool_confirmation` event to route the approval
@@ -148,8 +114,6 @@ module Anthropic
                   Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::Type::TaggedSymbol,
                 evaluated_permission:
                   Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::EvaluatedPermission::TaggedSymbol,
-                evaluation:
-                  Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluation::Variants,
                 session_thread_id: T.nilable(String)
               }
             )

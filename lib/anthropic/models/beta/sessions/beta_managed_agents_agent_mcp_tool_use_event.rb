@@ -47,14 +47,6 @@ module Anthropic
           optional :evaluated_permission,
                    enum: -> { Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::EvaluatedPermission }
 
-          # @!attribute evaluation
-          #   Names the resolved permission_policy that produced evaluated_permission, and
-          #   under auto carries the judgement. Open union: clients must tolerate unknown
-          #   variants.
-          #
-          #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAllow, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAsk, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAuto, nil]
-          optional :evaluation, union: -> { Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolEvaluation }
-
           # @!attribute session_thread_id
           #   When set, this event was cross-posted from a subagent's thread to surface its
           #   permission request on the primary thread's stream. Empty on the thread's own
@@ -64,7 +56,7 @@ module Anthropic
           #   @return [String, nil]
           optional :session_thread_id, String, nil?: true
 
-          # @!method initialize(id:, input:, mcp_server_name:, name:, processed_at:, type:, evaluated_permission: nil, evaluation: nil, session_thread_id: nil)
+          # @!method initialize(id:, input:, mcp_server_name:, name:, processed_at:, type:, evaluated_permission: nil, session_thread_id: nil)
           #   Event emitted when the agent invokes a tool provided by an MCP server.
           #
           #   Some parameter documentations has been truncated, see
@@ -84,8 +76,6 @@ module Anthropic
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::Type]
           #
           #   @param evaluated_permission [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::EvaluatedPermission] AgentEvaluatedPermission enum
-          #
-          #   @param evaluation [Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAllow, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAlwaysAsk, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolEvaluationAuto] Names the resolved permission_policy that produced evaluated_permission, and und
           #
           #   @param session_thread_id [String, nil] When set, this event was cross-posted from a subagent's thread to surface its pe
 

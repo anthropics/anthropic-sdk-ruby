@@ -109,8 +109,7 @@ module Anthropic
               T.nilable(
                 T.any(
                   Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsAutoPolicy::OrHash
+                  Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy::OrHash
                 )
               ),
             allowed_domains: T::Array[String],

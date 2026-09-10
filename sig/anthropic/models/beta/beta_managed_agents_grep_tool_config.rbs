@@ -37,19 +37,17 @@ module Anthropic
         type permission_policy =
           Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy
           | Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
-          | Anthropic::Beta::BetaManagedAgentsAutoPolicy
 
         module PermissionPolicy
           extend Anthropic::Internal::Type::Union
 
-          type type_ = :always_allow | :always_ask | :auto
+          type type_ = :always_allow | :always_ask
 
           module Type
             extend Anthropic::Internal::Type::Enum
 
             ALWAYS_ALLOW: :always_allow
             ALWAYS_ASK: :always_ask
-            AUTO: :auto
 
             def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfig::PermissionPolicy::type_]
           end
@@ -63,9 +61,6 @@ module Anthropic
             | (
               type: :always_ask | "always_ask"
             ) -> Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
-            | (
-              type: :auto | "auto"
-            ) -> Anthropic::Beta::BetaManagedAgentsAutoPolicy
             | (
               type: Symbol | String
             ) -> Anthropic::Models::Beta::BetaManagedAgentsGrepToolConfig::permission_policy

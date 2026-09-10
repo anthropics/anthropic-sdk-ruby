@@ -30,8 +30,7 @@ module Anthropic
             T.nilable(
               T.any(
                 Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy,
-                Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy,
-                Anthropic::Beta::BetaManagedAgentsAutoPolicy
+                Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
               )
             )
           )
@@ -63,8 +62,7 @@ module Anthropic
               T.nilable(
                 T.any(
                   Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsAutoPolicy::OrHash
+                  Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy::OrHash
                 )
               ),
             type:
@@ -93,8 +91,7 @@ module Anthropic
                 T.nilable(
                   T.any(
                     Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy,
-                    Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy,
-                    Anthropic::Beta::BetaManagedAgentsAutoPolicy
+                    Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
                   )
                 ),
               type:
@@ -113,8 +110,7 @@ module Anthropic
             T.type_alias do
               T.any(
                 Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy,
-                Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy,
-                Anthropic::Beta::BetaManagedAgentsAutoPolicy
+                Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
               )
             end
 
@@ -138,11 +134,6 @@ module Anthropic
             ALWAYS_ASK =
               T.let(
                 :always_ask,
-                Anthropic::Beta::BetaManagedAgentsGlobToolConfigParams::PermissionPolicy::Type::TaggedSymbol
-              )
-            AUTO =
-              T.let(
-                :auto,
                 Anthropic::Beta::BetaManagedAgentsGlobToolConfigParams::PermissionPolicy::Type::TaggedSymbol
               )
 

@@ -187,7 +187,6 @@ module Anthropic
               name: String,
               processed_at: Time,
               ?evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission,
-              ?evaluation: Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_tool_evaluation,
               ?session_thread_id: String?
             ) -> Anthropic::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent
             | (
@@ -205,7 +204,6 @@ module Anthropic
               name: String,
               processed_at: Time,
               ?evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::evaluated_permission,
-              ?evaluation: Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_tool_evaluation,
               ?session_thread_id: String?
             ) -> Anthropic::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent
             | (
@@ -427,7 +425,6 @@ module Anthropic
               ?mcp_server_name: String,
               ?evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMCPToolUseEvent::evaluated_permission
               | Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::evaluated_permission,
-              ?evaluation: Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_tool_evaluation,
               ?mcp_tool_use_id: String,
               ?from_session_thread_id: String,
               ?from_agent_name: String?,

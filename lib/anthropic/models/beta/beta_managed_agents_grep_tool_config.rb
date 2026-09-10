@@ -17,7 +17,7 @@ module Anthropic
         # @!attribute permission_policy
         #   Permission policy for tool execution.
         #
-        #   @return [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy, Anthropic::Models::Beta::BetaManagedAgentsAutoPolicy]
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy]
         required :permission_policy,
                  union: -> { Anthropic::Beta::BetaManagedAgentsGrepToolConfig::PermissionPolicy }
 
@@ -31,7 +31,7 @@ module Anthropic
         #
         #   @param enabled [Boolean]
         #
-        #   @param permission_policy [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy, Anthropic::Models::Beta::BetaManagedAgentsAutoPolicy] Permission policy for tool execution.
+        #   @param permission_policy [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy] Permission policy for tool execution.
         #
         #   @param name [Symbol, :grep]
         #
@@ -51,22 +51,18 @@ module Anthropic
           # Tool calls require user confirmation before execution.
           variant :always_ask, -> { Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy }
 
-          # The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
-          variant :auto, -> { Anthropic::Beta::BetaManagedAgentsAutoPolicy }
-
           module Type
             extend Anthropic::Internal::Type::Enum
 
             ALWAYS_ALLOW = :always_allow
             ALWAYS_ASK = :always_ask
-            AUTO = :auto
 
             # @!method self.values
             #   @return [Array<Symbol>]
           end
 
           # @!method self.variants
-          #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy, Anthropic::Models::Beta::BetaManagedAgentsAutoPolicy)]
+          #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy)]
 
           # Creates a new instance of the variant class whose `type` matches the given
           # value, passing the remaining arguments to its constructor.
@@ -76,15 +72,13 @@ module Anthropic
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
           #
           # @raise [ArgumentError]
-          # @return [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy, Anthropic::Models::Beta::BetaManagedAgentsAutoPolicy]
+          # @return [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy]
           def self.new(type:, **args)
             case type.to_sym
             when :always_allow
               Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy.new(**args)
             when :always_ask
               Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy.new(**args)
-            when :auto
-              Anthropic::Beta::BetaManagedAgentsAutoPolicy.new(**args)
             else
               raise ArgumentError, "unknown type: #{type}"
             end

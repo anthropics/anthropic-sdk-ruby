@@ -38,8 +38,7 @@ module Anthropic
             permission_policy:
               T.any(
                 Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy::OrHash,
-                Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy::OrHash,
-                Anthropic::Beta::BetaManagedAgentsAutoPolicy::OrHash
+                Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy::OrHash
               ),
             name: Symbol,
             type: Symbol
@@ -76,8 +75,7 @@ module Anthropic
             T.type_alias do
               T.any(
                 Anthropic::Beta::BetaManagedAgentsAlwaysAllowPolicy,
-                Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy,
-                Anthropic::Beta::BetaManagedAgentsAutoPolicy
+                Anthropic::Beta::BetaManagedAgentsAlwaysAskPolicy
               )
             end
 
@@ -101,11 +99,6 @@ module Anthropic
             ALWAYS_ASK =
               T.let(
                 :always_ask,
-                Anthropic::Beta::BetaManagedAgentsGrepToolConfig::PermissionPolicy::Type::TaggedSymbol
-              )
-            AUTO =
-              T.let(
-                :auto,
                 Anthropic::Beta::BetaManagedAgentsGrepToolConfig::PermissionPolicy::Type::TaggedSymbol
               )
 

@@ -65,7 +65,7 @@ module Anthropic
         #
         #   @option args [Boolean, nil] :enabled Whether this tool is enabled and available to Claude. Overrides the default_conf
         #
-        #   @option args [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy, Anthropic::Models::Beta::BetaManagedAgentsAutoPolicy, nil] :permission_policy Permission policy for tool execution.
+        #   @option args [Anthropic::Models::Beta::BetaManagedAgentsAlwaysAllowPolicy, Anthropic::Models::Beta::BetaManagedAgentsAlwaysAskPolicy, nil] :permission_policy Permission policy for tool execution.
         #
         #   @option args [Symbol, :bash, Symbol, :edit, Symbol, :read, Symbol, :write, Symbol, :glob, Symbol, :grep, Symbol, :web_fetch, Symbol, :web_search] :name Must be "bash".
         #

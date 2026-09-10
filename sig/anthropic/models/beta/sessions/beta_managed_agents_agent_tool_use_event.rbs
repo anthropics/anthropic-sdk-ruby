@@ -10,7 +10,6 @@ module Anthropic
             processed_at: Time,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::type_,
             evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::evaluated_permission,
-            evaluation: Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_tool_evaluation,
             session_thread_id: String?
           }
 
@@ -31,12 +30,6 @@ module Anthropic
             Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::evaluated_permission
           ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::evaluated_permission
 
-          attr_reader evaluation: Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_tool_evaluation?
-
-          def evaluation=: (
-            Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_tool_evaluation
-          ) -> Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_tool_evaluation
-
           attr_accessor session_thread_id: String?
 
           def initialize: (
@@ -46,7 +39,6 @@ module Anthropic
             processed_at: Time,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::type_,
             ?evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::evaluated_permission,
-            ?evaluation: Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_tool_evaluation,
             ?session_thread_id: String?
           ) -> void
 
@@ -57,7 +49,6 @@ module Anthropic
             processed_at: Time,
             type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::type_,
             evaluated_permission: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentToolUseEvent::evaluated_permission,
-            evaluation: Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_tool_evaluation,
             session_thread_id: String?
           }
 
