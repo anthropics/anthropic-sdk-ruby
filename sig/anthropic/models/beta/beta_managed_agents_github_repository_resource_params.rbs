@@ -5,36 +5,38 @@ module Anthropic
     module Beta
       type beta_managed_agents_github_repository_resource_params =
         {
-          authorization_token: String,
           type: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::type_,
           url: String,
+          authorization_token: String,
           checkout: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::checkout?,
           mount_path: String?
         }
 
       class BetaManagedAgentsGitHubRepositoryResourceParams < Anthropic::Internal::Type::BaseModel
-        attr_accessor authorization_token: String
-
         attr_accessor type: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::type_
 
         attr_accessor url: String
+
+        attr_reader authorization_token: String?
+
+        def authorization_token=: (String) -> String
 
         attr_accessor checkout: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::checkout?
 
         attr_accessor mount_path: String?
 
         def initialize: (
-          authorization_token: String,
           type: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::type_,
           url: String,
+          ?authorization_token: String,
           ?checkout: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::checkout?,
           ?mount_path: String?
         ) -> void
 
         def to_hash: -> {
-          authorization_token: String,
           type: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::type_,
           url: String,
+          authorization_token: String,
           checkout: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::checkout?,
           mount_path: String?
         }

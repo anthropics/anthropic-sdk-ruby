@@ -4,12 +4,6 @@ module Anthropic
   module Models
     module Beta
       class BetaManagedAgentsGitHubRepositoryResourceParams < Anthropic::Internal::Type::BaseModel
-        # @!attribute authorization_token
-        #   GitHub authorization token used to clone the repository.
-        #
-        #   @return [String]
-        required :authorization_token, String
-
         # @!attribute type
         #
         #   @return [Symbol, Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::Type]
@@ -20,6 +14,13 @@ module Anthropic
         #
         #   @return [String]
         required :url, String
+
+        # @!attribute authorization_token
+        #   GitHub authorization token used to clone the repository. Required for private
+        #   repositories; optional for public ones.
+        #
+        #   @return [String, nil]
+        optional :authorization_token, String
 
         # @!attribute checkout
         #   Branch or commit to check out. Defaults to the repository's default branch.
@@ -35,14 +36,18 @@ module Anthropic
         #   @return [String, nil]
         optional :mount_path, String, nil?: true
 
-        # @!method initialize(authorization_token:, type:, url:, checkout: nil, mount_path: nil)
+        # @!method initialize(type:, url:, authorization_token: nil, checkout: nil, mount_path: nil)
         #   Mount a GitHub repository into the session's container.
         #
-        #   @param authorization_token [String] GitHub authorization token used to clone the repository.
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams} for
+        #   more details.
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::Type]
         #
         #   @param url [String] Github URL of the repository
+        #
+        #   @param authorization_token [String] GitHub authorization token used to clone the repository. Required for private re
         #
         #   @param checkout [Anthropic::Models::Beta::BetaManagedAgentsBranchCheckout, Anthropic::Models::Beta::BetaManagedAgentsCommitCheckout, nil] Branch or commit to check out. Defaults to the repository's default branch.
         #
