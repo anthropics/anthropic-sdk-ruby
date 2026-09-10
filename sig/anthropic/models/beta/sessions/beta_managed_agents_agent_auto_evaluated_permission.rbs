@@ -1,0 +1,47 @@
+module Anthropic
+  module Models
+    module Beta
+      module Sessions
+        type beta_managed_agents_agent_auto_evaluated_permission =
+          Anthropic::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionAllow
+          | Anthropic::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionAsk
+          | Anthropic::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionDeny
+
+        module BetaManagedAgentsAgentAutoEvaluatedPermission
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :allow | :ask | :deny
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            ALLOW: :allow
+            ASK: :ask
+            DENY: :deny
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermission::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_auto_evaluated_permission]
+
+          def self.new:
+            (
+              type: :allow | "allow"
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionAllow
+            | (
+              type: :ask | "ask",
+              reason_code: String
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionAsk
+            | (
+              type: :deny | "deny",
+              reason_code: String
+            ) -> Anthropic::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermissionDeny
+            | (
+              type: Symbol | String,
+              ?reason_code: String
+            ) -> Anthropic::Models::Beta::Sessions::beta_managed_agents_agent_auto_evaluated_permission
+        end
+      end
+    end
+  end
+end
