@@ -19,8 +19,11 @@ module Anthropic
 
         def self.connect: (
           cert_store: OpenSSL::X509::Store,
-          url: URI::Generic
+          url: URI::Generic,
+          ?proxy: URI::Generic?
         ) -> top
+
+        def self.parse_proxy: ((String | URI::Generic)? proxy) -> URI::Generic?
 
         def self.calibrate_socket_timeout: (top conn, Float deadline) -> void
 
@@ -41,7 +44,12 @@ module Anthropic
           Anthropic::Internal::Transport::PooledNetRequester::request request
         ) -> [Integer, top, Enumerable[String]]
 
-        def initialize: (?size: Integer) -> void
+        def initialize: (
+          ?size: Integer,
+          ?proxy: (String | URI::Generic)?
+        ) -> void
+
+        def inspect: -> String
       end
     end
   end

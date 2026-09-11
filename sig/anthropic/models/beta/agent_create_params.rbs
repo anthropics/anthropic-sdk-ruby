@@ -94,8 +94,8 @@ module Anthropic
         }
 
         type model =
-          Anthropic::Models::Beta::beta_managed_agents_model
-          | Anthropic::Beta::BetaManagedAgentsModelConfigParams
+          Anthropic::Beta::BetaManagedAgentsModelConfigParams
+          | Anthropic::Models::Beta::beta_managed_agents_model
 
         module Model
           extend Anthropic::Internal::Type::Union

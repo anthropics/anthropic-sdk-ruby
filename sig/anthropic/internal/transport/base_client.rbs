@@ -87,6 +87,7 @@ module Anthropic
 
         def initialize: (
           base_url: String,
+          ?proxy: (String | URI::Generic)?,
           ?timeout: Float,
           ?max_retries: Integer,
           ?initial_retry_delay: Float,

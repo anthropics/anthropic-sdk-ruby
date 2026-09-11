@@ -12,9 +12,9 @@ module Anthropic
           params(
             model:
               T.any(
+                Anthropic::Beta::BetaManagedAgentsModelConfigParams::OrHash,
                 Anthropic::Beta::BetaManagedAgentsModel::OrSymbol,
-                String,
-                Anthropic::Beta::BetaManagedAgentsModelConfigParams::OrHash
+                String
               ),
             name: String,
             description: T.nilable(String),
@@ -133,9 +133,9 @@ module Anthropic
             metadata: T.nilable(T::Hash[Symbol, T.nilable(String)]),
             model:
               T.any(
+                Anthropic::Beta::BetaManagedAgentsModelConfigParams::OrHash,
                 Anthropic::Beta::BetaManagedAgentsModel::OrSymbol,
-                String,
-                Anthropic::Beta::BetaManagedAgentsModelConfigParams::OrHash
+                String
               ),
             multiagent:
               T.nilable(

@@ -171,12 +171,15 @@ module Anthropic
           end
 
           exactness = state.fetch(:exactness)
+          error = state[:error]
 
           alternatives = []
           known_variants.each do |_, variant_fn|
             target = variant_fn.call
             exact = state[:exactness] = {yes: 0, no: 0, maybe: 0}
             state[:branched] += 1
+            # a variant that was tried and passed over must not leave its error behind
+            state[:error] = error
 
             coerced = Anthropic::Internal::Type::Converter.coerce(target, value, state: state)
             yes, no, maybe = exact.values
@@ -185,7 +188,7 @@ module Anthropic
               state[:exactness] = exactness
               return coerced
             elsif maybe.positive?
-              alternatives << [[-yes, -maybe, no], exact, coerced]
+              alternatives << [[-yes, -maybe, no], exact, coerced, state[:error]]
             end
           end
 
@@ -194,8 +197,9 @@ module Anthropic
             exactness[:no] += 1
             state[:error] = ArgumentError.new("no matching variant for #{value.inspect}")
             value
-          in [[_, exact, coerced], *]
+          in [[_, exact, coerced, error], *]
             exact.each { exactness[_1] += _2 }
+            state[:error] = error
             coerced
           end
             .tap { state[:exactness] = exactness }

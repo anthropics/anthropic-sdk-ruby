@@ -50,9 +50,9 @@ module Anthropic
           returns(
             T.nilable(
               T.any(
+                Anthropic::Beta::BetaManagedAgentsModelConfigParams,
                 Anthropic::Beta::BetaManagedAgentsModel::OrSymbol,
-                String,
-                Anthropic::Beta::BetaManagedAgentsModelConfigParams
+                String
               )
             )
           )
@@ -63,9 +63,9 @@ module Anthropic
           params(
             model:
               T.any(
+                Anthropic::Beta::BetaManagedAgentsModelConfigParams::OrHash,
                 Anthropic::Beta::BetaManagedAgentsModel::OrSymbol,
-                String,
-                Anthropic::Beta::BetaManagedAgentsModelConfigParams::OrHash
+                String
               )
           ).void
         end
@@ -178,9 +178,9 @@ module Anthropic
             metadata: T.nilable(T::Hash[Symbol, T.nilable(String)]),
             model:
               T.any(
+                Anthropic::Beta::BetaManagedAgentsModelConfigParams::OrHash,
                 Anthropic::Beta::BetaManagedAgentsModel::OrSymbol,
-                String,
-                Anthropic::Beta::BetaManagedAgentsModelConfigParams::OrHash
+                String
               ),
             multiagent:
               T.nilable(
@@ -269,9 +269,9 @@ module Anthropic
               metadata: T.nilable(T::Hash[Symbol, T.nilable(String)]),
               model:
                 T.any(
+                  Anthropic::Beta::BetaManagedAgentsModelConfigParams,
                   Anthropic::Beta::BetaManagedAgentsModel::OrSymbol,
-                  String,
-                  Anthropic::Beta::BetaManagedAgentsModelConfigParams
+                  String
                 ),
               multiagent:
                 T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagentParams),
@@ -317,8 +317,8 @@ module Anthropic
           Variants =
             T.type_alias do
               T.any(
-                Anthropic::Beta::BetaManagedAgentsModel::Variants,
-                Anthropic::Beta::BetaManagedAgentsModelConfigParams
+                Anthropic::Beta::BetaManagedAgentsModelConfigParams,
+                Anthropic::Beta::BetaManagedAgentsModel::Variants
               )
             end
 

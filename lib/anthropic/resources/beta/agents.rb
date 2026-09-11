@@ -14,7 +14,7 @@ module Anthropic
         #
         # @overload create(model:, name:, description: nil, mcp_servers: nil, metadata: nil, multiagent: nil, skills: nil, system_: nil, tools: nil, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param model [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams] Body param: Model identifier. Accepts the [model string](https://platform.claude
+        # @param model [Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] Body param: Model identifier. Accepts the [model string](https://platform.claude
         #
         # @param name [String] Body param: Human-readable name for the agent.
         #
@@ -106,7 +106,7 @@ module Anthropic
         #
         # @param metadata [Hash{Symbol=>String, nil}, nil] Body param: Metadata patch. Set a key to a string to upsert it, or to null to de
         #
-        # @param model [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams] Body param: Model identifier. Accepts the [model string](https://platform.claude
+        # @param model [Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] Body param: Model identifier. Accepts the [model string](https://platform.claude
         #
         # @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] Body param: A coordinator topology: the session's primary thread orchestrates wo
         #

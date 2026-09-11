@@ -47,7 +47,7 @@ module Anthropic
         #   e.g. `claude-opus-5`, or a `model_config` object for additional configuration
         #   control. Omit to preserve. Cannot be cleared.
         #
-        #   @return [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, nil]
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, nil]
         optional :model, union: -> { Anthropic::Beta::AgentUpdateParams::Model }
 
         # @!attribute multiagent
@@ -121,7 +121,7 @@ module Anthropic
         #
         #   @param metadata [Hash{Symbol=>String, nil}, nil] Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omi
         #
-        #   @param model [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams] Model identifier. Accepts the [model string](https://platform.claude.com/docs/en
+        #   @param model [Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] Model identifier. Accepts the [model string](https://platform.claude.com/docs/en
         #
         #   @param multiagent [Anthropic::Models::Beta::BetaManagedAgentsMultiagentParams, nil] A coordinator topology: the session's primary thread orchestrates work by spawni
         #
@@ -148,16 +148,16 @@ module Anthropic
         module Model
           extend Anthropic::Internal::Type::Union
 
+          # An object that defines additional configuration control over model use
+          variant -> { Anthropic::Beta::BetaManagedAgentsModelConfigParams }
+
           # The model that will power your agent.
           #
           # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
           variant union: -> { Anthropic::Beta::BetaManagedAgentsModel }
 
-          # An object that defines additional configuration control over model use
-          variant -> { Anthropic::Beta::BetaManagedAgentsModelConfigParams }
-
           # @!method self.variants
-          #   @return [Array(Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams)]
+          #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel)]
         end
 
         # Union type for tool configurations in the tools array.

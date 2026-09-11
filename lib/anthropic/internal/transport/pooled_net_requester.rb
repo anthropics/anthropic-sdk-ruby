@@ -18,9 +18,10 @@ module Anthropic
           #
           # @param cert_store [OpenSSL::X509::Store]
           # @param url [URI::Generic]
+          # @param proxy [URI::Generic, nil]
           #
           # @return [Net::HTTP]
-          def connect(cert_store:, url:)
+          def connect(cert_store:, url:, proxy: nil)
             port =
               case [url.port, url.scheme]
               in [Integer, _]
@@ -31,12 +32,59 @@ module Anthropic
                 Net::HTTP.https_default_port
               end
 
-            Net::HTTP.new(url.host, port).tap do
+            conn =
+              if proxy.nil?
+                # `net/http` falls back to the `http_proxy`/`https_proxy`/`no_proxy` environment variables.
+                Net::HTTP.new(url.host, port)
+              else
+                # `https://` targets are tunnelled through the proxy with CONNECT by `net/http` itself.
+                Net::HTTP.new(
+                  url.host,
+                  port,
+                  proxy.hostname,
+                  proxy.port,
+                  proxy.user&.then { CGI.unescape(_1) },
+                  proxy.password&.then { CGI.unescape(_1) }
+                )
+              end
+
+            conn.tap do
               _1.use_ssl = %w[https wss].include?(url.scheme)
               _1.max_retries = 0
 
               (_1.cert_store = cert_store) if _1.use_ssl?
             end
+          end
+
+          # @api private
+          #
+          # @param proxy [String, URI::Generic, nil]
+          #
+          # @raise [ArgumentError]
+          # @return [URI::Generic, nil]
+          def parse_proxy(proxy)
+            return nil if proxy.nil?
+
+            parsed =
+              case proxy
+              in URI::Generic
+                proxy
+              in String
+                begin
+                  URI(proxy)
+                rescue URI::InvalidURIError
+                  nil
+                end
+              else
+                nil
+              end
+
+            # The offending value is deliberately left out of the message since proxy URLs often embed credentials.
+            if parsed.nil? || parsed.scheme&.downcase != "http" || parsed.host.to_s.empty?
+              raise ArgumentError.new("Expected proxy to be an http:// URL with a host, for example http://proxy.example.com:8080")
+            end
+
+            parsed
           end
 
           # @api private
@@ -105,7 +153,7 @@ module Anthropic
           pool =
             @mutex.synchronize do
               @pools[origin] ||= ConnectionPool.new(size: @size) do
-                self.class.connect(cert_store: @cert_store, url: url)
+                self.class.connect(cert_store: @cert_store, url: url, proxy: @proxy)
               end
             end
 
@@ -194,11 +242,22 @@ module Anthropic
         # @api private
         #
         # @param size [Integer]
-        def initialize(size: self.class::DEFAULT_MAX_CONNECTIONS)
+        # @param proxy [String, URI::Generic, nil]
+        def initialize(size: self.class::DEFAULT_MAX_CONNECTIONS, proxy: nil)
           @mutex = Mutex.new
           @size = size
+          @proxy = self.class.parse_proxy(proxy)
           @cert_store = OpenSSL::X509::Store.new.tap(&:set_default_paths)
           @pools = {}
+        end
+
+        # @api private
+        #
+        # @return [String]
+        def inspect
+          # Proxy URLs often embed credentials, so never surface the password.
+          proxy = @proxy&.then { _1.password.nil? ? _1 : _1.dup.tap { |uri| uri.password = "REDACTED" } }
+          "#<#{self.class.name}:0x#{object_id.to_s(16)} size=#{@size} proxy=#{proxy.inspect}>"
         end
 
         define_sorbet_constant!(:Request) do

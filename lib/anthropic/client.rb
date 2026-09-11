@@ -173,6 +173,10 @@ module Anthropic
     #   +"https://api.example.com/v2/"+. Defaults to +ENV["ANTHROPIC_BASE_URL"]+,
     #   then to the profile's +base_url+ if present, then to +https://api.anthropic.com+.
     #
+    # @param proxy [String, URI::Generic, nil] HTTP proxy URL, e.g., `"http://user:pass@proxy.example.com:8080"`. When `nil`,
+    # `net/http` reads the `http_proxy`, `https_proxy`, and `no_proxy` environment
+    # variables.
+    #
     # @param max_retries [Integer] Max number of retries to attempt after a failed retryable request.
     #
     # @param timeout [Float]
@@ -191,6 +195,7 @@ module Anthropic
       credentials: nil,
       config: nil,
       base_url: nil,
+      proxy: nil,
       max_retries: self.class::DEFAULT_MAX_RETRIES,
       timeout: self.class::DEFAULT_TIMEOUT_IN_SECONDS,
       initial_retry_delay: self.class::DEFAULT_INITIAL_RETRY_DELAY,
@@ -279,6 +284,7 @@ module Anthropic
 
       super(
         base_url: base_url,
+        proxy: proxy,
         timeout: timeout,
         max_retries: max_retries,
         initial_retry_delay: initial_retry_delay,

@@ -27,11 +27,22 @@ module Anthropic
         class << self
           # @api private
           sig do
-            params(cert_store: OpenSSL::X509::Store, url: URI::Generic).returns(
-              Net::HTTP
+            params(
+              cert_store: OpenSSL::X509::Store,
+              url: URI::Generic,
+              proxy: T.nilable(URI::Generic)
+            ).returns(Net::HTTP)
+          end
+          def connect(cert_store:, url:, proxy: nil)
+          end
+
+          # @api private
+          sig do
+            params(proxy: T.nilable(T.any(String, URI::Generic))).returns(
+              T.nilable(URI::Generic)
             )
           end
-          def connect(cert_store:, url:)
+          def parse_proxy(proxy)
           end
 
           # @api private
@@ -72,10 +83,21 @@ module Anthropic
         end
 
         # @api private
-        sig { params(size: Integer).returns(T.attached_class) }
+        sig do
+          params(
+            size: Integer,
+            proxy: T.nilable(T.any(String, URI::Generic))
+          ).returns(T.attached_class)
+        end
         def self.new(
-          size: Anthropic::Internal::Transport::PooledNetRequester::DEFAULT_MAX_CONNECTIONS
+          size: Anthropic::Internal::Transport::PooledNetRequester::DEFAULT_MAX_CONNECTIONS,
+          proxy: nil
         )
+        end
+
+        # @api private
+        sig { returns(String) }
+        def inspect
         end
       end
     end
