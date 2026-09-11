@@ -183,7 +183,16 @@ class Anthropic::Test::UtilUriHandlingTest < Minitest::Test
       "a=1&a=2&b=3" => {"a" => %w[1 2], "b" => ["3"]},
       "e=" => {"e" => [""]},
       "q=hello+world" => {"q" => ["hello world"]},
-      "q=a%2Fb" => {"q" => ["a/b"]}
+      "q=a%2Fb" => {"q" => ["a/b"]},
+      # URI.decode_www_form, not CGI.parse: a bare key is [""] rather than [],
+      # `;` is data not a separator, empty `&` pairs are kept, and a non-UTF-8
+      # percent-escape becomes U+FFFD.
+      "a" => {"a" => [""]},
+      "a&b=1" => {"a" => [""], "b" => ["1"]},
+      "a=1;b=2" => {"a" => ["1;b=2"]},
+      "a=1&&b=2" => {"a" => ["1"], "" => [""], "b" => ["2"]},
+      "&a=1" => {"" => [""], "a" => ["1"]},
+      "q=%E9" => {"q" => ["\uFFFD"]}
     }
     cases.each do |query, expected|
       assert_equal(expected, Anthropic::Internal::Util.decode_query(query))
@@ -308,55 +317,25 @@ class Anthropic::Test::RegexMatchTest < Minitest::Test
 end
 
 class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
-  # Minimal multipart reader so these tests do not depend on the `cgi` gem.
-  class ParsedMultipart
-    Part = Struct.new(:name, :filename, :body) do
-      def original_filename = filename.to_s
-      alias_method :read, :body
-    end
-
+  class FakeCGI < CGI
     def initialize(headers, io)
-      @parts = parse(headers.fetch("content-type"), io.to_a.join)
+      encoded = io.to_a
+      @ctype = headers["content-type"]
+      # rubocop:disable Lint/EmptyBlock
+      @io = Anthropic::Internal::Util::ReadIOAdapter.new(encoded.to_enum) {}
+      # rubocop:enable Lint/EmptyBlock
+      @c_len = encoded.join.bytesize.to_s
+      super()
     end
 
-    def [](key)
-      key = key.to_s
-      part = @parts.find { _1.name == key }
-      return unless part
+    def stdinput = @io
 
-      if !part.filename.nil? || key.empty?
-        part
-      else
-        part.body
-      end
-    end
-
-    private
-
-    def parse(content_type, body)
-      boundary = content_type[/\bboundary=(.+)\z/, 1]
-      chunks = body.split("--#{boundary}")
-      chunks.shift
-      chunks.pop if chunks.last&.start_with?("--")
-
-      chunks.filter_map do |chunk|
-        next if chunk.empty?
-
-        raw = chunk.delete_prefix("\r\n")
-        head, content = raw.split("\r\n\r\n", 2)
-        disposition = head.to_s[/^Content-Disposition:\s*(.*)$/i, 1].to_s
-        Part.new(
-          quoted_attr(disposition, "name") || "",
-          quoted_attr(disposition, "filename"),
-          content.to_s.delete_suffix("\r\n")
-        )
-      end
-    end
-
-    def quoted_attr(disposition, attr)
-      return unless (m = /(?:\A|;)\s*#{Regexp.escape(attr)}="((?:\\.|[^"])*)"/.match(disposition))
-
-      m[1].gsub(/\\(.)/, '\1')
+    def env_table
+      {
+        "REQUEST_METHOD" => "POST",
+        "CONTENT_TYPE" => @ctype,
+        "CONTENT_LENGTH" => @c_len
+      }
     end
   end
 
@@ -394,8 +373,8 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
     cases.each do |body, testcase|
       filename, val = testcase
       encoded = Anthropic::Internal::Util.encode_content(headers, body)
-      form = ParsedMultipart.new(*encoded)
-      io = form[""]
+      cgi = FakeCGI.new(*encoded)
+      io = cgi[""]
       assert_pattern do
         io.original_filename => ^filename
         io.read => ^val
@@ -431,11 +410,11 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
     }
     cases.each do |body, testcase|
       encoded = Anthropic::Internal::Util.encode_content(headers, body)
-      form = ParsedMultipart.new(*encoded)
+      cgi = FakeCGI.new(*encoded)
       testcase.each do |key, val|
         assert_pattern do
           parsed =
-            case (p = form[key])
+            case (p = cgi[key])
             in StringIO
               p.read
             else
