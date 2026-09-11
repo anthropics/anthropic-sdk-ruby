@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "cgi"
+
 require_relative "../test_helper"
 
 class Anthropic::Test::UtilDataHandlingTest < Minitest::Test
@@ -175,6 +177,30 @@ class Anthropic::Test::UtilQueryParamsTest < Minitest::Test
 end
 
 class Anthropic::Test::UtilUriHandlingTest < Minitest::Test
+  def test_decode_query
+    cases = {
+      nil => {},
+      "" => {},
+      "a=1" => {"a" => ["1"]},
+      "a=1&a=2&b=3" => {"a" => %w[1 2], "b" => ["3"]},
+      "e=" => {"e" => [""]},
+      "q=hello+world" => {"q" => ["hello world"]},
+      "q=a%2Fb" => {"q" => ["a/b"]},
+      # URI.decode_www_form, not CGI.parse: a bare key is [""] rather than [],
+      # `;` is data not a separator, empty `&` pairs are kept, and a non-UTF-8
+      # percent-escape becomes U+FFFD.
+      "a" => {"a" => [""]},
+      "a&b=1" => {"a" => [""], "b" => ["1"]},
+      "a=1;b=2" => {"a" => ["1;b=2"]},
+      "a=1&&b=2" => {"a" => ["1"], "" => [""], "b" => ["2"]},
+      "&a=1" => {"" => [""], "a" => ["1"]},
+      "q=%E9" => {"q" => ["\uFFFD"]}
+    }
+    cases.each do |query, expected|
+      assert_equal(expected, Anthropic::Internal::Util.decode_query(query))
+    end
+  end
+
   def test_parsing
     %w[
       http://example.com
@@ -341,7 +367,10 @@ class Anthropic::Test::UtilFormDataEncodingTest < Minitest::Test
       Anthropic::FilePart.new(file, filename: "d o g") => ["d o g", /^class Anthropic/],
       # ...and an explicit path-qualified name survives intact (Skills API needs
       # `<dir>/SKILL.md`); it is neither basenamed nor percent-encoded to `%2F`.
-      Anthropic::FilePart.new(file, filename: "my-skill/SKILL.md") => ["my-skill/SKILL.md", /^class Anthropic/]
+      Anthropic::FilePart.new(
+        file,
+        filename: "my-skill/SKILL.md"
+      ) => ["my-skill/SKILL.md", /^class Anthropic/]
     }
     cases.each do |body, testcase|
       filename, val = testcase

@@ -318,7 +318,9 @@ module Anthropic
         #
         # @return [Hash{String=>Array<String>}]
         def decode_query(query)
-          CGI.parse(query.to_s)
+          URI.decode_www_form(query.to_s).each_with_object({}) do |(key, value), out|
+            (out[key] ||= []) << value
+          end
         end
 
         # @api private
