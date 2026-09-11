@@ -20,7 +20,6 @@ module Anthropic
         required :type, const: :web_fetch_tool_result
 
         # @!attribute caller_
-        #   Tool invocation directly from the model.
         #
         #   @return [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120, nil]
         optional :caller_,
@@ -31,11 +30,8 @@ module Anthropic
 
         # @!method initialize(content:, tool_use_id:, caller_: nil, type: :web_fetch_tool_result)
         #   @param content [Anthropic::Models::Beta::BetaWebFetchToolResultErrorBlock, Anthropic::Models::Beta::BetaWebFetchBlock]
-        #
         #   @param tool_use_id [String]
-        #
-        #   @param caller_ [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120] Tool invocation directly from the model.
-        #
+        #   @param caller_ [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120]
         #   @param type [Symbol, :web_fetch_tool_result]
 
         # @see Anthropic::Models::Beta::BetaWebFetchToolResultBlock#content
@@ -50,8 +46,6 @@ module Anthropic
           #   @return [Array(Anthropic::Models::Beta::BetaWebFetchToolResultErrorBlock, Anthropic::Models::Beta::BetaWebFetchBlock)]
         end
 
-        # Tool invocation directly from the model.
-        #
         # @see Anthropic::Models::Beta::BetaWebFetchToolResultBlock#caller_
         module Caller
           extend Anthropic::Internal::Type::Union

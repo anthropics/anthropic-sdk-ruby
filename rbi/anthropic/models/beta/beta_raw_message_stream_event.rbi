@@ -167,7 +167,6 @@ module Anthropic
           # which case it holds the serving model's entries and replaces the one in
           # `message_start`.
           input_transformations: nil,
-          # Response model for a file uploaded to the container.
           content_block: nil,
           index: nil
         )

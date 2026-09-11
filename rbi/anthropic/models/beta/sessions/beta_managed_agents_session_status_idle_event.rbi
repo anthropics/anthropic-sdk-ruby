@@ -21,7 +21,6 @@ module Anthropic
           sig { returns(Time) }
           attr_accessor :processed_at
 
-          # The agent completed its turn naturally and is ready for the next user message.
           sig do
             returns(
               Anthropic::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::StopReason::Variants
@@ -57,7 +56,6 @@ module Anthropic
             id:,
             # A timestamp in RFC 3339 format
             processed_at:,
-            # The agent completed its turn naturally and is ready for the next user message.
             stop_reason:,
             type:
           )
@@ -78,7 +76,6 @@ module Anthropic
           def to_hash
           end
 
-          # The agent completed its turn naturally and is ready for the next user message.
           module StopReason
             extend Anthropic::Internal::Type::Union
 

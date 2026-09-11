@@ -79,8 +79,6 @@ module Anthropic
         def to_hash
         end
 
-        # Automatically compact older context when reaching the configured trigger
-        # threshold.
         module Edit
           extend Anthropic::Internal::Type::Union
 

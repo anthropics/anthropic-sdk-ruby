@@ -27,7 +27,6 @@ module Anthropic
         end
         attr_accessor :inputs
 
-        # Model identifier and configuration applied to every pipeline stage.
         sig do
           returns(T.any(Anthropic::Beta::BetaDreamModelConfigParam, String))
         end
@@ -36,9 +35,6 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :instructions
 
-        # The default destination: the job creates a new output memory store as a clone of
-        # the memory_store input and writes the consolidated memories into it. The input
-        # store is never mutated.
         sig do
           returns(
             T.nilable(
@@ -109,12 +105,8 @@ module Anthropic
         end
         def self.new(
           inputs:,
-          # Model identifier and configuration applied to every pipeline stage.
           model:,
           instructions: nil,
-          # The default destination: the job creates a new output memory store as a clone of
-          # the memory_store input and writes the consolidated memories into it. The input
-          # store is never mutated.
           output_behavior: nil,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
@@ -150,7 +142,6 @@ module Anthropic
         def to_hash
         end
 
-        # Model identifier and configuration applied to every pipeline stage.
         module Model
           extend Anthropic::Internal::Type::Union
 

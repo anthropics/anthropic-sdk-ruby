@@ -13,11 +13,11 @@ module Anthropic
         #
         # @param inputs [Array<Anthropic::Models::Beta::BetaDreamMemoryStoreInput, Anthropic::Models::Beta::BetaDreamSessionsInput>] Body param
         #
-        # @param model [Anthropic::Models::Beta::BetaDreamModelConfigParam, String] Body param: Model identifier and configuration applied to every pipeline stage.
+        # @param model [Anthropic::Models::Beta::BetaDreamModelConfigParam, String] Body param
         #
         # @param instructions [String, nil] Body param
         #
-        # @param output_behavior [Anthropic::Models::Beta::BetaOutputBehaviorCreateNew, Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting] Body param: The default destination: the job creates a new output memory store a
+        # @param output_behavior [Anthropic::Models::Beta::BetaOutputBehaviorCreateNew, Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting] Body param
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #

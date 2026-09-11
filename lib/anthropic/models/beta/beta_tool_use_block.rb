@@ -25,7 +25,6 @@ module Anthropic
         required :type, const: :tool_use
 
         # @!attribute caller_
-        #   Tool invocation directly from the model.
         #
         #   @return [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120, nil]
         optional :caller_, union: -> { Anthropic::Beta::BetaToolUseBlock::Caller }, api_name: :caller
@@ -57,14 +56,12 @@ module Anthropic
         #
         #   @param name [String]
         #
-        #   @param caller_ [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120] Tool invocation directly from the model.
+        #   @param caller_ [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120]
         #
         #   @param toolset_name [String, nil] For a toolset member tool_use, the toolset family.
         #
         #   @param type [Symbol, :tool_use]
 
-        # Tool invocation directly from the model.
-        #
         # @see Anthropic::Models::Beta::BetaToolUseBlock#caller_
         module Caller
           extend Anthropic::Internal::Type::Union

@@ -21,7 +21,6 @@ module Anthropic
           sig { returns(T.nilable(String)) }
           attr_accessor :scope
 
-          # Updated HTTP Basic authentication parameters for the token endpoint.
           sig do
             returns(
               T.nilable(
@@ -62,7 +61,6 @@ module Anthropic
             refresh_token: nil,
             # Updated OAuth scope for the refresh request.
             scope: nil,
-            # Updated HTTP Basic authentication parameters for the token endpoint.
             token_endpoint_auth: nil
           )
           end
@@ -83,7 +81,6 @@ module Anthropic
           def to_hash
           end
 
-          # Updated HTTP Basic authentication parameters for the token endpoint.
           module TokenEndpointAuth
             extend Anthropic::Internal::Type::Union
 

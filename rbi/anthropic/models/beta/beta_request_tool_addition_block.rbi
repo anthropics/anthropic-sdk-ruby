@@ -14,9 +14,6 @@ module Anthropic
             )
           end
 
-        # Reference to a single tool the caller declared directly in `tools[]`. Does not
-        # accept the composed `{server}_{name}` form the server assigns to MCP-resolved
-        # tools — use `mcp_tool_reference` or `mcp_toolset_reference` for those.
         sig do
           returns(
             T.any(
@@ -61,9 +58,6 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # Reference to a single tool the caller declared directly in `tools[]`. Does not
-          # accept the composed `{server}_{name}` form the server assigns to MCP-resolved
-          # tools — use `mcp_tool_reference` or `mcp_toolset_reference` for those.
           tool:,
           # Create a cache control breakpoint at this content block.
           cache_control: nil,
@@ -89,9 +83,6 @@ module Anthropic
         def to_hash
         end
 
-        # Reference to a single tool the caller declared directly in `tools[]`. Does not
-        # accept the composed `{server}_{name}` form the server assigns to MCP-resolved
-        # tools — use `mcp_tool_reference` or `mcp_toolset_reference` for those.
         module Tool
           extend Anthropic::Internal::Type::Union
 

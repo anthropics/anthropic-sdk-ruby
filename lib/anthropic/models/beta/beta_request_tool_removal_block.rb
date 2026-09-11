@@ -5,9 +5,6 @@ module Anthropic
     module Beta
       class BetaRequestToolRemovalBlock < Anthropic::Internal::Type::BaseModel
         # @!attribute tool
-        #   Reference to a single tool the caller declared directly in `tools[]`. Does not
-        #   accept the composed `{server}_{name}` form the server assigns to MCP-resolved
-        #   tools — use `mcp_tool_reference` or `mcp_toolset_reference` for those.
         #
         #   @return [Anthropic::Models::Beta::BetaToolChangeToolReference, Anthropic::Models::Beta::BetaToolChangeMCPToolReference, Anthropic::Models::Beta::BetaToolChangeMCPToolsetReference]
         required :tool, union: -> { Anthropic::Beta::BetaRequestToolRemovalBlock::Tool }
@@ -29,19 +26,12 @@ module Anthropic
         #   `tool` references a tool (or MCP toolset) by name from the request's `tools`; it
         #   is no longer offered to the model from this point in the conversation onward.
         #
-        #   Some parameter documentations has been truncated, see
-        #   {Anthropic::Models::Beta::BetaRequestToolRemovalBlock} for more details.
-        #
-        #   @param tool [Anthropic::Models::Beta::BetaToolChangeToolReference, Anthropic::Models::Beta::BetaToolChangeMCPToolReference, Anthropic::Models::Beta::BetaToolChangeMCPToolsetReference] Reference to a single tool the caller declared directly in
+        #   @param tool [Anthropic::Models::Beta::BetaToolChangeToolReference, Anthropic::Models::Beta::BetaToolChangeMCPToolReference, Anthropic::Models::Beta::BetaToolChangeMCPToolsetReference]
         #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
         #   @param type [Symbol, :tool_removal]
 
-        # Reference to a single tool the caller declared directly in `tools[]`. Does not
-        # accept the composed `{server}_{name}` form the server assigns to MCP-resolved
-        # tools — use `mcp_tool_reference` or `mcp_toolset_reference` for those.
-        #
         # @see Anthropic::Models::Beta::BetaRequestToolRemovalBlock#tool
         module Tool
           extend Anthropic::Internal::Type::Union

@@ -4,7 +4,6 @@ module Anthropic
   module Models
     class RawContentBlockStartEvent < Anthropic::Internal::Type::BaseModel
       # @!attribute content_block
-      #   Response model for a file uploaded to the container.
       #
       #   @return [Anthropic::Models::TextBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ServerToolUseBlock, Anthropic::Models::WebSearchToolResultBlock, Anthropic::Models::WebFetchToolResultBlock, Anthropic::Models::CodeExecutionToolResultBlock, Anthropic::Models::BashCodeExecutionToolResultBlock, Anthropic::Models::TextEditorCodeExecutionToolResultBlock, Anthropic::Models::ToolSearchToolResultBlock, Anthropic::Models::ContainerUploadBlock]
       required :content_block, union: -> { Anthropic::RawContentBlockStartEvent::ContentBlock }
@@ -20,14 +19,10 @@ module Anthropic
       required :type, const: :content_block_start
 
       # @!method initialize(content_block:, index:, type: :content_block_start)
-      #   @param content_block [Anthropic::Models::TextBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ServerToolUseBlock, Anthropic::Models::WebSearchToolResultBlock, Anthropic::Models::WebFetchToolResultBlock, Anthropic::Models::CodeExecutionToolResultBlock, Anthropic::Models::BashCodeExecutionToolResultBlock, Anthropic::Models::TextEditorCodeExecutionToolResultBlock, Anthropic::Models::ToolSearchToolResultBlock, Anthropic::Models::ContainerUploadBlock] Response model for a file uploaded to the container.
-      #
+      #   @param content_block [Anthropic::Models::TextBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ServerToolUseBlock, Anthropic::Models::WebSearchToolResultBlock, Anthropic::Models::WebFetchToolResultBlock, Anthropic::Models::CodeExecutionToolResultBlock, Anthropic::Models::BashCodeExecutionToolResultBlock, Anthropic::Models::TextEditorCodeExecutionToolResultBlock, Anthropic::Models::ToolSearchToolResultBlock, Anthropic::Models::ContainerUploadBlock]
       #   @param index [Integer]
-      #
       #   @param type [Symbol, :content_block_start]
 
-      # Response model for a file uploaded to the container.
-      #
       # @see Anthropic::Models::RawContentBlockStartEvent#content_block
       module ContentBlock
         extend Anthropic::Internal::Type::Union
@@ -104,7 +99,7 @@ module Anthropic
         #
         #   @option args [String] :id
         #
-        #   @option args [Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120] :caller_ Tool invocation directly from the model.
+        #   @option args [Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120] :caller_
         #
         #   @option args [Hash{Symbol=>Object}] :input
         #
@@ -112,7 +107,7 @@ module Anthropic
         #
         #   @option args [String, nil] :toolset_name For a toolset member tool_use, the toolset family.
         #
-        #   @option args [Anthropic::Models::WebSearchToolResultError, Array<Anthropic::Models::WebSearchResultBlock>, Anthropic::Models::WebFetchToolResultErrorBlock, Anthropic::Models::WebFetchBlock, Anthropic::Models::CodeExecutionToolResultError, Anthropic::Models::CodeExecutionResultBlock, Anthropic::Models::EncryptedCodeExecutionResultBlock, Anthropic::Models::BashCodeExecutionToolResultError, Anthropic::Models::BashCodeExecutionResultBlock, Anthropic::Models::TextEditorCodeExecutionToolResultError, Anthropic::Models::TextEditorCodeExecutionViewResultBlock, Anthropic::Models::TextEditorCodeExecutionCreateResultBlock, Anthropic::Models::TextEditorCodeExecutionStrReplaceResultBlock, Anthropic::Models::ToolSearchToolResultError, Anthropic::Models::ToolSearchToolSearchResultBlock] :content Code execution result with encrypted stdout for PFC + web_search results.
+        #   @option args [Anthropic::Models::WebSearchToolResultError, Array<Anthropic::Models::WebSearchResultBlock>, Anthropic::Models::WebFetchToolResultErrorBlock, Anthropic::Models::WebFetchBlock, Anthropic::Models::CodeExecutionToolResultError, Anthropic::Models::CodeExecutionResultBlock, Anthropic::Models::EncryptedCodeExecutionResultBlock, Anthropic::Models::BashCodeExecutionToolResultError, Anthropic::Models::BashCodeExecutionResultBlock, Anthropic::Models::TextEditorCodeExecutionToolResultError, Anthropic::Models::TextEditorCodeExecutionViewResultBlock, Anthropic::Models::TextEditorCodeExecutionCreateResultBlock, Anthropic::Models::TextEditorCodeExecutionStrReplaceResultBlock, Anthropic::Models::ToolSearchToolResultError, Anthropic::Models::ToolSearchToolSearchResultBlock] :content
         #
         #   @option args [String] :tool_use_id
         #

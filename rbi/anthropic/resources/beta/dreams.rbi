@@ -30,13 +30,11 @@ module Anthropic
         def create(
           # Body param
           inputs:,
-          # Body param: Model identifier and configuration applied to every pipeline stage.
+          # Body param
           model:,
           # Body param
           instructions: nil,
-          # Body param: The default destination: the job creates a new output memory store
-          # as a clone of the memory_store input and writes the consolidated memories into
-          # it. The input store is never mutated.
+          # Body param
           output_behavior: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,

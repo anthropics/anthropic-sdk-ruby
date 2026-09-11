@@ -5,8 +5,6 @@ module Anthropic
     BetaToolUnion = Beta::BetaToolUnion
 
     module Beta
-      # Code execution tool with REPL state persistence (daemon mode + gVisor
-      # checkpoint).
       module BetaToolUnion
         extend Anthropic::Internal::Type::Union
 

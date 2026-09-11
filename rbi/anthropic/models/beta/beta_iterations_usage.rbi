@@ -6,7 +6,6 @@ module Anthropic
       T.let(Beta::BetaIterationsUsage, Anthropic::Internal::Type::Converter)
 
     module Beta
-      # Token usage for a sampling iteration.
       module BetaIterationsUsageItem
         extend Anthropic::Internal::Type::Union
 

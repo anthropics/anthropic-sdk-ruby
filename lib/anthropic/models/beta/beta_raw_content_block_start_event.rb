@@ -5,7 +5,6 @@ module Anthropic
     module Beta
       class BetaRawContentBlockStartEvent < Anthropic::Internal::Type::BaseModel
         # @!attribute content_block
-        #   Response model for a file uploaded to the container.
         #
         #   @return [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaServerToolUseBlock, Anthropic::Models::Beta::BetaWebSearchToolResultBlock, Anthropic::Models::Beta::BetaWebFetchToolResultBlock, Anthropic::Models::Beta::BetaAdvisorToolResultBlock, Anthropic::Models::Beta::BetaCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaBashCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaToolSearchToolResultBlock, Anthropic::Models::Beta::BetaMCPToolUseBlock, Anthropic::Models::Beta::BetaMCPToolResultBlock, Anthropic::Models::Beta::BetaContainerUploadBlock, Anthropic::Models::Beta::BetaCompactionBlock, Anthropic::Models::Beta::BetaFallbackBlock]
         required :content_block, union: -> { Anthropic::Beta::BetaRawContentBlockStartEvent::ContentBlock }
@@ -21,14 +20,10 @@ module Anthropic
         required :type, const: :content_block_start
 
         # @!method initialize(content_block:, index:, type: :content_block_start)
-        #   @param content_block [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaServerToolUseBlock, Anthropic::Models::Beta::BetaWebSearchToolResultBlock, Anthropic::Models::Beta::BetaWebFetchToolResultBlock, Anthropic::Models::Beta::BetaAdvisorToolResultBlock, Anthropic::Models::Beta::BetaCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaBashCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaToolSearchToolResultBlock, Anthropic::Models::Beta::BetaMCPToolUseBlock, Anthropic::Models::Beta::BetaMCPToolResultBlock, Anthropic::Models::Beta::BetaContainerUploadBlock, Anthropic::Models::Beta::BetaCompactionBlock, Anthropic::Models::Beta::BetaFallbackBlock] Response model for a file uploaded to the container.
-        #
+        #   @param content_block [Anthropic::Models::Beta::BetaTextBlock, Anthropic::Models::Beta::BetaThinkingBlock, Anthropic::Models::Beta::BetaRedactedThinkingBlock, Anthropic::Models::Beta::BetaToolUseBlock, Anthropic::Models::Beta::BetaServerToolUseBlock, Anthropic::Models::Beta::BetaWebSearchToolResultBlock, Anthropic::Models::Beta::BetaWebFetchToolResultBlock, Anthropic::Models::Beta::BetaAdvisorToolResultBlock, Anthropic::Models::Beta::BetaCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaBashCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultBlock, Anthropic::Models::Beta::BetaToolSearchToolResultBlock, Anthropic::Models::Beta::BetaMCPToolUseBlock, Anthropic::Models::Beta::BetaMCPToolResultBlock, Anthropic::Models::Beta::BetaContainerUploadBlock, Anthropic::Models::Beta::BetaCompactionBlock, Anthropic::Models::Beta::BetaFallbackBlock]
         #   @param index [Integer]
-        #
         #   @param type [Symbol, :content_block_start]
 
-        # Response model for a file uploaded to the container.
-        #
         # @see Anthropic::Models::Beta::BetaRawContentBlockStartEvent#content_block
         module ContentBlock
           extend Anthropic::Internal::Type::Union
@@ -142,11 +137,11 @@ module Anthropic
           #
           #   @option args [String, Symbol, Anthropic::Models::Beta::BetaServerToolUseBlock::Name] :name The name of the MCP tool
           #
-          #   @option args [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120] :caller_ Tool invocation directly from the model.
+          #   @option args [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120] :caller_
           #
           #   @option args [String, nil] :toolset_name For a toolset member tool_use, the toolset family.
           #
-          #   @option args [Anthropic::Models::Beta::BetaWebSearchToolResultError, Array<Anthropic::Models::Beta::BetaWebSearchResultBlock>, Anthropic::Models::Beta::BetaWebFetchToolResultErrorBlock, Anthropic::Models::Beta::BetaWebFetchBlock, Anthropic::Models::Beta::BetaAdvisorToolResultError, Anthropic::Models::Beta::BetaAdvisorResultBlock, Anthropic::Models::Beta::BetaAdvisorRedactedResultBlock, Anthropic::Models::Beta::BetaCodeExecutionToolResultError, Anthropic::Models::Beta::BetaCodeExecutionResultBlock, Anthropic::Models::Beta::BetaEncryptedCodeExecutionResultBlock, Anthropic::Models::Beta::BetaBashCodeExecutionToolResultError, Anthropic::Models::Beta::BetaBashCodeExecutionResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultError, Anthropic::Models::Beta::BetaTextEditorCodeExecutionViewResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionCreateResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionStrReplaceResultBlock, Anthropic::Models::Beta::BetaToolSearchToolResultError, Anthropic::Models::Beta::BetaToolSearchToolSearchResultBlock, String, Array<Anthropic::Models::Beta::BetaTextBlock>, String, nil] :content Code execution result with encrypted stdout for PFC + web_search results.
+          #   @option args [Anthropic::Models::Beta::BetaWebSearchToolResultError, Array<Anthropic::Models::Beta::BetaWebSearchResultBlock>, Anthropic::Models::Beta::BetaWebFetchToolResultErrorBlock, Anthropic::Models::Beta::BetaWebFetchBlock, Anthropic::Models::Beta::BetaAdvisorToolResultError, Anthropic::Models::Beta::BetaAdvisorResultBlock, Anthropic::Models::Beta::BetaAdvisorRedactedResultBlock, Anthropic::Models::Beta::BetaCodeExecutionToolResultError, Anthropic::Models::Beta::BetaCodeExecutionResultBlock, Anthropic::Models::Beta::BetaEncryptedCodeExecutionResultBlock, Anthropic::Models::Beta::BetaBashCodeExecutionToolResultError, Anthropic::Models::Beta::BetaBashCodeExecutionResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultError, Anthropic::Models::Beta::BetaTextEditorCodeExecutionViewResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionCreateResultBlock, Anthropic::Models::Beta::BetaTextEditorCodeExecutionStrReplaceResultBlock, Anthropic::Models::Beta::BetaToolSearchToolResultError, Anthropic::Models::Beta::BetaToolSearchToolSearchResultBlock, String, Array<Anthropic::Models::Beta::BetaTextBlock>, String, nil] :content Summary of compacted content, or null if compaction failed
           #
           #   @option args [String] :tool_use_id
           #

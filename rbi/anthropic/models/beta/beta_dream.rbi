@@ -51,9 +51,6 @@ module Anthropic
         end
         attr_writer :model
 
-        # The default destination: the job creates a new output memory store as a clone of
-        # the memory_store input and writes the consolidated memories into it. The input
-        # store is never mutated.
         sig { returns(Anthropic::Beta::BetaOutputBehavior::Variants) }
         attr_accessor :output_behavior
 
@@ -126,9 +123,6 @@ module Anthropic
           # Model identifier and configuration applied to every pipeline stage. Same wire
           # shape as the Agents API ModelConfig.
           model:,
-          # The default destination: the job creates a new output memory store as a clone of
-          # the memory_store input and writes the consolidated memories into it. The input
-          # store is never mutated.
           output_behavior:,
           outputs:,
           session_id:,

@@ -52,9 +52,6 @@ module Anthropic
         required :model, -> { Anthropic::Beta::BetaDreamModelConfig }
 
         # @!attribute output_behavior
-        #   The default destination: the job creates a new output memory store as a clone of
-        #   the memory_store input and writes the consolidated memories into it. The input
-        #   store is never mutated.
         #
         #   @return [Anthropic::Models::Beta::BetaOutputBehaviorCreateNew, Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting]
         required :output_behavior, union: -> { Anthropic::Beta::BetaOutputBehavior }
@@ -113,7 +110,7 @@ module Anthropic
         #
         #   @param model [Anthropic::Models::Beta::BetaDreamModelConfig] Model identifier and configuration applied to every pipeline stage. Same wire sh
         #
-        #   @param output_behavior [Anthropic::Models::Beta::BetaOutputBehaviorCreateNew, Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting] The default destination: the job creates a new output memory store as a clone of
+        #   @param output_behavior [Anthropic::Models::Beta::BetaOutputBehaviorCreateNew, Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting]
         #
         #   @param outputs [Array<Anthropic::Models::Beta::BetaDreamOutput>]
         #

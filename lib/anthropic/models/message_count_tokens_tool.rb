@@ -2,8 +2,6 @@
 
 module Anthropic
   module Models
-    # Code execution tool with REPL state persistence (daemon mode + gVisor
-    # checkpoint).
     module MessageCountTokensTool
       extend Anthropic::Internal::Type::Union
 

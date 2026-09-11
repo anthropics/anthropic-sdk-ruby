@@ -14,8 +14,6 @@ module Anthropic
         # @!method initialize(edits: nil)
         #   @param edits [Array<Anthropic::Models::Beta::BetaClearToolUses20250919Edit, Anthropic::Models::Beta::BetaClearThinking20251015Edit, Anthropic::Models::Beta::BetaCompact20260112Edit>] List of context management edits to apply
 
-        # Automatically compact older context when reaching the configured trigger
-        # threshold.
         module Edit
           extend Anthropic::Internal::Type::Union
 

@@ -11,7 +11,6 @@ module Anthropic
           )
         end
 
-      # Tool invocation directly from the model.
       sig { returns(Anthropic::WebSearchToolResultBlock::Caller::Variants) }
       attr_accessor :caller_
 
@@ -42,7 +41,6 @@ module Anthropic
         ).returns(T.attached_class)
       end
       def self.new(
-        # Tool invocation directly from the model.
         caller_:,
         content:,
         tool_use_id:,
@@ -63,7 +61,6 @@ module Anthropic
       def to_hash
       end
 
-      # Tool invocation directly from the model.
       module Caller
         extend Anthropic::Internal::Type::Union
 

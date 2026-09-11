@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # Token usage for a sampling iteration.
       module BetaIterationsUsageItem
         extend Anthropic::Internal::Type::Union
 

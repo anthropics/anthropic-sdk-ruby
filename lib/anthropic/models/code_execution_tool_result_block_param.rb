@@ -4,7 +4,6 @@ module Anthropic
   module Models
     class CodeExecutionToolResultBlockParam < Anthropic::Internal::Type::BaseModel
       # @!attribute content
-      #   Code execution result with encrypted stdout for PFC + web_search results.
       #
       #   @return [Anthropic::Models::CodeExecutionToolResultErrorParam, Anthropic::Models::CodeExecutionResultBlockParam, Anthropic::Models::EncryptedCodeExecutionResultBlockParam]
       required :content, union: -> { Anthropic::CodeExecutionToolResultBlockParamContent }
@@ -26,7 +25,7 @@ module Anthropic
       optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
       # @!method initialize(content:, tool_use_id:, cache_control: nil, type: :code_execution_tool_result)
-      #   @param content [Anthropic::Models::CodeExecutionToolResultErrorParam, Anthropic::Models::CodeExecutionResultBlockParam, Anthropic::Models::EncryptedCodeExecutionResultBlockParam] Code execution result with encrypted stdout for PFC + web_search results.
+      #   @param content [Anthropic::Models::CodeExecutionToolResultErrorParam, Anthropic::Models::CodeExecutionResultBlockParam, Anthropic::Models::EncryptedCodeExecutionResultBlockParam]
       #
       #   @param tool_use_id [String]
       #

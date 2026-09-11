@@ -26,7 +26,6 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
-        # Tool invocation directly from the model.
         sig do
           returns(
             T.nilable(Anthropic::Beta::BetaToolUseBlock::Caller::Variants)
@@ -69,7 +68,6 @@ module Anthropic
           id:,
           input:,
           name:,
-          # Tool invocation directly from the model.
           caller_: nil,
           # For a toolset member tool_use, the toolset family.
           toolset_name: nil,
@@ -92,7 +90,6 @@ module Anthropic
         def to_hash
         end
 
-        # Tool invocation directly from the model.
         module Caller
           extend Anthropic::Internal::Type::Union
 

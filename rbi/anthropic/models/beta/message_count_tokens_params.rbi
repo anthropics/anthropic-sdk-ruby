@@ -864,8 +864,6 @@ module Anthropic
             )
         end
 
-        # Code execution tool with REPL state persistence (daemon mode + gVisor
-        # checkpoint).
         module Tool
           extend Anthropic::Internal::Type::Union
 

@@ -18,7 +18,6 @@ module Anthropic
           required :processed_at, Time
 
           # @!attribute stop_reason
-          #   The agent completed its turn naturally and is ready for the next user message.
           #
           #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached]
           required :stop_reason,
@@ -36,12 +35,10 @@ module Anthropic
           #
           #   @param processed_at [Time] A timestamp in RFC 3339 format
           #
-          #   @param stop_reason [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached] The agent completed its turn naturally and is ready for the next user message.
+          #   @param stop_reason [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached]
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::Type]
 
-          # The agent completed its turn naturally and is ready for the next user message.
-          #
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent#stop_reason
           module StopReason
             extend Anthropic::Internal::Type::Union

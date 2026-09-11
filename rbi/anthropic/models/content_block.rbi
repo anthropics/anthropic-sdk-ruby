@@ -2,7 +2,6 @@
 
 module Anthropic
   module Models
-    # Response model for a file uploaded to the container.
     module ContentBlock
       extend Anthropic::Internal::Type::Union
 
@@ -183,13 +182,11 @@ module Anthropic
         # for details.
         data: nil,
         id: nil,
-        # Tool invocation directly from the model.
         caller_: nil,
         input: nil,
         name: nil,
         # For a toolset member tool_use, the toolset family.
         toolset_name: nil,
-        # Code execution result with encrypted stdout for PFC + web_search results.
         content: nil,
         tool_use_id: nil,
         file_id: nil

@@ -25,7 +25,6 @@ module Anthropic
       optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
       # @!attribute caller_
-      #   Tool invocation directly from the model.
       #
       #   @return [Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120, nil]
       optional :caller_, union: -> { Anthropic::WebFetchToolResultBlockParam::Caller }, api_name: :caller
@@ -37,7 +36,7 @@ module Anthropic
       #
       #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
       #
-      #   @param caller_ [Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120] Tool invocation directly from the model.
+      #   @param caller_ [Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120]
       #
       #   @param type [Symbol, :web_fetch_tool_result]
 
@@ -53,8 +52,6 @@ module Anthropic
         #   @return [Array(Anthropic::Models::WebFetchToolResultErrorBlockParam, Anthropic::Models::WebFetchBlockParam)]
       end
 
-      # Tool invocation directly from the model.
-      #
       # @see Anthropic::Models::WebFetchToolResultBlockParam#caller_
       module Caller
         extend Anthropic::Internal::Type::Union

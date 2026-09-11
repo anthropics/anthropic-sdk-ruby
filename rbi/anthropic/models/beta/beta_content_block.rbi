@@ -5,7 +5,6 @@ module Anthropic
     BetaContentBlock = Beta::BetaContentBlock
 
     module Beta
-      # Response model for a file uploaded to the container.
       module BetaContentBlock
         extend Anthropic::Internal::Type::Union
 
@@ -260,11 +259,10 @@ module Anthropic
           input: nil,
           # The name of the MCP tool
           name: nil,
-          # Tool invocation directly from the model.
           caller_: nil,
           # For a toolset member tool_use, the toolset family.
           toolset_name: nil,
-          # Code execution result with encrypted stdout for PFC + web_search results.
+          # Summary of compacted content, or null if compaction failed
           content: nil,
           tool_use_id: nil,
           # The name of the MCP server

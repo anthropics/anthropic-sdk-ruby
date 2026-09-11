@@ -12,9 +12,6 @@ module Anthropic
           required :id, String
 
           # @!attribute error
-          #   An unknown or unexpected error occurred during session execution. A fallback
-          #   variant; clients that don't recognize a new error code can match on
-          #   `retry_status` and `message` alone.
           #
           #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError]
           required :error, union: -> { Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error }
@@ -33,22 +30,14 @@ module Anthropic
           # @!method initialize(id:, error:, processed_at:, type:)
           #   An error event indicating a problem occurred during session execution.
           #
-          #   Some parameter documentations has been truncated, see
-          #   {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent} for more
-          #   details.
-          #
           #   @param id [String] Unique identifier for this event.
           #
-          #   @param error [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError] An unknown or unexpected error occurred during session execution. A fallback var
+          #   @param error [Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRateLimitedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelRequestFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPConnectionFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsBillingError, Anthropic::Models::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError]
           #
           #   @param processed_at [Time] A timestamp in RFC 3339 format
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Type]
 
-          # An unknown or unexpected error occurred during session execution. A fallback
-          # variant; clients that don't recognize a new error code can match on
-          # `retry_status` and `message` alone.
-          #
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent#error
           module Error
             extend Anthropic::Internal::Type::Union
