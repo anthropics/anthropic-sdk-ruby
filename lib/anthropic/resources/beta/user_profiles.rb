@@ -9,7 +9,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::UserProfileCreateParams} for more details.
         #
-        # @overload create(access_type: nil, external_id: nil, external_user_details: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, betas: nil, request_options: {})
+        # @overload create(access_type: nil, external_id: nil, external_user_details: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param access_type [Symbol, Anthropic::Models::Beta::UserProfileCreateParams::AccessType] Body param: How the platform uses the API on behalf of the entity this profile r
         #
@@ -25,6 +25,8 @@ module Anthropic
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Beta::BetaUserProfile]
@@ -32,7 +34,7 @@ module Anthropic
         # @see Anthropic::Models::Beta::UserProfileCreateParams
         def create(params = {})
           parsed, options = Anthropic::Beta::UserProfileCreateParams.dump_request(params)
-          header_params = {betas: "anthropic-beta"}
+          header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
             method: :post,
             path: "v1/user_profiles?beta=true",
@@ -45,11 +47,16 @@ module Anthropic
 
         # Get User Profile
         #
-        # @overload retrieve(user_profile_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::UserProfileRetrieveParams} for more details.
+        #
+        # @overload retrieve(user_profile_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param user_profile_id [String] Path parameter user_profile_id
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -61,7 +68,7 @@ module Anthropic
           @client.request(
             method: :get,
             path: ["v1/user_profiles/%1$s?beta=true", user_profile_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaUserProfile,
             options: {extra_headers: {"anthropic-beta" => "user-profiles-2026-08-18"}, **options}
           )
@@ -72,7 +79,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::UserProfileUpdateParams} for more details.
         #
-        # @overload update(user_profile_id, access_type: nil, external_id: nil, external_user_details: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, betas: nil, request_options: {})
+        # @overload update(user_profile_id, access_type: nil, external_id: nil, external_user_details: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param user_profile_id [String] Path param: Path parameter user_profile_id
         #
@@ -90,6 +97,8 @@ module Anthropic
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
+        #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
         # @return [Anthropic::Models::Beta::BetaUserProfile]
@@ -97,7 +106,7 @@ module Anthropic
         # @see Anthropic::Models::Beta::UserProfileUpdateParams
         def update(user_profile_id, params = {})
           parsed, options = Anthropic::Beta::UserProfileUpdateParams.dump_request(params)
-          header_params = {betas: "anthropic-beta"}
+          header_params = {betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"}
           @client.request(
             method: :post,
             path: ["v1/user_profiles/%1$s?beta=true", user_profile_id],
@@ -110,7 +119,10 @@ module Anthropic
 
         # List User Profiles
         #
-        # @overload list(limit: nil, order: nil, order_by: nil, page: nil, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::UserProfileListParams} for more details.
+        #
+        # @overload list(limit: nil, order: nil, order_by: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param limit [Integer] Query param: Query parameter for limit
         #
@@ -121,6 +133,8 @@ module Anthropic
         # @param page [String] Query param: Query parameter for page
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -135,7 +149,10 @@ module Anthropic
             method: :get,
             path: "v1/user_profiles?beta=true",
             query: query,
-            headers: parsed.except(*query_params).transform_keys(betas: "anthropic-beta"),
+            headers: parsed.except(*query_params).transform_keys(
+              betas: "anthropic-beta",
+              workspace_id: "anthropic-workspace-id"
+            ),
             page: Anthropic::Internal::PageCursor,
             model: Anthropic::Beta::BetaUserProfile,
             options: {extra_headers: {"anthropic-beta" => "user-profiles-2026-08-18"}, **options}
@@ -144,11 +161,17 @@ module Anthropic
 
         # Create Enrollment URL
         #
-        # @overload create_enrollment_url(user_profile_id, betas: nil, request_options: {})
+        # Some parameter documentations has been truncated, see
+        # {Anthropic::Models::Beta::UserProfileCreateEnrollmentURLParams} for more
+        # details.
+        #
+        # @overload create_enrollment_url(user_profile_id, betas: nil, workspace_id: nil, request_options: {})
         #
         # @param user_profile_id [String] Path parameter user_profile_id
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
         # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -160,7 +183,7 @@ module Anthropic
           @client.request(
             method: :post,
             path: ["v1/user_profiles/%1$s/enrollment_url?beta=true", user_profile_id],
-            headers: parsed.transform_keys(betas: "anthropic-beta"),
+            headers: parsed.transform_keys(betas: "anthropic-beta", workspace_id: "anthropic-workspace-id"),
             model: Anthropic::Beta::BetaUserProfileEnrollmentURL,
             options: {extra_headers: {"anthropic-beta" => "user-profiles-2026-08-18"}, **options}
           )

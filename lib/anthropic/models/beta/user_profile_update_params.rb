@@ -69,7 +69,12 @@ module Anthropic
         #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
-        # @!method initialize(user_profile_id:, access_type: nil, external_id: nil, external_user_details: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, betas: nil, request_options: {})
+        # @!attribute workspace_id
+        #
+        #   @return [String, nil]
+        optional :workspace_id, String
+
+        # @!method initialize(user_profile_id:, access_type: nil, external_id: nil, external_user_details: nil, external_user_onboarded_at: nil, metadata: nil, name: nil, betas: nil, workspace_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::UserProfileUpdateParams} for more details.
         #
@@ -88,6 +93,8 @@ module Anthropic
         #   @param name [String, nil] If present, replaces the stored name. Omit to leave unchanged. Maximum 255 chara
         #
         #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #
+        #   @param workspace_id [String]
         #
         #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 

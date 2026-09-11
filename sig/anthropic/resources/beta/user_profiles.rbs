@@ -10,12 +10,14 @@ module Anthropic
           ?metadata: ::Hash[Symbol, String],
           ?name: String?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaUserProfile
 
         def retrieve: (
           String user_profile_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaUserProfile
 
@@ -28,6 +30,7 @@ module Anthropic
           ?metadata: ::Hash[Symbol, String],
           ?name: String?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaUserProfile
 
@@ -37,12 +40,14 @@ module Anthropic
           ?order_by: Anthropic::Models::Beta::UserProfileListParams::order_by,
           ?page: String,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Internal::PageCursor[Anthropic::Beta::BetaUserProfile]
 
         def create_enrollment_url: (
           String user_profile_id,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> Anthropic::Beta::BetaUserProfileEnrollmentURL
 
