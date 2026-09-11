@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "cgi"
+
 require_relative "../test_helper"
 
 class Anthropic::Test::UtilDataHandlingTest < Minitest::Test
