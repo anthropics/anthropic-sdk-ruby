@@ -32,7 +32,7 @@ module Anthropic
           # @!attribute betas
           #   Optional header to specify the beta version(s) you want to use.
           #
-          #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
+          #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
           # @!attribute anthropic_worker_id
@@ -52,7 +52,7 @@ module Anthropic
           #
           #   @param reclaim_older_than_ms [Integer, nil] Reclaim unacknowledged work items older than this many milliseconds. If omitted,
           #
-          #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           #   @param anthropic_worker_id [String] Unique identifier for the specific worker polling, used to track aggregated envi
           #

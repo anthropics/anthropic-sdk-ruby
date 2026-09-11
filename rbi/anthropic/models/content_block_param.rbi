@@ -157,8 +157,8 @@ module Anthropic
               T::Array[Anthropic::TextBlockParam::OrHash],
               Anthropic::ToolResultBlockParam::Content::Variants,
               T.any(
-                T::Array[Anthropic::WebSearchResultBlockParam::OrHash],
-                Anthropic::WebSearchToolRequestError::OrHash
+                Anthropic::WebSearchToolRequestError::OrHash,
+                T::Array[Anthropic::WebSearchResultBlockParam::OrHash]
               ),
               T.any(
                 Anthropic::WebFetchToolResultErrorBlockParam::OrHash,

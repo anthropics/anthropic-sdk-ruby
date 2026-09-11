@@ -18,7 +18,7 @@ module Anthropic
         #   version, or an `agent` object with both id and version specified. Omit to
         #   preserve. Cannot be cleared.
         #
-        #   @return [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams, nil]
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsAgentParams, String, nil]
         optional :agent, union: -> { Anthropic::Beta::DeploymentUpdateParams::Agent }
 
         # @!attribute budget
@@ -90,7 +90,7 @@ module Anthropic
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
-        #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
+        #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
         # @!attribute workspace_id
@@ -104,7 +104,7 @@ module Anthropic
         #
         #   @param deployment_id [String]
         #
-        #   @param agent [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams] Agent to deploy. Accepts the `agent` ID string, which re-pins to the latest vers
+        #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsAgentParams, String] Agent to deploy. Accepts the `agent` ID string, which re-pins to the latest vers
         #
         #   @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] A hard spend ceiling. The session stops issuing new model requests once the trac
         #
@@ -124,7 +124,7 @@ module Anthropic
         #
         #   @param vault_ids [Array<String>, nil] Vault IDs. Full replacement. Omit to preserve; send empty array or null to clear
         #
-        #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         #   @param workspace_id [String]
         #
@@ -136,13 +136,13 @@ module Anthropic
         module Agent
           extend Anthropic::Internal::Type::Union
 
-          variant String
-
           # Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
           variant -> { Anthropic::Beta::BetaManagedAgentsAgentParams }
 
+          variant String
+
           # @!method self.variants
-          #   @return [Array(String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams)]
+          #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAgentParams, String)]
         end
 
         # Union of resources that can be mounted into a session.

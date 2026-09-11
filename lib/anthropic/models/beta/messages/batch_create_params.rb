@@ -20,7 +20,7 @@ module Anthropic
           # @!attribute betas
           #   Optional header to specify the beta version(s) you want to use.
           #
-          #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
+          #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
           # @!attribute user_profile_id
@@ -43,7 +43,7 @@ module Anthropic
           #
           #   @param requests [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>] List of requests for prompt completion. Each is an individual request to create
           #
-          #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           #   @param user_profile_id [String] The user profile ID to attribute the requests in this batch to. Use when acting
           #
@@ -231,7 +231,7 @@ module Anthropic
               #   When the appended-assistant form is used on a model that otherwise disallows
               #   assistant-turn prefill, this token also authorizes that one prefill.
               #
-              #   @return [String, Anthropic::Models::Beta::BetaFallbackCreditTokenParam, nil]
+              #   @return [Anthropic::Models::Beta::BetaFallbackCreditTokenParam, String, nil]
               optional :fallback_credit_token,
                        union: -> {
                          Anthropic::Beta::Messages::BatchCreateParams::Request::Params::FallbackCreditToken
@@ -244,7 +244,7 @@ module Anthropic
               #   declines, the second is tried, and so on. The string "default" requests the
               #   requested model's server-defined default fallback configuration.
               #
-              #   @return [Array<Anthropic::Models::Beta::BetaFallbackParam>, Symbol, :default, nil]
+              #   @return [Symbol, :default, Array<Anthropic::Models::Beta::BetaFallbackParam>, nil]
               optional :fallbacks, union: -> { Anthropic::Beta::BetaFallbacksParam }, nil?: true
 
               # @!attribute inference_geo
@@ -517,9 +517,9 @@ module Anthropic
               #
               #   @param diagnostics [Anthropic::Models::Beta::BetaDiagnosticsParam, nil] Request-level diagnostics. Currently carries the previous response
               #
-              #   @param fallback_credit_token [String, Anthropic::Models::Beta::BetaFallbackCreditTokenParam, nil] The `fallback_credit_token` from a prior refusal's `stop_details`.
+              #   @param fallback_credit_token [Anthropic::Models::Beta::BetaFallbackCreditTokenParam, String, nil] The `fallback_credit_token` from a prior refusal's `stop_details`.
               #
-              #   @param fallbacks [Array<Anthropic::Models::Beta::BetaFallbackParam>, Symbol, :default, nil] Opt-in server-side retry on one or more substitute models when the requested mod
+              #   @param fallbacks [Symbol, :default, Array<Anthropic::Models::Beta::BetaFallbackParam>, nil] Opt-in server-side retry on one or more substitute models when the requested mod
               #
               #   @param inference_geo [String, nil] Specifies the geographic region for inference processing. If not specified, the
               #
@@ -592,8 +592,6 @@ module Anthropic
               module FallbackCreditToken
                 extend Anthropic::Internal::Type::Union
 
-                variant String
-
                 # Object form of ``fallback_credit_token``: the token plus a redemption
                 # mode.
                 #
@@ -603,8 +601,10 @@ module Anthropic
                 # an existing token changes nothing by itself.
                 variant -> { Anthropic::Beta::BetaFallbackCreditTokenParam }
 
+                variant String
+
                 # @!method self.variants
-                #   @return [Array(String, Anthropic::Models::Beta::BetaFallbackCreditTokenParam)]
+                #   @return [Array(Anthropic::Models::Beta::BetaFallbackCreditTokenParam, String)]
               end
 
               # Determines whether to use priority capacity (if available) or standard capacity

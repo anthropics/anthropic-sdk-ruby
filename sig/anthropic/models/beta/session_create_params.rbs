@@ -91,9 +91,9 @@ module Anthropic
         }
 
         type agent =
-          String
-          | Anthropic::Beta::BetaManagedAgentsAgentParams
+          Anthropic::Beta::BetaManagedAgentsAgentParams
           | Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams
+          | String
 
         module Agent
           extend Anthropic::Internal::Type::Union

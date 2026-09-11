@@ -13,7 +13,7 @@ module Anthropic
         #   or an `agent` object with both id and version specified. The agent must exist
         #   and not be archived.
         #
-        #   @return [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams]
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsAgentParams, String]
         required :agent, union: -> { Anthropic::Beta::DeploymentCreateParams::Agent }
 
         # @!attribute environment_id
@@ -82,7 +82,7 @@ module Anthropic
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
-        #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
+        #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
         # @!attribute workspace_id
@@ -94,7 +94,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::DeploymentCreateParams} for more details.
         #
-        #   @param agent [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams] Agent to deploy. Accepts the `agent` ID string, which pins the latest version, o
+        #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsAgentParams, String] Agent to deploy. Accepts the `agent` ID string, which pins the latest version, o
         #
         #   @param environment_id [String] ID of the `environment` defining the container configuration for sessions create
         #
@@ -114,7 +114,7 @@ module Anthropic
         #
         #   @param vault_ids [Array<String>] Vault IDs for stored credentials the agent can use during sessions created from
         #
-        #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         #   @param workspace_id [String]
         #
@@ -126,13 +126,13 @@ module Anthropic
         module Agent
           extend Anthropic::Internal::Type::Union
 
-          variant String
-
           # Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
           variant -> { Anthropic::Beta::BetaManagedAgentsAgentParams }
 
+          variant String
+
           # @!method self.variants
-          #   @return [Array(String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams)]
+          #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAgentParams, String)]
         end
 
         # Union of resources that can be mounted into a session.

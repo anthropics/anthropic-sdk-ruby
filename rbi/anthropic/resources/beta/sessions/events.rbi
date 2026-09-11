@@ -19,7 +19,7 @@ module Anthropic
               page: String,
               types: T::Array[String],
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(
@@ -84,7 +84,7 @@ module Anthropic
                   )
                 ],
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(
@@ -116,7 +116,7 @@ module Anthropic
               event_deltas:
                 T::Array[Anthropic::Beta::BetaManagedAgentsDeltaType::OrSymbol],
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(

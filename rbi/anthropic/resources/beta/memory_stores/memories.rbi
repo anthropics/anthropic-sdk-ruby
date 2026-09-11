@@ -14,7 +14,7 @@ module Anthropic
               view:
                 Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryView::OrSymbol,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory)
@@ -54,7 +54,7 @@ module Anthropic
               view:
                 Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryView::OrSymbol,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory)
@@ -91,7 +91,7 @@ module Anthropic
               precondition:
                 Anthropic::Beta::MemoryStores::BetaManagedAgentsPrecondition::OrHash,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::MemoryStores::BetaManagedAgentsMemory)
@@ -144,7 +144,7 @@ module Anthropic
               view:
                 Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryView::OrSymbol,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(
@@ -196,7 +196,7 @@ module Anthropic
               memory_store_id: String,
               expected_content_sha256: String,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(

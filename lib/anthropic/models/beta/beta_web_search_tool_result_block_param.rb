@@ -6,7 +6,7 @@ module Anthropic
       class BetaWebSearchToolResultBlockParam < Anthropic::Internal::Type::BaseModel
         # @!attribute content
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaWebSearchResultBlockParam>, Anthropic::Models::Beta::BetaWebSearchToolRequestError]
+        #   @return [Anthropic::Models::Beta::BetaWebSearchToolRequestError, Array<Anthropic::Models::Beta::BetaWebSearchResultBlockParam>]
         required :content, union: -> { Anthropic::Beta::BetaWebSearchToolResultBlockParamContent }
 
         # @!attribute tool_use_id
@@ -34,7 +34,7 @@ module Anthropic
                  api_name: :caller
 
         # @!method initialize(content:, tool_use_id:, cache_control: nil, caller_: nil, type: :web_search_tool_result)
-        #   @param content [Array<Anthropic::Models::Beta::BetaWebSearchResultBlockParam>, Anthropic::Models::Beta::BetaWebSearchToolRequestError]
+        #   @param content [Anthropic::Models::Beta::BetaWebSearchToolRequestError, Array<Anthropic::Models::Beta::BetaWebSearchResultBlockParam>]
         #
         #   @param tool_use_id [String]
         #

@@ -30,7 +30,7 @@ module Anthropic
                 limit: Integer,
                 page: T.nilable(String),
                 betas:
-                  T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                  T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                 request_options: Anthropic::RequestOptions::OrHash
               ).returns(
                 Anthropic::Internal::PageCursor[
@@ -70,7 +70,7 @@ module Anthropic
                 workspace_role:
                   Anthropic::Beta::Organization::BetaNoBillingWorkspaceRole::OrSymbol,
                 betas:
-                  T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                  T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                 request_options: Anthropic::RequestOptions::OrHash
               ).returns(
                 Anthropic::Beta::Organization::BetaServiceAccountWorkspaceMember
@@ -108,7 +108,7 @@ module Anthropic
                 workspace_id: String,
                 service_account_id: String,
                 betas:
-                  T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                  T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                 request_options: Anthropic::RequestOptions::OrHash
               ).returns(
                 Anthropic::Models::Beta::Organization::ServiceAccounts::WorkspaceRemoveResponse

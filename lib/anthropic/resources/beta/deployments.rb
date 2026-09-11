@@ -11,7 +11,7 @@ module Anthropic
         #
         # @overload create(agent:, environment_id:, initial_events:, name:, budget: nil, description: nil, metadata: nil, resources: nil, schedule: nil, vault_ids: nil, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param agent [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams] Body param: Agent to deploy. Accepts the `agent` ID string, which pins the lates
+        # @param agent [Anthropic::Models::Beta::BetaManagedAgentsAgentParams, String] Body param: Agent to deploy. Accepts the `agent` ID string, which pins the lates
         #
         # @param environment_id [String] Body param: ID of the `environment` defining the container configuration for ses
         #
@@ -31,7 +31,7 @@ module Anthropic
         #
         # @param vault_ids [Array<String>] Body param: Vault IDs for stored credentials the agent can use during sessions c
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -62,7 +62,7 @@ module Anthropic
         #
         # @param deployment_id [String] Path parameter deployment_id
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -91,7 +91,7 @@ module Anthropic
         #
         # @param deployment_id [String] Path param: Path parameter deployment_id
         #
-        # @param agent [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams] Body param: Agent to deploy. Accepts the `agent` ID string, which re-pins to the
+        # @param agent [Anthropic::Models::Beta::BetaManagedAgentsAgentParams, String] Body param: Agent to deploy. Accepts the `agent` ID string, which re-pins to the
         #
         # @param budget [Anthropic::Models::Beta::BetaManagedAgentsBudgetLimit, nil] Body param: A hard spend ceiling. The session stops issuing new model requests o
         #
@@ -111,7 +111,7 @@ module Anthropic
         #
         # @param vault_ids [Array<String>, nil] Body param: Vault IDs. Full replacement. Omit to preserve; send empty array or n
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -154,7 +154,7 @@ module Anthropic
         #
         # @param status [Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeploymentStatus] Query param: Filter by status: `active` or `paused`. Omit for both. To include a
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -198,7 +198,7 @@ module Anthropic
         #
         # @param deployment_id [String] Path parameter deployment_id
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -227,7 +227,7 @@ module Anthropic
         #
         # @param deployment_id [String] Path parameter deployment_id
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -256,7 +256,7 @@ module Anthropic
         #
         # @param deployment_id [String] Path parameter deployment_id
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -285,7 +285,7 @@ module Anthropic
         #
         # @param deployment_id [String] Path parameter deployment_id
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #

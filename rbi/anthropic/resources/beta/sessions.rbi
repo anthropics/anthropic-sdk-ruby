@@ -18,9 +18,9 @@ module Anthropic
           params(
             agent:
               T.any(
-                String,
                 Anthropic::Beta::BetaManagedAgentsAgentParams::OrHash,
-                Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::OrHash
+                Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::OrHash,
+                String
               ),
             environment_id: String,
             budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash,
@@ -42,7 +42,7 @@ module Anthropic
               ],
             title: T.nilable(String),
             vault_ids: T::Array[String],
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaManagedAgentsSession)
@@ -90,7 +90,7 @@ module Anthropic
         sig do
           params(
             session_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaManagedAgentsSession)
@@ -121,7 +121,7 @@ module Anthropic
             metadata: T.nilable(T::Hash[Symbol, T.nilable(String)]),
             title: T.nilable(String),
             vault_ids: T::Array[String],
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaManagedAgentsSession)
@@ -175,7 +175,7 @@ module Anthropic
             page: String,
             statuses:
               T::Array[Anthropic::Beta::SessionListParams::Status::OrSymbol],
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(
@@ -232,7 +232,7 @@ module Anthropic
         sig do
           params(
             session_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaManagedAgentsDeletedSession)
@@ -257,7 +257,7 @@ module Anthropic
         sig do
           params(
             session_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaManagedAgentsSession)

@@ -6,7 +6,7 @@ module Anthropic
       extend Anthropic::Internal::Type::Union
 
       Variants =
-        T.type_alias { T.any(String, Anthropic::AnthropicBeta::TaggedSymbol) }
+        T.type_alias { T.any(Anthropic::AnthropicBeta::TaggedSymbol, String) }
 
       sig { override.returns(T::Array[Anthropic::AnthropicBeta::Variants]) }
       def self.variants

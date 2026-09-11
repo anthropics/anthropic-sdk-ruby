@@ -48,7 +48,7 @@ module Anthropic
             # @!attribute betas
             #   Optional header to specify the beta version(s) you want to use.
             #
-            #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
+            #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
             optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
             # @!method initialize(issuer_url:, name:, check_jti: nil, jwks: nil, max_jwt_lifetime_seconds: nil, betas: nil, request_options: {})
@@ -66,7 +66,7 @@ module Anthropic
             #
             #   @param max_jwt_lifetime_seconds [Integer, nil] Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds
             #
-            #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+            #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
             #
             #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 

@@ -333,15 +333,15 @@ module Anthropic
             fallback_credit_token:
               T.nilable(
                 T.any(
-                  String,
-                  Anthropic::Beta::BetaFallbackCreditTokenParam::OrHash
+                  Anthropic::Beta::BetaFallbackCreditTokenParam::OrHash,
+                  String
                 )
               ),
             fallbacks:
               T.nilable(
                 T.any(
-                  T::Array[Anthropic::Beta::BetaFallbackParam::OrHash],
-                  Symbol
+                  Symbol,
+                  T::Array[Anthropic::Beta::BetaFallbackParam::OrHash]
                 )
               ),
             inference_geo: T.nilable(String),
@@ -408,7 +408,7 @@ module Anthropic
               ],
             top_k: Integer,
             top_p: Float,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             user_profile_id: String,
             workspace_id: String,
             stream: T.noreturn,
@@ -745,15 +745,15 @@ module Anthropic
             fallback_credit_token:
               T.nilable(
                 T.any(
-                  String,
-                  Anthropic::Beta::BetaFallbackCreditTokenParam::OrHash
+                  Anthropic::Beta::BetaFallbackCreditTokenParam::OrHash,
+                  String
                 )
               ),
             fallbacks:
               T.nilable(
                 T.any(
-                  T::Array[Anthropic::Beta::BetaFallbackParam::OrHash],
-                  Symbol
+                  Symbol,
+                  T::Array[Anthropic::Beta::BetaFallbackParam::OrHash]
                 )
               ),
             inference_geo: T.nilable(String),
@@ -820,7 +820,7 @@ module Anthropic
               ],
             top_k: Integer,
             top_p: Float,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             user_profile_id: String,
             workspace_id: String,
             stream: T.noreturn,
@@ -1157,15 +1157,15 @@ module Anthropic
             fallback_credit_token:
               T.nilable(
                 T.any(
-                  String,
-                  Anthropic::Beta::BetaFallbackCreditTokenParam::OrHash
+                  Anthropic::Beta::BetaFallbackCreditTokenParam::OrHash,
+                  String
                 )
               ),
             fallbacks:
               T.nilable(
                 T.any(
-                  T::Array[Anthropic::Beta::BetaFallbackParam::OrHash],
-                  Symbol
+                  Symbol,
+                  T::Array[Anthropic::Beta::BetaFallbackParam::OrHash]
                 )
               ),
             inference_geo: T.nilable(String),
@@ -1232,7 +1232,7 @@ module Anthropic
               ],
             top_k: Integer,
             top_p: Float,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             user_profile_id: String,
             workspace_id: String,
             stream: T.noreturn,
@@ -1619,7 +1619,7 @@ module Anthropic
                   Anthropic::Beta::BetaMCPToolset::OrHash
                 )
               ],
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             user_profile_id: String,
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash

@@ -29,7 +29,7 @@ module Anthropic
           sig do
             returns(
               T.nilable(
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
               )
             )
           end
@@ -37,7 +37,7 @@ module Anthropic
 
           sig do
             params(
-              betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
+              betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
             ).void
           end
           attr_writer :betas
@@ -65,7 +65,7 @@ module Anthropic
                   Anthropic::Beta::Messages::BatchCreateParams::Request::OrHash
                 ],
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               user_profile_id: String,
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
@@ -95,7 +95,7 @@ module Anthropic
                     Anthropic::Beta::Messages::BatchCreateParams::Request
                   ],
                 betas:
-                  T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                  T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                 user_profile_id: String,
                 workspace_id: String,
                 request_options: Anthropic::RequestOptions
@@ -354,7 +354,7 @@ module Anthropic
               sig do
                 returns(
                   T.nilable(
-                    T.any(String, Anthropic::Beta::BetaFallbackCreditTokenParam)
+                    T.any(Anthropic::Beta::BetaFallbackCreditTokenParam, String)
                   )
                 )
               end
@@ -367,7 +367,7 @@ module Anthropic
               sig do
                 returns(
                   T.nilable(
-                    T.any(T::Array[Anthropic::Beta::BetaFallbackParam], Symbol)
+                    T.any(Symbol, T::Array[Anthropic::Beta::BetaFallbackParam])
                   )
                 )
               end
@@ -804,15 +804,15 @@ module Anthropic
                   fallback_credit_token:
                     T.nilable(
                       T.any(
-                        String,
-                        Anthropic::Beta::BetaFallbackCreditTokenParam::OrHash
+                        Anthropic::Beta::BetaFallbackCreditTokenParam::OrHash,
+                        String
                       )
                     ),
                   fallbacks:
                     T.nilable(
                       T.any(
-                        T::Array[Anthropic::Beta::BetaFallbackParam::OrHash],
-                        Symbol
+                        Symbol,
+                        T::Array[Anthropic::Beta::BetaFallbackParam::OrHash]
                       )
                     ),
                   inference_geo: T.nilable(String),
@@ -1193,15 +1193,15 @@ module Anthropic
                     fallback_credit_token:
                       T.nilable(
                         T.any(
-                          String,
-                          Anthropic::Beta::BetaFallbackCreditTokenParam
+                          Anthropic::Beta::BetaFallbackCreditTokenParam,
+                          String
                         )
                       ),
                     fallbacks:
                       T.nilable(
                         T.any(
-                          T::Array[Anthropic::Beta::BetaFallbackParam],
-                          Symbol
+                          Symbol,
+                          T::Array[Anthropic::Beta::BetaFallbackParam]
                         )
                       ),
                     inference_geo: T.nilable(String),
@@ -1322,7 +1322,7 @@ module Anthropic
 
                 Variants =
                   T.type_alias do
-                    T.any(String, Anthropic::Beta::BetaFallbackCreditTokenParam)
+                    T.any(Anthropic::Beta::BetaFallbackCreditTokenParam, String)
                   end
 
                 sig do

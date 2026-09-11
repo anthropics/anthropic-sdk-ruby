@@ -31,7 +31,7 @@ module Anthropic
           #
           # @param tags [Hash{Symbol=>String}, nil] Body param: User-defined tags as string key-value pairs. Keys may not begin with
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #

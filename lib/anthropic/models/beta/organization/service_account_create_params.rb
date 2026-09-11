@@ -32,7 +32,7 @@ module Anthropic
           # @!attribute betas
           #   Optional header to specify the beta version(s) you want to use.
           #
-          #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
+          #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
           # @!method initialize(name:, description: nil, organization_role: nil, betas: nil, request_options: {})
@@ -46,7 +46,7 @@ module Anthropic
           #
           #   @param organization_role [Symbol, Anthropic::Models::Beta::Organization::ServiceAccountCreateParams::OrganizationRole] Org-level role. Defaults to `developer`.
           #
-          #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
 

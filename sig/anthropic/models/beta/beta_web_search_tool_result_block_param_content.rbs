@@ -4,8 +4,8 @@ module Anthropic
 
     module Beta
       type beta_web_search_tool_result_block_param_content =
-        ::Array[Anthropic::Beta::BetaWebSearchResultBlockParam]
-        | Anthropic::Beta::BetaWebSearchToolRequestError
+        Anthropic::Beta::BetaWebSearchToolRequestError
+        | ::Array[Anthropic::Beta::BetaWebSearchResultBlockParam]
 
       module BetaWebSearchToolResultBlockParamContent
         extend Anthropic::Internal::Type::Union

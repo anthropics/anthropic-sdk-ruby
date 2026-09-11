@@ -255,7 +255,7 @@ module Anthropic
               end
 
               type fallback_credit_token =
-                String | Anthropic::Beta::BetaFallbackCreditTokenParam
+                Anthropic::Beta::BetaFallbackCreditTokenParam | String
 
               module FallbackCreditToken
                 extend Anthropic::Internal::Type::Union

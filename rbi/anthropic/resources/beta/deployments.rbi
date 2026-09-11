@@ -9,8 +9,8 @@ module Anthropic
           params(
             agent:
               T.any(
-                String,
-                Anthropic::Beta::BetaManagedAgentsAgentParams::OrHash
+                Anthropic::Beta::BetaManagedAgentsAgentParams::OrHash,
+                String
               ),
             environment_id: String,
             initial_events:
@@ -39,7 +39,7 @@ module Anthropic
                 Anthropic::Beta::BetaManagedAgentsScheduleParams::OrHash
               ),
             vault_ids: T::Array[String],
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaManagedAgentsDeployment)
@@ -91,7 +91,7 @@ module Anthropic
         sig do
           params(
             deployment_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaManagedAgentsDeployment)
@@ -118,8 +118,8 @@ module Anthropic
             deployment_id: String,
             agent:
               T.any(
-                String,
-                Anthropic::Beta::BetaManagedAgentsAgentParams::OrHash
+                Anthropic::Beta::BetaManagedAgentsAgentParams::OrHash,
+                String
               ),
             budget:
               T.nilable(Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash),
@@ -150,7 +150,7 @@ module Anthropic
                 Anthropic::Beta::BetaManagedAgentsScheduleParams::OrHash
               ),
             vault_ids: T.nilable(T::Array[String]),
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaManagedAgentsDeployment)
@@ -213,7 +213,7 @@ module Anthropic
             page: String,
             status:
               Anthropic::Beta::BetaManagedAgentsDeploymentStatus::OrSymbol,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(
@@ -257,7 +257,7 @@ module Anthropic
         sig do
           params(
             deployment_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaManagedAgentsDeployment)
@@ -282,7 +282,7 @@ module Anthropic
         sig do
           params(
             deployment_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaManagedAgentsDeployment)
@@ -307,7 +307,7 @@ module Anthropic
         sig do
           params(
             deployment_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaManagedAgentsDeploymentRun)
@@ -332,7 +332,7 @@ module Anthropic
         sig do
           params(
             deployment_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaManagedAgentsDeployment)

@@ -5,12 +5,12 @@ module Anthropic
     module WebSearchToolResultBlockParamContent
       extend Anthropic::Internal::Type::Union
 
-      variant -> { Anthropic::Models::WebSearchToolResultBlockParamContent::WebSearchResultBlockParamArray }
-
       variant -> { Anthropic::WebSearchToolRequestError }
 
+      variant -> { Anthropic::Models::WebSearchToolResultBlockParamContent::WebSearchResultBlockParamArray }
+
       # @!method self.variants
-      #   @return [Array(Array<Anthropic::Models::WebSearchResultBlockParam>, Anthropic::Models::WebSearchToolRequestError)]
+      #   @return [Array(Anthropic::Models::WebSearchToolRequestError, Array<Anthropic::Models::WebSearchResultBlockParam>)]
 
       # @type [Anthropic::Internal::Type::Converter]
       WebSearchResultBlockParamArray =

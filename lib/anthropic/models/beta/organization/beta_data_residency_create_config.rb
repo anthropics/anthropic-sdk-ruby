@@ -10,7 +10,7 @@ module Anthropic
           #   allows all geos. Use the string 'unrestricted' to allow all geos, or a list of
           #   specific geos.
           #
-          #   @return [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAllowedInferenceGeo>, Symbol, :unrestricted, nil]
+          #   @return [Symbol, :unrestricted, Array<Symbol, Anthropic::Models::Beta::Organization::BetaAllowedInferenceGeo>, nil]
           optional :allowed_inference_geos,
                    union: -> {
                      Anthropic::Beta::Organization::BetaDataResidencyCreateConfig::AllowedInferenceGeos
@@ -43,7 +43,7 @@ module Anthropic
           #   {Anthropic::Models::Beta::Organization::BetaDataResidencyCreateConfig} for more
           #   details.
           #
-          #   @param allowed_inference_geos [Array<Symbol, Anthropic::Models::Beta::Organization::BetaAllowedInferenceGeo>, Symbol, :unrestricted, nil] Permitted inference geo values. Defaults to 'unrestricted' if omitted, which all
+          #   @param allowed_inference_geos [Symbol, :unrestricted, Array<Symbol, Anthropic::Models::Beta::Organization::BetaAllowedInferenceGeo>, nil] Permitted inference geo values. Defaults to 'unrestricted' if omitted, which all
           #
           #   @param default_inference_geo [Symbol, Anthropic::Models::Beta::Organization::BetaDataResidencyCreateConfig::DefaultInferenceGeo, nil] Default inference geo applied when requests omit the parameter. Defaults to 'glo
           #
@@ -57,12 +57,12 @@ module Anthropic
           module AllowedInferenceGeos
             extend Anthropic::Internal::Type::Union
 
-            variant -> { Anthropic::Models::Beta::Organization::BetaDataResidencyCreateConfig::AllowedInferenceGeos::BetaAllowedInferenceGeoArray }
-
             variant const: :unrestricted
 
+            variant -> { Anthropic::Models::Beta::Organization::BetaDataResidencyCreateConfig::AllowedInferenceGeos::BetaAllowedInferenceGeoArray }
+
             # @!method self.variants
-            #   @return [Array(Array<Symbol, Anthropic::Models::Beta::Organization::BetaAllowedInferenceGeo>, Symbol, :unrestricted)]
+            #   @return [Array(Symbol, :unrestricted, Array<Symbol, Anthropic::Models::Beta::Organization::BetaAllowedInferenceGeo>)]
 
             # @type [Anthropic::Internal::Type::Converter]
             BetaAllowedInferenceGeoArray =

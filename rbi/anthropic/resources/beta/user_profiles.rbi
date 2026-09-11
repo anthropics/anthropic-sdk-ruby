@@ -15,7 +15,7 @@ module Anthropic
             external_user_onboarded_at: Time,
             metadata: T::Hash[Symbol, String],
             name: T.nilable(String),
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaUserProfile)
         end
@@ -56,7 +56,7 @@ module Anthropic
         sig do
           params(
             user_profile_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaUserProfile)
         end
@@ -83,7 +83,7 @@ module Anthropic
             external_user_onboarded_at: Time,
             metadata: T::Hash[Symbol, String],
             name: T.nilable(String),
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaUserProfile)
         end
@@ -129,7 +129,7 @@ module Anthropic
             order: Anthropic::Beta::UserProfileListParams::Order::OrSymbol,
             order_by: Anthropic::Beta::UserProfileListParams::OrderBy::OrSymbol,
             page: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(
             Anthropic::Internal::PageCursor[Anthropic::Beta::BetaUserProfile]
@@ -154,7 +154,7 @@ module Anthropic
         sig do
           params(
             user_profile_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaUserProfileEnrollmentURL)
         end

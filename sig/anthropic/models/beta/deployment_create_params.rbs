@@ -92,7 +92,7 @@ module Anthropic
           request_options: Anthropic::RequestOptions
         }
 
-        type agent = String | Anthropic::Beta::BetaManagedAgentsAgentParams
+        type agent = Anthropic::Beta::BetaManagedAgentsAgentParams | String
 
         module Agent
           extend Anthropic::Internal::Type::Union

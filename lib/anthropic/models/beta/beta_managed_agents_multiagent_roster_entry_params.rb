@@ -8,8 +8,6 @@ module Anthropic
       module BetaManagedAgentsMultiagentRosterEntryParams
         extend Anthropic::Internal::Type::Union
 
-        variant String
-
         # Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
         variant -> { Anthropic::Beta::BetaManagedAgentsAgentParams }
 
@@ -19,8 +17,10 @@ module Anthropic
         # Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
         variant -> { Anthropic::Beta::BetaManagedAgentsAdvisorParams }
 
+        variant String
+
         # @!method self.variants
-        #   @return [Array(String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsMultiagentSelfParams, Anthropic::Models::Beta::BetaManagedAgentsAdvisorParams)]
+        #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsMultiagentSelfParams, Anthropic::Models::Beta::BetaManagedAgentsAdvisorParams, String)]
       end
     end
 

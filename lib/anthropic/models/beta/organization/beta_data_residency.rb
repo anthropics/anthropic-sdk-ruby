@@ -8,7 +8,7 @@ module Anthropic
           # @!attribute allowed_inference_geos
           #   Permitted inference geo values. 'unrestricted' means all geos are allowed.
           #
-          #   @return [Array<String>, Symbol, :unrestricted]
+          #   @return [Symbol, :unrestricted, Array<String>]
           required :allowed_inference_geos,
                    union: -> { Anthropic::Beta::Organization::BetaDataResidency::AllowedInferenceGeos }
 
@@ -25,7 +25,7 @@ module Anthropic
           required :workspace_geo, String
 
           # @!method initialize(allowed_inference_geos:, default_inference_geo:, workspace_geo:)
-          #   @param allowed_inference_geos [Array<String>, Symbol, :unrestricted] Permitted inference geo values. 'unrestricted' means all geos are allowed.
+          #   @param allowed_inference_geos [Symbol, :unrestricted, Array<String>] Permitted inference geo values. 'unrestricted' means all geos are allowed.
           #
           #   @param default_inference_geo [String] Default inference geo applied when requests omit the parameter.
           #
@@ -37,12 +37,12 @@ module Anthropic
           module AllowedInferenceGeos
             extend Anthropic::Internal::Type::Union
 
-            variant -> { Anthropic::Models::Beta::Organization::BetaDataResidency::AllowedInferenceGeos::StringArray }
-
             variant const: :unrestricted
 
+            variant -> { Anthropic::Models::Beta::Organization::BetaDataResidency::AllowedInferenceGeos::StringArray }
+
             # @!method self.variants
-            #   @return [Array(Array<String>, Symbol, :unrestricted)]
+            #   @return [Array(Symbol, :unrestricted, Array<String>)]
 
             # @type [Anthropic::Internal::Type::Converter]
             StringArray = Anthropic::Internal::Type::ArrayOf[String]

@@ -5,8 +5,6 @@ module Anthropic
     module AnthropicBeta
       extend Anthropic::Internal::Type::Union
 
-      variant String
-
       variant const: -> { Anthropic::Models::AnthropicBeta::MESSAGE_BATCHES_2024_09_24 }
 
       variant const: -> { Anthropic::Models::AnthropicBeta::PROMPT_CACHING_2024_07_31 }
@@ -97,11 +95,13 @@ module Anthropic
 
       variant const: -> { Anthropic::Models::AnthropicBeta::MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21 }
 
+      variant String
+
       # @!method self.variants
-      #   @return [Array(String, Symbol)]
+      #   @return [Array(Symbol, String)]
 
       define_sorbet_constant!(:Variants) do
-        T.type_alias { T.any(String, Anthropic::AnthropicBeta::TaggedSymbol) }
+        T.type_alias { T.any(Anthropic::AnthropicBeta::TaggedSymbol, String) }
       end
 
       # @!group

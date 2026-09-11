@@ -231,10 +231,10 @@ module Anthropic
                 T::Array[Anthropic::Beta::BetaTextBlockParam::OrHash],
                 Anthropic::Beta::BetaToolResultBlockParam::Content::Variants,
                 T.any(
+                  Anthropic::Beta::BetaWebSearchToolRequestError::OrHash,
                   T::Array[
                     Anthropic::Beta::BetaWebSearchResultBlockParam::OrHash
-                  ],
-                  Anthropic::Beta::BetaWebSearchToolRequestError::OrHash
+                  ]
                 ),
                 T.any(
                   Anthropic::Beta::BetaWebFetchToolResultErrorBlockParam::OrHash,

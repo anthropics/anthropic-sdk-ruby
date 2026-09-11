@@ -31,7 +31,7 @@ module Anthropic
 
           sig do
             params(
-              allowed_inference_geos: T.any(T::Array[String], Symbol),
+              allowed_inference_geos: T.any(Symbol, T::Array[String]),
               default_inference_geo: String,
               workspace_geo: String
             ).returns(T.attached_class)
@@ -63,7 +63,7 @@ module Anthropic
           module AllowedInferenceGeos
             extend Anthropic::Internal::Type::Union
 
-            Variants = T.type_alias { T.any(T::Array[String], Symbol) }
+            Variants = T.type_alias { T.any(Symbol, T::Array[String]) }
 
             sig do
               override.returns(

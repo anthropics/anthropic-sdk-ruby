@@ -16,7 +16,7 @@ module Anthropic
               work_id: String,
               environment_id: String,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Environments::BetaSelfHostedWork)
@@ -51,7 +51,7 @@ module Anthropic
               environment_id: String,
               metadata: T::Hash[Symbol, T.nilable(String)],
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Environments::BetaSelfHostedWork)
@@ -89,7 +89,7 @@ module Anthropic
               limit: Integer,
               page: T.nilable(String),
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(
               Anthropic::Internal::PageCursor[
@@ -122,7 +122,7 @@ module Anthropic
               work_id: String,
               environment_id: String,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Environments::BetaSelfHostedWork)
           end
@@ -150,7 +150,7 @@ module Anthropic
               desired_ttl_seconds: T.nilable(Integer),
               expected_last_heartbeat: T.nilable(String),
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(
               Anthropic::Beta::Environments::BetaSelfHostedWorkHeartbeatResponse
@@ -187,7 +187,7 @@ module Anthropic
               block_ms: T.nilable(Integer),
               reclaim_older_than_ms: T.nilable(Integer),
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               anthropic_worker_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(
@@ -218,7 +218,7 @@ module Anthropic
             params(
               environment_id: String,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(
@@ -252,7 +252,7 @@ module Anthropic
               environment_id: String,
               force: T::Boolean,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Environments::BetaSelfHostedWork)

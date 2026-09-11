@@ -29,8 +29,8 @@ module Anthropic
           }
 
           type allowed_inference_geos =
-            ::Array[Anthropic::Models::Beta::Organization::beta_allowed_inference_geo]
-            | :unrestricted
+            :unrestricted
+            | ::Array[Anthropic::Models::Beta::Organization::beta_allowed_inference_geo]
 
           module AllowedInferenceGeos
             extend Anthropic::Internal::Type::Union

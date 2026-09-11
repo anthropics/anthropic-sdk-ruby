@@ -16,7 +16,7 @@ module Anthropic
         # @!attribute model
         #   Model identifier and configuration applied to every pipeline stage.
         #
-        #   @return [String, Anthropic::Models::Beta::BetaDreamModelConfigParam]
+        #   @return [Anthropic::Models::Beta::BetaDreamModelConfigParam, String]
         required :model, union: -> { Anthropic::Beta::DreamCreateParams::Model }
 
         # @!attribute instructions
@@ -35,7 +35,7 @@ module Anthropic
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
-        #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
+        #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
         # @!attribute workspace_id
@@ -49,13 +49,13 @@ module Anthropic
         #
         #   @param inputs [Array<Anthropic::Models::Beta::BetaDreamMemoryStoreInput, Anthropic::Models::Beta::BetaDreamSessionsInput>]
         #
-        #   @param model [String, Anthropic::Models::Beta::BetaDreamModelConfigParam] Model identifier and configuration applied to every pipeline stage.
+        #   @param model [Anthropic::Models::Beta::BetaDreamModelConfigParam, String] Model identifier and configuration applied to every pipeline stage.
         #
         #   @param instructions [String, nil]
         #
         #   @param output_behavior [Anthropic::Models::Beta::BetaOutputBehaviorCreateNew, Anthropic::Models::Beta::BetaOutputBehaviorUpdateExisting] The default destination: the job creates a new output memory store as a clone of
         #
-        #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         #   @param workspace_id [String]
         #
@@ -65,13 +65,13 @@ module Anthropic
         module Model
           extend Anthropic::Internal::Type::Union
 
-          variant String
-
           # Model identifier and configuration applied to every pipeline stage.
           variant -> { Anthropic::Beta::BetaDreamModelConfigParam }
 
+          variant String
+
           # @!method self.variants
-          #   @return [Array(String, Anthropic::Models::Beta::BetaDreamModelConfigParam)]
+          #   @return [Array(Anthropic::Models::Beta::BetaDreamModelConfigParam, String)]
         end
       end
     end

@@ -28,7 +28,7 @@ module Anthropic
             workspace_geo: String
           }
 
-          type allowed_inference_geos = ::Array[String] | :unrestricted
+          type allowed_inference_geos = :unrestricted | ::Array[String]
 
           module AllowedInferenceGeos
             extend Anthropic::Internal::Type::Union
