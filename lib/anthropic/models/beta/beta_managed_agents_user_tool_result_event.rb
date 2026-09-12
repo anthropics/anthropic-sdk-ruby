@@ -44,8 +44,8 @@ module Anthropic
         optional :processed_at, Time, nil?: true
 
         # @!attribute session_thread_id
-        #   Routes this result to a subagent thread. Copy from the `agent.tool_use` event's
-        #   `session_thread_id`.
+        #   Set by the server to the subagent thread this result was routed to. Omitted when
+        #   it was routed to the primary thread.
         #
         #   @return [String, nil]
         optional :session_thread_id, String, nil?: true
@@ -71,7 +71,7 @@ module Anthropic
         #
         #   @param processed_at [Time, nil] A timestamp in RFC 3339 format
         #
-        #   @param session_thread_id [String, nil] Routes this result to a subagent thread. Copy from the `agent.tool_use` event's
+        #   @param session_thread_id [String, nil] Set by the server to the subagent thread this result was routed to. Omitted when
 
         # @see Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent#type
         module Type
