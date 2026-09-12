@@ -42,7 +42,7 @@ module Anthropic
         #
         # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         # details and options.
-        sig { returns(Anthropic::Model::Variants) }
+        sig { returns(T.nilable(Anthropic::Model::Variants)) }
         attr_accessor :model
 
         # The number of output tokens which were used.
@@ -61,7 +61,7 @@ module Anthropic
             cache_creation_input_tokens: Integer,
             cache_read_input_tokens: Integer,
             input_tokens: Integer,
-            model: T.any(Anthropic::Model::OrSymbol, String),
+            model: T.nilable(T.any(Anthropic::Model::OrSymbol, String)),
             output_tokens: Integer,
             type: Symbol
           ).returns(T.attached_class)
@@ -94,7 +94,7 @@ module Anthropic
               cache_creation_input_tokens: Integer,
               cache_read_input_tokens: Integer,
               input_tokens: Integer,
-              model: Anthropic::Model::Variants,
+              model: T.nilable(Anthropic::Model::Variants),
               output_tokens: Integer,
               type: Symbol
             }

@@ -34,8 +34,8 @@ module Anthropic
         #   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional
         #   details and options.
         #
-        #   @return [Symbol, String, Anthropic::Models::Model]
-        required :model, union: -> { Anthropic::Model }
+        #   @return [Symbol, String, Anthropic::Models::Model, nil]
+        required :model, union: -> { Anthropic::Model }, nil?: true
 
         # @!attribute output_tokens
         #   The number of output tokens which were used.
@@ -63,7 +63,7 @@ module Anthropic
         #
         #   @param input_tokens [Integer] The number of input tokens which were used.
         #
-        #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
+        #   @param model [Symbol, String, Anthropic::Models::Model, nil] The model that will complete your prompt.
         #
         #   @param output_tokens [Integer] The number of output tokens which were used.
         #

@@ -58,7 +58,7 @@ module Anthropic
         #
         #   @option args [Integer] :input_tokens The number of input tokens which were used.
         #
-        #   @option args [Symbol, String, Anthropic::Models::Model] :model The model that will complete your prompt.
+        #   @option args [Symbol, String, Anthropic::Models::Model, nil, Symbol, String, Anthropic::Models::Model] :model The model that will complete your prompt.
         #
         #   @option args [Integer] :output_tokens The number of output tokens which were used.
         #
