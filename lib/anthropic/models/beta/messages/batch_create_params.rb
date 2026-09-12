@@ -344,7 +344,7 @@ module Anthropic
 
               # @!attribute temperature
               #   @deprecated Deprecated. Models released after Claude Opus 4.6 do not support setting
-              #   temperature. A value of 1.0 of will be accepted for backwards compatibility, all
+              #   temperature. A value of 1.0 will be accepted for backwards compatibility, all
               #   other values will be rejected with a 400 error.
               #
               #   Amount of randomness injected into the response.
