@@ -22,18 +22,34 @@ module Anthropic
           attr_accessor :allowed_inference_geos
 
           # Default inference geo applied when requests omit the parameter.
-          sig { returns(String) }
+          sig do
+            returns(
+              Anthropic::Beta::Organization::BetaDataResidency::DefaultInferenceGeo::TaggedSymbol
+            )
+          end
           attr_accessor :default_inference_geo
 
           # Geographic region for workspace data storage. Immutable after creation.
-          sig { returns(String) }
+          sig do
+            returns(
+              Anthropic::Beta::Organization::BetaDataResidency::WorkspaceGeo::TaggedSymbol
+            )
+          end
           attr_accessor :workspace_geo
 
           sig do
             params(
-              allowed_inference_geos: T.any(Symbol, T::Array[String]),
-              default_inference_geo: String,
-              workspace_geo: String
+              allowed_inference_geos:
+                T.any(
+                  Symbol,
+                  T::Array[
+                    Anthropic::Beta::Organization::BetaAllowedInferenceGeo::OrSymbol
+                  ]
+                ),
+              default_inference_geo:
+                Anthropic::Beta::Organization::BetaDataResidency::DefaultInferenceGeo::OrSymbol,
+              workspace_geo:
+                Anthropic::Beta::Organization::BetaDataResidency::WorkspaceGeo::OrSymbol
             ).returns(T.attached_class)
           end
           def self.new(
@@ -51,8 +67,10 @@ module Anthropic
               {
                 allowed_inference_geos:
                   Anthropic::Beta::Organization::BetaDataResidency::AllowedInferenceGeos::Variants,
-                default_inference_geo: String,
-                workspace_geo: String
+                default_inference_geo:
+                  Anthropic::Beta::Organization::BetaDataResidency::DefaultInferenceGeo::TaggedSymbol,
+                workspace_geo:
+                  Anthropic::Beta::Organization::BetaDataResidency::WorkspaceGeo::TaggedSymbol
               }
             )
           end
@@ -63,7 +81,15 @@ module Anthropic
           module AllowedInferenceGeos
             extend Anthropic::Internal::Type::Union
 
-            Variants = T.type_alias { T.any(Symbol, T::Array[String]) }
+            Variants =
+              T.type_alias do
+                T.any(
+                  Symbol,
+                  T::Array[
+                    Anthropic::Beta::Organization::BetaAllowedInferenceGeo::TaggedSymbol
+                  ]
+                )
+              end
 
             sig do
               override.returns(
@@ -75,11 +101,78 @@ module Anthropic
             def self.variants
             end
 
-            StringArray =
+            BetaAllowedInferenceGeoArray =
               T.let(
-                Anthropic::Internal::Type::ArrayOf[String],
+                Anthropic::Internal::Type::ArrayOf[
+                  enum: Anthropic::Beta::Organization::BetaAllowedInferenceGeo
+                ],
                 Anthropic::Internal::Type::Converter
               )
+          end
+
+          # Default inference geo applied when requests omit the parameter.
+          module DefaultInferenceGeo
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::Organization::BetaDataResidency::DefaultInferenceGeo
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            GLOBAL =
+              T.let(
+                :global,
+                Anthropic::Beta::Organization::BetaDataResidency::DefaultInferenceGeo::TaggedSymbol
+              )
+            US =
+              T.let(
+                :us,
+                Anthropic::Beta::Organization::BetaDataResidency::DefaultInferenceGeo::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::Organization::BetaDataResidency::DefaultInferenceGeo::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
+          # Geographic region for workspace data storage. Immutable after creation.
+          module WorkspaceGeo
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::Organization::BetaDataResidency::WorkspaceGeo
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            US =
+              T.let(
+                :us,
+                Anthropic::Beta::Organization::BetaDataResidency::WorkspaceGeo::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::Organization::BetaDataResidency::WorkspaceGeo::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
           end
         end
       end
