@@ -64,9 +64,7 @@ module Anthropic
         #
         #   @return [Array<Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation, Anthropic::Models::Beta::BetaThinkingMismatchAllowedInputTransformation>, nil]
         optional :input_transformations,
-                 -> {
-                   Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaRawMessageDeltaEvent::InputTransformation]
-                 },
+                 -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaInputTransformation] },
                  nil?: true
 
         # @!method initialize(context_management:, delta:, usage:, input_transformations: nil, type: :message_delta)
@@ -119,57 +117,6 @@ module Anthropic
           #   @param stop_reason [Symbol, Anthropic::Models::Beta::BetaStopReason, nil]
           #
           #   @param stop_sequence [String, nil]
-        end
-
-        module InputTransformation
-          extend Anthropic::Internal::Type::Union
-
-          discriminator :type
-
-          variant :thinking_dropped, -> { Anthropic::Beta::BetaThinkingDroppedInputTransformation }
-
-          variant :thinking_mismatch_allowed, -> { Anthropic::Beta::BetaThinkingMismatchAllowedInputTransformation }
-
-          module Type
-            extend Anthropic::Internal::Type::Enum
-
-            THINKING_DROPPED = :thinking_dropped
-            THINKING_MISMATCH_ALLOWED = :thinking_mismatch_allowed
-
-            # @!method self.values
-            #   @return [Array<Symbol>]
-          end
-
-          # @!method self.variants
-          #   @return [Array(Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation, Anthropic::Models::Beta::BetaThinkingMismatchAllowedInputTransformation)]
-
-          # Creates a new instance of the variant class whose `type` matches the given
-          # value, passing the remaining arguments to its constructor.
-          #
-          # Some parameter documentations has been truncated, see
-          # {Anthropic::Models::Beta::BetaRawMessageDeltaEvent::InputTransformation} for
-          # more details.
-          #
-          # @param type [Symbol, String]
-          #
-          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
-          #
-          #   @option args [String] :path Where the removed block was in your request, as `messages.{i}.content.{j}`:
-          #
-          #   @option args [Symbol, Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation::Reason, Symbol, Anthropic::Models::Beta::BetaThinkingMismatchAllowedInputTransformation::Reason] :reason Which binding check removed the block: `model_binding_mismatch` — it was
-          #
-          # @raise [ArgumentError]
-          # @return [Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation, Anthropic::Models::Beta::BetaThinkingMismatchAllowedInputTransformation]
-          def self.new(type:, **args)
-            case type.to_sym
-            when :thinking_dropped
-              Anthropic::Beta::BetaThinkingDroppedInputTransformation.new(**args)
-            when :thinking_mismatch_allowed
-              Anthropic::Beta::BetaThinkingMismatchAllowedInputTransformation.new(**args)
-            else
-              raise ArgumentError, "unknown type: #{type}"
-            end
-          end
         end
       end
     end
