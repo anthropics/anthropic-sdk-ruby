@@ -64,25 +64,32 @@ module Anthropic
         end
         attr_writer :usage
 
-        # Changes the API made to the request's input before showing it to the model: one
-        # entry per change, in request order. Today the only entry type is
-        # `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text` block
-        # from the request's `messages` that was removed from the prompt instead of being
-        # shown to the model because it failed a binding check. More entry types may be
-        # added over time; ignore types you do not recognize.
+        # Changes the API made to the request's input before showing it to the model, and
+        # blocks that failed a binding check but were left unchanged: one entry per block,
+        # in request order. Two entry types today. `thinking_dropped` — a `thinking`,
+        # `redacted_thinking` or `connector_text` block from the request's `messages` that
+        # was removed from the prompt instead of being shown to the model because it
+        # failed a binding check. `thinking_mismatch_allowed` — a `thinking` or
+        # `redacted_thinking` block that failed the conversation check (the conversation
+        # before it differs from the one it was created in, or it carries no record of one
+        # on a model that requires it) and was shown to the model all the same, because
+        # that check is not enforced for this request. More entry types may be added over
+        # time; ignore types you do not recognize.
         #
         # Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
         # every such response from a model that supports extended thinking, as `[]` when
-        # nothing was changed; without the beta, blocks are removed all the same but
-        # nothing is reported. Removed blocks contribute nothing to `usage.input_tokens`.
-        # When streaming, the array is final in `message_start`; the final `message_delta`
-        # event carries it only when a server-side model fallback happened mid-stream, in
-        # which case it holds the serving model's entries and replaces the one in
-        # `message_start`.
+        # there is no entry to report; without the beta, blocks are removed or left in
+        # place all the same but nothing is reported. Removed blocks contribute nothing to
+        # `usage.input_tokens`; blocks left in place count as sent. When streaming, the
+        # array is final in `message_start`; the final `message_delta` event carries it
+        # only when a server-side model fallback happened mid-stream, in which case it
+        # holds the serving model's entries and replaces the one in `message_start`.
         sig do
           returns(
             T.nilable(
-              T::Array[Anthropic::Beta::BetaThinkingDroppedInputTransformation]
+              T::Array[
+                Anthropic::Beta::BetaRawMessageDeltaEvent::InputTransformation::Variants
+              ]
             )
           )
         end
@@ -97,7 +104,10 @@ module Anthropic
             input_transformations:
               T.nilable(
                 T::Array[
-                  Anthropic::Beta::BetaThinkingDroppedInputTransformation::OrHash
+                  T.any(
+                    Anthropic::Beta::BetaThinkingDroppedInputTransformation::OrHash,
+                    Anthropic::Beta::BetaThinkingMismatchAllowedInputTransformation::OrHash
+                  )
                 ]
               ),
             type: Symbol
@@ -123,21 +133,26 @@ module Anthropic
           # Total input tokens in a request is the summation of `input_tokens`,
           # `cache_creation_input_tokens`, and `cache_read_input_tokens`.
           usage:,
-          # Changes the API made to the request's input before showing it to the model: one
-          # entry per change, in request order. Today the only entry type is
-          # `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text` block
-          # from the request's `messages` that was removed from the prompt instead of being
-          # shown to the model because it failed a binding check. More entry types may be
-          # added over time; ignore types you do not recognize.
+          # Changes the API made to the request's input before showing it to the model, and
+          # blocks that failed a binding check but were left unchanged: one entry per block,
+          # in request order. Two entry types today. `thinking_dropped` — a `thinking`,
+          # `redacted_thinking` or `connector_text` block from the request's `messages` that
+          # was removed from the prompt instead of being shown to the model because it
+          # failed a binding check. `thinking_mismatch_allowed` — a `thinking` or
+          # `redacted_thinking` block that failed the conversation check (the conversation
+          # before it differs from the one it was created in, or it carries no record of one
+          # on a model that requires it) and was shown to the model all the same, because
+          # that check is not enforced for this request. More entry types may be added over
+          # time; ignore types you do not recognize.
           #
           # Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
           # every such response from a model that supports extended thinking, as `[]` when
-          # nothing was changed; without the beta, blocks are removed all the same but
-          # nothing is reported. Removed blocks contribute nothing to `usage.input_tokens`.
-          # When streaming, the array is final in `message_start`; the final `message_delta`
-          # event carries it only when a server-side model fallback happened mid-stream, in
-          # which case it holds the serving model's entries and replaces the one in
-          # `message_start`.
+          # there is no entry to report; without the beta, blocks are removed or left in
+          # place all the same but nothing is reported. Removed blocks contribute nothing to
+          # `usage.input_tokens`; blocks left in place count as sent. When streaming, the
+          # array is final in `message_start`; the final `message_delta` event carries it
+          # only when a server-side model fallback happened mid-stream, in which case it
+          # holds the serving model's entries and replaces the one in `message_start`.
           input_transformations: nil,
           type: :message_delta
         )
@@ -154,7 +169,7 @@ module Anthropic
               input_transformations:
                 T.nilable(
                   T::Array[
-                    Anthropic::Beta::BetaThinkingDroppedInputTransformation
+                    Anthropic::Beta::BetaRawMessageDeltaEvent::InputTransformation::Variants
                   ]
                 )
             }
@@ -237,6 +252,100 @@ module Anthropic
             )
           end
           def to_hash
+          end
+        end
+
+        module InputTransformation
+          extend Anthropic::Internal::Type::Union
+
+          Variants =
+            T.type_alias do
+              T.any(
+                Anthropic::Beta::BetaThinkingDroppedInputTransformation,
+                Anthropic::Beta::BetaThinkingMismatchAllowedInputTransformation
+              )
+            end
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  Anthropic::Beta::BetaRawMessageDeltaEvent::InputTransformation::Type
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            THINKING_DROPPED =
+              T.let(
+                :thinking_dropped,
+                Anthropic::Beta::BetaRawMessageDeltaEvent::InputTransformation::Type::TaggedSymbol
+              )
+            THINKING_MISMATCH_ALLOWED =
+              T.let(
+                :thinking_mismatch_allowed,
+                Anthropic::Beta::BetaRawMessageDeltaEvent::InputTransformation::Type::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  Anthropic::Beta::BetaRawMessageDeltaEvent::InputTransformation::Type::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
+          end
+
+          sig do
+            override.returns(
+              T::Array[
+                Anthropic::Beta::BetaRawMessageDeltaEvent::InputTransformation::Variants
+              ]
+            )
+          end
+          def self.variants
+          end
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          sig do
+            params(
+              type: T.any(Symbol, String),
+              path: String,
+              reason:
+                T.any(
+                  Anthropic::Beta::BetaThinkingDroppedInputTransformation::Reason::OrSymbol,
+                  Anthropic::Beta::BetaThinkingMismatchAllowedInputTransformation::Reason::OrSymbol
+                )
+            ).returns(
+              Anthropic::Beta::BetaRawMessageDeltaEvent::InputTransformation::Variants
+            )
+          end
+          def self.new(
+            type:,
+            # Where the removed block was in your request, as `messages.{i}.content.{j}`: `i`
+            # indexes the `messages` array you sent and `j` that message's `content` array —
+            # the same form error messages use.
+            path:,
+            # Which binding check removed the block: `model_binding_mismatch` — it was created
+            # by a model whose reasoning the requested model may not read;
+            # `prefix_binding_mismatch` — the conversation before it differs from the
+            # conversation it was created in (the rest of that turn's consecutive thinking
+            # blocks are removed with it, each with this reason);
+            # `organization_binding_mismatch` — it was created under a different organization
+            # (an Anthropic organization, AWS account or Google Cloud project) and this
+            # organization is not one of its additional organizations;
+            # `end_user_binding_mismatch` — it was created for a different end user, or was
+            # removed by the consumer-organization binding. A block that would fail several
+            # checks reports one reason, in this order of precedence:
+            # `organization_binding_mismatch`, `end_user_binding_mismatch`,
+            # `model_binding_mismatch`, `prefix_binding_mismatch`.
+            reason:
+          )
           end
         end
       end

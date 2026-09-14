@@ -41,26 +41,31 @@ module Anthropic
         required :usage, -> { Anthropic::Beta::BetaMessageDeltaUsage }
 
         # @!attribute input_transformations
-        #   Changes the API made to the request's input before showing it to the model: one
-        #   entry per change, in request order. Today the only entry type is
-        #   `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text` block
-        #   from the request's `messages` that was removed from the prompt instead of being
-        #   shown to the model because it failed a binding check. More entry types may be
-        #   added over time; ignore types you do not recognize.
+        #   Changes the API made to the request's input before showing it to the model, and
+        #   blocks that failed a binding check but were left unchanged: one entry per block,
+        #   in request order. Two entry types today. `thinking_dropped` — a `thinking`,
+        #   `redacted_thinking` or `connector_text` block from the request's `messages` that
+        #   was removed from the prompt instead of being shown to the model because it
+        #   failed a binding check. `thinking_mismatch_allowed` — a `thinking` or
+        #   `redacted_thinking` block that failed the conversation check (the conversation
+        #   before it differs from the one it was created in, or it carries no record of one
+        #   on a model that requires it) and was shown to the model all the same, because
+        #   that check is not enforced for this request. More entry types may be added over
+        #   time; ignore types you do not recognize.
         #
         #   Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
         #   every such response from a model that supports extended thinking, as `[]` when
-        #   nothing was changed; without the beta, blocks are removed all the same but
-        #   nothing is reported. Removed blocks contribute nothing to `usage.input_tokens`.
-        #   When streaming, the array is final in `message_start`; the final `message_delta`
-        #   event carries it only when a server-side model fallback happened mid-stream, in
-        #   which case it holds the serving model's entries and replaces the one in
-        #   `message_start`.
+        #   there is no entry to report; without the beta, blocks are removed or left in
+        #   place all the same but nothing is reported. Removed blocks contribute nothing to
+        #   `usage.input_tokens`; blocks left in place count as sent. When streaming, the
+        #   array is final in `message_start`; the final `message_delta` event carries it
+        #   only when a server-side model fallback happened mid-stream, in which case it
+        #   holds the serving model's entries and replaces the one in `message_start`.
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation>, nil]
+        #   @return [Array<Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation, Anthropic::Models::Beta::BetaThinkingMismatchAllowedInputTransformation>, nil]
         optional :input_transformations,
                  -> {
-                   Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::BetaThinkingDroppedInputTransformation]
+                   Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaRawMessageDeltaEvent::InputTransformation]
                  },
                  nil?: true
 
@@ -74,7 +79,7 @@ module Anthropic
         #
         #   @param usage [Anthropic::Models::Beta::BetaMessageDeltaUsage] Billing and rate-limit usage.
         #
-        #   @param input_transformations [Array<Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation>, nil] Changes the API made to the request's input before showing it to the model:
+        #   @param input_transformations [Array<Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation, Anthropic::Models::Beta::BetaThinkingMismatchAllowedInputTransformation>, nil] Changes the API made to the request's input before showing it to the model,
         #
         #   @param type [Symbol, :message_delta]
 
@@ -114,6 +119,57 @@ module Anthropic
           #   @param stop_reason [Symbol, Anthropic::Models::Beta::BetaStopReason, nil]
           #
           #   @param stop_sequence [String, nil]
+        end
+
+        module InputTransformation
+          extend Anthropic::Internal::Type::Union
+
+          discriminator :type
+
+          variant :thinking_dropped, -> { Anthropic::Beta::BetaThinkingDroppedInputTransformation }
+
+          variant :thinking_mismatch_allowed, -> { Anthropic::Beta::BetaThinkingMismatchAllowedInputTransformation }
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            THINKING_DROPPED = :thinking_dropped
+            THINKING_MISMATCH_ALLOWED = :thinking_mismatch_allowed
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
+
+          # @!method self.variants
+          #   @return [Array(Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation, Anthropic::Models::Beta::BetaThinkingMismatchAllowedInputTransformation)]
+
+          # Creates a new instance of the variant class whose `type` matches the given
+          # value, passing the remaining arguments to its constructor.
+          #
+          # Some parameter documentations has been truncated, see
+          # {Anthropic::Models::Beta::BetaRawMessageDeltaEvent::InputTransformation} for
+          # more details.
+          #
+          # @param type [Symbol, String]
+          #
+          # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
+          #
+          #   @option args [String] :path Where the removed block was in your request, as `messages.{i}.content.{j}`:
+          #
+          #   @option args [Symbol, Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation::Reason, Symbol, Anthropic::Models::Beta::BetaThinkingMismatchAllowedInputTransformation::Reason] :reason Which binding check removed the block: `model_binding_mismatch` — it was
+          #
+          # @raise [ArgumentError]
+          # @return [Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation, Anthropic::Models::Beta::BetaThinkingMismatchAllowedInputTransformation]
+          def self.new(type:, **args)
+            case type.to_sym
+            when :thinking_dropped
+              Anthropic::Beta::BetaThinkingDroppedInputTransformation.new(**args)
+            when :thinking_mismatch_allowed
+              Anthropic::Beta::BetaThinkingMismatchAllowedInputTransformation.new(**args)
+            else
+              raise ArgumentError, "unknown type: #{type}"
+            end
+          end
         end
       end
     end

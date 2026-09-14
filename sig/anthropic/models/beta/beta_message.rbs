@@ -17,7 +17,7 @@ module Anthropic
           stop_sequence: String?,
           type: :message,
           usage: Anthropic::Beta::BetaUsage,
-          input_transformations: ::Array[Anthropic::Beta::BetaThinkingDroppedInputTransformation]?
+          input_transformations: ::Array[Anthropic::Models::Beta::beta_input_transformation]?
         }
 
       class BetaMessage < Anthropic::Internal::Type::BaseModel
@@ -47,7 +47,7 @@ module Anthropic
 
         attr_accessor usage: Anthropic::Beta::BetaUsage
 
-        attr_accessor input_transformations: ::Array[Anthropic::Beta::BetaThinkingDroppedInputTransformation]?
+        attr_accessor input_transformations: ::Array[Anthropic::Models::Beta::beta_input_transformation]?
 
         def initialize: (
           id: String,
@@ -60,7 +60,7 @@ module Anthropic
           stop_reason: Anthropic::Models::Beta::beta_stop_reason?,
           stop_sequence: String?,
           usage: Anthropic::Beta::BetaUsage,
-          ?input_transformations: ::Array[Anthropic::Beta::BetaThinkingDroppedInputTransformation]?,
+          ?input_transformations: ::Array[Anthropic::Models::Beta::beta_input_transformation]?,
           ?role: :assistant,
           ?type: :message
         ) -> void
@@ -78,7 +78,7 @@ module Anthropic
           stop_sequence: String?,
           type: :message,
           usage: Anthropic::Beta::BetaUsage,
-          input_transformations: ::Array[Anthropic::Beta::BetaThinkingDroppedInputTransformation]?
+          input_transformations: ::Array[Anthropic::Models::Beta::beta_input_transformation]?
         }
       end
     end

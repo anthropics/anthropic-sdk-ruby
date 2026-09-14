@@ -9,7 +9,7 @@ module Anthropic
           delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta,
           type: :message_delta,
           usage: Anthropic::Beta::BetaMessageDeltaUsage,
-          input_transformations: ::Array[Anthropic::Beta::BetaThinkingDroppedInputTransformation]?
+          input_transformations: ::Array[Anthropic::Models::Beta::BetaRawMessageDeltaEvent::input_transformation]?
         }
 
       class BetaRawMessageDeltaEvent < Anthropic::Internal::Type::BaseModel
@@ -21,13 +21,13 @@ module Anthropic
 
         attr_accessor usage: Anthropic::Beta::BetaMessageDeltaUsage
 
-        attr_accessor input_transformations: ::Array[Anthropic::Beta::BetaThinkingDroppedInputTransformation]?
+        attr_accessor input_transformations: ::Array[Anthropic::Models::Beta::BetaRawMessageDeltaEvent::input_transformation]?
 
         def initialize: (
           context_management: Anthropic::Beta::BetaContextManagementResponse?,
           delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta,
           usage: Anthropic::Beta::BetaMessageDeltaUsage,
-          ?input_transformations: ::Array[Anthropic::Beta::BetaThinkingDroppedInputTransformation]?,
+          ?input_transformations: ::Array[Anthropic::Models::Beta::BetaRawMessageDeltaEvent::input_transformation]?,
           ?type: :message_delta
         ) -> void
 
@@ -36,7 +36,7 @@ module Anthropic
           delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta,
           type: :message_delta,
           usage: Anthropic::Beta::BetaMessageDeltaUsage,
-          input_transformations: ::Array[Anthropic::Beta::BetaThinkingDroppedInputTransformation]?
+          input_transformations: ::Array[Anthropic::Models::Beta::BetaRawMessageDeltaEvent::input_transformation]?
         }
 
         type delta =
@@ -69,6 +69,45 @@ module Anthropic
             stop_reason: Anthropic::Models::Beta::beta_stop_reason?,
             stop_sequence: String?
           }
+        end
+
+        type input_transformation =
+          Anthropic::Beta::BetaThinkingDroppedInputTransformation
+          | Anthropic::Beta::BetaThinkingMismatchAllowedInputTransformation
+
+        module InputTransformation
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :thinking_dropped | :thinking_mismatch_allowed
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            THINKING_DROPPED: :thinking_dropped
+            THINKING_MISMATCH_ALLOWED: :thinking_mismatch_allowed
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaRawMessageDeltaEvent::InputTransformation::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaRawMessageDeltaEvent::input_transformation]
+
+          def self.new:
+            (
+              type: :thinking_dropped | "thinking_dropped",
+              path: String,
+              reason: Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation::reason
+            ) -> Anthropic::Beta::BetaThinkingDroppedInputTransformation
+            | (
+              type: :thinking_mismatch_allowed | "thinking_mismatch_allowed",
+              path: String,
+              reason: Anthropic::Models::Beta::BetaThinkingMismatchAllowedInputTransformation::reason
+            ) -> Anthropic::Beta::BetaThinkingMismatchAllowedInputTransformation
+            | (
+              type: Symbol | String,
+              path: String,
+              reason: Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation::reason
+              | Anthropic::Models::Beta::BetaThinkingMismatchAllowedInputTransformation::reason
+            ) -> Anthropic::Models::Beta::BetaRawMessageDeltaEvent::input_transformation
         end
       end
     end
