@@ -112,6 +112,22 @@ module Anthropic
       sig { params(strict: T::Boolean).void }
       attr_writer :strict
 
+      # Which sources contribute to the set of URLs web fetch may fetch.
+      #
+      # Each key is a tagged variant: `user_input` is `all` or `none`; the two tool
+      # filters are `all`, `none`, `only` (only the named tools' results) or `except`
+      # (every result but the named tools'). A named tool must be declared in this
+      # request's `tools[]`.
+      sig { returns(T.nilable(Anthropic::WebFetchURLSources)) }
+      attr_reader :url_sources
+
+      sig do
+        params(
+          url_sources: T.nilable(Anthropic::WebFetchURLSources::OrHash)
+        ).void
+      end
+      attr_writer :url_sources
+
       # Whether to use cached content. Set to false to bypass the cache and fetch fresh
       # content. Only set to false when the user explicitly requests fresh content or
       # when fetching rapidly-changing sources.
@@ -135,6 +151,7 @@ module Anthropic
           response_inclusion:
             Anthropic::WebFetchTool20260318::ResponseInclusion::OrSymbol,
           strict: T::Boolean,
+          url_sources: T.nilable(Anthropic::WebFetchURLSources::OrHash),
           use_cache: T::Boolean,
           name: Symbol,
           type: Symbol
@@ -168,6 +185,13 @@ module Anthropic
         response_inclusion: nil,
         # When true, guarantees schema validation on tool names and inputs
         strict: nil,
+        # Which sources contribute to the set of URLs web fetch may fetch.
+        #
+        # Each key is a tagged variant: `user_input` is `all` or `none`; the two tool
+        # filters are `all`, `none`, `only` (only the named tools' results) or `except`
+        # (every result but the named tools'). A named tool must be declared in this
+        # request's `tools[]`.
+        url_sources: nil,
         # Whether to use cached content. Set to false to bypass the cache and fetch fresh
         # content. Only set to false when the user explicitly requests fresh content or
         # when fetching rapidly-changing sources.
@@ -199,6 +223,7 @@ module Anthropic
             response_inclusion:
               Anthropic::WebFetchTool20260318::ResponseInclusion::OrSymbol,
             strict: T::Boolean,
+            url_sources: T.nilable(Anthropic::WebFetchURLSources),
             use_cache: T::Boolean
           }
         )

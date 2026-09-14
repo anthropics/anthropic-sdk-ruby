@@ -101,6 +101,23 @@ module Anthropic
         sig { params(strict: T::Boolean).void }
         attr_writer :strict
 
+        # Which sources contribute to the set of URLs web fetch may fetch.
+        #
+        # Each key is a tagged variant: `user_input` is `all` or `none`; the two tool
+        # filters are `all`, `none`, `only` (only the named tools' results) or `except`
+        # (every result but the named tools'). A named tool must be declared in this
+        # request's `tools[]`.
+        sig { returns(T.nilable(Anthropic::Beta::BetaWebFetchURLSources)) }
+        attr_reader :url_sources
+
+        sig do
+          params(
+            url_sources:
+              T.nilable(Anthropic::Beta::BetaWebFetchURLSources::OrHash)
+          ).void
+        end
+        attr_writer :url_sources
+
         sig do
           params(
             allowed_callers:
@@ -117,6 +134,8 @@ module Anthropic
             max_content_tokens: T.nilable(Integer),
             max_uses: T.nilable(Integer),
             strict: T::Boolean,
+            url_sources:
+              T.nilable(Anthropic::Beta::BetaWebFetchURLSources::OrHash),
             name: Symbol,
             type: Symbol
           ).returns(T.attached_class)
@@ -142,6 +161,13 @@ module Anthropic
           max_uses: nil,
           # When true, guarantees schema validation on tool names and inputs
           strict: nil,
+          # Which sources contribute to the set of URLs web fetch may fetch.
+          #
+          # Each key is a tagged variant: `user_input` is `all` or `none`; the two tool
+          # filters are `all`, `none`, `only` (only the named tools' results) or `except`
+          # (every result but the named tools'). A named tool must be declared in this
+          # request's `tools[]`.
+          url_sources: nil,
           # Name of the tool.
           #
           # This is how the tool will be called by the model and in `tool_use` blocks.
@@ -167,7 +193,8 @@ module Anthropic
               defer_loading: T::Boolean,
               max_content_tokens: T.nilable(Integer),
               max_uses: T.nilable(Integer),
-              strict: T::Boolean
+              strict: T::Boolean,
+              url_sources: T.nilable(Anthropic::Beta::BetaWebFetchURLSources)
             }
           )
         end

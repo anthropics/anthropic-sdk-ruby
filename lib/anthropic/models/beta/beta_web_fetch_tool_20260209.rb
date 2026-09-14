@@ -74,7 +74,18 @@ module Anthropic
         #   @return [Boolean, nil]
         optional :strict, Anthropic::Internal::Type::Boolean
 
-        # @!method initialize(allowed_callers: nil, allowed_domains: nil, blocked_domains: nil, cache_control: nil, citations: nil, defer_loading: nil, max_content_tokens: nil, max_uses: nil, strict: nil, name: :web_fetch, type: :web_fetch_20260209)
+        # @!attribute url_sources
+        #   Which sources contribute to the set of URLs web fetch may fetch.
+        #
+        #   Each key is a tagged variant: `user_input` is `all` or `none`; the two tool
+        #   filters are `all`, `none`, `only` (only the named tools' results) or `except`
+        #   (every result but the named tools'). A named tool must be declared in this
+        #   request's `tools[]`.
+        #
+        #   @return [Anthropic::Models::Beta::BetaWebFetchURLSources, nil]
+        optional :url_sources, -> { Anthropic::Beta::BetaWebFetchURLSources }, nil?: true
+
+        # @!method initialize(allowed_callers: nil, allowed_domains: nil, blocked_domains: nil, cache_control: nil, citations: nil, defer_loading: nil, max_content_tokens: nil, max_uses: nil, strict: nil, url_sources: nil, name: :web_fetch, type: :web_fetch_20260209)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaWebFetchTool20260209} for more details.
         #
@@ -95,6 +106,8 @@ module Anthropic
         #   @param max_uses [Integer, nil] Maximum number of times the tool can be used in the API request.
         #
         #   @param strict [Boolean] When true, guarantees schema validation on tool names and inputs
+        #
+        #   @param url_sources [Anthropic::Models::Beta::BetaWebFetchURLSources, nil] Which sources contribute to the set of URLs web fetch may fetch.
         #
         #   @param name [Symbol, :web_fetch] Name of the tool.
         #

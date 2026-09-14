@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    type web_fetch_url_source_none = { type: :none }
+
+    class WebFetchURLSourceNone < Anthropic::Internal::Type::BaseModel
+      attr_accessor type: :none
+
+      def initialize: (?type: :none) -> void
+
+      def to_hash: -> { type: :none }
+    end
+  end
+end

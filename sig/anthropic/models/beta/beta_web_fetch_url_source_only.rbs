@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    class BetaWebFetchURLSourceOnly = Beta::BetaWebFetchURLSourceOnly
+
+    module Beta
+      type beta_web_fetch_url_source_only =
+        {
+          tools: ::Array[Anthropic::Beta::BetaWebFetchURLSourceToolReference],
+          type: :only
+        }
+
+      class BetaWebFetchURLSourceOnly < Anthropic::Internal::Type::BaseModel
+        attr_accessor tools: ::Array[Anthropic::Beta::BetaWebFetchURLSourceToolReference]
+
+        attr_accessor type: :only
+
+        def initialize: (
+          tools: ::Array[Anthropic::Beta::BetaWebFetchURLSourceToolReference],
+          ?type: :only
+        ) -> void
+
+        def to_hash: -> {
+          tools: ::Array[Anthropic::Beta::BetaWebFetchURLSourceToolReference],
+          type: :only
+        }
+      end
+    end
+  end
+end

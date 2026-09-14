@@ -1,0 +1,13 @@
+module Anthropic
+  module Models
+    type web_fetch_url_source_all = { type: :all }
+
+    class WebFetchURLSourceAll < Anthropic::Internal::Type::BaseModel
+      attr_accessor type: :all
+
+      def initialize: (?type: :all) -> void
+
+      def to_hash: -> { type: :all }
+    end
+  end
+end

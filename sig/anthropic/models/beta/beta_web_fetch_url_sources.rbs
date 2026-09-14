@@ -1,0 +1,162 @@
+module Anthropic
+  module Models
+    class BetaWebFetchURLSources = Beta::BetaWebFetchURLSources
+
+    module Beta
+      type beta_web_fetch_url_sources =
+        {
+          client_tool_results: Anthropic::Models::Beta::BetaWebFetchURLSources::client_tool_results,
+          server_tool_results: Anthropic::Models::Beta::BetaWebFetchURLSources::server_tool_results,
+          user_input: Anthropic::Models::Beta::BetaWebFetchURLSources::user_input
+        }
+
+      class BetaWebFetchURLSources < Anthropic::Internal::Type::BaseModel
+        attr_reader client_tool_results: Anthropic::Models::Beta::BetaWebFetchURLSources::client_tool_results?
+
+        def client_tool_results=: (
+          Anthropic::Models::Beta::BetaWebFetchURLSources::client_tool_results
+        ) -> Anthropic::Models::Beta::BetaWebFetchURLSources::client_tool_results
+
+        attr_reader server_tool_results: Anthropic::Models::Beta::BetaWebFetchURLSources::server_tool_results?
+
+        def server_tool_results=: (
+          Anthropic::Models::Beta::BetaWebFetchURLSources::server_tool_results
+        ) -> Anthropic::Models::Beta::BetaWebFetchURLSources::server_tool_results
+
+        attr_reader user_input: Anthropic::Models::Beta::BetaWebFetchURLSources::user_input?
+
+        def user_input=: (
+          Anthropic::Models::Beta::BetaWebFetchURLSources::user_input
+        ) -> Anthropic::Models::Beta::BetaWebFetchURLSources::user_input
+
+        def initialize: (
+          ?client_tool_results: Anthropic::Models::Beta::BetaWebFetchURLSources::client_tool_results,
+          ?server_tool_results: Anthropic::Models::Beta::BetaWebFetchURLSources::server_tool_results,
+          ?user_input: Anthropic::Models::Beta::BetaWebFetchURLSources::user_input
+        ) -> void
+
+        def to_hash: -> {
+          client_tool_results: Anthropic::Models::Beta::BetaWebFetchURLSources::client_tool_results,
+          server_tool_results: Anthropic::Models::Beta::BetaWebFetchURLSources::server_tool_results,
+          user_input: Anthropic::Models::Beta::BetaWebFetchURLSources::user_input
+        }
+
+        type client_tool_results =
+          Anthropic::Beta::BetaWebFetchURLSourceAll
+          | Anthropic::Beta::BetaWebFetchURLSourceNone
+          | Anthropic::Beta::BetaWebFetchURLSourceOnly
+          | Anthropic::Beta::BetaWebFetchURLSourceExcept
+
+        module ClientToolResults
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :all | :none | :only | :except
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            ALL: :all
+            NONE: :none
+            ONLY: :only
+            EXCEPT: :except
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaWebFetchURLSources::ClientToolResults::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaWebFetchURLSources::client_tool_results]
+
+          def self.new:
+            (type: :all | "all") -> Anthropic::Beta::BetaWebFetchURLSourceAll
+            | (
+              type: :none | "none"
+            ) -> Anthropic::Beta::BetaWebFetchURLSourceNone
+            | (
+              type: :only | "only",
+              tools: ::Array[Anthropic::Beta::BetaWebFetchURLSourceToolReference]
+            ) -> Anthropic::Beta::BetaWebFetchURLSourceOnly
+            | (
+              type: :except | "except",
+              tools: ::Array[Anthropic::Beta::BetaWebFetchURLSourceToolReference]
+            ) -> Anthropic::Beta::BetaWebFetchURLSourceExcept
+            | (
+              type: Symbol | String,
+              ?tools: ::Array[Anthropic::Beta::BetaWebFetchURLSourceToolReference]
+            ) -> Anthropic::Models::Beta::BetaWebFetchURLSources::client_tool_results
+        end
+
+        type server_tool_results =
+          Anthropic::Beta::BetaWebFetchURLSourceAll
+          | Anthropic::Beta::BetaWebFetchURLSourceNone
+          | Anthropic::Beta::BetaWebFetchURLSourceOnly
+          | Anthropic::Beta::BetaWebFetchURLSourceExcept
+
+        module ServerToolResults
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :all | :none | :only | :except
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            ALL: :all
+            NONE: :none
+            ONLY: :only
+            EXCEPT: :except
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaWebFetchURLSources::ServerToolResults::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaWebFetchURLSources::server_tool_results]
+
+          def self.new:
+            (type: :all | "all") -> Anthropic::Beta::BetaWebFetchURLSourceAll
+            | (
+              type: :none | "none"
+            ) -> Anthropic::Beta::BetaWebFetchURLSourceNone
+            | (
+              type: :only | "only",
+              tools: ::Array[Anthropic::Beta::BetaWebFetchURLSourceToolReference]
+            ) -> Anthropic::Beta::BetaWebFetchURLSourceOnly
+            | (
+              type: :except | "except",
+              tools: ::Array[Anthropic::Beta::BetaWebFetchURLSourceToolReference]
+            ) -> Anthropic::Beta::BetaWebFetchURLSourceExcept
+            | (
+              type: Symbol | String,
+              ?tools: ::Array[Anthropic::Beta::BetaWebFetchURLSourceToolReference]
+            ) -> Anthropic::Models::Beta::BetaWebFetchURLSources::server_tool_results
+        end
+
+        type user_input =
+          Anthropic::Beta::BetaWebFetchURLSourceAll
+          | Anthropic::Beta::BetaWebFetchURLSourceNone
+
+        module UserInput
+          extend Anthropic::Internal::Type::Union
+
+          type type_ = :all | :none
+
+          module Type
+            extend Anthropic::Internal::Type::Enum
+
+            ALL: :all
+            NONE: :none
+
+            def self?.values: -> ::Array[Anthropic::Models::Beta::BetaWebFetchURLSources::UserInput::type_]
+          end
+
+          def self?.variants: -> ::Array[Anthropic::Models::Beta::BetaWebFetchURLSources::user_input]
+
+          def self.new:
+            (type: :all | "all") -> Anthropic::Beta::BetaWebFetchURLSourceAll
+            | (
+              type: :none | "none"
+            ) -> Anthropic::Beta::BetaWebFetchURLSourceNone
+            | (
+              type: Symbol | String
+            ) -> Anthropic::Models::Beta::BetaWebFetchURLSources::user_input
+        end
+      end
+    end
+  end
+end

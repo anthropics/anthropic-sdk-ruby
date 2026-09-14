@@ -1,0 +1,29 @@
+module Anthropic
+  module Models
+    class BetaWebFetchURLSourceExcept = Beta::BetaWebFetchURLSourceExcept
+
+    module Beta
+      type beta_web_fetch_url_source_except =
+        {
+          tools: ::Array[Anthropic::Beta::BetaWebFetchURLSourceToolReference],
+          type: :except
+        }
+
+      class BetaWebFetchURLSourceExcept < Anthropic::Internal::Type::BaseModel
+        attr_accessor tools: ::Array[Anthropic::Beta::BetaWebFetchURLSourceToolReference]
+
+        attr_accessor type: :except
+
+        def initialize: (
+          tools: ::Array[Anthropic::Beta::BetaWebFetchURLSourceToolReference],
+          ?type: :except
+        ) -> void
+
+        def to_hash: -> {
+          tools: ::Array[Anthropic::Beta::BetaWebFetchURLSourceToolReference],
+          type: :except
+        }
+      end
+    end
+  end
+end

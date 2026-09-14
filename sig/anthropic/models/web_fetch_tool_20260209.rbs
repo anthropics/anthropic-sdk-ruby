@@ -12,7 +12,8 @@ module Anthropic
         defer_loading: bool,
         max_content_tokens: Integer?,
         max_uses: Integer?,
-        strict: bool
+        strict: bool,
+        url_sources: Anthropic::WebFetchURLSources?
       }
 
     class WebFetchTool20260209 < Anthropic::Internal::Type::BaseModel
@@ -46,6 +47,8 @@ module Anthropic
 
       def strict=: (bool) -> bool
 
+      attr_accessor url_sources: Anthropic::WebFetchURLSources?
+
       def initialize: (
         ?allowed_callers: ::Array[Anthropic::Models::WebFetchTool20260209::allowed_caller],
         ?allowed_domains: ::Array[String]?,
@@ -56,6 +59,7 @@ module Anthropic
         ?max_content_tokens: Integer?,
         ?max_uses: Integer?,
         ?strict: bool,
+        ?url_sources: Anthropic::WebFetchURLSources?,
         ?name: :web_fetch,
         ?type: :web_fetch_20260209
       ) -> void
@@ -71,7 +75,8 @@ module Anthropic
         defer_loading: bool,
         max_content_tokens: Integer?,
         max_uses: Integer?,
-        strict: bool
+        strict: bool,
+        url_sources: Anthropic::WebFetchURLSources?
       }
 
       type allowed_caller =

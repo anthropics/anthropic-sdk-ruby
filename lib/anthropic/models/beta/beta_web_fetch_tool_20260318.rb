@@ -85,6 +85,17 @@ module Anthropic
         #   @return [Boolean, nil]
         optional :strict, Anthropic::Internal::Type::Boolean
 
+        # @!attribute url_sources
+        #   Which sources contribute to the set of URLs web fetch may fetch.
+        #
+        #   Each key is a tagged variant: `user_input` is `all` or `none`; the two tool
+        #   filters are `all`, `none`, `only` (only the named tools' results) or `except`
+        #   (every result but the named tools'). A named tool must be declared in this
+        #   request's `tools[]`.
+        #
+        #   @return [Anthropic::Models::Beta::BetaWebFetchURLSources, nil]
+        optional :url_sources, -> { Anthropic::Beta::BetaWebFetchURLSources }, nil?: true
+
         # @!attribute use_cache
         #   Whether to use cached content. Set to false to bypass the cache and fetch fresh
         #   content. Only set to false when the user explicitly requests fresh content or
@@ -93,7 +104,7 @@ module Anthropic
         #   @return [Boolean, nil]
         optional :use_cache, Anthropic::Internal::Type::Boolean
 
-        # @!method initialize(allowed_callers: nil, allowed_domains: nil, blocked_domains: nil, cache_control: nil, citations: nil, defer_loading: nil, max_content_tokens: nil, max_uses: nil, response_inclusion: nil, strict: nil, use_cache: nil, name: :web_fetch, type: :web_fetch_20260318)
+        # @!method initialize(allowed_callers: nil, allowed_domains: nil, blocked_domains: nil, cache_control: nil, citations: nil, defer_loading: nil, max_content_tokens: nil, max_uses: nil, response_inclusion: nil, strict: nil, url_sources: nil, use_cache: nil, name: :web_fetch, type: :web_fetch_20260318)
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaWebFetchTool20260318} for more details.
         #
@@ -116,6 +127,8 @@ module Anthropic
         #   @param response_inclusion [Symbol, Anthropic::Models::Beta::BetaWebFetchTool20260318::ResponseInclusion] How this tool's result blocks appear in the API response when the result was con
         #
         #   @param strict [Boolean] When true, guarantees schema validation on tool names and inputs
+        #
+        #   @param url_sources [Anthropic::Models::Beta::BetaWebFetchURLSources, nil] Which sources contribute to the set of URLs web fetch may fetch.
         #
         #   @param use_cache [Boolean] Whether to use cached content. Set to false to bypass the cache and fetch fresh
         #

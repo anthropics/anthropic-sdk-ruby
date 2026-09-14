@@ -17,6 +17,7 @@ module Anthropic
           max_uses: Integer?,
           response_inclusion: Anthropic::Models::Beta::BetaWebFetchTool20260318::response_inclusion,
           strict: bool,
+          url_sources: Anthropic::Beta::BetaWebFetchURLSources?,
           use_cache: bool
         }
 
@@ -57,6 +58,8 @@ module Anthropic
 
         def strict=: (bool) -> bool
 
+        attr_accessor url_sources: Anthropic::Beta::BetaWebFetchURLSources?
+
         attr_reader use_cache: bool?
 
         def use_cache=: (bool) -> bool
@@ -72,6 +75,7 @@ module Anthropic
           ?max_uses: Integer?,
           ?response_inclusion: Anthropic::Models::Beta::BetaWebFetchTool20260318::response_inclusion,
           ?strict: bool,
+          ?url_sources: Anthropic::Beta::BetaWebFetchURLSources?,
           ?use_cache: bool,
           ?name: :web_fetch,
           ?type: :web_fetch_20260318
@@ -90,6 +94,7 @@ module Anthropic
           max_uses: Integer?,
           response_inclusion: Anthropic::Models::Beta::BetaWebFetchTool20260318::response_inclusion,
           strict: bool,
+          url_sources: Anthropic::Beta::BetaWebFetchURLSources?,
           use_cache: bool
         }
 
