@@ -31,7 +31,7 @@ class AnthropicTest < Minitest::Test
     client = Anthropic::Client.new(
       base_url: "http://localhost",
       api_key: "my-anthropic-api-key",
-      proxy: "http://user:p%40ss@127.0.0.1:9"
+      proxy: "http://user:p%40s+s@127.0.0.1:9"
     )
     requester = client.requester
     conn = requester.class.connect(
@@ -41,7 +41,7 @@ class AnthropicTest < Minitest::Test
     )
 
     assert_equal(
-      ["127.0.0.1", 9, "user", "p@ss"],
+      ["127.0.0.1", 9, "user", "p@s+s"],
       [conn.proxy_address, conn.proxy_port, conn.proxy_user, conn.proxy_pass]
     )
     assert(conn.proxy?)

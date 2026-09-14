@@ -43,8 +43,8 @@ module Anthropic
                   port,
                   proxy.hostname,
                   proxy.port,
-                  proxy.user&.then { CGI.unescape(_1) },
-                  proxy.password&.then { CGI.unescape(_1) }
+                  proxy.user&.then { URI.decode_uri_component(_1) },
+                  proxy.password&.then { URI.decode_uri_component(_1) }
                 )
               end
 
