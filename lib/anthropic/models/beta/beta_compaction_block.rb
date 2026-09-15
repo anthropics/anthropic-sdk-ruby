@@ -21,7 +21,13 @@ module Anthropic
         #   @return [Symbol, :compaction]
         required :type, const: :compaction
 
-        # @!method initialize(content:, encrypted_content:, type: :compaction)
+        # @!attribute signature
+        #   Signature over the summary, to be sent back with the block verbatim
+        #
+        #   @return [String, nil]
+        optional :signature, String, nil?: true
+
+        # @!method initialize(content:, encrypted_content:, signature: nil, type: :compaction)
         #   A compaction block returned when autocompact is triggered.
         #
         #   When content is None, it indicates the compaction failed to produce a valid
@@ -31,6 +37,8 @@ module Anthropic
         #   @param content [String, nil] Summary of compacted content, or null if compaction failed
         #
         #   @param encrypted_content [String, nil] Opaque metadata from prior compaction, to be round-tripped verbatim
+        #
+        #   @param signature [String, nil] Signature over the summary, to be sent back with the block verbatim
         #
         #   @param type [Symbol, :compaction]
       end

@@ -95,6 +95,19 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
+        # @!attribute compaction
+        #   Compact the whole conversation and return a signed `compaction` block, alone,
+        #   that a later request sends back first in `messages`, in place of the messages it
+        #   summarizes. There is no trigger and no pause flag: sending the parameter
+        #   compacts, and nothing is sampled after the block.
+        #
+        #   The summarization prompt is the server's own unless `instructions` are given,
+        #   which then replace it for this request; a value that is empty or only whitespace
+        #   counts as absent.
+        #
+        #   @return [Anthropic::Models::Beta::BetaCompactionConfig, nil]
+        optional :compaction, -> { Anthropic::Beta::BetaCompactionConfig }, nil?: true
+
         # @!attribute context_management
         #   Context management configuration.
         #
@@ -269,7 +282,7 @@ module Anthropic
         #   @return [String, nil]
         optional :workspace_id, String
 
-        # @!method initialize(messages:, model:, cache_control: nil, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @!method initialize(messages:, model:, cache_control: nil, compaction: nil, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::MessageCountTokensParams} for more details.
         #
@@ -278,6 +291,8 @@ module Anthropic
         #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
         #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Top-level cache control automatically applies a cache_control marker to the last
+        #
+        #   @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Compact the whole conversation and return a signed `compaction` block,
         #
         #   @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Context management configuration.
         #

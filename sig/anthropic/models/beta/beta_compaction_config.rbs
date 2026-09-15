@@ -1,0 +1,19 @@
+module Anthropic
+  module Models
+    class BetaCompactionConfig = Beta::BetaCompactionConfig
+
+    module Beta
+      type beta_compaction_config = { type: :summarize, instructions: String? }
+
+      class BetaCompactionConfig < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :summarize
+
+        attr_accessor instructions: String?
+
+        def initialize: (?instructions: String?, ?type: :summarize) -> void
+
+        def to_hash: -> { type: :summarize, instructions: String? }
+      end
+    end
+  end
+end

@@ -204,6 +204,8 @@ module Anthropic
           :"mid-conversation-system-clear-at-2026-08-21",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      COMPACT_2026_09_04 =
+        T.let(:"compact-2026-09-04", Anthropic::AnthropicBeta::TaggedSymbol)
     end
   end
 end

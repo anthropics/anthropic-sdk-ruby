@@ -185,7 +185,8 @@ module Anthropic
             | (
               type: :compaction | "compaction",
               content: String?,
-              encrypted_content: String?
+              encrypted_content: String?,
+              ?signature: String?
             ) -> Anthropic::Beta::BetaCompactionBlock
             | (
               type: :fallback | "fallback",
@@ -197,7 +198,7 @@ module Anthropic
               type: Symbol | String,
               ?citations: ::Array[Anthropic::Models::Beta::beta_text_citation]?,
               ?text: String,
-              ?signature: String,
+              ?signature: String | String?,
               ?thinking: String,
               ?data: String,
               ?id: String,

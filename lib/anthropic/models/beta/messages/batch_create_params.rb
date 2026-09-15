@@ -186,6 +186,19 @@ module Anthropic
               #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
               optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
+              # @!attribute compaction
+              #   Compact the whole conversation and return a signed `compaction` block, alone,
+              #   that a later request sends back first in `messages`, in place of the messages it
+              #   summarizes. There is no trigger and no pause flag: sending the parameter
+              #   compacts, and nothing is sampled after the block.
+              #
+              #   The summarization prompt is the server's own unless `instructions` are given,
+              #   which then replace it for this request; a value that is empty or only whitespace
+              #   counts as absent.
+              #
+              #   @return [Anthropic::Models::Beta::BetaCompactionConfig, nil]
+              optional :compaction, -> { Anthropic::Beta::BetaCompactionConfig }, nil?: true
+
               # @!attribute container
               #   Container identifier for reuse across requests.
               #
@@ -492,7 +505,7 @@ module Anthropic
               #   @return [Float, nil]
               optional :top_p, Float
 
-              # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
+              # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
               #   Messages API creation parameters for the individual request.
               #
               #   See the
@@ -510,6 +523,8 @@ module Anthropic
               #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
               #
               #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Top-level cache control automatically applies a cache_control marker to the last
+              #
+              #   @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Compact the whole conversation and return a signed `compaction` block,
               #
               #   @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Container identifier for reuse across requests.
               #

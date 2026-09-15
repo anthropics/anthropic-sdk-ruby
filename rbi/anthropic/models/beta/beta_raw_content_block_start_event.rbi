@@ -232,7 +232,7 @@ module Anthropic
                   ]
                 ),
               text: String,
-              signature: String,
+              signature: T.any(String, T.nilable(String)),
               thinking: String,
               data: String,
               id: String,

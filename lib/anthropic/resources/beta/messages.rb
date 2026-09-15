@@ -40,7 +40,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
-        # @overload create(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @overload create(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -49,6 +49,8 @@ module Anthropic
         # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
         #
         # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
+        #
+        # @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Body param: Compact the whole conversation and return a signed `compaction` bloc
         #
         # @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Body param: Container identifier for reuse across requests.
         #
@@ -161,7 +163,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
-        # @overload stream(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @overload stream(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -170,6 +172,8 @@ module Anthropic
         # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
         #
         # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
+        #
+        # @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Body param: Compact the whole conversation and return a signed `compaction` bloc
         #
         # @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Body param: Container identifier for reuse across requests.
         #
@@ -274,7 +278,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
-        # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -283,6 +287,8 @@ module Anthropic
         # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
         #
         # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
+        #
+        # @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Body param: Compact the whole conversation and return a signed `compaction` bloc
         #
         # @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Body param: Container identifier for reuse across requests.
         #
@@ -379,13 +385,15 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCountTokensParams} for more details.
         #
-        # @overload count_tokens(messages:, model:, cache_control: nil, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @overload count_tokens(messages:, model:, cache_control: nil, compaction: nil, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Body param: Input messages.
         #
         # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
         #
         # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
+        #
+        # @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Body param: Compact the whole conversation and return a signed `compaction` bloc
         #
         # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Context management configuration.
         #

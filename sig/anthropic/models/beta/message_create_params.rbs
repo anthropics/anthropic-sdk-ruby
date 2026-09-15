@@ -7,6 +7,7 @@ module Anthropic
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          compaction: Anthropic::Beta::BetaCompactionConfig?,
           container: Anthropic::Models::Beta::MessageCreateParams::container?,
           context_management: Anthropic::Beta::BetaContextManagementConfig?,
           diagnostics: Anthropic::Beta::BetaDiagnosticsParam?,
@@ -44,6 +45,8 @@ module Anthropic
         attr_accessor model: Anthropic::Models::model
 
         attr_accessor cache_control: Anthropic::Beta::BetaCacheControlEphemeral?
+
+        attr_accessor compaction: Anthropic::Beta::BetaCompactionConfig?
 
         attr_accessor container: Anthropic::Models::Beta::MessageCreateParams::container?
 
@@ -144,6 +147,7 @@ module Anthropic
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
           ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          ?compaction: Anthropic::Beta::BetaCompactionConfig?,
           ?container: Anthropic::Models::Beta::MessageCreateParams::container?,
           ?context_management: Anthropic::Beta::BetaContextManagementConfig?,
           ?diagnostics: Anthropic::Beta::BetaDiagnosticsParam?,
@@ -175,6 +179,7 @@ module Anthropic
           messages: ::Array[Anthropic::Beta::BetaMessageParam],
           model: Anthropic::Models::model,
           cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
+          compaction: Anthropic::Beta::BetaCompactionConfig?,
           container: Anthropic::Models::Beta::MessageCreateParams::container?,
           context_management: Anthropic::Beta::BetaContextManagementConfig?,
           diagnostics: Anthropic::Beta::BetaDiagnosticsParam?,

@@ -25,6 +25,10 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
+        # Signature over the summary, to be sent back with the block verbatim
+        sig { returns(T.nilable(String)) }
+        attr_accessor :signature
+
         # A compaction block returned when autocompact is triggered.
         #
         # When content is None, it indicates the compaction failed to produce a valid
@@ -34,6 +38,7 @@ module Anthropic
           params(
             content: T.nilable(String),
             encrypted_content: T.nilable(String),
+            signature: T.nilable(String),
             type: Symbol
           ).returns(T.attached_class)
         end
@@ -42,6 +47,8 @@ module Anthropic
           content:,
           # Opaque metadata from prior compaction, to be round-tripped verbatim
           encrypted_content:,
+          # Signature over the summary, to be sent back with the block verbatim
+          signature: nil,
           type: :compaction
         )
         end
@@ -51,7 +58,8 @@ module Anthropic
             {
               content: T.nilable(String),
               encrypted_content: T.nilable(String),
-              type: Symbol
+              type: Symbol,
+              signature: T.nilable(String)
             }
           )
         end

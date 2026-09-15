@@ -4,7 +4,12 @@ module Anthropic
 
     module Beta
       type beta_compaction_block =
-        { content: String?, encrypted_content: String?, type: :compaction }
+        {
+          content: String?,
+          encrypted_content: String?,
+          type: :compaction,
+          signature: String?
+        }
 
       class BetaCompactionBlock < Anthropic::Internal::Type::BaseModel
         attr_accessor content: String?
@@ -13,16 +18,20 @@ module Anthropic
 
         attr_accessor type: :compaction
 
+        attr_accessor signature: String?
+
         def initialize: (
           content: String?,
           encrypted_content: String?,
+          ?signature: String?,
           ?type: :compaction
         ) -> void
 
         def to_hash: -> {
           content: String?,
           encrypted_content: String?,
-          type: :compaction
+          type: :compaction,
+          signature: String?
         }
       end
     end

@@ -322,6 +322,8 @@ module Anthropic
             model: T.any(Anthropic::Model::OrSymbol, String),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+            compaction:
+              T.nilable(Anthropic::Beta::BetaCompactionConfig::OrHash),
             container:
               T.nilable(
                 T.any(Anthropic::Beta::BetaContainerParams::OrHash, String)
@@ -504,6 +506,15 @@ module Anthropic
           # Body param: Top-level cache control automatically applies a cache_control marker
           # to the last cacheable block in the request.
           cache_control: nil,
+          # Body param: Compact the whole conversation and return a signed `compaction`
+          # block, alone, that a later request sends back first in `messages`, in place of
+          # the messages it summarizes. There is no trigger and no pause flag: sending the
+          # parameter compacts, and nothing is sampled after the block.
+          #
+          # The summarization prompt is the server's own unless `instructions` are given,
+          # which then replace it for this request; a value that is empty or only whitespace
+          # counts as absent.
+          compaction: nil,
           # Body param: Container identifier for reuse across requests.
           container: nil,
           # Body param: Context management configuration.
@@ -734,6 +745,8 @@ module Anthropic
             model: T.any(Anthropic::Model::OrSymbol, String),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+            compaction:
+              T.nilable(Anthropic::Beta::BetaCompactionConfig::OrHash),
             container:
               T.nilable(
                 T.any(Anthropic::Beta::BetaContainerParams::OrHash, String)
@@ -916,6 +929,15 @@ module Anthropic
           # Body param: Top-level cache control automatically applies a cache_control marker
           # to the last cacheable block in the request.
           cache_control: nil,
+          # Body param: Compact the whole conversation and return a signed `compaction`
+          # block, alone, that a later request sends back first in `messages`, in place of
+          # the messages it summarizes. There is no trigger and no pause flag: sending the
+          # parameter compacts, and nothing is sampled after the block.
+          #
+          # The summarization prompt is the server's own unless `instructions` are given,
+          # which then replace it for this request; a value that is empty or only whitespace
+          # counts as absent.
+          compaction: nil,
           # Body param: Container identifier for reuse across requests.
           container: nil,
           # Body param: Context management configuration.
@@ -1146,6 +1168,8 @@ module Anthropic
             model: T.any(Anthropic::Model::OrSymbol, String),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+            compaction:
+              T.nilable(Anthropic::Beta::BetaCompactionConfig::OrHash),
             container:
               T.nilable(
                 T.any(Anthropic::Beta::BetaContainerParams::OrHash, String)
@@ -1332,6 +1356,15 @@ module Anthropic
           # Body param: Top-level cache control automatically applies a cache_control marker
           # to the last cacheable block in the request.
           cache_control: nil,
+          # Body param: Compact the whole conversation and return a signed `compaction`
+          # block, alone, that a later request sends back first in `messages`, in place of
+          # the messages it summarizes. There is no trigger and no pause flag: sending the
+          # parameter compacts, and nothing is sampled after the block.
+          #
+          # The summarization prompt is the server's own unless `instructions` are given,
+          # which then replace it for this request; a value that is empty or only whitespace
+          # counts as absent.
+          compaction: nil,
           # Body param: Container identifier for reuse across requests.
           container: nil,
           # Body param: Context management configuration.
@@ -1558,6 +1591,8 @@ module Anthropic
             model: T.any(Anthropic::Model::OrSymbol, String),
             cache_control:
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
+            compaction:
+              T.nilable(Anthropic::Beta::BetaCompactionConfig::OrHash),
             context_management:
               T.nilable(Anthropic::Beta::BetaContextManagementConfig::OrHash),
             mcp_servers:
@@ -1701,6 +1736,15 @@ module Anthropic
           # Body param: Top-level cache control automatically applies a cache_control marker
           # to the last cacheable block in the request.
           cache_control: nil,
+          # Body param: Compact the whole conversation and return a signed `compaction`
+          # block, alone, that a later request sends back first in `messages`, in place of
+          # the messages it summarizes. There is no trigger and no pause flag: sending the
+          # parameter compacts, and nothing is sampled after the block.
+          #
+          # The summarization prompt is the server's own unless `instructions` are given,
+          # which then replace it for this request; a value that is empty or only whitespace
+          # counts as absent.
+          compaction: nil,
           # Body param: Context management configuration.
           #
           # This allows you to control how Claude manages context across multiple requests,

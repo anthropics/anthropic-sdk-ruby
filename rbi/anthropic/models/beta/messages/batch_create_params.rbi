@@ -292,6 +292,25 @@ module Anthropic
               end
               attr_writer :cache_control
 
+              # Compact the whole conversation and return a signed `compaction` block, alone,
+              # that a later request sends back first in `messages`, in place of the messages it
+              # summarizes. There is no trigger and no pause flag: sending the parameter
+              # compacts, and nothing is sampled after the block.
+              #
+              # The summarization prompt is the server's own unless `instructions` are given,
+              # which then replace it for this request; a value that is empty or only whitespace
+              # counts as absent.
+              sig { returns(T.nilable(Anthropic::Beta::BetaCompactionConfig)) }
+              attr_reader :compaction
+
+              sig do
+                params(
+                  compaction:
+                    T.nilable(Anthropic::Beta::BetaCompactionConfig::OrHash)
+                ).void
+              end
+              attr_writer :compaction
+
               # Container identifier for reuse across requests.
               sig do
                 returns(
@@ -788,6 +807,8 @@ module Anthropic
                     T.nilable(
                       Anthropic::Beta::BetaCacheControlEphemeral::OrHash
                     ),
+                  compaction:
+                    T.nilable(Anthropic::Beta::BetaCompactionConfig::OrHash),
                   container:
                     T.nilable(
                       T.any(
@@ -974,6 +995,15 @@ module Anthropic
                 # Top-level cache control automatically applies a cache_control marker to the last
                 # cacheable block in the request.
                 cache_control: nil,
+                # Compact the whole conversation and return a signed `compaction` block, alone,
+                # that a later request sends back first in `messages`, in place of the messages it
+                # summarizes. There is no trigger and no pause flag: sending the parameter
+                # compacts, and nothing is sampled after the block.
+                #
+                # The summarization prompt is the server's own unless `instructions` are given,
+                # which then replace it for this request; a value that is empty or only whitespace
+                # counts as absent.
+                compaction: nil,
                 # Container identifier for reuse across requests.
                 container: nil,
                 # Context management configuration.
@@ -1182,6 +1212,8 @@ module Anthropic
                     model: T.any(Anthropic::Model::OrSymbol, String),
                     cache_control:
                       T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
+                    compaction:
+                      T.nilable(Anthropic::Beta::BetaCompactionConfig),
                     container:
                       T.nilable(
                         T.any(Anthropic::Beta::BetaContainerParams, String)
