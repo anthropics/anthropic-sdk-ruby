@@ -61,8 +61,10 @@ module Anthropic
           #
           # `:message-type: event` frames carry a JSON payload
           # `{"bytes": "<base64>"}` wrapping the Anthropic event; emit it as
-          # an `event:`/`data:` pair. `:message-type: exception` frames carry an
-          # error payload and a `:exception-type` header — re-emit as the same
+          # an `event:`/`data:` pair, skipping chunks with no `type`.
+          # `:message-type: exception` frames (error payload plus an
+          # `:exception-type` header) and `:message-type: error` frames
+          # (`:error-code`/`:error-message` headers) are re-emitted as the same
           # `event: error` / `data: {"type":"error",...}` SSE shape the API
           # would have sent, so the stream consumer's existing error path fires.
           #
@@ -74,12 +76,20 @@ module Anthropic
             in "event"
               payload = JSON.parse(msg.payload.read, symbolize_names: true)
               inner = Base64.decode64(payload.fetch(:bytes))
-              type = JSON.parse(inner, symbolize_names: true).fetch(:type)
-              y << "event: #{type}\ndata: #{inner}\n\n"
+              case JSON.parse(inner, symbolize_names: true)
+              in {type: String => type}
+                y << "event: #{type}\ndata: #{inner}\n\n"
+              else
+              end
             in "exception"
               exc_type = msg.headers[":exception-type"]&.value
               body = msg.payload.read
               data = JSON.generate(type: "error", error: {type: exc_type, message: body})
+              y << "event: error\ndata: #{data}\n\n"
+            in "error"
+              code = msg.headers[":error-code"]&.value
+              message = msg.headers[":error-message"]&.value
+              data = JSON.generate(type: "error", error: {type: code, message: message})
               y << "event: error\ndata: #{data}\n\n"
             else
               # Unknown message-type — drop. AWS may add prelude/metadata frames.
