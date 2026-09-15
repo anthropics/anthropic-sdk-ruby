@@ -17,9 +17,8 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
-        # Replaces the server's summarization prompt for this request. When set, earlier
-        # thinking blocks are left out of the content being summarized on models that
-        # require it.
+        # Replaces the server's default summarization prompt for this request. An empty or
+        # whitespace-only value counts as absent.
         sig { returns(T.nilable(String)) }
         attr_accessor :instructions
 
@@ -37,9 +36,8 @@ module Anthropic
           )
         end
         def self.new(
-          # Replaces the server's summarization prompt for this request. When set, earlier
-          # thinking blocks are left out of the content being summarized on models that
-          # require it.
+          # Replaces the server's default summarization prompt for this request. An empty or
+          # whitespace-only value counts as absent.
           instructions: nil,
           type: :summarize
         )

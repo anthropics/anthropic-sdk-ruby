@@ -10,9 +10,8 @@ module Anthropic
         required :type, const: :summarize
 
         # @!attribute instructions
-        #   Replaces the server's summarization prompt for this request. When set, earlier
-        #   thinking blocks are left out of the content being summarized on models that
-        #   require it.
+        #   Replaces the server's default summarization prompt for this request. An empty or
+        #   whitespace-only value counts as absent.
         #
         #   @return [String, nil]
         optional :instructions, String, nil?: true
@@ -30,7 +29,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::BetaCompactionConfig} for more details.
         #
-        #   @param instructions [String, nil] Replaces the server's summarization prompt for this request. When set, earlier t
+        #   @param instructions [String, nil] Replaces the server's default summarization prompt for this request. An empty or
         #
         #   @param type [Symbol, :summarize]
       end
