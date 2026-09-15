@@ -19,7 +19,7 @@ module Anthropic
           #
           # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Query parameter for view
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -83,7 +83,7 @@ module Anthropic
           #
           # @param view [Symbol, Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryView] Query param: Query parameter for view
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -137,7 +137,7 @@ module Anthropic
           #
           # @param memory_store_id [String] Path param: Path parameter memory_store_id
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #

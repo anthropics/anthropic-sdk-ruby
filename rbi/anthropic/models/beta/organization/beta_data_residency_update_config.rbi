@@ -19,10 +19,10 @@ module Anthropic
             returns(
               T.nilable(
                 T.any(
+                  Symbol,
                   T::Array[
                     Anthropic::Beta::Organization::BetaAllowedInferenceGeo::OrSymbol
-                  ],
-                  Symbol
+                  ]
                 )
               )
             )
@@ -45,10 +45,10 @@ module Anthropic
               allowed_inference_geos:
                 T.nilable(
                   T.any(
+                    Symbol,
                     T::Array[
                       Anthropic::Beta::Organization::BetaAllowedInferenceGeo::OrSymbol
-                    ],
-                    Symbol
+                    ]
                   )
                 ),
               default_inference_geo:
@@ -73,10 +73,10 @@ module Anthropic
                 allowed_inference_geos:
                   T.nilable(
                     T.any(
+                      Symbol,
                       T::Array[
                         Anthropic::Beta::Organization::BetaAllowedInferenceGeo::OrSymbol
-                      ],
-                      Symbol
+                      ]
                     )
                   ),
                 default_inference_geo:
@@ -97,10 +97,10 @@ module Anthropic
             Variants =
               T.type_alias do
                 T.any(
+                  Symbol,
                   T::Array[
                     Anthropic::Beta::Organization::BetaAllowedInferenceGeo::TaggedSymbol
-                  ],
-                  Symbol
+                  ]
                 )
               end
 

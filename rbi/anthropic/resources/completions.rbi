@@ -24,7 +24,7 @@ module Anthropic
           temperature: Float,
           top_k: Integer,
           top_p: Float,
-          betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+          betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
           workspace_id: String,
           stream: T.noreturn,
           request_options: Anthropic::RequestOptions::OrHash
@@ -124,7 +124,7 @@ module Anthropic
           temperature: Float,
           top_k: Integer,
           top_p: Float,
-          betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+          betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
           workspace_id: String,
           stream: T.noreturn,
           request_options: Anthropic::RequestOptions::OrHash

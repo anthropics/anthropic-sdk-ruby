@@ -12,7 +12,7 @@ module Anthropic
         #   Referenced agents must exist, must not be archived, and must not themselves have
         #   `multiagent` set (depth limit 1).
         #
-        #   @return [Array<String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsMultiagentSelfParams, Anthropic::Models::Beta::BetaManagedAgentsAdvisorParams>]
+        #   @return [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsMultiagentSelfParams, Anthropic::Models::Beta::BetaManagedAgentsAdvisorParams, String>]
         required :agents,
                  -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::Beta::BetaManagedAgentsMultiagentRosterEntryParams] }
 
@@ -29,7 +29,7 @@ module Anthropic
         #   {Anthropic::Models::Beta::BetaManagedAgentsMultiagentCoordinatorParams} for more
         #   details.
         #
-        #   @param agents [Array<String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsMultiagentSelfParams, Anthropic::Models::Beta::BetaManagedAgentsAdvisorParams>] Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is
+        #   @param agents [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsMultiagentSelfParams, Anthropic::Models::Beta::BetaManagedAgentsAdvisorParams, String>] Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is
         #
         #   @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsMultiagentCoordinatorParams::Type]
 

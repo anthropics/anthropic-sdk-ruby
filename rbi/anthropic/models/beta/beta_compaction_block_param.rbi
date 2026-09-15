@@ -37,6 +37,10 @@ module Anthropic
         sig { returns(T.nilable(String)) }
         attr_accessor :encrypted_content
 
+        # The block's signature as returned, to be sent back verbatim
+        sig { returns(T.nilable(String)) }
+        attr_accessor :signature
+
         # A compaction block containing summary of previous context.
         #
         # Users should round-trip these blocks from responses to subsequent requests to
@@ -50,6 +54,7 @@ module Anthropic
               T.nilable(Anthropic::Beta::BetaCacheControlEphemeral::OrHash),
             content: T.nilable(String),
             encrypted_content: T.nilable(String),
+            signature: T.nilable(String),
             type: Symbol
           ).returns(T.attached_class)
         end
@@ -60,6 +65,8 @@ module Anthropic
           content: nil,
           # Opaque metadata from prior compaction, to be round-tripped verbatim
           encrypted_content: nil,
+          # The block's signature as returned, to be sent back verbatim
+          signature: nil,
           type: :compaction
         )
         end
@@ -71,7 +78,8 @@ module Anthropic
               cache_control:
                 T.nilable(Anthropic::Beta::BetaCacheControlEphemeral),
               content: T.nilable(String),
-              encrypted_content: T.nilable(String)
+              encrypted_content: T.nilable(String),
+              signature: T.nilable(String)
             }
           )
         end

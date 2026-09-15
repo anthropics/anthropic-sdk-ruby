@@ -28,7 +28,7 @@ module Anthropic
               #
               # @param page [String, nil] Query param: Opaque cursor from a previous response's `next_page`.
               #
-              # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+              # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
               #
               # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
               #
@@ -72,7 +72,7 @@ module Anthropic
               #
               # @param workspace_id [String] Body param: Tagged ID of the workspace to enable this rule for.
               #
-              # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+              # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
               #
               # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
               #
@@ -110,7 +110,7 @@ module Anthropic
               #
               # @param federation_rule_id [String] Path param: ID of the federation rule.
               #
-              # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+              # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
               #
               # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
               #

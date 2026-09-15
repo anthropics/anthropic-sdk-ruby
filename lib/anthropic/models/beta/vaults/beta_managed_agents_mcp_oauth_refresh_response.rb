@@ -18,7 +18,6 @@ module Anthropic
           required :token_endpoint, String
 
           # @!attribute token_endpoint_auth
-          #   Token endpoint requires no client authentication.
           #
           #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostResponse]
           required :token_endpoint_auth,
@@ -43,14 +42,12 @@ module Anthropic
           #
           #   @param token_endpoint [String] Token endpoint URL used to refresh the access token.
           #
-          #   @param token_endpoint_auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostResponse] Token endpoint requires no client authentication.
+          #   @param token_endpoint_auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthNoneResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicResponse, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostResponse]
           #
           #   @param resource [String, nil] OAuth resource indicator.
           #
           #   @param scope [String, nil] OAuth scope for the refresh request.
 
-          # Token endpoint requires no client authentication.
-          #
           # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshResponse#token_endpoint_auth
           module TokenEndpointAuth
             extend Anthropic::Internal::Type::Union

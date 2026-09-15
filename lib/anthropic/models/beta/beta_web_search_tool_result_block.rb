@@ -20,7 +20,6 @@ module Anthropic
         required :type, const: :web_search_tool_result
 
         # @!attribute caller_
-        #   Tool invocation directly from the model.
         #
         #   @return [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120, nil]
         optional :caller_,
@@ -31,15 +30,10 @@ module Anthropic
 
         # @!method initialize(content:, tool_use_id:, caller_: nil, type: :web_search_tool_result)
         #   @param content [Anthropic::Models::Beta::BetaWebSearchToolResultError, Array<Anthropic::Models::Beta::BetaWebSearchResultBlock>]
-        #
         #   @param tool_use_id [String]
-        #
-        #   @param caller_ [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120] Tool invocation directly from the model.
-        #
+        #   @param caller_ [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120]
         #   @param type [Symbol, :web_search_tool_result]
 
-        # Tool invocation directly from the model.
-        #
         # @see Anthropic::Models::Beta::BetaWebSearchToolResultBlock#caller_
         module Caller
           extend Anthropic::Internal::Type::Union

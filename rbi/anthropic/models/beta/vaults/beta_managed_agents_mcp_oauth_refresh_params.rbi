@@ -25,7 +25,6 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :token_endpoint
 
-          # Token endpoint requires no client authentication.
           sig do
             returns(
               T.any(
@@ -68,7 +67,6 @@ module Anthropic
             refresh_token:,
             # Token endpoint URL used to refresh the access token.
             token_endpoint:,
-            # Token endpoint requires no client authentication.
             token_endpoint_auth:,
             # OAuth resource indicator.
             resource: nil,
@@ -97,7 +95,6 @@ module Anthropic
           def to_hash
           end
 
-          # Token endpoint requires no client authentication.
           module TokenEndpointAuth
             extend Anthropic::Internal::Type::Union
 

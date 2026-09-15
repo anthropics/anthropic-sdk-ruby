@@ -40,7 +40,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
-        # @overload create(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @overload create(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -50,15 +50,17 @@ module Anthropic
         #
         # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
         #
+        # @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Body param: Compact the whole conversation and return a signed `compaction` bloc
+        #
         # @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Body param: Container identifier for reuse across requests.
         #
         # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Context management configuration.
         #
         # @param diagnostics [Anthropic::Models::Beta::BetaDiagnosticsParam, nil] Body param: Request-level diagnostics. Currently carries the previous response
         #
-        # @param fallback_credit_token [String, Anthropic::Models::Beta::BetaFallbackCreditTokenParam, nil] Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
+        # @param fallback_credit_token [Anthropic::Models::Beta::BetaFallbackCreditTokenParam, String, nil] Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
         #
-        # @param fallbacks [Array<Anthropic::Models::Beta::BetaFallbackParam>, Symbol, :default, nil] Body param: Opt-in server-side retry on one or more substitute models when the r
+        # @param fallbacks [Symbol, :default, Array<Anthropic::Models::Beta::BetaFallbackParam>, nil] Body param: Opt-in server-side retry on one or more substitute models when the r
         #
         # @param inference_geo [String, nil] Body param: Specifies the geographic region for inference processing. If not spe
         #
@@ -90,7 +92,7 @@ module Anthropic
         #
         # @param top_p [Float] Body param: Use nucleus sampling.
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
         #
@@ -161,7 +163,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
-        # @overload stream(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @overload stream(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -171,15 +173,17 @@ module Anthropic
         #
         # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
         #
+        # @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Body param: Compact the whole conversation and return a signed `compaction` bloc
+        #
         # @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Body param: Container identifier for reuse across requests.
         #
         # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Context management configuration.
         #
         # @param diagnostics [Anthropic::Models::Beta::BetaDiagnosticsParam, nil] Body param: Request-level diagnostics. Currently carries the previous response
         #
-        # @param fallback_credit_token [String, Anthropic::Models::Beta::BetaFallbackCreditTokenParam, nil] Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
+        # @param fallback_credit_token [Anthropic::Models::Beta::BetaFallbackCreditTokenParam, String, nil] Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
         #
-        # @param fallbacks [Array<Anthropic::Models::Beta::BetaFallbackParam>, Symbol, :default, nil] Body param: Opt-in server-side retry on one or more substitute models when the r
+        # @param fallbacks [Symbol, :default, Array<Anthropic::Models::Beta::BetaFallbackParam>, nil] Body param: Opt-in server-side retry on one or more substitute models when the r
         #
         # @param inference_geo [String, nil] Body param: Specifies the geographic region for inference processing. If not spe
         #
@@ -211,7 +215,7 @@ module Anthropic
         #
         # @param top_p [Float] Body param: Use nucleus sampling.
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
         #
@@ -274,7 +278,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCreateParams} for more details.
         #
-        # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @overload stream_raw(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param max_tokens [Integer] Body param: The maximum number of tokens to generate before stopping.
         #
@@ -284,15 +288,17 @@ module Anthropic
         #
         # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
         #
+        # @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Body param: Compact the whole conversation and return a signed `compaction` bloc
+        #
         # @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Body param: Container identifier for reuse across requests.
         #
         # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Context management configuration.
         #
         # @param diagnostics [Anthropic::Models::Beta::BetaDiagnosticsParam, nil] Body param: Request-level diagnostics. Currently carries the previous response
         #
-        # @param fallback_credit_token [String, Anthropic::Models::Beta::BetaFallbackCreditTokenParam, nil] Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
+        # @param fallback_credit_token [Anthropic::Models::Beta::BetaFallbackCreditTokenParam, String, nil] Body param: The `fallback_credit_token` from a prior refusal's `stop_details`.
         #
-        # @param fallbacks [Array<Anthropic::Models::Beta::BetaFallbackParam>, Symbol, :default, nil] Body param: Opt-in server-side retry on one or more substitute models when the r
+        # @param fallbacks [Symbol, :default, Array<Anthropic::Models::Beta::BetaFallbackParam>, nil] Body param: Opt-in server-side retry on one or more substitute models when the r
         #
         # @param inference_geo [String, nil] Body param: Specifies the geographic region for inference processing. If not spe
         #
@@ -324,7 +330,7 @@ module Anthropic
         #
         # @param top_p [Float] Body param: Use nucleus sampling.
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
         #
@@ -379,13 +385,15 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::MessageCountTokensParams} for more details.
         #
-        # @overload count_tokens(messages:, model:, cache_control: nil, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @overload count_tokens(messages:, model:, cache_control: nil, compaction: nil, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #
         # @param messages [Array<Anthropic::Models::Beta::BetaMessageParam>] Body param: Input messages.
         #
         # @param model [Symbol, String, Anthropic::Models::Model] Body param: The model that will complete your prompt.
         #
         # @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Body param: Top-level cache control automatically applies a cache_control marker
+        #
+        # @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Body param: Compact the whole conversation and return a signed `compaction` bloc
         #
         # @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Body param: Context management configuration.
         #
@@ -405,7 +413,7 @@ module Anthropic
         #
         # @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaCodeExecutionTool20250522, Anthropic::Models::Beta::BetaCodeExecutionTool20250825, Anthropic::Models::Beta::BetaCodeExecutionTool20260120, Anthropic::Models::Beta::BetaCodeExecutionTool20260521, Anthropic::Models::Beta::BetaBrowserToolset20260801, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaMemoryTool20250818, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20251124, Anthropic::Models::Beta::BetaComputerToolset20260801, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaToolTextEditor20250429, Anthropic::Models::Beta::BetaToolTextEditor20250728, Anthropic::Models::Beta::BetaWebSearchTool20250305, Anthropic::Models::Beta::BetaWebFetchTool20250910, Anthropic::Models::Beta::BetaWebSearchTool20260209, Anthropic::Models::Beta::BetaWebFetchTool20260209, Anthropic::Models::Beta::BetaWebFetchTool20260309, Anthropic::Models::Beta::BetaWebSearchTool20260318, Anthropic::Models::Beta::BetaWebFetchTool20260318, Anthropic::Models::Beta::BetaAdvisorTool20260301, Anthropic::Models::Beta::BetaToolSearchToolBm25_20251119, Anthropic::Models::Beta::BetaToolSearchToolRegex20251119, Anthropic::Models::Beta::BetaMCPToolset>] Body param: Definitions of tools that the model may use.
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param user_profile_id [String] Header param: The user profile ID to attribute this request to. Use when acting
         #

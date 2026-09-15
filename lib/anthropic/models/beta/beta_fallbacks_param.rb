@@ -10,12 +10,12 @@ module Anthropic
       module BetaFallbacksParam
         extend Anthropic::Internal::Type::Union
 
-        variant -> { Anthropic::Models::Beta::BetaFallbacksParam::BetaFallbackParamArray }
-
         variant const: :default
 
+        variant -> { Anthropic::Models::Beta::BetaFallbacksParam::BetaFallbackParamArray }
+
         # @!method self.variants
-        #   @return [Array(Array<Anthropic::Models::Beta::BetaFallbackParam>, Symbol, :default)]
+        #   @return [Array(Symbol, :default, Array<Anthropic::Models::Beta::BetaFallbackParam>)]
 
         # @type [Anthropic::Internal::Type::Converter]
         BetaFallbackParamArray = Anthropic::Internal::Type::ArrayOf[-> { Anthropic::Beta::BetaFallbackParam }]

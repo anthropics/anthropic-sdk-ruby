@@ -67,6 +67,7 @@ module Anthropic
         auth_token: T.nilable(String),
         webhook_key: T.nilable(String),
         base_url: T.nilable(String),
+        proxy: T.nilable(T.any(String, URI::Generic)),
         max_retries: Integer,
         timeout: Float,
         initial_retry_delay: Float,
@@ -84,6 +85,10 @@ module Anthropic
       # Override the default base URL for the API, e.g.,
       # `"https://api.example.com/v2/"`. Defaults to `ENV["ANTHROPIC_BASE_URL"]`
       base_url: ENV["ANTHROPIC_BASE_URL"],
+      # HTTP proxy URL, e.g., `"http://user:pass@proxy.example.com:8080"`. When `nil`,
+      # `net/http` reads the `http_proxy`, `https_proxy`, and `no_proxy` environment
+      # variables.
+      proxy: nil,
       # Max number of retries to attempt after a failed retryable request.
       max_retries: Anthropic::Client::DEFAULT_MAX_RETRIES,
       timeout: Anthropic::Client::DEFAULT_TIMEOUT_IN_SECONDS,

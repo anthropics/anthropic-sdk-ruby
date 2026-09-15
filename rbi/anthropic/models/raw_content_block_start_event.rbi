@@ -11,7 +11,6 @@ module Anthropic
           )
         end
 
-      # Response model for a file uploaded to the container.
       sig do
         returns(Anthropic::RawContentBlockStartEvent::ContentBlock::Variants)
       end
@@ -44,12 +43,7 @@ module Anthropic
           type: Symbol
         ).returns(T.attached_class)
       end
-      def self.new(
-        # Response model for a file uploaded to the container.
-        content_block:,
-        index:,
-        type: :content_block_start
-      )
+      def self.new(content_block:, index:, type: :content_block_start)
       end
 
       sig do
@@ -65,7 +59,6 @@ module Anthropic
       def to_hash
       end
 
-      # Response model for a file uploaded to the container.
       module ContentBlock
         extend Anthropic::Internal::Type::Union
 
@@ -282,13 +275,11 @@ module Anthropic
           # for details.
           data: nil,
           id: nil,
-          # Tool invocation directly from the model.
           caller_: nil,
           input: nil,
           name: nil,
           # For a toolset member tool_use, the toolset family.
           toolset_name: nil,
-          # Code execution result with encrypted stdout for PFC + web_search results.
           content: nil,
           tool_use_id: nil,
           file_id: nil

@@ -29,7 +29,6 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :session_thread_id
 
-          # The agent completed its turn naturally and is ready for the next user message.
           sig do
             returns(
               Anthropic::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::StopReason::Variants
@@ -72,7 +71,6 @@ module Anthropic
             processed_at:,
             # Public sthr\_ ID of the thread that went idle.
             session_thread_id:,
-            # The agent completed its turn naturally and is ready for the next user message.
             stop_reason:,
             type:
           )
@@ -95,7 +93,6 @@ module Anthropic
           def to_hash
           end
 
-          # The agent completed its turn naturally and is ready for the next user message.
           module StopReason
             extend Anthropic::Internal::Type::Union
 

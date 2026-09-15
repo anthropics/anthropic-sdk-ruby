@@ -9,7 +9,7 @@ module Anthropic
           delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta,
           type: :message_delta,
           usage: Anthropic::Beta::BetaMessageDeltaUsage,
-          input_transformations: ::Array[Anthropic::Beta::BetaThinkingDroppedInputTransformation]?
+          input_transformations: ::Array[Anthropic::Models::Beta::beta_input_transformation]?
         }
 
       class BetaRawMessageDeltaEvent < Anthropic::Internal::Type::BaseModel
@@ -21,13 +21,13 @@ module Anthropic
 
         attr_accessor usage: Anthropic::Beta::BetaMessageDeltaUsage
 
-        attr_accessor input_transformations: ::Array[Anthropic::Beta::BetaThinkingDroppedInputTransformation]?
+        attr_accessor input_transformations: ::Array[Anthropic::Models::Beta::beta_input_transformation]?
 
         def initialize: (
           context_management: Anthropic::Beta::BetaContextManagementResponse?,
           delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta,
           usage: Anthropic::Beta::BetaMessageDeltaUsage,
-          ?input_transformations: ::Array[Anthropic::Beta::BetaThinkingDroppedInputTransformation]?,
+          ?input_transformations: ::Array[Anthropic::Models::Beta::beta_input_transformation]?,
           ?type: :message_delta
         ) -> void
 
@@ -36,7 +36,7 @@ module Anthropic
           delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta,
           type: :message_delta,
           usage: Anthropic::Beta::BetaMessageDeltaUsage,
-          input_transformations: ::Array[Anthropic::Beta::BetaThinkingDroppedInputTransformation]?
+          input_transformations: ::Array[Anthropic::Models::Beta::beta_input_transformation]?
         }
 
         type delta =

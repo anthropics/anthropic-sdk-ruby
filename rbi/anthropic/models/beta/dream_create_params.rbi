@@ -27,18 +27,14 @@ module Anthropic
         end
         attr_accessor :inputs
 
-        # Model identifier and configuration applied to every pipeline stage.
         sig do
-          returns(T.any(String, Anthropic::Beta::BetaDreamModelConfigParam))
+          returns(T.any(Anthropic::Beta::BetaDreamModelConfigParam, String))
         end
         attr_accessor :model
 
         sig { returns(T.nilable(String)) }
         attr_accessor :instructions
 
-        # The default destination: the job creates a new output memory store as a clone of
-        # the memory_store input and writes the consolidated memories into it. The input
-        # store is never mutated.
         sig do
           returns(
             T.nilable(
@@ -66,7 +62,7 @@ module Anthropic
         sig do
           returns(
             T.nilable(
-              T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
+              T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
             )
           )
         end
@@ -74,7 +70,7 @@ module Anthropic
 
         sig do
           params(
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
           ).void
         end
         attr_writer :betas
@@ -95,26 +91,22 @@ module Anthropic
                 )
               ],
             model:
-              T.any(String, Anthropic::Beta::BetaDreamModelConfigParam::OrHash),
+              T.any(Anthropic::Beta::BetaDreamModelConfigParam::OrHash, String),
             instructions: T.nilable(String),
             output_behavior:
               T.any(
                 Anthropic::Beta::BetaOutputBehaviorCreateNew::OrHash,
                 Anthropic::Beta::BetaOutputBehaviorUpdateExisting::OrHash
               ),
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
           inputs:,
-          # Model identifier and configuration applied to every pipeline stage.
           model:,
           instructions: nil,
-          # The default destination: the job creates a new output memory store as a clone of
-          # the memory_store input and writes the consolidated memories into it. The input
-          # store is never mutated.
           output_behavior: nil,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
@@ -133,7 +125,7 @@ module Anthropic
                     Anthropic::Beta::BetaDreamSessionsInput
                   )
                 ],
-              model: T.any(String, Anthropic::Beta::BetaDreamModelConfigParam),
+              model: T.any(Anthropic::Beta::BetaDreamModelConfigParam, String),
               instructions: T.nilable(String),
               output_behavior:
                 T.any(
@@ -141,7 +133,7 @@ module Anthropic
                   Anthropic::Beta::BetaOutputBehaviorUpdateExisting
                 ),
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions
             }
@@ -150,13 +142,12 @@ module Anthropic
         def to_hash
         end
 
-        # Model identifier and configuration applied to every pipeline stage.
         module Model
           extend Anthropic::Internal::Type::Union
 
           Variants =
             T.type_alias do
-              T.any(String, Anthropic::Beta::BetaDreamModelConfigParam)
+              T.any(Anthropic::Beta::BetaDreamModelConfigParam, String)
             end
 
           sig do

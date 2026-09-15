@@ -168,6 +168,7 @@ module Anthropic
         sig do
           params(
             base_url: String,
+            proxy: T.nilable(T.any(String, URI::Generic)),
             timeout: Float,
             max_retries: Integer,
             initial_retry_delay: Float,
@@ -191,6 +192,7 @@ module Anthropic
         end
         def self.new(
           base_url:,
+          proxy: nil,
           timeout: 0.0,
           max_retries: 0,
           initial_retry_delay: 0.0,

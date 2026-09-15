@@ -4,7 +4,6 @@ module Anthropic
   module Models
     module Beta
       module Sessions
-        # A memory store attached to an agent session.
         module BetaManagedAgentsSessionResource
           extend Anthropic::Internal::Type::Union
 

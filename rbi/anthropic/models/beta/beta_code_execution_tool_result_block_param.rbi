@@ -15,7 +15,6 @@ module Anthropic
             )
           end
 
-        # Code execution result with encrypted stdout for PFC + web_search results.
         sig do
           returns(
             T.any(
@@ -60,7 +59,6 @@ module Anthropic
           ).returns(T.attached_class)
         end
         def self.new(
-          # Code execution result with encrypted stdout for PFC + web_search results.
           content:,
           tool_use_id:,
           # Create a cache control breakpoint at this content block.

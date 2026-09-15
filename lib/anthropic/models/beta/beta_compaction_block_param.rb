@@ -27,7 +27,13 @@ module Anthropic
         #   @return [String, nil]
         optional :encrypted_content, String, nil?: true
 
-        # @!method initialize(cache_control: nil, content: nil, encrypted_content: nil, type: :compaction)
+        # @!attribute signature
+        #   The block's signature as returned, to be sent back verbatim
+        #
+        #   @return [String, nil]
+        optional :signature, String, nil?: true
+
+        # @!method initialize(cache_control: nil, content: nil, encrypted_content: nil, signature: nil, type: :compaction)
         #   A compaction block containing summary of previous context.
         #
         #   Users should round-trip these blocks from responses to subsequent requests to
@@ -41,6 +47,8 @@ module Anthropic
         #   @param content [String, nil] Summary of previously compacted content, or null if compaction failed
         #
         #   @param encrypted_content [String, nil] Opaque metadata from prior compaction, to be round-tripped verbatim
+        #
+        #   @param signature [String, nil] The block's signature as returned, to be sent back verbatim
         #
         #   @param type [Symbol, :compaction]
       end

@@ -68,8 +68,8 @@ module Anthropic
         sig { returns(T.nilable(Time)) }
         attr_accessor :processed_at
 
-        # Routes this result to a subagent thread. Copy from the `agent.tool_use` event's
-        # `session_thread_id`.
+        # Set by the server to the subagent thread this result was routed to. Omitted when
+        # it was routed to the primary thread.
         sig { returns(T.nilable(String)) }
         attr_accessor :session_thread_id
 
@@ -111,8 +111,8 @@ module Anthropic
           is_error: nil,
           # A timestamp in RFC 3339 format
           processed_at: nil,
-          # Routes this result to a subagent thread. Copy from the `agent.tool_use` event's
-          # `session_thread_id`.
+          # Set by the server to the subagent thread this result was routed to. Omitted when
+          # it was routed to the primary thread.
           session_thread_id: nil
         )
         end

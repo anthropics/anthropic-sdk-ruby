@@ -541,6 +541,18 @@ module Anthropic
 
   module WebFetchToolResultErrorCode = Anthropic::Models::WebFetchToolResultErrorCode
 
+  class WebFetchURLSourceAll = Anthropic::Models::WebFetchURLSourceAll
+
+  class WebFetchURLSourceExcept = Anthropic::Models::WebFetchURLSourceExcept
+
+  class WebFetchURLSourceNone = Anthropic::Models::WebFetchURLSourceNone
+
+  class WebFetchURLSourceOnly = Anthropic::Models::WebFetchURLSourceOnly
+
+  class WebFetchURLSources = Anthropic::Models::WebFetchURLSources
+
+  class WebFetchURLSourceToolReference = Anthropic::Models::WebFetchURLSourceToolReference
+
   class WebSearchResultBlock = Anthropic::Models::WebSearchResultBlock
 
   class WebSearchResultBlockParam = Anthropic::Models::WebSearchResultBlockParam

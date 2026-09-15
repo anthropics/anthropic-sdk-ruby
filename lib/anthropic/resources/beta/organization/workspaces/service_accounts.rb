@@ -25,7 +25,7 @@ module Anthropic
             #
             # @param workspace_id [String] Path param: ID of the workspace.
             #
-            # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
@@ -73,7 +73,7 @@ module Anthropic
             #
             # @param workspace_role [Symbol, Anthropic::Models::Beta::Organization::BetaNoBillingWorkspaceRole] Body param: New role for the service account in this workspace.
             #
-            # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
@@ -123,7 +123,7 @@ module Anthropic
             #
             # @param page [String, nil] Query param: Opaque cursor from a previous response's `next_page`.
             #
-            # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
@@ -169,7 +169,7 @@ module Anthropic
             #
             # @param workspace_role [Symbol, Anthropic::Models::Beta::Organization::BetaNoBillingWorkspaceRole] Body param: Role to assign to the service account in this workspace.
             #
-            # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #
@@ -208,7 +208,7 @@ module Anthropic
             #
             # @param workspace_id [String] Path param: ID of the workspace.
             #
-            # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
             #
             # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
             #

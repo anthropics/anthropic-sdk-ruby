@@ -64,7 +64,7 @@ module Anthropic
 
       # @!attribute temperature
       #   @deprecated Deprecated. Models released after Claude Opus 4.6 do not support setting
-      #   temperature. A value of 1.0 of will be accepted for backwards compatibility, all
+      #   temperature. A value of 1.0 will be accepted for backwards compatibility, all
       #   other values will be rejected with a 400 error.
       #
       #   Amount of randomness injected into the response.
@@ -112,7 +112,7 @@ module Anthropic
       # @!attribute betas
       #   Optional header to specify the beta version(s) you want to use.
       #
-      #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
+      #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
       optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
       # @!attribute workspace_id
@@ -140,7 +140,7 @@ module Anthropic
       #
       #   @param top_p [Float] Use nucleus sampling.
       #
-      #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+      #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
       #
       #   @param workspace_id [String]
       #

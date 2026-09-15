@@ -24,10 +24,10 @@ module Anthropic
           returns(
             T::Array[
               T.any(
-                String,
                 Anthropic::Beta::BetaManagedAgentsAgentParams,
                 Anthropic::Beta::BetaManagedAgentsMultiagentSelfParams,
-                Anthropic::Beta::BetaManagedAgentsAdvisorParams
+                Anthropic::Beta::BetaManagedAgentsAdvisorParams,
+                String
               )
             ]
           )
@@ -48,10 +48,10 @@ module Anthropic
             agents:
               T::Array[
                 T.any(
-                  String,
                   Anthropic::Beta::BetaManagedAgentsAgentParams::OrHash,
                   Anthropic::Beta::BetaManagedAgentsMultiagentSelfParams::OrHash,
-                  Anthropic::Beta::BetaManagedAgentsAdvisorParams::OrHash
+                  Anthropic::Beta::BetaManagedAgentsAdvisorParams::OrHash,
+                  String
                 )
               ],
             type:
@@ -76,10 +76,10 @@ module Anthropic
               agents:
                 T::Array[
                   T.any(
-                    String,
                     Anthropic::Beta::BetaManagedAgentsAgentParams,
                     Anthropic::Beta::BetaManagedAgentsMultiagentSelfParams,
-                    Anthropic::Beta::BetaManagedAgentsAdvisorParams
+                    Anthropic::Beta::BetaManagedAgentsAdvisorParams,
+                    String
                   )
                 ],
               type:

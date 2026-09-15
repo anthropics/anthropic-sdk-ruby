@@ -17,8 +17,8 @@ module Anthropic
         sig do
           returns(
             T.any(
-              T::Array[Anthropic::Beta::BetaWebSearchResultBlockParam],
-              Anthropic::Beta::BetaWebSearchToolRequestError
+              Anthropic::Beta::BetaWebSearchToolRequestError,
+              T::Array[Anthropic::Beta::BetaWebSearchResultBlockParam]
             )
           )
         end
@@ -42,7 +42,6 @@ module Anthropic
         end
         attr_writer :cache_control
 
-        # Tool invocation directly from the model.
         sig do
           returns(
             T.nilable(
@@ -72,10 +71,8 @@ module Anthropic
           params(
             content:
               T.any(
-                T::Array[
-                  Anthropic::Beta::BetaWebSearchResultBlockParam::OrHash
-                ],
-                Anthropic::Beta::BetaWebSearchToolRequestError::OrHash
+                Anthropic::Beta::BetaWebSearchToolRequestError::OrHash,
+                T::Array[Anthropic::Beta::BetaWebSearchResultBlockParam::OrHash]
               ),
             tool_use_id: String,
             cache_control:
@@ -94,7 +91,6 @@ module Anthropic
           tool_use_id:,
           # Create a cache control breakpoint at this content block.
           cache_control: nil,
-          # Tool invocation directly from the model.
           caller_: nil,
           type: :web_search_tool_result
         )
@@ -105,8 +101,8 @@ module Anthropic
             {
               content:
                 T.any(
-                  T::Array[Anthropic::Beta::BetaWebSearchResultBlockParam],
-                  Anthropic::Beta::BetaWebSearchToolRequestError
+                  Anthropic::Beta::BetaWebSearchToolRequestError,
+                  T::Array[Anthropic::Beta::BetaWebSearchResultBlockParam]
                 ),
               tool_use_id: String,
               type: Symbol,
@@ -124,7 +120,6 @@ module Anthropic
         def to_hash
         end
 
-        # Tool invocation directly from the model.
         module Caller
           extend Anthropic::Internal::Type::Union
 

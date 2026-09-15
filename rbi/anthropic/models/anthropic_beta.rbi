@@ -6,7 +6,7 @@ module Anthropic
       extend Anthropic::Internal::Type::Union
 
       Variants =
-        T.type_alias { T.any(String, Anthropic::AnthropicBeta::TaggedSymbol) }
+        T.type_alias { T.any(Anthropic::AnthropicBeta::TaggedSymbol, String) }
 
       sig { override.returns(T::Array[Anthropic::AnthropicBeta::Variants]) }
       def self.variants
@@ -204,6 +204,8 @@ module Anthropic
           :"mid-conversation-system-clear-at-2026-08-21",
           Anthropic::AnthropicBeta::TaggedSymbol
         )
+      COMPACT_2026_09_04 =
+        T.let(:"compact-2026-09-04", Anthropic::AnthropicBeta::TaggedSymbol)
     end
   end
 end

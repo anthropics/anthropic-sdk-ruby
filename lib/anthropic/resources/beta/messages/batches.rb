@@ -21,7 +21,7 @@ module Anthropic
           #
           # @param requests [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>] Body param: List of requests for prompt completion. Each is an individual reques
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param user_profile_id [String] Header param: The user profile ID to attribute the requests in this batch to. Us
           #
@@ -64,7 +64,7 @@ module Anthropic
           #
           # @param message_batch_id [String] ID of the Message Batch.
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
           #
@@ -101,7 +101,7 @@ module Anthropic
           #
           # @param limit [Integer] Query param: Number of items to return per page.
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -143,7 +143,7 @@ module Anthropic
           #
           # @param message_batch_id [String] ID of the Message Batch.
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
           #
@@ -183,7 +183,7 @@ module Anthropic
           #
           # @param message_batch_id [String] ID of the Message Batch.
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
           #
@@ -219,7 +219,7 @@ module Anthropic
           #
           # @param message_batch_id [String] ID of the Message Batch.
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
           #

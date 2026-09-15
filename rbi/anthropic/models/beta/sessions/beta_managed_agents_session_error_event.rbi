@@ -17,9 +17,6 @@ module Anthropic
           sig { returns(String) }
           attr_accessor :id
 
-          # An unknown or unexpected error occurred during session execution. A fallback
-          # variant; clients that don't recognize a new error code can match on
-          # `retry_status` and `message` alone.
           sig do
             returns(
               Anthropic::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::Variants
@@ -61,9 +58,6 @@ module Anthropic
           def self.new(
             # Unique identifier for this event.
             id:,
-            # An unknown or unexpected error occurred during session execution. A fallback
-            # variant; clients that don't recognize a new error code can match on
-            # `retry_status` and `message` alone.
             error:,
             # A timestamp in RFC 3339 format
             processed_at:,
@@ -86,9 +80,6 @@ module Anthropic
           def to_hash
           end
 
-          # An unknown or unexpected error occurred during session execution. A fallback
-          # variant; clients that don't recognize a new error code can match on
-          # `retry_status` and `message` alone.
           module Error
             extend Anthropic::Internal::Type::Union
 

@@ -20,7 +20,7 @@ module Anthropic
           # @!attribute betas
           #   Optional header to specify the beta version(s) you want to use.
           #
-          #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
+          #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
           optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
           # @!attribute user_profile_id
@@ -43,7 +43,7 @@ module Anthropic
           #
           #   @param requests [Array<Anthropic::Models::Beta::Messages::BatchCreateParams::Request>] List of requests for prompt completion. Each is an individual request to create
           #
-          #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           #   @param user_profile_id [String] The user profile ID to attribute the requests in this batch to. Use when acting
           #
@@ -186,6 +186,19 @@ module Anthropic
               #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
               optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
+              # @!attribute compaction
+              #   Compact the whole conversation and return a signed `compaction` block, alone,
+              #   that a later request sends back first in `messages`, in place of the messages it
+              #   summarizes. There is no trigger and no pause flag: sending the parameter
+              #   compacts, and nothing is sampled after the block.
+              #
+              #   The summarization prompt is the server's own unless `instructions` are given,
+              #   which then replace it for this request; a value that is empty or only whitespace
+              #   counts as absent.
+              #
+              #   @return [Anthropic::Models::Beta::BetaCompactionConfig, nil]
+              optional :compaction, -> { Anthropic::Beta::BetaCompactionConfig }, nil?: true
+
               # @!attribute container
               #   Container identifier for reuse across requests.
               #
@@ -231,7 +244,7 @@ module Anthropic
               #   When the appended-assistant form is used on a model that otherwise disallows
               #   assistant-turn prefill, this token also authorizes that one prefill.
               #
-              #   @return [String, Anthropic::Models::Beta::BetaFallbackCreditTokenParam, nil]
+              #   @return [Anthropic::Models::Beta::BetaFallbackCreditTokenParam, String, nil]
               optional :fallback_credit_token,
                        union: -> {
                          Anthropic::Beta::Messages::BatchCreateParams::Request::Params::FallbackCreditToken
@@ -244,7 +257,7 @@ module Anthropic
               #   declines, the second is tried, and so on. The string "default" requests the
               #   requested model's server-defined default fallback configuration.
               #
-              #   @return [Array<Anthropic::Models::Beta::BetaFallbackParam>, Symbol, :default, nil]
+              #   @return [Symbol, :default, Array<Anthropic::Models::Beta::BetaFallbackParam>, nil]
               optional :fallbacks, union: -> { Anthropic::Beta::BetaFallbacksParam }, nil?: true
 
               # @!attribute inference_geo
@@ -344,7 +357,7 @@ module Anthropic
 
               # @!attribute temperature
               #   @deprecated Deprecated. Models released after Claude Opus 4.6 do not support setting
-              #   temperature. A value of 1.0 of will be accepted for backwards compatibility, all
+              #   temperature. A value of 1.0 will be accepted for backwards compatibility, all
               #   other values will be rejected with a 400 error.
               #
               #   Amount of randomness injected into the response.
@@ -492,7 +505,7 @@ module Anthropic
               #   @return [Float, nil]
               optional :top_p, Float
 
-              # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
+              # @!method initialize(max_tokens:, messages:, model:, cache_control: nil, compaction: nil, container: nil, context_management: nil, diagnostics: nil, fallback_credit_token: nil, fallbacks: nil, inference_geo: nil, mcp_servers: nil, metadata: nil, output_config: nil, output_format: nil, service_tier: nil, speed: nil, stop_sequences: nil, stream: nil, system_: nil, temperature: nil, thinking: nil, tool_choice: nil, tools: nil, top_k: nil, top_p: nil)
               #   Messages API creation parameters for the individual request.
               #
               #   See the
@@ -511,15 +524,17 @@ module Anthropic
               #
               #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Top-level cache control automatically applies a cache_control marker to the last
               #
+              #   @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Compact the whole conversation and return a signed `compaction` block,
+              #
               #   @param container [Anthropic::Models::Beta::BetaContainerParams, String, nil] Container identifier for reuse across requests.
               #
               #   @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Context management configuration.
               #
               #   @param diagnostics [Anthropic::Models::Beta::BetaDiagnosticsParam, nil] Request-level diagnostics. Currently carries the previous response
               #
-              #   @param fallback_credit_token [String, Anthropic::Models::Beta::BetaFallbackCreditTokenParam, nil] The `fallback_credit_token` from a prior refusal's `stop_details`.
+              #   @param fallback_credit_token [Anthropic::Models::Beta::BetaFallbackCreditTokenParam, String, nil] The `fallback_credit_token` from a prior refusal's `stop_details`.
               #
-              #   @param fallbacks [Array<Anthropic::Models::Beta::BetaFallbackParam>, Symbol, :default, nil] Opt-in server-side retry on one or more substitute models when the requested mod
+              #   @param fallbacks [Symbol, :default, Array<Anthropic::Models::Beta::BetaFallbackParam>, nil] Opt-in server-side retry on one or more substitute models when the requested mod
               #
               #   @param inference_geo [String, nil] Specifies the geographic region for inference processing. If not specified, the
               #
@@ -592,8 +607,6 @@ module Anthropic
               module FallbackCreditToken
                 extend Anthropic::Internal::Type::Union
 
-                variant String
-
                 # Object form of ``fallback_credit_token``: the token plus a redemption
                 # mode.
                 #
@@ -603,8 +616,10 @@ module Anthropic
                 # an existing token changes nothing by itself.
                 variant -> { Anthropic::Beta::BetaFallbackCreditTokenParam }
 
+                variant String
+
                 # @!method self.variants
-                #   @return [Array(String, Anthropic::Models::Beta::BetaFallbackCreditTokenParam)]
+                #   @return [Array(Anthropic::Models::Beta::BetaFallbackCreditTokenParam, String)]
               end
 
               # Determines whether to use priority capacity (if available) or standard capacity

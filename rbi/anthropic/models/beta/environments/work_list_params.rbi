@@ -34,7 +34,7 @@ module Anthropic
           sig do
             returns(
               T.nilable(
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
               )
             )
           end
@@ -42,7 +42,7 @@ module Anthropic
 
           sig do
             params(
-              betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
+              betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
             ).void
           end
           attr_writer :betas
@@ -53,7 +53,7 @@ module Anthropic
               limit: Integer,
               page: T.nilable(String),
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(T.attached_class)
           end
@@ -76,7 +76,7 @@ module Anthropic
                 limit: Integer,
                 page: T.nilable(String),
                 betas:
-                  T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                  T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                 request_options: Anthropic::RequestOptions
               }
             )

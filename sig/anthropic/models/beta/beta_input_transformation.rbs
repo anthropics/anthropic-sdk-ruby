@@ -1,0 +1,46 @@
+module Anthropic
+  module Models
+    module BetaInputTransformation = Beta::BetaInputTransformation
+
+    module Beta
+      type beta_input_transformation =
+        Anthropic::Beta::BetaThinkingDroppedInputTransformation
+        | Anthropic::Beta::BetaThinkingMismatchAllowedInputTransformation
+
+      module BetaInputTransformation
+        extend Anthropic::Internal::Type::Union
+
+        type type_ = :thinking_dropped | :thinking_mismatch_allowed
+
+        module Type
+          extend Anthropic::Internal::Type::Enum
+
+          THINKING_DROPPED: :thinking_dropped
+          THINKING_MISMATCH_ALLOWED: :thinking_mismatch_allowed
+
+          def self?.values: -> ::Array[Anthropic::Models::Beta::BetaInputTransformation::type_]
+        end
+
+        def self?.variants: -> ::Array[Anthropic::Models::Beta::beta_input_transformation]
+
+        def self.new:
+          (
+            type: :thinking_dropped | "thinking_dropped",
+            path: String,
+            reason: Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation::reason
+          ) -> Anthropic::Beta::BetaThinkingDroppedInputTransformation
+          | (
+            type: :thinking_mismatch_allowed | "thinking_mismatch_allowed",
+            path: String,
+            reason: Anthropic::Models::Beta::BetaThinkingMismatchAllowedInputTransformation::reason
+          ) -> Anthropic::Beta::BetaThinkingMismatchAllowedInputTransformation
+          | (
+            type: Symbol | String,
+            path: String,
+            reason: Anthropic::Models::Beta::BetaThinkingDroppedInputTransformation::reason
+            | Anthropic::Models::Beta::BetaThinkingMismatchAllowedInputTransformation::reason
+          ) -> Anthropic::Models::Beta::beta_input_transformation
+      end
+    end
+  end
+end

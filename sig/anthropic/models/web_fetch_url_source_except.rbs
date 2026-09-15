@@ -1,0 +1,25 @@
+module Anthropic
+  module Models
+    type web_fetch_url_source_except =
+      {
+        tools: ::Array[Anthropic::WebFetchURLSourceToolReference],
+        type: :except
+      }
+
+    class WebFetchURLSourceExcept < Anthropic::Internal::Type::BaseModel
+      attr_accessor tools: ::Array[Anthropic::WebFetchURLSourceToolReference]
+
+      attr_accessor type: :except
+
+      def initialize: (
+        tools: ::Array[Anthropic::WebFetchURLSourceToolReference],
+        ?type: :except
+      ) -> void
+
+      def to_hash: -> {
+        tools: ::Array[Anthropic::WebFetchURLSourceToolReference],
+        type: :except
+      }
+    end
+  end
+end

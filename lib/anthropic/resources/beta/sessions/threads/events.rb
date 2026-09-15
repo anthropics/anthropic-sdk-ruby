@@ -21,7 +21,7 @@ module Anthropic
             #
             # @param page [String] Query param: Query parameter for page
             #
-            # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
             #
             # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
             #
@@ -66,7 +66,7 @@ module Anthropic
             #
             # @param event_deltas [Array<Symbol, Anthropic::Models::Beta::BetaManagedAgentsDeltaType>] Query param: When set, this connection also receives streaming deltas (`event_st
             #
-            # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+            # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
             #
             # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
             #

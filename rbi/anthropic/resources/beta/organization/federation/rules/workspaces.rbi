@@ -25,7 +25,7 @@ module Anthropic
                   limit: Integer,
                   page: T.nilable(String),
                   betas:
-                    T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                    T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                   request_options: Anthropic::RequestOptions::OrHash
                 ).returns(
                   Anthropic::Internal::PageCursor[
@@ -65,7 +65,7 @@ module Anthropic
                   federation_rule_id: String,
                   workspace_id: String,
                   betas:
-                    T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                    T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                   request_options: Anthropic::RequestOptions::OrHash
                 ).returns(
                   Anthropic::Beta::Organization::Federation::BetaFederationRuleWorkspace
@@ -97,7 +97,7 @@ module Anthropic
                   workspace_id: String,
                   federation_rule_id: String,
                   betas:
-                    T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                    T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                   request_options: Anthropic::RequestOptions::OrHash
                 ).returns(
                   Anthropic::Models::Beta::Organization::Federation::Rules::WorkspaceRemoveResponse

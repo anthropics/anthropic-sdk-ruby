@@ -14,7 +14,7 @@ module Anthropic
 
         Variants =
           T.type_alias do
-            T.any(T::Array[Anthropic::Beta::BetaFallbackParam], Symbol)
+            T.any(Symbol, T::Array[Anthropic::Beta::BetaFallbackParam])
           end
 
         sig do

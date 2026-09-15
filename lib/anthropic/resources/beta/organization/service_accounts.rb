@@ -34,7 +34,7 @@ module Anthropic
           #
           # @param organization_role [Symbol, Anthropic::Models::Beta::Organization::ServiceAccountCreateParams::OrganizationRole] Body param: Org-level role. Defaults to `developer`.
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -65,7 +65,7 @@ module Anthropic
           #
           # @param service_account_id [String] ID of the service account.
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -107,7 +107,7 @@ module Anthropic
           #
           # @param organization_role [Symbol, Anthropic::Models::Beta::Organization::ServiceAccountUpdateParams::OrganizationRole, nil] Body param: Replaces the org-level role. Omit or send `null` to leave unchanged.
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -146,7 +146,7 @@ module Anthropic
           #
           # @param page [String, nil] Query param: Opaque cursor from a previous response's `next_page`.
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -184,7 +184,7 @@ module Anthropic
           #
           # @param service_account_id [String] ID of the service account to archive.
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #

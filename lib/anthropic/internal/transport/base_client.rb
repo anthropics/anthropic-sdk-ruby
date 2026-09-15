@@ -191,6 +191,7 @@ module Anthropic
         # @api private
         #
         # @param base_url [String]
+        # @param proxy [String, URI::Generic, nil]
         # @param timeout [Float]
         # @param max_retries [Integer]
         # @param initial_retry_delay [Float]
@@ -201,6 +202,7 @@ module Anthropic
         # @param requester [Anthropic::Internal::Transport::PooledNetRequester, nil]
         def initialize(
           base_url:,
+          proxy: nil,
           timeout: 0.0,
           max_retries: 0,
           initial_retry_delay: 0.0,
@@ -211,7 +213,7 @@ module Anthropic
           requester: nil
         )
           @middleware = Array(middleware).freeze
-          @requester = requester || Anthropic::Internal::Transport::PooledNetRequester.new
+          @requester = requester || Anthropic::Internal::Transport::PooledNetRequester.new(proxy: proxy)
           @headers = Anthropic::Internal::Util.normalized_headers(
             self.class::PLATFORM_HEADERS,
             {
@@ -365,21 +367,23 @@ module Anthropic
         private def retry_delay(headers, retry_count:)
           # Non-standard extension
           span = Float(headers["retry-after-ms"], exception: false)&.then { _1 / 1000 }
-          return span if span
 
           retry_header = headers["retry-after"]
-          return span if (span = Float(retry_header, exception: false))
-
-          span = retry_header&.then do
+          span ||= Float(retry_header, exception: false)
+          span ||= retry_header&.then do
             Time.httpdate(_1) - Time.now
           rescue ArgumentError
             nil
           end
-          return span if span
 
-          scale = retry_count**2
+          # If the API asks us to wait a certain amount of time, do what it says, however long.
+          # A non-positive value, e.g. an HTTP-date in the past, falls back to the computed backoff rather than reaching `sleep`.
+          return span if span&.positive?
+
+          # Exponential backoff capped at `max_retry_delay`, minus up to 25% jitter.
+          scale = 2**retry_count
           jitter = 1 - (0.25 * rand)
-          (@initial_retry_delay * scale * jitter).clamp(0, @max_retry_delay)
+          (@initial_retry_delay * scale).clamp(0, @max_retry_delay) * jitter
         end
 
         # @api private

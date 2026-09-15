@@ -6,7 +6,6 @@ module Anthropic
       Beta::BetaCodeExecutionToolResultBlockParamContent
 
     module Beta
-      # Code execution result with encrypted stdout for PFC + web_search results.
       module BetaCodeExecutionToolResultBlockParamContent
         extend Anthropic::Internal::Type::Union
 

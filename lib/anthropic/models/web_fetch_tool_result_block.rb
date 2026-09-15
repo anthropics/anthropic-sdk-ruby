@@ -4,7 +4,6 @@ module Anthropic
   module Models
     class WebFetchToolResultBlock < Anthropic::Internal::Type::BaseModel
       # @!attribute caller_
-      #   Tool invocation directly from the model.
       #
       #   @return [Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120]
       required :caller_, union: -> { Anthropic::WebFetchToolResultBlock::Caller }, api_name: :caller
@@ -25,16 +24,11 @@ module Anthropic
       required :type, const: :web_fetch_tool_result
 
       # @!method initialize(caller_:, content:, tool_use_id:, type: :web_fetch_tool_result)
-      #   @param caller_ [Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120] Tool invocation directly from the model.
-      #
+      #   @param caller_ [Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120]
       #   @param content [Anthropic::Models::WebFetchToolResultErrorBlock, Anthropic::Models::WebFetchBlock]
-      #
       #   @param tool_use_id [String]
-      #
       #   @param type [Symbol, :web_fetch_tool_result]
 
-      # Tool invocation directly from the model.
-      #
       # @see Anthropic::Models::WebFetchToolResultBlock#caller_
       module Caller
         extend Anthropic::Internal::Type::Union

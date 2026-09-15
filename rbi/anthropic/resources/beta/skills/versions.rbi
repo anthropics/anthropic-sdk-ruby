@@ -11,7 +11,7 @@ module Anthropic
               skill_id: String,
               files: T::Array[Anthropic::Internal::FileInput],
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Skills::BetaSkillVersion)
@@ -45,7 +45,7 @@ module Anthropic
               version: String,
               skill_id: String,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Skills::BetaSkillVersion)
@@ -81,7 +81,7 @@ module Anthropic
               limit: T.nilable(Integer),
               page: T.nilable(String),
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(
@@ -120,7 +120,7 @@ module Anthropic
               version: String,
               skill_id: String,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Skills::BetaDeletedSkillVersion)
@@ -154,7 +154,7 @@ module Anthropic
               version: String,
               skill_id: String,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(StringIO)

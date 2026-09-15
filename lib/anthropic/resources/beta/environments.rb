@@ -24,7 +24,7 @@ module Anthropic
         #
         # @param scope [Symbol, Anthropic::Models::Beta::EnvironmentCreateParams::Scope, nil] Body param: The visibility scope for this environment. 'organization' makes the
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -55,7 +55,7 @@ module Anthropic
         #
         # @param environment_id [String]
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -94,7 +94,7 @@ module Anthropic
         #
         # @param scope [Symbol, Anthropic::Models::Beta::EnvironmentUpdateParams::Scope, nil] Body param: The visibility scope for this environment. 'organization' makes the
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -129,7 +129,7 @@ module Anthropic
         #
         # @param page [String, nil] Query param: Opaque cursor from previous response for pagination. Pass the `next
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -165,7 +165,7 @@ module Anthropic
         #
         # @param environment_id [String]
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -195,7 +195,7 @@ module Anthropic
         #
         # @param environment_id [String]
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #

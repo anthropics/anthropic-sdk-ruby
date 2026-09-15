@@ -8,7 +8,7 @@ module Anthropic
         sig do
           params(
             deployment_run_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaManagedAgentsDeploymentRun)
@@ -42,7 +42,7 @@ module Anthropic
             page: String,
             trigger_type:
               Anthropic::Beta::BetaManagedAgentsTriggerType::OrSymbol,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(

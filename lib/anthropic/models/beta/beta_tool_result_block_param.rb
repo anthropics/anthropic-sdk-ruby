@@ -57,7 +57,6 @@ module Anthropic
 
           variant -> { Anthropic::Models::Beta::BetaToolResultBlockParam::Content::ContentArray }
 
-          # Tool reference block that can be included in tool_result content.
           module Content
             extend Anthropic::Internal::Type::Union
 

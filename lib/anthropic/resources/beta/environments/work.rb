@@ -21,7 +21,7 @@ module Anthropic
           #
           # @param environment_id [String] Path param
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -63,7 +63,7 @@ module Anthropic
           #
           # @param metadata [Hash{Symbol=>String, nil}] Body param: Metadata patch. Set a key to a string to upsert it, or to null to de
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #
@@ -104,7 +104,7 @@ module Anthropic
           #
           # @param page [String, nil] Query param: Opaque cursor from previous response for pagination
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -140,7 +140,7 @@ module Anthropic
           #
           # @param environment_id [String] Path param
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -182,7 +182,7 @@ module Anthropic
           #
           # @param expected_last_heartbeat [String, nil] Query param: Expected last_heartbeat for conditional update (optimistic concurre
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -225,7 +225,7 @@ module Anthropic
           #
           # @param reclaim_older_than_ms [Integer, nil] Query param: Reclaim unacknowledged work items older than this many milliseconds
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param anthropic_worker_id [String] Header param: Unique identifier for the specific worker polling, used to track a
           #
@@ -260,7 +260,7 @@ module Anthropic
           #
           # @param environment_id [String]
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
           #
           # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
           #
@@ -298,7 +298,7 @@ module Anthropic
           #
           # @param force [Boolean] Body param: If true, immediately stop work without graceful shutdown
           #
-          # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+          # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
           # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
           #

@@ -32,7 +32,7 @@ module Anthropic
               organization_role:
                 Anthropic::Beta::Organization::ServiceAccountCreateParams::OrganizationRole::OrSymbol,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Organization::BetaServiceAccount)
           end
@@ -60,7 +60,7 @@ module Anthropic
             params(
               service_account_id: String,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Organization::BetaServiceAccount)
           end
@@ -93,7 +93,7 @@ module Anthropic
                   Anthropic::Beta::Organization::ServiceAccountUpdateParams::OrganizationRole::OrSymbol
                 ),
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Organization::BetaServiceAccount)
           end
@@ -127,7 +127,7 @@ module Anthropic
               limit: Integer,
               page: T.nilable(String),
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(
               Anthropic::Internal::PageCursor[
@@ -163,7 +163,7 @@ module Anthropic
             params(
               service_account_id: String,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Organization::BetaServiceAccount)
           end

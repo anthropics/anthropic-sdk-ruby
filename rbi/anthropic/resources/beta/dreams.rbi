@@ -15,14 +15,14 @@ module Anthropic
                 )
               ],
             model:
-              T.any(String, Anthropic::Beta::BetaDreamModelConfigParam::OrHash),
+              T.any(Anthropic::Beta::BetaDreamModelConfigParam::OrHash, String),
             instructions: T.nilable(String),
             output_behavior:
               T.any(
                 Anthropic::Beta::BetaOutputBehaviorCreateNew::OrHash,
                 Anthropic::Beta::BetaOutputBehaviorUpdateExisting::OrHash
               ),
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaDream)
@@ -30,13 +30,11 @@ module Anthropic
         def create(
           # Body param
           inputs:,
-          # Body param: Model identifier and configuration applied to every pipeline stage.
+          # Body param
           model:,
           # Body param
           instructions: nil,
-          # Body param: The default destination: the job creates a new output memory store
-          # as a clone of the memory_store input and writes the consolidated memories into
-          # it. The input store is never mutated.
+          # Body param
           output_behavior: nil,
           # Header param: Optional header to specify the beta version(s) you want to use.
           betas: nil,
@@ -55,7 +53,7 @@ module Anthropic
         sig do
           params(
             dream_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaDream)
@@ -85,7 +83,7 @@ module Anthropic
             limit: Integer,
             page: String,
             statuses: T::Array[Anthropic::Beta::BetaDreamStatus::OrSymbol],
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Internal::PageCursor[Anthropic::Beta::BetaDream])
@@ -123,7 +121,7 @@ module Anthropic
         sig do
           params(
             dream_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaDream)
@@ -148,7 +146,7 @@ module Anthropic
         sig do
           params(
             dream_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaDream)

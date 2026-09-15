@@ -98,7 +98,7 @@ module Anthropic
             # @!attribute betas
             #   Optional header to specify the beta version(s) you want to use.
             #
-            #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
+            #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
             optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
             # @!method initialize(federation_rule_id:, applies_to_all_workspaces: nil, attributes: nil, description: nil, match: nil, name: nil, oauth_scope: nil, target: nil, token_lifetime_seconds: nil, workspace_id: nil, betas: nil, request_options: {})
@@ -126,7 +126,7 @@ module Anthropic
             #
             #   @param workspace_id [String, nil] Replaces the existing single workspace enablement (the previous one is removed).
             #
-            #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+            #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
             #
             #   @param request_options [Anthropic::RequestOptions, Hash{Symbol=>Object}]
           end

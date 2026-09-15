@@ -221,7 +221,8 @@ module Anthropic
             type: :compaction | "compaction",
             ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
             ?content: String?,
-            ?encrypted_content: String?
+            ?encrypted_content: String?,
+            ?signature: String?
           ) -> Anthropic::Beta::BetaCompactionBlockParam
           | (
             type: :tool_addition | "tool_addition",
@@ -263,7 +264,7 @@ module Anthropic
             | Anthropic::Models::Beta::BetaToolSearchToolResultBlockParam::content
             | Anthropic::Models::Beta::BetaRequestMCPToolResultBlockParam::content
             | String?,
-            ?signature: String,
+            ?signature: String | String?,
             ?thinking: String,
             ?data: String,
             ?id: String,

@@ -35,7 +35,7 @@ module Anthropic
                   ),
                 max_jwt_lifetime_seconds: T.nilable(Integer),
                 betas:
-                  T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                  T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                 request_options: Anthropic::RequestOptions::OrHash
               ).returns(
                 Anthropic::Beta::Organization::Federation::BetaFederationIssuer
@@ -74,7 +74,7 @@ module Anthropic
               params(
                 federation_issuer_id: String,
                 betas:
-                  T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                  T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                 request_options: Anthropic::RequestOptions::OrHash
               ).returns(
                 Anthropic::Beta::Organization::Federation::BetaFederationIssuer
@@ -118,7 +118,7 @@ module Anthropic
                 max_jwt_lifetime_seconds: T.nilable(Integer),
                 name: T.nilable(String),
                 betas:
-                  T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                  T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                 request_options: Anthropic::RequestOptions::OrHash
               ).returns(
                 Anthropic::Beta::Organization::Federation::BetaFederationIssuer
@@ -169,7 +169,7 @@ module Anthropic
                 limit: Integer,
                 page: T.nilable(String),
                 betas:
-                  T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                  T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                 request_options: Anthropic::RequestOptions::OrHash
               ).returns(
                 Anthropic::Internal::PageCursor[
@@ -205,7 +205,7 @@ module Anthropic
               params(
                 federation_issuer_id: String,
                 betas:
-                  T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                  T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                 request_options: Anthropic::RequestOptions::OrHash
               ).returns(
                 Anthropic::Beta::Organization::Federation::BetaFederationIssuer

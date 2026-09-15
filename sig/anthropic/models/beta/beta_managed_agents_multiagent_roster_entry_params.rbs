@@ -4,10 +4,10 @@ module Anthropic
 
     module Beta
       type beta_managed_agents_multiagent_roster_entry_params =
-        String
-        | Anthropic::Beta::BetaManagedAgentsAgentParams
+        Anthropic::Beta::BetaManagedAgentsAgentParams
         | Anthropic::Beta::BetaManagedAgentsMultiagentSelfParams
         | Anthropic::Beta::BetaManagedAgentsAdvisorParams
+        | String
 
       module BetaManagedAgentsMultiagentRosterEntryParams
         extend Anthropic::Internal::Type::Union

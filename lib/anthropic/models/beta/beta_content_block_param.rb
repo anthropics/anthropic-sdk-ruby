@@ -3,7 +3,6 @@
 module Anthropic
   module Models
     module Beta
-      # Regular text content.
       module BetaContentBlockParam
         extend Anthropic::Internal::Type::Union
 
@@ -155,9 +154,9 @@ module Anthropic
         #
         #   @option args [String, nil, String] :title
         #
-        #   @option args [Array<Anthropic::Models::Beta::BetaTextBlockParam>, String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaSearchResultBlockParam, Anthropic::Models::Beta::BetaRequestDocumentBlock, Anthropic::Models::Beta::BetaToolReferenceBlockParam, Anthropic::Models::Beta::BetaBrowserStateBlockParam>, Array<Anthropic::Models::Beta::BetaWebSearchResultBlockParam>, Anthropic::Models::Beta::BetaWebSearchToolRequestError, Anthropic::Models::Beta::BetaWebFetchToolResultErrorBlockParam, Anthropic::Models::Beta::BetaWebFetchBlockParam, Anthropic::Models::Beta::BetaAdvisorToolResultErrorParam, Anthropic::Models::Beta::BetaAdvisorResultBlockParam, Anthropic::Models::Beta::BetaAdvisorRedactedResultBlockParam, Anthropic::Models::Beta::BetaCodeExecutionToolResultErrorParam, Anthropic::Models::Beta::BetaCodeExecutionResultBlockParam, Anthropic::Models::Beta::BetaEncryptedCodeExecutionResultBlockParam, Anthropic::Models::Beta::BetaBashCodeExecutionToolResultErrorParam, Anthropic::Models::Beta::BetaBashCodeExecutionResultBlockParam, Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultErrorParam, Anthropic::Models::Beta::BetaTextEditorCodeExecutionViewResultBlockParam, Anthropic::Models::Beta::BetaTextEditorCodeExecutionCreateResultBlockParam, Anthropic::Models::Beta::BetaTextEditorCodeExecutionStrReplaceResultBlockParam, Anthropic::Models::Beta::BetaToolSearchToolResultErrorParam, Anthropic::Models::Beta::BetaToolSearchToolSearchResultBlockParam, String, Array<Anthropic::Models::Beta::BetaTextBlockParam>, String, nil] :content Code execution result with encrypted stdout for PFC + web_search results.
+        #   @option args [Array<Anthropic::Models::Beta::BetaTextBlockParam>, String, Array<Anthropic::Models::Beta::BetaTextBlockParam, Anthropic::Models::Beta::BetaImageBlockParam, Anthropic::Models::Beta::BetaSearchResultBlockParam, Anthropic::Models::Beta::BetaRequestDocumentBlock, Anthropic::Models::Beta::BetaToolReferenceBlockParam, Anthropic::Models::Beta::BetaBrowserStateBlockParam>, Anthropic::Models::Beta::BetaWebSearchToolRequestError, Array<Anthropic::Models::Beta::BetaWebSearchResultBlockParam>, Anthropic::Models::Beta::BetaWebFetchToolResultErrorBlockParam, Anthropic::Models::Beta::BetaWebFetchBlockParam, Anthropic::Models::Beta::BetaAdvisorToolResultErrorParam, Anthropic::Models::Beta::BetaAdvisorResultBlockParam, Anthropic::Models::Beta::BetaAdvisorRedactedResultBlockParam, Anthropic::Models::Beta::BetaCodeExecutionToolResultErrorParam, Anthropic::Models::Beta::BetaCodeExecutionResultBlockParam, Anthropic::Models::Beta::BetaEncryptedCodeExecutionResultBlockParam, Anthropic::Models::Beta::BetaBashCodeExecutionToolResultErrorParam, Anthropic::Models::Beta::BetaBashCodeExecutionResultBlockParam, Anthropic::Models::Beta::BetaTextEditorCodeExecutionToolResultErrorParam, Anthropic::Models::Beta::BetaTextEditorCodeExecutionViewResultBlockParam, Anthropic::Models::Beta::BetaTextEditorCodeExecutionCreateResultBlockParam, Anthropic::Models::Beta::BetaTextEditorCodeExecutionStrReplaceResultBlockParam, Anthropic::Models::Beta::BetaToolSearchToolResultErrorParam, Anthropic::Models::Beta::BetaToolSearchToolSearchResultBlockParam, String, Array<Anthropic::Models::Beta::BetaTextBlockParam>, String, nil] :content Summary of previously compacted content, or null if compaction failed
         #
-        #   @option args [String] :signature The `signature` value of this thinking block, exactly as returned by the API in
+        #   @option args [String, String, nil] :signature The `signature` value of this thinking block, exactly as returned by the API in
         #
         #   @option args [String] :thinking The `thinking` text of this block as returned by the API.
         #
@@ -169,7 +168,7 @@ module Anthropic
         #
         #   @option args [String, Symbol, Anthropic::Models::Beta::BetaServerToolUseBlockParam::Name] :name
         #
-        #   @option args [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120] :caller_ Tool invocation directly from the model.
+        #   @option args [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120] :caller_
         #
         #   @option args [String, nil] :toolset_name For a toolset member tool_use, the toolset family this member belongs to.
         #
@@ -183,7 +182,7 @@ module Anthropic
         #
         #   @option args [String, nil] :encrypted_content Opaque metadata from prior compaction, to be round-tripped verbatim
         #
-        #   @option args [Anthropic::Models::Beta::BetaToolChangeToolReference, Anthropic::Models::Beta::BetaToolChangeMCPToolReference, Anthropic::Models::Beta::BetaToolChangeMCPToolsetReference] :tool Reference to a single tool the caller declared directly in
+        #   @option args [Anthropic::Models::Beta::BetaToolChangeToolReference, Anthropic::Models::Beta::BetaToolChangeMCPToolReference, Anthropic::Models::Beta::BetaToolChangeMCPToolsetReference] :tool
         #
         #   @option args [Anthropic::Models::Beta::BetaFallbackInfoParam] :from Identifies one hop of a fallback transition.
         #

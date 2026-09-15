@@ -31,7 +31,6 @@ module Anthropic
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!attribute caller_
-        #   Tool invocation directly from the model.
         #
         #   @return [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120, nil]
         optional :caller_,
@@ -49,7 +48,7 @@ module Anthropic
         #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
-        #   @param caller_ [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120] Tool invocation directly from the model.
+        #   @param caller_ [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120]
         #
         #   @param type [Symbol, :server_tool_use]
 
@@ -70,8 +69,6 @@ module Anthropic
           #   @return [Array<Symbol>]
         end
 
-        # Tool invocation directly from the model.
-        #
         # @see Anthropic::Models::Beta::BetaServerToolUseBlockParam#caller_
         module Caller
           extend Anthropic::Internal::Type::Union

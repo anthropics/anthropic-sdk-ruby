@@ -27,6 +27,65 @@ class AnthropicTest < Minitest::Test
     super
   end
 
+  def test_client_proxy_option
+    client = Anthropic::Client.new(
+      base_url: "http://localhost",
+      api_key: "my-anthropic-api-key",
+      proxy: "http://user:p%40s+s@127.0.0.1:9"
+    )
+    requester = client.requester
+    conn = requester.class.connect(
+      cert_store: requester.instance_variable_get(:@cert_store),
+      url: URI("https://example.com"),
+      proxy: requester.instance_variable_get(:@proxy)
+    )
+
+    assert_equal(
+      ["127.0.0.1", 9, "user", "p@s+s"],
+      [conn.proxy_address, conn.proxy_port, conn.proxy_user, conn.proxy_pass]
+    )
+    assert(conn.proxy?)
+    refute(conn.proxy_from_env?)
+    refute(conn.started?)
+  end
+
+  def test_client_proxy_defaults_to_env
+    conn = Anthropic::Internal::Transport::PooledNetRequester.connect(
+      cert_store: OpenSSL::X509::Store.new,
+      url: URI("https://example.com")
+    )
+    assert(conn.proxy_from_env?)
+  end
+
+  def test_client_proxy_scheme_is_case_insensitive
+    client = Anthropic::Client.new(
+      base_url: "http://localhost",
+      api_key: "my-anthropic-api-key",
+      proxy: "HTTP://127.0.0.1:9"
+    )
+    assert_equal("127.0.0.1", client.requester.instance_variable_get(:@proxy).hostname)
+  end
+
+  def test_client_proxy_inspect_redacts_password
+    client = Anthropic::Client.new(
+      base_url: "http://localhost",
+      api_key: "my-anthropic-api-key",
+      proxy: "http://user:secret@127.0.0.1:9"
+    )
+    inspected = client.requester.inspect
+    refute_includes(inspected, "secret")
+    assert_includes(inspected, "REDACTED")
+    assert_equal("secret", client.requester.instance_variable_get(:@proxy).password)
+  end
+
+  def test_client_rejects_invalid_proxy
+    ["socks5://127.0.0.1:1080", "not a url", "http://"].each do |proxy|
+      assert_raises(ArgumentError) do
+        Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key", proxy: proxy)
+      end
+    end
+  end
+
   def test_client_default_request_default_retry_attempts
     stub_request(:post, "http://localhost/v1/messages").to_return_json(status: 500, body: {})
 
@@ -163,6 +222,74 @@ class AnthropicTest < Minitest::Test
 
     assert_requested(:any, /./, times: 2)
     assert_equal(1.3, Thread.current.thread_variable_get(:mock_sleep).last)
+  end
+
+  def test_client_retry_after_past_date
+    time_now = Time.now
+
+    stub_request(:post, "http://localhost/v1/messages").to_return_json(
+      status: 500,
+      headers: {"retry-after" => (time_now - 10).httpdate},
+      body: {}
+    )
+
+    anthropic =
+      Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key", max_retries: 1)
+
+    Thread.current.thread_variable_set(:time_now, time_now)
+    assert_raises(Anthropic::Errors::InternalServerError) do
+      anthropic.messages.create(
+        max_tokens: 1024,
+        messages: [{content: "Hello, world", role: :user}],
+        model: Anthropic::Model::CLAUDE_OPUS_5
+      )
+    end
+    Thread.current.thread_variable_set(:time_now, nil)
+
+    assert_requested(:any, /./, times: 2)
+    delay = [Anthropic::Client::DEFAULT_INITIAL_RETRY_DELAY, Anthropic::Client::DEFAULT_MAX_RETRY_DELAY].min
+    assert_includes((delay * 0.75)..delay, Thread.current.thread_variable_get(:mock_sleep).last)
+  end
+
+  def test_client_retry_after_large
+    stub_request(:post, "http://localhost/v1/messages").to_return_json(
+      status: 500,
+      headers: {"retry-after" => "3600"},
+      body: {}
+    )
+
+    anthropic =
+      Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key", max_retries: 1)
+
+    assert_raises(Anthropic::Errors::InternalServerError) do
+      anthropic.messages.create(
+        max_tokens: 1024,
+        messages: [{content: "Hello, world", role: :user}],
+        model: Anthropic::Model::CLAUDE_OPUS_5
+      )
+    end
+
+    assert_requested(:any, /./, times: 2)
+    assert_equal(3600, Thread.current.thread_variable_get(:mock_sleep).last)
+  end
+
+  def test_client_default_backoff
+    stub_request(:post, "http://localhost/v1/messages").to_return_json(status: 500, body: {})
+
+    anthropic =
+      Anthropic::Client.new(base_url: "http://localhost", api_key: "my-anthropic-api-key", max_retries: 2)
+
+    assert_raises(Anthropic::Errors::InternalServerError) do
+      anthropic.messages.create(
+        max_tokens: 1024,
+        messages: [{content: "Hello, world", role: :user}],
+        model: Anthropic::Model::CLAUDE_OPUS_5
+      )
+    end
+
+    assert_requested(:any, /./, times: 3)
+    delay = [Anthropic::Client::DEFAULT_INITIAL_RETRY_DELAY * 2, Anthropic::Client::DEFAULT_MAX_RETRY_DELAY].min
+    assert_includes((delay * 0.75)..delay, Thread.current.thread_variable_get(:mock_sleep).last)
   end
 
   def test_retry_count_header

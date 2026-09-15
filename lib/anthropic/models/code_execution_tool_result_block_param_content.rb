@@ -2,7 +2,6 @@
 
 module Anthropic
   module Models
-    # Code execution result with encrypted stdout for PFC + web_search results.
     module CodeExecutionToolResultBlockParamContent
       extend Anthropic::Internal::Type::Union
 

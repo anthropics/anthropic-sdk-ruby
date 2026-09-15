@@ -50,9 +50,9 @@ module Anthropic
           returns(
             T.nilable(
               T.any(
+                Anthropic::Beta::BetaManagedAgentsModelConfigParams,
                 Anthropic::Beta::BetaManagedAgentsModel::OrSymbol,
-                String,
-                Anthropic::Beta::BetaManagedAgentsModelConfigParams
+                String
               )
             )
           )
@@ -63,9 +63,9 @@ module Anthropic
           params(
             model:
               T.any(
+                Anthropic::Beta::BetaManagedAgentsModelConfigParams::OrHash,
                 Anthropic::Beta::BetaManagedAgentsModel::OrSymbol,
-                String,
-                Anthropic::Beta::BetaManagedAgentsModelConfigParams::OrHash
+                String
               )
           ).void
         end
@@ -146,7 +146,7 @@ module Anthropic
         sig do
           returns(
             T.nilable(
-              T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
+              T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
             )
           )
         end
@@ -154,7 +154,7 @@ module Anthropic
 
         sig do
           params(
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
           ).void
         end
         attr_writer :betas
@@ -178,9 +178,9 @@ module Anthropic
             metadata: T.nilable(T::Hash[Symbol, T.nilable(String)]),
             model:
               T.any(
+                Anthropic::Beta::BetaManagedAgentsModelConfigParams::OrHash,
                 Anthropic::Beta::BetaManagedAgentsModel::OrSymbol,
-                String,
-                Anthropic::Beta::BetaManagedAgentsModelConfigParams::OrHash
+                String
               ),
             multiagent:
               T.nilable(
@@ -208,7 +208,7 @@ module Anthropic
                 ]
               ),
             version: Integer,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
@@ -269,9 +269,9 @@ module Anthropic
               metadata: T.nilable(T::Hash[Symbol, T.nilable(String)]),
               model:
                 T.any(
+                  Anthropic::Beta::BetaManagedAgentsModelConfigParams,
                   Anthropic::Beta::BetaManagedAgentsModel::OrSymbol,
-                  String,
-                  Anthropic::Beta::BetaManagedAgentsModelConfigParams
+                  String
                 ),
               multiagent:
                 T.nilable(Anthropic::Beta::BetaManagedAgentsMultiagentParams),
@@ -298,7 +298,7 @@ module Anthropic
                 ),
               version: Integer,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions
             }
@@ -317,8 +317,8 @@ module Anthropic
           Variants =
             T.type_alias do
               T.any(
-                Anthropic::Beta::BetaManagedAgentsModel::Variants,
-                Anthropic::Beta::BetaManagedAgentsModelConfigParams
+                Anthropic::Beta::BetaManagedAgentsModelConfigParams,
+                Anthropic::Beta::BetaManagedAgentsModel::Variants
               )
             end
 

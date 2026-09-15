@@ -13,6 +13,7 @@ module Anthropic
         max_content_tokens: Integer?,
         max_uses: Integer?,
         strict: bool,
+        url_sources: Anthropic::WebFetchURLSources?,
         use_cache: bool
       }
 
@@ -47,6 +48,8 @@ module Anthropic
 
       def strict=: (bool) -> bool
 
+      attr_accessor url_sources: Anthropic::WebFetchURLSources?
+
       attr_reader use_cache: bool?
 
       def use_cache=: (bool) -> bool
@@ -61,6 +64,7 @@ module Anthropic
         ?max_content_tokens: Integer?,
         ?max_uses: Integer?,
         ?strict: bool,
+        ?url_sources: Anthropic::WebFetchURLSources?,
         ?use_cache: bool,
         ?name: :web_fetch,
         ?type: :web_fetch_20260309
@@ -78,6 +82,7 @@ module Anthropic
         max_content_tokens: Integer?,
         max_uses: Integer?,
         strict: bool,
+        url_sources: Anthropic::WebFetchURLSources?,
         use_cache: bool
       }
 

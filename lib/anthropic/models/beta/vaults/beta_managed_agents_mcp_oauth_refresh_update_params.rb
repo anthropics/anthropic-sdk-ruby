@@ -18,7 +18,6 @@ module Anthropic
           optional :scope, String, nil?: true
 
           # @!attribute token_endpoint_auth
-          #   Updated HTTP Basic authentication parameters for the token endpoint.
           #
           #   @return [Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam, nil]
           optional :token_endpoint_auth,
@@ -31,10 +30,8 @@ module Anthropic
           #
           #   @param scope [String, nil] Updated OAuth scope for the refresh request.
           #
-          #   @param token_endpoint_auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam] Updated HTTP Basic authentication parameters for the token endpoint.
+          #   @param token_endpoint_auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthBasicUpdateParam, Anthropic::Models::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostUpdateParam]
 
-          # Updated HTTP Basic authentication parameters for the token endpoint.
-          #
           # @see Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshUpdateParams#token_endpoint_auth
           module TokenEndpointAuth
             extend Anthropic::Internal::Type::Union

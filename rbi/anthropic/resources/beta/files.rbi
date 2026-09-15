@@ -11,7 +11,7 @@ module Anthropic
             limit: Integer,
             page: T.nilable(String),
             scope_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(
@@ -52,7 +52,7 @@ module Anthropic
         sig do
           params(
             file_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaDeletedFile)
@@ -77,7 +77,7 @@ module Anthropic
         sig do
           params(
             file_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(StringIO)
@@ -102,7 +102,7 @@ module Anthropic
         sig do
           params(
             file_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaFileMetadata)
@@ -128,7 +128,7 @@ module Anthropic
           params(
             file: Anthropic::Internal::FileInput,
             expires_in_seconds: Integer,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaFileMetadata)

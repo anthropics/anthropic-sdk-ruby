@@ -25,20 +25,15 @@ module Anthropic
         required :type, const: :server_tool_use
 
         # @!attribute caller_
-        #   Tool invocation directly from the model.
         #
         #   @return [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120, nil]
         optional :caller_, union: -> { Anthropic::Beta::BetaServerToolUseBlock::Caller }, api_name: :caller
 
         # @!method initialize(id:, input:, name:, caller_: nil, type: :server_tool_use)
         #   @param id [String]
-        #
         #   @param input [Object]
-        #
         #   @param name [Symbol, Anthropic::Models::Beta::BetaServerToolUseBlock::Name]
-        #
-        #   @param caller_ [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120] Tool invocation directly from the model.
-        #
+        #   @param caller_ [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120]
         #   @param type [Symbol, :server_tool_use]
 
         # @see Anthropic::Models::Beta::BetaServerToolUseBlock#name
@@ -58,8 +53,6 @@ module Anthropic
           #   @return [Array<Symbol>]
         end
 
-        # Tool invocation directly from the model.
-        #
         # @see Anthropic::Models::Beta::BetaServerToolUseBlock#caller_
         module Caller
           extend Anthropic::Internal::Type::Union

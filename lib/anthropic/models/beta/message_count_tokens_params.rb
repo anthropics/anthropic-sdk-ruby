@@ -95,6 +95,19 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil]
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
+        # @!attribute compaction
+        #   Compact the whole conversation and return a signed `compaction` block, alone,
+        #   that a later request sends back first in `messages`, in place of the messages it
+        #   summarizes. There is no trigger and no pause flag: sending the parameter
+        #   compacts, and nothing is sampled after the block.
+        #
+        #   The summarization prompt is the server's own unless `instructions` are given,
+        #   which then replace it for this request; a value that is empty or only whitespace
+        #   counts as absent.
+        #
+        #   @return [Anthropic::Models::Beta::BetaCompactionConfig, nil]
+        optional :compaction, -> { Anthropic::Beta::BetaCompactionConfig }, nil?: true
+
         # @!attribute context_management
         #   Context management configuration.
         #
@@ -254,7 +267,7 @@ module Anthropic
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
-        #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
+        #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
         # @!attribute user_profile_id
@@ -269,7 +282,7 @@ module Anthropic
         #   @return [String, nil]
         optional :workspace_id, String
 
-        # @!method initialize(messages:, model:, cache_control: nil, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
+        # @!method initialize(messages:, model:, cache_control: nil, compaction: nil, context_management: nil, mcp_servers: nil, output_config: nil, output_format: nil, speed: nil, system_: nil, thinking: nil, tool_choice: nil, tools: nil, betas: nil, user_profile_id: nil, workspace_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::MessageCountTokensParams} for more details.
         #
@@ -278,6 +291,8 @@ module Anthropic
         #   @param model [Symbol, String, Anthropic::Models::Model] The model that will complete your prompt.
         #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Top-level cache control automatically applies a cache_control marker to the last
+        #
+        #   @param compaction [Anthropic::Models::Beta::BetaCompactionConfig, nil] Compact the whole conversation and return a signed `compaction` block,
         #
         #   @param context_management [Anthropic::Models::Beta::BetaContextManagementConfig, nil] Context management configuration.
         #
@@ -297,7 +312,7 @@ module Anthropic
         #
         #   @param tools [Array<Anthropic::Models::Beta::BetaTool, Anthropic::Models::Beta::BetaToolBash20241022, Anthropic::Models::Beta::BetaToolBash20250124, Anthropic::Models::Beta::BetaCodeExecutionTool20250522, Anthropic::Models::Beta::BetaCodeExecutionTool20250825, Anthropic::Models::Beta::BetaCodeExecutionTool20260120, Anthropic::Models::Beta::BetaCodeExecutionTool20260521, Anthropic::Models::Beta::BetaBrowserToolset20260801, Anthropic::Models::Beta::BetaToolComputerUse20241022, Anthropic::Models::Beta::BetaMemoryTool20250818, Anthropic::Models::Beta::BetaToolComputerUse20250124, Anthropic::Models::Beta::BetaToolTextEditor20241022, Anthropic::Models::Beta::BetaToolComputerUse20251124, Anthropic::Models::Beta::BetaComputerToolset20260801, Anthropic::Models::Beta::BetaToolTextEditor20250124, Anthropic::Models::Beta::BetaToolTextEditor20250429, Anthropic::Models::Beta::BetaToolTextEditor20250728, Anthropic::Models::Beta::BetaWebSearchTool20250305, Anthropic::Models::Beta::BetaWebFetchTool20250910, Anthropic::Models::Beta::BetaWebSearchTool20260209, Anthropic::Models::Beta::BetaWebFetchTool20260209, Anthropic::Models::Beta::BetaWebFetchTool20260309, Anthropic::Models::Beta::BetaWebSearchTool20260318, Anthropic::Models::Beta::BetaWebFetchTool20260318, Anthropic::Models::Beta::BetaAdvisorTool20260301, Anthropic::Models::Beta::BetaToolSearchToolBm25_20251119, Anthropic::Models::Beta::BetaToolSearchToolRegex20251119, Anthropic::Models::Beta::BetaMCPToolset>] Definitions of tools that the model may use.
         #
-        #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         #   @param user_profile_id [String] The user profile ID to attribute this request to. Use when acting on behalf of a
         #
@@ -339,8 +354,6 @@ module Anthropic
           }]
         end
 
-        # Code execution tool with REPL state persistence (daemon mode + gVisor
-        # checkpoint).
         module Tool
           extend Anthropic::Internal::Type::Union
 

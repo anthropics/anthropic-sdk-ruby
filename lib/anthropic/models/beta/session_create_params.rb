@@ -12,7 +12,7 @@ module Anthropic
         #   Agent identifier. Accepts the `agent` ID string, which pins the latest version
         #   for the session, or an `agent` object with both id and version specified.
         #
-        #   @return [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams]
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams, String]
         required :agent, union: -> { Anthropic::Beta::SessionCreateParams::Agent }
 
         # @!attribute environment_id
@@ -65,7 +65,7 @@ module Anthropic
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
-        #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
+        #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
         # @!attribute workspace_id
@@ -77,7 +77,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::SessionCreateParams} for more details.
         #
-        #   @param agent [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams] Agent identifier. Accepts the `agent` ID string, which pins the latest version f
+        #   @param agent [Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams, String] Agent identifier. Accepts the `agent` ID string, which pins the latest version f
         #
         #   @param environment_id [String] ID of the `environment` defining the container configuration for this session.
         #
@@ -93,7 +93,7 @@ module Anthropic
         #
         #   @param vault_ids [Array<String>] Vault IDs for stored credentials the agent can use during the session.
         #
-        #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         #   @param workspace_id [String]
         #
@@ -104,16 +104,16 @@ module Anthropic
         module Agent
           extend Anthropic::Internal::Type::Union
 
-          variant String
-
           # Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
           variant -> { Anthropic::Beta::BetaManagedAgentsAgentParams }
 
           # Reference to an `agent` plus optional configuration overrides. Each provided field replaces the agent's value for the caller's use; the agent resource is unchanged.
           variant -> { Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams }
 
+          variant String
+
           # @!method self.variants
-          #   @return [Array(String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams)]
+          #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams, String)]
         end
 
         # An event sent to the `session` immediately after it is created. Supports

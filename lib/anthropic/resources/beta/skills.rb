@@ -18,7 +18,7 @@ module Anthropic
         #
         # @param display_name [String, nil] Body param: Human-readable, single-line label for the Skill. Maximum 255 charact
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -54,7 +54,7 @@ module Anthropic
         #
         # @param skill_id [String] Unique identifier for the skill.
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -87,7 +87,7 @@ module Anthropic
         #
         # @param source [String, nil] Query param: Filter skills by source.
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -123,7 +123,7 @@ module Anthropic
         #
         # @param skill_id [String] Unique identifier for the skill.
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #

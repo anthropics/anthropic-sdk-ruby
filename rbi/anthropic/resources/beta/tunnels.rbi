@@ -18,7 +18,7 @@ module Anthropic
         sig do
           params(
             display_name: T.nilable(String),
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaTunnel)
@@ -48,7 +48,7 @@ module Anthropic
         sig do
           params(
             tunnel_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaTunnel)
@@ -81,7 +81,7 @@ module Anthropic
             include_archived: T::Boolean,
             limit: Integer,
             page: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(
@@ -122,7 +122,7 @@ module Anthropic
         sig do
           params(
             tunnel_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaTunnel)
@@ -155,7 +155,7 @@ module Anthropic
         sig do
           params(
             tunnel_id: String,
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaTunnelToken)
@@ -188,7 +188,7 @@ module Anthropic
           params(
             tunnel_id: String,
             reason: T.nilable(String),
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(Anthropic::Beta::BetaTunnelToken)

@@ -9,7 +9,7 @@ module Anthropic
           cache_creation_input_tokens: Integer,
           cache_read_input_tokens: Integer,
           input_tokens: Integer,
-          model: Anthropic::Models::model,
+          model: Anthropic::Models::model?,
           output_tokens: Integer,
           type: :message
         }
@@ -23,7 +23,7 @@ module Anthropic
 
         attr_accessor input_tokens: Integer
 
-        attr_accessor model: Anthropic::Models::model
+        attr_accessor model: Anthropic::Models::model?
 
         attr_accessor output_tokens: Integer
 
@@ -34,7 +34,7 @@ module Anthropic
           cache_creation_input_tokens: Integer,
           cache_read_input_tokens: Integer,
           input_tokens: Integer,
-          model: Anthropic::Models::model,
+          model: Anthropic::Models::model?,
           output_tokens: Integer,
           ?type: :message
         ) -> void
@@ -44,7 +44,7 @@ module Anthropic
           cache_creation_input_tokens: Integer,
           cache_read_input_tokens: Integer,
           input_tokens: Integer,
-          model: Anthropic::Models::model,
+          model: Anthropic::Models::model?,
           output_tokens: Integer,
           type: :message
         }

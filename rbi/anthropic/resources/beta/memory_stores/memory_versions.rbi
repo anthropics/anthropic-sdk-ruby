@@ -13,7 +13,7 @@ module Anthropic
               view:
                 Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryView::OrSymbol,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(
@@ -57,7 +57,7 @@ module Anthropic
               view:
                 Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryView::OrSymbol,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(
@@ -108,7 +108,7 @@ module Anthropic
               memory_version_id: String,
               memory_store_id: String,
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(

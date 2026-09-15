@@ -14,7 +14,7 @@ module Anthropic
         #   e.g. `claude-opus-5`, or a `model_config` object for additional configuration
         #   control
         #
-        #   @return [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams]
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel]
         required :model, union: -> { Anthropic::Beta::AgentCreateParams::Model }
 
         # @!attribute name
@@ -77,7 +77,7 @@ module Anthropic
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
-        #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
+        #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
         # @!attribute workspace_id
@@ -89,7 +89,7 @@ module Anthropic
         #   Some parameter documentations has been truncated, see
         #   {Anthropic::Models::Beta::AgentCreateParams} for more details.
         #
-        #   @param model [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams] Model identifier. Accepts the [model string](https://platform.claude.com/docs/en
+        #   @param model [Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] Model identifier. Accepts the [model string](https://platform.claude.com/docs/en
         #
         #   @param name [String] Human-readable name for the agent.
         #
@@ -107,7 +107,7 @@ module Anthropic
         #
         #   @param tools [Array<Anthropic::Models::Beta::BetaManagedAgentsAgentToolset20260401Params, Anthropic::Models::Beta::BetaManagedAgentsMCPToolsetParams, Anthropic::Models::Beta::BetaManagedAgentsCustomToolParams>] Tool configurations available to the agent. Maximum of 128 tools across all tool
         #
-        #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         #   @param workspace_id [String]
         #
@@ -120,16 +120,16 @@ module Anthropic
         module Model
           extend Anthropic::Internal::Type::Union
 
+          # An object that defines additional configuration control over model use
+          variant -> { Anthropic::Beta::BetaManagedAgentsModelConfigParams }
+
           # The model that will power your agent.
           #
           # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
           variant union: -> { Anthropic::Beta::BetaManagedAgentsModel }
 
-          # An object that defines additional configuration control over model use
-          variant -> { Anthropic::Beta::BetaManagedAgentsModelConfigParams }
-
           # @!method self.variants
-          #   @return [Array(Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams)]
+          #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel)]
         end
 
         # Union type for tool configurations in the tools array.

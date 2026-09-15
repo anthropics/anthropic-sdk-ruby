@@ -38,7 +38,9 @@ module Anthropic
 
           # When set, this event was cross-posted from a subagent's thread to surface its
           # custom tool use on the primary thread's stream. Empty on the thread's own
-          # events. Echo this on a `user.custom_tool_result` event to route the result back.
+          # events. Informational only: the server routes the matching
+          # `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it
+          # back.
           sig { returns(T.nilable(String)) }
           attr_accessor :session_thread_id
 
@@ -67,7 +69,9 @@ module Anthropic
             type:,
             # When set, this event was cross-posted from a subagent's thread to surface its
             # custom tool use on the primary thread's stream. Empty on the thread's own
-            # events. Echo this on a `user.custom_tool_result` event to route the result back.
+            # events. Informational only: the server routes the matching
+            # `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it
+            # back.
             session_thread_id: nil
           )
           end

@@ -22,6 +22,14 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaCapabilitySupport]
         required :code_execution, -> { Anthropic::Beta::BetaCapabilitySupport }
 
+        # @!attribute compaction
+        #   Compaction capability details: whether the model accepts the top-level
+        #   `compaction` request parameter, with one entry per supported `compaction.type`
+        #   value.
+        #
+        #   @return [Anthropic::Models::Beta::BetaCompactionCapability, nil]
+        required :compaction, -> { Anthropic::Beta::BetaCompactionCapability }, nil?: true
+
         # @!attribute context_management
         #   Context management support and available strategies.
         #
@@ -58,14 +66,19 @@ module Anthropic
         #   @return [Anthropic::Models::Beta::BetaThinkingCapability]
         required :thinking, -> { Anthropic::Beta::BetaThinkingCapability }
 
-        # @!method initialize(batch:, citations:, code_execution:, context_management:, effort:, image_input:, pdf_input:, structured_outputs:, thinking:)
+        # @!method initialize(batch:, citations:, code_execution:, compaction:, context_management:, effort:, image_input:, pdf_input:, structured_outputs:, thinking:)
         #   Model capability information.
+        #
+        #   Some parameter documentations has been truncated, see
+        #   {Anthropic::Models::Beta::BetaModelCapabilities} for more details.
         #
         #   @param batch [Anthropic::Models::Beta::BetaCapabilitySupport] Whether the model supports the Batch API.
         #
         #   @param citations [Anthropic::Models::Beta::BetaCapabilitySupport] Whether the model supports citation generation.
         #
         #   @param code_execution [Anthropic::Models::Beta::BetaCapabilitySupport] Whether the model supports code execution tools.
+        #
+        #   @param compaction [Anthropic::Models::Beta::BetaCompactionCapability, nil] Compaction capability details: whether the model accepts the top-level
         #
         #   @param context_management [Anthropic::Models::Beta::BetaContextManagementCapability] Context management support and available strategies.
         #

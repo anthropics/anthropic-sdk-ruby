@@ -50,7 +50,7 @@ module Anthropic
         # @!attribute betas
         #   Optional header to specify the beta version(s) you want to use.
         #
-        #   @return [Array<String, Symbol, Anthropic::Models::AnthropicBeta>, nil]
+        #   @return [Array<Symbol, String, Anthropic::Models::AnthropicBeta>, nil]
         optional :betas, -> { Anthropic::Internal::Type::ArrayOf[union: Anthropic::AnthropicBeta] }
 
         # @!attribute workspace_id
@@ -74,7 +74,7 @@ module Anthropic
         #
         #   @param statuses [Array<Symbol, Anthropic::Models::Beta::BetaDreamStatus>] Filter by lifecycle status. Repeat the parameter to match any of multiple status
         #
-        #   @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        #   @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         #   @param workspace_id [String]
         #

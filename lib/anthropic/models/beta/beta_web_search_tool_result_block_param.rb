@@ -6,7 +6,7 @@ module Anthropic
       class BetaWebSearchToolResultBlockParam < Anthropic::Internal::Type::BaseModel
         # @!attribute content
         #
-        #   @return [Array<Anthropic::Models::Beta::BetaWebSearchResultBlockParam>, Anthropic::Models::Beta::BetaWebSearchToolRequestError]
+        #   @return [Anthropic::Models::Beta::BetaWebSearchToolRequestError, Array<Anthropic::Models::Beta::BetaWebSearchResultBlockParam>]
         required :content, union: -> { Anthropic::Beta::BetaWebSearchToolResultBlockParamContent }
 
         # @!attribute tool_use_id
@@ -26,7 +26,6 @@ module Anthropic
         optional :cache_control, -> { Anthropic::Beta::BetaCacheControlEphemeral }, nil?: true
 
         # @!attribute caller_
-        #   Tool invocation directly from the model.
         #
         #   @return [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120, nil]
         optional :caller_,
@@ -34,18 +33,16 @@ module Anthropic
                  api_name: :caller
 
         # @!method initialize(content:, tool_use_id:, cache_control: nil, caller_: nil, type: :web_search_tool_result)
-        #   @param content [Array<Anthropic::Models::Beta::BetaWebSearchResultBlockParam>, Anthropic::Models::Beta::BetaWebSearchToolRequestError]
+        #   @param content [Anthropic::Models::Beta::BetaWebSearchToolRequestError, Array<Anthropic::Models::Beta::BetaWebSearchResultBlockParam>]
         #
         #   @param tool_use_id [String]
         #
         #   @param cache_control [Anthropic::Models::Beta::BetaCacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
         #
-        #   @param caller_ [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120] Tool invocation directly from the model.
+        #   @param caller_ [Anthropic::Models::Beta::BetaDirectCaller, Anthropic::Models::Beta::BetaServerToolCaller, Anthropic::Models::Beta::BetaServerToolCaller20260120]
         #
         #   @param type [Symbol, :web_search_tool_result]
 
-        # Tool invocation directly from the model.
-        #
         # @see Anthropic::Models::Beta::BetaWebSearchToolResultBlockParam#caller_
         module Caller
           extend Anthropic::Internal::Type::Union

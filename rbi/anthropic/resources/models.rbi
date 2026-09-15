@@ -10,7 +10,7 @@ module Anthropic
       sig do
         params(
           model_id: String,
-          betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+          betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
           workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::ModelInfo)
@@ -40,7 +40,7 @@ module Anthropic
           after_id: String,
           before_id: String,
           limit: Integer,
-          betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+          betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
           workspace_id: String,
           request_options: Anthropic::RequestOptions::OrHash
         ).returns(Anthropic::Internal::Page[Anthropic::ModelInfo])

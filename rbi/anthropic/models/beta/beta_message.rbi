@@ -176,25 +176,30 @@ module Anthropic
         sig { params(usage: Anthropic::Beta::BetaUsage::OrHash).void }
         attr_writer :usage
 
-        # Changes the API made to the request's input before showing it to the model: one
-        # entry per change, in request order. Today the only entry type is
-        # `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text` block
-        # from the request's `messages` that was removed from the prompt instead of being
-        # shown to the model because it failed a binding check. More entry types may be
-        # added over time; ignore types you do not recognize.
+        # Changes the API made to the request's input before showing it to the model, and
+        # blocks that failed a binding check but were left unchanged: one entry per block,
+        # in request order. Two entry types today. `thinking_dropped` — a `thinking`,
+        # `redacted_thinking` or `connector_text` block from the request's `messages` that
+        # was removed from the prompt instead of being shown to the model because it
+        # failed a binding check. `thinking_mismatch_allowed` — a `thinking` or
+        # `redacted_thinking` block that failed the conversation check (the conversation
+        # before it differs from the one it was created in, or it carries no record of one
+        # on a model that requires it) and was shown to the model all the same, because
+        # that check is not enforced for this request. More entry types may be added over
+        # time; ignore types you do not recognize.
         #
         # Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
         # every such response from a model that supports extended thinking, as `[]` when
-        # nothing was changed; without the beta, blocks are removed all the same but
-        # nothing is reported. Removed blocks contribute nothing to `usage.input_tokens`.
-        # When streaming, the array is final in `message_start`; the final `message_delta`
-        # event carries it only when a server-side model fallback happened mid-stream, in
-        # which case it holds the serving model's entries and replaces the one in
-        # `message_start`.
+        # there is no entry to report; without the beta, blocks are removed or left in
+        # place all the same but nothing is reported. Removed blocks contribute nothing to
+        # `usage.input_tokens`; blocks left in place count as sent. When streaming, the
+        # array is final in `message_start`; the final `message_delta` event carries it
+        # only when a server-side model fallback happened mid-stream, in which case it
+        # holds the serving model's entries and replaces the one in `message_start`.
         sig do
           returns(
             T.nilable(
-              T::Array[Anthropic::Beta::BetaThinkingDroppedInputTransformation]
+              T::Array[Anthropic::Beta::BetaInputTransformation::Variants]
             )
           )
         end
@@ -238,7 +243,10 @@ module Anthropic
             input_transformations:
               T.nilable(
                 T::Array[
-                  Anthropic::Beta::BetaThinkingDroppedInputTransformation::OrHash
+                  T.any(
+                    Anthropic::Beta::BetaThinkingDroppedInputTransformation::OrHash,
+                    Anthropic::Beta::BetaThinkingMismatchAllowedInputTransformation::OrHash
+                  )
                 ]
               ),
             role: Symbol,
@@ -338,21 +346,26 @@ module Anthropic
           # Total input tokens in a request is the summation of `input_tokens`,
           # `cache_creation_input_tokens`, and `cache_read_input_tokens`.
           usage:,
-          # Changes the API made to the request's input before showing it to the model: one
-          # entry per change, in request order. Today the only entry type is
-          # `thinking_dropped` — a `thinking`, `redacted_thinking` or `connector_text` block
-          # from the request's `messages` that was removed from the prompt instead of being
-          # shown to the model because it failed a binding check. More entry types may be
-          # added over time; ignore types you do not recognize.
+          # Changes the API made to the request's input before showing it to the model, and
+          # blocks that failed a binding check but were left unchanged: one entry per block,
+          # in request order. Two entry types today. `thinking_dropped` — a `thinking`,
+          # `redacted_thinking` or `connector_text` block from the request's `messages` that
+          # was removed from the prompt instead of being shown to the model because it
+          # failed a binding check. `thinking_mismatch_allowed` — a `thinking` or
+          # `redacted_thinking` block that failed the conversation check (the conversation
+          # before it differs from the one it was created in, or it carries no record of one
+          # on a model that requires it) and was shown to the model all the same, because
+          # that check is not enforced for this request. More entry types may be added over
+          # time; ignore types you do not recognize.
           #
           # Requires `anthropic-beta: thinking-binding-controls-2026-08-01`. Present on
           # every such response from a model that supports extended thinking, as `[]` when
-          # nothing was changed; without the beta, blocks are removed all the same but
-          # nothing is reported. Removed blocks contribute nothing to `usage.input_tokens`.
-          # When streaming, the array is final in `message_start`; the final `message_delta`
-          # event carries it only when a server-side model fallback happened mid-stream, in
-          # which case it holds the serving model's entries and replaces the one in
-          # `message_start`.
+          # there is no entry to report; without the beta, blocks are removed or left in
+          # place all the same but nothing is reported. Removed blocks contribute nothing to
+          # `usage.input_tokens`; blocks left in place count as sent. When streaming, the
+          # array is final in `message_start`; the final `message_delta` event carries it
+          # only when a server-side model fallback happened mid-stream, in which case it
+          # holds the serving model's entries and replaces the one in `message_start`.
           input_transformations: nil,
           # Conversational role of the generated message.
           #
@@ -384,9 +397,7 @@ module Anthropic
               usage: Anthropic::Beta::BetaUsage,
               input_transformations:
                 T.nilable(
-                  T::Array[
-                    Anthropic::Beta::BetaThinkingDroppedInputTransformation
-                  ]
+                  T::Array[Anthropic::Beta::BetaInputTransformation::Variants]
                 )
             }
           )

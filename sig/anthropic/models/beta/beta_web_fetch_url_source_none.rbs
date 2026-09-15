@@ -1,0 +1,17 @@
+module Anthropic
+  module Models
+    class BetaWebFetchURLSourceNone = Beta::BetaWebFetchURLSourceNone
+
+    module Beta
+      type beta_web_fetch_url_source_none = { type: :none }
+
+      class BetaWebFetchURLSourceNone < Anthropic::Internal::Type::BaseModel
+        attr_accessor type: :none
+
+        def initialize: (?type: :none) -> void
+
+        def to_hash: -> { type: :none }
+      end
+    end
+  end
+end

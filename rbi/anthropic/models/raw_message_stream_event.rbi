@@ -126,7 +126,6 @@ module Anthropic
         # Total input tokens in a request is the summation of `input_tokens`,
         # `cache_creation_input_tokens`, and `cache_read_input_tokens`.
         usage: nil,
-        # Response model for a file uploaded to the container.
         content_block: nil,
         index: nil
       )

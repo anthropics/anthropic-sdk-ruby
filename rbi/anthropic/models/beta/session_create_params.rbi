@@ -20,9 +20,9 @@ module Anthropic
         sig do
           returns(
             T.any(
-              String,
               Anthropic::Beta::BetaManagedAgentsAgentParams,
-              Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams
+              Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams,
+              String
             )
           )
         end
@@ -128,7 +128,7 @@ module Anthropic
         sig do
           returns(
             T.nilable(
-              T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
+              T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
             )
           )
         end
@@ -136,7 +136,7 @@ module Anthropic
 
         sig do
           params(
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)]
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)]
           ).void
         end
         attr_writer :betas
@@ -151,9 +151,9 @@ module Anthropic
           params(
             agent:
               T.any(
-                String,
                 Anthropic::Beta::BetaManagedAgentsAgentParams::OrHash,
-                Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::OrHash
+                Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::OrHash,
+                String
               ),
             environment_id: String,
             budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit::OrHash,
@@ -175,7 +175,7 @@ module Anthropic
               ],
             title: T.nilable(String),
             vault_ids: T::Array[String],
-            betas: T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+            betas: T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
             workspace_id: String,
             request_options: Anthropic::RequestOptions::OrHash
           ).returns(T.attached_class)
@@ -213,9 +213,9 @@ module Anthropic
             {
               agent:
                 T.any(
-                  String,
                   Anthropic::Beta::BetaManagedAgentsAgentParams,
-                  Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams
+                  Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams,
+                  String
                 ),
               environment_id: String,
               budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit,
@@ -238,7 +238,7 @@ module Anthropic
               title: T.nilable(String),
               vault_ids: T::Array[String],
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               workspace_id: String,
               request_options: Anthropic::RequestOptions
             }
@@ -255,9 +255,9 @@ module Anthropic
           Variants =
             T.type_alias do
               T.any(
-                String,
                 Anthropic::Beta::BetaManagedAgentsAgentParams,
-                Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams
+                Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams,
+                String
               )
             end
 

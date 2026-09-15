@@ -27,7 +27,7 @@ module Anthropic
         #   Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a
         #   `model_config` object. Omit to use the agent's model.
         #
-        #   @return [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, nil]
+        #   @return [Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, nil]
         optional :model, union: -> { Anthropic::Beta::BetaManagedAgentsAgentWithOverridesParams::Model }
 
         # @!attribute skills
@@ -74,7 +74,7 @@ module Anthropic
         #
         #   @param mcp_servers [Array<Anthropic::Models::Beta::BetaManagedAgentsURLMCPServerParams>] Replacement MCP server list. Full replacement: the provided array becomes the MC
         #
-        #   @param model [Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams] Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_c
+        #   @param model [Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel] Replacement model. Accepts the model string, e.g. `claude-opus-5`, or a `model_c
         #
         #   @param skills [Array<Anthropic::Models::Beta::BetaManagedAgentsAnthropicSkillParams, Anthropic::Models::Beta::BetaManagedAgentsCustomSkillParams>] Replacement skill list. Full replacement: the provided array becomes the skills.
         #
@@ -101,16 +101,16 @@ module Anthropic
         module Model
           extend Anthropic::Internal::Type::Union
 
+          # An object that defines additional configuration control over model use
+          variant -> { Anthropic::Beta::BetaManagedAgentsModelConfigParams }
+
           # The model that will power your agent.
           #
           # See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
           variant union: -> { Anthropic::Beta::BetaManagedAgentsModel }
 
-          # An object that defines additional configuration control over model use
-          variant -> { Anthropic::Beta::BetaManagedAgentsModelConfigParams }
-
           # @!method self.variants
-          #   @return [Array(Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel, Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams)]
+          #   @return [Array(Anthropic::Models::Beta::BetaManagedAgentsModelConfigParams, Symbol, String, Anthropic::Models::Beta::BetaManagedAgentsModel)]
         end
 
         # Union type for tool configurations in the tools array.

@@ -38,7 +38,7 @@ module Anthropic
               external_key_id: T.nilable(String),
               tags: T.nilable(T::Hash[Symbol, String]),
               betas:
-                T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
               request_options: Anthropic::RequestOptions::OrHash
             ).returns(Anthropic::Beta::Organization::BetaWorkspace)
           end

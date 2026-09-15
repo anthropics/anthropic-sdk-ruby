@@ -1,0 +1,16 @@
+module Anthropic
+  module Models
+    type web_fetch_url_source_tool_reference =
+      { name: String, type: :tool_reference }
+
+    class WebFetchURLSourceToolReference < Anthropic::Internal::Type::BaseModel
+      attr_accessor name: String
+
+      attr_accessor type: :tool_reference
+
+      def initialize: (name: String, ?type: :tool_reference) -> void
+
+      def to_hash: -> { name: String, type: :tool_reference }
+    end
+  end
+end

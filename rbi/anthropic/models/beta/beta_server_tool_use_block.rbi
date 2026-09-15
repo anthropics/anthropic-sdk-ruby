@@ -28,7 +28,6 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
-        # Tool invocation directly from the model.
         sig do
           returns(
             T.nilable(Anthropic::Beta::BetaServerToolUseBlock::Caller::Variants)
@@ -62,14 +61,7 @@ module Anthropic
             type: Symbol
           ).returns(T.attached_class)
         end
-        def self.new(
-          id:,
-          input:,
-          name:,
-          # Tool invocation directly from the model.
-          caller_: nil,
-          type: :server_tool_use
-        )
+        def self.new(id:, input:, name:, caller_: nil, type: :server_tool_use)
         end
 
         sig do
@@ -147,7 +139,6 @@ module Anthropic
           end
         end
 
-        # Tool invocation directly from the model.
         module Caller
           extend Anthropic::Internal::Type::Union
 

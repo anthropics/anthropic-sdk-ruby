@@ -58,7 +58,7 @@ module Anthropic
           request_options: Anthropic::RequestOptions
         }
 
-        type model = String | Anthropic::Beta::BetaDreamModelConfigParam
+        type model = Anthropic::Beta::BetaDreamModelConfigParam | String
 
         module Model
           extend Anthropic::Internal::Type::Union

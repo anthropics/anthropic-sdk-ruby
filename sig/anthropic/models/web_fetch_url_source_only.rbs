@@ -1,0 +1,22 @@
+module Anthropic
+  module Models
+    type web_fetch_url_source_only =
+      { tools: ::Array[Anthropic::WebFetchURLSourceToolReference], type: :only }
+
+    class WebFetchURLSourceOnly < Anthropic::Internal::Type::BaseModel
+      attr_accessor tools: ::Array[Anthropic::WebFetchURLSourceToolReference]
+
+      attr_accessor type: :only
+
+      def initialize: (
+        tools: ::Array[Anthropic::WebFetchURLSourceToolReference],
+        ?type: :only
+      ) -> void
+
+      def to_hash: -> {
+        tools: ::Array[Anthropic::WebFetchURLSourceToolReference],
+        type: :only
+      }
+    end
+  end
+end

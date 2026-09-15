@@ -30,7 +30,6 @@ module Anthropic
           required :session_thread_id, String
 
           # @!attribute stop_reason
-          #   The agent completed its turn naturally and is ready for the next user message.
           #
           #   @return [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached]
           required :stop_reason,
@@ -54,12 +53,10 @@ module Anthropic
           #
           #   @param session_thread_id [String] Public sthr\_ ID of the thread that went idle.
           #
-          #   @param stop_reason [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached] The agent completed its turn naturally and is ready for the next user message.
+          #   @param stop_reason [Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEndTurn, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRequiresAction, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionRetriesExhausted, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionBudgetReached]
           #
           #   @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::Type]
 
-          # The agent completed its turn naturally and is ready for the next user message.
-          #
           # @see Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent#stop_reason
           module StopReason
             extend Anthropic::Internal::Type::Union

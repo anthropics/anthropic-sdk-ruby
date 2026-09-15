@@ -14,7 +14,7 @@ module Anthropic
                 limit: Integer,
                 page: String,
                 betas:
-                  T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                  T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                 workspace_id: String,
                 request_options: Anthropic::RequestOptions::OrHash
               ).returns(
@@ -55,7 +55,7 @@ module Anthropic
                     Anthropic::Beta::BetaManagedAgentsDeltaType::OrSymbol
                   ],
                 betas:
-                  T::Array[T.any(String, Anthropic::AnthropicBeta::OrSymbol)],
+                  T::Array[T.any(Anthropic::AnthropicBeta::OrSymbol, String)],
                 workspace_id: String,
                 request_options: Anthropic::RequestOptions::OrHash
               ).returns(

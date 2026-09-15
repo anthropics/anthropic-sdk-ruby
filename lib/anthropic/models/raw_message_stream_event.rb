@@ -52,7 +52,7 @@ module Anthropic
       #
       #   @option args [Anthropic::Models::MessageDeltaUsage] :usage Billing and rate-limit usage.
       #
-      #   @option args [Anthropic::Models::TextBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ServerToolUseBlock, Anthropic::Models::WebSearchToolResultBlock, Anthropic::Models::WebFetchToolResultBlock, Anthropic::Models::CodeExecutionToolResultBlock, Anthropic::Models::BashCodeExecutionToolResultBlock, Anthropic::Models::TextEditorCodeExecutionToolResultBlock, Anthropic::Models::ToolSearchToolResultBlock, Anthropic::Models::ContainerUploadBlock] :content_block Response model for a file uploaded to the container.
+      #   @option args [Anthropic::Models::TextBlock, Anthropic::Models::ThinkingBlock, Anthropic::Models::RedactedThinkingBlock, Anthropic::Models::ToolUseBlock, Anthropic::Models::ServerToolUseBlock, Anthropic::Models::WebSearchToolResultBlock, Anthropic::Models::WebFetchToolResultBlock, Anthropic::Models::CodeExecutionToolResultBlock, Anthropic::Models::BashCodeExecutionToolResultBlock, Anthropic::Models::TextEditorCodeExecutionToolResultBlock, Anthropic::Models::ToolSearchToolResultBlock, Anthropic::Models::ContainerUploadBlock] :content_block
       #
       #   @option args [Integer] :index
       #

@@ -9,7 +9,8 @@ module Anthropic
           external_user_onboarded_at: Time,
           metadata: ::Hash[Symbol, String],
           name: String?,
-          betas: ::Array[Anthropic::Models::anthropic_beta]
+          betas: ::Array[Anthropic::Models::anthropic_beta],
+          workspace_id: String
         }
         & Anthropic::Internal::Type::request_parameters
 
@@ -47,6 +48,10 @@ module Anthropic
           ::Array[Anthropic::Models::anthropic_beta]
         ) -> ::Array[Anthropic::Models::anthropic_beta]
 
+        attr_reader workspace_id: String?
+
+        def workspace_id=: (String) -> String
+
         def initialize: (
           ?access_type: Anthropic::Models::Beta::UserProfileCreateParams::access_type,
           ?external_id: String?,
@@ -55,6 +60,7 @@ module Anthropic
           ?metadata: ::Hash[Symbol, String],
           ?name: String?,
           ?betas: ::Array[Anthropic::Models::anthropic_beta],
+          ?workspace_id: String,
           ?request_options: Anthropic::request_opts
         ) -> void
 
@@ -66,6 +72,7 @@ module Anthropic
           metadata: ::Hash[Symbol, String],
           name: String?,
           betas: ::Array[Anthropic::Models::anthropic_beta],
+          workspace_id: String,
           request_options: Anthropic::RequestOptions
         }
 

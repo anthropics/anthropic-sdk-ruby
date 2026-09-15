@@ -15,7 +15,8 @@ module Anthropic
           defer_loading: bool,
           max_content_tokens: Integer?,
           max_uses: Integer?,
-          strict: bool
+          strict: bool,
+          url_sources: Anthropic::Beta::BetaWebFetchURLSources?
         }
 
       class BetaWebFetchTool20260209 < Anthropic::Internal::Type::BaseModel
@@ -49,6 +50,8 @@ module Anthropic
 
         def strict=: (bool) -> bool
 
+        attr_accessor url_sources: Anthropic::Beta::BetaWebFetchURLSources?
+
         def initialize: (
           ?allowed_callers: ::Array[Anthropic::Models::Beta::BetaWebFetchTool20260209::allowed_caller],
           ?allowed_domains: ::Array[String]?,
@@ -59,6 +62,7 @@ module Anthropic
           ?max_content_tokens: Integer?,
           ?max_uses: Integer?,
           ?strict: bool,
+          ?url_sources: Anthropic::Beta::BetaWebFetchURLSources?,
           ?name: :web_fetch,
           ?type: :web_fetch_20260209
         ) -> void
@@ -74,7 +78,8 @@ module Anthropic
           defer_loading: bool,
           max_content_tokens: Integer?,
           max_uses: Integer?,
-          strict: bool
+          strict: bool,
+          url_sources: Anthropic::Beta::BetaWebFetchURLSources?
         }
 
         type allowed_caller =

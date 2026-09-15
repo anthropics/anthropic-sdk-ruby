@@ -9,7 +9,6 @@ module Anthropic
       required :id, String
 
       # @!attribute caller_
-      #   Tool invocation directly from the model.
       #
       #   @return [Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120]
       required :caller_, union: -> { Anthropic::ServerToolUseBlock::Caller }, api_name: :caller
@@ -31,17 +30,11 @@ module Anthropic
 
       # @!method initialize(id:, caller_:, input:, name:, type: :server_tool_use)
       #   @param id [String]
-      #
-      #   @param caller_ [Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120] Tool invocation directly from the model.
-      #
+      #   @param caller_ [Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120]
       #   @param input [Object]
-      #
       #   @param name [Symbol, Anthropic::Models::ServerToolUseBlock::Name]
-      #
       #   @param type [Symbol, :server_tool_use]
 
-      # Tool invocation directly from the model.
-      #
       # @see Anthropic::Models::ServerToolUseBlock#caller_
       module Caller
         extend Anthropic::Internal::Type::Union

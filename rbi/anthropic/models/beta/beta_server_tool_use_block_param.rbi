@@ -40,7 +40,6 @@ module Anthropic
         end
         attr_writer :cache_control
 
-        # Tool invocation directly from the model.
         sig do
           returns(
             T.nilable(
@@ -88,7 +87,6 @@ module Anthropic
           name:,
           # Create a cache control breakpoint at this content block.
           cache_control: nil,
-          # Tool invocation directly from the model.
           caller_: nil,
           type: :server_tool_use
         )
@@ -177,7 +175,6 @@ module Anthropic
           end
         end
 
-        # Tool invocation directly from the model.
         module Caller
           extend Anthropic::Internal::Type::Union
 

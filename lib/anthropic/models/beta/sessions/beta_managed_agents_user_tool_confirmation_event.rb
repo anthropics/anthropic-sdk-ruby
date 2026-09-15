@@ -46,9 +46,8 @@ module Anthropic
           optional :processed_at, Time, nil?: true
 
           # @!attribute session_thread_id
-          #   When set, the confirmation routes to this subagent's thread rather than the
-          #   primary. Echo this from the `session_thread_id` on the `agent.tool_use` or
-          #   `agent.mcp_tool_use` event that prompted the approval.
+          #   Set by the server to the subagent thread this confirmation was routed to.
+          #   Omitted when it was routed to the primary thread.
           #
           #   @return [String, nil]
           optional :session_thread_id, String, nil?: true
@@ -72,7 +71,7 @@ module Anthropic
           #
           #   @param processed_at [Time, nil] A timestamp in RFC 3339 format
           #
-          #   @param session_thread_id [String, nil] When set, the confirmation routes to this subagent's thread rather than the prim
+          #   @param session_thread_id [String, nil] Set by the server to the subagent thread this confirmation was routed to. Omitte
 
           # UserToolConfirmationResult enum
           #

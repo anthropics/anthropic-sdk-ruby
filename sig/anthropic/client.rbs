@@ -38,6 +38,7 @@ module Anthropic
       ?auth_token: String?,
       ?webhook_key: String?,
       ?base_url: String?,
+      ?proxy: (String | URI::Generic)?,
       ?max_retries: Integer,
       ?timeout: Float,
       ?initial_retry_delay: Float,

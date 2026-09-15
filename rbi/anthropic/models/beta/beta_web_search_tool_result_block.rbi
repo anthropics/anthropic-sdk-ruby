@@ -27,7 +27,6 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
-        # Tool invocation directly from the model.
         sig do
           returns(
             T.nilable(
@@ -69,7 +68,6 @@ module Anthropic
         def self.new(
           content:,
           tool_use_id:,
-          # Tool invocation directly from the model.
           caller_: nil,
           type: :web_search_tool_result
         )
@@ -90,7 +88,6 @@ module Anthropic
         def to_hash
         end
 
-        # Tool invocation directly from the model.
         module Caller
           extend Anthropic::Internal::Type::Union
 

@@ -446,11 +446,7 @@ module Anthropic
             # Name of the callable agent this message was sent to. Absent when sent to the
             # primary agent.
             to_agent_name: nil,
-            # An unknown or unexpected error occurred during session execution. A fallback
-            # variant; clients that don't recognize a new error code can match on
-            # `retry_status` and `message` alone.
             error: nil,
-            # The agent completed its turn naturally and is ready for the next user message.
             stop_reason: nil,
             # Name of the callable agent the thread runs.
             agent_name: nil,

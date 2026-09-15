@@ -43,6 +43,20 @@ module Anthropic
         end
         attr_writer :code_execution
 
+        # Compaction capability details: whether the model accepts the top-level
+        # `compaction` request parameter, with one entry per supported `compaction.type`
+        # value.
+        sig { returns(T.nilable(Anthropic::Beta::BetaCompactionCapability)) }
+        attr_reader :compaction
+
+        sig do
+          params(
+            compaction:
+              T.nilable(Anthropic::Beta::BetaCompactionCapability::OrHash)
+          ).void
+        end
+        attr_writer :compaction
+
         # Context management support and available strategies.
         sig { returns(Anthropic::Beta::BetaContextManagementCapability) }
         attr_reader :context_management
@@ -110,6 +124,8 @@ module Anthropic
             batch: Anthropic::Beta::BetaCapabilitySupport::OrHash,
             citations: Anthropic::Beta::BetaCapabilitySupport::OrHash,
             code_execution: Anthropic::Beta::BetaCapabilitySupport::OrHash,
+            compaction:
+              T.nilable(Anthropic::Beta::BetaCompactionCapability::OrHash),
             context_management:
               Anthropic::Beta::BetaContextManagementCapability::OrHash,
             effort: Anthropic::Beta::BetaEffortCapability::OrHash,
@@ -126,6 +142,10 @@ module Anthropic
           citations:,
           # Whether the model supports code execution tools.
           code_execution:,
+          # Compaction capability details: whether the model accepts the top-level
+          # `compaction` request parameter, with one entry per supported `compaction.type`
+          # value.
+          compaction:,
           # Context management support and available strategies.
           context_management:,
           # Effort (reasoning_effort) support and available levels.
@@ -147,6 +167,7 @@ module Anthropic
               batch: Anthropic::Beta::BetaCapabilitySupport,
               citations: Anthropic::Beta::BetaCapabilitySupport,
               code_execution: Anthropic::Beta::BetaCapabilitySupport,
+              compaction: T.nilable(Anthropic::Beta::BetaCompactionCapability),
               context_management:
                 Anthropic::Beta::BetaContextManagementCapability,
               effort: Anthropic::Beta::BetaEffortCapability,

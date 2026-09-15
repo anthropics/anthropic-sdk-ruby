@@ -14,10 +14,10 @@ module Anthropic
         Variants =
           T.type_alias do
             T.any(
-              String,
               Anthropic::Beta::BetaManagedAgentsAgentParams,
               Anthropic::Beta::BetaManagedAgentsMultiagentSelfParams,
-              Anthropic::Beta::BetaManagedAgentsAdvisorParams
+              Anthropic::Beta::BetaManagedAgentsAdvisorParams,
+              String
             )
           end
 

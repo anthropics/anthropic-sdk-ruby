@@ -20,7 +20,7 @@ module Anthropic
         #
         # @overload create(agent:, environment_id:, budget: nil, initial_events: nil, metadata: nil, resources: nil, title: nil, vault_ids: nil, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param agent [String, Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams] Body param: Agent identifier. Accepts the `agent` ID string, which pins the late
+        # @param agent [Anthropic::Models::Beta::BetaManagedAgentsAgentParams, Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams, String] Body param: Agent identifier. Accepts the `agent` ID string, which pins the late
         #
         # @param environment_id [String] Body param: ID of the `environment` defining the container configuration for thi
         #
@@ -36,7 +36,7 @@ module Anthropic
         #
         # @param vault_ids [Array<String>] Body param: Vault IDs for stored credentials the agent can use during the sessio
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -67,7 +67,7 @@ module Anthropic
         #
         # @param session_id [String] Path parameter session_id
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -106,7 +106,7 @@ module Anthropic
         #
         # @param vault_ids [Array<String>] Body param: Vault IDs (`vlt_*`) to attach to the session. Not yet supported; req
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -161,7 +161,7 @@ module Anthropic
         #
         # @param statuses [Array<Symbol, Anthropic::Models::Beta::SessionListParams::Status>] Query param: Filter by session status. Repeat the parameter to match any of mult
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Header param: Optional header to select the Workspace for this request. The valu
         #
@@ -217,7 +217,7 @@ module Anthropic
         #
         # @param session_id [String] Path parameter session_id
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #
@@ -246,7 +246,7 @@ module Anthropic
         #
         # @param session_id [String] Path parameter session_id
         #
-        # @param betas [Array<String, Symbol, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
+        # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
         # @param workspace_id [String] Optional header to select the Workspace for this request. The value is a Workspa
         #

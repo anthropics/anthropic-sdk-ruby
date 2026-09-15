@@ -4,9 +4,6 @@ module Anthropic
   module Models
     module Beta
       module Vaults
-        # Substitute the secret on any host the session's Environment network policy
-        # permits egress to. The Environment's network policy is the only boundary on
-        # where the secret can reach.
         module BetaManagedAgentsCredentialNetworkingParams
           extend Anthropic::Internal::Type::Union
 

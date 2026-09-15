@@ -14,7 +14,6 @@ module Anthropic
             )
           end
 
-        # Response model for a file uploaded to the container.
         sig do
           returns(
             Anthropic::Beta::BetaRawContentBlockStartEvent::ContentBlock::Variants
@@ -54,12 +53,7 @@ module Anthropic
             type: Symbol
           ).returns(T.attached_class)
         end
-        def self.new(
-          # Response model for a file uploaded to the container.
-          content_block:,
-          index:,
-          type: :content_block_start
-        )
+        def self.new(content_block:, index:, type: :content_block_start)
         end
 
         sig do
@@ -75,7 +69,6 @@ module Anthropic
         def to_hash
         end
 
-        # Response model for a file uploaded to the container.
         module ContentBlock
           extend Anthropic::Internal::Type::Union
 
@@ -239,7 +232,7 @@ module Anthropic
                   ]
                 ),
               text: String,
-              signature: String,
+              signature: T.any(String, T.nilable(String)),
               thinking: String,
               data: String,
               id: String,
@@ -342,11 +335,10 @@ module Anthropic
             input: nil,
             # The name of the MCP tool
             name: nil,
-            # Tool invocation directly from the model.
             caller_: nil,
             # For a toolset member tool_use, the toolset family.
             toolset_name: nil,
-            # Code execution result with encrypted stdout for PFC + web_search results.
+            # Summary of compacted content, or null if compaction failed
             content: nil,
             tool_use_id: nil,
             # The name of the MCP server

@@ -5,7 +5,7 @@ module Anthropic
     class WebSearchToolResultBlockParam < Anthropic::Internal::Type::BaseModel
       # @!attribute content
       #
-      #   @return [Array<Anthropic::Models::WebSearchResultBlockParam>, Anthropic::Models::WebSearchToolRequestError]
+      #   @return [Anthropic::Models::WebSearchToolRequestError, Array<Anthropic::Models::WebSearchResultBlockParam>]
       required :content, union: -> { Anthropic::WebSearchToolResultBlockParamContent }
 
       # @!attribute tool_use_id
@@ -25,24 +25,21 @@ module Anthropic
       optional :cache_control, -> { Anthropic::CacheControlEphemeral }, nil?: true
 
       # @!attribute caller_
-      #   Tool invocation directly from the model.
       #
       #   @return [Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120, nil]
       optional :caller_, union: -> { Anthropic::WebSearchToolResultBlockParam::Caller }, api_name: :caller
 
       # @!method initialize(content:, tool_use_id:, cache_control: nil, caller_: nil, type: :web_search_tool_result)
-      #   @param content [Array<Anthropic::Models::WebSearchResultBlockParam>, Anthropic::Models::WebSearchToolRequestError]
+      #   @param content [Anthropic::Models::WebSearchToolRequestError, Array<Anthropic::Models::WebSearchResultBlockParam>]
       #
       #   @param tool_use_id [String]
       #
       #   @param cache_control [Anthropic::Models::CacheControlEphemeral, nil] Create a cache control breakpoint at this content block.
       #
-      #   @param caller_ [Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120] Tool invocation directly from the model.
+      #   @param caller_ [Anthropic::Models::DirectCaller, Anthropic::Models::ServerToolCaller, Anthropic::Models::ServerToolCaller20260120]
       #
       #   @param type [Symbol, :web_search_tool_result]
 
-      # Tool invocation directly from the model.
-      #
       # @see Anthropic::Models::WebSearchToolResultBlockParam#caller_
       module Caller
         extend Anthropic::Internal::Type::Union
