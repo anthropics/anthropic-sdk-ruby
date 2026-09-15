@@ -1,5 +1,49 @@
 # Changelog
 
+## 1.71.0 (2026-09-15)
+
+Full Changelog: [v1.70.0...v1.71.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.70.0...v1.71.0)
+
+### Features
+
+* **api:** add auto mode tool permissions for Managed Agents ([8145b1f](https://github.com/anthropics/anthropic-sdk-ruby/commit/8145b1fce049b1fe98feefad2c41ccbd911ad892))
+* **api:** add compaction parameter and signed compaction blocks (beta) ([68baa7f](https://github.com/anthropics/anthropic-sdk-ruby/commit/68baa7f15aaad3e919adf9afbb4d94a421bf3d34))
+* **api:** add enum types for workspace data-residency geo fields ([389726b](https://github.com/anthropics/anthropic-sdk-ruby/commit/389726beec073e24a676456506e675f88912bd90))
+* **api:** add thinking_mismatch_allowed entries to input_transformations (beta) ([509b7ce](https://github.com/anthropics/anthropic-sdk-ruby/commit/509b7cebde87b9cf071d549a142789bcb2b11a85))
+* **api:** add url_sources to the web fetch tool ([0a787a2](https://github.com/anthropics/anthropic-sdk-ruby/commit/0a787a28e314f48c0de64d80ac66212997ec2a35))
+* **api:** add workspace_id parameter to user profiles methods ([f0ad83c](https://github.com/anthropics/anthropic-sdk-ruby/commit/f0ad83ccc3e07e1cd15d55509fe3d0162946eecf))
+* **client:** add a `proxy` client option ([9f39c26](https://github.com/anthropics/anthropic-sdk-ruby/commit/9f39c26cbac6bb52a3fe52f47dba522ff588a3ab))
+
+
+### Bug Fixes
+
+* **api:** mark usage iteration model as nullable ([167854a](https://github.com/anthropics/anthropic-sdk-ruby/commit/167854a6801249f8aa5f0d16512dcc531c68e9e5))
+* **api:** use one input transformation type for message and delta event ([7807c32](https://github.com/anthropics/anthropic-sdk-ruby/commit/7807c32042d64c130d81a9f879e30a8c744ea4fc))
+* **client:** ignore invalid Retry-After values and validate maxRetries ([8145b1f](https://github.com/anthropics/anthropic-sdk-ruby/commit/8145b1fce049b1fe98feefad2c41ccbd911ad892))
+* **client:** retry connection errors in the async client and stop blocking in the coroutine retry loop ([8145b1f](https://github.com/anthropics/anthropic-sdk-ruby/commit/8145b1fce049b1fe98feefad2c41ccbd911ad892))
+* **client:** stop union fields raising a conversion error after an earlier variant failed to match ([9f39c26](https://github.com/anthropics/anthropic-sdk-ruby/commit/9f39c26cbac6bb52a3fe52f47dba522ff588a3ab))
+* **client:** use exponential retry backoff and fall back to it for non-positive Retry-After values ([9f39c26](https://github.com/anthropics/anthropic-sdk-ruby/commit/9f39c26cbac6bb52a3fe52f47dba522ff588a3ab))
+* **client:** use the default backoff when Retry-After is out of range ([bdf00db](https://github.com/anthropics/anthropic-sdk-ruby/commit/bdf00db3626682338ff98c9fb3b2359faecd9460))
+* coerce union values to their most specific variant ([c8240de](https://github.com/anthropics/anthropic-sdk-ruby/commit/c8240de05c210c74a31c42ae0063c69fc465d08a))
+
+
+### Chores
+
+* **client:** decode proxy credentials without the cgi library ([9023815](https://github.com/anthropics/anthropic-sdk-ruby/commit/90238157521df7ba4c0aa460c3ed51fd4453a179))
+* **deps:** remove cgi dependency ([#233](https://github.com/anthropics/anthropic-sdk-ruby/issues/233)) ([02a81dd](https://github.com/anthropics/anthropic-sdk-ruby/commit/02a81dd6c7d93e3e3a00675b409fa95d258626b5))
+* **docs:** clarify that session_thread_id on tool use events is informational ([5356110](https://github.com/anthropics/anthropic-sdk-ruby/commit/53561106e4a21cd464a9441b719310d97a2ea6b0))
+* **docs:** correct the compaction beta's parameter descriptions ([edf62b3](https://github.com/anthropics/anthropic-sdk-ruby/commit/edf62b365844022b648310732ea3ac78c2b21aaf))
+* **internal:** reorder union variants in type listings ([9f39c26](https://github.com/anthropics/anthropic-sdk-ruby/commit/9f39c26cbac6bb52a3fe52f47dba522ff588a3ab))
+* **internal:** set the gem license from the generator config ([9f39c26](https://github.com/anthropics/anthropic-sdk-ruby/commit/9f39c26cbac6bb52a3fe52f47dba522ff588a3ab))
+* **tests:** stop the mock server without failing a passing test run ([46d47b0](https://github.com/anthropics/anthropic-sdk-ruby/commit/46d47b094d0467c2a534d633b66b8c9fd1121843))
+
+
+### Documentation
+
+* **api:** clarify usage.iterations entry typing under server-side fallback ([82136a5](https://github.com/anthropics/anthropic-sdk-ruby/commit/82136a54d292f0919b5f6713bbc3153b7b766a72))
+* **api:** fix typo in temperature deprecation message ([7605285](https://github.com/anthropics/anthropic-sdk-ruby/commit/76052855d56e41189c5bc5654aa96863d5ae5307))
+* stop documenting unions with their first variant's description ([a24a371](https://github.com/anthropics/anthropic-sdk-ruby/commit/a24a37104e5ac949ba1fdef8643e083f7c7d314e))
+
 ## 1.70.0 (2026-09-10)
 
 Full Changelog: [v1.69.0...v1.70.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.69.0...v1.70.0)
