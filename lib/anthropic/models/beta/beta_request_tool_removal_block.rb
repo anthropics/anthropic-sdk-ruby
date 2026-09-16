@@ -44,7 +44,7 @@ module Anthropic
           # ``mcp_toolset_reference`` for those.
           variant :tool_reference, -> { Anthropic::Beta::BetaToolChangeToolReference }
 
-          # Reference to a single MCP tool by its server and remote name — the
+          # Reference to a single MCP tool by its server and remote name; the
           # same ``server_name``/``name`` pair ``mcp_tool_use`` carries.
           variant :mcp_tool_reference, -> { Anthropic::Beta::BetaToolChangeMCPToolReference }
 
