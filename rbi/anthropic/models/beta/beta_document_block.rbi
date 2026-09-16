@@ -124,7 +124,7 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type: Anthropic::Beta::BetaDocumentBlock::Source::Type::OrSymbol,
               data: String,
               media_type: Symbol
             ).returns(Anthropic::Beta::BetaDocumentBlock::Source::Variants)

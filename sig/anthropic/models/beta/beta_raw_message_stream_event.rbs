@@ -67,7 +67,8 @@ module Anthropic
             index: Integer
           ) -> Anthropic::Beta::BetaRawContentBlockStopEvent
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::Beta::BetaRawMessageStreamEvent::type_
+            | String,
             ?message: Anthropic::Beta::BetaMessage,
             ?context_management: Anthropic::Beta::BetaContextManagementResponse?,
             ?delta: Anthropic::Beta::BetaRawMessageDeltaEvent::Delta

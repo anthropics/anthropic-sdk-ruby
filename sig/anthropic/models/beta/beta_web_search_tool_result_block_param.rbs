@@ -77,7 +77,8 @@ module Anthropic
               tool_id: String
             ) -> Anthropic::Beta::BetaServerToolCaller20260120
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaWebSearchToolResultBlockParam::Caller::type_
+              | String,
               ?tool_id: String
             ) -> Anthropic::Models::Beta::BetaWebSearchToolResultBlockParam::caller_
         end

@@ -213,7 +213,8 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type:
+                Anthropic::Beta::BetaFallbackParam::Thinking::Type::OrSymbol,
               budget_tokens: Integer,
               block_binding:
                 T.nilable(Anthropic::Beta::BetaThinkingBlockBinding::OrHash),

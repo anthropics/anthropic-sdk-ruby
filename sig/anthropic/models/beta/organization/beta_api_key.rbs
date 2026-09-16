@@ -98,7 +98,8 @@ module Anthropic
                 service_account_id: String
               ) -> Anthropic::Beta::Organization::BetaAPIKeyServiceAccountActor
               | (
-                type: Symbol | String,
+                type: Anthropic::Models::Beta::Organization::BetaAPIKey::Principal::type_
+                | String,
                 ?user_id: String,
                 ?service_account_id: String
               ) -> Anthropic::Models::Beta::Organization::BetaAPIKey::principal
@@ -133,7 +134,8 @@ module Anthropic
                 workspace_id: String
               ) -> Anthropic::Beta::Organization::BetaAPIKeyWorkspaceScope
               | (
-                type: Symbol | String,
+                type: Anthropic::Models::Beta::Organization::BetaAPIKey::Scope::type_
+                | String,
                 ?workspace_id: String
               ) -> Anthropic::Models::Beta::Organization::BetaAPIKey::scope
           end

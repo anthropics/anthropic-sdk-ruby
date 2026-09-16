@@ -92,7 +92,8 @@ module Anthropic
               value: Integer
             ) -> Anthropic::Beta::BetaToolUsesTrigger
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaClearToolUses20250919Edit::Trigger::type_
+              | String,
               value: Integer
             ) -> Anthropic::Models::Beta::BetaClearToolUses20250919Edit::trigger
         end

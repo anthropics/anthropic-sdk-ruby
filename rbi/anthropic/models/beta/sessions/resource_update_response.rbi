@@ -70,7 +70,8 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type:
+                Anthropic::Models::Beta::Sessions::ResourceUpdateResponse::Type::OrSymbol,
               id: String,
               created_at: Time,
               mount_path: T.any(String, T.nilable(String)),

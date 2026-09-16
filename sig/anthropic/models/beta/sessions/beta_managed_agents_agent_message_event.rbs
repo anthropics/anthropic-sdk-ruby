@@ -62,7 +62,8 @@ module Anthropic
                 type: :redacted | "redacted"
               ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRedactedBlock
               | (
-                type: Symbol | String,
+                type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::Content::type_
+                | String,
                 ?text: String
               ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentMessageEvent::content
           end

@@ -42,7 +42,7 @@ module Anthropic
           # {Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermission}
           # for more details.
           #
-          # @param type [Symbol, String]
+          # @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsAgentAutoEvaluatedPermission::Type, String]
           #
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
           #

@@ -76,7 +76,7 @@ module Anthropic
         # value, passing the remaining arguments to its constructor.
         sig do
           params(
-            type: T.any(Symbol, String),
+            type: Anthropic::Messages::MessageBatchResult::Type::OrSymbol,
             message: Anthropic::Message::OrHash,
             error: Anthropic::ErrorResponse::OrHash
           ).returns(Anthropic::Messages::MessageBatchResult::Variants)

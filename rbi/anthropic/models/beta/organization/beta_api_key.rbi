@@ -249,7 +249,8 @@ module Anthropic
             # value, passing the remaining arguments to its constructor.
             sig do
               params(
-                type: T.any(Symbol, String),
+                type:
+                  Anthropic::Beta::Organization::BetaAPIKey::Principal::Type::OrSymbol,
                 user_id: String,
                 service_account_id: String
               ).returns(
@@ -329,7 +330,11 @@ module Anthropic
             # Creates a new instance of the variant class whose `type` matches the given
             # value, passing the remaining arguments to its constructor.
             sig do
-              params(type: T.any(Symbol, String), workspace_id: String).returns(
+              params(
+                type:
+                  Anthropic::Beta::Organization::BetaAPIKey::Scope::Type::OrSymbol,
+                workspace_id: String
+              ).returns(
                 Anthropic::Beta::Organization::BetaAPIKey::Scope::Variants
               )
             end

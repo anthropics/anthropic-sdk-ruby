@@ -123,7 +123,8 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type:
+                Anthropic::Beta::MemoryStores::BetaManagedAgentsError::Type::OrSymbol,
               message: String,
               conflicting_memory_id: String,
               conflicting_path: String

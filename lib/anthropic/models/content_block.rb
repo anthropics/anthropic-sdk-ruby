@@ -61,7 +61,7 @@ module Anthropic
       # Some parameter documentations has been truncated, see
       # {Anthropic::Models::ContentBlock} for more details.
       #
-      # @param type [Symbol, String]
+      # @param type [Symbol, Anthropic::Models::ContentBlock::Type, String]
       #
       # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
       #

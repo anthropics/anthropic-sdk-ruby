@@ -43,7 +43,7 @@ module Anthropic
           ) -> Anthropic::Beta::BetaToolChoiceTool
           | (type: :none | "none") -> Anthropic::Beta::BetaToolChoiceNone
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::Beta::BetaToolChoice::type_ | String,
             ?disable_parallel_tool_use: bool,
             ?name: String
           ) -> Anthropic::Models::Beta::beta_tool_choice

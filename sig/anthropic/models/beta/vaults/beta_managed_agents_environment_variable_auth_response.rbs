@@ -62,7 +62,8 @@ module Anthropic
                 allowed_hosts: ::Array[String]
               ) -> Anthropic::Beta::Vaults::BetaManagedAgentsLimitedCredentialNetworkingResponse
               | (
-                type: Symbol | String,
+                type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Networking::type_
+                | String,
                 ?allowed_hosts: ::Array[String]
               ) -> Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::networking
           end

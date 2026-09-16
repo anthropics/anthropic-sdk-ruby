@@ -81,7 +81,7 @@ module Anthropic
           message: String
         ) -> Anthropic::OverloadedError
         | (
-          type: Symbol | String,
+          type: Anthropic::Models::ErrorObject::type_ | String,
           message: String
         ) -> Anthropic::Models::error_object
     end

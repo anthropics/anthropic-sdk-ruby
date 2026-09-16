@@ -122,7 +122,8 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type:
+                Anthropic::Beta::BetaCloudConfig::Networking::Type::OrSymbol,
               allow_mcp_servers: T::Boolean,
               allow_package_managers: T::Boolean,
               allowed_hosts: T::Array[String]

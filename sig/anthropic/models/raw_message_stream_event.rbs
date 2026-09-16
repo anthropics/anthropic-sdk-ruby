@@ -62,7 +62,7 @@ module Anthropic
           index: Integer
         ) -> Anthropic::RawContentBlockStopEvent
         | (
-          type: Symbol | String,
+          type: Anthropic::Models::RawMessageStreamEvent::type_ | String,
           ?message: Anthropic::Message,
           ?delta: Anthropic::RawMessageDeltaEvent::Delta
           | Anthropic::Models::raw_content_block_delta,

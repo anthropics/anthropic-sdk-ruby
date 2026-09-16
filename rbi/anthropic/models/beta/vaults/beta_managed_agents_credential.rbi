@@ -184,7 +184,8 @@ module Anthropic
             # value, passing the remaining arguments to its constructor.
             sig do
               params(
-                type: T.any(Symbol, String),
+                type:
+                  Anthropic::Beta::Vaults::BetaManagedAgentsCredential::Auth::Type::OrSymbol,
                 mcp_server_url: String,
                 expires_at: T.nilable(Time),
                 refresh:

@@ -80,7 +80,8 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type:
+                Anthropic::Beta::MemoryStores::BetaManagedAgentsActor::Type::OrSymbol,
               session_id: String,
               api_key_id: String,
               user_id: String,

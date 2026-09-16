@@ -55,7 +55,8 @@ module Anthropic
               model: String
             ) -> Anthropic::Beta::BetaManagedAgentsAdvisor
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaManagedAgentsMultiagent::Agent::type_
+              | String,
               ?id: String,
               ?version: Integer,
               ?model: String

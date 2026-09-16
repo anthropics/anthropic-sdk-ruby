@@ -311,7 +311,7 @@ module Anthropic
         # value, passing the remaining arguments to its constructor.
         sig do
           params(
-            type: T.any(Symbol, String),
+            type: Anthropic::Beta::BetaWebhookEventData::Type::OrSymbol,
             id: String,
             organization_id: String,
             workspace_id: String,

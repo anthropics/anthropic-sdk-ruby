@@ -86,7 +86,8 @@ module Anthropic
               type: :auto | "auto"
             ) -> Anthropic::Beta::BetaManagedAgentsAutoPolicy
             | (
-              type: Symbol | String
+              type: Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfig::PermissionPolicy::type_
+              | String
             ) -> Anthropic::Models::Beta::BetaManagedAgentsWebSearchToolConfig::permission_policy
         end
       end

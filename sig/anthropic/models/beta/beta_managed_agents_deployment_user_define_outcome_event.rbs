@@ -64,7 +64,8 @@ module Anthropic
               content: String
             ) -> Anthropic::Beta::Sessions::BetaManagedAgentsTextRubric
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent::Rubric::type_
+              | String,
               ?file_id: String,
               ?content: String
             ) -> Anthropic::Models::Beta::BetaManagedAgentsDeploymentUserDefineOutcomeEvent::rubric

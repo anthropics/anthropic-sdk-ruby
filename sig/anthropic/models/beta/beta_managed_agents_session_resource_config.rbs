@@ -44,7 +44,8 @@ module Anthropic
             ?instructions: String?
           ) -> Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceConfig
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::Beta::BetaManagedAgentsSessionResourceConfig::type_
+            | String,
             ?url: String,
             ?checkout: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig::checkout?,
             ?mount_path: String?,

@@ -331,7 +331,8 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type:
+                Anthropic::Beta::SessionCreateParams::InitialEvent::Type::OrSymbol,
               content:
                 T::Array[
                   T.any(
@@ -430,7 +431,8 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type:
+                Anthropic::Beta::SessionCreateParams::Resource::Type::OrSymbol,
               url: String,
               authorization_token: String,
               checkout:

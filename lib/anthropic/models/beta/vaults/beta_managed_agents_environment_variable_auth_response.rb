@@ -76,7 +76,7 @@ module Anthropic
             # {Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Networking}
             # for more details.
             #
-            # @param type [Symbol, String]
+            # @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Networking::Type, String]
             #
             # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
             #

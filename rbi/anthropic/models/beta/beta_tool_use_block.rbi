@@ -149,9 +149,10 @@ module Anthropic
           # Creates a new instance of the variant class whose `type` matches the given
           # value, passing the remaining arguments to its constructor.
           sig do
-            params(type: T.any(Symbol, String), tool_id: String).returns(
-              Anthropic::Beta::BetaToolUseBlock::Caller::Variants
-            )
+            params(
+              type: Anthropic::Beta::BetaToolUseBlock::Caller::Type::OrSymbol,
+              tool_id: String
+            ).returns(Anthropic::Beta::BetaToolUseBlock::Caller::Variants)
           end
           def self.new(type:, tool_id: nil)
           end

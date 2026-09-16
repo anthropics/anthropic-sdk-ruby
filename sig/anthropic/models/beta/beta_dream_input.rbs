@@ -33,7 +33,7 @@ module Anthropic
             session_ids: ::Array[String]
           ) -> Anthropic::Beta::BetaDreamSessionsInput
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::Beta::BetaDreamInput::type_ | String,
             ?memory_store_id: String,
             ?session_ids: ::Array[String]
           ) -> Anthropic::Models::Beta::beta_dream_input

@@ -37,7 +37,8 @@ module Anthropic
             ?transformations: Anthropic::Beta::BetaImageTransformationsParam?
           ) -> Anthropic::Beta::BetaImageBlockParam
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::Beta::BetaContentBlockSourceContent::type_
+            | String,
             ?text: String,
             ?cache_control: Anthropic::Beta::BetaCacheControlEphemeral?,
             ?citations: ::Array[Anthropic::Models::Beta::beta_text_citation_param]?,

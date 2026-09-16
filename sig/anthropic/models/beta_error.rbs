@@ -81,7 +81,7 @@ module Anthropic
           message: String
         ) -> Anthropic::BetaOverloadedError
         | (
-          type: Symbol | String,
+          type: Anthropic::Models::BetaError::type_ | String,
           message: String
         ) -> Anthropic::Models::beta_error
     end

@@ -195,7 +195,7 @@ module Anthropic
           # Some parameter documentations has been truncated, see
           # {Anthropic::Models::Beta::AgentUpdateParams::Tool} for more details.
           #
-          # @param type [Symbol, String]
+          # @param type [Symbol, Anthropic::Models::Beta::AgentUpdateParams::Tool::Type, String]
           #
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
           #

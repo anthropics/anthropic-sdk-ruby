@@ -36,7 +36,7 @@ module Anthropic
           # {Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredentialNetworkingParams}
           # for more details.
           #
-          # @param type [Symbol, String]
+          # @param type [Symbol, Anthropic::Models::Beta::Vaults::BetaManagedAgentsCredentialNetworkingParams::Type, String]
           #
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
           #

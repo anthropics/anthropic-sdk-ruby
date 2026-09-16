@@ -149,7 +149,7 @@ module Anthropic
           # {Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams::Tool} for
           # more details.
           #
-          # @param type [Symbol, String]
+          # @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsAgentWithOverridesParams::Tool::Type, String]
           #
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
           #

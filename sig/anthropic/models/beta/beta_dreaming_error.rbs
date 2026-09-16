@@ -91,7 +91,7 @@ module Anthropic
             ?message: String
           ) -> Anthropic::Beta::BetaTargetStoreHeldError
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::Beta::BetaDreamingError::type_ | String,
             ?message: String
           ) -> Anthropic::Models::Beta::beta_dreaming_error
       end

@@ -57,7 +57,8 @@ module Anthropic
               type: :auto | "auto"
             ) -> Anthropic::Beta::BetaManagedAgentsAutoPolicy
             | (
-              type: Symbol | String
+              type: Anthropic::Models::Beta::BetaManagedAgentsAgentToolsetDefaultConfig::PermissionPolicy::type_
+              | String
             ) -> Anthropic::Models::Beta::BetaManagedAgentsAgentToolsetDefaultConfig::permission_policy
         end
       end

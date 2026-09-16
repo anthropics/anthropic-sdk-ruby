@@ -142,7 +142,8 @@ module Anthropic
               ?instructions: String?
             ) -> Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceParam
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::DeploymentCreateParams::Resource::type_
+              | String,
               ?url: String,
               ?authorization_token: String,
               ?checkout: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::checkout?,

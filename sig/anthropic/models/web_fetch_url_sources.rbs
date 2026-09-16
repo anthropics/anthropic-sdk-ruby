@@ -74,7 +74,8 @@ module Anthropic
             tools: ::Array[Anthropic::WebFetchURLSourceToolReference]
           ) -> Anthropic::WebFetchURLSourceExcept
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::WebFetchURLSources::ClientToolResults::type_
+            | String,
             ?tools: ::Array[Anthropic::WebFetchURLSourceToolReference]
           ) -> Anthropic::Models::WebFetchURLSources::client_tool_results
       end
@@ -115,7 +116,8 @@ module Anthropic
             tools: ::Array[Anthropic::WebFetchURLSourceToolReference]
           ) -> Anthropic::WebFetchURLSourceExcept
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::WebFetchURLSources::ServerToolResults::type_
+            | String,
             ?tools: ::Array[Anthropic::WebFetchURLSourceToolReference]
           ) -> Anthropic::Models::WebFetchURLSources::server_tool_results
       end
@@ -143,7 +145,8 @@ module Anthropic
           (type: :all | "all") -> Anthropic::WebFetchURLSourceAll
           | (type: :none | "none") -> Anthropic::WebFetchURLSourceNone
           | (
-            type: Symbol | String
+            type: Anthropic::Models::WebFetchURLSources::UserInput::type_
+            | String
           ) -> Anthropic::Models::WebFetchURLSources::user_input
       end
     end

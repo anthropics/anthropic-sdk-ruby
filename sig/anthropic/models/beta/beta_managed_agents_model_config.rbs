@@ -85,7 +85,8 @@ module Anthropic
               type: :max | "max"
             ) -> Anthropic::Beta::BetaManagedAgentsEffortMax
             | (
-              type: Symbol | String
+              type: Anthropic::Models::Beta::BetaManagedAgentsModelConfig::Effort::type_
+              | String
             ) -> Anthropic::Models::Beta::BetaManagedAgentsModelConfig::effort
         end
 

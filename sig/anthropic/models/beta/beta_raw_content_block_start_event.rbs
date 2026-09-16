@@ -195,7 +195,8 @@ module Anthropic
               trigger: Anthropic::Beta::BetaFallbackRefusalTrigger
             ) -> Anthropic::Beta::BetaFallbackBlock
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaRawContentBlockStartEvent::ContentBlock::type_
+              | String,
               ?citations: ::Array[Anthropic::Models::Beta::beta_text_citation]?,
               ?text: String,
               ?signature: String | String?,

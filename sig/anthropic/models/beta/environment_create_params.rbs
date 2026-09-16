@@ -91,7 +91,8 @@ module Anthropic
               type: :self_hosted | "self_hosted"
             ) -> Anthropic::Beta::BetaSelfHostedConfigParams
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::EnvironmentCreateParams::Config::type_
+              | String,
               ?networking: Anthropic::Models::Beta::BetaCloudConfigParams::networking?,
               ?packages: Anthropic::Beta::BetaPackagesParams?
             ) -> Anthropic::Models::Beta::EnvironmentCreateParams::config

@@ -102,7 +102,8 @@ module Anthropic
         # value, passing the remaining arguments to its constructor.
         sig do
           params(
-            type: T.any(Symbol, String),
+            type:
+              Anthropic::Beta::BetaManagedAgentsAgentToolConfigParams::Type::OrSymbol,
             name: Symbol,
             enabled: T.nilable(T::Boolean),
             permission_policy:

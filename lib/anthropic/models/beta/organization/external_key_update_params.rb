@@ -90,7 +90,7 @@ module Anthropic
             # {Anthropic::Models::Beta::Organization::ExternalKeyUpdateParams::ProviderConfig}
             # for more details.
             #
-            # @param type [Symbol, String]
+            # @param type [Symbol, Anthropic::Models::Beta::Organization::ExternalKeyUpdateParams::ProviderConfig::Type, String]
             #
             # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
             #

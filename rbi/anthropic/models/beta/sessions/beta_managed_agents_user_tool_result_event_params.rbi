@@ -221,7 +221,8 @@ module Anthropic
             # value, passing the remaining arguments to its constructor.
             sig do
               params(
-                type: T.any(Symbol, String),
+                type:
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUserToolResultEventParams::Content::Type::OrSymbol,
                 text: String,
                 source:
                   T.any(

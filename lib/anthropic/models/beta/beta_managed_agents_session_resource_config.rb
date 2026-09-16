@@ -39,7 +39,7 @@ module Anthropic
         # {Anthropic::Models::Beta::BetaManagedAgentsSessionResourceConfig} for more
         # details.
         #
-        # @param type [Symbol, String]
+        # @param type [Symbol, Anthropic::Models::Beta::BetaManagedAgentsSessionResourceConfig::Type, String]
         #
         # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
         #

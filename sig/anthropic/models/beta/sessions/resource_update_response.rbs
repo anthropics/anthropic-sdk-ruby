@@ -52,7 +52,8 @@ module Anthropic
               ?name: String?
             ) -> Anthropic::Beta::Sessions::BetaManagedAgentsMemoryStoreResource
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::Sessions::ResourceUpdateResponse::type_
+              | String,
               ?id: String,
               ?created_at: Time,
               ?mount_path: String | String?,

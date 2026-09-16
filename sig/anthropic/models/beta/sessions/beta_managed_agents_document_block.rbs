@@ -77,7 +77,8 @@ module Anthropic
                 file_id: String
               ) -> Anthropic::Beta::Sessions::BetaManagedAgentsFileDocumentSource
               | (
-                type: Symbol | String,
+                type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock::Source::type_
+                | String,
                 ?data: String,
                 ?media_type: String
                 | Anthropic::Models::Beta::Sessions::BetaManagedAgentsPlainTextDocumentSource::media_type,

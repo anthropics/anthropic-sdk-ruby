@@ -86,7 +86,8 @@ module Anthropic
         # value, passing the remaining arguments to its constructor.
         sig do
           params(
-            command: T.any(Symbol, String),
+            command:
+              Anthropic::Beta::BetaMemoryTool20250818Command::Command::OrSymbol,
             path: String,
             view_range: T::Array[Integer],
             file_text: String,

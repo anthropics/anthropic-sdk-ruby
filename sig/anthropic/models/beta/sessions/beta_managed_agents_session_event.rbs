@@ -388,7 +388,8 @@ module Anthropic
               ?budget: Anthropic::Beta::BetaManagedAgentsBudgetLimit?
             ) -> Anthropic::Beta::BetaManagedAgentsSessionUsageEvent
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionEvent::type_
+              | String,
               id: String,
               ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEvent::content]
               | ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::content]

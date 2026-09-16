@@ -30,7 +30,8 @@ module Anthropic
               type: :disabled | "disabled"
             ) -> Anthropic::Beta::Organization::BetaComplianceSettingsStateDisabled
             | (
-              type: Symbol | String
+              type: Anthropic::Models::Beta::Organization::BetaComplianceSettingsState::type_
+              | String
             ) -> Anthropic::Models::Beta::Organization::beta_compliance_settings_state
         end
       end

@@ -50,7 +50,7 @@ module Anthropic
           signature: String
         ) -> Anthropic::SignatureDelta
         | (
-          type: Symbol | String,
+          type: Anthropic::Models::RawContentBlockDelta::type_ | String,
           ?text: String,
           ?partial_json: String,
           ?citation: Anthropic::Models::CitationsDelta::citation,

@@ -65,7 +65,8 @@ module Anthropic
             encrypted_content: String?
           ) -> Anthropic::Beta::BetaCompactionContentBlockDelta
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::Beta::BetaRawContentBlockDelta::type_
+            | String,
             ?text: String,
             ?partial_json: String,
             ?citation: Anthropic::Models::Beta::BetaCitationsDelta::citation,

@@ -60,7 +60,8 @@ module Anthropic
                 file_id: String
               ) -> Anthropic::Beta::Sessions::BetaManagedAgentsFileImageSource
               | (
-                type: Symbol | String,
+                type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::Source::type_
+                | String,
                 ?data: String,
                 ?media_type: String,
                 ?url: String,

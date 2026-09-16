@@ -153,7 +153,8 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type:
+                Anthropic::Beta::BetaDiagnostics::CacheMissReason::Type::OrSymbol,
               cache_missed_input_tokens: Integer
             ).returns(
               Anthropic::Beta::BetaDiagnostics::CacheMissReason::Variants

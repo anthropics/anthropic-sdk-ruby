@@ -107,7 +107,8 @@ module Anthropic
             type: :mcp_egress_blocked_error | "mcp_egress_blocked_error"
           ) -> Anthropic::Beta::BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError
           | (
-            type: Symbol | String
+            type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentPausedReasonError::type_
+            | String
           ) -> Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason_error
       end
     end

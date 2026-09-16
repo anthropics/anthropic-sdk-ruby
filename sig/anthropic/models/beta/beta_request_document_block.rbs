@@ -94,7 +94,8 @@ module Anthropic
               file_id: String
             ) -> Anthropic::Beta::BetaFileDocumentSource
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaRequestDocumentBlock::Source::type_
+              | String,
               ?data: String,
               ?media_type: :"application/pdf" | :"text/plain",
               ?content: Anthropic::Models::Beta::BetaContentBlockSource::content,

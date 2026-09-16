@@ -79,7 +79,7 @@ module Anthropic
             # {Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::StopReason}
             # for more details.
             #
-            # @param type [Symbol, String]
+            # @param type [Symbol, Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionStatusIdleEvent::StopReason::Type, String]
             #
             # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
             #

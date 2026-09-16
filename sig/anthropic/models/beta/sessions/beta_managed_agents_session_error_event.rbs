@@ -123,7 +123,8 @@ module Anthropic
                 vault_id: String
               ) -> Anthropic::Beta::Sessions::BetaManagedAgentsCredentialHostUnreachableError
               | (
-                type: Symbol | String,
+                type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionErrorEvent::Error::type_
+                | String,
                 message: String,
                 retry_status: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUnknownError::retry_status
                 | Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::retry_status

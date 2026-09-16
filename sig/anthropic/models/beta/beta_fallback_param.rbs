@@ -88,7 +88,8 @@ module Anthropic
               ?display_: Anthropic::Models::Beta::BetaThinkingConfigAdaptive::display_?
             ) -> Anthropic::Beta::BetaThinkingConfigAdaptive
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaFallbackParam::Thinking::type_
+              | String,
               ?budget_tokens: Integer,
               ?block_binding: Anthropic::Beta::BetaThinkingBlockBinding?,
               ?display_: Anthropic::Models::Beta::BetaThinkingConfigEnabled::display_?

@@ -66,7 +66,7 @@ module Anthropic
       # value, passing the remaining arguments to its constructor.
       sig do
         params(
-          type: T.any(Symbol, String),
+          type: Anthropic::TextCitationParam::Type::OrSymbol,
           cited_text: String,
           document_index: Integer,
           document_title: T.nilable(String),

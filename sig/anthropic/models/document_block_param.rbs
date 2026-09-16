@@ -88,7 +88,7 @@ module Anthropic
             file_id: String
           ) -> Anthropic::FileDocumentSource
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::DocumentBlockParam::Source::type_ | String,
             ?data: String,
             ?media_type: :"application/pdf" | :"text/plain",
             ?content: Anthropic::Models::ContentBlockSource::content,

@@ -240,7 +240,8 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type:
+                Anthropic::Beta::BetaWebFetchURLSources::ClientToolResults::Type::OrSymbol,
               tools:
                 T::Array[
                   Anthropic::Beta::BetaWebFetchURLSourceToolReference::OrHash
@@ -327,7 +328,8 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type:
+                Anthropic::Beta::BetaWebFetchURLSources::ServerToolResults::Type::OrSymbol,
               tools:
                 T::Array[
                   Anthropic::Beta::BetaWebFetchURLSourceToolReference::OrHash
@@ -399,7 +401,10 @@ module Anthropic
           # Creates a new instance of the variant class whose `type` matches the given
           # value, passing the remaining arguments to its constructor.
           sig do
-            params(type: T.any(Symbol, String)).returns(
+            params(
+              type:
+                Anthropic::Beta::BetaWebFetchURLSources::UserInput::Type::OrSymbol
+            ).returns(
               Anthropic::Beta::BetaWebFetchURLSources::UserInput::Variants
             )
           end

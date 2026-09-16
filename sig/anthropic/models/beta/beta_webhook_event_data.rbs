@@ -426,7 +426,7 @@ module Anthropic
             workspace_id: String
           ) -> Anthropic::Beta::BetaWebhookSessionBudgetReachedEventData
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::Beta::BetaWebhookEventData::type_ | String,
             id: String,
             organization_id: String,
             workspace_id: String,
