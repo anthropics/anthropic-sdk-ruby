@@ -101,7 +101,7 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaManagedAgentsAgent)
         end
         def retrieve(
-          # Path param: Path parameter agent_id
+          # Path param: Unique identifier of the agent to retrieve.
           agent_id,
           # Query param: Agent version. Omit for the most recent version. Must be at least 1
           # if specified.
@@ -169,7 +169,7 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaManagedAgentsAgent)
         end
         def update(
-          # Path param: Path parameter agent_id
+          # Path param: Unique identifier of the agent to update.
           agent_id,
           # Body param: Description. Omit to preserve; send empty string or null to clear.
           description: nil,
@@ -273,7 +273,7 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaManagedAgentsAgent)
         end
         def archive(
-          # Path parameter agent_id
+          # Unique identifier of the agent to archive.
           agent_id,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,

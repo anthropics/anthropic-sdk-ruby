@@ -46,7 +46,7 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaManagedAgentsVault)
         end
         def retrieve(
-          # Path parameter vault_id
+          # Unique identifier of the vault to retrieve.
           vault_id,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
@@ -73,7 +73,7 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaManagedAgentsVault)
         end
         def update(
-          # Path param: Path parameter vault_id
+          # Path param: Unique identifier of the vault to update.
           vault_id,
           # Body param: Updated human-readable name for the vault. 1-255 characters.
           display_name: nil,
@@ -139,7 +139,7 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaManagedAgentsDeletedVault)
         end
         def delete(
-          # Path parameter vault_id
+          # Unique identifier of the vault to delete.
           vault_id,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
@@ -164,7 +164,7 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaManagedAgentsVault)
         end
         def archive(
-          # Path parameter vault_id
+          # Unique identifier of the vault to archive.
           vault_id,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,

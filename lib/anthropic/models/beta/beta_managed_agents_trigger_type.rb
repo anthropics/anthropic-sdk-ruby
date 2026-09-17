@@ -7,7 +7,10 @@ module Anthropic
       module BetaManagedAgentsTriggerType
         extend Anthropic::Internal::Type::Enum
 
+        # The run was fired by the deployment's cron schedule.
         SCHEDULE = :schedule
+
+        # The run was started manually by creating a session directly against the deployment.
         MANUAL = :manual
 
         # @!method self.values

@@ -88,21 +88,28 @@ module Anthropic
               end
             OrSymbol = T.type_alias { T.any(Symbol, String) }
 
+            # The token endpoint returned a new access token.
             SUCCEEDED =
               T.let(
                 :succeeded,
                 Anthropic::Beta::Vaults::BetaManagedAgentsRefreshObject::Status::TaggedSymbol
               )
+
+            # The token endpoint returned an error response. See `http_response` for detail.
             FAILED =
               T.let(
                 :failed,
                 Anthropic::Beta::Vaults::BetaManagedAgentsRefreshObject::Status::TaggedSymbol
               )
+
+            # The token endpoint could not be reached (DNS, TLS, or connection error).
             CONNECT_ERROR =
               T.let(
                 :connect_error,
                 Anthropic::Beta::Vaults::BetaManagedAgentsRefreshObject::Status::TaggedSymbol
               )
+
+            # No refresh token is stored for the credential, so no exchange was attempted.
             NO_REFRESH_TOKEN =
               T.let(
                 :no_refresh_token,

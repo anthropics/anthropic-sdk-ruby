@@ -61,7 +61,7 @@ module Anthropic
         #
         # @overload retrieve(agent_id, version: nil, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param agent_id [String] Path param: Path parameter agent_id
+        # @param agent_id [String] Path param: Unique identifier of the agent to retrieve.
         #
         # @param version [Integer] Query param: Agent version. Omit for the most recent version. Must be at least 1
         #
@@ -98,7 +98,7 @@ module Anthropic
         #
         # @overload update(agent_id, description: nil, mcp_servers: nil, metadata: nil, model: nil, multiagent: nil, name: nil, skills: nil, system_: nil, tools: nil, version: nil, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param agent_id [String] Path param: Path parameter agent_id
+        # @param agent_id [String] Path param: Unique identifier of the agent to update.
         #
         # @param description [String, nil] Body param: Description. Omit to preserve; send empty string or null to clear.
         #
@@ -193,7 +193,7 @@ module Anthropic
         #
         # @overload archive(agent_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param agent_id [String] Path parameter agent_id
+        # @param agent_id [String] Unique identifier of the agent to archive.
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #

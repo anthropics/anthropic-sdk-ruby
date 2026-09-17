@@ -14,7 +14,7 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaManagedAgentsDeploymentRun)
         end
         def retrieve(
-          # Path parameter deployment_run_id
+          # Unique identifier of the deployment run.
           deployment_run_id,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,

@@ -12,7 +12,7 @@ module Anthropic
           #
           # @overload list(agent_id, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
           #
-          # @param agent_id [String] Path param: Path parameter agent_id
+          # @param agent_id [String] Path param: Agent ID to list versions for.
           #
           # @param limit [Integer] Query param: Maximum results per page. Default 20, maximum 100.
           #

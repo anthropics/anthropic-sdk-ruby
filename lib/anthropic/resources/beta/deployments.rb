@@ -60,7 +60,7 @@ module Anthropic
         #
         # @overload retrieve(deployment_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param deployment_id [String] Path parameter deployment_id
+        # @param deployment_id [String] Unique identifier of the deployment.
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
@@ -89,7 +89,7 @@ module Anthropic
         #
         # @overload update(deployment_id, agent: nil, budget: nil, description: nil, environment_id: nil, initial_events: nil, metadata: nil, name: nil, resources: nil, schedule: nil, vault_ids: nil, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param deployment_id [String] Path param: Path parameter deployment_id
+        # @param deployment_id [String] Path param: Unique identifier of the deployment to update.
         #
         # @param agent [Anthropic::Models::Beta::BetaManagedAgentsAgentParams, String] Body param: Agent to deploy. Accepts the `agent` ID string, which re-pins to the
         #
@@ -196,7 +196,7 @@ module Anthropic
         #
         # @overload archive(deployment_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param deployment_id [String] Path parameter deployment_id
+        # @param deployment_id [String] Unique identifier of the deployment to archive.
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
@@ -225,7 +225,7 @@ module Anthropic
         #
         # @overload pause(deployment_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param deployment_id [String] Path parameter deployment_id
+        # @param deployment_id [String] Unique identifier of the deployment to pause.
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
@@ -254,7 +254,7 @@ module Anthropic
         #
         # @overload run(deployment_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param deployment_id [String] Path parameter deployment_id
+        # @param deployment_id [String] Unique identifier of the deployment to run.
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
@@ -283,7 +283,7 @@ module Anthropic
         #
         # @overload unpause(deployment_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param deployment_id [String] Path parameter deployment_id
+        # @param deployment_id [String] Unique identifier of the deployment to unpause.
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #

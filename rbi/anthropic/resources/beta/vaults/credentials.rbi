@@ -24,7 +24,7 @@ module Anthropic
             ).returns(Anthropic::Beta::Vaults::BetaManagedAgentsCredential)
           end
           def create(
-            # Path param: Path parameter vault_id
+            # Path param: Identifier of the vault to create the credential in.
             vault_id,
             # Body param: Authentication details for creating a credential.
             auth:,
@@ -58,9 +58,9 @@ module Anthropic
             ).returns(Anthropic::Beta::Vaults::BetaManagedAgentsCredential)
           end
           def retrieve(
-            # Path param: Path parameter credential_id
+            # Path param: Unique identifier of the credential to retrieve.
             credential_id,
-            # Path param: Path parameter vault_id
+            # Path param: Identifier of the vault containing the credential.
             vault_id:,
             # Header param: Optional header to specify the beta version(s) you want to use.
             betas: nil,
@@ -95,9 +95,9 @@ module Anthropic
             ).returns(Anthropic::Beta::Vaults::BetaManagedAgentsCredential)
           end
           def update(
-            # Path param: Path parameter credential_id
+            # Path param: Unique identifier of the credential to update.
             credential_id,
-            # Path param: Path parameter vault_id
+            # Path param: Identifier of the vault containing the credential.
             vault_id:,
             # Body param: Updated authentication details for a credential.
             auth: nil,
@@ -137,7 +137,7 @@ module Anthropic
             )
           end
           def list(
-            # Path param: Path parameter vault_id
+            # Path param: Identifier of the vault to list credentials for.
             vault_id,
             # Query param: Whether to include archived credentials in the results.
             include_archived: nil,
@@ -174,9 +174,9 @@ module Anthropic
             )
           end
           def delete(
-            # Path param: Path parameter credential_id
+            # Path param: Unique identifier of the credential to delete.
             credential_id,
-            # Path param: Path parameter vault_id
+            # Path param: Identifier of the vault containing the credential.
             vault_id:,
             # Header param: Optional header to specify the beta version(s) you want to use.
             betas: nil,
@@ -203,9 +203,9 @@ module Anthropic
             ).returns(Anthropic::Beta::Vaults::BetaManagedAgentsCredential)
           end
           def archive(
-            # Path param: Path parameter credential_id
+            # Path param: Unique identifier of the credential to archive.
             credential_id,
-            # Path param: Path parameter vault_id
+            # Path param: Identifier of the vault containing the credential.
             vault_id:,
             # Header param: Optional header to specify the beta version(s) you want to use.
             betas: nil,
@@ -234,9 +234,9 @@ module Anthropic
             )
           end
           def mcp_oauth_validate(
-            # Path param: Path parameter credential_id
+            # Path param: Unique identifier of the credential to validate.
             credential_id,
-            # Path param: Path parameter vault_id
+            # Path param: Identifier of the vault containing the credential.
             vault_id:,
             # Header param: Optional header to specify the beta version(s) you want to use.
             betas: nil,

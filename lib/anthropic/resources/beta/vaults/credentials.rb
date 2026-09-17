@@ -12,7 +12,7 @@ module Anthropic
           #
           # @overload create(vault_id, auth:, display_name: nil, metadata: nil, betas: nil, workspace_id: nil, request_options: {})
           #
-          # @param vault_id [String] Path param: Path parameter vault_id
+          # @param vault_id [String] Path param: Identifier of the vault to create the credential in.
           #
           # @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerCreateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableCreateParams] Body param: Authentication details for creating a credential.
           #
@@ -49,9 +49,9 @@ module Anthropic
           #
           # @overload retrieve(credential_id, vault_id:, betas: nil, workspace_id: nil, request_options: {})
           #
-          # @param credential_id [String] Path param: Path parameter credential_id
+          # @param credential_id [String] Path param: Unique identifier of the credential to retrieve.
           #
-          # @param vault_id [String] Path param: Path parameter vault_id
+          # @param vault_id [String] Path param: Identifier of the vault containing the credential.
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
@@ -84,9 +84,9 @@ module Anthropic
           #
           # @overload update(credential_id, vault_id:, auth: nil, display_name: nil, metadata: nil, betas: nil, workspace_id: nil, request_options: {})
           #
-          # @param credential_id [String] Path param: Path parameter credential_id
+          # @param credential_id [String] Path param: Unique identifier of the credential to update.
           #
-          # @param vault_id [String] Path param: Path parameter vault_id
+          # @param vault_id [String] Path param: Identifier of the vault containing the credential.
           #
           # @param auth [Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsStaticBearerUpdateParams, Anthropic::Models::Beta::Vaults::BetaManagedAgentsEnvironmentVariableUpdateParams] Body param: Updated authentication details for a credential.
           #
@@ -127,7 +127,7 @@ module Anthropic
           #
           # @overload list(vault_id, include_archived: nil, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
           #
-          # @param vault_id [String] Path param: Path parameter vault_id
+          # @param vault_id [String] Path param: Identifier of the vault to list credentials for.
           #
           # @param include_archived [Boolean] Query param: Whether to include archived credentials in the results.
           #
@@ -169,9 +169,9 @@ module Anthropic
           #
           # @overload delete(credential_id, vault_id:, betas: nil, workspace_id: nil, request_options: {})
           #
-          # @param credential_id [String] Path param: Path parameter credential_id
+          # @param credential_id [String] Path param: Unique identifier of the credential to delete.
           #
-          # @param vault_id [String] Path param: Path parameter vault_id
+          # @param vault_id [String] Path param: Identifier of the vault containing the credential.
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
@@ -204,9 +204,9 @@ module Anthropic
           #
           # @overload archive(credential_id, vault_id:, betas: nil, workspace_id: nil, request_options: {})
           #
-          # @param credential_id [String] Path param: Path parameter credential_id
+          # @param credential_id [String] Path param: Unique identifier of the credential to archive.
           #
-          # @param vault_id [String] Path param: Path parameter vault_id
+          # @param vault_id [String] Path param: Identifier of the vault containing the credential.
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
@@ -240,9 +240,9 @@ module Anthropic
           #
           # @overload mcp_oauth_validate(credential_id, vault_id:, betas: nil, workspace_id: nil, request_options: {})
           #
-          # @param credential_id [String] Path param: Path parameter credential_id
+          # @param credential_id [String] Path param: Unique identifier of the credential to validate.
           #
-          # @param vault_id [String] Path param: Path parameter vault_id
+          # @param vault_id [String] Path param: Identifier of the vault containing the credential.
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #

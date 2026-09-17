@@ -7,7 +7,10 @@ module Anthropic
       module BetaManagedAgentsDeploymentStatus
         extend Anthropic::Internal::Type::Enum
 
+        # The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
         ACTIVE = :active
+
+        # The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
         PAUSED = :paused
 
         # @!method self.values

@@ -11,7 +11,7 @@ module Anthropic
         #
         # @overload retrieve(deployment_run_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param deployment_run_id [String] Path parameter deployment_run_id
+        # @param deployment_run_id [String] Unique identifier of the deployment run.
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
