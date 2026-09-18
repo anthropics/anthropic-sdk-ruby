@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_organization_rate_limit_token_count_group =
+          { id: String, type: :token_count }
+
+        class BetaOrganizationRateLimitTokenCountGroup < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor type: :token_count
+
+          def initialize: (id: String, ?type: :token_count) -> void
+
+          def to_hash: -> { id: String, type: :token_count }
+        end
+      end
+    end
+  end
+end

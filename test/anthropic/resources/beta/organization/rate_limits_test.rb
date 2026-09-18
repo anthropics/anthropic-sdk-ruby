@@ -20,6 +20,7 @@ class Anthropic::Test::Resources::Beta::Organization::RateLimitsTest < Anthropic
     assert_pattern do
       row => {
         id: String,
+        group: Anthropic::Beta::Organization::BetaOrganizationRateLimit::Group,
         group_type: Anthropic::Beta::Organization::BetaOrganizationRateLimit::GroupType,
         limits: ^(Anthropic::Internal::Type::ArrayOf[Anthropic::Beta::Organization::BetaOrganizationRateLimitValue]),
         models: ^(Anthropic::Internal::Type::ArrayOf[String]) | nil,

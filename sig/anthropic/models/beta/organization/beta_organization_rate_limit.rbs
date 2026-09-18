@@ -5,6 +5,7 @@ module Anthropic
         type beta_organization_rate_limit =
           {
             id: String,
+            group: Anthropic::Models::Beta::Organization::BetaOrganizationRateLimit::group,
             group_type: Anthropic::Models::Beta::Organization::BetaOrganizationRateLimit::group_type,
             limits: ::Array[Anthropic::Beta::Organization::BetaOrganizationRateLimitValue],
             models: ::Array[String]?,
@@ -13,6 +14,8 @@ module Anthropic
 
         class BetaOrganizationRateLimit < Anthropic::Internal::Type::BaseModel
           attr_accessor id: String
+
+          attr_accessor group: Anthropic::Models::Beta::Organization::BetaOrganizationRateLimit::group
 
           attr_accessor group_type: Anthropic::Models::Beta::Organization::BetaOrganizationRateLimit::group_type
 
@@ -24,6 +27,7 @@ module Anthropic
 
           def initialize: (
             id: String,
+            group: Anthropic::Models::Beta::Organization::BetaOrganizationRateLimit::group,
             group_type: Anthropic::Models::Beta::Organization::BetaOrganizationRateLimit::group_type,
             limits: ::Array[Anthropic::Beta::Organization::BetaOrganizationRateLimitValue],
             models: ::Array[String]?,
@@ -32,11 +36,80 @@ module Anthropic
 
           def to_hash: -> {
             id: String,
+            group: Anthropic::Models::Beta::Organization::BetaOrganizationRateLimit::group,
             group_type: Anthropic::Models::Beta::Organization::BetaOrganizationRateLimit::group_type,
             limits: ::Array[Anthropic::Beta::Organization::BetaOrganizationRateLimitValue],
             models: ::Array[String]?,
             type: :rate_limit
           }
+
+          type group =
+            Anthropic::Beta::Organization::BetaOrganizationRateLimitModelGroup
+            | Anthropic::Beta::Organization::BetaOrganizationRateLimitBatchGroup
+            | Anthropic::Beta::Organization::BetaOrganizationRateLimitTokenCountGroup
+            | Anthropic::Beta::Organization::BetaOrganizationRateLimitFilesGroup
+            | Anthropic::Beta::Organization::BetaOrganizationRateLimitSkillsGroup
+            | Anthropic::Beta::Organization::BetaOrganizationRateLimitWebSearchGroup
+
+          module Group
+            extend Anthropic::Internal::Type::Union
+
+            type type_ =
+              :model_group
+              | :batch
+              | :token_count
+              | :files
+              | :skills
+              | :web_search
+
+            module Type
+              extend Anthropic::Internal::Type::Enum
+
+              MODEL_GROUP: :model_group
+              BATCH: :batch
+              TOKEN_COUNT: :token_count
+              FILES: :files
+              SKILLS: :skills
+              WEB_SEARCH: :web_search
+
+              def self?.values: -> ::Array[Anthropic::Models::Beta::Organization::BetaOrganizationRateLimit::Group::type_]
+            end
+
+            def self?.variants: -> ::Array[Anthropic::Models::Beta::Organization::BetaOrganizationRateLimit::group]
+
+            def self.new:
+              (
+                type: :model_group | "model_group",
+                id: String,
+                display_name: String
+              ) -> Anthropic::Beta::Organization::BetaOrganizationRateLimitModelGroup
+              | (
+                type: :batch | "batch",
+                id: String
+              ) -> Anthropic::Beta::Organization::BetaOrganizationRateLimitBatchGroup
+              | (
+                type: :token_count | "token_count",
+                id: String
+              ) -> Anthropic::Beta::Organization::BetaOrganizationRateLimitTokenCountGroup
+              | (
+                type: :files | "files",
+                id: String
+              ) -> Anthropic::Beta::Organization::BetaOrganizationRateLimitFilesGroup
+              | (
+                type: :skills | "skills",
+                id: String
+              ) -> Anthropic::Beta::Organization::BetaOrganizationRateLimitSkillsGroup
+              | (
+                type: :web_search | "web_search",
+                id: String
+              ) -> Anthropic::Beta::Organization::BetaOrganizationRateLimitWebSearchGroup
+              | (
+                type: Anthropic::Models::Beta::Organization::BetaOrganizationRateLimit::Group::type_
+                | String,
+                id: String,
+                ?display_name: String
+              ) -> Anthropic::Models::Beta::Organization::BetaOrganizationRateLimit::group
+          end
 
           type group_type =
             :batch
