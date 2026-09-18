@@ -99,7 +99,8 @@ module Anthropic
             ?name: :web_search
           ) -> Anthropic::Beta::BetaManagedAgentsWebSearchToolConfig
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfig::type_
+            | String,
             enabled: bool,
             permission_policy: Anthropic::Models::Beta::BetaManagedAgentsBashToolConfig::permission_policy
             | Anthropic::Models::Beta::BetaManagedAgentsEditToolConfig::permission_policy

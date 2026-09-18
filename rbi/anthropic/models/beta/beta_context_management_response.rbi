@@ -113,7 +113,8 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type:
+                Anthropic::Beta::BetaContextManagementResponse::AppliedEdit::Type::OrSymbol,
               cleared_input_tokens: Integer,
               cleared_tool_uses: Integer,
               cleared_thinking_turns: Integer

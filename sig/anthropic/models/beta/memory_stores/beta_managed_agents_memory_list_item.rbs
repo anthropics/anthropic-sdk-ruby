@@ -40,7 +40,8 @@ module Anthropic
               path: String
             ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryPrefix
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsMemoryListItem::type_
+              | String,
               path: String,
               ?id: String,
               ?content_sha256: String,

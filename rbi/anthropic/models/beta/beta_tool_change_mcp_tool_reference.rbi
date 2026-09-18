@@ -23,7 +23,7 @@ module Anthropic
         sig { returns(Symbol) }
         attr_accessor :type
 
-        # Reference to a single MCP tool by its server and remote name — the same
+        # Reference to a single MCP tool by its server and remote name; the same
         # `server_name`/`name` pair `mcp_tool_use` carries.
         sig do
           params(name: String, server_name: String, type: Symbol).returns(

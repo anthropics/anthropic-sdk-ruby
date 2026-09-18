@@ -163,7 +163,8 @@ module Anthropic
             # value, passing the remaining arguments to its constructor.
             sig do
               params(
-                type: T.any(Symbol, String),
+                type:
+                  Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEvent::Rubric::Type::OrSymbol,
                 file_id: String,
                 content: String
               ).returns(

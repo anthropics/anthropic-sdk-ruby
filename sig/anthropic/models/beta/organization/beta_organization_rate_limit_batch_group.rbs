@@ -1,0 +1,20 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_organization_rate_limit_batch_group =
+          { id: String, type: :batch }
+
+        class BetaOrganizationRateLimitBatchGroup < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor type: :batch
+
+          def initialize: (id: String, ?type: :batch) -> void
+
+          def to_hash: -> { id: String, type: :batch }
+        end
+      end
+    end
+  end
+end

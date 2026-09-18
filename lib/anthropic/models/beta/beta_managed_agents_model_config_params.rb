@@ -87,10 +87,19 @@ module Anthropic
           module BetaManagedAgentsEffortLevel
             extend Anthropic::Internal::Type::Enum
 
+            # Low effort. Favors latency over reasoning depth.
             LOW = :low
+
+            # Medium effort. Balances latency and reasoning depth.
             MEDIUM = :medium
+
+            # High effort. Favors reasoning depth.
             HIGH = :high
+
+            # Extra-high effort. Not all models accept this level.
             XHIGH = :xhigh
+
+            # Maximum effort. Favors reasoning depth over latency.
             MAX = :max
 
             # @!method self.values

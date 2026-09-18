@@ -5,9 +5,9 @@ Context for contributors on how this SDK is put together, plus the things review
 ## Overview
 
 - The official Ruby SDK for the Claude API (the `anthropic` gem). Much of it is produced via code generation from the OpenAPI spec, with hand-written helpers (`lib/anthropic/helpers/**`: streaming, tools, input schemas, platform clients), credentials, middleware and examples layered on top.
-- Generated files are safe to edit. New generator output is git-merged with custom changes rather than overwriting them, so fix things where they live; a collision is just a merge conflict. (`git diff origin/generated origin/next` shows everything custom if you ever need to know which is which.)
+- Generated files are safe to edit. New generator output is git-merged with custom changes rather than overwriting them, so fix things where they live; a collision is just a merge conflict.
 - Fix things upstream first wherever you can, before reaching for custom code: a missing parameter, an out-of-date doc string, or a response the models can't represent (a missing required field, an unknown enum member, a nullability mismatch) belongs in the OpenAPI spec, and broken generated infrastructure (`lib/anthropic/internal/**`: transport, retries, SSE and multipart handling, coercion) belongs in the generator — fixing it there is preferred over a local patch.
-- PRs target `next`. `main` only moves when a release is cut. `next` moves quickly and its history is occasionally rewritten, so rebase onto the current `origin/next` before asking for review — a stale base shows up as unrelated "changed" files (`git rebase --onto origin/next <old-base>` sorts out a base that was rewritten underneath you).
+- PRs target the default branch (`main` on the public repo). `next` belongs to release automation — don't open PRs against it or push to it; a commit that lands there outside the release flow breaks the sync. Rebase onto the current default branch before asking for review — a stale base shows up as unrelated "changed" files.
 - `lib/anthropic/version.rb`, `.release-please-manifest.json`, the gem's own entry in `Gemfile.lock`, the `README.md` version block and `CHANGELOG.md` are written by release automation.
 
 ## Build, test, lint
@@ -79,5 +79,5 @@ Context for contributors on how this SDK is put together, plus the things review
 ## Commits and pull requests
 
 - Conventional Commits drive release-please and the changelog (`feat(scope):`, `fix(scope):`, `chore`, `docs`; `test` and `ci` are hidden). A `!` or `BREAKING CHANGE:` footer cuts a major version, which is rare and a maintainer call — describe the compatibility impact in the PR instead.
-- One logical change per PR, against current `next`, with formatting-only churn in its own commit.
+- One logical change per PR, against the current default branch, with formatting-only churn in its own commit.
 - A good PR description says what was wrong (a short before/after helps), what changed, and what gives confidence — the failing-then-passing test plus any manual verification, and what the sibling SDKs do when the change is visible on the wire — and calls out behaviour changes and anything left unverified (no mock server, no cloud credentials) rather than implying it passed.

@@ -1,0 +1,30 @@
+module Anthropic
+  module Models
+    module Beta
+      module Organization
+        type beta_organization_rate_limit_model_group =
+          { id: String, display_name: String, type: :model_group }
+
+        class BetaOrganizationRateLimitModelGroup < Anthropic::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor display_name: String
+
+          attr_accessor type: :model_group
+
+          def initialize: (
+            id: String,
+            display_name: String,
+            ?type: :model_group
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            display_name: String,
+            type: :model_group
+          }
+        end
+      end
+    end
+  end
+end

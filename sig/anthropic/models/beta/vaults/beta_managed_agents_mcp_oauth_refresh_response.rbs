@@ -71,7 +71,8 @@ module Anthropic
                 type: :client_secret_post | "client_secret_post"
               ) -> Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostResponse
               | (
-                type: Symbol | String
+                type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshResponse::TokenEndpointAuth::type_
+                | String
               ) -> Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshResponse::token_endpoint_auth
           end
         end

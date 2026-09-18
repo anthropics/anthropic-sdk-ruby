@@ -97,7 +97,7 @@ module Anthropic
             title: String?
           ) -> Anthropic::CitationsSearchResultLocation
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::CitationsDelta::Citation::type_ | String,
             cited_text: String,
             ?document_index: Integer,
             ?document_title: String?,

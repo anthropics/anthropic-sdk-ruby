@@ -99,7 +99,8 @@ module Anthropic
             ?name: :web_search
           ) -> Anthropic::Beta::BetaManagedAgentsWebSearchToolConfigParams
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::Beta::BetaManagedAgentsAgentToolConfigParams::type_
+            | String,
             name: :bash
             | :edit
             | :read

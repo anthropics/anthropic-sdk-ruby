@@ -148,7 +148,8 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type:
+                Anthropic::Beta::BetaRequestToolAdditionBlock::Tool::Type::OrSymbol,
               name: String,
               server_name: String
             ).returns(

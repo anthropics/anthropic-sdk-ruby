@@ -73,7 +73,7 @@ module Anthropic
           title: String?
         ) -> Anthropic::CitationSearchResultLocationParam
         | (
-          type: Symbol | String,
+          type: Anthropic::Models::TextCitationParam::type_ | String,
           cited_text: String,
           ?document_index: Integer,
           ?document_title: String?,

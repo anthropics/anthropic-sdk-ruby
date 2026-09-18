@@ -121,7 +121,8 @@ module Anthropic
               version: String
             ) -> Anthropic::Beta::BetaManagedAgentsCustomSkill
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaManagedAgentsAgent::Skill::type_
+              | String,
               skill_id: String,
               version: String
             ) -> Anthropic::Models::Beta::BetaManagedAgentsAgent::skill
@@ -168,7 +169,8 @@ module Anthropic
               name: String
             ) -> Anthropic::Beta::BetaManagedAgentsCustomTool
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaManagedAgentsAgent::Tool::type_
+              | String,
               ?configs: ::Array[Anthropic::Models::Beta::beta_managed_agents_agent_tool_config]
               | ::Array[Anthropic::Beta::BetaManagedAgentsMCPToolConfig],
               ?default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfig

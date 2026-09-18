@@ -115,7 +115,8 @@ module Anthropic
                 ?processed_at: Time?
               ) -> Anthropic::Beta::BetaManagedAgentsSystemMessageEvent
               | (
-                type: Symbol | String,
+                type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSendSessionEvents::Data::type_
+                | String,
                 id: String,
                 ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEvent::content]
                 | ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserCustomToolResultEvent::content]

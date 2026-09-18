@@ -133,7 +133,8 @@ module Anthropic
               ?max_iterations: Integer?
             ) -> Anthropic::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::SessionCreateParams::InitialEvent::type_
+              | String,
               ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::content],
               ?description: String,
               ?rubric: Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserDefineOutcomeEventParams::rubric,
@@ -183,7 +184,8 @@ module Anthropic
               ?instructions: String?
             ) -> Anthropic::Beta::BetaManagedAgentsMemoryStoreResourceParam
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::SessionCreateParams::Resource::type_
+              | String,
               ?url: String,
               ?authorization_token: String,
               ?checkout: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceParams::checkout?,

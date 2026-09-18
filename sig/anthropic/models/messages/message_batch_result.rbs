@@ -43,7 +43,8 @@ module Anthropic
             type: :expired | "expired"
           ) -> Anthropic::Messages::MessageBatchExpiredResult
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::Messages::MessageBatchResult::type_
+            | String,
             ?message: Anthropic::Message,
             ?error: Anthropic::ErrorResponse
           ) -> Anthropic::Models::Messages::message_batch_result

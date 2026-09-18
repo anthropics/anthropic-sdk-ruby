@@ -83,7 +83,7 @@ module Anthropic
         # value, passing the remaining arguments to its constructor.
         sig do
           params(
-            type: T.any(Symbol, String),
+            type: Anthropic::Beta::BetaRawMessageStreamEvent::Type::OrSymbol,
             message: Anthropic::Beta::BetaMessage::OrHash,
             context_management:
               T.nilable(Anthropic::Beta::BetaContextManagementResponse::OrHash),

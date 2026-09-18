@@ -121,7 +121,8 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type:
+                Anthropic::Beta::BetaFallbackCreditUsage::Status::Type::OrSymbol,
               reason:
                 Anthropic::Beta::BetaFallbackCreditNotApplied::Reason::OrSymbol,
               remove_to_redeem: T.nilable(T::Array[String])

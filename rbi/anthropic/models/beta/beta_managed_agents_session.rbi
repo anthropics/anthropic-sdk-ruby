@@ -244,21 +244,28 @@ module Anthropic
             end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
+          # Transient error occurred, retrying automatically.
           RESCHEDULING =
             T.let(
               :rescheduling,
               Anthropic::Beta::BetaManagedAgentsSession::Status::TaggedSymbol
             )
+
+          # Agent is actively executing.
           RUNNING =
             T.let(
               :running,
               Anthropic::Beta::BetaManagedAgentsSession::Status::TaggedSymbol
             )
+
+          # Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
           IDLE =
             T.let(
               :idle,
               Anthropic::Beta::BetaManagedAgentsSession::Status::TaggedSymbol
             )
+
+          # Session has ended, either due to an error or completion.
           TERMINATED =
             T.let(
               :terminated,

@@ -90,7 +90,8 @@ module Anthropic
                 ?client_id: String?
               ) -> Anthropic::Beta::Organization::BetaAzureExternalKeyConfigParam
               | (
-                type: Symbol | String,
+                type: Anthropic::Models::Beta::Organization::ExternalKeyUpdateParams::ProviderConfig::type_
+                | String,
                 ?kms_arn: String,
                 ?region: String?,
                 ?role_arn: String?,

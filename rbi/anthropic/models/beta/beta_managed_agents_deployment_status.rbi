@@ -15,11 +15,14 @@ module Anthropic
           end
         OrSymbol = T.type_alias { T.any(Symbol, String) }
 
+        # The deployment is active and can run sessions. Archived deployments also report this status; check `archived_at` to distinguish them.
         ACTIVE =
           T.let(
             :active,
             Anthropic::Beta::BetaManagedAgentsDeploymentStatus::TaggedSymbol
           )
+
+        # The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
         PAUSED =
           T.let(
             :paused,

@@ -44,7 +44,7 @@ module Anthropic
       # value, passing the remaining arguments to its constructor.
       sig do
         params(
-          type: T.any(Symbol, String),
+          type: Anthropic::ToolChoice::Type::OrSymbol,
           disable_parallel_tool_use: T::Boolean,
           name: String
         ).returns(Anthropic::ToolChoice::Variants)

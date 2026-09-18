@@ -79,7 +79,8 @@ module Anthropic
               tools: ::Array[Anthropic::Beta::BetaWebFetchURLSourceToolReference]
             ) -> Anthropic::Beta::BetaWebFetchURLSourceExcept
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaWebFetchURLSources::ClientToolResults::type_
+              | String,
               ?tools: ::Array[Anthropic::Beta::BetaWebFetchURLSourceToolReference]
             ) -> Anthropic::Models::Beta::BetaWebFetchURLSources::client_tool_results
         end
@@ -122,7 +123,8 @@ module Anthropic
               tools: ::Array[Anthropic::Beta::BetaWebFetchURLSourceToolReference]
             ) -> Anthropic::Beta::BetaWebFetchURLSourceExcept
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaWebFetchURLSources::ServerToolResults::type_
+              | String,
               ?tools: ::Array[Anthropic::Beta::BetaWebFetchURLSourceToolReference]
             ) -> Anthropic::Models::Beta::BetaWebFetchURLSources::server_tool_results
         end
@@ -153,7 +155,8 @@ module Anthropic
               type: :none | "none"
             ) -> Anthropic::Beta::BetaWebFetchURLSourceNone
             | (
-              type: Symbol | String
+              type: Anthropic::Models::Beta::BetaWebFetchURLSources::UserInput::type_
+              | String
             ) -> Anthropic::Models::Beta::BetaWebFetchURLSources::user_input
         end
       end

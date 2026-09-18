@@ -86,7 +86,8 @@ module Anthropic
                 type: :budget_reached | "budget_reached"
               ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSessionBudgetReached
               | (
-                type: Symbol | String,
+                type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::StopReason::type_
+                | String,
                 ?event_ids: ::Array[String]
               ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsSessionThreadStatusIdleEvent::stop_reason
           end

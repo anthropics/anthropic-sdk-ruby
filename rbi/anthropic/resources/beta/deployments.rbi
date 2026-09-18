@@ -97,7 +97,7 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaManagedAgentsDeployment)
         end
         def retrieve(
-          # Path parameter deployment_id
+          # Unique identifier of the deployment.
           deployment_id,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
@@ -156,7 +156,7 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaManagedAgentsDeployment)
         end
         def update(
-          # Path param: Path parameter deployment_id
+          # Path param: Unique identifier of the deployment to update.
           deployment_id,
           # Body param: Agent to deploy. Accepts the `agent` ID string, which re-pins to the
           # latest version, or an `agent` object with both id and version specified. Omit to
@@ -263,7 +263,7 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaManagedAgentsDeployment)
         end
         def archive(
-          # Path parameter deployment_id
+          # Unique identifier of the deployment to archive.
           deployment_id,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
@@ -288,7 +288,7 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaManagedAgentsDeployment)
         end
         def pause(
-          # Path parameter deployment_id
+          # Unique identifier of the deployment to pause.
           deployment_id,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
@@ -313,7 +313,7 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaManagedAgentsDeploymentRun)
         end
         def run(
-          # Path parameter deployment_id
+          # Unique identifier of the deployment to run.
           deployment_id,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
@@ -338,7 +338,7 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaManagedAgentsDeployment)
         end
         def unpause(
-          # Path parameter deployment_id
+          # Unique identifier of the deployment to unpause.
           deployment_id,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,

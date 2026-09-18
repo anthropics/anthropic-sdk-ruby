@@ -72,7 +72,7 @@ module Anthropic
         # value, passing the remaining arguments to its constructor.
         sig do
           params(
-            type: T.any(Symbol, String),
+            type: Anthropic::Beta::BetaIterationsUsageItem::Type::OrSymbol,
             cache_creation:
               T.nilable(Anthropic::Beta::BetaCacheCreation::OrHash),
             cache_creation_input_tokens: Integer,

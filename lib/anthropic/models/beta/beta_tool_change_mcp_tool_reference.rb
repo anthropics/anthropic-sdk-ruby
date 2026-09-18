@@ -20,7 +20,7 @@ module Anthropic
         required :type, const: :mcp_tool_reference
 
         # @!method initialize(name:, server_name:, type: :mcp_tool_reference)
-        #   Reference to a single MCP tool by its server and remote name — the same
+        #   Reference to a single MCP tool by its server and remote name; the same
         #   `server_name`/`name` pair `mcp_tool_use` carries.
         #
         #   @param name [String]

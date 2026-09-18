@@ -77,7 +77,8 @@ module Anthropic
               type: :unavailable | "unavailable"
             ) -> Anthropic::Beta::BetaCacheMissUnavailable
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaDiagnostics::CacheMissReason::type_
+              | String,
               ?cache_missed_input_tokens: Integer
             ) -> Anthropic::Models::Beta::BetaDiagnostics::cache_miss_reason
         end

@@ -106,7 +106,7 @@ module Anthropic
             # {Anthropic::Models::Beta::BetaToolResultBlockParam::Content::Content} for more
             # details.
             #
-            # @param type [Symbol, String]
+            # @param type [Symbol, Anthropic::Models::Beta::BetaToolResultBlockParam::Content::Content::Type, String]
             #
             # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
             #

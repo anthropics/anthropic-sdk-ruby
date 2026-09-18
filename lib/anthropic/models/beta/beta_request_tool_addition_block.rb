@@ -44,7 +44,7 @@ module Anthropic
           # ``mcp_toolset_reference`` for those.
           variant :tool_reference, -> { Anthropic::Beta::BetaToolChangeToolReference }
 
-          # Reference to a single MCP tool by its server and remote name — the
+          # Reference to a single MCP tool by its server and remote name; the
           # same ``server_name``/``name`` pair ``mcp_tool_use`` carries.
           variant :mcp_tool_reference, -> { Anthropic::Beta::BetaToolChangeMCPToolReference }
 
@@ -68,7 +68,7 @@ module Anthropic
           # Creates a new instance of the variant class whose `type` matches the given
           # value, passing the remaining arguments to its constructor.
           #
-          # @param type [Symbol, String]
+          # @param type [Symbol, Anthropic::Models::Beta::BetaRequestToolAdditionBlock::Tool::Type, String]
           #
           # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
           #

@@ -107,7 +107,8 @@ module Anthropic
               ?message: String
             ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsConflictError
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsError::type_
+              | String,
               ?message: String,
               ?conflicting_memory_id: String,
               ?conflicting_path: String

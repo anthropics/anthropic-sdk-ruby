@@ -66,7 +66,8 @@ module Anthropic
               ?media_type: :"text/plain"
             ) -> Anthropic::Beta::BetaPlainTextSource
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaDocumentBlock::Source::type_
+              | String,
               data: String,
               media_type: :"application/pdf" | :"text/plain"
             ) -> Anthropic::Models::Beta::BetaDocumentBlock::source

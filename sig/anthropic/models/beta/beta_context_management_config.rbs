@@ -68,7 +68,8 @@ module Anthropic
               ?trigger: Anthropic::Beta::BetaInputTokensTrigger?
             ) -> Anthropic::Beta::BetaCompact20260112Edit
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaContextManagementConfig::Edit::type_
+              | String,
               ?clear_at_least: Anthropic::Beta::BetaInputTokensClearAtLeast?,
               ?clear_tool_inputs: Anthropic::Models::Beta::BetaClearToolUses20250919Edit::clear_tool_inputs?,
               ?exclude_tools: ::Array[String]?,

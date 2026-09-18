@@ -250,7 +250,8 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type:
+                Anthropic::Beta::BetaManagedAgentsAgent::Skill::Type::OrSymbol,
               skill_id: String,
               version: String
             ).returns(Anthropic::Beta::BetaManagedAgentsAgent::Skill::Variants)
@@ -323,7 +324,8 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type:
+                Anthropic::Beta::BetaManagedAgentsAgent::Tool::Type::OrSymbol,
               configs:
                 T.any(
                   T::Array[

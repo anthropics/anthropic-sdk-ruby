@@ -80,7 +80,8 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type:
+                Anthropic::Beta::Messages::BetaMessageBatchResult::Type::OrSymbol,
               message: Anthropic::Beta::BetaMessage::OrHash,
               error: Anthropic::BetaErrorResponse::OrHash
             ).returns(

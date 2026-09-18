@@ -71,7 +71,8 @@ module Anthropic
               file_id: String
             ) -> Anthropic::Beta::BetaFileImageSource
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaImageBlockParam::Source::type_
+              | String,
               ?data: String,
               ?media_type: Anthropic::Models::Beta::BetaBase64ImageSource::media_type,
               ?url: String,

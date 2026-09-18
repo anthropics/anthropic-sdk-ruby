@@ -55,7 +55,7 @@ module Anthropic
         # value, passing the remaining arguments to its constructor.
         sig do
           params(
-            type: T.any(Symbol, String),
+            type: Anthropic::Beta::BetaDreamInput::Type::OrSymbol,
             memory_store_id: String,
             session_ids: T::Array[String]
           ).returns(Anthropic::Beta::BetaDreamInput::Variants)

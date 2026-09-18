@@ -81,7 +81,8 @@ module Anthropic
                 type: :unattached | "unattached"
               ) -> Anthropic::Beta::Organization::BetaExternalKeyUnattachedAttachment
               | (
-                type: Symbol | String
+                type: Anthropic::Models::Beta::Organization::BetaExternalKey::Attachment::type_
+                | String
               ) -> Anthropic::Models::Beta::Organization::BetaExternalKey::attachment
           end
 
@@ -126,7 +127,8 @@ module Anthropic
                 ?client_id: String?
               ) -> Anthropic::Beta::Organization::BetaAzureExternalKeyConfig
               | (
-                type: Symbol | String,
+                type: Anthropic::Models::Beta::Organization::BetaExternalKey::ProviderConfig::type_
+                | String,
                 ?kms_arn: String,
                 ?region: String?,
                 ?role_arn: String?,

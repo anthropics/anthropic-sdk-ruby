@@ -56,9 +56,10 @@ module Anthropic
         # Creates a new instance of the variant class whose `type` matches the given
         # value, passing the remaining arguments to its constructor.
         sig do
-          params(type: T.any(Symbol, String), memory_store_id: String).returns(
-            Anthropic::Beta::BetaOutputBehavior::Variants
-          )
+          params(
+            type: Anthropic::Beta::BetaOutputBehavior::Type::OrSymbol,
+            memory_store_id: String
+          ).returns(Anthropic::Beta::BetaOutputBehavior::Variants)
         end
         def self.new(type:, memory_store_id: nil)
         end

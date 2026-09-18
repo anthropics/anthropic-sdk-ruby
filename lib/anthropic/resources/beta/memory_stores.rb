@@ -52,7 +52,7 @@ module Anthropic
         #
         # @overload retrieve(memory_store_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param memory_store_id [String] Path parameter memory_store_id
+        # @param memory_store_id [String] ID of the memory store to retrieve (a `memstore_...` identifier). Required. Enum
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
@@ -81,7 +81,7 @@ module Anthropic
         #
         # @overload update(memory_store_id, description: nil, metadata: nil, name: nil, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param memory_store_id [String] Path param: Path parameter memory_store_id
+        # @param memory_store_id [String] Path param: ID of the memory store to update (a `memstore_...` identifier). Requ
         #
         # @param description [String, nil] Body param: New description for the store, up to 1024 characters. Pass an empty
         #
@@ -162,7 +162,7 @@ module Anthropic
         #
         # @overload delete(memory_store_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param memory_store_id [String] Path parameter memory_store_id
+        # @param memory_store_id [String] ID of the memory store to permanently delete (a `memstore_...` identifier). Requ
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
@@ -191,7 +191,7 @@ module Anthropic
         #
         # @overload archive(memory_store_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param memory_store_id [String] Path parameter memory_store_id
+        # @param memory_store_id [String] ID of the memory store to archive (a `memstore_...` identifier). Required. Archi
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #

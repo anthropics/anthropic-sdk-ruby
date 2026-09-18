@@ -33,7 +33,7 @@ module Anthropic
           ?transformations: Anthropic::ImageTransformationsParam?
         ) -> Anthropic::ImageBlockParam
         | (
-          type: Symbol | String,
+          type: Anthropic::Models::ContentBlockSourceContent::type_ | String,
           ?text: String,
           ?cache_control: Anthropic::CacheControlEphemeral?,
           ?citations: ::Array[Anthropic::Models::text_citation_param]?,

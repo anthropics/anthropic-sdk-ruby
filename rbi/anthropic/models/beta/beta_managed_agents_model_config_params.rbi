@@ -170,26 +170,35 @@ module Anthropic
               end
             OrSymbol = T.type_alias { T.any(Symbol, String) }
 
+            # Low effort. Favors latency over reasoning depth.
             LOW =
               T.let(
                 :low,
                 Anthropic::Beta::BetaManagedAgentsModelConfigParams::Effort::BetaManagedAgentsEffortLevel::TaggedSymbol
               )
+
+            # Medium effort. Balances latency and reasoning depth.
             MEDIUM =
               T.let(
                 :medium,
                 Anthropic::Beta::BetaManagedAgentsModelConfigParams::Effort::BetaManagedAgentsEffortLevel::TaggedSymbol
               )
+
+            # High effort. Favors reasoning depth.
             HIGH =
               T.let(
                 :high,
                 Anthropic::Beta::BetaManagedAgentsModelConfigParams::Effort::BetaManagedAgentsEffortLevel::TaggedSymbol
               )
+
+            # Extra-high effort. Not all models accept this level.
             XHIGH =
               T.let(
                 :xhigh,
                 Anthropic::Beta::BetaManagedAgentsModelConfigParams::Effort::BetaManagedAgentsEffortLevel::TaggedSymbol
               )
+
+            # Maximum effort. Favors reasoning depth over latency.
             MAX =
               T.let(
                 :max,

@@ -144,7 +144,8 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type:
+                Anthropic::Beta::BetaContextManagementConfig::Edit::Type::OrSymbol,
               clear_at_least:
                 T.nilable(Anthropic::Beta::BetaInputTokensClearAtLeast::OrHash),
               clear_tool_inputs:

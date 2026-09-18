@@ -40,7 +40,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::BetaTextCitation} for more details.
         #
-        # @param type [Symbol, String]
+        # @param type [Symbol, Anthropic::Models::Beta::BetaTextCitation::Type, String]
         #
         # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
         #

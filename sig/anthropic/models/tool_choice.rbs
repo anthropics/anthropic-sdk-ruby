@@ -40,7 +40,7 @@ module Anthropic
         ) -> Anthropic::ToolChoiceTool
         | (type: :none | "none") -> Anthropic::ToolChoiceNone
         | (
-          type: Symbol | String,
+          type: Anthropic::Models::ToolChoice::type_ | String,
           ?disable_parallel_tool_use: bool,
           ?name: String
         ) -> Anthropic::Models::tool_choice

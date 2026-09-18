@@ -54,7 +54,7 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaTunnel)
         end
         def retrieve(
-          # Path parameter tunnel_id
+          # ID of the tunnel (`tnl_...`).
           tunnel_id,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
@@ -128,7 +128,7 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaTunnel)
         end
         def archive(
-          # Path parameter tunnel_id
+          # ID of the tunnel (`tnl_...`).
           tunnel_id,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
@@ -161,7 +161,7 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaTunnelToken)
         end
         def reveal_token(
-          # Path parameter tunnel_id
+          # ID of the tunnel (`tnl_...`).
           tunnel_id,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
@@ -194,7 +194,7 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaTunnelToken)
         end
         def rotate_token(
-          # Path param: Path parameter tunnel_id
+          # Path param: ID of the tunnel (`tnl_...`).
           tunnel_id,
           # Body param: Optional free-text reason for the rotation, recorded for audit.
           reason: nil,

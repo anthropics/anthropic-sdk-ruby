@@ -96,7 +96,8 @@ module Anthropic
                   keys: ::Array[::Hash[Symbol, top]]
                 ) -> Anthropic::Beta::Organization::Federation::BetaJWKSInline
                 | (
-                  type: Symbol | String,
+                  type: Anthropic::Models::Beta::Organization::Federation::IssuerCreateParams::JWKS::type_
+                  | String,
                   ?ca_cert_pem: String?,
                   ?discovery_base: String?,
                   ?url: String,

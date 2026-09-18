@@ -34,7 +34,7 @@ module Anthropic
           ?display_: Anthropic::Models::ThinkingConfigAdaptive::display_?
         ) -> Anthropic::ThinkingConfigAdaptive
         | (
-          type: Symbol | String,
+          type: Anthropic::Models::ThinkingConfigParam::type_ | String,
           ?budget_tokens: Integer,
           ?display_: Anthropic::Models::ThinkingConfigEnabled::display_?
           | Anthropic::Models::ThinkingConfigAdaptive::display_?

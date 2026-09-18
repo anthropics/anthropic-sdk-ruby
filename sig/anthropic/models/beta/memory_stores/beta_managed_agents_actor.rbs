@@ -45,7 +45,8 @@ module Anthropic
               service_account_id: String
             ) -> Anthropic::Beta::MemoryStores::BetaManagedAgentsServiceAccountActor
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::MemoryStores::BetaManagedAgentsActor::type_
+              | String,
               ?session_id: String,
               ?api_key_id: String,
               ?user_id: String,

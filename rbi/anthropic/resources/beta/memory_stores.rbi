@@ -60,7 +60,8 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaManagedAgentsMemoryStore)
         end
         def retrieve(
-          # Path parameter memory_store_id
+          # ID of the memory store to retrieve (a `memstore_...` identifier). Required.
+          # Enumerate IDs via `GET /v1/memory_stores`.
           memory_store_id,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
@@ -88,7 +89,9 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaManagedAgentsMemoryStore)
         end
         def update(
-          # Path param: Path parameter memory_store_id
+          # Path param: ID of the memory store to update (a `memstore_...` identifier).
+          # Required. Enumerate IDs via `GET /v1/memory_stores`. Updating an archived store
+          # returns 400.
           memory_store_id,
           # Body param: New description for the store, up to 1024 characters. Pass an empty
           # string to clear it.
@@ -170,7 +173,9 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaManagedAgentsDeletedMemoryStore)
         end
         def delete(
-          # Path parameter memory_store_id
+          # ID of the memory store to permanently delete (a `memstore_...` identifier).
+          # Required. Deletion cascades to all memories and memory versions in the store and
+          # cannot be undone.
           memory_store_id,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,
@@ -195,7 +200,9 @@ module Anthropic
           ).returns(Anthropic::Beta::BetaManagedAgentsMemoryStore)
         end
         def archive(
-          # Path parameter memory_store_id
+          # ID of the memory store to archive (a `memstore_...` identifier). Required.
+          # Archiving is one-way and idempotent; archived stores cannot be unarchived.
+          # Enumerate IDs via `GET /v1/memory_stores`.
           memory_store_id,
           # Optional header to specify the beta version(s) you want to use.
           betas: nil,

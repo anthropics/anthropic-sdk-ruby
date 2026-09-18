@@ -40,7 +40,7 @@ module Anthropic
         # Creates a new instance of the variant class whose `command` matches the given
         # value, passing the remaining arguments to its constructor.
         #
-        # @param command [Symbol, String]
+        # @param command [Symbol, Anthropic::Models::Beta::BetaMemoryTool20250818Command::Command, String]
         #
         # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
         #

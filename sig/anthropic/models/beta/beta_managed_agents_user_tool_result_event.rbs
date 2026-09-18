@@ -110,7 +110,8 @@ module Anthropic
               title: String
             ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSearchResultBlock
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaManagedAgentsUserToolResultEvent::Content::type_
+              | String,
               ?text: String,
               ?source: Anthropic::Models::Beta::Sessions::BetaManagedAgentsImageBlock::source
               | Anthropic::Models::Beta::Sessions::BetaManagedAgentsDocumentBlock::source

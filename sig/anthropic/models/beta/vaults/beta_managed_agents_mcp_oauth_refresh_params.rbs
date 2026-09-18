@@ -78,7 +78,8 @@ module Anthropic
                 client_secret: String
               ) -> Anthropic::Beta::Vaults::BetaManagedAgentsTokenEndpointAuthPostParam
               | (
-                type: Symbol | String,
+                type: Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshParams::TokenEndpointAuth::type_
+                | String,
                 ?client_secret: String
               ) -> Anthropic::Models::Beta::Vaults::BetaManagedAgentsMCPOAuthRefreshParams::token_endpoint_auth
           end

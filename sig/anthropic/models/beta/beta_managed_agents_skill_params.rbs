@@ -35,7 +35,8 @@ module Anthropic
             ?version: String?
           ) -> Anthropic::Beta::BetaManagedAgentsCustomSkillParams
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::Beta::BetaManagedAgentsSkillParams::type_
+            | String,
             skill_id: String,
             ?version: String?
           ) -> Anthropic::Models::Beta::beta_managed_agents_skill_params

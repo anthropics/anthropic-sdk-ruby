@@ -74,7 +74,8 @@ module Anthropic
               sha: String
             ) -> Anthropic::Beta::BetaManagedAgentsCommitCheckout
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig::Checkout::type_
+              | String,
               ?name: String,
               ?sha: String
             ) -> Anthropic::Models::Beta::BetaManagedAgentsGitHubRepositoryResourceConfig::checkout

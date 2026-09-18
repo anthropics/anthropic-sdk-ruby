@@ -47,7 +47,7 @@ module Anthropic
         #
         # @overload retrieve(vault_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param vault_id [String] Path parameter vault_id
+        # @param vault_id [String] Unique identifier of the vault to retrieve.
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
@@ -76,7 +76,7 @@ module Anthropic
         #
         # @overload update(vault_id, display_name: nil, metadata: nil, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param vault_id [String] Path param: Path parameter vault_id
+        # @param vault_id [String] Path param: Unique identifier of the vault to update.
         #
         # @param display_name [String, nil] Body param: Updated human-readable name for the vault. 1-255 characters.
         #
@@ -151,7 +151,7 @@ module Anthropic
         #
         # @overload delete(vault_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param vault_id [String] Path parameter vault_id
+        # @param vault_id [String] Unique identifier of the vault to delete.
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
@@ -180,7 +180,7 @@ module Anthropic
         #
         # @overload archive(vault_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param vault_id [String] Path parameter vault_id
+        # @param vault_id [String] Unique identifier of the vault to archive.
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #

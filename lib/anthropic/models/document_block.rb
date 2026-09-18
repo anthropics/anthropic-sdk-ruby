@@ -60,7 +60,7 @@ module Anthropic
         # Creates a new instance of the variant class whose `type` matches the given
         # value, passing the remaining arguments to its constructor.
         #
-        # @param type [Symbol, String]
+        # @param type [Symbol, Anthropic::Models::DocumentBlock::Source::Type, String]
         #
         # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
         #

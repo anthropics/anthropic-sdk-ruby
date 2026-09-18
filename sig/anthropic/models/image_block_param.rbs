@@ -65,7 +65,7 @@ module Anthropic
             file_id: String
           ) -> Anthropic::FileImageSource
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::ImageBlockParam::Source::type_ | String,
             ?data: String,
             ?media_type: Anthropic::Models::Base64ImageSource::media_type,
             ?url: String,

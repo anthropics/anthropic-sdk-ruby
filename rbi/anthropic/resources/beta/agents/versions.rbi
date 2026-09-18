@@ -22,7 +22,7 @@ module Anthropic
             )
           end
           def list(
-            # Path param: Path parameter agent_id
+            # Path param: Agent ID to list versions for.
             agent_id,
             # Query param: Maximum results per page. Default 20, maximum 100.
             limit: nil,

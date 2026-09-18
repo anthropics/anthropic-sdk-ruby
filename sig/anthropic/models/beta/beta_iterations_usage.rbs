@@ -65,7 +65,8 @@ module Anthropic
             output_tokens: Integer
           ) -> Anthropic::Beta::BetaFallbackMessageIterationUsage
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::Beta::BetaIterationsUsageItem::type_
+            | String,
             cache_creation: Anthropic::Beta::BetaCacheCreation?,
             cache_creation_input_tokens: Integer,
             cache_read_input_tokens: Integer,

@@ -147,7 +147,8 @@ module Anthropic
             file_id: String
           ) -> Anthropic::ContainerUploadBlock
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::RawContentBlockStartEvent::ContentBlock::type_
+            | String,
             ?citations: ::Array[Anthropic::Models::text_citation]?,
             ?text: String,
             ?signature: String,

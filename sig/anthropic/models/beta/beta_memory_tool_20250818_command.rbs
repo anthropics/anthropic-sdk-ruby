@@ -65,7 +65,8 @@ module Anthropic
             old_path: String
           ) -> Anthropic::Beta::BetaMemoryTool20250818RenameCommand
           | (
-            command: Symbol | String,
+            command: Anthropic::Models::Beta::BetaMemoryTool20250818Command::command
+            | String,
             ?path: String,
             ?view_range: ::Array[Integer],
             ?file_text: String,

@@ -42,7 +42,8 @@ module Anthropic
             content: ::Array[Anthropic::Beta::BetaManagedAgentsSystemContentBlock]
           ) -> Anthropic::Beta::Sessions::BetaManagedAgentsSystemMessageEventParams
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentInitialEventParams::type_
+            | String,
             ?content: ::Array[Anthropic::Models::Beta::Sessions::BetaManagedAgentsUserMessageEventParams::content]
             | ::Array[Anthropic::Beta::BetaManagedAgentsSystemContentBlock],
             ?description: String,

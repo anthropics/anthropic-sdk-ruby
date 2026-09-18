@@ -73,7 +73,8 @@ module Anthropic
               name: String
             ) -> Anthropic::Beta::BetaManagedAgentsCustomToolParams
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaManagedAgentsSessionAgentUpdate::Tool::type_
+              | String,
               ?configs: ::Array[Anthropic::Models::Beta::beta_managed_agents_agent_tool_config_params]
               | ::Array[Anthropic::Beta::BetaManagedAgentsMCPToolConfigParams],
               ?default_config: Anthropic::Beta::BetaManagedAgentsAgentToolsetDefaultConfigParams?

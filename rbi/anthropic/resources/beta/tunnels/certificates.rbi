@@ -24,7 +24,7 @@ module Anthropic
             ).returns(Anthropic::Beta::Tunnels::BetaTunnelCertificate)
           end
           def create(
-            # Path param: Path parameter tunnel_id
+            # Path param: ID of the tunnel (`tnl_...`).
             tunnel_id,
             # Body param: PEM-encoded X.509 CA certificate. Must contain exactly one
             # certificate and no private-key material. Maximum 8KB.
@@ -59,9 +59,9 @@ module Anthropic
             ).returns(Anthropic::Beta::Tunnels::BetaTunnelCertificate)
           end
           def retrieve(
-            # Path param: Path parameter certificate_id
+            # Path param: ID of the certificate (`tcrt_...`).
             certificate_id,
-            # Path param: Path parameter tunnel_id
+            # Path param: ID of the tunnel (`tnl_...`).
             tunnel_id:,
             # Header param: Optional header to specify the beta version(s) you want to use.
             betas: nil,
@@ -100,7 +100,7 @@ module Anthropic
             )
           end
           def list(
-            # Path param: Path parameter tunnel_id
+            # Path param: ID of the tunnel (`tnl_...`).
             tunnel_id,
             # Query param: Whether to include archived certificates in the results. Defaults
             # to false.
@@ -144,9 +144,9 @@ module Anthropic
             ).returns(Anthropic::Beta::Tunnels::BetaTunnelCertificate)
           end
           def archive(
-            # Path param: Path parameter certificate_id
+            # Path param: ID of the certificate to archive (`tcrt_...`).
             certificate_id,
-            # Path param: Path parameter tunnel_id
+            # Path param: ID of the tunnel (`tnl_...`).
             tunnel_id:,
             # Header param: Optional header to specify the beta version(s) you want to use.
             betas: nil,

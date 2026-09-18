@@ -57,7 +57,7 @@ module Anthropic
         #
         # @overload retrieve(tunnel_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param tunnel_id [String] Path parameter tunnel_id
+        # @param tunnel_id [String] ID of the tunnel (`tnl_...`).
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
@@ -140,7 +140,7 @@ module Anthropic
         #
         # @overload archive(tunnel_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param tunnel_id [String] Path parameter tunnel_id
+        # @param tunnel_id [String] ID of the tunnel (`tnl_...`).
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
@@ -177,7 +177,7 @@ module Anthropic
         #
         # @overload reveal_token(tunnel_id, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param tunnel_id [String] Path parameter tunnel_id
+        # @param tunnel_id [String] ID of the tunnel (`tnl_...`).
         #
         # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Optional header to specify the beta version(s) you want to use.
         #
@@ -213,7 +213,7 @@ module Anthropic
         #
         # @overload rotate_token(tunnel_id, reason: nil, betas: nil, workspace_id: nil, request_options: {})
         #
-        # @param tunnel_id [String] Path param: Path parameter tunnel_id
+        # @param tunnel_id [String] Path param: ID of the tunnel (`tnl_...`).
         #
         # @param reason [String, nil] Body param: Optional free-text reason for the rotation, recorded for audit.
         #

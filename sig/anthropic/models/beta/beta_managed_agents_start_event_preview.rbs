@@ -33,7 +33,8 @@ module Anthropic
             id: String
           ) -> Anthropic::Beta::BetaManagedAgentsAgentThinkingPreview
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::Beta::BetaManagedAgentsStartEventPreview::type_
+            | String,
             id: String
           ) -> Anthropic::Models::Beta::beta_managed_agents_start_event_preview
       end

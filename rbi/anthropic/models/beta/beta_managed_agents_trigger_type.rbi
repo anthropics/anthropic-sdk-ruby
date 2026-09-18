@@ -15,11 +15,14 @@ module Anthropic
           end
         OrSymbol = T.type_alias { T.any(Symbol, String) }
 
+        # The run was fired by the deployment's cron schedule.
         SCHEDULE =
           T.let(
             :schedule,
             Anthropic::Beta::BetaManagedAgentsTriggerType::TaggedSymbol
           )
+
+        # The run was started manually by creating a session directly against the deployment.
         MANUAL =
           T.let(
             :manual,

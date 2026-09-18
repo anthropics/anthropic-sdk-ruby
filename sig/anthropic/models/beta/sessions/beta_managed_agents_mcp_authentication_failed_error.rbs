@@ -66,7 +66,8 @@ module Anthropic
                 type: :terminal | "terminal"
               ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal
               | (
-                type: Symbol | String
+                type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::RetryStatus::type_
+                | String
               ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsMCPAuthenticationFailedError::retry_status
           end
 

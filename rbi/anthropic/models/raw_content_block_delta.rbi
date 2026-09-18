@@ -68,7 +68,7 @@ module Anthropic
       # value, passing the remaining arguments to its constructor.
       sig do
         params(
-          type: T.any(Symbol, String),
+          type: Anthropic::RawContentBlockDelta::Type::OrSymbol,
           text: String,
           partial_json: String,
           citation:

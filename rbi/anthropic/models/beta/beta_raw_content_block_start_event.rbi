@@ -218,7 +218,8 @@ module Anthropic
           # value, passing the remaining arguments to its constructor.
           sig do
             params(
-              type: T.any(Symbol, String),
+              type:
+                Anthropic::Beta::BetaRawContentBlockStartEvent::ContentBlock::Type::OrSymbol,
               citations:
                 T.nilable(
                   T::Array[

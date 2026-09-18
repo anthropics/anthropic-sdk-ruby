@@ -79,7 +79,7 @@ module Anthropic
             title: String?
           ) -> Anthropic::Beta::BetaCitationSearchResultLocation
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::Beta::BetaTextCitation::type_ | String,
             cited_text: String,
             ?document_index: Integer,
             ?document_title: String?,

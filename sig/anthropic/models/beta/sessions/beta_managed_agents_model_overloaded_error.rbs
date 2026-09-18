@@ -61,7 +61,8 @@ module Anthropic
                 type: :terminal | "terminal"
               ) -> Anthropic::Beta::Sessions::BetaManagedAgentsRetryStatusTerminal
               | (
-                type: Symbol | String
+                type: Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::RetryStatus::type_
+                | String
               ) -> Anthropic::Models::Beta::Sessions::BetaManagedAgentsModelOverloadedError::retry_status
           end
 

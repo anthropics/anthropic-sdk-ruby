@@ -56,7 +56,7 @@ module Anthropic
         # value, passing the remaining arguments to its constructor.
         sig do
           params(
-            type: T.any(Symbol, String),
+            type: Anthropic::Beta::BetaToolChoice::Type::OrSymbol,
             disable_parallel_tool_use: T::Boolean,
             name: String
           ).returns(Anthropic::Beta::BetaToolChoice::Variants)

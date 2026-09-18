@@ -134,7 +134,10 @@ module Anthropic
             # Creates a new instance of the variant class whose `type` matches the given
             # value, passing the remaining arguments to its constructor.
             sig do
-              params(type: T.any(Symbol, String)).returns(
+              params(
+                type:
+                  Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::RetryStatus::Type::OrSymbol
+              ).returns(
                 Anthropic::Beta::Sessions::BetaManagedAgentsModelRateLimitedError::RetryStatus::Variants
               )
             end

@@ -275,7 +275,8 @@ module Anthropic
               # value, passing the remaining arguments to its constructor.
               sig do
                 params(
-                  type: T.any(Symbol, String),
+                  type:
+                    Anthropic::Beta::Organization::Federation::BetaFederationIssuer::JWKS::Type::OrSymbol,
                   ca_cert_pem: T.nilable(String),
                   discovery_base: T.nilable(String),
                   url: String,

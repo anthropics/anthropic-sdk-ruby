@@ -51,7 +51,8 @@ module Anthropic
               cleared_thinking_turns: Integer
             ) -> Anthropic::Beta::BetaClearThinking20251015EditResponse
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaContextManagementResponse::AppliedEdit::type_
+              | String,
               cleared_input_tokens: Integer,
               ?cleared_tool_uses: Integer,
               ?cleared_thinking_turns: Integer

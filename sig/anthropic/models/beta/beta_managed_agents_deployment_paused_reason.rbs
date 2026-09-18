@@ -32,7 +32,8 @@ module Anthropic
             error: Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason_error
           ) -> Anthropic::Beta::BetaManagedAgentsErrorDeploymentPausedReason
           | (
-            type: Symbol | String,
+            type: Anthropic::Models::Beta::BetaManagedAgentsDeploymentPausedReason::type_
+            | String,
             ?error: Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason_error
           ) -> Anthropic::Models::Beta::beta_managed_agents_deployment_paused_reason
       end

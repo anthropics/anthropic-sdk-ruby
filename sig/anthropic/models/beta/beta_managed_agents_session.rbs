@@ -104,9 +104,16 @@ module Anthropic
         module Status
           extend Anthropic::Internal::Type::Enum
 
+          # Transient error occurred, retrying automatically.
           RESCHEDULING: :rescheduling
+
+          # Agent is actively executing.
           RUNNING: :running
+
+          # Agent is waiting for input, including user messages or tool confirmations. Sessions start in idle.
           IDLE: :idle
+
+          # Session has ended, either due to an error or completion.
           TERMINATED: :terminated
 
           def self?.values: -> ::Array[Anthropic::Models::Beta::BetaManagedAgentsSession::status]

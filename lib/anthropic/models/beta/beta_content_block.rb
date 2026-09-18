@@ -94,7 +94,7 @@ module Anthropic
         # Some parameter documentations has been truncated, see
         # {Anthropic::Models::Beta::BetaContentBlock} for more details.
         #
-        # @param type [Symbol, String]
+        # @param type [Symbol, Anthropic::Models::Beta::BetaContentBlock::Type, String]
         #
         # @param args [Hash{Symbol=>Object}] Attributes for the chosen variant.
         #

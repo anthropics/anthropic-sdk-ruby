@@ -19,7 +19,7 @@ module Anthropic
           #
           # @overload create(tunnel_id, ca_certificate_pem:, betas: nil, workspace_id: nil, request_options: {})
           #
-          # @param tunnel_id [String] Path param: Path parameter tunnel_id
+          # @param tunnel_id [String] Path param: ID of the tunnel (`tnl_...`).
           #
           # @param ca_certificate_pem [String] Body param: PEM-encoded X.509 CA certificate. Must contain exactly one certifica
           #
@@ -57,9 +57,9 @@ module Anthropic
           #
           # @overload retrieve(certificate_id, tunnel_id:, betas: nil, workspace_id: nil, request_options: {})
           #
-          # @param certificate_id [String] Path param: Path parameter certificate_id
+          # @param certificate_id [String] Path param: ID of the certificate (`tcrt_...`).
           #
-          # @param tunnel_id [String] Path param: Path parameter tunnel_id
+          # @param tunnel_id [String] Path param: ID of the tunnel (`tnl_...`).
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #
@@ -98,7 +98,7 @@ module Anthropic
           #
           # @overload list(tunnel_id, include_archived: nil, limit: nil, page: nil, betas: nil, workspace_id: nil, request_options: {})
           #
-          # @param tunnel_id [String] Path param: Path parameter tunnel_id
+          # @param tunnel_id [String] Path param: ID of the tunnel (`tnl_...`).
           #
           # @param include_archived [Boolean] Query param: Whether to include archived certificates in the results. Defaults t
           #
@@ -148,9 +148,9 @@ module Anthropic
           #
           # @overload archive(certificate_id, tunnel_id:, betas: nil, workspace_id: nil, request_options: {})
           #
-          # @param certificate_id [String] Path param: Path parameter certificate_id
+          # @param certificate_id [String] Path param: ID of the certificate to archive (`tcrt_...`).
           #
-          # @param tunnel_id [String] Path param: Path parameter tunnel_id
+          # @param tunnel_id [String] Path param: ID of the tunnel (`tnl_...`).
           #
           # @param betas [Array<Symbol, String, Anthropic::Models::AnthropicBeta>] Header param: Optional header to specify the beta version(s) you want to use.
           #

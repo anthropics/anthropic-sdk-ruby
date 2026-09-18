@@ -56,7 +56,7 @@ module Anthropic
       # value, passing the remaining arguments to its constructor.
       sig do
         params(
-          type: T.any(Symbol, String),
+          type: Anthropic::ThinkingConfigParam::Type::OrSymbol,
           budget_tokens: Integer,
           display_:
             T.any(

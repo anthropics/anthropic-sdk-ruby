@@ -150,7 +150,8 @@ module Anthropic
             # value, passing the remaining arguments to its constructor.
             sig do
               params(
-                type: T.any(Symbol, String),
+                type:
+                  Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Networking::Type::OrSymbol,
                 allowed_hosts: T::Array[String]
               ).returns(
                 Anthropic::Beta::Vaults::BetaManagedAgentsEnvironmentVariableAuthResponse::Networking::Variants

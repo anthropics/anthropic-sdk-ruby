@@ -21,11 +21,14 @@ module Anthropic
             end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
+          # Return the object with `content` set to `null`. The `content_size_bytes` and `content_sha256` fields remain populated, so sync clients can diff without fetching content.
           BASIC =
             T.let(
               :basic,
               Anthropic::Beta::MemoryStores::BetaManagedAgentsMemoryView::TaggedSymbol
             )
+
+          # Return the object with `content` populated. On list endpoints, `view=full` caps `limit` at 20.
           FULL =
             T.let(
               :full,

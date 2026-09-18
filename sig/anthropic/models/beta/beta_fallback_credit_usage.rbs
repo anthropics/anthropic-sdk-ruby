@@ -47,7 +47,8 @@ module Anthropic
               ?remove_to_redeem: ::Array[String]?
             ) -> Anthropic::Beta::BetaFallbackCreditNotApplied
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::BetaFallbackCreditUsage::Status::type_
+              | String,
               ?reason: Anthropic::Models::Beta::BetaFallbackCreditNotApplied::reason,
               ?remove_to_redeem: ::Array[String]?
             ) -> Anthropic::Models::Beta::BetaFallbackCreditUsage::status

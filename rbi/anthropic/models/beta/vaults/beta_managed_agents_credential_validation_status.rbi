@@ -17,16 +17,21 @@ module Anthropic
             end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
+          # The credential successfully authenticated against its MCP server.
           VALID =
             T.let(
               :valid,
               Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidationStatus::TaggedSymbol
             )
+
+          # The probe reached the MCP server and was rejected, and a refresh (if attempted) did not recover it.
           INVALID =
             T.let(
               :invalid,
               Anthropic::Beta::Vaults::BetaManagedAgentsCredentialValidationStatus::TaggedSymbol
             )
+
+          # The probe could not determine validity — for example, a transport error or a successful refresh that was not re-probed.
           UNKNOWN =
             T.let(
               :unknown,

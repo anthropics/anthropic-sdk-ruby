@@ -42,7 +42,8 @@ module Anthropic
               type: :expired | "expired"
             ) -> Anthropic::Beta::Messages::BetaMessageBatchExpiredResult
             | (
-              type: Symbol | String,
+              type: Anthropic::Models::Beta::Messages::BetaMessageBatchResult::type_
+              | String,
               ?message: Anthropic::Beta::BetaMessage,
               ?error: Anthropic::BetaErrorResponse
             ) -> Anthropic::Models::Beta::Messages::beta_message_batch_result
