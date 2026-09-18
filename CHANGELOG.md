@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.72.0 (2026-09-18)
+
+Full Changelog: [v1.71.0...v1.72.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.71.0...v1.72.0)
+
+### Features
+
+* **api:** add group with display_name to rate limits, deprecate group_type ([8155b1d](https://github.com/anthropics/anthropic-sdk-ruby/commit/8155b1d0d17408a7ca0b04e774d5ff087d9aa438))
+* **ruby:** accept the discriminator enum in union .new signatures ([f31077a](https://github.com/anthropics/anthropic-sdk-ruby/commit/f31077a956e382b5453fbde900b8f03641bd8cbb))
+
+
+### Bug Fixes
+
+* **bedrock:** skip typeless chunks and raise on event-stream error frames ([#254](https://github.com/anthropics/anthropic-sdk-ruby/issues/254)) ([ae8f6e2](https://github.com/anthropics/anthropic-sdk-ruby/commit/ae8f6e2296396528ff52249f3049fffb3b176434))
+
+
+### Chores
+
+* **docs:** add descriptions for enum values and path parameters ([929b51e](https://github.com/anthropics/anthropic-sdk-ruby/commit/929b51ebe061ef833b593f03b912c08a021be7ca))
+* **docs:** clarify the compaction tool_changes and tool change descriptions ([4bc6c5f](https://github.com/anthropics/anthropic-sdk-ruby/commit/4bc6c5f7c0c8cf4a98277ee74ca04c9a46ef2864))
+* **internal:** update CLAUDE.md branch guidance ([#261](https://github.com/anthropics/anthropic-sdk-ruby/issues/261)) ([1931e53](https://github.com/anthropics/anthropic-sdk-ruby/commit/1931e537da142e3b6f33aa6ea2781c8f8659375c))
+
 ## 1.71.0 (2026-09-15)
 
 Full Changelog: [v1.70.0...v1.71.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.70.0...v1.71.0)
