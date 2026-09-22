@@ -1,5 +1,38 @@
 # Changelog
 
+## 1.73.0 (2026-09-22)
+
+Full Changelog: [v1.72.0...v1.73.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.72.0...v1.73.0)
+
+### Features
+
+* **api:** add support for claude-opus-5-5, inline tool definitions and MCP tool-list pinning (beta) ([b68ad25](https://github.com/anthropics/anthropic-sdk-ruby/commit/b68ad25d7e21c929b0a2309ba5c8ecc48f09fcfa))
+* **tools:** add compact_before_next_turn() to the tool runner ([#258](https://github.com/anthropics/anthropic-sdk-ruby/issues/258)) ([adccb26](https://github.com/anthropics/anthropic-sdk-ruby/commit/adccb26c933e2057794f903e41308d65108ecaff))
+
+
+### Bug Fixes
+
+* **api:** share one evaluated_permission enum across Managed Agents events ([5cea62a](https://github.com/anthropics/anthropic-sdk-ruby/commit/5cea62a855bec9f4cc991b2309b6934b9db987bf))
+* **tools:** add_tools takes effect straight away ([#269](https://github.com/anthropics/anthropic-sdk-ruby/issues/269)) ([289bfad](https://github.com/anthropics/anthropic-sdk-ruby/commit/289bfad23d1d26d0b86006f9aca7a624f8a86ce6))
+* **tools:** leave reply-only params off the tool runner's compaction request ([#267](https://github.com/anthropics/anthropic-sdk-ruby/issues/267)) ([5a1d7d2](https://github.com/anthropics/anthropic-sdk-ruby/commit/5a1d7d2352e7e4f65c312219c7a5695187ea2926))
+
+
+### Chores
+
+* **ci:** give the lint and breaking-change detection jobs more time ([59fc172](https://github.com/anthropics/anthropic-sdk-ruby/commit/59fc172c0f462de5743e947b6ec3c4708a5aac58))
+* **docs:** add descriptions to the Dreams API reference ([cfc7239](https://github.com/anthropics/anthropic-sdk-ruby/commit/cfc7239c607941094a470586342ed77cee41d75c))
+* **docs:** add descriptions to the User Profiles API reference ([cfc7239](https://github.com/anthropics/anthropic-sdk-ruby/commit/cfc7239c607941094a470586342ed77cee41d75c))
+* **docs:** add memory store descriptions to the Managed Agents API reference ([cfc7239](https://github.com/anthropics/anthropic-sdk-ruby/commit/cfc7239c607941094a470586342ed77cee41d75c))
+* **docs:** improve descriptions in the Dreams API reference ([54a81a7](https://github.com/anthropics/anthropic-sdk-ruby/commit/54a81a7c9f7fce043fafb342014144bf2a1bf050))
+* **docs:** simplify the session thread agent type description ([23d1d44](https://github.com/anthropics/anthropic-sdk-ruby/commit/23d1d4418dcf305366c48f144756071f173f909b))
+* **docs:** update diagnostics field descriptions on beta messages ([678a792](https://github.com/anthropics/anthropic-sdk-ruby/commit/678a7923359f8de6be74cffd9bbd1123df5e2cb9))
+* **internal:** let the typecheck task use every core, up to 16 ([f0ac300](https://github.com/anthropics/anthropic-sdk-ruby/commit/f0ac30052d083a8bf95c66a7c98a80985649c70d))
+
+
+### Documentation
+
+* add path and header parameter descriptions ([d458058](https://github.com/anthropics/anthropic-sdk-ruby/commit/d458058bfe901b540f5b346af63926d344c253dd))
+
 ## 1.72.0 (2026-09-18)
 
 Full Changelog: [v1.71.0...v1.72.0](https://github.com/anthropics/anthropic-sdk-ruby/compare/v1.71.0...v1.72.0)

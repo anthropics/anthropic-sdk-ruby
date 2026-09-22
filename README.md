@@ -15,7 +15,7 @@ Add to your application's Gemfile:
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "anthropic", "~> 1.72.0"
+gem "anthropic", "~> 1.73.0"
 ```
 
 <!-- x-release-please-end -->

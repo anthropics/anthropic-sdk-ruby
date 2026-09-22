@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    anthropic (1.72.0)
+    anthropic (1.73.0)
       base64 (~> 0.1)
       connection_pool (>= 2, < 4)
       standardwebhooks (~> 1.0)
